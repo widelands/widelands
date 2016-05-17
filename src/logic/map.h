@@ -221,6 +221,7 @@ public:
 	FileSystem* filesystem() const;
 	// swap the filesystem after load / save
 	void swap_filesystem(std::unique_ptr<FileSystem>& fs);
+	void reset_filesystem();
 
 	// informational functions
 	const std::string& get_filename()    const {return filename_;}

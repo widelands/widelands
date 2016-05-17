@@ -292,6 +292,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			delete wms;
 			// Reset filesystem to avoid file locks on saves
 			fs.reset();
+			map.reset_filesystem();
 			eia().set_need_save(false);
 			g_fs->fs_unlink(complete_filename);
 			g_fs->fs_rename(tmp_name, complete_filename);

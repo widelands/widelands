@@ -31,12 +31,16 @@ return {
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
 
-   -- Simple flowing text. One Paragraph
-   local function p(s)
-      return "<p line-spacing=3 font-size=12>" .. s .. "<br></p>" ..
-         "<p font-size=8> <br></p>"
+   local plrs = wl.Game().players
+   local teams = {}
+   for idx,plr in ipairs(plrs) do
+      if (plr.team ~= 0) then
+         if (teams[plr.team] == nil) then
+            teams[plr.team] = {}
+         end
+         table.insert(teams[plr.team], plr)
+      end
    end
-
 
    -- The list of wares that give points
    local point_table = {
@@ -93,36 +97,42 @@ return {
        },
    }
 
-   -- Calculate the momentary points for one player
-   local function _calc_points(plr)
+   -- Calculate the momentary points for a list of players
+   local function _calc_points(players)
       set_textdomain("win_conditions")
-      local bs = array_combine(
-         plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
-      )
+      local team_points = 0
+      local descr = ""
 
-      local points = 0
-      local descr = { "</p>" .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"}
-      for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
-         local value = point_table[plr.tribe_name][ware]
-         local count = 0
-         for idx,b in ipairs(bs) do
-            count = count + b:get_wares(ware)
-         end
-         local lpoints = count * value
-         points = points + lpoints
-
-         local warename = wl.Game():get_ware_description(ware).descname
-         -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-         descr[#descr+1] = listitem_bullet(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
-            warename, value, count, lpoints
+      for idx, plr in ipairs(players) do
+         local bs = array_combine(
+            plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
          )
+
+         descr = descr .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"
+         local points = 0
+         for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
+            local value = point_table[plr.tribe_name][ware]
+            local count = 0
+            for idx,b in ipairs(bs) do
+               count = count + b:get_wares(ware)
+            end
+            local lpoints = count * value
+            points = points + lpoints
+
+            local warename = wl.Game():get_ware_description(ware).descname
+            -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
+            descr = descr .. listitem_bullet(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
+               warename, value, count, lpoints
+            )
+         end
+         descr = descr .. "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
+         team_points = team_points + points
       end
-      descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
-              .. "<p line-spacing=3 font-size=12>"
-      return points, p(table.concat(descr, "\n"))
+      
+      return team_points, descr
    end
 
-   local plrs = wl.Game().players
+   
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
       set_textdomain("win_conditions")
@@ -144,12 +154,21 @@ return {
       end
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
       local msg = p(_"The game will end in %s."):format(time)
-      msg = msg .. "\n\n"
 
+      -- Points for players without team
       for idx, plr in ipairs(plrs) do
-         local points, pstat = _calc_points(plr)
-
-         msg = msg .. pstat
+         if (plr.team == 0) then
+            local points, pstat = _calc_points({plr})
+            msg = msg .. "<p font-size=8> <br></p>" .. pstat
+         end
+      end
+      -- Team points
+      for idx, team in ipairs(teams) do
+         local points, pstat = _calc_points(team)
+         local message = h1((_"Status for Team %d"):format(idx))
+            .. pstat
+            .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
+         msg = msg .. "<p font-size=8> <br></p>" .. message
       end
 
       for idx, plr in ipairs(plrs) do
@@ -159,16 +178,35 @@ return {
 
    local function _game_over(plrs)
       local points = {}
+      local win_points = 0
       for idx,plr in ipairs(plrs) do
-         points[#points + 1] = { plr, _calc_points(plr) }
+         local player_points, pstat = _calc_points({plr})
+         if (plr.team == 0) then
+            points[#points + 1] = { plr, player_points, player_points }
+         else
+            local team_points, tstat = _calc_points(teams[plr.team])
+            points[#points + 1] = { plr, team_points, player_points }
+         end
+         if (points[#points][2] > win_points) then
+            win_points = points[#points][2]
+         end
       end
-      table.sort(points, function(a,b) return a[2] < b[2] end)
-      for i=1,#points-1 do
-         points[i][1]:send_message(lost_game_over.title, lost_game_over.body)
-         wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
+      for idx,info in ipairs(points) do
+         local player = info[1]
+         local lost_or_won = 0
+         if (info[2] < win_points) then
+            lost_or_won = 0
+            player:send_message(lost_game_over.title, lost_game_over.body)
+         else
+            lost_or_won = 1
+            player:send_message(won_game_over.title, won_game_over.body)
+         end
+         if (player.team == 0) then
+            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))
+         else
+            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[3], team_score=info[2]}))
+         end
       end
-      points[#points][1]:send_message(won_game_over.title, won_game_over.body)
-      wl.game.report_result(points[#points][1], 1, make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
    end
 
    -- Instantiate the hook to calculate points
@@ -176,7 +214,7 @@ return {
       name = wc_points,
       pic = "images/wui/stats/genstats_points.png",
       calculator = function(p)
-         local pts = _calc_points(p)
+         local pts = _calc_points({p})
          return pts
       end,
    }
