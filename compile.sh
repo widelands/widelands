@@ -1,8 +1,8 @@
 #!/bin/sh
 echo " "
-echo "################################################"
-echo "# Script to simplify compilations of Widelands #"
-echo "################################################"
+echo "###########################################################"
+echo "#     Script to simplify the compilation of Widelands     #"
+echo "###########################################################"
 echo " "
 echo "  Because of the many different systems Widelands"
 echo "  might be compiled on, we unfortunally can not"
@@ -10,17 +10,38 @@ echo "  provide a simple way to prepare your system for"
 echo "  compilation. To ensure your system is ready, best"
 echo "  check http://wl.widelands.org/wiki/BuildingWidelands"
 echo " "
-echo "  You often find helpfully hands at our"
+echo "  You will often find helpful hands at our"
 echo "  * IRC Chat: http://wl.widelands.org/webchat/"
 echo "  * Forums: http://wl.widelands.org/forum/"
 echo "  * Mailinglist: http://wl.widelands.org/wiki/MailLists/"
 echo " "
-echo "  Please post your bugreports and feature requests at:"
+echo "  Please post your bug reports and feature requests at:"
 echo "  https://bugs.launchpad.net/widelands"
 echo " "
-echo "################################################"
+echo "###########################################################"
 echo " "
 
+
+## Option to avoid building and linking website-related executables.
+NO_WEBSITE=0
+while [ "$1" != "" ]; do
+  if [ "$1" = "--no-website" -o "$1" = "-n" ]; then
+    NO_WEBSITE=1
+  fi
+  shift
+done
+if [ $NO_WEBSITE -eq 0 ]; then
+  echo "A complete build will be created."
+  echo "You can use -n or --no-website to omit building and"
+  echo "linking website-related executables."
+else
+  echo "Any website-related code will be OMITTED in the build."
+  echo "Make sure that you have created and tested a full"
+  echo "build before submitting code to the repository!"
+fi
+echo " "
+echo "###########################################################"
+echo " "
 
 
 ######################################
@@ -73,9 +94,17 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     echo "for instructions on how to adjust options and build with CMake."
 
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug
+      if [ $NO_WEBSITE -eq 0 ]; then
+        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=ON
+      else
+        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=OFF
+      fi
     else
-      cmake .. -DCMAKE_BUILD_TYPE=Debug
+      if [ $NO_WEBSITE -eq 0 ]; then
+        cmake .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=ON
+      else
+        cmake .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=OFF
+      fi
     fi
 
     $buildtool
@@ -150,12 +179,12 @@ move_built_files
 cd ..
 create_update_script
 echo " "
-echo "#####################################################"
-echo "# Congratulations Widelands was successfully build. #"
-echo "# You should now be able to run Widelands via       #"
-echo "# typing ./widelands + ENTER in your terminal       #"
-echo "#                                                   #"
-echo "# You can update Widelands via running ./update.sh  #"
-echo "# in the same directory you ran this script in.     #"
-echo "#####################################################"
+echo "###########################################################"
+echo "# Congratulations! Widelands has been built successfully. #"
+echo "# You should now be able to run Widelands via             #"
+echo "# typing ./widelands + ENTER in your terminal             #"
+echo "#                                                         #"
+echo "# You can update Widelands via running ./update.sh        #"
+echo "# in the same directory that you ran this script in.      #"
+echo "###########################################################"
 ######################################
