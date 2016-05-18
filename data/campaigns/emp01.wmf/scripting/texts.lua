@@ -183,7 +183,7 @@ amalea_3 = {
       _([[I’ve got two important things to talk about… First the good news:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]])
+      _([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into planks.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But the bad news is that our lumberjacks harvest at an incredible speed. There are almost no trees left on this island.]])

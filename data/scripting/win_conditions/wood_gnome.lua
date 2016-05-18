@@ -91,6 +91,7 @@ return {
          msg = msg .. "\n"
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
                :format(playerpoints[plr.number])
+         -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg ..  (_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
       end
 
@@ -141,11 +142,13 @@ return {
    for idx,plr in ipairs(plrs) do
       msg = msg .. "\n"
       local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
+      -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
       msg = msg ..  (_"%1$s had %2$s."):bformat(plr.name,trees)
    end
    msg = msg .. "\n\n"
    local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
          :format(playerpoints[points[#points][1].number])
+   -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
    msg = msg ..  (_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
 
    local privmsg = ""
