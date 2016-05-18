@@ -96,6 +96,9 @@ struct BaseImmovable : public MapObject {
 		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
 
+	static int32_t string_to_size(const std::string& size);
+	static std::string size_to_string(int32_t size);
+
 protected:
 	void set_position(EditorGameBase &, Coords);
 	void unset_position(EditorGameBase &, Coords);
