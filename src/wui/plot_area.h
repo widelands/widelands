@@ -95,14 +95,15 @@ struct WuiPlotArea : public UI::Panel {
 
 protected:
 	void draw_plot_line
-		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
+		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
 	uint32_t get_plot_time();
 	/// Recalculates the data
 	virtual void update();
 
 	struct PlotData {
-		const std::vector<uint32_t> * dataset;
+		const std::vector<uint32_t> * absolute_data; // The absolute dataset
+		std::vector<uint32_t> * relative_data; // The relative dataset
 		bool                          showplot;
 		RGBColor                      plotcolor;
 	};
@@ -117,6 +118,8 @@ protected:
 	uint32_t lastupdate_;
 
 	/// For first updating and then plotting the data
+	float const xline_length_;
+	float const yline_length_;
 	uint32_t time_ms_;
 	uint32_t highest_scale_;
 	float sub_;
@@ -184,13 +187,14 @@ protected:
 	void update() override;
 
 private:
-
 	/**
-	 * for the negative plotdata only the values matter. The color and
+	 * For the negative plotdata, only the values matter. The color and
 	 * visibility is determined by the normal plotdata.
+	 * We don't need relative data to fill - this is also done in the
+	 * normal plotdata
 	 */
 	struct ReducedPlotData {
-		const std::vector<uint32_t> * dataset;
+		const std::vector<uint32_t> * absolute_data;
 	};
 	std::vector<ReducedPlotData>  negative_plotdata_;
 };
