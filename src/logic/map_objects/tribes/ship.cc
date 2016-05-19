@@ -870,10 +870,18 @@ WalkingDir Ship::get_scouting_direction() {
 
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
-void Ship::exp_construct_port(Game&, const Coords& c) {
+void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
-	DescriptionIndex port_idx = get_owner()->tribe().port();
-	get_owner()->force_csite(c, port_idx);
+	get_owner()->force_csite(c, get_owner()->tribe().port());
+
+	// Make sure that we have space to squeeze in a lumberjack
+	std::vector<ImmovableFound> trees;
+	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 2),
+	                           &trees,
+	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+	for (auto& tree : trees) {
+		tree.object->remove(game);
+	}
 	ship_state_ = ShipStates::kExpeditionColonizing;
 }
 
