@@ -167,7 +167,7 @@ uint32_t ms_to_unit(Units unit, uint32_t ms) {
 /**
  * calculate how many values are taken together when plot mode is relative
  */
-int32_t calc_how_many(uint32_t time_ms, int32_t sample_rate) {
+int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 	int32_t how_many = static_cast<int32_t>
 			((static_cast<float>(time_ms)
 				/
@@ -283,11 +283,12 @@ void draw_diagram
 
 WuiPlotArea::WuiPlotArea
 	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+	 uint32_t sample_rate, Plotmode plotmode)
 :
 UI::Panel (parent, x, y, w, h),
-plotmode_(PLOTMODE_ABSOLUTE),
-sample_rate_(0),
+plotmode_(plotmode),
+sample_rate_(sample_rate),
 needs_update_(true),
 lastupdate_(0),
 xline_length_(get_inner_w() - kSpaceRight  - kSpacing),
@@ -314,7 +315,7 @@ uint32_t WuiPlotArea::get_game_time() {
 
 std::vector<std::string> WuiPlotArea::get_labels() {
 	std::vector<std::string> labels;
-	for (int32_t i = 0; i < game_time_id_; i++) {
+	for (uint32_t i = 0; i < game_time_id_; i++) {
 		Units unit = get_suggested_unit(time_in_ms[i], false);
 		labels.push_back(get_value_with_unit(unit, ms_to_unit(unit, time_in_ms[i])));
 	}
@@ -358,7 +359,7 @@ uint32_t WuiPlotArea::get_plot_time() {
  * We start to search with i=1 to ensure that at least one option besides
  * "game" will be offered to the user.
  */
-int32_t WuiPlotArea::get_game_time_id() {
+uint32_t WuiPlotArea::get_game_time_id() {
 	uint32_t game_time = get_game_time();
 	uint32_t i;
 	for (i = 1; i < 7 && time_in_ms[i] <= game_time; i++) {
@@ -389,7 +390,7 @@ void WuiPlotArea::update() {
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_ms_, sample_rate_);
 	highest_scale_ = 0;
-	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+	if (plotmode_ == Plotmode::kAbsolute)  {
 		for (uint32_t i = 0; i < plotdata_.size(); ++i)
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].absolute_data->size(); ++l) {
@@ -417,7 +418,7 @@ void WuiPlotArea::update() {
 	}
 
 	//  Update the datasets
-	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+	if (plotmode_ == Plotmode::kAbsolute)  {
 		sub_ =
 			(xline_length_ - kSpaceLeftOfLabel)
 			/
@@ -428,7 +429,7 @@ void WuiPlotArea::update() {
 		sub_ = (xline_length_ - kSpaceLeftOfLabel) / static_cast<float>(KNoSamples);
 	}
 
-	if (plotmode_ == PLOTMODE_RELATIVE) {
+	if (plotmode_ == Plotmode::kRelative) {
 		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
 				std::vector<uint32_t> const * dataset = plotdata_[plot].absolute_data;
@@ -465,7 +466,7 @@ void WuiPlotArea::draw(RenderTarget & dst) {
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
 			draw_plot_line
-				(dst, (plotmode_ == PLOTMODE_RELATIVE) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_, sub_, plotdata_[plot].plotcolor, yoffset);
+				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
 }
@@ -548,17 +549,9 @@ void WuiPlotArea::show_plot(uint32_t const id, bool const t) {
 	needs_update_ = true;
 }
 
-/*
- * Set sample rate the data uses
- */
-void WuiPlotArea::set_sample_rate(uint32_t const id) {
-	sample_rate_ = id;
-	needs_update_ = true;
-}
-
 
 void WuiPlotAreaSlider::draw(RenderTarget & dst) {
-	int32_t new_game_time_id = plot_area_.get_game_time_id();
+	uint32_t new_game_time_id = plot_area_.get_game_time_id();
 	if (new_game_time_id != last_game_time_id_) {
 		last_game_time_id_ = new_game_time_id;
 		set_labels(plot_area_.get_labels());
@@ -569,9 +562,10 @@ void WuiPlotAreaSlider::draw(RenderTarget & dst) {
 
 DifferentialPlotArea::DifferentialPlotArea
 		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
+		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+		 uint32_t sample_rate, Plotmode plotmode)
 :
-WuiPlotArea (parent, x, y, w, h)
+WuiPlotArea (parent, x, y, w, h, sample_rate, plotmode)
 {
 	update();
 }
@@ -589,7 +583,7 @@ void DifferentialPlotArea::update() {
 	int32_t max = 0;
 	int32_t min = 0;
 
-	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+	if (plotmode_ == Plotmode::kAbsolute)  {
 		for (uint32_t i = 0; i < plotdata_.size(); ++i)
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].absolute_data->size(); ++l) {
@@ -629,7 +623,7 @@ void DifferentialPlotArea::update() {
 	}
 
 	//  plot the pixels
-	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+	if (plotmode_ == Plotmode::kAbsolute)  {
 		sub_ =
 			xline_length_
 			/
@@ -640,7 +634,7 @@ void DifferentialPlotArea::update() {
 		sub_ = xline_length_ / static_cast<float>(KNoSamples);
 	}
 
-	if (plotmode_ == PLOTMODE_RELATIVE) {
+	if (plotmode_ == Plotmode::kRelative) {
 		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
 				std::vector<uint32_t> const * dataset = plotdata_[plot].absolute_data;
@@ -684,7 +678,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
 			draw_plot_line
-				(dst, (plotmode_ == PLOTMODE_RELATIVE) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_ * 2, sub_, plotdata_[plot].plotcolor, yoffset);
+				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_ * 2, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
 }

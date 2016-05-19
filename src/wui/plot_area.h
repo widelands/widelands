@@ -44,16 +44,17 @@ struct WuiPlotArea : public UI::Panel {
 		TIME_16_HOURS,
 		TIME_GAME,
 	};
-	enum PLOTMODE {
-		//  Always take the samples of some times together, so that the graph is
-		//  not completely zigg-zagged.
-		PLOTMODE_RELATIVE,
-
-		PLOTMODE_ABSOLUTE
+	enum class Plotmode {
+		//  Always aggregate the samples of some time periods, so that the graph is
+		//  not completely zig-zagged.
+		kRelative,
+		kAbsolute
 	};
 
+	// sample_rate is in in milliseconds
 	WuiPlotArea
-		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
+		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h,
+		 uint32_t sample_rate, Plotmode plotmode);
 
 	/// Calls update() if needed
 	void think() override;
@@ -65,7 +66,7 @@ struct WuiPlotArea : public UI::Panel {
 		needs_update_ = true;
 	}
 
-	void set_time_id(int32_t time) {
+	void set_time_id(uint32_t time) {
 		if (time == game_time_id_)
 			set_time(TIME_GAME);
 		else
@@ -79,15 +80,12 @@ struct WuiPlotArea : public UI::Panel {
 		else
 			return time_;
 	}
-	void set_sample_rate(uint32_t id); // in milliseconds
 
-	int32_t get_game_time_id();
+	uint32_t get_game_time_id();
 
 	void register_plot_data
 		(uint32_t id, const std::vector<uint32_t> * data, RGBColor);
 	void show_plot(uint32_t id, bool t);
-
-	void set_plotmode(int32_t id) {plotmode_ = id;}
 
 	void set_plotcolor(uint32_t id, RGBColor color);
 
@@ -109,8 +107,8 @@ protected:
 	};
 	std::vector<PlotData> plotdata_;
 
-	int32_t                 plotmode_;
-	int32_t                 sample_rate_;
+	Plotmode                plotmode_;
+	uint32_t                sample_rate_;
 
 	/// Whether there has ben a data update since the last time that think() was executed
 	bool needs_update_;
@@ -128,7 +126,7 @@ private:
 	uint32_t get_game_time();
 
 	TIME                    time_;  // How much do you want to list
-	int32_t                 game_time_id_; // what label is used for TIME_GAME
+	uint32_t                game_time_id_; // what label is used for TIME_GAME
 };
 
 /**
@@ -164,7 +162,7 @@ protected:
 
 private:
 	WuiPlotArea & plot_area_;
-	int32_t last_game_time_id_;
+	uint32_t last_game_time_id_;
 };
 
 /**
@@ -175,7 +173,8 @@ private:
 struct DifferentialPlotArea : public WuiPlotArea {
 public:
 	DifferentialPlotArea
-		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
+		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h,
+		 uint32_t sample_rate, Plotmode plotmode);
 
 	void draw(RenderTarget &) override;
 

@@ -164,9 +164,9 @@ parent_(&parent)
 	plot_production_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
-	plot_production_->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	plot_production_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+			 kStatisticsSampleTime,
+			 WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add
 		("production", g_gr->images().get(pic_tab_production),
@@ -175,9 +175,9 @@ parent_(&parent)
 	plot_consumption_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
-	plot_consumption_->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	plot_consumption_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+			 kStatisticsSampleTime,
+			 WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add
 		("consumption", g_gr->images().get(pic_tab_consumption),
@@ -186,9 +186,9 @@ parent_(&parent)
 	plot_economy_ =
 		new DifferentialPlotArea
 			(tabs,
-			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
-	plot_economy_->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	plot_economy_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+			 kStatisticsSampleTime,
+			 WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add
 		("economy_health", g_gr->images().get(pic_tab_economy),
@@ -196,9 +196,9 @@ parent_(&parent)
 
 	plot_stock_ = new WuiPlotArea
 			(tabs,
-			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
-	plot_stock_->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	plot_stock_->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+			 kStatisticsSampleTime,
+			 WuiPlotArea::Plotmode::kAbsolute);
 
 	tabs->add
 		("stock", g_gr->images().get(pic_tab_stock),
