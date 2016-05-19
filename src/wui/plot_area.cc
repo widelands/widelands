@@ -303,7 +303,7 @@ game_time_id_(0)
 }
 
 
-uint32_t WuiPlotArea::get_game_time() {
+uint32_t WuiPlotArea::get_game_time() const {
 	uint32_t game_time = 0;
 
 	// Find running time of the game, based on the plot data
@@ -313,7 +313,7 @@ uint32_t WuiPlotArea::get_game_time() {
 	return game_time;
 }
 
-std::vector<std::string> WuiPlotArea::get_labels() {
+std::vector<std::string> WuiPlotArea::get_labels() const {
 	std::vector<std::string> labels;
 	for (uint32_t i = 0; i < game_time_id_; i++) {
 		Units unit = get_suggested_unit(time_in_ms[i], false);
@@ -323,7 +323,7 @@ std::vector<std::string> WuiPlotArea::get_labels() {
 	return labels;
 }
 
-uint32_t WuiPlotArea::get_plot_time() {
+uint32_t WuiPlotArea::get_plot_time() const {
 	if (time_ == TIME_GAME) {
 		// Start with the game time
 		uint32_t time_ms = get_game_time();
@@ -379,16 +379,33 @@ void WuiPlotArea::think() {
 	needs_update_ = false;
 }
 
-
-//  Find the maximum value.
-void WuiPlotArea::update() {
-	time_ms_ = get_plot_time();
+int32_t WuiPlotArea::initialize_update() {
+	// Initialize
 	for (uint32_t i = 0; i < plotdata_.size(); ++i) {
 		plotdata_[i].relative_data->clear();
 	}
+	// Get range
+	time_ms_ = get_plot_time();
+	if (plotmode_ == Plotmode::kAbsolute)  {
+		sub_ =
+			(xline_length_ - kSpaceLeftOfLabel)
+			/
+			(static_cast<float>(time_ms_)
+			 /
+			 static_cast<float>(sample_rate_));
+	} else {
+		sub_ = (xline_length_ - kSpaceLeftOfLabel) / static_cast<float>(KNoSamples);
+	}
 
-	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms_, sample_rate_);
+	// How many do we aggregate when relative plotting
+	return calc_how_many(time_ms_, sample_rate_);
+}
+
+//  Find the maximum value.
+void WuiPlotArea::update() {
+	const int32_t how_many = initialize_update();
+
+	// Calculate highest scale
 	highest_scale_ = 0;
 	if (plotmode_ == Plotmode::kAbsolute)  {
 		for (uint32_t i = 0; i < plotdata_.size(); ++i)
@@ -417,18 +434,7 @@ void WuiPlotArea::update() {
 		}
 	}
 
-	//  Update the datasets
-	if (plotmode_ == Plotmode::kAbsolute)  {
-		sub_ =
-			(xline_length_ - kSpaceLeftOfLabel)
-			/
-			(static_cast<float>(time_ms_)
-			 /
-			 static_cast<float>(sample_rate_));
-	} else {
-		sub_ = (xline_length_ - kSpaceLeftOfLabel) / static_cast<float>(KNoSamples);
-	}
-
+	//  Calculate plot data
 	if (plotmode_ == Plotmode::kRelative) {
 		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
@@ -454,19 +460,22 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget & dst) {
+	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
+}
+
+void WuiPlotArea::draw_plot(RenderTarget& dst, float const yoffset, const std::string& yscale_label, uint32_t highest_scale) {
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
 	draw_value
-		(std::to_string(highest_scale_), RGBColor(60, 125, 0),
+		(yscale_label, RGBColor(60, 125, 0),
 		 Point(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
 
 	//  plot the pixels
-	float const yoffset = get_inner_h() - kSpaceBottom;
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
 			draw_plot_line
-				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_, sub_, plotdata_[plot].plotcolor, yoffset);
+				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
 }
@@ -571,15 +580,9 @@ WuiPlotArea (parent, x, y, w, h, sample_rate, plotmode)
 }
 
 void DifferentialPlotArea::update() {
-	time_ms_ = get_plot_time();
-	for (uint32_t i = 0; i < plotdata_.size(); ++i) {
-		plotdata_[i].relative_data->clear();
-	}
+	const int32_t how_many = initialize_update();
 
-	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms_, sample_rate_);
-
-	// Find max and min value
+	// Calculate highest scale
 	int32_t max = 0;
 	int32_t min = 0;
 
@@ -615,25 +618,9 @@ void DifferentialPlotArea::update() {
 
 	// Use equal positive and negative range
 	min = abs(min);
-	highest_scale_ = 0;
-	if (min > max) {
-		highest_scale_ = min;
-	} else {
-		highest_scale_ = max;
-	}
+	highest_scale_ =  (min > max) ? min : max;
 
-	//  plot the pixels
-	if (plotmode_ == Plotmode::kAbsolute)  {
-		sub_ =
-			xline_length_
-			/
-			(static_cast<float>(time_ms_)
-			 /
-			 static_cast<float>(sample_rate_));
-	} else {
-		sub_ = xline_length_ / static_cast<float>(KNoSamples);
-	}
-
+	//  Calculate plot data
 	if (plotmode_ == Plotmode::kRelative) {
 		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
@@ -655,32 +642,19 @@ void DifferentialPlotArea::update() {
 }
 
 void DifferentialPlotArea::draw(RenderTarget & dst) {
-	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
-
-	// Print the min and max values
-	draw_value
-		(std::to_string(highest_scale_), RGBColor(60, 125, 0),
-		 Point(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
-
-	draw_value
-		((boost::format("-%u") % highest_scale_).str(), RGBColor(125, 0, 0),
-		 Point(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
-
 	// yoffset of the zero line
 	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;
+	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
+
+	// Print the min value
+	draw_value
+		((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
+		 Point(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
 
 	// draw zero line
 	dst.draw_line_strip({FloatPoint(get_inner_w() - kSpaceRight, yoffset),
 	                     FloatPoint(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
 							  kZeroLineColor, kPlotLinesWidth);
-
-	//  plot the pixels
-	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
-		if (plotdata_[plot].showplot) {
-			draw_plot_line
-				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data, highest_scale_ * 2, sub_, plotdata_[plot].plotcolor, yoffset);
-		}
-	}
 }
 
 /**

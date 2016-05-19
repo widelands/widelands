@@ -73,8 +73,8 @@ struct WuiPlotArea : public UI::Panel {
 			set_time(static_cast<TIME>(time));
 		needs_update_ = true;
 	}
-	TIME get_time() {return static_cast<TIME>(time_); }
-	int32_t get_time_id() {
+	TIME get_time() const {return static_cast<TIME>(time_); }
+	int32_t get_time_id() const {
 		if (time_ == TIME_GAME)
 			return game_time_id_;
 		else
@@ -89,15 +89,19 @@ struct WuiPlotArea : public UI::Panel {
 
 	void set_plotcolor(uint32_t id, RGBColor color);
 
-	std::vector<std::string> get_labels();
+	std::vector<std::string> get_labels() const;
 
 protected:
+	void draw_plot(RenderTarget& dst, float const yoffset, const std::string& yscale_label, uint32_t highest_scale);
 	void draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
-	uint32_t get_plot_time();
+	uint32_t get_plot_time() const;
 	/// Recalculates the data
 	virtual void update();
+	// Initializes relative_dataset and time scaling.
+	// Returns how many values will be aggregated when relative plotting
+	int32_t initialize_update();
 
 	struct PlotData {
 		const std::vector<uint32_t> * absolute_data; // The absolute dataset
@@ -123,7 +127,7 @@ protected:
 	float sub_;
 
 private:
-	uint32_t get_game_time();
+	uint32_t get_game_time() const;
 
 	TIME                    time_;  // How much do you want to list
 	uint32_t                game_time_id_; // what label is used for TIME_GAME
