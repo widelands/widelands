@@ -3,6 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2016
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2016
 # GunChleoc, 2013-2016
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 08:08+0000\n"
+"POT-Creation-Date: 2016-05-14 08:33+0000\n"
+"PO-Revision-Date: 2016-05-19 16:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +88,7 @@ msgstr " --language=[gd_GB|de_DE|...]\n                           An sgeama iona
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr " --write_syncstreams=[true|false]\n                           Cruthaich faidhlichean sruth sioncronachaidh a chum geamannan\n                           lìonraidh a dhì-bhugachadh."
+msgstr " --write_syncstreams=[true|false]\n                           Cruthaich faidhlichean sruth sioncronachaidh a chum\n                           geamannan lìonraidh a dhì-bhugachadh."
 
 #: ../../src/wlapplication_messages.cc:70
 msgid " --autosave=[...]     Automatically save each n minutes"

@@ -128,11 +128,11 @@ return {
          descr = descr .. "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
          team_points = team_points + points
       end
-      
+
       return team_points, descr
    end
 
-   
+
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
       set_textdomain("win_conditions")
