@@ -100,7 +100,8 @@ void FieldOverlayManager::get_overlays(Widelands::TCoords<> const c,
 	}
 }
 
-int FieldOverlayManager::get_buildhelp_overlay(const Widelands::Map& map, const Widelands::FCoords& fc) const {
+int FieldOverlayManager::get_buildhelp_overlay(const Widelands::Map& map, const Widelands::FCoords& fc)
+const {
 	Widelands::NodeCaps const caps =
 	   callback_ ? static_cast<Widelands::NodeCaps>(callback_(fc)) : fc.field->nodecaps();
 
