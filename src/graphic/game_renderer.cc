@@ -400,7 +400,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
 			{
 				overlay_info.clear();
-				overlay_manager.get_overlays(coords[F], &overlay_info);
+				overlay_manager.get_overlays(map, coords[F], &overlay_info);
 				for (const auto& overlay : overlay_info) {
 					dst.blit(pos[F] - overlay.hotspot, overlay.pic);
 				}

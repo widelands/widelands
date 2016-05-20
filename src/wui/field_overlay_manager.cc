@@ -34,7 +34,9 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 		"images/wui/overlays/medium.png",
 		"images/wui/overlays/big.png",
 		"images/wui/overlays/mine.png",
-		"images/wui/overlays/port.png"
+		"images/wui/overlays/port.png",
+		"images/wui/overlays/small_port.png",
+		"images/wui/overlays/medium_port.png"
 	};
 	const char * const * filename = filenames;
 
@@ -43,7 +45,7 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const OverlayInfo * const buildhelp_infos_end =
-		buildhelp_info + Widelands::Field::Buildhelp_None;
+		buildhelp_info + static_cast<int>(Widelands::Field::Buildhelp::kNone);
 	for (;;) { // The other buildhelp overlays.
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end)
@@ -62,7 +64,7 @@ void FieldOverlayManager::show_buildhelp(const bool value) {
 	buildhelp_ = value;
 }
 
-void FieldOverlayManager::get_overlays(Widelands::FCoords const c,
+void FieldOverlayManager::get_overlays(const Widelands::Map& map, Widelands::FCoords const c,
                                           std::vector<OverlayInfo>* result) const {
 	const RegisteredOverlaysMap & overlay_map = overlays_[Widelands::TCoords<>::None];
 	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
@@ -73,8 +75,8 @@ void FieldOverlayManager::get_overlays(Widelands::FCoords const c,
 	}
 
 	if (buildhelp_) {
-		int buildhelp_overlay_index = get_buildhelp_overlay(c);
-		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
+		int buildhelp_overlay_index = get_buildhelp_overlay(map, c);
+		if (buildhelp_overlay_index < static_cast<int>(Widelands::Field::Buildhelp::kNone)) {
 		   result->emplace_back(buildhelp_infos_[buildhelp_overlay_index]);
 	   }
 	}
@@ -98,22 +100,31 @@ void FieldOverlayManager::get_overlays(Widelands::TCoords<> const c,
 	}
 }
 
-int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) const {
+int FieldOverlayManager::get_buildhelp_overlay(const Widelands::Map& map, const Widelands::FCoords& fc) const {
 	Widelands::NodeCaps const caps =
 	   callback_ ? static_cast<Widelands::NodeCaps>(callback_(fc)) : fc.field->nodecaps();
 
-	const int value = caps & Widelands::BUILDCAPS_MINE ?
-	               Widelands::Field::Buildhelp_Mine :
-	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
-	               (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp_Port :
-	                                                   Widelands::Field::Buildhelp_Big) :
-	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
-	               Widelands::Field::Buildhelp_Medium :
+	const Widelands::Field::Buildhelp value =
+	      caps & Widelands::BUILDCAPS_MINE ?
+	         Widelands::Field::Buildhelp::kMine :
+	         (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
+	            (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp::kPort :
+	                                                Widelands::Field::Buildhelp::kBig) :
+	            (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
+	               Widelands::Field::Buildhelp::kMedium :
 	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL ?
-	               Widelands::Field::Buildhelp_Small :
-	               caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp_Flag :
-	                                                  Widelands::Field::Buildhelp_None;
-	return value;
+	                  Widelands::Field::Buildhelp::kSmall :
+	                  caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp::kFlag :
+	                                                     Widelands::Field::Buildhelp::kNone;
+
+	if (map.is_port_space(fc)) {
+		if (value == Widelands::Field::Buildhelp::kMedium) {
+			return static_cast<int>(Widelands::Field::Buildhelp::kMediumPortHint);
+		} else if (value == Widelands::Field::Buildhelp::kSmall) {
+			return static_cast<int>(Widelands::Field::Buildhelp::kSmallPortHint);
+		}
+	}
+	return static_cast<int>(value);
 }
 
 void FieldOverlayManager::register_overlay

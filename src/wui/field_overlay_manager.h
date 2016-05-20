@@ -26,6 +26,7 @@
 #include <vector>
 
 #include "logic/field.h"
+#include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "base/point.h"
 
@@ -102,7 +103,7 @@ struct FieldOverlayManager {
 	void remove_all_overlays();
 
 	/// Returns the currently registered overlays and the buildhelp for a node.
-	void get_overlays(Widelands::FCoords c, std::vector<OverlayInfo>* result) const;
+	void get_overlays(const Widelands::Map& map, Widelands::FCoords c, std::vector<OverlayInfo>* result) const;
 
 	/// Returns the currently registered overlays for a triangle.
 	void get_overlays(Widelands::TCoords<>, std::vector<OverlayInfo>* result) const;
@@ -128,12 +129,12 @@ private:
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
 	// 'fc' according to the current 'callback_'.
-	int get_buildhelp_overlay(const Widelands::FCoords& fc) const;
+	int get_buildhelp_overlay(const Widelands::Map& map, const Widelands::FCoords& fc) const;
 
 	//  indexed by TCoords<>::TriangleIndex
 	RegisteredOverlaysMap overlays_[3];
 
-	OverlayInfo buildhelp_infos_[Widelands::Field::Buildhelp_None];
+	OverlayInfo buildhelp_infos_[static_cast<int>(Widelands::Field::Buildhelp::kNone)];
 	bool buildhelp_;
 
 	// this callback is used to define where overlays are drawn.

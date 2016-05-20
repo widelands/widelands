@@ -60,14 +60,16 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
-	enum BuildhelpIndex {
-		Buildhelp_Flag   = 0,
-		Buildhelp_Small  = 1,
-		Buildhelp_Medium = 2,
-		Buildhelp_Big    = 3,
-		Buildhelp_Mine   = 4,
-		Buildhelp_Port   = 5,
-		Buildhelp_None   = 6
+	enum class Buildhelp {
+		kFlag           = 0,
+		kSmall          = 1,
+		kMedium         = 2,
+		kBig            = 3,
+		kMine           = 4,
+		kPort           = 5,
+		kSmallPortHint  = 6,
+		kMediumPortHint = 7,
+		kNone           = 8
 	};
 
 	using Height = uint8_t;
