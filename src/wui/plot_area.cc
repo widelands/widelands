@@ -463,7 +463,7 @@ void WuiPlotArea::draw(RenderTarget & dst) {
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 }
 
-void WuiPlotArea::draw_plot(RenderTarget& dst, float const yoffset, const std::string& yscale_label,
+void WuiPlotArea::draw_plot(RenderTarget& dst, float yoffset, const std::string& yscale_label,
                             uint32_t highest_scale) {
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
@@ -476,7 +476,9 @@ void WuiPlotArea::draw_plot(RenderTarget& dst, float const yoffset, const std::s
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
 			draw_plot_line
-				(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data : plotdata_[plot].absolute_data,
+				(dst,
+			    (plotmode_ == Plotmode::kRelative) ?
+			       plotdata_[plot].relative_data : plotdata_[plot].absolute_data,
 			    highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}

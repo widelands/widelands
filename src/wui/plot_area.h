@@ -92,7 +92,7 @@ struct WuiPlotArea : public UI::Panel {
 	std::vector<std::string> get_labels() const;
 
 protected:
-	void draw_plot(RenderTarget& dst, float const yoffset, const std::string& yscale_label,
+	void draw_plot(RenderTarget& dst, float yoffset, const std::string& yscale_label,
 	               uint32_t highest_scale);
 	void draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
