@@ -109,8 +109,7 @@ const {
 	      caps & Widelands::BUILDCAPS_MINE ?
 	         Widelands::Field::Buildhelp::kMine :
 	         (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG ?
-	            (caps & Widelands::BUILDCAPS_PORT ? Widelands::Field::Buildhelp::kPort :
-	                                                Widelands::Field::Buildhelp::kBig) :
+	            Widelands::Field::Buildhelp::kBig :
 	            (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
 	               Widelands::Field::Buildhelp::kMedium :
 	               (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL ?
@@ -118,13 +117,17 @@ const {
 	                  caps & Widelands::BUILDCAPS_FLAG ? Widelands::Field::Buildhelp::kFlag :
 	                                                     Widelands::Field::Buildhelp::kNone;
 
-	if (map.is_port_space(fc)) {
-		if (value == Widelands::Field::Buildhelp::kMedium) {
+	// Same conditions as for BUILDCAPS_PORT, but without the size requirement
+	if (map.is_port_space(fc) && !map.find_portdock(fc).empty()) {
+		if (value == Widelands::Field::Buildhelp::kBig) {
+			return static_cast<int>(Widelands::Field::Buildhelp::kPort);
+		} else if (value == Widelands::Field::Buildhelp::kMedium) {
 			return static_cast<int>(Widelands::Field::Buildhelp::kMediumPortHint);
 		} else if (value == Widelands::Field::Buildhelp::kSmall) {
 			return static_cast<int>(Widelands::Field::Buildhelp::kSmallPortHint);
 		}
 	}
+
 	return static_cast<int>(value);
 }
 
