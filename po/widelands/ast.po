@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:46+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Asturian (http://www.transifex.com/widelands/widelands/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -288,25 +288,27 @@ msgstr ""
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:455
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:466
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
 #: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:664
+#. * TRANSLATORS: Map author name when it hasn't been set yet
+#: ../../src/editor/editorinteractive.cc:665
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:456
-msgctxt "map_name"
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:467
+#: ../../src/logic/map.h:181
+msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:671
+#: ../../src/editor/editorinteractive.cc:672
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
 
-#: ../../src/editor/map_generator.cc:792
+#: ../../src/editor/map_generator.cc:787
 msgid "Random Player"
 msgstr ""
 
@@ -422,7 +424,7 @@ msgid "Editor Category: %s"
 msgstr ""
 
 #: ../../src/editor/tools/info_tool.cc:123
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:94
 msgid "Resources:"
 msgstr ""
 
@@ -506,7 +508,7 @@ msgid "New Map"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu.cc:57
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:46
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:47
 msgid "New Random Map"
 msgstr ""
 
@@ -533,7 +535,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
-#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
+#: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:63
 #: ../../src/ui_fsmenu/options.cc:134
@@ -544,7 +546,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:145
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:146
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
@@ -626,12 +628,12 @@ msgid "Size: %1% x %2%"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:56
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:57
 msgid "Width:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:60
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:61
 msgid "Height:"
 msgstr ""
 
@@ -639,100 +641,100 @@ msgstr ""
 msgid "Create Map"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:65
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:66
 #: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr ""
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:71
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:72
 msgid "Summer"
 msgstr ""
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:73
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:74
 msgid "Winter"
 msgstr ""
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:76
 msgid "Desert"
 msgstr ""
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:78
 msgid "Wasteland"
 msgstr ""
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:84
 msgid "Low"
 msgstr ""
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:85
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:86
 msgid "Medium"
 msgstr "Mediu"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:88
 msgid "High"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
 msgid "Climate:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:112
 msgid "Water:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:116
 msgid "Land:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:119
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:120
 msgid "Wasteland:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:122
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:123
 msgid "Mountains:"
 msgstr ""
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:124
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:423
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:125
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:434
 #: ../../src/ui_basic/spinbox.cc:335
 #, c-format
 msgid "%i %%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:126
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:127
 msgid "Island mode"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:129
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:130
 msgid "Random Number:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:135
 msgid "Map ID:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:142
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Generate Map"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:458
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Generating random map…"
 msgstr ""
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:469
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:507
 msgid "Random Map"
 msgstr ""
 
@@ -741,7 +743,7 @@ msgstr ""
 #. * TRANSLATORS: You don't need to be literal with your translation,
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:473
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:511
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -770,7 +772,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:242
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
 msgid "Error Saving Map!"
 msgstr ""
 
@@ -781,7 +783,7 @@ msgid ""
 "manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -813,7 +815,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1705 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -993,16 +995,11 @@ msgid ""
 " anymore, or it's a new version that can't be handled yet."
 msgstr ""
 
-#: ../../src/logic/map.h:181
-msgctxt "author_name"
-msgid "Unknown"
-msgstr ""
-
 #: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:520
+#: ../../src/logic/map_objects/immovable.cc:529
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:77
 #, c-format
 msgid "%i%% built"
@@ -1441,16 +1438,16 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Se llegó al final de la repetición y se posó'l xuegu. Puedes activar el xuegu y siguir mirando si quies."
 
-#: ../../src/logic/save_handler.cc:106
-msgid "Saving game…"
-msgstr ""
-
-#: ../../src/logic/save_handler.cc:125
+#: ../../src/logic/save_handler.cc:111
 msgid "Saving failed!"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:144
+#: ../../src/logic/save_handler.cc:130
 msgid "Game saved"
+msgstr ""
+
+#: ../../src/logic/save_handler.cc:158
+msgid "Saving game…"
 msgstr ""
 
 #: ../../src/map_io/s2map.cc:405
@@ -1783,16 +1780,16 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1637
+#: ../../src/network/nethost.cc:1639
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1699 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Xugador"
 
-#: ../../src/network/nethost.cc:1862
+#: ../../src/network/nethost.cc:1864
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2030,7 +2027,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+#: ../../src/scripting/lua_game.cc:1081 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -3272,7 +3269,9 @@ msgstr ""
 msgid "Script console"
 msgstr ""
 
-#: ../../src/wui/game_debug_ui.cc:235
+#. * TRANSLATORS: Title for a window that shows debug information for a field
+#. on the map
+#: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
 msgstr ""
 
@@ -3491,7 +3490,7 @@ msgid "Game over"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:73
-msgid "Player info:"
+msgid "Player Info:"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:89
@@ -3550,6 +3549,10 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:277
 msgid "Score"
+msgstr ""
+
+#: ../../src/wui/game_summary.cc:280
+msgid "Team Score"
 msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:191

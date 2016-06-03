@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -314,8 +314,8 @@ msgstr "Tha dà rud cudromach air a dh’fheumas mi bruidhinn… Innsim an deagh
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr "Mhothaich mi gu bheil am muileann sàbhaidh air a thogail, mas sin ’s urrainn dhuinn tòiseachadh air maidean a dhèanamh dhen fhiodh a tha na coilltearan a’ buain."
+"to refine the logs that the lumberjacks are harvesting into planks."
+msgstr "Mhothaich mi gu bheil am muileann sàbhaidh air a thogail, mas sin ’s urrainn dhuinn tòiseachadh air maide a dhèanamh dhen fhiodh a tha na coilltearan a’ buain."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -434,7 +434,7 @@ msgstr "A thighearna, rinn sibh àite glè thèarainte dhen rubha seo. Thàinig 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

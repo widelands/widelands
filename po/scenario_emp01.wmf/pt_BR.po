@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -312,8 +312,8 @@ msgstr ""
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr "Já vi que a construção da Serraria terminou, daí já poderemos serrar os troncos, que os lenhadores estão cortando, para fazermos madeira."
+"to refine the logs that the lumberjacks are harvesting into planks."
+msgstr ""
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -432,7 +432,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo Objetivo"

@@ -5,13 +5,14 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2016
+# Renaud Bouchard, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 14:15+0000\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-06-01 14:05+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,8 +314,8 @@ msgstr "J'ai deux choses importantes à vous dire... Premièrement la bonne nouv
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr "J'ai vu que la scierie était terminée, nous allons donc pouvoir découper des planches des troncs que les bûcherons rapportent."
+"to refine the logs that the lumberjacks are harvesting into planks."
+msgstr "J'ai remarqué que la construction de la scierie était terminée, nous allons donc pouvoir découper les troncs que rapportent les bûcherons en planches."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -433,7 +434,7 @@ msgstr "Sire, vous avez fait de cette péninsule un endroit fort sûr. Il est ma
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"

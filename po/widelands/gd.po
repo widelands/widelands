@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-14 08:33+0000\n"
-"PO-Revision-Date: 2016-05-17 18:05+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -298,14 +298,16 @@ msgstr "A’ cruthachadh mapa falamh…"
 msgid "No Name"
 msgstr "Gun ainm"
 
-#: ../../src/editor/editorinteractive.cc:664
+#. * TRANSLATORS: Map author name when it hasn't been set yet
+#: ../../src/editor/editorinteractive.cc:665
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:132
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:467
-msgctxt "map_name"
+#: ../../src/logic/map.h:181
+msgctxt "author_name"
 msgid "Unknown"
-msgstr "Mapa nach aithne dhuinn"
+msgstr "Gun urra"
 
-#: ../../src/editor/editorinteractive.cc:671
+#: ../../src/editor/editorinteractive.cc:672
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A’ luchdadh mapa “%s”…"
@@ -537,7 +539,7 @@ msgstr "Fàg an deasaiche"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
-#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
+#: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:63
 #: ../../src/ui_fsmenu/options.cc:134
@@ -776,7 +778,7 @@ msgstr "Tha faidhle air a bheil “%s” ann mar-thà. A bheil thu airson sgrìo
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:242
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
 msgid "Error Saving Map!"
 msgstr "Mearachd le sàbhaladh a’ mhapa!"
 
@@ -787,7 +789,7 @@ msgid ""
 "manually."
 msgstr "Tha faidhle air a bheil “%s.tmp” ann mar-thà. Feumaidh tu a thoirt air falbh a làmh."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -819,7 +821,7 @@ msgstr "Àireamh de chluicheadairean"
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1705 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -999,16 +1001,11 @@ msgid ""
 " anymore, or it's a new version that can't be handled yet."
 msgstr "Chaidh an geama a shàbhaladh le seann-tionndadh de Widelands is cha ghabh a luchdadh tuilleadh no ’s e tionndadh ùr a th’ ann nach urrainn dhuinn làimhseachadh fhathast."
 
-#: ../../src/logic/map.h:181
-msgctxt "author_name"
-msgid "Unknown"
-msgstr "Gun urra"
-
 #: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr "Cha deach tuairisgeul a mhìneachadh"
 
-#: ../../src/logic/map_objects/immovable.cc:520
+#: ../../src/logic/map_objects/immovable.cc:529
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:77
 #, c-format
 msgid "%i%% built"
@@ -1465,17 +1462,17 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Ràinig sinn deireadh na h-ath-chluiche is chaidh an geama a chur ’na stad. ’S urrainn dhut an geama a chur a’ dol a-rithist is leantainn air adhart a’ coimhead air ma thogras tu."
 
-#: ../../src/logic/save_handler.cc:106
-msgid "Saving game…"
-msgstr "A’ sàbhaladh a’ gheama…"
-
-#: ../../src/logic/save_handler.cc:125
+#: ../../src/logic/save_handler.cc:111
 msgid "Saving failed!"
 msgstr "Dh’fhàillig leis an t-sàbhaladh!"
 
-#: ../../src/logic/save_handler.cc:144
+#: ../../src/logic/save_handler.cc:130
 msgid "Game saved"
 msgstr "Chaidh an geama a shàbhaladh"
+
+#: ../../src/logic/save_handler.cc:158
+msgid "Saving game…"
+msgstr "A’ sàbhaladh a’ gheama…"
 
 #: ../../src/map_io/s2map.cc:405
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1811,16 +1808,16 @@ msgstr "Cha deach toirt air a’ gheama stad on nach eil dad ri stad ann."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Àithne mhì-dhligheach! Sgrìobh /help airson liosta dhe na h-àitheantan."
 
-#: ../../src/network/nethost.cc:1637
+#: ../../src/network/nethost.cc:1639
 #, c-format
 msgid "Computer %u"
 msgstr "Coimpiutair %u"
 
-#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1699 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Cluicheadair"
 
-#: ../../src/network/nethost.cc:1862
+#: ../../src/network/nethost.cc:1864
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2060,7 +2057,7 @@ msgstr "dheth"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+#: ../../src/scripting/lua_game.cc:1081 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3312,7 +3309,9 @@ msgstr "Cabadaich"
 msgid "Script console"
 msgstr "Consoil sgriobt"
 
-#: ../../src/wui/game_debug_ui.cc:235
+#. * TRANSLATORS: Title for a window that shows debug information for a field
+#. on the map
+#: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
 msgstr "Dì-bhugaich an raon"
 
@@ -3533,7 +3532,7 @@ msgid "Game over"
 msgstr "Crìoch a’ gheama"
 
 #: ../../src/wui/game_summary.cc:73
-msgid "Player info:"
+msgid "Player Info:"
 msgstr "Fiosrachadh a’ chluicheadair:"
 
 #: ../../src/wui/game_summary.cc:89
@@ -3593,6 +3592,10 @@ msgstr "Bhuannaich an sgioba %|1$u|!"
 #: ../../src/wui/game_summary.cc:277
 msgid "Score"
 msgstr "Sgòr"
+
+#: ../../src/wui/game_summary.cc:280
+msgid "Team Score"
+msgstr "Sgòr an sgioba"
 
 #: ../../src/wui/general_statistics_menu.cc:191
 msgid "Land"

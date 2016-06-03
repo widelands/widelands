@@ -8,14 +8,15 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Владимир Куряев <istercul@gmail.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 20:43+0000\n"
-"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-28 00:10+0000\n"
+"Last-Translator: Владимир Куряев <istercul@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -553,7 +554,7 @@ msgstr "На днях"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:292
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Трон глубокомысленно говорит..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:294
@@ -619,7 +620,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Хантрух входит в..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:324
@@ -644,12 +645,12 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Хантрух ворчит..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Старый человек? Невежливая молодежь!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:347
@@ -662,7 +663,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Болдрет восклицает..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:355
@@ -776,7 +777,7 @@ msgstr "Прекрасное утро"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Трон признает..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:423

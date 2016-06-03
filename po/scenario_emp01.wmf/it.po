@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-08 08:17+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -315,8 +315,8 @@ msgstr "Ho due cose importanti di cui parlare... Prima le buone notizie:"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr "Ho visto che la costruzione della segheria è completata, quindi possiamo cominciare a lavorare i tronchi che i taglialegna stanno tagliando in legno."
+"to refine the logs that the lumberjacks are harvesting into planks."
+msgstr ""
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -435,7 +435,7 @@ msgstr "Sire, hai reso questa penisola un posto molto sicuro. È il momento di m
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"
