@@ -2,5 +2,7 @@ usr/widelands usr/games
 usr/wl_map_info usr/games
 usr/wl_map_object_info usr/games
 usr/wl_render_richtext usr/games
+widelands.appdata.xml /usr/share/appdata
+widelands.desktop usr/share/applications
 usr/share/applications
 usr/share/icons

@@ -47,6 +47,16 @@ else
   exit 1;
 fi
 
+# Update appdata
+utils/update_appdata.py
+if [ $? -eq 0 ]
+then
+  echo "Updated appdata";
+else
+  echo "Failed updating appdata";
+  exit 1;
+fi
+
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.
 # This script can be removed if we don't get any errors in the future.
