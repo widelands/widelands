@@ -8,15 +8,16 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-28 00:18+0000\n"
+"Last-Translator: Владимир Куряев <istercul@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +163,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Ткачи производят шелк и накидки на ткацкой фабрике. Шелк нужен для строительства некоторых зданий и производства одежды, в то время как накидки служат униформой солдат. Ткацкая фабрика использует в качестве сырья золотую нить и паучий шёлк. Паучий шёлк производится паучьей фермой, в то время как золотую нить изготовляют на прядильной фабрике из золота."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -342,7 +343,7 @@ msgstr "Волнения и беспорядки"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Появление Хаоса..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -351,7 +352,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Охваченный раскаянием, царь покончил жизнь самоубийством. Лишившись монарха, люди обратились к жрецам, но они не сумели предложить ничего существенного. Большинство приняли свою судьбу, другие же пытались смягчить гнев бога жертвоприношениями животных в храме. Но безрезультатно ..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -902,7 +903,7 @@ msgstr "Вы выиграли это миссию. Можете начать с�
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

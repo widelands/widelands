@@ -58,9 +58,11 @@
 
 namespace Widelands {
 
-namespace  {
+BaseImmovable::BaseImmovable(const MapObjectDescr & mo_descr) :
+MapObject(&mo_descr)
+{}
 
-BaseImmovable::Size string_to_size(const std::string& size) {
+int32_t BaseImmovable::string_to_size(const std::string& size) {
 	if (size == "none")
 		return BaseImmovable::NONE;
 	if (size == "small")
@@ -72,13 +74,20 @@ BaseImmovable::Size string_to_size(const std::string& size) {
 	throw GameDataError("Unknown size %s.", size.c_str());
 }
 
-}  // namespace
-
-
-BaseImmovable::BaseImmovable(const MapObjectDescr & mo_descr) :
-MapObject(&mo_descr)
-{}
-
+std::string BaseImmovable::size_to_string(int32_t size) {
+	switch (size) {
+	case BaseImmovable::NONE:
+		return "none";
+	case BaseImmovable::SMALL:
+		return "small";
+	case BaseImmovable::MEDIUM:
+		return "medium";
+	case BaseImmovable::BIG:
+		return "big";
+	default:
+		NEVER_HERE();
+	}
+}
 
 static std::string const base_immovable_name = "unknown";
 
@@ -203,7 +212,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("size")) {
-		size_ = string_to_size(table.get_string("size"));
+		size_ = BaseImmovable::string_to_size(table.get_string("size"));
 	}
 
 	if (table.has_key("terrain_affinity")) {

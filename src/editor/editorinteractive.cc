@@ -661,7 +661,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 					0,
 					/** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-					g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
+				         /** TRANSLATORS: Map author name when it hasn't been set yet */
+					g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

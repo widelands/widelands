@@ -464,7 +464,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		map_info.h,
 		0,
 		_("No Name"),
-		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
+		g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
 		sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
 

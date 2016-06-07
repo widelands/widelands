@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-14 08:33+0000\n"
+"POT-Creation-Date: 2016-06-03 08:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -277,14 +277,16 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:664
+#. * TRANSLATORS: Map author name when it hasn't been set yet
+#: ../../src/editor/editorinteractive.cc:665
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:132
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:467
-msgctxt "map_name"
+#: ../../src/logic/map.h:181
+msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:671
+#: ../../src/editor/editorinteractive.cc:672
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -513,7 +515,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
-#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
+#: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:63
 #: ../../src/ui_fsmenu/options.cc:134
@@ -743,7 +745,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:242
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
 msgid "Error Saving Map!"
 msgstr ""
 
@@ -753,7 +755,7 @@ msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -785,7 +787,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1705 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -967,16 +969,11 @@ msgid ""
 "anymore, or it's a new version that can't be handled yet."
 msgstr ""
 
-#: ../../src/logic/map.h:181
-msgctxt "author_name"
-msgid "Unknown"
-msgstr ""
-
 #: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:520
+#: ../../src/logic/map_objects/immovable.cc:529
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:77
 #, c-format
 msgid "%i%% built"
@@ -1274,31 +1271,31 @@ msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:972
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -1394,16 +1391,16 @@ msgid ""
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:106
-msgid "Saving game…"
-msgstr ""
-
-#: ../../src/logic/save_handler.cc:125
+#: ../../src/logic/save_handler.cc:111
 msgid "Saving failed!"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:144
+#: ../../src/logic/save_handler.cc:130
 msgid "Game saved"
+msgstr ""
+
+#: ../../src/logic/save_handler.cc:158
+msgid "Saving game…"
 msgstr ""
 
 #: ../../src/map_io/s2map.cc:405
@@ -1735,16 +1732,16 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1637
+#: ../../src/network/nethost.cc:1639
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1699 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1862
+#: ../../src/network/nethost.cc:1864
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -1976,7 +1973,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+#: ../../src/scripting/lua_game.cc:1081 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -3214,7 +3211,8 @@ msgstr ""
 msgid "Script console"
 msgstr ""
 
-#: ../../src/wui/game_debug_ui.cc:235
+#. * TRANSLATORS: Title for a window that shows debug information for a field on the map
+#: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
 msgstr ""
 
@@ -3429,7 +3427,7 @@ msgid "Game over"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:73
-msgid "Player info:"
+msgid "Player Info:"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:89
@@ -3485,6 +3483,10 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:277
 msgid "Score"
+msgstr ""
+
+#: ../../src/wui/game_summary.cc:280
+msgid "Team Score"
 msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:191

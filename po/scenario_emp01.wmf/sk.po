@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-12 16:33+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-21 11:02+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -313,8 +313,8 @@ msgstr "Musím s tebou prebrať dve dôležité záležitosti… Najprv dobrá s
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr "Všimla som si, že sme dostavali pílu, nuž môžeme začať zdokonaľovať kláty, ktoré ťažia drevorubači, na stavebné drevo."
+"to refine the logs that the lumberjacks are harvesting into planks."
+msgstr "Všimla som si, že sa dostavala píla. Môžeme teda začať zdokonaľovať kláty, ktoré ťažia drevorubači, na dosky."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -433,7 +433,7 @@ msgstr "Pane, spravili ste z tohto polostrova veľmi bezpečné miesto. Teraz je
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nová úloha"

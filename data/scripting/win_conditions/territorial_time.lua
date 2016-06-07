@@ -226,6 +226,7 @@ return {
                else
                   msg = msg .. msg1 .. "\n\n"
                end
+               -- TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it for x more minute(s) to win the game."
                msg = msg .. p((ngettext("Otherwise the game will end in %i minute.",
                             "Otherwise the game will end in %i minutes.",
                             remaining_max_time // 60))

@@ -72,19 +72,19 @@ return {
 
          h3(_"In the message window, the following additional shortcuts are available:") ..
          p(
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("0"), _"Show all messages") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("1"), _"Show geologists’ messages only") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("2"), _"Show economy messages only") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("3"), _"Show seafaring messages only") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("4"), _"Show warfare messages only") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("5"), _"Show scenario messages only") ..
-               -- TRANSLATORS: This is an access key combination.
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Jump to the location corresponding to the current message") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")
