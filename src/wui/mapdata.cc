@@ -132,7 +132,7 @@ std::string MapData::parent_name() {
 
 // static
 MapData MapData::create_empty_dir(const std::string& current_dir) {
-	/** TRANSLATORS: Empty current folder */
+	/** TRANSLATORS: This label is shown when a folder is empty */
 	return MapData(current_dir, (boost::format("<%s>") % _("empty")).str());
 }
 
