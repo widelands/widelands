@@ -3,6 +3,10 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.list_files(dirname .. "stag_idle_??.png"),
+      sound_effect = {
+         directory = "sound/animals",
+         name = "stag",
+      },
       hotspot = { 12, 26 },
       fps = 20,
    },
