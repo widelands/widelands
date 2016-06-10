@@ -32,8 +32,10 @@
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
+                                             int no_of_bottom_rows,
                                              const std::string& name,
-                                             const std::string& title)
+                                             const std::string& title,
+                                             const std::string& basedir)
    : UI::Window(&parent, name, 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
 
      // Values for alignment and size
@@ -42,7 +44,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      tablex_(padding_),
      tabley_(buth_ + 2 * padding_),
      tablew_(get_inner_w() * 7 / 12),
-     tableh_(get_inner_h() - tabley_ - 3 * buth_ - 2 * padding_),
+     tableh_(get_inner_h() - tabley_ - (no_of_bottom_rows + 1) * buth_ - no_of_bottom_rows * padding_),
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
@@ -50,6 +52,11 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	  map_details_(
 		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_,
 		  MapDetails::Style::kWui),
+     directory_info_(this,
+                     padding_,
+                     get_inner_h() - 2 * buth_ - 4 * padding_,
+                     "",
+                     UI::Align::kLeft),
      ok_(this,
          "ok",
 			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
@@ -68,9 +75,10 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
              buth_,
 				 g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
-     basedir_("maps"),
+     basedir_(basedir),
      has_translated_mapname_(false),
      showing_mapames_(false) {
+	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
@@ -78,7 +86,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                                "show_mapnames",
 	                                0,
 	                                0,
-	                                butw_,
+	                                2 * butw_,
 	                                buth_,
 											  g_gr->images().get("images/ui_basic/but1.png"),
 	                                _("Show Map Names"));
@@ -155,6 +163,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	} else if (files.empty()) {
+		maps_data_.push_back(MapData::create_empty_dir(curdir_));
 	}
 
 	MapData::DisplayType display_type;

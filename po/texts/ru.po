@@ -8,15 +8,16 @@
 # dr&mx <dronmax@gmail.com>, 2015
 # Ivan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 22:55+0000\n"
-"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-29 22:57+0000\n"
+"Last-Translator: Владимир Куряев <istercul@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -446,7 +447,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Подключение к одному или нескольким клиентам (см. 'Параметры клиента)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""

@@ -34,7 +34,7 @@ MapTable::MapTable
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align::kHCenter);
-	add_column(get_w() - 35 - 115, "", _("The name of the map or scenario"), UI::Align::kLeft);
+	add_column(get_w() - 35 - 115, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft);
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
 	set_sort_column(0);
 }

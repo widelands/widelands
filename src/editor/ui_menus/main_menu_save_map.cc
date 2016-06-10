@@ -49,7 +49,7 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 
 // TODO(GunChleoc): Arabic: Make directory dialog: buttons need more height for Arabic.
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, "save_map_menu", _("Save Map")),
+   : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
 
      make_directory_(this,
                      "make_directory",
@@ -74,6 +74,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     buth_,
                     _("Filename:"),
                     UI::Align::kLeft) {
+	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
 	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
@@ -131,7 +132,7 @@ void MainMenuSaveMap::clicked_ok() {
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
-		curdir_ = complete_filename;
+		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -151,6 +152,7 @@ void MainMenuSaveMap::clicked_ok() {
  * Called, when the make directory button was clicked.
  */
 void MainMenuSaveMap::clicked_make_directory() {
+	/** TRANSLATORS: A folder that hasn't been given a name yet */
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
@@ -201,7 +203,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		curdir_ = mapdata.filename;
+		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
 		clicked_ok();
@@ -214,6 +216,13 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	ok_.set_enabled(!editbox_->text().empty());
+}
+
+void MainMenuSaveMap::set_current_directory(const std::string& filename) {
+	curdir_ = filename;
+	/** TRANSLATORS: The folder that a file will be saved to. */
+	directory_info_.set_text((boost::format(_("Current Directory: %s"))
+	                          % (_("My Maps") + curdir_.substr(basedir_.size()))).str());
 }
 
 /**
