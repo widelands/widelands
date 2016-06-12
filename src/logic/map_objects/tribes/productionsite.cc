@@ -31,6 +31,7 @@
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -112,7 +113,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
+				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
 					for (const auto& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
@@ -121,8 +122,18 @@ ProductionSiteDescr::ProductionSiteDescr
 					}
 					inputs_.push_back(WareAmount(idx, amount));
 				} else {
-					throw wexception
-						("tribes do not define a ware type with this name");
+				    idx = egbase.tribes().worker_index(ware_name);
+				    if (egbase.tribes().worker_exists(idx)) {
+                        for (const auto& temp_inputs : input_workers()) {
+                            if (temp_inputs.first == idx) {
+                                throw wexception("duplicated");
+                            }
+                        }
+                        input_workers_.push_back(WareAmount(idx, amount));
+                    } else {
+                        throw wexception
+                            ("tribes do not define a ware or worker type with this name");
+                    }
 				}
 			} catch (const WException & e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
@@ -346,6 +357,22 @@ WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
+WorkersQueue & ProductionSite::workersqueue(DescriptionIndex const wi) {
+	// Check for perfect match first
+	for (WorkersQueue * ip_queue : input_worker_queues_) {
+		if (ip_queue->get_worker() == wi) {
+			return *ip_queue;
+		}
+	}
+	// No perfect match, check for similar jobs
+	for (WorkersQueue * ip_queue : input_worker_queues_) {
+		if (owner().egbase().tribes().get_worker_descr(wi)->can_act_as(ip_queue->get_worker())) {
+			return *ip_queue;
+		}
+	}
+	throw wexception("%s (%u) has no WorkersQueue for %u", descr().name().c_str(), serial(), wi);
+}
+
 /**
  * Calculate statistic.
  */
@@ -424,6 +451,16 @@ void ProductionSite::init(EditorGameBase & egbase)
 			 i.current->first,
 			 i.current->second);
 
+	const BillOfMaterials & input_workers = descr().input_workers();
+	input_worker_queues_.resize(input_workers.size());
+	for (WareRange i(input_workers); i; ++i) {
+		input_worker_queues_[i.i] =
+			new WorkersQueue
+			(*this,
+			 i.current->first,
+			 i.current->second);
+	}
+
 	//  Request missing workers.
 	WorkingPosition * wp = working_positions_;
 	for (const auto& temp_wp : descr().working_positions()) {
@@ -450,6 +487,9 @@ void ProductionSite::set_economy(Economy * const e)
 		for (WaresQueue * ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
+		for (WorkersQueue * ip_queue : input_worker_queues_) {
+			ip_queue->remove_from_economy(*old);
+		}
 	}
 
 	Building::set_economy(e);
@@ -459,6 +499,9 @@ void ProductionSite::set_economy(Economy * const e)
 
 	if (e) {
 		for (WaresQueue * ip_queue : input_queues_) {
+			ip_queue->add_to_economy(*e);
+		}
+		for (WorkersQueue * ip_queue : input_worker_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}

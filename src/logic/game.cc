@@ -811,6 +811,22 @@ void Game::send_player_change_training_options
 			(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
+void Game::send_player_drop_worker (Building & b, int32_t const ser)
+{
+	assert(ser != -1);
+	send_player_command
+		(*new CmdDropWorker
+		 	(get_gametime(), b.owner().player_number(), b, ser));
+}
+
+void Game::send_player_change_worker_capacity
+	(Building & b, DescriptionIndex worker_type, int16_t const val)
+{
+	send_player_command
+		(*new CmdChangeWorkerCapacity
+		 	(get_gametime(), b.owner().player_number(), b, worker_type, val));
+}
+
 void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 {
 	assert(ser != -1);

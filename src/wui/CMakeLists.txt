@@ -153,10 +153,14 @@ wl_library(wui
     quicknavigation.cc
     quicknavigation.h
     shipwindow.cc
+    workercapacitycontrol.cc
+    workercapacitycontrol.h
     soldiercapacitycontrol.cc
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
+    workerpanel.cc
+    workerpanel.h
     stock_menu.cc
     stock_menu.h
     story_message_box.cc

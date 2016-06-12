@@ -31,6 +31,7 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/waresqueuedisplay.h"
+#include "wui/workerpanel.h"
 
 using Widelands::ProductionSite;
 
@@ -110,6 +111,12 @@ ProductionSiteWindow::ProductionSiteWindow
 			);
 		update_worker_table();
 	}
+
+    // Input workers. Make "worker-worker"-panel first to match order in training sites
+    const std::vector<Widelands::WorkersQueue*>& workerqueues = ps.workerqueues();
+    for (uint32_t i = 0; i < workerqueues.size(); ++i)
+        add_worker_panel(get_tabs(), parent, ps, i, *workerqueues[i]);
+
 }
 
 void ProductionSiteWindow::think()

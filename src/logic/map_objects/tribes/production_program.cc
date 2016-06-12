@@ -32,6 +32,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -52,6 +53,8 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "sound/sound_handler.h"
+
+#warning TODO(Notabilis): Check the modified code in this file before merging to trunk
 
 namespace Widelands {
 
@@ -220,9 +223,10 @@ void ProductionProgram::parse_ware_type_group
 	(char * & parameters,
 	 WareTypeGroup& group,
 	 const Tribes& tribes,
-	 const BillOfMaterials& inputs)
+	 const BillOfMaterials& inputs,
+	 const BillOfMaterials& input_workers)
 {
-	std::set<DescriptionIndex>::iterator last_insert_pos = group.first.end();
+	std::set<std::pair<DescriptionIndex, WareWorker>>::iterator last_insert_pos = group.first.end();
 	uint8_t count     = 1;
 	uint8_t count_max = 0;
 	for (;;) {
@@ -234,30 +238,57 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 
-		DescriptionIndex const ware_index = tribes.safe_ware_index(ware);
+        WareWorker type = wwWARE;
 
-		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
-			if (input_it == inputs.end()) {
-				throw GameDataError
-					(
-					 "%s is not declared as an input (\"%s=<count>\" was not "
-					 "found in the [inputs] section)",
-					 ware, ware);
-			}
-			else if (input_it->first == ware_index) {
-				count_max += input_it->second;
-				break;
-			}
-		}
+        // Try as ware
+		DescriptionIndex ware_index = tribes.ware_index(ware);
+		if (tribes.ware_exists(ware_index)) {
+            for (BillOfMaterials::const_iterator input_it = inputs.begin();
+                input_it != inputs.end(); ++input_it) {
+                if (input_it == inputs.end()) {
+                    throw GameDataError
+                        (
+                         "%s is not declared as an input (\"%s=<count>\" was not "
+                         "found in the [inputs] section)",
+                         ware, ware);
+                }
+                else if (input_it->first == ware_index) {
+                    count_max += input_it->second;
+                    break;
+                }
+            }
+        } else {
+            ware_index = tribes.worker_index(ware);
+            if (tribes.worker_exists(ware_index)) {
+                // It is a worker
+                type = wwWORKER;
+                for (BillOfMaterials::const_iterator input_it = input_workers.begin();
+                    input_it != input_workers.end(); ++input_it) {
+                    if (input_it == input_workers.end()) {
+                        throw GameDataError
+                            (
+                             "%s is not declared as an input (\"%s=<count>\" was not "
+                             "found in the [inputs] section)",
+                             ware, ware);
+                    }
+                    else if (input_it->first == ware_index) {
+                        count_max += input_it->second;
+                        break;
+                    }
+                }
+            } else {
+                throw GameDataError("Unknown ware or worker type \"%s\"", ware);
+            }
+        }
 
-		if (group.first.size() && ware_index <= *group.first.begin())
+		if (group.first.size() && ware_index <= group.first.begin()->first)
 			throw GameDataError
 				(
 				 "wrong order of ware types within group: ware type %s appears "
 				 "after ware type %s (fix order!)",
 				 ware,
-				 tribes.get_ware_descr(*group.first.begin())->name().c_str());
-		last_insert_pos = group.first.insert(last_insert_pos, ware_index);
+				 tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
+		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
 		*parameters = terminator;
 		switch (terminator) {
 		case ':': {
@@ -371,7 +402,7 @@ ProductionProgram::ActReturn::SiteHas::SiteHas
 	(char * & parameters, const ProductionSiteDescr & descr, const Tribes& tribes)
 {
 	try {
-		parse_ware_type_group(parameters, group, tribes, descr.inputs());
+		parse_ware_type_group(parameters, group, tribes, descr.inputs(), descr.input_workers());
 	} catch (const WException & e) {
 		throw GameDataError
 			("has ware_type1[,ware_type2[,...]][:N]: %s", e.what());
@@ -382,11 +413,14 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate
 {
 	uint8_t count = group.second;
 	for (WaresQueue * ip_queue : ps.warequeues()) {
-		if (group.first.count(ip_queue->get_ware())) {
-			uint8_t const filled = ip_queue->get_filled();
-			if (count <= filled)
-				return true;
-			count -= filled;
+        for (auto it = group.first.begin(); it != group.first.end(); it++) {
+            if (it->first == ip_queue->get_ware() && it->second == wwWARE) {
+                uint8_t const filled = ip_queue->get_filled();
+                if (count <= filled)
+                    return true;
+                count -= filled;
+                break;
+            }
 		}
 	}
 	return false;
@@ -397,8 +431,11 @@ std::string ProductionProgram::ActReturn::SiteHas::description
 	(const Tribes& tribes) const
 {
 	std::vector<std::string> condition_list;
-	for (const DescriptionIndex& temp_ware : group.first) {
-		condition_list.push_back(tribes.get_ware_descr(temp_ware)->descname());
+	for (const auto& entry : group.first) {
+        if (entry.second == wwWARE)
+            condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
+        else
+            condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -419,8 +456,12 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation
 	(const Tribes& tribes) const
 {
 	std::vector<std::string> condition_list;
-	for (const DescriptionIndex& temp_ware : group.first) {
-		condition_list.push_back(tribes.get_ware_descr(temp_ware)->descname());
+
+	for (const auto& entry : group.first) {
+        if (entry.second == wwWARE)
+            condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
+        else
+            condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -864,7 +905,7 @@ ProductionProgram::ActConsume::ActConsume
 		for (;;) {
 			consumed_wares_.resize(consumed_wares_.size() + 1);
 			parse_ware_type_group
-				(parameters, *consumed_wares_.rbegin(), tribes, descr.inputs());
+				(parameters, *consumed_wares_.rbegin(), tribes, descr.inputs(), descr.input_workers());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
@@ -882,38 +923,76 @@ void ProductionProgram::ActConsume::execute
 	(Game & game, ProductionSite & ps) const
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
-	size_t const nr_warequeues = warequeues.size();
-	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
+	std::vector<WorkersQueue *> const workerqueues = ps.workerqueues();
+	std::vector<uint8_t> consumption_quantities_wares(warequeues.size(), 0);
+	std::vector<uint8_t> consumption_quantities_workers(workerqueues.size(), 0);
 
 	Groups l_groups = consumed_wares_; //  make a copy for local modification
 
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
-	for (size_t i = 0; i < nr_warequeues; ++i) {
+	bool found;
+	for (size_t i = 0; i < warequeues.size(); ++i) {
 		DescriptionIndex const ware_type = warequeues[i]->get_ware();
 		uint8_t nr_available = warequeues[i]->get_filled();
-		consumption_quantities[i] = 0;
+		consumption_quantities_wares[i] = 0;
 
 		//  Iterate over all consume groups and see if they want us to consume
 		//  any thing from the currently considered input queue.
-		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();)
-			if (it->first.count(ware_type)) {
-				if (it->second <= nr_available) {
-					//  There are enough wares of the currently considered type
-					//  to fulfill the requirements of the current group. We can
-					//  therefore erase the group.
-					consumption_quantities[i] += it->second;
-					nr_available              -= it->second;
-					it = l_groups.erase(it);
-					//  No increment here, erase moved next element to the position
-					//  pointed to by it.
-				} else {
-					consumption_quantities[i] += nr_available;
-					it->second                -= nr_available;
-					++it; //  Now check if the next group includes this ware type.
+		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
+			found = false;
+			for (auto it2 = it->first.begin(); it2 != it->first.end(); it2++) {
+				if (it2->first == ware_type && it2->second == wwWARE) {
+					found = true;
+					if (it->second <= nr_available) {
+						//  There are enough wares of the currently considered type
+						//  to fulfill the requirements of the current group. We can
+						//  therefore erase the group.
+						consumption_quantities_wares[i] += it->second;
+						nr_available              -= it->second;
+						it = l_groups.erase(it);
+						//  No increment here, erase moved next element to the position
+						//  pointed to by it.
+					} else {
+						consumption_quantities_wares[i] += nr_available;
+						it->second                -= nr_available;
+						++it; //  Now check if the next group includes this ware type.
+					}
+					break;
 				}
-			} else
+			}
+			// group does not request ware
+			if (!found)
 				++it;
+		}
+	}
+
+    // Same for workers
+	for (size_t i = 0; i < workerqueues.size(); ++i) {
+		DescriptionIndex const worker_type = workerqueues[i]->get_worker();
+		uint8_t nr_available = workerqueues[i]->workers().size();
+		consumption_quantities_workers[i] = 0;
+
+		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
+			found = false;
+			for (auto it2 = it->first.begin(); it2 != it->first.end(); it2++) {
+				if (it2->first == worker_type && it2->second == wwWORKER) {
+					found = true;
+					if (it->second <= nr_available) {
+						consumption_quantities_workers[i] += it->second;
+						nr_available              -= it->second;
+						it = l_groups.erase(it);
+					} else {
+						consumption_quantities_workers[i] += nr_available;
+						it->second                -= nr_available;
+						++it;
+					}
+					break;
+				}
+			}
+			if (!found)
+				++it;
+		}
 	}
 
 	// "Did not start working because .... is/are missing"
@@ -925,8 +1004,11 @@ void ProductionProgram::ActConsume::execute
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
-			for (const DescriptionIndex& ware : group.first) {
-				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
+			for (const auto& entry : group.first) {
+			if (entry.second == wwWARE)
+				ware_list.push_back(tribe.get_ware_descr(entry.first)->descname());
+			else
+				ware_list.push_back(tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 
@@ -967,13 +1049,18 @@ void ProductionProgram::ActConsume::execute
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
 	} else { //  we fulfilled all consumption requirements
-		for (size_t i = 0; i < nr_warequeues; ++i)
-			if (uint8_t const q = consumption_quantities[i]) {
+		for (size_t i = 0; i < warequeues.size(); ++i)
+			if (uint8_t const q = consumption_quantities_wares[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
 
 				// Update consumption statistic
 				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
+			}
+		for (size_t i = 0; i < workerqueues.size(); ++i)
+			if (uint8_t const q = consumption_quantities_workers[i]) {
+				assert(q <= workerqueues[i]->workers().size());
+				workerqueues[i]->remove_workers(q);
 			}
 		return ps.program_step(game);
 	}

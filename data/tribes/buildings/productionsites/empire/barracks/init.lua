@@ -35,6 +35,9 @@ tribes:new_productionsite_type {
 	},
 
 	aihints = {
+		forced_after = 1000,
+		very_weak_ai_limit = 1,
+		weak_ai_limit = 3
 	},
 
 	working_positions = {
@@ -43,7 +46,8 @@ tribes:new_productionsite_type {
 
 	inputs = {
 		armor_helmet = 8,
-		spear_wooden = 8
+		spear_wooden = 8,
+		empire_carrier = 8
 	},
 	outputs = {
 		"empire_soldier",
@@ -52,12 +56,11 @@ tribes:new_productionsite_type {
 	programs = {
 		work = {
 			-- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-			-- NOCOM this should cost us a carrier as well
 			descname = _"recruiting soldier",
 			actions = {
 				"sleep=15000",
 				"return=skipped unless economy needs empire_soldier",
-				"consume=armor_helmet spear_wooden",
+				"consume=armor_helmet spear_wooden empire_carrier",
 				"animate=working 15000", -- NOCOM we have no working animation
 				"recruit=empire_soldier"
 			}

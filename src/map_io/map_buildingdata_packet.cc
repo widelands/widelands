@@ -30,6 +30,7 @@
 #include "economy/request.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -762,6 +763,19 @@ void MapBuildingdataPacket::read_productionsite
 				}
 			}
 
+			nr_queues = fr.unsigned_16();
+			assert(!productionsite.input_worker_queues_.size());
+			for (uint16_t i = 0; i < nr_queues; ++i) {
+				WorkersQueue * wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
+				wq->read(fr, game, mol);
+
+				if (!game.tribes().worker_exists(wq->get_worker())) {
+					delete wq;
+				} else {
+					productionsite.input_worker_queues_.push_back(wq);
+				}
+			}
+
 			uint16_t const stats_size = fr.unsigned_16();
 			productionsite.statistics_.resize(stats_size);
 			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
@@ -1259,6 +1273,11 @@ void MapBuildingdataPacket::write_productionsite
 	fw.unsigned_16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i)
 		productionsite.input_queues_[i]->write(fw, game, mos);
+
+    const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
+	fw.unsigned_16(input_worker_queues_size);
+	for (uint16_t i = 0; i < input_worker_queues_size; ++i)
+		productionsite.input_worker_queues_[i]->write(fw, game, mos);
 
 	const uint16_t statistics_size = productionsite.statistics_.size();
 	fw.unsigned_16(statistics_size);

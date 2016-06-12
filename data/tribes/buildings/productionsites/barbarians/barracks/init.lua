@@ -33,6 +33,9 @@ tribes:new_productionsite_type {
 	},
 
 	aihints = {
+		forced_after = 1000,
+		very_weak_ai_limit = 1,
+		weak_ai_limit = 3
 	},
 
 	working_positions = {
@@ -40,7 +43,9 @@ tribes:new_productionsite_type {
 	},
 
 	inputs = {
-		ax = 8
+		ax = 8,
+		beer = 8,
+		barbarians_carrier = 8
 	},
 	outputs = {
 		"barbarians_soldier",
@@ -50,11 +55,10 @@ tribes:new_productionsite_type {
 		work = {
 			-- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 			descname = _"recruiting soldier",
-			-- NOCOM this should cost us a carrier as well
 			actions = {
 				"sleep=15000",
 				"return=skipped unless economy needs barbarians_soldier",
-				"consume=ax",
+				"consume=ax beer barbarians_carrier",
 				"animate=working 15000", -- NOCOM we have no working animation
 				"recruit=barbarians_soldier"
 			}

@@ -504,6 +504,10 @@ WaresQueue & Building::waresqueue(DescriptionIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
+WorkersQueue & Building::workersqueue(DescriptionIndex const wi) {
+	throw wexception("%s (%u) has no WorkersQueue for %u", descr().name().c_str(), serial(), wi);
+}
+
 /*
 ===============
 This function is called by workers in the buildingwork task.

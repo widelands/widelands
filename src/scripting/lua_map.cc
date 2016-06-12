@@ -2051,8 +2051,12 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 		for (const auto& group: program.consumed_wares()) {
 			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
-			for (const DescriptionIndex& ware_index : group.first) {
-				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
+			for (const auto& entry : group.first) {
+			    const DescriptionIndex& index = entry.first;
+                if (entry.second == wwWARE)
+                    lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(index)->name());
+                else
+                    lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(index)->name());
 				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
 			}

@@ -48,6 +48,10 @@ GameLogicCommand & QueueCmdFactory::create_correct_queue_command
 		return *new CmdEnhanceBuilding();
 	case QueueCommandTypes::kBulldoze:
 		return *new CmdBulldoze();
+	case QueueCommandTypes::kDropWorker:
+		return *new CmdDropWorker();
+	case QueueCommandTypes::kChangeWorkerCapacity:
+		return *new CmdChangeWorkerCapacity();
 	case QueueCommandTypes::kChangeTrainingOptions:
 		return *new CmdChangeTrainingOptions();
 	case QueueCommandTypes::kDropSoldier:

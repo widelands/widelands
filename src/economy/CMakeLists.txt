@@ -42,6 +42,8 @@ wl_library(economy
     warehousesupply.h
     wares_queue.cc
     wares_queue.h
+    workers_queue.cc
+    workers_queue.h
   DEPENDS
     base_exceptions
     base_log

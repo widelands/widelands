@@ -52,7 +52,7 @@ class World;
 struct ProductionProgram {
 
 	/// A group of ware types with a count.
-	using WareTypeGroup = std::pair<std::set<DescriptionIndex>, uint8_t>;
+	using WareTypeGroup = std::pair<std::set<std::pair<DescriptionIndex, WareWorker>>, uint8_t>;
 	using Groups = std::vector<WareTypeGroup>;
 
 	/// Can be executed on a ProductionSite.
@@ -95,7 +95,8 @@ struct ProductionProgram {
 		(char            * & parameters,
 		 WareTypeGroup   & group,
 		 const Tribes& tribes,
-		 const BillOfMaterials  & inputs);
+		 const BillOfMaterials  & inputs,
+		 const BillOfMaterials  & input_workers);
 
 	/// Returns from the program.
 	///

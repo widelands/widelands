@@ -69,12 +69,6 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      empire_carrier = 1,
-      armor_helmet = 1,
-      spear_wooden = 1
-   },
-
    animations = animations,
 
    -- Battle attributes - initial values and per level increase

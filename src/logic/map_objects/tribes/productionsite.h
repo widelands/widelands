@@ -82,6 +82,7 @@ public:
 		return output_worker_types_.count(i);
 	}
 	const BillOfMaterials & inputs() const {return inputs_;}
+	const BillOfMaterials & input_workers() const {return input_workers_;}
 	using Output = std::set<DescriptionIndex>;
 	const Output   & output_ware_types  () const {return output_ware_types_;}
 	const Output   & output_worker_types() const {return output_worker_types_;}
@@ -107,6 +108,7 @@ public:
 private:
 	BillOfMaterials working_positions_;
 	BillOfMaterials inputs_;
+	BillOfMaterials input_workers_;
 	Output   output_ware_types_;
 	Output   output_worker_types_;
 	Programs programs_;
@@ -173,6 +175,7 @@ public:
 	}
 
 	WaresQueue & waresqueue(DescriptionIndex) override;
+	WorkersQueue & workersqueue(DescriptionIndex) override;
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -188,6 +191,8 @@ public:
 
 	using InputQueues = std::vector<WaresQueue *>;
 	const InputQueues & warequeues() const {return input_queues_;}
+	using InputWorkerQueues = std::vector<WorkersQueue *>;
+	const InputWorkerQueues & workerqueues() const {return input_worker_queues_;}
 	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const;
@@ -281,6 +286,7 @@ protected:  // TrainingSite must have access to this stuff
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_; ///< input queues for all inputs
+	InputWorkerQueues input_worker_queues_; ///< input queues for workers
 	std::vector<bool>        statistics_;
 	uint8_t                  last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range: 0-10)
