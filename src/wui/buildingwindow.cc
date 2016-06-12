@@ -58,7 +58,8 @@ BuildingWindow::BuildingWindow
 	registry_(registry),
 	building_       (b),
 	workarea_overlay_id_(0),
-	avoid_fastclick_(false)
+	avoid_fastclick_(false),
+	expeditionbtn_(nullptr)
 {
 	delete registry_;
 	registry_ = this;
@@ -178,27 +179,20 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		// Check if this is a port building and if yes show expedition button
 		if (upcast(Widelands::Warehouse const, warehouse, &building_)) {
 			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
-				if (pd->expedition_started()) {
-					UI::Button * expeditionbtn =
-						new UI::Button
-							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
-							g_gr->images().get("images/ui_basic/but4.png"),
-							g_gr->images().get("images/wui/buildings/cancel_expedition.png"),
-							_("Cancel the expedition"));
-					expeditionbtn->sigclicked.connect
-						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
-					capsbuttons->add(expeditionbtn, UI::Align::kHCenter);
-				} else {
-					UI::Button * expeditionbtn =
-						new UI::Button
-							(capsbuttons, "start_expedition", 0, 0, 34, 34,
-							g_gr->images().get("images/ui_basic/but4.png"),
-							g_gr->images().get("images/wui/buildings/start_expedition.png"),
-							_("Start an expedition"));
-					expeditionbtn->sigclicked.connect
-						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
-					capsbuttons->add(expeditionbtn, UI::Align::kHCenter);
-				}
+				expedition_canceled_subscriber_ =
+					Notifications::subscribe<Widelands::NoteExpeditionCanceled>(
+						[this](const Widelands::NoteExpeditionCanceled&) {
+							update_expedition_button(true);
+				});
+				expeditionbtn_ =
+					new UI::Button
+						(capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34,
+						g_gr->images().get("images/ui_basic/but4.png"),
+						g_gr->images().get("images/wui/buildings/start_expedition.png"));
+				update_expedition_button(!pd->expedition_started());
+				expeditionbtn_->sigclicked.connect
+					(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
+				capsbuttons->add(expeditionbtn_, UI::Align::kHCenter);
 			}
 		}
 		else
@@ -212,8 +206,11 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						 g_gr->images().get((is_stopped ?
 														"images/ui_basic/continue.png" :
 														"images/ui_basic/stop.png")),
-						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-						 is_stopped ? _("Continue") : _("Stop"));
+						 is_stopped ?
+							 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+							 _("Continue") :
+							 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+							 _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
 					(stopbtn,
@@ -275,21 +272,19 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (capscache_ & Widelands::Building::PCap_Dismantle) {
-			std::map<Widelands::DescriptionIndex, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(&building_, wares);
-			UI::Button * dismantlebtn =
-				new UI::Button
-					(capsbuttons, "dismantle", 0, 0, 34, 34,
-					 g_gr->images().get("images/ui_basic/but4.png"),
-					 g_gr->images().get(pic_dismantle),
-					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
-						 waremap_to_richtext(owner.tribe(), wares));
-			dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
-			capsbuttons->add
-				(dismantlebtn,
-				 UI::Align::kHCenter);
-
-			requires_destruction_separator = true;
+			const Widelands::Buildcost wares = Widelands::DismantleSite::count_returned_wares(&building_);
+			if (!wares.empty()) {
+				UI::Button * dismantlebtn =
+					new UI::Button
+						(capsbuttons, "dismantle", 0, 0, 34, 34,
+						 g_gr->images().get("images/ui_basic/but4.png"),
+						 g_gr->images().get(pic_dismantle),
+						 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
+							 waremap_to_richtext(owner.tribe(), wares));
+				dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
+				capsbuttons->add(dismantlebtn, UI::Align::kHCenter);
+				requires_destruction_separator = true;
+			}
 		}
 
 		if (requires_destruction_separator && can_see) {
@@ -304,9 +299,9 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 	if (can_see) {
 		WorkareaInfo wa_info;
 		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-			wa_info = csite->building().m_workarea_info;
+			wa_info = csite->building().workarea_info_;
 		} else {
-			wa_info = building_.descr().m_workarea_info;
+			wa_info = building_.descr().workarea_info_;
 		}
 		if (!wa_info.empty()) {
 			toggle_workarea_ = new UI::Button
@@ -329,7 +324,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->images().get("images/ui_basic/but4.png"),
 					 g_gr->images().get(pic_debug),
-					 _("Debug"));
+					 _("Show Debug Window"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add
 				(debugbtn,
@@ -422,12 +417,15 @@ Callback for starting an expedition request
 ===============
 */
 void BuildingWindow::act_start_or_cancel_expedition() {
-	if (upcast(Widelands::Warehouse const, warehouse, &building_))
-		if (warehouse->get_portdock())
+	if (upcast(Widelands::Warehouse const, warehouse, &building_)) {
+		if (warehouse->get_portdock()) {
+			expeditionbtn_->set_enabled(false);
 			igbase().game().send_player_start_or_cancel_expedition(building_);
+		}
+		get_tabs()->activate("expedition_wares_queue");
+	}
 
 	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
-	//die();
 }
 
 /**
@@ -471,9 +469,9 @@ void BuildingWindow::show_workarea()
 	}
 	WorkareaInfo workarea_info;
 	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		workarea_info = csite->building().m_workarea_info;
+		workarea_info = csite->building().workarea_info_;
 	} else {
-		workarea_info = building_.descr().m_workarea_info;
+		workarea_info = building_.descr().workarea_info_;
 	}
 	if (workarea_info.empty()) {
 		return;
@@ -538,4 +536,17 @@ void BuildingWindow::create_ware_queue_panel
 void BuildingWindow::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
+}
+
+void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
+	assert(expeditionbtn_ != nullptr);
+	if (expedition_was_canceled) {
+		expeditionbtn_->set_tooltip(_("Start an expedition"));
+		expeditionbtn_->set_pic(g_gr->images().get("images/wui/buildings/start_expedition.png"));
+		tabs_->remove_last_tab("expedition_wares_queue");
+	} else {
+		expeditionbtn_->set_tooltip(_("Cancel the expedition"));
+		expeditionbtn_->set_pic(g_gr->images().get("images/wui/buildings/cancel_expedition.png"));
+	}
+	expeditionbtn_->set_enabled(true);
 }

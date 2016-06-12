@@ -43,7 +43,7 @@ class Building;
  *  - Work: the worker is running his working schedule
  */
 class Worker : public Bob {
-	friend class Soldier; //  allow access to m_supply
+	friend class Soldier; //  allow access to supply_
 	friend struct WorkerProgram;
 	friend struct MapBobdataPacket;
 
@@ -80,32 +80,32 @@ public:
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(EditorGameBase & egbase) {
-		return m_location.get(egbase);
+		return location_.get(egbase);
 	}
-	OPtr<PlayerImmovable> get_location() const {return m_location;}
-	Economy * get_economy() const {return m_economy;}
+	OPtr<PlayerImmovable> get_location() const {return location_;}
+	Economy * get_economy() const {return economy_;}
 
 	/// Sets the location of the worker initially. It may not have a previous
 	/// location. Does not add the worker to the location's set of workers (it
 	/// should be there already). The worker must already be in the same economy
 	/// as the location.
 	void set_location_initially(PlayerImmovable & location) {
-		assert(!m_location.is_set());
+		assert(!location_.is_set());
 		assert(location.serial());
-		assert(m_economy);
-		assert(m_economy == location.get_economy());
-		m_location = &location;
+		assert(economy_);
+		assert(economy_ == location.get_economy());
+		location_ = &location;
 	}
 
 	void set_location(PlayerImmovable *);
 	void set_economy(Economy *);
 
 	WareInstance       * get_carried_ware(EditorGameBase       & egbase) {
-		return m_carried_ware.get(egbase);
+		return carried_ware_.get(egbase);
 	}
 	WareInstance const * get_carried_ware(const EditorGameBase & egbase) const
 	{
-		return m_carried_ware.get(egbase);
+		return carried_ware_.get(egbase);
 	}
 	void set_carried_ware(EditorGameBase &, WareInstance *);
 	WareInstance * fetch_carried_ware(EditorGameBase &);
@@ -131,7 +131,7 @@ public:
 	void create_needed_experience(Game &);
 	DescriptionIndex level             (Game &);
 
-	int32_t get_current_experience() const {return m_current_exp;}
+	int32_t get_current_experience() const {return current_exp_;}
 	bool needs_experience() const {return descr().get_needed_experience() != INVALID_INDEX;}
 
 	// debug
@@ -140,7 +140,7 @@ public:
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
 	void cancel_task_transfer(Game &);
-	Transfer * get_transfer() const {return m_transfer;}
+	Transfer * get_transfer() const {return transfer_;}
 
 	void start_task_shipping(Game &, PortDock*);
 	void end_shipping(Game &);
@@ -175,7 +175,7 @@ protected:
 	void draw(const EditorGameBase &, RenderTarget &, const Point&) const override;
 	void init_auto_task(Game &) override;
 
-	bool does_carry_ware() {return m_carried_ware.is_set();}
+	bool does_carry_ware() {return carried_ware_.is_set();}
 
 	void set_program_objvar(Game &, State &, MapObject * obj);
 
@@ -239,15 +239,15 @@ private:
 	bool run_geologist        (Game &, State &, const Action &);
 	bool run_geologist_find   (Game &, State &, const Action &);
 	bool run_scout            (Game &, State &, const Action &);
-	bool run_playfx           (Game &, State &, const Action &);
+	bool run_play_sound       (Game &, State &, const Action &);
 	bool run_construct        (Game &, State &, const Action &);
 
-	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
-	Economy          * m_economy;      ///< economy this worker is registered in
-	OPtr<WareInstance>    m_carried_ware; ///< ware we are carrying
-	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
-	Transfer * m_transfer; ///< where we are currently being sent
-	int32_t                m_current_exp;  ///< current experience
+	OPtr<PlayerImmovable> location_; ///< meta location of the worker
+	Economy          * economy_;      ///< economy this worker is registered in
+	OPtr<WareInstance>    carried_ware_; ///< ware we are carrying
+	IdleWorkerSupply * supply_;   ///< supply while gowarehouse and not transfer
+	Transfer * transfer_; ///< where we are currently being sent
+	int32_t                current_exp_;  ///< current experience
 
 	// saving and loading
 protected:
@@ -264,9 +264,9 @@ protected:
 		const BobProgramBase * get_program(const std::string & name) override;
 
 	private:
-		uint32_t m_location;
-		uint32_t m_carried_ware;
-		Transfer::ReadData m_transfer;
+		uint32_t location_;
+		uint32_t carried_ware_;
+		Transfer::ReadData transfer_;
 	};
 
 	virtual Loader * create_loader();

@@ -62,7 +62,7 @@
 
 FileSystem::FileSystem()
 {
-	m_root = "";
+	root_ = "";
 }
 
 
@@ -71,20 +71,20 @@ FileSystem::FileSystem()
  * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
 bool FileSystem::is_path_absolute(const std::string & path) const {
-	std::string::size_type const path_size = path  .size();
-	std::string::size_type const root_size = m_root.size();
+	std::string::size_type const path_size = path.size();
+	std::string::size_type const root_size = root_.size();
 
 	if (path_size < root_size)
 		return false;
 
 	if (path_size == root_size)
-		return path == m_root;
+		return path == root_;
 
-	if (path.compare(0, m_root.size(), m_root))
+	if (path.compare(0, root_.size(), root_))
 		return false;
 
 #ifdef _WIN32
-	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') //"C:\"
+	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') // "C:\"
 	{
 		return true;
 	}
@@ -160,7 +160,7 @@ std::string FileSystem::get_homedir()
 {
 	std::string homedir;
 #ifdef _WIN32
-	// trying to get it compatible to ALL windows versions...
+	// Trying to get it compatible to ALL windows versions...
 	// Could anybody please hit the Megasoft devs for not keeping
 	// their own "standards"?
 #define TRY_USE_AS_HOMEDIR(name)                                              \
@@ -186,7 +186,7 @@ std::string FileSystem::get_homedir()
 			("\nWARNING: either we can not detect your home directory "
 			 "or you do not have one! Please contact the developers.\n\n");
 
-		//TODO(unknown): is it really a good idea to set homedir to "." then ??
+		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 
 		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
@@ -209,15 +209,15 @@ static void fs_tokenize
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
-	//extract the first path component
-	if (path.find(filesep) == 0) //is this an absolute path?
+	// Extract the first path component
+	if (path.find(filesep) == 0) // Is this an absolute path?
 		pos = 1;
-	else //relative path
+	else // Relative path
 		pos = 0;
 	pos2 = path.find(filesep, pos);
-	//'current' token is now between pos and pos2
+	// 'current' token is now between pos and pos2
 
-	//split path into it's components
+	// Split path into it's components
 	while (pos2 != std::string::npos) {
 		if (pos != pos2)
 		{
@@ -228,7 +228,7 @@ static void fs_tokenize
 		pos2 = path.find(filesep, pos);
 	}
 
-	//extract the last component (most probably a filename)
+	// Extract the last component (most probably a filename)
 	std::string node = path.substr(pos);
 	if (!node.empty())
 		*components++ = node;
@@ -252,7 +252,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 
 	fs_tokenize(path, file_separator(), std::inserter(components, components.begin()));
 
-	//tilde expansion
+	// Tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		fs_tokenize
@@ -262,21 +262,21 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	} else if (!is_path_absolute(path))
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize
-			(m_root.empty() ? get_working_directory() : m_root, file_separator(),
+			(root_.empty() ? get_working_directory() : root_, file_separator(),
 			 std::inserter(components, components.begin()));
 
-	//clean up the path
+	// Clean up the path
 	for (i = components.begin(); i != components.end();) {
 		char const * str = i->c_str();
 		if (*str == '.') {
 			++str;
 
-			//remove single dot
+			// Remove single dot
 			if (*str == '\0') {
 				i = components.erase(i);
 				continue;
 			}
-			//remove double dot and the preceding component (if any)
+			// Remove double dot and the preceding component (if any)
 			else if (*str == '.' && *(str + 1) == '\0') {
 				if (i != components.begin()) {
 #ifdef _WIN32
@@ -309,7 +309,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 		canonpath += '\\';
 	}
 
-	//remove trailing slash
+	// Remove trailing slash
 	if (canonpath.size() > 1) canonpath.erase(canonpath.end() - 1);
 #endif
 
@@ -375,7 +375,7 @@ FileSystem & FileSystem::create(const std::string & root)
 			 errno == ENOENT  ||
 			 errno == ENOTDIR ||
 #ifdef ELOOP
-			 errno == ELOOP   || //MinGW does not support ELOOP (yet)
+			 errno == ELOOP   || // MinGW does not support ELOOP (yet)
 #endif
 			 errno == ENAMETOOLONG)
 		{
@@ -388,7 +388,7 @@ FileSystem & FileSystem::create(const std::string & root)
 	if (S_ISDIR(statinfo.st_mode)) {
 		return *new RealFSImpl(root);
 	}
-	if (S_ISREG(statinfo.st_mode)) { //TODO(unknown): ensure root is a zipfile
+	if (S_ISREG(statinfo.st_mode)) { // TODO(unknown): ensure root is a zipfile
 		return *new ZipFilesystem(root);
 	}
 

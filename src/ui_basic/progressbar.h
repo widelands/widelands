@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2009 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,18 +45,18 @@ public:
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 uint32_t orientation);
 
-	uint32_t get_state() const {return m_state;}
+	uint32_t get_state() const {return state_;}
 	void set_state(uint32_t);
-	uint32_t get_total() const {return m_total;}
+	uint32_t get_total() const {return total_;}
 	void set_total(uint32_t);
 
 protected:
 	void draw(RenderTarget &) override;
 
 private:
-	uint32_t m_orientation;
-	uint32_t m_state; ///< m_state is [0..m_total]
-	uint32_t m_total; ///< maximum progress
+	uint32_t orientation_;
+	uint32_t state_; ///< state_ is [0..total_]
+	uint32_t total_; ///< maximum progress
 };
 
 }

@@ -7,21 +7,23 @@ include "scripting/infrastructure.lua"
 set_textdomain("tribes")
 
 return {
+   -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
+   -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
+   tooltip = _" Start the game with a fortified military installation",
    func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
 
-   if shared_in_start then
-      sf = shared_in_start
-   else
-      plr:allow_workers("all")
-   end
+      if shared_in_start then
+         sf = shared_in_start
+      else
+         plr:allow_workers("all")
+      end
 
-   local h = plr:place_building("empire_castle", sf, false, true)
-   h:set_soldiers{[{0,0,0,0}] = 12}
+      local h = plr:place_building("empire_castle", sf, false, true)
+      h:set_soldiers{[{0,0,0,0}] = 12}
 
-   if not pcall(function()
       place_building_in_region(plr, "empire_warehouse", sf:region(7), {
          wares = {
             armor_helmet = 2,
@@ -115,13 +117,5 @@ return {
       })
 
       place_building_in_region(plr, "empire_stonemasons_house", sf:region(11))
-   end) then
-      plr:send_message(
-         -- TRANSLATORS: Short for "Not enough space"
-         _"No Space",
-         rt(p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]))),
-         {popup=true, heading=_"Not enough space"}
-      )
    end
-end
 }

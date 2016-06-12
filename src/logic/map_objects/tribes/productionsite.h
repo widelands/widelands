@@ -67,52 +67,52 @@ public:
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		for (const WareAmount& working_pos : working_positions()) {
+		for (const auto& working_pos : working_positions()) {
 			result += working_pos.second;
 		}
 		return result;
 	}
 	const BillOfMaterials & working_positions() const {
-		return m_working_positions;
+		return working_positions_;
 	}
 	bool is_output_ware_type  (const DescriptionIndex& i) const {
-		return m_output_ware_types  .count(i);
+		return output_ware_types_  .count(i);
 	}
 	bool is_output_worker_type(const DescriptionIndex& i) const {
-		return m_output_worker_types.count(i);
+		return output_worker_types_.count(i);
 	}
-	const BillOfMaterials & inputs() const {return m_inputs;}
+	const BillOfMaterials & inputs() const {return inputs_;}
 	using Output = std::set<DescriptionIndex>;
-	const Output   & output_ware_types  () const {return m_output_ware_types;}
-	const Output   & output_worker_types() const {return m_output_worker_types;}
+	const Output   & output_ware_types  () const {return output_ware_types_;}
+	const Output   & output_worker_types() const {return output_worker_types_;}
 	const ProductionProgram * get_program(const std::string &) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
-	const Programs & programs() const {return m_programs;}
+	const Programs & programs() const {return programs_;}
 
 	const std::string& out_of_resource_title() const {
-		return m_out_of_resource_title;
+		return out_of_resource_title_;
 	}
 
 	const std::string& out_of_resource_heading() const {
-		return m_out_of_resource_heading;
+		return out_of_resource_heading_;
 	}
 
 	const std::string& out_of_resource_message() const {
-		return m_out_of_resource_message;
+		return out_of_resource_message_;
 	}
 	uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
 
 private:
-	BillOfMaterials m_working_positions;
-	BillOfMaterials m_inputs;
-	Output   m_output_ware_types;
-	Output   m_output_worker_types;
-	Programs m_programs;
-	std::string m_out_of_resource_title;
-	std::string m_out_of_resource_heading;
-	std::string m_out_of_resource_message;
+	BillOfMaterials working_positions_;
+	BillOfMaterials inputs_;
+	Output   output_ware_types_;
+	Output   output_worker_types_;
+	Programs programs_;
+	std::string out_of_resource_title_;
+	std::string out_of_resource_heading_;
+	std::string out_of_resource_message_;
 	int         out_of_resource_productivity_threshold_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
@@ -133,7 +133,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActMine;
 	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
-	friend struct ProductionProgram::ActPlayFX;
+	friend struct ProductionProgram::ActPlaySound;
 	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSiteDescr)
 
@@ -143,7 +143,7 @@ public:
 
 	void log_general_info(const EditorGameBase &) override;
 
-	bool is_stopped() const {return m_is_stopped;}
+	bool is_stopped() const {return is_stopped_;}
 	void set_stopped(bool);
 
 	struct WorkingPosition {
@@ -155,21 +155,21 @@ public:
 	};
 
 	WorkingPosition const * working_positions() const {
-		return m_working_positions;
+		return working_positions_;
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game & game);
-	uint8_t get_statistics_percent() {return m_last_stat_percent;}
-	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
+	uint8_t get_statistics_percent() {return last_stat_percent_;}
+	uint8_t get_crude_statistics() {return (crude_percent_ + 5000) / 10000;}
 
 
-	const std::string& production_result() const {return m_production_result;}
+	const std::string& production_result() const {return production_result_;}
 
 	 // Production and worker programs set this to explain the current
 	 // state of the production. This string is shown as a tooltip
 	 // when the mouse hovers over the building.
 	 void set_production_result(const std::string& text) {
-		m_production_result = text;
+		production_result_ = text;
 	}
 
 	WaresQueue & waresqueue(DescriptionIndex) override;
@@ -187,7 +187,7 @@ public:
 	void set_economy(Economy *) override;
 
 	using InputQueues = std::vector<WaresQueue *>;
-	const InputQueues & warequeues() const {return m_input_queues;}
+	const InputQueues & warequeues() const {return input_queues_;}
 	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const;
@@ -240,8 +240,8 @@ protected:
 	 */
 	virtual void find_and_start_next_program(Game &);
 
-	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
-	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : nullptr;}
+	State & top_state() {assert(stack_.size()); return *stack_.rbegin();}
+	State * get_state() {return stack_.size() ? &*stack_.rbegin() : nullptr;}
 	void program_act(Game &);
 
 	/// \param phase can be used to pass a value on to the next step in the
@@ -257,12 +257,12 @@ protected:
 
 	void calc_statistics();
 	void try_start_working(Game &);
-	void set_post_timer (int32_t const t) {m_post_timer = t;}
+	void set_post_timer (int32_t const t) {post_timer_ = t;}
 
 protected:  // TrainingSite must have access to this stuff
-	WorkingPosition                   * m_working_positions;
+	WorkingPosition                   * working_positions_;
 
-	int32_t m_fetchfromflag; ///< Number of wares to fetch from flag
+	int32_t fetchfromflag_; ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -270,28 +270,29 @@ protected:  // TrainingSite must have access to this stuff
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
 	using SkippedPrograms = std::map<std::string, Time>;
-	SkippedPrograms m_skipped_programs;
+	SkippedPrograms skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack        m_stack; ///<  program stack
-	bool         m_program_timer; ///< execute next instruction based on pointer
-	int32_t      m_program_time; ///< timer time
-	int32_t      m_post_timer;    ///< Time to schedule after ends
+	Stack        stack_; ///<  program stack
+	bool         program_timer_; ///< execute next instruction based on pointer
+	int32_t      program_time_; ///< timer time
+	int32_t      post_timer_;    ///< Time to schedule after ends
 
-	BillOfMaterials m_produced_wares;
-	BillOfMaterials m_recruited_workers;
-	InputQueues m_input_queues; ///< input queues for all inputs
-	std::vector<bool>        m_statistics;
-	uint8_t                  m_last_stat_percent;
-	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
-	bool                     m_is_stopped;
-	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
+	BillOfMaterials produced_wares_;
+	BillOfMaterials recruited_workers_;
+	InputQueues input_queues_; ///< input queues for all inputs
+	std::vector<bool>        statistics_;
+	uint8_t                  last_stat_percent_;
+	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range: 0-10)
+	uint32_t                 crude_percent_;
+	bool                     is_stopped_;
+	std::string              default_anim_; // normally "idle", "empty", if empty mine.
 
 private:
 	enum class Trend {kUnchanged, kRising, kFalling};
 	Trend                    trend_;
-	std::string              m_statistics_string_on_changed_statistics;
-	std::string              m_production_result; // hover tooltip text
+	std::string              statistics_string_on_changed_statistics_;
+	std::string              production_result_; // hover tooltip text
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -303,16 +304,16 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const DescriptionIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max)
 	{}
 	~Input() {}
 
-	DescriptionIndex ware() const {return m_ware;}
-	uint8_t     max() const {return m_max;}
+	DescriptionIndex ware() const {return ware_;}
+	uint8_t     max() const {return max_;}
 
 private:
-	DescriptionIndex m_ware;
-	uint8_t    m_max;
+	DescriptionIndex ware_;
+	uint8_t    max_;
 };
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,22 +63,22 @@ std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::str
 }  // namespace
 
 LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
-	: m_factory(new EditorFactory())
+	: factory_(new EditorFactory())
 {
-	setup_for_editor_and_game(m_L, g);
-	LuaRoot::luaopen_wlroot(m_L, true);
-	LuaEditor::luaopen_wleditor(m_L);
+	setup_for_editor_and_game(lua_state_, g);
+	LuaRoot::luaopen_wlroot(lua_state_, true);
+	LuaEditor::luaopen_wleditor(lua_state_);
 
 	// Push the factory class into the registry
-	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(m_factory.get())));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
+	lua_pushlightuserdata(lua_state_, reinterpret_cast<void*>(dynamic_cast<Factory*>(factory_.get())));
+	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
 }
 
 LuaEditorInterface::~LuaEditorInterface() {
 }
 
 std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script) {
-	return run_script_maybe_from_map(m_L, script);
+	return run_script_maybe_from_map(lua_state_, script);
 }
 
 // Special handling of math.random.
@@ -99,14 +99,14 @@ static int L_math_random(lua_State * L) {
 	switch (lua_gettop(L)) { /* check number of arguments */
 		case 0:
 		{  /* no arguments */
-			lua_pushnumber(L, r);  /* Number between 0 and 1 */
+			lua_pushdouble(L, r);  /* Number between 0 and 1 */
 			break;
 		}
 		case 1:
 		{  /* only upper limit */
 			int32_t u = luaL_checkint32(L, 1);
 			luaL_argcheck(L, 1 <= u, 1, "interval is empty");
-			lua_pushnumber(L, floor(r * u) + 1);  /* int between 1 and `u' */
+			lua_pushuint32(L, floor(r * u) + 1);  /* int between 1 and `u' */
 			break;
 		}
 		case 2:
@@ -115,7 +115,7 @@ static int L_math_random(lua_State * L) {
 			int32_t u = luaL_checkint32(L, 2);
 			luaL_argcheck(L, l <= u, 2, "interval is empty");
 			/* int between `l' and `u' */
-			lua_pushnumber(L, floor(r * (u - l + 1)) + l);
+			lua_pushint32(L, floor(r * (u - l + 1)) + l);
 			break;
 		}
 		default: return luaL_error(L, "wrong number of arguments");
@@ -125,27 +125,27 @@ static int L_math_random(lua_State * L) {
 }
 
 LuaGameInterface::LuaGameInterface(Widelands::Game * g)
-	: m_factory(new GameFactory())
+	: factory_(new GameFactory())
 {
-	setup_for_editor_and_game(m_L, g);
+	setup_for_editor_and_game(lua_state_, g);
 
 	// Overwrite math.random
-	lua_getglobal(m_L, "math");
-	lua_pushcfunction(m_L, L_math_random);
-	lua_setfield(m_L, -2, "random");
-	lua_pop(m_L, 1); // pop "math"
+	lua_getglobal(lua_state_, "math");
+	lua_pushcfunction(lua_state_, L_math_random);
+	lua_setfield(lua_state_, -2, "random");
+	lua_pop(lua_state_, 1); // pop "math"
 
-	LuaRoot::luaopen_wlroot(m_L, false);
-	LuaGame::luaopen_wlgame(m_L);
+	LuaRoot::luaopen_wlroot(lua_state_, false);
+	LuaGame::luaopen_wlgame(lua_state_);
 
 	// Push the game into the registry
-	lua_pushlightuserdata(m_L, static_cast<void *>(g));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
+	lua_pushlightuserdata(lua_state_, static_cast<void *>(g));
+	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "game");
 
 	// Push the factory class into the registry
 	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(m_factory.get())));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
+		(lua_state_, reinterpret_cast<void *>(dynamic_cast<Factory *>(factory_.get())));
+	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
 }
 
 LuaGameInterface::~LuaGameInterface() {
@@ -153,7 +153,7 @@ LuaGameInterface::~LuaGameInterface() {
 
 LuaCoroutine* LuaGameInterface::read_coroutine(FileRead& fr) {
 	LuaCoroutine * rv = new LuaCoroutine(nullptr);
-	rv->read(m_L, fr);
+	rv->read(lua_state_, fr);
 	return rv;
 }
 
@@ -167,77 +167,77 @@ void LuaGameInterface::read_global_env
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
+	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 
-	assert(lua_gettop(m_L) == 0); // S:
-	unpersist_object(m_L, fr, mol, size);
-	assert(lua_gettop(m_L) == 1); // S: unpersisted_object
-	luaL_checktype(m_L, -1, LUA_TTABLE);
+	assert(lua_gettop(lua_state_) == 0); // S:
+	unpersist_object(lua_state_, fr, mol, size);
+	assert(lua_gettop(lua_state_) == 1); // S: unpersisted_object
+	luaL_checktype(lua_state_, -1, LUA_TTABLE);
 
 	// Now, we have to merge all keys from the loaded table
 	// into the global table
-	lua_pushnil(m_L);  // S: table nil
-	while (lua_next(m_L, 1) != 0) {
+	lua_pushnil(lua_state_);  // S: table nil
+	while (lua_next(lua_state_, 1) != 0) {
 		// S: table key value
-		lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);  // S: table key value globals_table
-		lua_pushvalue(m_L, -3); // S: table key value globals_table key
-		lua_gettable(m_L, -2);  // S: table key value globals_table value_in_globals
-		if (lua_compare(m_L, -1, -3, LUA_OPEQ)) {
-			lua_pop(m_L, 3); // S: table key
+		lua_rawgeti(lua_state_, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);  // S: table key value globals_table
+		lua_pushvalue(lua_state_, -3); // S: table key value globals_table key
+		lua_gettable(lua_state_, -2);  // S: table key value globals_table value_in_globals
+		if (lua_compare(lua_state_, -1, -3, LUA_OPEQ)) {
+			lua_pop(lua_state_, 3); // S: table key
 			continue;
 		} else {
 			// Make this a global value
-			lua_pop(m_L, 1);  // S: table key value globals_table
-			lua_pushvalue(m_L, -3);  // S: table key value globals_table key
-			lua_pushvalue(m_L, -3);  // S: table key value globals_table key value
-			lua_settable(m_L, -3);  // S: table key value globals_table
-			lua_pop(m_L, 2);  // S: table key
+			lua_pop(lua_state_, 1);  // S: table key value globals_table
+			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key
+			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key value
+			lua_settable(lua_state_, -3);  // S: table key value globals_table
+			lua_pop(lua_state_, 2);  // S: table key
 		}
 	}
 
-	lua_pop(m_L, 1); // pop the table returned by unpersist_object
+	lua_pop(lua_state_, 1); // pop the table returned by unpersist_object
 
 	// Clean out the garbage before returning.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
+	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 }
 
 uint32_t LuaGameInterface::write_global_env
 	(FileWrite & fw, Widelands::MapObjectSaver & mos)
 {
 	// Clean out the garbage before writing.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
+	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 
 	// Empty table + object to persist on the stack Stack
-	lua_newtable(m_L);
-	lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
+	lua_newtable(lua_state_);
+	lua_rawgeti(lua_state_, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
 
-	uint32_t nwritten = persist_object(m_L, fw, mos);
+	uint32_t nwritten = persist_object(lua_state_, fw, mos);
 
 	// Garbage collect once more, so we do not return unnecessary stuff.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
+	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 
 	return nwritten;
 }
 
 std::unique_ptr<LuaTable> LuaGameInterface::get_hook(const std::string& name) {
-	lua_getglobal(m_L, "hooks");
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 1);
+	lua_getglobal(lua_state_, "hooks");
+	if (lua_isnil(lua_state_, -1)) {
+		lua_pop(lua_state_, 1);
 		return std::unique_ptr<LuaTable>();
 	}
 
-	lua_getfield(m_L, -1, name.c_str());
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 2);
+	lua_getfield(lua_state_, -1, name.c_str());
+	if (lua_isnil(lua_state_, -1)) {
+		lua_pop(lua_state_, 2);
 		return std::unique_ptr<LuaTable>();
 	}
-	lua_remove(m_L, -2);
+	lua_remove(lua_state_, -2);
 
-	std::unique_ptr<LuaTable> return_value(new LuaTable(m_L));
-	lua_pop(m_L, 1);
+	std::unique_ptr<LuaTable> return_value(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
 	return return_value;
 }
 
 std::unique_ptr<LuaTable> LuaGameInterface::run_script(const std::string& script) {
-	return run_script_maybe_from_map(m_L, script);
+	return run_script_maybe_from_map(lua_state_, script);
 }

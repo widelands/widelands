@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,6 +63,7 @@ public:
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
+	int get_messages(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
 	int get_tribe(lua_State * L);
@@ -94,15 +95,15 @@ public:
 	 * C methods
 	 */
 private:
-	void m_parse_building_list
+	void parse_building_list
 		(lua_State *, const Widelands::TribeDescr &,
 		 std::vector<Widelands::DescriptionIndex> &);
-	int m_allow_forbid_buildings(lua_State * L, bool);
+	int allow_forbid_buildings(lua_State * L, bool);
 
 };
 
 class LuaObjective : public LuaGameModuleClass {
-	std::string m_name;
+	std::string name_;
 
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
@@ -110,7 +111,7 @@ public:
 	virtual ~LuaObjective() {}
 
 	LuaObjective(const Widelands::Objective& n);
-	LuaObjective() : m_name("") {}
+	LuaObjective() : name_("") {}
 	LuaObjective(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
@@ -144,15 +145,15 @@ public:
 };
 
 class LuaMessage : public LuaGameModuleClass {
-	uint32_t m_plr;
-	Widelands::MessageId m_mid;
+	Widelands::PlayerNumber player_number_;
+	Widelands::MessageId message_id_;
 
 public:
 	LUNA_CLASS_HEAD(LuaMessage);
 	virtual ~LuaMessage() {}
 
 	LuaMessage(uint8_t, Widelands::MessageId);
-	LuaMessage() : m_plr(0), m_mid(0) {}
+	LuaMessage() : player_number_(0), message_id_(0) {}
 	LuaMessage(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}

@@ -31,6 +31,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
+#include "wui/map_tags.h"
 
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
@@ -51,8 +52,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	map_details_(this, right_column_x_, tabley_,
-					 get_right_column_w(right_column_x_ + indent_),
-					 tableh_ - buth_ - 4 * padding_),
+					 get_right_column_w(right_column_x_),
+					 tableh_ - buth_ - 4 * padding_, MapDetails::Style::kFsMenu),
 
 	basedir_("maps"),
 	settings_(settings),
@@ -60,7 +61,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	has_translated_mapname_(false)
 {
 	curdir_ = basedir_,
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {
@@ -84,7 +85,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	cb_dont_localize_mapnames_->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 
-	cb_show_all_maps_ = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
+	cb_show_all_maps_ = add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	tags_checkboxes_.clear(); // Remove this again, it is a special tag checkbox
 	cb_show_all_maps_->set_state(true);
 
@@ -94,27 +95,27 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "official", _("Official"));
-	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
-	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
-	_add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
-	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
+	add_tag_checkbox(vbox, "official", localize_tag("official"));
+	add_tag_checkbox(vbox, "unbalanced", localize_tag("unbalanced"));
+	add_tag_checkbox(vbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(vbox, "artifacts", localize_tag("artifacts"));
+	add_tag_checkbox(vbox, "scenario", localize_tag("scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
-	_add_tag_checkbox(vbox, "1v1", _("1v1"));
+	add_tag_checkbox(vbox, "ffa", localize_tag("ffa"));
+	add_tag_checkbox(vbox, "1v1", localize_tag("1v1"));
 
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
-	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
-	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
+	add_tag_checkbox(vbox, "2teams", localize_tag("2teams"));
+	add_tag_checkbox(vbox, "3teams", localize_tag("3teams"));
+	add_tag_checkbox(vbox, "4teams", localize_tag("4teams"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
@@ -214,9 +215,6 @@ void FullscreenMenuMapSelect::entry_selected()
  * The search starts in \ref curdir_ ("..../maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
- *
- * \note special case is, if this is a multiplayer game on a dedicated server and
- * the client wants to change the map - in that case the maps available on the server are shown.
  */
 void FullscreenMenuMapSelect::fill_table()
 {
@@ -231,137 +229,66 @@ void FullscreenMenuMapSelect::fill_table()
 		display_type = MapData::DisplayType::kMapnamesLocalized;
 	}
 
-	if (settings_->settings().maps.empty()) {
-		// This is the normal case
+	// This is the normal case
 
-		//  Fill it with all files we find in all directories.
-		FilenameSet files = g_fs->list_directory(curdir_);
+	//  Fill it with all files we find in all directories.
+	FilenameSet files = g_fs->list_directory(curdir_);
 
-		//If we are not at the top of the map directory hierarchy (we're not talking
-		//about the absolute filesystem top!) we manually add ".."
-		if (curdir_ != basedir_) {
-			maps_data_.push_back(MapData::create_parent_dir(curdir_));
-		}
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
+	if (curdir_ != basedir_) {
+		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	}
 
-		Widelands::Map map; //  MapLoader needs a place to put its preload data
+	Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-		for (const std::string& mapfilename : files) {
-			// Add map file (compressed) or map directory (uncompressed)
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-			if (ml != nullptr) {
-				try {
-					map.set_filename(mapfilename);
-					ml->preload_map(true);
-
-					if (!map.get_width() || !map.get_height()) {
-						continue;
-					}
-
-					MapData::MapType maptype;
-					if (map.scenario_types() & scenario_types_) {
-						maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-						maptype = MapData::MapType::kNormal;
-					} else {
-						maptype = MapData::MapType::kSettlers2;
-					}
-
-					MapData mapdata(map, mapfilename, maptype, display_type);
-
-					has_translated_mapname_ =
-							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-					bool has_all_tags = true;
-					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
-						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
-					if (!has_all_tags) {
-						continue;
-					}
-					maps_data_.push_back(mapdata);
-				} catch (const std::exception & e) {
-					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-				} catch (...) {
-					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
-				}
-			} else if (g_fs->is_directory(mapfilename)) {
-				// Add subdirectory to the list
-				const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-				if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
-					continue;
-				maps_data_.push_back(MapData::create_directory(mapfilename));
-			}
-		}
-	} else {
-		//client changing maps on dedicated server
-		for (uint16_t i = 0; i < settings_->settings().maps.size(); ++i) {
-			Widelands::Map map; //  MapLoader needs a place to put its preload data
-
-			const DedicatedMapInfos & dmap = settings_->settings().maps.at(i);
-			const std::string& mapfilename = dmap.path;
-			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
-
+	for (const std::string& mapfilename : files) {
+		// Add map file (compressed) or map directory (uncompressed)
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+		if (ml != nullptr) {
 			try {
-				if (!ml) {
-					throw wexception("Mapselect: No MapLoader");
-				}
-
 				map.set_filename(mapfilename);
 				ml->preload_map(true);
 
 				if (!map.get_width() || !map.get_height()) {
-					throw wexception("Mapselect: Map has no size");
+					continue;
 				}
 
 				MapData::MapType maptype;
-
 				if (map.scenario_types() & scenario_types_) {
 					maptype = MapData::MapType::kScenario;
 				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-					maptype = MapData::MapType::kSettlers2;
-				} else {
 					maptype = MapData::MapType::kNormal;
-				}
-
-				if (map.get_nrplayers() != dmap.players ||
-					 (maptype == MapData::MapType::kScenario) != dmap.scenario) {
-					throw wexception("Mapselect: Number of players or scenario doesn't match");
+				} else {
+					maptype = MapData::MapType::kSettlers2;
 				}
 
 				MapData mapdata(map, mapfilename, maptype, display_type);
 
-				// Finally write the entry to the list
-				maps_data_.push_back(mapdata);
-			} catch (...) {
-				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
+				has_translated_mapname_ =
+						has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-				MapData mapdata;
-
-				// Fill in the data we got from the dedicated server
-				mapdata.filename    = mapfilename;
-				mapdata.name        = mapfilename.substr(5, mapfilename.size() - 1);
-				mapdata.authors     = MapAuthorData(_("Nobody"));
-				mapdata.description = _("This map file is not present in your filesystem."
-							" The data shown here was sent by the server.");
-				mapdata.hint        = "";
-				mapdata.nrplayers   = dmap.players;
-				mapdata.width       = 1;
-				mapdata.height      = 0;
-				mapdata.displaytype = display_type;
-
-				if (dmap.scenario) {
-					mapdata.maptype = MapData::MapType::kScenario;
-					mapdata.tags.insert("scenario");
-				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-					mapdata.maptype = MapData::MapType::kSettlers2;
-				} else {
-					mapdata.maptype = MapData::MapType::kNormal;
+				bool has_all_tags = true;
+				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+				if (!has_all_tags) {
+					continue;
 				}
-
-				// Finally write the entry to the list
 				maps_data_.push_back(mapdata);
+			} catch (const std::exception & e) {
+				log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+			} catch (...) {
+				log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
+		} else if (g_fs->is_directory(mapfilename)) {
+			// Add subdirectory to the list
+			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
+			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+				continue;
+			maps_data_.push_back(MapData::create_directory(mapfilename));
 		}
 	}
+
 	table_.fill(maps_data_, display_type);
 	if (!table_.empty()) {
 		table_.select(0);
@@ -373,7 +300,7 @@ void FullscreenMenuMapSelect::fill_table()
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
+UI::Checkbox * FullscreenMenuMapSelect::add_tag_checkbox
 	(UI::Box * box, std::string tag, std::string displ_name)
 {
 	int32_t id = tags_ordered_.size();
@@ -381,7 +308,7 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	cb->changedto.connect
-		(boost::bind(&FullscreenMenuMapSelect::_tagbox_changed, this, id, _1));
+		(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Align::kLeft, true);
 	box->add_space(checkbox_space_);
@@ -393,7 +320,7 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 /*
  * One of the tagboxes has changed
  */
-void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
+void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
 			for (UI::Checkbox * checkbox : tags_checkboxes_) {

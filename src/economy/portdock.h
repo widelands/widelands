@@ -37,7 +37,7 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const _name, char const* const _descname);
+	PortdockDescr(char const* const init_name, char const* const init_descname);
 	~PortdockDescr() override {
 	}
 
@@ -82,9 +82,9 @@ public:
 	void add_position(Widelands::Coords where);
 	Warehouse * get_warehouse() const;
 
-	Fleet * get_fleet() const {return m_fleet;}
+	Fleet * get_fleet() const {return fleet_;}
 	PortDock * get_dock(Flag & flag) const;
-	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
+	bool get_need_ship() const {return need_ship_ || expedition_ready_;}
 
 	void set_economy(Economy *) override;
 
@@ -134,17 +134,17 @@ private:
 
 	void init_fleet(EditorGameBase & egbase);
 	void set_fleet(Fleet * fleet);
-	void _update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
+	void update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
 	void set_need_ship(Game &, bool need);
 
-	Fleet * m_fleet;
-	Warehouse * m_warehouse;
-	PositionList m_dockpoints;
-	std::vector<ShippingItem> m_waiting;
-	bool m_need_ship;
-	bool m_expedition_ready;
+	Fleet * fleet_;
+	Warehouse * warehouse_;
+	PositionList dockpoints_;
+	std::vector<ShippingItem> waiting_;
+	bool need_ship_;
+	bool expedition_ready_;
 
-	std::unique_ptr<ExpeditionBootstrap> m_expedition_bootstrap;
+	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
 	// saving and loading
 protected:
@@ -157,8 +157,8 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t m_warehouse;
-		std::vector<ShippingItem::Loader> m_waiting;
+		uint32_t warehouse_;
+		std::vector<ShippingItem::Loader> waiting_;
 	};
 
 public:

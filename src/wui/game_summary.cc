@@ -70,7 +70,7 @@ game_(parent->game())
 	hbox1->add_space(PADDING);
 
 	UI::Box * info_box = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	info_area_label_ = new UI::Textarea(info_box, _("Player info:"));
+	info_area_label_ = new UI::Textarea(info_box, _("Player Info:"));
 	info_box->add(info_area_label_, UI::Align::kLeft);
 	info_area_ = new UI::MultilineTextarea(
 						  info_box, 0, 0, 130,
@@ -122,7 +122,7 @@ game_(parent->game())
 	players_table_->add_column(100, _("Time"));
 
 	// Prepare Elements
-	title_area_->set_textstyle(UI::TextStyle::ui_big());
+	title_area_->set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Connections
 	continue_button_->sigclicked.connect
@@ -159,8 +159,8 @@ void GameSummaryScreen::fill_data()
 	Widelands::Player* single_won = nullptr;
 	uint8_t teawon_ = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
-	//this defines a row to be selected, current player,
-	//if not then the first line
+	// This defines a row to be selected, current player,
+	// if not then the first line
 	uint32_t current_player_position = 0;
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
@@ -275,6 +275,9 @@ std::string GameSummaryScreen::parse_player_info(std::string info)
 		if (key == "score") {
 			info_str +=
 				(boost::format("%1% : %2%\n") % _("Score") % pair.at(1)).str();
+		} else if (key == "team_score") {
+			info_str +=
+				(boost::format("%1% : %2%\n") % _("Team Score") % pair.at(1)).str();
 		} else if (key == "resign_reason") {
 			info_str +=
 				(boost::format("%1%\n") % pair.at(1)).str();

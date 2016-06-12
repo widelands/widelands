@@ -67,13 +67,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
 		in_selection_.insert(std::make_pair(index, false));
-
-		// Prerender all texts to avoid flickering with mouseover
-		curware_.set_text(index != Widelands::INVALID_INDEX ?
-									 (type_ == Widelands::wwWORKER ?
-										  tribe_.get_worker_descr(index)->descname() :
-										  tribe_.get_ware_descr(index)->descname()) :
-									 "");
 	}
 
 	curware_.set_text(_("Stock"));
@@ -101,6 +94,8 @@ bool AbstractWaresDisplay::handle_mousemove
 	(uint8_t state, int32_t x, int32_t y, int32_t, int32_t)
 {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
+
+	curware_.set_fixed_width(get_inner_w());
 
 	curware_.set_text(index != Widelands::INVALID_INDEX ?
 	                      (type_ == Widelands::wwWORKER ?
@@ -167,7 +162,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 
 	// Release anchor, empty selection
 	selection_anchor_ = Widelands::INVALID_INDEX;
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
 	return true;
@@ -212,7 +207,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		return;
 	}
 
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
 

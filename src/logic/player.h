@@ -92,8 +92,8 @@ public:
 
 	void allocate_map();
 
-	const MessageQueue & messages() const {return m_messages;}
-	MessageQueue       & messages()       {return m_messages;}
+	const MessageQueue & messages() const {return messages_;}
+	MessageQueue       & messages()       {return messages_;}
 
 	/// Adds the message to the queue. Takes ownership of the message. Assumes
 	/// that it has been allocated in a separate memory block (not as a
@@ -115,15 +115,15 @@ public:
 		messages().set_message_status(id, status);
 	}
 
-	const EditorGameBase & egbase() const {return m_egbase;}
-	EditorGameBase       & egbase()       {return m_egbase;}
-	PlayerNumber     player_number() const {return m_plnum;}
-	TeamNumber team_number() const {return m_team_number;}
-	const RGBColor & get_playercolor() const {return Colors[m_plnum - 1];}
-	const TribeDescr & tribe() const {return m_tribe;}
+	const EditorGameBase & egbase() const {return egbase_;}
+	EditorGameBase       & egbase()       {return egbase_;}
+	PlayerNumber     player_number() const {return player_number_;}
+	TeamNumber team_number() const {return team_number_;}
+	const RGBColor & get_playercolor() const {return Colors[player_number_ - 1];}
+	const TribeDescr & tribe() const {return tribe_;}
 
-	const std::string & get_name() const {return m_name;}
-	void set_name(const std::string & name) {m_name = name;}
+	const std::string & get_name() const {return name_;}
+	void set_name(const std::string & name) {name_ = name;}
 	void set_team_number(TeamNumber team);
 
 	void create_default_infrastructure();
@@ -133,19 +133,34 @@ public:
 	bool is_hostile(const Player &) const;
 
 	// For cheating
-	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
-	bool see_all() const {return m_see_all;}
+	void set_see_all(bool const t) {see_all_ = t; view_changed_ = true;}
+	bool see_all() const {return see_all_;}
 
-	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
+	/// Data that are used and managed by AI. They are here to have it saved as a part of player's data
 	struct AiPersistentState {
-		AiPersistentState() : initialized(0){}
+		AiPersistentState()
+		: initialized(0), // zero here is important, it means "~first time"
+		 colony_scan_area(0),
+		 trees_around_cutters(0),
+		 expedition_start_time(0),
+		 ships_utilization(0),
+		 no_more_expeditions(0),
+		 last_attacked_player(0),
+		 least_military_score(0),
+		 target_military_score(0),
+		 ai_personality_military_loneliness(0),
+		 ai_personality_attack_margin(0),
+		 ai_productionsites_ratio(0),
+		 ai_personality_wood_difference(0),
+		 ai_personality_early_militarysites(0),
+		 last_soldier_trained(0) {}
 
-		//was initialized
+		// Was initialized
 		uint8_t initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
 		uint32_t expedition_start_time;
-		int16_t ships_utilization; //0-10000 to avoid floats, used for decision for building new ships
+		int16_t ships_utilization; // 0-10000 to avoid floats, used for decision for building new ships
 		uint8_t no_more_expeditions;
 		int16_t last_attacked_player;
 		int32_t least_military_score;
@@ -155,9 +170,10 @@ public:
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_wood_difference;
 		uint32_t ai_personality_early_militarysites;
+		uint32_t last_soldier_trained;
 	} ai_data;
 
-	AiPersistentState* get_mutable_ai_persistent_state(){
+	AiPersistentState* get_mutable_ai_persistent_state() {
 		return &ai_data;
 	}
 
@@ -379,17 +395,17 @@ public:
 		DISALLOW_COPY_AND_ASSIGN(Field);
 	};
 
-	const Field * fields() const {return m_fields;}
+	const Field * fields() const {return fields_;}
 
 	// See area
 	Vision vision(MapIndex const i) const {
 		// Node visible if > 1
-		return (m_see_all ? 2 : 0) + m_fields[i].vision;
+		return (see_all_ ? 2 : 0) + fields_[i].vision;
 	}
 
 	bool has_view_changed() {
-		bool t = m_view_changed;
-		m_view_changed = false;
+		bool t = view_changed_;
+		view_changed_ = false;
 		return t;
 	}
 
@@ -421,7 +437,7 @@ public:
 		do {
 			see_node(map, first_map_field, mr.location(), gametime);
 		} while (mr.advance(map));
-		m_view_changed = true;
+		view_changed_ = true;
 	}
 
 	/// Decrement this player's vision for each node in an area.
@@ -432,25 +448,25 @@ public:
 		MapRegion<Area<FCoords> > mr(map, area);
 		do unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
-		m_view_changed = true;
+		view_changed_ = true;
 	}
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
-		return m_fields[i].military_influence;
+		return fields_[i].military_influence;
 	}
 
 	MilitaryInfluence & military_influence(MapIndex const i) {
-		return m_fields[i].military_influence;
+		return fields_[i].military_influence;
 	}
 
 	bool is_worker_type_allowed(const DescriptionIndex& i) const {
-		return m_allowed_worker_types.at(i);
+		return allowed_worker_types_.at(i);
 	}
 	void allow_worker_type(DescriptionIndex, bool allow);
 
 	// Allowed buildings
 	bool is_building_type_allowed(const DescriptionIndex& i) const {
-		return m_allowed_building_types[i];
+		return allowed_building_types_[i];
 	}
 	void allow_building_type(DescriptionIndex, bool allow);
 
@@ -469,7 +485,7 @@ public:
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
-	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
+	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t soldier_preference);
 	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
 		(Building *, DescriptionIndex index_of_new_building);
@@ -482,13 +498,13 @@ public:
 	using Economies = std::vector<Economy *>;
 	Economies::size_type get_economy_number(Economy const *) const;
 	Economy * get_economy_by_number(Economies::size_type const i) const {
-		return m_economies[i];
+		return economies_[i];
 	}
-	uint32_t get_nr_economies() const {return m_economies.size();}
+	uint32_t get_nr_economies() const {return economies_.size();}
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable &, Soldier &);
-	void change_training_options(TrainingSite &, int32_t atr, int32_t val);
+	void change_training_options(TrainingSite &, TrainingAttribute attr, int32_t val);
 
 	uint32_t find_attack_soldiers
 		(Flag                   &,
@@ -497,18 +513,18 @@ public:
 	void enemyflagaction
 		(Flag &, PlayerNumber attacker, uint32_t count);
 
-	uint32_t casualties() const {return m_casualties;}
-	uint32_t kills     () const {return m_kills;}
-	uint32_t msites_lost        () const {return m_msites_lost;}
-	uint32_t msites_defeated    () const {return m_msites_defeated;}
-	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
-	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
-	void count_casualty          () {++m_casualties;}
-	void count_kill              () {++m_kills;}
-	void count_msite_lost        () {++m_msites_lost;}
-	void count_msite_defeated    () {++m_msites_defeated;}
-	void count_civil_bld_lost    () {++m_civil_blds_lost;}
-	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
+	uint32_t casualties() const {return casualties_;}
+	uint32_t kills     () const {return kills_;}
+	uint32_t msites_lost        () const {return msites_lost_;}
+	uint32_t msites_defeated    () const {return msites_defeated_;}
+	uint32_t civil_blds_lost    () const {return civil_blds_lost_;}
+	uint32_t civil_blds_defeated() const {return civil_blds_defeated_;}
+	void count_casualty          () {++casualties_;}
+	void count_kill              () {++kills_;}
+	void count_msite_lost        () {++msites_lost_;}
+	void count_msite_defeated    () {++msites_defeated_;}
+	void count_civil_bld_lost    () {++civil_blds_lost_;}
+	void count_civil_bld_defeated() {++civil_blds_defeated_;}
 
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
@@ -537,8 +553,8 @@ public:
 
 	// used in shared kingdom mode
 	void add_further_starting_position(uint8_t plr, uint8_t init) {
-		m_further_shared_in_player.push_back(plr);
-		m_further_initializations .push_back(init);
+		further_shared_in_player_.push_back(plr);
+		further_initializations_ .push_back(init);
 	}
 
 	const std::string pick_shipname();
@@ -548,7 +564,7 @@ private:
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
-	void _enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
+	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -559,61 +575,61 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
 	   field_terrain_changed_subscriber_;
 
-	MessageQueue           m_messages;
+	MessageQueue           messages_;
 
-	EditorGameBase     & m_egbase;
-	uint8_t                m_initialization_index;
-	std::vector<uint8_t>   m_further_initializations;    // used in shared kingdom mode
-	std::vector<uint8_t>   m_further_shared_in_player;   //  ''  ''   ''     ''     ''
-	TeamNumber             m_team_number;
-	std::vector<Player *>  m_team_player;
-	bool                   m_team_player_uptodate;
-	bool                   m_see_all;
-	bool                   m_view_changed;
-	const PlayerNumber    m_plnum;
-	const TribeDescr    & m_tribe; // buildings, wares, workers, sciences
-	uint32_t               m_casualties, m_kills;
-	uint32_t               m_msites_lost,     m_msites_defeated;
-	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-	std::unordered_set<std::string>  m_remaining_shipnames;
+	EditorGameBase     & egbase_;
+	uint8_t                initialization_index_;
+	std::vector<uint8_t>   further_initializations_;    // used in shared kingdom mode
+	std::vector<uint8_t>   further_shared_in_player_;   //  ''  ''   ''     ''     ''
+	TeamNumber             team_number_;
+	std::vector<Player *>  team_player_;
+	bool                   team_player_uptodate_;
+	bool                   see_all_;
+	bool                   view_changed_;
+	const PlayerNumber    player_number_;
+	const TribeDescr    & tribe_; // buildings, wares, workers, sciences
+	uint32_t               casualties_, kills_;
+	uint32_t               msites_lost_,     msites_defeated_;
+	uint32_t               civil_blds_lost_, civil_blds_defeated_;
+	std::unordered_set<std::string>  remaining_shipnames_;
 
-	Field *               m_fields;
-	std::vector<bool>     m_allowed_worker_types;
-	std::vector<bool>     m_allowed_building_types;
-	Economies             m_economies;
-	std::string           m_name; // Player name
-	std::string           m_ai; /**< Name of preferred AI implementation */
+	Field *               fields_;
+	std::vector<bool>     allowed_worker_types_;
+	std::vector<bool>     allowed_building_types_;
+	Economies             economies_;
+	std::string           name_; // Player name
+	std::string           ai_; /**< Name of preferred AI implementation */
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> m_current_produced_statistics;
+	std::vector<uint32_t> current_produced_statistics_;
 
 	/**
 	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> m_current_consumed_statistics;
+	std::vector<uint32_t> current_consumed_statistics_;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
-	 * m_ware_productions[ware id][time index]
+	 * ware_productions_[ware id][time index]
 	 */
-	std::vector< std::vector<uint32_t> > m_ware_productions;
+	std::vector< std::vector<uint32_t> > ware_productions_;
 
 	/**
 	 * Statistics of wares consumed over the life of the game, indexed as
-	 * m_ware_consumptions[ware_id][time_index]
+	 * ware_consumptions_[ware_id][time_index]
 	 */
-	std::vector< std::vector<uint32_t> > m_ware_consumptions;
+	std::vector< std::vector<uint32_t> > ware_consumptions_;
 
 	/**
 	 * Statistics of wares stored inside of warehouses over the
 	 * life of the game, indexed as
-	 * m_ware_stocks[ware_id][time_index]
+	 * ware_stocks_[ware_id][time_index]
 	 */
-	std::vector< std::vector<uint32_t> > m_ware_stocks;
+	std::vector< std::vector<uint32_t> > ware_stocks_;
 
-	PlayerBuildingStats m_building_stats;
+	PlayerBuildingStats building_stats_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

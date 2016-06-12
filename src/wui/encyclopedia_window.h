@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,52 +22,41 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
-#include "logic/map_objects/map_object.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "ui_basic/window.h"
 
-class InteractivePlayer;
+class InteractiveBase;
+
+namespace UI {
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&);
+	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+
+protected:
+	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
+
+	LuaInterface* const lua_;
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry&) = default;
-		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
-		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
-		                  const std::string& _descname,
-		                  const Image* _icon)
-		   : index(_index), descname(_descname), icon(_icon) {
+		EncyclopediaEntry(const std::string& init_script_path,
+								const std::vector<std::string>& init_script_parameters)
+			: script_path(init_script_path), script_parameters(init_script_parameters) {
 		}
-		Widelands::DescriptionIndex index;
-		std::string descname;
-		const Image* icon;
-
-		bool operator<(const EncyclopediaEntry other) const {
-			return descname < other.descname;
-		}
+		const std::string script_path;
+		const std::vector<std::string> script_parameters;
 	};
 
-	InteractivePlayer& iaplayer() const;
-
-	// Fill table of contents
-	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
-	void fill_buildings();
-	void fill_wares();
-	void fill_workers();
-
 	// Update contents when an entry is selected
-	void entry_selected(const std::string& key,
-	                    const std::string& script_path,
-	                    const Widelands::MapObjectType& type);
+	void entry_selected(const std::string& tab_name);
 
 	// UI elements
 	UI::TabPanel tabs_;
@@ -77,9 +66,11 @@ private:
 	// Main contents boxes for each tab
 	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;
 	// A tab's table of contents
-	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>> lists_;
+	std::map<std::string, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };
+
+} // namespace UI
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

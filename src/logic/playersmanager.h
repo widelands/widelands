@@ -74,31 +74,36 @@ public:
 	Player * get_player(int32_t n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);
-		return m_players[n - 1];
+		return players_[n - 1];
 	}
 	Player & player(int32_t n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);
-		return *m_players[n - 1];
+		return *players_[n - 1];
 	}
 
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() {return m_number_of_players;}
+	uint8_t get_number_of_players() {return number_of_players_;}
 
-	const std::vector<PlayerEndStatus> & get_players_end_status() {return m_players_end_status;}
+	const std::vector<PlayerEndStatus> & get_players_end_status() {return players_end_status_;}
 
 	/**
 	* Adds a new player status for a player that left the game.
 	*/
 	void add_player_end_status(const PlayerEndStatus & status);
 
+	/**
+	 * Changes an already existing player end status
+	 */
+	void set_player_end_status(const PlayerEndStatus & status);
+
 private:
-	Player                 * m_players[MAX_PLAYERS];
-	EditorGameBase       & m_egbase;
-	uint8_t                  m_number_of_players;
-	std::vector<PlayerEndStatus> m_players_end_status;
+	Player* players_[MAX_PLAYERS];
+	EditorGameBase& egbase_;
+	uint8_t number_of_players_;
+	std::vector<PlayerEndStatus> players_end_status_;
 };
 }
 

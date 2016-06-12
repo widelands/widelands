@@ -69,7 +69,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 			 boost::ref(*this),
 			 FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	title.set_fontsize(fs_big());
 
 	vbox.add(&new_game, UI::Align::kHCenter);
 	vbox.add(&campaign, UI::Align::kHCenter);

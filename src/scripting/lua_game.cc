@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 	PROP_RO(LuaPlayer, allowed_buildings),
 	PROP_RO(LuaPlayer, objectives),
 	PROP_RO(LuaPlayer, defeated),
+	PROP_RO(LuaPlayer, messages),
 	PROP_RO(LuaPlayer, inbox),
 	PROP_RW(LuaPlayer, team),
 	PROP_RO(LuaPlayer, tribe),
@@ -192,9 +193,29 @@ int LuaPlayer::get_defeated(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: messages
+
+		(RO) An array of all the messages sent to the player. Note that you
+		can't add messages to this array, use :meth:`send_message` for that.
+*/
+int LuaPlayer::get_messages(lua_State * L) {
+	Player & p = get(L, get_egbase(L));
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	for (const auto& temp_message : p.messages()) {
+		lua_pushuint32(L, cidx ++);
+		to_lua<LuaMessage>(L, new LuaMessage(player_number(), temp_message.first));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
 	.. attribute:: inbox
 
-		(RO) An array of the message that are either read or new. Note that you
+		(RO) An array of the messages that are either read or new. Note that you
 		can't add messages to this array, use :meth:`send_message` for that.
 */
 int LuaPlayer::get_inbox(lua_State * L) {
@@ -202,7 +223,7 @@ int LuaPlayer::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	for (const std::pair<MessageId, Message *>& temp_message : p.messages()) {
+	for (const auto& temp_message : p.messages()) {
 		if (temp_message.second->status() == Message::Status::kArchived)
 			continue;
 
@@ -525,7 +546,7 @@ int LuaPlayer::seen_field(lua_State * L) {
 		:returns: :const:`nil`
 */
 int LuaPlayer::allow_buildings(lua_State * L) {
-	return m_allow_forbid_buildings(L, true);
+	return allow_forbid_buildings(L, true);
 }
 
 /* RST
@@ -538,7 +559,7 @@ int LuaPlayer::allow_buildings(lua_State * L) {
 		:returns: :const:`nil`
 */
 int LuaPlayer::forbid_buildings(lua_State * L) {
-	return m_allow_forbid_buildings(L, false);
+	return allow_forbid_buildings(L, false);
 }
 
 /* RST
@@ -733,7 +754,7 @@ int LuaPlayer::get_buildings(lua_State * L) {
 	Player & p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
-	// m_parse_building_list
+	// parse_building_list
 	bool return_array = true;
 	if (lua_isstring(L, -1)) {
 		const char * name = luaL_checkstring(L, -1);
@@ -746,7 +767,7 @@ int LuaPlayer::get_buildings(lua_State * L) {
 	}
 
 	std::vector<DescriptionIndex> houses;
-	m_parse_building_list(L, p.tribe(), houses);
+	parse_building_list(L, p.tribe(), houses);
 
 	lua_newtable(L);
 
@@ -883,17 +904,18 @@ int LuaPlayer::switchplayer(lua_State * L) {
  C METHODS
  ==========================================================
  */
-void LuaPlayer::m_parse_building_list
+void LuaPlayer::parse_building_list
 	(lua_State * L, const TribeDescr & tribe, std::vector<DescriptionIndex> & rv)
 {
-	const Tribes& tribes = get_egbase(L).tribes();
+	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = egbase.tribes();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
 		// Only act on buildings that the tribe has or could conquer
-		const TribeDescr& tribe_descr = get(L, get_egbase(L)).tribe();
+		const TribeDescr& tribe_descr = get(L, egbase).tribe();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
 			const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
 			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
@@ -918,12 +940,12 @@ void LuaPlayer::m_parse_building_list
 		}
 	}
 }
-int LuaPlayer::m_allow_forbid_buildings(lua_State * L, bool allow)
+int LuaPlayer::allow_forbid_buildings(lua_State * L, bool allow)
 {
 	Player & p = get(L, get_egbase(L));
 
 	std::vector<DescriptionIndex> houses;
-	m_parse_building_list(L, p.tribe(), houses);
+	parse_building_list(L, p.tribe(), houses);
 
 	for (const DescriptionIndex& house : houses) {
 		p.allow_building_type(house, allow);
@@ -958,14 +980,14 @@ const PropertyType<LuaObjective> LuaObjective::Properties[] = {
 };
 
 LuaObjective::LuaObjective(const Widelands::Objective& o) {
-	m_name = o.name();
+	name_ = o.name();
 }
 
 void LuaObjective::__persist(lua_State * L) {
-	PERS_STRING("name", m_name);
+	PERS_STRING("name", name_);
 }
 void LuaObjective::__unpersist(lua_State * L) {
-	UNPERS_STRING("name", m_name);
+	UNPERS_STRING("name", name_);
 }
 
 
@@ -1075,16 +1097,16 @@ int LuaObjective::remove(lua_State * L) {
 	Game & g = get_game(L);
 	// The next call checks if the Objective still exists
 	get(L, g);
-	g.map().mutable_objectives()->erase(m_name);
+	g.map().mutable_objectives()->erase(name_);
 	return 0;
 }
 
 int LuaObjective::__eq(lua_State * L) {
 	const Map::Objectives& objectives = get_game(L).map().objectives();
 
-	const Map::Objectives::const_iterator me = objectives.find(m_name);
+	const Map::Objectives::const_iterator me = objectives.find(name_);
 	const Map::Objectives::const_iterator other =
-		objectives.find((*get_user_class<LuaObjective>(L, 2))->m_name);
+		objectives.find((*get_user_class<LuaObjective>(L, 2))->name_);
 
 	lua_pushboolean(L,
 	                (me != objectives.end() && other != objectives.end()) &&
@@ -1099,10 +1121,10 @@ int LuaObjective::__eq(lua_State * L) {
  */
 Objective & LuaObjective::get(lua_State * L, Widelands::Game & g) {
 	Map::Objectives* objectives = g.map().mutable_objectives();
-	Map::Objectives::iterator i = objectives->find(m_name);
+	Map::Objectives::iterator i = objectives->find(name_);
 	if (i == objectives->end()) {
 		report_error
-			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
+			(L, "Objective with name '%s' doesn't exist!", name_.c_str());
 	}
 	return *i->second;
 }
@@ -1132,19 +1154,19 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
 };
 
 LuaMessage::LuaMessage(uint8_t plr, MessageId id) {
-	m_plr = plr;
-	m_mid = id;
+	player_number_ = plr;
+	message_id_    = id;
 }
 
 void LuaMessage::__persist(lua_State * L) {
-	PERS_UINT32("player", m_plr);
-	PERS_UINT32("msg_idx", get_mos(L)->message_savers[m_plr - 1][m_mid].value());
+	PERS_UINT32("player", player_number_);
+	PERS_UINT32("msg_idx", get_mos(L)->message_savers[player_number_ - 1][message_id_].value());
 }
 void LuaMessage::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_plr);
+	UNPERS_UINT32("player", player_number_);
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx);
-	m_mid = MessageId(midx);
+	message_id_ = MessageId(midx);
 }
 
 /*
@@ -1220,7 +1242,7 @@ int LuaMessage::set_status(lua_State * L) {
 	else if (s == "archived") status = Message::Status::kArchived;
 	else report_error(L, "Invalid message status <%s>!", s.c_str());
 
-	get_plr(L, get_game(L)).messages().set_message_status(m_mid, status);
+	get_plr(L, get_game(L)).messages().set_message_status(message_id_, status);
 
 	return 0;
 }
@@ -1253,7 +1275,7 @@ int LuaMessage::get_icon_name(lua_State * L) {
  ==========================================================
  */
 int LuaMessage::__eq(lua_State * L) {
-	lua_pushboolean(L, m_mid == (*get_user_class<LuaMessage>(L, 2))->m_mid);
+	lua_pushboolean(L, message_id_ == (*get_user_class<LuaMessage>(L, 2))->message_id_);
 	return 1;
 }
 
@@ -1263,15 +1285,15 @@ int LuaMessage::__eq(lua_State * L) {
  ==========================================================
  */
 Player & LuaMessage::get_plr(lua_State * L, Widelands::Game & game) {
-	if (m_plr > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_plr);
-	Player * rv = game.get_player(m_plr);
+	if (player_number_ > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  player_number_);
+	Player * rv = game.get_player(player_number_);
 	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_plr);
+		report_error(L, "Player with the number %i does not exist", player_number_);
 	return *rv;
 }
 const Message & LuaMessage::get(lua_State * L, Widelands::Game & game) {
-	const Message * rv = get_plr(L, game).messages()[m_mid];
+	const Message * rv = get_plr(L, game).messages()[message_id_];
 	if (!rv)
 		report_error(L, "This message has been deleted!");
 	return *rv;

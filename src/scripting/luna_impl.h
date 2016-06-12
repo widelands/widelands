@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ template <class T> T * * get_user_class(lua_State * const L, int narg);
 bool luna_table_has_key(lua_State* L, const std::string& key);
 
 template <class T>
-int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
+int dispatch_property_in_metatable(lua_State * const L, bool setter) {
 	// stack for getter: table name
 	// stack for setter: table name value
 	int ret = 0;
@@ -109,7 +109,7 @@ int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
  *   idx 1: table  - current objects table
  */
 template <class T>
-int m_property_getter(lua_State * const L) {
+int property_getter(lua_State * const L) {
 	// Try a normal get on the table
 	lua_pushvalue(L, 2); // table name name
 	lua_rawget   (L, 1); // table name val?
@@ -120,13 +120,13 @@ int m_property_getter(lua_State * const L) {
 	}
 	lua_pop(L, 1); // table name
 
-	return m_dispatch_property_in_metatable<T>(L, false);
+	return dispatch_property_in_metatable<T>(L, false);
 }
 
 template <class T>
-int m_property_setter(lua_State * const L) {
+int property_setter(lua_State * const L) {
 	// stack: table name value
-	return  m_dispatch_property_in_metatable<T>(L, true);
+	return  dispatch_property_in_metatable<T>(L, true);
 }
 
 /**
@@ -136,7 +136,7 @@ int m_property_setter(lua_State * const L) {
  * obj:method(). We also check that we are not called with another object
  */
 template <class T, class PT>
-int m_property_dispatch(lua_State * const L) {
+int property_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
 	if (!n)
@@ -167,7 +167,7 @@ int m_property_dispatch(lua_State * const L) {
  * obj:method(). We also check that we are not called with another object
  */
 template <class T, class PT>
-int m_method_dispatch(lua_State * const L) {
+int method_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
 	if (!n)
@@ -191,7 +191,7 @@ int m_method_dispatch(lua_State * const L) {
  * Deletes a given object, as soon as Lua wants to get rid of it
  */
 template <class T>
-int m_garbage_collect(lua_State* const L) {
+int garbage_collect(lua_State* const L) {
 	// This method is called in two cases - either the userdata that we store at
 	// key 0 in all of our objects is deleted or the table that represents our
 	// classes itself is deleted. If it is the table, the following check will
@@ -212,13 +212,13 @@ int m_garbage_collect(lua_State* const L) {
  * use report_error in the constructor to tell this the user
  */
 template <class T>
-int m_constructor(lua_State * const L) {
+int constructor(lua_State * const L) {
 	return to_lua<T>(L, new T(L));
 }
 
 template <class T>
-void m_add_constructor_to_lua(lua_State * const L) {
-	lua_pushcfunction (L, &m_constructor<T>);
+void add_constructor_to_lua(lua_State * const L) {
+	lua_pushcfunction (L, &constructor<T>);
 	lua_setfield(L, -2, T::className);
 }
 
@@ -229,19 +229,19 @@ void m_add_constructor_to_lua(lua_State * const L) {
  *   __ClassName == Instantiator
  */
 template <class T>
-int m_instantiator(lua_State * const L) {
+int instantiator(lua_State * const L) {
 	return to_lua<T>(L, new T());
 }
 
 template <class T>
-void m_add_instantiator_to_lua(lua_State * const L) {
+void add_instantiator_to_lua(lua_State * const L) {
 	std::string s = std::string("__") + T::className;
-	lua_pushcfunction (L, &m_instantiator<T>);
+	lua_pushcfunction (L, &instantiator<T>);
 	lua_setfield(L, -2, s.c_str());
 }
 
 template <class T>
-int m_persist(lua_State * const L) {
+int persist(lua_State * const L) {
 	assert(lua_gettop(L) == 1);  // S: lightuserdata
 	T * * const obj = get_user_class<T>(L, 1);
 
@@ -265,32 +265,32 @@ int m_persist(lua_State * const L) {
 
 
 template <class T>
-int m_create_metatable_for_class(lua_State * const L) {
+int create_metatable_for_class(lua_State * const L) {
 	luaL_newmetatable(L, T::className);
 	int const metatable = lua_gettop(L);
 
 	// OVERLOAD LUA TABLE FUNCTIONS
 	lua_pushstring(L, "__gc");
-	lua_pushcfunction(L, &m_garbage_collect<T>);
+	lua_pushcfunction(L, &garbage_collect<T>);
 	lua_settable  (L, metatable);
 
 	lua_pushstring(L, "__index");
-	lua_pushcfunction(L, &m_property_getter<T>);
+	lua_pushcfunction(L, &property_getter<T>);
 	lua_settable  (L, metatable);
 
 	lua_pushstring(L, "__newindex");
-	lua_pushcfunction(L, &m_property_setter<T>);
+	lua_pushcfunction(L, &property_setter<T>);
 	lua_settable  (L, metatable);
 
 	lua_pushstring(L, "__persist");
-	lua_pushcfunction(L, &m_persist<T>);
+	lua_pushcfunction(L, &persist<T>);
 	lua_settable  (L, metatable);
 
 	return metatable;
 }
 
 template <class T, class PT>
-void m_register_properties_in_metatable
+void register_properties_in_metatable
 	(lua_State * const L)
 {
 	for (int i = 0; PT::Properties[i].name; ++i) {
@@ -320,7 +320,7 @@ void m_register_properties_in_metatable
 		lua_settable(L, -3);
 
 		lua_pushstring(L, "dispatcher");
-		lua_pushcfunction(L, &(m_property_dispatch<T, PT>));
+		lua_pushcfunction(L, &(property_dispatch<T, PT>));
 		lua_settable(L, -3);
 
 		lua_settable(L, -3); // Metatable is directly before our pushed stuff
@@ -328,7 +328,7 @@ void m_register_properties_in_metatable
 }
 
 template <class T, class PT>
-void m_register_methods_in_metatable(lua_State * const L)
+void register_methods_in_metatable(lua_State * const L)
 {
 	// We add a lua C closure around the call, the closure gets the pointer to
 	// the c method to call as its only argument. We can then use
@@ -345,7 +345,7 @@ void m_register_methods_in_metatable(lua_State * const L)
 			(L,
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&PT::Methods[i].method)));
-		lua_pushcclosure(L, &(m_method_dispatch<T, PT>), 1);
+		lua_pushcclosure(L, &(method_dispatch<T, PT>), 1);
 		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
@@ -354,7 +354,7 @@ void m_register_methods_in_metatable(lua_State * const L)
  * Get the userdata in a given stack object
  */
 template <class T>
-void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
+void extract_userdata_from_user_class(lua_State * const L, int narg) {
 	luaL_checktype(L, narg, LUA_TTABLE);
 
 	//  GET table[0]

@@ -24,12 +24,24 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 
 namespace Gl {
 
 namespace {
 
 constexpr GLenum NONE = static_cast<GLenum>(0);
+
+// Reads 'filename' from g_fs into a string.
+std::string read_file(const std::string& filename) {
+	std::string content;
+	FileRead fr;
+	fr.open(*g_fs, filename);
+	content.assign(fr.data(0), fr.get_size());
+	fr.close();
+	return content;
+}
 
 // Returns a readable string for a GL_*_SHADER 'type' for debug output.
 std::string shader_to_string(GLenum type) {
@@ -126,13 +138,16 @@ Program::~Program() {
 	}
 }
 
-void Program::build(const char* vertex_shader_source, const char* fragment_shader_source) {
+void Program::build(const std::string& program_name) {
+	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
+	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
+
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
-	vertex_shader_->compile(vertex_shader_source);
+	vertex_shader_->compile(vertex_shader_source.c_str());
 	glAttachShader(program_object_, vertex_shader_->object());
 
 	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
-	fragment_shader_->compile(fragment_shader_source);
+	fragment_shader_->compile(fragment_shader_source.c_str());
 	glAttachShader(program_object_, fragment_shader_->object());
 
 	glLinkProgram(program_object_);
@@ -186,6 +201,16 @@ void State::unbind_texture_if_bound(const GLuint texture) {
 	const auto target = texture_to_target_[texture];
 	if (target != 0) {
 		do_bind(target, 0);
+	}
+}
+
+void State::delete_texture(const GLuint texture)
+{
+	unbind_texture_if_bound(texture);
+	glDeleteTextures(1, &texture);
+
+	if (current_framebuffer_texture_ == texture) {
+		current_framebuffer_texture_ = 0;
 	}
 }
 

@@ -51,12 +51,10 @@ namespace {
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
 					  const std::string& init_descname,
-					  const std::string& init_sortname,
-					  const std::string& init_fontname) :
+					  const std::string& init_sortname) :
 		localename(init_localename),
 		descname(init_descname),
-		sortname(init_sortname),
-		fontname(init_fontname) {}
+		sortname(init_sortname) {}
 
 	bool operator<(const LanguageEntry& other) const {
 		return sortname < other.sortname;
@@ -65,7 +63,6 @@ struct LanguageEntry {
 	std::string localename; // ISO code for the locale
 	std::string descname;   // Native language name
 	std::string sortname;   // ASCII Language name used for sorting
-	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
 // Locale identifiers can look like this: ca_ES@valencia.UTF-8
@@ -116,7 +113,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Buttons
 	cancel_
 		(this, "cancel",
-		 get_w() * 1 / 4 - butw_ / 2,
+		 UI::g_fh1->fontset()->is_rtl() ? get_w() * 3 / 4 - butw_ / 2 : get_w() * 1 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but0.png"),
@@ -130,7 +127,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 _("Apply"), std::string(), true, false),
 	ok_
 		(this, "ok",
-		 get_w() * 3 / 4 - butw_ / 2,
+		 UI::g_fh1->fontset()->is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but2.png"),
@@ -150,14 +147,14 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Interface options
 	label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
-	resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, UI::Align::kLeft, true),
+	resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, true),
 
 	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
 	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
 
 	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4,
 				  opt.maxfps, 0, 99,
-				  _("Maximum FPS:"), ""),
+				  _("Maximum FPS:")),
 
 
 	// Windows options
@@ -169,17 +166,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	sb_dis_panel_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.panel_snap_distance, 0, 99, _("Distance for windows to snap to other panels:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	sb_dis_border_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.border_snap_distance, 0, 99,
 			 _("Distance for windows to snap to borders:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to borders: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.border_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	// Sound options
 	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
@@ -190,29 +183,19 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Saving options
 	sb_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.autosave / 60, 0, 100, _("Save game automatically every"),
-		 /** TRANSLATORS: Options: Save game automatically every: */
-		 /** TRANSLATORS: This will have a number added in front of it */
-		 ngettext("minute", "minutes", opt.autosave / 60),
+		 opt.autosave / 60, 0, 100, _("Save game automatically every:"),
+		 UI::SpinBox::Units::kMinutes,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
-		 "",
+		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files:"),
+		 UI::SpinBox::Units::kNone,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
-	sb_remove_replays_
-		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
-		 /** TRANSLATORS: Options: Remove Replays older than: */
-		 /** TRANSLATORS: This will have a number added in front of it */
-		 ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
-
-	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
+	zip_(&box_saving_, Point(0, 0), _("Compress widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
-	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
+	write_syncstreams_(&box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs"),
 							  "", column_width_),
 
 	// Game options
@@ -228,13 +211,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Language options
 	label_language_(&box_language_, _("Language"), UI::Align::kLeft),
 	language_list_(&box_language_, 0, 0, column_width_ / 2,
-						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
-						UI::Align::kLeft, true),
+						get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
+						true),
 
 	os_(opt)
 {
 	// Set up UI Elements
-	title_           .set_textstyle(UI::TextStyle::ui_big());
+	title_           .set_fontsize(UI_FONT_SIZE_BIG);
 
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
 	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
@@ -278,9 +261,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Saving
 	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
 	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
-	box_saving_.add(&sb_remove_replays_, UI::Align::kLeft);
-	box_saving_.add(&nozip_, UI::Align::kLeft);
-	box_saving_.add(&remove_syncstreams_, UI::Align::kLeft);
+	box_saving_.add(&zip_, UI::Align::kLeft);
+	box_saving_.add(&write_syncstreams_, UI::Align::kLeft);
 
 	// Game
 	box_game_.add(&auto_roadbuild_mode_, UI::Align::kLeft);
@@ -300,33 +282,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	sb_autosave_     .add_replacement(0, _("Off"));
-	for (UI::Button* temp_button : sb_autosave_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_autosave_unit,
-					 boost::ref(*this)));
-	}
-	/** TRANSLATORS Options: Remove Replays older than: */
-	sb_remove_replays_.add_replacement(0, _("Never"));
-	for (UI::Button* temp_button : sb_remove_replays_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_remove_replays_unit,
-					 boost::ref(*this)));
-	}
-	for (UI::Button* temp_button : sb_dis_panel_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_panel_unit,
-					 boost::ref(*this)));
-	}
-
-	for (UI::Button* temp_button : sb_dis_border_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_border_unit,
-					 boost::ref(*this)));
-	}
 
 	// Fill in data
 	// Interface options
@@ -385,8 +340,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	message_sound_        .set_state(opt.message_sound);
 
 	// Saving options
-	nozip_                .set_state(opt.nozip);
-	remove_syncstreams_   .set_state(opt.remove_syncstreams);
+	zip_                  .set_state(opt.zip);
+	write_syncstreams_    .set_state(opt.write_syncstreams);
 
 	// Game options
 	auto_roadbuild_mode_  .set_state(opt.auto_roadbuild_mode);
@@ -399,21 +354,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	language_list_.focus();
 }
 
-void FullscreenMenuOptions::update_sb_autosave_unit() {
-	sb_autosave_.set_unit(ngettext("minute", "minutes", sb_autosave_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_remove_replays_unit() {
-	sb_remove_replays_.set_unit(ngettext("day", "days", sb_remove_replays_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_panel_unit() {
-	sb_dis_panel_.set_unit(ngettext("pixel", "pixels", sb_dis_panel_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_border_unit() {
-	sb_dis_border_.set_unit(ngettext("pixel", "pixels", sb_dis_border_.get_value()));
-}
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
@@ -448,9 +388,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
-				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
-
-				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+				entries.push_back(LanguageEntry(localename, name, sortname));
 
 				if (localename == current_locale) {
 					selected_locale = current_locale;
@@ -458,7 +396,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 			} catch (const WException&) {
 				log("Could not read locale for: %s\n", localename.c_str());
-				entries.push_back(LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
+				entries.push_back(LanguageEntry(localename, localename, localename));
 			}  // End read locale from table
 		}  // End scan locales directory
 	} catch (const LuaError& err) {
@@ -467,11 +405,10 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	}  // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
-
 	std::sort(entries.begin(), entries.end());
 	for (const LanguageEntry& entry : entries) {
 		language_list_.add(entry.descname.c_str(), entry.localename, nullptr,
-									entry.localename == selected_locale, "", entry.fontname);
+									entry.localename == selected_locale, "");
 	}
 }
 
@@ -505,9 +442,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Saving options
 	os_.autosave              = sb_autosave_.get_value();
 	os_.rolling_autosave      = sb_rolling_autosave_.get_value();
-	os_.remove_replays        = sb_remove_replays_.get_value();
-	os_.nozip                 = nozip_.get_state();
-	os_.remove_syncstreams    = remove_syncstreams_.get_state();
+	os_.zip                   = zip_.get_state();
+	os_.write_syncstreams     = write_syncstreams_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode   = auto_roadbuild_mode_.get_state();
@@ -574,9 +510,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
-	opt.remove_replays = opt_section_.get_int("remove_replays", 0);
-	opt.nozip = opt_section_.get_bool("nozip", false);
-	opt.remove_syncstreams = opt_section_.get_bool("remove_syncstreams", true);
+	opt.zip = !opt_section_.get_bool("nozip", false);
+	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
@@ -618,9 +553,8 @@ void OptionsCtrl::save_options() {
 	// Saving options
 	opt_section_.set_int("autosave",               opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave",       opt.rolling_autosave);
-	opt_section_.set_int("remove_replays",         opt.remove_replays);
-	opt_section_.set_bool("nozip",                 opt.nozip);
-	opt_section_.set_bool("remove_syncstreams",    opt.remove_syncstreams);
+	opt_section_.set_bool("nozip",                !opt.zip);
+	opt_section_.set_bool("write_syncstreams",     opt.write_syncstreams);
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);

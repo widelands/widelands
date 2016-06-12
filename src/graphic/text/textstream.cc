@@ -19,6 +19,7 @@
 
 #include "graphic/text/textstream.h"
 
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -34,14 +35,14 @@ struct EndOfTextImpl : public EndOfText {
 	{}
 };
 
-void TextStream::m_consume(size_t cnt) {
+void TextStream::consume(size_t cnt) {
 	while (cnt) {
-		if (m_t[m_i] == '\n') {
-			++m_lineno;
-			m_col = 0;
+		if (text_[pos_] == '\n') {
+			++line_;
+			col_ = 0;
 		} else
-			++m_col;
-		++m_i;
+			++col_;
+		++pos_;
 		--cnt;
 	}
 }
@@ -53,19 +54,19 @@ void TextStream::m_consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (m_i < m_end && isspace(m_t[m_i]))
-		m_consume(1);
+	while (pos_ < end_ && isspace(text_[pos_]))
+		consume(1);
 }
 void TextStream::rskip_ws() {
-	while (m_i < m_end && isspace(m_t[m_end - 1]))
-		--m_end;
+	while (pos_ < end_ && isspace(text_[end_ - 1]))
+		--end_;
 }
 
 /*
  * Return the next few characters without advancing the stream
  */
 string TextStream::peek(size_t n, size_t at) const {
-	return m_t.substr(at > m_t.size() ? m_i : at, n);
+	return text_.substr(at > text_.size() ? pos_ : at, n);
 }
 
 /*
@@ -77,8 +78,8 @@ void TextStream::expect(string n, bool skip_whitespace) {
 		skip_ws();
 
 	if (peek(n.size()) != n)
-		throw SyntaxErrorImpl(m_lineno, m_col, (format("'%s'") % n).str(), peek(n.size()), peek(100));
-	m_consume(n.size());
+		throw SyntaxErrorImpl(line_, col_, (format("'%s'") % n).str(), peek(n.size()), peek(100));
+	consume(n.size());
 }
 
 /*
@@ -90,26 +91,40 @@ string TextStream::till_any(string chars) {
 	// Sticking with a double loop because chars will likely be short
 	string rv;
 
-	size_t j = m_i;
-	size_t started_at = m_i;
+	size_t j = pos_;
+	size_t started_at = pos_;
 	bool found = false;
-	while (j < m_end) {
+	while (j < end_) {
 		for (size_t k = 0; k < chars.size(); ++k) {
-			if (chars[k] == m_t[j]) {
+			if (chars[k] == text_[j]) {
 				found = true;
 				break;
 			}
 		}
 		if (found) break;
 
-		if (m_t[j] == '\\')
+		// Get rid of control characters
+		// http://en.cppreference.com/w/cpp/language/escape
+		switch (text_[j]) {
+		case '\a':
+		case '\b':
+		case '\f':
+		case '\v':
 			++j;
-		rv += m_t[j];
+			break;
+		default:
+			break;
+		}
+
+		rv += text_[j];
 		++j;
 	}
 	if (!found)
 		throw EndOfTextImpl(started_at, peek(100, started_at));
-	m_consume(j - started_at);
+	consume(j - started_at);
+
+	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
+	boost::replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }
@@ -122,8 +137,8 @@ string TextStream::till_any_or_end(string chars) {
 	try {
 		rv = till_any(chars);
 	} catch (EndOfTextImpl &) {
-		rv = m_t.substr(m_i, m_end - m_i);
-		m_consume(m_end + 1 - m_i);
+		rv = text_.substr(pos_, end_ - pos_);
+		consume(end_ + 1 - pos_);
 	}
 	return rv;
 }
@@ -134,9 +149,9 @@ string TextStream::till_any_or_end(string chars) {
 string TextStream::parse_string() {
 	string delim = peek(1);
 	if (delim == "'" || delim == "\"") {
-		m_consume(1);
+		consume(1);
 		string rv = till_any(delim);
-		m_consume(1);
+		consume(1);
 		return rv;
 	} else
 		return till_any(" \t>");
@@ -146,7 +161,7 @@ string TextStream::parse_string() {
  * Return the text that is yet to be parsed
  */
 string TextStream::remaining_text() {
-	return m_t.substr(m_i, m_end - m_i);
+	return text_.substr(pos_, end_ - pos_);
 }
 
 }

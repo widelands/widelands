@@ -38,23 +38,20 @@ struct WareList {
 	WareList() {}
 	~WareList();
 
-	void clear() {m_wares.clear();} /// Clear the storage
-
-	using WareCount = uint32_t;
-	using WareCountVector = std::vector<WareCount>;
+	void clear() {wares_.clear();} /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {return DescriptionIndex(m_wares.size());}
+	DescriptionIndex get_nrwareids() const {return DescriptionIndex(wares_.size());}
 
-	void add   (DescriptionIndex, WareCount = 1);
+	void add   (DescriptionIndex, Quantity = 1);
 	void add(const WareList &);
-	void remove(DescriptionIndex, WareCount = 1);
+	void remove(DescriptionIndex, Quantity = 1);
 	void remove(const WareList & wl);
-	WareCount stock(DescriptionIndex) const;
+	Quantity stock(DescriptionIndex) const;
 
 	void set_nrwares(DescriptionIndex const i) {
-		assert(m_wares.empty());
-		m_wares.resize(i, 0);
+		assert(wares_.empty());
+		wares_.resize(i, 0);
 	}
 
 	bool operator== (const WareList &)    const;
@@ -63,7 +60,7 @@ struct WareList {
 	mutable boost::signals2::signal<void ()> changed;
 
 private:
-	WareCountVector m_wares;
+	std::vector<Quantity> wares_;
 };
 
 }

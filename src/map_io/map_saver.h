@@ -46,12 +46,12 @@ struct MapSaver {
 	~MapSaver();
 
 	void save();
-	MapObjectSaver * get_map_object_saver() {return m_mos;}
+	MapObjectSaver * get_map_object_saver() {return mos_;}
 
 private:
-	EditorGameBase     & m_egbase;
-	FileSystem & m_fs;
-	MapObjectSaver * m_mos;
+	EditorGameBase     & egbase_;
+	FileSystem & fs_;
+	MapObjectSaver * mos_;
 };
 
 }

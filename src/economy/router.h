@@ -49,7 +49,7 @@ struct Router {
 	uint32_t assign_cycle();
 
 private:
-	ResetCycleFn m_reset;
+	ResetCycleFn reset_;
 	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_COROUTINE_H
 #define WL_SCRIPTING_LUA_COROUTINE_H
 
+#include <memory>
 #include <string>
 
 #include <stdint.h>
@@ -28,6 +29,7 @@
 
 class FileRead;
 class FileWrite;
+class LuaTable;
 
 namespace Widelands {
 class Player;
@@ -62,14 +64,12 @@ public:
 	// in hooks.
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
-	void push_arg(const Widelands::BuildingDescr*);
-	void push_arg(const Widelands::WareDescr*);
-	void push_arg(const Widelands::WorkerDescr*);
 	void push_arg(const std::string&);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();
 	std::string pop_string();
+	std::unique_ptr<LuaTable> pop_table();
 
 private:
 	friend class LuaGameInterface;
@@ -79,11 +79,11 @@ private:
 	void write(FileWrite&);
 	void read(lua_State*, FileRead&);
 
-	lua_State* m_L;
-	uint32_t m_idx;
-	uint32_t m_nargs;
-	uint32_t m_ninput_args;
-	uint32_t m_nreturn_values;
+	lua_State* lua_state_;
+	uint32_t idx_;
+	uint32_t nargs_;
+	uint32_t ninput_args_;
+	uint32_t nreturn_values_;
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

@@ -14,7 +14,7 @@ Command Types
 - `mine`_
 - `check_soldier`_
 - `train`_
-- `playFX`_
+- `play_sound`_
 
 
 return
@@ -196,8 +196,8 @@ train
 -----
 Increases the level of a specified property of a soldier. No further documentation available.
 
-playFX
-------
+play_sound
+----------
 Plays a soundFX.
 
 Parameter syntax::

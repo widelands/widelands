@@ -45,7 +45,7 @@ class WorkerDescr : public BobDescr
 	friend struct WorkerProgram;
 
 public:
-	using Buildcost = std::map<std::string, uint8_t>;
+	using Buildcost = std::map<std::string, Quantity>;
 
 	WorkerDescr(const std::string& init_descname,
 					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
@@ -67,7 +67,7 @@ public:
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
 	/// not be configurable.
-	uint32_t default_target_quantity() const {return default_target_quantity_;}
+	Quantity default_target_quantity() const {return default_target_quantity_;}
 
 	bool has_demand_check() const {
 		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
@@ -95,6 +95,12 @@ public:
 	DescriptionIndex worker_index() const;
 	bool can_act_as(DescriptionIndex) const;
 
+	// Add a building to the list of employers
+	void add_employer(const DescriptionIndex& building_index);
+
+	// The buildings where this worker can work
+	const std::set<DescriptionIndex>& employers() const;
+
 	Worker & create
 		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
 
@@ -105,7 +111,7 @@ public:
 
 protected:
 	Point             ware_hotspot_;
-	uint32_t          default_target_quantity_;
+	Quantity          default_target_quantity_;
 	std::string       helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations     walk_anims_;
 	DirAnimations     walkload_anims_;
@@ -123,6 +129,7 @@ protected:
 	 */
 	DescriptionIndex becomes_;
 	Programs  programs_;
+	std::set<DescriptionIndex> employers_; // Buildings where ths worker can work
 private:
 	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);

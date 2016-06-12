@@ -6,6 +6,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
+option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -119,6 +120,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
@@ -165,10 +167,10 @@ else()
 endif()
 
 # Turn some warnings into errors.
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
-
 
 IF (WIN32)
   add_definitions(-DMINGW_HAS_SECURE_API)
@@ -243,6 +245,7 @@ install(
     data/i18n
     data/images
     data/scripting
+    data/shaders
     data/tribes
     data/txts
     data/world

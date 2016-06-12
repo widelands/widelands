@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="144"
+nr_players="4"
+name=_"Archipelago Sea"
+author="King of nowhere"
+descr=_"Between Sweden and Finland lies the archipelago sea. This place of incredible beauty is not land, and it is not sea, but it is both. Within a few hundred kilometers, there are no less than 50,000 islands and islets, most no more than a few acres across. The climate is quite mild for its latitude; farming thrives, berries are abundant, and fish plentiful. The small human population of this place never knew famine. You warlording bastards just couldn’t leave this little paradise in peace, could you?"
+hint=_"Large plots are rare on those small islands. Prioritize construction of large buildings on them. Sometimes you will need big military buildings to expand all the way to the next island. The AI will perform poorly."
+tags="official"

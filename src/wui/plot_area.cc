@@ -24,7 +24,6 @@
 #include <string>
 
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -38,16 +37,17 @@ using namespace std;
 
 namespace {
 
+constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
+
 const uint32_t minutes = 60 * 1000;
 const uint32_t hours = 60 * 60 * 1000;
 const uint32_t days = 24 * 60 * 60 * 1000;
 
 const int32_t spacing = 5;
-const int32_t space_at_bottom = 15;
+const int32_t space_at_bottom = 20;
 const int32_t space_at_right = 10;
 const int32_t space_left_of_label = 15;
 const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
-
 
 const uint32_t time_in_ms[] = {
 	15 * minutes,
@@ -60,13 +60,18 @@ const uint32_t time_in_ms[] = {
 };
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
-const RGBColor LINE_COLOR(0, 0, 0);
-const RGBColor ZERO_LINE_COLOR(255, 255, 255);
+const RGBColor kAxisLineColor(0, 0, 0);
+constexpr float kAxisLinesWidth = 2.0f;
+constexpr float kPlotLinesWidth = 3.f;
+const RGBColor kZeroLineColor(255, 255, 255);
 
-enum UNIT {
-	UNIT_MIN,
-	UNIT_HOUR,
-	UNIT_DAY,
+enum class Units {
+	kMinutesNarrow,
+	kHourNarrow,
+	kDayNarrow,
+	kMinutesGeneric,
+	kHourGeneric,
+	kDayGeneric
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
@@ -91,34 +96,70 @@ float scale_value
 	return yline_length / (static_cast<float>(highest_scale) / static_cast<float>(value));
 }
 
-UNIT get_suggested_unit(uint32_t game_time) {
+Units get_suggested_unit(uint32_t game_time, bool is_generic = false) {
 	// Find a nice unit for max_x
-	if (game_time > 4 * days) {
-		return UNIT_DAY;
-	} else if (game_time > 4 * hours) {
-		return UNIT_HOUR;
-	} else {
-		return UNIT_MIN;
+	if (is_generic) {
+		if (game_time > 4 * days) {
+			return Units::kDayGeneric;
+		} else if (game_time > 4 * hours) {
+			return Units::kHourGeneric;
+		} else {
+			return Units::kMinutesGeneric;
+		}
+	}
+	else {
+		if (game_time > 4 * days) {
+			return Units::kDayNarrow;
+		} else if (game_time > 4 * hours) {
+			return Units::kHourNarrow;
+		} else {
+			return Units::kMinutesNarrow;
+		}
 	}
 }
 
-std::string get_unit_name(UNIT unit) {
+std::string get_value_with_unit(Units unit, int value) {
 	switch (unit) {
-	/** TRANSLATOR: day(s). Used in statistics. */
-	case UNIT_DAY:  return _("%1% d");
-	/** TRANSLATOR: hour(s). Used in statistics. */
-	case UNIT_HOUR: return _("%1% h");
-	/** TRANSLATOR: minute(s). Used in statistics. */
-	case UNIT_MIN:  return _("%1% min");
+	case Units::kDayNarrow:
+		/** TRANSLATORS: day(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%d", "%1%d", value)) % value).str();
+	case Units::kHourNarrow:
+		/** TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%h", "%1%h", value)) % value).str();
+	case Units::kMinutesNarrow:
+		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%m", "%1%m", value)) % value).str();
+	default: NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
-uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
+std::string get_generic_unit_name(Units unit) {
 	switch (unit) {
-	case UNIT_DAY: return ms / days;
-	case UNIT_HOUR: return ms / hours;
-	case UNIT_MIN: return ms / minutes;
+	case Units::kDayGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "days");
+	case Units::kHourGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "hours");
+	case Units::kMinutesGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "minutes");
+	default: NEVER_HERE();
+	}
+}
+
+
+uint32_t ms_to_unit(Units unit, uint32_t ms) {
+	switch (unit) {
+	case Units::kDayGeneric:
+	case Units::kDayNarrow:
+		return ms / days;
+	case Units::kHourGeneric:
+	case Units::kHourNarrow:
+		return ms / hours;
+	case Units::kMinutesGeneric:
+	case Units::kMinutesNarrow:
+		return ms / minutes;
 	}
 	NEVER_HERE();
 }
@@ -156,8 +197,10 @@ void draw_diagram
 {
 	uint32_t how_many_ticks, max_x;
 
-	UNIT unit = get_suggested_unit(time_ms);
+	Units unit = get_suggested_unit(time_ms, true);
 	max_x = ms_to_unit(unit, time_ms);
+	// Make sure that we always have a tick
+	max_x = std::max(max_x, 1u);
 
 	// Try to find a nice division of max_x (some number between 3 and 7 so data on graph are
 	// readable) - to get correct data on graph, how_many_ticks has to be a divisor of max_x. Now
@@ -176,6 +219,8 @@ void draw_diagram
 	while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
 		how_many_ticks /= 7;
 	}
+	// Make sure that we always have a tick
+	how_many_ticks = std::max(how_many_ticks, 1u);
 
 	// first, tile the background
 	dst.tile
@@ -184,34 +229,30 @@ void draw_diagram
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
+		kAxisLineColor, kAxisLinesWidth);
 	// Arrow
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom - 3),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom + 3),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({
+		FloatPoint(spacing + 5, inner_h - space_at_bottom - 3),
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(spacing + 5, inner_h - space_at_bottom + 3),
+		}, kAxisLineColor, kAxisLinesWidth);
+
 	//  Y Axis
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({FloatPoint(inner_w - space_at_right, spacing),
+	                     FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
+							  kAxisLineColor, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
-		              Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3),
-		              LINE_COLOR,
-		              2);
+		dst.draw_line_strip({FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+		                     FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
+								  kAxisLineColor, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -225,18 +266,16 @@ void draw_diagram
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right - 3, spacing),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(
-	   Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   LINE_COLOR,
-	   2);
+	dst.draw_line_strip({
+		FloatPoint(inner_w - space_at_right, spacing), FloatPoint(inner_w - space_at_right - 3, spacing)},
+		kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip({
+		FloatPoint(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		FloatPoint(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
+		kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
+	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
 }
 
@@ -249,9 +288,16 @@ WuiPlotArea::WuiPlotArea
 UI::Panel (parent, x, y, w, h),
 plotmode_(PLOTMODE_ABSOLUTE),
 sample_rate_(0),
-time_    (TIME_GAME),
+needs_update_(true),
+lastupdate_(0),
+time_ms_(0),
+highest_scale_(0),
+sub_(0.0f),
+time_(TIME_GAME),
 game_time_id_(0)
-{}
+{
+	update();
+}
 
 
 uint32_t WuiPlotArea::get_game_time() {
@@ -267,9 +313,8 @@ uint32_t WuiPlotArea::get_game_time() {
 std::vector<std::string> WuiPlotArea::get_labels() {
 	std::vector<std::string> labels;
 	for (int32_t i = 0; i < game_time_id_; i++) {
-		UNIT unit = get_suggested_unit(time_in_ms[i]);
-		uint32_t val = ms_to_unit(unit, time_in_ms[i]);
-		labels.push_back((boost::format(get_unit_name(unit)) % boost::lexical_cast<std::string>(val)).str());
+		Units unit = get_suggested_unit(time_in_ms[i], false);
+		labels.push_back(get_value_with_unit(unit, ms_to_unit(unit, time_in_ms[i])));
 	}
 	labels.push_back(_("game"));
 	return labels;
@@ -320,30 +365,36 @@ int32_t WuiPlotArea::get_game_time_id() {
 	return game_time_id_;
 }
 
-/*
- * Draw this. This is the main function
- */
-void WuiPlotArea::draw(RenderTarget & dst) {
-	float const xline_length = get_inner_w() - space_at_right  - spacing;
-	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 
-	const uint32_t time_ms = get_plot_time();
-	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
+void WuiPlotArea::think() {
+	// Don't update that often
+	const int32_t gametime = get_game_time();
+	if (needs_update_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update();
+		lastupdate_ = gametime;
+	}
+	needs_update_ = false;
+}
+
+
+//  Find the maximum value.
+void WuiPlotArea::update() {
+	float const xline_length = get_inner_w() - space_at_right  - spacing;
+
+	time_ms_ = get_plot_time();
 
 	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms, sample_rate_);
-
-	uint32_t max = 0;
-	//  Find the maximum value.
+	const int32_t how_many = calc_how_many(time_ms_, sample_rate_);
+	highest_scale_ = 0;
 	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
 		for (uint32_t i = 0; i < plotdata_.size(); ++i)
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].dataset->size(); ++l)
-					if (max < (*plotdata_[i].dataset)[l])
-						max = (*plotdata_[i].dataset)[l];
+					if (highest_scale_ < (*plotdata_[i].dataset)[l])
+						highest_scale_ = (*plotdata_[i].dataset)[l];
 			}
 	} else {
-		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
 
 				const std::vector<uint32_t> & dataset = *plotdata_[plot].dataset;
@@ -353,52 +404,70 @@ void WuiPlotArea::draw(RenderTarget & dst) {
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i];
 					if (0 == ((i + 1) % how_many)) {
-						if (max < add)
-							max = add;
+						if (highest_scale_ < add)
+							highest_scale_ = add;
 						add = 0;
 					}
 				}
 			}
+		}
 	}
 
-	//  print the maximal value into the top right corner
-	draw_value
-		(std::to_string(max), RGBColor(60, 125, 0),
-		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
-
-	//  plot the pixels
-	float sub =
+	//  Update the datasets
+	sub_ =
 		(xline_length - space_left_of_label)
 		/
-		(static_cast<float>(time_ms)
+		(static_cast<float>(time_ms_)
 		 /
 		 static_cast<float>(sample_rate_));
-	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
-
-			RGBColor color = plotdata_[plot].plotcolor;
 			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
 
-			std::vector<uint32_t> data_;
+			std::vector<uint32_t> data;
 			if (plotmode_ == PLOTMODE_RELATIVE) {
 				uint32_t add = 0;
 				// Relative data, first entry is always zero
-				data_.push_back(0);
+				data.push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i];
 					if (0 == ((i + 1) % how_many)) {
-						data_.push_back(add);
+						data.push_back(add);
 						add = 0;
 					}
 				}
-
-				dataset = &data_;
-				sub = (xline_length - space_left_of_label) / static_cast<float>(nr_samples);
+				dataset = &data;
+				sub_ = (xline_length - space_left_of_label) / static_cast<float>(nr_samples);
 			}
-
-			draw_plot_line
-				(dst, dataset, yline_length, max, sub, color, get_inner_h() - space_at_bottom);
 		}
+	}
+}
+
+
+
+/*
+ * Draw this. This is the main function
+ */
+void WuiPlotArea::draw(RenderTarget & dst) {
+	float const xline_length = get_inner_w() - space_at_right  - spacing;
+	float const yline_length = get_inner_h() - space_at_bottom - spacing;
+
+	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length, dst);
+
+	//  print the maximal value into the top right corner
+	draw_value
+		(std::to_string(highest_scale_), RGBColor(60, 125, 0),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
+
+	//  plot the pixels
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
+		if (plotdata_[plot].showplot) {
+			RGBColor color = plotdata_[plot].plotcolor;
+			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
+			draw_plot_line
+				(dst, dataset, yline_length, highest_scale_, sub_, color, get_inner_h() - space_at_bottom);
+		}
+	}
 }
 
 /**
@@ -410,35 +479,31 @@ void WuiPlotArea::draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t const yoffset)
 {
-
 	float posx = get_inner_w() - space_at_right;
-
-	int32_t lx = get_inner_w() - space_at_right;
-	int32_t ly = yoffset;
-	//init start point of the plot line with the first data value.
-	//this prevent that the plot start always at zero
-	if (int32_t value = (*dataset)[dataset->size() - 1]) {
+	const int lx = get_inner_w() - space_at_right;
+	int ly = yoffset;
+	// Init start point of the plot line with the first data value.
+	// This prevents that the plot starts always at zero
+	if (int value = (*dataset)[dataset->size() - 1]) {
 		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
 	}
+
+	std::vector<FloatPoint> points;
+	points.emplace_back(lx, ly);
 
 	for (int32_t i = dataset->size() - 1; i > 0 && posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
 		int32_t       cury = yoffset;
 
-		//scale the line to the available space
+		// Scale the line to the available space
 		if (int32_t value = (*dataset)[i]) {
 			const float length_y = scale_value(yline_length, highest_scale, value);
-
 			cury -= static_cast<int32_t>(length_y);
 		}
-
-		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 2);
-
+		points.emplace_back(curx, cury);
 		posx -= sub;
-
-		lx = curx;
-		ly = cury;
 	}
+	dst.draw_line_strip(points, color, kPlotLinesWidth);
 }
 
 /*
@@ -457,6 +522,7 @@ void WuiPlotArea::register_plot_data
 	plotdata_[id].plotcolor = color;
 
 	get_game_time_id();
+	needs_update_ = true;
 }
 
 /**
@@ -466,6 +532,7 @@ void WuiPlotArea::set_plotcolor(uint32_t id, RGBColor color) {
 	if (id > plotdata_.size()) return;
 
 	plotdata_[id].plotcolor = color;
+	needs_update_ = true;
 }
 
 /*
@@ -474,6 +541,7 @@ void WuiPlotArea::set_plotcolor(uint32_t id, RGBColor color) {
 void WuiPlotArea::show_plot(uint32_t const id, bool const t) {
 	assert(id < plotdata_.size());
 	plotdata_[id].showplot = t;
+	needs_update_ = true;
 }
 
 /*
@@ -481,6 +549,7 @@ void WuiPlotArea::show_plot(uint32_t const id, bool const t) {
  */
 void WuiPlotArea::set_sample_rate(uint32_t const id) {
 	sample_rate_ = id;
+	needs_update_ = true;
 }
 
 
@@ -499,27 +568,19 @@ DifferentialPlotArea::DifferentialPlotArea
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
 WuiPlotArea (parent, x, y, w, h)
-{}
+{
+	update();
+}
 
-void DifferentialPlotArea::draw(RenderTarget & dst) {
+void DifferentialPlotArea::update() {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
-	float const yline_length = get_inner_h() - space_at_bottom - spacing;
-	//yoffset of the zero line
-	float const yoffset = spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2;
 
-	const uint32_t time_ms = get_plot_time();
-	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
-
-	// draw zero line
-	dst.draw_line(Point(get_inner_w() - space_at_right, yoffset),
-	              Point(get_inner_w() - space_at_right - xline_length, yoffset),
-	              ZERO_LINE_COLOR,
-	              2);
+	time_ms_ = get_plot_time();
 
 	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms, sample_rate_);
+	const int32_t how_many = calc_how_many(time_ms_, sample_rate_);
 
-	//find max and min value
+	// Find max and min value
 	int32_t max = 0;
 	int32_t min = 0;
 
@@ -528,7 +589,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].dataset->size(); ++l) {
 					int32_t temp = (*plotdata_[i].dataset)[l] -
-								   (*negative_plotdata_[i].dataset)[l];
+									(*negative_plotdata_[i].dataset)[l];
 					if (max < temp) max = temp;
 					if (min > temp) min = temp;
 				}
@@ -547,41 +608,30 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 					if (0 == ((i + 1) % how_many)) {
 						if (max < add) max = add;
 						if (min > add) min = add;
-
 						add = 0;
 					}
 				}
 			}
 	}
 
-	//use equal positive and negative range
+	// Use equal positive and negative range
 	min = abs(min);
-	uint32_t highest_scale = 0;
+	highest_scale_ = 0;
 	if (min > max) {
-		highest_scale = min;
+		highest_scale_ = min;
 	} else {
-		highest_scale = max;
+		highest_scale_ = max;
 	}
-	//print the min and max values
-	draw_value
-		(std::to_string(highest_scale), RGBColor(60, 125, 0),
-		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
-
-	draw_value
-		((boost::format("-%u") % highest_scale).str(), RGBColor(125, 0, 0),
-		 Point(get_inner_w() - space_at_right - 2, get_inner_h() - spacing - 15), dst);
 
 	//  plot the pixels
-	float sub =
+	sub_ =
 		xline_length
 		/
-		(static_cast<float>(time_ms)
+		(static_cast<float>(time_ms_)
 		 /
 		 static_cast<float>(sample_rate_));
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
 		if (plotdata_[plot].showplot) {
-
-			RGBColor color = plotdata_[plot].plotcolor;
 			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
 			std::vector<uint32_t> const * ndataset = negative_plotdata_[plot].dataset;
 
@@ -597,14 +647,45 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 						add = 0;
 					}
 				}
-
 				dataset = &data_;
-				sub = xline_length / static_cast<float>(nr_samples);
+				sub_ = xline_length / static_cast<float>(nr_samples);
 			}
+		}
+}
 
-			//highest_scale represent the space between zero line and top.
-			//-> half of the whole differential plot area
-			draw_plot_line(dst, dataset, yline_length, highest_scale * 2, sub, color, yoffset);
+void DifferentialPlotArea::draw(RenderTarget & dst) {
+	float const xline_length = get_inner_w() - space_at_right  - spacing;
+	float const yline_length = get_inner_h() - space_at_bottom - spacing;
+	// yoffset of the zero line
+	float const yoffset = spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2;
+
+	time_ms_ = get_plot_time();
+	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length, dst);
+
+	// draw zero line
+	dst.draw_line_strip({FloatPoint(get_inner_w() - space_at_right, yoffset),
+	                     FloatPoint(get_inner_w() - space_at_right - xline_length, yoffset)},
+							  kZeroLineColor, kPlotLinesWidth);
+
+	// Print the min and max values
+	draw_value
+		(std::to_string(highest_scale_), RGBColor(60, 125, 0),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
+
+	draw_value
+		((boost::format("-%u") % highest_scale_).str(), RGBColor(125, 0, 0),
+		 Point(get_inner_w() - space_at_right - 2, get_inner_h() - spacing - 15), dst);
+
+	//  plot the pixels
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		if (plotdata_[plot].showplot) {
+
+			RGBColor color = plotdata_[plot].plotcolor;
+			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
+
+			// Highest_scale represent the space between zero line and top.
+			// -> half of the whole differential plot area
+			draw_plot_line(dst, dataset, yline_length, highest_scale_ * 2, sub_, color, yoffset);
 		}
 }
 
@@ -619,4 +700,5 @@ void DifferentialPlotArea::register_negative_plot_data
 		negative_plotdata_.resize(id + 1);
 
 	negative_plotdata_[id].dataset   = data;
+	needs_update_ = true;
 }

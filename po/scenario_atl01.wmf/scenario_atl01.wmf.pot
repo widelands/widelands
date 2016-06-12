@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
+"POT-Creation-Date: 2016-06-07 17:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -177,7 +177,7 @@ msgstr ""
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine will dig for quartz and diamonds – all of them are precious materials "
-"and very rarely found. It will produce a lot of stone while searching for "
+"and very rarely found. It will produce a lot of granite while searching for "
 "them."
 msgstr ""
 
@@ -330,7 +330,7 @@ msgid "Uproar and Confusion"
 msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
-msgid "Emerging Chaos..."
+msgid "Emerging Chaos…"
 msgstr ""
 
 #. TRANSLATORS: Foreword
@@ -339,7 +339,7 @@ msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
-"animals in his temple. But to no avail..."
+"animals in his temple. But to no avail…"
 msgstr ""
 
 #. TRANSLATORS: Foreword
@@ -462,8 +462,8 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a "
 "good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all "
-"its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
+"its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
 msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -643,8 +643,8 @@ msgstr ""
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
+"I have considered this, Sidolus. I think it is about time. We will make this "
+"a priority for now. You shall get your industry soon!"
 msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
@@ -866,7 +866,7 @@ msgid ""
 "never have I seen sturdier ones – with enough room to carry all of us and "
 "some wares too. And this rescue came just in time: Lutas is about to swallow "
 "the rest of this island, the water rises faster by the hour. But we can make "
-"our escape now and start over in some country farther away..."
+"our escape now and start over in some country farther away…"
 msgstr ""
 
 #. TRANSLATORS: Jundlina
@@ -891,7 +891,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

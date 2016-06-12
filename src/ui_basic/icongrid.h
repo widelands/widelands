@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,11 +60,11 @@ private:
 	};
 
 	/// max # of columns (or rows, depending on orientation) in the grid
-	int32_t m_columns;
-	int32_t m_cell_width; ///< size of one cell
-	int32_t m_cell_height;
+	int32_t columns_;
+	int32_t cell_width_; ///< size of one cell
+	int32_t cell_height_;
 
-	std::vector<Item> m_items;
+	std::vector<Item> items_;
 };
 
 }

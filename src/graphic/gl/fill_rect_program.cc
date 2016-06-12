@@ -24,35 +24,6 @@
 #include "base/log.h"
 #include "base/wexception.h"
 
-namespace  {
-
-const char kFillRectVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec3 attr_position;
-attribute vec4 attr_color;
-
-varying vec4 var_color;
-
-void main() {
-	var_color = attr_color;
-	gl_Position = vec4(attr_position, 1.);
-}
-)";
-
-const char kFillRectFragmentShader[] = R"(
-#version 120
-
-varying vec4 var_color;
-
-void main() {
-	gl_FragColor = var_color;
-}
-)";
-
-}  // namespace
-
 // static
 FillRectProgram& FillRectProgram::instance() {
 	static FillRectProgram fill_rect_program;
@@ -60,7 +31,7 @@ FillRectProgram& FillRectProgram::instance() {
 }
 
 FillRectProgram::FillRectProgram() {
-	gl_program_.build(kFillRectVertexShader, kFillRectFragmentShader);
+	gl_program_.build("fill_rect");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
@@ -102,6 +73,9 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		case BlendMode::Copy:
 			glDisable(GL_BLEND);
+			break;
+
+		case BlendMode::Default:
 			break;
 		}
 
@@ -192,6 +166,9 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		case BlendMode::Copy:
 			glEnable(GL_BLEND);
+			break;
+
+		case BlendMode::Default:
 			break;
 		}
 	}

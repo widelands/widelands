@@ -51,13 +51,13 @@ struct MapObjectSaver {
 #ifndef NDEBUG
 	void     detect_unsaved_objects() const;
 #endif
-	uint32_t get_nr_roads          () const {return m_nr_roads;}
-	uint32_t get_nr_flags          () const {return m_nr_flags;}
-	uint32_t get_nr_buildings      () const {return m_nr_buildings;}
-	uint32_t get_nr_wares          () const {return m_nr_wares;}
-	uint32_t get_nr_bobs           () const {return m_nr_bobs;}
-	uint32_t get_nr_immovables     () const {return m_nr_immovables;}
-	uint32_t get_nr_battles        () const {return m_nr_battles;}
+	uint32_t get_nr_roads          () const {return nr_roads_;}
+	uint32_t get_nr_flags          () const {return nr_flags_;}
+	uint32_t get_nr_buildings      () const {return nr_buildings_;}
+	uint32_t get_nr_wares          () const {return nr_wares_;}
+	uint32_t get_nr_bobs           () const {return nr_bobs_;}
+	uint32_t get_nr_immovables     () const {return nr_immovables_;}
+	uint32_t get_nr_battles        () const {return nr_battles_;}
 
 	bool is_object_saved(const MapObject &);
 
@@ -77,17 +77,17 @@ private:
 
 	MapObjectRec & get_object_record(const MapObject &);
 
-	MapObjectRecordMap m_objects;
-	uint32_t m_nr_roads;
-	uint32_t m_nr_flags;
-	uint32_t m_nr_buildings;
-	uint32_t m_nr_bobs;
-	uint32_t m_nr_wares;
-	uint32_t m_nr_immovables;
-	uint32_t m_nr_battles;
-	uint32_t m_nr_fleets;
-	uint32_t m_nr_portdocks;
-	uint32_t m_lastserial;
+	MapObjectRecordMap objects_;
+	uint32_t nr_roads_;
+	uint32_t nr_flags_;
+	uint32_t nr_buildings_;
+	uint32_t nr_bobs_;
+	uint32_t nr_wares_;
+	uint32_t nr_immovables_;
+	uint32_t nr_battles_;
+	uint32_t nr_fleets_;
+	uint32_t nr_portdocks_;
+	uint32_t lastserial_;
 };
 
 }

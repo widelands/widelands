@@ -19,12 +19,14 @@
 
 #include "ui_basic/spinbox.h"
 
+#include <map>
 #include <vector>
 
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -34,14 +36,6 @@
 #include "ui_basic/textarea.h"
 
 namespace UI {
-
-struct IntValueTextReplacement {
-	/// Value to be replaced
-	int32_t value;
-
-	/// Text to be used
-	std::string text;
-};
 
 struct SpinBoxImpl {
 	/// Value hold by the spinbox
@@ -55,13 +49,13 @@ struct SpinBoxImpl {
 	std::vector<int32_t> values;
 
 	/// The unit of the value
-	std::string unit;
+	UI::SpinBox::Units unit;
 
 	/// Background tile style of buttons.
 	const Image* background;
 
-	/// Special names for specific Values
-	std::vector<IntValueTextReplacement> valrep;
+	/// Special names for specific values
+	std::map<int32_t, std::string> value_replacements;
 
 	/// The UI parts
 	Textarea * text;
@@ -84,7 +78,7 @@ SpinBox::SpinBox
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t unit_w,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
 	 const std::string& label_text,
-	 const std::string& unit,
+	 const SpinBox::Units& unit,
 	 const Image* background,
 	 SpinBox::Type type,
 	 int32_t step_size, int32_t big_step_size)
@@ -110,7 +104,8 @@ SpinBox::SpinBox
 	uint32_t actual_w = std::max(w, unit_w);
 	uint32_t no_padding = (is_big ? 6 : 4);
 	// Give some height margin = 2 to keep the label from generating a scrollbar.
-	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height() + 2;
+	uint32_t texth =
+			UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2;
 	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
@@ -187,7 +182,7 @@ SpinBox::SpinBox
 		sbi_->text->set_fixed_width(unit_w
 											 - 2 * sbi_->button_ten_plus->get_w()
 											 - 2 * sbi_->button_minus->get_w()
-											 - 4 * padding);
+											 - 2 * padding);
 
 		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
 		box_->add(sbi_->button_minus, UI::Align::kTop);
@@ -195,7 +190,7 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Align::kTop);
 		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
 	} else {
-		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
+		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w());
 
 		box_->add(sbi_->button_minus, UI::Align::kHCenter);
 		box_->add(sbi_->text, UI::Align::kHCenter);
@@ -230,27 +225,17 @@ SpinBox::~SpinBox() {
  */
 void SpinBox::update()
 {
-	bool was_in_list = false;
-	for (const IntValueTextReplacement& value : sbi_->valrep) {
-		if (value.value == sbi_->value) {
-			sbi_->text->set_text(value.text);
-			was_in_list = true;
-			break;
-		}
-	}
-	if (!was_in_list) {
+	if (sbi_->value_replacements.count(sbi_->value) == 1) {
+		sbi_->text->set_text(sbi_->value_replacements.at(sbi_->value));
+	} else {
 		if (type_ == SpinBox::Type::kValueList) {
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
-				/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-				sbi_->text->set_text((boost::format(_("%1$i %2$s"))
-											 % sbi_->values.at(sbi_->value)
-											 % sbi_->unit.c_str()).str());
+				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
 			} else {
 				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
 			}
 		} else {
-			/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-			sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+			sbi_->text->set_text(unit_text(sbi_->value));
 		}
 	}
 
@@ -269,6 +254,7 @@ void SpinBox::update()
 void SpinBox::change_value(int32_t const value)
 {
 	set_value(value + sbi_->value);
+	changed();
 }
 
 
@@ -309,16 +295,6 @@ void SpinBox::set_interval(int32_t const min, int32_t const max)
 
 
 /**
- * manually sets the used unit to a given string
- */
-void SpinBox::set_unit(const std::string & unit)
-{
-	sbi_->unit = unit;
-	update();
-}
-
-
-/**
  * \returns the value
  */
 int32_t SpinBox::get_value() const
@@ -334,27 +310,6 @@ int32_t SpinBox::get_value() const
 	}
 }
 
-/**
- * \returns the unit
- */
-std::string SpinBox::get_unit() const
-{
-	return sbi_->unit;
-}
-
-
-/**
- * Searches for value in sbi->valrep
- * \returns the place where value was found or -1 if the value wasn't found.
- */
-int32_t SpinBox::find_replacement(int32_t value) const
-{
-	for (uint32_t i = 0; i < sbi_->valrep.size(); ++i)
-		if (sbi_->valrep[i].value == value)
-			return i;
-	return -1;
-}
-
 
 /**
  * Adds a replacement text for a specific value
@@ -362,34 +317,25 @@ int32_t SpinBox::find_replacement(int32_t value) const
  */
 void SpinBox::add_replacement(int32_t value, const std::string& text)
 {
-	if (int32_t i = find_replacement(value) >= 0)
-		sbi_->valrep[i].text = text;
-	else {
-		IntValueTextReplacement newtr;
-		newtr.value = value;
-		newtr.text  = text;
-		sbi_->valrep.push_back(newtr);
-	}
+	sbi_->value_replacements[value] = text;
 	update();
 }
 
 
-/**
- * Removes a replacement text for a specific value
- */
-void SpinBox::remove_replacement(int32_t value)
-{
-	if (int32_t i = find_replacement(value) >= 0) {
-		sbi_->valrep[i].text = (boost::format(_("%1$i %2$s")) % value % sbi_->unit.c_str()).str();
+const std::string SpinBox::unit_text(int32_t value) const {
+	switch (sbi_->unit) {
+	case (Units::kMinutes):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d minute", "%d minutes", value)) % value).str();
+	case (Units::kPixels):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kPercent):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(_("%i %%")) % value).str();
+	default:
+		return (boost::format("%d") % value).str();
 	}
 }
 
-/**
- * \returns true, if find_replacement returns an int >= 0
- */
-bool SpinBox::has_replacement(int32_t value) const
-{
-	return find_replacement(value) >= 0;
-}
-
-}
+} // namespace UI

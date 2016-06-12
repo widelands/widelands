@@ -95,12 +95,12 @@ void SoundHandler::init()
 {
 	read_config();
 	rng_.seed(SDL_GetTicks());
-	//this RNG will still be somewhat predictable, but it's just to avoid
-	//identical playback patterns
+	// This RNG will still be somewhat predictable, but it's just to avoid
+	// identical playback patterns
 
-	//Windows Music has crickling inside if the buffer has another size
-	//than 4k, but other systems work fine with less, some crash
-	//with big buffers.
+	// Windows Music has crickling inside if the buffer has another size
+	// than 4k, but other systems work fine with less, some crash
+	// with big buffers.
 #ifdef _WIN32
 	const uint16_t bufsize = 4096;
 #else
@@ -294,7 +294,7 @@ void SoundHandler::load_one_fx
 		(Mix_Chunk * const m =
 		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1))
 	{
-		//make sure that requested FXset exists
+		// Make sure that requested FXset exists
 
 		assert(fxs_.count(fx_name) > 0);
 
@@ -316,10 +316,8 @@ void SoundHandler::load_one_fx
 */
 int32_t SoundHandler::stereo_position(Widelands::Coords const position)
 {
-	//screen x, y (without clipping applied, might well be invisible)
+	// Screen x, y (without clipping applied, might well be invisible)
 	int32_t sx, sy;
-	//x, y resolutions of game window
-	Widelands::FCoords fposition;
 
 	if (nosound_)
 		return -1;
@@ -337,7 +335,7 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position)
 	sx -= vp.x;
 	sy -= vp.y;
 
-	//make sure position is inside viewport
+	// Make sure position is inside viewport
 
 	if (sx >= 0 && sx <= xres && sy >= 0 && sy <= yres)
 		return sx * 254 / xres;
@@ -355,34 +353,34 @@ bool SoundHandler::play_or_not
 	 uint8_t             const priority)
 {
 	bool allow_multiple = false; //  convenience for easier code reading
-	float evaluation; //temporary to calculate single influences
-	float probability; //weighted total of all influences
+	float evaluation; // Temporary to calculate single influences
+	float probability; // Weighted total of all influences
 
 	if (nosound_)
 		return false;
 
-	//probability that this fx gets played; initially set according to priority
+	// Probability that this fx gets played; initially set according to priority
 
 	//  float division! not integer
-	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
+	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0f;
 
-	//TODO(unknown): what to do with fx that happen offscreen?
-	//TODO(unknown): reduce volume? reduce priority? other?
+	// TODO(unknown): what to do with fx that happen offscreen?
+	// TODO(unknown): reduce volume? reduce priority? other?
 	if (stereo_pos == -1) {
 		return false;
 	}
 
-	//TODO(unknown): check for a free channel
+	// TODO(unknown): check for a free channel
 
 	if (priority == PRIO_ALWAYS_PLAY) {
-		//TODO(unknown): if there is no free channel, kill a running fx and complain
+		// TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
 	if (priority >= PRIO_ALLOW_MULTIPLE)
 		allow_multiple = true;
 
-	//find out if an fx called fx_name is already running
+	// Find out if an fx called fx_name is already running
 	bool already_running = false;
 
 	// Access to active_fx_ is protected because it can
@@ -391,7 +389,7 @@ bool SoundHandler::play_or_not
 
 	// starting a block, so I can define a local type for iterating
 	{
-		for (const std::pair<uint32_t, std::string> fx_pair : active_fx_) {
+		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_name) {
 				already_running = true;
 				break;
@@ -404,9 +402,9 @@ bool SoundHandler::play_or_not
 	if (!allow_multiple && already_running)
 		return false;
 
-	//TODO(unknown): long time since any play increases weighted_priority
-	//TODO(unknown): high general frequency reduces weighted priority
-	//TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
+	// TODO(unknown): long time since any play increases weighted_priority
+	// TODO(unknown): high general frequency reduces weighted priority
+	// TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
 	uint32_t const ticks_since_last_play =
 		SDL_GetTicks() - fxs_[fx_name]->last_used_;
@@ -417,18 +415,15 @@ bool SoundHandler::play_or_not
 
 		//  "decrease improbability"
 		probability = 1 - ((1 - probability) * (1 - evaluation));
-	} else { //penalize an fx for playing in short succession
+	} else { // Penalize an fx for playing in short succession
 		evaluation =
 			static_cast<float>(ticks_since_last_play) / SLIDING_WINDOW_SIZE;
 		probability *= evaluation; //  decrease probability
 	}
 
-	//printf("XXXXX %s ticks: %i ev: %f prob: %f\n",
-	//       fx_name.c_str(), ticks_since_last_play, evaluation, probability);
-
-	//finally: the decision
-	//  float division! not integer
-	return (rng_.rand() % 255) / 255.0 <= probability;
+	// finally: the decision
+	// float division! not integer
+	return (rng_.rand() % 255) / 255.0f <= probability;
 }
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
@@ -477,7 +472,7 @@ void SoundHandler::play_fx
 		return;
 	}
 
-	//see if the FX should be played
+	// See if the FX should be played
 	if (!play_or_not(fx_name, stereo_pos, priority))
 		return;
 
@@ -511,7 +506,7 @@ void SoundHandler::play_fx
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
- * finished playing.\n
+ * finished playing.
 */
 void SoundHandler::register_song
 	(const std::string & dir, const std::string & basename)
@@ -693,24 +688,24 @@ void SoundHandler::set_fx_volume(int32_t volume) {
 }
 
 /** Callback to notify \ref SoundHandler that a song has finished playing.
- * Usually, another song from the same songset will be started.\n
+ * Usually, another song from the same songset will be started.
  * There is a special case for the intro screen's music: only one song will be
  * played. If the user has not clicked the mouse or pressed escape when the song
  * finishes, Widelands will automatically go on to the main menu.
 */
 void SoundHandler::music_finished_callback()
 {
-	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
+	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	SDL_Event event;
 	if (g_sound_handler.current_songset_ == "intro") {
-		//special case for splashscreen: there, only one song is ever played
+		// Special case for splashscreen: there, only one song is ever played
 		event.type           = SDL_KEYDOWN;
 		event.key.state      = SDL_PRESSED;
 		event.key.keysym.sym = SDLK_ESCAPE;
 	} else {
-		//else just play the next song - see general description for
-		//further explanation
+		// Else just play the next song - see general description for
+		// further explanation
 		event.type           = SDL_USEREVENT;
 		event.user.code      = CHANGE_MUSIC;
 	}
@@ -722,7 +717,7 @@ void SoundHandler::music_finished_callback()
 */
 void SoundHandler::fx_finished_callback(int32_t const channel)
 {
-	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
+	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	assert(0 <= channel);
 	g_sound_handler.handle_channel_finished(static_cast<uint32_t>(channel));

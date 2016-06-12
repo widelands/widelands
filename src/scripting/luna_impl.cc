@@ -30,7 +30,7 @@
  * Private Functions
  * =======================================
  */
-static void m_instantiate_new_lua_class(lua_State * L) {
+static void instantiate_new_lua_class(lua_State * L) {
 	assert(lua_gettop(L) == 0);  // S:
 
 	std::string module, klass;
@@ -58,10 +58,10 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 	assert(lua_gettop(L) == 1);
 }
 
-static LunaClass** m_get_new_empty_user_data(lua_State * L) {
+static LunaClass** get_new_empty_user_data(lua_State * L) {
 	assert(lua_gettop(L) == 0);  // S:
 
-	m_instantiate_new_lua_class(L); // S: luna_obj
+	instantiate_new_lua_class(L); // S: luna_obj
 
 	lua_pushint32(L, 0); // luna_obj int
 	lua_gettable(L, -2); // luna_obj userdata
@@ -95,7 +95,7 @@ bool luna_table_has_key(lua_State* L, const std::string& key) {
 int luna_unpersisting_closure(lua_State * L) {
 	assert(lua_gettop(L) == 0);
 
-	LunaClass ** obj = m_get_new_empty_user_data(L); // S: luna_obj
+	LunaClass ** obj = get_new_empty_user_data(L); // S: luna_obj
 
 	(*obj)->__unpersist(L);
 

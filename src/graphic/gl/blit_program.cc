@@ -29,61 +29,6 @@
 
 namespace  {
 
-const char kBlitVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec2 attr_mask_texture_position;
-attribute vec2 attr_texture_position;
-attribute vec3 attr_position;
-attribute vec4 attr_blend;
-attribute float attr_program_flavor;
-
-varying vec2 out_mask_texture_coordinate;
-varying vec2 out_texture_coordinate;
-varying vec4 out_blend;
-varying float out_program_flavor;
-
-void main() {
-	out_mask_texture_coordinate = attr_mask_texture_position;
-	out_texture_coordinate = attr_texture_position;
-	out_blend = attr_blend;
-	out_program_flavor = attr_program_flavor;
-	gl_Position = vec4(attr_position, 1.);
-}
-)";
-
-const char kBlitFragmentShader[] = R"(
-#version 120
-
-uniform sampler2D u_texture;
-uniform sampler2D u_mask;
-
-varying vec2 out_mask_texture_coordinate;
-varying vec2 out_texture_coordinate;
-varying vec4 out_blend;
-varying float out_program_flavor;
-
-void main() {
-	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
-
-	// See http://en.wikipedia.org/wiki/YUV.
-	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
-
-	if (out_program_flavor == 0.) {
-		gl_FragColor = vec4(texture_color.rgb, out_blend.a * texture_color.a);
-	} else if (out_program_flavor == 1.) {
-		gl_FragColor = vec4(vec3(luminance) * out_blend.rgb, out_blend.a * texture_color.a);
-	} else {
-		vec4 mask_color = texture2D(u_mask, out_mask_texture_coordinate);
-		float blend_influence = mask_color.r * mask_color.a;
-		gl_FragColor = vec4(
-			mix(texture_color.rgb, out_blend.rgb * luminance, blend_influence),
-				out_blend.a * texture_color.a);
-	}
-}
-)";
-
 // While drawing we put all draw calls into a buffer, so that we have to
 // transfer the buffer to the GPU only once, even though we might need to do
 // many glDraw* calls. This structure represents the parameters for one glDraw*
@@ -99,7 +44,7 @@ struct DrawBatch {
 }  // namespace
 
 BlitProgram::BlitProgram() {
-	gl_program_.build(kBlitVertexShader, kBlitFragmentShader);
+	gl_program_.build("blit");
 
 	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
 	attr_mask_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_mask_texture_position");

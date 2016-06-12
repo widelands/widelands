@@ -54,15 +54,15 @@ public:
 
 	Building & create_object() const override;
 
-	uint32_t get_conquers() const override {return m_conquers;}
+	uint32_t get_conquers() const override {return conquers_;}
 
 	uint32_t get_heal_per_second        () const {
-		return m_heal_per_second;
+		return heal_per_second_;
 	}
 
 private:
-	int32_t m_conquers;
-	uint32_t m_heal_per_second;
+	int32_t conquers_;
+	uint32_t heal_per_second_;
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -122,7 +122,7 @@ public:
 	/// * Sets a next_spawn time for each buildable worker type without cost
 	///   that the owning player is allowed to create and schedules act for for
 	///   the spawn.
-	/// * Schedules act for military stuff (and sets m_next_military_act).
+	/// * Schedules act for military stuff (and sets next_military_act_).
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
@@ -148,20 +148,20 @@ public:
 	 */
 	Workers get_incorporated_workers();
 
-	void insert_wares  (DescriptionIndex, uint32_t count);
-	void remove_wares  (DescriptionIndex, uint32_t count);
-	void insert_workers(DescriptionIndex, uint32_t count);
-	void remove_workers(DescriptionIndex, uint32_t count);
+	void insert_wares  (DescriptionIndex, Quantity count);
+	void remove_wares  (DescriptionIndex, Quantity count);
+	void insert_workers(DescriptionIndex, Quantity count);
+	void remove_workers(DescriptionIndex, Quantity count);
 
 	/* SoldierControl implementation */
 	std::vector<Soldier *> present_soldiers() const override;
 	std::vector<Soldier *> stationed_soldiers() const override {
 		return present_soldiers();
 	}
-	uint32_t min_soldier_capacity() const override {return 0;}
-	uint32_t max_soldier_capacity() const override {return 4294967295U;}
-	uint32_t soldier_capacity() const override {return max_soldier_capacity();}
-	void set_soldier_capacity(uint32_t /* capacity */) override {
+	Quantity min_soldier_capacity() const override {return 0;}
+	Quantity max_soldier_capacity() const override {return 4294967295U;}
+	Quantity soldier_capacity() const override {return max_soldier_capacity();}
+	void set_soldier_capacity(Quantity /* capacity */) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
 	void drop_soldier(Soldier &) override {
@@ -172,7 +172,7 @@ public:
 
 	bool fetch_from_flag(Game &) override;
 
-	uint32_t count_workers(const Game &, DescriptionIndex, const Requirements &);
+	Quantity count_workers(const Game &, DescriptionIndex, const Requirements &);
 	Worker & launch_worker(Game &, DescriptionIndex worker, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
@@ -188,9 +188,9 @@ public:
 	bool can_create_worker(Game &, DescriptionIndex) const;
 	void     create_worker(Game &, DescriptionIndex);
 
-	uint32_t get_planned_workers(Game &, DescriptionIndex index) const;
-	void plan_workers(Game &, DescriptionIndex index, uint32_t amount);
-	std::vector<uint32_t> calc_available_for_worker
+	Quantity get_planned_workers(Game &, DescriptionIndex index) const;
+	void plan_workers(Game &, DescriptionIndex index, Quantity amount);
+	std::vector<Quantity> calc_available_for_worker
 		(Game &, DescriptionIndex index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
@@ -213,7 +213,7 @@ public:
 	void set_worker_policy(DescriptionIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
-	PortDock * get_portdock() const {return m_portdock;}
+	PortDock * get_portdock() const {return portdock_;}
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
@@ -240,7 +240,7 @@ private:
 		DescriptionIndex index;
 
 		/// How many workers of this type are we supposed to create?
-		uint32_t amount;
+		Quantity amount;
 
 		/// Requests to obtain the required build costs
 		std::vector<Request *> requests;
@@ -252,30 +252,30 @@ private:
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
-	bool _load_finish_planned_worker(PlannedWorkers & pw);
-	void _update_planned_workers(Game &, PlannedWorkers & pw);
-	void _update_all_planned_workers(Game &);
+	bool load_finish_planned_worker(PlannedWorkers & pw);
+	void update_planned_workers(Game &, PlannedWorkers & pw);
+	void update_all_planned_workers(Game &);
 
-	WarehouseSupply       * m_supply;
+	WarehouseSupply       * supply_;
 
-	std::vector<StockPolicy> m_ware_policy;
-	std::vector<StockPolicy> m_worker_policy;
+	std::vector<StockPolicy> ware_policy_;
+	std::vector<StockPolicy> worker_policy_;
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<Worker *>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
-	IncorporatedWorkers        m_incorporated_workers;
-	std::vector<Time>          m_next_worker_without_cost_spawn;
-	Time                       m_next_military_act;
-	Time                       m_next_stock_remove_act;
+	IncorporatedWorkers        incorporated_workers_;
+	std::vector<Time>          next_worker_without_cost_spawn_;
+	Time                       next_military_act_;
+	Time                       next_stock_remove_act_;
 
-	std::vector<PlannedWorkers> m_planned_workers;
+	std::vector<PlannedWorkers> planned_workers_;
 
-	PortDock * m_portdock;
+	PortDock * portdock_;
 
-	//this is information for portdock,to know whether it should
-	//try to recreate itself
-	bool m_cleanup_in_progress;
+	// This is information for portdock, to know whether it should
+	// try to recreate itself
+	bool cleanup_in_progress_;
 
 };
 

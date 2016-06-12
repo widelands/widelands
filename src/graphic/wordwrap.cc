@@ -40,20 +40,20 @@ namespace UI {
  * and a default-constructed text style.
  */
 WordWrap::WordWrap() :
-	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false)
+	wrapwidth_(std::numeric_limits<uint32_t>::max()), draw_caret_(false)
 {
 }
 
 WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
-	m_style(style), m_draw_caret(false)
+	style_(style), draw_caret_(false)
 {
-	m_wrapwidth = gwrapwidth;
+	wrapwidth_ = gwrapwidth;
 
-	if (m_wrapwidth < std::numeric_limits<uint32_t>::max()) {
-		if (m_wrapwidth < 2 * LINE_MARGIN)
-			m_wrapwidth = 0;
+	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
+		if (wrapwidth_ < 2 * LINE_MARGIN)
+			wrapwidth_ = 0;
 		else
-			m_wrapwidth -= 2 * LINE_MARGIN;
+			wrapwidth_ -= 2 * LINE_MARGIN;
 	}
 }
 
@@ -62,7 +62,7 @@ WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
  */
 void WordWrap::set_style(const TextStyle & style)
 {
-	m_style = style;
+	style_ = style;
 }
 
 /**
@@ -70,7 +70,7 @@ void WordWrap::set_style(const TextStyle & style)
  */
 void WordWrap::set_wrapwidth(uint32_t gwrapwidth)
 {
-	m_wrapwidth = gwrapwidth;
+	wrapwidth_ = gwrapwidth;
 }
 
 /**
@@ -79,7 +79,7 @@ void WordWrap::set_wrapwidth(uint32_t gwrapwidth)
  */
 uint32_t WordWrap::wrapwidth() const
 {
-	return m_wrapwidth;
+	return wrapwidth_;
 }
 
 /**
@@ -88,10 +88,10 @@ uint32_t WordWrap::wrapwidth() const
  */
 void WordWrap::wrap(const std::string & text)
 {
-	m_lines.clear();
+	lines_.clear();
 
 	std::string::size_type line_start = 0;
-	uint32_t margin =  m_style.calc_width_for_wrapping(0x2003); // Em space
+	uint32_t margin =  style_.calc_width_for_wrapping(0x2003); // Em space
 
 	while (line_start <= text.size()) {
 		std::string::size_type next_line_start;
@@ -102,7 +102,7 @@ void WordWrap::wrap(const std::string & text)
 		LineData ld;
 		ld.start = line_start;
 		ld.text = text.substr(line_start, line_end - line_start);
-		m_lines.push_back(ld);
+		lines_.push_back(ld);
 
 		line_start = next_line_start;
 	}
@@ -121,13 +121,13 @@ void WordWrap::compute_end_of_line
 	 uint32_t safety_margin)
 {
 	std::string::size_type minimum_chars = 1; // So we won't get empty lines
-	assert(text.empty() || m_wrapwidth > safety_margin);
+	assert(text.empty() || wrapwidth_ > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
 	if (orig_end == std::string::npos)
 		orig_end = text.size();
 
-	if (m_wrapwidth == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= minimum_chars) {
+	if (wrapwidth_ == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= minimum_chars) {
 		// Special fast path when wrapping is disabled or
 		// original text line contains at most minimum_chars characters
 		line_end = orig_end;
@@ -137,8 +137,8 @@ void WordWrap::compute_end_of_line
 
 
 	// Optimism: perhaps the entire line fits?
-	if (text_width(text.substr(line_start, orig_end - line_start), m_style.font->size())
-		 <= m_wrapwidth - safety_margin) {
+	if (text_width(text.substr(line_start, orig_end - line_start), style_.font->size())
+		 <= wrapwidth_ - safety_margin) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -191,18 +191,18 @@ void WordWrap::compute_end_of_line
 
 	// The line didn't fit.
 	// We just do a linear search ahead until we hit the max.
-	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str());
+	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str(), "UTF-8");
 	uint32_t line_width = 0;
 	int32_t end = -1;
 	icu::UnicodeString unicode_line;
 
-	while ((line_width < (m_wrapwidth - safety_margin)) && (end < unicode_word.length())) {
+	while ((line_width < (wrapwidth_ - safety_margin)) && (end < unicode_word.length())) {
 		++end;
 		UChar c = unicode_word.charAt(end);
 		// Diacritics do not add to the line width
 		if (!i18n::is_diacritic(c)) {
 			// This only estimates the width
-			line_width += m_style.calc_width_for_wrapping(c);
+			line_width += style_.calc_width_for_wrapping(c);
 		}
 		unicode_line += c;
 	}
@@ -210,7 +210,7 @@ void WordWrap::compute_end_of_line
 	// Now make sure that it really fits.
 	std::string::size_type test_cutoff = line_start + end * 2 / 3;
 	while ((end > 0) && (static_cast<uint32_t>(line_start + end) > test_cutoff)) {
-		if (text_width(text.substr(line_start, end), m_style.font->size()) > m_wrapwidth - safety_margin) {
+		if (text_width(text.substr(line_start, end), style_.font->size()) > wrapwidth_ - safety_margin) {
 			--end;
 		} else {
 			break;
@@ -241,9 +241,9 @@ void WordWrap::compute_end_of_line
 bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const {
 	// calc_width_for_wrapping is fast, but it will underestimate the width.
 	// So, we test again with text_width to make sure that the line really fits.
-	return m_style.calc_width_for_wrapping(i18n::make_ligatures(text.c_str()))
-			<= m_wrapwidth - safety_margin &&
-			text_width(text, m_style.font->size()) <= m_wrapwidth - safety_margin;
+	return style_.calc_width_for_wrapping(i18n::make_ligatures(text.c_str()))
+			<= wrapwidth_ - safety_margin &&
+			text_width(text, style_.font->size()) <= wrapwidth_ - safety_margin;
 }
 
 
@@ -256,8 +256,8 @@ uint32_t WordWrap::width() const
 {
 	uint32_t calculated_width = 0;
 
-	for (uint32_t line = 0; line < m_lines.size(); ++line) {
-		uint32_t linewidth = text_width(m_lines[line].text, m_style.font->size());
+	for (uint32_t line = 0; line < lines_.size(); ++line) {
+		uint32_t linewidth = text_width(lines_[line].text, style_.font->size());
 		if (linewidth > calculated_width)
 			calculated_width = linewidth;
 	}
@@ -271,11 +271,11 @@ uint32_t WordWrap::width() const
 uint32_t WordWrap::height() const
 {
 	uint16_t fontheight = 0;
-	if (!m_lines.empty()) {
-		fontheight = text_height(m_lines[0].text, m_style.font->size());
+	if (!lines_.empty()) {
+		fontheight = text_height(lines_[0].text, style_.font->size());
 	}
 
-	return fontheight * (m_lines.size()) + 2 * LINE_MARGIN;
+	return fontheight * (lines_.size()) + 2 * LINE_MARGIN;
 }
 
 /**
@@ -284,25 +284,25 @@ uint32_t WordWrap::height() const
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const
 {
-	assert(m_lines.size());
-	assert(m_lines[0].start == 0);
+	assert(lines_.size());
+	assert(lines_[0].start == 0);
 
 	uint32_t min = 0;
-	uint32_t max = m_lines.size() - 1;
+	uint32_t max = lines_.size() - 1;
 
 	while (max > min) {
 		uint32_t mid = min + (max - min + 1) / 2;
 
-		if (caret >= m_lines[mid].start)
+		if (caret >= lines_[mid].start)
 			min = mid;
 		else
 			max = mid - 1;
 	}
 
-	assert(caret >= m_lines[min].start);
+	assert(caret >= lines_[min].start);
 
 	line = min;
-	pos = caret - m_lines[min].start;
+	pos = caret - lines_[min].start;
 }
 
 /**
@@ -310,7 +310,7 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos)
  */
 uint32_t WordWrap::line_offset(uint32_t line) const
 {
-	return m_lines[line].start;
+	return lines_[line].start;
 }
 
 /**
@@ -320,7 +320,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
-	if (m_lines.empty()) return;
+	if (lines_.empty()) return;
 
 	uint32_t caretline, caretpos;
 
@@ -339,28 +339,28 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	Align alignment = mirror_alignment(align);
 
-	uint16_t fontheight = text_height(m_lines[0].text, m_style.font->size());
-	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight) {
+	uint16_t fontheight = text_height(lines_[0].text, style_.font->size());
+	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
 		Point point(where.x, where.y);
 
 		if (static_cast<int>(alignment & UI::Align::kRight)) {
-			point.x += m_wrapwidth - LINE_MARGIN;
+			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 
 		const Image* entry_text_im =
-				UI::g_fh1->render(as_editorfont(m_lines[line].text,
-														  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-														  m_style.fg));
+				UI::g_fh1->render(as_editorfont(lines_[line].text,
+														  style_.font->size() - UI::g_fh1->fontset()->size_offset(),
+														  style_.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 
-		if (m_draw_caret && line == caretline) {
-			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
+		if (draw_caret_ && line == caretline) {
+			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-			int caret_x = text_width(line_to_caret, m_style.font->size());
+			int caret_x = text_width(line_to_caret, style_.font->size());
 
 			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 			Point caretpt;

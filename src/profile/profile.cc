@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,17 +77,17 @@ static char const * falseWords[FALSE_WORDS] =
 Profile g_options(Profile::err_log);
 
 Section::Value::Value(const string & nname, const char * const nval) :
-	m_used(false),
-	m_name(nname)
+	used_(false),
+	name_(nname)
 {
 	set_string(nval);
 }
 
 Section::Value::Value(const Section::Value & o) :
-	m_used(o.m_used),
-	m_name(o.m_name)
+	used_(o.used_),
+	name_(o.name_)
 {
-	set_string(o.m_value.get());
+	set_string(o.value_.get());
 }
 
 Section::Value::Value(Section::Value && o)
@@ -113,18 +113,18 @@ Section::Value & Section::Value::operator= (Section::Value && other)
 
 bool Section::Value::is_used() const
 {
-	return m_used;
+	return used_;
 }
 
 void Section::Value::mark_used()
 {
-	m_used = true;
+	used_ = true;
 }
 
 int32_t Section::Value::get_int() const
 {
 	char * endp;
-	long int const i = strtol(m_value.get(), &endp, 0);
+	long int const i = strtol(value_.get(), &endp, 0);
 	if (*endp)
 		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	int32_t const result = i;
@@ -138,7 +138,7 @@ int32_t Section::Value::get_int() const
 uint32_t Section::Value::get_natural() const
 {
 	char * endp;
-	long long int i = strtoll(m_value.get(), &endp, 0);
+	long long int i = strtoll(value_.get(), &endp, 0);
 	if (*endp || i < 0)
 		throw wexception("%s: '%s' is not natural", get_name(), get_string());
 	return i;
@@ -148,7 +148,7 @@ uint32_t Section::Value::get_natural() const
 uint32_t Section::Value::get_positive() const
 {
 	char * endp;
-	long long int i = strtoll(m_value.get(), &endp, 0);
+	long long int i = strtoll(value_.get(), &endp, 0);
 	if (*endp || i < 1)
 		throw wexception("%s: '%s' is not positive", get_name(), get_string());
 	return i;
@@ -158,10 +158,10 @@ uint32_t Section::Value::get_positive() const
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
-		if (boost::iequals(m_value.get(), trueWords[i]))
+		if (boost::iequals(value_.get(), trueWords[i]))
 			return true;
 	for (int32_t i = 0; i < FALSE_WORDS; ++i)
-		if (boost::iequals(m_value.get(), falseWords[i]))
+		if (boost::iequals(value_.get(), falseWords[i]))
 			return false;
 
 	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
@@ -170,7 +170,7 @@ bool Section::Value::get_bool() const
 
 Point Section::Value::get_point() const
 {
-	char * endp = m_value.get();
+	char * endp = value_.get();
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 	if (*endp)
@@ -184,17 +184,17 @@ void Section::Value::set_string(char const * const value)
 	using std::copy;
 
 	const auto len = strlen(value) + 1;
-	m_value.reset(new char[len]);
-	copy(value, value + len, m_value.get());
+	value_.reset(new char[len]);
+	copy(value, value + len, value_.get());
 }
 
 void swap(Section::Value & first, Section::Value & second)
 {
 	using std::swap;
 
-	swap(first.m_name,  second.m_name);
-	swap(first.m_value, second.m_value);
-	swap(first.m_used,  second.m_used);
+	swap(first.name_,  second.name_);
+	swap(first.value_, second.value_);
+	swap(first.used_,  second.used_);
 }
 
 
@@ -207,21 +207,21 @@ Section
 */
 
 char const * Section::get_name() const {
-	return m_section_name.c_str();
+	return section_name_.c_str();
 }
 void Section::set_name(const std::string& name) {
-	m_section_name = name;
+	section_name_ = name;
 }
 
 Section::Section(Profile * const prof, const std::string & name) :
-m_profile(prof), m_used(false), m_section_name(name) {}
+profile_(prof), used_(false), section_name_(name) {}
 
 /** Section::is_used()
  *
  */
 bool Section::is_used() const
 {
-	return m_used;
+	return used_;
 }
 
 /** Section::mark_used()
@@ -229,7 +229,7 @@ bool Section::is_used() const
  */
 void Section::mark_used()
 {
-	m_used = true;
+	used_ = true;
 }
 
 /** Section::check_used()
@@ -238,9 +238,9 @@ void Section::mark_used()
  */
 void Section::check_used() const
 {
-	for (const Value& temp_value : m_values) {
+	for (const Value& temp_value : values_) {
 		if (!temp_value.is_used()) {
-			m_profile->error
+			profile_->error
 				("Section [%s], key '%s' not used (did you spell the name "
 				 "correctly?)",
 				 get_name(), temp_value.get_name());
@@ -251,7 +251,7 @@ void Section::check_used() const
 
 bool Section::has_val(char const * const name) const
 {
-	for (const Value& temp_value : m_values) {
+	for (const Value& temp_value : values_) {
 		if (boost::iequals(temp_value.get_name(), name)) {
 			return true;
 		}
@@ -268,7 +268,7 @@ bool Section::has_val(char const * const name) const
  */
 Section::Value * Section::get_val(char const * const name)
 {
-	for (Value& value : m_values) {
+	for (Value& value : values_) {
 		if (boost::iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
@@ -286,7 +286,7 @@ Section::Value * Section::get_val(char const * const name)
  */
 Section::Value * Section::get_next_val(char const * const name)
 {
-	for (Value& value : m_values) {
+	for (Value& value : values_) {
 		if (!value.is_used()) {
 			if (!name || boost::iequals(value.get_name(), name)) {
 				value.mark_used();
@@ -300,7 +300,7 @@ Section::Value * Section::get_next_val(char const * const name)
 Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
-	for (Value& temp_value : m_values) {
+	for (Value& temp_value : values_) {
 		if (boost::iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
@@ -312,8 +312,8 @@ Section::Value & Section::create_val
 Section::Value & Section::create_val_duplicate
 	(char const * const name, char const * const value)
 {
-	m_values.emplace_back(name, value);
-	return m_values.back();
+	values_.emplace_back(name, value);
+	return values_.back();
 }
 
 /**
@@ -400,7 +400,7 @@ int32_t Section::get_int(char const * const name, int32_t const def)
 	try {
 		return v->get_int();
 	} catch (const std::exception & e) {
-		m_profile->error("%s", e.what());
+		profile_->error("%s", e.what());
 	}
 
 	return def;
@@ -413,7 +413,7 @@ uint32_t Section::get_natural(char const * const name, uint32_t const def)
 		try {
 			return v->get_natural();
 		} catch (const std::exception & e) {
-			m_profile->error("%s", e.what());
+			profile_->error("%s", e.what());
 			return def;
 		}
 	else
@@ -428,7 +428,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
 		try {
 			return v->get_positive();
 		} catch (const std::exception & e) {
-			m_profile->error("%s", e.what());
+			profile_->error("%s", e.what());
 			return def;
 		}
 	}
@@ -455,7 +455,7 @@ bool Section::get_bool(char const * const name, bool const def)
 	try {
 		return v->get_bool();
 	} catch (const std::exception & e) {
-		m_profile->error("%s", e.what());
+		profile_->error("%s", e.what());
 	}
 
 	return def;
@@ -540,7 +540,7 @@ Profile
  */
 Profile::Profile(int32_t error_level)
 {
-	m_error_level = error_level;
+	error_level_ = error_level;
 }
 
 /**
@@ -553,7 +553,7 @@ Profile::Profile
 	(char const * const filename,
 	 char const * const global_section,
 	 int32_t      const error_level)
-	: m_filename(filename), m_error_level(error_level)
+	: filename_(filename), error_level_(error_level)
 {
 	read(filename, global_section);
 }
@@ -563,7 +563,7 @@ Profile::Profile
 	 char const * const global_section,
 	 const std::string & textdomain,
 	 int32_t      const error_level)
-	: m_filename(filename), m_error_level(error_level)
+	: filename_(filename), error_level_(error_level)
 {
 	i18n::Textdomain td(textdomain);
 	read(filename, global_section);
@@ -576,7 +576,7 @@ Profile::Profile
  */
 void Profile::error(char const * const fmt, ...) const
 {
-	if (m_error_level == err_ignore)
+	if (error_level_ == err_ignore)
 		return;
 
 	char buffer[256];
@@ -586,10 +586,10 @@ void Profile::error(char const * const fmt, ...) const
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_error_level == err_log)
-		log("[%s] %s\n", m_filename.c_str(), buffer);
+	if (error_level_ == err_log)
+		log("[%s] %s\n", filename_.c_str(), buffer);
 	else
-		throw wexception("[%s] %s", m_filename.c_str(), buffer);
+		throw wexception("[%s] %s", filename_.c_str(), buffer);
 }
 
 /** Profile::check_used()
@@ -598,7 +598,7 @@ void Profile::error(char const * const fmt, ...) const
  */
 void Profile::check_used() const
 {
-	for (const Section& temp_section : m_sections) {
+	for (const Section& temp_section : sections_) {
 		if (!temp_section.is_used()) {
 			error
 				("Section [%s] not used (did you spell the name correctly?)",
@@ -619,7 +619,7 @@ void Profile::check_used() const
  */
 Section * Profile::get_section(const std::string & name)
 {
-	for (Section& temp_section : m_sections) {
+	for (Section& temp_section : sections_) {
 		if (boost::iequals(temp_section.get_name(), name.c_str())) {
 			temp_section.mark_used();
 			return &temp_section;
@@ -638,7 +638,7 @@ Section & Profile::get_safe_section(const std::string & name)
 		return *s;
 	else
 		throw wexception
-			("in \"%s\" section [%s] not found", m_filename.c_str(), name.c_str());
+			("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());
 }
 
 /**
@@ -662,7 +662,7 @@ Section & Profile::pull_section(char const * const name)
  */
 Section * Profile::get_next_section(char const * const name)
 {
-	for (Section& section : m_sections) {
+	for (Section& section : sections_) {
 		if (!section.is_used()) {
 			if (!name || boost::iequals(section.get_name(), name)) {
 				section.mark_used();
@@ -676,7 +676,7 @@ Section * Profile::get_next_section(char const * const name)
 
 Section & Profile::create_section          (char const * const name)
 {
-	for (Section& section : m_sections) {
+	for (Section& section : sections_) {
 		if (boost::iequals(section.get_name(), name)) {
 			return section;
 		}
@@ -687,8 +687,8 @@ Section & Profile::create_section          (char const * const name)
 
 Section & Profile::create_section_duplicate(char const * const name)
 {
-	m_sections.push_back(Section(this, name));
-	return m_sections.back();
+	sections_.push_back(Section(this, name));
+	return sections_.back();
 }
 
 
@@ -849,8 +849,8 @@ void Profile::read
 		}
 	}
 	catch (const FileNotFoundError &) {
-		//It's no problem if the config file does not exist. (It'll get
-		//written on exit anyway)
+		// It's no problem if the config file does not exist. (It'll get
+		// written on exit anyway)
 		log("There's no configuration file, using default values.\n");
 	}
 	catch (const std::exception & e) {
@@ -875,13 +875,13 @@ void Profile::write
 		("# Automatically created by Widelands %s (%s)\n",
 		 build_id().c_str(), build_type().c_str());
 
-	for (const Section& temp_section : m_sections) {
+	for (const Section& temp_section : sections_) {
 		if (used_only && !temp_section.is_used())
 			continue;
 
 		fw.print_f("\n[%s]\n", temp_section.get_name());
 
-		for (const Section::Value& temp_value : temp_section.m_values) {
+		for (const Section::Value& temp_value : temp_section.values_) {
 			if (used_only && !temp_value.is_used())
 				continue;
 

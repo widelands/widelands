@@ -20,7 +20,7 @@
 #ifndef WL_WLAPPLICATION_H
 #define WL_WLAPPLICATION_H
 
-//Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
+// Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
 #ifndef _WIN64
 #define _USE_32BIT_TIME_T 1
@@ -135,7 +135,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK};
 
 	void run();
 
@@ -146,7 +146,7 @@ struct WLApplication {
 	/// \warning This function doesn't check for dumbness
 	bool get_key_state(SDL_Scancode const key) const {return SDL_GetKeyboardState(nullptr)[key];}
 
-	//@{
+	// @{
 	void warp_mouse(Point);
 	void set_input_grab(bool grab);
 
@@ -161,7 +161,7 @@ struct WLApplication {
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(const bool locked) {mouse_locked_ = locked;}
-	//@}
+	// @}
 
 
 	// Refresh the graphics settings with the latest options.
@@ -217,7 +217,7 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
-	//Log all output to this file if set, otherwise use cout
+	// Log all output to this file if set, otherwise use cout
 	std::string logfile_;
 
 	GameType game_type_;
@@ -252,12 +252,12 @@ private:
 	std::string datadir_;
 	std::string datadir_for_testing_;
 
-	///Holds this process' one and only instance of WLApplication, if it was
-	///created already. nullptr otherwise.
-	///\note This is private on purpose. Read the class documentation.
+	/// Holds this process' one and only instance of WLApplication, if it was
+	/// created already. nullptr otherwise.
+	/// \note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
 
-	void _handle_mousebutton(SDL_Event &, InputCallback const *);
+	void handle_mousebutton(SDL_Event &, InputCallback const *);
 };
 
 #endif  // end of include guard: WL_WLAPPLICATION_H

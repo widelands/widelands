@@ -94,7 +94,7 @@ enum {
 /*** class PlayerCommand ***/
 
 PlayerCommand::PlayerCommand (const uint32_t time, const PlayerNumber s)
-	: GameLogicCommand (time), m_sender(s), m_cmdserial(0)
+	: GameLogicCommand (time), sender_(s), cmdserial_(0)
 {}
 
 PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
@@ -159,10 +159,10 @@ void PlayerCommand::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
-			m_sender    = fr.unsigned_8 ();
-			if (!egbase.get_player(m_sender))
-				throw GameDataError("player %u does not exist", m_sender);
-			m_cmdserial = fr.unsigned_32();
+			sender_    = fr.unsigned_8 ();
+			if (!egbase.get_player(sender_))
+				throw GameDataError("player %u does not exist", sender_);
+			cmdserial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("PlayerCommand", packet_version, kCurrentPacketVersionPlayerCommand);
 		}
@@ -814,11 +814,11 @@ void CmdShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE ||
-			ship->get_ship_state() == Widelands::Ship::EXP_SCOUTING)) {
+		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
 			log (" %1d:ship on %3dx%3d received scout command but not in "
-				"EXP_WAITING or PORTSPACE_FOUND or EXP_SCOUTING status "
+				"kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting status "
 				"(expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,
@@ -886,9 +886,9 @@ void CmdShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (ship->get_ship_state() != Widelands::Ship::EXP_FOUNDPORTSPACE) {
+		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			log (" %1d:ship on %3dx%3d received build port command but "
-			"not in PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+			"not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,
 				ship->get_position().y,
@@ -955,11 +955,11 @@ void CmdShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE ||
-			ship->get_ship_state() == Widelands::Ship::EXP_SCOUTING)) {
+		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
 			log (" %1d:ship on %3dx%3d received explore island command "
-			"but not in EXP_WAITING or PORTSPACE_FOUND or EXP_SCOUTING "
+			"but not in kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting "
 			"status (expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,
@@ -1122,27 +1122,27 @@ void CmdShipCancelExpedition::write
 
 /*** class Cmd_SetWarePriority ***/
 CmdSetWarePriority::CmdSetWarePriority
-	(const uint32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
 	 PlayerImmovable & imm,
-	 const int32_t type, const DescriptionIndex index, const int32_t priority)
+	 const int32_t init_type, const DescriptionIndex i, const int32_t init_priority)
 	:
-	PlayerCommand(_duetime, _sender),
-	m_serial     (imm.serial()),
-	m_type       (type),
-	m_index      (index),
-	m_priority   (priority)
+	PlayerCommand(init_duetime, init_sender),
+	serial_     (imm.serial()),
+	type_       (init_type),
+	index_      (i),
+	priority_   (init_priority)
 {}
 
 void CmdSetWarePriority::execute(Game & game)
 {
-	upcast(Building, psite, game.objects().get_object(m_serial));
+	upcast(Building, psite, game.objects().get_object(serial_));
 
 	if (!psite)
 		return;
 	if (psite->owner().player_number() != sender())
 		return;
 
-	psite->set_priority(m_type, m_index, m_priority);
+	psite->set_priority(type_, index_, priority_);
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 1;
@@ -1154,10 +1154,10 @@ void CmdSetWarePriority::write
 
 	PlayerCommand::write(fw, egbase, mos);
 
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(m_serial)));
-	fw.unsigned_8(m_type);
-	fw.signed_32(m_index);
-	fw.signed_32(m_priority);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(type_);
+	fw.signed_32(index_);
+	fw.signed_32(priority_);
 }
 
 void CmdSetWarePriority::read
@@ -1167,10 +1167,10 @@ void CmdSetWarePriority::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
-			m_serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			m_type = fr.unsigned_8();
-			m_index = fr.signed_32();
-			m_priority = fr.signed_32();
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			type_ = fr.unsigned_8();
+			index_ = fr.signed_32();
+			priority_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError("CmdSetWarePriority",
 												 packet_version, kCurrentPacketVersionCmdSetWarePriority);
@@ -1183,44 +1183,44 @@ void CmdSetWarePriority::read
 
 CmdSetWarePriority::CmdSetWarePriority(StreamRead & des) :
 	PlayerCommand(0, des.unsigned_8()),
-	m_serial     (des.unsigned_32()),
-	m_type       (des.unsigned_8()),
-	m_index      (des.signed_32()),
-	m_priority   (des.signed_32())
+	serial_     (des.unsigned_32()),
+	type_       (des.unsigned_8()),
+	index_      (des.signed_32()),
+	priority_   (des.signed_32())
 {}
 
 void CmdSetWarePriority::serialize(StreamWrite & ser)
 {
 	ser.unsigned_8(PLCMD_SETWAREPRIORITY);
 	ser.unsigned_8(sender());
-	ser.unsigned_32(m_serial);
-	ser.unsigned_8(m_type);
-	ser.signed_32(m_index);
-	ser.signed_32(m_priority);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(type_);
+	ser.signed_32(index_);
+	ser.signed_32(priority_);
 }
 
 /*** class Cmd_SetWareMaxFill ***/
 CmdSetWareMaxFill::CmdSetWareMaxFill
-	(const uint32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
 	 PlayerImmovable & imm,
 	 const DescriptionIndex index, const uint32_t max_fill)
 	:
-	PlayerCommand(_duetime, _sender),
-	m_serial     (imm.serial()),
-	m_index      (index),
-	m_max_fill   (max_fill)
+	PlayerCommand(init_duetime, init_sender),
+	serial_     (imm.serial()),
+	index_      (index),
+	max_fill_   (max_fill)
 {}
 
 void CmdSetWareMaxFill::execute(Game & game)
 {
-	upcast(Building, b, game.objects().get_object(m_serial));
+	upcast(Building, b, game.objects().get_object(serial_));
 
 	if (!b)
 		return;
 	if (b->owner().player_number() != sender())
 		return;
 
-	b->waresqueue(m_index).set_max_fill(m_max_fill);
+	b->waresqueue(index_).set_max_fill(max_fill_);
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdSetWareMaxFill = 1;
@@ -1232,9 +1232,9 @@ void CmdSetWareMaxFill::write
 
 	PlayerCommand::write(fw, egbase, mos);
 
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(m_serial)));
-	fw.signed_32(m_index);
-	fw.unsigned_32(m_max_fill);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.signed_32(index_);
+	fw.unsigned_32(max_fill_);
 }
 
 void CmdSetWareMaxFill::read
@@ -1244,9 +1244,9 @@ void CmdSetWareMaxFill::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdSetWareMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
-			m_serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			m_index = fr.signed_32();
-			m_max_fill = fr.unsigned_32();
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			index_ = fr.signed_32();
+			max_fill_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdSetWareMaxFill",
 												 packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
@@ -1258,27 +1258,27 @@ void CmdSetWareMaxFill::read
 
 CmdSetWareMaxFill::CmdSetWareMaxFill(StreamRead & des) :
 	PlayerCommand(0, des.unsigned_8()),
-	m_serial     (des.unsigned_32()),
-	m_index      (des.signed_32()),
-	m_max_fill(des.unsigned_32())
+	serial_     (des.unsigned_32()),
+	index_      (des.signed_32()),
+	max_fill_(des.unsigned_32())
 {}
 
 void CmdSetWareMaxFill::serialize(StreamWrite & ser)
 {
 	ser.unsigned_8(PLCMD_SETWAREMAXFILL);
 	ser.unsigned_8(sender());
-	ser.unsigned_32(m_serial);
-	ser.signed_32(m_index);
-	ser.unsigned_32(m_max_fill);
+	ser.unsigned_32(serial_);
+	ser.signed_32(index_);
+	ser.unsigned_32(max_fill_);
 }
 
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy, const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy, const DescriptionIndex init_ware_type)
 	:
-	PlayerCommand(_duetime, _sender),
-	m_economy (_economy), m_ware_type(_ware_type)
+	PlayerCommand(init_duetime, init_sender),
+	economy_(init_economy), ware_type_(init_ware_type)
 {}
 
 void CmdChangeTargetQuantity::write
@@ -1295,8 +1295,8 @@ void CmdChangeTargetQuantity::read
 {
 	try {
 		PlayerCommand::read(fr, egbase, mol);
-		m_economy   = fr.unsigned_32();
-		m_ware_type =
+		economy_   = fr.unsigned_32();
+		ware_type_ =
 			egbase.player(sender()).tribe().ware_index(fr.c_string());
 	} catch (const WException & e) {
 		throw GameDataError("change target quantity: %s", e.what());
@@ -1306,8 +1306,8 @@ void CmdChangeTargetQuantity::read
 CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead & des)
 	:
 	PlayerCommand(0, des.unsigned_8()),
-	m_economy    (des.unsigned_32()),
-	m_ware_type  (des.unsigned_8())
+	economy_    (des.unsigned_32()),
+	ware_type_  (des.unsigned_8())
 {}
 
 void CmdChangeTargetQuantity::serialize(StreamWrite & ser)
@@ -1319,13 +1319,13 @@ void CmdChangeTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type,
-	 const uint32_t _permanent)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type,
+	 const uint32_t init_permanent)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_permanent(_permanent)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type),
+	permanent_(init_permanent)
 {}
 
 void CmdSetWareTargetQuantity::execute(Game & game)
@@ -1333,7 +1333,7 @@ void CmdSetWareTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(), m_permanent, duetime());
+			(ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1344,7 +1344,7 @@ void CmdSetWareTargetQuantity::write
 {
 	fw.unsigned_16(kCurrentPacketVersionSetWareTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
-	fw.unsigned_32(m_permanent);
+	fw.unsigned_32(permanent_);
 }
 
 void CmdSetWareTargetQuantity::read
@@ -1354,7 +1354,7 @@ void CmdSetWareTargetQuantity::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSetWareTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
-			m_permanent = fr.unsigned_32();
+			permanent_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdSetWareTargetQuantity",
 												 packet_version, kCurrentPacketVersionSetWareTargetQuantity);
@@ -1367,7 +1367,7 @@ void CmdSetWareTargetQuantity::read
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead & des)
 	:
 	CmdChangeTargetQuantity(des),
-	m_permanent             (des.unsigned_32())
+	permanent_             (des.unsigned_32())
 {
 	if (cmdserial() == 1) des.unsigned_32();
 }
@@ -1376,16 +1376,16 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite & ser)
 {
 	ser.unsigned_8 (PLCMD_SETWARETARGETQUANTITY);
 	CmdChangeTargetQuantity::serialize(ser);
-	ser.unsigned_32(m_permanent);
+	ser.unsigned_32(permanent_);
 }
 
 
 CmdResetWareTargetQuantity::CmdResetWareTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type)
 {}
 
 void CmdResetWareTargetQuantity::execute(Game & game)
@@ -1437,13 +1437,13 @@ void CmdResetWareTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type,
-	 const uint32_t _permanent)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type,
+	 const uint32_t init_permanent)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_permanent(_permanent)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type),
+	permanent_(init_permanent)
 {}
 
 void CmdSetWorkerTargetQuantity::execute(Game & game)
@@ -1451,7 +1451,7 @@ void CmdSetWorkerTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity
-			(ware_type(),  m_permanent, duetime());
+			(ware_type(),  permanent_, duetime());
 	}
 }
 
@@ -1462,7 +1462,7 @@ void CmdSetWorkerTargetQuantity::write
 {
 	fw.unsigned_16(kCurrentPacketVersionSetWorkerTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
-	fw.unsigned_32(m_permanent);
+	fw.unsigned_32(permanent_);
 }
 
 void CmdSetWorkerTargetQuantity::read
@@ -1472,7 +1472,7 @@ void CmdSetWorkerTargetQuantity::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSetWorkerTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
-			m_permanent = fr.unsigned_32();
+			permanent_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdSetWorkerTargetQuantity",
 												 packet_version, kCurrentPacketVersionSetWorkerTargetQuantity);
@@ -1485,7 +1485,7 @@ void CmdSetWorkerTargetQuantity::read
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead & des)
 	:
 	CmdChangeTargetQuantity(des),
-	m_permanent             (des.unsigned_32())
+	permanent_             (des.unsigned_32())
 {
 	if (cmdserial() == 1) des.unsigned_32();
 }
@@ -1494,16 +1494,16 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite & ser)
 {
 	ser.unsigned_8 (PLCMD_SETWORKERTARGETQUANTITY);
 	CmdChangeTargetQuantity::serialize(ser);
-	ser.unsigned_32(m_permanent);
+	ser.unsigned_32(permanent_);
 }
 
 
 CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type)
 {}
 
 void CmdResetWorkerTargetQuantity::execute(Game & game)
@@ -1560,26 +1560,25 @@ CmdChangeTrainingOptions::CmdChangeTrainingOptions(StreamRead & des)
 PlayerCommand (0, des.unsigned_8())
 {
 	serial    = des.unsigned_32();  //  Serial of the building
-	attribute = des.unsigned_16();  //  Attribute to modify
+	attribute = static_cast<TrainingAttribute>(des.unsigned_8());  //  Attribute to modify
 	value     = des.unsigned_16();  //  New vale
 }
 
 void CmdChangeTrainingOptions::execute (Game & game)
 {
 	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial)))
-		game.player(sender()).change_training_options
-			(*trainingsite, attribute, value);
+		game.player(sender()).change_training_options(*trainingsite, attribute, value);
 }
 
 void CmdChangeTrainingOptions::serialize (StreamWrite & ser) {
 	ser.unsigned_8 (PLCMD_CHANGETRAININGOPTIONS);
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_16(attribute);
+	ser.unsigned_8(static_cast<uint8_t>(attribute));
 	ser.unsigned_16(value);
 }
 
-constexpr uint16_t kCurrentPacketVersionChangeTrainingOptions = 1;
+constexpr uint16_t kCurrentPacketVersionChangeTrainingOptions = 2;
 
 void CmdChangeTrainingOptions::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
@@ -1589,7 +1588,7 @@ void CmdChangeTrainingOptions::read
 		if (packet_version == kCurrentPacketVersionChangeTrainingOptions) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<TrainingSite>(fr.unsigned_32(), mol);
-			attribute = fr.unsigned_16();
+			attribute = static_cast<TrainingAttribute>(fr.unsigned_8());
 			value     = fr.unsigned_16();
 		} else {
 			throw UnhandledVersionError("CmdChangeTrainingOptions",
@@ -1611,7 +1610,7 @@ void CmdChangeTrainingOptions::write
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
-	fw.unsigned_16(attribute);
+	fw.unsigned_8(static_cast<uint8_t>(attribute));
 	fw.unsigned_16(value);
 }
 
@@ -1827,7 +1826,7 @@ void CmdEnemyFlagAction::write
 /*** struct PlayerMessageCommand ***/
 
 PlayerMessageCommand::PlayerMessageCommand(StreamRead & des) :
-PlayerCommand (0, des.unsigned_8()), m_message_id(des.unsigned_32())
+PlayerCommand (0, des.unsigned_8()), message_id_(des.unsigned_32())
 {}
 
 constexpr uint16_t kCurrentPacketVersionPlayerMessageCommand = 1;
@@ -1839,8 +1838,8 @@ void PlayerMessageCommand::read
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
-			m_message_id = MessageId(fr.unsigned_32());
-			if (!m_message_id)
+			message_id_ = MessageId(fr.unsigned_32());
+			if (!message_id_)
 				throw GameDataError
 					("(player %u): message id is null", sender());
 		} else {
@@ -1899,14 +1898,14 @@ CmdSetStockPolicy::CmdSetStockPolicy
 	 Warehouse::StockPolicy policy)
 : PlayerCommand(time, p)
 {
-	m_warehouse = wh.serial();
-	m_isworker = isworker;
-	m_ware = ware;
-	m_policy = policy;
+	warehouse_ = wh.serial();
+	isworker_ = isworker;
+	ware_ = ware;
+	policy_ = policy;
 }
 
 CmdSetStockPolicy::CmdSetStockPolicy()
-: PlayerCommand(), m_warehouse(0), m_isworker(false), m_policy()
+: PlayerCommand(), warehouse_(0), isworker_(false), policy_()
 {
 }
 
@@ -1914,7 +1913,7 @@ void CmdSetStockPolicy::execute(Game & game)
 {
 	// Sanitize data that could have come from the network
 	if (Player * plr = game.get_player(sender())) {
-		if (upcast(Warehouse, warehouse, game.objects().get_object(m_warehouse)))
+		if (upcast(Warehouse, warehouse, game.objects().get_object(warehouse_)))
 		{
 			if (&warehouse->owner() != plr) {
 				log
@@ -1923,7 +1922,7 @@ void CmdSetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			switch (m_policy) {
+			switch (policy_) {
 			case Warehouse::SP_Normal:
 			case Warehouse::SP_Prefer:
 			case Warehouse::SP_DontStock:
@@ -1931,22 +1930,22 @@ void CmdSetStockPolicy::execute(Game & game)
 				break;
 			}
 
-			if (m_isworker) {
-				if (!(game.tribes().worker_exists(m_ware))) {
+			if (isworker_) {
+				if (!(game.tribes().worker_exists(ware_))) {
 					log
 						("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n",
-						 sender(), m_ware);
+						 sender(), ware_);
 					return;
 				}
-				warehouse->set_worker_policy(m_ware, m_policy);
+				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.tribes().ware_exists(m_ware))) {
+				if (!(game.tribes().ware_exists(ware_))) {
 					log
 						("Cmd_SetStockPolicy: sender %u, ware %u does not exist\n",
-						 sender(), m_ware);
+						 sender(), ware_);
 					return;
 				}
-				warehouse->set_ware_policy(m_ware, m_policy);
+				warehouse->set_ware_policy(ware_, policy_);
 			}
 		}
 	}
@@ -1955,20 +1954,20 @@ void CmdSetStockPolicy::execute(Game & game)
 CmdSetStockPolicy::CmdSetStockPolicy(StreamRead & des)
 	: PlayerCommand(0, des.unsigned_8())
 {
-	m_warehouse = des.unsigned_32();
-	m_isworker = des.unsigned_8();
-	m_ware = DescriptionIndex(des.unsigned_8());
-	m_policy = static_cast<Warehouse::StockPolicy>(des.unsigned_8());
+	warehouse_ = des.unsigned_32();
+	isworker_ = des.unsigned_8();
+	ware_ = DescriptionIndex(des.unsigned_8());
+	policy_ = static_cast<Warehouse::StockPolicy>(des.unsigned_8());
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite & ser)
 {
 	ser.unsigned_8(PLCMD_SETSTOCKPOLICY);
 	ser.unsigned_8(sender());
-	ser.unsigned_32(m_warehouse);
-	ser.unsigned_8(m_isworker);
-	ser.unsigned_8(m_ware);
-	ser.unsigned_8(m_policy);
+	ser.unsigned_32(warehouse_);
+	ser.unsigned_8(isworker_);
+	ser.unsigned_8(ware_);
+	ser.unsigned_8(policy_);
 }
 
 constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
@@ -1980,10 +1979,10 @@ void CmdSetStockPolicy::read
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionCmdSetStockPolicy) {
 			PlayerCommand::read(fr, egbase, mol);
-			m_warehouse = fr.unsigned_32();
-			m_isworker = fr.unsigned_8();
-			m_ware = DescriptionIndex(fr.unsigned_8());
-			m_policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+			warehouse_ = fr.unsigned_32();
+			isworker_ = fr.unsigned_8();
+			ware_ = DescriptionIndex(fr.unsigned_8());
+			policy_ = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError("CmdSetStockPolicy",
 												 packet_version, kCurrentPacketVersionCmdSetStockPolicy);
@@ -1998,10 +1997,10 @@ void CmdSetStockPolicy::write
 {
 	fw.unsigned_8(kCurrentPacketVersionCmdSetStockPolicy);
 	PlayerCommand::write(fw, egbase, mos);
-	fw.unsigned_32(m_warehouse);
-	fw.unsigned_8(m_isworker);
-	fw.unsigned_8(m_ware);
-	fw.unsigned_8(m_policy);
+	fw.unsigned_32(warehouse_);
+	fw.unsigned_8(isworker_);
+	fw.unsigned_8(ware_);
+	fw.unsigned_8(policy_);
 }
 
 }

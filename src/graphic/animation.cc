@@ -74,7 +74,7 @@ public:
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 		const override;
-	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
+	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:
@@ -96,7 +96,7 @@ private:
 	vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playFX in a program instead of
+	// TODO(sirver): this should be done using play_sound in a program instead of
 	// binding it to the animation.
 	string sound_effect_;
 	bool play_once_;
@@ -114,7 +114,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 
 			const std::string name = sound_effects->get_string("name");
 			const std::string directory = sound_effects->get_string("directory");
-			sound_effect_ = directory + "/" + name;
+			sound_effect_ = directory + g_fs->file_separator() + name;
 			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
 		}
 
@@ -251,7 +251,7 @@ uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 	return 0;
 }
 
-void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
+void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
 	if (sound_effect_.empty()) {
 		return;
 	}
@@ -299,12 +299,12 @@ DirAnimations::DirAnimations
 	 uint32_t dir5,
 	 uint32_t dir6)
 {
-	m_animations[0] = dir1;
-	m_animations[1] = dir2;
-	m_animations[2] = dir3;
-	m_animations[3] = dir4;
-	m_animations[4] = dir5;
-	m_animations[5] = dir6;
+	animations_[0] = dir1;
+	animations_[1] = dir2;
+	animations_[2] = dir3;
+	animations_[3] = dir4;
+	animations_[4] = dir5;
+	animations_[5] = dir6;
 }
 
 /*

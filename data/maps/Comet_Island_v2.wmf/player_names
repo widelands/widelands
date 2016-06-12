@@ -1,0 +1,22 @@
+# Automatically created by Widelands bzr7905[revised_maps] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Ergon"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Artorius"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_3]
+name="Armin"
+tribe="barbarians"
+ai=
+closeable="false"

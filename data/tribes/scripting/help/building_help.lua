@@ -346,10 +346,9 @@ function building_help_dependencies_production(tribe, building_description)
       local soldier = wl.Game():get_worker_description(tribe.soldier)
       for j, buildcost in ipairs(soldier.buildcost) do
          if (buildcost == ware) then
-            for k, buildingname in ipairs(tribe.buildings) do
-               local warehouse_description = wl.Game():get_building_description(buildingname)
-               if (warehouse_description.type_name == "warehouse") then
-                  outgoing = outgoing .. dependencies({ware, warehouse_description, soldier}, soldier.descname)
+            for k, building in ipairs(tribe.buildings) do
+               if (building.type_name == "warehouse") then
+                  outgoing = outgoing .. dependencies({ware, building, soldier}, soldier.descname)
                end
             end
          end
@@ -373,18 +372,18 @@ end
 --
 function building_help_dependencies_training(tribe, building_description)
    local result = ""
-   if (building_description.max_hp and building_description.min_hp) then
+   if (building_description.max_health and building_description.min_health) then
       result = result .. rt(h2(_"Health Training"))
       result = result .. rt(p(_"Trains ‘Health’ from %1% up to %2%":
-            bformat(building_description.min_hp, building_description.max_hp+1)))
+            bformat(building_description.min_health, building_description.max_health+1)))
       result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. building_description.min_health .. ".png",
             building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_hp)
-      result = result .. dependencies_training_weapons(building_description.weapons_hp)
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. (building_description.max_health + 1) ..".png"})
+      result = result .. dependencies_training_food(building_description.food_health)
+      result = result .. dependencies_training_weapons(building_description.weapons_health)
    end
    if (building_description.max_attack and building_description.min_attack) then
       result = result .. rt(h2(_"Attack Training"))
@@ -449,11 +448,11 @@ function building_help_building_section(building_description)
    elseif (building_description.is_port) then
       result = result .. text_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
    else
-      if (building_description.size == 1) then
+      if (building_description.size == "small") then
          result = result .. text_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
-      elseif (building_description.size == 2) then
+      elseif (building_description.size == "medium") then
          result = result .. text_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
-      elseif (building_description.size == 3) then
+      elseif (building_description.size == "big") then
          result = result .. text_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
       else
          result = result .. p(_"Space required:" .. _"Unknown")
@@ -662,7 +661,11 @@ function building_help_crew_string(tribe, building_description)
          end
       end
 
-      result = result .. help_tool_string(tribe, toolnames, number_of_workers)
+      if (number_of_workers > 0) then
+         local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
+         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+         result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+      end
 
       if(becomes_description) then
 
@@ -756,12 +759,15 @@ end
 
 -- The main function call
 return {
-   func = function(tribename, building)
+   func = function(tribename, buildingname)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       -- We need to get the building description again, because it will
       -- give us a cast to the appropriate subclass.
-      local building_description = wl.Game():get_building_description(building.name)
-      return building_help(tribe, building_description)
+      local building_description = wl.Game():get_building_description(buildingname)
+      return {
+         title = building_description.descname,
+         text = building_help(tribe, building_description)
+      }
    end
 }

@@ -147,10 +147,10 @@ void GameRenderer::draw(RenderTarget& dst,
 	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
-	int minfx = tl_map.x / TRIANGLE_WIDTH - 1;
-	int minfy = tl_map.y / TRIANGLE_HEIGHT - 1;
-	int maxfx = (tl_map.x + dst.get_rect().w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
-	int maxfy = (tl_map.y + dst.get_rect().h) / TRIANGLE_HEIGHT;
+	int minfx = tl_map.x / kTriangleWidth - 1;
+	int minfy = tl_map.y / kTriangleHeight - 1;
+	int maxfx = (tl_map.x + dst.get_rect().w + (kTriangleWidth / 2)) / kTriangleWidth;
+	int maxfy = (tl_map.y + dst.get_rect().h) / kTriangleHeight;
 
 	// fudge for triangle boundary effects and for height differences
 	minfx -= 1;
@@ -196,7 +196,7 @@ void GameRenderer::draw(RenderTarget& dst,
 			f.texture_y = -float(y) / kTextureSideLength;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
-			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
+			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * kHeightFactor;
 			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
 
 			f.ter_d = fcoords.field->terrain_d();
@@ -219,7 +219,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
-	i.destination_rect =
+	i.terrain_arguments.destination_rect =
 	   FloatRect(bounding_rect.x,
 	             surface_height - bounding_rect.y - bounding_rect.h,
 	             bounding_rect.w,
@@ -274,7 +274,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), pos[BL].x, pos[BL].y);
 			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), pos[BR].x, pos[BR].y);
 			for (uint32_t d = 0; d < 4; ++d) {
-				pos[d].y -= coords[d].field->get_height() * HEIGHT_FACTOR;
+				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
 				pos[d] -= view_offset;
 			}
 

@@ -37,7 +37,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 2;
+constexpr uint32_t kCurrentPacketVersion = 3;
 }  // namespace
 /*
  * ========================================================================

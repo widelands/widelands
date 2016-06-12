@@ -25,9 +25,35 @@
 
 #include <SDL_ttf.h>
 
-#include "graphic/text/rt_render.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 
 namespace RT {
+
+/**
+ * Wrapper object around a font.
+ *
+ * Fonts in our sense are defined by the general font shape (given by the font
+ * name) and the size of the font. Note that Bold and Italic are special in the
+ * regard that we expect that this is already handled by the Font File, so, the
+ * font loader directly loads DejaVuSans-Bold.ttf for example.
+ */
+class IFont {
+public:
+	enum {
+		DEFAULT = 0,
+		BOLD = 1,
+		ITALIC = 2,
+		UNDERLINE = 4,
+		SHADOW = 8,
+	};
+	virtual ~IFont() {}
+
+	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
+	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
+
+	virtual uint16_t ascent(int) const = 0;
+};
 
 // Implementation of a Font object using SDL_ttf.
 class SdlTtfFont : public IFont {
@@ -41,7 +67,7 @@ public:
 	uint16_t ascent(int) const override;
 
 private:
-	void m_set_style(int);
+	void set_style(int);
 
 	TTF_Font * font_;
 	int style_;

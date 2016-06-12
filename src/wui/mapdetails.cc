@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "wui/mapdetails.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <memory>
 
@@ -33,122 +34,155 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
+#include "wui/map_tags.h"
+
+namespace {
+std::string as_header(const std::string& txt, MapDetails::Style style, bool is_first = false) {
+	switch (style) {
+	case MapDetails::Style::kFsMenu:
+		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % (is_first ? "" : "<vspace gap=9>")
+				  % richtext_escape(txt)).str();
+	case MapDetails::Style::kWui:
+		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % (is_first ? "" : "<vspace gap=6>")
+				  % richtext_escape(txt)).str();
+	default:
+		NEVER_HERE();
+	}
+}
+std::string as_content(const std::string& txt, MapDetails::Style style) {
+	switch (style) {
+	case MapDetails::Style::kFsMenu:
+		return (boost::format("<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % richtext_escape(txt)).str();
+	case MapDetails::Style::kWui:
+		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>")
+				  % (UI_FONT_SIZE_SMALL - 2)
+				  % richtext_escape(txt)).str();
+	default:
+		NEVER_HERE();
+	}
+}
+} // namespace
 
 MapDetails::MapDetails
-		(Panel* parent, int32_t x, int32_t y, int32_t max_x, int32_t max_y) :
-	UI::Panel(parent, x, y, max_x, max_y),
+		(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style) :
+	UI::Panel(parent, x, y, max_w, max_h),
 
+	style_(style),
 	padding_(4),
-	indent_(10),
-	labelh_(20),
-	max_x_(max_x),
-	max_y_(max_y),
-
-	main_box_(this, 0, 0, UI::Box::Vertical,
-		  max_x_, max_y_, 0),
-
-	name_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 3 * labelh_ + padding_, padding_ / 2),
-	name_label_(&main_box_, 0, 0, max_x_ - padding_, labelh_, ""),
-	name_(&name_box_, 0, 0, max_x_ - indent_, 2 * labelh_, ""),
-
-	author_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 3 * labelh_ + padding_, padding_ / 2),
-	author_label_(&main_box_, 0, 0, max_x_ - padding_, labelh_, ""),
-	author_(&author_box_, 0, 0, max_x_ - indent_, labelh_, ""),
-
-	descr_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 6 * labelh_ + padding_, padding_ / 2),
-	descr_label_(&main_box_, 0, 0, max_x_, labelh_, ""),
-	descr_(&descr_box_, 0, 0, max_x_ - indent_, 5 * labelh_, "")
+	main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
+	name_label_(&main_box_, 0, 0, max_w - padding_, 20, "", UI::Align::kLeft,
+					UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	descr_(&main_box_, 0, 0, max_w, 20, ""),
+	suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w))
 {
-	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
-																	 padding_, indent_, labelh_, max_x_, 4 * labelh_);
+	name_label_.force_new_renderer();
+	descr_.force_new_renderer();
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
-	name_box_.add_space(indent_);
-	name_box_.add(&name_, UI::Align::kLeft);
-	main_box_.add(&name_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
-
-	main_box_.add(&author_label_, UI::Align::kLeft);
-	author_box_.add_space(indent_);
-	author_box_.add(&author_, UI::Align::kLeft);
-	main_box_.add(&author_box_, UI::Align::kLeft);
-	main_box_.add_space(padding_);
-
-	main_box_.add(&descr_label_, UI::Align::kLeft);
-	descr_box_.add_space(indent_);
-	descr_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.add(&descr_box_, UI::Align::kLeft);
-	main_box_.add_space(padding_);
+	main_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.set_size(max_w, max_h); // We need to initialize the width, set_max_height will set the height
+	set_max_height(max_h);
 }
 
 
 void MapDetails::clear() {
 	name_label_.set_text("");
-	author_label_.set_text("");
-	descr_label_.set_text("");
-	name_.set_text("");
-	author_.set_text("");
 	descr_.set_text("");
 	suggested_teams_box_->hide();
 }
 
+void MapDetails::set_max_height(int new_height) {
+	max_h_ = new_height;
+	update_layout();
+}
+
+void MapDetails::update_layout() {
+	// Adjust sizes for show / hide suggested teams
+	if (suggested_teams_box_->is_visible()) {
+		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
+		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
+	} else {
+		main_box_.set_size(main_box_.get_w(), max_h_);
+	}
+	descr_.set_size(descr_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
+	descr_.scroll_to_top();
+}
+
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
+	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		// Show directory information
-		name_label_.set_text(_("Directory:"));
-		name_.set_text(mapdata.localized_name);
-		name_.set_tooltip(_("The name of this directory"));
-		main_box_.set_size(max_x_, max_y_);
-	} else {
-		// Show map information
-		if (mapdata.maptype == MapData::MapType::kScenario) {
-			name_label_.set_text(_("Scenario:"));
-		} else {
-			name_label_.set_text(_("Map:"));
-		}
-		name_.set_text(localize_mapname ? mapdata.localized_name : mapdata.name);
+		name_label_.set_text((boost::format("<rt>%s%s</rt>")
+									 % as_header(_("Directory:"), style_, true)
+									 % as_content(mapdata.localized_name, style_)).str());
+		main_box_.set_size(main_box_.get_w(), max_h_);
+
+	} else { // Show map information
+		name_label_.set_text(
+					(boost::format("<rt>%s%s</rt>")
+					 % as_header(mapdata.maptype == MapData::MapType::kScenario ?
+										 _("Scenario:") : _("Map:"), style_, true)
+					 % as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_)).str());
+
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
-				name_.set_tooltip
+				name_label_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
 				/** TRANSLATORS: %s is the English name of the map. */
 						((boost::format(_("The original name of this map: %s"))
 						  % mapdata.name).str());
 			} else {
-				name_.set_tooltip
+				name_label_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
 				/** TRANSLATORS: %s is the localized name of the map. */
 						((boost::format(_("The name of this map in your language: %s"))
 						  % mapdata.localized_name).str());
 			}
-		} else {
-			name_.set_tooltip(_("The name of this map"));
 		}
-		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
-		author_.set_text(mapdata.authors.get_names());
-		descr_label_.set_text(_("Description:"));
-		descr_.set_text(mapdata.description +
-										  (mapdata.hint.empty() ? "" : (std::string("\n\n") + mapdata.hint)));
+
+		// Show map information
+		std::string description =
+				as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
+		description = (boost::format("%s%s")
+		               % description
+		               % as_content(mapdata.authors.get_names(), style_)).str();
+
+		std::vector<std::string> tags;
+		for (const auto& tag : mapdata.tags) {
+			tags.push_back(localize_tag(tag));
+		}
+		std::sort(tags.begin(), tags.end());
+		description = (boost::format("%s%s") % description % as_header(_("Tags:"), style_)).str();
+		description = (boost::format("%s%s")
+							% description %
+							as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
+						  .str();
+
+		description = (boost::format("%s%s") % description % as_header(_("Description:"), style_)).str();
+		description = (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
+
+		if (!mapdata.hint.empty()) {
+			/** TRANSLATORS: Map hint header when selecting a map. */
+			description = (boost::format("%s%s") % description % as_header(_("Hint:"), style_)).str();
+			description = (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
+		}
+
+		description = (boost::format("<rt>%s</rt>") % description).str();
+		descr_.set_text(description);
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
-			main_box_.set_size(max_x_, max_y_);
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						max_y_ - descr_label_.get_y() - descr_label_.get_h() - 2 * padding_);
+			suggested_teams_box_->hide();
 		} else {
 			suggested_teams_box_->show(mapdata.suggested_teams);
-			suggested_teams_box_->set_pos(Point(0, max_y_ - suggested_teams_box_->get_h()));
-			main_box_.set_size(max_x_, max_y_ - suggested_teams_box_->get_h());
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						suggested_teams_box_->get_y() - descr_label_.get_y() - descr_label_.get_h() - 4 * padding_);
 		}
-		descr_.set_size(descr_.get_w(), descr_box_.get_h());
-		descr_.scroll_to_top();
 	}
+	update_layout();
 }

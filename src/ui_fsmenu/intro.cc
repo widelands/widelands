@@ -29,9 +29,10 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 message_
 	(this,
 	 get_w() / 2, get_h() * 19 / 20,
-	 _("Press any key or click to continue ..."), UI::Align::kHCenter)
+	 _("Press any key or click to continue…"), UI::Align::kHCenter)
 {
-	message_.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
+	message_.set_fontsize(fs_small() * 6 / 5);
+	message_.set_color(RGBColor(192, 192, 128));
 }
 
 bool FullscreenMenuIntro::handle_mousepress  (uint8_t, int32_t, int32_t)

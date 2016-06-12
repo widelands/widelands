@@ -65,13 +65,13 @@ public:
 	Bob & create_object() const override;
 
 	uint32_t movecaps() const override;
-	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
+	const DirAnimations & get_sail_anims() const {return sail_anims_;}
 
-	uint32_t get_capacity() const {return m_capacity;}
+	Quantity get_capacity() const {return capacity_;}
 
 private:
-	DirAnimations m_sail_anims;
-	uint32_t m_capacity;
+	DirAnimations sail_anims_;
+	Quantity capacity_;
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
@@ -97,7 +97,7 @@ struct Ship : Bob {
 	// the last visited was removed.
 	PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy * get_economy() const {return m_economy;}
+	Economy * get_economy() const {return economy_;}
 	void set_economy(Game &, Economy * e);
 	void set_destination(Game &, PortDock &);
 
@@ -114,8 +114,8 @@ struct Ship : Bob {
 
 	void log_general_info(const EditorGameBase &) override;
 
-	uint32_t get_nritems() const {return m_items.size();}
-	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
+	uint32_t get_nritems() const {return items_.size();}
+	const ShippingItem & get_item(uint32_t idx) const {return items_[idx];}
 
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
@@ -124,100 +124,101 @@ struct Ship : Bob {
 	void close_window();
 	void refresh_window(InteractiveGameBase &);
 
-	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING,
-	// EXP_FOUNDPORTSPACE or EXP_COLONIZING in the first states, the owning player of this ship can
-	// give direction change commands to change the direction of the moving ship / send the ship in a
-	// direction. Once the ship is on its way, it is in EXP_SCOUTING state. In the backend, a click
+	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
+	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of this ship
+	// can give direction change commands to change the direction of the moving ship / send the ship in a
+	// direction. Once the ship is on its way, it is in kExpeditionScouting state. In the backend, a click
 	// on a direction begins to the movement into that direction until a coast is reached or the user
 	// cancels the direction through a direction change.
 	//
-	// The EXP_WAITING state means, that an event happend and thus the ship stopped and waits for a
-	// new command by the owner. An event leading to a EXP_WAITING state can be:
+	// The kExpeditionWaiting state means, that an event happend and thus the ship stopped and waits for a
+	// new command by the owner. An event leading to a kExpeditionWaiting state can be:
 	// * expedition is ready to start
 	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
 	//   always ongoing movement).
 	// * island was completely surrounded
 	//
-	// The EXP_FOUNDPORTSPACE state means, that a port build space was found.
+	// The kExpeditionPortspaceFound state means, that a port build space was found.
 	//
-	enum {
-		TRANSPORT          = 0,
-		EXP_WAITING        = 1,
-		EXP_SCOUTING       = 2,
-		EXP_FOUNDPORTSPACE = 3,
-		EXP_COLONIZING     = 4,
-		SINK_REQUEST       = 8,
-		SINK_ANIMATION     = 9
+	enum class ShipStates : uint8_t {
+		kTransport                = 0,
+		kExpeditionWaiting        = 1,
+		kExpeditionScouting       = 2,
+		kExpeditionPortspaceFound = 3,
+		kExpeditionColonizing     = 4,
+		kSinkRequest              = 8,
+		kSinkAnimation            = 9
 	};
 
 	/// \returns the current state the ship is in
-	uint8_t get_ship_state() {return m_ship_state;}
+	ShipStates get_ship_state() {return ship_state_;}
 
 	/// \returns the current name of ship
-	const std::string & get_shipname() {return m_shipname;}
+	const std::string & get_shipname() {return shipname_;}
 
 	/// \returns whether the ship is currently on an expedition
 	bool state_is_expedition() {
 		return
-			(m_ship_state == EXP_SCOUTING
+			(ship_state_ == ShipStates::kExpeditionScouting
 			 ||
-			 m_ship_state == EXP_WAITING
+			 ship_state_ == ShipStates::kExpeditionWaiting
 			 ||
-			 m_ship_state == EXP_FOUNDPORTSPACE
+			 ship_state_ == ShipStates::kExpeditionPortspaceFound
 			 ||
-			 m_ship_state == EXP_COLONIZING);
+			 ship_state_ == ShipStates::kExpeditionColonizing);
 	}
 	/// \returns whether the ship is in transport mode
-	bool state_is_transport() {return (m_ship_state == TRANSPORT);}
+	bool state_is_transport() {return (ship_state_ == ShipStates::kTransport);}
 	/// \returns whether a sink request for the ship is currently valid
 	bool state_is_sinkable() {
 		return
-			(m_ship_state != SINK_REQUEST
+			(ship_state_ != ShipStates::kSinkRequest
 			 &&
-			 m_ship_state != SINK_ANIMATION
+			 ship_state_ != ShipStates::kSinkAnimation
 			 &&
-			 m_ship_state != EXP_COLONIZING);
+			 ship_state_ != ShipStates::kExpeditionColonizing);
 	}
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
 	bool exp_dir_swimable(Direction dir) {
-		if (!m_expedition)
+		if (!expedition_)
 			return false;
-		return m_expedition->swimable[dir - 1];
+		return expedition_->swimable[dir - 1];
 	}
 
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() {
-		if (!m_expedition)
+		if (!expedition_)
 			return false;
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
-			if (!m_expedition->swimable[dir - 1])
+			if (!expedition_->swimable[dir - 1])
 				return true;
 		return false;
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	const std::list<Coords>* exp_port_spaces() {
-		if (!m_expedition)
-			return nullptr;
-		return m_expedition->seen_port_buildspaces.get();
+	const std::vector<Coords>& exp_port_spaces() {
+		return expedition_->seen_port_buildspaces;
 	}
 
 	void exp_scouting_direction(Game &, WalkingDir);
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, IslandExploreDirection);
 
-	//Returns integer of direction, or WalkingDir::IDLE if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or WalkingDir::IDLE if query invalid
+	// Intended for LUA scripting
 	WalkingDir get_scouting_direction();
 
-	//Returns integer of direction, or IslandExploreDirection::kNotSet
-	//if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or IslandExploreDirection::kNotSet
+	// if query invalid
+	// Intended for LUA scripting
 	IslandExploreDirection get_island_explore_direction();
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
+
+protected:
+	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
 
 private:
 	friend struct Fleet;
@@ -243,18 +244,18 @@ private:
 							const std::string& description,
 							const std::string& picture);
 
-	UI::Window * m_window;
+	UI::Window * window_;
 
-	Fleet   * m_fleet;
-	Economy * m_economy;
-	OPtr<PortDock> m_lastdock;
-	OPtr<PortDock> m_destination;
-	std::vector<ShippingItem> m_items;
-	uint8_t m_ship_state;
-	std::string m_shipname;
+	Fleet   * fleet_;
+	Economy * economy_;
+	OPtr<PortDock> lastdock_;
+	OPtr<PortDock> destination_;
+	std::vector<ShippingItem> items_;
+	ShipStates ship_state_;
+	std::string shipname_;
 
 	struct Expedition {
-		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
+		std::vector<Coords> seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;
@@ -262,7 +263,7 @@ private:
 		IslandExploreDirection island_explore_direction;
 		std::unique_ptr<Economy> economy;
 	};
-	std::unique_ptr<Expedition> m_expedition;
+	std::unique_ptr<Expedition> expedition_;
 
 	// saving and loading
 protected:
@@ -276,12 +277,12 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t m_lastdock;
-		uint32_t m_destination;
-		uint8_t  m_ship_state;
-		std::string m_shipname;
-		std::unique_ptr<Expedition> m_expedition;
-		std::vector<ShippingItem::Loader> m_items;
+		uint32_t lastdock_;
+		uint32_t destination_;
+		ShipStates  ship_state_;
+		std::string shipname_;
+		std::unique_ptr<Expedition> expedition_;
+		std::vector<ShippingItem::Loader> items_;
 	};
 
 public:

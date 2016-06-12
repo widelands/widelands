@@ -42,20 +42,20 @@ struct PortDockWaresDisplay : AbstractWaresDisplay {
 	std::string info_for_ware(Widelands::DescriptionIndex ware) override;
 
 private:
-	PortDock & m_portdock;
+	PortDock & portdock_;
 };
 
 PortDockWaresDisplay::PortDockWaresDisplay
 	(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type) :
 	AbstractWaresDisplay(parent, 0, 0, pd.owner().tribe(), type, false),
-	m_portdock(pd)
+	portdock_(pd)
 {
 	set_inner_size(width, 0);
 }
 
 std::string PortDockWaresDisplay::info_for_ware(Widelands::DescriptionIndex ware)
 {
-	uint32_t count = m_portdock.count_waiting(get_type(), ware);
+	uint32_t count = portdock_.count_waiting(get_type(), ware);
 	return boost::lexical_cast<std::string>(count);
 }
 

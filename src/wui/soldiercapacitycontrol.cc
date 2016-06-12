@@ -45,12 +45,12 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	InteractiveGameBase & m_igb;
-	Widelands::Building & m_building;
+	InteractiveGameBase & igbase_;
+	Widelands::Building & building_;
 
-	UI::Button m_decrease;
-	UI::Button m_increase;
-	UI::Textarea m_value;
+	UI::Button decrease_;
+	UI::Button increase_;
+	UI::Textarea value_;
 };
 
 SoldierCapacityControl::SoldierCapacityControl
@@ -58,49 +58,49 @@ SoldierCapacityControl::SoldierCapacityControl
 	 Widelands::Building & building)
 :
 Box(parent, 0, 0, Horizontal),
-m_igb(igb),
-m_building(building),
-m_decrease
+igbase_(igb),
+building_(building),
+decrease_
 	(this, "decrease", 0, 0, 32, 32,
 	 g_gr->images().get("images/ui_basic/but4.png"),
 	 g_gr->images().get("images/wui/buildings/menu_down_train.png"), _("Decrease capacity")),
-m_increase
+increase_
 	(this, "increase", 0, 0, 32, 32,
 	 g_gr->images().get("images/ui_basic/but4.png"),
 	 g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Increase capacity")),
-m_value(this, "199", UI::Align::kCenter)
+value_(this, "199", UI::Align::kCenter)
 {
-	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
-	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
+	decrease_.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
+	increase_.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
 	add(new UI::Textarea(this, _("Capacity")), UI::Align::kHCenter);
-	add(&m_decrease, UI::Align::kHCenter);
-	add(&m_value, UI::Align::kHCenter);
-	add(&m_increase, UI::Align::kHCenter);
+	add(&decrease_, UI::Align::kHCenter);
+	add(&value_, UI::Align::kHCenter);
+	add(&increase_, UI::Align::kHCenter);
 
-	m_decrease.set_repeating(true);
-	m_increase.set_repeating(true);
+	decrease_.set_repeating(true);
+	increase_.set_repeating(true);
 
 	set_thinks(true);
 }
 
 void SoldierCapacityControl::think()
 {
-	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
+	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&building_);
 	uint32_t const capacity = soldiers->soldier_capacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
-	m_value.set_text(buffer);
+	value_.set_text(buffer);
 
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
-	m_increase.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
+	bool const can_act = igbase_.can_act(building_.owner().player_number());
+	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
+	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)
 {
-	m_igb.game().send_player_change_soldier_capacity(m_building, delta);
+	igbase_.game().send_player_change_soldier_capacity(building_, delta);
 }
 
 void SoldierCapacityControl::click_decrease()

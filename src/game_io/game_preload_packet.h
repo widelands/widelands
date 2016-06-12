@@ -39,30 +39,31 @@ struct GamePreloadPacket : public GameDataPacket {
 	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
 	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 
-	char const * get_mapname()      {return m_mapname.c_str();}
-	std::string get_background()    {return m_background;}
-	std::string get_win_condition() {return m_win_condition;}
-	uint32_t get_gametime() {return m_gametime;}
-	uint8_t get_player_nr() {return m_player_nr;}
-	std::string get_version() {return m_version;}
+	char const * get_mapname()      const {return mapname_.c_str();}
+	std::string get_background()    const {return background_;}
+	std::string get_win_condition() const {return win_condition_;}
+	std::string get_localized_win_condition() const;
+	uint32_t get_gametime() const {return gametime_;}
+	uint8_t get_player_nr() const {return player_nr_;}
+	std::string get_version() const {return version_;}
 
-	uint8_t get_number_of_players() {return m_number_of_players;}
-	std::string get_minimap_path() {return m_minimap_path;}
+	uint8_t get_number_of_players() const {return number_of_players_;}
+	std::string get_minimap_path() const {return minimap_path_;}
 
-	time_t get_savetimestamp() {return m_savetimestamp;}
-	GameController::GameType get_gametype() {return m_gametype;}
+	time_t get_savetimestamp() const {return savetimestamp_;}
+	GameController::GameType get_gametype() const {return gametype_;}
 
 private:
-	std::string m_minimap_path;
-	std::string m_mapname;
-	std::string m_background;
-	std::string m_win_condition;
-	uint32_t m_gametime;
-	uint8_t  m_player_nr; // The local player idx
-	uint8_t  m_number_of_players;
-	std::string m_version;
-	time_t   m_savetimestamp;
-	GameController::GameType m_gametype;
+	std::string minimap_path_;
+	std::string mapname_;
+	std::string background_;
+	std::string win_condition_;
+	uint32_t gametime_;
+	uint8_t  player_nr_; // The local player idx
+	uint8_t  number_of_players_;
+	std::string version_;
+	time_t   savetimestamp_;
+	GameController::GameType gametype_;
 };
 
 }

@@ -22,6 +22,12 @@
 
 // Defines blending during blitting.
 enum class BlendMode {
+	// Normal blending, equivalent to:
+	// glEnable(GL_BLEND);
+	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// glBlendEquation(GL_FUNC_ADD);
+	Default,
+
 	// Perform a normal blitting operation that respects the alpha channel if
 	// present.
 	UseAlpha,

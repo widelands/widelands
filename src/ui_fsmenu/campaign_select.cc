@@ -86,7 +86,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 get_right_column_w(right_column_x_ + indent_),
 		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_)
 {
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 	ta_campname_.set_tooltip(_("The name of this campaign"));
@@ -325,7 +325,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	is_tutorial_(is_tutorial)
 {
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	if (is_tutorial_) {
 		ok_.set_tooltip(_("Play this tutorial"));
@@ -346,7 +346,6 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
-	/** TRANSLATORS: Campaign scenario number table header */
 	std::string number_tooltip;
 	std::string name_tooltip;
 	if (is_tutorial_) {
@@ -356,6 +355,8 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 		number_tooltip = _("The number of this scenario in the campaign");
 		name_tooltip = _("Scenario Name");
 	}
+
+	/** TRANSLATORS: Campaign scenario number table header */
 	table_.add_column(35, _("#"), number_tooltip, UI::Align::kLeft);
 	table_.add_column(table_.get_w() - 35, name_tooltip, name_tooltip, UI::Align::kLeft);
 	table_.set_sort_column(0);
@@ -370,8 +371,7 @@ std::string FullscreenMenuCampaignMapSelect::get_map()
 }
 
 
-//telling this class what campaign we have and since we know what campaign we
-//have, fill it.
+// Telling this class what campaign we have and since we know what campaign we have, fill it.
 void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	campaign = i;
 	fill_table();
@@ -414,7 +414,8 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData authors(map.get_author());
+		// Localizing this, because some author fields now have "edited by" text.
+		MapAuthorData authors(_(map.get_author()));
 
 		ta_author_.set_text(authors.get_names());
 		if (is_tutorial_) {

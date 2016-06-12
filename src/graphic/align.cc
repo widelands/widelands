@@ -26,7 +26,7 @@ namespace UI {
 
 // This mirrors the horizontal alignment for RTL languages.
 Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
 			case Align::kBottomLeft:
 				alignment = Align::kBottomRight;
@@ -54,7 +54,7 @@ Align mirror_alignment(Align alignment) {
 }
 
 void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
-	//Vertical Align
+	// Vertical Align
 	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
 		if (static_cast<int>(align & Align::kVCenter))
 			pt->y -= h / 2;
@@ -62,7 +62,7 @@ void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 			pt->y -= h;
 	}
 
-	//Horizontal Align
+	// Horizontal Align
 	if ((align & Align::kHorizontal) != Align::kLeft) {
 		if (static_cast<int>(align & Align::kHCenter))
 			pt->x -= w / 2;

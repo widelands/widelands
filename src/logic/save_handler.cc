@@ -28,6 +28,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
@@ -44,132 +45,143 @@ using Widelands::GameSaver;
 void SaveHandler::think(Widelands::Game & game) {
 	uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
-	std::string filename = "wl_autosave";
+	std::string filename = autosave_filename_;
 
-	if (!m_allow_saving) {
+	if (!allow_saving_) {
 		return;
 	}
 	if (game.is_replay()) {
 		return;
 	}
 
-	if (m_save_requested) {
-		if (!m_save_filename.empty()) {
-			filename = m_save_filename;
+	// Are we saving now?
+	if (saving_next_tick_ || save_requested_) {
+		if (save_requested_) {
+			// Requested by user
+			if (!save_filename_.empty()) {
+				filename = save_filename_;
+			}
+			log("Gamesave: save requested: %s\n", filename.c_str());
+			save_requested_ = false;
+			save_filename_ = "";
+		} else {
+			// Autosave ...
+			// Roll savefiles
+			int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
+			log("Autosave: Rolling savefiles (count): %d\n", number_of_rolls + 1);
+			std::string filename_previous =
+				create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
+			if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
+				g_fs->fs_unlink(filename_previous);
+				log("Autosave: Deleted %s\n", filename_previous.c_str());
+			}
+			number_of_rolls--;
+			while (number_of_rolls >= 0) {
+				const std::string filename_next =
+					create_file_name(get_base_dir(),
+						(boost::format("%s_%02d") % filename % number_of_rolls).str());
+				if (g_fs->file_exists(filename_next)) {
+					g_fs->fs_rename(filename_next, filename_previous);
+					log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+				}
+				filename_previous = filename_next;
+				number_of_rolls--;
+			}
+			filename = (boost::format("%s_00") % autosave_filename_).str();
+			log("Autosave: saving as %s\n", filename.c_str());
 		}
 
-		log("Autosave: save requested : %s\n", filename.c_str());
-		m_save_requested = false;
-		m_save_filename = "";
+		// Saving now
+		const std::string complete_filename = create_file_name(get_base_dir(), filename);
+		std::string backup_filename;
+
+		// always overwrite a file
+		if (g_fs->file_exists(complete_filename)) {
+			filename += "2";
+			backup_filename = create_file_name (get_base_dir(), filename);
+			if (g_fs->file_exists(backup_filename)) {
+				g_fs->fs_unlink(backup_filename);
+			}
+			g_fs->fs_rename(complete_filename, backup_filename);
+		}
+
+		std::string error;
+		if (!save_game(game, complete_filename, &error)) {
+			log("Autosave: ERROR! - %s\n", error.c_str());
+			game.get_ibase()->log_message(_("Saving failed!"));
+
+			// if backup file was created, move it back
+			if (backup_filename.length() > 0) {
+				if (g_fs->file_exists(complete_filename)) {
+					g_fs->fs_unlink(complete_filename);
+				}
+				g_fs->fs_rename(backup_filename, complete_filename);
+			}
+			// Wait 30 seconds until next save try
+			last_saved_realtime_ = last_saved_realtime_ + 30000;
+			return;
+		} else {
+			// if backup file was created, time to remove it
+			if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename))
+				g_fs->fs_unlink(backup_filename);
+		}
+
+		log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
+		game.get_ibase()->log_message(_("Game saved"));
+		last_saved_realtime_ = realtime;
+		saving_next_tick_ =  false;
+
 	} else {
+		// Perhaps save is due now?
 		const int32_t autosave_interval_in_seconds =
 			g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 		if (autosave_interval_in_seconds <= 0) {
 			return; // no autosave requested
 		}
 
-		const int32_t elapsed = (realtime - m_last_saved_realtime) / 1000;
+		const int32_t elapsed = (realtime - last_saved_realtime_) / 1000;
 		if (elapsed < autosave_interval_in_seconds) {
 			return;
 		}
 
-		if (game.game_controller()->is_paused()) { // check if game is paused
+		// check if game is paused (in any way)
+		if (game.game_controller()->is_paused_or_zero_speed()) {
 			// Wait 30 seconds until next save try
-			m_last_saved_realtime = m_last_saved_realtime + 30000;
+			last_saved_realtime_ = last_saved_realtime_ + 30000;
 			return;
 		}
-		//roll autosaves
-		int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
-		std::string filename_previous =
-			create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
-		if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
-			g_fs->fs_unlink(filename_previous);
-			log("Autosave: Deleted %s\n", filename_previous.c_str());
-		}
-		number_of_rolls--;
-		while (number_of_rolls >= 0) {
-			const std::string filename_next =
-				create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
-			if (g_fs->file_exists(filename_next)) {
-				g_fs->fs_rename(filename_next, filename_previous);
-				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
-			}
-			filename_previous = filename_next;
-			number_of_rolls--;
-		}
-		filename = "wl_autosave_00";
-		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
+		log("Autosave: %d s interval elapsed, current gametime: %s, saving...\n",
+			elapsed,
+			gametimestring(game.get_gametime(), true).c_str());
+
+		saving_next_tick_ = true;
+		game.get_ibase()->log_message(_("Saving game…"));
 	}
-
-	// TODO(unknown): defer saving to next tick so that this message is shown
-	// before the actual save, or put the saving logic in another thread
-	game.get_ibase()->log_message(_("Saving game..."));
-
-	// save the game
-	const std::string complete_filename = create_file_name(get_base_dir(), filename);
-	std::string backup_filename;
-
-	// always overwrite a file
-	if (g_fs->file_exists(complete_filename)) {
-		filename += "2";
-		backup_filename = create_file_name (get_base_dir(), filename);
-		if (g_fs->file_exists(backup_filename)) {
-			g_fs->fs_unlink(backup_filename);
-		}
-		g_fs->fs_rename(complete_filename, backup_filename);
-	}
-
-	std::string error;
-	if (!save_game(game, complete_filename, &error)) {
-		log("Autosave: ERROR! - %s\n", error.c_str());
-		game.get_ibase()->log_message(_("Saving failed!"));
-
-		// if backup file was created, move it back
-		if (backup_filename.length() > 0) {
-			if (g_fs->file_exists(complete_filename)) {
-				g_fs->fs_unlink(complete_filename);
-			}
-			g_fs->fs_rename(backup_filename, complete_filename);
-		}
-		// Wait 30 seconds until next save try
-		m_last_saved_realtime = m_last_saved_realtime + 30000;
-		return;
-	} else {
-		// if backup file was created, time to remove it
-		if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename))
-			g_fs->fs_unlink(backup_filename);
-	}
-
-	log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
-	game.get_ibase()->log_message(_("Game saved"));
-	m_last_saved_realtime = realtime;
 }
 
 /**
 * Initialize autosave timer
  */
 void SaveHandler::initialize(uint32_t realtime) {
-	if (m_initialized)
+	if (initialized_)
 		return;
 
-	m_last_saved_realtime = realtime;
-	m_initialized = true;
+	last_saved_realtime_ = realtime;
+	initialized_ = true;
 }
 
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name
-	(std::string dir, std::string filename)
+std::string SaveHandler::create_file_name(const std::string& dir, const std::string& filename) const
 {
-	// ok, first check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, WLGF_SUFFIX))
-		filename += WLGF_SUFFIX;
+	// Append directory name
+	std::string complete_filename = dir + g_fs->file_separator() + filename;
 
-	// Now append directory name
-	std::string complete_filename = dir;
-	complete_filename += "/";
-	complete_filename += filename;
+	// Now check if the extension matches (ignoring case)
+	if (!boost::iends_with(filename, WLGF_SUFFIX)) {
+		complete_filename += WLGF_SUFFIX;
+	}
 
 	return complete_filename;
 }

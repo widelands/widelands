@@ -53,7 +53,7 @@ public:
 	};
 
 	struct Type {
-		Type(TerrainDescription::Is _is);
+		Type(TerrainDescription::Is init_is);
 
 		TerrainDescription::Is is;
 		const char* descname;
@@ -89,27 +89,30 @@ public:
 	const std::vector<TerrainDescription::Type> get_types() const;
 
 	/// Returns the valid resource with the given index.
-	DescriptionIndex get_valid_resource(uint8_t index) const;
+	DescriptionIndex get_valid_resource(DescriptionIndex index) const;
 
 	/// Returns the number of valid resources.
-	int get_num_valid_resources() const;
+	size_t get_num_valid_resources() const;
+
+	/// Returns the the valid resources.
+	std::vector<DescriptionIndex> valid_resources() const;
 
 	/// Returns true if this resource can be found in this terrain type.
-	bool is_resource_valid(int32_t res) const;
+	bool is_resource_valid(DescriptionIndex res) const;
 
 	/// Returns the resource index that can by default always be found in this
 	/// terrain.
-	int get_default_resource() const;
+	DescriptionIndex get_default_resource() const;
 
 	/// Returns the default amount of resources you can find in this terrain.
-	int32_t get_default_resource_amount() const;
+	ResourceAmount get_default_resource_amount() const;
 
 	/// Returns the dither layer, i.e. the information in which zlayer this
 	/// texture should be drawn.
 	int32_t dither_layer() const;
 
 	/// Returns the editor category.
-	const EditorCategory& editor_category() const;
+	const EditorCategory* editor_category() const;
 
 	/// Parameters for terrain affinity of immovables.
 	/// Temperature is in arbitrary units.
@@ -131,8 +134,8 @@ private:
 	const EditorCategory* editor_category_;  ///< not owned.
 	Is is_;
 	std::vector<std::string> custom_tooltips_;
-	std::vector<uint8_t> valid_resources_;
-	int default_resource_index_;
+	std::vector<DescriptionIndex> valid_resources_;
+	DescriptionIndex default_resource_index_;
 	int default_resource_amount_;
 	int dither_layer_;
 	int frame_length_;

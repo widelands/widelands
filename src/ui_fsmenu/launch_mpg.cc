@@ -114,7 +114,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	butw_ (get_w() / 4),
 	buth_ (get_h() * 9 / 200),
 	fs_   (fs_small()),
-	fn_   (ui_fn()),
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
 	padding_(4),
@@ -204,11 +203,15 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	lua_ = new LuaInterface();
 	win_condition_clicked();
 
-	title_      .set_font(fn_, fs_big(), UI_FONT_CLR_FG);
-	mapname_    .set_font(fn_, fs_, RGBColor(255, 255, 127));
-	clients_    .set_font(fn_, fs_, RGBColor(0, 255, 0));
-	players_    .set_font(fn_, fs_, RGBColor(0, 255, 0));
-	map_        .set_font(fn_, fs_, RGBColor(0, 255, 0));
+	title_      .set_fontsize(fs_big());
+	mapname_    .set_fontsize(fs_);
+	mapname_    .set_color(RGBColor(255, 255, 127));
+	clients_    .set_fontsize(fs_);
+	clients_    .set_color(RGBColor(0, 255, 0));
+	players_    .set_fontsize(fs_);
+	players_    .set_color(RGBColor(0, 255, 0));
+	map_        .set_fontsize(fs_);
+	map_        .set_color(RGBColor(0, 255, 0));
 
 	mapname_ .set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
@@ -217,7 +220,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		new MultiPlayerSetupGroup
 			(this,
 			 get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h() / 2,
-			 settings, butw_, buth_, fn_, fs_);
+			 settings, butw_, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -231,7 +234,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	// Y coordinate will be set later, when we know how high this box will get.
 	suggested_teams_box_ = new UI::SuggestedTeamsBox
 									(this, right_column_x_, 0, UI::Box::Vertical,
-									 padding_, indent_, label_height_,
+									 padding_, indent_,
 									 get_w() - right_column_x_, 4 * label_height_);
 }
 
@@ -315,7 +318,7 @@ void FullscreenMenuLaunchMPG::win_condition_load() {
 			std::unique_ptr<Widelands::MapLoader> ml =
 					map.get_correct_loader(settings_->settings().mapfilename);
 			ml->preload_map(true);
-			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!map.has_tag(map_tag)) {
 					is_usable = false;
 					break;
@@ -433,16 +436,6 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 				UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
 		}
-	} else {
-		if (!settings_ || settings_->settings().saved_games.empty())
-			throw wexception("A file was selected, that is not available to the client");
-		// this file is obviously a file from the dedicated server's saved games pool not available locally.
-		for (uint32_t i = 0; i < settings_->settings().saved_games.size(); ++i)
-			if (settings_->settings().saved_games.at(i).path == filename) {
-				settings_->set_map(filename, filename, settings_->settings().saved_games.at(i).players, true);
-				return;
-			}
-		throw wexception("The selected file could not be found in the pool of dedicated saved games.");
 	}
 }
 
@@ -499,11 +492,11 @@ void FullscreenMenuLaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			//Try to translate the map name.
-			//This will work on every official map as expected
-			//and 'fail silently' (not find a translation) for already translated campaign map names.
-			//It will also translate 'false-positively' on any user-made map which shares a name with
-			//the official maps, but this should not be a problem to worry about.
+			// Try to translate the map name.
+			// This will work on every official map as expected
+			// and 'fail silently' (not find a translation) for already translated campaign map names.
+			// It will also translate 'false-positively' on any user-made map which shares a name with
+			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
 			mapname_.set_text(_(settings.mapname));
 		}
@@ -588,7 +581,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
-				(boost::format("\\<%s\\>") % _("closed")).str();
+				(boost::format("<%s>") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
@@ -691,7 +684,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	if (help_) {
 		help_->set_visible(true);
 	} else {
-		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "scripting/widelands/multiplayer_help.lua",
+		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
 																/** TRANSLATORS: This is a heading for a help window */
 																_("Multiplayer Game Setup")));
 	}

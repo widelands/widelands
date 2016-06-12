@@ -41,7 +41,7 @@ int32_t const h_space = 3;
  * rectangular bounding box.
  */
 struct Element {
-	explicit Element(const Rect & _bbox) : bbox(_bbox) {}
+	explicit Element(const Rect & bounding_box) : bbox(bounding_box) {}
 	virtual ~Element() {}
 
 	/**
@@ -54,8 +54,8 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const Image* _image)
-		: Element(_bbox), image(_image) {}
+	ImageElement(const Rect & bounding_box, const Image* init_image)
+		: Element(bounding_box), image(init_image) {}
 
 	void draw(RenderTarget & dst) override
 	{
@@ -67,10 +67,10 @@ struct ImageElement : Element {
 
 struct TextlineElement : Element {
 	TextlineElement
-		(const Rect & _bbox, const TextStyle & _style,
+		(const Rect & bounding_box, const TextStyle & init_style,
 		 std::vector<std::string>::const_iterator words_begin,
 		 std::vector<std::string>::const_iterator words_end)
-		: Element(_bbox), style(_style), words(words_begin, words_end) {}
+		: Element(bounding_box), style(init_style), words(words_begin, words_end) {}
 
 	void draw(RenderTarget & dst) override
 	{
@@ -81,12 +81,11 @@ struct TextlineElement : Element {
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
+		if (UI::g_fh1->fontset()->is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
 				  source_it != words.end(); ++source_it) {
 				std::string& word = *source_it;
-				replace_entities(&word);
 				if (source_it != words.end()) {
 					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
@@ -101,7 +100,6 @@ struct TextlineElement : Element {
 			}
 		} else {
 			for (std::string& word: words) {
-				replace_entities(&word);
 				result_words.push_back(word);
 			}
 		}
@@ -250,8 +248,8 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl & _rti) :
-		rti(_rti),
+	TextBuilder(RichTextImpl & impl) :
+		rti(impl),
 		images_width(0),
 		images_height(0),
 		maxwidth(0),

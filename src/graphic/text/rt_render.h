@@ -52,30 +52,6 @@ struct RendererStyle {
 	uint16_t overall_width;
 };
 
-/**
- * Wrapper object around a font.
- *
- * Fonts in our sense are defined by the general font shape (given by the font
- * name) and the size of the font. Note that Bold and Italic are special in the
- * regard that we expect that this is already handled by the Font File, so, the
- * font loader directly loads DejaVuSerif-Bold.ttf for example.
- */
-class IFont {
-public:
-	enum {
-		DEFAULT = 0,
-		BOLD = 1,
-		ITALIC = 2,
-		UNDERLINE = 4,
-		SHADOW = 8,
-	};
-	virtual ~IFont() {}
-
-	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
-	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
-
-	virtual uint16_t ascent(int) const = 0;
-};
 
 /**
  * A map that maps pixels to a string. The string are the references which can be used
@@ -95,7 +71,7 @@ using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.
-	Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset);
+	Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets);
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
@@ -115,7 +91,7 @@ private:
 	std::unique_ptr<Parser> parser_;
 	ImageCache* const image_cache_;  // Not owned.
 	TextureCache* const texture_cache_;  // Not owned.
-	UI::FontSet* const fontset_;  // Not owned.
+	const UI::FontSets& fontsets_; // All fontsets
 	RendererStyle renderer_style_; // Properties that all render nodes need to know about
 };
 

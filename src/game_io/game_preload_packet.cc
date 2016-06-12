@@ -46,6 +46,11 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 6;
 constexpr const char* kMinimapFilename = "minimap.png";
 
+std::string GamePreloadPacket::get_localized_win_condition() const {
+	i18n::Textdomain td("win_conditions");
+	return _(win_condition_);
+}
+
 void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
 {
@@ -56,19 +61,19 @@ void GamePreloadPacket::read
 		int32_t const packet_version = s.get_int("packet_version");
 
 		if (packet_version == kCurrentPacketVersion) {
-			m_gametime = s.get_safe_int("gametime");
-			m_mapname = s.get_safe_string("mapname");
+			gametime_ = s.get_safe_int("gametime");
+			mapname_ = s.get_safe_string("mapname");
 
-			m_background = s.get_safe_string("background");
-			m_player_nr = s.get_safe_int("player_nr");
-			m_win_condition = s.get_safe_string("win_condition");
-			m_number_of_players = s.get_safe_int("player_amount");
-			m_version = s.get_safe_string("widelands_version");
+			background_ = s.get_safe_string("background");
+			player_nr_ = s.get_safe_int("player_nr");
+			win_condition_ = s.get_safe_string("win_condition");
+			number_of_players_ = s.get_safe_int("player_amount");
+			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {
-				m_minimap_path = kMinimapFilename;
+				minimap_path_ = kMinimapFilename;
 			}
-			m_savetimestamp = static_cast<time_t>(s.get_natural("savetimestamp"));
-			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
+			savetimestamp_ = static_cast<time_t>(s.get_natural("savetimestamp"));
+			gametype_ = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -119,16 +124,17 @@ void GamePreloadPacket::write
 	if (!game.is_loaded()) {
 		return;
 	}
-	if (ipl != nullptr) {
-		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
-		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-		if (sw.get() != nullptr) {
-			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
-			sw->flush();
-		}
-	}
 
+	std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
+	if (sw.get() != nullptr) {
+		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+		if (ipl != nullptr) {  // Player
+			write_minimap_image(game, &ipl->player(), ipl->get_viewpoint(), flags, sw.get());
+		} else { // Observer
+			write_minimap_image(game, nullptr, Point(0, 0), flags, sw.get());
+		}
+		sw->flush();
+	}
 }
 
 }

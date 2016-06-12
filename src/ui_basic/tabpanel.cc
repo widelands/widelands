@@ -26,9 +26,6 @@
 
 namespace UI {
 
-// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
-constexpr int kTabPanelButtonHeight = 34;
-
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kTabPanelImageMargin = 2;
 
@@ -52,16 +49,16 @@ Tab::Tab
 	 int32_t x,
 	 int32_t w,
 	 const std::string& name,
-	 const std::string& _title,
-	 const Image* _pic,
+	 const std::string& init_title,
+	 const Image* init_pic,
 	 const std::string& tooltip_text,
 	 Panel* const contents)
 	:
 	NamedPanel(tab_parent, name, x, 0, w, kTabPanelButtonHeight, tooltip_text),
 	parent(tab_parent),
 	id(tab_id),
-	pic(_pic),
-	title(_title),
+	pic(init_pic),
+	title(init_title),
 	tooltip(tooltip_text),
 	panel(contents)
 {
@@ -97,10 +94,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, 0, 0),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 TabPanel::TabPanel
 	(Panel * const parent,
@@ -109,10 +106,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, w, h),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 
 /**
@@ -150,10 +147,10 @@ void TabPanel::update_desired_size()
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
-		//panel->set_size(panelw, panelh);
 
-		if (panelw > w)
+		if (panelw > w) {
 			w = panelw;
+		}
 		h += panelh;
 	}
 
@@ -243,6 +240,7 @@ void TabPanel::activate(uint32_t idx)
 	active_ = idx;
 
 	update_desired_size();
+	sigclicked();
 }
 
 void TabPanel::activate(const std::string & name)
@@ -253,10 +251,22 @@ void TabPanel::activate(const std::string & name)
 }
 
 /**
- * Return the tab names in order
+ * Return the tabs in order
  */
 const TabPanel::TabList & TabPanel::tabs() {
 	return tabs_;
+}
+
+bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.back()->get_name() == tabname) {
+		tabs_.pop_back();
+		if (active_ > tabs_.size() - 1) {
+			active_ = 0ul;
+		}
+		update_desired_size();
+		return true;
+	}
+	return false;
 }
 
 /**

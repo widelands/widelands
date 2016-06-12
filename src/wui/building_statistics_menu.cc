@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ using namespace Widelands;
 
 namespace {
 void set_label_font(UI::Textarea* label) {
-	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+	label->set_fontsize(kLabelFontSize);
 }
 }  // namespace
 
@@ -91,8 +91,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			_("Low Productivity "),
 			UI::Align::kBottomLeft),
 		unproductive_percent_(
-			&unproductive_box_, 0, 0, 35, g_gr->images().get("images/ui_basic/but1.png"),
-			kLabelFontSize - UI::g_fh1->fontset().size_offset()), // We need consistent height here
+			&unproductive_box_, 0, 0, 35, 0, 1, g_gr->images().get("images/ui_basic/but1.png"),
+			kLabelFontSize - UI::g_fh1->fontset()->size_offset()), // We need consistent height here
 		unproductive_label2_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the second part of productivity with input field */
@@ -399,11 +399,15 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(owned_labels_[id], UI::Align::kLeft);
+	owned_labels_[id]->set_fontsize(kLabelFontSize);
+	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
+	button_box->add(owned_labels_[id], UI::Align::kHCenter);
 
 	productivity_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(productivity_labels_[id], UI::Align::kLeft);
+	productivity_labels_[id]->set_fontsize(kLabelFontSize);
+	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
+	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
 
 	row.add(button_box, UI::Align::kLeft);
 
@@ -419,6 +423,7 @@ bool BuildingStatisticsMenu::add_button(
 	++*column;
 	if (*column == kColumns) {
 		tabs_[tab_index]->add(&row, UI::Align::kLeft);
+		tabs_[tab_index]->add_space(6);
 		*column = 0;
 		return true;
 	}
@@ -677,7 +682,7 @@ void BuildingStatisticsMenu::update() {
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
-				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -707,7 +712,7 @@ void BuildingStatisticsMenu::update() {
 				}
 				const std::string perc_str = (boost::format(_("%1%/%2%")) % total_stationed_soldiers %
 														total_soldier_capacity).str();
-				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -733,7 +738,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext_autosize(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
+		set_labeltext(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -759,33 +764,27 @@ void BuildingStatisticsMenu::update() {
 	}
 }
 
-void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
+void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-	int fontsize = text.length() > 7 ? kLabelFontSize - floor(text.length() / 3) : kLabelFontSize;
-
-	UI::TextStyle style;
-	if (text.length() > 5) {
-		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
-	} else {
-		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
-	}
-	style.fg = color;
-	style.bold = true;
-
-	textarea->set_textstyle(style);
+	textarea->set_color(color);
 	textarea->set_text(text);
 	textarea->set_visible(true);
 }
 
 void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
-	current_building_type_ = id;
-	for (DescriptionIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
-		if (building_buttons_[i] != nullptr) {
-			building_buttons_[i]->set_flat(true);
+
+	// Reset button states
+	for (UI::Button* building_button : building_buttons_) {
+		if (building_button == nullptr) {
+			continue;
 		}
+		building_button->set_flat(true);
 	}
+
+	// Update for current button
+	current_building_type_ = id;
 	building_buttons_[current_building_type_]->set_flat(false);
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());

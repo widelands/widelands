@@ -44,7 +44,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
-#include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu.h"
@@ -54,18 +53,19 @@
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/stock_menu.h"
+#include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;
 
 InteractivePlayer::InteractivePlayer
-	(Widelands::Game        &       _game,
+	(Widelands::Game        &       g,
 	 Section                &       global_s,
 	 Widelands::PlayerNumber const plyn,
 	 bool                     const multiplayer)
 	:
-	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
+	InteractiveGameBase (g, global_s, NONE, multiplayer, multiplayer),
 	auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
 	flag_to_connect_(Widelands::Coords::null()),
 
@@ -89,7 +89,7 @@ toggle_chat_
 	 ("wui/menus/menu_chat", "chat", _("Chat"))),
 toggle_options_menu_
 	(INIT_BTN
-	 ("wui/menus/menu_options_menu", "options_menu", _("Options"))),
+	 ("wui/menus/menu_options_menu", "options_menu", _("Main Menu"))),
 toggle_statistics_menu_
 	(INIT_BTN
 	 ("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
@@ -134,9 +134,9 @@ toggle_help_
 		toggle_chat_.set_enabled(false);
 	}
 
-	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
 	toolbar_.add(&toggle_objectives_,      UI::Align::kLeft);
 	toolbar_.add(&toggle_message_menu_,    UI::Align::kLeft);
+	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
@@ -153,10 +153,10 @@ toggle_help_
 	INIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
 	INIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
 	INIT_BTN_HOOKS(objectives_, toggle_objectives_)
-	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 	INIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
+	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 
-	encyclopedia_.open_window = [this] {new EncyclopediaWindow(*this, encyclopedia_);};
+	encyclopedia_.open_window = [this] {new TribalEncyclopedia(*this, encyclopedia_, &game().lua());};
 	options_.open_window = [this] {new GameOptionsMenu(*this, options_, main_windows_);};
 	statisticsmenu_.open_window = [this] {
 		new GameMainMenu(*this, statisticsmenu_, main_windows_);
@@ -182,8 +182,8 @@ InteractivePlayer::~InteractivePlayer() {
 	DEINIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
 	DEINIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
 	DEINIT_BTN_HOOKS(objectives_, toggle_objectives_)
-	DEINIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 	DEINIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
+	DEINIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 }
 
 void InteractivePlayer::think()
@@ -328,6 +328,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_o:
 			objectives_.toggle();
+			return true;
+
+		case SDLK_F1:
+			encyclopedia_.toggle();
 			return true;
 
 		case SDLK_c:

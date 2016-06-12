@@ -33,9 +33,7 @@
 #include "logic/playersmanager.h"
 #include "wui/interactive_gamebase.h"
 
-InteractiveGameBase & GameMainMenuSaveGame::igbase() {
-	return dynamic_cast<InteractiveGameBase&>(*get_parent());
-}
+namespace {
 
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
@@ -52,13 +50,19 @@ InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 
+} // namespace
+
+InteractiveGameBase & GameMainMenuSaveGame::igbase() {
+	return dynamic_cast<InteractiveGameBase&>(*get_parent());
+}
+
 GameMainMenuSaveGame::GameMainMenuSaveGame
 	(InteractiveGameBase & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, g_gr->images().get("images/ui_basic/but1.png")),
+	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
 	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
 	name_label_
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::kCenterLeft),
@@ -119,7 +123,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	} else {
 		// Display current game infos
 		{
-			//Try to translate the map name.
+			// Try to translate the map name.
 			i18n::Textdomain td("maps");
 			mapname_.set_text(_(parent.game().get_map()->get_name()));
 		}
@@ -154,7 +158,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	}
 	button_ok_->set_enabled(true);
 
-	//Try to translate the map name.
+	// Try to translate the map name.
 	{
 		i18n::Textdomain td("maps");
 		mapname_.set_text(_(gpdp.get_mapname()));
@@ -172,7 +176,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 		// Keep label empty
 		players_label_.set_text("");
 	}
-	win_condition_.set_text(gpdp.get_win_condition());
+	win_condition_.set_text(_(gpdp.get_localized_win_condition()));
 }
 
 /**

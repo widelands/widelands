@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -135,5 +135,5 @@ build_texture_atlas(const int max_size,
 		throw wexception("Not all images that should fit in the first texture atlas did actually "
 		                 "fit. Widelands has now more images than before.");
 	}
-	return {std::move(first_texture_atlas)};
+	return first_texture_atlas;
 }

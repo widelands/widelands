@@ -59,8 +59,8 @@ private:
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
-	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
-	void _tagbox_changed(int32_t, bool);
+	UI::Checkbox* add_tag_checkbox(UI::Box*, std::string, std::string);
+	void tagbox_changed(int32_t, bool);
 
 	int32_t const                 checkbox_space_;
 	int32_t const                 checkboxes_y_;

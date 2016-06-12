@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -37,13 +38,7 @@ struct ActionConfirm : public UI::Window {
 		(InteractivePlayer & parent,
 		 const std::string & windowtitle,
 		 const std::string & message,
-		 Widelands::Building & building);
-
-	ActionConfirm
-		(InteractivePlayer & parent,
-		 const std::string & windowtitle,
-		 const std::string & message,
-		 Widelands::Ship & ship);
+		 Widelands::MapObject& map_object);
 
 	InteractivePlayer & iaplayer() const {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -53,7 +48,7 @@ struct ActionConfirm : public UI::Window {
 	virtual void ok() = 0;
 
 protected:
-	Widelands::ObjectPointer m_object;
+	Widelands::ObjectPointer object_;
 };
 
 /**
@@ -80,7 +75,7 @@ struct BulldozeConfirm : public ActionConfirm {
 	void ok() override;
 
 private:
-	Widelands::ObjectPointer m_todestroy;
+	Widelands::ObjectPointer todestroy_;
 };
 
 /**
@@ -109,7 +104,7 @@ struct EnhanceConfirm : public ActionConfirm {
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
-	const Widelands::DescriptionIndex m_id;
+	const Widelands::DescriptionIndex id_;
 };
 
 
@@ -138,22 +133,18 @@ ActionConfirm::ActionConfirm
 	(InteractivePlayer & parent,
 	 const std::string & windowtitle,
 	 const std::string & message,
-	 Widelands::Building & building)
+	 Widelands::MapObject & map_object)
 	:
 	UI::Window
 		(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-	m_object (&building)
+	object_ (&map_object)
 {
-	new UI::MultilineTextarea
-		(this,
-		 0, 0, 200, 74,
-		 (boost::format(message) % building.descr().descname()).str(),
-		 UI::Align::kCenter);
+	new UI::MultilineTextarea(this, 0, 0, 200, 74, message, UI::Align::kCenter);
 
 	UI::Button * okbtn =
 		new UI::Button
 			(this, "ok",
-			 6, 80, 80, 34,
+			 UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80, 34,
 			 g_gr->images().get("images/ui_basic/but4.png"),
 			 g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
@@ -161,43 +152,7 @@ ActionConfirm::ActionConfirm
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
-			 114, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_abort.png"));
-	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
-
-	center_to_parent();
-	cancelbtn->center_mouse();
-}
-
-
-ActionConfirm::ActionConfirm
-	(InteractivePlayer & parent,
-	 const std::string & windowtitle,
-	 const std::string & message,
-	 Widelands::Ship & ship)
-	:
-	UI::Window(&parent, "ship_action_confirm", 0, 0, 200, 120, windowtitle),
-	m_object (&ship)
-{
-	new UI::MultilineTextarea
-		(this,
-		 0, 0, 200, 74,
-		 message,
-		 UI::Align::kCenter);
-
-	UI::Button * okbtn =
-		new UI::Button
-			(this, "ok",
-			 6, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_okay.png"));
-	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
-
-	UI::Button * cancelbtn =
-		new UI::Button
-			(this, "abort",
-			 114, 80, 80, 34,
+			 UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
 			 g_gr->images().get("images/ui_basic/but4.png"),
 			 g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
@@ -220,9 +175,9 @@ BulldozeConfirm::BulldozeConfirm
 	ActionConfirm
 		(parent,
 		 _("Destroy building?"),
-		 _("Do you really want to destroy this %s?"),
+		 (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname()).str(),
 		 building),
-	m_todestroy(todestroy ? todestroy : &building)
+	todestroy_(todestroy ? todestroy : &building)
 {
 	// Nothing special to do
 }
@@ -236,8 +191,8 @@ Make sure the building still exists and can in fact be bulldozed.
 void BulldozeConfirm::think()
 {
 	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
-	upcast(Widelands::Building, building, m_object .get(egbase));
-	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
+	upcast(Widelands::Building, building, object_ .get(egbase));
+	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
 	if
 		(!todestroy ||
@@ -255,8 +210,8 @@ void BulldozeConfirm::think()
 void BulldozeConfirm::ok()
 {
 	Widelands::Game & game = iaplayer().game();
-	upcast(Widelands::Building, building, m_object.get(game));
-	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(game));
+	upcast(Widelands::Building, building, object_.get(game));
+	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(game));
 
 	if
 		(todestroy &&
@@ -284,7 +239,7 @@ DismantleConfirm::DismantleConfirm
 	ActionConfirm
 		(parent,
 		 _("Dismantle building?"),
-		 _("Do you really want to dismantle this %s?"),
+		 (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname()).str(),
 		 building)
 {
 	// Nothing special to do
@@ -299,7 +254,7 @@ Make sure the building still exists and can in fact be dismantled.
 void DismantleConfirm::think()
 {
 	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
-	upcast(Widelands::Building, building, m_object.get(egbase));
+	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if
 		(!building ||
@@ -316,8 +271,8 @@ void DismantleConfirm::think()
 void DismantleConfirm::ok()
 {
 	Widelands::Game & game = iaplayer().game();
-	upcast(Widelands::Building, building, m_object.get(game));
-	upcast(Widelands::PlayerImmovable, todismantle, m_object.get(game));
+	upcast(Widelands::Building, building, object_.get(game));
+	upcast(Widelands::PlayerImmovable, todismantle, object_.get(game));
 
 	if
 		(building &&
@@ -344,9 +299,9 @@ EnhanceConfirm::EnhanceConfirm
 	ActionConfirm
 		(parent,
 		 _("Enhance building?"),
-		 _("Do you really want to enhance this %s?"),
+		 (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname()).str(),
 		 building),
-	m_id(id)
+	id_(id)
 {
 	// Nothing special to do
 }
@@ -360,7 +315,7 @@ Make sure the building still exists and can in fact be enhanced.
 void EnhanceConfirm::think()
 {
 	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
-	upcast(Widelands::Building, building, m_object.get(egbase));
+	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if
 		(!building ||
@@ -377,14 +332,14 @@ void EnhanceConfirm::think()
 void EnhanceConfirm::ok()
 {
 	Widelands::Game & game = iaplayer().game();
-	upcast(Widelands::Building, building, m_object.get(game));
+	upcast(Widelands::Building, building, object_.get(game));
 
 	if
 		(building &&
 		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 	{
-		game.send_player_enhance_building(*building, m_id);
+		game.send_player_enhance_building(*building, id_);
 	}
 
 	die();
@@ -395,7 +350,11 @@ void EnhanceConfirm::ok()
  */
 ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
-	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to sink this ship?"), ship)
+	ActionConfirm(parent,
+					  _("Sink the ship?"),
+					  /** TRANSLATORS: %s is a ship name */
+					  (boost::format(_("Do you really want to sink %s?")) % ship.get_shipname()).str(),
+					  ship)
 {
 	// Nothing special to do
 }
@@ -407,7 +366,7 @@ ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & s
 void ShipSinkConfirm::think()
 {
 	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
-	upcast(Widelands::Ship, ship, m_object.get(egbase));
+	upcast(Widelands::Ship, ship, object_.get(egbase));
 
 	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
 		die();
@@ -420,7 +379,7 @@ void ShipSinkConfirm::think()
 void ShipSinkConfirm::ok()
 {
 	Widelands::Game & game = iaplayer().game();
-	upcast(Widelands::Ship, ship, m_object.get(game));
+	upcast(Widelands::Ship, ship, object_.get(game));
 
 	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
@@ -435,7 +394,10 @@ void ShipSinkConfirm::ok()
  */
 ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
-	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to cancel the active expedition?"), ship)
+	ActionConfirm(parent,
+					  _("Cancel expedition?"),
+					  _("Do you really want to cancel the active expedition?"),
+					  ship)
 {
 	// Nothing special to do
 }
@@ -446,7 +408,7 @@ ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer & par
  */
 void ShipCancelExpeditionConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
-	upcast(Widelands::Ship, ship, m_object.get(egbase));
+	upcast(Widelands::Ship, ship, object_.get(egbase));
 
 	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()) ||
 	    !ship->state_is_expedition()) {
@@ -460,16 +422,16 @@ void ShipCancelExpeditionConfirm::think() {
 void ShipCancelExpeditionConfirm::ok()
 {
 	Widelands::Game & game = iaplayer().game();
-	upcast(Widelands::Ship, ship, m_object.get(game));
+	upcast(Widelands::Ship, ship, object_.get(game));
 
 	if
 		(ship
 		 &&
 		 iaplayer().can_act(ship->get_owner()->player_number())
 		 &&
-		 ship->get_ship_state() != Widelands::Ship::TRANSPORT
+		 ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport
 		 &&
-		 ship->get_ship_state() != Widelands::Ship::EXP_COLONIZING)
+		 ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing)
 	{
 		game.send_player_cancel_expedition_ship(*ship);
 	}

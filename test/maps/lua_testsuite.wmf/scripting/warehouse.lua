@@ -168,8 +168,8 @@ function warehouse_tests:test_set_soldiers_by_list()
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
    assert_equal(0, self.w:get_soldiers({2,1,0,1}))
 end
-function warehouse_tests:test_set_soldiers_hp_too_high()
-   assert_error("hp too high", function()
+function warehouse_tests:test_set_soldiers_health_too_high()
+   assert_error("health too high", function()
       self.w:set_soldiers({10,0,0,0}, 1)
    end)
 end

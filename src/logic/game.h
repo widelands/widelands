@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_GAME_H
 #define WL_LOGIC_GAME_H
 
+#include <memory>
+
 #include "base/md5.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
@@ -105,10 +107,15 @@ public:
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame (UI::ProgressWindow *, const GameSettings &);
-	void init_savegame(UI::ProgressWindow *, const GameSettings &);
+	void init_newgame (UI::ProgressWindow* loader_ui, const GameSettings&);
+	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, StartGameType, const std::string& script_to_run, bool replay);
+
+	bool run(UI::ProgressWindow* loader_ui,
+	         StartGameType,
+	         const std::string& script_to_run,
+	         bool replay,
+	         const std::string& prefix_for_replays);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;
@@ -116,33 +123,34 @@ public:
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
 	// Returns the result of run().
-	bool run_splayer_scenario_direct(char const * mapname, const std::string& script_to_run);
+	bool run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run);
 
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
-	bool run_load_game (std::string filename, const std::string& script_to_run);
+	bool run_load_game (const std::string& filename, const std::string& script_to_run);
 
 	void postload() override;
 
 	void think() override;
 
-	ReplayWriter * get_replaywriter() {return m_replaywriter;}
+	ReplayWriter* get_replaywriter() {
+		return replaywriter_.get();
+	}
 
 	/**
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() {return m_state == gs_running;}
-	void end_dedicated_game();
+	bool is_loaded() {return state_ == gs_running;}
 
 	void cleanup_for_load() override;
 
 	// in-game logic
-	const CmdQueue & cmdqueue() const {return m_cmdqueue;}
-	CmdQueue       & cmdqueue()       {return m_cmdqueue;}
-	const RNG       & rng     () const {return m_rng;}
-	RNG             & rng     ()       {return m_rng;}
+	const CmdQueue & cmdqueue() const {return cmdqueue_;}
+	CmdQueue       & cmdqueue()       {return cmdqueue_;}
+	const RNG       & rng     () const {return rng_;}
+	RNG             & rng     ()       {return rng_;}
 
 	uint32_t logic_rand();
 
@@ -176,7 +184,7 @@ public:
 		(PlayerImmovable &, int32_t type, DescriptionIndex index, int32_t prio);
 	void send_player_set_ware_max_fill
 		(PlayerImmovable &, DescriptionIndex index, uint32_t);
-	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
+	void send_player_change_training_options(TrainingSite &, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
@@ -190,11 +198,11 @@ public:
 
 	InteractivePlayer * get_ipl();
 
-	SaveHandler & save_handler() {return m_savehandler;}
+	SaveHandler & save_handler() {return savehandler_;}
 
 	// Statistics
 	const GeneralStatsVector & get_general_statistics() const {
-		return m_general_stats;
+		return general_stats_;
 	}
 
 	void read_statistics(FileRead &);
@@ -202,23 +210,22 @@ public:
 
 	void sample_statistics();
 
-	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
+	const std::string & get_win_condition_displayname() {return win_condition_displayname_;}
 
-	bool is_replay() const {return m_replay;}
+	bool is_replay() const {return replay_;}
 
 private:
 	void sync_reset();
 
-	MD5Checksum<StreamWrite> m_synchash;
+	MD5Checksum<StreamWrite> synchash_;
 
 	struct SyncWrapper : public StreamWrite {
 		SyncWrapper(Game & game, StreamWrite & target) :
-			m_game          (game),
-			m_target        (target),
-			m_counter       (0),
-			m_next_diskspacecheck(0),
-			m_dump          (nullptr),
-			m_syncstreamsave(false)
+			game_          (game),
+			target_        (target),
+			counter_       (0),
+			next_diskspacecheck_(0),
+			syncstreamsave_(false)
 		{}
 
 		~SyncWrapper();
@@ -226,51 +233,50 @@ private:
 		/// Start dumping the entire syncstream into a file.
 		///
 		/// Note that this file is deleted at the end of the game, unless
-		/// \ref m_syncstreamsave has been set.
+		/// \ref syncstreamsave_ has been set.
 		void start_dump(const std::string & fname);
 
 		void data(void const * data, size_t size) override;
 
-		void flush() override {m_target.flush();}
+		void flush() override {target_.flush();}
 
 	public:
-		Game        &   m_game;
-		StreamWrite &   m_target;
-		uint32_t        m_counter;
-		uint32_t        m_next_diskspacecheck;
-		::StreamWrite * m_dump;
-		std::string     m_dumpfname;
-		bool            m_syncstreamsave;
-	}                    m_syncwrapper;
+		Game        &   game_;
+		StreamWrite &   target_;
+		uint32_t        counter_;
+		uint32_t        next_diskspacecheck_;
+		std::unique_ptr<StreamWrite> dump_;
+		std::string     dumpfname_;
+		bool            syncstreamsave_;
+	} syncwrapper_;
 
-	GameController     * m_ctrl;
+	GameController     * ctrl_;
 
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
 	/// replays.
-	bool                 m_writereplay;
+	bool                 writereplay_;
 
 	/// Whether a syncsteam file should be created.
 	/// Defaults to \c false, and can be set to true for network games. The file
-	/// is written only if \ref m_writereplay is true too.
-	bool                 m_writesyncstream;
+	/// is written only if \ref writereplay_ is true too.
+	bool                 writesyncstream_;
 
-	int32_t              m_state;
+	int32_t              state_;
 
-	RNG                  m_rng;
+	RNG                  rng_;
 
-	CmdQueue            m_cmdqueue;
+	CmdQueue            cmdqueue_;
 
-	SaveHandler          m_savehandler;
+	SaveHandler          savehandler_;
 
-	ReplayReader       * m_replayreader;
-	ReplayWriter       * m_replaywriter;
+	std::unique_ptr<ReplayWriter> replaywriter_;
 
-	GeneralStatsVector m_general_stats;
+	GeneralStatsVector general_stats_;
 
 	/// For save games and statistics generation
-	std::string          m_win_condition_displayname;
-	bool                 m_replay;
+	std::string          win_condition_displayname_;
+	bool                 replay_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

@@ -63,9 +63,8 @@ public:
 		// Saving options
 		int32_t autosave; // autosave interval in minutes
 		int32_t rolling_autosave; // number of file to use for rolling autosave
-		uint32_t remove_replays;
-		bool nozip;
-		bool remove_syncstreams;
+		bool zip;
+		bool write_syncstreams;
 
 		// Game options
 		bool auto_roadbuild_mode;
@@ -99,11 +98,6 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
-	void update_sb_autosave_unit();
-	void update_sb_remove_replays_unit();
-	void update_sb_dis_panel_unit();
-	void update_sb_dis_border_unit();
-
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 
@@ -151,9 +145,8 @@ private:
 	// Saving options
 	UI::SpinBox                 sb_autosave_;
 	UI::SpinBox                 sb_rolling_autosave_;
-	UI::SpinBox                 sb_remove_replays_;
-	UI::Checkbox                nozip_;
-	UI::Checkbox                remove_syncstreams_;
+	UI::Checkbox                zip_;
+	UI::Checkbox                write_syncstreams_;
 
 	// Game options
 	UI::Checkbox                auto_roadbuild_mode_;

@@ -213,7 +213,7 @@ public:
 		const Task           * task;
 		int32_t                ivar1;
 		int32_t                ivar2;
-		union                  {int32_t ivar3; uint32_t ui32var3;};
+		int32_t                ivar3;
 		ObjectPointer             objvar1;
 		std::string            svar1;
 
@@ -226,8 +226,8 @@ public:
 
 	MO_DESCR(BobDescr)
 
-	uint32_t get_current_anim() const {return m_anim;}
-	int32_t get_animstart() const {return m_animstart;}
+	uint32_t get_current_anim() const {return anim_;}
+	int32_t get_animstart() const {return animstart_;}
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -237,10 +237,10 @@ public:
 	void skip_act();
 	Point calc_drawpos(const EditorGameBase &, Point) const;
 	void set_owner(Player *);
-	Player * get_owner() const {return m_owner;}
+	Player * get_owner() const {return owner_;}
 	void set_position(EditorGameBase &, const Coords &);
-	const FCoords & get_position() const {return m_position;}
-	Bob * get_next_bob() const {return m_linknext;}
+	const FCoords & get_position() const {return position_;}
+	Bob * get_next_bob() const {return linknext_;}
 
 	/// Check whether this bob should be able to move onto the given node.
 	///
@@ -297,11 +297,11 @@ public:
 	void start_task_move(Game & game, int32_t dir, const DirAnimations &, bool);
 
 	// higher level handling (task-based)
-	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
-	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : nullptr;}
+	State & top_state() {assert(stack_.size()); return *stack_.rbegin();}
+	State * get_state() {return stack_.size() ? &*stack_.rbegin() : nullptr;}
 
 
-	std::string get_signal() {return m_signal;}
+	std::string get_signal() {return signal_;}
 	State       * get_state(const Task &);
 	State const * get_state(const Task &) const;
 	void push_task(Game & game, const Task & task, uint32_t tdelta = 10);
@@ -316,7 +316,7 @@ public:
 	void set_animation(EditorGameBase &, uint32_t anim);
 
 	/// \return true if we're currently walking
-	bool is_walking() {return m_walking != IDLE;}
+	bool is_walking() {return walking_ != IDLE;}
 
 
 	/**
@@ -324,7 +324,7 @@ public:
 	 * It is only introduced here because profiling showed
 	 * that soldiers spend a lot of time in the node blocked check.
 	 */
-	Bob * get_next_on_field() const {return m_linknext;}
+	Bob * get_next_on_field() const {return linknext_;}
 
 protected:
 	Bob(const BobDescr & descr);
@@ -344,25 +344,25 @@ private:
 	 * Call this from your task_act() function that was scheduled after
 	 * start_walk().
 	 */
-	void end_walk() {m_walking = IDLE;}
+	void end_walk() {walking_ = IDLE;}
 
 
 	static Task const taskIdle;
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	Player   * m_owner; ///< can be 0
-	FCoords    m_position; ///< where are we right now?
-	Bob      * m_linknext; ///< next object on this node
-	Bob    * * m_linkpprev;
-	uint32_t       m_anim;
-	int32_t        m_animstart; ///< gametime when the animation was started
-	WalkingDir m_walking;
-	int32_t        m_walkstart; ///< start time (used for interpolation)
-	int32_t        m_walkend;   ///< end time (used for interpolation)
+	Player   * owner_; ///< can be 0
+	FCoords    position_; ///< where are we right now?
+	Bob      * linknext_; ///< next object on this node
+	Bob    * * linkpprev_;
+	uint32_t       anim_;
+	int32_t        animstart_; ///< gametime when the animation was started
+	WalkingDir walking_;
+	int32_t        walkstart_; ///< start time (used for interpolation)
+	int32_t        walkend_;   ///< end time (used for interpolation)
 
 	// Task framework variables
-	std::vector<State> m_stack;
+	std::vector<State> stack_;
 
 	/**
 	 * Every time a Bob acts, this counter is incremented.
@@ -371,7 +371,7 @@ private:
 	 * only the earliest \ref Cmd_Act issued during one act phase is actually
 	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
 	 */
-	uint32_t m_actid;
+	uint32_t actid_;
 
 	/**
 	 * Whether something was scheduled during this act phase.
@@ -380,9 +380,9 @@ private:
 	 * Bobs that hang themselves up. So e.g. \ref skip_act() also sets this
 	 * to \c true, even though it technically doesn't schedule anything.
 	 */
-	bool m_actscheduled;
-	bool m_in_act; ///< if do_act is currently running
-	std::string m_signal;
+	bool actscheduled_;
+	bool in_act_; ///< if do_act is currently running
+	std::string signal_;
 
 	// saving and loading
 protected:

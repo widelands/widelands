@@ -59,7 +59,7 @@ void CritterProgram::parse(const std::vector<std::string>& lines) {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 			}
 
-			m_actions.push_back(act);
+			actions_.push_back(act);
 		}
 		catch (const std::exception& e) {
 			throw wexception("Line '%s': %s", line.c_str(), e.what());
@@ -105,7 +105,7 @@ bool Critter::run_remove
 CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& table)
 	: BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table)
 {
-	add_directional_animation(&m_walk_anims, "walk");
+	add_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
@@ -115,7 +115,7 @@ CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& tab
 		try {
 			std::unique_ptr<CritterProgram> prog(new CritterProgram(program_name));
 			prog->parse(programs->get_table(program_name)->array_entries<std::string>());
-			m_programs[program_name] = prog.release();
+			programs_[program_name] = prog.release();
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
@@ -123,7 +123,7 @@ CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& tab
 }
 
 CritterDescr::~CritterDescr() {
-	for (std::pair<std::string, CritterProgram *> program : m_programs) {
+	for (auto program : programs_) {
 		delete program.second;
 	}
 }
@@ -142,8 +142,8 @@ Get a program from the workers description.
 CritterProgram const * CritterDescr::get_program
 	(const std::string & programname) const
 {
-	Programs::const_iterator const it = m_programs.find(programname);
-	if (it == m_programs.end())
+	Programs::const_iterator const it = programs_.find(programname);
+	if (it == programs_.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 	return it->second;

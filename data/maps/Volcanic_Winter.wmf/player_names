@@ -1,10 +1,10 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7890[trunk] (Debug)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Haegar"
+name="Hägar"
 tribe="barbarians"
 ai=
 closeable="false"

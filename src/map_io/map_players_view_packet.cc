@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -305,7 +305,7 @@ void MapPlayersViewPacket::read
 	Field & first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
-		Player::Field * const player_fields = player->m_fields;
+		Player::Field * const player_fields = player->fields_;
 		uint32_t const gametime = egbase.get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
@@ -903,7 +903,7 @@ void MapPlayersViewPacket::write
 	Field & first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
-		if (const Player::Field * const player_fields = player->m_fields) {
+		if (const Player::Field * const player_fields = player->fields_) {
 			FileWrite                   unseen_times_file;
 			FileWrite           node_immovable_kinds_file;
 			FileWrite                node_immovables_file;
@@ -991,12 +991,12 @@ void MapPlayersViewPacket::write
 						}
 
 						//  edges
-						if (!bl_seen & (f_everseen | bl_everseen))
+						if (!bl_seen && (f_everseen || bl_everseen))
 							roads_file.unsigned_8(f_player_field.road_sw());
-						if (!br_seen & (f_everseen | br_everseen))
+						if (!br_seen && (f_everseen || br_everseen))
 							roads_file.unsigned_8(f_player_field.road_se());
-						if (!r_seen & (f_everseen |  r_everseen))
-							roads_file.unsigned_8(f_player_field.road_e ());
+						if (!r_seen && (f_everseen || r_everseen))
+							roads_file.unsigned_8(f_player_field.road_e());
 					}
 
 					//  geologic survey

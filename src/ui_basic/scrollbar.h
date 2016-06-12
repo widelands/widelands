@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,11 +39,9 @@ struct Scrollbar : public Panel {
 		PlusPage
 	};
 
-	enum {
-		///< default width for vertical scrollbars,
-		// height for horizontal scrollbar
-		Size = 24,
-	};
+	/// default width for vertical scrollbars,
+	/// or height for horizontal scrollbars
+	static constexpr int kSize = 24;
 
 public:
 	Scrollbar
@@ -59,14 +57,16 @@ public:
 
 	bool is_enabled() const;
 	uint32_t get_steps() const;
-	uint32_t get_singlestepsize() const {return m_singlestepsize;}
-	uint32_t get_pagesize() const {return m_pagesize;}
-	uint32_t get_scrollpos() const {return m_pos;}
+	uint32_t get_singlestepsize() const {return singlestepsize_;}
+	uint32_t get_pagesize() const {return pagesize_;}
+	uint32_t get_scrollpos() const {return pos_;}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
 
-	void set_force_draw(bool const t) {m_force_draw = t;}
+	void set_force_draw(bool const t) {force_draw_ = t;}
+
+	void layout() override;
 
 private:
 	Area get_area_for_point(int32_t x, int32_t y);
@@ -86,22 +86,23 @@ private:
 		(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
 private:
-	bool m_horizontal;
-	bool      m_force_draw; // draw this scrollbar, even if it can't do anything
+	bool horizontal_;
+	bool      force_draw_; // draw this scrollbar, even if it can't do anything
 
-	uint32_t  m_pos;            ///< from 0 to m_range - 1
-	uint32_t  m_singlestepsize;
-	uint32_t  m_pagesize;
-	uint32_t  m_steps;
+	uint32_t  pos_;            ///< from 0 to range_ - 1
+	uint32_t  singlestepsize_;
+	uint32_t  pagesize_;
+	uint32_t  buttonsize_;
+	uint32_t  steps_;
 
-	Area m_pressed; ///< area that the user clicked on (None if mouse is up)
-	uint32_t  m_time_nextact;
-	int32_t   m_knob_grabdelta; ///< only while m_pressed == Knob
+	Area pressed_; ///< area that the user clicked on (None if mouse is up)
+	uint32_t  time_nextact_;
+	int32_t   knob_grabdelta_; ///< only while pressed_ == Knob
 
-	const Image* m_pic_minus;      ///< left/up
-	const Image* m_pic_plus;       ///< right/down
-	const Image* m_pic_background;
-	const Image* m_pic_buttons;
+	const Image* pic_minus_;      ///< left/up
+	const Image* pic_plus_;       ///< right/down
+	const Image* pic_background_;
+	const Image* pic_buttons_;
 };
 
 }

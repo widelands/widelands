@@ -168,7 +168,7 @@ amalea_2 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea recommends…",
       -- TRANSLATORS: Amalea
-      _([[I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
+      _([[I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he has cleared enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But unfortunately the logs are useless for repairing our ship – we need to turn them into planks, which are needed by every ship and every bigger building too. So we should build a sawmill – as soon as we have enough space for this.]]))
@@ -183,7 +183,7 @@ amalea_3 = {
       _([[I’ve got two important things to talk about… First the good news:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]])
+      _([[I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into planks.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But the bad news is that our lumberjacks harvest at an incredible speed. There are almost no trees left on this island.]])
