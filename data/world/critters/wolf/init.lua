@@ -5,6 +5,10 @@ animations = {
       pictures = path.list_files(dirname .. "wolf_idle_??.png"),
       hotspot = { 8, 15 },
       fps = 10,
+      sound_effect = {
+         directory = "sound/animals",
+         name = "wolf",
+      },
    },
 }
 add_walking_animations(animations, dirname, "wolf_walk", {19, 19}, 20)
