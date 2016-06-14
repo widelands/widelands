@@ -336,6 +336,8 @@ void Economy::set_ware_target_quantity
 	 Quantity   const permanent,
 	 Time       const mod_time)
 {
+	// Is this safe idea? NOCOM
+	assert(ware_type < owner().egbase().tribes().nrwares());
 	TargetQuantity & tq = ware_target_quantities_[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
@@ -959,8 +961,9 @@ void Economy::create_requested_worker(Game & game, DescriptionIndex index)
 		// if the target quantity of a resource is set to 0
 		// plan at least one worker, so a request for that resource is triggered
 		DescriptionIndex id_w = tribe.ware_index(bc.first);
-		if (0 == ware_target_quantity(id_w).permanent)
+		if (id_w != INVALID_INDEX && 0 == ware_target_quantity(id_w).permanent) {
 			plan_at_least_one = true;
+		}
 		idx++;
 	}
 
