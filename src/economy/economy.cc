@@ -336,8 +336,7 @@ void Economy::set_ware_target_quantity
 	 Quantity   const permanent,
 	 Time       const mod_time)
 {
-	// Is this safe idea? NOCOM
-	assert(ware_type < owner().egbase().tribes().nrwares());
+	assert(owner().egbase().tribes().ware_exists(ware_type));
 	TargetQuantity & tq = ware_target_quantities_[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
@@ -349,6 +348,7 @@ void Economy::set_worker_target_quantity
 	 Quantity   const permanent,
 	 Time       const mod_time)
 {
+	assert(owner().egbase().tribes().worker_exists(ware_type));
 	TargetQuantity & tq = worker_target_quantities_[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
