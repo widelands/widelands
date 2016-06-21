@@ -67,7 +67,9 @@ UI::UniqueWindow
 	 440, 400, _("General Statistics")),
          my_registry_   (&registry),
          box_           (this, 0, 0, UI::Box::Vertical, 0, 0, 5),
-         plot_          (&box_, 0, 0, 430, PLOT_HEIGHT),
+			plot_          (&box_, 0, 0, 430, PLOT_HEIGHT,
+								 kStatisticsSampleTime,
+								 WuiPlotArea::Plotmode::kAbsolute),
          selected_information_(0)
 {
 	assert (my_registry_);
@@ -78,8 +80,6 @@ UI::UniqueWindow
 	box_.set_border(5, 5, 5, 5);
 
 	// Setup plot data
-	plot_.set_sample_rate(STATISTICS_SAMPLE_TIME);
-	plot_.set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 	Game & game = *parent.get_game();
 	const Game::GeneralStatsVector & genstats =
 		game.get_general_statistics();
