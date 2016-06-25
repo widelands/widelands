@@ -36,6 +36,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "base/log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "sound/songset.h"
@@ -327,11 +328,15 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position)
 
 	const InteractiveBase & ibase = *egbase_->get_ibase();
 	Point const vp = ibase.get_viewpoint();
+	log("Viewpoint x: %d\n", vp.x);
+	log("Viewpoint y: %d\n", vp.y);
 
 	int32_t const xres = g_gr->get_xres();
 	int32_t const yres = g_gr->get_yres();
 
 	MapviewPixelFunctions::get_pix(egbase_->map(), position, sx, sy);
+	log("ScreenX sx: %d\n", sx);
+	log("ScreenY sy: %d\n", sy);
 	sx -= vp.x;
 	sy -= vp.y;
 
