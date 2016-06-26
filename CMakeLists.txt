@@ -69,7 +69,9 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
-if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+if (APPLE OR WIN32 OR 
+    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR 
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
   endif()
