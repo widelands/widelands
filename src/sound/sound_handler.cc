@@ -445,7 +445,8 @@ void SoundHandler::play_fx
 {
 	if (nosound_)
 		return;
-
+	log("Playing sound: %s\n", fx_name.c_str());
+	log("At map_position: %d / %d\n", map_position.x, map_position.y);
 	play_fx(fx_name, stereo_position(map_position), priority);
 }
 
