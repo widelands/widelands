@@ -73,7 +73,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "sleep=25000",
             "consume=iron_ore coal",
+            "play_sound=sound/metal fizzle 150",
             "animate=working 35000",
+            "play_sound=sound/metal ironping 80",
             "produce=iron"
          }
       },
@@ -84,7 +86,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold",
             "sleep=25000",
             "consume=gold_ore coal",
+            "play_sound=sound/metal fizzle 150",
             "animate=working 35000",
+            "play_sound=sound/metal goldping 80",
             "produce=gold"
          }
       },
