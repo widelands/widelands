@@ -159,7 +159,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "steppe_barren",
+   name = "summer_steppe_barren",
    descname = _ "Barren Steppe",
    editor_category = "summer",
    is = "arable",
@@ -295,7 +295,7 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "swamp",
+   name = "summer_swamp",
    descname = _ "Swamp",
    editor_category = "summer",
    is = "unwalkable",
