@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-22 06:04+0000\n"
+"POT-Creation-Date: 2016-06-29 06:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -924,8 +924,8 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
 msgid "smelting gold"
 msgstr ""
 
@@ -1995,22 +1995,22 @@ msgid "forging a wooden spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
 msgid "forging an advanced spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:117
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
 msgid "forging a heavy spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
 msgid "forging a war spear"
 msgstr ""
 

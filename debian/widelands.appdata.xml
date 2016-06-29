@@ -8,6 +8,7 @@
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
   <summary xml:lang="ca">Un joc d'estratègia i construcció a temps real </summary>
+  <summary xml:lang="cs">Real-time budovací strategická hra</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
@@ -34,6 +35,14 @@
     </p>
     <p>
       El Widelands ofereix un mode d'un sol jugador amb campanyes que narren les històries de les tribus i la seva lluita en l'univers del Widelands. No obstant, els modes multijugador, a través d'Internet o xarxa LAN, són més interessants: permeten construir imperis junts o enfrontar-vos fins que només quedi pols. El Widelands també disposa d'una intel·ligència artificial que fa les partides més interessants.
+    </p>
+  </description>
+  <description xml:lang="cs">
+    <p>
+      Stanete se vůdcem malého klanu. Vašim úkolem je vybudovat prosperující osídlení. Každý člen Vašeho klanu přispěje svým dílem k vytváření zdrojů a dalšímu růstu.
+    </p>
+    <p>
+      Widelands nabízí mód jednoho hráče a kampaněmi, které vyprávějí příběhy klanů a jejich zápasu ve vesmíru Widelands. Opravdová zábava ale začíná až po spojení s přáteli přes internet nebo LAN a budování společných říší - nebo při vzájemném zápasu a rozdrcení nepřátel v prach. Ve Widelands můžete také k zápasu vyzvat umělou inteligenci.
     </p>
   </description>
   <description xml:lang="de">
