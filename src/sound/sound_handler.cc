@@ -36,7 +36,6 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "base/log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "sound/songset.h"
@@ -328,22 +327,27 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position)
 
 	const InteractiveBase & ibase = *egbase_->get_ibase();
 	Point const vp = ibase.get_viewpoint();
-	log("Viewpoint x: %d\n", vp.x);
-	log("Viewpoint y: %d\n", vp.y);
+	log("Viewpoint x/y: %d / %d\n", vp.x, vp.y);
 
+	// x/yres = resolution of window or fullscreen
 	int32_t const xres = g_gr->get_xres();
 	int32_t const yres = g_gr->get_yres();
+	log("resoluton xres / yres: %d / %d\n", xres, yres);
 
+	// get pixel coordinates in map
 	MapviewPixelFunctions::get_pix(egbase_->map(), position, sx, sy);
-	log("ScreenX sx: %d\n", sx);
-	log("ScreenY sy: %d\n", sy);
+	log("get_pix() sx / sy: %d / %d\n", sx, sy);
+	// adjust map ccordinates to viewpoint
 	sx -= vp.x;
 	sy -= vp.y;
-
+	Point p(sx, sy);
+	log("before normalizing sx/sy: %d / %d\n", sx, sy);
+	MapviewPixelFunctions::normalize_pix(egbase_->map(), p);
+	log("after normalizing sx/sy: %d / %d\n", p.x, p.y);
 	// Make sure position is inside viewport
 
-	if (sx >= 0 && sx <= xres && sy >= 0 && sy <= yres)
-		return sx * 254 / xres;
+	if (p.x >= 0 && p.x <= xres && p.y >= 0 && p.y <= yres)
+		return p.x * 254 / xres;
 
 	return -1;
 }
@@ -446,7 +450,6 @@ void SoundHandler::play_fx
 	if (nosound_)
 		return;
 	log("Playing sound: %s\n", fx_name.c_str());
-	log("At map_position: %d / %d\n", map_position.x, map_position.y);
 	play_fx(fx_name, stereo_position(map_position), priority);
 }
 
