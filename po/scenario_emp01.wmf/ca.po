@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 11:47+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-21 14:18+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -312,7 +312,7 @@ msgstr "Tinc dues coses importants a dir-vos. Primer, les bones notícies:"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
+"to refine the logs that the lumberjacks are harvesting into planks."
 msgstr "He vist que s'ha acabat de construir la serradora. Ja podem refinar els troncs que talen els llenyataires i fer-ne taulons."
 
 #. TRANSLATORS: Amalea
@@ -432,7 +432,7 @@ msgstr "Senyor, heu fet d'aquesta península un lloc molt segur. És hora de con
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

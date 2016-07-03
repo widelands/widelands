@@ -3,19 +3,19 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# Cristiano, 2015
+# xno, 2015
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015
+# Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Matteo Viarengo <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-06-15 06:00+0000\n"
+"PO-Revision-Date: 2016-06-20 14:22+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Costruisci un'economia di base"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
@@ -34,23 +34,23 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Costruisci una capanna del taglialegna"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Costruisci una capanna della guardia forestale"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Costruisci una cava"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Costruisci un trattamento del legno"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Costruisci una guardiola lungo il confine orientale"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."

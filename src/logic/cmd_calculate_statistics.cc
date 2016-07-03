@@ -31,7 +31,7 @@ void CmdCalculateStatistics::execute (Game & game) {
 	game.sample_statistics();
 	game.enqueue_command
 		(new CmdCalculateStatistics
-		 (game.get_gametime() + STATISTICS_SAMPLE_TIME));
+		 (game.get_gametime() + kStatisticsSampleTime));
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;

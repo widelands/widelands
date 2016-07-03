@@ -5,14 +5,14 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2010
-# Matej Svrcek <mmatej@yahoo.com>, 2015
+# Matej Svrcek <mmatej@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-06-22 06:04+0000\n"
+"PO-Revision-Date: 2016-06-27 12:47+0000\n"
+"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Stavba ztracena!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
@@ -34,7 +34,7 @@ msgstr "Budova se zřítila do oceánu!"
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Stavba ztracena!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -115,7 +115,7 @@ msgstr "Postav statek a pěstírnu koření"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Postav mlýn aby se mohla mlít mouka z kukuřice a černého kořene"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -123,7 +123,7 @@ msgstr "Postav studnu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Postav pekárnu, aby se mohl péci chleba z kukuřičné mouky, mouky z černého kořene a vody."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -158,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Tkadleny a tkáči vyrádí pavoučí látku a kytlice v tkalcovské dílně. Pavoučí látka je potřeba také při stavbě některých budov a výrobě dalších látek, zatímco kytlice slouží jako uniformy vojáků. Tkalcovská dílna potřebuje jako vstupní materiál zlatou přízi. Pavoučí příze se vyrábí na pavoučím statku, zatímco zlatá příze se přede ze zlata ve zlaté přadlecí dílně."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -186,7 +186,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "Železná ruda, zlatá ruda a uhlí se těží v příslušných dolech. V krystalovém dole lze těžit křemen a diamanty - jsou to velmi cenné materiály a proto se nachází jen zřídka. Jejich hledání obvykle vyprodukuje mnoho kamene."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -338,7 +338,7 @@ msgstr "Vřava a zmatek"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Rostoucí chaos"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -347,7 +347,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Kvůli výčitkám svědomí spáchal král sebevraždu. Bez svého monarchy se lidé obrátili ke kněžím, ale ti jim nemohli nijak pomoci. Většina se smířila s osudem a ti ostatní se pokoušeli změnit vůli bohů obětováním zvířat v chrámech. Ale vše nadarmo..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -457,7 +457,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Nechť vás Satul hřeje, Jundlino! Nejdůležitější věcí při budování osady jsou stavební materiály. Jsou zde nějaké stromy, takže bychom měli začít postavením domků pro dřevorubce a samozřejmě i pro lesníky, abychom si stromy úplně nevykáceli. Ach, a nesmíme zapomenout ani na pilu, protože většinu budov nelze postavit jen z kmenů. Odolnější budovy potřebují také kámen, ale toho je zde na severovýchodě spousta - stačí postavit lom a moji kameníci se ihned mohou pustit do práce."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -471,7 +471,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Nechť vás Satul hřeje, Jundlino! Plně souhlasím s Loftomorovým návrhem. Potřebujeme zásobu stavebního materiálu, protože musíme rychle rozšiřovat svá území. Dokud neprozkoumáme celé pobřeží ostrova, nebudu se zde na ostrově cítit v bezpečí. Přivedl jsem z Atlantidy spoustu dobrých mužů. Vojenskou sílu máme k dispozici, jediné co potřebujeme, jsou budovy ve kterých budeme přebývat."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -641,7 +641,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Nechť vás hřeje Satul, Jundlino. Zvážila jste možnost těžby nerostných surovin v okolních horách? Začíná nám docházet křemen i diamanty na stavbu našich budov. Také bychom potřebovali více železa, zlata a hlavně uhlí. Pokud bychom objevili dostatečnou zásobu těchto surovin, mohli bychom začít vyrábět zbraně a nástroje, což by nám neuvěřitelně pomohlo. Samozřejmě potřebujeme i slévárnu, zbrojířství, platnéřství a dílnu. A možná dokonce i další výrobny."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
@@ -652,7 +652,7 @@ msgstr "Jundlina přikývne"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Uvažovala jsem nad tím, Sidole. Myslím, že čas nadešel. Od teď je to naše priorita. Brzy budeš mít průmysl, který žádáš!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -874,7 +874,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Chvála Satulovi! Ostur, náš mladý lodník, to dokázal. Máme tři lodě - a neviděl jsem ještě bytelnější - a dostatek místa pro nás i nějaké zboží. Záchrana přišla na poslední chvíli: Lutas se chystá spolknout i zbytek ostrova, vody stoupají každou hodinu rychleji. Ale teď už se nám podaří uprchnout a začít znova v nějaké vzdálené zemi..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:449
@@ -898,7 +898,7 @@ msgstr "Vyhrál jsi tuto misi. Můžeš přejít k další misí, nebo pokračov
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

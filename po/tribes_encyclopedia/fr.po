@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-13 06:49+0000\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-06-01 14:11+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -502,7 +502,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon toutes les 32,5 secondes en moyenne."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
@@ -510,7 +510,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon toutes les 19,5 secondes en moyenne."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -528,7 +528,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon toutes les 14,4 secondes en moyenne."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -592,7 +592,7 @@ msgstr "Relâche des animaux dans la nature pour stabiliser la production de via
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The gamekeeper pauses 52.5 seconds before going to work again."
-msgstr ""
+msgstr "La garde-chasse fait une pause de 52,5 secondes avant de reprendre son travail."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -638,7 +638,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
 " on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire de l'or toutes les 19,5 secondes en moyenne."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -656,7 +656,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
 " on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire de l'or toutes les 18,5 secondes en moyenne."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -792,7 +792,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
 " on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire de l'or toutes les 39,5 secondes en moyenne."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -810,7 +810,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
 " on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du minerai de fer toutes les 17,6 secondes en moyenne."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1973,37 +1973,37 @@ msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Dans la fenêtre de message, les raccourcis clavier additionnels suivants sont disponibles :"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Afficher tous les messages"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "N'afficher que les messages des géologues"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "N'afficher que les messages de l'économie"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "N'afficher que les messages des transports maritimes"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "N'afficher que les messages d'opérations militaires"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "N'afficher que les messages du scénario"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Jump to the location corresponding to the current message"
 msgstr "Saute vers la location correspondante  au message actuel"

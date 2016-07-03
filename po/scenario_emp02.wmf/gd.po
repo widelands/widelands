@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"POT-Creation-Date: 2016-06-07 17:17+0000\n"
+"PO-Revision-Date: 2016-06-10 17:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -80,7 +80,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
 " weapon smithy, armor smithy and smelting works)."
-msgstr "Tog taigh clachair agus bun-structar mèinnearachd 's dèanadais slàn (mèinn guail agus / no sloc guail-fhiodha, mèinn iarainn, ceàrdach acainnean, ceàrdach arm, ceàrdach armachd agus ceàrdach leaghadair)."
+msgstr "Tog taigh clachair agus bun-structar mèinnearachd ’s dèanadais slàn (mèinn guail agus / no sloc guail-fhiodha, mèinn iarainn, ceàrdach acainnean, ceàrdach arm, ceàrdach armachd agus ceàrdach leaghadair)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -511,7 +511,7 @@ msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhar
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

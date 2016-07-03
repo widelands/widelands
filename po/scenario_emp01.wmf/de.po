@@ -2,19 +2,20 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # Jürgen Eberlein <juergen.eberlein@web.de>, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Venatrix, 2015-2016
+# Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:51+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-05-20 21:03+0000\n"
+"PO-Revision-Date: 2016-05-20 21:35+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -316,7 +317,7 @@ msgstr "Ich muss mit dir über zwei wichtige Dinge reden … Zuerst die gute Nac
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
-"to refine the logs that the lumberjacks are harvesting into lumber."
+"to refine the logs that the lumberjacks are harvesting into planks."
 msgstr "Ich sah, dass der Bau des Sägewerks beendet ist, also können wir beginnen, die Stämme zu Brettern zu verarbeiten."
 
 #. TRANSLATORS: Amalea
@@ -436,7 +437,7 @@ msgstr "Herr, Ihr habt diese Halbinsel zu einem sicheren Ort gemacht. Es ist Zei
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

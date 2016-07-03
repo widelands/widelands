@@ -19,6 +19,9 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -30,7 +33,8 @@
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, 2, "load_map_menu", _("Load Map")) {
+	set_current_directory(curdir_);
 
 	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
 	table_.double_clicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, boost::ref(*this)));
@@ -45,13 +49,29 @@ void MainMenuLoadMap::clicked_ok() {
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (g_fs->is_directory(mapdata.filename) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
-		curdir_ = mapdata.filename;
+		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 		eia.load(mapdata.filename);
 		// load() will delete us.
 	}
+}
+
+void MainMenuLoadMap::set_current_directory(const std::string& filename) {
+	curdir_ = filename;
+
+	std::string display_dir = curdir_.substr(basedir_.size());
+	if (boost::starts_with(display_dir, "/")) {
+		display_dir = display_dir.substr(1);
+	}
+	if (boost::starts_with(display_dir, "My_Maps")) {
+		boost::replace_first(display_dir, "My_Maps", _("My Maps"));
+	} else if (boost::starts_with(display_dir, "MP_Scenarios")) {
+		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	}
+	/** TRANSLATORS: The folder that a file will be saved to. */
+	directory_info_.set_text((boost::format(_("Current Directory: %s")) % display_dir).str());
 }
 
 /**

@@ -58,6 +58,7 @@ tribes:new_productionsite_type {
             -- Grapes are only needed for wine, so no need to check if wine is needed
             "sleep=30000",
             "consume=grape:2",
+            "play_sound=sound/empire winebubble 180",
             "animate=working 30000",
             "produce=wine"
          }

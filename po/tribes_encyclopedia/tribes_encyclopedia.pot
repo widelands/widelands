@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-14 08:33+0000\n"
+"POT-Creation-Date: 2016-06-29 06:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1947,37 +1947,37 @@ msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Jump to the location corresponding to the current message"
 msgstr ""
