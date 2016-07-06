@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-16 07:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-06-29 06:36+0000\n"
+"PO-Revision-Date: 2016-07-05 19:58+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,7 +81,7 @@ msgid ""
 "A building is being dismantled at this dismantlesite, returning some of the "
 "resources that were used during this building’s construction to your tribe’s"
 " stores."
-msgstr "En bygning er ved at blive taget ned på denne byggeplads. Det returnerer nogle af de resurser der blev brugt under bygningen til din stammes lagre."
+msgstr "En bygning er ved at blive taget ned på denne byggeplads. Det returnerer nogle af de ressourser, der blev brugt under bygningen til din stammes lagre."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -359,7 +359,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "\"En ny krigerøkse bringer det bedste frem for dens bærer - eller det værste for dens ophavsmand.\""
+msgstr "»En ny krigerøkse bringer det bedste frem hos sin kriger - eller det værste i sin skaber.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -491,7 +491,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr "Minen udnytter kun %s af resursen. Fremadrettet vil der kun være 5%% chance for at finde kul."
+msgstr "Minen udnytter kun %s af ressoursen. Fremadrettet vil der kun være 5%% chance for at finde kul."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
@@ -499,7 +499,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
 "average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille kul i gennemsnitlig 32,5 sekunder."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
@@ -507,7 +507,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
 "average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille kul i gennemsnitlig 19,5 sekunder."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -517,7 +517,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr "Denne mine udnytter alle resurserne ned til det dybeste niveau. Alligevel vil der kun være en %s chance for at finde kul."
+msgstr "Denne mine udnytter alle ressourserne ned til det dybeste niveau. Alligevel vil der kun være en %s chance for at finde kul."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
@@ -525,7 +525,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
 "average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille kul i gennemsnitlig 14,4 sekunder."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -544,7 +544,7 @@ msgstr "Landmanden skal bruge %1% i gennemsnit for at så og høste et neg hvede
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "\"Hvad mener du, er min fisk ikke frisk?!\""
+msgstr "»Hvad mener du, er min fisk ikke frisk?!«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -571,7 +571,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr "\"Han elsker dyrene og at opdrætte dem<br>\nligesom vi elsker at tilberede og spise dem.\""
+msgstr "»Han elsker dyrene og at opdrætte dem<br>\nligesom vi elsker at tilberede og spise dem.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -589,7 +589,7 @@ msgstr "Udsætter dyr i det fri for at understøtte jagten."
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The gamekeeper pauses 52.5 seconds before going to work again."
-msgstr ""
+msgstr "Jagtbestyreren holder pause i 52,5 sekunder før arbejdet genoptages."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -599,7 +599,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity…’"
-msgstr "\"Blød og formbar.<br> Dog urørt af tid og vejr.<br> Solens stråler, spundet ind i evigheden...\""
+msgstr "»Blød og formbar.<br> Dog urørt af tid og vejr.<br> Solens stråler, spundet ind i evigheden ...«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -608,7 +608,7 @@ msgstr "\"Blød og formbar.<br> Dog urørt af tid og vejr.<br> Solens stråler, 
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "Uddrag fra \"Vores underjordiske skatte\",<br> en traditionel barbarsang."
+msgstr "Uddrag fra »Vores underjordiske skatte«,<br> en traditionel barbarsang."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -618,7 +618,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr "Denne mine udnytter kun %s af resursen. Fremadrettet vil der kun være 5%% chance for at finde guldmalm."
+msgstr "Denne mine udnytter kun %s af sine ressourcer. Fremadrettet vil der kun være en 5%% sandsynlighed for at finde guldmalm."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
@@ -635,7 +635,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
 " on average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guld i gennemsnitlig 19,5 sekunder."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -645,7 +645,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Denne mine udnytter alle resurserne ned til det dybeste niveau. Alligevel vil der kun være %s chance for at finde guldmalm."
+msgstr "Denne mine udnytter alle ressourcerne ned til det dybeste niveau. Men selv på dette tidspunkt, vil der stadig være en sandsynlighed på %s for at finde mere guldmalm."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -653,13 +653,13 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
 " on average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guld i gennemsnitlig 18,5 sekunder."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr "\"Jeg kan klare tonsvis af granit, men ikke mere af dit meningsløse ævl.\""
+msgstr "»Jeg kan klare tonsvis af granit, men ikke mere af dit meningsløse ævl.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
@@ -686,7 +686,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr "Denne mine udnytter alle resurserne ned til det dybeste niveau. Alligevel vil der kun være %s chance for at finde granit."
+msgstr "Denne mine udnytter alle ressourserne ned til det dybeste niveau. Alligevel vil der kun være %s chance for at finde granit."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
@@ -717,13 +717,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "\"Så tyst som en ræv,<br> så snu som en væsel,<br> så hurtig som en pil,<br> så dødbringende som en hugorm.\""
+msgstr "»Så tyst som en ræv,<br> så snu som en væsel,<br> så hurtig som en pil,<br> så dødbringende som en hugorm.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "\"Kunsten at jage\""
+msgstr "»Kunsten at jage«"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -754,7 +754,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "\"Jeg kigger på min hakke som slides væk dag for dag, og jeg forstår hvorfor mit arbejde er vigtigt.\""
+msgstr "»Jeg kigger på min egen hakke, som bliver mere og mere træt for hver dag og jeg forstår hvorfor mit arbejde er vigtigt.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -772,7 +772,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr "Denne mine udnytter kun %s af resursen. Fremadrettet vil der kun være 5%% chance for at finde jernmalm."
+msgstr "Denne mine udnytter kun %s af sine ressourser. Fremadrettet vil der kun være 5%% chance for at finde jernmalm."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
@@ -789,7 +789,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
 " on average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille jernmalm i gennemsnitlig 39,5 sekunder."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -799,7 +799,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Denne mine udnytter alle resurserne ned til det dybeste niveau. Alligevel vil der kun være %s chance for at finde jernmalm."
+msgstr "Denne mine udnytter alle ressourserne ned til det dybeste niveau. Alligevel vil der kun være %s chance for at finde jernmalm."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -807,13 +807,13 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
 " on average."
-msgstr ""
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille jernmalm i gennemsnitlig 17,6 sekunder."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "\"Danner nye sten fra gamle med ild og vand.\""
+msgstr "»Danner nye sten fra gamle med ild og vand.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -821,7 +821,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr "Ragnar Barnets svar på spørgsmålet om hvorfor han roder rundt i støvet. Hans \"nye sten\" er nu et vigtigt byggemateriale."
+msgstr "Ragnar Barnets svar på spørgsmålet om hvorfor han roder rundt i støvet. Hans »nye sten« er nu et vigtigt byggemateriale."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
@@ -829,7 +829,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Processes granite to make ‘grout’, a substance that solidifies and so "
 "reinforces masonry."
-msgstr "Omdanner granit for at fremstille \"mørtel\", en substans der størkner og forstærker murværk."
+msgstr "Omdanner granit for at fremstille »injektionsmørtel«, en substans der størkner og forstærker murværk."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -882,7 +882,7 @@ msgstr "Skovhuggeren skal bruge %s på at fælde et træ, ikke indbefattet tiden
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "\"Vi får det til at virke!\""
+msgstr "»Vi får det til at virke!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -994,7 +994,7 @@ msgstr "Skovfogeden skal bruge %s på at plante et træ, ikke indbefattet tiden 
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "\"Vi dyrker tage\""
+msgstr "»Vi dyrker tage«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
@@ -1767,251 +1767,251 @@ msgstr "Produktion"
 msgid "Performance:"
 msgstr "Ydelse:"
 
-#: ../../data/tribes/scripting/help/controls.lua:7
+#: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
 msgstr "Kontroller"
 
-#: ../../data/tribes/scripting/help/controls.lua:10
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgid "Window Control"
 msgstr "Vindueskontrol"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgid "Close window"
 msgstr "Luk vindue"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Højreklik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Midterklik eller Ctrl + venstreklik"
 
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgid "Minimize/Maximize window"
 msgstr "Minimer/maksimer vindue"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl + venstreklik på knap"
 
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgid "Skip confirmation dialog"
 msgstr "Spring over bekræftelsesvindue"
 
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid "Road Control"
 msgstr "Vejkontrol"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:22
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:28
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + venstreklik"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Når to flag forbindes: Sæt automatisk flag i"
 
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Når et flag fjernes: Fjern alle flag hen til nærmeste forgrening"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgid "Keyboard Shortcuts"
 msgstr "Tastaturgenveje"
 
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgid "Increase game speed"
 msgstr "Forøg spillets hastighed"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgid "Decrease game speed"
 msgstr "Sænk spillets hastighed"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pause"
 
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Pause the game"
 msgstr "Sæt spillet på pause"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:41
 msgid "Toggle census"
 msgstr "Vis/skjul folketal"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "Toggle statistics"
 msgstr "Vis/skjul statistik"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "Toggle objectives"
 msgstr "Vis/skjul mål"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:43
+#: ../../data/tribes/scripting/help/controls.lua:49
 msgid "Toggle messages (‘news’)"
 msgstr "Vis/skjul beskeder (nyheder)"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:45
+#: ../../data/tribes/scripting/help/controls.lua:51
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
 msgstr "Stammeleksikon"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:47
+#: ../../data/tribes/scripting/help/controls.lua:53
 msgid "Toggle stock inventory"
 msgstr "Vis/skjul lagerbeholdning"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:49
+#: ../../data/tribes/scripting/help/controls.lua:55
 msgid "Toggle building statistics"
 msgstr "Vis/skjul bygningsstatistik"
 
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgid "Center main mapview on starting location"
 msgstr "Centrer kortet på startstedet"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "(Ctrl +) 0-9"
 msgstr "(Ctrl +) 0-9"
 
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr "Gem og gå til tidligere gemte steder"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:55
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Go to the previous location"
 msgstr "Gå til forrige sted"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Go to the next location"
 msgstr "Gå til næste sted"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Take a screenshot"
 msgstr "Gem skærmbilledet"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Quit the game immediately"
 msgstr "Afslut spillet med det samme"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Vis fejlfindingskonsollen (kun i fejlfindingsudgaver)"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "I beskedvinduet er følgende ekstra genveje tilgængelige:"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Vis alle typer beskeder"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Vis kun beskeder fra geologer"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Vis kun beskeder om økonomien"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Vis kun beskeder om søfart"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Vis kun beskeder om krigsførsel"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Vis kun beskeder om scenariet"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Jump to the location corresponding to the current message"
 msgstr "Gå til det sted som den nuværende besked handler om"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Archive/Restore the current message"
 msgstr "Arkiver/gendan den aktuelle besked"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Slet"
@@ -2124,24 +2124,24 @@ msgstr "Erfaringsniveauer"
 #. TRANSLATORS: Soldier levels
 #: ../../data/tribes/scripting/help/worker_help.lua:165
 msgid "Levels"
-msgstr ""
+msgstr "Niveauer"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:167
 msgid "Health"
-msgstr ""
+msgstr "Helbred"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../data/tribes/scripting/help/worker_help.lua:171
 msgid "Starts at %1% points."
-msgstr ""
+msgstr "Starter med %1% point."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
 #: ../../data/tribes/scripting/help/worker_help.lua:174
 #: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Forøget med %1% point per niveau."
+msgstr[1] "Forøget med %1% point per niveau."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
 #: ../../data/tribes/scripting/help/worker_help.lua:177
@@ -2150,42 +2150,42 @@ msgstr[1] ""
 #: ../../data/tribes/scripting/help/worker_help.lua:212
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Maksimumniveau er %1%"
+msgstr[1] "Maksimumniveau er %1%"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Attack"
-msgstr ""
+msgstr "Angreb"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../data/tribes/scripting/help/worker_help.lua:182
 msgid "A random value between %1% and %2% points is added to each attack."
-msgstr ""
+msgstr "En vilkårlig værdi mellem %1% og %2% point tilføjes til hvert angreb."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:189
 msgid "Defense"
-msgstr ""
+msgstr "Forsvar"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:193
 #: ../../data/tribes/scripting/help/worker_help.lua:201
 #: ../../data/tribes/scripting/help/worker_help.lua:208
 #, lua-format
 msgid "Starts at %d%%."
-msgstr ""
+msgstr "Starter ved %d%%"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:195
 #: ../../data/tribes/scripting/help/worker_help.lua:210
 #, lua-format
 msgid "Increased by %d%% for each level."
-msgstr ""
+msgstr "Forøget med %d%% for hvert niveau."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:202
 msgid "This soldier cannot be trained in defense."
-msgstr ""
+msgstr "Denne soldat kan ikke trænes i forsvar."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Evade"
-msgstr ""
+msgstr "Undvig"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
@@ -2527,7 +2527,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Fisk er en af de vigtigste madresurser for atlanterne. Den skal røges i et røgeri før den leveres til miner, træningsanlæg og spejdere."
+msgstr "Fisk er en af de vigtigste madressourser for atlanterne. Den skal røges i et røgeri før den leveres til miner, træningsanlæg og spejdere."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:6

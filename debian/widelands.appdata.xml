@@ -9,6 +9,7 @@
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
   <summary xml:lang="ca">Un joc d'estratègia i construcció a temps real </summary>
   <summary xml:lang="cs">Real-time budovací strategická hra</summary>
+  <summary xml:lang="da">Et realtids opbygningsstrategispil</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
@@ -43,6 +44,14 @@
     </p>
     <p>
       Widelands nabízí mód jednoho hráče a kampaněmi, které vyprávějí příběhy klanů a jejich zápasu ve vesmíru Widelands. Opravdová zábava ale začíná až po spojení s přáteli přes internet nebo LAN a budování společných říší - nebo při vzájemném zápasu a rozdrcení nepřátel v prach. Ve Widelands můžete také k zápasu vyzvat umělou inteligenci.
+    </p>
+  </description>
+  <description xml:lang="da">
+    <p>
+      Du er leder af en lille klan. Din opgave er at opbygge en stadig voksende bebyggelse. Hvert medlem af din klan vil udføre sin del for at fremstille flere ressourcer til understøttelse af denne vækst.
+    </p>
+    <p>
+      Widelands tilbyder en tilstand for en spiller med kampagner med historier om stammer og deres kamp i universet Widelands. Det bliver dog først rigtig spændende når du bliver forenet med venner over internettet eller LAN for sammen at bygge nye imperier sammen -- eller knuse hinanden i krigens støv. Widelands tilbyder også en kunstig intelligens, som kan udfordre dig.
     </p>
   </description>
   <description xml:lang="de">
