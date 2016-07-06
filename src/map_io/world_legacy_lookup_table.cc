@@ -38,7 +38,6 @@ public:
 private:
 	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> resources_;
-	const std::map<std::string, std::string> terrains_;
 };
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
@@ -72,27 +71,6 @@ immovables_
 resources_
 {
 	{"granite", "stones"},
-},
-
-// Renamed german spelled terrains into english
-terrains_
-{
-	{"wiese1", "summer_meadow1"},
-	{"wiese2", "summer_meadow2"},
-	{"wiese3", "summer_meadow3"},
-	{"wiese4", "summer_meadow4"},
-	{"berg4", "summer_mountain4"},
-	{"steppe", "summer_steppe"},
-	{"steppe_kahl", "summer_steppe_barren"},
-	{"bergwiese", "summer_mountain_meadow"},
-	{"berg1", "summer_mountain1"},
-	{"berg2", "summer_mountain2"},
-	{"berg3", "summer_mountain3"},
-	{"berg4", "summer_mountain4"},
-	{"sumpf", "summer_swamp"},
-	{"strand", "summer_beach"},
-	{"schnee", "summer_snow"},
-	{"wasser", "summer_water"},
 }
 {}
 
@@ -106,11 +84,7 @@ PostOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) cons
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	const auto& i = terrains_.find(terrain);
-	if (i == terrains_.end()) {
-		return terrain;
-	}
-	return i->second;
+	return terrain;
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {

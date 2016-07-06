@@ -27,7 +27,7 @@ world:new_editor_terrain_category{
 pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
    -- The internal name of this terrain.
-   name = "summer_meadow1",
+   name = "wiese1",
 
    -- The name that will be used in UI and translated.
    descname = _ "Meadow 1",
@@ -82,7 +82,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_meadow2",
+   name = "wiese2",
    descname = _ "Meadow 2",
    editor_category = "summer",
    is = "arable",
@@ -103,7 +103,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_meadow3",
+   name = "wiese3",
    descname = _ "Meadow 3",
    editor_category = "summer",
    is = "arable",
@@ -123,7 +123,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_meadow4",
+   name = "wiese4",
    descname = _ "Meadow 4",
    editor_category = "summer",
    is = "arable",
@@ -143,7 +143,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_steppe",
+   name = "steppe",
    descname = _ "Steppe",
    editor_category = "summer",
    is = "arable",
@@ -159,7 +159,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_steppe_barren",
+   name = "steppe_kahl",
    descname = _ "Barren Steppe",
    editor_category = "summer",
    is = "arable",
@@ -175,7 +175,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_mountain_meadow",
+   name = "bergwiese",
    descname = _ "Mountain Meadow",
    editor_category = "summer",
    is = "arable",
@@ -191,7 +191,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_mountain1",
+   name = "berg1",
    descname = _ "Mountain 1",
    editor_category = "summer",
    is = "mineable",
@@ -207,7 +207,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_mountain2",
+   name = "berg2",
    descname = _ "Mountain 2",
    editor_category = "summer",
    is = "mineable",
@@ -223,7 +223,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_mountain3",
+   name = "berg3",
    descname = _ "Mountain 3",
    editor_category = "summer",
    is = "mineable",
@@ -239,7 +239,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_mountain4",
+   name = "berg4",
    descname = _ "Mountain 4",
    editor_category = "summer",
    is = "mineable",
@@ -295,7 +295,7 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "summer_swamp",
+   name = "sumpf",
    descname = _ "Swamp",
    editor_category = "summer",
    is = "unwalkable",
@@ -311,7 +311,7 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "summer_beach",
+   name = "strand",
    descname = _ "Beach",
    editor_category = "summer",
    is = "walkable",
@@ -325,7 +325,7 @@ world:new_terrain_type{
    fertility = 0.2,
 }
 world:new_terrain_type{
-   name = "summer_snow",
+   name = "schnee",
    descname = _ "Snow",
    editor_category = "summer",
    is = "unreachable",
@@ -358,7 +358,7 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "summer_water",
+   name = "wasser",
    descname = _ "Water",
    editor_category = "summer",
    is = "water",

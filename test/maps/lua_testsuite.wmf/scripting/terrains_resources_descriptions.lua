@@ -124,7 +124,7 @@ function test_terrains_resource_descr:test_terrain_default_resource_amount()
 end
 
 function test_terrains_resource_descr:test_terrain_editor_category()
-   assert_equal("green", egbase:get_terrain_description("wiese1").editor_category.name)
+   assert_equal("summer", egbase:get_terrain_description("wiese1").editor_category.name)
    assert_equal("Summer", egbase:get_terrain_description("wiese1").editor_category.descname)
    assert_equal("wasteland",
       egbase:get_terrain_description("wasteland_beach").editor_category.name)
@@ -162,13 +162,13 @@ function test_terrains_resource_descr:test_terrain_temperature()
 end
 
 function test_terrains_resource_descr:test_terrain_representative_image()
-   assert_equal("world/terrains/pics/green/wiese1_00.png",
+   assert_equal("world/terrains/pics/summer/meadow1_00.png",
       egbase:get_terrain_description("wiese1").representative_image)
-   assert_equal("world/terrains/pics/wasteland/strand_00.png",
+   assert_equal("world/terrains/pics/wasteland/beach_00.png",
       egbase:get_terrain_description("wasteland_beach").representative_image)
    assert_equal("world/terrains/pics/desert/forested_mountain2_00.png",
       egbase:get_terrain_description("desert_forested_mountain2").representative_image)
-   assert_equal("world/terrains/pics/winter/water_00.png",
+   assert_equal("world/terrains/pics/winter/water/water_00.png",
       egbase:get_terrain_description("winter_water").representative_image)
 end
 
