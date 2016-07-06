@@ -314,31 +314,39 @@ void SoundHandler::load_one_fx
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
 */
-int32_t SoundHandler::stereo_position(Widelands::Coords const position)
+int32_t SoundHandler::stereo_position(Widelands::Coords const position_map)
 {
-	// Screen x, y (without clipping applied, might well be invisible)
-	int32_t sx, sy;
-
 	if (nosound_)
 		return -1;
 
 	assert(egbase_);
-	assert(position);
+	assert(position_map);
 
+	// Viewpoint is the point of the map in pixel which is shown in the upper
+	// left corner of window or fullscreen
 	const InteractiveBase & ibase = *egbase_->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
+	// Resolution of window or fullscreen
 	int32_t const xres = g_gr->get_xres();
 	int32_t const yres = g_gr->get_yres();
 
-	MapviewPixelFunctions::get_pix(egbase_->map(), position, sx, sy);
-	sx -= vp.x;
-	sy -= vp.y;
+	// Get pixel coordinates of sound source from map coordinates
+	Point position_pix;
+	MapviewPixelFunctions::get_pix(egbase_->map(), position_map, position_pix.x, position_pix.y);
+
+	// Adjust pixel coordinates to viewpoint
+	position_pix.x -= vp.x;
+	position_pix.y -= vp.y;
+	// Normalizing correct invalid pixel coordinates
+	MapviewPixelFunctions::normalize_pix(egbase_->map(), position_pix);
 
 	// Make sure position is inside viewport
-
-	if (sx >= 0 && sx <= xres && sy >= 0 && sy <= yres)
-		return sx * 254 / xres;
+	if (position_pix.x >= 0 &&
+			position_pix.x <= xres &&
+			position_pix.y >= 0 &&
+			position_pix.y <= yres)
+		return position_pix.x * 254 / xres;
 
 	return -1;
 }
@@ -440,7 +448,6 @@ void SoundHandler::play_fx
 {
 	if (nosound_)
 		return;
-
 	play_fx(fx_name, stereo_position(map_position), priority);
 }
 

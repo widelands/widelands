@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
+# Joe Hansen <joedalton2@yahoo.dk>, 2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-06-29 06:36+0000\n"
+"PO-Revision-Date: 2016-07-05 19:45+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -420,50 +421,50 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Udvid din fæstning"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "Udvidelse af bygninger"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "Godt arbejde. Nu ved du hvordan du trækker soldater tilbage fra steder, hvor du ikke har brug for dem. Det er tid at fortælle dig hvordan du forstærker din frontlinje."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "Din fæstning er allerede ret så stærk og erobrer en masse plads. Men der er en endnu større bygning: Kastellet."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "Kasteller kan ikke bygges direkte. I stedet skal du konstruere en fæstning først og så udvide den til et kastel. For at gøre dette klikkes på fæstningen og knappen »Udvid kastellet« vælges."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "Dine soldater vil forlade fæstningen mens konstruktionen er i gang. Dette betyder, at din fæstning vil miste sin militære indflydelse, som jeg beskrev ovenfor."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "Udvid din fæstning til et kastel nu."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Udvid din fæstning til et kastel"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "Udvid din fæstning til et mægtigt kastel."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
@@ -471,15 +472,15 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
+msgstr "Kastellet kan huse 12 soldater og er den største militære bygning barbarerne kan bygge. Den koster også en masse ressourcer og tager lang tid at bygge. Den er bedst egnet til at bevogte strategisk vigtige punkter såsom indsnævrede punkter eller bjerge."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Besejr din fjende"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Besejr fjenden"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""

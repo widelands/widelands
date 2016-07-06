@@ -4,15 +4,15 @@
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # Esben Aaberg <esben_aaberg@yahoo.com>, 2015
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-06-29 06:36+0000\n"
+"PO-Revision-Date: 2016-07-05 19:58+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr "»%s«"
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
@@ -291,7 +291,7 @@ msgstr "Opretter tomt kort..."
 #: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:139
 #: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr "Intet navn"
@@ -308,7 +308,7 @@ msgstr "Ukendt"
 #: ../../src/editor/editorinteractive.cc:672
 #, c-format
 msgid "Loading map “%s”…"
-msgstr "Indlæser kort \"%s\"..."
+msgstr "Indlæser kort »%s« ..."
 
 #: ../../src/editor/map_generator.cc:787
 msgid "Random Player"
@@ -428,21 +428,21 @@ msgstr "Redigeringskategori: %s"
 #: ../../src/editor/tools/info_tool.cc:123
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:94
 msgid "Resources:"
-msgstr "Resurser:"
+msgstr "Ressourser:"
 
 #: ../../src/editor/tools/info_tool.cc:130
 #, c-format
 msgid "Resource name: %s"
-msgstr "Resursenavn: %s"
+msgstr "Ressoursenavn: %s"
 
 #: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Resource amount: %i"
-msgstr "Resursemængde: %i"
+msgstr "Ressoursemængde: %i"
 
 #: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
-msgstr "Ingen resurser"
+msgstr "Ingen ressourser"
 
 #: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
@@ -515,7 +515,7 @@ msgid "New Random Map"
 msgstr "Nyt tilfældigt kort"
 
 #: ../../src/editor/ui_menus/main_menu.cc:62
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
 msgstr "Indlæs kort"
 
@@ -534,7 +534,27 @@ msgstr "Kort-indstillinger"
 msgid "Exit Editor"
 msgstr "Afslut redigering"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
+#. * TRANSLATORS: Directory name for user maps in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:225
+#: ../../src/wui/mapdata.cc:147
+msgid "My Maps"
+msgstr "Mine kort"
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:71
+#: ../../src/wui/mapdata.cc:144
+msgid "Multiplayer Scenarios"
+msgstr "Scenarier for flere spillere"
+
+#. * TRANSLATORS: The folder that a file will be saved to.
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:74
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:224
+#, c-format
+msgid "Current Directory: %s"
+msgstr "Nuværende mappe: %s"
+
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
@@ -545,7 +565,7 @@ msgstr "Afslut redigering"
 msgid "OK"
 msgstr "O.k."
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:146
@@ -556,19 +576,19 @@ msgstr "O.k."
 msgid "Cancel"
 msgstr "Annuller"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "Show Map Names"
 msgstr "Vis kortnavne"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:96
 #: ../../src/ui_fsmenu/mapselect.cc:83
 msgid "Show original map names"
 msgstr "Vis originale kortnavne"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:145
 msgid "Show Filenames"
 msgstr "Vis filnavne"
 
@@ -738,7 +758,7 @@ msgstr "Danner tilfældigt kort..."
 #. created in the editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:507
 msgid "Random Map"
-msgstr ""
+msgstr "Vilkårligt kort"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -750,7 +770,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "Kortet er blevet oprettet. Kontroller spillernes startpositioner for at sikre at din bærer ikke drukner, eller sidder fast på en ø eller oven på et bjerg."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
@@ -762,30 +782,31 @@ msgstr "Opret mappe"
 msgid "Filename:"
 msgstr "Filnavn:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
+#. * TRANSLATORS: A folder that hasn't been given a name yet
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:156
 msgid "unnamed"
 msgstr "unavngivet"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:248
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "En fil med navnet »%s« findes allerede. Overskriv?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:264
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 msgid "Error Saving Map!"
 msgstr "Kunne ikke gemme kort!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:261
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "En fil med navnet »%s.tmp« findes allerede. Du skal fjerne den manuelt."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -837,43 +858,43 @@ msgstr "Indstillinger for højdeværktøjer"
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Øg/sænk værdi:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
-msgstr ""
+msgstr "Angiv værdi:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Klik på kortet for at øge, Skift + Klik på kortet for at sænke terrænhøjden"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Ctrl + Klik på kortet for at angive terrænhøjde"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/tool_menu.cc:71
 msgid "Resources"
-msgstr "Resurser"
+msgstr "Ressourser"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Klik på kortet for at øge, Skift + Klik på kortet for at sænke mængden af den valgte ressource"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "Ctrl + Klik på kortet for at angive mængden af den valgte ressource"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
@@ -881,7 +902,7 @@ msgstr "Ændr højde"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Random height"
-msgstr ""
+msgstr "Vilkårlig højde"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -909,15 +930,15 @@ msgstr "Vælg det punkt der skal have koordinat (0,0). Dette vil være det øver
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
 msgid "Random Height Options"
-msgstr ""
+msgstr "Vilkårlige højdeindstillinger"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Minimumshøjde:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Maksimumshøjde:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
@@ -925,15 +946,15 @@ msgstr ""
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr ""
+msgstr "Klik på kortet for at angive terrænhøjden til en vilkårlig værdi indenfor det angivne interval"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
-msgstr ""
+msgstr "Vilkårlig højde"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
-msgstr ""
+msgstr "Fast højde"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
@@ -1247,7 +1268,7 @@ msgstr "%i%%"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:981
 msgid "Can’t find any more resources!"
-msgstr "Kan ikke finde flere resurser!"
+msgstr "Kan ikke finde flere ressourser!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "Port Space"
@@ -1317,34 +1338,34 @@ msgid "An expedition ship is waiting for your commands."
 msgstr "Et ekspeditionsskib afventer dine kommandoer."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Fragter"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Venter"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Spejder"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:972
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Havneplads fundet"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Grundlægger en koloni"
@@ -1378,11 +1399,11 @@ msgstr "bør udvinde %s, som ikke findes i denne verden; stammen kan ikke bruges
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "bør opdyrke resursetype %s, som ikke findes i denne verden; stammen kan ikke bruges i denne verden"
+msgstr "bør opdyrke ressoursetype %s, som ikke findes i denne verden; stammen kan ikke bruges i denne verden"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:930
 msgid "A geologist found resources."
-msgstr "En geolog har fundet resurser."
+msgstr "En geolog har fundet ressourser."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1836
 #, c-format
@@ -2285,7 +2306,7 @@ msgstr "Navn"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 #: ../../src/ui_fsmenu/options.cc:226
@@ -2912,7 +2933,7 @@ msgstr "Vis samtale i spillet med gennemsigtig baggrund"
 #. * TRANSLATORS: and it also lets you jump to it on the map.
 #: ../../src/ui_fsmenu/options.cc:209
 msgid "Use single watchwindow mode"
-msgstr "Brug ét overvågningsvindue"
+msgstr "Brug et overvågningsvindue"
 
 #: ../../src/ui_fsmenu/options.cc:212 ../../src/ui_fsmenu/options.cc:227
 msgid "Language"
@@ -2986,7 +3007,7 @@ msgstr "Ødelæg bygning?"
 #: ../../src/wui/actionconfirm.cc:178
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr "Ønsker du at ødelægge \"%s\"?"
+msgstr "Ønsker du at ødelægge »%s«?"
 
 #: ../../src/wui/actionconfirm.cc:241
 msgid "Dismantle building?"
@@ -2995,7 +3016,7 @@ msgstr "Riv bygning ned?"
 #: ../../src/wui/actionconfirm.cc:242
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr "Ønsker du at rive \"%s\" ned?"
+msgstr "Ønsker du at rive »%s« ned?"
 
 #: ../../src/wui/actionconfirm.cc:301
 msgid "Enhance building?"
@@ -3004,7 +3025,7 @@ msgstr "Opgrader bygning?"
 #: ../../src/wui/actionconfirm.cc:302
 #, c-format
 msgid "Do you really want to enhance this %s?"
-msgstr "Ønsker du at opgradere \"%s\"?"
+msgstr "Ønsker du at opgradere »%s«?"
 
 #: ../../src/wui/actionconfirm.cc:354
 msgid "Sink the ship?"
@@ -3130,7 +3151,7 @@ msgstr "Stop"
 #: ../../src/wui/buildingwindow.cc:237
 #, c-format
 msgid "Enhance to %s"
-msgstr "Opgradér til \"%s\""
+msgstr "Opgrader til »%s«"
 
 #: ../../src/wui/buildingwindow.cc:239 ../../src/wui/fieldaction.cc:106
 msgid "Construction costs:"
@@ -3493,7 +3514,7 @@ msgstr "Spillet er slut"
 
 #: ../../src/wui/game_summary.cc:73
 msgid "Player Info:"
-msgstr ""
+msgstr "Spillerinfo:"
 
 #: ../../src/wui/game_summary.cc:89
 msgid "Elapsed time:"
@@ -3555,7 +3576,7 @@ msgstr "Score"
 
 #: ../../src/wui/game_summary.cc:280
 msgid "Team Score"
-msgstr ""
+msgstr "Holdpoint"
 
 #: ../../src/wui/general_statistics_menu.cc:191
 msgid "Land"
@@ -3738,17 +3759,17 @@ msgstr "Hold på 4"
 
 #: ../../src/wui/mapdata.cc:37
 msgid "No Author"
-msgstr ""
+msgstr "Ingen forfatter"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../src/wui/mapdata.cc:130
 msgid "parent"
 msgstr "overmappe"
 
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:138
-msgid "Multiplayer Scenarios"
-msgstr "Scenarier for flere spillere"
+#. * TRANSLATORS: This label is shown when a folder is empty
+#: ../../src/wui/mapdata.cc:136
+msgid "empty"
+msgstr "tom"
 
 #: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
@@ -3773,7 +3794,7 @@ msgstr "Navnet på dette kort på dit sprog: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:173
 msgid "Hint:"
-msgstr ""
+msgstr "Fif:"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"
@@ -3783,6 +3804,10 @@ msgstr "Antallet af spillere"
 #: ../../src/wui/maptable.cc:36
 msgid "Pl."
 msgstr "S."
+
+#: ../../src/wui/maptable.cc:37 ../../src/wui/maptable.cc:64
+msgid "Filename"
+msgstr "Filnavn"
 
 #: ../../src/wui/maptable.cc:37
 msgid "The name of the map or scenario"
@@ -3795,10 +3820,6 @@ msgstr "Størrelse"
 #: ../../src/wui/maptable.cc:38
 msgid "The size of the map (Width x Height)"
 msgstr "Størrelsen på kortet (bredde x højde)"
-
-#: ../../src/wui/maptable.cc:64
-msgid "Filename"
-msgstr "Filnavn"
 
 #: ../../src/wui/maptable.cc:70
 msgid "Map Name"
@@ -3926,7 +3947,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minutter"
 
-#: ../../src/wui/plot_area.cc:319
+#: ../../src/wui/plot_area.cc:322
 msgid "game"
 msgstr "spil"
 
