@@ -125,7 +125,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs ax_bronze",
             "sleep=26000",
-            "consume=coal gold iron",
+            "consume=coal:2 iron:2",
             "play_sound=sound/smiths smith 192",
             "animate=working 22000",
             "play_sound=sound/smiths sharpening 120",
