@@ -550,6 +550,10 @@ bool Panel::handle_key(bool down, SDL_Keysym code)
 	if (down) {
 		if (focus_) {
 				Panel * p = focus_->next_;
+				if (focus_ == last_child_) {
+					p = first_child_;
+				}
+
 				switch (code.sym) {
 
 				case SDLK_TAB:
