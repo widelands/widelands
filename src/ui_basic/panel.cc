@@ -857,14 +857,20 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 }
 
 
-bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	// TODO(GunChleoc): This is just a hack for focussed panels
-	// We need to find the actualy scrollable panel beneaththe mouse cursor,
-	// so we can have multiple scrollable elements on the same screen
-	// e.g. load map with a long desctiprion has 2 of them.
-	if (focus_) {
-		if (focus_->do_mousewheel(which, x, y))
-			return true;
+bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos) {
+
+    // Check if a child-panel is beneath the mouse and processes the event
+	for (Panel * child = first_child_; child; child = child->next_) {
+		if (!child->handles_mouse() || !child->is_visible())
+			continue;
+		if (rel_mouse_pos.x < child->x_ + static_cast<int32_t>(child->w_) && rel_mouse_pos.x >= child->x_
+			 &&
+			 rel_mouse_pos.y < child->y_ + static_cast<int32_t>(child->h_) && rel_mouse_pos.y >= child->y_) {
+            // Found a child at the position
+            if (child->do_mousewheel(which, x, y, rel_mouse_pos
+				 - Point(child->get_x() + child->get_lborder(), child->get_y() + child->get_tborder())))
+                return true;
+        }
 	}
 
 	return handle_mousewheel(which, x, y);
@@ -1065,7 +1071,8 @@ bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!p) {
 		return false;
 	}
-	return p->do_mousewheel(which, x, y);
+	return p->do_mousewheel(which, x, y,
+		p->get_mouse_position() - Point(p->get_x() + p->get_lborder(), p->get_y() + p->get_tborder()));
 }
 
 

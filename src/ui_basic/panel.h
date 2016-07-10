@@ -288,7 +288,7 @@ private:
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
