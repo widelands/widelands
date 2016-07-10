@@ -19,9 +19,9 @@ local region_to_forest = map:get_field(0,0):region(23)
 end
 
 function _fully_flooded(f)
-   if f.terd == "wasser" and f.terr == "wasser" and
-      f.tln.terr == "wasser" and f.tln.terd == "wasser" and
-      f.ln.terr == "wasser" and f.trn.terd == "wasser" then
+   if f.terd == "summer_water" and f.terr == "summer_water" and
+      f.tln.terr == "summer_water" and f.tln.terd == "summer_water" and
+      f.ln.terr == "summer_water" and f.trn.terd == "summer_water" then
       return true
    end
    return false
@@ -42,10 +42,10 @@ function flooding()
       flooded_fields:add(f_Field:new(field, field.terd, field.terr))
       local tr_to_change = Set:new{Triangle:new(map:get_field(field.x,field.y),"d")}
       local tr = tr_to_change:pop_at(1)
-      tr:set_ter("wasser")
+      tr:set_ter("summer_water")
       local tr_to_change = Set:new{Triangle:new(map:get_field(field.x,field.y),"r")}
       local tr = tr_to_change:pop_at(1)
-      tr:set_ter("wasser")
+      tr:set_ter("summer_water")
    end
    sleep(3*60*60*1000)
    -- Fields terrains are set back to their former shape

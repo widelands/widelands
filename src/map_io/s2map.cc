@@ -250,9 +250,10 @@ TerrainConverter::TerrainConverter
 	{
 	std::make_pair(S2MapLoader::GREENLAND, std::vector<std::string>
 		{
-			"steppe", "berg1", "schnee", "sumpf", "strand", "wasser", "wiese1",
-			"wiese2", "wiese3", "berg2", "berg3", "berg4", "steppe_kahl",
-			"wiese4", "lava", "bergwiese"
+			"summer_steppe", "summer_mountain1", "summer_snow", "summer_swamp", "summer_beach",
+			"summer_water", "summer_meadow1", "summer_meadow2", "summer_meadow3",
+			"summer_mountain2", "summer_mountain3", "summer_mountain4", "summer_steppe_barren",
+			"summer_meadow4", "lava", "summer_mountain_meadow"
 		}),
 	std::make_pair(S2MapLoader::BLACKLAND, std::vector<std::string>
 		{

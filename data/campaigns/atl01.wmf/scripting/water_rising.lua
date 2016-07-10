@@ -21,9 +21,9 @@ end
 
 
 function _fully_flooded(f)
-   if f.terd == "wasser" and f.terr == "wasser" and
-      f.tln.terr == "wasser" and f.tln.terd == "wasser" and
-      f.ln.terr == "wasser" and f.trn.terd == "wasser" then
+   if f.terd == "summer_water" and f.terr == "summer_water" and
+      f.tln.terr == "summer_water" and f.tln.terd == "summer_water" and
+      f.ln.terr == "summer_water" and f.trn.terd == "summer_water" then
       return true
    end
    return false
@@ -119,7 +119,7 @@ function WaterRiser:new(ocean_seed)
 
    while triangles_to_check.size > 0 do
       local tr = triangles_to_check:pop_at(1)
-      if tr:get_ter() == "wasser" and tr:get_height() <= rv._water_level then
+      if tr:get_ter() == "summer_water" and tr:get_height() <= rv._water_level then
          rv._ocean:add(tr)
          for idx, ntr in ipairs(tr:neighbours()) do
             if not (rv._ocean:contains(ntr) or rv._shore:contains(ntr)) then
@@ -193,7 +193,7 @@ function WaterRiser:_rise_water()
    while self._to_flood.size > 0 do
       local tr = self._to_flood:pop_at(math.random(self._to_flood.size))
 
-      tr:set_ter("wasser")
+      tr:set_ter("summer_water")
       for idx,f in ipairs(tr:fields()) do
          if _fully_flooded(f) then
             if self.field_flooded_callback then
