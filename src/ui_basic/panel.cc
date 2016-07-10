@@ -870,6 +870,9 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_
             if (child->do_mousewheel(which, x, y, rel_mouse_pos
 				 - Point(child->get_x() + child->get_lborder(), child->get_y() + child->get_tborder())))
                 return true;
+			// Break after the first hit panel in the list. The panels are ordered from top to bottom,
+			// so only the highest window at the current mouse coordinates receives the event
+			break;
         }
 	}
 
@@ -1071,8 +1074,7 @@ bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!p) {
 		return false;
 	}
-	return p->do_mousewheel(which, x, y,
-		p->get_mouse_position() - Point(p->get_x() + p->get_lborder(), p->get_y() + p->get_tborder()));
+	return p->do_mousewheel(which, x, y, p->get_mouse_position());
 }
 
 
