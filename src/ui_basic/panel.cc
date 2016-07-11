@@ -859,21 +859,25 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos) {
 
-    // Check if a child-panel is beneath the mouse and processes the event
+	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel * child = first_child_; child; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible())
+		if (!child->handles_mouse() || !child->is_visible()) {
 			continue;
-		if (rel_mouse_pos.x < child->x_ + static_cast<int32_t>(child->w_) && rel_mouse_pos.x >= child->x_
-			 &&
-			 rel_mouse_pos.y < child->y_ + static_cast<int32_t>(child->h_) && rel_mouse_pos.y >= child->y_) {
-            // Found a child at the position
-            if (child->do_mousewheel(which, x, y, rel_mouse_pos
-				 - Point(child->get_x() + child->get_lborder(), child->get_y() + child->get_tborder())))
-                return true;
-			// Break after the first hit panel in the list. The panels are ordered from top to bottom,
-			// so only the highest window at the current mouse coordinates receives the event
-			break;
-        }
+		}
+		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_)
+			|| rel_mouse_pos.x < child->x_
+			|| rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_)
+			|| rel_mouse_pos.y < child->y_) {
+			continue;
+		}
+		// Found a child at the position
+		if (child->do_mousewheel(which, x, y, rel_mouse_pos
+				- Point(child->get_x() + child->get_lborder(), child->get_y() + child->get_tborder()))) {
+			return true;
+		}
+		// Break after the first hit panel in the list. The panels are ordered from top to bottom,
+		// so only the highest window at the current mouse coordinates receives the event
+		break;
 	}
 
 	return handle_mousewheel(which, x, y);
