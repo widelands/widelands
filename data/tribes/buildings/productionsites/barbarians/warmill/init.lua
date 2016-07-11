@@ -82,11 +82,12 @@ tribes:new_productionsite_type {
          descname = _"forging an ax",
          actions = {
             "return=skipped unless economy needs ax",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal iron",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax"
          }
       },
@@ -95,11 +96,12 @@ tribes:new_productionsite_type {
          descname = _"forging a sharp ax",
          actions = {
             "return=skipped unless economy needs ax_sharp",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal iron:2",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax_sharp"
          }
       },
@@ -108,11 +110,12 @@ tribes:new_productionsite_type {
          descname = _"forging a broad ax",
          actions = {
             "return=skipped unless economy needs ax_broad",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal:2 iron:2",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax_broad"
          }
       },
@@ -121,11 +124,12 @@ tribes:new_productionsite_type {
          descname = _"forging a bronze ax",
          actions = {
             "return=skipped unless economy needs ax_bronze",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal:2 iron:2",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax_bronze"
          }
       },
@@ -134,11 +138,12 @@ tribes:new_productionsite_type {
          descname = _"forging a battle ax",
          actions = {
             "return=skipped unless economy needs ax_battle",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal gold iron:2",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax_battle"
          }
       },
@@ -147,11 +152,12 @@ tribes:new_productionsite_type {
          descname = _"forging a warrior’s ax",
          actions = {
             "return=skipped unless economy needs ax_warriors",
-            "sleep=32000",
+            "sleep=26000",
             "consume=coal:2 gold:2 iron:2",
             "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 22000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=ax_warriors"
          }
       },

@@ -63,6 +63,7 @@ tribes:new_productionsite_type {
             "sleep=43000",
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
+            "play_sound=sound/barbarians blackwood 80",
             "animate=working 24000",
             "produce=blackwood"
          }

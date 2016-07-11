@@ -76,8 +76,9 @@ tribes:new_productionsite_type {
             "sleep=20000",
             "consume=iron planks",
             "play_sound=sound/smiths smith 192",
-            "animate=working 30000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 21000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=trident_light"
          }
       },
@@ -89,8 +90,9 @@ tribes:new_productionsite_type {
             "sleep=32000",
             "consume=iron coal planks",
             "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 36000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=trident_long"
          }
       },
@@ -102,8 +104,9 @@ tribes:new_productionsite_type {
             "sleep=32000",
             "consume=iron:2 coal planks",
             "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 36000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=trident_steel"
          }
       },
@@ -115,8 +118,9 @@ tribes:new_productionsite_type {
             "sleep=32000",
             "consume=iron coal:2 planks gold",
             "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 36000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=trident_double"
          }
       },
@@ -128,8 +132,9 @@ tribes:new_productionsite_type {
             "sleep=32000",
             "consume=iron:2 coal:2 planks gold",
             "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "animate=working 36000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=trident_heavy_double"
          }
       },
