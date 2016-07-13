@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-06 06:43+0000\n"
+"POT-Creation-Date: 2016-07-13 06:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1042,22 +1042,22 @@ msgid "forging a light trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
 msgid "forging a long trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:112
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
 msgid "forging a double trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
 msgid "forging a heavy double trident"
 msgstr ""
 
@@ -1151,14 +1151,14 @@ msgid "forging an ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
 msgid "forging a sharp ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:101
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:108
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
 msgid "forging a broad ax"
 msgstr ""
 
@@ -1571,17 +1571,17 @@ msgid "War Mill"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
 msgid "forging a bronze ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:134
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a battle ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:147
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
 msgid "forging a warrior’s ax"
 msgstr ""
 
