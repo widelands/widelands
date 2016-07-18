@@ -70,8 +70,10 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=33000",
+            "sleep=23000",
             "consume=barbarians_bread,fish,meat",
+            "play_sound=sound/barbarians/taverns tavern 100",
+            "sleep=10000",
             "produce=ration"
          }
       },
@@ -80,8 +82,10 @@ tribes:new_productionsite_type {
          descname = _"preparing a snack",
          actions = {
             "return=skipped unless economy needs snack",
-            "sleep=35000",
+            "sleep=5000",  -- keeping first sleep low reduces futile wait time for resources
             "consume=barbarians_bread fish,meat beer",
+            "play_sound=sound/barbarians/taverns biginn 100",
+            "sleep=30000",
             "produce=snack"
          }
       },
@@ -90,8 +94,10 @@ tribes:new_productionsite_type {
          descname = _"preparing a meal",
          actions = {
             "return=skipped unless economy needs meal",
-            "sleep=37000",
+            "sleep=5000",  -- keeping first sleep low reduces futile wait time for resources
             "consume=barbarians_bread fish,meat beer_strong",
+            "play_sound=sound/barbarians/taverns biginn 100",
+            "sleep=32000",
             "produce=meal"
          }
       },

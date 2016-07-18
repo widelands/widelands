@@ -64,9 +64,11 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=14000",
+            "sleep=10000",
             "consume=empire_bread,fish,meat",
+            "play_sound=sound/empire/taverns ration 100",
             "animate=working 19000",
+            "sleep=4000",
             "produce=ration"
          }
       },
@@ -75,9 +77,11 @@ tribes:new_productionsite_type {
          descname = _"preparing a meal",
          actions = {
             "return=skipped unless economy needs meal",
-            "sleep=15000",
+            "sleep=10000",
             "consume=empire_bread fish,meat",
+            "play_sound=sound/empire/taverns meal 100",
             "animate=working 20000",
+            "sleep=5000",
             "produce=meal"
          }
       },
