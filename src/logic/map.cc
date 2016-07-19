@@ -249,7 +249,7 @@ void Map::recalc_default_resources(const World& world) {
 			}
 			amount /= 6;
 
-			if (res == -1 || !amount) {
+			if (res == -1 || res == INVALID_INDEX || res == Widelands::kNoResource || !amount) {
 				clear_resources(f);
 			} else {
 				initialize_resources(f, res, amount);
