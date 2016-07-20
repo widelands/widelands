@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-15 06:00+0000\n"
-"PO-Revision-Date: 2016-06-20 14:22+0000\n"
+"POT-Creation-Date: 2016-07-13 06:02+0000\n"
+"PO-Revision-Date: 2016-07-13 08:26+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -556,7 +556,7 @@ msgstr "Scenari multiplayer"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:224
 #, c-format
 msgid "Current Directory: %s"
-msgstr ""
+msgstr "Directory corrente: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
@@ -779,7 +779,7 @@ msgstr "La mappa è stata generata. Per favore controlla le posizioni iniziali d
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
 msgid "Make Directory"
-msgstr "Crea cartella"
+msgstr "Crea directory"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
 #: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
@@ -2420,14 +2420,14 @@ msgstr "La partita è una partita salvata - la condizione di vittoria è stata i
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:428
 msgid "Saved game is directory"
-msgstr "La partita salvata è una cartella"
+msgstr "La partita salvata è una directory"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:430
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "AVVERTIMENTO:\nIl salvataggio che hai selezionato è una cartella. Questo succede se attivi l'opzione \"nozip\" o se scompatti manualmente un salvataggio.\nWidelands non è in grado di trasferire la struttura della cartella ai client, seleziona un altro salvataggio o comprimi il contenuto della cartella"
+msgstr "AVVERTIMENTO:\nIl salvataggio che hai selezionato è una directory. Questo succede se attivi l'opzione \"nozip\" o se scompatti manualmente un salvataggio.\nWidelands non è in grado di trasferire le strutture della directory ai client, seleziona un altro salvataggio o comprimi il contenuto delle directory"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:449 ../../src/ui_fsmenu/launch_spg.cc:297
 msgid "File not found"
@@ -3951,7 +3951,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:319
+#: ../../src/wui/plot_area.cc:322
 msgid "game"
 msgstr "gioco"
 
