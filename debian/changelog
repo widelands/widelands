@@ -15,6 +15,7 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
     - Reduce complexity by reducing the number of paths configured during build
       to just the datadir. 
     - Install two new binaries; wl_map_info and wl_render_richtext
+    - Always use our bundled fonts
 
  -- Widelands <mail@example.org>  Thu, 21 Jul 2016 21:25:36 +0200
 
