@@ -10,6 +10,8 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
     - Removed build dependencies: lua
     - Disabled and removed all Debian-patches since some caused conflicts when
       applied to latest trunk.
+    - Set absolute paths when building. Otherwise Widelands will get confused 
+      and refuse to start
 
  -- Widelands <mail@example.org>  Thu, 21 Jul 2016 21:25:36 +0200
 
