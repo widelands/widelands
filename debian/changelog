@@ -3,7 +3,6 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
   * Merged Debian packaging of Widelands 1:18-3.
   * Remaining patches applied:
     - Adjust boost dependency to fix FTBFS on Ubuntu 12.04
-    - Alternative font dependencies for older releases
     - Removed patch for kFreebsd. It has been included in trunk and therefore 
       triggers a conflict when attempting to reapply it.
     - New build dependencies: boost-regex, boost-test
