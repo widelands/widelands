@@ -191,7 +191,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     find_library(EXECINFO_LIBRARY NAMES execinfo)
   endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 
-  #OpenBSD needs the X11 include directory in order to find GL/glu.h
+  # OpenBSD needs the X11 include directory in order to find GL/glu.h
   if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     find_package(X11 REQUIRED)
     include_directories(${X11_INCLUDE_DIR})
