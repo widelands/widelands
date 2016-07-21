@@ -5,6 +5,7 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
     - Adjust boost dependency to fix FTBFS on Ubuntu 12.04
     - Removed patch for kFreebsd. It has been included in trunk and therefore 
       triggers a conflict when attempting to reapply it.
+    - Build dependencies changed from SDL to SDL2.
     - New build dependencies: boost-regex, boost-test
     - Removed build dependencies: lua
     - Disabled and removed all Debian-patches since some caused conflicts when
