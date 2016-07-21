@@ -7,11 +7,14 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
       triggers a conflict when attempting to reapply it.
     - Build dependencies changed from SDL to SDL2.
     - New build dependencies: boost-regex, boost-test
-    - Removed build dependencies: lua
+    - Removed build dependencies: lua, sdl(2)-gfx
     - Disabled and removed all Debian-patches since some caused conflicts when
       applied to latest trunk.
     - Set absolute paths when building. Otherwise Widelands will get confused 
       and refuse to start
+    - Reduce complexity by reducing the number of paths configured during build
+      to just the datadir. 
+    - Install two new binaries; wl_map_info and wl_render_richtext
 
  -- Widelands <mail@example.org>  Thu, 21 Jul 2016 21:25:36 +0200
 
