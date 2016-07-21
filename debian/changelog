@@ -6,7 +6,8 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
     - Alternative font dependencies for older releases
     - Removed patch for kFreebsd. It has been included in trunk and therefore 
       triggers a conflict when attempting to reapply it.
-    - New build dependencies: boost-regex
+    - New build dependencies: boost-regex, boost-test
+    - Removed build dependencies: lua
     - Disabled and removed all Debian-patches since some caused conflicts when
       applied to latest trunk.
 
