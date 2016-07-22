@@ -1,7 +1,6 @@
 widelands (1:18-3widelands1) UNRELEASED; urgency=medium
 
   * Merged Debian packaging of Widelands 1:18-3. Remaining changes:
-    - Adjust boost dependency to fix FTBFS on Ubuntu 12.04
     - Disabled all Debian-patches since some caused conflicts when applied to 
       latest trunk. They mostly concern architectures which we don't have
       access to build/test with normally, so they would be hard to maintain.
