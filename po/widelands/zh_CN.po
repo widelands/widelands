@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
+"POT-Creation-Date: 2016-07-20 04:54+0000\n"
+"PO-Revision-Date: 2016-06-07 17:19+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -290,7 +290,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:139
 #: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr "无名"
@@ -514,7 +514,7 @@ msgid "New Random Map"
 msgstr "新随机地图"
 
 #: ../../src/editor/ui_menus/main_menu.cc:62
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
 msgstr "加载地图"
 
@@ -533,7 +533,27 @@ msgstr "地图选项"
 msgid "Exit Editor"
 msgstr "退出编辑器"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
+#. * TRANSLATORS: Directory name for user maps in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:225
+#: ../../src/wui/mapdata.cc:147
+msgid "My Maps"
+msgstr ""
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:71
+#: ../../src/wui/mapdata.cc:144
+msgid "Multiplayer Scenarios"
+msgstr ""
+
+#. * TRANSLATORS: The folder that a file will be saved to.
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:74
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:224
+#, c-format
+msgid "Current Directory: %s"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
@@ -544,7 +564,7 @@ msgstr "退出编辑器"
 msgid "OK"
 msgstr "确认"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:146
@@ -555,19 +575,19 @@ msgstr "确认"
 msgid "Cancel"
 msgstr "撤销"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "Show Map Names"
 msgstr "显示地图名"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:96
 #: ../../src/ui_fsmenu/mapselect.cc:83
 msgid "Show original map names"
 msgstr "显示原始地图名"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:145
 msgid "Show Filenames"
 msgstr "显示文件名"
 
@@ -760,30 +780,31 @@ msgstr "建立目录"
 msgid "Filename:"
 msgstr "文件名"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
+#. * TRANSLATORS: A folder that hasn't been given a name yet
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:156
 msgid "unnamed"
 msgstr "未命名"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:248
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "文件‘%s’已经存在了，要覆盖吗？"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:264
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 msgid "Error Saving Map!"
 msgstr "保存地图错误！"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:261
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "名为'%s.tmp'的文件已经存在。你必须自己删除它。"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1307,34 +1328,34 @@ msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:972
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -3724,9 +3745,9 @@ msgstr ""
 msgid "parent"
 msgstr "上级"
 
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:138
-msgid "Multiplayer Scenarios"
+#. * TRANSLATORS: This label is shown when a folder is empty
+#: ../../src/wui/mapdata.cc:136
+msgid "empty"
 msgstr ""
 
 #: ../../src/wui/mapdetails.cc:123
@@ -3763,6 +3784,10 @@ msgstr "玩家数量"
 msgid "Pl."
 msgstr ""
 
+#: ../../src/wui/maptable.cc:37 ../../src/wui/maptable.cc:64
+msgid "Filename"
+msgstr ""
+
 #: ../../src/wui/maptable.cc:37
 msgid "The name of the map or scenario"
 msgstr ""
@@ -3773,10 +3798,6 @@ msgstr "尺寸"
 
 #: ../../src/wui/maptable.cc:38
 msgid "The size of the map (Width x Height)"
-msgstr ""
-
-#: ../../src/wui/maptable.cc:64
-msgid "Filename"
 msgstr ""
 
 #: ../../src/wui/maptable.cc:70
@@ -3902,7 +3923,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:319
+#: ../../src/wui/plot_area.cc:322
 msgid "game"
 msgstr ""
 

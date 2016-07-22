@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:36+0000\n"
+"POT-Creation-Date: 2016-07-20 04:54+0000\n"
+"PO-Revision-Date: 2016-06-07 19:38+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -299,7 +299,7 @@ msgstr "Erstelle leere Karte …"
 #: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:139
 #: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr "Kein Name"
@@ -523,7 +523,7 @@ msgid "New Random Map"
 msgstr "Neue Zufallskarte"
 
 #: ../../src/editor/ui_menus/main_menu.cc:62
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
 msgstr "Karte laden"
 
@@ -542,7 +542,27 @@ msgstr "Kartenoptionen"
 msgid "Exit Editor"
 msgstr "Editor beenden"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
+#. * TRANSLATORS: Directory name for user maps in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:225
+#: ../../src/wui/mapdata.cc:147
+msgid "My Maps"
+msgstr "Meine Karten"
+
+#. * TRANSLATORS: Directory name for MP Scenarios in map selection
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:71
+#: ../../src/wui/mapdata.cc:144
+msgid "Multiplayer Scenarios"
+msgstr "Mehrspieler-Szenarios"
+
+#. * TRANSLATORS: The folder that a file will be saved to.
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:74
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:224
+#, c-format
+msgid "Current Directory: %s"
+msgstr "Aktuelles Verzeichnis: %s"
+
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:447 ../../src/ui_basic/messagebox.cc:91
@@ -553,7 +573,7 @@ msgstr "Editor beenden"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:146
@@ -564,19 +584,19 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "Show Map Names"
 msgstr "Zeige Kartennamen"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:96
 #: ../../src/ui_fsmenu/mapselect.cc:83
 msgid "Show original map names"
 msgstr "Zeige ursprüngliche (englische) Kartennamen"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:145
 msgid "Show Filenames"
 msgstr "Zeige Dateinamen"
 
@@ -770,30 +790,31 @@ msgstr "Erstelle Verzeichnis"
 msgid "Filename:"
 msgstr "Dateiname:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
+#. * TRANSLATORS: A folder that hasn't been given a name yet
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:156
 msgid "unnamed"
 msgstr "unbenannt"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:248
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eine Datei mit dem Namen „%s“ existiert bereits. Überschreiben?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:303
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:251
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:264
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 msgid "Error Saving Map!"
 msgstr "Fehler beim Speichern der Karte!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:261
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Eine Datei mit dem Namen „%s.tmp“ existiert bereits. Du musst sie manuell entfernen."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:299
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1325,34 +1346,34 @@ msgid "An expedition ship is waiting for your commands."
 msgstr "Ein Expeditionsschiff wartet auf seine Befehle."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Liefert Waren"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Wartet"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Erkundet"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:972
+#: ../../src/logic/map_objects/tribes/ship.cc:980
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Hafenbauplatz gefunden"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:976
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Gründet eine Kolonie"
@@ -3753,10 +3774,10 @@ msgstr "Kein Autor"
 msgid "parent"
 msgstr "übergeordneter Ordner"
 
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:138
-msgid "Multiplayer Scenarios"
-msgstr "Mehrspieler-Szenarios"
+#. * TRANSLATORS: This label is shown when a folder is empty
+#: ../../src/wui/mapdata.cc:136
+msgid "empty"
+msgstr "leer"
 
 #: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
@@ -3792,6 +3813,10 @@ msgstr "Anzahl der Spieler"
 msgid "Pl."
 msgstr "Sp."
 
+#: ../../src/wui/maptable.cc:37 ../../src/wui/maptable.cc:64
+msgid "Filename"
+msgstr "Dateiname"
+
 #: ../../src/wui/maptable.cc:37
 msgid "The name of the map or scenario"
 msgstr "Der Name der Karte oder des Szenarios"
@@ -3803,10 +3828,6 @@ msgstr "Größe"
 #: ../../src/wui/maptable.cc:38
 msgid "The size of the map (Width x Height)"
 msgstr "Die Größe der Karte (Breite x Höhe)"
-
-#: ../../src/wui/maptable.cc:64
-msgid "Filename"
-msgstr "Dateiname"
 
 #: ../../src/wui/maptable.cc:70
 msgid "Map Name"
@@ -3934,7 +3955,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../../src/wui/plot_area.cc:319
+#: ../../src/wui/plot_area.cc:322
 msgid "game"
 msgstr "Spiel"
 
