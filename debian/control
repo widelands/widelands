@@ -32,6 +32,7 @@ Architecture: any
 Depends: widelands-data (= ${source:Version}), 
   ${shlibs:Depends}, 
   ${misc:Depends}, 
+  fonts-freefont-ttf, fonts-dejavu-core, fonts-dejavu-extra,
 Description: fantasy real-time strategy game
  Widelands is a strategy game aiming for gameplay similar to Settlers II by
  BlueByte.
@@ -44,7 +45,8 @@ Description: fantasy real-time strategy game
 
 Package: widelands-data
 Architecture: all
-Depends: ${misc:Depends}
+Depends: fonts-freefont-ttf,
+  ${misc:Depends}
 Description: fantasy real-time strategy game (data files)
  This package contains the graphics and levels for Widelands.
  .
