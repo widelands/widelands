@@ -27,8 +27,6 @@ until sudo apt-get install -qq --force-yes -y \
    libglew-dev \
    libicu-dev \
    libpng-dev \
-   libxml2-dev \
-   libyajl-dev \
    zlib1g-dev \
    libsdl2-dev \
    libsdl2-image-dev \
