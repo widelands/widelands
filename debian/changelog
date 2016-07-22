@@ -2,13 +2,13 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
 
   * Merged Debian packaging of Widelands 1:18-3. Remaining changes:
     - Adjust boost dependency to fix FTBFS on Ubuntu 12.04
-    - Removed patch for kFreebsd. It has been included in trunk and therefore 
-      triggers a conflict when attempting to reapply it.
+    - Disabled all Debian-patches since some caused conflicts when applied to 
+      latest trunk. They mostly concern architectures which we don't have
+      access to build/test with normally, so they would be hard to maintain.
+        - The kFreeBSD-patch was removed entirely since it has been included.
     - Build dependencies changed from SDL to SDL2.
     - New build dependencies: boost-regex, boost-test
     - Removed build dependencies: lua, sdl(2)-gfx
-    - Disabled and removed all Debian-patches since some caused conflicts when
-      applied to latest trunk.
     - Reduce complexity by reducing the number of paths configured during build
       to just the datadir. 
     - Install new binaries; wl_map_info, wl_map_object_info and wl_render_richtext
