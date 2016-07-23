@@ -20,7 +20,7 @@ widelands (1:18-3widelands1) UNRELEASED; urgency=medium
     - Made widelands.desktop localizable.
     - Translations for appdata and desktop file.
 
- -- Widelands <mail@example.org>  Thu, 21 Jul 2016 21:25:36 +0200
+ -- Widelands <widelands-dev@lists.launchpad.net>  Thu, 21 Jul 2016 21:25:36 +0200
 
 widelands (1:18-3) unstable; urgency=medium
 
