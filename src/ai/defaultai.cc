@@ -4808,8 +4808,8 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
                                         uint32_t* tested_fields,
                                         uint16_t* mineable_fields_count,
-                                        const Widelands::Coords starting_spot,
-                                        const WalkSearch type) {
+                                        const Coords& starting_spot,
+                                        const WalkSearch& type) {
 	Map& map = game().map();
 	std::list<uint32_t> queue;
 	std::unordered_set<uint32_t> done;
@@ -5335,7 +5335,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
 // ones ready to attack
-int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> soldiers) {
+int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& soldiers) {
 
 	if (soldiers.empty()) {
 		return 0;

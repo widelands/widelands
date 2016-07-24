@@ -405,7 +405,7 @@ struct ComplexRouterFixture {
 	  */
 	TestingRoutingNode * new_node_w_neighbour
 		(TestingRoutingNode * const d,
-		 Coords               const pos      = Coords(0, 0),
+		 const Coords& pos = Coords(0, 0),
 		 int32_t                             = 1,
 		 int32_t              const waitcost = 0)
 	{
