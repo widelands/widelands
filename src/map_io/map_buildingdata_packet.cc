@@ -1308,16 +1308,12 @@ void MapBuildingdataPacket::write_trainingsite
 			("Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
 			 static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
 	fw.unsigned_16(static_cast<uint16_t> (trainingsite.training_failure_count_.size()));
-	for
-		(TrainingSite::TrainFailCount::const_iterator i = trainingsite.training_failure_count_.begin();
-		 i != trainingsite.training_failure_count_.end(); i++)
-	{
-		fw.unsigned_8(static_cast<uint8_t>(i->first.first));
-		fw.unsigned_16(i->first.second);
-		fw.unsigned_16(i->second.first);
-		fw.unsigned_8(i->second.second);
+	for (const auto& fail_and_presence : trainingsite.training_failure_count_) {
+		fw.unsigned_8(static_cast<uint8_t>(fail_and_presence.first.first));
+		fw.unsigned_16(fail_and_presence.first.second);
+		fw.unsigned_16(fail_and_presence.second.first);
+		fw.unsigned_8(fail_and_presence.second.second);
 	}
-
 	// DONE
 }
 }
