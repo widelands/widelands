@@ -85,7 +85,7 @@ struct FieldOverlayManager {
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
 	/// Point::invalid(), the center of the picture will be used as hotspot.
-	void register_overlay(const Widelands::TCoords<> coords,
+	void register_overlay(const Widelands::TCoords<>& coords,
 	                      const Image* pic,
 	                      int32_t level,
 	                      Point hotspot = Point::invalid(),

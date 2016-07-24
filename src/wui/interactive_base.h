@@ -186,7 +186,7 @@ private:
 	struct SelData {
 		SelData
 			(const bool Freeze = false, const bool Triangles = false,
-			 const Widelands::NodeAndTriangle<> Pos       =
+			 const Widelands::NodeAndTriangle<>& Pos =
 				Widelands::NodeAndTriangle<>
 			 		(Widelands::Coords(0, 0),
 			 		 Widelands::TCoords<>

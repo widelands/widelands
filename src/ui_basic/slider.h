@@ -185,7 +185,7 @@ struct DiscreteSlider : public Panel {
 	DiscreteSlider
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const std::vector<std::string> labels_in,
+		 const std::vector<std::string>& labels_in,
 		 uint32_t value_,
 		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),

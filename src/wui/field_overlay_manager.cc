@@ -117,7 +117,7 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 }
 
 void FieldOverlayManager::register_overlay
-	(Widelands::TCoords<> const c,
+	(const Widelands::TCoords<>& c,
 	 const Image* pic,
 	 int32_t              const level,
 	 Point                      hotspot,

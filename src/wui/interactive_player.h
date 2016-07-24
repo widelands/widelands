@@ -77,12 +77,12 @@ public:
 	void cleanup_for_load() override;
 	void think() override;
 
-	void set_flag_to_connect(Widelands::Coords const location) {
+	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message &);
-	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) override;
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
