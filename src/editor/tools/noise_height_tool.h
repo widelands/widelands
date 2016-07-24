@@ -26,7 +26,7 @@
 struct EditorNoiseHeightTool : public EditorTool {
 	EditorNoiseHeightTool
 	(EditorSetHeightTool & the_set_tool,
-	 const Widelands::HeightInterval the_interval =
+	 const Widelands::HeightInterval& the_interval =
 	     Widelands::HeightInterval(10, 14))
 		:
 		EditorTool(the_set_tool, the_set_tool),
@@ -55,7 +55,7 @@ struct EditorNoiseHeightTool : public EditorTool {
 	Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
-	void set_interval(Widelands::HeightInterval const i) {
+	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 

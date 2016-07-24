@@ -51,7 +51,7 @@ struct EditorSetHeightTool : public EditorTool {
 	Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
-	void set_interval(Widelands::HeightInterval const i) {
+	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 

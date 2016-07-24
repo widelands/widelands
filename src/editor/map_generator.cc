@@ -119,7 +119,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
                                       uint32_t const* const random2,
                                       uint32_t const* const random3,
                                       uint32_t const* const random4,
-                                      FCoords const fc) {
+                                      const FCoords& fc) {
 	// We'll take the "D" terrain at first...
 	// TODO(unknown): Check how the editor handles this...
 
@@ -438,7 +438,7 @@ DescriptionIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
-	 Coords const c0, Coords const c1, Coords const c2,
+	 const Coords& c0, const Coords& c1, const Coords& c2,
 	 uint32_t const h1, uint32_t const h2, uint32_t const h3,
 	 RNG                       &       rng,
 	 MapGenAreaInfo::MapGenTerrainType & terrType)

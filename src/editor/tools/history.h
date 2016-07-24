@@ -41,7 +41,7 @@ struct EditorHistory {
 							 EditorTool::ToolIndex ind,
 	                   Widelands::Map& map,
 	                   const Widelands::World& world,
-	                   Widelands::NodeAndTriangle<> const center,
+	                   const Widelands::NodeAndTriangle<>& center,
 							 EditorInteractive& parent,
 	                   bool draw = false);
 	uint32_t undo_action(const Widelands::World& world);
