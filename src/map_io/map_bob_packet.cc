@@ -34,7 +34,7 @@ constexpr uint16_t kCurrentPacketVersion = 1;
 void MapBobPacket::read_bob(FileRead& fr,
 									 EditorGameBase& egbase,
 									 MapObjectLoader&,
-									 Coords const coords,
+									 const Coords& coords,
 									 const WorldLegacyLookupTable& lookup_table) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();

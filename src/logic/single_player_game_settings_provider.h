@@ -53,7 +53,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	void set_player_closeable(uint8_t, bool) override;
 	void set_player_shared(uint8_t, uint8_t) override;
 	void set_player_name(uint8_t const number, const std::string & name) override;
-	void set_player(uint8_t const number, PlayerSettings const ps) override;
+	void set_player(uint8_t const number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t const number) override;
 
 	std::string get_win_condition_script() override;

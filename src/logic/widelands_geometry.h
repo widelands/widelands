@@ -155,10 +155,10 @@ struct NodeAndTriangle {
 			: node(Node), triangle(Triangle)
 	{}
 
-	bool operator== (NodeAndTriangle<> const other) const {
+	bool operator== (const NodeAndTriangle<>& other) const {
 		return node == other.node && triangle == other.triangle;
 	}
-	bool operator!= (NodeAndTriangle<> const other) const {
+	bool operator!= (const NodeAndTriangle<>& other) const {
 		return !(*this == other);
 	}
 

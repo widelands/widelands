@@ -52,7 +52,7 @@ struct NoteShipMessage {
 	enum class Message {kLost, kGained, kWaitingForCommand};
 	Message message;
 
-	NoteShipMessage(Ship* const init_ship, Message const init_message)
+	NoteShipMessage(Ship* const init_ship, const Message& init_message)
 	   : ship(init_ship), message(init_message) {
 	}
 };

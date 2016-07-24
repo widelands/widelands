@@ -86,7 +86,7 @@ struct NetClient :
 		(uint8_t number, const std::string & tribe, bool const random_tribe = false) override;
 	void set_player_init     (uint8_t number, uint8_t index) override;
 	void set_player_name     (uint8_t number, const std::string & name) override;
-	void set_player         (uint8_t number, PlayerSettings ps) override;
+	void set_player         (uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number   (uint8_t number) override;
 	void set_player_team     (uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;

@@ -43,7 +43,7 @@ private:
 	void read_bob(FileRead&,
 	             EditorGameBase&,
 					 MapObjectLoader&,
-	             Coords,
+	             const Coords&,
 	             const WorldLegacyLookupTable& lookup_table);
 };
 }

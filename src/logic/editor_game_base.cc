@@ -260,7 +260,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
  * \li former_buildings is the list of former buildings
  */
 Building & EditorGameBase::warp_building
-	(Coords const c, PlayerNumber const owner, DescriptionIndex const idx,
+	(const Coords& c, PlayerNumber const owner, DescriptionIndex const idx,
 		Building::FormerBuildings former_buildings)
 {
 	Player & plr = player(owner);
@@ -279,7 +279,7 @@ Building & EditorGameBase::warp_building
  * an enhancement.
  */
 Building & EditorGameBase::warp_constructionsite
-	(Coords const c, PlayerNumber const owner,
+	(const Coords& c, PlayerNumber const owner,
 	 DescriptionIndex idx, bool loading,
 	 Building::FormerBuildings former_buildings)
 {
@@ -296,7 +296,7 @@ Building & EditorGameBase::warp_constructionsite
  * except during loading.
  */
 Building & EditorGameBase::warp_dismantlesite
-	(Coords const c, PlayerNumber const owner,
+	(const Coords& c, PlayerNumber const owner,
 	 bool loading, Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);
@@ -327,11 +327,11 @@ Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owne
  *
  */
 
-Bob& EditorGameBase::create_critter(Coords const c, DescriptionIndex const bob_type_idx, Player* owner) {
+Bob& EditorGameBase::create_critter(const Coords& c, DescriptionIndex const bob_type_idx, Player* owner) {
 	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
 }
 
-Bob& EditorGameBase::create_critter(Coords c, const std::string& name, Player* owner) {
+Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
 	const BobDescr* descr = world().get_bob_descr(name);
 	if (descr == nullptr)
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
@@ -349,7 +349,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, DescriptionIndex const idx, MapObjectDescr::OwnerType type)
+	(const Coords& c, DescriptionIndex const idx, MapObjectDescr::OwnerType type)
 {
 	const ImmovableDescr & descr =
 		*
@@ -364,7 +364,7 @@ Immovable & EditorGameBase::create_immovable
 }
 
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
+	(const Coords& c, const std::string & name, MapObjectDescr::OwnerType type)
 {
 	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
@@ -391,12 +391,12 @@ Immovable & EditorGameBase::create_immovable
  * idx is the bob type.
  */
 
-Bob& EditorGameBase::create_ship(Coords const c, int const ship_type_idx, Player* owner) {
+Bob& EditorGameBase::create_ship(const Coords& c, int const ship_type_idx, Player* owner) {
 	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
 	return create_bob(c, *descr, owner);
 }
 
-Bob& EditorGameBase::create_ship(Coords c, const std::string& name, Player* owner) {
+Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Player* owner) {
 	try {
 		int idx = tribes().safe_ship_index(name);
 		return create_ship(c, idx, owner);
@@ -482,7 +482,7 @@ void EditorGameBase::cleanup_for_load()
 
 
 void EditorGameBase::set_road
-	(FCoords const f, uint8_t const direction, uint8_t const roadtype)
+	(const FCoords& f, uint8_t const direction, uint8_t const roadtype)
 {
 	const Map & m = map();
 	const Field & first_field = m[0];

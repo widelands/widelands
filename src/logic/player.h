@@ -128,7 +128,7 @@ public:
 
 	void create_default_infrastructure();
 
-	NodeCaps get_buildcaps(FCoords) const;
+	NodeCaps get_buildcaps(const FCoords&) const;
 
 	bool is_hostile(const Player &) const;
 
@@ -416,7 +416,7 @@ public:
 	void see_node
 		(const Map &,
 		 const Widelands::Field & first_map_field,
-		 const FCoords,
+		 const FCoords&,
 		 const Time,
 		 const bool forward = false)
 	;
@@ -472,8 +472,8 @@ public:
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
-	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
-	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
+	Flag & force_flag(const FCoords&);      /// Do what it takes to create the flag.
+	Flag *   build_flag(const Coords&);      /// Build a flag if it is allowed.
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building& force_building(Coords, const Building::FormerBuildings&);
@@ -569,7 +569,7 @@ private:
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
 	// node.
-	void rediscover_node(const Map&, const Widelands::Field&, FCoords);
+	void rediscover_node(const Map&, const Widelands::Field&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>

@@ -71,7 +71,7 @@ bool CheckStepAnd::allowed
 	return true;
 }
 
-bool CheckStepAnd::reachable_dest(Map & map, FCoords const dest) const
+bool CheckStepAnd::reachable_dest(Map & map, const FCoords& dest) const
 {
 	for (const CheckStep& checkstep : subs) {
 		if (!checkstep.reachable_dest(map, dest)) {
@@ -103,7 +103,7 @@ bool CheckStepDefault::allowed
 	return false;
 }
 
-bool CheckStepDefault::reachable_dest(Map & map, FCoords const dest) const
+bool CheckStepDefault::reachable_dest(Map & map, const FCoords& dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
@@ -193,7 +193,7 @@ bool CheckStepRoad::allowed
 	return true;
 }
 
-bool CheckStepRoad::reachable_dest(Map & map, FCoords const dest) const
+bool CheckStepRoad::reachable_dest(Map & map, const FCoords& dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
@@ -210,7 +210,7 @@ bool CheckStepRoad::reachable_dest(Map & map, FCoords const dest) const
 
 
 bool CheckStepLimited::allowed
-	(Map &, FCoords, FCoords const end, int32_t, CheckStep::StepId) const
+	(Map &, FCoords, const FCoords& end, int32_t, CheckStep::StepId) const
 {
 	return allowed_locations_.find(end) != allowed_locations_.end();
 }

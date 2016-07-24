@@ -417,7 +417,7 @@ void NetClient::set_player_name(uint8_t, const std::string &)
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void NetClient::set_player(uint8_t, PlayerSettings)
+void NetClient::set_player(uint8_t, const PlayerSettings&)
 {
 	// do nothing here - the request for a positionchange is send in
 	// set_player_number(uint8_t) to the host.
