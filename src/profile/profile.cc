@@ -634,7 +634,7 @@ Section * Profile::get_section(const std::string & name)
  */
 Section & Profile::get_safe_section(const std::string & name)
 {
-	if (Section * const s = get_section(name.c_str()))
+	if (Section * const s = get_section(name))
 		return *s;
 	else
 		throw wexception

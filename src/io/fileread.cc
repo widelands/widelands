@@ -57,7 +57,7 @@ bool FileRead::end_of_file() const {
 	return length_ <= filepos_;
 }
 
-void FileRead::set_file_pos(Pos const pos) {
+void FileRead::set_file_pos(const Pos& pos) {
 	assert(data_);
 	if (pos >= length_)
 		throw FileBoundaryExceeded();
@@ -77,7 +77,7 @@ size_t FileRead::data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::data(uint32_t const bytes, const Pos pos) {
+char* FileRead::data(uint32_t const bytes, const Pos& pos) {
 	assert(data_);
 	Pos i = pos;
 	if (pos.is_null()) {
@@ -89,7 +89,7 @@ char* FileRead::data(uint32_t const bytes, const Pos pos) {
 	return data_ + i;
 }
 
-char* FileRead::c_string(Pos const pos) {
+char* FileRead::c_string(const Pos& pos) {
 	assert(data_);
 
 	Pos i = pos.is_null() ? filepos_ : pos;

@@ -61,9 +61,8 @@
 #endif
 
 FileSystem::FileSystem()
-{
-	root_ = "";
-}
+   : root_("")
+{}
 
 
 /**
