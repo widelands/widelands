@@ -29,7 +29,7 @@
 */
 int32_t
 EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
-                                       Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                        EditorInteractive& parent,
                                        EditorActionArgs* args,
 									   Widelands::Map* map) {
@@ -52,7 +52,7 @@ EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
 
 int32_t
 EditorDeleteBobTool::handle_undo_impl(const Widelands::World& world,
-                                      Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& parent,
                                       EditorActionArgs* args,
 									  Widelands::Map* map) {
