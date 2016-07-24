@@ -59,7 +59,7 @@ void CheckStepAnd::add(const CheckStep & sub)
 }
 
 bool CheckStepAnd::allowed
-	(Map & map, FCoords const start, FCoords const end, int32_t const dir,
+	(Map & map, const FCoords& start, const FCoords& end, int32_t const dir,
 	 CheckStep::StepId const id)
 	const
 {
@@ -87,7 +87,7 @@ CheckStepDefault
 ===============
 */
 bool CheckStepDefault::allowed
-	(Map &, FCoords start, FCoords end, int32_t, CheckStep::StepId) const
+	(Map &, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId) const
 {
 	NodeCaps const endcaps = end.field->nodecaps();
 
@@ -126,8 +126,8 @@ CheckStepWalkOn
 */
 bool CheckStepWalkOn::allowed
 	(Map &,
-	 FCoords           const start,
-	 FCoords           const end,
+	 const FCoords& start,
+	 const FCoords& end,
 	 int32_t,
 	 CheckStep::StepId const id)
 	const
@@ -162,7 +162,7 @@ bool CheckStepWalkOn::reachable_dest(Map &, FCoords) const {
 
 
 bool CheckStepRoad::allowed
-	(Map & map, FCoords const start, FCoords const end, int32_t,
+	(Map & map, const FCoords& start, const FCoords& end, int32_t,
 	 CheckStep::StepId const id)
 	const
 {
@@ -210,7 +210,7 @@ bool CheckStepRoad::reachable_dest(Map & map, const FCoords& dest) const
 
 
 bool CheckStepLimited::allowed
-	(Map &, FCoords, const FCoords& end, int32_t, CheckStep::StepId) const
+	(Map &, const FCoords&, const FCoords& end, int32_t, CheckStep::StepId) const
 {
 	return allowed_locations_.find(end) != allowed_locations_.end();
 }
