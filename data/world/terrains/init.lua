@@ -182,7 +182,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "summer/mountain_maedow_00.png" },
+   textures = { pics_dir .. "summer/mountain_meadow_00.png" },
    dither_layer = 160,
    temperature = 75,
    humidity = 0.8,

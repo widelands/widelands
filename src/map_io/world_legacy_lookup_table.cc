@@ -74,7 +74,7 @@ resources_
 	{"granite", "stones"},
 },
 
-// Renamed german spelled terrains into english
+// Renamed German spelled terrains into English
 terrains_
 {
 	{"wiese1", "summer_meadow1"},
@@ -157,6 +157,7 @@ terrains_
 {std::make_pair(
 	"greenland", std::map<std::string, std::string>
 	{
+       // Renamed German spelled terrains into English
 		 // This has to be here to get scenarios work
 		 {"wiese1", "summer_meadow1"},
 		 {"wiese2", "summer_meadow2"},
