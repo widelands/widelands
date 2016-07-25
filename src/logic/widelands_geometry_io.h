@@ -106,7 +106,7 @@ void write_direction_8_allow_null(StreamWrite* wr, Direction d);
 void write_coords_32(StreamWrite* wr, const Coords& c);
 
 // Writes 'area' to 'wr'.
-void write_area_48(StreamWrite* wr, Area<Coords, uint16_t> const area);
+void write_area_48(StreamWrite* wr, const Area<Coords, uint16_t>& area);
 
 }  // namespace Widelands
 

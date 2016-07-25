@@ -85,7 +85,7 @@ bool TestingRoutingNode::all_members_zeroed() {
 }
 
 class TestingTransportCostCalculator : public ITransportCostCalculator {
-	int32_t calc_cost_estimate(Coords c1, Coords c2) const override {
+	int32_t calc_cost_estimate(const Coords& c1, const Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
@@ -405,7 +405,7 @@ struct ComplexRouterFixture {
 	  */
 	TestingRoutingNode * new_node_w_neighbour
 		(TestingRoutingNode * const d,
-		 Coords               const pos      = Coords(0, 0),
+		 const Coords& pos = Coords(0, 0),
 		 int32_t                             = 1,
 		 int32_t              const waitcost = 0)
 	{

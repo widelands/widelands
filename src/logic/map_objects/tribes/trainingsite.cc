@@ -813,18 +813,15 @@ TrainingSite::training_successful(TrainingAttribute type, uint32_t level)
 void
 TrainingSite::training_done()
 {
-	TrainFailCount::iterator it;
-	for (it = training_failure_count_.begin(); it != training_failure_count_.end(); it++)
-	{
+	for (auto& fail_and_presence : training_failure_count_) {
 		// If a soldier is present at this training level, deteoriate
-		if (it->second.second)
+		if (fail_and_presence.second.second)
 		{
-			it->second.first++;
-			it->second.second = 0;
+			fail_and_presence.second.first++;
+			fail_and_presence.second.second = 0;
+		} else if (0 < fail_and_presence.second.first) { // If no soldier, let's become optimistic
+			fail_and_presence.second.first--;
 		}
-		else // If no soldier, let's become optimistic
-		if (0 < it->second.first)
-			it->second.first--;
 	}
 }
 

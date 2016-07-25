@@ -38,7 +38,7 @@ using namespace Widelands;
 /* Helper classes */
 /******************/
 struct TestingFlag : public Flag {
-	TestingFlag(EditorGameBase &, Coords const c) : Flag() {
+	TestingFlag(EditorGameBase &, const Coords& c) : Flag() {
 		set_flag_position(c);
 	}
 

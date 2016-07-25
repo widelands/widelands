@@ -73,7 +73,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	const FlagDescr& descr() const;
 
 	Flag(); /// empty flag for savegame loading
-	Flag(EditorGameBase &, Player & owner, Coords); /// create a new flag
+	Flag(EditorGameBase &, Player & owner, const Coords&); /// create a new flag
 	~Flag() override;
 
 	void load_finish(EditorGameBase &) override;

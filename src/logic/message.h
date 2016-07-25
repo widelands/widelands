@@ -70,7 +70,7 @@ struct Message {
 		 const std::string&        init_icon_filename,
 		 const std::string&        init_heading,
 		 const std::string&        init_body,
-		 Widelands::Coords   const c = Coords::null(),
+		 const Widelands::Coords&  c = Coords::null(),
 		 Widelands::Serial         ser = 0,
 		 Status                    s = Status::kNew)
 		:

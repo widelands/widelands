@@ -283,10 +283,9 @@ void CmdBuild::write
 /*** class Cmd_BuildFlag ***/
 
 CmdBuildFlag::CmdBuildFlag (StreamRead & des) :
-PlayerCommand (0, des.unsigned_8())
-{
-	coords = read_coords_32(&des);
-}
+PlayerCommand (0, des.unsigned_8()),
+  coords(read_coords_32(&des))
+{}
 
 void CmdBuildFlag::execute (Game & game)
 {
@@ -339,17 +338,16 @@ steps        (nullptr)
 {}
 
 CmdBuildRoad::CmdBuildRoad (StreamRead & des) :
-PlayerCommand (0, des.unsigned_8())
+PlayerCommand (0, des.unsigned_8()),
+  // We cannot completely deserialize the path here because we don't have a Map
+  path(nullptr),
+  start(read_coords_32(&des)),
+  nsteps(des.unsigned_16()),
+  steps(new char[nsteps])
 {
-	start = read_coords_32(&des);
-	nsteps = des.unsigned_16();
-
-	// we cannot completely deserialize the path here because we don't have a Map
-	path = nullptr;
-	steps = new char[nsteps];
-
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
+	}
 }
 
 CmdBuildRoad::~CmdBuildRoad ()

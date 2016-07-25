@@ -30,10 +30,10 @@
 
 namespace Widelands {
 
-MapGenBobCategory::MapGenBobCategory(const LuaTable& table) {
-	immovables_ = table.get_table("immovables")->array_entries<std::string>();
-	critters_ = table.get_table("critters")->array_entries<std::string>();
-}
+MapGenBobCategory::MapGenBobCategory(const LuaTable& table) :
+	immovables_(table.get_table("immovables")->array_entries<std::string>()),
+	critters_(table.get_table("critters")->array_entries<std::string>())
+{}
 
 const MapGenBobCategory*
 MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType) const {

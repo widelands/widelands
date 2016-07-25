@@ -100,8 +100,8 @@ struct BaseImmovable : public MapObject {
 	static std::string size_to_string(int32_t size);
 
 protected:
-	void set_position(EditorGameBase &, Coords);
-	void unset_position(EditorGameBase &, Coords);
+	void set_position(EditorGameBase &, const Coords&);
+	void unset_position(EditorGameBase &, const Coords&);
 };
 
 
@@ -126,7 +126,7 @@ public:
 	int32_t get_size() const {return size_;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
-	Immovable & create(EditorGameBase &, Coords) const;
+	Immovable & create(EditorGameBase &, const Coords&) const;
 
 	MapObjectDescr::OwnerType owner_type() const {return owner_type_;}
 

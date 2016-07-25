@@ -64,7 +64,7 @@ struct MapTriangleRegion
 	bool advance(const Map &);
 };
 template <> struct MapTriangleRegion<FCoords> {
-	MapTriangleRegion(const Map & map, const Area<FCoords> area) :
+	MapTriangleRegion(const Map & map, const Area<FCoords>& area) :
 		area_(TCoords<FCoords>(area, TCoords<FCoords>::D), area.radius + 1),
 		rowwidth_        (area_.radius * 2 + 1),
 		remaining_in_row_(rowwidth_),

@@ -711,13 +711,13 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, DescriptionIndex const id)
+	(int32_t const pid, const Coords& coords, DescriptionIndex const id)
 {
 	assert(tribes().building_exists(id));
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
 }
 
-void Game::send_player_build_flag (int32_t const pid, Coords const coords)
+void Game::send_player_build_flag (int32_t const pid, const Coords& coords)
 {
 	send_player_command (*new CmdBuildFlag(get_gametime(), pid, coords));
 }

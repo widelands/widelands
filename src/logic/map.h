@@ -200,7 +200,7 @@ public:
 
 	void set_nrplayers(PlayerNumber);
 
-	void set_starting_pos(PlayerNumber, Coords);
+	void set_starting_pos(PlayerNumber, const Coords&);
 	Coords get_starting_pos(PlayerNumber const p) const {
 		assert(1 <= p && p <= get_nrplayers());
 		return starting_pos_[p - 1];
@@ -258,7 +258,7 @@ public:
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
 	NodeCaps get_max_nodecaps(const World& world, const FCoords &);
 
-	BaseImmovable * get_immovable(Coords) const;
+	BaseImmovable * get_immovable(const Coords&) const;
 	uint32_t find_bobs
 		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
@@ -302,13 +302,13 @@ public:
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
 
-	uint32_t calc_distance(Coords, Coords) const;
+	uint32_t calc_distance(const Coords&, const Coords&) const;
 
-	int32_t calc_cost_estimate(Coords, Coords) const override;
-	int32_t calc_cost_lowerbound(Coords, Coords) const;
+	int32_t calc_cost_estimate(const Coords&, const Coords&) const override;
+	int32_t calc_cost_lowerbound(const Coords&, const Coords&) const;
 	int32_t calc_cost(int32_t slope) const;
-	int32_t calc_cost(Coords, int32_t dir) const;
-	int32_t calc_bidi_cost(Coords, int32_t dir) const;
+	int32_t calc_cost(const Coords&, int32_t dir) const;
+	int32_t calc_bidi_cost(const Coords&, int32_t dir) const;
 	void calc_cost(const Path &, int32_t * forward, int32_t * backward) const;
 
 	void get_ln  (const Coords &,  Coords *) const;
@@ -353,7 +353,7 @@ public:
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
 	 * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
 	 */
-	bool can_reach_by_water(Coords) const;
+	bool can_reach_by_water(const Coords&) const;
 
 	/// Sets the height to a value. Recalculates brightness. Changes the
 	/// surrounding nodes if necessary. Returns the radius that covers all
@@ -425,7 +425,7 @@ public:
 	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
 	/// Translate the whole map so that the given point becomes the new origin.
-	void set_origin(Coords);
+	void set_origin(const Coords&);
 
 	/// Port space specific functions
 	bool is_port_space(const Coords& c) const;
@@ -441,7 +441,7 @@ protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
 
 private:
-	void recalc_border(FCoords);
+	void recalc_border(const FCoords&);
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;
@@ -474,12 +474,12 @@ private:
 	PortSpacesSet port_spaces_;
 	Objectives objectives_;
 
-	void recalc_brightness(FCoords);
-	void recalc_nodecaps_pass1(const World& world, FCoords);
+	void recalc_brightness(const FCoords&);
+	void recalc_nodecaps_pass1(const World& world, const FCoords&);
 	void recalc_nodecaps_pass2(const World& world, const FCoords & f);
-	NodeCaps calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
+	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
 	NodeCaps calc_nodecaps_pass2(const World& world,
-	                              FCoords,
+	                              const FCoords&,
 	                              bool consider_mobs = true,
 	                              NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
@@ -489,8 +489,8 @@ private:
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 	template<typename functorT>
-		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);
-	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
+		void find_reachable(const Area<FCoords>&, const CheckStep &, functorT &);
+	template<typename functorT> void find(const Area<FCoords>&, functorT &) const;
 
 	MapVersion map_version_;
 };
