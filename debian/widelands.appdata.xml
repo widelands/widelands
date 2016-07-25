@@ -14,6 +14,7 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
+  <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <description>
     <p>
       You are the regent of a small clan. Your task is to build an ever growing settlement. Every member of your clan will do his or her part to produce more resources to further this growth.
@@ -84,6 +85,14 @@
     </p>
     <p>
       Widelands ponúka režim jedného hráča s kampaňami, ktoré rozprávajú príbehy o kmeňoch a ich boji vo svete Widelands. Skutočné usádzanie začne však až vtedy, keď sa spojíte s priateľmi po internete alebo lokálnej sieti a spoločne vybudujete nové ríše alebo, naopak, navzájom sa rozdrvíte v prachu vojny. Okrem toho Widelands poskytuje možnosť hry proti umelej inteligencii.
+    </p>
+  </description>
+  <description xml:lang="uk">
+    <p>
+      Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.
+    </p>
+    <p>
+      Widelands пропонує режим одиночної гри в кампанію, яка розповідає історії племен і їх боротьбу у всесвіті Widelands. Однак, реальне розселення починається тоді, коли ви об’єднуєтеся з друзями через інтернет або локальну мережу, будувати нові імперії разом, або розбити один одного в пилу війни. Widelands також пропонує штучний інтелект, щоб кинути виклик вам.
     </p>
   </description>
   <screenshots>

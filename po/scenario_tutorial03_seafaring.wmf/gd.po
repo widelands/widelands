@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"POT-Creation-Date: 2016-07-22 17:46+0000\n"
+"PO-Revision-Date: 2016-07-25 08:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -163,11 +163,11 @@ msgstr "Taghta. Tha am port agad air a thogail. Bidh feum againn air longan a-ni
 msgid ""
 "Ships are constructed in a shipyard by a shipwright. We have to build one "
 "somewhere close to the shore."
-msgstr "Thèid longan a thogail le saor-luinge ann an doca. Feumaidh sinn fear a thogail àiteigin faisg air an oirthir."
+msgstr "Thèid longan a thogail le saor-luinge ann an doca. Feumaidh sinn fear a thogail àiteigin air an oirthir."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr "Tog doca faisg air an oirthir. ’S e togalach meadhanach a th’ ann."
+msgstr "Tog doca air an oirthir. ’S e togalach meadhanach a th’ ann."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
@@ -181,7 +181,7 @@ msgstr "Nì thu longan ann an doca."
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Tog doca faisg air an oirthir air ceann a deas do ranntair."
+msgstr "Tog doca air an oirthir air ceann a deas do ranntair."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
@@ -419,7 +419,7 @@ msgstr "Na biodh eagal ort o nach eil nàmhaid air a’ mhapa seo. Mar as àbhai
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

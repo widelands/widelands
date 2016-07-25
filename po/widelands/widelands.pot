@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-22 17:46+0000\n"
+"POT-Creation-Date: 2016-07-25 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -273,7 +273,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:139
-#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
+#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:46
 msgid "No Name"
 msgstr ""
 
@@ -515,13 +515,13 @@ msgstr ""
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:225
-#: ../../src/wui/mapdata.cc:147
+#: ../../src/wui/mapdata.cc:167
 msgid "My Maps"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
-#: ../../src/wui/mapdata.cc:144
+#: ../../src/wui/mapdata.cc:164
 msgid "Multiplayer Scenarios"
 msgstr ""
 
@@ -3689,17 +3689,17 @@ msgstr ""
 msgid "Teams of 4"
 msgstr ""
 
-#: ../../src/wui/mapdata.cc:37
+#: ../../src/wui/mapdata.cc:47
 msgid "No Author"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:130
+#: ../../src/wui/mapdata.cc:150
 msgid "parent"
 msgstr ""
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:136
+#: ../../src/wui/mapdata.cc:156
 msgid "empty"
 msgstr ""
 
