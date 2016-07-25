@@ -71,10 +71,14 @@ struct MapData {
 		kMapnamesLocalized
 	};
 
-
-	/// For incomplete data
-	MapData();
-
+private:
+	/// For common properties
+	MapData(const std::string& init_filename,
+	        const std::string& init_localized_name,
+	        const std::string& init_author,
+	        const MapData::MapType& init_maptype,
+	        const MapData::DisplayType& init_displaytype);
+public:
 	/// For normal maps and scenarios
 	MapData(const Widelands::Map& map, const std::string& init_filename,
 			  const MapData::MapType& init_maptype,

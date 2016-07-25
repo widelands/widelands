@@ -386,7 +386,7 @@ Open a watch window.
 ===============
 */
 void show_watch_window
-	(InteractiveGameBase & parent, Widelands::Coords const coords)
+	(InteractiveGameBase & parent, const Widelands::Coords& coords)
 {
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (g_watch_window)

@@ -48,10 +48,9 @@ FullscreenMenuBase::FullscreenMenuBase():
  * Args: bgpic  name of the background picture
  */
 FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
-
-	background_image_ = bgpic;
-}
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     background_image_(bgpic)
+{}
 
 FullscreenMenuBase::~FullscreenMenuBase()
 {
