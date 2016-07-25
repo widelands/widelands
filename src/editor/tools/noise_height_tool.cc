@@ -28,7 +28,7 @@
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
-                                                 Widelands::NodeAndTriangle<> const center,
+                                                 const Widelands::NodeAndTriangle<>& center,
                                                  EditorInteractive& /* parent */,
                                                  EditorActionArgs* args,
 												 Widelands::Map* map) {
@@ -63,7 +63,7 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
 
 int32_t
 EditorNoiseHeightTool::handle_undo_impl(const Widelands::World& world,
-                                        Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                        const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                         EditorInteractive& parent,
                                         EditorActionArgs* args,
 										Widelands::Map* map) {

@@ -31,13 +31,13 @@ struct EditorSetHeightTool : public EditorTool {
 	{}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 							  Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
+	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 							 Widelands::Map* map) override;
@@ -51,7 +51,7 @@ struct EditorSetHeightTool : public EditorTool {
 	Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
-	void set_interval(Widelands::HeightInterval const i) {
+	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 

@@ -35,7 +35,7 @@ void EditorDrawTool::add_action
 
 int32_t
 EditorDrawTool::handle_click_impl(const Widelands::World& world,
-                                  Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
+                                  const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
                                   EditorInteractive& /* parent */,
                                   EditorActionArgs* args,
 								  Widelands::Map* /* map */) {
@@ -54,7 +54,7 @@ EditorDrawTool::handle_click_impl(const Widelands::World& world,
 
 int32_t
 EditorDrawTool::handle_undo_impl(const Widelands::World& world,
-                                 Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
+                                 const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
                                  EditorInteractive& /* parent */,
                                  EditorActionArgs* args,
 								 Widelands::Map* /* map */) {
