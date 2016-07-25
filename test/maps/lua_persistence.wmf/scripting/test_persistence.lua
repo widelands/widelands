@@ -35,7 +35,7 @@ function save_coroutine()
    worker_descr = game:get_worker_description("barbarians_lumberjack")
    immovable_descr = game:get_immovable_description("alder_summer_sapling")
    resource_descr = game:get_resource_description("coal")
-   terrain_descr = game:get_terrain_description("wiese1")
+   terrain_descr = game:get_terrain_description("summer_meadow1")
 
    corout = coroutine.create(function()
       local a = 100
@@ -106,7 +106,7 @@ function check_coroutine()
    assert_equal("barbarians_lumberjack", worker_descr.name)
    assert_equal("alder_summer_sapling", immovable_descr.name)
    assert_equal("coal", resource_descr.name)
-   assert_equal("wiese1", terrain_descr.name)
+   assert_equal("summer_meadow1", terrain_descr.name)
 
    assert_equal(global_value_1, false)
    assert_thread(corout)

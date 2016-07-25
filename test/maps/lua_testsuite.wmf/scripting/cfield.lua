@@ -123,22 +123,22 @@ function field_tests:test_setting_illegal_too_big_height()
    end)
 end
 function field_tests:test_getting_terr()
-   assert_equal("steppe", map:get_field(50,40).terr)
+   assert_equal("summer_steppe", map:get_field(50,40).terr)
 end
 function field_tests:test_getting_terd()
-   assert_equal("steppe", map:get_field(50,40).terd)
+   assert_equal("summer_steppe", map:get_field(50,40).terd)
 end
 function field_tests:test_setting_terr()
    f = map:get_field(50,40)
-   f.terr = "wasser"
-   assert_equal("wasser", f.terr)
-   f.terr = "steppe"
+   f.terr = "summer_water"
+   assert_equal("summer_water", f.terr)
+   f.terr = "summer_steppe"
 end
 function field_tests:test_setting_terd()
    f = map:get_field(50,40)
-   f.terd = "wasser"
-   assert_equal("wasser", f.terd)
-   f.terd = "steppe"
+   f.terd = "summer_water"
+   assert_equal("summer_water", f.terd)
+   f.terd = "summer_steppe"
 end
 function field_tests:test_region_radius_zero()
    f = map:get_field(50,40)
