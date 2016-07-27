@@ -35,11 +35,6 @@
 #include "logic/message_queue.h"
 #include "logic/widelands.h"
 
-// there are three arrays to be used by AI
-// their size is defined here
-// (all are of the same size)
-constexpr int kAIDataSize = 8;
-
 class Node;
 namespace Widelands {
 
@@ -153,7 +148,8 @@ public:
 		 ai_productionsites_ratio(0),
 		 ai_personality_wood_difference(0),
 		 ai_personality_early_militarysites(0),
-		 last_soldier_trained(0) {}
+		 last_soldier_trained(0),
+		 ai_personality_mil_upper_limit(0) {}
 
 		// Was initialized
 		uint8_t initialized;
@@ -171,6 +167,7 @@ public:
 		int32_t ai_personality_wood_difference;
 		uint32_t ai_personality_early_militarysites;
 		uint32_t last_soldier_trained;
+		int32_t ai_personality_mil_upper_limit;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

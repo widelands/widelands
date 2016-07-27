@@ -79,8 +79,10 @@ constexpr uint32_t kNoExpedition = 0;
 constexpr int32_t kSpotsTooLittle = 15;
 constexpr int32_t kSpotsEnough = 25;
 
+constexpr uint16_t kTargetQuantCap = 30;
+
 // this is intended for map developers, by default should be off
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true;
 
 constexpr int8_t kUncalculated = -1;
 constexpr uint8_t kFalse = 0;
@@ -451,8 +453,8 @@ void DefaultAI::think() {
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-				set_taskpool_task_time(gametime + 30 * 60 * 1000, SchedulerTaskId::kPrintStats);
-				print_stats();
+				set_taskpool_task_time(gametime + 10 * 60 * 1000, SchedulerTaskId::kPrintStats);
+				print_stats(gametime);
 				break;
 			case SchedulerTaskId::kCheckEnemySites :
 				check_enemy_sites(gametime);
@@ -510,7 +512,7 @@ void DefaultAI::late_initialization() {
 		bo.cnt_target = 1;  // default for everything
 		bo.cnt_limit_by_aimode = std::numeric_limits<int32_t>::max();
 		bo.cnt_upgrade_pending = 0;
-		bo.stocklevel = 0;
+		bo.stocklevel_count = 0;
 		bo.stocklevel_time = 0;
 		bo.last_dismantle_time = 0;
 		// this is set to negative number, otherwise the AI would wait 25 sec
@@ -757,7 +759,7 @@ void DefaultAI::late_initialization() {
 								SchedulerTaskId::kUnbuildableFCheck,     1, "check unbuildable fields"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 15 * 60 * 1000),
 								SchedulerTaskId::kWareReview,            9, "wares review"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 								SchedulerTaskId::kPrintStats,            9, "print statistics"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime,  1 * 60 * 1000),
 								SchedulerTaskId::kCountMilitaryVacant,   2, "count military vacant"));
@@ -863,6 +865,7 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
 		persistent_data->ai_personality_early_militarysites = std::rand() % 20 + 20;
 		persistent_data->last_soldier_trained = kNever;
+		persistent_data->ai_personality_mil_upper_limit = std::rand() % 125 + 325;
 	} else if (persistent_data->initialized == kTrue) {
 		// Doing some consistency checks
 		check_range<uint32_t>(persistent_data->expedition_start_time, gametime, "expedition_start_time");
@@ -1545,11 +1548,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	const bool too_many_vacant_mil =
 		(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
-	const int32_t kUpperLimit = 325;
+	//const int32_t kUpperLimit = 350; NOCOM
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score, down if more military sites are needed and vice versa
 	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
-		if (persistent_data->least_military_score < kUpperLimit) { // No sense in letting it grow too high
+		if (persistent_data->least_military_score < persistent_data->ai_personality_mil_upper_limit) { // No sense in letting it grow too high
 			persistent_data->least_military_score += 20;
 		}
 	} else {
@@ -1582,7 +1585,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// This is effective score, falling down very quickly
-	if (persistent_data->target_military_score > kUpperLimit + 150) {
+	if (persistent_data->target_military_score > persistent_data->ai_personality_mil_upper_limit + 150) {
 		persistent_data->target_military_score = 8 * persistent_data->target_military_score / 10;
 	} else {
 		persistent_data->target_military_score = 9 * persistent_data->target_military_score / 10;
@@ -1620,7 +1623,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// stocked wood is to be in some propotion to productionsites and
 	// constructionsites (this proportion is bit artifical, or we can say
 	// it is proportion to the size of economy). Plus some positive 'margin'
-	const int32_t stocked_wood_margin = get_warehoused_stock(wood_index) -
+	const int32_t stocked_wood_margin = calculate_stocklevel(wood_index) -
 		productionsites.size() * 2 -
 		num_prod_constructionsites +
 		persistent_data->ai_personality_wood_difference;
@@ -1697,7 +1700,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				treshold = 2;
 			}
 
-			if (get_warehoused_stock(wt) < treshold) {
+			if (calculate_stocklevel(wt) < treshold) {
 				bo.build_material_shortage = true;
 				break;
 			}
@@ -1928,12 +1931,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 150;
 					}
 
-					if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-						bo.stocklevel = get_stocklevel(static_cast<size_t>(bo.production_hint));
-						bo.stocklevel_time = game().get_gametime();
-					}
 
-					if (bo.stocklevel == 0) {
+					if (get_stocklevel(bo, gametime) == 0) {
 						prio *= 2;
 					}
 
@@ -2030,12 +2029,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 
-						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-							bo.stocklevel =
-							   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint));
-							bo.stocklevel_time = game().get_gametime();
-						}
-						if (bo.stocklevel > 50) {
+						if (get_stocklevel(bo, gametime) > 50) {
 							continue;
 						}
 
@@ -3259,13 +3253,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		if (site.bo->stocklevel_time < game().get_gametime() - 10 * 1000) {
-			site.bo->stocklevel = get_stocklevel(*site.bo);
-			site.bo->stocklevel_time = game().get_gametime();
-		}
+		//if (site.bo->stocklevel_time < game().get_gametime() - 10 * 1000) {NOCOM
+			//site.bo->stocklevel = calculate_stocklevel(*site.bo);
+			//site.bo->stocklevel_time = game().get_gametime();
+		//}
 
 		// if we need wood badly
-		if (remaining_trees > 0 && site.bo->stocklevel <= 50) {
+		if (remaining_trees > 0 && get_stocklevel(*site.bo, gametime) <= 50) {
 			return false;
 		}
 
@@ -3304,11 +3298,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// now we test the stocklevel and dismantle the well if we have enough water
 		// but first we make sure we do not dismantle a well too soon
 		// after dismantling previous one
-		if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
-			site.bo->stocklevel = get_stocklevel(*site.bo);
-			site.bo->stocklevel_time = game().get_gametime();
-		}
-		if (site.bo->stocklevel > 250 + productionsites.size() * 5) {  // dismantle
+		if (get_stocklevel(*site.bo, gametime) > 250 + productionsites.size() * 5) {  // dismantle
 			site.bo->last_dismantle_time = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			if (connected_to_wh) {
@@ -3372,13 +3362,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// if we have more buildings then target
 		if ((site.bo->cnt_built - site.bo->unconnected_count) > site.bo->cnt_target) {
-			if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
-				site.bo->stocklevel = get_stocklevel(*site.bo);
-				site.bo->stocklevel_time = game().get_gametime();
-			}
+			//if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
+				//site.bo->stocklevel = calculate_stocklevel(*site.bo);
+				//site.bo->stocklevel_time = game().get_gametime();
+			//}
 
 			if (site.site->get_statistics_percent() < 30 &&
-			    site.bo->stocklevel > 100) {
+			    get_stocklevel(*site.bo, gametime) > 100) {
 				site.bo->last_dismantle_time = game().get_gametime();
 				flags_to_be_removed.push_back(site.site->base_flag().get_position());
 				if (connected_to_wh) {
@@ -3903,22 +3893,6 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	return changed;
 }
 
-// this count ware as hints
-uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
-	uint32_t count = 0;
-	DescriptionIndex wt(hintoutput);
-	for (EconomyObserver* observer : economies) {
-		// Don't check if the economy has no warehouse.
-		if (observer->economy.warehouses().empty()) {
-			continue;
-		}
-
-		count += observer->economy.stock_ware(wt);
-	}
-
-	return count;
-}
-
 // this receives an building observer and have to decide if new/one of
 // current buildings of this type is needed
 // This is core of construct_building() function
@@ -3992,7 +3966,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 		DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
 
-		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name()) / 3;
+		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name());
+		if (target == Widelands::kInvalidWare) {
+			target = kTargetQuantCap;
+		}
+		target /= 3;
+
 		// at least  1
 		target = std::max<uint16_t>(target, 1);
 
@@ -4001,7 +3980,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			preciousness = 1; // (no entry in conf files?). But we need positive value here
 		}
 
-		if (get_warehoused_stock(wt) < target) {
+		if (calculate_stocklevel(wt) < target) {
 			if (bo.max_needed_preciousness < preciousness) {
 				bo.max_needed_preciousness = preciousness;
 			}
@@ -4105,13 +4084,19 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForced;
 		} else if (bo.prohibited_till > gametime) {
 			return BuildingNecessity::kForbidden;
-		} else if (bo.is_hunter || bo.is_fisher) {
+		} else if (bo.is_hunter || bo.is_fisher || bo.mines_water) {
+
+			bo.cnt_target =
+					   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 40;
 
 			if (bo.max_needed_preciousness == 0) {
 				return BuildingNecessity::kNotNeeded;
 			} else if (bo.cnt_under_construction + bo.unoccupied_count > 0) {
 				return BuildingNecessity::kForbidden;
 			} else if (bo.total_count() > 0 && new_buildings_stop_) {
+				return BuildingNecessity::kForbidden;
+			} else if (bo.total_count() >= bo.cnt_target 
+				&& bo.last_building_built + 15 * 60 * 100 > gametime){
 				return BuildingNecessity::kForbidden;
 			} else {
 				return BuildingNecessity::kNeeded;
@@ -4147,9 +4132,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 			// 150 corresponds to 15 trees
-			if (persistent_data->trees_around_cutters < 150) {
-				bo.cnt_target *= 4;
+			if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 15) {
+				bo.cnt_target += 4;
+			} else if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 30) {
+				bo.cnt_target += 2;
 			}
+
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
 				return BuildingNecessity::kForbidden;
 			} else if (bo.total_count() > bo.cnt_target) {
@@ -4292,7 +4280,7 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
+uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo) {
 	uint32_t count = std::numeric_limits<uint32_t>::max();
 
 	if (!bo.outputs.empty()) {
@@ -4316,7 +4304,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(Widelands::DescriptionIndex wt) {
+uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt) {
 	uint32_t count = 0;
 
 	for (EconomyObserver* observer : economies) {
@@ -4330,18 +4318,20 @@ uint32_t DefaultAI::get_stocklevel(Widelands::DescriptionIndex wt) {
 	return count;
 }
 
-// counts produced output in warehouses (only)
-// perhaps it will be able to replace get_stocklevel
-uint32_t DefaultAI::get_warehoused_stock(DescriptionIndex wt) {
-	uint32_t count = 0;
-
-	for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
-	     i != warehousesites.end();
-	     ++i) {
-		count += i->site->get_wares().stock(wt);
+// This is wrapper function to prevent too frequent recalculation of stocklevel
+// and distinquish if we count stocks for production hint or for outputs of a productionsite
+uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime) {
+	if (bo.stocklevel_time < gametime - 5 * 1000) {
+		if (bo.production_hint > 0) {
+			bo.stocklevel_count = calculate_stocklevel(static_cast<size_t>(bo.production_hint));
+		} else if (!bo.outputs.empty()) {
+			bo.stocklevel_count = calculate_stocklevel(bo);
+		} else {
+			bo.stocklevel_count = 0;
+		}
+		bo.stocklevel_time = gametime;
 	}
-
-	return count;
+	return bo.stocklevel_count;
 }
 
 // this just counts free positions in military and training sites
@@ -5828,7 +5818,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 			// It seems that when default target for ware is not set, it returns
 			// kInvalidWare (=254), this is confusing for AI so we change it to 10
 			if (default_target == Widelands::kInvalidWare) {
-				default_target = 10;
+				default_target = kTargetQuantCap;
 			}
 
 			uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 2);
@@ -5919,7 +5909,7 @@ uint32_t DefaultAI::msites_built() const{
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats() {
+void DefaultAI::print_stats(uint32_t const gametime) {
 
 	if (!kPrintStats) {
 		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kPrintStats);
@@ -5929,46 +5919,141 @@ void DefaultAI::print_stats() {
 
 	PlayerNumber const pn = player_number();
 
-	// we test following materials
-	const std::vector<std::string> materials = {"coal",
-	                                            "log",
-	                                            "iron_ore",
-	                                            "iron",
-	                                            "marble",
-	                                            "planks",
-	                                            "water",
-	                                            "gold_ore",
-	                                            "granite",
-	                                            "fish",
-	                                            "diamond",
-	                                            "corn",
-	                                            "wheat",
-	                                            "grape",
-	                                            "quartz",
-	                                            "atlanteans_bread",
-	                                            "barbarians_bread",
-	                                            "empire_bread",
-	                                            "meat"};
-	std::string summary = "";
-	for (uint32_t j = 0; j < materials.size(); ++j) {
-		DescriptionIndex const index = tribe_->ware_index(materials.at(j));
-		if (!tribe_->has_ware(index)) {
+
+	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
+	std::set<DescriptionIndex> materials;
+
+	// Collect information about the different buildings that our tribe can have
+	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+		const BuildingDescr& bld = *tribe_->get_building_descr(building_index);
+		if (!tribe_->has_building(building_index)) {
 			continue;
 		}
-		if (get_warehoused_stock(index) > 0) {
-			continue;
+		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
+			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
+			for (const auto& temp_input : prod.inputs()) {
+				if (materials.count(temp_input.first)==0) {
+					materials.insert(temp_input.first);
+				}
+			}
+			for (const auto& temp_cost : prod.buildcost()) {
+				if (materials.count(temp_cost.first)==0) {
+					materials.insert(temp_cost.first);
+				}
+			}
 		}
-		summary = summary + materials.at(j) + ", ";
+
+		if (bld.type() == MapObjectType::TRAININGSITE) {
+			const ProductionSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
+			for (const auto& temp_cost : train.buildcost()) {
+				if (materials.count(temp_cost.first)==0) {
+					materials.insert(temp_cost.first);
+				}
+			}
+		}
 	}
 
-	log(" %1d: Buildings: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u. Missing: %s\n",
+	std::string summary = "";
+	for (const auto material : materials) {
+		uint32_t stock = calculate_stocklevel(material);
+		if (stock == 0) {
+			summary = summary + game().tribes().get_ware_descr(material)->descname() + ", ";
+		}
+	}
+
+	printf(" %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n",
 	    pn,
+		gamestring_with_leading_zeros(gametime),
 	    static_cast<uint32_t>(productionsites.size()),
 	    static_cast<uint32_t>(militarysites.size()),
 	    static_cast<uint32_t>(mines_.size()),
 	    static_cast<uint32_t>(warehousesites.size() - num_ports),
-	    num_ports,
-	    summary.c_str());
+	    num_ports);
+	printf(" Missing wares (zero stock): %s\n", summary.c_str());
+
+	printf (" %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n",
+		"T", "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio", "stock", "targ.");
+	for (uint32_t j = 0; j < buildings_.size(); ++j) {
+		BuildingObserver& bo = buildings_.at(j);
+		if ((bo.total_count() > 0 || bo.new_building == BuildingNecessity::kNeeded
+		|| bo.new_building == BuildingNecessity::kForced
+		|| bo.new_building == BuildingNecessity::kNeededPending
+		|| bo.new_building == BuildingNecessity::kAllowed)
+		&& bo.type != BuildingObserver::Type::kMilitarysite) {
+			std::string needeness;
+			if (bo.new_building == BuildingNecessity::kNeededPending) {
+				needeness = "pend";
+			} else if (bo.new_building == BuildingNecessity::kForced) {
+				needeness = "forc";
+			} else if (bo.new_building == BuildingNecessity::kAllowed) {
+				needeness = "allw";
+			} else if (bo.new_building == BuildingNecessity::kNotNeeded
+				|| bo.new_building == BuildingNecessity::kForbidden) {
+				needeness = "no";
+			} else {
+				needeness = "yes";
+			}
+			std::string btype;
+			switch (bo.type) {
+				case BuildingObserver::Type::kWarehouse:
+					btype = "W";
+					break;
+				case BuildingObserver::Type::kMine:
+					btype = "M";
+					break;
+				case BuildingObserver::Type::kTrainingsite:
+					btype = "T";
+					break;
+				case BuildingObserver::Type::kProductionsite:
+					btype = "P";
+					break;
+				default:
+					btype = "?";
+				}
+
+			printf (" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
+			btype.c_str(),
+			bo.name,
+			bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count - bo.unconnected_count,
+			bo.current_stats,
+			bo.cnt_under_construction,
+			bo.unoccupied_count,
+			bo.unconnected_count,
+			needeness.c_str(),
+			bo.max_needed_preciousness,
+			bo.primary_priority,
+			get_stocklevel(bo, gametime),
+			bo.cnt_target);
+		}
+	}
+	printf ("Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
+		num_prod_constructionsites,
+		mines_in_constr(),
+		(new_buildings_stop_) ? "NEW BUILDING STOP":"",
+		((num_prod_constructionsites + mines_in_constr()) > (productionsites.size() + mines_built())
+		/persistent_data->ai_productionsites_ratio + 2)?" (too many constructionsites)":"");
+
+	printf ("Least military score: %5d/%3d, msites in constr: %3d, vacant pos: %2d\n",
+		persistent_data->least_military_score,
+		persistent_data->ai_personality_mil_upper_limit,
+		msites_in_constr(),
+		vacant_mil_positions_);
+	std::string wpolicy = "";
+	switch (wood_policy_) {
+		case WoodPolicy::kDismantleRangers:
+			wpolicy = "Dismantle rangers";
+			break;
+		case WoodPolicy::kAllowRangers:
+			wpolicy = "Allow rangers";
+			break;
+		case WoodPolicy::kStopRangers:
+			wpolicy = "Stop rangers";
+			break;
+		default:
+			wpolicy = "unknown";
+	}
+	printf ("Trees around cutters: %4d/10, woodcutters policy: %s\n",
+		persistent_data->trees_around_cutters, wpolicy.c_str());
 }
 
 template<typename T>

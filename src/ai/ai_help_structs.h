@@ -382,7 +382,7 @@ struct BuildingObserver {
 	int32_t cnt_upgrade_pending; // number of buildings that are to be upgraded
 
 	// used to track amount of wares produced by building
-	uint32_t stocklevel;
+	uint32_t stocklevel_count;
 	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	uint32_t last_dismantle_time;
 	uint32_t construction_decision_time;
