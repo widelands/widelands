@@ -76,8 +76,8 @@ tribes:new_productionsite_type {
          descname = _"forging an advanced shield",
          actions = {
             "return=skipped unless economy needs shield_advanced",
-            "sleep=32000",
             "consume=iron:2 coal:2 gold",
+            "sleep=32000",
             "animate=working 45000",
             "produce=shield_advanced"
          }

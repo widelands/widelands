@@ -89,8 +89,8 @@ tribes:new_productionsite_type {
          descname = _"forging a sharp ax",
          actions = {
             "return=skipped unless economy needs ax_sharp",
-            "sleep=26000",
             "consume=coal iron:2",
+            "sleep=26000",
             "play_sound=sound/smiths smith 192",
             "animate=working 22000",
             "play_sound=sound/smiths sharpening 120",
@@ -103,8 +103,8 @@ tribes:new_productionsite_type {
          descname = _"forging a broad ax",
          actions = {
             "return=skipped unless economy needs ax_broad",
-            "sleep=26000",
             "consume=coal:2 iron:2",
+            "sleep=26000",
             "play_sound=sound/smiths smith 192",
             "animate=working 22000",
             "play_sound=sound/smiths sharpening 120",
