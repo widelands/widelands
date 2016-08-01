@@ -93,6 +93,8 @@ struct DefaultAI : ComputerPlayer {
 		kAtlanteans,
 		kEmpire
 	};
+	
+	enum class SoldiersStatus : uint8_t {kEnough, kShortage, kBadShortage};
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -249,6 +251,7 @@ private:
 	uint32_t enemysites_check_delay_;
 
 	WoodPolicy wood_policy_;
+	SoldiersStatus soldier_status_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<Widelands::BuildableField*> buildable_fields;
@@ -302,7 +305,7 @@ private:
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
-	uint16_t military_last_dismantle_;
+	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
 	uint32_t last_road_dismantled_; // uses to prevent too frequent road dismantling

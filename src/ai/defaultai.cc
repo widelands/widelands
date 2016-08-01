@@ -111,6 +111,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      last_attack_time_(0),
      enemysites_check_delay_(60),
      wood_policy_(WoodPolicy::kAllowRangers),
+     soldier_status_(SoldiersStatus::kEnough),
      next_ai_think_(0),
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
@@ -440,7 +441,7 @@ void DefaultAI::think() {
 				break;
 			case SchedulerTaskId::kCountMilitaryVacant :
 				count_military_vacant_positions();
-				set_taskpool_task_time(gametime + 45 * 1000, SchedulerTaskId::kCountMilitaryVacant);
+				set_taskpool_task_time(gametime + 15 * 1000, SchedulerTaskId::kCountMilitaryVacant);
 				break;
 			case SchedulerTaskId::kWareReview :
 				if (check_economies()) {  // economies must be consistent
@@ -859,7 +860,7 @@ void DefaultAI::late_initialization() {
 		persistent_data->no_more_expeditions = kFalse;
 		persistent_data->target_military_score = 0;
 		persistent_data->least_military_score = 100;
-		persistent_data->ai_personality_military_loneliness = std::rand() % 5 * 30 - 60;
+		persistent_data->ai_personality_military_dismatlement = std::rand() % 14 + 11;
 		persistent_data->ai_personality_attack_margin = std::max(std::rand() % 20 - 5, 0);
 		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
 		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
@@ -871,7 +872,7 @@ void DefaultAI::late_initialization() {
 		check_range<uint32_t>(persistent_data->expedition_start_time, gametime, "expedition_start_time");
 		check_range<uint16_t>(persistent_data->ships_utilization, 0, 10000, "ships_utilization_");
 		check_range<int16_t>
-			(persistent_data->ai_personality_military_loneliness, -60, 60, "ai_personality_military_loneliness");
+			(persistent_data->ai_personality_military_dismatlement, 11, 24, "ai_personality_military_dismatlement");
 		check_range<int32_t>(persistent_data->ai_personality_attack_margin, 15, "ai_personality_attack_margin");
 		check_range<uint32_t>(persistent_data->ai_productionsites_ratio, 5, 15, "ai_productionsites_ratio");
 		check_range<int32_t>
@@ -1476,6 +1477,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if (buildable_fields.empty()) {
 		return false;
 	}
+	
 	// Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	uint32_t consumers_nearby_count = 0;
@@ -1546,14 +1548,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const bool too_many_ms_constructionsites =
 		(pow(msites_in_constr(), 2) > militarysites.size() + 2);
-	const bool too_many_vacant_mil =
-		(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
+	//const bool too_many_vacant_mil =
+		//(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
 	//const int32_t kUpperLimit = 350; NOCOM
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score, down if more military sites are needed and vice versa
-	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
+	if (too_many_ms_constructionsites || soldier_status_== SoldiersStatus::kShortage || soldier_status_== SoldiersStatus::kBadShortage || needs_boost_economy) {
 		if (persistent_data->least_military_score < persistent_data->ai_personality_mil_upper_limit) { // No sense in letting it grow too high
 			persistent_data->least_military_score += 20;
+			persistent_data->least_military_score =
+				std::min(persistent_data->ai_personality_mil_upper_limit, persistent_data->least_military_score);
 		}
 	} else {
 		// least_military_score is decreased, but depending on the size of territory
@@ -1574,7 +1578,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				persistent_data->least_military_score -= 2;
 			}
 		// do not get bellow kBottomLimit if there is at least one ms in construction
-		if ((msites_in_constr() > 0 || too_many_vacant_mil)
+		if ((msites_in_constr() > 0 || soldier_status_!=SoldiersStatus::kEnough)
 			&&
 			persistent_data->least_military_score < kBottomLimit) {
 				persistent_data->least_military_score = kBottomLimit;
@@ -4283,19 +4287,11 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo) {
 	uint32_t count = std::numeric_limits<uint32_t>::max();
 
-	if (!bo.outputs.empty()) {
-		for (EconomyObserver* observer : economies) {
-			// Don't check if the economy has no warehouse.
-			if (observer->economy.warehouses().empty()) {
-				continue;
-			}
-
-			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-				DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
-				if (count > observer->economy.stock_ware(wt)) {
-					count = observer->economy.stock_ware(wt);
-				}
-			}
+	for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
+		DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
+		const uint32_t stock = calculate_stocklevel(wt);
+		if (count > stock) {
+			count = stock;
 		}
 	}
 
@@ -4307,12 +4303,10 @@ uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo) {
 uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt) {
 	uint32_t count = 0;
 
-	for (EconomyObserver* observer : economies) {
-		// Don't check if the economy has no warehouse.
-		if (observer->economy.warehouses().empty()) {
-			continue;
-		}
-		count += observer->economy.stock_ware(wt);
+	for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
+	     i != warehousesites.end();
+	     ++i) {
+		count += i->site->get_wares().stock(wt);
 	}
 
 	return count;
@@ -4339,11 +4333,20 @@ void DefaultAI::count_military_vacant_positions() {
 	// counting vacant positions
 	vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
-		vacant_mil_positions_ += 10 * (tso.site->soldier_capacity() - tso.site->stationed_soldiers().size());
-		vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10;
+		vacant_mil_positions_ += 5 * std::min<int32_t>((tso.site->soldier_capacity() - tso.site->stationed_soldiers().size()), 2);
+		//vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10; NOCOM ???
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
+	}
+	vacant_mil_positions_ += msites_in_constr() * 2;
+	
+	if (vacant_mil_positions_ * 2 <= static_cast<int32_t>(militarysites.size())) {
+		soldier_status_ = SoldiersStatus::kEnough;
+	} else if (vacant_mil_positions_ * 4 > static_cast<int32_t>(militarysites.size())) {
+		soldier_status_ = SoldiersStatus::kBadShortage;
+	} else {
+		soldier_status_ = SoldiersStatus::kShortage;
 	}
 }
 
@@ -4498,94 +4501,91 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	// look if there are any enemies building
 	FindNodeEnemiesBuilding find_enemy(player_, game());
 
-	// first we make sure there is no enemy at all
-	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
-
-		mso.enemies_nearby = false;
-
-		// If no enemy in sight - decrease the number of stationed soldiers
-		// as long as it is > 1 - BUT take care that there is a warehouse in the
-		// same economy where the thrown out soldiers can go to.
-
-		if (ms->economy().warehouses().size()) {
-			uint32_t const j = ms->soldier_capacity();
-
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
-				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersRookies);
-			} else if (j > 1) {
-				game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
-			}
-			// if the building is in inner land and other militarysites still
-			// hold the miliary influence of the field, consider to destruct the
-			// building to free some building space.
-			else {
-				// treat this field like a buildable and write military info to it.
-				BuildableField bf(f);
-				update_buildable_field(bf, vision, true);
-				const int32_t size_penalty = ms->get_size() - 1;
-				FindNodeAllyOwned find_ally(player_, game(), player_number());
-				const int32_t allyOwnedFields =
-				   map.find_fields(Area<FCoords>(f, vision), nullptr, find_ally);
-
-				int16_t score = 0;
-				score += (bf.area_military_capacity > 6);
-				score += (bf.area_military_capacity > 22);
-				score += (bf.area_military_presence > 4);
-				score += (bf.military_loneliness < (180 + persistent_data->ai_personality_military_loneliness));
-				score += (bf.military_stationed > 2);
-				score -= size_penalty;
-				score += ((bf.unowned_land_nearby + allyOwnedFields) < 10);
-				score -= (mso.built_time + 10 * 60 * 1000 > gametime);
-
-				if (score >= 4) {
-					if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-						flags_to_be_removed.push_back(ms->base_flag().get_position());
-						game().send_player_dismantle(*ms);
-						military_last_dismantle_ = game().get_gametime();
-					} else {
-						game().send_player_bulldoze(*ms);
-						military_last_dismantle_ = game().get_gametime();
-					}
-				}
-			}
-		}
-	} else {
-
+	const uint16_t enemy_sites_nearby = map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy);
+	bool enemy_accessible = false;
+	if (enemy_sites_nearby) {
 		uint32_t unused1 = 0;
 		uint16_t unused2 = 0;
+		enemy_accessible = other_player_accessible(
+		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy);
+		   }
+	
+	int16_t dismantle_score = 0;
+	if (military_last_dismantle_ + 2 * 60 *1000 < gametime) { // 2 minutes between every dismantle
+		BuildableField bf(f);
+		update_buildable_field(bf, vision, true);
+		const int32_t size_penalty = ms->get_size() - 1;
+		FindNodeAllyOwned find_ally(player_, game(), player_number());
+		const int32_t allyOwnedFields =
+		   map.find_fields(Area<FCoords>(f, vision), nullptr, find_ally);
+	
+		dismantle_score += std::min(bf.area_military_capacity / 4, 8);   //0-8
+		dismantle_score += std::min(bf.area_military_presence / 2, 8);   //0-8
+		dismantle_score -= bf.military_loneliness / 125; //0-8//remove ai_personality_military_dismatlement
+		dismantle_score += bf.military_stationed; // increase importance somehow
+		dismantle_score -= size_penalty * 3; //0-6
+		dismantle_score -= (bf.unowned_land_nearby + allyOwnedFields) / 40;  //0-~6
+		dismantle_score -= (mso.built_time + 10 * 60 * 1000 > gametime) * 4; // 0 or 4
+		dismantle_score -= enemy_accessible * static_cast<uint16_t>(log10(enemy_sites_nearby) * 3 + 4);  //0-10
+		dismantle_score += vacant_mil_positions_ / 2;
+	
+		printf (" %d MSite: at %3dx%3d - dismantle score %4d (%3d+%3d-%3d+%3d-%3d-%3d-%3d-%3d+%3d) %s%s\n",
+		player_number(),
+		f.x, f.y,
+		dismantle_score,
+		std::min(bf.area_military_capacity / 4, 8),
+		std::min(bf.area_military_presence / 2, 8),
+		bf.military_loneliness / 125,
+		bf.military_stationed,
+		size_penalty * 3,
+		(bf.unowned_land_nearby + allyOwnedFields) / 40,
+		(mso.built_time + 10 * 60 * 1000 > gametime) * 5,
+		enemy_accessible * static_cast<uint16_t>(log10(enemy_sites_nearby) * 3 + 4),
+		vacant_mil_positions_ / 2,
+		(dismantle_score >= persistent_data->ai_personality_military_dismatlement) ? "*":"",
+		(dismantle_score >= persistent_data->ai_personality_military_dismatlement-3 &&
+		 dismantle_score <persistent_data->ai_personality_military_dismatlement) ? ".":"");
+	}
 
-		mso.enemies_nearby = false;
+	if (dismantle_score >= persistent_data->ai_personality_military_dismatlement) { // not <= 0
+		changed = true;
+		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+			flags_to_be_removed.push_back(ms->base_flag().get_position());
+			game().send_player_dismantle(*ms);
+			military_last_dismantle_ = game().get_gametime();
+		} else {
+			game().send_player_bulldoze(*ms);
+			military_last_dismantle_ = game().get_gametime();
+		}
+	} else if(!enemy_accessible) {
+		uint32_t const j = ms->soldier_capacity();
 
-		// yes enemy is nearby, but still we must distinguish whether
-		// he is accessible (over the land)
-		if (other_player_accessible(
-		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
+		if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, MilitarySite::kPrefersRookies);
+		} else if (j > 1) {
+			game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
+		}
+	} else 	{
+		//set preferHeroes and modify number of soldiers
+		Quantity const total_capacity = ms->max_soldier_capacity();
+		Quantity const target_capacity = ms->soldier_capacity();
 
-			Quantity const total_capacity = ms->max_soldier_capacity();
-			Quantity const target_capacity = ms->soldier_capacity();
-
+		if(total_capacity != target_capacity && soldier_status_==SoldiersStatus::kEnough) {
 			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
 			changed = true;
+		}
 
-			// and also set preference to Heroes
-			if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
-				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersHeroes);
-				changed = true;
-			}
+		if (soldier_status_ == SoldiersStatus::kBadShortage && target_capacity > total_capacity / 2 + 1) {
+			game().send_player_change_soldier_capacity(*ms, -1);
+			changed = true;
+		}
 
-			mso.enemies_nearby = true;
-			enemy_last_seen_ = gametime;
-		} else {  // otherwise decrease soldiers
-			uint32_t const j = ms->soldier_capacity();
-
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
-				game().send_player_militarysite_set_soldier_preference(
-				   *ms, MilitarySite::kPrefersRookies);
-			} else if (j > 1) {
-				game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
-			}
+		// and also set preference to Heroes
+		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, MilitarySite::kPrefersHeroes);
+			changed = true;
 		}
 	}
 
@@ -4832,7 +4832,9 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// sometimes we search for any owned territory (f.e. when considering
 		// a port location), but when testing (starting from) own military building
 		// we must ignore own territory, of course
-		if (f->get_owned_by() > 0) {
+		//NEW HERE
+		const PlayerNumber field_owner = f->get_owned_by();
+		if (field_owner > 0) {
 
 			// if field is owned by anybody
 			if (type == WalkSearch::kAnyPlayer) {
@@ -4841,26 +4843,31 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 			}
 
 			// if anybody but not me
-			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
+			if (type == WalkSearch::kOtherPlayers && field_owner != pn) {
 				*tested_fields = done.size();
 				return true;
 			}
 
 			// if owned by enemy
-			if  (type == WalkSearch::kEnemy && f->get_owned_by() != pn) {
-				// in case I am not member of a team
-				if (player_->team_number() == 0) {
+			if  (type == WalkSearch::kEnemy && field_owner != pn) {
+				//NEW HERE
+				// if not in the same taem => it is enemy
+				if (!player_statistics.players_in_same_team(pn, field_owner)) {
 					*tested_fields = done.size();
 					return true;
-				// if I am in team, testing if the same team
-				} else if (player_->team_number() > 0
-				&&
-				player_->team_number()
-				!=
-				game().get_player(f->get_owned_by())->team_number()) {
-					*tested_fields = done.size();
-					return true;
-				}
+				}					
+				//if (player_->team_number() == 0) {
+					//*tested_fields = done.size();
+					//return true;
+				//// if I am in team, testing if the same team
+				//} else if (player_->team_number() > 0
+				//&&
+				//player_->team_number()
+				//!=
+				//game().get_player(f->get_owned_by())->team_number()) {
+					//*tested_fields = done.size();
+					//return true;
+				//}
 			}
 		}
 
@@ -5131,7 +5138,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			}
 			militarysites.back().enemies_nearby = true;
 			msites_per_size[bo.desc->get_size()].finished += 1;
-			vacant_mil_positions_ += 2; // at least some indication that there are vacant positions
+			vacant_mil_positions_ += bo.desc->get_size() * 2; // at least some indication that there are vacant positions
 
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
 			ts_without_trainers_ += 1;
@@ -5144,7 +5151,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			if (bo.trainingsite_type == TrainingSiteType::kAdvanced) {
 				ts_advanced_count_ += 1;
 			}
-			vacant_mil_positions_ += 8; // at least some indication that there are vacant positions
+			vacant_mil_positions_ += 2; // at least some indication that there are vacant positions
 
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			++numof_warehouses_;
@@ -5264,6 +5271,13 @@ void DefaultAI::lose_building(const Building& b) {
 					break;
 				}
 			}
+			// Here we very roughly modify count of vacant military position
+			// in case when a military site is gone (conquered or so)
+			if (vacant_mil_positions_ > bo.desc->get_size() * 2) {
+				vacant_mil_positions_ -= bo.desc->get_size() * 2; //rough estimation
+			} else {
+				vacant_mil_positions_ = 0;
+			}
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
 
 			for (std::list<TrainingSiteObserver>::iterator i = trainingsites.begin();
@@ -5281,6 +5295,9 @@ void DefaultAI::lose_building(const Building& b) {
 					}
 					break;
 				}
+			}
+			if (vacant_mil_positions_>1) {
+				vacant_mil_positions_ -= 1; //rough estimation
 			}
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			assert(numof_warehouses_ > 0);
@@ -5662,7 +5679,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 2;
 				}
 
-				site->second.score -= vacant_mil_positions_ / 8;
+				site->second.score -= vacant_mil_positions_ / 4;
 
 				if (site->second.mines_nearby == ExtendedBool::kFalse) {
 					site->second.score -= 1;
@@ -5956,6 +5973,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	std::string summary = "";
 	for (const auto material : materials) {
 		uint32_t stock = calculate_stocklevel(material);
+		//printf (" testing %s  %d\n", game().tribes().get_ware_descr(material)->descname().c_str(), calculate_stocklevel(material));
 		if (stock == 0) {
 			summary = summary + game().tribes().get_ware_descr(material)->descname() + ", ";
 		}
@@ -6026,18 +6044,40 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 			bo.cnt_target);
 		}
 	}
+	
+	std::string why="; Why: ";
+	
+	if ((num_prod_constructionsites + mines_in_constr())
+		>
+		(productionsites.size() + mines_built())
+		/
+		persistent_data->ai_productionsites_ratio + 2) {
+			why += " too many constr.";
+	}
+	// 3. too keep some proportions production sites vs military sites
+	if ((num_prod_constructionsites + productionsites.size()) >
+	    (msites_in_constr() + militarysites.size()) * 5) {
+		why += ", too many productionsites";
+	}
+	// 4. if we do not have 2 mines at least
+	if (mines_.size() < 2) {
+		why += ", less then 2 mines";
+	}
+	
 	printf ("Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
 		num_prod_constructionsites,
 		mines_in_constr(),
 		(new_buildings_stop_) ? "NEW BUILDING STOP":"",
-		((num_prod_constructionsites + mines_in_constr()) > (productionsites.size() + mines_built())
-		/persistent_data->ai_productionsites_ratio + 2)?" (too many constructionsites)":"");
+		why.c_str());
 
-	printf ("Least military score: %5d/%3d, msites in constr: %3d, vacant pos: %2d\n",
+	printf ("Least military score: %5d/%3d, msites in constr: %3d, vacant pos: %2d, dismantlement treshold: %3d, strength: %3d\n",
 		persistent_data->least_military_score,
 		persistent_data->ai_personality_mil_upper_limit,
 		msites_in_constr(),
-		vacant_mil_positions_);
+		vacant_mil_positions_,
+		persistent_data->ai_personality_military_dismatlement,
+		player_statistics.get_modified_player_power(player_number())
+		);
 	std::string wpolicy = "";
 	switch (wood_policy_) {
 		case WoodPolicy::kDismantleRangers:
@@ -6054,6 +6094,11 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 	printf ("Trees around cutters: %4d/10, woodcutters policy: %s\n",
 		persistent_data->trees_around_cutters, wpolicy.c_str());
+		
+	printf ("  %d: DISMANTL: %3d, LEASTE SCORE: %3d\n",
+	player_number(), 
+	persistent_data->ai_personality_military_dismatlement,
+	persistent_data->ai_personality_mil_upper_limit);
 }
 
 template<typename T>
