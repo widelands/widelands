@@ -20,6 +20,7 @@
 #include "wui/mapdata.h"
 
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 
 MapData::MapData(const std::string& init_filename,
                  const std::string& init_localized_name,
@@ -162,11 +163,8 @@ MapData MapData::create_directory(const std::string& directory) {
 	if (boost::equals(directory, "maps/MP_Scenarios")) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
-	#ifdef _WIN32
-	} else if (boost::equals(directory, "maps\\My_Maps")) {
-	#else
-	} else if (boost::equals(directory, "maps/My_Maps")) {
-	#endif
+	} else if (boost::equals(directory,
+									 std::string("maps") + g_fs->file_separator() + std::string("My_Maps"))) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
 	} else {
