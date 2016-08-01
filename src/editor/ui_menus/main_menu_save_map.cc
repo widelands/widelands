@@ -49,8 +49,11 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 
 // TODO(GunChleoc): Arabic: Make directory dialog: buttons need more height for Arabic.
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
+   #ifdef _WIN32
+   : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps\\My_Maps"),
+   #elif
    : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
-
+   #endif
      make_directory_(this,
                      "make_directory",
                      right_column_x_,
