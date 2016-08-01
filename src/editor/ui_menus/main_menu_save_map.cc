@@ -51,7 +51,7 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
    #ifdef _WIN32
    : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps\\My_Maps"),
-   #elif
+   #else
    : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
    #endif
      make_directory_(this,
