@@ -3,6 +3,10 @@
 --  =======================================================
 
 -- RST
+-- global_helptexts.lua
+-- --------------------
+
+-- RST
 -- .. function:: no_lore_text_yet()
 --
 --    Returns a localized string for when no lore helptext has been defined yet.

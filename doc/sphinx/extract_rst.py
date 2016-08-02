@@ -20,6 +20,12 @@ cpp_pairs = (
     ("src/scripting/lua_globals.cc", "autogen_globals.rst"),
 )
 
+# Where to search for RST comments in lua files
+lua_dirs = (
+    "data/scripting",
+    "data/tribes/scripting/help"    
+)
+
 def _find_basedir():
     """Walk upwards in the directory tree till we are in the base directory of
     Widelands. Return the base directory and the source/ directory."""
@@ -37,7 +43,6 @@ def extract_rst_from_cpp(inname, outname=None):
     and prints them out on stdout or writes them to outname.
     """
     data = open(p.join(base_dir, inname), "r").read()
-
     res = re.findall(r"\s*/\* RST\s(.*?)\*/", data, re.M | re.DOTALL)
 
     output = ""
@@ -56,6 +61,7 @@ def extract_rst_from_lua(inname):
     Searches for /* RST comments in the given filename, strips the lines
     and prints them out on stdout or writes them to outname.
     """
+    print 'franku inname: ', inname
     data = open(p.join(base_dir, inname), "r").read()
 
     res = re.findall(r"-- RST\s(.*?)(?:^(?!--))", data, re.M | re.DOTALL)
@@ -71,9 +77,11 @@ def extract_rst_from_lua(inname):
     if output.strip():
         out = sys.stdout if not outname else open(outname, "w")
         out.write(output)
+        print 'franku return: ', os.path.basename(outname)
         return os.path.basename(outname)
 
 def replace_auxilary_toc(aux_fns):
+    print 'frank aux_fns: ', aux_fns
     aux_in = open(p.join(source_dir, "auxiliary.rst.in"), "r").read()
     aux_in = aux_in.replace("REPLACE_ME",
                 '\n'.join('   ' + fn for fn in aux_fns))
@@ -83,11 +91,20 @@ if __name__ == '__main__':
     def main():
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
-
-        replace_auxilary_toc(
-            filter(lambda a: a, [
-                extract_rst_from_lua(i) for i in glob(p.join(base_dir, "data/scripting", "*.lua"))
-            ])
-        )
+        
+        # NOCOMM franku: I replaced the commented part with the follwoing lines
+        names = []
+        for dirs in lua_dirs:
+            for i in glob(p.join(base_dir, dirs, "*.lua")):
+                name = extract_rst_from_lua(i)
+                if name != None:
+                    names.append(name)
+        replace_auxilary_toc(names)
+                                    
+        # replace_auxilary_toc(
+        #     filter(lambda a: a, [
+        #         extract_rst_from_lua(i) for i in glob(p.join(base_dir, "data/scripting", "*.lua"))
+        #     ])
+        # )
 
     main()
