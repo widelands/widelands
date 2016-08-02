@@ -61,7 +61,6 @@ def extract_rst_from_lua(inname):
     Searches for /* RST comments in the given filename, strips the lines
     and prints them out on stdout or writes them to outname.
     """
-    print 'franku inname: ', inname
     data = open(p.join(base_dir, inname), "r").read()
 
     res = re.findall(r"-- RST\s(.*?)(?:^(?!--))", data, re.M | re.DOTALL)
@@ -77,11 +76,9 @@ def extract_rst_from_lua(inname):
     if output.strip():
         out = sys.stdout if not outname else open(outname, "w")
         out.write(output)
-        print 'franku return: ', os.path.basename(outname)
         return os.path.basename(outname)
 
 def replace_auxilary_toc(aux_fns):
-    print 'frank aux_fns: ', aux_fns
     aux_in = open(p.join(source_dir, "auxiliary.rst.in"), "r").read()
     aux_in = aux_in.replace("REPLACE_ME",
                 '\n'.join('   ' + fn for fn in aux_fns))

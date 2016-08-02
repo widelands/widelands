@@ -240,3 +240,9 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# Options for displaying formulas
+# http://www.nongnu.org/dvipng/dvipng_4.html#Command_002dline-options
+# Use one of 'dvispnames' or 'svgnames' for coloring from
+# http://mirrors.ctan.org/macros/latex/contrib/xcolor/xcolor.pdf
+imgmath_dvipng_args = ['-gamma', '1.5', '-D', '110', '-bg', 'Transparent', '-fg', 'Cerulean']
