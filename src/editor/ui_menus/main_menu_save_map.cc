@@ -28,6 +28,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
@@ -133,6 +134,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		set_current_directory(complete_filename);
+		log("\nNOCOM OK clicked!\n");
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -161,6 +163,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		// Trim it for preceding/trailing whitespaces in user input
 		boost::trim(fullname);
 		g_fs->make_directory(fullname);
+		log("\nNOCOM makedir clicked!\n");
 		fill_table();
 	}
 }
@@ -205,6 +208,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
+		log("\nNOCOM double-clicked!\n");
 		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
