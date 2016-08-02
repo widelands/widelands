@@ -60,7 +60,7 @@ public:
 
 	std::set<std::string> list_directory(const std::string& path) override;
 
-	/// Checks whether the filename is not empty and does not start with a . or blank space
+	/// Returns true if the filename is legal in all operating systems
 	static bool is_legal_filename(const std::string& filename);
 	bool is_writable            () const override;
 	bool file_exists            (const std::string & path) override;
