@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	(UI::Panel * const parent, char const * dirname) :
@@ -75,6 +76,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
  */
 void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const std::string& text = edit_.text();
-	ok_button_.set_enabled(!text.empty());
+	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
+	ok_button_.set_enabled(LayeredFileSystem::is_legal_filename(text));
 	dirname_ = text;
 }

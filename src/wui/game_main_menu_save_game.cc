@@ -228,7 +228,8 @@ void GameMainMenuSaveGame::select_by_name(std::string name)
  * The editbox was changed. Enable ok button
  */
 void GameMainMenuSaveGame::edit_box_changed() {
-	button_ok_->set_enabled(editbox_.text().size());
+	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
+	button_ok_->set_enabled(LayeredFileSystem::is_legal_filename(editbox_.text()));
 }
 
 static void dosave

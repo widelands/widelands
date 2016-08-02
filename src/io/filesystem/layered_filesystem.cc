@@ -22,6 +22,8 @@
 #include <cstdio>
 #include <memory>
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
@@ -35,6 +37,14 @@ LayeredFileSystem::LayeredFileSystem(): home_(nullptr) {}
  * Free all sub-filesystems
  */
 LayeredFileSystem::~LayeredFileSystem() {
+}
+
+bool LayeredFileSystem::is_legal_filename(const std::string& filename) {
+	// We can't just regex for word characters here because of non-Latin scripts,
+	// so the check is rather simple.
+	return !filename.empty() &&
+			!boost::starts_with(filename, ".") &&
+			!boost::starts_with(filename, " ");
 }
 
 

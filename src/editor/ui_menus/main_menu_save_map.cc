@@ -215,7 +215,8 @@ void MainMenuSaveMap::double_clicked_item() {
  * The editbox was changed. Enable ok button
  */
 void MainMenuSaveMap::edit_box_changed() {
-	ok_.set_enabled(!editbox_->text().empty());
+	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
+	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
