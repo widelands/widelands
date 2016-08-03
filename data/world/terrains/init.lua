@@ -1,6 +1,6 @@
 -- Categories for the editor.
 world:new_editor_terrain_category{
-   name = "green",
+   name = "summer",
    descname = _ "Summer",
    picture = "world/pics/editor_terrain_category_green.png",
 }
@@ -27,13 +27,13 @@ world:new_editor_terrain_category{
 pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
    -- The internal name of this terrain.
-   name = "wiese1",
+   name = "summer_meadow1",
 
    -- The name that will be used in UI and translated.
    descname = _ "Meadow 1",
 
    -- The category for sorting this into menus in the editor.
-   editor_category = "green",
+   editor_category = "summer",
 
    -- Type of terrain. Describes if the terrain is walkable, swimmable, if
    -- mines or buildings can be build on it, if flags can be build on it and so
@@ -63,7 +63,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
 
    -- The images used for this terrain.
-   textures = { pics_dir .. "green/wiese1_00.png" },
+   textures = { pics_dir .. "summer/meadow1_00.png" },
 
    -- This describes the z layer of the terrain when rendered next to another
    -- one and blending slightly over it to hide the triangles.
@@ -82,9 +82,9 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "wiese2",
+   name = "summer_meadow2",
    descname = _ "Meadow 2",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
@@ -93,7 +93,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { pics_dir .. "green/wiese2_00.png" },
+   textures = { pics_dir .. "summer/meadow2_00.png" },
    dither_layer = 350,
    temperature = 100,
    humidity = 0.6,
@@ -103,9 +103,9 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "wiese3",
+   name = "summer_meadow3",
    descname = _ "Meadow 3",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
@@ -114,7 +114,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { pics_dir .. "green/wiese3_00.png" },
+   textures = { pics_dir .. "summer/meadow3_00.png" },
    dither_layer = 350,
    temperature = 105,
    humidity = 0.55,
@@ -123,9 +123,9 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "wiese4",
+   name = "summer_meadow4",
    descname = _ "Meadow 4",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
@@ -134,7 +134,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { pics_dir .. "green/wiese4_00.png" },
+   textures = { pics_dir .. "summer/meadow4_00.png" },
    dither_layer = 350,
    temperature = 110,
    humidity = 0.65,
@@ -143,14 +143,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "steppe",
+   name = "summer_steppe",
    descname = _ "Steppe",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
-   textures = { pics_dir .. "green/steppe_00.png" },
+   textures = { pics_dir .. "summer/steppe_00.png" },
    dither_layer = 330,
    temperature = 100,
    humidity = 0.4,
@@ -159,14 +159,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "steppe_kahl",
+   name = "summer_steppe_barren",
    descname = _ "Barren Steppe",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
-   textures = { pics_dir .. "green/steppe_kahl_00.png" },
+   textures = { pics_dir .. "summer/steppe_barren_00.png" },
    dither_layer = 320,
    temperature = 100,
    humidity = 0.15,
@@ -175,14 +175,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "bergwiese",
+   name = "summer_mountain_meadow",
    descname = _ "Mountain Meadow",
-   editor_category = "green",
+   editor_category = "summer",
    is = "arable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/bergwiese_00.png" },
+   textures = { pics_dir .. "summer/mountain_meadow_00.png" },
    dither_layer = 160,
    temperature = 75,
    humidity = 0.8,
@@ -191,14 +191,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "berg1",
+   name = "summer_mountain1",
    descname = _ "Mountain 1",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/berg1_00.png" },
+   textures = { pics_dir .. "summer/mountain1_00.png" },
    dither_layer = 70,
    temperature = 80,
    humidity = 0.1,
@@ -207,14 +207,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "berg2",
+   name = "summer_mountain2",
    descname = _ "Mountain 2",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/berg2_00.png" },
+   textures = { pics_dir .. "summer/mountain2_00.png" },
    dither_layer = 70,
    temperature = 80,
    humidity = 0.1,
@@ -223,14 +223,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "berg3",
+   name = "summer_mountain3",
    descname = _ "Mountain 3",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/berg3_00.png" },
+   textures = { pics_dir .. "summer/mountain3_00.png" },
    dither_layer = 70,
    temperature = 80,
    humidity = 0.1,
@@ -239,14 +239,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "berg4",
+   name = "summer_mountain4",
    descname = _ "Mountain 4",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/berg4_00.png" },
+   textures = { pics_dir .. "summer/mountain4_00.png" },
    dither_layer = 70,
    temperature = 80,
    humidity = 0.1,
@@ -257,7 +257,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "summer_forested_mountain1",
    descname = _ "Forested Mountain 1",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
    tooltips = {
@@ -267,7 +267,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/forested_mountain1_00.png" },
+   textures = { pics_dir .. "summer/forested_mountain1_00.png" },
    dither_layer = 71,
    temperature = 50,
    humidity = 0.75,
@@ -277,7 +277,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "summer_forested_mountain2",
    descname = _ "Forested Mountain 2",
-   editor_category = "green",
+   editor_category = "summer",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
    tooltips = {
@@ -287,7 +287,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/forested_mountain2_00.png" },
+   textures = { pics_dir .. "summer/forested_mountain2_00.png" },
    dither_layer = 71,
    temperature = 50,
    humidity = 0.75,
@@ -295,14 +295,14 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "sumpf",
+   name = "summer_swamp",
    descname = _ "Swamp",
-   editor_category = "green",
+   editor_category = "summer",
    is = "unwalkable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
-   textures = path.list_files(pics_dir .. "green/sumpf_??.png"),
+   textures = path.list_files(pics_dir .. "summer/swamp/swamp_??.png"),
    dither_layer = 370,
    fps = 14,
    temperature = 105,
@@ -311,28 +311,28 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "strand",
+   name = "summer_beach",
    descname = _ "Beach",
-   editor_category = "green",
+   editor_category = "summer",
    is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/strand_00.png" },
+   textures = { pics_dir .. "summer/beach_00.png" },
    dither_layer = 60,
    temperature = 120,
    humidity = 0.6,
    fertility = 0.2,
 }
 world:new_terrain_type{
-   name = "schnee",
+   name = "summer_snow",
    descname = _ "Snow",
-   editor_category = "green",
+   editor_category = "summer",
    is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "green/schnee_00.png" },
+   textures = { pics_dir .. "summer/snow_00.png" },
    dither_layer = 220,
    temperature = 50,
    humidity = 0.999,
@@ -343,12 +343,12 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
-   editor_category = "green",
+   editor_category = "summer",
    is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.list_files(pics_dir .. "green/lava_??.png"),
+   textures = path.list_files(pics_dir .. "summer/lava/lava_??.png"),
    dither_layer = 30,
    fps = 4,
    temperature = 1273.0,
@@ -358,14 +358,14 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
-   name = "wasser",
+   name = "summer_water",
    descname = _ "Water",
-   editor_category = "green",
+   editor_category = "summer",
    is = "water",
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.list_files(pics_dir .. "green/wasser_??.png"),
+   textures = path.list_files(pics_dir .. "summer/water/water_??.png"),
    dither_layer = 180,
    fps = 14,
    temperature = 100,
@@ -623,7 +623,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "wasteland/strand_00.png" },
+   textures = { pics_dir .. "wasteland/beach_00.png" },
    dither_layer = 50,
    temperature = 60,
    humidity = 0.4,
@@ -639,7 +639,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.list_files(pics_dir .. "wasteland/lava-stone1_??.png"),
+   textures = path.list_files(pics_dir .. "wasteland/lava_stone1/lava-stone1_??.png"),
    dither_layer = 20,
    fps = 7,
    temperature = 1273.0,
@@ -656,7 +656,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.list_files(pics_dir .. "wasteland/lava-stone2_??.png"),
+   textures = path.list_files(pics_dir .. "wasteland/lava_stone2/lava-stone2_??.png"),
    dither_layer = 10,
    fps = 7,
    temperature = 1273.0,
@@ -673,7 +673,7 @@ world:new_terrain_type{
    valid_resources = { "fish" },
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.list_files(pics_dir .. "wasteland/water_??.png"),
+   textures = path.list_files(pics_dir .. "wasteland/water/water_??.png"),
    dither_layer = 170,
    fps = 14,
    temperature = 100,
@@ -920,7 +920,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { pics_dir .. "winter/strand_00.png" },
+   textures = { pics_dir .. "winter/beach_00.png" },
    dither_layer = 40,
    temperature = 60,
    humidity = 0.5,
@@ -936,7 +936,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.list_files(pics_dir .. "winter/ice_flows_??.png"),
+   textures = path.list_files(pics_dir .. "winter/ice_floes1/ice_floes_??.png"),
    dither_layer = 210,
    fps = 5,
    temperature = 50,
@@ -953,7 +953,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.list_files(pics_dir .. "winter/ice_flows2_??.png"),
+   textures = path.list_files(pics_dir .. "winter/ice_floes2/ice_floes2_??.png"),
    dither_layer = 210,
    fps = 5,
    temperature = 50,
@@ -970,7 +970,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.list_files(pics_dir .. "winter/water_??.png"),
+   textures = path.list_files(pics_dir .. "winter/water/water_??.png"),
    dither_layer = 190,
    fps = 8,
    temperature = 50,
@@ -1266,7 +1266,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.list_files(pics_dir .. "desert/wasser_??.png"),
+   textures = path.list_files(pics_dir .. "desert/water/water_??.png"),
    dither_layer = 200,
    fps = 5,
    temperature = 150,

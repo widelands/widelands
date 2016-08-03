@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Вячеслав Фияло <philstd@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-07-22 17:46+0000\n"
+"PO-Revision-Date: 2016-07-23 23:41+0000\n"
+"Last-Translator: Вячеслав Фияло <philstd@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr ""
+msgstr "Введення"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Солдати, тренування та ведення бою"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
@@ -32,18 +33,18 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "У цьому сценарії я збираюся розповісти вам про солдатів, їх підготовці та їх військової професії. У Widelands іноді є ворог, якого ви повинні перемогти. Але війна в основному зосереджена на економіці, а не на військовій стратегії, і її механіка заслуговує пояснення."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "Я створив невелике село, яке містить самі важливі будівлі. У вас також є досить виробів, так що ви не повинні турбуватися про ваше виробництві зброї. В реальній грі, у вас не буде такої розкоші."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Здібності солдатів"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ public:
 private:
 	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> resources_;
+	const std::map<std::string, std::string> terrains_;
 };
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
@@ -71,6 +72,26 @@ immovables_
 resources_
 {
 	{"granite", "stones"},
+},
+
+// Renamed German spelled terrains into English
+terrains_
+{
+	{"wiese1", "summer_meadow1"},
+	{"wiese2", "summer_meadow2"},
+	{"wiese3", "summer_meadow3"},
+	{"wiese4", "summer_meadow4"},
+	{"steppe", "summer_steppe"},
+	{"steppe_kahl", "summer_steppe_barren"},
+	{"bergwiese", "summer_mountain_meadow"},
+	{"berg1", "summer_mountain1"},
+	{"berg2", "summer_mountain2"},
+	{"berg3", "summer_mountain3"},
+	{"berg4", "summer_mountain4"},
+	{"sumpf", "summer_swamp"},
+	{"strand", "summer_beach"},
+	{"schnee", "summer_snow"},
+	{"wasser", "summer_water"},
 }
 {}
 
@@ -84,7 +105,11 @@ PostOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) cons
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	return terrain;
+	const auto& i = terrains_.find(terrain);
+	if (i == terrains_.end()) {
+		return terrain;
+	}
+	return i->second;
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
@@ -132,7 +157,23 @@ terrains_
 {std::make_pair(
 	"greenland", std::map<std::string, std::string>
 	{
-		// No changes for greenland.
+       // Renamed German spelled terrains into English
+		 // This has to be here to get scenarios work
+		 {"wiese1", "summer_meadow1"},
+		 {"wiese2", "summer_meadow2"},
+		 {"wiese3", "summer_meadow3"},
+		 {"wiese4", "summer_meadow4"},
+		 {"steppe", "summer_steppe"},
+		 {"steppe_kahl", "summer_steppe_barren"},
+		 {"bergwiese", "summer_mountain_meadow"},
+		 {"berg1", "summer_mountain1"},
+		 {"berg2", "summer_mountain2"},
+		 {"berg3", "summer_mountain3"},
+		 {"berg4", "summer_mountain4"},
+		 {"sumpf", "summer_swamp"},
+		 {"strand", "summer_beach"},
+		 {"schnee", "summer_snow"},
+		 {"wasser", "summer_water"},
 	}),
 std::make_pair(
 	"blackland", std::map<std::string, std::string>
