@@ -38,8 +38,7 @@ inline void pixel_to_gl_renderbuffer(const int width, const int height, float* x
 // Converts 'rect' given on a screen of 'width' x 'height' pixels into a rect
 // in opengl coordinates in a renderbuffer, i.e. in [-1, 1]. The returned
 // rectangle has positive width and height.
-inline FloatRect
-rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
+inline FloatRect rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
 	float left = rect.x;
 	float top = rect.y;
 	float right = rect.x + rect.w;
@@ -52,8 +51,7 @@ rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
 // Converts 'rect' given on a texture of 'width' x 'height' pixels into a rect
 // in opengl coordinates in a texture, i.e. in [0, 1]. Texture pixels are sampled in their center.
 // The returned rectangle has positive width and height.
-inline FloatRect
-rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
+inline FloatRect rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
 	float left = rect.x;
 	float top = rect.y;
 	float right = rect.x + rect.w;

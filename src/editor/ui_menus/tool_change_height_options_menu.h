@@ -27,13 +27,10 @@
 class EditorInteractive;
 struct EditorIncreaseHeightTool;
 
-struct EditorToolChangeHeightOptionsMenu :
-	public EditorToolOptionsMenu
-{
-	EditorToolChangeHeightOptionsMenu
-		(EditorInteractive          &,
-		 EditorIncreaseHeightTool &,
-		 UI::UniqueWindow::Registry  &);
+struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolChangeHeightOptionsMenu(EditorInteractive&,
+	                                  EditorIncreaseHeightTool&,
+	                                  UI::UniqueWindow::Registry&);
 
 private:
 	EditorIncreaseHeightTool& increase_tool_;

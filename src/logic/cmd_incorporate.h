@@ -26,22 +26,25 @@
 namespace Widelands {
 
 struct CmdIncorporate : public GameLogicCommand {
-	CmdIncorporate() : GameLogicCommand(0), worker(nullptr) {} // For savegame loading
-	CmdIncorporate (uint32_t const t, Worker * const w)
-		: GameLogicCommand(t), worker(w)
-	{}
+	CmdIncorporate() : GameLogicCommand(0), worker(nullptr) {
+	}  // For savegame loading
+	CmdIncorporate(uint32_t const t, Worker* const w) : GameLogicCommand(t), worker(w) {
+	}
 
-	void execute (Game & game) override {worker->incorporate(game);}
+	void execute(Game& game) override {
+		worker->incorporate(game);
+	}
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kIncorporate;}
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kIncorporate;
+	}
 
 private:
-	Worker * worker;
+	Worker* worker;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_CMD_INCORPORATE_H

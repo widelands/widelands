@@ -30,14 +30,12 @@ namespace Widelands {
  * operations before the destructor is called. If you are sure of what you're
  * doing, call clear().
  */
-WareList::~WareList()
-{
+WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
 		if (wares_[id])
 			log("WareList: %i items of %i left.\n", wares_[id], id);
 	}
 }
-
 
 /**
  * Add the given number of items (default = 1) to the storage.
@@ -54,9 +52,7 @@ void WareList::add(DescriptionIndex const i, const Quantity count) {
 	changed();
 }
 
-
-void WareList::add(const WareList & wl)
-{
+void WareList::add(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
 	if (wares_.size() < nr_wares)
 		wares_.reserve(nr_wares);
@@ -64,7 +60,6 @@ void WareList::add(const WareList & wl)
 		if (wl.wares_[i])
 			add(i, wl.wares_[i]);
 }
-
 
 /**
  * Remove the given number of items (default = 1) from the storage.
@@ -80,9 +75,7 @@ void WareList::remove(DescriptionIndex const i, const Quantity count) {
 	changed();
 }
 
-
-void WareList::remove(const WareList & wl)
-{
+void WareList::remove(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
 	for (DescriptionIndex i = 0; i < nr_wares; ++i)
 		if (wl.wares_[i])
@@ -96,13 +89,11 @@ Quantity WareList::stock(DescriptionIndex const id) const {
 	return id < wares_.size() ? wares_[id] : 0;
 }
 
-
 /**
  * Two WareLists are only equal when they contain the exact same stock of
  * all wares types.
 */
-bool WareList::operator== (const WareList & wl) const
-{
+bool WareList::operator==(const WareList& wl) const {
 	uint32_t i = 0;
 
 	while (i < wl.wares_.size()) {
@@ -111,19 +102,18 @@ bool WareList::operator== (const WareList & wl) const
 			if (count != wares_[i])
 				return false;
 		} else {
-			if (count) // wl2 has 0 stock per definition
+			if (count)  // wl2 has 0 stock per definition
 				return false;
 		}
 		++i;
 	}
 
 	while (i < wares_.size()) {
-		if (wares_[i]) // wl1 has 0 stock per definition
+		if (wares_[i])  // wl1 has 0 stock per definition
 			return false;
 		++i;
 	}
 
 	return true;
 }
-
 }

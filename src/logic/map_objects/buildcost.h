@@ -41,10 +41,10 @@ struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
 	uint32_t total() const;
 
-	void save(FileWrite & fw, const TribeDescr & tribe) const;
-	void load(FileRead & fw, const TribeDescr & tribe);
+	void save(FileWrite& fw, const TribeDescr& tribe) const;
+	void load(FileRead& fw, const TribeDescr& tribe);
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_BUILDCOST_H

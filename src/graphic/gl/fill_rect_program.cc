@@ -41,7 +41,7 @@ void FillRectProgram::draw(const FloatRect& destination_rect,
                            const float z_value,
                            const RGBAColor& color,
                            const BlendMode blend_mode) {
-	draw({Arguments{destination_rect, z_value, color, blend_mode} });
+	draw({Arguments{destination_rect, z_value, color, blend_mode}});
 }
 
 void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
@@ -101,50 +101,23 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			const float a = current_args.color.a / 255.;
 
 			// First triangle.
-			vertices_.emplace_back(current_args.destination_rect.x,
-			                      current_args.destination_rect.y,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			vertices_.emplace_back(current_args.destination_rect.x, current_args.destination_rect.y,
+			                       current_args.z_value, r, g, b, a);
 			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                      current_args.destination_rect.y,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			                       current_args.destination_rect.y, current_args.z_value, r, g, b, a);
 			vertices_.emplace_back(current_args.destination_rect.x,
-			                      current_args.destination_rect.y + current_args.destination_rect.h,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			                       current_args.destination_rect.y + current_args.destination_rect.h,
+			                       current_args.z_value, r, g, b, a);
 
 			// Second triangle.
 			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                      current_args.destination_rect.y,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			                       current_args.destination_rect.y, current_args.z_value, r, g, b, a);
 			vertices_.emplace_back(current_args.destination_rect.x,
-			                      current_args.destination_rect.y + current_args.destination_rect.h,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			                       current_args.destination_rect.y + current_args.destination_rect.h,
+			                       current_args.z_value, r, g, b, a);
 			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                      current_args.destination_rect.y + current_args.destination_rect.h,
-			                      current_args.z_value,
-			                      r,
-			                      g,
-			                      b,
-			                      a);
+			                       current_args.destination_rect.y + current_args.destination_rect.h,
+			                       current_args.z_value, r, g, b, a);
 			++i;
 		}
 

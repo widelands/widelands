@@ -44,9 +44,8 @@ private:
 	WorldType worldtype_;
 
 	void load_s2mf_header(FileRead&);
-	void load_s2mf(Widelands::EditorGameBase &);
-	void postload_fix_conversion(Widelands::EditorGameBase &);
+	void load_s2mf(Widelands::EditorGameBase&);
+	void postload_fix_conversion(Widelands::EditorGameBase&);
 };
-
 
 #endif  // end of include guard: WL_MAP_IO_S2MAP_H

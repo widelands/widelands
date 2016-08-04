@@ -20,10 +20,10 @@
 #ifndef WL_UI_FSMENU_ABOUT_H
 #define WL_UI_FSMENU_ABOUT_H
 
-#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/fileview_panel.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 /**
  * "Fullscreen "About" information with tabs
@@ -33,14 +33,14 @@ public:
 	FullscreenMenuAbout();
 
 private:
-	uint32_t const              butw_;
-	uint32_t const              buth_;
-	uint32_t const              hmargin_;
-	uint32_t const              tab_panel_width_;
-	uint32_t const              tab_panel_y_;
+	uint32_t const butw_;
+	uint32_t const buth_;
+	uint32_t const hmargin_;
+	uint32_t const tab_panel_width_;
+	uint32_t const tab_panel_y_;
 
-	UI::Textarea                title_;
-	UI::Button                  close_;
+	UI::Textarea title_;
+	UI::Button close_;
 
 	// Tab contents
 	UI::FileViewPanel tabs_;

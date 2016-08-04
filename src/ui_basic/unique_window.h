@@ -28,14 +28,13 @@
 namespace UI {
 class Panel;
 
-
 /**
  * Can only be created once, when it is requested to
  * open a second one, it will implicitly kill the old one
 */
 struct UniqueWindow : public Window {
 	struct Registry {
-		UniqueWindow * window;
+		UniqueWindow* window;
 
 		// Whenever Registry::toggle() is called, a window will be created using
 		// 'open_window' or if one is open already, the existing one will be
@@ -56,27 +55,29 @@ struct UniqueWindow : public Window {
 		bool valid_pos;
 
 		Registry(const Registry&) = default;
-		Registry& operator = (const Registry&) = default;
+		Registry& operator=(const Registry&) = default;
 
-		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {}
+		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
+		}
 		~Registry();
 	};
 
-	UniqueWindow
-		(Panel             * parent,
-		 const std::string & name,
-		 Registry          *,
-		 int32_t w, int32_t h,
-		 const std::string & title);
+	UniqueWindow(Panel* parent,
+	             const std::string& name,
+	             Registry*,
+	             int32_t w,
+	             int32_t h,
+	             const std::string& title);
 	virtual ~UniqueWindow();
 
-	bool get_usedefaultpos() {return usedefaultpos_;}
+	bool get_usedefaultpos() {
+		return usedefaultpos_;
+	}
 
 private:
-	Registry * registry_;
-	bool       usedefaultpos_;
+	Registry* registry_;
+	bool usedefaultpos_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_UNIQUE_WINDOW_H

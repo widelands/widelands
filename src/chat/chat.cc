@@ -19,4 +19,5 @@
 
 #include "chat/chat.h"
 
-ChatProvider::~ChatProvider() {}
+ChatProvider::~ChatProvider() {
+}

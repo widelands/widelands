@@ -20,8 +20,8 @@
 #ifndef WL_UI_BASIC_FILEVIEW_PANEL_H
 #define WL_UI_BASIC_FILEVIEW_PANEL_H
 
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "ui_basic/box.h"
@@ -35,10 +35,13 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel * parent,
-					  int32_t x, int32_t y, int32_t w, int32_t h,
-					  const Image* background,
-					  TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	FileViewPanel(Panel* parent,
+	              int32_t x,
+	              int32_t y,
+	              int32_t w,
+	              int32_t h,
+	              const Image* background,
+	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/// Adds a tab with the contents of 'lua_script'.
 	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
@@ -52,6 +55,6 @@ private:
 	std::vector<std::unique_ptr<MultilineTextarea>> textviews_;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_FILEVIEW_PANEL_H

@@ -28,12 +28,12 @@
 /** Create an FXset and set it's \ref priority_
  * \param[in] prio  The desired priority (optional)
  */
-FXset::FXset(uint8_t const priority) : last_used_(0), priority_(priority) {}
+FXset::FXset(uint8_t const priority) : last_used_(0), priority_(priority) {
+}
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.
-FXset::~FXset()
-{
-	std::vector < Mix_Chunk * >::iterator i = fxs_.begin();
+FXset::~FXset() {
+	std::vector<Mix_Chunk*>::iterator i = fxs_.begin();
 
 	while (i != fxs_.end()) {
 		Mix_FreeChunk(*i);
@@ -47,8 +47,7 @@ FXset::~FXset()
  * \param[in] fx    The sound fx to append
  * \param[in] prio  Set previous \ref priority_ to new value (optional)
  */
-void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
-{
+void FXset::add_fx(Mix_Chunk* const fx, uint8_t const prio) {
 	assert(fx);
 
 	priority_ = prio;
@@ -60,8 +59,7 @@ void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
  * \return  a pointer to the chosen effect; 0 if sound effects are
  * disabled or no fx is registered
  */
-Mix_Chunk * FXset::get_fx()
-{
+Mix_Chunk* FXset::get_fx() {
 	if (g_sound_handler.get_disable_fx() || fxs_.empty())
 		return nullptr;
 

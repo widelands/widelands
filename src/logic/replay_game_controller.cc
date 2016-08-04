@@ -25,14 +25,12 @@
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 
-
-ReplayGameController::ReplayGameController(Widelands::Game & game, const std::string & filename) :
-	game_(game),
-	lastframe_(SDL_GetTicks()),
-	time_(game_.get_gametime()),
-	speed_(1000),
-	paused_(false)
-{
+ReplayGameController::ReplayGameController(Widelands::Game& game, const std::string& filename)
+   : game_(game),
+     lastframe_(SDL_GetTicks()),
+     time_(game_.get_gametime()),
+     speed_(1000),
+     paused_(false) {
 	game_.set_game_controller(this);
 
 	// We have to create an empty map, otherwise nothing will load properly
@@ -56,20 +54,17 @@ void ReplayGameController::think() {
 	time_ = game_.get_gametime() + frametime;
 
 	if (replayreader_) {
-		while
-			(Widelands::Command * const cmd =
-				replayreader_->get_next_command(time_))
+		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_))
 			game_.enqueue_command(cmd);
 
 		if (replayreader_->end_of_replay()) {
 			replayreader_.reset(nullptr);
-			game_.enqueue_command
-				(new CmdReplayEnd(time_ = game_.get_gametime()));
+			game_.enqueue_command(new CmdReplayEnd(time_ = game_.get_gametime()));
 		}
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand &) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand&) {
 	throw wexception("Trying to send a player command during replay");
 }
 
@@ -101,15 +96,13 @@ void ReplayGameController::set_paused(bool const paused) {
 	paused_ = paused;
 }
 
-void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
+void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb
-		(game.get_ibase(),
-		 _("End of replay"),
-		 _("The end of the replay has been reached and the game has "
-			"been paused. You may unpause the game and continue watching "
-			"if you want to."),
-		 UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mmb(game.get_ibase(), _("End of replay"),
+	                     _("The end of the replay has been reached and the game has "
+	                       "been paused. You may unpause the game and continue watching "
+	                       "if you want to."),
+	                     UI::WLMessageBox::MBoxType::kOk);
 	mmb.run<UI::Panel::Returncodes>();
 }
 

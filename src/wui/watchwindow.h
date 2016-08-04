@@ -24,6 +24,6 @@
 
 class InteractiveGameBase;
 
-void show_watch_window(InteractiveGameBase &, const Widelands::Coords&);
+void show_watch_window(InteractiveGameBase&, const Widelands::Coords&);
 
 #endif  // end of include guard: WL_WUI_WATCHWINDOW_H

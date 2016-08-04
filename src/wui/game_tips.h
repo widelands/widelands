@@ -28,8 +28,7 @@
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
-	GameTips
-		(UI::ProgressWindow & progressWindow, const std::vector<std::string>&);
+	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&);
 	virtual ~GameTips();
 
 	void update(bool repaint) override;
@@ -37,19 +36,19 @@ struct GameTips : public UI::IProgressVisualization {
 
 private:
 	struct Tip {
-		std::string  text;
-		int32_t          interval;
+		std::string text;
+		int32_t interval;
 	};
 	void load_tips(std::string);
 	void show_tip(int32_t index);
 
-	uint32_t             lastUpdated_;
-	uint32_t             updateAfter_;
-	UI::ProgressWindow & progressWindow_;
-	bool                 registered_;
-	uint32_t             lastTip_;
+	uint32_t lastUpdated_;
+	uint32_t updateAfter_;
+	UI::ProgressWindow& progressWindow_;
+	bool registered_;
+	uint32_t lastTip_;
 
-	std::vector<Tip>     tips_;
+	std::vector<Tip> tips_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_TIPS_H

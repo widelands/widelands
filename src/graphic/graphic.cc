@@ -46,9 +46,9 @@
 
 using namespace std;
 
-Graphic * g_gr;
+Graphic* g_gr;
 
-namespace  {
+namespace {
 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
@@ -88,8 +88,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	GLint max;
 	gl_context_ = Gl::initialize(
-	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_,
-		&max);
+	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_, &max);
 
 	max_texture_size_ = static_cast<int>(max);
 
@@ -120,8 +119,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	   std::move(texture_atlases), std::move(textures_in_atlas));
 }
 
-Graphic::~Graphic()
-{
+Graphic::~Graphic() {
 	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();
@@ -139,16 +137,14 @@ Graphic::~Graphic()
 /**
  * Return the screen x resolution
 */
-int Graphic::get_xres()
-{
+int Graphic::get_xres() {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
 */
-int Graphic::get_yres()
-{
+int Graphic::get_yres() {
 	return screen_->height();
 }
 
@@ -175,20 +171,17 @@ void Graphic::resolution_changed() {
 /**
  * Return a pointer to the RenderTarget representing the screen
 */
-RenderTarget * Graphic::get_render_target()
-{
+RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
 }
 
-bool Graphic::fullscreen()
-{
+bool Graphic::fullscreen() {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
 
-void Graphic::set_fullscreen(const bool value)
-{
+void Graphic::set_fullscreen(const bool value) {
 	if (value == fullscreen()) {
 		return;
 	}
@@ -216,8 +209,7 @@ void Graphic::set_fullscreen(const bool value)
 /**
  * Bring the screen uptodate.
 */
-void Graphic::refresh()
-{
+void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
 	// Setting the window size immediately after going out of fullscreen does
@@ -247,7 +239,6 @@ void Graphic::refresh()
 /**
  * Save a screenshot to the given file.
 */
-void Graphic::screenshot(const string& fname)
-{
+void Graphic::screenshot(const string& fname) {
 	screenshot_filename_ = fname;
 }

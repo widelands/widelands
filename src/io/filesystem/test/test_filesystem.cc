@@ -27,20 +27,18 @@
 #include "io/filesystem/disk_filesystem.h"
 
 #ifdef _WIN32
-static std::string Win32Path(std::string s)
-{
+static std::string Win32Path(std::string s) {
 	for (size_t i = 0; i < s.size(); i++)
-		if (s[i] == '/') s[i] = '\\';
-	if (!s.empty() && s[0] == '\\')
-	{
+		if (s[i] == '/')
+			s[i] = '\\';
+	if (!s.empty() && s[0] == '\\') {
 		// Insert drive letter part from current working directory
 		std::string cwd = FileSystem::get_working_directory();
 		s.insert(0, cwd.substr(0, 2));
 	}
 	return s;
 }
-static int setenv(const char* envname, const char* envval, int overwrite)
-{
+static int setenv(const char* envname, const char* envval, int overwrite) {
 	return _putenv_s(envname, envval);
 }
 #else
@@ -50,10 +48,10 @@ static int setenv(const char* envname, const char* envval, int overwrite)
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
 #ifndef _WIN32
-#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
+#define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
 	BOOST_CHECK_EQUAL(RealFSImpl(root).canonicalize_name(path), expected);
 #else
-#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
+#define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
 	BOOST_CHECK_EQUAL(RealFSImpl(Win32Path(root)).canonicalize_name(path), Win32Path(expected));
 #endif
 

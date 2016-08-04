@@ -56,7 +56,7 @@ private:
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
-	enum Direction {kEast, kSouthEast, kSouthWest};
+	enum Direction { kEast, kSouthEast, kSouthWest };
 	void add_road(int renderbuffer_width,
 	              int renderbuffer_height,
 	              const FieldsToDraw::Field& start,

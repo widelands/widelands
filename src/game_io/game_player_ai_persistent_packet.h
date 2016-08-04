@@ -28,10 +28,9 @@ namespace Widelands {
  * stores data that are needed for AI
  */
 struct GamePlayerAiPersistentPacket : public GameDataPacket {
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H

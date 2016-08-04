@@ -36,7 +36,7 @@
 namespace {
 
 struct LuaReaderHelper {
-	std::unique_ptr<char []> data;
+	std::unique_ptr<char[]> data;
 	size_t data_len;
 };
 
@@ -61,9 +61,7 @@ const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
  * be touched. Returns true if the object was non nil and
  * therefore stored, false otherwise.
  */
-static bool add_object_to_not_persist
-	(lua_State * L, std::string name, uint32_t nidx)
-{
+static bool add_object_to_not_persist(lua_State* L, std::string name, uint32_t nidx) {
 	// Search for a dot. If one is found, we first have
 	// to get the global module.
 	std::string::size_type pos = name.find('.');
@@ -72,26 +70,26 @@ static bool add_object_to_not_persist
 		std::string table = name.substr(0, pos);
 		name = name.substr(pos + 1);
 
-		lua_getglobal(L, table.c_str()); // table object table
+		lua_getglobal(L, table.c_str());  // table object table
 		assert(!lua_isnil(L, -1));
 
-		lua_getfield(L, -1, name.c_str()); // table object table function
+		lua_getfield(L, -1, name.c_str());  // table object table function
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
 			return false;
 		}
 
-		lua_pushint32(L, nidx); // table object table function int
-		lua_settable(L, 1); //  newtable[function] = int
-		lua_pop(L, 1); // pop tabltable
+		lua_pushint32(L, nidx);  // table object table function int
+		lua_settable(L, 1);      //  newtable[function] = int
+		lua_pop(L, 1);           // pop tabltable
 	} else {
-		lua_getglobal(L, name.c_str()); // stack: table object value
+		lua_getglobal(L, name.c_str());  // stack: table object value
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
 			return false;
 		}
-		lua_pushint32(L, nidx); // stack: table object value int
-		lua_settable(L, 1); //  table[symbol] = integer
+		lua_pushint32(L, nidx);  // stack: table object value int
+		lua_settable(L, 1);      //  table[symbol] = integer
 	}
 	return true;
 }
@@ -99,18 +97,15 @@ static bool add_object_to_not_persist
 // Special handling for the upvalues of pairs and ipairs which are iterator
 // functions, but always the same and therefor need not be persisted (in fact
 // they are c functions, so they can't be persisted all the same)
-static void add_iterator_function_to_not_persist
-	(lua_State * L, std::string global, uint32_t idx)
-{
+static void add_iterator_function_to_not_persist(lua_State* L, std::string global, uint32_t idx) {
 	lua_getglobal(L, global.c_str());
 	lua_newtable(L);
-	lua_call(L, 1, 1); // pairs{}, stack now contains iterator function
+	lua_call(L, 1, 1);  // pairs{}, stack now contains iterator function
 	lua_pushuint32(L, idx);
-	lua_settable(L, 1); //  table[function] = integer
+	lua_settable(L, 1);  //  table[function] = integer
 }
 
-static bool add_object_to_not_unpersist
-	(lua_State * L, std::string name, uint32_t idx) {
+static bool add_object_to_not_unpersist(lua_State* L, std::string name, uint32_t idx) {
 	// S: ... globals
 
 	// Search for a dot. If one is found, we first have
@@ -121,32 +116,30 @@ static bool add_object_to_not_unpersist
 		const std::string table = name.substr(0, pos);
 		name = name.substr(pos + 1);
 
-		lua_getglobal(L, table.c_str()); // S: ... gtables table
-		assert(!lua_isnil(L, -1)); // table must already exist!
+		lua_getglobal(L, table.c_str());  // S: ... gtables table
+		assert(!lua_isnil(L, -1));        // table must already exist!
 
-		lua_pushint32(L, idx); // S: ... gtables table idx
+		lua_pushint32(L, idx);  // S: ... gtables table idx
 
-		lua_getfield(L, -2, name.c_str()); // S: ... gtables table idx function
-		assert(!lua_isnil(L, -1)); // function must already exist
+		lua_getfield(L, -2, name.c_str());  // S: ... gtables table idx function
+		assert(!lua_isnil(L, -1));          // function must already exist
 
-		lua_settable(L, -4); //  gtables[int] = function, S: ... gtables table
-		lua_pop(L, 1); // S: ... gtables
+		lua_settable(L, -4);  //  gtables[int] = function, S: ... gtables table
+		lua_pop(L, 1);        // S: ... gtables
 	} else {
-		lua_pushint32(L, idx); // S: ... gtable int
-		lua_getglobal(L, name.c_str()); // S: ... gtable int object
-		lua_settable(L, -3); // S: gtable[int] = object
+		lua_pushint32(L, idx);           // S: ... gtable int
+		lua_getglobal(L, name.c_str());  // S: ... gtable int object
+		lua_settable(L, -3);             // S: gtable[int] = object
 	}
 	return true;
 }
 
-static void add_iterator_function_to_not_unpersist
-	(lua_State * L, std::string global, uint32_t idx)
-{
-	lua_pushuint32(L, idx); // S: ... globals idx
+static void add_iterator_function_to_not_unpersist(lua_State* L, std::string global, uint32_t idx) {
+	lua_pushuint32(L, idx);            // S: ... globals idx
 	lua_getglobal(L, global.c_str());  // S: ... globals idx "pairs"
-	lua_newtable(L);  // S: ... globals idx "pairs" table
-	lua_call(L, 1, 1); // calls, pairs {}: ... globals idx iterator_func
-	lua_settable(L, -3); //  globals[int] = function, S: ... globals
+	lua_newtable(L);                   // S: ... globals idx "pairs" table
+	lua_call(L, 1, 1);                 // calls, pairs {}: ... globals idx iterator_func
+	lua_settable(L, -3);               //  globals[int] = function, S: ... globals
 }
 
 /*
@@ -158,26 +151,62 @@ static void add_iterator_function_to_not_unpersist
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break safe game compatibility.
-static const char * kPersistentGlobals[] = {
-	"_VERSION", "assert", "collectgarbage", "coroutine", "debug", "dofile",
-	"error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs", "load",
-	"loadfile", "loadstring", "math", "module", "newproxy", "next", "os",
-	"package", "pairs", "pcall", "print", "rawequal", "rawget", "rawset",
-	"rawlen", "require", "select", "setfenv", "setmetatable", "table",
-	"tonumber", "tostring", "type", "unpack", "wl", "xpcall", "string",
-	"_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext",
-	"include", "path", "pgettext", nullptr
-};
+static const char* kPersistentGlobals[] = {"_VERSION",
+                                           "assert",
+                                           "collectgarbage",
+                                           "coroutine",
+                                           "debug",
+                                           "dofile",
+                                           "error",
+                                           "gcinfo",
+                                           "getfenv",
+                                           "getmetatable",
+                                           "io",
+                                           "ipairs",
+                                           "load",
+                                           "loadfile",
+                                           "loadstring",
+                                           "math",
+                                           "module",
+                                           "newproxy",
+                                           "next",
+                                           "os",
+                                           "package",
+                                           "pairs",
+                                           "pcall",
+                                           "print",
+                                           "rawequal",
+                                           "rawget",
+                                           "rawset",
+                                           "rawlen",
+                                           "require",
+                                           "select",
+                                           "setfenv",
+                                           "setmetatable",
+                                           "table",
+                                           "tonumber",
+                                           "tostring",
+                                           "type",
+                                           "unpack",
+                                           "wl",
+                                           "xpcall",
+                                           "string",
+                                           "_",
+                                           "set_textdomain",
+                                           "get_build_id",
+                                           "coroutine.yield",
+                                           "ngettext",
+                                           "include",
+                                           "path",
+                                           "pgettext",
+                                           nullptr};
 
 /**
  * Does all the persisting work. Returns the number of bytes
  * written
  */
-uint32_t persist_object
-	(lua_State * L,
-	 FileWrite & fw, Widelands::MapObjectSaver & mos)
-{
-	assert(lua_gettop(L) == 2); // S: globals_table object
+uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& mos) {
+	assert(lua_gettop(L) == 2);  // S: globals_table object
 
 	// Save a reference to the object saver
 	lua_pushlightuserdata(L, &mos);
@@ -211,7 +240,7 @@ uint32_t persist_object
 	eris_dump(L, &LuaWriter, &fw);
 	uint32_t nwritten = fw.get_pos() - cpos;
 
-	lua_pop(L, 2); // pop the object and the table
+	lua_pop(L, 2);  // pop the object and the table
 
 	// Delete the entry in the registry
 	lua_pushnil(L);
@@ -220,12 +249,8 @@ uint32_t persist_object
 	return nwritten;
 }
 
-void unpersist_object
-	(lua_State * L,
-	 FileRead & fr, Widelands::MapObjectLoader & mol,
-	 uint32_t size)
-{
-	assert(lua_gettop(L) == 0); // S:
+void unpersist_object(lua_State* L, FileRead& fr, Widelands::MapObjectLoader& mol, uint32_t size) {
+	assert(lua_gettop(L) == 0);  // S:
 
 	// Save the mol in the registry
 	lua_pushlightuserdata(L, &mol);
@@ -254,7 +279,7 @@ void unpersist_object
 
 	eris_undump(L, &LuaReader, &helper);
 
-	lua_remove(L, -2); // remove the globals table
+	lua_remove(L, -2);  // remove the globals table
 
 	// Delete the entry in the registry
 	lua_pushnil(L);

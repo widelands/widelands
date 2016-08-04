@@ -28,14 +28,15 @@
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
-enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
+enum class TrainingSiteType : uint8_t { kNoTS = 0, kBasic = 1, kAdvanced = 2 };
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(std::unique_ptr<LuaTable>);
-	~BuildingHints() {}
+	~BuildingHints() {
+	}
 
 	bool renews_map_resource() const {
 		return !renews_map_resource_.empty();

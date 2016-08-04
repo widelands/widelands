@@ -26,10 +26,10 @@ THE SOFTWARE.
 #ifndef ERIS_H
 #define ERIS_H
 
-#define ERIS_VERSION_MAJOR  "1"
-#define ERIS_VERSION_MINOR  "1"
-#define ERIS_VERSION_NUM    101
-#define ERIS_VERSION_RELEASE  "0"
+#define ERIS_VERSION_MAJOR "1"
+#define ERIS_VERSION_MINOR "1"
+#define ERIS_VERSION_NUM 101
+#define ERIS_VERSION_RELEASE "0"
 
 /*
 ** ==================================================================
@@ -114,7 +114,7 @@ LUA_API void eris_unpersist(lua_State* L, int perms, int value);
  *
  * [-0, +1, e]
  */
-LUA_API void eris_get_setting(lua_State *L, const char *name);
+LUA_API void eris_get_setting(lua_State* L, const char* name);
 
 /**
  * Changes the value of a setting to a value on the stack.
@@ -126,7 +126,7 @@ LUA_API void eris_get_setting(lua_State *L, const char *name);
  *
  * [-0, +0, e]
  */
-LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
+LUA_API void eris_set_setting(lua_State* L, const char* name, int value);
 
 /*
 ** ==================================================================
@@ -150,4 +150,3 @@ LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
 LUA_API int luaopen_eris(lua_State* L);
 
 #endif
-

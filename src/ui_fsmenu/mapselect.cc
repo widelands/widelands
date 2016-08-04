@@ -38,30 +38,28 @@
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect
-		(GameSettingsProvider* const settings, GameController* const ctrl) :
-	FullscreenMenuLoadMapOrGame(),
-	checkbox_space_(25),
-	checkboxes_y_(tabley_ - 120),
+FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const settings,
+                                                 GameController* const ctrl)
+   : FullscreenMenuLoadMapOrGame(),
+     checkbox_space_(25),
+     checkboxes_y_(tabley_ - 120),
 
-	// Main title
-	title_
-		(this, get_w() / 2, checkboxes_y_ / 3,
-		 _("Choose a map"),
-		 UI::Align::kHCenter),
+     // Main title
+     title_(this, get_w() / 2, checkboxes_y_ / 3, _("Choose a map"), UI::Align::kHCenter),
 
-	table_(this, tablex_, tabley_, tablew_, tableh_, false),
-	map_details_(this, right_column_x_, tabley_,
-					 get_right_column_w(right_column_x_),
-					 tableh_ - buth_ - 4 * padding_, MapDetails::Style::kFsMenu),
+     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     map_details_(this,
+                  right_column_x_,
+                  tabley_,
+                  get_right_column_w(right_column_x_),
+                  tableh_ - buth_ - 4 * padding_,
+                  MapDetails::Style::kFsMenu),
 
-	basedir_("maps"),
-	settings_(settings),
-	ctrl_(ctrl),
-	has_translated_mapname_(false)
-{
-	curdir_ = basedir_,
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+     basedir_("maps"),
+     settings_(settings),
+     ctrl_(ctrl),
+     has_translated_mapname_(false) {
+	curdir_ = basedir_, title_.set_fontsize(UI_FONT_SIZE_BIG);
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {
@@ -71,30 +69,32 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 	table_.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
-	table_.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	table_.set_column_compare(0, boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
-	table_.set_column_compare(1, boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
+	table_.double_clicked.connect(
+	   boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	table_.set_column_compare(
+	   0, boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
+	table_.set_column_compare(
+	   1, boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
 	table_.set_column_compare(2, boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
 
-	UI::Box* vbox = new UI::Box(this, tablex_, checkboxes_y_,
-										 UI::Box::Horizontal, checkbox_space_, get_w());
+	UI::Box* vbox =
+	   new UI::Box(this, tablex_, checkboxes_y_, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
 	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
-	cb_dont_localize_mapnames_->changedto.connect
-			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
+	cb_dont_localize_mapnames_->changedto.connect(
+	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 
 	cb_show_all_maps_ = add_tag_checkbox(vbox, "blumba", _("Show all maps"));
-	tags_checkboxes_.clear(); // Remove this again, it is a special tag checkbox
+	tags_checkboxes_.clear();  // Remove this again, it is a special tag checkbox
 	cb_show_all_maps_->set_state(true);
 
 	vbox->add(cb_dont_localize_mapnames_, UI::Align::kLeft, true);
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
-	vbox = new UI::Box(this,
-							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
-							 UI::Box::Horizontal, checkbox_space_, get_w());
+	vbox = new UI::Box(this, tablex_, vbox->get_y() + vbox->get_h() + padding_, UI::Box::Horizontal,
+	                   checkbox_space_, get_w());
 	add_tag_checkbox(vbox, "official", localize_tag("official"));
 	add_tag_checkbox(vbox, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(vbox, "seafaring", localize_tag("seafaring"));
@@ -102,17 +102,15 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	add_tag_checkbox(vbox, "scenario", localize_tag("scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
-	vbox = new UI::Box(this,
-							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
-							 UI::Box::Horizontal, checkbox_space_, get_w());
+	vbox = new UI::Box(this, tablex_, vbox->get_y() + vbox->get_h() + padding_, UI::Box::Horizontal,
+	                   checkbox_space_, get_w());
 	add_tag_checkbox(vbox, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(vbox, "1v1", localize_tag("1v1"));
 
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
-	vbox = new UI::Box(this,
-							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
-							 UI::Box::Horizontal, checkbox_space_, get_w());
+	vbox = new UI::Box(this, tablex_, vbox->get_y() + vbox->get_h() + padding_, UI::Box::Horizontal,
+	                   checkbox_space_, get_w());
 	add_tag_checkbox(vbox, "2teams", localize_tag("2teams"));
 	add_tag_checkbox(vbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(vbox, "4teams", localize_tag("4teams"));
@@ -128,43 +126,32 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 }
 
-void FullscreenMenuMapSelect::think()
-{
+void FullscreenMenuMapSelect::think() {
 	if (ctrl_) {
 		ctrl_->think();
 	}
 }
 
-
-bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb)
-{
+bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
 }
 
-
-bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb)
-{
+bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
 }
 
-
-bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
-{
+bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
 }
 
-
-MapData const * FullscreenMenuMapSelect::get_map() const
-{
+MapData const* FullscreenMenuMapSelect::get_map() const {
 	if (!table_.has_selection()) {
 		return nullptr;
 	}
 	return &maps_data_[table_.get_selected()];
 }
 
-
-void FullscreenMenuMapSelect::clicked_ok()
-{
+void FullscreenMenuMapSelect::clicked_ok() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 
@@ -180,8 +167,7 @@ void FullscreenMenuMapSelect::clicked_ok()
 	}
 }
 
-bool FullscreenMenuMapSelect::set_has_selection()
-{
+bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 
@@ -191,14 +177,12 @@ bool FullscreenMenuMapSelect::set_has_selection()
 	return has_selection;
 }
 
-
-void FullscreenMenuMapSelect::entry_selected()
-{
+void FullscreenMenuMapSelect::entry_selected() {
 	if (set_has_selection()) {
-		map_details_.update(maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		map_details_.update(
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
 	}
 }
-
 
 /**
  * Fill the list with maps that can be opened.
@@ -216,8 +200,7 @@ void FullscreenMenuMapSelect::entry_selected()
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  */
-void FullscreenMenuMapSelect::fill_table()
-{
+void FullscreenMenuMapSelect::fill_table() {
 	has_translated_mapname_ = false;
 
 	maps_data_.clear();
@@ -240,7 +223,7 @@ void FullscreenMenuMapSelect::fill_table()
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	}
 
-	Widelands::Map map; //  MapLoader needs a place to put its preload data
+	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 
 	for (const std::string& mapfilename : files) {
 		// Add map file (compressed) or map directory (uncompressed)
@@ -266,16 +249,17 @@ void FullscreenMenuMapSelect::fill_table()
 				MapData mapdata(map, mapfilename, maptype, display_type);
 
 				has_translated_mapname_ =
-						has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+				   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
 				bool has_all_tags = true;
-				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
+				     ++it)
 					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
 				if (!has_all_tags) {
 					continue;
 				}
 				maps_data_.push_back(mapdata);
-			} catch (const std::exception & e) {
+			} catch (const std::exception& e) {
 				log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			} catch (...) {
 				log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
@@ -300,15 +284,13 @@ void FullscreenMenuMapSelect::fill_table()
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox * FullscreenMenuMapSelect::add_tag_checkbox
-	(UI::Box * box, std::string tag, std::string displ_name)
-{
+UI::Checkbox*
+FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name) {
 	int32_t id = tags_ordered_.size();
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0), displ_name);
-	cb->changedto.connect
-		(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
+	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0), displ_name);
+	cb->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Align::kLeft, true);
 	box->add_space(checkbox_space_);
@@ -321,24 +303,22 @@ UI::Checkbox * FullscreenMenuMapSelect::add_tag_checkbox
  * One of the tagboxes has changed
  */
 void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
-	if (id == 0) { // Show all maps checbox
+	if (id == 0) {  // Show all maps checbox
 		if (to) {
-			for (UI::Checkbox * checkbox : tags_checkboxes_) {
+			for (UI::Checkbox* checkbox : tags_checkboxes_) {
 				checkbox->set_state(false);
 			}
 		}
-	} else { // Any tag
+	} else {  // Any tag
 		if (to) {
 			req_tags_.insert(id);
-		}
-		else {
+		} else {
 			req_tags_.erase(id);
 		}
 	}
 	if (req_tags_.empty()) {
 		cb_show_all_maps_->set_state(true);
-	}
-	else {
+	} else {
 		cb_show_all_maps_->set_state(false);
 	}
 

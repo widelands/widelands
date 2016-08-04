@@ -51,8 +51,10 @@ constexpr int FRAME_LENGTH = 250;
  */
 class Animation {
 public:
-	Animation() {}
-	virtual ~Animation() {}
+	Animation() {
+	}
+	virtual ~Animation() {
+	}
 
 	/// The dimensions of this animation.
 	virtual uint16_t width() const = 0;
@@ -81,7 +83,8 @@ public:
 	/// color used for blitting - the parameter can be 'nullptr', in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
-	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
+	virtual void
+	blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;

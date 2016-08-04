@@ -37,16 +37,16 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (const std::string & playername, bool internet = false);
-	virtual ~NetHost ();
+	NetHost(const std::string& playername, bool internet = false);
+	virtual ~NetHost();
 
 	void run();
-	const std::string & get_local_playername() const;
+	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
 
 	// GameController interface
 	void think() override;
-	void send_player_command(Widelands::PlayerCommand &) override;
+	void send_player_command(Widelands::PlayerCommand&) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 
@@ -58,26 +58,25 @@ struct NetHost : public GameController, private SyncCallback {
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings & settings();
+	const GameSettings& settings();
 	bool can_launch();
 	void set_scenario(bool);
-	void set_map
-		(const std::string & mapname,
-		 const std::string & mapfilename,
-		 uint32_t            maxplayers,
-		 bool                savegame = false);
-	void set_player_state    (uint8_t number, PlayerSettings::State state, bool host = false);
-	void set_player_tribe    (uint8_t number, const std::string & tribe, bool const random_tribe = false);
-	void set_player_init     (uint8_t number, uint8_t index);
-	void set_player_ai       (uint8_t number, const std::string & name, bool const random_ai = false);
-	void set_player_name     (uint8_t number, const std::string & name);
-	void set_player          (uint8_t number, const PlayerSettings&);
-	void set_player_number   (uint8_t number);
-	void set_player_team     (uint8_t number, Widelands::TeamNumber team);
+	void set_map(const std::string& mapname,
+	             const std::string& mapfilename,
+	             uint32_t maxplayers,
+	             bool savegame = false);
+	void set_player_state(uint8_t number, PlayerSettings::State state, bool host = false);
+	void set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe = false);
+	void set_player_init(uint8_t number, uint8_t index);
+	void set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false);
+	void set_player_name(uint8_t number, const std::string& name);
+	void set_player(uint8_t number, const PlayerSettings&);
+	void set_player_number(uint8_t number);
+	void set_player_team(uint8_t number, Widelands::TeamNumber team);
 	void set_player_closeable(uint8_t number, bool closeable);
-	void set_player_shared   (uint8_t number, uint8_t shared);
-	void switch_to_player    (uint32_t user,  uint8_t number);
-	void set_win_condition_script   (std::string);
+	void set_player_shared(uint8_t number, uint8_t shared);
+	void switch_to_player(uint32_t user, uint8_t number);
+	void set_win_condition_script(std::string);
 
 	// just visible stuff for the select mapmenu
 	void set_multiplayer_game_settings();
@@ -88,10 +87,14 @@ struct NetHost : public GameController, private SyncCallback {
 	//  Host command related stuff
 	int32_t check_client(std::string name);
 	void kick_user(uint32_t, std::string);
-	void split_command_array
-		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
+	void split_command_array(const std::string& cmdarray,
+	                         std::string& cmd,
+	                         std::string& arg1,
+	                         std::string& arg2);
 
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
+	void report_result(uint8_t player,
+	                   Widelands::PlayerEndResult result,
+	                   const std::string& info) override;
 
 	void force_pause() {
 		forced_pause_ = true;
@@ -103,13 +106,15 @@ struct NetHost : public GameController, private SyncCallback {
 		update_network_speed();
 	}
 
-	bool forced_pause() {return forced_pause_;}
+	bool forced_pause() {
+		return forced_pause_;
+	}
 
 private:
-
-	void send_system_message_code
-		(const std::string &,
-		 const std::string & a = "", const std::string & b = "", const std::string & c = "");
+	void send_system_message_code(const std::string&,
+	                              const std::string& a = "",
+	                              const std::string& b = "",
+	                              const std::string& c = "");
 	void request_sync_reports();
 	void check_sync_reports();
 	void syncreport() override;
@@ -118,8 +123,8 @@ private:
 	void init_computer_player(Widelands::PlayerNumber p);
 	void init_computer_players();
 
-	void handle_packet(uint32_t i, RecvPacket &);
-	void handle_network ();
+	void handle_packet(uint32_t i, RecvPacket&);
+	void handle_network();
 	void send_file_part(TCPsocket, uint32_t);
 
 	void check_hung_clients();
@@ -127,36 +132,30 @@ private:
 	void update_network_speed();
 
 	std::string get_computer_player_name(uint8_t playernum);
-	bool has_user_name
-		(const std::string & name,
-		 uint8_t             ignoreplayer = UserSettings::none());
-	void welcome_client(uint32_t number, std::string & playername);
+	bool has_user_name(const std::string& name, uint8_t ignoreplayer = UserSettings::none());
+	void welcome_client(uint32_t number, std::string& playername);
 	void committed_network_time(int32_t time);
 	void receive_client_time(uint32_t number, int32_t time);
 
-	void broadcast(SendPacket &);
-	void write_setting_map(SendPacket &);
-	void write_setting_player(SendPacket &, uint8_t number);
-	void write_setting_all_players(SendPacket &);
-	void write_setting_user(SendPacket &, uint32_t number);
-	void write_setting_all_users(SendPacket &);
-	bool write_map_transfer_info(SendPacket &, std::string);
+	void broadcast(SendPacket&);
+	void write_setting_map(SendPacket&);
+	void write_setting_player(SendPacket&, uint8_t number);
+	void write_setting_all_players(SendPacket&);
+	void write_setting_user(SendPacket&, uint32_t number);
+	void write_setting_all_users(SendPacket&);
+	bool write_map_transfer_info(SendPacket&, std::string);
 
-	void disconnect_player_controller
-		(uint8_t number,
-		 const std::string & name);
-	void disconnect_client
-		(uint32_t number,
-		 const std::string & reason,
-		 bool sendreason = true,
-		 const std::string & arg = "");
+	void disconnect_player_controller(uint8_t number, const std::string& name);
+	void disconnect_client(uint32_t number,
+	                       const std::string& reason,
+	                       bool sendreason = true,
+	                       const std::string& arg = "");
 	void reaper();
 
-	NetTransferFile * file_;
-	NetHostImpl     * d;
-	bool              internet_;
-	bool              forced_pause_;
+	NetTransferFile* file_;
+	NetHostImpl* d;
+	bool internet_;
+	bool forced_pause_;
 };
-
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

@@ -34,9 +34,9 @@ using namespace std;
 
 namespace UI {
 
-Panel * Panel::modal_       = nullptr;
-Panel * Panel::mousegrab_ = nullptr;
-Panel * Panel::mousein_   = nullptr;
+Panel* Panel::modal_ = nullptr;
+Panel* Panel::mousegrab_ = nullptr;
+Panel* Panel::mousein_ = nullptr;
 
 // The following variable can be set to false. If so, all mouse and keyboard
 // events are ignored and not passed on to any widget. This is only useful
@@ -48,20 +48,32 @@ const Image* Panel::default_cursor_click_ = nullptr;
 /**
  * Initialize a panel, link it into the parent's queue.
  */
-Panel::Panel
-	(Panel * const nparent,
-	 const int nx, const int ny, const int nw, const int nh,
-	 const std::string & tooltip_text)
-	:
-	parent_(nparent), first_child_(nullptr), last_child_(nullptr), mousein_child_(nullptr), focus_(nullptr),
-	flags_(pf_handle_mouse|pf_thinks|pf_visible),
-	x_(nx), y_(ny), w_(nw), h_(nh),
-	lborder_(0), rborder_(0), tborder_(0), bborder_(0),
-	border_snap_distance_(0), panel_snap_distance_(0),
-	desired_w_(nw), desired_h_(nh),
-	running_(false),
-	tooltip_(tooltip_text)
-{
+Panel::Panel(Panel* const nparent,
+             const int nx,
+             const int ny,
+             const int nw,
+             const int nh,
+             const std::string& tooltip_text)
+   : parent_(nparent),
+     first_child_(nullptr),
+     last_child_(nullptr),
+     mousein_child_(nullptr),
+     focus_(nullptr),
+     flags_(pf_handle_mouse | pf_thinks | pf_visible),
+     x_(nx),
+     y_(ny),
+     w_(nw),
+     h_(nh),
+     lborder_(0),
+     rborder_(0),
+     tborder_(0),
+     bborder_(0),
+     border_snap_distance_(0),
+     panel_snap_distance_(0),
+     desired_w_(nw),
+     desired_h_(nh),
+     running_(false),
+     tooltip_(tooltip_text) {
 	assert(nparent != this);
 	if (parent_) {
 		next_ = parent_->first_child_;
@@ -78,8 +90,7 @@ Panel::Panel
 /**
  * Unlink the panel from the parent's queue
  */
-Panel::~Panel()
-{
+Panel::~Panel() {
 	// Release pointers to this object
 	if (mousegrab_ == this)
 		mousegrab_ = nullptr;
@@ -107,7 +118,6 @@ Panel::~Panel()
 	}
 }
 
-
 /**
  * Free all of the panel's children.
  */
@@ -115,9 +125,9 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_) delete first_child_;
+	while (first_child_)
+		delete first_child_;
 }
-
 
 /**
  * Enters the event loop; all events will be handled by this panel.
@@ -126,17 +136,16 @@ void Panel::free_children() {
  * negative when the event loop was quit in an abnormal way (e.g. the user
  * clicked the window's close button or similar).
  */
-int Panel::do_run()
-{
+int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
-	WLApplication * const app = WLApplication::get();
-	Panel * const prevmodal = modal_;
+	WLApplication* const app = WLApplication::get();
+	Panel* const prevmodal = modal_;
 	modal_ = this;
-	mousegrab_ = nullptr; // good ol' paranoia
-	app->set_mouse_lock(false); // more paranoia :-)
+	mousegrab_ = nullptr;        // good ol' paranoia
+	app->set_mouse_lock(false);  // more paranoia :-)
 
-	Panel * forefather = this;
-	while (Panel * const p = forefather->parent_)
+	Panel* forefather = this;
+	while (Panel* const p = forefather->parent_)
 		forefather = p;
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
@@ -155,14 +164,9 @@ int Panel::do_run()
 	const uint32_t draw_delay =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
-	static InputCallback input_callback = {
-		Panel::ui_mousepress,
-		Panel::ui_mouserelease,
-		Panel::ui_mousemove,
-		Panel::ui_key,
-		Panel::ui_textinput,
-		Panel::ui_mousewheel
-	};
+	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
+	                                       Panel::ui_mousemove,  Panel::ui_key,
+	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 
 	const uint32_t initial_ticks = SDL_GetTicks();
 	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
@@ -187,8 +191,8 @@ int Panel::do_run()
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			rt.blit(app->get_mouse_position() - Point(3, 7), WLApplication::get()->is_mouse_pressed() ?
-																				 default_cursor_click_ :
-																				 default_cursor_);
+			                                                    default_cursor_click_ :
+			                                                    default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
@@ -210,21 +214,21 @@ int Panel::do_run()
 /**
  * \return \c true if this is the currently modal panel
  */
-bool Panel::is_modal()
-{
+bool Panel::is_modal() {
 	return running_;
 }
-
 
 /**
  * Called once before the event loop in run is started
  */
-void Panel::start() {}
+void Panel::start() {
+}
 
 /**
  * Called once after the event loop in run() has ended
  */
-void Panel::end() {}
+void Panel::end() {
+}
 
 /**
  * Resizes the panel.
@@ -232,8 +236,7 @@ void Panel::end() {}
  * \note NEVER override this function. If you feel the urge to override this
  * function, you probably want to override \ref layout.
  */
-void Panel::set_size(const int nw, const int nh)
-{
+void Panel::set_size(const int nw, const int nh) {
 	if (nw == w_ && nh == h_)
 		return;
 
@@ -258,8 +261,7 @@ void Panel::set_pos(const Point n) {
  * Set \p w and \p h to the desired
  * width and height of this panel, respectively.
  */
-void Panel::get_desired_size(int* w, int* h) const
-{
+void Panel::get_desired_size(int* w, int* h) const {
 	*w = desired_w_;
 	*h = desired_h_;
 }
@@ -274,8 +276,7 @@ void Panel::get_desired_size(int* w, int* h) const
  *
  * \note NEVER override this function
  */
-void Panel::set_desired_size(int w, int h)
-{
+void Panel::set_desired_size(int w, int h) {
 	if (desired_w_ == w && desired_h_ == h)
 		return;
 
@@ -296,8 +297,7 @@ void Panel::set_desired_size(int w, int h)
  *
  * This is automatically called whenever a child panel's desired size changes.
  */
-void Panel::update_desired_size()
-{
+void Panel::update_desired_size() {
 }
 
 /**
@@ -305,15 +305,13 @@ void Panel::update_desired_size()
  *
  * Typically, only true for \ref Window.
  */
-void Panel::set_layout_toplevel(bool ltl)
-{
+void Panel::set_layout_toplevel(bool ltl) {
 	flags_ &= ~pf_layout_toplevel;
 	if (ltl)
 		flags_ |= pf_layout_toplevel;
 }
 
-bool Panel::get_layout_toplevel() const
-{
+bool Panel::get_layout_toplevel() const {
 	return flags_ & pf_layout_toplevel;
 }
 
@@ -322,14 +320,12 @@ bool Panel::get_layout_toplevel() const
  * and translate it into the interior coordinate system of the parent
  * and return the result.
  */
-Point Panel::to_parent(const Point & pt) const
-{
+Point Panel::to_parent(const Point& pt) const {
 	if (!parent_)
 		return pt;
 
 	return pt + Point(lborder_ + x_, tborder_ + y_);
 }
-
 
 /**
  * Ensure the panel is inside the parent's visibile area.
@@ -337,8 +333,7 @@ Point Panel::to_parent(const Point & pt) const
  * The default implementation does nothing, this is overridden
  * by \ref Window
  */
-void Panel::move_inside_parent()
-{
+void Panel::move_inside_parent() {
 }
 
 /**
@@ -349,15 +344,13 @@ void Panel::move_inside_parent()
  *
  * The default implementation does nothing.
  */
-void Panel::layout()
-{
+void Panel::layout() {
 }
 
 /**
  * Set the size of the inner area (total area minus border)
  */
-void Panel::set_inner_size(int const nw, int const nh)
-{
+void Panel::set_inner_size(int const nw, int const nh) {
 	set_size(nw + lborder_ + rborder_, nh + tborder_ + bborder_);
 }
 
@@ -366,8 +359,7 @@ void Panel::set_inner_size(int const nw, int const nh)
  * Note that since position and total size aren't changed, so that the size
  * and position of the inner area will change.
  */
-void Panel::set_border(int l, int r, int t, int b)
-{
+void Panel::set_border(int l, int r, int t, int b) {
 	lborder_ = l;
 	rborder_ = r;
 	tborder_ = t;
@@ -377,8 +369,7 @@ void Panel::set_border(int l, int r, int t, int b)
 /**
  * Make this panel the top-most panel in the parent's Z-order.
  */
-void Panel::move_to_top()
-{
+void Panel::move_to_top() {
 	if (!parent_)
 		return;
 
@@ -405,8 +396,7 @@ void Panel::move_to_top()
 /**
  * Makes the panel visible or invisible
  */
-void Panel::set_visible(bool const on)
-{
+void Panel::set_visible(bool const on) {
 	if (((flags_ & pf_visible) > 1) == on)
 		return;
 
@@ -419,69 +409,59 @@ void Panel::set_visible(bool const on)
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
-void Panel::draw(RenderTarget &) {}
+void Panel::draw(RenderTarget&) {
+}
 
 /**
  * Redraw the panel border.
  */
-void Panel::draw_border(RenderTarget &) {}
-
+void Panel::draw_border(RenderTarget&) {
+}
 
 /**
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
 */
-void Panel::draw_overlay(RenderTarget &) {}
+void Panel::draw_overlay(RenderTarget&) {
+}
 
 /**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
  */
-void Panel::think()
-{
+void Panel::think() {
 }
-
 
 /**
  * Descend the panel hierarchy and call the \ref think() function of all
  * (grand-)children for which set_thinks(false) has not been called.
  */
-void Panel::do_think()
-{
+void Panel::do_think() {
 	if (thinks())
 		think();
 
-	for (Panel * child = first_child_; child; child = child->next_)
+	for (Panel* child = first_child_; child; child = child->next_)
 		child->do_think();
 }
-
 
 /**
  * Get mouse position relative to this panel
 */
 Point Panel::get_mouse_position() const {
-	return
-		(parent_ ?
-		 parent_             ->get_mouse_position()
-		 :
-		 WLApplication::get()->get_mouse_position())
-		-
-		Point(get_x() + get_lborder(), get_y() + get_tborder());
+	return (parent_ ? parent_->get_mouse_position() : WLApplication::get()->get_mouse_position()) -
+	       Point(get_x() + get_lborder(), get_y() + get_tborder());
 }
-
 
 /**
  * Set mouse position relative to this panel
 */
 void Panel::set_mouse_pos(const Point p) {
-	const Point relative_p =
-		p + Point(get_x() + get_lborder(), get_y() + get_tborder());
+	const Point relative_p = p + Point(get_x() + get_lborder(), get_y() + get_tborder());
 	if (parent_)
-		parent_             ->set_mouse_pos(relative_p);
+		parent_->set_mouse_pos(relative_p);
 	else
-		WLApplication::get()->warp_mouse   (relative_p);
+		WLApplication::get()->warp_mouse(relative_p);
 }
-
 
 /**
  * Center the mouse on this panel.
@@ -490,15 +470,14 @@ void Panel::center_mouse() {
 	set_mouse_pos(Point(get_w() / 2, get_h() / 2));
 }
 
-
 /**
  * Called whenever the mouse enters or leaves the panel. The inside state
  * is relative to the outer area of a panel. This means that the mouse
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
  */
-void Panel::handle_mousein(bool)
-{}
+void Panel::handle_mousein(bool) {
+}
 
 /**
  * Called whenever the user presses a mouse button in the panel.
@@ -507,8 +486,7 @@ void Panel::handle_mousein(bool)
  *
  * \return true if the mouseclick was processed, flase otherwise
  */
-bool Panel::handle_mousepress  (const uint8_t, int32_t, int32_t)
-{
+bool Panel::handle_mousepress(const uint8_t, int32_t, int32_t) {
 	return false;
 }
 
@@ -519,8 +497,7 @@ bool Panel::handle_mousepress  (const uint8_t, int32_t, int32_t)
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t)
-{
+bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t) {
 	return false;
 }
 
@@ -535,64 +512,56 @@ bool Panel::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	return false;
 }
 
-
 /**
  * Called when the mouse is moved while inside the panel
  */
-bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
-{
+bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return !tooltip_.empty();
 }
 
-
-bool Panel::handle_key(bool down, SDL_Keysym code)
-{
+bool Panel::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		if (focus_) {
-				Panel * p = focus_->next_;
-				if (focus_ == last_child_) {
-					p = first_child_;
-				}
+			Panel* p = focus_->next_;
+			if (focus_ == last_child_) {
+				p = first_child_;
+			}
 
-				switch (code.sym) {
+			switch (code.sym) {
 
-				case SDLK_TAB:
-					while (p != focus_) {
-						if (p->get_can_focus()) {
-							p->focus();
-							break;
-						}
-						if (p == last_child_) {
-								p = first_child_;
-						}
-						else {
-								p = p->next_;
-						}
+			case SDLK_TAB:
+				while (p != focus_) {
+					if (p->get_can_focus()) {
+						p->focus();
+						break;
 					}
-					return true;
+					if (p == last_child_) {
+						p = first_child_;
+					} else {
+						p = p->next_;
+					}
+				}
+				return true;
 
-				default:
-					return false;
+			default:
+				return false;
 			}
 		}
 	}
 	return false;
 }
 
-
 bool Panel::handle_textinput(const std::string& /* text */) {
 	return false;
 }
-
 
 /**
  * Called whenever a tooltip could be drawn.
  * Return true if the tooltip has been drawn,
  * false otherwise.
  */
-bool Panel::handle_tooltip()
-{
-	RenderTarget & rt = *g_gr->get_render_target();
+bool Panel::handle_tooltip() {
+	RenderTarget& rt = *g_gr->get_render_target();
 	return draw_tooltip(rt, tooltip());
 }
 
@@ -603,8 +572,7 @@ bool Panel::handle_tooltip()
  *
  * \param yes true if the panel should receive mouse events
  */
-void Panel::set_handle_mouse(bool const yes)
-{
+void Panel::set_handle_mouse(bool const yes) {
 	if (yes)
 		flags_ |= pf_handle_mouse;
 	else
@@ -619,8 +587,7 @@ void Panel::set_handle_mouse(bool const yes)
  *
  * \param grab true if the mouse should be grabbed
  */
-void Panel::grab_mouse(bool const grab)
-{
+void Panel::grab_mouse(bool const grab) {
 	if (grab) {
 		mousegrab_ = this;
 	} else {
@@ -632,8 +599,7 @@ void Panel::grab_mouse(bool const grab)
 /**
  * Set if this panel can receive the keyboard focus
 */
-void Panel::set_can_focus(bool const yes)
-{
+void Panel::set_can_focus(bool const yes) {
 
 	if (yes)
 		flags_ |= pf_can_focus;
@@ -649,8 +615,7 @@ void Panel::set_can_focus(bool const yes)
  * Grabs the keyboard focus, if it can,
  * topcaller identifies widget at the beginning of the recursion
  */
-void Panel::focus(const bool topcaller)
-{
+void Panel::focus(const bool topcaller) {
 	if (topcaller) {
 		if (handles_textinput()) {
 			if (!SDL_IsTextInputActive()) {
@@ -679,8 +644,7 @@ void Panel::focus(const bool topcaller)
  *
  * \param yes true if the panel's think function should be called
  */
-void Panel::set_thinks(bool const yes)
-{
+void Panel::set_thinks(bool const yes) {
 	if (yes)
 		flags_ |= pf_thinks;
 	else
@@ -693,11 +657,10 @@ void Panel::set_thinks(bool const yes)
  * been pressed (e.g. non-modal dialogs).
  * Do NOT use this to delete a hierarchy of panels that have been modal.
  */
-void Panel::die()
-{
+void Panel::die() {
 	flags_ |= pf_die;
 
-	for (Panel * p = parent_; p; p = p->parent_) {
+	for (Panel* p = parent_; p; p = p->parent_) {
 		p->flags_ |= pf_child_die;
 		if (p == modal_)
 			break;
@@ -708,29 +671,24 @@ void Panel::die()
  * Wrapper around SoundHandler::play_fx() to prevent having to include
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
-void Panel::play_click()
-{
+void Panel::play_click() {
 	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
 }
-void Panel::play_new_chat_message()
-{
+void Panel::play_new_chat_message() {
 	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
 }
-void Panel::play_new_chat_member()
-{
+void Panel::play_new_chat_member() {
 	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
 }
-
 
 /**
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
  */
-void Panel::check_child_death()
-{
-	Panel * next = first_child_;
+void Panel::check_child_death() {
+	Panel* next = first_child_;
 	while (next) {
-		Panel * p = next;
+		Panel* p = next;
 		next = p->next_;
 
 		if (p->flags_ & pf_die)
@@ -742,24 +700,21 @@ void Panel::check_child_death()
 	flags_ &= ~pf_child_die;
 }
 
-
 /**
  * Draw the inner region of the panel into the given target.
  *
  * \param dst target to render into, assumed to be prepared for the panel's
  * inner coordinate system.
  */
-void Panel::do_draw_inner(RenderTarget & dst)
-{
+void Panel::do_draw_inner(RenderTarget& dst) {
 	draw(dst);
 
 	// draw back to front
-	for (Panel * child = last_child_; child; child = child->prev_)
+	for (Panel* child = last_child_; child; child = child->prev_)
 		child->do_draw(dst);
 
 	draw_overlay(dst);
 }
-
 
 /**
  * Subset for the border first and draw the border, then subset for the inner
@@ -769,8 +724,7 @@ void Panel::do_draw_inner(RenderTarget & dst)
  *
  * \param dst RenderTarget for the parent Panel
 */
-void Panel::do_draw(RenderTarget & dst)
-{
+void Panel::do_draw(RenderTarget& dst) {
 	if (!is_visible())
 		return;
 
@@ -782,9 +736,8 @@ void Panel::do_draw(RenderTarget & dst)
 
 	draw_border(dst);
 
-	Rect innerwindow
-		(Point(lborder_, tborder_),
-			w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
+	Rect innerwindow(
+	   Point(lborder_, tborder_), w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
 
 	if (dst.enter_window(innerwindow, nullptr, nullptr))
 		do_draw_inner(dst);
@@ -792,23 +745,18 @@ void Panel::do_draw(RenderTarget & dst)
 	dst.set_window(outerrc, outerofs);
 }
 
-
 /**
  * Returns the child panel that receives mouse events at the given location.
  * Starts the search with child (which should usually be set to first_child_) and
  * returns the first match.
  */
-inline Panel * Panel::child_at_mouse_cursor
-	(int32_t const x, int32_t const y, Panel * child)
-{
+inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
 
 	for (; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible())
 			continue;
-		if
-			(x < child->x_ + static_cast<int32_t>(child->w_) && x >= child->x_
-			 &&
-			 y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_)
+		if (x < child->x_ + static_cast<int32_t>(child->w_) && x >= child->x_ &&
+		    y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_)
 			break;
 	}
 
@@ -825,8 +773,7 @@ inline Panel * Panel::child_at_mouse_cursor
  * Propagate mouseleave events (e.g. for buttons that are inside a different
  * window)
  */
-void Panel::do_mousein(bool const inside)
-{
+void Panel::do_mousein(bool const inside) {
 	if (!inside && mousein_child_) {
 		mousein_child_->do_mousein(false);
 		mousein_child_ = nullptr;
@@ -849,34 +796,31 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 		move_to_top();
 
 	if (mousegrab_ != this)
-		for
-			(Panel * child = first_child_;
-			 (child = child_at_mouse_cursor(x, y, child));
-			 child = child->next_)
-			{
-				if (child->do_mousepress(btn, x - child->x_, y - child->y_))
-					return true;
-			}
+		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child));
+		     child = child->next_) {
+			if (child->do_mousepress(btn, x - child->x_, y - child->y_))
+				return true;
+		}
 	return handle_mousepress(btn, x, y);
 }
-
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos) {
 
 	// Check if a child-panel is beneath the mouse and processes the event
-	for (Panel * child = first_child_; child; child = child->next_) {
+	for (Panel* child = first_child_; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible()) {
 			continue;
 		}
-		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_)
-			|| rel_mouse_pos.x < child->x_
-			|| rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_)
-			|| rel_mouse_pos.y < child->y_) {
+		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
+		    rel_mouse_pos.x < child->x_ ||
+		    rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_) ||
+		    rel_mouse_pos.y < child->y_) {
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(which, x, y, rel_mouse_pos
-				- Point(child->get_x() + child->get_lborder(), child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(
+		       which, x, y, rel_mouse_pos - Point(child->get_x() + child->get_lborder(),
+		                                          child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 		// Break after the first hit panel in the list. The panels are ordered from top to bottom,
@@ -887,36 +831,25 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_
 	return handle_mousewheel(which, x, y);
 }
 
-
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this)
-		for
-			(Panel * child = first_child_;
-			 (child = child_at_mouse_cursor(x, y, child));
-			 child = child->next_)
+		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child));
+		     child = child->next_)
 			if (child->do_mouserelease(btn, x - child->x_, y - child->y_))
 				return true;
 	return handle_mouserelease(btn, x, y);
 }
 
-bool Panel::do_mousemove
-	(uint8_t const state,
-	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
-{
+bool Panel::do_mousemove(
+   uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this) {
-		for
-			(Panel * child = first_child_;
-			 (child = child_at_mouse_cursor(x, y, child));
-			 child = child->next_)
-		{
-			if
-				(child->do_mousemove
-					(state, x - child->x_, y - child->y_, xdiff, ydiff))
-			{
+		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child));
+		     child = child->next_) {
+			if (child->do_mousemove(state, x - child->x_, y - child->y_, xdiff, ydiff)) {
 				return true;
 			}
 		}
@@ -928,8 +861,7 @@ bool Panel::do_mousemove
  * Pass the key event to the focused child.
  * If it doesn't process the key, we'll see if we can use the event.
  */
-bool Panel::do_key(bool const down, SDL_Keysym const code)
-{
+bool Panel::do_key(bool const down, SDL_Keysym const code) {
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
 	}
@@ -954,8 +886,7 @@ bool Panel::do_textinput(const std::string& text) {
 	return handle_textinput(text);
 }
 
-bool Panel::do_tooltip()
-{
+bool Panel::do_tooltip() {
 	if (mousein_child_ && mousein_child_->do_tooltip()) {
 		return true;
 	}
@@ -965,8 +896,7 @@ bool Panel::do_tooltip()
 /**
  * \return \c true if the given key is currently pressed, or \c false otherwise
  */
-bool Panel::get_key_state(const SDL_Scancode key) const
-{
+bool Panel::get_key_state(const SDL_Scancode key) const {
 	return WLApplication::get()->get_key_state(key);
 }
 
@@ -975,10 +905,9 @@ bool Panel::get_key_state(const SDL_Scancode key) const
  *
  * \return The panel which receives the mouse event
  */
-Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
-{
-	Panel * mousein;
-	Panel * rcv = nullptr;
+Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
+	Panel* mousein;
+	Panel* rcv = nullptr;
 
 	if (mousegrab_)
 		mousein = rcv = mousegrab_;
@@ -987,15 +916,13 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
 
 	x -= mousein->x_;
 	y -= mousein->y_;
-	for (Panel * p = mousein->parent_; p; p = p->parent_) {
+	for (Panel* p = mousein->parent_; p; p = p->parent_) {
 		x -= p->lborder_ + p->x_;
 		y -= p->tborder_ + p->y_;
 	}
 
-	if
-		(0 <= x && x < static_cast<int32_t>(mousein->w_)
-		 &&
-		 0 <= y && y < static_cast<int32_t>(mousein->h_))
+	if (0 <= x && x < static_cast<int32_t>(mousein->w_) && 0 <= y &&
+	    y < static_cast<int32_t>(mousein->h_))
 		rcv = mousein;
 	else
 		mousein = nullptr;
@@ -1020,7 +947,7 @@ bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 		return true;
 	}
 
-	Panel * const p = ui_trackmouse(x, y);
+	Panel* const p = ui_trackmouse(x, y);
 	if (p == nullptr) {
 		return false;
 	}
@@ -1032,7 +959,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
 		return true;
 	}
 
-	Panel * const p = ui_trackmouse(x, y);
+	Panel* const p = ui_trackmouse(x, y);
 	if (p == nullptr) {
 		return false;
 	}
@@ -1043,10 +970,8 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-bool Panel::ui_mousemove
-	(uint8_t const state,
-	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
-{
+bool Panel::ui_mousemove(
+   uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
 	if (!allow_user_input_) {
 		return true;
 	}
@@ -1085,19 +1010,16 @@ bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	return p->do_mousewheel(which, x, y, p->get_mouse_position());
 }
 
-
 /**
  * Input callback function. Pass the key event to the currently modal panel
  */
-bool Panel::ui_key(bool const down, SDL_Keysym const code)
-{
+bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 	if (!allow_user_input_) {
 		return true;
 	}
 
 	return modal_->do_key(down, code);
 }
-
 
 /**
  * Input callback function. Pass the textinput event to the currently modal panel
@@ -1112,8 +1034,7 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
-{
+bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	if (text.empty()) {
 		return false;
 	}
@@ -1130,13 +1051,11 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	uint16_t tip_width = rendered_text->width() + 4;
 	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rect r
-		(WLApplication::get()->get_mouse_position() + Point(2, 32),
-		 tip_width, tip_height);
+	Rect r(WLApplication::get()->get_mouse_position() + Point(2, 32), tip_width, tip_height);
 	const Point tooltip_bottom_right = r.opposite_of_origin();
 	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
-		r.x -=  4 + r.w;
+		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
 
@@ -1145,5 +1064,4 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	dst.blit(r.origin() + Point(2, 2), rendered_text);
 	return true;
 }
-
 }

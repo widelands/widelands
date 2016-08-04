@@ -39,45 +39,50 @@ class PartiallyFinishedBuilding : public Building {
 	friend struct MapBuildingPacket;
 
 public:
-	PartiallyFinishedBuilding(const BuildingDescr & building_descr);
+	PartiallyFinishedBuilding(const BuildingDescr& building_descr);
 
-	virtual void set_building         (const BuildingDescr &);
+	virtual void set_building(const BuildingDescr&);
 
 	int32_t get_size() const override;
 	uint32_t get_playercaps() const override;
 	const Image* representative_image() const override;
-	void cleanup(EditorGameBase &) override;
-	void init   (EditorGameBase &) override;
-	void set_economy(Economy *) override;
+	void cleanup(EditorGameBase&) override;
+	void init(EditorGameBase&) override;
+	void set_economy(Economy*) override;
 
-	uint32_t get_nrwaresqueues() {return wares_.size();}
-	WaresQueue * get_waresqueue(uint32_t const idx) {return wares_[idx];}
+	uint32_t get_nrwaresqueues() {
+		return wares_.size();
+	}
+	WaresQueue* get_waresqueue(uint32_t const idx) {
+		return wares_[idx];
+	}
 
 	uint32_t get_built_per64k() const;
-	Request * get_builder_request() {return builder_request_;}
-	static void request_builder_callback(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
+	Request* get_builder_request() {
+		return builder_request_;
+	}
+	static void
+	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 private:
-	void request_builder(Game &);
-
+	void request_builder(Game&);
 
 	virtual uint32_t build_step_time() const = 0;
 
 protected:
-	const BuildingDescr * building_; // type of building that was or will become
+	const BuildingDescr* building_;  // type of building that was or will become
 
-	Request * builder_request_;
+	Request* builder_request_;
 	OPtr<Worker> builder_;
 
-	using Wares = std::vector<WaresQueue *>;
+	using Wares = std::vector<WaresQueue*>;
 	Wares wares_;
 
-	bool     working_;        // true if the builder is currently working
-	uint32_t work_steptime_;  // time when next step is completed
-	uint32_t work_completed_; // how many steps have we done so far?
-	uint32_t work_steps_;     // how many steps (= wares) until we're done?
+	bool working_;             // true if the builder is currently working
+	uint32_t work_steptime_;   // time when next step is completed
+	uint32_t work_completed_;  // how many steps have we done so far?
+	uint32_t work_steps_;      // how many steps (= wares) until we're done?
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H

@@ -28,14 +28,7 @@ namespace Widelands {
  * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
-enum class TrainingAttribute : uint8_t {
-	kHealth = 0,
-	kAttack,
-	kDefense,
-	kEvade,
-	kTotal = 100
-};
-
+enum class TrainingAttribute : uint8_t { kHealth = 0, kAttack, kDefense, kEvade, kTotal = 100 };
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H

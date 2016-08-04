@@ -34,9 +34,7 @@ GameMapPacket::~GameMapPacket() {
 	delete wml_;
 }
 
-void GameMapPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader * const)
-{
+void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
 	if (!fs.file_exists("map") || !fs.is_directory("map"))
 		throw GameDataError("no map");
 
@@ -52,19 +50,14 @@ void GameMapPacket::read
 	return;
 }
 
-
-void GameMapPacket::read_complete(Game & game) {
+void GameMapPacket::read_complete(Game& game) {
 	wml_->load_map_complete(game, MapLoader::LoadType::kScenario);
 	mol_ = wml_->get_map_object_loader();
 }
 
+void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 
-void GameMapPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
-
-	std::unique_ptr<FileSystem> mapfs
-		(fs.create_sub_file_system("map", FileSystem::DIR));
+	std::unique_ptr<FileSystem> mapfs(fs.create_sub_file_system("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete wms_;
@@ -72,5 +65,4 @@ void GameMapPacket::write
 	wms_->save();
 	mos_ = wms_->get_map_object_saver();
 }
-
 }

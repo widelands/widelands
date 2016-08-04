@@ -31,7 +31,6 @@ public:
 	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable&);
 	void write(FileSystem&, EditorGameBase&);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_RESOURCES_PACKET_H

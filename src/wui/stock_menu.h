@@ -30,19 +30,19 @@ class InteractivePlayer;
  * one player
  */
 struct StockMenu : public UI::UniqueWindow {
-	StockMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
+	StockMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 
 private:
-	InteractivePlayer &  player_;
-	WaresDisplay * all_wares_;
-	WaresDisplay * all_workers_;
-	WaresDisplay * warehouse_wares_;
-	WaresDisplay * warehouse_workers_;
+	InteractivePlayer& player_;
+	WaresDisplay* all_wares_;
+	WaresDisplay* all_workers_;
+	WaresDisplay* warehouse_wares_;
+	WaresDisplay* warehouse_workers_;
 
-	void fill_total_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
-	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
+	void fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);
+	void fill_warehouse_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);
 };
 
 #endif  // end of include guard: WL_WUI_STOCK_MENU_H

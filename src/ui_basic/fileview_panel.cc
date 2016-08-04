@@ -28,12 +28,15 @@
 
 namespace UI {
 
-FileViewPanel::FileViewPanel(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h,
-									  const Image* background, TabPanel::Type border_type)
-	:
-	TabPanel(parent, x, y, w, h, background, border_type),
-	padding_(5)
-{}
+FileViewPanel::FileViewPanel(Panel* parent,
+                             int32_t x,
+                             int32_t y,
+                             int32_t w,
+                             int32_t h,
+                             const Image* background,
+                             TabPanel::Type border_type)
+   : TabPanel(parent, x, y, w, h, background, border_type), padding_(5) {
+}
 
 void FileViewPanel::add_tab(const std::string& lua_script) {
 	std::string content, title;
@@ -42,32 +45,29 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 		std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
 		content = t->get_string("text");
 		title = t->get_string("title");
-	} catch (LuaError & err) {
+	} catch (LuaError& err) {
 		content = err.what();
 		title = "Lua error";
 	}
-	boxes_.push_back(std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
+	boxes_.push_back(
+	   std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 	size_t index = boxes_.size() - 1;
 
 	// If there is a border, we have less space
-	const int width = border_type_ == TabPanel::Type::kNoBorder ?
-								 get_w() - padding_ :
-								 get_w() - 2 * padding_;
+	const int width =
+	   border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_;
 
 	const int height = border_type_ == TabPanel::Type::kNoBorder ?
-								 get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-								 get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
+	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
+	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(
-									new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, width, height, content)));
-	add((boost::format("about_%lu") % index).str(),
-				 title,
-				 boxes_.at(index).get(),
-				 "");
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, width, height, content)));
+	add((boost::format("about_%lu") % index).str(), title, boxes_.at(index).get(), "");
 	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
 
 	assert(boxes_.size() == textviews_.size());
 	assert(tabs().size() == textviews_.size());
 }
 
-} // namespace UI
+}  // namespace UI

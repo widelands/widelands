@@ -28,12 +28,13 @@ namespace LuaPath {
  * Base class for all classes in path.
  */
 class LuaPathModuleClass : public LunaClass {
-	public:
-		const char * get_modulename() override {return "path";}
+public:
+	const char* get_modulename() override {
+		return "path";
+	}
 };
 
-void luaopen_path(lua_State *);
-
+void luaopen_path(lua_State*);
 }
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_PATH_H
