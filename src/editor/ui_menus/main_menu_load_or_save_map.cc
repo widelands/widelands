@@ -23,7 +23,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler1.h"
@@ -157,17 +156,12 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	maps_data_.clear();
 	has_translated_mapname_ = false;
 
-	// NOCOM debug output for Windows
-	log("Current dir is: %s\n", curdir_.c_str());
-	log("Base dir is:    %s\n", basedir_.c_str());
-
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
-		log("Dirs not equal - add parent\n"); // NOCOM
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	} else if (files.empty()) {
 		maps_data_.push_back(MapData::create_empty_dir(curdir_));
