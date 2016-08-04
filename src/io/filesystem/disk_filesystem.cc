@@ -307,10 +307,17 @@ void RealFSImpl::unlink_directory(const std::string & file) {
  */
 void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 {
+#ifdef _WIN32
+	// Make sure we always use "/" for splitting the directory, because
+	// directory names might be hardcoded in C++ or come from the file system.
+	// Calling canonicalize_name will take care of this working for all file systems.
+	boost::replace(dirname, "\\", "/");
+#endif
+
 	try {
 		std::string::size_type it = 0;
 		while (it < dirname.size()) {
-			it = dirname.find(file_separator(), it);
+			it = dirname.find('/', it);
 
 			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
 			if (fspath.exists_ && !fspath.is_directory_)

@@ -163,8 +163,7 @@ MapData MapData::create_directory(const std::string& directory) {
 	if (boost::equals(directory, "maps/MP_Scenarios")) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
-	} else if (boost::equals(directory,
-									 std::string("maps") + g_fs->file_separator() + std::string("My_Maps"))) {
+	} else if (boost::equals(directory, "maps/My_Maps")) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
 	} else {
