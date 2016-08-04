@@ -311,7 +311,7 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 	// Make sure we always use "/" for splitting the directory, because
 	// directory names might be hardcoded in C++ or come from the file system.
 	// Calling canonicalize_name will take care of this working for all file systems.
-	boost::replace(dirname, "\\", "/");
+	boost::replace_all(dirname, "\\", "/");
 #endif
 
 	try {
