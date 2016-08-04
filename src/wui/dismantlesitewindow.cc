@@ -18,6 +18,7 @@
  */
 
 #include "logic/map_objects/tribes/dismantlesite.h"
+
 #include "graphic/graphic.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"

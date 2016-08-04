@@ -352,8 +352,10 @@ private:
 	static bool ui_textinput(const std::string& text);
 
 	Panel* parent_;
-	Panel *next_, *prev_;
-	Panel *first_child_, *last_child_;
+	Panel* next_;
+	Panel* prev_;
+	Panel* first_child_;
+	Panel* last_child_;
 	Panel* mousein_child_;  //  child panel that the mouse is in
 	Panel* focus_;          //  keyboard focus
 

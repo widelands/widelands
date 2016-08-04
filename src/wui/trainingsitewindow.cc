@@ -18,6 +18,7 @@
  */
 
 #include "logic/map_objects/tribes/trainingsite.h"
+
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/productionsitewindow.h"

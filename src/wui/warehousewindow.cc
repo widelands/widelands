@@ -18,6 +18,7 @@
  */
 
 #include "logic/map_objects/tribes/warehouse.h"
+
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
