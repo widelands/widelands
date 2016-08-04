@@ -1,9 +1,13 @@
-dirname = path.dirname(__file__)
-
-set_textdomain("tribes")
+-- RST
+-- tribes/preload.lua
+-- -----------------
+--
 
 -- This file contains the basic information for all tribes that is
 -- needed before a game is loaded or the editor has been started.
+
+dirname = path.dirname(__file__)
+set_textdomain("tribes")
 
 return {
    -- Basic information for the Barbarian tribe
