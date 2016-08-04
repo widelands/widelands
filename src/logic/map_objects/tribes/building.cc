@@ -188,7 +188,7 @@ Building & BuildingDescr::create
 }
 
 
-int32_t BuildingDescr::suitability(const Map &, FCoords const fc) const {
+int32_t BuildingDescr::suitability(const Map &, const FCoords& fc) const {
 	return size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 

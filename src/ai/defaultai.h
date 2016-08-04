@@ -184,7 +184,7 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void print_stats();
 	// return single number of strength of vector of soldiers
-	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
@@ -198,8 +198,8 @@ private:
 	bool other_player_accessible(uint32_t max_distance,
 	                             uint32_t* tested_fields,
 	                             uint16_t* mineable_fields_count,
-	                             const Widelands::Coords starting_spot,
-	                             const WalkSearch type);
+	                             const Widelands::Coords& starting_spot,
+	                             const WalkSearch& type);
 
 	int32_t recalc_with_border_range(const Widelands::BuildableField&, int32_t);
 

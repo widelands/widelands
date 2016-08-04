@@ -86,7 +86,7 @@ end
 
 function test_terrains_resource_descr:test_terrain_descname()
    assert_equal("Meadow 1",
-      egbase:get_terrain_description("wiese1").descname)
+      egbase:get_terrain_description("summer_meadow1").descname)
    assert_equal("Beach",
       egbase:get_terrain_description("wasteland_beach").descname)
    assert_equal("Forested Mountain 2",
@@ -96,7 +96,7 @@ function test_terrains_resource_descr:test_terrain_descname()
 end
 
 function test_terrains_resource_descr:test_terrain_name()
-   assert_equal("wiese1", egbase:get_terrain_description("wiese1").name)
+   assert_equal("summer_meadow1", egbase:get_terrain_description("summer_meadow1").name)
    assert_equal("wasteland_beach",
       egbase:get_terrain_description("wasteland_beach").name)
    assert_equal("desert_forested_mountain2",
@@ -106,7 +106,7 @@ function test_terrains_resource_descr:test_terrain_name()
 end
 
 function test_terrains_resource_descr:test_terrain_default_resource()
-   assert_equal("water", egbase:get_terrain_description("wiese1").default_resource.name)
+   assert_equal("water", egbase:get_terrain_description("summer_meadow1").default_resource.name)
    assert_equal(nil, egbase:get_terrain_description("wasteland_beach").default_resource)
    assert_equal(nil,
       egbase:get_terrain_description("desert_forested_mountain2").default_resource)
@@ -115,7 +115,7 @@ function test_terrains_resource_descr:test_terrain_default_resource()
 end
 
 function test_terrains_resource_descr:test_terrain_default_resource_amount()
-   assert_equal(10, egbase:get_terrain_description("wiese1").default_resource_amount)
+   assert_equal(10, egbase:get_terrain_description("summer_meadow1").default_resource_amount)
    assert_equal(0, egbase:get_terrain_description("wasteland_beach").default_resource_amount)
    assert_equal(0, egbase:get_terrain_description(
       "desert_forested_mountain2").default_resource_amount)
@@ -124,8 +124,8 @@ function test_terrains_resource_descr:test_terrain_default_resource_amount()
 end
 
 function test_terrains_resource_descr:test_terrain_editor_category()
-   assert_equal("green", egbase:get_terrain_description("wiese1").editor_category.name)
-   assert_equal("Summer", egbase:get_terrain_description("wiese1").editor_category.descname)
+   assert_equal("summer", egbase:get_terrain_description("summer_meadow1").editor_category.name)
+   assert_equal("Summer", egbase:get_terrain_description("summer_meadow1").editor_category.descname)
    assert_equal("wasteland",
       egbase:get_terrain_description("wasteland_beach").editor_category.name)
    assert_equal("Wasteland",
@@ -141,39 +141,39 @@ function test_terrains_resource_descr:test_terrain_editor_category()
 end
 
 function test_terrains_resource_descr:test_terrain_fertility()
-   assert_near(0.7, egbase:get_terrain_description("wiese1").fertility, 0.01)
+   assert_near(0.7, egbase:get_terrain_description("summer_meadow1").fertility, 0.01)
    assert_near(0.2, egbase:get_terrain_description("wasteland_beach").fertility, 0.01)
    assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").fertility, 0.01)
    assert_near(0.001, egbase:get_terrain_description("winter_water").fertility, 0.0001)
 end
 
 function test_terrains_resource_descr:test_terrain_humidity()
-   assert_near(0.6, egbase:get_terrain_description("wiese1").humidity, 0.01)
+   assert_near(0.6, egbase:get_terrain_description("summer_meadow1").humidity, 0.01)
    assert_near(0.4, egbase:get_terrain_description("wasteland_beach").humidity, 0.01)
    assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").humidity, 0.01)
    assert_near(0.999, egbase:get_terrain_description("winter_water").humidity, 0.0001)
 end
 
 function test_terrains_resource_descr:test_terrain_temperature()
-   assert_equal(100, egbase:get_terrain_description("wiese1").temperature)
+   assert_equal(100, egbase:get_terrain_description("summer_meadow1").temperature)
    assert_equal(60, egbase:get_terrain_description("wasteland_beach").temperature)
    assert_equal(120, egbase:get_terrain_description("desert_forested_mountain2").temperature)
    assert_equal(50, egbase:get_terrain_description("winter_water").temperature)
 end
 
 function test_terrains_resource_descr:test_terrain_representative_image()
-   assert_equal("world/terrains/pics/green/wiese1_00.png",
-      egbase:get_terrain_description("wiese1").representative_image)
-   assert_equal("world/terrains/pics/wasteland/strand_00.png",
+   assert_equal("world/terrains/pics/summer/meadow1_00.png",
+      egbase:get_terrain_description("summer_meadow1").representative_image)
+   assert_equal("world/terrains/pics/wasteland/beach_00.png",
       egbase:get_terrain_description("wasteland_beach").representative_image)
    assert_equal("world/terrains/pics/desert/forested_mountain2_00.png",
       egbase:get_terrain_description("desert_forested_mountain2").representative_image)
-   assert_equal("world/terrains/pics/winter/water_00.png",
+   assert_equal("world/terrains/pics/winter/water/water_00.png",
       egbase:get_terrain_description("winter_water").representative_image)
 end
 
 function test_terrains_resource_descr:test_valid_resources()
-   assert_equal("water", egbase:get_terrain_description("wiese1").valid_resources[1].name)
+   assert_equal("water", egbase:get_terrain_description("summer_meadow1").valid_resources[1].name)
    assert_equal(0, #egbase:get_terrain_description("wasteland_beach").valid_resources)
    assert_equal(4, #egbase:get_terrain_description("desert_forested_mountain2").valid_resources)
    assert_equal("fish", egbase:get_terrain_description("winter_water").valid_resources[1].name)

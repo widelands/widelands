@@ -3,7 +3,7 @@
 -- ===============
 
 function introduction()
-   additional_port_space.terr = "wasser" -- disable the port space
+   additional_port_space.terr = "summer_water" -- disable the port space
    sleep(1000)
    message_box_objective(plr, intro_south)
    sleep(300)

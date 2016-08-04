@@ -77,7 +77,7 @@ public:
 
 protected:
 	void draw_overlay(RenderTarget &) override;
-	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
+	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) = 0;
 
 	GameMainMenuWindows      main_windows_;
 	ChatProvider           * chat_provider_;

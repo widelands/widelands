@@ -55,7 +55,7 @@ EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool()
 {}
 
 int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
-                                                  Widelands::NodeAndTriangle<> const center,
+                                                  const Widelands::NodeAndTriangle<>& center,
                                                   EditorInteractive&,
                                                   EditorActionArgs* args,
 												  Map* map) {
@@ -82,7 +82,7 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
-                                                 NodeAndTriangle<Coords> center,
+                                                 const NodeAndTriangle<Coords>& center,
                                                  EditorInteractive& parent,
                                                  EditorActionArgs* args,
 												 Map* map) {
@@ -90,7 +90,7 @@ int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& world,
-                                                    NodeAndTriangle<> const center,
+                                                    const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive&,
                                                     EditorActionArgs* args,
 													Map* map) {
@@ -117,7 +117,7 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
-                                                   NodeAndTriangle<Coords> center,
+                                                   const NodeAndTriangle<Coords>& center,
                                                    EditorInteractive& parent,
                                                    EditorActionArgs* args,
 												   Map* map) {

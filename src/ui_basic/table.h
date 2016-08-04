@@ -126,7 +126,7 @@ public:
 		const Image* get_picture(uint8_t col) const;
 		const std::string & get_string(uint8_t col) const;
 		void * entry() const {return entry_;}
-		void set_color(const  RGBColor c) {
+		void set_color(const RGBColor& c) {
 			use_clr = true;
 			clr = c;
 		}

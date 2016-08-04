@@ -39,12 +39,12 @@ struct Vector {
 	}
 
 	// vector addition
-	Vector operator+ (Vector const other) const {
+	Vector operator+ (const Vector& other) const {
 		return Vector(x + other.x, y + other.y, z + other.z);
 	}
 
 	// inner product
-	float operator* (Vector const other) const {
+	float operator* (const Vector& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 

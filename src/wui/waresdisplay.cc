@@ -464,7 +464,7 @@ std::string waremap_to_richtext
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
-	for (i = order.begin(); i != order.end(); i++)
+	for (i = order.begin(); i != order.end(); ++i)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<sub width=30 padding=2><p align=center>"

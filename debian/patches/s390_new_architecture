@@ -1,0 +1,52 @@
+Description: Port the game to the s390 architecture
+Forwarded-Upstream: should be
+
+---
+ src/logic/widelands.h |   20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+Index: b/src/logic/widelands.h
+===================================================================
+--- a/src/logic/widelands.h
++++ b/src/logic/widelands.h
+@@ -78,6 +78,13 @@
+ 	{
+ 		assert(I < std::numeric_limits<value_t>::max());
+ 	}
++#if (defined(__s390__) && !defined(__s390x__))
++	explicit _Index(uintptr_t  const I)
++		: i(static_cast<value_t>(I))
++	{
++		assert(I < std::numeric_limits<value_t>::max());
++	}
++#endif
+ 
+ 	/// For compatibility with old code that use int32_t for building index
+ 	/// and use -1 to indicate invalidity.
+@@ -116,6 +123,17 @@
+ 	value_t i;
+ };
+ 
++#if (defined(__s390__) && !defined(__s390x__)) 
++#define DEFINE_INDEX(NAME)                                                    \
++   struct NAME : public _Index<NAME> {                                        \
++      NAME(NAME const & other = Null()) : _Index<NAME>(other) {}              \
++      explicit NAME(value_t const I) : _Index<NAME>(I) {}                     \
++      explicit NAME(size_t  const I) : _Index<NAME>(I) {}                     \
++      explicit NAME(int32_t const I) __attribute__((deprecated));             \
++      explicit NAME(uintptr_t  const I) : _Index<NAME>(I) {}                  \
++   };                                                                         \
++
++#else
+ #define DEFINE_INDEX(NAME)                                                    \
+    struct NAME : public Index_<NAME> {                                        \
+       NAME(const NAME & other = Null()) : Index_<NAME>(other) {}              \
+@@ -124,6 +142,8 @@
+       explicit NAME(int32_t const I) __attribute__((deprecated));             \
+    };                                                                         \
+ 
++#endif /* s390 architecture */
++
+ DEFINE_INDEX(Building_Index)
+ DEFINE_INDEX(Ware_Index)
+ 

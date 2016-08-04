@@ -249,7 +249,7 @@ void BaseListselect::set_scrollpos(const int32_t i)
  * index.
  */
 void BaseListselect::set_entry_color
-	(const uint32_t n, const RGBColor col)
+	(const uint32_t n, const RGBColor& col)
 {
 	assert(n < entry_records_.size());
 

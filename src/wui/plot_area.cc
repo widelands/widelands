@@ -491,7 +491,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst, float yoffset, const std::string&
  */
 void WuiPlotArea::draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
-		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t const yoffset)
+		 uint32_t const highest_scale, float const sub, const RGBColor& color, int32_t const yoffset)
 {
 	if (!dataset->empty()) {
 		float posx = get_inner_w() - kSpaceRight;

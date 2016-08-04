@@ -266,7 +266,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_player_name(number, name);
 	}
 
-	void set_player(uint8_t const number, PlayerSettings const ps) override {
+	void set_player(uint8_t const number, const PlayerSettings& ps) override {
 		if (number >= host_->settings().players.size())
 			return;
 		host_->set_player(number, ps);
@@ -1409,7 +1409,7 @@ void NetHost::set_player_shared(uint8_t number, uint8_t shared) {
 }
 
 
-void NetHost::set_player(uint8_t const number, PlayerSettings const ps)
+void NetHost::set_player(uint8_t const number, const PlayerSettings& ps)
 {
 	if (number >= d->settings.players.size())
 		return;

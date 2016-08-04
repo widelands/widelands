@@ -98,7 +98,7 @@ static std::string const base_immovable_name = "unknown";
  *
  * \note this function will remove the immovable (if existing) currently connected to this position.
  */
-void BaseImmovable::set_position(EditorGameBase & egbase, Coords const c)
+void BaseImmovable::set_position(EditorGameBase & egbase, const Coords& c)
 {
 	assert(c);
 
@@ -118,7 +118,7 @@ void BaseImmovable::set_position(EditorGameBase & egbase, Coords const c)
  *
  * Only call this during cleanup.
 */
-void BaseImmovable::unset_position(EditorGameBase & egbase, Coords const c)
+void BaseImmovable::unset_position(EditorGameBase & egbase, const Coords& c)
 {
 	Map & map = egbase.map();
 	FCoords const f = map.get_fcoords(c);
@@ -333,7 +333,7 @@ ImmovableProgram const * ImmovableDescr::get_program
  * Create an immovable of this type
 */
 Immovable & ImmovableDescr::create
-	(EditorGameBase & egbase, Coords const coords) const
+	(EditorGameBase & egbase, const Coords& coords) const
 {
 	assert(this != nullptr);
 	Immovable & result = *new Immovable(*this);

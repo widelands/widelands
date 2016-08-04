@@ -170,8 +170,8 @@ public:
 
 	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
 	void send_player_dismantle  (PlayerImmovable &);
-	void send_player_build      (int32_t, Coords, DescriptionIndex);
-	void send_player_build_flag (int32_t, Coords);
+	void send_player_build      (int32_t, const Coords&, DescriptionIndex);
+	void send_player_build_flag (int32_t, const Coords&);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);

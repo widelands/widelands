@@ -47,7 +47,7 @@ editor_make_infrastructure_tool_callback
  * Obviously, this function ignores the sel radius
 */
 int32_t EditorMakeInfrastructureTool::handle_click_impl(const Widelands::World&,
-                                                        Widelands::NodeAndTriangle<> const,
+                                                        const Widelands::NodeAndTriangle<>&,
                                                         EditorInteractive& parent,
                                                         EditorActionArgs* /* args */,
 														Widelands::Map*) {

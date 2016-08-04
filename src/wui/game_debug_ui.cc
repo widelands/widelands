@@ -467,7 +467,7 @@ Open a debug window for the given field.
 ===============
 */
 void show_field_debug
-	(InteractiveBase & parent, Widelands::Coords const coords)
+	(InteractiveBase& parent, const Widelands::Coords& coords)
 {
 	new FieldDebugWindow(parent, coords);
 }

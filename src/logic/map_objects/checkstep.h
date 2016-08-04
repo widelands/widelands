@@ -110,11 +110,11 @@ struct CheckStepAnd {
 	void add(const CheckStep & sub);
 
 	bool allowed
-		(Map &, FCoords start, FCoords end,
+		(Map &, const FCoords& start, const FCoords& end,
 		 int32_t           dir,
 		 CheckStep::StepId id)
 		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, const FCoords& dest) const;
 
 private:
 	std::vector<CheckStep> subs;
@@ -131,9 +131,9 @@ struct CheckStepDefault {
 	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {}
 
 	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		(Map &, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, const FCoords& dest) const;
 
 private:
 	uint8_t movecaps_;
@@ -150,7 +150,7 @@ struct CheckStepWalkOn {
 		movecaps_(movecaps), onlyend_(onlyend) {}
 
 	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		(Map &, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId)
 		const;
 	bool reachable_dest(Map &, FCoords dest) const;
 
@@ -173,9 +173,9 @@ struct CheckStepRoad {
 	{}
 
 	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		(Map &, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, const FCoords& dest) const;
 
 private:
 	const Player & player_;
@@ -189,7 +189,7 @@ private:
 struct CheckStepLimited {
 	void add_allowed_location(const Coords & c) {allowed_locations_.insert(c);}
 	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		(Map &, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId)
 		const;
 	bool reachable_dest(Map &, FCoords dest) const;
 

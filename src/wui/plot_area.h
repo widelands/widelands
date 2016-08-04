@@ -96,7 +96,7 @@ protected:
 	               uint32_t highest_scale);
 	void draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset,
-		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
+		 uint32_t const highest_scale, float const sub, const RGBColor& color, int32_t yoffset);
 	uint32_t get_plot_time() const;
 	/// Recalculates the data
 	virtual void update();

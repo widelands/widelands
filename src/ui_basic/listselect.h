@@ -73,7 +73,7 @@ struct BaseListselect : public Panel {
 
 	void switch_entries(uint32_t, uint32_t);
 
-	void set_entry_color(uint32_t, RGBColor);
+	void set_entry_color(uint32_t, const RGBColor&);
 
 	uint32_t size () const {return entry_records_.size ();}
 	bool     empty() const {return entry_records_.empty();}

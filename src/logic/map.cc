@@ -81,7 +81,7 @@ Map::~Map()
 	cleanup();
 }
 
-void Map::recalc_border(const FCoords fc) {
+void Map::recalc_border(const FCoords& fc) {
 	if (const PlayerNumber owner = fc.field->get_owned_by()) {
 		//  A node that is owned by a player and has a neighbour that is not owned
 		//  by that player is a border node.
@@ -335,7 +335,7 @@ void Map::create_empty_map
 }
 
 
-void Map::set_origin(Coords const new_origin) {
+void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.x);
 	assert     (new_origin.x < width_);
 	assert(0 <= new_origin.y);
@@ -528,7 +528,7 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 Set the starting coordinates of a player
 ===============
 */
-void Map::set_starting_pos(PlayerNumber const plnum, Coords const c)
+void Map::set_starting_pos(PlayerNumber const plnum, const Coords& c)
 {
 	assert(1 <= plnum && plnum <= get_nrplayers());
 	starting_pos_[plnum - 1] = c;
@@ -586,7 +586,7 @@ NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) {
 
 
 /// \returns the immovable at the given coordinate
-BaseImmovable * Map::get_immovable(const Coords coord) const
+BaseImmovable * Map::get_immovable(const Coords& coord) const
 {
 	return operator[](coord).get_immovable();
 }
@@ -602,7 +602,7 @@ Functor is of the form: functor(Map*, FCoords)
 */
 template<typename functorT>
 void Map::find_reachable
-	(Area<FCoords> const area, const CheckStep & checkstep, functorT & functor)
+	(const Area<FCoords>& area, const CheckStep & checkstep, functorT & functor)
 {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
@@ -654,7 +654,7 @@ Functor is of the form: functor(Map &, FCoords)
 ===============
 */
 template<typename functorT>
-void Map::find(const Area<FCoords> area, functorT & functor) const {
+void Map::find(const Area<FCoords>& area, functorT & functor) const {
 	MapRegion<Area<FCoords> > mr(*this, area);
 	do functor(*this, mr.location()); while (mr.advance(*this));
 }
@@ -671,7 +671,7 @@ struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
 		: list_(list), functor_(functor), found_(0) {}
 
-	void operator()(const Map &, const FCoords cur) {
+	void operator()(const Map &, const FCoords& cur) {
 		for
 			(Bob * bob = cur.field->get_first_bob();
 			 bob;
@@ -758,7 +758,7 @@ struct FindImmovablesCallback {
 		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
 		: list_(list), functor_(functor), found_(0) {}
 
-	void operator()(const Map &, const FCoords cur) {
+	void operator()(const Map &, const FCoords& cur) {
 		BaseImmovable * const imm = cur.field->get_immovable();
 
 		if (!imm)
@@ -869,7 +869,7 @@ struct FindNodesCallback {
 		(std::vector<Coords> * const list, const FindNode & functor)
 		: list_(list), functor_(functor), found_(0) {}
 
-	void operator()(const Map & map, const FCoords cur) {
+	void operator()(const Map & map, const FCoords& cur) {
 		if (functor_.accept(map, cur)) {
 			if (list_)
 				list_->push_back(cur);
@@ -962,7 +962,7 @@ dependencies.
 Fetch the slopes to neighbours and call the actual logic in Field
 ===============
 */
-void Map::recalc_brightness(FCoords const f) {
+void Map::recalc_brightness(const FCoords& f) {
 	int32_t left, right, top_left, top_right, bottom_left, bottom_right;
 	Field::Height const height = f.field->get_height();
 
@@ -1007,11 +1007,11 @@ into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_nodecaps_pass1(const World& world, FCoords const f) {
+void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
 }
 
-NodeCaps Map::calc_nodecaps_pass1(const World& world, FCoords const f, bool consider_mobs) {
+NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1125,7 +1125,7 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
 }
 
 NodeCaps Map::calc_nodecaps_pass2
-	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
+	(const World& world, const FCoords& f, bool consider_mobs, NodeCaps initcaps)
 {
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
@@ -1401,7 +1401,7 @@ void Map::set_port_space(Coords c, bool allowed) {
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-uint32_t Map::calc_distance(const Coords a, const Coords b) const
+uint32_t Map::calc_distance(const Coords& a, const Coords& b) const
 {
 	uint32_t dist;
 	int32_t dy;
@@ -1475,7 +1475,7 @@ Calculates the cost estimate between the two points.
 This function is used mainly for the path-finding estimate.
 ===============
 */
-int32_t Map::calc_cost_estimate(const Coords a, const Coords b) const
+int32_t Map::calc_cost_estimate(const Coords& a, const Coords& b) const
 {
 	return calc_distance(a, b) * BASE_COST_PER_FIELD;
 }
@@ -1484,7 +1484,7 @@ int32_t Map::calc_cost_estimate(const Coords a, const Coords b) const
 /**
  * \return a lower bound on the time required to walk from \p a to \p b
  */
-int32_t Map::calc_cost_lowerbound(const Coords a, const Coords b) const
+int32_t Map::calc_cost_lowerbound(const Coords& a, const Coords& b) const
 {
 	return calc_distance(a, b) * calc_cost(-SLOPE_COST_STEPS);
 }
@@ -1536,7 +1536,7 @@ Return the time it takes to walk the given step from coords in the given
 direction, in milliseconds.
 ===============
 */
-int32_t Map::calc_cost(const Coords coords, const int32_t dir) const
+int32_t Map::calc_cost(const Coords& coords, const int32_t dir) const
 {
 	FCoords f;
 	int32_t startheight;
@@ -1558,7 +1558,7 @@ int32_t Map::calc_cost(const Coords coords, const int32_t dir) const
 Calculate the average cost of walking the given step in both directions.
 ===============
 */
-int32_t Map::calc_bidi_cost(const Coords coords, const int32_t dir) const
+int32_t Map::calc_bidi_cost(const Coords& coords, const int32_t dir) const
 {
 	FCoords f;
 	int32_t startheight;
@@ -1820,7 +1820,7 @@ int32_t Map::findpath
 }
 
 
-bool Map::can_reach_by_water(const Coords field) const
+bool Map::can_reach_by_water(const Coords& field) const
 {
 	FCoords fc = get_fcoords(field);
 

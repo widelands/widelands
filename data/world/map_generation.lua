@@ -25,48 +25,48 @@ greenland = {
          {
             name = "ocean",
             weight = 1,
-            ocean_terrains = { "wasser" },
-            shelf_terrains = { "wasser" },
-            shallow_terrains = { "wasser" },
+            ocean_terrains = { "summer_water" },
+            shelf_terrains = { "summer_water" },
+            shallow_terrains = { "summer_water" },
          }
       },
       land = {
          {
             name = "beach",
             weight = 2,
-            coast_terrains = { "strand" },
-            land_terrains = { "wiese2", "wiese3" },
-            upper_terrains = { "wiese2", "wiese3" },
+            coast_terrains = { "summer_beach" },
+            land_terrains = { "summer_meadow2", "summer_meadow3" },
+            upper_terrains = { "summer_meadow2", "summer_meadow3" },
          },
          {
             name = "meadow",
             weight = 1,
-            coast_terrains = { "strand" },
-            land_terrains = { "wiese1" },
-            upper_terrains = { "wiese2", "wiese3" },
+            coast_terrains = { "summer_beach" },
+            land_terrains = { "summer_meadow1" },
+            upper_terrains = { "summer_meadow2", "summer_meadow3" },
          }
       },
       wasteland = {
          {
             name = "swamp",
             weight = 1,
-            inner_terrains = { "sumpf" },
-            outer_terrains = { "sumpf" },
+            inner_terrains = { "summer_swamp" },
+            outer_terrains = { "summer_swamp" },
          },
          {
             name = "tundra",
-            inner_terrains = { "steppe_kahl" },
+            inner_terrains = { "summer_steppe_barren" },
             weight = 1,
-            outer_terrains = { "steppe" },
+            outer_terrains = { "summer_steppe" },
          }
       },
       mountains = {
          {
             name = "mountains",
             weight = 1,
-            mountainfoot_terrains = { "bergwiese" },
-            mountain_terrains = { "berg1", "berg2", "berg3", "berg4" },
-            snow_terrains = { "schnee" },
+            mountainfoot_terrains = { "summer_mountain_meadow" },
+            mountain_terrains = { "summer_mountain1", "summer_mountain2", "summer_mountain3", "summer_mountain4" },
+            snow_terrains = { "summer_snow" },
          }
       }
    }, -- areas

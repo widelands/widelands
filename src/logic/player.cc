@@ -59,7 +59,7 @@ namespace {
 
 void terraform_for_building
 	(Widelands::EditorGameBase& egbase, const Widelands::PlayerNumber player_number,
-	 const Widelands::Coords location, const Widelands::BuildingDescr* descr)
+	 const Widelands::Coords& location, const Widelands::BuildingDescr* descr)
 {
 	Widelands::Map & map = egbase.map();
 	Widelands::FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -387,7 +387,7 @@ void Player::message_object_removed(MessageId message_id) const
 Return filtered buildcaps that take the player's territory into account.
 ===============
 */
-NodeCaps Player::get_buildcaps(FCoords const fc) const {
+NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 	const Map & map = egbase().map();
 	uint8_t buildcaps = fc.field->nodecaps();
 
@@ -421,7 +421,7 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
  * Build a flag, checking that it's legal to do so. Returns
  * the flag in case of success, else returns 0;
  */
-Flag * Player::build_flag(Coords const c) {
+Flag * Player::build_flag(const Coords& c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
@@ -430,7 +430,7 @@ Flag * Player::build_flag(Coords const c) {
 }
 
 
-Flag & Player::force_flag(FCoords const c) {
+Flag & Player::force_flag(const FCoords& c) {
 	log("Forcing flag at (%i, %i)\n", c.x, c.y);
 	const Map & map = egbase().map();
 	if (BaseImmovable * const immovable = c.field->get_immovable()) {
@@ -983,7 +983,7 @@ void Player::enemyflagaction
 void Player::rediscover_node
 	(const Map              &       map,
 	 const Widelands::Field &       first_map_field,
-	 FCoords          const f)
+	 const FCoords& f)
 {
 
 	assert(0 <= f.x);
@@ -1097,7 +1097,7 @@ void Player::rediscover_node
 void Player::see_node
 	(const Map              &       map,
 	 const Widelands::Field &       first_map_field,
-	 FCoords                  const f,
+	 const FCoords&                 f,
 	 Time                     const gametime,
 	 bool                     const forward)
 {

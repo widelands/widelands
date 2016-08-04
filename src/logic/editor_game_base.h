@@ -119,35 +119,35 @@ public:
 	void load_graphics(UI::ProgressWindow& loader_ui);
 	virtual void cleanup_for_load();
 
-	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
+	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building&
-	warp_building(Coords,
+	warp_building(const Coords&,
 					  PlayerNumber,
 					  DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
-	warp_constructionsite(Coords,
+	warp_constructionsite(const Coords&,
 								 PlayerNumber,
 								 DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
-	warp_dismantlesite(Coords,
+	warp_dismantlesite(const Coords&,
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
-	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
-	Immovable& create_immovable(Coords,
+	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
+	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
+	Immovable& create_immovable(const Coords&,
 										 DescriptionIndex idx,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
-	Immovable& create_immovable(Coords,
+	Immovable& create_immovable(const Coords&,
 										 const std::string& name,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
-	Bob& create_ship(Coords, int ship_type_idx, Player* owner = nullptr);
-	Bob& create_ship(Coords, const std::string& name, Player* owner = nullptr);
+	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 
 	uint32_t get_gametime() const {
 		return gametime_;

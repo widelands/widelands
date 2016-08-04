@@ -96,7 +96,7 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 											  EditorTool::ToolIndex ind,
                                    Widelands::Map& map,
                                    const Widelands::World& world,
-                                   const Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
 											  EditorInteractive& parent,
                                    bool draw) {
 	EditorToolAction ac

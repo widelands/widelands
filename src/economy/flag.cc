@@ -111,7 +111,7 @@ void Flag::load_finish(EditorGameBase & egbase) {
  * Create a flag at the given location
 */
 Flag::Flag
-	(EditorGameBase & egbase, Player & owning_player, Coords const coords)
+	(EditorGameBase & egbase, Player & owning_player, const Coords& coords)
 	:
 	PlayerImmovable       (g_flag_descr),
 	building_            (nullptr),

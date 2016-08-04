@@ -35,7 +35,7 @@
  * there is not already another resource there.
 */
 int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
-                                                       Widelands::NodeAndTriangle<> const center,
+                                                       const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& /* parent */,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
@@ -66,7 +66,7 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 }
 
 int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::World& world,
-													  Widelands::NodeAndTriangle<> center,
+													  const Widelands::NodeAndTriangle<>& center,
 													  EditorInteractive& parent,
 													  EditorActionArgs* args,
 													  Widelands::Map* map) {

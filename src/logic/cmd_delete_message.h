@@ -37,7 +37,7 @@ namespace Widelands {
 /// the savegame.
 struct CmdDeleteMessage : public Command {
 	CmdDeleteMessage
-		(uint32_t const t, PlayerNumber const p, MessageId const m)
+		(uint32_t const t, PlayerNumber const p, const MessageId& m)
 		: Command(t), player(p), message(m)
 	{}
 

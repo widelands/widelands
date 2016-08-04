@@ -210,7 +210,7 @@ void SinglePlayerGameSettingsProvider::set_player_name(uint8_t const number, con
 		s.players[number].name = name;
 }
 
-void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, PlayerSettings const ps) {
+void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, const PlayerSettings& ps) {
 	if (number < s.players.size())
 		s.players[number] = ps;
 }

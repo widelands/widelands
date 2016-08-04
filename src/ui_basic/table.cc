@@ -76,6 +76,9 @@ Table<void *>::~Table()
 	for (const EntryRecord * entry : entry_records_) {
 		delete entry;
 	}
+	for (Column& column : columns_) {
+		delete column.btn;
+	}
 }
 
 /// Add a new column to this table.
@@ -99,17 +102,16 @@ void Table<void *>::add_column
 
 	{
 		Column c;
-		c.btn = nullptr;
-		if (title.size()) {
-			c.btn =
-				new Button
-					(this, title,
-					 complete_width, 0, width, headerheight_,
-					 g_gr->images().get("images/ui_basic/but3.png"),
-					 title, tooltip_string, true, false);
-			c.btn->sigclicked.connect
-				(boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
-		}
+		// All columns have a title button that is clickable for sorting.
+		// The title text can be empty.
+		c.btn =
+			new Button
+				(this, title,
+				 complete_width, 0, width, headerheight_,
+				 g_gr->images().get("images/ui_basic/but3.png"),
+				 title, tooltip_string, true, false);
+		c.btn->sigclicked.connect
+			(boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
 		c.alignment = alignment;
 		c.is_checkbox_column = is_checkbox_column;
@@ -144,25 +146,8 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 {
 	assert(col < columns_.size());
 	Column & column = columns_.at(col);
-	if (!column.btn && !title.empty()) { //  no title before, but now
-		uint32_t complete_width = 0;
-		for (uint8_t i = 0; i < col; ++i)
-			complete_width += columns_.at(i).width;
-		column.btn =
-			new Button
-				(this, title,
-				 complete_width, 0, column.width, headerheight_,
-				 g_gr->images().get("images/ui_basic/but3.png"),
-				 title, "", true, false);
-		column.btn->sigclicked.connect
-			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
-	} else if (title.empty()) { //  had title before, not now
-		if (column.btn) {
-			delete column.btn;
-			column.btn = nullptr;
-		}
-	} else
-		column.btn->set_title(title);
+	assert(column.btn);
+	column.btn->set_title(title);
 }
 
 /**
