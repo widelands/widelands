@@ -39,7 +39,7 @@ protected:
 	void set_current_directory(const std::string& filename) override;
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void clicked_ok();
 	void clicked_make_directory();
 	void clicked_edit_options();

@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator += (Pos const other) {
+		Pos operator+=(Pos const other) {
 			return pos += other.pos;
 		}
 

@@ -28,36 +28,36 @@ namespace Widelands {
 
 struct DirectionIsNull : public FileRead::DataError {
 	DirectionIsNull()
-		: DataError("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
-	                 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}") {
+	   : DataError("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
+	               "(southeast), 4 (southwest), 5 (west), 6 (northwest)}") {
 	}
 };
 
 struct DirectionInvalid : public FileRead::DataError {
 	DirectionInvalid(Direction const D)
-		: DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
-	                 "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
-	                 D),
+	   : DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
+	               "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
+	               D),
 	     direction(D) {
 	}
 	Direction direction;
 };
 struct ExceededMaxIndex : public FileRead::DataError {
 	ExceededMaxIndex(MapIndex const Max, MapIndex const I)
-		: DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
+	   : DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
 	}
 	MapIndex const max, i;
 };
 struct ExceededWidth : public FileRead::DataError {
 	ExceededWidth(uint16_t const W, const uint16_t X)
-		: DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
+	   : DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
 	}
 	uint16_t const w;
 	uint16_t const x;
 };
 struct ExceededHeight : public FileRead::DataError {
 	ExceededHeight(uint16_t const H, const int16_t Y)
-		: DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
+	   : DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
 	}
 	uint16_t h;
 	int16_t y;

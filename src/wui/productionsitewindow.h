@@ -20,27 +20,27 @@
 #ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
 #define WL_WUI_PRODUCTIONSITEWINDOW_H
 
-#include "wui/buildingwindow.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "ui_basic/table.h"
+#include "wui/buildingwindow.h"
 
 struct ProductionSiteWindow : public BuildingWindow {
-	ProductionSiteWindow
-		(InteractiveGameBase & parent,
-		 Widelands::ProductionSite &,
-		 UI::Window *         & registry);
+	ProductionSiteWindow(InteractiveGameBase& parent,
+	                     Widelands::ProductionSite&,
+	                     UI::Window*& registry);
 
-	Widelands::ProductionSite & productionsite() {
+	Widelands::ProductionSite& productionsite() {
 		return dynamic_cast<Widelands::ProductionSite&>(building());
 	}
 	void update_worker_table();
+
 protected:
 	void think() override;
 	void evict_worker();
 
 private:
-	UI::Table<uintptr_t> * worker_table_;
-	UI::Box * worker_caps_;
+	UI::Table<uintptr_t>* worker_table_;
+	UI::Box* worker_caps_;
 };
 
 #endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

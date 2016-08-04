@@ -26,20 +26,20 @@ namespace Widelands {
 /// \returns the neighbour direction in clockwise
 WalkingDir get_cw_neighbour(WalkingDir dir) {
 	switch (dir) {
-		case WalkingDir::WALK_NE:
-			return WalkingDir::WALK_E;
-		case WalkingDir::WALK_E:
-			return WalkingDir::WALK_SE;
-		case WalkingDir::WALK_SE:
-			return WalkingDir::WALK_SW;
-		case WalkingDir::WALK_SW:
-			return WalkingDir::WALK_W;
-		case WalkingDir::WALK_W:
-			return WalkingDir::WALK_NW;
-		case WalkingDir::WALK_NW:
-			return WalkingDir::WALK_NE;
-		case WalkingDir::IDLE:
-			return WalkingDir::IDLE;
+	case WalkingDir::WALK_NE:
+		return WalkingDir::WALK_E;
+	case WalkingDir::WALK_E:
+		return WalkingDir::WALK_SE;
+	case WalkingDir::WALK_SE:
+		return WalkingDir::WALK_SW;
+	case WalkingDir::WALK_SW:
+		return WalkingDir::WALK_W;
+	case WalkingDir::WALK_W:
+		return WalkingDir::WALK_NW;
+	case WalkingDir::WALK_NW:
+		return WalkingDir::WALK_NE;
+	case WalkingDir::IDLE:
+		return WalkingDir::IDLE;
 	}
 	NEVER_HERE();
 }
@@ -47,42 +47,41 @@ WalkingDir get_cw_neighbour(WalkingDir dir) {
 /// \returns the neighbour direction in counterclockwise
 WalkingDir get_ccw_neighbour(WalkingDir dir) {
 	switch (dir) {
-		case WalkingDir::WALK_E:
-			return WalkingDir::WALK_NE;
-		case WalkingDir::WALK_NE:
-			return WalkingDir::WALK_NW;
-		case WalkingDir::WALK_NW:
-			return WalkingDir::WALK_W;
-		case WalkingDir::WALK_W:
-			return WalkingDir::WALK_SW;
-		case WalkingDir::WALK_SW:
-			return WalkingDir::WALK_SE;
-		case WalkingDir::WALK_SE:
-			return WalkingDir::WALK_E;
-		case WalkingDir::IDLE:
-			return WalkingDir::IDLE;
+	case WalkingDir::WALK_E:
+		return WalkingDir::WALK_NE;
+	case WalkingDir::WALK_NE:
+		return WalkingDir::WALK_NW;
+	case WalkingDir::WALK_NW:
+		return WalkingDir::WALK_W;
+	case WalkingDir::WALK_W:
+		return WalkingDir::WALK_SW;
+	case WalkingDir::WALK_SW:
+		return WalkingDir::WALK_SE;
+	case WalkingDir::WALK_SE:
+		return WalkingDir::WALK_E;
+	case WalkingDir::IDLE:
+		return WalkingDir::IDLE;
 	}
 	NEVER_HERE();
 }
 
 WalkingDir get_backward_dir(WalkingDir dir) {
 	switch (dir) {
-		case WalkingDir::WALK_E:
-			return WalkingDir::WALK_W;
-		case WalkingDir::WALK_NE:
-			return WalkingDir::WALK_SW;
-		case WalkingDir::WALK_NW:
-			return WalkingDir::WALK_SE;
-		case WalkingDir::WALK_W:
-			return WalkingDir::WALK_E;
-		case WalkingDir::WALK_SW:
-			return WalkingDir::WALK_NE;
-		case WalkingDir::WALK_SE:
-			return WalkingDir::WALK_NW;
-		case WalkingDir::IDLE:
-			return WalkingDir::IDLE;
+	case WalkingDir::WALK_E:
+		return WalkingDir::WALK_W;
+	case WalkingDir::WALK_NE:
+		return WalkingDir::WALK_SW;
+	case WalkingDir::WALK_NW:
+		return WalkingDir::WALK_SE;
+	case WalkingDir::WALK_W:
+		return WalkingDir::WALK_E;
+	case WalkingDir::WALK_SW:
+		return WalkingDir::WALK_NE;
+	case WalkingDir::WALK_SE:
+		return WalkingDir::WALK_NW;
+	case WalkingDir::IDLE:
+		return WalkingDir::IDLE;
 	}
 	NEVER_HERE();
 }
-
 }

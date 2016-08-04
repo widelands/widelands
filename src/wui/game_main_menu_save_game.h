@@ -33,16 +33,17 @@ class InteractiveGameBase;
 struct SaveWarnMessageBox;
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
-	GameMainMenuSaveGame
-		(InteractiveGameBase &, UI::UniqueWindow::Registry & registry);
+	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
 
 	void fill_list();
 	void select_by_name(std::string name);
+
 protected:
 	void die() override;
+
 private:
-	InteractiveGameBase & igbase();
-	void selected      (uint32_t);
+	InteractiveGameBase& igbase();
+	void selected(uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
 	void ok();
@@ -55,8 +56,8 @@ private:
 	UI::Listselect<std::string> ls_;
 
 	UI::Textarea name_label_, mapname_, gametime_label_, gametime_, players_label_,
-		win_condition_label_, win_condition_;
-	UI::Button * button_ok_;
+	   win_condition_label_, win_condition_;
+	UI::Button* button_ok_;
 	std::string curdir_;
 	std::string parentdir_;
 	std::string filename_;

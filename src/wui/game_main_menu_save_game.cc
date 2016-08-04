@@ -35,78 +35,63 @@
 
 namespace {
 
-#define WINDOW_WIDTH                                                        440
-#define WINDOW_HEIGHT                                                       440
-#define VMARGIN                                                               5
-#define VSPACING                                                              5
-#define HSPACING                                                              5
-#define BUTTON_HEIGHT                                                        20
-#define LIST_WIDTH                                                          280
-#define LIST_HEIGHT                    (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING)
-#define EDITBOX_Y                                (WINDOW_HEIGHT - 24 - VMARGIN)
-#define DESCRIPTION_X                         (VMARGIN + LIST_WIDTH + VSPACING)
-#define DESCRIPTION_WIDTH              (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
-#define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
-#define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
-#define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
+#define WINDOW_WIDTH 440
+#define WINDOW_HEIGHT 440
+#define VMARGIN 5
+#define VSPACING 5
+#define HSPACING 5
+#define BUTTON_HEIGHT 20
+#define LIST_WIDTH 280
+#define LIST_HEIGHT (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING)
+#define EDITBOX_Y (WINDOW_HEIGHT - 24 - VMARGIN)
+#define DESCRIPTION_X (VMARGIN + LIST_WIDTH + VSPACING)
+#define DESCRIPTION_WIDTH (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
+#define CANCEL_Y (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
+#define DELETE_Y (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
+#define OK_Y (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 
-} // namespace
+}  // namespace
 
-InteractiveGameBase & GameMainMenuSaveGame::igbase() {
+InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 	return dynamic_cast<InteractiveGameBase&>(*get_parent());
 }
 
-GameMainMenuSaveGame::GameMainMenuSaveGame
-	(InteractiveGameBase & parent, UI::UniqueWindow::Registry & registry)
-:
-	UI::UniqueWindow
-		(&parent, "save_game", &registry,
-		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
-	name_label_
-		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::kCenterLeft),
-	mapname_
-		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align::kCenterLeft),
-	gametime_label_
-		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::kCenterLeft),
-	gametime_
-		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align::kCenterLeft),
-	players_label_
-		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align::kCenterLeft),
-	win_condition_label_
-		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align::kCenterLeft),
-	win_condition_
-		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align::kCenterLeft),
-	curdir_(SaveHandler::get_base_dir())
-{
+GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
+                                           UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent, "save_game", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+     editbox_(this,
+              HSPACING,
+              EDITBOX_Y,
+              LIST_WIDTH,
+              0,
+              2,
+              g_gr->images().get("images/ui_basic/but1.png")),
+     ls_(this, HSPACING, VSPACING, LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
+     name_label_(this, DESCRIPTION_X, 5, 0, 20, _("Map Name:"), UI::Align::kCenterLeft),
+     mapname_(this, DESCRIPTION_X, 20, 0, 20, " ", UI::Align::kCenterLeft),
+     gametime_label_(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::kCenterLeft),
+     gametime_(this, DESCRIPTION_X, 60, 0, 20, " ", UI::Align::kCenterLeft),
+     players_label_(this, DESCRIPTION_X, 85, 0, 20, " ", UI::Align::kCenterLeft),
+     win_condition_label_(
+        this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align::kCenterLeft),
+     win_condition_(this, DESCRIPTION_X, 125, 0, 20, " ", UI::Align::kCenterLeft),
+     curdir_(SaveHandler::get_base_dir()) {
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	button_ok_ =
-		new UI::Button
-			(this, "ok",
-			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 _("OK"),
-			 std::string(),
-			 false);
+	   new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	                  g_gr->images().get("images/ui_basic/but4.png"), _("OK"), std::string(), false);
 	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
-	UI::Button * cancelbtn =
-		new UI::Button
-			(this, "cancel",
-			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 _("Cancel"));
+	UI::Button* cancelbtn =
+	   new UI::Button(this, "cancel", DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	                  g_gr->images().get("images/ui_basic/but4.png"), _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
-	UI::Button * deletebtn =
-		new UI::Button
-			(this, "delete",
-			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 _("Delete"));
+	UI::Button* deletebtn =
+	   new UI::Button(this, "delete", DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	                  g_gr->images().get("images/ui_basic/but4.png"), _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	ls_.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));
@@ -143,19 +128,16 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	pause_game(true);
 }
 
-
 /**
  * called when a item is selected
  */
 void GameMainMenuSaveGame::selected(uint32_t) {
-	const std::string & name = ls_.get_selected();
+	const std::string& name = ls_.get_selected();
 
 	Widelands::GameLoader gl(name, igbase().game());
 	Widelands::GamePreloadPacket gpdp;
-	gl.preload_game(gpdp); //  This has worked before, no problem
-	{
-		editbox_.set_text(FileSystem::filename_without_ext(name.c_str()));
-	}
+	gl.preload_game(gpdp);  //  This has worked before, no problem
+	{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
 	button_ok_->set_enabled(true);
 
 	// Try to translate the map name.
@@ -169,8 +151,9 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 
 	if (gpdp.get_number_of_players() > 0) {
 		const std::string text =
-				(boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players()))
-				 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+		   (boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players())) %
+		    static_cast<unsigned int>(gpdp.get_number_of_players()))
+		      .str();
 		players_label_.set_text(text);
 	} else {
 		// Keep label empty
@@ -198,23 +181,19 @@ void GameMainMenuSaveGame::fill_list() {
 
 	Widelands::GamePreloadPacket gpdp;
 
-	for
-		(FilenameSet::iterator pname = gamefiles.begin();
-		 pname != gamefiles.end();
-		 ++pname)
-	{
-		char const * const name = pname->c_str();
+	for (FilenameSet::iterator pname = gamefiles.begin(); pname != gamefiles.end(); ++pname) {
+		char const* const name = pname->c_str();
 
 		try {
 			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
 			ls_.add(FileSystem::filename_without_ext(name), name);
-		} catch (const WException &) {} //  we simply skip illegal entries
+		} catch (const WException&) {
+		}  //  we simply skip illegal entries
 	}
 }
 
-void GameMainMenuSaveGame::select_by_name(std::string name)
-{
+void GameMainMenuSaveGame::select_by_name(std::string name) {
 	for (uint32_t idx = 0; idx < ls_.size(); idx++) {
 		const std::string val = ls_[idx];
 		if (name == val) {
@@ -231,52 +210,42 @@ void GameMainMenuSaveGame::edit_box_changed() {
 	button_ok_->set_enabled(editbox_.text().size());
 }
 
-static void dosave
-	(InteractiveGameBase & igbase, const std::string & complete_filename)
-{
-	Widelands::Game & game = igbase.game();
+static void dosave(InteractiveGameBase& igbase, const std::string& complete_filename) {
+	Widelands::Game& game = igbase.game();
 
 	std::string error;
 	if (!game.save_handler().save_game(game, complete_filename, &error)) {
-		std::string s =
-			_
-			("Game Saving Error!\nSaved game file may be corrupt!\n\n"
-			 "Reason given:\n");
+		std::string s = _("Game Saving Error!\nSaved game file may be corrupt!\n\n"
+		                  "Reason given:\n");
 		s += error;
-		UI::WLMessageBox mbox
-			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mbox(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	}
 	game.save_handler().set_current_filename(complete_filename);
 }
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {
-	SaveWarnMessageBox
-		(GameMainMenuSaveGame & parent, const std::string & filename)
-		:
-		UI::WLMessageBox
-			(&parent,
-			 _("Save Game Error!"),
-			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
-				% FileSystem::fs_filename(filename.c_str())).str(),
-			 MBoxType::kOkCancel),
-		filename_(filename)
-	{}
+	SaveWarnMessageBox(GameMainMenuSaveGame& parent, const std::string& filename)
+	   : UI::WLMessageBox(&parent,
+	                      _("Save Game Error!"),
+	                      (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
+	                       FileSystem::fs_filename(filename.c_str()))
+	                         .str(),
+	                      MBoxType::kOkCancel),
+	     filename_(filename) {
+	}
 
-	GameMainMenuSaveGame & menu_save_game() {
+	GameMainMenuSaveGame& menu_save_game() {
 		return dynamic_cast<GameMainMenuSaveGame&>(*get_parent());
 	}
 
-
-	void clicked_ok() override
-	{
+	void clicked_ok() override {
 		g_fs->fs_unlink(filename_);
 		dosave(menu_save_game().igbase(), filename_);
 		menu_save_game().die();
 	}
 
-	void clicked_back() override
-	{
+	void clicked_back() override {
 		die();
 	}
 
@@ -287,14 +256,12 @@ private:
 /**
  * Called when the Ok button is clicked or the Return key pressed in the edit box.
  */
-void GameMainMenuSaveGame::ok()
-{
+void GameMainMenuSaveGame::ok() {
 	if (editbox_.text().empty())
 		return;
 
 	std::string const complete_filename =
-		igbase().game().save_handler().create_file_name
-			(curdir_, editbox_.text());
+	   igbase().game().save_handler().create_file_name(curdir_, editbox_.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -305,37 +272,28 @@ void GameMainMenuSaveGame::ok()
 	}
 }
 
-void GameMainMenuSaveGame::die()
-{
+void GameMainMenuSaveGame::die() {
 	pause_game(false);
 	UI::UniqueWindow::die();
 }
 
-
-
 struct DeletionMessageBox : public UI::WLMessageBox {
-	DeletionMessageBox
-		(GameMainMenuSaveGame & parent, const std::string & filename)
-		:
-		UI::WLMessageBox
-			(&parent,
-			 _("File deletion"),
-			 str
-				 (boost::format(_("Do you really want to delete the file %s?")) %
-				  FileSystem::fs_filename(filename.c_str())),
-			 MBoxType::kOkCancel),
-		filename_(filename)
-	{}
+	DeletionMessageBox(GameMainMenuSaveGame& parent, const std::string& filename)
+	   : UI::WLMessageBox(&parent,
+	                      _("File deletion"),
+	                      str(boost::format(_("Do you really want to delete the file %s?")) %
+	                          FileSystem::fs_filename(filename.c_str())),
+	                      MBoxType::kOkCancel),
+	     filename_(filename) {
+	}
 
-	void clicked_ok() override
-	{
+	void clicked_ok() override {
 		g_fs->fs_unlink(filename_);
 		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_list();
 		die();
 	}
 
-	void clicked_back() override
-	{
+	void clicked_back() override {
 		die();
 	}
 
@@ -343,23 +301,19 @@ private:
 	std::string const filename_;
 };
 
-
 /**
  * Called when the delete button has been clicked
  */
-void GameMainMenuSaveGame::delete_clicked()
-{
+void GameMainMenuSaveGame::delete_clicked() {
 	std::string const complete_filename =
-		igbase().game().save_handler().create_file_name
-			(curdir_, editbox_.text());
+	   igbase().game().save_handler().create_file_name(curdir_, editbox_.text());
 
 	//  Check if file exists. If it does, let the user confirm the deletion.
 	if (g_fs->file_exists(complete_filename))
 		new DeletionMessageBox(*this, complete_filename);
 }
 
-void GameMainMenuSaveGame::pause_game(bool paused)
-{
+void GameMainMenuSaveGame::pause_game(bool paused) {
 	if (igbase().is_multiplayer()) {
 		return;
 	}

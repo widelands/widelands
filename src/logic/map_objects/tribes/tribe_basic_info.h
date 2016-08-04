@@ -34,10 +34,9 @@ struct TribeBasicInfo {
 
 	/// Script path and localized name for a starting condition
 	struct Initialization {
-		Initialization(std::string init_script, std::string init_descname, std::string init_tooltip) :
-			script(init_script),
-			descname(init_descname),
-			tooltip(init_tooltip) {}
+		Initialization(std::string init_script, std::string init_descname, std::string init_tooltip)
+		   : script(init_script), descname(init_descname), tooltip(init_tooltip) {
+		}
 		std::string script;
 		std::string descname;
 		std::string tooltip;

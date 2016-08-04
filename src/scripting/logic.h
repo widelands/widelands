@@ -31,7 +31,7 @@ class GameFactory;
 
 class LuaEditorInterface : public LuaInterface {
 public:
-	LuaEditorInterface(Widelands::EditorGameBase * g);
+	LuaEditorInterface(Widelands::EditorGameBase* g);
 	virtual ~LuaEditorInterface();
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
@@ -42,7 +42,7 @@ private:
 
 class LuaGameInterface : public LuaInterface {
 public:
-	LuaGameInterface(Widelands::Game * g);
+	LuaGameInterface(Widelands::Game* g);
 	virtual ~LuaGameInterface();
 
 	// Returns a given hook if one is defined, otherwise returns 0
@@ -55,10 +55,8 @@ public:
 	void write_coroutine(FileWrite&, LuaCoroutine*);
 
 	// Input output for the global game state.
-	void read_global_env
-		(FileRead &, Widelands::MapObjectLoader &, uint32_t);
-	uint32_t write_global_env
-		(FileWrite &, Widelands::MapObjectSaver &);
+	void read_global_env(FileRead&, Widelands::MapObjectLoader&, uint32_t);
+	uint32_t write_global_env(FileWrite&, Widelands::MapObjectSaver&);
 
 private:
 	std::unique_ptr<GameFactory> factory_;

@@ -28,7 +28,6 @@
  */
 class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
-
 	/// Calls FullscreenMenuMainMenu(const std::string& background_image)
 	/// with a default background image
 	FullscreenMenuMainMenu();

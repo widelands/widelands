@@ -48,19 +48,21 @@ struct Md5Checksum {
 
 	std::string str() const;
 
-	bool operator== (const Md5Checksum & o) const {
+	bool operator==(const Md5Checksum& o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
 	}
 
-	bool operator!= (const Md5Checksum & o) const {return !(*this == o);}
+	bool operator!=(const Md5Checksum& o) const {
+		return !(*this == o);
+	}
 };
 
 // Note that the implementation of MD5Checksum is basically just
 // a wrapper around these functions, which have been taken basically
 // verbatim (with some whitespace changes) from the GNU tools; see below.
-void * md5_finish_ctx (Md5Ctx *, void * resbuf);
-void md5_process_bytes (void const * buffer, uint32_t len, Md5Ctx *);
-void md5_process_block (void const * buffer, uint32_t len, Md5Ctx *);
+void* md5_finish_ctx(Md5Ctx*, void* resbuf);
+void md5_process_bytes(void const* buffer, uint32_t len, Md5Ctx*);
+void md5_process_block(void const* buffer, uint32_t len, Md5Ctx*);
 
 /**
  * This class is responsible for creating a streaming md5 checksum.
@@ -72,18 +74,20 @@ void md5_process_block (void const * buffer, uint32_t len, Md5Ctx *);
  */
 template <typename Base> class MD5Checksum : public Base {
 public:
-	MD5Checksum() {Reset();}
-	explicit MD5Checksum(const MD5Checksum & other)
-		:
-		Base(),
-		can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx)
-	{}
+	MD5Checksum() {
+		Reset();
+	}
+	explicit MD5Checksum(const MD5Checksum& other)
+	   : Base(), can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx) {
+	}
 
 	/// Reset the checksumming machinery to its initial state.
 	void Reset() {
 		can_handle_data = 1;
-		ctx.A = 0x67452301; ctx.B = 0xefcdab89;
-		ctx.C = 0x98badcfe; ctx.D = 0x10325476;
+		ctx.A = 0x67452301;
+		ctx.B = 0xefcdab89;
+		ctx.C = 0x98badcfe;
+		ctx.D = 0x10325476;
 		ctx.total[0] = ctx.total[1] = 0;
 		ctx.buflen = 0;
 	}
@@ -93,7 +97,7 @@ public:
 	///
 	/// \param newdata data to compute chksum for
 	/// \param size size of data
-	void data(const void * const newdata, const size_t size) {
+	void data(const void* const newdata, const size_t size) {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}
@@ -110,7 +114,7 @@ public:
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	const Md5Checksum & get_checksum() const {
+	const Md5Checksum& get_checksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}

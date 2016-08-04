@@ -25,12 +25,10 @@
 
 static const uint32_t MaxHistorySize = 32;
 
-QuickNavigation::QuickNavigation
-	(const Widelands::EditorGameBase & egbase,
-	 uint32_t screenwidth, uint32_t screenheight)
-: egbase_(egbase),
-  landmarks_(10)
-{
+QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase,
+                                 uint32_t screenwidth,
+                                 uint32_t screenheight)
+   : egbase_(egbase), landmarks_(10) {
 	screenwidth_ = screenwidth;
 	screenheight_ = screenheight;
 
@@ -39,42 +37,32 @@ QuickNavigation::QuickNavigation
 	history_index_ = 0;
 }
 
-void QuickNavigation::set_setview(const QuickNavigation::SetViewFn & fn)
-{
+void QuickNavigation::set_setview(const QuickNavigation::SetViewFn& fn) {
 	setview_ = fn;
 }
 
-void QuickNavigation::setview(Point where)
-{
+void QuickNavigation::setview(Point where) {
 	update_ = false;
 	setview_(where);
 	update_ = true;
 }
 
-void QuickNavigation::view_changed(Point newpos, bool jump)
-{
+void QuickNavigation::view_changed(Point newpos, bool jump) {
 	if (havefirst_ && update_) {
 		if (!jump) {
-			Point delta =
-				MapviewPixelFunctions::calc_pix_difference
-					(egbase_.map(), newpos, anchor_);
+			Point delta = MapviewPixelFunctions::calc_pix_difference(egbase_.map(), newpos, anchor_);
 
-			if
-				(static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
-			    	 static_cast<uint32_t>(abs(delta.y)) > screenheight_)
+			if (static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
+			    static_cast<uint32_t>(abs(delta.y)) > screenheight_)
 				jump = true;
 		}
 
 		if (jump) {
 			if (history_index_ < history_.size())
-				history_.erase
-					(history_.begin() + history_index_,
-					 history_.end());
+				history_.erase(history_.begin() + history_index_, history_.end());
 			history_.push_back(current_);
 			if (history_.size() > MaxHistorySize)
-				history_.erase
-					(history_.begin(),
-					 history_.end() - MaxHistorySize);
+				history_.erase(history_.begin(), history_.end() - MaxHistorySize);
 			history_index_ = history_.size();
 		}
 	}
@@ -93,8 +81,7 @@ void QuickNavigation::set_landmark(size_t index, const Point& point) {
 	landmarks_[index].set = true;
 }
 
-bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
-{
+bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	if (!havefirst_)
 		return false;
 	if (!down)
@@ -104,9 +91,8 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);
 
-		bool ctrl =
-			WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
-			WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
+		bool ctrl = WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
+		            WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
 		if (ctrl) {
 			set_landmark(which, current_);
 		} else {

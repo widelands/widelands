@@ -33,12 +33,10 @@
 
 namespace UI {
 
-RichtextBlock::RichtextBlock() :
-	image_align_(UI::Align::kLeft),
-	text_align_ (UI::Align::kLeft)
-{}
+RichtextBlock::RichtextBlock() : image_align_(UI::Align::kLeft), text_align_(UI::Align::kLeft) {
+}
 
-RichtextBlock::RichtextBlock(const RichtextBlock & src) {
+RichtextBlock::RichtextBlock(const RichtextBlock& src) {
 	images_.clear();
 	text_blocks_.clear();
 	for (uint32_t i = 0; i < src.images_.size(); ++i)
@@ -59,10 +57,7 @@ TextBlock::TextBlock() :
 	line_spacing_(0)
 {}
 
-void TextParser::parse
-	(std::string                 & text,
-	 std::vector<RichtextBlock> & blocks)
-{
+void TextParser::parse(std::string& text, std::vector<RichtextBlock>& blocks) {
 	bool more_richtext_blocks = true;
 	// First while loop parses all richtext blocks (images)
 	while (more_richtext_blocks) {
@@ -71,13 +66,8 @@ void TextParser::parse
 		std::string richtext_format;
 
 		more_richtext_blocks =
-			extract_format_block
-				(text,
-				 unparsed_text,
-				 richtext_format,
-				 std::string("<rt"),
-				 std::string(">"),
-				 std::string("</rt>"));
+		   extract_format_block(text, unparsed_text, richtext_format, std::string("<rt"),
+		                        std::string(">"), std::string("</rt>"));
 		parse_richtexttext_attributes(richtext_format, &new_richtext_block);
 
 		std::vector<TextBlock> text_blocks;
@@ -91,9 +81,7 @@ void TextParser::parse
 			std::vector<std::string> words;
 			std::vector<std::vector<std::string>::size_type> line_breaks;
 
-			more_text_blocks =
-				parse_textblock
-					(unparsed_text, block_format, words, line_breaks);
+			more_text_blocks = parse_textblock(unparsed_text, block_format, words, line_breaks);
 			parse_text_attributes(block_format, new_block);
 
 			new_block.set_words(words);
@@ -105,15 +93,14 @@ void TextParser::parse
 	}
 }
 
-bool TextParser::parse_textblock
-	(std::string                                      & block,
-	 std::string                                      & block_format,
-	 std::vector<std::string>                         & words,
-	 std::vector<std::vector<std::string>::size_type> & line_breaks)
-{
+bool TextParser::parse_textblock(std::string& block,
+                                 std::string& block_format,
+                                 std::vector<std::string>& words,
+                                 std::vector<std::vector<std::string>::size_type>& line_breaks) {
 	std::string block_text;
 
-	const bool extract_more = extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
+	const bool extract_more =
+	   extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
 	// Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
@@ -144,8 +131,7 @@ bool TextParser::parse_textblock
 	return extract_more;
 }
 
-void TextParser::split_words(const std::string & in, std::vector<std::string>* plist)
-{
+void TextParser::split_words(const std::string& in, std::vector<std::string>* plist) {
 	std::string::size_type pos = 0;
 
 	while (pos < in.size()) {
@@ -165,14 +151,12 @@ void TextParser::split_words(const std::string & in, std::vector<std::string>* p
 	}
 }
 
-bool TextParser::extract_format_block
-	(std::string       & block,
-	 std::string       & block_text,
-	 std::string       & block_format,
-	 const std::string & block_start,
-	 const std::string & format_end,
-	 const std::string & block_end)
-{
+bool TextParser::extract_format_block(std::string& block,
+                                      std::string& block_text,
+                                      std::string& block_format,
+                                      const std::string& block_start,
+                                      const std::string& format_end,
+                                      const std::string& block_end) {
 	if (block.compare(0, block_start.size(), block_start)) {
 		const std::string::size_type format_begin_pos = block.find(block_start);
 		if (format_begin_pos == std::string::npos) {
@@ -212,9 +196,7 @@ bool TextParser::extract_format_block
 	return block.find(block_start) != std::string::npos;
 }
 
-void TextParser::parse_richtexttext_attributes
-	(std::string format, RichtextBlock * const element)
-{
+void TextParser::parse_richtexttext_attributes(std::string format, RichtextBlock* const element) {
 	if (format.empty())
 		return;
 	if (format[0] == ' ')
@@ -232,20 +214,18 @@ void TextParser::parse_richtexttext_attributes
 				val_end = format.size();
 			std::string val = format.substr(0, val_end);
 			format.erase(0, val_end + 1);
-			if        (key == "image") {
+			if (key == "image") {
 				const std::vector<std::string> images(split_string(val, ";"));
 				element->set_images(images);
 			} else if (key == "image-align")
 				element->set_image_align(set_align(val));
-			else if   (key == "text-align")
+			else if (key == "text-align")
 				element->set_text_align(set_align(val));
 		}
 	}
 }
 
-void TextParser::parse_text_attributes
-	(std::string format, TextBlock & element)
-{
+void TextParser::parse_text_attributes(std::string format, TextBlock& element) {
 	if (format.empty())
 		return;
 	if (format[0] == ' ')
@@ -279,14 +259,14 @@ void TextParser::parse_text_attributes
 				element.set_line_spacing(atoi(val.c_str()));
 			} else if (key == "font-color") {
 				std::string::size_type const offset = val[0] == '#';
-				std::string const r = "0x" + val.substr(offset,     2);
+				std::string const r = "0x" + val.substr(offset, 2);
 				std::string const g = "0x" + val.substr(offset + 2, 2);
 				std::string const b = "0x" + val.substr(offset + 4, 2);
 
-				char * ptr;
-				long int const red   = strtol(r.c_str(), &ptr, 0);
+				char* ptr;
+				long int const red = strtol(r.c_str(), &ptr, 0);
 				long int const green = strtol(g.c_str(), &ptr, 0);
-				long int const blue  = strtol(b.c_str(), &ptr, 0);
+				long int const blue = strtol(b.c_str(), &ptr, 0);
 				element.set_font_color(RGBColor(red, green, blue));
 			} else if (key == "font-weight") {
 				element.set_font_weight(val);
@@ -299,11 +279,8 @@ void TextParser::parse_text_attributes
 	}
 }
 
-Align TextParser::set_align(const std::string & align) {
-	return
-		align == "right"  ? UI::Align::kRight   :
-		align == "center" ? UI::Align::kHCenter :
-		UI::Align::kLeft;
+Align TextParser::set_align(const std::string& align) {
+	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kHCenter :
+	                                                                  UI::Align::kLeft;
 }
-
 }

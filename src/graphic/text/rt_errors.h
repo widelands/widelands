@@ -30,16 +30,20 @@ class Exception : public std::exception {
 public:
 	Exception(std::string msg) : std::exception(), msg_(msg) {
 	}
-	const char* what() const noexcept override {return msg_.c_str();}
+	const char* what() const noexcept override {
+		return msg_.c_str();
+	}
 
 private:
 	std::string msg_;
 };
 
-#define DEF_ERR(Name) class Name : public Exception { \
-public: \
-		  Name(std::string msg) : Exception(msg) {} \
-};
+#define DEF_ERR(Name)                                                                              \
+	class Name : public Exception {                                                                 \
+	public:                                                                                         \
+		Name(std::string msg) : Exception(msg) {                                                     \
+		}                                                                                            \
+	};
 
 DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
@@ -51,8 +55,6 @@ DEF_ERR(TextureTooBig)
 DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
-
-
 }
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H

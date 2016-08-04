@@ -26,16 +26,12 @@
 #include "wui/mapdata.h"
 #include "wui/suggested_teams_box.h"
 
-
 /**
  * Show a Panel with information about a map.
  */
 class MapDetails : public UI::Panel {
 public:
-	enum class Style {
-		kFsMenu,
-		kWui
-	};
+	enum class Style { kFsMenu, kWui };
 
 	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style);
 

@@ -27,7 +27,6 @@
 #include "base/point.h"
 #include "graphic/color.h"
 
-
 class RenderTarget;
 
 namespace UI {
@@ -50,13 +49,13 @@ struct RichText {
 	uint32_t width();
 	uint32_t height();
 
-	void parse(const std::string & text);
-	void draw(RenderTarget & dst, const Point& offset, bool background = false);
+	void parse(const std::string& text);
+	void draw(RenderTarget& dst, const Point& offset, bool background = false);
 
 private:
 	std::unique_ptr<RichTextImpl> m;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_RICHTEXT_H

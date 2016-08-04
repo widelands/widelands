@@ -19,7 +19,8 @@
 
 #include "io/fileread.h"
 
-FileRead::FileRead() : data_(nullptr), length_(0) {}
+FileRead::FileRead() : data_(nullptr), length_(0) {
+}
 
 FileRead::~FileRead() {
 	if (data_) {
@@ -36,8 +37,7 @@ void FileRead::open(FileSystem& fs, const std::string& filename) {
 bool FileRead::try_open(FileSystem& fs, const std::string& filename) {
 	try {
 		open(fs, filename);
-	}
-	catch (const std::exception&) {
+	} catch (const std::exception&) {
 		return false;
 	}
 	return true;
@@ -98,7 +98,7 @@ char* FileRead::c_string(const Pos& pos) {
 	char* const result = data_ + i;
 	for (char* p = result; *p; ++p, ++i) {
 	}
-	++i;                   //  beyond the null
+	++i;                    //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
 	if (pos.is_null())

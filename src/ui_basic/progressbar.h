@@ -32,33 +32,33 @@ namespace UI {
 */
 struct ProgressBar : public Panel {
 	enum {
-		Horizontal = 0, ///< from left to right
-		Vertical   = 1, ///< from bottom to top
+		Horizontal = 0,  ///< from left to right
+		Vertical = 1,    ///< from bottom to top
 
 		DefaultWidth = 100,
 		DefaultHeight = 24,
 	};
 
 public:
-	ProgressBar
-		(Panel * parent,
-		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 uint32_t orientation);
+	ProgressBar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
 
-	uint32_t get_state() const {return state_;}
+	uint32_t get_state() const {
+		return state_;
+	}
 	void set_state(uint32_t);
-	uint32_t get_total() const {return total_;}
+	uint32_t get_total() const {
+		return total_;
+	}
 	void set_total(uint32_t);
 
 protected:
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 private:
 	uint32_t orientation_;
-	uint32_t state_; ///< state_ is [0..total_]
-	uint32_t total_; ///< maximum progress
+	uint32_t state_;  ///< state_ is [0..total_]
+	uint32_t total_;  ///< maximum progress
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSBAR_H

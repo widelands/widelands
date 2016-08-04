@@ -42,46 +42,70 @@ inline EditorInteractive& MainMenuNewMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
-	:
-	UI::Window(&parent, "new_map_menu", 0, 0, 360, 150, _("New Map")),
-	margin_(4),
-	box_width_(get_inner_w() -  2 * margin_),
-	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
-	width_(&box_, 0, 0, box_width_, box_width_ / 3,
-			 0, 0, 0,
-			 _("Width:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
-			 UI::SpinBox::Type::kValueList),
-	height_(&box_, 0, 0, box_width_, box_width_ / 3,
-			  0, 0, 0,
-			  _("Height:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
-			  UI::SpinBox::Type::kValueList),
-	list_(&box_, 0, 0, box_width_, 330),
-	// Buttons
-	button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-	ok_button_(&button_box_, "create_map", 0, 0, box_width_ / 2 - margin_, 0,
-		 g_gr->images().get("images/ui_basic/but5.png"),
-		 _("Create Map")),
-	cancel_button_(&button_box_, "generate_map", 0, 0, box_width_ / 2 - margin_, 0,
-		 g_gr->images().get("images/ui_basic/but1.png"),
-		 _("Cancel"))
-{
+MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
+   : UI::Window(&parent, "new_map_menu", 0, 0, 360, 150, _("New Map")),
+     margin_(4),
+     box_width_(get_inner_w() - 2 * margin_),
+     box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
+     width_(&box_,
+            0,
+            0,
+            box_width_,
+            box_width_ / 3,
+            0,
+            0,
+            0,
+            _("Width:"),
+            UI::SpinBox::Units::kNone,
+            g_gr->images().get("images/ui_basic/but1.png"),
+            UI::SpinBox::Type::kValueList),
+     height_(&box_,
+             0,
+             0,
+             box_width_,
+             box_width_ / 3,
+             0,
+             0,
+             0,
+             _("Height:"),
+             UI::SpinBox::Units::kNone,
+             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::SpinBox::Type::kValueList),
+     list_(&box_, 0, 0, box_width_, 330),
+     // Buttons
+     button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
+     ok_button_(&button_box_,
+                "create_map",
+                0,
+                0,
+                box_width_ / 2 - margin_,
+                0,
+                g_gr->images().get("images/ui_basic/but5.png"),
+                _("Create Map")),
+     cancel_button_(&button_box_,
+                    "generate_map",
+                    0,
+                    0,
+                    box_width_ / 2 - margin_,
+                    0,
+                    g_gr->images().get("images/ui_basic/but1.png"),
+                    _("Cancel")) {
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);
 
 	{
 		size_t width_index, height_index;
 		Widelands::Extent const map_extent = parent.egbase().map().extent();
-		for (width_index = 0;
-			  width_index < Widelands::kMapDimensions.size() &&
-			  Widelands::kMapDimensions[width_index] < map_extent.w;
-			  ++width_index) {}
+		for (width_index = 0; width_index < Widelands::kMapDimensions.size() &&
+		                      Widelands::kMapDimensions[width_index] < map_extent.w;
+		     ++width_index) {
+		}
 		width_.set_value(width_index);
 
-		for (height_index = 0;
-			  height_index < Widelands::kMapDimensions.size() &&
-			  Widelands::kMapDimensions[height_index] < map_extent.h;
-			  ++height_index) {}
+		for (height_index = 0; height_index < Widelands::kMapDimensions.size() &&
+		                       Widelands::kMapDimensions[height_index] < map_extent.h;
+		     ++height_index) {
+		}
 		height_.set_value(height_index);
 	}
 
@@ -104,19 +128,17 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	}
 	box_.add(&button_box_, UI::Align::kLeft);
 
-	box_.set_size(box_width_,
-					  width_.get_h() + height_.get_h() + terrain_label->get_h() + list_.get_h()
-					  + button_box_.get_h() + 9 * margin_);
+	box_.set_size(box_width_, width_.get_h() + height_.get_h() + terrain_label->get_h() +
+	                             list_.get_h() + button_box_.get_h() + 9 * margin_);
 	set_size(get_w(), box_.get_h() + 2 * margin_ + get_h() - get_inner_h());
 	fill_list();
 	center_to_parent();
 }
 
-
 void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
-	Widelands::EditorGameBase & egbase = parent.egbase();
-	Widelands::Map              & map    = egbase.map();
+	Widelands::EditorGameBase& egbase = parent.egbase();
+	Widelands::Map& map = egbase.map();
 	UI::ProgressWindow loader_ui;
 
 	loader_ui.step(_("Creating empty map…"));
@@ -124,14 +146,12 @@ void MainMenuNewMap::clicked_create_map() {
 	parent.cleanup_for_load();
 
 	map.create_empty_map(
-				egbase.world(),
-				width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
-				height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
-				list_.get_selected(),
-				_("No Name"),
-				g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
+	   egbase.world(), width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
+	   height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
+	   list_.get_selected(), _("No Name"),
+	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 
-	egbase.postload     ();
+	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
 	map.recalc_whole_map(egbase.world());
@@ -148,7 +168,8 @@ void MainMenuNewMap::clicked_cancel() {
  */
 void MainMenuNewMap::fill_list() {
 	list_.clear();
-	const DescriptionMaintainer<Widelands::TerrainDescription>& terrains = eia().egbase().world().terrains();
+	const DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
+	   eia().egbase().world().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
 		const Widelands::TerrainDescription& terrain = terrains.get(index);

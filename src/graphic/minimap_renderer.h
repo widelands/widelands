@@ -28,8 +28,8 @@ class StreamWrite;
 class Texture;
 
 namespace Widelands {
-	class Player;
-	class EditorGameBase;
+class Player;
+class EditorGameBase;
 }
 
 // Layers for selecting what do display on the minimap.
@@ -50,21 +50,24 @@ inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
 inline int operator&(MiniMapLayer left, MiniMapLayer right) {
 	return static_cast<int>(left) & static_cast<int>(right);
 }
-inline MiniMapLayer operator ^ (MiniMapLayer left, MiniMapLayer right) {
+inline MiniMapLayer operator^(MiniMapLayer left, MiniMapLayer right) {
 	return MiniMapLayer(static_cast<int>(left) ^ static_cast<int>(right));
 }
 
 /// Render the minimap. If player is not nullptr, it renders from that player's
 /// point of view.
 /// \param viewpoint top left corner in map coordinates
-std::unique_ptr<Texture> draw_minimap
-	(const Widelands::EditorGameBase& egbase, const Widelands::Player* player,
-	 const Point& viewpoint, MiniMapLayer layers);
+std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
+                                      const Widelands::Player* player,
+                                      const Point& viewpoint,
+                                      MiniMapLayer layers);
 
 /// Render the minimap to a file. 1 pixel will be used for each fields.
 /// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
-void write_minimap_image
-	(const Widelands::EditorGameBase& egbase, Widelands::Player const* player,
-	 const Point& viewpoint, MiniMapLayer layers, StreamWrite* const streamwrite);
+void write_minimap_image(const Widelands::EditorGameBase& egbase,
+                         Widelands::Player const* player,
+                         const Point& viewpoint,
+                         MiniMapLayer layers,
+                         StreamWrite* const streamwrite);
 
 #endif  // end of include guard: WL_GRAPHIC_MINIMAP_RENDERER_H

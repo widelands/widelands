@@ -39,27 +39,41 @@ class MapObject;
 struct MapObjectSaver {
 	MapObjectSaver();
 
-	bool is_object_known(const MapObject &) const;
-	Serial register_object(const MapObject &);
+	bool is_object_known(const MapObject&) const;
+	Serial register_object(const MapObject&);
 
-	uint32_t get_object_file_index(const MapObject &);
-	uint32_t get_object_file_index_or_zero(MapObject const *);
+	uint32_t get_object_file_index(const MapObject&);
+	uint32_t get_object_file_index_or_zero(MapObject const*);
 
-	void mark_object_as_saved(const MapObject &);
+	void mark_object_as_saved(const MapObject&);
 
-	// Information functions
+// Information functions
 #ifndef NDEBUG
-	void     detect_unsaved_objects() const;
+	void detect_unsaved_objects() const;
 #endif
-	uint32_t get_nr_roads          () const {return nr_roads_;}
-	uint32_t get_nr_flags          () const {return nr_flags_;}
-	uint32_t get_nr_buildings      () const {return nr_buildings_;}
-	uint32_t get_nr_wares          () const {return nr_wares_;}
-	uint32_t get_nr_bobs           () const {return nr_bobs_;}
-	uint32_t get_nr_immovables     () const {return nr_immovables_;}
-	uint32_t get_nr_battles        () const {return nr_battles_;}
+	uint32_t get_nr_roads() const {
+		return nr_roads_;
+	}
+	uint32_t get_nr_flags() const {
+		return nr_flags_;
+	}
+	uint32_t get_nr_buildings() const {
+		return nr_buildings_;
+	}
+	uint32_t get_nr_wares() const {
+		return nr_wares_;
+	}
+	uint32_t get_nr_bobs() const {
+		return nr_bobs_;
+	}
+	uint32_t get_nr_immovables() const {
+		return nr_immovables_;
+	}
+	uint32_t get_nr_battles() const {
+		return nr_battles_;
+	}
 
-	bool is_object_saved(const MapObject &);
+	bool is_object_saved(const MapObject&);
 
 	/// \note Indexed by player number - 1.
 	MapMessageSaver message_savers[MAX_PLAYERS];
@@ -73,9 +87,9 @@ private:
 		bool registered;
 		bool saved;
 	};
-	using MapObjectRecordMap = std::map<const MapObject *, MapObjectRec>;
+	using MapObjectRecordMap = std::map<const MapObject*, MapObjectRec>;
 
-	MapObjectRec & get_object_record(const MapObject &);
+	MapObjectRec& get_object_record(const MapObject&);
 
 	MapObjectRecordMap objects_;
 	uint32_t nr_roads_;
@@ -89,7 +103,6 @@ private:
 	uint32_t nr_portdocks_;
 	uint32_t lastserial_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_SAVER_H

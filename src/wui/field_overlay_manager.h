@@ -25,9 +25,9 @@
 #include <set>
 #include <vector>
 
+#include "base/point.h"
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
-#include "base/point.h"
 
 class Image;
 
@@ -110,9 +110,9 @@ struct FieldOverlayManager {
 private:
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
-		                    const Image* init_pic,
-		                    const Point init_hotspot,
-		                    const int init_level)
+		                   const Image* init_pic,
+		                   const Point init_hotspot,
+		                   const int init_level)
 		   : pic(init_pic), hotspot(init_hotspot), level(init_level) {
 			overlay_ids.insert(init_overlay_id);
 		}
@@ -123,8 +123,8 @@ private:
 	};
 
 	using RegisteredOverlaysMap = std::multimap<const Widelands::Coords,
-	                                                      RegisteredOverlays,
-	                                                      Widelands::Coords::OrderingFunctor>;
+	                                            RegisteredOverlays,
+	                                            Widelands::Coords::OrderingFunctor>;
 
 	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
 	// 'fc' according to the current 'callback_'.

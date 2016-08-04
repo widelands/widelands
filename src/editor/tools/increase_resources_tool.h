@@ -27,12 +27,12 @@
 /// Increases the resources of a node by a value.
 struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorIncreaseResourcesTool(EditorDecreaseResourcesTool& the_decrease_tool,
-											 EditorSetResourcesTool& the_set_to_tool)
+	                            EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(the_decrease_tool, the_set_to_tool),
-		  decrease_tool_(the_decrease_tool),
+	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_to_tool),
-		  change_by_(1),
-		  cur_res_(0) {
+	     change_by_(1),
+	     cur_res_(0) {
 	}
 
 	/***
@@ -43,31 +43,39 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_increase_resources.png";
 	}
 
-	int32_t get_change_by() const        {return change_by_;}
-	void set_change_by(const int32_t n)  {change_by_ = n;}
-	Widelands::DescriptionIndex get_cur_res() const {return cur_res_;}
+	int32_t get_change_by() const {
+		return change_by_;
+	}
+	void set_change_by(const int32_t n) {
+		change_by_ = n;
+	}
+	Widelands::DescriptionIndex get_cur_res() const {
+		return cur_res_;
+	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
 		cur_res_ = res;
 	}
 
-	EditorDecreaseResourcesTool & decrease_tool() const {
+	EditorDecreaseResourcesTool& decrease_tool() const {
 		return decrease_tool_;
 	}
-	EditorSetResourcesTool    &   set_tool() const {return set_tool_;}
+	EditorSetResourcesTool& set_tool() const {
+		return set_tool_;
+	}
 
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;
@@ -75,6 +83,5 @@ private:
 	int32_t change_by_;
 	Widelands::DescriptionIndex cur_res_;
 };
-
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INCREASE_RESOURCES_TOOL_H

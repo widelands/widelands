@@ -30,38 +30,43 @@ namespace LuaRoot {
  * Base class for all classes in wl
  */
 class LuaRootModuleClass : public LunaClass {
-	public:
-		const char * get_modulename() override {return "";}
+public:
+	const char* get_modulename() override {
+		return "";
+	}
 };
 
 class LuaGame : public LuaBases::LuaEditorGameBase {
 public:
 	LUNA_CLASS_HEAD(LuaGame);
-	const char * get_modulename() override {return "";}
+	const char* get_modulename() override {
+		return "";
+	}
 
-	LuaGame() {}
-	LuaGame(lua_State * L);
+	LuaGame() {
+	}
+	LuaGame(lua_State* L);
 
-	void __persist(lua_State * L) override;
-	void __unpersist(lua_State * L) override;
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 
 	/*
 	 * Properties
 	 */
-	int get_real_speed(lua_State * L);
-	int get_time(lua_State *);
-	int get_desired_speed(lua_State *);
-	int set_desired_speed(lua_State *);
-	int get_allow_autosaving(lua_State *);
-	int set_allow_autosaving(lua_State *);
-	int get_allow_saving(lua_State *);
-	int set_allow_saving(lua_State *);
+	int get_real_speed(lua_State* L);
+	int get_time(lua_State*);
+	int get_desired_speed(lua_State*);
+	int set_desired_speed(lua_State*);
+	int get_allow_autosaving(lua_State*);
+	int set_allow_autosaving(lua_State*);
+	int get_allow_saving(lua_State*);
+	int set_allow_saving(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
-	int launch_coroutine(lua_State *);
-	int save(lua_State *);
+	int launch_coroutine(lua_State*);
+	int save(lua_State*);
 
 	/*
 	 * C methods
@@ -71,14 +76,18 @@ public:
 class LuaEditor : public LuaBases::LuaEditorGameBase {
 public:
 	LUNA_CLASS_HEAD(LuaEditor);
-	const char * get_modulename() override {return "";}
+	const char* get_modulename() override {
+		return "";
+	}
 
-	LuaEditor() {}
-	LuaEditor(lua_State * L);
-	virtual ~LuaEditor() {}
+	LuaEditor() {
+	}
+	LuaEditor(lua_State* L);
+	virtual ~LuaEditor() {
+	}
 
-	void __persist(lua_State * L) override;
-	void __unpersist(lua_State * L) override;
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 
 	/*
 	 * Properties
@@ -96,13 +105,16 @@ public:
 class LuaWorld : public LuaRootModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaWorld);
-	const char * get_modulename() override {return "";}
+	const char* get_modulename() override {
+		return "";
+	}
 
-	LuaWorld() {}
-	LuaWorld(lua_State * L);
+	LuaWorld() {
+	}
+	LuaWorld(lua_State* L);
 
-	void __persist(lua_State * L) override;
-	void __unpersist(lua_State * L) override;
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 
 	/*
 	 * Properties
@@ -128,13 +140,16 @@ public:
 class LuaTribes : public LuaRootModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaTribes);
-	const char * get_modulename() override {return "";}
+	const char* get_modulename() override {
+		return "";
+	}
 
-	LuaTribes() {}
-	LuaTribes(lua_State * L);
+	LuaTribes() {
+	}
+	LuaTribes(lua_State* L);
 
-	void __persist(lua_State * L) override;
-	void __unpersist(lua_State * L) override;
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 
 	/*
 	 * Properties
@@ -162,7 +177,7 @@ public:
 	 */
 };
 
-void luaopen_wlroot(lua_State *, bool in_editor);
+void luaopen_wlroot(lua_State*, bool in_editor);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
 }

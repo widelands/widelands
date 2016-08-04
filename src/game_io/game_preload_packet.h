@@ -20,8 +20,8 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
-#include <ctime>
 #include <cstring>
+#include <ctime>
 #include <string>
 
 #include "game_io/game_data_packet.h"
@@ -36,22 +36,42 @@ namespace Widelands {
  */
 
 struct GamePreloadPacket : public GameDataPacket {
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 
-	char const * get_mapname()      const {return mapname_.c_str();}
-	std::string get_background()    const {return background_;}
-	std::string get_win_condition() const {return win_condition_;}
+	char const* get_mapname() const {
+		return mapname_.c_str();
+	}
+	std::string get_background() const {
+		return background_;
+	}
+	std::string get_win_condition() const {
+		return win_condition_;
+	}
 	std::string get_localized_win_condition() const;
-	uint32_t get_gametime() const {return gametime_;}
-	uint8_t get_player_nr() const {return player_nr_;}
-	std::string get_version() const {return version_;}
+	uint32_t get_gametime() const {
+		return gametime_;
+	}
+	uint8_t get_player_nr() const {
+		return player_nr_;
+	}
+	std::string get_version() const {
+		return version_;
+	}
 
-	uint8_t get_number_of_players() const {return number_of_players_;}
-	std::string get_minimap_path() const {return minimap_path_;}
+	uint8_t get_number_of_players() const {
+		return number_of_players_;
+	}
+	std::string get_minimap_path() const {
+		return minimap_path_;
+	}
 
-	time_t get_savetimestamp() const {return savetimestamp_;}
-	GameController::GameType get_gametype() const {return gametype_;}
+	time_t get_savetimestamp() const {
+		return savetimestamp_;
+	}
+	GameController::GameType get_gametype() const {
+		return gametype_;
+	}
 
 private:
 	std::string minimap_path_;
@@ -59,13 +79,12 @@ private:
 	std::string background_;
 	std::string win_condition_;
 	uint32_t gametime_;
-	uint8_t  player_nr_; // The local player idx
-	uint8_t  number_of_players_;
+	uint8_t player_nr_;  // The local player idx
+	uint8_t number_of_players_;
 	std::string version_;
-	time_t   savetimestamp_;
+	time_t savetimestamp_;
 	GameController::GameType gametype_;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_PRELOAD_PACKET_H
