@@ -24,11 +24,11 @@
 #include <iostream>
 
 // Default to stdout for logging.
-std::ostream & wout = std::cout;
+std::ostream& wout = std::cout;
 
 bool g_verbose = false;
 
-void log(const char * const fmt, ...) {
+void log(const char* const fmt, ...) {
 	char buffer[2048];
 	va_list va;
 

@@ -29,14 +29,14 @@
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<MessageId, Message *> {
+struct MessageQueue : private std::map<MessageId, Message*> {
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		counts_[static_cast<int>(Message::Status::kNew)]      = 0; //  C++0x:
-		counts_[static_cast<int>(Message::Status::kRead)]     = 0; //  C++0x:
-		counts_[static_cast<int>(Message::Status::kArchived)] = 0; //  C++0x:
-	}                                   //  C++0x:
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;       //  C++0x:
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;      //  C++0x:
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;  //  C++0x:
+	}                                                              //  C++0x:
 
 	~MessageQueue() {
 		while (size()) {
@@ -47,18 +47,18 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 
 	//  Make some selected inherited members public.
 	MessageQueue::const_iterator begin() const {
-		return std::map<MessageId, Message *>::begin();
+		return std::map<MessageId, Message*>::begin();
 	}
 	MessageQueue::const_iterator end() const {
-		return std::map<MessageId, Message *>::end();
+		return std::map<MessageId, Message*>::end();
 	}
 	size_type count(uint32_t const i) const {
 		assert_counts();
-		return std::map<MessageId, Message *>::count(MessageId(i));
+		return std::map<MessageId, Message*>::count(MessageId(i));
 	}
 
 	/// \returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](const MessageId& id) const {
+	Message const* operator[](const MessageId& id) const {
 		assert_counts();
 		MessageQueue::const_iterator const it = find(MessageId(id));
 		return it != end() ? it->second : nullptr;
@@ -79,13 +79,12 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// \returns the id of the added message.
 	///
 	/// The loading code calls this function to add messages form the map file.
-	MessageId add_message(Message & message) {
+	MessageId add_message(Message& message) {
 		assert_counts();
 		assert(static_cast<int>(message.status()) < 3);
 		++counts_[static_cast<int>(message.status())];
-		insert
-			(std::map<MessageId, Message *>::end(),
-			 std::pair<MessageId, Message *>(++current_message_id_, &message));
+		insert(std::map<MessageId, Message*>::end(),
+		       std::pair<MessageId, Message*>(++current_message_id_, &message));
 		assert_counts();
 		return current_message_id_;
 	}
@@ -96,7 +95,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 		assert(static_cast<int>(status) < 3);
 		MessageQueue::iterator const it = find(id);
 		if (it != end()) {
-			Message & message = *it->second;
+			Message& message = *it->second;
 			assert(static_cast<int>(it->second->status()) < 3);
 			assert(counts_[static_cast<int>(message.status())]);
 			--counts_[static_cast<int>(message.status())];
@@ -116,7 +115,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
-		Message & message = *it->second;
+		Message& message = *it->second;
 		assert(static_cast<int>(message.status()) < 3);
 		assert(counts_[static_cast<int>(message.status())]);
 		--counts_[static_cast<int>(message.status())];
@@ -125,7 +124,9 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 		assert_counts();
 	}
 
-	MessageId current_message_id() const {return current_message_id_;}
+	MessageId current_message_id() const {
+		return current_message_id_;
+	}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
@@ -142,11 +143,11 @@ private:
 	/// it.
 	void clear() {
 		assert_counts();
-		current_message_id_        = MessageId::null();
-		counts_[static_cast<int>(Message::Status::kNew)]      = 0;
-		counts_[static_cast<int>(Message::Status::kRead)]     = 0;
+		current_message_id_ = MessageId::null();
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
 		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
-		std::map<MessageId, Message *>::clear();
+		std::map<MessageId, Message*>::clear();
 		assert_counts();
 	}
 
@@ -156,19 +157,17 @@ private:
 
 	/// Number of messages with each status (new, read, deleted).
 	/// Indexed by Message::Status.
-	uint32_t   counts_[3];
+	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert
-			(size() ==
-			 counts_[static_cast<int>(Message::Status::kNew)]  +
-			 counts_[static_cast<int>(Message::Status::kRead)] +
-			 counts_[static_cast<int>(Message::Status::kArchived)]);
+		assert(size() ==
+		       counts_[static_cast<int>(Message::Status::kNew)] +
+		          counts_[static_cast<int>(Message::Status::kRead)] +
+		          counts_[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

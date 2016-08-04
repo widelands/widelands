@@ -20,28 +20,33 @@
 #ifndef WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H
 #define WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H
 
-#include "editor/tools/tool.h"
 #include "editor/tools/multi_select.h"
+#include "editor/tools/tool.h"
 
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
-	EditorSetTerrainTool() : EditorTool(*this, *this) {}
+	EditorSetTerrainTool() : EditorTool(*this, *this) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {return "images/ui_basic/fsel.png";}
-	bool operates_on_triangles() const override {return true;}
+	char const* get_sel_impl() const override {
+		return "images/ui_basic/fsel.png";
+	}
+	bool operates_on_triangles() const override {
+		return true;
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H

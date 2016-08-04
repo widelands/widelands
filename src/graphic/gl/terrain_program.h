@@ -28,7 +28,6 @@
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
-
 class TerrainProgram {
 public:
 	// Compiles the program. Throws on errors.

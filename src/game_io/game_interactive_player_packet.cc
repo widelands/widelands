@@ -32,9 +32,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void GameInteractivePlayerPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader *)
-{
+void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
@@ -57,28 +55,26 @@ void GameInteractivePlayerPacket::read
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
-			int32_t       const x             = fr.unsigned_16();
-			int32_t       const y             = fr.unsigned_16();
-			uint32_t      const display_flags = fr.unsigned_32();
+			int32_t const x = fr.unsigned_16();
+			int32_t const y = fr.unsigned_16();
+			uint32_t const display_flags = fr.unsigned_32();
 
-			if (InteractiveBase * const ibase = game.get_ibase()) {
+			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->set_viewpoint(Point(x, y), true);
 
 				uint32_t const loaded_df =
-					InteractiveBase::dfShowCensus |
-					InteractiveBase::dfShowStatistics;
+				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
 				uint32_t const olddf = ibase->get_display_flags();
-				uint32_t const realdf =
-					(olddf & ~loaded_df) | (display_flags & loaded_df);
+				uint32_t const realdf = (olddf & ~loaded_df) | (display_flags & loaded_df);
 				ibase->set_display_flags(realdf);
 			}
-			if (InteractivePlayer * const ipl = game.get_ipl()) {
+			if (InteractivePlayer* const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
 			}
 
 			// Map landmarks
 			if (packet_version >= 3) {
-				if (InteractiveBase * const ibase = game.get_ibase()) {
+				if (InteractiveBase* const ibase = game.get_ibase()) {
 					size_t no_of_landmarks = fr.unsigned_8();
 					for (size_t i = 0; i < no_of_landmarks; ++i) {
 						uint8_t set = fr.unsigned_8();
@@ -90,9 +86,10 @@ void GameInteractivePlayerPacket::read
 				}
 			}
 		} else {
-			throw UnhandledVersionError("GameInteractivePlayerPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "GameInteractivePlayerPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("interactive player: %s", e.what());
 	}
 }
@@ -100,15 +97,13 @@ void GameInteractivePlayerPacket::read
 /*
  * Write Function
  */
-void GameInteractivePlayerPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
+void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	InteractiveBase * const ibase = game.get_ibase();
-	InteractivePlayer * const iplayer = game.get_ipl();
+	InteractiveBase* const ibase = game.get_ibase();
+	InteractivePlayer* const iplayer = game.get_ipl();
 
 	// Player number
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
@@ -127,7 +122,7 @@ void GameInteractivePlayerPacket::write
 	// Map landmarks
 	const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
 	fw.unsigned_8(landmarks.size());
-	for (const QuickNavigation::Landmark& landmark: landmarks) {
+	for (const QuickNavigation::Landmark& landmark : landmarks) {
 		fw.unsigned_8(landmark.set ? 1 : 0);
 		fw.signed_32(landmark.point.x);
 		fw.signed_32(landmark.point.y);
@@ -135,5 +130,4 @@ void GameInteractivePlayerPacket::write
 
 	fw.write(fs, "binary/interactive_player");
 }
-
 }

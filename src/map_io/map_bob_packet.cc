@@ -32,10 +32,10 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapBobPacket::read_bob(FileRead& fr,
-									 EditorGameBase& egbase,
-									 MapObjectLoader&,
-									 const Coords& coords,
-									 const WorldLegacyLookupTable& lookup_table) {
+                            EditorGameBase& egbase,
+                            MapObjectLoader&,
+                            const Coords& coords,
+                            const WorldLegacyLookupTable& lookup_table) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
@@ -68,9 +68,9 @@ void MapBobPacket::read_bob(FileRead& fr,
 }
 
 void MapBobPacket::read(FileSystem& fs,
-								EditorGameBase& egbase,
-								MapObjectLoader& mol,
-								const WorldLegacyLookupTable& lookup_table) {
+                        EditorGameBase& egbase,
+                        MapObjectLoader& mol,
+                        const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 

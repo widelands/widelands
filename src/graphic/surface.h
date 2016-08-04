@@ -37,18 +37,16 @@ class Texture;
 class Surface {
 public:
 	Surface() = default;
-	virtual ~Surface() {}
+	virtual ~Surface() {
+	}
 
 	/// Dimensions.
 	virtual int width() const = 0;
 	virtual int height() const = 0;
 
 	/// This draws a part of 'texture'.
-	void blit(const Rect& dst,
-	          const Image&,
-	          const Rect& srcrc,
-	          const float opacity,
-	          BlendMode blend_mode);
+	void blit(
+	   const Rect& dst, const Image&, const Rect& srcrc, const float opacity, BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.
 	void blit_blended(const Rect& dst,
@@ -66,9 +64,7 @@ public:
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.
-	void draw_line_strip(std::vector<FloatPoint> points,
-	                     const RGBColor& color,
-								float width);
+	void draw_line_strip(std::vector<FloatPoint> points, const RGBColor& color, float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);

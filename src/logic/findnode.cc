@@ -26,17 +26,15 @@
 
 namespace Widelands {
 
-
 FindNodeAnd::Subfunctor::Subfunctor(const FindNode& init_findfield, bool const init_negate)
-	: negate(init_negate), findfield(init_findfield)
-{}
+   : negate(init_negate), findfield(init_findfield) {
+}
 
-void FindNodeAnd::add(const FindNode & findfield, bool const negate)
-{
+void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
 	subfunctors.push_back(Subfunctor(findfield, negate));
 }
 
-bool FindNodeAnd::accept(const Map & map, const FCoords & coord) const {
+bool FindNodeAnd::accept(const Map& map, const FCoords& coord) const {
 	for (const Subfunctor& subfunctor : subfunctors) {
 		if (subfunctor.findfield.accept(map, coord) == subfunctor.negate) {
 			return false;
@@ -45,8 +43,7 @@ bool FindNodeAnd::accept(const Map & map, const FCoords & coord) const {
 	return true;
 }
 
-
-bool FindNodeCaps::accept(const Map &, const FCoords & coord) const {
+bool FindNodeCaps::accept(const Map&, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 
 	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK))
@@ -58,16 +55,15 @@ bool FindNodeCaps::accept(const Map &, const FCoords & coord) const {
 	return true;
 }
 
-bool FindNodeSize::accept(const Map &, const FCoords & coord) const {
-	if (BaseImmovable const * const immovable = coord.field->get_immovable())
+bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
+	if (BaseImmovable const* const immovable = coord.field->get_immovable())
 		if (immovable->get_size() > BaseImmovable::NONE)
 			return false;
 	NodeCaps const nodecaps = coord.field->nodecaps();
 
 	switch (size) {
 	case sizeBuild:
-		return
-			nodecaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE);
+		return nodecaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE);
 	case sizeMine:
 		return nodecaps & BUILDCAPS_MINE;
 	case sizePort:
@@ -84,42 +80,37 @@ bool FindNodeSize::accept(const Map &, const FCoords & coord) const {
 	NEVER_HERE();
 }
 
-bool FindNodeImmovableSize::accept(const Map &, const FCoords & coord) const {
+bool FindNodeImmovableSize::accept(const Map&, const FCoords& coord) const {
 	int32_t size = BaseImmovable::NONE;
 
-	if (BaseImmovable * const imm = coord.field->get_immovable())
+	if (BaseImmovable* const imm = coord.field->get_immovable())
 		size = imm->get_size();
 
 	switch (size) {
-	case BaseImmovable::NONE:   return sizes & sizeNone;
-	case BaseImmovable::SMALL:  return sizes & sizeSmall;
-	case BaseImmovable::MEDIUM: return sizes & sizeMedium;
-	case BaseImmovable::BIG:    return sizes & sizeBig;
+	case BaseImmovable::NONE:
+		return sizes & sizeNone;
+	case BaseImmovable::SMALL:
+		return sizes & sizeSmall;
+	case BaseImmovable::MEDIUM:
+		return sizes & sizeMedium;
+	case BaseImmovable::BIG:
+		return sizes & sizeBig;
 	default:
 		throw wexception("FindNodeImmovableSize: bad size = %i", size);
 	}
 }
 
-
-bool FindNodeImmovableAttribute::accept
-	(const Map &, const FCoords & coord) const
-{
-	if (BaseImmovable * const imm = coord.field->get_immovable())
+bool FindNodeImmovableAttribute::accept(const Map&, const FCoords& coord) const {
+	if (BaseImmovable* const imm = coord.field->get_immovable())
 		return imm->has_attribute(attribute);
 	return false;
 }
 
-
-bool FindNodeResource::accept(const Map &, const FCoords & coord) const {
-	return
-		resource == coord.field->get_resources() &&
-		coord.field->get_resources_amount();
+bool FindNodeResource::accept(const Map&, const FCoords& coord) const {
+	return resource == coord.field->get_resources() && coord.field->get_resources_amount();
 }
 
-
-bool FindNodeResourceBreedable::accept
-	(const Map & map, const FCoords & coord) const
-{
+bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) const {
 	// Accept a tile that is full only if a neighbor also matches resource and
 	// is not full.
 	if (resource != coord.field->get_resources()) {
@@ -130,19 +121,15 @@ bool FindNodeResourceBreedable::accept
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
-		if
-			(resource == neighb.field->get_resources()
-			 &&
-			 neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount())
-		{
+		if (resource == neighb.field->get_resources() &&
+		    neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
 			return true;
 		}
 	}
 	return false;
 }
 
-bool FindNodeShore::accept(const Map & map, const FCoords & coord) const
-{
+bool FindNodeShore::accept(const Map& map, const FCoords& coord) const {
 	if (!(coord.field->nodecaps() & MOVECAPS_WALK))
 		return false;
 
@@ -154,5 +141,4 @@ bool FindNodeShore::accept(const Map & map, const FCoords & coord) const
 
 	return false;
 }
-
 }

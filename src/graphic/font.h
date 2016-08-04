@@ -32,7 +32,6 @@ namespace UI {
  */
 #define LINE_MARGIN 1
 
-
 /**
  * Wrapper object around a font.
  *
@@ -43,21 +42,23 @@ struct Font {
 	friend struct TextStyle;
 
 	static void shutdown();
-	static Font * get(const std::string & name, int size);
+	static Font* get(const std::string& name, int size);
 
 	uint32_t size() const;
 	uint32_t ascent() const;
 	uint32_t height() const;
 	uint32_t lineskip() const;
 
-	TTF_Font * get_ttf_font() const {return font_;}
+	TTF_Font* get_ttf_font() const {
+		return font_;
+	}
 
 private:
-	Font(const std::string & name, int size);
+	Font(const std::string& name, int size);
 	~Font();
 
 	FileRead fontfile_;
-	TTF_Font * font_;
+	TTF_Font* font_;
 
 	/**
 	 * Work around weird fonts with very large lineskip, to get something
@@ -69,6 +70,6 @@ private:
 	int size_;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_H

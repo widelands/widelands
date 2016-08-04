@@ -28,8 +28,8 @@
 #endif
 
 #include "io/filesystem/filesystem.h"
-#include "io/streamread.h"
 #include "io/machdep.h"
+#include "io/streamread.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire
 /// file into memory. Convenience functions are available for endian-safe
@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator += (Pos const other) {
+		Pos operator+=(Pos const other) {
 			return pos += other.pos;
 		}
 

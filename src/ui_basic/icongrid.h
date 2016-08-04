@@ -36,37 +36,30 @@ namespace UI {
  * bottom).
 */
 struct IconGrid : public Panel {
-	IconGrid
-		(Panel  * parent,
-		 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
-		 int32_t  cols);
+	IconGrid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
 
-	boost::signals2::signal<void (int32_t)> clicked;
-	boost::signals2::signal<void (int32_t)> mouseout;
-	boost::signals2::signal<void (int32_t)> mousein;
+	boost::signals2::signal<void(int32_t)> clicked;
+	boost::signals2::signal<void(int32_t)> mouseout;
+	boost::signals2::signal<void(int32_t)> mousein;
 
-	int32_t add
-		(const std::string & name,
-		 const Image* pic,
-		 void              * data,
-		 const std::string & tooltip_text = "");
-	void * get_data(int32_t idx);
+	int32_t
+	add(const std::string& name, const Image* pic, void* data, const std::string& tooltip_text = "");
+	void* get_data(int32_t idx);
 
 private:
 	void clicked_button(uint32_t);
 
 	struct Item {
-		void      * data;
+		void* data;
 	};
 
 	/// max # of columns (or rows, depending on orientation) in the grid
 	int32_t columns_;
-	int32_t cell_width_; ///< size of one cell
+	int32_t cell_width_;  ///< size of one cell
 	int32_t cell_height_;
 
 	std::vector<Item> items_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_ICONGRID_H

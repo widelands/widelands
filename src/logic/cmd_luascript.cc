@@ -29,15 +29,15 @@
 
 namespace Widelands {
 
-void CmdLuaScript::execute (Game & game) {
+void CmdLuaScript::execute(Game& game) {
 	log("Trying to run: %s: ", script_.c_str());
 	try {
 		game.lua().run_script(script_);
-	} catch (LuaScriptNotExistingError &) {
+	} catch (LuaScriptNotExistingError&) {
 		// The script has not been found.
 		log("not found.\n");
 		return;
-	} catch (LuaError & e) {
+	} catch (LuaError& e) {
 		throw GameDataError("lua: %s", e.what());
 	}
 	log("done\n");
@@ -46,9 +46,7 @@ void CmdLuaScript::execute (Game & game) {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void CmdLuaScript::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+void CmdLuaScript::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -57,17 +55,14 @@ void CmdLuaScript::read
 		} else {
 			throw UnhandledVersionError("CmdLuaScript", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("lua: %s", e.what());
 	}
 }
-void CmdLuaScript::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdLuaScript::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	fw.string(script_);
 }
-
 }

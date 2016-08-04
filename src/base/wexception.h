@@ -30,7 +30,7 @@
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
@@ -42,18 +42,18 @@
  * sprintf()-style format strings
  */
 struct WException : public std::exception {
-	explicit WException
-		(char const * const file, uint32_t const line, char const * const fmt, ...)
-	 PRINTF_FORMAT(4, 5);
+	explicit WException(char const* const file, uint32_t const line, char const* const fmt, ...)
+	   PRINTF_FORMAT(4, 5);
 
 	/**
-    * The target of the returned pointer remains valid during the lifetime of
+	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	const char * what() const noexcept override;
+	const char* what() const noexcept override;
 
 protected:
-	WException() {}
+	WException() {
+	}
 	std::string what_;
 };
 

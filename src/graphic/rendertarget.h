@@ -57,9 +57,7 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
-	void draw_line_strip(const std::vector<FloatPoint>& points,
-								const RGBColor& color,
-								float width);
+	void draw_line_strip(const std::vector<FloatPoint>& points, const RGBColor& color, float width);
 	void draw_rect(const Rect&, const RGBColor&);
 	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 	void brighten_rect(const Rect&, int32_t factor);
@@ -67,13 +65,13 @@ public:
 	void blit(const Point& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
-				 UI::Align = UI::Align::kTopLeft);
+	          UI::Align = UI::Align::kTopLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Point& dst,
-						const Image* image,
-						const RGBAColor& blend_mode,
-						UI::Align = UI::Align::kTopLeft);
+	                     const Image* image,
+	                     const RGBAColor& blend_mode,
+	                     UI::Align = UI::Align::kTopLeft);
 
 	void blitrect(const Point& dst,
 	              const Image* image,
@@ -104,10 +102,14 @@ public:
 	          const Point& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
 
-	// Draw the 'animation' as it should appear at 'time' in this target at 'dst'. Optionally, the animation is
+	// Draw the 'animation' as it should appear at 'time' in this target at 'dst'. Optionally, the
+	// animation is
 	// tinted with 'player_color' and cropped to 'source_rect'.
 	void blit_animation(const Point& dst, uint32_t animation, uint32_t time);
-	void blit_animation(const Point& dst, uint32_t animation, uint32_t time, const RGBColor& player_color);
+	void blit_animation(const Point& dst,
+	                    uint32_t animation,
+	                    uint32_t time,
+	                    const RGBColor& player_color);
 	void blit_animation(const Point& dst,
 	                    uint32_t animation,
 	                    uint32_t time,
@@ -116,12 +118,18 @@ public:
 
 	void reset();
 
-	Surface* get_surface() const {return surface_;}
-	const Rect& get_rect() const {return rect_;}
-	const Point& get_offset() const {return offset_;}
+	Surface* get_surface() const {
+		return surface_;
+	}
+	const Rect& get_rect() const {
+		return rect_;
+	}
+	const Point& get_offset() const {
+		return offset_;
+	}
 
 protected:
-	bool clip(Rect & r) const;
+	bool clip(Rect& r) const;
 	bool to_surface_geometry(Rect* destination_rect, Rect* source_rect) const;
 
 	// Does the actual blitting.

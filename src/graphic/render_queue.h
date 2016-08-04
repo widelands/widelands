@@ -113,7 +113,8 @@ public:
 	};
 
 	struct TerrainArguments {
-		TerrainArguments() {}
+		TerrainArguments() {
+		}
 
 		int gametime;
 		int renderbuffer_width;
@@ -185,6 +186,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(RenderQueue);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_QUEUE_H

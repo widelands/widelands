@@ -30,10 +30,9 @@
 namespace {
 
 // Returns the hexcolor for the 'player'.
-std::string color(const int16_t playern)
-{
+std::string color(const int16_t playern) {
 	if ((playern >= 0) && playern < MAX_PLAYERS) {
-		const RGBColor & clr = Widelands::Player::Colors[playern];
+		const RGBColor& clr = Widelands::Player::Colors[playern];
 		char buf[sizeof("ffffff")];
 		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
 		return buf;
@@ -55,8 +54,9 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&chat_message.time));
 	message += ts;
 
-	message = (boost::format("%s<p font-size=14 font-face=%s font-color=#%s")
-				  % message % font_face % color(chat_message.playern)).str();
+	message = (boost::format("%s<p font-size=14 font-face=%s font-color=#%s") % message % font_face %
+	           color(chat_message.playern))
+	             .str();
 
 	std::string sender_escaped = richtext_escape(chat_message.sender);
 	std::string recipient_escaped = richtext_escape(chat_message.recipient);
@@ -65,38 +65,33 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
 
-			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s> %s")
-						  % message
-						  % sender_escaped
-						  % recipient_escaped
-						  % font_face
-						  % sanitized).str();
+			message =
+			   (boost::format(
+			       "%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s> %s") %
+			    message % sender_escaped % recipient_escaped % font_face % sanitized)
+			      .str();
 		} else {
 
 			message =
-				(boost::format("%s>@%s &gt;&gt; </p>"
-									"<p font-size=14 font-face=%s font-color=#%s font-style=italic> %s%s")
-				 % message
-				 % recipient_escaped
-				 % font_face
-				 % color(chat_message.playern)
-				 % sender_escaped
-				 % sanitized.substr(3)).str();
+			   (boost::format("%s>@%s &gt;&gt; </p>"
+			                  "<p font-size=14 font-face=%s font-color=#%s font-style=italic> %s%s") %
+			    message % recipient_escaped % font_face % color(chat_message.playern) %
+			    sender_escaped % sanitized.substr(3))
+			      .str();
 		}
 	} else {
 		// Normal messages handling
 		if (!sanitized.compare(0, 3, "/me")) {
-			message = (boost::format("%s font-style=italic>-&gt; %s%s")
-						  % message
-						  % (chat_message.sender.size() ? chat_message.sender.c_str() : "***")
-						  % sanitized.substr(3)).str();
+			message = (boost::format("%s font-style=italic>-&gt; %s%s") % message %
+			           (chat_message.sender.size() ? chat_message.sender.c_str() : "***") %
+			           sanitized.substr(3))
+			             .str();
 
 		} else if (chat_message.sender.size()) {
-			message = (boost::format("%s font-decoration=underline>%s:</p><p font-size=14 font-face=%s> %s")
-						  % message
-						  % sender_escaped
-						  % font_face
-						  % sanitized).str();
+			message =
+			   (boost::format("%s font-decoration=underline>%s:</p><p font-size=14 font-face=%s> %s") %
+			    message % sender_escaped % font_face % sanitized)
+			      .str();
 		} else {
 			message += " font-weight=bold>*** ";
 			message += sanitized;
@@ -119,8 +114,9 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] ", localtime(&chat_message.time));
 	message += ts;
 
-	message = (boost::format("%s</font><font size=14 face=%s color=%s")
-				  % message % font_face % color(chat_message.playern)).str();
+	message = (boost::format("%s</font><font size=14 face=%s color=%s") % message % font_face %
+	           color(chat_message.playern))
+	             .str();
 
 	std::string sender_escaped = richtext_escape(chat_message.sender);
 	std::string recipient_escaped = richtext_escape(chat_message.recipient);
@@ -128,21 +124,18 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message = (boost::format("%s bold=1>%s @ %s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s")
-					% message
-					% sender_escaped
-					% recipient_escaped
-					% font_face
-					% sanitized).str();
+			message = (boost::format(
+			              "%s bold=1>%s @ %s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s") %
+			           message % sender_escaped % recipient_escaped % font_face % sanitized)
+			             .str();
 
 		} else {
-			message = (boost::format("%s>@%s &gt; </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s")
-					% message
-					% recipient_escaped
-					% font_face
-					% color(chat_message.playern)
-					% sender_escaped
-					% sanitized.substr(3)).str();
+			message =
+			   (boost::format(
+			       "%s>@%s &gt; </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s") %
+			    message % recipient_escaped % font_face % color(chat_message.playern) %
+			    sender_escaped % sanitized.substr(3))
+			      .str();
 		}
 	} else {
 		// Normal messages handling
@@ -154,11 +147,10 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 				message += "***";
 			message += sanitized.substr(3);
 		} else if (chat_message.sender.size()) {
-			message = (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s")
-						 % message
-						 % sender_escaped
-						 % font_face
-						 % sanitized).str();
+			message =
+			   (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s") %
+			    message % sender_escaped % font_face % sanitized)
+			      .str();
 		} else {
 			message += " bold=1>*** ";
 			message += sanitized;
@@ -169,8 +161,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	return message + "</font><br></p>";
 }
 
-std::string sanitize_message(const ChatMessage & chat_message)
-{
+std::string sanitize_message(const ChatMessage& chat_message) {
 	// Escape richtext characters
 	// The goal of this code is two-fold:
 	//  1. Assuming an honest game host, we want to prevent the ability of
@@ -196,10 +187,8 @@ std::string sanitize_message(const ChatMessage & chat_message)
 			if (!chat_message.msg.compare(pos, good1.size(), good1)) {
 				// TODO(MiroslavR): The logic here seems flawed.
 				std::string::size_type nextclose = chat_message.msg.find('>', pos + good1.size());
-				if
-					(nextclose != std::string::npos &&
-					(nextclose == pos + good1.size() || chat_message.msg[pos + good1.size()] == ' '))
-				{
+				if (nextclose != std::string::npos &&
+				    (nextclose == pos + good1.size() || chat_message.msg[pos + good1.size()] == ' ')) {
 					sanitized += good1;
 					pos += good1.size() - 1;
 					continue;

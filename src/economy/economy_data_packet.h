@@ -30,16 +30,16 @@ class MapObjectLoader;
 struct MapObjectSaver;
 
 class EconomyDataPacket {
-	public:
-		EconomyDataPacket(Economy * e) : eco_(e) {}
+public:
+	EconomyDataPacket(Economy* e) : eco_(e) {
+	}
 
-		void read(FileRead &);
-		void write(FileWrite &);
+	void read(FileRead&);
+	void write(FileWrite&);
 
-	private:
-		Economy * eco_;
+private:
+	Economy* eco_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

@@ -32,29 +32,22 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
 
-MapPlayerNamesAndTribesPacket::
-~MapPlayerNamesAndTribesPacket
-	()
-{}
+MapPlayerNamesAndTribesPacket::~MapPlayerNamesAndTribesPacket() {
+}
 
 /*
  * Read Function
  *
  * this is a scenario packet, it might be that we have to skip it
  */
-void MapPlayerNamesAndTribesPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
+                                         EditorGameBase& egbase,
+                                         bool const skip,
+                                         MapObjectLoader&) {
 	pre_read(fs, egbase.get_map(), skip);
 }
 
-
-void MapPlayerNamesAndTribesPacket::pre_read
-	(FileSystem & fs, Map * const map, bool const skip)
-{
+void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, bool const skip) {
 	if (skip)
 		return;
 
@@ -62,57 +55,52 @@ void MapPlayerNamesAndTribesPacket::pre_read
 	prof.read("player_names", nullptr, fs);
 
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_int("packet_version");
+		int32_t const packet_version = prof.get_safe_section("global").get_int("packet_version");
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
-				Section & s = prof.get_safe_section((boost::format("player_%u")
-																 % static_cast<unsigned int>(p)).str());
-				map->set_scenario_player_name     (p, s.get_string("name",  ""));
-				map->set_scenario_player_tribe    (p, s.get_string("tribe", ""));
-				map->set_scenario_player_ai       (p, s.get_string("ai",    ""));
-				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
+				Section& s = prof.get_safe_section(
+				   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
+				map->set_scenario_player_name(p, s.get_string("name", ""));
+				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
+				map->set_scenario_player_ai(p, s.get_string("ai", ""));
+				map->set_scenario_player_closeable(p, s.get_bool("closeable", false));
 			}
 		} else {
-			throw UnhandledVersionError("MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("player names and tribes: %s", e.what());
 	}
 }
 
-
-void MapPlayerNamesAndTribesPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	Profile prof;
 
-	prof.create_section("global").set_int
-		("packet_version", kCurrentPacketVersion);
+	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
-	const Map & map = egbase.map();
+	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		const std::string section_key = (boost::format("player_%u")
-													% static_cast<unsigned int>(p)).str();
+		const std::string section_key =
+		   (boost::format("player_%u") % static_cast<unsigned int>(p)).str();
 
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
 		boost::trim(player_name);
 		if (player_name.empty()) {
-			player_name =  (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+			player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
 		}
 
-		Section & s = prof.create_section(section_key.c_str());
-		s.set_string("name",      player_name);
-		s.set_string("tribe",     map.get_scenario_player_tribe    (p));
-		s.set_string("ai",        map.get_scenario_player_ai       (p));
-		s.set_bool  ("closeable", map.get_scenario_player_closeable(p));
+		Section& s = prof.create_section(section_key.c_str());
+		s.set_string("name", player_name);
+		s.set_string("tribe", map.get_scenario_player_tribe(p));
+		s.set_string("ai", map.get_scenario_player_ai(p));
+		s.set_bool("closeable", map.get_scenario_player_closeable(p));
 	}
 
 	prof.write("player_names", false, fs);
 }
-
 }

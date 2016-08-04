@@ -51,47 +51,48 @@ class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
 		Tools()
-			:
-			current_pointer(&info),
-			use_tool(EditorTool::First),
-			increase_height(decrease_height, set_height),
-			noise_height(set_height),
-			place_immovable(delete_immovable),
-			place_bob(delete_bob),
-			increase_resources(decrease_resources, set_resources),
-			set_port_space(unset_port_space),
-			set_origin()
-		{}
-		EditorTool & current() const {return *current_pointer;}
-		using ToolVector = std::vector<EditorTool *>;
-		EditorTool          *        current_pointer;
-		EditorTool::ToolIndex        use_tool;
-		EditorInfoTool               info;
-		EditorSetHeightTool          set_height;
-		EditorDecreaseHeightTool     decrease_height;
-		EditorIncreaseHeightTool     increase_height;
-		EditorNoiseHeightTool        noise_height;
-		EditorSetTerrainTool         set_terrain;
-		EditorDeleteImmovableTool    delete_immovable;
-		EditorPlaceImmovableTool     place_immovable;
-		EditorSetStartingPosTool     set_starting_pos;
-		EditorDeleteBobTool          delete_bob;
-		EditorPlaceBobTool           place_bob;
-		EditorDecreaseResourcesTool  decrease_resources;
-		EditorSetResourcesTool       set_resources;
-		EditorIncreaseResourcesTool  increase_resources;
-		EditorSetPortSpaceTool       set_port_space;
-		EditorUnsetPortSpaceTool     unset_port_space;
-		EditorSetOriginTool          set_origin;
+		   : current_pointer(&info),
+		     use_tool(EditorTool::First),
+		     increase_height(decrease_height, set_height),
+		     noise_height(set_height),
+		     place_immovable(delete_immovable),
+		     place_bob(delete_bob),
+		     increase_resources(decrease_resources, set_resources),
+		     set_port_space(unset_port_space),
+		     set_origin() {
+		}
+		EditorTool& current() const {
+			return *current_pointer;
+		}
+		using ToolVector = std::vector<EditorTool*>;
+		EditorTool* current_pointer;
+		EditorTool::ToolIndex use_tool;
+		EditorInfoTool info;
+		EditorSetHeightTool set_height;
+		EditorDecreaseHeightTool decrease_height;
+		EditorIncreaseHeightTool increase_height;
+		EditorNoiseHeightTool noise_height;
+		EditorSetTerrainTool set_terrain;
+		EditorDeleteImmovableTool delete_immovable;
+		EditorPlaceImmovableTool place_immovable;
+		EditorSetStartingPosTool set_starting_pos;
+		EditorDeleteBobTool delete_bob;
+		EditorPlaceBobTool place_bob;
+		EditorDecreaseResourcesTool decrease_resources;
+		EditorSetResourcesTool set_resources;
+		EditorIncreaseResourcesTool increase_resources;
+		EditorSetPortSpaceTool set_port_space;
+		EditorUnsetPortSpaceTool unset_port_space;
+		EditorSetOriginTool set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
 	};
-	EditorInteractive(Widelands::EditorGameBase &);
+	EditorInteractive(Widelands::EditorGameBase&);
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.
-	static void run_editor(const std::string & filename, const std::string& script_to_run);
+	static void run_editor(const std::string& filename, const std::string& script_to_run);
 
-	void load(const std::string & filename);
+	void load(const std::string& filename);
 	void cleanup_for_load() override;
 
 	// leaf functions from base class
@@ -109,19 +110,22 @@ public:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
+	void select_tool(EditorTool&, EditorTool::ToolIndex);
 
-	void select_tool(EditorTool &, EditorTool::ToolIndex);
-
-	Widelands::Player * get_player() const override {return nullptr;}
+	Widelands::Player* get_player() const override {
+		return nullptr;
+	}
 
 	// action functions
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::PlayerNumber, void const * const) override;
-	void unreference_player_tribe(Widelands::PlayerNumber, void const * const);
+	void reference_player_tribe(Widelands::PlayerNumber, void const* const) override;
+	void unreference_player_tribe(Widelands::PlayerNumber, void const* const);
 	bool is_player_tribe_referenced(Widelands::PlayerNumber);
-	void set_need_save(bool const t) {need_save_ = t;}
+	void set_need_save(bool const t) {
+		need_save_ = t;
+	}
 
 	// Signalizes that the egbase().map has changed. This can happen when a new
 	// map is created or loaded, in which case all windows should be closed and
@@ -143,8 +147,8 @@ private:
 	friend struct EditorToolMenu;
 
 	struct PlayerReferences {
-		int32_t      player;
-		void const * object;
+		int32_t player;
+		void const* object;
 	};
 
 	// Registers the overlays for player starting positions.

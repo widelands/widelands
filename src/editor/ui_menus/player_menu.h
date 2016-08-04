@@ -30,7 +30,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-
 class EditorInteractive;
 namespace UI {
 struct Textarea;
@@ -40,20 +39,18 @@ struct Button;
 
 class EditorPlayerMenu : public UI::UniqueWindow {
 public:
-	EditorPlayerMenu
-		(EditorInteractive &, UI::UniqueWindow::Registry &);
-	virtual ~EditorPlayerMenu() {}
+	EditorPlayerMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
+	virtual ~EditorPlayerMenu() {
+	}
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	UI::UniqueWindow::Registry allow_buildings_menu_;
 	UI::Textarea* nr_of_players_ta_;
 	UI::EditBox* plr_names_[MAX_PLAYERS];
 	UI::Button add_player_, remove_last_player_;
-	UI::Button
-		* plr_make_infrastructure_buts_[MAX_PLAYERS],
-		* plr_set_pos_buts_            [MAX_PLAYERS],
-		* plr_set_tribes_buts_         [MAX_PLAYERS];
+	UI::Button *plr_make_infrastructure_buts_[MAX_PLAYERS], *plr_set_pos_buts_[MAX_PLAYERS],
+	   *plr_set_tribes_buts_[MAX_PLAYERS];
 
 	std::vector<std::string> tribenames_;
 
@@ -63,10 +60,10 @@ private:
 	int32_t posy_;
 
 	void name_changed(int32_t);
-	void clicked_add_player         ();
-	void clicked_remove_last_player ();
-	void player_tribe_clicked       (uint8_t);
-	void set_starting_pos_clicked   (uint8_t);
+	void clicked_add_player();
+	void clicked_remove_last_player();
+	void player_tribe_clicked(uint8_t);
+	void set_starting_pos_clicked(uint8_t);
 	void update();
 	void think() override;
 	void make_infrastructure_clicked(uint8_t);

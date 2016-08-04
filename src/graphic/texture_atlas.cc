@@ -25,7 +25,7 @@
 
 #include "base/wexception.h"
 
-namespace  {
+namespace {
 
 // This padding will be applied to the left and bottom of each block to
 // separate them during blitting if OpenGL decides to be a jerk about where to
@@ -49,10 +49,7 @@ void TextureAtlas::Node::split(int item_w, int item_h) {
 	// size of the full canvas.
 }
 
-
-TextureAtlas::TextureAtlas() :
-	next_index_(0)
-{
+TextureAtlas::TextureAtlas() : next_index_(0) {
 }
 
 void TextureAtlas::add(const Image& texture) {
@@ -77,9 +74,8 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 	return nullptr;
 }
 
-std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_dimension,
-                                                                const int texture_atlas_index,
-                                                                std::vector<PackedTexture>* pack_info) {
+std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
+   const int max_dimension, const int texture_atlas_index, std::vector<PackedTexture>* pack_info) {
 
 	std::unique_ptr<Node> root(new Node(Rect(0, 0, blocks_.begin()->texture->width() + kPadding,
 	                                         blocks_.begin()->texture->height() + kPadding)));
@@ -144,9 +140,7 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_di
 	for (Block& block : packed) {
 		texture_atlas->blit(
 		   Rect(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
-		   *block.texture,
-		   Rect(0, 0, block.texture->width(), block.texture->height()),
-		   1.,
+		   *block.texture, Rect(0, 0, block.texture->width(), block.texture->height()), 1.,
 		   BlendMode::Copy);
 
 		pack_info->emplace_back(PackedTexture(
@@ -161,8 +155,8 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_di
 }
 
 void TextureAtlas::pack(const int max_dimension,
-		std::vector<std::unique_ptr<Texture>>* texture_atlases,
-		std::vector<PackedTexture>* pack_info) {
+                        std::vector<std::unique_ptr<Texture>>* texture_atlases,
+                        std::vector<PackedTexture>* pack_info) {
 	if (blocks_.empty()) {
 		throw wexception("Called pack() without blocks.");
 	}
@@ -180,7 +174,6 @@ void TextureAtlas::pack(const int max_dimension,
 	}
 
 	// Sort pack info by index so that they come back in the correct ordering.
-	std::sort(pack_info->begin(), pack_info->end(), [](const PackedTexture& i, const PackedTexture& j) {
-		return i.index_ < j.index_;
-	});
+	std::sort(pack_info->begin(), pack_info->end(),
+	          [](const PackedTexture& i, const PackedTexture& j) { return i.index_ < j.index_; });
 }

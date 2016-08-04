@@ -25,25 +25,26 @@
 
 /// Places bobs on the map.
 struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
-	EditorPlaceBobTool(EditorDeleteBobTool & tool)
-		: EditorTool(tool, tool)
-	{}
+	EditorPlaceBobTool(EditorDeleteBobTool& tool) : EditorTool(tool, tool) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {return "images/wui/editor/fsel_editor_place_bob.png";}
+	char const* get_sel_impl() const override {
+		return "images/wui/editor/fsel_editor_place_bob.png";
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H

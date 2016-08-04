@@ -24,8 +24,7 @@
 
 namespace Widelands {
 
-void CmdDeleteMessage::execute(Game & game) {
+void CmdDeleteMessage::execute(Game& game) {
 	game.player(player).messages().delete_message(message);
 }
-
 }

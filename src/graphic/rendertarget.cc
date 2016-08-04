@@ -27,8 +27,7 @@
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(Surface* surf)
-{
+RenderTarget::RenderTarget(Surface* surf) {
 	surface_ = surf;
 	reset();
 }
@@ -36,8 +35,7 @@ RenderTarget::RenderTarget(Surface* surf)
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(const Rect& rc, const Point& ofs)
-{
+void RenderTarget::set_window(const Rect& rc, const Point& ofs) {
 	rect_ = rc;
 	offset_ = ofs;
 
@@ -50,8 +48,7 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 	}
 
 	if (rect_.x + rect_.w > surface_->width())
-		rect_.w =
-			std::max<int32_t>(surface_->width() - rect_.x, 0);
+		rect_.w = std::max<int32_t>(surface_->width() - rect_.x, 0);
 
 	if (rect_.y < 0) {
 		offset_.y += rect_.y;
@@ -60,8 +57,7 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 	}
 
 	if (rect_.y + rect_.h > surface_->height())
-		rect_.h =
-			std::max<int32_t>(surface_->height() - rect_.y, 0);
+		rect_.h = std::max<int32_t>(surface_->height() - rect_.y, 0);
 }
 
 /**
@@ -73,9 +69,7 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
  * Returns false if the subwindow is invisible. In that case, the window state
  * is not changed at all. Otherwise, the function returns true.
  */
-bool RenderTarget::enter_window
-	(const Rect& rc, Rect* previous, Point* prevofs)
-{
+bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs) {
 	Rect newrect = rc;
 
 	if (clip(newrect)) {
@@ -89,22 +83,21 @@ bool RenderTarget::enter_window
 		rect_ = newrect;
 
 		return true;
-	} else return false;
+	} else
+		return false;
 }
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::width() const
-{
+int32_t RenderTarget::width() const {
 	return surface_->width();
 }
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::height() const
-{
+int32_t RenderTarget::height() const {
 	return surface_->height();
 }
 
@@ -113,7 +106,7 @@ int32_t RenderTarget::height() const
  */
 void RenderTarget::draw_line_strip(const std::vector<FloatPoint>& points,
                                    const RGBColor& color,
-											  float line_width) {
+                                   float line_width) {
 	std::vector<FloatPoint> adjusted_points;
 	adjusted_points.reserve(points.size());
 	for (const auto& p : points) {
@@ -125,23 +118,20 @@ void RenderTarget::draw_line_strip(const std::vector<FloatPoint>& points,
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(const Rect& rect, const RGBColor& clr)
-{
+void RenderTarget::draw_rect(const Rect& rect, const RGBColor& clr) {
 	Rect r(rect);
 	if (clip(r)) {
 		::draw_rect(r, clr, surface_);
 	}
 }
 
-void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr, BlendMode blend_mode)
-{
+void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr, BlendMode blend_mode) {
 	Rect r(rect);
 	if (clip(r))
 		surface_->fill_rect(r, clr, blend_mode);
 }
 
-void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
-{
+void RenderTarget::brighten_rect(const Rect& rect, int32_t factor) {
 	Rect r(rect);
 	if (clip(r))
 		surface_->brighten_rect(r, factor);
@@ -152,8 +142,10 @@ void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
  *
  * This blit function copies the pixels to the destination surface.
  */
-void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mode, UI::Align align)
-{
+void RenderTarget::blit(const Point& dst,
+                        const Image* image,
+                        BlendMode blend_mode,
+                        UI::Align align) {
 	Point destination_point(dst);
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
@@ -166,8 +158,9 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 }
 
 void RenderTarget::blit_monochrome(const Point& dst,
-									  const Image* image,
-									  const RGBAColor& blend_mode, UI::Align align) {
+                                   const Image* image,
+                                   const RGBAColor& blend_mode,
+                                   UI::Align align) {
 	Point destination_point(dst);
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
@@ -182,18 +175,17 @@ void RenderTarget::blit_monochrome(const Point& dst,
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
-void RenderTarget::blitrect
-	(const Point& dst, const Image* image, const Rect& gsrcrc, BlendMode blend_mode)
-{
+void RenderTarget::blitrect(const Point& dst,
+                            const Image* image,
+                            const Rect& gsrcrc,
+                            BlendMode blend_mode) {
 	assert(0 <= gsrcrc.x);
 	assert(0 <= gsrcrc.y);
 
 	// We want to use the given srcrc, but we must make sure that we are not
 	// blitting outside of the boundaries of 'image'.
-	Rect source_rect(gsrcrc.x,
-	           gsrcrc.y,
-	           std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
-	           std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+	Rect source_rect(gsrcrc.x, gsrcrc.y, std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
+	                 std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
 	Rect destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -212,9 +204,9 @@ void RenderTarget::blitrect_scale(Rect destination_rect,
 }
 
 void RenderTarget::blitrect_scale_monochrome(Rect destination_rect,
-                                       const Image* image,
-                                       Rect source_rect,
-													const RGBAColor& blend) {
+                                             const Image* image,
+                                             Rect source_rect,
+                                             const RGBAColor& blend) {
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		surface_->blit_monochrome(destination_rect, *image, source_rect, blend);
 	}
@@ -226,8 +218,10 @@ void RenderTarget::blitrect_scale_monochrome(Rect destination_rect,
  * The pixel from ofs inside image is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs, BlendMode blend_mode)
-{
+void RenderTarget::tile(const Rect& rect,
+                        const Image* image,
+                        const Point& gofs,
+                        BlendMode blend_mode) {
 	int32_t srcw = image->width();
 	int32_t srch = image->height();
 
@@ -310,7 +304,8 @@ void RenderTarget::blit_animation(const Point& dst,
                                   uint32_t time,
                                   const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(dst, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
+	do_blit_animation(
+	   dst, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
 void RenderTarget::blit_animation(const Point& dst,
@@ -346,8 +341,7 @@ void RenderTarget::do_blit_animation(const Point& dst,
  * Called every time before the render target is handed out by the Graphic
  * implementation to start in a neutral state.
  */
-void RenderTarget::reset()
-{
+void RenderTarget::reset() {
 	rect_.x = rect_.y = 0;
 	rect_.w = surface_->width();
 	rect_.h = surface_->height();
@@ -361,8 +355,7 @@ void RenderTarget::reset()
  * If true is returned, r a valid rectangle that can be used.
  * If false is returned, r may not be used and may be partially modified.
  */
-bool RenderTarget::clip(Rect & r) const
-{
+bool RenderTarget::clip(Rect& r) const {
 	r.x += offset_.x;
 	r.y += offset_.y;
 
@@ -404,8 +397,7 @@ bool RenderTarget::clip(Rect & r) const
  * Clip against window and source bitmap, returns false if blitting is
  * unnecessary because image is not inside the target surface.
  */
-bool RenderTarget::to_surface_geometry(Rect* destination_rect, Rect* source_rect) const
-{
+bool RenderTarget::to_surface_geometry(Rect* destination_rect, Rect* source_rect) const {
 	assert(0 <= source_rect->x);
 	assert(0 <= source_rect->y);
 	destination_rect->x += offset_.x;
@@ -448,8 +440,8 @@ bool RenderTarget::to_surface_geometry(Rect* destination_rect, Rect* source_rect
 			return false;
 		}
 		// Adding 0.5 is a cheap way of turning integer truncation into a rounded value.
-		const int source_rect_pixel_change = 0.5 +
-		   -static_cast<double>(destination_rect->y) / destination_rect->h * source_rect->h;
+		const int source_rect_pixel_change =
+		   0.5 + -static_cast<double>(destination_rect->y) / destination_rect->h * source_rect->h;
 		source_rect->y += source_rect_pixel_change;
 		source_rect->h -= source_rect_pixel_change;
 		destination_rect->h += destination_rect->y;

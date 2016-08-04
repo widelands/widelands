@@ -64,8 +64,7 @@ private:
 
 // Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
 // on all errors. Also grows the server memory only when needed.
-template<typename T>
-class Buffer {
+template <typename T> class Buffer {
 public:
 	Buffer() {
 		glGenBuffers(1, &object_);
@@ -84,7 +83,6 @@ public:
 	void bind() const {
 		glBindBuffer(GL_ARRAY_BUFFER, object_);
 	}
-
 
 	// Copies 'elements' into the buffer, overwriting what was there before.
 	// Does not check if the buffer is already bound.

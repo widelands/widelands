@@ -39,15 +39,14 @@ MapView::MapView(
      dragging_(false) {
 }
 
-MapView::~MapView()
-{
+MapView::~MapView() {
 	// explicit destructor so that smart pointer destructors
 	// with forward-declared types are properly instantiated
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
-	const Widelands::Map & map = intbase().egbase().map();
+	const Widelands::Map& map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= viewpoint_;
@@ -55,8 +54,8 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
 	if (p.x < get_w() && p.y < get_h()) {
-		if      (p.x <= 0)
-			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
+		if (p.x <= 0)
+			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width(), c.y));
 		else if (p.y <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
 		else {
@@ -66,7 +65,6 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	}
 }
 
-
 /*
 ===============
 This is the guts!! this function draws the whole
@@ -74,9 +72,8 @@ map the user can see. we spend a lot of time
 in this function
 ===============
 */
-void MapView::draw(RenderTarget & dst)
-{
-	Widelands::EditorGameBase & egbase = intbase().egbase();
+void MapView::draw(RenderTarget& dst) {
+	Widelands::EditorGameBase& egbase = intbase().egbase();
 
 	if (upcast(Widelands::Game, game, &egbase)) {
 		// Bail out if the game isn't actually loaded.
@@ -92,8 +89,7 @@ void MapView::draw(RenderTarget & dst)
 	}
 }
 
-void MapView::set_changeview(const MapView::ChangeViewFn & fn)
-{
+void MapView::set_changeview(const MapView::ChangeViewFn& fn) {
 	changeview_ = fn;
 }
 
@@ -102,8 +98,7 @@ void MapView::set_changeview(const MapView::ChangeViewFn & fn)
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void MapView::set_viewpoint(Point vp, bool jump)
-{
+void MapView::set_viewpoint(Point vp, bool jump) {
 	if (vp == viewpoint_)
 		return;
 
@@ -114,7 +109,6 @@ void MapView::set_viewpoint(Point vp, bool jump)
 		changeview_(vp, jump);
 	changeview(viewpoint_.x, viewpoint_.y);
 }
-
 
 void MapView::stop_dragging() {
 	WLApplication::get()->set_mouse_lock(false);
@@ -128,11 +122,8 @@ void MapView::stop_dragging() {
  * Right-release: disable dragging
  * Left-press:    field action window
  */
-bool MapView::handle_mousepress
-	(uint8_t const btn, int32_t const x, int32_t const y)
-{
-	if (btn == SDL_BUTTON_LEFT)
-	{
+bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
+	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
 		track_sel(Point(x, y));
 
@@ -144,33 +135,30 @@ bool MapView::handle_mousepress
 	}
 	return true;
 }
-bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
-{
+bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_)
 		stop_dragging();
 	return true;
 }
-
 
 /*
 ===============
 Scroll the view according to mouse movement.
 ===============
 */
-bool MapView::handle_mousemove
-	(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
-{
+bool MapView::handle_mousemove(
+   uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
 			set_rel_viewpoint(Point(xdiff, ydiff), false);
-		else stop_dragging();
+		else
+			stop_dragging();
 	}
 
 	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 	return true;
 }
-
 
 /*
 ===============
@@ -182,7 +170,6 @@ Does not honour sel freeze.
 */
 void MapView::track_sel(Point m) {
 	m += viewpoint_;
-	intbase_.set_sel_pos
-		(MapviewPixelFunctions::calc_node_and_triangle
-		 	(intbase().egbase().map(), m.x, m.y));
+	intbase_.set_sel_pos(
+	   MapviewPixelFunctions::calc_node_and_triangle(intbase().egbase().map(), m.x, m.y));
 }

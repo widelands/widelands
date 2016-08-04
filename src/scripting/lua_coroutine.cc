@@ -45,9 +45,9 @@ uint32_t reference_coroutine(lua_State* L) {
 		lua_getglobal(L, kReferenceTableName);
 	}
 	// S: __references
-	lua_pushthread(L); // S: __references thread
+	lua_pushthread(L);  // S: __references thread
 	uint32_t idx = luaL_ref(L, -2);
-	lua_pop(L, 1); // S:
+	lua_pop(L, 1);  // S:
 	return idx;
 }
 
@@ -61,9 +61,8 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 
 }  // namespace
 
-LuaCoroutine::LuaCoroutine(lua_State * ms)
-	: lua_state_(ms), idx_(LUA_REFNIL), ninput_args_(0), nreturn_values_(0)
-{
+LuaCoroutine::LuaCoroutine(lua_State* ms)
+   : lua_state_(ms), idx_(LUA_REFNIL), ninput_args_(0), nreturn_values_(0) {
 	if (lua_state_) {
 		idx_ = reference_coroutine(lua_state_);
 	}
@@ -77,8 +76,7 @@ int LuaCoroutine::get_status() {
 	return lua_status(lua_state_);
 }
 
-int LuaCoroutine::resume()
-{
+int LuaCoroutine::resume() {
 	int rv = lua_resume(lua_state_, nullptr, ninput_args_);
 	ninput_args_ = 0;
 	nreturn_values_ = lua_gettop(lua_state_);
@@ -90,12 +88,12 @@ int LuaCoroutine::resume()
 	return rv;
 }
 
-void LuaCoroutine::push_arg(const Widelands::Player * plr) {
+void LuaCoroutine::push_arg(const Widelands::Player* plr) {
 	to_lua<LuaGame::LuaPlayer>(lua_state_, new LuaGame::LuaPlayer(plr->player_number()));
 	ninput_args_++;
 }
 
-void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
+void LuaCoroutine::push_arg(const Widelands::Coords& coords) {
 	to_lua<LuaMaps::LuaField>(lua_state_, new LuaMaps::LuaField(coords));
 	++nargs_;
 	++ninput_args_;

@@ -33,12 +33,12 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn & reset) : reset_(reset), mpf_cycle(0) {}
+Router::Router(const ResetCycleFn& reset) : reset_(reset), mpf_cycle(0) {
+}
 
-uint32_t Router::assign_cycle()
-{
+uint32_t Router::assign_cycle() {
 	++mpf_cycle;
-	if (!mpf_cycle) { // reset all cycle fields
+	if (!mpf_cycle) {  // reset all cycle fields
 		reset_();
 		++mpf_cycle;
 	}
@@ -67,18 +67,17 @@ uint32_t Router::assign_cycle()
  *
  * \return true if a route has been found, false otherwise
  */
-bool Router::find_route
-	(RoutingNode & start, RoutingNode & end,
-	 IRoute * const route,
-	 WareWorker const type,
-	 int32_t const cost_cutoff,
-	 ITransportCostCalculator & cost_calculator)
-{
+bool Router::find_route(RoutingNode& start,
+                        RoutingNode& end,
+                        IRoute* const route,
+                        WareWorker const type,
+                        int32_t const cost_cutoff,
+                        ITransportCostCalculator& cost_calculator) {
 	RouteAStar<AStarEstimator> astar(*this, type, AStarEstimator(cost_calculator, end));
 
 	astar.push(start);
 
-	while (RoutingNode * current = astar.step()) {
+	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
 			return false;
 
@@ -93,4 +92,4 @@ bool Router::find_route
 	return false;
 }
 
-} // namespace Widelands
+}  // namespace Widelands

@@ -35,21 +35,22 @@ namespace {
 // Calls 'method_to_call' with argument 'name'. This expects that this will
 // return a table with registered functions in it. If 'register_globally' is
 // true, this will also do name = <table> globally.
-void open_lua_library
-	(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
+void open_lua_library(lua_State* L,
+                      const std::string& name,
+                      lua_CFunction method_to_call,
+                      bool register_globally) {
 	lua_pushcfunction(L, method_to_call);  // S: function
-	lua_pushstring(L, name); // S: function name
-	lua_call(L, 1, 1); // S: module_table
+	lua_pushstring(L, name);               // S: function name
+	lua_call(L, 1, 1);                     // S: module_table
 
 	if (register_globally) {
-		lua_setglobal(L, name.c_str()); // S:
+		lua_setglobal(L, name.c_str());  // S:
 	} else {
-		lua_pop(L, 1); // S:
+		lua_pop(L, 1);  // S:
 	}
 }
 
 }  // namespace
-
 
 LuaInterface::LuaInterface() {
 	lua_state_ = luaL_newstate();
@@ -65,8 +66,7 @@ LuaInterface::LuaInterface() {
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are
 	// same, so use LuaInterface* on both sides.
-	lua_pushlightuserdata
-		(lua_state_, reinterpret_cast<void *>(dynamic_cast<LuaInterface *>(this)));
+	lua_pushlightuserdata(lua_state_, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own

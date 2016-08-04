@@ -24,33 +24,37 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 
-
 FullscreenMenuAbout::FullscreenMenuAbout()
-	:
-	FullscreenMenuBase(),
+   : FullscreenMenuBase(),
 
-// Values for alignment and size
-	butw_    (get_w() / 5),
-	buth_    (get_h() * 9 / 200),
-	hmargin_ (get_w() * 19 / 200),
-	tab_panel_width_(get_inner_w() - 2 * hmargin_),
-	tab_panel_y_(get_h() * 14 / 100),
+     // Values for alignment and size
+     butw_(get_w() / 5),
+     buth_(get_h() * 9 / 200),
+     hmargin_(get_w() * 19 / 200),
+     tab_panel_width_(get_inner_w() - 2 * hmargin_),
+     tab_panel_y_(get_h() * 14 / 100),
 
-	title_(this, get_w() / 2, buth_, _("About Widelands"), UI::Align::kCenter),
+     title_(this, get_w() / 2, buth_, _("About Widelands"), UI::Align::kCenter),
 
-	close_
-		(this, "close",
-		 get_w() * 2 / 4 - butw_ / 2,
-		 get_inner_h() - hmargin_,
-		 butw_, buth_,
-		 g_gr->images().get("images/ui_basic/but2.png"),
-		 _("Close"), std::string(), true, false),
+     close_(this,
+            "close",
+            get_w() * 2 / 4 - butw_ / 2,
+            get_inner_h() - hmargin_,
+            butw_,
+            buth_,
+            g_gr->images().get("images/ui_basic/but2.png"),
+            _("Close"),
+            std::string(),
+            true,
+            false),
 
-	tabs_(this, hmargin_, 0,
-			tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
-			g_gr->images().get("images/ui_basic/but1.png"),
-			UI::TabPanel::Type::kBorder)
-{
+     tabs_(this,
+           hmargin_,
+           0,
+           tab_panel_width_,
+           get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
+           g_gr->images().get("images/ui_basic/but1.png"),
+           UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
