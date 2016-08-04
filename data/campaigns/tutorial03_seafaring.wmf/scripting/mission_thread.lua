@@ -60,7 +60,7 @@ function expedition()
    while not _ship_ready_for_expedition() do sleep(1000) end
    o.done = true
 
-   local o2 = message_box_objective(plr, expedition3)
+   o = message_box_objective(plr, expedition3)
 
    while #plr:get_buildings("atlanteans_port") < 3 do sleep(200) end
    o.done = true
