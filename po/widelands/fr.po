@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-20 04:54+0000\n"
-"PO-Revision-Date: 2016-06-08 10:52+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2016-07-25 11:49+0000\n"
+"PO-Revision-Date: 2016-07-30 18:48+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -297,7 +297,7 @@ msgstr "Création d'une carte vide..."
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:139
-#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
+#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:46
 msgid "No Name"
 msgstr "Sans Nom"
 
@@ -325,12 +325,12 @@ msgstr "Informations sur le champ"
 
 #: ../../src/editor/tools/info_tool.cc:55
 msgid "Node:"
-msgstr "Nœud:"
+msgstr "Nœud :"
 
 #: ../../src/editor/tools/info_tool.cc:57
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr "Coordonnées: (%1$i, %2$i)"
+msgstr "Coordonnées : (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/info_tool.cc:65
@@ -383,7 +383,7 @@ msgstr "Limites:%s"
 #: ../../src/editor/tools/info_tool.cc:90
 #, c-format
 msgid "Owned by: Player %u"
-msgstr "Appartient à: Joueur %u"
+msgstr "Appartient à : Joueur %u"
 
 #: ../../src/editor/tools/info_tool.cc:93
 msgid "Owned by: —"
@@ -408,13 +408,13 @@ msgstr "Pas d'animaux"
 #: ../../src/editor/tools/info_tool.cc:104
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:91
 msgid "Terrain:"
-msgstr "Terrain:"
+msgstr "Terrain :"
 
 #: ../../src/editor/tools/info_tool.cc:110
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
-msgstr "Nom: %s"
+msgstr "Nom : %s"
 
 #. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable",
 #. "unreachable and unwalkable"
@@ -433,17 +433,17 @@ msgstr "Catégorie d'éditeur : %s"
 #: ../../src/editor/tools/info_tool.cc:123
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:94
 msgid "Resources:"
-msgstr "Ressources:"
+msgstr "Ressources :"
 
 #: ../../src/editor/tools/info_tool.cc:130
 #, c-format
 msgid "Resource name: %s"
-msgstr "Nom de la ressource: %s"
+msgstr "Nom de la ressource : %s"
 
 #: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Resource amount: %i"
-msgstr "Nombre de ressource: %i"
+msgstr "Nombre de ressource : %i"
 
 #: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
@@ -451,23 +451,23 @@ msgstr "Pas de ressources"
 
 #: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
-msgstr "Carte:"
+msgstr "Carte :"
 
 #: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
-msgstr "Nom: %s"
+msgstr "Nom : %s"
 
 #: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr "Taille: %1$ix%2$i"
+msgstr "Taille : %1$ix%2$i"
 
 #: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
-msgstr "Joueurs: %u"
+msgstr "Joueurs : %u"
 
 #: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
@@ -476,7 +476,7 @@ msgstr "Joueurs : -"
 #: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
-msgstr "Auteur: %s"
+msgstr "Auteur : %s"
 
 #: ../../src/editor/tools/info_tool.cc:154
 #, c-format
@@ -487,7 +487,7 @@ msgstr "Descr: %s"
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:185
 #, c-format
 msgid "Current: %s …"
-msgstr "Actuel: %s ..."
+msgstr "Actuel : %s ..."
 
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:188
@@ -499,7 +499,7 @@ msgstr "Cliquer pour sélectionner un objet. Utiliser la touche Ctrl pour sélec
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:171
 #, c-format
 msgid "Current: %s"
-msgstr "Actuel: %s ..."
+msgstr "Actuel : %s ..."
 
 #: ../../src/editor/ui_menus/help.cc:45
 #: ../../src/editor/ui_menus/player_menu.cc:293
@@ -507,33 +507,33 @@ msgstr "Actuel: %s ..."
 #: ../../src/wui/encyclopedia_window.cc:156
 #: ../../src/wui/tribal_encyclopedia.cc:51
 msgid "Error!"
-msgstr "Erreur!"
+msgstr "Erreur !"
 
 #: ../../src/editor/ui_menus/main_menu.cc:52
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:47
 msgid "New Map"
-msgstr "Nouvelle Carte"
+msgstr "Nouvelle carte"
 
 #: ../../src/editor/ui_menus/main_menu.cc:57
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:47
 msgid "New Random Map"
-msgstr "Nouvelle Carte Aléatoire"
+msgstr "Nouvelle carte aléatoire"
 
 #: ../../src/editor/ui_menus/main_menu.cc:62
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
-msgstr "Charger une Carte"
+msgstr "Charger une carte"
 
 #: ../../src/editor/ui_menus/main_menu.cc:67
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 msgid "Save Map"
-msgstr "Enregistrer la Carte"
+msgstr "Enregistrer la carte"
 
 #: ../../src/editor/ui_menus/main_menu.cc:72
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
-msgstr "Options de la Carte"
+msgstr "Options de la carte"
 
 #: ../../src/editor/ui_menus/main_menu.cc:77
 msgid "Exit Editor"
@@ -542,13 +542,13 @@ msgstr "Quitter l'éditeur"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:225
-#: ../../src/wui/mapdata.cc:147
+#: ../../src/wui/mapdata.cc:167
 msgid "My Maps"
 msgstr "Mes cartes"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
-#: ../../src/wui/mapdata.cc:144
+#: ../../src/wui/mapdata.cc:164
 msgid "Multiplayer Scenarios"
 msgstr "Scénarios multijoueurs"
 
@@ -601,7 +601,7 @@ msgstr "Afficher les noms de fichiers"
 #: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Map Name:"
-msgstr "Nom de la Carte:"
+msgstr "Nom de la carte :"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 msgid "Authors:"
@@ -612,7 +612,7 @@ msgstr "Auteurs :"
 #: ../../src/ui_fsmenu/campaign_select.cc:157
 #: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:168
 msgid "Description:"
-msgstr "Description:"
+msgstr "Description :"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:116
 msgid "Hint (optional):"
@@ -627,7 +627,7 @@ msgstr "Etiquettes : "
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:133
 #: ../../src/wui/suggested_teams_box.cc:96
 msgid "Suggested Teams:"
-msgstr "Équipes suggérées:"
+msgstr "Équipes suggérées :"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:142
 #: ../../src/ui_fsmenu/launch_mpg.cc:663
@@ -636,7 +636,7 @@ msgstr "Équipes suggérées:"
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u Joueur"
-msgstr[1] "%u Joueurs"
+msgstr[1] "%u joueurs"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 msgid "Main Options"
@@ -644,7 +644,7 @@ msgstr "Options principales"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:148
 msgid "Tags"
-msgstr "Etiquette"
+msgstr "Étiquette"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:150
 msgid "Teams"
@@ -691,7 +691,7 @@ msgstr "Désert"
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:78
 msgid "Wasteland"
-msgstr "Terrain en friche"
+msgstr "Terres en friche"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -745,11 +745,11 @@ msgstr "Mode insulaire"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:130
 msgid "Random Number:"
-msgstr "Nombre aléatoire:"
+msgstr "Nombre aléatoire :"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:135
 msgid "Map ID:"
-msgstr "ID de la carte:"
+msgstr "ID de la carte :"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Generate Map"
@@ -775,7 +775,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "La carte a été généré. Veuillez vérifier les positions de départs des joueurs pour vous assurer que vos porteurs ne se noieront pas, ne seront pas coincés sur une île ou au sommet d'une montagne. "
+msgstr "La carte a été générée. Veuillez vérifier les positions de départ des joueurs pour vous assurer que vos porteurs ne se noieront pas, ne seront pas coincés sur une île ou au sommet d'une montagne. "
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
@@ -785,12 +785,12 @@ msgstr "Créer un répertoire"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
 #: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
 msgid "Filename:"
-msgstr "Nom de fichier:"
+msgstr "Nom de fichier :"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:156
 msgid "unnamed"
-msgstr "SansNom"
+msgstr "sans nom"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:248
 #: ../../src/wui/game_main_menu_save_game.cc:260
@@ -802,7 +802,7 @@ msgstr "Ce fichier '%s' existe déjà. L'écraser ?"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:264
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 msgid "Error Saving Map!"
-msgstr "Erreur d'enregistrement de la carte!"
+msgstr "Erreur d'enregistrement de la carte !"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:261
 #, c-format
@@ -817,7 +817,7 @@ msgid ""
 "Saved map file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr "Erreur en sauvant la carte!\nLe fichier de carte sauvé peut être corrompu!\n\nRaison donnée:\n"
+msgstr "Erreur en sauvant la carte !\nLe fichier de carte sauvé peut être corrompu !\n\nRaison donnée :\n"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:35
 msgid "Enter Directory Name: "
@@ -825,7 +825,7 @@ msgstr "Entrez le nom du répertoire : "
 
 #: ../../src/editor/ui_menus/player_menu.cc:72
 msgid "Player Options"
-msgstr "Options du Joueur"
+msgstr "Options du joueur"
 
 #: ../../src/editor/ui_menus/player_menu.cc:78
 msgid "Add player"
@@ -837,7 +837,7 @@ msgstr "Retirer le dernier joueur"
 
 #: ../../src/editor/ui_menus/player_menu.cc:99
 msgid "Number of Players"
-msgstr "Nombre de Joueurs"
+msgstr "Nombre de joueurs"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
@@ -854,22 +854,22 @@ msgstr "Joueur %u"
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
-msgstr "Ne peut enlever le joueur. Il est référencé quelque part. Enlevez les constructions et les animaux qui dépendent de ce jouer et ré-essayez."
+msgstr "Impossible d'enlever le joueur. Il est référencé quelque part. Enlevez les constructions et les animaux qui dépendent de ce joueur et réessayez."
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
-msgstr "Options Outils de Hauteur"
+msgstr "Options outils de hauteur"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
-msgstr "Augmenter/Diminuer la valeur :"
+msgstr "Augmenter / Diminuer la valeur :"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
-msgstr "Définir la Valeur:"
+msgstr "Définir la valeur :"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
@@ -882,7 +882,7 @@ msgstr "Cliquez sur la carte pour augmenter, Shift+Click sur la carte pour dimin
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Ctrl+Click sur la carte pour définir l'élévation hauteur du terrain"
+msgstr "Ctrl+Click sur la carte pour définir la hauteur du terrain"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/tool_menu.cc:71
@@ -894,12 +894,12 @@ msgstr "Ressources"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Cliquez sur la carte pour augmenter, Shift+Click sur la carte pour diminuer la quantité de ressource sélectionné"
+msgstr "Cliquez sur la carte pour augmenter, Shift+Click sur la carte pour diminuer la quantité de la ressource sélectionnée"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr "Ctrl+Click sur la carte pour définir la quantité de ressource sélectionné"
+msgstr "Ctrl+Click sur la carte pour définir la quantité de la ressource sélectionné"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
@@ -907,7 +907,7 @@ msgstr "Changer la hauteur"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Random height"
-msgstr "Elévation aléatoire"
+msgstr "Élévation aléatoire"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -939,11 +939,11 @@ msgstr "Options d'élévation aléatoire"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
-msgstr "Elévation minimum:"
+msgstr "Elévation minimum :"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
-msgstr "Elévation maximum:"
+msgstr "Elévation maximum :"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
@@ -951,33 +951,33 @@ msgstr "Elévation maximum:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "CLiquez sur la carte pour définir l'élévation du terrain de manière aléatoire dans les limites spécifiés"
+msgstr "Cliquez sur la carte pour définir l'élévation du terrain de manière aléatoire dans les limites spécifiées"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
-msgstr "Elévation aléatoire"
+msgstr "Élévation aléatoire"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
-msgstr "Elévation fixe"
+msgstr "Élévation fixe"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
-msgstr "%1%: %2%"
+msgstr "%1% : %2%"
 
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
-msgstr "Sélection du Terrain"
+msgstr "Sélection du terrain"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:81
 #, c-format
 msgid "Current Size: %u"
-msgstr "Taille Actuelle: %u"
+msgstr "Taille Actuelle : %u"
 
 #: ../../src/logic/editor_game_base.cc:252
 msgid "Loading graphics"
-msgstr "Chargement des graphiques"
+msgstr "Chargement des graphismes"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:131
@@ -1008,7 +1008,7 @@ msgstr "Création de l'infrastructure des joueurs"
 
 #: ../../src/logic/game.cc:486 ../../src/logic/player.cc:245
 msgid "Missing starting position"
-msgstr "Manque position de départ"
+msgstr "Position de départ manquante"
 
 #: ../../src/logic/game.cc:488 ../../src/logic/player.cc:247
 #, c-format
@@ -1413,7 +1413,7 @@ msgstr "Un géologue a trouvé des ressources."
 #: ../../src/logic/map_objects/tribes/worker.cc:1836
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr "Vos %s ne peuvent trouver de chemin pour rentrer et vont probablement mourir."
+msgstr "Vos %s ne peuvent trouver de chemin pour rentrer chez eux et vont probablement mourir."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1844
 #: ../../src/wui/productionsitewindow.cc:81
@@ -1468,7 +1468,7 @@ msgstr "La fin du replay a été atteinte et le jeu a été mis en pause. Vous p
 
 #: ../../src/logic/save_handler.cc:111
 msgid "Saving failed!"
-msgstr "La sauvegarde a échoué!"
+msgstr "La sauvegarde a échoué !"
 
 #: ../../src/logic/save_handler.cc:130
 msgid "Game saved"
@@ -1480,7 +1480,7 @@ msgstr "Sauvegarde du jeu..."
 
 #: ../../src/map_io/s2map.cc:405
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Carte Bluebyte Settlers II. Pas de commentaire défini!"
+msgstr "Carte Bluebyte Settlers II. Pas de commentaire défini !"
 
 #: ../../src/network/internet_gaming.cc:114
 #: ../../src/ui_fsmenu/internet_lobby.cc:423
@@ -1504,15 +1504,15 @@ msgstr "Widelands n'a pas pu établir de connexion à l'adresse donnée.\nSoit i
 
 #: ../../src/network/internet_gaming.cc:169
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr "Pour héberger une partie, veuillez jeter un œil aux notes à:"
+msgstr "Pour héberger une partie, veuillez jeter un œil aux notes à :"
 
 #: ../../src/network/internet_gaming.cc:309
 msgid "Something went wrong: "
-msgstr "Quelque chose s'est mal passé: "
+msgstr "Quelque chose s'est mal passé : "
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "Successfully reconnected to the metaserver!"
-msgstr "Reconnecté au méta-serveur avec succès!"
+msgstr "Reconnecté au méta-serveur avec succès !"
 
 #: ../../src/network/internet_gaming.cc:406
 msgid "Mixed up"
@@ -3762,17 +3762,17 @@ msgstr "Équipes de 3"
 msgid "Teams of 4"
 msgstr "Équipes de 4"
 
-#: ../../src/wui/mapdata.cc:37
+#: ../../src/wui/mapdata.cc:47
 msgid "No Author"
 msgstr "Pas d'auteur"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:130
+#: ../../src/wui/mapdata.cc:150
 msgid "parent"
 msgstr "parent"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:136
+#: ../../src/wui/mapdata.cc:156
 msgid "empty"
 msgstr "vide"
 
