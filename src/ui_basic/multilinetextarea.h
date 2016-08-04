@@ -38,27 +38,38 @@ struct Scrollbar;
  */
 struct MultilineTextarea : public Panel {
 	enum class ScrollMode {
-		kNoScrolling,        // Expand the height instead of showing a scroll bar
-		kScrollNormal,       // (default) only explicit scrolling
-		kScrollNormalForced, // forced scrolling
-		kScrollLog,          // follow the bottom of the text
-		kScrollLogForced     // follow the bottom of the text, and forced
+		kNoScrolling,         // Expand the height instead of showing a scroll bar
+		kScrollNormal,        // (default) only explicit scrolling
+		kScrollNormalForced,  // forced scrolling
+		kScrollLog,           // follow the bottom of the text
+		kScrollLogForced      // follow the bottom of the text, and forced
 	};
 
-	MultilineTextarea
-		(Panel * const parent,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const std::string& text          = std::string(),
-		 const Align                      = UI::Align::kLeft,
-		 MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
+	MultilineTextarea(
+	   Panel* const parent,
+	   const int32_t x,
+	   const int32_t y,
+	   const uint32_t w,
+	   const uint32_t h,
+	   const std::string& text = std::string(),
+	   const Align = UI::Align::kLeft,
+	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
-	const std::string& get_text() const {return text_;}
+	const std::string& get_text() const {
+		return text_;
+	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();}
+	uint32_t get_eff_w() const {
+		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
+	}
 
-	void set_color(RGBColor fg) {color_ = fg;}
-	void force_new_renderer() {force_new_renderer_ = true;}
+	void set_color(RGBColor fg) {
+		color_ = fg;
+	}
+	void force_new_renderer() {
+		force_new_renderer_ = true;
+	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -87,10 +98,9 @@ private:
 	bool use_old_renderer_;
 	RichText rt;
 
-	Scrollbar   scrollbar_;
-	ScrollMode  scrollmode_;
+	Scrollbar scrollbar_;
+	ScrollMode scrollmode_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

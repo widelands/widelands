@@ -28,10 +28,9 @@ class EditorInteractive;
 struct EditorNoiseHeightTool;
 
 struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
-	EditorToolNoiseHeightOptionsMenu
-		(EditorInteractive         &,
-		 EditorNoiseHeightTool   &,
-		 UI::UniqueWindow::Registry &);
+	EditorToolNoiseHeightOptionsMenu(EditorInteractive&,
+	                                 EditorNoiseHeightTool&,
+	                                 UI::UniqueWindow::Registry&);
 
 private:
 	void update_interval(int32_t lower, int32_t upper);

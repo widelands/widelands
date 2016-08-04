@@ -30,10 +30,9 @@
 
 namespace Widelands {
 
-namespace  {
+namespace {
 
-Coords
-parse_coords(const std::string& name, const char* const coords, const Extent& extent) {
+Coords parse_coords(const std::string& name, const char* const coords, const Extent& extent) {
 	char* endp = const_cast<char*>(coords);
 	const long int x = strtol(endp, &endp, 0);
 	const long int y = strtol(endp, &endp, 0);
@@ -43,11 +42,8 @@ parse_coords(const std::string& name, const char* const coords, const Extent& ex
 	//  the editor can load incomplete maps. For games the starting positions
 	//  will be checked in player initalisation anyway.
 	if (((x < 0 || extent.w <= x || y < 0 || extent.h <= y) && (x != -1 || y != -1)) || *endp)
-		throw wexception("%s: \"%s\" is not a Coords on a map with size (%u, %u)",
-		                 name.c_str(),
-		                 coords,
-		                 extent.w,
-		                 extent.h);
+		throw wexception("%s: \"%s\" is not a Coords on a map with size (%u, %u)", name.c_str(),
+		                 coords, extent.w, extent.h);
 	return Coords(x, y);
 }
 
@@ -69,8 +65,7 @@ get_coords(const std::string& name, const Extent& extent, const Coords& def, Sec
 	return parse_coords(name, v, extent);
 }
 
-Coords
-get_safe_coords(const std::string& name, const Extent& extent, Section* section) {
+Coords get_safe_coords(const std::string& name, const Extent& extent, Section* section) {
 	return parse_coords(name, section->get_safe_string(name), extent);
 }
 

@@ -58,44 +58,46 @@ struct SpinBoxImpl {
 	std::map<int32_t, std::string> value_replacements;
 
 	/// The UI parts
-	Textarea * text;
-	Button * button_plus;
-	Button * button_minus;
-	Button * button_ten_plus;
-	Button * button_ten_minus;
+	Textarea* text;
+	Button* button_plus;
+	Button* button_minus;
+	Button* button_ten_plus;
+	Button* button_ten_minus;
 };
 
 /**
  * SpinBox constructor:
  *
  * initializes a new spinbox with either two (big = false) or four (big = true)
- * buttons. w must be >= the space taken up by the buttons, else the spinbox would become useless and so
+ * buttons. w must be >= the space taken up by the buttons, else the spinbox would become useless
+ * and so
  * throws an exception.
  * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
-SpinBox::SpinBox
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t unit_w,
-	 int32_t const startval, int32_t const minval, int32_t const maxval,
-	 const std::string& label_text,
-	 const SpinBox::Units& unit,
-	 const Image* background,
-	 SpinBox::Type type,
-	 int32_t step_size, int32_t big_step_size)
-	:
-	Panel(parent, x, y, std::max(w, unit_w), 0),
-	type_(type),
-	sbi_(new SpinBoxImpl)
-{
+SpinBox::SpinBox(Panel* const parent,
+                 const int32_t x,
+                 const int32_t y,
+                 const uint32_t w,
+                 const uint32_t unit_w,
+                 int32_t const startval,
+                 int32_t const minval,
+                 int32_t const maxval,
+                 const std::string& label_text,
+                 const SpinBox::Units& unit,
+                 const Image* background,
+                 SpinBox::Type type,
+                 int32_t step_size,
+                 int32_t big_step_size)
+   : Panel(parent, x, y, std::max(w, unit_w), 0), type_(type), sbi_(new SpinBoxImpl) {
 	if (type_ == SpinBox::Type::kValueList) {
-		sbi_->min   = 0;
-		sbi_->max   = 0;
+		sbi_->min = 0;
+		sbi_->max = 0;
 	} else {
-		sbi_->min   = minval;
-		sbi_->max   = maxval;
+		sbi_->min = minval;
+		sbi_->max = maxval;
 	}
 	sbi_->value = startval;
-	sbi_->unit  = unit;
+	sbi_->unit = unit;
 	sbi_->background = background;
 
 	bool is_big = type_ == SpinBox::Type::kBig;
@@ -105,84 +107,64 @@ SpinBox::SpinBox
 	uint32_t no_padding = (is_big ? 6 : 4);
 	// Give some height margin = 2 to keep the label from generating a scrollbar.
 	uint32_t texth =
-			UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2;
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2;
 	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
 	if (!label_text.empty() && (w + padding) <= unit_w - 40) {
 		throw wexception(
-					"SpinBox: Overall width %d must be bigger than unit width %d + %d * %d + 40 for padding",
-					w, unit_w, no_padding, padding);
+		   "SpinBox: Overall width %d must be bigger than unit width %d + %d * %d + 40 for padding",
+		   w, unit_w, no_padding, padding);
 	}
 
 	if (unit_w < (is_big ? 7 * buttonh : 3 * buttonh)) {
 		log("Not enough space to draw spinbox \"%s\".\n"
-			 "Width %d is smaller than required width %d."
-			 "Please report as a bug.\n",
-			 label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
+		    "Width %d is smaller than required width %d."
+		    "Please report as a bug.\n",
+		    label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
 	}
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
-	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0,
-																				w - unit_w - no_padding * padding, texth,
-																				label_text,
-																				UI::Align::kLeft,
-																				UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	UI::MultilineTextarea* label =
+	   new UI::MultilineTextarea(box_, 0, 0, w - unit_w - no_padding * padding, texth, label_text,
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(label, UI::Align::kHCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
 
 	sbi_->button_minus =
-		new Button
-			(box_, "-",
-			 0, 0, buttonh, buttonh,
-			 sbi_->background,
-			 g_gr->images().get(is_big ?
-										  "images/ui_basic/scrollbar_left.png" :
-										  "images/ui_basic/scrollbar_down.png"),
-			 _("Decrease the value"));
+	   new Button(box_, "-", 0, 0, buttonh, buttonh, sbi_->background,
+	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" :
+	                                          "images/ui_basic/scrollbar_down.png"),
+	              _("Decrease the value"));
 	sbi_->button_plus =
-		new Button
-			(box_, "+",
-			 0, 0, buttonh, buttonh,
-			 sbi_->background,
-			 g_gr->images().get(is_big ?
-										  "images/ui_basic/scrollbar_right.png" :
-										  "images/ui_basic/scrollbar_up.png"),
-			 _("Increase the value"));
+	   new Button(box_, "+", 0, 0, buttonh, buttonh, sbi_->background,
+	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" :
+	                                          "images/ui_basic/scrollbar_up.png"),
+	              _("Increase the value"));
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-			new Button
-				(box_, "--",
-				 0, 0, 2 * buttonh, buttonh,
-				 sbi_->background,
-				 g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
-				 _("Decrease the value by 10"));
+		   new Button(box_, "--", 0, 0, 2 * buttonh, buttonh, sbi_->background,
+		              g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
+		              _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
-			new Button
-				(box_, "++",
-				 0, 0, 2 * buttonh, buttonh,
-				 sbi_->background,
-				 g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
-				 _("Increase the value by 10"));
+		   new Button(box_, "++", 0, 0, 2 * buttonh, buttonh, sbi_->background,
+		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
+		              _("Increase the value by 10"));
 
-		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value,
-																				boost::ref(*this),
-																				big_step_size));
-		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
-																				 boost::ref(*this),
-																				 -1 * big_step_size));
+		sbi_->button_ten_plus->sigclicked.connect(
+		   boost::bind(&SpinBox::change_value, boost::ref(*this), big_step_size));
+		sbi_->button_ten_minus->sigclicked.connect(
+		   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * big_step_size));
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		sbi_->text->set_fixed_width(unit_w
-											 - 2 * sbi_->button_ten_plus->get_w()
-											 - 2 * sbi_->button_minus->get_w()
-											 - 2 * padding);
+		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_ten_plus->get_w() -
+		                            2 * sbi_->button_minus->get_w() - 2 * padding);
 
 		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
 		box_->add(sbi_->button_minus, UI::Align::kTop);
@@ -197,10 +179,10 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Align::kHCenter);
 	}
 
-	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
-	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
-																		boost::ref(*this),
-																		-1 * step_size));
+	sbi_->button_plus->sigclicked.connect(
+	   boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
+	sbi_->button_minus->sigclicked.connect(
+	   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * step_size));
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -219,12 +201,10 @@ SpinBox::~SpinBox() {
 	sbi_ = nullptr;
 }
 
-
 /**
  * private function - takes care about all updates in the UI elements
  */
-void SpinBox::update()
-{
+void SpinBox::update() {
 	if (sbi_->value_replacements.count(sbi_->value) == 1) {
 		sbi_->text->set_text(sbi_->value_replacements.at(sbi_->value));
 	} else {
@@ -232,7 +212,8 @@ void SpinBox::update()
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
 			} else {
-				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
+				sbi_->text->set_text(
+				   "undefined");  // The user should never see this, so we're not localizing
 			}
 		} else {
 			sbi_->text->set_text(unit_text(sbi_->value));
@@ -240,29 +221,25 @@ void SpinBox::update()
 	}
 
 	sbi_->button_minus->set_enabled(sbi_->min < sbi_->value);
-	sbi_->button_plus ->set_enabled(sbi_->value < sbi_->max);
+	sbi_->button_plus->set_enabled(sbi_->value < sbi_->max);
 	if (type_ == SpinBox::Type::kBig) {
 		sbi_->button_ten_minus->set_enabled(sbi_->min < sbi_->value);
-		sbi_->button_ten_plus ->set_enabled(sbi_->value < sbi_->max);
+		sbi_->button_ten_plus->set_enabled(sbi_->value < sbi_->max);
 	}
 }
-
 
 /**
  * private function called by spinbox buttons to in-/decrease the value
  */
-void SpinBox::change_value(int32_t const value)
-{
+void SpinBox::change_value(int32_t const value) {
 	set_value(value + sbi_->value);
 	changed();
 }
 
-
 /**
  * manually sets the used value to a given value
  */
-void SpinBox::set_value(int32_t const value)
-{
+void SpinBox::set_value(int32_t const value) {
 	sbi_->value = value;
 	if (sbi_->value > sbi_->max)
 		sbi_->value = sbi_->max;
@@ -278,12 +255,10 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 	update();
 }
 
-
 /**
  * sets the interval the value may lay in and fixes the value, if outside.
  */
-void SpinBox::set_interval(int32_t const min, int32_t const max)
-{
+void SpinBox::set_interval(int32_t const min, int32_t const max) {
 	sbi_->max = max;
 	sbi_->min = min;
 	if (sbi_->value > max)
@@ -293,12 +268,10 @@ void SpinBox::set_interval(int32_t const min, int32_t const max)
 	update();
 }
 
-
 /**
  * \returns the value
  */
-int32_t SpinBox::get_value() const
-{
+int32_t SpinBox::get_value() const {
 	if (type_ == SpinBox::Type::kValueList) {
 		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 			return sbi_->values.at(sbi_->value);
@@ -310,17 +283,14 @@ int32_t SpinBox::get_value() const
 	}
 }
 
-
 /**
  * Adds a replacement text for a specific value
  * overwrites an old replacement if one exists.
  */
-void SpinBox::add_replacement(int32_t value, const std::string& text)
-{
+void SpinBox::add_replacement(int32_t value, const std::string& text) {
 	sbi_->value_replacements[value] = text;
 	update();
 }
-
 
 const std::string SpinBox::unit_text(int32_t value) const {
 	switch (sbi_->unit) {
@@ -338,4 +308,4 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	}
 }
 
-} // namespace UI
+}  // namespace UI

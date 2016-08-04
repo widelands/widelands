@@ -23,15 +23,14 @@
 
 #include "base/wexception.h"
 
-StreamWrite::~StreamWrite() {}
+StreamWrite::~StreamWrite() {
+}
 
-void StreamWrite::flush()
-{
+void StreamWrite::flush() {
 	// no-op as default implementation
 }
 
-void StreamWrite::print_f(char const * const fmt, ...)
-{
+void StreamWrite::print_f(char const* const fmt, ...) {
 	//  Try to do formatting on the stack first, but fallback to heap
 	//  allocations to accommodate strings of arbitrary length.
 	char buffer[2048];
@@ -45,13 +44,13 @@ void StreamWrite::print_f(char const * const fmt, ...)
 		data(buffer, i);
 	} else {
 		uint32_t size = sizeof(buffer);
-		char * heapbuf = nullptr;
+		char* heapbuf = nullptr;
 
 		do {
 			if (i < 0)
-				size = 2 * size; //  old vsnprintf
+				size = 2 * size;  //  old vsnprintf
 			else
-				size = i + 1; //  C99-compatible vsnprintf
+				size = i + 1;  //  C99-compatible vsnprintf
 
 			delete[] heapbuf;
 			heapbuf = new char[size];

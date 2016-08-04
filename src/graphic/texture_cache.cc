@@ -30,8 +30,9 @@
 // http://timday.bitbucket.org/lru.html, but our use case here is a little
 // different.
 
-TextureCache::TextureCache(uint32_t max_size_in_bytes) :
-	max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {}
+TextureCache::TextureCache(uint32_t max_size_in_bytes)
+   : max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {
+}
 
 TextureCache::~TextureCache() {
 	flush();

@@ -42,7 +42,7 @@ using Widelands::GameSaver;
 /**
 * Check if autosave is not needed.
  */
-void SaveHandler::think(Widelands::Game & game) {
+void SaveHandler::think(Widelands::Game& game) {
 	uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
 	std::string filename = autosave_filename_;
@@ -67,19 +67,19 @@ void SaveHandler::think(Widelands::Game & game) {
 		} else {
 			// Autosave ...
 			// Roll savefiles
-			int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
+			int32_t number_of_rolls =
+			   g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
 			log("Autosave: Rolling savefiles (count): %d\n", number_of_rolls + 1);
-			std::string filename_previous =
-				create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
+			std::string filename_previous = create_file_name(
+			   get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
 			if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
 				g_fs->fs_unlink(filename_previous);
 				log("Autosave: Deleted %s\n", filename_previous.c_str());
 			}
 			number_of_rolls--;
 			while (number_of_rolls >= 0) {
-				const std::string filename_next =
-					create_file_name(get_base_dir(),
-						(boost::format("%s_%02d") % filename % number_of_rolls).str());
+				const std::string filename_next = create_file_name(
+				   get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
 				if (g_fs->file_exists(filename_next)) {
 					g_fs->fs_rename(filename_next, filename_previous);
 					log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
@@ -98,7 +98,7 @@ void SaveHandler::think(Widelands::Game & game) {
 		// always overwrite a file
 		if (g_fs->file_exists(complete_filename)) {
 			filename += "2";
-			backup_filename = create_file_name (get_base_dir(), filename);
+			backup_filename = create_file_name(get_base_dir(), filename);
 			if (g_fs->file_exists(backup_filename)) {
 				g_fs->fs_unlink(backup_filename);
 			}
@@ -129,14 +129,14 @@ void SaveHandler::think(Widelands::Game & game) {
 		log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 		game.get_ibase()->log_message(_("Game saved"));
 		last_saved_realtime_ = realtime;
-		saving_next_tick_ =  false;
+		saving_next_tick_ = false;
 
 	} else {
 		// Perhaps save is due now?
 		const int32_t autosave_interval_in_seconds =
-			g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+		   g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 		if (autosave_interval_in_seconds <= 0) {
-			return; // no autosave requested
+			return;  // no autosave requested
 		}
 
 		const int32_t elapsed = (realtime - last_saved_realtime_) / 1000;
@@ -150,9 +150,8 @@ void SaveHandler::think(Widelands::Game & game) {
 			last_saved_realtime_ = last_saved_realtime_ + 30000;
 			return;
 		}
-		log("Autosave: %d s interval elapsed, current gametime: %s, saving...\n",
-			elapsed,
-			gametimestring(game.get_gametime(), true).c_str());
+		log("Autosave: %d s interval elapsed, current gametime: %s, saving...\n", elapsed,
+		    gametimestring(game.get_gametime(), true).c_str());
 
 		saving_next_tick_ = true;
 		game.get_ibase()->log_message(_("Saving game…"));
@@ -173,8 +172,8 @@ void SaveHandler::initialize(uint32_t realtime) {
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name(const std::string& dir, const std::string& filename) const
-{
+std::string SaveHandler::create_file_name(const std::string& dir,
+                                          const std::string& filename) const {
 	// Append directory name.
 	std::string complete_filename = dir + g_fs->file_separator() + filename;
 	// Trim it for preceding/trailing whitespaces in user input
@@ -193,11 +192,9 @@ std::string SaveHandler::create_file_name(const std::string& dir, const std::str
  *
  * returns true if saved
  */
-bool SaveHandler::save_game
-	(Widelands::Game   &       game,
-	 const std::string &       complete_filename,
-	 std::string       * const error)
-{
+bool SaveHandler::save_game(Widelands::Game& game,
+                            const std::string& complete_filename,
+                            std::string* const error) {
 	ScopedTimer save_timer("SaveHandler::save_game() took %ums");
 
 	bool const binary = !g_options.pull_section("global").get_bool("nozip", false);
@@ -216,7 +213,7 @@ bool SaveHandler::save_game
 	GameSaver gs(*fs, game);
 	try {
 		gs.save();
-	} catch (const std::exception & e) {
+	} catch (const std::exception& e) {
 		if (error)
 			*error = e.what();
 		result = false;

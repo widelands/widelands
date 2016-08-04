@@ -24,8 +24,8 @@
 #include <memory>
 #include <string>
 
-#include "graphic/align.h"
 #include "base/point.h"
+#include "graphic/align.h"
 
 class RenderTarget;
 
@@ -40,26 +40,26 @@ struct FontHandler {
 	FontHandler();
 	~FontHandler();
 
-	void draw_text
-		(RenderTarget &,
-		 const TextStyle &,
-		 Point dstpoint,
-		 const std::string & text,
-		 Align align = UI::Align::kCenterLeft,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
-	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
+	void draw_text(RenderTarget&,
+	               const TextStyle&,
+	               Point dstpoint,
+	               const std::string& text,
+	               Align align = UI::Align::kCenterLeft,
+	               uint32_t caret = std::numeric_limits<uint32_t>::max());
+	uint32_t draw_text_raw(RenderTarget&, const TextStyle&, Point dstpoint, const std::string& text);
 
-	void get_size
-		(const TextStyle &,
-		 const std::string & text,
-		 uint32_t & w, uint32_t & h,
-		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	void get_size
-		(const std::string & fontname, int32_t size,
-		 const std::string & text,
-		 uint32_t & w, uint32_t & h,
-		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	uint32_t get_fontheight(const std::string & name, int32_t size);
+	void get_size(const TextStyle&,
+	              const std::string& text,
+	              uint32_t& w,
+	              uint32_t& h,
+	              uint32_t wrap = std::numeric_limits<uint32_t>::max());
+	void get_size(const std::string& fontname,
+	              int32_t size,
+	              const std::string& text,
+	              uint32_t& w,
+	              uint32_t& h,
+	              uint32_t wrap = std::numeric_limits<uint32_t>::max());
+	uint32_t get_fontheight(const std::string& name, int32_t size);
 
 	// Delete the whole cache.
 	void flush();
@@ -69,8 +69,7 @@ private:
 	std::unique_ptr<Data> d;
 };
 
-extern FontHandler * g_fh;
-
+extern FontHandler* g_fh;
 }
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER_H

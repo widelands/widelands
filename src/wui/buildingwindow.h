@@ -39,26 +39,31 @@ struct BuildingWindow : public UI::Window {
 	friend struct TrainingSiteWindow;
 	friend struct MilitarySiteWindow;
 	enum {
-		Width = 4 * 34 //  4 normally sized buttons
+		Width = 4 * 34  //  4 normally sized buttons
 	};
 
-	BuildingWindow
-		(InteractiveGameBase & parent, Widelands::Building &, UI::Window * & registry);
+	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&, UI::Window*& registry);
 
 	virtual ~BuildingWindow();
 
-	Widelands::Building & building() {return building_;}
+	Widelands::Building& building() {
+		return building_;
+	}
 
-	InteractiveGameBase & igbase() const {
+	InteractiveGameBase& igbase() const {
 		return dynamic_cast<InteractiveGameBase&>(*get_parent());
 	}
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 	void think() override;
-	void set_avoid_fastclick(bool afc) {avoid_fastclick_ = afc;}
+	void set_avoid_fastclick(bool afc) {
+		avoid_fastclick_ = afc;
+	}
 
 protected:
-	UI::TabPanel * get_tabs() {return tabs_;}
+	UI::TabPanel* get_tabs() {
+		return tabs_;
+	}
 
 	void act_bulldoze();
 	void act_dismantle();
@@ -72,20 +77,20 @@ protected:
 	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
-	void create_ware_queue_panel
-		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *, bool = false);
+	void
+	create_ware_queue_panel(UI::Box*, Widelands::Building&, Widelands::WaresQueue*, bool = false);
 
-	virtual void create_capsbuttons(UI::Box * buttons);
+	virtual void create_capsbuttons(UI::Box* buttons);
 
-	UI::Window * & registry_;
+	UI::Window*& registry_;
 
 private:
 	Widelands::Building& building_;
 
-	UI::TabPanel * tabs_;
+	UI::TabPanel* tabs_;
 
-	UI::Box * capsbuttons_; ///< \ref UI::Box that contains capabilities buttons
-	UI::Button * toggle_workarea_;
+	UI::Box* capsbuttons_;  ///< \ref UI::Box that contains capabilities buttons
+	UI::Button* toggle_workarea_;
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t capscache_;
@@ -98,9 +103,9 @@ private:
 	// For ports only.
 	void update_expedition_button(bool expedition_was_canceled);
 
-	UI::Button * expeditionbtn_;
+	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
-		expedition_canceled_subscriber_;
+	   expedition_canceled_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

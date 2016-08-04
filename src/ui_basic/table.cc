@@ -44,36 +44,31 @@ namespace UI {
  *       w       dimensions, in pixels, of the Table
  *       h
 */
-Table<void *>::Table
-	(Panel * const parent,
-	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 const bool descending)
-:
-	Panel             (parent, x, y, w, h),
-	total_width_     (0),
-	headerheight_    (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
-							->height() + 4),
-	lineheight_      (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
-							->height()),
-	scrollbar_       (nullptr),
-	scrollpos_       (0),
-	selection_       (no_selection_index()),
-	last_click_time_ (-10000),
-	last_selection_  (no_selection_index()),
-	sort_column_     (0),
-	sort_descending_ (descending)
-{
+Table<void*>::Table(
+   Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
+   : Panel(parent, x, y, w, h),
+     total_width_(0),
+     headerheight_(
+        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
+        4),
+     lineheight_(
+        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
+     scrollbar_(nullptr),
+     scrollpos_(0),
+     selection_(no_selection_index()),
+     last_click_time_(-10000),
+     last_selection_(no_selection_index()),
+     sort_column_(0),
+     sort_descending_(descending) {
 	set_thinks(false);
 	set_can_focus(true);
 }
 
-
 /**
  * Free allocated resources
 */
-Table<void *>::~Table()
-{
-	for (const EntryRecord * entry : entry_records_) {
+Table<void*>::~Table() {
+	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
 	}
 	for (Column& column : columns_) {
@@ -82,13 +77,11 @@ Table<void *>::~Table()
 }
 
 /// Add a new column to this table.
-void Table<void *>::add_column
-	(uint32_t            const width,
-	 const std::string &       title,
-	 const std::string &       tooltip_string,
-	 Align               const alignment,
-	 bool                const is_checkbox_column)
-{
+void Table<void*>::add_column(uint32_t const width,
+                              const std::string& title,
+                              const std::string& tooltip_string,
+                              Align const alignment,
+                              bool const is_checkbox_column) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -104,37 +97,29 @@ void Table<void *>::add_column
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn =
-			new Button
-				(this, title,
-				 complete_width, 0, width, headerheight_,
-				 g_gr->images().get("images/ui_basic/but3.png"),
-				 title, tooltip_string, true, false);
-		c.btn->sigclicked.connect
-			(boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_,
+		                   g_gr->images().get("images/ui_basic/but3.png"), title, tooltip_string,
+		                   true, false);
+		c.btn->sigclicked.connect(
+		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
 		c.alignment = alignment;
 		c.is_checkbox_column = is_checkbox_column;
 
 		if (is_checkbox_column) {
-			c.compare = boost::bind
-				(&Table<void *>::default_compare_checkbox,
-				 this, columns_.size(), _1, _2);
+			c.compare =
+			   boost::bind(&Table<void*>::default_compare_checkbox, this, columns_.size(), _1, _2);
 		} else {
-			c.compare = boost::bind
-				(&Table<void *>::default_compare_string,
-				 this, columns_.size(), _1, _2);
+			c.compare =
+			   boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
 		}
 
 		columns_.push_back(c);
 	}
 	if (!scrollbar_) {
 		scrollbar_ =
-			new Scrollbar
-				(get_parent(),
-				 get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-				 Scrollbar::kSize,                     get_h() - headerheight_,
-				 false);
+		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
+		                 Scrollbar::kSize, get_h() - headerheight_, false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);
 		scrollbar_->set_singlestepsize(lineheight_);
@@ -142,10 +127,9 @@ void Table<void *>::add_column
 	}
 }
 
-void Table<void *>::set_column_title(uint8_t const col, const std::string & title)
-{
+void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
 	assert(col < columns_.size());
-	Column & column = columns_.at(col);
+	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
 }
@@ -153,43 +137,34 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 /**
  * Set a custom comparison function for sorting of the given column.
  */
-void Table<void *>::set_column_compare
-	(uint8_t col, const Table<void *>::CompareFn & fn)
-{
+void Table<void*>::set_column_compare(uint8_t col, const Table<void*>::CompareFn& fn) {
 	assert(col < columns_.size());
-	Column & column = columns_.at(col);
+	Column& column = columns_.at(col);
 	column.compare = fn;
 }
 
-void Table<void *>::EntryRecord::set_checked
-	(uint8_t const col, bool const checked)
-{
-	Data & cell = data_.at(col);
+void Table<void*>::EntryRecord::set_checked(uint8_t const col, bool const checked) {
+	Data& cell = data_.at(col);
 
 	cell.d_checked = checked;
-	cell.d_picture =
-		g_gr->images().get(checked ?
-									 "images/ui_basic/checkbox_checked.png" :
-									 "images/ui_basic/checkbox_empty.png");
+	cell.d_picture = g_gr->images().get(checked ? "images/ui_basic/checkbox_checked.png" :
+	                                              "images/ui_basic/checkbox_empty.png");
 }
 
-void Table<void *>::EntryRecord::toggle(uint8_t const col)
-{
+void Table<void*>::EntryRecord::toggle(uint8_t const col) {
 	set_checked(col, !is_checked(col));
 }
 
-
-bool Table<void *>::EntryRecord::is_checked(uint8_t const col) const {
-	const Data & cell = data_.at(col);
+bool Table<void*>::EntryRecord::is_checked(uint8_t const col) const {
+	const Data& cell = data_.at(col);
 
 	return cell.d_checked;
 }
 
-Table<void *>::EntryRecord * Table<void *>::find
-	(const void * const entry) const
+Table<void*>::EntryRecord* Table<void*>::find(const void* const entry) const
 
 {
-	for (EntryRecord * temp_entry : entry_records_) {
+	for (EntryRecord* temp_entry : entry_records_) {
 		if (temp_entry->entry() == entry) {
 			return temp_entry;
 		}
@@ -200,10 +175,10 @@ Table<void *>::EntryRecord * Table<void *>::find
 /**
  * A header button has been clicked
  */
-void Table<void *>::header_button_clicked(Columns::size_type const n) {
+void Table<void*>::header_button_clicked(Columns::size_type const n) {
 	assert(columns_.at(n).btn);
 	if (get_sort_colum() == n) {
-		set_sort_descending(!get_sort_descending()); //  change sort direction
+		set_sort_descending(!get_sort_descending());  //  change sort direction
 		sort();
 		return;
 	}
@@ -216,9 +191,8 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 /**
  * Remove all entries from the table
 */
-void Table<void *>::clear()
-{
-	for (const EntryRecord * entry : entry_records_) {
+void Table<void*>::clear() {
+	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
 	}
 	entry_records_.clear();
@@ -231,8 +205,7 @@ void Table<void *>::clear()
 	last_selection_ = no_selection_index();
 }
 
-
-void Table<void *>::fit_height(uint32_t entries) {
+void Table<void*>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
@@ -246,8 +219,7 @@ void Table<void *>::fit_height(uint32_t entries) {
 /**
  * Redraw the table
 */
-void Table<void *>::draw(RenderTarget & dst)
-{
+void Table<void*>::draw(RenderTarget& dst) {
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
@@ -259,13 +231,11 @@ void Table<void *>::draw(RenderTarget & dst)
 		if (y >= static_cast<int32_t>(get_h()))
 			return;
 
-		const EntryRecord & er = *entry_records_[idx];
+		const EntryRecord& er = *entry_records_[idx];
 
 		if (idx == selection_) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect
-				(Rect(Point(1, y), get_eff_w() - 2, lineheight_),
-				 -ms_darken_value);
+			dst.brighten_rect(Rect(Point(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -327,7 +297,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				point.x += picw;
 			}
 
-			++picw; // A bit of margin between image and text
+			++picw;  // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
@@ -355,12 +325,11 @@ void Table<void *>::draw(RenderTarget & dst)
 					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
-				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
-					dst.blitrect(point,
-									 entry_text_im,
-									 Rect(text_width - curw + picw, 0, text_width, lineheight));
-				}
-				else {
+				if (i18n::has_rtl_character(
+				       entry_string.c_str(), 20)) {  // Restrict check for efficiency
+					dst.blitrect(
+					   point, entry_text_im, Rect(text_width - curw + picw, 0, text_width, lineheight));
+				} else {
 					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
 				}
 			} else {
@@ -377,8 +346,7 @@ void Table<void *>::draw(RenderTarget & dst)
 /**
  * handle key presses
  */
-bool Table<void *>::handle_key(bool down, SDL_Keysym code)
-{
+bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_UP:
@@ -392,24 +360,21 @@ bool Table<void *>::handle_key(bool down, SDL_Keysym code)
 			return true;
 
 		default:
-			break; // not handled
+			break;  // not handled
 		}
 	}
 
 	return UI::Panel::handle_key(down, code);
 }
 
-
-bool Table<void *>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	return scrollbar_->handle_mousewheel(which, x, y);
 }
 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void *>::handle_mousepress
-	(uint8_t const btn, int32_t x, int32_t const y)
-{
+bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const y) {
 	if (get_can_focus())
 		focus();
 
@@ -421,16 +386,15 @@ bool Table<void *>::handle_mousepress
 		//  to forget the last clicked time.
 		uint32_t const real_last_click_time = last_click_time_;
 
-		last_selection_  = selection_;
+		last_selection_ = selection_;
 		last_click_time_ = time;
 
-		uint32_t const row =
-			(y + scrollpos_ - headerheight_) / get_lineheight();
+		uint32_t const row = (y + scrollpos_ - headerheight_) / get_lineheight();
 		if (row < entry_records_.size()) {
 			select(row);
 			Columns::size_type const nr_cols = columns_.size();
 			for (uint8_t col = 0; col < nr_cols; ++col) {
-				const Column & column = columns_.at(col);
+				const Column& column = columns_.at(col);
 				x -= column.width;
 				if (x <= 0) {
 					if (column.is_checkbox_column) {
@@ -442,11 +406,9 @@ bool Table<void *>::handle_mousepress
 			}
 		}
 
-		if //  check if doubleclicked
-			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
-			 &&
-			 last_selection_ == selection_
-			 && selection_ != no_selection_index())
+		if  //  check if doubleclicked
+		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
+		    selection_ != no_selection_index())
 			double_clicked(selection_);
 
 		return true;
@@ -455,8 +417,7 @@ bool Table<void *>::handle_mousepress
 		return false;
 	}
 }
-bool Table<void *>::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
-{
+bool Table<void*>::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	return btn == SDL_BUTTON_LEFT;
 }
 
@@ -465,23 +426,24 @@ bool Table<void *>::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
  * \param offset positive value move the selection down and
  *        negative values up.
  */
-void Table<void *>::move_selection(const int32_t offset)
-{
-	if (!has_selection()) return;
+void Table<void*>::move_selection(const int32_t offset) {
+	if (!has_selection())
+		return;
 	int32_t new_selection = selection_ + offset;
 
-	if (new_selection < 0) new_selection = 0;
+	if (new_selection < 0)
+		new_selection = 0;
 	else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1)
 		new_selection = entry_records_.size() - 1;
 
 	select(static_cast<uint32_t>(new_selection));
 
 	// Scroll to newly selected entry
-	if (scrollbar_)
-	{
+	if (scrollbar_) {
 		// Keep an unselected item above or below
 		int32_t scroll_item = new_selection + offset;
-		if (scroll_item < 0) scroll_item = 0;
+		if (scroll_item < 0)
+			scroll_item = 0;
 		if (scroll_item > static_cast<int32_t>(entry_records_.size())) {
 			scroll_item = entry_records_.size();
 		}
@@ -489,10 +451,8 @@ void Table<void *>::move_selection(const int32_t offset)
 		// Ensure scroll_item is visible
 		if (static_cast<int32_t>(scroll_item * get_lineheight()) < scrollpos_) {
 			scrollbar_->set_scrollpos(scroll_item * get_lineheight());
-		} else if
-			(static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h())
-			 > scrollpos_)
-		{
+		} else if (static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h()) >
+		           scrollpos_) {
 			scrollbar_->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
 		}
 	}
@@ -503,8 +463,7 @@ void Table<void *>::move_selection(const int32_t offset)
  *
  * Args: i  the entry to select
  */
-void Table<void *>::select(const uint32_t i)
-{
+void Table<void*>::select(const uint32_t i) {
 	if (empty() || selection_ == i)
 		return;
 
@@ -516,22 +475,16 @@ void Table<void *>::select(const uint32_t i)
 /**
  * Add a new entry to the table.
 */
-Table<void *>::EntryRecord & Table<void *>::add
-	(void * const entry, const bool do_select)
-{
-	EntryRecord & result = *new EntryRecord(entry);
+Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
+	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
 	for (size_t i = 0; i < columns_.size(); ++i)
 		if (columns_.at(i).is_checkbox_column) {
-			result.data_.at(i).d_picture =
-				g_gr->images().get("images/ui_basic/checkbox_empty.png");
+			result.data_.at(i).d_picture = g_gr->images().get("images/ui_basic/checkbox_empty.png");
 		}
 
-	scrollbar_->set_steps
-		(entry_records_.size() * get_lineheight()
-		 -
-		 (get_h() - headerheight_ - 2));
+	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	if (do_select) {
 		select(entry_records_.size() - 1);
@@ -543,15 +496,14 @@ Table<void *>::EntryRecord & Table<void *>::add
 /**
  * Scroll to the given position, in pixels.
 */
-void Table<void *>::set_scrollpos(int32_t const i)
-{
+void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
 /**
  * Remove the table entry at the given (zero-based) index.
  */
-void Table<void *>::remove(const uint32_t i) {
+void Table<void*>::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
 
 	const EntryRecordVector::iterator it = entry_records_.begin() + i;
@@ -562,14 +514,10 @@ void Table<void *>::remove(const uint32_t i) {
 	else if (selection_ > i && selection_ != no_selection_index())
 		selection_--;
 
-	scrollbar_->set_steps
-		(entry_records_.size() * get_lineheight()
-		 -
-		 (get_h() - headerheight_ - 2));
+	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 }
 
-bool Table<void *>::sort_helper(uint32_t a, uint32_t b)
-{
+bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 	if (sort_descending_)
 		return columns_[sort_column_].compare(b, a);
 	else
@@ -583,8 +531,7 @@ bool Table<void *>::sort_helper(uint32_t a, uint32_t b)
  * For example you might want to sort directories for themselves at the
  * top of list and files at the bottom.
  */
-void Table<void *>::sort(const uint32_t Begin, uint32_t End)
-{
+void Table<void*>::sort(const uint32_t Begin, uint32_t End) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
@@ -592,7 +539,7 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 		End = size();
 
 	std::vector<uint32_t> indices;
-	std::vector<EntryRecord *> copy;
+	std::vector<EntryRecord*> copy;
 
 	indices.reserve(End - Begin);
 	copy.reserve(End - Begin);
@@ -601,9 +548,8 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 		copy.push_back(entry_records_[i]);
 	}
 
-	std::stable_sort
-		(indices.begin(), indices.end(),
-		 boost::bind(&Table<void *>::sort_helper, this, _1, _2));
+	std::stable_sort(
+	   indices.begin(), indices.end(), boost::bind(&Table<void*>::sort_helper, this, _1, _2));
 
 	uint32_t newselection = selection_;
 	for (uint32_t i = Begin; i < End; ++i) {
@@ -619,54 +565,43 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
  * Default comparison for checkbox columns:
  * checked items come before unchecked ones.
  */
-bool Table<void *>::default_compare_checkbox
-	(uint32_t column, uint32_t a, uint32_t b)
-{
-	EntryRecord & ea = get_record(a);
-	EntryRecord & eb = get_record(b);
+bool Table<void*>::default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b) {
+	EntryRecord& ea = get_record(a);
+	EntryRecord& eb = get_record(b);
 	return ea.is_checked(column) && !eb.is_checked(column);
 }
 
-bool Table<void *>::default_compare_string
-	(uint32_t column, uint32_t a, uint32_t b)
-{
-	EntryRecord & ea = get_record(a);
-	EntryRecord & eb = get_record(b);
+bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
+	EntryRecord& ea = get_record(a);
+	EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void *>::EntryRecord::EntryRecord(void * const e)
-	: entry_(e), use_clr(false)
-{}
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), use_clr(false) {
+}
 
-void Table<void *>::EntryRecord::set_picture
-	(uint8_t const col, const Image* pic, const std::string & str)
-{
+void Table<void*>::EntryRecord::set_picture(uint8_t const col,
+                                            const Image* pic,
+                                            const std::string& str) {
 	assert(col < data_.size());
 
 	data_.at(col).d_picture = pic;
-	data_.at(col).d_string  = str;
+	data_.at(col).d_string = str;
 }
-void Table<void *>::EntryRecord::set_string
-	(uint8_t const col, const std::string & str)
-{
+void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string& str) {
 	assert(col < data_.size());
 
 	data_.at(col).d_picture = nullptr;
-	data_.at(col).d_string  = str;
+	data_.at(col).d_string = str;
 }
-const Image* Table<void *>::EntryRecord::get_picture(uint8_t const col) const
-{
+const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
 
 	return data_.at(col).d_picture;
 }
-const std::string & Table<void *>::EntryRecord::get_string
-	(uint8_t const col) const
-{
+const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) const {
 	assert(col < data_.size());
 
 	return data_.at(col).d_string;
 }
-
 }

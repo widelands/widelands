@@ -24,28 +24,30 @@
 #include "logic/widelands_geometry.h"
 
 class EditorTool;
-namespace Widelands {class map;}
+namespace Widelands {
+class map;
+}
 class EditorInteractive;
-
 
 /// Class to save an action done by an editor tool
 // implementations in editor_history.cc
 struct EditorToolAction {
-	EditorTool & tool;
+	EditorTool& tool;
 
 	uint32_t i;
-	Widelands::Map & map;
+	Widelands::Map& map;
 	Widelands::NodeAndTriangle<> center;
-	EditorInteractive & parent;
+	EditorInteractive& parent;
 
-	EditorActionArgs * args;
+	EditorActionArgs* args;
 
-	EditorToolAction
-		(EditorTool & t, uint32_t ind,
-		Widelands::Map & m, Widelands::NodeAndTriangle<> c,
-		EditorInteractive & p, EditorActionArgs nargs)
-			: tool(t), i(ind), map(m), center(c), parent(p)
-	{
+	EditorToolAction(EditorTool& t,
+	                 uint32_t ind,
+	                 Widelands::Map& m,
+	                 Widelands::NodeAndTriangle<> c,
+	                 EditorInteractive& p,
+	                 EditorActionArgs nargs)
+	   : tool(t), i(ind), map(m), center(c), parent(p) {
 		args = new EditorActionArgs(parent);
 		*args = nargs;
 		args->refcount++;
@@ -54,13 +56,14 @@ struct EditorToolAction {
 	~EditorToolAction() {
 		if (args->refcount <= 1)
 			delete args;
-		else args->refcount--;
+		else
+			args->refcount--;
 	}
 
-	EditorToolAction(const EditorToolAction & b):
-		tool(b.tool), i(b.i), map(b.map),
-		center(b.center), parent(b.parent), args(b.args)
-	{args->refcount++;}
+	EditorToolAction(const EditorToolAction& b)
+	   : tool(b.tool), i(b.i), map(b.map), center(b.center), parent(b.parent), args(b.args) {
+		args->refcount++;
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_ACTION_H

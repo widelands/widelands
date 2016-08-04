@@ -24,19 +24,19 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-
 class EditorInteractive;
-
 
 /// The tool size window/menu.
 struct EditorToolsizeMenu : public UI::UniqueWindow {
-	EditorToolsizeMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
+	EditorToolsizeMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 	void update(uint32_t);
 	void set_buttons_enabled(bool enable);
-	uint32_t value() {return value_;}
+	uint32_t value() {
+		return value_;
+	}
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void decrease_radius();
 	void increase_radius();
 
@@ -44,6 +44,5 @@ private:
 	UI::Button increase_, decrease_;
 	uint32_t value_;
 };
-
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H

@@ -30,25 +30,16 @@ namespace UI {
  * This class provides a scrollbar
  */
 struct Scrollbar : public Panel {
-	enum Area {
-		None,
-		Minus,
-		Plus,
-		Knob,
-		MinusPage,
-		PlusPage
-	};
+	enum Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
 
 	/// default width for vertical scrollbars,
 	/// or height for horizontal scrollbars
 	static constexpr int kSize = 24;
 
 public:
-	Scrollbar
-		(Panel * parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
+	Scrollbar(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	boost::signals2::signal<void (int32_t)> moved;
+	boost::signals2::signal<void(int32_t)> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);
@@ -57,14 +48,22 @@ public:
 
 	bool is_enabled() const;
 	uint32_t get_steps() const;
-	uint32_t get_singlestepsize() const {return singlestepsize_;}
-	uint32_t get_pagesize() const {return pagesize_;}
-	uint32_t get_scrollpos() const {return pos_;}
+	uint32_t get_singlestepsize() const {
+		return singlestepsize_;
+	}
+	uint32_t get_pagesize() const {
+		return pagesize_;
+	}
+	uint32_t get_scrollpos() const {
+		return pos_;
+	}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
 
-	void set_force_draw(bool const t) {force_draw_ = t;}
+	void set_force_draw(bool const t) {
+		force_draw_ = t;
+	}
 
 	void layout() override;
 
@@ -76,35 +75,34 @@ private:
 
 	void action(Area area);
 
-	void draw_button(RenderTarget &, Area, Rect);
-	void draw_area  (RenderTarget &, Area, Rect);
-	void draw(RenderTarget &) override;
+	void draw_button(RenderTarget&, Area, Rect);
+	void draw_area(RenderTarget&, Area, Rect);
+	void draw(RenderTarget&) override;
 	void think() override;
 
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousemove
-		(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
 private:
 	bool horizontal_;
-	bool      force_draw_; // draw this scrollbar, even if it can't do anything
+	bool force_draw_;  // draw this scrollbar, even if it can't do anything
 
-	uint32_t  pos_;            ///< from 0 to range_ - 1
-	uint32_t  singlestepsize_;
-	uint32_t  pagesize_;
-	uint32_t  buttonsize_;
-	uint32_t  steps_;
+	uint32_t pos_;  ///< from 0 to range_ - 1
+	uint32_t singlestepsize_;
+	uint32_t pagesize_;
+	uint32_t buttonsize_;
+	uint32_t steps_;
 
-	Area pressed_; ///< area that the user clicked on (None if mouse is up)
-	uint32_t  time_nextact_;
-	int32_t   knob_grabdelta_; ///< only while pressed_ == Knob
+	Area pressed_;  ///< area that the user clicked on (None if mouse is up)
+	uint32_t time_nextact_;
+	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;      ///< left/up
-	const Image* pic_plus_;       ///< right/down
+	const Image* pic_minus_;  ///< left/up
+	const Image* pic_plus_;   ///< right/down
 	const Image* pic_background_;
 	const Image* pic_buttons_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_SCROLLBAR_H

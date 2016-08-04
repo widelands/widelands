@@ -24,31 +24,50 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 
-MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
-	(UI::Panel * const parent, char const * dirname) :
-	UI::Window(parent, "make_directory", 0, 0, 330, 100, _("Make Directory")),
-	padding_(5),
-	butw_(get_inner_w() / 2 - 3 * padding_),
-	buth_(20),
-	dirname_(dirname),
-	vbox_(this, padding_, padding_, UI::Box::Vertical,
-		  get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_, padding_ / 2),
-	label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name: "), UI::Align::kLeft),
-	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, g_gr->images().get("images/ui_basic/but1.png")),
-	ok_button_(
-		this, "ok",
-		UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
-		get_inner_h() - padding_ - buth_,
-		butw_, buth_,
-		g_gr->images().get("images/ui_basic/but5.png"),
-		_("OK")),
-	cancel_button_(
-		this, "cancel",
-		UI::g_fh1->fontset()->is_rtl() ?get_inner_w() - butw_ - padding_ : padding_,
-		get_inner_h() - padding_ - buth_,
-		butw_, buth_,
-		g_gr->images().get("images/ui_basic/but1.png"),
-		_("Cancel")) {
+MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const parent,
+                                                           char const* dirname)
+   : UI::Window(parent, "make_directory", 0, 0, 330, 100, _("Make Directory")),
+     padding_(5),
+     butw_(get_inner_w() / 2 - 3 * padding_),
+     buth_(20),
+     dirname_(dirname),
+     vbox_(this,
+           padding_,
+           padding_,
+           UI::Box::Vertical,
+           get_inner_w() - 2 * padding_,
+           get_inner_h() - 3 * padding_ - buth_,
+           padding_ / 2),
+     label_(&vbox_,
+            0,
+            0,
+            get_inner_w() - 2 * padding_,
+            buth_,
+            _("Enter Directory Name: "),
+            UI::Align::kLeft),
+     edit_(&vbox_,
+           0,
+           0,
+           get_inner_w() - 2 * padding_,
+           0,
+           4,
+           g_gr->images().get("images/ui_basic/but1.png")),
+     ok_button_(this,
+                "ok",
+                UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
+                get_inner_h() - padding_ - buth_,
+                butw_,
+                buth_,
+                g_gr->images().get("images/ui_basic/but5.png"),
+                _("OK")),
+     cancel_button_(this,
+                    "cancel",
+                    UI::g_fh1->fontset()->is_rtl() ? get_inner_w() - butw_ - padding_ : padding_,
+                    get_inner_h() - padding_ - buth_,
+                    butw_,
+                    buth_,
+                    g_gr->images().get("images/ui_basic/but1.png"),
+                    _("Cancel")) {
 
 	vbox_.add(&label_, UI::Align::kLeft);
 	vbox_.add_space(padding_);
@@ -57,19 +76,16 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 
 	edit_.set_text(dirname_);
 	edit_.changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
-	ok_button_.sigclicked.connect
-			(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
-							 boost::ref(*this),
-							 UI::Panel::Returncodes::kOk));
+	ok_button_.sigclicked.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+	               boost::ref(*this), UI::Panel::Returncodes::kOk));
 	ok_button_.set_enabled(false);
-	cancel_button_.sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
-						 boost::ref(*this),
-						 UI::Panel::Returncodes::kBack));
+	cancel_button_.sigclicked.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+	               boost::ref(*this), UI::Panel::Returncodes::kBack));
 	center_to_parent();
 	edit_.focus();
 }
-
 
 /**
  * Editbox changed

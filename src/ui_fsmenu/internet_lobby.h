@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include "ui_fsmenu/base.h"
 #include "network/internet_gaming.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/button.h"
@@ -32,11 +31,12 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 #include "wui/gamechatpanel.h"
 
 class FullscreenMenuInternetLobby : public FullscreenMenuBase {
 public:
-	FullscreenMenuInternetLobby (const char *, const char *, bool);
+	FullscreenMenuInternetLobby(const char*, const char*, bool);
 
 	void think() override;
 
@@ -54,21 +54,21 @@ private:
 	UI::Textarea servername_;
 	UI::Button joingame_, hostgame_, back_;
 	UI::EditBox edit_servername_;
-	UI::Table<const InternetClient * const> clientsonline_list_;
+	UI::Table<const InternetClient* const> clientsonline_list_;
 	UI::Listselect<InternetGame> opengames_list_;
 	GameChatPanel chat;
 
 	// Login information
-	const char * nickname_;
-	const char * password_;
-	bool         is_registered_;
+	const char* nickname_;
+	const char* password_;
+	bool is_registered_;
 
-	void fill_games_list (const std::vector<InternetGame>*);
+	void fill_games_list(const std::vector<InternetGame>*);
 	void fill_client_list(const std::vector<InternetClient>*);
 
 	void connect_to_metaserver();
 
-	void client_doubleclicked (uint32_t);
+	void client_doubleclicked(uint32_t);
 	void server_selected();
 	void server_doubleclicked();
 
@@ -76,7 +76,7 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 
-	uint8_t convert_clienttype(const std::string &);
+	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
 

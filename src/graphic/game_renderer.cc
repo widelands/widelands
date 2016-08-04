@@ -118,7 +118,7 @@ uint8_t field_roads(const FCoords& coords,
 
 }  // namespace
 
-GameRenderer::GameRenderer()  {
+GameRenderer::GameRenderer() {
 }
 
 GameRenderer::~GameRenderer() {
@@ -144,7 +144,7 @@ void GameRenderer::draw(RenderTarget& dst,
                         const Player* player) {
 	Point tl_map = dst.get_offset() + view_offset;
 
-	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
+	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
 	int minfx = tl_map.x / kTriangleWidth - 1;
@@ -157,7 +157,6 @@ void GameRenderer::draw(RenderTarget& dst,
 	minfy -= 1;
 	maxfx += 1;
 	maxfy += 10;
-
 
 	Surface* surface = dst.get_surface();
 	if (!surface)
@@ -220,10 +219,8 @@ void GameRenderer::draw(RenderTarget& dst,
 	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
 	i.terrain_arguments.destination_rect =
-	   FloatRect(bounding_rect.x,
-	             surface_height - bounding_rect.y - bounding_rect.h,
-	             bounding_rect.w,
-	             bounding_rect.h);
+	   FloatRect(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
+	             bounding_rect.w, bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;
 	i.terrain_arguments.renderbuffer_height = surface_height;
@@ -256,7 +253,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 	static const uint32_t R = 1;
 	static const uint32_t BL = 2;
 	static const uint32_t BR = 3;
-	const Map & map = egbase.map();
+	const Map& map = egbase.map();
 
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
@@ -271,7 +268,8 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			Point pos[4];
 			MapviewPixelFunctions::get_basepix(Coords(fx, fy), pos[F].x, pos[F].y);
 			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), pos[R].x, pos[R].y);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), pos[BL].x, pos[BL].y);
+			MapviewPixelFunctions::get_basepix(
+			   Coords(fx + (fy & 1) - 1, fy + 1), pos[BL].x, pos[BL].y);
 			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), pos[BR].x, pos[BR].y);
 			for (uint32_t d = 0; d < 4; ++d) {
 				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
@@ -288,7 +286,8 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 
 			if (player && !player->see_all()) {
 				for (uint32_t d = 0; d < 4; ++d) {
-					const Player::Field & pf = player->fields()[map.get_index(coords[d], map.get_width())];
+					const Player::Field& pf =
+					   player->fields()[map.get_index(coords[d], map.get_width())];
 					vision[d] = pf.vision;
 					if (pf.vision == 1) {
 						owner_number[d] = pf.owner;
@@ -298,32 +297,26 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			}
 
 			if (isborder[F]) {
-				const Player & owner = egbase.player(owner_number[F]);
+				const Player& owner = egbase.player(owner_number[F]);
 				uint32_t const anim_idx = owner.tribe().frontier_animation();
 				if (vision[F])
 					dst.blit_animation(pos[F], anim_idx, 0, owner.get_playercolor());
 				for (uint32_t d = 1; d < 4; ++d) {
-					if
-						((vision[F] || vision[d]) &&
-						 isborder[d] &&
-						 (owner_number[d] == owner_number[F] || !owner_number[d]))
-					{
+					if ((vision[F] || vision[d]) && isborder[d] &&
+					    (owner_number[d] == owner_number[F] || !owner_number[d])) {
 						dst.blit_animation(middle(pos[F], pos[d]), anim_idx, 0, owner.get_playercolor());
 					}
 				}
 			}
 
-			if (1 < vision[F]) { // Render stuff that belongs to the node.
-				if (BaseImmovable * const imm = coords[F].field->get_immovable())
+			if (1 < vision[F]) {  // Render stuff that belongs to the node.
+				if (BaseImmovable* const imm = coords[F].field->get_immovable())
 					imm->draw(egbase, dst, coords[F], pos[F]);
-				for
-					(Bob * bob = coords[F].field->get_first_bob();
-					 bob;
-					 bob = bob->get_next_bob())
+				for (Bob* bob = coords[F].field->get_first_bob(); bob; bob = bob->get_next_bob())
 					bob->draw(egbase, dst, pos[F]);
 			} else if (vision[F] == 1) {
-				const Player::Field & f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
-				const Player * owner = owner_number[F] ? egbase.get_player(owner_number[F]) : nullptr;
+				const Player::Field& f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
+				const Player* owner = owner_number[F] ? egbase.get_player(owner_number[F]) : nullptr;
 				if (const MapObjectDescr* const map_object_descr =
 				       f_pl.map_object_descr[TCoords<>::None]) {
 					if (f_pl.constructionsite.becomes) {
@@ -383,7 +376,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 							pic = building->get_animation("idle");
 						}
 						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
-					}  else if (map_object_descr->type() == MapObjectType::FLAG) {
+					} else if (map_object_descr->type() == MapObjectType::FLAG) {
 						assert(owner != nullptr);
 						dst.blit_animation(
 						   pos[F], owner->tribe().flag_animation(), 0, owner->get_playercolor());

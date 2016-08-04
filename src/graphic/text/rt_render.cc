@@ -53,16 +53,18 @@ using namespace std;
 
 namespace RT {
 
-static const uint16_t INFINITE_WIDTH = 65535; // 2^16-1
+static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
 
 // Helper Stuff
 struct Borders {
-	Borders() {left = top = right = bottom = 0;}
+	Borders() {
+		left = top = right = bottom = 0;
+	}
 	uint8_t left, top, right, bottom;
 };
 
 struct NodeStyle {
-	UI::FontSet const * fontset;
+	UI::FontSet const* fontset;
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
@@ -73,7 +75,6 @@ struct NodeStyle {
 	UI::Align valign;
 	string reference;
 };
-
 
 /*
  * This class makes sure that we only load each font file once.
@@ -120,12 +121,12 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	const bool is_italic = ns->font_style & IFont::ITALIC;
 	if (is_bold && is_italic) {
 		if (ns->font_face == ns->fontset->condensed() ||
-			 ns->font_face == ns->fontset->condensed_bold() ||
-			 ns->font_face == ns->fontset->condensed_italic()) {
+		    ns->font_face == ns->fontset->condensed_bold() ||
+		    ns->font_face == ns->fontset->condensed_italic()) {
 			ns->font_face = ns->fontset->condensed_bold_italic();
 		} else if (ns->font_face == ns->fontset->serif() ||
-					  ns->font_face == ns->fontset->serif_bold() ||
-					  ns->font_face == ns->fontset->serif_italic()) {
+		           ns->font_face == ns->fontset->serif_bold() ||
+		           ns->font_face == ns->fontset->serif_italic()) {
 			ns->font_face = ns->fontset->serif_bold_italic();
 		} else {
 			ns->font_face = ns->fontset->sans_bold_italic();
@@ -178,7 +179,8 @@ struct Reference {
 
 class RefMap : public IRefMap {
 public:
-	RefMap(const vector<Reference>& refs) : refs_(refs) {}
+	RefMap(const vector<Reference>& refs) : refs_(refs) {
+	}
 	string query(int16_t x, int16_t y) override {
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
@@ -200,30 +202,59 @@ public:
 		FLOAT_LEFT,
 	};
 	RenderNode(NodeStyle& ns)
-		: floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {}
-	virtual ~RenderNode() {}
+	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
+	}
+	virtual ~RenderNode() {
+	}
 
 	virtual uint16_t width() = 0;
 	virtual uint16_t height() = 0;
 	virtual uint16_t hotspot_y() = 0;
 	virtual Texture* render(TextureCache* texture_cache) = 0;
 
-	virtual bool is_non_mandatory_space() {return false;}
-	virtual bool is_expanding() {return false;}
-	virtual void set_w(uint16_t) {} // Only, when is_expanding
+	virtual bool is_non_mandatory_space() {
+		return false;
+	}
+	virtual bool is_expanding() {
+		return false;
+	}
+	virtual void set_w(uint16_t) {
+	}  // Only, when is_expanding
 
-	virtual const vector<Reference> get_references() {return vector<Reference>();}
+	virtual const vector<Reference> get_references() {
+		return vector<Reference>();
+	}
 
-	Floating get_floating() {return floating_;}
-	void set_floating(Floating f) {floating_ = f;}
-	UI::Align halign() {return halign_;}
-	void set_halign(UI::Align ghalign) {halign_ = ghalign;}
-	UI::Align valign() {return valign_;}
-	void set_valign(UI::Align gvalign) {valign_ = gvalign;}
-	void set_x(int32_t nx) {x_ = nx;}
-	void set_y(int32_t ny) {y_ = ny;}
-	int32_t x() {return x_;}
-	int32_t y() {return y_;}
+	Floating get_floating() {
+		return floating_;
+	}
+	void set_floating(Floating f) {
+		floating_ = f;
+	}
+	UI::Align halign() {
+		return halign_;
+	}
+	void set_halign(UI::Align ghalign) {
+		halign_ = ghalign;
+	}
+	UI::Align valign() {
+		return valign_;
+	}
+	void set_valign(UI::Align gvalign) {
+		valign_ = gvalign;
+	}
+	void set_x(int32_t nx) {
+		x_ = nx;
+	}
+	void set_y(int32_t ny) {
+		y_ = ny;
+	}
+	int32_t x() {
+		return x_;
+	}
+	int32_t y() {
+		return y_;
+	}
 
 private:
 	Floating floating_;
@@ -234,10 +265,14 @@ private:
 
 class Layout {
 public:
-	Layout(vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {}
-	virtual ~Layout() {}
+	Layout(vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	}
+	virtual ~Layout() {
+	}
 
-	uint16_t height() {return h_;}
+	uint16_t height() {
+		return h_;
+	}
 	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit);
 
 private:
@@ -262,14 +297,13 @@ private:
 	priority_queue<ConstraintChange> constraint_changes_;
 };
 
-uint16_t Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shrink_to_fit) {
+uint16_t
+Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shrink_to_fit) {
 	assert(rv->empty());
 
 	// Remove leading spaces
-	while (idx_ < all_nodes_.size()
-		&& all_nodes_[idx_]->is_non_mandatory_space()
-		&& shrink_to_fit) {
-			delete all_nodes_[idx_++];
+	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && shrink_to_fit) {
+		delete all_nodes_[idx_++];
 	}
 
 	uint16_t x = p.left;
@@ -286,14 +320,13 @@ uint16_t Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv,
 				break;
 			}
 		}
-		n->set_x(x); x += nw;
+		n->set_x(x);
+		x += nw;
 		rv->push_back(n);
 		++idx_;
 	}
 	// Remove trailing spaces
-	while (!rv->empty()
-			&& rv->back()->is_non_mandatory_space()
-			&& shrink_to_fit) {
+	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
 		x -= rv->back()->width();
 		delete rv->back();
 		rv->pop_back();
@@ -311,7 +344,7 @@ uint16_t Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv,
 		if (rv->at(idx)->is_expanding())
 			expanding_nodes.push_back(idx);
 
-	if (!expanding_nodes.empty()) { // If there are expanding nodes, we fill the space
+	if (!expanding_nodes.empty()) {  // If there are expanding nodes, we fill the space
 		const uint16_t individual_w = remaining_space / expanding_nodes.size();
 		for (const size_t idx : expanding_nodes) {
 			rv->at(idx)->set_w(individual_w);
@@ -324,7 +357,7 @@ uint16_t Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv,
 			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
-			for (RenderNode* node : *rv)  {
+			for (RenderNode* node : *rv) {
 				node->set_x(node->x() + remaining_space);
 			}
 		}
@@ -381,7 +414,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		h_ += line_height;
-		while (! constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
+		while (!constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
 			const ConstraintChange& top = constraint_changes_.top();
 			w += top.delta_w;
 			p.left += top.delta_offset_x;
@@ -408,7 +441,8 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 			++idx_;
 		}
 		if (idx_ == idx_before_iteration_) {
-			throw WidthTooSmall("Could not fit a single render node in line. Width of an Element is too small!");
+			throw WidthTooSmall(
+			   "Could not fit a single render node in line. Width of an Element is too small!");
 		}
 	}
 
@@ -422,10 +456,15 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 class TextNode : public RenderNode {
 public:
 	TextNode(FontCache& font, NodeStyle&, const string& txt);
-	virtual ~TextNode() {}
+	virtual ~TextNode() {
+	}
 
-	uint16_t width() override {return w_;}
-	uint16_t height() override {return h_ + nodestyle_.spacing;}
+	uint16_t width() override {
+		return w_;
+	}
+	uint16_t height() override {
+		return h_ + nodestyle_.spacing;
+	}
 	uint16_t hotspot_y() override;
 	const vector<Reference> get_references() override {
 		vector<Reference> rv;
@@ -447,9 +486,11 @@ protected:
 };
 
 TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
-	: RenderNode(ns), txt_(txt), nodestyle_(ns), fontcache_(font),
-	font_(dynamic_cast<SdlTtfFont&>(fontcache_.get_font(&nodestyle_)))
-{
+   : RenderNode(ns),
+     txt_(txt),
+     nodestyle_(ns),
+     fontcache_(font),
+     font_(dynamic_cast<SdlTtfFont&>(fontcache_.get_font(&nodestyle_))) {
 	font_.dimensions(txt_, ns.font_style, &w_, &h_);
 }
 uint16_t TextNode::hotspot_y() {
@@ -457,12 +498,10 @@ uint16_t TextNode::hotspot_y() {
 }
 
 Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img = font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+	const Texture& img =
+	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rect(0, 0, img.width(), img.height()),
-	         img,
-	         Rect(0, 0, img.width(), img.height()),
-	         1.,
+	rv->blit(Rect(0, 0, img.width(), img.height()), img, Rect(0, 0, img.width(), img.height()), 1.,
 	         BlendMode::Copy);
 	return rv;
 }
@@ -473,21 +512,28 @@ Texture* TextNode::render(TextureCache* texture_cache) {
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
-		TextNode(font, ns, txt), is_expanding_(expanding) {
-			w_ = w;
-		}
-	virtual ~FillingTextNode() {}
+	FillingTextNode(
+	   FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false)
+	   : TextNode(font, ns, txt), is_expanding_(expanding) {
+		w_ = w;
+	}
+	virtual ~FillingTextNode() {
+	}
 	Texture* render(TextureCache*) override;
 
-	bool is_expanding() override {return is_expanding_;}
-	void set_w(uint16_t w) override {w_ = w;}
+	bool is_expanding() override {
+		return is_expanding_;
+	}
+	void set_w(uint16_t w) override {
+		w_ = w;
+	}
 
 private:
 	bool is_expanding_;
 };
 Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t = font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+	const Texture& t =
+	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	Texture* rv = new Texture(w_, h_);
 	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), w_ - curx), h_);
@@ -502,8 +548,11 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
  */
 class WordSpacerNode : public TextNode {
 public:
-	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
-	static void show_spaces(bool t) {show_spaces_ = t;}
+	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {
+	}
+	static void show_spaces(bool t) {
+		show_spaces_ = t;
+	}
 
 	Texture* render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
@@ -513,7 +562,9 @@ public:
 		}
 		return TextNode::render(texture_cache);
 	}
-	bool is_non_mandatory_space() override {return true;}
+	bool is_non_mandatory_space() override {
+		return true;
+	}
 
 private:
 	static bool show_spaces_;
@@ -526,14 +577,23 @@ bool WordSpacerNode::show_spaces_;
  */
 class NewlineNode : public RenderNode {
 public:
-	NewlineNode(NodeStyle& ns) : RenderNode(ns) {}
-	uint16_t height() override {return 0;}
-	uint16_t width() override {return INFINITE_WIDTH; }
-	uint16_t hotspot_y() override {return 0;}
+	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
+	}
+	uint16_t height() override {
+		return 0;
+	}
+	uint16_t width() override {
+		return INFINITE_WIDTH;
+	}
+	uint16_t hotspot_y() override {
+		return 0;
+	}
 	Texture* render(TextureCache* /* texture_cache */) override {
 		NEVER_HERE();
 	}
-	bool is_non_mandatory_space() override {return true;}
+	bool is_non_mandatory_space() override {
+		return true;
+	}
 };
 
 /*
@@ -541,12 +601,19 @@ public:
  */
 class SpaceNode : public RenderNode {
 public:
-	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false) :
-		RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {}
+	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
+	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
+	}
 
-	uint16_t height() override {return h_;}
-	uint16_t width() override {return w_;}
-	uint16_t hotspot_y() override {return h_;}
+	uint16_t height() override {
+		return h_;
+	}
+	uint16_t width() override {
+		return w_;
+	}
+	uint16_t hotspot_y() override {
+		return h_;
+	}
 	Texture* render(TextureCache* /* texture_cache */) override {
 		Texture* rv = new Texture(w_, h_);
 
@@ -566,11 +633,16 @@ public:
 		}
 		return rv;
 	}
-	bool is_expanding() override {return is_expanding_;}
-	void set_w(uint16_t w) override {w_ = w;}
+	bool is_expanding() override {
+		return is_expanding_;
+	}
+	void set_w(uint16_t w) override {
+		w_ = w;
+	}
 
 	void set_background(const Image* s) {
-		background_image_ = s; h_ = s->height();
+		background_image_ = s;
+		h_ = s->height();
 	}
 
 private:
@@ -584,8 +656,11 @@ private:
  */
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns),
-		background_color_(0, 0, 0), is_background_color_set_(false), background_image_(nullptr) {
+	SubTagRenderNode(NodeStyle& ns)
+	   : RenderNode(ns),
+	     background_color_(0, 0, 0),
+	     is_background_color_set_(false),
+	     background_image_(nullptr) {
 	}
 	virtual ~SubTagRenderNode() {
 		for (RenderNode* n : nodes_to_render_) {
@@ -594,15 +669,22 @@ public:
 		nodes_to_render_.clear();
 	}
 
-	uint16_t width() override {return w_ + margin_.left + margin_.right;}
-	uint16_t height() override {return h_ + margin_.top + margin_.bottom;}
-	uint16_t hotspot_y() override {return height();}
+	uint16_t width() override {
+		return w_ + margin_.left + margin_.right;
+	}
+	uint16_t height() override {
+		return h_ + margin_.top + margin_.bottom;
+	}
+	uint16_t hotspot_y() override {
+		return height();
+	}
 
 	Texture* render(TextureCache* texture_cache) override {
 		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
 			const std::string error_message =
-					(boost::format("Texture (%d, %d) too big! Maximum size is %d.")
-					 % width() % height() % g_gr->max_texture_size()).str();
+			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %
+			    g_gr->max_texture_size())
+			      .str();
 			log("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
@@ -621,8 +703,10 @@ public:
 			Rect dst;
 			Rect src(0, 0, 0, 0);
 
-			for (uint16_t cury = margin_.top; cury < h_ + margin_.top; cury += background_image_->height()) {
-				for (uint16_t curx = margin_.left; curx < w_ + margin_.left; curx += background_image_->width()) {
+			for (uint16_t cury = margin_.top; cury < h_ + margin_.top;
+			     cury += background_image_->height()) {
+				for (uint16_t curx = margin_.left; curx < w_ + margin_.left;
+				     curx += background_image_->width()) {
 					dst.x = curx;
 					dst.y = cury;
 					src.w = dst.w = min<int>(background_image_->width(), w_ + margin_.left - curx);
@@ -636,13 +720,12 @@ public:
 		for (RenderNode* n : nodes_to_render_) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
-				Rect dst = Rect(n->x() + margin_.left,
-									 n->y() + margin_.top,
-				                node_texture->width(),
+				Rect dst = Rect(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
 				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				rv->blit(dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
+				rv->blit(
+				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
 				delete node_texture;
 			}
 			delete n;
@@ -652,16 +735,24 @@ public:
 
 		return rv;
 	}
-	const vector<Reference> get_references() override {return refs_;}
+	const vector<Reference> get_references() override {
+		return refs_;
+	}
 	void set_dimensions(uint16_t inner_w, uint16_t inner_h, Borders margin) {
-		w_ = inner_w; h_ = inner_h; margin_ = margin;
+		w_ = inner_w;
+		h_ = inner_h;
+		margin_ = margin;
 	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
 		is_background_color_set_ = true;
 	}
-	void set_background(const Image* img) {background_image_ = img;}
-	void set_nodes_to_render(vector<RenderNode*>& n) {nodes_to_render_ = n;}
+	void set_background(const Image* img) {
+		background_image_ = img;
+	}
+	void set_nodes_to_render(vector<RenderNode*>& n) {
+		nodes_to_render_ = n;
+	}
 	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const string& s) {
 		Reference r = {Rect(gx, gy, w, h), s};
 		refs_.push_back(r);
@@ -673,7 +764,7 @@ private:
 	Borders margin_;
 	RGBColor background_color_;
 	bool is_background_color_set_;
-	const Image* background_image_; // Not owned.
+	const Image* background_image_;  // Not owned.
 	vector<Reference> refs_;
 };
 
@@ -682,9 +773,15 @@ public:
 	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), image_(image) {
 	}
 
-	uint16_t width() override {return image_.width();}
-	uint16_t height() override {return image_.height();}
-	uint16_t hotspot_y() override {return image_.height();}
+	uint16_t width() override {
+		return image_.width();
+	}
+	uint16_t height() override {
+		return image_.height();
+	}
+	uint16_t hotspot_y() override {
+		return image_.height();
+	}
 	Texture* render(TextureCache* texture_cache) override;
 
 private:
@@ -693,29 +790,40 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(image_.width(), image_.height());
-	rv->blit(Rect(0, 0, image_.width(), image_.height()),
-				image_,
-				Rect(0, 0, image_.width(), image_.height()),
-				1.,
-	         BlendMode::Copy);
+	rv->blit(Rect(0, 0, image_.width(), image_.height()), image_,
+	         Rect(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
 
-
 class TagHandler;
-TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-										RendererStyle& renderer_style, const UI::FontSets& fontsets);
+TagHandler* create_taghandler(Tag& tag,
+                              FontCache& fc,
+                              NodeStyle& ns,
+                              ImageCache* image_cache,
+                              RendererStyle& renderer_style,
+                              const UI::FontSets& fontsets);
 
 class TagHandler {
 public:
-	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-				  RendererStyle& renderer_style, const UI::FontSets& fontsets) :
-		tag_(tag), font_cache_(fc), nodestyle_(ns), image_cache_(image_cache),
-		renderer_style_(renderer_style), fontsets_(fontsets) {}
-	virtual ~TagHandler() {}
+	TagHandler(Tag& tag,
+	           FontCache& fc,
+	           NodeStyle ns,
+	           ImageCache* image_cache,
+	           RendererStyle& renderer_style,
+	           const UI::FontSets& fontsets)
+	   : tag_(tag),
+	     font_cache_(fc),
+	     nodestyle_(ns),
+	     image_cache_(image_cache),
+	     renderer_style_(renderer_style),
+	     fontsets_(fontsets) {
+	}
+	virtual ~TagHandler() {
+	}
 
-	virtual void enter() {}
+	virtual void enter() {
+	}
 	virtual void emit_nodes(vector<RenderNode*>&);
 
 private:
@@ -725,8 +833,8 @@ protected:
 	Tag& tag_;
 	FontCache& font_cache_;
 	NodeStyle nodestyle_;
-	ImageCache* image_cache_;  // Not owned
-	RendererStyle& renderer_style_; // Reference to global renderer style in the renderer
+	ImageCache* image_cache_;        // Not owned
+	RendererStyle& renderer_style_;  // Reference to global renderer style in the renderer
 	const UI::FontSets& fontsets_;
 };
 
@@ -747,7 +855,8 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 			ts.skip_ws();
 			spacer_nodes.clear();
 
-			// We only know if the spacer goes to the left or right after having a look at the current word.
+			// We only know if the spacer goes to the left or right after having a look at the current
+			// word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
 				spacer_nodes.push_back(new WordSpacerNode(font_cache_, ns));
 			}
@@ -759,19 +868,19 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					for (WordSpacerNode* spacer: spacer_nodes) {
+					for (WordSpacerNode* spacer : spacer_nodes) {
 						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(),
-												  new TextNode(font_cache_, ns, word.c_str()));
-				} else { // Sequences of Latin words go to the right from current position
+					it = text_nodes.insert(
+					   text_nodes.begin(), new TextNode(font_cache_, ns, word.c_str()));
+				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					for (WordSpacerNode* spacer: spacer_nodes) {
+					for (WordSpacerNode* spacer : spacer_nodes) {
 						it = text_nodes.insert(it, spacer);
 						if (it < text_nodes.end()) {
 							++it;
@@ -801,7 +910,7 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
-					for (const std::string& unit: units) {
+					for (const std::string& unit : units) {
 						nodes.push_back(new TextNode(font_cache_, ns, unit));
 					}
 				} else {
@@ -815,8 +924,8 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 void TagHandler::emit_nodes(vector<RenderNode*>& nodes) {
 	for (Child* c : tag_.children()) {
 		if (c->tag) {
-			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, font_cache_, nodestyle_, image_cache_,
-																			 renderer_style_, fontsets_));
+			std::unique_ptr<TagHandler> th(create_taghandler(
+			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
 			th->enter();
 			th->emit_nodes(nodes);
 		} else
@@ -826,33 +935,51 @@ void TagHandler::emit_nodes(vector<RenderNode*>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						RendererStyle& init_renderer_style, const UI::FontSets& fontsets)
-		: TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {}
+	FontTagHandler(Tag& tag,
+	               FontCache& fc,
+	               NodeStyle ns,
+	               ImageCache* image_cache,
+	               RendererStyle& init_renderer_style,
+	               const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	}
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		if (a.has("color")) nodestyle_.font_color = a["color"].get_color();
-		if (a.has("size")) nodestyle_.font_size = a["size"].get_int();
-		if (a.has("face")) nodestyle_.font_face = a["face"].get_string();
-		if (a.has("bold")) nodestyle_.font_style |= a["bold"].get_bool() ? IFont::BOLD : 0;
-		if (a.has("italic")) nodestyle_.font_style |= a["italic"].get_bool() ? IFont::ITALIC : 0;
-		if (a.has("underline")) nodestyle_.font_style |= a["underline"].get_bool() ? IFont::UNDERLINE : 0;
-		if (a.has("shadow")) nodestyle_.font_style |= a["shadow"].get_bool() ? IFont::SHADOW : 0;
-		if (a.has("ref")) nodestyle_.reference = a["ref"].get_string();
+		if (a.has("color"))
+			nodestyle_.font_color = a["color"].get_color();
+		if (a.has("size"))
+			nodestyle_.font_size = a["size"].get_int();
+		if (a.has("face"))
+			nodestyle_.font_face = a["face"].get_string();
+		if (a.has("bold"))
+			nodestyle_.font_style |= a["bold"].get_bool() ? IFont::BOLD : 0;
+		if (a.has("italic"))
+			nodestyle_.font_style |= a["italic"].get_bool() ? IFont::ITALIC : 0;
+		if (a.has("underline"))
+			nodestyle_.font_style |= a["underline"].get_bool() ? IFont::UNDERLINE : 0;
+		if (a.has("shadow"))
+			nodestyle_.font_style |= a["shadow"].get_bool() ? IFont::SHADOW : 0;
+		if (a.has("ref"))
+			nodestyle_.reference = a["ref"].get_string();
 	}
 };
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					RendererStyle& init_renderer_style, const UI::FontSets& fontsets)
-		: TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
+	PTagHandler(Tag& tag,
+	            FontCache& fc,
+	            NodeStyle ns,
+	            ImageCache* image_cache,
+	            RendererStyle& init_renderer_style,
+	            const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
 	}
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		if (a.has("indent")) indent_ = a["indent"].get_int();
+		if (a.has("indent"))
+			indent_ = a["indent"].get_int();
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
@@ -894,9 +1021,13 @@ private:
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
+	ImgTagHandler(Tag& tag,
+	              FontCache& fc,
+	              NodeStyle ns,
+	              ImageCache* image_cache,
+	              RendererStyle& init_renderer_style,
+	              const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
 	}
 
 	void enter() override {
@@ -913,9 +1044,14 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {}
+	VspaceTagHandler(Tag& tag,
+	                 FontCache& fc,
+	                 NodeStyle ns,
+	                 ImageCache* image_cache,
+	                 RendererStyle& init_renderer_style,
+	                 const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
+	}
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
@@ -933,11 +1069,16 @@ private:
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
-		background_image_(nullptr),
-		space_(0) {}
+	HspaceTagHandler(Tag& tag,
+	                 FontCache& fc,
+	                 NodeStyle ns,
+	                 ImageCache* image_cache,
+	                 RendererStyle& init_renderer_style,
+	                 const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
+	     background_image_(nullptr),
+	     space_(0) {
+	}
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
@@ -952,8 +1093,7 @@ public:
 			try {
 				background_image_ = image_cache_->get(fill_text_);
 				fill_text_ = "";
-			}
-			catch (ImageNotFound&) {
+			} catch (ImageNotFound&) {
 			}
 		}
 	}
@@ -987,9 +1127,13 @@ private:
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					 RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	BrTagHandler(Tag& tag,
+	             FontCache& fc,
+	             NodeStyle ns,
+	             ImageCache* image_cache,
+	             RendererStyle& init_renderer_style,
+	             const UI::FontSets& fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void emit_nodes(vector<RenderNode*>& nodes) override {
@@ -997,19 +1141,20 @@ public:
 	}
 };
 
-
 class SubTagHandler : public TagHandler {
 public:
-	SubTagHandler
-		(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-		 RendererStyle& init_renderer_style, const UI::FontSets& fontsets,
-		 uint16_t max_w = 0, bool shrink_to_fit = true)
-		:
-			TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
-			shrink_to_fit_(shrink_to_fit),
-			w_(max_w),
-			render_node_(new SubTagRenderNode(ns))
-	{
+	SubTagHandler(Tag& tag,
+	              FontCache& fc,
+	              NodeStyle ns,
+	              ImageCache* image_cache,
+	              RendererStyle& init_renderer_style,
+	              const UI::FontSets& fontsets,
+	              uint16_t max_w = 0,
+	              bool shrink_to_fit = true)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
+	     shrink_to_fit_(shrink_to_fit),
+	     w_(max_w),
+	     render_node_(new SubTagRenderNode(ns)) {
 	}
 
 	void enter() override {
@@ -1030,10 +1175,14 @@ public:
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
-		if (a.has("padding_r")) padding.right = a["padding_r"].get_int();
-		if (a.has("padding_b")) padding.bottom = a["padding_b"].get_int();
-		if (a.has("padding_l")) padding.left = a["padding_l"].get_int();
-		if (a.has("padding_t")) padding.top = a["padding_t"].get_int();
+		if (a.has("padding_r"))
+			padding.right = a["padding_r"].get_int();
+		if (a.has("padding_b"))
+			padding.bottom = a["padding_b"].get_int();
+		if (a.has("padding_l"))
+			padding.left = a["padding_l"].get_int();
+		if (a.has("padding_t"))
+			padding.top = a["padding_t"].get_int();
 		if (a.has("margin")) {
 			uint8_t p = a["margin"].get_int();
 			margin.left = margin.top = margin.right = margin.bottom = p;
@@ -1042,7 +1191,7 @@ public:
 		vector<RenderNode*> subnodes;
 		TagHandler::emit_nodes(subnodes);
 
-		if (! w_) { // Determine the width by the width of the widest subnode
+		if (!w_) {  // Determine the width by the width of the widest subnode
 			for (RenderNode* n : subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
@@ -1062,7 +1211,8 @@ public:
 		// Collect all tags from children
 		for (RenderNode* rn : nodes_to_render) {
 			for (const Reference& r : rn->get_references()) {
-				render_node_->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
+				render_node_->add_reference(
+				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
 				if (rn->halign() == UI::Align::kCenter) {
@@ -1108,18 +1258,25 @@ public:
 		}
 		if (a.has("float")) {
 			const string s = a["float"].get_string();
-			if (s == "right") render_node_->set_floating(RenderNode::FLOAT_RIGHT);
-			else if (s == "left") render_node_->set_floating(RenderNode::FLOAT_LEFT);
+			if (s == "right")
+				render_node_->set_floating(RenderNode::FLOAT_RIGHT);
+			else if (s == "left")
+				render_node_->set_floating(RenderNode::FLOAT_LEFT);
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
-			if (align == "top") render_node_->set_valign(UI::Align::kTop);
-			else if (align == "bottom") render_node_->set_valign(UI::Align::kBottom);
-			else if (align == "center" || align == "middle") render_node_->set_valign(UI::Align::kCenter);
+			if (align == "top")
+				render_node_->set_valign(UI::Align::kTop);
+			else if (align == "bottom")
+				render_node_->set_valign(UI::Align::kBottom);
+			else if (align == "center" || align == "middle")
+				render_node_->set_valign(UI::Align::kCenter);
 		}
 	}
+
 protected:
 	bool shrink_to_fit_;
+
 private:
 	uint16_t w_;
 	SubTagRenderNode* render_node_;
@@ -1127,31 +1284,48 @@ private:
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					 RendererStyle& init_renderer_style, const UI::FontSets& fontsets, uint16_t w) :
-		SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
+	RTTagHandler(Tag& tag,
+	             FontCache& fc,
+	             NodeStyle ns,
+	             ImageCache* image_cache,
+	             RendererStyle& init_renderer_style,
+	             const UI::FontSets& fontsets,
+	             uint16_t w)
+	   : SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in sub.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
-		shrink_to_fit_ = shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		shrink_to_fit_ =
+		   shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 	}
 };
 
-template<typename T> TagHandler* create_taghandler
-	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-	 RendererStyle& renderer_style, const UI::FontSets& fontsets)
-{
+template <typename T>
+TagHandler* create_taghandler(Tag& tag,
+                              FontCache& fc,
+                              NodeStyle& ns,
+                              ImageCache* image_cache,
+                              RendererStyle& renderer_style,
+                              const UI::FontSets& fontsets) {
 	return new T(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
-using TagHandlerMap = map<const string, TagHandler* (*)
-	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-	 RendererStyle& renderer_style, const UI::FontSets& fontsets)>;
+using TagHandlerMap = map<const string,
+                          TagHandler* (*)(Tag& tag,
+                                          FontCache& fc,
+                                          NodeStyle& ns,
+                                          ImageCache* image_cache,
+                                          RendererStyle& renderer_style,
+                                          const UI::FontSets& fontsets)>;
 
-TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-										RendererStyle& renderer_style, const UI::FontSets& fontsets) {
+TagHandler* create_taghandler(Tag& tag,
+                              FontCache& fc,
+                              NodeStyle& ns,
+                              ImageCache* image_cache,
+                              RendererStyle& renderer_style,
+                              const UI::FontSets& fontsets) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -1164,18 +1338,23 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	}
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
-		throw RenderError
-			((boost::format("No Tag handler for %s. This is a bug, please submit a report.")
-			  % tag.name()).str());
+		throw RenderError(
+		   (boost::format("No Tag handler for %s. This is a bug, please submit a report.") %
+		    tag.name())
+		      .str());
 	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 
-Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets) :
-	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache), fontsets_(fontsets),
-	renderer_style_("sans", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
-	TextureCache* render
-		(const std::string&, uint16_t, const TagSet&);
+Renderer::Renderer(ImageCache* image_cache,
+                   TextureCache* texture_cache,
+                   const UI::FontSets& fontsets)
+   : font_cache_(new FontCache()),
+     parser_(new Parser()),
+     image_cache_(image_cache),
+     texture_cache_(texture_cache),
+     fontsets_(fontsets),
+     renderer_style_("sans", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
 Renderer::~Renderer() {
@@ -1191,16 +1370,20 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
 
-	UI::FontSet const * fontset = fontsets_.get_fontset(i18n::get_locale());
+	UI::FontSet const* fontset = fontsets_.get_fontset(i18n::get_locale());
 
-	NodeStyle default_style = {
-		fontset, renderer_style_.font_face, renderer_style_.font_size,
-		RGBColor(255, 255, 0), IFont::DEFAULT,
-		0, UI::Align::kLeft, UI::Align::kTop,
-		""
-	};
+	NodeStyle default_style = {fontset,
+	                           renderer_style_.font_face,
+	                           renderer_style_.font_size,
+	                           RGBColor(255, 255, 0),
+	                           IFont::DEFAULT,
+	                           0,
+	                           UI::Align::kLeft,
+	                           UI::Align::kTop,
+	                           ""};
 
-	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
+	RTTagHandler rtrn(
+	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit_nodes(nodes);
@@ -1216,9 +1399,9 @@ Texture* Renderer::render(const string& text, uint16_t width, const TagSet& allo
 	return node->render(texture_cache_);
 }
 
-IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
+IRefMap*
+Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());
 }
-
 }

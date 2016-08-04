@@ -32,10 +32,8 @@ namespace Widelands {
 
 constexpr uint8_t kCurrentPacketVersion = 1;
 
-Path::Path(CoordPath & o)
-	: start_(o.get_start()), end_(o.get_end()), path_(o.steps())
-{
-	std::reverse(path_.begin(), path_.end()); //  path stored in reverse order
+Path::Path(CoordPath& o) : start_(o.get_start()), end_(o.get_end()), path_(o.steps()) {
+	std::reverse(path_.begin(), path_.end());  //  path stored in reverse order
 }
 
 /*
@@ -43,8 +41,7 @@ Path::Path(CoordPath & o)
 Change the path so that it goes in the opposite direction
 ===============
 */
-void Path::reverse()
-{
+void Path::reverse() {
 	std::swap(start_, end_);
 	std::reverse(path_.begin(), path_.end());
 
@@ -57,16 +54,15 @@ void Path::reverse()
 Add the given step at the end of the path.
 ===============
 */
-void Path::append(const Map & map, const Direction dir) {
-	path_.insert(path_.begin(), dir); // stores in reversed order!
+void Path::append(const Map& map, const Direction dir) {
+	path_.insert(path_.begin(), dir);  // stores in reversed order!
 	map.get_neighbour(end_, dir, &end_);
 }
 
 /**
  * Save the given path in the given file
  */
-void Path::save(FileWrite & fw) const
-{
+void Path::save(FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersion);
 	write_coords_32(&fw, start_);
 
@@ -83,8 +79,7 @@ void Path::save(FileWrite & fw) const
  * The path previously contained in \p this object is entirely
  * replaced by the path from the file.
  */
-void Path::load(FileRead & fr, const Map & map)
-{
+void Path::load(FileRead& fr, const Map& map) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
@@ -97,7 +92,7 @@ void Path::load(FileRead & fr, const Map & map)
 		} else {
 			throw UnhandledVersionError("Path", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("player names and tribes: %s", e.what());
 	}
 }
@@ -107,7 +102,7 @@ void Path::load(FileRead & fr, const Map & map)
 Initialize from a path, calculating the coordinates as needed
 ===============
 */
-CoordPath::CoordPath(const Map & map, const Path & path) {
+CoordPath::CoordPath(const Map& map, const Path& path) {
 	coords_.clear();
 	path_.clear();
 
@@ -125,11 +120,9 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 	}
 }
 
-
 /// After which step does the node appear in this path?
 /// \return -1 if node is not part of this path.
-int32_t CoordPath::get_index(Coords const c) const
-{
+int32_t CoordPath::get_index(Coords const c) const {
 	for (uint32_t i = 0; i < coords_.size(); ++i)
 		if (coords_[i] == c)
 			return i;
@@ -137,21 +130,18 @@ int32_t CoordPath::get_index(Coords const c) const
 	return -1;
 }
 
-
 /*
 ===============
 Reverse the direction of the path.
 ===============
 */
-void CoordPath::reverse()
-{
+void CoordPath::reverse() {
 	std::reverse(path_.begin(), path_.end());
 	std::reverse(coords_.begin(), coords_.end());
 
 	for (uint32_t i = 0; i < path_.size(); ++i)
 		path_[i] = get_reverse_dir(path_[i]);
 }
-
 
 /*
 ===============
@@ -182,7 +172,7 @@ void CoordPath::trim_start(const std::vector<char>::size_type before) {
 Append the given path. Automatically created the necessary coordinates.
 ===============
 */
-void CoordPath::append(const Map & map, const Path & tail) {
+void CoordPath::append(const Map& map, const Path& tail) {
 	assert(tail.get_start() == get_end());
 
 	Coords c = get_end();
@@ -202,13 +192,10 @@ void CoordPath::append(const Map & map, const Path & tail) {
 Append the given path.
 ===============
 */
-void CoordPath::append(const CoordPath & tail)
-{
+void CoordPath::append(const CoordPath& tail) {
 	assert(tail.get_start() == get_end());
 
 	path_.insert(path_.end(), tail.path_.begin(), tail.path_.end());
-	coords_.insert
-		(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
+	coords_.insert(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
 }
-
 }

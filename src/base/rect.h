@@ -22,8 +22,7 @@
 
 #include "base/point.h"
 
-template <typename T>
-struct GenericRect {
+template <typename T> struct GenericRect {
 	/// Generates a degenerate Rect at (0, 0) with no height or width.
 	GenericRect() : GenericRect(T(0), T(0), T(0), T(0)) {
 	}

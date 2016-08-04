@@ -31,7 +31,6 @@
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 
-
 namespace RT {
 
 Attr::Attr(const std::string& gname, const std::string& value) : name_(gname), value_(value) {
@@ -99,7 +98,7 @@ Tag::~Tag() {
 	}
 }
 
-void Tag::parse_opening_tag(TextStream & ts, TagConstraints & tcs) {
+void Tag::parse_opening_tag(TextStream& ts, TagConstraints& tcs) {
 	ts.expect("<");
 	name_ = ts.till_any(" \t\n>");
 	ts.skip_ws();
@@ -112,13 +111,13 @@ void Tag::parse_opening_tag(TextStream & ts, TagConstraints & tcs) {
 	ts.expect(">");
 }
 
-void Tag::parse_closing_tag(TextStream & ts) {
+void Tag::parse_closing_tag(TextStream& ts) {
 	ts.expect("</");
 	ts.expect(name_, false);
 	ts.expect(">", false);
 }
 
-void Tag::parse_attribute(TextStream & ts, std::unordered_set<std::string> & allowed_attrs) {
+void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
 	if (!allowed_attrs.count(aname))
 		throw SyntaxErrorImpl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
@@ -128,8 +127,7 @@ void Tag::parse_attribute(TextStream & ts, std::unordered_set<std::string> & all
 	attribute_map_.add_attribute(aname, new Attr(aname, ts.parse_string()));
 }
 
-void Tag::parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_tags)
-{
+void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags) {
 	TagConstraint tc = tcs[name_];
 
 	for (;;) {
@@ -140,7 +138,8 @@ void Tag::parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & al
 		std::string text = ts.till_any("<");
 		if (text != "") {
 			if (!tc.text_allowed) {
-				throw SyntaxErrorImpl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
+				throw SyntaxErrorImpl(
+				   line, col, "no text, as only tags are allowed here", text, ts.peek(100));
 			}
 			children_.push_back(new Child(text));
 		}
@@ -148,8 +147,10 @@ void Tag::parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & al
 		if (ts.peek(2 + name_.size()) == ("</" + name_))
 			break;
 
-		Tag * child = new Tag();
-		line = ts.line(); col = ts.col(); size_t cpos = ts.pos();
+		Tag* child = new Tag();
+		line = ts.line();
+		col = ts.col();
+		size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
 		if (!tc.allowed_children.count(child->name()))
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
@@ -160,7 +161,7 @@ void Tag::parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & al
 	}
 }
 
-void Tag::parse(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_tags) {
+void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags) {
 	parse_opening_tag(ts, tcs);
 
 	TagConstraint tc = tcs[name_];
@@ -170,12 +171,11 @@ void Tag::parse(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_ta
 	}
 }
 
-
 /*
  * Class Parser
  */
 Parser::Parser() {
-	{ // rt tag
+	{  // rt tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
@@ -183,7 +183,7 @@ Parser::Parser() {
 		tc.allowed_attrs.insert("padding_b");
 		tc.allowed_attrs.insert("padding_t");
 		tc.allowed_attrs.insert("db_show_spaces");
-		tc.allowed_attrs.insert("keep_spaces"); // Keeps blank spaces intact for text editing
+		tc.allowed_attrs.insert("keep_spaces");  // Keeps blank spaces intact for text editing
 		tc.allowed_attrs.insert("background");
 
 		tc.allowed_children.insert("p");
@@ -194,13 +194,13 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["rt"] = tc;
 	}
-	{ // br tag
+	{  // br tag
 		TagConstraint tc;
 		tc.text_allowed = false;
 		tc.has_closing_tag = false;
 		tag_constraints_["br"] = tc;
 	}
-	{ // img tag
+	{  // img tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
 		tc.allowed_attrs.insert("ref");
@@ -208,14 +208,14 @@ Parser::Parser() {
 		tc.has_closing_tag = false;
 		tag_constraints_["img"] = tc;
 	}
-	{ // vspace tag
+	{  // vspace tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("gap");
 		tc.text_allowed = false;
 		tc.has_closing_tag = false;
 		tag_constraints_["vspace"] = tc;
 	}
-	{ // space tag
+	{  // space tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("gap");
 		tc.allowed_attrs.insert("fill");
@@ -223,7 +223,7 @@ Parser::Parser() {
 		tc.has_closing_tag = false;
 		tag_constraints_["space"] = tc;
 	}
-	{ // sub tag
+	{  // sub tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
 		tc.allowed_attrs.insert("padding_r");
@@ -245,7 +245,7 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["sub"] = tc;
 	}
-	{ // p tag
+	{  // p tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("indent");
 		tc.allowed_attrs.insert("align");
@@ -261,7 +261,7 @@ Parser::Parser() {
 		tc.has_closing_tag = true;
 		tag_constraints_["p"] = tc;
 	}
-	{ // font tag
+	{  // font tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("size");
 		tc.allowed_attrs.insert("face");
@@ -287,13 +287,14 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-Tag * Parser::parse(std::string text, const TagSet & allowed_tags) {
-	boost::replace_all(text, "\\", "\\\\"); // Prevent crashes with \.
+Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
+	boost::replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
 
 	text_stream_.reset(new TextStream(text));
 
-	text_stream_->skip_ws(); text_stream_->rskip_ws();
-	Tag * rv = new Tag();
+	text_stream_->skip_ws();
+	text_stream_->rskip_ws();
+	Tag* rv = new Tag();
 	rv->parse(*text_stream_, tag_constraints_, allowed_tags);
 
 	return rv;
@@ -303,5 +304,4 @@ std::string Parser::remaining_text() {
 		return "";
 	return text_stream_->remaining_text();
 }
-
 }

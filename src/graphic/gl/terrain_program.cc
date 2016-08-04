@@ -47,14 +47,15 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array(
-		{attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_});
+	   {attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
 
 	Gl::vertex_attrib_pointer(
 	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
-	Gl::vertex_attrib_pointer(attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
 	Gl::vertex_attrib_pointer(
 	   attr_texture_offset_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_offset_x));
 	Gl::vertex_attrib_pointer(
@@ -84,7 +85,7 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 }
 
 void TerrainProgram::draw(uint32_t gametime,
-								  const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
                           const FieldsToDraw& fields_to_draw,
                           float z_value) {
 	// This method expects that all terrains have the same dimensions and that
@@ -129,8 +130,5 @@ void TerrainProgram::draw(uint32_t gametime,
 
 	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
 	const FloatRect texture_coordinates = to_gl_texture(blit_data);
-	gl_draw(blit_data.texture_id,
-	        texture_coordinates.w,
-	        texture_coordinates.h,
-	        z_value);
+	gl_draw(blit_data.texture_id, texture_coordinates.w, texture_coordinates.h, z_value);
 }

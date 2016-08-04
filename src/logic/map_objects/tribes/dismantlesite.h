@@ -45,8 +45,11 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
-	~DismantleSiteDescr() override {}
+	DismantleSiteDescr(const std::string& init_descname,
+	                   const LuaTable& t,
+	                   const EditorGameBase& egbase);
+	~DismantleSiteDescr() override {
+	}
 
 	Building& create_object() const override;
 
@@ -62,28 +65,32 @@ class DismantleSite : public PartiallyFinishedBuilding {
 	MO_DESCR(DismantleSiteDescr)
 
 public:
-	DismantleSite(const DismantleSiteDescr & descr);
-	DismantleSite
-		(const DismantleSiteDescr & descr, EditorGameBase &,
-		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
+	DismantleSite(const DismantleSiteDescr& descr);
+	DismantleSite(const DismantleSiteDescr& descr,
+	              EditorGameBase&,
+	              Coords const,
+	              Player&,
+	              bool,
+	              Building::FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
-	void init   (EditorGameBase &) override;
+	void init(EditorGameBase&) override;
 
-	bool get_building_work(Game &, Worker &, bool success) override;
+	bool get_building_work(Game&, Worker&, bool success) override;
 
 	static const Buildcost count_returned_wares(Building* building);
 
 protected:
 	void update_statistics_string(std::string*) override;
 
-	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
+	uint32_t build_step_time() const override {
+		return DISMANTLESITE_STEP_TIME;
+	}
 
 	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
-	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_DISMANTLESITE_H

@@ -30,7 +30,8 @@
 class Screen : public Surface {
 public:
 	Screen(int w, int h);
-	virtual ~Screen() {}
+	virtual ~Screen() {
+	}
 
 	// Implements Surface.
 	int width() const override;

@@ -29,16 +29,13 @@
 class EditorInteractive;
 struct EditorIncreaseResourcesTool;
 
-struct EditorToolChangeResourcesOptionsMenu :
-	public EditorToolOptionsMenu
-{
-	EditorToolChangeResourcesOptionsMenu
-		(EditorInteractive             &,
-		 EditorIncreaseResourcesTool &,
-		 UI::UniqueWindow::Registry     &);
+struct EditorToolChangeResourcesOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolChangeResourcesOptionsMenu(EditorInteractive&,
+	                                     EditorIncreaseResourcesTool&,
+	                                     UI::UniqueWindow::Registry&);
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void change_resource();
 	void update_change_by();
 	void update_set_to();

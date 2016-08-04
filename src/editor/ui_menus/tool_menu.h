@@ -26,7 +26,7 @@
 
 /// The tool selection window/menu.
 struct EditorToolMenu : public UI::UniqueWindow {
-	EditorToolMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
+	EditorToolMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 private:
 	UI::Radiogroup radioselect_;

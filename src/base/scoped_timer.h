@@ -20,8 +20,8 @@
 #ifndef WL_BASE_SCOPED_TIMER_H
 #define WL_BASE_SCOPED_TIMER_H
 
-#include <string>
 #include <stdint.h>
+#include <string>
 
 #include "base/macros.h"
 

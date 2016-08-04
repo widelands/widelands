@@ -26,7 +26,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
-
 namespace UI {
 
 /**
@@ -35,14 +34,14 @@ namespace UI {
  */
 class FullscreenHelpWindow : public Window {
 public:
-	FullscreenHelpWindow
-		(Panel * parent,
-		 LuaInterface* lua,
-		 const std::string& script_path,
-		 const std::string & caption,
-		 uint32_t width = 0, uint32_t height = 0);
+	FullscreenHelpWindow(Panel* parent,
+	                     LuaInterface* lua,
+	                     const std::string& script_path,
+	                     const std::string& caption,
+	                     uint32_t width = 0,
+	                     uint32_t height = 0);
 
-	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 
 	/// Handle keypresses
@@ -55,7 +54,6 @@ private:
 	std::unique_ptr<MultilineTextarea> textarea_;
 };
 
-
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_FSMENU_HELPWINDOW_H

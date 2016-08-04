@@ -27,14 +27,12 @@
  * Generic problem when dealing with a file or directory
  */
 struct FileError : public std::runtime_error {
-	explicit FileError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & message = "problem with file/directory")
+	explicit FileError(const std::string& thrower,
+	                   const std::string& filename,
+	                   const std::string& message = "problem with file/directory")
 
-		:
-		std::runtime_error(thrower + ": " + message + ": " + filename)
-	{}
+	   : std::runtime_error(thrower + ": " + message + ": " + filename) {
+	}
 };
 
 /**
@@ -42,39 +40,36 @@ struct FileError : public std::runtime_error {
  * are problems with the path, e.g. loops or nonexistent path components
  */
 struct FileNotFoundError : public FileError {
-	explicit FileNotFoundError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & message = "could not find file or directory")
+	explicit FileNotFoundError(const std::string& thrower,
+	                           const std::string& filename,
+	                           const std::string& message = "could not find file or directory")
 
-		: FileError(thrower, filename, message)
-	{}
+	   : FileError(thrower, filename, message) {
+	}
 };
 
 /**
  * The file/directory is of an unexpected type. Reasons can be given via message
  */
 struct FileTypeError : public FileError {
-	explicit FileTypeError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & message = "file or directory has wrong type")
+	explicit FileTypeError(const std::string& thrower,
+	                       const std::string& filename,
+	                       const std::string& message = "file or directory has wrong type")
 
-		: FileError(thrower, filename, message)
-	{}
+	   : FileError(thrower, filename, message) {
+	}
 };
 
 /**
  * The operating system denied access to the file/directory in question
  */
 struct FileAccessDeniedError : public FileError {
-	explicit FileAccessDeniedError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & message = "access denied on file or directory")
+	explicit FileAccessDeniedError(const std::string& thrower,
+	                               const std::string& filename,
+	                               const std::string& message = "access denied on file or directory")
 
-		: FileError(thrower, filename, message)
-	{}
+	   : FileError(thrower, filename, message) {
+	}
 };
 
 /**
@@ -82,12 +77,11 @@ struct FileAccessDeniedError : public FileError {
  */
 
 struct DirectoryCannotCreateError : public FileError {
-	explicit DirectoryCannotCreateError
-		(const std::string & thrower,
-		 const std::string & dirname,
-		 const std::string & message = "cannot create directory")
+	explicit DirectoryCannotCreateError(const std::string& thrower,
+	                                    const std::string& dirname,
+	                                    const std::string& message = "cannot create directory")
 
-		: FileError(thrower, dirname, message)
-	{}
+	   : FileError(thrower, dirname, message) {
+	}
 };
 #endif  // end of include guard: WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H

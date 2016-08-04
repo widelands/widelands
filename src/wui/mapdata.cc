@@ -20,34 +20,30 @@
 #include "wui/mapdata.h"
 
 #include "io/filesystem/filesystem.h"
-#include "io/filesystem/layered_filesystem.h"
 
 MapData::MapData(const std::string& init_filename,
                  const std::string& init_localized_name,
                  const std::string& init_author,
                  const MapData::MapType& init_maptype,
-                 const MapData::DisplayType& init_displaytype) :
-   filename(init_filename),
-   name(init_localized_name),
-   localized_name(init_localized_name),
-   authors(init_author),
-   description(""),
-   hint(""),
-   nrplayers(0),
-   width(0),
-   height(0),
-   maptype(init_maptype),
-   displaytype(init_displaytype)
-{}
+                 const MapData::DisplayType& init_displaytype)
+   : filename(init_filename),
+     name(init_localized_name),
+     localized_name(init_localized_name),
+     authors(init_author),
+     description(""),
+     hint(""),
+     nrplayers(0),
+     width(0),
+     height(0),
+     maptype(init_maptype),
+     displaytype(init_displaytype) {
+}
 
-MapData::MapData(const Widelands::Map& map, const std::string& init_filename,
-	  const MapData::MapType& init_maptype,
-	  const MapData::DisplayType& init_displaytype) :
-		MapData(init_filename,
-              _("No Name"),
-              _("No Author"),
-              init_maptype,
-              init_displaytype) {
+MapData::MapData(const Widelands::Map& map,
+                 const std::string& init_filename,
+                 const MapData::MapType& init_maptype,
+                 const MapData::DisplayType& init_displaytype)
+   : MapData(init_filename, _("No Name"), _("No Author"), init_maptype, init_displaytype) {
 
 	i18n::Textdomain td("maps");
 	if (!map.get_name().empty()) {
@@ -71,13 +67,13 @@ MapData::MapData(const Widelands::Map& map, const std::string& init_filename,
 	}
 }
 
-MapData::MapData(const std::string& init_filename, const std::string& init_localized_name) :
-		MapData(init_filename,
-              init_localized_name,
-              "",
-              MapData::MapType::kDirectory,
-              MapData::DisplayType::kMapnamesLocalized)
-{}
+MapData::MapData(const std::string& init_filename, const std::string& init_localized_name)
+   : MapData(init_filename,
+             init_localized_name,
+             "",
+             MapData::MapType::kDirectory,
+             MapData::DisplayType::kMapnamesLocalized) {
+}
 
 bool MapData::compare_names(const MapData& other) {
 	// The parent directory gets special treatment.

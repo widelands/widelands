@@ -57,11 +57,11 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 // not properly joined at the corners which does not seem to matter a lot for
 // the thin lines that we draw in Widelands.
 void tesselate_line_strip(int w,
-								  int h,
-								  const RGBColor& color,
-								  float line_width,
-								  const std::vector<FloatPoint>& points,
-								  std::vector<DrawLineProgram::PerVertexData>* vertices) {
+                          int h,
+                          const RGBColor& color,
+                          float line_width,
+                          const std::vector<FloatPoint>& points,
+                          std::vector<DrawLineProgram::PerVertexData>* vertices) {
 	const float r = color.r / 255.;
 	const float g = color.g / 255.;
 	const float b = color.b / 255.;
@@ -79,22 +79,19 @@ void tesselate_line_strip(int w,
 		{
 			FloatPoint p = p1 - scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
-			vertices->emplace_back(
-			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
+			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
 		}
 
 		{
 			FloatPoint p = p2 - scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
-			vertices->emplace_back(
-			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
+			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
 		}
 
 		{
 			FloatPoint p = p1 + scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
-			vertices->emplace_back(
-			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
+			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
 		}
 
 		vertices->push_back(vertices->at(vertices->size() - 2));
@@ -103,8 +100,7 @@ void tesselate_line_strip(int w,
 		{
 			FloatPoint p = p2 + scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
-			vertices->emplace_back(
-			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
+			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
 		}
 	}
 }
@@ -116,8 +112,7 @@ void Surface::fill_rect(const Rect& rc, const RGBAColor& clr, BlendMode blend_mo
 	do_fill_rect(rect, clr, blend_mode);
 }
 
-void Surface::brighten_rect(const Rect& rc, const int32_t factor)
-{
+void Surface::brighten_rect(const Rect& rc, const int32_t factor) {
 	if (!factor) {
 		return;
 	}
@@ -130,8 +125,8 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void Surface::draw_line_strip(std::vector<FloatPoint> points,
-										const RGBColor& color,
-										float line_width) {
+                              const RGBColor& color,
+                              float line_width) {
 	if (points.size() < 2) {
 		return;
 	}
@@ -178,5 +173,6 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 
 	surface->draw_line_strip({top_left, top_right, bottom_right}, clr, 1);
 	// We need to split this up in order not to miss a pixel on the bottom right corner.
-	surface->draw_line_strip({FloatPoint(bottom_right.x + 1, bottom_right.y), bottom_left, top_left}, clr, 1);
+	surface->draw_line_strip(
+	   {FloatPoint(bottom_right.x + 1, bottom_right.y), bottom_left, top_left}, clr, 1);
 }
