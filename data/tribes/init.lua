@@ -18,15 +18,15 @@ tribes = wl.Tribes()
 
 
 -- RST
--- .. add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
+-- .. function:: add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
 --
 --    Adds 6 walk or sail animations - one for each walking direction - to 'table'.
 --
 --    :arg table: A table that the animation data is added to. It may already contain some animations.
---    :arg animationname: The name of the animation to be added, e.g. "walkload".
+--    :arg animationname: The name of the animation to be added, e.g. ``walkload``.
 --    :arg dirname: The name of the directory where the animation image files are located.
---    :arg basename: The basename of the animation files. The filenames of the animation files need to have the format <basename>_(e|ne|se|sw|w|nw)_\d+.png
---    :arg hotspot: The hotspot coordinates for blitting, e.g. { 2, 20 }.
+--    :arg basename: The basename of the animation files. The filenames of the animation files need to have the format ``<basename>_(e|ne|se|sw|w|nw)_\d+.png``
+--    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{ 2, 20 }``.
 --    :arg fps: Frames per second. Only use this if the animation has more than 1 frame, and if you need to deviate from the default frame rate.
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
    if (fps ~= nil) then

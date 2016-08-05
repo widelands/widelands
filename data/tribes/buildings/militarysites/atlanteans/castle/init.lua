@@ -7,49 +7,49 @@ dirname = path.dirname(__file__)
 -- RST
 -- .. new_militarysite_type(table)
 --
---    This function adds the definition os a military site building to the engine.
+--    This function adds the definition of a military site building to the engine.
 --
 --    :arg table: This table contains all the data that the game engine will add to this building.
 --                It contains the following entries:
 --
---    <b>msgctxt</b>: The context that Gettext will use to disambiguate the translations for strings in this table.
+--    **msgctxt**: The context that Gettext will use to disambiguate the translations for strings in this table.
 --
---    <b>name</b>: A string containing the internal name of this building.
+--    **name**: A string containing the internal name of this building.
 --
---    <b>descname</b>: The translatable display name. use pgettext with the msgctxt above to fetch the string.
+--    **descname**: The translatable display name. use ``pgettext`` with the ``msgctxt`` above to fetch the string.
 --
---    <b>helptext_script</b>: The full path to the helptexts.lua script for this building.
+--    **helptext_script**: The full path to the ``helptexts.lua`` script for this building.
 --
---    <b>icon</b>: The full path to the menu icon for this building.
+--    **icon**: The full path to the menu icon for this building.
 --
---    <b>size</b>: The size of this building: 'small', 'medium', or 'big'.
+--    **size**: The size of this building: ``"small"``, ``"medium"``, or ``"big"``.
 --
---    <b>buildcost</b>: A table with the wares used to build this building, containing warename - amount pairs, e.g. buildcost = { log = 4, granite = 2 }.
+--    **buildcost**: A table with the wares used to build this building, containing warename - amount pairs, e.g. ``buildcost = { log = 4, granite = 2 }``.
 --
---    <b>return_on_dismantle</b>: The wares that this building will give back to the player when it is dismantled, e.g. buildcost = { log = 2, granite = 1 }.
+--    **return_on_dismantle**: The wares that this building will give back to the player when it is dismantled, e.g. ``buildcost = { log = 2, granite = 1 }``.
 --
---    <b>enhancement_cost</b>: The wares needed to upgrade this building, e.g. enhancement_cost = { log = 1, granite = 1 }.
+--    **enhancement_cost**: The wares needed to upgrade this building, e.g. ``enhancement_cost = { log = 1, granite = 1 }``.
 --
---    <b>return_on_dismantle_on_enhanced</b>: The wares that this enhanced building will give back to the player when it is dismantled, e.g. return_on_dismantle_on_enhanced = { granite = 1 }.
+--    **return_on_dismantle_on_enhanced**: The wares that this enhanced building will give back to the player when it is dismantled, e.g. ``return_on_dismantle_on_enhanced = { granite = 1 }``.
 --
---    <b>animations</b>: A table containing all animations for this building.
+--    **animations**: A table containing all animations for this building.
 --
---    <b>aihints</b>: A list of name - value pairs with hints for the AI.
+--    **aihints**: A list of name - value pairs with hints for the AI.
 --
---    <b>max_soldiers</b>: The maximum number of solders that can be garrisoned at this building.
+--    **max_soldiers**: The maximum number of solders that can be garrisoned at this building.
 --
---    <b>heal_per_second</b>: The number of healt points that a garrisoned solder will heal each second.
+--    **heal_per_second**: The number of health points that a garrisoned solder will heal each second.
 --
---    <b>conquers</b>: The conquer radius for this building.
+--    **conquers**: The conquer radius for this building.
 --
---    <b>prefer_heroes</b>: Whether this building prefers heroes or rookies per default. Set to 'true' or 'false'.
+--    **prefer_heroes**: Whether this building prefers heroes or rookies per default. Set to ``true`` or ``false``.
 --
---    <b>messages</b>: Messages that this building will send to the user. The following messages need to ne defined:
---         - occupied: Shown when your soldiers occupy a new building
---         - aggressor: Shown when this building sees enemy soldiers
---         - attack: Shown when this building is being attacked by an enemy
---         - defeated_enemy: Shown when you lose this building to an enemy
---         - defeated_you: Shown when you take this building from an enemy
+--    **messages**: Messages that this building will send to the user. The following messages need to ne defined:
+--         * *occupied*: Shown when your soldiers occupy a new building
+--         * *aggressor*: Shown when this building sees enemy soldiers
+--         * *attack*: Shown when this building is being attacked by an enemy
+--         * *defeated_enemy*: Shown when you lose this building to an enemy
+--         * *defeated_you*: Shown when you take this building from an enemy
 tribes:new_militarysite_type {
    msgctxt = "atlanteans_building",
    name = "atlanteans_castle",

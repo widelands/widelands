@@ -4,7 +4,7 @@
 --
 -- The functions in this file return texts that are used by the Tribal Encyclopedia.
 --
--- See also the helper functions in "tribes/scripting/help/global_helptexts.lua"
+-- See also the helper functions in ``tribes/scripting/help/global_helptexts.lua``
 --
 
 -- This include can be removed when all help texts have been defined.
@@ -14,7 +14,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 -- .. function:: building_helptext_lore()
 --
 --    Returns a localized string with a lore helptext for this building.
---    If you don't have a lore text yet, use no_lore_text_yet() from the global_helptexts.lua script.
+--    If you don't have a lore text yet, use ``no_lore_text_yet()`` from the ``global_helptexts.lua`` script.
 --
 --    :returns: Localized lore text
 function building_helptext_lore()
@@ -26,7 +26,7 @@ end
 -- .. function:: building_helptext_lore_author()
 --
 --    Returns a localized string with a fictional author for the lore helptext for this building. The returned string can be empty.
---    If you don't have an author yet, use no_lore_author_text_yet() from the global_helptexts.lua script.
+--    If you don't have an author yet, use ``no_lore_author_text_yet()`` from the ``global_helptexts.lua`` script.
 --
 --    :returns: Localized lore author or empty string.
 function building_helptext_lore_author()
@@ -37,7 +37,7 @@ end
 -- RST
 -- .. function:: building_helptext_purpose()
 --
---    Returns a localized string with a purpose helptext for this building. This should be individually defined for all buildings. You can use no_purpose_text_yet() from the global_helptexts.lua script if you're not ready to define this yet.
+--    Returns a localized string with a purpose helptext for this building. This should be individually defined for all buildings. You can use ``no_purpose_text_yet()`` from the ``global_helptexts.lua`` script if you're not ready to define this yet.
 --
 --    :returns: Localized purpose text
 function building_helptext_purpose()
@@ -59,7 +59,7 @@ end
 -- RST
 -- .. function:: building_helptext_performance()
 --
---    Returns a localized string with a performance helptext for this building. You can use no_purpose_text_yet() from the global_helptexts.lua script if the performance hasn't been calculated yet. Leave empty when this isn't applicable (e.g. for militarysites or warehouses).
+--    Returns a localized string with a performance helptext for this building. You can use ``no_purpose_text_yet()`` from the ``global_helptexts.lua`` script if the performance hasn't been calculated yet. Leave empty when this isn't applicable (e.g. for militarysites or warehouses).
 --
 --    :returns: Localized performance text or empty string.
 function building_helptext_performance()
