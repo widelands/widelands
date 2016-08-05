@@ -5,7 +5,7 @@
 dirname = path.dirname(__file__)
 
 -- RST
--- .. new_militarysite_type(table)
+-- .. function:: new_militarysite_type(table)
 --
 --    This function adds the definition of a military site building to the engine.
 --
