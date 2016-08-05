@@ -297,17 +297,25 @@ void RealFSImpl::unlink_directory(const std::string& file) {
  * if the dir can't be created or if a file with this name exists
  */
 void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
+	std::string clean_dirname = dirname;
+#ifdef _WIN32
+	// Make sure we always use "/" for splitting the directory, because
+	// directory names might be hardcoded in C++ or come from the file system.
+	// Calling canonicalize_name will take care of this working for all file systems.
+	boost::replace_all(clean_dirname, "\\", "/");
+#endif
+
 	try {
 		std::string::size_type it = 0;
-		while (it < dirname.size()) {
-			it = dirname.find(file_separator(), it);
+		while (it < clean_dirname.size()) {
+			it = clean_dirname.find('/', it);
 
-			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
+			FileSystemPath fspath(canonicalize_name(clean_dirname.substr(0, it)));
 			if (fspath.exists_ && !fspath.is_directory_)
 				throw wexception("'%s' in directory '%s' exists and is not a directory",
-				                 dirname.substr(0, it).c_str(), directory_.c_str());
+				                 clean_dirname.substr(0, it).c_str(), directory_.c_str());
 			if (!fspath.exists_)
-				make_directory(dirname.substr(0, it));
+				make_directory(clean_dirname.substr(0, it));
 
 			if (it == std::string::npos)
 				break;
@@ -315,7 +323,7 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 		}
 	} catch (const std::exception& e) {
 		throw wexception("RealFSImpl::ensure_directory_exists(%s) in directory '%s': %s",
-		                 dirname.c_str(), directory_.c_str(), e.what());
+		                 clean_dirname.c_str(), directory_.c_str(), e.what());
 	}
 }
 
