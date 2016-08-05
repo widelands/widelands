@@ -39,57 +39,66 @@ class Worker;
  */
 class WaresQueue {
 public:
-	using CallbackFn = void
-		(Game &, WaresQueue *, DescriptionIndex ware, void * data);
+	using CallbackFn = void(Game&, WaresQueue*, DescriptionIndex ware, void* data);
 
-	WaresQueue(PlayerImmovable &, DescriptionIndex, uint8_t size);
+	WaresQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {assert(ware_ == INVALID_INDEX);}
+	~WaresQueue() {
+		assert(ware_ == INVALID_INDEX);
+	}
 #endif
 
-	DescriptionIndex get_ware()    const {return ware_;}
-	Quantity get_max_fill() const {return max_fill_;}
-	Quantity get_max_size() const {return max_size_;}
-	Quantity get_filled()   const {return filled_;}
+	DescriptionIndex get_ware() const {
+		return ware_;
+	}
+	Quantity get_max_fill() const {
+		return max_fill_;
+	}
+	Quantity get_max_size() const {
+		return max_size_;
+	}
+	Quantity get_filled() const {
+		return filled_;
+	}
 
 	void cleanup();
 
-	void set_callback(CallbackFn *, void * data);
+	void set_callback(CallbackFn*, void* data);
 
-	void remove_from_economy(Economy &);
-	void add_to_economy(Economy &);
+	void remove_from_economy(Economy&);
+	void add_to_economy(Economy&);
 
-	void set_max_size        (Quantity);
-	void set_max_fill        (Quantity);
-	void set_filled          (Quantity);
+	void set_max_size(Quantity);
+	void set_max_fill(Quantity);
+	void set_filled(Quantity);
 	void set_consume_interval(uint32_t);
 
-	Player & owner() const {return owner_.owner();}
+	Player& owner() const {
+		return owner_.owner();
+	}
 
-	void read (FileRead  &, Game &, MapObjectLoader &);
-	void write(FileWrite &, Game &, MapObjectSaver  &);
+	void read(FileRead&, Game&, MapObjectLoader&);
+	void write(FileWrite&, Game&, MapObjectSaver&);
 
 private:
-	static void request_callback
-		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
+	static void request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	void update();
 
-	PlayerImmovable & owner_;
-	DescriptionIndex         ware_;    ///< ware ID
-	Quantity max_size_;         ///< nr of items that fit into the queue maximum
-	Quantity max_fill_;         ///< nr of wares that should be ideally in this queue
-	Quantity filled_;           ///< nr of items that are currently in the queue
+	PlayerImmovable& owner_;
+	DescriptionIndex ware_;  ///< ware ID
+	Quantity max_size_;      ///< nr of items that fit into the queue maximum
+	Quantity max_fill_;      ///< nr of wares that should be ideally in this queue
+	Quantity filled_;        ///< nr of items that are currently in the queue
 
 	///< time in ms between consumption at full speed
 	uint32_t consume_interval_;
 
-	Request         * request_; ///< currently pending request
+	Request* request_;  ///< currently pending request
 
-	CallbackFn      * callback_fn_;
-	void            * callback_data_;
+	CallbackFn* callback_fn_;
+	void* callback_data_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_WARES_QUEUE_H

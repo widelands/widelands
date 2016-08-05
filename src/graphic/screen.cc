@@ -47,15 +47,8 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free
 	// 'pixels'.
-	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels.get(),
-	                                                w_,
-	                                                h_,
-	                                                32,
-	                                                w_ * 4,
-	                                                0x000000ff,
-	                                                0x0000ff00,
-	                                                0x00ff0000,
-	                                                0xff000000);
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(
+	   pixels.get(), w_, h_, 32, w_ * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	return std::unique_ptr<Texture>(new Texture(surface));
 }

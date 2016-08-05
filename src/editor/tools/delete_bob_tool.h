@@ -24,23 +24,24 @@
 
 /// Deletes bob from the map.
 struct EditorDeleteBobTool : public EditorTool {
-	EditorDeleteBobTool() : EditorTool(*this, *this) {}
+	EditorDeleteBobTool() : EditorTool(*this, *this) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_delete.png";
 	}
 };

@@ -40,52 +40,53 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
-	FullscreenMenuLoadMapOrGame(),
-	table_(this, tablex_, tabley_, tablew_, tableh_, false),
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
+   : FullscreenMenuLoadMapOrGame(),
+     table_(this, tablex_, tabley_, tablew_, tableh_, false),
 
-	// Main Title
-	title_
-		(this, get_w() / 2, tabley_ / 3,
-		 _("Choose a campaign"),
-		 UI::Align::kHCenter),
+     // Main Title
+     title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kHCenter),
 
-	// Campaign description
-	label_campname_
-		(this, right_column_x_, tabley_,
-		 "",
-		 UI::Align::kLeft),
-	ta_campname_(this,
-					  right_column_x_ + indent_, get_y_from_preceding(label_campname_) + padding_,
-					  get_right_column_w(right_column_x_) - indent_, label_height_),
+     // Campaign description
+     label_campname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
+     ta_campname_(this,
+                  right_column_x_ + indent_,
+                  get_y_from_preceding(label_campname_) + padding_,
+                  get_right_column_w(right_column_x_) - indent_,
+                  label_height_),
 
-	label_tribename_
-		(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_,
-		 "",
-		 UI::Align::kLeft),
-	ta_tribename_(this,
-						 right_column_x_ + indent_, get_y_from_preceding(label_tribename_) + padding_,
-						 get_right_column_w(right_column_x_ + indent_), label_height_),
+     label_tribename_(this,
+                      right_column_x_,
+                      get_y_from_preceding(ta_campname_) + 2 * padding_,
+                      "",
+                      UI::Align::kLeft),
+     ta_tribename_(this,
+                   right_column_x_ + indent_,
+                   get_y_from_preceding(label_tribename_) + padding_,
+                   get_right_column_w(right_column_x_ + indent_),
+                   label_height_),
 
-	label_difficulty_
-		(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_,
-		 "",
-		 UI::Align::kLeft),
-	ta_difficulty_(this,
-						 right_column_x_ + indent_, get_y_from_preceding(label_difficulty_) + padding_,
-						 get_right_column_w(right_column_x_ + indent_), 2 * label_height_ - padding_),
+     label_difficulty_(this,
+                       right_column_x_,
+                       get_y_from_preceding(ta_tribename_) + 2 * padding_,
+                       "",
+                       UI::Align::kLeft),
+     ta_difficulty_(this,
+                    right_column_x_ + indent_,
+                    get_y_from_preceding(label_difficulty_) + padding_,
+                    get_right_column_w(right_column_x_ + indent_),
+                    2 * label_height_ - padding_),
 
-	label_description_
-		(this, right_column_x_, get_y_from_preceding(ta_difficulty_) + 2 * padding_,
-		 _("Description:"),
-		 UI::Align::kLeft),
-	ta_description_
-		(this,
-		 right_column_x_ + indent_,
-		 get_y_from_preceding(label_description_) + padding_,
-		 get_right_column_w(right_column_x_ + indent_),
-		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_)
-{
+     label_description_(this,
+                        right_column_x_,
+                        get_y_from_preceding(ta_difficulty_) + 2 * padding_,
+                        _("Description:"),
+                        UI::Align::kLeft),
+     ta_description_(this,
+                     right_column_x_ + indent_,
+                     get_y_from_preceding(label_description_) + padding_,
+                     get_right_column_w(right_column_x_ + indent_),
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -93,49 +94,44 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	ta_tribename_.set_tooltip(_("The tribe you will be playing"));
 	ta_difficulty_.set_tooltip(_("The difficulty of this campaign"));
 
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
+	ok_.sigclicked.connect(
+	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(
+	   boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
 	table_.selected.connect(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
-	table_.double_clicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	table_.double_clicked.connect(
+	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Campaign difficulty table header */
 	table_.add_column(45, _("Diff."), _("Difficulty"), UI::Align::kLeft);
 	table_.add_column(100, _("Tribe"), _("Tribe Name"), UI::Align::kLeft);
-	table_.add_column(table_.get_w() - 100 - 45, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft);
-	table_.set_column_compare
-			(0,
-			 boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
+	table_.add_column(
+	   table_.get_w() - 100 - 45, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft);
+	table_.set_column_compare(
+	   0, boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
 }
 
-
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
-void FullscreenMenuCampaignSelect::clicked_ok()
-{
+void FullscreenMenuCampaignSelect::clicked_ok() {
 	get_campaign();
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
-int32_t FullscreenMenuCampaignSelect::get_campaign()
-{
+int32_t FullscreenMenuCampaignSelect::get_campaign() {
 	return campaign;
 }
 
 /// Pictorial descriptions of difficulty levels.
-static char const * const difficulty_picture_filenames[] = {
-	"images/novalue.png",
-	"images/ui_fsmenu/easy.png",
-	"images/ui_fsmenu/challenging.png",
-	"images/ui_fsmenu/hard.png"
-};
+static char const* const difficulty_picture_filenames[] = {
+   "images/novalue.png", "images/ui_fsmenu/easy.png", "images/ui_fsmenu/challenging.png",
+   "images/ui_fsmenu/hard.png"};
 
-
-bool FullscreenMenuCampaignSelect::set_has_selection()
-{
+bool FullscreenMenuCampaignSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 
@@ -159,9 +155,7 @@ bool FullscreenMenuCampaignSelect::set_has_selection()
 	return has_selection;
 }
 
-
-void FullscreenMenuCampaignSelect::entry_selected()
-{
+void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
 		const CampaignListData& campaign_data = campaigns_data_[table_.get_selected()];
 		campaign = campaign_data.index;
@@ -170,28 +164,25 @@ void FullscreenMenuCampaignSelect::entry_selected()
 		ta_tribename_.set_text(campaign_data.tribename);
 		ta_difficulty_.set_text(campaign_data.difficulty_description);
 		ta_description_.set_text(campaign_data.description);
-
 	}
 	ta_description_.scroll_to_top();
 }
 
-
 /**
  * fill the campaign list
  */
-void FullscreenMenuCampaignSelect::fill_table()
-{
+void FullscreenMenuCampaignSelect::fill_table() {
 	campaigns_data_.clear();
 	table_.clear();
 
 	// Read in the campaign config
 	Profile prof("campaigns/campaigns.conf", nullptr, "maps");
-	Section & s = prof.get_safe_section("global");
+	Section& s = prof.get_safe_section("global");
 
 	// Read in campvis-file
 	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
-	Section & c = campvis.get_safe_section("campaigns");
+	Section& c = campvis.get_safe_section("campaigns");
 
 	// Predefine variables, used in while-loop
 	uint32_t i = 0;
@@ -214,12 +205,8 @@ void FullscreenMenuCampaignSelect::fill_table()
 		if (c.get_bool(csection.c_str())) {
 
 			uint32_t difficulty = s.get_int(cdifficulty.c_str());
-			if
-				(sizeof (difficulty_picture_filenames)
-				 /
-				 sizeof(*difficulty_picture_filenames)
-				 <=
-				 difficulty) {
+			if (sizeof(difficulty_picture_filenames) / sizeof(*difficulty_picture_filenames) <=
+			    difficulty) {
 				difficulty = 0;
 			}
 
@@ -248,7 +235,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 		++i;
 		csection = (boost::format("campsect%u") % i).str();
 
-	} // while (s.get_string(csection.c_str()))
+	}  // while (s.get_string(csection.c_str()))
 	table_.sort();
 
 	if (table_.size()) {
@@ -256,9 +243,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 	}
 }
 
-bool FullscreenMenuCampaignSelect::compare_difficulty
-	(uint32_t rowa, uint32_t rowb)
-{
+bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
 	const CampaignListData& r1 = campaigns_data_[table_[rowa]];
 	const CampaignListData& r2 = campaigns_data_[table_[rowb]];
 
@@ -267,7 +252,6 @@ bool FullscreenMenuCampaignSelect::compare_difficulty
 	}
 	return r1.index < r2.index;
 }
-
 
 /*
  * UI 2 - Selection of a map
@@ -279,52 +263,52 @@ bool FullscreenMenuCampaignSelect::compare_difficulty
  * Loads a list of all visible maps of selected campaign and let's the user
  * choose one.
  */
-FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial) :
-	FullscreenMenuLoadMapOrGame(),
-	table_(this, tablex_, tabley_, tablew_, tableh_, false),
+FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial)
+   : FullscreenMenuLoadMapOrGame(),
+     table_(this, tablex_, tabley_, tablew_, tableh_, false),
 
-	// Main title
-	title_
-		(this, get_w() / 2, tabley_ / 3,
-		 is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
-		 UI::Align::kHCenter),
-	subtitle_
-		(this, get_w() / 6, get_y_from_preceding(title_) + 6 * padding_,
-		 get_w() * 2 / 3, 4 * label_height_,
-		 "",
-		 UI::Align::kHCenter),
+     // Main title
+     title_(this,
+            get_w() / 2,
+            tabley_ / 3,
+            is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
+            UI::Align::kHCenter),
+     subtitle_(this,
+               get_w() / 6,
+               get_y_from_preceding(title_) + 6 * padding_,
+               get_w() * 2 / 3,
+               4 * label_height_,
+               "",
+               UI::Align::kHCenter),
 
-	// Map description
-	label_mapname_
-		(this, right_column_x_, tabley_,
-		 "",
-		 UI::Align::kLeft),
-	ta_mapname_(this,
-					 right_column_x_ + indent_, get_y_from_preceding(label_mapname_) + padding_,
-					 get_right_column_w(right_column_x_ + indent_), label_height_),
+     // Map description
+     label_mapname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
+     ta_mapname_(this,
+                 right_column_x_ + indent_,
+                 get_y_from_preceding(label_mapname_) + padding_,
+                 get_right_column_w(right_column_x_ + indent_),
+                 label_height_),
 
-	label_author_
-		(this,
-		 right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_,
-		 "",
-		 UI::Align::kLeft),
-	ta_author_(this,
-					right_column_x_ + indent_, get_y_from_preceding(label_author_) + padding_,
-					get_right_column_w(right_column_x_ + indent_), 2 * label_height_),
+     label_author_(this,
+                   right_column_x_,
+                   get_y_from_preceding(ta_mapname_) + 2 * padding_,
+                   "",
+                   UI::Align::kLeft),
+     ta_author_(this,
+                right_column_x_ + indent_,
+                get_y_from_preceding(label_author_) + padding_,
+                get_right_column_w(right_column_x_ + indent_),
+                2 * label_height_),
 
-	label_description_
-		(this, right_column_x_, get_y_from_preceding(ta_author_) + padding_,
-		 "",
-		 UI::Align::kLeft),
-	ta_description_
-		(this,
-		 right_column_x_ + indent_,
-		 get_y_from_preceding(label_description_) + padding_,
-		 get_right_column_w(right_column_x_ + indent_),
-		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_),
+     label_description_(
+        this, right_column_x_, get_y_from_preceding(ta_author_) + padding_, "", UI::Align::kLeft),
+     ta_description_(this,
+                     right_column_x_ + indent_,
+                     get_y_from_preceding(label_description_) + padding_,
+                     get_right_column_w(right_column_x_ + indent_),
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_),
 
-	is_tutorial_(is_tutorial)
-{
+     is_tutorial_(is_tutorial) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	if (is_tutorial_) {
@@ -336,15 +320,13 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 		ta_mapname_.set_tooltip(_("The name of this scenario"));
 	}
 
-	ok_.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
+	ok_.sigclicked.connect(
+	   boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(
+	   boost::bind(&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
 	table_.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::entry_selected, this));
-	table_.double_clicked.connect
-		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
+	table_.double_clicked.connect(
+	   boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
 	std::string number_tooltip;
 	std::string name_tooltip;
@@ -364,12 +346,9 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.focus();
 }
 
-
-std::string FullscreenMenuCampaignMapSelect::get_map()
-{
+std::string FullscreenMenuCampaignMapSelect::get_map() {
 	return campmapfile;
 }
-
 
 // Telling this class what campaign we have and since we know what campaign we have, fill it.
 void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
@@ -377,8 +356,7 @@ void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	fill_table();
 }
 
-bool FullscreenMenuCampaignMapSelect::set_has_selection()
-{
+bool FullscreenMenuCampaignMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 
@@ -392,12 +370,12 @@ bool FullscreenMenuCampaignMapSelect::set_has_selection()
 		ta_description_.set_text(std::string());
 
 	} else {
-		is_tutorial_? label_mapname_.set_text(_("Tutorial:")) : label_mapname_.set_text(_("Scenario:"));
+		is_tutorial_ ? label_mapname_.set_text(_("Tutorial:")) :
+		               label_mapname_.set_text(_("Scenario:"));
 		label_description_.set_text(_("Description:"));
 	}
 	return has_selection;
 }
-
 
 void FullscreenMenuCampaignMapSelect::entry_selected() {
 	if (set_has_selection()) {
@@ -407,8 +385,7 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
 		if (!ml) {
-			throw wexception
-				(_("Invalid path to file in campaigns.conf: %s"), campmapfile.c_str());
+			throw wexception(_("Invalid path to file in campaigns.conf: %s"), campmapfile.c_str());
 		}
 
 		map.set_filename(campmapfile);
@@ -419,11 +396,11 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 
 		ta_author_.set_text(authors.get_names());
 		if (is_tutorial_) {
-			ta_author_.set_tooltip(ngettext("The designer of this tutorial", "The designers of this tutorial",
-											authors.get_number()));
+			ta_author_.set_tooltip(ngettext("The designer of this tutorial",
+			                                "The designers of this tutorial", authors.get_number()));
 		} else {
-			ta_author_.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
-											authors.get_number()));
+			ta_author_.set_tooltip(ngettext("The designer of this scenario",
+			                                "The designers of this scenario", authors.get_number()));
 		}
 		label_author_.set_text(ngettext("Author:", "Authors:", authors.get_number()));
 
@@ -441,12 +418,10 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 	}
 }
 
-
 /**
  * fill the campaign-map list
  */
-void FullscreenMenuCampaignMapSelect::fill_table()
-{
+void FullscreenMenuCampaignMapSelect::fill_table() {
 	// read in the campaign config
 	Profile* prof;
 	std::string campsection;
@@ -456,7 +431,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		// Set subtitle of the page
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit \"OK\".");
 		const std::string subtitle2 =
-				_("You can see a description of the currently selected tutorial on the right.");
+		   _("You can see a description of the currently selected tutorial on the right.");
 		subtitle_.set_text((boost::format("%s\n%s") % subtitle1 % subtitle2).str());
 
 		// Get section of campaign-maps
@@ -465,15 +440,16 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 	} else {
 		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
 
-		Section & global_s = prof->get_safe_section("global");
+		Section& global_s = prof->get_safe_section("global");
 
 		// Set subtitle of the page
-		const char* campaign_tribe = _(global_s.get_string(
-													 (boost::format("camptribe%u") % campaign).str().c_str()));
+		const char* campaign_tribe =
+		   _(global_s.get_string((boost::format("camptribe%u") % campaign).str().c_str()));
 		const char* campaign_name;
 		{
 			i18n::Textdomain td("maps");
-			campaign_name = _(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
+			campaign_name =
+			   _(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
 		}
 		subtitle_.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str());
 
@@ -488,10 +464,10 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 	// Read in campvis-file
 	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
-	Section & c = campvis.get_safe_section("campmaps");
+	Section& c = campvis.get_safe_section("campmaps");
 
 	// Add all visible entries to the list.
-	while (Section * const s = prof->get_section(mapsection)) {
+	while (Section* const s = prof->get_section(mapsection)) {
 		if (is_tutorial_ || c.get_bool(mapsection.c_str())) {
 
 			CampaignScenarioData scenario_data;
@@ -502,7 +478,8 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
+			tableEntry.set_picture(
+			   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
 		}
 
 		// Increase counter & mapsection

@@ -22,7 +22,7 @@
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
-#include "graphic/font_handler1.h" // Needed for fontset's direction
+#include "graphic/font_handler1.h"  // Needed for fontset's direction
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
@@ -34,31 +34,33 @@ namespace UI {
 
 namespace {
 int32_t const h_space = 3;
-} // namespace
+}  // namespace
 
 /**
  * Layouted rich text is essentially a bunch of drawable elements, each with a
  * rectangular bounding box.
  */
 struct Element {
-	explicit Element(const Rect & bounding_box) : bbox(bounding_box) {}
-	virtual ~Element() {}
+	explicit Element(const Rect& bounding_box) : bbox(bounding_box) {
+	}
+	virtual ~Element() {
+	}
 
 	/**
 	 * Draw the element, assuming that @p dst is already set up to be
 	 * relative to the element's internal frame of reference.
 	 */
-	virtual void draw(RenderTarget & dst) = 0;
+	virtual void draw(RenderTarget& dst) = 0;
 
 	Rect bbox;
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & bounding_box, const Image* init_image)
-		: Element(bounding_box), image(init_image) {}
+	ImageElement(const Rect& bounding_box, const Image* init_image)
+	   : Element(bounding_box), image(init_image) {
+	}
 
-	void draw(RenderTarget & dst) override
-	{
+	void draw(RenderTarget& dst) override {
 		dst.blit(Point(0, 0), image);
 	}
 
@@ -66,14 +68,14 @@ struct ImageElement : Element {
 };
 
 struct TextlineElement : Element {
-	TextlineElement
-		(const Rect & bounding_box, const TextStyle & init_style,
-		 std::vector<std::string>::const_iterator words_begin,
-		 std::vector<std::string>::const_iterator words_end)
-		: Element(bounding_box), style(init_style), words(words_begin, words_end) {}
+	TextlineElement(const Rect& bounding_box,
+	                const TextStyle& init_style,
+	                std::vector<std::string>::const_iterator words_begin,
+	                std::vector<std::string>::const_iterator words_end)
+	   : Element(bounding_box), style(init_style), words(words_begin, words_end) {
+	}
 
-	void draw(RenderTarget & dst) override
-	{
+	void draw(RenderTarget& dst) override {
 		assert(words.size());
 		uint32_t spacewidth = style.calc_bare_width(" ");
 
@@ -84,12 +86,13 @@ struct TextlineElement : Element {
 		if (UI::g_fh1->fontset()->is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
-				  source_it != words.end(); ++source_it) {
+			     source_it != words.end(); ++source_it) {
 				std::string& word = *source_it;
 				if (source_it != words.end()) {
-					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
+					if (i18n::has_rtl_character(word.c_str()) ||
+					    i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
-					} else { // Sequences of Latin words go to the right from current position
+					} else {  // Sequences of Latin words go to the right from current position
 						if (it < result_words.end()) {
 							++it;
 						}
@@ -99,7 +102,7 @@ struct TextlineElement : Element {
 				}
 			}
 		} else {
-			for (std::string& word: words) {
+			for (std::string& word : words) {
 				result_words.push_back(word);
 			}
 		}
@@ -127,7 +130,7 @@ struct RichTextImpl {
 	RGBColor background_color;
 
 	/// Layouted elements
-	std::vector<Element *> elements;
+	std::vector<Element*> elements;
 
 	/// Width of the rich-text area, controlled by the user of the
 	/// rich-text field
@@ -142,33 +145,25 @@ struct RichTextImpl {
 	void clear();
 };
 
-RichText::RichText()
-	: m(new RichTextImpl)
-{
+RichText::RichText() : m(new RichTextImpl) {
 }
 
-RichText::~RichText()
-{
+RichText::~RichText() {
 }
 
-RichTextImpl::RichTextImpl()
-:
-background_color(0, 0, 0)
-{
+RichTextImpl::RichTextImpl() : background_color(0, 0, 0) {
 	width = 0;
 	height = 0;
 }
 
-RichTextImpl::~RichTextImpl()
-{
+RichTextImpl::~RichTextImpl() {
 	clear();
 }
 
 /**
  * Reset all layouting data.
  */
-void RichTextImpl::clear()
-{
+void RichTextImpl::clear() {
 	while (!elements.empty()) {
 		delete elements.back();
 		elements.pop_back();
@@ -181,8 +176,7 @@ void RichTextImpl::clear()
  * Set the width for the rich text field.
  * Default width is undefined. This must be called before @ref parse.
  */
-void RichText::set_width(uint32_t gwidth)
-{
+void RichText::set_width(uint32_t gwidth) {
 	m->width = gwidth;
 }
 
@@ -190,29 +184,26 @@ void RichText::set_width(uint32_t gwidth)
  * Set a solid background color that is used by @ref draw when a
  * solid background is requested.
  */
-void RichText::set_background_color(RGBColor color)
-{
+void RichText::set_background_color(RGBColor color) {
 	m->background_color = color;
 }
 
 /**
  * @return the width of the rich text field, set by @ref set_width
  */
-uint32_t RichText::width()
-{
+uint32_t RichText::width() {
 	return m->width;
 }
 
 /**
  * @return the actual total height of layouted rich text, computed by @ref parse
  */
-uint32_t RichText::height()
-{
+uint32_t RichText::height() {
 	return m->height;
 }
 
 struct TextBuilder {
-	RichTextImpl & rti;
+	RichTextImpl& rti;
 
 	/// Current richtext block
 	std::vector<RichtextBlock>::iterator richtext;
@@ -239,7 +230,7 @@ struct TextBuilder {
 	uint32_t linespacing;
 
 	struct Elt {
-		TextlineElement * element;
+		TextlineElement* element;
 		int32_t miny, maxy;
 	};
 
@@ -248,22 +239,21 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl & impl) :
-		rti(impl),
-		images_width(0),
-		images_height(0),
-		maxwidth(0),
-		text_y(0),
-		linewidth(0),
-		spacewidth(0),
-		linespacing(0)
-	{}
+	TextBuilder(RichTextImpl& impl)
+	   : rti(impl),
+	     images_width(0),
+	     images_height(0),
+	     maxwidth(0),
+	     text_y(0),
+	     linewidth(0),
+	     spacewidth(0),
+	     linespacing(0) {
+	}
 
 	/**
 	 * Update data that is specific to the current @ref textblock.
 	 */
-	void reset_block()
-	{
+	void reset_block() {
 		style.font = Font::get(textblock->get_font_face(), textblock->get_font_size());
 		style.fg = textblock->get_font_color();
 
@@ -279,8 +269,7 @@ struct TextBuilder {
 	 * Properly align elements in the current line, and advance @ref text_y and
 	 * other data so that we can begin the next line.
 	 */
-	void advance_line()
-	{
+	void advance_line() {
 		int32_t miny = 0;
 		int32_t maxy = 0;
 
@@ -291,8 +280,8 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((mirror_alignment(richtext->get_image_align()) & UI::Align::kHorizontal)
-					 == UI::Align::kRight) {
+				if ((mirror_alignment(richtext->get_image_align()) & UI::Align::kHorizontal) ==
+				    UI::Align::kRight) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -338,8 +327,7 @@ struct TextBuilder {
 /**
  * Parse and layout the given rich text.
  */
-void RichText::parse(const std::string & rtext)
-{
+void RichText::parse(const std::string& rtext) {
 	m->clear();
 
 	std::vector<RichtextBlock> blocks;
@@ -353,8 +341,8 @@ void RichText::parse(const std::string & rtext)
 	TextBuilder text(*m);
 
 	for (text.richtext = blocks.begin(); text.richtext != blocks.end(); ++text.richtext) {
-		const std::vector<TextBlock> & cur_text_blocks = text.richtext->get_text_blocks();
-		const std::vector<std::string> & cur_block_images = text.richtext->get_images();
+		const std::vector<TextBlock>& cur_text_blocks = text.richtext->get_text_blocks();
+		const std::vector<std::string>& cur_block_images = text.richtext->get_images();
 
 		// First obtain the data of all images of this richtext block and prepare
 		// the corresponding elements, then do the alignment once the total width
@@ -363,11 +351,8 @@ void RichText::parse(const std::string & rtext)
 		text.images_height = 0;
 		text.images_width = 0;
 
-		for
-			(std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
-			 image_it != cur_block_images.end();
-			 ++image_it)
-		{
+		for (std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
+		     image_it != cur_block_images.end(); ++image_it) {
 			const Image* image = g_gr->images().get(*image_it);
 			if (!image)
 				continue;
@@ -389,8 +374,8 @@ void RichText::parse(const std::string & rtext)
 
 		if ((text.richtext->get_image_align() & UI::Align::kHorizontal) == UI::Align::kHCenter) {
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		} else if ((mirror_alignment(text.richtext->get_image_align()) & UI::Align::kHorizontal)
-					  == UI::Align::kRight) {
+		} else if ((mirror_alignment(text.richtext->get_image_align()) & UI::Align::kHorizontal) ==
+		           UI::Align::kRight) {
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
 		}
 
@@ -415,12 +400,13 @@ void RichText::parse(const std::string & rtext)
 		while (text.textblock != cur_text_blocks.end()) {
 			text.reset_block();
 
-			const std::vector<std::string> & words = text.textblock->get_words();
-			const std::vector<std::vector<std::string>::size_type> & line_breaks =
-				text.textblock->get_line_breaks();
+			const std::vector<std::string>& words = text.textblock->get_words();
+			const std::vector<std::vector<std::string>::size_type>& line_breaks =
+			   text.textblock->get_line_breaks();
 
 			uint32_t word_cnt = 0;
-			std::vector<std::vector<std::string>::size_type>::const_iterator br_it = line_breaks.begin();
+			std::vector<std::vector<std::string>::size_type>::const_iterator br_it =
+			   line_breaks.begin();
 
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
@@ -439,7 +425,7 @@ void RichText::parse(const std::string & rtext)
 
 				Rect bbox;
 				bbox.x = text.linewidth ? text.linewidth + text.spacewidth : 0;
-				bbox.y = 0; // filled in later
+				bbox.y = 0;  // filled in later
 				bbox.w = 0;
 				bbox.h = text.style.font->height();
 
@@ -451,10 +437,7 @@ void RichText::parse(const std::string & rtext)
 						wordwidth += text.spacewidth;
 
 					// Break only if this is not the first word of the line
-					if
-						((text.linewidth || nrwords) &&
-						 bbox.x + bbox.w + wordwidth > text.maxwidth)
-					{
+					if ((text.linewidth || nrwords) && bbox.x + bbox.w + wordwidth > text.maxwidth) {
 						wrap = true;
 						break;
 					}
@@ -466,18 +449,15 @@ void RichText::parse(const std::string & rtext)
 
 					bbox.w += wordwidth;
 					++nrwords;
-				} while
-					(word_cnt + nrwords < words.size() &&
-					 (br_it == line_breaks.end() || *br_it > word_cnt + nrwords));
+				} while (word_cnt + nrwords < words.size() &&
+				         (br_it == line_breaks.end() || *br_it > word_cnt + nrwords));
 
 				if (nrwords) {
-					m->elements.push_back
-						(new TextlineElement
-							(bbox, text.style,
-							 words.begin() + word_cnt, words.begin() + word_cnt + nrwords));
+					m->elements.push_back(new TextlineElement(
+					   bbox, text.style, words.begin() + word_cnt, words.begin() + word_cnt + nrwords));
 					word_cnt += nrwords;
 
-					elt.element = static_cast<TextlineElement *>(m->elements.back());
+					elt.element = static_cast<TextlineElement*>(m->elements.back());
 					text.elements.push_back(elt);
 					text.linewidth = bbox.x + bbox.w;
 				}
@@ -506,13 +486,9 @@ void RichText::parse(const std::string & rtext)
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
-{
-	for
-		(std::vector<Element *>::const_iterator elt = m->elements.begin();
-		 elt != m->elements.end();
-		 ++elt)
-	{
+void RichText::draw(RenderTarget& dst, const Point& offset, bool background) {
+	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
+	     ++elt) {
 		Rect oldbox;
 		Point oldofs;
 		Rect bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
@@ -526,5 +502,4 @@ void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 	}
 }
 
-
-} // namespace UI
+}  // namespace UI

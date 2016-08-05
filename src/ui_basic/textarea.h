@@ -49,24 +49,21 @@ namespace UI {
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
-	Textarea
-		(Panel * parent,
-		 int32_t x, int32_t y,
-		 const std::string & text = std::string(),
-		 Align align = UI::Align::kLeft);
-	Textarea
-		(Panel * parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = UI::Align::kLeft);
-	Textarea
-		(Panel *  const parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const std::string & text,
-		 Align align = UI::Align::kLeft);
-	Textarea
-		(Panel * parent,
-		 const std::string & text = std::string(),
-		 Align align = UI::Align::kLeft);
+	Textarea(Panel* parent,
+	         int32_t x,
+	         int32_t y,
+	         const std::string& text = std::string(),
+	         Align align = UI::Align::kLeft);
+	Textarea(
+	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = UI::Align::kLeft);
+	Textarea(Panel* const parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& text,
+	         Align align = UI::Align::kLeft);
+	Textarea(Panel* parent, const std::string& text = std::string(), Align align = UI::Align::kLeft);
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.
@@ -75,11 +72,11 @@ struct Textarea : public Panel {
 	 */
 	void set_fixed_width(int w);
 
-	void set_text(const std::string &);
+	void set_text(const std::string&);
 	const std::string& get_text();
 
 	// Drawing and event handlers
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	void set_color(RGBColor color);
 	void set_fontsize(int fontsize);
@@ -88,11 +85,7 @@ protected:
 	void update_desired_size() override;
 
 private:
-	enum LayoutMode {
-		AutoMove,
-		Layouted,
-		Static
-	};
+	enum LayoutMode { AutoMove, Layouted, Static };
 
 	void init();
 	void collapse();
@@ -108,7 +101,6 @@ private:
 
 	int fixed_width_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_TEXTAREA_H

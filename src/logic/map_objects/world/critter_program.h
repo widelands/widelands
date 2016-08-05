@@ -25,30 +25,34 @@
 namespace Widelands {
 
 struct CritterAction {
-	using CritterExecuteActionFn =
-		bool (Critter::*)
-			(Game &, Bob::State &, const CritterAction &);
+	using CritterExecuteActionFn = bool (Critter::*)(Game&, Bob::State&, const CritterAction&);
 
 	enum {
-		walkObject, //  walk to objvar1
-		walkCoords, //  walk to coords
+		walkObject,  //  walk to objvar1
+		walkCoords,  //  walk to coords
 	};
 
-	CritterExecuteActionFn       function;
-	int32_t                      iparam1;
-	int32_t                      iparam2;
-	std::string              sparam1;
+	CritterExecuteActionFn function;
+	int32_t iparam1;
+	int32_t iparam2;
+	std::string sparam1;
 
 	std::vector<std::string> sparamv;
 };
 
 struct CritterProgram : public BobProgramBase {
-	CritterProgram(const std::string & name) : name_(name) {}
-	virtual ~CritterProgram() {}
+	CritterProgram(const std::string& name) : name_(name) {
+	}
+	virtual ~CritterProgram() {
+	}
 
-	std::string get_name() const override {return name_;}
-	int32_t get_size() const {return actions_.size();}
-	const CritterAction & operator[] (size_t const idx) const {
+	std::string get_name() const override {
+		return name_;
+	}
+	int32_t get_size() const {
+		return actions_.size();
+	}
+	const CritterAction& operator[](size_t const idx) const {
 		assert(idx < actions_.size());
 		return actions_[idx];
 	}
@@ -59,7 +63,6 @@ private:
 	std::string name_;
 	std::vector<CritterAction> actions_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_PROGRAM_H

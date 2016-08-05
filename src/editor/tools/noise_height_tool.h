@@ -24,31 +24,27 @@
 
 /// Set the height of a node to a random value within a defined interval.
 struct EditorNoiseHeightTool : public EditorTool {
-	EditorNoiseHeightTool
-	(EditorSetHeightTool & the_set_tool,
-	 const Widelands::HeightInterval& the_interval =
-	     Widelands::HeightInterval(10, 14))
-		:
-		EditorTool(the_set_tool, the_set_tool),
-		set_tool_(the_set_tool),
-		interval_(the_interval)
-	{}
+	EditorNoiseHeightTool(
+	   EditorSetHeightTool& the_set_tool,
+	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
+	   : EditorTool(the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_noise_height.png";
 	}
 
@@ -59,10 +55,12 @@ struct EditorNoiseHeightTool : public EditorTool {
 		interval_ = i;
 	}
 
-	EditorSetHeightTool & set_tool() const {return set_tool_;}
+	EditorSetHeightTool& set_tool() const {
+		return set_tool_;
+	}
 
 private:
-	EditorSetHeightTool & set_tool_;
+	EditorSetHeightTool& set_tool_;
 	Widelands::HeightInterval interval_;
 };
 

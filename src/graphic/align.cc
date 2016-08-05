@@ -28,26 +28,26 @@ namespace UI {
 Align mirror_alignment(Align alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
-			case Align::kBottomLeft:
-				alignment = Align::kBottomRight;
-				break;
-			case Align::kBottomRight:
-				alignment = Align::kBottomLeft;
-				break;
-			case Align::kCenterLeft:
-				alignment = Align::kCenterRight;
-				break;
-			case Align::kCenterRight:
-				alignment = Align::kCenterLeft;
-				break;
-			case Align::kTopLeft:
-				alignment = Align::kTopRight;
-				break;
-			case Align::kTopRight:
-				alignment = Align::kTopLeft;
-				break;
-			default:
-				break;
+		case Align::kBottomLeft:
+			alignment = Align::kBottomRight;
+			break;
+		case Align::kBottomRight:
+			alignment = Align::kBottomLeft;
+			break;
+		case Align::kCenterLeft:
+			alignment = Align::kCenterRight;
+			break;
+		case Align::kCenterRight:
+			alignment = Align::kCenterLeft;
+			break;
+		case Align::kTopLeft:
+			alignment = Align::kTopRight;
+			break;
+		case Align::kTopRight:
+			alignment = Align::kTopLeft;
+			break;
+		default:
+			break;
 		}
 	}
 	return alignment;
@@ -72,4 +72,3 @@ void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 }
 
 }  // namespace UI
-

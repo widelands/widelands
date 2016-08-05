@@ -40,11 +40,9 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
-
 using namespace std;
 
-
-namespace  {
+namespace {
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Point* p) {
 	std::vector<int> pts = table.array_entries<int>();
@@ -61,7 +59,8 @@ void get_point(const LuaTable& table, Point* p) {
  */
 class NonPackedAnimation : public Animation {
 public:
-	virtual ~NonPackedAnimation() {}
+	virtual ~NonPackedAnimation() {
+	}
 	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
@@ -72,10 +71,9 @@ public:
 	const Point& hotspot() const override;
 	Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
-		const override;
+	virtual void blit(
+	   uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
-
 
 private:
 	// Loads the graphics if they are not yet loaded.
@@ -103,9 +101,7 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-		: frametime_(FRAME_LENGTH),
-		  hasplrclrs_(false),
-		  play_once_(false) {
+   : frametime_(FRAME_LENGTH), hasplrclrs_(false), play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -126,10 +122,11 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 
 		if (image_files_.empty()) {
 			throw wexception("Animation without pictures. The template should look similar to this:"
-								  " 'directory/idle_??.png' for 'directory/idle_00.png' etc.");
+			                 " 'directory/idle_??.png' for 'directory/idle_00.png' etc.");
 		} else if (table.has_key("fps")) {
 			if (image_files_.size() == 1) {
-				throw wexception("Animation with one picture %s must not have 'fps'", image_files_[0].c_str());
+				throw wexception(
+				   "Animation with one picture %s must not have 'fps'", image_files_[0].c_str());
 			}
 			frametime_ = 1000 / get_positive_int(table, "fps");
 		}
@@ -162,18 +159,15 @@ void NonPackedAnimation::load_graphics() {
 		throw wexception("animation without pictures.");
 
 	if (pc_mask_image_files_.size() && pc_mask_image_files_.size() != image_files_.size())
-		throw wexception
-			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
-			 image_files_.size(), pc_mask_image_files_.size());
+		throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
+		                 image_files_.size(), pc_mask_image_files_.size());
 
 	for (const std::string& filename : image_files_) {
 		const Image* image = g_gr->images().get(filename);
 		if (frames_.size() &&
 		    (frames_[0]->width() != image->width() || frames_[0]->height() != image->height())) {
 			throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
-			                 image->width(),
-			                 image->height(),
-			                 frames_[0]->width(),
+			                 image->width(), image->height(), frames_[0]->width(),
 			                 frames_[0]->height());
 		}
 		frames_.push_back(image);
@@ -187,9 +181,7 @@ void NonPackedAnimation::load_graphics() {
 			// TODO(unknown): see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",
-			                 pc_image->width(),
-			                 pc_image->height(),
-			                 frames_[0]->width(),
+			                 pc_image->width(), pc_image->height(), frames_[0]->width(),
 			                 frames_[0]->height());
 		}
 		pcmasks_.push_back(pc_image);
@@ -245,8 +237,8 @@ const std::string& NonPackedAnimation::representative_image_filename() const {
 uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 	if (nr_frames() > 1) {
 		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
-					static_cast<uint32_t>(nr_frames() - 1) :
-					time / frametime_ % nr_frames();
+		          static_cast<uint32_t>(nr_frames() - 1) :
+		          time / frametime_ % nr_frames();
 	}
 	return 0;
 }
@@ -263,9 +255,8 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 	}
 }
 
-void NonPackedAnimation::blit
-	(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const
-{
+void NonPackedAnimation::blit(
+   uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
 	assert(target);
 
 	const uint32_t idx = current_frame(time);
@@ -282,7 +273,6 @@ void NonPackedAnimation::blit
 
 }  // namespace
 
-
 /*
 ==============================================================================
 
@@ -291,14 +281,8 @@ DirAnimations IMPLEMENTAION
 ==============================================================================
 */
 
-DirAnimations::DirAnimations
-	(uint32_t dir1,
-	 uint32_t dir2,
-	 uint32_t dir3,
-	 uint32_t dir4,
-	 uint32_t dir5,
-	 uint32_t dir6)
-{
+DirAnimations::DirAnimations(
+   uint32_t dir1, uint32_t dir2, uint32_t dir3, uint32_t dir4, uint32_t dir5, uint32_t dir6) {
 	animations_[0] = dir1;
 	animations_[1] = dir2;
 	animations_[2] = dir3;
@@ -320,8 +304,7 @@ uint32_t AnimationManager::load(const LuaTable& table) {
 	return animations_.size();
 }
 
-const Animation& AnimationManager::get_animation(uint32_t id) const
-{
+const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
 		throw wexception("Requested unknown animation with id: %i", id);
 
@@ -330,10 +313,9 @@ const Animation& AnimationManager::get_animation(uint32_t id) const
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
 	if (representative_images_.count(id) != 1) {
-		representative_images_.insert(
-					std::make_pair(
-						id,
-						std::unique_ptr<Image>(g_gr->animations().get_animation(id).representative_image(clr))));
+		representative_images_.insert(std::make_pair(
+		   id,
+		   std::unique_ptr<Image>(g_gr->animations().get_animation(id).representative_image(clr))));
 	}
 	return representative_images_.at(id).get();
 }

@@ -30,19 +30,18 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::World& world,
                                                const Widelands::NodeAndTriangle<>& center,
                                                EditorInteractive& /* parent */,
                                                EditorActionArgs* args,
-											   Widelands::Map* map) {
-	if (args->original_heights.empty())
-	{
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(*map,
-		 Widelands::Area<Widelands::FCoords>
-		 (map->get_fcoords(center.node), args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
-		do args->original_heights.push_back(mr.location().field->get_height());
+                                               Widelands::Map* map) {
+	if (args->original_heights.empty()) {
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map, Widelands::Area<Widelands::FCoords>(
+		            map->get_fcoords(center.node),
+		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		do
+			args->original_heights.push_back(mr.location().field->get_height());
 		while (mr.advance(*map));
 	}
 	return map->set_height(
-	   world,
-	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
+	   world, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
 	   args->interval);
 }
 
@@ -51,29 +50,28 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::World& world,
                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& /* parent */,
                                       EditorActionArgs* args,
-									  Widelands::Map* map) {
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(*map,
-	Widelands::Area<Widelands::FCoords>
-	(map->get_fcoords(center.node),
-	args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+                                      Widelands::Map* map) {
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   *map, Widelands::Area<Widelands::FCoords>(
+	            map->get_fcoords(center.node),
+	            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
 
 	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
 
 	do {
-		mr.location().field->set_height(*i); ++i;
+		mr.location().field->set_height(*i);
+		++i;
 	} while (mr.advance(*map));
 
-	map->recalc_for_field_area
-		(world, Widelands::Area<Widelands::FCoords>
-		(map->get_fcoords(center.node),
-		args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	map->recalc_for_field_area(
+	   world, Widelands::Area<Widelands::FCoords>(
+	             map->get_fcoords(center.node),
+	             args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 
 	return mr.radius() + 1;
 }
 
-EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive & parent)
-{
+EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
 	a.interval = interval_;
 	return a;

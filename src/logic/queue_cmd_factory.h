@@ -33,9 +33,8 @@ struct GameLogicCommand;
  * from the queue command file ids
  */
 namespace QueueCmdFactory {
-	GameLogicCommand & create_correct_queue_command(Widelands::QueueCommandTypes id);
+GameLogicCommand& create_correct_queue_command(Widelands::QueueCommandTypes id);
 }
-
 }
 
 #endif  // end of include guard: WL_LOGIC_QUEUE_CMD_FACTORY_H

@@ -56,8 +56,8 @@ SDL_GLContext initialize(
 	// is built using -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW.
 	if (trace == Trace::kYes) {
 		setCallbackMaskExcept(
-				glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
-				{"glGetError"});
+		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
+		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
 			log("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
@@ -94,7 +94,7 @@ SDL_GLContext initialize(
 	log(
 	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
-#define LOG_SDL_GL_ATTRIBUTE(x)                                                                        \
+#define LOG_SDL_GL_ATTRIBUTE(x)                                                                    \
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \

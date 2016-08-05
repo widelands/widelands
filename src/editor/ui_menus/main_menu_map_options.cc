@@ -35,54 +35,53 @@
 #include "ui_basic/textarea.h"
 #include "wui/map_tags.h"
 
-inline EditorInteractive & MainMenuMapOptions::eia() {
+inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
-
 
 /**
  * Create all the buttons etc...
 */
-MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
-	:
-	UI::Window
-		(&parent, "map_options",
-		 0, 0, 350, parent.get_inner_h() - 80,
-		 _("Map Options")),
-	padding_(4),
-	indent_(10),
-	labelh_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 4),
-	checkbox_space_(25),
-	butw_((get_inner_w() - 3 * padding_) / 2),
-	max_w_(get_inner_w() - 2 * padding_),
-	ok_(
-		this, "ok",
-		UI::g_fh1->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
-		get_inner_h() - padding_ - labelh_,
-		butw_, labelh_,
-		g_gr->images().get("images/ui_basic/but5.png"),
-		_("OK")),
-	cancel_(
-		this, "cancel",
-		UI::g_fh1->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
-		get_inner_h() - padding_ - labelh_,
-		butw_, labelh_,
-		g_gr->images().get("images/ui_basic/but1.png"),
-		_("Cancel")),
-	tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-	tabs_(&tab_box_, 0, 0, nullptr),
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
+   : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
+     padding_(4),
+     indent_(10),
+     labelh_(
+        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
+        4),
+     checkbox_space_(25),
+     butw_((get_inner_w() - 3 * padding_) / 2),
+     max_w_(get_inner_w() - 2 * padding_),
+     ok_(this,
+         "ok",
+         UI::g_fh1->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
+         get_inner_h() - padding_ - labelh_,
+         butw_,
+         labelh_,
+         g_gr->images().get("images/ui_basic/but5.png"),
+         _("OK")),
+     cancel_(this,
+             "cancel",
+             UI::g_fh1->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
+             get_inner_h() - padding_ - labelh_,
+             butw_,
+             labelh_,
+             g_gr->images().get("images/ui_basic/but1.png"),
+             _("Cancel")),
+     tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     tabs_(&tab_box_, 0, 0, nullptr),
 
-	main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-	tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-	teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-	name_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-	author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+     name_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-	teams_list_(&teams_box_, 0, 0, max_w_, 60, true),
+     teams_list_(&teams_box_, 0, 0, max_w_, 60, true),
 
-	modal_(modal) {
+     modal_(modal) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -93,34 +92,36 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	// Calculate the overall remaining space for MultilineEditboxes.
 	uint32_t remaining_space = main_box_.get_inner_h() - 7 * labelh_ - 5 * indent_;
 
-	// We need less space for the hint and the description, but it should at least have 1 line height.
-	hint_ = new UI::MultilineEditbox(
-				  &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
-				  "", g_gr->images().get("images/ui_basic/but1.png"));
-	descr_ = new UI::MultilineEditbox(
-					&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(),
-					"", g_gr->images().get("images/ui_basic/but1.png"));
+	// We need less space for the hint and the description, but it should at least have 1 line
+	// height.
+	hint_ =
+	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
+	                            "", g_gr->images().get("images/ui_basic/but1.png"));
+	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), "",
+	                                  g_gr->images().get("images/ui_basic/but1.png"));
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Align::kLeft);
+	main_box_.add(
+	   new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Align::kLeft);
 	main_box_.add(&name_, UI::Align::kLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Authors:")), UI::Align::kLeft);
+	main_box_.add(
+	   new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Authors:")), UI::Align::kLeft);
 	main_box_.add(&author_, UI::Align::kLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Description:")), UI::Align::kLeft);
+	main_box_.add(
+	   new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Description:")), UI::Align::kLeft);
 	main_box_.add(descr_, UI::Align::kLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")),
-					  UI::Align::kLeft);
+	main_box_.add(
+	   new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")), UI::Align::kLeft);
 	main_box_.add(hint_, UI::Align::kLeft);
 	main_box_.add_space(indent_);
 
 	main_box_.add(&size_, UI::Align::kLeft);
 	main_box_.add_space(indent_);
-
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Align::kLeft);
 	add_tag_checkbox(&tags_box_, "unbalanced", localize_tag("unbalanced"));
@@ -131,7 +132,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")),
-						UI::Align::kLeft);
+	               UI::Align::kLeft);
 	teams_box_.add(&teams_list_, UI::Align::kLeft);
 	// TODO(GunChleoc): We need team images in the listselect here,
 	// so map editors will be able to delete entries.
@@ -139,25 +140,25 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	teams_list_.add("Not implemented yet.", "", nullptr, false);
 
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
-	std::string players = (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
+	std::string players =
+	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players), UI::Align::kLeft);
 
 	tab_box_.add(&tabs_, UI::Align::kLeft, true);
-	tabs_.add("main_map_options",
-				 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
-	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_, _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"), &teams_box_,
-				 _("Teams"));
+	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+	          &main_box_, _("Main Options"));
+	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
+	          _("Tags"));
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"),
+	          &teams_box_, _("Teams"));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 
-	ok_.sigclicked.connect
-		(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
 	ok_.set_enabled(false);
-	cancel_.sigclicked.connect
-		(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
+	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
 	center_to_parent();
@@ -169,12 +170,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
  * set values
 */
 void MainMenuMapOptions::update() {
-	const Widelands::Map & map = eia().egbase().map();
+	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
-	size_.set_text((boost::format(_("Size: %1% x %2%"))
-						 % map.get_width()
-						 % map.get_height()).str());
+	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
 
@@ -183,7 +182,6 @@ void MainMenuMapOptions::update() {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
 }
-
 
 /**
  * Called when one of the editboxes are changed
@@ -224,7 +222,9 @@ void MainMenuMapOptions::clicked_cancel() {
 /*
  * Add a tag to the checkboxes
  */
-void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, std::string tag, std::string displ_name) {
+void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
+                                          std::string tag,
+                                          std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	box->add(cb, UI::Align::kLeft, true);

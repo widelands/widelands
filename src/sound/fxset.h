@@ -24,7 +24,6 @@
 
 #include <SDL_mixer.h>
 
-
 class SoundHandler;
 
 /// Predefined priorities for easy reading
@@ -49,13 +48,15 @@ struct FXset {
 	FXset(uint8_t priority = PRIO_MEDIUM);
 	~FXset();
 
-	void add_fx(Mix_Chunk * fx, uint8_t prio = PRIO_MEDIUM);
-	Mix_Chunk * get_fx();
-	bool empty() {return fxs_.empty();}
+	void add_fx(Mix_Chunk* fx, uint8_t prio = PRIO_MEDIUM);
+	Mix_Chunk* get_fx();
+	bool empty() {
+		return fxs_.empty();
+	}
 
 protected:
 	/// The collection of sound effects
-	std::vector<Mix_Chunk *> fxs_;
+	std::vector<Mix_Chunk*> fxs_;
 
 	/** When the effect was played the last time (milliseconds since SDL
 	 * initialization). Set via SDL_GetTicks()

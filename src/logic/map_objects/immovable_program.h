@@ -63,9 +63,12 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
-		uint32_t animation() const {return id_;}
+		ActAnimate(char* parameters, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+		uint32_t animation() const {
+			return id_;
+		}
+
 	private:
 		uint32_t id_;
 		Duration duration_;
@@ -88,36 +91,38 @@ struct ImmovableProgram {
 	///    name:
 	///       name of the replacement object
 	struct ActTransform : public Action {
-		ActTransform
-			(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+		ActTransform(char* parameters, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
 		std::string type_name;
-		bool        bob;
-		bool        tribe;
-		uint8_t     probability;
+		bool bob;
+		bool tribe;
+		uint8_t probability;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
 	struct ActGrow : public Action {
-		ActGrow
-			(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+		ActGrow(char* parameters, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
 		std::string type_name;
-		bool        tribe;
+		bool tribe;
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+		ActRemove(char* parameters, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
 		uint8_t probability;
 	};
 
 	struct ActSeed : public Action {
-		ActSeed(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+		ActSeed(char* parameters, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
 		std::string type_name;
 		uint8_t probability;
@@ -138,11 +143,12 @@ struct ImmovableProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		ActPlaySound(char* parameters, const ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+		ActPlaySound(char* parameters, const ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
 		std::string name;
-		uint8_t     priority;
+		uint8_t priority;
 	};
 
 	/**
@@ -160,10 +166,14 @@ struct ImmovableProgram {
 	 */
 	struct ActConstruction : public Action {
 		ActConstruction(char* parameters, ImmovableDescr&);
-		void execute(Game &, Immovable &) const override;
+		void execute(Game&, Immovable&) const override;
 
-		Duration buildtime() const {return buildtime_;}
-		Duration decaytime() const {return decaytime_;}
+		Duration buildtime() const {
+			return buildtime_;
+		}
+		Duration decaytime() const {
+			return decaytime_;
+		}
 
 	private:
 		uint32_t animid_;
@@ -172,9 +182,7 @@ struct ImmovableProgram {
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const * const init_name, Action * const action)
-		: name_(init_name)
-	{
+	ImmovableProgram(char const* const init_name, Action* const action) : name_(init_name) {
 		actions_.push_back(action);
 	}
 
@@ -184,36 +192,43 @@ struct ImmovableProgram {
 	                 ImmovableDescr* immovable);
 
 	~ImmovableProgram() {
-		for (Action * action : actions_) {
+		for (Action* action : actions_) {
 			delete action;
 		}
 	}
 
-	const std::string & name() const {return name_;}
-	size_t size() const {return actions_.size();}
-	const Action & operator[](size_t const idx) const {
+	const std::string& name() const {
+		return name_;
+	}
+	size_t size() const {
+		return actions_.size();
+	}
+	const Action& operator[](size_t const idx) const {
 		assert(idx < actions_.size());
 		return *actions_[idx];
 	}
 
-	using Actions = std::vector<Action *>;
-	const Actions & actions() const {return actions_;}
+	using Actions = std::vector<Action*>;
+	const Actions& actions() const {
+		return actions_;
+	}
 
 private:
 	std::string name_;
-	Actions     actions_;
+	Actions actions_;
 };
 
 struct ImmovableActionData {
-	ImmovableActionData() {}
-	virtual ~ImmovableActionData() {}
+	ImmovableActionData() {
+	}
+	virtual ~ImmovableActionData() {
+	}
 
-	virtual const char * name() const = 0;
-	virtual void save(FileWrite & fw, Immovable & imm) = 0;
+	virtual const char* name() const = 0;
+	virtual void save(FileWrite& fw, Immovable& imm) = 0;
 
-	static ImmovableActionData * load(FileRead & fr, Immovable & imm, const std::string & name);
+	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

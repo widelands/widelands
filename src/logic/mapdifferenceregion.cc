@@ -23,10 +23,9 @@
 
 namespace Widelands {
 
-template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
-{
+template <> bool MapDifferenceRegion<Area<FCoords>>::advance(const Map& map) {
 	assert(1 <= direction_);
-	assert     (direction_ <= 6);
+	assert(direction_ <= 6);
 	if (remaining_in_edge_) {
 		map.get_neighbour(area_, direction_, &area_);
 		--remaining_in_edge_;
@@ -34,7 +33,9 @@ template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 	} else {
 		if (!passed_corner_) {
 			passed_corner_ = true;
-			--direction_; if (!direction_) direction_ = 6;
+			--direction_;
+			if (!direction_)
+				direction_ = 6;
 			remaining_in_edge_ = area_.radius;
 			return advance(map);
 		}
@@ -42,33 +43,34 @@ template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 	return false;
 }
 
-template <>
-void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
-{
+template <> void MapDifferenceRegion<Area<FCoords>>::move_to_other_side(const Map& map) {
 	assert(1 <= direction_);
-	assert     (direction_ <= 6);
+	assert(direction_ <= 6);
 	assert(passed_corner_);
-	--direction_; if (!direction_) direction_ = 6;
+	--direction_;
+	if (!direction_)
+		direction_ = 6;
 	Area<FCoords>::RadiusType steps_left = area_.radius + 1;
 	switch (direction_) {
-#define DIRECTION_CASE(dir, neighbour_function)                               \
-   case dir:                                                                  \
-      for (; steps_left; --steps_left)                                        \
-			map.neighbour_function(area_, &area_);                               \
-      break;                                                                  \
+#define DIRECTION_CASE(dir, neighbour_function)                                                    \
+	case dir:                                                                                       \
+		for (; steps_left; --steps_left)                                                             \
+			map.neighbour_function(area_, &area_);                                                    \
+		break;
 
-	DIRECTION_CASE(WALK_NW, get_tln);
-	DIRECTION_CASE(WALK_NE, get_trn);
-	DIRECTION_CASE(WALK_E,  get_rn);
-	DIRECTION_CASE(WALK_SE, get_brn);
-	DIRECTION_CASE(WALK_SW, get_bln);
-	DIRECTION_CASE(WALK_W,  get_ln);
+		DIRECTION_CASE(WALK_NW, get_tln);
+		DIRECTION_CASE(WALK_NE, get_trn);
+		DIRECTION_CASE(WALK_E, get_rn);
+		DIRECTION_CASE(WALK_SE, get_brn);
+		DIRECTION_CASE(WALK_SW, get_bln);
+		DIRECTION_CASE(WALK_W, get_ln);
 	default:
-			NEVER_HERE();
+		NEVER_HERE();
 	}
-	--direction_; if (!direction_) direction_ = 6;
+	--direction_;
+	if (!direction_)
+		direction_ = 6;
 	remaining_in_edge_ = area_.radius;
-	passed_corner_     = false;
+	passed_corner_ = false;
 }
-
 }

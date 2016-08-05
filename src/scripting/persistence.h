@@ -28,27 +28,21 @@ class FileRead;
 class FileWrite;
 
 namespace Widelands {
-	class MapObjectLoader;
-	struct MapObjectSaver;
-	class EditorGameBase;
-	class Game;
+class MapObjectLoader;
+struct MapObjectSaver;
+class EditorGameBase;
+class Game;
 }
-
 
 /**
  * This persists the lua object at the stack position
  * 2 after populating the (empty) table at position 1
  * with the items given in globals.
  */
-uint32_t persist_object
-	(lua_State * L,
-	 FileWrite &, Widelands::MapObjectSaver &);
+uint32_t persist_object(lua_State* L, FileWrite&, Widelands::MapObjectSaver&);
 
 // Does all the unpersisting work. The unpersisted object is at the top of the
 // stack after the function returns.
-void unpersist_object
-	(lua_State * L,
-	 FileRead & fr, Widelands::MapObjectLoader & mol,
-	 uint32_t size);
+void unpersist_object(lua_State* L, FileRead& fr, Widelands::MapObjectLoader& mol, uint32_t size);
 
 #endif  // end of include guard: WL_SCRIPTING_PERSISTENCE_H

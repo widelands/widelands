@@ -30,54 +30,70 @@
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
 
-
 using Widelands::Field;
 
-EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
-	(EditorInteractive         & parent,
-	 EditorNoiseHeightTool   & noise_tool,
-	 UI::UniqueWindow::Registry & registry)
-	:
-	EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options")),
-	noise_tool_(noise_tool),
-	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-	lower_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  noise_tool_.get_interval().min, 1, MAX_FIELD_HEIGHT,
-				  _("Minimum Height:"), UI::SpinBox::Units::kNone,
-				  g_gr->images().get("images/ui_basic/but1.png"),
-				  UI::SpinBox::Type::kSmall),
-	upper_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  noise_tool_.get_interval().max, 0, MAX_FIELD_HEIGHT,
-				  _("Maximum Height:"), UI::SpinBox::Units::kNone,
-				  g_gr->images().get("images/ui_basic/but1.png"),
-				  UI::SpinBox::Type::kSmall),
-	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-			  noise_tool_.set_tool().get_interval().min, 0, MAX_FIELD_HEIGHT,
-			  _("Set Value:"), UI::SpinBox::Units::kNone,
-			  g_gr->images().get("images/ui_basic/but1.png"),
-			  UI::SpinBox::Type::kSmall)
-{
+EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
+   EditorInteractive& parent,
+   EditorNoiseHeightTool& noise_tool,
+   UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options")),
+     noise_tool_(noise_tool),
+     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     lower_(&box_,
+            0,
+            0,
+            get_inner_w() - 2 * hmargin(),
+            80,
+            noise_tool_.get_interval().min,
+            1,
+            MAX_FIELD_HEIGHT,
+            _("Minimum Height:"),
+            UI::SpinBox::Units::kNone,
+            g_gr->images().get("images/ui_basic/but1.png"),
+            UI::SpinBox::Type::kSmall),
+     upper_(&box_,
+            0,
+            0,
+            get_inner_w() - 2 * hmargin(),
+            80,
+            noise_tool_.get_interval().max,
+            0,
+            MAX_FIELD_HEIGHT,
+            _("Maximum Height:"),
+            UI::SpinBox::Units::kNone,
+            g_gr->images().get("images/ui_basic/but1.png"),
+            UI::SpinBox::Type::kSmall),
+     set_to_(&box_,
+             0,
+             0,
+             get_inner_w() - 2 * hmargin(),
+             80,
+             noise_tool_.set_tool().get_interval().min,
+             0,
+             MAX_FIELD_HEIGHT,
+             _("Set Value:"),
+             UI::SpinBox::Units::kNone,
+             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::SpinBox::Type::kSmall) {
 	lower_.set_tooltip(
-				/** TRANSLATORS: Editor random height access key. **/
-				_("Click on the map to set terrain height to a random value within the specified range"));
+	   /** TRANSLATORS: Editor random height access key. **/
+	   _("Click on the map to set terrain height to a random value within the specified range"));
 	upper_.set_tooltip(
-				/** TRANSLATORS: Editor random height access key. **/
-				_("Click on the map to set terrain height to a random value within the specified range"));
+	   /** TRANSLATORS: Editor random height access key. **/
+	   _("Click on the map to set terrain height to a random value within the specified range"));
 	set_to_.set_tooltip(
-				/** TRANSLATORS: Editor set height access key. **/
-				_("Ctrl + Click on the map to set terrain height"));
+	   /** TRANSLATORS: Editor set height access key. **/
+	   _("Ctrl + Click on the map to set terrain height"));
 
-	lower_.changed.connect
-		(boost::bind
-		 (&EditorToolNoiseHeightOptionsMenu::update_lower, boost::ref(*this)));
-	upper_.changed.connect
-		(boost::bind
-		 (&EditorToolNoiseHeightOptionsMenu::update_upper, boost::ref(*this)));
-	set_to_.changed.connect
-		(boost::bind
-		 (&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
+	lower_.changed.connect(
+	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_lower, boost::ref(*this)));
+	upper_.changed.connect(
+	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_upper, boost::ref(*this)));
+	set_to_.changed.connect(
+	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
-	UI::Textarea* label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
+	UI::Textarea* label =
+	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label, UI::Align::kLeft);
 	box_.add(&upper_, UI::Align::kLeft);
@@ -89,12 +105,11 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 	box_.add(label, UI::Align::kLeft);
 	box_.add(&set_to_, UI::Align::kLeft);
 
-	box_.set_size(get_inner_w() - 2 * hmargin(),
-					  upper_.get_h() + lower_.get_h() + set_to_.get_h() + 2 * label->get_h() + 7 * vspacing());
+	box_.set_size(get_inner_w() - 2 * hmargin(), upper_.get_h() + lower_.get_h() + set_to_.get_h() +
+	                                                2 * label->get_h() + 7 * vspacing());
 
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
 }
-
 
 void EditorToolNoiseHeightOptionsMenu::update_lower() {
 	int32_t upper = upper_.get_value();
@@ -104,7 +119,6 @@ void EditorToolNoiseHeightOptionsMenu::update_lower() {
 	lower = std::min(lower, upper);
 	update_interval(lower, upper);
 }
-
 
 void EditorToolNoiseHeightOptionsMenu::update_upper() {
 	int32_t upper = upper_.get_value();

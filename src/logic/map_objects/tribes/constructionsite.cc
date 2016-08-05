@@ -42,17 +42,15 @@
 namespace Widelands {
 
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
-															const LuaTable& table,
-															const EditorGameBase& egbase)
-	: BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase)
-{
+                                             const LuaTable& table,
+                                             const EditorGameBase& egbase)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
-Building & ConstructionSiteDescr::create_object() const {
+Building& ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
 }
-
 
 /*
 ==============================
@@ -62,19 +60,15 @@ IMPLEMENTATION
 ==============================
 */
 
+ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
+   : PartiallyFinishedBuilding(cs_descr), fetchfromflag_(0), builder_idle_(false) {
+}
 
-ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
-PartiallyFinishedBuilding (cs_descr),
-fetchfromflag_     (0),
-builder_idle_      (false)
-{}
-
-
-void ConstructionSite::update_statistics_string(std::string* s)
-{
+void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
 	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-			(boost::format(_("%i%% built")) % percent)).str();
+	      (boost::format(_("%i%% built")) % percent))
+	        .str();
 }
 
 /*
@@ -82,24 +76,22 @@ void ConstructionSite::update_statistics_string(std::string* s)
 Access to the wares queues by id
 =======
 */
-WaresQueue & ConstructionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue * ware : wares_) {
+WaresQueue& ConstructionSite::waresqueue(DescriptionIndex const wi) {
+	for (WaresQueue* ware : wares_) {
 		if (ware->get_ware() == wi) {
 			return *ware;
 		}
 	}
-	throw wexception
-		("%s (%u) (building %s) has no WaresQueue for %u",
-		 descr().name().c_str(), serial(), building_->name().c_str(), wi);
+	throw wexception("%s (%u) (building %s) has no WaresQueue for %u", descr().name().c_str(),
+	                 serial(), building_->name().c_str(), wi);
 }
-
 
 /*
 ===============
 Set the type of building we're going to build
 ===============
 */
-void ConstructionSite::set_building(const BuildingDescr & building_descr) {
+void ConstructionSite::set_building(const BuildingDescr& building_descr) {
 	PartiallyFinishedBuilding::set_building(building_descr);
 
 	info_.becomes = &building_descr;
@@ -110,11 +102,10 @@ void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(EditorGameBase & egbase)
-{
+void ConstructionSite::init(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<DescriptionIndex, uint8_t> * buildcost;
+	const std::map<DescriptionIndex, uint8_t>* buildcost;
 	if (!old_buildings_.empty()) {
 		// Enhancement
 		DescriptionIndex was_index = old_buildings_.back();
@@ -133,8 +124,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-		WaresQueue & wq =
-			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
+		WaresQueue& wq = *(wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
 		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
@@ -143,24 +133,21 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	}
 }
 
-
 /*
 ===============
 Release worker and material (if any is left).
 If construction was finished successfully, place the building at our position.
 ===============
 */
-void ConstructionSite::cleanup(EditorGameBase & egbase)
-{
+void ConstructionSite::cleanup(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		old_buildings_.push_back(becomes_idx);
-		Building & b =
-			building_->create(egbase, owner(), position_, false, false, old_buildings_);
-		if (Worker * const builder = builder_.get(egbase)) {
+		Building& b = building_->create(egbase, owner(), position_, false, false, old_buildings_);
+		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
@@ -168,23 +155,20 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 		if (optionswindow_) {
 			Point window_position = optionswindow_->get_pos();
 			hide_options();
-			InteractiveGameBase & igbase =
-				dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
+			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
 		}
 	}
 }
-
 
 /*
 ===============
 Construction sites only burn if some of the work has been completed.
 ===============
 */
-bool ConstructionSite::burn_on_destroy()
-{
+bool ConstructionSite::burn_on_destroy() {
 	if (work_completed_ >= work_steps_)
-		return false; // completed, so don't burn
+		return false;  // completed, so don't burn
 
 	return work_completed_ || !old_buildings_.empty();
 }
@@ -194,23 +178,21 @@ bool ConstructionSite::burn_on_destroy()
 Remember the ware on the flag. The worker will be sent from get_building_work().
 ===============
 */
-bool ConstructionSite::fetch_from_flag(Game & game)
-{
+bool ConstructionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
-	if (Worker * const builder = builder_.get(game))
+	if (Worker* const builder = builder_.get(game))
 		builder->update_task_buildingwork(game);
 
 	return true;
 }
-
 
 /*
 ===============
 Called by our builder to get instructions.
 ===============
 */
-bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
+bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -219,16 +201,14 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_) //  Happens for building without buildcost.
-		schedule_destroy(game); //  Complete the building immediately.
+	if (!work_steps_)           //  Happens for building without buildcost.
+		schedule_destroy(game);  //  Complete the building immediately.
 
 	// Check if one step has completed
 	if (working_) {
 		if (static_cast<int32_t>(game.get_gametime() - work_steptime_) < 0) {
-			worker.start_task_idle
-				(game,
-				 worker.descr().get_animation("work"),
-				 work_steptime_ - game.get_gametime());
+			worker.start_task_idle(
+			   game, worker.descr().get_animation("work"), work_steptime_ - game.get_gametime());
 			builder_idle_ = false;
 			return true;
 		} else {
@@ -252,12 +232,12 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue * iqueue: wares_) {
-		WaresQueue * queue = iqueue;
+	for (WaresQueue* iqueue : wares_) {
+		WaresQueue* queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
+			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -265,10 +245,9 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Check if we've got wares to consume
-	if (work_completed_ < work_steps_)
-	{
+	if (work_completed_ < work_steps_) {
 		for (uint32_t i = 0; i < wares_.size(); ++i) {
-			WaresQueue & wq = *wares_[i];
+			WaresQueue& wq = *wares_[i];
 
 			if (!wq.get_filled())
 				continue;
@@ -282,8 +261,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
-			worker.start_task_idle
-				(game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+			worker.start_task_idle(
+			   game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
 			builder_idle_ = false;
 			return true;
 		}
@@ -297,36 +276,36 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	return true;
 }
 
-
 /*
 ===============
 Called by WaresQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback
-	(Game & game, WaresQueue *, DescriptionIndex, void * const data)
-{
-	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
+void ConstructionSite::wares_queue_callback(Game& game,
+                                            WaresQueue*,
+                                            DescriptionIndex,
+                                            void* const data) {
+	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_)
-		if (Worker * const builder = cs.builder_.get(game))
+		if (Worker* const builder = cs.builder_.get(game))
 			builder->update_task_buildingwork(game);
 }
-
 
 /*
 ===============
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw
-	(const EditorGameBase & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
-{
+void ConstructionSite::draw(const EditorGameBase& game,
+                            RenderTarget& dst,
+                            const FCoords& coords,
+                            const Point& pos) {
 	const uint32_t gametime = game.get_gametime();
 	uint32_t tanim = gametime - animstart_;
 
 	if (coords != position_)
-		return; // draw big buildings only once
+		return;  // draw big buildings only once
 
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
@@ -334,15 +313,13 @@ void ConstructionSite::draw
 
 	// Draw the partially finished building
 
-	static_assert(0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
+	static_assert(
+	   0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
 	info_.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
 	info_.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
 
 	if (working_) {
-		assert
-			(work_steptime_
-			 <=
-			 info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		assert(work_steptime_ <= info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
@@ -370,12 +347,12 @@ void ConstructionSite::draw
 	if (info_.totaltime)
 		lines /= info_.totaltime;
 	assert(h * cur_frame <= lines);
-	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+	lines -= h * cur_frame;  //  This won't work if pictures have various sizes.
 
-	if (cur_frame) { //  not the first pic
+	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.blit_animation(pos, anim_idx, tanim - FRAME_LENGTH, player_color,
-		                   Rect(Point(0, 0), w, h - lines));
+		dst.blit_animation(
+		   pos, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
@@ -384,10 +361,11 @@ void ConstructionSite::draw
 		uint32_t prev_building_anim_idx;
 		try {
 			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (MapObjectDescr::AnimationNonexistent &) {
+		} catch (MapObjectDescr::AnimationNonexistent&) {
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
-		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);
+		const Animation& prev_building_anim =
+		   g_gr->animations().get_animation(prev_building_anim_idx);
 		dst.blit_animation(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
 		                   Rect(Point(0, 0), prev_building_anim.width(),
 		                        std::min<int>(prev_building_anim.height(), h - lines)));
@@ -399,5 +377,4 @@ void ConstructionSite::draw
 	// Draw help strings
 	draw_info(game, dst, pos);
 }
-
 }

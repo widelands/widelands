@@ -63,84 +63,108 @@ public:
 	friend class Economy;
 	friend class RequestList;
 
-	using CallbackFn = void (*)
-		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
+	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	Request(PlayerImmovable & target, DescriptionIndex, CallbackFn, WareWorker);
+	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request();
 
-	PlayerImmovable & target() const {return target_;}
-	DescriptionIndex get_index() const {return index_;}
-	WareWorker get_type() const {return type_;}
-	Quantity get_count() const {return count_;}
-	uint32_t get_open_count() const {return count_ - transfers_.size();}
-	bool is_open() const {return transfers_.size() < count_;}
-	Economy * get_economy() const {return economy_;}
+	PlayerImmovable& target() const {
+		return target_;
+	}
+	DescriptionIndex get_index() const {
+		return index_;
+	}
+	WareWorker get_type() const {
+		return type_;
+	}
+	Quantity get_count() const {
+		return count_;
+	}
+	uint32_t get_open_count() const {
+		return count_ - transfers_.size();
+	}
+	bool is_open() const {
+		return transfers_.size() < count_;
+	}
+	Economy* get_economy() const {
+		return economy_;
+	}
 	int32_t get_required_time() const;
-	int32_t get_last_request_time() const {return last_request_time_;}
+	int32_t get_last_request_time() const {
+		return last_request_time_;
+	}
 	int32_t get_priority(int32_t cost) const;
 	uint32_t get_transfer_priority() const;
-	uint32_t get_num_transfers() const {return transfers_.size();}
+	uint32_t get_num_transfers() const {
+		return transfers_.size();
+	}
 
-	Flag & target_flag() const;
+	Flag& target_flag() const;
 
-	void set_economy(Economy *);
+	void set_economy(Economy*);
 	void set_count(Quantity);
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
-	void set_last_request_time(int32_t const time) {last_request_time_ = time;}
+	void set_last_request_time(int32_t const time) {
+		last_request_time_ = time;
+	}
 
-	void start_transfer(Game &, Supply &);
+	void start_transfer(Game&, Supply&);
 
-	void read (FileRead  &, Game &, MapObjectLoader &);
-	void write(FileWrite &, Game &, MapObjectSaver  &) const;
-	Worker * get_transfer_worker();
+	void read(FileRead&, Game&, MapObjectLoader&);
+	void write(FileWrite&, Game&, MapObjectSaver&) const;
+	Worker* get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
-	void transfer_finish(Game &, Transfer &);
-	void transfer_fail  (Game &, Transfer &);
+	void transfer_finish(Game&, Transfer&);
+	void transfer_fail(Game&, Transfer&);
 
-	void set_requirements (const Requirements & r) {requirements_ = r;}
-	const Requirements & get_requirements () const {return requirements_;}
+	void set_requirements(const Requirements& r) {
+		requirements_ = r;
+	}
+	const Requirements& get_requirements() const {
+		return requirements_;
+	}
 
 private:
-	int32_t get_base_required_time(EditorGameBase &, uint32_t nr) const;
+	int32_t get_base_required_time(EditorGameBase&, uint32_t nr) const;
+
 public:
 	void cancel_transfer(uint32_t idx);
+
 private:
 	void remove_transfer(uint32_t idx);
-	uint32_t find_transfer(Transfer &);
+	uint32_t find_transfer(Transfer&);
 
-	using TransferList = std::vector<Transfer *>;
+	using TransferList = std::vector<Transfer*>;
 
 	WareWorker type_;
 
-	PlayerImmovable & target_;            //  who requested it?
+	PlayerImmovable& target_;  //  who requested it?
 	//  Copies of target_ of various pointer types, to avoid expensive
 	//  dynamic casting at runtime. Variables with an incompatible type
 	//  are filled with nulls.
-	Building        * target_building_;
-	ProductionSite  * target_productionsite_;
-	Warehouse       * target_warehouse_;
-	ConstructionSite * target_constructionsite_;
+	Building* target_building_;
+	ProductionSite* target_productionsite_;
+	Warehouse* target_warehouse_;
+	ConstructionSite* target_constructionsite_;
 
-	Economy         * economy_;
-	DescriptionIndex        index_;             //  the index of the ware descr
-	Quantity          count_;             //  how many do we need in total
+	Economy* economy_;
+	DescriptionIndex index_;  //  the index of the ware descr
+	Quantity count_;          //  how many do we need in total
 
-	CallbackFn        callbackfn_;        //  called on request success
+	CallbackFn callbackfn_;  //  called on request success
 
 	//  when do we need the first ware (can be in the past)
-	int32_t           required_time_;
-	int32_t           required_interval_; //  time between wares
-	int32_t           last_request_time_;
+	int32_t required_time_;
+	int32_t required_interval_;  //  time between wares
+	int32_t last_request_time_;
 
-	TransferList      transfers_;         //  maximum size is count_
+	TransferList transfers_;  //  maximum size is count_
 
 	Requirements requirements_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_REQUEST_H

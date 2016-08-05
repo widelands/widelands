@@ -38,15 +38,14 @@ class Game;
  */
 
 struct GameSaver {
-	GameSaver(FileSystem &, Game &);
+	GameSaver(FileSystem&, Game&);
 
 	void save();
 
 private:
-	FileSystem & fs_;
-	Game       & game_;
+	FileSystem& fs_;
+	Game& game_;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_SAVER_H

@@ -31,23 +31,24 @@ namespace UI {
 /**
  * Initialize an empty box
 */
-Box::Box
-	(Panel * const parent,
-	 int32_t const x, int32_t const y,
-	 uint32_t const orientation,
-	 int32_t const max_x, int32_t const max_y, uint32_t const inner_spacing)
-	:
-	Panel        (parent, x, y, 0, 0),
+Box::Box(Panel* const parent,
+         int32_t const x,
+         int32_t const y,
+         uint32_t const orientation,
+         int32_t const max_x,
+         int32_t const max_y,
+         uint32_t const inner_spacing)
+   : Panel(parent, x, y, 0, 0),
 
-	max_x_      (max_x ? max_x : g_gr->get_xres()),
-	max_y_      (max_y ? max_y : g_gr->get_yres()),
+     max_x_(max_x ? max_x : g_gr->get_xres()),
+     max_y_(max_y ? max_y : g_gr->get_yres()),
 
-	scrolling_(false),
-	scrollbar_(nullptr),
-	orientation_(orientation),
-	mindesiredbreadth_(0),
-	inner_spacing_(inner_spacing)
-{}
+     scrolling_(false),
+     scrollbar_(nullptr),
+     orientation_(orientation),
+     mindesiredbreadth_(0),
+     inner_spacing_(inner_spacing) {
+}
 
 /**
  * Enable or disable the creation of a scrollbar if the maximum
@@ -57,8 +58,7 @@ Box::Box
  * are added, e.g. if the box has a \ref Vertical orientation,
  * only a vertical scrollbar may be added.
  */
-void Box::set_scrolling(bool scroll)
-{
+void Box::set_scrolling(bool scroll) {
 	if (scroll == scrolling_)
 		return;
 
@@ -72,8 +72,7 @@ void Box::set_scrolling(bool scroll)
  * The breadth is the dimension of the box that is orthogonal to
  * its orientation.
  */
-void Box::set_min_desired_breadth(uint32_t min)
-{
+void Box::set_min_desired_breadth(uint32_t min) {
 	if (min == mindesiredbreadth_)
 		return;
 
@@ -86,8 +85,7 @@ void Box::set_min_desired_breadth(uint32_t min)
  * infinite space is zero, and is later on also re-used to calculate the
  * space assigned to an infinite space.
  */
-void Box::update_desired_size()
-{
+void Box::update_desired_size() {
 	int totaldepth = 0;
 	int maxbreadth = mindesiredbreadth_;
 
@@ -107,16 +105,14 @@ void Box::update_desired_size()
 		if (totaldepth > max_x_ && scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
-		set_desired_size
-			(std::min(totaldepth, max_x_), // + get_lborder() + get_rborder(),
-			 std::min(maxbreadth, max_y_)); // + get_tborder() + get_bborder());
+		set_desired_size(std::min(totaldepth, max_x_),   // + get_lborder() + get_rborder(),
+		                 std::min(maxbreadth, max_y_));  // + get_tborder() + get_bborder());
 	} else {
 		if (totaldepth > max_y_ && scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
-		set_desired_size
-			(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
-			 std::min(totaldepth, max_y_) + get_tborder() + get_bborder());
+		set_desired_size(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
+		                 std::min(totaldepth, max_y_) + get_tborder() + get_bborder());
 	}
 
 	//  This is not redundant, because even if all this does not change our
@@ -128,8 +124,7 @@ void Box::update_desired_size()
 /**
  * Adjust all the children and the box's size.
  */
-void Box::layout()
-{
+void Box::layout() {
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	int totaldepth = 0;
 
@@ -171,8 +166,7 @@ void Box::layout()
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(
-			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, orientation_ == Horizontal));
+			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, orientation_ == Horizontal));
 			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			scrollbar_->set_pos(Point(sb_x, sb_y));
@@ -199,18 +193,16 @@ void Box::layout()
 	for (size_t idx = 0; idx < items_.size(); ++idx)
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
-			items_[idx].assigned_var_depth =
-				(max_depths - totaldepth) / infspace_count;
+			items_[idx].assigned_var_depth = (max_depths - totaldepth) / infspace_count;
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
-	}
+		}
 
 	// Forth pass: Update positions of all other items
 	update_positions();
 }
 
-void Box::update_positions()
-{
+void Box::update_positions() {
 	int32_t scrollpos = scrollbar_ ? scrollbar_->get_scrollpos() : 0;
 
 	uint32_t totaldepth = 0;
@@ -223,9 +215,7 @@ void Box::update_positions()
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
-			set_item_size
-				(idx, depth, items_[idx].u.panel.fullsize ?
-				 totalbreadth : breadth);
+			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -237,11 +227,9 @@ void Box::update_positions()
 /**
  * Callback for scrollbar movement.
  */
-void Box::scrollbar_moved(int32_t)
-{
+void Box::scrollbar_moved(int32_t) {
 	update_positions();
 }
-
 
 /**
  * Add a new panel to be controlled by this box
@@ -254,8 +242,7 @@ void Box::scrollbar_moved(int32_t)
  * This can be used to make buttons fill a box completely.
  *
  */
-void Box::add(Panel * const panel, UI::Align const align, bool fullsize, bool fillspace)
-{
+void Box::add(Panel* const panel, UI::Align const align, bool fullsize, bool fillspace) {
 	Item it;
 
 	it.type = Item::ItemPanel;
@@ -270,12 +257,10 @@ void Box::add(Panel * const panel, UI::Align const align, bool fullsize, bool fi
 	update_desired_size();
 }
 
-
 /**
  * Add spacing of empty pixels.
 */
-void Box::add_space(uint32_t space)
-{
+void Box::add_space(uint32_t space) {
 	Item it;
 
 	it.type = Item::ItemSpace;
@@ -288,12 +273,10 @@ void Box::add_space(uint32_t space)
 	update_desired_size();
 }
 
-
 /**
  * Add some infinite space (to align some buttons to the right)
 */
-void Box::add_inf_space()
-{
+void Box::add_inf_space() {
 	Item it;
 
 	it.type = Item::ItemSpace;
@@ -306,18 +289,15 @@ void Box::add_inf_space()
 	update_desired_size();
 }
 
-
 /**
  * Retrieve the given item's desired size. depth is the size of the
  * item along the orientation axis, breadth is the size perpendicular
  * to the orientation axis.
 */
-void Box::get_item_desired_size
-	(uint32_t const idx, int* depth, int* breadth)
-{
+void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 	assert(idx < items_.size());
 
-	const Item & it = items_[idx];
+	const Item& it = items_[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel:
@@ -339,12 +319,10 @@ void Box::get_item_desired_size
  * Retrieve the given item's size. This differs from get_item_desired_size only
  * for expanding items, at least for now.
  */
-void Box::get_item_size
-	(uint32_t const idx, int* depth, int* breadth)
-{
+void Box::get_item_size(uint32_t const idx, int* depth, int* breadth) {
 	assert(idx < items_.size());
 
-	const Item & it = items_[idx];
+	const Item& it = items_[idx];
 
 	get_item_desired_size(idx, depth, breadth);
 	*depth += it.assigned_var_depth;
@@ -353,11 +331,10 @@ void Box::get_item_size
 /**
  * Set the given items actual size.
  */
-void Box::set_item_size(uint32_t idx, int depth, int breadth)
-{
+void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 	assert(idx < items_.size());
 
-	const Item & it = items_[idx];
+	const Item& it = items_[idx];
 
 	if (it.type == Item::ItemPanel) {
 		if (orientation_ == Horizontal)
@@ -372,11 +349,10 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth)
  * pos is the position relative to the parent in the direction of the
  * orientation axis.
 */
-void Box::set_item_pos(uint32_t idx, int32_t pos)
-{
+void Box::set_item_pos(uint32_t idx, int32_t pos) {
 	assert(idx < items_.size());
 
-	const Item & it = items_[idx];
+	const Item& it = items_[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel: {
@@ -410,8 +386,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 	}
 
 	case Item::ItemSpace:
-		break; //  no need to do anything
+		break;  //  no need to do anything
 	};
 }
-
 }

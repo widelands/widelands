@@ -28,7 +28,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-
 /**
  * Show a small modal dialog allowing the user to enter
  * a directory name to be created
@@ -36,9 +35,11 @@
  */
 // TODO(unknown): This should be moved to src/ui, it's not specific to the editor
 struct MainMenuSaveMapMakeDirectory : public UI::Window {
-	MainMenuSaveMapMakeDirectory(UI::Panel *, char const *);
+	MainMenuSaveMapMakeDirectory(UI::Panel*, char const*);
 
-	char const * get_dirname() {return dirname_.c_str();}
+	char const* get_dirname() {
+		return dirname_.c_str();
+	}
 
 private:
 	const int padding_;

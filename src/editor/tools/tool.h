@@ -40,66 +40,69 @@ class World;
  */
 class EditorTool {
 public:
-	EditorTool(EditorTool & second, EditorTool & third, bool uda = true) :
-		second_(second), third_(third), undoable_(uda)
-	{}
-	virtual ~EditorTool() {}
-
-	enum ToolIndex {First, Second, Third};
-	int32_t handle_click
-		(ToolIndex i,
-		const Widelands::World& world, const Widelands::NodeAndTriangle<>& center,
-		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
-	{
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .handle_click_impl(world, center, parent, args, map);
+	EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
+	   : second_(second), third_(third), undoable_(uda) {
+	}
+	virtual ~EditorTool() {
 	}
 
-	int32_t handle_undo
-		(ToolIndex i,
-		const Widelands::World& world, const Widelands::NodeAndTriangle<>& center,
-		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
-	{
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .handle_undo_impl(world, center, parent, args, map);
+	enum ToolIndex { First, Second, Third };
+	int32_t handle_click(ToolIndex i,
+	                     const Widelands::World& world,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     EditorInteractive& parent,
+	                     EditorActionArgs* args,
+	                     Widelands::Map* map) {
+		return (i == First ? *this : i == Second ? second_ : third_)
+		   .handle_click_impl(world, center, parent, args, map);
 	}
 
-	const char * get_sel(const ToolIndex i) {
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .get_sel_impl();
+	int32_t handle_undo(ToolIndex i,
+	                    const Widelands::World& world,
+	                    const Widelands::NodeAndTriangle<>& center,
+	                    EditorInteractive& parent,
+	                    EditorActionArgs* args,
+	                    Widelands::Map* map) {
+		return (i == First ? *this : i == Second ? second_ : third_)
+		   .handle_undo_impl(world, center, parent, args, map);
 	}
 
-	EditorActionArgs format_args(const ToolIndex i, EditorInteractive & parent) {
-		return
-			 (i == First ? *this : i == Second ? second_ : third_)
-		    .format_args_impl(parent);
+	const char* get_sel(const ToolIndex i) {
+		return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
 	}
 
-	bool is_undoable() {return undoable_;}
-	virtual bool has_size_one() const {return false;}
-	virtual EditorActionArgs format_args_impl(EditorInteractive & parent) {
+	EditorActionArgs format_args(const ToolIndex i, EditorInteractive& parent) {
+		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl(parent);
+	}
+
+	bool is_undoable() {
+		return undoable_;
+	}
+	virtual bool has_size_one() const {
+		return false;
+	}
+	virtual EditorActionArgs format_args_impl(EditorInteractive& parent) {
 		return EditorActionArgs(parent);
 	}
 	virtual int32_t handle_click_impl(const Widelands::World& world,
 	                                  const Widelands::NodeAndTriangle<>&,
 	                                  EditorInteractive&,
 	                                  EditorActionArgs*,
-									  Widelands::Map*) = 0;
+	                                  Widelands::Map*) = 0;
 	virtual int32_t handle_undo_impl(const Widelands::World&,
 	                                 const Widelands::NodeAndTriangle<>&,
 	                                 EditorInteractive&,
 	                                 EditorActionArgs*,
-									 Widelands::Map*) {
+	                                 Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const char * get_sel_impl() const = 0;
-	virtual bool operates_on_triangles() const {return false;}
+	virtual const char* get_sel_impl() const = 0;
+	virtual bool operates_on_triangles() const {
+		return false;
+	}
 
 protected:
-	EditorTool & second_, & third_;
+	EditorTool& second_, &third_;
 	bool undoable_;
 
 private:
