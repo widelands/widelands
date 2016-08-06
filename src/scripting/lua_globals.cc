@@ -195,16 +195,15 @@ static int L_ngettext(lua_State* L) {
 /* RST
 .. function:: pgettext(msgctxt, msgid)
 
-   A wrapper for the pgettext() function, needed for allowing multiple translations of the same
-string
-   according to context.
+	A wrapper for the pgettext() function, needed for allowing multiple translations of the same string
+	according to context.
 
-   :arg msgctxt: a named context for this string for disambiguation
-   :type msgctxt: :class:`string`
-   :arg msgid: text to translate
-   :type msgid: :class:`string`
+	:arg msgctxt: a named context for this string for disambiguation
+	:type msgctxt: :class:`string`
+	:arg msgid: text to translate
+	:type msgid: :class:`string`
 
-   :returns: The translated string.
+	:returns: The translated string.
 */
 // UNTESTED
 static int L_pgettext(lua_State* L) {

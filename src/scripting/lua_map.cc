@@ -1095,11 +1095,10 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: buildings
+	.. attribute:: buildings
 
-         (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can
-   use,
-              casted to their appropriate subclasses.
+			(RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
+				  casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
 	const TribeDescr& tribe = *get();
@@ -1159,10 +1158,9 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: headquarters
+	.. attribute:: headquarters
 
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe
-   uses
+			(RO) the :class:`string` internal name of the default headquarters type that this tribe uses
 */
 
 int LuaTribeDescription::get_headquarters(lua_State* L) {
@@ -1300,14 +1298,13 @@ MapObjectDescription
 
 .. class:: MapObjectDescription
 
-   A static description of a tribe's map object, so it can be used in help files
-   without having to access an actual object on the map.
-   This class contains the properties that are common to all map objects such as buildings or wares.
+	A static description of a tribe's map object, so it can be used in help files
+	without having to access an actual object on the map.
+	This class contains the properties that are common to all map objects such as buildings or wares.
 
-   The dynamic MapObject class corresponding to this class is the base class for all Objects in
-widelands,
-   including immovables and Bobs. This class can't be instantiated directly, but provides the base
-   for all others.
+	The dynamic MapObject class corresponding to this class is the base class for all Objects in widelands,
+	including immovables and Bobs. This class can't be instantiated directly, but provides the base
+	for all others.
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
@@ -1453,10 +1450,9 @@ int LuaImmovableDescription::get_build_cost(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: the name and descname of the editor category of this immovable
+	.. attribute:: the name and descname of the editor category of this immovable
 
-         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-   none.
+			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -1475,12 +1471,11 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: returns the terrain affinity values for this immovable
+	.. attribute:: returns the terrain affinity values for this immovable
 
-         (RO) a table containing numbers labeled as pickiness (double), preferred_fertility
-   (double),
-              preferred_humidity (double), and preferred_temperature (uint),
-              or nil if the immovable has no terrain affinity.
+			(RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
+				  preferred_humidity (double), and preferred_temperature (uint),
+				  or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
@@ -1702,10 +1697,9 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: enhanced_from
+	.. attribute:: enhanced_from
 
-         (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced
-   building.
+			(RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -1986,15 +1980,13 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: consumed_wares
+	.. attribute:: consumed_wares
 
-      :arg program_name: the name of the production program that we want to get the consumed wares
-   for
-      :type tribename: :class:`string`
+		:arg program_name: the name of the production program that we want to get the consumed wares for
+		:type tribename: :class:`string`
 
-      (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
-   program.
-           Multiple entries in {ware name} are alternatives (OR logic)).
+		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
+			  Multiple entries in {ware name} are alternatives (OR logic)).
 */
 int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2018,14 +2010,12 @@ int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: produced_wares
+	.. attribute:: produced_wares
 
-      :arg program_name: the name of the production program that we want to get the produced wares
-   for
-      :type tribename: :class:`string`
+		:arg program_name: the name of the production program that we want to get the produced wares for
+		:type tribename: :class:`string`
 
-      (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
-   program
+		(RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2038,14 +2028,13 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: recruited_workers
+	.. attribute:: recruited_workers
 
-      :arg program_name: the name of the production program that we want to get the recruited
-   workers for
-      :type tribename: :class:`string`
+		:arg program_name: the name of the production program that we want to get the recruited workers for
+		:type tribename: :class:`string`
 
-      (RO) Returns a table of {worker name, worker amount} for the workers recruited
-           by this production program
+		(RO) Returns a table of {worker name, worker amount} for the workers recruited
+			  by this production program
 */
 int LuaProductionSiteDescription::recruited_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2112,11 +2101,10 @@ TrainingSiteDescription
 
 .. class:: TrainingSiteDescription
 
-   A static description of a tribe's trainingsite, so it can be used in help files
-   without having to access an actual building on the map.
-   A training site can train some or all of a soldier's properties (Attack, Defense, Evade and
-Health).
-   See also class BuildingDescription and class MapObjectDescription for more properties.
+	A static description of a tribe's trainingsite, so it can be used in help files
+	without having to access an actual building on the map.
+	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
+	See also class BuildingDescription and class MapObjectDescription for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -2909,12 +2897,11 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
  */
 
 /* RST
-   .. method:: editor_image(amount)
+	.. method:: editor_image(amount)
 
-      :arg amount: The amount of the resource what we want an overlay image for
+		:arg amount: The amount of the resource what we want an overlay image for
 
-         (RO) the :class:`string` path to the image representing the specified amount of this
-   resource
+			(RO) the :class:`string` path to the image representing the specified amount of this resource
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -2990,11 +2977,10 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: get_default_resource
+	.. attribute:: get_default_resource
 
-         (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
-   terrain, or
-              nil if the terrain has no default resource.
+			(RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this terrain, or
+				  nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -3021,10 +3007,9 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: the name and descname of the editor category of this terrain
+	.. attribute:: the name and descname of the editor category of this terrain
 
-         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-   none.
+			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -3087,10 +3072,9 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: valid_resources
+	.. attribute:: valid_resources
 
-         (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
-   terrain.
+			(RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this terrain.
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
