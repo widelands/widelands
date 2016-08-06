@@ -1095,10 +1095,10 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-	.. attribute:: buildings
+   .. attribute:: buildings
 
-			(RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
-				  casted to their appropriate subclasses.
+      (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
+      casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
 	const TribeDescr& tribe = *get();
@@ -1158,9 +1158,9 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: headquarters
+   .. attribute:: headquarters
 
-			(RO) the :class:`string` internal name of the default headquarters type that this tribe uses
+         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
 */
 
 int LuaTribeDescription::get_headquarters(lua_State* L) {
@@ -1697,9 +1697,9 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: enhanced_from
+   .. attribute:: enhanced_from
 
-			(RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
+         (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
