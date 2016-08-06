@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-20 04:54+0000\n"
-"PO-Revision-Date: 2016-06-09 21:16+0000\n"
+"POT-Creation-Date: 2016-08-02 08:53+0000\n"
+"PO-Revision-Date: 2016-08-04 12:32+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -291,7 +291,7 @@ msgstr "S'està creant un mapa buit…"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:466
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:139
-#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
+#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:46
 msgid "No Name"
 msgstr "Sense nom"
 
@@ -536,13 +536,13 @@ msgstr "Surt de l'editor"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:225
-#: ../../src/wui/mapdata.cc:147
+#: ../../src/wui/mapdata.cc:167
 msgid "My Maps"
 msgstr "Els meus mapes"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
-#: ../../src/wui/mapdata.cc:144
+#: ../../src/wui/mapdata.cc:164
 msgid "Multiplayer Scenarios"
 msgstr "Escenaris multijugador"
 
@@ -1472,7 +1472,7 @@ msgstr "Partida desada"
 msgid "Saving game…"
 msgstr "S'està guardant la partida…"
 
-#: ../../src/map_io/s2map.cc:405
+#: ../../src/map_io/s2map.cc:404
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa del Settlers II de Bluebyte. Sense comentari definit!"
 
@@ -2909,7 +2909,7 @@ msgstr "Nombre màxim d'arxius de desades automàtiques:"
 
 #: ../../src/ui_fsmenu/options.cc:196
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Comprimeix els arxius de dades del Widelands (mapes, repeticions i partides desades)."
+msgstr "Comprimeix els arxius de dades del Widelands (mapes, repeticions i partides desades)"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Write syncstreams in network games to debug desyncs"
@@ -3756,17 +3756,17 @@ msgstr "Equips de 3"
 msgid "Teams of 4"
 msgstr "Equips de 4"
 
-#: ../../src/wui/mapdata.cc:37
+#: ../../src/wui/mapdata.cc:47
 msgid "No Author"
 msgstr "Sense autor"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:130
+#: ../../src/wui/mapdata.cc:150
 msgid "parent"
 msgstr "carpeta superior"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:136
+#: ../../src/wui/mapdata.cc:156
 msgid "empty"
 msgstr "buit"
 
