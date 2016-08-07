@@ -231,6 +231,9 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;

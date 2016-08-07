@@ -60,6 +60,8 @@ public:
 
 	std::set<std::string> list_directory(const std::string& path) override;
 
+	/// Returns true if the filename is legal in all operating systems
+	static bool is_legal_filename(const std::string& filename);
 	bool is_writable() const override;
 	bool file_exists(const std::string& path) override;
 	bool is_directory(const std::string& path) override;
