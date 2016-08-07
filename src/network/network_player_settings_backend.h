@@ -25,22 +25,19 @@
 
 struct NetworkPlayerSettingsBackend {
 
-	NetworkPlayerSettingsBackend(GameSettingsProvider * const settings)
-	:
-	s(settings)
-	{
+	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
 		for (uint8_t i = 0; i < MAX_PLAYERS; ++i)
 			shared_in_tribe[i] = std::string();
 	}
 
-	void toggle_type (uint8_t id);
+	void toggle_type(uint8_t id);
 	void toggle_tribe(uint8_t id);
-	void toggle_init (uint8_t id);
-	void toggle_team (uint8_t id);
-	void refresh     (uint8_t id);
+	void toggle_init(uint8_t id);
+	void toggle_team(uint8_t id);
+	void refresh(uint8_t id);
 
-	GameSettingsProvider * const s;
-	std::string            shared_in_tribe[MAX_PLAYERS];
+	GameSettingsProvider* const s;
+	std::string shared_in_tribe[MAX_PLAYERS];
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

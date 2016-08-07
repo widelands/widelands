@@ -38,10 +38,10 @@ class EditorInteractive;
  * author, name and description
 */
 struct MainMenuMapOptions : public UI::Window {
-	MainMenuMapOptions(EditorInteractive &, bool modal = false);
+	MainMenuMapOptions(EditorInteractive&, bool modal = false);
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	void changed();
 	void update();
 	void clicked_ok();

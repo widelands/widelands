@@ -30,28 +30,27 @@ static const uint32_t IWD_VBorder = 10;
 static const uint32_t IWD_DefaultItemsPerRow = 9;
 static const uint32_t IWD_ItemWidth = 14;
 static const uint32_t IWD_ItemHeight = 26;
-static const uint32_t IWD_WorkerBaseline = -2; ///< Offset of anim center from bottom border of item rect
+static const uint32_t IWD_WorkerBaseline =
+   -2;  ///< Offset of anim center from bottom border of item rect
 static const uint32_t IWD_WareBaseLine = -6;
 
-} // anonymous namespace
+}  // anonymous namespace
 
 /**
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
-ItemWaresDisplay::ItemWaresDisplay(Panel * parent, const Widelands::Player & gplayer) :
-	Panel(parent, 0, 0, 0, 0),
-	player_(gplayer),
-	capacity_(0),
-	items_per_row_(IWD_DefaultItemsPerRow)
-{
+ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
+   : Panel(parent, 0, 0, 0, 0),
+     player_(gplayer),
+     capacity_(0),
+     items_per_row_(IWD_DefaultItemsPerRow) {
 	set_desired_size(2 * IWD_HBorder, 2 * IWD_VBorder);
 }
 
 /**
  * Remove all items from the internal list of items.
  */
-void ItemWaresDisplay::clear()
-{
+void ItemWaresDisplay::clear() {
 	items_.clear();
 }
 
@@ -61,8 +60,7 @@ void ItemWaresDisplay::clear()
  * This does not actually affect the number of items that can be added to the internal list,
  * but it does affect the desired size for this panel.
  */
-void ItemWaresDisplay::set_capacity(uint32_t cap)
-{
+void ItemWaresDisplay::set_capacity(uint32_t cap) {
 	if (cap != capacity_) {
 		capacity_ = cap;
 		recalc_desired_size();
@@ -72,41 +70,38 @@ void ItemWaresDisplay::set_capacity(uint32_t cap)
 /**
  * Set the items shown per row of the panel.
  */
-void ItemWaresDisplay::set_items_per_row(uint32_t nr)
-{
+void ItemWaresDisplay::set_items_per_row(uint32_t nr) {
 	if (nr != items_per_row_) {
 		items_per_row_ = nr;
 		recalc_desired_size();
 	}
 }
 
-void ItemWaresDisplay::recalc_desired_size()
-{
+void ItemWaresDisplay::recalc_desired_size() {
 	uint32_t nrrows = (capacity_ + items_per_row_ - 1) / items_per_row_;
 	uint32_t rowitems = capacity_ >= items_per_row_ ? items_per_row_ : capacity_;
 
-	set_desired_size(2 * IWD_HBorder + rowitems * IWD_ItemWidth, 2 * IWD_VBorder + nrrows * IWD_ItemHeight);
+	set_desired_size(
+	   2 * IWD_HBorder + rowitems * IWD_ItemWidth, 2 * IWD_VBorder + nrrows * IWD_ItemHeight);
 }
 
 /**
  * Add an item to the end of the internal list.
  */
-void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index)
-{
+void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index) {
 	Item it;
 	it.worker = worker;
 	it.index = index;
 	items_.push_back(it);
 }
 
-void ItemWaresDisplay::draw(RenderTarget & dst)
-{
-	const Widelands::TribeDescr & tribe(player().tribe());
+void ItemWaresDisplay::draw(RenderTarget& dst) {
+	const Widelands::TribeDescr& tribe(player().tribe());
 
 	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		const Item & it = items_[idx];
+		const Item& it = items_[idx];
 		uint32_t row = idx / items_per_row_;
 		uint32_t col = idx % items_per_row_;
 

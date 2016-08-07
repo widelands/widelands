@@ -48,8 +48,8 @@ protected:
 private:
 	struct EncyclopediaEntry {
 		EncyclopediaEntry(const std::string& init_script_path,
-								const std::vector<std::string>& init_script_parameters)
-			: script_path(init_script_path), script_parameters(init_script_parameters) {
+		                  const std::vector<std::string>& init_script_parameters)
+		   : script_path(init_script_path), script_parameters(init_script_parameters) {
 		}
 		const std::string script_path;
 		const std::vector<std::string> script_parameters;
@@ -71,6 +71,6 @@ private:
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

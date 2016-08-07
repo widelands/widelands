@@ -23,51 +23,70 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 
-FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
-	FullscreenMenuMainMenu(),
+FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
+   : FullscreenMenuMainMenu(),
 
-// Title
-	title
-		(this,
-		 get_w() / 2, title_y_,
-		 _("Single Player"), UI::Align::kHCenter),
+     // Title
+     title(this, get_w() / 2, title_y_, _("Single Player"), UI::Align::kHCenter),
 
-// Buttons
-	vbox(this, box_x_, box_y_, UI::Box::Vertical,
-		  butw_, get_h() - box_y_, padding_),
-	new_game
-		(&vbox, "new_game", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("New Game"), "", true, false),
-	campaign
-		(&vbox, "campaigns", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("Campaigns"), "", true, false),
-	load_game
-		(&vbox, "load_game", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("Load Game"), "", true, false),
-	back
-		(&vbox, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("Back"), "", true, false)
-{
-	new_game.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-			 boost::ref(*this),
-			 FullscreenMenuBase::MenuTarget::kNewGame));
-	campaign.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-			 boost::ref(*this),
-			 FullscreenMenuBase::MenuTarget::kCampaign));
-	load_game.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-			 boost::ref(*this),
-			 FullscreenMenuBase::MenuTarget::kLoadGame));
-	back.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-			 boost::ref(*this),
-			 FullscreenMenuBase::MenuTarget::kBack));
+     // Buttons
+     vbox(this, box_x_, box_y_, UI::Box::Vertical, butw_, get_h() - box_y_, padding_),
+     new_game(&vbox,
+              "new_game",
+              0,
+              0,
+              butw_,
+              buth_,
+              g_gr->images().get(button_background_),
+              _("New Game"),
+              "",
+              true,
+              false),
+     campaign(&vbox,
+              "campaigns",
+              0,
+              0,
+              butw_,
+              buth_,
+              g_gr->images().get(button_background_),
+              _("Campaigns"),
+              "",
+              true,
+              false),
+     load_game(&vbox,
+               "load_game",
+               0,
+               0,
+               butw_,
+               buth_,
+               g_gr->images().get(button_background_),
+               _("Load Game"),
+               "",
+               true,
+               false),
+     back(&vbox,
+          "back",
+          0,
+          0,
+          butw_,
+          buth_,
+          g_gr->images().get(button_background_),
+          _("Back"),
+          "",
+          true,
+          false) {
+	new_game.sigclicked.connect(
+	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
+	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kNewGame));
+	campaign.sigclicked.connect(
+	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
+	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kCampaign));
+	load_game.sigclicked.connect(
+	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
+	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kLoadGame));
+	back.sigclicked.connect(
+	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
+	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_fontsize(fs_big());
 

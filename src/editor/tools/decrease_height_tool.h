@@ -24,30 +24,33 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	EditorDecreaseHeightTool() : EditorTool(*this, *this), change_by_(1) {}
+	EditorDecreaseHeightTool() : EditorTool(*this, *this), change_by_(1) {
+	}
 
-	int32_t handle_click_impl
-		(const Widelands::World& world,
-		 const Widelands::NodeAndTriangle<>& center,
-		 EditorInteractive & parent,
-		 EditorActionArgs* args,
-		 Widelands::Map* map) override;
+	int32_t handle_click_impl(const Widelands::World& world,
+	                          const Widelands::NodeAndTriangle<>& center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl
-		(const Widelands::World& world,
-		 const Widelands::NodeAndTriangle<>& center,
-		 EditorInteractive& parent,
-		 EditorActionArgs* args,
-		 Widelands::Map* map) override;
+	int32_t handle_undo_impl(const Widelands::World& world,
+	                         const Widelands::NodeAndTriangle<>& center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor//fsel_editor_decrease_height.png";
 	}
 
-	int32_t get_change_by() const {return change_by_;}
-	void set_change_by(const int32_t n) {change_by_ = n;}
+	int32_t get_change_by() const {
+		return change_by_;
+	}
+	void set_change_by(const int32_t n) {
+		change_by_ = n;
+	}
 
 private:
 	int32_t change_by_;

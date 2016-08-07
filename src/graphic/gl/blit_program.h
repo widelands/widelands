@@ -55,20 +55,19 @@ public:
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const FloatRect& gl_dest_rect,
 	          const float z_value,
-				 const BlitData& texture,
-				 const BlitData& mask,
+	          const BlitData& texture,
+	          const BlitData& mask,
 	          const RGBAColor& blend,
-				 const BlendMode& blend_mode);
+	          const BlendMode& blend_mode);
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw_monochrome(const FloatRect& gl_dest_rect,
-				 const float z_value,
-				 const BlitData& blit_source,
-				 const RGBAColor& blend);
-
+	                     const float z_value,
+	                     const BlitData& blit_source,
+	                     const RGBAColor& blend);
 
 	// Draws a bunch of items at once.
 	void draw(const std::vector<Arguments>& arguments);

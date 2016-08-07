@@ -30,9 +30,7 @@ namespace Widelands {
 class Building;
 }
 
-UI::Panel * create_soldier_list
-	(UI::Panel & parent,
-	 InteractiveGameBase & igb,
-	 Widelands::Building & building);
+UI::Panel*
+create_soldier_list(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building);
 
 #endif  // end of include guard: WL_WUI_SOLDIERLIST_H

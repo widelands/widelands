@@ -35,39 +35,42 @@ public:
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	char const * get_sel_impl() const override {return FSEL_EUPS_FILENAME;}
+	char const* get_sel_impl() const override {
+		return FSEL_EUPS_FILENAME;
+	}
 };
-
 
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	EditorSetPortSpaceTool(EditorUnsetPortSpaceTool &);
+	EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	char const * get_sel_impl() const override {return FSEL_ESPS_FILENAME;}
+	char const* get_sel_impl() const override {
+		return FSEL_ESPS_FILENAME;
+	}
 };
 
-int32_t editor_Tool_set_port_space_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c, const Widelands::Map& map);
+int32_t editor_Tool_set_port_space_callback(const Widelands::TCoords<Widelands::FCoords>& c,
+                                            const Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H

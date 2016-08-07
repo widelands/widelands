@@ -40,11 +40,11 @@ saved game file. it is an abstract base class
 */
 class GameDataPacket {
 public:
-	virtual ~GameDataPacket() {}
-	virtual void read (FileSystem &, Game &, MapObjectLoader * = nullptr) = 0;
-	virtual void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) = 0;
+	virtual ~GameDataPacket() {
+	}
+	virtual void read(FileSystem&, Game&, MapObjectLoader* = nullptr) = 0;
+	virtual void write(FileSystem&, Game&, MapObjectSaver* = nullptr) = 0;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_DATA_PACKET_H

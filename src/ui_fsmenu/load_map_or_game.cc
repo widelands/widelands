@@ -28,40 +28,51 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
-		FullscreenMenuBase("images/ui_fsmenu/choosemapmenu.jpg"),
+FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
+   : FullscreenMenuBase("images/ui_fsmenu/choosemapmenu.jpg"),
 
-		// Values for alignment and size
-		padding_(4),
-		indent_(10),
-		label_height_(20),
-		tablex_(get_w() *  47 / 2500),
-		tabley_(get_h() * 17 / 50),
-		tablew_(get_w() * 711 / 1250),
-		tableh_(get_h() * 6083 / 10000),
-		right_column_margin_(15),
-		right_column_x_(tablex_ + tablew_ + right_column_margin_),
-		buty_ (get_h() * 9 / 10),
-		butw_ ((get_w() - right_column_x_ - right_column_margin_) / 2 - padding_),
-		buth_ (get_h() * 9 / 200),
-		right_column_tab_(get_w() - right_column_margin_ - butw_),
+     // Values for alignment and size
+     padding_(4),
+     indent_(10),
+     label_height_(20),
+     tablex_(get_w() * 47 / 2500),
+     tabley_(get_h() * 17 / 50),
+     tablew_(get_w() * 711 / 1250),
+     tableh_(get_h() * 6083 / 10000),
+     right_column_margin_(15),
+     right_column_x_(tablex_ + tablew_ + right_column_margin_),
+     buty_(get_h() * 9 / 10),
+     butw_((get_w() - right_column_x_ - right_column_margin_) / 2 - padding_),
+     buth_(get_h() * 9 / 200),
+     right_column_tab_(get_w() - right_column_margin_ - butw_),
 
-		// Main buttons
-		back_
-		  (this, "back",
-			right_column_x_, buty_, butw_, buth_,
-			g_gr->images().get("images/ui_basic/but0.png"),
-			_("Back"), std::string(), true, false),
-		ok_
-		  (this, "ok",
-			get_w() - right_column_margin_ - butw_, buty_, butw_, buth_,
-			g_gr->images().get("images/ui_basic/but2.png"),
-			_("OK"), std::string(), false, false)
-	{}
+     // Main buttons
+     back_(this,
+           "back",
+           right_column_x_,
+           buty_,
+           butw_,
+           buth_,
+           g_gr->images().get("images/ui_basic/but0.png"),
+           _("Back"),
+           std::string(),
+           true,
+           false),
+     ok_(this,
+         "ok",
+         get_w() - right_column_margin_ - butw_,
+         buty_,
+         butw_,
+         buth_,
+         g_gr->images().get("images/ui_basic/but2.png"),
+         _("OK"),
+         std::string(),
+         false,
+         false) {
+}
 
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();

@@ -31,23 +31,24 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
 
-void MapObjectivePacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapObjectivePacket::read(FileSystem& fs,
+                              EditorGameBase& egbase,
+                              bool const skip,
+                              MapObjectLoader&) {
 	if (skip)
 		return;
 
 	Profile prof;
-	try {prof.read("objective", nullptr, fs);} catch (...) {return;}
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_safe_int("packet_version");
+		prof.read("objective", nullptr, fs);
+	} catch (...) {
+		return;
+	}
+	try {
+		int32_t const packet_version = prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
-			while (Section * const s = prof.get_next_section(nullptr)) {
-				char const * const         name = s->get_name();
+			while (Section* const s = prof.get_next_section(nullptr)) {
+				char const* const name = s->get_name();
 				try {
 					std::unique_ptr<Objective> objective(new Objective(name));
 					Map::Objectives* objectives = egbase.map().mutable_objectives();
@@ -59,25 +60,21 @@ void MapObjectivePacket::read
 					objective->set_visible(s->get_safe_bool("visible"));
 					objective->set_done(s->get_bool("done", false));
 					objectives->insert(std::make_pair(name, std::move(objective)));
-				} catch (const WException & e) {
+				} catch (const WException& e) {
 					throw GameDataError("%s: %s", name, e.what());
 				}
 			}
 		} else {
 			throw UnhandledVersionError("MapObjectivePacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("Objectives: %s", e.what());
 	}
 }
 
-
-void MapObjectivePacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapObjectivePacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	Profile prof;
-	prof.create_section("global").set_int
-		("packet_version", kCurrentPacketVersion);
+	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
 	for (const auto& item : egbase.map().objectives()) {
 		Section& s = prof.create_section(item.second->name().c_str());
@@ -89,5 +86,4 @@ void MapObjectivePacket::write
 
 	prof.write("objective", false, fs);
 }
-
 }

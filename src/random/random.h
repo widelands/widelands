@@ -28,20 +28,20 @@ class StreamRead;
 class StreamWrite;
 
 struct RNG {
-	RNG ();
+	RNG();
 
-	void seed (uint32_t);
+	void seed(uint32_t);
 
-	uint32_t rand ();
+	uint32_t rand();
 
-	void read_state(StreamRead &);
-	void write_state(StreamWrite &);
+	void read_state(StreamRead&);
+	void write_state(StreamWrite&);
 
 private:
 	uint32_t state0;
 	uint32_t state1;
 };
 
-#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])
+#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
 
 #endif  // end of include guard: WL_RANDOM_RANDOM_H

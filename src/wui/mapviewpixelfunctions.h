@@ -20,13 +20,15 @@
 #ifndef WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 #define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
+#include "base/point.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
-#include "base/point.h"
 
-namespace Widelands {class Map;}
+namespace Widelands {
+class Map;
+}
 
 namespace MapviewPixelFunctions {
 
@@ -79,10 +81,8 @@ get_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int3
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
-inline void get_save_pix(const Widelands::Map& map,
-                         const Widelands::Coords& c,
-                         int32_t& px,
-                         int32_t& py) {
+inline void
+get_save_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int32_t& py) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);

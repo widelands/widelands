@@ -20,17 +20,16 @@
 #ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
 #define WL_UI_FSMENU_CAMPAIGN_SELECT_H
 
-#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
 /*
  * Fullscreen Menu for all Campaigns
  */
-
 
 /*
  * UI 1 - Selection of Campaign
@@ -62,28 +61,29 @@ private:
 		std::string difficulty_description;
 		std::string description;
 
-		CampaignListData() : index(0), difficulty(0) {}
+		CampaignListData() : index(0), difficulty(0) {
+		}
 	};
 
 	bool compare_difficulty(uint32_t, uint32_t);
 
-	UI::Table<uintptr_t const>    table_;
+	UI::Table<uintptr_t const> table_;
 
-	UI::Textarea                  title_;
-	UI::Textarea                  label_campname_;
-	UI::MultilineTextarea         ta_campname_;
-	UI::Textarea                  label_tribename_;
-	UI::MultilineTextarea         ta_tribename_;
-	UI::Textarea                  label_difficulty_;
-	UI::MultilineTextarea         ta_difficulty_;
-	UI::Textarea                  label_description_;
-	UI::MultilineTextarea         ta_description_;
+	UI::Textarea title_;
+	UI::Textarea label_campname_;
+	UI::MultilineTextarea ta_campname_;
+	UI::Textarea label_tribename_;
+	UI::MultilineTextarea ta_tribename_;
+	UI::Textarea label_difficulty_;
+	UI::MultilineTextarea ta_difficulty_;
+	UI::Textarea label_description_;
+	UI::MultilineTextarea ta_description_;
 
 	std::vector<CampaignListData> campaigns_data_;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
-	int32_t                       campaign;
+	int32_t campaign;
 };
 /*
  * UI 2 - Selection of a map
@@ -111,22 +111,23 @@ private:
 		std::string name;
 		std::string path;
 
-		CampaignScenarioData() : index(0) {}
+		CampaignScenarioData() : index(0) {
+		}
 	};
 
-	UI::Table<uintptr_t const>    table_;
+	UI::Table<uintptr_t const> table_;
 
-	UI::Textarea                  title_;
-	UI::MultilineTextarea         subtitle_;
-	UI::Textarea                  label_mapname_;
-	UI::MultilineTextarea         ta_mapname_;
-	UI::Textarea                  label_author_;
-	UI::MultilineTextarea         ta_author_;
-	UI::Textarea                  label_description_;
-	UI::MultilineTextarea         ta_description_;
+	UI::Textarea title_;
+	UI::MultilineTextarea subtitle_;
+	UI::Textarea label_mapname_;
+	UI::MultilineTextarea ta_mapname_;
+	UI::Textarea label_author_;
+	UI::MultilineTextarea ta_author_;
+	UI::Textarea label_description_;
+	UI::MultilineTextarea ta_description_;
 
-	uint32_t                      campaign;
-	std::string                   campmapfile;
+	uint32_t campaign;
+	std::string campmapfile;
 
 	std::vector<CampaignScenarioData> scenarios_data_;
 

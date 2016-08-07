@@ -35,7 +35,6 @@ struct MultilineTextarea;
 struct Textarea;
 }
 
-
 /**
  * This is the interactive player. this one is
  * responsible to show the correct map
@@ -44,15 +43,14 @@ struct Textarea;
  */
 class InteractivePlayer : public InteractiveGameBase {
 public:
-	InteractivePlayer
-		(Widelands::Game &,
-		 Section         & global_s,
-		 Widelands::PlayerNumber,
-		 bool              multiplayer);
+	InteractivePlayer(Widelands::Game&,
+	                  Section& global_s,
+	                  Widelands::PlayerNumber,
+	                  bool multiplayer);
 
 	~InteractivePlayer();
 
-	void toggle_chat        ();
+	void toggle_chat();
 
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
@@ -62,10 +60,10 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player & player() const {
+	Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
-	Widelands::Player * get_player() const override {
+	Widelands::Player* get_player() const override {
 		assert(&game());
 		return game().get_player(player_number_);
 	}
@@ -81,15 +79,15 @@ public:
 		flag_to_connect_ = location;
 	}
 
-	void popup_message(Widelands::MessageId, const Widelands::Message &);
+	void popup_message(Widelands::MessageId, const Widelands::Message&);
 	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 
 private:
-	void cmdSwitchPlayer(const std::vector<std::string> & args);
+	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;
-	bool                     auto_roadbuild_mode_;
-	Widelands::Coords        flag_to_connect_;
+	bool auto_roadbuild_mode_;
+	Widelands::Coords flag_to_connect_;
 
 	UI::Button toggle_chat_;
 	UI::Button toggle_options_menu_;
@@ -106,6 +104,5 @@ private:
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 };
-
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

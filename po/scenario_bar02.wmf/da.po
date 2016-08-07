@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-13 06:02+0000\n"
-"PO-Revision-Date: 2016-07-16 10:24+0000\n"
+"POT-Creation-Date: 2016-07-25 11:49+0000\n"
+"PO-Revision-Date: 2016-07-27 20:01+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -560,7 +560,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Vores geologer fandt en masse depoter med jernmalm, kul og endda guld. Vi bør forbedre vores nuværende miner så snart vores minearbejdere er mere erfarne. Vi bør bygge flere miner, en bedre infrastruktur for fødevarer, så vi altid kan give vores mænd tilstrækkelig med mad og yderligere forbedre fremstillingsøkonomien. Men det er stadig ikke nok - de fleste af vores soldater er ret unge og ingen af dem har et godt våben eller er godt trænet. Vi bør bygge træningsfaciliteter, så de er forberedt på fremtidige opgaver."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -569,7 +569,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Mine brødre og deres soldater er døde og efterlod ild og ødelæggelse bag sig. I ingen af ruinerne kunne jeg ikke finde nogen mand eller kvinde fra folket, så jeg har kun håbet om, at de er flygtede fra denne onde slagmark og har startet et bedre liv et andet sted."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
@@ -580,7 +580,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Intet er tilbage af skønheden, kun ruiner er tilbage af den gamle hovedstad. Jeg er så nedtrykt, men også lettet. Jeg havde intet håb om at se Al'thunrans gamle skønhed igen - det er kun nogle måneder siden, jeg undrede mig over om jeg ville kunne sætte mine fødder her igen. Nu er den gamle by tilbage i mine hænder, og jeg vil ikke tøve i mine bestræbelser på at genopbygge byen via styrken hos mit folk. Jeg glæder mig til igen at se byens skønhed."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"
@@ -590,11 +590,11 @@ msgstr "Sejr"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Du har fuldført den sidste mission i prøvekampagnen for barbarerne. Du kan fortsætte med at spille, eller gå videre til den næste kampagne."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid "Military Assault"
-msgstr ""
+msgstr "Militært angreb"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
@@ -602,7 +602,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Generalerne er ude og arrangere opstillingen af mine tropper, og Boldreth vil selv lede det første angreb. Jeg vil ridde ved hans side, for at befri Al'thunran fra denne krig og igen skabe fred i vores hovedstad."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
@@ -611,12 +611,12 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Når den tidlige sol står over træerne i morgen tidlig, så vil jeg beordre angrebet. Ved skumringen vil jeg fejre min sejr i træhallerne for krigsherren og ofre et nyfødt lam til min fars ære, hvis øjne følger mig i dag."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:350
 msgid "So be it!"
-msgstr ""
+msgstr "Så må det være sådan!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid "Faster Transportation"
@@ -624,7 +624,7 @@ msgstr "Mere effektiv transport"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh udtaler:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:358

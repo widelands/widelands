@@ -30,7 +30,6 @@ void load_map_images(FileSystem& fs) {
 	// Read all pics.
 	if (!fs.file_exists("pics") || !fs.is_directory("pics")) {
 		return;
-
 	}
 	for (const std::string& pname : fs.list_directory("pics")) {
 		if (fs.is_directory(pname.c_str())) {
@@ -40,11 +39,10 @@ void load_map_images(FileSystem& fs) {
 		if (!g_gr->images().has(hash)) {
 			g_gr->images().insert(hash, load_image(pname, &fs));
 		}
-   }
+	}
 }
 
-void save_map_images(FileSystem* new_fs, FileSystem* map_fs)
-{
+void save_map_images(FileSystem* new_fs, FileSystem* map_fs) {
 	if (!map_fs || !map_fs->file_exists("pics") || !map_fs->is_directory("pics")) {
 		return;
 	}
@@ -56,5 +54,4 @@ void save_map_images(FileSystem* new_fs, FileSystem* map_fs)
 		free(input_data);
 	}
 }
-
 }

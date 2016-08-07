@@ -40,25 +40,26 @@ struct Box : public Panel {
 		Vertical = 1,
 	};
 
-	Box
-		(Panel * parent,
-		 int32_t x, int32_t y,
-		 uint32_t orientation,
-		 int32_t max_x = 0, int32_t max_y = 0,
-		 uint32_t inner_spacing = 0);
+	Box(Panel* parent,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t orientation,
+	    int32_t max_x = 0,
+	    int32_t max_y = 0,
+	    uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 
-	int32_t get_nritems() const {return items_.size();}
+	int32_t get_nritems() const {
+		return items_.size();
+	}
 
-	void add
-		(Panel * panel,
-		UI::Align align,
-		bool fullsize = false,
-		bool fillspace = false);
+	void add(Panel* panel, UI::Align align, bool fullsize = false, bool fillspace = false);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const override {return true;}
+	bool is_snap_target() const override {
+		return true;
+	}
 
 	void set_min_desired_breadth(uint32_t min);
 
@@ -87,7 +88,7 @@ private:
 
 		union {
 			struct {
-				Panel * panel;
+				Panel* panel;
 				UI::Align align;
 				bool fullsize;
 			} panel;
@@ -106,7 +107,6 @@ private:
 
 	std::vector<Item> items_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_BOX_H

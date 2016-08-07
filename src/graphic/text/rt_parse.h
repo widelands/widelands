@@ -83,16 +83,16 @@ public:
 
 	~Tag();
 
-	const std::string & name() const;
-	const AttrMap & attrs() const;
-	const ChildList & children() const;
+	const std::string& name() const;
+	const AttrMap& attrs() const;
+	const ChildList& children() const;
 	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&);
 
 private:
-	void parse_opening_tag(TextStream & ts, TagConstraints & tcs);
-	void parse_closing_tag(TextStream & ts);
-	void parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
-	void parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
+	void parse_opening_tag(TextStream& ts, TagConstraints& tcs);
+	void parse_closing_tag(TextStream& ts);
+	void parse_attribute(TextStream& ts, std::unordered_set<std::string>&);
+	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&);
 
 	std::string name_;
 	AttrMap attribute_map_;

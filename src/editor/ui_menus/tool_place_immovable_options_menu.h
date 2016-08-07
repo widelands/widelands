@@ -23,21 +23,22 @@
 #include <memory>
 #include <vector>
 
+#include "editor/tools/place_immovable_tool.h"
 #include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "editor/tools/place_immovable_tool.h"
 
 class EditorInteractive;
 
 struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceImmovableOptionsMenu(EditorInteractive&,
-	                                         EditorPlaceImmovableTool&,
-	                                         UI::UniqueWindow::Registry&);
+	                                    EditorPlaceImmovableTool&,
+	                                    UI::UniqueWindow::Registry&);
 	virtual ~EditorToolPlaceImmovableOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
-	multi_select_menu_;
+	std::unique_ptr<
+	   CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
+	   multi_select_menu_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

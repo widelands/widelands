@@ -58,7 +58,9 @@ std::string shader_to_string(GLenum type) {
 
 const char* gl_error_to_string(const GLenum err) {
 	CLANG_DIAG_OFF("-Wswitch-enum");
-#define LOG(a) case a: return #a
+#define LOG(a)                                                                                     \
+	case a:                                                                                         \
+		return #a
 	switch (err) {
 		LOG(GL_INVALID_ENUM);
 		LOG(GL_INVALID_OPERATION);
@@ -172,7 +174,7 @@ State::State()
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
-	if (texture == 0)  {
+	if (texture == 0) {
 		return;
 	}
 	do_bind(target, texture);
@@ -204,8 +206,7 @@ void State::unbind_texture_if_bound(const GLuint texture) {
 	}
 }
 
-void State::delete_texture(const GLuint texture)
-{
+void State::delete_texture(const GLuint texture) {
 	unbind_texture_if_bound(texture);
 	glDeleteTextures(1, &texture);
 
@@ -248,7 +249,6 @@ State& State::instance() {
 	static State binder;
 	return binder;
 }
-
 
 void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
 	glVertexAttribPointer(

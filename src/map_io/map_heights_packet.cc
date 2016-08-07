@@ -30,9 +30,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapHeightsPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
-{
+void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
 
 	FileRead fr;
 	fr.open(fs, "binary/heights");
@@ -40,36 +38,33 @@ void MapHeightsPacket::read
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			Map & map = egbase.map();
+			Map& map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_height(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError("MapHeightsPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("heights: %s", e.what());
 	}
 }
 
-
 /*
  * Write Function
  */
-void MapHeightsPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
+void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&)
 
 {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i)
 		fw.unsigned_8(map[i].get_height());
 
-	fw.write(fs,  "binary/heights");
+	fw.write(fs, "binary/heights");
 }
-
 }

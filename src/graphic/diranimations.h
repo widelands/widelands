@@ -28,9 +28,12 @@
 
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
-	DirAnimations
-		(uint32_t dir1 = 0, uint32_t dir2 = 0, uint32_t dir3 = 0,
-		 uint32_t dir4 = 0, uint32_t dir5 = 0, uint32_t dir6 = 0);
+	DirAnimations(uint32_t dir1 = 0,
+	              uint32_t dir2 = 0,
+	              uint32_t dir3 = 0,
+	              uint32_t dir4 = 0,
+	              uint32_t dir5 = 0,
+	              uint32_t dir6 = 0);
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return animations_[dir - 1];
@@ -40,10 +43,12 @@ struct DirAnimations {
 	}
 
 	static DirAnimations null() {
-		return DirAnimations(0); // Since real animation IDs are positive, this is safe
+		return DirAnimations(0);  // Since real animation IDs are positive, this is safe
 	}
 
-	operator bool() const {return animations_[0];}
+	operator bool() const {
+		return animations_[0];
+	}
 
 private:
 	uint32_t animations_[6];

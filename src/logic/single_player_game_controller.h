@@ -23,15 +23,13 @@
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
 
-
 class SinglePlayerGameController : public GameController {
 public:
-	SinglePlayerGameController
-		(Widelands::Game &, bool useai, Widelands::PlayerNumber local);
+	SinglePlayerGameController(Widelands::Game&, bool useai, Widelands::PlayerNumber local);
 	~SinglePlayerGameController();
 
 	void think() override;
-	void send_player_command(Widelands::PlayerCommand &) override;
+	void send_player_command(Widelands::PlayerCommand&) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
@@ -39,18 +37,20 @@ public:
 	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
 	void set_paused(bool paused) override;
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
+	void report_result(uint8_t player,
+	                   Widelands::PlayerEndResult result,
+	                   const std::string& info) override;
 
 private:
-	Widelands::Game & game_;
+	Widelands::Game& game_;
 	bool use_ai_;
 	int32_t lastframe_;
 	int32_t time_;
-	uint32_t speed_; ///< current game speed, in milliseconds per second
+	uint32_t speed_;  ///< current game speed, in milliseconds per second
 	bool paused_;
 	uint32_t player_cmdserial_;
 	Widelands::PlayerNumber local_;
-	std::vector<ComputerPlayer *> computerplayers_;
+	std::vector<ComputerPlayer*> computerplayers_;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

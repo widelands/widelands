@@ -26,14 +26,16 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
 
-namespace UI {struct ProgressWindow;}
+namespace UI {
+struct ProgressWindow;
+}
 struct FullscreenMenuLaunchGame;
 class InteractiveBase;
 
@@ -58,14 +60,14 @@ struct NoteFieldPossession {
 	CAN_BE_SENT_AS_NOTE(NoteId::FieldPossession)
 
 	// Has this been lost or gained?
-	enum class Ownership {LOST, GAINED};
+	enum class Ownership { LOST, GAINED };
 	Ownership ownership;
 
 	// The field that has been lost/gained.
 	FCoords fc;
 
 	// The player that has lost or gained this field.
-	Player * player;
+	Player* player;
 
 	NoteFieldPossession(const FCoords& init_fc, Ownership const init_ownership, Player* init_player)
 	   : ownership(init_ownership), fc(init_fc), player(init_player) {
@@ -124,28 +126,28 @@ public:
 	// warping stuff. instantly creating map_objects
 	Building&
 	warp_building(const Coords&,
-					  PlayerNumber,
-					  DescriptionIndex,
+	              PlayerNumber,
+	              DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_constructionsite(const Coords&,
-								 PlayerNumber,
-								 DescriptionIndex,
+	                      PlayerNumber,
+	                      DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_dismantlesite(const Coords&,
-							 PlayerNumber,
+	                   PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(const Coords&,
-										 DescriptionIndex idx,
-										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	                            DescriptionIndex idx,
+	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 	Immovable& create_immovable(const Coords&,
-										 const std::string& name,
-										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	                            const std::string& name,
+	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 
@@ -235,7 +237,7 @@ private:
 	///  influence becomes greater than the owner's influence.
 	virtual void do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	                             bool conquer,
-										  PlayerNumber preferred_player = 0,
+	                             PlayerNumber preferred_player = 0,
 	                             bool neutral_when_no_influence = false,
 	                             bool neutral_when_competing_influence = false,
 	                             bool conquer_guarded_location_by_superior_influence = false);

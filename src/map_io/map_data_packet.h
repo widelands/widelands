@@ -27,16 +27,15 @@ namespace Widelands {
 class EditorGameBase;
 class MapObjectLoader;
 struct MapObjectSaver;
-
 }
 
-#define MAP_DATA_PACKET(Name)                                                            \
-	namespace Widelands {                                                            \
-	class Name {                                                                     \
-	public:                                                                          \
-		void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&); \
-		void write(FileSystem&, EditorGameBase&, MapObjectSaver&);       \
-	};                                                                               \
+#define MAP_DATA_PACKET(Name)                                                                      \
+	namespace Widelands {                                                                           \
+	class Name {                                                                                    \
+	public:                                                                                         \
+		void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);                             \
+		void write(FileSystem&, EditorGameBase&, MapObjectSaver&);                                   \
+	};                                                                                              \
 	}
 
 #endif  // end of include guard: WL_MAP_IO_MAP_DATA_PACKET_H

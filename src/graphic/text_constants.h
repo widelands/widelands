@@ -23,26 +23,26 @@
 // Basic constants for often used text attributes.
 
 /// Font Sizes
-#define UI_FONT_SIZE_BIG        22
-#define UI_FONT_SIZE_SMALL      14
+#define UI_FONT_SIZE_BIG 22
+#define UI_FONT_SIZE_SMALL 14
 #define UI_FONT_SIZE_ULTRASMALL 10
 constexpr int kMinimumFontSize = 6;
 
 /// Font colors
 
 /// Global UI font color
-#define UI_FONT_CLR_FG       RGBColor(255, 255,   0)
+#define UI_FONT_CLR_FG RGBColor(255, 255, 0)
 #define UI_FONT_CLR_DISABLED RGBColor(127, 127, 127)
-#define UI_FONT_CLR_WARNING  RGBColor(255,  22,  22)
+#define UI_FONT_CLR_WARNING RGBColor(255, 22, 22)
 
 /// Tooltip font color
-#define UI_FONT_TOOLTIP_CLR  RGBColor(255, 255,   0)
+#define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0)
 
 /// Colors for good/ok/bad
-#define UI_FONT_CLR_BRIGHT   RGBColor(255, 250, 170)
-#define UI_FONT_CLR_DARK     RGBColor(163, 144,  19)
-#define UI_FONT_CLR_BAD      RGBColor(187,   0,   0)
-#define UI_FONT_CLR_OK       RGBColor(255, 225,  30)
-#define UI_FONT_CLR_GOOD     RGBColor(  0, 187,   0)
+#define UI_FONT_CLR_BRIGHT RGBColor(255, 250, 170)
+#define UI_FONT_CLR_DARK RGBColor(163, 144, 19)
+#define UI_FONT_CLR_BAD RGBColor(187, 0, 0)
+#define UI_FONT_CLR_OK RGBColor(255, 225, 30)
+#define UI_FONT_CLR_GOOD RGBColor(0, 187, 0)
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_CONSTANTS_H

@@ -24,7 +24,7 @@
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 
-namespace  {
+namespace {
 
 // Reads the 'filename' from the 'fs' and returns its content.
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
@@ -55,9 +55,8 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 	lua_setglobal(L, "__file__");
 
 	check_return_value_for_errors(
-	   L,
-	   luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
-	      lua_pcall(L, 0, 1, 0));
+	   L, luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
+	         lua_pcall(L, 0, 1, 0));
 
 	if (lua_isnil(L, -1)) {
 		lua_pop(L, 1);    // No return value from script

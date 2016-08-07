@@ -33,9 +33,11 @@ namespace Widelands {
 //  Type definitions for the game logic.
 using MilitaryInfluence = uint16_t;
 
-using PlayerNumber = uint8_t; /// 5 bits used, so 0 .. 31
-inline PlayerNumber neutral() {return 0;}
-#define iterate_player_numbers(p, nr_players) \
+using PlayerNumber = uint8_t;  /// 5 bits used, so 0 .. 31
+inline PlayerNumber neutral() {
+	return 0;
+}
+#define iterate_player_numbers(p, nr_players)                                                      \
 	for (Widelands::PlayerNumber p = 1; p < nr_players + 1; ++p)
 
 /**
@@ -62,43 +64,41 @@ constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
-using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
+using ResourceAmount = uint8_t;  /// 4 bits used, so 0 .. 15.
 
-using Quantity = uint32_t; // e.g. the number of a type of ware in a warehouse.
+using Quantity = uint32_t;  // e.g. the number of a type of ware in a warehouse.
 
 using Vision = uint16_t;
 
-using Time = int32_t; // TODO(unknown): should be unsigned
-inline Time never() {return 0xffffffff;}
+using Time = int32_t;  // TODO(unknown): should be unsigned
+inline Time never() {
+	return 0xffffffff;
+}
 
 using Duration = uint32_t;
-inline Duration endless() {return 0xffffffff;}
+inline Duration endless() {
+	return 0xffffffff;
+}
 
-using Serial = uint32_t; /// Serial number for MapObject.
+using Serial = uint32_t;  /// Serial number for MapObject.
 
 using Direction = uint8_t;
 
 struct SoldierStrength {
 	uint8_t health, attack, defense, evade;
-	bool operator== (const SoldierStrength & other) const {
-		return
-			health  == other.health  &&
-			attack  == other.attack  &&
-			defense == other.defense &&
-			evade   == other.evade;
+	bool operator==(const SoldierStrength& other) const {
+		return health == other.health && attack == other.attack && defense == other.defense &&
+		       evade == other.evade;
 	}
-	bool operator<  (const SoldierStrength & other) const {
-		return
-			health  <  other.health ||
-			(health  == other.health &&
-			 (attack  <  other.attack ||
-			  (attack  == other.attack &&
-			   (defense <  other.defense ||
-			    (defense == other.defense &&
-			     evade    <  other.evade)))));
+	bool operator<(const SoldierStrength& other) const {
+		return health < other.health ||
+		       (health == other.health &&
+		        (attack < other.attack ||
+		         (attack == other.attack &&
+		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
 	}
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_H

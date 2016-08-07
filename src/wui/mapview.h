@@ -41,56 +41,65 @@ struct MapView : public UI::Panel {
 	 * Parameters are x/y screen coordinates and whether the change should
 	 * be considered a "jump" or a smooth scrolling event.
 	 */
-	using ChangeViewFn = boost::function<void (Point, bool)>;
+	using ChangeViewFn = boost::function<void(Point, bool)>;
 
-	MapView
-		(UI::Panel * const parent,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 InteractiveBase &);
+	MapView(UI::Panel* const parent,
+	        const int32_t x,
+	        const int32_t y,
+	        const uint32_t w,
+	        const uint32_t h,
+	        InteractiveBase&);
 	virtual ~MapView();
 
-	void set_changeview(const ChangeViewFn & fn);
+	void set_changeview(const ChangeViewFn& fn);
 
 	/**
 	 * Called whenever the view position changes, for whatever reason.
 	 *
 	 * Parameters are x/y position in screen coordinates.
 	 */
-	boost::signals2::signal<void (int32_t, int32_t)> changeview;
+	boost::signals2::signal<void(int32_t, int32_t)> changeview;
 
-	boost::signals2::signal<void ()> fieldclicked;
+	boost::signals2::signal<void()> fieldclicked;
 
 	void warp_mouse_to_node(Widelands::Coords);
 
 	void set_viewpoint(Point vp, bool jump);
-	void set_rel_viewpoint(Point r, bool jump) {set_viewpoint(viewpoint_ + r, jump);}
+	void set_rel_viewpoint(Point r, bool jump) {
+		set_viewpoint(viewpoint_ + r, jump);
+	}
 
-	Point get_viewpoint() const {return viewpoint_;}
-	bool is_dragging() const {return dragging_;}
+	Point get_viewpoint() const {
+		return viewpoint_;
+	}
+	bool is_dragging() const {
+		return dragging_;
+	}
 
 	// Drawing
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	// Event handling
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousemove
-		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 	void track_sel(Point m);
 
 protected:
-	InteractiveBase & intbase() const {return intbase_;}
+	InteractiveBase& intbase() const {
+		return intbase_;
+	}
 
 private:
 	void stop_dragging();
 
 	std::unique_ptr<GameRenderer> renderer_;
-	InteractiveBase & intbase_;
+	InteractiveBase& intbase_;
 	ChangeViewFn changeview_;
-	Point              viewpoint_;
-	bool               dragging_;
+	Point viewpoint_;
+	bool dragging_;
 };
-
 
 #endif  // end of include guard: WL_WUI_MAPVIEW_H

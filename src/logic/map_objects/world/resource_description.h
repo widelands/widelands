@@ -56,7 +56,9 @@ public:
 	const std::string& editor_image(uint32_t amount) const;
 
 	/// Returns the path to the image that should be used in menus to represent this resource
-	const std::string& representative_image() const {return representative_image_;}
+	const std::string& representative_image() const {
+		return representative_image_;
+	}
 
 private:
 	const std::string name_;

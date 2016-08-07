@@ -31,7 +31,8 @@ DitherProgram::DitherProgram() {
 	gl_program_.build("dither");
 
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
-	attr_dither_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_dither_texture_position");
+	attr_dither_texture_position_ =
+	   glGetAttribLocation(gl_program_.object(), "attr_dither_texture_position");
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_offset_ = glGetAttribLocation(gl_program_.object(), "attr_texture_offset");
 	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
@@ -50,7 +51,8 @@ DitherProgram::DitherProgram() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
-DitherProgram::~DitherProgram() {}
+DitherProgram::~DitherProgram() {
+}
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
                                const TrianglePoint triangle_point,
@@ -94,10 +96,8 @@ void DitherProgram::maybe_add_dithering_triangle(
 	if (my_terrain == other_terrain) {
 		return;
 	}
-	const Widelands::TerrainDescription& other_terrain_description =
-	   terrains.get(other_terrain);
-	if (terrains.get(my_terrain).dither_layer() <
-	    other_terrain_description.dither_layer()) {
+	const Widelands::TerrainDescription& other_terrain_description = terrains.get(other_terrain);
+	if (terrains.get(my_terrain).dither_layer() < other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
 		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
 		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
@@ -110,22 +110,19 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array({attr_brightness_,
-	                                   attr_dither_texture_position_,
-	                                   attr_position_,
-	                                   attr_texture_offset_,
-	                                   attr_texture_position_});
+	gl_state.enable_vertex_attrib_array({attr_brightness_, attr_dither_texture_position_,
+	                                     attr_position_, attr_texture_offset_,
+	                                     attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
 
 	Gl::vertex_attrib_pointer(
 	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
-	Gl::vertex_attrib_pointer(attr_dither_texture_position_,
-	                       2,
-	                       sizeof(PerVertexData),
-	                       offsetof(PerVertexData, dither_texture_x));
-	Gl::vertex_attrib_pointer(attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(attr_dither_texture_position_, 2, sizeof(PerVertexData),
+	                          offsetof(PerVertexData, dither_texture_x));
+	Gl::vertex_attrib_pointer(
+	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
 	Gl::vertex_attrib_pointer(
 	   attr_texture_offset_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_offset_x));
 	Gl::vertex_attrib_pointer(
@@ -168,44 +165,41 @@ void DitherProgram::draw(const uint32_t gametime,
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-			   brn_index, current_index, bln_index, field.ter_d, field.ter_r);
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, current_index,
+			                             bln_index, field.ter_d, field.ter_r);
 
 			const int terrain_dd = fields_to_draw.at(bln_index).ter_r;
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-			   bln_index, brn_index, current_index, field.ter_d, terrain_dd);
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, bln_index, brn_index,
+			                             current_index, field.ter_d, terrain_dd);
 
 			const int ln_index = fields_to_draw.calculate_index(field.fx - 1, field.fy);
 			if (ln_index != -1) {
 				const int terrain_l = fields_to_draw.at(ln_index).ter_r;
-				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-				   current_index, bln_index, brn_index, field.ter_d, terrain_l);
+				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
+				                             bln_index, brn_index, field.ter_d, terrain_l);
 			}
 		}
 
 		// Dithering for right triangle.
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-			   current_index, brn_index, rn_index, field.ter_r, field.ter_d);
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index, brn_index,
+			                             rn_index, field.ter_r, field.ter_d);
 			int terrain_rr = fields_to_draw.at(rn_index).ter_d;
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-					brn_index, rn_index, current_index, field.ter_r, terrain_rr);
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, rn_index,
+			                             current_index, field.ter_r, terrain_rr);
 
 			const int trn_index =
-				fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy - 1);
+			   fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy - 1);
 			if (trn_index != -1) {
 				const int terrain_u = fields_to_draw.at(trn_index).ter_d;
-				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw,
-				   rn_index, current_index, brn_index, field.ter_r, terrain_u);
+				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, rn_index,
+				                             current_index, brn_index, field.ter_r, terrain_u);
 			}
 		}
 	}
 
 	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
 	const FloatRect texture_coordinates = to_gl_texture(blit_data);
-	gl_draw(blit_data.texture_id,
-	        texture_coordinates.w,
-	        texture_coordinates.h,
-	        z_value);
+	gl_draw(blit_data.texture_id, texture_coordinates.w, texture_coordinates.h, z_value);
 }

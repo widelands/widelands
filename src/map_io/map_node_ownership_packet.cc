@@ -30,11 +30,10 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapNodeOwnershipPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
+void MapNodeOwnershipPacket::read(FileSystem& fs,
+                                  EditorGameBase& egbase,
+                                  bool const skip,
+                                  MapObjectLoader&)
 
 {
 	if (skip)
@@ -52,32 +51,29 @@ void MapNodeOwnershipPacket::read
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			Map & map = egbase.map();
+			Map& map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.unsigned_8());
 		} else {
-			throw UnhandledVersionError("MapNodeOwnershipPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "MapNodeOwnershipPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("ownership: %s", e.what());
 	}
 }
 
-
-void MapNodeOwnershipPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapNodeOwnershipPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i)
 		fw.unsigned_8(map[i].get_owned_by());
 
 	fw.write(fs, "binary/node_ownership");
 }
-
 }

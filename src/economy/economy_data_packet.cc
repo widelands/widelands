@@ -31,23 +31,23 @@ constexpr uint16_t kCurrentPacketVersion = 3;
 
 namespace Widelands {
 
-void EconomyDataPacket::read(FileRead & fr)
-{
+void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
-					char const * const type_name = fr.c_string();
+					char const* const type_name = fr.c_string();
 					uint32_t const permanent = fr.unsigned_32();
 					DescriptionIndex i = tribe.ware_index(type_name);
 					if (tribe.has_ware(i)) {
-						if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) == kInvalidWare) {
+						if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
+						    kInvalidWare) {
 							log("WARNING: target quantity configured for %s, "
-								 "which should not have target quantity, "
-								 "ignoring\n",
-								 type_name);
+							    "which should not have target quantity, "
+							    "ignoring\n",
+							    type_name);
 						} else {
 							Economy::TargetQuantity& tq = eco_->ware_target_quantities_[i];
 							if (tq.last_modified) {
@@ -60,11 +60,10 @@ void EconomyDataPacket::read(FileRead & fr)
 						i = tribe.worker_index(type_name);
 						if (tribe.has_worker(i)) {
 							if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
-								log
-										("WARNING: target quantity configured for %s, "
-										 "which should not have target quantity, "
-										 "ignoring\n",
-										 type_name);
+								log("WARNING: target quantity configured for %s, "
+								    "which should not have target quantity, "
+								    "ignoring\n",
+								    type_name);
 							} else {
 								Economy::TargetQuantity& tq = eco_->worker_target_quantities_[i];
 								if (tq.last_modified) {
@@ -74,33 +73,30 @@ void EconomyDataPacket::read(FileRead & fr)
 								tq.last_modified = last_modified;
 							}
 						} else {
-							log
-								("WARNING: target quantity configured for \"%s\", "
-								 "which is not a ware or worker type defined in tribe "
-								 "%s, ignoring\n",
-								 type_name, tribe.name().c_str());
+							log("WARNING: target quantity configured for \"%s\", "
+							    "which is not a ware or worker type defined in tribe "
+							    "%s, ignoring\n",
+							    type_name, tribe.name().c_str());
 						}
 					}
 				}
-			} catch (const WException & e) {
+			} catch (const WException& e) {
 				throw GameDataError("target quantities: %s", e.what());
 			}
-		eco_->request_timerid_ = fr.unsigned_32();
+			eco_->request_timerid_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("EconomyDataPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const std::exception & e) {
+	} catch (const std::exception& e) {
 		throw GameDataError("economy: %s", e.what());
 	}
 }
 
-void EconomyDataPacket::write(FileWrite & fw)
-{
+void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_16(kCurrentPacketVersion);
-	const TribeDescr & tribe = eco_->owner().tribe();
+	const TribeDescr& tribe = eco_->owner().tribe();
 	for (const DescriptionIndex& ware_index : tribe.wares()) {
-		const Economy::TargetQuantity & tq =
-			eco_->ware_target_quantities_[ware_index];
+		const Economy::TargetQuantity& tq = eco_->ware_target_quantities_[ware_index];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
 			fw.c_string(tribe.get_ware_descr(ware_index)->name());
@@ -108,16 +104,14 @@ void EconomyDataPacket::write(FileWrite & fw)
 		}
 	}
 	for (const DescriptionIndex& worker_index : tribe.workers()) {
-		const Economy::TargetQuantity & tq =
-			eco_->worker_target_quantities_[worker_index];
+		const Economy::TargetQuantity& tq = eco_->worker_target_quantities_[worker_index];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
 			fw.c_string(tribe.get_worker_descr(worker_index)->name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
-	fw.unsigned_32(0); //  terminator
+	fw.unsigned_32(0);  //  terminator
 	fw.unsigned_32(eco_->request_timerid_);
 }
-
 }

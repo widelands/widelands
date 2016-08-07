@@ -30,6 +30,6 @@ std::string format_as_old_richtext(const ChatMessage& chat_message);
 // Formats 'chat_message' as richtext.
 std::string format_as_richtext(const ChatMessage& chat_message);
 
-std::string sanitize_message(const ChatMessage & chat_message);
+std::string sanitize_message(const ChatMessage& chat_message);
 
 #endif  // end of include guard: WL_WUI_CHAT_MSG_LAYOUT_H

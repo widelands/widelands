@@ -27,7 +27,9 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
 
-namespace UI {struct Textarea;}
+namespace UI {
+struct Textarea;
+}
 
 namespace Widelands {
 class TribeDescr;
@@ -42,17 +44,18 @@ struct WareList;
  */
 class AbstractWaresDisplay : public UI::Panel {
 public:
-	AbstractWaresDisplay
-		(UI::Panel * const parent,
-		 int32_t x, int32_t y,
-		 const Widelands::TribeDescr &,
-		 Widelands::WareWorker type,
-		 bool selectable,
-		 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
-		 bool horizontal = false);
+	AbstractWaresDisplay(
+	   UI::Panel* const parent,
+	   int32_t x,
+	   int32_t y,
+	   const Widelands::TribeDescr&,
+	   Widelands::WareWorker type,
+	   bool selectable,
+	   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	   bool horizontal = false);
 
-	bool handle_mousemove
-		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
@@ -67,7 +70,9 @@ public:
 	bool ware_hidden(Widelands::DescriptionIndex);
 
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
-	Widelands::WareWorker get_type() const {return type_;}
+	Widelands::WareWorker get_type() const {
+		return type_;
+	}
 
 protected:
 	void layout() override;
@@ -76,16 +81,14 @@ protected:
 
 	virtual RGBColor info_color_for_ware(Widelands::DescriptionIndex);
 
-	const Widelands::TribeDescr::WaresOrder & icons_order() const;
-	const Widelands::TribeDescr::WaresOrderCoords & icons_order_coords() const;
+	const Widelands::TribeDescr::WaresOrder& icons_order() const;
+	const Widelands::TribeDescr::WaresOrderCoords& icons_order_coords() const;
 	virtual Point ware_position(Widelands::DescriptionIndex) const;
-	void draw(RenderTarget &) override;
-	virtual void draw_ware
-		(RenderTarget &,
-		 Widelands::DescriptionIndex);
+	void draw(RenderTarget&) override;
+	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList *>;
+	using WareListVector = std::vector<const Widelands::WareList*>;
 	using WareListSelectionType = std::map<const Widelands::DescriptionIndex, bool>;
 
 	/**
@@ -98,15 +101,15 @@ private:
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 
-	const Widelands::TribeDescr & tribe_;
+	const Widelands::TribeDescr& tribe_;
 	Widelands::WareWorker type_;
 	const std::set<Widelands::DescriptionIndex> indices_;
-	UI::Textarea        curware_;
-	WareListSelectionType      selected_;
-	WareListSelectionType      hidden_;
-	WareListSelectionType      in_selection_;  // Wares in temporary anchored selection
-	bool                selectable_;
-	bool                horizontal_;
+	UI::Textarea curware_;
+	WareListSelectionType selected_;
+	WareListSelectionType hidden_;
+	WareListSelectionType in_selection_;  // Wares in temporary anchored selection
+	bool selectable_;
+	bool horizontal_;
 
 	/**
 	 * The ware on which the mouse press has been performed.
@@ -124,28 +127,27 @@ must be valid while they are registered with this class.
 */
 class WaresDisplay : public AbstractWaresDisplay {
 public:
-	WaresDisplay
-		(UI::Panel * const parent,
-		 int32_t x, int32_t y,
-		 const Widelands::TribeDescr &,
-		 Widelands::WareWorker type,
-		 bool selectable);
+	WaresDisplay(UI::Panel* const parent,
+	             int32_t x,
+	             int32_t y,
+	             const Widelands::TribeDescr&,
+	             Widelands::WareWorker type,
+	             bool selectable);
 
 	virtual ~WaresDisplay();
 
-	void add_warelist(const Widelands::WareList &);
+	void add_warelist(const Widelands::WareList&);
 	void remove_all_warelists();
 
 protected:
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList *>;
-	WareListVector         warelists_;
+	using WareListVector = std::vector<const Widelands::WareList*>;
+	WareListVector warelists_;
 };
 
-std::string waremap_to_richtext
-		(const Widelands::TribeDescr & tribe,
-		 const std::map<Widelands::DescriptionIndex, uint8_t> & map);
+std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
+                                const std::map<Widelands::DescriptionIndex, uint8_t>& map);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H

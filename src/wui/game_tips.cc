@@ -30,15 +30,12 @@
 #define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
 
-GameTips::GameTips
-	(UI::ProgressWindow & progressWindow, const std::vector<std::string>& names)
-:
-lastUpdated_   (0),
-updateAfter_   (0),
-progressWindow_(progressWindow),
-registered_    (false),
-lastTip_       (0)
-{
+GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
+   : lastUpdated_(0),
+     updateAfter_(0),
+     progressWindow_(progressWindow),
+     registered_(false),
+     lastTip_(0) {
 	// Loading texts-locals, for translating the tips
 	i18n::Textdomain textdomain("texts");
 
@@ -58,22 +55,21 @@ GameTips::~GameTips() {
 }
 
 /// Loads tips out of \var filename
-void GameTips::load_tips(std::string name)
-{
+void GameTips::load_tips(std::string name) {
 	std::string filename = "txts/tips/" + name + ".tip";
 	try {
 		Profile prof(filename.c_str());
-		while (Section * const s = prof.get_next_section(nullptr)) {
-			char const * const text = s->get_string("text");
+		while (Section* const s = prof.get_next_section(nullptr)) {
+			char const* const text = s->get_string("text");
 			if (nullptr == text)
 				continue;
 
 			Tip tip;
 			tip.text = text;
 			tip.interval = s->get_int("sec", DEFAULT_INTERVAL);
-			tips_.push_back (tip);
+			tips_.push_back(tip);
 		}
-	} catch (std::exception &) {
+	} catch (std::exception&) {
 		// just ignore - tips do not impact game
 		return;
 	}
@@ -107,7 +103,7 @@ void GameTips::show_tip(int32_t index) {
 	const Image* pic_background = g_gr->images().get(BG_IMAGE);
 	assert(pic_background);
 
-	RenderTarget & rt = *g_gr->get_render_target();
+	RenderTarget& rt = *g_gr->get_render_target();
 	Rect tips_area;
 
 	uint16_t w = pic_background->width();
