@@ -1,14 +1,194 @@
-### Build 19 until r7770
+### Build 19 until r7914
 
-
+- Reversed semantics of "Do not zip" checkbox on the Options screen.
+- More intelligent handling of units in spinboxes.
+- Fixed bug #1162527: Military statistics button seem cropped when selected.
+- Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
+                      transparency.
+- Added missing pixel on the bottom right corner in the draw_rect program.
+- Fixed bug #1540827: Bug with establishing smuggling routes in the Smugglers
+                      scenario.
+- Stopped the infotool from painting.
+- Fixed bug #1252625: Plot areas now update their data less often.
+- Fixed bug #1559729: Port space not shown.
+- Added census/statistics strings to ships and ship construction.
+- Ship states are now an enum class.
+- Watchwindow fixes: Fixed some oddities such as view duplication:
+  - Possibly fixed bug #1553699 (probable cause: std::erase used on invalid
+    position, which results in undefined behavior).
+  - Highlight the current view button.
+- Better coloring for workarea pics.
+- Fixed a crash where a leaked remnant of the game session would still be
+  subscribed to the 'changed resolution' event if a savegame failed to load.
+- Fixed bug #1556621: Catalogs with overlapping source file by moving win
+                      condition helper scripts into win_conditions directory.
+- Unified debug button texts.
+- Added Hasi50 (Klaus Halfmann) to developers list.
+- Ships get debug window. Also its content are extended.
+- Fixed bug #1550568: Editor crashes upon placing resources.
+- Changed color of statistics string for Dismantlesite to match Constructionsite.
+- AI: Roads rework.
+- Fixed bug #1191556: The "Cancel Expedition" button in Port windows will now
+                      toggle and remove the tab.
+- Using auto for more efficient iterating over maps.
+- Deleted stillborn translation projects (en_AU and es_CO).
+- Added map/wiki credit for king of nowhere.
+- Added a new codecheck rule that requires comments to start with a blank space.
+- Various string fixes for issues reported on Transifex.
+- Some refactoring for the Soldier code.
+- Added New starting condition "Training Outpost" that will periodically give
+  the player some wares if needed (cheat mode)
+- Fixed line drawing by replacing the broken use of GL_LINES with a tessellation
+  algorithm for drawing lines.
+- Listselect now uses the new font renderer, and text is aligned according to rtl/ltr per entry.
+- Implemented locale fontset selection by word into the new renderer.
+- Fontsets now have a representative character that is used to calculate line height.
+- Fixed an overflow bug in the renderer.
+- Use -Werror=deprecated for clang compiles.
+- Fixes to buildcat.py: United 'do_compile' and 'do_compile_src' functions and
+  also improved error handling a bit.
+- Fixed overlapping building names and long window titles.
+- Shut up spammy sphinx-warning.
+- Fixed bug #1525706: Wincondition artifacts could be chosen if no artifacts
+                      are available in map.
+- Fixed bug #1546153: Editor removes "Suggested Teams" when saving.
+- Fixed pointer error in box.cc. This fixes the button width in the general
+  statistics GUI.
+- Fixed text cropping in DiscreteSlider.
+- Gave plot area bottom axis labels some space.
+- autofit_ui_text now calls richtext_escape.
+- New tree/terrain values.
+- Fixed bug #1540782: Multiline edit box shows new text only when hitting
+                      backspace.
+- Fixed bug #1551578: Fortified Village crashes when building can't be placed.
+                      Also fixed some building names in starting conditions.
+- Returned editor strings to buildcat.py.
+- Fixed bug #1542705: Consolidate names in bob worker programs: Renamed program
+                      "geologist-find" to "geologist_find" and "playFX" to
+                      "play_sound".
+- Fixed bug #1546095: Crash when typing "\" in Editor text fields.
+- Fixed bug #1513181: Multiplayer chat don't display any more my fixing the check
+                      in ChatOverlay whether a chat provider has been assigned.
+- Added the buildings where a worker can work to worker help.
+- AI: reworked upgrading.
+- Fixed bug #1509172: Editor gives error on saving maps in Windows.
+- AI: Various small tweaks.
+- Fixed bug #1524841: Translation updates are incomplete.
+- InternetGaming::games() and InternetGaming::clients() now return nullptr
+  instead of a new vector in case of a communication failure.
+- Fixed bug #1546810: Editor: undo/redo doesn't work when placing terrains in
+                      one move
+- Removed unneeded packages from campaign and tutorial maps to fix map loading.
+- Reworked find_portdock.
+- Added a codecheck rule to require a space before opening braces.
+- String fixes: Added localization marker for production program names
+- String fixes: Fixed stone -> granite in Atlantean campaign
+- String fixes: Fixed grammar in Empire campaign
+- String fixes: Correct use of Unicode ellipsis
+- Some small code style fixes
+- Balancing: Added gold to building cost for Atlantean training sites.
+  Made Barbarian attack stronger.
+- Removed leading underscores from variable and function names.
+- Fixed renaming of member variables for Windows.
+- wl_map_info.cc misbehaves on the server. Add more error checking to get to
+  the bottom of it.
+- Fixed bug #1544864: Get rid of LuaBaseImmovable::get_size. The corresponding
+                      functions now return strings instead of ints.
+- Fixed crash with identical autosave filenames when LAN game is run with
+  multiple instances of Widelands on a single computer. Also, more informative
+  error messages in disk_filesystem.cc.
+- Removed --remove-replays and --remove-syncstreams. We now always delete them
+  if they were autogenerated and older than 4 weeks.
+- Added --write-syncstreams option which defaults to true for now.
+  This will give us more debug information for future desyncs.
+- Decoupled UI update frequency from game update frequency (which is now 15
+  times per second).
+- Exposed terrain and resource descriptions to the Lua interface and added tree
+  and terrain help to the editor.
+- MultilineTextarea now generates an empty line for "\n\n" rather than just a
+  line break. Added "HINTS:" label to map hints in mapdetails.cc.
+- Fixed placeholder typo in zip_filesystem.
+- Buttons will now automatically scale down their text if it is too wide.
+- Removed unused function set_fontface from Textarea.
+- Added file and zip file paths to exceptions in ZipFilesystem.
+- Rolled back using glbinding on the PPA.
+- Fixed bug #1543944: Error in widelands:free(): invalid pointer, caused by an
+                      indexing error in SuggestedTeamsBox.
+- Added Widelands version to log output
+- Added map names to scoped timer for map loading/saving.
+- Added file paths to error messages in exceptions thrown by LayeredFileSystem.
+  Removed unused member variables from filesystem_exceptions.h.
+- Fixed bug #1542703: Crash during battle in editor_game_base.cc:677: Only allow
+                      building a port if all fields can be conquered.
+                      Also added a test for this issue.
+- Forcing a constructionsite properly conquers the area that the finished building
+  will occupy.
+- Code simplifications/refactorings around ships.
+- Small const correctness in Map.
+- AI: Reworked algorithm for building new trainingsites. Modified a logic for
+  trainingsites when to call a soldier. Modified attacking, based on actual
+  performance of trainingsites.
+- Fixed bug #1535296: Font file not found. Falling back to serif.
+- Changed the fallback font to sans.
+- Cleanup: UI::TextStyle is now only used in the old font handler and in
+  wordwrap (wordwrap still needs some of its functions for efficiency).
+  Removed ui_big() and ui_small().
+- Added sigclicked signal to TabPanel.
+- Textareas with fixed width will now automatically resize the text to fit the
+  width.
+- Cleanup: Removed prerendering of text in WaresDisplay.
+- Added helptext to Editor CategorizedItemSelectionMenu when nothing has been
+  selected.
+- Editor CategorizedItemSelectionMenu no longer grows excessively wide when
+  multiple items are selected.
+- Change the PPA to build against the glbinding PPA so that we can get debug
+  traces from OpenGL.
+- Fix c++ compiler for AppVeyor.
+- Set gcc path explicitely for AppVeyor.
+- Removed some compatibility code from map_flagdata_packet.cc.
+- Unbreak gcc 4.7: <:: is not working in src/logic/game.h.
+- Unbreak installations: install shaders directory.
+- Fixes/Improvements to Building Statistics.
+- Fixed bug #1542214: Inconsistent ordering of OK/Cancel buttons. The OK button
+  is always on the right for LTR languages, and on the left for RTL languages.
+- Remove --dedicated commandline option and associated code.
+- create_parent_directory() uses the code from FileSystem now instead of rolling
+  its own. Cleaned up mapdata.h and moved implementation into the new mapdata.cc.
+- Windows lo longer update their size when minimized, but instead when they get
+  restored.
+- Fixed bug #1542238: assertion failed within unset_position().
+- Fixed bug #1397500: "warning: unterminated string literal" in
+                      utils/buildcat.py by moving GL shaders into external files.
+- Consistent naming of loader_ui variables.
+- More consistent Progresswindow strings.
+- Consistent use of colons with spinboxes in the Options menu.
+- Remove support in setbobdescription for tribe bobs. There aren't any.
+- Added "hint" to the json file created by wl_map_info.
+- Ports can be affected by terrain changes up to 3 tiles away from their original
+  position, so we recalculate as much when changing a terrain tile.
+- Changed amount in WareAmount from uint8_t to uint32_t.
+- Refactored WLMessageBox. It now no longer depends on the old font renderer,
+  and scrollbars only appear when they are needed.
+- Fixed bug #1541697: regression_test.py does not work in some setups.
+- Canonicalized datadir and datadir_for_testing in WLApplication.
+- Fixes to appveyor builds and enable x86 and debug builds.
+- Fixed lua scripting path in utils/buildcat.py.
+- Cleaned up switch statement in Building::info_string: Replaced FORMAT macro
+  with enum class and got rid of unused cases.
+- Modification of a few internal AI parameters.
+- Added a test for the text renderer to make sure that <not_a_tag> does not crash.
+  This test checks Tables, Listselect and MultilineTextarea.
+- Fixed bug #1535065: Editor crashes with random map regarding player positions.
+- Removed unused option "setdescription" from worker program.
+- Fixed bug #1532279: Spin box not displayed correct in options menu.
+- For Travis builds ignore github branch _widelands_dev_widelands_trunk.
+- Fixed data path in Mac OS X packaging.
 - No longer saving or loading unneeded map packages in the editor.
 - Removed compatibility code from MapBuildingPacket.
 - Fixed compiler warning and updated comment in game_renderer.cc.
 - Fixed logo image paths in src/graphic/text/test
 - Fixed source path of logo files in Debian rules.
-- Fixed bug #1525680: "warning: unterminated string literal" in
-                      utils/buildcat.py and moved all data-related directories
-                      into a new "data" directory.
+- moved all data-related directories into a new "data" directory.
 - Fixed iteration depth in buildcat.py for widelands.pot.
 - Fixed Textdomain for The Green Plateau.
 - Removed graphic::update() and Panel::update() and always redraw at maxfps.
