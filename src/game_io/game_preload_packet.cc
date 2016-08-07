@@ -80,7 +80,6 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 }
 
 void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
-
 	Profile prof;
 	Section& s = prof.create_section("global");
 

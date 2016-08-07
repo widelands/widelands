@@ -155,8 +155,10 @@ void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
-		//  create directory
+		//  Create directory.
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+		// Trim it for preceding/trailing whitespaces in user input
+		boost::trim(fullname);
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -215,7 +217,8 @@ void MainMenuSaveMap::double_clicked_item() {
  * The editbox was changed. Enable ok button
  */
 void MainMenuSaveMap::edit_box_changed() {
-	ok_.set_enabled(!editbox_->text().empty());
+	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
+	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
@@ -237,11 +240,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the current directory exists and is writeable.
 	g_fs->ensure_directory_exists(curdir_);
 
+	// Trim it for preceding/trailing whitespaces in user input
+	boost::trim(filename);
+
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
-	//  append directory name
+	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
