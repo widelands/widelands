@@ -1,6 +1,6 @@
 -- RST
 -- tribes/preload.lua
--- -----------------
+-- ------------------
 --
 
 -- This file contains the basic information for all tribes that is

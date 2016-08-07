@@ -1,6 +1,6 @@
 -- RST
 -- tribes/buildings/militarysites/<name>/helptexts.lua
--- --------------------
+-- ---------------------------------------------------
 --
 -- The functions in this file return texts that are used by the Tribal Encyclopedia.
 --

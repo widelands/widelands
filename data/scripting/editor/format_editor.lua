@@ -1,13 +1,13 @@
 -- RST
 -- format_editor.lua
--- ---------------
+-- -----------------
 
 -- Functions used in the ingame editor help windows for formatting the text and pictures.
 
 include "scripting/formatting.lua"
 
 -- RST
--- .. function picture_li(imagepath, text)
+-- .. function:: picture_li(imagepath, text)
 --
 --    Places a paragraph of text to the right of an image
 
@@ -21,7 +21,7 @@ function picture_li(imagepath, text)
 end
 
 -- RST
--- .. function spacer()
+-- .. function:: spacer()
 --
 --    Adds a little space between two paragraphs
 --
@@ -31,7 +31,7 @@ function spacer()
 end
 
 -- RST
--- .. function text_line(t1, t2[, imgstr = nil])
+-- .. function:: text_line(t1, t2[, imgstr = nil])
 --
 --    Creates a line of h3 formatted text followed by normal text and an image.
 --

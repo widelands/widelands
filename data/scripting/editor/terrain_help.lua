@@ -1,6 +1,6 @@
 -- RST
 -- terrain_help.lua
--- -------------
+-- ----------------
 
 
 -- This file returns a formatted entry for the terrain help in the editor.

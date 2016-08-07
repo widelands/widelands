@@ -13,7 +13,7 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function ware_help_general_string(tribe, ware_description)
+-- .. function:: ware_help_general_string(tribe, ware_description)
 --
 --    Displays general info texts about the ware
 --
@@ -35,7 +35,7 @@ function ware_help_general_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_producers_string(tribe, ware_description)
+-- .. function:: ware_help_producers_string(tribe, ware_description)
 --
 --    Displays the buildings that produce this ware with information about
 --    wares consumed in their production programs
@@ -101,7 +101,7 @@ function ware_help_producers_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_consumers_string(tribe, ware_description)
+-- .. function:: ware_help_consumers_string(tribe, ware_description)
 --
 --    Displays the buildings that consume this ware and about
 --    workers that use this ware as a tool

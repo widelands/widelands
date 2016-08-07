@@ -77,7 +77,7 @@ end
 
 
 -- RST
--- .. function worker_help_employers_string(worker_description)
+-- .. function:: worker_help_employers_string(worker_description)
 --
 --    Displays the buildings where the worker can work
 --
@@ -101,14 +101,15 @@ end
 
 
 -- RST
--- .. function worker_help_string(worker_description)
+-- .. function:: worker_help_string(worker_description)
 --
 --    Displays the worker with a helptext, an image and the tool used
 --
 --    :arg tribe: The :class:`LuaTribeDescription` for the tribe
 --                that we are displaying this help for.
---
+
 --    :arg worker_description: the worker_description from C++.
+--
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)

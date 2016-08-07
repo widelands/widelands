@@ -13,7 +13,7 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function text_line(t1, t2[, imgstr = nil])
+-- .. function:: text_line(t1, t2[, imgstr = nil])
 --
 --    Creates a line of h3 formatted text followed by normal text and an image.
 --
@@ -174,7 +174,7 @@ end
 
 
 -- RST
--- .. function building_help_general_string(tribe, building_description)
+-- .. function:: building_help_general_string(tribe, building_description)
 --
 --    Creates the string for the general section in building help
 --
@@ -615,7 +615,7 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribe, building_description)
+-- .. function:: building_help_crew_string(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
@@ -695,7 +695,7 @@ end
 
 
 -- RST
--- .. building_help_production_section()
+-- .. function:: building_help_production_section()
 --
 --    Displays the production/performance section with a headline
 --
@@ -712,7 +712,7 @@ end
 
 
 -- RST
--- .. function building_help(tribe, building_description)
+-- .. function:: building_help(tribe, building_description)
 --
 --    Main function to create a building help string.
 --

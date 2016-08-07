@@ -1,6 +1,6 @@
 -- RST
 -- tribes/atlanteans.lua
--- -----------------
+-- ---------------------
 --
 -- This file contains all the units for the Atlantean tribe.
 
@@ -44,7 +44,7 @@ dirname = path.dirname(__file__)
 --
 --    **headquarters**: The internal name of the tribe's headquarters building. This unit needs to be defined in the ``buildings`` table too.
 --
---    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings table too.
+--    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 tribes:new_tribe {
    name = "atlanteans",
 

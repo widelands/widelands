@@ -24,8 +24,12 @@ cpp_pairs = (
 # This directories are scanned without knowing which file
 # has rst comments; scan for *.lua files
 lua_dirs = (
-    'data/scripting',
-    'data/tribes/scripting/help'
+    ('data/scripting', 'aux'),
+    ('data/scripting/editor', 'editor'),
+    ('data/scripting/win_conditions', 'editor'),
+    ('data/tribes', 'tribes'),
+    ('data/tribes/scripting/help', 'tribes'),
+    ('data/tribes/buildings/militarysites/altanteans/castle', 'tribes'),
 )
 
 
@@ -105,7 +109,7 @@ if __name__ == '__main__':
 
         # Search the given dirs for rst-comments in every lua files
         all_names = []
-        for dirs in lua_dirs:
+        for dirs, toc in lua_dirs:
             rstnames = extract_rst_from_lua(dirs)
             all_names.extend(rstnames)
         # Replace the auxiliary toc with all found rst comments in lua files.
