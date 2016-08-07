@@ -205,7 +205,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_TAB:
 			// Let the panel handle the tab key
-			return false;
+			return get_parent()->handle_key(true, code);
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
