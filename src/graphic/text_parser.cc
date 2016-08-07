@@ -47,15 +47,15 @@ RichtextBlock::RichtextBlock(const RichtextBlock& src) {
 	text_align_ = src.text_align_;
 }
 
-TextBlock::TextBlock() :
-   font_size_(10),
-	font_color_(RGBColor(255, 255, 0)),
-	font_weight_("normal"),
-	font_style_("normal"),
-	font_decoration_("none"),
-	font_face_((UI::g_fh1->fontset())->sans()),
-	line_spacing_(0)
-{}
+TextBlock::TextBlock()
+   : font_size_(10),
+     font_color_(RGBColor(255, 255, 0)),
+     font_weight_("normal"),
+     font_style_("normal"),
+     font_decoration_("none"),
+     font_face_((UI::g_fh1->fontset())->sans()),
+     line_spacing_(0) {
+}
 
 void TextParser::parse(std::string& text, std::vector<RichtextBlock>& blocks) {
 	bool more_richtext_blocks = true;
