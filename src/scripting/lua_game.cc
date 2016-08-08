@@ -947,8 +947,7 @@ const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RW(LuaObjective, visible), PROP_RW(LuaObjective, done),  {nullptr, nullptr, nullptr},
 };
 
-LuaObjective::LuaObjective(const Widelands::Objective& o) {
-	name_ = o.name();
+LuaObjective::LuaObjective(const Widelands::Objective& o) : name_(o.name()) {
 }
 
 void LuaObjective::__persist(lua_State* L) {

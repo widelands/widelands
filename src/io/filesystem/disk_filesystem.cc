@@ -357,7 +357,7 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 void* RealFSImpl::load(const std::string& fname, size_t& length) {
 	const std::string fullname = canonicalize_name(fname);
 	if (is_directory(fullname)) {
-		throw FileError("RealFSImpl::load", fullname.c_str());
+		throw FileError("RealFSImpl::load", fullname);
 	}
 
 	FILE* file = nullptr;
@@ -366,7 +366,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 	try {
 		file = fopen(fullname.c_str(), "rb");
 		if (!file)
-			throw FileError("RealFSImpl::load", fullname.c_str());
+			throw FileError("RealFSImpl::load", fullname);
 
 		// determine the size of the file (rather quirky, but it doesn't require
 		// potentially unportable functions)

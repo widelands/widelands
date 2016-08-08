@@ -466,7 +466,7 @@ void RichText::parse(const std::string& rtext) {
 					text.advance_line();
 			}
 
-			text.textblock++;
+			++text.textblock;
 		}
 
 		if (!text.elements.empty())

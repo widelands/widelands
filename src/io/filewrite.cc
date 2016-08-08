@@ -50,7 +50,7 @@ FileWrite::Pos FileWrite::get_pos() const {
 	return filepos_;
 }
 
-void FileWrite::set_pos(const Pos pos) {
+void FileWrite::set_pos(const Pos& pos) {
 	filepos_ = pos;
 }
 
