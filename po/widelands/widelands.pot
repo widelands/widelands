@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-06 07:12+0000\n"
+"POT-Creation-Date: 2016-08-09 20:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -539,7 +539,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/messagebox.cc:92 ../../src/ui_fsmenu/launch_mpg.cc:77
 #: ../../src/ui_fsmenu/options.cc:116
-#: ../../src/wui/game_main_menu_save_game.cc:89 ../../src/wui/login_box.cc:64
+#: ../../src/wui/game_main_menu_save_game.cc:89 ../../src/wui/login_box.cc:62
 msgid "Cancel"
 msgstr ""
 
@@ -611,7 +611,7 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:176
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:177
 msgid "Size: %1% x %2%"
 msgstr ""
 
@@ -1987,7 +1987,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1048 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1047 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -2713,7 +2713,7 @@ msgid "Show login dialog"
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:129
-#: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:68
+#: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:66
 msgid "nobody"
 msgstr ""
 
@@ -3578,47 +3578,47 @@ msgstr ""
 msgid "Nickname:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:38
+#: ../../src/wui/login_box.cc:35
 msgid "Password:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:43
+#: ../../src/wui/login_box.cc:42
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:46
+#: ../../src/wui/login_box.cc:45
 msgid "Log in to a registered account"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:50
+#: ../../src/wui/login_box.cc:48
 msgid "Automatically use this login information from now on."
 msgstr ""
 
-#: ../../src/wui/login_box.cc:58
+#: ../../src/wui/login_box.cc:56
 msgid "Login"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Empty Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Please enter a nickname!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:83
+#: ../../src/wui/login_box.cc:82
 msgid "Space in Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:84
+#: ../../src/wui/login_box.cc:83
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Password"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter your password!"
 msgstr ""
 

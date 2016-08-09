@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-08-06 07:12+0000\n"
+"PO-Revision-Date: 2016-08-07 08:34+0000\n"
+"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,42 +29,42 @@ msgstr "Maamerkit"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "Etsi historiallisia kohteita (maamerkkejä). Kun kaikki on löydetty, peli päättyy. Joukkue, jolla on tuolloin hallussaan useimpia kohteita, voittaa."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
 msgid "No Artifacts"
-msgstr ""
+msgstr "Ei maamerkkejä"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on https://launchpad.net/widelands and specify your Widelands "
 "version and the map you tried to load."
-msgstr ""
+msgstr "Tällä kartalla ei ole maamerkkejä. Tämän pitäisi olla mahdotonta. Raportoi bugi osoitteessa https://launchpad.net/widelands , ja kerro mitä teit törmätäksesi tähän."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:61
 msgid "New Artifact Found"
-msgstr ""
+msgstr "Uusi maamerkki löydetty"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:62
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "Löysit maamerkin"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:65
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Menetit maamerkin"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:66
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Vihollinen ryöväsi maamerkkisi"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Maamerkki valloitettu"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:70
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "Otit haltuusi vastustajan maamerkin"
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
@@ -74,26 +74,26 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:147
 msgid "Overview:"
-msgstr ""
+msgstr "Yhteenveto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:150
 #: ../../data/scripting/win_conditions/artifacts.lua:163
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i maamerkki"
+msgstr[1] "%i maamerkiä"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:152
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s omistaa $2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../data/scripting/win_conditions/artifacts.lua:165
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "Joukkueella %1$i (%2$s) on %3$s"
 
 #: ../../data/scripting/win_conditions/collectors.lua:19
 msgid "Collectors"
@@ -117,7 +117,7 @@ msgstr "%s:n tila"
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:124
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../data/scripting/win_conditions/collectors.lua:128
 #, lua-format
@@ -138,8 +138,8 @@ msgstr[1] "%i minuutin"
 #: ../../data/scripting/win_conditions/collectors.lua:149
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% t and %2%"
+msgstr[1] "%1% t and %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/collectors.lua:152
@@ -157,14 +157,14 @@ msgstr "Peli päättyy %s kuluttua."
 #: ../../data/scripting/win_conditions/collectors.lua:168
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "Joukkueen %d:n tila"
 
 #: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Yhteensä: %i piste"
+msgstr[1] "Yhteensä: %i pistettä"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
@@ -218,8 +218,8 @@ msgstr "%s hallitsee yli puolta kartan maa-alasta"
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sinulla on %i minuutti aikaa estää voitto"
+msgstr[1] "Sinulla on %i minuuttia aikaa estää voitto"
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:164
 #: ../../data/scripting/win_conditions/territorial_time.lua:212
@@ -231,8 +231,8 @@ msgstr "Hallitset yli puolta maa-alasta."
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pidä se %i minuutin ajan, jotta voitat pelin."
+msgstr[1] "Pidä se %i minuutin ajan, jotta voitat pelin."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:18
 msgid "Territorial Time"
@@ -248,11 +248,11 @@ msgstr "Ensimmäinen pelaaja, joka pitää yli puolta pelialueesta hallussaan ka
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s:lla on %2$3.0f%% maapinta-alasta (%3$i / %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:27
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s:lla oli %2$3.0f%% maapinta-alasta (%3$i / %4$i)."
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
@@ -340,12 +340,12 @@ msgstr[1] "%i puuta"
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:95
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s:lla on nyt %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:146
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s:lla oli %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:152
