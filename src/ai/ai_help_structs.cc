@@ -20,6 +20,7 @@
 #include "ai/ai_help_structs.h"
 
 #include "base/macros.h"
+#include "base/time_string.h"
 #include "logic/map.h"
 #include "logic/player.h"
 
@@ -274,6 +275,11 @@ ManagementData::ManagementData(std::vector<std::vector<int16_t>> mm, std::vector
 	military_matrix(mm), military_numbers(mn)  {
 		old_msites = 0;
 		old_psites = 0;
+		old_bfields = 0;
+		initial_military_numbers = military_numbers;
+		initial_military_matrix = military_matrix;
+		re_scatter_count = 0;
+		last_scatter_time = 0;
 	}
 
 // "Empty initialization - only temporarily"
@@ -282,13 +288,15 @@ ManagementData::ManagementData() {
 	old_psites = 0;
 }
 
-void ManagementData::scatter() {
+void ManagementData::scatter(const uint32_t gametime) {
 
-	old_military_numbers = military_numbers;
-	old_military_matrix = military_matrix;
-
-	printf ("     scattering\n");
+	re_scatter_count +=1;
+	printf ("    ... scattering (*%2d), time since last scatter %6d\n",
+	re_scatter_count, (gametime - last_scatter_time) / 1000 / 60);
+	last_scatter_time = gametime;
+	
 	int16_t diff = 0;
+	
 	
 	for (auto & item : military_matrix) {
 		for (auto & subitem : item) {
@@ -297,19 +305,21 @@ void ManagementData::scatter() {
 				if (diff < 10) {
 					diff = 10;
 				}
-				int32_t boost = -diff + std::rand() % 2*diff;
+				int32_t boost = -diff + std::rand() % (2*diff);
 				if (boost != 0 ){
-					printf (" special matrix boost: %4d\n", boost);
-					subitem = subitem +  diff;
+					boost *= re_scatter_count;
+					printf ("   special matrix boost: %4d\n", boost);
+					subitem = subitem +  boost;
 				}
 			} else if (std::rand() % 5 == 0) {
 				diff = std::abs(subitem) / 6;
 				if (diff < 2) {
 					diff = 2;
 				}
-				int32_t boost = -diff + std::rand() % 2*diff;
+				int32_t boost = -diff + std::rand() % (2*diff);
 				if (boost != 0 ){
-					printf ("  special matrix boost: %4d\n", boost);
+					boost *= re_scatter_count;
+					printf ("   special matrix boost: %4d\n", boost);
 					subitem = subitem + boost;				
 				}
 			}	
@@ -323,9 +333,10 @@ void ManagementData::scatter() {
 			if (diff < 10) {
 				diff = 10;
 			}
-			int32_t boost = -diff + std::rand() % 2*diff;
+			int32_t boost = -diff + std::rand() % (2*diff);
 			if (boost != 0 ){
-				printf (" special numbers boost: %4d\n", boost);
+				boost *= re_scatter_count;
+				printf ("   special numbers boost: %4d\n", boost);
 				item = item +  boost;
 				
 			}
@@ -334,28 +345,94 @@ void ManagementData::scatter() {
 			if (diff < 2) {
 				diff = 2;
 			}
-			int32_t boost = -diff + std::rand() % 2*diff;
+			int32_t boost = -diff + std::rand() % (2*diff);
 			if (boost != 0 ){
-				printf (" special numbers boost: %4d\n", boost);
+				boost *= re_scatter_count;
+				printf ("   special numbers boost: %4d\n", boost);
 				item = item +  boost;
 			}
 		}
 	}
-	
+
+	if (military_numbers[16] < 40) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[16] = 40;
+	}	
+	if (military_numbers[17] < 70) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[17] = 70;
 	}
-void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn) {
-	printf (" %d: reviewig AI management data\n", pn);
-	if (old_msites + 5 > msites || old_psites + 5 > psites) {
-		printf ("    too WEAK performer\n");
+	if (military_numbers[18] < 100) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[18] = 100;
+	}	
+	if (military_numbers[16] > 80) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[16] = 80;
+	}	
+	if (military_numbers[17] > 120) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[17] = 120;
+	}
+	if (military_numbers[18] > 150) {
+		printf ("   Increasing military_numbers[17]...\n");
+		military_numbers[18] = 150;
+	}	
+
+
+	//dumping new numbers
+	printf ("   new military_numbers:\n    {");
+	for (const auto& item : military_numbers) {
+		printf ("%d%s",item,(&item != &military_numbers.back())?", ":"");
+	}
+	printf ("}\n");
+	//Dumping statistics
+	printf ("   new military_matrix:\n");
+	for (const auto& item : military_matrix) {
+			printf ("    {");
+			for (const auto& subitem : item) {
+				printf ("%d%s",subitem, (&subitem != &item.back())?", ":"");
+			}
+			printf ("}%s\n",(&item != &military_matrix.back())?", ":"");
+	}
+	printf ("\n");
+	
+}
+void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn, const uint16_t bfields, const uint32_t gametime) {
+	printf (" %d %s: reviewig AI management data (%3d -> %3d, %3d -> %3d, %3d -> %3d )\n",
+	pn, gamestring_with_leading_zeros(gametime), old_msites, msites, old_psites, psites, old_bfields, bfields);
+	//militarysites are now ignored
+	if (((psites - old_psites) * 5  + (bfields - old_bfields)) < 20) {	
+	//if (old_psites + 2 > psites || old_bfields + 15 > bfields) {
+		printf (" !   too WEAK performer\n");
 		
-		military_numbers = old_military_numbers;
-		military_matrix = old_military_matrix;		
-		scatter();
-		old_military_numbers = military_numbers;
-		old_military_matrix = military_matrix;
-		old_msites = msites;
-		old_psites = psites;		
+		military_numbers = initial_military_numbers;
+		military_matrix = initial_military_matrix;		
+		scatter(gametime);
+	} else {
+		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
+		
+		//dumping new numbers
+		printf ("   military_numbers:\n    {");
+		for (const auto& item : military_numbers) {
+			printf ("%d%s",item,(&item != &military_numbers.back())?", ":"");
 		}
+		printf ("}\n");
+		//Dumping statistics
+		printf ("   military_matrix:\n");
+		for (const auto& item : military_matrix) {
+				printf ("    {");
+				for (const auto& subitem : item) {
+					printf ("%d%s",subitem, (&subitem != &item.back())?", ":"");
+				}
+				printf ("}%s\n",(&item != &military_matrix.back())?", ":"");
+		}
+		printf ("\n");
+
+	}
+	old_msites = msites;
+	old_psites = psites;
+	old_bfields = bfields;	
 }
 
 uint16_t MineTypesObserver::total_count() const {

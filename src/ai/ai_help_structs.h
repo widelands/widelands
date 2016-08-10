@@ -484,15 +484,18 @@ struct MineTypesObserver {
 struct ManagementData {
 	ManagementData();
 	ManagementData(std::vector<std::vector<int16_t>>, std::vector<int16_t>);
-	void scatter();
-	void review(uint16_t, uint16_t, uint8_t);
+	void scatter(uint32_t);
+	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint32_t);
 	
 	std::vector<std::vector<int16_t>> military_matrix;
 	std::vector<int16_t> military_numbers;
-	std::vector<std::vector<int16_t>> old_military_matrix;
-	std::vector<int16_t> old_military_numbers;	
+	std::vector<std::vector<int16_t>> initial_military_matrix;
+	std::vector<int16_t> initial_military_numbers;	
 	uint16_t old_msites;
-	uint16_t old_psites;	
+	uint16_t old_psites;
+	uint16_t old_bfields;
+	uint16_t re_scatter_count;
+	uint32_t last_scatter_time;	
 };
 
 // this is used to count militarysites by their size

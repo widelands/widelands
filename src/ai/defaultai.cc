@@ -66,7 +66,7 @@ constexpr int kMinMFCheckInterval = 19 * 1000;
 constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 15 * 1000;
-constexpr int kManagementUpdateInterval = 30 * 60 * 1000;
+constexpr int kManagementUpdateInterval = 20 * 60 * 1000;
 
 // handfull of constants used for expeditions/colonization
 constexpr int kColonyScanStartArea = 35;
@@ -463,7 +463,11 @@ void DefaultAI::think() {
 				set_taskpool_task_time(gametime +   19 * 1000, SchedulerTaskId::kCheckEnemySites);
 				break;
 			case SchedulerTaskId::kManagementUpdate :
-				management_data.review(militarysites.size(), productionsites.size(), player_number());
+				management_data.review(militarysites.size(),
+										productionsites.size(),
+										player_number(),
+										buildable_fields.size(),
+										gametime);
 				set_taskpool_task_time(gametime +   kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 				break;
 			case SchedulerTaskId::kUnset :
@@ -771,7 +775,7 @@ void DefaultAI::late_initialization() {
 								SchedulerTaskId::kCountMilitaryVacant,   2, "count military vacant"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 								SchedulerTaskId::kCheckEnemySites,       6, "check enemy sites"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 20 * 60 * 1000),
 								SchedulerTaskId::kManagementUpdate,       7, "Management update"));
 
 	Map& map = game().map();
@@ -891,35 +895,61 @@ void DefaultAI::late_initialization() {
 	}
 
 	const std::vector<std::vector<int16_t>> AI_initial_matrix_A = {
-    {9, -38, -41, 365, -11, -9}, 
+    {11, -38, -47, 365, -11, -9}, 
     {-184, 10, -23, 4, -58, -2}, 
-    {-7, 14, 21, -18, -20, -7}, 
-    {89, 16, -2, 12, 11, 18}
+    {-7, -40, 21, -18, -20, -18}, 
+    {94, 10, -1, 6, 11, 18}
 	};
 
 	const std::vector<int16_t> AI_initial_military_numbers_A =
-	{2, 0, 7, -15, -3, -15, -3, 8, 8, 0, -2, 9, -20, -126, -17, 70, 64, 116, 141, -20, 46, -1, 9}
+	{-6, 1, -7, -27, -17, -17, -14, 3, -6, 4, -14, 13, -19, -17, -18, 23, 46, 120, 141, -33, 27, -6, 14}
 	;
 
 
 	const std::vector<std::vector<int16_t>> AI_initial_matrix_B = {
-    {10, -38, -43, 362, -11, -9}, 
-    {-59, 6, -23, 2, -58, -2}, 
-    {-7, 18, 25, -18, -15, -7}, 
+    {10, -22, -43, 362, -11, -9}, 
+    {-75, 6, -15, -6, -202, -2}, 
+    {-7, 18, 25, -18, -7, -7}, 
     {85, -30, -2, 12, 11, 255}
 	};
 
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-	 {-4, -5, 6, -13, -4, -18, -2, 13, 4, 5, -3, 12, -19, -126, -24, 76, 70, 120, 141, -15, 44, -2, 7}
+	 {-20, 3, -10, -21, 4, -34, -2, 21, 4, 13, -11, 4, -43, -14, -24, 132, 40, 120, 150, -7, 20, -10, 7}
 
 	;
 
-	if(player_number()%2 ==0) {
+	printf (" %d: initializing magic numbers\n", player_number());
+
+	if (player_number() % 3 == 1) {
+		printf ("  ... inheriting from parent A\n");
 		management_data = ManagementData(AI_initial_matrix_A, AI_initial_military_numbers_A);
-	} else {
+	} else if (player_number() % 3 == 2) {
+		printf ("  ... inheriting from parent B\n");
 		management_data = ManagementData(AI_initial_matrix_B, AI_initial_military_numbers_B);
-	}	
-	management_data.scatter();
+	}	else {
+		printf ("  ... inheriting from both parents randomly\n");
+		assert (AI_initial_military_numbers_A.size() == AI_initial_military_numbers_B.size());
+		assert (AI_initial_matrix_A.size() == AI_initial_matrix_B.size());		
+		//crosspolination
+		management_data = ManagementData(AI_initial_matrix_A, AI_initial_military_numbers_A);
+		for (uint16_t i = 0; i < management_data.military_numbers.size(); i += 1){
+			if (std::rand() % 2 == 0) {
+				printf ("    [%d] \n", i);
+				management_data.military_numbers[i] = AI_initial_military_numbers_B[i];
+			}
+		}
+		
+		for (uint16_t i = 0; i < management_data.military_matrix.size(); i += 1){
+			for (uint16_t j = 0; j < management_data.military_matrix.size(); j += 1){
+				if (std::rand() % 2 == 0) {
+					printf ("    [%d][%d] \n", i,j);
+					management_data.military_matrix[i][j] = AI_initial_matrix_B[i][j];
+				}
+			}
+		}		
+	}
+
+	management_data.scatter(gametime);
 
 	//if(player_number()%2 ==0) {
 		//management_data.military_matrix = AI_initial_matrix_A;
@@ -953,41 +983,17 @@ void DefaultAI::late_initialization() {
 		//management_data.military_numbers = AI_initial_military_numbers_B;
 	//}
 	
-   for (auto & item : management_data.military_numbers) {
-	   	if (std::rand() % 50 == 0) {
-				int32_t boost = -100 + std::rand() % 200;
-				item = item + boost;
-				printf ("special boost: %4d\n", boost);
-		} else {
-			item = item -4 + std::rand() % 8;
-		}
-	}
+   //for (auto & item : management_data.military_numbers) {
+	   	//if (std::rand() % 50 == 0) {
+				//int32_t boost = -100 + std::rand() % 200;
+				//item = item + boost;
+				//printf ("special boost: %4d\n", boost);
+		//} else {
+			//item = item -4 + std::rand() % 8;
+		//}
+	//}
    
-	if (management_data.military_numbers[16] < 40) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[16] = 40;
-	}	
-	if (management_data.military_numbers[17] < 70) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[17] = 70;
-	}
-	if (management_data.military_numbers[18] < 100) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[18] = 100;
-	}	
-	if (management_data.military_numbers[16] > 80) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[16] = 80;
-	}	
-	if (management_data.military_numbers[17] > 120) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[17] = 120;
-	}
-	if (management_data.military_numbers[18] > 150) {
-		printf (" Increasing management_data.military_numbers[17]...\n");
-		management_data.military_numbers[18] = 150;
-	}		
-	
+
 }
 
 /**
@@ -5083,6 +5089,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
+	const bool verbose = false;
+
 	// Check next militarysite
 	bool changed = false;
 	Map& map = game().map();
@@ -5101,7 +5109,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		usefullness_score += bf.military_score_;
 		usefullness_score += static_cast<uint8_t>(soldier_status_) * management_data.military_numbers[15] / 10; //make magic number of this
 	
-		printf (" %d MSite: at %3dx%3d - military score: %4d, usefulness score %4d, local: %4d\n",
+		if (verbose) printf (" %d MSite: at %3dx%3d - military score: %4d, usefulness score %4d, local: %4d\n",
 		player_number(),
 		f.x, f.y,
 		bf.military_score_,
@@ -5162,23 +5170,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			changed = true;
 		}
 	}
-
-	//Dumping statistics
-	printf (" %d: management_data.military_numbers\n   {", player_number());
-	for (const auto& item : management_data.military_numbers) {
-		printf ("%d%s",item,(&item != &management_data.military_numbers.back())?", ":"");
-	}
-	printf ("}\n");
-	//Dumping statistics
-	printf ("   management_data.military_matrix\n");
-	for (const auto& item : management_data.military_matrix) {
-			printf ("    {");
-			for (const auto& subitem : item) {
-				printf ("%d%s",subitem, (&subitem != &item.back())?", ":"");
-			}
-			printf ("}%s\n",(&item != &management_data.military_matrix.back())?", ":"");
-	}
-	printf ("\n");
 
 	// reorder:;
 	militarysites.push_back(militarysites.front());
@@ -6569,7 +6560,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	    static_cast<uint32_t>(mines_.size()),
 	    static_cast<uint32_t>(warehousesites.size() - num_ports),
 	    num_ports);
-	printf(" Missing wares (zero stock): %s\n", summary.c_str());
+	//printf(" Missing wares (zero stock): %s\n", summary.c_str());
 
 	if (false) printf (" %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n",
 		"T", "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio", "stock", "targ.");
@@ -6678,11 +6669,11 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	if (false) printf ("Trees around cutters: %4d/10, woodcutters policy: %s\n",
 		persistent_data->trees_around_cutters, wpolicy.c_str());
 
-	printf ("  %d: DISMANTL: %3d, LEASTE SCORE: %3d, soldier st: %2d\n",
-	player_number(),
-	persistent_data->ai_personality_military_dismatlement,
-	persistent_data->ai_personality_mil_upper_limit,
-	static_cast<uint8_t>(soldier_status_));
+	//printf ("  %d: DISMANTL: %3d, LEASTE SCORE: %3d, soldier st: %2d\n",
+	//player_number(),
+	//persistent_data->ai_personality_military_dismatlement,
+	//persistent_data->ai_personality_mil_upper_limit,
+	//static_cast<uint8_t>(soldier_status_));
 }
 
 template<typename T>
