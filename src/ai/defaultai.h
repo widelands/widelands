@@ -94,7 +94,7 @@ struct DefaultAI : ComputerPlayer {
 		kEmpire
 	};
 	
-	enum class SoldiersStatus : uint8_t {kEnough, kShortage, kBadShortage};
+	enum class SoldiersStatus : uint8_t {kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6};
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -147,7 +147,7 @@ private:
 	void update_all_mineable_fields(uint32_t);
 	void update_all_not_buildable_fields();
 
-	void update_buildable_field(Widelands::BuildableField&, uint16_t = 6, bool = false);
+	void update_buildable_field(Widelands::BuildableField&);
 	void update_mineable_field(Widelands::MineableField&);
 
 	void update_productionsite_stats();
@@ -157,7 +157,7 @@ private:
 		(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 	// for militarysites (overloading the function)
 	Widelands::BuildingNecessity check_building_necessity
-		(uint8_t, uint32_t);
+		(Widelands::BuildingObserver&, uint32_t);
 
 	void sort_task_pool();
 	void sort_by_priority();
@@ -287,6 +287,8 @@ private:
 
 	std::vector<Widelands::WareObserver> wares;
 
+	Widelands::ManagementData management_data;
+
 	uint32_t next_ai_think_;
 	uint32_t next_mine_construction_due_;
 	uint32_t inhibit_road_building_;
@@ -294,6 +296,7 @@ private:
 	uint32_t enemy_last_seen_;
 
 	uint16_t numof_warehouses_;
+	int32_t avg_military_score_;
 
 	bool new_buildings_stop_;
 
@@ -314,7 +317,7 @@ private:
 	uint32_t expedition_ship_;
 
 	int32_t spots_;  // sum of buildable fields
-	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	//int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites NOCOM
 	// statistics for training sites per type
 	int16_t ts_basic_count_;
 	int16_t ts_basic_const_count_;
@@ -339,6 +342,9 @@ private:
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
 	std::vector<int16_t> marine_task_queue;
+	
+	std::vector<std::vector<int16_t>> AI_military_matrix;
+	std::vector<int16_t> AI_military_numbers;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

@@ -174,6 +174,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
 	  field_info_expiration(20000),
 	  preferred(false),
 	  enemy_nearby(0),
+	  enemy_accessible_(false),
 	  unowned_land_nearby(0),
 	  near_border(false),
 	  unowned_mines_spots_nearby(0),
@@ -201,11 +202,15 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
 	  military_stationed(0),
 	  unconnected_nearby(false),
 	  military_unstationed(0),
-	  is_portspace(false),
+	  is_portspace(Widelands::ExtendedBool::kUnset),
 	  port_nearby(false),
 	  portspace_nearby(Widelands::ExtendedBool::kUnset),
 	  max_buildcap_nearby(0),
-	  last_resources_check_time(0) {
+	  last_resources_check_time(0),
+	  military_score_(0),
+	  inland(false),
+	  local_soldier_capacity(0),
+	  is_militarysite(false) {
 }
 
 int32_t BuildableField::own_military_sites_nearby_() {
@@ -263,6 +268,95 @@ EnemySiteObserver::EnemySiteObserver()
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
 MineTypesObserver::MineTypesObserver() : in_construction(0), finished(0) {}
+
+// Is this needed? HERE
+ManagementData::ManagementData(std::vector<std::vector<int16_t>> mm, std::vector<int16_t> mn) :
+	military_matrix(mm), military_numbers(mn)  {
+		old_msites = 0;
+		old_psites = 0;
+	}
+
+// "Empty initialization - only temporarily"
+ManagementData::ManagementData() {
+	old_msites = 0;
+	old_psites = 0;
+}
+
+void ManagementData::scatter() {
+
+	old_military_numbers = military_numbers;
+	old_military_matrix = military_matrix;
+
+	printf ("     scattering\n");
+	int16_t diff = 0;
+	
+	for (auto & item : military_matrix) {
+		for (auto & subitem : item) {
+			if (std::rand() % 15 == 0) {
+				diff = std::abs(subitem) / 2;
+				if (diff < 10) {
+					diff = 10;
+				}
+				int32_t boost = -diff + std::rand() % 2*diff;
+				if (boost != 0 ){
+					printf (" special matrix boost: %4d\n", boost);
+					subitem = subitem +  diff;
+				}
+			} else if (std::rand() % 5 == 0) {
+				diff = std::abs(subitem) / 6;
+				if (diff < 2) {
+					diff = 2;
+				}
+				int32_t boost = -diff + std::rand() % 2*diff;
+				if (boost != 0 ){
+					printf ("  special matrix boost: %4d\n", boost);
+					subitem = subitem + boost;				
+				}
+			}	
+
+		}
+	}
+
+   for (auto & item : military_numbers) {
+	   	if (std::rand() % 50 == 0) {
+			diff = std::abs(item) / 3;
+			if (diff < 10) {
+				diff = 10;
+			}
+			int32_t boost = -diff + std::rand() % 2*diff;
+			if (boost != 0 ){
+				printf (" special numbers boost: %4d\n", boost);
+				item = item +  boost;
+				
+			}
+		} else {
+			diff = std::abs(item) / 6;
+			if (diff < 2) {
+				diff = 2;
+			}
+			int32_t boost = -diff + std::rand() % 2*diff;
+			if (boost != 0 ){
+				printf (" special numbers boost: %4d\n", boost);
+				item = item +  boost;
+			}
+		}
+	}
+	
+	}
+void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn) {
+	printf (" %d: reviewig AI management data\n", pn);
+	if (old_msites + 5 > msites || old_psites + 5 > psites) {
+		printf ("    too WEAK performer\n");
+		
+		military_numbers = old_military_numbers;
+		military_matrix = old_military_matrix;		
+		scatter();
+		old_military_numbers = military_numbers;
+		old_military_matrix = military_matrix;
+		old_msites = msites;
+		old_psites = psites;		
+		}
+}
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;

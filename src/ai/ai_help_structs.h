@@ -67,6 +67,7 @@ enum class SchedulerTaskId : uint8_t {
 		kCheckTrainingsites,
 		kCountMilitaryVacant,
 		kCheckEnemySites,
+		kManagementUpdate,
 		kUnset
 	};
 
@@ -233,6 +234,7 @@ struct BuildableField {
 
 	bool preferred;
 	bool enemy_nearby;
+	bool enemy_accessible_;
 
 	uint8_t unowned_land_nearby;
 	// to identify that field is too close to border and no production building should be built there
@@ -266,7 +268,7 @@ struct BuildableField {
 	// unconnected buildings nearby
 	bool unconnected_nearby;
 	int16_t military_unstationed;
-	bool is_portspace;
+	Widelands::ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
@@ -274,6 +276,10 @@ struct BuildableField {
 	// it is not necessary to check resources (stones, fish...) too frequently as they do not change fast
 	// this stores time of last check
 	uint32_t last_resources_check_time;
+	int32_t military_score_;
+	bool inland;
+	uint16_t local_soldier_capacity;
+	bool is_militarysite;
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
@@ -472,6 +478,21 @@ struct MineTypesObserver {
 
 	uint16_t in_construction;
 	uint16_t finished;
+};
+
+//This is to keep all data related to AI magic numbers
+struct ManagementData {
+	ManagementData();
+	ManagementData(std::vector<std::vector<int16_t>>, std::vector<int16_t>);
+	void scatter();
+	void review(uint16_t, uint16_t, uint8_t);
+	
+	std::vector<std::vector<int16_t>> military_matrix;
+	std::vector<int16_t> military_numbers;
+	std::vector<std::vector<int16_t>> old_military_matrix;
+	std::vector<int16_t> old_military_numbers;	
+	uint16_t old_msites;
+	uint16_t old_psites;	
 };
 
 // this is used to count militarysites by their size
