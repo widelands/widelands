@@ -11,6 +11,8 @@ import sys
 # inputs, outputs #
 ###################
 # These files ar known to have rst comments; cpp files
+# Meaning of pairs:
+# (src_file, file_name_to_generate_html)
 cpp_pairs = (
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
@@ -23,13 +25,15 @@ cpp_pairs = (
 
 # This directories are scanned without knowing which file
 # has rst comments; scan for *.lua files
+# Meaning:
+# (src_dir, toc_to_place_found_RSTs_in)
 lua_dirs = (
-    ('data/scripting', 'aux'),
-    ('data/scripting/editor', 'editor'),
-    ('data/scripting/win_conditions', 'editor'),
-    ('data/tribes', 'tribes'),
-    ('data/tribes/scripting/help', 'tribes'),
-    ('data/tribes/buildings/militarysites/altanteans/castle', 'tribes'),
+    ('data/scripting', 'auxiliary'),
+    ('data/scripting/editor', 'lua_world'),
+    ('data/scripting/win_conditions', 'lua_world'),
+    ('data/tribes', 'lua_tribes'),
+    ('data/tribes/scripting/help', 'lua_tribes'),
+    ('data/tribes/buildings/militarysites/atlanteans/castle', 'lua_tribes'),
 )
 
 
@@ -44,6 +48,7 @@ def _find_basedir():
     source_dir = p.join(curdir, 'source')
     while not (p.exists(p.join(curdir, 'data/tribes')) and p.exists(p.join(curdir, 'data/world'))):
         curdir = p.abspath(p.join(curdir, p.pardir))
+
     return source_dir, curdir
 source_dir, base_dir = _find_basedir()
 
@@ -68,7 +73,7 @@ def extract_rst_from_cpp(inname, outname=None):
         out.write(output)
 
 
-def extract_rst_from_lua(directory):
+def extract_rst_from_lua(directory, toc):
     """
     Searches for /* RST comments in the given directory, strips the lines
     and prints them out on stdout or writes them to outname. Returns a list
@@ -76,11 +81,13 @@ def extract_rst_from_lua(directory):
     """
     # Used for replace_auxiliary_toc:
     rstnames = []
+    
     for filename in glob(p.join(base_dir, directory, '*.lua')):
-        data = open(p.join(base_dir, filename), 'r').read()
+        with open(p.join(base_dir, filename), 'r') as f:
+            data = f.read()
         res = re.findall(r"-- RST\s(.*?)(?:^(?!--))", data, re.M | re.DOTALL)
         if res:
-            outname = 'autogen_aux_%s.rst' % os.path.basename(
+            outname = 'autogen_'+toc+'_%s.rst' % os.path.basename(
                 os.path.splitext(filename)[0])
             rstnames.append(outname)
             outname = p.join(source_dir, outname)
@@ -93,14 +100,23 @@ def extract_rst_from_lua(directory):
             if output.strip():
                 out = sys.stdout if not outname else open(outname, 'w')
                 out.write(output)
+        
     return rstnames
 
 
-def replace_auxilary_toc(aux_fns):
-    aux_in = open(p.join(source_dir, 'auxiliary.rst.in'), 'r').read()
-    aux_in = aux_in.replace('REPLACE_ME',
-                            '\n'.join('   ' + fn for fn in aux_fns))
-    open(p.join(source_dir, 'auxiliary.rst'), 'w').write(aux_in)
+def replace_tocs(toc_rst_dict):
+    for toc_name, f_names in toc_rst_dict.items():
+
+        # Open original toc file
+        with open(p.join(source_dir, toc_name + '.rst.org'), 'r') as f:
+            f_content = f.read()
+
+        # Add the names to the content of original toc
+        f_content = f_content.replace('REPLACE_ME',
+                   '\n'.join('   ' + name for name in f_names))
+        
+        # Save modified content as new file
+        open(p.join(source_dir, toc_name + '.rst'), 'w').write(f_content)
 
 if __name__ == '__main__':
     def main():
@@ -108,11 +124,19 @@ if __name__ == '__main__':
             extract_rst_from_cpp(inf, outf)
 
         # Search the given dirs for rst-comments in every lua files
-        all_names = []
-        for dirs, toc in lua_dirs:
-            rstnames = extract_rst_from_lua(dirs)
-            all_names.extend(rstnames)
-        # Replace the auxiliary toc with all found rst comments in lua files.
-        replace_auxilary_toc(all_names)
+        # Create a dict with toc names as keys and a list for values
+        toc_fnames = {}
+        for f, toc_name in lua_dirs:
+            if not toc_name in toc_fnames:
+                toc_fnames[toc_name] = []
+        
+        for directory, toc in lua_dirs:
+            rstnames = extract_rst_from_lua(directory, toc)
+            if rstnames:
+                toc_fnames[toc].extend(rstnames)
+        
+        # Replace the predefined tocs with all found rst comments in lua files.    
+        replace_tocs(toc_fnames)
+        #replace_auxilary_toc(all_names)
 
     main()

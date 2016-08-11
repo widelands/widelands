@@ -1,0 +1,9 @@
+Scripts for Tribes
+==================
+
+Description of Tribe related scripts...
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME

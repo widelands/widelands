@@ -1,6 +1,6 @@
 -- RST
 -- tribes/buildings/militarysites/<name>/init.lua
--- --------------------
+-- ----------------------------------------------
 
 dirname = path.dirname(__file__)
 
