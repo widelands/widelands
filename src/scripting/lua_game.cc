@@ -321,9 +321,9 @@ int LuaPlayer::get_see_all(lua_State* const L) {
 */
 int LuaPlayer::send_message(lua_State* L) {
 	uint32_t n = lua_gettop(L);
-	std::string title = luaL_checkstring(L, 2);
+	const std::string title = luaL_checkstring(L, 2);
 	std::string heading = title;
-	std::string body = luaL_checkstring(L, 3);
+	const std::string body = luaL_checkstring(L, 3);
 	std::string icon = "images/wui/messages/menu_toggle_objectives_menu.png";
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
@@ -341,7 +341,7 @@ int LuaPlayer::send_message(lua_State* L) {
 
 		lua_getfield(L, 4, "status");
 		if (!lua_isnil(L, -1)) {
-			std::string s = luaL_checkstring(L, -1);
+			const std::string s = luaL_checkstring(L, -1);
 			if (s == "new")
 				st = Message::Status::kNew;
 			else if (s == "read")
@@ -360,14 +360,14 @@ int LuaPlayer::send_message(lua_State* L) {
 
 		lua_getfield(L, 4, "icon");
 		if (!lua_isnil(L, -1)) {
-			std::string s = luaL_checkstring(L, -1);
+			const std::string s = luaL_checkstring(L, -1);
 			if (!s.empty()) {
 				icon = s;
 			}
 		}
 		lua_getfield(L, 4, "heading");
 		if (!lua_isnil(L, -1)) {
-			std::string s = luaL_checkstring(L, -1);
+			const std::string s = luaL_checkstring(L, -1);
 			if (!s.empty()) {
 				heading = s;
 			}
@@ -947,8 +947,7 @@ const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RW(LuaObjective, visible), PROP_RW(LuaObjective, done),  {nullptr, nullptr, nullptr},
 };
 
-LuaObjective::LuaObjective(const Widelands::Objective& o) {
-	name_ = o.name();
+LuaObjective::LuaObjective(const Widelands::Objective& o) : name_(o.name()) {
 }
 
 void LuaObjective::__persist(lua_State* L) {

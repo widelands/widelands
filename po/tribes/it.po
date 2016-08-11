@@ -6,13 +6,13 @@
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
-# Luigi Lain <lainluigi86@tiscali.it>, 2015
+# Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-07 17:17+0000\n"
-"PO-Revision-Date: 2016-05-17 13:06+0000\n"
+"POT-Creation-Date: 2016-08-06 07:12+0000\n"
+"PO-Revision-Date: 2016-08-07 00:23+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -939,8 +939,8 @@ msgstr "fondendo del ferro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
 msgid "smelting gold"
 msgstr "fondendo dell'oro"
 
@@ -1064,25 +1064,25 @@ msgstr "sta forgiando un tridente leggero"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
 msgid "forging a long trident"
 msgstr "sta forgiando un tridente lungo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr "sta forgiando un tridente d'acciaio"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:112
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
 msgid "forging a double trident"
 msgstr "sta forgiando un tridente doppio"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
 msgid "forging a heavy double trident"
 msgstr "sta forgiando un tridente doppio pesante"
 
@@ -1179,14 +1179,14 @@ msgid "forging an ax"
 msgstr "sta forgiando un'ascia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
 msgid "forging a sharp ax"
 msgstr "sta forgiando un'ascia affilata"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:101
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:108
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
 msgid "forging a broad ax"
 msgstr "sta forgiando un'ascia grande"
 
@@ -1233,7 +1233,7 @@ msgstr "Birreria"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:53
 msgid "brewing strong beer"
-msgstr ""
+msgstr "sta producendo della birra forte"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
@@ -1264,7 +1264,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1284,7 +1284,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può più essere migliorata, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1383,7 +1383,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1420,7 +1420,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr ""
+msgstr "Il cacciatore al lavoro in questa casa del cacciatore non trova nessuna selvaggina nella sua area di lavoro. Ricorda che puoi costruire una capanna del guardiacaccia per rilasciare più selvaggina nei dintorni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:7
@@ -1440,7 +1440,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1460,7 +1460,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1606,19 +1606,19 @@ msgstr "Fucina da guerra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
 msgid "forging a bronze ax"
 msgstr "sta forgiando un'ascia di bronzo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:134
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a battle ax"
 msgstr "sta forgiando un'ascia da battaglia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:147
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
 msgid "forging a warrior’s ax"
 msgstr "sta forgiando un'ascia da guerriero"
 
@@ -1710,7 +1710,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -1724,7 +1724,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -1779,7 +1779,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera d'oro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -1793,7 +1793,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera d'oro è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -1826,7 +1826,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -1840,7 +1840,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -2041,25 +2041,25 @@ msgid "forging a wooden spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
 msgid "forging an advanced spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:117
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
 msgid "forging a heavy spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
 msgid "forging a war spear"
 msgstr ""
 
@@ -2727,7 +2727,7 @@ msgstr "Pane"
 #: ../../data/tribes/wares/bread_barbarians/init.lua:7
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Pane pitta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_empire/init.lua:7

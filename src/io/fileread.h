@@ -53,6 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
+
 		Pos operator+=(Pos const other) {
 			return pos += other.pos;
 		}
@@ -96,7 +97,7 @@ public:
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
-	void set_file_pos(Pos pos);
+	void set_file_pos(const Pos& pos);
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
@@ -104,10 +105,10 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* data(uint32_t bytes, Pos pos = Pos::null());
+	char* data(uint32_t bytes, const Pos& pos = Pos::null());
 
 	// Returns the whole file as a string starting from 'pos'.
-	char* c_string(Pos pos);
+	char* c_string(const Pos& pos);
 
 	// Returns the next line.
 	char* read_line();

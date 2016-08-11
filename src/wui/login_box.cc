@@ -32,10 +32,9 @@ LoginBox::LoginBox(Panel& parent)
 	int32_t margin = 10;
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
+	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_nickname = new UI::EditBox(
 	   this, 150, margin, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
-
-	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_password =
 	   new UI::EditBox(this, 150, 40, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
 
@@ -45,7 +44,6 @@ LoginBox::LoginBox(Panel& parent)
 
 	cb_register = new UI::Checkbox(this, Point(margin, 110), _("Log in to a registered account"), "",
 	                               get_inner_w() - 2 * margin);
-
 	cb_auto_log = new UI::Checkbox(this, Point(margin, 135),
 	                               _("Automatically use this login information from now on."), "",
 	                               get_inner_w() - 2 * margin);
@@ -68,6 +66,7 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
 	eb_password->set_text(s.get_string("password", ""));
 	cb_register->set_state(s.get_bool("registered", false));
+	eb_nickname->focus();
 }
 
 /// called, if "login" is pressed
