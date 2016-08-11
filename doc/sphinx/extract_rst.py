@@ -11,8 +11,7 @@ import sys
 # inputs, outputs #
 ###################
 # These files ar known to have rst comments; cpp files
-# Meaning of pairs:
-# (src_file, file_name_to_generate_html)
+# Meaning: (src_file, file_name_to_generate_rst)
 cpp_pairs = (
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
@@ -25,8 +24,7 @@ cpp_pairs = (
 
 # This directories are scanned without knowing which file
 # has rst comments; scan for *.lua files
-# Meaning:
-# (src_dir, toc_to_place_found_RSTs_in)
+# Meaning: (src_dir, toc_name_to_place)
 lua_dirs = (
     ('data/scripting', 'auxiliary'),
     ('data/scripting/editor', 'lua_world'),
@@ -85,16 +83,16 @@ def extract_rst_from_lua(directory, toc):
     for filename in glob(p.join(base_dir, directory, '*.lua')):
         with open(p.join(base_dir, filename), 'r') as f:
             data = f.read()
-            
+
         res = re.findall(r"-- RST\s(.*?)(?:^(?!--))", data, re.M | re.DOTALL)
-        
+
         if res:
             # File with RST commet found
-            outname = 'autogen_'+toc+'_%s.rst' % os.path.basename(
+            outname = 'autogen_' + toc + '_%s.rst' % os.path.basename(
                 os.path.splitext(filename)[0])
             rst_file_names.append(outname)
             outname = p.join(source_dir, outname)
-            
+
             output = ''
             for r in res:
                 r = re.subn(re.compile(r'^-- ?', re.M | re.DOTALL), '', r)[0]
@@ -103,11 +101,13 @@ def extract_rst_from_lua(directory, toc):
             if output.strip():
                 out = sys.stdout if not outname else open(outname, 'w')
                 out.write(output)
-        
+
     return rst_file_names
 
 
 def replace_tocs(toc_rst_dict):
+    """Open predefined toc files, add the produced filenames from
+    extract_rst_from_lua() and store it as regular .rst file."""
     for toc_name, f_names in toc_rst_dict.items():
 
         # Open original toc file
@@ -116,10 +116,11 @@ def replace_tocs(toc_rst_dict):
 
         # Add the names to the content of original toc
         f_content = f_content.replace('REPLACE_ME',
-                   '\n'.join('   ' + name for name in f_names))
-        
+                                      '\n'.join('   ' + name for name in f_names))
+
         # Save modified content as new file
-        open(p.join(source_dir, 'autogen_toc_' + toc_name + '.rst'), 'w').write(f_content)
+        open(p.join(source_dir, 'autogen_toc_' +
+                    toc_name + '.rst'), 'w').write(f_content)
 
 if __name__ == '__main__':
     def main():
@@ -137,9 +138,9 @@ if __name__ == '__main__':
                     toc_fnames[toc].extend(rst_file_names)
                 else:
                     # no toc found, create it and add value list
-                    toc_fnames[toc]=rst_file_names
-        
-        # Replace the predefined tocs with all found files    
+                    toc_fnames[toc] = rst_file_names
+
+        # Replace the predefined tocs with all found files
         replace_tocs(toc_fnames)
 
     main()
