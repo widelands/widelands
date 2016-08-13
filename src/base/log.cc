@@ -18,17 +18,18 @@
  */
 
 #include "base/log.h"
-#include "base/macros.h"
-
-#include <SDL2/SDL.h>
 
 #include <cstdarg>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
+
+#include <SDL2/SDL.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
+
+#include "base/macros.h"
 
 namespace {
 
@@ -114,9 +115,9 @@ bool g_verbose = false;
 void log(const char* const fmt, ...) {
 #ifdef _WIN32
 	static WindowsLogger logger;
-#else 
+#else
 	static Logger logger;
-#endif 
+#endif
 	char buffer[2048];
 	va_list va;
 

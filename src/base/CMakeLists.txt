@@ -8,6 +8,8 @@ wl_library(base_log
   SRCS
     log.cc
     log.h
+  DEPENDS
+    base_macros
 )
 
 wl_library(base_exceptions
