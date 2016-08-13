@@ -41,6 +41,29 @@ ZipFilesystem::ZipFile::ZipFile(const std::string& zipfile)
      basename_(fs_filename(zipfile.c_str())),
      write_handle_(nullptr),
      read_handle_(nullptr) {
+	std::string first_entry;
+	size_t longest_prefix = 0;
+	unz_file_info file_info;
+	char filename_inzip[256];
+	for (;;) {
+		unzGetCurrentFileInfo(read_handle(), &file_info, filename_inzip,
+		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		if (first_entry.empty()) {
+			first_entry = filename_inzip;
+			longest_prefix = first_entry.size();
+		} else {
+			const std::string entry = filename_inzip;
+			size_t pos = 0;
+			while (pos < longest_prefix && pos < entry.size() && first_entry[pos] == entry[pos]) {
+				++pos;
+			}
+			longest_prefix = pos;
+		}
+
+		if (unzGoToNextFile(read_handle()) == UNZ_END_OF_LIST_OF_FILE)
+			break;
+	}
+	common_prefix_ = first_entry.substr(0, longest_prefix);
 }
 
 ZipFilesystem::ZipFile::~ZipFile() {
@@ -84,18 +107,7 @@ void ZipFilesystem::ZipFile::open_for_unzip() {
 }
 
 std::string ZipFilesystem::ZipFile::strip_basename(const std::string& filename) {
-	if (filename.compare(0, basename_.length(), basename_) == 0) {
-		// filename contains the name of the zip file as first element. This means
-		// this is an old zip file where all data were in a directory named as the
-		// file inside the zip file.
-		// return the filename without the first element
-		return filename.substr(basename_.length() + 1);
-	}
-
-	// seems to be a new zipfile without directory or a old zipfile was renamed
-	if (*filename.begin() == '/')
-		return filename.substr(1);
-	return filename;
+	return filename.substr(common_prefix_.size());
 }
 
 const zipFile& ZipFilesystem::ZipFile::write_handle() {
