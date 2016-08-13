@@ -1,0 +1,24 @@
+# Automatically created by Widelands svn4982 (inoffical)
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Lord Sandkeks"
+tribe="empire"
+ai=
+
+[player_2]
+name="Fürst Lapsus"
+tribe="barbarians"
+ai=
+
+[player_3]
+name="Satan Kurl"
+tribe="empire"
+ai=
+
+[player_4]
+name="Baron Heidschnuck"
+tribe="atlanteans"
+ai=
