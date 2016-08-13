@@ -832,18 +832,6 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
  * true otherwise.
 */
 void WLApplication::handle_commandline_parameters() {
-	if (commandline_.count("logfile")) {
-		logfile_ = commandline_["logfile"];
-		std::cerr << "Redirecting log target to: " << logfile_ << std::endl;
-		if (logfile_.size() != 0) {
-			// TODO(unknown): (very small) memory leak of 1 ofstream;
-			// swaw the buffers (internally) of the file and wout
-			std::ofstream* widelands_out = new std::ofstream(logfile_.c_str());
-			std::streambuf* logbuf = widelands_out->rdbuf();
-			wout.rdbuf(logbuf);
-		}
-		commandline_.erase("logfile");
-	}
 	if (commandline_.count("nosound")) {
 		g_sound_handler.nosound_ = true;
 		commandline_.erase("nosound");
