@@ -637,15 +637,12 @@ void Profile::read(char const* const filename, char const* const global_section,
 		char* p = nullptr;
 		Section* s = nullptr;
 
-		bool reading_multiline = 0;
 		std::string data;
 		char* key = nullptr;
 		bool translate_line = false;
 		while (char* line = fr.read_line()) {
 			++linenr;
-
-			if (!reading_multiline)
-				p = line;
+			p = line;
 
 			p = skipwhite(p);
 			if (!p[0] || p[0] == '#')
@@ -661,60 +658,27 @@ void Profile::read(char const* const filename, char const* const global_section,
 			} else {
 				char* tail = nullptr;
 				translate_line = false;
-				if (reading_multiline) {
-					// Note: comments are killed by walking backwards into the string
-					rtrim(p);
-					while (*line != '\'' && *line != '"') {
-						if (*line == 0)
-							throw wexception("runaway multiline string");
-						if (*line == '_')
-							translate_line = true;
-						++line;
-					}
-
-					// skip " or '
-					++line;
-
-					for (char* eot = line + strlen(line) - 1; *eot != '"' && *eot != '\''; --eot)
-						*eot = 0;
-					// NOTE: we leave the last '"' and do not remove them
-					tail = line;
-				} else {
-					tail = strchr(p, '=');
-					if (!tail)
-						throw wexception("invalid syntax: %s", line);
-					*tail++ = '\0';
-					key = p;
-					if (*tail == '_') {
-						tail += 1;  // skip =_, which is only used for translations
-						translate_line = true;
-					}
-					tail = skipwhite(tail);
-					killcomments(tail);
-					rtrim(tail);
-					rtrim(p);
-
-					// first, check for multiline string
-					if ((tail[0] == '\'' || tail[0] == '"') && (tail[1] == '\'' || tail[1] == '"')) {
-						reading_multiline = true;
-						tail += 2;
-					}
-
-					// then remove surrounding '' or ""
-					if (tail[0] == '\'' || tail[0] == '"')
-						++tail;
+				tail = strchr(p, '=');
+				if (!tail)
+					throw wexception("invalid syntax: %s", line);
+				*tail++ = '\0';
+				key = p;
+				if (*tail == '_') {
+					tail += 1;  // skip =_, which is only used for translations
+					translate_line = true;
 				}
+				tail = skipwhite(tail);
+				killcomments(tail);
+				rtrim(tail);
+				rtrim(p);
+
+				// then remove surrounding '' or ""
+				if (tail[0] == '\'' || tail[0] == '"')
+					++tail;
 				if (tail) {
 					char* const eot = tail + strlen(tail) - 1;
 					if (*eot == '\'' || *eot == '"') {
 						*eot = '\0';
-						if (*tail) {
-							char* const eot2 = tail + strlen(tail) - 1;
-							if (*eot2 == '\'' || *eot2 == '"') {
-								reading_multiline = false;
-								*eot2 = '\0';
-							}
-						}
 					}
 
 					// ready to insert
@@ -730,7 +694,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 					} else {
 						data += tail;
 					}
-					if (s && !reading_multiline) {
+					if (s) {
 						s->create_val_duplicate(key, data.c_str());
 						data.clear();
 					}
