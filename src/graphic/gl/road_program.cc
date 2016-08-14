@@ -86,9 +86,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
-	   start.pixel_y - road_overshoot_y + road_thickness_y,
-	   texture_rect.x,
-	   texture_rect.y,
+	   start.pixel_y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -96,20 +94,16 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
-	   start.pixel_y - road_overshoot_y - road_thickness_y,
-	   texture_rect.x,
-	   texture_rect.y + texture_rect.h,
-	   start.brightness,
+	   start.pixel_y - road_overshoot_y - road_thickness_y, texture_rect.x,
+	   texture_rect.y + texture_rect.h, start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x + road_thickness_x,
-	   end.pixel_y + road_overshoot_y + road_thickness_y,
-	   texture_rect.x + texture_rect.w,
-	   texture_rect.y,
-	   end.brightness,
+	   end.pixel_y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
+	   texture_rect.y, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
@@ -123,10 +117,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x - road_thickness_x,
-	   end.pixel_y + road_overshoot_y - road_thickness_y,
-	   texture_rect.x + texture_rect.w,
-	   texture_rect.y + texture_rect.h,
-	   end.brightness,
+	   end.pixel_y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
+	   texture_rect.y + texture_rect.h, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
@@ -148,13 +140,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width,
-				         renderbuffer_height,
-				         field,
-				         fields_to_draw.at(rn_index),
-				         road,
-				         kEast,
-				         &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(rn_index),
+				         road, kEast, &gl_texture);
 			}
 		}
 
@@ -164,13 +151,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width,
-				         renderbuffer_height,
-				         field,
-				         fields_to_draw.at(brn_index),
-				         road,
-				         kSouthEast,
-				         &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(brn_index),
+				         road, kSouthEast, &gl_texture);
 			}
 		}
 
@@ -181,13 +163,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width,
-				         renderbuffer_height,
-				         field,
-				         fields_to_draw.at(bln_index),
-				         road,
-				         kSouthWest,
-				         &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(bln_index),
+				         road, kSouthWest, &gl_texture);
 			}
 		}
 	}
@@ -195,9 +172,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array({
-		attr_position_, attr_texture_position_, attr_brightness_
-	});
+	gl_state.enable_vertex_attrib_array({attr_position_, attr_texture_position_, attr_brightness_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);

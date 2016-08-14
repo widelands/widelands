@@ -38,16 +38,17 @@ using namespace Widelands;
 /* Helper classes */
 /******************/
 struct TestingFlag : public Flag {
-	TestingFlag(EditorGameBase &, Coords const c) : Flag() {
+	TestingFlag(EditorGameBase&, const Coords& c) : Flag() {
 		set_flag_position(c);
 	}
-
 };
 struct TestingMap : public Map {
-	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
+	TestingMap(int const w, int const h) : Map() {
+		set_size(w, h);
+	}
 
-	void recalc_for_field_area(const World&, Area<FCoords>) override {}
-
+	void recalc_for_field_area(const World&, Area<FCoords>) override {
+	}
 };
 
 /*************************************************************************/
@@ -55,16 +56,16 @@ struct TestingMap : public Map {
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
-	g_fs = new LayeredFileSystem();
+		g_fs = new LayeredFileSystem();
 	}
-	~WlTestFixture() {delete g_fs; g_fs = nullptr;}
+	~WlTestFixture() {
+		delete g_fs;
+		g_fs = nullptr;
+	}
 };
 
 struct SimpleRoadTestsFixture : public WlTestFixture {
-	SimpleRoadTestsFixture() :
-		g(nullptr),
-		path(Coords(5, 5))
-	{
+	SimpleRoadTestsFixture() : g(nullptr), path(Coords(5, 5)) {
 		map = new TestingMap(32, 32);
 		g.set_map(map);
 
@@ -80,12 +81,12 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
-	TestingMap * map;
+	TestingMap* map;
 	EditorGameBase g;
 	Road r;
 	Path path;
-	TestingFlag * start;
-	TestingFlag * end;
+	TestingFlag* start;
+	TestingFlag* end;
 };
 
 BOOST_AUTO_TEST_SUITE(Road)
@@ -100,10 +101,10 @@ BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {
 	BOOST_CHECK_EQUAL(r.get_size(), static_cast<int32_t>(BaseImmovable::SMALL));
 }
 BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
-	BOOST_TEST_MESSAGE
-		(start->get_position().x << ',' << start->get_position().y <<
-		 "   " << end->get_position().x << ',' << end->get_position().y <<
-		 "   " << path.get_start().x << ',' << path.get_start().y);
+	BOOST_TEST_MESSAGE(start->get_position().x
+	                   << ',' << start->get_position().y << "   " << end->get_position().x << ','
+	                   << end->get_position().y << "   " << path.get_start().x << ','
+	                   << path.get_start().y);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

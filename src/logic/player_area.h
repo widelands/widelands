@@ -25,14 +25,13 @@
 
 namespace Widelands {
 
-template <typename AreaType = Area<> > struct PlayerArea : public AreaType {
-	PlayerArea() : player_number(0) {}
-	PlayerArea(const PlayerNumber pn, const AreaType area)
-		: AreaType(area), player_number(pn)
-	{}
+template <typename AreaType = Area<>> struct PlayerArea : public AreaType {
+	PlayerArea() : player_number(0) {
+	}
+	PlayerArea(const PlayerNumber pn, const AreaType area) : AreaType(area), player_number(pn) {
+	}
 	PlayerNumber player_number;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_AREA_H

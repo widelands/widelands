@@ -81,20 +81,20 @@ struct DefaultAI : ComputerPlayer {
 	~DefaultAI();
 	void think() override;
 
-	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
-	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
-	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
-	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
-	enum class Attackable : uint8_t {kNotAttackable, kAttackable, kAttackableAndWeak, kAttackableVeryWeak};
-
-	enum class Tribes : uint8_t {
-		kNone,
-		kBarbarians,
-		kAtlanteans,
-		kEmpire
+	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
+	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
+	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
+	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
+	enum class Attackable : uint8_t {
+		kNotAttackable,
+		kAttackable,
+		kAttackableAndWeak,
+		kAttackableVeryWeak
 	};
 	
 	enum class SoldiersStatus : uint8_t {kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6};
+
+	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -153,8 +153,8 @@ private:
 	void update_productionsite_stats();
 
 	// for productionsites
-	Widelands::BuildingNecessity check_building_necessity
-		(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
+	Widelands::BuildingNecessity
+	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 	// for militarysites (overloading the function)
 	Widelands::BuildingNecessity check_building_necessity
 		(Widelands::BuildingObserver&, uint32_t);
@@ -186,7 +186,7 @@ private:
 	bool check_enemy_sites(uint32_t);
 	void print_stats(uint32_t);
 	// return single number of strength of vector of soldiers
-	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	uint32_t calculate_stocklevel(Widelands::BuildingObserver&);
 	uint32_t calculate_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
@@ -199,14 +199,14 @@ private:
 	bool other_player_accessible(uint32_t max_distance,
 	                             uint32_t* tested_fields,
 	                             uint16_t* mineable_fields_count,
-	                             const Widelands::Coords starting_spot,
-	                             const WalkSearch type);
+	                             const Widelands::Coords& starting_spot,
+	                             const WalkSearch& type);
 
 	int32_t recalc_with_border_range(const Widelands::BuildableField&, int32_t);
 
 	void consider_productionsite_influence(Widelands::BuildableField&,
-														Widelands::Coords,
-														const Widelands::BuildingObserver&);
+	                                       Widelands::Coords,
+	                                       const Widelands::BuildingObserver&);
 
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
@@ -229,8 +229,8 @@ private:
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
-	template<typename T> void check_range(const T, const  T, const  T, const char *);
-	template<typename T> void check_range(const T, const  T, const char *);
+	template <typename T> void check_range(const T, const T, const T, const char*);
+	template <typename T> void check_range(const T, const T, const char*);
 
 private:
 	// Variables of default AI
@@ -310,9 +310,9 @@ private:
 	uint32_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
-	uint32_t last_road_dismantled_; // uses to prevent too frequent road dismantling
+	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
 
-	bool seafaring_economy;          // false by default, until first port space is found
+	bool seafaring_economy;  // false by default, until first port space is found
 	uint32_t expedition_ship_;
 
 	int32_t spots_;  // sum of buildable fields
@@ -334,11 +334,12 @@ private:
 	// This points to persistent data stored in Player object
 	Widelands::Player::AiPersistentState* persistent_data;
 
-	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
-	std::vector<std::string> const armors_and_weapons =
-		{"ax", "armor", "helm", "lance", "trident", "tabard", "shield", "mask", "spear"};
+	// this is a bunch of patterns that have to identify weapons and armors for input queues of
+	// trainingsites
+	std::vector<std::string> const armors_and_weapons = {
+	   "ax", "armor", "helm", "lance", "trident", "tabard", "shield", "mask", "spear"};
 
-	enum {kReprioritize, kStopShipyard, kStapShipyard};
+	enum { kReprioritize, kStopShipyard, kStapShipyard };
 
 	std::vector<int16_t> marine_task_queue;
 	

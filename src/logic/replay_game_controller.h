@@ -26,16 +26,16 @@
 #include "logic/game_controller.h"
 
 namespace Widelands {
-	class ReplayReader;
+class ReplayReader;
 }
 
 class ReplayGameController : public GameController {
 public:
-	ReplayGameController(Widelands::Game & game, const std::string & filename);
+	ReplayGameController(Widelands::Game& game, const std::string& filename);
 
 	void think() override;
 
-	void send_player_command(Widelands::PlayerCommand &) override;
+	void send_player_command(Widelands::PlayerCommand&) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
@@ -46,12 +46,13 @@ public:
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
-		CmdReplayEnd (uint32_t const init_duetime) : Widelands::Command(init_duetime) {}
-		virtual void execute (Widelands::Game & game);
+		CmdReplayEnd(uint32_t const init_duetime) : Widelands::Command(init_duetime) {
+		}
+		virtual void execute(Widelands::Game& game);
 		virtual Widelands::QueueCommandTypes id() const;
 	};
 
-	Widelands::Game & game_;
+	Widelands::Game& game_;
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
 	int32_t time_;

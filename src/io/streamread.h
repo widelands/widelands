@@ -27,7 +27,6 @@
 #include "base/wexception.h"
 #include "io/machdep.h"
 
-
 /**
  * Abstract base class for stream-like data sources.
  * It is intended for deserializing network packets and for reading log-type
@@ -43,7 +42,8 @@
  */
 class StreamRead {
 public:
-	explicit StreamRead() {}
+	explicit StreamRead() {
+	}
 	virtual ~StreamRead();
 
 	/**
@@ -52,14 +52,14 @@ public:
 	 * \return the number of bytes that were actually read. Will return 0 at
 	 * end of stream.
 	 */
-	virtual size_t data(void * read_data, size_t bufsize) = 0;
+	virtual size_t data(void* read_data, size_t bufsize) = 0;
 
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
 	virtual bool end_of_file() const = 0;
 
-	void data_complete(void * data, size_t size);
+	void data_complete(void* data, size_t size);
 
 	int8_t signed_8();
 	uint8_t unsigned_8();
@@ -68,12 +68,14 @@ public:
 	int32_t signed_32();
 	uint32_t unsigned_32();
 	std::string string();
-	virtual char const * c_string() {throw;}
+	virtual char const* c_string() {
+		throw;
+	}
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
 	struct DataError : public WException {
-		DataError(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
+		DataError(char const* const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)
 

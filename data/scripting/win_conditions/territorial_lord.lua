@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/formatting.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -168,12 +169,12 @@ return {
                    remaining_time / 60))
                :format(remaining_time / 60)
 
-         for idx, p in ipairs(plrs) do
-            if candidateisteam and currentcandidate == p.team
-               or not candidateisteam and currentcandidate == p.name then
-               send_message(p, game_status.title, msg2, {popup = true})
+         for idx, player in ipairs(plrs) do
+            if candidateisteam and currentcandidate == player.team
+               or not candidateisteam and currentcandidate == player.name then
+               send_message(player, game_status.title, rt(p(msg2)), {popup = true})
             else
-               send_message(p, game_status.title, msg1, {popup = true})
+               send_message(player, game_status.title, rt(p(msg1)), {popup = true})
             end
          end
       end

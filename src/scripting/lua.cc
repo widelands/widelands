@@ -19,17 +19,17 @@
 
 #include "scripting/lua.h"
 
-void lua_pushstring (lua_State * L, const std::string & s) {
+void lua_pushstring(lua_State* L, const std::string& s) {
 	lua_pushstring(L, s.c_str());
 }
 
-lua_State * luaL_checkthread(lua_State * L, int n) {
+lua_State* luaL_checkthread(lua_State* L, int n) {
 	luaL_checktype(L, n, LUA_TTHREAD);
-	lua_State * thread = lua_tothread(L, n);
+	lua_State* thread = lua_tothread(L, n);
 	return thread;
 }
 
-bool luaL_checkboolean(lua_State * L, int n) {
+bool luaL_checkboolean(lua_State* L, int n) {
 	if (lua_isboolean(L, n))
 		return lua_toboolean(L, n);
 	return luaL_checkinteger(L, n);

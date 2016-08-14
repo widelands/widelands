@@ -36,22 +36,21 @@ struct RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	using ResetCycleFn = boost::function<void ()>;
+	using ResetCycleFn = boost::function<void()>;
 
-	Router(const ResetCycleFn & reset);
+	Router(const ResetCycleFn& reset);
 
-	bool find_route
-		(RoutingNode & start, RoutingNode & end,
-		 IRoute * route,
-		 WareWorker type,
-		 int32_t cost_cutoff,
-		 ITransportCostCalculator   & cost_calculator);
+	bool find_route(RoutingNode& start,
+	                RoutingNode& end,
+	                IRoute* route,
+	                WareWorker type,
+	                int32_t cost_cutoff,
+	                ITransportCostCalculator& cost_calculator);
 	uint32_t assign_cycle();
 
 private:
 	ResetCycleFn reset_;
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
+	uint32_t mpf_cycle;  ///< pathfinding cycle, see Flag::mpf_cycle
 };
-
 }
 #endif  // end of include guard: WL_ECONOMY_ROUTER_H

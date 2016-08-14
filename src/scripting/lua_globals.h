@@ -24,8 +24,7 @@
 
 namespace LuaGlobals {
 
-void luaopen_globals(lua_State *);
-
+void luaopen_globals(lua_State*);
 }
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H

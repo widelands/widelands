@@ -20,11 +20,11 @@
 #ifndef WL_UI_FSMENU_MULTIPLAYER_H
 #define WL_UI_FSMENU_MULTIPLAYER_H
 
-#include "ui_fsmenu/main_menu.h"
 #include "network/internet_gaming.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/main_menu.h"
 
 /**
  * Fullscreen Menu for MultiPlayer.
@@ -36,26 +36,32 @@ public:
 
 	void show_internet_login();
 	void internet_login();
-	std::string get_nickname() {return nickname_;}
-	std::string get_password() {return password_;}
-	bool registered()          {return register_;}
+	std::string get_nickname() {
+		return nickname_;
+	}
+	std::string get_password() {
+		return password_;
+	}
+	bool registered() {
+		return register_;
+	}
 
 protected:
 	void clicked_ok() override;
 
 private:
 	UI::Textarea title;
-	UI::Box      vbox;
-	UI::Button   metaserver;
-	UI::Button*  showloginbox;
-	UI::Button   lan;
-	UI::Button   back;
+	UI::Box vbox;
+	UI::Button metaserver;
+	UI::Button* showloginbox;
+	UI::Button lan;
+	UI::Button back;
 
 	// Values from internet login window
 	std::string nickname_;
 	std::string password_;
-	bool        register_;
-	bool        auto_log_;
+	bool register_;
+	bool auto_log_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYER_H

@@ -26,15 +26,14 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 
-MapTable::MapTable
-		(UI::Panel * parent,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const bool descending) :
-	UI::Table<uintptr_t>(parent, x, y, w, h, descending) {
+MapTable::MapTable(
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
+   : UI::Table<uintptr_t>(parent, x, y, w, h, descending) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align::kHCenter);
-	add_column(get_w() - 35 - 115, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft);
+	add_column(
+	   get_w() - 35 - 115, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft);
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
 	set_sort_column(0);
 }
@@ -48,7 +47,8 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
 			te.set_string(0, "");
-			te.set_picture(1,  g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
+			te.set_picture(
+			   1, g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
 			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
@@ -62,10 +62,8 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 			if (type == MapData::DisplayType::kFilenames) {
 				set_column_title(1, _("Filename"));
-				te.set_picture(
-							1,
-							g_gr->images().get(picture),
-							FileSystem::filename_without_ext(mapdata.filename.c_str()));
+				te.set_picture(1, g_gr->images().get(picture),
+				               FileSystem::filename_without_ext(mapdata.filename.c_str()));
 			} else {
 				set_column_title(1, _("Map Name"));
 				if (type == MapData::DisplayType::kMapnames) {

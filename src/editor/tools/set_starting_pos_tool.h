@@ -33,23 +33,26 @@ struct EditorSetStartingPosTool : public EditorTool {
 	EditorSetStartingPosTool();
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<>,
+	                          const Widelands::NodeAndTriangle<>&,
 	                          EditorInteractive&,
 	                          EditorActionArgs*,
-							  Widelands::Map*) override;
-	char const * get_sel_impl() const override
-		{return current_sel_pic_;}
+	                          Widelands::Map*) override;
+	char const* get_sel_impl() const override {
+		return current_sel_pic_;
+	}
 
 	Widelands::PlayerNumber get_current_player() const;
 	void set_current_player(int32_t);
-	bool has_size_one() const override {return true;}
+	bool has_size_one() const override {
+		return true;
+	}
 
 private:
-	char const * fsel_picsname_;
-	char const * current_sel_pic_;
+	char const* fsel_picsname_;
+	char const* current_sel_pic_;
 };
 
-int32_t editor_tool_set_starting_pos_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
+int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
+                                              Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H

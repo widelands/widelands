@@ -26,7 +26,9 @@
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 
-namespace Widelands {class Game;}
+namespace Widelands {
+class Game;
+}
 
 /**
  * This class shows a game for somebody who is only a spectator.
@@ -36,12 +38,11 @@ namespace Widelands {class Game;}
  * This class provides the UI, runs the game logic, etc.
  */
 struct InteractiveSpectator : public InteractiveGameBase {
-	InteractiveSpectator
-		(Widelands::Game &, Section & global_s, bool multiplayer = false);
+	InteractiveSpectator(Widelands::Game&, Section& global_s, bool multiplayer = false);
 
 	~InteractiveSpectator();
 
-	Widelands::Player * get_player() const override;
+	Widelands::Player* get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
@@ -51,7 +52,7 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
-	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) override;
+	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
@@ -65,10 +66,8 @@ private:
 	UI::Button toggle_statistics_;
 	UI::Button toggle_minimap_;
 
-
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;
 };
-
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

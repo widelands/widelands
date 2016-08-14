@@ -40,7 +40,6 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 
-
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 6;
@@ -51,13 +50,11 @@ std::string GamePreloadPacket::get_localized_win_condition() const {
 	return _(win_condition_);
 }
 
-void GamePreloadPacket::read
-	(FileSystem & fs, Game &, MapObjectLoader * const)
-{
+void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 	try {
 		Profile prof;
 		prof.read("preload", nullptr, fs);
-		Section & s = prof.get_safe_section("global");
+		Section& s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 
 		if (packet_version == kCurrentPacketVersion) {
@@ -77,27 +74,23 @@ void GamePreloadPacket::read
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("preload: %s", e.what());
 	}
 }
 
-
-void GamePreloadPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
-
+void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	Profile prof;
-	Section & s = prof.create_section("global");
+	Section& s = prof.create_section("global");
 
-	InteractivePlayer const * const ipl = game.get_ipl();
+	InteractivePlayer const* const ipl = game.get_ipl();
 
-	s.set_int   ("packet_version", kCurrentPacketVersion);
+	s.set_int("packet_version", kCurrentPacketVersion);
 
 	//  save some kind of header.
-	s.set_int   ("gametime",       game.get_gametime());
-	const Map & map = game.map();
-	s.set_string("mapname",        map.get_name());  // Name of map
+	s.set_int("gametime", game.get_gametime());
+	const Map& map = game.map();
+	s.set_string("mapname", map.get_name());  // Name of map
 
 	if (ipl) {
 		// player that saved the game.
@@ -125,16 +118,16 @@ void GamePreloadPacket::write
 		return;
 	}
 
-	std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
+	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 	if (sw.get() != nullptr) {
-		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+		const MiniMapLayer flags =
+		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		if (ipl != nullptr) {  // Player
 			write_minimap_image(game, &ipl->player(), ipl->get_viewpoint(), flags, sw.get());
-		} else { // Observer
+		} else {  // Observer
 			write_minimap_image(game, nullptr, Point(0, 0), flags, sw.get());
 		}
 		sw->flush();
 	}
 }
-
 }

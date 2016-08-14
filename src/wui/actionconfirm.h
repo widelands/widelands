@@ -31,27 +31,19 @@ struct Ship;
 }
 
 // Building confirm windows
-void show_bulldoze_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * const todestroy = nullptr);
+void show_bulldoze_confirm(InteractivePlayer& player,
+                           Widelands::Building& building,
+                           Widelands::PlayerImmovable* const todestroy = nullptr);
 
-void show_dismantle_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building);
+void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building);
 
-void show_enhance_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 const Widelands::DescriptionIndex & id);
+void show_enhance_confirm(InteractivePlayer& player,
+                          Widelands::Building& building,
+                          const Widelands::DescriptionIndex& id);
 
 // Ship confirm windows
-void show_ship_sink_confirm
-	(InteractivePlayer & player,
-	 Widelands::Ship & ship);
+void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
-void show_ship_cancel_expedition_confirm
-	(InteractivePlayer & player,
-	 Widelands::Ship & ship);
+void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

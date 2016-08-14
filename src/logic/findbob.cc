@@ -25,32 +25,25 @@
 
 namespace Widelands {
 
-bool FindBobAttribute::accept(Bob * const bob) const
-{
+bool FindBobAttribute::accept(Bob* const bob) const {
 	return bob->has_attribute(attrib);
 }
 
-bool FindBobEnemySoldier::accept(Bob * const imm) const
-{
+bool FindBobEnemySoldier::accept(Bob* const imm) const {
 	if (upcast(Soldier, soldier, imm))
-		if
-			(soldier->is_on_battlefield() &&
-			 (!player || soldier->owner().is_hostile(*player)) &&
-			 soldier->get_current_health())
+		if (soldier->is_on_battlefield() && (!player || soldier->owner().is_hostile(*player)) &&
+		    soldier->get_current_health())
 			return true;
 
 	return false;
 }
 
-bool FindBobShip::accept(Bob * bob) const
-{
+bool FindBobShip::accept(Bob* bob) const {
 	return bob->descr().type() == MapObjectType::SHIP;
 }
 
-bool FindBobCritter::accept(Bob * bob) const
-{
+bool FindBobCritter::accept(Bob* bob) const {
 	return bob->descr().type() == MapObjectType::CRITTER;
 }
 
-
-} // namespace Widelands
+}  // namespace Widelands

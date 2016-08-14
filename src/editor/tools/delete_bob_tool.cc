@@ -29,18 +29,17 @@
 */
 int32_t
 EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
-                                       Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                        EditorInteractive& parent,
                                        EditorActionArgs* args,
-									   Widelands::Map* map) {
-	Widelands::EditorGameBase & egbase = parent.egbase();
+                                       Widelands::Map* map) {
+	Widelands::EditorGameBase& egbase = parent.egbase();
 	const int32_t radius = args->sel_radius;
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(*map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map->get_fcoords(center.node), radius));
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 
-	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob()) {
+	do
+		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 			args->old_bob_type.push_back(&bob->descr());
 			bob->remove(egbase);
 		} else {
@@ -52,17 +51,16 @@ EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
 
 int32_t
 EditorDeleteBobTool::handle_undo_impl(const Widelands::World& world,
-                                      Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& parent,
                                       EditorActionArgs* args,
-									  Widelands::Map* map) {
+                                      Widelands::Map* map) {
 
 	uint32_t ret = parent.tools()->place_bob.handle_undo_impl(world, center, parent, args, map);
 	args->old_bob_type.clear();
 	return ret;
 }
 
-EditorActionArgs EditorDeleteBobTool::format_args_impl(EditorInteractive & parent)
-{
+EditorActionArgs EditorDeleteBobTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }

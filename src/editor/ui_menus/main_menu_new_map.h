@@ -35,7 +35,7 @@ class EditorInteractive;
  * things like size, world ....
 */
 struct MainMenuNewMap : public UI::Window {
-	MainMenuNewMap(EditorInteractive &);
+	MainMenuNewMap(EditorInteractive&);
 
 private:
 	EditorInteractive& eia();

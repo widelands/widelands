@@ -138,6 +138,13 @@ else()
      wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
   endif()
 
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    # g++-4.7 complains otherwise about <:: not being a valid token in
+    # unique_ptr<::Something>. Since this is common style in c++ though, we'd
+    # rather have it swallow this frog for us.
+    wl_add_flag(WL_GENERIC_CXX_FLAGS "-fpermissive")
+  endif()
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-pedantic")

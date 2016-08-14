@@ -34,14 +34,12 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 1;
 
-void MapPortSpacesPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
-{
+void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
 	Profile prof;
 	prof.read("port_spaces", nullptr, fs);
-	Section & s1 = prof.get_safe_section("global");
+	Section& s1 = prof.get_safe_section("global");
 
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	Extent ext(map.extent());
 
 	try {
@@ -51,36 +49,35 @@ void MapPortSpacesPacket::read
 			if (!num)
 				return;
 
-			Section & s2 = prof.get_safe_section("port_spaces");
+			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
-				map.set_port_space(get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
+				map.set_port_space(
+				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
 			}
 		} else {
 			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("port_spaces data: %s", e.what());
 	}
 }
 
-
-void MapPortSpacesPacket::write(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
+void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&)
 
 {
 	Profile prof;
-	Section & s1 = prof.create_section("global");
+	Section& s1 = prof.create_section("global");
 	s1.set_int("packet_version", kCurrentPacketVersion);
 
 	Map& map = egbase.map();
 	const uint16_t num = map.get_port_spaces().size();
 	s1.set_int("number_of_port_spaces", num);
 
-	Section & s2 = prof.create_section("port_spaces");
+	Section& s2 = prof.create_section("port_spaces");
 	int i = 0;
 	for (const Coords& c : map.get_port_spaces()) {
 		set_coords(std::to_string(i++), c, &s2);
 	}
 	prof.write("port_spaces", false, fs);
 }
-
 }

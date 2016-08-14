@@ -26,13 +26,14 @@
 #include "ui_basic/tabpanel.h"
 
 struct EditorPlaceBobTool;
-namespace UI {struct Checkbox;}
+namespace UI {
+struct Checkbox;
+}
 
 struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
-	EditorToolPlaceBobOptionsMenu
-		(EditorInteractive         &,
-		 EditorPlaceBobTool      &,
-		 UI::UniqueWindow::Registry &);
+	EditorToolPlaceBobOptionsMenu(EditorInteractive&,
+	                              EditorPlaceBobTool&,
+	                              UI::UniqueWindow::Registry&);
 
 private:
 	void clicked(int32_t, bool);

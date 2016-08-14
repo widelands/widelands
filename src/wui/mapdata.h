@@ -31,13 +31,16 @@
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"
 
-
 /**
  * Author data for a map or scenario.
  */
 struct MapAuthorData {
-	const std::string& get_names() const {return names_;}
-	size_t get_number()            const {return number_;}
+	const std::string& get_names() const {
+		return names_;
+	}
+	size_t get_number() const {
+		return number_;
+	}
 
 	// Parses author list string into localized contatenated list
 	// string. Use , as list separator and no whitespaces between
@@ -51,34 +54,31 @@ struct MapAuthorData {
 
 private:
 	std::string names_;
-	size_t      number_;
+	size_t number_;
 };
 
 /**
  * Data about a map that we're interested in.
  */
 struct MapData {
-	enum class MapType {
-		kNormal,
-		kDirectory,
-		kScenario,
-		kSettlers2
-	};
+	enum class MapType { kNormal, kDirectory, kScenario, kSettlers2 };
 
-	enum class DisplayType {
-		kFilenames,
-		kMapnames,
-		kMapnamesLocalized
-	};
+	enum class DisplayType { kFilenames, kMapnames, kMapnamesLocalized };
 
+private:
+	/// For common properties
+	MapData(const std::string& init_filename,
+	        const std::string& init_localized_name,
+	        const std::string& init_author,
+	        const MapData::MapType& init_maptype,
+	        const MapData::DisplayType& init_displaytype);
 
-	/// For incomplete data
-	MapData();
-
+public:
 	/// For normal maps and scenarios
-	MapData(const Widelands::Map& map, const std::string& init_filename,
-			  const MapData::MapType& init_maptype,
-			  const MapData::DisplayType& init_displaytype);
+	MapData(const Widelands::Map& map,
+	        const std::string& init_filename,
+	        const MapData::MapType& init_maptype,
+	        const MapData::DisplayType& init_displaytype);
 
 	/// For directories
 	MapData(const std::string& init_filename, const std::string& init_localized_name);

@@ -43,14 +43,17 @@ struct QuickNavigation {
 		Point point;
 		bool set;
 
-		Landmark() : set(false) {}
+		Landmark() : set(false) {
+		}
 	};
 
-	using SetViewFn = boost::function<void (Point)>;
+	using SetViewFn = boost::function<void(Point)>;
 
-	QuickNavigation(const Widelands::EditorGameBase & egbase, uint32_t screenwidth, uint32_t screenheight);
+	QuickNavigation(const Widelands::EditorGameBase& egbase,
+	                uint32_t screenwidth,
+	                uint32_t screenheight);
 
-	void set_setview(const SetViewFn & fn);
+	void set_setview(const SetViewFn& fn);
 
 	void view_changed(Point point, bool jump);
 
@@ -58,14 +61,16 @@ struct QuickNavigation {
 	void set_landmark(size_t index, const Point& point);
 
 	// Returns a pointer to the first element in the landmarks array
-	const std::vector<Landmark>& landmarks() const {return landmarks_;}
+	const std::vector<Landmark>& landmarks() const {
+		return landmarks_;
+	}
 
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
 	void setview(Point where);
 
-	const Widelands::EditorGameBase & egbase_;
+	const Widelands::EditorGameBase& egbase_;
 	uint32_t screenwidth_;
 	uint32_t screenheight_;
 

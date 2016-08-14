@@ -57,29 +57,24 @@ void UniqueWindow::Registry::toggle() {
 	}
 }
 
-
-
 /**
  * In order to avoid dangling pointers, we need to kill our contained window
  * here.
 */
-UniqueWindow::Registry::~Registry() {delete window;}
-
+UniqueWindow::Registry::~Registry() {
+	delete window;
+}
 
 /**
  * Register, position according to the registry information.
 */
-UniqueWindow::UniqueWindow
-	(Panel                  * const parent,
-	 const std::string & name,
-	 UniqueWindow::Registry * const reg,
-	 int32_t const w, int32_t const h,
-	 const std::string      & title)
-	:
-	Window         (parent, name, 0, 0, w, h, title.c_str()),
-	registry_     (reg),
-	usedefaultpos_(true)
-{
+UniqueWindow::UniqueWindow(Panel* const parent,
+                           const std::string& name,
+                           UniqueWindow::Registry* const reg,
+                           int32_t const w,
+                           int32_t const h,
+                           const std::string& title)
+   : Window(parent, name, 0, 0, w, h, title.c_str()), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
 		delete registry_->window;
 
@@ -94,12 +89,10 @@ UniqueWindow::UniqueWindow
 	}
 }
 
-
 /**
  * Unregister, save latest position.
 */
-UniqueWindow::~UniqueWindow()
-{
+UniqueWindow::~UniqueWindow() {
 	if (registry_) {
 		assert(registry_->window == this);
 
@@ -113,5 +106,4 @@ UniqueWindow::~UniqueWindow()
 		}
 	}
 }
-
 }

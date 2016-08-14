@@ -30,7 +30,6 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands.h"
 
-
 namespace Widelands {
 class Bob;
 class MapObject;
@@ -58,19 +57,19 @@ public:
 	// object in case the serial number is alrealy known, since the object will
 	// never even be allocated then. But this change can only be done when all
 	// kinds of map objects have suitable default constructors.
-	template<typename T> T & register_object(Serial const n, T & object) {
-		ReverseMapObjectMap::const_iterator const existing =
-			objects_.find(n);
+	template <typename T> T& register_object(Serial const n, T& object) {
+		ReverseMapObjectMap::const_iterator const existing = objects_.find(n);
 		if (existing != objects_.end()) {
 			// delete &object; can not do this
-			throw GameDataError("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
+			throw GameDataError(
+			   "already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		objects_.insert(std::pair<Serial, MapObject *>(n, &object));
+		objects_.insert(std::pair<Serial, MapObject*>(n, &object));
 		loaded_objects_[&object] = false;
 		return object;
 	}
 
-	template<typename T> T & get(Serial const serial) {
+	template <typename T> T& get(Serial const serial) {
 		ReverseMapObjectMap::iterator const it = objects_.find(serial);
 		if (it == objects_.end())
 			throw GameDataError("not found");
@@ -78,30 +77,30 @@ public:
 			return *result;
 		else
 			throw GameDataError("is a %s, expected a %s",
-			                      to_string(it->second->descr().type()).c_str(),
-			                      typeid(T).name());
+			                    to_string(it->second->descr().type()).c_str(), typeid(T).name());
 	}
 
 	int32_t get_nr_unloaded_objects();
-	bool is_object_loaded(MapObject & obj) {return loaded_objects_[&obj];}
+	bool is_object_loaded(MapObject& obj) {
+		return loaded_objects_[&obj];
+	}
 
-	void mark_object_as_loaded(MapObject &);
+	void mark_object_as_loaded(MapObject&);
 
-	void schedule_destroy(MapObject &);
-	void schedule_act(Bob &);
+	void schedule_destroy(MapObject&);
+	void schedule_act(Bob&);
 
-	void load_finish_game(Game & g);
+	void load_finish_game(Game& g);
 
 private:
-	using ReverseMapObjectMap = std::map<Serial, MapObject *>;
+	using ReverseMapObjectMap = std::map<Serial, MapObject*>;
 
-	std::map<MapObject *, bool> loaded_objects_;
+	std::map<MapObject*, bool> loaded_objects_;
 	ReverseMapObjectMap objects_;
 
-	std::vector<MapObject *> schedule_destroy_;
-	std::vector<Bob *> schedule_act_;
+	std::vector<MapObject*> schedule_destroy_;
+	std::vector<Bob*> schedule_act_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_LOADER_H

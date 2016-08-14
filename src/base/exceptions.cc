@@ -28,9 +28,7 @@
  * class WException implementation
  */
 #undef wexception
-WException::WException
-	(char const * const file, uint32_t const line, char const * const fmt, ...)
-{
+WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...) {
 	char buffer[512];
 	{
 		va_list va;
@@ -43,17 +41,14 @@ WException::WException
 	what_ = ost.str();
 }
 
-char const * WException::what() const noexcept {
+char const* WException::what() const noexcept {
 	return what_.c_str();
 }
-
 
 /*
  * class warning implementation
  */
-WLWarning::WLWarning(char const * const et, char const * const em, ...) :
-	title_(et)
-{
+WLWarning::WLWarning(char const* const et, char const* const em, ...) : title_(et) {
 	char buffer[512];
 	{
 		va_list va;
@@ -64,11 +59,10 @@ WLWarning::WLWarning(char const * const et, char const * const em, ...) :
 	what_ = buffer;
 }
 
-char const * WLWarning::title() const
-{
+char const* WLWarning::title() const {
 	return title_.c_str();
 }
 
-char const * WLWarning::what() const noexcept {
+char const* WLWarning::what() const noexcept {
 	return what_.c_str();
 }

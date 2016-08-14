@@ -35,9 +35,8 @@ struct MapPortSpacesPacket {
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured EditorGameBase object.
-	void pre_read(FileSystem &, Map*);
+	void pre_read(FileSystem&, Map*);
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PORT_SPACES_PACKET_H

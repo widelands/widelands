@@ -30,10 +30,10 @@ class EditorInteractive;
  * This represents the main menu
 */
 struct EditorMainMenu : public UI::UniqueWindow {
-	EditorMainMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
+	EditorMainMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 private:
-	EditorInteractive & eia();
+	EditorInteractive& eia();
 	UI::Box box_;
 	UI::Button button_new_map_;
 	UI::Button button_new_random_map_;
@@ -42,13 +42,12 @@ private:
 	UI::Button button_map_options_;
 	UI::Button button_exit_editor_;
 
-	void exit_btn       ();
-	void load_btn       ();
-	void save_btn       ();
-	void new_map_btn    ();
+	void exit_btn();
+	void load_btn();
+	void save_btn();
+	void new_map_btn();
 	void new_random_map_btn();
 	void map_options_btn();
 };
-
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_H

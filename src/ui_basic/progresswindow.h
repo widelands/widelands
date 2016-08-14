@@ -34,42 +34,42 @@ namespace UI {
 
 /// Manages a progress window on the screen.
 struct IProgressVisualization {
-	///perform any visualizations as needed
-	///if repaint is true, ensure previously painted areas are visible
+	/// perform any visualizations as needed
+	/// if repaint is true, ensure previously painted areas are visible
 	virtual void update(bool repaint) = 0;
 
-	///Progress Window is closing, unregister and cleanup
+	/// Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;
 
-	virtual ~IProgressVisualization() {}
+	virtual ~IProgressVisualization() {
+	}
 };
 
 /// Manages a progress window on the screen.
 struct ProgressWindow {
-	ProgressWindow(const std::string & background = std::string());
+	ProgressWindow(const std::string& background = std::string());
 	~ProgressWindow();
 
 	/// Register additional visualization (tips/hints, animation, etc)
-	void add_visualization(IProgressVisualization * instance);
-	void remove_visualization(IProgressVisualization * instance);
+	void add_visualization(IProgressVisualization* instance);
+	void remove_visualization(IProgressVisualization* instance);
 
 	/// Set a picture to render in the background
-	void set_background(const std::string & file_name);
+	void set_background(const std::string& file_name);
 
 	/// Display a progress step description.
-	void step(const std::string & description);
+	void step(const std::string& description);
 
 private:
-	using VisualizationArray = std::vector<IProgressVisualization *>;
+	using VisualizationArray = std::vector<IProgressVisualization*>;
 	Point label_center_;
-	Rect  label_rectangle_;
+	Rect label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
 
-	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
+	void draw_background(RenderTarget& rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

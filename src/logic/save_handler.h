@@ -25,31 +25,47 @@
 
 #include <stdint.h>
 
-namespace Widelands {class Game;}
+namespace Widelands {
+class Game;
+}
 
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
 class SaveHandler {
 public:
-	SaveHandler() : last_saved_realtime_(0), initialized_(false), allow_saving_(true),
-		save_requested_(false), saving_next_tick_(false), save_filename_(""),
-		autosave_filename_("wl_autosave") {}
-	void think(Widelands::Game &);
+	SaveHandler()
+	   : last_saved_realtime_(0),
+	     initialized_(false),
+	     allow_saving_(true),
+	     save_requested_(false),
+	     saving_next_tick_(false),
+	     save_filename_(""),
+	     autosave_filename_("wl_autosave") {
+	}
+	void think(Widelands::Game&);
 	std::string create_file_name(const std::string& dir, const std::string& filename) const;
-	bool save_game
-		(Widelands::Game   &,
-		 const std::string & filename,
-		 std::string       * error = nullptr);
+	bool save_game(Widelands::Game&, const std::string& filename, std::string* error = nullptr);
 
-	static std::string get_base_dir() {return "save";}
-	const std::string get_cur_filename() {return current_filename_;}
-	void set_current_filename(const std::string& filename) {current_filename_ = filename;}
-	void set_autosave_filename(const std::string& filename) {autosave_filename_ = filename;}
-	void set_allow_saving(bool t) {allow_saving_ = t;}
-	bool get_allow_saving() {return allow_saving_;}
-	void request_save(const std::string& filename = "")
-	{
+	static std::string get_base_dir() {
+		return "save";
+	}
+	const std::string get_cur_filename() {
+		return current_filename_;
+	}
+	void set_current_filename(const std::string& filename) {
+		current_filename_ = filename;
+	}
+	void set_autosave_filename(const std::string& filename) {
+		autosave_filename_ = filename;
+	}
+	void set_allow_saving(bool t) {
+		allow_saving_ = t;
+	}
+	bool get_allow_saving() {
+		return allow_saving_;
+	}
+	void request_save(const std::string& filename = "") {
 		save_requested_ = true;
 		save_filename_ = filename;
 	}

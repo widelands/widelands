@@ -36,27 +36,19 @@
 #include "ui_basic/textarea.h"
 #include "wlapplication.h"
 
+EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& parent,
+                                                             EditorPlaceBobTool& pit,
+                                                             UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
-EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
-	(EditorInteractive         & parent,
-	 EditorPlaceBobTool      & pit,
-	 UI::UniqueWindow::Registry & registry)
-:
-EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
-
-tabpanel_          (this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
-pit_               (pit),
-click_recursion_protect_(false)
-{
-	int32_t const space  =  5;
-	const Widelands::World & world = parent.egbase().world();
+     tabpanel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+     pit_(pit),
+     click_recursion_protect_(false) {
+	int32_t const space = 5;
+	const Widelands::World& world = parent.egbase().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
-		std::max
-			(std::min
-			 	(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))),
-			 	 24U),
-			 12U);
+	   std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U), 12U);
 
 	set_center_panel(&tabpanel_);
 
@@ -71,26 +63,23 @@ click_recursion_protect_(false)
 			height = h;
 	}
 
-	const Image* tab_icon =
-		g_gr->images().get("images/ui_basic/list_first_entry.png");
+	const Image* tab_icon = g_gr->images().get("images/ui_basic/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
-	UI::Box * box = nullptr;
+	UI::Box* box = nullptr;
 	while (i < nr_bobs) {
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
-			pos   = Point(5, 15);
+			pos = Point(5, 15);
 			box = new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 			tabpanel_.add("icons", tab_icon, box);
 		}
 
-		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
+		const Widelands::BobDescr& descr = *world.get_bob_descr(i);
 		upcast(Widelands::CritterDescr const, critter_descr, &descr);
 		UI::Checkbox& cb =
-		   *new UI::Checkbox(box,
-		                     pos,
-									descr.representative_image(),
+		   *new UI::Checkbox(box, pos, descr.representative_image(),
 		                     critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
@@ -107,28 +96,25 @@ click_recursion_protect_(false)
 	tabpanel_.activate(0);
 }
 
-
 /**
  * This is called when one of the state boxes is toggled
 */
-void EditorToolPlaceBobOptionsMenu::clicked
-	(int32_t const n, bool const t)
-{
+void EditorToolPlaceBobOptionsMenu::clicked(int32_t const n, bool const t) {
 	if (click_recursion_protect_)
 		return;
 
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
 	//  TODO(unknown): usage comment for get_key_state.
-	const bool multiselect =
-		get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
 	if (!t && (!multiselect || pit_.get_nr_enabled() == 1)) {
 		checkboxes_[n]->set_state(true);
 		return;
 	}
 
 	if (!multiselect) {
-		for (uint32_t i = 0; pit_.get_nr_enabled(); ++i) pit_.enable(i, false);
+		for (uint32_t i = 0; pit_.get_nr_enabled(); ++i)
+			pit_.enable(i, false);
 
 		//  disable all checkboxes
 		click_recursion_protect_ = true;

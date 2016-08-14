@@ -36,25 +36,21 @@ namespace Widelands {
 /**
  * Pre-initialize a WaresQueue
 */
-WaresQueue::WaresQueue
-	(PlayerImmovable &       init_owner,
-	 DescriptionIndex        const init_ware,
-	 uint8_t           const init_max_size)
-	:
-	owner_           (init_owner),
-	ware_            (init_ware),
-	max_size_        (init_max_size),
-	max_fill_        (init_max_size),
-	filled_          (0),
-	consume_interval_(0),
-	request_         (nullptr),
-	callback_fn_     (nullptr),
-	callback_data_   (nullptr)
-{
+WaresQueue::WaresQueue(PlayerImmovable& init_owner,
+                       DescriptionIndex const init_ware,
+                       uint8_t const init_max_size)
+   : owner_(init_owner),
+     ware_(init_ware),
+     max_size_(init_max_size),
+     max_fill_(init_max_size),
+     filled_(0),
+     consume_interval_(0),
+     request_(nullptr),
+     callback_fn_(nullptr),
+     callback_data_(nullptr) {
 	if (ware_ != INVALID_INDEX)
 		update();
 }
-
 
 /**
  * Clear the queue appropriately.
@@ -87,21 +83,13 @@ void WaresQueue::update() {
 		filled_ = max_size_;
 	}
 
-	if (filled_ < max_fill_)
-	{
+	if (filled_ < max_fill_) {
 		if (!request_)
-			request_ =
-				new Request
-					(owner_,
-					 ware_,
-					 WaresQueue::request_callback,
-					 wwWARE);
+			request_ = new Request(owner_, ware_, WaresQueue::request_callback, wwWARE);
 
 		request_->set_count(max_fill_ - filled_);
 		request_->set_required_interval(consume_interval_);
-	}
-	else
-	{
+	} else {
 		delete request_;
 		request_ = nullptr;
 	}
@@ -110,8 +98,7 @@ void WaresQueue::update() {
 /**
  * Set the callback function that is called when an item has arrived.
 */
-void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
-{
+void WaresQueue::set_callback(CallbackFn* const fn, void* const data) {
 	callback_fn_ = fn;
 	callback_data_ = data;
 }
@@ -119,21 +106,18 @@ void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 /**
  * Called when an item arrives at the owning building.
 */
-void WaresQueue::request_callback
-	(Game            &       game,
-	 Request         &,
-	 DescriptionIndex        const ware,
+void WaresQueue::request_callback(Game& game,
+                                  Request&,
+                                  DescriptionIndex const ware,
 #ifndef NDEBUG
-	 Worker          * const w,
+                                  Worker* const w,
 #else
-	 Worker          *,
+                                  Worker*,
 #endif
-	 PlayerImmovable & target)
-{
-	WaresQueue & wq =
-		dynamic_cast<Building&>(target).waresqueue(ware);
+                                  PlayerImmovable& target) {
+	WaresQueue& wq = dynamic_cast<Building&>(target).waresqueue(ware);
 
-	assert(!w); // WaresQueue can't hold workers
+	assert(!w);  // WaresQueue can't hold workers
 	assert(wq.filled_ < wq.max_size_);
 	assert(wq.ware_ == ware);
 
@@ -147,8 +131,7 @@ void WaresQueue::request_callback
 /**
  * Remove the wares in this queue from the given economy (used in accounting).
 */
-void WaresQueue::remove_from_economy(Economy & e)
-{
+void WaresQueue::remove_from_economy(Economy& e) {
 	if (ware_ != INVALID_INDEX) {
 		e.remove_wares(ware_, filled_);
 		if (request_)
@@ -159,8 +142,7 @@ void WaresQueue::remove_from_economy(Economy & e)
 /**
  * Add the wares in this queue to the given economy (used in accounting)
 */
-void WaresQueue::add_to_economy(Economy & e)
-{
+void WaresQueue::add_to_economy(Economy& e) {
 	if (ware_ != INVALID_INDEX) {
 		e.add_wares(ware_, filled_);
 		if (request_)
@@ -171,8 +153,7 @@ void WaresQueue::add_to_economy(Economy & e)
 /**
  * Change size of the queue.
  */
-void WaresQueue::set_max_size(const Quantity size)
-{
+void WaresQueue::set_max_size(const Quantity size) {
 	Quantity old_size = max_size_;
 	max_size_ = size;
 
@@ -192,8 +173,7 @@ void WaresQueue::set_max_size(const Quantity size)
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(Quantity size)
-{
+void WaresQueue::set_max_fill(Quantity size) {
 	if (size > max_size_)
 		size = max_size_;
 
@@ -224,8 +204,7 @@ void WaresQueue::set_filled(const Quantity filled) {
  *
  * This interval is merely a hint for the Supply/Request balancing code.
 */
-void WaresQueue::set_consume_interval(const uint32_t time)
-{
+void WaresQueue::set_consume_interval(const uint32_t time) {
 	consume_interval_ = time;
 
 	update();
@@ -237,13 +216,11 @@ void WaresQueue::set_consume_interval(const uint32_t time)
 
 constexpr uint16_t kCurrentPacketVersion = 2;
 
-void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
-{
+void WaresQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	fw.c_string
-		(owner().tribe().get_ware_descr(ware_)->name().c_str());
+	fw.c_string(owner().tribe().get_ware_descr(ware_)->name().c_str());
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);
 	fw.signed_32(filled_);
@@ -255,25 +232,20 @@ void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 		fw.unsigned_8(0);
 }
 
-
-void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
-{
+void WaresQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {
 			delete request_;
-			ware_             = owner().tribe().ware_index(fr.c_string  ());
-			max_size_         =                            fr.unsigned_32();
+			ware_ = owner().tribe().ware_index(fr.c_string());
+			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
-			filled_           =                            fr.unsigned_32();
-			consume_interval_ =                            fr.unsigned_32();
-			if                                             (fr.unsigned_8 ()) {
-				request_ =                          //  TODO(unknown): Change Request::read
-					new Request                       //  to a constructor.
-						(owner_,
-						 0,
-						 WaresQueue::request_callback,
-						 wwWORKER);
+			filled_ = fr.unsigned_32();
+			consume_interval_ = fr.unsigned_32();
+			if (fr.unsigned_8()) {
+				request_ =      //  TODO(unknown): Change Request::read
+				   new Request  //  to a constructor.
+				   (owner_, 0, WaresQueue::request_callback, wwWORKER);
 				request_->read(fr, game, mol);
 			} else
 				request_ = nullptr;
@@ -284,9 +256,8 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 		} else {
 			throw UnhandledVersionError("WaresQueue", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const GameDataError & e) {
+	} catch (const GameDataError& e) {
 		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
-
 }

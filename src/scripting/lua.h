@@ -24,18 +24,18 @@
 
 #include "third_party/eris/lua.hpp"
 
-#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
-#define luaL_checkuint32(L, n)  static_cast<uint32_t>(luaL_checkinteger(L, (n)))
-#define luaL_checkdouble(L, n)  static_cast<double>(luaL_checknumber(L, (n)))
+#define luaL_checkint32(L, n) static_cast<int32_t>(luaL_checkinteger(L, (n)))
+#define luaL_checkuint32(L, n) static_cast<uint32_t>(luaL_checkinteger(L, (n)))
+#define luaL_checkdouble(L, n) static_cast<double>(luaL_checknumber(L, (n)))
 
 #define lua_pushint32(L, n) (lua_pushinteger(L, static_cast<int32_t>(n)))
 #define lua_pushuint32(L, n) (lua_pushinteger(L, static_cast<uint32_t>(n)))
 #define lua_pushdouble(L, n) (lua_pushnumber(L, static_cast<double>(n)))
 
-void lua_pushstring (lua_State * L, const std::string & s);
+void lua_pushstring(lua_State* L, const std::string& s);
 
-lua_State * luaL_checkthread(lua_State * L, int n);
+lua_State* luaL_checkthread(lua_State* L, int n);
 
-bool luaL_checkboolean(lua_State * L, int n);
+bool luaL_checkboolean(lua_State* L, int n);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_H

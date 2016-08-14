@@ -25,42 +25,39 @@
 namespace UI {
 
 enum class Align {
-    kLeft         =  0,
-    kHCenter      =  1,
-    kRight        =  2,
-    kHorizontal   =  3,
+	kLeft = 0,
+	kHCenter = 1,
+	kRight = 2,
+	kHorizontal = 3,
 
-    kTop          =  0,
-    kVCenter      =  4,
-    kBottom       =  8,
-    kVertical     = 12,
+	kTop = 0,
+	kVCenter = 4,
+	kBottom = 8,
+	kVertical = 12,
 
-    kTopLeft      =  0,
-    kCenterLeft   = Align::kVCenter,
-    kBottomLeft   = Align::kBottom,
+	kTopLeft = 0,
+	kCenterLeft = Align::kVCenter,
+	kBottomLeft = Align::kBottom,
 
-    kTopCenter    = Align::kHCenter,
-    kCenter       = Align::kHCenter | Align::kVCenter,
-    kBottomCenter = Align::kHCenter | Align::kBottom,
+	kTopCenter = Align::kHCenter,
+	kCenter = Align::kHCenter | Align::kVCenter,
+	kBottomCenter = Align::kHCenter | Align::kBottom,
 
-    kTopRight     = Align::kRight,
-    kCenterRight  = Align::kRight | Align::kVCenter,
+	kTopRight = Align::kRight,
+	kCenterRight = Align::kRight | Align::kVCenter,
 
-    kBottomRight  = Align::kRight | Align::kBottom,
+	kBottomRight = Align::kRight | Align::kBottom,
 };
 
-inline Align operator &(Align a, Align b)
-{
-	 return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
+inline Align operator&(Align a, Align b) {
+	return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
 }
 
-inline Align operator |(Align a, Align b)
-{
-	 return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
+inline Align operator|(Align a, Align b) {
+	return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
 }
 
 Align mirror_alignment(Align alignment);
 void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
-
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

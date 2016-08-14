@@ -31,35 +31,33 @@
  * and places this on the current field
 */
 int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
-                                              Widelands::NodeAndTriangle<> const center,
+                                              const Widelands::NodeAndTriangle<>& center,
                                               EditorInteractive& parent,
                                               EditorActionArgs* args,
-											  Widelands::Map* map) {
+                                              Widelands::Map* map) {
 
 	if (get_nr_enabled() && args->old_bob_type.empty()) {
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(*map,
-		 Widelands::Area<Widelands::FCoords>
-		 (map->get_fcoords(center.node), args->sel_radius));
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map,
+		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 		do {
-			Widelands::Bob * const mbob = mr.location().field->get_first_bob();
+			Widelands::Bob* const mbob = mr.location().field->get_first_bob();
 			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
 			args->new_bob_type.push_back(world.get_bob_descr(get_random_enabled()));
 		} while (mr.advance(*map));
 	}
 
 	if (!args->new_bob_type.empty()) {
-		Widelands::EditorGameBase & egbase = parent.egbase();
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(*map,
-		 Widelands::Area<Widelands::FCoords>
-		 (map->get_fcoords(center.node), args->sel_radius));
-		std::list< const Widelands::BobDescr * >::iterator i = args->new_bob_type.begin();
+		Widelands::EditorGameBase& egbase = parent.egbase();
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map,
+		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
+		std::list<const Widelands::BobDescr*>::iterator i = args->new_bob_type.begin();
 		do {
-			const Widelands::BobDescr & descr = *(*i);
+			const Widelands::BobDescr& descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
-				if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
-					bob->remove(egbase); //  There is already a bob. Remove it.
+				if (Widelands::Bob* const bob = mr.location().field->get_first_bob())
+					bob->remove(egbase);  //  There is already a bob. Remove it.
 				descr.create(egbase, nullptr, mr.location());
 			}
 			++i;
@@ -71,26 +69,25 @@ int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
 
 int32_t
 EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
-                                     Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                     const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                      EditorInteractive& parent,
                                      EditorActionArgs* args,
-									 Widelands::Map* map) {
+                                     Widelands::Map* map) {
 	if (!args->new_bob_type.empty()) {
-		Widelands::EditorGameBase & egbase = parent.egbase();
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(*map,
-		 Widelands::Area<Widelands::FCoords>
-		 (map->get_fcoords(center.node), args->sel_radius));
-		std::list<const Widelands::BobDescr *>::iterator i = args->old_bob_type.begin();
+		Widelands::EditorGameBase& egbase = parent.egbase();
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map,
+		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
+		std::list<const Widelands::BobDescr*>::iterator i = args->old_bob_type.begin();
 		do {
 			if (*i) {
-				const Widelands::BobDescr & descr = *(*i);
+				const Widelands::BobDescr& descr = *(*i);
 				if (mr.location().field->nodecaps() & descr.movecaps()) {
-					if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
-						bob->remove(egbase); //  There is already a bob. Remove it.
+					if (Widelands::Bob* const bob = mr.location().field->get_first_bob())
+						bob->remove(egbase);  //  There is already a bob. Remove it.
 					descr.create(egbase, nullptr, mr.location());
 				}
-			} else if (Widelands::Bob * const bob = mr.location().field->get_first_bob()) {
+			} else if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 				bob->remove(egbase);
 			}
 			++i;
@@ -100,7 +97,6 @@ EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
 		return 0;
 }
 
-EditorActionArgs EditorPlaceBobTool::format_args_impl(EditorInteractive & parent)
-{
+EditorActionArgs EditorPlaceBobTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }

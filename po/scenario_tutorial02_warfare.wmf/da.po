@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
-"PO-Revision-Date: 2016-07-05 19:45+0000\n"
+"POT-Creation-Date: 2016-08-06 07:12+0000\n"
+"PO-Revision-Date: 2016-08-09 14:10+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -34,14 +34,14 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "I dette scenarie vil jeg fortælle lidt om soldater, deres træning og deres profession: krig. Selvom Widelands drejer sig om at bygge op og ikke brænde ned, så er der undertiden en fjende, du skal besejre. Krig er dog hovedsagelig fokuseret på økonomi, ikke på militære strategier og dets mekanik fortjener forklaring."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "Jeg har startet en lille landsby, som indeholder de vigtigste bygninger. Du har også nok varer, så du skal ikke begynde på en våbenproduktion. I et normalt spil vil du ikke have denne luksus forærende."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
@@ -53,7 +53,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr ""
+msgstr "En ny soldat oprettes ligesom en arbejder: Når en militærbygning har brug for en soldat, så henter en bærer de krævede våben og rustninger fra et lager (eller dit hovedkvarter) og bringer det til din nye bygning. Den meste simple barbarsoldat bruger ikke rustning, soldaten har kun en økse."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -62,7 +62,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "Tag et kig på soldaterne på vej mod vores militærbygninger. De er anderledes end vores normale arbejdere: De har en bjælke over hovedet som afspejler deres tilstand, og de har fire symboler, som symboliserer den individuelle soldats nuværende niveau i fire forskellige kategorier, helbred, angreb, forsvar og undvigelse."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
@@ -70,7 +70,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Hvis en barbarsoldat er trænet maksimalt har soldaten %1% helbred, %2% angreb, %3% forsvar og %4% undvigelse. Dette er en frygtindgydende kriger! De individuelle evner har den følgende mening:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
@@ -81,7 +81,7 @@ msgstr "Helbred:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "Samlet helbred for en soldat: En barbarsoldat starter med %1% helbred, og vil få %2% ekstra helbred ved hvert helbredsniveau."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -94,7 +94,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "Mængden af skade en soldat vil påføre fjenden, når et angreb er succesfuldt. En barbarsoldat med angrebsniveau 0 medfører ~%1% helbredsskade, når denne ramme en fjende. For hvert angrebsniveau forøges med %2% skadepoint."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
@@ -109,7 +109,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr ""
+msgstr "Forsvar er procenten, som fratrækkes fra angrebsværdien. Barbarerne kan ikke træne i denne værdi, og har derfor altid forsvarsniveau 0, hvilket betyder at skaden altid reduceres med %1%%%. Hvis en angriber med en angrebsværdi på 3500 point rammer en barbarsoldat så mister barbaren 3500-%2%%% = %3% helbred."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
@@ -122,7 +122,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "Undvigelse er sandsynligheden for, at soldaten kan undvige et angreb. En barbar på niveau 0 har en %1%%% sandsynlighed for at undvige et angreb og dette forøges i trin af %2%%% for hvert niveau."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
@@ -131,13 +131,13 @@ msgstr "Kamparenaen"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "Nu har jeg fortalt lidt om træning og niveauer. Lad mig udvide emnet."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "En ny soldat er ingen erfaring og er ikke særlig god til at slås. For at gøre ham stærkere, kan du bygge træningsanlæg."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid ""
@@ -145,48 +145,48 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "Et af disse træningsanlæg er kamparenaen. Den er en stor og dyr bygning, og den træner soldater i at undvige. Da soldater normalt bliver meget sultne under deres træning, så skal denne bygning bruge en masse mad og stærk øl. I et rigtigt spil, skal du have en god infrastruktur før du bygger den."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "For at se undvigelsestræning i praksis, så byg kamparenaen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr ""
+msgstr "Mens vi venter på kamparenaen, så vil du sandsynligvis bemærke nogle soldater der går omkring. De skifter plads automatisk fra tid til anden. Det vil jeg fortælle dig om senere."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Byg en kamparena"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Byg en kamparena. Det er en stor bygning."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
-msgstr ""
+msgstr "Da konstruktionen vil tage tid, så kan du ændre spilhastigheden via Side op og Side ned."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:82
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "Kamparenaen er blevet konstrueret"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:83
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr ""
+msgstr "Rigtig godt. Vores kamparena er færdig og soldaterne går allerede mod den for at træne."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "De krævede varer bliver også leveret. For succesfuld træning, så du bruge pittabrød og stærk øl, samt enten fisk eller kød."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""

@@ -24,11 +24,11 @@
 RGBColor::RGBColor() : RGBColor(0, 0, 0) {
 }
 
-RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :
-	r(R), g(G), b(B) {}
+RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) : r(R), g(G), b(B) {
+}
 
 std::string RGBColor::hex_value() const {
-	return (boost::format ("%02x%02x%02x") % int(r) % int(g) % int(b)).str();
+	return (boost::format("%02x%02x%02x") % int(r) % int(g) % int(b)).str();
 }
 
 uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
@@ -39,10 +39,10 @@ void RGBColor::set(SDL_PixelFormat* const fmt, uint32_t const clr) {
 	SDL_GetRGB(clr, fmt, &r, &g, &b);
 }
 
-bool RGBColor::operator == (const RGBColor& other) const {
+bool RGBColor::operator==(const RGBColor& other) const {
 	return r == other.r && g == other.g && b == other.b;
 }
-bool RGBColor::operator != (const RGBColor& other) const {
+bool RGBColor::operator!=(const RGBColor& other) const {
 	return !(*this == other);
 }
 
@@ -60,7 +60,7 @@ RGBAColor::RGBAColor(const RGBColor& c) {
 }
 
 std::string RGBAColor::hex_value() const {
-	return (boost::format ("%02x%02x%02x%02x>") % int(r) % int(g) % int(b) % int(a)).str();
+	return (boost::format("%02x%02x%02x%02x>") % int(r) % int(g) % int(b) % int(a)).str();
 }
 
 uint32_t RGBAColor::map(const SDL_PixelFormat& fmt) const {
@@ -71,9 +71,9 @@ void RGBAColor::set(const SDL_PixelFormat& fmt, const uint32_t clr) {
 	SDL_GetRGBA(clr, const_cast<SDL_PixelFormat*>(&fmt), &r, &g, &b, &a);
 }
 
-bool RGBAColor::operator == (const RGBAColor& other) const {
+bool RGBAColor::operator==(const RGBAColor& other) const {
 	return (r == other.r && g == other.g && b == other.b && a == other.a);
 }
-bool RGBAColor::operator != (const RGBAColor& other) const {
+bool RGBAColor::operator!=(const RGBAColor& other) const {
 	return !(*this == other);
 }

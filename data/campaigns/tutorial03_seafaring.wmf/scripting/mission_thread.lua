@@ -3,7 +3,7 @@
 -- ===============
 
 function introduction()
-   additional_port_space.terr = "wasser" -- disable the port space
+   additional_port_space.terr = "summer_water" -- disable the port space
    sleep(1000)
    message_box_objective(plr, intro_south)
    sleep(300)
@@ -60,7 +60,7 @@ function expedition()
    while not _ship_ready_for_expedition() do sleep(1000) end
    o.done = true
 
-   local o2 = message_box_objective(plr, expedition3)
+   o = message_box_objective(plr, expedition3)
 
    while #plr:get_buildings("atlanteans_port") < 3 do sleep(200) end
    o.done = true

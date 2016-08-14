@@ -32,19 +32,17 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 1;
 
-void MapAllowedBuildingTypesPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
+                                         EditorGameBase& egbase,
+                                         bool const skip,
+                                         MapObjectLoader&) {
 	if (skip)
 		return;
 
 	Profile prof;
 	try {
 		prof.read("allowed_building_types", nullptr, fs);
-	} catch (const WException &) {
+	} catch (const WException&) {
 		try {
 			prof.read("allowed_buildings", nullptr, fs);
 		} catch (...) {
@@ -54,8 +52,7 @@ void MapAllowedBuildingTypesPacket::read
 		return;
 	}
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_safe_int("packet_version");
+		int32_t const packet_version = prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber const nr_players = egbase.map().get_nrplayers();
 			upcast(Game const, game, &egbase);
@@ -63,7 +60,7 @@ void MapAllowedBuildingTypesPacket::read
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
 
-				const TribeDescr & tribe = player->tribe();
+				const TribeDescr& tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game) {
@@ -72,52 +69,48 @@ void MapAllowedBuildingTypesPacket::read
 					}
 				}
 				try {
-					Section & s = prof.get_safe_section((boost::format("player_%u")
-																	 % static_cast<unsigned int>(p)).str());
+					Section& s = prof.get_safe_section(
+					   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
 
 					bool allowed;
-					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
+					while (const char* const name = s.get_next_bool(nullptr, &allowed)) {
 						const DescriptionIndex index = tribe.building_index(name);
 						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
 						} else {
-							throw GameDataError
-								("tribe %s does not define building type \"%s\"",
-								 tribe.name().c_str(), name);
+							throw GameDataError("tribe %s does not define building type \"%s\"",
+							                    tribe.name().c_str(), name);
 						}
 					}
-				} catch (const WException & e) {
-					throw GameDataError
-						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
+				} catch (const WException& e) {
+					throw GameDataError("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
 		} else {
-			throw UnhandledVersionError("MapAllowedBuildingTypesPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "MapAllowedBuildingTypesPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("allowed buildings: %s", e.what());
 	}
 }
 
-
-void MapAllowedBuildingTypesPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	Profile prof;
-	prof.create_section("global").set_int
-		("packet_version", kCurrentPacketVersion);
+	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
-		const TribeDescr & tribe = player->tribe();
-		const std::string section_key = (boost::format("player_%u")
-													% static_cast<unsigned int>(p)).str();
-		Section & section = prof.create_section(section_key.c_str());
+		const TribeDescr& tribe = player->tribe();
+		const std::string section_key =
+		   (boost::format("player_%u") % static_cast<unsigned int>(p)).str();
+		Section& section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.
 		for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 			if (player->is_building_type_allowed(building_index)) {
-				const BuildingDescr* building_descr = egbase.tribes().get_building_descr(building_index);
+				const BuildingDescr* building_descr =
+				   egbase.tribes().get_building_descr(building_index);
 				section.set_bool(building_descr->name().c_str(), true);
 			}
 		}
@@ -125,5 +118,4 @@ void MapAllowedBuildingTypesPacket::write
 
 	prof.write("allowed_building_types", false, fs);
 }
-
 }

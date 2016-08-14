@@ -23,7 +23,7 @@
 #include <iostream>
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
@@ -48,8 +48,8 @@
 
 // Print a formatted log messages to wout.
 // wout is either std::cout or specified logfile.
-extern std::ostream & wout;
-void log(const char *, ...) PRINTF_FORMAT(1, 2);
+extern std::ostream& wout;
+void log(const char*, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;
 

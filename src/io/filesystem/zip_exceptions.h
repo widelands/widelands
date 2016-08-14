@@ -31,17 +31,16 @@
  * "couldn't open file (from zipfile "+zipfilename_+")");
  */
 struct ZipOperationError : public std::logic_error {
-	ZipOperationError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & zipfilename,
-		 const std::string & message = "problem during zipfile operation")
-		:
-		std::logic_error
-			(thrower + ": " + message + " (working on '" + filename +
-			 "' in zipfile '" + zipfilename + "')"),
-		thrower_(thrower), filename_(filename), zipfilename_(zipfilename)
-	{}
+	ZipOperationError(const std::string& thrower,
+	                  const std::string& filename,
+	                  const std::string& zipfilename,
+	                  const std::string& message = "problem during zipfile operation")
+	   : std::logic_error(thrower + ": " + message + " (working on '" + filename + "' in zipfile '" +
+	                      zipfilename + "')"),
+	     thrower_(thrower),
+	     filename_(filename),
+	     zipfilename_(zipfilename) {
+	}
 
 	std::string thrower_;
 	std::string filename_;
