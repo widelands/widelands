@@ -41,29 +41,6 @@ ZipFilesystem::ZipFile::ZipFile(const std::string& zipfile)
      basename_(fs_filename(zipfile.c_str())),
      write_handle_(nullptr),
      read_handle_(nullptr) {
-	std::string first_entry;
-	size_t longest_prefix = 0;
-	unz_file_info file_info;
-	char filename_inzip[256];
-	for (;;) {
-		unzGetCurrentFileInfo(read_handle(), &file_info, filename_inzip,
-		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
-		if (first_entry.empty()) {
-			first_entry = filename_inzip;
-			longest_prefix = first_entry.size();
-		} else {
-			const std::string entry = filename_inzip;
-			size_t pos = 0;
-			while (pos < longest_prefix && pos < entry.size() && first_entry[pos] == entry[pos]) {
-				++pos;
-			}
-			longest_prefix = pos;
-		}
-
-		if (unzGoToNextFile(read_handle()) == UNZ_END_OF_LIST_OF_FILE)
-			break;
-	}
-	common_prefix_ = first_entry.substr(0, longest_prefix);
 }
 
 ZipFilesystem::ZipFile::~ZipFile() {
@@ -103,6 +80,31 @@ void ZipFilesystem::ZipFile::open_for_unzip() {
 	read_handle_ = unzOpen(path_.c_str());
 	if (!read_handle_)
 		throw FileTypeError("ZipFilesystem::open_for_unzip", path_, "not a .zip file");
+
+	std::string first_entry;
+	size_t longest_prefix = 0;
+	unz_file_info file_info;
+	char filename_inzip[256];
+	for (;;) {
+		unzGetCurrentFileInfo(read_handle_, &file_info, filename_inzip,
+		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		if (first_entry.empty()) {
+			first_entry = filename_inzip;
+			longest_prefix = first_entry.size();
+		} else {
+			const std::string entry = filename_inzip;
+			size_t pos = 0;
+			while (pos < longest_prefix && pos < entry.size() && first_entry[pos] == entry[pos]) {
+				++pos;
+			}
+			longest_prefix = pos;
+		}
+
+		if (unzGoToNextFile(read_handle_) == UNZ_END_OF_LIST_OF_FILE)
+			break;
+	}
+	common_prefix_ = first_entry.substr(0, longest_prefix);
+
 	state_ = State::kUnzipping;
 }
 
