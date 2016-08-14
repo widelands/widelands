@@ -71,6 +71,14 @@ enum class SchedulerTaskId : uint8_t {
 		kUnset
 	};
 
+const std::vector<std::vector<int8_t>> neuron_curves = {
+		{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
+		{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
+		{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
+		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
+		};
+
+
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
 
@@ -480,23 +488,60 @@ struct MineTypesObserver {
 	uint16_t finished;
 };
 
+struct Neuron {
+	Neuron(int8_t,uint8_t, uint16_t);
+	void recalculate();
+	void set_weight(int8_t w);
+	int8_t get_weight() {return weight;};
+	int8_t get_result(uint8_t);
+	int8_t get_result_safe(int32_t);
+	void set_type(uint8_t);
+	uint8_t get_type() {return type;};
+	uint16_t get_id() {return id;};
+	int32_t get_lowest_pos() {return lowest_pos;};
+	int32_t get_highest_pos() {return highest_pos;};	
+		
+private:
+	int8_t results[21];
+	int8_t weight;
+	uint8_t type;
+	uint16_t id;
+	int32_t lowest_pos;
+	int32_t highest_pos;
+};
+
 //This is to keep all data related to AI magic numbers
 struct ManagementData {
 	ManagementData();
-	ManagementData(std::vector<std::vector<int16_t>>, std::vector<int16_t>);
+	//ManagementData(std::vector<std::vector<int16_t>>, std::vector<int16_t>);
+
+	//std::vector<std::vector<int8_t>> activation_functions;
+	 //= {
+		//{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
+		//{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
+		//{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
+		//{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
+	//};
+	
+	std::vector<Neuron> neuron_pool;
+
 	void scatter(uint32_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint32_t);
+	void init_learned_data();
+	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	
-	std::vector<std::vector<int16_t>> military_matrix;
 	std::vector<int16_t> military_numbers;
-	std::vector<std::vector<int16_t>> initial_military_matrix;
-	std::vector<int16_t> initial_military_numbers;	
+	std::vector<int16_t> learned_military_numbers;	
 	uint16_t old_msites;
 	uint16_t old_psites;
 	uint16_t old_bfields;
 	uint16_t re_scatter_count;
-	uint32_t last_scatter_time;	
+	uint32_t last_scatter_time;
+	uint16_t review_count;
+	uint16_t next_neuron_id;
 };
+
+	
 
 // this is used to count militarysites by their size
 struct MilitarySiteSizeObserver {

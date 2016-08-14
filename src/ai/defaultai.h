@@ -257,6 +257,7 @@ private:
 	std::list<Widelands::BuildableField*> buildable_fields;
 	Widelands::BlockedFields blocked_fields;
 	Widelands::PlayersStrengths player_statistics;
+	Widelands::ManagementData management_data;
 	std::unordered_set<uint32_t> port_reserved_coords;
 	std::list<Widelands::MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
@@ -286,8 +287,6 @@ private:
 	int32_t limit_cnt_target(int32_t, int32_t);
 
 	std::vector<Widelands::WareObserver> wares;
-
-	Widelands::ManagementData management_data;
 
 	uint32_t next_ai_think_;
 	uint32_t next_mine_construction_due_;
