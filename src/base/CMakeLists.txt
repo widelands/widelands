@@ -11,7 +11,7 @@ wl_library(base_log
   USES_SDL2
   DEPENDS
     base_macros
-	base_exceptions
+    base_exceptions
 )
 
 wl_library(base_exceptions
