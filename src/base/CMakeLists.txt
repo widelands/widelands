@@ -10,6 +10,7 @@ wl_library(base_log
     log.h
   DEPENDS
     base_macros
+	base_exceptions
 )
 
 wl_library(base_exceptions

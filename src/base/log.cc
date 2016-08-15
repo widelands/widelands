@@ -30,6 +30,7 @@
 #endif
 
 #include "base/macros.h"
+#include "base/wexception.h"
 
 namespace {
 
@@ -38,14 +39,14 @@ void sdl_logging_func(void* userdata, int, SDL_LogPriority, const char* message)
 
 #ifdef _WIN32
 
-string get_output_directory() {
+std::string get_output_directory() {
 	// This took inspiration from SDL 1.2 logger code.
 #ifdef _WIN32_WCE
 	wchar_t path[MAX_PATH];
 #else
 	char path[MAX_PATH];
 #endif
-	const auto pathlen = GetModuleFileName(NULL, path, MAX_PATH);
+	auto pathlen = GetModuleFileName(NULL, path, MAX_PATH);
 	while (pathlen > 0 && path[pathlen] != '\\') {
 		--pathlen;
 	}
@@ -70,8 +71,8 @@ public:
 	}
 
 private:
-	const string stdout_filename_;
-	ofstream stdout_;
+	const std::string stdout_filename_;
+	std::ofstream stdout_;
 
 	DISALLOW_COPY_AND_ASSIGN(WindowsLogger);
 };
