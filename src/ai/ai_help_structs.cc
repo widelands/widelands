@@ -292,7 +292,6 @@ ManagementData::ManagementData() {
 		old_psites = 0;
 		old_bfields = 0;
 		review_count = 0;
-		re_scatter_count = 0;
 		last_scatter_time = 0;
 		next_neuron_id = 0;
 	}
@@ -348,98 +347,66 @@ void Neuron::set_type(uint8_t new_type) {
 }
 
 
-void ManagementData::scatter(const uint32_t gametime) {
+void ManagementData::scatter(const uint32_t gametime, const uint16_t probability) {
 
-	re_scatter_count +=1;
-	printf ("    ... scattering (*%2d), time since last scatter %6d\n",
-	re_scatter_count, (gametime - last_scatter_time) / 1000 / 60);
+	printf ("    ... scattering , time since last scatter %6d, probability: 1/%d\n",
+	(gametime - last_scatter_time) / 1000 / 60,
+	probability);
 	last_scatter_time = gametime;
 	
-	int16_t diff = 0;
-	
 
-   for (auto & item : military_numbers) {
-	   	if (std::rand() % 15 == 0) {
-			int32_t boost = -400 + std::rand() % 800;
-			if (boost != 0 ){
-				//boost *= re_scatter_count;
-				printf ("   special numbers boost: %4d\n", boost);
-				item = item +  boost;
-				
+	for (auto & item : military_numbers) {
+	   	if (std::rand() % probability == 0) {
+			item = -100 + std::rand() % 200;
+			printf ("      Magic number - new value: %4d\n", item);
 			}
-		} else  if (std::rand() % 10 == 0) {
-			diff = std::abs(item) / 6;
-			if (diff < 2) {
-				diff = 2;
-			}
-			int32_t boost = -diff + std::rand() % (2*diff);
-			if (boost != 0 ){
-				//boost *= re_scatter_count;
-				printf ("   special numbers boost: %4d\n", boost);
-				item = item +  boost;
-			}
-		}
 	}
 
-	if (military_numbers[6] < 40) {
-		printf ("   Increasing military_numbers[16]...\n");
-		military_numbers[6] = 40;
-	}	
-	if (military_numbers[7] < 70) {
-		printf ("   Increasing military_numbers[17]...\n");
-		military_numbers[7] = 70;
-	}
-	if (military_numbers[8] < 100) {
-		printf ("   Increasing military_numbers[18]...\n");
-		military_numbers[8] = 100;
-	}	
-	if (military_numbers[6] > 80) {
-		printf ("   Decreasing military_numbers[16]...\n");
-		military_numbers[6] = 80;
-	}	
-	if (military_numbers[7] > 120) {
-		printf ("   Decreasing military_numbers[17]...\n");
-		military_numbers[7] = 120;
-	}
-	if (military_numbers[8] > 150) {
-		printf ("   Decreasing military_numbers[18]...\n");
-		military_numbers[8] = 150;
-	}
-	
 	// Modifying pool of neurons	
 	for (auto& item : neuron_pool){
-		if (std::rand() % 3 == 0) {
-			item.set_weight(item.get_weight() -10 + std::rand() % 20);
+		if (std::rand() % probability == 0) {
+			item.set_weight(-100 + std::rand() % 200);
 			item.set_type(std::rand() % neuron_curves.size());
-			printf ("     Neuron %d: re-setting type %d\n", item.get_id(), item.get_type());
+			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
 			item.recalculate();
 		}
 	}
 
 
 	//dumping new numbers
-	printf ("   new military_numbers (%lu):\n    {", military_numbers.size());
+	printf ("     new military_numbers (%lu):\n      {", military_numbers.size());
 	for (const auto& item : military_numbers) {
 		printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
 	}
 	printf ("}\n");
 
 	
-	printf ("   new neuron setup:\n    ");
+	printf ("     new neuron setup:\n      ");
 	
 	printf ("{");
+	uint16_t itemcounter = 1;
 	for (auto& item : neuron_pool) {
 		printf ("%3d%s",item.get_weight(),(&item != &neuron_pool.back())?", ":"");
+		if (itemcounter % 10 == 0) {
+			printf ("\n       ");
+		}
+		++itemcounter;
 	}
-	printf ("}\n{");	
+	printf ("}\n      {");
+	itemcounter = 1;	
 	for (auto& item : neuron_pool) {
 		printf ("%3d%s",item.get_type(),(&item != &neuron_pool.back())?", ":"");
+		if (itemcounter % 10 == 0) {
+			printf ("\n       ");
+		}
+		++itemcounter;
 	}
 	printf ("}\n");
 	
 	
 }
 void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn, const uint16_t bfields, const uint32_t gametime) {
+	assert(!military_numbers.empty());
 	printf (" %d %s: reviewig AI management data (%3d -> %3d, %3d -> %3d, %3d -> %3d )\n",
 	pn, gamestring_with_leading_zeros(gametime), old_msites, msites, old_psites, psites, old_bfields, bfields);
 	//militarysites are now ignored
@@ -447,28 +414,48 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 	 ((old_bfields + old_psites * 5) * 103 > (bfields + psites * 5) * 100) ) {
 		printf ("  !  too WEAK performer\n");
 		
-		military_numbers = learned_military_numbers;
-		scatter(gametime);
+		scatter(gametime, 20);
 	} else {
 		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
 		
 		
-		if (review_count > 1){
-			//learning
-			printf ("   updating learning_military_numbers:\n    {");
-			for (uint16_t i = 0; i < military_numbers.size(); i += 1){
-				int32_t newvalue = (9 * learned_military_numbers[i] + military_numbers[i])/ 10 ;
-				printf ("%3d(%3d)%s",newvalue,learned_military_numbers[i], (i + 1 !=  static_cast<int16_t>(military_numbers.size()))?", ":"");
-				learned_military_numbers[i] = newvalue;
-			}
-			printf ("}\n");
+		//dumping new numbers
+		printf ("     actual military_numbers (%lu):\n      {", military_numbers.size());
+		for (const auto& item : military_numbers) {
+			printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
 		}
+		printf ("}\n");
+	
+		
+		printf ("     actual neuron setup:\n      ");
+		
+		printf ("{");
+		uint16_t itemcounter = 1;
+		for (auto& item : neuron_pool) {
+			printf ("%3d%s",item.get_weight(),(&item != &neuron_pool.back())?", ":"");
+			if (itemcounter % 10 == 0) {
+				printf ("\n       ");
+			}
+			++itemcounter;
+		}
+		printf ("}\n      {");
+		itemcounter = 1;	
+		for (auto& item : neuron_pool) {
+			printf ("%3d%s",item.get_type(),(&item != &neuron_pool.back())?", ":"");
+			if (itemcounter % 10 == 0) {
+				printf ("\n       ");
+			}
+			++itemcounter;
+		}
+		printf ("}\n");
 
 	}
 	
 	//review min-max values of neurons
 	for (auto & item : neuron_pool) {
-		printf ("  Neuron %2d, min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
+		if (item.get_highest_pos() > 20) {
+			printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
+		}
 	}
 	
 	old_msites = msites;
@@ -477,9 +464,9 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 	review_count += 1;	
 }
 
-void ManagementData::init_learned_data() {
-	learned_military_numbers= military_numbers;
-}
+//void ManagementData::init_learned_data() {
+	//learned_military_numbers= military_numbers;
+//}
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;

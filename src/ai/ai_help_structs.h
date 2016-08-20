@@ -82,6 +82,8 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
 		{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
 		{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
+		{100, 97, 94, 91, 88,84,81,78,74,70,66,62,58,53,49,44,38,32,15,17,0},
+		{100,	95,	90,	85,	80,	75,	70,	65,	60,	55,	50,	45,	40,	35,	30,	25,	20,	15,	10,	5,	0},
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
@@ -530,17 +532,15 @@ struct ManagementData {
 	
 	std::vector<Neuron> neuron_pool;
 
-	void scatter(uint32_t);
+	void scatter(uint32_t, uint16_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint32_t);
-	void init_learned_data();
+	//void init_learned_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	
 	std::vector<int16_t> military_numbers;
-	std::vector<int16_t> learned_military_numbers;	
 	uint16_t old_msites;
 	uint16_t old_psites;
 	uint16_t old_bfields;
-	uint16_t re_scatter_count;
 	uint32_t last_scatter_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
