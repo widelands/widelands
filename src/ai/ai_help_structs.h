@@ -87,6 +87,9 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
+constexpr int  magic_numbers_size = 11;
+constexpr int  neuron_pool_size = 36;
+
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
@@ -520,20 +523,12 @@ private:
 //This is to keep all data related to AI magic numbers
 struct ManagementData {
 	ManagementData();
-	//ManagementData(std::vector<std::vector<int16_t>>, std::vector<int16_t>);
-
-	//std::vector<std::vector<int8_t>> activation_functions;
-	 //= {
-		//{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
-		//{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
-		//{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
-		//{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
-	//};
 	
 	std::vector<Neuron> neuron_pool;
 
 	void scatter(uint32_t, uint16_t);
-	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint32_t);
+	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t);
+	void dump_data();
 	//void init_learned_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	

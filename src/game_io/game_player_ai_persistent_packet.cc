@@ -49,7 +49,6 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				player->ai_data.last_attacked_player = fr.signed_16();
 				player->ai_data.least_military_score = fr.unsigned_32();
 				player->ai_data.target_military_score = fr.unsigned_32();
-				player->ai_data.ai_personality_military_dismatlement = fr.signed_16();
 				player->ai_data.ai_personality_attack_margin = fr.signed_32();
 				player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
 				player->ai_data.ai_personality_wood_difference = fr.signed_32();
@@ -89,7 +88,6 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.signed_16(player->ai_data.last_attacked_player);
 		fw.unsigned_32(player->ai_data.least_military_score);
 		fw.unsigned_32(player->ai_data.target_military_score);
-		fw.signed_16(player->ai_data.ai_personality_military_dismatlement);
 		fw.signed_32(player->ai_data.ai_personality_attack_margin);
 		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
 		fw.signed_32(player->ai_data.ai_personality_wood_difference);

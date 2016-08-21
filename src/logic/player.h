@@ -167,7 +167,6 @@ public:
 			 last_attacked_player(0),
 			 least_military_score(0),
 			 target_military_score(0),
-			 ai_personality_military_dismatlement(0),
 			 ai_personality_attack_margin(0),
 			 ai_productionsites_ratio(0),
 			 ai_personality_wood_difference(0),
@@ -187,7 +186,6 @@ public:
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
-		int16_t ai_personality_military_dismatlement;
 		int32_t ai_personality_attack_margin;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_wood_difference;

@@ -372,16 +372,56 @@ void ManagementData::scatter(const uint32_t gametime, const uint16_t probability
 		}
 	}
 
+	dump_data();
+	
+	
+}
+void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn, const uint16_t bfields, const uint16_t mines, const uint32_t gametime) {
+	assert(!military_numbers.empty());
+	uint32_t score = 3 * msites + bfields + 10 * psites + 10 * mines;
+	printf (" %d %s: reviewig AI management data, score: %4d (%3d -> %3d, %3d -> %3d, %3d -> %3d )\n",
+	pn, gamestring_with_leading_zeros(gametime), score, old_msites, msites, old_psites, psites, old_bfields, bfields);
+	//militarysites are now ignored
+	if ( (((psites - old_psites) * 5  + (bfields - old_bfields)) < 20) ||	
+	 ((old_bfields + old_psites * 5) * 103 > (bfields + psites * 5) * 100) ) {
+		printf ("  !  too WEAK performer\n");
+		
+		if (gametime < 40 * 60 * 1000){
+			scatter(gametime, 20);
+		} else {
+			printf ("     Too late to scatter\n");
+			dump_data();
+		}
+		
+	} else {
+		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
+		
+		dump_data();
+	}
+	
+	//review min-max values of neurons
+	for (auto & item : neuron_pool) {
+		if (item.get_highest_pos() > 20 || (item.get_highest_pos() > 0 && item.get_highest_pos() <15) || item.get_lowest_pos() < -2) {
+			printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
+		}
+	}
+	
+	old_msites = msites;
+	old_psites = psites;
+	old_bfields = bfields;
+	review_count += 1;	
+}
 
-	//dumping new numbers
-	printf ("     new military_numbers (%lu):\n      {", military_numbers.size());
+void ManagementData::dump_data() {
+		//dumping new numbers
+	printf ("     actual military_numbers (%lu):\n      {", military_numbers.size());
 	for (const auto& item : military_numbers) {
 		printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
 	}
 	printf ("}\n");
 
 	
-	printf ("     new neuron setup:\n      ");
+	printf ("     actual neuron setup:\n      ");
 	
 	printf ("{");
 	uint16_t itemcounter = 1;
@@ -402,71 +442,7 @@ void ManagementData::scatter(const uint32_t gametime, const uint16_t probability
 		++itemcounter;
 	}
 	printf ("}\n");
-	
-	
 }
-void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn, const uint16_t bfields, const uint32_t gametime) {
-	assert(!military_numbers.empty());
-	printf (" %d %s: reviewig AI management data (%3d -> %3d, %3d -> %3d, %3d -> %3d )\n",
-	pn, gamestring_with_leading_zeros(gametime), old_msites, msites, old_psites, psites, old_bfields, bfields);
-	//militarysites are now ignored
-	if ( (((psites - old_psites) * 5  + (bfields - old_bfields)) < 20) ||	
-	 ((old_bfields + old_psites * 5) * 103 > (bfields + psites * 5) * 100) ) {
-		printf ("  !  too WEAK performer\n");
-		
-		scatter(gametime, 20);
-	} else {
-		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
-		
-		
-		//dumping new numbers
-		printf ("     actual military_numbers (%lu):\n      {", military_numbers.size());
-		for (const auto& item : military_numbers) {
-			printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
-		}
-		printf ("}\n");
-	
-		
-		printf ("     actual neuron setup:\n      ");
-		
-		printf ("{");
-		uint16_t itemcounter = 1;
-		for (auto& item : neuron_pool) {
-			printf ("%3d%s",item.get_weight(),(&item != &neuron_pool.back())?", ":"");
-			if (itemcounter % 10 == 0) {
-				printf ("\n       ");
-			}
-			++itemcounter;
-		}
-		printf ("}\n      {");
-		itemcounter = 1;	
-		for (auto& item : neuron_pool) {
-			printf ("%3d%s",item.get_type(),(&item != &neuron_pool.back())?", ":"");
-			if (itemcounter % 10 == 0) {
-				printf ("\n       ");
-			}
-			++itemcounter;
-		}
-		printf ("}\n");
-
-	}
-	
-	//review min-max values of neurons
-	for (auto & item : neuron_pool) {
-		if (item.get_highest_pos() > 20) {
-			printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
-		}
-	}
-	
-	old_msites = msites;
-	old_psites = psites;
-	old_bfields = bfields;
-	review_count += 1;	
-}
-
-//void ManagementData::init_learned_data() {
-	//learned_military_numbers= military_numbers;
-//}
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
