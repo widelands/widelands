@@ -87,8 +87,8 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
-constexpr int  magic_numbers_size = 11;
-constexpr int  neuron_pool_size = 36;
+constexpr int  magic_numbers_size = 12;
+constexpr int  neuron_pool_size = 39;
 
 
 struct CheckStepRoadAI {
@@ -527,15 +527,13 @@ struct ManagementData {
 	std::vector<Neuron> neuron_pool;
 
 	void scatter(uint32_t, uint16_t);
-	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t);
+	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t);
 	void dump_data();
 	//void init_learned_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	
 	std::vector<int16_t> military_numbers;
-	uint16_t old_msites;
-	uint16_t old_psites;
-	uint16_t old_bfields;
+	uint32_t scores[3];
 	uint32_t last_scatter_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
@@ -632,6 +630,7 @@ struct FlagsForRoads {
 // This is a struct that stores strength of players, info on teams and provides some outputs from
 // these data
 struct PlayersStrengths {
+private:
 	struct PlayerStat {
 		PlayerStat();
 		PlayerStat(Widelands::TeamNumber tc, uint32_t pp);
@@ -639,16 +638,18 @@ struct PlayersStrengths {
 		Widelands::TeamNumber team_number;
 		uint32_t players_power;
 	};
-
+public:
 	// Inserting/updating data
 	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_player_power(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
 
+private:
 	// This is the core part of this struct
 	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
 

@@ -468,6 +468,8 @@ void DefaultAI::think() {
 									player_number(),
 									buildable_fields.size(),
 									mines_.size(),
+									player_statistics.get_player_power(player_number()),
+									enemy_last_seen_,
 									gametime);
 			set_taskpool_task_time(gametime +   kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
@@ -900,22 +902,22 @@ void DefaultAI::late_initialization() {
 	
 	//STAT: 3:10 score: 821
 	const std::vector<int16_t> AI_initial_military_numbers_A =
-      { 10, -28, -41,  10,  10, -47,  50, -33,  10,  10,  10}
+      {  2, -28, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10}
 	;
 
 	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
 
 	const std::vector<int8_t> input_weights_A=
-      {  2,  70, -52,  30,  30,  30,  30,  30,  30,  87, 
-        30,  15, -91,  30,  57,  30,  30, -29,  30,  24, 
-        30, -12,  30, -19,  51,  30,  30,  80, -63,  30, 
-        30,   9,  67,   3,  30, -58}
+      { 30,  70, -52,  30, -25,  30,  30,  -5,  15,  80, 
+        30, -98,  30, -60,  93, -68,  30, -29,  30,  73, 
+        30, -12,  30, -93,  30,  30,  30,  80,   6,  30, 
+        30,   9,  67,   3,  30, -58,  30,  30,  30}
 		;
 	const std::vector<int8_t> input_func_A=
-      {  5,   1,   5,   1,   1,   1,   1,   1,   1,   0, 
-         1,   4,   3,   1,   5,   1,   1,   5,   1,   2, 
-         1,   2,   1,   4,   5,   1,   1,   3,   0,   1, 
-         1,   2,   5,   0,   1,   1}
+      {  1,   1,   5,   1,   0,   1,   1,   0,   1,   3, 
+         1,   1,   1,   4,   1,   2,   1,   5,   1,   2, 
+         1,   2,   1,   3,   1,   1,   1,   3,   1,   1, 
+         1,   2,   5,   0,   1,   1,   1,   1,   1}
 		;
 	assert(neuron_pool_size == input_func_A.size());
 	assert(neuron_pool_size == input_weights_A.size());
@@ -923,22 +925,22 @@ void DefaultAI::late_initialization() {
 	
 	//STAT: 3:10 score: 892
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      { 10, -28, -41,  84,  10,  10,  37, -33,  10,  10,  10}
+      {  2, -57, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10}
 	;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 	
 	const std::vector<int8_t> input_weights_B =
-      { 30,  70, -52,  30,  30,  30,  30,  30, -56,  80, 
-        30,  29,  30, -60,  93,  30,  73, -29,  60,  73, 
-        30,  89,  30,  30,  30,  30,  30, -17,   6,  90, 
-        30, -51,  67,  30,  30,  67}
+      { 86,  70, -52,  30, -25,  30,  30,  -5,  15,  80, 
+        30, -98,  30, -60,  93, -68, -34, -29,  30,  73, 
+        30, -12,  30, -93,  30,  30,  30,  80,   6,  30, 
+       -30,   9, -18,   3,  30, -58,  30,  30,  30}
       ;
 
 	const std::vector<int8_t> input_func_B = 
-      {  1,   1,   5,   1,   1,   1,   1,   1,   2,   3, 
-         1,   3,   1,   4,   1,   1,   0,   5,   1,   2, 
-         1,   1,   1,   1,   1,   1,   1,   1,   1,   5, 
-         1,   3,   5,   1,   1,   5}
+      {  4,   1,   5,   1,   0,   1,   1,   0,   1,   3, 
+         1,   1,   1,   4,   1,   2,   3,   5,   1,   2, 
+         1,   2,   1,   3,   1,   1,   1,   3,   1,   1, 
+         4,   2,   2,   0,   1,   1,   1,   1,   1}
 	;
 	assert(neuron_pool_size == input_func_B.size());
 	assert(neuron_pool_size == input_weights_B.size());
@@ -1360,7 +1362,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			if (bpn != pn) {
 				// TODO(unknown): Only continue; if this is an opposing site
 				// allied sites should be counted for military influence
-				if (player_statistics.players_in_same_team(bpn,pn)) {
+				if (!player_statistics.players_in_same_team(bpn, pn)) {
 					field.enemy_nearby = true;
 				}
 				continue;
@@ -1460,6 +1462,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ += (field.enemy_nearby)	* 
 			management_data.neuron_pool[13].get_result_safe(field.military_stationed);
+	field.military_score_ += (field.enemy_nearby)	* 
+		management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 	
 	// near border, but not enemy nearby
 	field.military_score_ += (field.near_border)	* management_data.military_numbers[1];
@@ -1471,7 +1475,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ += (field.enemy_nearby)	* 
 			management_data.neuron_pool[15].get_result_safe(field.military_stationed);
-	
+	field.military_score_ += (field.enemy_nearby)	* 
+		management_data.neuron_pool[36].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+				
 	// inland
 	field.military_score_ += (field.inland)			* management_data.military_numbers[2];
 	field.military_score_ += (field.inland)			* management_data.neuron_pool[2].get_result_safe(field.military_loneliness / 50);
@@ -1482,25 +1488,33 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			management_data.neuron_pool[17].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ += (field.enemy_nearby)	* 
 			management_data.neuron_pool[18].get_result_safe(field.military_stationed);
+	field.military_score_ += (field.enemy_nearby)	* 
+		management_data.neuron_pool[37].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 
 	// ~diff if a militarysite here
 	field.military_score_ += (field.is_militarysite) * management_data.military_numbers[3];
+	field.military_score_ += (field.is_militarysite) * (field.enemy_accessible_)	* management_data.military_numbers[11];	
 	field.military_score_ += (field.is_militarysite) * management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50);
 	field.military_score_ += (field.is_militarysite) * management_data.neuron_pool[7].get_result_safe((field.area_military_capacity + 4) / 5);
 	field.military_score_ += (field.is_militarysite) * 
 			management_data.neuron_pool[11].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
+
 	field.military_score_ += (field.enemy_nearby)	* 
 			management_data.neuron_pool[19].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ += (field.enemy_nearby)	* 
 			management_data.neuron_pool[20].get_result_safe(field.military_stationed);
+	field.military_score_ += (field.enemy_nearby)	* 
+		management_data.neuron_pool[38].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);	
 
 	//if (field.is_militarysite && verbose) printf ("actual score: %4d\n", field.military_score_);
 	//generally
 	field.military_score_ += field.unconnected_nearby * management_data.military_numbers[4];
 	
-	field.military_score_ += management_data.neuron_pool[21].get_result_safe(field.unowned_land_nearby * resource_necessity_territory_ / 9 / 100);
+	field.military_score_ += management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
+		* resource_necessity_territory_ / 100;
 	
-	field.military_score_ += management_data.neuron_pool[22].get_result_safe(field.unowned_mines_spots_nearby * resource_necessity_mines_ / 7 / 100);
+	field.military_score_ += management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 6)  / 7)
+		* resource_necessity_mines_ / 100;
 	
 	field.military_score_ += (!field.inland) * 
 			management_data.neuron_pool[23].get_result_safe((field.unowned_mines_spots_nearby + 8) / 9) *
@@ -1511,11 +1525,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			management_data.neuron_pool[24].get_result_safe((field.rocks_nearby + 2) / 3);
 	
 	field.military_score_ += (!field.inland) *
-			management_data.neuron_pool[25].get_result_safe((field.water_nearby + 3) / 4);	
-
+			management_data.neuron_pool[25].get_result_safe((field.water_nearby + 2) / 3);	
 
 	field.military_score_ += (!field.inland) * resource_necessity_water_needed_ *
-			management_data.neuron_pool[26].get_result_safe((field.distant_water + 14) / 15);
+			management_data.neuron_pool[26].get_result_safe((field.distant_water + 4) / 5);
 	
 	field.military_score_ += (!field.inland) *
 			management_data.neuron_pool[27].get_result_safe(field.trees_nearby / 2);	
@@ -2421,51 +2434,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= bo.build_material_shortage * 500; // prohibitive
 				}
 
-
-
-
-				//// score here is a compound of various input values
-				//// usually resources in vicinity, but when enemy is nearby
-				//// additional bonus is added
-				//if (bf->enemy_nearby) {
-					//prio += bf->military_loneliness / 3;
-					//prio += (20 - bf->area_military_capacity) * 10;
-					//prio -= bo.build_material_shortage  * 50;
-					//prio -= (bf->military_in_constr_nearby + bf->military_unstationed) * 50;
-				//} else {
-					//if (bf->near_border) {
-						//prio += 50;
-						//prio -= bo.build_material_shortage  * 150;
-					//} else {
-						//prio -= bo.build_material_shortage * 500; // prohibitive
-					//}
-					//prio -= (bf->military_in_constr_nearby + bf->military_unstationed) * 150;
-					//prio += (5 - bf->own_military_sites_nearby_()) * 15;
-				//}
-				//prio += bf->unconnected_nearby * 50;
-				//prio += bf->unowned_land_nearby * resource_necessity_territory_ / 100;
-				//prio += bf->unowned_mines_spots_nearby * resource_necessity_mines_ / 100;
-				//prio += ((bf->unowned_mines_spots_nearby > 0) ? 35 : 0) *
-						//resource_necessity_mines_ / 100;
-				//prio += bf->rocks_nearby / 2;
-				//prio += bf->water_nearby;
-				//prio += bf->distant_water * resource_necessity_water_needed_ / 100;
-				//prio += bf->military_loneliness / 10;
-				//prio += bf->trees_nearby / 3;
-				//if (bf->portspace_nearby == ExtendedBool::kTrue) {
-					//if (num_ports == 0) {
-						//prio += 100;
-					//} else {
-						//prio += 25;
-					//}
-				//}
-				//// sometimes expansion is stalled and this is to help boost it
-				//if (msites_in_constr() == 0 && soldier_status_ == SoldiersStatus::kFull) {
-					//prio += 10;
-					//if (bf->enemy_nearby) {
-						//prio += 20;
-					//}
-				//}
 
 				// additional score for bigger buildings
 				int32_t prio_for_size = bo.desc->get_size() - 1;
@@ -4480,7 +4448,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	bo.primary_priority = 0;
-	bo.primary_priority -= static_cast<uint8_t>(soldier_status_) * 10;
+	//bo.primary_priority -= static_cast<uint8_t>(soldier_status_) * 10; not needed here probably
 
 	if (size == BaseImmovable::SMALL) { // this function is intended for medium and bigger sites
 		return BuildingNecessity::kAllowed;
@@ -4726,7 +4694,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	const bool verbose = false;
+	const bool verbose = true;
 
 	// Check next militarysite
 	bool changed = false;
@@ -4745,15 +4713,16 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		update_buildable_field(bf);
 		
 		usefullness_score += bf.military_score_;
-		usefullness_score += management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 		
-		if (verbose) printf (" %d MSite: at %3dx%3d - military score: %4d, usefulness score %4d, local: %4d\n",
-		player_number(),
-		f.x, f.y,
-		bf.military_score_,
-		usefullness_score,
-		management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3)
-		);
+		
+		if (verbose && (usefullness_score <= 0 || bf.enemy_nearby)){
+			printf (" %d MSite: at %3dx%3d, enemy: %s / accessible %s, usefulness score %4d\n",
+			player_number(),
+			f.x, f.y,
+			(bf.enemy_nearby) ? "Y":"N",
+			(bf.enemy_accessible_) ? "Y":"N",
+			usefullness_score);
+		}
 	}
 
 	if (usefullness_score < 0) {

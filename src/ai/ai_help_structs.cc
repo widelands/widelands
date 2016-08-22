@@ -288,9 +288,9 @@ MineTypesObserver::MineTypesObserver() : in_construction(0), finished(0) {
 
 // Is this needed? HERE
 ManagementData::ManagementData() {
-		old_msites = 0;
-		old_psites = 0;
-		old_bfields = 0;
+		scores[0] = 1;
+		scores[1] = 1;
+		scores[2] = 1;
 		review_count = 0;
 		last_scatter_time = 0;
 		next_neuron_id = 0;
@@ -373,29 +373,31 @@ void ManagementData::scatter(const uint32_t gametime, const uint16_t probability
 	}
 
 	dump_data();
-	
-	
 }
-void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn, const uint16_t bfields, const uint16_t mines, const uint32_t gametime) {
+
+
+void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn,
+ const uint16_t bfields, const uint16_t mines, const uint32_t strength,const uint32_t enemy_last_seen,
+ const uint32_t gametime) {
 	assert(!military_numbers.empty());
-	uint32_t score = 3 * msites + bfields + 10 * psites + 10 * mines;
-	printf (" %d %s: reviewig AI management data, score: %4d (%3d -> %3d, %3d -> %3d, %3d -> %3d )\n",
-	pn, gamestring_with_leading_zeros(gametime), score, old_msites, msites, old_psites, psites, old_bfields, bfields);
+	scores[0] = scores[1];
+	scores[1] = scores[2];	
+	scores[2] = 3 * msites + bfields + 10 * psites + 10 * mines + 3 * strength;
+	printf (" %d %s: reviewing AI management data, score: %4d ->%4d ->%4d (%3d, %3d,  %3d, %3d )\n",
+	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2], msites, psites, bfields, strength);
 	//militarysites are now ignored
-	if ( (((psites - old_psites) * 5  + (bfields - old_bfields)) < 20) ||	
-	 ((old_bfields + old_psites * 5) * 103 > (bfields + psites * 5) * 100) ) {
+	if (scores[0] != 0 && scores[2] * 100 / scores[0] < 110) {
 		printf ("  !  too WEAK performer\n");
 		
-		if (gametime < 40 * 60 * 1000){
+		if(enemy_last_seen <  gametime && enemy_last_seen + 45*60*100 > gametime) {
 			scatter(gametime, 20);
 		} else {
-			printf ("     Too late to scatter\n");
-			dump_data();
+			printf ("   not scattering though\n");
 		}
-		
+		dump_data();
+
 	} else {
 		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
-		
 		dump_data();
 	}
 	
@@ -406,11 +408,9 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 		}
 	}
 	
-	old_msites = msites;
-	old_psites = psites;
-	old_bfields = bfields;
 	review_count += 1;	
 }
+
 
 void ManagementData::dump_data() {
 		//dumping new numbers
@@ -419,10 +419,8 @@ void ManagementData::dump_data() {
 		printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
 	}
 	printf ("}\n");
-
 	
 	printf ("     actual neuron setup:\n      ");
-	
 	printf ("{");
 	uint16_t itemcounter = 1;
 	for (auto& item : neuron_pool) {
@@ -443,6 +441,7 @@ void ManagementData::dump_data() {
 	}
 	printf ("}\n");
 }
+
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
@@ -676,6 +675,14 @@ void PlayersStrengths::recalculate_team_power() {
 			}
 		}
 	}
+}
+
+// This is strength of player
+uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0) {
+		return all_stats[pn].players_power;
+	};
+	return 0;
 }
 
 // This is strength of player plus third of strength of other members of his team
