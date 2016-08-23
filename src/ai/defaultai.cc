@@ -902,7 +902,7 @@ void DefaultAI::late_initialization() {
 	
 	//STAT: 3:10 score: 821
 	const std::vector<int16_t> AI_initial_military_numbers_A =
-      {  2, -28, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10}
+      {  2, -28, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10, 10}
 	;
 
 	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
@@ -925,7 +925,7 @@ void DefaultAI::late_initialization() {
 	
 	//STAT: 3:10 score: 892
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  2, -57, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10}
+      {  2, -57, -41,  84,  10,  10,  37, -33,  10,  10,  10, 10, 10}
 	;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 	
@@ -950,14 +950,18 @@ void DefaultAI::late_initialization() {
 
 	if (player_number() % 3 == 1) {
 		printf ("  ... inheriting from parent A\n");
-		management_data.military_numbers = AI_initial_military_numbers_A;
+		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
+			management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
+		}
 		for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
 			management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
 		}
 		
 	} else if (player_number() % 3 == 2) {
 		printf ("  ... inheriting from parent B\n");
-		management_data.military_numbers = AI_initial_military_numbers_B;
+		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
+			management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
+		}
 		for (uint8_t i = 0; i < input_weights_B.size(); i+=1) {
 			management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));
 		}
@@ -966,11 +970,11 @@ void DefaultAI::late_initialization() {
 		printf ("  ... inheriting from both parents randomly\n");
 	
 		//crosspolination
-		management_data.military_numbers = AI_initial_military_numbers_A;
-		for (uint16_t i = 0; i < management_data.military_numbers.size(); i += 1){
+		for (uint16_t i = 0; i < magic_numbers_size; i += 1){
 			if (std::rand() % 2 == 0) {
-				//printf ("    [%d] \n", i);
-				management_data.military_numbers[i] = AI_initial_military_numbers_B[i];
+				management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
+			} else {
+				management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
 			}
 		}
 		for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
@@ -980,12 +984,9 @@ void DefaultAI::late_initialization() {
 				management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));				
 			}
 		}
-		
-		
 	}
 
 	management_data.scatter(gametime, 10);
-
 }
 
 /**
@@ -1127,7 +1128,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	
 	const uint16_t production_area = 6; //NOCOM watch this to not grow to much
 	//const uint16_t milit_area = 9;
-	const uint16_t enemy_check_area = 11;
+	const uint16_t enemy_check_area = 13;
 	const uint16_t distant_resources_area = 15;
 	
 	const bool verbose = false;
@@ -1452,118 +1453,113 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// score here is a compound of various input values
 	// usually resources in vicinity, but when enemy is nearby
 	// additional bonus is added
-	// speciic for enemy_nearby
-	field.military_score_ += (field.enemy_nearby)	* management_data.military_numbers[0];
-	field.military_score_ += (field.enemy_nearby)	* management_data.neuron_pool[0].get_result_safe(field.military_loneliness / 50);
-	field.military_score_ += (field.enemy_nearby)	* management_data.neuron_pool[4].get_result_safe((field.area_military_capacity + 4) / 5);
-	field.military_score_ += (field.enemy_nearby)	*
-			management_data.neuron_pool[8].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_());
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[13].get_result_safe(field.military_stationed);
-	field.military_score_ += (field.enemy_nearby)	* 
-		management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 	
-	// near border, but not enemy nearby
-	field.military_score_ += (field.near_border)	* management_data.military_numbers[1];
-	field.military_score_ += (field.near_border)	* management_data.neuron_pool[1].get_result_safe(field.military_loneliness / 50);
-	field.military_score_ += (field.near_border)	* management_data.neuron_pool[5].get_result_safe((field.area_military_capacity + 4) / 5);
-	field.military_score_ += (field.near_border)	* 
-			management_data.neuron_pool[9].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_());
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[15].get_result_safe(field.military_stationed);
-	field.military_score_ += (field.enemy_nearby)	* 
-		management_data.neuron_pool[36].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
-				
-	// inland
-	field.military_score_ += (field.inland)			* management_data.military_numbers[2];
-	field.military_score_ += (field.inland)			* management_data.neuron_pool[2].get_result_safe(field.military_loneliness / 50);
-	field.military_score_ += (field.inland)			* management_data.neuron_pool[6].get_result_safe((field.area_military_capacity + 4) / 5);
-	field.military_score_ -= (field.inland)			* 
-			management_data.neuron_pool[10].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[17].get_result_safe(field.own_military_sites_nearby_());
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[18].get_result_safe(field.military_stationed);
-	field.military_score_ += (field.enemy_nearby)	* 
-		management_data.neuron_pool[37].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+	if (!field.is_militarysite) {
+		if (field.enemy_nearby) {
+			// speciic for enemy_nearby
+			field.military_score_ += management_data.get_military_number_at(0);
+			field.military_score_ += management_data.neuron_pool[0].get_result_safe(field.military_loneliness / 50);
+			field.military_score_ += management_data.neuron_pool[4].get_result_safe((field.area_military_capacity + 4) / 5);
+			field.military_score_ += 
+					management_data.neuron_pool[8].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
+			field.military_score_ +=  
+					management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_());
+			field.military_score_ += 
+					management_data.neuron_pool[13].get_result_safe(field.military_stationed);
+			field.military_score_ +=  
+				management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+		} else if (field.near_border){
+			// near border, but not enemy nearby
+			field.military_score_ += management_data.get_military_number_at(1);
+			field.military_score_ += management_data.neuron_pool[1].get_result_safe(field.military_loneliness / 50);
+			field.military_score_ += management_data.neuron_pool[5].get_result_safe((field.area_military_capacity + 4) / 5);
+			field.military_score_ += 
+					management_data.neuron_pool[9].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
+			field.military_score_ += 
+					management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_());
+			field.military_score_ +=  
+					management_data.neuron_pool[15].get_result_safe(field.military_stationed);
+			field.military_score_ +=
+				management_data.neuron_pool[36].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+		} else if (field.inland) {		
+			// inland
+			field.military_score_ += management_data.get_military_number_at(2);
+			field.military_score_ += management_data.neuron_pool[2].get_result_safe(field.military_loneliness / 50);
+			field.military_score_ += management_data.neuron_pool[6].get_result_safe((field.area_military_capacity + 4) / 5);
+			field.military_score_ -=  
+					management_data.neuron_pool[10].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
+			field.military_score_ += 
+					management_data.neuron_pool[17].get_result_safe(field.own_military_sites_nearby_());
+			field.military_score_ += 
+					management_data.neuron_pool[18].get_result_safe(field.military_stationed);
+			field.military_score_ +=
+				management_data.neuron_pool[37].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+			} else {
+				NEVER_HERE();
+			}
+	} else {
+		field.military_score_ += management_data.get_military_number_at(3);
+		if (field.enemy_accessible_) {
+			field.military_score_ += management_data.get_military_number_at(11);	
+		}
+		if (field.near_border) {
+			field.military_score_ += management_data.get_military_number_at(12);
+		}
+		field.military_score_ += management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50);
+		field.military_score_ += management_data.neuron_pool[7].get_result_safe((field.area_military_capacity + 4) / 5);
+		field.military_score_ +=  
+				management_data.neuron_pool[11].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
+		field.military_score_ += 
+				management_data.neuron_pool[19].get_result_safe(field.own_military_sites_nearby_());
+		field.military_score_ +=
+				management_data.neuron_pool[20].get_result_safe(field.military_stationed);
+		field.military_score_ += 
+			management_data.neuron_pool[38].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);	
+		field.military_score_ +=
+			management_data.neuron_pool[28].get_result_safe(field.local_soldier_capacity / 2);
+	} 
 
-	// ~diff if a militarysite here
-	field.military_score_ += (field.is_militarysite) * management_data.military_numbers[3];
-	field.military_score_ += (field.is_militarysite) * (field.enemy_accessible_)	* management_data.military_numbers[11];	
-	field.military_score_ += (field.is_militarysite) * management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50);
-	field.military_score_ += (field.is_militarysite) * management_data.neuron_pool[7].get_result_safe((field.area_military_capacity + 4) / 5);
-	field.military_score_ += (field.is_militarysite) * 
-			management_data.neuron_pool[11].get_result_safe((field.military_in_constr_nearby + field.military_unstationed));
-
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[19].get_result_safe(field.own_military_sites_nearby_());
-	field.military_score_ += (field.enemy_nearby)	* 
-			management_data.neuron_pool[20].get_result_safe(field.military_stationed);
-	field.military_score_ += (field.enemy_nearby)	* 
-		management_data.neuron_pool[38].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);	
-
-	//if (field.is_militarysite && verbose) printf ("actual score: %4d\n", field.military_score_);
 	//generally
-	field.military_score_ += field.unconnected_nearby * management_data.military_numbers[4];
-	
-	field.military_score_ += management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
+	field.military_score_ += field.unconnected_nearby * management_data.get_military_number_at(4);
+	const int32_t land_score = management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
 		* resource_necessity_territory_ / 100;
-	
-	field.military_score_ += management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 6)  / 7)
+	assert (land_score >= -100 && land_score <= 100);
+	field.military_score_ += land_score;
+	const int32_t mines_score = management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 6)  / 7)
 		* resource_necessity_mines_ / 100;
-	
-	field.military_score_ += (!field.inland) * 
-			management_data.neuron_pool[23].get_result_safe((field.unowned_mines_spots_nearby + 8) / 9) *
-			resource_necessity_mines_ / 100;
+	assert (mines_score >= -100 && mines_score <= 100);		
+	field.military_score_ += mines_score;
+	field.military_score_ += field.preferred * management_data.get_military_number_at(8) / 5;
+	field.military_score_ += field.unconnected_nearby * management_data.get_military_number_at(10)  / 5;
 
-
-	field.military_score_ += (!field.inland) *
-			management_data.neuron_pool[24].get_result_safe((field.rocks_nearby + 2) / 3);
-	
-	field.military_score_ += (!field.inland) *
-			management_data.neuron_pool[25].get_result_safe((field.water_nearby + 2) / 3);	
-
-	field.military_score_ += (!field.inland) * resource_necessity_water_needed_ *
-			management_data.neuron_pool[26].get_result_safe((field.distant_water + 4) / 5);
-	
-	field.military_score_ += (!field.inland) *
-			management_data.neuron_pool[27].get_result_safe(field.trees_nearby / 2);	
-
+	if (!field.inland) {
+		field.military_score_ +=
+				management_data.neuron_pool[24].get_result_safe((field.rocks_nearby + 2) / 3);
+		field.military_score_ +=
+				management_data.neuron_pool[25].get_result_safe((field.water_nearby + 2) / 3);	
+		field.military_score_ += resource_necessity_water_needed_ *
+				management_data.neuron_pool[26].get_result_safe((field.distant_water + 4) / 5);
+		field.military_score_ +=
+				management_data.neuron_pool[27].get_result_safe(field.trees_nearby / 2);	
+	}
 	
 	if (field.portspace_nearby == ExtendedBool::kTrue) {
 		if (num_ports == 0) {
-			field.military_score_ += management_data.military_numbers[5];
+			field.military_score_ += management_data.get_military_number_at(5);
 		} else {
 			field.military_score_ += 25;
 		}
 	}
 
-	if (field.is_militarysite && verbose) printf ("actual score: %4d b\n", field.military_score_);
-
 	// sometimes expansion is stalled and this is to help boost it
 	if (msites_in_constr() == 0 && soldier_status_ == SoldiersStatus::kFull) {
-		field.military_score_ += management_data.military_numbers[6] ;
+		field.military_score_ += management_data.get_military_number_at(6) ;
 		if (field.enemy_nearby) {
-			field.military_score_ += management_data.military_numbers[7];
+			field.military_score_ += management_data.get_military_number_at(7);
 		}
 	}
 
-	//now consider the situation that this is militarysite
-	field.military_score_ += (field.is_militarysite) * management_data.military_numbers[9] * field.enemy_accessible_;
-	
-	
-	
-	field.military_score_ += (field.is_militarysite) * 
-			management_data.neuron_pool[28].get_result_safe(field.local_soldier_capacity / 2);
-	
-	if (field.is_militarysite && verbose) printf ("actual score: %4d\n", field.military_score_);
-	
-	field.military_score_ += field.preferred * management_data.military_numbers[8]  / 5;
-	field.military_score_ += field.unconnected_nearby * management_data.military_numbers[10]  / 5;
+	if (field.is_militarysite && verbose) printf ("actual score: %4d b\n", field.military_score_);
 	
 	avg_military_score_ = (avg_military_score_ * 99 + field.military_score_) / 100;
 	//printf (" %d: %3dx%3d: military_score: %6d, avg: %6d\n",
@@ -4715,8 +4711,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		usefullness_score += bf.military_score_;
 		
 		
-		if (verbose && (usefullness_score <= 0 || bf.enemy_nearby)){
-			printf (" %d MSite: at %3dx%3d, enemy: %s / accessible %s, usefulness score %4d\n",
+		if (verbose && (usefullness_score <= 0 || bf.enemy_nearby || usefullness_score > 1000)){
+			printf (" %d MSite: at %3dx%3d, enemy: %s / accessible: %s, usefulness score: %4d\n",
 			player_number(),
 			f.x, f.y,
 			(bf.enemy_nearby) ? "Y":"N",
@@ -5587,7 +5583,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		if (this_player) {
 			try {
 				player_statistics.add(
-				   j, this_player->team_number(), genstats.at(j - 1).miltary_strength.back());
+				   j, this_player->team_number(), genstats.at(j - 1).miltary_strength.back(), genstats.at(j - 1).nr_casualties.back());
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				    static_cast<unsigned int>(player_number()),

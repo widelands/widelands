@@ -294,6 +294,9 @@ ManagementData::ManagementData() {
 		review_count = 0;
 		last_scatter_time = 0;
 		next_neuron_id = 0;
+		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
+			military_numbers.push_back(0);
+		}
 	}
 
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : 
@@ -338,6 +341,7 @@ int8_t Neuron::get_result_safe(int32_t pos){
 		pos = 20;
 	}
 	assert(pos <= 20);
+	assert (results[pos] >= -100 && results[pos] <=100);
 	return results[pos];
 }
 
@@ -346,18 +350,19 @@ void Neuron::set_type(uint8_t new_type) {
 	type = new_type;
 }
 
-
+// this randomly sets new values into neurons and AI magic numbers
 void ManagementData::scatter(const uint32_t gametime, const uint16_t probability) {
 
 	printf ("    ... scattering , time since last scatter %6d, probability: 1/%d\n",
 	(gametime - last_scatter_time) / 1000 / 60,
 	probability);
 	last_scatter_time = gametime;
-	
 
 	for (auto & item : military_numbers) {
 	   	if (std::rand() % probability == 0) {
-			item = -100 + std::rand() % 200;
+			// poor man's gausian distribution probability
+			item = -100 + (std::rand() % 200 + std::rand() % 200) /2;
+			assert (item >= -100 && item <=100);
 			printf ("      Magic number - new value: %4d\n", item);
 			}
 	}
@@ -365,7 +370,7 @@ void ManagementData::scatter(const uint32_t gametime, const uint16_t probability
 	// Modifying pool of neurons	
 	for (auto& item : neuron_pool){
 		if (std::rand() % probability == 0) {
-			item.set_weight(-100 + std::rand() % 200);
+			item.set_weight(-100 + (std::rand() % 200 + std::rand() % 200) /2);
 			item.set_type(std::rand() % neuron_curves.size());
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
 			item.recalculate();
@@ -377,22 +382,25 @@ void ManagementData::scatter(const uint32_t gametime, const uint16_t probability
 
 
 void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn,
- const uint16_t bfields, const uint16_t mines, const uint32_t strength,const uint32_t enemy_last_seen,
+ const uint16_t bfields, const uint16_t mines, const uint32_t strength,const uint32_t casualities,
  const uint32_t gametime) {
 	assert(!military_numbers.empty());
 	scores[0] = scores[1];
 	scores[1] = scores[2];	
 	scores[2] = 3 * msites + bfields + 10 * psites + 10 * mines + 3 * strength;
-	printf (" %d %s: reviewing AI management data, score: %4d ->%4d ->%4d (%3d, %3d,  %3d, %3d )\n",
-	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2], msites, psites, bfields, strength);
+	printf (" %d %s: reviewing AI management data, score: %4d ->%4d ->%4d (ms: %3d, ps: %3d, bf: %3d, strg: %3d, cass.: %3d )\n",
+	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2], msites, psites, bfields, strength, casualities);
 	//militarysites are now ignored
 	if (scores[0] != 0 && scores[2] * 100 / scores[0] < 110) {
 		printf ("  !  too WEAK performer\n");
 		
-		if(enemy_last_seen <  gametime && enemy_last_seen + 45*60*100 > gametime) {
+		//Do not scatter if:
+		// - we started fighting
+		// - last scatter was less then 30 minutes ago
+		if (casualities == 0 && (last_scatter_time + 30 * 60 * 1000) < gametime) {
 			scatter(gametime, 20);
 		} else {
-			printf ("   not scattering though\n");
+			printf ("   not scattering, player already fights, or scatterred lately\n");
 		}
 		dump_data();
 
@@ -442,6 +450,16 @@ void ManagementData::dump_data() {
 	printf ("}\n");
 }
 
+int16_t ManagementData::get_military_number_at(uint8_t pos) {
+	assert (pos < magic_numbers_size);
+	return military_numbers[pos];
+}
+
+void ManagementData::set_military_number_at(const uint8_t pos, const int16_t value) {
+	assert (pos < magic_numbers_size);
+	assert (value >= -100 && value <= 100);
+	military_numbers[pos] = value;
+}
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
@@ -649,18 +667,19 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from
 // these data
-PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), players_power(0) {
+PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), players_power(0), players_casualities(0) {
 }
-PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp)
-   : team_number(tc), players_power(pp) {
+PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t cs)
+   : team_number(tc), players_power(pp), players_casualities(cs) {
 }
 
 // Inserting/updating data
-void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp) {
+void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp,  uint32_t cs) {
 	if (all_stats.count(pn) == 0) {
-		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(pn, PlayerStat(tn, pp)));
+		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(pn, PlayerStat(tn, pp, cs)));
 	} else {
 		all_stats[pn].players_power = pp;
+		all_stats[pn].players_casualities = cs;
 	}
 }
 
@@ -681,6 +700,14 @@ void PlayersStrengths::recalculate_team_power() {
 uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_power;
+	};
+	return 0;
+}
+
+// This is casualities of player
+uint32_t PlayersStrengths::get_player_casualities(Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0) {
+		return all_stats[pn].players_casualities;
 	};
 	return 0;
 }

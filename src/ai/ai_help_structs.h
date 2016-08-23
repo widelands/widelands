@@ -87,7 +87,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
-constexpr int  magic_numbers_size = 12;
+constexpr int  magic_numbers_size = 13;
 constexpr int  neuron_pool_size = 39;
 
 
@@ -529,16 +529,17 @@ struct ManagementData {
 	void scatter(uint32_t, uint16_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t);
 	void dump_data();
-	//void init_learned_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
-	
+	int16_t get_military_number_at(uint8_t);
+	void set_military_number_at(uint8_t, int16_t);
+
+private:	
 	std::vector<int16_t> military_numbers;
 	uint32_t scores[3];
 	uint32_t last_scatter_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
 };
-
 	
 
 // this is used to count militarysites by their size
@@ -633,19 +634,21 @@ struct PlayersStrengths {
 private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, uint32_t pp);
+		PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t cs);
 
 		Widelands::TeamNumber team_number;
 		uint32_t players_power;
+		uint32_t players_casualities;
 	};
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp);
+	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp, uint32_t cs);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
 
