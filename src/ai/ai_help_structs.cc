@@ -285,17 +285,17 @@ EnemySiteObserver::EnemySiteObserver()
 MineTypesObserver::MineTypesObserver() : in_construction(0), finished(0) {
 }
 
-
-// Is this needed? HERE
 ManagementData::ManagementData() {
 		scores[0] = 1;
 		scores[1] = 1;
 		scores[2] = 1;
 		review_count = 0;
-		last_scatter_time = 0;
+		last_mutate_time = 0;
 		next_neuron_id = 0;
+		performance_change = 0;
 		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
 			military_numbers.push_back(0);
+			orig_military_numbers.push_back(0);
 		}
 	}
 
@@ -303,7 +303,8 @@ Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) :
 	weight(w),type(f), id(i) {
 	lowest_pos = std::numeric_limits<uint8_t>::max();
 	highest_pos = std::numeric_limits<uint8_t>::min();
-	//printf (" New neuron created: %d\n", id);
+	orig_weight = weight;
+	orig_type = type;	
 	recalculate();
 }
 
@@ -351,28 +352,35 @@ void Neuron::set_type(uint8_t new_type) {
 }
 
 // this randomly sets new values into neurons and AI magic numbers
-void ManagementData::scatter(const uint32_t gametime, const uint16_t probability) {
+void ManagementData::mutate(const uint32_t gametime, const uint16_t probability) {
 
-	printf ("    ... scattering , time since last scatter %6d, probability: 1/%d\n",
-	(gametime - last_scatter_time) / 1000 / 60,
+	printf ("    ... mutating , time since last mutation: %6d, probability: 1/%d\n",
+	(gametime - last_mutate_time) / 1000 / 60,
 	probability);
-	last_scatter_time = gametime;
+	last_mutate_time = gametime;
 
-	for (auto & item : military_numbers) {
+	for (uint16_t i = 0; i < magic_numbers_size; i += 1){
 	   	if (std::rand() % probability == 0) {
 			// poor man's gausian distribution probability
-			item = -100 + (std::rand() % 200 + std::rand() % 200) /2;
-			assert (item >= -100 && item <=100);
-			printf ("      Magic number - new value: %4d\n", item);
-			}
+			int16_t new_value = -100 + ((std::rand() % 200) * 3 + std::rand() % 200) /4;
+			assert (new_value >= -100 && new_value <=100);
+			set_military_number_at(i,new_value);
+			printf ("      Magic number %d: new value: %4d\n", i, new_value);
+		} else { //restoring original value - (might not be changed of course)
+			set_military_number_at(i,get_orig_military_number_at(i));
+		}
 	}
 
 	// Modifying pool of neurons	
 	for (auto& item : neuron_pool){
 		if (std::rand() % probability == 0) {
-			item.set_weight(-100 + (std::rand() % 200 + std::rand() % 200) /2);
+			item.set_weight(-100 + ((std::rand() % 200) * 3 + std::rand() % 200) /4);
 			item.set_type(std::rand() % neuron_curves.size());
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
+			item.recalculate();
+		} else { //restoring original value 
+			item.set_weight(item.get_orig_weight());
+			item.set_type(item.get_orig_type());
 			item.recalculate();
 		}
 	}
@@ -390,29 +398,36 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 	scores[2] = 3 * msites + bfields + 10 * psites + 10 * mines + 3 * strength;
 	printf (" %d %s: reviewing AI management data, score: %4d ->%4d ->%4d (ms: %3d, ps: %3d, bf: %3d, strg: %3d, cass.: %3d )\n",
 	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2], msites, psites, bfields, strength, casualities);
-	//militarysites are now ignored
-	if (scores[0] != 0 && scores[2] * 100 / scores[0] < 110) {
-		printf ("  !  too WEAK performer\n");
+
+
+	performance_change = (scores[0] != 0) ? scores[2] * 100 / scores[0] : 0;
+	if (scores[0] != 0 && performance_change < 105) {
+		printf ("   !  too WEAK performer (%3d < 105)\n", performance_change);
 		
-		//Do not scatter if:
+		//Do not mutate if:
 		// - we started fighting
-		// - last scatter was less then 30 minutes ago
-		if (casualities == 0 && (last_scatter_time + 30 * 60 * 1000) < gametime) {
-			scatter(gametime, 20);
+		// - last mutate was less then 30 minutes ago
+		if (casualities == 0 && (last_mutate_time + 25 * 60 * 1000) < gametime) {
+			mutate(gametime, 20);
 		} else {
-			printf ("   not scattering, player already fights, or scatterred lately\n");
+			printf ("   not mutating; casualties: %d, previous mutation %d min ago\n",
+			casualities, (gametime - last_mutate_time) / 1000 / 60);
 		}
 		dump_data();
 
 	} else {
-		printf ("  still using scatter from %d minutes ago:\n",(gametime - last_scatter_time) / 1000 / 60); 
+		printf ("   still using mutate from %d minutes ago (performance: %3d >= 105):\n",
+		(gametime - last_mutate_time) / 1000 / 60,
+		performance_change); 
 		dump_data();
 	}
 	
 	//review min-max values of neurons
-	for (auto & item : neuron_pool) {
-		if (item.get_highest_pos() > 20 || (item.get_highest_pos() > 0 && item.get_highest_pos() <15) || item.get_lowest_pos() < -2) {
-			printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
+	if (gametime > 60 * 60 * 1000) {
+		for (auto & item : neuron_pool) {
+			if (item.get_highest_pos() > 22 || (item.get_highest_pos() > 0 && item.get_highest_pos() <14) || item.get_lowest_pos() < -2) {
+				printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
+			}
 		}
 	}
 	
@@ -455,10 +470,21 @@ int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	return military_numbers[pos];
 }
 
+int16_t ManagementData::get_orig_military_number_at(uint8_t pos) {
+	assert (pos < magic_numbers_size);
+	return orig_military_numbers[pos];
+}
+
 void ManagementData::set_military_number_at(const uint8_t pos, const int16_t value) {
 	assert (pos < magic_numbers_size);
 	assert (value >= -100 && value <= 100);
 	military_numbers[pos] = value;
+}
+
+void ManagementData::set_orig_military_number_at(const uint8_t pos, const int16_t value) {
+	assert (pos < magic_numbers_size);
+	assert (value >= -100 && value <= 100);
+	orig_military_numbers[pos] = value;
 }
 
 uint16_t MineTypesObserver::total_count() const {

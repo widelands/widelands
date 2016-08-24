@@ -503,10 +503,12 @@ struct Neuron {
 	void recalculate();
 	void set_weight(int8_t w);
 	int8_t get_weight() {return weight;};
+	int8_t get_orig_weight() {return orig_weight;};
 	int8_t get_result(uint8_t);
 	int8_t get_result_safe(int32_t);
 	void set_type(uint8_t);
 	uint8_t get_type() {return type;};
+	uint8_t get_orig_type() {return orig_type;};
 	uint16_t get_id() {return id;};
 	int32_t get_lowest_pos() {return lowest_pos;};
 	int32_t get_highest_pos() {return highest_pos;};	
@@ -515,6 +517,8 @@ private:
 	int8_t results[21];
 	int8_t weight;
 	uint8_t type;
+	int8_t orig_weight;
+	uint8_t orig_type;	
 	uint16_t id;
 	int32_t lowest_pos;
 	int32_t highest_pos;
@@ -526,19 +530,23 @@ struct ManagementData {
 	
 	std::vector<Neuron> neuron_pool;
 
-	void scatter(uint32_t, uint16_t);
+	void mutate(uint32_t, uint16_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t);
 	void dump_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	int16_t get_military_number_at(uint8_t);
+	int16_t get_orig_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
-
+	void set_orig_military_number_at(uint8_t, int16_t);
+	
 private:	
 	std::vector<int16_t> military_numbers;
+	std::vector<int16_t> orig_military_numbers;
 	uint32_t scores[3];
-	uint32_t last_scatter_time;
+	uint32_t last_mutate_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
+	uint16_t performance_change;
 };
 	
 
