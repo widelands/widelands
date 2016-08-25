@@ -352,9 +352,17 @@ void Neuron::set_type(uint8_t new_type) {
 }
 
 // this randomly sets new values into neurons and AI magic numbers
-void ManagementData::mutate(const uint32_t gametime, const uint16_t probability) {
+void ManagementData::mutate(const uint32_t gametime) {
 
-	printf ("    ... mutating , time since last mutation: %6d, probability: 1/%d\n",
+	int16_t probability = -1;
+	if (last_mutate_time == 0) {
+		probability = get_military_number_at(13) / 15 + 13;
+	} else {
+		probability = get_military_number_at(14) / 15 + 13;
+	}
+	assert(probability > 0);
+	
+	printf ("    ... mutating , time since last mutation: %6d, probability: 1 / %d\n",
 	(gametime - last_mutate_time) / 1000 / 60,
 	probability);
 	last_mutate_time = gametime;
@@ -362,7 +370,7 @@ void ManagementData::mutate(const uint32_t gametime, const uint16_t probability)
 	for (uint16_t i = 0; i < magic_numbers_size; i += 1){
 	   	if (std::rand() % probability == 0) {
 			// poor man's gausian distribution probability
-			int16_t new_value = -100 + ((std::rand() % 200) * 3 + std::rand() % 200) /4;
+			int16_t new_value = ((-100 + std::rand() % 200) * 3 -100 + std::rand() % 200) / 4;
 			assert (new_value >= -100 && new_value <=100);
 			set_military_number_at(i,new_value);
 			printf ("      Magic number %d: new value: %4d\n", i, new_value);
@@ -374,7 +382,7 @@ void ManagementData::mutate(const uint32_t gametime, const uint16_t probability)
 	// Modifying pool of neurons	
 	for (auto& item : neuron_pool){
 		if (std::rand() % probability == 0) {
-			item.set_weight(-100 + ((std::rand() % 200) * 3 + std::rand() % 200) /4);
+			item.set_weight(((-100 + std::rand() % 200) * 3 -100 + std::rand() % 200) / 4);
 			item.set_type(std::rand() % neuron_curves.size());
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
 			item.recalculate();
@@ -391,29 +399,31 @@ void ManagementData::mutate(const uint32_t gametime, const uint16_t probability)
 
 void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn,
  const uint16_t bfields, const uint16_t mines, const uint32_t strength,const uint32_t casualities,
- const uint32_t gametime) {
+ const uint32_t ships_count, const uint32_t wh_count, const uint32_t gametime) {
 	assert(!military_numbers.empty());
 	scores[0] = scores[1];
 	scores[1] = scores[2];	
-	scores[2] = 3 * msites + bfields + 10 * psites + 10 * mines + 3 * strength;
-	printf (" %d %s: reviewing AI management data, score: %4d ->%4d ->%4d (ms: %3d, ps: %3d, bf: %3d, strg: %3d, cass.: %3d )\n",
-	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2], msites, psites, bfields, strength, casualities);
+	scores[2] = msites + bfields + 8 * psites + 10 * mines + 3 * strength + 3 * casualities + 10 * ships_count + 10 * wh_count;
+	printf (" %d %s: reviewing AI mngm. data, score: %4d ->%4d ->%4d (ms:%3d, ps:%3d, bf:%3d, strg:%3d, cass.:%3d, shps: %3d, wh:%3d )\n",
+	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2],
+	msites, psites, bfields, strength, casualities, ships_count, wh_count);
 
 
 	performance_change = (scores[0] != 0) ? scores[2] * 100 / scores[0] : 0;
-	if (scores[0] != 0 && performance_change < 105) {
+	if (scores[0] != 0 && performance_change < 104) {
 		printf ("   !  too WEAK performer (%3d < 105)\n", performance_change);
 		
 		//Do not mutate if:
 		// - we started fighting
 		// - last mutate was less then 30 minutes ago
 		if (casualities == 0 && (last_mutate_time + 25 * 60 * 1000) < gametime) {
-			mutate(gametime, 20);
+			mutate(gametime);
 		} else {
 			printf ("   not mutating; casualties: %d, previous mutation %d min ago\n",
 			casualities, (gametime - last_mutate_time) / 1000 / 60);
+			dump_data();
 		}
-		dump_data();
+		
 
 	} else {
 		printf ("   still using mutate from %d minutes ago (performance: %3d >= 105):\n",

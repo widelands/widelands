@@ -470,6 +470,8 @@ void DefaultAI::think() {
 									mines_.size(),
 									player_statistics.get_player_power(player_number()),
 									player_statistics.get_player_casualities(player_number()),
+									allships.size(),
+									numof_warehouses_,
 									gametime);
 			set_taskpool_task_time(gametime +   kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
@@ -900,45 +902,46 @@ void DefaultAI::late_initialization() {
 	}
 
 	
-	//STAT: 3:10 score: 821
+	//STAT 5: 2337
 	const std::vector<int16_t> AI_initial_military_numbers_A =
-      {  2, -28, -41,  84,  10,  10, -38,  76,  10,  10,  10,  10,  10}
+{  2, -28, -41,  84,  45,  10, -38,  87,  10,  10,  10, -33,  10,   0,   0}
 	;
 
 	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
 
 	const std::vector<int8_t> input_weights_A=
-      { 30,  70,  87,  30, -25,  30,  30,  45,  15,  80, 
-        30, -98,  30, -60,  93, -68,  30, -29,  30,  73, 
-        30, -12,  30, -93,  30,  30,  30,  80,   6,  30, 
-        30,   9,  67,   3,  30, -58,  30,  30,  30}
+      { 30,  70, -39,  30, -25,  30,  30,  45,  15,  80, 
+        30, -98,  30, -60,  93, -68, -28, -29,  30,  73, 
+        43, -12,  30, -93,  30,  30,  30,  80,   6,  30, 
+        30,   9,  67,   3, -80, -58,  30,  30,  30}
+
 		;
 	const std::vector<int8_t> input_func_A=
-      {  1,   1,   0,   1,   0,   1,   1,   3,   1,   3, 
-         1,   1,   1,   4,   1,   2,   1,   5,   1,   2, 
-         1,   2,   1,   3,   1,   1,   1,   3,   1,   1, 
+      {  1,   1,   1,   1,   0,   1,   1,   3,   1,   3, 
+         1,   1,   1,   4,   1,   2,   4,   5,   1,   2, 
+         4,   2,   1,   3,   1,   1,   1,   3,   1,   1, 
          1,   2,   5,   0,   1,   1,   1,   1,   1}
 		;
 	assert(neuron_pool_size == input_func_A.size());
 	assert(neuron_pool_size == input_weights_A.size());
 	
 	
-	//STAT: 3:10 score: 892
+	//STAT: 3:20 score: 916
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  2, -57, -41,  84,  44,  10,  37, -33,  10,  10,  10,  10,  10}
+      {  2, -57, -41,  84,  44,  10,  37, -33,  10,  10,  10,  10,  10,   0,   0}
 	;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 	
 	const std::vector<int8_t> input_weights_B =
-      { 86,  70, -52,  30,  -8,   3,  30,  -5,  15,  80, 
-       -26, -98,  30, -60,  93, -68, -34, -29,  66,  73, 
-        30, -12,  30, -75,  30,  30, -71,  80,   6,  19, 
+      { 86,  70, -52,  30, -20,   3,  30,  -5,  15,  80, 
+       -26, -98,  30, -60,  93, -68, -34,   3,  66,  73, 
+        30, -12,  30,   4,  30,  30, -71,  80,   6,  19, 
        -30,   9, -18,   3,  30, -58, -41,  83, -20}
       ;
 
 	const std::vector<int8_t> input_func_B = 
-      {  4,   1,   5,   1,   3,   3,   1,   0,   1,   3, 
-         1,   1,   1,   4,   1,   2,   3,   5,   2,   2, 
+      {  4,   1,   5,   1,   0,   3,   1,   0,   1,   3, 
+         1,   1,   1,   4,   1,   2,   3,   2,   2,   2, 
          1,   2,   1,   1,   1,   1,   5,   3,   1,   3, 
          4,   2,   2,   0,   1,   1,   3,   3,   1}
 	;
@@ -990,7 +993,7 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	management_data.mutate(gametime, 10);
+	management_data.mutate(gametime);
 }
 
 /**
@@ -1496,7 +1499,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			} else {
 				NEVER_HERE();
 			}
-	} else {
+	} else { // militarysite
 		field.military_score_ += management_data.get_military_number_at(3);
 		if (field.enemy_accessible_) {
 			field.military_score_ += management_data.get_military_number_at(11);	
@@ -1799,8 +1802,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const bool too_many_ms_constructionsites =
 		(pow(msites_in_constr(), 2) > militarysites.size() + 2);
-	//const bool too_many_vacant_mil =
-		//(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
+
 	//const int32_t kUpperLimit = 350; NOCOM
 	const int32_t kBottomLimit = 0; // is this variable needed now?
 	// modifying least_military_score, down if more military sites are needed and vice versa
@@ -1895,10 +1897,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// set necessity for mines
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
-
-	//resource_necessity_mines_ = 100 * (15 - virtual_mines) / 15;
-	//resource_necessity_mines_ = (resource_necessity_mines_ > 100) ? 100 : resource_necessity_mines_;
-	//resource_necessity_mines_ = (resource_necessity_mines_ < 20) ? 10 : resource_necessity_mines_;
 	resource_necessity_mines_ = management_data.neuron_pool[34].get_result_safe(virtual_mines * 2);
 
 	// here we calculate how badly we need to expand, result is number (0-100)

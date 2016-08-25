@@ -87,7 +87,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
-constexpr int  magic_numbers_size = 13;
+constexpr int  magic_numbers_size = 15;
 constexpr int  neuron_pool_size = 39;
 
 
@@ -530,8 +530,8 @@ struct ManagementData {
 	
 	std::vector<Neuron> neuron_pool;
 
-	void mutate(uint32_t, uint16_t);
-	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t);
+	void mutate(uint32_t);
+	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t);
 	void dump_data();
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	int16_t get_military_number_at(uint8_t);
