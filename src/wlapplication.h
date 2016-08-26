@@ -229,9 +229,6 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
-	// Log all output to this file if set, otherwise use cout
-	std::string logfile_;
-
 	GameType game_type_;
 
 	/// True if left and right mouse button should be swapped
