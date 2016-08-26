@@ -6,6 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 18:42+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-08-17 12:44+0000\n"
+"PO-Revision-Date: 2016-08-20 20:09+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +162,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "A szövők pókszövetet és köntösöket gyártanak a szövőmalomban. A pókszövet szükséges alapanyaga pár épületnek és ruhának, míg a köntösök a katonák egyenruhái. A szövőmalomnak aranyfonálra és pókselyemre van szüksége nyersanyagként. Pókselymet a póktenyészetek termelnek, aranyfonalat pedig az aranyszálfonó malmok hoznak létre."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -210,7 +211,7 @@ msgstr "Építs egy kohót"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Építs egy páncél-, illetve egy fegyverkovács műhelyet"
+msgstr "Építs egy páncél-, illetve egy fegyverkovács műhelyt"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -609,7 +610,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "Téged is Satul melegítsen, Opol. El akartam halasztani a pókszövet gyártását, de megértem helyzeted sürgősségét. A javaslatod korrektnek tűnik. Meg fogom építeni a szövőmalmot és a póktenyészetet. Építeni fogok egy aranyszálfonó malmot is, hogy az általad készített aranyköntösök ne csak névlegesen legyenek aranyból."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
 msgid "Opol Seeks Out Jundlina"
@@ -622,7 +623,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "Satul melegítsen téged, Jundlina! A szövőmalom, az aranyszálfonó malom és a póktenyészet építése befejeződött és máris nekikezdenek a munkának. A szövők céhe nagyon hálás a támogatásodért és állni fogjuk szavunkat, rövid időn belül leszállítjuk az első köntöst."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:284
@@ -901,7 +902,7 @@ msgstr "Megnyerted ezt a küldetést. Folytasd a következővel, vagy játssz it
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Új cél"
