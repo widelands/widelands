@@ -281,10 +281,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{
-		MapObjectivePacket p;
-		p.write(fs_, egbase_, *mos_);
-	}
+	write_objective_data(fs_, egbase_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing map images ... ");

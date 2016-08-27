@@ -309,15 +309,16 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
-	}  // load_type != MapLoader::LoadType::kEditor
 
-	//  Objectives
-	log("Reading Objective Data ... ");
-	{
-		MapObjectivePacket p;
-		p.read(*fs_, egbase, is_game, *mol_);
+		// Objectives. They are not needed in the Editor, since they are fully
+		// defined through Lua scripting. They are also not required for a game,
+		// since they will be only be set after it has started.
+		log("Reading Objective Data ... ");
+		if (!is_game) {
+			read_objective_data(*fs_, egbase);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");
 	{

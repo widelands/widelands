@@ -31,13 +31,7 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
 
-void MapObjectivePacket::read(FileSystem& fs,
-                              EditorGameBase& egbase,
-                              bool const skip,
-                              MapObjectLoader&) {
-	if (skip)
-		return;
-
+void read_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 	Profile prof;
 	try {
 		prof.read("objective", nullptr, fs);
@@ -72,7 +66,7 @@ void MapObjectivePacket::read(FileSystem& fs,
 	}
 }
 
-void MapObjectivePacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void write_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 	Profile prof;
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
