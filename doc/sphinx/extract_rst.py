@@ -27,8 +27,8 @@ cpp_pairs = (
 # Meaning: (src_dir, toc_name_to_place)
 lua_dirs = (
     ('data/scripting', 'auxiliary'),
+    ('data/scripting/win_conditions', 'auxiliary'),
     ('data/scripting/editor', 'lua_world'),
-    ('data/scripting/win_conditions', 'lua_world'),
     ('data/tribes', 'lua_tribes'),
     ('data/tribes/scripting/help', 'lua_tribes'),
     ('data/tribes/buildings/militarysites/atlanteans/castle', 'lua_tribes'),
