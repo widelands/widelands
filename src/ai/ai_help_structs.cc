@@ -294,7 +294,6 @@ ManagementData::ManagementData() {
 		next_neuron_id = 0;
 		performance_change = 0;
 		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-			military_numbers.push_back(0);
 			orig_military_numbers.push_back(0);
 		}
 	}
@@ -316,6 +315,7 @@ void Neuron::set_weight(int8_t w) {
 	} else {
 		weight = w;
 	}
+	
 }
 
 void Neuron::recalculate() {
@@ -383,12 +383,16 @@ void ManagementData::mutate(const uint32_t gametime) {
 	for (auto& item : neuron_pool){
 		if (std::rand() % probability == 0) {
 			item.set_weight(((-100 + std::rand() % 200) * 3 -100 + std::rand() % 200) / 4);
+			pd->neuron_weights[item.get_id()] = item.get_weight();
 			item.set_type(std::rand() % neuron_curves.size());
+			pd->neuron_functs[item.get_id()] = item.get_type();
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
 			item.recalculate();
 		} else { //restoring original value 
 			item.set_weight(item.get_orig_weight());
+			pd->neuron_weights[item.get_id()] = item.get_weight();
 			item.set_type(item.get_orig_type());
+			pd->neuron_functs[item.get_id()] = item.get_type();
 			item.recalculate();
 		}
 	}
@@ -400,17 +404,22 @@ void ManagementData::mutate(const uint32_t gametime) {
 void ManagementData::review(const uint16_t msites, const uint16_t psites, const uint8_t pn,
  const uint16_t bfields, const uint16_t mines, const uint32_t strength,const uint32_t casualities,
  const uint32_t ships_count, const uint32_t wh_count, const uint32_t gametime) {
-	assert(!military_numbers.empty());
+	assert(!pd->magic_numbers.empty());
 	scores[0] = scores[1];
 	scores[1] = scores[2];	
-	scores[2] = msites + bfields + 8 * psites + 10 * mines + 3 * strength + 3 * casualities + 10 * ships_count + 10 * wh_count;
+	scores[2] = std::min<uint16_t>(msites, psites / 2) + bfields + 6 * psites + 10 * std::min<uint16_t>(mines, 7) + 3 * strength + 8 * casualities + 10 * ships_count + 8 * wh_count;
 	printf (" %d %s: reviewing AI mngm. data, score: %4d ->%4d ->%4d (ms:%3d, ps:%3d, bf:%3d, strg:%3d, cass.:%3d, shps: %3d, wh:%3d )\n",
 	pn, gamestring_with_leading_zeros(gametime), scores[0], scores[1], scores[2],
 	msites, psites, bfields, strength, casualities, ships_count, wh_count);
 
 
 	performance_change = (scores[0] != 0) ? scores[2] * 100 / scores[0] : 0;
-	if (scores[0] != 0 && performance_change < 104) {
+	if (gametime > 3 * 60 * 60 * 1000 && (gametime - last_mutate_time) > 60 * 60 * 1000){
+		printf ("   mutations locked, since %d minutes ago (current performance: %3d):\n",
+		(gametime - last_mutate_time) / 1000 / 60,
+		performance_change);
+		dump_data();
+	} else if (scores[0] != 0 && performance_change < 104) {
 		printf ("   !  too WEAK performer (%3d < 105)\n", performance_change);
 		
 		//Do not mutate if:
@@ -419,8 +428,8 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 		if (casualities == 0 && (last_mutate_time + 25 * 60 * 1000) < gametime) {
 			mutate(gametime);
 		} else {
-			printf ("   not mutating; casualties: %d, previous mutation %d min ago\n",
-			casualities, (gametime - last_mutate_time) / 1000 / 60);
+			printf ("   not mutating; previous mutation %d min ago only\n",
+			(gametime - last_mutate_time) / 1000 / 60);
 			dump_data();
 		}
 		
@@ -447,15 +456,20 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 
 void ManagementData::dump_data() {
 		//dumping new numbers
-	printf ("     actual military_numbers (%lu):\n      {", military_numbers.size());
-	for (const auto& item : military_numbers) {
-		printf ("%3d%s",item,(&item != &military_numbers.back())?", ":"");
+	printf ("     actual military_numbers (%lu):\n      {", pd->magic_numbers.size());
+	uint16_t itemcounter = 1;
+	for (const auto& item : pd->magic_numbers) {
+		printf ("%3d%s",item,(&item != &pd->magic_numbers.back())?", ":"");
+		if (itemcounter % 10 == 0) {
+			printf ("\n       ");
+		}
+		++itemcounter;
 	}
 	printf ("}\n");
 	
 	printf ("     actual neuron setup:\n      ");
 	printf ("{");
-	uint16_t itemcounter = 1;
+	itemcounter = 1;
 	for (auto& item : neuron_pool) {
 		printf ("%3d%s",item.get_weight(),(&item != &neuron_pool.back())?", ":"");
 		if (itemcounter % 10 == 0) {
@@ -477,7 +491,7 @@ void ManagementData::dump_data() {
 
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	assert (pos < magic_numbers_size);
-	return military_numbers[pos];
+	return pd->magic_numbers[pos];
 }
 
 int16_t ManagementData::get_orig_military_number_at(uint8_t pos) {
@@ -487,8 +501,9 @@ int16_t ManagementData::get_orig_military_number_at(uint8_t pos) {
 
 void ManagementData::set_military_number_at(const uint8_t pos, const int16_t value) {
 	assert (pos < magic_numbers_size);
+	assert (pos < pd->magic_numbers.size());
 	assert (value >= -100 && value <= 100);
-	military_numbers[pos] = value;
+	pd->magic_numbers[pos] = value;
 }
 
 void ManagementData::set_orig_military_number_at(const uint8_t pos, const int16_t value) {

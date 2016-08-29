@@ -866,6 +866,7 @@ void DefaultAI::late_initialization() {
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
+	management_data.pd = player_->get_mutable_ai_persistent_state();
 
 	if (persistent_data->initialized == kFalse) {
 		// As all data are initialized without given values, they must be populated with reasonable
@@ -885,6 +886,133 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_early_militarysites = std::rand() % 20 + 20;
 		persistent_data->last_soldier_trained = kNever;
 		persistent_data->ai_personality_mil_upper_limit = std::rand() % 125 + 325;
+
+
+	
+		//STAT 5:30 2708
+		const std::vector<int16_t> AI_initial_military_numbers_A =
+      {  2, -28, -41,  84, -34,  10, -15, -33,  10,  36,   0, -33,  10,   0,   0,0,0,0}
+		;
+	
+		assert(magic_numbers_size == AI_initial_military_numbers_A.size());
+	
+		const std::vector<int8_t> input_weights_A=
+      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
+        30,   9, -90, -60,  93, -68,  53,   9, -50,  55, 
+       -33, -12,  41, -18,  30, -39, -71,  80,   6,  30, 
+        86,  12,  67,   3,  40, -58,  43,  83, -40,   0, 
+         0,   0,   0,   0,   0, 0,0,0}
+			;
+		const std::vector<int8_t> input_func_A=
+      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
+         1,   5,   1,   4,   1,   2,   2,   5,   5,   0, 
+         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   0,   1,   1,   3,   3,   0, 
+         0,   1,   0,   0,   0,0,0,0}
+			;
+		assert(neuron_pool_size == input_func_A.size());
+		assert(neuron_pool_size == input_weights_A.size());
+		
+		
+		//STAT: 5:30 score: 2579
+		const std::vector<int16_t> AI_initial_military_numbers_B =
+      {  2, -28, -41,  84,  45,  10, -15, -33,  10,  36,   0, -33, -12,   0,   0,0,0,0}
+		;
+		assert(magic_numbers_size == AI_initial_military_numbers_B.size());
+		
+		const std::vector<int8_t> input_weights_B =
+      { 30,  70, -52,   8, -25,  30, -30,  45,  15, -33, 
+        30,  24, -90, -60,  93, -68,  53,   9, -50,  55, 
+       -33, -12,  41, -18,  30,  71, -71,  80,   6,  30, 
+        86,  12,  67,   3,  40, -58,  43,  73, -40,   0, 
+        64,   0,   0,   0,   0, 0,0,0}
+	      ;
+	
+		const std::vector<int8_t> input_func_B = 
+      {  1,   1,   5,   4,   0,   1,   0,   4,   1,   3, 
+         1,   1,   1,   4,   1,   2,   2,   5,   5,   0, 
+         3,   2,   0,   2,   1,   2,   5,   3,   1,   1, 
+         0,   4,   5,   0,   0,   1,   1,   2,   3,   0, 
+         2,   1,   0,   0,   0, 0,0,0}
+
+		;
+		assert(neuron_pool_size == input_func_B.size());
+		assert(neuron_pool_size == input_weights_B.size());
+	
+	
+		printf (" %d: initializing AI's DNA\n", player_number());
+
+		// filling vector with zeros
+		for (uint16_t i =  0; i < magic_numbers_size; i = i+1){
+			persistent_data->magic_numbers.push_back(0);
+		}
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+
+	
+		if (player_number() % 3 == 1) {
+			printf ("  ... inheriting from parent A\n");
+			for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
+				management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
+				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
+			}
+			for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
+				management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
+			}
+			
+		} else if (player_number() % 3 == 2) {
+			printf ("  ... inheriting from parent B\n");
+			for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
+				management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
+				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
+			}
+			for (uint8_t i = 0; i < input_weights_B.size(); i+=1) {
+				management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));
+			}
+			
+		}	else {
+			printf ("  ... inheriting from both parents randomly\n");
+		
+			//crosspolination
+			for (uint16_t i = 0; i < magic_numbers_size; i += 1){
+				if (std::rand() % 2 == 0) {
+					management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
+					management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
+				} else {
+					management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
+					management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
+				}
+			}
+			for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
+				if (std::rand() % 2 == 0) {
+					management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
+				} else {
+					management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));				
+				}
+			}
+		}
+		
+		// now push everything to persistant data
+		persistent_data->magic_numbers_size = magic_numbers_size;
+		persistent_data->neuron_pool_size = neuron_pool_size;	
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);	
+		//for (uint32_t i; i < persistent_data->magic_numbers_size; i = i+1){
+			//persistent_data->magic_numbers.push_back(management_data.get_military_number_at(i));
+		//}
+		for (uint32_t i = 0; i < neuron_pool_size; i = i+1){
+			persistent_data->neuron_weights.push_back(management_data.neuron_pool[i].get_weight());
+			persistent_data->neuron_functs.push_back(management_data.neuron_pool[i].get_type());			
+		}
+
+				
+
+		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
+		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);			
+		management_data.mutate(gametime);
+
+
+
 	} else if (persistent_data->initialized == kTrue) {
 		// Doing some consistency checks
 		check_range<uint32_t>(
@@ -897,103 +1025,30 @@ void DefaultAI::late_initialization() {
 		check_range<uint32_t>
 			(persistent_data->ai_personality_early_militarysites, 20, 40,
 							"ai_personality_early_militarysites");
+
+		printf ("%d  %d %d\n", persistent_data->magic_numbers.size(), persistent_data->magic_numbers_size, magic_numbers_size);							
+		assert (persistent_data->magic_numbers_size == magic_numbers_size);
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
+		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i+1){
+			management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
+			management_data.set_orig_military_number_at(i, persistent_data->magic_numbers[i]);
+		}
+		for (uint32_t i = 0; i < persistent_data->neuron_pool_size; i = i+1){
+			management_data.neuron_pool.push_back(
+				Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i],management_data.new_neuron_id()));	
+		}
+		management_data.dump_data();					
+							
 	} else {
 		throw wexception("Corrupted AI data");
 	}
 
-	
-	//STAT 5: 2337
-	const std::vector<int16_t> AI_initial_military_numbers_A =
-{  2, -28, -41,  84,  45,  10, -38,  87,  10,  10,  10, -33,  10,   0,   0}
-	;
-
-	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
-
-	const std::vector<int8_t> input_weights_A=
-      { 30,  70, -39,  30, -25,  30,  30,  45,  15,  80, 
-        30, -98,  30, -60,  93, -68, -28, -29,  30,  73, 
-        43, -12,  30, -93,  30,  30,  30,  80,   6,  30, 
-        30,   9,  67,   3, -80, -58,  30,  30,  30}
-
-		;
-	const std::vector<int8_t> input_func_A=
-      {  1,   1,   1,   1,   0,   1,   1,   3,   1,   3, 
-         1,   1,   1,   4,   1,   2,   4,   5,   1,   2, 
-         4,   2,   1,   3,   1,   1,   1,   3,   1,   1, 
-         1,   2,   5,   0,   1,   1,   1,   1,   1}
-		;
-	assert(neuron_pool_size == input_func_A.size());
-	assert(neuron_pool_size == input_weights_A.size());
-	
-	
-	//STAT: 3:20 score: 916
-	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  2, -57, -41,  84,  44,  10,  37, -33,  10,  10,  10,  10,  10,   0,   0}
-	;
-	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
-	
-	const std::vector<int8_t> input_weights_B =
-      { 86,  70, -52,  30, -20,   3,  30,  -5,  15,  80, 
-       -26, -98,  30, -60,  93, -68, -34,   3,  66,  73, 
-        30, -12,  30,   4,  30,  30, -71,  80,   6,  19, 
-       -30,   9, -18,   3,  30, -58, -41,  83, -20}
-      ;
-
-	const std::vector<int8_t> input_func_B = 
-      {  4,   1,   5,   1,   0,   3,   1,   0,   1,   3, 
-         1,   1,   1,   4,   1,   2,   3,   2,   2,   2, 
-         1,   2,   1,   1,   1,   1,   5,   3,   1,   3, 
-         4,   2,   2,   0,   1,   1,   3,   3,   1}
-	;
-	assert(neuron_pool_size == input_func_B.size());
-	assert(neuron_pool_size == input_weights_B.size());
 
 
-	printf (" %d: initializing AI's DNA\n", player_number());
 
-	if (player_number() % 3 == 1) {
-		printf ("  ... inheriting from parent A\n");
-		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-			management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
-			management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
-		}
-		for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
-			management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
-		}
-		
-	} else if (player_number() % 3 == 2) {
-		printf ("  ... inheriting from parent B\n");
-		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-			management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
-			management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
-		}
-		for (uint8_t i = 0; i < input_weights_B.size(); i+=1) {
-			management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));
-		}
-		
-	}	else {
-		printf ("  ... inheriting from both parents randomly\n");
-	
-		//crosspolination
-		for (uint16_t i = 0; i < magic_numbers_size; i += 1){
-			if (std::rand() % 2 == 0) {
-				management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
-				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
-			} else {
-				management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
-				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
-			}
-		}
-		for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
-			if (std::rand() % 2 == 0) {
-				management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
-			} else {
-				management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));				
-			}
-		}
-	}
-
-	management_data.mutate(gametime);
 }
 
 /**
@@ -1133,8 +1188,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 	
-	const uint16_t production_area = 6; //NOCOM watch this to not grow to much
-	//const uint16_t milit_area = 9;
+	const uint16_t production_area = 6;
 	const uint16_t enemy_check_area = 13;
 	const uint16_t distant_resources_area = 15;
 	
@@ -1470,8 +1524,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.military_score_ += management_data.neuron_pool[4].get_result_safe((field.area_military_capacity + 4) / 5);
 			field.military_score_ += 
 					management_data.neuron_pool[8].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
-			field.military_score_ += 
-					management_data.neuron_pool[13].get_result_safe(field.military_stationed);
 			field.military_score_ +=  
 				management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 		} else if (field.near_border){
@@ -1481,8 +1533,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.military_score_ += management_data.neuron_pool[5].get_result_safe((field.area_military_capacity + 4) / 5);
 			field.military_score_ += 
 					management_data.neuron_pool[9].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
-			field.military_score_ +=  
-					management_data.neuron_pool[15].get_result_safe(field.military_stationed);
 			field.military_score_ +=
 				management_data.neuron_pool[36].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 		} else if (field.inland) {		
@@ -1492,31 +1542,37 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.military_score_ += management_data.neuron_pool[6].get_result_safe((field.area_military_capacity + 4) / 5);
 			field.military_score_ -=  
 					management_data.neuron_pool[10].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
-			field.military_score_ += 
-					management_data.neuron_pool[18].get_result_safe(field.military_stationed);
 			field.military_score_ +=
 				management_data.neuron_pool[37].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 			} else {
 				NEVER_HERE();
 			}
+			field.military_score_ += 
+				management_data.neuron_pool[13].get_result_safe(field.military_stationed);
+			field.military_score_ += 
+				management_data.neuron_pool[15].get_result_safe(field.military_stationed / 2);
 	} else { // militarysite
+		field.military_score_ -= 100;
 		field.military_score_ += management_data.get_military_number_at(3);
 		if (field.enemy_accessible_) {
 			field.military_score_ += management_data.get_military_number_at(11);	
-		}
-		if (field.near_border) {
+		} else if (field.near_border) {
 			field.military_score_ += management_data.get_military_number_at(12);
-		}
+		} else {
+			field.military_score_ += management_data.get_military_number_at(9);			
+			}
 		field.military_score_ += management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50);
 		field.military_score_ += management_data.neuron_pool[7].get_result_safe((field.area_military_capacity + 4) / 5);
 		field.military_score_ +=  
-				management_data.neuron_pool[11].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
+			management_data.neuron_pool[11].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
 		field.military_score_ +=
-				management_data.neuron_pool[20].get_result_safe(field.military_stationed);
+			management_data.neuron_pool[20].get_result_safe(field.military_stationed);
+		field.military_score_ += 
+			management_data.neuron_pool[17].get_result_safe(field.military_stationed / 2);
 		field.military_score_ += 
 			management_data.neuron_pool[38].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);	
 		field.military_score_ +=
-			management_data.neuron_pool[28].get_result_safe(field.local_soldier_capacity * 3);
+			management_data.neuron_pool[28].get_result_safe(field.area_military_capacity - field.local_soldier_capacity);
 	} 
 
 	//generally
@@ -1528,9 +1584,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	const int32_t mines_score = management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 9)  / 10)
 		* resource_necessity_mines_ / 100;
 	field.military_score_ +=  
-		management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_() * 2);
+		management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ +=  
-		management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_() - 10);		
+		management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_() / 4);		
 	assert (mines_score >= -100 && mines_score <= 100);		
 	field.military_score_ += mines_score;
 	field.military_score_ += field.preferred * management_data.get_military_number_at(8) / 5;
@@ -1667,13 +1723,6 @@ void DefaultAI::update_productionsite_stats() {
 
 	if (resource_necessity_water_needed_) {
 		resource_necessity_water_ = management_data.neuron_pool[35].get_result_safe(fishers_count * 4);
-		//if (fishers_count == 0) {
-			//resource_necessity_water_ = 100;
-		//} else if (fishers_count == 1) {
-			//resource_necessity_water_ = 50;
-		//} else {
-			//resource_necessity_water_ = 10;
-		//}
 	}
 
 	// for mines_ also
@@ -1803,7 +1852,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const bool too_many_ms_constructionsites =
 		(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 
-	//const int32_t kUpperLimit = 350; NOCOM
 	const int32_t kBottomLimit = 0; // is this variable needed now?
 	// modifying least_military_score, down if more military sites are needed and vice versa
 
@@ -2036,6 +2084,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			bo.new_building = check_building_necessity(bo, gametime);
 		} else if  (bo.type == BuildingObserver::Type::kTrainingsite) {
 			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+		} else if  (bo.type == BuildingObserver::Type::kWarehouse) {
+			bo.new_building = check_warehouse_necessity(bo, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
 		} else {
@@ -2113,6 +2163,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			int32_t prio = 0;  // score of a bulding on a field
 
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
+
+				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 20;
+				assert (prio >= -5 && prio <= 5);
 
 				// this can be only a well (as by now)
 				if (bo.mines_water) {
@@ -2414,14 +2467,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 
 				// additional score for bigger buildings
-				int32_t prio_for_size = bo.desc->get_size() - 1;
+				const int32_t prio_for_size = bo.desc->get_size() - 1;
 				if (bf->enemy_nearby) {
-					prio_for_size *= management_data.neuron_pool[29].get_result_safe(prio_for_size * 6);
-
+					prio += management_data.neuron_pool[29].get_result_safe(prio_for_size * 10);
+				} else if (bf->unowned_land_nearby > 5) {
+					prio += management_data.neuron_pool[30].get_result_safe(prio_for_size * 10);
 				} else {
-					prio_for_size *= management_data.neuron_pool[30].get_result_safe(prio_for_size * 6);
+					prio += management_data.neuron_pool[16].get_result_safe(prio_for_size * 10);
 				}
-				prio += prio_for_size;
 
 				prio += bf->military_score_;
 
@@ -2440,45 +2493,46 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				if (bf->is_portspace != ExtendedBool::kTrue && bo.is_port) {
 					continue;
 				}
+				prio = bo.primary_priority;
 
-				if (bo.cnt_under_construction > 0) {
-					continue;
-				}
+				//if (bo.cnt_under_construction > 0) {
+					//continue;
+				//}
 
-				bool warehouse_needed = false;
+				//bool warehouse_needed = false;
 
-				//  Build one warehouse for ~every 35 productionsites and mines_.
-				//  Militarysites are slightly important as well, to have a bigger
-				//  chance for a warehouses (containing waiting soldiers or wares
-				//  needed for soldier training) near the frontier.
-				prio = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
-				       35 * static_cast<int32_t>(numof_warehouses_);
-				if (prio > 0) {
-					warehouse_needed = true;
-				} else {
-					prio = 0;
-				}
+				////  Build one warehouse for ~every 35 productionsites and mines_.
+				////  Militarysites are slightly important as well, to have a bigger
+				////  chance for a warehouses (containing waiting soldiers or wares
+				////  needed for soldier training) near the frontier.
+				//prio = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
+				       //35 * static_cast<int32_t>(numof_warehouses_);
+				//if (prio > 0) {
+					//warehouse_needed = true;
+				//} else {
+					//prio = 0;
+				//}
 
-				// But we still can built a port if it is first one
-				if (bo.is_port && bo.total_count() == 0 && productionsites.size() > 5 &&
-				    !bf->enemy_nearby && bf->is_portspace == ExtendedBool::kTrue && seafaring_economy) {
-					prio += productionsites.size();
-					warehouse_needed = true;
-				}
+				//// But we still can built a port if it is first one
+				//if (bo.is_port && bo.total_count() == 0 && productionsites.size() > 5 &&
+				    //!bf->enemy_nearby && bf->is_portspace == ExtendedBool::kTrue && seafaring_economy) {
+					//prio += productionsites.size();
+					//warehouse_needed = true;
+				//}
 
-				if (!warehouse_needed) {
-					continue;
-				}
+				//if (!warehouse_needed) {
+					//continue;
+				//}
 
-				// we prefer ports to a normal warehouse
-				if (bo.is_port) {
-					prio += 15;
-				}
+				//// we prefer ports to a normal warehouse
+				//if (bo.is_port) {
+					//prio += 15;
+				//}
 
-				// it is good to have more then 1 warehouse
-				if (numof_warehouses_ == 1) {
-					prio += 10;
-				}
+				//// it is good to have more then 1 warehouse
+				//if (numof_warehouses_ == 1) {
+					//prio += 10;
+				//}
 
 				// iterating over current warehouses and testing a distance
 				// getting distance to nearest warehouse and adding it to a score
@@ -2491,7 +2545,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// but limit to 30
 				const uint16_t max_distance_considered = 30;
 				nearest_distance = std::min(nearest_distance, max_distance_considered);
-				prio += nearest_distance - 30;
+				prio += management_data.neuron_pool[47].get_result_safe(nearest_distance/2);
 
 				// dont be close to enemies
 				if (bf->enemy_nearby) {
@@ -3455,10 +3509,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		//if (site.bo->stocklevel_time < game().get_gametime() - 10 * 1000) {NOCOM
-			//site.bo->stocklevel = calculate_stocklevel(*site.bo);
-			//site.bo->stocklevel_time = game().get_gametime();
-		//}
 
 		// if we need wood badly
 		if (remaining_trees > 0 && get_stocklevel(*site.bo, gametime) <= 50) {
@@ -4079,6 +4129,55 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	return changed;
 }
 
+BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
+                                                      const uint32_t gametime) { //NOCOM
+	bo.primary_priority = 0;
+
+	if (bo.cnt_under_construction > 0 || bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+		return BuildingNecessity::kForbidden;
+	}
+
+	bool warehouse_needed = false;
+
+	//  Build one warehouse for ~every 35 productionsites and mines_.
+	//  Militarysites are slightly important as well, to have a bigger
+	//  chance for a warehouses (containing waiting soldiers or wares
+	//  needed for soldier training) near the frontier.
+	bo.primary_priority = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
+	       static_cast<int32_t>(numof_warehouses_) * (35 + management_data.get_military_number_at(15) / 5);
+	if (bo.primary_priority > 0) {
+		warehouse_needed = true;
+	} else {
+		bo.primary_priority = 0;
+	}
+
+	bo.primary_priority += management_data.neuron_pool[45].get_result_safe(numof_warehouses_ * 3) / 5;
+	bo.primary_priority += management_data.neuron_pool[46].get_result_safe(gametime / 1000 / 60 / 5) / 5;
+
+	// But we still can built a port if it is first one
+	if (bo.is_port && bo.total_count() == 0 && productionsites.size() > 5 &&
+	    seafaring_economy) {
+		bo.primary_priority += 5 + management_data.get_military_number_at(16)/10;
+		warehouse_needed = true;
+	}
+
+	if (!warehouse_needed) {
+		return BuildingNecessity::kForbidden;;
+	}
+
+	// we prefer ports to a normal warehouse
+	if (bo.is_port) {
+		bo.primary_priority += +10 + management_data.get_military_number_at(17) / 10;
+	}
+	
+	if (bo.primary_priority > 0) {
+		return BuildingNecessity::kAllowed;
+	} else {
+		return BuildingNecessity::kForbidden;
+	}
+}		
+
+
 // this receives an building observer and have to decide if new/one of
 // current buildings of this type is needed
 // This is core of construct_building() function
@@ -4300,8 +4399,17 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kAllowed;
 			}
 		} else if (bo.plants_trees) {
-
-			bo.cnt_target = 2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 40;
+			int32_t value = management_data.neuron_pool[39].get_result_safe(mines_.size() + productionsites.size() / 2);
+			value += management_data.neuron_pool[40].get_result_safe(persistent_data->trees_around_cutters / 10);
+			value += management_data.neuron_pool[41].get_result_safe(get_stocklevel(bo, gametime) / 5);			
+			value += management_data.neuron_pool[42].get_result_safe(bo.total_count());	
+			value += management_data.neuron_pool[43].get_result_safe(spots_ / 3);	
+			value += management_data.get_military_number_at(13);
+			value /= 12;
+			value = std::max(value, -3);
+			
+			bo.cnt_target = 5 + value;
+			assert (bo.cnt_target > 1 && bo.cnt_target < 60);
 
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
@@ -4309,12 +4417,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
-			// 150 corresponds to 15 trees
-			if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 15) {
-				bo.cnt_target += 4;
-			} else if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 30) {
-				bo.cnt_target += 2;
-			}
+			//// 150 corresponds to 15 trees
+			//if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 15) {
+				//bo.cnt_target += 4;
+			//} else if (persistent_data->trees_around_cutters < 150 && get_stocklevel(bo, gametime) < 30) {
+				//bo.cnt_target += 2;
+			//}
 
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
 				return BuildingNecessity::kForbidden;

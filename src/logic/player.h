@@ -172,7 +172,9 @@ public:
 			 ai_personality_wood_difference(0),
 			 ai_personality_early_militarysites(0),
 			 last_soldier_trained(0),
-			 ai_personality_mil_upper_limit(0) {
+			 ai_personality_mil_upper_limit(0),
+			 magic_numbers_size(0),
+			 neuron_pool_size(0) {
 		}
 
 		// Was initialized
@@ -192,6 +194,11 @@ public:
 		uint32_t ai_personality_early_militarysites;
 		uint32_t last_soldier_trained;
 		int32_t ai_personality_mil_upper_limit;
+		uint32_t magic_numbers_size;
+		uint32_t neuron_pool_size;	
+		std::vector<int16_t> magic_numbers;
+		std::vector<int8_t> neuron_weights;
+		std::vector<int8_t> neuron_functs;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

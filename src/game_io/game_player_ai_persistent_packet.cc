@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -55,6 +55,22 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
 				player->ai_data.last_soldier_trained = fr.unsigned_32();
 				player->ai_data.ai_personality_mil_upper_limit = fr.signed_32();
+				// Magic numbers
+				player->ai_data.magic_numbers_size = fr.unsigned_32();
+				for (uint16_t i = 0; i < player->ai_data.magic_numbers_size; i = i + 1) {
+					player->ai_data.magic_numbers.push_back(fr.signed_16());
+				}
+				assert (player->ai_data.magic_numbers_size ==  player->ai_data.magic_numbers.size());
+				// Neurons
+				player->ai_data.neuron_pool_size = fr.unsigned_32();
+				for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
+					player->ai_data.neuron_weights.push_back(fr.signed_8());
+				}
+				for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
+					player->ai_data.neuron_functs.push_back(fr.signed_8());
+				}
+				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());	
+				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());					
 
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
@@ -94,6 +110,22 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
 		fw.unsigned_32(player->ai_data.last_soldier_trained);
 		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
+		// Magic numbers
+		fw.unsigned_32(player->ai_data.magic_numbers_size);
+		assert (player->ai_data.magic_numbers_size == player->ai_data.magic_numbers.size());
+		for (uint16_t i = 0; i < player->ai_data.magic_numbers_size; i = i + 1) {
+			fw.signed_16(player->ai_data.magic_numbers[i]);
+		}
+		// Neurons
+		fw.unsigned_32(player->ai_data.neuron_pool_size);
+		assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());	
+		assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());			
+		for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
+			fw.signed_8(player->ai_data.neuron_weights[i]);
+		}
+		for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
+			fw.signed_8(player->ai_data.neuron_functs[i]);
+		}		
 	}
 
 	fw.write(fs, "binary/player_ai");

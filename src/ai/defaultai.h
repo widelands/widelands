@@ -158,6 +158,8 @@ private:
 	// for militarysites (overloading the function)
 	Widelands::BuildingNecessity check_building_necessity
 		(Widelands::BuildingObserver&, uint32_t);
+	Widelands::BuildingNecessity check_warehouse_necessity
+		(Widelands::BuildingObserver&, uint32_t gametime);
 
 	void sort_task_pool();
 	void sort_by_priority();

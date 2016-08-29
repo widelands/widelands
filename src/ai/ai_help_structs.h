@@ -87,8 +87,8 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
-constexpr int  magic_numbers_size = 15;
-constexpr int  neuron_pool_size = 39;
+constexpr int  magic_numbers_size = 18;
+constexpr int  neuron_pool_size = 48;
 
 
 struct CheckStepRoadAI {
@@ -529,6 +529,7 @@ struct ManagementData {
 	ManagementData();
 	
 	std::vector<Neuron> neuron_pool;
+	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t);
@@ -540,7 +541,6 @@ struct ManagementData {
 	void set_orig_military_number_at(uint8_t, int16_t);
 	
 private:	
-	std::vector<int16_t> military_numbers;
 	std::vector<int16_t> orig_military_numbers;
 	uint32_t scores[3];
 	uint32_t last_mutate_time;
