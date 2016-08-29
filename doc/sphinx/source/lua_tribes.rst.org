@@ -1,7 +1,53 @@
 Scripts for Tribes
 ==================
 
-Description of Tribe related scripts...
+All tribes and their units are defined by Lua scripting files which are located
+in ``data/tribes``. Each tribe is bootstrapped as follows:
+
+Defining Tribes
+---------------
+
+* ``data/tribes/init.lua``: This file loads all the scripts that define the
+  tribes. So, if you add a new tribe or a new unit to a tribe, it needs to be
+  listed in this file.
+* ``data/tribes/preload.lua``: Provides basic information about all available
+  tribes to the game launching screens. The player won't be able to select a
+  tribe without it being defined in this file.
+* ``data/tribes/<tribe name>.lua``: These scripts tell the engine which units
+  belong to each tribe. They also define some global animated images for each
+  tribe (flags, borders, roads).
+
+Defining Units
+--------------
+
+A tribe can have the following types of units: buildings (militarysites,
+partially_finished, productionsites, trainingsites and warehouses; headquarters
+are a special case of warehouse), immovables, workers, wares, and a ship.
+
+The definitions for the tribes' units are located in the subdirectories of
+``data/tribes``. Each unit needs to have an ``init.lua`` and a ``helptexts.lua``
+file. The ``init.lua`` script will load the unit to be used in the game, and
+``helptexts.lua`` will provide the information used by the in-game help
+('Tribal Encyclopedia') and by our website's online
+`Encyclopedia <https://wl.widelands.org/encyclopedia/>`_.
+
+Other Scripts
+-------------
+
+The ``data/tribes/scripting`` directory provides some global scripts related to
+the tribes. It contains the following subdirectories:
+
+* ``data/tribes/scripting/help``: These scripts load all information used by the
+  in-game help ('Tribal Encyclopedia'). Unit-specific help is loaded with the
+  help of each unit's ``helptexts.lua`` script.
+* ``data/tribes/scripting/mapobject_info``: These scripts are used to generate
+  help information for the `Encyclopedia <https://wl.widelands.org/encyclopedia/>`_
+  on our website. Again, unit-specific help is loaded with the help of each
+  unit's ``helptexts.lua`` script.
+* ``data/tribes/scripting/starting_conditions``: Contains a subdirectory with
+  the game starting conditions available for each tribe. These scripts need to
+  be listed in ``data/tribes/preload.lua`` in order for Widelands to find them.
+
 
 .. toctree::
    :maxdepth: 3
