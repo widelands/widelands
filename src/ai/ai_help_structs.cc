@@ -356,9 +356,9 @@ void ManagementData::mutate(const uint32_t gametime) {
 
 	int16_t probability = -1;
 	if (last_mutate_time == 0) {
-		probability = get_military_number_at(13) / 15 + 13;
+		probability = get_military_number_at(13) / 8 + 15;
 	} else {
-		probability = get_military_number_at(14) / 15 + 13;
+		probability = get_military_number_at(14) / 8 + 15;
 	}
 	assert(probability > 0);
 	
@@ -384,6 +384,7 @@ void ManagementData::mutate(const uint32_t gametime) {
 		if (std::rand() % probability == 0) {
 			item.set_weight(((-100 + std::rand() % 200) * 3 -100 + std::rand() % 200) / 4);
 			pd->neuron_weights[item.get_id()] = item.get_weight();
+			assert(neuron_curves.size() > 0);
 			item.set_type(std::rand() % neuron_curves.size());
 			pd->neuron_functs[item.get_id()] = item.get_type();
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
@@ -414,7 +415,7 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 
 
 	performance_change = (scores[0] != 0) ? scores[2] * 100 / scores[0] : 0;
-	if (gametime > 3 * 60 * 60 * 1000 && (gametime - last_mutate_time) > 60 * 60 * 1000){
+	if (gametime > 2 * 60 * 60 * 1000 && (gametime - last_mutate_time) > 60 * 60 * 1000){
 		printf ("   mutations locked, since %d minutes ago (current performance: %3d):\n",
 		(gametime - last_mutate_time) / 1000 / 60,
 		performance_change);
