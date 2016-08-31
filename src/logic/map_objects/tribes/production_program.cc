@@ -67,7 +67,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -113,7 +113,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
@@ -942,10 +942,9 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	}
 	std::string ware_list = i18n::localize_list(ware_descnames, i18n::ConcatenateWith::AND);
 
-	const std::string
-	   result_string =
-	      /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
-	         wares. */
+	const std::string result_string =
+	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
+	      wares. */
 	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
 	ps.set_production_result(result_string);
 }

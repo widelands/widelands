@@ -535,8 +535,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						send_message(game,
 						             /** TRANSLATORS: A ship has circumnavigated an island and is waiting
 						                for orders */
-						             pgettext("ship", "Waiting"),
-						             _("Island Circumnavigated"),
+						             pgettext("ship", "Waiting"), _("Island Circumnavigated"),
 						             _("An expedition ship sailed around its island without any events."),
 						             "images/wui/ship/ship_explore_island_cw.png");
 						ship_state_ = ShipStates::kExpeditionWaiting;

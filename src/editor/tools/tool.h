@@ -102,7 +102,7 @@ public:
 	}
 
 protected:
-	EditorTool& second_, &third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:
