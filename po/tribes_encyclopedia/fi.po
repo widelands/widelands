@@ -3,6 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-16 07:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-08-26 10:14+0000\n"
+"PO-Revision-Date: 2016-08-30 20:44+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1770,251 +1771,251 @@ msgstr "Tuotanto "
 msgid "Performance:"
 msgstr "Suoriutuminen: "
 
-#: ../../data/tribes/scripting/help/controls.lua:7
+#: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:10
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgid "Window Control"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgid "Close window"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgid "Minimize/Maximize window"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgid "Skip confirmation dialog"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid "Road Control"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:22
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:28
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgid "While connecting two flags: Place flags automatically"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgid "Increase game speed"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgid "Decrease game speed"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Pause the game"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:41
 msgid "Toggle census"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "Toggle statistics"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "Toggle objectives"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:43
+#: ../../data/tribes/scripting/help/controls.lua:49
 msgid "Toggle messages (‘news’)"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:45
+#: ../../data/tribes/scripting/help/controls.lua:51
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:47
+#: ../../data/tribes/scripting/help/controls.lua:53
 msgid "Toggle stock inventory"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:49
+#: ../../data/tribes/scripting/help/controls.lua:55
 msgid "Toggle building statistics"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgid "Center main mapview on starting location"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "(Ctrl +) 0-9"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:55
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Go to the previous location"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Go to the next location"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Take a screenshot"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Quit the game immediately"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "F6"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Show the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Jump to the location corresponding to the current message"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Archive/Restore the current message"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
@@ -2638,25 +2639,25 @@ msgstr ""
 #: ../../data/tribes/wares/granite/helptexts.lua:4
 msgctxt "ware"
 msgid "Granite is a basic building material."
-msgstr ""
+msgstr "Graniitti on perusrakennusmateriaali."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "The Atlanteans produce granite blocks in quarries and crystal mines."
-msgstr ""
+msgstr "Atlantislaiset tuottavat graniittikappaleita kivilouhoksissa ja kidekaivoksissa."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid "The Barbarians produce granite blocks in quarries and granite mines."
-msgstr ""
+msgstr "Barbaarit tuottavat graniittikappaleita kivilouhoksissa ja graniittikaivoksissa."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "The Empire produces granite blocks in quarries and marble mines."
-msgstr ""
+msgstr "Keisarikuntalaiset tuottavat graniittia kivilouhoksissa ja marmorikaivoksissa."
 
 #. TRANSLATORS: Helptext for a ware: Grape
 #: ../../data/tribes/wares/grape/helptexts.lua:4
@@ -2672,13 +2673,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Granite can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
-msgstr ""
+msgstr "Graniitti voidaan prosessoida laastiksi, jonka avulla saadaan kiinteää, palamatonta rakennusmateriaalia. Laastia tuotetaan kalkinpolttouunissa."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
 msgctxt "ware"
 msgid "The hammer is an essential tool."
-msgstr ""
+msgstr "Vasara on välttämätön työkalu."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:6
@@ -2686,7 +2687,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, asesepät ja haarniskasepät tarvitsevat vasaran."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:8
@@ -2696,7 +2697,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, sepät ja kypäräsepät tarvitsevat vasaran. Varmista, että sinulla on niitä aina varastossa! Ne ovat perustyökaluja, joita tuotetaan metallipajassa (mutta tuottaminen loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -2704,7 +2705,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, asesepät ja haarniskasepät tarvitsevat vasaran. Varmista, että sinulla on niitä aina varastossa! Niitä tuotttaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/helmet/helptexts.lua:4
@@ -2713,7 +2714,7 @@ msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Kypärä on sotilasta suojaava perustyökalu. Se tuotetaan kypäräpajassa ja käytetään harjoitusleirillä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi terveystasolta 0 tasolle 1."
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../data/tribes/wares/helmet_mask/helptexts.lua:4
@@ -2722,7 +2723,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr ""
+msgstr "Tämä on kaikkein kehyttynein Barbaarin panssari. Sitä tuotetaan kypäräpajassa ja käytetään harjoitusleirillää – yhdessä ruuan kanssa  – sotilaiden kouluttamiseksi terveystasolta 2 tasolle 3."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../data/tribes/wares/helmet_warhelm/helptexts.lua:4
@@ -2731,7 +2732,7 @@ msgid ""
 "A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Sotakypärä on Barbaarisotilaiden paranneltu panssari. Sitä tuotetaan kypäräpajassa ja käytetään jarjoitusleirillä – yhdesä ruuan kanssa – sotilaiden kouluttamiseksi terveystasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../data/tribes/wares/hook_pole/helptexts.lua:4
@@ -2739,7 +2740,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
-msgstr ""
+msgstr "Savustusvarrasta käytetään savustamossa kaikkien lihojen ja kalojen ripustamiseen savustamon kattoon. Sen valmistaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Bow
 #: ../../data/tribes/wares/hunting_bow/helptexts.lua:4
@@ -2762,13 +2763,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Metsästyskeihäitä valmistetaan metallipajassa (mutta tuottaminen loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
 msgctxt "empire_ware_hunting_spear"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Niitä tuottaa aseseppä."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:4
@@ -2963,31 +2964,31 @@ msgstr "Hakkua käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä 
 #: ../../data/tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
 msgid "Planks are an important building material."
-msgstr ""
+msgstr "Laudat ovat tärkeää rakennusmateriaalia."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:7
 msgctxt "atlanteans_ware_planks"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Niitä tuotetaan kaadetuista puista sahaamossa."
 
 #: ../../data/tribes/wares/planks/helptexts.lua:8
 msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
-msgstr ""
+msgstr "Aseseppä ja telakka käyttävät myös lautoja tuottaessaan erilaisia kolmijalkoja ja mahtavia aluksia."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:11
 msgctxt "empire_ware_planks"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Niitä tuotetaan kaadetuista puista sahaamossa."
 
 #: ../../data/tribes/wares/planks/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
-msgstr ""
+msgstr "Niitä käytetään myös asepajassa."
 
 #. TRANSLATORS: Helptext for a ware: Quartz
 #: ../../data/tribes/wares/quartz/helptexts.lua:4
@@ -2995,7 +2996,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "These transparent quartz gems are used to build some exclusive buildings. "
 "They are produced in a crystal mine."
-msgstr ""
+msgstr "Näitä läpinäkyviä kvartsijalokiviä käytetään hienojen rakennuksien takentamisessa. Niitä tuotetaan kidekaivoksessa."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:4
@@ -3003,7 +3004,7 @@ msgctxt "ware"
 msgid ""
 "A small bite to keep miners strong and working. The scout also consumes "
 "rations on his scouting trips."
-msgstr ""
+msgstr "Pientä purtavaa pitämään kaivajat vahvoina ja työteliäinä. Tiedustelija käyttää myös oman osuutensa tiedusteluretkillään."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:6
@@ -3011,13 +3012,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
 " pitta bread."
-msgstr ""
+msgstr "Annokset tuotetaan kestikievarissa, krouvissa tai majatalossa kalasta, lihasta tai pitaleivästä."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
-msgstr ""
+msgstr "Annokset tuottetaan kestikievarissa kalasta, lihasta tai leivästä."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -3025,25 +3026,25 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "Sahaamoa tarvitsee sahaaja, puunhakkaaja ja työkaluseppä. Sen tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
 msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tätä sahaa tarvitsee puuseppä. Sen tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:4
 msgctxt "ware"
 msgid "The scythe is the tool of the farmers."
-msgstr ""
+msgstr "Viikate on maanviljelijöiden tuokalu."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Viikatteita tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:8
@@ -3051,13 +3052,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Scythes are produced by the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Viikatteita tuotetaan metallipajassa (mutta tuottaminen loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Viikatteita tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Shield
 #: ../../data/tribes/wares/shield_advanced/helptexts.lua:4
@@ -3066,7 +3067,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr ""
+msgstr "Näitä kehittyneitä suojia käyttää parhaimmat Atlantiksen sotilaat. Niitä tuotetaan haarniskapajassa ja käytetään labyrintissä – ruuan kanssa – sotilaiden kouluttamiseksi puolustustasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../data/tribes/wares/shield_steel/helptexts.lua:4
@@ -3074,13 +3075,13 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
-msgstr ""
+msgstr "Tätä kilpeä valmistetaan asepajassa ja käytetään labyrintissä – ruuan kanssa – sotilaiden kouluttamiseksi puolustustasolta 0 tasolle 1."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:4
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
-msgstr ""
+msgstr "Lapioita tarvitaan asianmukaisessa kasvien hoidissa."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:6
@@ -3088,7 +3089,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Therefore the forester and the blackroot farmer use them. They are produced "
 "by the toolsmith."
-msgstr ""
+msgstr "Sen vuoksi metsänhoitaja ja mustajuuriviljelijä käyttävät niitä. Niitä tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:8
@@ -3097,7 +3098,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Sen vuoksi puutarhuri ja metsänvartija käyttävät niitä. Niitä tuotetaan metallipajassa (mutta tuotanto loppuu rakennuksessa, jos se laajennetaan kirverpahaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -3105,7 +3106,7 @@ msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Sen vuoksi metsänhoitaja ja viinitarhuri käyttää niitä. Niitä tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -3122,7 +3123,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr ""
+msgstr "Savustettu liha tehdään lihasta savustamossa. Sitä toimitetaan kaivoksii ja harjoituspaikoille (labysinttiin ja tyrmään), joissa kaivostyöläiset ja sotilaat valmistavat ravitsevia lounaita itselleen."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -3130,7 +3131,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "Ruoka-annoksta suurempi annos tarjotaan kaivostyöläisille syviin kaivoksiin. Se tuotetaan krouvissa tai majatalossa kalasta/lihasta, pitaleivästä ja oluesta."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4
@@ -3139,7 +3140,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr ""
+msgstr "Tässä keihäässä on rautapiikki. Se tuotetaan asepajassa ja käytetään koulutusleirissä – ruuan kanssa – sotilaiden kouluttamiseen hyökkäystasolta 0 tasolle 1."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../data/tribes/wares/spear_advanced/helptexts.lua:4
@@ -3148,7 +3149,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
+msgstr "Tämä on erikoiskeihäs teräskärjellä. Sen tuotetaan asepajassa ja käytetään koulutusleirillä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi hyökkäystasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../data/tribes/wares/spear_heavy/helptexts.lua:4
@@ -3157,7 +3158,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "Tämä on raskas keihäs teräskärjellä ja pienellä terällä. Sen tuottaa aseseppä ja käytetään koulutusleirillä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi hyökkäystasolta 2 tasolle 3."
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../data/tribes/wares/spear_war/helptexts.lua:4
@@ -3166,7 +3167,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
+msgstr "Tämä on paras ja terävin ase, joka Keisarikunnan aseseppä valmistaa sotilailleen. Sitä käytetään koulutusleirillä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi hyökkäystasolta 3 tasolle 4."
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../data/tribes/wares/spear_wooden/helptexts.lua:4
@@ -3175,7 +3176,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
+msgstr "Tämä puinen keihäs on perusase Keisarikunnan asevoimissa. Se tuotetaan asepajassa. Yhdessä kypärän kanssa se on nuorten sotilaiden varustus."
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../data/tribes/wares/spider_silk/helptexts.lua:4
@@ -3183,7 +3184,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "Hämähäkinseittiä tuotetaan hämähäkeillä, joita kasvatetaan hämähäkkitiloilla. Se prosessoidaan hämähäkinsilkiksi kutomossa."
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../data/tribes/wares/spidercloth/helptexts.lua:4
@@ -3192,7 +3193,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "Hämähäkinsilkki tehdään hämähäkinseitistä kutomossa. Sitä käytetään asepajassa ja telakalla. Myös jotkut pitkälle kehittyneet rakennukset tarvitsevat hämähäkinsilkkiä rakentamiseen."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -3200,7 +3201,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr ""
+msgstr "Taisteluasu ja kevyt atrain ovat perusvälineet nuorille sotilaille. Taisteluasuja tuottaa kutomo."
 
 #. TRANSLATORS: Helptext for a ware: Golden Tabard
 #: ../../data/tribes/wares/tabard_golden/helptexts.lua:4
@@ -3209,7 +3210,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr ""
+msgstr "Kultaisia taisteluasuja tuotetaan Atlantiksen kutomoissa kultalangasta. Niitä käytetään labyrintissä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi terveystasolta 0 tasolle 1."
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
@@ -3217,7 +3218,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "Olkiruokoa tuotetaan kaislaviljelmällä ja käytetään vedenpitävien talonkattojen tekemmiseen."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -3226,7 +3227,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "Kaksoisatrain on yksi parhaimmista atraimista, joita Atlantiksen asepaja tuottaa. Sitä käytetään tyrmässä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi hyökkäystasolta 2 tasolle 3."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Double Trident
 #: ../../data/tribes/wares/trident_heavy_double/helptexts.lua:4
@@ -3236,7 +3237,7 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr ""
+msgstr "Tämä on kaikkein vaarallisin Atlantiksen sotavoimien ase. Vain parhaimmista parhain sotilas saattaa käyttää sitä. Se tuottetaan asepajassa ja käytetään tyrmässä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi hyökkäystasolta 3 tasolle 4."
 
 #. TRANSLATORS: Helptext for a ware: Light Trident
 #: ../../data/tribes/wares/trident_light/helptexts.lua:4
@@ -3245,7 +3246,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr ""
+msgstr "Tämä on paras Atlansiksen sotilaiden ase. Yhdessä taisteluasun kanssa siitä saadaan  nuoren sotilaan varustus. Kevyitä atraimia tuotetaan asepajassa, kuten myös kaikkia muitakin atraimia."
 
 #. TRANSLATORS: Helptext for a ware: Long Trident
 #: ../../data/tribes/wares/trident_long/helptexts.lua:4
@@ -3263,19 +3264,19 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon  – together with food – to train from "
 "attack level 1 to level 2."
-msgstr ""
+msgstr "Tämä on keskikokoinen atrain. Niitä tuottaa aseseppä ja käyttää edistyneet sotilaat tyrmässä – yhdessä ruuan kanssa – koulutautuakseen hyökkäystaitotasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "Vesi on elämälle välttämätöntä."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "Vettä kayttää leipomo sekä hevos- ja hämähäkkitilat."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:8
@@ -3283,7 +3284,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Water is used in the bakery, the micro brewery and the brewery. The lime "
 "kiln and the cattle farm also need to be supplied with water."
-msgstr ""
+msgstr "Vettä käyttää leipomo, pienpanimo ja panimo. Kalkkivalmistamo ja karjatila tarvitsee myös tuotannossaan vettä."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:10
@@ -3291,13 +3292,13 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr ""
+msgstr "Vettä käyttää leipomo ja panimo. Aasi- ja lammastila sekä sikala tarvitsee myös tuotannossaan vettä."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4
 msgctxt "ware"
 msgid "Wheat is essential for survival."
-msgstr ""
+msgstr "Vehnä on välttämätöntä selviytymisen kannalta."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:6
@@ -3305,14 +3306,14 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr ""
+msgstr "Vehnää tuotetaan maatiloilla ja käytetään leipomoissa, pienpanimoissa ja panimoissa. Karjatilat tarvitsevat myös tuotannossaan vehnää."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:8
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Vehnää tuotetaan maatiloilla ja käytetään myllyissä ja olutpanimoissa. Aasi- ja lammastilat sekä sikalat tarvitsevat myös vehnää tuotannossaan."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -3471,13 +3472,13 @@ msgstr "Puolusta ja valloita!"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Kasvattaa hämähäkkejä silkkiin."
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikka graniittikappaleita lähistön kivikosta."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/atlanteans/toolsmith/helptexts.lua:3
@@ -3513,7 +3514,7 @@ msgstr "Kaataa puita."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr ""
+msgstr "Leipoo pitaleipää kaivostyöläisille"
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -3521,20 +3522,20 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Tuottaa aseita sotilaille ja työkaluja työntekijöille."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Tuottaa olutta pitääkseen kaivostyöläiset vahvoina ja tyytyväisinä."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../data/tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Produces the finest ales to keep soldiers strong and happy in training."
-msgstr ""
+msgstr "Panee parhaimpia oluita, jotka pitävät sotilaat vahvoina ja tyytyväisinä harjoitellessaan."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
@@ -3552,7 +3553,7 @@ msgstr "Kantaa tavaroita teilläsi."
 #: ../../data/tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Kasvattaa vahvoja härkiä tavaroiden kuljetusavuksi."
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
@@ -3578,13 +3579,13 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "Riistanvartija varmistaa, etteivät riistaeläinten kannat pienene liikaa."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Kasvattaa kaislanolkia."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -3596,7 +3597,7 @@ msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 #: ../../data/tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Takoa kypäriä sotilaille."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/barbarians/hunter/helptexts.lua:3
@@ -3614,7 +3615,7 @@ msgstr "Valmistaa ruokaa kaivostyöläisille."
 #: ../../data/tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Mixes grout out of granite, water and coal in the lime kiln."
-msgstr ""
+msgstr "Yhdistää graniitia, vettä ja hiiltä kalkinpolttouunissa laastin tuottamiseksi."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
@@ -3630,14 +3631,14 @@ msgstr "Kaataa puita."
 #: ../../data/tribes/workers/barbarians/miner_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Työskentelee syvällä kaivoksessa hankkiakseen hiiltä, rautaa, kultaa tai graniittia."
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../data/tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "Härkä auttaa kantamaan tavaroita ruuhkaisilla teillä. Niitä kasvatetaan karjatilalla."
 
 #. TRANSLATORS: Helptext for a worker: Ranger
 #: ../../data/tribes/workers/barbarians/ranger/helptexts.lua:3
@@ -3662,7 +3663,7 @@ msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Sulattaa malmit metalliksi."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/barbarians/soldier/helptexts.lua:3
@@ -3674,7 +3675,7 @@ msgstr "Puolusta ja valloita!"
 #: ../../data/tribes/workers/barbarians/stonemason/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikkaa raakagraniittia lähialueen kivikosta."
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/barbarians/trainer/helptexts.lua:3
@@ -3686,7 +3687,7 @@ msgstr "Kouluttaa sotilaita."
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Valmistaa tekstiiliä laivojen purjeihin."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/empire/armorsmith/helptexts.lua:3
@@ -3704,7 +3705,7 @@ msgstr "Leipoo leipää työntekijöille."
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Valmistaa olutta."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
@@ -3744,7 +3745,7 @@ msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Tuottaa suloisia ja hyödyllisiä aaseja tavaroiden kuljetusavuksi."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
@@ -3831,7 +3832,7 @@ msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Sulattaa malmit metalliksi."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/empire/soldier/helptexts.lua:3
@@ -3843,7 +3844,7 @@ msgstr "Puolusta ja valloita!"
 #: ../../data/tribes/workers/empire/stonemason/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikkaa graniitti- ja marmorikappaleita lähialueen kivikosta rakennuskiviksi."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/empire/toolsmith/helptexts.lua:3
@@ -3867,7 +3868,7 @@ msgstr "Kasvattaa viinirypäleitä."
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Valmistaa viiniä."
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/empire/weaponsmith/helptexts.lua:3

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 19:31+0000\n"
+"POT-Creation-Date: 2016-08-26 10:14+0000\n"
+"PO-Revision-Date: 2016-08-30 17:35+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -217,7 +217,7 @@ msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Wi
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Archipelago-tenger"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -536,7 +536,7 @@ msgstr "A szeszélyes Istenek nem hallgatták meg imáinkat, helyette az ezersze
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Az utolsó túlélők"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
@@ -845,13 +845,13 @@ msgstr "A nyárnak közepén néhány vulkánkitörés telet hozott el. Hirtelen
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Nagyvilág"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "A világ nem elég! Ha nyerni akarsz, hajókat kell kiküldened. De ne felejtsd: az ellenfeleid nagyon közel vannak hozzád."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"

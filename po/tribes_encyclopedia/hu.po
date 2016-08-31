@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 20:27+0000\n"
+"POT-Creation-Date: 2016-08-26 10:14+0000\n"
+"PO-Revision-Date: 2016-08-30 17:38+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -725,7 +725,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "„A vadászat művészete”"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -1644,7 +1644,7 @@ msgstr ""
 #. help, containing size info, buildcost etc.
 #: ../../data/tribes/scripting/help/building_help.lua:443
 msgid "Building"
-msgstr ""
+msgstr "Épület"
 
 #: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Mine plot"
@@ -1657,7 +1657,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:456
 #: ../../data/tribes/scripting/help/building_help.lua:458
 msgid "Space required:"
-msgstr ""
+msgstr "Szükséges hely:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:449
 msgid "Port plot"
@@ -2135,7 +2135,7 @@ msgstr "Életerő"
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../data/tribes/scripting/help/worker_help.lua:171
 msgid "Starts at %1% points."
-msgstr ""
+msgstr "%1% pontnál kezdődik."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
 #: ../../data/tribes/scripting/help/worker_help.lua:174
