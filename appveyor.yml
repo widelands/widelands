@@ -48,6 +48,11 @@ platform:
   - x64
   - x86
 
+matrix:
+  allow_failures:
+    - platform: x64
+      configuration: Debug
+
 configuration:
   - Release
   - Debug
