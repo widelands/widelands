@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-30 20:44+0000\n"
+"POT-Creation-Date: 2016-08-31 07:18+0000\n"
+"PO-Revision-Date: 2016-08-31 17:59+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -2502,13 +2502,13 @@ msgstr ""
 msgctxt "ware"
 msgid ""
 "Fire tongs are the tools of the smelter, who works in the smelting works."
-msgstr ""
+msgstr "Pihdit ovat sulattajan työkaluja, joka työskentelee sulattamossa."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Niitä tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
@@ -2516,13 +2516,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Tuottaa metallipaja (mutta tuotanto loppuu rakennuksessa, jos se laajennetaan kirvespajaksi  ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
 msgctxt "empire_ware_fire_tongs"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Niitä tuottaa aseseppä."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -2531,7 +2531,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr ""
+msgstr "Kala on yksi suurimmista Atlansilaisten ruuan lähteistä. Se täytyy savustaa savustamossa ennen kavoksiin, harjoituapaikkoihin ja  tiedustelijoille toimittamista."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:6
@@ -2540,7 +2540,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Pitaleivän ja lihan ohella, kala kuuluu barbaarien ruokavalioon. Sitä käytetään kestikievareissa, krouveissa, majataloissa sekä harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -2560,7 +2560,7 @@ msgstr "Kalaverkon valmistaa työkaluseppä ja kalastaja käyttää sitä."
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:4
 msgctxt "ware"
 msgid "Fishing rods are needed by fishers to catch fish."
-msgstr ""
+msgstr "Kalastajat käyttävät onkia kalojen narraamiseen."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:6
@@ -2575,7 +2575,7 @@ msgstr ""
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:8
 msgctxt "empire_ware_fishing_rod"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Niitä tuottaa aseseppä."
 
 #. TRANSLATORS: Helptext for a ware: Flour
 #: ../../data/tribes/wares/flour/helptexts.lua:4
@@ -2591,7 +2591,7 @@ msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is obtained out of gold ore "
 "in a smelting works."
-msgstr ""
+msgstr "Kulta on kaikkein arvokkain kaikista metalleista ja sitä saadaan kultamalmista sulattamoissa."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
@@ -2599,7 +2599,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Gold is used by the armor smithy, the weapon smithy and the gold spinning "
 "mill."
-msgstr ""
+msgstr "Kultaa käyttää haarniskapaja, asepaja ja kultarihmakehräämö."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
@@ -2608,7 +2608,7 @@ msgid ""
 "Only very important things are embellished with gold. It is used as a "
 "precious building material and to produce different axes (in the war mill) "
 "and different parts of armor (in the helm smithy)."
-msgstr ""
+msgstr "Vain kaikkein tärkeimmät tavarat koristellaan kullalla. Sitä pidetään kallisarvoisena rakennusmateriaalina ja siitä tuotetaan erilaisia kirveitä (asetehtaassa) ja eri haarniskan osia (kypäräpajassa)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -2616,7 +2616,7 @@ msgctxt "empire_ware"
 msgid ""
 "Armor and weapons are embellished with gold in the armor smithy and the "
 "weapon smithy."
-msgstr ""
+msgstr "Haarniska ja aseet koristellaan kullalla haarniskapajassa ja asepajassa."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
@@ -2633,7 +2633,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Tätä lankaa, joka on tehty kullasta kultarihmakehräämössä, käytetään hienon kultaisen taisteluasun kutomiseen kutomossa."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:4
@@ -2781,7 +2781,7 @@ msgstr "Raudasta tehdään työkaluja, aseita ja haarniskoja. Sulattamossa rauta
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr ""
+msgstr "Sitä käytetään työkalupajassa, haarniskapajassa ja asepajassa."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -2789,13 +2789,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is used to produce weapons and tools in the metal workshop, ax workshop, "
 "war mill and helm smithy."
-msgstr ""
+msgstr "Sitä käytetään aseiden ja työkalujen tuottantoon metallipajassa, kirvespajassa, asetehtaassa ja kypäräpajassa."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Weapons, armor and tools are made of iron."
-msgstr ""
+msgstr "Raudasta tehdään aseita haarniskoja ja työkaluja."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -2813,7 +2813,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "Miten kukaan voisikaan tehdä ateriaa, välipalaa tai ruoka-annosta ilman keittiövälineitä? Pidä huoli, että metallipaja tuottaa tätä perustyökalua (mutta tuotanto loppuu, jos se laajennetaan kirvestehtaaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -2829,7 +2829,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr ""
+msgstr "Kaadetut puut ovat tärkeää perusrakennusmateriaalia. Niitä tuotetaan kaatamalla puita."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:6
@@ -2838,7 +2838,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr ""
+msgstr "Atlantislaiset käyttävät kaadettuja puita myös tehdessään lautoja, joita tarvitaan melkein kaikissa rakennuksissa. Lukuun ottamatta sahaa, miilua, työkalupajaa ja savustamoa kaadettuja puita tarvitaan myös heidän työssä. "
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:8
@@ -2848,7 +2848,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr ""
+msgstr "Barbaarien puunhakkaajat kaatavat puita; metsänvartija pitää huolen puiden tarjonnasta. Kaadettuja puita käytetään myös metallipajassa perustyökalujen valmistamiseksi ja miilussa hiilen tuotantoon. Puunkovettaja jalostaa kaadetut puut lämpöpuuksi tulen avulla."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:10
@@ -2857,7 +2857,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr ""
+msgstr "Kuninkaalliset puunhakkaajat kaatavat puita; puunistuttaja pitää huolen puiden tarjonnasta. Kaadettuja puita käytetään myös miilussa, työkalupajassa ja sahassa."
 
 #. TRANSLATORS: Helptext for a ware: Marble
 #: ../../data/tribes/wares/marble/helptexts.lua:4
@@ -2883,7 +2883,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
-msgstr ""
+msgstr "Ateria valmistetaan pitaleivästä, vahvasta oluesta ja kalasta/lihasta majatalossa. Tämä tuhti ruoka on juuri sitä, mitä syvien kaivosten kaivostyöläiset tarvitsevat."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:6
@@ -2899,7 +2899,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunters."
-msgstr ""
+msgstr "Liha sisältää paljon energiaa ja sitä hankitaan pelin luomista luonnonvaroista metsästäjien avulla."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:6
@@ -2907,7 +2907,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to mines and "
 "training sites (dungeon and labyrinth)."
-msgstr ""
+msgstr "Lihan täytyy olla savustettu ennen kaivoksiin ja harjoituspaikoille toimittamista (tyrmä ja labyrintti)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:8
@@ -2916,7 +2916,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Lihaa kulutetaan kestikievareissa, krouveissa ja majataloissa annoksien, välipalojen ja aterioiden tekemiseen kaivostyöläisille. Sitä kulutetaan myös harjoittelupaikoilla (harjoitusleiri ja taisteluareena)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -2925,7 +2925,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Lihaa voidaan myös hankkia sikana sikalasta. Sitä kulutetaan krouveissa ja majataloissa lounaan varmistamiseksi kaivostyöläisille ja kulutetaan harjoittelupaikoilla (areena, kolosseumi, harjoitusleiri)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4
@@ -2950,7 +2950,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Hakkuja käyttävät kivenhakkaajat ja kaivostyöläiset. Niitä tuotetaan metallipajassa (mutta tuotanto loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -3401,7 +3401,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse "
 "farm."
-msgstr ""
+msgstr "Hevoset auttavat kuljettamaan esineitä pitkin vilkkaita teitä. Niitä kasvatetaan hevostilalla."
 
 #. TRANSLATORS: Helptext for a worker: Horse Breeder
 #: ../../data/tribes/workers/atlanteans/horsebreeder/helptexts.lua:3
@@ -3409,7 +3409,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Tuottaa vahvoja atlantislaisia hevosia kuljetusavuksi."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/atlanteans/hunter/helptexts.lua:3
@@ -3423,13 +3423,13 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroot and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Jauhaa mustajuurta ja maissia tuottaakseen mustajuurimaustetta ja maissijauhoa tässä järjestyksessä."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr ""
+msgstr "Työskentelee syvällä kaivoksissa hankkiakseen hiiltä, rautaa, kultaa tai arvokkaita kiviä."
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3454,7 +3454,7 @@ msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Sulattaa malmit metalliksi."
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
@@ -3801,7 +3801,7 @@ msgstr "Jauhaa vehnää jauhoksi."
 #: ../../data/tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Työskentelee syvällä kaivoksissa hankkiakseen hiiltä, rautaa, kultaa tai marmoria."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3

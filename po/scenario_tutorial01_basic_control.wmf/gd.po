@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:09+0000\n"
+"POT-Creation-Date: 2016-08-31 07:18+0000\n"
+"PO-Revision-Date: 2016-08-31 09:30+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgstr "Thoir an aire air na slèibhtean nuair a thogas tu rathaidean is faigh b
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr "An tog thu an rathad eadar an cuaraidh agus am prìomh-àras agad as ùr?"
+msgstr "An tog thu an rathad eadar an cuaraidh agus am prìomh-àras agad às ùr?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
 msgid "Connect the quarry to the headquarters"
