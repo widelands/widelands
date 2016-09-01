@@ -1,8 +1,8 @@
 -- RST
--- tribes/atlanteans.lua
+-- <tribename>.lua
 -- ---------------------
 --
--- This file contains all the units for the Atlantean tribe.
+-- This file contains all the units for a tribe.
 
 dirname = path.dirname(__file__)
 

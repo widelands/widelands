@@ -2,7 +2,9 @@
 -- worker_help.lua
 -- ---------------
 --
--- Functions used in the ingame worker help windows for formatting the text and pictures.
+-- This script returns a formatted entry for the ingame worker help.
+-- Pass the internal tribe name and worker name to the coroutine to select the
+-- worker type.
 
 include "tribes/scripting/help/format_help.lua"
 

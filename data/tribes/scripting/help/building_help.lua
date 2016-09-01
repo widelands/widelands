@@ -6,7 +6,9 @@ include "tribes/scripting/help/format_help.lua"
 -- building_help.lua
 -- -----------------
 --
--- Functions used in the ingame building help windows for formatting the text and pictures.
+-- This script returns a formatted entry for the ingame building help.
+-- Pass the internal tribe name and building name to the coroutine to select the
+-- building type.
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********

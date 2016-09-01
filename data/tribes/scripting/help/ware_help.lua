@@ -5,7 +5,9 @@ include "tribes/scripting/help/format_help.lua"
 -- ware_help.lua
 -- ---------------
 --
--- Functions used in the ingame ware help windows for formatting the text and pictures.
+-- This script returns a formatted entry for the ingame ware help.
+-- Pass the internal tribe name and ware name to the coroutine to select the
+-- ware type.
 
 
 --  =======================================================

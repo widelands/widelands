@@ -1,7 +1,7 @@
 -- RST
 -- format_editor.lua
 -- -----------------
-
+--
 -- Functions used in the ingame editor help windows for formatting the text and pictures.
 
 include "scripting/formatting.lua"
