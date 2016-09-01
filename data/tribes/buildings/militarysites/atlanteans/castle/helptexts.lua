@@ -4,7 +4,7 @@
 --
 -- The functions in this file return texts that are used by the Tribal Encyclopedia.
 --
--- See also the helper functions in :doc:`autogen_lua_tribes_global_helptexts`
+-- See also the helper functions in ``scripting/help/global_helptexts.lua``
 --
 
 -- This include can be removed when all help texts have been defined.

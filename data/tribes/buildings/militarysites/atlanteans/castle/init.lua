@@ -4,7 +4,7 @@
 --
 -- Militarysites are a type of building that can house soldiers and that expand the players' terrain.
 -- They can also be attacked. This file contains the definition for a militarysite building.
--- The building will also need its helptexts, which are defined in :doc:`autogen_lua_tribes_helptexts`
+-- The building will also need its helptexts, which are defined in ``helptexts.lua``
 
 dirname = path.dirname(__file__)
 

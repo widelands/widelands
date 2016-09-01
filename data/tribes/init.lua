@@ -1,5 +1,5 @@
 -- RST
--- tribes/init.lua
+-- init.lua
 -- -----------------
 --
 -- Tribes initialization

@@ -29,9 +29,12 @@ lua_dirs = (
     ('data/scripting', 'auxiliary'),
     ('data/scripting/win_conditions', 'auxiliary'),
     ('data/scripting/editor', 'lua_world'),
-    ('data/tribes', 'lua_tribes'),
-    ('data/tribes/scripting/help', 'lua_tribes'),
-    ('data/tribes/buildings/militarysites/atlanteans/castle', 'lua_tribes'),
+    #('data/tribes', 'lua_tribes'),
+    ('data/tribes', 'lua_tribes_defining'),
+    ('data/tribes/scripting', 'lua_tribes_other'),
+    ('data/tribes/scripting/mapobject_info', 'lua_tribes_other'),
+    ('data/tribes/scripting/help', 'lua_tribes_other'),
+    ('data/tribes/buildings/militarysites/atlanteans/castle', 'lua_tribes_units'),
 )
 
 
