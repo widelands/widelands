@@ -49,7 +49,7 @@ private:
 	UI::Textarea* nr_of_players_ta_;
 	UI::EditBox* plr_names_[MAX_PLAYERS];
 	UI::Button add_player_, remove_last_player_;
-	UI::Button *plr_make_infrastructure_buts_[MAX_PLAYERS], *plr_set_pos_buts_[MAX_PLAYERS],
+	UI::Button* plr_make_infrastructure_buts_[MAX_PLAYERS], *plr_set_pos_buts_[MAX_PLAYERS],
 	   *plr_set_tribes_buts_[MAX_PLAYERS];
 
 	std::vector<std::string> tribenames_;
