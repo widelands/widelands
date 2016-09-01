@@ -5,7 +5,7 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- building_help.lua
 -- -----------------
-
+--
 -- Functions used in the ingame building help windows for formatting the text and pictures.
 
 --  =======================================================

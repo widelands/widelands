@@ -1,10 +1,10 @@
-include "scripting/formatting.lua"
-
 -- RST
 -- format_help.lua
--- ---------------
-
+-- -------------------------------------
+--
 -- Functions used in the ingame help windows for formatting the text and pictures.
+
+include "scripting/formatting.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************

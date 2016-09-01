@@ -2,7 +2,7 @@
 -- formatting.lua
 -- --------------
 --
--- Function to simplify and unique text formatting in scenarios and help files.
+-- Functions to simplify and unique text formatting in scenarios and help files.
 -- Most of these functions are simple wrapper functions that make working with
 -- widelands rich text formatting system more bearable.
 

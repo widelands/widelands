@@ -4,7 +4,7 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- ware_help.lua
 -- ---------------
-
+--
 -- Functions used in the ingame ware help windows for formatting the text and pictures.
 
 

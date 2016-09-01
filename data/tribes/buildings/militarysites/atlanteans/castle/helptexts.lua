@@ -1,10 +1,10 @@
 -- RST
--- tribes/buildings/militarysites/<name>/helptexts.lua
--- ---------------------------------------------------
+-- buildings/militarysites/<name>/helptexts.lua
+-- --------------------------------------------
 --
 -- The functions in this file return texts that are used by the Tribal Encyclopedia.
 --
--- See also the helper functions in ``tribes/scripting/help/global_helptexts.lua``
+-- See also the helper functions in :doc:`autogen_lua_tribes_global_helptexts`
 --
 
 -- This include can be removed when all help texts have been defined.

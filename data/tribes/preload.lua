@@ -1,8 +1,7 @@
 -- RST
--- tribes/preload.lua
--- ------------------
+-- preload.lua
+-- -----------
 --
-
 -- This file contains the basic information for all tribes that is
 -- needed before a game is loaded or the editor has been started.
 
