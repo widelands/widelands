@@ -42,8 +42,8 @@ tribes:new_productionsite_type {
 
    -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      { name = "wheat", amount = 7 },
-      { name = "water", amount = 7 }
+      { name = "water", amount = 7 },
+      { name = "wheat", amount = 7 }
    },
    outputs = {
       "meat"
