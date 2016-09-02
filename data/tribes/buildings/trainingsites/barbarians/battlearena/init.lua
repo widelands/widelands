@@ -57,11 +57,12 @@ tribes:new_trainingsite_type {
       barbarians_trainer = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      barbarians_bread = 10,
-      fish = 6,
-      meat = 6,
-      beer_strong = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "barbarians_bread", amount = 10 },
+      { name = "beer_strong", amount = 6 }
    },
    outputs = {
       "barbarians_soldier",

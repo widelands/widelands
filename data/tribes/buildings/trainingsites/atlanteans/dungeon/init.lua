@@ -45,14 +45,15 @@ tribes:new_trainingsite_type {
       atlanteans_trainer = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 6,
-      smoked_meat = 6,
-      trident_long = 4,
-      trident_steel = 4,
-      trident_double = 4,
-      trident_heavy_double = 4
+      { name = "smoked_fish", amount = 6 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 },
+      { name = "trident_long", amount = 4 },
+      { name = "trident_steel", amount = 4 },
+      { name = "trident_double", amount = 4 },
+      { name = "trident_heavy_double", amount = 4 }
    },
    outputs = {
       "atlanteans_soldier",

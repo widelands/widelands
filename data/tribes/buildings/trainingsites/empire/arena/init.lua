@@ -48,10 +48,11 @@ tribes:new_trainingsite_type {
       empire_trainer = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 }
    },
    outputs = {
       "empire_soldier",
