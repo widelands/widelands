@@ -4,10 +4,10 @@
 --
 -- Tribes initialization
 --
--- First the units are loaded, then the tribe descriptions
+-- First the units are loaded, then the tribe descriptions.
 --
 -- All tribes also have some basic information for the load screens
--- and the editor in preload.lua
+-- and the editor in ``preload.lua``.
 --
 -- Basic load order (first wares, then immovables etc.) is important,
 -- because checks will be made in C++.

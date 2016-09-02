@@ -46,7 +46,7 @@ dirname = path.dirname(__file__)
 --
 --    **max_soldiers**: The maximum number of solders that can be garrisoned at this building.
 --
---    **heal_per_second**: The number of health points that a garrisoned solder will heal each second.
+--    **heal_per_second**: The number of health points that a garrisoned soldier will heal each second.
 --
 --    **conquers**: The conquer radius for this building.
 --
