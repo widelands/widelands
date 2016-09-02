@@ -35,12 +35,18 @@ lua_dirs = (
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),
-    ('data/tribes/buildings/militarysites/atlanteans/castle', 'militarysite', 'lua_tribes_units'),
-    ('data/tribes/buildings/productionsites/atlanteans/armorsmithy', 'productionsite', 'lua_tribes_units'),
-    ('data/tribes/buildings/trainingsites/atlanteans/dungeon', 'trainingsite', 'lua_tribes_units'),
-    ('data/tribes/buildings/warehouses/atlanteans/headquarters', 'warehouse', 'lua_tribes_units'),
-    ('data/tribes/buildings/partially_finished/constructionsite', 'constructionsite', 'lua_tribes_units'),
-    ('data/tribes/buildings/partially_finished/dismantlesite', 'dismantlesite', 'lua_tribes_units'),
+    ('data/tribes/buildings/militarysites/atlanteans/castle',
+     'militarysite', 'lua_tribes_units'),
+    ('data/tribes/buildings/productionsites/atlanteans/armorsmithy',
+     'productionsite', 'lua_tribes_units'),
+    ('data/tribes/buildings/trainingsites/atlanteans/dungeon',
+     'trainingsite', 'lua_tribes_units'),
+    ('data/tribes/buildings/warehouses/atlanteans/headquarters',
+     'warehouse', 'lua_tribes_units'),
+    ('data/tribes/buildings/partially_finished/constructionsite',
+     'constructionsite', 'lua_tribes_units'),
+    ('data/tribes/buildings/partially_finished/dismantlesite',
+     'dismantlesite', 'lua_tribes_units'),
 )
 
 
@@ -61,10 +67,8 @@ source_dir, base_dir = _find_basedir()
 
 
 def extract_rst_from_cpp(inname, outname=None):
-    """
-    Searches for /* RST comments in the given filename, strips the lines
-    and prints them out on stdout or writes them to outname.
-    """
+    """Searches for /* RST comments in the given filename, strips the lines and
+    prints them out on stdout or writes them to outname."""
     data = open(p.join(base_dir, inname), 'r').read()
     res = re.findall(r"\s*/\* RST\s(.*?)\*/", data, re.M | re.DOTALL)
 
@@ -81,10 +85,12 @@ def extract_rst_from_cpp(inname, outname=None):
 
 
 def extract_rst_from_lua(directory, file_prefix, toc):
-    """
-    Searches for files with /* RST comments in the given directory, strips the lines
-    and writes them to a file (each found file gets a new 'file.rst'). Returns a list
-    with produced files for this directory.
+    """Searches for files with /* RST comments in the given directory, strips
+    the lines and writes them to a file (each found file gets a new
+    'file.rst').
+
+    Returns a list with produced files for this directory.
+
     """
     # List to contain all created files
     rst_file_names = []
