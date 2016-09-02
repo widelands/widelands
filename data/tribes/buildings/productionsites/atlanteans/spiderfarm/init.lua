@@ -39,9 +39,10 @@ tribes:new_productionsite_type {
       atlanteans_spiderbreeder = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      corn = 7,
-      water = 7
+      { name = "corn", amount = 7 },
+      { name = "water", amount = 7 }
    },
    outputs = {
       "spider_silk"

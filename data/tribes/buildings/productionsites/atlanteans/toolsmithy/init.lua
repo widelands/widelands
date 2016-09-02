@@ -40,10 +40,11 @@ tribes:new_productionsite_type {
       atlanteans_toolsmith = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      iron = 6,
-      log = 6,
-      spidercloth = 4
+      { name = "iron", amount = 6 },
+      { name = "log", amount = 6 },
+      { name = "spidercloth", amount = 4 }
    },
    outputs = {
       "bread_paddle",

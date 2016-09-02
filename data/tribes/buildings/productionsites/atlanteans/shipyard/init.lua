@@ -52,10 +52,11 @@ tribes:new_productionsite_type {
       atlanteans_shipwright = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      planks = 10,
-      log = 2,
-      spidercloth = 4
+      { name = "planks", amount = 10 },
+      { name = "log", amount = 2 },
+      { name = "spidercloth", amount = 4 }
    },
 
    programs = {

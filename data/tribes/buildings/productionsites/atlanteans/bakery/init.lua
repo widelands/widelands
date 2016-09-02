@@ -40,10 +40,11 @@ tribes:new_productionsite_type {
       atlanteans_baker = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      blackroot_flour = 4,
-      cornmeal = 4,
-      water = 8
+      { name = "blackroot_flour", amount = 4 },
+      { name = "cornmeal", amount = 4 },
+      { name = "water", amount = 8 }
    },
    outputs = {
       "atlanteans_bread"

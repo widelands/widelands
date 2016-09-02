@@ -38,8 +38,9 @@ tribes:new_productionsite_type {
       atlanteans_carrier = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      gold = 5
+      { name = "gold", amount = 5 }
    },
    outputs = {
       "gold_thread"

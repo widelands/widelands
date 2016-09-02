@@ -41,11 +41,12 @@ tribes:new_productionsite_type {
       atlanteans_weaponsmith = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      iron = 8,
-      gold = 8,
-      coal = 8,
-      planks = 8
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 },
+      { name = "coal", amount = 8 },
+      { name = "planks", amount = 8 }
    },
    outputs = {
       "trident_light",

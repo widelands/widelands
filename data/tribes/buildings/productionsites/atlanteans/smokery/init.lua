@@ -42,10 +42,11 @@ tribes:new_productionsite_type {
       atlanteans_smoker = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      fish = 4,
-      meat = 4,
-      log = 8
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "log", amount = 8 }
    },
    outputs = {
       "smoked_meat",
