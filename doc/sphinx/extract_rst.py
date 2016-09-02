@@ -10,7 +10,7 @@ import sys
 ###################
 # inputs, outputs #
 ###################
-# These files ar known to have rst comments; cpp files
+# These files are known to have rst comments; cpp files
 # Meaning: (src_file, file_name_to_generate_rst)
 cpp_pairs = (
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
