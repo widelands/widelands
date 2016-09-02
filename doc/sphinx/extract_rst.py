@@ -22,19 +22,21 @@ cpp_pairs = (
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
 )
 
-# This directories are scanned without knowing which file
+# These directories are scanned without knowing which file
 # has rst comments; scan for *.lua files
-# Meaning: (src_dir, toc_name_to_place)
+# Meaning: (src_dir, file_prefix, toc_name_to_place)
+# The file prefix can be left empty. You can use it to disambiguate if multiple
+# directories contain lua files of the same name (e.g. "init.lua").
 lua_dirs = (
-    ('data/scripting', 'auxiliary'),
-    ('data/scripting/win_conditions', 'auxiliary'),
-    ('data/scripting/editor', 'lua_world'),
-    #('data/tribes', 'lua_tribes'),
-    ('data/tribes', 'lua_tribes_defining'),
-    ('data/tribes/scripting', 'lua_tribes_other'),
-    ('data/tribes/scripting/mapobject_info', 'lua_tribes_other'),
-    ('data/tribes/scripting/help', 'lua_tribes_other'),
-    ('data/tribes/buildings/militarysites/atlanteans/castle', 'lua_tribes_units'),
+    ('data/scripting', '', 'auxiliary'),
+    ('data/scripting/win_conditions', '', 'auxiliary'),
+    ('data/scripting/editor', '', 'lua_world'),
+    ('data/tribes', '', 'lua_tribes_defining'),
+    ('data/tribes/scripting', '', 'lua_tribes_other'),
+    ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
+    ('data/tribes/scripting/help', '', 'lua_tribes_other'),
+    ('data/tribes/buildings/militarysites/atlanteans/castle', 'militarysite', 'lua_tribes_units'),
+    ('data/tribes/buildings/partially_finished/constructionsite', 'constructionsite', 'lua_tribes_units'),
 )
 
 
@@ -74,7 +76,7 @@ def extract_rst_from_cpp(inname, outname=None):
         out.write(output)
 
 
-def extract_rst_from_lua(directory, toc):
+def extract_rst_from_lua(directory, file_prefix, toc):
     """
     Searches for files with /* RST comments in the given directory, strips the lines
     and writes them to a file (each found file gets a new 'file.rst'). Returns a list
@@ -91,6 +93,8 @@ def extract_rst_from_lua(directory, toc):
 
         if res:
             # File with RST commet found
+            if file_prefix:
+                toc = file_prefix + '_' + toc
             outname = 'autogen_' + toc + '_%s.rst' % os.path.basename(
                 os.path.splitext(filename)[0])
             rst_file_names.append(outname)
@@ -133,8 +137,8 @@ if __name__ == '__main__':
         # Search the given dirs for rst-comments in every lua files
         # Store key:value as toc:list_of_files
         toc_fnames = {}
-        for directory, toc in lua_dirs:
-            rst_file_names = extract_rst_from_lua(directory, toc)
+        for directory, file_prefix, toc in lua_dirs:
+            rst_file_names = extract_rst_from_lua(directory, file_prefix, toc)
             if rst_file_names:
                 if toc in toc_fnames:
                     # toc key exists, extend the value list
