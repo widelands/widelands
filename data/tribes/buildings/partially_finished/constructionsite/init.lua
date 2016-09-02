@@ -4,7 +4,7 @@
 --
 -- The constructionsite is a special building.
 -- It is a building site where a building is being constructed.
--- It is defined only once for all tribes.
+-- Just like the dismantlesite, it is defined only once for all tribes.
 -- The building will also need its helptexts, which are defined in ``helptexts.lua``
 
 dirname = path.dirname(__file__)
