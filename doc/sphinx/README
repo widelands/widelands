@@ -10,6 +10,7 @@ Building the documentation for offline reading
 
 First, extract the embedded documentation from the C++ and Lua code::
 
+   $ cd doc/sphinx/
    $ ./extract_rst.py
 
 Then, run ``make`` to see your options. Convenient for off-line reading is
@@ -21,12 +22,12 @@ Building the documentation for the webserver
 
 First, extract the embedded documentation from the C++ and Lua code::
 
+   $ cd doc/sphinx/
    $ ./extract_rst.py
 
 Then build the Sphinx documentation as JSON files:
 
-cd doc/sphinx/
-sphinx-build -b json -d build/doctree source build/json
+   $ make json
 
 Then add a Sphinx app to the admin panel in the webserver, if this hasn't been
 done yet:
