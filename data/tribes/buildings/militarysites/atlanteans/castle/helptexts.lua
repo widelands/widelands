@@ -1,7 +1,8 @@
 -- RST
--- buildings/<type>/<name>/helptexts.lua
--- -------------------------------------
+-- Building Helptexts
+-- ------------------
 --
+-- Each building has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
 -- The functions in this file return texts that are used for buildings by the Tribal Encyclopedia.
 --
 -- See also the helper functions in ``scripting/help/global_helptexts.lua``

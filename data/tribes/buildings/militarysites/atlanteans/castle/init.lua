@@ -1,10 +1,14 @@
 -- RST
--- buildings/militarysites/<name>/init.lua
--- ---------------------------------------
+-- Military Sites
+-- --------------
 --
 -- Militarysites are a type of building that can house soldiers and that expand the players' terrain.
--- They can also be attacked. This file contains the definition for a militarysite building.
--- The building will also need its helptexts, which are defined in ``helptexts.lua``
+-- They can also be attacked.
+--
+-- Militarysites are defined in
+-- ``data/tribes/buildings/militarysites/<tribe_name>/<building_name>/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``data/tribes/buildings/militarysites/<tribe_name>/<building_name>/helptexts.lua``
 
 dirname = path.dirname(__file__)
 

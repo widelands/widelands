@@ -1,11 +1,15 @@
 -- RST
--- buildings/partially_finished/constructionsite/init.lua
--- ------------------------------------------------------
+-- Construction Sites
+-- ------------------
 --
 -- The constructionsite is a special building.
 -- It is a building site where a building is being constructed.
 -- Just like the dismantlesite, it is defined only once for all tribes.
--- The building will also need its helptexts, which are defined in ``helptexts.lua``
+--
+-- The constructionsite is defined in
+-- ``buildings/partially_finished/constructionsite/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``buildings/partially_finished/constructionsite/helptexts.lua``
 
 dirname = path.dirname(__file__)
 

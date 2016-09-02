@@ -1,12 +1,15 @@
 -- RST
--- buildings/productionsites/<name>/init.lua
--- -----------------------------------------
+-- Production Sites
+-- ----------------
 --
 -- Productionsites are a type of building where wares are being consumed to
 -- produce other wares, or to produce workers.
 -- They also have workers working at them.
--- This file contains the definition for a productionsite building.
--- The building will also need its helptexts, which are defined in ``helptexts.lua``
+--
+-- Productionsites are defined in
+-- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/helptexts.lua``
 
 
 dirname = path.dirname(__file__)

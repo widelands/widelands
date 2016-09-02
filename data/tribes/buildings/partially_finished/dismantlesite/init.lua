@@ -1,11 +1,15 @@
 -- RST
--- buildings/partially_finished/dismantlesite/init.lua
--- ---------------------------------------------------
+-- Dismantle Sites
+-- ---------------
 --
 -- The dismantlesite is a special building.
 -- It is a building site where a building is being dismantled.
 -- Just like the constructionsite, it is defined only once for all tribes.
--- The building will also need its helptexts, which are defined in ``helptexts.lua``
+--
+-- The dismantlesite is defined in
+-- ``buildings/partially_finished/dismantlesite/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``buildings/partially_finished/dismantlesite/helptexts.lua``
 
 dirname = path.dirname(__file__)
 

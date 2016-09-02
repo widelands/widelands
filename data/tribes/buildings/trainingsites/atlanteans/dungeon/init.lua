@@ -1,12 +1,15 @@
 -- RST
--- buildings/trainingsites/<name>/init.lua
--- ---------------------------------------
+-- Training Sites
+-- --------------
 --
--- Trainingsites are a type of productionsite building where soldiers are housed
--- and wares are being consumed to train the soldiers to better levels.
+-- Trainingsites are a special type of productionsite building where soldiers are
+-- housed and wares are being consumed to train the soldiers to better levels.
 -- They also have workers working at them.
--- This file contains the definition for a trainingsite building.
--- The building will also need its helptexts, which are defined in ``helptexts.lua``
+--
+-- Trainingsites are defined in
+-- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/init.lua``.
+-- The building will also need its help texts, which are defined in
+-- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/helptexts.lua``
 
 dirname = path.dirname(__file__)
 
