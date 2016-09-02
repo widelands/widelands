@@ -43,8 +43,9 @@ tribes:new_productionsite_type {
       barbarians_weaver = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      thatch_reed = 8
+      { name = "thatch_reed", amount = 8 }
    },
    outputs = {
       "cloth"

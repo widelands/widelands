@@ -40,10 +40,11 @@ tribes:new_productionsite_type {
       barbarians_lime_burner = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      granite = 6,
-      water = 6,
-      coal = 3
+      { name = "granite", amount = 6 },
+      { name = "water", amount = 6 },
+      { name = "coal", amount = 3 }
    },
    outputs = {
       "grout"

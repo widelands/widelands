@@ -48,8 +48,9 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      ration = 6
+      { name = "ration", amount = 6 }
    },
    outputs = {
       "gold_ore"

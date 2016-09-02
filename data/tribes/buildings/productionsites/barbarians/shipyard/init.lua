@@ -51,10 +51,11 @@ tribes:new_productionsite_type {
       barbarians_shipwright = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      blackwood = 10,
-      log = 2,
-      cloth = 4
+      { name = "log", amount = 2 },
+      { name = "blackwood", amount = 10 },
+      { name = "cloth", amount = 4 }
    },
 
    programs = {

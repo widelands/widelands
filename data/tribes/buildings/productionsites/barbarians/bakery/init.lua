@@ -44,9 +44,10 @@ tribes:new_productionsite_type {
       barbarians_baker = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      wheat = 6,
-      water = 6
+      { name = "water", amount = 6 },
+      { name = "wheat", amount = 6 }
    },
    outputs = {
       "barbarians_bread"

@@ -48,8 +48,9 @@ tribes:new_productionsite_type {
       barbarians_lumberjack = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      log = 8
+      { name = "log", amount = 8 }
    },
    outputs = {
       "blackwood"
