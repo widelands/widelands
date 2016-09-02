@@ -8,7 +8,7 @@ if you want to build the documentation (modules py-sphinx or similar).
 Building the documentation for offline reading
 ----------------------------------------------
 
-First, extract the embedded documentation from the C++ code::
+First, extract the embedded documentation from the C++ and Lua code::
 
    $ ./extract_rst.py
 
@@ -19,7 +19,11 @@ Then, run ``make`` to see your options. Convenient for off-line reading is
 Building the documentation for the webserver
 --------------------------------------------
 
-First, build the Sphinx documentation as JSON files:
+First, extract the embedded documentation from the C++ and Lua code::
+
+   $ ./extract_rst.py
+
+Then build the Sphinx documentation as JSON files:
 
 cd doc/sphinx/
 sphinx-build -b json -d build/doctree source build/json
