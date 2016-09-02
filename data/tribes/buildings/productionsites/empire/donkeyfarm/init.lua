@@ -38,9 +38,10 @@ tribes:new_productionsite_type {
       empire_donkeybreeder = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      wheat = 8,
-      water = 8
+      { name = "water", amount = 8 },
+      { name = "wheat", amount = 8 }
    },
    outputs = {
       "empire_donkey"

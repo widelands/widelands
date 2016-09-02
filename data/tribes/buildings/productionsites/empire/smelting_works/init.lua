@@ -45,10 +45,11 @@ tribes:new_productionsite_type {
       empire_smelter = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      iron_ore = 8,
-      gold_ore = 8,
-      coal = 8
+      { name = "coal", amount = 8 },
+      { name = "iron_ore", amount = 8 },
+      { name = "gold_ore", amount = 8 }
    },
    outputs = {
       "iron",

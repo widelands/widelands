@@ -39,10 +39,11 @@ tribes:new_productionsite_type {
       empire_innkeeper = 1
    },
 
+   -- This table is nested so we can define the order in the building's UI.
    inputs = {
-      fish = 6,
-      empire_bread = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 6 }
    },
    outputs = {
       "ration",
