@@ -5,7 +5,7 @@
 -- Productionsites are a type of building where wares are being consumed to
 -- produce other wares, or to produce workers.
 -- They also have workers working at them.
--- This file contains the definition for a production building.
+-- This file contains the definition for a productionsite building.
 -- The building will also need its helptexts, which are defined in ``helptexts.lua``
 
 

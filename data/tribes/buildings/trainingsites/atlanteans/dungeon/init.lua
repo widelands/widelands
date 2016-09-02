@@ -1,5 +1,50 @@
+-- RST
+-- buildings/trainingsites/<name>/init.lua
+-- ---------------------------------------
+--
+-- Trainingsites are a type of productionsite building where soldiers are housed
+-- and wares are being consumed to train the soldiers to better levels.
+-- They also have workers working at them.
+-- This file contains the definition for a trainingsite building.
+-- The building will also need its helptexts, which are defined in ``helptexts.lua``
+
 dirname = path.dirname(__file__)
 
+-- RST
+-- .. function:: new_trainingsite_type(table)
+--
+--    This function adds the definition of a training site building to the engine.
+--
+--    :arg table: This table contains all the data that the game engine will add to this building.
+--                It contains everything that a productionsite contains, plus the following entries:
+--
+--    **soldier_capacity**: An int describing how many soldiers this building can house.
+--
+--    **trainer_patience**: An int describing how patient the trainer is.
+--    If trainer patience runs out, a soldier will be kicked out.
+--
+--    **soldier attack**: A table describing what is needed to train a soldier in attack.
+--    It contains the following entries:
+--
+--        *min_level*: The minimum attack level that a soldier needs before it
+--        can be trained in attack at this training site.
+--
+--        *max_level*: The maximum level of attack that a soldier can be trained in.
+--
+--        *food*: A table with the types food needed to train a soldier in attack.
+--        It contains subtables with alternatives, e.g. ``{"fish", "meat"}``
+--        means that fish OR meat is needed, ``{"fish"}, {"meat"}`` means that fish
+--        AND meat are needed.
+--
+--        *weapons*: A table with the list of weapons that are used for attack
+--        training at the various levels.
+--
+--   **soldier defense**: Just like ``soldier attack``, but for defense training
+--
+--   **soldier health**: Just like ``soldier attack``, but for health training
+--
+--   **soldier evade**: Just like ``soldier attack``, but for evade training
+--
 tribes:new_trainingsite_type {
    msgctxt = "atlanteans_building",
    name = "atlanteans_dungeon",

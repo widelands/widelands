@@ -37,6 +37,7 @@ lua_dirs = (
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),
     ('data/tribes/buildings/militarysites/atlanteans/castle', 'militarysite', 'lua_tribes_units'),
     ('data/tribes/buildings/productionsites/atlanteans/armorsmithy', 'productionsite', 'lua_tribes_units'),
+    ('data/tribes/buildings/trainingsites/atlanteans/dungeon', 'trainingsite', 'lua_tribes_units'),
     ('data/tribes/buildings/partially_finished/constructionsite', 'constructionsite', 'lua_tribes_units'),
     ('data/tribes/buildings/partially_finished/dismantlesite', 'dismantlesite', 'lua_tribes_units'),
 )
