@@ -25,6 +25,7 @@
 #include <memory>
 
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -32,22 +33,16 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
-#include "graphic/image_io.h"
 #include "graphic/text_constants.h"
-#include "graphic/texture.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"
-#include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
 
-// TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 namespace {
-
 // This function concatenates the filename and localized map name for a savegame/replay.
 // If the filename starts with the map name, the map name is omitted.
 // It also prefixes autosave files with a numbered and localized "Autosave" prefix.
@@ -96,45 +91,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             UI::Align::kHCenter),
 
      // Savegame description
-     label_mapname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),
-     ta_mapname_(this,
-                 right_column_x_ + indent_,
-                 get_y_from_preceding(label_mapname_) + padding_,
-                 get_right_column_w(right_column_x_ + indent_),
-                 2 * label_height_ - padding_),
-
-     label_gametime_(this,
-                     right_column_x_,
-                     get_y_from_preceding(ta_mapname_) + 2 * padding_,
-                     "",
-                     UI::Align::kLeft),
-     ta_gametime_(this,
-                  right_column_tab_,
-                  label_gametime_.get_y(),
-                  get_right_column_w(right_column_tab_),
-                  label_height_),
-
-     label_players_(
-        this, right_column_x_, get_y_from_preceding(ta_gametime_), "", UI::Align::kLeft),
-     ta_players_(this,
-                 right_column_tab_,
-                 label_players_.get_y(),
-                 get_right_column_w(right_column_tab_),
-                 label_height_),
-
-     label_version_(this, right_column_x_, get_y_from_preceding(ta_players_), "", UI::Align::kLeft),
-     ta_version_(this, right_column_tab_, label_version_.get_y(), "", UI::Align::kLeft),
-
-     label_win_condition_(this,
-                          right_column_x_,
-                          get_y_from_preceding(ta_version_) + 3 * padding_,
-                          "",
-                          UI::Align::kLeft),
-     ta_win_condition_(this,
-                       right_column_x_ + indent_,
-                       get_y_from_preceding(label_win_condition_) + padding_,
-                       get_right_column_w(right_column_x_ + indent_),
-                       label_height_),
+     game_details_(this,
+                   right_column_x_,
+                   tabley_,
+                   get_right_column_w(right_column_x_),
+                   tableh_ - buth_ - 4 * padding_,
+                   GameDetails::Style::kFsMenu),
 
      delete_(this,
              "delete",
@@ -147,45 +109,20 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              std::string(),
              false,
              false),
-
-     ta_errormessage_(this,
-                      right_column_x_,
-                      get_y_from_preceding(ta_mapname_) + 2 * padding_,
-                      get_right_column_w(right_column_x_),
-                      delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
-
-     minimap_y_(get_y_from_preceding(ta_win_condition_) + 3 * padding_),
-     minimap_w_(get_right_column_w(right_column_x_)),
-     minimap_h_(delete_.get_y() - get_y_from_preceding(ta_win_condition_) - 6 * padding_),
-     minimap_icon_(this,
-                   right_column_x_,
-                   get_y_from_preceding(ta_win_condition_) + 3 * padding_,
-                   minimap_w_,
-                   minimap_h_,
-                   nullptr),
-
-     // "Data container" for the savegame information
      game_(g),
      settings_(gsp),
      ctrl_(gc) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	ta_gametime_.set_tooltip(_("The time that elapsed inside this game"));
-	ta_players_.set_tooltip(_("The number of players"));
-	ta_version_.set_tooltip(_("The version of Widelands that this game was played under"));
-	ta_win_condition_.set_tooltip(_("The win condition that was set for this game"));
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
-		ta_mapname_.set_tooltip(_("The map that this replay is based on"));
 		delete_.set_tooltip(_("Delete this replay"));
 	} else {
 		back_.set_tooltip(_("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
-		ta_mapname_.set_tooltip(_("The map that this game is based on"));
 		delete_.set_tooltip(_("Delete this game"));
 	}
-	minimap_icon_.set_visible(false);
 
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
@@ -265,23 +202,19 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	}
 	const SavegameData& gamedata = games_data_[table_.get_selected()];
 
-	std::string message =
-	   (boost::format("%s %s\n") % label_mapname_.get_text() % gamedata.mapname).str();
+	std::string message = (boost::format("%s %s\n") % _("Map:") % gamedata.mapname).str();
 
-	message = (boost::format("%s %s %s\n") % message % label_win_condition_.get_text() %
-	           gamedata.wincondition)
-	             .str();
+	message =
+	   (boost::format("%s %s %s\n") % message % _("Win Condition:") % gamedata.wincondition).str();
 
 	message =
 	   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
 
-	message = (boost::format("%s %s %s\n") % message % label_gametime_.get_text() %
-	           gametimestring(gamedata.gametime))
-	             .str();
-
 	message =
-	   (boost::format("%s %s %s\n\n") % message % label_players_.get_text() % gamedata.nrplayers)
+	   (boost::format("%s %s %s\n") % message % _("Gametime:") % gametimestring(gamedata.gametime))
 	      .str();
+
+	message = (boost::format("%s %s %s\n\n") % message % _("Players:") % gamedata.nrplayers).str();
 
 	message = (boost::format("%s %s %s\n") % message % _("Filename:") % gamedata.filename).str();
 
@@ -305,135 +238,17 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	}
 }
 
-bool FullscreenMenuLoadGame::set_has_selection() {
+void FullscreenMenuLoadGame::entry_selected() {
 	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	delete_.set_enabled(has_selection);
 
-	if (!has_selection) {
-		label_mapname_.set_text(std::string());
-		label_gametime_.set_text(std::string());
-		label_players_.set_text(std::string());
-		label_version_.set_text(std::string());
-		label_win_condition_.set_text(std::string());
-
-		ta_mapname_.set_text(std::string());
-		ta_gametime_.set_text(std::string());
-		ta_players_.set_text(std::string());
-		ta_version_.set_text(std::string());
-		ta_win_condition_.set_text(std::string());
-		minimap_icon_.set_icon(nullptr);
-		minimap_icon_.set_visible(false);
-		minimap_icon_.set_no_frame();
-		minimap_image_.reset();
-	} else {
-		label_mapname_.set_text(_("Map Name:"));
-		label_gametime_.set_text(_("Gametime:"));
-		label_players_.set_text(_("Players:"));
-		label_win_condition_.set_text(_("Win Condition:"));
-	}
-	return has_selection;
-}
-
-void FullscreenMenuLoadGame::entry_selected() {
-	if (set_has_selection()) {
-
+	if (has_selection) {
 		const SavegameData& gamedata = games_data_[table_.get_selected()];
-		ta_errormessage_.set_text(gamedata.errormessage);
-
-		if (gamedata.errormessage.empty()) {
-			ta_errormessage_.set_visible(false);
-			ta_mapname_.set_text(gamedata.mapname);
-			ta_gametime_.set_text(gametimestring(gamedata.gametime));
-
-			uint8_t number_of_players = gamedata.nrplayers;
-			if (number_of_players > 0) {
-				ta_players_.set_text(
-				   (boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
-			} else {
-				label_players_.set_text("");
-				ta_players_.set_text("");
-			}
-
-			if (gamedata.version.empty()) {
-				label_version_.set_text("");
-				ta_version_.set_text("");
-			} else {
-				label_version_.set_text(_("Widelands Version:"));
-				ta_version_.set_text(gamedata.version);
-			}
-
-			{
-				i18n::Textdomain td("win_conditions");
-				ta_win_condition_.set_text(_(gamedata.wincondition));
-			}
-
-			std::string minimap_path = gamedata.minimap_path;
-			// Delete former image
-			minimap_icon_.set_icon(nullptr);
-			minimap_icon_.set_visible(false);
-			minimap_icon_.set_no_frame();
-			minimap_image_.reset();
-			// Load the new one
-			if (!minimap_path.empty()) {
-				try {
-					// Load the image
-					minimap_image_ = load_image(
-					   minimap_path,
-					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
-
-					// Scale it
-					double scale = double(minimap_w_) / minimap_image_->width();
-					double scaleY = double(minimap_h_) / minimap_image_->height();
-					if (scaleY < scale) {
-						scale = scaleY;
-					}
-					if (scale > 1.0)
-						scale = 1.0;  // Don't make the image too big; fuzziness will result
-					uint16_t w = scale * minimap_image_->width();
-					uint16_t h = scale * minimap_image_->height();
-
-					// Center the minimap in the available space
-					int32_t xpos =
-					   right_column_x_ + (get_w() - right_column_margin_ - w - right_column_x_) / 2;
-					int32_t ypos = minimap_y_;
-
-					// Set small minimaps higher up for a more harmonious look
-					if (h < minimap_h_ * 2 / 3) {
-						ypos += (minimap_h_ - h) / 3;
-					} else {
-						ypos += (minimap_h_ - h) / 2;
-					}
-
-					minimap_icon_.set_size(w, h);
-					minimap_icon_.set_pos(Point(xpos, ypos));
-					minimap_icon_.set_frame(UI_FONT_CLR_FG);
-					minimap_icon_.set_visible(true);
-					minimap_icon_.set_icon(minimap_image_.get());
-				} catch (const std::exception& e) {
-					log("Failed to load the minimap image : %s\n", e.what());
-				}
-			}
-		} else {
-			label_mapname_.set_text(_("Filename:"));
-			ta_mapname_.set_text(gamedata.mapname);
-			label_gametime_.set_text("");
-			ta_gametime_.set_text("");
-			label_players_.set_text("");
-			ta_players_.set_text("");
-			label_version_.set_text("");
-			ta_version_.set_text("");
-			label_win_condition_.set_text("");
-			ta_win_condition_.set_text("");
-
-			minimap_icon_.set_icon(nullptr);
-			minimap_icon_.set_visible(false);
-			minimap_icon_.set_no_frame();
-			minimap_image_.reset();
-
-			ta_errormessage_.set_visible(true);
-			ok_.set_enabled(false);
-		}
+		game_details_.update(gamedata);
+		ok_.set_enabled(gamedata.errormessage.empty());
+	} else {
+		game_details_.clear();
 	}
 }
 
@@ -489,7 +304,10 @@ void FullscreenMenuLoadGame::fill_table() {
 				}
 			}
 
-			gamedata.mapname = gpdp.get_mapname();
+			{
+				i18n::Textdomain td("maps");
+				gamedata.mapname = _(gpdp.get_mapname());
+			}
 			gamedata.gametime = gpdp.get_gametime();
 			gamedata.nrplayers = gpdp.get_number_of_players();
 			gamedata.version = gpdp.get_version();
@@ -541,7 +359,12 @@ void FullscreenMenuLoadGame::fill_table() {
 				}
 			}
 
+			// Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 			gamedata.wincondition = _(gpdp.get_localized_win_condition());
+			{
+				i18n::Textdomain td("win_conditions");
+				gamedata.wincondition = _(gamedata.wincondition);
+			}
 			gamedata.minimap_path = gpdp.get_minimap_path();
 			games_data_.push_back(gamedata);
 
@@ -588,14 +411,15 @@ void FullscreenMenuLoadGame::fill_table() {
 				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname));
 			}
 		} catch (const WException& e) {
-			//  we simply skip illegal entries
+			std::string errormessage = e.what();
+			boost::replace_all(errormessage, "\n", "<br>");
 			gamedata.errormessage =
-			   ((boost::format("%s\n\n%s\n\n%s"))
+			   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
 			    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
 			    % _("This file has the wrong format and can’t be loaded."
 			        " Maybe it was created with an older version of Widelands.")
 			    /** TRANSLATORS: This text is on a separate line with an error message below */
-			    % _("Error message:") % e.what())
+			    % _("Error message:") % errormessage)
 			      .str();
 
 			const std::string fs_filename =

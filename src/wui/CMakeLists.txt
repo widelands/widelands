@@ -57,6 +57,8 @@ wl_library(wui_mapview_pixelfunctions
 
 wl_library(wui_common
   SRCS
+    gamedetails.cc
+    gamedetails.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc

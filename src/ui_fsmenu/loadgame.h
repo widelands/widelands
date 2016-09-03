@@ -27,47 +27,10 @@
 #include "graphic/image.h"
 #include "logic/game_controller.h"
 #include "ui_basic/button.h"
-#include "ui_basic/icon.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
-
-namespace Widelands {
-class EditorGameBase;
-class Game;
-class Map;
-class MapLoader;
-}
-class Image;
-class RenderTarget;
-class GameController;
-struct GameSettingsProvider;
-
-/**
- * Data about a savegame/replay that we're interested in.
- */
-struct SavegameData {
-	std::string filename;
-	std::string mapname;
-	std::string wincondition;
-	std::string minimap_path;
-	std::string savedatestring;
-	std::string errormessage;
-
-	uint32_t gametime;
-	uint32_t nrplayers;
-	std::string version;
-	time_t savetimestamp;
-	GameController::GameType gametype;
-
-	SavegameData()
-	   : gametime(0),
-	     nrplayers(0),
-	     savetimestamp(0),
-	     gametype(GameController::GameType::SINGLEPLAYER) {
-	}
-};
+#include "wui/gamedetails.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
@@ -91,8 +54,6 @@ protected:
 	void fill_table() override;
 
 private:
-	/// Updates buttons and text labels and returns whether a table entry is selected.
-	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
 
@@ -101,24 +62,9 @@ private:
 	bool is_replay_;
 
 	UI::Textarea title_;
-	UI::Textarea label_mapname_;
-	UI::MultilineTextarea ta_mapname_;  // Multiline for long names
-	UI::Textarea label_gametime_;
-	UI::MultilineTextarea ta_gametime_;  // Multiline because we want tooltips
-	UI::Textarea label_players_;
-	UI::MultilineTextarea ta_players_;
-	UI::Textarea label_version_;
-	UI::Textarea ta_version_;
-	UI::Textarea label_win_condition_;
-	UI::MultilineTextarea ta_win_condition_;
+	GameDetails game_details_;
 
 	UI::Button delete_;
-
-	UI::MultilineTextarea ta_errormessage_;
-
-	int32_t const minimap_y_, minimap_w_, minimap_h_;
-	UI::Icon minimap_icon_;
-	std::unique_ptr<const Image> minimap_image_;
 
 	std::vector<SavegameData> games_data_;
 	std::string filename_;
