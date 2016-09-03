@@ -542,7 +542,7 @@ struct DistanceRoutingFixture : public ComplexRouterFixture {
 
 	TestingRoutingNode* start;
 	TestingRoutingNode* end;
-	TestingRoutingNode *d1, *d2, *d3, *d4, *d5;
+	TestingRoutingNode* d1, *d2, *d3, *d4, *d5;
 };
 BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	Nodes chain;
