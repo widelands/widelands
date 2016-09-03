@@ -34,7 +34,6 @@ tribes:new_productionsite_type {
       atlanteans_scout = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "smoked_fish", amount = 2 },
       { name = "atlanteans_bread", amount = 2 }

@@ -45,7 +45,6 @@ tribes:new_trainingsite_type {
       atlanteans_trainer = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "smoked_fish", amount = 6 },
       { name = "smoked_meat", amount = 6 },

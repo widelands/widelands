@@ -41,7 +41,6 @@ tribes:new_productionsite_type {
       atlanteans_sawyer = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "log", amount = 8 }
    },

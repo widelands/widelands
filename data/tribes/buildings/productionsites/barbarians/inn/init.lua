@@ -41,7 +41,6 @@ tribes:new_productionsite_type {
       barbarians_innkeeper = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "fish", amount = 4 },
       { name = "meat", amount = 4 },

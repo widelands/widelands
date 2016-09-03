@@ -41,7 +41,6 @@ tribes:new_productionsite_type {
       empire_brewer = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }

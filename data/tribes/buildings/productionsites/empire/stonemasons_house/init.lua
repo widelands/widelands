@@ -42,7 +42,6 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   -- This table is nested so we can define the order in the building's UI.
    inputs = {
       { name = "marble", amount = 6 }
    },
