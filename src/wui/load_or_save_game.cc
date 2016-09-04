@@ -310,7 +310,15 @@ void LoadOrSaveGame::fill_table() {
 					break;
 				}
 				te.set_string(1, gametypestring);
-				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+				if (filetype_ == FileType::kReplay) {
+					if (UI::g_fh1->fontset()->is_rtl()) {
+						te.set_string(2, (boost::format("%1% ← %2%") % gamedata.gametime % gamedata.mapname).str());
+					} else {
+						te.set_string(2, (boost::format("%1% → %2%") % gamedata.gametime % gamedata.mapname).str());
+					}
+				} else {
+					te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+				}
 			} else {
 				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 			}
