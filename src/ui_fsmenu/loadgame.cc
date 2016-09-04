@@ -47,7 +47,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-	  load_or_save_(this, g, gsp, tablex_, tabley_, tablew_, tableh_, is_replay),
+     load_or_save_(this, g, gsp, tablex_, tabley_, tablew_, tableh_, padding_, is_replay),
 
      is_replay_(is_replay),
      // Main title
@@ -56,14 +56,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             tabley_ / 3,
             is_replay_ ? _("Choose a replay") : _("Choose a saved game"),
             UI::Align::kHCenter),
-
-     // Savegame description
-     game_details_(this,
-                   right_column_x_,
-                   tabley_,
-                   get_right_column_w(right_column_x_),
-                   tableh_ - buth_ - 4 * padding_,
-                   GameDetails::Style::kFsMenu),
 
      delete_(this,
              "delete",
@@ -95,9 +87,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	delete_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
-	load_or_save_.table().selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
+	load_or_save_.table().selected.connect(
+	   boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(
-		boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 
 	fill_table();
 }
@@ -109,7 +102,7 @@ void FullscreenMenuLoadGame::think() {
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
-	const SavegameData* gamedata = load_or_save_.selected_entry();
+	const SavegameData* gamedata = load_or_save_.entry_selected();
 	if (gamedata && gamedata->errormessage.empty()) {
 		filename_ = gamedata->filename;
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
@@ -120,7 +113,7 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	if (!load_or_save_.has_selection()) {
 		return;
 	}
-	const SavegameData& gamedata = *load_or_save_.selected_entry();
+	const SavegameData& gamedata = *load_or_save_.entry_selected();
 
 	std::string message = (boost::format("%s %s\n") % _("Map Name:") % gamedata.mapname).str();
 
@@ -162,11 +155,8 @@ void FullscreenMenuLoadGame::entry_selected() {
 	delete_.set_enabled(has_selection);
 
 	if (has_selection) {
-		const SavegameData& gamedata = *load_or_save_.selected_entry();
-		game_details_.update(gamedata);
+		const SavegameData& gamedata = *load_or_save_.entry_selected();
 		ok_.set_enabled(gamedata.errormessage.empty());
-	} else {
-		game_details_.clear();
 	}
 }
 

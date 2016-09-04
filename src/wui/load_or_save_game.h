@@ -30,15 +30,22 @@
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
 public:
-	LoadOrSaveGame(UI::Panel* parent, Widelands::Game& g,
-						GameSettingsProvider* gsp,
-						int tablex, int tabley, int tablew, int tableh,
-						bool is_replay = false);
+	LoadOrSaveGame(UI::Panel* parent,
+	               Widelands::Game& g,
+	               GameSettingsProvider* gsp,
+	               int tablex,
+	               int tabley,
+	               int tablew,
+	               int tableh,
+	               int padding,
+	               bool is_replay = false);
 
-	const SavegameData* selected_entry();
+	const SavegameData* entry_selected();
 	bool has_selection();
 	void fill_table();
-	UI::Table<uintptr_t const>& table() {return table_;}
+	UI::Table<uintptr_t const>& table() {
+		return table_;
+	}
 
 private:
 	bool compare_date_descending(uint32_t, uint32_t);
@@ -46,6 +53,7 @@ private:
 	UI::Table<uintptr_t const> table_;
 	bool is_replay_;
 	std::vector<SavegameData> games_data_;
+	GameDetails game_details_;
 
 	Widelands::Game& game_;
 	GameSettingsProvider* settings_;

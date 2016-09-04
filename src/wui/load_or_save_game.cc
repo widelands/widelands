@@ -67,13 +67,26 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 
 }  // namespace
 
-LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent, Widelands::Game& g,
-															  GameSettingsProvider* gsp, int tablex, int tabley, int tablew, int tableh,
-															  bool is_replay)
-	: table_(parent, tablex, tabley, tablew, tableh, true),
+LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
+                               Widelands::Game& g,
+                               GameSettingsProvider* gsp,
+                               int tablex,
+                               int tabley,
+                               int tablew,
+                               int tableh,
+                               int padding,
+                               bool is_replay)
+   : table_(parent, tablex, tabley, tablew, tableh, true),
      is_replay_(is_replay),
-	  game_(g),
-	  settings_(gsp) {
+     // Savegame description
+     game_details_(parent,
+                   tablex + tablew + padding,
+                   tabley,
+                   parent->get_w() - tablex - tablew - 2 * padding,
+                   tableh,
+                   GameDetails::Style::kFsMenu),
+     game_(g),
+     settings_(gsp) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	int used_width = 130;
 	if (is_replay_ || settings_->settings().multiplayer) {
@@ -125,10 +138,13 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) {
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-const SavegameData* LoadOrSaveGame::selected_entry() {
+const SavegameData* LoadOrSaveGame::entry_selected() {
 	if (has_selection()) {
-		return &games_data_[table_.get_selected()];
+		const SavegameData& result = games_data_[table_.get_selected()];
+		game_details_.update(result);
+		return &result;
 	} else {
+		game_details_.clear();
 		return nullptr;
 	}
 }
@@ -315,4 +331,3 @@ void LoadOrSaveGame::fill_table() {
 		table_.select(0);
 	}
 }
-

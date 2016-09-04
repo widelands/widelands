@@ -62,8 +62,6 @@ private:
 	bool is_replay_;
 
 	UI::Textarea title_;
-	GameDetails game_details_;
-
 	UI::Button delete_;
 
 	std::vector<SavegameData> games_data_;
