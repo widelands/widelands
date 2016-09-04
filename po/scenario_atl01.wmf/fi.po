@@ -5,6 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-06 07:12+0000\n"
-"PO-Revision-Date: 2016-08-07 08:15+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"POT-Creation-Date: 2016-08-26 10:14+0000\n"
+"PO-Revision-Date: 2016-08-26 19:03+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,15 +41,15 @@ msgstr "Rakennus menetettiin!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr ""
+msgstr "Varmista rakennustarvikkeiden toimitus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "Toimita Rakennustarvikkeita"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Toimita perusrakennusmateriaalia talouteesi:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -56,11 +57,11 @@ msgstr "Rakenna kivilouhos"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Rakenna kaksi puunhakkaajan mökkiä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Rakenna kaksi puunistuttajan mökkiä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -68,26 +69,26 @@ msgstr "Rakenna saha"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "Laajenna aluettasi ja tutki"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Laajenna ja tutki"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "Saari on suuri ja niin pitkään kuin emme ole varmoja ettemme ole täällä yksin, emme voi rentoutua. Tutki ja valloita se. Se on ainoa tapa suojella meitä saaren uhkilta ja Atlantikselta."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Rakenna sota-asema laajentaaksesi aluettasi"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Perusta kiinteän ruuan tuotanto"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
@@ -113,11 +114,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "Rakenna maatila ja mustajuuriviljelmä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Rakenna tehdas valmistaaksesi maissijauhoa ja mustajuurimaustetta"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -125,33 +126,33 @@ msgstr "Rakenna kaivo"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Rakenna leipomo ja leivo leipää maissijauhoista, mustajuurimausteesta ja vedestä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Rakenna metsästäjän mökki saadaksesi raakaa lihaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Rakenna kalastajan mökki lähelle vettä saadaksesi raakaa kalaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "Rakenna kalankasvattajan mökki lähelle kalastajaa varmistaaksesi ettei kalat kuole"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Rakenna kaksi savustamoa savustaaksesi raakaa lihaa ja kalaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Rakenna hämähäkkitarha ja kutomo"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Hämähänkinsilkki Tuotanto"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
@@ -172,15 +173,15 @@ msgstr "Rakenna hämähäkkitarha"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Rakenna kultarihmakehräämö"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Rakenna teollisuutta ja kaivoksia"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Industry and Mines"
-msgstr ""
+msgstr "Teollusuutta ja Kaivoksia"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -201,7 +202,7 @@ msgstr ""
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "Rakenna jokaisen tyyppinen kaivos. Muista lähettää geologi ensin vuorille."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
@@ -209,7 +210,7 @@ msgstr "Rakenna sulattamo"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Rakenna haarniskapäja ja asepaja"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -217,11 +218,11 @@ msgstr "Rakenna työkalupaja"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Rakenna harjoittelupaikka sotilaille"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Sotilaiden Harjoittelupaikka"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -233,15 +234,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "Rakenna tyrmä ja labyrintti"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Rakenna varasto ja hevostila"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Varasto ja Hevostila"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -257,7 +258,7 @@ msgstr "Rakenna varasto"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Rakenna hevostila"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
@@ -280,11 +281,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
-msgstr ""
+msgstr "Ylpeästi Kuolemaan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:137
 msgid "Favored by the God"
-msgstr ""
+msgstr "Jumalan Suosima"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:139
@@ -309,11 +310,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "Häväisty Jumalan Edessä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "Jumalan Rangaistus"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:149
@@ -336,11 +337,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "Sekasorto ja Hämminki"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Kaaoksen Orastus..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -382,11 +383,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid "The Princess’ Memoir"
-msgstr ""
+msgstr "Prinsessan Muistelmat"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:173
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "Jundlina Kirjoittaa Ylös Hänen Muistelmiaan"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:175
@@ -495,7 +496,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:213
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "Colionder Saapuu"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:216
@@ -525,7 +526,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "Colionder on Ajatuksissaan"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:228
@@ -569,7 +570,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "Jundlina Käy Läpi Raportit"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:250
@@ -580,7 +581,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "Mies Saapuu Jundlinan Luokse"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:259

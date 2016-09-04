@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-09 20:50+0000\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -953,7 +953,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1316
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
 msgid "Loading…"
 msgstr ""
 
@@ -1097,7 +1097,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:385
 #: ../../src/logic/map_objects/tribes/production_program.cc:834
 #: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1020
+#: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -1166,7 +1166,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:949
+#: ../../src/logic/map_objects/tribes/production_program.cc:948
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1175,19 +1175,19 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1031
+#: ../../src/logic/map_objects/tribes/production_program.cc:1030
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1237
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1246
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
+#: ../../src/logic/map_objects/tribes/production_program.cc:1245
+#: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
 msgstr ""
 
@@ -1229,6 +1229,10 @@ msgstr ""
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
+#: ../../src/logic/map_objects/tribes/ship.cc:538
+msgid "Island Circumnavigated"
+msgstr ""
+
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
@@ -1237,79 +1241,75 @@ msgid "Waiting"
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
-msgid "Island Circumnavigated"
-msgstr ""
-
-#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:605
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:837
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:955
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:959
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:963
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:967
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -1628,7 +1628,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1197
 msgid "Preparing game"
 msgstr ""
 
@@ -2894,11 +2894,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1008
+#: ../../src/wlapplication.cc:996
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1005
 #, c-format
 msgid ""
 "\n"
@@ -2908,7 +2908,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1023
+#: ../../src/wlapplication.cc:1011
 msgid ""
 "Please add this information to your report.\n"
 "\n"

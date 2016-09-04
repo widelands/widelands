@@ -4,13 +4,14 @@
 # Translators:
 # Endrju <endrjux@gmail.com>, 2005
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Tomasz Pudło <wptom@wp.pl>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-08-17 12:44+0000\n"
+"PO-Revision-Date: 2016-08-17 13:53+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,11 +43,11 @@ msgstr "Jeleń"
 msgid "Duck"
 msgstr "Kaczka"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Wapiti"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Lis"
 
@@ -66,11 +67,11 @@ msgstr "Renifer"
 msgid "Sheep"
 msgstr "Owca"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Jeleń"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Dzik"
 
@@ -78,7 +79,7 @@ msgstr "Dzik"
 msgid "Wisent"
 msgstr "Żubr"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Wilk"
 
@@ -151,7 +152,7 @@ msgstr "Kamyk"
 #: ../../data/world/immovables/rocks/greenland_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks1/init.lua:12
 msgid "Rocks 1"
-msgstr ""
+msgstr "Skały 1"
 
 #: ../../data/world/immovables/rocks/blackland_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks2/init.lua:12

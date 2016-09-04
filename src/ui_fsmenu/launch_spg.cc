@@ -335,18 +335,16 @@ void FullscreenMenuLaunchSPG::refresh() {
 	select_map_.set_enabled(settings_->can_change_map());
 	wincondition_.set_enabled(settings_->can_change_map() && !settings.scenario);
 
-	if (settings.scenario)
+	if (settings.scenario) {
 		set_scenario_values();
+	}
 
 	// "Choose Position" Buttons in frond of PDG
 	for (uint8_t i = 0; i < nr_players_; ++i) {
 		pos_[i]->set_visible(true);
 		const PlayerSettings& player = settings.players[i];
-		if (player.state == PlayerSettings::stateOpen ||
-		    player.state == PlayerSettings::stateComputer)
-			pos_[i]->set_enabled(true);
-		else
-			pos_[i]->set_enabled(false);
+		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::stateOpen ||
+		                                       player.state == PlayerSettings::stateComputer));
 	}
 	for (uint32_t i = nr_players_; i < MAX_PLAYERS; ++i)
 		pos_[i]->set_visible(false);
@@ -390,8 +388,9 @@ void FullscreenMenuLaunchSPG::select_map() {
  * and usability of all the parts of the UI.
  */
 void FullscreenMenuLaunchSPG::set_scenario_values() {
-	if (settings_->settings().mapfilename.empty())
+	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
+	}
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(settings_->settings().mapfilename));

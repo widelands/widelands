@@ -51,7 +51,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
 fi
 
 # Do the actual build.
-make -k -j1
+make -k -j3
 
 # Run the regression suite.
 cd ..

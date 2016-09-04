@@ -3,15 +3,16 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-08-17 12:44+0000\n"
+"PO-Revision-Date: 2016-08-23 19:32+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,40 +173,40 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Perusteiden hallinta"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "Tässä opetuspelissä sinulle opetaan kuinka navikoida Widelandsissa, rakentaa rakennuksia ja teitä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Sodankäynti"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "Tässä opetuspelissä sinulle opetaan sodankäynnin salaisuudet: kuinka luoda sotilaita, kouluttaa ja johtaa heitä taistelussa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Merenkäynti"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Talous"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -215,7 +216,7 @@ msgstr ""
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Saaristomeri"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -311,7 +312,7 @@ msgstr ""
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Aavikkoturnaus"
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:10
 msgid ""
@@ -424,7 +425,7 @@ msgstr ""
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Täysikuu"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
@@ -455,7 +456,7 @@ msgstr ""
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Jääsodat"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -479,7 +480,7 @@ msgstr "Asteroidin törmäystä seuranneessa kovassa talvessa kolmea saarta yhdi
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Saaret sodassa"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
@@ -490,7 +491,7 @@ msgstr "Satojen vuosien ajan olemme eläneet sovussa naapurisaaren heimon kanssa
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Kuninkaat ja Kuningattaret"
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
 msgid ""
@@ -534,7 +535,7 @@ msgstr ""
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Viimeiset selviytyjät"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
@@ -544,7 +545,7 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Saarivalloitus"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
 msgid ""
@@ -552,11 +553,11 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "Erityinen turnaus Atlantislaisessa kulttuurissa on niin sanottu 'Saarivalloitus', jossa kaksi tai useampi ryhmä yrittää saavuttaa saaren keskustan niin nopeasti kuin mahdollista ja pystyttääkseen ensimmäisenä linnan keskusvuoren päälle."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Salakuljettajat"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
@@ -590,7 +591,7 @@ msgstr ""
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
-msgstr ""
+msgstr "Jokilöytöretkeilijät"
 
 #: ../../data/maps/River_Explorers.wmf/elemental:10
 msgid ""
@@ -701,7 +702,7 @@ msgstr "Jälleen outo jumalten asettama koetus. Päästäksesi toiselle puolelle
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "Niili"
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:10
 msgid ""
@@ -761,7 +762,7 @@ msgstr ""
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "Vettä voi löytää saarien ympäriltä."
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -794,7 +795,7 @@ msgstr ""
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Kaksoislaguuni"
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
 msgid ""
@@ -831,7 +832,7 @@ msgstr "Moninpeliin sopiva taistelukartta pienellä, ympyränmuotoisella saarell
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Vulkaaninen Talvi"
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:10
 msgid ""
@@ -843,7 +844,7 @@ msgstr ""
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Suuri Maailma"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""

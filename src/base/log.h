@@ -46,9 +46,7 @@
 #define PRIXS PRIS_PREFIX "X"
 #define PRIoS PRIS_PREFIX "o"
 
-// Print a formatted log messages to wout.
-// wout is either std::cout or specified logfile.
-extern std::ostream& wout;
+// Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 void log(const char*, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;

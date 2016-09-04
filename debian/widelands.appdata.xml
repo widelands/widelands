@@ -11,10 +11,13 @@
   <summary xml:lang="cs">Real-time budovací strategická hra</summary>
   <summary xml:lang="da">Et realtids opbygningsstrategispil</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
+  <summary xml:lang="fi">Reaaliaikainen strategiapeli</summary>
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
+  <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
+  <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
     <p>
       You are the regent of a small clan. Your task is to build an ever growing settlement. Every member of your clan will do his or her part to produce more resources to further this growth.
@@ -63,6 +66,14 @@
       Widelands bietet einen Einzelspielermodus mit Kampagnen, die Geschichten der Stämme und ihren Schwierigkeiten im Widelands-Universum erzählen. Dennoch beginnt das eigentliche Siedeln erst, wenn du dich mit Freunden über Internet oder LAN verbindest, um gemeinsam neue Imperien zu errichten – oder um euch gegenseitig zu vernichten. Widelands bietet zusätzlich eine künstliche Intelligenz, um dich herauszufordern.
     </p>
   </description>
+  <description xml:lang="fi">
+    <p>
+      Ohjaat pientä heimoa. Tehtävänäsi luoda laajentua, sekä luoda toimiva talous jotta heimosi pärjäisi naapureiden puristuksessa.
+    </p>
+    <p>
+      Widelandsissa on yksinpelimoodi, jossa voit aloittelijana kohdata haasteita WL-maailmassa. Todellinen hupi alkaa LAN- tai verkkopelissä kavereiden kanssa.
+    </p>
+  </description>
   <description xml:lang="fr">
     <p>
       Vous êtes le régent d'un petit clan. Votre tâche est de construire une colonie toujours en expansion. Chaque membre de votre clan fera de son mieux pour produire plus de ressources et soutenir cette croissance.
@@ -77,6 +88,14 @@
     </p>
     <p>
       Bheir Widelands modh aon-chluicheadair chut le iomairtean a dh’innseas sgeulachdan nan treubhan agus an còmhstri aca air saoghal Widelands. Co-dhiù, cha tòisich an tuineachadh ann an dà-rìribh ach nuair a bhios tu ’s do charaidean cruinn còmhla air an eadar-lìn no air lìonra ionadail gus impireachdan ùra a thogail còmhla – no gus càch a chèile a cheannsachadh air a’ bhlàr. Tha inntinn fhuadain aig Widelands cuideachd a bheir dùbhlan dhut.
+    </p>
+  </description>
+  <description xml:lang="hu">
+    <p>
+      Egy kis klán régense vagy. A feladatod az, hogy felépíts egy folyamatosan növekvő települést. A klánod minden tagja kiveszi a részét a nyersanyagok termeléséből, hogy tovább segítse ezt a növekedést.
+    </p>
+    <p>
+      A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amik törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat - vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
     </p>
   </description>
   <description xml:lang="sk">

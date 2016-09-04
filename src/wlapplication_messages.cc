@@ -44,9 +44,6 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _("Options:") << endl << endl;
 	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
 	          << endl
-	          << _(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
-	               "                      terminal output")
-	          << endl
 	          << _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
 	               "                      data files")
 	          << endl

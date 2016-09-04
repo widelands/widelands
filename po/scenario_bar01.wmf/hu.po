@@ -6,14 +6,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 18:24+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-08-17 12:44+0000\n"
+"PO-Revision-Date: 2016-08-20 20:15+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,13 +29,13 @@ msgstr "Építs két vadőr kunyhót"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Építsd egy erdőőrkunyhót minden favágó kunyhó mellé."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Természetesen, a fák lassan nőnek. Hogy biztosan elég farönköd legyen, vadőröket kell építened."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -42,17 +43,17 @@ msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Terjeszkedj északkeletre, a kövekig."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Építs katonai épületeket (mint az őrbódék vagy a határőrházak) a területed növeléséhez."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Menj a tőled északkeletre fekvő kövekhez és építs ott egy kőfejtőt."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -60,11 +61,11 @@ msgstr "Láss hozzá bányák építéséhez a hegyen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Építs szén- és vasbányákat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Építs egy szénbányát és vasércbányát."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -243,7 +244,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Építs ki egy mész- és széngazdaságot"
+msgstr "Építs ki egy mész- és széntermelő gazdaságot"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
@@ -262,7 +263,7 @@ msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Vizet úgy tudsz szerezni, hogy kutat építesz egy vízforráson, amit a geológusaid tudnak felfedezni, amikor odaküldöd őket egy zászlóhoz ami nem hegyen van"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
@@ -1030,7 +1031,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Új célkitűzés"
