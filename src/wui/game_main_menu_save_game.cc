@@ -118,16 +118,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
  * called when a item is selected
  */
 void GameMainMenuSaveGame::entry_selected(uint32_t) {
-	// NOCOM crash with incompatible
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
-
-		const std::string& name = gamedata.filename;
-
-		Widelands::GameLoader gl(name, igbase().game());
-		Widelands::GamePreloadPacket gpdp;
-		gl.preload_game(gpdp);  //  This has worked before, no problem
-		{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
+		editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
 		ok_.set_enabled(true);
 	}
 }
