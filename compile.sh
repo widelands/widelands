@@ -23,17 +23,17 @@ echo " "
 
 
 ## Option to avoid building and linking website-related executables.
-NO_WEBSITE=0
+BUILD_WEBSITE="ON"
 BUILDTYPE="Debug"
 while [ "$1" != "" ]; do
   if [ "$1" = "--no-website" -o "$1" = "-n" ]; then
-    NO_WEBSITE=1
+    BUILD_WEBSITE="OFF"
   elif [ "$1" = "--release" -o "$1" = "-r" ]; then
     BUILDTYPE="Release"
   fi
   shift
 done
-if [ $NO_WEBSITE -eq 0 ]; then
+if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
   echo "You can use -n or --no-website to omit building and"
   echo "linking website-related executables."
@@ -104,17 +104,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      if [ $NO_WEBSITE -eq 0 ]; then
-        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=ON
-      else
-        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=OFF
-      fi
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE
     else
-      if [ $NO_WEBSITE -eq 0 ]; then
-        cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=ON
-      else
-        cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=OFF
-      fi
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE
     fi
 
     $buildtool
