@@ -27,10 +27,10 @@
 #include "graphic/image.h"
 #include "logic/game_controller.h"
 #include "ui_basic/button.h"
-#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/gamedetails.h"
+#include "wui/load_or_save_game.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
@@ -57,7 +57,7 @@ private:
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
 
-	UI::Table<uintptr_t const> table_;
+	LoadOrSaveGame load_or_save_;
 
 	bool is_replay_;
 

@@ -59,6 +59,8 @@ wl_library(wui_common
   SRCS
     gamedetails.cc
     gamedetails.h
+    load_or_save_game.cc
+    load_or_save_game.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc
