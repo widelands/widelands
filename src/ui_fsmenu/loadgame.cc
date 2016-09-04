@@ -47,11 +47,18 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-	  load_or_save_(this, g, tablex_, tabley_, tablew_, tableh_, padding_,
-						 is_replay? LoadOrSaveGame::FileType::kReplay :
-										gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer : LoadOrSaveGame::FileType::kGameSinglePlayer,
-						 GameDetails::Style::kFsMenu,
-						 true),
+     load_or_save_(this,
+                   g,
+                   tablex_,
+                   tabley_,
+                   tablew_,
+                   tableh_,
+                   padding_,
+                   is_replay ? LoadOrSaveGame::FileType::kReplay : gsp->settings().multiplayer ?
+                               LoadOrSaveGame::FileType::kGameMultiPlayer :
+                               LoadOrSaveGame::FileType::kGameSinglePlayer,
+                   GameDetails::Style::kFsMenu,
+                   true),
 
      is_replay_(is_replay),
      // Main title

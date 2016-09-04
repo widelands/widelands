@@ -45,7 +45,8 @@ namespace {
 // This function concatenates the filename and localized map name for a savegame/replay.
 // If the filename starts with the map name, the map name is omitted.
 // It also prefixes autosave files with a numbered and localized "Autosave" prefix.
-std::string map_filename(const std::string& filename, const std::string& mapname, bool localize_autosave) {
+std::string
+map_filename(const std::string& filename, const std::string& mapname, bool localize_autosave) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 
 	if (localize_autosave && boost::starts_with(result, "wl_autosave")) {
@@ -68,26 +69,26 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 }  // namespace
 
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
-										 Widelands::Game& g,
-										 int tablex,
-										 int tabley,
-										 int tablew,
-										 int tableh,
-										 int padding,
-										 FileType filetype,
-										 GameDetails::Style style,
-										 bool localize_autosave)
+                               Widelands::Game& g,
+                               int tablex,
+                               int tabley,
+                               int tablew,
+                               int tableh,
+                               int padding,
+                               FileType filetype,
+                               GameDetails::Style style,
+                               bool localize_autosave)
    : table_(parent, tablex, tabley, tablew, tableh, true),
-	  filetype_(filetype),
-	  localize_autosave_(localize_autosave),
-	  // Savegame description
+     filetype_(filetype),
+     localize_autosave_(localize_autosave),
+     // Savegame description
      game_details_(parent,
                    tablex + tablew + padding,
                    tabley,
                    parent->get_w() - tablex - tablew - 2 * padding,
                    tableh,
-						 style),
-	  game_(g) {
+                   style),
+     game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	int used_width = 130;
 	if (filetype_ != FileType::kGameSinglePlayer) {
@@ -164,7 +165,6 @@ void LoadOrSaveGame::select_by_name(const std::string& name) {
 		}
 	}
 }
-
 
 /**
  * Fill the file list
@@ -314,12 +314,15 @@ void LoadOrSaveGame::fill_table() {
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
 					if (UI::g_fh1->fontset()->is_rtl()) {
-						te.set_string(2, (boost::format("%1% ← %2%") % gamedata.gametime % gamedata.mapname).str());
+						te.set_string(
+						   2, (boost::format("%1% ← %2%") % gamedata.gametime % gamedata.mapname).str());
 					} else {
-						te.set_string(2, (boost::format("%1% → %2%") % gamedata.gametime % gamedata.mapname).str());
+						te.set_string(
+						   2, (boost::format("%1% → %2%") % gamedata.gametime % gamedata.mapname).str());
 					}
 				} else {
-					te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+					te.set_string(
+					   2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 				}
 			} else {
 				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
