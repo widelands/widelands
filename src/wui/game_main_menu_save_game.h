@@ -24,6 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/load_or_save_game.h"
 
@@ -51,10 +52,18 @@ private:
 	bool save_game(std::string);
 	void pause_game(bool paused);
 
+	// UI coordinates and spacers
+	int32_t const padding_;  // Common padding between panels
+	int32_t const buth_;     // Button dimensions
+	int32_t const tablex_, tabley_, tablew_, tableh_;
+	int32_t const right_column_x_;
+	int32_t const butw_;  // Button dimensions
+
+	UI::Textarea editbox_label_;
 	UI::EditBox editbox_;
 	LoadOrSaveGame load_or_save_;
 
-	UI::Button* button_ok_;
+	UI::Button ok_, cancel_, delete_;
 	std::string curdir_;
 	std::string parentdir_;
 	std::string filename_;

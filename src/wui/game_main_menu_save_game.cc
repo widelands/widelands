@@ -33,58 +33,70 @@
 #include "logic/playersmanager.h"
 #include "wui/interactive_gamebase.h"
 
-namespace {
-
-#define WINDOW_WIDTH 540
-#define WINDOW_HEIGHT 440
-#define VMARGIN 5
-#define VSPACING 5
-#define HSPACING 5
-#define BUTTON_HEIGHT 20
-#define LIST_WIDTH 280
-#define LIST_HEIGHT (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING)
-#define EDITBOX_Y (WINDOW_HEIGHT - 24 - VMARGIN)
-#define DESCRIPTION_X (VMARGIN + LIST_WIDTH + VSPACING)
-#define DESCRIPTION_WIDTH (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
-#define CANCEL_Y (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
-#define DELETE_Y (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
-#define OK_Y (DELETE_Y - BUTTON_HEIGHT - VSPACING)
-
-}  // namespace
-
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 	return dynamic_cast<InteractiveGameBase&>(*get_parent());
 }
 
 GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "save_game", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+	: UI::UniqueWindow(&parent, "save_game", &registry, parent.get_inner_w() - 40, parent.get_inner_h() - 40, _("Save Game")),
+	  // Values for alignment and size
+	  padding_(4),
+	  buth_(20),
+	  tablex_(padding_),
+	  tabley_(padding_),
+	  tablew_(get_inner_w() * 7 / 12),
+	  tableh_(get_inner_h() - tabley_ - 3 * buth_ - 2 * padding_),
+	  right_column_x_(tablew_ + 2 * padding_),
+	  butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
+	  editbox_label_(this,
+						  padding_,
+						  tabley_ + tableh_ + 3 * padding_,
+						  butw_,
+						  buth_,
+						  _("Filename:"),
+						  UI::Align::kLeft),
      editbox_(this,
-              HSPACING,
-              EDITBOX_Y,
-              LIST_WIDTH,
-              0,
+				  editbox_label_.get_w() + 2 * padding_,
+				  tabley_ + tableh_ + 3 * padding_,
+				  get_inner_w() - editbox_label_.get_w() - 3 * padding_,
+				  buth_,
               2,
               g_gr->images().get("images/ui_basic/but1.png")),
-	  load_or_save_(this, igbase().game(), VMARGIN, VMARGIN, LIST_WIDTH, LIST_HEIGHT - editbox_.get_h(), VSPACING, LoadOrSaveGame::FileType::kGame),
+	  load_or_save_(this, igbase().game(), tablex_, tabley_, tablew_, tableh_, padding_, LoadOrSaveGame::FileType::kGame),
+	  ok_(this,
+			"ok",
+			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
+														get_inner_w() / 2 + padding_,
+			get_inner_h() - padding_ - buth_,
+			butw_,
+			buth_,
+			g_gr->images().get("images/ui_basic/but5.png"),
+			_("OK")),
+	  cancel_(this,
+				 "cancel",
+				 UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
+															 get_inner_w() / 2 - butw_ - padding_,
+				 get_inner_h() - padding_ - buth_,
+				 butw_,
+				 buth_,
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 _("Cancel")),
+	  delete_(this,
+				 "delete",
+				 right_column_x_,
+				 tabley_ + tableh_ - buth_,
+				 get_inner_w() - right_column_x_ - padding_,
+				 buth_,
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 _("Delete")),
      curdir_(SaveHandler::get_base_dir()) {
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
-	button_ok_ =
-	   new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("OK"), std::string(), false);
-	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-
-	UI::Button* cancelbtn =
-	   new UI::Button(this, "cancel", DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
-
-	UI::Button* deletebtn =
-	   new UI::Button(this, "delete", DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("Delete"));
-	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
+	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
+	delete_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this, _1));
 	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
@@ -106,6 +118,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
  * called when a item is selected
  */
 void GameMainMenuSaveGame::entry_selected(uint32_t) {
+	// NOCOM crash with incompatible
 	if (load_or_save_.has_selection()) {
 		const SavegameData& gamedata = *load_or_save_.entry_selected();
 
@@ -115,7 +128,7 @@ void GameMainMenuSaveGame::entry_selected(uint32_t) {
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);  //  This has worked before, no problem
 		{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
-		button_ok_->set_enabled(true);
+		ok_.set_enabled(true);
 	}
 }
 
@@ -150,7 +163,7 @@ void GameMainMenuSaveGame::select_by_name(std::string name) {
  */
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	button_ok_->set_enabled(LayeredFileSystem::is_legal_filename(editbox_.text()));
+	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_.text()));
 }
 
 static void dosave(InteractiveGameBase& igbase, const std::string& complete_filename) {
