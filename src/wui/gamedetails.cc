@@ -113,7 +113,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 
 	if (gamedata.errormessage.empty()) {
 		name_label_.set_text((boost::format("<rt>%s</rt>") %
-		                      as_header_with_content(_("Map:"), gamedata.mapname, style_, true))
+		                      as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
 		                        .str());
 
 		name_label_.set_tooltip(gamedata.gametype == GameController::GameType::REPLAY ?
@@ -122,7 +122,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 
 		// Show game information
 		std::string description =
-		   as_header_with_content(_("Gametime:"), gametimestring(gamedata.gametime), style_);
+		   as_header_with_content(_("Game Time:"), gametimestring(gamedata.gametime), style_);
 
 		description =
 		   (boost::format("%s%s") % description %

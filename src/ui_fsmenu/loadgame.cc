@@ -202,7 +202,7 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	}
 	const SavegameData& gamedata = games_data_[table_.get_selected()];
 
-	std::string message = (boost::format("%s %s\n") % _("Map:") % gamedata.mapname).str();
+	std::string message = (boost::format("%s %s\n") % _("Map Name:") % gamedata.mapname).str();
 
 	message =
 	   (boost::format("%s %s %s\n") % message % _("Win Condition:") % gamedata.wincondition).str();
@@ -211,7 +211,7 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
 
 	message =
-	   (boost::format("%s %s %s\n") % message % _("Gametime:") % gametimestring(gamedata.gametime))
+	   (boost::format("%s %s %s\n") % message % _("Game Time:") % gametimestring(gamedata.gametime))
 	      .str();
 
 	message = (boost::format("%s %s %s\n\n") % message % _("Players:") % gamedata.nrplayers).str();
