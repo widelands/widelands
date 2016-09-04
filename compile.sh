@@ -24,9 +24,12 @@ echo " "
 
 ## Option to avoid building and linking website-related executables.
 NO_WEBSITE=0
+BUILDTYPE="Debug"
 while [ "$1" != "" ]; do
   if [ "$1" = "--no-website" -o "$1" = "-n" ]; then
     NO_WEBSITE=1
+  elif [ "$1" = "--release" -o "$1" = "-r" ]; then
+    BUILDTYPE="Release"
   fi
   shift
 done
@@ -42,7 +45,18 @@ fi
 echo " "
 echo "###########################################################"
 echo " "
-
+if [ $BUILDTYPE = "Release" ]; then
+  echo "Creating a Release build."
+else
+  echo "Creating a Debug build. Use -r to create a Release build."
+fi
+echo " "
+echo "For instructions on how to adjust options and build with"
+echo "CMake, please take a look at"
+echo "https://wl.widelands.org/wiki/BuildingWidelands/."
+echo " "
+echo "###########################################################"
+echo " "
 
 ######################################
 # Definition of some local variables #
@@ -89,21 +103,17 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    echo "This script produces a Debug build by default. If you want a Release build, "
-    echo "please take a look at https://wl.widelands.org/wiki/BuildingWidelands/ "
-    echo "for instructions on how to adjust options and build with CMake."
-
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
       if [ $NO_WEBSITE -eq 0 ]; then
-        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=ON
+        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=ON
       else
-        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=OFF
+        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=OFF
       fi
     else
       if [ $NO_WEBSITE -eq 0 ]; then
-        cmake .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=ON
+        cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=ON
       else
-        cmake .. -DCMAKE_BUILD_TYPE=Debug -DOPTION_BUILD_WEBSITE_TOOLS=OFF
+        cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=OFF
       fi
     fi
 
