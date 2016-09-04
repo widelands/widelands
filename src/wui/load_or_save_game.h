@@ -30,15 +30,22 @@
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
 public:
+	// Choose wich type of files to show
+	enum class FileType {
+		kReplay,
+		kGame,
+		kGameMultiPlayer,
+		kGameSinglePlayer
+	};
+
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
-	               GameSettingsProvider* gsp,
 	               int tablex,
 	               int tabley,
 	               int tablew,
 	               int tableh,
 	               int padding,
-	               bool is_replay = false);
+						FileType filetype);
 
 	const SavegameData* entry_selected();
 	bool has_selection();
@@ -51,12 +58,11 @@ private:
 	bool compare_date_descending(uint32_t, uint32_t);
 
 	UI::Table<uintptr_t const> table_;
-	bool is_replay_;
+	FileType filetype_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 
 	Widelands::Game& game_;
-	GameSettingsProvider* settings_;
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

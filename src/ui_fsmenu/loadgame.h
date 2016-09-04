@@ -63,8 +63,6 @@ private:
 
 	UI::Textarea title_;
 	UI::Button delete_;
-
-	std::vector<SavegameData> games_data_;
 	std::string filename_;
 
 	Widelands::Game& game_;

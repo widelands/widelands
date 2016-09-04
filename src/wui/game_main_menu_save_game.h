@@ -23,10 +23,9 @@
 #include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "wui/load_or_save_game.h"
 
 class InteractiveGameBase;
 
@@ -35,7 +34,7 @@ struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
 
-	void fill_list();
+	void fill_table();
 	void select_by_name(std::string name);
 
 protected:
@@ -43,7 +42,7 @@ protected:
 
 private:
 	InteractiveGameBase& igbase();
-	void selected(uint32_t);
+	void entry_selected(uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
 	void ok();
@@ -53,10 +52,8 @@ private:
 	void pause_game(bool paused);
 
 	UI::EditBox editbox_;
-	UI::Listselect<std::string> ls_;
+	LoadOrSaveGame load_or_save_;
 
-	UI::Textarea name_label_, mapname_, gametime_label_, gametime_, players_label_,
-	   win_condition_label_, win_condition_;
 	UI::Button* button_ok_;
 	std::string curdir_;
 	std::string parentdir_;

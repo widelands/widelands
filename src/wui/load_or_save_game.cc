@@ -68,30 +68,28 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 }  // namespace
 
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
-                               Widelands::Game& g,
-                               GameSettingsProvider* gsp,
-                               int tablex,
-                               int tabley,
-                               int tablew,
-                               int tableh,
-                               int padding,
-                               bool is_replay)
+										 Widelands::Game& g,
+										 int tablex,
+										 int tabley,
+										 int tablew,
+										 int tableh,
+										 int padding,
+										 FileType filetype)
    : table_(parent, tablex, tabley, tablew, tableh, true),
-     is_replay_(is_replay),
-     // Savegame description
+	  filetype_(filetype),
+	  // Savegame description
      game_details_(parent,
                    tablex + tablew + padding,
                    tabley,
                    parent->get_w() - tablex - tablew - 2 * padding,
                    tableh,
                    GameDetails::Style::kFsMenu),
-     game_(g),
-     settings_(gsp) {
+	  game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	int used_width = 130;
-	if (is_replay_ || settings_->settings().multiplayer) {
+	if (filetype_ != FileType::kGameSinglePlayer) {
 		std::vector<std::string> modes;
-		if (is_replay_) {
+		if (filetype_ == FileType::kReplay) {
 			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 			modes.push_back(_("SP = Single Player"));
@@ -163,7 +161,7 @@ void LoadOrSaveGame::fill_table() {
 
 	FilenameSet gamefiles;
 
-	if (is_replay_) {
+	if (filetype_ == FileType::kReplay) {
 		gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
 		                   [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX); });
 	} else {
@@ -180,7 +178,7 @@ void LoadOrSaveGame::fill_table() {
 		SavegameData gamedata;
 
 		std::string savename = gamefilename;
-		if (is_replay_)
+		if (filetype_ == FileType::kReplay)
 			savename += WLGF_SUFFIX;
 
 		if (!g_fs->file_exists(savename.c_str())) {
@@ -195,8 +193,12 @@ void LoadOrSaveGame::fill_table() {
 
 			gamedata.gametype = gpdp.get_gametype();
 
-			if (!is_replay_) {
-				if (settings_->settings().multiplayer) {
+			if (filetype_ != FileType::kReplay) {
+				if (filetype_ == FileType::kGame) {
+					if (gamedata.gametype == GameController::GameType::REPLAY) {
+						continue;
+					}
+				} else if (filetype_ == FileType::kGameMultiPlayer) {
 					if (gamedata.gametype == GameController::GameType::SINGLEPLAYER) {
 						continue;
 					}
@@ -264,7 +266,7 @@ void LoadOrSaveGame::fill_table() {
 			UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
 			te.set_string(0, gamedata.savedatestring);
 
-			if (is_replay_ || settings_->settings().multiplayer) {
+			if (filetype_ != FileType::kGameSinglePlayer) {
 				std::string gametypestring;
 				switch (gamedata.gametype) {
 				case GameController::GameType::SINGLEPLAYER:
@@ -316,7 +318,7 @@ void LoadOrSaveGame::fill_table() {
 
 			UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
 			te.set_string(0, "");
-			if (is_replay_ || settings_->settings().multiplayer) {
+			if (filetype_ != FileType::kGameSinglePlayer) {
 				te.set_string(1, "");
 				/** TRANSLATORS: Prefix for incompatible files in load game screens */
 				te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());

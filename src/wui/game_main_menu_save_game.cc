@@ -35,7 +35,7 @@
 
 namespace {
 
-#define WINDOW_WIDTH 440
+#define WINDOW_WIDTH 540
 #define WINDOW_HEIGHT 440
 #define VMARGIN 5
 #define VSPACING 5
@@ -66,15 +66,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
               0,
               2,
               g_gr->images().get("images/ui_basic/but1.png")),
-     ls_(this, HSPACING, VSPACING, LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
-     name_label_(this, DESCRIPTION_X, 5, 0, 20, _("Map Name:"), UI::Align::kCenterLeft),
-     mapname_(this, DESCRIPTION_X, 20, 0, 20, " ", UI::Align::kCenterLeft),
-     gametime_label_(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::kCenterLeft),
-     gametime_(this, DESCRIPTION_X, 60, 0, 20, " ", UI::Align::kCenterLeft),
-     players_label_(this, DESCRIPTION_X, 85, 0, 20, " ", UI::Align::kCenterLeft),
-     win_condition_label_(
-        this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align::kCenterLeft),
-     win_condition_(this, DESCRIPTION_X, 125, 0, 20, " ", UI::Align::kCenterLeft),
+	  load_or_save_(this, igbase().game(), VMARGIN, VMARGIN, LIST_WIDTH, LIST_HEIGHT - editbox_.get_h(), VSPACING, LoadOrSaveGame::FileType::kGame),
      curdir_(SaveHandler::get_base_dir()) {
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
@@ -94,10 +86,10 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	                  g_gr->images().get("images/ui_basic/but4.png"), _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
-	ls_.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));
-	ls_.double_clicked.connect(boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
+	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this, _1));
+	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
 
-	fill_list();
+	fill_table();
 
 	center_to_parent();
 	move_to_top();
@@ -105,25 +97,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
 	if (!cur_filename.empty()) {
 		select_by_name(cur_filename);
-	} else {
-		// Display current game infos
-		{
-			// Try to translate the map name.
-			i18n::Textdomain td("maps");
-			mapname_.set_text(_(parent.game().get_map()->get_name()));
-		}
-		uint32_t gametime = parent.game().get_gametime();
-		gametime_.set_text(gametimestring(gametime));
-
-		int player_nr = parent.game().player_manager()->get_number_of_players();
-		players_label_.set_text(
-		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
-		{
-			i18n::Textdomain td("win_conditions");
-			win_condition_.set_text(_(parent.game().get_win_condition_displayname()));
-		}
 	}
-
 	editbox_.focus();
 	pause_game(true);
 }
@@ -131,35 +105,18 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 /**
  * called when a item is selected
  */
-void GameMainMenuSaveGame::selected(uint32_t) {
-	const std::string& name = ls_.get_selected();
+void GameMainMenuSaveGame::entry_selected(uint32_t) {
+	if (load_or_save_.has_selection()) {
+		const SavegameData& gamedata = *load_or_save_.entry_selected();
 
-	Widelands::GameLoader gl(name, igbase().game());
-	Widelands::GamePreloadPacket gpdp;
-	gl.preload_game(gpdp);  //  This has worked before, no problem
-	{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
-	button_ok_->set_enabled(true);
+		const std::string& name = gamedata.filename;
 
-	// Try to translate the map name.
-	{
-		i18n::Textdomain td("maps");
-		mapname_.set_text(_(gpdp.get_mapname()));
+		Widelands::GameLoader gl(name, igbase().game());
+		Widelands::GamePreloadPacket gpdp;
+		gl.preload_game(gpdp);  //  This has worked before, no problem
+		{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
+		button_ok_->set_enabled(true);
 	}
-
-	uint32_t gametime = gpdp.get_gametime();
-	gametime_.set_text(gametimestring(gametime));
-
-	if (gpdp.get_number_of_players() > 0) {
-		const std::string text =
-		   (boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players())) %
-		    static_cast<unsigned int>(gpdp.get_number_of_players()))
-		      .str();
-		players_label_.set_text(text);
-	} else {
-		// Keep label empty
-		players_label_.set_text("");
-	}
-	win_condition_.set_text(_(gpdp.get_localized_win_condition()));
 }
 
 /**
@@ -172,28 +129,12 @@ void GameMainMenuSaveGame::double_clicked(uint32_t) {
 /*
  * fill the file list
  */
-void GameMainMenuSaveGame::fill_list() {
-	ls_.clear();
-	FilenameSet gamefiles;
-
-	//  Fill it with all files we find.
-	gamefiles = g_fs->list_directory(curdir_);
-
-	Widelands::GamePreloadPacket gpdp;
-
-	for (FilenameSet::iterator pname = gamefiles.begin(); pname != gamefiles.end(); ++pname) {
-		char const* const name = pname->c_str();
-
-		try {
-			Widelands::GameLoader gl(name, igbase().game());
-			gl.preload_game(gpdp);
-			ls_.add(FileSystem::filename_without_ext(name), name);
-		} catch (const WException&) {
-		}  //  we simply skip illegal entries
-	}
+void GameMainMenuSaveGame::fill_table() {
+	load_or_save_.fill_table();
 }
 
 void GameMainMenuSaveGame::select_by_name(std::string name) {
+	/* NOCOM implement me - preselection when game had been loaded
 	for (uint32_t idx = 0; idx < ls_.size(); idx++) {
 		const std::string val = ls_[idx];
 		if (name == val) {
@@ -201,6 +142,7 @@ void GameMainMenuSaveGame::select_by_name(std::string name) {
 			return;
 		}
 	}
+	*/ ;
 }
 
 /*
@@ -290,7 +232,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 
 	void clicked_ok() override {
 		g_fs->fs_unlink(filename_);
-		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_list();
+		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_table();
 		die();
 	}
 
