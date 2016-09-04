@@ -39,13 +39,13 @@ public:
 	};
 
 	LoadOrSaveGame(UI::Panel* parent,
-	               Widelands::Game& g,
-	               int tablex,
-	               int tabley,
-	               int tablew,
-	               int tableh,
-	               int padding,
-						FileType filetype,
+						Widelands::Game& g,
+						int tablex,
+						int tabley,
+						int tablew,
+						int tableh,
+						int padding,
+						FileType filetype, GameDetails::Style style,
 						bool localize_autosave);
 
 	const SavegameData* entry_selected();

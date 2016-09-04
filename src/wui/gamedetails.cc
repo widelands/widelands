@@ -51,8 +51,8 @@ std::string as_header_with_content(const std::string& header,
 		   .str();
 	case GameDetails::Style::kWui:
 		return (boost::format(
-		           "<p><font size=%i bold=1 shadow=1>%s<font color=D1D1D1>%s</font> %s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
+					  "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
+				  UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();

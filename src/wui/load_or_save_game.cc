@@ -75,6 +75,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 										 int tableh,
 										 int padding,
 										 FileType filetype,
+										 GameDetails::Style style,
 										 bool localize_autosave)
    : table_(parent, tablex, tabley, tablew, tableh, true),
 	  filetype_(filetype),
@@ -85,7 +86,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                    tabley,
                    parent->get_w() - tablex - tablew - 2 * padding,
                    tableh,
-                   GameDetails::Style::kFsMenu),
+						 style),
 	  game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	int used_width = 130;
@@ -154,6 +155,7 @@ bool LoadOrSaveGame::has_selection() {
 }
 
 void LoadOrSaveGame::select_by_name(const std::string& name) {
+	// NOCOM this will select the wrong entry
 	for (size_t idx = 0; idx < games_data_.size(); idx++) {
 		const SavegameData& gamedata = games_data_[idx];
 		if (name == gamedata.filename) {
