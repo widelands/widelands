@@ -49,6 +49,7 @@ public:
 
 	const SavegameData* entry_selected();
 	bool has_selection();
+	void select_by_name(const std::string& name);
 	void fill_table();
 	UI::Table<uintptr_t const>& table() {
 		return table_;

@@ -108,7 +108,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
 	if (!cur_filename.empty()) {
-		select_by_name(cur_filename);
+		load_or_save_.select_by_name(cur_filename);
 	}
 	editbox_.focus();
 	pause_game(true);
@@ -137,18 +137,6 @@ void GameMainMenuSaveGame::double_clicked(uint32_t) {
  */
 void GameMainMenuSaveGame::fill_table() {
 	load_or_save_.fill_table();
-}
-
-void GameMainMenuSaveGame::select_by_name(std::string name) {
-	/* NOCOM implement me - preselection when game had been loaded
-	for (uint32_t idx = 0; idx < ls_.size(); idx++) {
-		const std::string val = ls_[idx];
-		if (name == val) {
-			ls_.select(idx);
-			return;
-		}
-	}
-	*/ ;
 }
 
 /*

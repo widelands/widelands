@@ -151,6 +151,17 @@ bool LoadOrSaveGame::has_selection() {
 	return table_.has_selection();
 }
 
+void LoadOrSaveGame::select_by_name(const std::string& name) {
+	for (size_t idx = 0; idx < games_data_.size(); idx++) {
+		const SavegameData& gamedata = games_data_[idx];
+		if (name == gamedata.filename) {
+			table_.select(idx);
+			return;
+		}
+	}
+}
+
+
 /**
  * Fill the file list
  */
