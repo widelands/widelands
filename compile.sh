@@ -24,23 +24,33 @@ echo " "
 
 ## Option to avoid building and linking website-related executables.
 BUILD_WEBSITE="ON"
+BUILD_TRANSLATIONS="ON"
 BUILDTYPE="Debug"
 while [ "$1" != "" ]; do
-  if [ "$1" = "--no-website" -o "$1" = "-n" ]; then
+  if [ "$1" = "--no-website" -o "$1" = "-w" ]; then
     BUILD_WEBSITE="OFF"
   elif [ "$1" = "--release" -o "$1" = "-r" ]; then
     BUILDTYPE="Release"
+  elif [ "$1" = "--no-translations" -o "$1" = "-t" ]; then
+    BUILD_TRANSLATIONS="OFF"
   fi
   shift
 done
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
-  echo "You can use -n or --no-website to omit building and"
+  echo "You can use -w or --no-website to omit building and"
   echo "linking website-related executables."
 else
   echo "Any website-related code will be OMITTED in the build."
   echo "Make sure that you have created and tested a full"
   echo "build before submitting code to the repository!"
+fi
+echo " "
+if [ $BUILD_TRANSLATIONS = "ON" ]; then
+  echo "Translations will be built."
+  echo "You can use -t or --no-translations to omit building them."
+else
+echo "Translations will not be built."
 fi
 echo " "
 echo "###########################################################"
@@ -104,9 +114,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILDTYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS
     fi
 
     $buildtool
