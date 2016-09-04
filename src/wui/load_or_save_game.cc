@@ -45,10 +45,10 @@ namespace {
 // This function concatenates the filename and localized map name for a savegame/replay.
 // If the filename starts with the map name, the map name is omitted.
 // It also prefixes autosave files with a numbered and localized "Autosave" prefix.
-std::string map_filename(const std::string& filename, const std::string& mapname) {
+std::string map_filename(const std::string& filename, const std::string& mapname, bool localize_autosave) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 
-	if (boost::starts_with(result, "wl_autosave")) {
+	if (localize_autosave && boost::starts_with(result, "wl_autosave")) {
 		std::vector<std::string> autosave_name;
 		boost::split(autosave_name, result, boost::is_any_of("_"));
 		if (autosave_name.empty() || autosave_name.size() < 3) {
@@ -74,9 +74,11 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 										 int tablew,
 										 int tableh,
 										 int padding,
-										 FileType filetype)
+										 FileType filetype,
+										 bool localize_autosave)
    : table_(parent, tablex, tabley, tablew, tableh, true),
 	  filetype_(filetype),
+	  localize_autosave_(localize_autosave),
 	  // Savegame description
      game_details_(parent,
                    tablex + tablew + padding,
@@ -308,9 +310,9 @@ void LoadOrSaveGame::fill_table() {
 					break;
 				}
 				te.set_string(1, gametypestring);
-				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname));
+				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 			} else {
-				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname));
+				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 			}
 		} catch (const WException& e) {
 			std::string errormessage = e.what();

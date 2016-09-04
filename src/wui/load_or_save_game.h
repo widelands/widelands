@@ -45,7 +45,8 @@ public:
 	               int tablew,
 	               int tableh,
 	               int padding,
-						FileType filetype);
+						FileType filetype,
+						bool localize_autosave);
 
 	const SavegameData* entry_selected();
 	bool has_selection();
@@ -60,6 +61,7 @@ private:
 
 	UI::Table<uintptr_t const> table_;
 	FileType filetype_;
+	bool localize_autosave_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 

@@ -63,7 +63,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 				  buth_,
               2,
               g_gr->images().get("images/ui_basic/but1.png")),
-	  load_or_save_(this, igbase().game(), tablex_, tabley_, tablew_, tableh_, padding_, LoadOrSaveGame::FileType::kGame),
+	  load_or_save_(this, igbase().game(), tablex_, tabley_, tablew_, tableh_, padding_, LoadOrSaveGame::FileType::kGame, false),
 	  ok_(this,
 			"ok",
 			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
