@@ -48,27 +48,20 @@ namespace {
 // It also prefixes autosave files with a numbered and localized "Autosave" prefix.
 std::string map_filename(const std::string& filename, const std::string& mapname) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
-	std::string mapname_localized;
-	{
-		i18n::Textdomain td("maps");
-		mapname_localized = _(mapname);
-	}
 
 	if (boost::starts_with(result, "wl_autosave")) {
 		std::vector<std::string> autosave_name;
 		boost::split(autosave_name, result, boost::is_any_of("_"));
 		if (autosave_name.empty() || autosave_name.size() < 3) {
 			/** TRANSLATORS: %1% is a map's name. */
-			result = (boost::format(_("Autosave: %1%")) % mapname_localized).str();
+			result = (boost::format(_("Autosave: %1%")) % mapname).str();
 		} else {
 			/** TRANSLATORS: %1% is a number, %2% a map's name. */
-			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname_localized)
-			            .str();
+			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname).str();
 		}
-	} else if (!(boost::starts_with(result, mapname) ||
-	             boost::starts_with(result, mapname_localized))) {
+	} else if (!(boost::starts_with(result, mapname))) {
 		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
-		result = (boost::format(_("%1% (%2%)")) % result % mapname_localized).str();
+		result = (boost::format(_("%1% (%2%)")) % result % mapname).str();
 	}
 	return result;
 }
@@ -210,9 +203,7 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	message =
 	   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
 
-	message =
-	   (boost::format("%s %s %s\n") % message % _("Game Time:") % gametimestring(gamedata.gametime))
-	      .str();
+	message = (boost::format("%s %s %s\n") % message % _("Game Time:") % gamedata.gametime).str();
 
 	message = (boost::format("%s %s %s\n\n") % message % _("Players:") % gamedata.nrplayers).str();
 
@@ -304,12 +295,9 @@ void FullscreenMenuLoadGame::fill_table() {
 				}
 			}
 
-			{
-				i18n::Textdomain td("maps");
-				gamedata.mapname = _(gpdp.get_mapname());
-			}
-			gamedata.gametime = gpdp.get_gametime();
-			gamedata.nrplayers = gpdp.get_number_of_players();
+			gamedata.set_mapname(gpdp.get_mapname());
+			gamedata.set_gametime(gpdp.get_gametime());
+			gamedata.set_nrplayers(gpdp.get_number_of_players());
 			gamedata.version = gpdp.get_version();
 
 			gamedata.savetimestamp = gpdp.get_savetimestamp();
@@ -359,12 +347,7 @@ void FullscreenMenuLoadGame::fill_table() {
 				}
 			}
 
-			// Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
-			gamedata.wincondition = _(gpdp.get_localized_win_condition());
-			{
-				i18n::Textdomain td("win_conditions");
-				gamedata.wincondition = _(gamedata.wincondition);
-			}
+			gamedata.wincondition = gpdp.get_localized_win_condition();
 			gamedata.minimap_path = gpdp.get_minimap_path();
 			games_data_.push_back(gamedata);
 
@@ -387,9 +370,7 @@ void FullscreenMenuLoadGame::fill_table() {
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
 					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 					/** TRANSLATORS: %1% is the number of players */
-					gametypestring =
-					   (boost::format(_("H (%1%)")) % static_cast<unsigned int>(gamedata.nrplayers))
-					      .str();
+					gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
 					break;
 				case GameController::GameType::NETCLIENT:
 					/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
@@ -397,9 +378,7 @@ void FullscreenMenuLoadGame::fill_table() {
 					/** TRANSLATORS: A tooltip will explain the abbreviation. */
 					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 					/** TRANSLATORS: %1% is the number of players */
-					gametypestring =
-					   (boost::format(_("MP (%1%)")) % static_cast<unsigned int>(gamedata.nrplayers))
-					      .str();
+					gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
 					break;
 				case GameController::GameType::REPLAY:
 					gametypestring = "";
@@ -422,9 +401,7 @@ void FullscreenMenuLoadGame::fill_table() {
 			    % _("Error message:") % errormessage)
 			      .str();
 
-			const std::string fs_filename =
-			   FileSystem::filename_without_ext(gamedata.filename.c_str());
-			gamedata.mapname = fs_filename;
+			gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 			games_data_.push_back(gamedata);
 
 			UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
@@ -432,9 +409,9 @@ void FullscreenMenuLoadGame::fill_table() {
 			if (is_replay_ || settings_->settings().multiplayer) {
 				te.set_string(1, "");
 				/** TRANSLATORS: Prefix for incompatible files in load game screens */
-				te.set_string(2, (boost::format(_("Incompatible: %s")) % fs_filename).str());
+				te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
 			} else {
-				te.set_string(1, (boost::format(_("Incompatible: %s")) % fs_filename).str());
+				te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
 			}
 		}
 	}

@@ -63,6 +63,24 @@ std::string as_header_with_content(const std::string& header,
 
 }  // namespace
 
+SavegameData::SavegameData()
+   : gametime(""),
+     nrplayers("0"),
+     savetimestamp(0),
+     gametype(GameController::GameType::SINGLEPLAYER) {
+}
+
+void SavegameData::set_gametime(uint32_t input_gametime) {
+	gametime = gametimestring(input_gametime);
+}
+void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
+	nrplayers = (boost::format("%u") % static_cast<unsigned int>(input_nrplayers)).str();
+}
+void SavegameData::set_mapname(const std::string& input_mapname) {
+	i18n::Textdomain td("maps");
+	mapname = _(input_mapname);
+}
+
 GameDetails::GameDetails(
    Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style)
    : UI::Panel(parent, x, y, max_w, max_h),
@@ -121,15 +139,11 @@ void GameDetails::update(const SavegameData& gamedata) {
 		                           _("The map that this game is based on"));
 
 		// Show game information
-		std::string description =
-		   as_header_with_content(_("Game Time:"), gametimestring(gamedata.gametime), style_);
+		std::string description = as_header_with_content(_("Game Time:"), gamedata.gametime, style_);
 
-		description =
-		   (boost::format("%s%s") % description %
-		    as_header_with_content(
-		       _("Players:"),
-		       (boost::format("%u") % static_cast<unsigned int>(gamedata.nrplayers)).str(), style_))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
+		                 .str();
 
 		description = (boost::format("%s%s") % description %
 		               as_header_with_content(_("Widelands Version:"), gamedata.version, style_))

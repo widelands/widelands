@@ -39,18 +39,17 @@ struct SavegameData {
 	std::string savedatestring;
 	std::string errormessage;
 
-	uint32_t gametime;
-	uint32_t nrplayers;
+	std::string gametime;
+	std::string nrplayers;
 	std::string version;
 	time_t savetimestamp;
 	GameController::GameType gametype;
 
-	SavegameData()
-	   : gametime(0),
-	     nrplayers(0),
-	     savetimestamp(0),
-	     gametype(GameController::GameType::SINGLEPLAYER) {
-	}
+	SavegameData();
+
+	void set_gametime(uint32_t input_gametime);
+	void set_nrplayers(Widelands::PlayerNumber input_nrplayers);
+	void set_mapname(const std::string& input_mapname);
 };
 
 /**
