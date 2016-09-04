@@ -20,21 +20,5 @@ Then, run ``make`` to see your options. Convenient for off-line reading is
 Building the documentation for the webserver
 --------------------------------------------
 
-First, extract the embedded documentation from the C++ and Lua code::
-
-   $ cd doc/sphinx/
-   $ ./extract_rst.py
-
-Then build the Sphinx documentation as JSON files:
-
-   $ make json
-
-Then add a Sphinx app to the admin panel in the webserver, if this hasn't been
-done yet:
-
-1. In the "Sphinxdoc" section, add a new app.
-2. Configure the app as follows:
-   Name: Widelands developer documentation
-   Slug: wl
-   Path: <path-to-widelands>/doc/sphinx/build/json/
-
+For building the documentation for the webserver, see the README.txt
+of the widelands-website project.
