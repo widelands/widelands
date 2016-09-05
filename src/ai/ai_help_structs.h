@@ -534,7 +534,9 @@ struct ManagementData {
 	void mutate(uint32_t);
 	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t);
 	void dump_data();
+	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
+	void reset_neuron_id() {next_neuron_id = 0;}
 	int16_t get_military_number_at(uint8_t);
 	int16_t get_orig_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
@@ -642,20 +644,22 @@ struct PlayersStrengths {
 private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t cs);
+		PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t op, uint32_t cs);
 
 		Widelands::TeamNumber team_number;
 		uint32_t players_power;
+		uint32_t old_players_power;		
 		uint32_t players_casualities;
 	};
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp, uint32_t cs);
+	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);

@@ -782,7 +782,7 @@ void DefaultAI::late_initialization() {
 									SchedulerTaskId::kCountMilitaryVacant,   2, "count military vacant"));
 	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
 									SchedulerTaskId::kCheckEnemySites,       6, "check enemy sites"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
 									SchedulerTaskId::kManagementUpdate,       7, "Management update"));
 
 	Map& map = game().map();
@@ -888,130 +888,31 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_mil_upper_limit = std::rand() % 125 + 325;
 
 
-	
-		//Elven forest 1446
-		const std::vector<int16_t> AI_initial_military_numbers_A =
-      {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
-         0, -33,  10,   0,   0,   0,   0,  13}
-		;
-	
-		assert(magic_numbers_size == AI_initial_military_numbers_A.size());
-	
-		const std::vector<int8_t> input_weights_A=
-      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
-        30, -38, -90,  73,  93, -68, -16,   9,  17,  55, 
-       -33, -12,  41, -18,  30,  45, -71,  80,   6,  30, 
-        86,  12,  67,   3,  10, -58,  43,   3, -40,   0, 
-         0,   0,   0,   0,   0,   0,   0,   0}
-			;
-		const std::vector<int8_t> input_func_A=
-      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
-         1,   2,   1,   3,   1,   2,   4,   5,   1,   0, 
-         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
-         0,   4,   5,   0,   1,   1,   1,   0,   3,   0, 
-         0,   1,   0,   0,   0,   0,   0,   0}
-			;
-		assert(neuron_pool_size == input_func_A.size());
-		assert(neuron_pool_size == input_weights_A.size());
-		
-		
-		//Lesser ring 1011
-		const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  2, -58, -41,  84,  62,  10, -15,  72,  10,  36, 
-         0, -33,  60,   0,   0,   0,   0,   0}
-		;
-		assert(magic_numbers_size == AI_initial_military_numbers_B.size());
-		
-		const std::vector<int8_t> input_weights_B =
-      { 30,  70, -52,   8, -25,  30, -30,  45,  15, -33, 
-        30,   9, -90, -49,  93, -68,  53,   9,  17,  55, 
-       -33, -12,  41, -18,  30, -39, -71,  80,  56,  30, 
-        86,  12,  67,   3,  40, -58,  43,  22, -40,  68, 
-        13,   0,   0,   0,   0,   0,   0,   0}
-	      ;
-	
-		const std::vector<int8_t> input_func_B = 
-      {  1,   1,   5,   4,   0,   1,   0,   4,   1,   3, 
-         1,   5,   1,   1,   1,   2,   2,   5,   1,   0, 
-         3,   2,   0,   2,   1,   5,   5,   3,   5,   1, 
-         0,   4,   5,   0,   0,   1,   1,   1,   3,   1, 
-         1,   1,   0,   0,   0,   0,   0,   0}
-		;
-		assert(neuron_pool_size == input_func_B.size());
-		assert(neuron_pool_size == input_weights_B.size());
-	
-	
-		printf (" %d: initializing AI's DNA\n", player_number());
-
-		// filling vector with zeros
-		for (uint16_t i =  0; i < magic_numbers_size; i = i+1){
-			persistent_data->magic_numbers.push_back(0);
-		}
-		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
-
-	
-		if (player_number() % 3 == 1) {
-			printf ("  ... inheriting from parent A\n");
-			for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-				management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
-				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
-			}
-			for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
-				management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
-			}
-			
-		} else if (player_number() % 3 == 2) {
-			printf ("  ... inheriting from parent B\n");
-			for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-				management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
-				management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
-			}
-			for (uint8_t i = 0; i < input_weights_B.size(); i+=1) {
-				management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));
-			}
-			
-		}	else {
-			printf ("  ... inheriting from both parents randomly\n");
-		
-			//crosspolination
-			for (uint16_t i = 0; i < magic_numbers_size; i += 1){
-				if (std::rand() % 2 == 0) {
-					management_data.set_military_number_at(i,AI_initial_military_numbers_A[i]);
-					management_data.set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
-				} else {
-					management_data.set_military_number_at(i,AI_initial_military_numbers_B[i]);
-					management_data.set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
-				}
-			}
-			for (uint8_t i = 0; i < input_weights_A.size(); i+=1) {
-				if (std::rand() % 2 == 0) {
-					management_data.neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],management_data.new_neuron_id()));
-				} else {
-					management_data.neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],management_data.new_neuron_id()));				
-				}
-			}
-		}
+		management_data.initialize(player_number());
 		
 		// now push everything to persistant data
-		persistent_data->magic_numbers_size = magic_numbers_size;
-		persistent_data->neuron_pool_size = neuron_pool_size;	
-		assert (persistent_data->magic_numbers.size() == magic_numbers_size);	
-		//for (uint32_t i; i < persistent_data->magic_numbers_size; i = i+1){
-			//persistent_data->magic_numbers.push_back(management_data.get_military_number_at(i));
-		//}
-		for (uint32_t i = 0; i < neuron_pool_size; i = i+1){
-			persistent_data->neuron_weights.push_back(management_data.neuron_pool[i].get_weight());
-			persistent_data->neuron_functs.push_back(management_data.neuron_pool[i].get_type());			
-		}
+	
 
-				
-
+		printf (" magic numbers: %5d %5d %5lu\n",
+			magic_numbers_size, persistent_data->magic_numbers_size, persistent_data->magic_numbers.size());
+		printf ("  neurons: %5d %5d %5lu %5lu\n",
+			neuron_pool_size,  persistent_data->neuron_pool_size, persistent_data->neuron_functs.size(), persistent_data->neuron_weights.size());
+			
+		// and verifying size
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);			
 		management_data.mutate(gametime);
-
+		printf (" magic numbers: %5d %5d %5lu\n",
+			magic_numbers_size, persistent_data->magic_numbers_size, persistent_data->magic_numbers.size());
+		printf ("  neurons: %5d %5d %5lu %5lu\n",
+			neuron_pool_size,  persistent_data->neuron_pool_size, persistent_data->neuron_functs.size(), persistent_data->neuron_weights.size());
+	
+		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
+		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);		
 
 
 	} else if (persistent_data->initialized == kTrue) {
@@ -1027,7 +928,7 @@ void DefaultAI::late_initialization() {
 			(persistent_data->ai_personality_early_militarysites, 20, 40,
 							"ai_personality_early_militarysites");
 
-		printf ("%d  %d %d\n", persistent_data->magic_numbers.size(), persistent_data->magic_numbers_size, magic_numbers_size);							
+		printf ("%lu  %d %d\n", persistent_data->magic_numbers.size(), persistent_data->magic_numbers_size, magic_numbers_size);							
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
@@ -1046,10 +947,6 @@ void DefaultAI::late_initialization() {
 	} else {
 		throw wexception("Corrupted AI data");
 	}
-
-
-
-
 }
 
 /**
@@ -5661,8 +5558,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
 			try {
+				uint32_t vsize = genstats.at(j - 1).miltary_strength.size();
+				uint32_t cur_strength = genstats.at(j - 1).miltary_strength[vsize - 1];
+				assert (cur_strength == genstats.at(j - 1).miltary_strength.back());
+				uint32_t old_strength;
+				if (vsize > 11) {
+					old_strength = genstats.at(j - 1).miltary_strength[vsize - 11];
+				} else {
+					old_strength = genstats.at(j - 1).miltary_strength[0];
+				}
 				player_statistics.add(
-				   j, this_player->team_number(), genstats.at(j - 1).miltary_strength.back(), genstats.at(j - 1).nr_casualties.back());
+				   j, this_player->team_number(), cur_strength, old_strength, genstats.at(j - 1).nr_casualties.back());
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				    static_cast<unsigned int>(player_number()),

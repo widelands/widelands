@@ -415,35 +415,40 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 
 
 	performance_change = (scores[0] != 0) ? scores[2] * 100 / scores[0] : 0;
-	if (gametime > 2 * 60 * 60 * 1000 && (gametime - last_mutate_time) > 60 * 60 * 1000){
-		printf ("   mutations locked, since %d minutes ago (current performance: %3d):\n",
-		(gametime - last_mutate_time) / 1000 / 60,
-		performance_change);
-		dump_data();
-	} else if (scores[0] != 0 && performance_change < 104) {
-		printf ("   !  too WEAK performer (%3d < 105)\n", performance_change);
+	//if (gametime > 2 * 60 * 60 * 1000 && (gametime - last_mutate_time) > 60 * 60 * 1000){
+		//printf ("   mutations locked, since %d minutes ago (current performance: %3d):\n",
+		//(gametime - last_mutate_time) / 1000 / 60,
+		//performance_change);
+		//dump_data();
+	//} else if (scores[0] != 0 && performance_change < 104) {
+		//printf ("   !  too WEAK performer (%3d < 105)\n", performance_change);
 		
-		//Do not mutate if:
-		// - we started fighting
-		// - last mutate was less then 30 minutes ago
-		if (casualities == 0 && (last_mutate_time + 25 * 60 * 1000) < gametime) {
-			mutate(gametime);
-		} else {
-			printf ("   not mutating; previous mutation %d min ago only\n",
-			(gametime - last_mutate_time) / 1000 / 60);
-			dump_data();
-		}
-		
+		////Do not mutate if:
+		//// - we started fighting
+		//// - last mutate was less then 30 minutes ago
+		//if (casualities == 0 && (last_mutate_time + 25 * 60 * 1000) < gametime) {
+			//mutate(gametime);
+		//} else {
+			//printf ("   not mutating; previous mutation %d min ago only\n",
+			//(gametime - last_mutate_time) / 1000 / 60);
+			//dump_data();
+		//}
 
+	//If under 10 seconds we re-initialize
+	if (gametime < 25 * 1000){
+		printf (" %d - reinitializing DNA\n", pn);
+		initialize(pn, true);
+		mutate(gametime);
+		dump_data();
 	} else {
-		printf ("   still using mutate from %d minutes ago (performance: %3d >= 105):\n",
+		printf ("   still using mutate from %d minutes ago (performance: %3d):\n",
 		(gametime - last_mutate_time) / 1000 / 60,
 		performance_change); 
 		dump_data();
 	}
 	
 	//review min-max values of neurons
-	if (gametime > 60 * 60 * 1000) {
+	if (gametime > 120 * 60 * 1000) {
 		for (auto & item : neuron_pool) {
 			if (item.get_highest_pos() > 22 || (item.get_highest_pos() > 0 && item.get_highest_pos() <14) || item.get_lowest_pos() < -2) {
 				printf ("   Neuron %2d: min: %3d, max: %3d\n", item.get_id(), item.get_lowest_pos(), item.get_highest_pos());
@@ -452,6 +457,189 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 	}
 	
 	review_count += 1;	
+}
+
+void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
+	printf (" ... initialize starts %s\n", reinitializing?" * reinitializing *":"");
+
+		// - 1 - Elven forest 1446
+		const std::vector<int16_t> AI_initial_military_numbers_A =
+      {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
+         0, -33,  10,   0,   0,   0,   0,  13}
+		;
+	
+		assert(magic_numbers_size == AI_initial_military_numbers_A.size());
+	
+		const std::vector<int8_t> input_weights_A=
+      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
+        30, -38, -90,  73,  93, -68, -16,   9,  17,  55, 
+       -33, -12,  41, -18,  30,  45, -71,  80,   6,  30, 
+        86,  12,  67,   3,  10, -58,  43,   3, -40,   0, 
+         0,   0,   0,   0,   0,   0,   0,   0}
+			;
+		const std::vector<int8_t> input_func_A=
+      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
+         1,   2,   1,   3,   1,   2,   4,   5,   1,   0, 
+         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   1,   1,   1,   0,   3,   0, 
+         0,   1,   0,   0,   0,   0,   0,   0}
+			;
+		assert(neuron_pool_size == input_func_A.size());
+		assert(neuron_pool_size == input_weights_A.size());
+		
+		
+		// - 2 - Lesser ring 1011
+		const std::vector<int16_t> AI_initial_military_numbers_B =
+      {  2, -58, -41,  84,  62,  10, -15,  72,  10,  36, 
+         0, -33,  60,   0,   0,   0,   0,   0}
+		;
+		assert(magic_numbers_size == AI_initial_military_numbers_B.size());
+		
+		const std::vector<int8_t> input_weights_B =
+      { 30,  70, -52,   8, -25,  30, -30,  45,  15, -33, 
+        30,   9, -90, -49,  93, -68,  53,   9,  17,  55, 
+       -33, -12,  41, -18,  30, -39, -71,  80,  56,  30, 
+        86,  12,  67,   3,  40, -58,  43,  22, -40,  68, 
+        13,   0,   0,   0,   0,   0,   0,   0}
+	      ;
+	
+		const std::vector<int8_t> input_func_B = 
+      {  1,   1,   5,   4,   0,   1,   0,   4,   1,   3, 
+         1,   5,   1,   1,   1,   2,   2,   5,   1,   0, 
+         3,   2,   0,   2,   1,   5,   5,   3,   5,   1, 
+         0,   4,   5,   0,   0,   1,   1,   1,   3,   1, 
+         1,   1,   0,   0,   0,   0,   0,   0}
+		;
+		assert(neuron_pool_size == input_func_B.size());
+		assert(neuron_pool_size == input_weights_B.size());
+
+		// - 3 - Four Mountains
+		const std::vector<int16_t> AI_initial_military_numbers_C =
+      {  2, -28, -41,  84, -34,  10, -15, -69,  10,  36, 
+         0, -33,  10,   0,   0,   0,   0,  13}
+		;
+	
+		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
+	
+		const std::vector<int8_t> input_weights_C=
+      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
+        30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
+       -33, -12,  41,   7,  30,  45, -71,  80,   6,  30, 
+        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+         0,   0,   0,   0,   0,   0,   0,   0}
+			;
+		const std::vector<int8_t> input_func_C=
+      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
+         1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
+         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
+         0,   1,   0,   0,   0,   0,   0,   0}
+			;
+		assert(neuron_pool_size == input_func_C.size());
+		assert(neuron_pool_size == input_weights_C.size());
+		
+		
+		// - 4 - Atol
+		const std::vector<int16_t> AI_initial_military_numbers_D =
+      {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
+         0, -33,  10,   0,   0,   0,   0,  13}
+		;
+		assert(magic_numbers_size == AI_initial_military_numbers_D.size());
+		
+		const std::vector<int8_t> input_weights_D =
+      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
+        30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
+       -33, -12,  41, -18,  30,  45, -71,  80,   6,  30, 
+        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+         0,   0,   0,   0,   0,   0,   0,   0}
+	      ;
+	
+		const std::vector<int8_t> input_func_D = 
+      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
+         1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
+         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
+         0,   1,   0,   0,   0,   0,   0,   0}
+		;
+		assert(neuron_pool_size == input_func_D.size());
+		assert(neuron_pool_size == input_weights_D.size());
+
+		printf (" %d: initializing AI's DNA\n", pn);
+
+		// filling vector with zeros
+		if (!reinitializing) {
+			for (uint16_t i =  0; i < magic_numbers_size; i = i+1){
+				pd->magic_numbers.push_back(0);
+			}
+		}
+		assert (pd->magic_numbers.size() == magic_numbers_size);
+	
+	uint8_t parent = std::rand() % 4;
+	printf (" ... initialize 1 (%d)\n", parent);
+	
+	for (uint16_t i = 0; i < magic_numbers_size; i += 1){
+		switch ( parent ) {
+			case 0 : 
+				set_military_number_at(i,AI_initial_military_numbers_A[i]);
+				set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
+				break;
+			case 1 : 
+				set_military_number_at(i,AI_initial_military_numbers_B[i]);
+				set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
+				break;
+			case 2 : 
+				set_military_number_at(i,AI_initial_military_numbers_C[i]);
+				set_orig_military_number_at(i,AI_initial_military_numbers_C[i]);
+				break;
+			case 3 : 
+				set_military_number_at(i,AI_initial_military_numbers_D[i]);
+				set_orig_military_number_at(i,AI_initial_military_numbers_D[i]);
+				break;
+			default:
+				NEVER_HERE();
+			}
+		}
+
+	if (reinitializing) {
+		neuron_pool.clear();
+		reset_neuron_id();
+	}
+
+	printf (" ... initialize 2, pool size: %d\n", neuron_pool.size());
+
+	for (uint16_t i = 0; i <neuron_pool_size; i += 1){
+		switch ( parent ) {
+			case 0 : 
+				neuron_pool.push_back(Neuron(input_weights_A[i],input_func_A[i],new_neuron_id()));
+				break;
+			case 1 : 
+				neuron_pool.push_back(Neuron(input_weights_B[i],input_func_B[i],new_neuron_id()));
+				break;
+			case 2 : 
+				neuron_pool.push_back(Neuron(input_weights_C[i],input_func_C[i],new_neuron_id()));
+				break;
+			case 3 : 
+				neuron_pool.push_back(Neuron(input_weights_D[i],input_func_D[i],new_neuron_id()));
+				break;
+			default:
+				NEVER_HERE();
+		}
+	}
+	
+	printf (" ... initialize 2.5, pool size: %d\n", neuron_pool.size());
+		
+	for (uint32_t i = 0; i < neuron_pool_size; i = i+1){
+		pd->neuron_weights.push_back(neuron_pool[i].get_weight());
+		pd->neuron_functs.push_back(neuron_pool[i].get_type());			
+	}
+
+	printf (" ... initialize 3\n");
+	
+	pd->magic_numbers_size = magic_numbers_size;
+	pd->neuron_pool_size = neuron_pool_size;
+	assert (pd->magic_numbers.size() == magic_numbers_size);
+	printf (" %d: DNA initialized\n", pn);
+			
 }
 
 
@@ -719,18 +907,19 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from
 // these data
-PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), players_power(0), players_casualities(0) {
+PlayersStrengths::PlayerStat::PlayerStat() : team_number(0), players_power(0), old_players_power(0), players_casualities(0) {
 }
-PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t cs)
-   : team_number(tc), players_power(pp), players_casualities(cs) {
+PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t op, uint32_t cs)
+   : team_number(tc), players_power(pp),  old_players_power(op),players_casualities(cs) {
 }
 
 // Inserting/updating data
-void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp,  uint32_t cs) {
+void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp, uint32_t op,  uint32_t cs) {
 	if (all_stats.count(pn) == 0) {
-		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(pn, PlayerStat(tn, pp, cs)));
+		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(pn, PlayerStat(tn, pp, op, cs)));
 	} else {
 		all_stats[pn].players_power = pp;
+		all_stats[pn].old_players_power = op;
 		all_stats[pn].players_casualities = cs;
 	}
 }
@@ -752,6 +941,13 @@ void PlayersStrengths::recalculate_team_power() {
 uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_power;
+	};
+	return 0;
+}
+
+uint32_t PlayersStrengths::get_old_player_power(Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0) {
+		return all_stats[pn].old_players_power;
 	};
 	return 0;
 }
