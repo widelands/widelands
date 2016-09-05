@@ -156,9 +156,8 @@ bool LoadOrSaveGame::has_selection() {
 }
 
 void LoadOrSaveGame::select_by_name(const std::string& name) {
-	// NOCOM this will select the wrong entry
-	for (size_t idx = 0; idx < games_data_.size(); idx++) {
-		const SavegameData& gamedata = games_data_[idx];
+	for (size_t idx = 0; idx < table_.size(); ++idx) {
+		const SavegameData& gamedata = games_data_[table_[idx]];
 		if (name == gamedata.filename) {
 			table_.select(idx);
 			return;
