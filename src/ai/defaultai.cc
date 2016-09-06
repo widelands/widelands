@@ -887,11 +887,16 @@ void DefaultAI::late_initialization() {
 		persistent_data->last_soldier_trained = kNever;
 		persistent_data->ai_personality_mil_upper_limit = std::rand() % 125 + 325;
 
-
-		management_data.initialize(player_number());
 		
-		// now push everything to persistant data
-	
+		// all zeroes
+		assert (persistent_data->neuron_weights.size() == 0);		
+		assert (persistent_data->neuron_functs.size() == 0);
+		assert (persistent_data->magic_numbers_size == 0);			
+		assert (persistent_data->neuron_pool_size == 0);
+		assert (persistent_data->magic_numbers.size() == 0);
+
+		// AI's DNA population
+		management_data.initialize(player_number());
 
 		printf (" magic numbers: %5d %5d %5lu\n",
 			magic_numbers_size, persistent_data->magic_numbers_size, persistent_data->magic_numbers.size());
@@ -901,18 +906,24 @@ void DefaultAI::late_initialization() {
 		// and verifying size
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);	
+		assert (management_data.neuron_pool.size() == neuron_pool_size);	
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
-		assert (persistent_data->neuron_pool_size == neuron_pool_size);			
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+				
 		management_data.mutate(gametime);
 		printf (" magic numbers: %5d %5d %5lu\n",
 			magic_numbers_size, persistent_data->magic_numbers_size, persistent_data->magic_numbers.size());
 		printf ("  neurons: %5d %5d %5lu %5lu\n",
 			neuron_pool_size,  persistent_data->neuron_pool_size, persistent_data->neuron_functs.size(), persistent_data->neuron_weights.size());
 	
+		// and verifying size - once more
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);	
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
-		assert (persistent_data->neuron_pool_size == neuron_pool_size);		
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+		assert (management_data.neuron_pool.size() == neuron_pool_size);		
 
 
 	} else if (persistent_data->initialized == kTrue) {
@@ -928,20 +939,33 @@ void DefaultAI::late_initialization() {
 			(persistent_data->ai_personality_early_militarysites, 20, 40,
 							"ai_personality_early_militarysites");
 
-		printf ("%lu  %d %d\n", persistent_data->magic_numbers.size(), persistent_data->magic_numbers_size, magic_numbers_size);							
+		printf ("MN: %lu  %d %d\n", persistent_data->magic_numbers.size(), persistent_data->magic_numbers_size, magic_numbers_size);
+		printf ("NP: %lu  %lu %d %d %lu\n",
+			persistent_data->neuron_functs.size(),
+			persistent_data->neuron_weights.size(),
+			persistent_data->neuron_pool_size,
+			neuron_pool_size,
+			management_data.neuron_pool.size());						
+		
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+
 		for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i+1){
 			management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
-			management_data.set_orig_military_number_at(i, persistent_data->magic_numbers[i]);
 		}
 		for (uint32_t i = 0; i < persistent_data->neuron_pool_size; i = i+1){
 			management_data.neuron_pool.push_back(
 				Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i],management_data.new_neuron_id()));	
 		}
+		assert (persistent_data->magic_numbers_size == magic_numbers_size);
+		assert (persistent_data->neuron_pool_size == neuron_pool_size);
+		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
+		assert (persistent_data->neuron_functs.size() == neuron_pool_size);	
+		assert (management_data.neuron_pool.size() == neuron_pool_size);		
 		management_data.dump_data();					
 							
 	} else {

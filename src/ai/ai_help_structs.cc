@@ -293,17 +293,12 @@ ManagementData::ManagementData() {
 		last_mutate_time = 0;
 		next_neuron_id = 0;
 		performance_change = 0;
-		for (uint8_t i = 0; i < magic_numbers_size; i+=1) {
-			orig_military_numbers.push_back(0);
-		}
 	}
 
 Neuron::Neuron(int8_t w, uint8_t f, uint16_t i) : 
 	weight(w),type(f), id(i) {
 	lowest_pos = std::numeric_limits<uint8_t>::max();
 	highest_pos = std::numeric_limits<uint8_t>::min();
-	orig_weight = weight;
-	orig_type = type;	
 	recalculate();
 }
 
@@ -374,9 +369,7 @@ void ManagementData::mutate(const uint32_t gametime) {
 			assert (new_value >= -100 && new_value <=100);
 			set_military_number_at(i,new_value);
 			printf ("      Magic number %d: new value: %4d\n", i, new_value);
-		} else { //restoring original value - (might not be changed of course)
-			set_military_number_at(i,get_orig_military_number_at(i));
-		}
+		} 
 	}
 
 	// Modifying pool of neurons	
@@ -389,13 +382,7 @@ void ManagementData::mutate(const uint32_t gametime) {
 			pd->neuron_functs[item.get_id()] = item.get_type();
 			printf ("      Neuron %2d: new weight: %4d, new curve: %d\n", item.get_id(), item.get_weight(), item.get_type());
 			item.recalculate();
-		} else { //restoring original value 
-			item.set_weight(item.get_orig_weight());
-			pd->neuron_weights[item.get_id()] = item.get_weight();
-			item.set_type(item.get_orig_type());
-			pd->neuron_functs[item.get_id()] = item.get_type();
-			item.recalculate();
-		}
+		} 
 	}
 
 	dump_data();
@@ -462,117 +449,117 @@ void ManagementData::review(const uint16_t msites, const uint16_t psites, const 
 void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 	printf (" ... initialize starts %s\n", reinitializing?" * reinitializing *":"");
 
-		// - 1 - Elven forest 1446
-		const std::vector<int16_t> AI_initial_military_numbers_A =
+	// - 1 - Elven forest 1498
+	const std::vector<int16_t> AI_initial_military_numbers_A =
       {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
          0, -33,  10,   0,   0,   0,   0,  13}
 		;
 	
-		assert(magic_numbers_size == AI_initial_military_numbers_A.size());
+	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
 	
-		const std::vector<int8_t> input_weights_A=
-      { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
-        30, -38, -90,  73,  93, -68, -16,   9,  17,  55, 
-       -33, -12,  41, -18,  30,  45, -71,  80,   6,  30, 
-        86,  12,  67,   3,  10, -58,  43,   3, -40,   0, 
-         0,   0,   0,   0,   0,   0,   0,   0}
+	const std::vector<int8_t> input_weights_A=
+      { 43,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
+        30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
+       -33, -69,  41, -18,  30,  45, -71,  80,   6,  30, 
+        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+         0,   0,   0,   0,   0,   0, -30,   0}
 			;
-		const std::vector<int8_t> input_func_A=
-      {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
-         1,   2,   1,   3,   1,   2,   4,   5,   1,   0, 
-         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
-         0,   4,   5,   0,   1,   1,   1,   0,   3,   0, 
-         0,   1,   0,   0,   0,   0,   0,   0}
-			;
-		assert(neuron_pool_size == input_func_A.size());
-		assert(neuron_pool_size == input_weights_A.size());
+	const std::vector<int8_t> input_func_A=
+      {  0,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
+         1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
+         3,   1,   0,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
+         0,   1,   0,   0,   0,   0,   2,   0}
+		;
+	assert(neuron_pool_size == input_func_A.size());
+	assert(neuron_pool_size == input_weights_A.size());
 		
 		
-		// - 2 - Lesser ring 1011
-		const std::vector<int16_t> AI_initial_military_numbers_B =
-      {  2, -58, -41,  84,  62,  10, -15,  72,  10,  36, 
-         0, -33,  60,   0,   0,   0,   0,   0}
+	// - 2 - Lesser ring 1011
+	const std::vector<int16_t> AI_initial_military_numbers_B =
+      {  2, -28, -41,  84, -34,  10, -15,  35,  10,  36, 
+         0, -33,  10,   0,   0,   0,   0,  13}
 		;
 		assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 		
-		const std::vector<int8_t> input_weights_B =
-      { 30,  70, -52,   8, -25,  30, -30,  45,  15, -33, 
-        30,   9, -90, -49,  93, -68,  53,   9,  17,  55, 
-       -33, -12,  41, -18,  30, -39, -71,  80,  56,  30, 
-        86,  12,  67,   3,  40, -58,  43,  22, -40,  68, 
-        13,   0,   0,   0,   0,   0,   0,   0}
+	const std::vector<int8_t> input_weights_B =
+      { 30,  70, -52,  30, -25,  30,  13,  45,  15, -33, 
+        30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
+       -33, -12,  14,   7,  30,  45, -71,  80,   6,  30, 
+        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+         0,   0,  45,   0,   0,   0,   0,   0}
 	      ;
 	
-		const std::vector<int8_t> input_func_B = 
-      {  1,   1,   5,   4,   0,   1,   0,   4,   1,   3, 
-         1,   5,   1,   1,   1,   2,   2,   5,   1,   0, 
-         3,   2,   0,   2,   1,   5,   5,   3,   5,   1, 
-         0,   4,   5,   0,   0,   1,   1,   1,   3,   1, 
-         1,   1,   0,   0,   0,   0,   0,   0}
+	const std::vector<int8_t> input_func_B = 
+      {  1,   1,   5,   1,   0,   1,   1,   4,   1,   3, 
+         1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
+         3,   2,   2,   2,   1,   5,   5,   3,   1,   1, 
+         0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
+         0,   1,   1,   0,   0,   0,   0,   0}
 		;
 		assert(neuron_pool_size == input_func_B.size());
 		assert(neuron_pool_size == input_weights_B.size());
 
-		// - 3 - Four Mountains
-		const std::vector<int16_t> AI_initial_military_numbers_C =
-      {  2, -28, -41,  84, -34,  10, -15, -69,  10,  36, 
-         0, -33,  10,   0,   0,   0,   0,  13}
+	// - 3 - Four Mountains
+	const std::vector<int16_t> AI_initial_military_numbers_C =
+      {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
+         0, -33, -44,   0,   0,   0,   0,  13}
 		;
 	
 		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
 	
-		const std::vector<int8_t> input_weights_C=
+	const std::vector<int8_t> input_weights_C=
       { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
         30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
-       -33, -12,  41,   7,  30,  45, -71,  80,   6,  30, 
-        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+       -33, -12,  41, -37,  30,  45, -71,  80,   6,  30, 
+        86,  12,  12,   3,  10, -80,  43,   3, -40,   0, 
          0,   0,   0,   0,   0,   0,   0,   0}
 			;
-		const std::vector<int8_t> input_func_C=
+	const std::vector<int8_t> input_func_C=
       {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
          1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
-         3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
-         0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
+         3,   2,   0,   0,   1,   5,   5,   3,   1,   1, 
+         0,   4,   1,   0,   1,   3,   1,   0,   3,   0, 
          0,   1,   0,   0,   0,   0,   0,   0}
 			;
-		assert(neuron_pool_size == input_func_C.size());
-		assert(neuron_pool_size == input_weights_C.size());
+	assert(neuron_pool_size == input_func_C.size());
+	assert(neuron_pool_size == input_weights_C.size());
 		
 		
-		// - 4 - Atol
-		const std::vector<int16_t> AI_initial_military_numbers_D =
+	// - 4 - Atol
+	const std::vector<int16_t> AI_initial_military_numbers_D =
       {  2, -28, -41,  84, -34,  10, -15,  72,  10,  36, 
          0, -33,  10,   0,   0,   0,   0,  13}
 		;
 		assert(magic_numbers_size == AI_initial_military_numbers_D.size());
 		
-		const std::vector<int8_t> input_weights_D =
+	const std::vector<int8_t> input_weights_D =
       { 30,  70, -52,  30, -25,  30, -30,  45,  15, -33, 
-        30, -38, -90,  73,  93, -68, -16,  20,  17,  55, 
+        30, -38, -90,  73, -31, -68, -16, -26,   7,  55, 
        -33, -12,  41, -18,  30,  45, -71,  80,   6,  30, 
-        86,  12,  67,   3,  10, -80,  43,   3, -40,   0, 
+        86,  12,  67,  58,  10, -80,  43,   3, -40,   0, 
          0,   0,   0,   0,   0,   0,   0,   0}
 	      ;
 	
-		const std::vector<int8_t> input_func_D = 
+	const std::vector<int8_t> input_func_D = 
       {  1,   1,   5,   1,   0,   1,   0,   4,   1,   3, 
-         1,   2,   1,   3,   1,   2,   4,   2,   1,   0, 
+         1,   2,   1,   3,   3,   2,   4,   5,   5,   0, 
          3,   2,   0,   2,   1,   5,   5,   3,   1,   1, 
          0,   4,   5,   0,   1,   3,   1,   0,   3,   0, 
          0,   1,   0,   0,   0,   0,   0,   0}
 		;
-		assert(neuron_pool_size == input_func_D.size());
-		assert(neuron_pool_size == input_weights_D.size());
+	assert(neuron_pool_size == input_func_D.size());
+	assert(neuron_pool_size == input_weights_D.size());
 
-		printf (" %d: initializing AI's DNA\n", pn);
+	printf (" %d: initializing AI's DNA\n", pn);
 
-		// filling vector with zeros
-		if (!reinitializing) {
-			for (uint16_t i =  0; i < magic_numbers_size; i = i+1){
-				pd->magic_numbers.push_back(0);
-			}
+	// filling vector with zeros
+	if (!reinitializing) {
+		for (uint16_t i =  0; i < magic_numbers_size; i = i+1){
+			pd->magic_numbers.push_back(0);
 		}
-		assert (pd->magic_numbers.size() == magic_numbers_size);
+	}
+	assert (pd->magic_numbers.size() == magic_numbers_size);
 	
 	uint8_t parent = std::rand() % 4;
 	printf (" ... initialize 1 (%d)\n", parent);
@@ -581,19 +568,15 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 		switch ( parent ) {
 			case 0 : 
 				set_military_number_at(i,AI_initial_military_numbers_A[i]);
-				set_orig_military_number_at(i,AI_initial_military_numbers_A[i]);
 				break;
 			case 1 : 
 				set_military_number_at(i,AI_initial_military_numbers_B[i]);
-				set_orig_military_number_at(i,AI_initial_military_numbers_B[i]);
 				break;
 			case 2 : 
 				set_military_number_at(i,AI_initial_military_numbers_C[i]);
-				set_orig_military_number_at(i,AI_initial_military_numbers_C[i]);
 				break;
 			case 3 : 
 				set_military_number_at(i,AI_initial_military_numbers_D[i]);
-				set_orig_military_number_at(i,AI_initial_military_numbers_D[i]);
 				break;
 			default:
 				NEVER_HERE();
@@ -603,9 +586,12 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 	if (reinitializing) {
 		neuron_pool.clear();
 		reset_neuron_id();
+		pd->neuron_weights.clear();
+		pd->neuron_functs.clear();
 	}
 
-	printf (" ... initialize 2, pool size: %d\n", neuron_pool.size());
+	printf (" ... initialize 2, pool size: %lu\n", neuron_pool.size());
+	assert(neuron_pool.empty());
 
 	for (uint16_t i = 0; i <neuron_pool_size; i += 1){
 		switch ( parent ) {
@@ -626,7 +612,9 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 		}
 	}
 	
-	printf (" ... initialize 2.5, pool size: %d\n", neuron_pool.size());
+	printf (" ... initialize 2.5, pool size: %lu\n", neuron_pool.size());
+	assert(pd->neuron_weights.empty());
+	assert(pd->neuron_functs.empty());	
 		
 	for (uint32_t i = 0; i < neuron_pool_size; i = i+1){
 		pd->neuron_weights.push_back(neuron_pool[i].get_weight());
@@ -638,6 +626,9 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 	pd->magic_numbers_size = magic_numbers_size;
 	pd->neuron_pool_size = neuron_pool_size;
 	assert (pd->magic_numbers.size() == magic_numbers_size);
+	assert (pd->neuron_weights.size() == pd->neuron_pool_size);
+	assert (pd->neuron_functs.size() == pd->neuron_pool_size);
+	assert (neuron_pool.size() == pd->neuron_pool_size);
 	printf (" %d: DNA initialized\n", pn);
 			
 }
@@ -683,22 +674,11 @@ int16_t ManagementData::get_military_number_at(uint8_t pos) {
 	return pd->magic_numbers[pos];
 }
 
-int16_t ManagementData::get_orig_military_number_at(uint8_t pos) {
-	assert (pos < magic_numbers_size);
-	return orig_military_numbers[pos];
-}
-
 void ManagementData::set_military_number_at(const uint8_t pos, const int16_t value) {
 	assert (pos < magic_numbers_size);
 	assert (pos < pd->magic_numbers.size());
 	assert (value >= -100 && value <= 100);
 	pd->magic_numbers[pos] = value;
-}
-
-void ManagementData::set_orig_military_number_at(const uint8_t pos, const int16_t value) {
-	assert (pos < magic_numbers_size);
-	assert (value >= -100 && value <= 100);
-	orig_military_numbers[pos] = value;
 }
 
 uint16_t MineTypesObserver::total_count() const {

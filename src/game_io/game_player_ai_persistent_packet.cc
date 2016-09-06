@@ -110,6 +110,15 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
 		fw.unsigned_32(player->ai_data.last_soldier_trained);
 		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
+		
+		printf (" %d: writing persistent data, initialized: %s: %3d %3lu %3d %3lu %3lu\n",
+			p, 
+			(player->ai_data.initialized == 0)?"NO":"YES",
+			player->ai_data.magic_numbers_size, 
+			player->ai_data.magic_numbers.size(),
+			player->ai_data.neuron_pool_size,
+			player->ai_data.neuron_weights.size(),
+			player->ai_data.neuron_functs.size());
 		// Magic numbers
 		fw.unsigned_32(player->ai_data.magic_numbers_size);
 		assert (player->ai_data.magic_numbers_size == player->ai_data.magic_numbers.size());
