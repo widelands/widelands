@@ -220,6 +220,11 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 		return;
 	}
 
+	// Some graphic drivers inaccurately do not flush their pipeline when
+	// switching the framebuffer - and happily do draw calls into the wrong
+	// framebuffers. I AM LOOKING AT YOU, INTEL!!!
+	glFlush();
+
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	if (framebuffer != 0) {
 		unbind_texture_if_bound(texture);
