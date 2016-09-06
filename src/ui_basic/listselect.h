@@ -92,6 +92,10 @@ struct BaseListselect : public Panel {
 	uint32_t get_selected() const;
 	void remove_selected();
 
+	void set_background(const Image* background) {
+		background_ = background;
+	}
+
 	///  Return the total height (text + spacing) occupied by a single line.
 	uint32_t get_lineheight() const;
 
@@ -134,6 +138,7 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	bool show_check_;          //  show a green arrow left of selected element
 	const Image* check_pic_;
+	const Image* background_;
 	std::string current_tooltip_;
 };
 
@@ -165,6 +170,10 @@ template <typename Entry> struct Listselect : public BaseListselect {
 
 	const Entry& get_selected() const {
 		return entry_cache_[BaseListselect::get_selected()];
+	}
+
+	void set_background(const Image* background) {
+		BaseListselect::set_background(background);
 	}
 
 private:
@@ -206,6 +215,10 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 
 	Entry& get_selected() const {
 		return *Base::get_selected();
+	}
+
+	void set_background(const Image* background) {
+		*Base::set_background(background);
 	}
 };
 }

@@ -60,7 +60,8 @@ BaseListselect::BaseListselect(Panel* const parent,
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
-     show_check_(show_check) {
+     show_check_(show_check),
+     background_(nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -310,6 +311,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_;
+
+	if (background_ != nullptr) {
+		dst.tile(Rect(Point(0, 0), get_w(), get_h()), background_, Point(0, 0));
+	}
 
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
