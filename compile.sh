@@ -192,7 +192,26 @@ cd ..
 create_update_script
 echo " "
 echo "###########################################################"
-echo "# Congratulations! Widelands has been built successfully. #"
+echo "# Congratulations! Widelands has been built successfully  #"
+echo "# with the following settings:                            #"
+echo "#                                                         #"
+if [ $BUILDTYPE = "Release" ]; then
+  echo "# - Release build                                         #"
+else
+  echo "# - Debug build                                           #"
+fi
+if [ $BUILD_TRANSLATIONS = "ON" ]; then
+  echo "# - Translations                                          #"
+else
+  echo "# - No translations                                       #"
+fi
+
+if [ $BUILD_WEBSITE = "ON" ]; then
+  echo "# - Website-related executables                           #"
+else
+  echo "# - No website-related executables                        #"
+fi
+echo "#                                                         #"
 echo "# You should now be able to run Widelands via             #"
 echo "# typing ./widelands + ENTER in your terminal             #"
 echo "#                                                         #"
