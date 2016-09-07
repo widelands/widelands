@@ -33,7 +33,13 @@ namespace UI {
 class Dropdown : public Panel {
 public:
 	/// \param h determines the size of the list that's shown by the dropdown.
-	Dropdown(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label);
+	Dropdown(Panel* parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& label,
+	         bool show_tick = true);
 
 	/// Add an element to the list
 	/// \param name         the display name of the entry

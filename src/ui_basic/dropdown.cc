@@ -31,8 +31,13 @@
 
 namespace UI {
 
-Dropdown::Dropdown(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
+Dropdown::Dropdown(UI::Panel* parent,
+                   int32_t x,
+                   int32_t y,
+                   uint32_t w,
+                   uint32_t h,
+                   const std::string& label,
+                   bool show_tick)
    : UI::Panel(
         parent,
         x,
@@ -67,7 +72,8 @@ Dropdown::Dropdown(
            0,
            get_h(),
            w,
-           h - 2 * get_h()),  // Hook into parent so we can drop down outside the panel
+           h - 2 * get_h(),
+           show_tick),  // Hook into parent so we can drop down outside the panel
      selected_(""),
      label_(label) {
 	// Make sure that the list covers and deactivates the elements below it
