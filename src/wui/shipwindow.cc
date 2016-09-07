@@ -245,9 +245,9 @@ void ShipWindow::think() {
 		bool coast_nearby = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
-			btn_scout_[dir - 1]->set_enabled(can_act && ship_.exp_dir_swimable(dir) &&
+			btn_scout_[dir - 1]->set_enabled(can_act && ship_.exp_dir_swimmable(dir) &&
 			                                 (state != Ship::ShipStates::kExpeditionColonizing));
-			coast_nearby |= !ship_.exp_dir_swimable(dir);
+			coast_nearby |= !ship_.exp_dir_swimmable(dir);
 		}
 		btn_explore_island_cw_->set_enabled(can_act && coast_nearby &&
 		                                    (state != Ship::ShipStates::kExpeditionColonizing));
@@ -308,8 +308,8 @@ void ShipWindow::act_cancel_expedition() {
 
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(WalkingDir direction) {
-	// ignore request if the direction is not swimable at all
-	if (!ship_.exp_dir_swimable(static_cast<Direction>(direction)))
+	// ignore request if the direction is not swimmable at all
+	if (!ship_.exp_dir_swimmable(static_cast<Direction>(direction)))
 		return;
 	igbase_.game().send_player_ship_scouting_direction(ship_, direction);
 }
@@ -326,7 +326,7 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
-		if (!ship_.exp_dir_swimable(dir))
+		if (!ship_.exp_dir_swimmable(dir))
 			coast_nearby = true;
 		else
 			moveable = true;

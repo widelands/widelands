@@ -4975,7 +4975,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		so.last_command_time = gametime;
 		so.waiting_for_command_ = false;
 	} else {
-		// get swimable directions
+		// get swimmable directions
 		std::vector<Direction> possible_directions;
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 
