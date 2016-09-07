@@ -125,7 +125,7 @@ private:
 	UI::Box box_game_;
 
 	// Interface options
-	UI::Dropdown language_dropdown_;
+	UI::Dropdown<std::string> language_dropdown_;
 	UI::Textarea label_resolution_;
 	UI::Listselect<void*> resolution_list_;
 	UI::Checkbox fullscreen_;

@@ -295,6 +295,10 @@ void BaseListselect::remove_selected() {
 	remove(selection_);
 }
 
+const std::string& BaseListselect::get_name(uint32_t i) const {
+	return entry_records_[i]->name;
+}
+
 uint32_t BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }

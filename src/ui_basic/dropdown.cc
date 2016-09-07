@@ -31,13 +31,13 @@
 
 namespace UI {
 
-Dropdown::Dropdown(UI::Panel* parent,
-                   int32_t x,
-                   int32_t y,
-                   uint32_t w,
-                   uint32_t h,
-                   const std::string& label,
-                   bool show_tick)
+BaseDropdown::BaseDropdown(UI::Panel* parent,
+                           int32_t x,
+                           int32_t y,
+                           uint32_t w,
+                           uint32_t h,
+                           const std::string& label,
+                           bool show_tick)
    : UI::Panel(
         parent,
         x,
@@ -74,7 +74,6 @@ Dropdown::Dropdown(UI::Panel* parent,
            w,
            h - 2 * get_h(),
            show_tick),  // Hook into parent so we can drop down outside the panel
-     selected_(""),
      label_(label) {
 	// Make sure that the list covers and deactivates the elements below it
 	list_.set_layout_toplevel(true);
@@ -85,40 +84,45 @@ Dropdown::Dropdown(UI::Panel* parent,
 	button_box_.add(&push_button_, UI::Align::kLeft);
 	button_box_.set_size(w, get_h());
 
-	display_button_.sigclicked.connect(boost::bind(&Dropdown::toggle_list, this));
-	push_button_.sigclicked.connect(boost::bind(&Dropdown::toggle_list, this));
-	list_.selected.connect(boost::bind(&Dropdown::set_value, this));
-	list_.clicked.connect(boost::bind(&Dropdown::toggle_list, this));
+	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	push_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	list_.selected.connect(boost::bind(&BaseDropdown::set_value, this));
+	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 }
 
-void Dropdown::add(const std::string& name,
-                   const std::string& value,
-                   const Image* pic,
-                   const bool select_this,
-                   const std::string& tooltip_text) {
-	entries_.insert(std::make_pair(value, name));
+void BaseDropdown::add(const std::string& name,
+                       const uint32_t value,
+                       const Image* pic,
+                       const bool select_this,
+                       const std::string& tooltip_text) {
 	list_.add(name, value, pic, select_this, tooltip_text);
 }
 
-bool Dropdown::has_selection() const {
+bool BaseDropdown::has_selection() const {
 	return list_.has_selection();
 }
 
-const std::string& Dropdown::get_selected() const {
-	return selected_;
+uint32_t BaseDropdown::get_selected() const {
+	return list_.get_selected();
 }
 
-void Dropdown::set_value() {
-	if (list_.has_selection()) {
-		selected_ = list_.get_selected();
-		assert(entries_.count(selected_) == 1);
-		/** TRANSLATORS: Title: Selection in dropdown menus. */
+void BaseDropdown::set_value() {
+	if (label_.empty()) {
+		display_button_.set_title(list_.has_selection() ?
+		                             list_.get_selected_name() :
+		                             /** TRANSLATORS: Selection in Dropdown menus. */
+		                             pgettext("dropdown", "Not Selected"));
+	} else {
 		display_button_.set_title(
-		   (boost::format("%1%: %2%") % label_ % entries_.at(selected_)).str());
+		   /** TRANSLATORS: Title: Selection in Dropdown menus. */
+		   (boost::format("%1%: %2%") % label_ % (list_.has_selection() ?
+		                                             list_.get_selected_name() :
+		                                             pgettext("dropdown", "Not Selected")))
+		      .str());
 	}
 }
 
-void Dropdown::toggle_list() {
+void BaseDropdown::toggle_list() {
 	list_.set_visible(!list_.is_visible());
 	if (list_.is_visible()) {
 		list_.move_to_top();

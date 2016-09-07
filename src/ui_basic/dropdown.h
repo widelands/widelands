@@ -20,7 +20,7 @@
 #ifndef WL_UI_BASIC_DROPDOWN_H
 #define WL_UI_BASIC_DROPDOWN_H
 
-#include <map>
+#include <deque>
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -29,26 +29,25 @@
 
 namespace UI {
 
-/// A dropdown menu that lets the user select a string value.
-class Dropdown : public Panel {
+/// Implementation for a dropdown menu that lets the user select a value.
+class BaseDropdown : public Panel {
 public:
-	/// \param h determines the size of the list that's shown by the dropdown.
-	Dropdown(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         uint32_t w,
-	         uint32_t h,
-	         const std::string& label,
-	         bool show_tick = true);
+	BaseDropdown(Panel* parent,
+	             int32_t x,
+	             int32_t y,
+	             uint32_t w,
+	             uint32_t h,
+	             const std::string& label,
+	             bool show_tick = true);
 
 	/// Add an element to the list
 	/// \param name         the display name of the entry
-	/// \param value        the internal name of the value
+	/// \param value        the index of the entry
 	/// \param pic          an image to illustrate the entry
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	void add(const std::string& name,
-	         const std::string& value,
+	         uint32_t value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string());
@@ -56,8 +55,8 @@ public:
 	/// \return true if an element has been selected from the list
 	bool has_selection() const;
 
-	/// \return the internal name of the selected element
-	const std::string& get_selected() const;
+	/// \return the index of the selected element
+	uint32_t get_selected() const;
 
 private:
 	void set_value();
@@ -66,11 +65,54 @@ private:
 	UI::Box button_box_;
 	UI::Button push_button_;
 	UI::Button display_button_;
-	UI::Listselect<std::string> list_;
-	std::map<std::string, std::string> entries_;
-	std::string selected_;
+	UI::Listselect<uintptr_t> list_;
 	const std::string label_;
 };
+
+/// A dropdown menu that lets the user select a value of the datatype 'Entry'.
+template <typename Entry> class Dropdown : public BaseDropdown {
+public:
+	/// \param h determines the size of the list that's shown by the dropdown.
+	Dropdown(Panel* parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& label,
+	         bool show_tick = true)
+	   : BaseDropdown(parent, x, y, w, h, label, show_tick) {
+	}
+
+	/// Add an element to the list
+	/// \param name         the display name of the entry
+	/// \param value        the value for the entry
+	/// \param pic          an image to illustrate the entry
+	/// \param select_this  whether this element should be selected
+	/// \param tooltip_text a tooltip for this entry
+	void add(const std::string& name,
+	         const std::string& value,
+	         const Image* pic = nullptr,
+	         const bool select_this = false,
+	         const std::string& tooltip_text = std::string()) {
+		entry_cache_.push_back(value);
+		BaseDropdown::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text);
+	}
+
+	/// \return true if an element has been selected from the list
+	bool has_selection() const {
+		return BaseDropdown::has_selection();
+	}
+
+	/// \return the selected element
+	const Entry& get_selected() const {
+		return entry_cache_[BaseDropdown::get_selected()];
+	}
+
+private:
+	// Contains the actual elements. The BaseDropdown registers the indices only.
+	std::deque<Entry> entry_cache_;
+};
+
 }  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_DROPDOWN_H
