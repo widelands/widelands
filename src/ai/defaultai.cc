@@ -910,6 +910,7 @@ void DefaultAI::late_initialization() {
 		assert (management_data.neuron_pool.size() == neuron_pool_size);	
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+		management_data.test_consistency();	
 				
 		management_data.mutate(gametime);
 		printf (" magic numbers: %5d %5d %5lu\n",
@@ -923,7 +924,8 @@ void DefaultAI::late_initialization() {
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);	
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
-		assert (management_data.neuron_pool.size() == neuron_pool_size);		
+		assert (management_data.neuron_pool.size() == neuron_pool_size);
+		management_data.test_consistency();		
 
 
 	} else if (persistent_data->initialized == kTrue) {
@@ -960,12 +962,18 @@ void DefaultAI::late_initialization() {
 			management_data.neuron_pool.push_back(
 				Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i],management_data.new_neuron_id()));	
 		}
+		for (uint32_t i = 0; i < persistent_data->bi_neuron_pool_size; i = i+1){
+			management_data.bi_neuron_pool.push_back(
+				Bi_Neuron(persistent_data->bi_neuron_types[i], persistent_data->bi_neuron_weights[i], management_data.new_bi_neuron_id()));	
+		}
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);	
-		assert (management_data.neuron_pool.size() == neuron_pool_size);		
+		assert (management_data.neuron_pool.size() == neuron_pool_size);	
+		
+		management_data.test_consistency();	
 		management_data.dump_data();					
 							
 	} else {

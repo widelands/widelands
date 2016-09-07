@@ -89,7 +89,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 constexpr int  magic_numbers_size = 18;
 constexpr int  neuron_pool_size = 48;
-
+constexpr int  bi_neuron_pool_size = 10;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
@@ -520,11 +520,29 @@ private:
 	int32_t highest_pos;
 };
 
+//Bi_Neuron receives two bools and returns a value with probability of 1/4
+struct Bi_Neuron {
+	Bi_Neuron(uint8_t, int8_t, uint16_t); //type, weight (amount)
+	void set_weight(int8_t w);
+	int8_t get_weight() {return weight;};
+	int8_t get_result(bool, bool);
+	void set_type(uint8_t);
+	uint8_t get_type() {return type;};
+	uint16_t get_id() {return id;};
+		
+private:
+	uint8_t type;
+	int8_t weight;
+	uint16_t id;
+	
+};
+
 //This is to keep all data related to AI magic numbers
 struct ManagementData {
 	ManagementData();
 	
 	std::vector<Neuron> neuron_pool;
+	std::vector<Bi_Neuron> bi_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);
@@ -533,14 +551,18 @@ struct ManagementData {
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
 	void reset_neuron_id() {next_neuron_id = 0;}
+	uint16_t new_bi_neuron_id() {next_bi_neuron_id += 1; return next_bi_neuron_id - 1; };
+	void reset_bi_neuron_id() {next_bi_neuron_id = 0;}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
+	bool test_consistency();
 	
 private:	
 	uint32_t scores[3];
 	uint32_t last_mutate_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
+	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
 };
 	
