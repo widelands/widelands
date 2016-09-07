@@ -28,7 +28,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
@@ -126,8 +125,7 @@ private:
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Textarea label_resolution_;
-	UI::Listselect<void*> resolution_list_;
+	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
 	UI::SpinBox sb_maxfps_;

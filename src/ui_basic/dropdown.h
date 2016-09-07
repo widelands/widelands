@@ -90,7 +90,7 @@ public:
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	void add(const std::string& name,
-	         const std::string& value,
+	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string()) {

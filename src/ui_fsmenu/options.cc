@@ -161,8 +161,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         column_width_ / 2,
                         get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 4 * padding_,
                         _("Language")),
-     label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
-     resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, true),
+     resolution_dropdown_(&box_interface_, 0, 0, column_width_ / 2, 120, _("In-game resolution")),
 
      fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
      inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
@@ -287,8 +286,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Interface
 	box_interface_.add(&language_dropdown_, UI::Align::kLeft);
-	box_interface_.add(&label_resolution_, UI::Align::kLeft);
-	box_interface_.add(&resolution_list_, UI::Align::kLeft);
+	box_interface_.add(&resolution_dropdown_, UI::Align::kLeft);
 	box_interface_.add(&fullscreen_, UI::Align::kLeft);
 	box_interface_.add(&inputgrab_, UI::Align::kLeft);
 	box_interface_.add(&sb_maxfps_, UI::Align::kLeft);
@@ -346,18 +344,18 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected = resolutions_[i].xres == opt.xres && resolutions_[i].yres == opt.yres;
 		did_select_a_res |= selected;
-		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		resolution_list_.add(
-		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(),
-		   nullptr, nullptr, selected);
+		resolution_dropdown_.add(
+		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
+		   nullptr, selected);
 	}
 	if (!did_select_a_res) {
-		resolution_list_.add(
-		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), nullptr, nullptr, true);
 		uint32_t entry = resolutions_.size();
 		resolutions_.resize(entry + 1);
 		resolutions_[entry].xres = opt.xres;
 		resolutions_[entry].yres = opt.yres;
+		resolution_dropdown_.add(
+		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), entry, nullptr, true);
 	}
 
 	fullscreen_.set_state(opt.fullscreen);
@@ -456,9 +454,11 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	if (language_dropdown_.has_selection()) {
 		os_.language = language_dropdown_.get_selected();
 	}
-	const uint32_t res_index = resolution_list_.selection_index();
-	os_.xres = resolutions_[res_index].xres;
-	os_.yres = resolutions_[res_index].yres;
+	if (resolution_dropdown_.has_selection()) {
+		const uint32_t res_index = resolution_dropdown_.get_selected();
+		os_.xres = resolutions_[res_index].xres;
+		os_.yres = resolutions_[res_index].yres;
+	}
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
