@@ -91,6 +91,8 @@ constexpr int  magic_numbers_size = 18;
 constexpr int  neuron_pool_size = 48;
 constexpr int  bi_neuron_pool_size = 10;
 
+constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
 
@@ -659,25 +661,35 @@ struct PlayersStrengths {
 private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, uint32_t pp, uint32_t op, uint32_t cs);
+		PlayerStat(Widelands::TeamNumber tc, bool en, uint32_t pp, uint32_t op, uint32_t cs);
 
 		Widelands::TeamNumber team_number;
+		bool is_enemy;
 		uint32_t players_power;
 		uint32_t old_players_power;		
 		uint32_t players_casualities;
+		uint32_t last_time_seen;
 	};
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs);
+	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber en, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_visible_enemies_power(uint32_t);
+	uint32_t get_old_visible_enemies_power(uint32_t);
 	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
+	void set_last_time_seen(uint32_t, Widelands::PlayerNumber);
+	bool player_seen_lately(Widelands::PlayerNumber, uint32_t);
+	bool get_is_enemy(Widelands::PlayerNumber);
+	uint8_t enemies_seen_lately_count(uint32_t);
+	bool any_enemy_seen_lately(uint32_t);
+	uint32_t enemy_last_seen();
 
 private:
 	// This is the core part of this struct

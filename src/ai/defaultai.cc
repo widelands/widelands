@@ -73,7 +73,7 @@ constexpr int kColonyScanStartArea = 35;
 constexpr int kColonyScanMinArea = 10;
 constexpr int kExpeditionMaxDuration = 90 * 60 * 1000;
 constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
-constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+//constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t kNoExpedition = 0;
 
 // following two are used for roads management, for creating shortcuts and dismantling dispensable
@@ -118,7 +118,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
-     enemy_last_seen_(kNever),
      numof_warehouses_(0),
      avg_military_score_(0),
      new_buildings_stop_(false),
@@ -903,13 +902,6 @@ void DefaultAI::late_initialization() {
 		printf ("  neurons: %5d %5d %5lu %5lu\n",
 			neuron_pool_size,  persistent_data->neuron_pool_size, persistent_data->neuron_functs.size(), persistent_data->neuron_weights.size());
 			
-		// and verifying size
-		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
-		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
-		assert (persistent_data->neuron_pool_size == neuron_pool_size);	
-		assert (management_data.neuron_pool.size() == neuron_pool_size);	
-		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
-		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
 		management_data.test_consistency();	
 				
 		management_data.mutate(gametime);
@@ -918,13 +910,6 @@ void DefaultAI::late_initialization() {
 		printf ("  neurons: %5d %5d %5lu %5lu\n",
 			neuron_pool_size,  persistent_data->neuron_pool_size, persistent_data->neuron_functs.size(), persistent_data->neuron_weights.size());
 	
-		// and verifying size - once more
-		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
-		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
-		assert (persistent_data->neuron_pool_size == neuron_pool_size);	
-		assert (persistent_data->magic_numbers_size == magic_numbers_size);			
-		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
-		assert (management_data.neuron_pool.size() == neuron_pool_size);
 		management_data.test_consistency();		
 
 
@@ -1455,7 +1440,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.military_score_ += 
 					management_data.neuron_pool[8].get_result_safe((field.military_in_constr_nearby + field.military_unstationed) * 2);
 			field.military_score_ +=  
-				management_data.neuron_pool[0].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
+				management_data.neuron_pool[18].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 		} else if (field.near_border){
 			// near border, but not enemy nearby
 			field.military_score_ += management_data.get_military_number_at(1);
@@ -1510,6 +1495,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	const int32_t land_score = management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
 		* resource_necessity_territory_ / 100;
 	assert (land_score >= -100 && land_score <= 100);
+	//printf ("Land score: %3d\n", land_score);
 	field.military_score_ += land_score;
 	const int32_t mines_score = management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 9)  / 10)
 		* resource_necessity_mines_ / 100;
@@ -1879,9 +1865,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// here we calculate how badly we need to expand, result is number (0-100)
 	// like a percent
-	resource_necessity_territory_ = (management_data.neuron_pool[31].get_result_safe(productionsites.size() / 2) +
+	resource_necessity_territory_ = 50 +(management_data.neuron_pool[31].get_result_safe(productionsites.size() / 2) +
 		management_data.neuron_pool[32].get_result_safe(BUILDCAPS_BIG) + 
-		management_data.neuron_pool[33].get_result_safe(spots_/20)) / 3;
+		management_data.neuron_pool[33].get_result_safe(spots_/20)) / 6;
+	assert(resource_necessity_territory_ >= 0 && resource_necessity_territory_ <=100);
+	//printf ("resource_necessity_territory_: %3d\n", resource_necessity_territory_ );
 	
 	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
@@ -4145,7 +4133,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 
 		// If we are close to enemy (was seen in last 15 minutes)
-		if (enemy_last_seen_ < gametime && enemy_last_seen_ + 15 * 60 * 1000 > gametime) {
+		if (player_statistics.any_enemy_seen_lately(gametime)) {
 			bo.primary_priority += 10;
 		}
 
@@ -4485,8 +4473,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// exemption first
 	if (militarysites.size() > 3 && soldier_status_ == SoldiersStatus::kFull && msites_in_constr() == 0) {
 		return BuildingNecessity::kAllowed; // it seems the expansion is stuck so we allow big buildings
-	} else if (gametime > enemy_last_seen_ &&
-		gametime < enemy_last_seen_ + 30 * 60 * 1000 &&
+	} else if (player_statistics.any_enemy_seen_lately(gametime) &&
 		mines_.size() > 2) { // if enemies were nearby in last 30 minutes
 			// we allow more big buidings
 			limit *= 2;
@@ -5586,7 +5573,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
 	// Collecting statistics and saving them in player_statistics object
-	for (Widelands::TeamNumber j = 1; j <= plr_in_game; ++j) {
+	const  Player* me = game().get_player(pn);
+	for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
 			try {
@@ -5600,7 +5588,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					old_strength = genstats.at(j - 1).miltary_strength[0];
 				}
 				player_statistics.add(
-				   j, this_player->team_number(), cur_strength, old_strength, genstats.at(j - 1).nr_casualties.back());
+				   pn,
+				   j,
+				   me->team_number(),
+				   this_player->team_number(),
+				   cur_strength,
+				   old_strength,
+				   genstats.at(j - 1).nr_casualties.back());
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				    static_cast<unsigned int>(player_number()),
@@ -5610,6 +5604,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	player_statistics.recalculate_team_power();
+
+	printf ("%d : visible enemies (%d) power: %3d -> %3d, any seen at %u\n",
+		pn,
+		player_statistics.enemies_seen_lately_count(gametime),
+		player_statistics.get_old_visible_enemies_power(gametime),
+		player_statistics.get_visible_enemies_power(gametime),
+		player_statistics.enemy_last_seen());
 
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 100;
@@ -5683,18 +5684,25 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
-				if (player_->is_hostile(bld->owner())) {
+				const PlayerNumber opn = bld->owner().player_number();
+				if (player_statistics.get_is_enemy(opn)) {
+					assert(opn != pn );
+					player_statistics.set_last_time_seen(gametime, opn);
 					if (enemy_sites.count(bld->get_position().hash()) == 0) {
 						enemy_sites[bld->get_position().hash()] = EnemySiteObserver();
 					}
-				}
+				} 
 			}
 			if (upcast(Warehouse const, wh, immovables.at(j).object)) {
-				if (player_->is_hostile(wh->owner())) {
+				const PlayerNumber opn = wh->owner().player_number();
+				if (player_statistics.get_is_enemy(opn)) {
+					assert(opn != pn );
+					assert (player_statistics.get_is_enemy(opn));
+					player_statistics.set_last_time_seen(gametime, opn);
 					if (enemy_sites.count(wh->get_position().hash()) == 0) {
 						enemy_sites[wh->get_position().hash()] = EnemySiteObserver();
 					}
-				}
+				} 
 			}
 		}
 	}
@@ -5713,17 +5721,18 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// decreased if promotion of soldiers is stalled)
 	int8_t training_score = 0;
 	if (persistent_data->last_soldier_trained > gametime) {
-		// No soldier was ever trained ...
-		switch (type_) {
-		case DefaultAI::Type::kNormal:
-			training_score = -8;
-			break;
-		case DefaultAI::Type::kWeak:
-			training_score = -4;
-			break;
-		case DefaultAI::Type::kVeryWeak:
-			training_score = -2;
-		}
+		training_score += management_data.neuron_pool[19].get_result_safe((gametime - persistent_data->last_soldier_trained) / 60 / 1000) / 10;
+		//// No soldier was ever trained ...
+		//switch (type_) {
+		//case DefaultAI::Type::kNormal:
+			//training_score = -8;
+			//break;
+		//case DefaultAI::Type::kWeak:
+			//training_score = -4;
+			//break;
+		//case DefaultAI::Type::kVeryWeak:
+			//training_score = -2;
+		//}
 	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
 		// was any soldier trained within last 10 minutes
 		switch (type_) {
@@ -5739,19 +5748,27 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 	// Also we should have at least some training sites to be more willing to attack
 	// Of course, very weak AI can have only one trainingsite so will be always penalized by this
-	switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
-	case 0:
-		training_score -= 6;
-		break;
-	case 1:
-		training_score -= 3;
-		break;
-	case 2:
-		training_score -= 1;
-		break;
-	default:;
-	}
+	training_score += management_data.neuron_pool[23].get_result_safe((ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) * 4) / 10;
+	//switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
+	//case 0:
+		//training_score -= 6;
+		//break;
+	//case 1:
+		//training_score -= 3;
+		//break;
+	//case 2:
+		//training_score -= 1;
+		//break;
+	//default:;
+	//}
 
+	//some black box magic for growth
+	training_score += management_data.bi_neuron_pool[0].get_result( 
+		player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
+		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn)) / 10;		
+	training_score += management_data.bi_neuron_pool[3].get_result( 
+		player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
+		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn)) / 10;
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
@@ -5887,6 +5904,15 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) {
 					site->second.score += 8;
 				}
+
+				// consider change in power
+				site->second.score += management_data.bi_neuron_pool[1].get_result( 
+					player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
+					player_statistics.get_player_power(owner_number) > player_statistics.get_old_player_power(owner_number)) / 10;		
+				site->second.score += management_data.bi_neuron_pool[2].get_result( 
+					player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
+					player_statistics.get_player_power(owner_number) > player_statistics.get_old_player_power(owner_number)) / 10;	
+
 
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {

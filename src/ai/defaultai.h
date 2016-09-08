@@ -294,7 +294,6 @@ private:
 	uint32_t next_mine_construction_due_;
 	uint32_t inhibit_road_building_;
 	uint32_t time_of_last_construction_;
-	uint32_t enemy_last_seen_;
 
 	uint16_t numof_warehouses_;
 	int32_t avg_military_score_;
