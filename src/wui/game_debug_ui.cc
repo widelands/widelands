@@ -263,7 +263,7 @@ void FieldDebugWindow::think() {
 	if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK)
 		str += "is walkable\n";
 	if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM)
-		str += "is swimable\n";
+		str += "is swimmable\n";
 	Widelands::MapIndex const i = coords_.field - &map_[0];
 	Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {

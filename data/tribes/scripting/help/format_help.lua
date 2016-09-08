@@ -1,10 +1,10 @@
-include "scripting/formatting.lua"
-
 -- RST
 -- format_help.lua
--- ---------------
-
+-- -------------------------------------
+--
 -- Functions used in the ingame help windows for formatting the text and pictures.
+
+include "scripting/formatting.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -63,7 +63,7 @@ end
 
 
 -- RST
--- .. function help_ware_amount_line(ware_description, amount)
+-- .. function:: help_ware_amount_line(ware_description, amount)
 --
 --    Displays an amount of wares with name and images
 --
@@ -88,7 +88,7 @@ function help_ware_amount_line(ware_description, amount)
 end
 
 -- RST
--- .. function help_tool_string(tribe, toolname, no_of_workers)
+-- .. function:: help_tool_string(tribe, toolname, no_of_workers)
 --
 --    Displays tools with an intro text and images
 --
@@ -111,12 +111,13 @@ end
 
 
 -- RST
--- .. function help_consumed_wares(building, program_name)
+-- .. function:: help_consumed_wares(building, program_name)
 --
 --    Returns information for which wares in which amounts are consumed by a produciton program.
 --
 --    :arg tribe: The :class:`LuaBuildingDescription` for the building that runs the program
 --    :arg program_name: The name of the production program that the info is collected for
+--
 --    :returns: A "Ware(s) consumed:" section with image_lines
 --
 function help_consumed_wares(building, program_name)
