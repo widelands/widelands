@@ -64,6 +64,7 @@ protected:
 	void set_enabled(bool on);
 
 	void set_pos(Point point) override;
+	void clear();
 
 private:
 	void set_value();
@@ -76,6 +77,7 @@ private:
 	UI::Listselect<uintptr_t> list_;
 	std::string label_;
 	std::string tooltip_;
+	bool is_enabled_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
@@ -131,6 +133,11 @@ public:
 
 	void set_pos(Point point) override {
 		BaseDropdown::set_pos(point);
+	}
+
+	void clear() {
+		BaseDropdown::clear();
+		entry_cache_.clear();
 	}
 
 private:

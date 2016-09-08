@@ -75,7 +75,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
            w,
 			  0,
            show_tick),  // Hook into parent so we can drop down outside the panel
-     label_(label) {
+	  label_(label),
+	  is_enabled_(true) {
 	// Make sure that the list covers and deactivates the elements below it
 	list_.set_layout_toplevel(true);
 	list_.set_visible(false);
@@ -117,16 +118,22 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 	display_button_.set_tooltip(tooltip_);
 }
 
-// NOCOM find out why this doesn't work.
+// NOCOM find out why buttons are still clickable.
 void BaseDropdown::set_enabled(bool on) {
+	is_enabled_ = on;
 	push_button_.set_enabled(on);
 	display_button_.set_enabled(on);
-	list_.set_visible(on && list_.is_visible());
+	list_.set_visible(false);
 }
 
 void BaseDropdown::set_pos(Point point) {
 	UI::Panel::set_pos(point);
 	list_.set_pos(Point(point.x, point.y + get_h()));
+}
+
+void BaseDropdown::clear() {
+	list_.clear();
+	list_.set_size(list_.get_w(), 0);
 }
 
 void BaseDropdown::set_value() {
@@ -147,10 +154,12 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle_list() {
-	list_.set_visible(!list_.is_visible());
-	if (list_.is_visible()) {
-		list_.move_to_top();
-		list_.focus();
+	if (is_enabled_) {
+		list_.set_visible(!list_.is_visible());
+		if (list_.is_visible()) {
+			list_.move_to_top();
+			list_.focus();
+		}
 	}
 }
 
