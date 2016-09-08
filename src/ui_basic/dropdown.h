@@ -58,17 +58,24 @@ protected:
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
 
+	void set_label(const std::string& text);
+	void set_tooltip(const std::string& text);
+
+	void set_enabled(bool on);
+
 	void set_pos(Point point) override;
 
 private:
 	void set_value();
 	void toggle_list();
 
+	uint32_t max_list_height_;
 	UI::Box button_box_;
 	UI::Button push_button_;
 	UI::Button display_button_;
 	UI::Listselect<uintptr_t> list_;
-	const std::string label_;
+	std::string label_;
+	std::string tooltip_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
@@ -108,6 +115,18 @@ public:
 	/// \return the selected element
 	const Entry& get_selected() const {
 		return entry_cache_[BaseDropdown::get_selected()];
+	}
+
+	void set_label(const std::string& text) {
+		BaseDropdown::set_label(text);
+	}
+
+	void set_tooltip(const std::string& text) {
+		BaseDropdown::set_tooltip(text);
+	}
+
+	void set_enabled(bool on) {
+		BaseDropdown::set_enabled(on);
 	}
 
 	void set_pos(Point point) override {

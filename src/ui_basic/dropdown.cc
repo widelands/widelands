@@ -47,6 +47,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                  UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
                        ->height() +
                     2)),  // Height only to fit the button, so we can use this in Box layout.
+	  max_list_height_(h - 2 * get_h()),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
      push_button_(&button_box_,
                   "dropdown_select",
@@ -72,7 +73,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 			  x,
 			  y + get_h(),
            w,
-           h - 2 * get_h(),
+			  0,
            show_tick),  // Hook into parent so we can drop down outside the panel
      label_(label) {
 	// Make sure that the list covers and deactivates the elements below it
@@ -95,6 +96,7 @@ void BaseDropdown::add(const std::string& name,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text) {
+	list_.set_size(list_.get_w(), std::min(list_.get_h() + list_.get_lineheight(), max_list_height_));
 	list_.add(name, value, pic, select_this, tooltip_text);
 }
 
@@ -104,6 +106,22 @@ bool BaseDropdown::has_selection() const {
 
 uint32_t BaseDropdown::get_selected() const {
 	return list_.get_selected();
+}
+
+void BaseDropdown::set_label(const std::string& text) {
+	label_ = text;
+}
+
+void BaseDropdown::set_tooltip(const std::string& text) {
+	tooltip_ = text;
+	display_button_.set_tooltip(tooltip_);
+}
+
+// NOCOM find out why this doesn't work.
+void BaseDropdown::set_enabled(bool on) {
+	push_button_.set_enabled(on);
+	display_button_.set_enabled(on);
+	list_.set_visible(on && list_.is_visible());
 }
 
 void BaseDropdown::set_pos(Point point) {
@@ -125,6 +143,7 @@ void BaseDropdown::set_value() {
 		                                             pgettext("dropdown", "Not Selected")))
 		      .str());
 	}
+	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
 }
 
 void BaseDropdown::toggle_list() {

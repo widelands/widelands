@@ -299,12 +299,23 @@ const std::string& BaseListselect::get_name(uint32_t i) const {
 	return entry_records_[i]->name;
 }
 
+const std::string& BaseListselect::get_tooltip(uint32_t i) const {
+	return entry_records_[i]->tooltip;
+}
+
+
 uint32_t BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }
 
 uint32_t BaseListselect::get_eff_w() const {
 	return scrollbar_.is_enabled() ? get_w() - scrollbar_.get_w() : get_w();
+}
+
+void BaseListselect::layout() {
+	scrollbar_.set_size(scrollbar_.get_w(), get_h());
+	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
+	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
 }
 
 /**

@@ -93,6 +93,7 @@ struct BaseListselect : public Panel {
 	void remove_selected();
 
 	const std::string& get_name(uint32_t i) const;
+	const std::string& get_tooltip(uint32_t i) const;
 
 	void set_background(const Image* background) {
 		background_ = background;
@@ -102,6 +103,8 @@ struct BaseListselect : public Panel {
 	uint32_t get_lineheight() const;
 
 	uint32_t get_eff_w() const;
+
+	void layout() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
@@ -176,6 +179,10 @@ template <typename Entry> struct Listselect : public BaseListselect {
 
 	const std::string& get_selected_name() const {
 		return BaseListselect::get_name(BaseListselect::get_selected());
+	}
+
+	const std::string& get_selected_tooltip() const {
+		return BaseListselect::get_tooltip(BaseListselect::get_selected());
 	}
 
 	void set_background(const Image* background) {
