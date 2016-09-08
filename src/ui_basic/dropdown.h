@@ -31,7 +31,7 @@ namespace UI {
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
-public:
+protected:
 	BaseDropdown(Panel* parent,
 	             int32_t x,
 	             int32_t y,
@@ -57,6 +57,8 @@ public:
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
+
+	void set_pos(Point point) override;
 
 private:
 	void set_value();
@@ -106,6 +108,10 @@ public:
 	/// \return the selected element
 	const Entry& get_selected() const {
 		return entry_cache_[BaseDropdown::get_selected()];
+	}
+
+	void set_pos(Point point) override {
+		BaseDropdown::set_pos(point);
 	}
 
 private:

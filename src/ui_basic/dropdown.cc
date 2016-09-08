@@ -69,8 +69,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      true,
                      false),
      list_(parent,
-           0,
-           get_h(),
+			  x,
+			  y + get_h(),
            w,
            h - 2 * get_h(),
            show_tick),  // Hook into parent so we can drop down outside the panel
@@ -104,6 +104,11 @@ bool BaseDropdown::has_selection() const {
 
 uint32_t BaseDropdown::get_selected() const {
 	return list_.get_selected();
+}
+
+void BaseDropdown::set_pos(Point point) {
+	UI::Panel::set_pos(point);
+	list_.set_pos(Point(point.x, point.y + get_h()));
 }
 
 void BaseDropdown::set_value() {
