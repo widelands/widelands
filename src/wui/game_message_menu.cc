@@ -349,6 +349,7 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
+
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
@@ -357,23 +358,41 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 				center_view();
 			return true;
 		case SDLK_0:
-			filter_messages(Widelands::Message::Type::kAllMessages);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kAllMessages);
+				return true;
+			}
+			return false;
 		case SDLK_1:
-			filter_messages(Widelands::Message::Type::kGeologists);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kGeologists);
+				return true;
+			}
+			return false;
 		case SDLK_2:
-			filter_messages(Widelands::Message::Type::kEconomy);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kEconomy);
+				return true;
+			}
+			return false;
 		case SDLK_3:
-			filter_messages(Widelands::Message::Type::kSeafaring);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kSeafaring);
+				return true;
+			}
+			return false;
 		case SDLK_4:
-			filter_messages(Widelands::Message::Type::kWarfare);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kWarfare);
+				return true;
+			}
+			return false;
 		case SDLK_5:
-			filter_messages(Widelands::Message::Type::kScenario);
-			return true;
+			if (code.mod & KMOD_LALT) {
+				filter_messages(Widelands::Message::Type::kScenario);
+				return true;
+			}
+			return false;
 		case SDLK_DELETE:
 			archive_or_restore();
 			return true;
@@ -494,11 +513,13 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		scenariobtn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
+
+		// NOCOMM franku: Please check if this is used anywhere
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-		                    /** TRANSLATORS: Tooltip in the messages window */
-		                    % _("Show all messages") % "0")
-		                      .str());
+							/** TRANSLATORS: Tooltip in the messages window */
+							% _("Show all messages") % "0")
+							  .str());
 	}
 }
 
@@ -506,23 +527,23 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	geologistsbtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
 	                             % _("Show geologists' messages only") % "1")
 	                               .str());
-	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	economybtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
 	                          % _("Show economy messages only") % "2")
 	                            .str());
-	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	seafaringbtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
 	                            % _("Show seafaring messages only") % "3")
 	                              .str());
-	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	warfarebtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
 	                          % _("Show warfare messages only") % "4")
 	                            .str());
-	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	scenariobtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
 	                           % _("Show scenario messages only") % "5")
 	                             .str());
