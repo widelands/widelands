@@ -3,6 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-16 17:27+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-01 18:14+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -940,8 +941,8 @@ msgstr "sulattaa rautaa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
 msgid "smelting gold"
 msgstr "sulattaa kultaa"
 
@@ -1065,25 +1066,25 @@ msgstr "tekee kevyttä atrainta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
 msgid "forging a long trident"
 msgstr "tekee pitkää atrainta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr "tekee teräsatrainta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:112
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
 msgid "forging a double trident"
 msgstr "tekee kaksipäistä atrainta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
 msgid "forging a heavy double trident"
 msgstr "tekee raskasta kaksipääatrainta"
 
@@ -1180,14 +1181,14 @@ msgid "forging an ax"
 msgstr "tekee kirvestä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
 msgid "forging a sharp ax"
 msgstr "tekee terävää kirvestä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:101
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:108
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
 msgid "forging a broad ax"
 msgstr "tekee leveää kirvestä"
 
@@ -1607,19 +1608,19 @@ msgstr "Asetehdas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
 msgid "forging a bronze ax"
 msgstr "Valmistaa pronssikirveen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:134
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a battle ax"
 msgstr "Valmistaa taistelukirveen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:147
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
 msgid "forging a warrior’s ax"
 msgstr "Valmistaa sotakirveen"
 
@@ -2042,25 +2043,25 @@ msgid "forging a wooden spear"
 msgstr "tekee puukeihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
 msgstr "tekee keihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
 msgid "forging an advanced spear"
 msgstr "tekee kehittynyttä keihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:117
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
 msgid "forging a heavy spear"
 msgstr "tekee raskasta keihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
 msgid "forging a war spear"
 msgstr "tekee sotakeihästä"
 
@@ -2782,7 +2783,7 @@ msgstr "Timantti"
 #: ../../data/tribes/wares/felling_ax/init.lua:7
 msgctxt "ware"
 msgid "Felling Ax"
-msgstr "Metsurin kirves"
+msgstr "Kaatokirves"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fire_tongs/init.lua:7

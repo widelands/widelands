@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 20:16+0000\n"
-"Last-Translator: litoll <litoll@freemail.hu>\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-01 14:50+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +105,7 @@ msgstr "Építs egy tornyot"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Építs egy tornyot a területed az északkeleti határán, hogy jobb rálátást szerezz, és jobban védhesd a néped a hirtelen támadások ellen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
@@ -127,7 +128,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Terjeszd ki a területed a hegyekbe, küldj geológusokat, hogy ércet és szenet keressenek, és építsd ki egy bányászati gazdaságot bányákkal, vendéglőkkel, olvasztókkal és fém műhelyekkel."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -196,7 +197,7 @@ msgstr "A kiképzőhelyek, mint a kiképzőtábor vagy a harci aréna, a katoná
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Az attribútumok: életerő, támadás, védelem és kitérés."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
@@ -283,7 +284,7 @@ msgstr "Kételyek"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth rázza a fejét..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
@@ -433,7 +434,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kéne kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy tanyát és egy pékséget is! Az egyik paraszt nagyon okosnak tűnik - már termesztett néhány növényt ebben a hideg talajban."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
@@ -457,7 +458,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron azt mondta nekem, hogy nyomokat fedezett fel a hóban északkeletre a településünktől. Arra utasított minket, hogy építsünk egy tornyot, hogy jobb rálátásunk legyen a területre a csarnok körül, hogy megvédhessük a népünket a hirtelen támadásoktól."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
 msgid "Further Exploration"
@@ -548,7 +549,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "A bányászati gazdaságunk úgy néz ki, jól működik, ez remek hír! Mindenesetre sok férfi és nő vár a csarnokban, hogy feladatot kapjon, úgyhogy ők tudnak segíteni a katonáinknak a közelgő háborúban való felkészülésben."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
@@ -590,7 +591,7 @@ msgstr "Győzelem"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Befejezted az utolsó küldetést a Barbár oktatójáték hadjáratban. Ha szeretnéd, folytathatod a játékot, egyébként menj a következő hadjáratra."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid "Military Assault"
@@ -642,5 +643,5 @@ msgstr "„%s”"
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Új célkitűzés"
+msgstr[1] "Új célkitűzések"

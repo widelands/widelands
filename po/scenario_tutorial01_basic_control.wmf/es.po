@@ -4,7 +4,7 @@
 # Translators:
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Gastón Bermúdez Rochietti <gastbr@gmail.com>, 2016
+# G BR <gastbr@gmail.com>, 2016
 # Javier Mora <morehash@gmail.com>, 2015
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-15 06:00+0000\n"
-"PO-Revision-Date: 2016-06-22 05:02+0000\n"
-"Last-Translator: Gastón Bermúdez Rochietti <gastbr@gmail.com>\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-01 08:05+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -738,11 +738,11 @@ msgstr "¡Hola, soy yo otra vez! Esta vez te he mandado un mensaje. Los mensajes
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "La ventana de mensajes se puede mostrar con el boton a la derecha del todo en la parte inferior de la pantalla. Este botón también cambiará su apariencia siempre que haya nuevos mensajes, aunque suena una campana siempre que recibes un  mensaje nuevo."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""

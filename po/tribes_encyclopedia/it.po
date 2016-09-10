@@ -3,7 +3,9 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# Cristiano, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # Davide Nicolini <davide97@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
@@ -15,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-16 07:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-04 09:48+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -505,7 +507,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
 "average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre carbone in 32.5 secondi in media"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
@@ -513,7 +515,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
 "average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre carbone in 19.5 secondi in media"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -531,7 +533,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
 "average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre carbone in 14.4 secondi in media"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -595,7 +597,7 @@ msgstr "Rilascia animali in libertà per sostenere la produzione di carne."
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The gamekeeper pauses 52.5 seconds before going to work again."
-msgstr ""
+msgstr "Il guardiacaccia fa una pausa di 52.5 secondi prima di tornare al lavoro."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -641,7 +643,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
 " on average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre oro in 19.5 secondi in media"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -659,7 +661,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
 " on average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre oro in 18.5 secondi in media"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -795,7 +797,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
 " on average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre ferro grezzo in 39.5 secondi in media"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -813,7 +815,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
 " on average."
-msgstr ""
+msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre ferro grezzo in 17.6 secondi in media"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1061,7 +1063,7 @@ msgstr "Tutte le armi la stessa quantità di tempo per essere forgiate, ma il co
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of thatch reed."
-msgstr ""
+msgstr "Tesse del tessuto partendo dalla paglia di canne"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -1773,251 +1775,251 @@ msgstr "Produzione"
 msgid "Performance:"
 msgstr "Prestazione:"
 
-#: ../../data/tribes/scripting/help/controls.lua:7
+#: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
 msgstr "Controlli"
 
-#: ../../data/tribes/scripting/help/controls.lua:10
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgid "Window Control"
 msgstr "Controllo della finestra"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgid "Close window"
 msgstr "Chiudi la finestra"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:19
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Click destro"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Click centrale o Ctrl + click sinistro"
 
-#: ../../data/tribes/scripting/help/controls.lua:15
+#: ../../data/tribes/scripting/help/controls.lua:21
 msgid "Minimize/Maximize window"
 msgstr "Rimpicciolisci/Ingrandisci finestra"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl + click con il tasto sinistro sul pulsante"
 
-#: ../../data/tribes/scripting/help/controls.lua:17
+#: ../../data/tribes/scripting/help/controls.lua:23
 msgid "Skip confirmation dialog"
 msgstr "Salta il dialogo di conferma"
 
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid "Road Control"
 msgstr "Controllo della strada"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:22
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:28
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + Click sinistro"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Mentre si uniscono due bandiere: Colloca le bandiere in automatico"
 
-#: ../../data/tribes/scripting/help/controls.lua:24
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Mentre si rimuove una bandiera: Rimuovi tutte le bandiere fino alla prima giunzione"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgid "Increase game speed"
 msgstr "Aumenta la velocità di gioco"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:29
+#: ../../data/tribes/scripting/help/controls.lua:35
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Pagina su"
 
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgid "Decrease game speed"
 msgstr "Diminuisci la velocità di gioco"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:31
+#: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Pagina giù"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../../data/tribes/scripting/help/controls.lua:33
+#: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Pause the game"
 msgstr "Metti in pausa la partita"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:41
 msgid "Toggle census"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "Toggle statistics"
-msgstr ""
+msgstr "Mostra o togli le statistiche"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "Toggle objectives"
-msgstr ""
+msgstr "Mostra o togli gli obiettivi"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:43
+#: ../../data/tribes/scripting/help/controls.lua:49
 msgid "Toggle messages (‘news’)"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:45
+#: ../../data/tribes/scripting/help/controls.lua:51
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
 msgstr "Enciclopedia Tribale"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:47
+#: ../../data/tribes/scripting/help/controls.lua:53
 msgid "Toggle stock inventory"
-msgstr ""
+msgstr "Mostra o togli l'inventario scorte"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:49
+#: ../../data/tribes/scripting/help/controls.lua:55
 msgid "Toggle building statistics"
-msgstr ""
+msgstr "Mostra o togli le statistiche sugli edifici"
 
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgid "Center main mapview on starting location"
 msgstr "Centra la visuale della mappa principale sul punto di partenza"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:57
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Pagina iniziale"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "(Ctrl +) 0-9"
 msgstr "(Ctrl +) 0-9"
 
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr "Ricorda e vai in luoghi precedentemente memorizzati"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:55
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Go to the previous location"
 msgstr "Vai alla posizione precedente"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Go to the next location"
 msgstr "Vai alla posizione successiva"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Take a screenshot"
 msgstr "Fai una foto alla schermata"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:68
 msgid "Quit the game immediately"
 msgstr "Esci immediatamente dal gioco"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Mostra la console di elimina errori (solo  nella struttura dell'elimina errori)"
 
-#: ../../data/tribes/scripting/help/controls.lua:67
+#: ../../data/tribes/scripting/help/controls.lua:73
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Nella finestra di messaggio, sono disponibili le seguenti scorciatoie: "
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Mostra tutti i messaggi"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Mostra solamente i messaggi dei geologi"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Mostra solamente i messaggi relativi all'economia"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Mostra solamente i messaggi relativi alla navigazione in mare"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Mostra solamente i messaggi relativi alla guerra"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Mostra solamente i messaggi sullo scenario"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Jump to the location corresponding to the current message"
 msgstr "Salta alla posizione corrispondente al messaggio corrente"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Archive/Restore the current message"
 msgstr "Archivia/Ripristina il messaggio attuale"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Elimina"
@@ -2139,15 +2141,15 @@ msgstr "Vita"
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../data/tribes/scripting/help/worker_help.lua:171
 msgid "Starts at %1% points."
-msgstr ""
+msgstr "Inizia a %1% punti."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
 #: ../../data/tribes/scripting/help/worker_help.lua:174
 #: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aumentato di %1% punto per ogni livello."
+msgstr[1] "Aumentato di %1% punti per ogni livello."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
 #: ../../data/tribes/scripting/help/worker_help.lua:177
@@ -2156,8 +2158,8 @@ msgstr[1] ""
 #: ../../data/tribes/scripting/help/worker_help.lua:212
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Il livello massimo è %1%."
+msgstr[1] "Il livello massimo è %1%."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Attack"
@@ -2166,7 +2168,7 @@ msgstr "Attacco"
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../data/tribes/scripting/help/worker_help.lua:182
 msgid "A random value between %1% and %2% points is added to each attack."
-msgstr ""
+msgstr "Un valore casuale di punti tra %1% e %2% viene aggiunto ad ogni attacco."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:189
 msgid "Defense"
@@ -2177,13 +2179,13 @@ msgstr "Difesa"
 #: ../../data/tribes/scripting/help/worker_help.lua:208
 #, lua-format
 msgid "Starts at %d%%."
-msgstr ""
+msgstr "Inizia a %d%%."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:195
 #: ../../data/tribes/scripting/help/worker_help.lua:210
 #, lua-format
 msgid "Increased by %d%% for each level."
-msgstr ""
+msgstr "Aumentato di %d%% per ogni livello."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:202
 msgid "This soldier cannot be trained in defense."
@@ -2301,7 +2303,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Beer is produced in micro breweries and used in inns and big inns to produce"
 " snacks."
-msgstr ""
+msgstr "La birra è prodotta nelle microbirrerie ed è utilizzata in locande e grandi locande per produrre pasti leggeri."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:6
@@ -2309,7 +2311,7 @@ msgctxt "empire_ware"
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by"
 " miners in coal and iron mines."
-msgstr ""
+msgstr "Questa birra è prodotta in una birreria a partire da grano e acqua. È consumata dai minatori nelle miniere di carbone e di ferro."
 
 #. TRANSLATORS: Helptext for a ware: Strong Beer
 #: ../../data/tribes/wares/beer_strong/helptexts.lua:4
@@ -2378,13 +2380,13 @@ msgstr ""
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
-msgstr ""
+msgstr "La pala per il pane è l'attrezzo del fornaio, ogni fornaio ne deve avere una."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr ""
+msgstr "Le pale per il pane sono prodotte dal fabbro."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:8
@@ -2399,7 +2401,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr ""
+msgstr "Le pale per il pane sono prodotte dal fabbro."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -2765,7 +2767,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Le lance da caccia sono prodotte nell'officina metallica (ma smettono di essere prodotte dall'edificio se esso viene potenziato in una fabbrica di asce o fucina da guerra)"
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
@@ -2783,7 +2785,7 @@ msgstr ""
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr ""
+msgstr "Il ferro è usato nella fucina di strumenti, nella fucina di armature e nella fucina di armi."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -3278,7 +3280,7 @@ msgstr "L'acqua è l'essenza della vita!"
 #: ../../data/tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "L'acqua è utilizzata nei forni, l'allevamento di cavalli e l'allevamento di ragni."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:8
@@ -3803,7 +3805,7 @@ msgstr "Macina il grano per produrre farina."
 #: ../../data/tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Lavora in profondità nelle miniere per ottenere carbone, ferro, oro o marmo."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
@@ -3822,7 +3824,7 @@ msgstr "Esploratori come Scotty l'esploratore esplorano le aree non esplorate al
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Pascolare il gregge"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
@@ -3864,7 +3866,7 @@ msgstr "Allena i soldati."
 #: ../../data/tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Cresci la vigna."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3

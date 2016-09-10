@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-25 19:19+0000\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-02 18:36+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -302,11 +302,11 @@ msgstr "Käännökset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Ruudut"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -378,7 +378,7 @@ msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kanna
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.

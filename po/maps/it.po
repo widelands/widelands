@@ -2,7 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano, 2016
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -11,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-04 06:27+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -228,14 +230,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Tra la Svezia e la Finlandia si trova il mare dell'arcipelago. Questo luogo di gran bellezza non è terra, e non è mare, ma è entrambi. All'interno di poche centinaia di chilometri, ci sono non meno di 50.000 isole e isolotti, la maggior parte non ha più di pochi acri in tutto. Il clima è abbastanza mite per la sua latitudine; agricoltura prospera, le bacche sono abbondanti, e pesce abbondante. La piccola popolazione umana di questo luogo non ha mai conosciuto la fame. Tu bastardo signore della guerra semplicemente non potevi lasciare questo piccolo paradiso in pace, vero?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Grandi appezzamenti sono rari in quelle piccole isole. Dai priorità alla costruzione di edifici di grandi dimensioni su di queste. A volte sono necessari grandi edifici militari per espandersi fino alla prossima isola. L'IA si non sarà alla tua altezza."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -361,7 +363,7 @@ msgstr "Compagni"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "Le navi sono i tuoi migliori compagni. Le posizioni di partenza sono simili, così la mappa dovrebbe essere equa."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
@@ -416,13 +418,13 @@ msgstr "Quattro montagne"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "Ogni tribù è circondata da quattro possenti montagne. Chi le conquisterà per primo e reclamerà le risorse per la propria tribù? "
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: Puoi trovare l'acqua lungo il fiume. II: I pupazzi di neve segnalano ulteriori fonti d'acqua. III: Ogni montagna possiede una sola risorsa."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
@@ -445,7 +447,7 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "La tua tribù dimora su questo bellissimo e solitario lago glaciale da un lungo periodo di tempo. Nessuno ti ha disturbato e le risorse sono state sufficienti per la tua intera tribù, ma qualche mese fa un'altra tribù è venuta dalle montagne e si è insediata qui. E ne sei certo, c'è spazio sufficiente per una sola tribù."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -499,7 +501,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Un'antica leggenda narra che questi sette regni, fioriti e prosperi per secoli, un giorno cadranno in una guerra devastante. Forse il tuo ultimo tradimento è stato di troppo e la profezia si avvererà?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -542,7 +544,7 @@ msgstr "Ultimi sopravvissuti"
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Quattro tribù in lotta per il predominio in una zona desolata. Le risorse sono sparsi in tutta la mappa."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -759,7 +761,7 @@ msgstr "Tre guerrieri"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr ""
+msgstr "Possenti montagne dividono questa terra in tre fertili valli. Ma un passo collega le valli e quindi una battaglia sembra inevitabile!"
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
@@ -805,13 +807,13 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "Quando il vento si sollevò e le prime dune si formarono su questa doppia laguna, nessuno si sarebbe aspettato che due tribù che stavano cercando disperatamente più risorse per sostenere le loro guerre infinite, sarebbero arrivate nello stesso momento in questo posto dimenticato e per le stesse ragioni."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Difendi le tue linee di trasporto, o utilizza le navi per aggirare l'avversario. Quindi rimuovi tutte le attività nemiche."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"

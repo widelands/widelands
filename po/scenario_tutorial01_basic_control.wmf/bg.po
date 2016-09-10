@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 08:57+0000\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-01 08:27+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -732,11 +732,11 @@ msgstr "Здравейте, пак съм аз! Този път Ви изпра�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Прозорецът за съобщения може да бъде превключен чрез бутона, който е най-отдясно в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
+msgstr "Прозорецът за съобщения може да бъде превключен чрез втория бутон от дясно наляво, в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""

@@ -15,6 +15,8 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
+  <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
+  <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
@@ -96,6 +98,22 @@
     </p>
     <p>
       A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amik törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat - vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
+    </p>
+  </description>
+  <description xml:lang="it">
+    <p>
+      Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
+    </p>
+    <p>
+      Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
+    </p>
+  </description>
+  <description xml:lang="pt">
+    <p>
+      Tu és o chefe dum pequeno clã. A tua tarefa é de construir um campo que se está sempre a desenvolver. Cada membro do clã vai fazer a sua parte para produzir o necessário para continuar o desenvolvimento.
+    </p>
+    <p>
+      Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar.
     </p>
   </description>
   <description xml:lang="sk">

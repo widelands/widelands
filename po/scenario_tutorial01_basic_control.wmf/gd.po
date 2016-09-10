@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-31 07:18+0000\n"
-"PO-Revision-Date: 2016-08-31 09:30+0000\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-01 08:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -733,11 +733,11 @@ msgstr "Seo mise a-rithist! Chuir mi teachdaireachd thugad an turas seo. Cuiridh
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Gabhaidh uinneag nan teachdaireachd a thoglachadh leis a’ phutan as fhaide deas aig a’ bhonn. Barrachd air sin, atharraichidh coltas a’ phutain seo nuair a bhios teachdaireachd ùr ri làimh, ach cluinnidh tu clag cuideachd gach turas a thig teachdaireachd ùr a-steach."
+msgstr "Gabhaidh uinneag nan teachdaireachd a thoglachadh leis an dàrna putan taobh deas aig a’ bhonn. Barrachd air sin, atharraichidh coltas a’ phutain seo nuair a bhios teachdaireachd ùr ri làimh, ach cluinnidh tu clag cuideachd gach turas a thig teachdaireachd ùr a-steach."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
