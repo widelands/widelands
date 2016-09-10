@@ -45,8 +45,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      flour = 6,
-      water = 6
+      { name = "water", amount = 6 },
+      { name = "flour", amount = 6 }
    },
    outputs = {
       "empire_bread"

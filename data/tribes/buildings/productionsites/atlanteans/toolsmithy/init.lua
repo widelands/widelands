@@ -41,9 +41,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 6,
-      log = 6,
-      spidercloth = 4
+      { name = "log", amount = 6 },
+      { name = "spidercloth", amount = 4 },
+      { name = "iron", amount = 6 }
    },
    outputs = {
       "bread_paddle",

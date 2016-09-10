@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wool = 8
+      { name = "wool", amount = 8 }
    },
    outputs = {
       "cloth"

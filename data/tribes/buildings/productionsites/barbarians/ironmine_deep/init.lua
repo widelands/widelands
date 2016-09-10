@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      snack = 6
+      { name = "snack", amount = 6 }
    },
    outputs = {
       "iron_ore"
