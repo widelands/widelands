@@ -514,12 +514,11 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
 
-		// NOCOMM franku: Please check if this is used anywhere
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-							/** TRANSLATORS: Tooltip in the messages window */
-							% _("Show all messages") % "0")
-							  .str());
+		                    /** TRANSLATORS: Tooltip in the messages window */
+								  % _("Show all messages") % pgettext("hotkey", "Alt + 0"))
+		                      .str());
 	}
 }
 
@@ -527,25 +526,25 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	geologistsbtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
+	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show geologists' messages only") % "1")
+										  % _("Show geologists' messages only") % pgettext("hotkey", "Alt + 1"))
 	                               .str());
-	economybtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
+	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show economy messages only") % "2")
+									  % _("Show economy messages only") % pgettext("hotkey", "Alt + 2"))
 	                            .str());
-	seafaringbtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
+	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show seafaring messages only") % "3")
+										 % _("Show seafaring messages only") % pgettext("hotkey", "Alt + 3"))
 	                              .str());
-	warfarebtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
+	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show warfare messages only") % "4")
+									  % _("Show warfare messages only") % pgettext("hotkey", "Alt + 4"))
 	                            .str());
-	scenariobtn_->set_tooltip((boost::format(_("%1% (Alt + %2%)"))
+	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show scenario messages only") % "5")
+										% _("Show scenario messages only") % pgettext("hotkey", "Alt + 5"))
 	                             .str());
 }
 
