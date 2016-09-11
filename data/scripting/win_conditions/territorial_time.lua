@@ -2,6 +2,9 @@
 --                   Territorial Time Win condition
 -- =======================================================================
 
+-- TODO(sirver): There is so much code duplication with territorial_lord.lua in
+-- here. Pull that out into a separate script and reuse.
+
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/formatting.lua"
 include "scripting/messages.lua"
@@ -102,7 +105,7 @@ return {
          end
       end
 
-      function _calc_points()
+      local function _calc_points()
          local teampoints = {}     -- points of teams
          local points = {} -- tracking points of teams and players without teams
          local maxplayerpoints = 0 -- the highest points of a player without team
@@ -158,12 +161,12 @@ return {
          return points
       end
 
-      function _percent(part, whole)
+      local function _percent(part, whole)
          return (part * 100) / whole
       end
 
       -- Helper function to get the points that the leader has
-      function _maxpoints(points)
+      local function _maxpoints(points)
          local max = 0
          for i=1,#points do
             if points[i][2] > max then max = points[i][2] end
@@ -173,7 +176,7 @@ return {
 
       -- Helper function that returns a string containing the current
       -- land percentages of players/teams.
-      function _status(points, has_had)
+      local function _status(points, has_had)
          local msg = ""
          for i=1,#points do
             msg = msg .. "\n"
@@ -199,7 +202,7 @@ return {
          return p(msg)
       end
 
-      function _send_state(points)
+      local function _send_state(points)
          set_textdomain("win_conditions")
          local msg1 = (_"%s owns more than half of the map’s area."):format(currentcandidate)
          msg1 = msg1 .. "<br>"
@@ -246,9 +249,11 @@ return {
 
       -- Start a new coroutine that checks for defeated players
       run(function()
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title,
-            lost_game.body, wc_descname, wc_version)
+         while remaining_time ~= 0 and remaining_max_time > 0 do
+            sleep(5000)
+            check_player_defeated(plrs, lost_game.title,
+               lost_game.body, wc_descname, wc_version)
+         end
       end)
 
       -- here is the main loop!!!
@@ -261,7 +266,6 @@ return {
          -- Check if a player or team is a candidate and update variables
          -- Returns the names and points for the teams and players without a team
          local points = _calc_points()
-
 
          -- Game is over, do stuff after loop
          if remaining_time <= 0 or remaining_max_time <= 0 then break end

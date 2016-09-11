@@ -100,8 +100,10 @@ return {
 
    -- Start a new coroutine that checks for defeated players
    run(function()
-      sleep(5000)
-      check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+      while remaining_time > 0 do
+         sleep(5000)
+         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+      end
    end)
 
    -- Install statistics hook
