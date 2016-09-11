@@ -84,11 +84,10 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
 		{100, 97, 94, 91, 88,84,81,78,74,70,66,62,58,53,49,44,38,32,15,17,0},
 		{100,	95,	90,	85,	80,	75,	70,	65,	60,	55,	50,	45,	40,	35,	30,	25,	20,	15,	10,	5,	0},
-		{-100,	-99, -98, -96, -94,	-92, -88, -83, -73,	-55, 0,	55,	73,	83,	88,	92,	94,	96,	98,	99,	100}
 		};
 
-constexpr int  magic_numbers_size = 18;
-constexpr int  neuron_pool_size = 48;
+constexpr int  magic_numbers_size = 30;
+constexpr int  neuron_pool_size = 60;
 constexpr int  bi_neuron_pool_size = 10;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
@@ -524,17 +523,17 @@ private:
 
 //Bi_Neuron receives two bools and returns a value with probability of 1/4
 struct Bi_Neuron {
-	Bi_Neuron(uint8_t, int8_t, uint16_t); //type, weight (amount)
+	Bi_Neuron(int8_t, uint8_t, uint16_t); //weight, type, id
 	void set_weight(int8_t w);
 	int8_t get_weight() {return weight;};
 	int8_t get_result(bool, bool);
 	void set_type(uint8_t);
-	uint8_t get_type() {return type;};
+	uint8_t get_type();
 	uint16_t get_id() {return id;};
 		
 private:
-	uint8_t type;
 	int8_t weight;
+	uint8_t type;
 	uint16_t id;
 	
 };
@@ -548,7 +547,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);
-	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t);
+	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t, uint32_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
@@ -680,6 +679,7 @@ public:
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_visible_enemies_power(uint32_t);
+	uint32_t get_enemies_average_power();
 	uint32_t get_old_visible_enemies_power(uint32_t);
 	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);

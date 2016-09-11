@@ -471,7 +471,9 @@ void DefaultAI::think() {
 									player_statistics.get_player_casualities(player_number()),
 									allships.size(),
 									numof_warehouses_,
-									gametime);
+									gametime,
+									player_statistics.get_player_power(player_number())
+										- player_statistics.get_enemies_average_power());
 			set_taskpool_task_time(gametime +   kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
 		case SchedulerTaskId::kUnset :
@@ -949,7 +951,7 @@ void DefaultAI::late_initialization() {
 		}
 		for (uint32_t i = 0; i < persistent_data->bi_neuron_pool_size; i = i+1){
 			management_data.bi_neuron_pool.push_back(
-				Bi_Neuron(persistent_data->bi_neuron_types[i], persistent_data->bi_neuron_weights[i], management_data.new_bi_neuron_id()));	
+				Bi_Neuron(persistent_data->bi_neuron_weights[i], persistent_data->bi_neuron_types[i], management_data.new_bi_neuron_id()));	
 		}
 		assert (persistent_data->magic_numbers_size == magic_numbers_size);
 		assert (persistent_data->neuron_pool_size == neuron_pool_size);
@@ -1492,18 +1494,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	//generally
 	field.military_score_ += field.unconnected_nearby * management_data.get_military_number_at(4);
-	const int32_t land_score = management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
-		* resource_necessity_territory_ / 100;
-	assert (land_score >= -100 && land_score <= 100);
+	const int32_t land_score = 50 + management_data.neuron_pool[21].get_result_safe((field.unowned_land_nearby + 8) / 9 )
+		* resource_necessity_territory_ / 200;
+	assert (land_score >= 0 && land_score <= 100);
 	//printf ("Land score: %3d\n", land_score);
 	field.military_score_ += land_score;
-	const int32_t mines_score = management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 9)  / 10)
-		* resource_necessity_mines_ / 100;
+	const int32_t mines_score = 50 + management_data.neuron_pool[22].get_result_safe((field.unowned_mines_spots_nearby + 9)  / 10)
+		* resource_necessity_mines_ / 200;
+	assert (mines_score >= 0 && mines_score <= 100);	
 	field.military_score_ +=  
 		management_data.neuron_pool[12].get_result_safe(field.own_military_sites_nearby_());
 	field.military_score_ +=  
 		management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_() / 4);		
-	assert (mines_score >= -100 && mines_score <= 100);		
+
 	field.military_score_ += mines_score;
 	field.military_score_ += field.preferred * management_data.get_military_number_at(8) / 5;
 	field.military_score_ += field.unconnected_nearby * management_data.get_military_number_at(10)  / 5;
@@ -1638,7 +1641,8 @@ void DefaultAI::update_productionsite_stats() {
 	}
 
 	if (resource_necessity_water_needed_) {
-		resource_necessity_water_ = management_data.neuron_pool[35].get_result_safe(fishers_count * 4);
+		resource_necessity_water_ = std::abs(management_data.neuron_pool[35].get_result_safe(fishers_count * 4));
+		assert (resource_necessity_water_ >= 0 && resource_necessity_water_ <= 100);
 	}
 
 	// for mines_ also
@@ -1861,13 +1865,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// set necessity for mines
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
-	resource_necessity_mines_ = management_data.neuron_pool[34].get_result_safe(virtual_mines * 2);
+	resource_necessity_mines_ = std::abs(management_data.neuron_pool[34].get_result_safe(virtual_mines * 2));
+	assert(resource_necessity_mines_ >= 0 && resource_necessity_mines_ <= 100);
 
 	// here we calculate how badly we need to expand, result is number (0-100)
 	// like a percent
-	resource_necessity_territory_ = 50 +(management_data.neuron_pool[31].get_result_safe(productionsites.size() / 2) +
+	resource_necessity_territory_ = std::abs(management_data.neuron_pool[31].get_result_safe(productionsites.size() / 2) +
 		management_data.neuron_pool[32].get_result_safe(BUILDCAPS_BIG) + 
-		management_data.neuron_pool[33].get_result_safe(spots_/20)) / 6;
+		management_data.neuron_pool[33].get_result_safe(spots_/20)) / 3;
 	assert(resource_necessity_territory_ >= 0 && resource_necessity_territory_ <=100);
 	//printf ("resource_necessity_territory_: %3d\n", resource_necessity_territory_ );
 	
@@ -2118,22 +2123,29 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio *= 2;
+					//} else if (persistent_data->trees_around_cutters < 30){
+						//;
 					} else if (bf->trees_nearby < 2 && bf->supporters_nearby.at(bo.outputs.at(0) == 0)) {
 						continue;
 					}
 
+					//NOCOM
 					// consider cutters and rangers nearby
-					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * 20;
+					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25)/3);
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
 
-					prio += 2 * bf->trees_nearby;
+					prio += std::abs(management_data.get_military_number_at(26)/20) * bf->trees_nearby;
 
 				} else if (bo.need_rocks) {
 
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					prio = 2 * bf->rocks_nearby;
+					prio = 2 * bf->rocks_nearby; //NOCOM
+					
+					if (bf->rocks_nearby > 0 && bf->near_border) {
+						prio += management_data.get_military_number_at(27) / 5;
+						}
 
 					// value is initialized with 1 but minimal value that can be
 					// calculated is 11
@@ -2209,22 +2221,35 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							continue;
 						}
 
+						prio = 0;
+
 						// for small starting spots - to prevent crowding by rangers and trees
 						if (spots_ < (4 * bo.total_count()) && bo.total_count() > 0) {
-							continue;
+							prio -= bo.total_count() * management_data.get_military_number_at(29) ;
 						}
 
 						if (bo.total_count() == 0) {
-							prio = 200;
+							prio += 200;
 						} else {
-							prio = 50 / bo.total_count();
+							prio += 50 / bo.total_count();
 						}
 
 						// considering producers
+						if (get_stocklevel(bo, gametime) < 2){
+							prio += std::abs(management_data.neuron_pool[50].get_result_safe(gametime / 1000 / 60));
+							}
+						
+						prio += management_data.neuron_pool[49].get_result_safe(bf->trees_nearby) / 3;
+
+						if (persistent_data->trees_around_cutters < 20 && new_buildings_stop_) {
+							prio += management_data.get_military_number_at(28);
+							}
+												
 						prio += std::min<uint8_t>(bf->producers_nearby.at(bo.production_hint), 4) * 5 -
 						        new_buildings_stop_ * 15 - bf->space_consumers_nearby * 5 -
-						        bf->rocks_nearby / 3 + bf->trees_nearby / 2 +
-						        std::min<uint8_t>(bf->supporters_nearby.at(bo.production_hint), 4) * 3;
+						        bf->rocks_nearby / 3  +
+						        bf->supporters_nearby.at(bo.production_hint) * 3;
+						//printf (" %d priority for ranger here %d, overdue: %d\n", player_number(), prio, bo.new_building_overdue);
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
 
@@ -4048,10 +4073,11 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 }
 
 BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
-                                                      const uint32_t gametime) { //NOCOM
+                                                      const uint32_t gametime) {
 	bo.primary_priority = 0;
 
 	if (bo.cnt_under_construction > 0 || bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+		bo.new_building_overdue = 0;
 		return BuildingNecessity::kForbidden;
 	}
 
@@ -4061,37 +4087,60 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	//  Militarysites are slightly important as well, to have a bigger
 	//  chance for a warehouses (containing waiting soldiers or wares
 	//  needed for soldier training) near the frontier.
-	bo.primary_priority = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
-	       static_cast<int32_t>(numof_warehouses_) * (35 + management_data.get_military_number_at(15) / 5);
-	if (bo.primary_priority > 0) {
+	//bo.primary_priority = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
+	       //static_cast<int32_t>(numof_warehouses_) * (35 + management_data.get_military_number_at(15) / 5);
+	int32_t needed_count = static_cast<int32_t>(productionsites.size() + mines_.size()) /
+		(40 + management_data.get_military_number_at(21) / 5) + 1;
+	assert (needed_count >= 0 && needed_count <= (static_cast<uint16_t>(productionsites.size() + mines_.size()) / 10) + 2);
+	
+	       
+	if (needed_count > numof_warehouses_) {
 		warehouse_needed = true;
+		bo.primary_priority = (needed_count - numof_warehouses_) * (20 + management_data.get_military_number_at(22) / 5);
 	} else {
 		bo.primary_priority = 0;
 	}
 
+	//NOCOM
+	if ((productionsites.size() + mines_.size()) > 20 && numof_warehouses_ <= 1) {
+		bo.primary_priority += 15 + management_data.get_military_number_at(23)/5;
+	}
+
+	//NOCOM
+	if (numof_warehouses_ <= 1 && player_statistics.any_enemy_seen_lately(gametime)) {
+		bo.primary_priority += 15 + management_data.get_military_number_at(24)/5;
+	}
+	
 	bo.primary_priority += management_data.neuron_pool[45].get_result_safe(numof_warehouses_ * 3) / 5;
 	bo.primary_priority += management_data.neuron_pool[46].get_result_safe(gametime / 1000 / 60 / 5) / 5;
 
 	// But we still can built a port if it is first one
 	if (bo.is_port && bo.total_count() == 0 && productionsites.size() > 5 &&
 	    seafaring_economy) {
-		bo.primary_priority += 5 + management_data.get_military_number_at(16)/10;
+		bo.primary_priority += 10 + management_data.get_military_number_at(16)/10;
 		warehouse_needed = true;
 	}
 
 	if (!warehouse_needed) {
+		bo.new_building_overdue = 0;
 		return BuildingNecessity::kForbidden;;
 	}
 
 	// we prefer ports to a normal warehouse
 	if (bo.is_port) {
-		bo.primary_priority += +10 + management_data.get_military_number_at(17) / 10;
+		bo.primary_priority += 10 + management_data.get_military_number_at(17) / 10;
 	}
+
+	// considering overdue time
+	bo.primary_priority += -20 + bo.new_building_overdue;
 	
 	if (bo.primary_priority > 0) {
+		bo.new_building_overdue += 1;
 		return BuildingNecessity::kAllowed;
 	} else {
+		bo.new_building_overdue = 0;
 		return BuildingNecessity::kForbidden;
+
 	}
 }		
 
@@ -4332,6 +4381,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = limit_cnt_target(bo.cnt_target, bo.cnt_limit_by_aimode);
 
+			//printf (" %d:  rangers target: %d, rangers %s\n",
+				//player_number(),
+				//bo.cnt_target,
+				//(wood_policy_ == WoodPolicy::kAllowRangers)?"allowed":"not allowed");
+
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
 				return BuildingNecessity::kForbidden;
 			}
@@ -4540,7 +4594,6 @@ void DefaultAI::count_military_vacant_positions() {
 	int32_t vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ += 5 * std::min<int32_t>((tso.site->soldier_capacity() - tso.site->stationed_soldiers().size()), 2);
-		//vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10; NOCOM ???
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
@@ -5605,12 +5658,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	player_statistics.recalculate_team_power();
 
-	printf ("%d : visible enemies (%d) power: %3d -> %3d, any seen at %u\n",
-		pn,
-		player_statistics.enemies_seen_lately_count(gametime),
-		player_statistics.get_old_visible_enemies_power(gametime),
-		player_statistics.get_visible_enemies_power(gametime),
-		player_statistics.enemy_last_seen());
+	//printf ("%d : visible enemies (%d) power: %3d -> %3d, any seen at %u\n",
+		//pn,
+		//player_statistics.enemies_seen_lately_count(gametime),
+		//player_statistics.get_old_visible_enemies_power(gametime),
+		//player_statistics.get_visible_enemies_power(gametime),
+		//player_statistics.enemy_last_seen());
 
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 100;
@@ -5721,48 +5774,38 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// decreased if promotion of soldiers is stalled)
 	int8_t training_score = 0;
 	if (persistent_data->last_soldier_trained > gametime) {
-		training_score += management_data.neuron_pool[19].get_result_safe((gametime - persistent_data->last_soldier_trained) / 60 / 1000) / 10;
-		//// No soldier was ever trained ...
-		//switch (type_) {
-		//case DefaultAI::Type::kNormal:
-			//training_score = -8;
-			//break;
-		//case DefaultAI::Type::kWeak:
-			//training_score = -4;
-			//break;
-		//case DefaultAI::Type::kVeryWeak:
-			//training_score = -2;
-		//}
-	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
-		// was any soldier trained within last 10 minutes
+		// No soldier was ever trained ...
 		switch (type_) {
 		case DefaultAI::Type::kNormal:
-			training_score = -4;
+			training_score = -8;
 			break;
 		case DefaultAI::Type::kWeak:
-			training_score = -2;
+			training_score = -4;
 			break;
 		case DefaultAI::Type::kVeryWeak:
-			training_score = -1;
+			training_score = -2;
 		}
+	} else {
+		training_score += management_data.neuron_pool[19].get_result_safe((gametime - persistent_data->last_soldier_trained) / 60 / 1000) / 10;
 	}
+	
+	//switch (type_) {
+	//case DefaultAI::Type::kNormal:
+		//training_score = -4;
+		//break;
+	//case DefaultAI::Type::kWeak:
+		//training_score = -2;
+		//break;
+	//case DefaultAI::Type::kVeryWeak:
+		//training_score = -1;
+	//}
+
 	// Also we should have at least some training sites to be more willing to attack
 	// Of course, very weak AI can have only one trainingsite so will be always penalized by this
 	training_score += management_data.neuron_pool[23].get_result_safe((ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) * 4) / 10;
-	//switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
-	//case 0:
-		//training_score -= 6;
-		//break;
-	//case 1:
-		//training_score -= 3;
-		//break;
-	//case 2:
-		//training_score -= 1;
-		//break;
-	//default:;
-	//}
 
-	//some black box magic for growth
+
+	//some black box magic related to growth
 	training_score += management_data.bi_neuron_pool[0].get_result( 
 		player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
 		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn)) / 10;		
@@ -5875,20 +5918,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				site->second.score -= static_cast<uint8_t>(soldier_status_);
 
-				if (site->second.mines_nearby == ExtendedBool::kFalse) {
-					site->second.score -= 1;
-				} else {
-					site->second.score += 1;
+				if (site->second.mines_nearby == ExtendedBool::kTrue) {
+					site->second.score += management_data.get_military_number_at(18) / 15;
 				}
 				// we dont want to attack multiple players at the same time too eagerly
 				if (owner_number != persistent_data->last_attacked_player) {
-					site->second.score -= 3;
+					site->second.score -= 3 + management_data.get_military_number_at(19) / 40;
 				}
-				// if we dont have mines yet
-				if (mines_.size() <= 2) {
-					site->second.score -= 8;
-				}
-
+				
+				//NOCOM
+				site->second.score += management_data.bi_neuron_pool[4].get_result(
+					mines_.size() <= 2, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
+				site->second.score += management_data.bi_neuron_pool[5].get_result(
+					mines_.size() == 0, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
+				site->second.score += management_data.bi_neuron_pool[6].get_result(
+					mines_.size() <= 5, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
+				
 				// Applying (decreasing score) if trainingsites are not working
 				site->second.score += training_score;
 
@@ -5974,7 +6019,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// setting no attack counter here
 	// this gauranties that it will not be attacked in next 3
 	// turns
-	enemy_sites[best_target].no_attack_counter = -3;
+	//enemy_sites[best_target].no_attack_counter = -3; //NOCOM
+	enemy_sites[best_target].no_attack_counter = -3 + management_data.get_military_number_at(20) / 40;
+	assert(enemy_sites[best_target].no_attack_counter > -7 && enemy_sites[best_target].no_attack_counter < 0);
 
 	Flag* flag = nullptr;  // flag of a building to be attacked
 	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -5999,6 +6046,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	above_ten = (above_ten > 30) ? 30 : above_ten;
 
 	attackers = attackers - (gametime % 3) - ((above_ten > 0) ? gametime % above_ten : 0);
+	attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2) / 10; //NOCOM
 
 	if (attackers <= 0) {
 		return false;
