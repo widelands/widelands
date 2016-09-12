@@ -199,10 +199,10 @@ return {
                p.see_all = 1
                if candidateisteam and currentcandidate == p.team
                   or not candidateisteam and currentcandidate == p.name then
-                  p:send_message(won_game_over.title, won_game_over.body)
+                  p:send_message(won_game_over.title, rt(won_game_over.body))
                   wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                else
-                  p:send_message(lost_game_over.title, lost_game_over.body)
+                  p:send_message(lost_game_over.title, rt(lost_game_over.body))
                   wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                end
             end

@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/formatting.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 
@@ -83,19 +84,16 @@ return {
    local function _send_state()
       set_textdomain("win_conditions")
       local playerpoints = _calc_points()
-      local msg = (ngettext("The game will end in %i minute.", "The game will end in %i minutes.", remaining_time))
+      local msg = p(ngettext("The game will end in %i minute.", "The game will end in %i minutes.", remaining_time))
             :format(remaining_time)
-      msg = msg .. "\n\n"
-      msg = msg .. game_status.body
+      msg = msg .. "<p font-size=8> <br></p>" .. game_status.body
       for idx,plr in ipairs(plrs) do
-         msg = msg .. "\n"
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
                :format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-         msg = msg ..  (_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
+         msg = msg .. p(_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
       end
-
-      broadcast(plrs, game_status.title, msg)
+      broadcast(plrs, game_status.title, rt(msg))
    end
 
    -- Start a new coroutine that checks for defeated players
@@ -137,30 +135,29 @@ return {
    end
    table.sort(points, function(a,b) return a[2] < b[2] end)
 
-   local msg = "\n\n"
-   msg = msg .. game_status.body
+   local msg = "<p font-size=8> <br></p>" .. game_status.body
    for idx,plr in ipairs(plrs) do
-      msg = msg .. "\n"
+      msg = msg .. "<p font-size=8> <br></p>"
       local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
       -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-      msg = msg ..  (_"%1$s had %2$s."):bformat(plr.name,trees)
+      msg = msg ..  p(_"%1$s had %2$s."):bformat(plr.name,trees)
    end
-   msg = msg .. "\n\n"
+   msg = msg .. "<p font-size=8> <br></p>"
    local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
          :format(playerpoints[points[#points][1].number])
    -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-   msg = msg ..  (_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
+   msg = msg ..  h3(_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
 
    local privmsg = ""
    for i=1,#points-1 do
-      privmsg = lost_game_over.title
+      privmsg = lost_game_over.body
       privmsg = privmsg .. msg
-      points[i][1]:send_message(lost_game_over.body, privmsg)
+      points[i][1]:send_message(lost_game_over.title, rt(privmsg))
       wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
    end
-   privmsg = won_game_over.title
+   privmsg = won_game_over.body
    privmsg = privmsg .. msg
-   points[#points][1]:send_message(won_game_over.body, privmsg)
+   points[#points][1]:send_message(won_game_over.title, rt(privmsg))
    wl.game.report_result(points[#points][1], 1,
       make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
 end
