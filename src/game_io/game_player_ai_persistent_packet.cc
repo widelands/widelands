@@ -81,6 +81,15 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				}
 				assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_weights.size());	
 				assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_types.size());
+				
+				//F-neurons
+				player->ai_data.f_neuron_pool_size = fr.unsigned_32();
+				for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
+					player->ai_data.f_neurons.push_back(fr.unsigned_16());
+				}				
+				assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());
+
+				
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());
 			}
@@ -154,6 +163,15 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		for (uint16_t i = 0; i < player->ai_data.bi_neuron_pool_size; i = i + 1) {
 			fw.unsigned_8(player->ai_data.bi_neuron_types[i]);
 		}		
+
+		// F-Neurons
+		fw.unsigned_32(player->ai_data.f_neuron_pool_size);
+		assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());	
+	
+		for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
+			fw.unsigned_16(player->ai_data.f_neurons[i]);
+		}
+
 	}
 
 	fw.write(fs, "binary/player_ai");

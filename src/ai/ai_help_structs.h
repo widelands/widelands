@@ -86,9 +86,10 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{100,	95,	90,	85,	80,	75,	70,	65,	60,	55,	50,	45,	40,	35,	30,	25,	20,	15,	10,	5,	0},
 		};
 
-constexpr int  magic_numbers_size = 30;
+constexpr int  magic_numbers_size = 50;
 constexpr int  neuron_pool_size = 60;
 constexpr int  bi_neuron_pool_size = 10;
+constexpr int  f_neuron_pool_size = 20;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -521,6 +522,18 @@ private:
 	int32_t highest_pos;
 };
 
+
+struct FNeuron {
+	FNeuron(uint16_t);
+	
+	void flip_bit(uint8_t);
+	//void set(uint8_t);
+	bool get_result(bool, bool, bool, bool);
+	uint32_t get_int();
+private:
+	std::bitset<32> core;
+};
+
 //Bi_Neuron receives two bools and returns a value with probability of 1/4
 struct Bi_Neuron {
 	Bi_Neuron(int8_t, uint8_t, uint16_t); //weight, type, id
@@ -544,6 +557,7 @@ struct ManagementData {
 	
 	std::vector<Neuron> neuron_pool;
 	std::vector<Bi_Neuron> bi_neuron_pool;
+	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);

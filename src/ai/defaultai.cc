@@ -941,6 +941,7 @@ void DefaultAI::late_initialization() {
 		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
 		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
 		assert (persistent_data->neuron_functs.size() == neuron_pool_size);
+		assert (persistent_data->f_neurons.size() == f_neuron_pool_size);
 
 		for (uint32_t i = 0; i < persistent_data->magic_numbers_size; i = i+1){
 			management_data.set_military_number_at(i, persistent_data->magic_numbers[i]);
@@ -953,12 +954,18 @@ void DefaultAI::late_initialization() {
 			management_data.bi_neuron_pool.push_back(
 				Bi_Neuron(persistent_data->bi_neuron_weights[i], persistent_data->bi_neuron_types[i], management_data.new_bi_neuron_id()));	
 		}
-		assert (persistent_data->magic_numbers_size == magic_numbers_size);
-		assert (persistent_data->neuron_pool_size == neuron_pool_size);
-		assert (persistent_data->magic_numbers.size() == magic_numbers_size);
-		assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
-		assert (persistent_data->neuron_functs.size() == neuron_pool_size);	
-		assert (management_data.neuron_pool.size() == neuron_pool_size);	
+		
+		for (uint32_t i = 0; i < persistent_data->f_neuron_pool_size; i = i+1){
+			management_data.f_neuron_pool.push_back(
+				FNeuron(persistent_data->f_neurons[i]));	
+		}
+		
+		//assert (persistent_data->magic_numbers_size == magic_numbers_size);
+		//assert (persistent_data->neuron_pool_size == neuron_pool_size);
+		//assert (persistent_data->magic_numbers.size() == magic_numbers_size);
+		//assert (persistent_data->neuron_weights.size() == neuron_pool_size);		
+		//assert (persistent_data->neuron_functs.size() == neuron_pool_size);	
+		//assert (management_data.neuron_pool.size() == neuron_pool_size);	
 		
 		management_data.test_consistency();	
 		management_data.dump_data();					
@@ -2129,7 +2136,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					//NOCOM
 					// consider cutters and rangers nearby
 					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25)/3);
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
@@ -2141,7 +2147,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					prio = 2 * bf->rocks_nearby; //NOCOM
+					prio = 2 * bf->rocks_nearby;
 					
 					if (bf->rocks_nearby > 0 && bf->near_border) {
 						prio += management_data.get_military_number_at(27) / 5;
@@ -2236,14 +2242,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						// considering producers
 						if (get_stocklevel(bo, gametime) < 2){
-							prio += std::abs(management_data.neuron_pool[50].get_result_safe(gametime / 1000 / 60));
+							prio += std::abs(management_data.neuron_pool[50].get_result_safe(gametime / 1000 / 30));
 							}
 						
 						prio += management_data.neuron_pool[49].get_result_safe(bf->trees_nearby) / 3;
 
+						if (gametime < 60 * 60 * 1000 || get_stocklevel(bo, gametime) < 2) {
+							prio += management_data.neuron_pool[51].get_result_safe(persistent_data->trees_around_cutters / 2); //NOCOM
+						}
+
 						if (persistent_data->trees_around_cutters < 20 && new_buildings_stop_) {
 							prio += management_data.get_military_number_at(28);
-							}
+						}
 												
 						prio += std::min<uint8_t>(bf->producers_nearby.at(bo.production_hint), 4) * 5 -
 						        new_buildings_stop_ * 15 - bf->space_consumers_nearby * 5 -
@@ -4101,12 +4111,10 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		bo.primary_priority = 0;
 	}
 
-	//NOCOM
 	if ((productionsites.size() + mines_.size()) > 20 && numof_warehouses_ <= 1) {
 		bo.primary_priority += 15 + management_data.get_military_number_at(23)/5;
 	}
 
-	//NOCOM
 	if (numof_warehouses_ <= 1 && player_statistics.any_enemy_seen_lately(gametime)) {
 		bo.primary_priority += 15 + management_data.get_military_number_at(24)/5;
 	}
@@ -4674,9 +4682,26 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
+	//are we willing to train another soldier NOCOM
+	bool want_train = true;
+	const PlayerNumber pn = player_number();
+	
+	if (tso.site->soldier_capacity() == 0 && persistent_data->last_soldier_trained < gametime) {
+		if ((gametime - persistent_data->last_soldier_trained) <  static_cast<uint16_t>(std::abs(management_data.get_military_number_at(30) / 5))) {
+			if(management_data.neuron_pool[99].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3) >
+				std::abs(management_data.get_military_number_at(31))) {
+					want_train = false;
+			} else if (player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) -
+				(player_statistics.get_visible_enemies_power(gametime) - player_statistics.get_old_visible_enemies_power(gametime)) >
+				static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 2))) {
+					want_train = false;
+			} 
+		}
+	}
+
 	// if soldier capacity is set to 0, we need to find out if the site is
 	// supplied enough to incrase the capacity to 1
-	if (tso.site->soldier_capacity() == 0) {
+	if (want_train && tso.site->soldier_capacity() == 0) {
 
 		// First subsitute wares
 		int32_t filled = 0;
@@ -5926,7 +5951,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 3 + management_data.get_military_number_at(19) / 40;
 				}
 				
-				//NOCOM
 				site->second.score += management_data.bi_neuron_pool[4].get_result(
 					mines_.size() <= 2, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
 				site->second.score += management_data.bi_neuron_pool[5].get_result(
@@ -6019,7 +6043,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// setting no attack counter here
 	// this gauranties that it will not be attacked in next 3
 	// turns
-	//enemy_sites[best_target].no_attack_counter = -3; //NOCOM
 	enemy_sites[best_target].no_attack_counter = -3 + management_data.get_military_number_at(20) / 40;
 	assert(enemy_sites[best_target].no_attack_counter > -7 && enemy_sites[best_target].no_attack_counter < 0);
 
@@ -6046,7 +6069,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	above_ten = (above_ten > 30) ? 30 : above_ten;
 
 	attackers = attackers - (gametime % 3) - ((above_ten > 0) ? gametime % above_ten : 0);
-	attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2) / 10; //NOCOM
+	attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2) / 10;
 
 	if (attackers <= 0) {
 		return false;
