@@ -205,7 +205,7 @@ public:
 		std::vector<int8_t> neuron_functs;
 		std::vector<int8_t> bi_neuron_weights;
 		std::vector<uint8_t> bi_neuron_types;
-		std::vector<uint16_t> f_neurons;
+		std::vector<uint8_t> f_neurons;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

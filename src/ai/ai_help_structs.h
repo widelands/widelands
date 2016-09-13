@@ -90,6 +90,7 @@ constexpr int  magic_numbers_size = 50;
 constexpr int  neuron_pool_size = 60;
 constexpr int  bi_neuron_pool_size = 10;
 constexpr int  f_neuron_pool_size = 20;
+constexpr int  f_neuron_bit_size = 5;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -524,14 +525,14 @@ private:
 
 
 struct FNeuron {
-	FNeuron(uint16_t);
+	FNeuron(uint8_t);
 	
 	void flip_bit(uint8_t);
 	//void set(uint8_t);
-	bool get_result(bool, bool, bool, bool);
-	uint32_t get_int();
+	bool get_result(bool, bool, bool, bool bool4 = true , bool bool5 = true);
+	uint8_t get_int();
 private:
-	std::bitset<32> core;
+	std::bitset<f_neuron_bit_size> core;
 };
 
 //Bi_Neuron receives two bools and returns a value with probability of 1/4

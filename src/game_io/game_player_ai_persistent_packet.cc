@@ -85,7 +85,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				//F-neurons
 				player->ai_data.f_neuron_pool_size = fr.unsigned_32();
 				for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
-					player->ai_data.f_neurons.push_back(fr.unsigned_16());
+					player->ai_data.f_neurons.push_back(fr.unsigned_8());
 				}				
 				assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());
 
@@ -169,7 +169,7 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		assert (player->ai_data.f_neuron_pool_size == player->ai_data.f_neurons.size());	
 	
 		for (uint16_t i = 0; i < player->ai_data.f_neuron_pool_size; i = i + 1) {
-			fw.unsigned_16(player->ai_data.f_neurons[i]);
+			fw.unsigned_8(player->ai_data.f_neurons[i]);
 		}
 
 	}

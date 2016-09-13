@@ -2130,11 +2130,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio *= 2;
-					//} else if (persistent_data->trees_around_cutters < 30){
-						//;
-					} else if (bf->trees_nearby < 2 && bf->supporters_nearby.at(bo.outputs.at(0) == 0)) {
-						continue;
-					}
+					} else if (management_data.f_neuron_pool[4].get_result(
+							bf->trees_nearby > 25,
+							bf->producers_nearby.at(bo.outputs.at(0)) >= bf->supporters_nearby.at(bo.outputs.at(0)),
+							bo.total_count() >= 2,
+							new_buildings_stop_,
+							true)) {
+								continue;
+					} 
+					
+					prio += management_data.neuron_pool[53].get_result_safe(get_stocklevel(bo, gametime) / 2) / 5;
 
 					// consider cutters and rangers nearby
 					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * std::abs(management_data.get_military_number_at(25)/3);
@@ -2223,16 +2228,41 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert(bo.new_building == BuildingNecessity::kNeeded);
 
 						// if there are too many trees nearby
-						if (bf->trees_nearby > 25 && bo.total_count() >= 1) {
-							continue;
-						}
+						//if (bf->trees_nearby > 25 && bo.total_count() >= 1) {
+							//continue;
+						//}
+						
+						if (management_data.f_neuron_pool[3].get_result(
+							bf->trees_nearby > 25,
+							bo.total_count() >= 1,
+							bo.total_count() >= 2,
+							new_buildings_stop_,
+							true)) {
+								continue;
+								}
+						
 
 						prio = 0;
 
-						// for small starting spots - to prevent crowding by rangers and trees
-						if (spots_ < (4 * bo.total_count()) && bo.total_count() > 0) {
-							prio -= bo.total_count() * management_data.get_military_number_at(29) ;
-						}
+						prio += management_data.f_neuron_pool[2].get_result(
+							spots_ < (4 * bo.total_count()),
+							bo.total_count() == 0,
+							get_stocklevel(bo, gametime) < 2,
+							new_buildings_stop_,
+							persistent_data->trees_around_cutters) * management_data.get_military_number_at(36) / 2;
+							
+						prio += management_data.f_neuron_pool[1].get_result(
+							gametime < 60 * 60 * 1000,
+							get_stocklevel(bo, gametime) < 2,
+							persistent_data->trees_around_cutters + 5 < bf->trees_nearby,
+							bf->near_border,
+							persistent_data->trees_around_cutters)
+								* management_data.get_military_number_at(37) / 2;							
+
+						//// for small starting spots - to prevent crowding by rangers and trees
+						//if (spots_ < (4 * bo.total_count()) && bo.total_count() > 0) {
+							//prio -= bo.total_count() * management_data.get_military_number_at(29) ;
+						//}
 
 						if (bo.total_count() == 0) {
 							prio += 200;
@@ -2240,21 +2270,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							prio += 50 / bo.total_count();
 						}
 
-						// considering producers
-						if (get_stocklevel(bo, gametime) < 2){
-							prio += std::abs(management_data.neuron_pool[50].get_result_safe(gametime / 1000 / 30));
-							}
+						//// considering producers
+						//if (get_stocklevel(bo, gametime) < 2){
+							//prio += std::abs(management_data.neuron_pool[50].get_result_safe(gametime / 1000 / 30));
+							//}
 						
 						prio += management_data.neuron_pool[49].get_result_safe(bf->trees_nearby) / 3;
 
-						if (gametime < 60 * 60 * 1000 || get_stocklevel(bo, gametime) < 2) {
-							prio += management_data.neuron_pool[51].get_result_safe(persistent_data->trees_around_cutters / 2); //NOCOM
-						}
-
-						if (persistent_data->trees_around_cutters < 20 && new_buildings_stop_) {
-							prio += management_data.get_military_number_at(28);
-						}
-												
+										
 						prio += std::min<uint8_t>(bf->producers_nearby.at(bo.production_hint), 4) * 5 -
 						        new_buildings_stop_ * 15 - bf->space_consumers_nearby * 5 -
 						        bf->rocks_nearby / 3  +
@@ -4682,23 +4705,24 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 	}
 
-	//are we willing to train another soldier NOCOM
+	//are we willing to train another soldier
 	bool want_train = true;
 	const PlayerNumber pn = player_number();
-	
-	if (tso.site->soldier_capacity() == 0 && persistent_data->last_soldier_trained < gametime) {
-		if ((gametime - persistent_data->last_soldier_trained) <  static_cast<uint16_t>(std::abs(management_data.get_military_number_at(30) / 5))) {
-			if(management_data.neuron_pool[99].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3) >
-				std::abs(management_data.get_military_number_at(31))) {
-					want_train = false;
-			} else if (player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) -
-				(player_statistics.get_visible_enemies_power(gametime) - player_statistics.get_old_visible_enemies_power(gametime)) >
-				static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 2))) {
-					want_train = false;
-			} 
-		}
-	}
 
+	if (tso.site->soldier_capacity() == 0 && persistent_data->last_soldier_trained < gametime) {
+		want_train= management_data.f_neuron_pool[0].get_result(
+			player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) -
+				(player_statistics.get_visible_enemies_power(gametime) - player_statistics.get_old_visible_enemies_power(gametime)) >
+				static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 2)),
+			player_statistics.get_visible_enemies_power(gametime) - player_statistics.get_old_visible_enemies_power(gametime) >
+				static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 2)),
+			player_statistics.get_player_power(pn) * 2 > player_statistics.get_visible_enemies_power(gametime),
+			management_data.neuron_pool[52].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3) >
+				std::abs(management_data.get_military_number_at(31)),
+			player_statistics.any_enemy_seen_lately(gametime));
+		}	
+				
+				
 	// if soldier capacity is set to 0, we need to find out if the site is
 	// supplied enough to incrase the capacity to 1
 	if (want_train && tso.site->soldier_capacity() == 0) {
@@ -5830,13 +5854,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	training_score += management_data.neuron_pool[23].get_result_safe((ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) * 4) / 10;
 
 
-	//some black box magic related to growth
-	training_score += management_data.bi_neuron_pool[0].get_result( 
+	//some black box magic related to growth NOCOM
+	training_score += management_data.f_neuron_pool[6].get_result(
 		player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
-		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn)) / 10;		
-	training_score += management_data.bi_neuron_pool[3].get_result( 
-		player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
-		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn)) / 10;
+		player_statistics.get_visible_enemies_power(pn) > player_statistics.get_old_visible_enemies_power(pn),
+		player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) > 0) *
+			management_data.get_military_number_at(34) / 10;
+	
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
@@ -5948,15 +5972,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 				// we dont want to attack multiple players at the same time too eagerly
 				if (owner_number != persistent_data->last_attacked_player) {
-					site->second.score -= 3 + management_data.get_military_number_at(19) / 40;
+					site->second.score -= 3 + management_data.get_military_number_at(38) / 40;
 				}
 				
-				site->second.score += management_data.bi_neuron_pool[4].get_result(
-					mines_.size() <= 2, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
-				site->second.score += management_data.bi_neuron_pool[5].get_result(
-					mines_.size() == 0, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
-				site->second.score += management_data.bi_neuron_pool[6].get_result(
-					mines_.size() <= 5, site->second.mines_nearby == ExtendedBool::kTrue) / 10;
+				//NOCOM
+				site->second.score += management_data.f_neuron_pool[5].get_result(
+					mines_.size() <= 2,
+					mines_.size() > 2 && mines_.size() < 6,
+					mines_.size() >= 6,
+					site->second.mines_nearby == ExtendedBool::kTrue) * 
+						management_data.get_military_number_at(19) / 10;
+
 				
 				// Applying (decreasing score) if trainingsites are not working
 				site->second.score += training_score;
@@ -5974,14 +6000,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score += 8;
 				}
 
-				// consider change in power
-				site->second.score += management_data.bi_neuron_pool[1].get_result( 
+				// consider change in power NOCOM
+				site->second.score += management_data.f_neuron_pool[4].get_result(
 					player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
-					player_statistics.get_player_power(owner_number) > player_statistics.get_old_player_power(owner_number)) / 10;		
-				site->second.score += management_data.bi_neuron_pool[2].get_result( 
-					player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
-					player_statistics.get_player_power(owner_number) > player_statistics.get_old_player_power(owner_number)) / 10;	
-
+					player_statistics.get_player_power(owner_number) > player_statistics.get_old_player_power(owner_number),
+					player_statistics.get_player_power(pn) - player_statistics.get_old_player_power(pn) > 0) *
+					management_data.get_military_number_at(35) / 10;
+					
 
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {
