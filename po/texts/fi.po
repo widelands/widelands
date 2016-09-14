@@ -68,7 +68,7 @@ msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein /usr/share/games/widelands)"
+msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)"
 
 #: ../../data/txts/LICENSE.lua:31
 msgid ""
