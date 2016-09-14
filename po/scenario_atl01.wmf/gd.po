@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 08:15+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 09:34+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Chaill sinn togalach!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr "Dèan cinnteach gun tèid bathar togail a sholar"
+msgstr "Dèan cinnteach gun dèid bathar togail a sholar"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
@@ -137,7 +137,7 @@ msgstr "Tog taigh-iasgair faisg air uisge gus èisg a thogail"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Tog ionad-àraich èisg faisg air an taigh-iasgair ach nach tèid na h-èisg à bith"
+msgstr "Tog ionad-àraich èisg faisg air an taigh-iasgair ach nach dèid na h-èisg à bith"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -227,7 +227,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Mar a nì gach treubh eile, tha na h-Atlantaich comasach air saighdearan a thrèanadh: trèanaidh an toll-dubh an ionnsaigh – seo prìomh-fheart nan Atlantach – agus trèanaidh an cuartan teàrnadh, slàinte is dìon. Thèid na nithean a shaothraicheas na gnìomhachasan a chleachdadh gus saighdearan nas fhearr a thrèanadh san dà ionad-trèanaidh."
+msgstr "Mar a nì gach treubh eile, tha na h-Atlantaich comasach air saighdearan a thrèanadh: trèanaidh an toll-dubh an ionnsaigh – seo prìomh-bhuadh nan Atlantach – agus trèanaidh an cuartan teàrnadh, slàinte is dìon. Thèid na nithean a shaothraicheas na gnìomhachasan a chleachdadh gus saighdearan nas fhearr a thrèanadh san dà ionad-trèanaidh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
@@ -519,7 +519,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Gum blàthaicheadh Satul agus thusa, a Cholionder! Bha mi a’ cnuasadh air ciamar am b’ urrainn dhuinn am biadh againn a dhèanamh san dòigh a b’ èifeachdaiche. Tha sinn a’ call cus dèanadais air sgàth ’s gu bheil ar muinntir cleachdte ri bhith a’ dèanamh am iadh aca fhèin. Ar leam b’ fheairrde sinn uile na dleasdanasan sin a sgaoileadh. Dè do bheachdan?"
+msgstr "Gum blàthaicheadh Satul agus thusa, a Cholionder! Bha mi a’ cnuasadh air ciamar am b’ urrainn dhuinn am biadh againn a dhèanamh san dòigh a b’ èifeachdaiche. Tha sinn a’ call cus cinneasachadh air sgàth ’s gu bheil ar muinntir cleachdte ri bhith a’ dèanamh am iadh aca fhèin. Ar leam b’ fheairrde sinn uile na dleasdanasan sin a sgaoileadh. Dè do bheachdan?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
@@ -898,7 +898,7 @@ msgstr "Bhuannaich thu am misean seo. Lean air adhart leis an ath-fhear no cum o
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

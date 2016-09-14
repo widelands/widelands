@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:14+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 09:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr "Stiùireadh bunasach"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "San oideachadh seo, ionnsaichidh tu mar a stiùiricheas tu rudan ann an Widelands agus mar a thogas tu togalaichean ’s rathaidean."
+msgstr "San oideachadh seo, ionnsaichidh tu Widelands a stiùireadh agus mar a thogas tu togalaichean ’s rathaidean."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
@@ -211,7 +211,7 @@ msgstr "Eaconamaidh"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "San oideachadh seo, ionnsaichidh tu mu na roghainnean a bheir Widelands dhut gus an eaconamaidh agad a ghleusadh. Mholamaid e airson cluicheadairean aig a bheil eòlas air a’ gheama mar-thà."
+msgstr "San oideachadh seo, ionnsaichidh tu mu na roghainnean a bheir Widelands dhut gus an eaconamaidh agad a ghleusadh. Mholamaid an t-oideachadh seo dha na cluicheadairean aig a bheil eòlas air a’ gheama mar-thà."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -233,7 +233,7 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Tha ionadan togail mòra gann sna h-eileanan beaga seo. Thoir am prìomhachas air togalaichean mòra annta. Feumaidh tu togalach mòr an airm a thogail aig amannan mus ruig thu an t-ath-eilean. Cha dèid gu math leis an IF."
+msgstr "Tha raointean togail mòra gann sna h-eileanan beaga seo. Thoir am prìomhachas air togalaichean mòra annta. Feumaidh tu togalach mòr an airm a thogail aig amannan mus ruig thu an t-ath-eilean. Cha dèid gu math leis an IF."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -263,7 +263,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr "Ge b’ e feart annasach an nàdair no cruthachadh aig dia craicte (agus dèidheil air geamannan) a th’ ann, tha am blàr seo a’ feitheamh ri dithis nàmhaid ach an tèid iad an aghaidh càch a chèile."
+msgstr "Ge b’ e gleus annasach an nàdair no cruthachadh aig dia craicte (agus dèidheil air geamannan) a th’ ann, tha am blàr seo a’ feitheamh ri dithis nàmhaid ach an dèid iad an aghaidh càch a chèile."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:8
 msgid "Comet Island"
@@ -497,7 +497,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr "Tha seann-sgeulachd a’ toirt rabhadh dhuinn gun dig cogadh uabhasach air na seachd rìoghachdan seo aig a bha soirbheachas fad linntean. An robh am brathadh mu deireadh agad cus is an tig an fhàisneachd gu ìre?"
+msgstr "Tha seann-sgeulachd a’ toirt rabhadh dhuinn gun dig cogadh uabhasach air na seachd rìoghachdan seo aig a bha soirbheachas fad linntean. An robh am brathadh mu deireadh agad cus is an dig an fhàisneachd gu ìre?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -530,7 +530,7 @@ msgid ""
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live. Don’t forget to take "
 "care of your timber supplies, you’ll need them."
-msgstr "Cha do fhreagair na diathan baogaideach ris ar n-ùrnaighean. An àite seo, rinn solas na grèine an talamh nas teotha na gabhadh creidinn, leagh na h-eigh-shruthan agus thuit daoine dhan doimhne. Ach a-nis – àirde sna beanntan mòra air pìos mu dheireadh dhen tìr – fhuair dà threubh fasgadh. Ged tha an aimsir air fàs nas fhionnaire a-rithist on a ghabh na diathan truaghas orra, tha an t-uisge ag èirigh gun sgur fhathast. Cha tèid ach dà shlighe suas dhan àite shàbhailte mu dheireadh – mullaich as àirde a’ mhonaidh far nach foghainn an rum ’s an òr ach airson aon treubh. Ach thoir an aire… ’s e àite beag cruaidh a tha san àite-còmhnaidh mu dheireadh seo. Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
+msgstr "Cha do fhreagair na diathan baogaideach ris ar n-ùrnaighean. An àite seo, rinn solas na grèine an talamh nas teotha na gabhadh creidinn, leagh na h-eigh-shruthan agus thuit daoine dhan doimhne. Ach a-nis – àirde sna beanntan mòra air pìos mu dheireadh dhen tìr – fhuair dà threubh fasgadh. Ged tha an aimsir air fàs nas fhionnaire a-rithist on a ghabh na diathan truaghas orra, tha an t-uisge ag èirigh gun sgur fhathast. Cha dèid ach dà shlighe suas dhan àite shàbhailte mu dheireadh – mullaich as àirde a’ mhonaidh far nach foghainn an rum ’s an òr ach airson aon treubh. Ach thoir an aire… ’s e àite beag cruaidh a tha san àite-còmhnaidh mu dheireadh seo. Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -778,7 +778,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Bhiodh na ceithir puirt mòra aig Eileanan a’ Ghiabain a’ malairt le chèile o chionn linntean. Bhiodh iad uile feumach air stòrasan nach fhaigheadh iad air an tìr aca fhèin ’s thugadh iad stòrasan dhan fheadhainn nach b’ urrainn an dèanamh. Biodh malart càirdeil glè chumanta eadar na sluaghan a tha beò air Eileanan a’ Ghiabain – ach dh’aontaich dà phort dhiubh ri caidreachas malairt às-dùnach o chionn goirid a dh’èignich gun dèanadh an dà phort eile an dearbh rud. Gu h-obann, tha coltas nach fhada gus an tòisich sabaid eadar na puirt a mhilleas am beatha sìtheil a mhair cho fada…"
+msgstr "Bhiodh na ceithir puirt mòra aig Eileanan a’ Ghiabain a’ malairt le chèile o chionn linntean. Bhiodh iad uile feumach air stòrasan nach fhaigheadh iad air an ranntair aca fhèin ’s thugadh iad stòrasan dhan fheadhainn nach b’ urrainn an dèanamh. Biodh malart càirdeil glè chumanta eadar na sluaghan a tha beò air Eileanan a’ Ghiabain – ach dh’aontaich dà phort dhiubh ri caidreachas malairt às-dùnach o chionn goirid a dh’èignich gun dèanadh an dà phort eile an dearbh rud. Gu h-obann, tha coltas nach fhada gus an tòisich sabaid eadar na puirt a mhilleas am beatha sìtheil a mhair cho fada…"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"

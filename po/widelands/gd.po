@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-08 16:34+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 09:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1114,14 +1114,14 @@ msgstr "nach eil an eaconamaidh feumach air a’ bhathar “%s”"
 #: ../../src/logic/map_objects/tribes/production_program.cc:314
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr "gu bheil an eaconamaidh feumach air an obraiche “%s”"
+msgstr "gu bheil an eaconamaidh feumach air an neach-obrach “%s”"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/map_objects/tribes/production_program.cc:324
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "nach eil an eaconamaidh feumach air an obraiche “%s”"
+msgstr "nach eil an eaconamaidh feumach air an neach-obrach “%s”"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are
@@ -1159,7 +1159,7 @@ msgstr "nach eil am bathar seo aig an togalach: %s"
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:404
 msgid "a worker needs experience"
-msgstr "gu bheil eòlas a dhìth air obraiche"
+msgstr "gu bheil eòlas a dhìth air neach-obrach"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
@@ -1255,10 +1255,10 @@ msgstr "(falamh)"
 #: ../../src/logic/map_objects/tribes/productionsite.cc:262
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] "Tha obraiche a dhìth"
-msgstr[1] "Tha obraichean a dhìth"
-msgstr[2] "Tha obraichean a dhìth"
-msgstr[3] "Tha obraichean a dhìth"
+msgstr[0] "Tha neach-obrach a dhìth"
+msgstr[1] "Tha luchd-obrach a dhìth"
+msgstr[2] "Tha luchd-obrach a dhìth"
+msgstr[3] "Tha luchd-obrach a dhìth"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:269
 msgid "(stopped)"
@@ -1319,7 +1319,7 @@ msgstr "Ràinig triall luinge oirthir is e a’ feitheamh air òrduighean ùra."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
-msgstr "Chailleadh làrach-togail puirt ùr"
+msgstr "Chailleadh làrach togail puirt ùr"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
@@ -1422,14 +1422,14 @@ msgstr "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh 
 #: ../../src/wui/productionsitewindow.cc:97
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] "Obraiche"
-msgstr[1] "Obraichean"
-msgstr[2] "Obraichean"
-msgstr[3] "Obraichean"
+msgstr[0] "Neach-obrach"
+msgstr[1] "Luchd-obrach"
+msgstr[2] "Luchd-obrach"
+msgstr[3] "Luchd-obrach"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1654
 msgid "Worker got lost!"
-msgstr "Chaidh obraiche air chall!"
+msgstr "Chaidh neach-obrach air chall!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:70
@@ -2261,7 +2261,7 @@ msgstr[3] "Ùghdaran:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:432
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr "Tagh oideachadh on liosta ’s tagh “Ceart ma-thà” an uairsin,"
+msgstr "Tagh oideachadh on liosta ’s tagh “Ceart ma-thà” an uairsin."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:434
 msgid ""
@@ -2467,7 +2467,7 @@ msgstr "Dh’fheuch Widelands ri geama a thòiseachadh le faidhle nach deach a l
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "Cha deach am faidhle a thagh thu a lorg. Mur tèid a chur thugad gu fèin-obrachail, feuch an sgrìobh thu dhan òstair mun duilgheadas seo."
+msgstr "Cha deach am faidhle a thagh thu a lorg. Mura dèid a chur thugad gu fèin-obrachail, feuch an sgrìobh thu dhan òstair mun duilgheadas seo."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:498
 #, c-format
@@ -3089,7 +3089,7 @@ msgstr "’Ga thogail:"
 #: ../../src/wui/building_statistics_menu.cc:91
 #: ../../src/wui/building_statistics_menu.cc:633
 msgid "Low Productivity "
-msgstr "Saothrachadh gann"
+msgstr "Cinneasachadh gann"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
@@ -3410,7 +3410,7 @@ msgstr "Del: %s"
 #: ../../src/wui/game_message_menu.cc:123
 #: ../../src/wui/game_message_menu.cc:586
 msgid "Archive selected message"
-msgstr "Cuir an teachdaireachd a thagh thu gun tasglann"
+msgstr "Cuir an teachdaireachd a thagh thu dhan tasglann"
 
 #: ../../src/wui/game_message_menu.cc:131
 #: ../../src/wui/game_message_menu.cc:589
@@ -3436,7 +3436,7 @@ msgstr "Meadhanaich sealladh a’ mhapa air an ionad"
 #: ../../src/wui/game_message_menu.cc:521
 #: ../../src/wui/game_message_menu.cc:525
 msgid "%1% (Hotkey: %2%)"
-msgstr "%1% (Hotkey: %2%)"
+msgstr "%1% (grad-iuchair: %2%)"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:500
@@ -3595,7 +3595,7 @@ msgstr "Tìr"
 #: ../../src/wui/general_statistics_menu.cc:147
 #: ../../src/wui/transport_ui.cc:59 ../../src/wui/warehousewindow.cc:194
 msgid "Workers"
-msgstr "Obraichean"
+msgstr "Luchd-obrach"
 
 #: ../../src/wui/general_statistics_menu.cc:152 ../../src/wui/minimap.cc:190
 msgid "Buildings"
@@ -3609,7 +3609,7 @@ msgstr "Bathar"
 
 #: ../../src/wui/general_statistics_menu.cc:162
 msgid "Productivity"
-msgstr "Saothrachadh"
+msgstr "Cinneasachadh"
 
 #: ../../src/wui/general_statistics_menu.cc:167
 msgid "Casualties"
@@ -3981,7 +3981,7 @@ msgstr "An ath leibheil"
 
 #: ../../src/wui/productionsitewindow.cc:86
 msgid "Terminate the employment of the selected worker"
-msgstr "Cuir an obraiche a thagh thu a-mach à dreuchd"
+msgstr "Cuir an neach-obrach a thagh thu a-mach à dreuchd"
 
 #: ../../src/wui/productionsitewindow.cc:161
 msgid "(coming)"
@@ -4080,7 +4080,7 @@ msgstr "Bathar (iomlan)"
 
 #: ../../src/wui/stock_menu.cc:46
 msgid "Workers (total)"
-msgstr "Obraichean (iomlan)"
+msgstr "Luchd-obrach (iomlan)"
 
 #: ../../src/wui/stock_menu.cc:50
 msgid "Wares in warehouses"
@@ -4088,7 +4088,7 @@ msgstr "Bathar ann an taighean-stòrais"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Workers in warehouses"
-msgstr "Obraichean ann an taighean-stòrais"
+msgstr "Luchd-obrach ann an taighean-stòrais"
 
 #: ../../src/wui/trainingsitewindow.cc:55
 msgid "Soldiers in training"
