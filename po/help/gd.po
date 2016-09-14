@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
@@ -79,11 +79,11 @@ msgstr "Slànachadh:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Gheibh saighdearan a tha san togalach seo slànachadh le %s phuing gach diog"
-msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %s phuing gach diog"
-msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %s puingean gach diog"
-msgstr[3] "Gheibh saighdearan a tha san togalach seo slànachadh le %s puing gach diog"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog"
+msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog"
+msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puingean gach diog"
+msgstr[3] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puing gach diog"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

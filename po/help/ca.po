@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-# 
+#
 # Translators:
 # Juanjo, 2015
 msgid ""
@@ -77,9 +77,9 @@ msgstr "Curació:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Els soldat aquarterat es cura a %s punts per segon"
-msgstr[1] "Els soldats aquarterats es curen a %s punts per segon"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Els soldats allotjats es curen a raó de %d punt per segon."
+msgstr[1] "Els soldats allotjats es curen a raó de %d punts per segon."
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

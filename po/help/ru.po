@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-# 
+#
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
@@ -79,11 +79,11 @@ msgstr "лечение:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Размещенные здесь солдаты лечатся на %s очко здоровья за секунду"
-msgstr[1] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
-msgstr[2] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
-msgstr[3] "Размещенные здесь солдаты лечатся на %s очков здоровья за секунду"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Размещенные здесь солдаты лечатся на %d очко здоровья за секунду"
+msgstr[1] "Размещенные здесь солдаты лечатся на %d очков здоровья за секунду"
+msgstr[2] "Размещенные здесь солдаты лечатся на %d очков здоровья за секунду"
+msgstr[3] "Размещенные здесь солдаты лечатся на %d очков здоровья за секунду"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

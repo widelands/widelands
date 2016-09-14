@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-# 
+#
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015
 msgid ""
@@ -77,8 +77,8 @@ msgstr "Penyembuhan:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Askar bergarison sembuh %s mata hayat per saat"
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Askar bergarison sembuh %d mata hayat per saat"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

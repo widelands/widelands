@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2015 Widelands Development Team
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # millimarg, 2015
@@ -80,9 +80,9 @@ msgstr "Heilung:"
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] "Hier stationierte Soldaten werden um %s Lebenspunkt pro Sekunde geheilt."
-msgstr[1] "Hier stationierte Soldaten werden um %s Lebenspunkte pro Sekunde geheilt."
+msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgstr[0] "Hier stationierte Soldaten werden um %d Lebenspunkt pro Sekunde geheilt."
+msgstr[1] "Hier stationierte Soldaten werden um %d Lebenspunkte pro Sekunde geheilt."
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293

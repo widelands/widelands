@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2016 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016
@@ -87,7 +87,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Pelillä ei ole takuuta. Tukea saat veppisivun http://wl.widelands.org/ keskustelupalstalta. Virheraporttejavoi luoda osoitteessa https://launchpad.net/widelands. Samassa osoitteessa voit myös parantaa pelin tekstien suomennoksia."
+msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
