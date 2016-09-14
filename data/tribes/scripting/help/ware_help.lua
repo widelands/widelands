@@ -4,8 +4,10 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- ware_help.lua
 -- ---------------
-
--- Functions used in the ingame ware help windows for formatting the text and pictures.
+--
+-- This script returns a formatted entry for the ingame ware help.
+-- Pass the internal tribe name and ware name to the coroutine to select the
+-- ware type.
 
 
 --  =======================================================
@@ -13,7 +15,7 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function ware_help_general_string(tribe, ware_description)
+-- .. function:: ware_help_general_string(tribe, ware_description)
 --
 --    Displays general info texts about the ware
 --
@@ -35,7 +37,7 @@ function ware_help_general_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_producers_string(tribe, ware_description)
+-- .. function:: ware_help_producers_string(tribe, ware_description)
 --
 --    Displays the buildings that produce this ware with information about
 --    wares consumed in their production programs
@@ -101,7 +103,7 @@ function ware_help_producers_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_consumers_string(tribe, ware_description)
+-- .. function:: ware_help_consumers_string(tribe, ware_description)
 --
 --    Displays the buildings that consume this ware and about
 --    workers that use this ware as a tool

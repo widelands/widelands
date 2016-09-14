@@ -106,12 +106,14 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("inputs")) {
-		items_table = table.get_table("inputs");
-		for (const std::string& ware_name : items_table->keys<std::string>()) {
-			int amount = items_table->get_int(ware_name);
+		std::vector<std::unique_ptr<LuaTable>> input_entries =
+		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
+		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
+			const std::string& ware_name = entry_table->get_string("name");
+			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
-					throw wexception("count is out of range 1 .. 255");
+					throw wexception("amount is out of range 1 .. 255");
 				}
 				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {

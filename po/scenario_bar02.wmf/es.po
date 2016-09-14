@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Adrián Magro <nomeapelidos@gmail.com>, 2016
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-02 11:46+0000\n"
+"Last-Translator: Adrián Magro <nomeapelidos@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Construye una cabaña de guardabosques."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"

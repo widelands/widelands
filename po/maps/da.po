@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
-"PO-Revision-Date: 2016-07-05 19:51+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:41+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -125,7 +126,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Da deres gud mistede troen på atlanterne og lod deres ø forsvinde i havet, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlantere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev det mægtigste menneske i hendes tid, men til en høj pris: hendes menneskelighed og sjæl. "
+msgstr "Da deres gud mistede troen på atlanterne og lod deres ø forsvinde i havet, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlantere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev det mægtigste menneske i hendes tid, men til en høj pris: hendes menneskelighed og sjæl."
 
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7

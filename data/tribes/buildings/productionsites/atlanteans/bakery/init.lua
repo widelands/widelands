@@ -41,9 +41,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      blackroot_flour = 4,
-      cornmeal = 4,
-      water = 8
+      { name = "water", amount = 8 },
+      { name = "cornmeal", amount = 4 },
+      { name = "blackroot_flour", amount = 4 }
    },
    outputs = {
       "atlanteans_bread"

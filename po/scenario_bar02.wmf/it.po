@@ -3,7 +3,9 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# xno, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -13,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-15 06:00+0000\n"
-"PO-Revision-Date: 2016-06-20 14:22+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-03 14:24+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +32,7 @@ msgstr "Costruisci un'economia di base"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Inizia a raccogliere i materiali di base per la costruzione, e fortifica l'insediamento."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
@@ -54,7 +56,7 @@ msgstr "Costruisci una guardiola lungo il confine orientale"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Dovresti eventualmente costruire un edificio per produrre canne e una calchera."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -541,7 +543,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Finalmente! La fortezza è stata appena completata, così l'entrata al nostro insediamento dovrebbe essere sicuro per ora. Per il futuro si potrebbe pensare alla costruzione di alcune fortificazioni come fortini e torri presso i passaggi, ma per ora siamo in grado di prendere fiato."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
@@ -585,7 +587,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Nulla è rimasto di quella bellezza che ricordo, restano solo le rovine della vecchia capitale. Sono addolorato, ma anche sollevato. Non ho mai sperato di vedere di nuovo la bellezza della vecchia Al'thunran - era solo pochi mesi fa, che mi sono chiesto se i miei piedi avessero percorso quelli luoghi ancora. Ora la vecchia città è di nuovo nelle mie mani, e io non esiterò a ricostruirla con tutta la forza che la mia gente possiede. Non vedo l'ora di vederlo di nuovo nella sua vecchia bellezza."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"

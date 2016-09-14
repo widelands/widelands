@@ -53,9 +53,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      planks = 10,
-      log = 2,
-      spidercloth = 4
+      { name = "log", amount = 2 },
+      { name = "planks", amount = 10 },
+      { name = "spidercloth", amount = 4 }
    },
 
    programs = {

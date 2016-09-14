@@ -2,8 +2,10 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# xno, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
 # Davide Nicolini <davide97@gmail.com>, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
@@ -14,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-13 06:02+0000\n"
-"PO-Revision-Date: 2016-07-13 08:24+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -241,7 +243,7 @@ msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr "precedenti Anziani"
+msgstr "Precedenti Anziani"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
@@ -342,7 +344,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "In questa partita, cominci con un piccolo appezzamento di terra con solo poche risorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti. Lungo la strada verso questo obiettivo, dovrai creare una infrastruttura economica, esplorare il terreno intorno a te e fronteggiare delle tribù rivali."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -355,7 +357,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands registra ogni partita giocata in due files. Uno di questi file ha estensione .wrpl.wgf e contiene il salvataggio iniziale. L'altro file ha estensione .wrpl e contiene tutti i comandi eseguiti da tutti i giocatori, ad esempio costruisci un strada o attacca un nemico. L'altra parte dei nomi dei file indica quando hai avviato il gioco."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -365,7 +367,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Usando l'opzione Guarda Replay del menu principale, verrà ricostruita in maniera precisa e mostrata una partita giocata precedentemente. Nota, comunque, che ogni piccola modifica ai file del gioco o all'eseguibile di Widelands potrebbe rendere il replay incompatibile, mandandolo 'fuori sincronia'. Ciò è simile a quanto accade alle partite in rete quando soffrono di problemi di desincronizzazione se uno dei giocatori possiede una versione di gioco differente."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -374,7 +376,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "I replay sono molto utili per individuare bug nella logica del gioco, quindi possono essere utili come allegato ai bug report. I file di replay sono salvati nella directory %s su Linux e Mac OS X. Su Windows, sono nella sottodirectory 'replay' nel percorso di installazione di Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -392,7 +394,7 @@ msgstr "Spazio"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Nascondi gli spazi per la costruzione"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
@@ -406,11 +408,11 @@ msgstr "Mostra o togli la minimappa"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Impostazioni per una partita multiplayer"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Sei nel menù per il lancio di una partita multiplayer"
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
@@ -420,19 +422,19 @@ msgstr "Impostazioni del client"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Sulla sinistra vi è una lista dei clienti, compreso te. Puoi impostare il tuo ruolo dal bottone accanto al tuo nickname. I ruoli disponibili sono:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Il giocatore con il colore della bandiera. Se più di un client selezionano lo stesso colore, essi condividono il controllo del giocatore (\"modalità regno condiviso\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "La modalità spettatore, significa che puoi vedere ogni cosa, ma non puoi controllare nessun giocatore"
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -442,22 +444,22 @@ msgstr "Impostazioni del giocatore"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "In mezzo ci sono le impostazioni per i giocatori. Per avviare una partita, ogni giocatore deve essere in uno dei seguenti stati:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Connesso a uno o più client (guarda \"Impostazioni client\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Connesso con un giocatore controllato dal computer (la faccia nell'immagine ed il testo che appare tenendovi il mouse sopra, indicano la forza del giocatore  selezionato)"
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Imposta come posizione di inizio condivisa per un altro giocatore."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
@@ -469,13 +471,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "Le ultime tre sono impostabili solamente dal client ospitante cliccando con il tasto sinistro il bottone \"Tipo\" per ogni giocatore. Il giocatore ospitante può inoltre decidere il tipo di avvio di ogni giocatore (il set di edifici, merci e lavoratori con il quale un giocatore comincia) e la tribù e le squadre per i giocatori computer"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Ogni client connesso a un giocatore (che non sia uno spettatore) può impostare la tribù e la squadra per quel giocatore"
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -487,7 +489,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Sulla destra vi sono informazioni circa la mappa o il salvataggio selezionato. Un bottone immediatamente a destra del nome della mappa consente all'host di modificarla in una differente. Inoltre l'host può impostare una condizione di vittoria specifica ed infine può avviare il gioco appena tutti i giocatori sono pronti."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2

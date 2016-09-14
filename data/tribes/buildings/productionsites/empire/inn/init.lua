@@ -40,9 +40,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 6,
-      empire_bread = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 6 }
    },
    outputs = {
       "ration",

@@ -50,6 +50,8 @@ platform:
 
 matrix:
   allow_failures:
+    # Appveyor does not provide enough memory to link this build (Sep 2016)
+    # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
     - platform: x64
       configuration: Debug
 

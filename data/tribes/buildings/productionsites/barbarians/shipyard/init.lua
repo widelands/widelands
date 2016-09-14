@@ -52,9 +52,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      blackwood = 10,
-      log = 2,
-      cloth = 4
+      { name = "log", amount = 2 },
+      { name = "blackwood", amount = 10 },
+      { name = "cloth", amount = 4 }
    },
 
    programs = {

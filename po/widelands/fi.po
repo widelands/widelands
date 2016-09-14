@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 19:50+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:55+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -983,7 +984,7 @@ msgid "Loading map…"
 msgstr "Lataan karttaa..."
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1316
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
 msgid "Loading…"
 msgstr "Lataa..."
 
@@ -1131,7 +1132,7 @@ msgstr "talous ei tarvitse työtekijää '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:385
 #: ../../src/logic/map_objects/tribes/production_program.cc:834
 #: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1020
+#: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1207,7 +1208,7 @@ msgstr[1] "%s puuttuvat"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:949
+#: ../../src/logic/map_objects/tribes/production_program.cc:948
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1217,45 +1218,45 @@ msgstr[1] "Tuotettu %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1031
+#: ../../src/logic/map_objects/tribes/production_program.cc:1030
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s rekrytoitu"
 msgstr[1] "%s rektytoitu"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1237
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
 msgstr "Ei koulutettavia sotilaita!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1246
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
+#: ../../src/logic/map_objects/tribes/production_program.cc:1245
+#: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(tyhjillään)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Työläinen puuttuu"
 msgstr[1] "Työläisiä puuttuu"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(pysäytetty)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Resurssit lopussa!"
 
@@ -1271,6 +1272,10 @@ msgstr "Luonnonsatama löytyi"
 msgid "An expedition ship found a new port build space."
 msgstr "Tutkimusmatka-alus löysi sopivan satamapaikan"
 
+#: ../../src/logic/map_objects/tribes/ship.cc:538
+msgid "Island Circumnavigated"
+msgstr "Saari ympäripurjehdittu"
+
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
@@ -1279,75 +1284,71 @@ msgid "Waiting"
 msgstr "Odottaa"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
-msgid "Island Circumnavigated"
-msgstr "Saari ympäripurjehdittu"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Tutkimusmatka-alus kiersi saaren löytämättä mitään kiintoisaa."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Rannikko saavutettu"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Maata näkyvissä!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:605
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Tutkimusalus saapui rannikolle; odottaa ohjeitasi"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
 msgstr "Uuden sataman työmaa-alue ei ole enää olemassa"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
 msgstr "Satama menetetty!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Kauppatavaroiden purkaminen epäonnistui, retkikunta on nyt peruutettu."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Tutkimusmatka"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Tutkimusmatkailijat valmiina lähtöön"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:837
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tutkimusmatka-alus odottaa ohjeitasi"
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:955
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Rahtaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:959
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Odottaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:963
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr "tutkii"
+msgstr "Tutkii"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:967
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Luonnonsatama löytyi"
@@ -1355,7 +1356,7 @@ msgstr "Luonnonsatama löytyi"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Perustaa siirtokuntaa"
@@ -1675,7 +1676,7 @@ msgid ""
 msgstr "Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen.\nJoko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai\npalvelin sulkeutui kun yritit ottaa yhteyttä."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1197
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -2952,11 +2953,11 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:1008
+#: ../../src/wlapplication.cc:996
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1005
 #, c-format
 msgid ""
 "\n"
@@ -2964,7 +2965,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nOle hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsiä. Löydät asiaankuuluvat viestit ohjelman perustulosteesta (stdout, Windowsissa tiedosto stdout.txt). Käytät versiota  %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1023
+#: ../../src/wlapplication.cc:1011
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3060,7 +3061,7 @@ msgstr "Alhainen tuottavuus"
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:106
 msgid "%:"
-msgstr ""
+msgstr "%:"
 
 #: ../../src/wui/building_statistics_menu.cc:139
 msgid "Small Buildings"
@@ -3208,7 +3209,7 @@ msgstr "Lähetä geologi tutkimaan aluetta"
 
 #: ../../src/wui/fieldaction.cc:346
 msgid "Place a flag"
-msgstr "pystytä lippu"
+msgstr "Pystytä lippu"
 
 #: ../../src/wui/fieldaction.cc:350
 msgid "Destroy a road"
@@ -3960,7 +3961,7 @@ msgstr "Seilaa koilliseen"
 
 #: ../../src/wui/shipwindow.cc:131
 msgid "Scout towards the west"
-msgstr "seilaa länteen"
+msgstr "Seilaa länteen"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Construct a port at the current location"

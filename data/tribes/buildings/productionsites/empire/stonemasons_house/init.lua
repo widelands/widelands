@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      marble = 6
+      { name = "marble", amount = 6 }
    },
    outputs = {
       "marble_column"

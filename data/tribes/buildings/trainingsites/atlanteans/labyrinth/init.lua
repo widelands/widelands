@@ -46,12 +46,12 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 6,
-      smoked_meat = 6,
-      shield_steel = 4,
-      shield_advanced = 4,
-      tabard_golden = 5
+      { name = "smoked_fish", amount = 6 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 },
+      { name = "tabard_golden", amount = 5 },
+      { name = "shield_steel", amount = 4 },
+      { name = "shield_advanced", amount = 4 },
    },
    outputs = {
       "atlanteans_soldier",

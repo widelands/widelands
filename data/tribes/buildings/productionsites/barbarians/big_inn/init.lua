@@ -42,11 +42,11 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 4,
-      barbarians_bread = 4,
-      meat = 4,
-      beer_strong = 4,
-      beer = 4
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "barbarians_bread", amount = 4 },
+      { name = "beer", amount = 4 },
+      { name = "beer_strong", amount = 4 }
    },
    outputs = {
       "ration",
