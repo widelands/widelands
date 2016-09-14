@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-22 17:46+0000\n"
-"PO-Revision-Date: 2016-07-25 08:17+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr "Bidh feum agad air port air a’ chladach gus gnìomh sam bith a dhèanamh air a’ chuan. Tha puirt coltach ris a’ phrìomh-àras agad: ’s urrainn dhaibh bathar, obraichean agus saighdearan a ghlèidheadh. Thig na saighdearan ’na bhroinn a-mach gu fèin-obrachail nuair a bheir nàmhaid ionnsaigh air port."
+msgstr "Bidh feum agad air port air a’ chladach gus gnìomh sam bith a dhèanamh air a’ chuan. Tha puirt coltach ris a’ phrìomh-àras agad: ’s urrainn dhaibh bathar, luchd-obrach agus saighdearan a ghlèidheadh. Thig na saighdearan ’na bhroinn a-mach gu fèin-obrachail nuair a bheir nàmhaid ionnsaigh air port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid ""
@@ -83,7 +83,7 @@ msgid ""
 "tabs: wares and workers in the dock. They are waiting for a ship to "
 "transport them to another port. Currently, there are none because we have "
 "not yet built a second port. So let’s change this!"
-msgstr "A bharrachd air sin, bheir puirt an comas dhut gus bathar a ghiùlan air long. Nuair a nì thu briogadh air port a th’ agad mar-thà, mothaichidh tu do dhà thaba: bathar is obraichean san doca. Tha iad a’ feitheamh air long a bheireadh iad gu port eile. Chan eil gin ann an-dràsta air sgàth ’s nach eil sinn air port eile a thogail fhathast. Atharraichidh sinn seo a-nis!"
+msgstr "A bharrachd air sin, bheir puirt an comas dhut gus bathar a ghiùlan air long. Nuair a nì thu briogadh air port a th’ agad mar-thà, mothaichidh tu do dhà thaba: bathar is luchd-obrach san doca. Tha iad a’ feitheamh air long a bheireadh iad gu port eile. Chan eil gin ann an-dràsta air sgàth ’s nach eil sinn air port eile a thogail fhathast. Atharraichidh sinn seo a-nis!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -405,14 +405,14 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "Ach bu chòir dhomh rabhadh a thoirt dhut. Tha port coltach ris a’ phrìomh-àras agad: ’s urrainn do  nàmhaid a tha faisg air ionnsaigh a thoirt air. Fad ’s a tha saighdearan aig a’ phrìomh-àras agad gus a dhìon, cha bhi aig port air ùr-thogail. Mar sin, feuch gun a bhith a’ togail fear faisg air nàmhaid."
+msgstr "Ach bu chòir dhomh rabhadh a thoirt dhut. Tha port coltach ris a’ phrìomh-àras agad: ’s urrainn do nàmhaid a tha faisg air ionnsaigh a thoirt air. Fad ’s a tha saighdearan aig a’ phrìomh-àras agad gus a dhìon, cha bhi aig port air ùr-thogail. Mar sin, feuch gun a bhith a’ togail fear faisg air nàmhaid."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
-msgstr "Na biodh eagal ort o nach eil nàmhaid air a’ mhapa seo. Mar as àbhaist, ’s urrainn dhut leantainn air adhart a chluiche ma thogras tu agus coimhead air na longan fad ’s a chuireas iad bathar dhan eilean  ma thogas tu togalaichean an-siud. Tha eilean eile ann cuideachd far an urrainn dhut port a thogail."
+msgstr "Na biodh eagal ort o nach eil nàmhaid air a’ mhapa seo. Mar as àbhaist, ’s urrainn dhut leantainn air adhart a chluiche ma thogras tu agus coimhead air na longan fad ’s a chuireas iad bathar dhan eilean ma thogas tu togalaichean an-siud. Tha eilean eile ann cuideachd far an urrainn dhut port a thogail."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

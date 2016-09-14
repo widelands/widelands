@@ -3,13 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
@@ -187,30 +188,30 @@ msgstr "Ludus infiniens (non nimbatus)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Hic est infinitus ludus sine regulis et non nimbatus."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "Rex territorii"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Quisque ludor vel socieats agit, ut plus quam dimidia tabulae partem habeat. Victor eris qui XX aut plus minutorum id regio habere potueris."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
+#: ../../data/scripting/win_conditions/territorial_lord.lua:156
 #: ../../data/scripting/win_conditions/territorial_time.lua:28
 #, lua-format
 msgid "Team %i"
 msgstr "Societas %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
+#: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:204
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s habet plus quam dimidia tabulae terra."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:159
+#: ../../data/scripting/win_conditions/territorial_lord.lua:160
 #: ../../data/scripting/win_conditions/territorial_time.lua:206
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
@@ -218,12 +219,12 @@ msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
+#: ../../data/scripting/win_conditions/territorial_lord.lua:165
 #: ../../data/scripting/win_conditions/territorial_time.lua:212
 msgid "You own more than half of the map’s area."
 msgstr "Plus quam dimidiam tabulae terram habes."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:166
+#: ../../data/scripting/win_conditions/territorial_lord.lua:167
 #: ../../data/scripting/win_conditions/territorial_time.lua:214
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
@@ -323,7 +324,7 @@ msgstr "Tu Silvanus silvas magnas amans plus arborum quam alii ludores habeas. L
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
-msgstr "arbores habitas"
+msgstr "Arbores habitas"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:92
 #: ../../data/scripting/win_conditions/wood_gnome.lua:144

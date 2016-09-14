@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:22+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Tha sinn air cha mhòr a h-uile feart a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha an-còmhnaidh barrachd obrach ri dèanamh co-dhiù sna h-uile roinn. Nam bu toil leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu feartan ùra ris, an eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
+msgstr "Tha sinn air cha mhòr a h-uile gleus a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha an-còmhnaidh barrachd obrach ri dèanamh co-dhiù sna h-uile roinn. Nam bu toigh leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu gleusan ùra ris, an eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -177,7 +177,7 @@ msgstr "Am mapa a bha thu a’ cluiche nuair a thachair am buga."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Cuir glacadh-sgrìn no dhà rid ma tha am buga mu dheidhinn rudeigin nach tèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an duilgheadais."
+msgstr "Cuir glacadh-sgrìn no dhà rid ma tha am buga mu dheidhinn rudeigin nach dèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an duilgheadais."
 
 #: ../../data/txts/README.lua:39
 msgid ""
@@ -464,7 +464,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seata de thogalaichean, bhathar is obraichean leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
+msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seòrsa de thogalaichean, bhathar is luchd-obrach leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -560,7 +560,7 @@ msgstr "Tog taigh planntair-coille an-còmhnaidh ach nach ruith am fiodh ort."
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr "Cha tòisich an togail mus tèid rathad a thogail dhan làrach-togail."
+msgstr "Cha tòisich an togail mus dèid rathad a thogail dhan làrach togail."
 
 #: ../../data/txts/tips/general_game.tip:6
 msgid ""
@@ -572,7 +572,7 @@ msgstr "Dèan cinnteach gun cuir thu clach-eòlaiche airson làraichean a rùrac
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "’S urrainn dhut barrachd tìr a ghabhail ma thogras tu togalaichean an airm a leithid freiceadanan, dùin, taighean-bloca agus msaa."
+msgstr "’S urrainn dhut barrachd ranntair a ghabhail ma thogras tu togalaichean an airm a leithid freiceadanan, dùin, taighean-bloca agus msaa."
 
 #: ../../data/txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -653,7 +653,7 @@ msgstr "Togaidh tu eaconamaidh le togalaichean is brataich a bhios ceangailte le
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "’S urrainn dhut na h-iuchraichean “Page up” is “Page down” a chleachdadh gus gleus a chur air luaths a gheama  – thèid an luaths da-rìribh a shuidheachadh gu deamocratach an uairsin."
+msgstr "’S urrainn dhut na h-iuchraichean “Page up” is “Page down” a chleachdadh gus gleus a chur air luaths a gheama – thèid an luaths da-rìribh a shuidheachadh gu deamocratach an uairsin."
 
 #: ../../data/txts/tips/multiplayer.tip:6
 msgid ""

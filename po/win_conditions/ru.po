@@ -5,14 +5,15 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 10:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -202,30 +203,30 @@ msgstr "Свободная игра (без тумана)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Игра без правил и ограничений. Туман войны отключен."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "Владыка земель"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Каждый игрок или команда пытается захватить более половины карты. Победителем станет тот, кому удастся удержать большую часть карты в течение 20 минут."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
+#: ../../data/scripting/win_conditions/territorial_lord.lua:156
 #: ../../data/scripting/win_conditions/territorial_time.lua:28
 #, lua-format
 msgid "Team %i"
 msgstr "Команда %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
+#: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:204
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s контролирует более половины карты."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:159
+#: ../../data/scripting/win_conditions/territorial_lord.lua:160
 #: ../../data/scripting/win_conditions/territorial_time.lua:206
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
@@ -235,12 +236,12 @@ msgstr[1] "У вас всё ещё есть %i минуты, чтобы пред
 msgstr[2] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
 msgstr[3] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
+#: ../../data/scripting/win_conditions/territorial_lord.lua:165
 #: ../../data/scripting/win_conditions/territorial_time.lua:212
 msgid "You own more than half of the map’s area."
 msgstr "Под вашим контролем находится более половины карты."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:166
+#: ../../data/scripting/win_conditions/territorial_lord.lua:167
 #: ../../data/scripting/win_conditions/territorial_time.lua:214
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
@@ -355,9 +356,9 @@ msgstr "Собственник деревьев"
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i дерево"
-msgstr[1] "% дерева"
-msgstr[2] "% деревьев"
-msgstr[3] "% деревьев"
+msgstr[1] "%i дерева"
+msgstr[2] "%i деревьев"
+msgstr[3] "%i деревьев"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:95

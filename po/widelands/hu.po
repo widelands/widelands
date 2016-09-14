@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Herczeg Attila <hnczy.public@gmail.com>, 2015
 # litoll <litoll@freemail.hu>, 2016
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-23 11:50+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:44+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -382,7 +383,7 @@ msgstr "Van mozdíthatatlanja"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "No immovable"
-msgstr "nincs mozdíthatatlanja"
+msgstr "Nincs mozdíthatatlanja"
 
 #: ../../src/editor/tools/info_tool.cc:111
 msgid "Has animals"
@@ -982,7 +983,7 @@ msgid "Loading map…"
 msgstr "Térkép betöltése…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1316
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
 msgid "Loading…"
 msgstr "Betöltés…"
 
@@ -1130,7 +1131,7 @@ msgstr "a gazdaságnak nincs szüksége „%s” munkásra"
 #: ../../src/logic/map_objects/tribes/production_program.cc:385
 #: ../../src/logic/map_objects/tribes/production_program.cc:834
 #: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1020
+#: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1206,7 +1207,7 @@ msgstr[1] "%s hiányzik"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:949
+#: ../../src/logic/map_objects/tribes/production_program.cc:948
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1216,45 +1217,45 @@ msgstr[1] "Termelt: %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1031
+#: ../../src/logic/map_objects/tribes/production_program.cc:1030
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Besorozva: %s"
 msgstr[1] "Besorozva: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1237
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
 msgstr "Nincs kiképezhető katona!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1246
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
+#: ../../src/logic/map_objects/tribes/production_program.cc:1245
+#: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
 msgstr "Nem található katona ehhez a képzési szinthez!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(nincs munkás)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Munkás hiányzik"
 msgstr[1] "Munkások hiányoznak"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(megállítva)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Nem található több nyersanyag!"
 
@@ -1270,6 +1271,10 @@ msgstr "Kikötőhely felfedezve"
 msgid "An expedition ship found a new port build space."
 msgstr "Az expedíciós hajó új kikötőhelyet fedezett fel."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:538
+msgid "Island Circumnavigated"
+msgstr "Sziget körbehajózva"
+
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
@@ -1278,75 +1283,71 @@ msgid "Waiting"
 msgstr "Várakozás"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
-msgid "Island Circumnavigated"
-msgstr "Sziget körbehajózva"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Egy expedíciós hajó esemény nélkül megkerülte a szigetet."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Part elérve"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Szárazföld!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:605
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Egy expedíciós hajó partot ért és parancsra vár."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
 msgstr "Új kikötő építési terület megszűnt"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
 msgstr "Kikötő elveszett!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Az áruk kirakodása meghiúsult, expedíció törölve."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedíció"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Expedíció készen áll"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:837
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedíciós hajó parancsra vár."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:955
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Hajózás"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:959
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Várakozás"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:963
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Felderítés"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:967
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Kikötőhely felfedezve"
@@ -1354,7 +1355,7 @@ msgstr "Kikötőhely felfedezve"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Kolónia alapítása"
@@ -1674,7 +1675,7 @@ msgid ""
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\nVagy nem fut Widelands szerver a feltételezett porton, vagy\na szerver leállt ahogy csatlakozni próbáltál."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1197
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
@@ -1738,7 +1739,7 @@ msgstr "Helytelen használat; helyes: /announce <üzenet>"
 
 #: ../../src/network/nethost.cc:374
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Helytelen használat; helyes: <név> <ok>"
+msgstr "Helytelen használat; helyes: /warn <név> <ok>"
 
 #: ../../src/network/nethost.cc:378 ../../src/network/nethost.cc:401
 #, c-format
@@ -2951,11 +2952,11 @@ msgstr "Hadjáratok"
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/wlapplication.cc:1008
+#: ../../src/wlapplication.cc:996
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1005
 #, c-format
 msgid ""
 "\n"
@@ -2963,7 +2964,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nKérlek jelentsd be ezt a hibát, hogy ezzel segítsd a Widelands fejlesztését. A hibával kapcsolatos üzeneteket megtalálod a sztenderd kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1023
+#: ../../src/wlapplication.cc:1011
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3540,7 +3541,7 @@ msgstr "%s nyert!"
 
 #: ../../src/wui/game_summary.cc:206
 msgid "Team %|1$u| won!"
-msgstr "%l1$ul. csapat nyert!"
+msgstr "%|1$u| csapat nyert!"
 
 #: ../../src/wui/game_summary.cc:249
 msgid "Score"

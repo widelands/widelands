@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 # Teppo Mäenpää <teppo@runbox.com>, 2015-2016
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-07 17:56+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 10:05+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +106,7 @@ msgstr "Voit nähdä kuljetettujen tavaroiden määrän milloin tahansa yleisest
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr "Uusi salakuljetusreitti %1$s:ltä %2$S:lle on avattu! Jokainen salakuljetettu tavara tuo %3$s voittopistettä."
+msgstr "Uusi salakuljetusreitti %1$s:ltä %2$s:lle on avattu! Jokainen salakuljetettu tavara tuo %3$s voittopistettä."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:27

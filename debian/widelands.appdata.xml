@@ -18,6 +18,7 @@
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
+  <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
@@ -122,6 +123,14 @@
     </p>
     <p>
       Widelands ponúka režim jedného hráča s kampaňami, ktoré rozprávajú príbehy o kmeňoch a ich boji vo svete Widelands. Skutočné usádzanie začne však až vtedy, keď sa spojíte s priateľmi po internete alebo lokálnej sieti a spoločne vybudujete nové ríše alebo, naopak, navzájom sa rozdrvíte v prachu vojny. Okrem toho Widelands poskytuje možnosť hry proti umelej inteligencii.
+    </p>
+  </description>
+  <description xml:lang="sr">
+    <p>
+      Namesnik si malog klana. Tvoj zadatak je da sagradiš stalno rastuće naselje. Svaki član tvog klana će učiniti svoj deo posla da proizvede više resursa da pomogne širenje.
+    </p>
+    <p>
+      Widelands - Širozemlje - nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite medjusobno u pepelu rata. Widelands takođe nudi i AI da te izazove.
     </p>
   </description>
   <description xml:lang="uk">
