@@ -59,6 +59,8 @@ run_pofilter "urls"
 run_pofilter "doublespacing"
 run_pofilter "startwhitespace"
 run_pofilter "endwhitespace"
+run_pofilter "startpunc"
+run_pofilter "endpunc"
 run_pofilter "startcaps"
 run_pofilter "numbers"
 
