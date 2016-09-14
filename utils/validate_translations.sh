@@ -27,10 +27,10 @@ fi
 echo "Running i18nspector. This can take a while."
 
 # We want a log of all errors.
-i18nspector po/*/* | grep "E:" > po_validation/i18nspector-errors.log
+i18nspector po/*/*.po | grep "E:" > po_validation/i18nspector-errors.log
 
 # We don't care about all warnings, so we filter some out.
-i18nspector po/*/* | grep "W:" | grep -v "invalid-last-translator" | grep -v boilerplate > po_validation/i18nspector-warnings.log
+i18nspector po/*/*.po | grep "W:" | grep -v "invalid-last-translator" | grep -v boilerplate > po_validation/i18nspector-warnings.log
 
 
 # Takes type of check as an argument.
