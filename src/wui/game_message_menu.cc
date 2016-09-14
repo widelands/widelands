@@ -358,39 +358,64 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 				center_view();
 			return true;
 		case SDLK_0:
-			if (code.mod & KMOD_LALT) {
+			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kAllMessages);
+				last_keyboard_action_ = 0;
 				return true;
 			}
 			return false;
 		case SDLK_1:
-			if (code.mod & KMOD_LALT) {
-				filter_messages(Widelands::Message::Type::kGeologists);
-				return true;
+			if (code.mod & KMOD_ALT) {
+				// Workaround for duplicate triggering of the Alt key in Ubuntu:
+				// Don't accept the same key twice for the same gametime.
+				// TODO(GunChleoc): This means that when the game is paused,
+				// the button won't toggle on and off by pressing ALT + 1 repeatedly.
+				const uint32_t gametime = iplayer().game().get_gametime();
+				if (last_keyboard_action_ != gametime) {
+					filter_messages(Widelands::Message::Type::kGeologists);
+					last_keyboard_action_ = gametime;
+					return true;
+				}
 			}
 			return false;
 		case SDLK_2:
-			if (code.mod & KMOD_LALT) {
-				filter_messages(Widelands::Message::Type::kEconomy);
-				return true;
+			if (code.mod & KMOD_ALT) {
+				const uint32_t gametime = iplayer().game().get_gametime();
+				if (last_keyboard_action_ != gametime) {
+					filter_messages(Widelands::Message::Type::kEconomy);
+					last_keyboard_action_ = gametime;
+					return true;
+				}
 			}
 			return false;
 		case SDLK_3:
-			if (code.mod & KMOD_LALT) {
-				filter_messages(Widelands::Message::Type::kSeafaring);
-				return true;
+			if (code.mod & KMOD_ALT) {
+				const uint32_t gametime = iplayer().game().get_gametime();
+				if (last_keyboard_action_ != gametime) {
+					filter_messages(Widelands::Message::Type::kSeafaring);
+					last_keyboard_action_ = gametime;
+					return true;
+				}
 			}
 			return false;
 		case SDLK_4:
-			if (code.mod & KMOD_LALT) {
-				filter_messages(Widelands::Message::Type::kWarfare);
-				return true;
+			if (code.mod & KMOD_ALT) {
+				const uint32_t gametime = iplayer().game().get_gametime();
+				if (last_keyboard_action_ != gametime) {
+					filter_messages(Widelands::Message::Type::kWarfare);
+					last_keyboard_action_ = gametime;
+					return true;
+				}
 			}
 			return false;
 		case SDLK_5:
-			if (code.mod & KMOD_LALT) {
-				filter_messages(Widelands::Message::Type::kScenario);
-				return true;
+			if (code.mod & KMOD_ALT) {
+				const uint32_t gametime = iplayer().game().get_gametime();
+				if (last_keyboard_action_ != gametime) {
+					filter_messages(Widelands::Message::Type::kScenario);
+					last_keyboard_action_ = gametime;
+					return true;
+				}
 			}
 			return false;
 		case SDLK_DELETE:
@@ -517,7 +542,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 		                    /** TRANSLATORS: Tooltip in the messages window */
-								  % _("Show all messages") % pgettext("hotkey", "Alt + 0"))
+		                    % _("Show all messages") % pgettext("hotkey", "Alt + 0"))
 		                      .str());
 	}
 }
@@ -528,23 +553,24 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
-										  % _("Show geologists' messages only") % pgettext("hotkey", "Alt + 1"))
+	                             % _("Show geologists' messages only") %
+	                             pgettext("hotkey", "Alt + 1"))
 	                               .str());
 	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-									  % _("Show economy messages only") % pgettext("hotkey", "Alt + 2"))
+	                          % _("Show economy messages only") % pgettext("hotkey", "Alt + 2"))
 	                            .str());
 	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-										 % _("Show seafaring messages only") % pgettext("hotkey", "Alt + 3"))
+	                            % _("Show seafaring messages only") % pgettext("hotkey", "Alt + 3"))
 	                              .str());
 	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-									  % _("Show warfare messages only") % pgettext("hotkey", "Alt + 4"))
+	                          % _("Show warfare messages only") % pgettext("hotkey", "Alt + 4"))
 	                            .str());
 	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
-										% _("Show scenario messages only") % pgettext("hotkey", "Alt + 5"))
+	                           % _("Show scenario messages only") % pgettext("hotkey", "Alt + 5"))
 	                             .str());
 }
 
