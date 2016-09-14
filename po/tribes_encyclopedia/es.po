@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:31+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1257,7 +1257,7 @@ msgstr "El posadero necesita %1% de rendimiento para preparar una ración"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Plants grapevines and harvests grapes."
-msgstr "plantar vid y cosechar uvas."
+msgstr "Plantar vid y cosechar uvas."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/helptexts.lua:16

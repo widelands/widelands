@@ -5,6 +5,7 @@
 # Cristiano Magro, 2015
 # Cristiano Magro, 2016
 # Davide Nicolini <davide97@gmail.com>, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-02 17:06+0000\n"
-"Last-Translator: Cristiano Magro\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -242,7 +243,7 @@ msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr "precedenti Anziani"
+msgstr "Precedenti Anziani"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"

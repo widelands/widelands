@@ -3,15 +3,16 @@
 # 
 # Translators:
 # fenris <fenris.kcf@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2011
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 11:35+0000\n"
-"Last-Translator: fenris <fenris.kcf@gmail.com>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:38+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,32 +21,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:7
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Castle"
 msgstr "Kastelo"
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:104
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:40
 msgid "Your soldiers have occupied your castle."
 msgstr "Via soldatoj enmarŝis en vian kastelon."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:47
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:105
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:41
 msgid "Your castle discovered an aggressor."
 msgstr "Via kastelo ekvidis malamikon."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:48
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:106
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:42
 msgid "Your castle is under attack."
 msgstr "Via kastelo estas atakata."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:49
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:107
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:43
 msgid "The enemy defeated your soldiers at the castle."
 msgstr "La malamiko venkis viajn soldatojn ĉe la kastelo."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:50
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:108
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:44
 msgid "Your soldiers defeated the enemy at the castle."
 msgstr "Viaj soldatoj venkis la malamikon ĉe la kastelo."
@@ -399,26 +400,26 @@ msgstr "Turo"
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
-#: ../../data/tribes/buildings/partially_finished/constructionsite/init.lua:7
+#: ../../data/tribes/buildings/partially_finished/constructionsite/init.lua:46
 msgctxt "building"
 msgid "Construction Site"
 msgstr "Konstruejo"
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings being
 #. taken apart
-#: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:7
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:46
 msgctxt "building"
 msgid "Dismantle Site"
 msgstr "Malkonstruejo"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:7
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:75
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
 msgstr "Kiras-forĝo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:124
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:60
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
@@ -461,13 +462,13 @@ msgstr "laboranta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:133
 msgid "forging a steel shield"
 msgstr "forĝanta ŝtalan ŝildon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:76
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:144
 msgid "forging an advanced shield"
 msgstr "forĝanta altgradan ŝildon"
 
@@ -920,7 +921,7 @@ msgstr "Ŝip-konstruejo"
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 msgid "constructing a ship"
-msgstr "Konstrunta ŝipon"
+msgstr "konstrunta ŝipon"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:7
@@ -937,8 +938,8 @@ msgstr "fandanta feron"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
 msgid "smelting gold"
 msgstr "fandanta oron"
 
@@ -1062,25 +1063,25 @@ msgstr "forĝanta tridenton"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
 msgid "forging a long trident"
 msgstr "forĝanta longan tridenton"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
 msgstr "forĝanta ŝtalan tridenton"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:112
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
 msgid "forging a double trident"
 msgstr "forĝanta duoblan tridenton"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
 msgid "forging a heavy double trident"
 msgstr "forĝanta fortan duoblan tridenton"
 
@@ -1177,14 +1178,14 @@ msgid "forging an ax"
 msgstr "faranta hakilon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
 msgid "forging a sharp ax"
 msgstr "faranta akran hakilon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:101
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:108
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
 msgid "forging a broad ax"
 msgstr "faranta larĝan hakilon"
 
@@ -1604,19 +1605,19 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
 msgid "forging a bronze ax"
 msgstr "faranta hakilon bronzan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:134
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a battle ax"
 msgstr "forĝanta hakilon batalan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:147
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
 msgid "forging a warrior’s ax"
 msgstr "forĝanta hakilon militan"
 
@@ -2039,25 +2040,25 @@ msgid "forging a wooden spear"
 msgstr "forĝanta lancon lignan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
 msgstr "forĝanta lancon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
 msgid "forging an advanced spear"
 msgstr "forĝanta lancon altgradan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:117
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
 msgid "forging a heavy spear"
 msgstr "forĝantan lancon fortan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:130
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
 msgid "forging a war spear"
 msgstr "forĝantan lancon militan"
 
@@ -2091,13 +2092,13 @@ msgid "making wine"
 msgstr "faranta vinon"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:7
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:55
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "Ublieto"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:79
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:127
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
@@ -2108,28 +2109,28 @@ msgid "sleeping"
 msgstr "dormanta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:135
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "altiganta soldatan atak-gradon de 0 al 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:98
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:146
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "altiganta soldatan atak-gradon de 1 al 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:109
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:157
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "altiganta soldatan atak-gradon de 2 al 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:168
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
 msgid "upgrading soldier attack from level 3 to level 4"
@@ -2226,7 +2227,7 @@ msgid "upgrading soldier health from level 3 to level 4"
 msgstr "altiganta soldatan san-gradon de 3 al 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
+#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Headquarters"
 msgstr "Stabejo"
@@ -2504,35 +2505,35 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Ŝipo nepreta"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:31
+#: ../../data/tribes/preload.lua:47
 msgid "The Widelands Development Team"
 msgstr "La Widelands-disvolvant-skipo"
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:14
+#: ../../data/tribes/preload.lua:17
 msgid "Barbarians"
 msgstr "Barbaroj"
 
-#: ../../data/tribes/preload.lua:15
+#: ../../data/tribes/preload.lua:18
 msgid "The mighty tribes of the east-lands."
 msgstr "La fortegaj triboj de la orientaj landoj."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:33
 msgid "Empire"
 msgstr "Imperio"
 
-#: ../../data/tribes/preload.lua:31
+#: ../../data/tribes/preload.lua:34
 msgid "This is the culture of the Roman Empire."
 msgstr "Tio estas la kulturo de la Roma imperio."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:46
+#: ../../data/tribes/preload.lua:49
 msgid "Atlanteans"
 msgstr "Atlantidoj"
 
-#: ../../data/tribes/preload.lua:47
+#: ../../data/tribes/preload.lua:50
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
@@ -2899,7 +2900,7 @@ msgstr "Fero"
 #: ../../data/tribes/wares/iron_ore/init.lua:7
 msgctxt "ware"
 msgid "Iron Ore"
-msgstr "fer-minaĵo"
+msgstr "Fer-minaĵo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:7

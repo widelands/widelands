@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 09:36+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Roghainnean:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " Sgrìobhaidh --<ainm-na-roghainn>=luach thairis air gach roghainn\nsan fhaidhle config"
+msgstr " Sgrìobhaidh --<ainm-na-roghainn>=luach thairis air roghainn\nsam bith san fhaidhle config"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
@@ -128,17 +128,17 @@ msgstr " --editor                  Tòisichidh seo an deasaiche Widelands sa bha
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr " --scenario=FILENAME       Tòisichidh seo am mapa AINM-FAIDHLE sa bhad\n                           mar mhapa cnàmh-sgeòil."
+msgstr " --scenario=AINM-FAIDHLE   Tòisichidh seo am mapa AINM-FAIDHLE sa bhad\n                           mar mhapa cnàmh-sgeòil."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILENAME       Luchdaichidh seo an geama air a shàbhaladh\n                           AINM-FAIDHLE sa bhad."
+msgstr " --loadgame=AINM-FAIDHLE   Luchdaichidh seo an geama air a shàbhaladh\n                           AINM-FAIDHLE sa bhad."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FILENAME         Ruith an sgriobt Lua seo às dèidh an tòiseachaidh.\n                           Chan eil e dligheach ach le --scenario, --loadgame\n                           no --editor."
+msgstr " --script=AINM-FAIDHLE     Ruith an sgriobt Lua seo às dèidh an tòiseachaidh.\n                           Chan eil e dligheach ach le --scenario, --loadgame\n                           no --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the

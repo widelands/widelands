@@ -6,6 +6,7 @@
 # Cristiano Magro, 2016
 # Davide Nicolini <davide97@gmail.com>, 2015
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
+# GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-03 19:04+0000\n"
-"Last-Translator: Cristiano Magro\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:30+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1235,29 +1236,29 @@ msgstr "Nessun soldato da addestrare!"
 msgid "No soldier found for this training level!"
 msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(non occupato)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Lavoratore assente"
 msgstr[1] "Lavoratori assenti"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(interrotto)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Non è possibile trovare altre risorse!"
 
@@ -2016,7 +2017,7 @@ msgstr "sì"
 #. console
 #: ../../src/profile/profile.cc:51
 msgid "on"
-msgstr "Acceso"
+msgstr "acceso"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2037,7 +2038,7 @@ msgstr "no"
 #. console
 #: ../../src/profile/profile.cc:64
 msgid "off"
-msgstr "Spento"
+msgstr "spento"
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved

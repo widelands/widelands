@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 04:36+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 18:18+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +79,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
-msgstr "Vähän hiiltä"
+msgstr "vähän hiiltä"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of coal"
@@ -86,7 +87,7 @@ msgstr "paljon hiiltä"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "a bit of iron"
-msgstr "Vähän rautaa"
+msgstr "vähän rautaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of iron"
@@ -604,7 +605,7 @@ msgstr "Uskollinen kumppanisi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Urhollinen Boldreth astuu puolellesi..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
@@ -613,11 +614,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Eli haluat meidän valmistautuvan jäämään näihin metsiin pidemmäksi aikaa, Thron? Ymmärrän viisauden jäämisessä, mutta silti sydämeni halajaa kunniakasta paluuta Al’thunraniin. Olemme liian pitkään odottaneet, kun samaan aikaa veljemme ovat taistelleet taistelutantereella ja meidän kirveemme sekä miekkamme ovat alkaneet ruostua."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukh liittyy seuraan..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:324
@@ -629,7 +630,7 @@ msgstr "Pyydän anteeksi, päällikköni, mutta minun on puhuttava kanssasi vaka
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Boldreth ponkaisee pystyyn..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:332
@@ -638,11 +639,11 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Vaikka se ei todellakaan ole soturin arvoinen tehtävä, se on ainakin tekemisen arvoista! Thron, mitä sanot jos ottaisin muutaman levottomimmista sotureista mukaani ja rohkenisimme jonkin verran lähemmäksi noita mahtavia Kal’mavrathin vuoria – ehkä löydämme jonkin verran lisää suuria kiviä ilahduttaaksemme vanhaa miestä?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Khantrukh ärähtää..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
@@ -652,7 +653,7 @@ msgstr "Vai että 'vanhus'? Julkea nulikka!"
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:347
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Khantrukh nyökkää tyytyväisenä..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
@@ -660,14 +661,14 @@ msgstr "Vihdoinkin! Näiden kivien pitäisi riittää tarpeisiimme joksikin aika
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldreth huudahtaa..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:355
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "Katsoppas tuota! Idässä näkyy Kal’mavrathin mahtava vuori! Mietiskelen mitä aarteita luonto saataisi olle piilottanut sen majesteettisien kylkien alle."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:358
@@ -675,11 +676,11 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr ""
+msgstr "Laajennetaampas kohti itää. Vanhimmille tuli tilaisuus olla hyödyksi aina silloin tällöin! Lähetetäämpä joitakin kivistä ymmärtäviä purkamaan vuoren salaisuuksia!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldreth naurahtaa..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:366
@@ -691,11 +692,11 @@ msgstr "Kautta Chat'Karuthin parran, tämä on mainiota! Kuvittele, mihin kaikke
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:369
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "Sitä saattaa olla jopa riittävästi..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:374
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukh keskeyttää..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:376
@@ -704,16 +705,16 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr ""
+msgstr "Vaikka tämä onkin totta, meidän pitäisi harkita sitä myöhemmin, nyt on muita esteitä käsillä. Kaivostyöläiset tulevat varmasti vaatimaan suurempia osuuksia työskentelystä korkealla vuorella tässä purevassa kylmyydessä ja näiden tarvikkeiden hankkiminen ei taida olla helppoa."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:382
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "Boldreth nyökkää..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:384
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Minun täytyy antaa se sinulle: olet oikeassa tässä asiassa, vanha mies."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:387
@@ -721,16 +722,16 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr ""
+msgstr "Tässä metsässä näyttäisi olevan melko paljon eläimiä – ehkäpä voisimme metsästää niitä lisää. Ja tietenkin, kansa hurraisi uutta krouvia – hei, ehkäpä kutsuisimme sitä ‘Thronin Ylpeydeksi’ tai joksikin muuksi jos haluat!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "Vanhus hypähtää ilmaan..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Viisaita käskyjä muutoksen etsimiseksi."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:398
@@ -738,11 +739,11 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "Mahtavalta huorelta pohjoiseen on suuri tasanko – myksemme käytä Äiti Maan antamaa tilaa hyödyksi ja rakentaisi maatilaa? Olen varma, että voisin vaihteeksi nauttia vasta paistetusta pitaleivästä..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
-msgstr ""
+msgstr "Boldreth ilahtuu..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406

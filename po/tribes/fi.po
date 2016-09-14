@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-12 18:06+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:57+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -512,7 +513,7 @@ msgstr "Korjaa mustajuurisatoa"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
 msgid "No Fields"
-msgstr "ei peltoja"
+msgstr "Ei peltoja"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:77
@@ -2306,25 +2307,25 @@ msgstr "Puitu mustajuuripelto"
 #: ../../data/tribes/immovables/blackrootfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr "keskikokoinen mustajuuripelto"
+msgstr "Keskikokoinen mustajuuripelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "hyvin pieni mustajuuripelto"
+msgstr "Hyvin pieni mustajuuripelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_small/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (small)"
-msgstr "pieni mustajuuripelto"
+msgstr "Pieni mustajuuripelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "melko pieni mustajuuripelto"
+msgstr "Melko pieni mustajuuripelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_harvested/init.lua:7
@@ -2432,13 +2433,13 @@ msgstr "Hyvin pieni kaislikko"
 #: ../../data/tribes/immovables/reed_small/init.lua:7
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr "pienehkö kaislikko"
+msgstr "Pienehkö kaislikko"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr "pieni kaislikko"
+msgstr "Pieni kaislikko"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7

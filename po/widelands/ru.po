@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:32+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1251,11 +1251,11 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
@@ -1263,19 +1263,19 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -3379,7 +3379,7 @@ msgstr "Сообщения: Входящее"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Title"
-msgstr "заголовок"
+msgstr "Заголовок"
 
 #: ../../src/wui/game_message_menu.cc:67
 msgctxt "message"
@@ -3388,7 +3388,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:106
 msgid "Status"
-msgstr "статус"
+msgstr "Статус"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time

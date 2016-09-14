@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-05 19:46+0000\n"
-"Last-Translator: zecas <jjorge@free.fr>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:59+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -985,7 +985,7 @@ msgstr "A carregar …"
 
 #: ../../src/logic/game.cc:437
 msgid "Creating player infrastructure"
-msgstr "criando infraestruturas do jogador"
+msgstr "Criando infraestruturas do jogador"
 
 #: ../../src/logic/game.cc:448 ../../src/logic/player.cc:231
 msgid "Missing starting position"
@@ -1229,29 +1229,29 @@ msgstr "Não há soldados para treinar!"
 msgid "No soldier found for this training level!"
 msgstr "Não há soldados para treinar por este nível !"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(não ocupado)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Falta trabalhador"
 msgstr[1] "Faltam trabalhadores"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(parado)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Não podia precurar mais recursos!"
 
@@ -1505,7 +1505,7 @@ msgstr "O meta-servidor enviou um ERRO estranho durante a sessão"
 
 #: ../../src/network/internet_gaming.cc:403
 msgid "Unexpected packet"
-msgstr "pacote inesperado"
+msgstr "Pacote inesperado"
 
 #: ../../src/network/internet_gaming.cc:404
 #, c-format
@@ -1541,7 +1541,7 @@ msgstr "Tipo inválido de mensagem instantânea «&nbsp;%s&nbsp;»."
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"
-msgstr "tipo de mensagem inválida"
+msgstr "Tipo inválido de mensagem"
 
 #: ../../src/network/internet_gaming.cc:491
 #, c-format

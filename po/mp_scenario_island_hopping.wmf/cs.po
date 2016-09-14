@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 09:57+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -127,7 +127,7 @@ msgstr "%1$s jako druhý dosáhl ostrova číslo %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr "%1$s jako třetí dosáhl ostrova číslo %2$."
+msgstr "%1$s jako třetí dosáhl ostrova číslo %2$i."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the fourth to reach Island number %2$i."

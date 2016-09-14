@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 09:35+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -862,7 +862,7 @@ msgstr "Suidhich an luach:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Dèan briogadh  air a’ mhapa gus an tìr àrdachadh no Shift + briogadh gus a h-ìsleachadh"
+msgstr "Dèan briogadh air a’ mhapa gus an tìr àrdachadh no Shift + briogadh gus a h-ìsleachadh"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
@@ -880,12 +880,12 @@ msgstr "Stòrasan"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Dèan briogadh  air a’ mhapa gus an uiread dhen stòras a thagh thu àrdachadh no Shift + briogadh gus ìsleachadh"
+msgstr "Dèan briogadh air a’ mhapa gus an uiread dhen stòras a thagh thu àrdachadh no Shift + briogadh gus ìsleachadh"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr "Dèan Ctrl + briogadh air a’ mhapa gus  an uiread dhen stòras a thagh thu a shuidheachadh"
+msgstr "Dèan Ctrl + briogadh air a’ mhapa gus an uiread dhen stòras a thagh thu a shuidheachadh"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -1248,11 +1248,11 @@ msgstr "Chan eil saighdear ri thrèanadh ann!"
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de thrèanadh seo a lorg!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(falamh)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Tha neach-obrach a dhìth"
@@ -1260,19 +1260,19 @@ msgstr[1] "Tha luchd-obrach a dhìth"
 msgstr[2] "Tha luchd-obrach a dhìth"
 msgstr[3] "Tha luchd-obrach a dhìth"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(’na stad)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Cha deach stòras a lorg tuilleadh!"
 
@@ -1716,7 +1716,7 @@ msgstr "/me, dhearbhaich thu am faidhle a fhuair thu. Ged an do shoirbhich leis 
 #: ../../src/network/netclient.cc:937
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Thèid an geama a shàbhaladh gu fèin-obrachail."
+msgstr "%s Thèid an geama a shàbhaladh gu fèin-obrachail."
 
 #: ../../src/network/netclient.cc:941
 msgid "Disconnected from Host"
@@ -1729,17 +1729,17 @@ msgstr "Seo àitheantan an òstair a bhios ri làimh:"
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:346
 msgid "/help  -  Shows this help"
-msgstr "/help                  -  seall a’ chobhair seo"
+msgstr "/help - seall a’ chobhair seo"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:348
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr "/announce <teachdaireachd>        -  Cuir teachdaireachd na cabadaich mar bhrath (cabadaich an t-siostaim)"
+msgstr "/announce <teachdaireachd> - Cuir teachdaireachd na cabadaich mar bhrath (cabadaich an t-siostaim)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:350
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <ainm> <adhbhar>  -  Thoir rabhadh dhan chleachdaiche <ainm> air  <adhbhar>"
+msgstr "/warn <ainm> <adhbhar> - Thoir rabhadh dhan chleachdaiche <ainm> air <adhbhar>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:352
@@ -1794,7 +1794,7 @@ msgstr "Ma tha, sgrìobh: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:416
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach ainm a thoirt seachad!"
+msgstr "chaidh sgur de dhearbhadh a’ bhròig: cha deach ainm a thoirt seachad!"
 
 #: ../../src/network/nethost.cc:418
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -1802,7 +1802,7 @@ msgstr "Na cleachd mar sin e, bu chòir dha bith: /ack_kick <ainm>"
 
 #: ../../src/network/nethost.cc:424
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach an t-ainm ceart a thoirt seachad!"
+msgstr "chaidh sgur de dhearbhadh a’ bhròig: cha deach an t-ainm ceart a thoirt seachad!"
 
 #: ../../src/network/nethost.cc:433
 msgid "Pause was already forced - game should be paused."

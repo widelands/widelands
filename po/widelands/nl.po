@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 09:44+0000\n"
-"Last-Translator: stdh\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 13:44+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -669,7 +670,7 @@ msgstr "Woestijn"
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Wasteland"
-msgstr "niet opRuigland"
+msgstr "Ruigland"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -1227,29 +1228,29 @@ msgstr "Geen soldaten om te trainen!"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(niet bezet)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Werker ontbreekt"
 msgstr[1] "Werkers ontbreken"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(gestopt)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Kan geen grondstoffen meer vinden!"
 
@@ -1495,7 +1496,7 @@ msgstr "Succesvol herverbonden met de metaserver!"
 
 #: ../../src/network/internet_gaming.cc:392
 msgid "Mixed up"
-msgstr "gehusseld"
+msgstr "Gehusseld"
 
 #: ../../src/network/internet_gaming.cc:392
 msgid "The metaserver sent a strange ERROR during connection"
@@ -1627,7 +1628,7 @@ msgstr "De verbinding is verbroken, aangezien de metaserver momenteel opnieuw op
 
 #: ../../src/network/internet_gaming_messages.cc:51
 msgid "Connection was closed by the client normally."
-msgstr "verbinding is normaal gesloten door de cliënt"
+msgstr "Verbinding is normaal gesloten door de cliënt"
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "The connection to the metaserver was lost."
@@ -1725,7 +1726,7 @@ msgstr "/forcePause - Dwing het spel tot pauzeren."
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:356
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr "/endForcePause - Ga terug naar normale spelsnelheid."
+msgstr "/endForcedPause - Ga terug naar normale spelsnelheid."
 
 #: ../../src/network/nethost.cc:363
 msgid "Wrong use, should be: /announce <message>"
@@ -2464,7 +2465,7 @@ msgstr "Selecteer kaart"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:115
 msgid "Launch Game"
-msgstr "lanceer spel"
+msgstr "Lanceer spel"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:121
 msgid "Player’s name"

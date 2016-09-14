@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # avdpos <tyrberg.andreas@gmail.com>, 2015
@@ -9,24 +10,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-07 08:13+0000\n"
-"Last-Translator: avdpos <tyrberg.andreas@gmail.com>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/widelands/language/sv/)\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:17+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:15
-#: ../../maps/Plateau.wmf/scripting/texts.lua:17
-#: ../../maps/Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:17
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid "The Forbidden Island"
 msgstr "Den förbjudna ön"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:18
-#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:18
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:69
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -34,51 +35,51 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr "ntligen! Vi tog just vårt första steg mot segern! Igår kväll landade vi på det förbjudna ön och besegrade de få vakterna satta att vakta nordvästra delen av ön. Jag är ganska säker på att ingen av de andra krigsherrarna har upptäckt oss hittills, så vi bör vara diskreta och bygga upp vår infrastruktur. Snart kommer vi att vara starka nog för att göra räder mot deras positioner."
+msgstr "Äntligen! Vi tog just vårt första steg mot segern! Igår kväll landade vi på det förbjudna ön och besegrade de få vakterna satta att vakta nordvästra delen av ön. Jag är ganska säker på att ingen av de andra krigsherrarna har upptäckt oss hittills, så vi bör vara diskreta och bygga upp vår infrastruktur. Snart kommer vi att vara starka nog för att göra räder mot deras positioner."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:26
-#: ../../maps/Plateau.wmf/scripting/texts.lua:28
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
 msgstr "Erövra det uråldriga slottet"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:29
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Besegra Lanissa och erövra det uråldriga slottet."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:35
-#: ../../maps/Plateau.wmf/scripting/texts.lua:37
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
 msgstr "Besegra Erwyn"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:38
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Besegra Erwyn. Han för befäl över de starkaste fientliga soldaterna som finns kvar på ön."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:43
-#: ../../maps/Plateau.wmf/scripting/texts.lua:45
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
 msgstr "Besegra Jomo"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:46
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:64
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:64
 msgid "First Briefing"
 msgstr "Första genomgång"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:74
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:74
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:85
 msgid "Second Briefing"
 msgstr "Andra genomgången"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
 msgstr "Ett uråldrigt slott"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -86,7 +87,7 @@ msgid ""
 "craft."
 msgstr "Vid gudarna! En av våra spejare har hittat ett mäktigt slott på mitten av den gamla platån. Slottet måste vara mycket gammalt och verkar bygga i en främmande stil. Det är uppenbart att detta inte är barbarernas hantverk."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:80
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:80
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -94,17 +95,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Låt oss hoppas att Lanissa - krigsherren som för befäl över att slottet - fortfarande inte har iakttagit oss. Kanske har vi en chans att erövra den mäktiga byggnaden utan en stor kamp! Men vi måste verkligen erövra den. Det kommer att vara nyckeln till att härska över denna ö!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
 msgstr "Det uråldriga slottet erövrades"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:90
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Härligt! Våra trupper besegrade till sist Lanissa och hennes soldater. Det gamla slottet är vårt!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:91
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:91
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -117,46 +118,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:96
-#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:96
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:105
 msgid "Another Briefing"
 msgstr "Ytterligare genomgång"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:100
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:100
 msgid "Erwyn Defeated"
 msgstr "Erwyn besgerad"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:101
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Utmärkt! Erwyn gav upp när han såg sin sista byggnad brinna ner. En stark krigsherre mindre på ön!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:109
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:109
 msgid "Jomo Defeated"
 msgstr "Jomo besegrad"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:110
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Utmärkt! Jomo gav upp när han såg sin sista byggnad brinna ner. En stark krigsherre mindre på ön!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:114
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:114
 msgid "Last Briefing"
 msgstr "Sista genomgång"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:118
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:118
 msgid "Victory!"
 msgstr "Seger!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:119
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:119
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Äntligen! Hela ön är vår. Nu måste vi bara försvara den bättre än krigsherrarna gjorde."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:120
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

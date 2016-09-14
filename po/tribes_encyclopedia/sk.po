@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:15+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -1608,7 +1608,7 @@ msgstr "Výcvik zdravia"
 
 #: ../../data/tribes/scripting/help/building_help.lua:356
 msgid "Trains ‘Health’ from %1% up to %2%"
-msgstr "Cvičí zdravie od úrovne %1$s až po úroveň %2$s"
+msgstr "Cvičí zdravie od úrovne %1% až po úroveň %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:372

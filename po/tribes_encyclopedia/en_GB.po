@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:31+0000\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -441,7 +441,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, this building can produce a pitta bread in %s on average."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -471,7 +471,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, this building can produce an ox in %s on average."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:3
@@ -845,7 +845,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce grout "
 "in about %s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, this building can produce grout in about %s on average."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:3
@@ -907,7 +907,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "tool in about %s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, this building can produce each tool in about %s on average."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:3
@@ -938,7 +938,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in"
 " about %s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, this building can produce beer in about %s on average."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
@@ -1338,7 +1338,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr "If all needed wares are delivered in time, this building can produce each axe in about %s on average."
+msgstr "If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %1$s and %2$s on average."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:3
@@ -1373,7 +1373,7 @@ msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %1$s and %2$s on "
 "average."
-msgstr "If all needed wares are delivered in time, this building can produce each type of axe in about %s on average."
+msgstr "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:17
