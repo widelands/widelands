@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2016 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
@@ -94,7 +94,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "Seo an uiread de dhochann a nì saighdear air an nàmhaid le ionnsaigh shoirbheachail. Nì saighdear nan Tùsanach le ionnsaigh leibheil 0 dochann air slàinte de mu %1% puing nuair a bhuaileas e a air an nàmhaid gu soirbheachail. Buannaichidh e dochann de %1% le gach leibheil ionnsaighe."
+msgstr "Seo an uiread de dhochann a nì saighdear air an nàmhaid le ionnsaigh shoirbheachail. Nì saighdear nan Tùsanach le ionnsaigh leibheil 0 dochann air slàinte de mu %1% puing nuair a bhuaileas e a air an nàmhaid gu soirbheachail. Buannaichidh e dochann de %2% le gach leibheil ionnsaighe."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
