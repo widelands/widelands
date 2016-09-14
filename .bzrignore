@@ -24,3 +24,6 @@ VERSION
 
 # QT Creator settings
 CMakeLists.txt.user*
+
+# Translation validation files
+po_validation
