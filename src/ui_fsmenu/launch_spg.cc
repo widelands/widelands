@@ -222,7 +222,6 @@ void FullscreenMenuLaunchSPG::clicked_back() {
  * Fill the dropdown with the available win conditions.
  */
 void FullscreenMenuLaunchSPG::load_win_conditions() {
-	log("NOCOM start adding win conditions\n");
 	win_condition_dropdown_.clear();
 	if (settings_->settings().scenario) {
 		win_condition_dropdown_.set_label(_("Scenario"));
@@ -237,30 +236,29 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		if (ml != nullptr) {
 			try {
 				ml->preload_map(true);
+				std::set<std::string> tags = map.get_tags();
+				// Make sure that the last win condition is still valid. If not, pick the first one
+				// available.
+				if (last_win_condition_.empty()) {
+					last_win_condition_ = settings_->settings().win_condition_scripts.front();
+				}
+				std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
 				for (const std::string& win_condition_script :
 				     settings_->settings().win_condition_scripts) {
-					bool is_usable = true;
-					// NOCOM do proper validity check instead
-					if (last_win_condition_.empty()) {
+					if (t) {
+						break;
+					} else {
 						last_win_condition_ = win_condition_script;
+						t = win_condition_if_valid(last_win_condition_, tags);
 					}
+				}
+
+				// Now fill the dropdown.
+				for (const std::string& win_condition_script :
+				     settings_->settings().win_condition_scripts) {
 					try {
-						std::unique_ptr<LuaTable> t = lua_->run_script(win_condition_script);
-						t->do_not_warn_about_unaccessed_keys();
-
-						// Skip this win condition if the map doesn't have all the required tags
-						if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
-
-							for (const std::string& map_tag :
-							     t->get_table("map_tags")->array_entries<std::string>()) {
-								if (!map.has_tag(map_tag)) {
-									is_usable = false;
-									break;
-								}
-							}
-						}
-
-						if (is_usable) {
+						t = win_condition_if_valid(win_condition_script, tags);
+						if (t) {
 							i18n::Textdomain td("win_conditions");
 							win_condition_dropdown_.add(
 							   _(t->get_string("name")), win_condition_script, nullptr,
@@ -293,12 +291,40 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 			log("LaunchSPG: No map loader: %s\n", error_message.c_str());
 		}
 	}
-	log("NOCOM finished adding win conditions\n");
 	win_condition_dropdown_.set_enabled(true);
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
 	last_win_condition_ = win_condition_dropdown_.get_selected();
+}
+
+std::unique_ptr<LuaTable>
+FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition_script,
+                                                std::set<std::string> tags) const {
+	bool is_usable = true;
+	std::unique_ptr<LuaTable> t;
+	try {
+		t = lua_->run_script(win_condition_script);
+		t->do_not_warn_about_unaccessed_keys();
+
+		// Skip this win condition if the map doesn't have all the required tags
+		if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
+
+			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+				if (!tags.count(map_tag)) {
+					is_usable = false;
+					break;
+				}
+			}
+		}
+	} catch (LuaTableKeyError& e) {
+		log(
+		   "LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(), e.what());
+	}
+	if (!is_usable) {
+		t.reset(nullptr);
+	}
+	return t;
 }
 
 /**
@@ -315,11 +341,11 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                filename_.c_str());
-	settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 	if (settings_->can_launch()) {
 		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
+			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 		}
 	}

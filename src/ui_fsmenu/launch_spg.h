@@ -20,6 +20,7 @@
 #ifndef WL_UI_FSMENU_LAUNCH_SPG_H
 #define WL_UI_FSMENU_LAUNCH_SPG_H
 
+#include <memory>
 #include <string>
 
 #include "logic/constants.h"
@@ -67,6 +68,8 @@ private:
 	void select_map();
 	void load_win_conditions();
 	void win_condition_selected();
+	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
+	                                                 std::set<std::string> tags) const;
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
