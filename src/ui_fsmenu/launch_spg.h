@@ -24,6 +24,7 @@
 
 #include "logic/constants.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
@@ -64,9 +65,8 @@ private:
 	LuaInterface* lua_;
 
 	void select_map();
-	void win_condition_clicked();
-	void win_condition_update();
-	void win_condition_load();
+	void load_win_conditions();
+	void win_condition_selected();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
@@ -74,7 +74,10 @@ private:
 	uint32_t butw_;
 	uint32_t buth_;
 
-	UI::Button select_map_, wincondition_, back_, ok_;
+	UI::Button select_map_;
+	UI::Dropdown<std::string> win_condition_dropdown_;
+	std::string last_win_condition_;
+	UI::Button back_, ok_;
 	UI::Button* pos_[MAX_PLAYERS];
 	UI::Textarea title_, mapname_;
 	UI::Textarea name_, type_, team_, tribe_, init_, wincondition_type_;
@@ -87,8 +90,6 @@ private:
 	std::string player_save_tribe_[MAX_PLAYERS];
 	int8_t nr_players_;
 	bool is_scenario_;
-	std::vector<std::string> win_condition_scripts_;
-	uint8_t cur_wincondition_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H
