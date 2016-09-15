@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 11:57+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -583,7 +583,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -752,7 +752,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -1344,7 +1344,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1364,7 +1364,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1443,7 +1443,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1713,7 +1713,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -1727,7 +1727,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -1782,7 +1782,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -1796,7 +1796,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -1829,7 +1829,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -1887,7 +1887,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -1901,7 +1901,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se. "
+msgstr "Tämä rautakaivos on ehtymässä. Laajenna kaivosta tai pura se."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7

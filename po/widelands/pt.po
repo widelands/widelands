@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:59+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 07:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -339,7 +339,7 @@ msgstr "grande"
 
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr " bandeira"
+msgstr "bandeira"
 
 #: ../../src/editor/tools/info_tool.cc:81
 msgid "mine"
@@ -347,7 +347,7 @@ msgstr "mina"
 
 #: ../../src/editor/tools/info_tool.cc:84
 msgid "port"
-msgstr " porto"
+msgstr "porto"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:87
@@ -1677,7 +1677,7 @@ msgstr "Preparando jogo"
 
 #: ../../src/network/netclient.cc:699
 msgid "/me 's file failed md5 checksumming."
-msgstr "ficheiro /me falhou a verificação md5 checksumming."
+msgstr "/me tem ficheiro que falhou a verificação md5 checksumming."
 
 #: ../../src/network/netclient.cc:727
 msgid ""
@@ -1689,7 +1689,7 @@ msgstr ""
 #: ../../src/network/netclient.cc:937
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Será criada uma salvaguarda automática do jogo."
+msgstr "%s Será criada uma salvaguarda automática do jogo."
 
 #: ../../src/network/netclient.cc:941
 msgid "Disconnected from Host"

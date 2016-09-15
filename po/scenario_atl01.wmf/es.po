@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +78,7 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "La isla es enorme y siempre cuando no estemos seguros de que estamos solos aquí, no podemos relajarnos. Explora y conquístalo, es la única forma de protegernos de las amenazas de la isla y de los atlantes. "
+msgstr "La isla es enorme y siempre cuando no estemos seguros de que estamos solos aquí, no podemos relajarnos. Explora y conquístalo, es la única forma de protegernos de las amenazas de la isla y de los atlantes."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
@@ -137,7 +138,7 @@ msgstr "Construye una casa de pescador con agua para obtener el pescado crudo."
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Construye una casa de piscicultor para el pescador para asegurarte de que el pescado no muere. "
+msgstr "Construye una casa de piscicultor para el pescador para asegurarte de que el pescado no muere."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -199,7 +200,7 @@ msgstr "Los minerales tienen que ser forjados en una forja antes de ser usados. 
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr "Construye una mina de cada tipo. Asegúrate de enviar primero a los geologistas a la montaña. "
+msgstr "Construye una mina de cada tipo. Asegúrate de enviar primero a los geologistas a la montaña."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
@@ -239,7 +240,7 @@ msgstr "Construye un almacén y un establo"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr "Almacén y establo "
+msgstr "Almacén y establo"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -263,7 +264,7 @@ msgstr "Construye tres barcos para escapar de la isla"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Escape From the Island"
-msgstr "Escapa de la isla "
+msgstr "Escapa de la isla"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
 msgid ""
@@ -278,7 +279,7 @@ msgstr "Construye un astillero cerca del lago para empezar a construir barcos."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
-msgstr "Orgulloso de la Muerte "
+msgstr "Orgulloso de la Muerte"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:137
 msgid "Favored by the God"
@@ -578,7 +579,7 @@ msgstr "Parece que nuestra producción de alimentos ha terminado y todos están 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
-msgstr "Un hombre va a Jundlina "
+msgstr "Un hombre va a Jundlina"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:259
@@ -697,7 +698,7 @@ msgstr "No le temo al costo y el trabajo mientras mantenga a tu gente a raya. De
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Received a Letter"
-msgstr "Jundlina recibe una carta "
+msgstr "Jundlina recibe una carta"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:332
@@ -772,7 +773,7 @@ msgstr "Otro edificio"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:374
 msgid "Jundlina is Worried"
-msgstr "Jundlina está preocupada "
+msgstr "Jundlina está preocupada"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:376
@@ -786,7 +787,7 @@ msgstr "Hemos encontrado más edificios de esta extraña fabricación. Aún tene
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:384
 msgid "One More Building"
-msgstr "Un edificio más "
+msgstr "Un edificio más"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:387
@@ -898,8 +899,8 @@ msgstr "Has ganado esta misión. Continúa con la siguiente o sigue jugando el t
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Objetivo nuevo "
-msgstr[1] "Objetivos nuevos "
+msgstr[0] "Objetivo nuevo"
+msgstr[1] "Objetivos nuevos"

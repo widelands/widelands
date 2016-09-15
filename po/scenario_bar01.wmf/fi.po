@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 18:18+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 18:55+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -748,18 +748,18 @@ msgstr "Boldreth ilahtuu..."
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Meidän metsästäjä ovat ulkona metsissä, Thron."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr ""
+msgstr "Lupaan sinulle, että ennen kuin aurinko tänään laskee, tulet saamaan mahtavimman aterian, joka sopii kaikkien heimojen heimopäälliköille. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukh tuijottaa yli tasankojen..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:416
@@ -775,7 +775,7 @@ msgstr "Kaunis aamu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron tunnustaa..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:423
@@ -790,11 +790,11 @@ msgstr "Krouvi avasi ovensa asukkaillemme eilen. Vaikka en olekaan järin juhlat
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:426
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr ""
+msgstr "Ehkäpä me tosiaankin olemme hitaasti luomassa tänne paikka jota me voimme... kutsua kodiksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth huomauttaa..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:433
@@ -803,19 +803,19 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr ""
+msgstr "Siispä meillä on nyt sekä kaivoksia että ruokaa heidän ruokkimiseksi. Meidän pitäisi saattaa meidän urhollisten kaivostyöläisten raatamalla saatu malmi käyttökelpoisempaan muotoon. Rautamalmi täytyisi sulatta raudaksi, jotta se olisi valmis taottavaksi miksi ikinä haluammekaan. Ja me tarvitsemme hiiltä pitääksemme sulattajien uunit kuumina."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:439
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh puhuu..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr ""
+msgstr "Kaivostyöläisemme kaivavat ylös aina vain vähemmän ja vähemmän päivä päivältä! Meidän täytyy mennä syvemmälle, lähelle vuoren ydintä, jos me haluamme lisää sen kalleuksia."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:444
@@ -823,11 +823,11 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr ""
+msgstr "Toki on pimeää ja kylmää sellaisissa syvyyksissä ja vain muutama kohkenee vapaehtoisesti sellaisiin paikkoihin. Meidän pitäisi palkita heidän rohkeudesta suuremmila ruoka-annoksilla. Ja oluttuopilla tai kahdella pitääksemme heidän mielensä korkealla."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldreth näyttää huolestuneelta..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452

@@ -2,6 +2,8 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016
 # Markus Hällfors <markus@hallfors.com>, 2015
@@ -13,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-12 18:03+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 06:30+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -363,7 +365,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "Uusi soturin kirves tekee sen hallitsija neljänneksi parhaimmaksi – tai sen tekijän huonoimmaksi."
+msgstr "”Uusi soturin kirves tekee sen hallitsija neljänneksi parhaimmaksi – tai sen tekijän huonoimmaksi.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -548,7 +550,7 @@ msgstr "Maanviljelijä tarvitsee keskimäärin %1% kylvämiseen ja vehnänipun k
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "'Mitä tarkoitat, eikö minun kalani ole muka tuoreita?!'"
+msgstr "”Mitä tarkoitat, eikö minun kalani ole muka tuoreita?!”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -575,7 +577,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr "'Hän pitää eläimistä ja tykkää kasvattaa niitä<br>\nkuten me pidämme ruuanlaitosta ja työdä niitä."
+msgstr "”Hän pitää eläimistä ja tykkää kasvattaa niitä<br>\nkuten me pidämme ruuanlaitosta ja työdä niitä.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -603,7 +605,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity…’"
-msgstr "'Pehmeää ja täydellistä.<br> Ja vieläpä aikaa ja säätä kestävä.<br> Ikuiseksi työstetty auringonvalo...'"
+msgstr "”Pehmeää ja täydellistä.<br> Ja vieläpä aikaa ja säätä kestävä.<br> Ikuiseksi työstetty auringonvalo…”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -663,7 +665,7 @@ msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kaivos voi tuottaa kultamal
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr "'Voin käsitellä tonnikaupalla graniittia, ukko, mutta lopeta turhat höpinäsi.'"
+msgstr "”Voin käsitellä tonnikaupalla graniittia, ukko, mutta lopeta turhat höpinäsi.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
@@ -721,13 +723,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "'Yhtä hiljainen kuin pantteri,<br>viekas kuin kettu,<br>nopea kuin nuoli,<br>tappava kuin käärme.'"
+msgstr "”Yhtä hiljainen kuin pantteri,<br>viekas kuin kettu,<br>nopea kuin nuoli,<br>tappava kuin käärme.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "Metsästystaito"
+msgstr "”Metsästystaito”"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -758,7 +760,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "Kun näen hakkuni kuluvan päivästä toiseen, tiedän tekeväni työtä jolla on tarkoitus."
+msgstr "”Kun näen hakkuni kuluvan päivästä toiseen, tiedän tekeväni työtä jolla on tarkoitus.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -817,7 +819,7 @@ msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kaivos voi tuottaa rautamal
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "Tekee uutta kiveä vanhasta tulen ja veden avulla."
+msgstr "”Tekee uutta kiveä vanhasta tulen ja veden avulla.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -859,7 +861,7 @@ msgid ""
 "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
 " lumberjack.’"
-msgstr "'Iske 200 iskua puun kaatamiseksi ja olet lapsi. Iske 100 ja olet sotilas. Iske 50 ja olet sankari. Iske 20 ja pian sinusta tulee kunniallinen puunhakkaaja.'"
+msgstr "”Iske 200 iskua puun kaatamiseksi ja olet lapsi. Iske 100 ja olet sotilas. Iske 50 ja olet sankari. Iske 20 ja pian sinusta tulee kunniallinen puunhakkaaja.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:8
@@ -886,7 +888,7 @@ msgstr "Puunhakkaaja tarvitsee %s kaataakseen puun, joka ei sisällä aikaa, jok
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "Me saamme kaiken toimimaan!"
+msgstr "”Me saamme kaiken toimimaan!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -920,7 +922,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr "'Ensimmäinen tuoppi vie mennessään nälän, toinen rentouttaa sinut; kun olet kitannut kolmannen, on aika tehdä seuraava siirto!.'"
+msgstr "”Ensimmäinen tuoppi vie mennessään nälän, toinen rentouttaa sinut; kun olet kitannut kolmannen, on aika tehdä seuraava siirto!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:8
@@ -970,7 +972,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
-msgstr "'Hän, joka kasvattaa kaksi puuta siinä kuin muut yhden, ylittää tärkeydessään kenraalitkin.'"
+msgstr "”Hän, joka kasvattaa kaksi puuta siinä kuin muut yhden, ylittää tärkeydessään kenraalitkin.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:9
@@ -998,7 +1000,7 @@ msgstr "Metsänvartija tarvitsee %s istuttaakseen puun, mikä ei sisällä aikaa
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "Me kasvatamme katon pääsi päälle."
+msgstr "”Me kasvatamme katon pääsi päälle”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
@@ -1067,7 +1069,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr "'Elämän eliksiiri,<br> taivaasta luoksemme saapunut,<br> nousee jälleen päivänvaloon.'"
+msgstr "”Elämän eliksiiri,<br> taivaasta luoksemme saapunut,<br> nousee jälleen päivänvaloon.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
@@ -1075,7 +1077,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr "Bardi Sigurdin kirjoittama laulu<br> kun ensimmäiset pisarat tippuivat Suuren kuivuuden jälkeen Chat’Karuthin aikakaudella vuonna 21. "
+msgstr "Bardi Sigurdin kirjoittama laulu<br> kun ensimmäiset pisarat tippuivat Suuren kuivuuden jälkeen Chat’Karuthin aikakaudella vuonna 21."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1297,7 +1299,7 @@ msgstr "Kouluttaa sotilaille 'Hyökkäystä', 'Väistelyä' ja 'Terveyttä'."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "Vihollisen hutilointi on taistelijan paras ystävä."
+msgstr "”Vihollisen hutilointi on taistelijan paras ystävä.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
@@ -1351,7 +1353,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr "Voimakas ei anna anteeksi tai unohda, mutta kostaa kärsityt vääryydet – menneisyydestä ja kaikki tulevat."
+msgstr "”Voimakas ei anna anteeksi tai unohda, mutta kostaa kärsityt vääryydet – menneisyydestä ja kaikki tulevat.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
@@ -1699,38 +1701,38 @@ msgstr "Rakennuskustannukset:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:465
 msgid "Or enhanced from:"
-msgstr "Tai paranneltu rakennuksesta "
+msgstr "Tai paranneltu rakennuksesta"
 
 #: ../../data/tribes/scripting/help/building_help.lua:467
 msgid "Enhanced from:"
-msgstr "Laajennettu rakennuksesta "
+msgstr "Laajennettu rakennuksesta"
 
 #: ../../data/tribes/scripting/help/building_help.lua:476
 msgid "Cumulative cost:"
-msgstr "Kasautuva kulu: "
+msgstr "Kasautuva kulu:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:526
 msgid "If built directly, dismantle yields:"
-msgstr "Jos rakennettu suoraan, purettaessa saadaan: "
+msgstr "Jos rakennettu suoraan, purettaessa saadaan:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:531
 msgid "If enhanced, dismantle yields:"
-msgstr "Jos rakennettu paloittain, purettaessa saadaan: "
+msgstr "Jos rakennettu paloittain, purettaessa saadaan:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
 #: ../../data/tribes/scripting/help/building_help.lua:534
 #: ../../data/tribes/scripting/help/building_help.lua:575
 msgid "Dismantle yields:"
-msgstr "Purettaessa saadaan: "
+msgstr "Purettaessa saadaan:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:584
 msgid "Can be enhanced to:"
-msgstr "Voidaan laajentaa rakennukseksi "
+msgstr "Voidaan laajentaa rakennukseksi"
 
 #: ../../data/tribes/scripting/help/building_help.lua:614
 msgid "Crew required:"
-msgstr "Henkilökuntatarve: "
+msgstr "Henkilökuntatarve:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:614
 #: ../../data/tribes/scripting/help/init.lua:80
@@ -1752,7 +1754,7 @@ msgstr[1] "Työvälineet: "
 
 #: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Experience levels:"
-msgstr "Taitotaso: "
+msgstr "Taitotaso:"
 
 #. TRANSLATORS: EP = Experience Points
 #: ../../data/tribes/scripting/help/building_help.lua:653
@@ -1765,11 +1767,11 @@ msgstr "%s yleneemä kohti %s (%s EP)"
 
 #: ../../data/tribes/scripting/help/building_help.lua:685
 msgid "Production"
-msgstr "Tuotanto "
+msgstr "Tuotanto"
 
 #: ../../data/tribes/scripting/help/building_help.lua:686
 msgid "Performance:"
-msgstr "Suoriutuminen: "
+msgstr "Suoriutuminen:"
 
 #: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
@@ -2113,8 +2115,8 @@ msgstr[1] "Palkatut työntekijät:"
 #: ../../data/tribes/scripting/help/worker_help.lua:105
 msgid "Works at"
 msgid_plural "Works at"
-msgstr[0] "Työskentelee "
-msgstr[1] "Työskentelee "
+msgstr[0] "Työskentelee"
+msgstr[1] "Työskentelee"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:144
@@ -2123,7 +2125,7 @@ msgstr "Työläinen käyttää"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:156
 msgid "Experience levels"
-msgstr "Taitotaso: "
+msgstr "Taitotaso:"
 
 #. TRANSLATORS: Soldier levels
 #: ../../data/tribes/scripting/help/worker_help.lua:177
@@ -2838,7 +2840,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr "Atlantislaiset käyttävät kaadettuja puita myös tehdessään lautoja, joita tarvitaan melkein kaikissa rakennuksissa. Lukuun ottamatta sahaa, miilua, työkalupajaa ja savustamoa kaadettuja puita tarvitaan myös heidän työssä. "
+msgstr "Atlantislaiset käyttävät kaadettuja puita myös tehdessään lautoja, joita tarvitaan melkein kaikissa rakennuksissa. Lukuun ottamatta sahaa, miilua, työkalupajaa ja savustamoa kaadettuja puita tarvitaan myös heidän työssä."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:8

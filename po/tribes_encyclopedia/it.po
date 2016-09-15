@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
+# GunChleoc, 2016
 # Cristiano Magro, 2015
 # Cristiano Magro, 2016
 # Cristiano Magro, 2016
@@ -18,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:30+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 06:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +369,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "'Una nuova ascia da guerriero rivela il meglio in chi la impugna - o il peggio in chi la fabbbrica.'"
+msgstr "«Una nuova ascia da guerriero rivela il meglio in chi la impugna - o il peggio in chi la fabbbrica.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -553,7 +554,7 @@ msgstr "Il contadino impiega in media %1% per seminare e raccogliere un fascio d
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "'Cosa vuoi dire con, il mio pesce non è fresco?!'"
+msgstr "«Cosa vuoi dire con, il mio pesce non è fresco?!»"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -580,7 +581,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr "Lui ama gli animali e ama allevarli<br>\nalmeno quanto noi amiamo cucinarli e mangiarli."
+msgstr "«Lui ama gli animali e ama allevarli<br>\nalmeno quanto noi amiamo cucinarli e mangiarli.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -608,7 +609,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity…’"
-msgstr "'soffice e malleabile,<br> eppure impervio al tempo e agli elementi.<br> Raggi di sole, tessuti nell'eternità...'"
+msgstr "«Soffice e malleabile,<br> eppure impervio al tempo e agli elementi.<br> Raggi di sole, tessuti nell'eternità...»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -668,7 +669,7 @@ msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre oro in 1
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr "'Posso gestire tonnellate di granito, ma non le tue stupide chiacchiere.'"
+msgstr "«Posso gestire tonnellate di granito, ma non le tue stupide chiacchiere.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
@@ -726,13 +727,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "'Silenzioso come una pantera,<br> agile come una donnola,<br> veloce come una freccia,<br> letale come una vipera.'"
+msgstr "«Silenzioso come una pantera,<br> agile come una donnola,<br> veloce come una freccia,<br> letale come una vipera.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "'L'arte della caccia'"
+msgstr "«L'arte della caccia»"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -763,7 +764,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "'Vedo il mio piccone consumarsi giorno dopo giorno e capisco perchè il mio lavoro è importante.'"
+msgstr "«Vedo il mio piccone consumarsi giorno dopo giorno e capisco perchè il mio lavoro è importante.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -822,7 +823,7 @@ msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre ferro gr
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "'Trasformo la pietra vecchia in pietra nuova con acqua e fuoco'"
+msgstr "«Trasformo la pietra vecchia in pietra nuova con acqua e fuoco»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -864,7 +865,7 @@ msgid ""
 "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
 " lumberjack.’"
-msgstr "'Se ti servono 200 colpi di ascia per abbattere un albero sei un bambino. Se te ne servono 100, sei un soldato. Se te ne servono 50, sei un eroe. Se te ne servono 20, sei sulla buona strada per diventare un rispettabile taglialegna.'"
+msgstr "«Se ti servono 200 colpi di ascia per abbattere un albero sei un bambino. Se te ne servono 100, sei un soldato. Se te ne servono 50, sei un eroe. Se te ne servono 20, sei sulla buona strada per diventare un rispettabile taglialegna.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:8
@@ -891,7 +892,7 @@ msgstr "Il taglialegna richiede %s per abbattere un albero, senza contare il tem
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "'Noi lo facciamo funzionare!'"
+msgstr "«Noi lo facciamo funzionare!»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -925,7 +926,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr "'Il primo ti calma la fame, il secondo ti rilassa; quando hai bevuto il terzo, è ora del prossimo turno!'"
+msgstr "«Il primo ti calma la fame, il secondo ti rilassa; quando hai bevuto il terzo, è ora del prossimo turno!»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:8
@@ -975,7 +976,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
-msgstr "'Chi può far crescere due alberi dove normalmente ne crescerebbe solo uno è più importante del più grande dei generali.'"
+msgstr "«Chi può far crescere due alberi dove normalmente ne crescerebbe solo uno è più importante del più grande dei generali.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:9
@@ -1003,7 +1004,7 @@ msgstr "La guardia forestale richiede %s per piantare un albero, senza contare i
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "'Noi facciamo crescere dei tetti'"
+msgstr "«Noi facciamo crescere dei tetti»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
@@ -1058,7 +1059,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr "Tutte le armi la stessa quantità di tempo per essere forgiate, ma il consumo degli stessi materiali grezzi aumenta passo a passo. Gli ultimi due passaggi richiedono l'oro. "
+msgstr "Tutte le armi la stessa quantità di tempo per essere forgiate, ma il consumo degli stessi materiali grezzi aumenta passo a passo. Gli ultimi due passaggi richiedono l'oro."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
@@ -1072,7 +1073,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr "'Oh quanto dolce è la fonte della vita,<br> che sccende dal cielo<br> e disseta la terra.'"
+msgstr "«Oh quanto dolce è la fonte della vita,<br> che sccende dal cielo<br> e disseta la terra.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
@@ -1302,7 +1303,7 @@ msgstr "Addestra i soldati in 'Difesa', 'Schivata' e 'Salute'."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "'Il tuo migliore amico in battaglia è il colpo del nemico che va a vuoto.'"
+msgstr "«Il tuo migliore amico in battaglia è il colpo del nemico che va a vuoto.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
@@ -1321,7 +1322,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "'Evasione' aumenta la possibilità del soldato di non essere colpito dal nemico e pertanto non rimanere influenzato da un attacco."
+msgstr "«Evasione» aumenta la possibilità del soldato di non essere colpito dal nemico e pertanto non rimanere influenzato da un attacco."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:21
@@ -1356,7 +1357,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr "'Colui che è forte non deve ne perdonare ne dimenticare, ma vendicare le ingiustizie subite - nel passato e per tutto il futuro.'"
+msgstr "«Colui che è forte non deve ne perdonare ne dimenticare, ma vendicare le ingiustizie subite - nel passato e per tutto il futuro.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
@@ -1398,7 +1399,7 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "'Evasione' aumenta la possibilità del soldato di non essere colpito dal nemico e pertanto non rimanere influenzato da un attacco."
+msgstr "«Evasione» aumenta la possibilità del soldato di non essere colpito dal nemico e pertanto non rimanere influenzato da un attacco."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:24
@@ -1977,7 +1978,7 @@ msgstr "Mostra la console di elimina errori (solo  nella struttura dell'elimina 
 #: ../../data/tribes/scripting/help/controls.lua:73
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr "Nella finestra di messaggio, sono disponibili le seguenti scorciatoie: "
+msgstr "Nella finestra di messaggio, sono disponibili le seguenti scorciatoie:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76

@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# GunChleoc, 2016
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016
 # Javier Mora <morehash@gmail.com>, 2015
@@ -18,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:12+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 06:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +369,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "\"Una nueva hacha de guerrero saca lo mejor de su portador - o lo peor de su fabricante.\""
+msgstr "«Una nueva hacha de guerrero saca lo mejor de su portador - o lo peor de su fabricante.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -553,7 +554,7 @@ msgstr "El granjero necesita %1% de rendimiento para sembrar y cosechar un fajo 
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "\"¿Qué quieres decir, mi pescado no es fresco ?! '"
+msgstr "«¿Qué quieres decir, mi pescado no es fresco ?!»"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -580,7 +581,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr "\"El ama los animales y criarlos también<br>\ncomo amamos cocinarlos y comerlos.\""
+msgstr "«El ama los animales y criarlos también<br>\ncomo amamos cocinarlos y comerlos.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -608,7 +609,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity…’"
-msgstr "\"Suave y flexible.<br> Y aún intocado por el tiempo y el clima.<br> Rayos de sol, forjados en la eternidad...\""
+msgstr "«Suave y flexible.<br> Y aún intocado por el tiempo y el clima.<br> Rayos de sol, forjados en la eternidad...»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -668,7 +669,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr "\"Puedo manejar toneladas de granito, señor, pero no más de su vanidosa charla.\""
+msgstr "«Puedo manejar toneladas de granito, señor, pero no más de su vanidosa charla.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
@@ -726,13 +727,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "\"Silencioso como una pantera,<br> tan ágil como comadreja,<br> tan rápido como flecha,<br> tan mortal como una víbora.\""
+msgstr "«Silencioso como una pantera,<br> tan ágil como comadreja,<br> tan rápido como flecha,<br> tan mortal como una víbora.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "'El arte de la caza'"
+msgstr "«El arte de la caza»"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
@@ -763,7 +764,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "\"Miro a mi propio pico desgastarse día a día y me doy cuenta de por qué mi trabajo es importante.\""
+msgstr "«Miro a mi propio pico desgastarse día a día y me doy cuenta de por qué mi trabajo es importante.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -822,7 +823,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "\"Formando nueva piedra desde vieja con fuego y agua.\""
+msgstr "«Formando nueva piedra desde vieja con fuego y agua.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -864,7 +865,7 @@ msgid ""
 "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
 " lumberjack.’"
-msgstr "\"Toma 200 golpes tirar un árbol y eres un bebé. Toma 100 y eres un soldado. Toma 50 y eres un héroe. Toma 20 y pronto serás un honorable leñador.\""
+msgstr "«Toma 200 golpes tirar un árbol y eres un bebé. Toma 100 y eres un soldado. Toma 50 y eres un héroe. Toma 20 y pronto serás un honorable leñador.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:8
@@ -891,7 +892,7 @@ msgstr "El leñador necesita %s para tirar un árbol, sin contar el tiempo que n
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "\"¡Hicimos que funcionara!\""
+msgstr "«¡Hicimos que funcionara!»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -925,7 +926,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr "\"Deja que el primero te aleje del hambre, el segundo te pondrá a gusto; ¡cuando hayas devorado el tercero, es tiempo del siguiente turno!\""
+msgstr "«Deja que el primero te aleje del hambre, el segundo te pondrá a gusto; ¡cuando hayas devorado el tercero, es tiempo del siguiente turno!»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:8
@@ -1003,7 +1004,7 @@ msgstr "El agente forestal necesita %s para plantar un árbol, sin contar el tie
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "\"Crecemos techos\""
+msgstr "«Crecemos techos»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
@@ -1072,7 +1073,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr "\"Oh que dulce es la fuente de la vida,<br> que desciende del cielo <br> y deja a la tierra beber.\""
+msgstr "«Oh que dulce es la fuente de la vida,<br> que desciende del cielo <br> y deja a la tierra beber.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
@@ -1302,7 +1303,7 @@ msgstr "Entrena soldados en \"Defensa\", \"Evasión\", y \"Vida\"."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "\"No hay mejor amigo en la batalla que el golpe del enemigo que falla.\""
+msgstr "«No hay mejor amigo en la batalla que el golpe del enemigo que falla.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
@@ -1321,7 +1322,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "\"Evasión\" aumenta la posibilidad del soldado de no ser golpeado por el enemigo y no ser afectado."
+msgstr "«Evasión» aumenta la posibilidad del soldado de no ser golpeado por el enemigo y no ser afectado»"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:21
@@ -1398,7 +1399,7 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "\"Evasión\" aumenta la posibilidad del soldado de no ser golpeado por el enemigo y no ser afectado."
+msgstr "«Evasión» aumenta la posibilidad del soldado de no ser golpeado por el enemigo y no ser afectado."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:24
@@ -2203,7 +2204,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 1 al nivel 2. "
+msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 1 al nivel 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../data/tribes/wares/armor_chain/helptexts.lua:4
@@ -2212,7 +2213,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 2 al nivel 3. "
+msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 2 al nivel 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../data/tribes/wares/armor_gilded/helptexts.lua:4
@@ -2231,7 +2232,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 0 al nivel 1. "
+msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 0 al nivel 1."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../data/tribes/wares/ax/helptexts.lua:4
@@ -2239,7 +2240,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "The ax is the basic weapon of the Barbarians. All young soldiers are "
 "equipped with it."
-msgstr "El hacha es el arma básica de los bárbaros. Todos los soldados jovenes estan equipados con ella. "
+msgstr "El hacha es el arma básica de los bárbaros. Todos los soldados jovenes estan equipados con ella."
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../data/tribes/wares/ax_battle/helptexts.lua:4
@@ -2494,7 +2495,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr " Las hachas de talar son producidas en el taller del metal (pero dejará de ser producido por el edificio si se ha mejorado a taller de hachas o taller de guerra)."
+msgstr "Las hachas de talar son producidas en el taller del metal (pero dejará de ser producido por el edificio si se ha mejorado a taller de hachas o taller de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
@@ -2678,7 +2679,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Granite can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
-msgstr "El granito puede ser procesado en mortero que provee un sólido, no inflamable material de construcción. El mortero es producido en un horno de cal. "
+msgstr "El granito puede ser procesado en mortero que provee un sólido, no inflamable material de construcción. El mortero es producido en un horno de cal."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
@@ -3260,7 +3261,7 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 0 al nivel 1. "
+msgstr "Esta es una lanza avanzada con una punta de acero. Es producida en una armería y usada en un campo de entrenamiento-junto con comida-para entrenar soldados en ataque del nivel 0 al nivel 1."
 
 #. TRANSLATORS: Helptext for a ware: Steel Trident
 #: ../../data/tribes/wares/trident_steel/helptexts.lua:4
@@ -3297,7 +3298,7 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr "El agua es usada en la panadería y la cervecería. La granja de asnos, la granja de ovejas y la granja porcina también necesitan agua. "
+msgstr "El agua es usada en la panadería y la cervecería. La granja de asnos, la granja de ovejas y la granja porcina también necesitan agua."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4

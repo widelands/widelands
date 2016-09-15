@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 13:44+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -636,7 +636,7 @@ msgstr "Grootte: %1% x %2%"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:64
 msgid "Width:"
-msgstr "Breedto: "
+msgstr "Breedto:"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:76
@@ -704,7 +704,7 @@ msgstr "Land:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:173
 msgid "Wasteland:"
-msgstr "Ruigland: "
+msgstr "Ruigland:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:179
 msgid "Mountains:"
@@ -2615,7 +2615,7 @@ msgstr "Beschrijving"
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
-msgstr "Bestandsnaam waaronder het spel werd opgeslagen gevolgd door de naam van de kaart, of de naam van de kaart gevolgd door de laatst verwezenlijkte doelstelling. "
+msgstr "Bestandsnaam waaronder het spel werd opgeslagen gevolgd door de naam van de kaart, of de naam van de kaart gevolgd door de laatst verwezenlijkte doelstelling."
 
 #: ../../src/ui_fsmenu/loadgame.cc:276
 msgid "Save Date:"
@@ -3384,7 +3384,7 @@ msgstr "G: %s"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:142
 msgid "Center main mapview on location"
-msgstr "Centreer de kaart op locatie "
+msgstr "Centreer de kaart op locatie"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:498

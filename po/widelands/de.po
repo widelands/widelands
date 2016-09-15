@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 11:47+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -349,7 +349,7 @@ msgstr "groß"
 
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr " Flagge"
+msgstr "Flagge"
 
 #: ../../src/editor/tools/info_tool.cc:81
 msgid "mine"
@@ -357,7 +357,7 @@ msgstr "Mine"
 
 #: ../../src/editor/tools/info_tool.cc:84
 msgid "port"
-msgstr " Hafen"
+msgstr "Hafen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:87
@@ -1012,7 +1012,7 @@ msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keinen Startpunk
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr "Dieses Spiel wurde mit einer inkompatiblen Widelands-Version gespeichert und kann deshalb nicht geladen werden. "
+msgstr "Dieses Spiel wurde mit einer inkompatiblen Widelands-Version gespeichert und kann deshalb nicht geladen werden."
 
 #: ../../src/logic/map.h:181
 msgid "No description defined"
@@ -1575,7 +1575,7 @@ msgstr "%s hat die Lobby verlassen"
 
 #: ../../src/network/internet_gaming.cc:580
 msgid "Chat message could not be sent."
-msgstr "Die Chat-Nachricht konnte nicht gesendet werden. "
+msgstr "Die Chat-Nachricht konnte nicht gesendet werden."
 
 #: ../../src/network/internet_gaming.cc:594
 #, c-format
@@ -1699,7 +1699,7 @@ msgstr "/me überprüfte die empfangene Datei. Obwohl das md5-Prüfsummenverfahr
 #: ../../src/network/netclient.cc:937
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Eine automatische Spielsicherung wird durchgeführt."
+msgstr "%s Eine automatische Spielsicherung wird durchgeführt."
 
 #: ../../src/network/netclient.cc:941
 msgid "Disconnected from Host"

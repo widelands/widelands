@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Esben Aaberg <esben_aaberg@yahoo.com>, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
-"PO-Revision-Date: 2016-07-05 09:19+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:50+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +70,7 @@ msgstr "Dit hold stjal en artefakt fra en fjende."
 #. "Steve, Robert, David"
 #: ../../data/scripting/win_conditions/artifacts.lua:140
 msgid ", "
-msgstr ","
+msgstr ", "
 
 #: ../../data/scripting/win_conditions/artifacts.lua:147
 msgid "Overview:"
@@ -189,30 +190,30 @@ msgstr "Uendeligt spil (ingen tåge)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Dette er et uendeligt spil uden regler. Ingen tåge."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "Territorial krigsherre"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Hver spiller eller hold forsøger at erobre mere end halvdelen af kortets areal. Vinderen vil være spilleren eller holdet som kan holde kontrol over det område i mindst 20 minutter."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
+#: ../../data/scripting/win_conditions/territorial_lord.lua:156
 #: ../../data/scripting/win_conditions/territorial_time.lua:28
 #, lua-format
 msgid "Team %i"
 msgstr "Hold %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
+#: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:204
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s ejer mere end halvdelen af kortets område."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:159
+#: ../../data/scripting/win_conditions/territorial_lord.lua:160
 #: ../../data/scripting/win_conditions/territorial_time.lua:206
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
@@ -220,12 +221,12 @@ msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Du har stadig %i minut til at forhindre en sejr."
 msgstr[1] "Du har stadig %i minutter til at forhindre en sejr."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
+#: ../../data/scripting/win_conditions/territorial_lord.lua:165
 #: ../../data/scripting/win_conditions/territorial_time.lua:212
 msgid "You own more than half of the map’s area."
 msgstr "Du ejer mere end halvdelen af kortets område."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:166
+#: ../../data/scripting/win_conditions/territorial_lord.lua:167
 #: ../../data/scripting/win_conditions/territorial_time.lua:214
 #, lua-format
 msgid "Keep it for %i more minute to win the game."

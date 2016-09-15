@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:05+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Salakuljettajat on hauska kartta neljälle pelaajalle. Sinä ja kaverisi aloitatte symmetrisen kartan vastakkaisista kulmista. Kartalla on runsaasti salakuljetustunneleita, joista jokin koostuu lähetys- ja vastaanottopisteistä. "
+msgstr "Salakuljettajat on hauska kartta neljälle pelaajalle. Sinä ja kaverisi aloitatte symmetrisen kartan vastakkaisista kulmista. Kartalla on runsaasti salakuljetustunneleita, joista jokin koostuu lähetys- ja vastaanottopisteistä."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Tehdäksesi salakuljetusreitin, joudut tekemään varaston, joka vastaa partnerisi varastoa pyörähdyssymmetrisesti. Tämän jälkeen tavara kuljetetaan 10 sekunnin välein. "
+msgstr "Tehdäksesi salakuljetusreitin, joudut tekemään varaston, joka vastaa partnerisi varastoa pyörähdyssymmetrisesti. Tämän jälkeen tavara kuljetetaan 10 sekunnin välein."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12

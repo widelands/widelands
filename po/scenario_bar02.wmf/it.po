@@ -6,6 +6,7 @@
 # Cristiano Magro, 2015
 # Cristiano Magro, 2016
 # Cristiano Magro, 2016
+# GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-03 14:24+0000\n"
-"Last-Translator: Cristiano Magro\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:45+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -440,7 +441,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldreth ha ragione! Non abbiamo abbastanza cibo per sopravvivere a un lungo e freddo inverno. Dovremmo iniziare a costruire un pozzo,  una capanna del pescatore e una capanna del cacciatore. E se troviamo un luogo con abbastanza spazio, dovremmo costruire anche una fattoria e un forno! Uno dei nostri contadini sembra molto abile - è già riuscito a far crescere un raccolto in questo terreno gelido. "
+msgstr "Boldreth ha ragione! Non abbiamo abbastanza cibo per sopravvivere a un lungo e freddo inverno. Dovremmo iniziare a costruire un pozzo,  una capanna del pescatore e una capanna del cacciatore. E se troviamo un luogo con abbastanza spazio, dovremmo costruire anche una fattoria e un forno! Uno dei nostri contadini sembra molto abile - è già riuscito a far crescere un raccolto in questo terreno gelido."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
@@ -555,7 +556,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "La nostra economia mineraria sembra funzionare bene, questa è davvero una buona notizia! Comunque, ci sono ancora un sacco di uomini e donne in attesa di ottenere un lavoro, in modo che possano aiutare i nostri soldati a prepararsi per la guerra a venire. "
+msgstr "La nostra economia mineraria sembra funzionare bene, questa è davvero una buona notizia! Comunque, ci sono ancora un sacco di uomini e donne in attesa di ottenere un lavoro, in modo che possano aiutare i nostri soldati a prepararsi per la guerra a venire."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322

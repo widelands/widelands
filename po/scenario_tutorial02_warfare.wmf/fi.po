@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 10:59+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "Tässä skenaariossa, miinä kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista, ei hajottamista, täällä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen, ei sotilaallisiin strategioihin, ja sen mekaniikat ovat selvityksen arvoisia. "
+msgstr "Tässä skenaariossa, miinä kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista, ei hajottamista, täällä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen, ei sotilaallisiin strategioihin, ja sen mekaniikat ovat selvityksen arvoisia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
@@ -405,7 +406,7 @@ msgstr "Voit käyttää tämän mahdollisuuden tutustua muihin vaihtoehtoihin: a
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Dismantle your north-western sentry"
-msgstr "Pura sinun vartiomökki luoteessa "
+msgstr "Pura sinun vartiomökki luoteessa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid ""
@@ -490,7 +491,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen. "
+msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
@@ -549,7 +550,7 @@ msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr "Olet nyt valmis pelaamaan kampanjoita. Ne opettavat sinulle erilaisista heimotalouksista. Voit myös pelata loput opetuspelit, mutta ne eivät ole välttämättömiä kampanjoissa onnistumiseksi "
+msgstr "Olet nyt valmis pelaamaan kampanjoita. Ne opettavat sinulle erilaisista heimotalouksista. Voit myös pelata loput opetuspelit, mutta ne eivät ole välttämättömiä kampanjoissa onnistumiseksi."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

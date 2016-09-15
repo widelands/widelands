@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 13:48+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 05:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1090,7 +1090,7 @@ msgstr "Fo ionnsaigh!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:853
 msgid "You are under attack"
-msgstr "Tha thu fo ionnsaigh!"
+msgstr "Tha thu fo ionnsaigh"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1497,7 +1497,7 @@ msgstr "Cha b’ urrainn dha Widelands ceangal ris a’ mheata-fhrithealaiche."
 
 #: ../../src/network/internet_gaming.cc:113 ../../src/network/netclient.cc:104
 msgid "Could not establish connection to host"
-msgstr "Cha b’ urrainn dhuinn ceangal a dhèanamh ris an òstair."
+msgstr "Cha b’ urrainn dhuinn ceangal a dhèanamh ris an òstair"
 
 #: ../../src/network/internet_gaming.cc:114
 msgid ""
@@ -1630,7 +1630,7 @@ msgstr "chan eil fhios"
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "There is no user with the name %s logged in!"
-msgstr "Chan eil duine air a logadh a-steach air a bheil %s!"
+msgstr "Chan eil duine air a chlàradh a-steach air a bheil %s!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "The sent password was incorrect!"
@@ -1642,7 +1642,7 @@ msgstr "Cha chuir sinn taic ri tionndadh a’ phròtacail a bhios tu a’ chleac
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr "Tha thu air logadh a-steach mar-thà!"
+msgstr "Tha thu air do chlàradh a-steach mar-thà!"
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid ""
@@ -1688,7 +1688,7 @@ msgstr "Cha deach leis a’ mheata-fhrithealaiche ceangal ris a’ gheama agad. 
 msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
-msgstr "Dh’fheuch thu ri logadh a-steach a-rithist, ach chan aithnich am frithealaiche an staid roimhpe agad tuilleadh."
+msgstr "Dh’fheuch thu ri clàradh a-steach a-rithist, ach chan aithnich am frithealaiche an staid a bh’ agad roimhe tuilleadh."
 
 #: ../../src/network/netclient.cc:105
 msgid ""
@@ -1794,7 +1794,7 @@ msgstr "Ma tha, sgrìobh: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:416
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr "chaidh sgur de dhearbhadh a’ bhròig: cha deach ainm a thoirt seachad!"
+msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach ainm a thoirt seachad!"
 
 #: ../../src/network/nethost.cc:418
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -1802,7 +1802,7 @@ msgstr "Na cleachd mar sin e, bu chòir dha bith: /ack_kick <ainm>"
 
 #: ../../src/network/nethost.cc:424
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr "chaidh sgur de dhearbhadh a’ bhròig: cha deach an t-ainm ceart a thoirt seachad!"
+msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach an t-ainm ceart a thoirt seachad!"
 
 #: ../../src/network/nethost.cc:433
 msgid "Pause was already forced - game should be paused."
@@ -2275,7 +2275,7 @@ msgstr "Cobhair: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:51
 msgid "Metaserver Lobby"
-msgstr "Lobaidh a’ mheata-fhrithealaiche:"
+msgstr "Lobaidh a’ mheata-fhrithealaiche"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Clients online:"
@@ -2802,7 +2802,7 @@ msgstr "LAN / IP dìreach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:102
 msgid "Show login dialog"
-msgstr "Seall còmhradh logaidh a-steach"
+msgstr "Seall còmhradh clàraidh a-steach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:129
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:66
@@ -3045,7 +3045,7 @@ msgstr "A bheil thu cinnteach gu bheil thu airson %s a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:332
 msgid "Cancel expedition?"
-msgstr "Sgur dhen triall"
+msgstr "Dearbh sgur dhen triall"
 
 #: ../../src/wui/actionconfirm.cc:333
 msgid "Do you really want to cancel the active expedition?"
@@ -3674,7 +3674,7 @@ msgstr "Fàg an ath-chluiche"
 
 #: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
-msgstr "Logadh a-steach a’ mheata-fhrithealaiche:"
+msgstr "Clàradh a-steach a’ mheata-fhrithealaiche"
 
 #: ../../src/wui/login_box.cc:34
 msgid "Nickname:"
@@ -3690,15 +3690,15 @@ msgstr "RABHADH: Thèid am facal-faire a shealltainn is a shàbhaladh air dòigh
 
 #: ../../src/wui/login_box.cc:45
 msgid "Log in to a registered account"
-msgstr "Log a-steach le cunntas clàraichte"
+msgstr "Clàraich a-steach le cunntas clàraichte"
 
 #: ../../src/wui/login_box.cc:48
 msgid "Automatically use this login information from now on."
-msgstr "Cleachd am fiosrachadh logaidh a-steach seo gu fèin-obrachail o seo a-mach."
+msgstr "Cleachd am fiosrachadh clàraidh a-steach seo gu fèin-obrachail o seo a-mach."
 
 #: ../../src/wui/login_box.cc:56
 msgid "Login"
-msgstr "Log a-steach"
+msgstr "Clàraich a-steach"
 
 #: ../../src/wui/login_box.cc:77
 msgid "Empty Nickname"

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 13:44+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1693,7 +1693,7 @@ msgstr "/me ellenőrizte a kapott fájlt. Bár az md5 ellenőrzés sikeres volt,
 #: ../../src/network/netclient.cc:937
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Egy automatikus mentés lesz létrehozva."
+msgstr "%s Egy automatikus mentés lesz létrehozva."
 
 #: ../../src/network/netclient.cc:941
 msgid "Disconnected from Host"
@@ -1706,7 +1706,7 @@ msgstr "Az elérhető gazda parancsok:"
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:346
 msgid "/help  -  Shows this help"
-msgstr " /help - Megjeleníti ezt a segítséget"
+msgstr "/help - Megjeleníti ezt a segítséget"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:348

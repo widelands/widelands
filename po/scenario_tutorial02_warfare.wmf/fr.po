@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 10:59+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +56,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Un nouveau soldat est créé de la même façon qu'un ouvrier : lorsqu'un bâtiment militaire requiert un soldat, un porteur récupère les armes et armures requises dans un entrepôt (ou votre quartier général) puis se rend dans votre nouveau bâtiment par la route. Le soldat Barbare de base n'utilise pas d'armure, il n'a besoin que d'une hache.  "
+msgstr "Un nouveau soldat est créé de la même façon qu'un ouvrier : lorsqu'un bâtiment militaire requiert un soldat, un porteur récupère les armes et armures requises dans un entrepôt (ou votre quartier général) puis se rend dans votre nouveau bâtiment par la route. Le soldat Barbare de base n'utilise pas d'armure, il n'a besoin que d'une hache."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -331,7 +332,7 @@ msgstr "Il y a une autre manière de contrôler la puissance d'un bâtiment mili
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr "Si vous voulez renvoyer un soldat particulier, vous pouvez simplement cliquer sur son icône dans la fenêtre du bâtiment. Il sera remplacé par un autre soldat. "
+msgstr "Si vous voulez renvoyer un soldat particulier, vous pouvez simplement cliquer sur son icône dans la fenêtre du bâtiment. Il sera remplacé par un autre soldat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid ""
@@ -385,7 +386,7 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Cependant, détruire un bâtiment militaire est toujours risqué : le territoire vous appartient, mais il n'est plus protégé. Tout ennemi qui construirait son propre bâtiment militaire prendrait le contrôle de ce territoire sans combattre, et vos bâtiments seraient détruits par les flammes. \nDe plus, certaines parties du territoires peuvent désormais être masquées par le brouillard de guerre. Vous ne devriez démanteler que les bâtiments qui se trouvent au cœur de votre territoire, où vous êtes à l'abri des attaques ennemies. "
+msgstr "Cependant, détruire un bâtiment militaire est toujours risqué : le territoire vous appartient, mais il n'est plus protégé. Tout ennemi qui construirait son propre bâtiment militaire prendrait le contrôle de ce territoire sans combattre, et vos bâtiments seraient détruits par les flammes. \nDe plus, certaines parties du territoires peuvent désormais être masquées par le brouillard de guerre. Vous ne devriez démanteler que les bâtiments qui se trouvent au cœur de votre territoire, où vous êtes à l'abri des attaques ennemies."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid ""
@@ -402,7 +403,7 @@ msgstr "Démantelez-la."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Vous pouvez également profiter de l'occasion pour vous familiariser avec les autres options : la préférence héros / débutants et la capacité. "
+msgstr "Vous pouvez également profiter de l'occasion pour vous familiariser avec les autres options : la préférence héros / débutants et la capacité."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Dismantle your north-western sentry"
@@ -491,7 +492,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Beau travail, la citadelle est achevée. Mais qu'est ce que ceci ? Une tribu hostile s'est installée près de nous pendant que la citadelle était en construction ! Est-ce que vous voyez comment ils ont pris une partie de notre territoire ? Et notre bûcheron a maintenant perdu son lieu de travail. C'est de cela dont je parlais. Reprenons notre territoire et vainquons notre ennemi ! "
+msgstr "Beau travail, la citadelle est achevée. Mais qu'est ce que ceci ? Une tribu hostile s'est installée près de nous pendant que la citadelle était en construction ! Est-ce que vous voyez comment ils ont pris une partie de notre territoire ? Et notre bûcheron a maintenant perdu son lieu de travail. C'est de cela dont je parlais. Reprenons notre territoire et vainquons notre ennemi !"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:24+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 06:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -360,7 +360,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "«La destral d'un guerrer novell demostra les millors qualitats de qui l'empunya o el pitjor de qui la va fer»."
+msgstr "«La destral d'un guerrer novell demostra les millors qualitats de qui l'empunya o el pitjor de qui la va fer.»"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -384,7 +384,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is an upgrade from the metal workshop but doesn’t "
 "require additional qualification for the worker."
-msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres edificis de producció d'eines i armes. És la millora del taller de metall però el treballador no necessita qualificació addicional. "
+msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres edificis de producció d'eines i armes. És la millora del taller de metall però el treballador no necessita qualificació addicional."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -822,7 +822,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr "La resposta del fill d'en Ragnald quan se li preguntà què feia amb aquella brutícia. La seva «nova pedra» és avui en dia un important material de construcció. "
+msgstr "La resposta del fill d'en Ragnald quan se li preguntà què feia amb aquella brutícia. La seva «nova pedra» és avui en dia un important material de construcció."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
@@ -2296,7 +2296,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Beer is produced in micro breweries and used in inns and big inns to produce"
 " snacks."
-msgstr "La cervesa es produeix en petites cerveseries i es consumeix als hostals i tavernes per produir aperitius. "
+msgstr "La cervesa es produeix en petites cerveseries i es consumeix als hostals i tavernes per produir aperitius."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:6
@@ -3224,7 +3224,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "El trident doble és un dels millors tridents produïts pel taller d'armes atlant. S'usa a la masmorra, juntament amb menjar, per entrenar el nivell d'atac dels soldats de nivell 2 a nivell 3. "
+msgstr "El trident doble és un dels millors tridents produïts pel taller d'armes atlant. S'usa a la masmorra, juntament amb menjar, per entrenar el nivell d'atac dels soldats de nivell 2 a nivell 3."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Double Trident
 #: ../../data/tribes/wares/trident_heavy_double/helptexts.lua:4

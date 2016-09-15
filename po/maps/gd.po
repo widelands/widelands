@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 13:40+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-15 06:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "Tùsanaich"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "Furasta. Bheir e eòlas air na Tùsanaich dhut."
+msgstr "Furasta. Bheir e eòlas air na Tùsanaich dhut"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -91,7 +91,7 @@ msgstr "Impireachd"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr "Furasta. Bheir e eòlas air an Impireachd dhut."
+msgstr "Furasta. Bheir e eòlas air an Impireachd dhut"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""

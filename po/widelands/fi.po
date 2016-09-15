@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 11:55+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -344,7 +344,7 @@ msgstr "iso"
 
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr " lippu"
+msgstr "lippu"
 
 #: ../../src/editor/tools/info_tool.cc:81
 msgid "mine"
@@ -352,7 +352,7 @@ msgstr "mine (louhi)"
 
 #: ../../src/editor/tools/info_tool.cc:84
 msgid "port"
-msgstr " satama"
+msgstr "satama"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:87
@@ -376,7 +376,7 @@ msgstr "Omistettu: Player %u"
 
 #: ../../src/editor/tools/info_tool.cc:104
 msgid "Owned by: —"
-msgstr "Omistaja: "
+msgstr "Omistaja: —"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "Has immovable"
@@ -456,7 +456,7 @@ msgstr "Pelaajia: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: -"
-msgstr "Pelaajia: "
+msgstr "Pelaajia: -"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -2543,7 +2543,7 @@ msgstr "Lataa pelin toisto"
 
 #: ../../src/ui_fsmenu/loadgame.cc:180
 msgid "The map that this replay is based on"
-msgstr "Kartta, jossa tätä toistoa on pelattu "
+msgstr "Kartta, jossa tätä toistoa on pelattu"
 
 #: ../../src/ui_fsmenu/loadgame.cc:181
 msgid "Delete this replay"

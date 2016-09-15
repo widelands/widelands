@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:35+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -353,7 +353,7 @@ msgstr "kopalnia"
 
 #: ../../src/editor/tools/info_tool.cc:84
 msgid "port"
-msgstr " port"
+msgstr "port"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:87
@@ -1583,7 +1583,7 @@ msgstr "%s opuścił lobby"
 
 #: ../../src/network/internet_gaming.cc:580
 msgid "Chat message could not be sent."
-msgstr "Nie można wysłać wiadomości czatu. "
+msgstr "Nie można wysłać wiadomości czatu."
 
 #: ../../src/network/internet_gaming.cc:594
 #, c-format
@@ -1707,7 +1707,7 @@ msgstr "/me sprawdził odebrany plik. Pomimo, że suma md5 się zgadza, nie mog�
 #: ../../src/network/netclient.cc:937
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr " %s Gra zostanie zapisana automatycznie."
+msgstr "%s Gra zostanie zapisana automatycznie."
 
 #: ../../src/network/netclient.cc:941
 msgid "Disconnected from Host"

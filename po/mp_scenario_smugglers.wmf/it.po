@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 09:59+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Contrabbandieri è una mappa divertente per 4 giocatori. Tu e il tuo compagno iniziate diagonalmente su un'isola in un punto simmetrico. Ci sono molti tunnel di contrabbando su quest'isola, ciascuno con un punto di ricezione e di invio. "
+msgstr "Contrabbandieri è una mappa divertente per 4 giocatori. Tu e il tuo compagno iniziate diagonalmente su un'isola in un punto simmetrico. Ci sono molti tunnel di contrabbando su quest'isola, ciascuno con un punto di ricezione e di invio."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -66,7 +66,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Per stabilire un percorso di contrabbando, devi costruire un magazzino in un punto di ricezione/invio mentre il tuo compagno di squadra deve costruirne uno nel punto di ricezione/invio corrispondente. Una merce è allora trasportata ogni 10 secondi. "
+msgstr "Per stabilire un percorso di contrabbando, devi costruire un magazzino in un punto di ricezione/invio mentre il tuo compagno di squadra deve costruirne uno nel punto di ricezione/invio corrispondente. Una merce è allora trasportata ogni 10 secondi."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
