@@ -22,6 +22,8 @@
 
 #include <deque>
 
+#include <boost/signals2.hpp>
+
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -44,6 +46,8 @@ protected:
 	}
 
 public:
+	boost::signals2::signal<void()> selected;
+
 	/// The number of elements listed in the dropdown.
 	uint32_t size() const;
 

@@ -148,9 +148,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
      is_scenario_(false) {
 	select_map_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
-	// NOCOM
-	// win_condition_dropdown_.selected.connect(boost::bind(&FullscreenMenuLaunchSPG::win_condition_selected,
-	// this));
+	win_condition_dropdown_.selected.connect(
+	   boost::bind(&FullscreenMenuLaunchSPG::win_condition_selected, this));
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_ok, boost::ref(*this)));
 
@@ -236,60 +235,53 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		std::unique_ptr<Widelands::MapLoader> ml =
 		   map.get_correct_loader(settings_->settings().mapfilename);
 		if (ml != nullptr) {
-			// NOCOM try {
-			ml->preload_map(true);
-			int counter = 0;
-			for (const std::string& win_condition_script :
-			     settings_->settings().win_condition_scripts) {
-				bool is_usable = true;
-				try {
-					std::unique_ptr<LuaTable> t = lua_->run_script(win_condition_script);
-					t->do_not_warn_about_unaccessed_keys();
+			try {
+				ml->preload_map(true);
+				for (const std::string& win_condition_script :
+				     settings_->settings().win_condition_scripts) {
+					bool is_usable = true;
+					// NOCOM do proper validity check instead
+					if (last_win_condition_.empty()) {
+						last_win_condition_ = win_condition_script;
+					}
+					try {
+						std::unique_ptr<LuaTable> t = lua_->run_script(win_condition_script);
+						t->do_not_warn_about_unaccessed_keys();
 
-					// Skip this win condition if the map doesn't have all the required tags
-					if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
+						// Skip this win condition if the map doesn't have all the required tags
+						if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
 
-						for (const std::string& map_tag :
-						     t->get_table("map_tags")->array_entries<std::string>()) {
-							if (!map.has_tag(map_tag)) {
-								is_usable = false;
-								break;
+							for (const std::string& map_tag :
+							     t->get_table("map_tags")->array_entries<std::string>()) {
+								if (!map.has_tag(map_tag)) {
+									is_usable = false;
+									break;
+								}
 							}
 						}
-					}
 
-					if (is_usable) {
-						log("NOCOM adding %s\n", win_condition_script.c_str());
-						i18n::Textdomain td("win_conditions");
-						/* NOCOM
-						win_condition_dropdown_.add(_(t->get_string("name")),
-						                            win_condition_script,
-						                            nullptr,
-						                            false,
-						                            t->get_string("description"));
-
-						*/
-						win_condition_dropdown_.add(
-						   _(t->get_string("name")), win_condition_script, nullptr,
-						   counter++ == 0 || win_condition_script == last_win_condition_,
-						   t->get_string("description"));
-						log("NOCOM added\n");
+						if (is_usable) {
+							i18n::Textdomain td("win_conditions");
+							win_condition_dropdown_.add(
+							   _(t->get_string("name")), win_condition_script, nullptr,
+							   win_condition_script == last_win_condition_, t->get_string("description"));
+						}
+					} catch (LuaTableKeyError& e) {
+						log("LaunchSPG: Error loading win condition: %s %s\n",
+						    win_condition_script.c_str(), e.what());
 					}
-				} catch (LuaTableKeyError& e) {
-					log("LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-					    e.what());
 				}
+			} catch (const std::exception& e) {
+				const std::string error_message =
+				   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
+				                    "could not be loaded.")) %
+				    settings_->settings().mapfilename)
+				      .str();
+				win_condition_dropdown_.set_label(_("Error"));
+				win_condition_dropdown_.set_tooltip(error_message);
+				log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
 			}
-			/* NOCOM
-		} catch (const std::exception& e) {
-			const std::string error_message = (boost::format(_("Unable to determine valid win
-		conditions because the map '%s' could not be loaded."))
-			                                   % settings_->settings().mapfilename).str();
-			win_condition_dropdown_.set_label(_("Error"));
-			win_condition_dropdown_.set_tooltip(error_message);
-			log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
-		}
-		*/
+
 		} else {
 			const std::string error_message =
 			   (boost::format(_("Unable to determine valid win conditions because the map '%s' could "
@@ -302,12 +294,11 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		}
 	}
 	log("NOCOM finished adding win conditions\n");
-	// NOCOM select(0)
 	win_condition_dropdown_.set_enabled(true);
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
-	// NOCOM last_win_condition_ = win_condition_dropdown_.get_selected();
+	last_win_condition_ = win_condition_dropdown_.get_selected();
 }
 
 /**

@@ -152,6 +152,7 @@ void BaseDropdown::set_value() {
 		display_button_.set_title((boost::format("%1%: %2%") % label_ % (name)).str());
 	}
 	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
+	selected();
 }
 
 void BaseDropdown::toggle_list() {
