@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:14+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 14:19+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgstr "Először is, bal gombbal rákattintok a szimbólumra, ahová a favágó
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr ""
+msgstr "Kattints az „OK” gombra hogy megnézz. Lassan csinálom: rákattintok – aztán kiválasztom a lapfült – és végül kiválasztom az épületet."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -169,7 +169,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Ezzel még nem végeztem. Még össze kell kötni a favágókunyhót az úthálózat többi részével. Letiltottad a „Út építése a zászlók elhelyezése után” beállítást (a megváltoztatáshoz válaszd a „Beállításokat„ a Widelands főmenüjében). Ezért kézzel váltottam át útépítési módba. Később elmondom azt hogyan kell. Az út megépítéséhez nincs más dolgom, mint a főhadiszállás kék zászlójára kattintani."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"

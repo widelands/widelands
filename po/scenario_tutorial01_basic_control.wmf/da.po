@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 08:03+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -315,7 +315,7 @@ msgstr "Der er tre måder at flytte din visning. Den første er at bruge piletas
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr "Klik på knappen »O.k.« og flyt så visningen via piletasterne."
+msgstr "Klik på knappen »O.k.« og flyt så visningen via piletasterne"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -406,7 +406,7 @@ msgstr "Åbn minikortet ved at bruge den tredje knap fra venstre i bunden af din
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr "Prøv lidt forskelligt med forskellige ekstra informationer (veje, flag etc.)."
+msgstr "Prøv lidt forskelligt med forskellige ekstra informationer (veje, flag etc.)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:40+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 08:15+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1631,7 +1631,7 @@ msgstr "Du blev koblet af da metaserveren er ved at blive genstartet."
 
 #: ../../src/network/internet_gaming_messages.cc:51
 msgid "Connection was closed by the client normally."
-msgstr "Forbindelsen blev lukket normalt af klienten"
+msgstr "Forbindelsen blev lukket normalt af klienten."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "The connection to the metaserver was lost."
@@ -1724,7 +1724,7 @@ msgstr "/kick <navn> <årsag> - Smid brugeren <navn> ud på grund af <årsag>"
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:354
 msgid "/forcePause            -  Force the game to pause."
-msgstr "/forcePause - tving spillet på pause"
+msgstr "/forcePause - tving spillet på pause."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:356
@@ -2306,7 +2306,7 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
-msgstr "Widelands kunne ikke indhente IP-adressen for serveren tids nok.\nDer ser ud til at være et netværksproblem, enten hos dig eller hos \nserveren..\n"
+msgstr "Widelands kunne ikke indhente IP-adressen for serveren tids nok.\nDer ser ud til at være et netværksproblem, enten hos dig eller hos \nserveren.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:373
 msgid "Connection timed out"
@@ -2688,7 +2688,7 @@ msgstr "Denne fil har forkert format og kan ikke indlæses. Måske blev den opre
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/ui_fsmenu/loadgame.cc:598
 msgid "Error message:"
-msgstr "Fejlbesked"
+msgstr "Fejlbesked:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
 #: ../../src/ui_fsmenu/loadgame.cc:611 ../../src/ui_fsmenu/loadgame.cc:613

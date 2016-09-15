@@ -4,7 +4,8 @@
 # Translators:
 # Endrju <endrjux@gmail.com>, 2005
 # GunChleoc, 2016
-# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Wesmania <ikk_pl@yahoo.co.uk>, 2015
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # MikeNow <m.nowot@gmail.com>, 2015
 # Sebastian Janus <sebek89@gmail.com>, 2015
 # Szymon Gackowski <szymon.gackowski@gmail.com>, 2016
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 11:48+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +83,7 @@ msgstr "Nie ma miejsca dla niektórych z twoich początkowych budynków, więc n
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
-msgstr "Brak miejsca"
+msgstr "Za mało miejsca"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -764,7 +765,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "Mapa została wygenerowana. Sprawdź, czy punkty startowe graczy zostały wygenerowane prawidłowo i nie wystąpią żadne nieprzewidziane trudności."
+msgstr "Mapa została wygenerowana. Sprawdź, czy punkty startowe graczy zostały wygenerowane prawidłowo - być może ktoś wylądował w górach, na malutkiej wyspie albo na środku wody."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:29
@@ -864,13 +865,13 @@ msgstr "Ustaw wartość:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Kliknij na mapie, aby podwyższyć teren, SHIFT + kliknij, aby go obniżyć"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "CTRL + kliknij na mapie, aby ustawić wysokość terenu"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
@@ -882,12 +883,12 @@ msgstr "Surowce"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Kliknij na mapie, aby zwiększyć, SHIFT + kliknij, aby zmniejszyć ilość wybranego surowca"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "CTRL + kliknij na mapie, aby ustawić ilość wybranego surowca"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -895,7 +896,7 @@ msgstr "Ustaw wysokość"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:60
 msgid "Random height"
-msgstr ""
+msgstr "Losowa wysokość"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:142
 msgid "Terrain"
@@ -923,15 +924,15 @@ msgstr "Ustaw pozycję, która będzie miała współrzędne (0, 0). Będzie ona
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
-msgstr ""
+msgstr "Opcje losowej wysokości"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Minimalna wysokość:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Maksymalna wysokość:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
@@ -939,20 +940,20 @@ msgstr ""
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr ""
+msgstr "Kliknij na mapie, aby ustawić wysokość terenu losowo w zadanym przedziale"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
-msgstr ""
+msgstr "Losowa wysokość"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:103
 msgid "Fixed Height"
-msgstr ""
+msgstr "Ustalona wysokość"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 msgid "Terrain Select"
@@ -983,12 +984,12 @@ msgstr "Wczytywanie świata"
 
 #: ../../src/logic/game.cc:227 ../../src/logic/game.cc:298
 msgid "Loading map…"
-msgstr ""
+msgstr "Wczytywanie mapy..."
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
 msgid "Loading…"
-msgstr ""
+msgstr "Wczytywanie..."
 
 #: ../../src/logic/game.cc:437
 msgid "Creating player infrastructure"
@@ -1024,71 +1025,71 @@ msgstr "Zbudowano %i%%"
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:96
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "Rozebrano %u%%"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:118
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% żołnierz (+%2%)"
+msgstr[1] "%1% żołnierzy (+%2%)"
+msgstr[2] "%1% żołnierzy (+%2%)"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:122
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u żołnierz"
+msgstr[1] "%u żołnierzy"
+msgstr[2] "%u żołnierzy"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:130
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1%(+%2%) żołnierz (+%3%)"
+msgstr[1] "%1%(+%2%) żołnierzy (+%3%)"
+msgstr[2] "%1%(+%2%) żołnierzy (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:136
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1%(+%2%) żołnierz"
+msgstr[1] "%1%(+%2%) żołnierzy"
+msgstr[2] "%1%(+%2%) żołnierzy"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:770
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "Utracono!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:771
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Utracono budynek wojskowy!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy Defeated!"
-msgstr ""
+msgstr "Pokonano wroga!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Pokonano wroga na pozycji!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:853
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Atak!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:853
 msgid "You are under attack"
-msgstr ""
+msgstr "Zostałeś zaatakowany"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1096,7 +1097,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:292
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "ekonomia potrzebuje towaru: %s"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
@@ -1104,7 +1105,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:301
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "ekonomia nie potrzebuje towaru: %s"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1112,14 +1113,14 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:314
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "ekonomia potrzebuje pracownika: %s"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/map_objects/tribes/production_program.cc:324
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "ekonomia nie potrzebuje pracownika: %s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are
@@ -1141,29 +1142,29 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:369
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "budynek posiada towary: %s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:391
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "budynek nie posiada towarów: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:404
 msgid "a worker needs experience"
-msgstr ""
+msgstr "pracownik potrzebuje doświadczenia"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:410
 msgid "the workers need no experience"
-msgstr ""
+msgstr "pracownicy nie potrzebują doświadczenia"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1182,23 +1183,23 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:858
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "Nie rozpoczęto: %1$s, ponieważ %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:519
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "Ukończono: %1$s, ponieważ %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:524
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "Pominięto: %1$s, gdyż %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:719
 msgid "No use for ships on this map!"
-msgstr ""
+msgstr "Statki na tej mapie są bezużyteczne!"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1208,9 +1209,9 @@ msgstr ""
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "brakuje: %s"
+msgstr[1] "brakuje: %s"
+msgstr[2] "brakuje: %s"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
@@ -1219,9 +1220,9 @@ msgstr[2] ""
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wyprodukowano: %s"
+msgstr[1] "Wyprodukowano: %s"
+msgstr[2] "Wyprodukowano: %s"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -1230,33 +1231,33 @@ msgstr[2] ""
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zatrudniono: %s"
+msgstr[1] "Zatrudniono: %s"
+msgstr[2] "Zatrudniono: %s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Brak żołnierzy do treningu!"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1245
 #: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nie znaleziono żołnierzy dla tego poziomu treningu!"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
-msgstr ""
+msgstr "(niezamieszkany)"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Brakuje pracownika"
+msgstr[1] "Brakuje pracowników"
+msgstr[2] "Brakuje pracowników"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
-msgstr ""
+msgstr "(zatrzymano)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -1268,100 +1269,100 @@ msgstr "%i%%"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Nie można znaleźć więcej surowców!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space"
-msgstr ""
+msgstr "Miejsce na port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space Found"
-msgstr ""
+msgstr "Znaleziono miejsce na port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Ekspedycja znalazła miejsce zdatne do budowy portu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Opłynięto wyspę"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
-msgstr ""
+msgstr "Czeka"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Ekspedycja opłynęła wyspę nie znalazłszy niczego godnego uwagi."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
-msgstr ""
+msgstr "Dotarto do brzegu"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
-msgstr ""
+msgstr "Ląd na horyzoncie!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Ekspedycja dotarła do brzegu i oczekuje dalszych rozkazów."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
-msgstr ""
+msgstr "Nowy plac budowy portu zniknął"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
-msgstr ""
+msgstr "Utracono port!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Nie udało się wyładować towarów, anulowano ekspedycję."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
-msgstr ""
+msgstr "Ekspedycja"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Ekspedycja gotowa"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Statek ekspedycyjny czeka na twoje rozkazy."
 
 #. * TRANSLATORS: This is a ship state
 #: ../../src/logic/map_objects/tribes/ship.cc:955
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr ""
+msgstr "Transportuje"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:959
 msgctxt "ship_state"
 msgid "Waiting"
-msgstr ""
+msgstr "Czeka"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:963
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr ""
+msgstr "Prowadzi zwiad"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:967
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "Znaleziono miejsce na port"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
@@ -1369,47 +1370,47 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "Zakłada kolonię"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1329
 #: ../../src/logic/map_objects/tribes/soldier.cc:1335
 msgid "Logic error"
-msgstr ""
+msgstr "Błąd logiki"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:415
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Dodano nowy port do twojej gospodarki."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:418
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Dodano nową kwaterę główną do twojej gospodarki."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:421
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Dodano nowy magazyn do twojej gospodarki."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:114
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "powinno wydobywać surowiec %s, który nie jest dostępny w tym świecie; plemię jest niekompatybilne z tym światem"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:214
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "powinno hodować surowiec %s, który nie jest dostępny w tym świecie; plemię jest niekompatybilne z tym światem"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:856
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geolog znalazł surowce."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1648
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Twój %s nie może znaleźć drogi do domu i najpewniej umrze."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1653
 #: ../../src/wui/productionsitewindow.cc:72
@@ -1422,32 +1423,32 @@ msgstr[2] "Pracownicy"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1654
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Zaginął pracownik!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:70
 msgid "arable"
-msgstr ""
+msgstr "uprawialny"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:80
 msgid "navigable"
-msgstr ""
+msgstr "nawigowalny"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:85
 msgid "unreachable"
-msgstr ""
+msgstr "niedostępny"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:90
 msgid "mineable"
-msgstr ""
+msgstr "umożliwia wydobycie"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:95
 msgid "unwalkable"
-msgstr ""
+msgstr "nie do przejścia"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
@@ -1473,7 +1474,7 @@ msgstr "Gra zapisana"
 
 #: ../../src/logic/save_handler.cc:157
 msgid "Saving game…"
-msgstr ""
+msgstr "Zapisywanie gry..."
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2080,22 +2081,22 @@ msgstr "Zwiększ wartość o 10"
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minuta"
+msgstr[1] "%d minuty"
+msgstr[2] "%d minut"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:302
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d piksel"
+msgstr[1] "%d piksele"
+msgstr[2] "%d pikseli"
 
 #: ../../src/ui_fsmenu/about.cc:37 ../../src/ui_fsmenu/main.cc:113
 msgid "About Widelands"
-msgstr ""
+msgstr "O Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:46 ../../src/wui/watchwindow.cc:127
 msgid "Close"
@@ -2316,7 +2317,7 @@ msgstr "Imię"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 msgid "Version"
-msgstr ""
+msgstr "Wersja"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:147
 #: ../../src/ui_fsmenu/options.cc:277
@@ -2343,11 +2344,11 @@ msgstr "Widelands nie było w stanie połączyć się z hostem."
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgctxt "server_name"
 msgid "unnamed"
-msgstr "nienazwany"
+msgstr "bez nazwy"
 
 #: ../../src/ui_fsmenu/intro.cc:31
 msgid "Press any key or click to continue…"
-msgstr ""
+msgstr "Naciśnij dowolny klawisz lub kliknij, aby kontynuować..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new
@@ -2894,19 +2895,19 @@ msgstr "Odtwarzaj dźwięk po otrzymaniu wiadomości"
 
 #: ../../src/ui_fsmenu/options.cc:218
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Automatyczny zapis gry co:"
 
 #: ../../src/ui_fsmenu/options.cc:231
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Maksymalna liczba plików autozapisu:"
 
 #: ../../src/ui_fsmenu/options.cc:238
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Kompresuj pliki danych Widelands (mapy, powtórki i zapisy gry)"
 
 #: ../../src/ui_fsmenu/options.cc:243
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Zapisuj strumienie synchronizacji w grach sieciowych celem odpluskwiania desynchronizacji"
 
 #: ../../src/ui_fsmenu/options.cc:248
 msgid "Start building road after placing a flag"
@@ -2945,7 +2946,7 @@ msgstr "Dźwięk"
 
 #: ../../src/ui_fsmenu/options.cc:276
 msgid "Saving"
-msgstr "Zapis"
+msgstr "Zapisywanie"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:334
@@ -3026,11 +3027,11 @@ msgstr "Zatopić statek?"
 #: ../../src/wui/actionconfirm.cc:296
 #, c-format
 msgid "Do you really want to sink %s?"
-msgstr ""
+msgstr "Czy na pewno chcesz zatopić: %s?"
 
 #: ../../src/wui/actionconfirm.cc:332
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Anulować ekspedycję?"
 
 #: ../../src/wui/actionconfirm.cc:333
 msgid "Do you really want to cancel the active expedition?"
@@ -3167,7 +3168,7 @@ msgstr "Ukryj obszar pracy"
 #: ../../src/wui/buildingwindow.cc:279 ../../src/wui/fieldaction.cc:370
 #: ../../src/wui/shipwindow.cc:186
 msgid "Show Debug Window"
-msgstr ""
+msgstr "Pokaż okno debugowania"
 
 #: ../../src/wui/buildingwindow.cc:286
 msgid "Center view on this"
@@ -3394,7 +3395,7 @@ msgstr "Del: %s"
 #: ../../src/wui/game_message_menu.cc:123
 #: ../../src/wui/game_message_menu.cc:586
 msgid "Archive selected message"
-msgstr "Archiwizuj wybrane wiadomości"
+msgstr "Archiwizuj wybraną wiadomość"
 
 #: ../../src/wui/game_message_menu.cc:131
 #: ../../src/wui/game_message_menu.cc:589
@@ -3459,7 +3460,7 @@ msgstr "Wiadomości: archiwum"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:574
 msgid "Restore selected message"
-msgstr "Przywróć wybrane wiadomości"
+msgstr "Przywróć wybraną wiadomość"
 
 #: ../../src/wui/game_message_menu.cc:577
 msgid "Show Inbox"
@@ -3508,7 +3509,7 @@ msgstr "Koniec gry"
 
 #: ../../src/wui/game_summary.cc:65
 msgid "Player Info:"
-msgstr ""
+msgstr "Informacje o graczu:"
 
 #: ../../src/wui/game_summary.cc:80
 msgid "Elapsed time:"
@@ -3570,7 +3571,7 @@ msgstr "Wynik"
 
 #: ../../src/wui/game_summary.cc:251
 msgid "Team Score"
-msgstr ""
+msgstr "Wynik drużyny"
 
 #: ../../src/wui/general_statistics_menu.cc:141
 msgid "Land"
@@ -3754,7 +3755,7 @@ msgstr "Zespoły czteroosobowe"
 
 #: ../../src/wui/mapdata.cc:46
 msgid "No Author"
-msgstr ""
+msgstr "Bez autora"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../src/wui/mapdata.cc:147
@@ -3764,7 +3765,7 @@ msgstr "nadrzędny"
 #. * TRANSLATORS: This label is shown when a folder is empty
 #: ../../src/wui/mapdata.cc:153
 msgid "empty"
-msgstr ""
+msgstr "pusty"
 
 #: ../../src/wui/mapdetails.cc:128
 msgid "Directory:"
@@ -3791,7 +3792,7 @@ msgstr "Nazwa mapy w twoim języku: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:183
 msgid "Hint:"
-msgstr ""
+msgstr "Wskazówka:"
 
 #: ../../src/wui/maptable.cc:34
 msgid "Number of players"
@@ -3906,18 +3907,18 @@ msgstr "Plemię będzie ustawione losowo."
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% dz."
+msgstr[1] "%1% dni"
+msgstr[2] "%1% dni"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:117
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% godz."
+msgstr[1] "%1% godz."
+msgstr[2] "%1% godz."
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -3925,27 +3926,27 @@ msgstr[2] ""
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% min."
+msgstr[1] "%1% min."
+msgstr[2] "%1% min."
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:130
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "dni"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:133
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "godziny"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:136
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minuty"
 
 #: ../../src/wui/plot_area.cc:306
 msgid "game"
@@ -4120,11 +4121,11 @@ msgstr "Usuń stąd zaznaczone towary"
 
 #: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
-msgstr "Towary czekają na dostarczenie"
+msgstr "Towary czekające na dostarczenie"
 
 #: ../../src/wui/warehousewindow.cc:202
 msgid "Workers waiting to embark"
-msgstr "Pracownicy czekają na zaokrętowanie"
+msgstr "Pracownicy czekający na zaokrętowanie"
 
 #: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
