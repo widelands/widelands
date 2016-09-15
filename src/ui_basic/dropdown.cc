@@ -112,6 +112,7 @@ uint32_t BaseDropdown::get_selected() const {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
+	display_button_.set_title(label_);
 }
 
 void BaseDropdown::set_tooltip(const std::string& text) {
