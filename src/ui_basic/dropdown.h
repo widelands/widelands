@@ -34,6 +34,14 @@ namespace UI {
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
 protected:
+	/// \param parent     the parent panel
+	/// \param x          the x-position within 'parent'
+	/// \param y          the y-position within 'parent'
+	/// \param w          the dropdown's width
+	/// \param h          the maximum height for the dropdown list
+	/// \param label      a label to prefix to the selected entry on the display button.
+	/// \param show_tick  if 'true', the dropdown list will show a tick for the currently selected
+	///                   entry.
 	BaseDropdown(Panel* parent,
 	             int32_t x,
 	             int32_t y,
@@ -47,6 +55,19 @@ protected:
 
 public:
 	boost::signals2::signal<void()> selected;
+
+	/// \return true if an element has been selected from the list
+	bool has_selection() const;
+
+	/// Sets a label that will be prefixed to the currently selected element's name
+	/// and displayed on the display button.
+	void set_label(const std::string& text);
+	/// Sets the tooltip for the display button.
+	void set_tooltip(const std::string& text);
+	/// Enables/disables the dropdown selection.
+	void set_enabled(bool on);
+	/// Move the dropdown. The dropdown's position is relative to the parent.
+	void set_pos(Point point) override;
 
 	/// The number of elements listed in the dropdown.
 	uint32_t size() const;
@@ -64,22 +85,16 @@ protected:
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string());
 
-	/// \return true if an element has been selected from the list
-	bool has_selection() const;
-
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
 
-	void set_label(const std::string& text);
-	void set_tooltip(const std::string& text);
-
-	void set_enabled(bool on);
-
-	void set_pos(Point point) override;
+	/// Removes all elements from the list.
 	void clear();
 
 private:
+	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
+	/// Toggles the dropdown list on and off.
 	void toggle_list();
 
 	uint32_t max_list_height_;
@@ -94,7 +109,14 @@ private:
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
-	/// \param h determines the size of the list that's shown by the dropdown.
+	/// \param parent     the parent panel
+	/// \param x          the x-position within 'parent'
+	/// \param y          the y-position within 'parent'
+	/// \param w          the dropdown's width
+	/// \param h          the maximum height for the dropdown list
+	/// \param label      a label to prefix to the selected entry on the display button.
+	/// \param show_tick  if 'true', the dropdown list will show a tick for the currently selected
+	///                   entry.
 	Dropdown(Panel* parent,
 	         int32_t x,
 	         int32_t y,
@@ -123,32 +145,12 @@ public:
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text);
 	}
 
-	/// \return true if an element has been selected from the list
-	bool has_selection() const {
-		return BaseDropdown::has_selection();
-	}
-
 	/// \return the selected element
 	const Entry& get_selected() const {
 		return *entry_cache_[BaseDropdown::get_selected()];
 	}
 
-	void set_label(const std::string& text) {
-		BaseDropdown::set_label(text);
-	}
-
-	void set_tooltip(const std::string& text) {
-		BaseDropdown::set_tooltip(text);
-	}
-
-	void set_enabled(bool on) {
-		BaseDropdown::set_enabled(on);
-	}
-
-	void set_pos(Point point) override {
-		BaseDropdown::set_pos(point);
-	}
-
+	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
 		for (Entry* entry : entry_cache_) {

@@ -66,8 +66,14 @@ private:
 	LuaInterface* lua_;
 
 	void select_map();
+	/// Loads all win conditions that can be played with the map into the selection dropdown.
+	/// Disables the dropdown if the map is a scenario.
 	void load_win_conditions();
+	/// Remembers the win condition that is currently selected in the dropdown.
 	void win_condition_selected();
+	/// If the win condition in 'win_condition_script' can be played with the map tags,
+	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
+	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
 	                                                 std::set<std::string> tags) const;
 	void set_scenario_values();

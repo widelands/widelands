@@ -295,6 +295,10 @@ void BaseListselect::remove_selected() {
 	remove(selection_);
 }
 
+/**
+ * \return The name of the currently selected entry.
+ * \throw  NoSelection() if no entry has been selected
+ */
 const std::string& BaseListselect::get_selected_name() const {
 	if (selection_ == no_selection_index())
 		throw NoSelection();
@@ -302,6 +306,10 @@ const std::string& BaseListselect::get_selected_name() const {
 	return entry_records_[selection_]->name;
 }
 
+/**
+ * \return The tooltip for the currently selected entry.
+ * \throw  NoSelection() if no entry has been selected
+ */
 const std::string& BaseListselect::get_selected_tooltip() const {
 	if (selection_ == no_selection_index())
 		throw NoSelection();
