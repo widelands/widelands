@@ -290,8 +290,8 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 			win_condition_dropdown_.set_tooltip(error_message);
 			log("LaunchSPG: No map loader: %s\n", error_message.c_str());
 		}
+		win_condition_dropdown_.set_enabled(true);
 	}
-	win_condition_dropdown_.set_enabled(true);
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
