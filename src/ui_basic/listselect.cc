@@ -295,14 +295,19 @@ void BaseListselect::remove_selected() {
 	remove(selection_);
 }
 
-const std::string& BaseListselect::get_name(uint32_t i) const {
-	return entry_records_[i]->name;
+const std::string& BaseListselect::get_selected_name() const {
+	if (selection_ == no_selection_index())
+		throw NoSelection();
+
+	return entry_records_[selection_]->name;
 }
 
-const std::string& BaseListselect::get_tooltip(uint32_t i) const {
-	return entry_records_[i]->tooltip;
-}
+const std::string& BaseListselect::get_selected_tooltip() const {
+	if (selection_ == no_selection_index())
+		throw NoSelection();
 
+	return entry_records_[selection_]->tooltip;
+}
 
 uint32_t BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;

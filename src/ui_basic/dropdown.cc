@@ -47,7 +47,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                  UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
                        ->height() +
                     2)),  // Height only to fit the button, so we can use this in Box layout.
-	  max_list_height_(h - 2 * get_h()),
+     max_list_height_(h - 2 * get_h()),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
      push_button_(&button_box_,
                   "dropdown_select",
@@ -70,13 +70,13 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      true,
                      false),
      list_(parent,
-			  x,
-			  y + get_h(),
+           x,
+           y + get_h(),
            w,
-			  0,
+           0,
            show_tick),  // Hook into parent so we can drop down outside the panel
-	  label_(label),
-	  is_enabled_(true) {
+     label_(label),
+     is_enabled_(true) {
 	// Make sure that the list covers and deactivates the elements below it
 	list_.set_layout_toplevel(true);
 	list_.set_visible(false);
@@ -97,7 +97,8 @@ void BaseDropdown::add(const std::string& name,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text) {
-	list_.set_size(list_.get_w(), std::min(list_.get_h() + list_.get_lineheight(), max_list_height_));
+	list_.set_size(
+	   list_.get_w(), std::min(list_.get_h() + list_.get_lineheight(), max_list_height_));
 	list_.add(name, value, pic, select_this, tooltip_text);
 }
 
@@ -136,19 +137,19 @@ void BaseDropdown::clear() {
 	list_.set_size(list_.get_w(), 0);
 }
 
+uint32_t BaseDropdown::size() const {
+	return list_.size();
+}
+
 void BaseDropdown::set_value() {
+	const std::string name = list_.has_selection() ? list_.get_selected_name() :
+	                                                 /** TRANSLATORS: Selection in Dropdown menus. */
+	                            pgettext("dropdown", "Not Selected");
+
 	if (label_.empty()) {
-		display_button_.set_title(list_.has_selection() ?
-		                             list_.get_selected_name() :
-		                             /** TRANSLATORS: Selection in Dropdown menus. */
-		                             pgettext("dropdown", "Not Selected"));
+		display_button_.set_title(name);
 	} else {
-		display_button_.set_title(
-		   /** TRANSLATORS: Title: Selection in Dropdown menus. */
-		   (boost::format("%1%: %2%") % label_ % (list_.has_selection() ?
-		                                             list_.get_selected_name() :
-		                                             pgettext("dropdown", "Not Selected")))
-		      .str());
+		display_button_.set_title((boost::format("%1%: %2%") % label_ % (name)).str());
 	}
 	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
 }

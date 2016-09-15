@@ -92,8 +92,8 @@ struct BaseListselect : public Panel {
 	uint32_t get_selected() const;
 	void remove_selected();
 
-	const std::string& get_name(uint32_t i) const;
-	const std::string& get_tooltip(uint32_t i) const;
+	const std::string& get_selected_name() const;
+	const std::string& get_selected_tooltip() const;
 
 	void set_background(const Image* background) {
 		background_ = background;
@@ -175,14 +175,6 @@ template <typename Entry> struct Listselect : public BaseListselect {
 
 	const Entry& get_selected() const {
 		return entry_cache_[BaseListselect::get_selected()];
-	}
-
-	const std::string& get_selected_name() const {
-		return BaseListselect::get_name(BaseListselect::get_selected());
-	}
-
-	const std::string& get_selected_tooltip() const {
-		return BaseListselect::get_tooltip(BaseListselect::get_selected());
 	}
 
 	void set_background(const Image* background) {

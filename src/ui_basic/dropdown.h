@@ -39,7 +39,15 @@ protected:
 	             uint32_t h,
 	             const std::string& label,
 	             bool show_tick = true);
+	~BaseDropdown() {
+		clear();
+	}
 
+public:
+	/// The number of elements listed in the dropdown.
+	uint32_t size() const;
+
+protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the index of the entry
@@ -93,6 +101,9 @@ public:
 	         bool show_tick = true)
 	   : BaseDropdown(parent, x, y, w, h, label, show_tick) {
 	}
+	~Dropdown() {
+		clear();
+	}
 
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -105,8 +116,8 @@ public:
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string()) {
-		entry_cache_.push_back(value);
-		BaseDropdown::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text);
+		entry_cache_.push_back(new Entry(value));
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text);
 	}
 
 	/// \return true if an element has been selected from the list
@@ -116,7 +127,7 @@ public:
 
 	/// \return the selected element
 	const Entry& get_selected() const {
-		return entry_cache_[BaseDropdown::get_selected()];
+		return *entry_cache_[BaseDropdown::get_selected()];
 	}
 
 	void set_label(const std::string& text) {
@@ -137,12 +148,15 @@ public:
 
 	void clear() {
 		BaseDropdown::clear();
+		for (Entry* entry : entry_cache_) {
+			delete entry;
+		}
 		entry_cache_.clear();
 	}
 
 private:
 	// Contains the actual elements. The BaseDropdown registers the indices only.
-	std::deque<Entry> entry_cache_;
+	std::deque<Entry*> entry_cache_;
 };
 
 }  // namespace UI
