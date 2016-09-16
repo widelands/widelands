@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-31 05:41+0000\n"
-"PO-Revision-Date: 2016-08-12 10:16+0000\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 08:07+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -486,7 +486,7 @@ msgstr "I statistikmenuen er der også en"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
-msgstr "knap for »varestatistik«"
+msgstr "Knap for »varestatistik«."
 
 #. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257

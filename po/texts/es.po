@@ -4,7 +4,8 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
-# Thadah <juchuf@gmail.com>, 2015
+# GunChleoc, 2016
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
@@ -12,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -591,7 +592,7 @@ msgstr "Divide tus caminos en varios tramos pequeños, colocando banderas interm
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros foros de la comunidad pueden ser encontrados en www.widelands.org"
+msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros foros de la comunidad pueden ser encontrados en www.widelands.org."
 
 #: ../../data/txts/tips/general_game.tip:26
 msgid ""

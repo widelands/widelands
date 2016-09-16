@@ -51,17 +51,17 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      barbarians_bread = 10,
-      fish = 6,
-      meat = 6,
-      ax_sharp = 2,
-      ax_broad = 2,
-      ax_bronze = 2,
-      ax_battle = 2,
-      ax_warriors = 2,
-      helmet = 2,
-      helmet_mask = 2,
-      helmet_warhelm = 2
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "barbarians_bread", amount = 10 },
+      { name = "ax_sharp", amount = 2 },
+      { name = "ax_broad", amount = 2 },
+      { name = "ax_bronze", amount = 2 },
+      { name = "ax_battle", amount = 2 },
+      { name = "ax_warriors", amount = 2 },
+      { name = "helmet", amount = 2 },
+      { name = "helmet_mask", amount = 2 },
+      { name = "helmet_warhelm", amount = 2 }
    },
    outputs = {
       "barbarians_soldier",

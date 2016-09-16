@@ -45,9 +45,9 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 }
    },
    outputs = {
       "empire_soldier",

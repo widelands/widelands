@@ -3,8 +3,10 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
+# Cristiano Magro, 2016
 # Davide Nicolini <davide97@gmail.com>, 2015
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
+# GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -14,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-06 07:12+0000\n"
-"PO-Revision-Date: 2016-07-25 14:27+0000\n"
-"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 12:30+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -562,7 +564,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/messagebox.cc:92 ../../src/ui_fsmenu/launch_mpg.cc:77
 #: ../../src/ui_fsmenu/options.cc:116
-#: ../../src/wui/game_main_menu_save_game.cc:89 ../../src/wui/login_box.cc:64
+#: ../../src/wui/game_main_menu_save_game.cc:89 ../../src/wui/login_box.cc:62
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -635,7 +637,7 @@ msgstr "Etichette"
 msgid "Teams"
 msgstr "Squadre"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:176
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:177
 msgid "Size: %1% x %2%"
 msgstr "Dimensioni: %1% x %2%"
 
@@ -984,7 +986,7 @@ msgid "Loading map…"
 msgstr "Caricamento della mappa in corso"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1316
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
 msgid "Loading…"
 msgstr "Caricamento in corso..."
 
@@ -1132,7 +1134,7 @@ msgstr "l'economia non ha bisogno del lavoratore '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:385
 #: ../../src/logic/map_objects/tribes/production_program.cc:834
 #: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1020
+#: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1208,7 +1210,7 @@ msgstr[1] "%s sono assenti"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:949
+#: ../../src/logic/map_objects/tribes/production_program.cc:948
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1218,45 +1220,45 @@ msgstr[1] "Prodotti %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1031
+#: ../../src/logic/map_objects/tribes/production_program.cc:1030
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Reclutato %s"
 msgstr[1] "Reclutati %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1237
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1246
-#: ../../src/logic/map_objects/tribes/production_program.cc:1323
+#: ../../src/logic/map_objects/tribes/production_program.cc:1245
+#: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
 msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
 msgstr "(non occupato)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Lavoratore assente"
 msgstr[1] "Lavoratori assenti"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:269
+#: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
 msgstr "(interrotto)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:368
+#: ../../src/logic/map_objects/tribes/productionsite.cc:370
 #: ../../src/wui/building_statistics_menu.cc:621
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:912
+#: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
 msgstr "Non è possibile trovare altre risorse!"
 
@@ -1272,6 +1274,10 @@ msgstr "Trovato dello spazio per il porto"
 msgid "An expedition ship found a new port build space."
 msgstr "Una nave in spedizione ha trovato un nuovo luogo dove costruire un porto."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:538
+msgid "Island Circumnavigated"
+msgstr "Isola circumnavigata"
+
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
@@ -1280,75 +1286,71 @@ msgid "Waiting"
 msgstr "In attesa"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
-msgid "Island Circumnavigated"
-msgstr "Isola circumnavigata"
-
-#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Una nave in spedizione ha circumnavigato la sua isola senza eventi."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Raggiunta la costa"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Terra in vista!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:605
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Una nave in spedizione ha raggiunto la costa e sta attendendo ulteriori ordini."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "New port construction site is gone"
 msgstr "Il nuovo cantiere del porto è andato"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Lost!"
 msgstr "Porto perso!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:660
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Scarico merci fallito, la spedizione è annullata ora."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Spedizione"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:836
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Spedizione pronta"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:837
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Una nave in spedizione sta attendendo i tuoi ordini."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:955
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Sta trasportando via mare"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:959
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "In attesa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:963
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Sta esplorando"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:967
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Trovato uno spazio per il porto"
@@ -1356,7 +1358,7 @@ msgstr "Trovato uno spazio per il porto"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Sta fondando una colonia"
@@ -1676,7 +1678,7 @@ msgid ""
 msgstr "Widelands non è riuscito a stabilire una connessione all'indirizzo fornito.\nSu quella porta non girava un server di Widelands oppure il server si è\nspento mentre cercavi di connetterti."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1197
 msgid "Preparing game"
 msgstr "Preparazione della partita"
 
@@ -2015,7 +2017,7 @@ msgstr "sì"
 #. console
 #: ../../src/profile/profile.cc:51
 msgid "on"
-msgstr "Acceso"
+msgstr "acceso"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2036,12 +2038,12 @@ msgstr "no"
 #. console
 #: ../../src/profile/profile.cc:64
 msgid "off"
-msgstr "Spento"
+msgstr "spento"
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1048 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1047 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -2771,7 +2773,7 @@ msgid "Show login dialog"
 msgstr "Mostra finestra di login"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:129
-#: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:68
+#: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:66
 msgid "nobody"
 msgstr "nessuno"
 
@@ -2887,7 +2889,7 @@ msgstr "Comprimere i file di dati di widelands (mappe, replay e giochi salvati)"
 
 #: ../../src/ui_fsmenu/options.cc:243
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Scrivi syncstreams nelle partite in rete per eseguire il debug di desincronizzazione"
 
 #: ../../src/ui_fsmenu/options.cc:248
 msgid "Start building road after placing a flag"
@@ -2953,11 +2955,11 @@ msgstr "Campagne"
 msgid "Load Game"
 msgstr "Carica una partita"
 
-#: ../../src/wlapplication.cc:1008
+#: ../../src/wlapplication.cc:996
 msgid "Game data error"
 msgstr "Errore nei dati del gioco"
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1005
 #, c-format
 msgid ""
 "\n"
@@ -2965,7 +2967,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nSegnala questo problema per aiutarci a migliorare Widelands. Potrai trovare messaggi relativi al problema sullo standard output (stdout.txt su Windows). Stai usando la build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1023
+#: ../../src/wlapplication.cc:1011
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3642,47 +3644,47 @@ msgstr "Login al metaserver"
 msgid "Nickname:"
 msgstr "Nickname:"
 
-#: ../../src/wui/login_box.cc:38
+#: ../../src/wui/login_box.cc:35
 msgid "Password:"
 msgstr "Password:"
 
-#: ../../src/wui/login_box.cc:43
+#: ../../src/wui/login_box.cc:42
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr "ATTENZIONE: La password verrà mostrata e salvata in modo che sia leggibile!"
 
-#: ../../src/wui/login_box.cc:46
+#: ../../src/wui/login_box.cc:45
 msgid "Log in to a registered account"
 msgstr "Entra con un account registrato"
 
-#: ../../src/wui/login_box.cc:50
+#: ../../src/wui/login_box.cc:48
 msgid "Automatically use this login information from now on."
 msgstr "Usa automaticamente queste informazioni di login d'ora in avanti."
 
-#: ../../src/wui/login_box.cc:58
+#: ../../src/wui/login_box.cc:56
 msgid "Login"
 msgstr "Login"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Empty Nickname"
 msgstr "Nickname vuoto"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Please enter a nickname!"
 msgstr "Per favore inserisci il nickname!"
 
-#: ../../src/wui/login_box.cc:83
+#: ../../src/wui/login_box.cc:82
 msgid "Space in Nickname"
 msgstr "Spazio nel nickname"
 
-#: ../../src/wui/login_box.cc:84
+#: ../../src/wui/login_box.cc:83
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Spiacente ma gli spazi non sono permessi nei nickname!"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Password"
 msgstr "Password vuota"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter your password!"
 msgstr "Inserisci la tua password, per favore!"
 

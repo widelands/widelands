@@ -3,19 +3,20 @@
 # 
 # Translators:
 # wl-zocker, 2014
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Venatrix, 2015
-# Venatrix, 2015
+# Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:51+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:02+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,43 +81,43 @@ msgstr "Platziere dazu eine Flagge auf dem Berg im Osten (nicht auf der Bergwies
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
-msgstr " wenig Kohle"
+msgstr "wenig Kohle"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of coal"
-msgstr " viel Kohle"
+msgstr "viel Kohle"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "a bit of iron"
-msgstr " wenig Eisen"
+msgstr "wenig Eisen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of iron"
-msgstr " viel Eisen"
+msgstr "viel Eisen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "a bit of gold"
-msgstr " wenig Gold"
+msgstr "wenig Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "a lot of gold"
-msgstr " viel Gold"
+msgstr "viel Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid "a bit of granite"
-msgstr " wenig Granit"
+msgstr "wenig Granit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:55
 msgid "a lot of granite"
-msgstr " viel Granit"
+msgstr "viel Granit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:56
 msgid "water"
-msgstr " Wasser"
+msgstr "Wasser"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr " hier wurde nichts gefunden"
+msgstr "hier wurde nichts gefunden"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -1032,7 +1033,7 @@ msgstr "Doch sie fürchten, dass der Krieg um Al’thunran dieses Leben beenden 
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-31 05:41+0000\n"
-"PO-Revision-Date: 2016-08-11 12:20+0000\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 08:05+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +97,7 @@ msgstr "Sådan bygges en havn"
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr "Havne er store bygninger, men de kan kun bygges på specielle steder: dem markeret med "
+msgstr "Havne er store bygninger, men de kan kun bygges på specielle steder: dem markeret med"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid "blue port space icon."
@@ -305,7 +306,7 @@ msgstr "Prøv det nu. Jeg vil senere fortælle om de næste trin."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Start an expedition in any of your ports."
-msgstr "Start en ekspedition i en af dine havne"
+msgstr "Start en ekspedition i en af dine havne."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"

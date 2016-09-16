@@ -1,0 +1,18 @@
+Defining Units
+==============
+
+A tribe can have the following types of units: buildings (militarysites,
+partially_finished, productionsites, trainingsites and warehouses; headquarters
+are a special case of warehouse), immovables, workers, wares, and a ship.
+
+The definitions for the tribes' units are located in the subdirectories of
+``data/tribes``. Each unit needs to have an ``init.lua`` and a ``helptexts.lua``
+file. The ``init.lua`` script will load the unit to be used in the game, and
+``helptexts.lua`` will provide the information used by the in-game help
+('Tribal Encyclopedia') and by our website's online
+`Encyclopedia <https://wl.widelands.org/encyclopedia/>`_.
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME

@@ -4,14 +4,15 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # Javier Mora <morehash@gmail.com>, 2015
 # Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "En este escenario te voy a hablar acerca de los soldados, su entrenamiento y su profesión: la guerra. Aunque Widelands es sobre construir, no sobre destruir, hay un enemigo que a veces tienes que derrotar. Además la guerra está principalmente enfocada en la economía, no en la estrategia militar, y sus mecánicas merecen una explicación. "
+msgstr "En este escenario te voy a hablar acerca de los soldados, su entrenamiento y su profesión: la guerra. Aunque Widelands es sobre construir, no sobre destruir, hay un enemigo que a veces tienes que derrotar. Además la guerra está principalmente enfocada en la economía, no en la estrategia militar, y sus mecánicas merecen una explicación."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
@@ -371,9 +372,9 @@ msgstr "Desmantelando edificios militares"
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desmantelar el edificio (edificios de una tribu ajena a la tuya solamente podrán ser destruidos, no desmantelados)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""

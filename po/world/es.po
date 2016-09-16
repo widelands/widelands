@@ -4,7 +4,8 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
-# Thadah <juchuf@gmail.com>, 2015
+# GunChleoc, 2016
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
@@ -13,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:56+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:54+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -47,11 +48,11 @@ msgstr "Ciervo"
 msgid "Duck"
 msgstr "Pato"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Uapití"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Zorro"
 
@@ -71,11 +72,11 @@ msgstr "Reno"
 msgid "Sheep"
 msgstr "Oveja"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Ciervo"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Jabalí"
 
@@ -83,7 +84,7 @@ msgstr "Jabalí"
 msgid "Wisent"
 msgstr "Bisonte"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Lobo"
 
@@ -419,7 +420,7 @@ msgstr ""
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr "Hongo oscuro (Brote) "
+msgstr "Hongo oscuro (Brote)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
@@ -434,7 +435,7 @@ msgstr "Hongo oscuro (Maduro)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:85
 msgid "Dark Mushroom Tree (Old)"
-msgstr "Hongo oscuro (Viejo) "
+msgstr "Hongo oscuro (Viejo)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
@@ -768,7 +769,7 @@ msgstr "Palmeras"
 
 #: ../../data/world/init.lua:65
 msgid "Wasteland Trees"
-msgstr "Árboles de páramo "
+msgstr "Árboles de páramo"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"
@@ -862,7 +863,7 @@ msgstr ""
 #: ../../data/world/terrains/init.lua:147
 #: ../../data/world/terrains/init.lua:1002
 msgid "Steppe"
-msgstr "Estepa "
+msgstr "Estepa"
 
 #: ../../data/world/terrains/init.lua:163
 msgid "Barren Steppe"

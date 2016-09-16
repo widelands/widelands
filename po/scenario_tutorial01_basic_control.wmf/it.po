@@ -2,7 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
@@ -12,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -736,11 +738,11 @@ msgstr "Ciao, sono di nnuovo io!  Questa volta, ti ho mandato un messaggio. I me
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "La finestra dei messaggi può essere attivata/disattivata dal pulsante all'estrema destra nella parte inferiore dello schermo. Questo pulsante cambia anche aspetto se nuovi messaggi sono disponibili, ma viene anche riprodotto il suono di una campana ogni volta che ricevi un nuovo messaggio."
+msgstr "La finestra dei messaggi può essere attivata/disattivata dal  secondo pulsante da destra nella parte inferiore dello schermo. Questo pulsante cambia anche aspetto se nuovi messaggi sono disponibili, ma viene anche riprodotto il suono di una campana ogni volta che ricevi un nuovo messaggio."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -779,7 +781,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "La finestra dei messaggi è fondamentale per controllare appieno la sorte della tua tribù. Ma riceverai un sacco di messaggi durante una partita reale. Per non confonderti, dovresti cercare di mantenere la tua posta in arrivo vuota. "
+msgstr "La finestra dei messaggi è fondamentale per controllare appieno la sorte della tua tribù. Ma riceverai un sacco di messaggi durante una partita reale. Per non confonderti, dovresti cercare di mantenere la tua posta in arrivo vuota."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
@@ -1005,7 +1007,7 @@ msgstr "Per abbandonare questa partita e ritornare al menu principale, premi sul
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
-msgstr ""
+msgstr "Pulsante 'menu principale' all'estrema sinistra della parte inferiore dello schermo. Quindi fare clic sul"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."

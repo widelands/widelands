@@ -39,8 +39,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      corn = 8,
-      water = 8
+      { name = "water", amount = 8 },
+      { name = "corn", amount = 8 }
    },
    outputs = {
       "atlanteans_horse"

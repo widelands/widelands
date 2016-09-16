@@ -2,7 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
@@ -11,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-17 14:27+0000\n"
-"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:45+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -302,7 +304,7 @@ msgstr "La finestra del menù scorte ha quattro linguette. La prima (e attualmen
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "guardando le razioni, al momento ne abbiamo solo cinque, che probabilmente stanno venendo trasportate da qualche parte. Cinque razioni non sono molto per una economia così grandde. "
+msgstr "Guardando le razioni, al momento ne abbiamo solo cinque, che probabilmente stanno venendo trasportate da qualche parte. Cinque razioni non sono molto per una economia così grandde."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -432,7 +434,7 @@ msgstr "Questa enciclopedia è accessibile tramite"
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
-msgstr "Il pulsante di aiuto nella parte bassa dello schermo. Per tutte le merci della tua tribù, ti mostra una breve finestra di aiuto, una lista degli edifici che producono la merce e le risorse necessarie a farlo."
+msgstr "il pulsante di aiuto nella parte bassa dello schermo. Per tutte le merci della tua tribù, ti mostra una breve finestra di aiuto, una lista degli edifici che producono la merce e le risorse necessarie a farlo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
@@ -778,7 +780,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:440
 msgid "Bring all the marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Porta le colonne di marmo nel magazzino vicico alla prima linea"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:433
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:441
@@ -843,7 +845,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"

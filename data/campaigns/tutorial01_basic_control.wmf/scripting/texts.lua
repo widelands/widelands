@@ -461,7 +461,7 @@ destroy_quarries_message = {
    ),
    h = 300,
    obj_name = "destroy_quarries",
-   obj_title = "Destroy the two quarries",
+   obj_title = _"Destroy the two quarries",
    obj_body = rt(
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..

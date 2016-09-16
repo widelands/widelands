@@ -45,17 +45,17 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6,
-      spear = 2,
-      spear_advanced = 2,
-      spear_heavy = 2,
-      spear_war = 2,
-      armor_helmet = 2,
-      armor = 2,
-      armor_chain = 2,
-      armor_gilded = 2
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 },
+      { name = "spear", amount = 2 },
+      { name = "spear_advanced", amount = 2 },
+      { name = "spear_heavy", amount = 2 },
+      { name = "spear_war", amount = 2 },
+      { name = "armor_helmet", amount = 2 },
+      { name = "armor", amount = 2 },
+      { name = "armor_chain", amount = 2 },
+      { name = "armor_gilded", amount = 2 },
    },
    outputs = {
       "empire_soldier",

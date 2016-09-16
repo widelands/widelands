@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 4,
-      meat = 4,
-      log = 8
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "log", amount = 8 }
    },
    outputs = {
       "smoked_meat",

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 14:07+0000\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -418,7 +419,7 @@ msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr "Aujourd'hui, alors que je marchais vers la plage la plus à l'est, j'ai eu un choc. J'ai vu un signe de ces détestées, hostiles, tribus barbares avec lesquelles nous avons eu tant de problèmes avant. "
+msgstr "Aujourd'hui, alors que je marchais vers la plage la plus à l'est, j'ai eu un choc. J'ai vu un signe de ces détestées, hostiles, tribus barbares avec lesquelles nous avons eu tant de problèmes avant."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:238
@@ -511,7 +512,7 @@ msgstr "Vous avez rempli votre mission. Vous pouvez continuer à jouer si vous l
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"

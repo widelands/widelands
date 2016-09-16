@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
@@ -9,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -588,7 +589,7 @@ msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přep
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na www.widelands.org"
+msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na www.widelands.org."
 
 #: ../../data/txts/tips/general_game.tip:26
 msgid ""
