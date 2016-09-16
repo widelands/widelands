@@ -1452,7 +1452,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				management_data.neuron_pool[18].get_result_safe(static_cast<uint8_t>(soldier_status_) * 3);
 		} else if (field.near_border){
 			// near border, but not enemy nearby
-			field.military_score_ += management_data.get_military_number_at(1);
+			field.military_score_ += management_data.get_military_number_at(1) / 2;
 			field.military_score_ += management_data.neuron_pool[1].get_result_safe(field.military_loneliness / 50);
 			field.military_score_ += management_data.neuron_pool[5].get_result_safe((field.area_military_capacity + 4) / 5);
 			field.military_score_ += 
@@ -1479,7 +1479,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ -= 100;
 		field.military_score_ += management_data.get_military_number_at(3);
 		if (field.enemy_accessible_) {
-			field.military_score_ += management_data.get_military_number_at(11);	
+			field.military_score_ += management_data.get_military_number_at(11) / 2;	
 		} else if (field.near_border) {
 			field.military_score_ += management_data.get_military_number_at(12);
 		} else {
@@ -1515,7 +1515,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		management_data.neuron_pool[14].get_result_safe(field.own_military_sites_nearby_() / 4);		
 
 	field.military_score_ += mines_score;
-	field.military_score_ += field.preferred * management_data.get_military_number_at(8) / 5;
+	field.military_score_ += field.preferred * management_data.get_military_number_at(8) / 10;
 	field.military_score_ += field.unconnected_nearby * management_data.get_military_number_at(10)  / 5;
 
 	if (!field.inland) {
@@ -4123,7 +4123,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	//bo.primary_priority = static_cast<int32_t>(productionsites.size() + mines_.size()) + 20 -
 	       //static_cast<int32_t>(numof_warehouses_) * (35 + management_data.get_military_number_at(15) / 5);
 	int32_t needed_count = static_cast<int32_t>(productionsites.size() + mines_.size()) /
-		(40 + management_data.get_military_number_at(21) / 5) + 1;
+		(40 + management_data.get_military_number_at(21) / 10) + 1;
 	assert (needed_count >= 0 && needed_count <= (static_cast<uint16_t>(productionsites.size() + mines_.size()) / 10) + 2);
 	
 	       
@@ -4139,7 +4139,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	}
 
 	if (numof_warehouses_ <= 1 && player_statistics.any_enemy_seen_lately(gametime)) {
-		bo.primary_priority += 15 + management_data.get_military_number_at(24)/5;
+		bo.primary_priority += 15 + management_data.get_military_number_at(24)/10;
 	}
 	
 	bo.primary_priority += management_data.neuron_pool[45].get_result_safe(numof_warehouses_ * 3) / 5;
@@ -5981,7 +5981,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					mines_.size() > 2 && mines_.size() < 6,
 					mines_.size() >= 6,
 					site->second.mines_nearby == ExtendedBool::kTrue) * 
-						management_data.get_military_number_at(19) / 10;
+						management_data.get_military_number_at(19) / 20;
 
 				
 				// Applying (decreasing score) if trainingsites are not working
