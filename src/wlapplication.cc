@@ -535,8 +535,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 
 void WLApplication::handle_input(InputCallback const* cb) {
 	// Container for keyboard events using the Alt key.
-	// Using sym, mod for indexing.
-	std::map<std::pair<int32_t, uint16_t>, SDL_Event*> alt_events;
+	// sym, mod, ev.type == SDL_KEYDOWN.
+	std::map<std::pair<int32_t, uint16_t>, bool> alt_events;
 
 	SDL_Event ev;
 	while (poll_event(ev)) {
@@ -547,9 +547,10 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			// Workaround for duplicate triggering of the Alt key in Ubuntu:
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.
 			if (ev.key.keysym.mod & KMOD_ALT) {
-				alt_events.insert(std::make_pair<std::pair<int32_t, uint16_t>, SDL_Event*>(
-											std::make_pair<int32_t, uint16_t>(static_cast<int32_t>(ev.key.keysym.sym), static_cast<uint16_t>(ev.key.keysym.mod)),
-											&ev));
+				alt_events.insert(std::make_pair<std::pair<int32_t, uint16_t>, bool>(
+				   std::make_pair<int32_t, uint16_t>(static_cast<int32_t>(ev.key.keysym.sym),
+				                                     static_cast<uint16_t>(ev.key.keysym.mod)),
+				   ev.type == SDL_KEYDOWN));
 				handled = true;
 			}
 			if (!handled && cb && cb->key) {
@@ -588,17 +589,21 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		}
 	}
 
-	// Now handling the events for the Alt key.
+	// Now constructing the events for the Alt key from the container and handling them.
 	for (const auto& event : alt_events) {
-		// The event can contain nonsense, so we fetch the important values from the key
-		event.second->key.keysym.sym = event.first.first;
-		event.second->key.keysym.mod = event.first.second;
+		if (event.second) {
+			ev.type = SDL_KEYDOWN;
+		} else {
+			ev.type = SDL_KEYUP;
+		}
+		ev.key.keysym.sym = event.first.first;
+		ev.key.keysym.mod = event.first.second;
 		bool handled = false;
 		if (cb && cb->key) {
-			handled = cb->key(event.second->type == SDL_KEYDOWN, event.second->key.keysym);
+			handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 		}
 		if (!handled) {
-			handle_key(event.second->type == SDL_KEYDOWN, static_cast<SDL_Keycode>(event.first.first), static_cast<int>(event.first.second));
+			handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 		}
 	}
 }
