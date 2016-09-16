@@ -81,8 +81,6 @@ private:
 	UI::Button* warfarebtn_;
 	UI::Button* scenariobtn_;
 	Widelands::Message::Type message_filter_;
-
-	uint32_t last_keyboard_action_;  // Workaround for duplicate triggering of the Alt key in Ubuntu
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H

@@ -349,7 +349,6 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
-
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
@@ -360,62 +359,37 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kAllMessages);
-				last_keyboard_action_ = 0;
 				return true;
 			}
 			return false;
 		case SDLK_1:
 			if (code.mod & KMOD_ALT) {
-				// Workaround for duplicate triggering of the Alt key in Ubuntu:
-				// Don't accept the same key twice for the same gametime.
-				// TODO(GunChleoc): This means that when the game is paused,
-				// the button won't toggle on and off by pressing ALT + 1 repeatedly.
-				const uint32_t gametime = iplayer().game().get_gametime();
-				if (last_keyboard_action_ != gametime) {
-					filter_messages(Widelands::Message::Type::kGeologists);
-					last_keyboard_action_ = gametime;
-					return true;
-				}
+				filter_messages(Widelands::Message::Type::kGeologists);
+				return true;
 			}
 			return false;
 		case SDLK_2:
 			if (code.mod & KMOD_ALT) {
-				const uint32_t gametime = iplayer().game().get_gametime();
-				if (last_keyboard_action_ != gametime) {
-					filter_messages(Widelands::Message::Type::kEconomy);
-					last_keyboard_action_ = gametime;
-					return true;
-				}
+				filter_messages(Widelands::Message::Type::kEconomy);
+				return true;
 			}
 			return false;
 		case SDLK_3:
 			if (code.mod & KMOD_ALT) {
-				const uint32_t gametime = iplayer().game().get_gametime();
-				if (last_keyboard_action_ != gametime) {
-					filter_messages(Widelands::Message::Type::kSeafaring);
-					last_keyboard_action_ = gametime;
-					return true;
-				}
+				filter_messages(Widelands::Message::Type::kSeafaring);
+				return true;
 			}
 			return false;
 		case SDLK_4:
 			if (code.mod & KMOD_ALT) {
-				const uint32_t gametime = iplayer().game().get_gametime();
-				if (last_keyboard_action_ != gametime) {
-					filter_messages(Widelands::Message::Type::kWarfare);
-					last_keyboard_action_ = gametime;
-					return true;
-				}
+				filter_messages(Widelands::Message::Type::kWarfare);
+				return true;
 			}
 			return false;
 		case SDLK_5:
 			if (code.mod & KMOD_ALT) {
-				const uint32_t gametime = iplayer().game().get_gametime();
-				if (last_keyboard_action_ != gametime) {
-					filter_messages(Widelands::Message::Type::kScenario);
-					last_keyboard_action_ = gametime;
-					return true;
-				}
+				filter_messages(Widelands::Message::Type::kScenario);
+				return true;
 			}
 			return false;
 		case SDLK_DELETE:
