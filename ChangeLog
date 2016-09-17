@@ -1,5 +1,57 @@
-### Build 19 until r7914
+### Build 19 until r8096
 
+- Added added widelands.appdata.xml for debian desktops. Made this file and widelands.desktop localizable.
+- Added build instructions for OpenBSD
+- Added checks for illegal file names during map saving.
+- Added sounds for fox, elk, wolf, stag, boar, smelting works, weapon smithy ax workshop, lime kiln, tavern, brewery, winery, wood hardener. Replaced sound for sheep and mill.
+- Changed German language terrain names to English language names.
+- Collectors win condition now reports team scores as well as player scores.
+- Continuous integration and automated builds with Travis (Linux) and AppVeyor (Windows)
+- Created a new executable 'wl_map_object_info' that will generate JSON files for updating the encyclopedia on the website.
+- Disallow changing player slots in single player scenarios.
+- Display Widelands version for each client in Internet lobby.
+- Editor now starts with the Info tool instead of the Set Height tool
+- Fixed escaping of special characters in messages
+- Fixed sending of messages in Territorial Lord, Territorial Time and Wood Gnome.
+- Fixed various cashes in editor when loading a map or using the Set Origin tool.
+- Generic in-game help system driven by Lua scripts
+- Hide wares which do not need prerequisites and therefore are produced 'endlessly' from configure economy
+- Improved documentation: Started adding Tribe and World information to our online Widelands Scripting Reference.
+- New Graphics for Imperial Vintner
+- New maps: Wide World, Archipelago Sea, Full Moon, Last Survivors, Dolomites
+- New menu icon for Spidercloth
+- No longer write replay files for scenarios
+- Other tribes’ buildings that have been conquered can now be dismantled
+- Overhaul of diverse menu screens and windows: map and game loading, editor main menu submenus, in-game building statistics
+- Remember map location markers in singleplayer savegames.
+- Removed --logfile command line flag - use redirects instead. Added an SDL2 aware logger that replicates writing a stdout.txt on windows.
+- Removed maps: Dry Riverbed, War of the Valleys, Long long way
+- Reorganized Options into a tabbed view
+- Shifted chat overlay up so it won't overlap with the menu buttons.
+- Ships now have individual names and show their states in the statistics string
+- The second alternative tool in the editor can now also be accessed via the Ctrl key.
+- The soldier values in the warfare tutorial are now calculated from the actual values. Added soldier values to worker help.
+- Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
+- User maps are now saved in a 'My Maps' subdirectory to prevent overwriting of official maps
+- Various scrollbar-related fixes:
+- When an expedition ship places a port, a bit of land is cleared of trees to make room for a few buildings.
+- Fixed bug # 1535065: Editor crashes with random map regarding player positions
+- Fixed bug #1228811: Observers savegame contains no minimap.
+- Fixed bug #1232392: Allow tabbing in forms
+- Fixed bug #1302593: Result screen not shown in loaded game when a player was already defeated in saved game
+- Fixed bug #1500531: Random corrupted audio (loud garbled noise) when ox breeder is working for Barbarian tribe.
+- Fixed bug #1531312: Foresters aren’t planting on old fields
+- Fixed bug #1535732: Texts not displayed correctly with the new font renderer
+- Fixed bug #1542821: Inconsistency after Version Warning
+- Fixed bug #1548932: Editor fails on save with zip filesystem
+- Fixed bug #1554552: wounded attacking soldiers failing to retreat
+- Fixed bug #1562332: Crash with playing chat sound in Internet lobby
+- Fixed bug #1566441: String "Saving Game" appears too late
+- Fixed bug #1570094: Editor remove resources does not work as expected
+- Fixed bug #1571308: Crash when EditBox text exceeds maximum width
+- Fixed bug #1581828: Desync while testing bzr8001[bug-1418154-collectors-teams]
+- Fixed bug #1592692: No production sounds on some maps
+- Fixed bug #1600633: Crash when pressing tab key in help menu
 - Reversed semantics of "Do not zip" checkbox on the Options screen.
 - More intelligent handling of units in spinboxes.
 - Fixed bug #1162527: Military statistics button seem cropped when selected.
