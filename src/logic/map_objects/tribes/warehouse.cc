@@ -53,6 +53,7 @@ namespace Widelands {
 namespace {
 
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
 // game.
@@ -528,13 +529,24 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase)) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
-			const uint32_t stock = workers.stock(id);
+			Quantity stock = workers.stock(id);
 			// Separate behaviour for the case of loading the game
 			// (which does save/destroy/reload) and simply destroying ingame
 			if (game->is_loaded()) {
 				// This game is really running
-				for (uint32_t i = 0; i < stock; ++i) {
-					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+				Quantity worker_counter = 0;
+				for (Quantity i = 0; i < stock; ++i, ++worker_counter) {
+					// Make sure that we won't flood the map with carriers etc.
+					if (worker_counter < kFleeingUnitsCap) {
+						launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+					} else {
+						break;
+					}
+				}
+				// Remove the remaining stock in case we hit the cap
+				stock = workers.stock(id);
+				if (stock > 0) {
+					remove_workers(id, stock);
 				}
 				assert(!incorporated_workers_.count(id) || incorporated_workers_[id].empty());
 			} else {
