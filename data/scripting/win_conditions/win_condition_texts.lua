@@ -12,15 +12,15 @@ lost_game = {
 
 won_game_over = {
   title = _"You won",
-  body = rt(p(_"You are the winner!"))
+  body = h2(_"You are the winner!")
 }
 
 lost_game_over = {
   title = _"You lost",
-  body = rt(p(_"You’ve lost this game!"))
+  body = h2(_"You’ve lost this game!")
 }
 
 game_status = {
   title = _"Status",
-  body = rt(p(_"Player overview:"))
+  body = h3(_"Player overview:")
 }

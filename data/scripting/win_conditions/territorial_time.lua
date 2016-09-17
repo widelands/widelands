@@ -241,7 +241,7 @@ return {
                   :format(remaining_max_time // 60))
             end
             msg = msg .. "\n\n"
-            msg = msg .. "</rt>" .. game_status.body .. "<rt>"
+            msg = msg .. "</rt>" .. rt(game_status.body) .. "<rt>"
             msg = msg .. _status(points, "has")
             send_message(pl, game_status.title, rt(msg), {popup = true})
          end
@@ -289,9 +289,9 @@ return {
 
          maxpoints = points[1][2]
          local wonmsg = won_game_over.body
-         wonmsg = wonmsg .. "\n\n" .. game_status.body
+         wonmsg = wonmsg .. game_status.body
          local lostmsg = lost_game_over.body
-         lostmsg = lostmsg .. "\n\n" .. game_status.body
+         lostmsg = lostmsg .. game_status.body
          for i=1,#points do
             if points[i][1] == team_str:format(pl.team) or points[i][1] == pl.name then
                if points[i][2] >= maxpoints then
