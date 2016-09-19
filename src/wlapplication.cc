@@ -534,13 +534,26 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 }
 
 void WLApplication::handle_input(InputCallback const* cb) {
+	// Container for keyboard events using the Alt key.
+	// <sym, mod>, type.
+	std::map<std::pair<int32_t, uint16_t>, uint32_t> alt_events;
+
 	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
 		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
 			bool handled = false;
-			if (cb && cb->key) {
+			// Workaround for duplicate triggering of the Alt key in Ubuntu:
+			// Don't accept the same key twice, so we use a map to squash them and handle them later.
+			if (ev.key.keysym.mod & KMOD_ALT) {
+				alt_events.insert(std::make_pair<std::pair<int32_t, uint16_t>, uint32_t>(
+				   std::make_pair<int32_t, uint16_t>(static_cast<int32_t>(ev.key.keysym.sym),
+				                                     static_cast<uint16_t>(ev.key.keysym.mod)),
+				   static_cast<uint32_t>(ev.type)));
+				handled = true;
+			}
+			if (!handled && cb && cb->key) {
 				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			if (!handled) {
@@ -573,6 +586,20 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			should_die_ = true;
 			break;
 		default:;
+		}
+	}
+
+	// Now constructing the events for the Alt key from the container and handling them.
+	for (const auto& event : alt_events) {
+		ev.type = event.second;
+		ev.key.keysym.sym = event.first.first;
+		ev.key.keysym.mod = event.first.second;
+		bool handled = false;
+		if (cb && cb->key) {
+			handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
+		}
+		if (!handled) {
+			handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 		}
 	}
 }
