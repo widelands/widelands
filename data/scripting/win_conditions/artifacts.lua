@@ -21,6 +21,7 @@ return {
    description = wc_desc,
    map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suitable maps
    func = function()
+      set_textdomain("win_conditions")
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
