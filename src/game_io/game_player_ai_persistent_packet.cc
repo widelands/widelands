@@ -71,16 +71,6 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				}
 				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_weights.size());	
 				assert (player->ai_data.neuron_pool_size == player->ai_data.neuron_functs.size());
-				// Bi-Neurons					
-				player->ai_data.bi_neuron_pool_size = fr.unsigned_32();
-				for (uint16_t i = 0; i < player->ai_data.bi_neuron_pool_size; i = i + 1) {
-					player->ai_data.bi_neuron_weights.push_back(fr.signed_8());
-				}
-				for (uint16_t i = 0; i < player->ai_data.bi_neuron_pool_size; i = i + 1) {
-					player->ai_data.bi_neuron_types.push_back(fr.unsigned_8());
-				}
-				assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_weights.size());	
-				assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_types.size());
 				
 				//F-neurons
 				player->ai_data.f_neuron_pool_size = fr.unsigned_32();
@@ -153,16 +143,6 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		for (uint16_t i = 0; i < player->ai_data.neuron_pool_size; i = i + 1) {
 			fw.signed_8(player->ai_data.neuron_functs[i]);
 		}
-		// Bi-Neurons
-		fw.unsigned_32(player->ai_data.bi_neuron_pool_size);
-		assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_weights.size());	
-		assert (player->ai_data.bi_neuron_pool_size == player->ai_data.bi_neuron_types.size());			
-		for (uint16_t i = 0; i < player->ai_data.bi_neuron_pool_size; i = i + 1) {
-			fw.signed_8(player->ai_data.neuron_weights[i]);
-		}
-		for (uint16_t i = 0; i < player->ai_data.bi_neuron_pool_size; i = i + 1) {
-			fw.unsigned_8(player->ai_data.bi_neuron_types[i]);
-		}		
 
 		// F-Neurons
 		fw.unsigned_32(player->ai_data.f_neuron_pool_size);

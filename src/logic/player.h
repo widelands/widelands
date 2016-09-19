@@ -175,7 +175,6 @@ public:
 			 ai_personality_mil_upper_limit(0),
 			 magic_numbers_size(0),
 			 neuron_pool_size(0),
-			 bi_neuron_pool_size(0),
 			 f_neuron_pool_size(0) {
 		}
 
@@ -198,13 +197,10 @@ public:
 		int32_t ai_personality_mil_upper_limit;
 		uint32_t magic_numbers_size;
 		uint32_t neuron_pool_size;
-		uint32_t bi_neuron_pool_size;
 		uint32_t f_neuron_pool_size;			
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
-		std::vector<int8_t> bi_neuron_weights;
-		std::vector<uint8_t> bi_neuron_types;
 		std::vector<uint8_t> f_neurons;
 	} ai_data;
 

@@ -88,7 +88,6 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 constexpr int  magic_numbers_size = 50;
 constexpr int  neuron_pool_size = 60;
-constexpr int  bi_neuron_pool_size = 10;
 constexpr int  f_neuron_pool_size = 20;
 constexpr int  f_neuron_bit_size = 5;
 
@@ -535,34 +534,16 @@ private:
 	std::bitset<f_neuron_bit_size> core;
 };
 
-//Bi_Neuron receives two bools and returns a value with probability of 1/4
-struct Bi_Neuron {
-	Bi_Neuron(int8_t, uint8_t, uint16_t); //weight, type, id
-	void set_weight(int8_t w);
-	int8_t get_weight() {return weight;};
-	int8_t get_result(bool, bool);
-	void set_type(uint8_t);
-	uint8_t get_type();
-	uint16_t get_id() {return id;};
-		
-private:
-	int8_t weight;
-	uint8_t type;
-	uint16_t id;
-	
-};
-
 //This is to keep all data related to AI magic numbers
 struct ManagementData {
 	ManagementData();
 	
 	std::vector<Neuron> neuron_pool;
-	std::vector<Bi_Neuron> bi_neuron_pool;
 	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);
-	void review(uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint32_t, uint32_t, uint32_t,uint32_t, uint32_t, uint32_t);
+	void review(uint32_t, PlayerNumber, uint16_t, uint32_t, uint32_t, uint32_t, uint32_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
@@ -574,7 +555,7 @@ struct ManagementData {
 	bool test_consistency();
 	
 private:	
-	uint32_t scores[3];
+	int32_t scores[3];
 	uint32_t last_mutate_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;
@@ -675,26 +656,31 @@ struct PlayersStrengths {
 private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, bool en, uint32_t pp, uint32_t op, uint32_t cs);
+		PlayerStat(Widelands::TeamNumber tc, bool en, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
 
 		Widelands::TeamNumber team_number;
 		bool is_enemy;
 		uint32_t players_power;
-		uint32_t old_players_power;		
+		uint32_t old_players_power;
 		uint32_t players_casualities;
 		uint32_t last_time_seen;
+		uint32_t players_land;
+		uint32_t old_players_land;	
 	};
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber en, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs);
+	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber en, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_player_land(Widelands::PlayerNumber pn);
+	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
 	uint32_t get_visible_enemies_power(uint32_t);
 	uint32_t get_enemies_average_power();
+	uint32_t get_enemies_average_land();
 	uint32_t get_old_visible_enemies_power(uint32_t);
 	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
