@@ -1,10 +1,14 @@
 ### Build 19 until r8096
 
-- Added added widelands.appdata.xml for debian desktops. Made this file and widelands.desktop localizable.
+- Big internationalization overhaul to improve translations
+- UI redesigns to make translated strings fit
+- Internal unit names now match their display names
+- Most UI elements now use the new font renderer
+- Automatic font selection and support for Arabic script
+- Added added widelands.appdata.xml for debian desktops.
 - Added build instructions for OpenBSD
 - Added checks for illegal file names during map saving.
 - Added sounds for fox, elk, wolf, stag, boar, smelting works, weapon smithy ax workshop, lime kiln, tavern, brewery, winery, wood hardener. Replaced sound for sheep and mill.
-- Changed German language terrain names to English language names.
 - Collectors win condition now reports team scores as well as player scores.
 - Continuous integration and automated builds with Travis (Linux) and AppVeyor (Windows)
 - Created a new executable 'wl_map_object_info' that will generate JSON files for updating the encyclopedia on the website.
@@ -12,9 +16,8 @@
 - Display Widelands version for each client in Internet lobby.
 - Editor now starts with the Info tool instead of the Set Height tool
 - Fixed escaping of special characters in messages
-- Fixed sending of messages in Territorial Lord, Territorial Time and Wood Gnome.
 - Fixed various cashes in editor when loading a map or using the Set Origin tool.
-- Generic in-game help system driven by Lua scripts
+- Generic in-game and in-editor help system driven by Lua scripts
 - Hide wares which do not need prerequisites and therefore are produced 'endlessly' from configure economy
 - Improved documentation: Started adding Tribe and World information to our online Widelands Scripting Reference.
 - New Graphics for Imperial Vintner
@@ -30,28 +33,21 @@
 - Shifted chat overlay up so it won't overlap with the menu buttons.
 - Ships now have individual names and show their states in the statistics string
 - The second alternative tool in the editor can now also be accessed via the Ctrl key.
-- The soldier values in the warfare tutorial are now calculated from the actual values. Added soldier values to worker help.
 - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
 - User maps are now saved in a 'My Maps' subdirectory to prevent overwriting of official maps
-- Various scrollbar-related fixes:
+- Various scrollbar-related fixes.
 - When an expedition ship places a port, a bit of land is cleared of trees to make room for a few buildings.
 - Fixed bug #1228811: Observers savegame contains no minimap.
 - Fixed bug #1302593: Result screen not shown in loaded game when a player was already defeated in saved game
 - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when ox breeder is working for Barbarian tribe.
 - Fixed bug #1531312: Foresters aren’t planting on old fields
-- Fixed bug #1535732: Texts not displayed correctly with the new font renderer
-- Fixed bug #1542821: Inconsistency after Version Warning
 - Fixed bug #1548932: Editor fails on save with zip filesystem
 - Fixed bug #1554552: wounded attacking soldiers failing to retreat
 - Fixed bug #1562332: Crash with playing chat sound in Internet lobby
 - Fixed bug #1566441: String "Saving Game" appears too late
-- Fixed bug #1570094: Editor remove resources does not work as expected
-- Fixed bug #1571308: Crash when EditBox text exceeds maximum width
 - Fixed bug #1581828: Desync while testing bzr8001[bug-1418154-collectors-teams]
 - Fixed bug #1592692: No production sounds on some maps
-- Fixed bug #1600633: Crash when pressing tab key in help menu
 - More intelligent handling of units in spinboxes.
-- Fixed bug #1162527: Military statistics button seem cropped when selected.
 - Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
                       transparency.
 - Fixed bug #1540827: Bug with establishing smuggling routes in the Smugglers
@@ -77,22 +73,11 @@
   the player some wares if needed (cheat mode)
 - Fixed line drawing by replacing the broken use of GL_LINES with a tessellation
   algorithm for drawing lines.
-- Listselect now uses the new font renderer, and text is aligned according to rtl/ltr per entry.
-- Implemented locale fontset selection by word into the new renderer.
-- Fontsets now have a representative character that is used to calculate line height.
-- Fixed an overflow bug in the renderer.
-- Fixed overlapping building names and long window titles.
-- Fixed text cropping in DiscreteSlider.
-- Gave plot area bottom axis labels some space.
 - New tree/terrain values.
-- Fixed bug #1540782: Multiline edit box shows new text only when hitting
-                      backspace.
 - Fixed bug #1551578: Fortified Village crashes when building can't be placed.
-                      Also fixed some building names in starting conditions.
 - Fixed bug #1542705: Consolidate names in bob worker programs: Renamed program
                       "geologist-find" to "geologist_find" and "playFX" to
                       "play_sound".
-- Fixed bug #1546095: Crash when typing "\" in Editor text fields.
 - Fixed bug #1513181: Multiplayer chat don't display any more by fixing the check
                       in ChatOverlay whether a chat provider has been assigned.
 - Added the buildings where a worker can work to worker help.
@@ -102,7 +87,6 @@
 - Fixed bug #1546810: Editor: undo/redo doesn't work when placing terrains in
                       one move
 - Reworked find_portdock.
-- Various string fixes
 - Balancing: Added gold to building cost for Atlantean training sites.
   Made Barbarian attack stronger.
 - Fixed bug #1544864: Get rid of LuaBaseImmovable::get_size. The corresponding
@@ -118,9 +102,6 @@
   times per second).
 - Exposed terrain and resource descriptions to the Lua interface and added tree
   and terrain help to the editor.
-- MultilineTextarea now generates an empty line for "\n\n" rather than just a
-  line break. Added "HINTS:" label to map hints in mapdetails.cc.
-- Buttons will now automatically scale down their text if it is too wide.
 - Added Widelands version to log output
 - Added map names to scoped timer for map loading/saving.
 - Added file paths to error messages in exceptions thrown by LayeredFileSystem.
@@ -132,27 +113,18 @@
 - AI: Reworked algorithm for building new trainingsites. Modified a logic for
   trainingsites when to call a soldier. Modified attacking, based on actual
   performance of trainingsites.
-- Changed the fallback font to sans.
-- Textareas with fixed width will now automatically resize the text to fit the
-  width.
 - Added helptext to Editor CategorizedItemSelectionMenu when nothing has been
   selected.
 - Editor CategorizedItemSelectionMenu no longer grows excessively wide when
   multiple items are selected.
-- Fixes/Improvements to Building Statistics.
 - Fixed bug #1542214: Inconsistent ordering of OK/Cancel buttons. The OK button
   is always on the right for LTR languages, and on the left for RTL languages.
 - Remove --dedicated commandline option and associated code.
 - Windows lo longer update their size when minimized, but instead when they get
   restored.
-- More consistent Progresswindow strings.
-- Consistent use of colons with spinboxes in the Options menu.
 - Added "hint" to the json file created by wl_map_info.
 - Ports can be affected by terrain changes up to 3 tiles away from their original
   position, so we recalculate as much when changing a terrain tile.
-- Refactored WLMessageBox. It now no longer depends on the old font renderer,
-  and scrollbars only appear when they are needed.
-- Canonicalized datadir and datadir_for_testing in WLApplication.
 - Modification of a few internal AI parameters.
 - Fixed bug #1535065: Editor crashes with random map regarding player positions.
 - Removed unused option "setdescription" from worker program.
@@ -162,8 +134,6 @@
 - Removed graphic::update() and Panel::update() and always redraw at maxfps.
 - Changed default maxfps to 30 (instead of 25).
 - Fixed bug #1525680: Richtext and rt_render can now handle &nbsp;.
-                      Shifted handling of &lt; and &gt; from parser to renderer.
-- EditBox now uses the new font renderer.
 - Filter all textures linearly instead of near. This looks nicer and texture
   bleeding has been taken care of.
 - Fixed bug #1526916: When selecting a map, the parent directory now has a lower
@@ -187,11 +157,7 @@
 - Fixed bug #1532279: Spin box not displayed correct in options menu
 - Fixed bug #1438611: Widelands is leaking memory
 - Fixed bug #1535569: Messages window slows down game speed
-- Fixed bug #1522564: Table icons on bottom of table need cropping
-- Fixed bug #1530398: Wrong text above marble mine
-- Fixed bug #1530240: wrong text in the tribal encyclopedia for the battle ax
 - Fixed bug #1536053: Widelands without sound on win
-- Fixed bug #1519361: PlayerColor in Building menu causes render errors
 - Fixed bug #1532417: complete indicators for resource water
 - Fixed bug #1523096: Options Window redesign
 - Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
@@ -203,11 +169,9 @@
 - Fixed bug #977980:  Fish and mountain ressources cannot be removed when they
                       are on grass
 - Fixed bug #1525395: atlantean mines failing to extract all resources
-- Fixed bug #1523165: ai malfunctions after introduction of difficulty levels
 - Fixed bug #1526514: player 2 in "" section [player_2] not found
 - Fixed bug #1503949: excessive CPU usage and loading time seemingly related to
                       lenght of the game
-- Fixed bug #1425870: Artefacts in render queue branch
 - Fixed bug #1515006: Create a new forested mountain terrain
 - Fixed bug #1526903: Editor crashes when changing tribe
 - Fixed bug #1522290: Gameplay suddenly gets very slow
@@ -220,23 +184,15 @@
 - Fixed bug #1527368: Some buildings have lost build animations; Add check for
                       lua tables
 - Fixed bug #1421942: Unified term for "Black" and "Wasteland"
-- Fixed bug #1492114: Making the message window smaller
-- Fixed bug #1502965: Building statistics window does not "courtain up"
-                      correctly
 - Fixed bug #1505723: Some performance values for the buildings help text
 - Fixed bug #1412242: Multiplayer save game selection does not show the filename
-- Fixed bug #1509301: Loading older multiplayer savegame doesn't work
 - Fixed bug #1385859: Selecting a map in multiplayer mode crashes the game
 - Fixed bug #1508553: New win condition: artifacts
 - Fixed bug #1516777: Atlantean corn farms unproductive
 - Fixed bug #1227984: Autosave should not trigger while game is paused
-- Fixed bug #1516214: Game data error: unseen immovable: tribe "field_harvested"
-                      does not exist
 - Fixed bug #1515161: Worker does not actually exist crash and unseen immovable
                       when loading....
 - Fixed bug #1515359: Missing animation dismantlesite worker
-- Fixed bug #1513550: Unable to load savegame - tribe ... does not define
-                      building type
 - Fixed bug #1278050: login problems with metaserver
 - Fixed bug #1274279: Metaserver entry in config gets deleted
 - Fixed bug #1480928: Lumberjack animation glitches
@@ -244,19 +200,14 @@
 - Fixed bug #1493238: Options screen layout errors
 - Fixed bug #1368133: One Tribe
 - Fixed bug #1453528: Buildings missing menu icons
-- Fixed bug #1345663: format_help.lua has no Textdomain
-- Fixed bug #1341080: Building help: remove logic from wrappers
 - Fixed bug #1509220: Atlanteans campaign keeps counting 0 ships
 - Fixed bug #1402786: "Set origin" should be in the tools menu
 - Fixed bug #1171231: Size of minimap in the editor not changed when new map is
                       loaded
-- Fixed bug #1406301: Various strings need fixing
 - Fixed bug #1509452: Scenario maps aren't loaded as scenarios
 - Fixed bug #1504948: Performance issue when "no use for ships on this map"
 - Fixed bug #1426654: Only list compatible .wmf files in the load game dialog
 - Fixed bug #861761:  Improve production prioritisation
-- Fixed bug #1504952: "No use for ships on this map!" message is not
-                      translateable
 - Fixed bug #1504366: editor crashes unexpectedly
 - Fixed bug #1502458: Carrier hiding in Warehouse/HQ is hardcoded
 - Fixed bug #580923:  Production of carrier does not respect building costs
@@ -268,11 +219,8 @@
                       of the same name
 - Fixed bug #1375915: scripting files get deleted when a map is resaved
 - Fixed bug #1215412: graphic artifacts
-- Fixed bug #1401479: Minimaps button images are scaled down instead of cropped.
 - Fixed bug #849896:  Heal the highest level, healthiest soldier first
 - Fixed bug #1489974: Military tutorial should mention Hero-Rookie topic earlier
-- Fixed bug #1487887: Translation missing in editor and in replay tooltip
-- Fixed bug #1463829: Building statistics: Last line needs more space
 - Fixed bug #1480937: Escape key doesn't work in all dialogues
 - Fixed bug #978175:  localization not yet loaded in command line
 - Fixed bug #1413226: Spaces in attack box disappear
@@ -283,7 +231,6 @@
 - Fixed bug #653308:  The attack dialog is not updating the number of possible
                       attackers
 - Fixed bug #1326395: Information tool in the editor has large tool area
-- Fixed bug #1460724: Icon in news inbox overlaps with long message text
 - Fixed bug #1424950: strange character relationships in the empire campaigns
 - Fixed bug #1454371: "Out of resources" messages should be triggered by
                       productivity
@@ -292,13 +239,11 @@
                       statistics
 - Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when player
                       is removed
-- Fixed bug #1455732: New building encyclopedia causes crash with saveloading
 - Fixed bug #998544:  Replay name should contain Widelands version
 - Fixed bug #1442869: Stopped production sites should produce something from
                       their consumed wares befor they stop
 - Fixed bug #1451147: Game crashes when headquarters is taken over
 - Fixed bug #1442945: Atlanteans ship construction much faster
-- Fixed bug #1451977: Collectors message contains bad names
 - Fixed bug #1243700: Statistic window displays graph incorrectly when in
                       hour-mode
 - Fixed bug #1428396: savefile broken when enemy deafed
@@ -311,8 +256,6 @@
 - Fixed bug #731987:  mouse does not work in full screen on virtual machines
 - Fixed bug #1422072: Private message improvements
 - Fixed bug #1434291: collectors game over message
-- Fixed bug #1418151: Collectors: status points are no longer shown in the
-                      statistics
 - Fixed bug #1378798: Editor: 'new map' options redesign
 - Fixed bug #1406298: Load game screen lists campvis file
 - Fixed bug #1424408: Graphics become all white in tutorial
@@ -332,7 +275,7 @@
 - Fixed bug #1419537: Allow Observers to show building spaces
 - Fixed bug #1402231: Wl crashes when saving after port is reduced to warehouse
 - Fixed bug #1389211: port without a portdock (game crashing)
-- Fixed bug #1420521: Reset target quantitiy is overwritten easily
+- Fixed bug #1420521: Reset target quantity is overwritten easily
 - Fixed bug #1328637: Road textures are hard to see in some worlds
 - Fixed bug #1408775: Make autocrat &amp; territorial lord the last win
                       conditions, make Collectors the first
@@ -368,8 +311,6 @@
 - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
 - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
 - Fixed bug #1402253: Install fails (file INSTALL cannot find "..../fonts")
-- Fixed bug #1207415: Many screens do not honor the font setting
-- Fixed bug #662800:  Fonts have problems with non-latin characters
 - Fixed bug #859245:  Authors / developers button in main menu
 - Fixed bug #1281823: Setting resources via LUA API broken in Editor
 - Fixed bug #536559:  Fullscreen must not change physical screen resolution
@@ -377,8 +318,6 @@
 - Fixed bug #1397302: Fullscreen Toggle Text Overlay
 - Fixed bug #1397301: Screenshots black
 - Fixed bug #768826:  Show altitude level in the editor
-- Fixed bug #1219914: Lots of warnings "internationalized messages should not
-                      contain the '\r' escape sequence" when doing make lang
 - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
                       and bottom sides not being updated properly
 - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
@@ -386,7 +325,6 @@
 - Fixed bug #1322280: Remove Hint and feature for "ALT GR key lets you drag the
                       window" does not work
 - Fixed bug #1389346: Disabling opengl results in black screen
-- Fixed bug #1336097: Localization not working
 - Fixed bug #1390978: Textinput triggers hotkeys
 - Fixed bug #1393547: Flashing black background when autosaving
 - Fixed bug #1392406: Confirmation dialog when leaving the editor although Ctrl
@@ -395,7 +333,6 @@
 - Fixed bug #959605:  Barbarian In-Game Help Development
 - Fixed bug #960164:  Imperial In-Game Help Development
 - Fixed bug #960170:  Atlantean In-Game Help Development
-- Fixed bug #1388166: Cannot open savegame of build 18 with bzr 7237
 - Fixed bug #672248:  duplicated animations
 - Fixed bug #1283693: crash after very long chat message
 - Fixed bug #1257476: Crash when attempting to load a game after toggeling
@@ -425,7 +362,6 @@
 - Fixed bug #1378801: Random map: Wasteland % change not reflected in Mountains
                       %
 - Fixed bug #669699:  trainer is only a carrier
-- Fixed bug #1371905: Localized strings doesn'tfit in the available place
 - Fixed bug #1174075: Clarify meaning of icons in editor terrain preview
 - Fixed bug #744749:  Training sites should either show statistics as a military
                       or as a productionsite
@@ -437,16 +373,12 @@
 - Fixed bug #988831:  Remove message expiry feature.
 - Fixed bug #1226624: AI sometimes runs out of trunks with castle village
 - Fixed bug #951548:  AI building too many military buildings
-- Fixed bug #536360:  improve sentence structure
 - Fixed bug #1048528: AI builds roads around its vineyards
-- Fixed bug #965044:  Improve the rich text renderer with new formatting options
 - Fixed bug #1344179: Granite mines should check if their output is needed
 - Fixed bug #1332856: Regression from one_world: Crash when opening message
                       regarding resources
 - Fixed bug #536230:  building icons in menu are shown without correct
                       playercolor
-- Fixed bug #1310774: Problems with translating "%1$s %2$s mine %3$s"
-- Fixed bug #1295992: Cattle Farm shows wrong hover text
 - Fixed bug #1328635: Bring back terrain affinity
 - Fixed bug #647456:  options: colors of the main WL menu changes when changing
                       the language
@@ -455,14 +387,10 @@
 - Fixed bug #1349378: get_soldiers doesn't return a table in Island Hopping
 - Fixed bug #1344350: Constructionsites/dismantlesites only show a dot instead
                       of building image
-- Fixed bug #999262:  Immovable attribs (e.g. stone) are not translatable
-- Fixed bug #682405:  Some variables are not translatable
 - Fixed bug #1298411: No necessity to conquer all military buildings in the
                       third Barbarian Campaign
 - Fixed bug #674839:  Some issues of barbarian tutorial 3
 - Fixed bug #1322741: text issue: fps statistics overlaps with xz coordinates
-- Fixed bug #964534:  Building names in help headlines create duplicate
-                      translations of building names
 - Fixed bug #1027824: Mistakes in in-game help of Barbarian trainingscamp
 - Fixed bug #1005194: building help: clear indication of the meaning of working
                       area
@@ -488,8 +416,6 @@
 - Fixed bug #1332842: Remove support for different flag and frontier 'styles'.
 - Fixed bug #821553:  Increase maximum number of terrain types
 - Fixed bug #1161971: Graphics conf files "picture=" parameter
-- Fixed bug #1332984: Regression from one_world: Crash when finding granite
-                      mining location (as any tribe)
 - Fixed bug #1300359: Installation dialog shows old screenshot
 - Fixed bug #1332832: Warning when starting a new game Unused key "name" in
                       LuaTable.
@@ -502,16 +428,9 @@
 - Fixed bug #1303669: Reduce size of campaign savegames
 - Fixed bug #1311244: Atlantean Mission Trigger fail
 - Fixed bug #1311716: Segfault when loading a game with nightly build
-- Fixed bug #899928:  Translation overflow in "action" window
 - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
                       after starting a new game
-- Fixed bug #536218:  Text does not fit buttons in objectives dialog
-- Fixed bug #1240880: Needed experience for workers cut off in building window
 - Fixed bug #1304638: Wrong sound played
-- Fixed bug #1300724: Minor string issues
-- Fixed bug #1290070: Plateau scenario needs a string fix
-- Fixed bug #1298309: Message "We lost a %s to the ocean!" cannot easily be
-                      translated
 - Fixed bug #1306728: crash when info window opened if statistics window has
                       been opened
 - Fixed bug #1302635: Random tribe selection always gives the same result
@@ -520,20 +439,17 @@
 - Fixed bug #1303070: Gracefully deal with older savegames failing to load in
                       build 19
 - Fixed bug #1298011: Formatting stuff in Atlantean campaign texts shown
-- Fixed bug #1299919: AT: %1$u/%2$u in miltary sites
 - Fixed bug #964541:  Closing building window closes (child) help window
 - Fixed bug #1096453: Massive memory leaks
 - Fixed bug #1289575: Dialog for selecting immovable bobs in editor lacks tooltips
 - Fixed bug #1202133: Dialogs (and list of maps) have white background and
                       repetition
-- Fixed bug #1278583: build completion status not translated
 - Fixed bug #1291554: Remove compatibility wares
 - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
 - Fixed bug #1290073: Training grounds description vs Warrior's axe description
 - Fixed bug #1290123: Delete barbarian stronghold
 - Fixed bug #1289586: Let tree descriptions use the same size scheme as buildings
 - Fixed bug #1290066: Sort languages by their native names
-- Fixed bug #961526:  Articles and %s
 - Fixed bug #1232392: Allow tabbing in forms
 
 ### Build 18
