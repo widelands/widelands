@@ -294,9 +294,7 @@ void InternetGaming::handle_metaserver_communication() {
 			}
 		}
 	} catch (const std::exception& e) {
-		std::string reason = _("Something went wrong: ");
-		reason += e.what();
-		logout(reason);
+		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());
 		set_error();
 	}
 
