@@ -43,8 +43,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      spider_silk = 8,
-      gold_thread = 4
+      { name = "spider_silk", amount = 8 },
+      { name = "gold_thread", amount = 4 }
    },
    outputs = {
       "spidercloth",

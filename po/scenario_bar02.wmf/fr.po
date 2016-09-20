@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-13 06:58+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,7 +161,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Améliorez votre forge en fabrique de haches et construisez une autre forge pour assurer la construction des outils. Quand le forgeron aura atteint le niveau suivant (Maître forgeron), vous pourrez encore améliorer la fabrique de haches en moulin de guerre, qui produira des armes supplémentaires. "
+msgstr "Améliorez votre forge en fabrique de haches et construisez une autre forge pour assurer la construction des outils. Quand le forgeron aura atteint le niveau suivant (Maître forgeron), vous pourrez encore améliorer la fabrique de haches en moulin de guerre, qui produira des armes supplémentaires."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135

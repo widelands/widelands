@@ -94,7 +94,7 @@ return {
          end
       end
 
-      function _calc_points()
+      local function _calc_points()
          local teampoints = {}     -- points of teams
          local maxplayerpoints = 0 -- the highest points of a player without team
          local maxpointsplayer = 0 -- the player
@@ -149,7 +149,7 @@ return {
          end
       end
 
-      function _send_state()
+      local function _send_state()
          set_textdomain("win_conditions")
          local candidate = currentcandidate
          if candidateisteam then
@@ -181,8 +181,10 @@ return {
 
       -- Start a new coroutine that checks for defeated players
       run(function()
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+         while remaining_time ~= 0 do
+            sleep(5000)
+            check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+         end
       end)
 
       -- here is the main loop!!!
@@ -199,10 +201,10 @@ return {
                p.see_all = 1
                if candidateisteam and currentcandidate == p.team
                   or not candidateisteam and currentcandidate == p.name then
-                  p:send_message(won_game_over.title, won_game_over.body)
+                  p:send_message(won_game_over.title, rt(won_game_over.body))
                   wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                else
-                  p:send_message(lost_game_over.title, lost_game_over.body)
+                  p:send_message(lost_game_over.title, rt(lost_game_over.body))
                   wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                end
             end

@@ -154,7 +154,7 @@ dismantle = {
    title = _"Dismantle your sentry",
    body = rt(
       h1(_"Dismantling military buildings") ..
-      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle the building (buildings of an alien tribe cannot be dismantled, only be burned down).]]) ..
+      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]]) ..
       p(_[[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..

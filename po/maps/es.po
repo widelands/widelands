@@ -4,14 +4,15 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +56,7 @@ msgstr "Este tutorial explica el manejo de los edificios militares y sitios de e
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr "El segundo Imperio "
+msgstr "El segundo Imperio"
 
 #: ../../data/campaigns/campaigns.conf:29
 msgid "Barbarians"
@@ -173,7 +174,7 @@ msgstr "Finalmente el barco fue reparado, Lutius y su pueblo volvieron a la bús
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr "Control básico "
+msgstr "Control básico"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
@@ -614,7 +615,7 @@ msgstr "Una tierra mística, repleta de diferentes paisajes, todos atravesados p
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:8
 msgid "The Ancient Sun of Fire"
-msgstr "El antiguo Sol de fuego "
+msgstr "El antiguo Sol de fuego"
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:10
 msgid ""
@@ -729,13 +730,13 @@ msgstr "Hay algo místico como una atmósfera gris alrededor entorno a estos tre
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
-msgstr "El paso a través de las montañas "
+msgstr "El paso a través de las montañas"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:10
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "En esta zona montañosa dos príncipes se han asentado. Ahora están expandiendo sus territorios, sin darse cuenta de que no están solos! "
+msgstr "En esta zona montañosa dos príncipes se han asentado. Ahora están expandiendo sus territorios, sin darse cuenta de que no están solos!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -814,7 +815,7 @@ msgstr ""
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
-msgstr "aguas parpadeantes"
+msgstr "Aguas parpadeantes"
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:10
 msgid ""

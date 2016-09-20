@@ -4,32 +4,11 @@ include "tribes/scripting/help/format_help.lua"
 
 -- RST
 -- building_help.lua
--- ---------------
-
--- Functions used in the ingame building help windows for formatting the text and pictures.
-
---  =======================================================
---  *************** Basic helper functions ****************
---  =======================================================
-
--- RST
--- .. function text_line(t1, t2[, imgstr = nil])
+-- -----------------
 --
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: text in h3 format.
---    :arg t2: text in p format.
---    :arg imgstr: image aligned right.
---    :returns: header followed by normal text and image.
---
-function text_line(t1, t2, imgstr)
-   if imgstr then
-      return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   else
-      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   end
-end
-
+-- This script returns a formatted entry for the ingame building help.
+-- Pass the internal tribe name and building name to the coroutine to select the
+-- building type.
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
@@ -174,7 +153,7 @@ end
 
 
 -- RST
--- .. function building_help_general_string(tribe, building_description)
+-- .. function:: building_help_general_string(tribe, building_description)
 --
 --    Creates the string for the general section in building help
 --
@@ -615,7 +594,7 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribe, building_description)
+-- .. function:: building_help_crew_string(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
@@ -695,7 +674,7 @@ end
 
 
 -- RST
--- .. building_help_production_section()
+-- .. function:: building_help_production_section()
 --
 --    Displays the production/performance section with a headline
 --
@@ -712,7 +691,7 @@ end
 
 
 -- RST
--- .. function building_help(tribe, building_description)
+-- .. function:: building_help(tribe, building_description)
 --
 --    Main function to create a building help string.
 --

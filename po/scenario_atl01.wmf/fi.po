@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 19:03+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-12 18:49+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -277,7 +277,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "Rakenna telakka lähelle rannikkoa aloittaaksesi laivojen rakentamisen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
@@ -566,7 +566,7 @@ msgstr "Jundlina on samaa mieltä"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:240
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Sinun sanasi kuulostavat minusta viisailta, Colionder. Joten olkoon sitten niin."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
@@ -577,7 +577,7 @@ msgstr "Jundlina Käy Läpi Raportit"
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "Näyttää siltä, että ruuan tuotantomme valmistuu ja kaikki toimivat mukavasti yhdessä. Tällä olo alkaa tosiaankin tuntua kuin olisi kotona."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
@@ -789,7 +789,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:384
 msgid "One More Building"
-msgstr ""
+msgstr "Yksi Rakennus Lisää"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:387

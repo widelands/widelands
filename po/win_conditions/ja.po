@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
+"POT-Creation-Date: 2016-09-10 12:19+0000\n"
+"PO-Revision-Date: 2016-09-14 10:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -181,42 +181,42 @@ msgstr "エンドレス（霧なし）"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "これはルールのないエンドレスのゲームです。戦争の霧はありません。"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "領主"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "各プレイヤー（チーム）は、マップ面積の半分以上を獲得しようとします。勝者は、少なくとも20分間その面積を維持したプレイヤー（チーム）です。"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
+#: ../../data/scripting/win_conditions/territorial_lord.lua:156
 #: ../../data/scripting/win_conditions/territorial_time.lua:28
 #, lua-format
 msgid "Team %i"
 msgstr "チーム%i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
+#: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:204
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%sはマップ面積の半分以上を所有しています。"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:159
+#: ../../data/scripting/win_conditions/territorial_lord.lua:160
 #: ../../data/scripting/win_conditions/territorial_time.lua:206
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "相手の勝利を防ぐために、まだ%i分の猶予があります。"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
+#: ../../data/scripting/win_conditions/territorial_lord.lua:165
 #: ../../data/scripting/win_conditions/territorial_time.lua:212
 msgid "You own more than half of the map’s area."
 msgstr "あなたはマップ面積の半分以上を所有しています。"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:166
+#: ../../data/scripting/win_conditions/territorial_lord.lua:167
 #: ../../data/scripting/win_conditions/territorial_time.lua:214
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
@@ -237,11 +237,11 @@ msgstr "各プレイヤー（チーム）は、マップ面積の半分以上を
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1sは土地の/n%2$3.0f%%です。(%3$i of %4$i)"
+msgstr "%1$sは土地の/n%2$3.0f%%です。(%3$i of %4$i)"
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:27
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1sは土地の/n%2$3.0f%%でした。(%3$i of %4$i)"
+msgstr "%1$sは土地の/n%2$3.0f%%でした。(%3$i of %4$i)"
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."

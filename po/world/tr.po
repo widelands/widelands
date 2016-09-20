@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Erdy, 2016
+# GunChleoc, 2016
 # Recep Hasanbaş <swarfhell@gmail.com>, 2015
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-02 08:53+0000\n"
-"PO-Revision-Date: 2016-08-04 05:54+0000\n"
-"Last-Translator: Erdy\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:10+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -680,17 +681,17 @@ msgstr "Yeşil Şemsiye Ağacı (Fidan)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:37
 msgid "Green Umbrella Tree (Pole)"
-msgstr " Şemsiye Ağacı (Sırı)"
+msgstr "Şemsiye Ağacı (Sırı)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:61
 msgid "Green Umbrella Tree (Mature)"
-msgstr " Şemsiye Ağacı (Yetişkin)"
+msgstr "Şemsiye Ağacı (Yetişkin)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:85
 msgid "Green Umbrella Tree (Old)"
-msgstr " Şemsiye Ağacı (Yaşlı)"
+msgstr "Şemsiye Ağacı (Yaşlı)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87

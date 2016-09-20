@@ -1,8 +1,9 @@
 -- RST
 -- tree_help.lua
--- -------------
-
--- This file returns a formatted entry for the tree help in the editor.
+-- ---------------
+--
+-- This script returns a formatted entry for the tree help in the editor.
+-- Pass the internal tree name to the coroutine to select the tree type.
 
 include "scripting/editor/format_editor.lua"
 

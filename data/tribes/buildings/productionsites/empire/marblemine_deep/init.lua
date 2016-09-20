@@ -44,8 +44,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      meal = 6,
-      wine = 6
+      { name = "meal", amount = 6 },
+      { name = "wine", amount = 6 }
    },
    outputs = {
       "marble",

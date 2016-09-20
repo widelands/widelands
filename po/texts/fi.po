@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-25 19:19+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +69,7 @@ msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein /usr/share/games/widelands)"
+msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
 #: ../../data/txts/LICENSE.lua:31
 msgid ""
@@ -87,7 +88,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Pelillä ei ole takuuta. Tukea saat veppisivun http://wl.widelands.org/ keskustelupalstalta. Virheraporttejavoi luoda osoitteessa https://launchpad.net/widelands. Samassa osoitteessa voit myös parantaa pelin tekstien suomennoksia."
+msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
@@ -150,43 +151,43 @@ msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen pa
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr "- Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt"
+msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt"
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "- Mitä piti tapahtua ja mitä tapahtui."
+msgstr "Mitä piti tapahtua ja mitä tapahtui."
 
 #: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr "- Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
+msgstr "Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "- Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
+msgstr "Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr "- Mitä karttaa pelasit kun ongelma ilmeni."
+msgstr "Mitä karttaa pelasit kun ongelma ilmeni."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "- Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
+msgstr "Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "- Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
+msgstr "Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -302,11 +303,11 @@ msgstr "Käännökset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Ruudut"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -378,7 +379,7 @@ msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kanna
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -399,7 +400,7 @@ msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa.
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr "minikartta päälle/pois"
+msgstr "Minikartta päälle/pois"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
@@ -590,7 +591,7 @@ msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeutt
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitteessa http:/www.widelands.org/"
+msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitteessa www.widelands.org"
 
 #: ../../data/txts/tips/general_game.tip:26
 msgid ""
@@ -667,7 +668,7 @@ msgstr "Voit käyttää '/me' viestin alussa; esimerkiksi '/me puuteroi nenänp�
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittamasi tekstin."
+msgstr "Jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittamasi tekstin."
 
 #: ../../data/txts/tips/singleplayer.tip:2
 msgid ""

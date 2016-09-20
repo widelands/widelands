@@ -15,7 +15,10 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
+  <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
+  <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
+  <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
@@ -98,12 +101,36 @@
       A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amik törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat - vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
     </p>
   </description>
+  <description xml:lang="it">
+    <p>
+      Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
+    </p>
+    <p>
+      Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
+    </p>
+  </description>
+  <description xml:lang="pt">
+    <p>
+      Tu és o chefe dum pequeno clã. A tua tarefa é de construir um campo que se está sempre a desenvolver. Cada membro do clã vai fazer a sua parte para produzir o necessário para continuar o desenvolvimento.
+    </p>
+    <p>
+      Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar.
+    </p>
+  </description>
   <description xml:lang="sk">
     <p>
       Stojíte na čele malého klanu. Vašou úlohou je budovať neustále rastúcu osadu. Každý člen vášho klanu prispeje svojim dielom práce k získaniu zdrojov na podporu tohto rastu.
     </p>
     <p>
       Widelands ponúka režim jedného hráča s kampaňami, ktoré rozprávajú príbehy o kmeňoch a ich boji vo svete Widelands. Skutočné usádzanie začne však až vtedy, keď sa spojíte s priateľmi po internete alebo lokálnej sieti a spoločne vybudujete nové ríše alebo, naopak, navzájom sa rozdrvíte v prachu vojny. Okrem toho Widelands poskytuje možnosť hry proti umelej inteligencii.
+    </p>
+  </description>
+  <description xml:lang="sr">
+    <p>
+      Namesnik si malog klana. Tvoj zadatak je da sagradiš stalno rastuće naselje. Svaki član tvog klana će učiniti svoj deo posla da proizvede više resursa da pomogne širenje.
+    </p>
+    <p>
+      Widelands - Širozemlje - nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite medjusobno u pepelu rata. Widelands takođe nudi i AI da te izazove.
     </p>
   </description>
   <description xml:lang="uk">
@@ -120,12 +147,20 @@
       <caption>Fleet of Ships</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2018%20(until%20now)/Seafaring%20Expedition.png</image>
-      <caption>Seafaring Expedition</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
+      <caption>Dolomites Map</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2017/Playing%20online.png</image>
-      <caption>Multiplayer Game Setup</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Last%20Survivors.png</image>
+      <caption>Last Survivors Map</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Editor%20Help.png</image>
+      <caption>Editor Help</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Map%20Selection%20Screen.png</image>
+      <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
   <url type="homepage">https://wl.widelands.org/</url>

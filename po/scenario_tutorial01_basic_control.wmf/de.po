@@ -4,18 +4,20 @@
 # Translators:
 # Elisabeth Jäger, 2016
 # wl-zocker, 2014
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Jürgen Eberlein <juergen.eberlein@web.de>, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+#  <ovvv@web.de>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-02 19:45+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -737,11 +739,11 @@ msgstr "Hallo, ich bin’s wieder! Diesmal habe ich dir eine Nachricht gesandt. 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Das Nachrichtenfenster kann mit der Schaltfläche ganz rechts in der Leiste unten am Bildschirm zu- oder weggeschaltet werden. Sie ändert außerdem ihr Aussehen, wenn neue Nachrichten verfügbar sind; außerdem ertönt ein Glockenton, wenn eine neue Nachricht eintrifft."
+msgstr "Das Nachrichtenfenster kann mit der zweiten Schaltfläche von rechts unten am Bildschirm zu- oder weggeschaltet werden. Sie ändert außerdem ihr Aussehen, wenn neue Nachrichten verfügbar sind; ein Glockenton wird abgespielt, wenn eine neue Nachricht eintrifft."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -780,7 +782,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "Das Nachrichtenfenster ist ein zentrales Werkzeug, um das Schicksal deines Stammes zu kontrollieren. Allerdings bekommst du eine Menge Nachrichten in einem richtigen Spiel. Um einen klaren Kopf zu bewahren, solltest du versuchen, den Posteingang leer zu halten. "
+msgstr "Das Nachrichtenfenster ist ein zentrales Werkzeug, um das Schicksal deines Stammes zu kontrollieren. Allerdings bekommst du eine Menge Nachrichten in einem richtigen Spiel. Um einen klaren Kopf zu bewahren, solltest du versuchen, den Posteingang leer zu halten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."

@@ -347,11 +347,12 @@ void TabPanel::draw(RenderTarget& dst) {
 }
 
 /**
- * Cancel all highlights when the mouse leaves the panel
+ * Cancel all highlights and the tooltip when the mouse leaves the panel
 */
 void TabPanel::handle_mousein(bool inside) {
 	if (!inside && highlight_ != kNotFound) {
 		highlight_ = kNotFound;
+		set_tooltip("");
 	}
 }
 

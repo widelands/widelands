@@ -4,14 +4,15 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
+# GunChleoc, 2016
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:04+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +37,7 @@ msgstr "Construye un fortín en el símbolo de la casa roja en el lado este del 
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr "Construye una casa de leñador "
+msgstr "Construye una casa de leñador"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
@@ -64,11 +65,11 @@ msgstr "Construye dos casas de leñador y un aserradero tan pronto como haya esp
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr "Construye una casa del Silvicultor "
+msgstr "Construye una casa del Silvicultor"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr "Casa del Silvicultor "
+msgstr "Casa del Silvicultor"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
@@ -308,7 +309,7 @@ msgstr "Amalea entra..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr "Tengo dos cosas importantes que contarte...Primero las buenas noticias: "
+msgstr "Tengo dos cosas importantes que contarte...Primero las buenas noticias:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
@@ -339,7 +340,7 @@ msgstr "Lutius, por favor encuentra alguien que se encargue de plantar nuevos á
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid "Thinking About the Future"
-msgstr "Pensando en el futuro "
+msgstr "Pensando en el futuro"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Saledus notes…"

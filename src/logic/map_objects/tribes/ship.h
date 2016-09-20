@@ -196,11 +196,11 @@ struct Ship : Bob {
 		        ship_state_ != ShipStates::kExpeditionColonizing);
 	}
 
-	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
-	bool exp_dir_swimable(Direction dir) {
+	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
+	bool exp_dir_swimmable(Direction dir) {
 		if (!expedition_)
 			return false;
-		return expedition_->swimable[dir - 1];
+		return expedition_->swimmable[dir - 1];
 	}
 
 	/// \returns whether the expedition ship is close to the coast
@@ -208,7 +208,7 @@ struct Ship : Bob {
 		if (!expedition_)
 			return false;
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
-			if (!expedition_->swimable[dir - 1])
+			if (!expedition_->swimmable[dir - 1])
 				return true;
 		return false;
 	}
@@ -273,7 +273,7 @@ private:
 
 	struct Expedition {
 		std::vector<Coords> seen_port_buildspaces;
-		bool swimable[LAST_DIRECTION];
+		bool swimmable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;
 		Coords exploration_start;

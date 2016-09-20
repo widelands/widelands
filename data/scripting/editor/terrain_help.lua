@@ -1,9 +1,9 @@
 -- RST
 -- terrain_help.lua
--- -------------
-
-
--- This file returns a formatted entry for the terrain help in the editor.
+-- ----------------
+--
+-- This script returns a formatted entry for the terrain help in the editor.
+-- Pass the internal terrain name to the coroutine to select the terrain type.
 
 include "scripting/editor/format_editor.lua"
 

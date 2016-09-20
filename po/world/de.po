@@ -2,17 +2,18 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Venatrix, 2015-2016
+# Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:58+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-09-14 10:57+0000\n"
+"PO-Revision-Date: 2016-09-14 11:46+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,11 +45,11 @@ msgstr "Reh"
 msgid "Duck"
 msgstr "Ente"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Elch"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Fuchs"
 
@@ -68,11 +69,11 @@ msgstr "Rentier"
 msgid "Sheep"
 msgstr "Schaf"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Hirsch"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Wildschwein"
 
@@ -80,7 +81,7 @@ msgstr "Wildschwein"
 msgid "Wisent"
 msgstr "Wisent"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Wolf"
 
@@ -342,11 +343,11 @@ msgstr "Rankenbaum"
 #: ../../data/world/immovables/trees/deadtree5/init.lua:5
 #: ../../data/world/immovables/trees/deadtree6/init.lua:5
 msgid "Dead Tree"
-msgstr "toter Baum"
+msgstr "Toter Baum"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:12
 msgid "Fallen Tree"
-msgstr "gefällter Baum"
+msgstr "Gefällter Baum"
 
 #: ../../data/world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
@@ -863,7 +864,7 @@ msgstr "Steppe"
 
 #: ../../data/world/terrains/init.lua:163
 msgid "Barren Steppe"
-msgstr "trockene Steppe"
+msgstr "Trockene Steppe"
 
 #: ../../data/world/terrains/init.lua:179
 #: ../../data/world/terrains/init.lua:1042
@@ -1002,7 +1003,7 @@ msgstr "Eisschollen 2"
 
 #: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
-msgstr "trockene Erde"
+msgstr "Trockene Erde"
 
 #: ../../data/world/terrains/init.lua:1022
 msgid "Meadow"
