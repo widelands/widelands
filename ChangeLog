@@ -35,9 +35,7 @@
 - User maps are now saved in a 'My Maps' subdirectory to prevent overwriting of official maps
 - Various scrollbar-related fixes:
 - When an expedition ship places a port, a bit of land is cleared of trees to make room for a few buildings.
-- Fixed bug # 1535065: Editor crashes with random map regarding player positions
 - Fixed bug #1228811: Observers savegame contains no minimap.
-- Fixed bug #1232392: Allow tabbing in forms
 - Fixed bug #1302593: Result screen not shown in loaded game when a player was already defeated in saved game
 - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when ox breeder is working for Barbarian tribe.
 - Fixed bug #1531312: Foresters aren’t planting on old fields
@@ -158,7 +156,6 @@
 - Modification of a few internal AI parameters.
 - Fixed bug #1535065: Editor crashes with random map regarding player positions.
 - Removed unused option "setdescription" from worker program.
-- Fixed bug #1532279: Spin box not displayed correct in options menu.
 - No longer saving or loading unneeded map packages in the editor.
 - Removed compatibility code from MapBuildingPacket.
 - moved all data-related directories into a new "data" directory.
