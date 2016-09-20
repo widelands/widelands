@@ -539,7 +539,7 @@
 - Fixed bug #961526:  Articles and %s
 - Fixed bug #1232392: Allow tabbing in forms
 
-### Build 18-rc1
+### Build 18
 - Added a preview for the costs of a building and the resources gained
   through the dismantling of a building.
 - Added a button to productionsites for evicting a worker.
