@@ -1027,18 +1027,19 @@ void WLApplication::mainmenu() {
 		catch (const std::exception& e) {
 			messagetitle = "Unexpected error during the game";
 			message = e.what();
-			message +=
+			message += "\n\n";
+			message += (boost::format(_("Please report this problem to help us improve Widelands. "
+			                            "You will find related messages in the standard output "
+			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
+			            build_id().c_str() % build_type().c_str())
+			              .str();
 
-			   (boost::format(_("\n\nPlease report this problem to help us improve Widelands. "
-			                    "You will find related messages in the standard output "
-			                    "(stdout.txt on Windows). You are using build %1$s (%2$s). ")) %
-			    build_id().c_str() % build_type().c_str())
-			      .str();
-
-			message += _("Please add this information to your report.\n\n"
+			message = (boost::format("%s\n\n%s") % message %
+			           _("Please add this information to your report.\n\n"
 			             "Widelands attempts to create a savegame when errors occur "
 			             "during the game. It is often – though not always – possible "
-			             "to load it and continue playing.\n");
+			             "to load it and continue playing."))
+			             .str();
 		}
 #endif
 	}
