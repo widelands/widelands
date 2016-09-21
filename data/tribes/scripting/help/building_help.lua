@@ -642,8 +642,10 @@ function building_help_crew_string(tribe, building_description)
 
       if (number_of_workers > 0) then
          local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
-         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-         result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         if (tool_string ~= "") then
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+            result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         end
       end
 
       if(becomes_description) then
