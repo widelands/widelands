@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
+# GunChleoc, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-20 13:51+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -636,7 +637,7 @@ msgstr "Grootte: %1% x %2%"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:64
 msgid "Width:"
-msgstr "Breedto:"
+msgstr "Breedte:"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:76
@@ -978,7 +979,7 @@ msgid "Loading map…"
 msgstr "Kaart wordt geladen…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1331
 msgid "Loading…"
 msgstr "Bezig met laden…"
 
@@ -1062,7 +1063,7 @@ msgstr "Militaire locatie verloren!"
 #. "Success!"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy Defeated!"
-msgstr "Vijand Verslagen!"
+msgstr "Gewonnen!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy at site defeated!"
@@ -1434,7 +1435,7 @@ msgstr "onbegaanbaar"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
-msgstr "Deze doelstelling heeft geen beschrijving"
+msgstr "Deze doelstelling heeft geen beschrijving."
 
 #: ../../src/logic/replay_game_controller.cc:101
 msgid "End of replay"
@@ -1456,7 +1457,7 @@ msgstr "Het spel is opgeslagen"
 
 #: ../../src/logic/save_handler.cc:157
 msgid "Saving game…"
-msgstr "Het spel wordt opgeslagen..."
+msgstr "Het spel wordt opgeslagen…"
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1628,7 +1629,7 @@ msgstr "De verbinding is verbroken, aangezien de metaserver momenteel opnieuw op
 
 #: ../../src/network/internet_gaming_messages.cc:51
 msgid "Connection was closed by the client normally."
-msgstr "Verbinding is normaal gesloten door de cliënt"
+msgstr "Verbinding is normaal gesloten door de cliënt."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "The connection to the metaserver was lost."
@@ -1670,13 +1671,13 @@ msgid ""
 msgstr "Widelands kon geen verbinding maken met het opgegeven adres.\nOfwel draaide er geen Widelands server op de gebruikelijke poort\nof werd de server afgesloten toen je probeerde te verbinden."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1224
 msgid "Preparing game"
 msgstr "Voorbereiden spel"
 
 #: ../../src/network/netclient.cc:699
 msgid "/me 's file failed md5 checksumming."
-msgstr "/me 's bestand faalde op de md5 checksum controle"
+msgstr "/me 's bestand faalde op de md5 checksum controle."
 
 #: ../../src/network/netclient.cc:727
 msgid ""
@@ -1814,7 +1815,7 @@ msgstr "Cient is gecrashed en heeft een reddingsbestand opgeslagen."
 
 #: ../../src/network/network_gaming_messages.cc:121
 msgid "Connection was lost."
-msgstr "Verbinding is verbroken"
+msgstr "Verbinding is verbroken."
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Server has left the game."
@@ -1883,7 +1884,7 @@ msgstr "Server verzond een gebruikers-update voor een gebruiker die niet bestaat
 
 #: ../../src/network/network_gaming_messages.cc:142
 msgid "Server uses a different protocol version"
-msgstr "Server gebruikt een andere versie van het protocol."
+msgstr "Server gebruikt een andere versie van het protocol"
 
 #: ../../src/network/network_gaming_messages.cc:143
 #, c-format
@@ -1951,7 +1952,7 @@ msgstr "WAARSCHUWING: %1$s gebruikt versie: %2$s, terwijl Host versie: %3$s gebr
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s heeft zich bij het spel gevoegd."
+msgstr "%s heeft zich bij het spel gevoegd"
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
@@ -2947,11 +2948,11 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Laad spel"
 
-#: ../../src/wlapplication.cc:996
+#: ../../src/wlapplication.cc:1023
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
-#: ../../src/wlapplication.cc:1005
+#: ../../src/wlapplication.cc:1032
 #, c-format
 msgid ""
 "\n"
@@ -2959,7 +2960,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nRapporteer a.u.b. dit probleem om ons te helpen Widelands te verbeteren. Je kunt gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder Windows). Je gebruikt build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1038
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3316,7 +3317,7 @@ msgstr "Fout Tijdens Opslaan Spel!\nOpgeslagen spelbestand is mogelijk corrupt!\
 #: ../../src/wui/game_main_menu_save_game.cc:222
 #: ../../src/wui/game_main_menu_save_game.cc:231
 msgid "Save Game Error!"
-msgstr "Fout bij het opslaan van het spel!!"
+msgstr "Fout bij het opslaan van het spel!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:284
 msgid "File deletion"
@@ -3328,9 +3329,9 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Wil je bestand %s echt verwijderen?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:581
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
-msgstr "Berichten: inbox"
+msgstr "Berichten: Inbox"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Title"
@@ -3358,20 +3359,20 @@ msgstr "Tijd"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:121
-#: ../../src/wui/game_message_menu.cc:572
-#: ../../src/wui/game_message_menu.cc:584
+#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:604
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Archive selected message"
 msgstr "Archiveer geselecteerd bericht"
 
 #: ../../src/wui/game_message_menu.cc:131
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Archive"
 msgstr "Toon Archief"
 
@@ -3387,55 +3388,85 @@ msgid "Center main mapview on location"
 msgstr "Centreer de kaart op locatie"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:498
-#: ../../src/wui/game_message_menu.cc:509
-#: ../../src/wui/game_message_menu.cc:513
 #: ../../src/wui/game_message_menu.cc:517
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:545
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Sneltoets: %2%)"
 
+#: ../../src/wui/game_message_menu.cc:519
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:500
+#: ../../src/wui/game_message_menu.cc:519
 msgid "Show all messages"
 msgstr "Toon alle berichten"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show geologists' messages only"
 msgstr "Toon enkel berichten van de geologen"
 
+#: ../../src/wui/game_message_menu.cc:531
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
+#: ../../src/wui/game_message_menu.cc:535
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show economy messages only"
 msgstr "Toon enkel berichten van de economie"
 
+#: ../../src/wui/game_message_menu.cc:539
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show seafaring messages only"
 msgstr "Toon enkel berichten van de zeevaart"
 
+#: ../../src/wui/game_message_menu.cc:543
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:543
 msgid "Show warfare messages only"
 msgstr "Toon enkel berichten van de krijgskunst"
 
+#: ../../src/wui/game_message_menu.cc:547
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show scenario messages only"
 msgstr "Toon enkel berichten van het scenario"
 
-#: ../../src/wui/game_message_menu.cc:569
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Archive"
 msgstr "Berichten: archief"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:574
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
 msgstr "Plaats geselecteerd bericht terug in inbox"
 
-#: ../../src/wui/game_message_menu.cc:577
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Toon Inbox"
 
@@ -3670,7 +3701,7 @@ msgstr "Spatie in Bijnaam"
 
 #: ../../src/wui/login_box.cc:83
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr "Sorry, maar spaties zijn niet toegestaan in bijnamen"
+msgstr "Sorry, maar spaties zijn niet toegestaan in bijnamen!"
 
 #: ../../src/wui/login_box.cc:89
 msgid "Empty Password"

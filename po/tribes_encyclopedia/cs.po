@@ -6,12 +6,13 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-14 10:25+0000\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 07:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +42,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/tower/helptexts.lua:16
 msgctxt "building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umísti vojáky do vojenských budov, tím rozšíříš své území."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
@@ -73,7 +74,7 @@ msgstr ""
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
 msgctxt "building"
 msgid "A new building is being built at this construction site."
-msgstr ""
+msgstr "Na tomto místě začala stavba nové budovy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
@@ -118,7 +119,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
 msgctxt "building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Pálí dříví na dřevěné uhlí."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -153,13 +154,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish."
-msgstr ""
+msgstr "Chová ryby."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Lovení ryb na pobřeží, poblíž domku rybáře."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
@@ -221,7 +222,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:16
 msgctxt "building"
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Lov zvířata a tím získej maso."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:21
@@ -265,7 +266,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/helptexts.lua:16
 msgctxt "building"
 msgid "Saws logs to produce planks."
-msgstr ""
+msgstr "Nařež dříví a tím získáš prkna."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
@@ -273,7 +274,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Prozkoumá neznámé území."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
@@ -305,7 +306,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Chová pavouky na hedvábí."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/helptexts.lua:16
@@ -552,7 +553,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Fishes on the coast near the fisher’s hut."
-msgstr ""
+msgstr "Lovení ryb na pobřeží, poblíž chaty rybáře."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:18
@@ -1134,7 +1135,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Lovení ryb na pobřeží, poblíž domku rybáře."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:21
@@ -1564,7 +1565,7 @@ msgstr "Kapacita:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:226
 msgid "Vision range:"
-msgstr "Dohled"
+msgstr "Dohled:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "%1$s from: %2$s"
@@ -1574,7 +1575,7 @@ msgstr "%1$s z: %2$s"
 #. (e.g. wheat for a mill).
 #: ../../data/tribes/scripting/help/building_help.lua:258
 msgid "Incoming:"
-msgstr "Přírůstky"
+msgstr "Přírůstky:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:262
 msgid "Collects:"
@@ -1614,7 +1615,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:384
 #: ../../data/tribes/scripting/help/building_help.lua:397
 msgid "Soldiers:"
-msgstr "Vojáci"
+msgstr "Vojáci:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:368
 msgid "Attack Training"
@@ -1747,9 +1748,9 @@ msgstr "%s nebo lepší"
 #: ../../data/tribes/scripting/help/building_help.lua:646
 msgid "Worker uses:"
 msgid_plural "Workers use:"
-msgstr[0] "Dělník využívá"
+msgstr[0] "Dělník využívá:"
 msgstr[1] "Dělníci využívají:"
-msgstr[2] "Dělníci využívají"
+msgstr[2] "Dělníci využívají:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Experience levels:"
@@ -1770,7 +1771,7 @@ msgstr "Produkce"
 
 #: ../../data/tribes/scripting/help/building_help.lua:686
 msgid "Performance:"
-msgstr "Výkon"
+msgstr "Výkon:"
 
 #: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
@@ -1977,30 +1978,60 @@ msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr ""
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr ""
+
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr ""
+
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr ""
@@ -2053,7 +2084,7 @@ msgstr "Zdroj chybí"
 #. yet.
 #: ../../data/tribes/scripting/help/global_helptexts.lua:54
 msgid "Calculation needed"
-msgstr "Nutnost výpočtu."
+msgstr "Nutný výpočet"
 
 #: ../../data/tribes/scripting/help/global_helptexts.lua:95
 msgid "%1% and %2%"
@@ -3389,7 +3420,7 @@ msgstr "Stará se o ryby."
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The fisher fishes delicious fish."
-msgstr "Rybáři loví chutné ryby"
+msgstr "Rybáři loví chutné ryby."
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/atlanteans/forester/helptexts.lua:3

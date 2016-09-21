@@ -6,13 +6,14 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2010
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-22 06:04+0000\n"
-"PO-Revision-Date: 2016-06-27 12:47+0000\n"
-"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 16:39+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,19 +23,19 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr "Stavba ztracena!"
+msgstr "Budova ztracena!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Budova se zřítila do oceánu!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr "Stavba ztracena!"
+msgstr "Budova ztracena!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -46,7 +47,7 @@ msgstr "Zajisti stavební materiály"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr "Zajisti základní stavební materiál pro své hospodářství"
+msgstr "Zajisti základní stavební materiál pro své hospodářství:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -123,7 +124,7 @@ msgstr "Postav studnu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "Postav pekárnu, aby se mohl péci chleba z kukuřičné mouky, mouky z černého kořene a vody."
+msgstr "Postav pekárnu, aby se mohl péci chleba z kukuřičné mouky, mouky z černého kořene a vody"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -338,7 +339,7 @@ msgstr "Vřava a zmatek"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr "Rostoucí chaos"
+msgstr "Rostoucí chaos..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -626,7 +627,7 @@ msgstr "Ať ti Satul požehná, Jundlino! Tkalcovna, přádelna zlata a pavouč�
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr "To je vskutku skvělá novinka, Opole. Naše ekonomika se vyvíjí slibně. Vrať se nyní ke své práci, Opole, a nechť Satul hřeje tebe i všechny členy tvého cechu."
+msgstr "To je opravdu dobrá zpráva, Opole. Naše hospodářství se vyvíjí slibně. Vrať se nyní ke své práci, Opole, a nechť Satul hřeje tebe i všechny členy tvého cechu!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid "Sidolus Seeks Out Jundlina"
@@ -711,7 +712,7 @@ msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nov�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:338
 msgid "Jundlina Considers the Economy"
-msgstr "Jundlina zvažuje ekonomiku"
+msgstr "Jundlina zvažuje hospodářství"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:341
@@ -797,7 +798,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "A ještě další z těchto budov. Nyní víme, že kmen, který je postavil, tento ostrov kdysi zcela ovládal. Ale těchto potenciálních nepřátel je už neobávám. Už o tomto ostrově víme tak mnoho a přitom jsme ani náznakem nenarazili na fungující část této staré ekonomiky. Začínám se uklidňovat, ale to neznamená že by stráže mohly polevit v ostražitosti, zatímco budeme tento krásný ostrov dále zkoumat. Ale bez přímého ohrožení se tu začínám cítit jako doma."
+msgstr "A ještě další z těchto budov. Nyní víme, že kmen, který je postavil, tento ostrov kdysi zcela ovládal. Ale těchto potenciálních nepřátel se už neobávám. Už o tomto ostrově víme tak mnoho a přitom jsme ani náznakem nenarazili na fungující část tohoto starého hospodářství. Začínám se uklidňovat, ale to neznamená, že by stráže mohly polevit v ostražitosti, zatímco budeme tento krásný ostrov dále zkoumat. Ale bez přímého ohrožení se tu začínám cítit jako doma."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"

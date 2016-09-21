@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 20:15+0000\n"
-"Last-Translator: litoll <litoll@freemail.hu>\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 10:18+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,7 @@ msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr "Terjeszkedj északkeletre, a kövekig."
+msgstr "Terjeszkedj északkeletre, a kövekig"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -61,7 +61,7 @@ msgstr "Láss hozzá bányák építéséhez a hegyen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr "Építs szén- és vasbányákat."
+msgstr "Építs szén- és vasbányákat"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
@@ -263,7 +263,7 @@ msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr "Vizet úgy tudsz szerezni, hogy kutat építesz egy vízforráson, amit a geológusaid tudnak felfedezni, amikor odaküldöd őket egy zászlóhoz ami nem hegyen van"
+msgstr "Vizet úgy tudsz szerezni, hogy kutat építesz egy vízforráson, amit a geológusaid tudnak felfedezni, amikor odaküldöd őket egy zászlóhoz ami nem hegyen van."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
@@ -987,7 +987,7 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr "Nyakunkon a tél. Sokunk szenved a hidegtől, de ki kell tartanunk. A nap, melyen visszatérhetünk, nem lehet már messze – nem szabad messze lennie!"
+msgstr "Nyakunkon a tél. Sokunk szenved a hidegtől, de ki kell tartanunk. A nap, melyen visszatérhetünk, nem lehet már messze – nem szabad messze lennie."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
