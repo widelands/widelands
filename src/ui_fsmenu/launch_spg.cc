@@ -308,7 +308,7 @@ FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition
 		t->do_not_warn_about_unaccessed_keys();
 
 		// Skip this win condition if the map doesn't have all the required tags
-		if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
+		if (t->has_key("map_tags")) {
 
 			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!tags.count(map_tag)) {

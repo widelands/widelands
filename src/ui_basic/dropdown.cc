@@ -148,7 +148,8 @@ void BaseDropdown::set_value() {
 	if (label_.empty()) {
 		display_button_.set_title(name);
 	} else {
-		display_button_.set_title((boost::format("%1%: %2%") % label_ % (name)).str());
+		/** TRANSLATORS: Label: Value. */
+		display_button_.set_title((boost::format(_("%1%: %2%")) % label_ % (name)).str());
 	}
 	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
 	selected();
