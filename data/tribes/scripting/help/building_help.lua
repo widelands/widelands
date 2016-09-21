@@ -82,7 +82,7 @@ function dependencies_training_food(foods)
          food_warenames[countfood] = ware_description.descname
          food_images[countfood] = ware_description.icon_name
       end
-      local text = localize_list(food_warenames, "or")
+      local text = localize_list(food_warenames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
