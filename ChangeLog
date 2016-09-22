@@ -151,7 +151,7 @@
   - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
   - When an expedition ship places a port, a bit of land is cleared of trees to
     make room for a few buildings.
-  - Added New starting condition "Training Outpost" that will periodically give
+  - Added New starting condition "Trading Outpost" that will periodically give
     the player some wares if needed (cheat mode)
   - New tree/terrain values.
   - Forcing a constructionsite properly conquers the area that the finished
@@ -443,6 +443,8 @@
 
 * Other Issues:
 
+  - Removed --logfile command line flag - use redirects instead.
+    Added an SDL2 aware logger that replicates writing a stdout.txt on windows.
   - Added build instructions for OpenBSD
   - Ships get debug window. Also its content are extended.
   - Removed --remove-replays and --remove-syncstreams. We now always delete
