@@ -10,8 +10,8 @@
   - Reworked the way how AI stores some data in Player object
     (GamePlayerAiPersistentPacket)
   - Fixed bug #1344288: segmentation fault - AI building enhancement
-  - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with a
-                        outpost
+  - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
+                        a outpost
   - Fixed bug #1330070: AI crashes
 
 
@@ -28,26 +28,26 @@
   - Fixed bug #1453528: Buildings missing menu icons
   - Fixed bug #1408712: Waves are rolling in different speed /rolling angle is
                         different
-  - Fixed bug #829984:  Tweak the duck animation
-  - Fixed bug #1324642: playercolor mask has wrong size
   - Fixed bug #1407799: Fatal exception:  Image not found:
                         tribes/empire/soldier/untrained.png
+  - Fixed bug #1324642: playercolor mask has wrong size
+  - Fixed bug #829984:  Tweak the duck animation
   - Fixed bug #672248:  duplicated animations
 
 
 * Graphics Engine:
 
-  - Fixed line drawing by replacing the broken use of GL_LINES with a tessellation
-    algorithm for drawing lines.
+  - Fixed line drawing by replacing the broken use of GL_LINES with a
+    tessellation algorithm for drawing lines.
   - Decoupled UI update frequency from game update frequency (which is now 15
     times per second).
   - Removed graphic::update() and Panel::update() and always redraw at maxfps.
   - Changed default maxfps to 30 (instead of 25).
   - Filter all textures linearly instead of near. This looks nicer and texture
     bleeding has been taken care of.
-  - Added a new undocumented command line argument --debug_gl_trace which will log
-    every OpenGL call that is made, together with arguments, return values and
-    glError status. This requires that Widelands is build using
+  - Added a new undocumented command line argument --debug_gl_trace which will
+    log every OpenGL call that is made, together with arguments, return values
+    and glError status. This requires that Widelands is build using
     -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW. This will help
     debugging non-reproducible OpenGL errors that are reported. Tested with
     glbinding 1.1.0.
@@ -55,38 +55,38 @@
   - Correctly crop destination and source rectangle while blitting.
   - Fixed memory leaks in UI::Table::draw and around code found using the Leaks
     tool in Apple's Instruments.
-  - Fixed bug #1215412: graphic artifacts
-  - Fixed bug #1243700: Statistic window displays graph incorrectly when in
-                        hour-mode
-  - Fixed bug #1409267: Graphic errors with text on Windows
-  - Fixed bug #1408707: Water should be dithered as land terrain
-  - Fixed bug #1257320: strange vertical lines during gameplay
-  - Fixed bug #1397301: Screenshots black
-  - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
-                        and bottom sides not being updated properly
-  - Fixed bug #1389346: Disabling opengl results in black screen
-  - Fixed bug #1393547: Flashing black background when autosaving
-  - Fixed bug #1257476: Crash when attempting to load a game after toggeling
-                        opengl rendering
-  - Fixed bug #1202133: Dialogs (and list of maps) have white background and
-                        repetition
-  - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
   - Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
                         transparency.
+  - Fixed bug #1480928: Lumberjack animation glitches
+  - Fixed bug #1447333: Crashes on main menu under Windows 7. Mouse movement
+                        seems to trigger this.
+  - Fixed bug #1424408: Graphics become all white in tutorial
+  - Fixed bug #1409267: Graphic errors with text on Windows
+  - Fixed bug #1408707: Water should be dithered as land terrain
+  - Fixed bug #1397302: Fullscreen Toggle Text Overlay
+  - Fixed bug #1397301: Screenshots black
+  - Fixed bug #1393547: Flashing black background when autosaving
+  - Fixed bug #1389346: Disabling opengl results in black screen
+  - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
+  - Fixed bug #1370144: Playercolor mask is sometimes black
   - Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
                         the mouse pointer
-  - Fixed bug #1370144: Playercolor mask is sometimes black
-  - Fixed bug #1447333: Crashes on main menu under Windows 7.  Mouse movement
-                        seems to trigger this.
+  - Fixed bug #1257476: Crash when attempting to load a game after toggeling
+                        opengl rendering
+  - Fixed bug #1257320: strange vertical lines during gameplay
+  - Fixed bug #1243700: Statistic window displays graph incorrectly when in
+                        hour-mode
+  - Fixed bug #1215412: graphic artifacts
+  - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
+                        and bottom sides not being updated properly
+  - Fixed bug #1202133: Dialogs (and list of maps) have white background and
+                        repetition
+  - Fixed bug #1041436: Game jerks and stops after playing awhile. Bzr6421
   - Fixed bug #731987:  mouse does not work in full screen on virtual machines
-  - Fixed bug #1424408: Graphics become all white in tutorial
-  - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
   - Fixed bug #536559:  Fullscreen must not change physical screen resolution
-  - Fixed bug #1397302: Fullscreen Toggle Text Overlay
   - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
                         w.m.
-  - Fixed bug #1041436: Game jerks and stops after playing awhile. bzr6421
-  - Fixed bug #1480928: Lumberjack animation glitches
+  - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
 
 
 * Maps
