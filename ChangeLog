@@ -137,89 +137,83 @@
   - Fixed bug #979995:  Game crashes with large map when saving
 
 
-* Game Logic
+* Gameplay
 
-  - Internal unit names now match their display names
   - Collectors win condition now reports team scores as well as player scores.
-  - Other tribes’ buildings that have been conquered can now be dismantled
-  - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
-  - When an expedition ship places a port, a bit of land is cleared of trees to
-    make room for a few buildings.
+  - New win condition: Artifacts
   - Added New starting condition "Trading Outpost" that will periodically give
     the player some wares if needed (cheat mode)
-  - New tree/terrain values.
-  - Forcing a constructionsite properly conquers the area that the finished
-    building will occupy.
-  - Fixed bug #1542705: Consolidate names in bob worker programs: Renamed program
-                        "geologist-find" to "geologist_find" and "playFX" to
-                        "play_sound".
-  - Reworked find_portdock.
+  - Other tribes’ buildings that have been conquered can now be dismantled
   - Balancing: Added gold to building cost for Atlantean training sites.
     Made Barbarian attack stronger.
-  - Fixed bug #1544864: Get rid of LuaBaseImmovable::get_size. The corresponding
-                        functions now return strings instead of ints.
+  - Trainers now need the same tools as a soldier.
+  - When an expedition ship places a port, a bit of land is cleared of trees to
+    make room for a few buildings.
   - Ports can be affected by terrain changes up to 3 tiles away from their original
     position, so we recalculate as much when changing a terrain tile.
-  - Removed unused option "setdescription" from worker program.
-  - Fixed bug #1525395: atlantean mines failing to extract all resources
-  - Fixed bug #1508553: New win condition: artifacts
-  - Fixed bug #1368133: One Tribe
-  - Fixed bug #861761:  Improve production prioritisation
+  - New tree/terrain affinity values.
+  - Forcing a constructionsite properly conquers the area that the finished
+    building will occupy.
+  - Reworked find_portdock.
+  - "Out of resources" messages are now be triggered by productivity
+  - Engine change: all tribes can now use any building/ware/worker etc.
+    Use Lua instead of finf file for initialization.
+  - Ontology cleanup: Internal unit names now match their display names.
+    Renamed worker program "geologist-find" to "geologist_find" and "playFX" to
+    "play_sound" and removed unused option "setdescription".
+  - Added Description objects for all tribe and world entities to Lua interface.
+  - Removed LuaBaseImmovable::get_size. The corresponding functions now return
+    strings instead of ints.
+  - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
+  - Fixed bug #1554552: Wounded attacking soldiers failing to retreat
+  - Fixed bug #1551578: Fortified Village crashes when building can't be placed.
+  - Fixed bug #1542703: Crash during battle in editor_game_base.cc:677: Only
+                        allow building a port if all fields can be conquered.
+                        Also added a test for this issue.
+  - Fixed bug #1525395: Atlantean mines failing to extract all resources
+  - Fixed bug #1509220: Atlanteans campaign keeps counting 0 ships
+  - Fixed bug #1504948: Performance issue when "no use for ships on this map"
   - Fixed bug #1502458: Carrier hiding in Warehouse/HQ is hardcoded
-  - Fixed bug #580923:  Production of carrier does not respect building costs
-  - Fixed bug #849896:  Heal the highest level, healthiest soldier first
-  - Fixed bug #1454371: "Out of resources" messages should be triggered by
-                        productivity
-  - Fixed bug #1442869: Stopped production sites should produce something from
-                        their consumed wares befor they stop
-  - Fixed bug #1442945: Atlanteans ship construction much faster
-  - Fixed bug #978138:  Ship is under fisher's hut
+  - Fixed bug #1490116: Fully promoted soldiers remaining in training sites
+  - Fixed bug #1457425: Fight never ends (also not 2h later)
   - Fixed bug #1451078: labyrinth malfunctions full report
   - Fixed bug #1451069: Collectors win condition doesn't count wares in ports
-  - Fixed bug #1407418: Multiple hunters hunt for same animal
+  - Fixed bug #1442945: Atlanteans ship construction much faster
+  - Fixed bug #1442869: Stopped production sites should produce something from
+                        their consumed wares before they stop
   - Fixed bug #1434291: collectors game over message
   - Fixed bug #1423468: After reload, all percentages are blue until they are
                         updated again
+  - Fixed bug #1420521: Reset target quantity is overwritten easily
+  - Fixed bug #1407418: Multiple hunters hunt for same animal
+  - Fixed bug #1402392: Widelands crashed with SIGSEGV in
+                        LuaGame::LuaPlayer::get_buildings()
+  - Fixed bug #1402231: Wl crashes when saving after port is reduced to
+                        warehouse
+  - Fixed bug #1395238: Soldiers getting stuck
+  - Fixed bug #1389211: Port without a portdock (game crashing)
   - Fixed bug #1387801: Crash when expedition port is destroyed while wares are
                         unloaded
-  - Fixed bug #1402231: Wl crashes when saving after port is reduced to warehouse
-  - Fixed bug #1389211: port without a portdock (game crashing)
-  - Fixed bug #1420521: Reset target quantity is overwritten easily
-  - Fixed bug #980287:  productivity drops on game load
-  - Fixed bug #1348800: Parameters for terrain affinity need tweaking
-  - Fixed bug #1402392: widelands crashed with SIGSEGV in
-                        LuaGame::LuaPlayer::get_buildings()
-  - Fixed bug #669699:  trainer is only a carrier
   - Fixed bug #1344179: Granite mines should check if their output is needed
-  - Fixed bug #1328635: Bring back terrain affinity
-  - Fixed bug #1347648: Add Map_Object:descr to Lua interface
   - Fixed bug #1341662: Remove the animals out of the Barbarian directory
-  - Fixed bug #1332455: Productivity of the Atlantean farm does not drop to 0 when
-                        it does not work
-  - Fixed bug #902807:  Stopped production sites do not have their reserves filled
   - Fixed bug #1332842: Remove support for different flag and frontier 'styles'.
+  - Fixed bug #1332455: Productivity of the Atlantean farm does not drop to 0
+                        when it does not work
   - Fixed bug #1332452: Crop does not grow
   - Fixed bug #1302635: Random tribe selection always gives the same result
+  - Fixed bug #1302593: Result screen not shown in loaded game when a player was
+                        already defeated in saved game
   - Fixed bug #1290123: Delete barbarian stronghold
-  - Fixed bug #1302593: Result screen not shown in loaded game when a player
-                        was already defeated in saved game
-  - Fixed bug #1531312: Foresters aren’t planting on old fields
-  - Fixed bug #1554552: wounded attacking soldiers failing to retreat
-  - Fixed bug #1540827: Bug with establishing smuggling routes in the Smugglers
-                        scenario.
-  - Fixed bug #1551578: Fortified Village crashes when building can't be placed.
-  - Fixed bug #1542703: Crash during battle in editor_game_base.cc:677: Only allow
-                        building a port if all fields can be conquered.
-                        Also added a test for this issue.
-  - Fixed bug #1395238: soldiers getting stuck
-  - Fixed bug #1490116: fully promoted soldiers remaining in training sites
-  - Fixed bug #1457425: Fight never end (also not 2h later)
-  - Fixed bug #1516777: Atlantean corn farms unproductive
-  - Fixed bug #1251914: soldier stuck in battle animation loop
-  - Fixed bug #1509220: Atlanteans campaign keeps counting 0 ships
-  - Fixed bug #1504948: Performance issue when "no use for ships on this map"
+  - Fixed bug #1251914: Soldier stuck in battle animation loop
+  - Fixed bug #980287:  Productivity drops on game load
+  - Fixed bug #978138:  Ship is under fisher's hut
+  - Fixed bug #902807:  Stopped production sites do not have their reserves
+                        filled
+  - Fixed bug #861761:  Improve production prioritisation
+  - Fixed bug #849896:  Heal the highest level, healthiest soldier first
   - Fixed bug #653308:  The attack dialog is not updating the number of possible
                         attackers
+  - Fixed bug #580923:  Production of carrier does not respect building costs
 
 
 * Sounds
