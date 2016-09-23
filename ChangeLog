@@ -9,10 +9,13 @@
   - Enhanced military and soldier training strategy
   - Reworked the way how AI stores some data in Player object
     (GamePlayerAiPersistentPacket)
+  - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
   - Fixed bug #1344288: segmentation fault - AI building enhancement
   - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
                         a outpost
   - Fixed bug #1330070: AI crashes
+  - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
+                        after starting a new game
 
 
 * Animations and Icons
@@ -102,45 +105,36 @@
   - Older savegames can no longer be loaded.
   - Older maps can be loaded, but new maps can't be loaded with previous
     versions of Widelands.
-  - User maps are now saved in a 'My Maps' subdirectory to prevent overwriting of official maps
+  - User maps are now saved in a 'My Maps' subdirectory to prevent overwriting
+    of official maps
   - No longer write replay files for scenarios
+  - Implemented rolling autosave
   - Disallow changing player slots in single player scenarios.
-  - Fixed bug #1375915: scripting files get deleted when a map is resaved
-  - Fixed bug #1428396: savefile broken when enemy deafed
-  - Fixed bug #1422452: REPLAY: Caught exception
-                        [c:/data/bzr/widelands/working/src/logic/replay.cc:182]
-                        Unknown packet 0
-  - Fixed bug #1413734: savegame does not load
-  - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
-  - Fixed bug #1407948: More autosave files would help debugging
-  - Fixed bug #1388028: Unable to load saved game
-  - Fixed bug #1254116: Crash on saving game: unprotected error in call to Lua API
-                        (table index is NaN)
-  - Fixed bug #979995:  Game crashes with large map when saving
-  - Fixed bug #1349721: Most maps do not contain animals
-  - Fixed bug #1332832: Warning when starting a new game Unused key "name" in
-                        LuaTable.
-  - Fixed bug #992829:  Console output: WARNING: There are 73 unloaded objects.
-                        This is a bug, please consider committing!
-  - Fixed bug #1303669: Reduce size of campaign savegames
-  - Fixed bug #1311716: Segfault when loading a game with nightly build
-  - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
-                        after starting a new game
   - Added checks for illegal file names during map saving.
-  - Fixed bug #1228811: Observers savegame contains no minimap.
-  - Fixed bug #1548932: Editor fails on save with zip filesystem
   - Fixed a crash where a leaked remnant of the game session would still be
     subscribed to the 'changed resolution' event if a savegame failed to load.
-  - Fixed bug #1509172: Editor gives error on saving maps in Windows.
   - Fixed crash with identical autosave filenames when LAN game is run with
     multiple instances of Widelands on a single computer. Also, more informative
     error messages in disk_filesystem.cc.
+  - Fixed bug #1548932: Editor fails on save with zip filesystem
+  - Fixed bug #1526514: player 2 in "" section [player_2] not found
+  - Fixed bug #1509172: Editor gives error on saving maps in Windows.
+  - Fixed bug #1428396: savefile broken when enemy deafed
+  - Fixed bug #1413734: savegame does not load
+  - Fixed bug #1388028: Unable to load saved game
+  - Fixed bug #1375915: scripting files get deleted when a map is resaved
+  - Fixed bug #1332832: Warning when starting a new game Unused key "name" in
+                        LuaTable.
+  - Fixed bug #1311716: Segfault when loading a game with nightly build
+  - Fixed bug #1303669: Reduce size of campaign savegames
   - Fixed bug #1302577: Wrong minimap in load dialog when the save game has been
                         overwritten
-  - Fixed bug #1526514: player 2 in "" section [player_2] not found
+  - Fixed bug #1254116: Crash on saving game: unprotected error in call to Lua
+                        API (table index is NaN)
+  - Fixed bug #1228811: Observers savegame contains no minimap.
   - Fixed bug #1227984: Autosave should not trigger while game is paused
-  - Fixed bug #1378339: Writing Scripting Data ... PANIC: unprotected error in
-                        call to Lua API
+  - Fixed bug #992829:  Console output: WARNING: There are 73 unloaded objects.
+  - Fixed bug #979995:  Game crashes with large map when saving
 
 
 * Game Logic
