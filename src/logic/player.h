@@ -201,7 +201,7 @@ public:
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
-		std::vector<uint8_t> f_neurons;
+		std::vector<uint32_t> f_neurons;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state() {

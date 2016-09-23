@@ -183,6 +183,7 @@ private:
 	bool check_trainingsites(uint32_t);
 	bool check_mines_(uint32_t);
 	bool check_militarysites(uint32_t);
+	void update_player_stat();
 	bool marine_main_decisions();
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);

@@ -82,14 +82,12 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 		{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
 		{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
 		{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
-		{100, 97, 94, 91, 88,84,81,78,74,70,66,62,58,53,49,44,38,32,15,17,0},
-		{100,	95,	90,	85,	80,	75,	70,	65,	60,	55,	50,	45,	40,	35,	30,	25,	20,	15,	10,	5,	0},
 		};
 
-constexpr int  magic_numbers_size = 50;
-constexpr int  neuron_pool_size = 60;
+constexpr int  magic_numbers_size = 70;
+constexpr int  neuron_pool_size = 80;
 constexpr int  f_neuron_pool_size = 20;
-constexpr int  f_neuron_bit_size = 5;
+constexpr int  f_neuron_bit_size = 32;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -281,7 +279,9 @@ struct BuildableField {
 	// are construction sites that will change this once they are built
 	int16_t military_in_constr_nearby;
 	// actual count of soldiers in nearby buldings
-	int16_t area_military_presence;
+	int16_t own_military_presence;
+	int16_t enemy_military_presence;
+	int16_t ally_military_presence;	
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
 	// stationed (manned) military buildings nearby
@@ -506,7 +506,7 @@ struct Neuron {
 	void set_weight(int8_t w);
 	int8_t get_weight() {return weight;};
 	int8_t get_result(uint8_t);
-	int8_t get_result_safe(int32_t);
+	int8_t get_result_safe(int32_t, bool=false);
 	void set_type(uint8_t);
 	uint8_t get_type() {return type;};
 	uint16_t get_id() {return id;};
@@ -524,12 +524,12 @@ private:
 
 
 struct FNeuron {
-	FNeuron(uint8_t);
+	FNeuron(uint32_t);
 	
 	void flip_bit(uint8_t);
 	//void set(uint8_t);
 	bool get_result(bool, bool, bool, bool bool4 = true , bool bool5 = true);
-	uint8_t get_int();
+	uint32_t get_int();
 private:
 	std::bitset<f_neuron_bit_size> core;
 };
@@ -691,6 +691,7 @@ public:
 	uint8_t enemies_seen_lately_count(uint32_t);
 	bool any_enemy_seen_lately(uint32_t);
 	uint32_t enemy_last_seen();
+	PlayerNumber this_player_number;
 
 private:
 	// This is the core part of this struct
