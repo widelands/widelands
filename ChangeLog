@@ -218,14 +218,15 @@
 
 * Sounds
 
-  - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon Smithiea,
-    Ax workshop, Lime Kilns, Taverns, Breweries, Winery, Wood Hardener.
+  - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon
+    Smithies, Ax workshop, Lime Kilns, Taverns, Breweries, Winery,
+    Wood Hardener.
   - Replaced sound for Sheep and Mills.
-  - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when
-    ox breeder is working for Barbarian tribe.
-  - Fixed bug #1304638: Wrong sound played
   - Fixed bug #1592692: No production sounds on some maps
   - Fixed bug #1536053: Widelands without sound on win
+  - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when
+                        ox breeder is working for Barbarian tribe.
+  - Fixed bug #1304638: Wrong sound played
 
 
 * User Interface
