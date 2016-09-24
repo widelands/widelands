@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 10:18+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
+"POT-Creation-Date: 2016-09-21 08:44+0000\n"
+"PO-Revision-Date: 2016-09-23 10:46+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +121,7 @@ msgstr "semmi nincs ott"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "A bányák csak hegyi terepen építhetőek. A banyáknak megfelelő helyeket narancssárga bánya szimbólumok jelölik."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
@@ -162,7 +162,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr ""
+msgstr "Az élelmiszer-termelés más módjai – különböző fajta élelmiszereknek –, a halászok és a farmok. A farmok búzáit vízzel együtt kell feldogozni a pékségben, mielőtt ehető lesz. Vizet kút építésével szerezhetsz, egy olyan helyen, ahol a geológusok vízforrást találtak."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
@@ -184,17 +184,17 @@ msgstr "Fejleszd épületeidet, és építs egy kis sörfőzdét"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Fejleszd a bányát és a fogadót, és építs egy kis sörfőzdét."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Fejleszd a szénbányát vagy a vasércbányát mély bányává, és fejleszd a fogadót vendéglővé."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Építs egy kis sörfőzdét is."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -202,7 +202,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Egy normál bánya az elérhető nyersanyagoknak csak körülbelül a harmadát képes kiásni; ezért mély bányává kell fejleszteni, hogy továbbra is megfelelően működjön. Az épület fejlesztéséhez válaszd ki, és kattints a megfelelő gombra a megjelenő ablakon."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -218,14 +218,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Az ilyen épületeknek általában nagyobb igényei vannak, mint az alapvető épületnek – például a mély bányáknak uzsonnákra van szüksége harapnivalók helyett. Vendéglővé kell fejlesztened a fogadódat, hogy uzsonnákat készítsen pitából, egy másik élelmiszerből (húsból vagy halból) és sörből."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "Persze minden bányádat azonnal fejlesztheted, ha van elég munkásod – a nagyobb bányák egy kicsit gyorsabban dolgoznak, a kisebb bányákhoz olcsóbb élelmiszer kell. Rajtad áll, hogy melyik stratégiát választod."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
