@@ -1,22 +1,5 @@
 ### Build 19 until r8110
 
-* AI:
-
-  - AI can now build and use ships
-  - Improved placing, upgrading and dismantling buildings
-  - Improved placing and destroying roads.
-  - AI no longer runs out of wood
-  - Enhanced military and soldier training strategy
-  - Reworked the way how AI stores some data in Player object
-    (GamePlayerAiPersistentPacket)
-  - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
-  - Fixed bug #1344288: Segmentation fault - AI building enhancement
-  - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
-                        a outpost
-  - Fixed bug #1330070: AI crashes
-  - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
-                        after starting a new game
-
 
 * Animations, Icons and Overlays
 
@@ -39,61 +22,35 @@
   - Fixed bug #672248:  Duplicated animations
 
 
-* Graphics Engine:
+* Sounds
 
-  - Fixed line drawing by replacing the broken use of GL_LINES with a
-    tessellation algorithm for drawing lines.
-  - Decoupled UI update frequency from game update frequency (which is now 15
-    times per second).
-  - Removed graphic::update() and Panel::update() and always redraw at maxfps.
-  - Changed default maxfps to 30 (instead of 25).
-  - Filter all textures linearly instead of near. This looks nicer and texture
-    bleeding has been taken care of.
-  - Added a new undocumented command line argument --debug_gl_trace which will
-    log every OpenGL call that is made, together with arguments, return values
-    and glError status. This requires that Widelands is build using
-    -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW. This will help
-    debugging non-reproducible OpenGL errors that are reported. Tested with
-    glbinding 1.1.0.
-  - More logging when OpenGL is initialized.
-  - Correctly crop destination and source rectangle while blitting.
-  - Fixed memory leaks in UI::Table::draw and around code found using the Leaks
-    tool in Apple's Instruments.
-  - Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
-                        transparency.
-  - Fixed bug #1535569: Messages window slows down game speed
-  - Fixed bug #1480928: Lumberjack animation glitches
-  - Fixed bug #1447333: Crashes on main menu under Windows 7. Mouse movement
-                        seems to trigger this.
-  - Fixed bug #1424408: Graphics become all white in tutorial
-  - Fixed bug #1409267: Graphic errors with text on Windows
-  - Fixed bug #1408707: Water should be dithered as land terrain
-  - Fixed bug #1397302: Fullscreen Toggle Text Overlay
-  - Fixed bug #1397301: Screenshots black
-  - Fixed bug #1393547: Flashing black background when autosaving
-  - Fixed bug #1389346: Disabling opengl results in black screen
-  - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
-  - Fixed bug #1370144: Playercolor mask is sometimes black
-  - Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
-                        the mouse pointer
-  - Fixed bug #1257476: Crash when attempting to load a game after toggeling
-                        opengl rendering
-  - Fixed bug #1257320: Strange vertical lines during gameplay
-  - Fixed bug #1243700: Statistic window displays graph incorrectly when in
-                        hour-mode
-  - Fixed bug #1215412: Graphic artifacts
-  - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
-                        and bottom sides not being updated properly
-  - Fixed bug #1202133: Dialogs (and list of maps) have white background and
-                        repetition
-  - Fixed bug #1041436: Game jerks and stops after playing awhile. Bzr6421
-  - Fixed bug #731987:  Mouse does not work in full screen on virtual machines
-  - Fixed bug #647456:  Options: colors of the main WL menu changes when changing
-                        the language
-  - Fixed bug #536559:  Fullscreen must not change physical screen resolution
-  - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
-                        w.m.
-  - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
+  - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon
+    Smithies, Ax workshop, Lime Kilns, Taverns, Breweries, Winery,
+    Wood Hardener.
+  - Replaced sound for Sheep and Mills.
+  - Fixed bug #1592692: No production sounds on some maps
+  - Fixed bug #1536053: Widelands without sound on win
+  - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when
+                        ox breeder is working for Barbarian tribe.
+  - Fixed bug #1304638: Wrong sound played
+
+
+* Tutorials and Campaigns:
+
+  - Split tutorial into "Basic Control" and "Warefare" and added encancements.
+  - New "Seafaring" and "Economy" tutorials"
+  - Redesigned Barbarian campaign to remove topcs that are covered by the
+    tutorials.
+  - Fixed bug #1424950: Strange character relationships in the empire campaigns
+  - Fixed bug #1349378: Get_soldiers doesn't return a table in Island Hopping
+  - Fixed bug #1311244: Atlantean Mission Trigger fail
+  - Fixed bug #1298411: No necessity to conquer all military buildings in the
+                        third Barbarian Campaign
+
+  - Fixed bug #1286576: Tutorial fails if player is in road building mode when
+                        military building finishes
+  - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
+  - Fixed bug #674839:  Some issues of barbarian tutorial 3
 
 
 * Maps
@@ -140,6 +97,24 @@
   - Fixed bug #1227984: Autosave should not trigger while game is paused
   - Fixed bug #992829:  Console output: WARNING: There are 73 unloaded objects.
   - Fixed bug #979995:  Game crashes with large map when saving
+
+
+* AI:
+
+  - AI can now build and use ships
+  - Improved placing, upgrading and dismantling buildings
+  - Improved placing and destroying roads.
+  - AI no longer runs out of wood
+  - Enhanced military and soldier training strategy
+  - Reworked the way how AI stores some data in Player object
+    (GamePlayerAiPersistentPacket)
+  - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
+  - Fixed bug #1344288: Segmentation fault - AI building enhancement
+  - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
+                        a outpost
+  - Fixed bug #1330070: AI crashes
+  - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
+                        after starting a new game
 
 
 * Gameplay
@@ -220,19 +195,6 @@
   - Fixed bug #653308:  The attack dialog is not updating the number of possible
                         attackers
   - Fixed bug #580923:  Production of carrier does not respect building costs
-
-
-* Sounds
-
-  - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon
-    Smithies, Ax workshop, Lime Kilns, Taverns, Breweries, Winery,
-    Wood Hardener.
-  - Replaced sound for Sheep and Mills.
-  - Fixed bug #1592692: No production sounds on some maps
-  - Fixed bug #1536053: Widelands without sound on win
-  - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when
-                        ox breeder is working for Barbarian tribe.
-  - Fixed bug #1304638: Wrong sound played
 
 
 * User Interface
@@ -320,7 +282,8 @@
   - Fixed bug #1341990: Map names cause confusion in internet play
   - Fixed bug #1289698: Sorting maps by name sort by original instead of
                         translated name
-  - Fixed bug #1289586: Let tree descriptions use the same size scheme as buildings
+  - Fixed bug #1289586: Let tree descriptions use the same size scheme as
+                        buildings
   - Fixed bug #1290066: Sort languages by their native names
   - Fixed bug #978175:  Localization not yet loaded in command line
   - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
@@ -374,22 +337,61 @@
     for updating the encyclopedia on the website.
 
 
-* Tutorials and Campaigns:
+* Graphics Engine:
 
-  - Split tutorial into "Basic Control" and "Warefare" and added encancements.
-  - New "Seafaring" and "Economy" tutorials"
-  - Redesigned Barbarian campaign to remove topcs that are covered by the
-    tutorials.
-  - Fixed bug #1424950: Strange character relationships in the empire campaigns
-  - Fixed bug #1349378: Get_soldiers doesn't return a table in Island Hopping
-  - Fixed bug #1311244: Atlantean Mission Trigger fail
-  - Fixed bug #1298411: No necessity to conquer all military buildings in the
-                        third Barbarian Campaign
-
-  - Fixed bug #1286576: Tutorial fails if player is in road building mode when
-                        military building finishes
-  - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
-  - Fixed bug #674839:  Some issues of barbarian tutorial 3
+  - Fixed line drawing by replacing the broken use of GL_LINES with a
+    tessellation algorithm for drawing lines.
+  - Decoupled UI update frequency from game update frequency (which is now 15
+    times per second).
+  - Removed graphic::update() and Panel::update() and always redraw at maxfps.
+  - Changed default maxfps to 30 (instead of 25).
+  - Filter all textures linearly instead of near. This looks nicer and texture
+    bleeding has been taken care of.
+  - Added a new undocumented command line argument --debug_gl_trace which will
+    log every OpenGL call that is made, together with arguments, return values
+    and glError status. This requires that Widelands is build using
+    -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW. This will help
+    debugging non-reproducible OpenGL errors that are reported. Tested with
+    glbinding 1.1.0.
+  - More logging when OpenGL is initialized.
+  - Correctly crop destination and source rectangle while blitting.
+  - Fixed memory leaks in UI::Table::draw and around code found using the Leaks
+    tool in Apple's Instruments.
+  - Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
+                        transparency.
+  - Fixed bug #1535569: Messages window slows down game speed
+  - Fixed bug #1480928: Lumberjack animation glitches
+  - Fixed bug #1447333: Crashes on main menu under Windows 7. Mouse movement
+                        seems to trigger this.
+  - Fixed bug #1424408: Graphics become all white in tutorial
+  - Fixed bug #1409267: Graphic errors with text on Windows
+  - Fixed bug #1408707: Water should be dithered as land terrain
+  - Fixed bug #1397302: Fullscreen Toggle Text Overlay
+  - Fixed bug #1397301: Screenshots black
+  - Fixed bug #1393547: Flashing black background when autosaving
+  - Fixed bug #1389346: Disabling opengl results in black screen
+  - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
+  - Fixed bug #1370144: Playercolor mask is sometimes black
+  - Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
+                        the mouse pointer
+  - Fixed bug #1257476: Crash when attempting to load a game after toggeling
+                        opengl rendering
+  - Fixed bug #1257320: Strange vertical lines during gameplay
+  - Fixed bug #1243700: Statistic window displays graph incorrectly when in
+                        hour-mode
+  - Fixed bug #1215412: Graphic artifacts
+  - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
+                        and bottom sides not being updated properly
+  - Fixed bug #1202133: Dialogs (and list of maps) have white background and
+                        repetition
+  - Fixed bug #1041436: Game jerks and stops after playing awhile. Bzr6421
+  - Fixed bug #731987:  Mouse does not work in full screen on virtual machines
+  - Fixed bug #647456:  Options: colors of the main WL menu changes when changing
+                        the language
+  - Fixed bug #536559:  Fullscreen must not change physical screen resolution
+  - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
+                        w.m.
+  - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
 
 
 * Other Issues:
