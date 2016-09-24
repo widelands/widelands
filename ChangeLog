@@ -1,4 +1,4 @@
-### Build 19 until r8107
+### Build 19 until r8110
 
 * AI:
 
@@ -10,7 +10,7 @@
   - Reworked the way how AI stores some data in Player object
     (GamePlayerAiPersistentPacket)
   - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
-  - Fixed bug #1344288: segmentation fault - AI building enhancement
+  - Fixed bug #1344288: Segmentation fault - AI building enhancement
   - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
                         a outpost
   - Fixed bug #1330070: AI crashes
@@ -22,10 +22,10 @@
 
   - New animations for Barbarians buildings: Wood Hardener, Farm, Fisher's Hut,
     Gamekeeper's Hut, Lumberjack's Hut, Quarry, Ranger's Hut, Taver, Inn,
-    Big Inn, Warehouse.
+    Big Inn, Warehouse, Scout.
   - New animations: Imperial Vintner, Blackroot Field.
-  - New menu icons: All workers, Spidercloth, Options Menu,
-    Warehouse stock policy, Messages window
+  - New menu icons: All workers, Blackroot, Pitta Bread, Snack, Ration, Meal,
+    Spidercloth, Options Menu, Warehouse stock policy, Messages window
   - New road textures to improve visibility on all terrains
   - Fixed hotspot for Babarian Brewer walk animation.
   - Fixed bug #1453528: Buildings missing menu icons
@@ -33,9 +33,9 @@
                         different
   - Fixed bug #1407799: Fatal exception:  Image not found:
                         tribes/empire/soldier/untrained.png
-  - Fixed bug #1324642: playercolor mask has wrong size
+  - Fixed bug #1324642: Playercolor mask has wrong size
   - Fixed bug #829984:  Tweak the duck animation
-  - Fixed bug #672248:  duplicated animations
+  - Fixed bug #672248:  Duplicated animations
 
 
 * Graphics Engine:
@@ -76,16 +76,16 @@
                         the mouse pointer
   - Fixed bug #1257476: Crash when attempting to load a game after toggeling
                         opengl rendering
-  - Fixed bug #1257320: strange vertical lines during gameplay
+  - Fixed bug #1257320: Strange vertical lines during gameplay
   - Fixed bug #1243700: Statistic window displays graph incorrectly when in
                         hour-mode
-  - Fixed bug #1215412: graphic artifacts
+  - Fixed bug #1215412: Graphic artifacts
   - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
                         and bottom sides not being updated properly
   - Fixed bug #1202133: Dialogs (and list of maps) have white background and
                         repetition
   - Fixed bug #1041436: Game jerks and stops after playing awhile. Bzr6421
-  - Fixed bug #731987:  mouse does not work in full screen on virtual machines
+  - Fixed bug #731987:  Mouse does not work in full screen on virtual machines
   - Fixed bug #536559:  Fullscreen must not change physical screen resolution
   - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
                         w.m.
@@ -119,10 +119,10 @@
   - Fixed bug #1548932: Editor fails on save with zip filesystem
   - Fixed bug #1526514: player 2 in "" section [player_2] not found
   - Fixed bug #1509172: Editor gives error on saving maps in Windows.
-  - Fixed bug #1428396: savefile broken when enemy deafed
-  - Fixed bug #1413734: savegame does not load
+  - Fixed bug #1428396: Savefile broken when enemy deafed
+  - Fixed bug #1413734: Savegame does not load
   - Fixed bug #1388028: Unable to load saved game
-  - Fixed bug #1375915: scripting files get deleted when a map is resaved
+  - Fixed bug #1375915: Scripting files get deleted when a map is resaved
   - Fixed bug #1332832: Warning when starting a new game Unused key "name" in
                         LuaTable.
   - Fixed bug #1311716: Segfault when loading a game with nightly build
@@ -164,6 +164,7 @@
   - Added Description objects for all tribe and world entities to Lua interface.
   - Removed LuaBaseImmovable::get_size. The corresponding functions now return
     strings instead of ints.
+  - Added LUA interface to ship - RO property shipname
   - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
   - Fixed bug #1554552: Wounded attacking soldiers failing to retreat
   - Fixed bug #1551578: Fortified Village crashes when building can't be placed.
@@ -176,12 +177,12 @@
   - Fixed bug #1502458: Carrier hiding in Warehouse/HQ is hardcoded
   - Fixed bug #1490116: Fully promoted soldiers remaining in training sites
   - Fixed bug #1457425: Fight never ends (also not 2h later)
-  - Fixed bug #1451078: labyrinth malfunctions full report
+  - Fixed bug #1451078: Labyrinth malfunctions full report
   - Fixed bug #1451069: Collectors win condition doesn't count wares in ports
   - Fixed bug #1442945: Atlanteans ship construction much faster
   - Fixed bug #1442869: Stopped production sites should produce something from
                         their consumed wares before they stop
-  - Fixed bug #1434291: collectors game over message
+  - Fixed bug #1434291: Collectors game over message
   - Fixed bug #1423468: After reload, all percentages are blue until they are
                         updated again
   - Fixed bug #1420521: Reset target quantity is overwritten easily
@@ -260,7 +261,7 @@
                         sort order than all other directories.
   - Ships now get own names, picked from lists per tribe.
   - Fixed bug #1532279: Spin box not displayed correct in options menu
-  - Fixed bug #1532417: complete indicators for resource water
+  - Fixed bug #1532417: Complete indicators for resource water
   - Fixed bug #1523096: Options Window redesign
   - Fixed bug #566729:  Add gametime display to replays
   - Fixed bug #1412242: Multiplayer save game selection does not show the filename
@@ -278,7 +279,7 @@
   - Fixed bug #536470:  Make mouse sensitivity configurable
   - Fixed bug #736404:  Cannot switch from Widelands in full screen on Linux
                         (alt+tab)
-  - Fixed bug #1411939: in multiplayer games, the HQ is not shown correct
+  - Fixed bug #1411939: In multiplayer games, the HQ is not shown correct
   - Fixed bug #1370136: Drag selection for wares does not work when started on
                         Barbarian ax
   - Fixed bug #987510:  Filter for Messages
@@ -291,13 +292,13 @@
   - Fixed bug #744749:  Training sites should either show statistics as a military
                         or as a productionsite
   - Fixed bug #988831:  Remove message expiry feature.
-  - Fixed bug #536230:  building icons in menu are shown without correct
+  - Fixed bug #536230:  Building icons in menu are shown without correct
                         playercolor
-  - Fixed bug #647456:  options: colors of the main WL menu changes when changing
+  - Fixed bug #647456:  Options: colors of the main WL menu changes when changing
                         the language
   - Fixed bug #1344350: Constructionsites/dismantlesites only show a dot instead
                         of building image
-  - Fixed bug #1322741: text issue: fps statistics overlaps with xz coordinates
+  - Fixed bug #1322741: Text issue: fps statistics overlaps with xz coordinates
   - Fixed bug #571796:  Stop the rounding to full 10ths for productivity
                         percentages
   - Fixed bug #1342563: When choosing random tribe and castle village, the tribe
@@ -309,7 +310,7 @@
   - Fixed bug #1167242: Ctrl+destroying a flag with a building does not destroy
                         the whole road
   - Fixed bug #1300359: Installation dialog shows old screenshot
-  - Fixed bug #1306728: crash when info window opened if statistics window has
+  - Fixed bug #1306728: Crash when info window opened if statistics window has
                         been opened
   - Fixed bug #1296655: News window crashes when building has not been seen in
                         the game
@@ -321,8 +322,8 @@
   - Fixed bug #1535569: Messages window slows down game speed
   - Fixed bug #1480937: Escape key doesn't work in all dialogues
   - Fixed bug #1451147: Game crashes when headquarters is taken over
-  - Fixed bug #682351:  wishlist: Fullscreen toogle also in Menu
-  - Fixed bug #1283693: crash after very long chat message
+  - Fixed bug #682351:  Wishlist: Fullscreen toogle also in Menu
+  - Fixed bug #1283693: Crash after very long chat message
 
 
 * Internationalization
@@ -332,9 +333,8 @@
   - Automatic font selection and support for Arabic script
   - Fixed escaping of special characters in messages
   - Fixed bug #1525680: Richtext and rt_render can now handle &nbsp;.
-  - Added LUA interface to ship - RO property shipname
   - Fixed bug #1421942: Unified term for "Black" and "Wasteland"
-  - Fixed bug #978175:  localization not yet loaded in command line
+  - Fixed bug #978175:  Localization not yet loaded in command line
   - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
   - Fixed bug #1341990: Map names cause confusion in internet play
   - Fixed bug #1289698: Sorting maps by name sort by original instead of
@@ -354,7 +354,7 @@
                         dealing with saving and loading
   - Fixed bug #814500:  The Edit box in the Editor's "Map Options" should have a
                         "save" and "cancel" button to exit this window
-  - Fixed bug #1493972: editor load / save menu has issues with nested directories
+  - Fixed bug #1493972: Editor load / save menu has issues with nested directories
                         of the same name
   - Fixed bug #1326395: Information tool in the editor has large tool area
   - Fixed bug #1378798: Editor: 'new map' options redesign
@@ -383,7 +383,7 @@
   - Fixed bug #1526903: Editor crashes when changing tribe
   - Fixed bug #1171231: Size of minimap in the editor not changed when new map is
                         loaded
-  - Fixed bug #1504366: editor crashes unexpectedly
+  - Fixed bug #1504366: Editor crashes unexpectedly
   - Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when player
                         is removed
   - Fixed bug #1515006: Create a new forested mountain terrain
@@ -418,11 +418,11 @@
 * Tutorials and Campaigns:
 
   - Fixed bug #1489974: Military tutorial should mention Hero-Rookie topic earlier
-  - Fixed bug #1424950: strange character relationships in the empire campaigns
+  - Fixed bug #1424950: Strange character relationships in the empire campaigns
   - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
   - Fixed bug #1286576: Tutorial fails if player is in road building mode when
                         military building finishes
-  - Fixed bug #1349378: get_soldiers doesn't return a table in Island Hopping
+  - Fixed bug #1349378: Get_soldiers doesn't return a table in Island Hopping
   - Fixed bug #1298411: No necessity to conquer all military buildings in the
                         third Barbarian Campaign
   - Fixed bug #674839:  Some issues of barbarian tutorial 3
@@ -452,7 +452,7 @@
   - Fixed bug #1503949: excessive CPU usage and loading time seemingly related to
                       length of the game
   - Fixed bug #1522290: Gameplay suddenly gets very slow
-  - Fixed bug #1278050: login problems with metaserver
+  - Fixed bug #1278050: Login problems with metaserver
   - Fixed bug #1274279: Metaserver entry in config gets deleted
   - Fixed bug #1413326: Current trunk on Linux cannot join a game that is hosted
                       on Windows
