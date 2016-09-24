@@ -102,6 +102,7 @@
   - Removed maps: Dry Riverbed, Long long way, War of the Valleys
   - Overhauled maps: Comet Islands, Full Moon, Glacier Lake, Kings and Queens,
     Last Bastion, The Nile, Twin Lagoons, Volcanic Winter
+  - Added "hint" to the json file created by wl_map_info for use on the website.
 
 
 * Saveloading
@@ -237,7 +238,6 @@
 * User Interface
 
   - Display Widelands version for each client in Internet lobby.
-  - Generic in-game and in-editor help system driven by Lua scripts
   - Overhaul of diverse menu screens and windows: map and game loading,
     in-game Building Statistics, main menu Options and "About Widelands"
   - Messages can be filtered
@@ -364,43 +364,32 @@
 
 * Help and Documentation:
 
-  - Created a new executable 'wl_map_object_info' that will generate JSON files
-    for updating the encyclopedia on the website.
+  - Generic in-game and in-editor help system driven by Lua scripts. All values
+    except for performance are now read from the current Lua configuration
+    files.
+  - Added some performance values for the buildings help text
   - Improved documentation: Started adding Tribe and World information to our
     online Widelands Scripting Reference.
-  - Added the buildings where a worker can work to worker help.
-  - Exposed terrain and resource descriptions to the Lua interface and added tree
-    and terrain help to the editor.
-  - Added helptext to Editor CategorizedItemSelectionMenu when nothing has been
-    selected.
-  - Added "hint" to the json file created by wl_map_info.
-  - Fixed bug #1505723: Some performance values for the buildings help text
-  - Fixed bug #959605:  Barbarian In-Game Help Development
-  - Fixed bug #960164:  Imperial In-Game Help Development
-  - Fixed bug #960170:  Atlantean In-Game Help Development
-  - Fixed bug #1366725: Building help assumes that every worker needs only one
-                        tool
-  - Fixed bug #1027824: Mistakes in in-game help of Barbarian trainingscamp
-  - Fixed bug #1005194: building help: clear indication of the meaning of working
-                        area
-  - Fixed bug #1341082: Building help: clean up name, descname
-  - Fixed bug #1342801: Building help is broken (get_worker_description string
-                        expected got table)
+  - Created a new executable 'wl_map_object_info' that will generate JSON files
+    for updating the encyclopedia on the website.
 
 
 * Tutorials and Campaigns:
 
-  - Fixed bug #1489974: Military tutorial should mention Hero-Rookie topic earlier
+  - Split tutorial into "Basic Control" and "Warefare" and added encancements.
+  - New "Seafaring" and "Economy" tutorials"
+  - Redesigned Barbarian campaign to remove topcs that are covered by the
+    tutorials.
   - Fixed bug #1424950: Strange character relationships in the empire campaigns
-  - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
-  - Fixed bug #1286576: Tutorial fails if player is in road building mode when
-                        military building finishes
   - Fixed bug #1349378: Get_soldiers doesn't return a table in Island Hopping
+  - Fixed bug #1311244: Atlantean Mission Trigger fail
   - Fixed bug #1298411: No necessity to conquer all military buildings in the
                         third Barbarian Campaign
+
+  - Fixed bug #1286576: Tutorial fails if player is in road building mode when
+                        military building finishes
+  - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
   - Fixed bug #674839:  Some issues of barbarian tutorial 3
-  - Fixed bug #1311244: Atlantean Mission Trigger fail
-  - Fixed bug #1298011: Formatting stuff in Atlantean campaign texts shown
 
 
 * Other Issues:
