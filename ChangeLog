@@ -239,8 +239,7 @@
   - Display Widelands version for each client in Internet lobby.
   - Generic in-game and in-editor help system driven by Lua scripts
   - Overhaul of diverse menu screens and windows: map and game loading,
-    editor main menu submenus, in-game Building Statistics, main menu Options
-    and "About Widelands"
+    in-game Building Statistics, main menu Options and "About Widelands"
   - Messages can be filtered
   - Added Win condition descriptions as an Objective
   - Remember map location markers in singleplayer savegames.
@@ -258,6 +257,7 @@
   - Shifted chat overlay up so it won't overlap with the menu buttons.
   - Most UI elements now use the new font renderer
   - Various scrollbar-related fixes.
+  - Fixed handling of Alt key in Linux
   - Fixed bug #1566441: String "Saving Game" appears too late
   - Fixed bug #1559729: Port space not shown.
   - Fixed bug #1542214: Inconsistent ordering of OK/Cancel buttons.
@@ -315,62 +315,51 @@
   - UI redesigns to make translated strings fit
   - Automatic font selection and support for Arabic script
   - Fixed escaping of special characters in messages
-  - Fixed bug #1525680: Richtext and rt_render can now handle &nbsp;.
-  - Fixed bug #1421942: Unified term for "Black" and "Wasteland"
-  - Fixed bug #978175:  Localization not yet loaded in command line
-  - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
+  - Richtext and rt_render can now handle &nbsp;
+  - Added bash script for validating translations.
   - Fixed bug #1341990: Map names cause confusion in internet play
   - Fixed bug #1289698: Sorting maps by name sort by original instead of
                         translated name
   - Fixed bug #1289586: Let tree descriptions use the same size scheme as buildings
   - Fixed bug #1290066: Sort languages by their native names
-  - Added bash script for validating translations.
+  - Fixed bug #978175:  Localization not yet loaded in command line
+  - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
 
 
 * Editor
 
+  - Merged the four worlds into one, so any entity can be placed on any map now.
+  - New forested mountain terrains
   - Editor now starts with the Info tool instead of the Set Height tool
-  - The second alternative tool in the editor can now also be accessed via the Ctrl key.
-  - Stopped the infotool from painting.
+  - The user can choose to display map or filenames when loading or saving a map
+  - Overhaul of all main menu subenus
+  - Stopped the infotool from painting and gave it size 1.
+  - Fixed various cashes in editor when loading a map or using the Set Origin
+    tool.
+  - Fixed bug #1535065: Editor crashes with random map regarding player
+                        positions.
   - Fixed bug #1532417: Complete indicators for resource water
+  - Fixed bug #1504366: Editor crashes unexpectedly
+  - Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when
+                        player is removed
   - Fixed bug #1402786: "Set origin" should be in the tools menu
-  - Fixed bug #1390793: Editor should always show filenames, not map names when
-                        dealing with saving and loading
-  - Fixed bug #814500:  The Edit box in the Editor's "Map Options" should have a
-                        "save" and "cancel" button to exit this window
-  - Fixed bug #1493972: Editor load / save menu has issues with nested directories
-                        of the same name
-  - Fixed bug #1326395: Information tool in the editor has large tool area
-  - Fixed bug #1378798: Editor: 'new map' options redesign
-  - Fixed bug #1392215: Secondary and Third Alternative Tool no longer working in
-                        the Editor
-  - Fixed bug #1281823: Setting resources via LUA API broken in Editor
-  - Fixed bug #768826:  Show altitude level in the editor
-  - Fixed bug #1392406: Confirmation dialog when leaving the editor although Ctrl
-                        has been pressed
-  - Fixed bug #676241:  The list of loadable maps for the editor does not list
-                        number of players
+  - Fixed bug #1392406: Confirmation dialog when leaving the editor although
+                        Ctrl has been pressed
+  - Fixed bug #1392215: Secondary and Third Alternative Tool no longer working
+                        in the Editor
   - Fixed bug #1378801: Random map: Wasteland % change not reflected in
                         Mountains %
-  - Fixed bug #1174075: Clarify meaning of icons in editor terrain preview
   - Fixed bug #1341112: Editor line abruption in Noise height tool
-  - Fixed bug #1293158: Odd line in information tool in editor
-  - Fixed bug #821553:  Increase maximum number of terrain types
-  - Fixed bug #1289575: Dialog for selecting immovable bobs in editor lacks tooltips
-  - Fixed various cashes in editor when loading a map or using the Set Origin tool.
-  - Fixed bug #1550568: Editor crashes upon placing resources.
-  - Fixed bug #1546810: Editor: undo/redo doesn't work when placing terrains in
-                        one move
-  - Fixed bug #1535065: Editor crashes with random map regarding player positions.
+  - Fixed bug #1289575: Dialog for selecting immovable bobs in editor lacks
+                        tooltips
+  - Fixed bug #1281823: Setting resources via LUA API broken in Editor
+  - Fixed bug #1174075: Clarify meaning of icons in editor terrain preview
+  - Fixed bug #1171231: Size of minimap in the editor not changed when new map
+                        is loaded
   - Fixed bug #977980:  Fish and mountain ressources cannot be removed when they
                         are on grass
-  - Fixed bug #1526903: Editor crashes when changing tribe
-  - Fixed bug #1171231: Size of minimap in the editor not changed when new map is
-                        loaded
-  - Fixed bug #1504366: Editor crashes unexpectedly
-  - Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when player
-                        is removed
-  - Fixed bug #1515006: Create a new forested mountain terrain
+  - Fixed bug #821553:  Increase maximum number of terrain types
+  - Fixed bug #768826:  Show altitude level in the editor
 
 
 * Help and Documentation:
