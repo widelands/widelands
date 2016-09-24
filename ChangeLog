@@ -46,7 +46,6 @@
   - Fixed bug #1311244: Atlantean Mission Trigger fail
   - Fixed bug #1298411: No necessity to conquer all military buildings in the
                         third Barbarian Campaign
-
   - Fixed bug #1286576: Tutorial fails if player is in road building mode when
                         military building finishes
   - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
