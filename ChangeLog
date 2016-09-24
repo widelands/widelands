@@ -273,12 +273,12 @@
 
 * Internationalization
 
-  - Big internationalization overhaul to improve translations
+  - Big string overhaul to improve translations
   - UI redesigns to make translated strings fit
   - Automatic font selection and support for Arabic script
   - Fixed escaping of special characters in messages
   - Richtext and rt_render can now handle &nbsp;
-  - Added bash script for validating translations.
+  - ngettext and pgettext are now available in Lua
   - Fixed bug #1341990: Map names cause confusion in internet play
   - Fixed bug #1289698: Sorting maps by name sort by original instead of
                         translated name
