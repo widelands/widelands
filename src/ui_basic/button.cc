@@ -334,6 +334,10 @@ void Button::set_style(UI::Button::Style input_style) {
 	style_ = input_style;
 }
 
+void Button::set_perm_pressed(bool pressed) {
+	set_style(pressed ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
+}
+
 void Button::toggle() {
 	switch (style_) {
 	case UI::Button::Style::kRaised:

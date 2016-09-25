@@ -244,18 +244,11 @@ void MiniMap::resize() {
 }
 
 // Makes the buttons reflect the selected layers
-// NOCOM can this be made easier?
 void MiniMap::update_button_permpressed() {
-	button_terrn.set_style(*view_.flags_ & MiniMapLayer::Terrain ? UI::Button::Style::kPermpressed :
-	                                                               UI::Button::Style::kRaised);
-	button_owner.set_style(*view_.flags_ & MiniMapLayer::Owner ? UI::Button::Style::kPermpressed :
-	                                                             UI::Button::Style::kRaised);
-	button_flags.set_style(*view_.flags_ & MiniMapLayer::Flag ? UI::Button::Style::kPermpressed :
-	                                                            UI::Button::Style::kRaised);
-	button_roads.set_style(*view_.flags_ & MiniMapLayer::Road ? UI::Button::Style::kPermpressed :
-	                                                            UI::Button::Style::kRaised);
-	button_bldns.set_style(*view_.flags_ & MiniMapLayer::Building ? UI::Button::Style::kPermpressed :
-	                                                                UI::Button::Style::kRaised);
-	button_zoom.set_style(*view_.flags_ & MiniMapLayer::Zoom2 ? UI::Button::Style::kPermpressed :
-	                                                            UI::Button::Style::kRaised);
+	button_terrn.set_perm_pressed(*view_.flags_ & MiniMapLayer::Terrain);
+	button_owner.set_perm_pressed(*view_.flags_ & MiniMapLayer::Owner);
+	button_flags.set_perm_pressed(*view_.flags_ & MiniMapLayer::Flag);
+	button_roads.set_perm_pressed(*view_.flags_ & MiniMapLayer::Road);
+	button_bldns.set_perm_pressed(*view_.flags_ & MiniMapLayer::Building);
+	button_zoom.set_perm_pressed(*view_.flags_ & MiniMapLayer::Zoom2);
 }

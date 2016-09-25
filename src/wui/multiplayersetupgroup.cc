@@ -276,7 +276,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_visible(false);
 			team->set_enabled(false);
 			// Flat ~= icon
-			tribe->set_style(initaccess ? UI::Button::Style::kRaised : UI::Button::Style::kFlat);
+			tribe->set_perm_pressed(!initaccess);
 			tribe->set_enabled(true);
 		} else {
 			std::string title;

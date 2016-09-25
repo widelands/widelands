@@ -122,8 +122,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
 		                                 player->get_name().c_str());
 		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
-		cb.set_style(my_registry_->selected_players[p - 1] ? UI::Button::Style::kPermpressed :
-		                                                     UI::Button::Style::kRaised);
+		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
 		cbs_[p - 1] = &cb;
 

@@ -37,9 +37,9 @@ struct Font;
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
 	enum class Style {
-		kRaised,      // Normal raised Button
-		kFlat,        // Flat button with simple coloured outline
-		kPermpressed  // Button will appear pressed
+		kRaised,       // Normal raised Button
+		kPermpressed,  // Button will appear pressed
+		kFlat         // Flat button with simple coloured outline
 	};
 
 	enum class ImageMode {
@@ -104,7 +104,12 @@ struct Button : public NamedPanel {
 	UI::Button::Style style() const {
 		return style_;
 	}
-	/// Toggles between raised and permpressed style
+
+	/// Convenience function. If 'pressed', sets the style to kPermpressed, otherwise to kRaised.
+	void set_perm_pressed(bool pressed);
+
+
+	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
 
 	boost::signals2::signal<void()> sigclicked;
