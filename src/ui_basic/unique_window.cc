@@ -70,9 +70,8 @@ UniqueWindow::Registry::~Registry() {
 void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
 	assert(!on_create);
 	assert(!on_delete);
-	// NOCOM boost::bind?
-	on_create = std::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
-	on_delete = std::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
+	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
+	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
 	if (window) {
 		button->set_style(UI::Button::Style::kPermpressed);
 	}
