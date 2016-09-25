@@ -145,7 +145,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              g_gr->images().get("images/ui_basic/but0.png"),
              _("Delete"),
              std::string(),
-             false,
              false),
 
      ta_errormessage_(this,

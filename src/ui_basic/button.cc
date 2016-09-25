@@ -44,11 +44,12 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     const std::string& title_text,
     const std::string& tooltip_text,
     bool const init_enabled,
-    bool const flat)
+    UI::Button::Style init_style)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(init_enabled),
+     style_(init_style),
      repeating_(false),
      keep_image_size_(false),
      time_nextact_(0),
@@ -56,7 +57,6 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
      pic_background_(bg_pic),
      pic_custom_(nullptr),
      clr_down_(229, 161, 2) {
-	style_ = flat ? Style::kFlat : Style::kRaised;
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height =

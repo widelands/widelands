@@ -76,9 +76,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(name, UI::Align::kHCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) {  // Our Client
-			type = new UI::Button(this, "client_type", 0, 0, h, h,
-			                      g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-			                      std::string(), true, false);
+			type = new UI::Button(
+			   this, "client_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 			type->sigclicked.connect(
 			   boost::bind(&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
 			add(type, UI::Align::kHCenter);
@@ -179,27 +178,23 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player, UI::Align::kHCenter);
-		type = new UI::Button(this, "player_type", 0, 0, h, h,
-		                      g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-		                      std::string(), true, false);
+		type = new UI::Button(
+		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		add(type, UI::Align::kHCenter);
-		tribe = new UI::Button(this, "player_tribe", 0, 0, h, h,
-		                       g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-		                       std::string(), true, false);
+		tribe = new UI::Button(
+		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		tribe->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
 		add(tribe, UI::Align::kHCenter);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
-		                      g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-		                      std::string(), true, false);
+		                      g_gr->images().get("images/ui_basic/but1.png"), "");
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
 		add(init, UI::Align::kHCenter);
-		team = new UI::Button(this, "player_team", 0, 0, h, h,
-		                      g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-		                      std::string(), true, false);
+		team = new UI::Button(
+		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		add(team, UI::Align::kHCenter);

@@ -60,7 +60,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
 		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
 		                                 g_gr->images().get("images/ui_basic/but0.png"), _("Map"),
-		                                 _("Select a map"), true, false);
+		                                 _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
@@ -68,14 +68,14 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
 		                     g_gr->images().get("images/ui_basic/but0.png"),
 		                     /** Translators: This is a button to select a savegame */
-		                     _("Saved Game"), _("Select a saved game"), true, false);
+		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
 		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
 		                     buth, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"),
-		                     _("Cancel selection"), true, false);
+		                     _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));

@@ -53,7 +53,7 @@ struct Button : public NamedPanel {
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
 	    bool const enabled = true,
-	    bool const flat = false);
+	    UI::Button::Style init_style = UI::Button::Style::kRaised);
 	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
@@ -115,9 +115,9 @@ protected:
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
+	UI::Button::Style style_;
 	bool repeating_;
 	bool keep_image_size_;  // Keep image's original size and center it
-	UI::Button::Style style_;
 
 	uint32_t time_nextact_;
 

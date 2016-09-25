@@ -57,10 +57,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
            butw_,
            buth_,
            g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back"),
-           std::string(),
-           true,
-           false),
+           _("Back")),
      ok_(this,
          "ok",
          get_w() - right_column_margin_ - butw_,
@@ -70,7 +67,6 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
          g_gr->images().get("images/ui_basic/but2.png"),
          _("OK"),
          std::string(),
-         false,
          false) {
 }
 
