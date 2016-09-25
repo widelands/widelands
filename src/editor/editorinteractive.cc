@@ -103,19 +103,19 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      is_painting_(false),
      tools_(new Tools()),
      history_(new EditorHistory(*undo_, *redo_)),
-     toggle_main_menu_(make_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"))),
+     toggle_main_menu_(add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"))),
      toggle_tool_menu_(
-        make_toolbar_button("wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
-     toggle_toolsize_menu_(make_toolbar_button(
-        "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"))),
-     toggle_minimap_(make_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
-     toggle_buildhelp_(make_toolbar_button(
+        add_toolbar_button("wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
+     toggle_toolsize_menu_(
+        add_toolbar_button("wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"))),
+     toggle_minimap_(add_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
+     toggle_buildhelp_(add_toolbar_button(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
      toggle_player_menu_(
-        make_toolbar_button("wui/editor/editor_menu_player_menu", "players", _("Players"))),
-     undo_(make_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"))),
-     redo_(make_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"))),
-     toggle_help_(make_toolbar_button("ui_basic/menu_help", "help", _("Help"))) {
+        add_toolbar_button("wui/editor/editor_menu_player_menu", "players", _("Players"))),
+     undo_(add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"))),
+     redo_(add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"))),
+     toggle_help_(add_toolbar_button("ui_basic/menu_help", "help", _("Help"))) {
 	toggle_main_menu_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
 	toggle_tool_menu_->sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
 	toggle_toolsize_menu_->sigclicked.connect(

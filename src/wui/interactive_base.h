@@ -171,10 +171,16 @@ public:
 	void set_landmark(size_t key, const Point& point);
 
 protected:
-	UI::Button* make_toolbar_button(const std::string& image_basename,
-	                                const std::string& name,
-	                                const std::string& tooltip,
-	                                UI::UniqueWindow::Registry* window = nullptr);
+	/// Adds a toolbar button to the toolbar
+	/// \param image_basename: File path for button image starting from 'images' and without file
+	/// extension
+	/// \param name:           Internal name of the button
+	/// \param tooltip:        The button tooltip
+	/// \param window:         The window that's associated with this button.
+	UI::Button* add_toolbar_button(const std::string& image_basename,
+	                               const std::string& name,
+	                               const std::string& tooltip,
+	                               UI::UniqueWindow::Registry* window = nullptr);
 
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);

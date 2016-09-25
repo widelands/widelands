@@ -45,33 +45,33 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, multiplayer) {
 	toolbar_.set_layout_toplevel(true);
 	if (is_multiplayer()) {
-		toggle_options_menu_ = make_toolbar_button(
+		toggle_options_menu_ = add_toolbar_button(
 		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_);
 		toggle_options_menu_->sigclicked.connect(
 		   boost::bind(&InteractiveSpectator::toggle_options_menu, this));
 	} else {
-		exit_ = make_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
+		exit_ = add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
 		exit_->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
 
-		save_ = make_toolbar_button(
+		save_ = add_toolbar_button(
 		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame);
 		save_->sigclicked.connect(boost::bind(&InteractiveSpectator::save_btn, this));
 	}
-	toggle_statistics_ = make_toolbar_button("wui/menus/menu_general_stats", "general_stats",
-	                                         _("Statistics"), &main_windows_.general_stats);
+	toggle_statistics_ = add_toolbar_button("wui/menus/menu_general_stats", "general_stats",
+	                                        _("Statistics"), &main_windows_.general_stats);
 	toggle_statistics_->sigclicked.connect(
 	   boost::bind(&InteractiveSpectator::toggle_statistics, this));
 
-	toggle_minimap_ = make_toolbar_button(
+	toggle_minimap_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry());
 	toggle_minimap_->sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
 
-	toggle_buildhelp_ = make_toolbar_button(
+	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	if (is_multiplayer()) {
-		toggle_chat_ = make_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_);
+		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_);
 		toggle_chat_->sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
 	}
 
