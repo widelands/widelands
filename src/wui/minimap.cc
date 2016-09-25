@@ -141,7 +141,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_terrn.png"),
                   _("Terrain"),
                   true,
-						UI::Button::Style::kRaised,
+                  UI::Button::Style::kRaised,
                   true),
      button_owner(this,
                   "owner",
@@ -153,7 +153,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_owner.png"),
                   _("Owner"),
                   true,
-						UI::Button::Style::kRaised,
+                  UI::Button::Style::kRaised,
                   true),
      button_flags(this,
                   "flags",
@@ -165,7 +165,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_flags.png"),
                   _("Flags"),
                   true,
-						UI::Button::Style::kRaised,
+                  UI::Button::Style::kRaised,
                   true),
      button_roads(this,
                   "roads",
@@ -177,7 +177,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_roads.png"),
                   _("Roads"),
                   true,
-						UI::Button::Style::kRaised,
+                  UI::Button::Style::kRaised,
                   true),
      button_bldns(this,
                   "buildings",
@@ -189,7 +189,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_bldns.png"),
                   _("Buildings"),
                   true,
-						UI::Button::Style::kRaised,
+                  UI::Button::Style::kRaised,
                   true),
      button_zoom(this,
                  "zoom",
@@ -201,7 +201,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                  g_gr->images().get("images/wui/minimap/button_zoom.png"),
                  _("Zoom"),
                  true,
-					  UI::Button::Style::kRaised,
+                 UI::Button::Style::kRaised,
                  true) {
 	button_terrn.sigclicked.connect(
 	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
@@ -252,10 +252,16 @@ void MiniMap::resize() {
 // Makes the buttons reflect the selected layers
 // NOCOM can this be made easier?
 void MiniMap::update_button_permpressed() {
-	button_terrn.set_style(*view_.flags_ & MiniMapLayer::Terrain ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
-	button_owner.set_style(*view_.flags_ & MiniMapLayer::Owner ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
-	button_flags.set_style(*view_.flags_ & MiniMapLayer::Flag ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
-	button_roads.set_style(*view_.flags_ & MiniMapLayer::Road ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
-	button_bldns.set_style(*view_.flags_ & MiniMapLayer::Building ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
-	button_zoom.set_style(*view_.flags_ & MiniMapLayer::Zoom2 ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
+	button_terrn.set_style(*view_.flags_ & MiniMapLayer::Terrain ? UI::Button::Style::kPermpressed :
+	                                                               UI::Button::Style::kRaised);
+	button_owner.set_style(*view_.flags_ & MiniMapLayer::Owner ? UI::Button::Style::kPermpressed :
+	                                                             UI::Button::Style::kRaised);
+	button_flags.set_style(*view_.flags_ & MiniMapLayer::Flag ? UI::Button::Style::kPermpressed :
+	                                                            UI::Button::Style::kRaised);
+	button_roads.set_style(*view_.flags_ & MiniMapLayer::Road ? UI::Button::Style::kPermpressed :
+	                                                            UI::Button::Style::kRaised);
+	button_bldns.set_style(*view_.flags_ & MiniMapLayer::Building ? UI::Button::Style::kPermpressed :
+	                                                                UI::Button::Style::kRaised);
+	button_zoom.set_style(*view_.flags_ & MiniMapLayer::Zoom2 ? UI::Button::Style::kPermpressed :
+	                                                            UI::Button::Style::kRaised);
 }

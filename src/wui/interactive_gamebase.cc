@@ -121,7 +121,8 @@ void InteractiveGameBase::postload() {
 	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_.set_style(buildhelp() ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
+	toggle_buildhelp_.set_style(buildhelp() ? UI::Button::Style::kPermpressed :
+	                                          UI::Button::Style::kRaised);
 
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
@@ -138,7 +139,8 @@ void InteractiveGameBase::postload() {
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	// NOCOM this is broken in trunk already.
-	toggle_buildhelp_.set_style(value ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
+	toggle_buildhelp_.set_style(value ? UI::Button::Style::kPermpressed :
+	                                    UI::Button::Style::kRaised);
 }
 
 /**

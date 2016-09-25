@@ -79,14 +79,14 @@ Button::Button  //  for pictorial buttons
     const Image* fg_pic,
     const std::string& tooltip_text,
     bool const init_enabled,
-	 UI::Button::Style init_style,
+    UI::Button::Style init_style,
     const bool keep_image_size)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(init_enabled),
      repeating_(false),
-	  style_(init_style),
+     style_(init_style),
      keep_image_size_(keep_image_size),
      time_nextact_(0),
      pic_background_(bg_pic),
@@ -344,9 +344,7 @@ void Button::toggle() {
 	case UI::Button::Style::kPermpressed:
 		style_ = UI::Button::Style::kRaised;
 		break;
-	default:
-		; // Do nothing for flat buttons
+	default:;  // Do nothing for flat buttons
 	}
 }
-
 }

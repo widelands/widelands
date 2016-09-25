@@ -37,9 +37,9 @@ struct Font;
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
 	enum class Style {
-		kRaised,     // Normal raised Button
-		kFlat,       // Flat button with simple coloured outline
-		kPermpressed // Button will appear pressed
+		kRaised,      // Normal raised Button
+		kFlat,        // Flat button with simple coloured outline
+		kPermpressed  // Button will appear pressed
 	};
 
 	Button  /// for textual buttons
@@ -66,7 +66,7 @@ struct Button : public NamedPanel {
 	    const Image* foreground_picture_id,
 	    const std::string& tooltip_text = std::string(),
 	    bool const enabled = true,
-		 UI::Button::Style init_style = UI::Button::Style::kRaised,
+	    UI::Button::Style init_style = UI::Button::Style::kRaised,
 	    bool const keep_image_size = false);
 	~Button();
 
@@ -95,7 +95,6 @@ struct Button : public NamedPanel {
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
-
 
 	/// Sets the visual style of the button
 	void set_style(UI::Button::Style input_style);
