@@ -170,6 +170,10 @@ public:
 	void set_landmark(size_t key, const Point& point);
 
 protected:
+	UI::Button* make_toolbar_button(const std::string& image_basename,
+	                                const std::string& name,
+	                                const std::string& tooltip);
+
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
 
@@ -242,8 +246,5 @@ private:
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> workarea_pics_;
 };
-
-#define PIC2 g_gr->images().get("images/ui_basic/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) &toolbar_, name, 0, 0, 34U, 34U, PIC2
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

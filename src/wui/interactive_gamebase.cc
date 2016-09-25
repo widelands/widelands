@@ -56,13 +56,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      chatenabled_(chatenabled),
      multiplayer_(multiplayer),
      playertype_(pt),
-
-#define INIT_BTN(picture, name, tooltip)                                                           \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
-
-     toggle_buildhelp_(INIT_BTN(
+     toggle_buildhelp_(make_toolbar_button(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -121,7 +117,7 @@ void InteractiveGameBase::postload() {
 	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_.set_perm_pressed(buildhelp());
+	toggle_buildhelp_->set_perm_pressed(buildhelp());
 
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
@@ -137,7 +133,7 @@ void InteractiveGameBase::postload() {
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_.set_perm_pressed(value);
+	toggle_buildhelp_->set_perm_pressed(value);
 }
 
 /**

@@ -93,7 +93,7 @@ protected:
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
 
-	UI::Button toggle_buildhelp_;
+	UI::Button* toggle_buildhelp_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;

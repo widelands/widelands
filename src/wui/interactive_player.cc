@@ -66,68 +66,60 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
-
-// Chat is different, as chat_provider_ needs to be checked when toggling
-// Minimap is different as it warps and stuff
-
-#define INIT_BTN_this(picture, name, tooltip)                                                      \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
-
-#define INIT_BTN(picture, name, tooltip)                                                           \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
-
-     toggle_chat_(INIT_BTN_this("wui/menus/menu_chat", "chat", _("Chat"))),
-     toggle_options_menu_(INIT_BTN("wui/menus/menu_options_menu", "options_menu", _("Main Menu"))),
+     toggle_chat_(make_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"))),
+     toggle_options_menu_(
+        make_toolbar_button("wui/menus/menu_options_menu", "options_menu", _("Main Menu"))),
      toggle_statistics_menu_(
-        INIT_BTN("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
-     toggle_objectives_(INIT_BTN("wui/menus/menu_objectives", "objectives", _("Objectives"))),
-     toggle_minimap_(INIT_BTN_this("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
+        make_toolbar_button("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
+     toggle_objectives_(
+        make_toolbar_button("wui/menus/menu_objectives", "objectives", _("Objectives"))),
+     toggle_minimap_(make_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
      toggle_message_menu_(
-        INIT_BTN("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
-     toggle_help_(INIT_BTN("ui_basic/menu_help", "help", _("Tribal Encyclopedia")))
+        make_toolbar_button("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
+     toggle_help_(make_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia")))
 
 {
-	toggle_chat_.sigclicked.connect(boost::bind(&InteractivePlayer::toggle_chat, this));
-	toggle_options_menu_.sigclicked.connect(
+	toggle_chat_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_chat, this));
+	toggle_options_menu_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(options_)));
-	toggle_statistics_menu_.sigclicked.connect(
+	toggle_statistics_menu_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(statisticsmenu_)));
-	toggle_objectives_.sigclicked.connect(
+	toggle_objectives_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(objectives_)));
-	toggle_minimap_.sigclicked.connect(boost::bind(&InteractivePlayer::toggle_minimap, this));
-	toggle_message_menu_.sigclicked.connect(
+	toggle_minimap_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_minimap, this));
+	toggle_message_menu_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(message_menu_)));
-	toggle_help_.sigclicked.connect(
+	toggle_help_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(encyclopedia_)));
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	toolbar_.add(&toggle_options_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
-	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
+	toolbar_.add(toggle_options_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_minimap_, UI::Align::kLeft);
+	toolbar_.add(toggle_buildhelp_, UI::Align::kLeft);
 	if (multiplayer) {
-		toolbar_.add(&toggle_chat_, UI::Align::kLeft);
-		toggle_chat_.set_visible(false);
-		toggle_chat_.set_enabled(false);
+		toolbar_.add(toggle_chat_, UI::Align::kLeft);
+		toggle_chat_->set_visible(false);
+		toggle_chat_->set_enabled(false);
 	}
 
-	toolbar_.add(&toggle_objectives_, UI::Align::kLeft);
-	toolbar_.add(&toggle_message_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_help_, UI::Align::kLeft);
+	toolbar_.add(toggle_objectives_, UI::Align::kLeft);
+	toolbar_.add(toggle_message_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_help_, UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
 
-	chat_.assign_toggle_button(&toggle_chat_);
-	options_.assign_toggle_button(&toggle_options_menu_);
-	statisticsmenu_.assign_toggle_button(&toggle_statistics_menu_);
-	minimap_registry().assign_toggle_button(&toggle_minimap_);
-	objectives_.assign_toggle_button(&toggle_objectives_);
-	message_menu_.assign_toggle_button(&toggle_message_menu_);
-	encyclopedia_.assign_toggle_button(&toggle_help_);
+	chat_.assign_toggle_button(toggle_chat_);
+	options_.assign_toggle_button(toggle_options_menu_);
+	statisticsmenu_.assign_toggle_button(toggle_statistics_menu_);
+	minimap_registry().assign_toggle_button(toggle_minimap_);
+	objectives_.assign_toggle_button(toggle_objectives_);
+	message_menu_.assign_toggle_button(toggle_message_menu_);
+	encyclopedia_.assign_toggle_button(toggle_help_);
 
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
@@ -181,8 +173,8 @@ void InteractivePlayer::think() {
 		}
 	}
 	if (is_multiplayer()) {
-		toggle_chat_.set_visible(chatenabled_);
-		toggle_chat_.set_enabled(chatenabled_);
+		toggle_chat_->set_visible(chatenabled_);
+		toggle_chat_->set_enabled(chatenabled_);
 	}
 	{
 		char const* msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
@@ -195,8 +187,8 @@ void InteractivePlayer::think() {
 			    nr_new_messages)
 			      .str();
 		}
-		toggle_message_menu_.set_pic(g_gr->images().get(msg_icon));
-		toggle_message_menu_.set_tooltip(msg_tooltip);
+		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
+		toggle_message_menu_->set_tooltip(msg_tooltip);
 	}
 }
 

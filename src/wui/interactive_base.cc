@@ -220,6 +220,15 @@ void InteractiveBase::toggle_buildhelp() {
 	show_buildhelp(!field_overlay_manager_->buildhelp());
 }
 
+UI::Button* InteractiveBase::make_toolbar_button(const std::string& image_basename,
+                                                 const std::string& name,
+                                                 const std::string& tooltip) {
+	// NOCOM document
+	return new UI::Button(&toolbar_, name, 0, 0, 34U, 34U,
+	                      g_gr->images().get("images/ui_basic/but2.png"),
+	                      g_gr->images().get("images/" + image_basename + ".png"), tooltip);
+}
+
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 

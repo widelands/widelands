@@ -102,48 +102,42 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      tools_(new Tools()),
-     history_(new EditorHistory(undo_, redo_)),
-
-#define INIT_BUTTON(image, name, tooltip)                                                          \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get(image), tooltip
-
-     toggle_main_menu_(
-        INIT_BUTTON("images/wui/menus/menu_toggle_menu.png", "menu", _("Main Menu"))),
+     history_(new EditorHistory(*undo_, *redo_)),
+     toggle_main_menu_(make_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"))),
      toggle_tool_menu_(
-        INIT_BUTTON("images/wui/editor/editor_menu_toggle_tool_menu.png", "tools", _("Tools"))),
-     toggle_toolsize_menu_(INIT_BUTTON(
-        "images/wui/editor/editor_menu_set_toolsize_menu.png", "toolsize", _("Tool Size"))),
-     toggle_minimap_(
-        INIT_BUTTON("images/wui/menus/menu_toggle_minimap.png", "minimap", _("Minimap"))),
-     toggle_buildhelp_(INIT_BUTTON("images/wui/menus/menu_toggle_buildhelp.png",
-                                   "buildhelp",
-                                   _("Show Building Spaces (on/off)"))),
+        make_toolbar_button("wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
+     toggle_toolsize_menu_(make_toolbar_button(
+        "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"))),
+     toggle_minimap_(make_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
+     toggle_buildhelp_(make_toolbar_button(
+        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
      toggle_player_menu_(
-        INIT_BUTTON("images/wui/editor/editor_menu_player_menu.png", "players", _("Players"))),
-     undo_(INIT_BUTTON("images/wui/editor/editor_undo.png", "undo", _("Undo"))),
-     redo_(INIT_BUTTON("images/wui/editor/editor_redo.png", "redo", _("Redo"))),
-     toggle_help_(INIT_BUTTON("images/ui_basic/menu_help.png", "help", _("Help"))) {
-	toggle_main_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
-	toggle_tool_menu_.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
-	toggle_toolsize_menu_.sigclicked.connect(
+        make_toolbar_button("wui/editor/editor_menu_player_menu", "players", _("Players"))),
+     undo_(make_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"))),
+     redo_(make_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"))),
+     toggle_help_(make_toolbar_button("ui_basic/menu_help", "help", _("Help"))) {
+	toggle_main_menu_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
+	toggle_tool_menu_->sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
+	toggle_toolsize_menu_->sigclicked.connect(
 	   boost::bind(&EditorInteractive::toolsize_menu_btn, this));
-	toggle_minimap_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	toggle_player_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_playermenu, this));
-	undo_.sigclicked.connect([this] { history_->undo_action(egbase().world()); });
-	redo_.sigclicked.connect([this] { history_->redo_action(egbase().world()); });
-	toggle_help_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
+	toggle_minimap_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	toggle_player_menu_->sigclicked.connect(
+	   boost::bind(&EditorInteractive::toggle_playermenu, this));
+	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
+	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
+	toggle_help_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
 
 	toolbar_.set_layout_toplevel(true);
-	toolbar_.add(&toggle_main_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_tool_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_toolsize_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
-	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
-	toolbar_.add(&toggle_player_menu_, UI::Align::kLeft);
-	toolbar_.add(&undo_, UI::Align::kLeft);
-	toolbar_.add(&redo_, UI::Align::kLeft);
-	toolbar_.add(&toggle_help_, UI::Align::kLeft);
+	toolbar_.add(toggle_main_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_tool_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_toolsize_menu_, UI::Align::kLeft);
+	toolbar_.add(toggle_minimap_, UI::Align::kLeft);
+	toolbar_.add(toggle_buildhelp_, UI::Align::kLeft);
+	toolbar_.add(toggle_player_menu_, UI::Align::kLeft);
+	toolbar_.add(undo_, UI::Align::kLeft);
+	toolbar_.add(redo_, UI::Align::kLeft);
+	toolbar_.add(toggle_help_, UI::Align::kLeft);
 	adjust_toolbar_position();
 
 #ifndef NDEBUG
@@ -362,7 +356,7 @@ void EditorInteractive::toggle_help() {
 }
 
 void EditorInteractive::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_.set_perm_pressed(value);
+	toggle_buildhelp_->set_perm_pressed(value);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -654,9 +648,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 void EditorInteractive::map_changed(const MapWas& action) {
 	switch (action) {
 	case MapWas::kReplaced:
-		history_.reset(new EditorHistory(undo_, redo_));
-		undo_.set_enabled(false);
-		redo_.set_enabled(false);
+		history_.reset(new EditorHistory(*undo_, *redo_));
+		undo_->set_enabled(false);
+		redo_->set_enabled(false);
 
 		tools_.reset(new Tools());
 		select_tool(tools_->info, EditorTool::First);
