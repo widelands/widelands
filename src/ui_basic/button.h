@@ -42,6 +42,11 @@ struct Button : public NamedPanel {
 		kPermpressed  // Button will appear pressed
 	};
 
+	enum class ImageMode {
+		kShrink,   // Shrink foreground image to fit into the button
+		kUnscaled  // Show the foreground image without any scaling
+	};
+
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -53,7 +58,7 @@ struct Button : public NamedPanel {
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::Style init_style = UI::Button::Style::kRaised);
-	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
+
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -65,7 +70,7 @@ struct Button : public NamedPanel {
 	    const Image* foreground_picture_id,
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::Style init_style = UI::Button::Style::kRaised,
-	    bool const keep_image_size = false);
+	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
 	~Button();
 
 	void set_pic(const Image* pic);
@@ -115,7 +120,7 @@ protected:
 	bool enabled_;
 	UI::Button::Style style_;
 	bool repeating_;
-	bool keep_image_size_;  // Keep image's original size and center it
+	const UI::Button::ImageMode image_mode_;
 
 	uint32_t time_nextact_;
 

@@ -141,7 +141,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_terrn.png"),
                   _("Terrain"),
                   UI::Button::Style::kRaised,
-                  true),
+                  UI::Button::ImageMode::kUnscaled),
      button_owner(this,
                   "owner",
                   but_w() * 1,
@@ -152,7 +152,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_owner.png"),
                   _("Owner"),
                   UI::Button::Style::kRaised,
-                  true),
+                  UI::Button::ImageMode::kUnscaled),
      button_flags(this,
                   "flags",
                   but_w() * 2,
@@ -163,7 +163,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_flags.png"),
                   _("Flags"),
                   UI::Button::Style::kRaised,
-                  true),
+                  UI::Button::ImageMode::kUnscaled),
      button_roads(this,
                   "roads",
                   but_w() * 0,
@@ -174,7 +174,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_roads.png"),
                   _("Roads"),
                   UI::Button::Style::kRaised,
-                  true),
+                  UI::Button::ImageMode::kUnscaled),
      button_bldns(this,
                   "buildings",
                   but_w() * 1,
@@ -185,7 +185,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   g_gr->images().get("images/wui/minimap/button_bldns.png"),
                   _("Buildings"),
                   UI::Button::Style::kRaised,
-                  true),
+                  UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
                  "zoom",
                  but_w() * 2,
@@ -196,7 +196,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                  g_gr->images().get("images/wui/minimap/button_zoom.png"),
                  _("Zoom"),
                  UI::Button::Style::kRaised,
-                 true) {
+                 UI::Button::ImageMode::kUnscaled) {
 	button_terrn.sigclicked.connect(
 	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
 	button_owner.sigclicked.connect(

@@ -50,7 +50,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
      enabled_(true),
      style_(init_style),
      repeating_(false),
-     keep_image_size_(false),
+     image_mode_(UI::Button::ImageMode::kShrink),
      time_nextact_(0),
      title_(title_text),
      pic_background_(bg_pic),
@@ -78,14 +78,14 @@ Button::Button  //  for pictorial buttons
     const Image* fg_pic,
     const std::string& tooltip_text,
     UI::Button::Style init_style,
-    const bool keep_image_size)
+    ImageMode mode)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
      style_(init_style),
      repeating_(false),
-     keep_image_size_(keep_image_size),
+     image_mode_(mode),
      time_nextact_(0),
      pic_background_(bg_pic),
      pic_custom_(fg_pic),
@@ -156,7 +156,7 @@ void Button::draw(RenderTarget& dst) {
 
 	//  If we've got a picture, draw it centered
 	if (pic_custom_) {
-		if (keep_image_size_) {
+		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
 			if (enabled_) {
 				//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 				//  is that -1 >> 1 is -1 but -1 / 2 is 0).
