@@ -122,7 +122,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
 		                                 player->get_name().c_str());
 		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
-		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
+		cb.set_style(my_registry_->selected_players[p - 1] ? UI::Button::Style::kPermpressed : UI::Button::Style::kRaised);
 
 		cbs_[p - 1] = &cb;
 
@@ -215,7 +215,7 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 		my_registry_->time = plot_.get_time();
 		PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
-			my_registry_->selected_players[p - 1] = cbs_[p - 1]->get_perm_pressed();
+			my_registry_->selected_players[p - 1] = cbs_[p - 1]->style() == UI::Button::Style::kPermpressed;
 		}
 	}
 }
@@ -232,9 +232,8 @@ void GeneralStatisticsMenu::clicked_help() {
  */
 void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 	// This represents our player number
-	cbs_[id - 1]->set_perm_pressed(!cbs_[id - 1]->get_perm_pressed());
-
-	plot_.show_plot((id - 1) * ndatasets_ + selected_information_, cbs_[id - 1]->get_perm_pressed());
+	cbs_[id - 1]->toggle();
+	plot_.show_plot((id - 1) * ndatasets_ + selected_information_, cbs_[id - 1]->style() == UI::Button::Style::kPermpressed);
 }
 
 /*
@@ -245,7 +244,7 @@ void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (cbs_[i]) {
-			plot_.show_plot(i * ndatasets_ + id, cbs_[i]->get_perm_pressed());
+			plot_.show_plot(i * ndatasets_ + id, cbs_[i]->style() == UI::Button::Style::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
 	selected_information_ = id;

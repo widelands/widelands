@@ -48,17 +48,15 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
-     permpressed_(false),
      enabled_(init_enabled),
      repeating_(false),
-     flat_(flat),
      keep_image_size_(false),
-     draw_flat_background_(false),
      time_nextact_(0),
      title_(title_text),
      pic_background_(bg_pic),
      pic_custom_(nullptr),
      clr_down_(229, 161, 2) {
+	style_ = flat ? Style::kFlat : Style::kRaised;
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height =
@@ -86,16 +84,14 @@ Button::Button  //  for pictorial buttons
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
-     permpressed_(false),
      enabled_(init_enabled),
      repeating_(false),
-     flat_(flat),
      keep_image_size_(keep_image_size),
-     draw_flat_background_(false),
      time_nextact_(0),
      pic_background_(bg_pic),
      pic_custom_(fg_pic),
      clr_down_(229, 161, 2) {
+	style_ = flat ? Style::kFlat : Style::kRaised;
 	set_thinks(false);
 }
 
@@ -152,13 +148,12 @@ void Button::set_enabled(bool const on) {
 */
 void Button::draw(RenderTarget& dst) {
 	// Draw the background
-	if (!flat_ || draw_flat_background_) {
-		assert(pic_background_);
+	if (pic_background_) {
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), pic_background_, Point(get_x(), get_y()));
 	}
 
-	if (enabled_ && highlighted_ && !flat_)
+	if (enabled_ && highlighted_ && style_ != Style::kFlat)
 		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
@@ -217,14 +212,11 @@ void Button::draw(RenderTarget& dst) {
 	//  stays pressed when it is pressed once
 	RGBAColor black(0, 0, 0, 255);
 
-	// permpressed_ is true, we invert the behaviour on pressed_
-	bool draw_pressed = permpressed_ ? !(pressed_ && highlighted_) : (pressed_ && highlighted_);
-
-	if (!flat_) {
+	if (style_ != Style::kFlat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
-		//  button is a normal one, not flat
-		if (!draw_pressed) {
+		//  Button is a normal one, not flat. We invert the behaviour for kPermpressed.
+		if ((style_ == Style::kPermpressed) == (pressed_ && highlighted_)) {
 			//  top edge
 			dst.brighten_rect(Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  left edge
@@ -340,17 +332,21 @@ bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 	return true;  // We handle this always by lighting up
 }
 
-void Button::set_perm_pressed(bool state) {
-	if (state != permpressed_) {
-		permpressed_ = state;
+void Button::set_style(UI::Button::Style input_style) {
+	style_ = input_style;
+}
+
+void Button::toggle() {
+	switch (style_) {
+	case UI::Button::Style::kRaised:
+		style_ = UI::Button::Style::kPermpressed;
+		break;
+	case UI::Button::Style::kPermpressed:
+		style_ = UI::Button::Style::kRaised;
+		break;
+	default:
+		; // Do nothing for flat buttons
 	}
 }
 
-void Button::set_flat(bool flat) {
-	flat_ = flat;
-}
-
-void Button::set_draw_flat_background(bool set) {
-	draw_flat_background_ = set;
-}
 }

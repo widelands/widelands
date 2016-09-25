@@ -485,11 +485,11 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareUnderAttack:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
-		geologistsbtn_->set_perm_pressed(false);
-		economybtn_->set_perm_pressed(false);
-		seafaringbtn_->set_perm_pressed(false);
-		warfarebtn_->set_perm_pressed(false);
-		scenariobtn_->set_perm_pressed(false);
+		geologistsbtn_->set_style(UI::Button::Style::kRaised);
+		economybtn_->set_style(UI::Button::Style::kRaised);
+		seafaringbtn_->set_style(UI::Button::Style::kRaised);
+		warfarebtn_->set_style(UI::Button::Style::kRaised);
+		scenariobtn_->set_style(UI::Button::Style::kRaised);
 		break;
 	}
 	think();
@@ -501,16 +501,16 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
                                                     Widelands::Message::Type msgtype) {
 	set_filter_messages_tooltips();
-	if (button.get_perm_pressed()) {
-		button.set_perm_pressed(false);
+	if (button.style() == UI::Button::Style::kPermpressed) {
+		button.set_style(UI::Button::Style::kRaised);
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 	} else {
-		geologistsbtn_->set_perm_pressed(false);
-		economybtn_->set_perm_pressed(false);
-		seafaringbtn_->set_perm_pressed(false);
-		warfarebtn_->set_perm_pressed(false);
-		scenariobtn_->set_perm_pressed(false);
-		button.set_perm_pressed(true);
+		geologistsbtn_->set_style(UI::Button::Style::kRaised);
+		economybtn_->set_style(UI::Button::Style::kRaised);
+		seafaringbtn_->set_style(UI::Button::Style::kRaised);
+		warfarebtn_->set_style(UI::Button::Style::kRaised);
+		scenariobtn_->set_style(UI::Button::Style::kRaised);
+		button.set_style(UI::Button::Style::kPermpressed);
 		message_filter_ = msgtype;
 
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */

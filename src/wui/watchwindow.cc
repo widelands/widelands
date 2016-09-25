@@ -196,8 +196,8 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 		save_coords();
 
 	if (single_window) {
-		view_btns[cur_index]->set_perm_pressed(false);
-		view_btns[idx]->set_perm_pressed(true);
+		view_btns[cur_index]->set_style(UI::Button::Style::kRaised);
+		view_btns[idx]->set_style(UI::Button::Style::kPermpressed);
 	}
 	cur_index = idx;
 	show_view();

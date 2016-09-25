@@ -718,13 +718,12 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 		if (building_button == nullptr) {
 			continue;
 		}
-		building_button->set_flat(true);
+		building_button->set_style(UI::Button::Style::kFlat);
 	}
 
 	// Update for current button
 	current_building_type_ = id;
-	building_buttons_[current_building_type_]->set_flat(false);
-	building_buttons_[current_building_type_]->set_perm_pressed(true);
+	building_buttons_[current_building_type_]->set_style(UI::Button::Style::kPermpressed);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	low_production_reset_focus();
 	has_selection_ = true;

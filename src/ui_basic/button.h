@@ -36,6 +36,12 @@ struct Font;
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
+	enum class Style {
+		kRaised,     // Normal raised Button
+		kFlat,       // Flat button with simple coloured outline
+		kPermpressed // Button will appear pressed
+	};
+
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -90,16 +96,14 @@ struct Button : public NamedPanel {
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
-	// Set the permanently pressed state of the button
-	void set_perm_pressed(bool state);
-	bool get_perm_pressed() const {
-		return permpressed_;
-	}
 
-	// Set button to flat / not flat
-	void set_flat(bool flat);
-	// If no background is drawn, the button is drawn over the current background
-	void set_draw_flat_background(bool set);
+	/// Sets the visual style of the button
+	void set_style(UI::Button::Style input_style);
+	UI::Button::Style style() const {
+		return style_;
+	}
+	/// Toggles between raised and permpressed style
+	void toggle();
 
 	boost::signals2::signal<void()> sigclicked;
 	boost::signals2::signal<void()> sigmousein;
@@ -111,12 +115,10 @@ protected:
 
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
-	bool permpressed_;  //  button should appear  pressed
 	bool enabled_;
 	bool repeating_;
-	bool flat_;
 	bool keep_image_size_;  // Keep image's original size and center it
-	bool draw_flat_background_;
+	UI::Button::Style style_;
 
 	uint32_t time_nextact_;
 

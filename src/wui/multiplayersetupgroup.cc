@@ -191,7 +191,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
 		add(tribe, UI::Align::kHCenter);
-		tribe->set_draw_flat_background(true);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
 		                      g_gr->images().get("images/ui_basic/but1.png"), std::string(),
 		                      std::string(), true, false);
@@ -253,7 +252,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
-			tribe->set_flat(false);
+			tribe->set_style(UI::Button::Style::kRaised);
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
@@ -264,7 +263,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
-			tribe->set_flat(false);
+			tribe->set_style(UI::Button::Style::kRaised);
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
@@ -282,7 +281,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_visible(false);
 			team->set_enabled(false);
 			// Flat ~= icon
-			tribe->set_flat(!initaccess);
+			tribe->set_style(initaccess ? UI::Button::Style::kRaised : UI::Button::Style::kFlat);
 			tribe->set_enabled(true);
 		} else {
 			std::string title;
@@ -327,7 +326,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribe->set_tooltip(tribenames_[player_setting.tribe].c_str());
 				tribe->set_pic(tribepics_[player_setting.tribe]);
 			}
-			tribe->set_flat(false);
+			tribe->set_style(UI::Button::Style::kRaised);
 
 			if (player_setting.team) {
 				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));

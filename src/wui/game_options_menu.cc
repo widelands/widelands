@@ -111,10 +111,10 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
-	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
+	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
+	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
 	if (registry.window)                                                                            \
-		btn.set_perm_pressed(true);
+		btn.set_style(UI::Button::Style::kPermpressed);
 
 	INIT_BTN_HOOKS(windows_.sound_options, sound_)
 
