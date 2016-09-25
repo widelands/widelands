@@ -163,6 +163,7 @@ public:
 	}
 
 	void toggle_minimap();
+	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
 	const std::vector<QuickNavigation::Landmark>& landmarks();
@@ -172,12 +173,12 @@ public:
 protected:
 	UI::Button* make_toolbar_button(const std::string& image_basename,
 	                                const std::string& name,
-	                                const std::string& tooltip);
+	                                const std::string& tooltip,
+	                                UI::UniqueWindow::Registry* window = nullptr);
 
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
 
-	void toggle_buildhelp();
 	void hide_minimap();
 
 	UI::UniqueWindow::Registry& minimap_registry();

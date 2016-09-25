@@ -129,15 +129,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_help_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
 
 	toolbar_.set_layout_toplevel(true);
-	toolbar_.add(toggle_main_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_tool_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_toolsize_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_minimap_, UI::Align::kLeft);
-	toolbar_.add(toggle_buildhelp_, UI::Align::kLeft);
-	toolbar_.add(toggle_player_menu_, UI::Align::kLeft);
-	toolbar_.add(undo_, UI::Align::kLeft);
-	toolbar_.add(redo_, UI::Align::kLeft);
-	toolbar_.add(toggle_help_, UI::Align::kLeft);
 	adjust_toolbar_position();
 
 #ifndef NDEBUG

@@ -55,10 +55,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      chat_provider_(nullptr),
      chatenabled_(chatenabled),
      multiplayer_(multiplayer),
-     playertype_(pt),
-     toggle_buildhelp_(make_toolbar_button(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+     playertype_(pt) {
 }
 
 /// \return a pointer to the running \ref Game instance.

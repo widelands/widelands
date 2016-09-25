@@ -222,11 +222,17 @@ void InteractiveBase::toggle_buildhelp() {
 
 UI::Button* InteractiveBase::make_toolbar_button(const std::string& image_basename,
                                                  const std::string& name,
-                                                 const std::string& tooltip) {
+                                                 const std::string& tooltip,
+                                                 UI::UniqueWindow::Registry* window) {
 	// NOCOM document
-	return new UI::Button(&toolbar_, name, 0, 0, 34U, 34U,
-	                      g_gr->images().get("images/ui_basic/but2.png"),
-	                      g_gr->images().get("images/" + image_basename + ".png"), tooltip);
+	UI::Button* button = new UI::Button(
+	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
+	   g_gr->images().get("images/" + image_basename + ".png"), tooltip);
+	toolbar_.add(button, UI::Align::kLeft);
+	if (window) {
+		window->assign_toggle_button(button);
+	}
+	return button;
 }
 
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {

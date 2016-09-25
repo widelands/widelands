@@ -92,7 +92,6 @@ protected:
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
-
 	UI::Button* toggle_buildhelp_;
 
 private:

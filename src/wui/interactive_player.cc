@@ -65,61 +65,51 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      bool const multiplayer)
    : InteractiveGameBase(g, global_s, NONE, multiplayer, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
-     flag_to_connect_(Widelands::Coords::null()),
-     toggle_chat_(make_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"))),
-     toggle_options_menu_(
-        make_toolbar_button("wui/menus/menu_options_menu", "options_menu", _("Main Menu"))),
-     toggle_statistics_menu_(
-        make_toolbar_button("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
-     toggle_objectives_(
-        make_toolbar_button("wui/menus/menu_objectives", "objectives", _("Objectives"))),
-     toggle_minimap_(make_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
-     toggle_message_menu_(
-        make_toolbar_button("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
-     toggle_help_(make_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia")))
-
-{
-	toggle_chat_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_chat, this));
+     flag_to_connect_(Widelands::Coords::null()) {
+	toggle_options_menu_ =
+	   make_toolbar_button("wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_);
 	toggle_options_menu_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(options_)));
+
+	toggle_statistics_menu_ = make_toolbar_button(
+	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_);
 	toggle_statistics_menu_->sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(statisticsmenu_)));
-	toggle_objectives_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(objectives_)));
-	toggle_minimap_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_minimap, this));
-	toggle_message_menu_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(message_menu_)));
-	toggle_help_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(encyclopedia_)));
 
-	// TODO(unknown): instead of making unneeded buttons invisible after generation,
-	// they should not at all be generated. -> implement more dynamic toolbar UI
-	toolbar_.add(toggle_options_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_statistics_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_minimap_, UI::Align::kLeft);
-	toolbar_.add(toggle_buildhelp_, UI::Align::kLeft);
+	toggle_minimap_ = make_toolbar_button(
+	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry());
+	toggle_minimap_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_minimap, this));
+
+	toggle_buildhelp_ = make_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
+
 	if (multiplayer) {
-		toolbar_.add(toggle_chat_, UI::Align::kLeft);
-		toggle_chat_->set_visible(false);
-		toggle_chat_->set_enabled(false);
+		toggle_chat_ = make_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_);
+		// toggle_chat_->set_visible(false);
+		// NOCOM toggle_chat_->set_enabled(false);
+		toggle_chat_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_chat, this));
 	}
 
-	toolbar_.add(toggle_objectives_, UI::Align::kLeft);
-	toolbar_.add(toggle_message_menu_, UI::Align::kLeft);
-	toolbar_.add(toggle_help_, UI::Align::kLeft);
+	toggle_objectives_ =
+	   make_toolbar_button("wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_);
+	toggle_objectives_->sigclicked.connect(
+	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(objectives_)));
+
+	toggle_message_menu_ = make_toolbar_button(
+	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_);
+	toggle_message_menu_->sigclicked.connect(
+	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(message_menu_)));
+
+	toggle_help_ =
+	   make_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_);
+	toggle_help_->sigclicked.connect(
+	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(encyclopedia_)));
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
-
-	chat_.assign_toggle_button(toggle_chat_);
-	options_.assign_toggle_button(toggle_options_menu_);
-	statisticsmenu_.assign_toggle_button(toggle_statistics_menu_);
-	minimap_registry().assign_toggle_button(toggle_minimap_);
-	objectives_.assign_toggle_button(toggle_objectives_);
-	message_menu_.assign_toggle_button(toggle_message_menu_);
-	encyclopedia_.assign_toggle_button(toggle_help_);
 
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
