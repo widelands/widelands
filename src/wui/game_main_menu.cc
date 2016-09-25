@@ -81,19 +81,10 @@ GameMainMenu::GameMainMenu(InteractivePlayer& plr,
 	stock.sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.stock)));
 
-// NOCOM we have this multiple times - can we refactor?
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	assert(!registry.on_create);                                                                    \
-	assert(!registry.on_delete);                                                                    \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
-	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
-
-	INIT_BTN_HOOKS(windows_.general_stats, general_stats)
-	INIT_BTN_HOOKS(windows_.ware_stats, ware_stats)
-	INIT_BTN_HOOKS(windows_.building_stats, building_stats)
-	INIT_BTN_HOOKS(windows_.stock, stock)
+	windows_.general_stats.assign_toggle_button(&general_stats);
+	windows_.ware_stats.assign_toggle_button(&ware_stats);
+	windows_.building_stats.assign_toggle_button(&building_stats);
+	windows_.stock.assign_toggle_button(&stock);
 
 	windows_.general_stats.open_window = [this] {
 		new GeneralStatisticsMenu(player_, windows_.general_stats);
@@ -110,17 +101,8 @@ GameMainMenu::GameMainMenu(InteractivePlayer& plr,
 }
 
 GameMainMenu::~GameMainMenu() {
-// We need to remove these callbacks because the opened window might
-// live longer than 'this' window, and thus the buttons. The assertions
-// are safeguards in case somewhere else in the code someone would
-// overwrite our hooks.
-
-#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
-	registry.on_create = 0;                                                                         \
-	registry.on_delete = 0;
-
-	DEINIT_BTN_HOOKS(windows_.general_stats, general_stats)
-	DEINIT_BTN_HOOKS(windows_.ware_stats, ware_stats)
-	DEINIT_BTN_HOOKS(windows_.building_stats, building_stats)
-	DEINIT_BTN_HOOKS(windows_.stock, stock)
+	windows_.general_stats.unassign_toggle_button();
+	windows_.ware_stats.unassign_toggle_button();
+	windows_.building_stats.unassign_toggle_button();
+	windows_.stock.unassign_toggle_button();
 }

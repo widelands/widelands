@@ -110,16 +110,14 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	exit_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
-	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
-
-	INIT_BTN_HOOKS(windows_.sound_options, sound_)
+	windows_.sound_options.assign_toggle_button(&sound_);
 
 	if (get_usedefaultpos())
 		center_to_parent();
+}
+
+GameOptionsMenu::~GameOptionsMenu() {
+	windows_.sound_options.unassign_toggle_button();
 }
 
 void GameOptionsMenu::clicked_sound() {

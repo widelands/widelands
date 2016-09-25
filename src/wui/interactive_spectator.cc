@@ -93,34 +93,19 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	// Setup all screen elements
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
-	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
-
-	INIT_BTN_HOOKS(chat_, toggle_chat_)
-	INIT_BTN_HOOKS(options_, toggle_options_menu_)
-	INIT_BTN_HOOKS(main_windows_.general_stats, toggle_statistics_)
-	INIT_BTN_HOOKS(main_windows_.savegame, save_)
-	INIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
+	chat_.assign_toggle_button(&toggle_chat_);
+	options_.assign_toggle_button(&toggle_options_menu_);
+	main_windows_.general_stats.assign_toggle_button(&toggle_statistics_);
+	main_windows_.savegame.assign_toggle_button(&save_);
+	minimap_registry().assign_toggle_button(&toggle_minimap_);
 }
 
 InteractiveSpectator::~InteractiveSpectator() {
-// We need to remove these callbacks because the opened window might
-// (theoretically) live longer than 'this' window, and thus the
-// buttons. The assertions are safeguards in case somewhere else in the
-// code someone would overwrite our hooks.
-
-#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
-	registry.on_create = 0;                                                                         \
-	registry.on_delete = 0;
-
-	DEINIT_BTN_HOOKS(chat_, toggle_chat_)
-	DEINIT_BTN_HOOKS(options_, toggle_options_menu_)
-	DEINIT_BTN_HOOKS(main_windows_.general_stats, toggle_statistics_)
-	DEINIT_BTN_HOOKS(main_windows_.savegame, save_)
-	DEINIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
+	chat_.unassign_toggle_button();
+	options_.unassign_toggle_button();
+	main_windows_.general_stats.unassign_toggle_button();
+	main_windows_.savegame.unassign_toggle_button();
+	minimap_registry().unassign_toggle_button();
 }
 
 /**

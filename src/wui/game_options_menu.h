@@ -32,6 +32,7 @@ struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu(InteractiveGameBase&,
 	                UI::UniqueWindow::Registry&,
 	                InteractiveGameBase::GameMainMenuWindows&);
+	~GameOptionsMenu();
 
 private:
 	InteractiveGameBase& igb_;

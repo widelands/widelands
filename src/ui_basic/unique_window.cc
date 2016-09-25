@@ -19,6 +19,8 @@
 
 #include "ui_basic/unique_window.h"
 
+#include <boost/bind.hpp>
+
 namespace UI {
 /*
 ==============================================================================
@@ -63,6 +65,22 @@ void UniqueWindow::Registry::toggle() {
 */
 UniqueWindow::Registry::~Registry() {
 	delete window;
+}
+
+void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
+	assert(!on_create);
+	assert(!on_delete);
+	// NOCOM boost::bind?
+	on_create = std::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
+	on_delete = std::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
+	if (window) {
+		button->set_style(UI::Button::Style::kPermpressed);
+	}
+}
+
+void UniqueWindow::Registry::unassign_toggle_button() {
+	on_create = 0;
+	on_delete = 0;
 }
 
 /**

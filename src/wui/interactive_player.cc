@@ -121,19 +121,13 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	adjust_toolbar_position();
 
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
-	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
-
-	INIT_BTN_HOOKS(chat_, toggle_chat_)
-	INIT_BTN_HOOKS(options_, toggle_options_menu_)
-	INIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
-	INIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
-	INIT_BTN_HOOKS(objectives_, toggle_objectives_)
-	INIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
-	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
+	chat_.assign_toggle_button(&toggle_chat_);
+	options_.assign_toggle_button(&toggle_options_menu_);
+	statisticsmenu_.assign_toggle_button(&toggle_statistics_menu_);
+	minimap_registry().assign_toggle_button(&toggle_minimap_);
+	objectives_.assign_toggle_button(&toggle_objectives_);
+	message_menu_.assign_toggle_button(&toggle_message_menu_);
+	encyclopedia_.assign_toggle_button(&toggle_help_);
 
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
@@ -152,17 +146,13 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 }
 
 InteractivePlayer::~InteractivePlayer() {
-#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
-	registry.on_create = 0;                                                                         \
-	registry.on_delete = 0;
-
-	DEINIT_BTN_HOOKS(chat_, toggle_chat_)
-	DEINIT_BTN_HOOKS(options_, toggle_options_menu_)
-	DEINIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
-	DEINIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
-	DEINIT_BTN_HOOKS(objectives_, toggle_objectives_)
-	DEINIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
-	DEINIT_BTN_HOOKS(encyclopedia_, toggle_help_)
+	chat_.unassign_toggle_button();
+	options_.unassign_toggle_button();
+	statisticsmenu_.unassign_toggle_button();
+	minimap_registry().unassign_toggle_button();
+	objectives_.unassign_toggle_button();
+	message_menu_.unassign_toggle_button();
+	encyclopedia_.unassign_toggle_button();
 }
 
 void InteractivePlayer::think() {
