@@ -159,6 +159,7 @@ private:
 	void toggle_mainmenu();
 	void toggle_playermenu();
 	void toggle_help();
+	void on_buildhelp_changed(const bool value) override;
 
 	//  state variables
 	bool need_save_;

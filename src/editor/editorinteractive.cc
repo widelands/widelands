@@ -361,6 +361,10 @@ void EditorInteractive::toggle_help() {
 		new EditorHelp(*this, helpmenu_, &egbase().lua());
 }
 
+void EditorInteractive::on_buildhelp_changed(const bool value) {
+	toggle_buildhelp_.set_perm_pressed(value);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
 
