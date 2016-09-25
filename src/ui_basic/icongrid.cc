@@ -43,7 +43,6 @@ struct IconGridButton : public Button {
 	            background_picture_id,
 	            foreground_picture_id,
 	            tooltip_text,
-	            true,
 	            UI::Button::Style::kFlat),
 	     icongrid_(parent),
 	     callback_argument_id_(callback_argument_id) {

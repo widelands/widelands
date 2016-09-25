@@ -65,7 +65,6 @@ struct Button : public NamedPanel {
 	    const Image* background_picture_id,
 	    const Image* foreground_picture_id,
 	    const std::string& tooltip_text = std::string(),
-	    bool const enabled = true,
 	    UI::Button::Style init_style = UI::Button::Style::kRaised,
 	    bool const keep_image_size = false);
 	~Button();
