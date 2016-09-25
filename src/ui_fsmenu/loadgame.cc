@@ -143,9 +143,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              butw_,
              buth_,
              g_gr->images().get("images/ui_basic/but0.png"),
-             _("Delete"),
-             std::string(),
-             false),
+             _("Delete")),
 
      ta_errormessage_(this,
                       right_column_x_,
@@ -618,6 +616,7 @@ void FullscreenMenuLoadGame::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {

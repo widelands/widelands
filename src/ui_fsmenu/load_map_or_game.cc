@@ -65,9 +65,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
          butw_,
          buth_,
          g_gr->images().get("images/ui_basic/but2.png"),
-         _("OK"),
-         std::string(),
-         false) {
+         _("OK")) {
 }
 
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {

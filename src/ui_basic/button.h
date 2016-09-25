@@ -52,7 +52,6 @@ struct Button : public NamedPanel {
 	    const Image* background_picture_id,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
-	    bool const enabled = true,
 	    UI::Button::Style init_style = UI::Button::Style::kRaised);
 	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button  /// for pictorial buttons

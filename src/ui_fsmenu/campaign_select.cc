@@ -241,6 +241,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
@@ -491,4 +492,5 @@ void FullscreenMenuCampaignMapSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }

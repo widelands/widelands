@@ -43,12 +43,11 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     const Image* bg_pic,
     const std::string& title_text,
     const std::string& tooltip_text,
-    bool const init_enabled,
     UI::Button::Style init_style)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
-     enabled_(init_enabled),
+     enabled_(true),
      style_(init_style),
      repeating_(false),
      keep_image_size_(false),
