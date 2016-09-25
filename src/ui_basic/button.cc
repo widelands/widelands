@@ -79,19 +79,19 @@ Button::Button  //  for pictorial buttons
     const Image* fg_pic,
     const std::string& tooltip_text,
     bool const init_enabled,
-    bool const flat,
+	 UI::Button::Style init_style,
     const bool keep_image_size)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(init_enabled),
      repeating_(false),
+	  style_(init_style),
      keep_image_size_(keep_image_size),
      time_nextact_(0),
      pic_background_(bg_pic),
      pic_custom_(fg_pic),
      clr_down_(229, 161, 2) {
-	style_ = flat ? Style::kFlat : Style::kRaised;
 	set_thinks(false);
 }
 

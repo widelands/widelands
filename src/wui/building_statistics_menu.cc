@@ -335,7 +335,7 @@ bool BuildingStatisticsMenu::add_button(
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
-	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "", false, true);
+		descr.representative_image(&iplayer().get_player()->get_playercolor()), "", false, UI::Button::Style::kFlat);
 	button_box->add(building_buttons_[id], UI::Align::kLeft);
 
 	owned_labels_[id] =
