@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:13+0000\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 07:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1981,30 +1981,60 @@ msgstr "Tha na h-ath-ghoiridean a bharrachd seo ri fhaighinn ann an uinneag nan 
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Seall a h-uile teachdaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
@@ -2706,7 +2736,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Feumaidh gach clach-eòlaiche, togalaiche, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
+msgstr "Feumaidh gach clach-eòlaiche, fear-togail, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:8
@@ -2716,7 +2746,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr "Feumaidh gach clach-eòlaiche, togalaiche, gobha is gobha chlogaidean òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Seo aon dhe na h-acainnean bunasach a thèid a shaothrachadh sa cheàrdach meatailt (ach cha saothraich an togalach e tuilleadh nuair a thèid a leasachadh gu ceàrdach thuaghan is ceàrdach-cogaidh)."
+msgstr "Feumaidh gach clach-eòlaiche, fear-togail, gobha is gobha chlogaidean òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Seo aon dhe na h-acainnean bunasach a thèid a shaothrachadh sa cheàrdach meatailt (ach cha saothraich an togalach e tuilleadh nuair a thèid a leasachadh gu ceàrdach thuaghan is ceàrdach-cogaidh)."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -2724,7 +2754,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Feumaidh gach clach-eòlaiche, togalaiche, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
+msgstr "Feumaidh gach clach-eòlaiche, fear-togail, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/helmet/helptexts.lua:4
@@ -3485,7 +3515,7 @@ msgstr "Toitidh e feòil is èisg."
 #: ../../data/tribes/workers/atlanteans/soldier/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Defend and Conquer!"
-msgstr "Dìon is ceannsaich!"
+msgstr "Dìon is buinnig!"
 
 #. TRANSLATORS: Helptext for a worker: Spider Breeder
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
@@ -3688,7 +3718,7 @@ msgstr "Leaghaidh e clach-mhèinnir gus meatailt a dhèanamh."
 #: ../../data/tribes/workers/barbarians/soldier/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Defend and Conquer!"
-msgstr "Dìon is ceannsaich!"
+msgstr "Dìon is buinnig!"
 
 #. TRANSLATORS: Helptext for a worker: Stonemason
 #: ../../data/tribes/workers/barbarians/stonemason/helptexts.lua:3
@@ -3857,7 +3887,7 @@ msgstr "Leaghaidh e clach-mhèinnir gus meatailt a dhèanamh."
 #: ../../data/tribes/workers/empire/soldier/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Defend and Conquer!"
-msgstr "Dìon is ceannsaich!"
+msgstr "Dìon is buinnig!"
 
 #. TRANSLATORS: Helptext for a worker: Stonemason
 #: ../../data/tribes/workers/empire/stonemason/helptexts.lua:3

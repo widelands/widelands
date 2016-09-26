@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 16:54+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build up a small food economy"
-msgstr "Vybuduj základní ekonomiku potravin"
+msgstr "Vybuduj základní potravinné hospodářství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
@@ -437,7 +438,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
-msgstr "Ekonomika potravin je dokončena"
+msgstr "Potravinné hospodářství je hotové"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:256
@@ -500,7 +501,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
 msgid "Mining Economy Completed"
-msgstr "Těžební ekonomika je dokončena"
+msgstr "Těžební hospodářství je dokončeno"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:294
@@ -508,7 +509,7 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr "Právě mě informovali, že naši horníci začali těžit. Tahle novinka mě velice těší - přestože to nejtěžší nás stále teprve čeká, kováři nám do budoucna mohou velmi ulehčit život."
+msgstr "Právě mě informovali, že naši horníci začali těžit. Tahle novinka mě velice těší - přestože to nejtěžší nás teprve čeká, kováři nám do budoucna mohou velmi ulehčit život."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:299
 msgid "Fortress Needed"
@@ -540,7 +541,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
-msgstr "Pokročilá ekonomika a trénink"
+msgstr "Pokročilé hospodářství a trénink"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:319

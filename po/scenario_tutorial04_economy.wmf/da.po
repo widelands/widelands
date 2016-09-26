@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 08:07+0000\n"
+"POT-Creation-Date: 2016-09-21 08:44+0000\n"
+"PO-Revision-Date: 2016-09-21 13:45+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -718,6 +718,10 @@ msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
 msgstr "Angiv målmængden for marmorsøjler til 20 og vent på at din stenhugger fremstiller dem."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Fremstil 20 marmorkolonner."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""

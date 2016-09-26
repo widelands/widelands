@@ -14,14 +14,14 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
-# Matteo Viarengo <enthusedquill6@gmail.com>, 2016
+# theo the best <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-15 06:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-21 08:44+0000\n"
+"PO-Revision-Date: 2016-09-23 16:32+0000\n"
+"Last-Translator: Davide Nicolini <davide97@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1879,7 +1879,7 @@ msgstr "Metti in pausa la partita"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
 #: ../../data/tribes/scripting/help/controls.lua:41
 msgid "Toggle census"
-msgstr ""
+msgstr "disattiva censo"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:43
@@ -1982,30 +1982,60 @@ msgstr "Nella finestra di messaggio, sono disponibili le seguenti scorciatoie:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Mostra tutti i messaggi"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Mostra solamente i messaggi dei geologi"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Mostra solamente i messaggi relativi all'economia"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Mostra solamente i messaggi relativi alla navigazione in mare"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Mostra solamente i messaggi relativi alla guerra"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Mostra solamente i messaggi sullo scenario"
@@ -2079,20 +2109,28 @@ msgstr "Edifici"
 msgid "About Widelands"
 msgstr "Riguardo a Widelands"
 
-#: ../../data/tribes/scripting/help/ware_help.lua:34
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. Languages using Chinese script probably want to lose the blank space here.
+#: ../../data/tribes/scripting/help/ware_help.lua:33
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#: ../../data/tribes/scripting/help/ware_help.lua:36
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
 msgstr "Scopo"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-#: ../../data/tribes/scripting/help/ware_help.lua:54
+#: ../../data/tribes/scripting/help/ware_help.lua:56
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
 msgstr "Produttore"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:97
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Merce prodotta:"
@@ -2100,7 +2138,7 @@ msgstr[1] "Merci prodotte:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:158
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Consumatore"
@@ -2323,7 +2361,7 @@ msgid ""
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
-msgstr ""
+msgstr "Solo questa birra è considerata accettabile per i soldati nell' Arena di Battaglia. In molti dicono che l'intera potenza dei Barbari risale in questa birra. Aiuta a allenare il livello di evasione dei soldati da 0 a 1 a 2. La birra forte e anche usata nelle grandi locande per preparare le pasti"
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
@@ -2835,7 +2873,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr ""
+msgstr "I tronchi sono un importante risorsa base per gli edifici. Vengono prodotti abbattendo gli alberi."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:6
@@ -3024,7 +3062,7 @@ msgstr ""
 #: ../../data/tribes/wares/ration/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
-msgstr ""
+msgstr "Le razioni sono prodotte in taverna con il pesce o la carne o il pane."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -3528,7 +3566,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produce armi per i soldati e strumenti per i lavoratori"
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/barbarians/brewer/helptexts.lua:3
@@ -3591,7 +3629,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Coltiva paglia di canne."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -3603,7 +3641,7 @@ msgstr "Scopre le risorse del sottosuolo."
 #: ../../data/tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Forgia elmi per i soldati."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/barbarians/hunter/helptexts.lua:3
@@ -3693,7 +3731,7 @@ msgstr "Allena i soldati."
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Produce tessuto per le vele delle navi."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/empire/armorsmith/helptexts.lua:3
@@ -3743,7 +3781,7 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
+msgstr "Gli asini aiutano a trasportare oggetti per le strade trafficate. Vengono allevati in un allevamento di asini."
 
 #. TRANSLATORS: Helptext for a worker: Donkey Breeder
 #: ../../data/tribes/workers/empire/donkeybreeder/helptexts.lua:3

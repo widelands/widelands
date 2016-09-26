@@ -6,14 +6,14 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
 # GunChleoc, 2016
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015
+# Madkat Here, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 15:16+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -291,7 +291,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "Me dieron el mensaje de que nuestro primer leñador ha comenzado su trabajo en la actualidad. Tal vez sería una buena idea esperar hasta que haya liberado el espacio suficiente para construir dos casas más de leñador, de manera que podamos cortar los troncos más rápido."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:174
@@ -316,7 +316,7 @@ msgstr "Tengo dos cosas importantes que contarte...Primero las buenas noticias:"
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "Me di cuenta de que la construcción del aserradero está completa, por lo que podemos comenzar a refinar los troncos que los leñadores están cortando en tablones."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189

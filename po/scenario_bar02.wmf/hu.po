@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
@@ -9,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-01 14:50+0000\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 10:19+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +31,7 @@ msgstr "Kezdj bele az alapvető építőanyagok gyűjtésébe és erősítsd meg
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr "Építs egy favágóházat."
+msgstr "Építs egy favágóházat"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
@@ -94,7 +95,7 @@ msgstr "Ne felejts el építeni egy marhafarmot"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "Ahogy az utaid egyre hosszabbak lesznek és"
+msgstr "Ahogy az utaid egyre hosszabbak és a gazdaságod egyre nagyobbak lesznek, jó hasznát vehetnéd az ökreidnek, hogy segítség az áruid gyorsabb szállítását."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
@@ -284,7 +285,7 @@ msgstr "Kételyek"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Boldreth is shaking his head…"
-msgstr "Boldreth rázza a fejét..."
+msgstr "Boldreth rázza a fejét…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
@@ -474,7 +475,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Az első erődítmény, amit Thron rendelt elkészült. Pillanatnyilag szeretné elnyerni azok bizalmát és hitét, akik kint élnek az új lakóhelyünk falain kívül, amit mi „Ondunnak” neveztük el, amely a régi nyelven azt jelenti, hogy „azok, akik várnak”. De Thron még nem elégedett – és teljesen megértem félelmeit: az erdő mély, az Al'thunrani határ közel van. Biztos vagyok benne, hogy ezer nagyobb veszély leselkedik ott kint, mint a járatlan utak."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:276
@@ -497,7 +498,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Épp most beszéltem az őrjáratunk vezetőjével. Azt mondta, hogy néhány hegyet találtak északkeletre és keletre a területünktől. Egy kis szerencsével ez új esélyt fog adni, hogy felfegyverezzük az embereinket, mert ha jól emlékszem, akkor az Al'thunrantól nyugatra fekvő hegyek szenet és némi fémércet rejtenek."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
 msgid "Mining Economy Completed"
@@ -524,7 +525,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth és én most fedeztünk fel egy területet a három hegy körül. Úgy tűnik, hogy a terület egyik fő stratégiai problémája az, hogy két nagyobb átjáró is van – egy északra és egy délre a központi hegytől. Azok az átjárók nehezen tárhatóak ellenőrzés alatt, így csak egy esélyünk van biztosítani a hegyet az ellenséges kezektől: egy erődöt kell építenünk a hegytől keletre!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
 msgid "Fortress Completed"
@@ -581,7 +582,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Semmi sem maradt abból a szépségből, amire emlékszem, csak romok maradtak a fővárosból. Szomorú vagyok, de megkönnyebbült is. Sosem reméltem, hogy még egyszer látom Al'thunran régi szépségét – alig néhány hónapja volt, hogy azon gondolkodtam, hogy vajon egyszer újra betehetem-e oda a lábam. Most az óváros újra a kezeim között van, és nem tétovázom, hogy újjáépítsem a népem erejével. Alig várom, hogy újra a régi szépségében lássam."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"
