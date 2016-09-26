@@ -177,7 +177,7 @@ protected:
 	/// \param name:                Internal name of the button
 	/// \param tooltip:             The button tooltip
 	/// \param window:              The window that's associated with this button.
-	/// \param bind_default_toggle: If true, the button will toggle the 'window'.
+	/// \param bind_default_toggle: If true, the button will toggle with its 'window'.
 	UI::Button* add_toolbar_button(const std::string& image_basename,
 	                               const std::string& name,
 	                               const std::string& tooltip,
