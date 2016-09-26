@@ -152,7 +152,9 @@ MapData const* FullscreenMenuMapSelect::get_map() const {
 }
 
 void FullscreenMenuMapSelect::clicked_ok() {
-	assert(table_.has_selection());
+	if (!table_.has_selection()) {
+		return;
+	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 
 	if (!mapdata.width) {
@@ -276,9 +278,8 @@ void FullscreenMenuMapSelect::fill_table() {
 	table_.fill(maps_data_, display_type);
 	if (!table_.empty()) {
 		table_.select(0);
-	} else {
-		ok_.set_enabled(false);
 	}
+	set_has_selection();
 }
 
 /*

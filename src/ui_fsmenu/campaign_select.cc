@@ -118,6 +118,9 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
  * OK was clicked, after an entry of campaignlist got selected.
  */
 void FullscreenMenuCampaignSelect::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
 	get_campaign();
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
@@ -241,6 +244,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
@@ -491,4 +495,5 @@ void FullscreenMenuCampaignMapSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
