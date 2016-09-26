@@ -450,18 +450,14 @@ void InteractiveBase::move_view_to_point(Point pos) {
 }
 
 // Open the minimap or close it if it's open
-void InteractiveBase::toggle_minimap() {
-	if (m->minimap.window) {
-		delete m->minimap.window;
-	} else {
-		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::minimap_warp, this, _1, _2));
+void InteractiveBase::open_minimap() {
+	m->mm = new MiniMap(*this, &m->minimap);
+	m->mm->warpview.connect(boost::bind(&InteractiveBase::minimap_warp, this, _1, _2));
 
-		// make sure the viewpos marker is at the right pos to start with
-		const Point p = get_viewpoint();
+	// make sure the viewpos marker is at the right pos to start with
+	const Point p = get_viewpoint();
 
-		mainview_move(p.x, p.y);
-	}
+	mainview_move(p.x, p.y);
 }
 
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {

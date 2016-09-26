@@ -113,7 +113,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                                               &toolsizemenu_,
                                               true)),
      toggle_minimap_(add_toolbar_button(
-        "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry())),
+        "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true)),
      toggle_buildhelp_(add_toolbar_button(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
      toggle_player_menu_(add_toolbar_button(
@@ -124,8 +124,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
 	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
 	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
-
-	toggle_minimap_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
+	minimap_registry().open_window = [this] { open_minimap(); };
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
 
 	playermenu_.open_window = [this] {
@@ -412,7 +411,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_m:
-			toggle_minimap();
+			minimap_registry().toggle();
 			handled = true;
 			break;
 

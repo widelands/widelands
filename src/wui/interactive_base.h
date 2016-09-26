@@ -162,7 +162,7 @@ public:
 		return *edge_overlay_manager_;
 	}
 
-	void toggle_minimap();
+	void open_minimap();
 	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9

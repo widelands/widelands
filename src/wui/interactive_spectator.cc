@@ -66,9 +66,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	};
 
 	toggle_minimap_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry());
-	toggle_minimap_->sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
-	// NOCOM minimap is special case - investigate.
+	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
+	minimap_registry().open_window = [this] { open_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
@@ -154,7 +153,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_m:
-			toggle_minimap();
+			minimap_registry().toggle();
 			return true;
 
 		case SDLK_c:
