@@ -471,7 +471,7 @@ void InteractiveBase::set_landmark(size_t key, const Point& point) {
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
 void InteractiveBase::hide_minimap() {
-	delete m->minimap.window;
+	m->minimap.destroy();
 }
 
 /**

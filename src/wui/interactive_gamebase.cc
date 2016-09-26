@@ -119,9 +119,7 @@ void InteractiveGameBase::postload() {
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete fieldaction_.window;
-	fieldaction_.window = nullptr;
-
+	fieldaction_.destroy();
 	hide_minimap();
 }
 
