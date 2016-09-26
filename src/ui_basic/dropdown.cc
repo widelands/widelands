@@ -76,8 +76,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
            0,
            show_tick),  // Hook into parent so we can drop down outside the panel
      label_(label) {
-	// Make sure that the list covers and deactivates the elements below it
-	list_.set_layout_toplevel(true);
 	list_.set_visible(false);
 	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));
 	display_button_.set_perm_pressed(true);
@@ -134,6 +132,7 @@ void BaseDropdown::set_pos(Point point) {
 void BaseDropdown::clear() {
 	list_.clear();
 	list_.set_size(list_.get_w(), 0);
+	set_layout_toplevel(false);
 }
 
 uint32_t BaseDropdown::size() const {
@@ -158,9 +157,28 @@ void BaseDropdown::set_value() {
 void BaseDropdown::toggle_list() {
 	list_.set_visible(!list_.is_visible());
 	if (list_.is_visible()) {
+		// Make sure that the list covers and deactivates the elements below it
+		set_layout_toplevel(true);
 		list_.move_to_top();
-		list_.focus();
+		focus();
+	} else {
+		set_layout_toplevel(false);
 	}
+}
+
+bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+			if (list_.is_visible()) {
+				toggle_list();
+				return true;
+			}
+		default:
+			break;  // not handled
+		}
+	}
+	return false;
 }
 
 }  // namespace UI

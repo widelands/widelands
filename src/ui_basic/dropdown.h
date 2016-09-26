@@ -72,6 +72,9 @@ public:
 	/// The number of elements listed in the dropdown.
 	uint32_t size() const;
 
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
