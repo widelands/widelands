@@ -86,12 +86,7 @@ private:
 	Widelands::Coords flag_to_connect_;
 
 	UI::Button* toggle_chat_;
-	UI::Button* toggle_options_menu_;
-	UI::Button* toggle_statistics_menu_;
-	UI::Button* toggle_objectives_;
-	UI::Button* toggle_minimap_;
 	UI::Button* toggle_message_menu_;
-	UI::Button* toggle_help_;
 
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;

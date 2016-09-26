@@ -182,7 +182,7 @@ protected:
 	                               const std::string& name,
 	                               const std::string& tooltip,
 	                               UI::UniqueWindow::Registry* window = nullptr,
-	                               bool bind_default_toggle = false);  // NOCOM document
+	                               bool bind_default_toggle = false);
 
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
@@ -205,7 +205,6 @@ protected:
 
 	// TODO(sirver): why are these protected?
 	ChatOverlay* chat_overlay_;
-	UI::Box toolbar_;
 
 	// These get collected by add_toolbar_button
 	// so we can call unassign_toggle_button on them in the destructor.
@@ -237,6 +236,7 @@ private:
 		FieldOverlayManager::OverlayId jobid;
 	} sel_;
 
+	UI::Box toolbar_;
 	std::unique_ptr<InteractiveBaseInternals> m;
 
 	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;

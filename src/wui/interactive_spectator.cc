@@ -43,29 +43,29 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer)
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, multiplayer) {
-	toolbar_.set_layout_toplevel(true);
 	if (is_multiplayer()) {
-		toggle_options_menu_ = add_toolbar_button(
+		add_toolbar_button(
 		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
 		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	} else {
-		exit_ = add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
-		exit_->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
+		UI::Button* button =
+		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
+		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
 
-		save_ = add_toolbar_button(
+		add_toolbar_button(
 		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
 		main_windows_.savegame.open_window = [this] {
 			new GameMainMenuSaveGame(*this, main_windows_.savegame);
 		};
 	}
-	toggle_statistics_ = add_toolbar_button("wui/menus/menu_general_stats", "general_stats",
-	                                        _("Statistics"), &main_windows_.general_stats, true);
+	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
+	                   &main_windows_.general_stats, true);
 	main_windows_.general_stats.open_window = [this] {
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 	};
 
-	toggle_minimap_ = add_toolbar_button(
+	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { open_minimap(); };
 
@@ -74,7 +74,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	if (is_multiplayer()) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 		};

@@ -66,17 +66,17 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
-	toggle_options_menu_ = add_toolbar_button(
+	add_toolbar_button(
 	   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
-	toggle_statistics_menu_ = add_toolbar_button(
+	add_toolbar_button(
 	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);
 	statisticsmenu_.open_window = [this] {
 		new GameMainMenu(*this, statisticsmenu_, main_windows_);
 	};
 
-	toggle_minimap_ = add_toolbar_button(
+	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { open_minimap(); };
 
@@ -93,7 +93,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		};
 	}
 
-	toggle_objectives_ = add_toolbar_button(
+	add_toolbar_button(
 	   "wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
@@ -101,8 +101,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	toggle_help_ = add_toolbar_button(
-	   "ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};

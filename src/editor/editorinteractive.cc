@@ -102,42 +102,42 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      tools_(new Tools()),
-     history_(new EditorHistory(*undo_, *redo_)),
-     toggle_main_menu_(
-        add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true)),
-     toggle_tool_menu_(add_toolbar_button(
-        "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true)),
-     toggle_toolsize_menu_(add_toolbar_button("wui/editor/editor_menu_set_toolsize_menu",
-                                              "toolsize",
-                                              _("Tool Size"),
-                                              &toolsizemenu_,
-                                              true)),
-     toggle_minimap_(add_toolbar_button(
-        "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true)),
-     toggle_buildhelp_(add_toolbar_button(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
-     toggle_player_menu_(add_toolbar_button(
-        "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true)),
-     undo_(add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"))),
-     redo_(add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"))),
-     toggle_help_(add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true)) {
+     history_(new EditorHistory(*undo_, *redo_)) {
+	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true);
 	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
+
+	add_toolbar_button(
+	   "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true);
 	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
+
+	add_toolbar_button(
+	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"), &toolsizemenu_, true);
 	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
+
+	add_toolbar_button(
+	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { open_minimap(); };
+
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
 
+	add_toolbar_button(
+	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
 	playermenu_.open_window = [this] {
 		select_tool(tools_->set_starting_pos, EditorTool::First);
 		new EditorPlayerMenu(*this, playermenu_);
 	};
 
+	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
 	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
+
+	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
 
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
 
-	toolbar_.set_layout_toplevel(true);
 	adjust_toolbar_position();
 
 #ifndef NDEBUG

@@ -180,15 +180,9 @@ private:
 	UI::UniqueWindow::Registry resourcesmenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
-	UI::Button* toggle_main_menu_;
-	UI::Button* toggle_tool_menu_;
-	UI::Button* toggle_toolsize_menu_;
-	UI::Button* toggle_minimap_;
 	UI::Button* toggle_buildhelp_;
-	UI::Button* toggle_player_menu_;
 	UI::Button* undo_;
 	UI::Button* redo_;
-	UI::Button* toggle_help_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

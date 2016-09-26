@@ -114,7 +114,7 @@ void InteractiveGameBase::postload() {
 	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_->set_perm_pressed(buildhelp());
+	on_buildhelp_changed(buildhelp());
 
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
