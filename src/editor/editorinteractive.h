@@ -154,11 +154,6 @@ private:
 	// Registers the overlays for player starting positions.
 	void register_overlays();
 
-	void tool_menu_btn();
-	void toolsize_menu_btn();
-	void toggle_mainmenu();
-	void toggle_playermenu();
-	void toggle_help();
 	void on_buildhelp_changed(const bool value) override;
 
 	//  state variables

@@ -103,30 +103,40 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      is_painting_(false),
      tools_(new Tools()),
      history_(new EditorHistory(*undo_, *redo_)),
-     toggle_main_menu_(add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"))),
-     toggle_tool_menu_(
-        add_toolbar_button("wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
-     toggle_toolsize_menu_(
-        add_toolbar_button("wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"))),
-     toggle_minimap_(add_toolbar_button("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
+     toggle_main_menu_(
+        add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true)),
+     toggle_tool_menu_(add_toolbar_button(
+        "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true)),
+     toggle_toolsize_menu_(add_toolbar_button("wui/editor/editor_menu_set_toolsize_menu",
+                                              "toolsize",
+                                              _("Tool Size"),
+                                              &toolsizemenu_,
+                                              true)),
+     toggle_minimap_(add_toolbar_button(
+        "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry())),
      toggle_buildhelp_(add_toolbar_button(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
-     toggle_player_menu_(
-        add_toolbar_button("wui/editor/editor_menu_player_menu", "players", _("Players"))),
+     toggle_player_menu_(add_toolbar_button(
+        "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true)),
      undo_(add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"))),
      redo_(add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"))),
-     toggle_help_(add_toolbar_button("ui_basic/menu_help", "help", _("Help"))) {
-	toggle_main_menu_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
-	toggle_tool_menu_->sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
-	toggle_toolsize_menu_->sigclicked.connect(
-	   boost::bind(&EditorInteractive::toolsize_menu_btn, this));
+     toggle_help_(add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true)) {
+	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
+	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
+	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
+
 	toggle_minimap_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	toggle_player_menu_->sigclicked.connect(
-	   boost::bind(&EditorInteractive::toggle_playermenu, this));
+
+	playermenu_.open_window = [this] {
+		select_tool(tools_->set_starting_pos, EditorTool::First);
+		new EditorPlayerMenu(*this, playermenu_);
+	};
+
 	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
-	toggle_help_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
+
+	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
 
 	toolbar_.set_layout_toplevel(true);
 	adjust_toolbar_position();
@@ -259,13 +269,6 @@ void EditorInteractive::exit() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-void EditorInteractive::toggle_mainmenu() {
-	if (mainmenu_.window)
-		delete mainmenu_.window;
-	else
-		new EditorMainMenu(*this, mainmenu_);
-}
-
 void EditorInteractive::map_clicked(bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, egbase().map(), egbase().world(),
 	                    get_sel_pos(), *this, should_draw);
@@ -296,29 +299,6 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 		map_clicked(true);
 }
 
-void EditorInteractive::tool_menu_btn() {
-	if (toolmenu_.window)
-		delete toolmenu_.window;
-	else
-		new EditorToolMenu(*this, toolmenu_);
-}
-
-void EditorInteractive::toggle_playermenu() {
-	if (playermenu_.window)
-		delete playermenu_.window;
-	else {
-		select_tool(tools_->set_starting_pos, EditorTool::First);
-		new EditorPlayerMenu(*this, playermenu_);
-	}
-}
-
-void EditorInteractive::toolsize_menu_btn() {
-	if (toolsizemenu_.window)
-		delete toolsizemenu_.window;
-	else
-		new EditorToolsizeMenu(*this, toolsizemenu_);
-}
-
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	if (tools_->current().has_size_one()) {
 		set_sel_radius(0);
@@ -337,13 +317,6 @@ void EditorInteractive::start_painting() {
 
 void EditorInteractive::stop_painting() {
 	is_painting_ = false;
-}
-
-void EditorInteractive::toggle_help() {
-	if (helpmenu_.window)
-		delete helpmenu_.window;
-	else
-		new EditorHelp(*this, helpmenu_, &egbase().lua());
 }
 
 void EditorInteractive::on_buildhelp_changed(const bool value) {
@@ -429,7 +402,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_h:
-			toggle_mainmenu();
+			mainmenu_.toggle();
 			handled = true;
 			break;
 
@@ -450,7 +423,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_p:
-			toggle_playermenu();
+			playermenu_.toggle();
 			handled = true;
 			break;
 
@@ -461,7 +434,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_t:
-			tool_menu_btn();
+			toolmenu_.toggle();
 			handled = true;
 			break;
 
@@ -480,7 +453,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_F1:
-			toggle_help();
+			helpmenu_.toggle();
 			handled = true;
 			break;
 
