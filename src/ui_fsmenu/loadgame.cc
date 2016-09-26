@@ -249,6 +249,9 @@ bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t row
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
 	const SavegameData& gamedata = games_data_[table_.get_selected()];
 	if (gamedata.errormessage.empty()) {
 		filename_ = gamedata.filename;
