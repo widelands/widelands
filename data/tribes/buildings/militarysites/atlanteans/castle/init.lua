@@ -24,7 +24,7 @@ dirname = path.dirname(__file__)
 --
 --    **name**: A string containing the internal name of this building.
 --
---    **descname**: The translatable display name. use ``pgettext`` with the ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` with the ``msgctxt`` above to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this building.
 --
