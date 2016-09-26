@@ -2,7 +2,8 @@
 -- Ships
 -- -----
 --
--- Each tribe can have one ship that is used to explore the seas and trade between ports.
+-- Each tribe can have one ship that is used to explore the seas and transport
+-- wares between ports.
 --
 -- Ships are defined in
 -- ``data/tribes/ships/<tribe_name>/init.lua``.

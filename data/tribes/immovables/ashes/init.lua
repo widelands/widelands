@@ -29,7 +29,7 @@ dirname = path.dirname(__file__)
 --    **programs**: A table with the programs that this immovable will perform,
 --    e.g. ``{ animate=idle 4500,  remove= }``
 --
---    **animations**: A table containing all animations for this building.
+--    **animations**: A table containing all animations for this immovable.
 --
 tribes:new_immovable_type {
    msgctxt = "immovable",
