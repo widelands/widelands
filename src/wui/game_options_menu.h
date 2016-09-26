@@ -42,7 +42,6 @@ private:
 	UI::Button save_game_;
 	UI::Button exit_game_;
 
-	void clicked_sound();
 	void clicked_save_game();
 	void clicked_exit_game();
 };
