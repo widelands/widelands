@@ -152,7 +152,9 @@ MapData const* FullscreenMenuMapSelect::get_map() const {
 }
 
 void FullscreenMenuMapSelect::clicked_ok() {
-	assert(table_.has_selection());
+	if (!table_.has_selection()) {
+		return;
+	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 
 	if (!mapdata.width) {

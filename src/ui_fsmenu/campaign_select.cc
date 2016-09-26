@@ -118,6 +118,9 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
  * OK was clicked, after an entry of campaignlist got selected.
  */
 void FullscreenMenuCampaignSelect::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
 	get_campaign();
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
