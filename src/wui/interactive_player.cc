@@ -46,11 +46,11 @@
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
-#include "wui/game_main_menu.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/game_options_menu.h"
+#include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
@@ -73,7 +73,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);
 	statisticsmenu_.open_window = [this] {
-		new GameMainMenu(*this, statisticsmenu_, main_windows_);
+		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
 	add_toolbar_button(

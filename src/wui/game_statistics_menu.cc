@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/game_main_menu.h"
+#include "wui/game_statistics_menu.h"
 
 #include <boost/bind.hpp>
 
@@ -30,9 +30,9 @@
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 
-GameMainMenu::GameMainMenu(InteractivePlayer& plr,
-                           UI::UniqueWindow::Registry& registry,
-                           InteractivePlayer::GameMainMenuWindows& windows)
+GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
+                                       UI::UniqueWindow::Registry& registry,
+                                       InteractivePlayer::GameMainMenuWindows& windows)
    : UI::UniqueWindow(&plr, "main_menu", &registry, 0, 0, _("Statistics Menu")),
      player_(plr),
      windows_(windows),
@@ -63,10 +63,10 @@ GameMainMenu::GameMainMenu(InteractivePlayer& plr,
 		center_to_parent();
 }
 
-UI::Button* GameMainMenu::add_button(const std::string& image_basename,
-                                     const std::string& name,
-                                     const std::string& tooltip,
-                                     UI::UniqueWindow::Registry* window) {
+UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
+                                           const std::string& name,
+                                           const std::string& tooltip,
+                                           UI::UniqueWindow::Registry* window) {
 	UI::Button* button =
 	   new UI::Button(&box_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but4.png"),
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip);
@@ -80,7 +80,7 @@ UI::Button* GameMainMenu::add_button(const std::string& image_basename,
 	return button;
 }
 
-GameMainMenu::~GameMainMenu() {
+GameStatisticsMenu::~GameStatisticsMenu() {
 	for (auto& registry : registries_) {
 		registry.unassign_toggle_button();
 	}

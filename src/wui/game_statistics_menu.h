@@ -17,19 +17,20 @@
  *
  */
 
-#ifndef WL_WUI_GAME_MAIN_MENU_H
-#define WL_WUI_GAME_MAIN_MENU_H
+#ifndef WL_WUI_GAME_STATISTICS_MENU_H
+#define WL_WUI_GAME_STATISTICS_MENU_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_player.h"
 
-// The GameMainMenu is a rather dumb window with lots of buttons
-struct GameMainMenu : public UI::UniqueWindow {
-	GameMainMenu(InteractivePlayer&,
-	             UI::UniqueWindow::Registry&,
-	             InteractivePlayer::GameMainMenuWindows&);
+// The GameStatisticsMenu is a row of buttons that will toggle unique windows
+struct GameStatisticsMenu : public UI::UniqueWindow {
+	GameStatisticsMenu(InteractivePlayer&,
+	                   UI::UniqueWindow::Registry&,
+	                   InteractivePlayer::GameMainMenuWindows&);
 
-	~GameMainMenu();
+	~GameStatisticsMenu();
 
 private:
 	/// Adds a button to the menu that will toggle its window
@@ -52,4 +53,4 @@ private:
 	std::vector<UI::UniqueWindow::Registry> registries_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_H
+#endif  // end of include guard: WL_WUI_GAME_STATISTICS_MENU_H
