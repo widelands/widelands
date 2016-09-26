@@ -50,7 +50,6 @@ public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
-	                    bool chatenabled = false,
 	                    bool multiplayer = false);
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
@@ -87,7 +86,6 @@ protected:
 
 	GameMainMenuWindows main_windows_;
 	ChatProvider* chat_provider_;
-	bool chatenabled_;
 	bool multiplayer_;
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;

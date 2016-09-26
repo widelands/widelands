@@ -49,11 +49,9 @@ std::string speed_string(int const speed) {
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const chatenabled,
                                          bool const multiplayer)
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
-     chatenabled_(chatenabled),
      multiplayer_(multiplayer),
      playertype_(pt) {
 }
@@ -70,8 +68,6 @@ Widelands::Game& InteractiveGameBase::game() const {
 void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
 	chat_provider_ = &chat;
 	chat_overlay_->set_chat_provider(chat);
-
-	chatenabled_ = true;
 }
 
 ChatProvider* InteractiveGameBase::get_chat_provider() {

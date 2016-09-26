@@ -42,7 +42,7 @@
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, multiplayer) {
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
 	if (is_multiplayer()) {
 		add_toolbar_button(
 		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
@@ -76,7 +76,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	if (is_multiplayer()) {
 		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
-			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			if (chat_provider_) {
+				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			}
 		};
 	}
 
@@ -169,15 +171,13 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
-			if (!chat_provider_ | !chatenabled_)
-				break;
-
-			if (!chat_.window)
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-
-			dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			if (chat_provider_) {
+				if (!chat_.window) {
+					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+				}
+				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			}
 			return true;
-
 		default:
 			break;
 		}

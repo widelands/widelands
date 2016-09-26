@@ -63,7 +63,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Section& global_s,
                                      Widelands::PlayerNumber const plyn,
                                      bool const multiplayer)
-   : InteractiveGameBase(g, global_s, NONE, multiplayer, multiplayer),
+   : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
 	add_toolbar_button(
@@ -144,8 +144,8 @@ void InteractivePlayer::think() {
 		}
 	}
 	if (is_multiplayer()) {
-		toggle_chat_->set_visible(chatenabled_);
-		toggle_chat_->set_enabled(chatenabled_);
+		toggle_chat_->set_visible(chat_provider_);
+		toggle_chat_->set_enabled(chat_provider_);
 	}
 	{
 		char const* msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
@@ -272,12 +272,12 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!chat_provider_ | !chatenabled_ || !is_multiplayer())
-				break;
-
-			if (!chat_.window)
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-
+			if (chat_provider_) {
+				if (!chat_.window) {
+					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+				}
+				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			}
 			return true;
 		default:
 			break;
