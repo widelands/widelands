@@ -48,8 +48,6 @@ public:
 	                  Widelands::PlayerNumber,
 	                  bool multiplayer);
 
-	~InteractivePlayer();
-
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;

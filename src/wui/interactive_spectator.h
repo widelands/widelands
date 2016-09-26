@@ -40,8 +40,6 @@ class Game;
 struct InteractiveSpectator : public InteractiveGameBase {
 	InteractiveSpectator(Widelands::Game&, Section& global_s, bool multiplayer = false);
 
-	~InteractiveSpectator();
-
 	Widelands::Player* get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;

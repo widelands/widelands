@@ -172,11 +172,12 @@ public:
 
 protected:
 	/// Adds a toolbar button to the toolbar
-	/// \param image_basename: File path for button image starting from 'images' and without file
-	/// extension
-	/// \param name:           Internal name of the button
-	/// \param tooltip:        The button tooltip
-	/// \param window:         The window that's associated with this button.
+	/// \param image_basename:      File path for button image starting from 'images' and without
+	///                             file extension
+	/// \param name:                Internal name of the button
+	/// \param tooltip:             The button tooltip
+	/// \param window:              The window that's associated with this button.
+	/// \param bind_default_toggle: If true, the button will toggle the 'window'.
 	UI::Button* add_toolbar_button(const std::string& image_basename,
 	                               const std::string& name,
 	                               const std::string& tooltip,
@@ -205,6 +206,10 @@ protected:
 	// TODO(sirver): why are these protected?
 	ChatOverlay* chat_overlay_;
 	UI::Box toolbar_;
+
+	// These get collected by add_toolbar_button
+	// so we can call unassign_toggle_button on them in the destructor.
+	std::vector<UI::UniqueWindow::Registry> registries_;
 
 private:
 	void resize_chat_overlay();

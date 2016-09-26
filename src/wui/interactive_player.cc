@@ -119,16 +119,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 #endif
 }
 
-InteractivePlayer::~InteractivePlayer() {
-	chat_.unassign_toggle_button();
-	options_.unassign_toggle_button();
-	statisticsmenu_.unassign_toggle_button();
-	minimap_registry().unassign_toggle_button();
-	objectives_.unassign_toggle_button();
-	message_menu_.unassign_toggle_button();
-	encyclopedia_.unassign_toggle_button();
-}
-
 void InteractivePlayer::think() {
 	InteractiveBase::think();
 

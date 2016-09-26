@@ -87,14 +87,6 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 }
 
-InteractiveSpectator::~InteractiveSpectator() {
-	chat_.unassign_toggle_button();
-	options_.unassign_toggle_button();
-	main_windows_.general_stats.unassign_toggle_button();
-	main_windows_.savegame.unassign_toggle_button();
-	minimap_registry().unassign_toggle_button();
-}
-
 /**
  * \return "our" player.
  *

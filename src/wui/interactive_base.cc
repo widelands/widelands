@@ -136,8 +136,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 }
 
 InteractiveBase::~InteractiveBase() {
-	if (buildroad_)
+	if (buildroad_) {
 		abort_build_road();
+	}
+	for (auto& registry : registries_) {
+		registry.unassign_toggle_button();
+	}
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -231,6 +235,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	toolbar_.add(button, UI::Align::kLeft);
 	if (window) {
 		window->assign_toggle_button(button);
+		registries_.push_back(*window);
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
 			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
