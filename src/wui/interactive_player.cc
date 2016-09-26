@@ -66,15 +66,15 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
-	toggle_options_menu_ =
-	   add_toolbar_button("wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_);
-	toggle_options_menu_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(options_)));
+	toggle_options_menu_ = add_toolbar_button(
+	   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	toggle_statistics_menu_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_);
-	toggle_statistics_menu_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(statisticsmenu_)));
+	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);
+	statisticsmenu_.open_window = [this] {
+		new GameMainMenu(*this, statisticsmenu_, main_windows_);
+	};
 
 	toggle_minimap_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry());
@@ -85,39 +85,33 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	if (multiplayer) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_);
-		toggle_chat_->sigclicked.connect(boost::bind(&InteractivePlayer::toggle_chat, this));
+		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		chat_.open_window = [this] {
+			if (chat_provider_) {
+				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			}
+		};
 	}
 
-	toggle_objectives_ =
-	   add_toolbar_button("wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_);
-	toggle_objectives_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(objectives_)));
+	toggle_objectives_ = add_toolbar_button(
+	   "wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_, true);
+	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
 	toggle_message_menu_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_);
-	toggle_message_menu_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(message_menu_)));
+	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
+	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	toggle_help_ =
-	   add_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_);
-	toggle_help_->sigclicked.connect(
-	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(encyclopedia_)));
+	toggle_help_ = add_toolbar_button(
+	   "ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
+	encyclopedia_.open_window = [this] {
+		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
+	};
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
 
-	encyclopedia_.open_window = [this] {
-		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
-	};
-	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
-	statisticsmenu_.open_window = [this] {
-		new GameMainMenu(*this, statisticsmenu_, main_windows_);
-	};
-	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
-	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
 
 #ifndef NDEBUG  //  only in debug builds
@@ -184,14 +178,6 @@ void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
 	message_menu_.create();
 	dynamic_cast<GameMessageMenu&>(*message_menu_.window).show_new_message(id, message);
-}
-
-//  Toolbar button callback functions.
-void InteractivePlayer::toggle_chat() {
-	if (chat_.window)
-		delete chat_.window;
-	else if (chat_provider_)
-		GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 }
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const {

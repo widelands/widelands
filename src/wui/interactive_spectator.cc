@@ -46,33 +46,39 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toolbar_.set_layout_toplevel(true);
 	if (is_multiplayer()) {
 		toggle_options_menu_ = add_toolbar_button(
-		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_);
-		toggle_options_menu_->sigclicked.connect(
-		   boost::bind(&InteractiveSpectator::toggle_options_menu, this));
+		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+
 	} else {
 		exit_ = add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
 		exit_->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
 
 		save_ = add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame);
-		save_->sigclicked.connect(boost::bind(&InteractiveSpectator::save_btn, this));
+		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
+		main_windows_.savegame.open_window = [this] {
+			new GameMainMenuSaveGame(*this, main_windows_.savegame);
+		};
 	}
 	toggle_statistics_ = add_toolbar_button("wui/menus/menu_general_stats", "general_stats",
-	                                        _("Statistics"), &main_windows_.general_stats);
-	toggle_statistics_->sigclicked.connect(
-	   boost::bind(&InteractiveSpectator::toggle_statistics, this));
+	                                        _("Statistics"), &main_windows_.general_stats, true);
+	main_windows_.general_stats.open_window = [this] {
+		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	};
 
 	toggle_minimap_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry());
 	toggle_minimap_->sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
+	// NOCOM minimap is special case - investigate.
 
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	if (is_multiplayer()) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_);
-		toggle_chat_->sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
+		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		chat_.open_window = [this] {
+			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+		};
 	}
 
 	adjust_toolbar_position();
@@ -113,46 +119,11 @@ int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widel
 }
 
 // Toolbar button callback functions.
-void InteractiveSpectator::toggle_chat() {
-	if (chat_.window)
-		delete chat_.window;
-	else if (chat_provider_)
-		GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-}
-
 void InteractiveSpectator::exit_btn() {
 	if (is_multiplayer()) {
 		return;
 	}
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-}
-
-void InteractiveSpectator::save_btn() {
-	if (is_multiplayer()) {
-		return;
-	}
-	if (main_windows_.savegame.window)
-		delete main_windows_.savegame.window;
-	else {
-		new GameMainMenuSaveGame(*this, main_windows_.savegame);
-	}
-}
-
-void InteractiveSpectator::toggle_options_menu() {
-	if (!is_multiplayer()) {
-		return;
-	}
-	if (options_.window)
-		delete options_.window;
-	else
-		new GameOptionsMenu(*this, options_, main_windows_);
-}
-
-void InteractiveSpectator::toggle_statistics() {
-	if (main_windows_.general_stats.window)
-		delete main_windows_.general_stats.window;
-	else
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 }
 
 bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {

@@ -47,11 +47,7 @@ struct InteractiveSpectator : public InteractiveGameBase {
 	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
-	void toggle_chat();
-	void toggle_options_menu();
-	void toggle_statistics();
 	void exit_btn();
-	void save_btn();
 	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;

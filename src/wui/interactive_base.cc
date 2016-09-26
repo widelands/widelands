@@ -223,13 +223,18 @@ void InteractiveBase::toggle_buildhelp() {
 UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,
                                                 const std::string& name,
                                                 const std::string& tooltip,
-                                                UI::UniqueWindow::Registry* window) {
+                                                UI::UniqueWindow::Registry* window,
+                                                bool bind_default_toggle) {
 	UI::Button* button = new UI::Button(
 	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip);
 	toolbar_.add(button, UI::Align::kLeft);
 	if (window) {
 		window->assign_toggle_button(button);
+		if (bind_default_toggle) {
+			button->sigclicked.connect(
+			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
+		}
 	}
 	return button;
 }

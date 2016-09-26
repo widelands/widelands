@@ -180,7 +180,8 @@ protected:
 	UI::Button* add_toolbar_button(const std::string& image_basename,
 	                               const std::string& name,
 	                               const std::string& tooltip,
-	                               UI::UniqueWindow::Registry* window = nullptr);
+	                               UI::UniqueWindow::Registry* window = nullptr,
+	                               bool bind_default_toggle = false);  // NOCOM document
 
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
