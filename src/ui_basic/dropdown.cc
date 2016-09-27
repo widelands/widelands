@@ -119,6 +119,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 }
 
 void BaseDropdown::set_enabled(bool on) {
+	set_can_focus(on);
 	push_button_.set_enabled(on);
 	push_button_.set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
 	display_button_.set_enabled(on);
@@ -138,7 +139,7 @@ void BaseDropdown::clear() {
 
 void BaseDropdown::think() {
 	if (list_.is_visible()) {
-		// Autocollapse with a bit of toleracne for the mouse movement to make it less fiddly.
+		// Autocollapse with a bit of tolerance for the mouse movement to make it less fiddly.
 		if (!has_focus() || (get_mouse_position().x + mouse_tolerance_) < 0 ||
 		    get_mouse_position().x > (get_w() + mouse_tolerance_) ||
 		    (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
@@ -170,26 +171,36 @@ void BaseDropdown::set_value() {
 void BaseDropdown::toggle_list() {
 	list_.set_visible(!list_.is_visible());
 	if (list_.is_visible()) {
-		// Make sure that the list covers and deactivates the elements below it
-		set_layout_toplevel(true);
 		list_.move_to_top();
 		focus();
-	} else {
-		set_layout_toplevel(false);
 	}
+	// Make sure that the list covers and deactivates the elements below it
+	set_layout_toplevel(list_.is_visible());
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
 			if (list_.is_visible()) {
 				toggle_list();
 				return true;
 			}
+			break;
+		case SDLK_DOWN:
+			if (!list_.is_visible()) {
+				toggle_list();
+				return true;
+			}
+			break;
 		default:
 			break;  // not handled
 		}
+	}
+	if (list_.is_visible()) {
+		return list_.handle_key(down, code);
 	}
 	return false;
 }
