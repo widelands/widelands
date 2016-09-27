@@ -112,6 +112,7 @@ private:
 	UI::Listselect<uintptr_t> list_;
 	std::string label_;
 	std::string tooltip_;
+	uint32_t current_selection_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.

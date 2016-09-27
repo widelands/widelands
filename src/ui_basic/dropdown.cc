@@ -86,7 +86,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	push_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
-	list_.selected.connect(boost::bind(&BaseDropdown::set_value, this));
+	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 }
 
@@ -98,6 +98,9 @@ void BaseDropdown::add(const std::string& name,
 	list_.set_size(
 	   list_.get_w(), std::min(list_.get_h() + list_.get_lineheight(), max_list_height_));
 	list_.add(name, value, pic, select_this, tooltip_text);
+	if (select_this) {
+		set_value();
+	}
 }
 
 bool BaseDropdown::has_selection() const {
@@ -166,6 +169,7 @@ void BaseDropdown::set_value() {
 	}
 	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
 	selected();
+	current_selection_ = list_.selection_index();
 }
 
 void BaseDropdown::toggle_list() {
@@ -181,10 +185,14 @@ void BaseDropdown::toggle_list() {
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_ESCAPE:
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (list_.is_visible()) {
+				set_value();
+			}
+		case SDLK_ESCAPE:
+			if (list_.is_visible()) {
+				list_.select(current_selection_);
 				toggle_list();
 				return true;
 			}
