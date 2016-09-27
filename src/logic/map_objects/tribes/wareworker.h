@@ -28,11 +28,8 @@ namespace Widelands {
  *
  * @note These values are written into savegames
  */
-enum WareWorker {
-	wwWARE = 0,
-	wwWORKER = 1
-};
+enum WareWorker { wwWARE = 0, wwWORKER = 1 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WAREWORKER_H

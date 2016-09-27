@@ -1,10 +1,10 @@
-include "scripting/formatting.lua"
-
 -- RST
 -- format_help.lua
--- ---------------
-
+-- -------------------------------------
+--
 -- Functions used in the ingame help windows for formatting the text and pictures.
+
+include "scripting/formatting.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -63,7 +63,7 @@ end
 
 
 -- RST
--- .. function help_ware_amount_line(ware_description, amount)
+-- .. function:: help_ware_amount_line(ware_description, amount)
 --
 --    Displays an amount of wares with name and images
 --
@@ -88,7 +88,7 @@ function help_ware_amount_line(ware_description, amount)
 end
 
 -- RST
--- .. function help_tool_string(tribe, toolname, no_of_workers)
+-- .. function:: help_tool_string(tribe, toolname, no_of_workers)
 --
 --    Displays tools with an intro text and images
 --
@@ -106,21 +106,18 @@ function help_tool_string(tribe, toolnames, no_of_workers)
          result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
       end
    end
-   if (result ~= "") then
-      -- TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
-      result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers))) .. result
-   end
    return result
 end
 
 
 -- RST
--- .. function help_consumed_wares(building, program_name)
+-- .. function:: help_consumed_wares(building, program_name)
 --
 --    Returns information for which wares in which amounts are consumed by a produciton program.
 --
 --    :arg tribe: The :class:`LuaBuildingDescription` for the building that runs the program
 --    :arg program_name: The name of the production program that the info is collected for
+--
 --    :returns: A "Ware(s) consumed:" section with image_lines
 --
 function help_consumed_wares(building, program_name)
@@ -141,7 +138,7 @@ function help_consumed_wares(building, program_name)
          count = count + 1
          consumed_wares_counter = consumed_wares_counter + amount
       end
-      local text = localize_list(consumed_warenames, "or")
+      local text = localize_list(consumed_warenames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end

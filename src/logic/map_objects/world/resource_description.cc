@@ -31,12 +31,14 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      detectable_(table.get_bool("detectable")),
-     max_amount_(table.get_int("max_amount")) {
+     max_amount_(table.get_int("max_amount")),
+     representative_image_(table.get_string("representative_image")) {
 
 	std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
 	const std::set<int> keys = st->keys<int>();
 	for (int upper_limit : keys) {
-		ResourceDescription::EditorPicture editor_picture = {st->get_string(upper_limit), upper_limit};
+		ResourceDescription::EditorPicture editor_picture = {
+		   st->get_string(upper_limit), upper_limit};
 		editor_pictures_.push_back(editor_picture);
 	}
 	if (editor_pictures_.empty()) {
@@ -44,9 +46,7 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 	}
 }
 
-const std::string & ResourceDescription::get_editor_pic
-	(uint32_t const amount) const
-{
+const std::string& ResourceDescription::editor_image(uint32_t const amount) const {
 	uint32_t bestmatch = 0;
 	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 
@@ -76,9 +76,8 @@ bool ResourceDescription::detectable() const {
 	return detectable_;
 }
 
-int32_t ResourceDescription::max_amount() const {
+ResourceAmount ResourceDescription::max_amount() const {
 	return max_amount_;
 }
-
 
 }  // namespace Widelands

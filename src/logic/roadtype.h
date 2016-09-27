@@ -36,11 +36,10 @@ enum RoadType {
 	kWater = 3,
 	kMask = 3,
 
-	kEast      = 0, //  shift values
+	kEast = 0,  //  shift values
 	kSouthEast = 2,
 	kSouthWest = 4,
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

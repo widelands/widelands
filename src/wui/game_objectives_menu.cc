@@ -29,34 +29,26 @@ using namespace Widelands;
 #define OBJECTIVE_LIST 120
 #define FULL_OBJECTIVE_TEXT 240
 
-
-inline InteractivePlayer & GameObjectivesMenu::iplayer() const {
+inline InteractivePlayer& GameObjectivesMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
-
-GameObjectivesMenu::GameObjectivesMenu
-	(UI::Panel * parent, UI::UniqueWindow::Registry & registry)
-:
-	UI::UniqueWindow
-		(parent, "objectives", &registry,
-		 580,
-		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
-		 _("Objectives")),
-	list
-		(this,
-		 5, 5,
-		 get_inner_w() - 10, OBJECTIVE_LIST,
-		 UI::Align::kLeft,
-		 false),
-	objectivetext
-		(this,
-		 5, 130,
-		 get_inner_w() - 10, FULL_OBJECTIVE_TEXT,
-		 "",
-		 UI::Align::kLeft,
-		 UI::MultilineTextarea::ScrollMode::kScrollNormalForced)
-{
+GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(parent,
+                      "objectives",
+                      &registry,
+                      580,
+                      5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
+                      _("Objectives")),
+     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST, false),
+     objectivetext(this,
+                   5,
+                   130,
+                   get_inner_w() - 10,
+                   FULL_OBJECTIVE_TEXT,
+                   "",
+                   UI::Align::kLeft,
+                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -93,6 +85,5 @@ void GameObjectivesMenu::think() {
  * An entry in the objectives menu has been selected
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
-	objectivetext.set_text
-		(t == ListType::no_selection_index() ? std::string() : list[t].descr());
+	objectivetext.set_text(t == ListType::no_selection_index() ? std::string() : list[t].descr());
 }

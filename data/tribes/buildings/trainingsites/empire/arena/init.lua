@@ -40,7 +40,8 @@ tribes:new_trainingsite_type {
       trainingsite_type = "basic",
       prohibited_till = 900,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2
+      weak_ai_limit = 2,
+      forced_after = 1500
    },
 
    working_positions = {
@@ -48,9 +49,9 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 }
    },
    outputs = {
       "empire_soldier",

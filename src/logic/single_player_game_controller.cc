@@ -27,36 +27,29 @@
 #include "profile/profile.h"
 #include "wlapplication.h"
 
-
-SinglePlayerGameController::SinglePlayerGameController
-	(Widelands::Game        &       game,
-	 bool                     const useai,
-	 Widelands::PlayerNumber const local)
-	: m_game          (game),
-	m_useai           (useai),
-	m_lastframe       (SDL_GetTicks()),
-	m_time            (m_game.get_gametime()),
-	m_speed
-		(g_options.pull_section("global").get_natural
-		 	("speed_of_new_game", 1000)),
-	m_paused(false),
-	m_player_cmdserial(0),
-	m_local           (local)
-{
+SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
+                                                       bool const useai,
+                                                       Widelands::PlayerNumber const local)
+   : game_(game),
+     use_ai_(useai),
+     lastframe_(SDL_GetTicks()),
+     time_(game_.get_gametime()),
+     speed_(g_options.pull_section("global").get_natural("speed_of_new_game", 1000)),
+     paused_(false),
+     player_cmdserial_(0),
+     local_(local) {
 }
 
-SinglePlayerGameController::~SinglePlayerGameController()
-{
-	for (uint32_t i = 0; i < m_computerplayers.size(); ++i)
-		delete m_computerplayers[i];
-	m_computerplayers.clear();
+SinglePlayerGameController::~SinglePlayerGameController() {
+	for (uint32_t i = 0; i < computerplayers_.size(); ++i)
+		delete computerplayers_[i];
+	computerplayers_.clear();
 }
 
-void SinglePlayerGameController::think()
-{
+void SinglePlayerGameController::think() {
 	uint32_t const curtime = SDL_GetTicks();
-	int32_t frametime = curtime - m_lastframe;
-	m_lastframe = curtime;
+	int32_t frametime = curtime - lastframe_;
+	lastframe_ = curtime;
 
 	// prevent crazy frametimes
 	if (frametime < 0)
@@ -66,78 +59,67 @@ void SinglePlayerGameController::think()
 
 	frametime = frametime * real_speed() / 1000;
 
-	m_time = m_game.get_gametime() + frametime;
+	time_ = game_.get_gametime() + frametime;
 
-	if (m_useai && m_game.is_loaded()) {
-		const Widelands::PlayerNumber nr_players = m_game.map().get_nrplayers();
-		iterate_players_existing(p, nr_players, m_game, plr)
-			if (p != m_local) {
+	if (use_ai_ && game_.is_loaded()) {
+		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
+		iterate_players_existing(p, nr_players, game_, plr) if (p != local_) {
 
-				if (p > m_computerplayers.size())
-					m_computerplayers.resize(p);
-				if (!m_computerplayers[p - 1])
-					m_computerplayers[p - 1] =
-						ComputerPlayer::get_implementation
-							(plr->get_ai())->instantiate(m_game, p);
-				m_computerplayers[p - 1]->think();
-			}
+			if (p > computerplayers_.size())
+				computerplayers_.resize(p);
+			if (!computerplayers_[p - 1])
+				computerplayers_[p - 1] =
+				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
+			computerplayers_[p - 1]->think();
+		}
 	}
 }
 
-void SinglePlayerGameController::send_player_command
-	(Widelands::PlayerCommand & pc)
-{
-	pc.set_cmdserial(++m_player_cmdserial);
-	m_game.enqueue_command (&pc);
+void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand& pc) {
+	pc.set_cmdserial(++player_cmdserial_);
+	game_.enqueue_command(&pc);
 }
 
-int32_t SinglePlayerGameController::get_frametime()
-{
-	return m_time - m_game.get_gametime();
+int32_t SinglePlayerGameController::get_frametime() {
+	return time_ - game_.get_gametime();
 }
 
-GameController::GameType SinglePlayerGameController::get_game_type()
-{
+GameController::GameType SinglePlayerGameController::get_game_type() {
 	return GameController::GameType::SINGLEPLAYER;
 }
 
-uint32_t SinglePlayerGameController::real_speed()
-{
-	if (m_paused)
+uint32_t SinglePlayerGameController::real_speed() {
+	if (paused_)
 		return 0;
 	else
-		return m_speed;
+		return speed_;
 }
 
-uint32_t SinglePlayerGameController::desired_speed()
-{
-	return m_speed;
+uint32_t SinglePlayerGameController::desired_speed() {
+	return speed_;
 }
 
-void SinglePlayerGameController::set_desired_speed(uint32_t const speed)
-{
-	m_speed = speed;
+void SinglePlayerGameController::set_desired_speed(uint32_t const speed) {
+	speed_ = speed;
 }
 
-bool SinglePlayerGameController::is_paused()
-{
-	return m_paused;
+bool SinglePlayerGameController::is_paused() {
+	return paused_;
 }
 
-void SinglePlayerGameController::set_paused(bool paused)
-{
-	m_paused = paused;
+void SinglePlayerGameController::set_paused(bool paused) {
+	paused_ = paused;
 }
 
-void SinglePlayerGameController::report_result
-	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
-{
+void SinglePlayerGameController::report_result(uint8_t p_nr,
+                                               Widelands::PlayerEndResult result,
+                                               const std::string& info) {
 	Widelands::PlayerEndStatus pes;
-	Widelands::Player* player = m_game.get_player(p_nr);
+	Widelands::Player* player = game_.get_player(p_nr);
 	assert(player);
 	pes.player = player->player_number();
-	pes.time = m_game.get_gametime();
+	pes.time = game_.get_gametime();
 	pes.result = result;
 	pes.info = info;
-	m_game.player_manager()->add_player_end_status(pes);
+	game_.player_manager()->add_player_end_status(pes);
 }

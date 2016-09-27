@@ -85,6 +85,12 @@ source_file = po/tribes_encyclopedia/tribes_encyclopedia.pot
 source_lang = en
 type = PO
 
+[widelands.editor]
+file_filter = po/widelands_editor/<lang>.po
+source_file = po/widelands_editor/widelands_editor.pot
+source_lang = en
+type = PO
+
 [widelands.scenario_tutorial01_basic_control]
 file_filter = po/scenario_tutorial01_basic_control.wmf/<lang>.po
 source_file = po/scenario_tutorial01_basic_control.wmf/scenario_tutorial01_basic_control.wmf.pot
@@ -132,3 +138,10 @@ file_filter = data/i18n/locales/<lang>.json
 source_file = data/i18n/locales/locales_translators.json
 source_lang = en
 type = KEYVALUEJSON
+
+[widelands.appdata]
+file_filter = debian/translations/<lang>.json
+source_file = debian/translations/appdata.json
+source_lang = en
+type = KEYVALUEJSON
+

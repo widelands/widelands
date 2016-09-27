@@ -37,7 +37,7 @@
 
 using namespace Widelands;
 
-namespace  {
+namespace {
 
 const RGBColor kWhite(255, 255, 255);
 
@@ -54,8 +54,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    bool see_details) {
 	RGBColor color;
 	if (layers & MiniMapLayer::Terrain) {
-		color = egbase.world().terrain_descr(f.field->terrain_d()).get_minimap_color(
-		   f.field->get_brightness());
+		color = egbase.world()
+		           .terrain_descr(f.field->terrain_d())
+		           .get_minimap_color(f.field->get_brightness());
 	}
 
 	if (layers & MiniMapLayer::Owner) {
@@ -69,7 +70,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// visualize objects using white color.
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const *>(immovable)) {
+			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const*>(immovable)) {
 				color = blend_color(color, kWhite);
 			}
 
@@ -85,45 +86,32 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 }
 
 // Draws the dotted frame border onto the minimap.
-bool is_minimap_frameborder
-	(const Widelands::FCoords& f, const Point& ptopleft, const Point& pbottomright,
-	 int32_t mapwidth, int32_t mapheight, int32_t modx, int32_t mody)
-{
+bool is_minimap_frameborder(const Widelands::FCoords& f,
+                            const Point& ptopleft,
+                            const Point& pbottomright,
+                            int32_t mapwidth,
+                            int32_t mapheight,
+                            int32_t modx,
+                            int32_t mody) {
 	bool isframepixel = false;
 
 	if (ptopleft.x <= pbottomright.x) {
-		if
-			(f.x >= ptopleft.x && f.x <= pbottomright.x
-			 && (f.y == ptopleft.y || f.y == pbottomright.y)
-			 && f.x % 2 == modx)
+		if (f.x >= ptopleft.x && f.x <= pbottomright.x &&
+		    (f.y == ptopleft.y || f.y == pbottomright.y) && f.x % 2 == modx)
 			isframepixel = true;
 	} else {
-		if
-			(((f.x >= ptopleft.x && f.x <= mapwidth)
-			  ||
-			  (f.x >= 0 && f.x <= pbottomright.x))
-			 &&
-			 (f.y == ptopleft.y || f.y == pbottomright.y)
-			 &&
-			 (f.x % 2) == modx)
+		if (((f.x >= ptopleft.x && f.x <= mapwidth) || (f.x >= 0 && f.x <= pbottomright.x)) &&
+		    (f.y == ptopleft.y || f.y == pbottomright.y) && (f.x % 2) == modx)
 			isframepixel = true;
 	}
 
 	if (ptopleft.y <= pbottomright.y) {
-		if
-			(f.y >= ptopleft.y && f.y <= pbottomright.y
-			 && (f.x == ptopleft.x || f.x == pbottomright.x)
-			 && f.y % 2 == mody)
+		if (f.y >= ptopleft.y && f.y <= pbottomright.y &&
+		    (f.x == ptopleft.x || f.x == pbottomright.x) && f.y % 2 == mody)
 			isframepixel = true;
 	} else {
-		if
-			(((f.y >= ptopleft.y && f.y <= mapheight)
-			  ||
-			  (f.y >= 0 && f.y <= pbottomright.y))
-			 &&
-			 (f.x == ptopleft.x || f.x == pbottomright.x)
-			 &&
-			 f.y % 2 == mody)
+		if (((f.y >= ptopleft.y && f.y <= mapheight) || (f.y >= 0 && f.y <= pbottomright.y)) &&
+		    (f.x == ptopleft.x || f.x == pbottomright.x) && f.y % 2 == mody)
 			isframepixel = true;
 	}
 
@@ -142,8 +130,8 @@ void draw_minimap_int(Texture* texture,
 	const uint16_t surface_w = texture->width();
 
 	// size of the display frame
-	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
-	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
+	int32_t xsize = g_gr->get_xres() / kTriangleWidth / 2;
+	int32_t ysize = g_gr->get_yres() / kTriangleHeight / 2;
 
 	const int32_t mapwidth = egbase.get_map().get_width();
 	const int32_t mapheight = map.get_height();
@@ -235,10 +223,11 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	return texture;
 }
 
-void write_minimap_image
-	(const EditorGameBase& egbase, const Player* player, const Point& gviewpoint, MiniMapLayer layers,
-	 ::StreamWrite* const streamwrite)
-{
+void write_minimap_image(const EditorGameBase& egbase,
+                         const Player* player,
+                         const Point& gviewpoint,
+                         MiniMapLayer layers,
+                         ::StreamWrite* const streamwrite) {
 	assert(streamwrite != nullptr);
 
 	Point viewpoint(gviewpoint);
@@ -257,8 +246,8 @@ void write_minimap_image
 	if (viewpoint.y >= maxy) {
 		viewpoint.y -= maxy;
 	}
-	viewpoint.x /= TRIANGLE_WIDTH;
-	viewpoint.y /= TRIANGLE_HEIGHT;
+	viewpoint.x /= kTriangleWidth;
+	viewpoint.y /= kTriangleHeight;
 	viewpoint.x -= map_w / 2;
 	viewpoint.y -= map_h / 2;
 

@@ -39,20 +39,38 @@ class EditorGameBase;
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
-	using SetViewFn = boost::function<void (Point)>;
+	struct Landmark {
+		Point point;
+		bool set;
 
-	QuickNavigation(const Widelands::EditorGameBase & egbase, uint32_t screenwidth, uint32_t screenheight);
+		Landmark() : set(false) {
+		}
+	};
 
-	void set_setview(const SetViewFn & fn);
+	using SetViewFn = boost::function<void(Point)>;
+
+	QuickNavigation(const Widelands::EditorGameBase& egbase,
+	                uint32_t screenwidth,
+	                uint32_t screenheight);
+
+	void set_setview(const SetViewFn& fn);
 
 	void view_changed(Point point, bool jump);
+
+	// Set the landmark for 'index' to 'point'. 'index' must be < 10.
+	void set_landmark(size_t index, const Point& point);
+
+	// Returns a pointer to the first element in the landmarks array
+	const std::vector<Landmark>& landmarks() const {
+		return landmarks_;
+	}
 
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
 	void setview(Point where);
 
-	const Widelands::EditorGameBase & egbase_;
+	const Widelands::EditorGameBase& egbase_;
 	uint32_t screenwidth_;
 	uint32_t screenheight_;
 
@@ -75,17 +93,10 @@ private:
 	std::vector<Point>::size_type history_index_;
 	/*@}*/
 
-	struct Landmark {
-		Point point;
-		bool set;
-
-		Landmark() : set(false) {}
-	};
-
 	/**
 	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
 	 */
-	Landmark landmarks_[10];
+	std::vector<Landmark> landmarks_;
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

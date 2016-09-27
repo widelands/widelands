@@ -77,11 +77,10 @@ public:
 	}
 
 	// Unsubscribes 'subscriber'.
-	template <typename T>
-	void unsubscribe(Subscriber<T>* subscriber) {
+	template <typename T> void unsubscribe(Subscriber<T>* subscriber) {
 		std::list<void*>& subscribers = note_id_to_subscribers_.at(T::note_id());
-		auto subscribers_it =
-		   std::find_if(subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
+		auto subscribers_it = std::find_if(
+		   subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
 			   return static_cast<const Subscriber<T>*>(p_subscriber)->id_ == subscriber->id_;
 			});
 
@@ -105,7 +104,7 @@ private:
 	// introduce a base class and dispatch via a virtual function call, but
 	// since this framework should be as efficient as possible, I opted for
 	// using void* and casting instead.
-	std::unordered_map<uint32_t, std::list<void*>>  note_id_to_subscribers_;
+	std::unordered_map<uint32_t, std::list<void*>> note_id_to_subscribers_;
 
 	DISALLOW_COPY_AND_ASSIGN(NotificationsManager);
 };

@@ -26,8 +26,8 @@ class Soldier;
 
 class BattleDescr : public MapObjectDescr {
 public:
-	BattleDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::BATTLE, _name, _descname) {
+	BattleDescr(char const* const init_name, char const* const init_descname)
+	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
 	}
 	~BattleDescr() override {
 	}
@@ -48,78 +48,82 @@ class Battle : public MapObject {
 public:
 	const BattleDescr& descr() const;
 
-	Battle(); //  for loading an existing battle from a savegame
-	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
+	Battle();                           //  for loading an existing battle from a savegame
+	Battle(Game&, Soldier&, Soldier&);  //  to create a new battle in the game
 
 	// Implements MapObject.
-	void init(EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
-	bool has_new_save_support() override {return true;}
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
-	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
+	bool has_new_save_support() override {
+		return true;
+	}
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 	// Cancel this battle immediately and schedule destruction.
-	void cancel(Game &, Soldier &);
+	void cancel(Game&, Soldier&);
 
 	// Returns true if the battle should not be interrupted.
-	bool locked(Game &);
+	bool locked(Game&);
 
 	// The two soldiers involved in this fight.
-	Soldier * first() {return m_first;}
-	Soldier * second() {return m_second;}
+	Soldier* first() {
+		return first_;
+	}
+	Soldier* second() {
+		return second_;
+	}
 
 	// Returns the other soldier involved in this battle. CHECKs that the given
 	// soldier is participating in this battle. Can return nullptr, but I have
 	// no idea what that means.
-	Soldier * opponent(Soldier &);
+	Soldier* opponent(Soldier&);
 
 	// Called by the battling soldiers once they've met on a common node and are
 	// idle.
-	void get_battle_work(Game &, Soldier &);
+	void get_battle_work(Game&, Soldier&);
 
 private:
 	struct Loader : public MapObject::Loader {
-		virtual void load(FileRead &);
+		virtual void load(FileRead&);
 		void load_pointers() override;
 
-		Serial m_first;
-		Serial m_second;
+		Serial first_;
+		Serial second_;
 	};
 
-	void calculate_round(Game &);
+	void calculate_round(Game&);
 
-	Soldier * m_first;
-	Soldier * m_second;
+	Soldier* first_;
+	Soldier* second_;
 
 	/**
 	 * Gametime when the battle was created.
 	 */
-	int32_t m_creationtime;
+	int32_t creationtime_;
 
 	/**
 	 * 1 if only the first soldier is ready, 2 if only the second soldier
 	 * is ready, 3 if both are ready.
 	 */
-	uint8_t m_readyflags;
+	uint8_t readyflags_;
 
 	/**
 	 * Damage pending to apply. Damage is applied at end of round so animations
 	 * can show current action.
 	 */
-	uint32_t m_damage;
+	uint32_t damage_;
 
 	/**
 	 * \c true if the first soldier is the next to strike.
 	 */
-	bool m_first_strikes;
+	bool first_strikes_;
 
 	/**
 	 * \c true if the last turn attacker damaged his opponent
 	 */
-	bool m_last_attack_hits;
+	bool last_attack_hits_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H

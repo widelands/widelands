@@ -37,16 +37,15 @@
 namespace Widelands {
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
-								 MapObjectType init_type,
-								 const LuaTable& table,
-								 const EditorGameBase& egbase) :
-	BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
-	ware_hotspot_      (Point(0, 15)),
-	buildable_         (false),
-	needed_experience_ (INVALID_INDEX),
-	becomes_           (INVALID_INDEX),
-	egbase_            (egbase)
-{
+                         MapObjectType init_type,
+                         const LuaTable& table,
+                         const EditorGameBase& egbase)
+   : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
+     ware_hotspot_(Point(0, 15)),
+     buildable_(false),
+     needed_experience_(INVALID_INDEX),
+     becomes_(INVALID_INDEX),
+     egbase_(egbase) {
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
 	}
@@ -60,25 +59,22 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
 				if (buildcost_.count(key)) {
-					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
-											  key.c_str());
+					throw GameDataError(
+					   "a buildcost item of this ware type has already been defined: %s", key.c_str());
 				}
 				if (!tribes.ware_exists(tribes.ware_index(key)) &&
-					 !tribes.worker_exists(tribes.worker_index(key))) {
-					throw GameDataError
-						("\"%s\" has not been defined as a ware/worker type (wrong "
-						 "declaration order?)",
-						 key.c_str());
+				    !tribes.worker_exists(tribes.worker_index(key))) {
+					throw GameDataError("\"%s\" has not been defined as a ware/worker type (wrong "
+					                    "declaration order?)",
+					                    key.c_str());
 				}
 				int32_t value = items_table->get_int(key);
 				uint8_t const count = value;
 				if (count != value)
 					throw GameDataError("count is out of range 1 .. 255");
 				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
-			} catch (const WException & e) {
-				throw GameDataError
-					("[buildcost] \"%s\": %s",
-					 key.c_str(), e.what());
+			} catch (const WException& e) {
+				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}
 		}
 	}
@@ -105,18 +101,16 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	if (table.has_key("programs")) {
 		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
 		for (std::string program_name : programs_table->keys<std::string>()) {
-			std::transform
-				(program_name.begin(), program_name.end(), program_name.begin(),
-				 tolower);
+			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 
 			try {
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
 
-				programs_[program_name] =
-						std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, egbase_.tribes()));
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(
+				   new WorkerProgram(program_name, *this, egbase_.tribes()));
 				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
-			} catch (const std::exception & e) {
+			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
@@ -133,25 +127,22 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 }
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
-								 const LuaTable& table, const EditorGameBase& egbase) :
-	WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase)
-{}
+                         const LuaTable& table,
+                         const EditorGameBase& egbase)
+   : WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase) {
+}
 
-
-WorkerDescr::~WorkerDescr() {}
-
+WorkerDescr::~WorkerDescr() {
+}
 
 /**
  * Get a program from the workers description.
  */
-WorkerProgram const * WorkerDescr::get_program
-	(const std::string & programname) const
-{
+WorkerProgram const* WorkerDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator it = programs_.find(programname);
 
 	if (it == programs_.end())
-		throw wexception
-			("%s has no program '%s'", name().c_str(), programname.c_str());
+		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
 
 	return it->second.get();
 }
@@ -159,14 +150,11 @@ WorkerProgram const * WorkerDescr::get_program
 /**
  * Custom creation routing that accounts for the location.
  */
-Worker & WorkerDescr::create
-	(EditorGameBase &       egbase,
-	 Player           &       owner,
-	 PlayerImmovable  * const location,
-	 Coords             const coords)
-const
-{
-	Worker & worker = dynamic_cast<Worker&>(create_object());
+Worker& WorkerDescr::create(EditorGameBase& egbase,
+                            Player& owner,
+                            PlayerImmovable* const location,
+                            Coords const coords) const {
+	Worker& worker = dynamic_cast<Worker&>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
@@ -174,18 +162,16 @@ const
 	return worker;
 }
 
-
-uint32_t WorkerDescr::movecaps() const {return MOVECAPS_WALK;}
-
+uint32_t WorkerDescr::movecaps() const {
+	return MOVECAPS_WALK;
+}
 
 /**
  * Create a generic worker of this type.
  */
-Bob & WorkerDescr::create_object() const
-{
+Bob& WorkerDescr::create_object() const {
 	return *new Worker(*this);
 }
-
 
 /**
 * check if worker can be substitute for a requested worker type
@@ -206,4 +192,12 @@ DescriptionIndex WorkerDescr::worker_index() const {
 	return egbase_.tribes().worker_index(name());
 }
 
+void WorkerDescr::add_employer(const DescriptionIndex& building_index) {
+	employers_.insert(building_index);
 }
+
+const std::set<DescriptionIndex>& WorkerDescr::employers() const {
+	return employers_;
+}
+
+}  // namespace Widelands

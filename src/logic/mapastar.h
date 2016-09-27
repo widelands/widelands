@@ -27,65 +27,55 @@
 namespace Widelands {
 
 struct MapAStarBase {
-	MapAStarBase(Map & m) :
-		map(m),
-		pathfields(m.m_pathfieldmgr->allocate())
-	{
+	MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
 	}
 
-	bool empty() const {return queue.empty();}
-	void pathto(Coords dest, Path & path) const;
+	bool empty() const {
+		return queue.empty();
+	}
+	void pathto(Coords dest, Path& path) const;
 
 protected:
-	Pathfield & pathfield(Coords where)
-	{
+	Pathfield& pathfield(Coords where) {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
-	const Pathfield & pathfield(Coords where) const
-	{
+	const Pathfield& pathfield(Coords where) const {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
 
-	Map & map;
+	Map& map;
 	boost::shared_ptr<Pathfields> pathfields;
 	Pathfield::Queue queue;
 };
 
 struct StepEvalAStar {
-	StepEvalAStar(Coords target) :
-		m_target(target),
-		m_estimator_bias(0),
-		m_conservative(true),
-		m_swim(false)
-	{
+	StepEvalAStar(Coords target)
+	   : target_(target), estimator_bias_(0), conservative_(true), swim_(false) {
 	}
 
-	int32_t estimate(Map & map, FCoords pos) const
-	{
-		int32_t est = m_estimator_bias;
-		if (m_conservative)
-			est += map.calc_cost_lowerbound(pos, m_target);
+	int32_t estimate(Map& map, FCoords pos) const {
+		int32_t est = estimator_bias_;
+		if (conservative_)
+			est += map.calc_cost_lowerbound(pos, target_);
 		else
-			est += map.calc_cost_estimate(pos, m_target);
+			est += map.calc_cost_estimate(pos, target_);
 		return est;
 	}
 
-	int32_t stepcost(Map & map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const
-	{
-		if
-			((m_swim && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
-			 (!m_swim && !(to.field->nodecaps() & MOVECAPS_WALK)))
+	int32_t
+	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+		if ((swim_ && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
+		    (!swim_ && !(to.field->nodecaps() & MOVECAPS_WALK)))
 			return -1;
 
 		return map.calc_cost(from, dir);
 	}
 
-	Coords m_target;
-	int32_t m_estimator_bias;
-	bool m_conservative;
-	bool m_swim;
+	Coords target_;
+	int32_t estimator_bias_;
+	bool conservative_;
+	bool swim_;
 };
-
 
 /**
  * Allow customized A-star type searches through a map.
@@ -117,15 +107,15 @@ struct StepEvalAStar {
  * }
  * @endcode
  */
-template<typename StepEval>
-struct MapAStar : MapAStarBase {
-	MapAStar(Map & map_, const StepEval & eval_) : MapAStarBase(map_), eval(eval_) {}
+template <typename StepEval> struct MapAStar : MapAStarBase {
+	MapAStar(Map& map_, const StepEval& eval_) : MapAStarBase(map_), eval(eval_) {
+	}
 
 	void push(Coords pos, int32_t cost = 0);
-	bool step(FCoords & cur, int32_t & cost);
+	bool step(FCoords& cur, int32_t& cost);
 
 private:
-	const StepEval & eval;
+	const StepEval& eval;
 };
 
 /**
@@ -133,10 +123,8 @@ private:
  * unless a lower cost path to it has already been found,
  * or it has already been returned from @ref step.
  */
-template<typename StepEval>
-void MapAStar<StepEval>::push(Coords pos, int32_t cost)
-{
-	Pathfield & pf = pathfield(pos);
+template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t cost) {
+	Pathfield& pf = pathfield(pos);
 	if (pf.cycle != pathfields->cycle) {
 		pf.cycle = pathfields->cycle;
 		pf.backlink = IDLE;
@@ -156,13 +144,11 @@ void MapAStar<StepEval>::push(Coords pos, int32_t cost)
  *
  * @return true if a field was returned, or false if the search is over.
  */
-template<typename StepEval>
-bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
-{
+template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t& cost) {
 	if (queue.empty())
 		return false;
 
-	Pathfield * curpf = queue.top();
+	Pathfield* curpf = queue.top();
 	queue.pop(curpf);
 
 	cur.field = &map[curpf - pathfields->fields.get()];
@@ -170,16 +156,14 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 	cost = curpf->real_cost;
 
 	// avoid bias by using different orders when pathfinding
-	static const int8_t order1[] =
-		{WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
-	static const int8_t order2[] =
-		{WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-	int8_t const * direction = (cur.x + cur.y) & 1 ? order1 : order2;
+	static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
+	static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
+	int8_t const* direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
 	// Check all the 6 neighbours
 	for (uint32_t i = 6; i; i--, direction++) {
 		FCoords neighb(map.get_neighbour(cur, *direction));
-		Pathfield & neighbpf = pathfield(neighb);
+		Pathfield& neighbpf = pathfield(neighb);
 
 		// Field is closed already
 		if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active())
@@ -208,6 +192,6 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 	return true;
 }
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPASTAR_H

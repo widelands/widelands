@@ -26,12 +26,14 @@
 // tried to be faster with fixed point arithmetics
 // it was, but i'll try to find other opts first
 struct Vector {
-	Vector() : x(0), y(0), z(0) {}
-	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {}
+	Vector() : x(0), y(0), z(0) {
+	}
+	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {
+	}
 
 	void normalize() {
 		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
-		if (fabs(f) < 0.00001) // check for ==0
+		if (fabs(f) < 0.00001)  // check for ==0
 			return;
 		x /= f;
 		y /= f;
@@ -39,12 +41,12 @@ struct Vector {
 	}
 
 	// vector addition
-	Vector operator+ (Vector const other) const {
+	Vector operator+(const Vector& other) const {
 		return Vector(x + other.x, y + other.y, z + other.z);
 	}
 
 	// inner product
-	float operator* (Vector const other) const {
+	float operator*(const Vector& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 

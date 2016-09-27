@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 110,
-   preferred_humidity = 0.7,
+   preferred_humidity = 0.55,
    preferred_fertility = 0.8,
    pickiness = 0.8,
 }
@@ -79,6 +79,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
+   species = _ "Maple",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

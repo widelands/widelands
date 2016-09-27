@@ -36,15 +36,14 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;
 
-		for (const std::string& script_path : starting_conditions->array_entries<std::string>())
-		{
+		for (const std::string& script_path : starting_conditions->array_entries<std::string>()) {
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
-			initializations.push_back(Initialization(script_path, script_table->get_string("descname")));
+			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
+			                                         script_table->get_string("tooltip")));
 		}
-	} catch (const WException & e) {
-		throw Widelands::GameDataError
-			("reading basic info for tribe \"%s\": %s",
-			 name.c_str(), e.what());
+	} catch (const WException& e) {
+		throw Widelands::GameDataError(
+		   "reading basic info for tribe \"%s\": %s", name.c_str(), e.what());
 	}
 }

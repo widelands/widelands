@@ -30,95 +30,88 @@
 
 namespace Widelands {
 
-PlayersManager::PlayersManager(EditorGameBase& egbase) :
-m_egbase(egbase),
-m_number_of_players(0)
-{
-	memset(m_players, 0, sizeof(m_players));
+PlayersManager::PlayersManager(EditorGameBase& egbase) : egbase_(egbase), number_of_players_(0) {
+	memset(players_, 0, sizeof(players_));
 }
 
-PlayersManager::~PlayersManager()
-{
+PlayersManager::~PlayersManager() {
 	cleanup();
 }
 
-void PlayersManager::cleanup()
-{
-	const Player * const * const players_end = m_players + MAX_PLAYERS;
-	for (Player * * p = m_players; p < players_end; ++p) {
+void PlayersManager::cleanup() {
+	const Player* const* const players_end = players_ + MAX_PLAYERS;
+	for (Player** p = players_; p < players_end; ++p) {
 		delete *p;
 		*p = nullptr;
 	}
-	m_number_of_players = 0;
+	number_of_players_ = 0;
 }
 
-
-void PlayersManager::remove_player(PlayerNumber plnum)
-{
+void PlayersManager::remove_player(PlayerNumber plnum) {
 	assert(1 <= plnum);
 	assert(plnum <= MAX_PLAYERS);
 
-	Player * & p = m_players[plnum - 1];
+	Player*& p = players_[plnum - 1];
 	if (p) {
 		delete p;
 		p = nullptr;
 		if (plnum <= UserSettings::highest_playernum()) {
-			m_number_of_players--;
+			number_of_players_--;
 		}
 	}
 }
 
-Player* PlayersManager::add_player
-	(PlayerNumber       const player_number,
-	 uint8_t             const initialization_index,
-	 const std::string &       tribe,
-	 const std::string &       name,
-	 TeamNumber                team)
-{
+Player* PlayersManager::add_player(PlayerNumber const player_number,
+                                   uint8_t const initialization_index,
+                                   const std::string& tribe,
+                                   const std::string& name,
+                                   TeamNumber team) {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
 
-	Player * & p = m_players[player_number - 1];
+	Player*& p = players_[player_number - 1];
 	if (p) {
 		delete p;
 		if (player_number <= UserSettings::highest_playernum()) {
-			m_number_of_players--;
+			number_of_players_--;
 		}
 	}
-	p = new Player
-		(m_egbase,
-		 player_number,
-		 initialization_index,
-		 *m_egbase.tribes().get_tribe_descr(m_egbase.tribes().tribe_index(tribe)),
-		 name);
+	p = new Player(egbase_, player_number, initialization_index,
+	               *egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe)), name);
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {
-		m_number_of_players++;
+		number_of_players_++;
 	}
 	return p;
 }
 
-void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
-{
+void PlayersManager::add_player_end_status(const PlayerEndStatus& status) {
 	// Ensure we don't have a status for it yet
-	std::vector<PlayerEndStatus>::iterator it;
-	for (it = m_players_end_status.begin(); it != m_players_end_status.end(); ++it) {
-		PlayerEndStatus pes = *it;
+	for (const auto& pes : players_end_status_) {
 		if (pes.player == status.player) {
 			throw wexception("Player End status for player %d already reported", pes.player);
 		}
 	}
-	m_players_end_status.push_back(status);
+	players_end_status_.push_back(status);
 
 	// If all results have been gathered, save game and show summary screen
-	if (m_players_end_status.size() < m_number_of_players) {
+	if (players_end_status_.size() < number_of_players_) {
 		return;
 	}
 
-	if (m_egbase.get_igbase()) {
-		m_egbase.get_igbase()->show_game_summary();
+	if (egbase_.get_igbase()) {
+		egbase_.get_igbase()->show_game_summary();
 	}
 }
 
+void PlayersManager::set_player_end_status(const PlayerEndStatus& status) {
+	for (auto& pes : players_end_status_) {
+		if (pes.player == status.player) {
+			pes = status;
+			return;
+		}
+	}
+	players_end_status_.push_back(status);
+}
 
 }  // namespace Widelands

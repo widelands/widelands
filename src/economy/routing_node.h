@@ -36,19 +36,18 @@ struct Road;
  * @see RoutingNode::get_neighbours
  */
 struct RoutingNodeNeighbour {
-	RoutingNodeNeighbour(RoutingNode * const f, int32_t const cost) :
-		m_nb(f), m_cost(cost)
-	{}
-	RoutingNode * get_neighbour() const {
-		return m_nb;
+	RoutingNodeNeighbour(RoutingNode* const f, int32_t const cost) : nb_(f), cost_(cost) {
+	}
+	RoutingNode* get_neighbour() const {
+		return nb_;
 	}
 	int32_t get_cost() const {
-		return m_cost;
+		return cost_;
 	}
 
 private:
-	RoutingNode * m_nb;
-	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
+	RoutingNode* nb_;
+	int32_t cost_;  /// Cost to get from me to the neighbour (Cost for road)
 };
 using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
 
@@ -61,35 +60,39 @@ using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
  */
 struct RoutingNode {
 	struct LessCost {
-		bool operator()(const RoutingNode & a, const RoutingNode & b) const {
+		bool operator()(const RoutingNode& a, const RoutingNode& b) const {
 			return a.cost() < b.cost();
 		}
 	};
 	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
-	uint32_t      mpf_cycle;
+	uint32_t mpf_cycle;
 	Queue::Cookie mpf_cookie;
-	int32_t       mpf_realcost; ///< real cost of getting to this flag
-	RoutingNode * mpf_backlink; ///< flag where we came from
-	int32_t       mpf_estimate; ///< estimate of cost to destination
+	int32_t mpf_realcost;       ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink;  ///< flag where we came from
+	int32_t mpf_estimate;       ///< estimate of cost to destination
 
 public:
-	RoutingNode() : mpf_cycle(0),
-		mpf_realcost(0), mpf_backlink(nullptr), mpf_estimate(0) {}
-	virtual ~RoutingNode() {}
+	RoutingNode() : mpf_cycle(0), mpf_realcost(0), mpf_backlink(nullptr), mpf_estimate(0) {
+	}
+	virtual ~RoutingNode() {
+	}
 
 	void reset_path_finding_cycle() {
 		mpf_cycle = 0;
 	}
 
-	int32_t cost() const {return mpf_realcost + mpf_estimate;}
-	Queue::Cookie & cookie() {return mpf_cookie;}
+	int32_t cost() const {
+		return mpf_realcost + mpf_estimate;
+	}
+	Queue::Cookie& cookie() {
+		return mpf_cookie;
+	}
 
-	virtual Flag & base_flag() = 0;
-	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours &) = 0;
-	virtual const Coords & get_position() const = 0;
+	virtual Flag& base_flag() = 0;
+	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours&) = 0;
+	virtual const Coords& get_position() const = 0;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_ROUTING_NODE_H

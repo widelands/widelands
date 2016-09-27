@@ -28,24 +28,23 @@
  * Problems with the zipfile itself or normal file operations should throw
  * FileError or one of it's descendants with an appropriate message. E.g.:
  * throw FileNotFoundError("ZipFilesystem::load", fname,
- * "couldn't open file (from zipfile "+m_zipfilename+")");
+ * "couldn't open file (from zipfile "+zipfilename_+")");
  */
 struct ZipOperationError : public std::logic_error {
-	ZipOperationError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & zipfilename,
-		 const std::string & message = "problem during zipfile operation")
-		:
-		std::logic_error
-			(thrower + ": " + message + " (working on '" + filename +
-			 "' in zipfile '" + zipfilename + "')"),
-		m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
-	{}
+	ZipOperationError(const std::string& thrower,
+	                  const std::string& filename,
+	                  const std::string& zipfilename,
+	                  const std::string& message = "problem during zipfile operation")
+	   : std::logic_error(thrower + ": " + message + " (working on '" + filename + "' in zipfile '" +
+	                      zipfilename + "')"),
+	     thrower_(thrower),
+	     filename_(filename),
+	     zipfilename_(zipfilename) {
+	}
 
-	std::string m_thrower;
-	std::string m_filename;
-	std::string m_zipfilename;
+	std::string thrower_;
+	std::string filename_;
+	std::string zipfilename_;
 };
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_ZIP_EXCEPTIONS_H

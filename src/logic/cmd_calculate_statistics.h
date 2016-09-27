@@ -27,20 +27,20 @@
 namespace Widelands {
 
 struct CmdCalculateStatistics : public GameLogicCommand {
-	CmdCalculateStatistics() : GameLogicCommand(0) {} // For savegame loading
-	CmdCalculateStatistics(uint32_t const _duetime) :
-		GameLogicCommand(_duetime) {}
+	CmdCalculateStatistics() : GameLogicCommand(0) {
+	}  // For savegame loading
+	CmdCalculateStatistics(uint32_t const init_duetime) : GameLogicCommand(init_duetime) {
+	}
 
 	// Write these commands to a file (for savegames)
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kCalculateStatistics;}
-	void execute(Game &) override;
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kCalculateStatistics;
+	}
+	void execute(Game&) override;
 };
-
 }
-
-
 
 #endif  // end of include guard: WL_LOGIC_CMD_CALCULATE_STATISTICS_H

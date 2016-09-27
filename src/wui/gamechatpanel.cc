@@ -27,18 +27,24 @@
 /**
  * Create a game chat panel
  */
-GameChatPanel::GameChatPanel
-	(UI::Panel * parent,
-	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 ChatProvider & chat)
-	:
-	UI::Panel(parent, x, y, w, h),
-	chat_   (chat),
-	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft,
-				 UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-	editbox  (this, 0, h - 20, w),
-	chat_message_counter(std::numeric_limits<uint32_t>::max())
-{
+GameChatPanel::GameChatPanel(UI::Panel* parent,
+                             int32_t const x,
+                             int32_t const y,
+                             uint32_t const w,
+                             uint32_t const h,
+                             ChatProvider& chat)
+   : UI::Panel(parent, x, y, w, h),
+     chat_(chat),
+     chatbox(this,
+             0,
+             0,
+             w,
+             h - 25,
+             "",
+             UI::Align::kLeft,
+             UI::MultilineTextarea::ScrollMode::kScrollLogForced),
+     editbox(this, 0, h - 20, w, 20, 2),
+     chat_message_counter(std::numeric_limits<uint32_t>::max()) {
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -47,15 +53,14 @@ GameChatPanel::GameChatPanel
 	set_can_focus(true);
 
 	chat_message_subscriber_ =
-	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) {recalculate();});
+	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(); });
 	recalculate();
 }
 
 /**
  * Updates the chat message area.
  */
-void GameChatPanel::recalculate()
-{
+void GameChatPanel::recalculate() {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
 	std::string str = "<rt>";
@@ -68,39 +73,34 @@ void GameChatPanel::recalculate()
 	chatbox.set_text(str);
 
 	// If there are new messages, play a sound
-	if (0 < msgs.size() && msgs.size() != chat_message_counter)
-	{
+	if (0 < msgs.size() && msgs.size() != chat_message_counter) {
 		// computer generated ones are ignored
 		// Note: if many messages arrive simultaneously,
 		// the latest is a system message and some others
 		// are not, then this act wrong!
-		if (!msgs.back().sender.empty() && !chat_.sound_off())
-		{
+		if (!msgs.back().sender.empty() && !chat_.sound_off()) {
 			// The latest message is not a system message
-			if (std::string::npos == msgs.back().sender.find("(IRC)") && chat_message_counter < msgs.size())
-			{
+			if (std::string::npos == msgs.back().sender.find("(IRC)") &&
+			    chat_message_counter < msgs.size()) {
 				// The latest message was not relayed from IRC.
 				// The above built-in string constant should match
 				// that of the IRC bridge.
 				play_new_chat_message();
 			}
 		}
-		chat_message_counter = msgs . size();
-
+		chat_message_counter = msgs.size();
 	}
 }
 
 /**
  * Put the focus on the message input panel.
  */
-void GameChatPanel::focus_edit()
-{
+void GameChatPanel::focus_edit() {
 	editbox.focus();
 }
 
-void GameChatPanel::key_enter()
-{
-	const std::string & str = editbox.text();
+void GameChatPanel::key_enter() {
+	const std::string& str = editbox.text();
 
 	if (str.size())
 		chat_.send(str);
@@ -109,8 +109,7 @@ void GameChatPanel::key_enter()
 	sent();
 }
 
-void GameChatPanel::key_escape()
-{
+void GameChatPanel::key_escape() {
 	editbox.set_text("");
 	aborted();
 }

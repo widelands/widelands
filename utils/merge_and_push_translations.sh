@@ -35,7 +35,7 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po data/i18n/locales/*.json || true
+bzr add po/*/*.po data/i18n/locales/*.json debian/translations/*.json || true
 
 # Update authors file
 utils/update_authors.py
@@ -44,6 +44,16 @@ then
   echo "Updated authors";
 else
   echo "Failed updating authors";
+  exit 1;
+fi
+
+# Update appdata
+utils/update_appdata.py
+if [ $? -eq 0 ]
+then
+  echo "Updated appdata";
+else
+  echo "Failed updating appdata";
   exit 1;
 fi
 

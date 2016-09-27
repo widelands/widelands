@@ -3,6 +3,14 @@
 --  =======================================================
 
 -- RST
+-- global_helptexts.lua
+-- --------------------
+--
+-- This file contains some default building helptexts that can be used when a more
+-- specific help text hasn't been defined yet. It also contains some global time naming
+-- functions for uniform translations.
+
+-- RST
 -- .. function:: no_lore_text_yet()
 --
 --    Returns a localized string for when no lore helptext has been defined yet.
@@ -50,6 +58,7 @@ end
 -- .. function:: format_seconds(seconds)
 --
 --    :arg seconds: number of seconds
+--    :type seconds: An unsigned integer
 --
 --    Returns a localized string to tell the time in seconds with the proper plural form.
 --    :returns: "1 second", or "20 seconds" etc.
@@ -62,6 +71,7 @@ end
 -- .. function:: format_minutes(minutes)
 --
 --    :arg minutes: number of minutes
+--    :type minutes: An unsigned integer
 --
 --    Returns a localized string to tell the time in minutes with the proper plural form.
 --    :returns: "1 minute", or "20 minutes" etc.
@@ -74,7 +84,9 @@ end
 -- .. function:: format_minutes_seconds(minutes, seconds)
 --
 --    :arg minutes: number of minutes
+--    :type minutes: An unsigned integer
 --    :arg seconds: number of seconds
+--    :type seconds: An unsigned integer
 --
 --    Returns a localized string to tell the time in minutes and seconds with the proper plural form.
 --    :returns: "1 minute and 20 seconds" etc.

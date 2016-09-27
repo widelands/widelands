@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,44 +38,44 @@ struct Statebox : public Panel {
 	/**
 	 * Pictorial Statebox
 	 */
-	Statebox
-		(Panel * parent,
-		 Point,
-		 const Image* pic,
-		 const std::string & tooltip_text = std::string());
+	Statebox(Panel* parent,
+	         Point,
+	         const Image* pic,
+	         const std::string& tooltip_text = std::string());
 
 	/**
 	 * Textual Statebox
 	 * If width is set to 0, the checkbox will set its width automatically.
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
-	Statebox
-		(Panel * parent,
-		 Point,
-		 const std::string& label_text,
-		 const std::string & tooltip_text = std::string(),
-		 uint32_t width = 0);
+	Statebox(Panel* parent,
+	         Point,
+	         const std::string& label_text,
+	         const std::string& tooltip_text = std::string(),
+	         uint32_t width = 0);
 	~Statebox();
 
-	boost::signals2::signal<void ()> changed;
-	boost::signals2::signal<void (bool)> changedto;
-	boost::signals2::signal<void (bool)> clickedto; // same as changedto but only called when clicked
+	boost::signals2::signal<void()> changed;
+	boost::signals2::signal<void(bool)> changedto;
+	boost::signals2::signal<void(bool)> clickedto;  // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 
-	bool get_state() const {return m_flags & Is_Checked;}
+	bool get_state() const {
+		return flags_ & Is_Checked;
+	}
 	void set_state(bool on);
 
-	void set_owns_custom_picture() {
-		assert(m_flags & Has_Custom_Picture);
+	void set_owns_custopicture_() {
+		assert(flags_ & Has_Custom_Picture);
 		set_flags(Owns_Custom_Picture, true);
 	}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	void handle_mousein(bool inside) override;
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
@@ -83,22 +83,21 @@ private:
 	virtual void clicked() = 0;
 
 	enum Flags {
-		Is_Highlighted      = 0x01,
-		Is_Enabled          = 0x02,
-		Is_Checked          = 0x04,
-		Has_Custom_Picture  = 0x08,
+		Is_Highlighted = 0x01,
+		Is_Enabled = 0x02,
+		Is_Checked = 0x04,
+		Has_Custom_Picture = 0x08,
 		Owns_Custom_Picture = 0x10
 	};
-	uint8_t m_flags;
+	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {
-		m_flags &= ~flags;
+		flags_ &= ~flags;
 		if (enable)
-			m_flags |= flags;
+			flags_ |= flags;
 	}
-	const Image* m_pic_graphics;
+	const Image* pic_graphics_;
 	const Image* rendered_text_;
 };
-
 
 /**
  * A checkbox is a simplistic panel which consists of just a small box which
@@ -111,32 +110,29 @@ struct Checkbox : public Statebox {
 	/**
 	 * Pictorial Checkbox
 	 */
-	Checkbox
-		(Panel             * const parent,
-		 Point               const p,
-		 const Image* pic,
-		 const std::string &      tooltip_text = std::string())
-		: Statebox(parent, p, pic, tooltip_text)
-	{}
+	Checkbox(Panel* const parent,
+	         Point const p,
+	         const Image* pic,
+	         const std::string& tooltip_text = std::string())
+	   : Statebox(parent, p, pic, tooltip_text) {
+	}
 
 	/**
 	 * Textual Checkbox
 	 * If width is set to 0, the checkbox will set its width automatically.
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
-	Checkbox
-		(Panel             * const parent,
-		 Point               const p,
-		 const std::string&       label_text,
-		 const std::string &      tooltip_text = std::string(),
-		 uint32_t width = 0)
-		: Statebox(parent, p, label_text, tooltip_text, width)
-	{}
+	Checkbox(Panel* const parent,
+	         Point const p,
+	         const std::string& label_text,
+	         const std::string& tooltip_text = std::string(),
+	         uint32_t width = 0)
+	   : Statebox(parent, p, label_text, tooltip_text, width) {
+	}
 
 private:
 	void clicked() override;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_CHECKBOX_H

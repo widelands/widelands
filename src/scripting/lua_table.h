@@ -53,36 +53,36 @@ public:
 
 	/// Returns all keys. All keys must be of the given type.
 	template <typename KeyType> std::set<KeyType> keys() const {
-		lua_pushlightuserdata(L_, const_cast<LuaTable*>(this)); // S: this
-		lua_rawget(L_, LUA_REGISTRYINDEX); // S: table
+		lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
+		lua_rawget(L_, LUA_REGISTRYINDEX);                       // S: table
 
 		std::set<KeyType> table_keys;
-		lua_pushnil(L_);  // S: table nil
-		while (lua_next(L_, -2) != 0) {   // S: table key value
-			lua_pop(L_, 1);                    // S: table key
+		lua_pushnil(L_);                 // S: table nil
+		while (lua_next(L_, -2) != 0) {  // S: table key value
+			lua_pop(L_, 1);               // S: table key
 			table_keys.insert(get_value<KeyType>());
 		}
-		lua_pop(L_, 1); // S:
+		lua_pop(L_, 1);  // S:
 		return table_keys;
 	}
 
 	/// Returns all integer entries starting at 1 till nil is found. All entries
 	/// must be of the given type.
 	template <typename ValueType> std::vector<ValueType> array_entries() const {
-		lua_pushlightuserdata(L_, const_cast<LuaTable*>(this)); // S: this
-		lua_rawget(L_, LUA_REGISTRYINDEX); // S: table
+		lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
+		lua_rawget(L_, LUA_REGISTRYINDEX);                       // S: table
 
 		std::vector<ValueType> values;
 		int index = 1;
 		for (;;) {
-			lua_rawgeti(L_, -1, index); // S: table value
+			lua_rawgeti(L_, -1, index);  // S: table value
 			if (lua_isnil(L_, -1)) {
-				lua_pop(L_, 1); // S: table
+				lua_pop(L_, 1);  // S: table
 				break;
 			}
 			values.emplace_back(get_value<ValueType>());
 			accessed_keys_.insert(boost::lexical_cast<std::string>(index));
-			lua_pop(L_, 1); // S: table
+			lua_pop(L_, 1);  // S: table
 			++index;
 		}
 		lua_pop(L_, 1);  // S:
@@ -93,9 +93,9 @@ public:
 	template <typename KeyType> bool has_key(const KeyType& key) const {
 		try {
 			get_existing_table_value(key);
+			lua_pop(L_, 1);
 			return true;
-		}
-		catch (LuaTableKeyError&) {
+		} catch (LuaTableKeyError&) {
 			return false;
 		}
 	}
@@ -154,7 +154,8 @@ public:
 		return rv;
 	}
 
-	template <typename KeyType> std::unique_ptr<LuaCoroutine> get_coroutine(const KeyType& key) const {
+	template <typename KeyType>
+	std::unique_ptr<LuaCoroutine> get_coroutine(const KeyType& key) const {
 		get_existing_table_value(key);
 
 		if (lua_isfunction(L_, -1)) {
@@ -163,7 +164,7 @@ public:
 			lua_pop(L_, 1);  // Immediately remove this thread again
 
 			lua_xmove(L_, t, 1);  // Move function to coroutine
-			lua_pushthread(t);     // Now, move thread object back
+			lua_pushthread(t);    // Now, move thread object back
 			lua_xmove(t, L_, 1);
 		}
 
@@ -214,7 +215,7 @@ template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, con
 /// Uses 'key' to fetch a string value from 'table'. If table does not have an
 /// entry for key, returns 'default_value' instead.
 const std::string get_string_with_default(const LuaTable& table,
-														const std::string& key,
-														const std::string& default_value);
+                                          const std::string& key,
+                                          const std::string& default_value);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_TABLE_H

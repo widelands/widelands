@@ -39,7 +39,7 @@ class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
 
-constexpr uint32_t kCommandQueueBucketSize = 65536; // Make this a power of two, so that % is fast
+constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two, so that % is fast
 
 // This is the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
@@ -70,19 +70,23 @@ constexpr uint32_t kCommandQueueBucketSize = 65536; // Make this a power of two,
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (const uint32_t _duetime) : m_duetime(_duetime) {}
-	virtual ~Command ();
+	Command(const uint32_t init_duetime) : duetime_(init_duetime) {
+	}
+	virtual ~Command();
 
-	virtual void execute (Game &) = 0;
+	virtual void execute(Game&) = 0;
 	virtual QueueCommandTypes id() const = 0;
 
-	uint32_t duetime() const {return m_duetime;}
-	void set_duetime(uint32_t const t) {m_duetime = t;}
+	uint32_t duetime() const {
+		return duetime_;
+	}
+	void set_duetime(uint32_t const t) {
+		duetime_ = t;
+	}
 
 private:
-	uint32_t m_duetime;
+	uint32_t duetime_;
 };
-
 
 /**
  * All commands that affect the game simulation (e.g. acting of \ref Bob
@@ -92,26 +96,21 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand (uint32_t const _duetime) : Command(_duetime) {}
+	GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
+	}
 
 	// Write these commands to a file (for savegames)
-	virtual void write
-		(FileWrite &, EditorGameBase &, MapObjectSaver  &);
-	virtual void read
-		(FileRead  &, EditorGameBase &, MapObjectLoader &);
+	virtual void write(FileWrite&, EditorGameBase&, MapObjectSaver&);
+	virtual void read(FileRead&, EditorGameBase&, MapObjectLoader&);
 };
 
 class CmdQueue {
 	friend struct GameCmdQueuePacket;
 
-	enum {
-		cat_nongamelogic = 0,
-		cat_gamelogic,
-		cat_playercommand
-	};
+	enum { cat_nongamelogic = 0, cat_gamelogic, cat_playercommand };
 
 	struct CmdItem {
-		Command * cmd;
+		Command* cmd;
 
 		/**
 		 * category and serial are used to sort commands such that
@@ -121,8 +120,7 @@ class CmdQueue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (const CmdItem & c) const
-		{
+		bool operator<(const CmdItem& c) const {
 			if (cmd->duetime() != c.cmd->duetime())
 				return cmd->duetime() > c.cmd->duetime();
 			else if (category != c.category)
@@ -133,28 +131,27 @@ class CmdQueue {
 	};
 
 public:
-	CmdQueue(Game &);
+	CmdQueue(Game&);
 	~CmdQueue();
 
 	/// Add a command to the queue. Takes ownership.
-	void enqueue (Command *);
+	void enqueue(Command*);
 
 	// Run all commands scheduled for the next interval milliseconds, and update
 	// the internal time as well. the game_time_var represents the current game
 	// time, which we update and with which we must mess around (to run all
 	// queued cmd.s) and which we update (add the interval)
-	void run_queue(int32_t interval, uint32_t & game_time_var);
+	void run_queue(int32_t interval, uint32_t& game_time_var);
 
-	void flush(); // delete all commands in the queue now
+	void flush();  // delete all commands in the queue now
 
 private:
-	Game                       & m_game;
-	uint32_t                     nextserial;
-	uint32_t m_ncmds;
+	Game& game_;
+	uint32_t nextserial_;
+	uint32_t ncmds_;
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
-	CommandsContainer m_cmds;
+	CommandsContainer cmds_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_CMD_QUEUE_H

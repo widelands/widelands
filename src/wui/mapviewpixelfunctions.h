@@ -20,13 +20,15 @@
 #ifndef WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 #define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
+#include "base/point.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
-#include "base/point.h"
 
-namespace Widelands {class Map;}
+namespace Widelands {
+class Map;
+}
 
 namespace MapviewPixelFunctions {
 
@@ -36,11 +38,11 @@ Point calc_pix_difference(const Widelands::Map&, Point, Point);
 uint32_t calc_pix_distance(const Widelands::Map&, Point, Point);
 
 inline uint32_t get_map_end_screen_x(const Widelands::Map& map) {
-	return map.get_width() * TRIANGLE_WIDTH;
+	return map.get_width() * kTriangleWidth;
 }
 
 inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
-	return map.get_height() * TRIANGLE_HEIGHT;
+	return map.get_height() * kTriangleHeight;
 }
 
 /**
@@ -59,8 +61,8 @@ void normalize_pix(const Widelands::Map&, Point& p);
 // Calculate the on-screen position of the node without taking height into
 // account.
 inline void get_basepix(const Widelands::Coords& c, int32_t& px, int32_t& py) {
-	py = c.y * TRIANGLE_HEIGHT;
-	px = c.x * TRIANGLE_WIDTH + (c.y & 1) * (TRIANGLE_WIDTH / 2);
+	py = c.y * kTriangleHeight;
+	px = c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2);
 }
 
 /**
@@ -68,7 +70,7 @@ inline void get_basepix(const Widelands::Coords& c, int32_t& px, int32_t& py) {
  */
 inline void get_pix(const Widelands::FCoords& fc, int32_t& px, int32_t& py) {
 	get_basepix(fc, px, py);
-	py -= fc.field->get_height() * HEIGHT_FACTOR;
+	py -= fc.field->get_height() * kHeightFactor;
 }
 
 inline void
@@ -79,10 +81,8 @@ get_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int3
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
-inline void get_save_pix(const Widelands::Map& map,
-                         const Widelands::Coords& c,
-                         int32_t& px,
-                         int32_t& py) {
+inline void
+get_save_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int32_t& py) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);

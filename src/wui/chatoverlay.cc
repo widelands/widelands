@@ -39,7 +39,7 @@ static const uint32_t MARGIN = 2;
 
 struct ChatOverlay::Impl {
 	bool transparent_;
-	ChatProvider * chat_;
+	ChatProvider* chat_;
 	bool havemessages_;
 
 	/// Reception time of oldest message
@@ -60,7 +60,7 @@ struct ChatOverlay::Impl {
 	     havemessages_(false),
 	     oldest_(0),
 	     chat_message_subscriber_(
-	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) {recompute();})),
+	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
 	     log_message_subscriber_(
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
 		        log_messages_.push_back(note);
@@ -72,31 +72,25 @@ struct ChatOverlay::Impl {
 
 private:
 	bool has_chat_provider() {
-		if (chat_ == nullptr) return false;
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
-		if (is_a(ChatProvider, chat_)) return false;
-		return true;
+		return (chat_ != nullptr && chat_->has_been_set());
 	}
 };
 
-ChatOverlay::ChatOverlay
-	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-	: UI::Panel(parent, x, y, w, h), m(new Impl())
-{
-	Section & s = g_options.pull_section("global");
+ChatOverlay::ChatOverlay(
+   UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
+   : UI::Panel(parent, x, y, w, h), m(new Impl()) {
+	Section& s = g_options.pull_section("global");
 	m->transparent_ = s.get_bool("transparent_chat", true);
 
 	set_thinks(true);
 }
 
-ChatOverlay::~ChatOverlay()
-{
+ChatOverlay::~ChatOverlay() {
 }
 
-void ChatOverlay::set_chat_provider(ChatProvider & chat)
-{
+void ChatOverlay::set_chat_provider(ChatProvider& chat) {
 	m->chat_ = &chat;
 	m->recompute();
 }
@@ -104,8 +98,7 @@ void ChatOverlay::set_chat_provider(ChatProvider & chat)
 /**
  * Check for message expiry.
  */
-void ChatOverlay::think()
-{
+void ChatOverlay::think() {
 	if (m->havemessages_) {
 		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME)
 			m->recompute();
@@ -119,8 +112,7 @@ void ChatOverlay::recompute() {
 /**
  * Recompute the chat message display.
  */
-void ChatOverlay::Impl::recompute()
-{
+void ChatOverlay::Impl::recompute() {
 	int32_t const now = time(nullptr);
 
 	havemessages_ = false;
@@ -132,27 +124,23 @@ void ChatOverlay::Impl::recompute()
 	std::string richtext;
 
 	while ((chat_idx >= 0 || log_idx >= 0)) {
-		if
-			(chat_idx < 0 ||
-				(log_idx >= 0 && chat_->get_messages()[chat_idx].time < log_messages_[log_idx].time))
-		{
+		if (chat_idx < 0 ||
+		    (log_idx >= 0 && chat_->get_messages()[chat_idx].time < log_messages_[log_idx].time)) {
 			// Log message is more recent
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = "<p><font face=serif size=14 color=dddddd bold=1>"
-					+ log_messages_[log_idx].msg + "<br></font></p>" + richtext;
+				richtext = "<p><font face=serif size=14 color=dddddd bold=1>" +
+				           log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}
 			log_idx--;
-		} else if
-			(log_idx < 0 ||
-				(chat_idx >= 0 && chat_->get_messages()[chat_idx].time >= log_messages_[log_idx].time))
-		{
+		} else if (log_idx < 0 ||
+		           (chat_idx >= 0 &&
+		            chat_->get_messages()[chat_idx].time >= log_messages_[log_idx].time)) {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx])
-					+ richtext;
+				richtext = format_as_richtext(chat_->get_messages()[chat_idx]) + richtext;
 			}
 			chat_idx--;
 		} else {
@@ -175,8 +163,7 @@ void ChatOverlay::Impl::recompute()
 	}
 }
 
-void ChatOverlay::draw(RenderTarget & dst)
-{
+void ChatOverlay::draw(RenderTarget& dst) {
 	if (!m->havemessages_)
 		return;
 
@@ -185,8 +172,8 @@ void ChatOverlay::draw(RenderTarget & dst)
 		im = UI::g_fh1->render(m->all_text_, get_w());
 	} catch (RT::WidthTooSmall&) {
 		// Oops, maybe one long word? We render again, not limiting the width, but
-	   // render everything in one single line.
-	   im = UI::g_fh1->render(m->all_text_, 0);
+		// render everything in one single line.
+		im = UI::g_fh1->render(m->all_text_, 0);
 	}
 	assert(im != nullptr);
 
@@ -195,10 +182,9 @@ void ChatOverlay::draw(RenderTarget & dst)
 	const int32_t top = get_h() - height - 2 * MARGIN;
 	const int width = std::min<int>(get_w(), im->width());
 
-	// TODO(unknown): alpha channel not respected
 	if (!m->transparent_) {
 		Rect rect(0, top, width, height);
-		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
+		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128), BlendMode::Default);
 	}
 	int32_t topcrop = im->height() - height;
 	Rect cropRect(0, topcrop, width, height);

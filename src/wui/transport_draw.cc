@@ -26,37 +26,27 @@
 
 namespace Widelands {
 
-void Flag::draw
-	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
-{
-	static struct {int32_t x, y;} ware_offsets[8] = {
-		{-5,  1},
-		{-1,  3},
-		{3,  3},
-		{7,  1},
-		{-6, -3},
-		{-1, -2},
-		{3, -2},
-		{8, -3}
-	};
+void Flag::draw(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos) {
+	static struct {
+		int32_t x, y;
+	} ware_offsets[8] = {{-5, 1}, {-1, 3}, {3, 3}, {7, 1}, {-6, -3}, {-1, -2}, {3, -2}, {8, -3}};
 
 	const RGBColor& player_color = owner().get_playercolor();
 	dst.blit_animation(
-	   pos, owner().tribe().flag_animation(), game.get_gametime() - m_animstart, player_color);
+	   pos, owner().tribe().flag_animation(), game.get_gametime() - animstart_, player_color);
 
-	const uint32_t ware_filled = m_ware_filled;
-	for (uint32_t i = 0; i < ware_filled; ++i) { //  draw wares
+	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
 		Point warepos = pos;
 		if (i < 8) {
 			warepos.x += ware_offsets[i].x;
 			warepos.y += ware_offsets[i].y;
 		} else
 			warepos.y -= 6 + (i - 8) * 3;
-		dst.blit_animation(warepos, m_wares[i].ware->descr().get_animation("idle"), 0, player_color);
+		dst.blit_animation(warepos, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) {}
-
+void Road::draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) {
+}
 }

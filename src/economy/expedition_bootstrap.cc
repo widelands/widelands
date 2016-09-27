@@ -35,7 +35,8 @@ namespace Widelands {
 
 struct ExpeditionBootstrap::ExpeditionWorker {
 	// Ownership is taken.
-	ExpeditionWorker(Request * r) : request(r), worker(nullptr) {}
+	ExpeditionWorker(Request* r) : request(r), worker(nullptr) {
+	}
 
 	std::unique_ptr<Request> request;
 
@@ -45,14 +46,15 @@ struct ExpeditionBootstrap::ExpeditionWorker {
 };
 
 ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
-	 : portdock_(portdock), economy_(portdock->get_economy()) {}
+   : portdock_(portdock), economy_(portdock->get_economy()) {
+}
 
 ExpeditionBootstrap::~ExpeditionBootstrap() {
 	assert(workers_.empty());
 	assert(wares_.empty());
 }
 
-void ExpeditionBootstrap::is_ready(Game & game) {
+void ExpeditionBootstrap::is_ready(Game& game) {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
@@ -68,16 +70,18 @@ void ExpeditionBootstrap::is_ready(Game & game) {
 }
 
 // static
-void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, DescriptionIndex, void* const data)
-{
-	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap *>(data);
+void ExpeditionBootstrap::ware_callback(Game& game,
+                                        WaresQueue*,
+                                        DescriptionIndex,
+                                        void* const data) {
+	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->is_ready(game);
 }
 
 // static
-void ExpeditionBootstrap::worker_callback
-	(Game& game, Request& r, DescriptionIndex, Worker* worker, PlayerImmovable& pi) {
-	Warehouse* warehouse = static_cast<Warehouse *>(&pi);
+void ExpeditionBootstrap::worker_callback(
+   Game& game, Request& r, DescriptionIndex, Worker* worker, PlayerImmovable& pi) {
+	Warehouse* warehouse = static_cast<Warehouse*>(&pi);
 
 	warehouse->get_portdock()->expedition_bootstrap()->handle_worker_callback(game, r, worker);
 }
@@ -130,12 +134,9 @@ void ExpeditionBootstrap::start() {
 	}
 
 	// Issue the request for the workers (so far only a builder).
-	workers_.emplace_back
-		(new ExpeditionWorker
-		 (new Request(*warehouse,
-						  warehouse->owner().tribe().builder(),
-						  ExpeditionBootstrap::worker_callback, wwWORKER))
-	);
+	workers_.emplace_back(
+	   new ExpeditionWorker(new Request(*warehouse, warehouse->owner().tribe().builder(),
+	                                    ExpeditionBootstrap::worker_callback, wwWORKER)));
 
 	// Update the user interface
 	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
@@ -160,8 +161,10 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
 		warehouse->refresh_options(*igb);
+	}
+	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
 void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
@@ -216,10 +219,10 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 	economy_ = new_economy;
 }
 
-void ExpeditionBootstrap::get_waiting_workers_and_wares
-	(Game& game, const TribeDescr& tribe, std::vector<Worker*>* return_workers,
-	 std::vector<WareInstance*>* return_wares)
-{
+void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
+                                                        const TribeDescr& tribe,
+                                                        std::vector<Worker*>* return_workers,
+                                                        std::vector<WareInstance*>* return_wares) {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		const DescriptionIndex ware_index = wq->get_ware();
 		for (uint32_t j = 0; j < wq->get_filled(); ++j) {
@@ -261,16 +264,17 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load(Warehouse& warehouse, FileRead& fr,
-										 Game& game, MapObjectLoader& mol)
-{
+void ExpeditionBootstrap::load(Warehouse& warehouse,
+                               FileRead& fr,
+                               Game& game,
+                               MapObjectLoader& mol) {
 	// Expedition workers
 	const uint8_t num_workers = fr.unsigned_8();
 	for (uint8_t i = 0; i < num_workers; ++i) {
 		workers_.emplace_back(new ExpeditionWorker(nullptr));
 		if (fr.unsigned_8() == 1) {
-			Request* worker_request = new Request
-			  (warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
+			Request* worker_request =
+			   new Request(warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
 			workers_.back()->request.reset(worker_request);
 			worker_request->read(fr, game, mol);
 			workers_.back()->worker = nullptr;
@@ -283,7 +287,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse, FileRead& fr,
 	assert(wares_.empty());
 	const uint8_t num_wares = fr.unsigned_8();
 	for (uint8_t i = 0; i < num_wares; ++i) {
-		WaresQueue * wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
+		WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
 		wq->read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 

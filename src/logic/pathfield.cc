@@ -23,25 +23,21 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint32_t const nrfields)
-	: fields(new Pathfield[nrfields]), cycle(0)
-{}
-
-
-PathfieldManager::PathfieldManager() : m_nrfields(0) {}
-
-
-void PathfieldManager::set_size(uint32_t const nrfields)
-{
-	if (m_nrfields != nrfields)
-		m_list.clear();
-
-	m_nrfields = nrfields;
+Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]), cycle(0) {
 }
 
-boost::shared_ptr<Pathfields> PathfieldManager::allocate()
-{
-	for (boost::shared_ptr<Pathfields>& pathfield : m_list) {
+PathfieldManager::PathfieldManager() : nrfields_(0) {
+}
+
+void PathfieldManager::set_size(uint32_t const nrfields) {
+	if (nrfields_ != nrfields)
+		list_.clear();
+
+	nrfields_ = nrfields;
+}
+
+boost::shared_ptr<Pathfields> PathfieldManager::allocate() {
+	for (boost::shared_ptr<Pathfields>& pathfield : list_) {
 		if (pathfield.use_count() == 1) {
 			++pathfield->cycle;
 			if (!pathfield->cycle) {
@@ -51,20 +47,18 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 		}
 	}
 
-	if (m_list.size() >= 8)
+	if (list_.size() >= 8)
 		throw wexception("PathfieldManager::allocate: unbounded nesting?");
 
-	boost::shared_ptr<Pathfields> pf(new Pathfields(m_nrfields));
+	boost::shared_ptr<Pathfields> pf(new Pathfields(nrfields_));
 	clear(pf);
-	m_list.push_back(pf);
+	list_.push_back(pf);
 	return pf;
 }
 
-void PathfieldManager::clear(const boost::shared_ptr<Pathfields> & pf)
-{
-	for (uint32_t i = 0; i < m_nrfields; ++i)
+void PathfieldManager::clear(const boost::shared_ptr<Pathfields>& pf) {
+	for (uint32_t i = 0; i < nrfields_; ++i)
 		pf->fields[i].cycle = 0;
 	pf->cycle = 1;
 }
-
 }

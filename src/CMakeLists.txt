@@ -82,6 +82,9 @@ add_subdirectory(sound)
 add_subdirectory(third_party)
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
+if (OPTION_BUILD_WEBSITE_TOOLS)
+  add_subdirectory(website)
+endif (OPTION_BUILD_WEBSITE_TOOLS)
 add_subdirectory(wui)
 
 # TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
@@ -106,7 +109,6 @@ wl_library(widelands_ball_of_mud
     graphic_text
     graphic_text_layout
     helper
-    io_dedicated_log
     io_filesystem
     logic
     logic_game_controller
@@ -129,8 +131,6 @@ wl_library(helper
   DEPENDS
     base_exceptions
 )
-
-
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})

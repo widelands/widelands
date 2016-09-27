@@ -21,3 +21,9 @@ VERSION
 
 # OS-X Meta Files
 .DS_Store
+
+# QT Creator settings
+CMakeLists.txt.user*
+
+# Translation validation files
+po_validation

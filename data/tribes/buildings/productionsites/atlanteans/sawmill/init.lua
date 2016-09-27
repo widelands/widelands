@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
+      { name = "log", amount = 8 }
    },
    outputs = {
       "planks"
@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
             "sleep=16500", -- Much faster than barbarians' wood hardener
             "return=skipped unless economy needs planks",
             "consume=log:2",
-            "playFX=sound/sawmill sawmill 192",
+            "play_sound=sound/sawmill sawmill 192",
             "animate=working 20000", -- Much faster than barbarians' wood hardener
             "produce=planks"
          }

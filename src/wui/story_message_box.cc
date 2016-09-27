@@ -27,45 +27,38 @@
 /**
  * The message box itself
  */
-StoryMessageBox::StoryMessageBox
-	(UI::Panel * const parent,
-	 const std::string & title,
-	 const std::string & body,
-	 const std::string & button_text,
-	 int32_t  const gposx, int32_t  const gposy,
-	 uint32_t const w,     uint32_t const h)
-	: UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str())
-{
-	UI::MultilineTextarea * m_text = nullptr;
+StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
+                                 const std::string& title,
+                                 const std::string& body,
+                                 const std::string& button_text,
+                                 int32_t const gposx,
+                                 int32_t const gposy,
+                                 uint32_t const w,
+                                 uint32_t const h)
+   : UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str()) {
+	UI::MultilineTextarea* message_text = nullptr;
 	int32_t const spacing = 5;
-	int32_t       offsy   = 5;
-	int32_t       offsx   = spacing;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
+	int32_t offsy = 5;
+	int32_t offsx = spacing;
+	int32_t posx = offsx;
+	int32_t posy = offsy;
 
 	set_inner_size(w, h);
-	m_text =
-		new UI::MultilineTextarea
-			(this,
-			 posx, posy,
-			 get_inner_w() - posx -     spacing,
-			 get_inner_h() - posy - 2 * spacing - 50);
+	message_text = new UI::MultilineTextarea(
+	   this, posx, posy, get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50);
 
-	if (m_text)
-		m_text->set_text(body);
+	if (message_text)
+		message_text->set_text(body);
 
 	int32_t const but_width = 120;
 	int32_t space = get_inner_w() - 2 * spacing;
 	space -= but_width;
-	space /= 2; // center button
+	space /= 2;  // center button
 	posx = spacing;
 	posy = get_inner_h() - 30;
 	posx += space;
-	UI::Button * okbtn = new UI::Button
-		(this, "ok",
-		 posx, posy, but_width, 20,
-		 g_gr->images().get("images/ui_basic/but5.png"),
-		 button_text);
+	UI::Button* okbtn = new UI::Button(this, "ok", posx, posy, but_width, 20,
+	                                   g_gr->images().get("images/ui_basic/but5.png"), button_text);
 	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
 
 	center_to_parent();
@@ -88,25 +81,22 @@ void StoryMessageBox::clicked_ok() {
 /*
  * Avoid being closed by right click
  */
-bool StoryMessageBox::handle_mousepress
-	(const uint8_t btn, int32_t mx, int32_t my)
-{
+bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	if (btn == SDL_BUTTON_RIGHT)
 		return true;
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }
 
-bool StoryMessageBox::handle_key(bool down, SDL_Keysym code)
-{
+bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				clicked_ok();
-				return true;
-			default:
-				break; // not handled
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		default:
+			break;  // not handled
 		}
 	}
 	return UI::Panel::handle_key(down, code);

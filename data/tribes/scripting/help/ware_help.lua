@@ -4,8 +4,10 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- ware_help.lua
 -- ---------------
-
--- Functions used in the ingame ware help windows for formatting the text and pictures.
+--
+-- This script returns a formatted entry for the ingame ware help.
+-- Pass the internal tribe name and ware name to the coroutine to select the
+-- ware type.
 
 
 --  =======================================================
@@ -13,7 +15,7 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function ware_help_general_string(tribe, ware_description)
+-- .. function:: ware_help_general_string(tribe, ware_description)
 --
 --    Displays general info texts about the ware
 --
@@ -26,7 +28,9 @@ function ware_help_general_string(tribe, ware_description)
    if (purpose_text ~= "") then
       purpose_text = purpose_text .. " "
    end
-   purpose_text = ware_helptext() .. ware_helptext(tribe.name)
+   -- TRANSLATORS: Put 2 sentences one after the other.
+   -- Languages using Chinese script probably want to lose the blank space here.
+   purpose_text = pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribe.name))
 
    -- TODO(GunChleoc): Split into purpose and note
    local result = rt(h2(_"Purpose")) ..
@@ -35,7 +39,7 @@ function ware_help_general_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_producers_string(tribe, ware_description)
+-- .. function:: ware_help_producers_string(tribe, ware_description)
 --
 --    Displays the buildings that produce this ware with information about
 --    wares consumed in their production programs
@@ -101,7 +105,7 @@ function ware_help_producers_string(tribe, ware_description)
 end
 
 -- RST
--- .. function ware_help_consumers_string(tribe, ware_description)
+-- .. function:: ware_help_consumers_string(tribe, ware_description)
 --
 --    Displays the buildings that consume this ware and about
 --    workers that use this ware as a tool
@@ -134,8 +138,7 @@ function ware_help_consumers_string(tribe, ware_description)
 
    -- Now collecting the workers that use this ware as a tool
    local workers_string = ""
-   for i, workername in ipairs(tribe.workers) do
-   local worker = wl.Game():get_worker_description(workername)
+   for i, worker in ipairs(tribe.workers) do
       local add_this_worker = false
       for j, buildcost in ipairs(worker.buildcost) do
          if (buildcost ~= nil and buildcost == ware_description.name) then
@@ -165,12 +168,16 @@ end
 
 
 return {
-   func = function(tribename, ware_description)
+   func = function(tribename, warename)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
+      local ware_description = wl.Game():get_ware_description(warename)
       include(ware_description.helptext_script)
-      return ware_help_general_string(tribe, ware_description)
-         .. ware_help_producers_string(tribe, ware_description)
-         .. ware_help_consumers_string(tribe, ware_description)
+      return {
+         title = ware_description.descname,
+         text = ware_help_general_string(tribe, ware_description)
+            .. ware_help_producers_string(tribe, ware_description)
+            .. ware_help_consumers_string(tribe, ware_description)
+      }
    end
 }

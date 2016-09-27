@@ -47,7 +47,8 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::Program::kHighestProgramId <= 8, "Need to change sorting keys.");  // 4 bits.
+static_assert(RenderQueue::Program::kHighestProgramId <= 8,
+              "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
 make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
@@ -77,6 +78,7 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 
 inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
 	args->color = item.rect_arguments.color;
+	args->destination_rect = item.rect_arguments.destination_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* args) {
@@ -84,11 +86,11 @@ inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* arg
 	args->blend = item.blit_arguments.blend;
 	args->mask = item.blit_arguments.mask;
 	args->blit_mode = item.blit_arguments.mode;
+	args->destination_rect = item.blit_arguments.destination_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->color = item.line_arguments.color;
-	args->line_width = item.line_arguments.line_width;
+	args->vertices = std::move(item.line_arguments.vertices);
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.
@@ -106,7 +108,6 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		}
 		all_args.emplace_back();
 		T& args = all_args.back();
-		args.destination_rect = current_item.destination_rect;
 		args.z_value = current_item.z_value;
 		args.blend_mode = current_item.blend_mode;
 		from_item(current_item, &args);
@@ -155,23 +156,20 @@ void RenderQueue::enqueue(const Item& given_item) {
 	uint32_t extra_value = 0;
 
 	switch (given_item.program_id) {
-		case Program::kBlit:
-		   extra_value = given_item.blit_arguments.texture.texture_id;
-			break;
+	case Program::kBlit:
+		extra_value = given_item.blit_arguments.texture.texture_id;
+		break;
 
-		case Program::kLine:
-		   extra_value = given_item.line_arguments.line_width;
-			break;
+	case Program::kLine:
+	case Program::kRect:
+	case Program::kTerrainBase:
+	case Program::kTerrainDither:
+	case Program::kTerrainRoad:
+		/* all fallthroughs intended */
+		break;
 
-		case Program::kRect:
-		case Program::kTerrainBase:
-		case Program::kTerrainDither:
-		case Program::kTerrainRoad:
-			/* all fallthroughs intended */
-			break;
-
-		default:
-		   throw wexception("Unknown given_item.program_id: %d", given_item.program_id);
+	default:
+		throw wexception("Unknown given_item.program_id: %d", given_item.program_id);
 	}
 
 	if (given_item.blend_mode == BlendMode::Copy) {
@@ -206,13 +204,11 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	opaque_items_.clear();
 
 	glEnable(GL_BLEND);
-	glDepthMask(GL_FALSE);
 
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
 
-	glDepthMask(GL_TRUE);
 	glDisable(GL_DEPTH_TEST);
 	next_z_ = 1;
 }
@@ -223,8 +219,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		const Item& item = items[i];
 		switch (item.program_id) {
 		case Program::kBlit:
-			BlitProgram::instance().draw(
-			   batch_up<BlitProgram::Arguments>(Program::kBlit, items, &i));
+			BlitProgram::instance().draw(batch_up<BlitProgram::Arguments>(Program::kBlit, items, &i));
 			break;
 
 		case Program::kLine:
@@ -238,29 +233,25 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			break;
 
 		case Program::kTerrainBase: {
-			ScopedScissor scoped_scissor(item.destination_rect);
-			terrain_program_->draw(item.terrain_arguments.gametime,
-			                       *item.terrain_arguments.terrains,
-			                       *item.terrain_arguments.fields_to_draw,
-			                       item.z_value);
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			terrain_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
+			                       *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 
 		case Program::kTerrainDither: {
-			ScopedScissor scoped_scissor(item.destination_rect);
-			dither_program_->draw(item.terrain_arguments.gametime,
-			                      *item.terrain_arguments.terrains,
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
 			                      item.z_value + kOpenGlZDelta);
 			++i;
 		} break;
 
 		case Program::kTerrainRoad: {
-			ScopedScissor scoped_scissor(item.destination_rect);
-			road_program_->draw(item.terrain_arguments.renderbuffer_width,
-			                    item.terrain_arguments.renderbuffer_height,
-			                    *item.terrain_arguments.fields_to_draw,
-			                    item.z_value + 2 * kOpenGlZDelta);
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			road_program_->draw(
+			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
+			   *item.terrain_arguments.fields_to_draw, item.z_value + 2 * kOpenGlZDelta);
 			++i;
 		} break;
 

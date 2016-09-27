@@ -65,9 +65,14 @@ private:
 
 // Returns a value in [0., 1.] that describes the suitability for the
 // 'immovable_affinity' for 'field'. Higher is better suited.
-double probability_to_grow
-	(const TerrainAffinity& immovable_affinity, const FCoords& fcoords,
-	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains);
+double probability_to_grow(const TerrainAffinity& immovable_affinity,
+                           const FCoords& fcoords,
+                           const Map& map,
+                           const DescriptionMaintainer<TerrainDescription>& terrains);
+
+// Probability to grow for a single terrain
+double probability_to_grow(const TerrainAffinity& immovable_affinity,
+                           const TerrainDescription& terrain);
 
 }  // namespace Widelands
 

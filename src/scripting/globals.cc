@@ -19,60 +19,53 @@
 
 #include "scripting/globals.h"
 
-Widelands::Game & get_game(lua_State * const L) {
+Widelands::Game& get_game(lua_State* const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "game");
-	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
+	Widelands::Game* g = static_cast<Widelands::Game*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);  // pop this userdata
 
 	if (!g)
-		throw LuaError
-			("\"game\" field was nil. get_game was not called in a game.");
+		throw LuaError("\"game\" field was nil. get_game was not called in a game.");
 
 	return *g;
 }
 
-Widelands::EditorGameBase & get_egbase(lua_State * const L) {
+Widelands::EditorGameBase& get_egbase(lua_State* const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "egbase");
-	Widelands::EditorGameBase * g = static_cast<Widelands::EditorGameBase *>
-		(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
+	Widelands::EditorGameBase* g = static_cast<Widelands::EditorGameBase*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);  // pop this userdata
 
 	if (!g)
-		throw LuaError
-			("\"egbase\" field was nil. This should be impossible.");
-
+		throw LuaError("\"egbase\" field was nil. This should be impossible.");
 
 	return *g;
 }
 
-Widelands::MapObjectLoader * get_mol(lua_State * const L) {
+Widelands::MapObjectLoader* get_mol(lua_State* const L) {
 	lua_pushstring(L, "mol");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
-	Widelands::MapObjectLoader * mol =
-		static_cast<Widelands::MapObjectLoader *>(lua_touserdata(L, -1));
+	Widelands::MapObjectLoader* mol =
+	   static_cast<Widelands::MapObjectLoader*>(lua_touserdata(L, -1));
 
-	lua_pop(L, 1); // pop this userdata
+	lua_pop(L, 1);  // pop this userdata
 
 	if (!mol)
-		throw LuaError
-			("\"mol\" field was nil. This should be impossible.");
+		throw LuaError("\"mol\" field was nil. This should be impossible.");
 
 	return mol;
 }
 
-Widelands::MapObjectSaver * get_mos(lua_State * const L) {
+Widelands::MapObjectSaver* get_mos(lua_State* const L) {
 	lua_pushstring(L, "mos");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
-	Widelands::MapObjectSaver * mos =
-		static_cast<Widelands::MapObjectSaver *>(lua_touserdata(L, -1));
+	Widelands::MapObjectSaver* mos = static_cast<Widelands::MapObjectSaver*>(lua_touserdata(L, -1));
 
-	lua_pop(L, 1); // pop this userdata
+	lua_pop(L, 1);  // pop this userdata
 
 	if (!mos)
-		throw LuaError
-			("\"mos\" field was nil. This should be impossible.");
+		throw LuaError("\"mos\" field was nil. This should be impossible.");
 
 	return mos;
 }

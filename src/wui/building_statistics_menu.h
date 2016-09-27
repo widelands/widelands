@@ -50,10 +50,10 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 private:
 	/// Array indices for the tabs
-	enum BuildingTab {Small, Medium, Big, Mines, Ports};
+	enum BuildingTab { Small, Medium, Big, Mines, Ports };
 
 	/// Which building state to jump through
-	enum class JumpTarget {kOwned, kConstruction, kUnproductive};
+	enum class JumpTarget { kOwned, kConstruction, kUnproductive };
 
 	/// Array indices for the navigation buttons
 	enum NavigationButton {
@@ -67,17 +67,17 @@ private:
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
-	bool add_button(
-		Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, int tab_index,
-		UI::Box& row, int* column);
+	bool add_button(Widelands::DescriptionIndex id,
+	                const Widelands::BuildingDescr& descr,
+	                int tab_index,
+	                UI::Box& row,
+	                int* column);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
 	/// Sets the label for id type to text in the chosen color with dynamic font size
-	void set_labeltext_autosize(UI::Textarea* textarea,
-	                            const std::string& text,
-	                            const RGBColor& color);
+	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(Widelands::DescriptionIndex id);

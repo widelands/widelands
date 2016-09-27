@@ -36,9 +36,9 @@ class Texture;
  */
 class Image {
 public:
-
 	Image() = default;
-	virtual ~Image() {}
+	virtual ~Image() {
+	}
 
 	// Dimensions of this Image in pixels.
 	virtual int width() const = 0;
@@ -52,6 +52,5 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_H

@@ -42,44 +42,51 @@ class Trackable {
 	friend class BaseTrackPtr;
 
 	class Tracker {
-		uint32_t        m_refcount;
-		Trackable * m_ptr;
+		uint32_t refcount_;
+		Trackable* ptr_;
 
 	public:
-		Tracker(Trackable * const p) : m_refcount(0), m_ptr(p) {}
+		Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
+		}
 
 		void addref() {
-			++m_refcount;
-			assert(m_refcount > 0);
+			++refcount_;
+			assert(refcount_ > 0);
 		}
 		void deref() {
-			assert(m_refcount > 0);
-			--m_refcount;
-			if (!m_refcount && !m_ptr)
+			assert(refcount_ > 0);
+			--refcount_;
+			if (!refcount_ && !ptr_)
 				delete this;
 		}
 		void clear() {
-			m_ptr = nullptr;
-			if (!m_refcount)
+			ptr_ = nullptr;
+			if (!refcount_)
 				delete this;
 		}
 
-		Trackable * get() {return m_ptr;}
+		Trackable* get() {
+			return ptr_;
+		}
 
 		//  Putting "private:" here causes a compiler warning, even though we use
 		//  delete this.
 	protected:
-		~Tracker() {}
+		~Tracker() {
+		}
 	};
 
 public:
-	Trackable() {m_tracker = new Tracker(this);}
-	virtual ~Trackable() {m_tracker->clear();}
+	Trackable() {
+		tracker_ = new Tracker(this);
+	}
+	virtual ~Trackable() {
+		tracker_->clear();
+	}
 
 private:
-	Tracker * m_tracker;
+	Tracker* tracker_;
 };
-
 
 /*
 BaseTrackPtr cannot be used directly. It contains the bookkeeping logic
@@ -88,62 +95,60 @@ TrackPtr is a template that derives from BaseTrackPtr and provides a
 type-safe interface.
 */
 class BaseTrackPtr {
-	mutable Trackable::Tracker * m_tracker;
+	mutable Trackable::Tracker* tracker_;
 
 protected:
-	BaseTrackPtr() : m_tracker(nullptr) {}
+	BaseTrackPtr() : tracker_(nullptr) {
+	}
 	~BaseTrackPtr() {
-		if (m_tracker)
-			m_tracker->deref();
+		if (tracker_)
+			tracker_->deref();
 	}
-	BaseTrackPtr(Trackable * const t) {
+	BaseTrackPtr(Trackable* const t) {
 		if (t) {
-			m_tracker = t->m_tracker;
-			m_tracker->addref();
+			tracker_ = t->tracker_;
+			tracker_->addref();
 		} else
-			m_tracker = nullptr;
+			tracker_ = nullptr;
 	}
-	BaseTrackPtr(const BaseTrackPtr & o) {
-		m_tracker = o.m_tracker;
-		if (m_tracker)
-			m_tracker->addref();
-	}
-
-	void set(const BaseTrackPtr & o) {
-		if (m_tracker)
-			m_tracker->deref();
-
-		m_tracker = o.m_tracker;
-		if (m_tracker)
-			m_tracker->addref();
+	BaseTrackPtr(const BaseTrackPtr& o) {
+		tracker_ = o.tracker_;
+		if (tracker_)
+			tracker_->addref();
 	}
 
-	void set(Trackable * const t)
-	{
-		if (m_tracker)
-			m_tracker->deref();
+	void set(const BaseTrackPtr& o) {
+		if (tracker_)
+			tracker_->deref();
+
+		tracker_ = o.tracker_;
+		if (tracker_)
+			tracker_->addref();
+	}
+
+	void set(Trackable* const t) {
+		if (tracker_)
+			tracker_->deref();
 
 		if (t) {
-			m_tracker = t->m_tracker;
-			m_tracker->addref();
+			tracker_ = t->tracker_;
+			tracker_->addref();
 		} else
-			m_tracker = nullptr;
+			tracker_ = nullptr;
 	}
 
-	Trackable * get() const
-	{
-		if (m_tracker) {
-			if (Trackable * const t = m_tracker->get())
+	Trackable* get() const {
+		if (tracker_) {
+			if (Trackable* const t = tracker_->get())
 				return t;
 
-			m_tracker->deref();
-			m_tracker = nullptr;
+			tracker_->deref();
+			tracker_ = nullptr;
 		}
 
 		return nullptr;
 	}
 };
-
 
 /*
 A TrackPtr is a smart pointer to a T*.
@@ -151,19 +156,30 @@ It automatically becomes 0 when the object it points to is deleted.
 Class T, i.e. the object that the TrackPtr points to, must be a class
 derived from Trackable.
 */
-template<class T>
-struct TrackPtr : BaseTrackPtr {
-	TrackPtr() {}
+template <class T> struct TrackPtr : BaseTrackPtr {
+	TrackPtr() {
+	}
 
-	TrackPtr(T * ptr) : BaseTrackPtr(ptr) {}
-	TrackPtr(const TrackPtr<T> & o) : BaseTrackPtr(o) {}
+	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
+	}
+	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
+	}
 
-	TrackPtr & operator= (const TrackPtr<T> &       o) {set(o); return *this;}
-	TrackPtr & operator= (T                 * const p) {set(p); return *this;}
+	TrackPtr& operator=(const TrackPtr<T>& o) {
+		set(o);
+		return *this;
+	}
+	TrackPtr& operator=(T* const p) {
+		set(p);
+		return *this;
+	}
 
-	operator T *  () const {return static_cast<T *>(get());}
-	T * operator->() const {return static_cast<T *>(get());}
+	operator T*() const {
+		return static_cast<T*>(get());
+	}
+	T* operator->() const {
+		return static_cast<T*>(get());
+	}
 };
-
 
 #endif  // end of include guard: WL_ECONOMY_TRACKPTR_H

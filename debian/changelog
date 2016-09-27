@@ -1,3 +1,27 @@
+widelands (1:18-3widelands1) UNRELEASED; urgency=medium
+
+  * Merged Debian packaging of Widelands 1:18-3. Remaining changes:
+    - Disabled all Debian-patches since some caused conflicts when applied to 
+      latest trunk. They mostly concern architectures which we don't have
+      access to build/test with normally, so they would be hard to maintain.
+        - The kFreeBSD-patch was removed entirely since it has been included.
+    - Build dependencies changed from SDL to SDL2.
+    - New build dependencies: boost-regex, boost-test
+    - Removed build dependencies: lua, sdl(2)-gfx
+    - Reduce complexity by reducing the number of paths configured during build
+      to just the datadir. 
+    - Install new binaries; wl_map_info, wl_map_object_info and wl_render_richtext
+    - Always use our bundled fonts
+    - Updated copyright file
+    - Updated man page
+    - Moved all data-related directories into a new "data" directory.
+      Various paths have been updated to reflect this.
+    - Added added widelands.appdata.xml for debian desktops. 
+    - Made widelands.desktop localizable.
+    - Translations for appdata and desktop file.
+
+ -- Widelands <widelands-dev@lists.launchpad.net>  Thu, 21 Jul 2016 21:25:36 +0200
+
 widelands (1:18-3) unstable; urgency=medium
 
   Packaging cleanup version only, no user-visible changes.

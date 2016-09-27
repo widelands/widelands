@@ -30,7 +30,7 @@
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
@@ -39,18 +39,18 @@
 /// Similar exception type as wexception, but without the debug output.
 /// Intended for normal warnings like "map could not be found".
 struct WLWarning : public std::exception {
-	explicit WLWarning (char const * title, char const * message, ...)
-	 PRINTF_FORMAT(3, 4);
+	explicit WLWarning(char const* title, char const* message, ...) PRINTF_FORMAT(3, 4);
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
-	virtual const char * title() const;
-	const char * what() const noexcept override;
+	virtual const char* title() const;
+	const char* what() const noexcept override;
 
 protected:
-	WLWarning() {}
-	std::string m_what;
-	std::string m_title;
+	WLWarning() {
+	}
+	std::string what_;
+	std::string title_;
 };
 
 #endif  // end of include guard: WL_BASE_WARNING_H

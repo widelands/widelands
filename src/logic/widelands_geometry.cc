@@ -21,17 +21,17 @@
 
 namespace Widelands {
 
-Coords::Coords() {}
+Coords::Coords() {
+}
 
-Coords::Coords(const int16_t nx, const int16_t ny)
-		: x(nx), y(ny)
-	{}
+Coords::Coords(const int16_t nx, const int16_t ny) : x(nx), y(ny) {
+}
 
-bool Coords::operator== (const Coords& other) const {
+bool Coords::operator==(const Coords& other) const {
 	return x == other.x && y == other.y;
 }
 
-bool Coords::operator!= (const Coords & other) const {
+bool Coords::operator!=(const Coords& other) const {
 	return !(*this == other);
 }
 
@@ -44,7 +44,7 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 		if (y < new_origin.y)
 			y += extent.h;
 		y -= new_origin.y;
-		if ((y & 1) && (new_origin.y & 1) && ++ new_origin.x == extent.w)
+		if ((y & 1) && (new_origin.y & 1) && ++new_origin.x == extent.w)
 			new_origin.x = 0;
 		if (x < new_origin.x)
 			x += extent.w;
@@ -55,6 +55,19 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 // static
 Coords Coords::null() {
 	return Coords(-1, -1);
+}
+
+// Hash coordinates to use them as keys in a container
+uint32_t Coords::hash() const {
+	return x << 16 | y;
+}
+
+// Unhash coordinates so they can be gotten from a container
+Coords Coords::unhash(uint32_t hash) {
+	Coords coords;
+	coords.x = hash >> 16;  // is cast needed here???
+	coords.y = hash;
+	return coords;
 }
 
 }  // namespace Widelands

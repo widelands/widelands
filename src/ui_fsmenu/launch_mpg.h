@@ -23,12 +23,11 @@
 #include <memory>
 #include <string>
 
-#include "ui_fsmenu/base.h"
-#include "ui_fsmenu/helpwindow.h"
 #include "ui_basic/button.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/helpwindow.h"
 #include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
@@ -45,10 +44,10 @@ class LuaInterface;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuBase {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
+	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchMPG();
 
-	void set_chat_provider(ChatProvider &);
+	void set_chat_provider(ChatProvider&);
 
 	void think() override;
 
@@ -59,7 +58,7 @@ protected:
 	void clicked_back() override;
 
 private:
-	LuaInterface * lua_;
+	LuaInterface* lua_;
 
 	void change_map_or_save();
 	void select_map();
@@ -72,31 +71,30 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	uint32_t    butw_;
-	uint32_t    buth_;
-	uint32_t    fs_;
-	std::string fn_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t fs_;
+
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
-	int32_t const padding_;               // Common padding between panels
-	int32_t const indent_;                // Indent for elements below labels
+	int32_t const padding_;  // Common padding between panels
+	int32_t const indent_;   // Indent for elements below labels
 	int32_t const label_height_;
 	int32_t const right_column_x_;
 
-	UI::Button       change_map_or_save_, ok_, back_, wincondition_;
-	UI::Button       help_button_;
-	UI::Textarea              title_, mapname_, clients_, players_, map_, wincondition_type_;
-	UI::MultilineTextarea    map_info_, client_info_;
+	UI::Button change_map_or_save_, ok_, back_, wincondition_;
+	UI::Button help_button_;
+	UI::Textarea title_, mapname_, clients_, players_, map_, wincondition_type_;
+	UI::MultilineTextarea map_info_, client_info_;
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
-	GameSettingsProvider    * settings_;
-	GameController          * ctrl_;
-	GameChatPanel           * chat_;
-	MultiPlayerSetupGroup   * mpsg_;
-	std::string               filename_proof_; // local variable to check state
-	int16_t                   nr_players_;
+	GameSettingsProvider* settings_;
+	GameController* ctrl_;
+	GameChatPanel* chat_;
+	MultiPlayerSetupGroup* mpsg_;
+	std::string filename_proof_;  // local variable to check state
+	int16_t nr_players_;
 
-	UI::SuggestedTeamsBox*    suggested_teams_box_;
+	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
-
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

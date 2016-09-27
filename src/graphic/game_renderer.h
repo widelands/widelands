@@ -27,8 +27,8 @@
 #include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {
-	class Player;
-	class EditorGameBase;
+class Player;
+class EditorGameBase;
 }
 
 class RenderTarget;
@@ -58,9 +58,8 @@ public:
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
-	void rendermap(RenderTarget& dst,
-	               const Widelands::EditorGameBase& egbase,
-	               const Point& view_offset);
+	void
+	rendermap(RenderTarget& dst, const Widelands::EditorGameBase& egbase, const Point& view_offset);
 
 private:
 	// Draw the map for the given parameters (see rendermap). 'player'

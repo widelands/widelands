@@ -49,7 +49,7 @@ public:
 	RGBColor get_color() const;
 
 private:
-	const std::string m_name, m_value;
+	const std::string name_, value_;
 };
 
 // This is basically a map<string, Attr>.
@@ -65,12 +65,12 @@ public:
 	bool has(const std::string& name) const;
 
 private:
-	std::map<std::string, std::unique_ptr<Attr>> m_attrs;
+	std::map<std::string, std::unique_ptr<Attr>> attrs_;
 };
 
 struct TagConstraint {
 	std::unordered_set<std::string> allowed_attrs;
-	std::unordered_set<std::string> allowed_childs;
+	std::unordered_set<std::string> allowed_children;
 	bool text_allowed;
 	bool has_closing_tag;
 };
@@ -83,20 +83,20 @@ public:
 
 	~Tag();
 
-	const std::string & name() const;
-	const AttrMap & attrs() const;
-	const ChildList & childs() const;
+	const std::string& name() const;
+	const AttrMap& attrs() const;
+	const ChildList& children() const;
 	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&);
 
 private:
-	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
-	void m_parse_closing_tag(TextStream & ts);
-	void m_parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
-	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
+	void parse_opening_tag(TextStream& ts, TagConstraints& tcs);
+	void parse_closing_tag(TextStream& ts);
+	void parse_attribute(TextStream& ts, std::unordered_set<std::string>&);
+	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&);
 
-	std::string m_name;
-	AttrMap m_am;
-	ChildList m_childs;
+	std::string name_;
+	AttrMap attribute_map_;
+	ChildList children_;
 };
 
 struct Child {
@@ -122,8 +122,8 @@ public:
 	std::string remaining_text();
 
 private:
-	TagConstraints m_tcs;
-	std::unique_ptr<TextStream> m_ts;
+	TagConstraints tag_constraints_;
+	std::unique_ptr<TextStream> text_stream_;
 };
 }
 

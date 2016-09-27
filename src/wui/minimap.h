@@ -35,15 +35,14 @@ struct MiniMap : public UI::UniqueWindow {
 		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
 
 		Registry()
-		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner |
-		                           MiniMapLayer::Flag | MiniMapLayer::Road |
-		                           MiniMapLayer::Building) {
+		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
+		           MiniMapLayer::Road | MiniMapLayer::Building) {
 		}
 	};
 
-	MiniMap(InteractiveBase & parent, Registry *);
+	MiniMap(InteractiveBase& parent, Registry*);
 
-	boost::signals2::signal<void (int32_t, int32_t)> warpview;
+	boost::signals2::signal<void(int32_t, int32_t)> warpview;
 
 	void set_view_pos(int32_t const x, int32_t const y) {
 		view_.set_view_pos(x, y);
@@ -64,23 +63,26 @@ private:
 	 * The minimap always centers around the current viewpoint.
 	 */
 	struct View : public UI::Panel {
-		View
-			(UI::Panel & parent, MiniMapLayer * flags,
-			 int32_t x, int32_t y, uint32_t w, uint32_t h,
-			 InteractiveBase &);
+		View(UI::Panel& parent,
+		     MiniMapLayer* flags,
+		     int32_t x,
+		     int32_t y,
+		     uint32_t w,
+		     uint32_t h,
+		     InteractiveBase&);
 
 		void set_view_pos(int32_t x, int32_t y);
 
-		void draw(RenderTarget &) override;
+		void draw(RenderTarget&) override;
 
-		bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 
 	private:
-		InteractiveBase & ibase_;
-		int32_t                viewx_, viewy_;
+		InteractiveBase& ibase_;
+		int32_t viewx_, viewy_;
 		const Image* pic_map_spot_;
 
 		// This needs to be owned since it will be rendered by the RenderQueue
@@ -92,11 +94,11 @@ private:
 	};
 
 	uint32_t number_of_buttons_per_row() const;
-	uint32_t number_of_button_rows    () const;
-	uint32_t but_w                    () const;
-	uint32_t but_h                    () const;
+	uint32_t number_of_button_rows() const;
+	uint32_t but_w() const;
+	uint32_t but_h() const;
 
-	View     view_;
+	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;
 	UI::Button button_flags;

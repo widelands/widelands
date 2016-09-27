@@ -15,7 +15,7 @@ tribes:new_trainingsite_type {
       planks = 5,
       spidercloth = 5,
       diamond = 2,
-      quartz = 2
+      gold = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -23,7 +23,7 @@ tribes:new_trainingsite_type {
       planks = 2,
       spidercloth = 2,
       diamond = 1,
-      quartz = 1
+      gold = 1
    },
 
    animations = {
@@ -34,8 +34,8 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      prohibited_till=900,
-      forced_after=1500,
+      prohibited_till = 900,
+      forced_after = 1500,
       trainingsite_type = "basic",
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
@@ -46,12 +46,12 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 6,
-      smoked_meat = 6,
-      shield_steel = 4,
-      shield_advanced = 4,
-      tabard_golden = 5
+      { name = "smoked_fish", amount = 6 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 },
+      { name = "tabard_golden", amount = 5 },
+      { name = "shield_steel", amount = 4 },
+      { name = "shield_advanced", amount = 4 },
    },
    outputs = {
       "atlanteans_soldier",
@@ -69,7 +69,7 @@ tribes:new_trainingsite_type {
          "shield_advanced"
       }
    },
-   ["soldier hp"] = {
+   ["soldier health"] = {
       min_level = 0,
       max_level = 0,
       food = {
@@ -119,15 +119,15 @@ tribes:new_trainingsite_type {
             "train=soldier defense 1 2"
          }
       },
-      upgrade_soldier_hp_0 = {
+      upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 0 to level 1",
          actions = {
-            "check_soldier=soldier hp 0", -- Fails when aren't any soldier of level 0 hp
+            "check_soldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
             "sleep=30000",
-            "check_soldier=soldier hp 0", -- Because the soldier can be expelled by the player
+            "check_soldier=soldier health 0", -- Because the soldier can be expelled by the player
             "consume=smoked_fish,smoked_meat:2 tabard_golden",
-            "train=soldier hp 0 1"
+            "train=soldier health 0 1"
          }
       },
       upgrade_soldier_evade_0 = {

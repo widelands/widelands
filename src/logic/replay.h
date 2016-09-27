@@ -51,16 +51,16 @@ class PlayerCommand;
  */
 class ReplayReader {
 public:
-	ReplayReader(Game & game, const std::string & filename);
+	ReplayReader(Game& game, const std::string& filename);
 	~ReplayReader();
 
-	Command * get_next_command(uint32_t time);
+	Command* get_next_command(uint32_t time);
 	bool end_of_replay();
 
 private:
-	StreamRead * m_cmdlog;
+	StreamRead* cmdlog_;
 
-	uint32_t m_replaytime;
+	uint32_t replaytime_;
 };
 
 /**
@@ -68,18 +68,17 @@ private:
  */
 class ReplayWriter {
 public:
-	ReplayWriter(Game &, const std::string & filename);
+	ReplayWriter(Game&, const std::string& filename);
 	~ReplayWriter();
 
-	void send_player_command(PlayerCommand *);
-	void send_sync(const Md5Checksum &);
+	void send_player_command(PlayerCommand*);
+	void send_sync(const Md5Checksum&);
 
 private:
-	Game        & m_game;
-	StreamWrite * m_cmdlog;
-	std::string m_filename;
+	Game& game_;
+	StreamWrite* cmdlog_;
+	std::string filename_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_H

@@ -34,7 +34,7 @@
 
 namespace Widelands {
 
-namespace  {
+namespace {
 
 // Parse a terrain type from the giving string.
 TerrainDescription::Is terrain_type_from_string(const std::string& type) {
@@ -46,11 +46,11 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 	}
 	if (type == "water") {
 		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kWater |
-																	TerrainDescription::Is::kUnwalkable);
+		                                           TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "unreachable") {
 		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kUnreachable |
-																	TerrainDescription::Is::kUnwalkable);
+		                                           TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "mineable") {
 		return TerrainDescription::Is::kMineable;
@@ -63,8 +63,7 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 
 }  // namespace
 
-
-TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
+TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	switch (is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
@@ -102,7 +101,7 @@ TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
 TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
-	  is_(terrain_type_from_string(table.get_string("is"))),
+     is_(terrain_type_from_string(table.get_string("is"))),
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
@@ -124,8 +123,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
 
-	 texture_paths_ =
-	   table.get_table("textures")->array_entries<std::string>();
+	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
 	frame_length_ = FRAME_LENGTH;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
@@ -177,7 +175,6 @@ TerrainDescription::Is TerrainDescription::get_is() const {
 	return is_;
 }
 
-
 const std::vector<TerrainDescription::Type> TerrainDescription::get_types() const {
 	std::vector<TerrainDescription::Type> terrain_types;
 
@@ -210,20 +207,24 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorCategory& TerrainDescription::editor_category() const {
-	return *editor_category_;
+const EditorCategory* TerrainDescription::editor_category() const {
+	return editor_category_;
 }
 
-DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
+DescriptionIndex TerrainDescription::get_valid_resource(DescriptionIndex index) const {
 	return valid_resources_[index];
 }
 
-int TerrainDescription::get_num_valid_resources() const {
+size_t TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
 }
 
-bool TerrainDescription::is_resource_valid(const int res) const {
-	for (const uint8_t resource_index : valid_resources_) {
+std::vector<DescriptionIndex> TerrainDescription::valid_resources() const {
+	return valid_resources_;
+}
+
+bool TerrainDescription::is_resource_valid(const DescriptionIndex res) const {
+	for (const DescriptionIndex resource_index : valid_resources_) {
 		if (resource_index == res) {
 			return true;
 		}
@@ -231,11 +232,11 @@ bool TerrainDescription::is_resource_valid(const int res) const {
 	return false;
 }
 
-int TerrainDescription::get_default_resource() const {
+DescriptionIndex TerrainDescription::get_default_resource() const {
 	return default_resource_index_;
 }
 
-int TerrainDescription::get_default_resource_amount() const {
+ResourceAmount TerrainDescription::get_default_resource_amount() const {
 	return default_resource_amount_;
 }
 

@@ -23,9 +23,9 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "economy/shippingitem.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "economy/shippingitem.h"
 
 namespace Widelands {
 
@@ -37,7 +37,7 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const _name, char const* const _descname);
+	PortdockDescr(char const* const init_name, char const* const init_descname);
 	~PortdockDescr() override {
 	}
 
@@ -73,44 +73,45 @@ private:
  */
 class PortDock : public PlayerImmovable {
 public:
-
 	const PortdockDescr& descr() const;
 
 	PortDock(Warehouse* warehouse);
 	~PortDock() override;
 
 	void add_position(Widelands::Coords where);
-	Warehouse * get_warehouse() const;
+	Warehouse* get_warehouse() const;
 
-	Fleet * get_fleet() const {return m_fleet;}
-	PortDock * get_dock(Flag & flag) const;
-	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
+	Fleet* get_fleet() const {
+		return fleet_;
+	}
+	PortDock* get_dock(Flag& flag) const;
+	bool get_need_ship() const {
+		return need_ship_ || expedition_ready_;
+	}
 
-	void set_economy(Economy *) override;
+	void set_economy(Economy*) override;
 
 	int32_t get_size() const override;
 	bool get_passable() const override;
 
-	Flag & base_flag() override;
-	PositionList get_positions
-		(const EditorGameBase &) const override;
-	void draw
-		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	Flag& base_flag() override;
+	PositionList get_positions(const EditorGameBase&) const override;
+	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 
-	void init(EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
 
-	void add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours);
+	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);
 
-	void add_shippingitem(Game &, WareInstance &);
-	void update_shippingitem(Game &, WareInstance &);
+	void add_shippingitem(Game&, WareInstance&);
+	void update_shippingitem(Game&, WareInstance&);
 
-	void add_shippingitem(Game &, Worker &);
-	void update_shippingitem(Game &, Worker &);
+	void add_shippingitem(Game&, Worker&);
+	void update_shippingitem(Game&, Worker&);
 
-	void ship_arrived(Game &, Ship &);
+	void ship_arrived(Game&, Ship&);
 
-	void log_general_info(const EditorGameBase &) override;
+	void log_general_info(const EditorGameBase&) override;
 
 	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex);
 	uint32_t count_waiting();
@@ -120,7 +121,7 @@ public:
 
 	// Called when the button in the warehouse window is pressed.
 	void start_expedition();
-	void cancel_expedition(Game &);
+	void cancel_expedition(Game&);
 
 	// May return nullptr when there is no expedition ongoing or if the
 	// expedition ship is already underway.
@@ -132,19 +133,19 @@ public:
 private:
 	friend struct Fleet;
 
-	void init_fleet(EditorGameBase & egbase);
-	void set_fleet(Fleet * fleet);
-	void _update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
-	void set_need_ship(Game &, bool need);
+	void init_fleet(EditorGameBase& egbase);
+	void set_fleet(Fleet* fleet);
+	void update_shippingitem(Game&, std::vector<ShippingItem>::iterator);
+	void set_need_ship(Game&, bool need);
 
-	Fleet * m_fleet;
-	Warehouse * m_warehouse;
-	PositionList m_dockpoints;
-	std::vector<ShippingItem> m_waiting;
-	bool m_need_ship;
-	bool m_expedition_ready;
+	Fleet* fleet_;
+	Warehouse* warehouse_;
+	PositionList dockpoints_;
+	std::vector<ShippingItem> waiting_;
+	bool need_ship_;
+	bool expedition_ready_;
 
-	std::unique_ptr<ExpeditionBootstrap> m_expedition_bootstrap;
+	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
 	// saving and loading
 protected:
@@ -152,25 +153,26 @@ protected:
 	public:
 		Loader();
 
-		void load(FileRead &);
+		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t m_warehouse;
-		std::vector<ShippingItem::Loader> m_waiting;
+		uint32_t warehouse_;
+		std::vector<ShippingItem::Loader> waiting_;
 	};
 
 public:
-	bool has_new_save_support() override {return true;}
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	bool has_new_save_support() override {
+		return true;
+	}
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
-	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 
 extern PortdockDescr g_portdock_descr;
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_PORTDOCK_H

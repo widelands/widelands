@@ -21,9 +21,9 @@
 
 #include <string>
 
+#include "base/point.h"
 #include "graphic/align.h"
 #include "graphic/text_layout.h"
-#include "base/point.h"
 
 class RenderTarget;
 
@@ -34,25 +34,30 @@ namespace UI {
  */
 struct WordWrap {
 	WordWrap();
-	WordWrap(const TextStyle & style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
+	WordWrap(const TextStyle& style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
-	void set_style(const TextStyle & style);
+	void set_style(const TextStyle& style);
 	void set_wrapwidth(uint32_t wrapwidth);
 
 	uint32_t wrapwidth() const;
 
-	void wrap(const std::string & text);
+	void wrap(const std::string& text);
 
 	uint32_t width() const;
 	uint32_t height() const;
-	void set_draw_caret(bool draw_it) {m_draw_caret = draw_it;}
+	void set_draw_caret(bool draw_it) {
+		draw_caret_ = draw_it;
+	}
 
-	void draw
-		(RenderTarget & dst, Point where, Align align = UI::Align::kLeft,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void draw(RenderTarget& dst,
+	          Point where,
+	          Align align = UI::Align::kLeft,
+	          uint32_t caret = std::numeric_limits<uint32_t>::max());
 
-	void calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const;
-	uint32_t nrlines() const {return m_lines.size();}
+	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
+	uint32_t nrlines() const {
+		return lines_.size();
+	}
 	uint32_t line_offset(uint32_t line) const;
 
 private:
@@ -64,22 +69,21 @@ private:
 		size_t start;
 	};
 
-	void compute_end_of_line
-		(const std::string & text,
-		 std::string::size_type line_start,
-		 std::string::size_type & line_end,
-		 std::string::size_type & next_line_start,
-		 uint32_t safety_margin);
+	void compute_end_of_line(const std::string& text,
+	                         std::string::size_type line_start,
+	                         std::string::size_type& line_end,
+	                         std::string::size_type& next_line_start,
+	                         uint32_t safety_margin);
 
 	bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
-	TextStyle m_style;
-	uint32_t m_wrapwidth;
-	bool m_draw_caret;
+	TextStyle style_;
+	uint32_t wrapwidth_;
+	bool draw_caret_;
 
-	std::vector<LineData> m_lines;
+	std::vector<LineData> lines_;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_WORDWRAP_H

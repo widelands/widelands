@@ -31,11 +31,11 @@ namespace Widelands {
  *
  * \note The order in which fields are returned is not guarantueed.
  */
-template <typename AreaType = Area<> > struct MapHollowRegion {
-	MapHollowRegion(const Map & map, const HollowArea<AreaType> hollow_area);
+template <typename AreaType = Area<>> struct MapHollowRegion {
+	MapHollowRegion(const Map& map, const HollowArea<AreaType> hollow_area);
 
 	const typename AreaType::CoordsType& location() const {
-		return m_hollow_area;
+		return hollow_area_;
 	}
 
 	/**
@@ -53,26 +53,25 @@ template <typename AreaType = Area<> > struct MapHollowRegion {
 	 * iteration, while advance keeps returning true. When finally advance
 	 * returns false, it means that the iteration is done.
 	 */
-	bool advance(const Map &);
+	bool advance(const Map&);
 
 private:
 	enum Phase {
-		None   = 0, // not initialized or completed
-		Top    = 1, // above the hole
-		Upper  = 2, // upper half
-		Lower  = 4, // lower half
-		Bottom = 8, // below the hole
+		None = 0,    // not initialized or completed
+		Top = 1,     // above the hole
+		Upper = 2,   // upper half
+		Lower = 4,   // lower half
+		Bottom = 8,  // below the hole
 	};
 
-	HollowArea<AreaType> m_hollow_area;
-	Phase m_phase;
-	const uint32_t m_delta_radius;
-	uint32_t m_row; // # of rows completed in this phase
-	uint32_t m_rowwidth; // # of fields to return per row
-	uint32_t m_rowpos; // # of fields we have returned in this row
-	typename AreaType::CoordsType m_left; //  left-most node of current row
+	HollowArea<AreaType> hollow_area_;
+	Phase phase_;
+	const uint32_t delta_radius_;
+	uint32_t row_;                        // # of rows completed in this phase
+	uint32_t rowwidth_;                   // # of fields to return per row
+	uint32_t rowpos_;                     // # of fields we have returned in this row
+	typename AreaType::CoordsType left_;  //  left-most node of current row
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPHOLLOWREGION_H

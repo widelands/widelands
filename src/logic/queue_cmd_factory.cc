@@ -30,9 +30,7 @@
 
 namespace Widelands {
 
-GameLogicCommand & QueueCmdFactory::create_correct_queue_command
-	(QueueCommandTypes const id)
-{
+GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandTypes const id) {
 	switch (id) {
 	case QueueCommandTypes::kBuild:
 		return *new CmdBuild();
@@ -102,19 +100,18 @@ GameLogicCommand & QueueCmdFactory::create_correct_queue_command
 		return *new CmdLuaScript();
 	case QueueCommandTypes::kLuaCoroutine:
 		return *new CmdLuaCoroutine();
-	case QueueCommandTypes::kCalculateStatistics :
+	case QueueCommandTypes::kCalculateStatistics:
 		return *new CmdCalculateStatistics();
 	case QueueCommandTypes::kCallEconomyBalance:
 		return *new CmdCallEconomyBalance();
-	case QueueCommandTypes::kDeleteMessage: // Not a logic command
+	case QueueCommandTypes::kDeleteMessage:  // Not a logic command
 	case QueueCommandTypes::kNetCheckSync:
 	case QueueCommandTypes::kReplaySyncWrite:
 	case QueueCommandTypes::kReplaySyncRead:
 	case QueueCommandTypes::kReplayEnd:
 	case QueueCommandTypes::kNone:
-		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
+		throw wexception("Unknown Queue_Cmd_Id in file: %u", static_cast<unsigned int>(id));
 	}
 	NEVER_HERE();
 }
-
 }

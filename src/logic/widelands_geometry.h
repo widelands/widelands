@@ -30,7 +30,8 @@ namespace Widelands {
 using MapIndex = uint32_t;
 
 struct Extent {
-	Extent(uint16_t const W, uint16_t const H) : w(W), h(H) {}
+	Extent(uint16_t const W, uint16_t const H) : w(W), h(H) {
+	}
 	uint16_t w, h;
 };
 
@@ -44,19 +45,25 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords null();
 
-	bool operator== (const Coords& other) const;
-	bool operator!= (const Coords & other) const;
+	/// Unhash coordinates so they can be gotten from a container
+	static Coords unhash(uint32_t hash);
+
+	/// Hash coordinates to use them as keys in a container
+	uint32_t hash() const;
+
+	bool operator==(const Coords& other) const;
+	bool operator!=(const Coords& other) const;
 	operator bool() const;
 
 	// Ordering functor for use with std:: containers.
 	struct OrderingFunctor {
-		bool operator()(const Coords & a, const Coords & b) const {
+		bool operator()(const Coords& a, const Coords& b) const {
 			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
 		}
 	};
 
 	// Move the coords to the 'new_origin'.
-	void reorigin(Coords new_origin, const Extent & extent);
+	void reorigin(Coords new_origin, const Extent& extent);
 
 	int16_t x;
 	int16_t y;
@@ -64,36 +71,33 @@ struct Coords {
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
 template <typename _CoordsType = Coords, typename _RadiusType = uint16_t>
-struct Area : public _CoordsType
-{
+struct Area : public _CoordsType {
 	using CoordsType = _CoordsType;
 	using RadiusType = _RadiusType;
-	Area() {}
-	Area(const CoordsType center, const RadiusType Radius)
-		: CoordsType(center), radius(Radius)
-	{}
-
-	bool operator== (const Area& other) const {
-		return CoordsType::operator== (other) && radius == other.radius;
+	Area() {
 	}
-	bool operator!= (const Area& other) const {
-		return CoordsType::operator!= (other) ||  radius != other.radius;
+	Area(const CoordsType center, const RadiusType Radius) : CoordsType(center), radius(Radius) {
+	}
+
+	bool operator==(const Area& other) const {
+		return CoordsType::operator==(other) && radius == other.radius;
+	}
+	bool operator!=(const Area& other) const {
+		return CoordsType::operator!=(other) || radius != other.radius;
 	}
 
 	RadiusType radius;
 };
 
-template <typename AreaType = Area<> > struct HollowArea : public AreaType {
-	HollowArea
-		(const AreaType area, const typename AreaType::RadiusType Hole_Radius)
-		: AreaType(area), hole_radius(Hole_Radius)
-	{}
-
-	bool operator== (const HollowArea& other) const {
-		return
-			AreaType::operator== (other) && hole_radius == other.hole_radius;
+template <typename AreaType = Area<>> struct HollowArea : public AreaType {
+	HollowArea(const AreaType area, const typename AreaType::RadiusType Hole_Radius)
+	   : AreaType(area), hole_radius(Hole_Radius) {
 	}
-	bool operator!= (const HollowArea& other) const {
+
+	bool operator==(const HollowArea& other) const {
+		return AreaType::operator==(other) && hole_radius == other.hole_radius;
+	}
+	bool operator!=(const HollowArea& other) const {
 		return !(*this == other);
 	}
 
@@ -103,9 +107,10 @@ template <typename AreaType = Area<> > struct HollowArea : public AreaType {
 struct Field;
 
 struct FCoords : public Coords {
-	FCoords() : field(nullptr) {}
-	FCoords(const Coords & nc, Field * const nf) : Coords(nc), field(nf)
-	{}
+	FCoords() : field(nullptr) {
+	}
+	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
+	}
 
 	/**
 	 * Used in RenderTarget::rendermap where this is first called, then the
@@ -113,50 +118,47 @@ struct FCoords : public Coords {
 	 *
 	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
-	explicit FCoords(const Coords & nc) : Coords(nc), field(nullptr) {}
+	explicit FCoords(const Coords& nc) : Coords(nc), field(nullptr) {
+	}
 
-	Field * field;
+	Field* field;
 };
 
-
 template <typename CoordsType = Coords> struct TCoords : public CoordsType {
-	enum TriangleIndex {D, R, None};
+	enum TriangleIndex { D, R, None };
 
-	TCoords() : t() {}
-	TCoords(const CoordsType C, const TriangleIndex T = None)
-		: CoordsType(C), t(T)
-	{}
-
-	bool operator== (const TCoords& other) const {
-		return CoordsType::operator== (other) && t == other.t;
+	TCoords() : t() {
 	}
-	bool operator!= (const TCoords& other) const {
-		return CoordsType::operator!= (other) ||  t != other.t;
+	TCoords(const CoordsType C, const TriangleIndex T = None) : CoordsType(C), t(T) {
+	}
+
+	bool operator==(const TCoords& other) const {
+		return CoordsType::operator==(other) && t == other.t;
+	}
+	bool operator!=(const TCoords& other) const {
+		return CoordsType::operator!=(other) || t != other.t;
 	}
 
 	TriangleIndex t;
 };
 
-
-template
-<typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
+template <typename NodeCoordsType = Coords, typename TriangleCoordsType = Coords>
 struct NodeAndTriangle {
-	NodeAndTriangle() {}
-	NodeAndTriangle
-		(const NodeCoordsType              Node,
-		 const TCoords<TriangleCoordsType>& Triangle)
+	NodeAndTriangle() {
+	}
+	NodeAndTriangle(const NodeCoordsType Node, const TCoords<TriangleCoordsType>& Triangle)
 
-			: node(Node), triangle(Triangle)
-	{}
+	   : node(Node), triangle(Triangle) {
+	}
 
-	bool operator== (NodeAndTriangle<> const other) const {
+	bool operator==(const NodeAndTriangle<>& other) const {
 		return node == other.node && triangle == other.triangle;
 	}
-	bool operator!= (NodeAndTriangle<> const other) const {
+	bool operator!=(const NodeAndTriangle<>& other) const {
 		return !(*this == other);
 	}
 
-	NodeCoordsType              node;
+	NodeCoordsType node;
 	TCoords<TriangleCoordsType> triangle;
 };
 

@@ -85,7 +85,7 @@ obj_make_heavy_industry_and_mining = {
    title = _"Build industry and mines",
    number = 5,
    body = objective_text(_"Industry and Mines",
-      _[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them.]] .. paragraphdivider() ..
+      _[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of granite while searching for them.]] .. paragraphdivider() ..
       listitem_bullet(_[[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. paragraphdivider() ..
       listitem_bullet(_[[Build a mine of each type. Make sure to send geologists to the mountain first.]]) ..
       listitem_bullet(_[[Build a smelting works]]) ..
@@ -154,9 +154,9 @@ initial_messages = {
    {
       title = _"Uproar and Confusion",
       body = rt(
-         h1(_"Emerging Chaos...") ..
+         h1(_"Emerging Chaos…") ..
          -- TRANSLATORS: Foreword
-         p(_([[Guilt-ridden, the king committed suicide. Without a monarch, the people turned to the clerics, but they had no substantial help to offer. Most accepted their fate while others tried to change the god’s mind by offering animals in his temple. But to no avail...]])) ..
+         p(_([[Guilt-ridden, the king committed suicide. Without a monarch, the people turned to the clerics, but they had no substantial help to offer. Most accepted their fate while others tried to change the god’s mind by offering animals in his temple. But to no avail…]])) ..
          -- TRANSLATORS: Foreword
           p(_([[Jundlina, the late king’s daughter and the highest priestess of the god was the most determined cleric. As countless offerings didn’t change the situation, she convinced herself that to soothe the god, an offer of great personal value was needed. So she offered him her most beloved: her husband, the father of her only child.]])) ..
           -- TRANSLATORS: Foreword
@@ -197,7 +197,7 @@ first_briefing_messages = {
       title = _"Sidolus Speaks",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a good supply of building materials for we have to expand our territory swiftly. I will not feel safe on this island as long as we have not seen all its shores it. I brought plenty of good men from Atlantis. The military might is available. We only need some housing to live in.]]))
+         _([[May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a good supply of building materials for we have to expand our territory swiftly. I will not feel safe on this island as long as we have not seen all its shores. I brought plenty of good men from Atlantis. The military might is available. We only need some housing to live in.]]))
          ..  new_objectives(obj_expand)
    }
 }
@@ -297,7 +297,7 @@ heavy_industry_story = {
       title = _"Jundlina Replies",
       body = jundlina(_"Jundlina Nods",
          -- TRANSLATORS: Jundlina
-         _([[I have considered this, Sidolus. I think  it is about time. We will make this a priority for now. You shall get your industry soon!]]))
+         _([[I have considered this, Sidolus. I think it is about time. We will make this a priority for now. You shall get your industry soon!]]))
          .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
@@ -443,7 +443,7 @@ scenario_won = {
       title = _"Jundlina is Relieved",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Praise Satul! Ostur, the young ship builder did it. We have three ships – never have I seen sturdier ones – with enough room to carry all of us and some wares too. And this rescue came just in time: Lutas is about to swallow the rest of this island, the water rises faster by the hour. But we can make our escape now and start over in some country farther away...]])
+         _([[Praise Satul! Ostur, the young ship builder did it. We have three ships – never have I seen sturdier ones – with enough room to carry all of us and some wares too. And this rescue came just in time: Lutas is about to swallow the rest of this island, the water rises faster by the hour. But we can make our escape now and start over in some country farther away…]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[I expect a long journey, but we will find the land of Satul in the end. This is what I promised my people. And myself.]]))

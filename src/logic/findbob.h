@@ -27,12 +27,14 @@ namespace Widelands {
 class Player;
 
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
+	FindBobAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
+	}
 
-	bool accept(Bob *) const override;
+	bool accept(Bob*) const override;
 
-	uint32_t m_attrib;
-	virtual ~FindBobAttribute() {}  // make gcc shut up
+	uint32_t attrib;
+	virtual ~FindBobAttribute() {
+	}  // make gcc shut up
 };
 
 /**
@@ -40,22 +42,22 @@ struct FindBobAttribute : public FindBob {
  * if player is 0).
  */
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player * _player) : player(_player) {}
+	FindBobEnemySoldier(Player* init_player) : player(init_player) {
+	}
 
-	bool accept(Bob *) const override;
+	bool accept(Bob*) const override;
 
-	Player * player;
+	Player* player;
 };
 
 struct FindBobShip : FindBob {
-	bool accept(Bob * bob) const override;
+	bool accept(Bob* bob) const override;
 };
 
 struct FindBobCritter : FindBob {
-	bool accept(Bob * bob) const override;
+	bool accept(Bob* bob) const override;
 };
 
-
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FINDBOB_H

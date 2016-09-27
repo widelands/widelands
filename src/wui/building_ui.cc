@@ -31,46 +31,44 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(InteractiveGameBase & igbase, bool avoid_fastclick, Point pos)
-{
-	if (m_optionswindow) {
-		if (m_optionswindow->is_minimal())
-			m_optionswindow->restore();
-		m_optionswindow->move_to_top();
+void Building::show_options(InteractiveGameBase& igbase, bool avoid_fastclick, Point pos) {
+	if (optionswindow_) {
+		if (optionswindow_->is_minimal())
+			optionswindow_->restore();
+		optionswindow_->move_to_top();
 	} else {
-		create_options_window(igbase, m_optionswindow);
-		if (upcast(BuildingWindow, bw, m_optionswindow)) {
+		create_options_window(igbase, optionswindow_);
+		if (upcast(BuildingWindow, bw, optionswindow_)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
 		}
 		// Run a first think here so that certain things like caps buttons
 		// get properly initialized
-		m_optionswindow->think();
+		optionswindow_->think();
 	}
 	if (pos.x >= 0 && pos.y >= 0) {
-		m_optionswindow->set_pos(pos);
+		optionswindow_->set_pos(pos);
 	}
 }
 
 /**
  * Remove the building's options window.
  */
-void Building::hide_options()
-{
+void Building::hide_options() {
 	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
-	delete m_optionswindow;
-	m_optionswindow = nullptr;
+	delete optionswindow_;
+	optionswindow_ = nullptr;
 }
 
 /**
  * refreshs the option window of a building - useful if some ui elements have to be removed or added
  */
-void Building::refresh_options(InteractiveGameBase & igb) {
+void Building::refresh_options(InteractiveGameBase& igb) {
 	// Only do something if there is actually a window
-	if (m_optionswindow) {
-		Point window_position = m_optionswindow->get_pos();
+	if (optionswindow_) {
+		Point window_position = optionswindow_->get_pos();
 		hide_options();
 		show_options(igb, true);
-		m_optionswindow->set_pos(window_position);
+		optionswindow_->set_pos(window_position);
 	}
 }

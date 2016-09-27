@@ -15,6 +15,7 @@ override_dh_auto_configure:
 	  dh_auto_configure -Scmake -- \
 		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
 		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DOPTION_USE_GLBINDING:BOOL=OFF \
 		-DCMAKE_BUILD_TYPE=Release
 
 override_dh_strip:
@@ -46,6 +47,9 @@ override_dh_auto_install:
 	done
 	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \
 	        debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.xpm
+	# appdata
+	mkdir -p debian/tmp/usr/share/appdata/
+	cp debian/widelands.appdata.xml debian/tmp/usr/share/appdata/
 
 override_dh_install:
 	dh_install --fail-missing

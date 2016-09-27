@@ -25,8 +25,8 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
-#include "notifications/notifications.h"
 #include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 class AnimationManager;
 class RenderTarget;
@@ -57,7 +57,7 @@ public:
 	// Initializes with the given resolution if fullscreen is false, otherwise a
 	// window that fills the screen. The 'trace_gl' parameter gets passed on to
 	// 'Gl::initialize'.
-	enum class TraceGl {kNo, kYes};
+	enum class TraceGl { kNo, kYes };
 	void
 	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
 
@@ -70,12 +70,22 @@ public:
 	bool fullscreen();
 	void set_fullscreen(bool);
 
-	RenderTarget * get_render_target();
+	RenderTarget* get_render_target();
 	void refresh();
-	SDL_Window* get_sdlwindow() {return sdl_window_;}
+	SDL_Window* get_sdlwindow() {
+		return sdl_window_;
+	}
 
-	ImageCache& images() const {return *image_cache_.get();}
-	AnimationManager& animations() const {return *animation_manager_.get();}
+	int max_texture_size() const {
+		return max_texture_size_;
+	}
+
+	ImageCache& images() const {
+		return *image_cache_.get();
+	}
+	AnimationManager& animations() const {
+		return *animation_manager_.get();
+	}
 
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
@@ -98,6 +108,9 @@ private:
 	SDL_Window* sdl_window_;
 	SDL_GLContext gl_context_;
 
+	/// The maximum width or height a texture can have.
+	int max_texture_size_;
+
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;
 
@@ -113,6 +126,6 @@ private:
 	std::string screenshot_filename_;
 };
 
-extern Graphic * g_gr;
+extern Graphic* g_gr;
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H

@@ -24,8 +24,11 @@
 #include <unicode/uchar.h>
 
 #include "graphic/align.h"
-#include "graphic/font.h"
 #include "graphic/color.h"
+#include "graphic/font.h"
+#include "graphic/font_handler1.h"
+#include "graphic/image.h"
+#include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
 /**
@@ -63,19 +66,41 @@ std::string richtext_escape(const std::string& given_text);
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
  */
-std::string as_uifont
-	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+std::string as_uifont(const std::string&,
+                      int ptsize = UI_FONT_SIZE_SMALL,
+                      const RGBColor& clr = UI_FONT_CLR_FG,
+                      UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
-std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
-								  const RGBColor& clr = UI_FONT_CLR_FG);
+// Same as as_aligned, but with the condensed font preselected.
+std::string as_condensed(const std::string& text,
+                         UI::Align align = UI::Align::kLeft,
+                         int ptsize = UI_FONT_SIZE_SMALL,
+                         const RGBColor& clr = UI_FONT_CLR_FG);
 
-std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI_FONT_SIZE_SMALL,
-							  const RGBColor& clr = UI_FONT_CLR_FG);
+std::string as_editorfont(const std::string& text,
+                          int ptsize = UI_FONT_SIZE_SMALL,
+                          const RGBColor& clr = UI_FONT_CLR_FG);
+
+std::string as_aligned(const std::string& txt,
+                       UI::Align align,
+                       int ptsize = UI_FONT_SIZE_SMALL,
+                       const RGBColor& clr = UI_FONT_CLR_FG,
+                       UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
-std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
+
+/**
+  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
+  * wide, it will first use the condensed font face and then make the text
+  * smaller until it fits 'width'. The resulting font size will not go below
+  * 'kMinimumFontSize'.
+  */
+const Image* autofit_ui_text(const std::string& text,
+                             int width = 0,
+                             RGBColor color = UI_FONT_CLR_FG,
+                             int fontsize = UI_FONT_SIZE_SMALL);
 
 namespace UI {
 
@@ -85,15 +110,9 @@ namespace UI {
  */
 // TODO(GunChleoc): This struct will disappear with the old font handler
 struct TextStyle {
-	TextStyle() :
-		font(nullptr),
-		fg(255, 255, 255),
-		bold(false),
-		italics(false),
-		underline(false)
-	{}
+	TextStyle();
 
-	static TextStyle makebold(Font * font, RGBColor fg) {
+	static TextStyle makebold(Font* font, RGBColor fg) {
 		TextStyle ts;
 		ts.font = font;
 		ts.bold = true;
@@ -101,30 +120,27 @@ struct TextStyle {
 		return ts;
 	}
 
-	static const TextStyle & ui_big();
-	static const TextStyle & ui_small();
-	uint32_t calc_bare_width(const std::string & text) const;
+	uint32_t calc_bare_width(const std::string& text) const;
 	uint32_t calc_width_for_wrapping(const UChar& c) const;
-	uint32_t calc_width_for_wrapping(const std::string & text) const;
-	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
+	uint32_t calc_width_for_wrapping(const std::string& text) const;
+	void calc_bare_height_heuristic(const std::string& text, int32_t& miny, int32_t& maxy) const;
 	void setup() const;
 
-	Font * font;
+	Font* font;
 	RGBColor fg;
 	bool bold : 1;
 	bool italics : 1;
 	bool underline : 1;
 
-	bool operator== (const TextStyle & o) const {
-		return
-			font == o.font && fg == o.fg &&
-			bold == o.bold && italics == o.italics && underline == o.underline;
+	bool operator==(const TextStyle& o) const {
+		return font == o.font && fg == o.fg && bold == o.bold && italics == o.italics &&
+		       underline == o.underline;
 	}
-	bool operator!= (const TextStyle & o) const {
+	bool operator!=(const TextStyle& o) const {
 		return !(*this == o);
 	}
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

@@ -119,7 +119,7 @@ TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 	return *terrains_->get_mutable(i);
 }
 
-TerrainDescription const* World::get_ter(char const* const name) const {
+const TerrainDescription* World::terrain_descr(const std::string& name) const {
 	int32_t const i = terrains_->get_index(name);
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
@@ -153,7 +153,7 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 }
 
 DescriptionIndex World::get_resource(const char* const name) const {
-	return strcmp(name, "none") ? resources_->get_index(name): Widelands::kNoResource;
+	return strcmp(name, "none") ? resources_->get_index(name) : Widelands::kNoResource;
 }
 
 /***

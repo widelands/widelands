@@ -29,14 +29,14 @@
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<MessageId, Message *> {
+struct MessageQueue : private std::map<MessageId, Message*> {
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		m_counts[static_cast<int>(Message::Status::kNew)]      = 0; //  C++0x:
-		m_counts[static_cast<int>(Message::Status::kRead)]     = 0; //  C++0x:
-		m_counts[static_cast<int>(Message::Status::kArchived)] = 0; //  C++0x:
-	}                                   //  C++0x:
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;       //  C++0x:
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;      //  C++0x:
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;  //  C++0x:
+	}                                                              //  C++0x:
 
 	~MessageQueue() {
 		while (size()) {
@@ -47,18 +47,18 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 
 	//  Make some selected inherited members public.
 	MessageQueue::const_iterator begin() const {
-		return std::map<MessageId, Message *>::begin();
+		return std::map<MessageId, Message*>::begin();
 	}
 	MessageQueue::const_iterator end() const {
-		return std::map<MessageId, Message *>::end();
+		return std::map<MessageId, Message*>::end();
 	}
 	size_type count(uint32_t const i) const {
 		assert_counts();
-		return std::map<MessageId, Message *>::count(MessageId(i));
+		return std::map<MessageId, Message*>::count(MessageId(i));
 	}
 
 	/// \returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](const MessageId& id) const {
+	Message const* operator[](const MessageId& id) const {
 		assert_counts();
 		MessageQueue::const_iterator const it = find(MessageId(id));
 		return it != end() ? it->second : nullptr;
@@ -68,7 +68,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	uint32_t nr_messages(Message::Status const status) const {
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
-		return m_counts[static_cast<int>(status)];
+		return counts_[static_cast<int>(status)];
 	}
 
 	/// Adds the message. Takes ownership of the message. Assumes that it has
@@ -79,15 +79,14 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// \returns the id of the added message.
 	///
 	/// The loading code calls this function to add messages form the map file.
-	MessageId add_message(Message & message) {
+	MessageId add_message(Message& message) {
 		assert_counts();
 		assert(static_cast<int>(message.status()) < 3);
-		++m_counts[static_cast<int>(message.status())];
-		insert
-			(std::map<MessageId, Message *>::end(),
-			 std::pair<MessageId, Message *>(++m_current_message_id, &message));
+		++counts_[static_cast<int>(message.status())];
+		insert(std::map<MessageId, Message*>::end(),
+		       std::pair<MessageId, Message*>(++current_message_id_, &message));
 		assert_counts();
-		return m_current_message_id;
+		return current_message_id_;
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
@@ -96,11 +95,11 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 		assert(static_cast<int>(status) < 3);
 		MessageQueue::iterator const it = find(id);
 		if (it != end()) {
-			Message & message = *it->second;
+			Message& message = *it->second;
 			assert(static_cast<int>(it->second->status()) < 3);
-			assert(m_counts[static_cast<int>(message.status())]);
-			--m_counts[static_cast<int>(message.status())];
-			++m_counts[static_cast<int>(message.set_status(status))];
+			assert(counts_[static_cast<int>(message.status())]);
+			--counts_[static_cast<int>(message.status())];
+			++counts_[static_cast<int>(message.set_status(status))];
 		}
 		assert_counts();
 	}
@@ -116,16 +115,18 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
-		Message & message = *it->second;
+		Message& message = *it->second;
 		assert(static_cast<int>(message.status()) < 3);
-		assert(m_counts[static_cast<int>(message.status())]);
-		--m_counts[static_cast<int>(message.status())];
+		assert(counts_[static_cast<int>(message.status())]);
+		--counts_[static_cast<int>(message.status())];
 		delete &message;
 		erase(it);
 		assert_counts();
 	}
 
-	MessageId current_message_id() const {return m_current_message_id;}
+	MessageId current_message_id() const {
+		return current_message_id_;
+	}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
@@ -142,33 +143,31 @@ private:
 	/// it.
 	void clear() {
 		assert_counts();
-		m_current_message_id        = MessageId::null();
-		m_counts[static_cast<int>(Message::Status::kNew)]      = 0;
-		m_counts[static_cast<int>(Message::Status::kRead)]     = 0;
-		m_counts[static_cast<int>(Message::Status::kArchived)] = 0;
-		std::map<MessageId, Message *>::clear();
+		current_message_id_ = MessageId::null();
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
+		std::map<MessageId, Message*>::clear();
 		assert_counts();
 	}
 
 	/// The id of the most recently added message, or null if none has been
 	/// added yet.
-	MessageId m_current_message_id;
+	MessageId current_message_id_;
 
 	/// Number of messages with each status (new, read, deleted).
 	/// Indexed by Message::Status.
-	uint32_t   m_counts[3];
+	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert
-			(size() ==
-			 m_counts[static_cast<int>(Message::Status::kNew)]  +
-			 m_counts[static_cast<int>(Message::Status::kRead)] +
-			 m_counts[static_cast<int>(Message::Status::kArchived)]);
+		assert(size() ==
+		       counts_[static_cast<int>(Message::Status::kNew)] +
+		          counts_[static_cast<int>(Message::Status::kRead)] +
+		          counts_[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

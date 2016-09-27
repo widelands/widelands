@@ -17,7 +17,6 @@
  *
  */
 
-
 #include "logic/map_objects/tribes/productionsite.h"
 
 #include <memory>
@@ -54,23 +53,25 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
-ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, const std::string& msgctxt, MapObjectType _type,
-	 const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(init_descname, _type, table, egbase),
-	  m_out_of_resource_title(""),
-	  m_out_of_resource_heading(""),
-	  m_out_of_resource_message(""),
-	  out_of_resource_productivity_threshold_(100)
-{
+ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
+                                         const std::string& msgctxt,
+                                         MapObjectType init_type,
+                                         const LuaTable& table,
+                                         const EditorGameBase& egbase)
+   : BuildingDescr(init_descname, init_type, table, egbase),
+     out_of_resource_title_(""),
+     out_of_resource_heading_(""),
+     out_of_resource_message_(""),
+     out_of_resource_productivity_threshold_(100) {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
-		m_out_of_resource_title = _(items_table->get_string("title"));
-		m_out_of_resource_heading = _(items_table->get_string("heading"));
-		m_out_of_resource_message = pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
+		out_of_resource_title_ = _(items_table->get_string("title"));
+		out_of_resource_heading_ = _(items_table->get_string("heading"));
+		out_of_resource_message_ =
+		   pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -83,53 +84,53 @@ ProductionSiteDescr::ProductionSiteDescr
 			try {
 				DescriptionIndex idx = egbase.tribes().ware_index(output);
 				if (egbase.tribes().ware_exists(idx)) {
-					if (m_output_ware_types.count(idx)) {
+					if (output_ware_types_.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
 					}
-					m_output_ware_types.insert(idx);
+					output_ware_types_.insert(idx);
 				} else {
 					idx = egbase.tribes().worker_index(output);
 					if (egbase.tribes().worker_exists(idx)) {
-						if (m_output_worker_types.count(idx)) {
+						if (output_worker_types_.count(idx)) {
 							throw wexception("this worker type has already been declared as an output");
 						}
-						m_output_worker_types.insert(idx);
+						output_worker_types_.insert(idx);
 					} else {
 						throw wexception("tribes do not define a ware or worker type with this name");
 					}
 				}
-			} catch (const WException & e) {
+			} catch (const WException& e) {
 				throw wexception("output \"%s\": %s", output.c_str(), e.what());
 			}
 		}
 	}
 
 	if (table.has_key("inputs")) {
-		items_table = table.get_table("inputs");
-		for (const std::string& ware_name : items_table->keys<std::string>()) {
-			int amount = items_table->get_int(ware_name);
+		std::vector<std::unique_ptr<LuaTable>> input_entries =
+		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
+		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
+			const std::string& ware_name = entry_table->get_string("name");
+			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
-					throw wexception("count is out of range 1 .. 255");
+					throw wexception("amount is out of range 1 .. 255");
 				}
 				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const WareAmount& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					m_inputs.push_back(WareAmount(idx, amount));
+					inputs_.push_back(WareAmount(idx, amount));
 				} else {
-					throw wexception
-						("tribes do not define a ware type with this name");
+					throw wexception("tribes do not define a ware type with this name");
 				}
-			} catch (const WException & e) {
+			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
 			}
 		}
 	}
-
 
 	// Are we only a production site?
 	// If not, we might not have a worker
@@ -143,16 +144,16 @@ ProductionSiteDescr::ProductionSiteDescr
 				}
 				DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
 				if (egbase.tribes().worker_exists(woi)) {
-					for (const WareAmount& wp : working_positions()) {
+					for (const auto& wp : working_positions()) {
 						if (wp.first == woi) {
 							throw wexception("duplicated");
 						}
 					}
-					m_working_positions.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+					working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
 				} else {
 					throw wexception("invalid");
 				}
-			} catch (const WException & e) {
+			} catch (const WException& e) {
 				throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 			}
 		}
@@ -168,57 +169,45 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("programs")) {
 		items_table = table.get_table("programs");
 		for (std::string program_name : items_table->keys<std::string>()) {
-			std::transform
-				(program_name.begin(), program_name.end(), program_name.begin(),
-				 tolower);
+			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 			try {
-				if (m_programs.count(program_name)) {
+				if (programs_.count(program_name)) {
 					throw wexception("this program has already been declared");
 				}
 				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-				m_programs[program_name] =
-						std::unique_ptr<ProductionProgram>(
-							new ProductionProgram(program_name,
-														 program_table->get_string("descname"),
-														 program_table->get_table("actions"),
-														 egbase,
-														 this));
-			} catch (const std::exception & e) {
+				programs_[program_name] = std::unique_ptr<ProductionProgram>(
+				   new ProductionProgram(program_name, _(program_table->get_string("descname")),
+				                         program_table->get_table("actions"), egbase, this));
+			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
 	}
 }
 
-ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname,
-	 const std::string& msgctxt,
-	 const LuaTable& table,
-	 const EditorGameBase& egbase)
-	: ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase)
-{}
-
+ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
+                                         const std::string& msgctxt,
+                                         const LuaTable& table,
+                                         const EditorGameBase& egbase)
+   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase) {
+}
 
 /**
  * Get the program of the given name.
  */
-const ProductionProgram * ProductionSiteDescr::get_program
-	(const std::string & program_name) const
-{
+const ProductionProgram* ProductionSiteDescr::get_program(const std::string& program_name) const {
 	Programs::const_iterator const it = programs().find(program_name);
-	if (it == m_programs.end())
-		throw wexception
-			("%s has no program '%s'", name().c_str(), program_name.c_str());
+	if (it == programs_.end())
+		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second.get();
 }
 
 /**
  * Create a new building of this type
  */
-Building & ProductionSiteDescr::create_object() const {
+Building& ProductionSiteDescr::create_object() const {
 	return *new ProductionSite(*this);
 }
-
 
 /*
 ==============================
@@ -228,33 +217,31 @@ IMPLEMENTATION
 ==============================
 */
 
-ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
-	Building            (ps_descr),
-	m_working_positions (new WorkingPosition[ps_descr.nr_working_positions()]),
-	m_fetchfromflag     (0),
-	m_program_timer     (false),
-	m_program_time      (0),
-	m_post_timer        (50),
-	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
-	m_last_stat_percent (0),
-	m_crude_percent     (0),
-	m_is_stopped        (false),
-	m_default_anim      ("idle"),
-	m_production_result ("")
-{
+ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
+   : Building(ps_descr),
+     working_positions_(new WorkingPosition[ps_descr.nr_working_positions()]),
+     fetchfromflag_(0),
+     program_timer_(false),
+     program_time_(0),
+     post_timer_(50),
+     statistics_(STATISTICS_VECTOR_LENGTH, false),
+     last_stat_percent_(0),
+     crude_percent_(0),
+     is_stopped_(false),
+     default_anim_("idle"),
+     production_result_("") {
 	calc_statistics();
 }
 
 ProductionSite::~ProductionSite() {
 	// TODO(sirver): Use std::vector<std::unique_ptr<>> to avoid naked delete.
-	delete[] m_working_positions;
+	delete[] working_positions_;
 }
 
-void ProductionSite::load_finish(EditorGameBase & egbase) {
+void ProductionSite::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
 	calc_statistics();
 }
-
 
 /**
  * Display whether we're occupied.
@@ -263,26 +250,29 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
 	uint32_t nr_workers = 0;
 	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += m_working_positions[--i].worker ? 1 : 0;
+		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() % _("(not occupied)"))
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
+		      _("(not occupied)"))
 		        .str();
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
-		return;
-	}
-
-	if (m_is_stopped) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() % _("(stopped)"))
+		      ngettext("Worker missing", "Workers missing", nr_requests))
 		        .str();
 		return;
 	}
-	*s = m_statistics_string_on_changed_statistics;
+
+	if (is_stopped_) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() %
+		      _("(stopped)"))
+		        .str();
+		return;
+	}
+	*s = statistics_string_on_changed_statistics_;
 }
 
 /**
@@ -290,8 +280,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
  * Buildable workers are skipped, but upgraded ones (required be target site) are tested
  * @param idx Index of the enhancement
  */
-bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
-{
+bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {
 
@@ -301,20 +290,20 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 			for (const auto& wp : bld->working_positions()) {
 
 				// If worker for this position is buildable, just skip him
-				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()) {
 					continue;
 				}
 
 				// This position needs promoted worker, so trying to find out if there is such worker
 				// currently available in this site
 				const DescriptionIndex needed_worker = wp.first;
-				bool worker_available =  false;
+				bool worker_available = false;
 				for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
 					const Worker* cw = working_positions()[i].worker;
 					if (cw) {
 						DescriptionIndex current_worker = cw->descr().worker_index();
 						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
-							worker_available = true; // We found a worker for the position
+							worker_available = true;  // We found a worker for the position
 							break;
 						}
 					}
@@ -323,10 +312,9 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 					// We dont have needed workers in the site :(
 					return false;
 				}
-
 			}
 
-			//if we are here, all needs are satisfied
+			// If we are here, all needs are satisfied
 			return true;
 
 		} else {
@@ -337,8 +325,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 	}
 }
 
-WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue * ip_queue : m_input_queues) {
+WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
+	for (WaresQueue* ip_queue : input_queues_) {
 		if (ip_queue->get_ware() == wi) {
 			return *ip_queue;
 		}
@@ -349,8 +337,7 @@ WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
 /**
  * Calculate statistic.
  */
-void ProductionSite::calc_statistics()
-{
+void ProductionSite::calc_statistics() {
 	// TODO(sirver): this method does too much: it calculates statistics for the
 	// last few cycles, but it also formats them as a string and persists them
 	// into a string for reuse when the class is asked for the statistics
@@ -360,7 +347,7 @@ void ProductionSite::calc_statistics()
 	uint8_t lastOk = 0;
 
 	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
-		if (m_statistics[pos]) {
+		if (statistics_[pos]) {
 			++ok;
 			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
 				++lastOk;
@@ -368,7 +355,7 @@ void ProductionSite::calc_statistics()
 	}
 	// boost::format would treat uint8_t as char
 	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	m_last_stat_percent = percOk;
+	last_stat_percent_ = percOk;
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
@@ -380,7 +367,8 @@ void ProductionSite::calc_statistics()
 	else
 		color = UI_FONT_CLR_GOOD.hex_value();
 	const std::string perc_str =
-		(boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk)).str();
+	   (boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk))
+	      .str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
@@ -396,40 +384,34 @@ void ProductionSite::calc_statistics()
 		color = UI_FONT_CLR_BRIGHT.hex_value();
 		trend = "=";
 	}
-	const std::string trend_str =
-		(boost::format("<font color=%s>%s</font>") % color % trend).str();
+	const std::string trend_str = (boost::format("<font color=%s>%s</font>") % color % trend).str();
 
 	if (0 < percOk && percOk < 100) {
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
-		m_statistics_string_on_changed_statistics = (boost::format("%s %s") % perc_str % trend_str).str();
+		statistics_string_on_changed_statistics_ =
+		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();
 	} else {
-		m_statistics_string_on_changed_statistics = perc_str;
+		statistics_string_on_changed_statistics_ = perc_str;
 	}
 }
-
 
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(EditorGameBase & egbase)
-{
+void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	const BillOfMaterials & inputs = descr().inputs();
-	m_input_queues.resize(inputs.size());
+	const BillOfMaterials& inputs = descr().inputs();
+	input_queues_.resize(inputs.size());
 	for (WareRange i(inputs); i; ++i)
-		m_input_queues[i.i] =
-			new WaresQueue
-			(*this,
-			 i.current->first,
-			 i.current->second);
+		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
 
 	//  Request missing workers.
-	WorkingPosition * wp = m_working_positions;
-	for (const WareAmount& temp_wp : descr().working_positions()) {
+	WorkingPosition* wp = working_positions_;
+	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
-		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
-			if (Worker * const worker = wp->worker)
+		for (uint32_t j = temp_wp.second; j; --j, ++wp)
+			if (Worker* const worker = wp->worker)
 				worker->set_location(this);
 			else
 				wp->worker_request = &request_worker(worker_index);
@@ -444,21 +426,20 @@ void ProductionSite::init(EditorGameBase & egbase)
  *
  * \note Workers are dealt with in the PlayerImmovable code.
  */
-void ProductionSite::set_economy(Economy * const e)
-{
-	if (Economy * const old = get_economy()) {
-		for (WaresQueue * ip_queue : m_input_queues) {
+void ProductionSite::set_economy(Economy* const e) {
+	if (Economy* const old = get_economy()) {
+		for (WaresQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
 
 	Building::set_economy(e);
 	for (uint32_t i = descr().nr_working_positions(); i;)
-		if (Request * const r = m_working_positions[--i].worker_request)
+		if (Request* const r = working_positions_[--i].worker_request)
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue * ip_queue : m_input_queues) {
+		for (WaresQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
@@ -467,16 +448,15 @@ void ProductionSite::set_economy(Economy * const e)
 /**
  * Cleanup after a production site is removed
  */
-void ProductionSite::cleanup(EditorGameBase & egbase)
-{
+void ProductionSite::cleanup(EditorGameBase& egbase) {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
-		delete m_working_positions[i].worker_request;
-		m_working_positions[i].worker_request = nullptr;
-		Worker * const w = m_working_positions[i].worker;
+		delete working_positions_[i].worker_request;
+		working_positions_[i].worker_request = nullptr;
+		Worker* const w = working_positions_[i].worker;
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
-		m_working_positions[i].worker = nullptr;
+		working_positions_[i].worker = nullptr;
 
 		// Actually remove the worker
 		if (egbase.objects().object_still_available(w))
@@ -484,12 +464,11 @@ void ProductionSite::cleanup(EditorGameBase & egbase)
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < m_input_queues.size(); ++i) {
-		m_input_queues[i]->cleanup();
-		delete m_input_queues[i];
+	for (uint32_t i = 0; i < input_queues_.size(); ++i) {
+		input_queues_[i]->cleanup();
+		delete input_queues_[i];
 	}
-	m_input_queues.clear();
-
+	input_queues_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -499,16 +478,11 @@ void ProductionSite::cleanup(EditorGameBase & egbase)
  *
  * returns 0 on success -1 if there is no room for this worker
  */
-int ProductionSite::warp_worker
-	(EditorGameBase & egbase, const WorkerDescr & wdes)
-{
+int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
 	bool assigned = false;
-	WorkingPosition * current = m_working_positions;
-	for
-		(WorkingPosition * const end = current + descr().nr_working_positions();
-		 current < end;
-		 ++current)
-	{
+	WorkingPosition* current = working_positions_;
+	for (WorkingPosition* const end = current + descr().nr_working_positions(); current < end;
+	     ++current) {
 		if (current->worker)
 			continue;
 
@@ -517,7 +491,7 @@ int ProductionSite::warp_worker
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker & worker = wdes.create(egbase, owner(), this, get_position());
+		Worker& worker = wdes.create(egbase, owner(), this, get_position());
 
 		if (upcast(Game, game, &egbase))
 			worker.start_task_idle(*game, 0, -1);
@@ -538,17 +512,17 @@ int ProductionSite::warp_worker
 /**
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
-void ProductionSite::remove_worker(Worker & w)
-{
+void ProductionSite::remove_worker(Worker& w) {
 	molog("%s leaving\n", w.descr().descname().c_str());
-	WorkingPosition * wp = m_working_positions;
+	WorkingPosition* wp = working_positions_;
 
-	for (const WareAmount& temp_wp : descr().working_positions()) {
+	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
-			Worker * const worker = wp->worker;
+			Worker* const worker = wp->worker;
 			if (worker && worker == &w) {
-				// do not request the type of worker that is currently assigned - maybe a trained worker was
+				// do not request the type of worker that is currently assigned - maybe a trained worker
+				// was
 				// evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the WorkingPosition of descr()
 				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
@@ -561,45 +535,37 @@ void ProductionSite::remove_worker(Worker & w)
 	Building::remove_worker(w);
 }
 
-
 /**
  * Issue the worker requests
  */
-Request & ProductionSite::request_worker(DescriptionIndex const wareid) {
-	return
-		*new Request
-			(*this,
-			 wareid,
-			 ProductionSite::request_worker_callback,
-			 wwWORKER);
+Request& ProductionSite::request_worker(DescriptionIndex const wareid) {
+	return *new Request(*this, wareid, ProductionSite::request_worker_callback, wwWORKER);
 }
-
 
 /**
  * Called when our worker arrives.
  */
-void ProductionSite::request_worker_callback
-	(Game            &       game,
-	 Request         &       rq,
-	 DescriptionIndex              /* widx */,
-	 Worker          * const w,
-	 PlayerImmovable &       target)
-{
-	ProductionSite & psite = dynamic_cast<ProductionSite&>(target);
+void ProductionSite::request_worker_callback(
+   Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
+	ProductionSite& psite = dynamic_cast<ProductionSite&>(target);
 
 	assert(w);
 	assert(w->get_location(game) == &psite);
 
 	// If there is more than one working position, it's possible, that different level workers are
 	// requested and therefor possible, that a higher qualified worker answers a request for a lower
-	// leveled worker, although a worker with equal level (as the arrived worker has) is needed as well.
-	// Therefor, we first check whether the worker exactly fits the requested one. If yes, we place the
-	// worker and everything is fine, else we shuffle through the working positions, whether one of them
-	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
+	// leveled worker, although a worker with equal level (as the arrived worker has) is needed as
+	// well.
+	// Therefor, we first check whether the worker exactly fits the requested one. If yes, we place
+	// the
+	// worker and everything is fine, else we shuffle through the working positions, whether one of
+	// them
+	// needs a worker like the one just arrived. That way it is of course still possible, that the
+	// worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	DescriptionIndex     idx = w->descr().worker_index();
-	for (WorkingPosition * wp = psite.m_working_positions;; ++wp) {
+	DescriptionIndex idx = w->descr().worker_index();
+	for (WorkingPosition* wp = psite.working_positions_;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
@@ -619,7 +585,7 @@ void ProductionSite::request_worker_callback
 		{
 			uint8_t nwp = psite.descr().nr_working_positions();
 			uint8_t pos = 0;
-			WorkingPosition * wp = psite.m_working_positions;
+			WorkingPosition* wp = psite.working_positions_;
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker && !worker_placed)
@@ -633,21 +599,20 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			DescriptionIndex nuwo    = game.tribes().nrworkers();
+			DescriptionIndex nuwo = game.tribes().nrworkers();
 			DescriptionIndex current = 0;
 			for (; current < nuwo; ++current) {
-				WorkerDescr const * worker = game.tribes().get_worker_descr(current);
+				WorkerDescr const* worker = game.tribes().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
 				}
 			}
 			if (current == nuwo)
-				throw
-					wexception
-						("Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
-						 w->descr().descname().c_str(), psite.descr().descname().c_str(),
-						 psite.get_position().x, psite.get_position().y);
+				throw wexception(
+				   "Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
+				   w->descr().descname().c_str(), psite.descr().descname().c_str(),
+				   psite.get_position().x, psite.get_position().y);
 		}
 	}
 
@@ -660,37 +625,31 @@ void ProductionSite::request_worker_callback
 	psite.workers_changed();
 }
 
-
 /**
  * Advance the program state if applicable.
  */
-void ProductionSite::act(Game & game, uint32_t const data)
-{
+void ProductionSite::act(Game& game, uint32_t const data) {
 	Building::act(game, data);
 
-	if
-		(m_program_timer
-		 &&
-		 static_cast<int32_t>(game.get_gametime() - m_program_time) >= 0)
-	{
-		m_program_timer = false;
+	if (program_timer_ && static_cast<int32_t>(game.get_gametime() - program_time_) >= 0) {
+		program_timer_ = false;
 
 		if (!can_start_working()) {
-			while (!m_stack.empty())
+			while (!stack_.empty())
 				program_end(game, Failed);
 		} else {
-			if (m_stack.empty()) {
-				m_working_positions[0].worker->update_task_buildingwork(game);
+			if (stack_.empty()) {
+				working_positions_[0].worker->update_task_buildingwork(game);
 				return;
 			}
 
-			State & state = top_state();
+			State& state = top_state();
 			if (state.program->size() <= state.ip)
 				return program_end(game, Completed);
 
-			if (m_anim != descr().get_animation(m_default_anim)) {
+			if (anim_ != descr().get_animation(default_anim_)) {
 				// Restart idle animation, which is the default
-				start_animation(game, descr().get_animation(m_default_anim));
+				start_animation(game, descr().get_animation(default_anim_));
 			}
 
 			return program_act(game);
@@ -698,12 +657,9 @@ void ProductionSite::act(Game & game, uint32_t const data)
 	}
 }
 
-
-void ProductionSite::find_and_start_next_program(Game & game)
-{
+void ProductionSite::find_and_start_next_program(Game& game) {
 	program_start(game, "work");
 }
-
 
 /**
  * Perform the current program action.
@@ -711,45 +667,40 @@ void ProductionSite::find_and_start_next_program(Game & game)
  * \pre The program is running and in a valid state.
  * \post (Potentially indirect) scheduling for the next step has been done.
  */
-void ProductionSite::program_act(Game & game)
-{
-	State & state = top_state();
+void ProductionSite::program_act(Game& game) {
+	State& state = top_state();
 
 	// 'Stop' of building is considered only when starting
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
-	if (m_is_stopped && state.ip == 0) {
+	if (is_stopped_ && state.ip == 0) {
 		program_end(game, Failed);
-		m_program_timer = true;
-		m_program_time = schedule_act(game, 20000);
+		program_timer_ = true;
+		program_time_ = schedule_act(game, 20000);
 	} else
 		(*state.program)[state.ip].execute(game, *this);
 }
 
-
 /**
  * Remember that we need to fetch an ware from the flag.
  */
-bool ProductionSite::fetch_from_flag(Game & game)
-{
-	++m_fetchfromflag;
+bool ProductionSite::fetch_from_flag(Game& game) {
+	++fetchfromflag_;
 
 	if (can_start_working())
-		m_working_positions[0].worker->update_task_buildingwork(game);
+		working_positions_[0].worker->update_task_buildingwork(game);
 
 	return true;
 }
 
-
-void ProductionSite::log_general_info(const EditorGameBase & egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 	Building::log_general_info(egbase);
 
-	molog("m_is_stopped: %u\n", m_is_stopped);
+	molog("is_stopped: %u\n", is_stopped_);
 }
 
-
 void ProductionSite::set_stopped(bool const stopped) {
-	m_is_stopped = stopped;
+	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
 }
 
@@ -757,18 +708,16 @@ void ProductionSite::set_stopped(bool const stopped) {
  * \return True if this production site could theoretically start working (if
  * all workers are present)
  */
-bool ProductionSite::can_start_working() const
-{
+bool ProductionSite::can_start_working() const {
 	for (uint32_t i = descr().nr_working_positions(); i;)
-		if (m_working_positions[--i].worker_request)
+		if (working_positions_[--i].worker_request)
 			return false;
 	return true;
 }
 
-
-void ProductionSite::try_start_working(Game & game) {
+void ProductionSite::try_start_working(Game& game) {
 	if (can_start_working() && descr().working_positions().size()) {
-		Worker & main_worker = *m_working_positions[0].worker;
+		Worker& main_worker = *working_positions_[0].worker;
 		main_worker.reset_tasks(game);
 		main_worker.start_task_buildingwork(game);
 	}
@@ -779,63 +728,59 @@ void ProductionSite::try_start_working(Game & game) {
  *
  * \note We assume that the worker is inside the building when this is called.
  */
-bool ProductionSite::get_building_work
-	(Game & game, Worker & worker, bool const success)
-{
+bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
 	assert(descr().working_positions().size());
-	assert(&worker == m_working_positions[0].worker);
+	assert(&worker == working_positions_[0].worker);
 
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
-		State * state = get_state();
+		State* state = get_state();
 		if (state->ip < state->program->size())
 			(*state->program)[state->ip].building_work_failed(game, *this, worker);
 	}
 
 	// Default actions first
-	if (WareInstance * const ware = worker.fetch_carried_ware(game)) {
+	if (WareInstance* const ware = worker.fetch_carried_ware(game)) {
 		worker.start_task_dropoff(game, *ware);
 		return true;
 	}
 
-	if (m_fetchfromflag) {
-		--m_fetchfromflag;
+	if (fetchfromflag_) {
+		--fetchfromflag_;
 		worker.start_task_fetchfromflag(game);
 		return true;
 	}
 
-	if (!m_produced_wares.empty()) {
+	if (!produced_wares_.empty()) {
 		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
-		WareAmount& ware_type_with_count = *m_produced_wares.rbegin();
+		WareAmount& ware_type_with_count = *produced_wares_.rbegin();
 		{
 			DescriptionIndex const ware_index = ware_type_with_count.first;
-			const WareDescr & ware_ware_descr =
-				*owner().tribe().get_ware_descr(ware_type_with_count.first);
+			const WareDescr& ware_ware_descr =
+			   *owner().tribe().get_ware_descr(ware_type_with_count.first);
 			{
-				WareInstance & ware =
-					*new WareInstance(ware_index, &ware_ware_descr);
+				WareInstance& ware = *new WareInstance(ware_index, &ware_ware_descr);
 				ware.init(game);
 				worker.start_task_dropoff(game, ware);
 			}
-			owner().ware_produced(ware_index); //  for statistics
+			owner().ware_produced(ware_index);  //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
-			m_produced_wares.pop_back();
+			produced_wares_.pop_back();
 		return true;
 	}
 
-	if (!m_recruited_workers.empty()) {
+	if (!recruited_workers_.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
-		WareAmount& worker_type_with_count = *m_recruited_workers.rbegin();
+		WareAmount& worker_type_with_count = *recruited_workers_.rbegin();
 		{
-			const WorkerDescr & worker_descr =
-				*owner().tribe().get_worker_descr(worker_type_with_count.first);
+			const WorkerDescr& worker_descr =
+			   *owner().tribe().get_worker_descr(worker_type_with_count.first);
 			{
-				Worker & recruit =
-					dynamic_cast<Worker&>(worker_descr.create_object());
+				Worker& recruit = dynamic_cast<Worker&>(worker_descr.create_object());
 				recruit.set_owner(&worker.owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);
@@ -846,16 +791,16 @@ bool ProductionSite::get_building_work
 		}
 		assert(worker_type_with_count.second);
 		if (--worker_type_with_count.second == 0)
-			m_recruited_workers.pop_back();
+			recruited_workers_.pop_back();
 		return true;
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue * queue : m_input_queues) {
+	for (WaresQueue* queue : input_queues_) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
+			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -867,60 +812,51 @@ bool ProductionSite::get_building_work
 		return false;
 
 	// Start program if we haven't already done so
-	State * state = get_state();
+	State* state = get_state();
 	if (!state) {
-		//m_program_timer = true;
 		find_and_start_next_program(game);
-		// m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->size()) {
-		const ProductionProgram::Action & action = (*state->program)[state->ip];
+		const ProductionProgram::Action& action = (*state->program)[state->ip];
 		return action.get_building_work(game, *this, worker);
 	}
 
 	return false;
 }
 
-
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step
-	(Game & game, uint32_t const delay, uint32_t const phase)
-{
-	State & state = top_state();
+void ProductionSite::program_step(Game& game, uint32_t const delay, uint32_t const phase) {
+	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
-	m_program_timer = true;
-	m_program_time  = schedule_act(game, delay);
+	program_timer_ = true;
+	program_time_ = schedule_act(game, delay);
 }
-
 
 /**
  * Push the given program onto the stack and schedule acting.
  */
-void ProductionSite::program_start
-	(Game & game, const std::string & program_name)
-{
+void ProductionSite::program_start(Game& game, const std::string& program_name) {
 	State state;
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
 	state.phase = 0;
 
-	m_stack.push_back(state);
+	stack_.push_back(state);
 
-	m_program_timer = true;
+	program_timer_ = true;
 	uint32_t tdelta = 10;
-	SkippedPrograms::const_iterator i = m_skipped_programs.find(program_name);
-	if (i != m_skipped_programs.end()) {
+	SkippedPrograms::const_iterator i = skipped_programs_.find(program_name);
+	if (i != skipped_programs_.end()) {
 		uint32_t const gametime = game.get_gametime();
 		uint32_t const earliest_allowed_start_time = i->second + 10000;
 		if (gametime + tdelta < earliest_allowed_start_time)
 			tdelta = earliest_allowed_start_time - gametime;
 	}
-	m_program_time = schedule_act(game, tdelta);
+	program_time_ = schedule_act(game, tdelta);
 }
-
 
 /**
  * Ends the current program now and updates the productivity statistics.
@@ -928,77 +864,61 @@ void ProductionSite::program_start
  * \pre Any program is running
  * \post No program is running, acting is scheduled
  */
-void ProductionSite::program_end(Game & game, ProgramResult const result)
-{
-	assert(m_stack.size());
+void ProductionSite::program_end(Game& game, ProgramResult const result) {
+	assert(stack_.size());
 
-	const std::string & program_name = top_state().program->name();
+	const std::string& program_name = top_state().program->name();
 
-	m_stack.pop_back();
-	if (!m_stack.empty())
+	stack_.pop_back();
+	if (!stack_.empty())
 		top_state().phase = result;
 
 	switch (result) {
 	case Failed:
-		//changed by TB below
-		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
-		m_statistics.push_back(false);
+		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
+		statistics_.push_back(false);
 		calc_statistics();
-		m_crude_percent = m_crude_percent * 8 / 10;
+		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-		//end of changed by TB
 	case Completed:
-		m_skipped_programs.erase(program_name);
-		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
-		m_statistics.push_back(true);
+		skipped_programs_.erase(program_name);
+		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
+		statistics_.push_back(true);
 		train_workers(game);
-		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
+		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
 	case Skipped:
-		m_skipped_programs[program_name] = game.get_gametime();
-		//changed by TB below
-		m_crude_percent = m_crude_percent * 98 / 100;
-		//end of changed by TB
+		skipped_programs_[program_name] = game.get_gametime();
+		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
 		break;
 	}
 
-	m_program_timer = true;
-	m_program_time = schedule_act(game, m_post_timer);
+	program_timer_ = true;
+	program_time_ = schedule_act(game, post_timer_);
 }
 
-void ProductionSite::train_workers(Game & game)
-{
+void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
-		m_working_positions[--i].worker->gain_experience(game);
+		working_positions_[--i].worker->gain_experience(game);
 	Building::workers_changed();
 }
 
-
-void ProductionSite::notify_player(Game & game, uint8_t minutes)
-{
-	if (m_last_stat_percent == 0 ||
-		 (m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
-		  && trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_heading().empty())
-		{
+void ProductionSite::notify_player(Game& game, uint8_t minutes) {
+	if (last_stat_percent_ == 0 ||
+	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
+	     trend_ == Trend::kFalling)) {
+		if (descr().out_of_resource_heading().empty()) {
 			set_production_result(_("Can’t find any more resources!"));
-		}
-		else {
+		} else {
 			set_production_result(descr().out_of_resource_heading());
 
 			assert(!descr().out_of_resource_message().empty());
-			send_message
-				(game,
-				 Message::Type::kEconomy,
-				 descr().out_of_resource_title(),
-				 descr().icon_filename(),
-				 descr().out_of_resource_heading(),
-				 descr().out_of_resource_message(),
-				 true,
-				 minutes * 60000, 0);
+			send_message(game, Message::Type::kEconomy, descr().out_of_resource_title(),
+			             descr().icon_filename(), descr().out_of_resource_heading(),
+			             descr().out_of_resource_message(), true, minutes * 60000, 0);
 		}
 		// The following sends "out of resources" messages to be picked up by AI
 		// used as information for dismantling and upgrading buildings
@@ -1009,21 +929,17 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 }
 
 void ProductionSite::unnotify_player() {
-	 set_production_result("");
+	set_production_result("");
 }
 
-
 /// Changes the default anim string to \li anim
-void ProductionSite::set_default_anim(std::string anim)
-{
-	if (m_default_anim == anim)
+void ProductionSite::set_default_anim(std::string anim) {
+	if (default_anim_ == anim)
 		return;
 
 	if (!descr().is_animation_known(anim))
 		return;
 
-	m_default_anim = anim;
+	default_anim_ = anim;
 }
-
-
 }

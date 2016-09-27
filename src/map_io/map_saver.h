@@ -42,18 +42,19 @@ debugability
 ===========================
 */
 struct MapSaver {
-	MapSaver(FileSystem &, EditorGameBase &);
+	MapSaver(FileSystem&, EditorGameBase&);
 	~MapSaver();
 
 	void save();
-	MapObjectSaver * get_map_object_saver() {return m_mos;}
+	MapObjectSaver* get_map_object_saver() {
+		return mos_;
+	}
 
 private:
-	EditorGameBase     & m_egbase;
-	FileSystem & m_fs;
-	MapObjectSaver * m_mos;
+	EditorGameBase& egbase_;
+	FileSystem& fs_;
+	MapObjectSaver* mos_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_SAVER_H

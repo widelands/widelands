@@ -22,6 +22,8 @@
 
 #include <vector>
 
+#include "logic/widelands.h"
+
 namespace Widelands {
 
 class EditorGameBase;
@@ -43,30 +45,30 @@ struct SoldierControl {
 	/**
 	 * \return a list of soldiers that are currently present in the building.
 	 */
-	virtual std::vector<Soldier *> present_soldiers() const = 0;
+	virtual std::vector<Soldier*> present_soldiers() const = 0;
 
 	/**
 	 * \return a list of soldiers that are currently stationed in the building.
 	 */
-	virtual std::vector<Soldier *> stationed_soldiers() const = 0;
+	virtual std::vector<Soldier*> stationed_soldiers() const = 0;
 
 	/**
 	 * \return the minimum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t min_soldier_capacity() const = 0;
+	virtual Quantity min_soldier_capacity() const = 0;
 
 	/**
 	 * \return the maximum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t max_soldier_capacity() const = 0;
+	virtual Quantity max_soldier_capacity() const = 0;
 
 	/**
 	 * \return the number of soldiers this building is configured to hold
 	 * right now.
 	 */
-	virtual uint32_t soldier_capacity() const = 0;
+	virtual Quantity soldier_capacity() const = 0;
 
 	/**
 	 * Sets the capacity for soldiers of this building.
@@ -74,17 +76,14 @@ struct SoldierControl {
 	 * New soldiers will be requested and old soldiers will be evicted
 	 * as necessary.
 	 */
-	virtual void set_soldier_capacity(uint32_t capacity) = 0;
+	virtual void set_soldier_capacity(Quantity capacity) = 0;
 
 	void changeSoldierCapacity(int32_t const difference) {
-		uint32_t const old_capacity = soldier_capacity();
-		uint32_t const new_capacity =
-			std::min
-				(static_cast<uint32_t>
-				 	(std::max
-				 	 	(static_cast<int32_t>(old_capacity) + difference,
-				 	 	 static_cast<int32_t>(min_soldier_capacity()))),
-				 max_soldier_capacity());
+		Widelands::Quantity const old_capacity = soldier_capacity();
+		Widelands::Quantity const new_capacity = std::min(
+		   static_cast<Widelands::Quantity>(std::max(static_cast<int32_t>(old_capacity) + difference,
+		                                             static_cast<int32_t>(min_soldier_capacity()))),
+		   max_soldier_capacity());
 		if (old_capacity != new_capacity)
 			set_soldier_capacity(new_capacity);
 	}
@@ -96,25 +95,27 @@ struct SoldierControl {
 	 * \note This has no effect if the soldier is currently involved in a battle
 	 * or otherwise blocked from leaving the building.
 	 */
-	virtual void drop_soldier(Soldier &) = 0;
+	virtual void drop_soldier(Soldier&) = 0;
 
 	/**
 	 * Add a new soldier into this site. Returns -1 if there is no space
 	 * for him, 0 on success
 	 */
-	virtual int incorporate_soldier(EditorGameBase &, Soldier &) = 0;
+	virtual int incorporate_soldier(EditorGameBase&, Soldier&) = 0;
 
 	/**
 	 * Remove a soldier from the internal list. Most SoldierControls will be
 	 * informed by the soldier when it is removed, but WareHouses for example
 	 * will not.
 	 */
-	virtual int outcorporate_soldier(EditorGameBase &, Soldier &) {return 0;}
+	virtual int outcorporate_soldier(EditorGameBase&, Soldier&) {
+		return 0;
+	}
 
 protected:
-	virtual ~SoldierControl() {}
+	virtual ~SoldierControl() {
+	}
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIERCONTROL_H

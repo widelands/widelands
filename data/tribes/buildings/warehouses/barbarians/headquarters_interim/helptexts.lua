@@ -20,8 +20,7 @@ function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
    return
       pgettext("barbarians_building", "The headquarters is your main building.")
-      .. "<br>" ..
-      no_performance_text_yet()
+      -- .. "<br>" .. no_lore_text_yet()
 end
 
 function building_helptext_performance()

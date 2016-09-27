@@ -25,25 +25,23 @@
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 
-
-ReplayGameController::ReplayGameController(Widelands::Game & game, const std::string & filename) :
-	m_game(game),
-	m_lastframe(SDL_GetTicks()),
-	m_time(m_game.get_gametime()),
-	m_speed(1000),
-	m_paused(false)
-{
-	m_game.set_game_controller(this);
+ReplayGameController::ReplayGameController(Widelands::Game& game, const std::string& filename)
+   : game_(game),
+     lastframe_(SDL_GetTicks()),
+     time_(game_.get_gametime()),
+     speed_(1000),
+     paused_(false) {
+	game_.set_game_controller(this);
 
 	// We have to create an empty map, otherwise nothing will load properly
 	game.set_map(new Widelands::Map);
-	m_replayreader.reset(new Widelands::ReplayReader(m_game, filename));
+	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
 }
 
 void ReplayGameController::think() {
 	uint32_t curtime = SDL_GetTicks();
-	int32_t frametime = curtime - m_lastframe;
-	m_lastframe = curtime;
+	int32_t frametime = curtime - lastframe_;
+	lastframe_ = curtime;
 
 	// prevent crazy frametimes
 	if (frametime < 0)
@@ -53,28 +51,25 @@ void ReplayGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	m_time = m_game.get_gametime() + frametime;
+	time_ = game_.get_gametime() + frametime;
 
-	if (m_replayreader) {
-		while
-			(Widelands::Command * const cmd =
-				m_replayreader->get_next_command(m_time))
-			m_game.enqueue_command(cmd);
+	if (replayreader_) {
+		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_))
+			game_.enqueue_command(cmd);
 
-		if (m_replayreader->end_of_replay()) {
-			m_replayreader.reset(nullptr);
-			m_game.enqueue_command
-				(new CmdReplayEnd(m_time = m_game.get_gametime()));
+		if (replayreader_->end_of_replay()) {
+			replayreader_.reset(nullptr);
+			game_.enqueue_command(new CmdReplayEnd(time_ = game_.get_gametime()));
 		}
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand &) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand&) {
 	throw wexception("Trying to send a player command during replay");
 }
 
 int32_t ReplayGameController::get_frametime() {
-	return m_time - m_game.get_gametime();
+	return time_ - game_.get_gametime();
 }
 
 GameController::GameType ReplayGameController::get_game_type() {
@@ -82,34 +77,32 @@ GameController::GameType ReplayGameController::get_game_type() {
 }
 
 uint32_t ReplayGameController::real_speed() {
-	return m_paused ? 0 : m_speed;
+	return paused_ ? 0 : speed_;
 }
 
 uint32_t ReplayGameController::desired_speed() {
-	return m_speed;
+	return speed_;
 }
 
 void ReplayGameController::set_desired_speed(uint32_t const speed) {
-	m_speed = speed;
+	speed_ = speed;
 }
 
 bool ReplayGameController::is_paused() {
-	return m_paused;
+	return paused_;
 }
 
 void ReplayGameController::set_paused(bool const paused) {
-	m_paused = paused;
+	paused_ = paused;
 }
 
-void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
+void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb
-		(game.get_ibase(),
-		 _("End of replay"),
-		 _("The end of the replay has been reached and the game has "
-			"been paused. You may unpause the game and continue watching "
-			"if you want to."),
-		 UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mmb(game.get_ibase(), _("End of replay"),
+	                     _("The end of the replay has been reached and the game has "
+	                       "been paused. You may unpause the game and continue watching "
+	                       "if you want to."),
+	                     UI::WLMessageBox::MBoxType::kOk);
 	mmb.run<UI::Panel::Returncodes>();
 }
 

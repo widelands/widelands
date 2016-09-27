@@ -35,32 +35,32 @@ template <typename T> struct GenericPoint {
 		return GenericPoint(std::numeric_limits<T>::max(), std::numeric_limits<T>::max());
 	}
 
-	bool operator == (const GenericPoint& other) const {
+	bool operator==(const GenericPoint& other) const {
 		return x == other.x && y == other.y;
 	}
-	bool operator != (const GenericPoint& other) const {
+	bool operator!=(const GenericPoint& other) const {
 		return !(*this == other);
 	}
 
-	GenericPoint operator + (const GenericPoint& other) const {
+	GenericPoint operator+(const GenericPoint& other) const {
 		return GenericPoint(x + other.x, y + other.y);
 	}
 
-	GenericPoint operator - () const {
+	GenericPoint operator-() const {
 		return GenericPoint(-x, -y);
 	}
 
-	GenericPoint operator - (const GenericPoint& other) const {
+	GenericPoint operator-(const GenericPoint& other) const {
 		return GenericPoint(x - other.x, y - other.y);
 	}
 
-	GenericPoint& operator += (const GenericPoint& other) {
+	GenericPoint& operator+=(const GenericPoint& other) {
 		x += other.x;
 		y += other.y;
 		return *this;
 	}
 
-	GenericPoint& operator -= (const GenericPoint& other) {
+	GenericPoint& operator-=(const GenericPoint& other) {
 		x -= other.x;
 		y -= other.y;
 		return *this;

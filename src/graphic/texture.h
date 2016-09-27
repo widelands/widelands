@@ -31,7 +31,7 @@ class Texture : public Surface, public Image {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
-	Texture(SDL_Surface * surface, bool intensity = false);
+	Texture(SDL_Surface* surface, bool intensity = false);
 
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.
@@ -52,17 +52,17 @@ public:
 
 	enum UnlockMode {
 		/**
-		 * Update mode will ensure that any changes in the pixel data
-		 * will appear in subsequent operations.
-		 */
+	    * Update mode will ensure that any changes in the pixel data
+	    * will appear in subsequent operations.
+	    */
 		Unlock_Update = 0,
 
 		/**
-		 * NoChange mode indicates that the caller changed no pixel data.
-		 *
-		 * \note If the caller did change pixel data but specifies NoChange
-		 * mode, the results are undefined.
-		 */
+	    * NoChange mode indicates that the caller changed no pixel data.
+	    *
+	    * \note If the caller did change pixel data but specifies NoChange
+	    * mode, the results are undefined.
+	    */
 		Unlock_NoChange
 	};
 
@@ -94,17 +94,16 @@ private:
 	void do_blit_monochrome(const FloatRect& dst_rect,
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
-	void
-	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) override;
+	void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) override;
 	void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	// True if we own the texture, i.e. if we need to delete it.
-	bool m_owns_texture;
+	bool owns_texture_;
 
-	BlitData m_blit_data;
+	BlitData blit_data_;
 	/// Pixel data, while the texture is locked
-	std::unique_ptr<uint8_t[]> m_pixels;
+	std::unique_ptr<uint8_t[]> pixels_;
 
 	DISALLOW_COPY_AND_ASSIGN(Texture);
 };

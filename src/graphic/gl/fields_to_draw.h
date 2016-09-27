@@ -33,14 +33,14 @@
 class FieldsToDraw {
 public:
 	struct Field {
-		int fx, fy;  // geometric coordinates (i.e. map coordinates that can be out of bounds).
+		int fx, fy;        // geometric coordinates (i.e. map coordinates that can be out of bounds).
 		float gl_x, gl_y;  // GL Position of this field.
-		float pixel_x, pixel_y;  // Pixel position relative to top left.
-		float texture_x, texture_y;  // Texture coordinates.
-		float brightness;            // brightness of the pixel
-		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.
-		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
-		const RoadTextures* road_textures; // Road Textures to use for drawing.
+		float pixel_x, pixel_y;             // Pixel position relative to top left.
+		float texture_x, texture_y;         // Texture coordinates.
+		float brightness;                   // brightness of the pixel
+		uint8_t ter_r, ter_d;               // Texture index of the right and down triangle.
+		uint8_t roads;                      // Bitmask of roads to render, see logic/roadtype.h.
+		const RoadTextures* road_textures;  // Road Textures to use for drawing.
 	};
 
 	FieldsToDraw() = default;
@@ -101,6 +101,5 @@ private:
 
 	std::vector<Field> fields_;
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_GL_FIELDS_TO_DRAW_H

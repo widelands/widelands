@@ -28,18 +28,17 @@
 #include "ui_basic/unique_window.h"
 
 class InteractiveGameBase;
-namespace Widelands
-{
+namespace Widelands {
 class Game;
 }
 
 /// Shows an ingame summary window on game end
 class GameSummaryScreen : public UI::UniqueWindow {
 public:
-	GameSummaryScreen
-		(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r);
+	GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
+
 private:
 	void fill_data();
 	void stop_clicked();
@@ -47,15 +46,15 @@ private:
 	void player_selected(uint32_t idx);
 	std::string parse_player_info(std::string info);
 
-	Widelands::Game & game_;
-	UI::Textarea *  title_area_;
-	UI::Textarea *  gametime_label_;
-	UI::Textarea *  gametime_value_;
-	UI::Textarea *  info_area_label_;
-	UI::MultilineTextarea *  info_area_;
-	UI::Button *    continue_button_;
-	UI::Button *    stop_button_;
-	UI::Table<uintptr_t const> *     players_table_;
+	Widelands::Game& game_;
+	UI::Textarea* title_area_;
+	UI::Textarea* gametime_label_;
+	UI::Textarea* gametime_value_;
+	UI::Textarea* info_area_label_;
+	UI::MultilineTextarea* info_area_;
+	UI::Button* continue_button_;
+	UI::Button* stop_button_;
+	UI::Table<uintptr_t const>* players_table_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_SUMMARY_H

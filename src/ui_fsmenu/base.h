@@ -21,17 +21,8 @@
 #define WL_UI_FSMENU_BASE_H
 
 #include <string>
-#include <memory>
 
-#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-
-namespace UI {
-struct Font;
-struct TextStyle;
-}
-
-class Image;
 
 /**
  * This class is the base class for a fullscreen menu.
@@ -54,9 +45,7 @@ public:
 		kReplay,
 		kEditor,
 		kOptions,
-		kReadme,
-		kLicense,
-		kAuthors,
+		kAbout,
 		kExit,
 
 		// Single player
@@ -82,11 +71,11 @@ public:
 	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	///\return the size for texts fitting to current resolution
-	uint32_t fs_small();
-	uint32_t fs_big();
+	int fs_small();
+	int fs_big();
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
@@ -98,6 +87,5 @@ protected:
 private:
 	std::string background_image_;
 };
-
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

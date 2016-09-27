@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,11 +27,11 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
-
 
 using namespace Widelands;
 
@@ -66,34 +66,35 @@ Module Classes
 
 */
 
-
 /* RST
 EditorGameBase
 --------------
 
 .. class:: EditorGameBase
 
-	Common functionality between Editor and Game.
+   Common functionality between Editor and Game.
 */
 
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
-	METHOD(LuaEditorGameBase, get_building_description),
-	METHOD(LuaEditorGameBase, get_tribe_description),
-	METHOD(LuaEditorGameBase, get_ware_description),
-	METHOD(LuaEditorGameBase, get_worker_description),
-	{nullptr, nullptr},
+   METHOD(LuaEditorGameBase, get_immovable_description),
+   METHOD(LuaEditorGameBase, get_building_description),
+   METHOD(LuaEditorGameBase, get_tribe_description),
+   METHOD(LuaEditorGameBase, get_ware_description),
+   METHOD(LuaEditorGameBase, get_worker_description),
+   METHOD(LuaEditorGameBase, get_resource_description),
+   METHOD(LuaEditorGameBase, get_terrain_description),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
-	PROP_RO(LuaEditorGameBase, map),
-	PROP_RO(LuaEditorGameBase, players),
-	{nullptr, nullptr, nullptr},
+   PROP_RO(LuaEditorGameBase, map),
+   PROP_RO(LuaEditorGameBase, players),
+   {nullptr, nullptr, nullptr},
 };
 
-
-void LuaEditorGameBase::__persist(lua_State * /* L */) {
+void LuaEditorGameBase::__persist(lua_State* /* L */) {
 }
-void LuaEditorGameBase::__unpersist(lua_State * /* L */) {
+void LuaEditorGameBase::__unpersist(lua_State* /* L */) {
 }
 
 /*
@@ -102,37 +103,37 @@ void LuaEditorGameBase::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 /* RST
-	.. attribute:: map
+   .. attribute:: map
 
-		(RO) The :class:`~wl.map.Map` the game is played on.
+      (RO) The :class:`~wl.map.Map` the game is played on.
 */
-int LuaEditorGameBase::get_map(lua_State * L) {
+int LuaEditorGameBase::get_map(lua_State* L) {
 	to_lua<LuaMaps::LuaMap>(L, new LuaMaps::LuaMap());
 	return 1;
 }
 
 /* RST
-	.. attribute:: players
+   .. attribute:: players
 
-		(RO) An :class:`array` with the defined players. The players are
-		either of type :class:`wl.game.Player` or :class:`wl.editor.Player`.
+      (RO) An :class:`array` with the defined players. The players are
+      either of type :class:`wl.game.Player` or :class:`wl.editor.Player`.
 
-		In game, there might be less players then defined in
-		:attr:`wl.map.Map.player_slots` because some slots might not be taken.
-		Also note that for the same reason you cannot index this array with
-		:attr:`wl.bases.PlayerBase.number`, but the players are ordered with
-		increasing number in this array.
+      In game, there might be less players then defined in
+      :attr:`wl.map.Map.player_slots` because some slots might not be taken.
+      Also note that for the same reason you cannot index this array with
+      :attr:`wl.bases.PlayerBase.number`, but the players are ordered with
+      increasing number in this array.
 
-		The editor always creates all players that are defined by the map.
+      The editor always creates all players that are defined by the map.
 */
-int LuaEditorGameBase::get_players(lua_State * L) {
-	EditorGameBase & egbase = get_egbase(L);
+int LuaEditorGameBase::get_players(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
 
 	lua_newtable(L);
 
 	uint32_t idx = 1;
 	for (PlayerNumber i = 1; i <= MAX_PLAYERS; i++) {
-		Player * rv = egbase.get_player(i);
+		Player* rv = egbase.get_player(i);
 		if (!rv)
 			continue;
 
@@ -150,13 +151,44 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  */
 
 /* RST
-	.. function:: get_building_description(building_description.name)
+   .. function:: get_immovable_description(immovable_name)
 
-		:arg building_name: the name of the building
+      :arg immovable_name: the name of the immovable
 
-		Registers a building description so Lua can reference it from the game.
+      Returns the ImmovableDescription for the named object.
 
-		(RO) The :class:`~wl.Game.Building_description`.
+      (RO) The :class:`~wl.Game.Immovable_description`.
+*/
+int LuaEditorGameBase::get_immovable_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string immovable_name = luaL_checkstring(L, 2);
+	EditorGameBase& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	DescriptionIndex idx = world.get_immovable_index(immovable_name);
+	if (idx != INVALID_INDEX) {
+		const ImmovableDescr* descr = world.get_immovable_descr(idx);
+		return to_lua<LuaMaps::LuaImmovableDescription>(
+		   L, new LuaMaps::LuaImmovableDescription(descr));
+	}
+	const Tribes& tribes = egbase.tribes();
+	idx = tribes.immovable_index(immovable_name);
+	if (!tribes.immovable_exists(idx)) {
+		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
+	}
+	const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
+	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+}
+
+/* RST
+   .. function:: get_building_description(building_description.name)
+
+      :arg building_name: the name of the building
+
+      Returns the description for the given building.
+
+      (RO) The :class:`~wl.Game.Building_description`.
 */
 int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -174,13 +206,13 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 }
 
 /* RST
-	.. function:: get_tribe_description(tribe_name)
+   .. function:: get_tribe_description(tribe_name)
 
-		:arg tribe_name: the name of the tribe
+      :arg tribe_name: the name of the tribe
 
-		Registers a tribe description so Lua can reference it from the game.
+      Returns the tribe description of the given tribe.
 
-		(RO) The :class:`~wl.Game.Tribe_description`.
+      (RO) The :class:`~wl.Game.Tribe_description`.
 */
 int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -191,20 +223,19 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (!egbase.tribes().tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const TribeDescr* descr = egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+	const TribeDescr* descr =
+	   egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
 	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
 }
 
-
-
 /* RST
-	.. function:: get_ware_description(ware_description.name)
+   .. function:: get_ware_description(ware_description.name)
 
-		:arg ware_name: the name of the ware
+      :arg ware_name: the name of the ware
 
-		Registers a ware description so Lua can reference it from the game.
+      Returns the ware description for the given ware.
 
-		(RO) The :class:`~wl.Game.Ware_description`.
+      (RO) The :class:`~wl.Game.Ware_description`.
 */
 int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -220,15 +251,14 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
-
 /* RST
-	.. function:: get_worker_description(worker_description.name)
+   .. function:: get_worker_description(worker_description.name)
 
-		:arg worker_name: the name of the worker
+      :arg worker_name: the name of the worker
 
-		Registers a worker description so Lua can reference it from the game.
+      Returs the worker desciption for the given worker.
 
-		(RO) The :class:`~wl.Game.Worker_description`.
+      (RO) The :class:`~wl.Game.Worker_description`.
 */
 int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -244,12 +274,57 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
+/* RST
+   .. function:: get_resource_description(resource_name)
+
+      :arg resource_name: the name of the resource
+
+      Returns the resource description for the given resource.
+
+      (RO) The :class:`~wl.Game.Resource_description`.
+*/
+int LuaEditorGameBase::get_resource_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string resource_name = luaL_checkstring(L, 2);
+	const World& world = get_egbase(L).world();
+	const DescriptionIndex idx = world.get_resource(resource_name.c_str());
+
+	if (idx == INVALID_INDEX) {
+		report_error(L, "Resource %s does not exist", resource_name.c_str());
+	}
+
+	const ResourceDescription* descr = world.get_resource(idx);
+	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
+}
+
+/* RST
+   .. function:: get_terrain_description(terrain_name)
+
+      :arg terrain_name: the name of the terrain
+
+      Returns a given terrain description for the given terrain.
+
+      (RO) The :class:`~wl.Game.Terrain_description`.
+*/
+int LuaEditorGameBase::get_terrain_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string terrain_name = luaL_checkstring(L, 2);
+	const TerrainDescription* descr = get_egbase(L).world().terrain_descr(terrain_name);
+	if (!descr) {
+		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
+	}
+	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
+}
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 /* RST
 PlayerBase
@@ -257,33 +332,26 @@ PlayerBase
 
 .. class:: PlayerBase
 
-	The Base class for the Player objects in Editor and Game
+   The Base class for the Player objects in Editor and Game
 */
 
 const char LuaPlayerBase::className[] = "PlayerBase";
 const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
-	METHOD(LuaPlayerBase, __eq),
-	METHOD(LuaPlayerBase, __tostring),
-	METHOD(LuaPlayerBase, conquer),
-	METHOD(LuaPlayerBase, get_wares),
-	METHOD(LuaPlayerBase, get_workers),
-	METHOD(LuaPlayerBase, place_building),
-	METHOD(LuaPlayerBase, place_flag),
-	METHOD(LuaPlayerBase, place_road),
-	METHOD(LuaPlayerBase, place_ship),
-	{nullptr, nullptr},
+   METHOD(LuaPlayerBase, __eq),        METHOD(LuaPlayerBase, __tostring),
+   METHOD(LuaPlayerBase, conquer),     METHOD(LuaPlayerBase, get_wares),
+   METHOD(LuaPlayerBase, get_workers), METHOD(LuaPlayerBase, place_building),
+   METHOD(LuaPlayerBase, place_flag),  METHOD(LuaPlayerBase, place_road),
+   METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-	PROP_RO(LuaPlayerBase, number),
-	PROP_RO(LuaPlayerBase, tribe_name),
-	{nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
 };
 
-void LuaPlayerBase::__persist(lua_State * L) {
-	PERS_UINT32("player", m_pl);
+void LuaPlayerBase::__persist(lua_State* L) {
+	PERS_UINT32("player", player_number_);
 }
-void LuaPlayerBase::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_pl);
+void LuaPlayerBase::__unpersist(lua_State* L) {
+	UNPERS_UINT32("player", player_number_);
 }
 
 /*
@@ -292,77 +360,74 @@ void LuaPlayerBase::__unpersist(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. attribute:: number
+   .. attribute:: number
 
-		(RO) The number of this Player.
+      (RO) The number of this Player.
 */
-int LuaPlayerBase::get_number(lua_State * L) {
-	lua_pushuint32(L, m_pl);
+int LuaPlayerBase::get_number(lua_State* L) {
+	lua_pushuint32(L, player_number_);
 	return 1;
 }
 
 /* RST
-	.. attribute:: tribe_name
+   .. attribute:: tribe_name
 
-		(RO) The name of the tribe of this player.
+      (RO) The name of the tribe of this player.
 */
-int LuaPlayerBase::get_tribe_name(lua_State * L) {
+int LuaPlayerBase::get_tribe_name(lua_State* L) {
 	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
 	return 1;
 }
-
 
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
-int LuaPlayerBase::__eq(lua_State * L) {
-	EditorGameBase & egbase = get_egbase(L);
-	const Player & me = get(L, egbase);
-	const Player & you =
-		(*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
+int LuaPlayerBase::__eq(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	const Player& me = get(L, egbase);
+	const Player& you = (*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
 
-	lua_pushboolean
-		(L, (me.player_number() == you.player_number()));
+	lua_pushboolean(L, (me.player_number() == you.player_number()));
 	return 1;
 }
 
-int LuaPlayerBase::__tostring(lua_State * L) {
-	const std::string pushme =
-			(boost::format("Player(%i)")
-			 % static_cast<unsigned int>(get(L, get_egbase(L)).player_number())).str();
+int LuaPlayerBase::__tostring(lua_State* L) {
+	const std::string pushme = (boost::format("Player(%i)") %
+	                            static_cast<unsigned int>(get(L, get_egbase(L)).player_number()))
+	                              .str();
 	lua_pushstring(L, pushme.c_str());
 	return 1;
 }
 /* RST
-	.. function:: place_flag(field[, force])
+   .. function:: place_flag(field[, force])
 
-		Builds a flag on a given field if it is legal to do so. If not,
-		reports an error
+      Builds a flag on a given field if it is legal to do so. If not,
+      reports an error
 
-		:arg field: where the flag should be created
-		:type field: :class:`wl.map.Field`
-		:arg force: If this is :const:`true` then the map is created with
-			pure force:
+      :arg field: where the flag should be created
+      :type field: :class:`wl.map.Field`
+      :arg force: If this is :const:`true` then the map is created with
+         pure force:
 
-				* if there is an immovable on this field, it will be
-				  removed
-				* if there are flags too close by to this field, they will be
-				  ripped
-				* if the player does not own the territory, it is conquered
-				  for him.
-		:type force: :class:`boolean`
-		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
+            * if there is an immovable on this field, it will be
+              removed
+            * if there are flags too close by to this field, they will be
+              ripped
+            * if the player does not own the territory, it is conquered
+              for him.
+      :type force: :class:`boolean`
+      :returns: :class:`wl.map.Flag` object created or :const:`nil`.
 */
-int LuaPlayerBase::place_flag(lua_State * L) {
+int LuaPlayerBase::place_flag(lua_State* L) {
 	uint32_t n = lua_gettop(L);
-	LuaMaps::LuaField * c = *get_user_class<LuaMaps::LuaField>(L, 2);
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 	bool force = false;
 	if (n > 2)
 		force = luaL_checkboolean(L, 3);
 
-	Flag * f;
+	Flag* f;
 	if (!force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
 		if (!f)
@@ -375,29 +440,28 @@ int LuaPlayerBase::place_flag(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_road(f1, dir1, dir2, ...[, force=false])
+   .. method:: place_road(f1, dir1, dir2, ...[, force=false])
 
-		Start a road at the given field, then walk the directions
-		given. Places a flag at the last field.
+      Start a road at the given field, then walk the directions
+      given. Places a flag at the last field.
 
-		If the last argument to this function is :const:`true` the road will
-		be created by force: all immovables in the way are removed and land
-		is conquered.
+      If the last argument to this function is :const:`true` the road will
+      be created by force: all immovables in the way are removed and land
+      is conquered.
 
-		:arg f1: fields to connect with this road
-		:type f1: :class:`wl.map.Field`
-		:arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
-			("e", "w", "ne", "nw", "se", "sw").
-		:type dirs: :class:`string`
+      :arg f1: fields to connect with this road
+      :type f1: :class:`wl.map.Field`
+      :arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
+         ("e", "w", "ne", "nw", "se", "sw").
+      :type dirs: :class:`string`
 
-		:returns: the road created
+      :returns: the road created
 */
-int LuaPlayerBase::place_road(lua_State * L) {
-	EditorGameBase & egbase = get_egbase(L);
-	Map & map = egbase.map();
+int LuaPlayerBase::place_road(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	Map& map = egbase.map();
 
-	Flag * starting_flag =
-		(*get_user_class<LuaMaps::LuaFlag> (L, 2))->get(L, egbase);
+	Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, egbase);
 	Coords current = starting_flag->get_position();
 	Path path(current);
 
@@ -438,58 +502,52 @@ int LuaPlayerBase::place_road(lua_State * L) {
 
 	// Make sure that the road cannot cross itself
 	Path optimal_path;
-	map.findpath
-		(path.get_start(), path.get_end(),
-		 0,
-		 optimal_path,
-		 cstep,
-		 Map::fpBidiCost);
+	map.findpath(path.get_start(), path.get_end(), 0, optimal_path, cstep, Map::fpBidiCost);
 	if (optimal_path.get_nsteps() != path.get_nsteps())
 		report_error(L, "Cannot build a road that crosses itself!");
 
-	Road * r = nullptr;
+	Road* r = nullptr;
 	if (force_road) {
 		r = &get(L, egbase).force_road(path);
 	} else {
-		BaseImmovable * bi = map.get_immovable(current);
+		BaseImmovable* bi = map.get_immovable(current);
 		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
 			if (!get(L, egbase).build_flag(current))
 				report_error(L, "Could not place end flag!");
 		}
 		if (bi && bi == starting_flag)
-		  report_error(L, "Cannot build a closed loop!");
+			report_error(L, "Cannot build a closed loop!");
 
 		r = get(L, egbase).build_road(path);
 	}
 
 	if (!r) {
-		report_error(L,
-		             "Error while creating Road. May be: something is in "
-		             "the way or you do not own the territory were you want to build "
-		             "the road");
+		report_error(L, "Error while creating Road. May be: something is in "
+		                "the way or you do not own the territory were you want to build "
+		                "the road");
 	}
 
 	return to_lua<LuaMaps::LuaRoad>(L, new LuaMaps::LuaRoad(*r));
 }
 
 /* RST
-	.. method:: place_building(name, field[, cs = false, force = false])
+   .. method:: place_building(name, field[, cs = false, force = false])
 
-		Immediately creates a building on the given field. The building starts
-		out completely empty. If :const:`cs` is set, the building
-		is not created directly, instead a constructionsite for this building is
-		placed.
+      Immediately creates a building on the given field. The building starts
+      out completely empty. If :const:`cs` is set, the building
+      is not created directly, instead a constructionsite for this building is
+      placed.
 
-		If the :const:`force` argument is set, the building is forced into
-		existence: the same action is taken as for :meth:`place_flag` when force
-		is :const:`true`. Additionally, all buildings that are too close to the
-		new one are ripped.
+      If the :const:`force` argument is set, the building is forced into
+      existence: the same action is taken as for :meth:`place_flag` when force
+      is :const:`true`. Additionally, all buildings that are too close to the
+      new one are ripped.
 
-		:returns: a subclass of :class:`wl.map.Building`
+      :returns: a subclass of :class:`wl.map.Building`
 */
-int LuaPlayerBase::place_building(lua_State * L) {
+int LuaPlayerBase::place_building(lua_State* L) {
 	const std::string& name = luaL_checkstring(L, 2);
-	LuaMaps::LuaField * c = *get_user_class<LuaMaps::LuaField>(L, 3);
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	bool constructionsite = false;
 	bool force = false;
 
@@ -498,7 +556,8 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	const Tribes& tribes = get_egbase(L).tribes();
+	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = egbase.tribes();
 
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
@@ -511,18 +570,15 @@ int LuaPlayerBase::place_building(lua_State * L) {
 		former_buildings.pop_back();
 	}
 
-	Building * b = nullptr;
+	Building* b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			b = &get(L, get_egbase(L)).force_csite
-				(c->coords(), building_index, former_buildings);
+			b = &get(L, egbase).force_csite(c->coords(), building_index, former_buildings);
 		} else {
-			b = &get(L, get_egbase(L)).force_building
-				(c->coords(), former_buildings);
+			b = &get(L, egbase).force_building(c->coords(), former_buildings);
 		}
 	} else {
-		b = get(L, get_egbase(L)).build
-			(c->coords(), building_index, constructionsite, former_buildings);
+		b = get(L, egbase).build(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)
 		report_error(L, "Couldn't place building!");
@@ -532,21 +588,21 @@ int LuaPlayerBase::place_building(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_ship(field)
+   .. method:: place_ship(field)
 
-		Places a ship for the player's tribe, which will be
-		owned by the player.
+      Places a ship for the player's tribe, which will be
+      owned by the player.
 
-		:arg field: where the ship should be placed.
-		:type field: :class:`wl.map.Field`
+      :arg field: where the ship should be placed.
+      :type field: :class:`wl.map.Field`
 
-		:returns: The new ship that was created.
+      :returns: The new ship that was created.
 */
 // UNTESTED
-int LuaPlayerBase::place_ship(lua_State * L) {
+int LuaPlayerBase::place_ship(lua_State* L) {
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
-	EditorGameBase & egbase = get_egbase(L);
+	EditorGameBase& egbase = get_egbase(L);
 	Player& player = get(L, egbase);
 
 	const ShipDescr* descr = egbase.tribes().get_ship_descr(player.tribe().ship());
@@ -558,44 +614,42 @@ int LuaPlayerBase::place_ship(lua_State * L) {
 }
 
 /* RST
-	.. method:: conquer(f[, radius=1])
+   .. method:: conquer(f[, radius=1])
 
-		Conquer this area around the given field if it does not belong to the
-		player already. This will conquer the fields no matter who owns it at the
-		moment.
+      Conquer this area around the given field if it does not belong to the
+      player already. This will conquer the fields no matter who owns it at the
+      moment.
 
-		:arg f: center field for conquering
-		:type f: :class:`wl.map.Field`
-		:arg radius: radius to conquer around. Default value makes this call
-			conquer 7 fields
-		:type radius: :class:`integer`
-		:returns: :const:`nil`
+      :arg f: center field for conquering
+      :type f: :class:`wl.map.Field`
+      :arg radius: radius to conquer around. Default value makes this call
+         conquer 7 fields
+      :type radius: :class:`integer`
+      :returns: :const:`nil`
 */
-int LuaPlayerBase::conquer(lua_State * L) {
+int LuaPlayerBase::conquer(lua_State* L) {
 	uint32_t radius = 1;
 	if (lua_gettop(L) > 2)
 		radius = luaL_checkuint32(L, 3);
 
-	get_egbase(L).conquer_area_no_building
-		(PlayerArea<Area<FCoords> >
-			(m_pl, Area<FCoords>
-				((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius))
-	);
+	get_egbase(L).conquer_area_no_building(PlayerArea<Area<FCoords>>(
+	   player_number_,
+	   Area<FCoords>((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius)));
 	return 0;
 }
 
 /* RST
-	.. method:: get_workers(name)
+   .. method:: get_workers(name)
 
-		Returns the number of workers of this type in the players stock. This does not implement
-		everything that :class:`HasWorkers` offers.
+      Returns the number of workers of this type in the players stock. This does not implement
+      everything that :class:`HasWorkers` offers.
 
-		:arg name: name of the worker to get
-		:type name: :class:`string`.
-		:returns: the number of wares
+      :arg name: name of the worker to get
+      :type name: :class:`string`.
+      :returns: the number of wares
 */
 // UNTESTED
-int LuaPlayerBase::get_workers(lua_State * L) {
+int LuaPlayerBase::get_workers(lua_State* L) {
 	Player& player = get(L, get_egbase(L));
 	const std::string workername = luaL_checkstring(L, -1);
 
@@ -603,24 +657,24 @@ int LuaPlayerBase::get_workers(lua_State * L) {
 
 	uint32_t nworkers = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		 nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+		nworkers += player.get_economy_by_number(i)->stock_worker(worker);
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
 }
 
 /* RST
-	.. method:: get_wares(name)
+   .. method:: get_wares(name)
 
-		Returns the number of wares of this type in the players stock. This does not implement
-		everything that :class:`HasWorkers` offers.
+      Returns the number of wares of this type in the players stock. This does not implement
+      everything that :class:`HasWorkers` offers.
 
-		:arg name: name of the worker to get
-		:type name: :class:`string`.
-		:returns: the number of wares
+      :arg name: name of the worker to get
+      :type name: :class:`string`.
+      :returns: the number of wares
 */
 // UNTESTED
-int LuaPlayerBase::get_wares(lua_State * L) {
+int LuaPlayerBase::get_wares(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Player& player = get(L, egbase);
 	const std::string warename = luaL_checkstring(L, -1);
@@ -629,7 +683,7 @@ int LuaPlayerBase::get_wares(lua_State * L) {
 
 	uint32_t nwares = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		 nwares += player.get_economy_by_number(i)->stock_ware(ware);
+		nwares += player.get_economy_by_number(i)->stock_ware(ware);
 	}
 	lua_pushuint32(L, nwares);
 	return 1;
@@ -640,17 +694,14 @@ int LuaPlayerBase::get_wares(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Player & LuaPlayerBase::get
-		(lua_State * L, Widelands::EditorGameBase & egbase)
-{
-	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = egbase.get_player(m_pl);
+Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
+	if (player_number_ > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i", player_number_);
+	Player* rv = egbase.get_player(player_number_);
 	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
+		report_error(L, "Player with the number %i does not exist", player_number_);
 	return *rv;
 }
-
 
 /*
  * ========================================================================
@@ -658,20 +709,16 @@ Player & LuaPlayerBase::get
  * ========================================================================
  */
 
+const static struct luaL_Reg wlbases[] = {{nullptr, nullptr}};
 
-const static struct luaL_Reg wlbases [] = {
-	{nullptr, nullptr}
-};
-
-void luaopen_wlbases(lua_State * const L) {
-	lua_getglobal(L, "wl");  // S: wl_table
-	lua_pushstring(L, "bases"); // S: wl_table "bases"
-	luaL_newlib(L, wlbases);  // S: wl_table "bases" wl.bases_table
-	lua_settable(L, -3); // S: wl_table
-	lua_pop(L, 1); // S:
+void luaopen_wlbases(lua_State* const L) {
+	lua_getglobal(L, "wl");      // S: wl_table
+	lua_pushstring(L, "bases");  // S: wl_table "bases"
+	luaL_newlib(L, wlbases);     // S: wl_table "bases" wl.bases_table
+	lua_settable(L, -3);         // S: wl_table
+	lua_pop(L, 1);               // S:
 
 	register_class<LuaEditorGameBase>(L, "bases");
 	register_class<LuaPlayerBase>(L, "bases");
 }
-
 }

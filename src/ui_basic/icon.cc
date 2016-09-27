@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,54 +24,47 @@
 
 namespace UI {
 
-Icon::Icon
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const Image* picture_id)
-	:
-	Panel(parent, x, y, w, h),
-	m_pic(picture_id)
-{
+Icon::Icon(Panel* const parent,
+           const int32_t x,
+           const int32_t y,
+           const int32_t w,
+           const int32_t h,
+           const Image* picture_id)
+   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }
 
 void Icon::set_icon(const Image* picture_id) {
-	m_pic = picture_id;
+	pic_ = picture_id;
 }
 
-void Icon::set_frame(const RGBColor& color)
-{
-	m_draw_frame = true;
-	m_framecolor.r = color.r;
-	m_framecolor.g = color.g;
-	m_framecolor.b = color.b;
+void Icon::set_frame(const RGBColor& color) {
+	draw_frame_ = true;
+	framecolor_.r = color.r;
+	framecolor_.g = color.g;
+	framecolor_.b = color.b;
 }
 
-void Icon::set_no_frame()
-{
-	m_draw_frame = false;
+void Icon::set_no_frame() {
+	draw_frame_ = false;
 }
 
-void Icon::draw(RenderTarget & dst) {
-	if (m_pic) {
-		double scale = std::min(static_cast<double>(get_w()) / m_pic->width(),
-		                        static_cast<double>(get_h()) / m_pic->height());
+void Icon::draw(RenderTarget& dst) {
+	if (pic_) {
+		double scale = std::min(static_cast<double>(get_w()) / pic_->width(),
+		                        static_cast<double>(get_h()) / pic_->height());
 		scale = std::min(1., scale);
 
 		int width = scale * get_w();
 		int height = scale * get_h();
 		int x = (get_w() - width) / 2;
 		int y = (get_h() - height) / 2;
-		dst.blitrect_scale(Rect(x, y, width, height),
-		                   m_pic,
-		                   Rect(0, 0, m_pic->width(), m_pic->height()),
-		                   1.,
-		                   BlendMode::UseAlpha);
+		dst.blitrect_scale(Rect(x, y, width, height), pic_, Rect(0, 0, pic_->width(), pic_->height()),
+		                   1., BlendMode::UseAlpha);
 	}
-	if (m_draw_frame) {
-		dst.draw_rect(Rect(0, 0, get_w(), get_h()), m_framecolor);
+	if (draw_frame_) {
+		dst.draw_rect(Rect(0, 0, get_w(), get_h()), framecolor_);
 	}
 }
-
 }

@@ -40,13 +40,12 @@ struct S2MapLoader : public Widelands::MapLoader {
 	int32_t load_map_complete(Widelands::EditorGameBase&, Widelands::MapLoader::LoadType) override;
 
 private:
-	const std::string m_filename;
-	WorldType m_worldtype;
+	const std::string filename_;
+	WorldType worldtype_;
 
 	void load_s2mf_header(FileRead&);
-	void load_s2mf(Widelands::EditorGameBase &);
-	void postload_fix_conversion(Widelands::EditorGameBase &);
+	void load_s2mf(Widelands::EditorGameBase&);
+	void postload_fix_conversion(Widelands::EditorGameBase&);
 };
-
 
 #endif  // end of include guard: WL_MAP_IO_S2MAP_H

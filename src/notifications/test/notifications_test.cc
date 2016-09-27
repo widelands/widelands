@@ -28,24 +28,24 @@
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
 
-	SimpleNote(const std::string& init_text) : text(init_text) {}
+	SimpleNote(const std::string& init_text) : text(init_text) {
+	}
 
 	std::string text;
 };
 
 BOOST_AUTO_TEST_SUITE(NotificationsTestSuite)
 
-
 BOOST_AUTO_TEST_CASE(SimpleTest) {
 	std::vector<SimpleNote> received1;
 	auto subscriber1 = Notifications::subscribe<SimpleNote>(
-	   [&received1](const SimpleNote& got) {received1.push_back(got);});
+	   [&received1](const SimpleNote& got) { received1.push_back(got); });
 
 	Notifications::publish(SimpleNote("Hello"));
 
 	std::vector<SimpleNote> received2;
 	auto subscriber2 = Notifications::subscribe<SimpleNote>(
-	   [&received2](const SimpleNote& got) {received2.push_back(got);});
+	   [&received2](const SimpleNote& got) { received2.push_back(got); });
 
 	Notifications::publish(SimpleNote("World"));
 

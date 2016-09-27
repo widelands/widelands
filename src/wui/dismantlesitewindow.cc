@@ -17,9 +17,9 @@
  *
  */
 
+#include "logic/map_objects/tribes/dismantlesite.h"
 
 #include "graphic/graphic.h"
-#include "logic/map_objects/tribes/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
@@ -30,35 +30,27 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
  * Status window for dismantle sites.
  */
 struct DismantleSiteWindow : public BuildingWindow {
-	DismantleSiteWindow
-		(InteractiveGameBase        & parent,
-		 Widelands::DismantleSite &,
-		 UI::Window *                & registry);
+	DismantleSiteWindow(InteractiveGameBase& parent,
+	                    Widelands::DismantleSite&,
+	                    UI::Window*& registry);
 
 	void think() override;
 
 private:
-	UI::ProgressBar * m_progress;
+	UI::ProgressBar* progress_;
 };
 
-
-DismantleSiteWindow::DismantleSiteWindow
-	(InteractiveGameBase        & parent,
-	 Widelands::DismantleSite & cs,
-	 UI::Window *                & registry)
-	: BuildingWindow(parent, cs, registry)
-{
-	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
+                                         Widelands::DismantleSite& cs,
+                                         UI::Window*& registry)
+   : BuildingWindow(parent, cs, registry) {
+	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress =
-		new UI::ProgressBar
-			(&box,
-			 0, 0,
-			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
-			 UI::ProgressBar::Horizontal);
-	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Align::kHCenter);
+	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
+	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
+	progress_->set_total(1 << 16);
+	box.add(progress_, UI::Align::kHCenter);
 
 	box.add_space(8);
 
@@ -69,30 +61,25 @@ DismantleSiteWindow::DismantleSiteWindow
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
 
-
 /*
 ===============
 Make sure the window is redrawn when necessary.
 ===============
 */
-void DismantleSiteWindow::think()
-{
+void DismantleSiteWindow::think() {
 	BuildingWindow::think();
 
-	const Widelands::DismantleSite & ds =
-		dynamic_cast<Widelands::DismantleSite&>(building());
+	const Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
 
-	m_progress->set_state(ds.get_built_per64k());
+	progress_->set_state(ds.get_built_per64k());
 }
-
 
 /*
 ===============
 Create the status window describing the site.
 ===============
 */
-void Widelands::DismantleSite::create_options_window
-	(InteractiveGameBase & parent, UI::Window * & registry)
-{
+void Widelands::DismantleSite::create_options_window(InteractiveGameBase& parent,
+                                                     UI::Window*& registry) {
 	new DismantleSiteWindow(parent, *this, registry);
 }

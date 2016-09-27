@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-21 08:44+0000\n"
+"PO-Revision-Date: 2016-09-22 17:10+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,223 +19,256 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:21
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:23
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
+msgid "Build up a basic economy"
+msgstr "Rakenna alkeellinen talous"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
+msgid "Start collecting basic building materials, and fortify the camp."
+msgstr "Käy keräämään alkeellisia rakennusmateriaaleja ja vahvista leiriä."
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
+msgid "Build a lumberjack’s hut"
+msgstr "Rakenna puunhakkaajan maja"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
+msgid "Build a ranger’s hut"
+msgstr "Rakenna metsänvartijan maja"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
+msgid "Build a quarry"
+msgstr "Rakenna kivilouhos"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
+msgid "Build a wood hardener"
+msgstr "Rakenna puunkovettamo"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
+msgid "Build a sentry on the eastern border"
+msgstr "Rakenna vartiomökki itärajalle"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
+msgid "You should eventually also build a reed yard and a lime kiln."
+msgstr "Sinun pitäisi lopulta myös rakentaa ruokoviljelmä ja kalkinpolttouuni."
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build up a small food economy"
 msgstr "Rakenna perustason ruokatalous"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:24
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Rakenna alkeellinen talous tarjotaksesi kansallesi ruokaa."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:26
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Rakenna kalastajan maja"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:27
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Rakenna metsästäjän maja"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:28
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:43
 msgid "Build a well"
-msgstr ""
+msgstr "Rakenna kaivo"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:44
 msgid "Build a farm"
-msgstr ""
+msgstr "Rakenna maatila"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a bakery"
-msgstr ""
+msgstr "Rakenna leipomo"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:50
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Rakenna karjatila"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:37
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:40
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:52
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Muista rakentaa karjatila"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:53
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Kun tieverkostosi laajenee ja talouteri kasvaa, sinun tulisi valjastaa härkäsi nopeuttamaan tavaroiden kuljetusta."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:46
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 msgid "Build a tower"
-msgstr ""
+msgstr "Rakenna torni"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Rakenna torni valta-alueesi koiliselle rajalle saadaksesi merkittävästi suuremman näkyvyyden ja suojellaksesi kansaasi äkillisiltä vihollishyökkäyksiltä."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:54
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 msgid "Explore further"
 msgstr "Kartoita pidemmälle"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:72
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr "Rakenna lisää sotilasrakennuksia kartoittaaksesi päämajaa ympäröivää aluetta ja varmistaaksesi väkesi olevan turvassa."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:62
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:64
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Rakenna kaivosinfrastuktuuri"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:80
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Laajenn valta-aluettasi vuorille, lähetä geologeja etsimään malmia ja hiiltä ja rakenna kaivostalous kaivoksilla, krouveilla, sulattamoilla ja metallipajoilla."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:70
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 msgid "Build a fortress"
 msgstr "Rakenna linnoitus"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:88
 msgid "Build a fortress to the east of the mountains."
 msgstr "Rakenna linnoitus vuorten itäpuolelle."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:78
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Rakenna koulutusinfrastuktuuri"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:81
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "Build a battle arena and a training camp to the west of the mountains."
 msgstr "Rakenna taisteluareena ja harjoitusleiri vuorten länsipuolelle."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:82
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:112
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 msgid ""
 "Enhance your metal workshop to an ax workshop in order to produce weapons, "
 "and build up a second metal workshop to ensure the production of tools. When"
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Laajenna metallipajasi kirvespajaksi tuottaaksesi aseita ja rakenna toinen metallipaja varmistaaksesi työkalujen tuotanto. Kun seppä saavuttaa hänen seuraavan tasonsa (seppämestari), voit jopa laajentaa kirvespajan asetehtaaksi, joka tuottaa vaihtoehtoisia aseita."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:83
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Rakenna kypäräpaja vuoren länsipuolelle tarjotaksesi sotilaillesi paremman suojauksen."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:89
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:106
 msgid "Build a warehouse"
 msgstr "Rakenna varasto"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Rakenna varasto vuorten länsipuolelle,"
+msgstr "Rakenna varasto vuorten länsipuolelle."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Varastot ovat samanlaisia päämajasi kanssa, erona on vain etteivät ne ole sotilaiden puolustamia. On usein viisasta rakentaa varasto, kun valta-alueesi kastaa ja reitit päämajaasi käyvät yhä pidemmiksi."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:98
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:115
 msgid "Build training sites"
-msgstr ""
+msgstr "Rakenna harjoittelupaikkoja"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:102
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:117
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
 msgstr "Koulutuspaikat, kuten harjoitusleiri ja taisteluareena, kouluttavat sotilaita eri tavoin. Koulutettavat neljä eri kyvykkyystyyppiä ovat kaikki tärkeitä taisteluissa, ja mitä parempi soturi niissä on, sen korkeampi on todennäköisyys, että hän voittaa taistelun."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:104
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Ominaisuudet ovat: terveys, hyökkäys, puolustus ja väistely."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:109
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
 msgid "Build weapons production"
 msgstr "Rakenna asetuotantoketju"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:117
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Rakenna haarniskapaja"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:125
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:142
 msgid "Destroy Kalitath’s army"
 msgstr "Tuhoa Kalitatin armeija"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
 msgid "Destroy Kalitath’s army and expand your territory to the east."
 msgstr "Tuhoa Kalitatin armeija ja laajenna aluettasi itään."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:129
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Hykätäksesi vihollisen kimppuun, sinun täytyy klikata vihollisen sotarakennusta. Valikko ponnahtaa auki sallien sinun vallita kunka monta sotilasta lähetät hyökkäykseen. Kun olet salinnut määrän, klikkaa ristiä ('Aloita hyökkäys')."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:134
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:151
 msgid "Military assault on Al’thunran"
 msgstr "Hyökkäys Al'thunraniin"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:152
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr "Tuhoa kaikki Thronin kahden veljen joukot vapauttaaksesi valtaistuimen piirin."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
 msgid "Close to Home"
 msgstr "Lähellä kotia"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:146
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:157
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:313
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron näyttää huolestuneelta…"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "Viimepäivien aikana lähestyimme pääkaupunkia. Monet ovat jo liittyneet meihin marssimme aikana ja lattaneet toivonsa meihin. Siitä huolimatta, pelkään ettemme ole riittävän vahvoja ryhtyäksemme taisteluun veljiäni vastaan."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:166
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "Toistaiseksi lepäämme vanhan metsän reunalla ja valmistaudumme tuleviin päiviin."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:156
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:180
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:312
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid "Another Cold Day"
 msgstr "Toinen kuulas päivä"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -244,16 +278,16 @@ msgid ""
 "around the capital, securing the outer fortification rings."
 msgstr "Partion tuomat uutiset eivät ole hyviä. Vakoojamme kertovat, että sotaheimot käyvät vieläkin taisteluja mutta jotkut vanhimmat sotilaat ja heimopäälliköt ovat väsyneet järjettömään sotaan. Kalitath Kun:n poika on ensimmäinen sotapäällikkö joka lähti Al’thunran:sta jolloin hänen puolensa jäi haavoittuvaksi. Tiedustelijani kertovat, että hän on asettenut pääkaupungin ympärille varmistaen uloimmmat linnoitusrenkaat."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
 msgid "Doubts"
 msgstr "Epäilyksiä"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth pyörittää päätään…"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -263,33 +297,33 @@ msgid ""
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr "Thron haluaa uskoa että Kalitath on väsynyt sotimiseen ja voisi liittyä meihin kunhan marssimme palauttamaan lain ja järjestyksen Al’thunran:iin. Mutta en usko näin. Kalitath on yhden sotajoukkomme mahtavimman kenraalin poika ja hänen perheensä ei koskaan pitänyt ajatuksesta alistua Chat’Karuth lipun alle. Miksi hänen tulisi marssia poikansa kanssa palauttaakseen perintönsä ja valtaistuimen?"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:172
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
 msgid "The Story Continues"
 msgstr "Tarina jatkuu"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:173
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:221
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:246
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:255
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
 msgid "Boldreth says:"
 msgstr "Boldreth puhuu:"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr "Thron ei halua kuunnella epäilyksiäni. Hän haluaa laajentaa linnakkeitamme Kalitath:n alueen rajoille ja yhdistää armeijansa. Minun täytyy tarkkailla kaikkea mitä täällä tapahtuu."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
 msgid "Thron is speaking confidently."
 msgstr "Thron puhuu itsevarmasti."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -297,20 +331,20 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "Sotajoukkojeni rajalinja on levittäytynyt metsän reunalle. Meillä on pitkä ja kylmä talvi ja niin monta mailia takanamme. Rakentamamme linnoitus Ondun ympärille varmistaa meille nopean miesten ja tarvikkeiden toimituksen, ja kunhan Al’thunran on hallussani, nämä kaksi kaupunkia tullaan yhdistämään toisiinsa hyvällä ja puolustuskykyisellä infrastuktuurilla. Silti toivon etten tulisi kulkemaan tällä tehtävällä yksin, toivon Kalitathin Kunin pojan seuraavan kutsuani."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:189
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:207
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:238
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:276
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:284
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:293
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:326
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
 msgid "Thron says:"
 msgstr "Thron puhuu:"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -318,120 +352,120 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
-msgstr ""
+msgstr "Olen lähettänyt miehiä tapaamaan Kalitathia hänen linnoitukseen. Hän on sulkenut aiemman pääsisäänkäynnin pääkaupunkiin ja yrittää asettaa piiritysringin Al’thunranin ympärille. Hän ei anna kenenkään saapua tai lähteä kaupungista, kun piiritys on ehjä. Ennen tätä hän ei ole vastannut yhteenkään viestiini. Mutta aika, joka olen kuluttanut odottamiseen ei tule olemaan hukkaan heitettyä. Tulen myöhemmin kehittämään sotilaitani ja valmistautumaan taisteluun."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:195
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
 msgid "Your Loyal Companion"
 msgstr "Uskollinen kumppanisi"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Boldreth shouts out!"
 msgstr "Boldreth karjaisee!"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:198
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:214
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "ÄPÄRÄ SENTÄÄN! Vain yksi etupartion miehistäni tuli takaisin hengissä. Hän toi viestin Kalitathilta, kertoen meille, että hän tulee rankaisemaan kaikista joukkojemme tekemistä liikkeistä heidän omalla verellä! Emme voi hyväksyä tällaista käytöstä. Tästä lähtien, Kalitathin ja meidän välillä vallitsee sota!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:222
 msgid "Renegade Fortification"
 msgstr "Linnoittautuneet kapinalliset"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:225
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "Maanpetturi jätti armeijansa kuolemaan sinne missä ne olivat, kun hän näki ettei voisi enää pidätellä sotajoukkojani. Kalitath katosi sodan sekasorrossa, mutta en piittaa siitä nyt. Antakoon hänen paeta ja tulla unohdetuksi ikuisiksi ajoiksi heimojohtajana, joka ei kumartaisi puisen valtaistuimen edessä, joka minun on nyt aika ottaa haltuuni."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:228
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "Sen lisäksi, tämä taistelu toi meille suuren hyödyn: kaikki vuodet Kalitath oli niin kiireinen taistelemaan, että hän ei edes piitannut varastoida riittävästi ruokaa kaikille hänen miehilleen. Nyt kun hän on lähtenyt, heidän nälkänsä on saanut aikaan, että jotkut hänen nuorimmista kannattajista ovat pettäneet hänet. Tämä ryhmä ylläpitää vahvaa linnoittautumista päämuurilla."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:215
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "Mutta on myös muita uutisia: Tiedustelijani ovat raportoineet, että kaksi veljieni raivoavaa heimoa ovat kaaoksessa ja ovat hädin tuskin tiedostaneet uudesta uhasta, joka on aikeissa hyökätä heitä vastaan. Joka tapauksessa, luulempa eivät he piittaisi vaikka huomaisivatkin, koska raivon sokaisemana ei jäljelle jää järjen häivähdystäkään."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:236
 msgid "Winter Ahead"
 msgstr "Talvi tulossa"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Tänä aamuna löysin Thronin huolissaan. Hän palasi partioimasta myöhään eilen ilalla ja istahti puuta vasten, jääden katsomaan yli leirin. Riitojen ja kiistojen määrä senkun vain jatkaa kasvuaan ja talvi on ottamassa meistä tiukan otteen. Meidän pitäisi panna ruokaa varastoomme selvitäksemme pitkästä ja kylmästä talvesta!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
 msgid "The Advisor"
 msgstr "Neuvonantaja"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:245
 msgid "Khantrukh nods."
 msgstr "Khantrukh nyökkää."
 
 #. TRANSLATORS: Khantrukh
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:247
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth on oikeassa! Meillä ei ole riittävästi ruokaa selvitäksemme pitkästä ja kylmästä talvesta. Meidän pitää käydä rakentamaan kaivoa, kalastajan ja metsästäjän majaa. Ja jos löydämme riittävästi tilaa, meidän pitäisi myös rakentaa maatila ja leipomo! Yksi meidän maanvijelijöistä tuntuu olevan hyvin etevä – hän on jo hommannut jonkin verran viljaa tämän köyhän maan viljelemiseksi."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
 msgstr "Ruokatalous valmistunut"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:256
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "Khantrukh on juuri kertonut  minulle, että ruokavarantomme ovat kasvussa. Vihdoinkin kenenkään ei enää tarvitse pelätä nälkään nääntymistä."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:261
 msgid "Tracks"
 msgstr "Jälkiä"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thorn kertoi minulle löytäneensä jälkiä lumesta asutuksemme koillispuolelta. Hän on ohjeistanut meitä rakentamaan tornin saadaksemme näkymän suuremmalle alueelle hallin ympäriltä ja suojellaksemme kansaamme äkillisiltä hyökkäyksiltä."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
 msgid "Further Exploration"
 msgstr "Laajempaa kartoitusta"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:273
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -440,49 +474,49 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Thornin tilaama ensimmäinen linnoituksemme on juuri valmistunut. Tällä hetkellä hän yrittää luoda luottamusta ja uskoa heihin jotka asuvat uudessa asuinpaikassamme muurien sisäpuolella, jolle annoimme nimen ‘Ondun’, joka tarkoittaa ‘nuo jotka odottaa’ vanhalla kielellä. Mutta Thron ei ole vielä tyytyväinen – ja ymmärrän täysin hänen pelkonsa: metsät ovat syviä ja etulinja Al’thunraniin on lähellä. Olen varma, että on olemassa tuhat suurempaa vaaraa kuin tuntemattomat jäljet."
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:276
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Valvoaksemme suurempaa aluetta hallimme ympärillä, meidän pitäisi tutkia kauempia alueita ja asettaa enemmän vartioita ja tiedustelijoita tarkkailemaan etulinjaa ja pitämään silmällä raivoavia sotia reunamaillamme. SITTEN tulemme olemaan valmistuneita, kun ongelmat etsiytyvät meidän kulmillemme."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:282
 msgid "Mountains Found"
 msgstr "Vuoristo löytynyt"
 
 #. TRANSLATORS: Khantrukh
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:269
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:285
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Olen juuri puhunut meidän partiomme johtajan kanssa. Hän kertoi minulle, että he löysivät vuoristoa alueemme koillis- ja itäpuolelta. Pienellä onnella tämä voisi avata uuden mahdollisuuden miehiemm uudelle aseistamiseksi, koska niin kauan kuin muistan, useimmat vuoret Al’thunranista länteen sisältävät hiiltä ja jonkin verran metallimalmeja."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
 msgid "Mining Economy Completed"
 msgstr "Kaivostalous valmistunut"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:294
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "Minulle juuri tiedotettiin, että meidän kaivostaloutemm on aloittanut toimintansa. Tämä uutinen tui hymyn kasvoilleni – siitäkin huolimattam että vaikein osa vielä odottaa tekemistä, koska nyt meidän sepät tulevat antamaan kaikkensa helpottaakseen elämäämme myöhemmin."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:299
 msgid "Fortress Needed"
 msgstr "Linnoitus tarpeen"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:286
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:302
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -490,35 +524,35 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth ja minä tutkimme juuri aluettamme kolmoisvuorten ympäriltä. Yksi suuri strateginen ongelma tuolla alueella näyttäisi olevan, että siellä on kaksi suurempaa taivalta – keskimmäisen vuoren pohjoinen ja eteläinen reitti. Niitä taipaleita on melko hankala hallita ja siksi näyttää siltä, että meillä on vain yksi tapa turvata vuoret vihollisilta: meidän täytyy rakentaa linnoitus vuorien itäpuolelle."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
 msgid "Fortress Completed"
 msgstr "Linnoitus valmis"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:311
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Vihdoinkin! Linnoitus on juuri valmistunut, joten siirtokuntamme sisääntulo pitäisi olla nyt turvattu. Tulevaisuutta ajatellen meidän kannattaisi harkita joidenkin lisälinnoituksien rakentamista taipaleille, kuten rajalinnoituksien ja tornien rakentamista, mutta toistaiseksi voimme hiukan hengästää."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
 msgstr "Laajennettu talous ja koulutus"
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:319
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Kaivostaloutemme näyttää toimivan hyvin, mikä on hyvä uutinen! Siitä huolimatta on paljon miehiä ja naisia, jotka odottavat hallillamme saadakseen jotain tekemistä, joten he voivat auttaa sotilaitamme valmistautumaan sodan tuloon."
 
 #. TRANSLATORS: Boldreth
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:306
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -527,19 +561,19 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Geologimme löysi reilusti lisää rautamalmiesiintymiä, hiiltä ja jopa kultaa. Meidän pitäisi laajentaa meidän nykyisiä kaivoksia heti kun kaivostyöntekijämme ovat kokeneempia. Meidän pitäisi rakentaa lisää kaivoksia, isompi ruokainfrastuktuuri toimittaimaan miehillemme aina sopivaa ruokaa ja myöhemmin prosessointitalous. Mitta se ei ole vielä kaikki mitä tarvitsemme – useimmat sotilaistamme ovat melko nuoria eikä heillä ole hyviä aseita tai ole hyvin koulutettuja. Meidän pitäisi rakentaa koulutuspaikkoja valmistellaksemme heidät tuleviin tehtäviin."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:315
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Veljeni ja heidän sotilaat kuolivat ja jättivät tulipaloja ja tuhoa vain jälkeensä. Kaiken sen tuhon seasta en kyennyt löytämään yhtään tavallista kansanmiestä tai -naista ja siksi toivonkin, että he ovat paenneet tältä julmalta taistelukentältä ja aloittaneet paremman elämän jossakin muualla."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -547,66 +581,67 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Mitään ei ole jäljellä tuosta muistamastani vanhasta kauneudesta, vain vanhan pääkaupungin tuhot.  En olettanut enää näkeväni Al’thunranin vanhaa kauneutta – se oli vain muutama kuukausi sitten, jolloin ihmettelin tulisinko koskaan edes astumaan jalalloillani sinne uudestaan. Nyt vanha kaupunki on taas käsissäni enkä tule arkailemaan sen uudelleen rakentamista niillä taidoilla, joita kansalaisillamme on. En malta odottaa, että näkisin sen uudelleen, sen vanhassa kauneudessaan."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"
 msgstr "Voitto"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Olet suorittanut viimeisen Barbaarien opetuspelikampanjan. Voit halutessasi jatkaa pelaamista, tai siirtyä seuraavaan kampanjaan."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid "Military Assault"
 msgstr "Hyökkäys"
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Olkoon niin, kenraalit ovat kaukana ja järjestelevät joukkojani, ja itse Boldreth aikoo johtaa ensimmäisen iskun. Ratsastan hänen vierellään vapauttaaksemme Al’thunranin tästä sodasta ja palauttaaksemme rauhan pääkaupunkiimme."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Kun nuori aurinko nousee huomenna puiden yläpuolelle, määrään rynnäkön. Iltahämärässä sitten juhlin voitoani sotapäällikön puisissa halleissa ja uhraan karitsan isäni kunniaksi; tänään nuo silmät seuraavat minua."
 
 #. TRANSLATORS: Thron
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:350
 msgid "So be it!"
-msgstr ""
+msgstr "Olkoon niin!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Nopeampi Kuljetus"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh sanoo..."
 
 #. TRANSLATORS: Khantrukh
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:358
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Heimopäällikkö, muistatko kantajarukkamme: Tiemme käyvät yhä pidemmiksi ja kuorma heidän hartijoillaan ei käy koskaan keveämmäksi. Meidän pitäisi kasvattaa härkiä helpottamaan heidän työtään ja tehostaaksemme kuljetuksia."
 
-#: ../../scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
-#: ../../scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"

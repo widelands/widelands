@@ -4,32 +4,11 @@ include "tribes/scripting/help/format_help.lua"
 
 -- RST
 -- building_help.lua
--- ---------------
-
--- Functions used in the ingame building help windows for formatting the text and pictures.
-
---  =======================================================
---  *************** Basic helper functions ****************
---  =======================================================
-
--- RST
--- .. function text_line(t1, t2[, imgstr = nil])
+-- -----------------
 --
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: text in h3 format.
---    :arg t2: text in p format.
---    :arg imgstr: image aligned right.
---    :returns: header followed by normal text and image.
---
-function text_line(t1, t2, imgstr)
-   if imgstr then
-      return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   else
-      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   end
-end
-
+-- This script returns a formatted entry for the ingame building help.
+-- Pass the internal tribe name and building name to the coroutine to select the
+-- building type.
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
@@ -103,7 +82,7 @@ function dependencies_training_food(foods)
          food_warenames[countfood] = ware_description.descname
          food_images[countfood] = ware_description.icon_name
       end
-      local text = localize_list(food_warenames, "or")
+      local text = localize_list(food_warenames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
@@ -174,7 +153,7 @@ end
 
 
 -- RST
--- .. function building_help_general_string(tribe, building_description)
+-- .. function:: building_help_general_string(tribe, building_description)
 --
 --    Creates the string for the general section in building help
 --
@@ -346,10 +325,9 @@ function building_help_dependencies_production(tribe, building_description)
       local soldier = wl.Game():get_worker_description(tribe.soldier)
       for j, buildcost in ipairs(soldier.buildcost) do
          if (buildcost == ware) then
-            for k, buildingname in ipairs(tribe.buildings) do
-               local warehouse_description = wl.Game():get_building_description(buildingname)
-               if (warehouse_description.type_name == "warehouse") then
-                  outgoing = outgoing .. dependencies({ware, warehouse_description, soldier}, soldier.descname)
+            for k, building in ipairs(tribe.buildings) do
+               if (building.type_name == "warehouse") then
+                  outgoing = outgoing .. dependencies({ware, building, soldier}, soldier.descname)
                end
             end
          end
@@ -373,18 +351,18 @@ end
 --
 function building_help_dependencies_training(tribe, building_description)
    local result = ""
-   if (building_description.max_hp and building_description.min_hp) then
+   if (building_description.max_health and building_description.min_health) then
       result = result .. rt(h2(_"Health Training"))
       result = result .. rt(p(_"Trains ‘Health’ from %1% up to %2%":
-            bformat(building_description.min_hp, building_description.max_hp+1)))
+            bformat(building_description.min_health, building_description.max_health+1)))
       result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. building_description.min_health .. ".png",
             building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_hp)
-      result = result .. dependencies_training_weapons(building_description.weapons_hp)
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. (building_description.max_health + 1) ..".png"})
+      result = result .. dependencies_training_food(building_description.food_health)
+      result = result .. dependencies_training_weapons(building_description.weapons_health)
    end
    if (building_description.max_attack and building_description.min_attack) then
       result = result .. rt(h2(_"Attack Training"))
@@ -449,11 +427,11 @@ function building_help_building_section(building_description)
    elseif (building_description.is_port) then
       result = result .. text_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
    else
-      if (building_description.size == 1) then
+      if (building_description.size == "small") then
          result = result .. text_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
-      elseif (building_description.size == 2) then
+      elseif (building_description.size == "medium") then
          result = result .. text_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
-      elseif (building_description.size == 3) then
+      elseif (building_description.size == "big") then
          result = result .. text_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
       else
          result = result .. p(_"Space required:" .. _"Unknown")
@@ -616,7 +594,7 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribe, building_description)
+-- .. function:: building_help_crew_string(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
@@ -662,7 +640,13 @@ function building_help_crew_string(tribe, building_description)
          end
       end
 
-      result = result .. help_tool_string(tribe, toolnames, number_of_workers)
+      if (number_of_workers > 0) then
+         local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
+         if (tool_string ~= "") then
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+            result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         end
+      end
 
       if(becomes_description) then
 
@@ -692,7 +676,7 @@ end
 
 
 -- RST
--- .. building_help_production_section()
+-- .. function:: building_help_production_section()
 --
 --    Displays the production/performance section with a headline
 --
@@ -709,7 +693,7 @@ end
 
 
 -- RST
--- .. function building_help(tribe, building_description)
+-- .. function:: building_help(tribe, building_description)
 --
 --    Main function to create a building help string.
 --
@@ -756,12 +740,15 @@ end
 
 -- The main function call
 return {
-   func = function(tribename, building)
+   func = function(tribename, buildingname)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       -- We need to get the building description again, because it will
       -- give us a cast to the appropriate subclass.
-      local building_description = wl.Game():get_building_description(building.name)
-      return building_help(tribe, building_description)
+      local building_description = wl.Game():get_building_description(buildingname)
+      return {
+         title = building_description.descname,
+         text = building_help(tribe, building_description)
+      }
    end
 }

@@ -20,10 +20,10 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
-#include "ui_fsmenu/main_menu.h"
-#include "ui_basic/button.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/main_menu.h"
 
 /**
  * This runs the main menu. There, you can select
@@ -37,17 +37,15 @@ protected:
 	void clicked_ok() override;
 
 private:
-	UI::Box      vbox;
-	UI::Button   playtutorial;
-	UI::Button   singleplayer;
-	UI::Button   multiplayer;
-	UI::Button   replay;
-	UI::Button   editor;
-	UI::Button   options;
-	UI::Button   readme;
-	UI::Button   license;
-	UI::Button   authors;
-	UI::Button   exit;
+	UI::Box vbox;
+	UI::Button playtutorial;
+	UI::Button singleplayer;
+	UI::Button multiplayer;
+	UI::Button replay;
+	UI::Button editor;
+	UI::Button options;
+	UI::Button about;
+	UI::Button exit;
 	UI::Textarea version;
 	UI::Textarea copyright;
 	UI::Textarea gpl;

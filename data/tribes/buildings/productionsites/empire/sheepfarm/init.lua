@@ -39,8 +39,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 7,
-      water = 7
+      { name = "water", amount = 7 },
+      { name = "wheat", amount = 7 }
    },
    outputs = {
       "wool"
@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "sleep=25000",
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "playFX=sound/farm sheep 192",
+            "play_sound=sound/farm sheep 192",
             "animate=working 30000",
             "produce=wool"
          }

@@ -31,56 +31,49 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapVersionPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
+void MapVersionPacket::read(FileSystem& fs,
+                            EditorGameBase& egbase,
+                            bool const skip,
+                            MapObjectLoader&) {
 	if (skip)
 		return;
 
 	Profile prof;
-	try {prof.read("version", nullptr, fs);} catch (...)
-		{
-			Map & map = egbase.map();
-			map.m_map_version.m_map_version_timestamp = 0;
-			map.m_map_version.m_map_creator_version = "unknown";
-			return;
-		}
+	try {
+		prof.read("version", nullptr, fs);
+	} catch (...) {
+		Map& map = egbase.map();
+		map.map_version_.map_version_timestamp = 0;
+		map.map_version_.map_creator_version = "unknown";
+		return;
+	}
 
 	try {
-		Section & globv = prof.get_safe_section("global");
-		int32_t const packet_version =
-			globv.get_safe_int("packet_version");
-		int32_t const forward_compatibility =
-			globv.get_safe_int("packet_compatibility");
-		if
-		((packet_version == kCurrentPacketVersion)
-			|| (packet_version > kCurrentPacketVersion && forward_compatibility <= kCurrentPacketVersion))
-		{
-			Map & map = egbase.map();
-			map.m_map_version.m_map_source_url = globv.get_safe_string("map_source_url");
-			map.m_map_version.m_map_source_release = globv.get_safe_string("map_release");
-			map.m_map_version.m_map_creator_version = globv.get_safe_string("map_creator_version");
-			map.m_map_version.m_map_version_major = globv.get_safe_int("map_version_major");
-			map.m_map_version.m_map_version_minor = globv.get_safe_int("map_version_minor");
+		Section& globv = prof.get_safe_section("global");
+		int32_t const packet_version = globv.get_safe_int("packet_version");
+		int32_t const forward_compatibility = globv.get_safe_int("packet_compatibility");
+		if ((packet_version == kCurrentPacketVersion) ||
+		    (packet_version > kCurrentPacketVersion &&
+		     forward_compatibility <= kCurrentPacketVersion)) {
+			Map& map = egbase.map();
+			map.map_version_.map_source_url = globv.get_safe_string("map_source_url");
+			map.map_version_.map_source_release = globv.get_safe_string("map_release");
+			map.map_version_.map_creator_version = globv.get_safe_string("map_creator_version");
+			map.map_version_.map_version_major = globv.get_safe_int("map_version_major");
+			map.map_version_.map_version_minor = globv.get_safe_int("map_version_minor");
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
-			map.m_map_version.m_map_version_timestamp = ts;
+			map.map_version_.map_version_timestamp = ts;
 		} else {
 			throw UnhandledVersionError("MapVersionPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("version: %s", e.what());
 	}
 }
 
-
-void MapVersionPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
 	Profile prof;
-	Section & globs = prof.create_section("global");
+	Section& globs = prof.create_section("global");
 
 	// This writes the map revision information to savegame.
 	// revision information is put into a separate file, assuming that
@@ -115,17 +108,16 @@ void MapVersionPacket::write
 	// TODO(unknown): -- we could store the unix time in uint32, as a partial fix to 2038 problem.
 	// There seems to be a get_safe_natural method, but not corresponding setter.
 
-	Map & map = egbase.map();
-	globs.set_string("map_source_url", map.m_map_version.m_map_source_url);
-	globs.set_string("map_release", map.m_map_version.m_map_source_release);
-	globs.set_string("map_creator_version", map.m_map_version.m_map_creator_version);
-	globs.set_int("map_version_major", map.m_map_version.m_map_version_major);
-	globs.set_int("map_version_minor", 1 + map.m_map_version.m_map_version_minor);
+	Map& map = egbase.map();
+	globs.set_string("map_source_url", map.map_version_.map_source_url);
+	globs.set_string("map_release", map.map_version_.map_source_release);
+	globs.set_string("map_creator_version", map.map_version_.map_creator_version);
+	globs.set_int("map_version_major", map.map_version_.map_version_major);
+	globs.set_int("map_version_minor", 1 + map.map_version_.map_version_minor);
 	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(nullptr)));
 	globs.set_int("packet_version", kCurrentPacketVersion);
 	globs.set_int("packet_compatibility", kCurrentPacketVersion);
 
 	prof.write("version", false, fs);
 }
-
 }

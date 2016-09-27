@@ -32,6 +32,12 @@ return {
       font = "default"
    },
 
+   br = {
+      name = "Brezhoneg",
+      sort_name = "Brezhoneg",
+      font = "default"
+   },
+
    ca = {
       name = "Català",
       sort_name = "Catala",
@@ -62,12 +68,6 @@ return {
       font = "default"
    },
 
-   en_AU = {
-      name = "Australian English",
-      sort_name = "English (Australia)",
-      font = "default"
-   },
-
    en_CA = {
       name = "Canadian English",
       sort_name = "English (Canada)",
@@ -95,12 +95,6 @@ return {
    es = {
       name = "Español",
       sort_name = "Espanol",
-      font = "default"
-   },
-
-   es_CO = {
-      name = "Español colombiano",
-      sort_name = "Espanol colombiano",
       font = "default"
    },
 
@@ -210,6 +204,12 @@ return {
       name = "한국어",
       sort_name = "Hangug-eo",
       font = "cjk"
+   },
+
+   krl = {
+      name = "Karjala",
+      sort_name = "Karjala",
+      font = "default"
    },
 
    la = {

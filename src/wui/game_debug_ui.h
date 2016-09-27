@@ -24,10 +24,12 @@
 #include "logic/widelands_geometry.h"
 
 class InteractiveBase;
-namespace Widelands {class MapObject;}
+namespace Widelands {
+class MapObject;
+}
 
 // Open debug window for the given coordinates
-void show_mapobject_debug(InteractiveBase & parent, Widelands::MapObject &);
-void show_field_debug(InteractiveBase & parent, Widelands::Coords coords);
+void show_mapobject_debug(InteractiveBase& parent, Widelands::MapObject&);
+void show_field_debug(InteractiveBase& parent, const Widelands::Coords& coords);
 
 #endif  // end of include guard: WL_WUI_GAME_DEBUG_UI_H

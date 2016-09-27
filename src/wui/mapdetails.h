@@ -23,41 +23,31 @@
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 #include "wui/mapdata.h"
 #include "wui/suggested_teams_box.h"
-
 
 /**
  * Show a Panel with information about a map.
  */
 class MapDetails : public UI::Panel {
 public:
-	MapDetails(Panel * parent,
-				  int32_t x, int32_t y,
-				  int32_t max_x, int32_t max_y);
+	enum class Style { kFsMenu, kWui };
+
+	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style);
 
 	void clear();
+	void set_max_height(int new_height);
+	void update_layout();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
-	const int padding_, indent_, labelh_;
-	const int32_t max_x_, max_y_;
+	const Style style_;
+	const int padding_;
+	int max_h_;
 
 	UI::Box main_box_;
-
-	UI::Box name_box_;
-	UI::Textarea name_label_;
-	UI::MultilineTextarea name_;
-
-	UI::Box author_box_;
-	UI::Textarea author_label_;
-	UI::MultilineTextarea author_;
-
-	UI::Box descr_box_;
-	UI::Textarea descr_label_;
+	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
-
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
 

@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr7905[revised_maps] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Bjørn"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Ragnar"
+tribe="barbarians"
+ai=
+closeable="false"

@@ -50,9 +50,9 @@ public:
 		return program_object_;
 	}
 
-	// Creates and compiles 'vertex_shader_source' and 'fragment_shader_source'
-	// into shader objects. Then links them into the program.
-	void build(const char* vertex_shader_source, const char* fragment_shader_source);
+	// Creates and compiles shader objects based on the corresponding files in data/shaders,
+	// then links them into the program.
+	void build(const std::string& program_name);
 
 private:
 	const GLuint program_object_;
@@ -64,8 +64,7 @@ private:
 
 // Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
 // on all errors. Also grows the server memory only when needed.
-template<typename T>
-class Buffer {
+template <typename T> class Buffer {
 public:
 	Buffer() {
 		glGenBuffers(1, &object_);
@@ -84,7 +83,6 @@ public:
 	void bind() const {
 		glBindBuffer(GL_ARRAY_BUFFER, object_);
 	}
-
 
 	// Copies 'elements' into the buffer, overwriting what was there before.
 	// Does not check if the buffer is already bound.
@@ -121,6 +119,8 @@ public:
 	// needed before the texture is used as target for rendering.
 	void unbind_texture_if_bound(GLuint texture);
 
+	void delete_texture(GLuint texture);
+
 	// Calls glEnableVertexAttribArray on all 'entries' and disables all others
 	// that are activated. 'entries' is taken by value on purpose.
 	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);
@@ -143,7 +143,7 @@ private:
 // Calls glVertexAttribPointer.
 void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
 
-// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+// Swap order of rows in pixels, to compensate for the upside-down nature of the
 // OpenGL coordinate system.
 void swap_rows(int width, int height, int pitch, int bpp, uint8_t* pixels);
 

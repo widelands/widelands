@@ -42,9 +42,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 5,
-      empire_bread = 5,
-      meat = 5
+      { name = "fish", amount = 5 },
+      { name = "meat", amount = 5 },
+      { name = "empire_bread", amount = 5 }
    },
    outputs = {
       "ration"
@@ -58,6 +58,7 @@ tribes:new_productionsite_type {
             "sleep=14000",
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
+            "play_sound=sound/taverns dishes 100",
             "animate=working 19000",
             "produce=ration"
          }

@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      ration = 8
+      { name = "ration", amount = 8 }
    },
    outputs = {
       "granite"

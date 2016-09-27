@@ -20,8 +20,8 @@
 #ifndef WL_LOGIC_PATHFIELD_H
 #define WL_LOGIC_PATHFIELD_H
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include <boost/shared_ptr.hpp>
 #include <stdint.h>
@@ -41,7 +41,7 @@ namespace Widelands {
  */
 struct Pathfield {
 	struct LessCost {
-		bool operator()(const Pathfield & a, const Pathfield & b) const {
+		bool operator()(const Pathfield& a, const Pathfield& b) const {
 			return a.cost() < b.cost();
 		}
 	};
@@ -49,13 +49,17 @@ struct Pathfield {
 	using Queue = CookiePriorityQueue<Pathfield, LessCost>;
 
 	Queue::Cookie heap_cookie;
-	int32_t real_cost;  //  true cost up to this field
-	int32_t estim_cost; //  estimated cost till goal
+	int32_t real_cost;   //  true cost up to this field
+	int32_t estim_cost;  //  estimated cost till goal
 	uint16_t cycle;
-	uint8_t  backlink;   //  how we got here (WALK_*)
+	uint8_t backlink;  //  how we got here (WALK_*)
 
-	int32_t cost() const {return real_cost + estim_cost;}
-	Queue::Cookie & cookie() {return heap_cookie;}
+	int32_t cost() const {
+		return real_cost + estim_cost;
+	}
+	Queue::Cookie& cookie() {
+		return heap_cookie;
+	}
 };
 
 struct Pathfields {
@@ -78,14 +82,13 @@ struct PathfieldManager {
 	boost::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(const boost::shared_ptr<Pathfields> & pf);
+	void clear(const boost::shared_ptr<Pathfields>& pf);
 
 	using List = std::vector<boost::shared_ptr<Pathfields>>;
 
-	uint32_t m_nrfields;
-	List m_list;
+	uint32_t nrfields_;
+	List list_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_PATHFIELD_H

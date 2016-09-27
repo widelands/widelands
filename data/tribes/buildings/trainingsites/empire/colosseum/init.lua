@@ -35,7 +35,7 @@ tribes:new_trainingsite_type {
    aihints = {
       prohibited_till = 1200,
       trainingsite_type = "basic",
-      prohibited_till = 1200,
+      forced_after = 1800,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -45,9 +45,9 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 }
    },
    outputs = {
       "empire_soldier",

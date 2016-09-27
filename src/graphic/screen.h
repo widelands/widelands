@@ -30,7 +30,8 @@
 class Screen : public Surface {
 public:
 	Screen(int w, int h);
-	virtual ~Screen() {}
+	virtual ~Screen() {
+	}
 
 	// Implements Surface.
 	int width() const override;
@@ -53,14 +54,11 @@ private:
 	void do_blit_monochrome(const FloatRect& dst_rect,
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
-	void do_draw_line(const FloatPoint& start,
-	                  const FloatPoint& end,
-	                  const RGBColor& color,
-	                  int width) override;
+	void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) override;
 	void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
-	const int m_w, m_h;
+	const int w_, h_;
 
 	DISALLOW_COPY_AND_ASSIGN(Screen);
 };

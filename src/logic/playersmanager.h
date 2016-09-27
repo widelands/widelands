@@ -32,8 +32,12 @@ class EditorGameBase;
 class Player;
 class Player;
 
-enum class PlayerEndResult : uint8_t
-	{PLAYER_LOST = 0, PLAYER_WON = 1, PLAYER_RESIGNED = 2, UNDEFINED = 255};
+enum class PlayerEndResult : uint8_t {
+	PLAYER_LOST = 0,
+	PLAYER_WON = 1,
+	PLAYER_RESIGNED = 2,
+	UNDEFINED = 255
+};
 
 /**
  * Hold data once a player left the game, or on game ends.
@@ -53,7 +57,7 @@ struct PlayerEndStatus {
 
 class PlayersManager {
 public:
-	PlayersManager(EditorGameBase & egbase);
+	PlayersManager(EditorGameBase& egbase);
 	virtual ~PlayersManager();
 
 	void cleanup();
@@ -65,40 +69,48 @@ public:
 	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
 	*/
-	Player * add_player
-		(PlayerNumber,
-		 uint8_t             initialization_index,
-		 const std::string & tribe,
-		 const std::string & name,
-		 TeamNumber team = 0);
-	Player * get_player(int32_t n) const {
+	Player* add_player(PlayerNumber,
+	                   uint8_t initialization_index,
+	                   const std::string& tribe,
+	                   const std::string& name,
+	                   TeamNumber team = 0);
+	Player* get_player(int32_t n) const {
 		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return m_players[n - 1];
+		assert(n <= MAX_PLAYERS);
+		return players_[n - 1];
 	}
-	Player & player(int32_t n) const {
+	Player& player(int32_t n) const {
 		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return *m_players[n - 1];
+		assert(n <= MAX_PLAYERS);
+		return *players_[n - 1];
 	}
 
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() {return m_number_of_players;}
+	uint8_t get_number_of_players() {
+		return number_of_players_;
+	}
 
-	const std::vector<PlayerEndStatus> & get_players_end_status() {return m_players_end_status;}
+	const std::vector<PlayerEndStatus>& get_players_end_status() {
+		return players_end_status_;
+	}
 
 	/**
 	* Adds a new player status for a player that left the game.
 	*/
-	void add_player_end_status(const PlayerEndStatus & status);
+	void add_player_end_status(const PlayerEndStatus& status);
+
+	/**
+	 * Changes an already existing player end status
+	 */
+	void set_player_end_status(const PlayerEndStatus& status);
 
 private:
-	Player                 * m_players[MAX_PLAYERS];
-	EditorGameBase       & m_egbase;
-	uint8_t                  m_number_of_players;
-	std::vector<PlayerEndStatus> m_players_end_status;
+	Player* players_[MAX_PLAYERS];
+	EditorGameBase& egbase_;
+	uint8_t number_of_players_;
+	std::vector<PlayerEndStatus> players_end_status_;
 };
 }
 

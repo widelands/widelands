@@ -33,24 +33,23 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapResourcesPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, const WorldLegacyLookupTable& lookup_table)
-{
+void MapResourcesPacket::read(FileSystem& fs,
+                              EditorGameBase& egbase,
+                              const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
 
-	Map   & map   = egbase.map();
-	const World & world = egbase.world();
+	Map& map = egbase.map();
+	const World& world = egbase.world();
 
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
 			if (world.get_nr_resources() < nr_res)
-				log
-					("WARNING: Number of resources in map (%i) is bigger than in world "
-					 "(%i)",
-					 nr_res, world.get_nr_resources());
+				log("WARNING: Number of resources in map (%i) is bigger than in world "
+				    "(%i)",
+				    nr_res, world.get_nr_resources());
 
 			// construct ids and map
 			std::map<uint8_t, uint8_t> smap;
@@ -59,27 +58,28 @@ void MapResourcesPacket::read
 				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
 				int32_t const res = world.get_resource(resource_name.c_str());
 				if (res == Widelands::INVALID_INDEX)
-					throw GameDataError
-						("resource '%s' exists in map but not in world", resource_name.c_str());
+					throw GameDataError(
+					   "resource '%s' exists in map but not in world", resource_name.c_str());
 				smap[id] = res;
 			}
 
 			for (uint16_t y = 0; y < map.get_height(); ++y) {
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
-					uint8_t const id           = fr.unsigned_8();
-					uint8_t const found_amount = fr.unsigned_8();
-					uint8_t const amount       = found_amount;
-					uint8_t const start_amount = fr.unsigned_8();
+					DescriptionIndex const id = fr.unsigned_8();
+					ResourceAmount const found_amount = fr.unsigned_8();
+					ResourceAmount const amount = found_amount;
+					ResourceAmount const start_amount = fr.unsigned_8();
 
-					uint8_t set_id, set_amount, set_start_amount;
+					DescriptionIndex set_id;
+					ResourceAmount set_amount, set_start_amount;
 					//  if amount is zero, theres nothing here
 					if (!amount) {
-						set_id           = 0;
-						set_amount       = 0;
+						set_id = 0;
+						set_amount = 0;
 						set_start_amount = 0;
 					} else {
-						set_id           = smap[id];
-						set_amount       = amount;
+						set_id = smap[id];
+						set_amount = amount;
 						set_start_amount = start_amount;
 					}
 
@@ -93,11 +93,10 @@ void MapResourcesPacket::read
 		} else {
 			throw UnhandledVersionError("MapResourcesPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("port spaces: %s", e.what());
 	}
 }
-
 
 /*
  * Ok, when we're called from the editor, the default resources
@@ -106,9 +105,7 @@ void MapResourcesPacket::read
  * which is also ok. But this is one reason why save game != saved map
  * in nearly all cases.
  */
-void MapResourcesPacket::write
-	(FileSystem & fs, EditorGameBase & egbase)
-{
+void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -117,14 +114,14 @@ void MapResourcesPacket::write
 	// of the resources at run time doesn't matter.
 	// (saved like terrains)
 	// Write the number of resources
-	const Map   & map   = egbase.map  ();
+	const Map& map = egbase.map();
 	const World& world = egbase.world();
 	uint8_t const nr_res = world.get_nr_resources();
 	fw.unsigned_16(nr_res);
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
-		const ResourceDescription & res = *world.get_resource(i);
+		const ResourceDescription& res = *world.get_resource(i);
 		fw.unsigned_16(i);
 		fw.c_string(res.name().c_str());
 	}
@@ -134,10 +131,10 @@ void MapResourcesPacket::write
 	//  - amount
 	for (uint16_t y = 0; y < map.get_height(); ++y) {
 		for (uint16_t x = 0; x < map.get_width(); ++x) {
-			const Field & f = map[Coords(x, y)];
-			int32_t       res          = f.get_resources          ();
-			int32_t const       amount = f.get_resources_amount   ();
-			int32_t const start_amount = f.get_initial_res_amount();
+			const Field& f = map[Coords(x, y)];
+			DescriptionIndex res = f.get_resources();
+			ResourceAmount const amount = f.get_resources_amount();
+			ResourceAmount const start_amount = f.get_initial_res_amount();
 			if (!amount)
 				res = 0;
 			fw.unsigned_8(res);
@@ -148,5 +145,4 @@ void MapResourcesPacket::write
 
 	fw.write(fs, "binary/resource");
 }
-
 }

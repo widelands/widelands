@@ -30,11 +30,10 @@ namespace Widelands {
 
 // Returns the key 'name' from 'section' parsed as Coords. Will throw if the
 // value cannot be parsed. If 'name' is not in 'section' will return 'def'.
-Widelands::Coords get_coords(
-	const std::string& name,
-	const Widelands::Extent& extent,
-	const Widelands::Coords& def,
-	Section* section);
+Widelands::Coords get_coords(const std::string& name,
+                             const Widelands::Extent& extent,
+                             const Widelands::Coords& def,
+                             Section* section);
 
 // Like get_coords, but will also throw when 'name' is not in 'section'.
 Widelands::Coords

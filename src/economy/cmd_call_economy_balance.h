@@ -29,24 +29,25 @@ class Economy;
 class Game;
 class MapObjectLoader;
 
-
 struct CmdCallEconomyBalance : public GameLogicCommand {
-	CmdCallEconomyBalance () : GameLogicCommand(0), m_timerid(0) {} ///< for load and save
+	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
+	}  ///< for load and save
 
-	CmdCallEconomyBalance (uint32_t starttime, Economy *, uint32_t timerid);
+	CmdCallEconomyBalance(uint32_t starttime, Economy*, uint32_t timerid);
 
-	void execute (Game &) override;
+	void execute(Game&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kCallEconomyBalance;}
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kCallEconomyBalance;
+	}
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
-	OPtr<Flag> m_flag;
-	uint32_t m_timerid;
+	OPtr<Flag> flag_;
+	uint32_t timerid_;
 };
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H

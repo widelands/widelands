@@ -55,54 +55,51 @@
 #endif
 
 #ifdef _MSC_VER
-#define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
-#define S_ISREG(x) ((x&_S_IFREG)?1:0)
+#define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
+#define S_ISREG(x) ((x & _S_IFREG) ? 1 : 0)
 #define PATH_MAX MAX_PATH
 #endif
 
 FileSystem::FileSystem()
-{
-	m_root = "";
-}
-
+   : root_("")
+{}
 
 /**
  * \param path A file or directory name
  * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
-bool FileSystem::is_path_absolute(const std::string & path) const {
-	std::string::size_type const path_size = path  .size();
-	std::string::size_type const root_size = m_root.size();
+bool FileSystem::is_path_absolute(const std::string& path) const {
+	std::string::size_type const path_size = path.size();
+	std::string::size_type const root_size = root_.size();
 
 	if (path_size < root_size)
 		return false;
 
 	if (path_size == root_size)
-		return path == m_root;
+		return path == root_;
 
-	if (path.compare(0, m_root.size(), m_root))
+	if (path.compare(0, root_.size(), root_))
 		return false;
 
 #ifdef _WIN32
-	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') //"C:\"
+	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\')  // "C:\"
 	{
 		return true;
 	}
 #endif
-	assert(root_size < path_size); //  Otherwise an invalid read happens below.
+	assert(root_size < path_size);  //  Otherwise an invalid read happens below.
 	if (path[root_size] != file_separator())
 		return false;
 
 	return true;
 }
 
-
 /**
  * Fix a path that might come from another OS.
  * This function is used to make sure that paths send via network are usable
  * on locale OS.
  */
-std::string FileSystem::fix_cross_file(const std::string & path) const {
+std::string FileSystem::fix_cross_file(const std::string& path) const {
 	uint32_t path_size = path.size();
 	std::string fixedPath(path);
 	std::string temp;
@@ -139,8 +136,8 @@ std::string FileSystem::fix_cross_file(const std::string & path) const {
 // static
 std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
-	char * const result = getcwd(cwd, PATH_MAX);
-	if (! result)
+	char* const result = getcwd(cwd, PATH_MAX);
+	if (!result)
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
 
 	return std::string(cwd);
@@ -156,17 +153,16 @@ char FileSystem::file_separator() {
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems
-std::string FileSystem::get_homedir()
-{
+std::string FileSystem::get_homedir() {
 	std::string homedir;
 #ifdef _WIN32
-	// trying to get it compatible to ALL windows versions...
-	// Could anybody please hit the Megasoft devs for not keeping
-	// their own "standards"?
-#define TRY_USE_AS_HOMEDIR(name)                                              \
-   homedir = getenv(name);                                                    \
-   if (homedir.size() && check_writeable_for_data(homedir.c_str()))           \
-      return homedir;                                                         \
+// Trying to get it compatible to ALL windows versions...
+// Could anybody please hit the Megasoft devs for not keeping
+// their own "standards"?
+#define TRY_USE_AS_HOMEDIR(name)                                                                   \
+	homedir = getenv(name);                                                                         \
+	if (homedir.size() && check_writeable_for_data(homedir.c_str()))                                \
+		return homedir;
 
 	TRY_USE_AS_HOMEDIR("USERPROFILE");
 	TRY_USE_AS_HOMEDIR("HOMEPATH");
@@ -176,17 +172,16 @@ std::string FileSystem::get_homedir()
 	log("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
-	if (char const * const h = getenv("HOME"))
+	if (char const* const h = getenv("HOME"))
 		homedir = h;
 #endif
 #endif
 
 	if (homedir.empty()) {
-		log
-			("\nWARNING: either we can not detect your home directory "
-			 "or you do not have one! Please contact the developers.\n\n");
+		log("\nWARNING: either we can not detect your home directory "
+		    "or you do not have one! Please contact the developers.\n\n");
 
-		//TODO(unknown): is it really a good idea to set homedir to "." then ??
+		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 
 		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
@@ -202,25 +197,22 @@ std::string FileSystem::get_homedir()
  * \param filesep The file path separator used by the native filesystem
  * \param components The output iterator to place the path nodes into
  */
-template<typename Inserter>
-static void fs_tokenize
-	(const std::string & path, char const filesep, Inserter components)
-{
-	std::string::size_type pos;  //  start of token
-	std::string::size_type pos2; //  next filesep character
+template <typename Inserter>
+static void fs_tokenize(const std::string& path, char const filesep, Inserter components) {
+	std::string::size_type pos;   //  start of token
+	std::string::size_type pos2;  //  next filesep character
 
-	//extract the first path component
-	if (path.find(filesep) == 0) //is this an absolute path?
+	// Extract the first path component
+	if (path.find(filesep) == 0)  // Is this an absolute path?
 		pos = 1;
-	else //relative path
+	else  // Relative path
 		pos = 0;
 	pos2 = path.find(filesep, pos);
-	//'current' token is now between pos and pos2
+	// 'current' token is now between pos and pos2
 
-	//split path into it's components
+	// Split path into it's components
 	while (pos2 != std::string::npos) {
-		if (pos != pos2)
-		{
+		if (pos != pos2) {
 			std::string node = path.substr(pos, pos2 - pos);
 			*components++ = node;
 		}
@@ -228,7 +220,7 @@ static void fs_tokenize
 		pos2 = path.find(filesep, pos);
 	}
 
-	//extract the last component (most probably a filename)
+	// Extract the last component (most probably a filename)
 	std::string node = path.substr(pos);
 	if (!node.empty())
 		*components++ = node;
@@ -252,38 +244,35 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 
 	fs_tokenize(path, file_separator(), std::inserter(components, components.begin()));
 
-	//tilde expansion
+	// Tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
-		fs_tokenize
-			(get_homedir(),
-			 file_separator(),
-			 std::inserter(components, components.begin()));
+		fs_tokenize(get_homedir(), file_separator(), std::inserter(components, components.begin()));
 	} else if (!is_path_absolute(path))
 		//  make relative paths absolute (so that "../../foo" can work)
-		fs_tokenize
-			(m_root.empty() ? get_working_directory() : m_root, file_separator(),
-			 std::inserter(components, components.begin()));
+		fs_tokenize(root_.empty() ? get_working_directory() : root_, file_separator(),
+		            std::inserter(components, components.begin()));
 
-	//clean up the path
+	// Clean up the path
 	for (i = components.begin(); i != components.end();) {
-		char const * str = i->c_str();
+		char const* str = i->c_str();
 		if (*str == '.') {
 			++str;
 
-			//remove single dot
+			// Remove single dot
 			if (*str == '\0') {
 				i = components.erase(i);
 				continue;
 			}
-			//remove double dot and the preceding component (if any)
+			// Remove double dot and the preceding component (if any)
 			else if (*str == '.' && *(str + 1) == '\0') {
 				if (i != components.begin()) {
 #ifdef _WIN32
 					// On windows don't remove driveletter in this error condition
 					if (--i != components.begin())
 						i = components.erase(i);
-					else ++i;
+					else
+						++i;
 #else
 					i = components.erase(--i);
 #endif
@@ -309,8 +298,9 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 		canonpath += '\\';
 	}
 
-	//remove trailing slash
-	if (canonpath.size() > 1) canonpath.erase(canonpath.end() - 1);
+	// Remove trailing slash
+	if (canonpath.size() > 1)
+		canonpath.erase(canonpath.end() - 1);
 #endif
 
 	return canonpath;
@@ -320,8 +310,8 @@ std::string FileSystem::canonicalize_name(std::string path) const {
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-const char * FileSystem::fs_filename(const char * p) {
-	const char * result = p;
+const char* FileSystem::fs_filename(const char* p) {
+	const char* result = p;
 
 	while (*p != '\0') {
 		if (*p == '/' || *p == '\\')
@@ -337,8 +327,7 @@ std::string FileSystem::fs_dirname(const std::string& full_path) {
 	return full_path.substr(0, full_path.size() - filename.size());
 }
 
-std::string FileSystem::filename_ext(const std::string & f)
-{
+std::string FileSystem::filename_ext(const std::string& f) {
 	// Find last '.' - denotes start of extension
 	size_t ext_start = f.rfind('.');
 
@@ -348,8 +337,7 @@ std::string FileSystem::filename_ext(const std::string & f)
 		return f.substr(ext_start);
 }
 
-std::string FileSystem::filename_without_ext(const char * const p)
-{
+std::string FileSystem::filename_without_ext(const char* const p) {
 	std::string fname(p ? FileSystem::fs_filename(p) : "");
 	std::string ext(FileSystem::filename_ext(fname));
 	return fname.substr(0, fname.length() - ext.length());
@@ -365,20 +353,15 @@ std::string FileSystem::filename_without_ext(const char * const p)
 // TODO(unknown): Catch FileNotFoundError in all users
 // TODO(unknown): throw FileTypeError if root is not a zipfile (exception from
 // ZipFilesystem)
-FileSystem & FileSystem::create(const std::string & root)
-{
+FileSystem& FileSystem::create(const std::string& root) {
 	struct stat statinfo;
 
 	if (stat(root.c_str(), &statinfo) == -1) {
-		if
-			(errno == EBADF   ||
-			 errno == ENOENT  ||
-			 errno == ENOTDIR ||
+		if (errno == EBADF || errno == ENOENT || errno == ENOTDIR ||
 #ifdef ELOOP
-			 errno == ELOOP   || //MinGW does not support ELOOP (yet)
+		    errno == ELOOP ||  // MinGW does not support ELOOP (yet)
 #endif
-			 errno == ENAMETOOLONG)
-		{
+		    errno == ENAMETOOLONG) {
 			throw FileNotFoundError("FileSystem::create", root);
 		}
 		if (errno == EACCES)
@@ -388,20 +371,18 @@ FileSystem & FileSystem::create(const std::string & root)
 	if (S_ISDIR(statinfo.st_mode)) {
 		return *new RealFSImpl(root);
 	}
-	if (S_ISREG(statinfo.st_mode)) { //TODO(unknown): ensure root is a zipfile
+	if (S_ISREG(statinfo.st_mode)) {  // TODO(unknown): ensure root is a zipfile
 		return *new ZipFilesystem(root);
 	}
 
-	throw FileTypeError
-		("FileSystem::create", root,
-		 "cannot create virtual filesystem from file or directory");
+	throw FileTypeError(
+	   "FileSystem::create", root, "cannot create virtual filesystem from file or directory");
 }
 
 #ifdef _WIN32
 /// hack that is unfortunately needed for windows to check whether Widelands
 /// can write in the directory
-bool FileSystem::check_writeable_for_data(char const * const path)
-{
+bool FileSystem::check_writeable_for_data(char const* const path) {
 	RealFSImpl fs(path);
 
 	if (fs.is_directory(".widelands"))

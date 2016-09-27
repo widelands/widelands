@@ -398,7 +398,7 @@ teaching_about_messages = {
    heading = _"Introducing Messages",
    body = rt(
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
-      p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
+      p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
    rt("image=images/wui/messages/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
@@ -461,7 +461,7 @@ destroy_quarries_message = {
    ),
    h = 300,
    obj_name = "destroy_quarries",
-   obj_title = "Destroy the two quarries",
+   obj_title = _"Destroy the two quarries",
    obj_body = rt(
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..
@@ -512,7 +512,7 @@ conclude_tutorial = {
       p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]])
    ) ..
-   rt("image=images/wui/menus/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
+   rt("image=images/wui/menus/menu_options_menu.png", p(_[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]])) ..
    rt("image=images/wui/menus/menu_exit_game.png", p(_[[‘Exit Game’ button.]])) ..
    rt(p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]])) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>"),

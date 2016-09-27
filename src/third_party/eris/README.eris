@@ -1,11 +1,12 @@
 This directory contains a verbatim copy of Eris by Florian Nücke.
 
 URL: https://github.com/fnuecke/eris
-VERSION: 2e39ecc7dcb73120dde775929227fa661fbc6bc0
+VERSION: 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3)
+SNAPSHOT: https://github.com/fnuecke/eris/commits/683ac97476a8634d9e5c17f0dec8dff8b7f3e595
 
 We use this for heavy persistence and it also brings with it the Lua version
-that we use in Widelands. The Widelands Team wishes to expresses total and
+that we use in Widelands. The Widelands team wishes to expresses total and
 complete gratitude to the authors of Eris for making it available under the MIT
-License. 
+License.
 
    -- SirVer, in behalf of the Widelands Team

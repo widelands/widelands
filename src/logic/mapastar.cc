@@ -29,26 +29,25 @@ namespace Widelands {
  * to the given destination @p dest, which must have been discovered
  * in the A-star process already.
  */
-void MapAStarBase::pathto(Coords dest, Path & path) const
-{
-	path.m_end = dest;
-	path.m_path.clear();
+void MapAStarBase::pathto(Coords dest, Path& path) const {
+	path.end_ = dest;
+	path.path_.clear();
 
 	Coords cur = dest;
 	for (;;) {
-		const Pathfield & pf(pathfield(cur));
+		const Pathfield& pf(pathfield(cur));
 
 		assert(pf.cycle == pathfields->cycle);
 
 		if (pf.backlink == IDLE)
 			break;
 
-		path.m_path.push_back(pf.backlink);
+		path.path_.push_back(pf.backlink);
 
 		map.get_neighbour(cur, get_reverse_dir(pf.backlink), &cur);
 	}
 
-	path.m_start = cur;
+	path.start_ = cur;
 }
 
-} // namespace Widelands
+}  // namespace Widelands

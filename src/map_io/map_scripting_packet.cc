@@ -37,53 +37,43 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 2;
+constexpr uint32_t kCurrentPacketVersion = 3;
 }  // namespace
-/*
- * ========================================================================
- *            PUBLIC IMPLEMENTATION
- * ========================================================================
- */
-void MapScriptingPacket::read
-	(FileSystem& fs,
-	 EditorGameBase& egbase,
-	 bool,
-	 MapObjectLoader& mol)
-{
+   /*
+    * ========================================================================
+    *            PUBLIC IMPLEMENTATION
+    * ========================================================================
+    */
+void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader& mol) {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g && fr.try_open(fs, "scripting/globals.dump"))
-	{
+	if (g && fr.try_open(fs, "scripting/globals.dump")) {
 		try {
 			const uint32_t packet_version = fr.unsigned_32();
 			if (packet_version == kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &g->lua());
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 			} else {
-				throw UnhandledVersionError("MapScriptingPacket", packet_version, kCurrentPacketVersion);
+				throw UnhandledVersionError(
+				   "MapScriptingPacket", packet_version, kCurrentPacketVersion);
 			}
-		} catch (const WException & e) {
+		} catch (const WException& e) {
 			throw GameDataError("scripting: %s", e.what());
 		}
 	}
 }
 
-
-void MapScriptingPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fs.ensure_directory_exists("scripting");
 
 	FileSystem* map_fs = egbase.map().filesystem();
 	if (map_fs) {
 		for (const std::string& script :
-			  filter(map_fs->list_directory("scripting"),
-		            [](const std::string& fn) {
-							return boost::ends_with(fn, ".lua");
-						})) {
+		     filter(map_fs->list_directory("scripting"),
+		            [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
 			size_t length;
 			void* input_data = map_fs->load(script, length);
 			fs.write(script, input_data, length);
@@ -96,7 +86,7 @@ void MapScriptingPacket::write
 		FileWrite fw;
 		fw.unsigned_32(kCurrentPacketVersion);
 		const FileWrite::Pos pos = fw.get_pos();
-		fw.unsigned_32(0); // N bytes written, follows below
+		fw.unsigned_32(0);  // N bytes written, follows below
 
 		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
@@ -105,5 +95,4 @@ void MapScriptingPacket::write
 		fw.write(fs, "scripting/globals.dump");
 	}
 }
-
 }

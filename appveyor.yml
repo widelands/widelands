@@ -5,22 +5,21 @@
 ###################################
 
 init:
-  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64)" 
-  - cmd: "echo %MINGWPATH%"
-  - cmd: "echo %MINGWSUFFIX%"
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64)"
 
 install:
   # Installing various utilities
   - choco install -y InnoSetup
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
+  - cmd: "set CC=%MINGWPATH%\\gcc.exe"
+  - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # Update mirrors
-  - cmd: "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
-  # Update msys2 core with fixed update script (no wait for close window)
-  - cmd: "bash --login -c \"exec 0</dev/null && $APPVEYOR_BUILD_FOLDER/utils/win32/appveyor/update-core.sh\""
-  # Update msys2 system
+  - cmd: "bash --login -c \"pacman --noconfirm --sync pacman pacman-mirrors\""
+  # Update msys2 system (twice, first run does system packages)
+  - cmd: "bash --login -c \"pacman -Su --noconfirm\""
   - cmd: "bash --login -c \"pacman -Su --noconfirm\""
   # Installed required libs
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_net mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_net mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
 
 shallow_clone: true
 
@@ -49,7 +48,13 @@ platform:
   - x64
   - x86
 
+matrix:
+  allow_failures:
+    # Appveyor does not provide enough memory to link this build (Sep 2016)
+    # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
+    - platform: x64
+      configuration: Debug
+
 configuration:
   - Release
   - Debug
-

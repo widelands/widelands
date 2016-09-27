@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      thatch_reed = 8
+      { name = "thatch_reed", amount = 8 }
    },
    outputs = {
       "cloth"

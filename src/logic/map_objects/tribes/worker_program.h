@@ -37,53 +37,61 @@ class WorkerDescr;
 
 struct WorkerProgram : public BobProgramBase {
 
-	using ParseWorkerProgramFn = void (WorkerProgram::*)
-		(Worker::Action*, const std::vector<std::string>&);
+	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
+	                                                     const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes) :
-		name_(name),
-		worker_(worker),
-		tribes_(tribes) {}
-	virtual ~WorkerProgram() {}
+	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
+	   : name_(name), worker_(worker), tribes_(tribes) {
+	}
+	virtual ~WorkerProgram() {
+	}
 
-	std::string get_name() const override {return name_;}
+	std::string get_name() const override {
+		return name_;
+	}
 	using Actions = std::vector<Worker::Action>;
-	Actions::size_type get_size() const {return actions_.size();}
-	const Actions & actions() const {return actions_;}
-	Worker::Action const * get_action(int32_t idx) const {
+	Actions::size_type get_size() const {
+		return actions_.size();
+	}
+	const Actions& actions() const {
+		return actions_;
+	}
+	Worker::Action const* get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < actions_.size());
 		return &actions_[idx];
 	}
 
 	void parse(const LuaTable& table);
-	const WorkareaInfo & get_workarea_info() const {return workarea_info_;}
+	const WorkareaInfo& get_workarea_info() const {
+		return workarea_info_;
+	}
 
 private:
 	WorkareaInfo workarea_info_;
 	struct ParseMap {
-		const char * name;
+		const char* name;
 		ParseWorkerProgramFn function;
 	};
 
-	void parse_mine             (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_breed            (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_createware       (Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_mine(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_breed(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_createware(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_setbobdescription(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_findobject       (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_findspace        (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_walk             (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_animation        (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_return           (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_object           (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_plant            (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_create_bob       (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_removeobject     (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_geologist        (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_geologist_find   (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_scout            (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_play_fx          (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_construct        (Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_walk(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_animation(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_return(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_object(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_create_bob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_geologist(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_scout(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_play_sound(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;
 	const WorkerDescr& worker_;
@@ -92,7 +100,6 @@ private:
 	static ParseMap const parsemap_[];
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H

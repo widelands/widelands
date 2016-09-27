@@ -3,13 +3,14 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/formatting.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
-include "scripting/win_condition_functions.lua"
+include "scripting/win_conditions/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "scripting/win_condition_texts.lua"
+include "scripting/win_conditions/win_condition_texts.lua"
 
 local wc_name = "Territorial Lord"
 -- This needs to be exactly like wc_name, but localized, because wc_name
@@ -93,7 +94,7 @@ return {
          end
       end
 
-      function _calc_points()
+      local function _calc_points()
          local teampoints = {}     -- points of teams
          local maxplayerpoints = 0 -- the highest points of a player without team
          local maxpointsplayer = 0 -- the player
@@ -148,7 +149,7 @@ return {
          end
       end
 
-      function _send_state()
+      local function _send_state()
          set_textdomain("win_conditions")
          local candidate = currentcandidate
          if candidateisteam then
@@ -168,20 +169,22 @@ return {
                    remaining_time / 60))
                :format(remaining_time / 60)
 
-         for idx, p in ipairs(plrs) do
-            if candidateisteam and currentcandidate == p.team
-               or not candidateisteam and currentcandidate == p.name then
-               send_message(p, game_status.title, msg2, {popup = true})
+         for idx, player in ipairs(plrs) do
+            if candidateisteam and currentcandidate == player.team
+               or not candidateisteam and currentcandidate == player.name then
+               send_message(player, game_status.title, rt(p(msg2)), {popup = true})
             else
-               send_message(p, game_status.title, msg1, {popup = true})
+               send_message(player, game_status.title, rt(p(msg1)), {popup = true})
             end
          end
       end
 
       -- Start a new coroutine that checks for defeated players
       run(function()
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+         while remaining_time ~= 0 do
+            sleep(5000)
+            check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+         end
       end)
 
       -- here is the main loop!!!
@@ -198,10 +201,10 @@ return {
                p.see_all = 1
                if candidateisteam and currentcandidate == p.team
                   or not candidateisteam and currentcandidate == p.name then
-                  p:send_message(won_game_over.title, won_game_over.body)
+                  p:send_message(won_game_over.title, rt(won_game_over.body))
                   wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                else
-                  p:send_message(lost_game_over.title, lost_game_over.body)
+                  p:send_message(lost_game_over.title, rt(lost_game_over.body))
                   wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
                end
             end

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008, 2012, 2015 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,26 +36,27 @@ class Deserializer;
 class FileRead;
 
 struct SyncCallback {
-	virtual ~SyncCallback() {}
+	virtual ~SyncCallback() {
+	}
 	virtual void syncreport() = 0;
 };
-
 
 /**
  * This non-gamelogic command is used by \ref NetHost and \ref NetClient
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync (uint32_t dt, SyncCallback *);
+	CmdNetCheckSync(uint32_t dt, SyncCallback*);
 
-	void execute (Widelands::Game &) override;
+	void execute(Widelands::Game&) override;
 
-	Widelands::QueueCommandTypes id() const override {return Widelands::QueueCommandTypes::kNetCheckSync;}
+	Widelands::QueueCommandTypes id() const override {
+		return Widelands::QueueCommandTypes::kNetCheckSync;
+	}
 
 private:
-	SyncCallback * m_callback;
+	SyncCallback* callback_;
 };
-
 
 /**
  * Keeping track of network time: This class answers the question of how
@@ -79,46 +80,44 @@ public:
 	void receive(int32_t ntime);
 
 private:
-	int32_t m_networktime;
-	int32_t m_time;
+	int32_t networktime_;
+	int32_t time_;
 
-	uint32_t m_lastframe;
+	uint32_t lastframe_;
 
 	/// This is an attempt to measure how far behind the network time we are.
-	uint32_t m_latency;
+	uint32_t latency_;
 };
-
 
 /**
  * Buffered StreamWrite object for assembling a packet that will be
  * sent via the \ref send() function.
  */
 struct SendPacket : public StreamWrite {
-	SendPacket ();
+	SendPacket();
 
-	void send (TCPsocket);
-	void reset ();
+	void send(TCPsocket);
+	void reset();
 
-	void data(void const * data, size_t size) override;
+	void data(void const* data, size_t size) override;
 
 private:
 	std::vector<uint8_t> buffer;
 };
-
 
 /**
  * One packet, as received by the deserializer.
  */
 struct RecvPacket : public StreamRead {
 public:
-	RecvPacket(Deserializer &);
+	RecvPacket(Deserializer&);
 
-	size_t data(void * data, size_t bufsize) override;
+	size_t data(void* data, size_t bufsize) override;
 	bool end_of_file() const override;
 
 private:
 	std::vector<uint8_t> buffer;
-	size_t m_index;
+	size_t index_;
 };
 
 struct FilePart {
@@ -150,9 +149,8 @@ public:
 
 private:
 	friend struct RecvPacket;
-	std::vector<uint8_t> queue;
+	std::vector<uint8_t> queue_;
 };
-
 
 /**
  * This exception is used internally during protocol handling to indicate
@@ -162,34 +160,38 @@ private:
  * it assumes that it is due to malformed data sent by the server.
  */
 struct DisconnectException : public std::exception {
-	explicit DisconnectException
-		(const char * fmt, ...)
-	 PRINTF_FORMAT(2, 3);
+	explicit DisconnectException(const char* fmt, ...) PRINTF_FORMAT(2, 3);
 
-	const char * what() const noexcept override;
+	const char* what() const noexcept override;
 
 private:
-	std::string m_what;
+	std::string what_;
 };
 
 /**
  * This exception is used internally during protocol handling to indicate that the connection
- * should be terminated because an unexpected message got received that is disallowed by the protocol.
+ * should be terminated because an unexpected message got received that is disallowed by the
+ * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code) {m_what = code;}
+	explicit ProtocolException(uint8_t code) {
+		what_ = code;
+	}
 
 	/// do NOT use!!! This exception shall only return the command number of the received message
 	/// via \ref ProtocolException:number()
-	const char * what() const noexcept override {
+	const char* what() const noexcept override {
 		NEVER_HERE();
 	}
 
 	/// \returns the command number of the received message
-	virtual int          number() const {return m_what;}
+	virtual int number() const {
+		return what_;
+	}
+
 private:
 	// no uint8_t, as lexical_cast does not support that format
-	int m_what;
+	int what_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H

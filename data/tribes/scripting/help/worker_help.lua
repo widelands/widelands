@@ -1,19 +1,29 @@
-include "tribes/scripting/help/format_help.lua"
-
 -- RST
 -- worker_help.lua
 -- ---------------
+--
+-- This script returns a formatted entry for the ingame worker help.
+-- Pass the internal tribe name and worker name to the coroutine to select the
+-- worker type.
 
--- Functions used in the ingame worker help windows for formatting the text and pictures.
+include "tribes/scripting/help/format_help.lua"
 
 --  =======================================================
 --  ************* Main worker help functions *************
 --  =======================================================
 
+-- RST
+-- .. function:: worker_help_producers_string(worker_description)
+--
+--    Displays the buildings that can produce the worker
+--
+--    :arg tribe: the worker's tribe from C++.
+--    :arg worker_description: the worker_description from C++.
+--    :returns: Info about buildings that produce this worker
+--
 function worker_help_producers_string(tribe, worker_description)
    local result = ""
-   for i, building_name in ipairs(tribe.buildings) do
-      local building = wl.Game():get_building_description(building_name)
+   for i, building in ipairs(tribe.buildings) do
       if (building.type_name == "productionsite") then
          local recruits_this = false;
          for j, output in ipairs(building.output_worker_types) do
@@ -76,15 +86,41 @@ function worker_help_producers_string(tribe, worker_description)
    return result
 end
 
+
 -- RST
--- .. function worker_help_string(worker_description)
+-- .. function:: worker_help_employers_string(worker_description)
+--
+--    Displays the buildings where the worker can work
+--
+--    :arg worker_description: the worker_description from C++.
+--    :returns: Info about buildings that use this worker
+--
+function worker_help_employers_string(worker_description)
+   local result = ""
+   local employers = worker_description.employers;
+
+   if (#employers > 0) then
+      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplace(s)'
+      result = result .. rt(h2(ngettext("Works at", "Works at", #employers)))
+      for i, building in ipairs(worker_description.employers) do
+         result = result .. dependencies({worker_description, building}, building.descname)
+      end
+   end
+   return result
+end
+
+
+-- RST
+-- .. function:: worker_help_string(worker_description)
 --
 --    Displays the worker with a helptext, an image and the tool used
 --
 --    :arg tribe: The :class:`LuaTribeDescription` for the tribe
 --                that we are displaying this help for.
---
+
 --    :arg worker_description: the worker_description from C++.
+--
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)
@@ -102,19 +138,22 @@ function worker_help_string(tribe, worker_description)
          end
       end
 
-      if(#toolnames > 0) then
-         result = result .. help_tool_string(tribe, toolnames, 1)
+      if (#toolnames > 0) then
+         local tool_string = help_tool_string(tribe, toolnames, 1)
+         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
+         result = result .. rt(h2(_"Worker uses")) .. tool_string
       end
    else
       result = result .. worker_help_producers_string(tribe, worker_description)
    end
 
+   result = result .. worker_help_employers_string(worker_description)
 
    -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
    local becomes_description = worker_description.becomes
    if (becomes_description) then
 
-      result = result .. rt(h3(_"Experience levels:"))
+      result = result .. rt(h2(_"Experience levels"))
       local exp_string = _"%s to %s (%s EP)":format(
             worker_description.descname,
             becomes_description.descname,
@@ -130,16 +169,72 @@ function worker_help_string(tribe, worker_description)
                worker_description.needed_experience
             )
       end
-      result = result ..  rt("text-align=right", p(exp_string))
+      result = result .. rt("text-align=right", p(exp_string))
+   end
+   -- Soldier properties
+   if (worker_description.type_name == "soldier") then
+      -- TRANSLATORS: Soldier levels
+      result = result .. rt(h2(_"Levels"))
+
+      result = result .. rt(h3(_"Health"))
+      result = result .. rt(p(
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+            (_"Starts at %1% points."):bformat(worker_description.base_health)) ..
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / attack defense / evade points
+            ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.health_incr_per_level):bformat(worker_description.health_incr_per_level)) ..
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / attack defense / evade level
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_health_level):bformat(worker_description.max_health_level))))
+
+      result = result .. rt(h3(_"Attack"))
+      result = result .. rt(p(
+      -- TRANSLATORS: Points are 4 digit numbers.
+         listitem_bullet(_"A random value between %1% and %2% points is added to each attack."):bformat(worker_description.base_min_attack, worker_description.base_max_attack) ..
+
+         listitem_bullet(
+            ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.attack_incr_per_level):bformat(worker_description.attack_incr_per_level)) ..
+         listitem_bullet(
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_attack_level):bformat(worker_description.max_attack_level))))
+
+      result = result .. rt(h3(_"Defense"))
+      if (worker_description.max_defense_level > 0) then
+         result = result .. rt(p(
+            listitem_bullet(
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
+            listitem_bullet(
+               (_"Increased by %d%% for each level."):bformat(worker_description.defense_incr_per_level)) ..
+            listitem_bullet(
+               ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_defense_level):bformat(worker_description.max_defense_level))))
+      else
+         result = result .. rt(p(
+            listitem_bullet(
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
+            listitem_bullet(_"This soldier cannot be trained in defense.")))
+      end
+
+      result = result .. rt(h3(_"Evade"))
+      result = result .. rt(p(
+         listitem_bullet(
+            (_"Starts at %d%%."):bformat(worker_description.base_evade)) ..
+         listitem_bullet(
+            (_"Increased by %d%% for each level."):bformat(worker_description.evade_incr_per_level)) ..
+         listitem_bullet(
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_evade_level):bformat(worker_description.max_evade_level))))
    end
    return result
 end
 
 
 return {
-   func = function(tribename, worker_description)
+   func = function(tribename, workername)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
-      return worker_help_string(tribe, worker_description)
+      local worker_description = wl.Game():get_worker_description(workername)
+      return {
+         title = worker_description.descname,
+         text = worker_help_string(tribe, worker_description)
+      }
    end
 }

@@ -23,6 +23,7 @@ player3 = egbase.players[3]
 -- =================================
 include "map:scripting/egbase.lua"
 
+include "map:scripting/gettext.lua"
 include "map:scripting/math_random.lua"
 include "map:scripting/string_bformat.lua"
 include "map:scripting/path.lua"
@@ -33,6 +34,7 @@ include "map:scripting/cplr_access.lua"
 
 include "map:scripting/immovables.lua"
 include "map:scripting/immovables_descriptions.lua"
+include "map:scripting/terrains_resources_descriptions.lua"
 include "map:scripting/tribes_descriptions.lua"
 
 if not wl.editor then

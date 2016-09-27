@@ -29,19 +29,20 @@ namespace Widelands {
  *
  * Note that the order in which fields are returned is not guaranteed.
  */
-template <typename AreaType = Area<> > struct MapRegion {
-	MapRegion(const Map & map, AreaType area) :
-		m_area            (area),
-		m_rowwidth        (area.radius + 1),
-		m_remaining_in_row(m_rowwidth),
-		m_remaining_rows  (m_rowwidth + area.radius)
-	{
+template <typename AreaType = Area<>> struct MapRegion {
+	MapRegion(const Map& map, AreaType area)
+	   : area_(area),
+	     rowwidth_(area.radius + 1),
+	     remaining_in_row_(rowwidth_),
+	     remaining_rows_(rowwidth_ + area.radius) {
 		for (typename AreaType::RadiusType r = area.radius; r; --r)
-			map.get_tln(m_area, &m_area);
-		m_left = m_area;
+			map.get_tln(area_, &area_);
+		left_ = area_;
 	}
 
-	const typename AreaType::CoordsType & location() const {return m_area;}
+	const typename AreaType::CoordsType& location() const {
+		return area_;
+	}
 
 	/// Moves on to the next location. The return value indicates whether the
 	/// new location has not yet been reached during this iteration. Note that
@@ -49,28 +50,33 @@ template <typename AreaType = Area<> > struct MapRegion {
 	/// the same location may be reached several times during an iteration,
 	/// while advance keeps returning true. When finally advance returns false,
 	/// it means that the iteration is done.
-	bool advance(const Map & map) {
-		if (--m_remaining_in_row)
-			map.get_rn(m_area, &m_area);
-		else if (m_area.radius < --m_remaining_rows) {
-			map.get_bln(m_left, &m_area); m_left = m_area;
-			m_remaining_in_row = ++m_rowwidth;
-		} else if (m_remaining_rows) {
-			map.get_brn(m_left, &m_area); m_left = m_area;
-			m_remaining_in_row = --m_rowwidth;
-		} else return false;
+	bool advance(const Map& map) {
+		if (--remaining_in_row_)
+			map.get_rn(area_, &area_);
+		else if (area_.radius < --remaining_rows_) {
+			map.get_bln(left_, &area_);
+			left_ = area_;
+			remaining_in_row_ = ++rowwidth_;
+		} else if (remaining_rows_) {
+			map.get_brn(left_, &area_);
+			left_ = area_;
+			remaining_in_row_ = --rowwidth_;
+		} else
+			return false;
 		return true;
 	}
 
-	typename AreaType::RadiusType radius() const {return m_area.radius;}
-private:
-	AreaType                      m_area;
-	typename AreaType::CoordsType m_left;
-	typename AreaType::RadiusType m_rowwidth;
-	typename AreaType::RadiusType m_remaining_in_row;
-	typename AreaType::RadiusType m_remaining_rows;
-};
+	typename AreaType::RadiusType radius() const {
+		return area_.radius;
+	}
 
+private:
+	AreaType area_;
+	typename AreaType::CoordsType left_;
+	typename AreaType::RadiusType rowwidth_;
+	typename AreaType::RadiusType remaining_in_row_;
+	typename AreaType::RadiusType remaining_rows_;
+};
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPREGION_H

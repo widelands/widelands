@@ -40,9 +40,11 @@ struct MapElementalPacket {
 
 	/// The following function prereads a given map without the need of a
 	/// properly configured EditorGameBase object.
-	void pre_read(FileSystem &, Map *);
+	void pre_read(FileSystem&, Map*);
 
-	uint32_t get_version() {return m_version;}
+	uint32_t get_version() {
+		return version_;
+	}
 
 	/// If this map was created before the one_world merge was done, this returns
 	/// the old world name, otherwise "".
@@ -52,9 +54,8 @@ struct MapElementalPacket {
 
 private:
 	std::string old_world_name_;
-	uint32_t m_version;
+	uint32_t version_;
 };
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_ELEMENTAL_PACKET_H

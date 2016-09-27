@@ -1,9 +1,12 @@
-dirname = path.dirname(__file__)
-
-set_textdomain("tribes")
-
+-- RST
+-- preload.lua
+-- -----------
+--
 -- This file contains the basic information for all tribes that is
 -- needed before a game is loaded or the editor has been started.
+
+dirname = path.dirname(__file__)
+set_textdomain("tribes")
 
 return {
    -- Basic information for the Barbarian tribe
@@ -18,6 +21,7 @@ return {
       starting_conditions = {
          dirname .. "scripting/starting_conditions/barbarians/headquarters.lua";
          dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
+         dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
       }
    },
 
@@ -33,6 +37,7 @@ return {
       starting_conditions = {
          dirname .. "scripting/starting_conditions/empire/headquarters.lua";
          dirname .. "scripting/starting_conditions/empire/fortified_village.lua";
+         dirname .. "scripting/starting_conditions/empire/trading_outpost.lua";
       }
    },
 
@@ -48,6 +53,7 @@ return {
       starting_conditions = {
          dirname .. "scripting/starting_conditions/atlanteans/headquarters.lua";
          dirname .. "scripting/starting_conditions/atlanteans/fortified_village.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/trading_outpost.lua";
       }
    }
 }

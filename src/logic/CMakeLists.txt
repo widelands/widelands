@@ -1,19 +1,3 @@
-wl_binary(wl_map_info
-  SRCS
-    map_info.cc
-  USES_SDL2
-  DEPENDS
-    base_log
-    graphic
-    graphic_image_io
-    graphic_minimap_renderer
-    graphic_surface
-    io_fileread
-    io_filesystem
-    logic
-    map_io_map_loader
-)
-
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -236,7 +220,6 @@ wl_library(logic
     graphic_color
     graphic_image_io
     graphic_surface
-    graphic_text
     graphic_text_layout
     helper
     io_fileread

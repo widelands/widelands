@@ -69,17 +69,10 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 	return result;
 }
 
-UI::Textarea& AttackBox::add_text(UI::Box& parent,
-                                  std::string str,
-											 UI::Align alignment,
-                                  const std::string& fontname,
-                                  uint32_t fontsize) {
+UI::Textarea&
+AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, int fontsize) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
-	UI::TextStyle textstyle;
-	textstyle.font = UI::Font::get(fontname, fontsize);
-	textstyle.bold = true;
-	textstyle.fg = UI_FONT_CLR_FG;
-	result.set_textstyle(textstyle);
+	result.set_fontsize(fontsize);
 	parent.add(&result, alignment);
 	return result;
 }
@@ -88,8 +81,9 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   const std::string& text,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
-	std::unique_ptr<UI::Button> button(new UI::Button(
-		&parent, text, 8, 8, 26, 26, g_gr->images().get("images/ui_basic/but2.png"), text, tooltip_text));
+	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
+	                                                  g_gr->images().get("images/ui_basic/but2.png"),
+	                                                  text, tooltip_text));
 	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get(), UI::Align::kHCenter);
 	return button;
@@ -149,26 +143,15 @@ void AttackBox::init() {
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
-	soldiers_text_.reset(&add_text(columnbox,
-	                               attack_string,
-	                               UI::Align::kHCenter,
-	                               UI::g_fh1->fontset().serif(),
-	                               UI_FONT_SIZE_ULTRASMALL));
+	soldiers_text_.reset(
+	   &add_text(columnbox, attack_string, UI::Align::kHCenter, UI_FONT_SIZE_ULTRASMALL));
 
-	soldiers_slider_ = add_slider(columnbox,
-	                              100,
-	                              10,
-	                              0,
-	                              max_attackers,
-	                              max_attackers > 0 ? 1 : 0,
-											"images/ui_basic/but2.png",
-	                              _("Number of soldiers"));
+	soldiers_slider_ = add_slider(columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0,
+	                              "images/ui_basic/but2.png", _("Number of soldiers"));
 
 	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));
-	more_soldiers_ = add_button(linebox,
-	                            std::to_string(max_attackers),
-	                            &AttackBox::send_more_soldiers,
-	                            _("Send more soldiers"));
+	more_soldiers_ = add_button(linebox, std::to_string(max_attackers),
+	                            &AttackBox::send_more_soldiers, _("Send more soldiers"));
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);

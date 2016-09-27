@@ -53,7 +53,7 @@ struct NoteImmovable {
 
 	PlayerImmovable* pi;
 
-	enum class Ownership {LOST, GAINED};
+	enum class Ownership { LOST, GAINED };
 	Ownership ownership;
 
 	NoteImmovable(PlayerImmovable* const init_pi, Ownership const init_ownership)
@@ -73,15 +73,15 @@ struct NoteImmovable {
  */
 struct BaseImmovable : public MapObject {
 	enum Size {
-		NONE = 0, ///< not robust (i.e. removable by building something over it)
-		SMALL,    ///< small building or robust map element, including trees
-		MEDIUM,   ///< medium size building
-		BIG       ///< big building
+		NONE = 0,  ///< not robust (i.e. removable by building something over it)
+		SMALL,     ///< small building or robust map element, including trees
+		MEDIUM,    ///< medium size building
+		BIG        ///< big building
 	};
 
-	BaseImmovable(const MapObjectDescr &);
+	BaseImmovable(const MapObjectDescr&);
 
-	virtual int32_t  get_size    () const = 0;
+	virtual int32_t get_size() const = 0;
 	virtual bool get_passable() const = 0;
 
 	using PositionList = std::vector<Coords>;
@@ -90,17 +90,16 @@ struct BaseImmovable : public MapObject {
 	 * list always contains one entry and the first one is the main position
 	 * if one can be chosen as main.
 	 */
-	virtual PositionList get_positions
-		(const EditorGameBase &) const = 0;
-	virtual void draw
-		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&)
-		= 0;
+	virtual PositionList get_positions(const EditorGameBase&) const = 0;
+	virtual void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) = 0;
+
+	static int32_t string_to_size(const std::string& size);
+	static std::string size_to_string(int32_t size);
 
 protected:
-	void set_position(EditorGameBase &, Coords);
-	void unset_position(EditorGameBase &, Coords);
+	void set_position(EditorGameBase&, const Coords&);
+	void unset_position(EditorGameBase&, const Coords&);
 };
-
 
 class Immovable;
 struct ImmovableProgram;
@@ -112,7 +111,7 @@ struct ImmovableActionData;
  */
 class ImmovableDescr : public MapObjectDescr {
 public:
-	using Programs = std::map<std::string, ImmovableProgram *>;
+	using Programs = std::map<std::string, ImmovableProgram*>;
 
 	/// World immovable
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
@@ -120,18 +119,29 @@ public:
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
 	~ImmovableDescr() override;
 
-	int32_t get_size() const {return m_size;}
-	ImmovableProgram const * get_program(const std::string &) const;
+	int32_t get_size() const {
+		return size_;
+	}
+	ImmovableProgram const* get_program(const std::string&) const;
 
-	Immovable & create(EditorGameBase &, Coords) const;
+	Immovable& create(EditorGameBase&, const Coords&) const;
 
-	MapObjectDescr::OwnerType owner_type() const {return owner_type_;}
+	MapObjectDescr::OwnerType owner_type() const {
+		return owner_type_;
+	}
 
-	const Buildcost & buildcost() const {return m_buildcost;}
+	const Buildcost& buildcost() const {
+		return buildcost_;
+	}
 
+	// Returns the editor category, or nullptr if the immovable has no editor category
+	// (e.g. Tribe immovables never have one).
+	const EditorCategory* editor_category() const;
 
-	// Returns the editor category.
-	const EditorCategory& editor_category() const;
+	// A basic localized name for the immovable, used by trees
+	const std::string& species() const {
+		return species_;
+	}
 
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
@@ -142,19 +152,23 @@ public:
 	const TerrainAffinity& terrain_affinity() const;
 
 protected:
-	int32_t     m_size;
-	Programs    m_programs;
+	int32_t size_;
+	Programs programs_;
 
 	/// Whether this ImmovableDescr belongs to a tribe or the world
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
-	Buildcost m_buildcost;
+	Buildcost buildcost_;
+
+	std::string species_;
 
 private:
-	 // Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, MapObjectDescr::OwnerType type);
+	// Common constructor functions for tribes and world.
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               MapObjectDescr::OwnerType type);
 
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
@@ -172,56 +186,58 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	Immovable(const ImmovableDescr &);
+	Immovable(const ImmovableDescr&);
 	~Immovable();
 
-	Player * get_owner() const {return m_owner;}
-	void set_owner(Player * player);
+	Player* get_owner() const {
+		return owner_;
+	}
+	void set_owner(Player* player);
 
-	Coords get_position() const {return m_position;}
-	PositionList get_positions (const EditorGameBase &) const override;
+	Coords get_position() const {
+		return position_;
+	}
+	PositionList get_positions(const EditorGameBase&) const override;
 
-	int32_t  get_size    () const override;
+	int32_t get_size() const override;
 	bool get_passable() const override;
-	void start_animation(const EditorGameBase &, uint32_t anim);
+	void start_animation(const EditorGameBase&, uint32_t anim);
 
-	void program_step(Game & game, uint32_t const delay = 1) {
+	void program_step(Game& game, uint32_t const delay = 1) {
 		if (delay)
-			m_program_step = schedule_act(game, delay);
+			program_step_ = schedule_act(game, delay);
 		increment_program_pointer();
 	}
 
-	void init(EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
-	void act(Game &, uint32_t data) override;
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
+	void act(Game&, uint32_t data) override;
 
-	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 
-	void switch_program(Game & game, const std::string & programname);
-	bool construct_ware(Game & game, DescriptionIndex index);
-	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
+	void switch_program(Game& game, const std::string& programname);
+	bool construct_ware(Game& game, DescriptionIndex index);
+	bool construct_remaining_buildcost(Game& game, Buildcost* buildcost);
 
-
-	void set_action_data(ImmovableActionData * data);
-	template<typename T>
-	T * get_action_data() {
-		if (!m_action_data)
+	void set_action_data(ImmovableActionData* data);
+	template <typename T> T* get_action_data() {
+		if (!action_data_)
 			return nullptr;
-		if (T * data = dynamic_cast<T *>(m_action_data.get()))
+		if (T* data = dynamic_cast<T*>(action_data_.get()))
 			return data;
 		set_action_data(nullptr);
 		return nullptr;
 	}
 
 protected:
-	Player * m_owner;
-	Coords                   m_position;
+	Player* owner_;
+	Coords position_;
 
-	uint32_t                     m_anim;
-	int32_t                      m_animstart;
+	uint32_t anim_;
+	int32_t animstart_;
 
-	const ImmovableProgram * m_program;
-	uint32_t m_program_ptr; ///< index of next instruction to execute
+	const ImmovableProgram* program_;
+	uint32_t program_ptr_;  ///< index of next instruction to execute
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
@@ -232,48 +248,50 @@ protected:
  */
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0)
 public:
-	uint32_t m_anim_construction_total;
-	uint32_t m_anim_construction_done;
-	int32_t m_program_step;
+	uint32_t anim_construction_total_;
+	uint32_t anim_construction_done_;
+	uint32_t program_step_;
+
 protected:
 #else
-	uint32_t m_anim_construction_total;
-	uint32_t m_anim_construction_done;
-	uint32_t m_program_step; ///< time of next step
+	uint32_t anim_construction_total_;
+	uint32_t anim_construction_done_;
+	uint32_t program_step_;  ///< time of next step
 #endif
-	std::string m_construct_string;
 
 	/**
 	 * Private persistent data for the currently active program action.
 	 *
 	 * \warning Use get_action_data to access this.
 	 */
-	std::unique_ptr<ImmovableActionData> m_action_data;
+	std::unique_ptr<ImmovableActionData> action_data_;
 
-        // Load/save support
+	// Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		void load(FileRead &, uint8_t packet_version);
+		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 	};
 
 public:
 	// TODO(unknown): Remove as soon as we fully support the new system
-	bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {
+		return true;
+	}
 
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
-	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &,
-		 const WorldLegacyLookupTable& world_lookup_table,
-		 const TribesLegacyLookupTable& tribes_lookup_table);
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(EditorGameBase&,
+	                               MapObjectLoader&,
+	                               FileRead&,
+	                               const WorldLegacyLookupTable& world_lookup_table,
+	                               const TribesLegacyLookupTable& tribes_lookup_table);
 
 private:
 	void increment_program_pointer();
 
 	void draw_construction(const EditorGameBase&, RenderTarget&, Point);
 };
-
 
 /**
  * PlayerImmovable is an immovable owned by a player that belongs to an economy:
@@ -284,31 +302,41 @@ private:
  * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
-	PlayerImmovable(const MapObjectDescr &);
+	PlayerImmovable(const MapObjectDescr&);
 	virtual ~PlayerImmovable();
 
-	Player * get_owner() const {return m_owner;}
-	Player & owner() const {return *m_owner;}
-	Economy * get_economy() const {return m_economy;}
-	Economy & economy() const {return *m_economy;}
+	Player* get_owner() const {
+		return owner_;
+	}
+	Player& owner() const {
+		return *owner_;
+	}
+	Economy* get_economy() const {
+		return economy_;
+	}
+	Economy& economy() const {
+		return *economy_;
+	}
 
-	virtual Flag & base_flag() = 0;
+	virtual Flag& base_flag() = 0;
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy*);
 
-	virtual void    add_worker(Worker &);
-	virtual void remove_worker(Worker &);
+	virtual void add_worker(Worker&);
+	virtual void remove_worker(Worker&);
 
-	using Workers = std::vector<Worker *>;
+	using Workers = std::vector<Worker*>;
 
 	/**
 	 * \return a list of workers that are currently located at this
 	 * immovable. This is not the same as the list of production
 	 * workers returned by \ref ProductionSite::get_production_workers
 	 */
-	const Workers & get_workers() const {return m_workers;}
+	const Workers& get_workers() const {
+		return workers_;
+	}
 
-	void log_general_info(const EditorGameBase &) override;
+	void log_general_info(const EditorGameBase&) override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -321,34 +349,33 @@ struct PlayerImmovable : public BaseImmovable {
 	 * functionality, which has to do with setting up locations.
 	 */
 	/*@{*/
-	virtual void receive_ware(Game &, DescriptionIndex ware);
-	virtual void receive_worker(Game &, Worker & worker);
+	virtual void receive_ware(Game&, DescriptionIndex ware);
+	virtual void receive_worker(Game&, Worker& worker);
 	/*@}*/
 
-	void set_owner(Player *);
+	void set_owner(Player*);
 
 protected:
-	void init   (EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
 
 private:
-	Player              * m_owner;
-	Economy             * m_economy;
+	Player* owner_;
+	Economy* economy_;
 
-	Workers   m_workers;
+	Workers workers_;
 
 	// load/save support
 protected:
 	struct Loader : BaseImmovable::Loader {
 		Loader();
 
-		void load(FileRead &);
+		void load(FileRead&);
 	};
 
 public:
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

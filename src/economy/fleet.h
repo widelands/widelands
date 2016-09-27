@@ -36,8 +36,8 @@ struct Ship;
 
 class FleetDescr : public MapObjectDescr {
 public:
-	FleetDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
+	FleetDescr(char const* const init_name, char const* const init_descname)
+	   : MapObjectDescr(MapObjectType::FLEET, init_name, init_descname) {
 	}
 	~FleetDescr() override {
 	}
@@ -69,92 +69,98 @@ struct Fleet : MapObject {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
 
-		PortPath() : cost(-1) {}
+		PortPath() : cost(-1) {
+		}
 	};
 
 	const FleetDescr& descr() const;
 
-	Fleet(Player & player);
+	Fleet(Player& player);
 
-	Player * get_owner() const {return &m_owner;}
-	Player & owner() const {return m_owner;}
+	Player* get_owner() const {
+		return &owner_;
+	}
+	Player& owner() const {
+		return owner_;
+	}
 
-	PortDock * get_dock(Flag & flag) const;
-	PortDock * get_dock(EditorGameBase &, Coords) const;
-	PortDock * get_arbitrary_dock() const;
-	void set_economy(Economy * e);
+	PortDock* get_dock(Flag& flag) const;
+	PortDock* get_dock(EditorGameBase&, Coords) const;
+	PortDock* get_arbitrary_dock() const;
+	void set_economy(Economy* e);
 
 	bool active() const;
 
-	void init(EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
-	void update(EditorGameBase &);
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
+	void update(EditorGameBase&);
 
-	void add_ship(Ship * ship);
-	void remove_ship(EditorGameBase & egbase, Ship * ship);
-	void add_port(EditorGameBase & egbase, PortDock * port);
-	void remove_port(EditorGameBase & egbase, PortDock * port);
+	void add_ship(Ship* ship);
+	void remove_ship(EditorGameBase& egbase, Ship* ship);
+	void add_port(EditorGameBase& egbase, PortDock* port);
+	void remove_port(EditorGameBase& egbase, PortDock* port);
 
-	void log_general_info(const EditorGameBase &) override;
+	void log_general_info(const EditorGameBase&) override;
 
-	bool get_path(PortDock & start, PortDock & end, Path & path);
-	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
+	bool get_path(PortDock& start, PortDock& end, Path& path);
+	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships();
-	uint32_t count_ships_heading_here(EditorGameBase & egbase, PortDock * port);
+	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port);
 	uint32_t count_ports();
 	bool get_act_pending();
 
 protected:
-	void act(Game &, uint32_t data) override;
+	void act(Game&, uint32_t data) override;
 
 private:
-	void find_other_fleet(EditorGameBase & egbase);
-	void merge(EditorGameBase & egbase, Fleet * other);
+	void find_other_fleet(EditorGameBase& egbase);
+	void merge(EditorGameBase& egbase, Fleet* other);
 	void check_merge_economy();
-	void connect_port(EditorGameBase & egbase, uint32_t idx);
+	void connect_port(EditorGameBase& egbase, uint32_t idx);
 
-	PortPath & portpath(uint32_t i, uint32_t j);
-	const PortPath & portpath(uint32_t i, uint32_t j) const;
-	PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse);
-	const PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse) const;
+	PortPath& portpath(uint32_t i, uint32_t j);
+	const PortPath& portpath(uint32_t i, uint32_t j) const;
+	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
+	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
-	Player & m_owner;
-	std::vector<Ship *> m_ships;
-	std::vector<PortDock *> m_ports;
+	Player& owner_;
+	std::vector<Ship*> ships_;
+	std::vector<PortDock*> ports_;
 
-	bool m_act_pending;
+	bool act_pending_;
 
 	/**
 	 * Store all pairs shortest paths between port docks
 	 *
-	 * Let i < j, then the path from m_ports[i] to m_ports[j] is stored in
-	 * m_portpaths[binom(j,2) + i]
+	 * Let i < j, then the path from ports_[i] to ports_[j] is stored in
+	 * portpaths_[binom(j,2) + i]
 	 */
-	std::vector<PortPath> m_portpaths;
+	std::vector<PortPath> portpaths_;
 
 	// saving and loading
 protected:
 	struct Loader : MapObject::Loader {
 		Loader();
 
-		void load(FileRead &);
+		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		std::vector<uint32_t> m_ships;
-		std::vector<uint32_t> m_ports;
+		std::vector<uint32_t> ships_;
+		std::vector<uint32_t> ports_;
 	};
 
 public:
-	bool has_new_save_support() override {return true;}
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	bool has_new_save_support() override {
+		return true;
+	}
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
-	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLEET_H

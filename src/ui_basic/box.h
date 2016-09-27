@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,25 +40,26 @@ struct Box : public Panel {
 		Vertical = 1,
 	};
 
-	Box
-		(Panel * parent,
-		 int32_t x, int32_t y,
-		 uint32_t orientation,
-		 int32_t max_x = 0, int32_t max_y = 0,
-		 uint32_t inner_spacing = 0);
+	Box(Panel* parent,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t orientation,
+	    int32_t max_x = 0,
+	    int32_t max_y = 0,
+	    uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 
-	int32_t get_nritems() const {return m_items.size();}
+	int32_t get_nritems() const {
+		return items_.size();
+	}
 
-	void add
-		(Panel * panel,
-		UI::Align align,
-		bool fullsize = false,
-		bool fillspace = false);
+	void add(Panel* panel, UI::Align align, bool fullsize = false, bool fillspace = false);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const override {return true;}
+	bool is_snap_target() const override {
+		return true;
+	}
 
 	void set_min_desired_breadth(uint32_t min);
 
@@ -74,8 +75,8 @@ private:
 	void scrollbar_moved(int32_t);
 	void update_positions();
 
-	//don't resize beyond this size
-	int m_max_x, m_max_y;
+	// Don't resize beyond this size
+	int max_x_, max_y_;
 
 	struct Item {
 		enum Type {
@@ -87,7 +88,7 @@ private:
 
 		union {
 			struct {
-				Panel * panel;
+				Panel* panel;
 				UI::Align align;
 				bool fullsize;
 			} panel;
@@ -98,15 +99,14 @@ private:
 		int assigned_var_depth;
 	};
 
-	bool m_scrolling;
-	std::unique_ptr<Scrollbar> m_scrollbar;
-	uint32_t m_orientation;
-	uint32_t m_mindesiredbreadth;
-	uint32_t m_inner_spacing;
+	bool scrolling_;
+	std::unique_ptr<Scrollbar> scrollbar_;
+	uint32_t orientation_;
+	uint32_t mindesiredbreadth_;
+	uint32_t inner_spacing_;
 
-	std::vector<Item> m_items;
+	std::vector<Item> items_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_BOX_H

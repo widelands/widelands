@@ -32,15 +32,15 @@ class InteractivePlayer;
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry &);
+	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
 	void think() override;
 
 private:
-	InteractivePlayer & iplayer() const;
-	void                 selected(uint32_t);
+	InteractivePlayer& iplayer() const;
+	void selected(uint32_t);
 
 	using ListType = UI::Listselect<const Widelands::Objective&>;
-	ListType              list;
+	ListType list;
 	UI::MultilineTextarea objectivetext;
 };
 

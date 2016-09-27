@@ -20,10 +20,10 @@
 #ifndef WL_UI_FSMENU_SINGLEPLAYER_H
 #define WL_UI_FSMENU_SINGLEPLAYER_H
 
-#include "ui_fsmenu/main_menu.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/main_menu.h"
 
 /**
  * Fullscreen Menu for SinglePlayer.
@@ -38,11 +38,11 @@ protected:
 
 private:
 	UI::Textarea title;
-	UI::Box      vbox;
-	UI::Button   new_game;
-	UI::Button   campaign;
-	UI::Button   load_game;
-	UI::Button   back;
+	UI::Box vbox;
+	UI::Button new_game;
+	UI::Button campaign;
+	UI::Button load_game;
+	UI::Button back;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_SINGLEPLAYER_H

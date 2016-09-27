@@ -28,43 +28,42 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
-void GamePlayerAiPersistentPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader *)
-{
+void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
-		const Map   &       map        = game.map();
+		const Map& map = game.map();
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		FileRead fr;
 		fr.open(fs, "binary/player_ai");
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			iterate_players_existing(p, nr_players, game, player)
-				try {
-					player->ai_data.initialized = fr.unsigned_8();
-					player->ai_data.colony_scan_area = fr.unsigned_32();
-					player->ai_data.trees_around_cutters = fr.unsigned_32();
-					player->ai_data.expedition_start_time = fr.unsigned_32();
-					player->ai_data.ships_utilization = fr.unsigned_16();
-					player->ai_data.no_more_expeditions = fr.unsigned_8();
-					player->ai_data.last_attacked_player = fr.signed_16();
-					player->ai_data.least_military_score = fr.unsigned_32();
-					player->ai_data.target_military_score = fr.unsigned_32();
-					player->ai_data.ai_personality_military_loneliness = fr.signed_16();
-					player->ai_data.ai_personality_attack_margin = fr.signed_32();
-					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
-					player->ai_data.ai_personality_wood_difference = fr.signed_32();
-					player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
+			iterate_players_existing(p, nr_players, game, player) try {
+				player->ai_data.initialized = fr.unsigned_8();
+				player->ai_data.colony_scan_area = fr.unsigned_32();
+				player->ai_data.trees_around_cutters = fr.unsigned_32();
+				player->ai_data.expedition_start_time = fr.unsigned_32();
+				player->ai_data.ships_utilization = fr.unsigned_16();
+				player->ai_data.no_more_expeditions = fr.unsigned_8();
+				player->ai_data.last_attacked_player = fr.signed_16();
+				player->ai_data.least_military_score = fr.unsigned_32();
+				player->ai_data.target_military_score = fr.unsigned_32();
+				player->ai_data.ai_personality_military_loneliness = fr.signed_16();
+				player->ai_data.ai_personality_attack_margin = fr.signed_32();
+				player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
+				player->ai_data.ai_personality_wood_difference = fr.signed_32();
+				player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
+				player->ai_data.last_soldier_trained = fr.unsigned_32();
 
-				} catch (const WException & e) {
-					throw GameDataError("player %u: %s", p, e.what());
-				}
+			} catch (const WException& e) {
+				throw GameDataError("player %u: %s", p, e.what());
+			}
 		} else {
-			throw UnhandledVersionError("GamePlayerAiPersistentPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "GamePlayerAiPersistentPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("ai data: %s", e.what());
 	}
 }
@@ -72,14 +71,12 @@ void GamePlayerAiPersistentPacket::read
 /*
  * Write Function
  */
-void GamePlayerAiPersistentPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
+void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const Map & map = game.map();
+	const Map& map = game.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		fw.unsigned_8(player->ai_data.initialized);
@@ -96,9 +93,9 @@ void GamePlayerAiPersistentPacket::write
 		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
 		fw.signed_32(player->ai_data.ai_personality_wood_difference);
 		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
+		fw.unsigned_32(player->ai_data.last_soldier_trained);
 	}
 
 	fw.write(fs, "binary/player_ai");
 }
-
 }

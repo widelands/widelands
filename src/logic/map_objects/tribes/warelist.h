@@ -35,37 +35,40 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {}
+	WareList() {
+	}
 	~WareList();
 
-	void clear() {m_wares.clear();} /// Clear the storage
-
-	using WareCount = uint32_t;
-	using WareCountVector = std::vector<WareCount>;
+	void clear() {
+		wares_.clear();
+	}  /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {return DescriptionIndex(m_wares.size());}
-
-	void add   (DescriptionIndex, WareCount = 1);
-	void add(const WareList &);
-	void remove(DescriptionIndex, WareCount = 1);
-	void remove(const WareList & wl);
-	WareCount stock(DescriptionIndex) const;
-
-	void set_nrwares(DescriptionIndex const i) {
-		assert(m_wares.empty());
-		m_wares.resize(i, 0);
+	DescriptionIndex get_nrwareids() const {
+		return DescriptionIndex(wares_.size());
 	}
 
-	bool operator== (const WareList &)    const;
-	bool operator!= (const WareList & wl) const {return !(*this == wl);}
+	void add(DescriptionIndex, Quantity = 1);
+	void add(const WareList&);
+	void remove(DescriptionIndex, Quantity = 1);
+	void remove(const WareList& wl);
+	Quantity stock(DescriptionIndex) const;
 
-	mutable boost::signals2::signal<void ()> changed;
+	void set_nrwares(DescriptionIndex const i) {
+		assert(wares_.empty());
+		wares_.resize(i, 0);
+	}
+
+	bool operator==(const WareList&) const;
+	bool operator!=(const WareList& wl) const {
+		return !(*this == wl);
+	}
+
+	mutable boost::signals2::signal<void()> changed;
 
 private:
-	WareCountVector m_wares;
+	std::vector<Quantity> wares_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H

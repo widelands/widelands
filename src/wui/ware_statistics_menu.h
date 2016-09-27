@@ -23,9 +23,9 @@
 #include <vector>
 
 #include "logic/widelands.h"
-#include "wui/plot_area.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/unique_window.h"
+#include "wui/plot_area.h"
 
 struct DifferentialPlotArea;
 class InteractivePlayer;
@@ -33,23 +33,21 @@ struct WuiPlotArea;
 
 struct WareStatisticsMenu : public UI::UniqueWindow {
 public:
-	WareStatisticsMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
+	WareStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	void set_time(int32_t);
 
 private:
-	InteractivePlayer * parent_;
-	WuiPlotArea       * plot_production_;
-	WuiPlotArea       * plot_consumption_;
-	WuiPlotArea       * plot_stock_;
-	DifferentialPlotArea       * plot_economy_;
-	std::vector<uint8_t> color_map_; //maps ware index to colors
+	InteractivePlayer* parent_;
+	WuiPlotArea* plot_production_;
+	WuiPlotArea* plot_consumption_;
+	WuiPlotArea* plot_stock_;
+	DifferentialPlotArea* plot_economy_;
+	std::vector<uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
 
 	void clicked_help();
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
-
-
 
 /**
  * A discrete slider with plot time steps preconfigured, automatic signal
@@ -57,25 +55,28 @@ private:
  *
  */
 struct WuiPlotGenericAreaSlider : public UI::DiscreteSlider {
-	WuiPlotGenericAreaSlider
-		(Panel * const parent,
-		 WuiPlotArea & plot_area,
-		 WareStatisticsMenu * signal_listener,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const Image* background_picture_id,
-		 const std::string & tooltip_text = std::string(),
-		 const uint32_t cursor_size = 20,
-		 const bool enabled = true)
-	: DiscreteSlider
-		(parent,
-		 x, y, w, h,
-		 plot_area.get_labels(),
-		 plot_area.get_time_id(),
-		 background_picture_id,
-		 tooltip_text,
-		 cursor_size,
-		 enabled)
-	{
+	WuiPlotGenericAreaSlider(Panel* const parent,
+	                         WuiPlotArea& plot_area,
+	                         WareStatisticsMenu* signal_listener,
+	                         const int32_t x,
+	                         const int32_t y,
+	                         const int w,
+	                         const int h,
+	                         const Image* background_picture_id,
+	                         const std::string& tooltip_text = std::string(),
+	                         const uint32_t cursor_size = 20,
+	                         const bool enabled = true)
+	   : DiscreteSlider(parent,
+	                    x,
+	                    y,
+	                    w,
+	                    h,
+	                    plot_area.get_labels(),
+	                    plot_area.get_time_id(),
+	                    background_picture_id,
+	                    tooltip_text,
+	                    cursor_size,
+	                    enabled) {
 		changedto.connect(boost::bind(&WareStatisticsMenu::set_time, signal_listener, _1));
 	}
 };

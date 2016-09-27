@@ -9,6 +9,10 @@
 include "scripting/formatting.lua"
 include "scripting/format_scenario.lua"
 
+-- We want the soldier here so we can get some actual stats.
+local tribe = wl.Game():get_tribe_description("barbarians")
+local soldier = wl.Game():get_worker_description(tribe.soldier)
+
 -- =============
 -- Texts below
 -- =============
@@ -29,17 +33,24 @@ abilities = {
    body = rt(
       p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
-      p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
+      -- TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
+      p((_[[If a Barbarian soldier is fully trained, he has level %1% health, level %2% attack, level %3% defense and level %4% evade. This is one fearsome warrior then! The individual abilities have the following meaning:]]):bformat(soldier.max_health_level, soldier.max_attack_level, soldier.max_defense_level, soldier.max_evade_level))
    ) ..
-   rt("image=tribes/workers/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
-   rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
+   rt("image=tribes/workers/barbarians/soldier/health_level0.png", h2(_"Health:")) ..
+   -- TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
+   rt(p((_[[The total life of a soldier. A Barbarian soldier starts with %1% health, and he will gain %2% health with each health level.]]):bformat(soldier.base_health, soldier.health_incr_per_level))) ..
    rt("image=tribes/workers/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
-   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
+   -- TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
+   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of health damage when he succeeds in hitting an enemy. For each attack level, he gains %2% damage points.]]):bformat(soldier.base_min_attack + (soldier.base_max_attack - soldier.base_min_attack) / 2, soldier.attack_incr_per_level)) ..
    -- The Atlanteans' image, because the Barbarian one has a white background
    rt("image=tribes/workers/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
-   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a Barbarian soldier, the Barbarian will lose 35·0.97 = 34 health.]])) ..
+   -- TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
+   -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
+   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by %1%%%. If an attacker with an attack value of 3500 points hits a Barbarian soldier, the Barbarian will lose 3500·%2%%% = %3% health.]]):bformat(soldier.base_defense, (100 - soldier.base_defense), 3500 * (100 - soldier.base_defense) / 100)) ..
    rt("image=tribes/workers/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
-   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
+   -- TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
+   -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
+   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a %1%%% chance to evade an attack, and this increases in steps of %2%%% for each level.]]):bformat(soldier.base_evade, soldier.evade_incr_per_level))
 }
 
 battlearena1 = {
@@ -143,7 +154,7 @@ dismantle = {
    title = _"Dismantle your sentry",
    body = rt(
       h1(_"Dismantling military buildings") ..
-      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle the building (buildings of an alien tribe cannot be dismantled, only be burned down).]]) ..
+      p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]]) ..
       p(_[[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..

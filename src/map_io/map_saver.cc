@@ -39,10 +39,10 @@
 #include "map_io/map_buildingdata_packet.h"
 #include "map_io/map_elemental_packet.h"
 #include "map_io/map_exploration_packet.h"
-#include "map_io/map_extradata_packet.h"
 #include "map_io/map_flag_packet.h"
 #include "map_io/map_flagdata_packet.h"
 #include "map_io/map_heights_packet.h"
+#include "map_io/map_images.h"
 #include "map_io/map_node_ownership_packet.h"
 #include "map_io/map_object_packet.h"
 #include "map_io/map_object_saver.h"
@@ -59,55 +59,75 @@
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
 
-
 namespace Widelands {
 
-MapSaver::MapSaver(FileSystem & fs, EditorGameBase & egbase)
-	: m_egbase(egbase), m_fs(fs), m_mos(nullptr)
-{}
+MapSaver::MapSaver(FileSystem& fs, EditorGameBase& egbase)
+   : egbase_(egbase), fs_(fs), mos_(nullptr) {
+}
 
-
-MapSaver::~MapSaver() {delete m_mos;}
-
+MapSaver::~MapSaver() {
+	delete mos_;
+}
 
 void MapSaver::save() {
-	ScopedTimer timer("MapSaver::save() took %ums");
+	std::string timer_message = "MapSaver::save() for '";
+	timer_message += egbase_.map().get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
 
-	delete m_mos;
-	m_mos = new MapObjectSaver();
+	delete mos_;
+	mos_ = new MapObjectSaver();
 
-	bool is_game = is_a(Game, &m_egbase);
+	bool is_game = is_a(Game, &egbase_);
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
-	m_fs.ensure_directory_exists("binary");
+	fs_.ensure_directory_exists("binary");
 
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
-	{MapElementalPacket               p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapElementalPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Names And Tribe Data ... ");
-	{MapPlayerNamesAndTribesPacket p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapPlayerNamesAndTribesPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	//  PRELOAD DATA END
 
 	log("Writing Port Spaces Data ... ");
-	{MapPortSpacesPacket             p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapPortSpacesPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Heights Data ... ");
-	{MapHeightsPacket                 p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapHeightsPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Terrain Data ... ");
-	{MapTerrainPacket                 p; p.write(m_fs, m_egbase);}
+	{
+		MapTerrainPacket p;
+		p.write(fs_, egbase_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Start Position Data ... ");
-	{MapPlayerPositionPacket         p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapPlayerPositionPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// We don't save these when saving a map in the editor.
@@ -116,127 +136,171 @@ void MapSaver::save() {
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 		log("Writing Player Message Data ... ");
-		{MapPlayersMessagesPacket        p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapPlayersMessagesPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Writing Resources Data ... ");
-	{MapResourcesPacket               p; p.write(m_fs, m_egbase);}
+	{
+		MapResourcesPacket p;
+		p.write(fs_, egbase_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
-	log("Writing Map Extra Data ... ");
-	{MapExtradataPacket               p; p.write(m_fs, m_egbase);}
-	log("took %ums\n ", timer.ms_since_last_query());
-
 	log("Writing Map Version ... ");
-	{MapVersionPacket               p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapVersionPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// We don't save these when saving a map in the editor.
 	if (is_game) {
 
-		const Map & map = m_egbase.map();
+		const Map& map = egbase_.map();
 
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		//  allowed worker types
 		log("Writing Allowed Worker Types Data ... ");
-		{MapAllowedWorkerTypesPacket p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapAllowedWorkerTypesPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		 //  allowed building types
-		iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-			for (DescriptionIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
+		//  allowed building types
+		iterate_players_existing_const(plnum, nr_players, egbase_, player) {
+			for (DescriptionIndex i = 0; i < egbase_.tribes().nrbuildings(); ++i) {
 				if (!player->is_building_type_allowed(i)) {
 					log("Writing Allowed Building Types Data ... ");
 					MapAllowedBuildingTypesPacket p;
-					p                                  .write(m_fs, m_egbase, *m_mos);
+					p.write(fs_, egbase_, *mos_);
 					log("took %ums\n ", timer.ms_since_last_query());
 					goto end_find_a_forbidden_building_type_loop;
 				}
 			}
-		} end_find_a_forbidden_building_type_loop:;
+		}
+	end_find_a_forbidden_building_type_loop:;
 
 		// !!!!!!!!!! NOTE
 		// This packet must be written before any building or road packet. So do not
 		// change this order unless you know what you are doing
 		// EXISTING PACKETS
 		log("Writing Flag Data ... ");
-		{MapFlagPacket                   p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapFlagPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Road Data ... ");
-		{MapRoadPacket                   p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapRoadPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Building Data ... ");
-		{MapBuildingPacket               p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapBuildingPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
-
 	}
 
 	// We do need to save this one in the editor!
 	log("Writing Map Objects ... ");
-	{MapObjectPacket                      p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapObjectPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {
 		// DATA PACKETS
-		if (m_mos->get_nr_flags()) {
+		if (mos_->get_nr_flags()) {
 			log("Writing Flagdata Data ... ");
-			{MapFlagdataPacket            p; p.write(m_fs, m_egbase, *m_mos);}
+			{
+				MapFlagdataPacket p;
+				p.write(fs_, egbase_, *mos_);
+			}
 			log("took %ums\n ", timer.ms_since_last_query());
 		}
 
-		if (m_mos->get_nr_roads()) {
+		if (mos_->get_nr_roads()) {
 			log("Writing Roaddata Data ... ");
-			{MapRoaddataPacket            p; p.write(m_fs, m_egbase, *m_mos);}
+			{
+				MapRoaddataPacket p;
+				p.write(fs_, egbase_, *mos_);
+			}
 			log("took %ums\n ", timer.ms_since_last_query());
 		}
 
-		if (m_mos->get_nr_buildings()) {
+		if (mos_->get_nr_buildings()) {
 			log("Writing Buildingdata Data ... ");
-			{MapBuildingdataPacket        p; p.write(m_fs, m_egbase, *m_mos);}
+			{
+				MapBuildingdataPacket p;
+				p.write(fs_, egbase_, *mos_);
+			}
 			log("took %ums\n ", timer.ms_since_last_query());
 		}
 
 		log("Writing Node Ownership Data ... ");
-		{MapNodeOwnershipPacket         p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapNodeOwnershipPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Exploration Data ... ");
-		{MapExplorationPacket            p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapExplorationPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Players Unseen Data ... ");
-		{MapPlayersViewPacket           p; p.write(m_fs, m_egbase, *m_mos);}
+		{
+			MapPlayersViewPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	// We also want to write these in the editor.
 	log("Writing Scripting Data ... ");
-	{MapScriptingPacket              p; p.write(m_fs, m_egbase, *m_mos);}
+	{
+		MapScriptingPacket p;
+		p.write(fs_, egbase_, *mos_);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{MapObjectivePacket              p; p.write(m_fs, m_egbase, *m_mos);}
+	write_objective_data(fs_, egbase_);
+	log("took %ums\n ", timer.ms_since_last_query());
+
+	log("Writing map images ... ");
+	save_map_images(&fs_, egbase_.map().filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {
-		#ifndef NDEBUG
-			m_mos->detect_unsaved_objects();
-		#endif
+#ifndef NDEBUG
+		mos_->detect_unsaved_objects();
+#endif
 	}
 
 	// Write minimap
 	{
 		std::unique_ptr<Texture> minimap(
-		   draw_minimap(m_egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		   draw_minimap(egbase_, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 		FileWrite fw;
 		save_to_png(minimap.get(), &fw, ColorType::RGBA);
-		fw.write(m_fs, "minimap.png");
+		fw.write(fs_, "minimap.png");
 	}
 }
-
 }

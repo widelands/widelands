@@ -29,7 +29,6 @@
 #include "graphic/align.h"
 #include "graphic/text/font_set.h"
 
-
 class FileSystem;
 class Image;
 class ImageCache;
@@ -42,7 +41,8 @@ namespace UI {
 class IFontHandler1 {
 public:
 	IFontHandler1() = default;
-	virtual ~IFontHandler1() {}
+	virtual ~IFontHandler1() {
+	}
 
 	/*
 	 * Renders the given text into an image. The image is cached and therefore
@@ -51,7 +51,7 @@ public:
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 
 	/// Returns the font handler's current FontSet
-	virtual UI::FontSet& fontset() const = 0;
+	virtual UI::FontSet const* fontset() const = 0;
 
 	/// Loads the FontSet for the currently active locale into the
 	/// font handler. This needs to be called after the language of the
@@ -62,10 +62,9 @@ public:
 };
 
 // Create a new FontHandler1.
-IFontHandler1 * create_fonthandler(ImageCache* image_cache);
+IFontHandler1* create_fonthandler(ImageCache* image_cache);
 
-extern IFontHandler1 * g_fh1;
-
+extern IFontHandler1* g_fh1;
 }
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

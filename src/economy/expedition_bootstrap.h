@@ -20,8 +20,8 @@
 #ifndef WL_ECONOMY_EXPEDITION_BOOTSTRAP_H
 #define WL_ECONOMY_EXPEDITION_BOOTSTRAP_H
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "base/macros.h"
 #include "economy/wares_queue.h"
@@ -57,9 +57,10 @@ public:
 	// Returns a list of workers and wares that are ready to go to an
 	// expedition. Ownership is transferred and the object is in an undefined
 	// state after this and must be deleted.
-	void get_waiting_workers_and_wares
-		(Game&, const TribeDescr&, std::vector<Worker*>* return_workers,
-		 std::vector<WareInstance*>* return_wares);
+	void get_waiting_workers_and_wares(Game&,
+	                                   const TribeDescr&,
+	                                   std::vector<Worker*>* return_workers,
+	                                   std::vector<WareInstance*>* return_wares);
 
 	// Returns the wares currently in stock.
 	std::vector<WaresQueue*> wares() const;
@@ -75,8 +76,7 @@ public:
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
 	// packet, and there in the warehouse data packet.
-	void load(Warehouse& warehouse, FileRead& fr,
-				 Game& game, MapObjectLoader& mol);
+	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol);
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:
@@ -85,7 +85,7 @@ private:
 	// Handles arriving workers and wares.
 	static void worker_callback(Game&, Request& r, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void ware_callback(Game& game, WaresQueue*, DescriptionIndex, void* const data);
-	void handle_worker_callback(Game &, Request &, Worker *);
+	void handle_worker_callback(Game&, Request&, Worker*);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
 	void is_ready(Game& game);
@@ -97,6 +97,15 @@ private:
 	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
 
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
+};
+
+struct NoteExpeditionCanceled {
+	CAN_BE_SENT_AS_NOTE(NoteId::NoteExpeditionCanceled)
+
+	ExpeditionBootstrap* bootstrap;
+
+	NoteExpeditionCanceled(ExpeditionBootstrap* const init_bootstrap) : bootstrap(init_bootstrap) {
+	}
 };
 
 }  // namespace Widelands

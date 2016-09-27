@@ -32,25 +32,25 @@
 
 namespace UI {
 
-FullscreenHelpWindow::FullscreenHelpWindow
-	(Panel * const parent,
-	 LuaInterface* lua,
-	 const std::string& script_path,
-	 const std::string & caption,
-	 uint32_t width, uint32_t height)
-	:
-	Window(parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft))
-{
+FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
+                                           LuaInterface* lua,
+                                           const std::string& script_path,
+                                           const std::string& caption,
+                                           uint32_t width,
+                                           uint32_t height)
+   : Window(
+        parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
+     textarea_(new MultilineTextarea(
+        this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft)) {
 	int margin = 5;
 
 	// Calculate sizes
-	width  = (width  == 0) ? g_gr->get_xres() * 3 / 5 : width;
+	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
-									 g_gr->images().get("images/ui_basic/but5.png"),
-									 _("OK"), "", true, false);
+	Button* btn =
+	   new Button(this, "ok", width / 3, 0, width / 3, 0,
+	              g_gr->images().get("images/ui_basic/but5.png"), _("OK"), "", true, false);
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
 	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
@@ -73,14 +73,12 @@ FullscreenHelpWindow::FullscreenHelpWindow
 	focus();
 }
 
-
 /**
  * Handle mouseclick.
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
-{
+bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
@@ -88,29 +86,25 @@ bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t
 	return true;
 }
 
-bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
-{
+bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t) {
 	return true;
 }
 
-bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code)
-{
+bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				clicked_ok();
-				return true;
-			default:
-				return true; // handled
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		default:
+			return true;  // handled
 		}
 	}
 	return true;
 }
 
-
-void FullscreenHelpWindow::clicked_ok()
-{
+void FullscreenHelpWindow::clicked_ok() {
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	else {
@@ -120,4 +114,4 @@ void FullscreenHelpWindow::clicked_ok()
 	}
 }
 
-} // namespace UI
+}  // namespace UI

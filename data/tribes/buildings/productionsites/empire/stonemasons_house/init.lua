@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      marble = 6
+      { name = "marble", amount = 6 }
    },
    outputs = {
       "marble_column"
@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
             "sleep=50000",
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "playFX=sound/stonecutting stonemason 192",
+            "play_sound=sound/stonecutting stonemason 192",
             "animate=working 32000",
             "produce=marble_column"
          }

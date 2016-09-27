@@ -28,10 +28,9 @@ namespace Widelands {
  * how many and which economies does a player have?
  */
 struct GamePlayerEconomiesPacket : public GameDataPacket {
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_ECONOMIES_PACKET_H

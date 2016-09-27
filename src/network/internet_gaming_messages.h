@@ -25,7 +25,7 @@
 struct InternetGamingMessages {
 public:
 	// Before calling this function the first time, keep in mind to first fill_map()
-	static const std::string & get_message(const std::string & code);
+	static const std::string& get_message(const std::string& code);
 
 	static void fill_map();
 };

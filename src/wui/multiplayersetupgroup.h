@@ -45,31 +45,30 @@ struct MultiPlayerPlayerGroup;
  *
  */
 struct MultiPlayerSetupGroup : public UI::Panel {
-	MultiPlayerSetupGroup
-		(UI::Panel * parent,
-		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 GameSettingsProvider * settings,
-		 uint32_t butw, uint32_t buth,
-		 const std::string & fname = UI::g_fh1->fontset().serif(),
-		 uint32_t fsize = UI_FONT_SIZE_SMALL);
+	MultiPlayerSetupGroup(UI::Panel* parent,
+	                      int32_t x,
+	                      int32_t y,
+	                      int32_t w,
+	                      int32_t h,
+	                      GameSettingsProvider* settings,
+	                      uint32_t butw,
+	                      uint32_t buth);
 	~MultiPlayerSetupGroup();
 
 	void refresh();
 
 private:
-	GameSettingsProvider   * const s;
+	GameSettingsProvider* const s;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
-	UI::Box                  clientbox, playerbox;
-	std::vector<UI::Textarea *> labels;
+	UI::Box clientbox, playerbox;
+	std::vector<UI::Textarea*> labels;
 
-	uint32_t    buth_, fsize_;
-	std::string fname_;
+	uint32_t buth_;
 
-	std::map<std::string, const Image* > tribepics_;
+	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
 };
-
 
 #endif  // end of include guard: WL_WUI_MULTIPLAYERSETUPGROUP_H
