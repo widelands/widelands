@@ -94,6 +94,10 @@ protected:
 	/// Removes all elements from the list.
 	void clear();
 
+	/// Automatically collapses the list if the mouse gets too far away from the dropdown, or if it
+	/// loses focus.
+	void think() override;
+
 private:
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
@@ -101,6 +105,7 @@ private:
 	void toggle_list();
 
 	uint32_t max_list_height_;
+	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button push_button_;
 	UI::Button display_button_;

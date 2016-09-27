@@ -48,6 +48,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                        ->height() +
                     2)),  // Height only to fit the button, so we can use this in Box layout.
      max_list_height_(h - 2 * get_h()),
+     mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
      push_button_(&button_box_,
                   "dropdown_select",
@@ -133,6 +134,18 @@ void BaseDropdown::clear() {
 	list_.clear();
 	list_.set_size(list_.get_w(), 0);
 	set_layout_toplevel(false);
+}
+
+void BaseDropdown::think() {
+	if (list_.is_visible()) {
+		// Autocollapse with a bit of toleracne for the mouse movement to make it less fiddly.
+		if (!has_focus() || (get_mouse_position().x + mouse_tolerance_) < 0 ||
+		    get_mouse_position().x > (get_w() + mouse_tolerance_) ||
+		    (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
+		    get_mouse_position().y > (get_h() + list_.get_h() + mouse_tolerance_)) {
+			toggle_list();
+		}
+	}
 }
 
 uint32_t BaseDropdown::size() const {
