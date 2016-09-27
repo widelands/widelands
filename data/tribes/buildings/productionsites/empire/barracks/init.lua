@@ -24,11 +24,11 @@ tribes:new_productionsite_type {
 	},
 
    animations = {
-		idle = { -- NOCOM make animations
+		idle = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		},
-		working = { -- NOCOM make animations
+		working = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		}
@@ -52,13 +52,13 @@ tribes:new_productionsite_type {
 	programs = {
 		work = {
 			-- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-			-- NOCOM this should cost us a carrier as well
+			-- TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
 			descname = _"recruiting soldier",
 			actions = {
 				"sleep=15000",
 				"return=skipped unless economy needs empire_soldier",
 				"consume=armor_helmet spear_wooden",
-				"animate=working 15000", -- NOCOM we have no working animation
+				"animate=working 15000",
 				"recruit=empire_soldier"
 			}
 		},
