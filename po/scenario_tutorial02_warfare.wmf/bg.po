@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:33+0000\n"
+"POT-Creation-Date: 2016-09-15 07:23+0000\n"
+"PO-Revision-Date: 2016-09-15 07:54+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgstr "Една от тези тренировъчни сгради е бойн
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "To see evade training in action, build a battle arena."
-msgstr "За да видите тренирането на ловкостта в действие, постройте бойна арена"
+msgstr "За да видите тренирането на ловкостта в действие, постройте бойна арена."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
 msgid ""
@@ -328,7 +328,7 @@ msgstr "Има още един начин, по който можете да у�
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr "Ако искате да отпратите конкретен войник, можете просто да щракнете върху него. Така той ще бъде заменен от друг"
+msgstr "Ако искате да отпратите конкретен войник, можете просто да щракнете върху него. Така той ще бъде заменен от друг."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid ""
@@ -369,9 +369,9 @@ msgstr "Демонтиране на военни сгради"
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr "Можете да намалите броя на войниците до един. Последният войник в сградата няма никога да я напусне (освен ако тя не бъде нападната). Ако искате да преместите войника, ще трябва да демонтирате сградата (сградите на другите племена не могат да бъдат демонтирани, а само изгорени)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr "Можете да намалите броя на войниците до един. Последният войник в сградата няма никога да я напусне (освен ако тя не бъде нападната). Ако искате да преместите войника, ще трябва да демонтирате или изгорите сградата."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""

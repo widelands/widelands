@@ -3,7 +3,10 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# xno, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
+# GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -13,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-15 06:00+0000\n"
-"PO-Revision-Date: 2016-06-20 14:22+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 19:45+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +33,7 @@ msgstr "Costruisci un'economia di base"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Inizia a raccogliere i materiali di base per la costruzione, e fortifica l'insediamento."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
@@ -54,7 +57,7 @@ msgstr "Costruisci una guardiola lungo il confine orientale"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Dovresti eventualmente costruire un edificio per produrre canne e una calchera."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -438,7 +441,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldreth ha ragione! Non abbiamo abbastanza cibo per sopravvivere a un lungo e freddo inverno. Dovremmo iniziare a costruire un pozzo,  una capanna del pescatore e una capanna del cacciatore. E se troviamo un luogo con abbastanza spazio, dovremmo costruire anche una fattoria e un forno! Uno dei nostri contadini sembra molto abile - è già riuscito a far crescere un raccolto in questo terreno gelido. "
+msgstr "Boldreth ha ragione! Non abbiamo abbastanza cibo per sopravvivere a un lungo e freddo inverno. Dovremmo iniziare a costruire un pozzo,  una capanna del pescatore e una capanna del cacciatore. E se troviamo un luogo con abbastanza spazio, dovremmo costruire anche una fattoria e un forno! Uno dei nostri contadini sembra molto abile - è già riuscito a far crescere un raccolto in questo terreno gelido."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
@@ -541,7 +544,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Finalmente! La fortezza è stata appena completata, così l'entrata al nostro insediamento dovrebbe essere sicuro per ora. Per il futuro si potrebbe pensare alla costruzione di alcune fortificazioni come fortini e torri presso i passaggi, ma per ora siamo in grado di prendere fiato."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
@@ -553,7 +556,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "La nostra economia mineraria sembra funzionare bene, questa è davvero una buona notizia! Comunque, ci sono ancora un sacco di uomini e donne in attesa di ottenere un lavoro, in modo che possano aiutare i nostri soldati a prepararsi per la guerra a venire. "
+msgstr "La nostra economia mineraria sembra funzionare bene, questa è davvero una buona notizia! Comunque, ci sono ancora un sacco di uomini e donne in attesa di ottenere un lavoro, in modo che possano aiutare i nostri soldati a prepararsi per la guerra a venire."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
@@ -585,7 +588,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Nulla è rimasto di quella bellezza che ricordo, restano solo le rovine della vecchia capitale. Sono addolorato, ma anche sollevato. Non ho mai sperato di vedere di nuovo la bellezza della vecchia Al'thunran - era solo pochi mesi fa, che mi sono chiesto se i miei piedi avessero percorso quelli luoghi ancora. Ora la vecchia città è di nuovo nelle mie mani, e io non esiterò a ricostruirla con tutta la forza che la mia gente possiede. Non vedo l'ora di vederlo di nuovo nella sua vecchia bellezza."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"

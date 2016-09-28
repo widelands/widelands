@@ -196,10 +196,10 @@ return {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            player:send_message(lost_game_over.title, lost_game_over.body)
+            player:send_message(lost_game_over.title, rt(lost_game_over.body))
          else
             lost_or_won = 1
-            player:send_message(won_game_over.title, won_game_over.body)
+            player:send_message(won_game_over.title, rt(won_game_over.body))
          end
          if (player.team == 0) then
             wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))

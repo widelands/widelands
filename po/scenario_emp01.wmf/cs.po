@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-26 10:48+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "Domek dřevorubce"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Postav domek dřevorubce na symbolu červeného domku, jižně od tvé provizorní základny."
+msgstr "Postav domek dřevorubce na symbolu červeného domku, jižně od tvé provizorní hlavní budovy."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -52,13 +53,13 @@ msgstr "Postav dva domky pro dřevorubce a pilu"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Dva domky dřevorubce a Pila"
+msgstr "Dva domky dřevorubce a pilu"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Postav další dva domky pro dřevorubce a pilu hned jak pro ně bude místo."
+msgstr "Postav další dva domky dřevorubce a pilu hned, jak pro ně bude místo."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
@@ -355,7 +356,7 @@ msgstr ""
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "Oprava naší lodi určitě zabere pár týdnů, a zdroje, které nyní získáme, se mohou stát základy silných a velkých budov na jiném území."
+msgstr "Oprava naší lodi určitě zabere pár týdnů a suroviny, které nyní získáme, mohou být základ pro silné a velké budovy na jiném území."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"

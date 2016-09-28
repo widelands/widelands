@@ -1001,7 +1001,7 @@ NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool con
 	if (cnt_unwalkable < 6)
 		caps |= MOVECAPS_WALK;
 
-	//  2b) If all neighbouring triangles are water, the node is swimable.
+	//  2b) If all neighbouring triangles are water, the node is swimmable.
 	if (cnt_water == 6)
 		caps |= MOVECAPS_SWIM;
 

@@ -398,7 +398,7 @@ teaching_about_messages = {
    heading = _"Introducing Messages",
    body = rt(
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
-      p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
+      p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
    rt("image=images/wui/messages/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
@@ -461,7 +461,7 @@ destroy_quarries_message = {
    ),
    h = 300,
    obj_name = "destroy_quarries",
-   obj_title = "Destroy the two quarries",
+   obj_title = _"Destroy the two quarries",
    obj_body = rt(
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..

@@ -40,7 +40,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      ration = 2
+      { name = "ration", amount = 2 }
    },
 
    programs = {

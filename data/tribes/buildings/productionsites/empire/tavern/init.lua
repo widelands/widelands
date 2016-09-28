@@ -42,9 +42,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 5,
-      empire_bread = 5,
-      meat = 5
+      { name = "fish", amount = 5 },
+      { name = "meat", amount = 5 },
+      { name = "empire_bread", amount = 5 }
    },
    outputs = {
       "ration"

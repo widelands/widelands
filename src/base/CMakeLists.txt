@@ -8,6 +8,10 @@ wl_library(base_log
   SRCS
     log.cc
     log.h
+  USES_SDL2
+  DEPENDS
+    base_macros
+    base_exceptions
 )
 
 wl_library(base_exceptions

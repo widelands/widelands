@@ -373,7 +373,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 	// Update the knowledge of the surrounding fields
 	FCoords position = get_position();
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		expedition_->swimable[dir - 1] =
+		expedition_->swimmable[dir - 1] =
 		   map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 	}
 
@@ -520,7 +520,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					// Make sure we know the location of the coast and use it as initial direction we
 					// come from
 					expedition_->scouting_direction = WALK_SE;
-					for (uint8_t secure = 0; exp_dir_swimable(expedition_->scouting_direction);
+					for (uint8_t secure = 0; exp_dir_swimmable(expedition_->scouting_direction);
 					     ++secure) {
 						assert(secure < 6);
 						expedition_->scouting_direction =
@@ -535,8 +535,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						send_message(game,
 						             /** TRANSLATORS: A ship has circumnavigated an island and is waiting
 						                for orders */
-						             pgettext("ship", "Waiting"),
-						             _("Island Circumnavigated"),
+						             pgettext("ship", "Waiting"), _("Island Circumnavigated"),
 						             _("An expedition ship sailed around its island without any events."),
 						             "images/wui/ship/ship_explore_island_cw.png");
 						ship_state_ = ShipStates::kExpeditionWaiting;
@@ -549,18 +548,18 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				}
 				// The ship is supposed to follow the coast as close as possible, therefore the check
 				// for
-				// a swimable field begins at the neighbour field of the direction we came from.
+				// a swimmable field begins at the neighbour field of the direction we came from.
 				expedition_->scouting_direction = get_backward_dir(expedition_->scouting_direction);
 				if (expedition_->island_explore_direction == IslandExploreDirection::kClockwise) {
 					do {
 						expedition_->scouting_direction =
 						   get_ccw_neighbour(expedition_->scouting_direction);
-					} while (!exp_dir_swimable(expedition_->scouting_direction));
+					} while (!exp_dir_swimmable(expedition_->scouting_direction));
 				} else {
 					do {
 						expedition_->scouting_direction =
 						   get_cw_neighbour(expedition_->scouting_direction);
-					} while (!exp_dir_swimable(expedition_->scouting_direction));
+					} while (!exp_dir_swimmable(expedition_->scouting_direction));
 				}
 				state.ivar1 = 1;
 				return start_task_move(
@@ -589,7 +588,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				return start_task_idle(game, descr().main_animation(), 1500);
 			}
 		} else {  // scouting towards a specific direction
-			if (exp_dir_swimable(expedition_->scouting_direction)) {
+			if (exp_dir_swimmable(expedition_->scouting_direction)) {
 				// the scouting direction is still free to move
 				state.ivar1 = 1;
 				start_task_move(game, expedition_->scouting_direction, descr().get_sail_anims(), false);
@@ -1097,7 +1096,7 @@ void Ship::Loader::load(FileRead& fr) {
 			expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
 		// Swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-			expedition_->swimable[i] = (fr.unsigned_8() == 1);
+			expedition_->swimmable[i] = (fr.unsigned_8() == 1);
 		// whether scouting or exploring
 		expedition_->island_exploration = fr.unsigned_8() == 1;
 		// current direction
@@ -1222,7 +1221,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-			fw.unsigned_8(expedition_->swimable[i] ? 1 : 0);
+			fw.unsigned_8(expedition_->swimmable[i] ? 1 : 0);
 		// whether scouting or exploring
 		fw.unsigned_8(expedition_->island_exploration ? 1 : 0);
 		// current direction

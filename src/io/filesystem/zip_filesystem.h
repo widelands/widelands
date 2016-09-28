@@ -110,6 +110,11 @@ private:
 		// E.g. "filename.zip"
 		std::string basename_;
 
+		// All files in our zipfile start with this prefix. We remember this to deal
+		// with legacy Widelands files that used to keep files in sub directories
+		// that had the same name than the containing zip file.
+		std::string common_prefix_;
+
 		// File handles for zipping and unzipping.
 		zipFile write_handle_;
 		unzFile read_handle_;

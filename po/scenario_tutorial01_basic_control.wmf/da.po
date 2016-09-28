@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-06 07:12+0000\n"
-"PO-Revision-Date: 2016-08-09 13:45+0000\n"
+"POT-Creation-Date: 2016-09-21 08:44+0000\n"
+"PO-Revision-Date: 2016-09-21 13:45+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +315,7 @@ msgstr "Der er tre måder at flytte din visning. Den første er at bruge piletas
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr "Klik på knappen »O.k.« og flyt så visningen via piletasterne."
+msgstr "Klik på knappen »O.k.« og flyt så visningen via piletasterne"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -372,7 +373,7 @@ msgstr "Brug minikortet"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr "Rigtig godt. Og nu lidt omkring minikortet. Du kan åbne det ved at klikke på "
+msgstr "Rigtig godt. Og nu lidt omkring minikortet. Du kan åbne det ved at klikke på"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid ""
@@ -405,7 +406,7 @@ msgstr "Åbn minikortet ved at bruge den tredje knap fra venstre i bunden af din
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr "Prøv lidt forskelligt med forskellige ekstra informationer (veje, flag etc.)."
+msgstr "Prøv lidt forskelligt med forskellige ekstra informationer (veje, flag etc.)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""
@@ -732,11 +733,11 @@ msgstr "Hej igen! Denne gang har jeg sendt dig en besked. Beskeder sendes til di
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Beskedvinduet kan aktiveres af knappen yderst til højre i bunden af skærmen. Denne knap vil ændre fremtoning, når nye beskeder er tilgængelige, men der er også en ringeklokke, hver gang du modtager en ny besked."
+msgstr "Beskedvinduet kan aktiveres af den 2. knap fra højre i bunden af skærmen. Denne knap vil også ændre fremtoning, når nye beskeder er tilgængelige, men der er også en ringeklokke, hver gang du modtager en ny besked."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -858,6 +859,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Nedrivning af stenbruddet: En byggearbejder vil gå fra hovedkvarteret for at rive stenbruddet ned et stykke ad gangen. Dermed genbruger du nogle af ressourcerne fra konstruktionen."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Ødelæg de to stenbrud"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

@@ -3,13 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-01 08:03+0000\n"
+"PO-Revision-Date: 2016-09-07 17:40+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Rakenna vahtitupa"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
@@ -29,7 +30,7 @@ msgstr "Vahtitupa"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Rakenna vahtitalo punaiselle talokuvakkeelle metsän itälaidalla ja oikealla puolella sinun väliaikaista päämajaa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
@@ -43,7 +44,7 @@ msgstr "Puunhakkaajan mökki"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "Rakenna puunhakkaajan mökki punaisella tasokuvakkeella, etelässä sinun väliaikaisesta päämajasta."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -51,7 +52,7 @@ msgstr "Rakenna kaksi puunhakkaajan mökkiä ja saha"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Kaksi puunhakkaajan mökkiä ja saha."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
@@ -83,7 +84,7 @@ msgstr "Kivilouhos"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "Rakenna kivilouhos etelään leikataksesi irti graniittia ja marmoria kivikosta."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -106,7 +107,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan, joka aluksi tekeytyi ystävällisiksi ja sitten hyökkäsi armeijani kimppuun yön pimeydessä."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -116,7 +117,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella rajavyöhykkeellä, joka koostuu kauniista ja ikivanhoista metsästä lähellä Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan ja heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita asepukujamme ja aseitamme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -127,7 +128,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Mutta viidentenä yönämme tällä alueella he hyökkäsivät kimppuumme ilman syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä oli heidän maataan ja että se pysyisi heillä kunnes aaveet veisivät viimeisenkin hänen väestään!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -136,7 +137,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "Kolme viikkoa myöhemmin palasin Fremiliin puhuakseni kuninkaalleni. Hän oli raivoissaan barbaarien teosta, mutta kielsi yhä meitä hyökkäämästä heimojen kimppuun. Hän uskoi armeijamme olevan liian heikon selvitäksemme sodasta barbaareja vastaan."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:93
@@ -145,7 +146,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "En vieläkään nähnyt keinoa pyyhkiä pois häpeääni taistelematta barbaareja vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden maailman ja uuden elämän jossakin etelässä. Nyt purjehdin Perl lahdella mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
@@ -158,7 +159,7 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "Näyttää siltä, että Perl lahteen purjehtiminen oli yksi suurimmista virheistämme. Luonto oli meitä vastaan ja ajoi meidät pimeään, villiin myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta korkeammalle kuin laivamme kansi - olisi itsemurha nousta kannelle."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:105
@@ -169,12 +170,12 @@ msgstr "Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enem
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
-msgstr ""
+msgstr "Selviytyjät"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Lopulta, Jumalat olivat kanssamme!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -182,7 +183,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "Rantauduimme tuntemattomalle rannikolle ja löysimme rauhallisen leposijan rannan palmupuiden alta. Mutta sitä saa mitä tilaa. Totuus on: kun heräsin tänä aamuna, en nähnyt muuta kuin hiekkaa ympärillämme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:120
@@ -190,15 +191,15 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "Näyttää siltä kuin olisimme rantautuneet koko tämän kaukaisen saaren ainoan palmunpuun alle. Pelkäämpä ettemme löydä apua, jota tarvitsemme laivan valmistelemiseen ajoissa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
-msgstr ""
+msgstr "Paha enne"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:127
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus katselee ympärilleen levottomasti..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -206,7 +207,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "Herrani, pelkäänpä ettemme ole turvassa täällä vieraalla maalla. Kuka tietää millaisia kauheita olentoja elääkään tämän metsässä takana, tuolla suunnaatomalla aavikolla? Mitä jos nuo olennot tulevatkin metsään ja odottavat hetkeä hyökätäkseen kimppuumme?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -214,7 +215,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "No, ehkäpä pelkoni on harhaa, mutta ei voi olla väärin pitää metsää hieman silmällä – jotta voisimme olla varmoja, että havaitsemme mahdolliset viholliset ennen kuin he näkevät meidät."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:135
@@ -222,7 +223,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Sinun tulisi tosiaankin rakentaa vahtitupa metsän itäiseen osaan. Sitten yksi miehistäni voi pitää sitä silmällä ja pitää meidät turvassa niiltä olennoilta."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Safe For Now"
@@ -230,14 +231,14 @@ msgstr "Hetkellisesti turvassa"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus puhuu helpottuneena..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "Herrani, näin että vahtituvan rakentamien on saatu päätökseen, joten lähetin yhden parhaista sotilaistani pitämään silmällä aavikkoa."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:148
@@ -254,19 +255,19 @@ msgstr "Nuori Amalea"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:154
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea hymyilee"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Tervehdys, Lutius! Tapasin juuri Saledusin ulkopuolella."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Hän kertoi minulle vahtituvasta. No, en usko meidän tarvitsevan lisää vahtitupia – sen sijaan, meidän kannattaisi keskittyä nyt muihin asioihin."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:162
@@ -274,11 +275,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "On täysin selvää, että tarvitsemme puuta laivamme korjaamiseksi. Joten kävelin eilen läpi metsän katsoakseni sopivan paikan puunhakkaajanmökille ja löysin yhden väliaikaisen päämajamme eteläpuolelta."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea suosittelee..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -287,7 +288,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "Sain viestin, että ensimmäinen puunhakkaajamme on tänään aloittanut työnteon. Ehkäpä olisi viisainta odottaa enenkuin hän saa hiukan raivattua tilaa kahdelle muulle puunhakkaajanmökille, jotta voisimme tuottaa noeammin kaadettuja puita."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:174
@@ -296,30 +297,30 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Mutta valitettavasti kaadetut puut ovat käyttökelvottomia laivamme korjaamiseksi – meidän täytyy sahata niistä lautoja, joita tarvitsemme jokaisessa laivassa ja myös kaikissa rakennuksissa. Joten meidän täytyy rakentaa saha – heti kun olemme saaneet riittävästi tilaa sille."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea tulee sisään..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Minulla on kaksi tärkeää asiaa kerrottavani... Ensimmäiseksi hyvät uutiset:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "Huomasi, että sahan rakentaminen on saatu päätökseen, joten voimme aloittaa puunhakkaajan kaatamien puiden jalostamisen laudoiksi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Mutta huono uutinen on, että meidän puunhakkaaja kaataa puita uskomattomalla nopeudella. Puita ei ole juuri yhtään enää jäljellä."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
@@ -327,12 +328,12 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Nämä puut tarjoavat suojan hiekkamyrskyiltä, jotka pyyhkäisevät aavikolta ja varjostavat kuumina päivinä ja ne ovat monien herttaisten eläimien koti. Meidän ei tulisi jättää tätä saarta täysin aavikoksi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:195
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "Lutius, ole hyvä ja etsi joku, joka hoitaisi uusien puiden istutuksen."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid "Thinking About the Future"
@@ -340,21 +341,21 @@ msgstr "Tulevaisuutta ajatellessa"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Saledus notes…"
-msgstr ""
+msgstr "Saledus muistuttaa:"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "Herra, ajattelin juuri kivikkoa, joka sijaitsee saaren etelärannikolla. Voisimme mahdollisesti leikata irti jonkin verran käyttökelpoista graniittia ja kaunista marmoria."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:207
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "Laivan valmisteluun menee aina muutama viikko ja nyt korjaamamme sadot saattaa olla vahvojen ja isojen rakennusten perusta toisessa maassa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
@@ -362,7 +363,7 @@ msgstr "Askel eteenpäin"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus näyttää innostuneelta..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -370,7 +371,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "Herra, tänään olemme askeleen lähempänä ensimmäisen linnamme rakentamista. Työt eteläisellä kivilouhoksella alkoivat tänään, ja pian meillä on graniittia ja kaunista marmoria."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219
@@ -424,15 +425,15 @@ msgstr "Saledus puhuu:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "Herra, olet tehnyt tästä niemimaasta hyvin turvallisen paikan. On aika jatkaa matkaa!"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uudet tavoitteet"
+msgstr[1] "Uudet tavoitteet"

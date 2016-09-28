@@ -41,8 +41,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      corn = 6,
-      blackroot = 6
+      { name = "corn", amount = 6 },
+      { name = "blackroot", amount = 6 }
    },
    outputs = {
       "cornmeal",

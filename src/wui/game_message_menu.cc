@@ -357,23 +357,41 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 				center_view();
 			return true;
 		case SDLK_0:
-			filter_messages(Widelands::Message::Type::kAllMessages);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kAllMessages);
+				return true;
+			}
+			return false;
 		case SDLK_1:
-			filter_messages(Widelands::Message::Type::kGeologists);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kGeologists);
+				return true;
+			}
+			return false;
 		case SDLK_2:
-			filter_messages(Widelands::Message::Type::kEconomy);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kEconomy);
+				return true;
+			}
+			return false;
 		case SDLK_3:
-			filter_messages(Widelands::Message::Type::kSeafaring);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kSeafaring);
+				return true;
+			}
+			return false;
 		case SDLK_4:
-			filter_messages(Widelands::Message::Type::kWarfare);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kWarfare);
+				return true;
+			}
+			return false;
 		case SDLK_5:
-			filter_messages(Widelands::Message::Type::kScenario);
-			return true;
+			if (code.mod & KMOD_ALT) {
+				filter_messages(Widelands::Message::Type::kScenario);
+				return true;
+			}
+			return false;
 		case SDLK_DELETE:
 			archive_or_restore();
 			return true;
@@ -494,10 +512,11 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		scenariobtn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
+
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 		                    /** TRANSLATORS: Tooltip in the messages window */
-		                    % _("Show all messages") % "0")
+		                    % _("Show all messages") % pgettext("hotkey", "Alt + 0"))
 		                      .str());
 	}
 }
@@ -508,23 +527,24 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show geologists' messages only") % "1")
+	                             % _("Show geologists' messages only") %
+	                             pgettext("hotkey", "Alt + 1"))
 	                               .str());
 	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show economy messages only") % "2")
+	                          % _("Show economy messages only") % pgettext("hotkey", "Alt + 2"))
 	                            .str());
 	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show seafaring messages only") % "3")
+	                            % _("Show seafaring messages only") % pgettext("hotkey", "Alt + 3"))
 	                              .str());
 	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show warfare messages only") % "4")
+	                          % _("Show warfare messages only") % pgettext("hotkey", "Alt + 4"))
 	                            .str());
 	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show scenario messages only") % "5")
+	                           % _("Show scenario messages only") % pgettext("hotkey", "Alt + 5"))
 	                             .str());
 }
 

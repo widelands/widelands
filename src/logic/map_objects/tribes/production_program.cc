@@ -942,10 +942,9 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	}
 	std::string ware_list = i18n::localize_list(ware_descnames, i18n::ConcatenateWith::AND);
 
-	const std::string
-	   result_string =
-	      /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
-	         wares. */
+	const std::string result_string =
+	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
+	      wares. */
 	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
 	ps.set_production_result(result_string);
 }

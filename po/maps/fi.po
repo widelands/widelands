@@ -2,15 +2,17 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
+"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"PO-Revision-Date: 2016-09-14 20:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -22,39 +24,39 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/elemental:9
 #: ../../data/campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Nemesiksestä Geneesiin"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Rantauduttuaan salaperäiselle saarelle, joka muistutti Atlantista, atlantislaiset tekivät kaikkensa tehdäkseen siitä heille uuden kodin."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Paikka Jota Kutsua Kodiksi"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "Tässä skenaariossa esitellään korkean tuottavuuden rakennuksia mukaan lukien kaivostoiminta."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Tämä Maa on Meidän Maa"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Tämä opetuspeli opettaa käsittelemään sota- ja harjoittelupaikkarakennuksia ja esittelee taistelemista."
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Toinen Keisarikunta"
 
 #: ../../data/campaigns/campaigns.conf:29
 msgid "Barbarians"
@@ -62,7 +64,7 @@ msgstr "Barbaarit"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Helppo. Tutustuminen Barbaareihin"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -79,11 +81,11 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra armeijalle, joka voisi peitota minkä tahansa viholisen, joka haluaisi tulla muinaisiin metsiin. Vaikka hänen mahtavan valtakauden lopussa Chat’Karuth valitsi vanhimman poikansa, Thornin, seuraavaksi heimon sotaherraksi – päätös jätti hänen muut poikaansa pettyneiksi. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä opasti häntä, Thorn jätti Al’thunran pääkaupungin, Thronen kodin metsän keskellä ja vetäyty joukkoineen kukkuloille, missä hän hautasi isänsä ruumiin. Siellä hän vannoi jumalan nimeen ja hänen isän henkeen, että hän tulisi palauttamaan järjestyksen. Sillä aikaa hähen veljensää ovat raivonneet sokeasti Thornia ja muutamia Al’thunran rajoja turvaamaan jätettyjä joukkoja vastaan, nuori sotaherra etsi tapaa koota jälleen hänen kunnianhimoiset veljensä ja pakottaa heimot marssimaan yhteisen lipun alla."
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Maanpaon kuukaudet"
 
 #: ../../data/campaigns/campaigns.conf:37
 msgid "Empire"
@@ -91,7 +93,7 @@ msgstr "Keisarikunta"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Helppo. Tutustuminen Keisarikuntaan"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""
@@ -105,11 +107,11 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Kuusi vuotta sitten, Lutius – nuori Keisarikunnan kenraali – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan vahvuisena, missä Barbaariheimot olivat ylittämässä Keisarikunnan maita. Hänen tehtävänä oli puolustaa Keisarikunnan maita. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien Barbaarilasten kanssa ja ajatteli rauhallisesta elämästä – rintarinnan muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijan tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä, hänen valmistautumatonta armeijaansa vastaan hyökkää 100 Barbaarin vahvuinen jalkaväki, täysin hajaantuneesti. Vain hän ja kourallinen hänen sotilaistaan selvytyi."
 
 #: ../../data/campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Pakeneminen Pelossa"
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
@@ -117,7 +119,7 @@ msgstr "Atlantislaiset"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Haastava. Tutustuminen Atlanstislaisiin"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -126,31 +128,31 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
 
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Malac’ Morin rannat"
 
 #: ../../data/campaigns/campaigns.conf:83
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Etuvartio Maanpakoon"
 
 #: ../../data/campaigns/campaigns.conf:88
 #: ../../data/campaigns/campaigns.conf:100
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Ei vielä toteutettu"
 
 #: ../../data/campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Ei kukaan"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Anteeksi, tätä karttaa ei ole vielä toteutettu."
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -159,7 +161,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Hävittyään tärkeän taistelun barbaareja vastaan, mikä johti suuren osan Keisarikunnan maiden menettämiseen,  Lutius jättää Fremilin aloittaakseen uuden elämän. Mutta hänen kohtalokseen, hänen laivansa joutuu kovaan myrskyyn, joka lähes tuhoaa sen. Vain hyvällä onnella hän pystyy rantautumaan vaurioituneella laivallaan asuttamattomalle rannalle ja pelastamaan hänen kansansa. Toistaiseksi."
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -167,55 +169,55 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr ""
+msgstr "Lopulta laiva korjattiin, joten Lutius ja hänen kansansa palasivat etsimään hyvää paikkaa uuden elämän aloittamiselle. Vain muutama pävä myöhemmin he rantautuvat vihreälle, Välimeren saarelle, joka näyttää paratiisilta. Ikionnellisena he ryhtyivät tutkimaan tätä uutta asuinpaikkaa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
-msgstr ""
+msgstr "Perusteiden hallinta"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "Tässä opetuspelissä sinulle opetaan kuinka navikoida Widelandsissa, rakentaa rakennuksia ja teitä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Sodankäynti"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "Tässä opetuspelissä sinulle opetaan sodankäynnin salaisuudet: kuinka luoda sotilaita, kouluttaa ja johtaa heitä taistelussa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Merenkäynti"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Talous"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "Tämä opetuspeli opettaa sinulle mitä asetuksia Widelands tarjoaa talouden säätämiseksi. Näitä suositellaan hieman kokeneemmille pelaajille."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Saaristomeri"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -226,14 +228,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Ruotsin ja Suomen välissä sijaitsee saaristomeri. Tämä erittäin kaunis alue ei ole maata eikä merta, vaan molempia. Muutaman sadan kilometrin sisällä on ainakin 50,000 saarta ja luotoa, joista monen eivät ole muutamaa eekkeriä suurempia. Ilmasto on melko leuto, ottaen huomioon phjoisen sijaintinsa; viljeltävää maata, marjoja on yltäkyllin sekä kalaa runsaasti. Tämän alueen pieni ihmispopulaatio ei koskaan ole kärsinyt nälästä. Etkö sinä sotaisa roisto voisi jättää tätä pientä paratiisia rauhaan?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Laajat maapalat ovat harvinaisia noilla pienillä saarilla. Priorisoi suurten rakennusten rakentaminen niille. Joskus tulet tarvitsemaan suuren sotarakennuksen laajentaaksesi seuraavalle saarelle asti. Tekoäly suoriutunee huonosti."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -245,14 +247,14 @@ msgstr "Kuka on suuren atollin oikea kuningas?"
 
 #: ../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../data/maps/Calvisson.wmf/elemental:10
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "On hautinto asettua tämän maaseudun rakoilevaan kauneuteen. Mutta tavat näden laajojen maa-alueen ympäröimiseksi ovat pitkät ja mutkittelevat, joten on helppoa päätyä erehdyksessä vieraiden heimojen alueille."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -272,7 +274,7 @@ msgstr "Komeettasaari"
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nenäkarhu"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:10
 msgid ""
@@ -289,7 +291,7 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr ""
+msgstr "Punaisen pelaajan lähellä on malmeja, mutta vain hiukan hedelmällistä maata. Keltaisella pelaajalla on runsaasti hyvää maata, mutta löytääkseen malmeja hänen täytyy siirtyä kauas lähtöpaikalta. Sininen pelaaja sijoittuu maan keskivaiheille – hänellä on jonkin verran maata ja se ei ole liian kaukana resursseista."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -299,30 +301,30 @@ msgstr "Kraateri"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr ""
+msgstr "Kauan sen jälkeen, kun meteori iskeytyi kahteen vuoreen, elämä kukoistaa kraaterissa. Nyt kaksi heimoa taistelevat sen rikkaista resursseista."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Taivaanrannan ylittäminen"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Miehitä laivasi ja purjehdi taivaanrantaan."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Aavikkoturnaus"
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:10
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "Neljä heimoa kamppailevat heidän lähimmän naapurin kanssa saavuttaakseen ensimmäisenä kultavuoren, joka lupaa uskomattomia rikkauksia. Mutta voiko viimeiset kaksi jakaa resurssit viisaasti?"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "Dolomiitit"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -331,7 +333,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Alppien jalokivi, Dolomittien vuorijono on julistettu Maailmanperintökohteeksi sen koskemattoman luonnon vuoksi. Tämä kartta on rekonstruoitu alueesta niin-luotettavasti-kuin-mahdollista rajattuna Cortina d’Ampezzoon koillisessa ja Canazeihin lounaassa. Jos sinun täytyy ryhtyä kaksintaisteluun viholisesi kanssa kuolemaan asti, se on myös kaiken lisäksi kaunis paikka."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -339,7 +341,7 @@ msgid ""
 "vertical. Use the little building space that you have wisely. A fortress at "
 "the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
 " army. Use the terrain to your advantage."
-msgstr ""
+msgstr "Vuorilla on paljon tasaista maata. Valitettavasti suurin osa siitä on pystysuuntainsta. Käytä vähäinen rakennusmaasi viisaasti. Linnoituksen ohittamienn kapean vuoren suulla voi olla hyvin pelottava este vihollisen armeijalle. Käytä maaston muodot eduksesi."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -349,24 +351,24 @@ msgstr "Haltiametsät"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "Nämä henkeä salpaavan kauniita smaragdisaaret ovat houkutelleet monia heimoja yrityksiin ottaa ne haltuunsa."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
-msgstr ""
+msgstr "Toveruus"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "Laivat ovat sinun parhaimmat ystävät. Lähtöpaikat ovat samanlaisia, joten kartan pitäisi olla tasapuolinen."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "Tämä on melko tekninen kartta ja se sopii parhaiten kahdelle tai kolmelle pelaajalle. Hiiltä on vaikea löytää – harkitse sen tekemistä itse. Lähtöpaikan lähellä on kultaa – näetkö sen?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -382,7 +384,7 @@ msgstr "Nämä ovat kauniita suomalaisia maita, jotka ovat järviä, jokia, muin
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "Keltaisella pelaajalla on paljon helpompi aloituspaikka kuin kahdell muulla; tämä kartta on sopiva 1v2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -404,7 +406,7 @@ msgstr "Neljä linnaa"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "Heidä suunnattomat linnoituksensa ovat hyvin suojattuja, neljä vahvaa ja nälkäistä sotaherraa ovat saamassa päätökseen näiden maiden hallinnan..."
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -414,23 +416,23 @@ msgstr "Neljä vuorta"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "Jokainen heimo on ympäröity neljällä valtavalla vuorella. Kuka ensimmäisenä valloittaa ne ja valtaa resurssit omalle heimolleen?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: Vettä voi löytää jokien mukaan. II: Lumimies merkitsee ylimääräiset veden lähteet. III: Jokainen vuori sisältää vain yhden resurssin."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Täysikuu"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Joko se on viimeisin päivänseisaus tai kuuhun liittyvä sairaus, jokin liikuttaa näitä heimoja kohti heidän viimeistä koettelemusta."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -443,7 +445,7 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "Heimosi on asuttanut jo pitkään tätä kaunista ja syrjäistä jäätikköjärveä. Kukaan ei häirinnyt teitä ja resurssit ovat riittäneet koko heimollesi, mutta muutama kuukausi sitten toinen heimo tuli yli vuorten ja asettui aloilleen. Olet varma, että tilaa on vain yhdelle heimolle."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -451,20 +453,20 @@ msgstr "Kultainen niemimaa"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
+msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista..."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Jääsodat"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "Syksyä seuraa talvi. Jotkin asia jäätyvät, muttei sota."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Aloituspaikat ovat myötäpäivää"
 
 #: ../../data/maps/Impact.wmf/elemental:8
 msgid "Impact"
@@ -479,7 +481,7 @@ msgstr "Asteroidin törmäystä seuranneessa kovassa talvessa kolmea saarta yhdi
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Saaret sodassa"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
@@ -490,14 +492,14 @@ msgstr "Satojen vuosien ajan olemme eläneet sovussa naapurisaaren heimon kanssa
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Kuninkaat ja Kuningattaret"
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Vanhan tarun mukaan nämä seitsemän valtakuntaa, jotka ovat kukoistaneet ikuisuuden vauraudessa, tulevat jonakin päivänä sortumaan tuhoavaan sotaan. Onko viimeisin kavalluksenne ollut jo liikaa ja tuleeko ennustus toteutumaan?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -508,7 +510,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr ""
+msgstr "Tämä järvi, syvällä ikimetsissä, on kauan ollut tunnettu sen kauneudesta ja paikan rikkumattomasta rauhasta. Nyt sen koskemattomuus on uhattuna, kun kaksi heimoa on saapunut sen rannoille..."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
 msgid "Last Bastion"
@@ -516,7 +518,7 @@ msgstr "Viimeinen turvapaikka"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Toinen Barbaari"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -530,21 +532,21 @@ msgid ""
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live. Don’t forget to take "
 "care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Ailahtelevaiset jumalat eivät vastanneet rukouksiimme. Sen sijaan tuhatkertaisesti kuumempi aurinko kärvensi maata sulattaen jäätiköt ja hukuttaen ihmiset. Nyt, korkealla vuoristossa, viimeisellä maanpläntillä elää kaksi henkiinjäänyttä heimoa. Vaikka jumalat osoittivat armoa ja ilmasto viileni, veden pinta nousee yhä. Viimeiseen turvapaikkaan - korkeimmalle vuorenrinteelle, jossa kullan ja elintilan määrä riittävät vain yhdelle heimolle - johtaa vain kaksi vastakkaista polkua. Mutta muista olla varovainen - tämä viimeinen asuinala on myös kova ja pieni elinpaikka. Älä unohda pitää huolta puuvarannoistasi, sillä tulet tarvitsemaan niitä."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Viimeiset selviytyjät"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Neljä heimoa taistelee karun alueen hallinnasta. Resurssit ovat pirstoutuneet koko kartan alueelle."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Saarivalloitus"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
 msgid ""
@@ -552,18 +554,18 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "Erityinen turnaus Atlantislaisessa kulttuurissa on niin sanottu 'Saarivalloitus', jossa kaksi tai useampi ryhmä yrittää saavuttaa saaren keskustan niin nopeasti kuin mahdollista ja pystyttääkseen ensimmäisenä linnan keskusvuoren päälle."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Salakuljettajat"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Sinun hyvin vakiintuneet salakuljetusreittisi vilkastuvat yllättäin: kaksi muuta heimoa ovat ilmestyneet apajille ja kilpailu on nyt alkanut olemaan kovaa. Mikä ryhmä tulee olemaan ensimmäinen, joka salakuljettaa tietyn määrän varusteita?"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
@@ -573,7 +575,7 @@ msgstr "Mystinen sokkelo"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr ""
+msgstr "Ilmassa on kaksi iso kysymystä: Kuka loi tämän uskomattoman suuren labyrintin ja mitä sen sisältä voikaan löytyä?"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -586,11 +588,11 @@ msgid ""
 "as a sign of your superiority! Hint: In the centre is only space for one "
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
-msgstr ""
+msgstr "VAin pieni kukkula keskellä karttaa yhdistää nämä neljä kilpailevaa heimoa. Johda armeijasi suoraan tuolle kukkulalle ja rakenna jättiläsmäinen tukikohta merkiksi ylivoimaisuudestasi! Vihje: Keskellä on tilaa vain yhdelle tukikohdalle. Vettä voi löytyä mistä tahansa, joten geologin lähettämiselle ei ole tarvetta."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
-msgstr ""
+msgstr "Jokilöytöretkeilijät"
 
 #: ../../data/maps/River_Explorers.wmf/elemental:10
 msgid ""
@@ -599,7 +601,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr ""
+msgstr "Jokaisella pelaajalla on eri päämäärät laajentamisessa ja siihen pääsemiseksi on aina enemmän kuin yksi tapa. Vaikka teköäly voidaan täällä voittaa tekemättä yhtään laivaa, pelaajia neuvotaan ensisijassa tekemään satamia ja telakoita – odotukset ovat universaalisti hyödyllisiä ja ovat useimmiten nopein tie kultapinnoitteisiin."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -621,7 +623,7 @@ msgid ""
 "human ever ventured to set a foot on it. But now that a tribe had finally "
 "been barefaced enough to settle on the coast of that island, a lot of others"
 " followed in its wake."
-msgstr ""
+msgstr "Satoja vuosia tätä saarta pidettiin Jumalien pyhättönä. Yksikään ihminen ei koskaan rohjennut astua jalallaa sille. Mutta nyt tuolla heimolla on viimeinkin ollut riittävästi rohkeutta tuon saaren rannikon asuttamiseksi, moni muu on seurannut sen perässä."
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
@@ -642,7 +644,7 @@ msgstr "Suomunkit"
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr ""
+msgstr "Sanotaan että vanhan sodan munkit elävät tasaisilla vanhoilla soilla, ne ovat avain koko saaren hallintaan."
 
 #: ../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -675,7 +677,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
+msgstr "Jotkut sanovat kaukaisen pohjoisen läpitunkemattomien maiden säikäyttäneen pois jopa kaikkein rohkeimmat uudisraivaajat ja urhollisimmat soturit. Suuret ja vanhat metsät, täynnä suuria ja petomaisia riistaeläimiä, ylipääsemättömiä soita ja kukkuloita kätkettyin salaisuuksin. Ne harvat, jotka olivat selviytyneet sieltä takaisin, mainitsivat hämmästyttävän hienosti kaiverruksilla ja majesteettisien vuorijonojen kullalla koristellut rakennelmat, jossain keskellä erämaata. Kymmeniä vuosia myöhemmin jäljellä on jäänyt vain joitakin hauraita sammalien ja puiden peittämiä raunioita noista hyvistä vanhoista ajoista. Niiden muodot antavat vain viitteitä muinaisten rakennelmien käsityöläisten taidoista. Kukaan ei tiedä miksi (he) katosivat. Kukaan ei tiedä miksi. Ihmiset sanovat ettei nykyään kukaan ole estämässä pääryä tuohon vaurauteen. Mutta sillä matkalla, monet tulevat kuolemaan susien raateluihin, hukkumaan kosteikkoihin.. tai päätyvät vihamielisien heimojen saartamiksi."
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -701,19 +703,19 @@ msgstr "Jälleen outo jumalten asettama koetus. Päästäksesi toiselle puolelle
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "Niili"
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "Joki on aina tarjonnut ruokaa ja kulkuyhteyksiä. Tällä kertaa kahdeksan valtakuntaa tulee taistelemaan tämän maan hallinnasta."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Käytä jokea viisaasti. Vastustajasi tulevat tekemään myös niin. Tulet löytämään tärkeän malmiresurssit syvältä autiomaasta."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -724,7 +726,7 @@ msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr ""
+msgstr "Näiden kolmen keitaan ympärillä on jotain mystistä. Kukaan ei ole vielä niitä löytänyt. Ehkä sinä olet ensimmäinen, mutta ole varuillasi, koska on toisiakin etsijöitä."
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
@@ -734,7 +736,7 @@ msgstr "Tie vuorten läpi"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
+msgstr "Tälle vuoristoiselle alueelle on asettunut kaksi prinsessaa. He ovat juuri nyt laajentamassa territoriaan, tietämättöminä siitä, etteivät he ole yksin."
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -747,7 +749,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "Toinen suojasää on asettumassa. Kolme heimoa ovat suojautuneet ankaralta talvelta majesteetillisien vuorten lomaan. Päivänseisauksen aikaan he kuuntelivat oraakkelia ja ryhtyivät sotaan. Ainoa selviytynyt uhraa vihollisen aarteet muinaisella alttarilla, rakentaa sinne suuremmoiseen linnaan ja ansaitsee Jumalien hyvän tahdon ja kunnioituksen."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
@@ -757,11 +759,11 @@ msgstr "Kolme soturia"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr ""
+msgstr "Suunnattomat vuoret jakavat tämän maan kolmeen hedelmälliseen laaksoon. Mutta polku yhdistää laaksot toisiinsa ja siksi taistelu näyttää väistämättömältä."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "Vettä voi löytää saarien ympäriltä."
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -778,11 +780,11 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr ""
+msgstr "Neljä Craw Saarien mahtavaa satamaa ovat käyneet tavarakauppaa toistensa kanssa ikuisuuksia. Heistä kaikki tarvitsevat resursseja, joita he eivät pysty omalla alueellaan itse tuottamaan ja vaihtokauppana tarjoavat muita resursseja, joita muut eivät pysty tuottamaan. Perustuen tähän kaupankäyntiin, näiden neljän sataman välillä oli hyvin ystävällismieliset kauppasuhteet ja ihmiset elivät onnellisina Craw Saarilla – kunnes aivan äskettäin, kaksi satamista yhdistyivät muodostaen yhteisen kauppaliiton, mikä pakotti myös kahden muun muodostamaan liiton. Lopulta, oli vain ajan kysymys milloin ensimmäiset taistelut rikkoisivat näiden satamien niin pitkään kestäneen rauhallisen elinolon."
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tulen kolminaisuus"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -790,11 +792,11 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
+msgstr "Kolmen suurimman tulivuoren läheisyydessä, kuusi viehättävää saarta kutsuvat uudisasukkaita aloittamaan uuden elämän. Aavikot ja nopeasti kasvavat metsät odottavat löytämistään. Mutta vain tulemalla merivoimien suurvallaksi heimosi kykenee hankkimaan riittävästi resursseja vastustajan hoitamiseksi."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Kaksoislaguuni"
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
 msgid ""
@@ -803,13 +805,13 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "Kun tuuli yltyi ja ensimmäiset dyynit muodostuivat näille hyljätyille kaksoislaguunille, kukaan ei voinut olettaa, että kaksi heimoa, jotka epätoivoisesti etsivät lisää resursseja loputtomien sotien tueksi, tulisi päätymään samanaikaisesti tälle unohdetulle paikalle ja samasta hyvin tunnetusta syystä."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Puolusta kuljetusväyliäsi tai käytä laivoja vastustajan ohittamiseksi. Sen jälkeen poista kaikki vihollistoiminta."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
@@ -831,7 +833,7 @@ msgstr "Moninpeliin sopiva taistelukartta pienellä, ympyränmuotoisella saarell
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Vulkaaninen Talvi"
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:10
 msgid ""
@@ -839,17 +841,17 @@ msgid ""
 "Suddenly, the sun seemed to be gone and the only light and heat sources left"
 " were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr ""
+msgstr "Kesän puolivälissä vulkaanisten purkauksien sarja toi tänne talven. Yllättäin aurinko näytti olevan poissa ja ainoita valon- ja lämmönlähteitä näytti olevan nuo, jotka vahvistivat tätä dramaattista muutosta. Mantereet, valtameret ja meret ovat nyt jäätyneet, vain vulkaaniset saaret näyttäisivät jääneen ainoiksi asumiskelpoisiksi maiksi."
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Suuri Maailma"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "Maailma ei riitä! Jos haluat voittaa, sinun täytyy lähettää joitakin laivoja. Mutta muista: vastustajasi ovat hyvin lähellä sinua."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
@@ -861,7 +863,7 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr ""
+msgstr "Näyttää siltä, että tämä maaginen laakso on ollut vinsenttien asuttama aikojen alusta. Kun heimosi tuli tänne, olit varma sen tarjoavan riittävästi tilaa rauhalliselle elämälle. Mutta voiko heimosi elää rauhassa naapurienne kanssa?"
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
@@ -870,4 +872,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "Musta pelaaja on saarrettu keskelle ilman resursseja, joten on kolme eri tapaa käyttää tätä karttaa: normaali 4 pelaajan kartta ilman mustaa pelaajaa, mustan tekoälyn kanssa lisää monimutkaisuutta muille pelaajille laajentumisessa tai voit pelata mustalla pelaajalla haasteena muita neljää vastaan (HYVIN vaikea)."

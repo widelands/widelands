@@ -2,26 +2,29 @@
 -- formatting.lua
 -- --------------
 --
--- Function to simplify and unique text formatting in scenarios and help files.
+-- Functions to simplify and unique text formatting in scenarios and help files.
 -- Most of these functions are simple wrapper functions that make working with
 -- widelands rich text formatting system more bearable.
 
 
 -- RST
--- .. function:: localize_list(items, listtype)
+-- .. function:: localize_list(items, listtype, former_textdomain)
 --
 --    Turns an array of string items into a localized string list with
 --    appropriate concatenation.
 --
---    e.g. localize_list({"foo", "bar", baz"}, "or") will return _"foo, bar or baz"
+--    e.g. localize_list({"foo", "bar", baz"}, "or", "widelands") will return
+--    _"foo, bar or baz"
 --
---    :arg items:    An array of strings
---    :arg listtype: The type of concatenation to use.
---                   Legal values are "&", "and", "or", and ";"
+--    :arg items:              An array of strings
+--    :arg listtype:           The type of concatenation to use.
+--                             Legal values are "&", "and", "or", and ";"
+--    :arg former_textdomain:  The textdomain to restore after running this function.
 --    :returns: The concatenated list string, using localized concatenation operators.
 --
 -- Same algorithm as in src/base/i18n
-function localize_list(items, listtype)
+function localize_list(items, listtype, former_textdomain)
+   set_textdomain("widelands")
    local result = ""
    for i, item in pairs(items) do
       if (i == 1) then
@@ -40,6 +43,7 @@ function localize_list(items, listtype)
          result = _"%1$s, %2$s":bformat(result, item)
       end
    end
+   set_textdomain(former_textdomain)
    return result
 end
 
@@ -236,4 +240,27 @@ end
 --    :returns: b(dt) .. " " .. dd .. "<br>"
 function dl(dt, dd)
    return b(dt) .. " " .. dd .. "<br>"
+end
+
+-- RST
+-- .. function:: text_line(t1, t2[, imgstr = nil])
+--
+--    Creates a line of h3 formatted text followed by normal text and an image.
+--
+--    :arg t1: text in h3 format.
+--    :arg t2: text in p format.
+--    :arg imgstr: image aligned right.
+--    :returns: header followed by normal text and image.
+--
+function text_line(t1, t2, imgstr)
+   if imgstr then
+      return "<rt text-align=left image=" .. imgstr ..
+         " image-align=right><p font-size=13 font-color=D1D1D1>" ..
+         t1 .. "</p><p line-spacing=3 font-size=12>" ..
+         t2 .. "<br></p><p font-size=8> <br></p></rt>"
+   else
+      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..
+         t1 .. "</p><p line-spacing=3 font-size=12>" ..
+         t2 .. "<br></p><p font-size=8> <br></p></rt>"
+   end
 end

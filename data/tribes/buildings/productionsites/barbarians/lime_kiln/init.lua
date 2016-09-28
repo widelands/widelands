@@ -41,9 +41,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      granite = 6,
-      water = 6,
-      coal = 3
+      { name = "granite", amount = 6 },
+      { name = "water", amount = 6 },
+      { name = "coal", amount = 3 }
    },
    outputs = {
       "grout"

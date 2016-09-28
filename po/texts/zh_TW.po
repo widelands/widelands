@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Arm Coon <armcoon@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-08-17 12:44+0000\n"
+"PO-Revision-Date: 2016-08-23 04:46+0000\n"
+"Last-Translator: Arm Coon <armcoon@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "開發者"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -26,7 +27,7 @@ msgstr ""
 
 #: ../../data/txts/LICENSE.lua:18
 msgid "License"
-msgstr ""
+msgstr "許可證"
 
 #: ../../data/txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
@@ -86,11 +87,11 @@ msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "説明"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
-msgstr ""
+msgstr "一款開放源碼的策略遊戲"
 
 #: ../../data/txts/README.lua:15
 msgid "Check out the Widelands project homepage:"
@@ -104,7 +105,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
-msgstr ""
+msgstr "狀態"
 
 #: ../../data/txts/README.lua:19
 msgid ""
@@ -117,7 +118,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands幫助"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
@@ -129,11 +130,11 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "報告問題"
 
 #: ../../data/txts/README.lua:29
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -185,11 +186,11 @@ msgstr ""
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
-msgstr ""
+msgstr "翻譯員"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands翻譯員"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -197,11 +198,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
-msgstr ""
+msgstr "野蛮人"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "故事模式"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftain"
@@ -221,11 +222,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Elders"
-msgstr ""
+msgstr "長老"
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "帝國"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
@@ -245,11 +246,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "圖形"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "主頁"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
@@ -265,7 +266,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "地圖和任務"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
@@ -273,7 +274,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
@@ -281,11 +282,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "聲音"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "音效"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
@@ -293,7 +294,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "翻譯"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
@@ -305,7 +306,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "綫上幫助"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -338,7 +339,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
-msgstr ""
+msgstr "回放"
 
 #: ../../data/txts/help/common_helptexts.lua:26
 msgid ""
@@ -389,16 +390,16 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "切換全屏 (如果系統支持)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "切換迷你地圖"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "多人遊戲設定"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
@@ -428,7 +429,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "玩家設定"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -471,7 +472,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "地圖細節"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""

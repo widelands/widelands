@@ -21,15 +21,16 @@ return {
    description = wc_desc,
    map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suitable maps
    func = function()
+      set_textdomain("win_conditions")
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
-      local function _getkey(p)
-         if p.team == 0 then
+      local function _getkey(plr)
+         if plr.team == 0 then
             -- Players without a team have team number 0. To distinguish between them, we use a special key.
-            return "player" .. p.number
+            return "player" .. plr.number
          else
-            return p.team
+            return plr.team
          end
       end
 
@@ -74,9 +75,9 @@ return {
          if player.team == 0 then
             player:send_message(msg.title, msg.body, {msg, field = f})
          else
-            for idx, p in ipairs(plrs) do
-               if p.team == player.team then
-                  p:send_message(msg.title, msg.body, {msg, field = f})
+            for idx, plr in ipairs(plrs) do
+               if plr.team == player.team then
+                  plr:send_message(msg.title, msg.body, {msg, field = f})
                end
             end
          end
@@ -111,12 +112,12 @@ return {
 
       -- All artifacts are found, the game is over.
       local artifacts_per_team = {}
-      for idx, p in ipairs(plrs) do
-         artifacts_per_team[_getkey(p)] = 0
+      for idx, plr in ipairs(plrs) do
+         artifacts_per_team[_getkey(plr)] = 0
       end
 
-      for idx, p in pairs(artifacts_owner) do
-         local key = _getkey(p)
+      for idx, plr in pairs(artifacts_owner) do
+         local key = _getkey(plr)
          artifacts_per_team[key] = artifacts_per_team[key] + 1
       end
 
@@ -132,29 +133,29 @@ return {
 
       local function _get_member_names(t)
          local s = ""
-         for idx, p in ipairs(t) do
+         for idx, plr in ipairs(t) do
             if s == "" then
-               s = p.name
+               s = plr.name
             else
                -- TRANSLATORS: This is used to seperate players’ names in a list, e.g. "Steve, Robert, David"
-               s = s .. _", " .. p.name
+               s = s .. _", " .. plr.name
             end
          end
          return s
       end
 
       local teams = {}
-      local msg = _"Overview:" .. "\n"
-      for idx, p in ipairs(plrs) do
-         if p.team == 0 then
-            local artifacts = (ngettext("%i artifact", "%i artifacts", artifacts_per_team[_getkey(p)])):format(artifacts_per_team[_getkey(p)])
+      local msg = h3(_"Overview:")
+      for idx, plr in ipairs(plrs) do
+         if plr.team == 0 then
+            local artifacts = (ngettext("%i artifact", "%i artifacts", artifacts_per_team[_getkey(plr)])):format(artifacts_per_team[_getkey(plr)])
             -- TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-            msg = msg .. "\n" .. (_"%1$s owns %2$s."):bformat(p.name, artifacts)
+            msg = msg .. p((_"%1$s owns %2$s."):bformat(plr.name, artifacts))
          else
-            if teams[p.team] then
-               teams[p.team][#teams[p.team]+1] = p
+            if teams[plr.team] then
+               teams[plr.team][#teams[plr.team]+1] = plr
             else
-               teams[p.team] = {p}
+               teams[plr.team] = {plr}
             end
          end
       end
@@ -162,19 +163,19 @@ return {
          local members = _get_member_names(t)
          local artifacts = (ngettext("%i artifact", "%i artifacts", artifacts_per_team[_getkey(t[1])])):format(artifacts_per_team[_getkey(t[1])])
          -- TRANSLATORS: %1$i is the team's number; %2$s is a list of team members (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-         msg = msg .. "\n" .. (_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts)
+         msg = msg .. p((_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts))
       end
 
 
-      for idx, p in ipairs(plrs) do
-         local key = _getkey(p)
+      for idx, plr in ipairs(plrs) do
+         local key = _getkey(plr)
          -- If two or more teams have the same amount of artifacts, they are all considered winners.
          if artifacts_per_team[key] == max_artifacts then
-            p:send_message(won_game_over.title, won_game_over.body .. "\n\n" .. msg)
-            wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=artifacts_per_team[key]}))
+            plr:send_message(won_game_over.title, rt(won_game_over.body .. msg))
+            wl.game.report_result(plr, 1, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          else
-            p:send_message(lost_game_over.title, lost_game_over.body .. "\n\n" .. msg)
-            wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=artifacts_per_team[key]}))
+            plr:send_message(lost_game_over.title, rt(lost_game_over.body .. msg))
+            wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          end
       end
    end,
