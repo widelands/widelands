@@ -382,8 +382,8 @@ void ManagementData::mutate(const uint32_t gametime) {
 
 	probability = get_military_number_at(13) / 8 + 15;
 
-	probability /= 5; //temporarily
-	probability += 1;
+	//probability /= 5; //temporarily
+	//probability += 1;
 	
 	assert(probability > 0);
 	
@@ -443,7 +443,7 @@ void ManagementData::review(const uint32_t gametime, PlayerNumber pn, const uint
 	assert(!pd->magic_numbers.empty());
 	scores[0] = scores[1];
 	scores[1] = scores[2];
-	scores[2] = land / 3 + static_cast<int32_t>(land_delta) / 3 + strength + static_cast<int32_t>(strength_delta) + mines * 10;
+	scores[2] = land / 3 + static_cast<int32_t>(land_delta) / 6 + static_cast<int32_t>(strength_delta);
 	assert (scores[2] > -10000 && scores[2] < 100000);
 	
 	printf (" %d %s: reviewing AI mngm. data, score: %4d ->%4d ->%4d (land:%3d, delta: %3d, strength: %3d, delta:%3d, mines: %3d)\n",
@@ -476,86 +476,86 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 	printf (" ... initialize starts %s\n", reinitializing?" * reinitializing *":"");
 
 
-    //AutoSCore_EForests_   2369
+    //AutoSCore_EForests_   2192
     const std::vector<int16_t> AI_initial_military_numbers_A =
-      {-65,  43, -70,  14, -71,  12, -55, -35,   8, -39,  //AutoContent_01_EForests_
-        12, -37, -47,  34, -100, -69,  28,  36, -68,   0,  //AutoContent_02_EForests_
-       -37,   0,   0,   0, -70,   0,   0,   0,  15, -38,  //AutoContent_03_EForests_
-        52,   0,  19, -34, -16, -71,  46, -10, -76,  19,  //AutoContent_04_EForests_
-       -22,   0, -17, -62, -53,  35,  43, -29, -22, -48,  //AutoContent_05_EForests_
-        14,  47,   0,   0,   0,   0,   0,  40,  37,   0,  //AutoContent_06_EForests_
-         0,  30,   0,   0, -24,   0,   0,   0,   0,   0 //AutoContent_07_EForests_
+      {-65,  43, -70, -46, -22,  15,  53,  48, -49, -10,  //AutoContent_01_EForests_
+        12, -94,  33,  34,  18, -79,  28,  36, -68, -13,  //AutoContent_02_EForests_
+       -27,  73,   0,   0, -53, -25,  -6,   0,  54,  24,  //AutoContent_03_EForests_
+        50,  58,  35,  25, -16, -61,  46,  32, -76,  19,  //AutoContent_04_EForests_
+        23,   0, -17, -28, -53,  35, -43, -29,  46,  75,  //AutoContent_05_EForests_
+         0,   9, -16,  72,  20,   8,  38,  40,   0, -41,  //AutoContent_06_EForests_
+       -29, -13,   0, -61, -56,   0,  42,  77, -27,   0 //AutoContent_07_EForests_
        }
 		;
 	
 	assert(magic_numbers_size == AI_initial_military_numbers_A.size());
 	
 	const std::vector<int8_t> input_weights_A =
-      { 46,  64, -45, -47,  48,  -5,  15,  54,   8, -24,  //AutoContent_08_EForests_
-        -2, -29,   0,  71,  49, -68, -30,  16, -33, -68,  //AutoContent_09_EForests_
-        50,  -8,  58,  35, -55,  92, -87,  -4, -77,  37,  //AutoContent_10_EForests_
-       -26,  -2,  52,  89,  40,  35,  -2,  12, -17,   8,  //AutoContent_11_EForests_
-         0,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //AutoContent_12_EForests_
-       -75,   2,  27,  49, -42, -38, -31, -11, -20, -43,  //AutoContent_13_EForests_
-         0,   0,  78,   0,   0,  -2,   0,   0,   0, -54,  //AutoContent_14_EForests_
-         0,   0,   0,  27,   0,   0,   0, -40, -13,   0 //AutoContent_15_EForests_
+      { 17,  64,  17, -48,  10,  -5,  15,  46, -84,  25,  //AutoContent_08_EForests_
+         0,  49, -68, -13,  -8, -49,   6,  16,  -8,  60,  //AutoContent_09_EForests_
+       -55, -43,  58,  -6,  51,  92, -87, -70,  27,  37,  //AutoContent_10_EForests_
+       -26,  -2,  52, -19,   7,  35,   6, -27,  37, -37,  //AutoContent_11_EForests_
+         0,  47,  42, -39, -86,  -6, -39,  13,  72, -50,  //AutoContent_12_EForests_
+       -75,  26, -72, -44,  18,  80,  -3,  56, -20, -43,  //AutoContent_13_EForests_
+       -46,   0,  78,   0,  62,  36,   0, -31,   0, -39,  //AutoContent_14_EForests_
+         0,   0,   0,   0, -34,   0,   0,   0,   0,   0 //AutoContent_15_EForests_
 	}
 			;
 	const std::vector<int8_t> input_func_A =
-      {  2,   1,   1,   1,   0,   1,   2,   1,   1,   0,  //AutoContent_16_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   2,   0,  //AutoContent_17_EForests_
-         1,   0,   0,   2,   1,   1,   1,   2,   1,   1,  //AutoContent_18_EForests_
-         1,   1,   1,   1,   0,   1,   1,   1,   2,   2,  //AutoContent_19_EForests_
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //AutoContent_20_EForests_
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   0,  //AutoContent_21_EForests_
-         0,   0,   0,   0,   0,   1,   0,   0,   0,   2,  //AutoContent_22_EForests_
-         0,   0,   0,   2,   0,   0,   0,   0,   1,   0 //AutoContent_23_EForests_
+      {  2,   0,   2,   0,   1,   1,   2,   0,   0,   1,  //AutoContent_16_EForests_
+         1,   1,   0,   0,   0,   2,   2,   0,   2,   1,  //AutoContent_17_EForests_
+         0,   2,   0,   1,   1,   1,   1,   2,   0,   1,  //AutoContent_18_EForests_
+         1,   1,   1,   2,   1,   1,   2,   1,   0,   1,  //AutoContent_19_EForests_
+         0,   2,   2,   0,   0,   1,   0,   0,   1,   1,  //AutoContent_20_EForests_
+         0,   2,   0,   2,   2,   0,   2,   2,   1,   0,  //AutoContent_21_EForests_
+         1,   0,   0,   0,   2,   0,   0,   1,   0,   1,  //AutoContent_22_EForests_
+         0,   0,   0,   0,   2,   0,   0,   0,   0,   0 //AutoContent_23_EForests_
 	}
 		;
 	assert(neuron_pool_size == input_func_A.size());
 	assert(neuron_pool_size == input_weights_A.size());
 
 	const std::vector<uint32_t> f_neurons_A =
-      {1166557215, 2685792577, 1074823182, 337674752, 486900226, 538182736, 854470, 2353049705, 1252133944, 899961111,  //AutoContent_24_EForests_
-        28816, 236102665, 2281767967, 175145022, 1141407760, 2315690262, 1174671874, 120779341, 1286951204, 2223048231 //AutoContent_25_EForests_
+      {3721402462, 760898373, 251737775, 2616280966, 396107664, 4667732, 1122688194, 3226544785, 139530090, 969016628,  //AutoContent_24_EForests_
+       3892322365, 2558593844, 1413371062, 3776780289, 1146820011, 853574379, 842221498, 3282145244, 2467047155, 2557118994 //AutoContent_25_EForests_
 	 };
 	assert(f_neuron_pool_size == f_neurons_A.size());
 
 		
-    //AutoSCore_CratEr___   1207
+    //AutoSCore_CratEr___   1209
 	const std::vector<int16_t> AI_initial_military_numbers_B =
-      {-65,  67, -70,  -1, -71,  12,  24,  48,  18,   0,  //AutoContent_01_CratEr___
-        -8,  24, -29,  34, -100, -69, -60,  36, -68,   0,  //AutoContent_02_CratEr___
-         0, -80,   0,   0, -74,   0, -33,   0,  75,   0,  //AutoContent_03_CratEr___
-        52,   0,  34, -34, -16, -71,  46, -68, -76, -38,  //AutoContent_04_CratEr___
-       -23,   0, -17, -62, -53,  35, -43, -51, -22, -12,  //AutoContent_05_CratEr___
-         0, -55,   0,   0, -29, -56,   0,   0,   0,   0,  //AutoContent_06_CratEr___
-       -26,   1,  16,   0,   0,   0,   0,  23,   0,   0 //AutoContent_07_CratEr___
+      { 31,  43, -70, -46, -22,  15,  24,  48,  51, -10,  //AutoContent_01_CratEr___
+        12,  25,   3,  34, -100,  36,  28,  36, -68,  44,  //AutoContent_02_CratEr___
+        68,  73,   0,   0, -53, -25,  -6,   0, -78,  24,  //AutoContent_03_CratEr___
+        58,   0, -73,  25, -16, -86,  46, -48, -76,  19,  //AutoContent_04_CratEr___
+       -23,   0, -17, -62, -53,  35, -43, -29, -22, -12,  //AutoContent_05_CratEr___
+         0,  10, -16,  72, -56,   8,  38, -60,  84, -48,  //AutoContent_06_CratEr___
+        49, -13,   0,  61,   0,   0,  75,  40,  41,   0 //AutoContent_07_CratEr___
 		}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_B.size());
 		
 	const std::vector<int8_t> input_weights_B =
-      { 34,  64, -45, -48,  10, -17,  15,  10,   8,  52,  //AutoContent_08_CratEr___
-        -2, -29,  24,   6,  49, -68, -39,  16,  67, -10,  //AutoContent_09_CratEr___
-       -17,  57, -66, -55, -11,  92, -87,  22,  10,  37,  //AutoContent_10_CratEr___
-        12,  -2,  52,  33,  45,  35,  -2, -27, -17,  45,  //AutoContent_11_CratEr___
-         0,  31,  83, -39, -86,  -6,   3,  35, -16,  50,  //AutoContent_12_CratEr___
-       -75, -92,  28,  49,  13, -38, -31,  56,  63, -43,  //AutoContent_13_CratEr___
-         0,  63,   0,   0,   0,   0, -16,   0,   0,   0,  //AutoContent_14_CratEr___
-         0, -34,   0, -14,   0,   0,   0,   0,   0,  61 //AutoContent_15_CratEr___
+      { 17,  64, -45, -48,  10, -17,  20,  32, -84, -70,  //AutoContent_08_CratEr___
+       -18,  49, -24, -13,  -8, -49,  11, -24, -31,  60,  //AutoContent_09_CratEr___
+        -2, -43,  58, -47, -11, -19,  38, -70,  27,  37,  //AutoContent_10_CratEr___
+       -26,   7,  74,  33,   7,  35,  49, -27,  37, -37,  //AutoContent_11_CratEr___
+         0,  47,  42,  47, -86,  -6, -13,  13, -16, -20,  //AutoContent_12_CratEr___
+       -75, -52, -72,  49,  18, -35, -46,  56, -66, -43,  //AutoContent_13_CratEr___
+       -46,   0,  78,   0,   0,  36,   0, -31,   0, -89,  //AutoContent_14_CratEr___
+         0,   0, -45,  -1,  12, -26,  -4,   0, -74,   0 //AutoContent_15_CratEr___
 }
 	      ;
 	
 	const std::vector<int8_t> input_func_B = 
-      {  0,   1,   1,   0,   1,   2,   2,   1,   1,   0,  //AutoContent_16_CratEr___
-         0,   0,   2,   2,   0,   0,   0,   0,   0,   2,  //AutoContent_17_CratEr___
-         0,   2,   2,   0,   1,   1,   1,   2,   1,   1,  //AutoContent_18_CratEr___
-         1,   1,   1,   0,   0,   1,   1,   1,   2,   1,  //AutoContent_19_CratEr___
-         0,   1,   0,   0,   0,   1,   1,   1,   1,   0,  //AutoContent_20_CratEr___
-         0,   1,   1,   1,   0,   1,   2,   2,   2,   0,  //AutoContent_21_CratEr___
-         0,   1,   0,   0,   0,   0,   1,   0,   0,   0,  //AutoContent_22_CratEr___
-         0,   1,   0,   0,   0,   0,   0,   0,   0,   0 //AutoContent_23_CratEr___
+      {  2,   0,   1,   0,   1,   2,   1,   0,   0,   1,  //AutoContent_16_CratEr___
+         0,   1,   2,   0,   0,   2,   2,   0,   0,   1,  //AutoContent_17_CratEr___
+         0,   2,   0,   2,   1,   2,   1,   2,   0,   1,  //AutoContent_18_CratEr___
+         1,   0,   1,   0,   1,   1,   1,   1,   0,   1,  //AutoContent_19_CratEr___
+         0,   2,   2,   0,   0,   1,   0,   0,   1,   1,  //AutoContent_20_CratEr___
+         0,   1,   0,   1,   2,   1,   1,   2,   0,   0,  //AutoContent_21_CratEr___
+         1,   0,   0,   0,   0,   0,   0,   1,   0,   2,  //AutoContent_22_CratEr___
+         0,   0,   1,   1,   0,   0,   0,   0,   2,   0 //AutoContent_23_CratEr___
 }
 		;
 		assert(neuron_pool_size == input_func_B.size());
@@ -563,21 +563,21 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 
       
 	const std::vector<uint32_t> f_neurons_B =
-      {2366978079, 2155872313, 33960461, 604975880, 1218003212, 21117270, 13126720, 4497415, 676454476, 834798948,  //AutoContent_24_CratEr___
-       673210429, 119581768, 348670979, 487755149, 2430869588, 3456697100, 1212743855, 158859277, 1310912, 980518345 //AutoContent_25_CratEr___
+      {2637568223, 862978637, 528489135, 2608284678, 362363285, 776223062, 1613022547, 1750271490, 705313192, 1915243203,  //AutoContent_24_CratEr___
+       724070526, 2223052590, 4131290350, 85641404, 1208161579, 879003179, 859019162, 3282406109, 462186209, 3630867474 //AutoContent_25_CratEr___
 	 };
 	assert(f_neuron_pool_size == f_neurons_B.size());
 
 
-    //AutoSCore_4Mount_   1676
+    //AutoSCore_4Mount_   1639
 	const std::vector<int16_t> AI_initial_military_numbers_C =
-      {-65,  43, -70, -48,  50,  12,  24,  48,  18, -39,  //AutoContent_01_4Mount_
-        12,  24,  -2,  34, -100, -69,  28,  36,  54,   0,  //AutoContent_02_4Mount_
-       -36, -80,   0, -23,  19,   0, -61,   0,  54,   0,  //AutoContent_03_4Mount_
-        52,   0,  34, -46, -16, -60,  46, -68, -76, -38,  //AutoContent_04_4Mount_
-        29,  12, -17, -62, -25,  35, -43,  46, -22,  75,  //AutoContent_05_4Mount_
-         0,  67,   0,  72,  34,   0,  49,   0,  -6,   0,  //AutoContent_06_4Mount_
-        -5,   0,   0,   0,   0,   0,  42,   0,   0,   0 //AutoContent_07_4Mount_
+      {-65,  43, -70, -46, -22,  15,  24,  48, -49, -10,  //AutoContent_01_4Mount_
+        12, -94,  33,  34,  18, -79,  28,  36, -68, -13,  //AutoContent_02_4Mount_
+       -27,  73,   0,   0, -53, -25,  -6,   0,  54,  24,  //AutoContent_03_4Mount_
+        50,  58,  35,  25, -16, -61,  46,  32, -76,  19,  //AutoContent_04_4Mount_
+        23,   0, -17, -28, -53,  35, -43, -29,  46,  75,  //AutoContent_05_4Mount_
+         0,   9, -16,  72,  20,   8,  38,  40,   0, -41,  //AutoContent_06_4Mount_
+       -29, -13,   0, -61, -56,   0,  42,  77, -27,   0 //AutoContent_07_4Mount_
        }
 
 		;
@@ -585,164 +585,164 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 		assert(magic_numbers_size == AI_initial_military_numbers_C.size());
 	
 	const std::vector<int8_t> input_weights_C =
-      { 52,  64, -45, -48,  19,  -5,  18,  67,   8, -24,  //AutoContent_08_4Mount_
-        -2, -29,  24, -13,  -8, -68,   6,  16,  67, -68,  //AutoContent_09_4Mount_
-       -29,  15, -66, -47, -11,  92, -87,  22, -12,  37,  //AutoContent_10_4Mount_
-        12,  -2,  52,  89,  40,  35,  -2, -27, -17,  45,  //AutoContent_11_4Mount_
-         0,   8,  83, -39, -86,  -6,   3,  13, -16,  50,  //AutoContent_12_4Mount_
-       -75, -12,  27,  49,  18,  23, -31,  56, -20,  85,  //AutoContent_13_4Mount_
-         0,  63,   0,   0,   0, -38,   0,  10,   0,   0,  //AutoContent_14_4Mount_
-         0, -34,   0,   0,   0, -11,   0,   0,   0,  61 //AutoContent_15_4Mount_
+      { 17,  64, -45, -48,  10,  -5,  15,  46, -84,  25,  //AutoContent_08_4Mount_
+         0,  49,  36, -13,  -8, -49,   6,  16,  -8,  60,  //AutoContent_09_4Mount_
+       -55, -43,  58, -47, -11,  92, -87, -70,  27,  37,  //AutoContent_10_4Mount_
+       -26,  -2,  52, -19,   7,  35,   6, -27,  37, -37,  //AutoContent_11_4Mount_
+         0,  47,  42, -39, -86,  -6, -13,  13,  72,  50,  //AutoContent_12_4Mount_
+       -75,  26, -72,  49,  18, -35,  -3,  56, -20, -43,  //AutoContent_13_4Mount_
+       -46,   0,  78,   0,   0,  36,   0, -31,   0, -39,  //AutoContent_14_4Mount_
+         0,   0,   0,   0, -34,   0,   0,   0,   0,   0 //AutoContent_15_4Mount_
        }
 			;
 	const std::vector<int8_t> input_func_C =
-      {  1,   1,   1,   0,   0,   1,   2,   1,   1,   0,  //AutoContent_16_4Mount_
-         0,   0,   2,   0,   0,   0,   2,   0,   0,   0,  //AutoContent_17_4Mount_
-         0,   2,   2,   2,   1,   1,   1,   2,   0,   1,  //AutoContent_18_4Mount_
-         1,   1,   1,   1,   0,   1,   1,   1,   2,   1,  //AutoContent_19_4Mount_
-         0,   2,   0,   0,   0,   1,   1,   0,   1,   0,  //AutoContent_20_4Mount_
-         0,   2,   2,   1,   2,   2,   2,   2,   1,   1,  //AutoContent_21_4Mount_
-         0,   1,   0,   0,   0,   1,   0,   0,   0,   0,  //AutoContent_22_4Mount_
-         0,   1,   0,   0,   0,   0,   0,   0,   0,   0 //AutoContent_23_4Mount_
+      {  2,   0,   1,   0,   1,   1,   2,   0,   0,   1,  //AutoContent_16_4Mount_
+         1,   1,   0,   0,   0,   2,   2,   0,   2,   1,  //AutoContent_17_4Mount_
+         0,   2,   0,   2,   1,   1,   1,   2,   0,   1,  //AutoContent_18_4Mount_
+         1,   1,   1,   2,   1,   1,   2,   1,   0,   1,  //AutoContent_19_4Mount_
+         0,   2,   2,   0,   0,   1,   0,   0,   1,   0,  //AutoContent_20_4Mount_
+         0,   2,   0,   1,   2,   1,   2,   2,   1,   0,  //AutoContent_21_4Mount_
+         1,   0,   0,   0,   0,   0,   0,   1,   0,   1,  //AutoContent_22_4Mount_
+         0,   0,   0,   0,   2,   0,   0,   0,   0,   0 //AutoContent_23_4Mount_
        }
 			;
 	assert(neuron_pool_size == input_func_C.size());
 	assert(neuron_pool_size == input_weights_C.size());
 	
 	const std::vector<uint32_t> f_neurons_C =
-      {1353979534, 541122767, 22781971, 2383415046, 33620378, 2219726867, 1212448878, 3225952907, 947939512, 1007887652,  //AutoContent_24_4Mount_
-       690024464, 154206770, 382363651, 2820409371, 2960402256, 3121218567, 34665817, 2687520271, 839028760, 839917571 //AutoContent_25_4Mount_
+      {3720354910, 1834509133, 254809775, 2616280710, 395583377, 4536660, 1122684098, 3360762513, 139530218, 969016820,  //AutoContent_24_4Mount_
+       1744838717, 2625702710, 1949979814, 3776714753, 1549473195, 820019883, 842745786, 1403031516, 319563507, 2557118994 //AutoContent_25_4Mount_
 	 };
 	assert(f_neuron_pool_size == f_neurons_C.size());
 
 		
-    //AutoSCore_Atol____   1102
+    //AutoSCore_CraBso___   774
 	const std::vector<int16_t> AI_initial_military_numbers_D =
-      {-65,  43, -70,  -1, -71,  12,  24,  48,  26, -39,  //AutoContent_01_Atol____
-        65,  -7, -29,  34, -100, -69,  -9,  36, -55,   0,  //AutoContent_02_Atol____
-         0,  84,   0,   0, -70,   0,   0,  37,   0,   0,  //AutoContent_03_Atol____
-        26,   0,  19, -34, -16,  34,  46, -68, -76, -38,  //AutoContent_04_Atol____
-       -22,   0, -17, -62, -53,  35, -43, -29, -22,  75,  //AutoContent_05_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //AutoContent_06_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //AutoContent_07_Atol____
+      {-65,  43, -70, -46, -22,  15,  24, -25, -49, -10,  //AutoContent_01_CraBso___
+        12, -94,  33,  34,  18, -79,  28,  36, -68, -13,  //AutoContent_02_CraBso___
+       -27,  73,   0,   0, -53,   0,  -6,   0,  54,  24,  //AutoContent_03_CraBso___
+        50,  58,  35,  25, -16,  42,  46, -16, -76,  19,  //AutoContent_04_CraBso___
+        23,   0, -17, -28, -53, -63, -43, -29,  46,  75,  //AutoContent_05_CraBso___
+         0,   9, -16,  72,  20,   8,  82,  40,   0, -41,  //AutoContent_06_CraBso___
+       -29, -13,   0, -61,   0,   0,  42,  77, -27,   0 //AutoContent_07_CraBso___
 	}
 		;
 	assert(magic_numbers_size == AI_initial_military_numbers_D.size());
 		
 	const std::vector<int8_t> input_weights_D =
-      { 46,  64, -45, -47,  48,  38,   1,  10,   8,  50,  //AutoContent_08_Atol____
-        -2, -29,   0,  71, -28,  37, -30,  16,  67, -10,  //AutoContent_09_Atol____
-         7,  -8,  58,  78, -11,  92, -87,  12,  38,  37,  //AutoContent_10_Atol____
-        12,  -2,  52,  89,  40,  35,  -2, -27, -74,  45,  //AutoContent_11_Atol____
-         0,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //AutoContent_12_Atol____
-       -75,  26,  27,  49, -42, -38, -31,   5, -20, -43,  //AutoContent_13_Atol____
-       -46,   0,   0,   0,  17,   0,   0,   0,   0,  78,  //AutoContent_14_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //AutoContent_15_Atol____
+      { 17,  64, -45, -48,  10,  -5,  15,  46, -84,  25,  //AutoContent_08_CraBso___
+         0,  49,  36, -13,  -8, -49,   6,  16,  -8,  60,  //AutoContent_09_CraBso___
+       -23, -43,  58, -47, -11,  92, -87,  22,  27,  37,  //AutoContent_10_CraBso___
+       -26,  -2,  52, -19, -69,  35,   6, -27,  37, -37,  //AutoContent_11_CraBso___
+         0,  47,  42, -39, -86,  61, -13,  13,  72,  50,  //AutoContent_12_CraBso___
+       -75, -52, -72,  49,  18, -35,   7,  56, -20, -43,  //AutoContent_13_CraBso___
+       -46,   0,   9,   0,   0,  36,   0, -31,   0, -39,  //AutoContent_14_CraBso___
+         0,   0,   0,   0, -34,   0,   0,   0,   0,   0 //AutoContent_15_CraBso___
 	}
 	      ;
 	
 	const std::vector<int8_t> input_func_D = 
-      {  2,   1,   1,   1,   0,   2,   1,   1,   1,   2,  //AutoContent_16_Atol____
-         0,   0,   0,   0,   0,   1,   0,   0,   0,   2,  //AutoContent_17_Atol____
-         2,   0,   0,   2,   1,   1,   1,   1,   1,   1,  //AutoContent_18_Atol____
-         1,   1,   1,   1,   0,   1,   1,   1,   1,   1,  //AutoContent_19_Atol____
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //AutoContent_20_Atol____
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   0,  //AutoContent_21_Atol____
-         1,   0,   0,   0,   1,   0,   0,   0,   0,   1,  //AutoContent_22_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //AutoContent_23_Atol____
+      {  2,   0,   1,   0,   1,   1,   2,   0,   0,   1,  //AutoContent_16_CraBso___
+         1,   1,   0,   0,   0,   2,   2,   0,   2,   1,  //AutoContent_17_CraBso___
+         0,   2,   0,   2,   1,   1,   1,   2,   0,   1,  //AutoContent_18_CraBso___
+         1,   1,   1,   2,   1,   1,   2,   1,   0,   1,  //AutoContent_19_CraBso___
+         0,   2,   2,   0,   0,   0,   0,   0,   1,   0,  //AutoContent_20_CraBso___
+         0,   1,   0,   1,   2,   1,   2,   2,   1,   0,  //AutoContent_21_CraBso___
+         1,   0,   1,   0,   0,   0,   0,   1,   0,   1,  //AutoContent_22_CraBso___
+         0,   0,   0,   0,   2,   0,   0,   0,   0,   0 //AutoContent_23_CraBso___
 	}
 		;
 	assert(neuron_pool_size == input_func_D.size());
 	assert(neuron_pool_size == input_weights_D.size());
 
 	const std::vector<uint32_t> f_neurons_D =
-      {68692252, 21635213, 537923588, 1644314632, 740294730, 268443664, 542654732, 2298487296, 270348, 574886789,  //AutoContent_24_Atol____
-        33849, 2248146955, 689697, 822094103, 68157456, 2198381152, 4259850, 805306439, 805830848, 2323776087 //AutoContent_25_Atol____
+      {3451919455, 1836852173, 185603757, 2616280582, 395591569, 4529492, 1189268674, 3360766608, 156323818, 969016820,  //AutoContent_24_CraBso___
+       2013274300, 2629897014, 825906342, 3775664129, 1548459307, 820021167, 574179258, 1403035612, 2605199213, 2557118994 //AutoContent_25_CraBso___
 	 };
 	assert(f_neuron_pool_size == f_neurons_D.size());
 
 
 //  Old winners section start ############
-    //for_EForests_   2265
+    //for_EForests_   2514
     const std::vector<int16_t> AI_initial_military_numbers_E =
-      {-65,  43, -70,  -1, -71,  12,  24,  48,  18, -39,  //_01_EForests_
-        12,  24, -43,  34, -100, -69,  28,  36, -68,   0,  //_02_EForests_
-         0, -80,   0,   0,   0,   0,   0,   0,   0,   0,  //_03_EForests_
-        52,   0,  19, -34, -16, -71,  46, -68, -76, -38,  //_04_EForests_
-       -22,   0, -17, -62, -53,  35, -43,  46, -22,  75,  //_05_EForests_
-         0, -55,   0,   0,  34,   0,   0,   0,   0,   0,  //_06_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_07_EForests_
+      {-65,  43, -70, -46, -22,  15,  24,  48,  51, -10,  //_01_EForests_
+        72,  74,  33,  34, -100, -79,  28,  36, -68,   0,  //_02_EForests_
+        12,  73,   0,   0, -53, -25,  -6,  65, -78,  24,  //_03_EForests_
+        58,   0, -73,  25, -16, -60,  46, -68, -76,  19,  //_04_EForests_
+       -23,   0, -17, -62, -53,  35, -43, -29, -22, -12,  //_05_EForests_
+         0,   9, -16,  72,  20, -56,  38, -60,   0, -41,  //_06_EForests_
+        49, -13,  16,  28,   0,   0,  75,  40,  41,   0 //_07_EForests_
        }
                 ;
 
         assert(magic_numbers_size == AI_initial_military_numbers_E.size());
 
         const std::vector<int8_t> input_weights_E =
-      { 53,  64, -45, -47,  10,  -5,  15,  10,   8, -24,  //_08_EForests_
-        -2, -29,  24,  71,  49, -68, -39,  16,  67, -68,  //_09_EForests_
-         7,  15, -66,  35, -11,  92, -87,  -4,  38,  37,  //_10_EForests_
-        12,  -2,  52,  89,  40,  35,  -2, -27, -17,  45,  //_11_EForests_
-         0,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //_12_EForests_
-       -75, -12,  27,  49, -42, -38, -31,  56, -20, -43,  //_13_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_14_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_15_EForests_
+      { 17,  64, -45, -48,  19,  -5,  20,  32, -84, -24,  //_08_EForests_
+       -18,  49,  36, -13,  -8, -49,  11,  16,  -8,  60,  //_09_EForests_
+       -29, -43,  58, -47, -11,  92, -87, -70,  27,  37,  //_10_EForests_
+       -26,  -2,  52,  33,   7,  35,   6, -27,  37, -37,  //_11_EForests_
+         0,  47,  42,  47, -86,  -6, -13,  13, -16,  50,  //_12_EForests_
+       -75,  26, -72,  49,  18, -38,  -3,  56, -20, -43,  //_13_EForests_
+       -46,   0,  78,   0,   0,  36, -16, -31,   0, -39,  //_14_EForests_
+         0,   0, -45,   0, -34,   0,  -4,   0, -74,   0 //_15_EForests_
         }
                         ;
         const std::vector<int8_t> input_func_E =
-      {  0,   1,   1,   1,   1,   1,   2,   1,   1,   0,  //_16_EForests_
-         0,   0,   2,   0,   0,   0,   0,   0,   0,   0,  //_17_EForests_
-         2,   2,   2,   2,   1,   1,   1,   2,   1,   1,  //_18_EForests_
-         1,   1,   1,   1,   0,   1,   1,   1,   2,   1,  //_19_EForests_
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //_20_EForests_
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   0,  //_21_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_22_EForests_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_23_EForests_
+      {  2,   0,   1,   0,   0,   1,   1,   0,   0,   0,  //_16_EForests_
+         0,   1,   0,   0,   0,   2,   2,   0,   2,   1,  //_17_EForests_
+         0,   2,   0,   2,   1,   1,   1,   2,   0,   1,  //_18_EForests_
+         1,   1,   1,   0,   1,   1,   2,   1,   0,   1,  //_19_EForests_
+         0,   2,   2,   0,   0,   1,   0,   0,   1,   0,  //_20_EForests_
+         0,   2,   0,   1,   2,   1,   2,   2,   1,   0,  //_21_EForests_
+         1,   0,   0,   0,   0,   0,   1,   1,   0,   1,  //_22_EForests_
+         0,   0,   1,   0,   2,   0,   0,   0,   2,   0 //_23_EForests_
         }
                 ;
         assert(neuron_pool_size == input_func_E.size());
         assert(neuron_pool_size == input_weights_E.size());
 
         const std::vector<uint32_t> f_neurons_E =
-      {1074003998, 1081417, 17833990, 67239936,  65802, 4331537, 12583020,   8195, 536895548, 603980836,  //_24_EForests_
-       136323129, 18874376, 2160591875, 135792647, 262224, 524868, 33641994, 24117263, 536875064, 301989895 //_25_EForests_
+      {2635532383, 2112882253, 252714671, 2616280710, 345579413, 4471124, 1087163586, 3897631232, 713095352, 1983400915,  //_24_EForests_
+       803336322, 2223049526, 344509475, 353537452, 1279464875, 820020905, 858998714, 209199631, 185345763, 2624555283 //_25_EForests_
          };
         assert(f_neuron_pool_size == f_neurons_E.size());
 
 
-    //for_CratEr___   1082
+    //for_CratEr___   906
         const std::vector<int16_t> AI_initial_military_numbers_F =
-      {-65,  43, -70,  -1, -71,  12,  24,  48,  26, -39,  //_01_CratEr___
-        65,  24, -29,  34, -100, -69,  -9,  36, -55,   0,  //_02_CratEr___
-         0,  84,   0,   0,   0,   0,   0,  37,   0,   0,  //_03_CratEr___
-        26,   0,  19,  47, -16,  34,  46, -68, -76, -38,  //_04_CratEr___
-       -22,   0, -17, -62, -53,  35, -43, -29, -22,  75,  //_05_CratEr___
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_06_CratEr___
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_07_CratEr___
+      {-65,  43, -70, -46, -82,  15,  24,  48, -49, -10,  //_01_CratEr___
+        12,  24,  33,  34,  18, -69,  28,  36, -68,   0,  //_02_CratEr___
+         0, -80,   0,   0, -53,   0,  -6,   0,  75,  24,  //_03_CratEr___
+        50,   0,  35,  25, -16, -61,  46, -68, -76,  19,  //_04_CratEr___
+         6,   0, -17, -28, -53,  35, -43, -51,  46,  75,  //_05_CratEr___
+         0,   9, -16,  72,  20,   8,  38,  40,   0,  33,  //_06_CratEr___
+       -29, -13,   0,  61,   0,   0,  42,  18, -27,   0 //_07_CratEr___
                 }
                 ;
         assert(magic_numbers_size == AI_initial_military_numbers_F.size());
 
         const std::vector<int8_t> input_weights_F =
-      {-15,  64, -45, -47,  48,  -5,  50,  10,   8, -24,  //_08_CratEr___
-        -2, -29,   0,  71, -28,  37, -30,  16,  67, -10,  //_09_CratEr___
-         7,  -8,  58,  78, -11,  92, -87,  12,  38,  37,  //_10_CratEr___
-        12,  -2,  52,  89,  40,  35,  -2, -27, -17,  45,  //_11_CratEr___
-         0,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //_12_CratEr___
-       -75,  26,  27,  49, -42, -38, -31,   5, -20, -43,  //_13_CratEr___
-         0,   0,   0,   0,   0,   0,   0,  68,   0,   0,  //_14_CratEr___
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_15_CratEr___
+      { 17,  64, -45, -48,  10, -17,  15,  10, -84,  25,  //_08_CratEr___
+         0,  49,  36,  54,  -8, -68,   6,  16, -50,  60,  //_09_CratEr___
+       -23,  57, -45, -47, -11,  92, -87,  22,  27,  37,  //_10_CratEr___
+       -26,   7,  52,  33, -69,  35,   6, -27,  58, -37,  //_11_CratEr___
+        45,  31,  42, -39, -86,  -6, -13,  13,  72,  50,  //_12_CratEr___
+       -75, -52, -72,  49,  13, -35,  -3,  56, -20, -43,  //_13_CratEr___
+       -46,   0,  78,   0,   0,   0,  53, -31,   0, -39,  //_14_CratEr___
+         0,   0,   0, -19, -34,   0,   0,   0,   0,  61 //_15_CratEr___
 }
               ;
 
         const std::vector<int8_t> input_func_F =
-      {  1,   1,   1,   1,   0,   1,   1,   1,   1,   0,  //_16_CratEr___
-         0,   0,   0,   0,   0,   1,   0,   0,   0,   2,  //_17_CratEr___
-         2,   0,   0,   2,   1,   1,   1,   1,   1,   1,  //_18_CratEr___
-         1,   1,   1,   1,   0,   1,   1,   1,   2,   1,  //_19_CratEr___
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //_20_CratEr___
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   0,  //_21_CratEr___
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_22_CratEr___
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_23_CratEr___
+      {  2,   1,   1,   0,   1,   2,   2,   1,   0,   1,  //_16_CratEr___
+         1,   1,   0,   2,   0,   0,   2,   0,   1,   1,  //_17_CratEr___
+         0,   2,   2,   2,   1,   1,   1,   2,   0,   1,  //_18_CratEr___
+         1,   0,   1,   0,   1,   1,   2,   1,   2,   1,  //_19_CratEr___
+         1,   1,   2,   0,   0,   1,   0,   0,   1,   0,  //_20_CratEr___
+         0,   1,   0,   1,   0,   1,   2,   2,   1,   0,  //_21_CratEr___
+         1,   0,   0,   0,   0,   0,   2,   1,   0,   1,  //_22_CratEr___
+         0,   0,   0,   2,   2,   0,   0,   0,   0,   2 //_23_CratEr___
 }
                 ;
                 assert(neuron_pool_size == input_func_F.size());
@@ -750,20 +750,20 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 
 
         const std::vector<uint32_t> f_neurons_F =
-      {67645724, 663685, 134222596, 1610743816, 69206026, 268443664, 1589516, 2164269057,     12, 574882693,  //_24_CratEr___
-        33849, 541065227, 696353, 822085655, 67371088, 2198372428, 4194314,  71939, 805830848, 2147615303 //_25_CratEr___
+      {3451919455, 1800955213, 185603758, 3675342574, 362553232, 3682122986, 694746419, 3360762001, 676449352, 969016806,  //_24_CratEr___
+       673214525, 2659273510, 4148057254, 2870745097, 1548426539, 4240029225, 926111130, 3550514652, 2605199209, 2558429234 //_25_CratEr___
          };
         assert(f_neuron_pool_size == f_neurons_F.size());
 
-    //for_4Mount_   1648
+    //for_4Mount_   1967
         const std::vector<int16_t> AI_initial_military_numbers_G =
-      {-65,  43, -70,  -1, -71,  12,  24,  48,  26, -39,  //_01_4Mount_
-        12,  24, -43,  34, -100, -69,  28,  36, -68,   0,  //_02_4Mount_
-         0,   0,   0,   0, -70,   0,   0,   0,   0,   0,  //_03_4Mount_
-        52,   0,  19, -34, -16, -71,  46, -68, -76,  53,  //_04_4Mount_
-       -22,   0, -17, -62, -53,  35, -46, -29, -22,  75,  //_05_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_06_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_07_4Mount_
+      {-65,   0, -70, -62, -82,  15,  24,  48,  51, -10,  //_01_4Mount_
+        12,  24,  33,  34, -100, -69, -60,  36,  40,   0,  //_02_4Mount_
+         0,  73,   0,   0, -53, -25,  -6,   0,  75,  24,  //_03_4Mount_
+        58,  58,  34,  25, -16, -60,  46, -68, -76,  19,  //_04_4Mount_
+       -23,   0, -17, -28,  35,  35, -43, -29,  46,  75,  //_05_4Mount_
+         0,   9, -16,  72,  20, -56,  38, -60,   0, -41,  //_06_4Mount_
+       -29, -13,  16,  28,   0,   0,  75,  40, -27,   0 //_07_4Mount_
        }
 
                 ;
@@ -771,88 +771,83 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
                 assert(magic_numbers_size == AI_initial_military_numbers_G.size());
 
         const std::vector<int8_t> input_weights_G =
-      { 46,  64, -45, -47,  48,  -5,   1,  10,   8, -24,  //_08_4Mount_
-        -2, -29,   0,  71,  49, -68, -30,  16,  67, -68,  //_09_4Mount_
-         7,  -8,  58,  35, -11,  92, -87,  -4,  38,  37,  //_10_4Mount_
-       -15,  -2,  52,  89,  40,  35,  -2, -27, -17,  32,  //_11_4Mount_
-         0,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //_12_4Mount_
-       -75, -12,  27,  49, -42, -38, -31, -11, -20, -43,  //_13_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_14_4Mount_
-         0,   0,   0,   0,   0,   0,   0, -40,   0,   0 //_15_4Mount_
+      { 17,  64, -45, -48,  19,  -5,  15,  32, -84, -24,  //_08_4Mount_
+         0,  49,  36, -13,  -8, -49,  11,  16, -50,  60,  //_09_4Mount_
+       -29, -43, -66, -47, -11,  92, -87, -70,  10,  37,  //_10_4Mount_
+       -26,  -2,  52,  33,   7,  35,   6, -27,  37, -37,  //_11_4Mount_
+        78,  47,  83,  25, -86,  -6, -13,  35, -16,  50,  //_12_4Mount_
+       -75,  26,  22,  49,  13, -35,  19,  56, -20, -43,  //_13_4Mount_
+         0,  63,  78,   0,   0,  36,   0, -31,   0, -39,  //_14_4Mount_
+         0,   0,   0,   0, -34,   0,  -4,   4,   0,  61 //_15_4Mount_
        }
                         ;
         const std::vector<int8_t> input_func_G =
-      {  2,   1,   1,   1,   0,   1,   1,   1,   1,   0,  //_16_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_17_4Mount_
-         2,   0,   0,   2,   1,   1,   1,   2,   1,   1,  //_18_4Mount_
-         1,   1,   1,   1,   0,   1,   1,   1,   2,   1,  //_19_4Mount_
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //_20_4Mount_
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   0,  //_21_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_22_4Mount_
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_23_4Mount_
+      {  2,   0,   1,   0,   0,   1,   2,   0,   0,   0,  //_16_4Mount_
+         1,   1,   0,   0,   0,   2,   2,   0,   1,   1,  //_17_4Mount_
+         0,   2,   2,   2,   1,   1,   1,   2,   1,   1,  //_18_4Mount_
+         1,   1,   1,   0,   1,   1,   2,   1,   0,   1,  //_19_4Mount_
+         0,   2,   0,   0,   0,   1,   0,   1,   1,   0,  //_20_4Mount_
+         0,   2,   0,   1,   0,   1,   0,   2,   1,   0,  //_21_4Mount_
+         0,   1,   0,   0,   0,   0,   0,   1,   0,   1,  //_22_4Mount_
+         0,   0,   0,   0,   2,   0,   0,   2,   0,   0 //_23_4Mount_
        }
                         ;
         assert(neuron_pool_size == input_func_G.size());
         assert(neuron_pool_size == input_weights_G.size());
 
         const std::vector<uint32_t> f_neurons_G =
-      {    28, 2155889677, 1052676, 76021760,     10, 262160,   2124, 138412033,   2076,      5,  //_24_4Mount_
-         4121, 100663307,  65539, 1048599, 67108880, 131142, 1073741834, 268435463, 1140850712,  65543 //_25_4Mount_
+      {4192213067, 2135950925, 177215151, 3690022566, 337190421, 2302978452, 1086868672, 3360792577, 683735740, 1446530003,  //_24_4Mount_
+       2820694077, 121678920, 77089827, 353607053, 1497568681, 1894285993, 858998682, 192413709, 457974497, 2557380883 //_25_4Mount_
          };
         assert(f_neuron_pool_size == f_neurons_G.size());
 
-    //for_Atol____   930
+    //for_CraBso___   909
         const std::vector<int16_t> AI_initial_military_numbers_H =
-      {-65,  43, -70,  -1, -71,  12,  16,  48,  26, -39,  //_01_Atol____
-        12,  24, -19,  34, -100, -69,  28,  36, -55,   0,  //_02_Atol____
-         0,   0,  -7,   0,   0,   0,   0,   0,   0,   0,  //_03_Atol____
-        52,   0,  19, -34, -16, -71,  46, -68, -76, -38,  //_04_Atol____
-       -22,   0, -17, -62, -53,  35, -43, -29, -22,  75,  //_05_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_06_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_07_Atol____
+      {-65,  43, -70, -46, -82,  15,  24,  48, -49, -10,  //_01_CraBso___
+        12,  24,  33,  34,  18, -69,  28,  36, -68,   0,  //_02_CraBso___
+       -27,  73,   0,   0, -53,   0,  -6,   0,  54,  24,  //_03_CraBso___
+        50,  58,  35,  25, -16, -61,  46,  32, -76,  19,  //_04_CraBso___
+         6,   0, -17, -28, -53,  35, -43, -29,  46,  75,  //_05_CraBso___
+         0,   9, -16,  72,  20,   8,  38,  40,   0, -41,  //_06_CraBso___
+       -29, -13,   0,  28, -56,   0,  42,  77, -27,   0 //_07_CraBso___
         }
                 ;
         assert(magic_numbers_size == AI_initial_military_numbers_H.size());
 
         const std::vector<int8_t> input_weights_H =
-      {-15,  64, -45, -47,  48,  -5,  50,  10,   8, -24,  //_08_Atol____
-        -2, -29,   0,  71,  49, -68, -30,  16,  67, -68,  //_09_Atol____
-         7,  10,  58,  35, -11,  92, -87,  -4,  38,  37,  //_10_Atol____
-        12,  -2,  52,  89,  50,  35,  -2, -27, -17,  45,  //_11_Atol____
-        23,  47,  83, -39,  -4,  -6,   3,  35, -16,  50,  //_12_Atol____
-       -75,  26,  27,  49, -42, -38, -31,   5, -20, -59,  //_13_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_14_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_15_Atol____
+      { 17,  64, -45, -48,  10, -17,  15,  46, -84,  25,  //_08_CraBso___
+         0,  49,  36, -13,  -8, -49,   6,  16, -50,  60,  //_09_CraBso___
+       -29, -43,  58, -47, -11,  92, -87, -70,  27,  37,  //_10_CraBso___
+       -26,  -2,  52, -19,   7,  35,   6, -27,  58, -37,  //_11_CraBso___
+        45,  47,  42, -39, -86,  -6, -13,  13,  72,  50,  //_12_CraBso___
+       -75,  26, -72,  49,  13, -35,  -3,  56, -20, -43,  //_13_CraBso___
+       -46,   0,  78,   0,   0,  36,   0, -31,   0, -39,  //_14_CraBso___
+         0,   0,   0,   0, -34,   0,   0,   0,   0,  61 //_15_CraBso___
         }
               ;
 
         const std::vector<int8_t> input_func_H =
-      {  1,   1,   1,   1,   0,   1,   1,   1,   1,   0,  //_16_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_17_Atol____
-         2,   0,   0,   2,   1,   1,   1,   2,   1,   1,  //_18_Atol____
-         1,   1,   1,   1,   2,   1,   1,   1,   2,   1,  //_19_Atol____
-         0,   2,   0,   0,   1,   1,   1,   1,   1,   0,  //_20_Atol____
-         0,   2,   2,   1,   1,   1,   2,   2,   1,   2,  //_21_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  //_22_Atol____
-         0,   0,   0,   0,   0,   0,   0,   0,   0,   0 //_23_Atol____
+      {  2,   1,   1,   0,   1,   2,   2,   0,   0,   1,  //_16_CraBso___
+         1,   1,   0,   0,   0,   2,   2,   0,   1,   1,  //_17_CraBso___
+         0,   2,   0,   2,   1,   1,   1,   2,   0,   1,  //_18_CraBso___
+         1,   1,   1,   2,   1,   1,   2,   1,   2,   1,  //_19_CraBso___
+         1,   2,   2,   0,   0,   1,   0,   0,   1,   0,  //_20_CraBso___
+         0,   2,   0,   1,   0,   1,   2,   2,   1,   0,  //_21_CraBso___
+         1,   0,   0,   0,   0,   0,   0,   1,   0,   1,  //_22_CraBso___
+         0,   0,   0,   0,   2,   0,   0,   0,   0,   2 //_23_CraBso___
         }
                 ;
         assert(neuron_pool_size == input_func_H.size());
         assert(neuron_pool_size == input_weights_H.size());
 
         const std::vector<uint32_t> f_neurons_H =
-      {    28, 67108877, 16777220, 1610743816,   1026, 285212688,     45, 33620993, 1048604,    133,  //_24_Atol____
-       1141112857, 37896203, 134219777,     55,     16, 150994948, 2097163, 2097159,   2074,      6 //_25_Atol____
+      {3720354911, 1766875469, 185603758, 3677439726, 345776017, 3681852642, 695270715, 3360762001, 139529706, 969016804,  //_24_CraBso___
+       1746952253, 2625702710, 4097725606, 2837190657, 1548424619, 4038697641, 859002266, 1403031004, 457712489, 2557380626 //_25_CraBso___
          };
         assert(f_neuron_pool_size == f_neurons_H.size());
 
 
 //  Old winners section end ############
-
-
-
-
-
 
 
     //Static AI   
@@ -897,8 +892,8 @@ void ManagementData::initialize( const uint8_t pn, const bool reinitializing) {
 
 
 	const std::vector<uint32_t> f_neurons_static =
-      {  28,   13,    4,    0,   10,   16,   12,    1,   28,    5,  // from Atol____
-         25,   11,    1,   23,   16,    4,   10,    7,   24,    7 //A from Atol____
+      {  28,   13,    4,    0,   10,   16,   12,    1,   28,    5,  // from CraBso___
+         25,   11,    1,   23,   16,    4,   10,    7,   24,    7 //A from CraBso___
 	 };
 	assert(f_neuron_pool_size == f_neurons_static.size());
 
@@ -1401,19 +1396,19 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, bool e, uint3
 }
 
 // Inserting/updating data
-void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber en, Widelands::TeamNumber tn, uint32_t pp, uint32_t op,  uint32_t cs, uint32_t land, uint32_t oland) {
+void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber mytn, Widelands::TeamNumber pltn, uint32_t pp, uint32_t op,  uint32_t cs, uint32_t land, uint32_t oland) {
 	if (all_stats.count(opn) == 0) {
 		bool enemy = false;
 		if ( pn == opn ) {
 			;
-		} else if (en == 0 || tn == 0) {
+		} else if (pltn == 0 || mytn == 0) {
 			enemy = true;
-		} else if (en != tn) {
+		} else if (pltn != mytn) {
 			enemy = true;			
 		}
 		this_player_number = pn;
-		printf (" %d PlayersStrengths: player %d is%s enemy\n", pn, opn, (enemy)?"":" not");
-		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(opn, PlayerStat(tn, enemy, pp, op, cs, land, oland)));
+		printf (" %d PlayersStrengths: player %d / team: %d - is%s enemy\n", pn, opn, pltn, (enemy)?"":" not");
+		all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(opn, PlayerStat(pltn, enemy, pp, op, cs, land, oland)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1556,10 +1551,8 @@ uint32_t PlayersStrengths::get_old_player_power(Widelands::PlayerNumber pn) {
 	return 0;
 }
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].old_players_land;
-	};
-	return 0;
+	assert(all_stats.count(pn) > 0);
+	return all_stats[pn].old_players_land;
 }
 
 
@@ -1597,10 +1590,14 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
-	if (all_stats.count(pl1) > 0 && all_stats.count(pl2) > 0 && pl1 != pl2) {
+	assert(all_stats.count(pl1) > 0);
+	assert(all_stats.count(pl2) > 0);
+	if (pl1 == pl2) {
+		return false;
+	} else if (all_stats[pl1].team_number > 0 &&
+		       all_stats[pl1].team_number == all_stats[pl2].team_number) {
 		// team number 0 = no team
-		return all_stats[pl1].team_number > 0 &&
-		       all_stats[pl1].team_number == all_stats[pl2].team_number;
+		return true;
 	} else {
 		return false;
 	}

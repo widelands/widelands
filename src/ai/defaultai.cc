@@ -1358,16 +1358,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			}
 		}				
 			
-			//if (bpn != pn) {
-				//// TODO(unknown): Only continue; if this is an opposing site
-				//// allied sites should be counted for military influence
-				//if (!player_statistics.players_in_same_team(bpn, pn)) {
-					//field.enemy_nearby = true;
-				//}
-				//continue;
-			//}
-		//}
-
 		// if we are here, immovable is ours
 		if (upcast(Building const, building, &base_immovable)) {
 
@@ -1426,12 +1416,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 	
 
-	if ((field.enemy_military_presence + field.ally_military_presence)  > 15 )printf ("bf %3dx%3d: presence own: %3d, enemy: %3d, ally %3d\n",
-		field.coords.x,
-		field.coords.y,
-		field.own_military_presence,
-		field.enemy_military_presence,
-		field.ally_military_presence);
+	//if ((field.enemy_military_presence + field.ally_military_presence)  > 15 )printf ("bf %3dx%3d: presence own: %3d, enemy: %3d, ally %3d\n",
+		//field.coords.x,
+		//field.coords.y,
+		//field.own_military_presence,
+		//field.enemy_military_presence,
+		//field.ally_military_presence);
 	
 	// if there is a militarysite on field, we try to walk to enemy
 	field.enemy_accessible_ = false;
@@ -1874,27 +1864,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		persistent_data->target_military_score = persistent_data->least_military_score;
 	}
 
-	// there are many reasons why to stop building production buildings
-	// (note there are numerous exceptions)
-	//// 1. to not have too many constructionsites
-	//if ((num_prod_constructionsites + mines_in_constr()) >
-	    //(productionsites.size() + mines_built()) / persistent_data->ai_productionsites_ratio + 2) {
-		//new_buildings_stop_ = true;
-	//}
-	//// 2. to not exhaust all free spots
-	//if (!has_enough_space) {
-		//new_buildings_stop_ = true;
-	//}
-	//// 3. too keep some proportions production sites vs military sites
-	//if ((num_prod_constructionsites + productionsites.size()) >
-	    //(msites_in_constr() + militarysites.size()) * 5) {
-		//new_buildings_stop_ = true;
-	//}
-	//// 4. if we do not have 2 mines at least
-	//if (mines_.size() < 2) {
-		//new_buildings_stop_ = true;
-	//}
-	//NOCOM 
+	// Under some circumstances we prohibit new productionsites
 	new_buildings_stop_ = management_data.f_neuron_pool[8].get_result(
 		(num_prod_constructionsites + mines_in_constr()) >
 			(productionsites.size() + mines_built()) / persistent_data->ai_productionsites_ratio + 2,
@@ -4556,31 +4526,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	const uint32_t msites_total = msites_built() + msites_in_constr();
 
-	//// this is final proportion of big_buildings_score / msites_total
-	//// two exeptions:
-	//// if enemy nearby - can be higher
-	//// for early game - must be lower
-	//uint32_t limit = (msites_built() + msites_in_constr()) * 2 / 3;
-
-	//// exemption first
-	//if (militarysites.size() > 3 && soldier_status_ == SoldiersStatus::kFull && msites_in_constr() == 0) {
-		//return BuildingNecessity::kAllowed; // it seems the expansion is stuck so we allow big buildings
-	//} else if (player_statistics.any_enemy_seen_lately(gametime) &&
-		//mines_.size() > 2) { // if enemies were nearby in last 30 minutes
-			//// we allow more big buidings
-			//limit *= 2;
-	//} else if (msites_total < persistent_data->ai_personality_early_militarysites) {
-		//// for the beginning of the game (first 30 military sites)
-		//limit = limit * msites_total / persistent_data->ai_personality_early_militarysites;
-	//}
-
-	//if (big_buildings_score + size - 1 > limit) {
-		//return BuildingNecessity::kNotNeeded;
-	//} else {
-		//return BuildingNecessity::kAllowed;
-	//}
-	
-	////NOCOM it would be convenient to have more inputs for FNeuron
+	// it would be convenient to have more inputs for FNeuron
 	if (management_data.f_neuron_pool[9].get_result(
 		size,
 		msites_in_constr() == 0 || player_statistics.any_enemy_seen_lately(gametime) || mines_.size() < 2,
@@ -4818,7 +4764,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	const bool verbose = true;
+	const bool verbose = false;
 
 	// Check next militarysite
 	bool changed = false;
@@ -5750,7 +5696,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const pn = player_number();
 
-	//iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
+	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	//// receiving games statistics and parsing it (reading latest entry)
 	//const Game::GeneralStatsVector& genstats = game().get_general_statistics();
@@ -5887,7 +5833,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				const PlayerNumber opn = wh->owner().player_number();
 				if (player_statistics.get_is_enemy(opn)) {
 					assert(opn != pn );
-					assert (player_statistics.get_is_enemy(opn));
 					player_statistics.set_last_time_seen(gametime, opn);
 					if (enemy_sites.count(wh->get_position().hash()) == 0) {
 						enemy_sites[wh->get_position().hash()] = EnemySiteObserver();
@@ -6063,7 +6008,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 3 + std::abs(management_data.get_military_number_at(38)) / 40;
 				}
 				
-				//NOCOM
+				// Let consider mines nearby and generally
 				site->second.score += management_data.f_neuron_pool[5].get_result(
 					mines_.size() <= 2,
 					mines_.size() > 2 && mines_.size() < 6,
@@ -6102,7 +6047,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					// but increase the counter by 1
 					site->second.no_attack_counter += 1;
 				}
-
 			} else {
 				site->second.score = 0;
 			}  // or the score will remain 0

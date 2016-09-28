@@ -669,7 +669,7 @@ private:
 	};
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber en, Widelands::TeamNumber tn, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
+	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber mytn, Widelands::TeamNumber pltn, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team

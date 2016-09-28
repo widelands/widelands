@@ -318,7 +318,6 @@ private:
 	uint32_t expedition_ship_;
 
 	int32_t spots_;  // sum of buildable fields
-	//int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites NOCOM
 	// statistics for training sites per type
 	int16_t ts_basic_count_;
 	int16_t ts_basic_const_count_;
