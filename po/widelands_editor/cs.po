@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-21 08:44+0000\n"
-"PO-Revision-Date: 2016-09-23 14:13+0000\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-27 10:14+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -35,23 +35,23 @@ msgstr "Nápověda"
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:19
 msgid "Toggle main menu"
-msgstr ""
+msgstr "Zapnout hlavní nabídku"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
 #: ../../data/scripting/editor/editor_controls.lua:21
 msgid "Toggle tools menu"
-msgstr ""
+msgstr "Zapnout menu nástroje"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle player menu"
-msgstr ""
+msgstr "Zapnout menu hráčů"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Undo"
-msgstr ""
+msgstr "Zpět"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -62,7 +62,7 @@ msgstr "Provést znovu"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Activate information tool"
-msgstr ""
+msgstr "Zapnout informace o nástroji"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -95,11 +95,11 @@ msgstr "Nástroje"
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
 msgid "1-0"
-msgstr ""
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
-msgstr ""
+msgstr "Změnit velikost nástroje"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -112,13 +112,13 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Vlož nové prvky do mapy nebo zvyš počet prvků na mapě o hodnotu v \"Zvýšit/Snížit hodnotu\""
 
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Odstranit prvky z mapy nebo snížit počet prvků o hodnotu v \"Zvýšit/Snížit hodnotu\""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -136,11 +136,11 @@ msgstr "Ctrl + Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Nastavit počet prvků na mapě v \"Nastavit hodnotu\""
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
-msgstr ""
+msgstr "Nápověda editoru"
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
@@ -167,17 +167,17 @@ msgstr "Widelands editor"
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Tento editor je pro hráče, kteří mají zájem o vytváření vlastních map pro Widelands."
 
 #: ../../data/scripting/editor/editor_introduction.lua:15
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Jak vidíš, na tomto editoru je ještě spousta práce. Spolu s tím jak se bude editor zlepšovat, budou popisky delší a detailnější."
 
 #: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "Wiki také zahrnuje krátký tutoriál na vytváření map."
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -187,9 +187,9 @@ msgstr "Suroviny"
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
 msgid_plural "Valid Resources:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Platná surovina:"
+msgstr[1] "Platné suroviny:"
+msgstr[2] "Platné suroviny:"
 
 #: ../../data/scripting/editor/terrain_help.lua:34
 msgid "Default:"
@@ -213,7 +213,7 @@ msgstr "Zde stromy neporostou."
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Preferovaná krajina"
 
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39

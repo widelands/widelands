@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-15 06:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-27 12:24+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr "Postav dvě lovecké chaty"
+msgstr "Postav dvě chaty lesníka"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
@@ -47,7 +48,7 @@ msgstr ""
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Postav vojenskou stavbu (např. strážní hlásku nebo val) pro rozšíření tvého území."
+msgstr "Postav vojenskou stavbu (např. strážnici nebo hradbu) pro rozšíření tvého území."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
@@ -59,11 +60,11 @@ msgstr "Začni v horách budovat doly"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Postav důl na uhlí a železo"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Postav důl na uhlí a železo."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -119,7 +120,7 @@ msgstr "nebylo zde nic nalezeno"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Doly mohou být postaveny pouze na horském terénu. Vhodná místa pro výstavbu dolů jsou zobrazena jako oranžový symbol dolu."
+msgstr "Doly mohou být postaveny pouze v horském terénu. Vhodná místa pro výstavbu dolů jsou zobrazena jako oranžový symbol dolu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
@@ -127,7 +128,7 @@ msgstr "Zajisti jídlo pro horníky"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Postav chatu pro lovce, hajného a kuchyni"
+msgstr "Postav chatu pro lovce, hajného a hospodu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
@@ -138,13 +139,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Lovec loví zvěř, zatímco hajný hlídá, aby zvěř nevyhynula. Maso se potom zpracuje v kuchyni na jídlo pro horníky."
+msgstr "Lovec loví zvěř, zatímco hajný hlídá, aby zvěř nevyhynula. Maso se potom zpracovává v hospodě na obědy pro horníky."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Tohle je jen první příklad zboží, které je nutné zpracovat, než jej lze použít v druhotném zařízení - další budou následovat."
+msgstr "Tohle je jen první příklad surovin, které je nutné zpracovat, než je lze použít v další budově - další budou následovat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
@@ -152,7 +153,7 @@ msgstr "Upeč chléb"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
-msgstr "Postav studnu, statek a pekárnu"
+msgstr "Postav studnu, obilné pole a pekárnu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:77
 msgid ""
@@ -174,15 +175,15 @@ msgstr "Postav slévárnu"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Železnou rudu přímo z dolu ještě nelze opracovávat - musí být nejdřív přetavena na železo."
+msgstr "Železná ruda, kterou tvoji horníci vytěží, nelze ještě použít - musí být nejdříve přetavena na železo."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Vylepši budovy a postav minipivovar"
+msgstr "Vylepši budovy a postav malý pivovar"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Vylepší důl, hospodu a postav malý pivovar"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
@@ -192,7 +193,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr "Postav také minipivovar."
+msgstr "Postav také malý pivovar."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -208,7 +209,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Dělníci získávají úspěšnou prací zkušenosti. Při dostatečné zkušenosti povýší a mohou pak používat vylešené budovy. Nepřebudovávej budovu dokud není k dispozici dostatek zkušených pracovníků, kteří ji pak budou používat!"
+msgstr "Dělníci získávají prací zkušenosti. Při dostatečné zkušenosti povýší a mohou pak používat vylešené budovy. Nepřebudovávej budovu dokud není k dispozici dostatek zkušených dělníků, kteří ji pak budou používat!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -229,7 +230,7 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a wood hardener"
-msgstr "Postav tesařství"
+msgstr "Postav tesaře"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
@@ -238,11 +239,11 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Větší a lepší budovy - včetně všech vojenských - vyžadují lepší stavební materiály. Nejdou postavit jen z kmenů - kmeny musí tesař vytvrdit na tvrzené dřevo. Vždy pamatuj, že musíš postavit tesařství předtím, než ti dojde tvrzené dřevo, protože bez něj nelze expandovat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Postav vápenku a budovu na uhlí"
+msgstr "Postav vápennou pec a uhelné hospodářství"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
@@ -294,13 +295,13 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Třetím materiálem nutným pro vylepšení budov je doškový rákos, užívaný pro zakrytí střechy. Doškový rákos je pěstovaný zahradníkem okolo jeho budovy, rákosového dvora."
+msgstr "Třetím materiálem nutným pro vylepšení budov je doškový rákos, užívaný pro zakrytí střechy. Doškový rákos je pěstovaný zahradníkem okolo jeho budovy, rákosového pole."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr "Postav dobytčí farmu"
+msgstr "Postav statek"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -312,7 +313,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Voli jsou chovaní na dobytčích farmách, které potřebují pšenici a vodu."
+msgstr "Voli jsou chováni na statcích, které potřebují pšenici a vodu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -503,7 +504,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
-msgstr "V noci..."
+msgstr "V noci"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:278
@@ -612,7 +613,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "Tak ty nás chceš připravit na delší pobyt v těchto lesech, Thronene? Ačkoliv je toto moudré rozhodnutí, stejně mé srdce touží po slavném návratu do Al’thunran. Příliš dlouho jsme čekali zatímco naši bratři bojovali na bitevním poli a naše sekery a meče mezitím rezavěli."
+msgstr "Tak ty nás chceš připravit na delší pobyt v těchto lesech, Thronene? Ačkoliv je toto moudré rozhodnutí, stejně mé srdce touží po slavném návratu do Al’thunran. Příliš dlouho jsme čekali zatímco naši bratři bojovali na bitevním poli a naše sekery a meče mezitím zrezavěli."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
@@ -703,7 +704,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "To je všechno pravda, ale zamyslíme se nad tím později, když teď budeme mít jiné starosti. Horníci budou určitě požadovat větší příděly jídla za práci vysoko v horách, zvláště teď, když se ochlazuje. A dodat jim zásoby nemusí být až tak snadné."
+msgstr "To je všechno pravda, ale zamyslíme se nad tím později, když teď máme jiné starosti. Horníci budou určitě chtít větší svačiny za práci vysoko v horách, zvláště teď, když se ochlazuje. Dodávat jim zásoby už nemusí být tak snadné."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:382
 msgid "Boldreth nods…"
@@ -720,11 +721,11 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Vypadá to, že tu po lesích běhá dost zvěře - můžeme jich zkusit pár ulovit. A potom, každý určitě přivítá novou kuchyň - hele, co jí tak říkat 'Thronova chlouba', jak by se ti to líbilo, co?"
+msgstr "Vypadá to, že tu po lesích běhá dost zvěře - můžeme jich zkusit pár ulovit. A potom, každý určitě přivítá novou hospodu - hele, co jí tak říkat 'Thronova chlouba' nebo tak nějak!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "Starší skočí do vzduchu..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:395
@@ -801,7 +802,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "No a tak teď, když máme doly i jídlo na jejich udržení v chodu, je načase převést do užitečnějšího stavu to, co pro nás naši stateční horníci získali. Máme dost železné rudy, ze které vytavíme železo a vykováme z něj cokoli budeme považovat za vhodné. Potřebujeme uhlí, aby dostatečně vyhřálo slévárenské pece."
+msgstr "Teď, když máme doly i jídlo na jejich udržení v chodu, je ten správný čas, abychom zužitkovali to, co naši stateční horníci vydolovali. Železnou rudu musíme roztavit na železo, abychom z něj mohli ukovat cokoliv uznáme za vhodné. Potřebujeme uhlí, aby dostatečně vyhřálo slévárenské pece."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:439
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
@@ -821,7 +822,7 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr "V tak hlubokých tunelech je temno a zima a musíme vděčně odměnit těch nemnoho statečných, kteří se odvážně pouštějí do takových míst. Musíme jim dát větší porce jídla a žejdlík piva nebo radši dva, na udržení dobré nálady."
+msgstr "Samozřejmě, že v tak hlubokých tunelech je tma a zima a jen pár odvážných se na tato místa vypraví. Proto bychom měli odměnit tuto statečnost většími svačinami. Jedna nebo dvě pinty piva jim jistě zvedne náladu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
@@ -833,7 +834,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Právě jsem zjistil, že nám dochází tvrzené dřevo! Naši bojovníci nemůžou přebývat v nějakých vetchých chatrčích, a už vůbec ne v dobách tak nebezpečných, jako jsou ty naše!"
+msgstr "Právě jsem zjistil, že nám dochází tvrzené dřevo! Naši bojovníci nemůžou přebývat v nějakých vetchých chatrčích, už vůbec ne v dobách, tak nebezpečných, jako jsou ty naše!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:455
@@ -900,7 +901,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr "Jak se naše území stále zvětšuje, provoz na cestách ohromně narůstá. Chudáci naši nosiči, ani kdyby se uchodili, nestačí přenášet zboží tak rychle jak potřebujeme. Navrhuji abychom jim ulehčili tím, že jim přidělíme volské povozy."
+msgstr "Jak se naše území stále zvětšuje, provoz na cestách ohromně narůstá. Chudáci naši nosiči, ani kdyby se uchodili, nestačí přenášet suroviny tak rychle, jak potřebujeme. Navrhuji abychom jim ulehčili tím, že jim přidělíme voly."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
@@ -925,7 +926,7 @@ msgstr "Thron promluvil…"
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr "Jednoho dne mě Boldreth přemluvil, abych jej doprovodil do nové hospody. Povzbudí mě to, sliboval."
+msgstr "Jednoho dne mě Boldreth přemluvil, abych jej doprovodil do nového hostince. Řekl, že mne to povzbudí."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
@@ -934,7 +935,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "Když jsem se rozhlédl, uviděl jsem tváře svých věrných druhů, kteří věří, že je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hospody jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil."
+msgstr "Když jsem se rozhlédl, uviděl jsem tváře svých věrných druhů, kteří věří, že je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit slova vděčnosti a povzbuzení, vběhl do hostince jeden z mých bojovníků. Byl v těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
@@ -1008,7 +1009,7 @@ msgstr "Přátelská vesnice se k nám připojila!"
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr "Objevili jsme vesnici, obývanou přítelskými a pracovitými lidmi, kterým imponuje naše bohatství, technologe a síla."
+msgstr "Objevili jsme vesnici, obývanou přítelskými a pracovitými lidmi, kterým imponuje naše bohatství, technologie a síla."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:544

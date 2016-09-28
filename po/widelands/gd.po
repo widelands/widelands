@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 07:55+0000\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-24 09:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,14 @@ msgstr[3] "Amasan ùra"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s ⁊ %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s no %2$s"
@@ -51,8 +51,8 @@ msgstr "%1$s no %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -60,7 +60,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ’s %2$s"
@@ -1241,12 +1241,12 @@ msgstr[3] "Chaidh %s a thrusadh"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
-msgstr "Chan eil saighdear ri thrèanadh ann!"
+msgstr "Chan eil saighdear ri oideachadh ann!"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1245
 #: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
-msgstr "Cha deach saighdear airson an leibheil de thrèanadh seo a lorg!"
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
@@ -2283,7 +2283,7 @@ msgstr "Cliantan air loidhne:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:53
 msgid "List of games:"
-msgstr "Liosta dhe na geamaichean:"
+msgstr "Liosta dhe na geamannan:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:54
 msgid "Name of your server:"
@@ -4122,7 +4122,7 @@ msgstr "Luchd-obrach ann an taighean-stòrais"
 
 #: ../../src/wui/trainingsitewindow.cc:55
 msgid "Soldiers in training"
-msgstr "Saighdearan ’gan trèanadh"
+msgstr "Saighdearan ’gan oideachadh"
 
 #: ../../src/wui/transport_ui.cc:52
 msgid "Economy options"
