@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 17:10+0000\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-27 12:41+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,14 @@ msgstr[2] "Nové úkoly"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s a %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s nebo %2$s"
@@ -51,8 +51,8 @@ msgstr "%1$s nebo %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -60,7 +60,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s a %2$s"
@@ -416,21 +416,21 @@ msgstr "Editorská kategorie: %s"
 #: ../../src/editor/tools/info_tool.cc:141
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:117
 msgid "Resources:"
-msgstr "Zdroje:"
+msgstr "Suroviny:"
 
 #: ../../src/editor/tools/info_tool.cc:149
 #, c-format
 msgid "Resource name: %s"
-msgstr "Jméno zdroje: %s"
+msgstr "Název suroviny: %s"
 
 #: ../../src/editor/tools/info_tool.cc:152
 #, c-format
 msgid "Resource amount: %i"
-msgstr "Množství zdroje: %i"
+msgstr "Množství suroviny: %i"
 
 #: ../../src/editor/tools/info_tool.cc:155
 msgid "No resources"
-msgstr "Došly zdroje"
+msgstr "Došly suroviny"
 
 #: ../../src/editor/tools/info_tool.cc:159 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
@@ -872,7 +872,7 @@ msgstr "Ctrl + Klik v mapě nastaví úroveň terénu."
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
 msgid "Resources"
-msgstr "Zdroje"
+msgstr "Suroviny"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:82
@@ -916,7 +916,7 @@ msgstr "Nastav místo pro přístav"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Určit pozici, která bude mít souřadnice (0, 0). Ta bude levým horním rohem vygenerované minimapy."
+msgstr "Nastaví pozici, která bude mít souřadnice (0, 0). Ta bude levým horním rohem vygenerované minimapy."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
@@ -1238,7 +1238,7 @@ msgstr "Nemáte vojáky k trénování!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1245
 #: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
-msgstr "Nebyl nalezen voják pro tuto úroveň tréninku!"
+msgstr "Nebyl nalezen voják pro tuto úroveň výcviku!"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
@@ -1379,29 +1379,29 @@ msgstr "Nový přístav byl přidán k tvému hospodářství."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:418
 msgid "A new headquarters was added to your economy."
-msgstr "Nové velitelství bylo přidáno k tvému hospodářství."
+msgstr "Nová hlavní budova byla přidána k tvému hospodářství."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:421
 msgid "A new warehouse was added to your economy."
-msgstr "Nový sklad byl přidán k tvému hospodářství."
+msgstr "Nové skladiště bylo přidáno k tvému hospodářství."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:114
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "má těžit zdroj %s, který se v tomto světě nevyskytuje; kmen není kompatibilní s tímto světem"
+msgstr "má těžit surovinu %s, která se v tomto světě nevyskytuje; kmen není kompatibilní s tímto světem"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:214
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "má chovat zdroj %s, který se v tomto světě nevyskytuje; kmen není kompatibilní s tímto světem"
+msgstr "má chovat %s, který se v tomto světě nevyskytuje; kmen není kompatibilní s tímto světem"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:856
 msgid "A geologist found resources."
-msgstr "Geolog objevil zdroje."
+msgstr "Geolog objevil suroviny."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1648
 #, c-format
@@ -1419,7 +1419,7 @@ msgstr[2] "Dělníci"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1654
 msgid "Worker got lost!"
-msgstr "Pracovník se ztratil!"
+msgstr "Dělník se ztratil!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:70
@@ -1609,7 +1609,7 @@ msgstr "Chyba převodu"
 #: ../../src/network/internet_gaming.cc:805
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr "Nelze určit pravivou hodnotu pro \"%s\""
+msgstr "Nelze určit pravdivostní hodnotu pro \"%s\""
 
 #: ../../src/network/internet_gaming.cc:822
 msgid "unknown"
@@ -2381,7 +2381,7 @@ msgstr "Změnit mapu ,nebo uloženou hru"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:131 ../../src/ui_fsmenu/launch_spg.cc:109
 msgid "Start game"
-msgstr "Začni hrát"
+msgstr "Začít hru"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:165
 msgid "Show the help window"
@@ -2487,7 +2487,7 @@ msgstr "Vyber mapu"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:115
 msgid "Launch Game"
-msgstr "Spusť hru"
+msgstr "Spustit hru"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:121
 msgid "Player’s name"
@@ -2717,7 +2717,7 @@ msgstr "Nekompatibilní: %s"
 
 #: ../../src/ui_fsmenu/main.cc:47
 msgid "Play Tutorial"
-msgstr "Hrej tutoriál"
+msgstr "Hrát tutoriál"
 
 #: ../../src/ui_fsmenu/main.cc:58 ../../src/ui_fsmenu/singleplayer.cc:30
 msgid "Single Player"
@@ -3056,7 +3056,7 @@ msgstr "Poslat více vojáků"
 #: ../../src/wui/building_statistics_menu.cc:67
 #: ../../src/wui/game_main_menu.cc:65
 msgid "Building Statistics"
-msgstr "Statistika budov"
+msgstr "Statistiky budov"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 msgid "Owned:"
@@ -3217,7 +3217,7 @@ msgstr "Znič tuto vlajku"
 
 #: ../../src/wui/fieldaction.cc:328
 msgid "Configure economy"
-msgstr "Nastavit hospodářství"
+msgstr "Nastavení hospodářství"
 
 #: ../../src/wui/fieldaction.cc:331
 msgid "Send geologist to explore site"
@@ -3288,17 +3288,17 @@ msgstr "Ladicí políčko"
 
 #: ../../src/wui/game_main_menu.cc:36
 msgid "Statistics Menu"
-msgstr "Statistické menu"
+msgstr "Statistiky"
 
 #: ../../src/wui/game_main_menu.cc:47
 #: ../../src/wui/general_statistics_menu.cc:59
 msgid "General Statistics"
-msgstr "Obecná statistika"
+msgstr "Obecné statistiky"
 
 #: ../../src/wui/game_main_menu.cc:56
 #: ../../src/wui/ware_statistics_menu.cc:106
 msgid "Ware Statistics"
-msgstr "Statistika zboží"
+msgstr "Statistiky surovin"
 
 #: ../../src/wui/game_main_menu.cc:74 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
@@ -3432,7 +3432,7 @@ msgstr "Zobrazit všechny zprávy"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:530
 msgid "Show geologists' messages only"
-msgstr "Zobrazit pouze zprávy geologa"
+msgstr "Zobrazit pouze zprávy od geologa"
 
 #: ../../src/wui/game_message_menu.cc:531
 msgctxt "hotkey"
@@ -3606,7 +3606,7 @@ msgstr "Země"
 #: ../../src/wui/general_statistics_menu.cc:147
 #: ../../src/wui/transport_ui.cc:59 ../../src/wui/warehousewindow.cc:194
 msgid "Workers"
-msgstr "Pracovníci"
+msgstr "Dělníci"
 
 #: ../../src/wui/general_statistics_menu.cc:152 ../../src/wui/minimap.cc:190
 msgid "Buildings"
@@ -3616,7 +3616,7 @@ msgstr "Budovy"
 #: ../../src/wui/productionsitewindow.cc:60 ../../src/wui/transport_ui.cc:57
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
-msgstr "Zboží"
+msgstr "Suroviny"
 
 #: ../../src/wui/general_statistics_menu.cc:162
 msgid "Productivity"
@@ -4083,7 +4083,7 @@ msgstr "Preference hrdinů"
 
 #: ../../src/wui/stock_menu.cc:42
 msgid "Wares (total)"
-msgstr "Zboží (celkem)"
+msgstr "Suroviny (celkem)"
 
 #: ../../src/wui/stock_menu.cc:46
 msgid "Workers (total)"
@@ -4091,7 +4091,7 @@ msgstr "Dělníci (celkem)"
 
 #: ../../src/wui/stock_menu.cc:50
 msgid "Wares in warehouses"
-msgstr "Zboží v skladišti"
+msgstr "Suroviny ve skladišti"
 
 #: ../../src/wui/stock_menu.cc:55
 msgid "Workers in warehouses"
@@ -4135,19 +4135,19 @@ msgstr "Normální politika"
 
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Preferably store selected wares here"
-msgstr "Přednostně zde uskladnit vybrané zboží"
+msgstr "Přednostně zde uskladnit vybrané suroviny"
 
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Do not store selected wares here"
-msgstr "Neskladovat zde vybrané zboží"
+msgstr "Neskladovat zde vybrané suroviny"
 
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Remove selected wares from here"
-msgstr "Vystěhovat odsud označené zboží"
+msgstr "Vystěhovat odsud označené suroviny"
 
 #: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
-msgstr "Zboží čeká na doručení"
+msgstr "Suroviny čekají na doručení"
 
 #: ../../src/wui/warehousewindow.cc:202
 msgid "Workers waiting to embark"
@@ -4171,11 +4171,11 @@ msgstr "Nejnižší priorita"
 
 #: ../../src/wui/waresqueuedisplay.cc:225
 msgid "Decrease the number of wares you want to be stored here."
-msgstr "Snížit počet zboží, které zde chceš uskladnit."
+msgstr "Snížit počet surovin, které zde chceš uskladnit."
 
 #: ../../src/wui/waresqueuedisplay.cc:234
 msgid "Increase the number of wares you want to be stored here."
-msgstr "Zvýšit počet zboží, které zde chceš uskladnit."
+msgstr "Zvýšit počet surovin, které zde chceš uskladnit."
 
 #: ../../src/wui/watchwindow.cc:108
 msgid "Follow"
