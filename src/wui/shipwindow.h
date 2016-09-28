@@ -32,9 +32,8 @@
 /**
  * Display information about a ship.
  */
-// NOCOM can we restrict visibility to InteractiveGameBase?
-class ShipWindow : public UI::Window {
-public:
+class ShipWindow : protected UI::Window {
+protected:
 	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship, bool avoid_fastclick = false);
 	virtual ~ShipWindow();
 
@@ -56,6 +55,7 @@ public:
 	void act_explore_island(Widelands::IslandExploreDirection);
 
 private:
+	friend class InteractiveGameBase;
 	InteractiveGameBase& igbase_;
 	Widelands::Ship& ship_;
 
