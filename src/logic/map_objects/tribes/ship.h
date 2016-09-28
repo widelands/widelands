@@ -57,12 +57,12 @@ struct NoteShipMessage {
 struct NoteShipWindow {
 	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
 
-	const Ship& ship;
+	Ship& ship;
 
-	enum class Action { kRefresh, kClose };
+	enum class Action { kRefresh, kClose, kDied };
 	const Action action;
 
-	NoteShipWindow(const Ship& init_ship, const Action& init_action)
+	NoteShipWindow(Ship& init_ship, const Action& init_action)
 		: ship(init_ship), action(init_action) {
 	}
 };

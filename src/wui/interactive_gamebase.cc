@@ -64,6 +64,50 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      toggle_buildhelp_(INIT_BTN(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
+	   [this](const Widelands::NoteShipWindow& note) {
+		   const Widelands::Serial serial = note.ship.serial();
+		   switch (note.action) {
+		   case Widelands::NoteShipWindow::Action::kRefresh: {
+			   bool is_refreshing = false;
+			   Point pos(0, 0);
+			   ShipWindow* shipwindow;
+			   if (shipwindows_.count(serial) == 1) {
+				   shipwindow = shipwindows_.at(serial);
+				   if (shipwindow) {
+					   is_refreshing = true;
+					   pos = shipwindow->get_pos();
+					   delete shipwindow;
+					   shipwindow = nullptr;
+				   }
+			   }
+			   shipwindow = new ShipWindow(*this, note.ship, is_refreshing);
+			   shipwindows_.insert(std::pair<Widelands::Serial, ShipWindow*>(serial, shipwindow));
+			   if (is_refreshing) {
+				   shipwindow->set_pos(pos);
+			   }
+
+		   } break;
+		   case Widelands::NoteShipWindow::Action::kClose: {
+			   if (shipwindows_.count(serial) == 1) {
+				   ShipWindow* shipwindow = shipwindows_.at(serial);
+				   if (shipwindow) {
+					   delete shipwindow;
+					   shipwindow = nullptr;
+				   }
+				   shipwindows_.erase(serial);
+			   }
+
+		   } break;
+		   case Widelands::NoteShipWindow::Action::kDied: {
+			   if (shipwindows_.count(serial) == 1) {
+				   shipwindows_.erase(serial);
+			   }
+
+		   } break;
+		   }
+		});
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -159,7 +203,8 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				new ShipWindow(*this, *ship);
+				Notifications::publish(
+				   Widelands::NoteShipWindow(*ship, Widelands::NoteShipWindow::Action::kRefresh));
 				return true;
 			}
 		}

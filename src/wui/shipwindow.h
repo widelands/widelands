@@ -29,12 +29,13 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/itemwaresdisplay.h"
 
-
 /**
  * Display information about a ship.
  */
-struct ShipWindow : UI::Window {
-	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship);
+// NOCOM can we restrict visibility to InteractiveGameBase?
+class ShipWindow : public UI::Window {
+public:
+	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship, bool avoid_fastclick = false);
 	virtual ~ShipWindow();
 
 	void think() override;
@@ -53,7 +54,6 @@ struct ShipWindow : UI::Window {
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
-	void refresh_window();
 
 private:
 	InteractiveGameBase& igbase_;
@@ -70,7 +70,6 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_SHIPWINDOW_H

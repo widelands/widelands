@@ -20,19 +20,28 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
+#include <map>
+#include <memory>
+
 #include "logic/game.h"
+#include "logic/widelands.h"
+#include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
 
 struct ChatProvider;
+class ShipWindow;
+
+namespace Widelands {
+struct NoteShipWindow;
+}
 
 enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	class GameMainMenuWindows {
-	public:
+	struct GameMainMenuWindows {
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
 		UI::UniqueWindow::Registry readme;
@@ -97,6 +106,11 @@ protected:
 
 private:
 	void on_buildhelp_changed(const bool value) override;
+
+	// Registers all ship windows to avoid duplication
+	std::map<Widelands::Serial, ShipWindow*> shipwindows_;
+	// Handles opening, refreshing and closing of ship windows
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H
