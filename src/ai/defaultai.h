@@ -91,8 +91,8 @@ struct DefaultAI : ComputerPlayer {
 		kAttackableAndWeak,
 		kAttackableVeryWeak
 	};
-	
-	enum class SoldiersStatus : uint8_t {kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6};
+
+	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 };
 
 	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
 
@@ -156,10 +156,9 @@ private:
 	Widelands::BuildingNecessity
 	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 	// for militarysites (overloading the function)
-	Widelands::BuildingNecessity check_building_necessity
-		(Widelands::BuildingObserver&, uint32_t);
-	Widelands::BuildingNecessity check_warehouse_necessity
-		(Widelands::BuildingObserver&, uint32_t gametime);
+	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
+	Widelands::BuildingNecessity check_warehouse_necessity(Widelands::BuildingObserver&,
+	                                                       uint32_t gametime);
 
 	void sort_task_pool();
 	void sort_by_priority();
@@ -343,7 +342,7 @@ private:
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
 
 	std::vector<int16_t> marine_task_queue;
-	
+
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
 

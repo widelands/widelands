@@ -79,15 +79,15 @@ enum class SchedulerTaskId : uint8_t {
 };
 
 const std::vector<std::vector<int8_t>> neuron_curves = {
-		{0,	5,	10,	15,	20,	25,	30,	35,	40,	45,	50,	55,	60,	65,	70,	75,	80,	85,	90,	95,	100},
-		{0,	0,	1,	2,	4,	6,	9,	12,	16,	20,	25,	30,	36,	42,	49,	56,	64,	72,	81,	90,	100},
-		{0,	17,	25,	32,	38,	44,	49,	53,	58,	62,	66,	70,	74,	78,	81,	84,	88,	91,	94,	97,	100},
-		};
+   {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
+   {0, 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81, 90, 100},
+   {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
+};
 
-constexpr int  magic_numbers_size = 70;
-constexpr int  neuron_pool_size = 80;
-constexpr int  f_neuron_pool_size = 20;
-constexpr int  f_neuron_bit_size = 32;
+constexpr int magic_numbers_size = 70;
+constexpr int neuron_pool_size = 80;
+constexpr int f_neuron_pool_size = 20;
+constexpr int f_neuron_bit_size = 32;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -281,7 +281,7 @@ struct BuildableField {
 	// actual count of soldiers in nearby buldings
 	int16_t own_military_presence;
 	int16_t enemy_military_presence;
-	int16_t ally_military_presence;	
+	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
 	// stationed (manned) military buildings nearby
@@ -501,18 +501,28 @@ struct MineTypesObserver {
 };
 
 struct Neuron {
-	Neuron(int8_t,uint8_t, uint16_t);
+	Neuron(int8_t, uint8_t, uint16_t);
 	void recalculate();
 	void set_weight(int8_t w);
-	int8_t get_weight() {return weight;};
+	int8_t get_weight() {
+		return weight;
+	};
 	int8_t get_result(uint8_t);
-	int8_t get_result_safe(int32_t, bool=false);
+	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
-	uint8_t get_type() {return type;};
-	uint16_t get_id() {return id;};
-	int32_t get_lowest_pos() {return lowest_pos;};
-	int32_t get_highest_pos() {return highest_pos;};	
-		
+	uint8_t get_type() {
+		return type;
+	};
+	uint16_t get_id() {
+		return id;
+	};
+	int32_t get_lowest_pos() {
+		return lowest_pos;
+	};
+	int32_t get_highest_pos() {
+		return highest_pos;
+	};
+
 private:
 	int8_t results[21];
 	int8_t weight;
@@ -522,22 +532,22 @@ private:
 	int32_t highest_pos;
 };
 
-
 struct FNeuron {
 	FNeuron(uint32_t);
-	
+
 	void flip_bit(uint8_t);
-	//void set(uint8_t);
-	bool get_result(bool, bool, bool, bool bool4 = true , bool bool5 = true);
+	// void set(uint8_t);
+	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	uint32_t get_int();
+
 private:
 	std::bitset<f_neuron_bit_size> core;
 };
 
-//This is to keep all data related to AI magic numbers
+// This is to keep all data related to AI magic numbers
 struct ManagementData {
 	ManagementData();
-	
+
 	std::vector<Neuron> neuron_pool;
 	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
@@ -546,15 +556,25 @@ struct ManagementData {
 	void review(uint32_t, PlayerNumber, uint16_t, uint32_t, uint32_t, uint32_t, uint32_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
-	uint16_t new_neuron_id() {next_neuron_id += 1; return next_neuron_id - 1; };
-	void reset_neuron_id() {next_neuron_id = 0;}
-	uint16_t new_bi_neuron_id() {next_bi_neuron_id += 1; return next_bi_neuron_id - 1; };
-	void reset_bi_neuron_id() {next_bi_neuron_id = 0;}
+	uint16_t new_neuron_id() {
+		next_neuron_id += 1;
+		return next_neuron_id - 1;
+	};
+	void reset_neuron_id() {
+		next_neuron_id = 0;
+	}
+	uint16_t new_bi_neuron_id() {
+		next_bi_neuron_id += 1;
+		return next_bi_neuron_id - 1;
+	};
+	void reset_bi_neuron_id() {
+		next_bi_neuron_id = 0;
+	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
 	bool test_consistency();
-	
-private:	
+
+private:
 	int32_t scores[3];
 	uint32_t last_mutate_time;
 	uint16_t review_count;
@@ -562,7 +582,6 @@ private:
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
 };
-	
 
 // this is used to count militarysites by their size
 struct MilitarySiteSizeObserver {
@@ -656,7 +675,13 @@ struct PlayersStrengths {
 private:
 	struct PlayerStat {
 		PlayerStat();
-		PlayerStat(Widelands::TeamNumber tc, bool en, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
+		PlayerStat(Widelands::TeamNumber tc,
+		           bool en,
+		           uint32_t pp,
+		           uint32_t op,
+		           uint32_t cs,
+		           uint32_t land,
+		           uint32_t oland);
 
 		Widelands::TeamNumber team_number;
 		bool is_enemy;
@@ -665,11 +690,20 @@ private:
 		uint32_t players_casualities;
 		uint32_t last_time_seen;
 		uint32_t players_land;
-		uint32_t old_players_land;	
+		uint32_t old_players_land;
 	};
+
 public:
 	// Inserting/updating data
-	void add(Widelands::PlayerNumber pn, Widelands::PlayerNumber opn, Widelands::TeamNumber mytn, Widelands::TeamNumber pltn, uint32_t pp, uint32_t op, uint32_t cs, uint32_t land, uint32_t oland);
+	void add(Widelands::PlayerNumber pn,
+	         Widelands::PlayerNumber opn,
+	         Widelands::TeamNumber mytn,
+	         Widelands::TeamNumber pltn,
+	         uint32_t pp,
+	         uint32_t op,
+	         uint32_t cs,
+	         uint32_t land,
+	         uint32_t oland);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
