@@ -373,6 +373,23 @@ world:new_terrain_type{
    fertility = 0.001,
 }
 
+world:new_terrain_type{
+   name = "water_lily",
+   descname = _ "Water Lily",
+   editor_category = "summer",
+   is = "walkable",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.list_files(pics_dir .. "summer/water_lily/water_lily_??.png"),
+   dither_layer = 180,
+   fps = 14,
+   temperature = 100,
+   humidity = 0.999,
+   fertility = 0.001,
+}
+
+
 ------------------------
 --  Former blackland  --
 ------------------------
@@ -675,6 +692,22 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = path.list_files(pics_dir .. "wasteland/water/water_??.png"),
    dither_layer = 170,
+   fps = 14,
+   temperature = 100,
+   humidity = 0.999,
+   fertility = 0.001,
+}
+
+world:new_terrain_type{
+   name = "algae_slick",
+   descname = _ "Algae slick",
+   editor_category = "wasteland",
+   is = "walkable",
+   valid_resources = { "fish" },
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.list_files(pics_dir .. "wasteland/algae_slick/algae_slick_??.png"),
+   dither_layer = 171,
    fps = 14,
    temperature = 100,
    humidity = 0.999,
@@ -1268,6 +1301,22 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = path.list_files(pics_dir .. "desert/water/water_??.png"),
    dither_layer = 200,
+   fps = 5,
+   temperature = 150,
+   humidity = 0.999,
+   fertility = 0.001,
+}
+
+world:new_terrain_type{
+   name = "reef",
+   descname = _ "Reef",
+   editor_category = "desert",
+   is = "walkable",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.list_files(pics_dir .. "desert/reef/reef_??.png"),
+   dither_layer = 201,
    fps = 5,
    temperature = 150,
    humidity = 0.999,
