@@ -126,14 +126,13 @@ Bob& ShipDescr::create_object() const {
 
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
-     window_(nullptr),
      fleet_(nullptr),
      economy_(nullptr),
      ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
-	close_window();
+	Notifications::publish(NoteShipWindow(*this, NoteShipWindow::Action::kClose));
 }
 
 PortDock* Ship::get_destination(EditorGameBase& egbase) const {
@@ -680,8 +679,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 			expedition_.reset(nullptr);
 
-			if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-				refresh_window(*igb);
+			Notifications::publish(NoteShipWindow(*this, NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
@@ -743,7 +741,7 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 /**
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) {
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) const {
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.swim_ = true;
@@ -847,7 +845,7 @@ void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
 	expedition_->island_exploration = false;
 }
 
-WalkingDir Ship::get_scouting_direction() {
+WalkingDir Ship::get_scouting_direction() const {
 	if (expedition_ && ship_state_ == ShipStates::kExpeditionScouting &&
 	    !expedition_->island_exploration) {
 		return expedition_->scouting_direction;
@@ -882,7 +880,7 @@ void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direc
 	expedition_->island_exploration = true;
 }
 
-IslandExploreDirection Ship::get_island_explore_direction() {
+IslandExploreDirection Ship::get_island_explore_direction() const {
 	if (expedition_ && ship_state_ == ShipStates::kExpeditionScouting &&
 	    expedition_->island_exploration) {
 		return expedition_->island_explore_direction;
@@ -926,8 +924,7 @@ void Ship::exp_cancel(Game& game) {
 	expedition_.reset(nullptr);
 
 	// And finally update our ship window
-	if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-		refresh_window(*igb);
+	Notifications::publish(NoteShipWindow(*this, NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
@@ -939,7 +936,7 @@ void Ship::sink_ship(Game& game) {
 	ship_state_ = ShipStates::kSinkRequest;
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
-	close_window();
+	Notifications::publish(NoteShipWindow(*this, NoteShipWindow::Action::kClose));
 }
 
 void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
