@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Ship& ship;
 
-	enum class Action { kRefresh, kClose, kDied };
+	enum class Action { kRefresh, kRemove, kClosed };
 	const Action action;
 
 	NoteShipWindow(Ship& init_ship, const Action& init_action)

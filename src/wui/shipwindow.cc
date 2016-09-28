@@ -156,7 +156,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, bool avoid_fastclic
 }
 
 ShipWindow::~ShipWindow() {
-	Notifications::publish(NoteShipWindow(ship_, NoteShipWindow::Action::kDied));
+	Notifications::publish(NoteShipWindow(ship_, NoteShipWindow::Action::kClosed));
 }
 
 void ShipWindow::think() {

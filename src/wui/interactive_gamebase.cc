@@ -69,6 +69,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	   [this](const Widelands::NoteShipWindow& note) {
 		   const Widelands::Serial serial = note.ship.serial();
 		   switch (note.action) {
+		   // The ship state has changed or the user requested a new window
 		   case Widelands::NoteShipWindow::Action::kRefresh: {
 			   bool is_refreshing = false;
 			   Point pos(0, 0);
@@ -89,7 +90,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   }
 
 		   } break;
-		   case Widelands::NoteShipWindow::Action::kClose: {
+		   // The ship has been removed
+		   case Widelands::NoteShipWindow::Action::kRemove: {
 			   if (shipwindows_.count(serial) == 1) {
 				   ShipWindow* shipwindow = shipwindows_.at(serial);
 				   if (shipwindow) {
@@ -100,7 +102,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   }
 
 		   } break;
-		   case Widelands::NoteShipWindow::Action::kDied: {
+		   // The user closed the window
+		   case Widelands::NoteShipWindow::Action::kClosed: {
 			   if (shipwindows_.count(serial) == 1) {
 				   shipwindows_.erase(serial);
 			   }
