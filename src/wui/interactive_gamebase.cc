@@ -107,7 +107,6 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   if (shipwindows_.count(serial) == 1) {
 				   shipwindows_.erase(serial);
 			   }
-
 		   } break;
 		   }
 		});
