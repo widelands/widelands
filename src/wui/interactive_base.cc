@@ -217,7 +217,7 @@ void InteractiveBase::show_buildhelp(bool t) {
 }
 
 void InteractiveBase::toggle_buildhelp() {
-	field_overlay_manager_->show_buildhelp(!field_overlay_manager_->buildhelp());
+	show_buildhelp(!field_overlay_manager_->buildhelp());
 }
 
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
