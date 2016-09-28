@@ -149,7 +149,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, bool avoid_fastclic
 	set_thinks(true);
 	set_fastclick_panel(btn_goto_);
 	if (!avoid_fastclick) {
-		center_to_parent();
 		move_out_of_the_way();
 		warp_mouse_to_fastclick_panel();
 	}
