@@ -88,6 +88,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	push_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	set_can_focus(true);
 }
 
 void BaseDropdown::add(const std::string& name,
