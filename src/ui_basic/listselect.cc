@@ -50,7 +50,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                int32_t const y,
                                uint32_t const w,
                                uint32_t const h,
-                               bool const show_check)
+                               ListselectSelectionMode selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
@@ -60,7 +60,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
-     show_check_(show_check),
+     selection_mode_(selection_mode),
      background_(nullptr) {
 	set_thinks(false);
 
@@ -69,7 +69,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.set_pagesize(h - 2 * lineheight_);
 	scrollbar_.set_steps(1);
 
-	if (show_check) {
+	if (selection_mode_ == ListselectSelectionMode::kShowCheck) {
 		uint32_t pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
@@ -253,7 +253,7 @@ void BaseListselect::select(const uint32_t i) {
 	if (selection_ == i)
 		return;
 
-	if (show_check_) {
+	if (selection_mode_ == ListselectSelectionMode::kShowCheck) {
 		if (selection_ != no_selection_index())
 			entry_records_[selection_]->pic = nullptr;
 		entry_records_[i]->pic = check_pic_;

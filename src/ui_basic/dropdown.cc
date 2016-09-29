@@ -31,13 +31,8 @@
 
 namespace UI {
 
-BaseDropdown::BaseDropdown(UI::Panel* parent,
-                           int32_t x,
-                           int32_t y,
-                           uint32_t w,
-                           uint32_t h,
-                           const std::string& label,
-                           bool show_tick)
+BaseDropdown::BaseDropdown(
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
    : UI::Panel(
         parent,
         x,
@@ -74,8 +69,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
            x,
            y + get_h(),
            w,
-           0,
-           show_tick),  // Hook into parent so we can drop down outside the panel
+           0),  // Hook into parent so we can drop down outside the panel
      label_(label) {
 	list_.set_visible(false);
 	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));

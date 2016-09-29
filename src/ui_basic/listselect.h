@@ -32,6 +32,13 @@
 namespace UI {
 struct Scrollbar;
 
+enum class ListselectSelectionMode {
+	kPlain,           // Highlight the selected element
+	kHoverHighlight,  // Highlight the element that the mouse hovers over, or the selected element
+	                  // for keyboard navigation
+	kShowCheck        // Show a green arrow in front of the selected element
+};
+
 /**
  * This class defines a list-select box whose entries are defined by a name
  * and an associated numeric ID.
@@ -39,8 +46,12 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false);
+	BaseListselect(Panel* parent,
+	               int32_t x,
+	               int32_t y,
+	               uint32_t w,
+	               uint32_t h,
+	               ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain);
 	~BaseListselect();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -141,15 +152,20 @@ private:
 	uint32_t selection_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
-	bool show_check_;          //  show a green arrow left of selected element
+	ListselectSelectionMode selection_mode_;
 	const Image* check_pic_;
 	const Image* background_;
 	std::string current_tooltip_;
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : BaseListselect(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain)
+	   : BaseListselect(parent, x, y, w, h, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -195,8 +211,13 @@ private:
 template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
 	using Base = Listselect<Entry*>;
 
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : Base(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain)
+	   : Base(parent, x, y, w, h, selection_mode) {
 	}
 
 	void add(const std::string& name,

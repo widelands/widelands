@@ -40,15 +40,8 @@ protected:
 	/// \param w          the dropdown's width
 	/// \param h          the maximum height for the dropdown list
 	/// \param label      a label to prefix to the selected entry on the display button.
-	/// \param show_tick  if 'true', the dropdown list will show a tick for the currently selected
-	///                   entry.
-	BaseDropdown(Panel* parent,
-	             int32_t x,
-	             int32_t y,
-	             uint32_t w,
-	             uint32_t h,
-	             const std::string& label,
-	             bool show_tick = true);
+	BaseDropdown(
+	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label);
 	~BaseDropdown() {
 		clear();
 	}
@@ -124,16 +117,9 @@ public:
 	/// \param w          the dropdown's width
 	/// \param h          the maximum height for the dropdown list
 	/// \param label      a label to prefix to the selected entry on the display button.
-	/// \param show_tick  if 'true', the dropdown list will show a tick for the currently selected
 	///                   entry.
-	Dropdown(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         uint32_t w,
-	         uint32_t h,
-	         const std::string& label,
-	         bool show_tick = true)
-	   : BaseDropdown(parent, x, y, w, h, label, show_tick) {
+	Dropdown(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
+	   : BaseDropdown(parent, x, y, w, h, label) {
 	}
 	~Dropdown() {
 		clear();
