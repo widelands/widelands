@@ -132,7 +132,7 @@ Ship::Ship(const ShipDescr& gdescr)
 }
 
 Ship::~Ship() {
-	Notifications::publish(NoteShipWindow(this->serial(), NoteShipWindow::Action::kRemove));
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRemove));
 }
 
 PortDock* Ship::get_destination(EditorGameBase& egbase) const {
@@ -679,7 +679,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 			expedition_.reset(nullptr);
 
-			Notifications::publish(NoteShipWindow(this->serial(), NoteShipWindow::Action::kRefresh));
+			Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
@@ -924,7 +924,7 @@ void Ship::exp_cancel(Game& game) {
 	expedition_.reset(nullptr);
 
 	// And finally update our ship window
-	Notifications::publish(NoteShipWindow(this->serial(), NoteShipWindow::Action::kRefresh));
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
@@ -933,7 +933,7 @@ void Ship::sink_ship(Game& game) {
 	// Running colonization has the highest priority + a sink request is only valid once
 	if (!state_is_sinkable())
 		return;
-	Notifications::publish(NoteShipWindow(this->serial(), NoteShipWindow::Action::kRemove));
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRemove));
 	ship_state_ = ShipStates::kSinkRequest;
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
