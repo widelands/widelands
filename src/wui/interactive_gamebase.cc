@@ -67,7 +67,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 
 	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
 	   [this](const Widelands::NoteShipWindow& note) {
-		   const Widelands::Serial serial = note.ship.serial();
+			const Widelands::Serial serial = note.serial;
 		   switch (note.action) {
 		   // The ship state has changed or the user requested a new window
 		   case Widelands::NoteShipWindow::Action::kRefresh: {
@@ -83,7 +83,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 					   shipwindow = nullptr;
 				   }
 			   }
-			   shipwindow = new ShipWindow(*this, note.ship, is_refreshing);
+				Widelands::MapObject* mo = game().objects().get_object(serial);
+				upcast(Widelands::Ship, ship, mo);
+				assert(ship);
+				shipwindow = new ShipWindow(*this, *ship, is_refreshing);
 			   shipwindows_.insert(std::pair<Widelands::Serial, ShipWindow*>(serial, shipwindow));
 			   if (is_refreshing) {
 				   shipwindow->set_pos(pos);
@@ -206,7 +209,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
 				Notifications::publish(
-				   Widelands::NoteShipWindow(*ship, Widelands::NoteShipWindow::Action::kRefresh));
+					Widelands::NoteShipWindow(ship->serial(), Widelands::NoteShipWindow::Action::kRefresh));
 				return true;
 			}
 		}

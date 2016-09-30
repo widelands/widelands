@@ -57,13 +57,13 @@ struct NoteShipMessage {
 struct NoteShipWindow {
 	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
 
-	Ship& ship;
+	Serial serial;
 
 	enum class Action { kRefresh, kRemove, kClosed };
 	const Action action;
 
-	NoteShipWindow(Ship& init_ship, const Action& init_action)
-		: ship(init_ship), action(init_action) {
+	NoteShipWindow(Serial init_serial, const Action& init_action)
+		: serial(init_serial), action(init_action) {
 	}
 };
 
