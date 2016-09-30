@@ -70,6 +70,7 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
+	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 
 #endif  // end of include guard: WL_WUI_SHIPWINDOW_H
