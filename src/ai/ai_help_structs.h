@@ -162,6 +162,17 @@ struct FindNodeUnownedMineable {
 	Game& game;
 };
 
+// When looking for unowned terrain to acquire, we must
+// consider if any buildings can be built on unowned land.
+struct FindNodeUnownedBuildable {
+	FindNodeUnownedBuildable(Player* p, Game& g);
+
+	bool accept(const Map&, const FCoords& fc) const;
+
+	Player* player;
+	Game& game;
+};
+
 // Unowned but walkable fields nearby
 struct FindNodeUnownedWalkable {
 	FindNodeUnownedWalkable(Player* p, Game& g);
@@ -254,7 +265,8 @@ struct BuildableField {
 	bool enemy_nearby;
 	bool enemy_accessible_;
 
-	uint8_t unowned_land_nearby;
+	uint16_t unowned_land_nearby;
+	uint16_t unowned_buildable_spots_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
 	uint8_t unowned_mines_spots_nearby;
@@ -553,7 +565,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t);
-	void review(uint32_t, PlayerNumber, uint16_t, uint32_t, uint32_t, uint32_t, uint32_t);
+	void review(uint32_t, PlayerNumber, uint16_t, uint32_t, uint32_t, uint32_t, uint32_t, bool);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {
@@ -715,6 +727,8 @@ public:
 	uint32_t get_visible_enemies_power(uint32_t);
 	uint32_t get_enemies_average_power();
 	uint32_t get_enemies_average_land();
+	uint32_t get_enemies_max_power();
+	uint32_t get_enemies_max_land();
 	uint32_t get_old_visible_enemies_power(uint32_t);
 	uint32_t get_player_casualities(Widelands::PlayerNumber pn);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
