@@ -50,24 +50,46 @@ static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port
 
 using namespace Widelands;
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, bool avoid_fastclick)
+ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
    : Window(&igb, "shipwindow", 0, 0, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
+	init(false);
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
+	   [this](const Widelands::NoteShipWindow& note) {
+		   if (note.serial == ship_.serial()) {
+			   switch (note.action) {
+			   // The ship state has changed, e.g. expedition canceled
+			   case Widelands::NoteShipWindow::Action::kRefresh:
+				   init(true);
+				   break;
+			   // The ship is no more
+			   case Widelands::NoteShipWindow::Action::kClose:
+				   die();
+				   break;
+			   default:
+				   break;
+			   }
+		   }
+		});
+}
+
+void ShipWindow::init(bool avoid_fastclick) {
 	assert(ship_.get_owner());
 
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	// NOCOM(GunChleoc): Do we end up with garbage objects here?
+	vbox_ = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-	display_ = new ItemWaresDisplay(vbox, *ship.get_owner());
-	display_->set_capacity(ship.descr().get_capacity());
-	vbox->add(display_, UI::Align::kHCenter, false);
+	display_ = new ItemWaresDisplay(vbox_, *ship_.get_owner());
+	display_->set_capacity(ship_.descr().get_capacity());
+	vbox_->add(display_, UI::Align::kHCenter, false);
 
 	// Expedition buttons
 	if (ship_.state_is_expedition()) {
-		UI::Box* exp_top = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_top, UI::Align::kHCenter, false);
-		UI::Box* exp_mid = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_mid, UI::Align::kHCenter, false);
-		UI::Box* exp_bot = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_bot, UI::Align::kHCenter, false);
+		UI::Box* exp_top = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_top, UI::Align::kHCenter, false);
+		UI::Box* exp_mid = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_mid, UI::Align::kHCenter, false);
+		UI::Box* exp_bot = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_bot, UI::Align::kHCenter, false);
 
 		btn_scout_[WALK_NW - 1] =
 		   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
@@ -117,8 +139,8 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, bool avoid_fastclic
 	}
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(buttons, UI::Align::kLeft, false);
+	UI::Box* buttons = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+	vbox_->add(buttons, UI::Align::kLeft, false);
 
 	btn_goto_ = make_button(
 	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
@@ -145,17 +167,13 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, bool avoid_fastclic
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_, UI::Align::kLeft, false);
 	}
-	set_center_panel(vbox);
+	set_center_panel(vbox_);
 	set_thinks(true);
 	set_fastclick_panel(btn_goto_);
 	if (!avoid_fastclick) {
 		move_out_of_the_way();
 		warp_mouse_to_fastclick_panel();
 	}
-}
-
-ShipWindow::~ShipWindow() {
-	Notifications::publish(NoteShipWindow(ship_.serial(), NoteShipWindow::Action::kClosed));
 }
 
 void ShipWindow::think() {

@@ -34,8 +34,8 @@
  */
 class ShipWindow : protected UI::Window {
 protected:
-	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship, bool avoid_fastclick = false);
-	virtual ~ShipWindow();
+	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship);
+	void init(bool avoid_fastclick);
 
 	void think() override;
 
@@ -59,6 +59,7 @@ private:
 	InteractiveGameBase& igbase_;
 	Widelands::Ship& ship_;
 
+	UI::Box* vbox_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
@@ -70,6 +71,7 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 

@@ -47,71 +47,6 @@ std::string speed_string(int const speed) {
 
 }  // namespace
 
-InteractiveGameBase::MapObjectWindowManager::MapObjectWindowManager(InteractiveGameBase& igb)
-   : igb_(igb) {
-	// TODO(GunChleoc): Check if we can have a general NoteMapObjectWindow when we have all of them.
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
-	   [this](const Widelands::NoteShipWindow& note) {
-		   switch (note.action) {
-		   // The ship state has changed or the user requested a new window
-		   case Widelands::NoteShipWindow::Action::kRefresh:
-			   refresh(note.serial);
-			   break;
-		   // The ship has been removed
-		   case Widelands::NoteShipWindow::Action::kRemove:
-			   close(note.serial);
-			   break;
-		   // The user closed the window
-		   case Widelands::NoteShipWindow::Action::kClosed:
-			   unregister(note.serial);
-			   break;
-		   }
-		});
-}
-
-void InteractiveGameBase::MapObjectWindowManager::refresh(const Widelands::Serial& serial) {
-	bool is_refreshing = false;
-	Point pos(0, 0);
-	if (map_object_windows_.count(serial) == 1) {
-		UI::Window* window = map_object_windows_.at(serial);
-		if (window) {
-			is_refreshing = true;
-			pos = window->get_pos();
-			delete window;
-			window = nullptr;
-		}
-	}
-	Widelands::MapObject* mo = igb_.game().objects().get_object(serial);
-	// TODO(GunChleoc): Make this a switch statement when we have more of these.
-	if (mo->descr().type() == Widelands::MapObjectType::SHIP) {
-		upcast(Widelands::Ship, ship, mo);
-		ShipWindow* shipwindow = new ShipWindow(igb_, *ship, is_refreshing);
-		map_object_windows_.insert(std::pair<Widelands::Serial, UI::Window*>(serial, shipwindow));
-		if (is_refreshing) {
-			shipwindow->set_pos(pos);
-		}
-	} else {
-		NEVER_HERE();
-	}
-}
-
-void InteractiveGameBase::MapObjectWindowManager::close(Widelands::Serial serial) {
-	if (map_object_windows_.count(serial) == 1) {
-		UI::Window* window = map_object_windows_.at(serial);
-		if (window) {
-			delete window;
-			window = nullptr;
-		}
-		unregister(serial);
-	}
-}
-
-void InteractiveGameBase::MapObjectWindowManager::unregister(Widelands::Serial serial) {
-	if (map_object_windows_.count(serial) == 1) {
-		map_object_windows_.erase(serial);
-	}
-}
-
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
@@ -127,8 +62,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
 
      toggle_buildhelp_(INIT_BTN(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
-     window_manager_(new MapObjectWindowManager(*this)) {
+        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }
 
@@ -225,8 +159,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				Notifications::publish(Widelands::NoteShipWindow(
-				   ship->serial(), Widelands::NoteShipWindow::Action::kRefresh));
+				new ShipWindow(*this, *ship);
 				return true;
 			}
 		}

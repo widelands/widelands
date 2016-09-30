@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kRemove, kClosed };
+	enum class Action { kRefresh, kClose };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
