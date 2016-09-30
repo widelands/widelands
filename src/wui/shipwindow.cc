@@ -63,6 +63,8 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
 				   break;
 			   // The ship is no more
 			   case Widelands::NoteShipWindow::Action::kClose:
+				   // Stop this from thinking to avoid segfaults
+				   set_thinks(false);
 				   die();
 				   break;
 			   default:
@@ -75,20 +77,19 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
 void ShipWindow::init(bool avoid_fastclick) {
 	assert(ship_.get_owner());
 
-	// NOCOM(GunChleoc): Do we end up with garbage objects here?
-	vbox_ = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
-	display_ = new ItemWaresDisplay(vbox_, *ship_.get_owner());
+	display_ = new ItemWaresDisplay(vbox_.get(), *ship_.get_owner());
 	display_->set_capacity(ship_.descr().get_capacity());
 	vbox_->add(display_, UI::Align::kHCenter, false);
 
 	// Expedition buttons
 	if (ship_.state_is_expedition()) {
-		UI::Box* exp_top = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		UI::Box* exp_top = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
 		vbox_->add(exp_top, UI::Align::kHCenter, false);
-		UI::Box* exp_mid = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		UI::Box* exp_mid = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
 		vbox_->add(exp_mid, UI::Align::kHCenter, false);
-		UI::Box* exp_bot = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+		UI::Box* exp_bot = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
 		vbox_->add(exp_bot, UI::Align::kHCenter, false);
 
 		btn_scout_[WALK_NW - 1] =
@@ -139,7 +140,7 @@ void ShipWindow::init(bool avoid_fastclick) {
 	}
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(vbox_, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
 	vbox_->add(buttons, UI::Align::kLeft, false);
 
 	btn_goto_ = make_button(
@@ -167,7 +168,7 @@ void ShipWindow::init(bool avoid_fastclick) {
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_, UI::Align::kLeft, false);
 	}
-	set_center_panel(vbox_);
+	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(btn_goto_);
 	if (!avoid_fastclick) {

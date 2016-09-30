@@ -20,6 +20,8 @@
 #ifndef WL_WUI_SHIPWINDOW_H
 #define WL_WUI_SHIPWINDOW_H
 
+#include <memory>
+
 #include "logic/game.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
@@ -32,9 +34,12 @@
 /**
  * Display information about a ship.
  */
-class ShipWindow : protected UI::Window {
-protected:
+class ShipWindow : public UI::Window {
+public:
 	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship);
+
+private:
+	// Resets the vbox_ and fills it with the currently needed buttons, then positions the window.
 	void init(bool avoid_fastclick);
 
 	void think() override;
@@ -54,12 +59,10 @@ protected:
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
 
-private:
-	friend class InteractiveGameBase;
 	InteractiveGameBase& igbase_;
 	Widelands::Ship& ship_;
 
-	UI::Box* vbox_;
+	std::unique_ptr<UI::Box> vbox_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
