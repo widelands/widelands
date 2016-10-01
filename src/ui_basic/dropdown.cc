@@ -65,11 +65,8 @@ BaseDropdown::BaseDropdown(
                      "",
                      true,
                      false),
-     list_(parent,
-           x,
-           y + get_h(),
-           w,
-           0),  // Hook into parent so we can drop down outside the panel
+     // Hook into parent so we can drop down outside the panel
+     list_(parent, x, y + get_h(), w, 0, ListselectSelectionMode::kSelectOnMouseMove),
      label_(label) {
 	list_.set_visible(false);
 	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));

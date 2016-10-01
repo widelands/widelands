@@ -478,6 +478,9 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 		set_tooltip("");
 		return false;
 	}
+	if (selection_mode_ == ListselectSelectionMode::kSelectOnMouseMove) {
+		select(y);
+	}
 	set_tooltip(entry_records_.at(y)->tooltip);
 	return true;
 }

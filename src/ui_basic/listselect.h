@@ -33,10 +33,10 @@ namespace UI {
 struct Scrollbar;
 
 enum class ListselectSelectionMode {
-	kPlain,           // Highlight the selected element
-	kHoverHighlight,  // Highlight the element that the mouse hovers over, or the selected element
-	                  // for keyboard navigation
-	kShowCheck        // Show a green arrow in front of the selected element
+	kPlain,              // Highlight the selected element
+	kSelectOnMouseMove,  // When the mouse moves, instantly select the element that the mouse hovers
+                        // over
+	kShowCheck           // Show a green arrow in front of the selected element
 };
 
 /**
