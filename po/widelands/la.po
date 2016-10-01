@@ -5,12 +5,13 @@
 # GunChleoc, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Leonard Noack, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:40+0000\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 07:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
@@ -27,8 +28,8 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Novum propositum"
+msgstr[1] "Nova proposita"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -105,7 +106,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:96
 msgid "Jan"
-msgstr ""
+msgstr "Iān"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -114,7 +115,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:102
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -123,7 +124,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:108
 msgid "Mar"
-msgstr ""
+msgstr "Mār"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -132,7 +133,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:114
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -141,7 +142,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:120
 msgid "May"
-msgstr ""
+msgstr "Māi"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -150,7 +151,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:126
 msgid "Jun"
-msgstr ""
+msgstr "Iūn"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -159,7 +160,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:132
 msgid "Jul"
-msgstr ""
+msgstr "Iūl"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -168,7 +169,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:138
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -177,7 +178,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:144
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -186,7 +187,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:150
 msgid "Oct"
-msgstr ""
+msgstr "Oct"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -195,7 +196,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:156
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -203,12 +204,12 @@ msgstr ""
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:161
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #: ../../src/editor/editorinteractive.cc:72 ../../src/logic/game.cc:213
 #: ../../src/logic/game.cc:263
 msgid "Loading tribes"
-msgstr ""
+msgstr "Tollens gentes"
 
 #: ../../src/editor/editorinteractive.cc:111
 #: ../../src/editor/ui_menus/main_menu.cc:43
@@ -246,11 +247,11 @@ msgstr "Ludores"
 
 #: ../../src/editor/editorinteractive.cc:123
 msgid "Undo"
-msgstr ""
+msgstr "irritum facere"
 
 #: ../../src/editor/editorinteractive.cc:124
 msgid "Redo"
-msgstr ""
+msgstr "iterum facere"
 
 #: ../../src/editor/editorinteractive.cc:125
 #: ../../src/wui/buildingwindow.cc:298
@@ -301,7 +302,7 @@ msgstr "Nullum nomen"
 #: ../../src/logic/map.h:180
 msgctxt "author_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Ignotum"
 
 #: ../../src/editor/editorinteractive.cc:632
 #, c-format
@@ -310,7 +311,7 @@ msgstr ""
 
 #: ../../src/editor/map_generator.cc:712
 msgid "Random Player"
-msgstr ""
+msgstr "Ludor fortuitus"
 
 #: ../../src/editor/tools/info_tool.cc:45
 msgid "Field Information"
@@ -339,7 +340,7 @@ msgstr "magnum"
 
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr ""
+msgstr "vexillum"
 
 #: ../../src/editor/tools/info_tool.cc:81
 msgid "mine"
@@ -392,7 +393,7 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:115
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
 msgid "Terrain:"
-msgstr ""
+msgstr "locus"
 
 #: ../../src/editor/tools/info_tool.cc:122
 #, c-format
@@ -524,7 +525,7 @@ msgstr "Editorem finire"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:228
 #: ../../src/wui/mapdata.cc:164
 msgid "My Maps"
-msgstr ""
+msgstr "Tabulae meae"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
@@ -637,12 +638,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:64
 msgid "Width:"
-msgstr ""
+msgstr "Latitudo"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:76
 msgid "Height:"
-msgstr ""
+msgstr "Altitudo"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:84
 msgid "Create Map"
@@ -656,28 +657,28 @@ msgstr "Ludores:"
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 msgid "Summer"
-msgstr ""
+msgstr "Aestas"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:98
 msgid "Winter"
-msgstr ""
+msgstr "Hiems"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:100
 msgid "Desert"
-msgstr "Vastitas"
+msgstr "Deserta"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Wasteland"
-msgstr ""
+msgstr "Vastitas"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:107
 msgid "Low"
-msgstr ""
+msgstr "Pauci"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -689,7 +690,7 @@ msgstr "Medium"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "High"
-msgstr "Altum"
+msgstr "Multi"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:116
 msgid "Climate:"
@@ -697,19 +698,19 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:147
 msgid "Water:"
-msgstr ""
+msgstr "Aqua"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:160
 msgid "Land:"
-msgstr ""
+msgstr "Terra"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:173
 msgid "Wasteland:"
-msgstr ""
+msgstr "Vastitas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:179
 msgid "Mountains:"
-msgstr ""
+msgstr "Montes"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:185
@@ -744,7 +745,7 @@ msgstr ""
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:573
 msgid "Random Map"
-msgstr ""
+msgstr "Tabula fortuita"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -902,7 +903,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_menu.cc:63
 #: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:42
 msgid "Animals"
-msgstr ""
+msgstr "Animales"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:65
 msgid "Set port space"
@@ -920,11 +921,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Altitudo minima:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Altitudo maxima:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
@@ -936,11 +937,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
-msgstr ""
+msgstr "Altitudo fortuita"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:103
 msgid "Fixed Height"
-msgstr ""
+msgstr "Altitudo immutabilis"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
@@ -979,9 +980,9 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1331
 msgid "Loading…"
-msgstr ""
+msgstr "Tollens..."
 
 #: ../../src/logic/game.cc:437
 msgid "Creating player infrastructure"
@@ -1671,7 +1672,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1224
 msgid "Preparing game"
 msgstr "Ludum paro"
 
@@ -2948,11 +2949,11 @@ msgstr "Contentiones"
 msgid "Load Game"
 msgstr "Ludum tollere"
 
-#: ../../src/wlapplication.cc:996
+#: ../../src/wlapplication.cc:1023
 msgid "Game data error"
 msgstr "Error datorum ludi"
 
-#: ../../src/wlapplication.cc:1005
+#: ../../src/wlapplication.cc:1032
 #, c-format
 msgid ""
 "\n"
@@ -2960,7 +2961,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nHunc errorem, quaeso, nunties, ut Widelands ludus emendetur et melius fiat. Plus in regulare editione (stdout.txt in Windows systemate). Uteris aedem %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1038
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3329,7 +3330,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Num plica %s deleatur?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:581
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3359,20 +3360,20 @@ msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:121
-#: ../../src/wui/game_message_menu.cc:572
-#: ../../src/wui/game_message_menu.cc:584
+#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:604
 #, c-format
 msgid "Del: %s"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Archive selected message"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:131
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Archive"
 msgstr "Archivum monstrare"
 
@@ -3388,55 +3389,85 @@ msgid "Center main mapview on location"
 msgstr "Monstra locum tabulae in mediam fenestram"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:498
-#: ../../src/wui/game_message_menu.cc:509
-#: ../../src/wui/game_message_menu.cc:513
 #: ../../src/wui/game_message_menu.cc:517
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:545
 msgid "%1% (Hotkey: %2%)"
 msgstr ""
 
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:500
-msgid "Show all messages"
-msgstr ""
-
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:511
-msgid "Show geologists' messages only"
-msgstr ""
-
-#. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:515
-msgid "Show economy messages only"
+#: ../../src/wui/game_message_menu.cc:519
+msgctxt "hotkey"
+msgid "Alt + 0"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:519
+msgid "Show all messages"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:530
+msgid "Show geologists' messages only"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:531
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:535
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:535
+msgid "Show economy messages only"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:539
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show seafaring messages only"
 msgstr ""
 
+#: ../../src/wui/game_message_menu.cc:543
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:543
 msgid "Show warfare messages only"
 msgstr ""
 
+#: ../../src/wui/game_message_menu.cc:547
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show scenario messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:569
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Archive"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:574
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:577
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Nuntia nova monstrare"
 

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 07:53+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1973,30 +1973,60 @@ msgstr "Следните допълнителни клавиши могат да
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Алт + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Показва всички съобщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Алт + 1"
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Показване само на съобщенията от геолозите"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Алт + 2"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Показване само на съобщенията за икономиката"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Алт + 3"
+
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Показване само на съобщенията за мореплаването"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Алт + 4"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Показване само на военните съобщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Алт + 5"
+
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Показване само на съобщенията за сценария"
@@ -3360,7 +3390,7 @@ msgstr "Пренася стоки по пътищата Ви."
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Burns coal."
-msgstr "Изгаря въглища"
+msgstr "Изгаря въглища."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
@@ -3556,7 +3586,7 @@ msgstr "Развъжда силни волове, които да се полз�
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns coal."
-msgstr "Изгаря въглища"
+msgstr "Изгаря въглища."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -3582,7 +3612,7 @@ msgstr "Дивечовъдът се грижи за това да поддърж
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr "Отглежда покривна слама"
+msgstr "Отглежда покривна слама."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -3726,7 +3756,7 @@ msgstr "Пренася стоки по пътищата Ви."
 #: ../../data/tribes/workers/empire/charcoal_burner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Burns coal."
-msgstr "Изгаря въглища"
+msgstr "Изгаря въглища."
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../data/tribes/workers/empire/donkey/helptexts.lua:3

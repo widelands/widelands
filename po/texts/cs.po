@@ -6,13 +6,14 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-27 09:51+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Vývojáři"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -38,20 +39,20 @@ msgstr "Licenční informace pro Widelands"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2016 by the Widelands Development Team."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU General Public License (GPL) V2.0"
+msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -67,7 +68,7 @@ msgstr "Dále připojujeme GPL jako textový dokument i k Widelands."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "V Linuxu lze soubor COPYING najít v hlavním adresáři zdrojového kódu nebo samostatného binárního balíčku, nebo v instalačním adresáři (např. ‘%1%’)."
 
 #: ../../data/txts/LICENSE.lua:31
 msgid ""
@@ -90,7 +91,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Čti mě"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -121,7 +122,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands pomoc"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
@@ -133,7 +134,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -149,13 +150,13 @@ msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "Podrobný postup jak chybu vyvolat, je-li to možné."
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "Co jste očekávali, že se stane, když jste učinili tyto kroky a co se doopravdy stalo."
 
 #: ../../data/txts/README.lua:35
 msgid ""
@@ -168,17 +169,17 @@ msgstr ""
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "Prosím, přijdete informaci o tom, na jakém operační systému Widelands hrajete, protože některé chyby mohou být specifické pro danou platformu."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "Kterou mapu jsi hrál, když jsi na chybu narazi."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "Pokud chyba souvisí s tím, že je něco zobrazeno nesprávně nebo lze chybu lépe vysvětlit graficky, přiložte jeden a více screenshotů."
 
 #: ../../data/txts/README.lua:39
 msgid ""
@@ -193,11 +194,11 @@ msgstr "Překladatelé"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands překladatelé"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
-msgstr "Atleanťan"
+msgstr "Atlanťan"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
@@ -217,7 +218,7 @@ msgstr "Programátoři"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -233,15 +234,15 @@ msgstr "Císařství"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Předešlí starší"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -257,15 +258,15 @@ msgstr "Domovská stránka"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr "Programátoři domovské stránky"
+msgstr "Domovské stránky kodérů"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -281,7 +282,7 @@ msgstr "Další"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
-msgstr "Baliči"
+msgstr "Balíčkáři"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
@@ -301,11 +302,11 @@ msgstr "Překlad"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -377,40 +378,40 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Mezerník"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Přepínání míst pro budovy"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Přepíná celoobrazovkový režim (pokud je podporován v OS)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Přepíná minimapu"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Nastavení hry více hráčů"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Jsi v menu spuštění hry více hráčů."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavení klienta"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
@@ -432,7 +433,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Nastavení hráče"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -457,7 +458,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Zavřeno."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -475,7 +476,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Podrobnosti mapy"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -496,7 +497,7 @@ msgstr ""
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Nikdy nezapomeň postavit domek lesníka nebo porybného, aby ti nedošlo dřevo nebo jídlo."
+msgstr "Nikdy nezapomeň postavit domek lesníka nebo porybného, aby ti nedošly kmeny nebo jídlo."
 
 #: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
 msgid ""
@@ -508,7 +509,7 @@ msgstr ""
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr "Nikdy nezapomeň postavit domek lesníka nebo hajného, aby ti nedošlo dřevo nebo jídlo."
+msgstr "Nikdy nezapomeň postavit chaty pro lesníka a hajného, aby ti nedošly kmeny nebo jídlo."
 
 #: ../../data/txts/tips/editor.tip:2
 msgid ""
@@ -545,7 +546,7 @@ msgstr ""
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Pomocí kláves čísel (1-0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
+msgstr "Pomocí kláves čísel (1 - 0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -555,7 +556,7 @@ msgstr ""
 
 #: ../../data/txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Nikdy nezapomeň postavit domek lesníka , aby ti nedošlo dřevo."
+msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly kmeny."
 
 #: ../../data/txts/tips/general_game.tip:2
 msgid ""
@@ -567,7 +568,7 @@ msgstr "Stavba začne teprve poté, až bude ke staveništi postavena cesta."
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr "Předtím než postavíš důl nebo studnu, určitě pošli na vyhlédnuté místo geologa."
+msgstr "Předtím než postavíš důl nebo studnu, pošli na vyhlédnuté místo geologa."
 
 #: ../../data/txts/tips/general_game.tip:10
 msgid ""
@@ -583,7 +584,7 @@ msgstr "Horníci pracují pouze pokud jsou zásobováni jídlem."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přepravu zboží."
+msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přepravu surovin."
 
 #: ../../data/txts/tips/general_game.tip:22
 msgid ""
@@ -595,13 +596,13 @@ msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum n
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr "Pro nastavení přepravy specifického zboží lze použít tlačítka priority v okně výstavby."
+msgstr "Pro nastavení přepravy specifické suroviny, lze použít tlačítka priority v okně výstavby."
 
 #: ../../data/txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Pro úpravu cílového množství surovit použit volbu \"konfigurace hospodářství\" v menu. Menu je přístupné přes menu vlajky."
+msgstr "Použij menu \"nastavení hospodářství\" pro nastavení maximálního množství surovin. Menu je přístupné přes menu vlajky."
 
 #: ../../data/txts/tips/general_game.tip:34
 msgid ""
@@ -632,7 +633,7 @@ msgstr "Odebráním cesty se stisknutým Ctrl můžeš odebrat všechny vlajky a
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr "Noví vojáci jsou rekrutováni na velitelství nebo ve skladě, pokud jsou dostupné všechny potřebné nástroje. Výcviková střediska zvyšují jejich schopnosti."
+msgstr "Noví vojáci jsou rekrutováni v hlavní budově nebo ve skladišti, pokud jsou dostupné všechny potřebné nástroje. Cvičiště vylepšují jejich schopnosti."
 
 #: ../../data/txts/tips/general_game.tip:54
 msgid ""
@@ -666,7 +667,7 @@ msgstr "Na začátku řádku zprávy chatu můžeš použít '/me', které se p�
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "Pro odeslání zprávy pouze jednomu hráči napište na začátek zprávy '@jméno' ."
+msgstr "Pro odeslání zprávy pouze jednomu hráči, napište na začátek zprávy '@jméno'."
 
 #: ../../data/txts/tips/singleplayer.tip:2
 msgid ""

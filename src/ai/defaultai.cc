@@ -4176,7 +4176,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return needed_type;
 			} else if (bo.total_count() == 0) {
 				return needed_type;
-			} else if (bo.current_stats > 10 + 70 / bo.outputs.size()) {
+			} else if (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) {
 				assert(bo.last_building_built != kNever);
 				if (gametime < bo.last_building_built + 10 * 60 * 1000) {
 					// Previous building built less then 10 minutes ago
@@ -4204,7 +4204,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
 			return BuildingNecessity::kNeeded;
-		} else if (bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
+		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 12:29+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -765,7 +765,7 @@ msgstr "„Látom, napról napra mint kopik el csákányom, s ráébredek, miér
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Quote from an anonymous miner."
-msgstr "Egy ismeretlen bányász szavai"
+msgstr "Egy ismeretlen bányász szavai."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:18
@@ -1548,8 +1548,8 @@ msgstr "Gyógyítás:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second"
 msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként."
-msgstr[1] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként."
+msgstr[0] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként"
+msgstr[1] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként"
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1975,30 +1975,60 @@ msgstr "Az üzenetablakban a következő gyorsbillentyűk használhatóak:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Minden üzenet megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Csak a gazdasági üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
 msgstr "Csak a hajózási üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Csak a hadi üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
 msgstr "Csak a küldetés üzeneteinek megjelenítése"
@@ -2118,7 +2148,7 @@ msgstr[1] "Itt dolgozik:"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Worker uses"
-msgstr "Munkás használja:"
+msgstr "Munkás használja"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:156
 msgid "Experience levels"
@@ -2184,7 +2214,7 @@ msgstr "Szintenként %d%%-kal nő."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:214
 msgid "This soldier cannot be trained in defense."
-msgstr "Ennek a katonának nem képezhető tovább a védelme"
+msgstr "Ennek a katonának nem képezhető tovább a védelme."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:217
 msgid "Evade"

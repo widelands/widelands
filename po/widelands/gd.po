@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-15 05:56+0000\n"
+"POT-Creation-Date: 2016-09-24 07:02+0000\n"
+"PO-Revision-Date: 2016-09-24 09:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,14 @@ msgstr[3] "Amasan ùra"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s ⁊ %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s no %2$s"
@@ -51,8 +51,8 @@ msgstr "%1$s no %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -60,7 +60,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ’s %2$s"
@@ -984,7 +984,7 @@ msgid "Loading map…"
 msgstr "A’ luchdadh a’ mhapa…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1331
 msgid "Loading…"
 msgstr "’Ga luchdadh…"
 
@@ -1241,12 +1241,12 @@ msgstr[3] "Chaidh %s a thrusadh"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
-msgstr "Chan eil saighdear ri thrèanadh ann!"
+msgstr "Chan eil saighdear ri oideachadh ann!"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1245
 #: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
-msgstr "Cha deach saighdear airson an leibheil de thrèanadh seo a lorg!"
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
@@ -1698,7 +1698,7 @@ msgid ""
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\nCha robh frithealaiche Widelands a’ ruith aig a’ phort sin air neo\nchaidh am frithealaiche a dhùnadh sìos fhad ’s a bha thu a’ feuchainn ri ceangal."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1224
 msgid "Preparing game"
 msgstr "Ag ullachadh a’ gheama"
 
@@ -2283,7 +2283,7 @@ msgstr "Cliantan air loidhne:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:53
 msgid "List of games:"
-msgstr "Liosta dhe na geamaichean:"
+msgstr "Liosta dhe na geamannan:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:54
 msgid "Name of your server:"
@@ -2987,11 +2987,11 @@ msgstr "Iomairtean"
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/wlapplication.cc:996
+#: ../../src/wlapplication.cc:1023
 msgid "Game data error"
 msgstr "Mearachd le dàta a’ gheama"
 
-#: ../../src/wlapplication.cc:1005
+#: ../../src/wlapplication.cc:1032
 #, c-format
 msgid ""
 "\n"
@@ -2999,7 +2999,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nNach innis thu dhuinn mun duilgheadas seo ach an doir sinn piseach air Widelands? Chì thu teachdaireachdan co-cheangailte ris san às-chur stannardach (stdout.txt air Windows). Tha thu a’ chleachdadh an togail %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1038
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3370,7 +3370,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "A bheil thu cinnteach gu bheil thu airson am faidhle %s a sguabadh às?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:581
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr "Teachdaireachdan: Am bogsa a-steach"
 
@@ -3400,20 +3400,20 @@ msgstr "Àm"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:121
-#: ../../src/wui/game_message_menu.cc:572
-#: ../../src/wui/game_message_menu.cc:584
+#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:604
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Archive selected message"
 msgstr "Cuir an teachdaireachd a thagh thu dhan tasglann"
 
 #: ../../src/wui/game_message_menu.cc:131
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Archive"
 msgstr "Dhan tasglann"
 
@@ -3429,55 +3429,85 @@ msgid "Center main mapview on location"
 msgstr "Meadhanaich sealladh a’ mhapa air an ionad"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:498
-#: ../../src/wui/game_message_menu.cc:509
-#: ../../src/wui/game_message_menu.cc:513
 #: ../../src/wui/game_message_menu.cc:517
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:545
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (grad-iuchair: %2%)"
 
+#: ../../src/wui/game_message_menu.cc:519
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:500
+#: ../../src/wui/game_message_menu.cc:519
 msgid "Show all messages"
 msgstr "Seall a h-uile teachdaireachd"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show geologists' messages only"
 msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 
+#: ../../src/wui/game_message_menu.cc:531
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
+#: ../../src/wui/game_message_menu.cc:535
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show economy messages only"
 msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 
+#: ../../src/wui/game_message_menu.cc:539
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show seafaring messages only"
 msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 
+#: ../../src/wui/game_message_menu.cc:543
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:543
 msgid "Show warfare messages only"
 msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 
+#: ../../src/wui/game_message_menu.cc:547
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show scenario messages only"
 msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
 
-#: ../../src/wui/game_message_menu.cc:569
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Archive"
 msgstr "Teachdaireachdan: Tasglann"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:574
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
 msgstr "Aisig an teachdaireachd a thagh thu"
 
-#: ../../src/wui/game_message_menu.cc:577
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Dhan bhogsa a-steach"
 
@@ -3742,7 +3772,7 @@ msgstr "Seòladaireachd"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Artifacts"
-msgstr "Buill-cheàirde"
+msgstr "Buill-ealain"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:38
@@ -4092,7 +4122,7 @@ msgstr "Luchd-obrach ann an taighean-stòrais"
 
 #: ../../src/wui/trainingsitewindow.cc:55
 msgid "Soldiers in training"
-msgstr "Saighdearan ’gan trèanadh"
+msgstr "Saighdearan ’gan oideachadh"
 
 #: ../../src/wui/transport_ui.cc:52
 msgid "Economy options"

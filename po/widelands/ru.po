@@ -4,7 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
 # dr&mx <dronmax@gmail.com>, 2015
 # GunChleoc, 2016
 # Yuriy Sokolov <lention@mail.ru>, 2015
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:31+0000\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 07:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новая задача"
 msgstr[1] "Новых задач"
-msgstr[2] "Новых задач"
+msgstr[2] "Новые задачи"
 msgstr[3] "Новые задачи"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
@@ -71,14 +71,14 @@ msgstr "%1$s и %2$s"
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:157
 msgid "No Space"
-msgstr ""
+msgstr "Недостаточно пространства"
 
 #: ../../data/scripting/infrastructure.lua:158
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Не хватило места для постройки некоторых ваших стартовых зданий. Вы находитесь в невыгодном положении; можете начать игру заново, чтобы стартовать на более справедливых условиях."
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
@@ -87,17 +87,17 @@ msgstr "Недостаточно места"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
-msgstr ""
+msgstr "Без ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:102
 msgid "Normal AI"
-msgstr ""
+msgstr "Нормальный ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:115
 msgid "Weak AI"
-msgstr ""
+msgstr "Слабый ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:128
@@ -381,7 +381,7 @@ msgstr "Владелец: —"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "Has immovable"
-msgstr ""
+msgstr "Есть неподвижные объекты"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "No immovable"
@@ -409,7 +409,7 @@ msgstr "Имя: %s"
 #: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "Это: %s"
 
 #: ../../src/editor/tools/info_tool.cc:137
 #, c-format
@@ -478,7 +478,7 @@ msgstr "Текущий: %s …"
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:193
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr ""
+msgstr "Кликните ЛКМ для выбора объекта. Используйте клавишу Ctrl для выбора нескольких объектов"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:196
@@ -530,7 +530,7 @@ msgstr "Выход из редактора"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:228
 #: ../../src/wui/mapdata.cc:164
 msgid "My Maps"
-msgstr ""
+msgstr "Мои карты"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
@@ -543,7 +543,7 @@ msgstr "Многопользовательские сценарии"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:228
 #, c-format
 msgid "Current Directory: %s"
-msgstr ""
+msgstr "Текущий каталог: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
@@ -570,7 +570,7 @@ msgstr "Отмена"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:132
 msgid "Show Map Names"
-msgstr ""
+msgstr "Показать названия карт"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
@@ -581,7 +581,7 @@ msgstr "Отображать реальные имена файлов"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
 msgid "Show Filenames"
-msgstr ""
+msgstr "Показать имена файлов"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:104
 #: ../../src/ui_fsmenu/loadgame.cc:330
@@ -602,12 +602,12 @@ msgstr "Описание:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:119
 msgid "Hint (optional):"
-msgstr ""
+msgstr "Подсказки (по желанию):"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:126
 #: ../../src/wui/mapdetails.cc:171
 msgid "Tags:"
-msgstr ""
+msgstr "Ключевые слова:"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:134
@@ -632,7 +632,7 @@ msgstr "Основные настройки"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:151
 msgid "Tags"
-msgstr ""
+msgstr "Ключевые слова"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:153
 msgid "Teams"
@@ -709,11 +709,11 @@ msgstr "Вода:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:160
 msgid "Land:"
-msgstr ""
+msgstr "Суша:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:173
 msgid "Wasteland:"
-msgstr ""
+msgstr "Пустошь:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:179
 msgid "Mountains:"
@@ -729,7 +729,7 @@ msgstr "%i %%"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:187
 msgid "Island mode"
-msgstr ""
+msgstr "Режим острова"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:190
 msgid "Random Number:"
@@ -765,7 +765,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "Карта сгенерирована. Пожалуйста, перепроверьте стартовые позиции игроков, чтобы убедиться, что ваши носильщики не утонут, или застрянут на острове или на вершине горы."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:29
@@ -852,26 +852,26 @@ msgstr "Инструменты высоты"
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Увеличить/уменьшить значение:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
-msgstr ""
+msgstr "Задать значение:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:65
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Клик на карте для увеличения, Shift + клик на карте для уменьшения высоты местности"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Ctrl + клик на карте, чтобы установить высоту местности"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
@@ -883,12 +883,12 @@ msgstr "Ресурсы"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Нажмите на карту для увеличения, Shift + клик на карте, чтобы уменьшить залежи выбранного ресурса"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "Ctrl + клик на карте, чтобы установить залежи выбранного ресурса"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -896,7 +896,7 @@ msgstr "Изменить высоту"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:60
 msgid "Random height"
-msgstr ""
+msgstr "Случайная высота"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:142
 msgid "Terrain"
@@ -924,11 +924,11 @@ msgstr "Задайте позицию с координатами (0, 0). Это
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
-msgstr ""
+msgstr "Настройки случайной высоты"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Минимальная высота:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum Height:"
@@ -987,7 +987,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1331
 msgid "Loading…"
 msgstr ""
 
@@ -1701,7 +1701,7 @@ msgid ""
 msgstr "Widelands не может осуществить соединение по указанному адресу. \nВозможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз"
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1224
 msgid "Preparing game"
 msgstr "Подготовка игры"
 
@@ -2990,11 +2990,11 @@ msgstr "Кампании"
 msgid "Load Game"
 msgstr "Загрузить игру"
 
-#: ../../src/wlapplication.cc:996
+#: ../../src/wlapplication.cc:1023
 msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
-#: ../../src/wlapplication.cc:1005
+#: ../../src/wlapplication.cc:1032
 #, c-format
 msgid ""
 "\n"
@@ -3002,7 +3002,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nСообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt на Windows). Вы используете сборку %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1038
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3373,7 +3373,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Вы действительно хотите удалить файл %s?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:581
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr "Сообщения: Входящее"
 
@@ -3403,20 +3403,20 @@ msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:121
-#: ../../src/wui/game_message_menu.cc:572
-#: ../../src/wui/game_message_menu.cc:584
+#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:604
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Archive selected message"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:131
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Archive"
 msgstr "Архив"
 
@@ -3432,55 +3432,85 @@ msgid "Center main mapview on location"
 msgstr "Центрировать главное окно карты на месте"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:498
-#: ../../src/wui/game_message_menu.cc:509
-#: ../../src/wui/game_message_menu.cc:513
 #: ../../src/wui/game_message_menu.cc:517
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:545
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (клавиатура: %2%)"
 
+#: ../../src/wui/game_message_menu.cc:519
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:500
+#: ../../src/wui/game_message_menu.cc:519
 msgid "Show all messages"
 msgstr "Показать все сообщения"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show geologists' messages only"
 msgstr "Показать только сообщения геологов"
 
+#: ../../src/wui/game_message_menu.cc:531
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:535
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show economy messages only"
 msgstr "Показать только сообщения о состоянии экономики"
 
+#: ../../src/wui/game_message_menu.cc:539
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show seafaring messages only"
 msgstr "Показать только сообщения о мореплавании"
 
+#: ../../src/wui/game_message_menu.cc:543
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:543
 msgid "Show warfare messages only"
 msgstr "Показать только военные сообщения"
 
+#: ../../src/wui/game_message_menu.cc:547
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr ""
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show scenario messages only"
 msgstr "Показать только сообщения сценария"
 
-#: ../../src/wui/game_message_menu.cc:569
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Archive"
 msgstr "Сообщения: Архив"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:574
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:577
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Показать \"входящее\""
 

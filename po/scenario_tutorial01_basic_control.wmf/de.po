@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wuzzy <almikes@aol.com>, 2016
 # Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # GunChleoc, 2016
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:52+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-09-19 07:41+0000\n"
+"PO-Revision-Date: 2016-09-19 20:09+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -865,6 +866,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Den Steinbruch abreißen: Ein Bauarbeiter kommt von deinem Hauptquartier, um den Steinbruch Stück für Stück abzureißen. Dabei erhältst du einige Rohstoffe, die du für den Bau verwendet hast, zurück."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Zerstöre die beiden Steinbrüche"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
