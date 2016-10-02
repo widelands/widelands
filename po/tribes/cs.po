@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-24 07:02+0000\n"
-"PO-Revision-Date: 2016-09-27 10:00+0000\n"
+"POT-Creation-Date: 2016-09-28 06:50+0000\n"
+"PO-Revision-Date: 2016-09-29 20:13+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -530,7 +530,7 @@ msgstr "Pěstitel rozrazilu nemůže sázet rozrazil, protože nemá kam sázet.
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Charcoal Kiln"
-msgstr "Pec na dřevěné uhlí"
+msgstr "Milíř na dřevěné uhlí"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:51
@@ -1248,7 +1248,7 @@ msgstr "chovám dobytek"
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
 msgctxt "barbarians_building"
 msgid "Charcoal Kiln"
-msgstr "Pec na dřevěné uhlí"
+msgstr "Milíř na dřevěné uhlí"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
@@ -1695,7 +1695,7 @@ msgstr "Pivovar"
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
 msgctxt "empire_building"
 msgid "Charcoal Kiln"
-msgstr "Pec na dřevěné uhlí"
+msgstr "Milíř na dřevěné uhlí"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:7
@@ -2287,7 +2287,7 @@ msgid "Warehouse"
 msgstr "Skladiště"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Popel"
@@ -2613,14 +2613,14 @@ msgid ""
 msgstr "Pokud tomuto hráči dojdou potřebné suroviny, budou zdarma doplněny"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Loď"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Zbroj"
