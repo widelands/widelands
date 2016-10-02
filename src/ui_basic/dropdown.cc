@@ -135,10 +135,7 @@ void BaseDropdown::clear() {
 void BaseDropdown::think() {
 	if (list_.is_visible()) {
 		// Autocollapse with a bit of tolerance for the mouse movement to make it less fiddly.
-		if (!(has_focus() || list_.has_focus()) || (get_mouse_position().x + mouse_tolerance_) < 0 ||
-		    get_mouse_position().x > (get_w() + mouse_tolerance_) ||
-		    (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
-		    get_mouse_position().y > (get_h() + list_.get_h() + mouse_tolerance_)) {
+		if (!(has_focus() || list_.has_focus()) || is_mouse_away()) {
 			toggle_list();
 		}
 	}
@@ -174,6 +171,13 @@ void BaseDropdown::toggle_list() {
 	set_layout_toplevel(list_.is_visible());
 }
 
+bool BaseDropdown::is_mouse_away() const {
+	return (get_mouse_position().x + mouse_tolerance_) < 0 ||
+	       get_mouse_position().x > (get_w() + mouse_tolerance_) ||
+	       (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
+	       get_mouse_position().y > (get_h() + list_.get_h() + mouse_tolerance_);
+}
+
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
@@ -190,7 +194,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			}
 			break;
 		case SDLK_DOWN:
-			if (!list_.is_visible()) {
+			if (!list_.is_visible() && !is_mouse_away()) {
 				toggle_list();
 				return true;
 			}

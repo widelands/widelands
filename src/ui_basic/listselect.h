@@ -35,7 +35,7 @@ struct Scrollbar;
 enum class ListselectSelectionMode {
 	kPlain,              // Highlight the selected element
 	kSelectOnMouseMove,  // When the mouse moves, instantly select the element that the mouse hovers
-                        // over
+	                     // over
 	kShowCheck           // Show a green arrow in front of the selected element
 };
 
