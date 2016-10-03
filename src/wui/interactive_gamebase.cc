@@ -80,7 +80,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				// Check whether the window is wanted
 				if (wanted_building_windows_.count(coords.hash()) == 1) {
 					BuildingWindow* building_window = show_building_window(coords, true);
-					building_window->set_pos(wanted_building_windows_.at(coords.hash()).second);
+					building_window->set_pos(std::get<1>(wanted_building_windows_.at(coords.hash())));
+					if (std::get<2>(wanted_building_windows_.at(coords.hash()))) {
+						building_window->minimize();
+					}
 					wanted_building_windows_.erase(coords.hash());
 				}
 			}
@@ -166,8 +169,8 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_.set_perm_pressed(value);
 }
 
-void InteractiveGameBase::add_wanted_building(const Widelands::Coords& coords, const Point point) {
-	wanted_building_windows_.insert(std::make_pair(coords.hash(), std::make_pair(coords, point)));
+void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords, const Point point, bool was_minimal) {
+	wanted_building_windows_.insert(std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));
 }
 BuildingWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord, bool avoid_fastclick) {
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);

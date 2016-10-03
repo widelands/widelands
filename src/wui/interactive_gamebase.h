@@ -20,6 +20,10 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
+#include <map>
+#include <memory>
+#include <tuple>
+
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "wui/general_statistics_menu.h"
@@ -71,7 +75,7 @@ public:
 		playertype_ = pt;
 	}
 
-	void add_wanted_building(const Widelands::Coords& coords, const Point point);
+	void add_wanted_building_window(const Widelands::Coords& coords, const Point point, bool was_minimal);
 	BuildingWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
@@ -99,7 +103,8 @@ protected:
 
 private:
 	void on_buildhelp_changed(const bool value) override;
-	std::map<uint32_t, std::pair<const Widelands::Coords, const Point>> wanted_building_windows_;
+	// Building coordinates, window position, whether the window was minimized
+	std::map<uint32_t, std::tuple<const Widelands::Coords, const Point, bool>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>> buildingnotes_subscriber_;
 };
 

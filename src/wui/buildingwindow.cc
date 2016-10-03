@@ -61,7 +61,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building&
 						break;
 					// The building is no more
 					case Widelands::NoteBuildingWindow::Action::kStartWarp:
-						igbase().add_wanted_building(building().get_position(), get_pos());
+						igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
 						// Fallthrough intended
 					case Widelands::NoteBuildingWindow::Action::kClose:
 						// Stop everybody from thinking to avoid segfaults
