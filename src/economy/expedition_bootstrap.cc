@@ -30,7 +30,6 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-// NOCOM remove wui dependency from CMakeLists.txt if possible
 
 namespace Widelands {
 
