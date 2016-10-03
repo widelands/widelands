@@ -38,8 +38,10 @@
 #include "wui/game_summary.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
+#include "wui/shipwindow.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/warehousewindow.h"
+
 
 namespace {
 
@@ -209,7 +211,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				ship->show_window(*this);
+				new ShipWindow(*this, *ship);
 				return true;
 			}
 		}

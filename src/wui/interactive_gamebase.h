@@ -31,8 +31,7 @@ enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	class GameMainMenuWindows {
-	public:
+	struct GameMainMenuWindows {
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
 		UI::UniqueWindow::Registry readme;
