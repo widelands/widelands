@@ -205,7 +205,8 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action() {
 	// Special case for buildings
 	if (is_a(Widelands::Building, egbase().map().get_immovable(get_sel_pos().node))) {
-		return show_building_window(get_sel_pos().node, false);
+		show_building_window(get_sel_pos().node, false);
+		return;
 	}
 
 	if (try_show_ship_window()) {

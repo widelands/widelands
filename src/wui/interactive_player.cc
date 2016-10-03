@@ -245,8 +245,10 @@ void InteractivePlayer::node_action() {
 	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
-			if (can_see(building->owner().player_number()))
-				return show_building_window(get_sel_pos().node, false);
+			if (can_see(building->owner().player_number())) {
+				show_building_window(get_sel_pos().node, false);
+				return ;
+			}
 
 		if (!is_building_road()) {
 			if (try_show_ship_window())

@@ -49,6 +49,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building&
    : UI::Window(&parent, "building_window", 0, 0, Width, 0, b.descr().descname()),
      building_(b),
      workarea_overlay_id_(0),
+	  avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
 		buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
 			[this](const Widelands::NoteBuildingWindow& note) {
@@ -60,8 +61,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building&
 						break;
 					// The building is no more
 					case Widelands::NoteBuildingWindow::Action::kStartWarp:
-						// NOCOM remember where the window was and whether it was minimized
-						igbase().add_wanted_building(building().get_position());
+						igbase().add_wanted_building(building().get_position(), get_pos());
 						// Fallthrough intended
 					case Widelands::NoteBuildingWindow::Action::kClose:
 						// Stop everybody from thinking to avoid segfaults
