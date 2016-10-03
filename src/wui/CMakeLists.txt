@@ -165,6 +165,7 @@ wl_library(wui
     story_message_box.cc
     story_message_box.h
     trainingsitewindow.cc
+    trainingsitewindow.h
     transport_draw.cc
     transport_ui.cc
     tribal_encyclopedia.cc

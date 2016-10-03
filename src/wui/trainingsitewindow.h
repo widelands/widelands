@@ -17,24 +17,26 @@
  *
  */
 
-#ifndef WL_WUI_WAREHOUSEWINDOW_H
-#define WL_WUI_WAREHOUSEWINDOW_H
+#ifndef WL_WUI_TRAININGSITEWINDOW_H
+#define WL_WUI_TRAININGSITEWINDOW_H
 
-#include "logic/map_objects/tribes/warehouse.h"
-#include "wui/buildingwindow.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "ui_basic/button.h"
+#include "wui/productionsitewindow.h"
 
 /**
- * Status window for warehouses
+ * Status window for \ref TrainingSite
  */
-struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent, Widelands::Warehouse&);
+struct TrainingSiteWindow : public ProductionSiteWindow {
+	TrainingSiteWindow(InteractiveGameBase& parent, Widelands::TrainingSite&);
 
-	Widelands::Warehouse& warehouse() {
-		return dynamic_cast<Widelands::Warehouse&>(building());
+	Widelands::TrainingSite& trainingsite() {
+		return dynamic_cast<Widelands::TrainingSite&>(building());
 	}
 
 protected:
 	void init() override;
+	void create_capsbuttons(UI::Box* buttons) override;
 };
 
-#endif  // end of include guard: WL_WUI_WAREHOUSEWINDOW_H
+#endif  // end of include guard: WL_WUI_TRAININGSITEWINDOW_H

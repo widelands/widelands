@@ -35,7 +35,7 @@ struct MilitarySiteWindow : public BuildingWindow {
 	}
 
 protected:
-	void init() override;  // NOCOM move to header file
+	void init() override;
 	void create_capsbuttons(UI::Box* buttons) override;
 };
 

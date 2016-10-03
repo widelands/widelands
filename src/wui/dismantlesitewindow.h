@@ -33,7 +33,7 @@ struct DismantleSiteWindow : public BuildingWindow {
 	void think() override;
 
 protected:
-	void init() override;  // NOCOM move to header file
+	void init() override;
 private:
 	UI::ProgressBar* progress_;
 };

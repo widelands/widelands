@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,40 +17,31 @@
  *
  */
 
-#include "logic/map_objects/tribes/trainingsite.h"
+#include "wui/trainingsitewindow.h"
 
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/productionsitewindow.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
-using Widelands::TrainingSite;
-
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
-/**
- * Status window for \ref TrainingSite
- */
-struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent, TrainingSite&);
+using namespace Widelands;
 
-	TrainingSite& trainingsite() {
-		return dynamic_cast<TrainingSite&>(building());
-	}
-
-protected:
-	void create_capsbuttons(UI::Box* buttons) override;
-};
 
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
 TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent, TrainingSite& ts)
    : ProductionSiteWindow(parent, ts) {
+	init();
+}
+
+void TrainingSiteWindow::init() {
+	ProductionSiteWindow::init();
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), parent, trainingsite()),
-	                _("Soldiers in training"));
+						 create_soldier_list(*get_tabs(), igbase(), trainingsite()),
+						 _("Soldiers in training"));
 }
 
 void TrainingSiteWindow::create_capsbuttons(UI::Box* buttons) {
