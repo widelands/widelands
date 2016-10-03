@@ -42,7 +42,7 @@ struct BuildingWindow : public UI::Window {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
-	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&, UI::Window*& registry);
+	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&);
 
 	virtual ~BuildingWindow();
 
@@ -61,6 +61,8 @@ struct BuildingWindow : public UI::Window {
 	}
 
 protected:
+	virtual void init();
+
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}
@@ -82,10 +84,10 @@ protected:
 
 	virtual void create_capsbuttons(UI::Box* buttons);
 
-	UI::Window*& registry_;
-
 private:
 	Widelands::Building& building_;
+
+	std::unique_ptr<UI::Box> vbox_;
 
 	UI::TabPanel* tabs_;
 

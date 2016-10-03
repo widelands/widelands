@@ -30,20 +30,24 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
  * Status window for dismantle sites.
  */
 struct DismantleSiteWindow : public BuildingWindow {
-	DismantleSiteWindow(InteractiveGameBase& parent,
-	                    Widelands::DismantleSite&,
-	                    UI::Window*& registry);
+	DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite&);
 
 	void think() override;
 
+protected:
+	void init() override;  // NOCOM move to header file
 private:
 	UI::ProgressBar* progress_;
 };
 
-DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
-                                         Widelands::DismantleSite& cs,
-                                         UI::Window*& registry)
-   : BuildingWindow(parent, cs, registry) {
+DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite& ds)
+   : BuildingWindow(parent, ds) {
+	init();
+}
+
+void DismantleSiteWindow::init() {
+	BuildingWindow::init();
+	Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -55,8 +59,8 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
+	for (uint32_t i = 0; i < ds.get_nrwaresqueues(); ++i)
+		BuildingWindow::create_ware_queue_panel(&box, ds, ds.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -79,7 +83,6 @@ void DismantleSiteWindow::think() {
 Create the status window describing the site.
 ===============
 */
-void Widelands::DismantleSite::create_options_window(InteractiveGameBase& parent,
-                                                     UI::Window*& registry) {
-	new DismantleSiteWindow(parent, *this, registry);
+BuildingWindow* Widelands::DismantleSite::create_options_window(InteractiveGameBase& parent) {
+	return new DismantleSiteWindow(parent, *this);
 }

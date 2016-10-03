@@ -222,7 +222,7 @@ public:
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
+	BuildingWindow* create_options_window(InteractiveGameBase&) override;
 
 	void load_finish(EditorGameBase& egbase) override;
 

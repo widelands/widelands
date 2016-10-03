@@ -32,20 +32,25 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
  * Status window for construction sites.
  */
 struct ConstructionSiteWindow : public BuildingWindow {
-	ConstructionSiteWindow(InteractiveGameBase& parent,
-	                       Widelands::ConstructionSite&,
-	                       UI::Window*& registry);
+	ConstructionSiteWindow(InteractiveGameBase& parent, Widelands::ConstructionSite&);
 
 	void think() override;
 
+protected:
+	void init() override;  // NOCOM move to header file
 private:
 	UI::ProgressBar* progress_;
 };
 
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
-                                               Widelands::ConstructionSite& cs,
-                                               UI::Window*& registry)
-   : BuildingWindow(parent, cs, registry) {
+                                               Widelands::ConstructionSite& cs)
+   : BuildingWindow(parent, cs) {
+	init();
+}
+
+void ConstructionSiteWindow::init() {
+	BuildingWindow::init();
+	Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -82,7 +87,6 @@ void ConstructionSiteWindow::think() {
 Create the status window describing the construction site.
 ===============
 */
-void Widelands::ConstructionSite::create_options_window(InteractiveGameBase& parent,
-                                                        UI::Window*& registry) {
-	new ConstructionSiteWindow(parent, *this, registry);
+BuildingWindow* Widelands::ConstructionSite::create_options_window(InteractiveGameBase& parent) {
+	return new ConstructionSiteWindow(parent, *this);
 }

@@ -45,35 +45,43 @@ static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 
-BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
-                               Widelands::Building& b,
-                               UI::Window*& registry)
+BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building& b)
    : UI::Window(&parent, "building_window", 0, 0, Width, 0, b.descr().descname()),
-     registry_(registry),
      building_(b),
      workarea_overlay_id_(0),
      avoid_fastclick_(false),
      expeditionbtn_(nullptr) {
-	delete registry_;
-	registry_ = this;
+}
 
+BuildingWindow::~BuildingWindow() {
+	if (workarea_overlay_id_) {
+		igbase().mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
+	}
+}
+
+namespace Widelands {
+class BuildingDescr;
+}
+using Widelands::Building;
+
+void BuildingWindow::init() {
 	capscache_player_number_ = 0;
 	capsbuttons_ = nullptr;
 	capscache_ = 0;
 	caps_setup_ = false;
 	toggle_workarea_ = nullptr;
 
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
-	tabs_ = new UI::TabPanel(vbox, 0, 0, nullptr);
-	vbox->add(tabs_, UI::Align::kLeft, true);
+	tabs_ = new UI::TabPanel(vbox_.get(), 0, 0, nullptr);
+	vbox_->add(tabs_, UI::Align::kLeft, true);
 
-	capsbuttons_ = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(capsbuttons_, UI::Align::kLeft, true);
+	capsbuttons_ = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+	vbox_->add(capsbuttons_, UI::Align::kLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
-	set_center_panel(vbox);
+	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(this);
 
@@ -86,18 +94,6 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 		set_title(title);
 	}
 }
-
-BuildingWindow::~BuildingWindow() {
-	if (workarea_overlay_id_) {
-		igbase().mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
-	}
-	registry_ = nullptr;
-}
-
-namespace Widelands {
-class BuildingDescr;
-}
-using Widelands::Building;
 
 /*
 ===============

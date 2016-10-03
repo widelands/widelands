@@ -172,18 +172,26 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
  * Status window for warehouses
  */
 struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent, Warehouse&, UI::Window*& registry);
+	WarehouseWindow(InteractiveGameBase& parent, Warehouse&);
 
 	Warehouse& warehouse() {
 		return dynamic_cast<Warehouse&>(building());
 	}
+
+protected:
+	void init() override;  // NOCOM move to header file
 };
 
 /**
  * Create the tabs of a warehouse window.
  */
-WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh, UI::Window*& registry)
-   : BuildingWindow(parent, wh, registry) {
+WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh)
+   : BuildingWindow(parent, wh) {
+	init();
+}
+
+void WarehouseWindow::init() {
+	BuildingWindow::init();
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
 	   new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), Widelands::wwWARE),
@@ -193,7 +201,7 @@ WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh, UI:
 	   new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), Widelands::wwWORKER),
 	   _("Workers"));
 
-	if (Widelands::PortDock* pd = wh.get_portdock()) {
+	if (Widelands::PortDock* pd = warehouse().get_portdock()) {
 		get_tabs()->add("dock_wares", g_gr->images().get(pic_tab_dock_wares),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));
@@ -211,7 +219,6 @@ WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh, UI:
 /**
  * Create the status window describing the warehouse.
  */
-void Widelands::Warehouse::create_options_window(InteractiveGameBase& parent,
-                                                 UI::Window*& registry) {
-	new WarehouseWindow(parent, *this, registry);
+BuildingWindow* Widelands::Warehouse::create_options_window(InteractiveGameBase& parent) {
+	return new WarehouseWindow(parent, *this);
 }

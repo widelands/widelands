@@ -38,10 +38,11 @@
 #include "scripting/lua_table.h"
 
 namespace UI {
-class Window;
+class Window; // NOCOM
 }
+struct BuildingWindow; // NOCOM
 struct BuildingHints;
-class InteractiveGameBase;
+class InteractiveGameBase; // NOCOM
 class Image;
 
 namespace Widelands {
@@ -241,6 +242,7 @@ public:
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
 
+	// NOCOM
 	void show_options(InteractiveGameBase&, bool avoid_fastclick = false, Point pos = Point(-1, -1));
 	void hide_options();
 	void refresh_options(InteractiveGameBase&);
@@ -314,10 +316,12 @@ protected:
 	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 	void draw_info(const EditorGameBase&, RenderTarget&, const Point&);
 
-	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
+	// NOCOM
+	virtual BuildingWindow* create_options_window(InteractiveGameBase&) = 0;
 
 	void set_seeing(bool see);
 
+	// NOCOM
 	UI::Window* optionswindow_;
 	Coords position_;
 	Flag* flag_;

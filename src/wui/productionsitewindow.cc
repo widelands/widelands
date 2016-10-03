@@ -42,11 +42,14 @@ static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
-                                           ProductionSite& ps,
-                                           UI::Window*& registry)
-   : BuildingWindow(parent, ps, registry) {
-	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
+ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent, ProductionSite& ps)
+   : BuildingWindow(parent, ps) {
+	init();
+}
+
+void ProductionSiteWindow::init() {
+	BuildingWindow::init();
+	const std::vector<Widelands::WaresQueue*>& warequeues = productionsite().warequeues();
 
 	if (warequeues.size()) {
 		// Add the wares tab
@@ -55,7 +58,8 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
 			prod_box->add(
-			   new WaresQueueDisplay(prod_box, 0, 0, igbase(), ps, warequeues[i]), UI::Align::kLeft);
+			   new WaresQueueDisplay(prod_box, 0, 0, igbase(), productionsite(), warequeues[i]),
+			   UI::Align::kLeft);
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
 	}
@@ -117,10 +121,11 @@ void ProductionSiteWindow::think() {
 Create the production site information window.
 ===============
 */
-void ProductionSite::create_options_window(InteractiveGameBase& parent, UI::Window*& registry) {
-	ProductionSiteWindow* win = new ProductionSiteWindow(parent, *this, registry);
+BuildingWindow* ProductionSite::create_options_window(InteractiveGameBase& parent) {
+	ProductionSiteWindow* win = new ProductionSiteWindow(parent, *this);
 	Building::options_window_connections.push_back(Building::workers_changed.connect(
 	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
+	return win;
 }
 
 void ProductionSiteWindow::update_worker_table() {

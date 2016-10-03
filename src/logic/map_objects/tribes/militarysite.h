@@ -134,7 +134,7 @@ public:
 protected:
 	void conquer_area(EditorGameBase&);
 
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
+	BuildingWindow* create_options_window(InteractiveGameBase&) override;
 
 private:
 	void update_statistics_string(std::string*) override;

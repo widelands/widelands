@@ -87,7 +87,7 @@ protected:
 		return DISMANTLESITE_STEP_TIME;
 	}
 
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
+	BuildingWindow* create_options_window(InteractiveGameBase&) override;
 
 	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 };

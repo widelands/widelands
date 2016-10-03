@@ -226,7 +226,7 @@ Implementation
 
 Building::Building(const BuildingDescr& building_descr)
    : PlayerImmovable(building_descr),
-     optionswindow_(nullptr),
+	  optionswindow_(nullptr), // NOCOM
      flag_(nullptr),
      anim_(0),
      animstart_(0),
@@ -236,7 +236,7 @@ Building::Building(const BuildingDescr& building_descr)
 }
 
 Building::~Building() {
-	if (optionswindow_)
+	if (optionswindow_) // NOCOM
 		hide_options();
 }
 

@@ -33,22 +33,20 @@ static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.pn
  * Status window for \ref MilitarySite
  */
 struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite&, UI::Window*& registry);
+	MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite&);
 
 	MilitarySite& militarysite() {
 		return dynamic_cast<MilitarySite&>(building());
 	}
 
 protected:
+	void init() override;  // NOCOM move to header file
 	void create_capsbuttons(UI::Box* buttons) override;
 };
 
-MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
-                                       MilitarySite& ms,
-                                       UI::Window*& registry)
-   : BuildingWindow(parent, ms, registry) {
-	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), parent, militarysite()), _("Soldiers"));
+MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite& ms)
+   : BuildingWindow(parent, ms) {
+	init();
 }
 
 void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
@@ -58,6 +56,12 @@ void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
 /**
  * Create the  military site information window.
  */
-void MilitarySite::create_options_window(InteractiveGameBase& plr, UI::Window*& registry) {
-	new MilitarySiteWindow(plr, *this, registry);
+BuildingWindow* MilitarySite::create_options_window(InteractiveGameBase& plr) {
+	return new MilitarySiteWindow(plr, *this);
+}
+
+void MilitarySiteWindow::init() {
+	BuildingWindow::init();
+	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
+	                create_soldier_list(*get_tabs(), igbase(), militarysite()), _("Soldiers"));
 }

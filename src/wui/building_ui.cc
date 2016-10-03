@@ -26,7 +26,7 @@
 #include "ui_basic/window.h"
 
 using Widelands::Building;
-
+// NOCOM move this to buildingwindow.cc
 /**
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
@@ -37,7 +37,7 @@ void Building::show_options(InteractiveGameBase& igbase, bool avoid_fastclick, P
 			optionswindow_->restore();
 		optionswindow_->move_to_top();
 	} else {
-		create_options_window(igbase, optionswindow_);
+		optionswindow_ = create_options_window(igbase);
 		if (upcast(BuildingWindow, bw, optionswindow_)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
 		}
@@ -54,6 +54,7 @@ void Building::show_options(InteractiveGameBase& igbase, bool avoid_fastclick, P
  * Remove the building's options window.
  */
 void Building::hide_options() {
+	// NOCOM segfault at game end.
 	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
 	delete optionswindow_;

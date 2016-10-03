@@ -25,9 +25,7 @@
 #include "wui/buildingwindow.h"
 
 struct ProductionSiteWindow : public BuildingWindow {
-	ProductionSiteWindow(InteractiveGameBase& parent,
-	                     Widelands::ProductionSite&,
-	                     UI::Window*& registry);
+	ProductionSiteWindow(InteractiveGameBase& parent, Widelands::ProductionSite&);
 
 	Widelands::ProductionSite& productionsite() {
 		return dynamic_cast<Widelands::ProductionSite&>(building());
@@ -35,6 +33,7 @@ struct ProductionSiteWindow : public BuildingWindow {
 	void update_worker_table();
 
 protected:
+	virtual void init() override;
 	void think() override;
 	void evict_worker();
 
