@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,15 @@
  *
  */
 
-#include "wui/buildingwindow.h"
-
-#include "wui/waresqueuedisplay.h"
+#include "wui/constructionsitewindow.h"
 
 #include "graphic/graphic.h"
-#include "logic/map_objects/tribes/constructionsite.h"
-#include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/waresqueuedisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
-/**
- * Status window for construction sites.
- */
-struct ConstructionSiteWindow : public BuildingWindow {
-	ConstructionSiteWindow(InteractiveGameBase& parent, Widelands::ConstructionSite&);
-
-	void think() override;
-
-protected:
-	void init() override;  // NOCOM move to header file
-private:
-	UI::ProgressBar* progress_;
-};
+using namespace Widelands;
 
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                Widelands::ConstructionSite& cs)

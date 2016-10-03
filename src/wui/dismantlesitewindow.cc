@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,14 @@
  *
  */
 
-#include "logic/map_objects/tribes/dismantlesite.h"
+#include "wui/dismantlesitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/buildingwindow.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
-/**
- * Status window for dismantle sites.
- */
-struct DismantleSiteWindow : public BuildingWindow {
-	DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite&);
-
-	void think() override;
-
-protected:
-	void init() override;  // NOCOM move to header file
-private:
-	UI::ProgressBar* progress_;
-};
+using namespace Widelands;
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite& ds)
    : BuildingWindow(parent, ds) {

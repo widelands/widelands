@@ -17,18 +17,17 @@
  *
  */
 
-#include "logic/map_objects/tribes/warehouse.h"
+#include "wui/warehousewindow.h"
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/waresdisplay.h"
-
-using Widelands::Warehouse;
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -39,6 +38,8 @@ static const char pic_tab_expedition[] = "images/wui/buildings/start_expedition.
 static const char pic_policy_prefer[] = "images/wui/buildings/stock_policy_prefer.png";
 static const char pic_policy_dontstock[] = "images/wui/buildings/stock_policy_dontstock.png";
 static const char pic_policy_remove[] = "images/wui/buildings/stock_policy_remove.png";
+
+using namespace Widelands;
 
 /**
  * Extends the wares display to show and modify stock policy of items.
@@ -168,19 +169,6 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	}
 }
 
-/**
- * Status window for warehouses
- */
-struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent, Warehouse&);
-
-	Warehouse& warehouse() {
-		return dynamic_cast<Warehouse&>(building());
-	}
-
-protected:
-	void init() override;  // NOCOM move to header file
-};
 
 /**
  * Create the tabs of a warehouse window.

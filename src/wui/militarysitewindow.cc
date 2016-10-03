@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,16 @@
  *
  */
 
-#include "logic/map_objects/tribes/militarysite.h"
+#include "wui/militarysitewindow.h"
 
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/buildingwindow.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
-using Widelands::MilitarySite;
+using namespace Widelands;
 
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
-
-/**
- * Status window for \ref MilitarySite
- */
-struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite&);
-
-	MilitarySite& militarysite() {
-		return dynamic_cast<MilitarySite&>(building());
-	}
-
-protected:
-	void init() override;  // NOCOM move to header file
-	void create_capsbuttons(UI::Box* buttons) override;
-};
 
 MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite& ms)
    : BuildingWindow(parent, ms) {

@@ -93,9 +93,11 @@ wl_library(wui
     buildingwindow.cc
     buildingwindow.h
     constructionsitewindow.cc
+    constructionsitewindow.h
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    dismantlesitewindow.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -138,6 +140,7 @@ wl_library(wui
     mapview.cc
     mapview.h
     militarysitewindow.cc
+    militarysitewindow.h
     minimap.cc
     minimap.h
     multiplayersetupgroup.cc
@@ -171,6 +174,7 @@ wl_library(wui
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
+    warehousewindow.h
     waresdisplay.cc
     waresdisplay.h
     waresqueuedisplay.cc
