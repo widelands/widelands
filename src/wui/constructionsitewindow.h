@@ -28,12 +28,12 @@
  * Status window for construction sites.
  */
 struct ConstructionSiteWindow : public BuildingWindow {
-	ConstructionSiteWindow(InteractiveGameBase& parent, Widelands::ConstructionSite&);
+	ConstructionSiteWindow(InteractiveGameBase& parent, Widelands::ConstructionSite&, bool avoid_fastclick);
 
 	void think() override;
 
 protected:
-	void init() override;
+	void init(bool avoid_fastclick) override;
 private:
 	UI::ProgressBar* progress_;
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);

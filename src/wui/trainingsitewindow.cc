@@ -32,16 +32,17 @@ using namespace Widelands;
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
-TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent, TrainingSite& ts)
-   : ProductionSiteWindow(parent, ts) {
-	init();
+TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent, TrainingSite& ts, bool avoid_fastclick)
+	: ProductionSiteWindow(parent, ts, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
-void TrainingSiteWindow::init() {
-	ProductionSiteWindow::init();
+void TrainingSiteWindow::init(bool avoid_fastclick) {
+	ProductionSiteWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
 						 create_soldier_list(*get_tabs(), igbase(), trainingsite()),
 						 _("Soldiers in training"));
+	think();
 }
 
 void TrainingSiteWindow::create_capsbuttons(UI::Box* buttons) {

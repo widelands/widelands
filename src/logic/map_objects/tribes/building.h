@@ -39,7 +39,7 @@
 #include "scripting/lua_table.h"
 
 struct BuildingHints;
-class InteractiveGameBase; // NOCOM
+class InteractiveGameBase; // TODO(GunChleoc): Get rid
 class Image;
 
 namespace Widelands {

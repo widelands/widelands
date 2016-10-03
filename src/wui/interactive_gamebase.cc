@@ -79,7 +79,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				const Widelands::Coords coords = building->get_position();
 				// Check whether the window is wanted
 				if (wanted_building_windows_.count(coords.hash()) == 1) {
-					show_building_window(coords);
+					show_building_window(coords, true);
 					wanted_building_windows_.erase(coords.hash());
 				}
 			}
@@ -165,28 +165,28 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_.set_perm_pressed(value);
 }
 
-void InteractiveGameBase::show_building_window(const Widelands::Coords& coord) {
+void InteractiveGameBase::show_building_window(const Widelands::Coords& coord, bool avoid_fastclick) {
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		new ConstructionSiteWindow(*this, *dynamic_cast<Widelands::ConstructionSite*>(building));
+		new ConstructionSiteWindow(*this, *dynamic_cast<Widelands::ConstructionSite*>(building), avoid_fastclick);
 		break;
 	case Widelands::MapObjectType::DISMANTLESITE:
-		new DismantleSiteWindow(*this, *dynamic_cast<Widelands::DismantleSite*>(building));
+		new DismantleSiteWindow(*this, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
 		break;
 	case Widelands::MapObjectType::MILITARYSITE:
-		new MilitarySiteWindow(*this, *dynamic_cast<Widelands::MilitarySite*>(building));
+		new MilitarySiteWindow(*this, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
 		break;
 	case Widelands::MapObjectType::PRODUCTIONSITE:
-		new ProductionSiteWindow(*this, *dynamic_cast<Widelands::ProductionSite*>(building));
+		new ProductionSiteWindow(*this, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
 		break;
 	case Widelands::MapObjectType::TRAININGSITE:
-		new TrainingSiteWindow(*this, *dynamic_cast<Widelands::TrainingSite*>(building));
+		new TrainingSiteWindow(*this, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
 		break;
 	case Widelands::MapObjectType::WAREHOUSE:
-		new WarehouseWindow(*this, *dynamic_cast<Widelands::Warehouse*>(building));
+		new WarehouseWindow(*this, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
 		break;
 	default:
 		NEVER_HERE();

@@ -26,13 +26,13 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 using namespace Widelands;
 
-DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite& ds)
-   : BuildingWindow(parent, ds) {
-	init();
+DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent, Widelands::DismantleSite& ds, bool avoid_fastclick)
+	: BuildingWindow(parent, ds, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
-void DismantleSiteWindow::init() {
-	BuildingWindow::init();
+void DismantleSiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
 	Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
@@ -49,6 +49,7 @@ void DismantleSiteWindow::init() {
 		BuildingWindow::create_ware_queue_panel(&box, ds, ds.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	think();
 }
 
 /*

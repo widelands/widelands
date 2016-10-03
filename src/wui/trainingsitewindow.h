@@ -28,14 +28,14 @@
  * Status window for \ref TrainingSite
  */
 struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent, Widelands::TrainingSite&);
+	TrainingSiteWindow(InteractiveGameBase& parent, Widelands::TrainingSite&, bool avoid_fastclick);
 
 	Widelands::TrainingSite& trainingsite() {
 		return dynamic_cast<Widelands::TrainingSite&>(building());
 	}
 
 protected:
-	void init() override;
+	void init(bool avoid_fastclick) override;
 	void create_capsbuttons(UI::Box* buttons) override;
 private:
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);

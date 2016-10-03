@@ -173,13 +173,13 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 /**
  * Create the tabs of a warehouse window.
  */
-WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh)
-   : BuildingWindow(parent, wh) {
-	init();
+WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh, bool avoid_fastclick)
+	: BuildingWindow(parent, wh, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
-void WarehouseWindow::init() {
-	BuildingWindow::init();
+void WarehouseWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
 	   new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), Widelands::wwWARE),
@@ -202,4 +202,5 @@ void WarehouseWindow::init() {
 			                _("Expedition"));
 		}
 	}
+	think();
 }

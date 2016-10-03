@@ -43,7 +43,7 @@ struct BuildingWindow : public UI::Window {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
-	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&);
+	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&, bool avoid_fastclick);
 
 	virtual ~BuildingWindow();
 
@@ -62,7 +62,7 @@ struct BuildingWindow : public UI::Window {
 	}
 
 protected:
-	virtual void init();
+	virtual void init(bool avoid_fastclick);
 
 	UI::TabPanel* get_tabs() {
 		return tabs_;

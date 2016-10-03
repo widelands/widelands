@@ -73,7 +73,7 @@ public:
 	void add_wanted_building(const Widelands::Coords& coords) {
 		wanted_building_windows_.insert(std::make_pair(coords.hash(), coords));
 	}
-	void show_building_window(const Widelands::Coords& coords);
+	void show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
 		return multiplayer_;

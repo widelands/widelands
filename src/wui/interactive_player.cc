@@ -246,7 +246,7 @@ void InteractivePlayer::node_action() {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
 			if (can_see(building->owner().player_number()))
-				return show_building_window(get_sel_pos().node);
+				return show_building_window(get_sel_pos().node, false);
 
 		if (!is_building_road()) {
 			if (try_show_ship_window())

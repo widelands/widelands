@@ -19,6 +19,8 @@
 
 #include "wui/constructionsitewindow.h"
 
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/waresqueuedisplay.h"
@@ -28,13 +30,13 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 using namespace Widelands;
 
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
-                                               Widelands::ConstructionSite& cs)
-   : BuildingWindow(parent, cs) {
-	init();
+															  Widelands::ConstructionSite& cs, bool avoid_fastclick)
+	: BuildingWindow(parent, cs, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
-void ConstructionSiteWindow::init() {
-	BuildingWindow::init();
+void ConstructionSiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
 	Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
@@ -52,6 +54,9 @@ void ConstructionSiteWindow::init() {
 		   new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+
+	set_title((boost::format("(%s)") % cs.building().descname()).str());
+	think();
 }
 
 /*

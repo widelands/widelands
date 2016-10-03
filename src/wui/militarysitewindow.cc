@@ -28,17 +28,18 @@ using namespace Widelands;
 
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
-MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite& ms)
-   : BuildingWindow(parent, ms) {
-	init();
+MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent, MilitarySite& ms, bool avoid_fastclick)
+	: BuildingWindow(parent, ms, avoid_fastclick) {
+	init(avoid_fastclick);
 }
 
 void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
 	BuildingWindow::create_capsbuttons(buttons);
 }
 
-void MilitarySiteWindow::init() {
-	BuildingWindow::init();
+void MilitarySiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
 	                create_soldier_list(*get_tabs(), igbase(), militarysite()), _("Soldiers"));
+	think();
 }

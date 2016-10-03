@@ -27,14 +27,14 @@
  * Status window for warehouses
  */
 struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent, Widelands::Warehouse&);
+	WarehouseWindow(InteractiveGameBase& parent, Widelands::Warehouse&, bool avoid_fastclick);
 
 	Widelands::Warehouse& warehouse() {
 		return dynamic_cast<Widelands::Warehouse&>(building());
 	}
 
 protected:
-	void init() override;
+	void init(bool avoid_fastclick) override;
 private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };

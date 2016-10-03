@@ -45,11 +45,10 @@ static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 
-BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building& b)
+BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building& b, bool avoid_fastclick)
    : UI::Window(&parent, "building_window", 0, 0, Width, 0, b.descr().descname()),
      building_(b),
      workarea_overlay_id_(0),
-     avoid_fastclick_(false),
      expeditionbtn_(nullptr) {
 		buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
 			[this](const Widelands::NoteBuildingWindow& note) {
@@ -57,8 +56,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building&
 					switch (note.action) {
 					// The building's state has changed
 					case Widelands::NoteBuildingWindow::Action::kRefresh:
-						init();
-						set_avoid_fastclick(true);
+						init(true);
 						break;
 					// The building is no more
 					case Widelands::NoteBuildingWindow::Action::kStartWarp:
@@ -76,8 +74,6 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building&
 					}
 				}
 		});
-		set_avoid_fastclick(false);
-		// NOCOM flickers to top left corner
 }
 
 BuildingWindow::~BuildingWindow() {
@@ -91,12 +87,13 @@ class BuildingDescr;
 }
 using Widelands::Building;
 
-void BuildingWindow::init() {
+void BuildingWindow::init(bool avoid_fastclick) {
 	capscache_player_number_ = 0;
 	capsbuttons_ = nullptr;
 	capscache_ = 0;
 	caps_setup_ = false;
 	toggle_workarea_ = nullptr;
+	avoid_fastclick_ = avoid_fastclick,
 
 	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
@@ -111,15 +108,7 @@ void BuildingWindow::init() {
 	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(this);
-
 	show_workarea();
-
-	// Title for construction site
-	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		// Show name in parenthesis as it may take all width already
-		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
-		set_title(title);
-	}
 }
 
 /*

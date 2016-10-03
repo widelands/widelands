@@ -28,14 +28,14 @@
  * Status window for \ref MilitarySite
  */
 struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent, Widelands::MilitarySite&);
+	MilitarySiteWindow(InteractiveGameBase& parent, Widelands::MilitarySite&, bool avoid_fastclick);
 
 	Widelands::MilitarySite& militarysite() {
 		return dynamic_cast<Widelands::MilitarySite&>(building());
 	}
 
 protected:
-	void init() override;
+	void init(bool avoid_fastclick) override;
 	void create_capsbuttons(UI::Box* buttons) override;
 private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);

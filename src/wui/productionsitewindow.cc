@@ -42,8 +42,8 @@ static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent, ProductionSite& ps)
-   : BuildingWindow(parent, ps) {
+ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent, ProductionSite& ps, bool avoid_fastclick)
+	: BuildingWindow(parent, ps, avoid_fastclick) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
 		[this](const Widelands::NoteBuildingWindow& note) {
 			if (note.serial == building().serial()) {
@@ -56,11 +56,11 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent, Producti
 				}
 			}
 	});
-	init();
+	init(avoid_fastclick);
 }
 
-void ProductionSiteWindow::init() {
-	BuildingWindow::init();
+void ProductionSiteWindow::init(bool avoid_fastclick) {
+	BuildingWindow::init(avoid_fastclick);
 	const std::vector<Widelands::WaresQueue*>& warequeues = productionsite().warequeues();
 
 	if (warequeues.size()) {
@@ -113,6 +113,7 @@ void ProductionSiteWindow::init() {
 		   (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
 		update_worker_table();
 	}
+	think();
 }
 
 void ProductionSiteWindow::think() {
