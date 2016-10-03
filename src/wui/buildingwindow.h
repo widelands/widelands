@@ -57,9 +57,6 @@ struct BuildingWindow : public UI::Window {
 
 	void draw(RenderTarget&) override;
 	void think() override;
-	void set_avoid_fastclick(bool afc) {
-		avoid_fastclick_ = afc;
-	}
 
 protected:
 	virtual void init(bool avoid_fastclick);

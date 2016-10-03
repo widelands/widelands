@@ -702,6 +702,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
+	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kRefresh));
 }
 
 /**

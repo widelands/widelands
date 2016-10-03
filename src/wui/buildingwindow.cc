@@ -140,9 +140,10 @@ void BuildingWindow::think() {
 	    building().get_playercaps() != capscache_) {
 		capsbuttons_->free_children();
 		create_capsbuttons(capsbuttons_);
-		move_out_of_the_way();
-		if (!avoid_fastclick_)
+		if (!avoid_fastclick_) {
+			move_out_of_the_way();
 			warp_mouse_to_fastclick_panel();
+		}
 		caps_setup_ = true;
 	}
 
@@ -356,10 +357,9 @@ Callback for starting / stoping the production site request
 ===============
 */
 void BuildingWindow::act_start_stop() {
-	if (dynamic_cast<const Widelands::ProductionSite*>(&building_))
+	if (dynamic_cast<const Widelands::ProductionSite*>(&building_)) {
 		igbase().game().send_player_start_stop_building(building_);
-
-	die();
+	}
 }
 
 /**
