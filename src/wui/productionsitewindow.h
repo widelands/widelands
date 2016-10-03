@@ -20,6 +20,8 @@
 #ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
 #define WL_WUI_PRODUCTIONSITEWINDOW_H
 
+#include <memory>
+
 #include "logic/map_objects/tribes/productionsite.h"
 #include "ui_basic/table.h"
 #include "wui/buildingwindow.h"
@@ -35,7 +37,7 @@ struct ProductionSiteWindow : public BuildingWindow {
 	void update_worker_table();
 
 protected:
-	virtual void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick) override;
 	void think() override;
 	void evict_worker();
 
