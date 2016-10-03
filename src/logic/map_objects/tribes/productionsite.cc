@@ -622,7 +622,8 @@ void ProductionSite::request_worker_callback(
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
-	Notifications::publish(NoteBuildingWindow(psite.serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	Notifications::publish(
+	   NoteBuildingWindow(psite.serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 /**
@@ -904,7 +905,8 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
-	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	Notifications::publish(
+	   NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes) {

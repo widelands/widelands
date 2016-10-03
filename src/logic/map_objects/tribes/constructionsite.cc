@@ -154,7 +154,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
-		Notifications::publish(NoteBuildingWindow(b.serial(), NoteBuildingWindow::Action::kFinishWarp));
+		Notifications::publish(
+		   NoteBuildingWindow(b.serial(), NoteBuildingWindow::Action::kFinishWarp));
 	}
 }
 

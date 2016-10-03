@@ -30,8 +30,9 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 using namespace Widelands;
 
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
-															  Widelands::ConstructionSite& cs, bool avoid_fastclick)
-	: BuildingWindow(parent, cs, avoid_fastclick) {
+                                               Widelands::ConstructionSite& cs,
+                                               bool avoid_fastclick)
+   : BuildingWindow(parent, cs, avoid_fastclick) {
 	init(avoid_fastclick);
 }
 

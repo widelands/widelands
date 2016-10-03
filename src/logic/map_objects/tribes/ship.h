@@ -63,7 +63,7 @@ struct NoteShipWindow {
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
-		: serial(init_serial), action(init_action) {
+	   : serial(init_serial), action(init_action) {
 	}
 };
 

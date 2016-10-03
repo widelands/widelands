@@ -42,7 +42,6 @@
 #include "wui/trainingsitewindow.h"
 #include "wui/warehousewindow.h"
 
-
 namespace {
 
 std::string speed_string(int const speed) {
@@ -72,26 +71,27 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
-											 [this](const Widelands::NoteBuildingWindow& note) {
-		switch (note.action) {
-		case Widelands::NoteBuildingWindow::Action::kFinishWarp: {
-			if (upcast(Widelands::Building const, building, game().objects().get_object(note.serial))) {
-				const Widelands::Coords coords = building->get_position();
-				// Check whether the window is wanted
-				if (wanted_building_windows_.count(coords.hash()) == 1) {
-					BuildingWindow* building_window = show_building_window(coords, true);
-					building_window->set_pos(std::get<1>(wanted_building_windows_.at(coords.hash())));
-					if (std::get<2>(wanted_building_windows_.at(coords.hash()))) {
-						building_window->minimize();
-					}
-					wanted_building_windows_.erase(coords.hash());
-				}
-			}
-		} break;
-		default:
-			break;
-		}
-	});
+	   [this](const Widelands::NoteBuildingWindow& note) {
+		   switch (note.action) {
+		   case Widelands::NoteBuildingWindow::Action::kFinishWarp: {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				   const Widelands::Coords coords = building->get_position();
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
+					   BuildingWindow* building_window = show_building_window(coords, true);
+					   building_window->set_pos(std::get<1>(wanted_building_windows_.at(coords.hash())));
+					   if (std::get<2>(wanted_building_windows_.at(coords.hash()))) {
+						   building_window->minimize();
+					   }
+					   wanted_building_windows_.erase(coords.hash());
+				   }
+			   }
+		   } break;
+		   default:
+			   break;
+		   }
+		});
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -169,26 +169,36 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_.set_perm_pressed(value);
 }
 
-void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords, const Point point, bool was_minimal) {
-	wanted_building_windows_.insert(std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));
+void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
+                                                     const Point point,
+                                                     bool was_minimal) {
+	wanted_building_windows_.insert(
+	   std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));
 }
-BuildingWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord, bool avoid_fastclick) {
+BuildingWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
+                                                          bool avoid_fastclick) {
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		return new ConstructionSiteWindow(*this, *dynamic_cast<Widelands::ConstructionSite*>(building), avoid_fastclick);
+		return new ConstructionSiteWindow(
+		   *this, *dynamic_cast<Widelands::ConstructionSite*>(building), avoid_fastclick);
 	case Widelands::MapObjectType::DISMANTLESITE:
-		return new DismantleSiteWindow(*this, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		return new DismantleSiteWindow(
+		   *this, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
 	case Widelands::MapObjectType::MILITARYSITE:
-		return new MilitarySiteWindow(*this, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		return new MilitarySiteWindow(
+		   *this, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
 	case Widelands::MapObjectType::PRODUCTIONSITE:
-		return new ProductionSiteWindow(*this, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		return new ProductionSiteWindow(
+		   *this, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
 	case Widelands::MapObjectType::TRAININGSITE:
-		return new TrainingSiteWindow(*this, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		return new TrainingSiteWindow(
+		   *this, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
 	case Widelands::MapObjectType::WAREHOUSE:
-		return new WarehouseWindow(*this, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		return new WarehouseWindow(
+		   *this, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
 	default:
 		NEVER_HERE();
 	}

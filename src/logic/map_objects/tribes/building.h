@@ -39,7 +39,7 @@
 #include "scripting/lua_table.h"
 
 struct BuildingHints;
-class InteractiveGameBase; // TODO(GunChleoc): Get rid
+class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 class Image;
 
 namespace Widelands {
@@ -198,7 +198,7 @@ struct NoteBuildingWindow {
 	const Action action;
 
 	NoteBuildingWindow(Serial init_serial, const Action& init_action)
-		: serial(init_serial), action(init_action) {
+	   : serial(init_serial), action(init_action) {
 	}
 };
 

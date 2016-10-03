@@ -25,7 +25,9 @@
 #include "wui/buildingwindow.h"
 
 struct ProductionSiteWindow : public BuildingWindow {
-	ProductionSiteWindow(InteractiveGameBase& parent, Widelands::ProductionSite&, bool avoid_fastclick);
+	ProductionSiteWindow(InteractiveGameBase& parent,
+	                     Widelands::ProductionSite&,
+	                     bool avoid_fastclick);
 
 	Widelands::ProductionSite& productionsite() {
 		return dynamic_cast<Widelands::ProductionSite&>(building());
@@ -40,7 +42,8 @@ protected:
 private:
 	UI::Table<uintptr_t>* worker_table_;
 	UI::Box* worker_caps_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>> productionsitenotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>>
+	   productionsitenotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 

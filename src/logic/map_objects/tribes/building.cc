@@ -234,7 +234,6 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false) {
 }
 
-
 void Building::load_finish(EditorGameBase& egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
 		Worker& worker = *optr.get(egbase);
@@ -688,14 +687,16 @@ void Building::add_worker(Worker& worker) {
 		}
 	}
 	PlayerImmovable::add_worker(worker);
-	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	Notifications::publish(
+	   NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (!get_workers().size())
 		set_seeing(false);
-	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	Notifications::publish(
+	   NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 /**

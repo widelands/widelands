@@ -37,6 +37,7 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 protected:
 	void init(bool avoid_fastclick) override;
 	void create_capsbuttons(UI::Box* buttons) override;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);
 };

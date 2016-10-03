@@ -35,6 +35,7 @@ struct WarehouseWindow : public BuildingWindow {
 
 protected:
 	void init(bool avoid_fastclick) override;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };

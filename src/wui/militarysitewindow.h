@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MILITARYSITEWINDOW_H
 #define WL_WUI_MILITARYSITEWINDOW_H
 
-
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wui/buildingwindow.h"
 
@@ -37,6 +36,7 @@ struct MilitarySiteWindow : public BuildingWindow {
 protected:
 	void init(bool avoid_fastclick) override;
 	void create_capsbuttons(UI::Box* buttons) override;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);
 };

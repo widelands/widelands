@@ -125,10 +125,7 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr),
-     fleet_(nullptr),
-     economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {

@@ -247,7 +247,7 @@ void InteractivePlayer::node_action() {
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
 			if (can_see(building->owner().player_number())) {
 				show_building_window(get_sel_pos().node, false);
-				return ;
+				return;
 			}
 
 		if (!is_building_road()) {

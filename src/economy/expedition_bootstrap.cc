@@ -139,7 +139,8 @@ void ExpeditionBootstrap::start() {
 	                                    ExpeditionBootstrap::worker_callback, wwWORKER)));
 
 	// Update the user interface
-	Notifications::publish(NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
+	Notifications::publish(
+	   NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
 }
 
 void ExpeditionBootstrap::cancel(Game& game) {
@@ -160,7 +161,8 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	Notifications::publish(NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
+	Notifications::publish(
+	   NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 

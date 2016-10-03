@@ -45,35 +45,37 @@ static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 
-BuildingWindow::BuildingWindow(InteractiveGameBase& parent, Widelands::Building& b, bool avoid_fastclick)
+BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
+                               Widelands::Building& b,
+                               bool avoid_fastclick)
    : UI::Window(&parent, "building_window", 0, 0, Width, 0, b.descr().descname()),
      building_(b),
      workarea_overlay_id_(0),
-	  avoid_fastclick_(avoid_fastclick),
+     avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
-		buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
-			[this](const Widelands::NoteBuildingWindow& note) {
-				if (note.serial == building_.serial()) {
-					switch (note.action) {
-					// The building's state has changed
-					case Widelands::NoteBuildingWindow::Action::kRefresh:
-						init(true);
-						break;
-					// The building is no more
-					case Widelands::NoteBuildingWindow::Action::kStartWarp:
-						igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
-						// Fallthrough intended
-					case Widelands::NoteBuildingWindow::Action::kClose:
-						// Stop everybody from thinking to avoid segfaults
-						set_thinks(false);
-						vbox_.reset(nullptr);
-						die();
-						break;
-					default:
-						break;
-					}
-				}
-		});
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>([this](
+	   const Widelands::NoteBuildingWindow& note) {
+		if (note.serial == building_.serial()) {
+			switch (note.action) {
+			// The building's state has changed
+			case Widelands::NoteBuildingWindow::Action::kRefresh:
+				init(true);
+				break;
+			// The building is no more
+			case Widelands::NoteBuildingWindow::Action::kStartWarp:
+				igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
+			// Fallthrough intended
+			case Widelands::NoteBuildingWindow::Action::kClose:
+				// Stop everybody from thinking to avoid segfaults
+				set_thinks(false);
+				vbox_.reset(nullptr);
+				die();
+				break;
+			default:
+				break;
+			}
+		}
+	});
 }
 
 BuildingWindow::~BuildingWindow() {
