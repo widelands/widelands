@@ -35,12 +35,9 @@
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
 #include "logic/widelands.h"
+#include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 
-namespace UI {
-class Window; // NOCOM
-}
-struct BuildingWindow; // NOCOM
 struct BuildingHints;
 class InteractiveGameBase; // NOCOM
 class Image;
@@ -192,6 +189,19 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
+struct NoteBuildingWindow {
+	CAN_BE_SENT_AS_NOTE(NoteId::BuildingWindow)
+
+	Serial serial;
+
+	enum class Action { kRefresh, kClose, kStartWarp, kFinishWarp, kWorkersChanged };
+	const Action action;
+
+	NoteBuildingWindow(Serial init_serial, const Action& init_action)
+		: serial(init_serial), action(init_action) {
+	}
+};
+
 class Building : public PlayerImmovable {
 	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
@@ -212,7 +222,6 @@ public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
 	Building(const BuildingDescr&);
-	virtual ~Building();
 
 	void load_finish(EditorGameBase&) override;
 
@@ -241,11 +250,6 @@ public:
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
-
-	// NOCOM
-	void show_options(InteractiveGameBase&, bool avoid_fastclick = false, Point pos = Point(-1, -1));
-	void hide_options();
-	void refresh_options(InteractiveGameBase&);
 
 	virtual bool fetch_from_flag(Game&);
 	virtual bool get_building_work(Game&, Worker&, bool success);
@@ -289,7 +293,6 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
-	mutable boost::signals2::signal<void()> workers_changed;
 
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
@@ -316,13 +319,8 @@ protected:
 	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 	void draw_info(const EditorGameBase&, RenderTarget&, const Point&);
 
-	// NOCOM
-	virtual BuildingWindow* create_options_window(InteractiveGameBase&) = 0;
-
 	void set_seeing(bool see);
 
-	// NOCOM
-	UI::Window* optionswindow_;
 	Coords position_;
 	Flag* flag_;
 
@@ -342,9 +340,6 @@ protected:
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_;
-
-	// Signals connected for the option window
-	std::vector<boost::signals2::connection> options_window_connections;
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;

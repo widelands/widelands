@@ -40,6 +40,8 @@ protected:
 private:
 	UI::Table<uintptr_t>* worker_table_;
 	UI::Box* worker_caps_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>> productionsitenotes_subscriber_;
+	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 
 #endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

@@ -140,6 +140,8 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
+	// Register whether the window was open
+	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kStartWarp));
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
@@ -152,12 +154,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
-		if (optionswindow_) {
-			Point window_position = optionswindow_->get_pos();
-			hide_options();
-			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
-			b.show_options(igbase, false, window_position);
-		}
+		Notifications::publish(NoteBuildingWindow(b.serial(), NoteBuildingWindow::Action::kFinishWarp));
 	}
 }
 

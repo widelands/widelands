@@ -71,6 +71,10 @@ public:
 		playertype_ = pt;
 	}
 
+	void add_wanted_building(const Widelands::Coords& coords) {
+		wanted_building_windows_.insert(std::make_pair(coords.hash(), coords));
+	}
+	void show_building_window(const Widelands::Coords& coords);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
 		return multiplayer_;
@@ -97,6 +101,8 @@ protected:
 
 private:
 	void on_buildhelp_changed(const bool value) override;
+	std::map<uint32_t, const Widelands::Coords> wanted_building_windows_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>> buildingnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

@@ -47,12 +47,3 @@ void TrainingSiteWindow::init() {
 void TrainingSiteWindow::create_capsbuttons(UI::Box* buttons) {
 	ProductionSiteWindow::create_capsbuttons(buttons);
 }
-
-/*
-===============
-Create the training site information window.
-===============
-*/
-BuildingWindow* TrainingSite::create_options_window(InteractiveGameBase& plr) {
-	return new TrainingSiteWindow(plr, *this);
-}

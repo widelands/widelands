@@ -37,6 +37,8 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 protected:
 	void init() override;
 	void create_capsbuttons(UI::Box* buttons) override;
+private:
+	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);
 };
 
 #endif  // end of include guard: WL_WUI_TRAININGSITEWINDOW_H

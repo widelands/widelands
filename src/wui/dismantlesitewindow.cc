@@ -63,12 +63,3 @@ void DismantleSiteWindow::think() {
 
 	progress_->set_state(ds.get_built_per64k());
 }
-
-/*
-===============
-Create the status window describing the site.
-===============
-*/
-BuildingWindow* Widelands::DismantleSite::create_options_window(InteractiveGameBase& parent) {
-	return new DismantleSiteWindow(parent, *this);
-}

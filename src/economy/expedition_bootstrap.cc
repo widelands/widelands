@@ -24,12 +24,13 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/portdock.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_gamebase.h"
+// NOCOM remove wui dependency from CMakeLists.txt if possible
 
 namespace Widelands {
 
@@ -139,8 +140,7 @@ void ExpeditionBootstrap::start() {
 	                                    ExpeditionBootstrap::worker_callback, wwWORKER)));
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
-		warehouse->refresh_options(*igb);
+	Notifications::publish(NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
 }
 
 void ExpeditionBootstrap::cancel(Game& game) {
@@ -161,9 +161,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
-		warehouse->refresh_options(*igb);
-	}
+	Notifications::publish(NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 

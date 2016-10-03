@@ -226,7 +226,6 @@ Implementation
 
 Building::Building(const BuildingDescr& building_descr)
    : PlayerImmovable(building_descr),
-	  optionswindow_(nullptr), // NOCOM
      flag_(nullptr),
      anim_(0),
      animstart_(0),
@@ -235,10 +234,6 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false) {
 }
 
-Building::~Building() {
-	if (optionswindow_) // NOCOM
-		hide_options();
-}
 
 void Building::load_finish(EditorGameBase& egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
@@ -390,9 +385,6 @@ void Building::cleanup(EditorGameBase& egbase) {
 	}
 
 	PlayerImmovable::cleanup(egbase);
-
-	for (boost::signals2::connection& c : options_window_connections)
-		c.disconnect();
 }
 
 /*
@@ -437,6 +429,7 @@ applicable.
 ===============
 */
 void Building::destroy(EditorGameBase& egbase) {
+	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kClose));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
 	PlayerImmovable::destroy(egbase);
@@ -695,14 +688,14 @@ void Building::add_worker(Worker& worker) {
 		}
 	}
 	PlayerImmovable::add_worker(worker);
-	workers_changed();
+	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (!get_workers().size())
 		set_seeing(false);
-	workers_changed();
+	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
 }
 
 /**

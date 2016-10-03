@@ -87,8 +87,6 @@ protected:
 		return DISMANTLESITE_STEP_TIME;
 	}
 
-	BuildingWindow* create_options_window(InteractiveGameBase&) override;
-
 	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
 };
 }

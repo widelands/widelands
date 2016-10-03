@@ -203,10 +203,3 @@ void WarehouseWindow::init() {
 		}
 	}
 }
-
-/**
- * Create the status window describing the warehouse.
- */
-BuildingWindow* Widelands::Warehouse::create_options_window(InteractiveGameBase& parent) {
-	return new WarehouseWindow(parent, *this);
-}

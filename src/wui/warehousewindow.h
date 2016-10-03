@@ -35,6 +35,8 @@ struct WarehouseWindow : public BuildingWindow {
 
 protected:
 	void init() override;
+private:
+	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };
 
 #endif  // end of include guard: WL_WUI_WAREHOUSEWINDOW_H

@@ -44,6 +44,18 @@ Create the window and its panels, add it to the registry.
 */
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent, ProductionSite& ps)
    : BuildingWindow(parent, ps) {
+	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
+		[this](const Widelands::NoteBuildingWindow& note) {
+			if (note.serial == building().serial()) {
+				switch (note.action) {
+				case Widelands::NoteBuildingWindow::Action::kWorkersChanged:
+					update_worker_table();
+					break;
+				default:
+					break;
+				}
+			}
+	});
 	init();
 }
 
@@ -114,18 +126,6 @@ void ProductionSiteWindow::think() {
 			break;
 		}
 	}
-}
-
-/*
-===============
-Create the production site information window.
-===============
-*/
-BuildingWindow* ProductionSite::create_options_window(InteractiveGameBase& parent) {
-	ProductionSiteWindow* win = new ProductionSiteWindow(parent, *this);
-	Building::options_window_connections.push_back(Building::workers_changed.connect(
-	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
-	return win;
 }
 
 void ProductionSiteWindow::update_worker_table() {

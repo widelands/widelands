@@ -89,7 +89,6 @@ wl_library(wui
     attack_box.h
     building_statistics_menu.cc
     building_statistics_menu.h
-    building_ui.cc
     buildingwindow.cc
     buildingwindow.h
     constructionsitewindow.cc

@@ -33,7 +33,13 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "profile/profile.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
 #include "wui/game_summary.h"
+#include "wui/militarysitewindow.h"
+#include "wui/productionsitewindow.h"
+#include "wui/trainingsitewindow.h"
+#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -63,6 +69,23 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      toggle_buildhelp_(INIT_BTN(
         "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
+											 [this](const Widelands::NoteBuildingWindow& note) {
+		switch (note.action) {
+		case Widelands::NoteBuildingWindow::Action::kFinishWarp: {
+			if (upcast(Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				const Widelands::Coords coords = building->get_position();
+				// Check whether the window is wanted
+				if (wanted_building_windows_.count(coords.hash()) == 1) {
+					show_building_window(coords);
+					wanted_building_windows_.erase(coords.hash());
+				}
+			}
+		} break;
+		default:
+			break;
+		}
+	});
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -138,6 +161,34 @@ void InteractiveGameBase::postload() {
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_.set_perm_pressed(value);
+}
+
+void InteractiveGameBase::show_building_window(const Widelands::Coords& coord) {
+	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
+	upcast(Widelands::Building, building, immovable);
+	assert(building);
+	switch (building->descr().type()) {
+	case Widelands::MapObjectType::CONSTRUCTIONSITE:
+		new ConstructionSiteWindow(*this, *dynamic_cast<Widelands::ConstructionSite*>(building));
+		break;
+	case Widelands::MapObjectType::DISMANTLESITE:
+		new DismantleSiteWindow(*this, *dynamic_cast<Widelands::DismantleSite*>(building));
+		break;
+	case Widelands::MapObjectType::MILITARYSITE:
+		new MilitarySiteWindow(*this, *dynamic_cast<Widelands::MilitarySite*>(building));
+		break;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+		new ProductionSiteWindow(*this, *dynamic_cast<Widelands::ProductionSite*>(building));
+		break;
+	case Widelands::MapObjectType::TRAININGSITE:
+		new TrainingSiteWindow(*this, *dynamic_cast<Widelands::TrainingSite*>(building));
+		break;
+	case Widelands::MapObjectType::WAREHOUSE:
+		new WarehouseWindow(*this, *dynamic_cast<Widelands::Warehouse*>(building));
+		break;
+	default:
+		NEVER_HERE();
+	}
 }
 
 /**

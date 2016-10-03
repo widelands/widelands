@@ -209,7 +209,6 @@ public:
 	void training_done();
 
 protected:
-	BuildingWindow* create_options_window(InteractiveGameBase&) override;
 	void program_end(Game&, ProgramResult) override;
 
 private:

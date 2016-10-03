@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "economy/expedition_bootstrap.h"
+#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 #include "wui/field_overlay_manager.h"
@@ -108,6 +109,8 @@ private:
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>> buildingnotes_subscriber_;
+	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };
 
 #endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

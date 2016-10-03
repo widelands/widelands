@@ -36,6 +36,7 @@ protected:
 	void init() override;
 private:
 	UI::ProgressBar* progress_;
+	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };
 
 #endif  // end of include guard: WL_WUI_CONSTRUCTIONSITEWINDOW_H

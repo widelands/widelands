@@ -66,12 +66,3 @@ void ConstructionSiteWindow::think() {
 
 	progress_->set_state(cs.get_built_per64k());
 }
-
-/*
-===============
-Create the status window describing the construction site.
-===============
-*/
-BuildingWindow* Widelands::ConstructionSite::create_options_window(InteractiveGameBase& parent) {
-	return new ConstructionSiteWindow(parent, *this);
-}

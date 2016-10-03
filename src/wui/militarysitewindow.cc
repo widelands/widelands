@@ -37,13 +37,6 @@ void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
 	BuildingWindow::create_capsbuttons(buttons);
 }
 
-/**
- * Create the  military site information window.
- */
-BuildingWindow* MilitarySite::create_options_window(InteractiveGameBase& plr) {
-	return new MilitarySiteWindow(plr, *this);
-}
-
 void MilitarySiteWindow::init() {
 	BuildingWindow::init();
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),

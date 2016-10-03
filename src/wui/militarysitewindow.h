@@ -37,6 +37,8 @@ struct MilitarySiteWindow : public BuildingWindow {
 protected:
 	void init() override;
 	void create_capsbuttons(UI::Box* buttons) override;
+private:
+	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);
 };
 
 #endif  // end of include guard: WL_WUI_MILITARYSITEWINDOW_H
