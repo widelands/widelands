@@ -16,6 +16,7 @@ add_walking_animations(animations, dirname, "wildboar_walk", {20, 22}, 20)
 world:new_critter_type{
    name = "wildboar",
    descname = _ "Wild boar",
+   editor_category = "critters_herbivores",
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },

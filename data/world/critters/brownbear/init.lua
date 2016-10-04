@@ -12,6 +12,7 @@ add_walking_animations(animations, dirname, "brownbear_walk", {24, 24}, 4)
 world:new_critter_type{
    name = "brownbear",
    descname = _ "Brown bear",
+   editor_category = "critters_carnivores",
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },

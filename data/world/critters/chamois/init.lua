@@ -12,6 +12,7 @@ add_walking_animations(animations, dirname, "chamois_walk", {11, 20}, 20)
 world:new_critter_type{
    name = "chamois",
    descname = _ "Chamois",
+   editor_category = "critters_herbivores",
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },

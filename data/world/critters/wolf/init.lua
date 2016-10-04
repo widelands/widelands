@@ -17,6 +17,7 @@ add_walking_animations(animations, dirname, "wolf_walk", {19, 19}, 20)
 world:new_critter_type{
    name = "wolf",
    descname = _ "Wolf",
+   editor_category = "critters_carnivores",
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },

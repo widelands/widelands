@@ -66,6 +66,24 @@ world:new_editor_immovable_category{
    picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
 }
 
+world:new_critter_immovable_category{
+   name = "critters_herbivores",
+   descname = _ "Herbivores",
+   picture = "world/critters/stag/idle_00.png",
+}
+
+world:new_critter_immovable_category{
+   name = "critters_carnivores",
+   descname = _ "Carnivores",
+   picture = "world/critters/badger/idle_00.png",
+}
+
+world:new_critter_immovable_category{
+   name = "critters_aquatic",
+   descname = _ "Aquatic",
+   picture = "world/critters/duck/idle_00.png",
+}
+
 include "world/immovables/grass1/init.lua"
 include "world/immovables/grass2/init.lua"
 include "world/immovables/grass3/init.lua"
