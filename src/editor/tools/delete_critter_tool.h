@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 1012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,14 @@
  *
  */
 
-#ifndef WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
-#define WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
+#ifndef WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H
+#define WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H
 
-#include "editor/tools/delete_bob_tool.h"
-#include "editor/tools/multi_select.h"
+#include "editor/tools/tool.h"
 
-/// Places bobs on the map.
-struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
-	EditorPlaceBobTool(EditorDeleteBobTool& tool) : EditorTool(tool, tool) {
+/// Deletes critter from the map.
+struct EditorDeleteCritterTool : public EditorTool {
+	EditorDeleteCritterTool() : EditorTool(*this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -43,8 +42,8 @@ struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	char const* get_sel_impl() const override {
-		return "images/wui/editor/fsel_editor_place_bob.png";
+		return "images/wui/editor/fsel_editor_delete.png";
 	}
 };
 
-#endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H

@@ -9,8 +9,8 @@ wl_library(editor
     tools/decrease_height_tool.h
     tools/decrease_resources_tool.cc
     tools/decrease_resources_tool.h
-    tools/delete_bob_tool.cc
-    tools/delete_bob_tool.h
+    tools/delete_critter_tool.cc
+    tools/delete_critter_tool.h
     tools/delete_immovable_tool.cc
     tools/delete_immovable_tool.h
     tools/draw_tool.cc
@@ -28,8 +28,8 @@ wl_library(editor
     tools/multi_select.h
     tools/noise_height_tool.cc
     tools/noise_height_tool.h
-    tools/place_bob_tool.cc
-    tools/place_bob_tool.h
+    tools/place_critter_tool.cc
+    tools/place_critter_tool.h
     tools/place_immovable_tool.cc
     tools/place_immovable_tool.h
     tools/set_height_tool.cc
@@ -77,8 +77,8 @@ wl_library(editor
     ui_menus/tool_noise_height_options_menu.h
     ui_menus/tool_options_menu.cc
     ui_menus/tool_options_menu.h
-    ui_menus/tool_place_bob_options_menu.cc
-    ui_menus/tool_place_bob_options_menu.h
+    ui_menus/tool_place_critter_options_menu.cc
+    ui_menus/tool_place_critter_options_menu.h
     ui_menus/tool_place_immovable_options_menu.cc
     ui_menus/tool_place_immovable_options_menu.h
     ui_menus/tool_set_terrain_options_menu.cc

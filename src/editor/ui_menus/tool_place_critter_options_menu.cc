@@ -17,13 +17,13 @@
  *
  */
 
-#include "editor/ui_menus/tool_place_bob_options_menu.h"
+#include "editor/ui_menus/tool_place_critter_options_menu.h"
 
 #include <SDL_keycode.h>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_critter_tool.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/critter.h"
@@ -49,20 +49,19 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent, const CritterDescr& cri
 
 }  // namespace
 
-EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& parent,
-                                                             EditorPlaceBobTool& tool,
-                                                             UI::UniqueWindow::Registry& registry)
+EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
+   EditorInteractive& parent, EditorPlaceCritterTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals")) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
-		new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceBobTool>(
+	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
 	      this, world.editor_critter_categories(), world.critters(),
-			[this](UI::Panel* cb_parent, const CritterDescr& critter_descr) {
-				return create_critter_checkbox(cb_parent, critter_descr);
+	      [this](UI::Panel* cb_parent, const CritterDescr& critter_descr) {
+		      return create_critter_checkbox(cb_parent, critter_descr);
 		   },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }
 
-EditorToolPlaceBobOptionsMenu::~EditorToolPlaceBobOptionsMenu() {
+EditorToolPlaceCritterOptionsMenu::~EditorToolPlaceCritterOptionsMenu() {
 }

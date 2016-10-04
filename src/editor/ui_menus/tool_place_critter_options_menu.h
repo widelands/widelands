@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H
+#define WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H
 
 #include <memory>
 #include <vector>
 
-#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_critter_tool.h"
 #include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/tool_options_menu.h"
 
@@ -32,15 +32,15 @@ namespace Widelands {
 struct CritterDescr;
 }
 
-struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
-	EditorToolPlaceBobOptionsMenu(EditorInteractive&,
-	                              EditorPlaceBobTool&,
-	                              UI::UniqueWindow::Registry&);
-	virtual ~EditorToolPlaceBobOptionsMenu();
+struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolPlaceCritterOptionsMenu(EditorInteractive&,
+	                                  EditorPlaceCritterTool&,
+	                                  UI::UniqueWindow::Registry&);
+	virtual ~EditorToolPlaceCritterOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceBobTool>>
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>>
 	   multi_select_menu_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H

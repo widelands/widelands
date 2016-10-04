@@ -28,7 +28,7 @@
 #include "editor/tools/info_tool.h"
 #include "editor/tools/make_infrastructure_tool.h"
 #include "editor/tools/noise_height_tool.h"
-#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -56,7 +56,7 @@ public:
 		     increase_height(decrease_height, set_height),
 		     noise_height(set_height),
 		     place_immovable(delete_immovable),
-		     place_bob(delete_bob),
+		     place_critter(delete_critter),
 		     increase_resources(decrease_resources, set_resources),
 		     set_port_space(unset_port_space),
 		     set_origin() {
@@ -76,8 +76,8 @@ public:
 		EditorDeleteImmovableTool delete_immovable;
 		EditorPlaceImmovableTool place_immovable;
 		EditorSetStartingPosTool set_starting_pos;
-		EditorDeleteBobTool delete_bob;
-		EditorPlaceBobTool place_bob;
+		EditorDeleteCritterTool delete_critter;
+		EditorPlaceCritterTool place_critter;
 		EditorDecreaseResourcesTool decrease_resources;
 		EditorSetResourcesTool set_resources;
 		EditorIncreaseResourcesTool increase_resources;
@@ -180,7 +180,7 @@ private:
 	UI::UniqueWindow::Registry noise_heightmenu_;
 	UI::UniqueWindow::Registry terrainmenu_;
 	UI::UniqueWindow::Registry immovablemenu_;
-	UI::UniqueWindow::Registry bobmenu_;
+	UI::UniqueWindow::Registry crittermenu_;
 	UI::UniqueWindow::Registry resourcesmenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
