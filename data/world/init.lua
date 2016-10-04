@@ -66,19 +66,19 @@ world:new_editor_immovable_category{
    picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
 }
 
-world:new_critter_immovable_category{
+world:new_editor_critter_category {
    name = "critters_herbivores",
    descname = _ "Herbivores",
    picture = "world/critters/stag/idle_00.png",
 }
 
-world:new_critter_immovable_category{
+world:new_editor_critter_category {
    name = "critters_carnivores",
    descname = _ "Carnivores",
    picture = "world/critters/fox/idle_00.png",
 }
 
-world:new_critter_immovable_category{
+world:new_editor_critter_category {
    name = "critters_aquatic",
    descname = _ "Aquatic",
    picture = "world/critters/duck/idle_00.png",

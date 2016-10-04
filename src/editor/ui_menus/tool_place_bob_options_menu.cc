@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <SDL_keycode.h>
 
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_bob_tool.h"
 #include "graphic/graphic.h"
@@ -32,99 +31,38 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication.h"
 
-EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& parent,
-                                                             EditorPlaceBobTool& pit,
-                                                             UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
+namespace {
 
-     tabpanel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
-     pit_(pit),
-     click_recursion_protect_(false) {
-	int32_t const space = 5;
-	const Widelands::World& world = parent.egbase().world();
-	int32_t const nr_bobs = world.get_nr_bobs();
-	const uint32_t bobs_in_row =
-	   std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U), 12U);
+using namespace Widelands;
 
-	set_center_panel(&tabpanel_);
-
-	uint32_t width = 0, height = 0;
-	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const Image* pic = world.get_bob_descr(j)->representative_image();
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
-		if (w > width)
-			width = w;
-		if (h > height)
-			height = h;
-	}
-
-	const Image* tab_icon = g_gr->images().get("images/ui_basic/list_first_entry.png");
-	Point pos;
-	uint32_t cur_x = bobs_in_row;
-	int32_t i = 0;
-	UI::Box* box = nullptr;
-	while (i < nr_bobs) {
-		if (cur_x == bobs_in_row) {
-			cur_x = 0;
-			pos = Point(5, 15);
-			box = new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
-			tabpanel_.add("icons", tab_icon, box);
-		}
-
-		const Widelands::BobDescr& descr = *world.get_bob_descr(i);
-		upcast(Widelands::CritterDescr const, critter_descr, &descr);
-		UI::Checkbox& cb =
-		   *new UI::Checkbox(box, pos, descr.representative_image(),
-		                     critter_descr ? critter_descr->descname() : std::string());
-
-		cb.set_desired_size(width, height);
-		cb.set_state(pit_.is_enabled(i));
-		cb.changedto.connect(boost::bind(&EditorToolPlaceBobOptionsMenu::clicked, this, i, _1));
-		checkboxes_.push_back(&cb);
-		box->add(&cb, UI::Align::kLeft);
-		box->add_space(space);
-		pos.x += width + 1 + space;
-		++cur_x;
-		++i;
-	}
-
-	tabpanel_.activate(0);
+UI::Checkbox* create_critter_checkbox(UI::Panel* parent, const CritterDescr& critter_descr) {
+	const Image* pic = critter_descr.representative_image();
+	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), pic, critter_descr.descname());
+	const int kMinClickableArea = 24;
+	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
+	                     std::max<int>(pic->height(), kMinClickableArea));
+	return cb;
 }
 
-/**
- * This is called when one of the state boxes is toggled
-*/
-void EditorToolPlaceBobOptionsMenu::clicked(int32_t const n, bool const t) {
-	if (click_recursion_protect_)
-		return;
+}  // namespace
 
-	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
-	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
-	//  TODO(unknown): usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
-	if (!t && (!multiselect || pit_.get_nr_enabled() == 1)) {
-		checkboxes_[n]->set_state(true);
-		return;
-	}
+EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& parent,
+                                                             EditorPlaceBobTool& tool,
+                                                             UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals")) {
+	const Widelands::World& world = parent.egbase().world();
+	multi_select_menu_.reset(
+		new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceBobTool>(
+	      this, world.editor_critter_categories(), world.critters(),
+			[this](UI::Panel* cb_parent, const CritterDescr& critter_descr) {
+				return create_critter_checkbox(cb_parent, critter_descr);
+		   },
+	      [this] { select_correct_tool(); }, &tool));
+	set_center_panel(multi_select_menu_.get());
+}
 
-	if (!multiselect) {
-		for (uint32_t i = 0; pit_.get_nr_enabled(); ++i)
-			pit_.enable(i, false);
-
-		//  disable all checkboxes
-		click_recursion_protect_ = true;
-		for (uint32_t i = 0; i < checkboxes_.size(); ++i) {
-			if (i != static_cast<uint32_t>(n))
-				checkboxes_[i]->set_state(false);
-		}
-		click_recursion_protect_ = false;
-	}
-
-	pit_.enable(n, t);
-	select_correct_tool();
+EditorToolPlaceBobOptionsMenu::~EditorToolPlaceBobOptionsMenu() {
 }

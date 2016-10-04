@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,28 +20,27 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H
 
+#include <memory>
 #include <vector>
 
+#include "editor/tools/place_bob_tool.h"
+#include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "ui_basic/tabpanel.h"
 
-struct EditorPlaceBobTool;
-namespace UI {
-struct Checkbox;
+class EditorInteractive;
+namespace Widelands {
+struct CritterDescr;
 }
 
 struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceBobOptionsMenu(EditorInteractive&,
 	                              EditorPlaceBobTool&,
 	                              UI::UniqueWindow::Registry&);
+	virtual ~EditorToolPlaceBobOptionsMenu();
 
 private:
-	void clicked(int32_t, bool);
-
-	UI::TabPanel tabpanel_;
-	std::vector<UI::Checkbox*> checkboxes_;
-	EditorPlaceBobTool& pit_;
-	bool click_recursion_protect_;
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceBobTool>>
+	   multi_select_menu_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_BOB_OPTIONS_MENU_H

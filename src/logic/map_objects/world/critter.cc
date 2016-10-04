@@ -97,8 +97,11 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 ===========================================================================
 */
 
-CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& table)
-   : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table) {
+CritterDescr::CritterDescr(const std::string& init_descname,
+                           const LuaTable& table,
+                           const World& world)
+   : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
+     editor_category_(nullptr) {
 	add_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
@@ -114,6 +117,13 @@ CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& tab
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+	int editor_category_index =
+	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
+	if (editor_category_index == Widelands::INVALID_INDEX) {
+		throw GameDataError(
+		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	}
+	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
 }
 
 CritterDescr::~CritterDescr() {
@@ -141,6 +151,10 @@ CritterProgram const* CritterDescr::get_program(const std::string& programname) 
 
 uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
+}
+
+const EditorCategory* CritterDescr::editor_category() const {
+	return editor_category_;
 }
 
 /*
@@ -290,7 +304,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			if (owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name);
-				descr = dynamic_cast<const CritterDescr*>(egbase.world().get_bob_descr(critter_name));
+				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
 				throw GameDataError(
 				   "Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());

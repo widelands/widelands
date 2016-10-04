@@ -23,6 +23,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
@@ -43,7 +44,7 @@ int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
 		do {
 			Widelands::Bob* const mbob = mr.location().field->get_first_bob();
 			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
-			args->new_bob_type.push_back(world.get_bob_descr(get_random_enabled()));
+			args->new_bob_type.push_back(dynamic_cast<const Widelands::BobDescr*>(world.get_critter_descr(get_random_enabled())));
 		} while (mr.advance(*map));
 	}
 
