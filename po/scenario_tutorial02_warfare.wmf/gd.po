@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 15:25+0000\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-02 16:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Ro-ràdh"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
-msgstr "Saighdearan, trèanadh agus an cogadh"
+msgstr "Saighdearan, an t-oideachadh agus an cogadh"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
@@ -34,7 +34,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "Sa chnàmh-sgeul seo, innsidh mi dhut mu na saighdearan, mun trèanadh agus mun dreuchd a th’ aca: an cogadh. Ged a tha togail seach milleadh fainear Widelands, bidh nàmhaid ann a dh’fheumas tu ruaig a chur air aig amannan. Tha an cogadh stèidhichte air an eaconamaidh seach ro-innleachd an airm agus tha mar a dh’obraicheas seo airidh air mìneachadh."
+msgstr "Sa chnàmh-sgeul seo, innsidh mi dhut mu na saighdearan, mun oideachadh agus mun dreuchd a th’ aca: an cogadh. Ged a tha togail seach milleadh fainear Widelands, bidh nàmhaid ann a dh’fheumas tu ruaig a chur air aig amannan. Tha an cogadh stèidhichte air an eaconamaidh seach ro-innleachd an airm agus tha mar a dh’obraicheas seo airidh air mìneachadh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
@@ -70,7 +70,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Nuair a bhios saighdear Tùsanach air a thrèanadh gu slàn, bidh slàinte leibheil %1%, ionnsaigh leibheil %2%, dìon leibheil %3% agus teàrnadh leibheil %4% aige. Seo gaisgeach eagalach dhut! Seo nas ciall dha gach comas:"
+msgstr "Nuair a bhios saighdear Tùsanach air oideachadh gu slàn, bidh slàinte leibheil %1%, ionnsaigh leibheil %2%, dìon leibheil %3% agus teàrnadh leibheil %4% aige. Seo gaisgeach eagalach dhut! Seo nas ciall dha gach comas:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
@@ -109,7 +109,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "’S e an ceudad a thèid a thoirt air falbh o luach na h-ionnsaighe a tha san dìon. Chan urrainn dha na Tùsanaich an sgil seo a thrèanadh is mar sin bidh dìon leibheil 0 aca an-còmhnaidh. Is ciall dha seo gun dèid %1%%% a thoirt air falbh o gach dochann a dh’fhulaingeas iad. Ma bhuaileas ionnsaighear le luach ionnsaighe de 3500 puing air saighdear Tùsanach, caillidh an Tùsanach 3500·%2%%% = %3% de shlàinte."
+msgstr "’S e an ceudad a thèid a thoirt air falbh o luach na h-ionnsaighe a tha san dìon. Chan urrainn dha na Tùsanaich an sgil seo oideachadh is mar sin bidh dìon leibheil 0 aca an-còmhnaidh. Is ciall dha seo gun dèid %1%%% a thoirt air falbh o gach dochann a dh’fhulaingeas iad. Ma bhuaileas ionnsaighear le luach ionnsaighe de 3500 puing air saighdear Tùsanach, caillidh an Tùsanach 3500·%2%%% = %3% de shlàinte."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
@@ -131,13 +131,13 @@ msgstr "An raon catha"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr "Nise, tha mi air bruidhinn mu thrèanadh agus leibheilean. Innseam barrachd mun dèidhinn dhut."
+msgstr "Nise, tha mi air bruidhinn mun oideachadh agus leibheilean. Innseam barrachd mun dèidhinn dhut."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "Chan eil eòlas sam bith aig saighdear air ùr-chruthachadh agus chan eil e uabhasach math air sabaid. ’S urrainn dhut ionadan-trèanaidh a thogail gus a neartachadh."
+msgstr "Chan eil eòlas sam bith aig saighdear air ùr-chruthachadh agus chan eil e uabhasach math air sabaid. ’S urrainn dhut ionadan-oideachaidh a thogail gus a neartachadh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid ""
@@ -145,18 +145,18 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Is an raon catha aon dhe na h-ionadan-trèanaidh ud. ’S e togalach daor mòr a th’ ann agus trèanaidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
+msgstr "Is an raon catha aon dhe na h-ionadan-oideachaidh ud. ’S e togalach daor mòr a th’ ann agus oidichidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "To see evade training in action, build a battle arena."
-msgstr "Tog raon catha ach am faic thu trèanadh an teàrnaidh a’ dol air adhart."
+msgstr "Tog raon catha ach am faic thu oideachadh an teàrnaidh a’ dol air adhart."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr "Fhad ’s a tha sinn a’ feitheamh air an raon catha, chì thu saighdearan a’ coiseachd am measg nan togalaichean gun teagamh. Thèid iad a chur an àite càich a chèile o àm gu àm. Innsidh mi dhut mu dheidhinn fhathast."
+msgstr "Fhad ’s a tha sinn a’ feitheamh air an raon catha, chì thu saighdearan a’ coiseachd am measg nan togalaichean gun teagamh. Thèid iad a chur an àite càich a chèile o àm gu àm. Innsidh mi dhut mu dhèidhinn fhathast."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid "Build a battle arena"
@@ -186,7 +186,7 @@ msgstr "Glè mhath. Chaidh an raon catha againn a thogail agus tha na saighdeara
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr "Tha am bathar air a bheil feum ’ga ghiùlan thuige cuideachd. Bidh feum agad air aran tur agus leann làidir cho math ri iasg no feòil ach an soirbhich leis an trèanadh."
+msgstr "Tha am bathar air a bheil feum ’ga ghiùlan thuige cuideachd. Bidh feum agad air aran tur agus leann làidir cho math ri iasg no feòil ach an soirbhich leis an oideachadh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
@@ -198,19 +198,19 @@ msgstr "Airson barrachd fiosrachaidh, thoir sùil air uinneag taice an togalaich
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "Gus faighinn a-mach dè an adhartas a rinn na saighdearan agad ann an trèanadh, seall air na h-ìomhaigheagan aca. Thèid dotagan dearga a chur riutha:"
+msgstr "Gus faighinn a-mach dè an adhartas a rinn na saighdearan agad ann an oideachadh, seall air na h-ìomhaigheagan aca. Thèid dotagan dearga a chur riutha:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr "Mur eil dotag dhearg ann, is ciall dha seo nach deach an saighdear a thrèanadh agus mar sin tha leibheil 0 air. Seo na bhios aig gach saighdear air ùr-thrusadh."
+msgstr "Mur eil dotag dhearg ann, is ciall dha seo nach deach an saighdear oideachadh agus mar sin tha leibheil 0 air. Seo na bhios aig gach saighdear air ùr-thrusadh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "Fàsaidh an saighdear agad nas neartmhoire le gach ceum soirbheachail an trèanaidh. Seallaidh dotag dhearg seo dhut. Fhuair an saighdear seo trèanadh teàrnaidh gu leibheil 1."
+msgstr "Fàsaidh an saighdear agad nas neartmhoire le gach ceum soirbheachail an oideachaidh. Seallaidh dotag dhearg seo dhut. Fhuair an saighdear seo oideachadh teàrnaidh gu leibheil 1."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
@@ -222,43 +222,43 @@ msgstr "Nuair a bhios an saighdear agad air an leibheil as àirde a ruigsinn (le
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
 msgid "The Training Camp"
-msgstr "An campa trèanaidh"
+msgstr "An campa oideachadh"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Tha ionad-trèanaidh eile ann agus seo an campa trèanaidh. ’S e togalach mòr a th’ ann cuideachd agus a chum nach dèan an raon catha a choileanadh, nì e trèanadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha na saighdearan Tùsanach trèanadh dìona fhaighinn)."
+msgstr "Tha ionad-oideachaidh eile ann agus seo an campa oideachaidh. ’S e togalach mòr a th’ ann cuideachd agus a chum nach dèan an raon catha a choileanadh, nì e oideachadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha na saighdearan Tùsanach oideachadh dìona fhaighinn)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Build a training camp."
-msgstr "Tog campa trèanaidh."
+msgstr "Tog campa oideachaidh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
 msgid "Build a training camp"
-msgstr "Tog campa trèanaidh"
+msgstr "Tog campa oideachaidh"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Cha dèan an raon catha ach trèanadh teàrnaidh. Gus an saighdear as neartmhoire fhaighinn, feumaidh tu campa trèanaidh a thogail cuideachd a nì trèanadh ionnsaighe agus slàinte."
+msgstr "Cha dèan an raon catha ach oideachadh teàrnaidh. Gus an saighdear as neartmhoire fhaighinn, feumaidh tu campa oideachaidh a thogail cuideachd a nì oideachadh ionnsaighe agus slàinte."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "Taghta, tha an campa trèanaidh againn deiseil cuideachd a-nis. Chan eil rud fon ghrèin tuilleadh a chuireas stad oirnn ’s gheibh sinn na saighdearan as neartmhoire a chunnacas a-riamh."
+msgstr "Taghta, tha an campa oideachaidh againn deiseil cuideachd a-nis. Chan eil rud fon ghrèin tuilleadh a chuireas stad oirnn ’s gheibh sinn na saighdearan as neartmhoire a chunnacas a-riamh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Gus trèanadh a dhèanamh sa champa trèanaidh, bidh na saighdearan againn feumach air biadh mar a tha san raon catha ach cha bhi feum aca air leann làidir. Bidh iad feumach air diofar seòrsa de thuaghan ’na àite airson trèanadh ionnsaighe agus air clogaidean airson trèanadh slàinte."
+msgstr "Gus oideachadh a dhèanamh sa champa oideachaidh, bidh na saighdearan againn feumach air biadh mar a tha san raon catha ach cha bhi feum aca air leann làidir. Bidh iad feumach air diofar seòrsa de thuaghan ’na àite airson oideachadh ionnsaighe agus air clogaidean airson oideachadh slàinte."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
@@ -274,7 +274,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier with evade level 0 "
 "has a 30% chance of evading, while a Barbarian soldier at the same level "
 "only has a 25% chance."
-msgstr "Thoir an aire cuideachd gu bheil dòighean trèanaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha teans teàrnaidh dhe 30% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach teans dhe 25% aig saighdear Tùsanach air an aon leibheil."
+msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha teans teàrnaidh dhe 30% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach teans dhe 25% aig saighdear Tùsanach air an aon leibheil."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
@@ -284,7 +284,7 @@ msgstr "Seann-ghaisgich is saighdearan ùra"
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr "Fad ’s a tha na saighdearan againn ’gan trèanadh, innseam dhut dè nì sinn leotha."
+msgstr "Fad ’s a tha na saighdearan againn ’gan oideachadh, innseam dhut dè nì sinn leotha."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid ""
@@ -292,7 +292,7 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr "Anns gach togalach an airm, ’s urrainn dhut suidheachadh am b’ fhearr leis seann-ghaisgich (saighdearan air an trèanadh) no saighdearan ùra. Fàgaidh saighdear an togalach o àm gu àm agus thig fear nas treasa/nas laige a-steach ’na àite gu fèin-obrachail – seo na chunnaic thu roimhe."
+msgstr "Anns gach togalach an airm, ’s urrainn dhut suidheachadh am b’ fhearr leis seann-ghaisgich (saighdearan air an oideachadh) no saighdearan ùra. Fàgaidh saighdear an togalach o àm gu àm agus thig fear nas treasa/nas laige a-steach ’na àite gu fèin-obrachail – seo na chunnaic thu roimhe."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid ""
@@ -306,7 +306,7 @@ msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Nuair a bhios tu a’ meudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fhearr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fhearr le togalaichean a cheannsaich thu seann-ghaisgich an-còmhnaidh."
+msgstr "Nuair a bhios tu a’ meudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fhearr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fhearr le togalaichean a bhuinnig thu seann-ghaisgich an-còmhnaidh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:139
 msgid "Soldier capacity"
@@ -472,7 +472,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "’S urrainn do 12 shaighdear còmhnaidh ann an cathair is ’s i togalach an airm as motha as urrainn dha na Tùsanaich a thogail. Tha i glè chosgail cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fhearr gus ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
+msgstr "’S urrainn do 12 shaighdear còmhnaidh ann an cathair is ’s ise togalach an airm as motha as urrainn dha na Tùsanaich a thogail. Tha i glè chosgail cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fhearr gus ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid "Defeat your Enemy"
@@ -496,7 +496,7 @@ msgstr "Abair deagh obair, tha a’ chathair deiseil a-nis. Ach dè tha siud? Th
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "Gus ionnsaigh a thoirt air togalach, briog air an doras aige, tagh an àireamh de shaighdearan a bu toigh leat cur a-null agus briog air a’ phutan “Ionnsaigh”."
+msgstr "Gus ionnsaigh a thoirt air togalach, briog air an doras aige, tagh an àireamh de shaighdearan a bu toigh leat cur a-null agus briog air a’ phutan “Thoir ionnsaigh”."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
@@ -509,11 +509,11 @@ msgstr "Thig na saighdearan agad o gach togalach an airm a tha am fagas. Mar an 
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr "Thoir ionnsaigh air is ceannsaich gach togalach an airm aig an nàmhaid is mill am prìomh-àras aige."
+msgstr "Thoir ionnsaigh air is buinnig gach togalach an airm aig an nàmhaid is mill am prìomh-àras aige."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
 msgid "Defeat the enemy tribe"
-msgstr "Cuir ruaig air an treubh nàmhad"
+msgstr "Cuir ruaig air an treubh nàimhdeil"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid "Defeat Your Enemy"
@@ -534,7 +534,7 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr "Tapadh leat airson an t-oideachadh seo a chluiche. Tha mi ’n dòchas gun do chòrd e riut agus gun do dh’ionnsaich thu mar a chruthaicheas tu saighdearan agus mar a nì thu trèanadh orra, mar a stiùiricheas tu far an dèid iad agus mar a chuireas tu ruaig air nàmhaid. Am faca tu dè cho furasta ’s a rinn thu a’ chùis air an nàmhaid? Is mòr a’ bhuannachd a gheibh thu o thrèanadh nan saighdearan."
+msgstr "Tapadh leat airson an t-oideachadh seo a chluiche. Tha mi ’n dòchas gun do chòrd e riut agus gun do dh’ionnsaich thu mar a chruthaicheas tu saighdearan agus mar a bheir thu oideachadh dhaibh, mar a stiùiricheas tu far an dèid iad agus mar a chuireas tu ruaig air nàmhaid. Am faca tu dè cho furasta ’s a rinn thu a’ chùis air an nàmhaid? Is mòr a’ bhuannachd a gheibh thu o oideachadh nan saighdearan."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:222
 msgid ""

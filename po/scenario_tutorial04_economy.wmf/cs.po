@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-28 22:18+0000\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-01 12:17+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -259,14 +259,14 @@ msgstr "Zásoby"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:130
 msgid "Check for rations"
-msgstr "Zkontroluj svačiny"
+msgstr "Zkontroluj příděly"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Dobře. V seznamu je vidět, že už nemáš ani hospody ani hostince. To znamená, že nepřipravuješ žádné svačiny. Tak se podíváme, co máme ještě v zásobě."
+msgstr "Dobře. V seznamu je vidět, že už nemáš ani hospody ani hostince. To znamená, že nepřipravuješ žádné příděly. Tak se podíváme, co máme ještě v zásobě."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
@@ -299,7 +299,7 @@ msgstr "Okno zásob má čtyři záložky. První (a aktuálně vybraná) zobraz
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "Když tak koukám na svačiny, je jich pouze pět, pravděpodobně už na cestě někam. Pět svačin není moc pro tak velké hospodářsvtí."
+msgstr "Když tak koukám na příděly, je jich pouze pět, pravděpodobně už na cestě někam. Pět přídělů není moc, pro tak velké hospodářsvtí."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -345,7 +345,7 @@ msgstr "Čtvrtá záložka zobrazuje to samé pro dělníky."
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "Třetí záložka ti říká, že v hlavní budově už nejsou žádné svačiny - to není dobré."
+msgstr "Třetí záložka ti říká, že v hlavní budově už nejsou žádné příděly - to není dobré."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid "You closed the stock window!"
@@ -389,7 +389,7 @@ msgid ""
 "than one tavern – two or three are better. Remember: as long as we don’t "
 "produce rations, our miners won’t dig for ore. And without iron, we cannot "
 "forge a single helm."
-msgstr "Teď když máš už nějaký ten přehled, můžeš začít něco dělat. Myslím, že bychom měli postavit další hospodu - dvě nebo tři by byly ještě lepší. Pamatuj: pokud nebudeme připravovat svačiny, naši horníci nebudou těžit rudu. Bez železa nemůžeme ukovat ani jedinou přilbu."
+msgstr "Teď když máš už nějaký ten přehled, můžeš začít něco dělat. Myslím, že bychom měli postavit další hospodu - dvě nebo tři by byly ještě lepší. Pamatuj: pokud nebudeme připravovat příděly, naši horníci nebudou těžit rudu. Bez železa nemůžeme ukovat ani jedinou přilbu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
@@ -402,7 +402,7 @@ msgstr "Postav nové hospody."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
-msgstr "Aby naše doly opět fungovaly, potřebujeme svačiny - čím více, tím lépe."
+msgstr "Aby naše doly opět fungovaly, potřebujeme příděly - čím více, tím lépe."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 msgid "Ware Encyclopedia"
@@ -412,7 +412,7 @@ msgstr "Encyklopedie surovin"
 msgid ""
 "I am not sure if you could follow my remarks. Why do we need rations to get "
 "soldiers?"
-msgstr "Nejsem si jistý, zda mě chápeš. Proč je nutné aby vojáci dostávali svačiny?"
+msgstr "Nejsem si jistý, zda mě chápeš. Proč je nutné aby vojáci dostávali příděly?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid ""
@@ -448,14 +448,14 @@ msgstr "Poslat suroviny tam, kde jsou potřeba"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:240
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr "Skvěle. Naše hospody už se dostavěly a začínají se plnit jídlem."
+msgstr "Skvěle. Naše hospody už se dostavěly a začínají se plnit příděly."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:241
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr "V tuto chvíli jsou všechny doly zásobeny svačinami. Pokud chceš upřednostnit nějaký důl, jednoduše to uděláš v jeho okně. Na záložce surovin, za každou surovinou, je umístěn \"semafor\"."
+msgstr "V tuto chvíli jsou všechny doly zásobeny příděly. Pokud chceš upřednostnit nějaký důl, jednoduše to uděláš v jeho okně. Na záložce surovin, za každou surovinou, je umístěn \"semafor\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid ""

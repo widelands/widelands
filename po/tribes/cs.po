@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-29 20:13+0000\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-01 12:31+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1207,7 +1207,7 @@ msgstr "Velký hostinec"
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
 msgid "preparing a ration"
-msgstr "příprava svačiny"
+msgstr "příprava přídělu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:80
@@ -2965,7 +2965,7 @@ msgstr "Křemen"
 #: ../../data/tribes/wares/ration/init.lua:7
 msgctxt "ware"
 msgid "Ration"
-msgstr "Svačina"
+msgstr "Příděl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:7
@@ -3409,7 +3409,7 @@ msgstr "Hostinský"
 #: ../../data/tribes/workers/barbarians/lime_burner/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
-msgstr "Dělník z vápenky"
+msgstr "Dělník z vápenné peci"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
