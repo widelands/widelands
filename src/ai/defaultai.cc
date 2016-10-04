@@ -123,6 +123,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      numof_warehouses_(0),
      avg_military_score_(0),
      new_buildings_stop_(false),
+     needs_boost_economy(false),
      resource_necessity_territory_(100),
      resource_necessity_mines_(100),
      resource_necessity_water_(0),
@@ -130,6 +131,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      military_last_dismantle_(0),
      military_last_build_(0),
      last_road_dismantled_(0),
+     military_status_last_updated(0),
      seafaring_economy(false),
      expedition_ship_(kNoShip),
      spots_(0),
@@ -446,7 +448,7 @@ void DefaultAI::think() {
 			check_trainingsites(gametime);
 			break;
 		case SchedulerTaskId::kCountMilitaryVacant:
-			count_military_vacant_positions();
+			count_military_vacant_positions(gametime);
 			set_taskpool_task_time(gametime + 15 * 1000, SchedulerTaskId::kCountMilitaryVacant);
 			break;
 		case SchedulerTaskId::kWareReview:
@@ -1485,6 +1487,17 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			   field.enemy_military_presence * 2, kAbsValue);
 			field.military_score_ += management_data.neuron_pool[61].get_result_safe(
 			   field.enemy_military_presence / 3, kAbsValue);
+			//NOCOM   
+			if (management_data.f_neuron_pool[12].get_result(
+				mines_.size() < 4,
+				field.unowned_mines_spots_nearby < 5,
+				persistent_data->last_soldier_trained < gametime && persistent_data->last_soldier_trained + 20 * 60 * 1000 < gametime)) {
+					field.military_score_ -= std::abs(management_data.get_military_number_at(58));
+				}
+
+			   
+			   
+			   
 		} else if (field.near_border) {
 			// near border, but not enemy nearby
 			field.military_score_ += management_data.get_military_number_at(1);
@@ -1519,6 +1532,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	} else {  // militarysite
 		// field.military_score_ -= 100;
 		field.military_score_ += management_data.get_military_number_at(3);
+		field.military_score_ += std::abs(management_data.get_military_number_at(59));
 		field.military_score_ -=
 		   field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(52)) / 5;
 		if (field.enemy_accessible_) {
@@ -1531,9 +1545,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ +=
 		   management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50, kAbsValue);
 		field.military_score_ -= management_data.neuron_pool[7].get_result_safe(
-		   (field.area_military_capacity + 4) / 5, kAbsValue);
+		   (field.area_military_capacity + 4) / 5, kAbsValue) / 2;
 		field.military_score_ -= management_data.neuron_pool[11].get_result_safe(
-		   (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+		   (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue) / 2;
 		field.military_score_ -=
 		   management_data.neuron_pool[20].get_result_safe(field.military_stationed, kAbsValue);
 		field.military_score_ -=
@@ -1541,7 +1555,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.military_score_ -= management_data.neuron_pool[38].get_result_safe(
 		   static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
 		field.military_score_ -= management_data.neuron_pool[28].get_result_safe(
-		   field.area_military_capacity - field.local_soldier_capacity, kAbsValue);
+		   field.area_military_capacity - field.local_soldier_capacity, kAbsValue) / 2;
 		field.military_score_ -=
 		   management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
 		field.military_score_ += management_data.neuron_pool[56].get_result_safe(
@@ -1837,9 +1851,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// It is bit complicated balance building militarysites and productionsites so this is small hack
 	// to help
 	// it
-	bool needs_boost_economy = management_data.f_neuron_pool[7].get_result(
-	   highest_nonmil_prio_ > 18 + management_data.get_military_number_at(29) / 10, has_enough_space,
-	   virtual_mines >= 5, gametime > 45 * 60 * 1000,
+	needs_boost_economy = management_data.f_neuron_pool[7].get_result(
+	   highest_nonmil_prio_ > 18 + management_data.get_military_number_at(29) / 10,
+	   has_enough_space,
+	   virtual_mines >= 5,
+	   gametime > 45 * 60 * 1000,
 	   player_statistics.any_enemy_seen_lately(gametime));
 
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
@@ -2328,6 +2344,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						} else {
 							prio += 50 / bo.total_count();
 						}
+
+						prio -= bf->water_nearby / 2;
 
 						prio -=
 						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
@@ -4256,7 +4274,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// If we are close to enemy (was seen in last 15 minutes)
 		if (player_statistics.any_enemy_seen_lately(gametime)) {
-			bo.primary_priority += 10;
+			bo.primary_priority += std::abs(management_data.get_military_number_at(57) / 3);
 		}
 
 		// We build one trainig site per X military sites
@@ -4272,7 +4290,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// Special bonus for very first site of type
 		if (bo.total_count() == 0) {
-			bo.primary_priority += 30;
+			bo.primary_priority += std::abs(management_data.get_military_number_at(56) / 3);
 		}
 
 		if (bo.primary_priority > 0) {
@@ -4669,7 +4687,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime
 }
 
 // this just counts free positions in military and training sites
-void DefaultAI::count_military_vacant_positions() {
+void DefaultAI::count_military_vacant_positions(const uint32_t gametime) {
 	// counting vacant positions
 	int32_t vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
@@ -4681,15 +4699,30 @@ void DefaultAI::count_military_vacant_positions() {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
 	}
 
+	SoldiersStatus soldier_status_tmp;
+
 	if (vacant_mil_positions_ <= 1) {
-		soldier_status_ = SoldiersStatus::kFull;
+		soldier_status_tmp = SoldiersStatus::kFull;
 	} else if (vacant_mil_positions_ * 4 <= static_cast<int32_t>(militarysites.size())) {
-		soldier_status_ = SoldiersStatus::kEnough;
+		soldier_status_tmp = SoldiersStatus::kEnough;
 	} else if (vacant_mil_positions_ > static_cast<int32_t>(militarysites.size())) {
-		soldier_status_ = SoldiersStatus::kBadShortage;
+		soldier_status_tmp = SoldiersStatus::kBadShortage;
 	} else {
-		soldier_status_ = SoldiersStatus::kShortage;
+		soldier_status_tmp = SoldiersStatus::kShortage;
 	}
+	
+	// Never increase soldier status too soon
+	if (soldier_status_tmp >= soldier_status_) {
+		soldier_status_  = soldier_status_tmp;
+		military_status_last_updated = gametime;
+	} else if (soldier_status_tmp < soldier_status_ &&
+	   military_status_last_updated + std::abs(management_data.get_military_number_at(60)) * 60 * 1000 / 10 < gametime) {
+		printf ("%d / %d: finaly increasing soldier status %d -> %d\n",
+			player_number(), gametime / 1000, soldier_status_, soldier_status_tmp );
+		soldier_status_ = soldier_status_tmp;
+
+	}
+
 }
 
 // this function only check with trainingsites
@@ -4768,7 +4801,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		      static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 2)),
 		   player_statistics.get_visible_enemies_power(gametime) -
 		         player_statistics.get_old_visible_enemies_power(gametime) >
-		      static_cast<uint16_t>(std::abs(management_data.get_military_number_at(33) / 4)),
+		      static_cast<uint16_t>(std::abs(management_data.get_military_number_at(34) / 4)),
 		   player_statistics.get_player_power(pn) * 2 >
 		      player_statistics.get_visible_enemies_power(gametime),
 		   management_data.neuron_pool[52].get_result_safe(static_cast<uint8_t>(soldier_status_) *
@@ -5118,6 +5151,8 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	persistent_data->last_soldier_trained = game().get_gametime();
+	
+	//printf (" %d: soldier just trained (%d)\n", player_number(), persistent_data->last_soldier_trained / 1000); NOCOM
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {

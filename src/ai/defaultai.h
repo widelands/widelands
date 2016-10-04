@@ -192,7 +192,7 @@ private:
 	uint32_t calculate_stocklevel(Widelands::BuildingObserver&);
 	uint32_t calculate_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
-	void count_military_vacant_positions();
+	void count_military_vacant_positions(uint32_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t);
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
@@ -299,6 +299,7 @@ private:
 	int32_t avg_military_score_;
 
 	bool new_buildings_stop_;
+	bool needs_boost_economy;
 
 	// when territory is expanded for every candidate field benefits are calculated
 	// but need for water, space, mines can vary
@@ -312,6 +313,7 @@ private:
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
+	uint32_t military_status_last_updated;
 
 	bool seafaring_economy;  // false by default, until first port space is found
 	uint32_t expedition_ship_;
