@@ -68,18 +68,21 @@ world:new_editor_immovable_category{
 
 world:new_editor_critter_category {
    name = "critters_herbivores",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Herbivores",
    picture = "world/critters/stag/idle_00.png",
 }
 
 world:new_editor_critter_category {
    name = "critters_carnivores",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Carnivores",
    picture = "world/critters/fox/idle_00.png",
 }
 
 world:new_editor_critter_category {
    name = "critters_aquatic",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Aquatic",
    picture = "world/critters/duck/idle_00.png",
 }
