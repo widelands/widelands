@@ -40,10 +40,10 @@ tribes:new_productionsite_type {
 		atlanteans_trainer = 1
 	},
 
-	inputs = {
-		tabard = 8,
-		trident_light = 8
-	},
+   inputs = {
+      { name = "tabard", amount = 8 },
+      { name = "trident_light", amount = 8 }
+   },
 	outputs = {
 		"atlanteans_soldier",
    },

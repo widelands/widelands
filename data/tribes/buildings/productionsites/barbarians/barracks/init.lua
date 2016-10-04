@@ -39,9 +39,9 @@ tribes:new_productionsite_type {
 		barbarians_trainer = 1
 	},
 
-	inputs = {
-		ax = 8
-	},
+   inputs = {
+      { name = "ax", amount = 8 }
+   },
 	outputs = {
 		"barbarians_soldier",
    },

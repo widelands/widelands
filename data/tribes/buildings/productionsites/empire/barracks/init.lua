@@ -41,10 +41,10 @@ tribes:new_productionsite_type {
 		empire_trainer = 1
 	},
 
-	inputs = {
-		armor_helmet = 8,
-		spear_wooden = 8
-	},
+   inputs = {
+      { name = "armor_helmet", amount = 8 },
+      { name = "spear_wooden", amount = 8 }
+   },
 	outputs = {
 		"empire_soldier",
    },
