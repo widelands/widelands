@@ -75,7 +75,7 @@ world:new_critter_immovable_category{
 world:new_critter_immovable_category{
    name = "critters_carnivores",
    descname = _ "Carnivores",
-   picture = "world/critters/badger/idle_00.png",
+   picture = "world/critters/fox/idle_00.png",
 }
 
 world:new_critter_immovable_category{
