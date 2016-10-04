@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Yuriy Sokolov <lention@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-06 15:08+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-02 06:24+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,41 +19,38 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
 msgstr "5 минут"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
 msgstr "10 минут"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:78
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
 msgstr "15 минут"
 
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:99 ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "Status"
 msgstr "Статус"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:112
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:223 ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:223
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Правила"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
 msgstr "Добро пожаловать на Захват Островов"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
 "Island Hopping is a traditional tournament in Atlantean culture. The rules "
 "of the game are simple: you start with a headquarters on an island. When you"
@@ -62,98 +59,101 @@ msgid ""
 "first headquarters."
 msgstr "Захват островов - традиционный для атлантов вид состязаний. Правила игры просты: вы начинаете игру со штабом на первом острове. Когда вы построите замок на краю первого острова, вам дадут второй остров со штабом, содержащим все ваши запасы из первого штаба."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
 msgstr "Если вы построите замок в указанной зоне второго острова, вы перейдёте на третий остров со штабом. Тут вам нужно построить замок в центре острова и удерживать его 20 минут, чтобы победить."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
 msgstr "Когда вы заканчиваете остров, вы получаете товары в количестве, зависящем от количества игроков, закончивших этот остров перед вами. Чем раньше вы закончите, тем меньше товаров вы получите. Подробности ниже."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
 msgid ""
 "The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "Дело в том, что на первом острове есть Камень и Дерево, на втором - только луга и ресурсы. Налаженная экономика, которую Вы оставляете позади, продолжит работать на Вас, но реальную выгоду вы получите в тот момент, когда достигнете нового острова."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
 msgstr "Постарайтесь не тратить ваш кварц и алмазы."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"
 msgstr "Награда за окончание"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
 msgid "First Island"
 msgstr "Первый Остров"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 msgid "1st to finish"
 msgstr "1ый закончил"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "2nd to finish"
 msgstr "2ой закончил"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "3rd to finish"
 msgstr "3ий закончил"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "4th to finish"
 msgstr "4ый закончил"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 msgid "Second Island"
 msgstr "Второй Остров"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:42
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "Игрок %1$s первым достиг острова номер %2$i."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "Игрок %1$s вторым достиг острова номер %2$i."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "Игрок %1$s третьим достиг острова номер %2$i."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "Игрок %1$s четвертым достиг острова номер  %2$i"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:49
 msgid "The reward for this feat amounts to:"
 msgstr "Награда за данный подвиг:"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:52
+#, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s теперь Царь Горы и выиграет игру через 20 минут, если никто не займёт его место."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
+#, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s утратил лидерство."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:55
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s был Царём Горы %2$s!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:58
+#, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s победил. Поздравляем!"

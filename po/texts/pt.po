@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2015-2016
 # zecas <jjorge@free.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-05 21:07+0000\n"
-"Last-Translator: zecas <jjorge@free.fr>\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-03 11:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,7 +127,7 @@ msgstr "Ajuda do Widelands"
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Encontrarás ajuda sobe como jogas no sobre o editor com o botão da ajuda no menu de fundo ou le carregar %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
@@ -414,23 +415,23 @@ msgstr "Definições do Cliente"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Na parte esquerda fica uma lista de todos os utilizadores, incluindo tu. Com o botão junto ao teu nome, podes definir o teu estatuto. Existem os seguintes estatutos:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "O jogador com a cor da bandeira. Se mais que um cliente selecionado controlar a mesma cor, todos eles partilham o controlo sobre o jogador («Modo reino partilhado»)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "O modo espetador, que significa que poderás ver tudo, mas não controlarás nenhum jogador."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr "Definições de Jogador"
+msgstr "Definições de jogador"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -440,14 +441,14 @@ msgstr "Ao meio ficam as definições dos jogadores. Para começar uma partida, 
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Ligado a um ou mais clientes (veja «Definições de utilizador»)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Ligado a um jogador controlado pelo computador (a cara na imagem assim como o texto sobreposto quando passares o rato nele indicam a qualidade dele)."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
@@ -481,14 +482,14 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "No lado direito estão as informações sobre o mapa seleccionado ou o jogo guardado. O botão à direita do mapa permite ao Anfitrião mudar para outro mapa. O Anfitrião pode ainda definir uma condição de vitória e finalmente pode começar um jogo assim que todos os jogadores estejam prontos."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Alguns edifícios, como as quintas, usam uma pequena área à sua volta. Se o edifício estiver rodeado de árvores ou estradas, a produção pára porque não há espaço para as plantações."
+msgstr "Alguns edifícios, como as quintas, usam uma pequena área de trabalho à sua volta. Se o edifício estiver rodeado de árvores ou estradas, a produção parará porque não há espaço para as plantações."
 
 #: ../../data/txts/tips/atlanteans.tip:6
 msgid ""
@@ -500,13 +501,13 @@ msgstr "Constrói sempre uma casa do silvicultor e uma casa do piscicultor para 
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Presta bem atenção aos pescadores. Assim que os recursos piscícolas se esgotarem nessa área de trabalho, eles não vão poder pescar mais."
 
 #: ../../data/txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr "Constrói sempre uma casa do guarda-florestal e uma coutada para evitar ficar sem madeira ou alimentação."
+msgstr "Constrói sempre uma cabana do guarda-florestal e uma coutada para evitar ficar sem madeira ou alimentação."
 
 #: ../../data/txts/tips/editor.tip:2
 msgid ""
@@ -519,13 +520,13 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Podes seleccionar diversos tipo de animais se mantiveres premida a tecla Ctrl durante a selecção. Se depois clicares no mapa, uma instância de um dos tipos de animais seleccionados será colocada no mapa."
 
 #: ../../data/txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "Tal como fazes com animais, podes selecionar diversos tipos de imóveis ou texturas de terreno com Ctrl + clocar."
 
 #: ../../data/txts/tips/editor.tip:14
 msgid ""
@@ -549,7 +550,7 @@ msgstr "As teclas numéricas (1 - 0) permitem mudar diretamente o tamanho da ár
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "A tecla ESPAÇO comporta-se como no jogo normal. Ela mostra ou esconde os espaços de construção."
+msgstr "A tecla ESPAÇO comporta-se como no jogo normal. Ela mostra ou esconde os lotes de construção."
 
 #: ../../data/txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -571,7 +572,7 @@ msgstr "Não te esqueças de enviar um geólogo para pesquisar água e minérios
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "O teu território pode ser expandido ao construir edifícios militares - Sentinela, Fortaleza, Quartel, etc."
+msgstr "O teu território pode ser expandido ao construir edifícios militares - sentinela, fortaleza, blocausse, etc."
 
 #: ../../data/txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -636,7 +637,7 @@ msgstr "Novos soldados são recrutados no quartel-general ou nos armazéns, bast
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Se gostas de risco, manter CTRL premido evita a janela de confirmação quando pressionas nos botões para melhorar, desmantelar ou destruir um edifício."
+msgstr "Se gostas de risco, manter Ctrl premido evita a janela de confirmação quando pressionas nos botões para melhorar, desmanchar ou destruir um edifício."
 
 #: ../../data/txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
