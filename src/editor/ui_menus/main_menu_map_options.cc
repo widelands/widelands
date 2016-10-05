@@ -79,7 +79,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-     teams_list_(&teams_box_, 0, 0, max_w_, 60, UI::ListselectSelectionMode::kShowCheck),
+     teams_list_(&teams_box_, 0, 0, max_w_, 60, UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
 

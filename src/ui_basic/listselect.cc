@@ -31,6 +31,7 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
+#include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
 
 constexpr int kMargin = 2;
@@ -50,7 +51,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                int32_t const y,
                                uint32_t const w,
                                uint32_t const h,
-                               ListselectSelectionMode selection_mode)
+                               ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
@@ -69,7 +70,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.set_pagesize(h - 2 * lineheight_);
 	scrollbar_.set_steps(1);
 
-	if (selection_mode_ == ListselectSelectionMode::kShowCheck) {
+	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		uint32_t pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
@@ -253,7 +254,7 @@ void BaseListselect::select(const uint32_t i) {
 	if (selection_ == i)
 		return;
 
-	if (selection_mode_ == ListselectSelectionMode::kShowCheck) {
+	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		if (selection_ != no_selection_index())
 			entry_records_[selection_]->pic = nullptr;
 		entry_records_[i]->pic = check_pic_;
@@ -326,7 +327,8 @@ uint32_t BaseListselect::get_eff_w() const {
 }
 
 void BaseListselect::layout() {
-	scrollbar_.set_size(scrollbar_.get_w(), get_h());
+	scrollbar_.set_size(
+	   scrollbar_.get_w(), selection_mode_ == ListselectLayout::kDropdown ? get_h() - 1 : get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
 }
@@ -344,7 +346,19 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), background_, Point(0, 0));
 	}
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		RGBAColor black(0, 0, 0, 255);
+		//  left edge
+		dst.brighten_rect(Rect(Point(0, 0), 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
+		//  bottom edge
+		dst.fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
+		dst.fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
+		//  right edge
+		dst.fill_rect(Rect(Point(get_w() - 2, 1), 1, get_h() - 1), black);
+		dst.fill_rect(Rect(Point(get_w() - 1, 0), 1, get_h()), black);
+	} else {
+		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	}
 
 	while (idx < entry_records_.size()) {
 		assert(get_h() < std::numeric_limits<int32_t>::max());
@@ -354,8 +368,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		Point point(1, y);
-		uint32_t maxw = get_eff_w() - 2;
+		Point point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
+		uint32_t maxw =
+		   get_eff_w() -
+		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
 
 		// Highlight the current selected entry
 		if (idx == selection_) {
@@ -478,7 +494,7 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 		set_tooltip("");
 		return false;
 	}
-	if (selection_mode_ == ListselectSelectionMode::kSelectOnMouseMove) {
+	if (selection_mode_ == ListselectLayout::kDropdown) {
 		select(y);
 	}
 	set_tooltip(entry_records_.at(y)->tooltip);

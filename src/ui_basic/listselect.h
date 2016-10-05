@@ -32,11 +32,10 @@
 namespace UI {
 struct Scrollbar;
 
-enum class ListselectSelectionMode {
-	kPlain,              // Highlight the selected element
-	kSelectOnMouseMove,  // When the mouse moves, instantly select the element that the mouse hovers
-	                     // over
-	kShowCheck           // Show a green arrow in front of the selected element
+enum class ListselectLayout {
+	kPlain,     // Highlight the selected element
+	kDropdown,  // When the mouse moves, instantly select the element that the mouse hovers over
+	kShowCheck  // Show a green arrow in front of the selected element
 };
 
 /**
@@ -51,7 +50,7 @@ struct BaseListselect : public Panel {
 	               int32_t y,
 	               uint32_t w,
 	               uint32_t h,
-	               ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain);
+	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -152,7 +151,7 @@ private:
 	uint32_t selection_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
-	ListselectSelectionMode selection_mode_;
+	ListselectLayout selection_mode_;
 	const Image* check_pic_;
 	const Image* background_;
 	std::string current_tooltip_;
@@ -164,7 +163,7 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain)
+	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : BaseListselect(parent, x, y, w, h, selection_mode) {
 	}
 
@@ -216,7 +215,7 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           ListselectSelectionMode selection_mode = ListselectSelectionMode::kPlain)
+	           ListselectLayout selection_mode = ListselectLayout::kPlain)
 	   : Base(parent, x, y, w, h, selection_mode) {
 	}
 
