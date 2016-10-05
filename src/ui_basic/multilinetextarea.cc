@@ -45,7 +45,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
-     scrollmode_(scroll_mode) {
+     scrollmode_(scroll_mode),
+     pic_background_(nullptr) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
 
