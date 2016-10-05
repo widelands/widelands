@@ -25,11 +25,11 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 48, 65 },
+			hotspot = { 44, 65 },
 		},
 		working = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 48, 65 },
+			hotspot = { 44, 65 },
 		}
 	},
 
