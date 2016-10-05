@@ -327,8 +327,7 @@ uint32_t BaseListselect::get_eff_w() const {
 }
 
 void BaseListselect::layout() {
-	scrollbar_.set_size(
-	   scrollbar_.get_w(), selection_mode_ == ListselectLayout::kDropdown ? get_h() - 1 : get_h());
+	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
 }
@@ -338,9 +337,10 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
-	const uint32_t lineheight = get_lineheight();
-	uint32_t idx = scrollpos_ / lineheight;
-	int32_t y = 1 + idx * lineheight - scrollpos_;
+	const int eff_h =
+	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - 4 : get_inner_h();
+	uint32_t idx = scrollpos_ / get_lineheight();
+	int y = 1 + idx * get_lineheight() - scrollpos_;
 
 	if (background_ != nullptr) {
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), background_, Point(0, 0));
@@ -351,8 +351,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 		//  left edge
 		dst.brighten_rect(Rect(Point(0, 0), 2, get_h()), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
-		dst.fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
+		dst.fill_rect(Rect(Point(2, get_h() - 2), get_eff_w() - 2, 1), black);
+		dst.fill_rect(Rect(Point(1, get_h() - 1), get_eff_w() - 1, 1), black);
 		//  right edge
 		dst.fill_rect(Rect(Point(get_w() - 2, 1), 1, get_h() - 1), black);
 		dst.fill_rect(Rect(Point(get_w() - 1, 0), 1, get_h()), black);
@@ -360,11 +360,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	}
 
+	int lineheight = lineheight_;
 	while (idx < entry_records_.size()) {
-		assert(get_h() < std::numeric_limits<int32_t>::max());
-		if (y >= get_h()) {
+		assert(eff_h < std::numeric_limits<int32_t>::max());
+
+		// Don't draw over the bottom edge
+		lineheight = std::min(eff_h - y, lineheight);
+		if (lineheight < 0)
 			break;
-		}
 
 		const EntryRecord& er = *entry_records_[idx];
 
@@ -395,9 +398,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			               y + (get_lineheight() - er.pic->height()) / 2),
-			         er.pic);
+			dst.blitrect(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			                   y + (lineheight_ - er.pic->height()) / 2),
+			             er.pic, Rect(0, 0, er.pic->width(), lineheight));
 		}
 
 		const Image* entry_text_im = UI::g_fh1->render(as_uifont(
@@ -417,11 +420,16 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {
+		if (lineheight_ > static_cast<uint32_t>(entry_text_im->height())) {
 			point.y += (lineheight_ - entry_text_im->height()) / 2;
 		} else {
 			point.y -= (entry_text_im->height() - lineheight_) / 2;
 		}
+
+		// Don't draw over the bottom edge
+		lineheight = std::min(eff_h - point.y, lineheight);
+		if (lineheight < 0)
+			break;
 
 		// Crop to column width while blitting
 		if (static_cast<int>(alignment & UI::Align::kRight) &&
@@ -431,13 +439,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 			// We want this always on, e.g. for mixed language savegame filenames, or the languages
 			// list
-			dst.blitrect(point, entry_text_im,
-			             Rect(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
+			dst.blitrect(
+			   point, entry_text_im, Rect(entry_text_im->width() - maxw + picw, 0, maxw, lineheight));
 		} else {
-			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, entry_text_im->height()));
+			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, lineheight));
 		}
 
-		y += lineheight;
+		y += get_lineheight();
 		++idx;
 	}
 }
