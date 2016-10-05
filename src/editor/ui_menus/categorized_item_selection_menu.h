@@ -109,12 +109,10 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
-		const uint32_t items_in_row =
-		   static_cast<uint32_t>(std::ceil(std::sqrt(static_cast<float>(item_indices.size()))));
 		int nitems_handled = 0;
 		UI::Box* horizontal = nullptr;
 		for (const int i : item_indices) {
-			if (nitems_handled % items_in_row == 0) {
+			if (nitems_handled % category.items_per_row() == 0) {
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 

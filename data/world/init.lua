@@ -10,60 +10,70 @@ world:new_editor_immovable_category{
    name = "miscellaneous",
    descname = _ "Miscellaneous",
    picture = "world/immovables/ruin5/idle.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "artifacts",
    descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
    picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "plants",
    descname = _ "Plants",
    picture = "world/immovables/cactus3/idle.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "standing_stones",
    descname = _ "Standing Stones",
    picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
+   items_per_row = 4,
 }
 
 world:new_editor_immovable_category{
    name = "rocks",
    descname = _ "Rocks",
    picture = "world/immovables/rocks/greenland_rocks6/idle.png",
-}
-
-world:new_editor_immovable_category{
-   name = "trees_coniferous",
-   descname = _ "Coniferous Trees",
-   picture = "world/immovables/trees/spruce/old/idle_0.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "trees_dead",
    descname = _ "Dead Trees",
    picture = "world/immovables/trees/deadtree2/idle.png",
+   items_per_row = 8,
+}
+
+world:new_editor_immovable_category{
+   name = "trees_coniferous",
+   descname = _ "Coniferous Trees",
+   picture = "world/immovables/trees/spruce/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_deciduous",
    descname = _ "Deciduous Trees",
    picture = "world/immovables/trees/alder/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_palm",
    descname = _ "Palm Trees",
    picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_wasteland",
    descname = _ "Wasteland Trees",
    picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_critter_category {
@@ -71,6 +81,7 @@ world:new_editor_critter_category {
    -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Herbivores",
    picture = "world/critters/stag/idle_00.png",
+   items_per_row = 10,
 }
 
 world:new_editor_critter_category {
@@ -78,6 +89,7 @@ world:new_editor_critter_category {
    -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Carnivores",
    picture = "world/critters/fox/idle_00.png",
+   items_per_row = 10,
 }
 
 world:new_editor_critter_category {
@@ -85,6 +97,7 @@ world:new_editor_critter_category {
    -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Aquatic",
    picture = "world/critters/duck/idle_00.png",
+   items_per_row = 10,
 }
 
 include "world/immovables/grass1/init.lua"
@@ -96,9 +109,9 @@ include "world/immovables/bush3/init.lua"
 include "world/immovables/bush4/init.lua"
 include "world/immovables/bush5/init.lua"
 include "world/immovables/cactus1/init.lua"
-include "world/immovables/cactus2/init.lua"
 include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
+include "world/immovables/cactus2/init.lua"
 include "world/immovables/manmade/artifacts/artifact00/init.lua"
 include "world/immovables/manmade/artifacts/artifact01/init.lua"
 include "world/immovables/manmade/artifacts/artifact02/init.lua"
