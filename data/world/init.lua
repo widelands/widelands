@@ -80,7 +80,7 @@ world:new_editor_critter_category {
    name = "critters_herbivores",
    -- TRANSLATORS: A category in the editor for placing animals on the map.
    descname = _ "Herbivores",
-   picture = "world/critters/stag/idle_00.png",
+   picture = "world/critters/sheep/idle_00.png",
    items_per_row = 10,
 }
 
@@ -238,19 +238,24 @@ function add_walking_animations(table, dirname, basename, hotspot, fps)
    end
 end
 
-include "world/critters/badger/init.lua"
-include "world/critters/brownbear/init.lua"
+-- Herbivores
 include "world/critters/bunny/init.lua"
+include "world/critters/sheep/init.lua"
+include "world/critters/wisent/init.lua"
+include "world/critters/wildboar/init.lua"
 include "world/critters/chamois/init.lua"
 include "world/critters/deer/init.lua"
-include "world/critters/duck/init.lua"
-include "world/critters/elk/init.lua"
-include "world/critters/fox/init.lua"
-include "world/critters/lynx/init.lua"
-include "world/critters/marten/init.lua"
 include "world/critters/reindeer/init.lua"
-include "world/critters/sheep/init.lua"
 include "world/critters/stag/init.lua"
-include "world/critters/wildboar/init.lua"
-include "world/critters/wisent/init.lua"
+include "world/critters/elk/init.lua"
+
+-- Carnivores
+include "world/critters/marten/init.lua"
+include "world/critters/badger/init.lua"
+include "world/critters/lynx/init.lua"
+include "world/critters/fox/init.lua"
 include "world/critters/wolf/init.lua"
+include "world/critters/brownbear/init.lua"
+
+-- Aquatic animals
+include "world/critters/duck/init.lua"
