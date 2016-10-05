@@ -77,6 +77,8 @@ struct MultilineTextarea : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	void scroll_to_top();
 
+	void set_background(const Image* background);
+
 protected:
 	void layout() override;
 
@@ -100,6 +102,8 @@ private:
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
+
+	const Image* pic_background_;
 };
 }
 

@@ -27,6 +27,7 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -82,7 +83,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, 0, 0, nullptr),
+     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
      current_selection_names_(this,
                               0,
                               0,
@@ -92,6 +93,8 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               UI::Align::kCenter,
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
+	current_selection_names_.set_background(
+	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_, UI::Align::kCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {

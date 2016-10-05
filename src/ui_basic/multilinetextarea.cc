@@ -143,6 +143,9 @@ void MultilineTextarea::layout() {
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
+	if (pic_background_) {
+		dst.tile(Rect(Point(0, 0), get_inner_w(), get_inner_h()), pic_background_, Point(0, 0));
+	}
 	if (use_old_renderer_) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
@@ -183,6 +186,10 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
+}
+
+void MultilineTextarea::set_background(const Image* background) {
+	pic_background_ = background;
 }
 
 std::string MultilineTextarea::make_richtext() {
