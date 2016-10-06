@@ -144,7 +144,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
 	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
-	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, _("Game"));
+	clientsonline_list_.add_column(0, _("Game"), "", UI::Align::kLeft, false, true);
 	clientsonline_list_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_.double_clicked.connect(
