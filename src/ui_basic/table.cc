@@ -44,8 +44,13 @@ namespace UI {
  *       w       dimensions, in pixels, of the Table
  *       h
 */
-Table<void*>::Table(
-   Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
+Table<void*>::Table(Panel* const parent,
+                    int32_t x,
+                    int32_t y,
+                    uint32_t w,
+                    uint32_t h,
+                    const Image* button_background,
+                    const bool descending)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(
@@ -53,17 +58,10 @@ Table<void*>::Table(
         4),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
+     button_background_(button_background),
      scrollbar_(nullptr),
-     scrollbar_filler_button_(new Button(this,
-                                         "",
-                                         0,
-                                         0,
-                                         Scrollbar::kSize,
-                                         headerheight_,
-                                         g_gr->images().get("images/ui_basic/but3.png"),
-                                         "",
-                                         "",
-                                         false)),
+     scrollbar_filler_button_(new Button(
+        this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "", "", false)),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -74,6 +72,13 @@ Table<void*>::Table(
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
+	scrollbar_ =
+	   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
+	                 Scrollbar::kSize, get_h() - headerheight_, button_background);
+	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
+	scrollbar_->set_steps(1);
+	scrollbar_->set_singlestepsize(lineheight_);
+	scrollbar_->set_pagesize(get_h() - lineheight_);
 }
 
 /**
@@ -110,9 +115,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_,
-		                   g_gr->images().get("images/ui_basic/but3.png"), title, tooltip_string,
-		                   true, false);
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
+		                   title, tooltip_string, true, false);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -132,15 +136,6 @@ void Table<void*>::add_column(uint32_t const width,
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
 			flexible_column_ = columns_.size() - 1;
 		}
-	}
-	if (!scrollbar_) {
-		scrollbar_ =
-		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-		                 Scrollbar::kSize, get_h() - headerheight_, false);
-		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
-		scrollbar_->set_steps(1);
-		scrollbar_->set_singlestepsize(lineheight_);
-		scrollbar_->set_pagesize(get_h() - lineheight_);
 	}
 	layout();
 }

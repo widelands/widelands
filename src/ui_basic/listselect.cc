@@ -50,12 +50,13 @@ BaseListselect::BaseListselect(Panel* const parent,
                                int32_t const y,
                                uint32_t const w,
                                uint32_t const h,
+                               const Image* button_background,
                                bool const show_check)
    : Panel(parent, x, y, w, h),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
         kMargin),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),

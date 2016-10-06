@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -39,8 +40,13 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false);
+	BaseListselect(Panel* parent,
+	               int32_t x,
+	               int32_t y,
+	               uint32_t w,
+	               uint32_t h,
+	               const Image* button_background,
+	               bool show_check);
 	~BaseListselect();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -138,8 +144,14 @@ private:
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : BaseListselect(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           bool show_check = false)
+	   : BaseListselect(parent, x, y, w, h, button_background, show_check) {
 	}
 
 	void add(const std::string& name,
@@ -181,8 +193,14 @@ private:
 template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
 	using Base = Listselect<Entry*>;
 
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : Base(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           bool show_check = false)
+	   : Base(parent, x, y, w, h, button_background, show_check) {
 	}
 
 	void add(const std::string& name,

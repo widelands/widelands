@@ -28,6 +28,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -48,7 +49,13 @@ template <typename Entry> class Table {
 public:
 	struct EntryRecord {};
 
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool descending = false);
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      bool descending = false);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -158,7 +165,13 @@ public:
 	 */
 	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool descending = false);
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      bool descending = false);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -281,6 +294,7 @@ private:
 	uint32_t total_width_;
 	uint32_t headerheight_;
 	int32_t lineheight_;
+	const Image* button_background_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
@@ -302,8 +316,14 @@ private:
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -408,8 +428,14 @@ static_assert(sizeof(void*) == sizeof(uintptr_t),
 template <> class Table<uintptr_t> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -434,8 +460,14 @@ public:
 template <> class Table<uintptr_t const> : public Table<uintptr_t> {
 public:
 	using Base = Table<uintptr_t>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 };
 }

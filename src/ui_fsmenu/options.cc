@@ -157,7 +157,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
-     resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, true),
+     resolution_list_(&box_interface_,
+                      0,
+                      0,
+                      column_width_ / 2,
+                      80,
+                      g_gr->images().get("images/ui_basic/but3.png"),
+                      true),
 
      fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
      inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
@@ -264,6 +270,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     0,
                     column_width_ / 2,
                     get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
+                    g_gr->images().get("images/ui_basic/but3.png"),
                     true),
 
      os_(opt) {
