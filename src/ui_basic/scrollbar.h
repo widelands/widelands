@@ -100,7 +100,6 @@ private:
 
 	const Image* pic_minus_;  ///< left/up
 	const Image* pic_plus_;   ///< right/down
-	const Image* pic_background_;
 	const Image* pic_buttons_;
 };
 }
