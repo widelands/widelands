@@ -288,16 +288,16 @@ void Scrollbar::draw_area(RenderTarget& dst, const Area area, const Rect r) {
 	dst.brighten_rect(r, area == pressed_ ? MOUSE_OVER_BRIGHT_FACTOR : MOUSE_OVER_BRIGHT_FACTOR / 2);
 	if (horizontal_) {
 		//  top edge
-		dst.brighten_rect(Rect(Point(r.x, r.y), r.w - 1, 1), - BUTTON_EDGE_BRIGHT_FACTOR / 2);
-		dst.brighten_rect(Rect(Point(r.x, r.y + 1), r.w - 2, 1), - BUTTON_EDGE_BRIGHT_FACTOR / 2);
+		dst.brighten_rect(Rect(Point(r.x, r.y), r.w - 1, 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
+		dst.brighten_rect(Rect(Point(r.x, r.y + 1), r.w - 2, 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
 		//  bottom edge
 		dst.brighten_rect(Rect(Point(r.x, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	} else {
 		//  right edge
 		dst.brighten_rect(Rect(Point(r.w - 2, r.y), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR / 2);
 		//  left edge
-		dst.brighten_rect(Rect(Point(r.x, r.y), 1, r.h - 1), - BUTTON_EDGE_BRIGHT_FACTOR / 2);
-		dst.brighten_rect(Rect(Point(r.x + 1, r.y), 1, r.h - 2), - BUTTON_EDGE_BRIGHT_FACTOR / 2);
+		dst.brighten_rect(Rect(Point(r.x, r.y), 1, r.h - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
+		dst.brighten_rect(Rect(Point(r.x + 1, r.y), 1, r.h - 2), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
 	}
 }
 

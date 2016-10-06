@@ -54,14 +54,26 @@ Table<void*>::Table(
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
      scrollbar_(nullptr),
+     scrollbar_filler_button_(new Button(this,
+                                         "",
+                                         0,
+                                         0,
+                                         Scrollbar::kSize,
+                                         headerheight_,
+                                         g_gr->images().get("images/ui_basic/but3.png"),
+                                         "",
+                                         "",
+                                         false)),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      sort_column_(0),
-     sort_descending_(descending) {
+     sort_descending_(descending),
+     flexible_column_(std::numeric_limits<size_t>::max()) {
 	set_thinks(false);
 	set_can_focus(true);
+	scrollbar_filler_button_->set_visible(false);
 }
 
 /**
@@ -81,7 +93,8 @@ void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
                               Align const alignment,
-                              bool const is_checkbox_column) {
+                              bool const is_checkbox_column,
+                              bool is_flexible_column) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -115,6 +128,10 @@ void Table<void*>::add_column(uint32_t const width,
 		}
 
 		columns_.push_back(c);
+		if (is_flexible_column) {
+			assert(flexible_column_ == std::numeric_limits<size_t>::max());
+			flexible_column_ = columns_.size() - 1;
+		}
 	}
 	if (!scrollbar_) {
 		scrollbar_ =
@@ -125,6 +142,7 @@ void Table<void*>::add_column(uint32_t const width,
 		scrollbar_->set_singlestepsize(lineheight_);
 		scrollbar_->set_pagesize(get_h() - lineheight_);
 	}
+	layout();
 }
 
 void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
@@ -203,6 +221,10 @@ void Table<void*>::clear() {
 	selection_ = no_selection_index();
 	last_click_time_ = -10000;
 	last_selection_ = no_selection_index();
+}
+
+uint32_t Table<void*>::get_eff_w() const {
+	return scrollbar_->is_enabled() ? get_w() - scrollbar_->get_w() : get_w();
 }
 
 void Table<void*>::fit_height(uint32_t entries) {
@@ -490,6 +512,7 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 		select(entry_records_.size() - 1);
 		scrollbar_->set_scrollpos(std::numeric_limits<int32_t>::max());
 	}
+	layout();
 	return result;
 }
 
@@ -522,6 +545,34 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 		return columns_[sort_column_].compare(b, a);
 	else
 		return columns_[sort_column_].compare(a, b);
+}
+
+void Table<void*>::layout() {
+	// If we have a flexible column, adjust the column sizes.
+	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
+		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+		for (const auto& column : columns_) {
+			all_columns_width += column.width;
+		}
+		if (all_columns_width != get_w()) {
+			Column& column = columns_.at(flexible_column_);
+			column.width = column.width + get_w() - all_columns_width;
+			column.btn->set_size(column.width, column.btn->get_h());
+			int offset = 0;
+			for (const auto& col : columns_) {
+				col.btn->set_pos(Point(offset, col.btn->get_y()));
+				offset = col.btn->get_x() + col.btn->get_w();
+			}
+			if (scrollbar_->is_enabled()) {
+				const UI::Button* last_column_btn = columns_.back().btn;
+				scrollbar_filler_button_->set_pos(
+				   Point(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+				scrollbar_filler_button_->set_visible(true);
+			} else {
+				scrollbar_filler_button_->set_visible(false);
+			}
+		}
+	}
 }
 
 /**

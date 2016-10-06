@@ -59,7 +59,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false);
+	                bool is_checkbox_column = false,
+	                bool is_flexible_column = false);
 
 	void set_column_title(uint8_t col, const std::string& title);
 
@@ -167,7 +168,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false);
+	                bool is_checkbox_column = false,
+	                bool is_flexible_column = false);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
@@ -245,9 +247,7 @@ public:
 	uint32_t get_lineheight() const {
 		return lineheight_ + 2;
 	}
-	uint32_t get_eff_w() const {
-		return get_w();
-	}
+	uint32_t get_eff_w() const;
 
 	/// Adjust the desired size to fit the height needed for the number of entries.
 	/// If entries == 0, the current entries are used.
@@ -264,9 +264,8 @@ private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
+	void layout() override;
 
-	struct Column;
-	using Columns = std::vector<Column>;
 	struct Column {
 		Button* btn;
 		uint32_t width;
@@ -274,6 +273,7 @@ private:
 		bool is_checkbox_column;
 		CompareFn compare;
 	};
+	using Columns = std::vector<Column>;
 
 	static const int32_t ms_darken_value = -20;
 
@@ -282,12 +282,16 @@ private:
 	uint32_t headerheight_;
 	int32_t lineheight_;
 	Scrollbar* scrollbar_;
+	// A disabled button that will fill the space above the scroll bar
+	UI::Button* scrollbar_filler_button_;
 	int32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
 	Columns::size_type sort_column_;
 	bool sort_descending_;
+	// This column will grow/shrink depending on the scrollbar being present
+	size_t flexible_column_;
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
