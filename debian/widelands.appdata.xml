@@ -12,6 +12,7 @@
   <summary xml:lang="da">Et realtids opbygningsstrategispil</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
   <summary xml:lang="es">Un juego de estrategia y construcción en tiempo real</summary>
+  <summary xml:lang="eu">Denbora errealeko eraikuntza eta estrategia jokoa</summary>
   <summary xml:lang="fi">Reaaliaikainen strategiapeli</summary>
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel </summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ùine</summary>
@@ -78,6 +79,14 @@
     </p>
     <p>
       Widelands ofrece un modo de un solo jugador con campañas que cuentan historias de las tribus y su lucha en el universo Widelands. Sin embargo, el asentamiento comienza realmente cuando te unes con amigos a través de Internet o LAN para construir nuevos imperios juntos - o para aplastarse entre sí en los polvos de guerra. Widelands también ofrece una inteligencia artificial para desafiarte.
+    </p>
+  </description>
+  <description xml:lang="eu">
+    <p>
+      Herri txiki baten buruzagia zara. Zure betebeharra bizileku gero eta handiagoa eraikitzea da. Zure herritar guztiek bere lana beteko dute baliabide gehiago ekoizteko herriaren hazkuntza bultzatzeko.
+    </p>
+    <p>
+      Widelands-ek jokalari bakarreko aukera eskeintzen du tribuen historiak kontatzen dituen kanpainekin eta Widelands unibertsoan dituzten tirabirekin. Hala ere, zure lagunekin Internet edo LAN bidez elkartzen zarenean hasten da benetako jokoa, bai inperio berriak elkarrekin eraikitzeko edo elkar erasotzeko gerraren hautsen artean. Widelans-ek adimen artifizialeko etsaiak ere eskeintzen dizkizu erronka bezala.
     </p>
   </description>
   <description xml:lang="fi">
