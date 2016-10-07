@@ -85,7 +85,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, true),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::TableRows::kMultiDescending),
 
      is_replay_(is_replay),
      // Main title

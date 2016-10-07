@@ -45,7 +45,7 @@ namespace UI {
  *       h
 */
 Table<void*>::Table(
-   Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
+   Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(
@@ -59,7 +59,8 @@ Table<void*>::Table(
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      sort_column_(0),
-     sort_descending_(descending) {
+     sort_descending_(rowtype == TableRows::kSingleDescending ||
+                      rowtype == TableRows::kMultiDescending) {
 	set_thinks(false);
 	set_can_focus(true);
 }

@@ -34,6 +34,8 @@ namespace UI {
 struct Scrollbar;
 struct Button;
 
+enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
+
 /** A table with columns and lines.
  *
  * The entries can be sorted by columns by
@@ -48,7 +50,12 @@ template <typename Entry> class Table {
 public:
 	struct EntryRecord {};
 
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool descending = false);
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -157,7 +164,12 @@ public:
 	 */
 	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool descending = false);
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -298,8 +310,13 @@ private:
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -322,8 +339,13 @@ public:
 template <typename Entry> class Table<Entry* const> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -346,8 +368,13 @@ public:
 template <typename Entry> class Table<const Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -374,8 +401,13 @@ public:
 template <typename Entry> class Table<Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
@@ -404,8 +436,13 @@ static_assert(sizeof(void*) == sizeof(uintptr_t),
 template <> class Table<uintptr_t> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -430,8 +467,13 @@ public:
 template <> class Table<uintptr_t const> : public Table<uintptr_t> {
 public:
 	using Base = Table<uintptr_t>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      TableRows rowtype = TableRows::kSingle)
+	   : Base(parent, x, y, w, h, rowtype) {
 	}
 };
 }
