@@ -35,6 +35,8 @@ namespace UI {
 struct Scrollbar;
 struct Button;
 
+enum class TableColumnType { kFixed, kFlexible };
+
 /** A table with columns and lines.
  *
  * The entries can be sorted by columns by
@@ -66,8 +68,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false,
-	                bool is_flexible_column = false);
+	                TableColumnType column_type = TableColumnType::kFixed,
+	                bool is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string& title);
 
@@ -181,8 +183,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false,
-	                bool is_flexible_column = false);
+	                TableColumnType column_type = TableColumnType::kFixed,
+	                bool is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);

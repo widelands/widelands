@@ -230,7 +230,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	table_.add_column(0, _("Description"),
 	                  _("The filename that the game was saved under followed by the map’s name, "
 	                    "or the map’s name followed by the last objective achieved."),
-	                  UI::Align::kLeft, false, true);
+	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));
 	table_.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));

@@ -98,8 +98,8 @@ void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
                               Align const alignment,
-                              bool const is_checkbox_column,
-                              bool is_flexible_column) {
+                              TableColumnType column_type,
+                              bool const is_checkbox_column) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -132,7 +132,7 @@ void Table<void*>::add_column(uint32_t const width,
 		}
 
 		columns_.push_back(c);
-		if (is_flexible_column) {
+		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
 			flexible_column_ = columns_.size() - 1;
 		}
