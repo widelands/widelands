@@ -336,20 +336,28 @@ void FullscreenMenuLoadGame::clicked_delete() {
 
 std::string FullscreenMenuLoadGame::filename_list_string() {
 	std::set<uint32_t> selections = table_.selections();
-	std::string message = "";
+	boost::format message;
+	int counter = 0;
 	for (const uint32_t index : selections) {
+		++counter;
+		// TODO(GunChleoc): We can exceed the texture size for the font renderer,
+		// so we have to restrict this for now.
+		if (counter > 50) {
+			message = boost::format("%s\n%s") % message % "...";
+			break;
+		}
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+
 		if (gamedata.errormessage.empty()) {
 			message =
-			   (boost::format("%s\n%s") % message
-			    /** TRANSLATORS %1% = map name, %2% = save date. */
-			    % (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring))
-			      .str();
+			   boost::format("%s\n%s") % message %
+			   /** TRANSLATORS %1% = map name, %2% = save date. */
+			   (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring);
 		} else {
-			message = (boost::format("%s\n%s") % message % gamedata.filename).str();
+			message = boost::format("%s\n%s") % message % gamedata.filename;
 		}
 	}
-	return message;
+	return message.str();
 }
 
 bool FullscreenMenuLoadGame::set_has_selection() {

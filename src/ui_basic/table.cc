@@ -352,6 +352,7 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 					toggle_entry(i);
 				}
 				selection_ = 0;
+				selected(0);
 				return true;
 			}
 			break;
@@ -408,16 +409,16 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 						for (uint32_t i = lower_bound; i <= upper_bound; ++i) {
 							toggle_entry(i);
 						}
-						selection_ = last_selected;
+						select(last_selected);
 					} else {
-						toggle_entry(row);
+						select(toggle_entry(row));
 					}
 				} else {
 					// Single selection without Ctrl
 					if (!ctrl_down_) {
 						multiselect_.clear();
 					}
-					toggle_entry(row);
+					select(toggle_entry(row));
 				}
 			} else {
 				select(row);
@@ -482,7 +483,7 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || selection_ == i)
+	if (empty() || selection_ == i || i == no_selection_index())
 		return;
 
 	selection_ = i;
@@ -493,19 +494,24 @@ void Table<void*>::select(const uint32_t i) {
 	selected(selection_);
 }
 
-void Table<void*>::toggle_entry(uint32_t row) {
+/**
+ * Adds/removes the row from multiselect.
+ * Returns the row that should be selected afterwards, or no_selection_index() if
+ * the multiselect is empty.
+ */
+uint32_t Table<void*>::toggle_entry(uint32_t row) {
 	assert(is_multiselect_);
 	if (multiselect_.count(row)) {
 		multiselect_.erase(row);
 		// Find last selection
 		if (multiselect_.empty()) {
-			selection_ = no_selection_index();
+			return no_selection_index();
 		} else {
-			select(*multiselect_.lower_bound(0));
+			return *multiselect_.lower_bound(0);
 		}
 	} else {
 		multiselect_.insert(row);
-		select(row);
+		return row;
 	}
 }
 
