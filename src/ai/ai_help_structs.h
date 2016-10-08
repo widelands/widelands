@@ -86,7 +86,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 constexpr int magic_numbers_size = 70;
 constexpr int neuron_pool_size = 80;
-constexpr int f_neuron_pool_size = 20;
+constexpr int f_neuron_pool_size = 40;
 constexpr int f_neuron_bit_size = 32;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
@@ -691,6 +691,7 @@ private:
 		           bool en,
 		           uint32_t pp,
 		           uint32_t op,
+		           uint32_t o60p,
 		           uint32_t cs,
 		           uint32_t land,
 		           uint32_t oland);
@@ -699,6 +700,7 @@ private:
 		bool is_enemy;
 		uint32_t players_power;
 		uint32_t old_players_power;
+		uint32_t old60_players_power;
 		uint32_t players_casualities;
 		uint32_t last_time_seen;
 		uint32_t players_land;
@@ -713,6 +715,7 @@ public:
 	         Widelands::TeamNumber pltn,
 	         uint32_t pp,
 	         uint32_t op,
+	         uint32_t o60p,
 	         uint32_t cs,
 	         uint32_t land,
 	         uint32_t oland);
@@ -722,6 +725,7 @@ public:
 	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
 	uint32_t get_player_land(Widelands::PlayerNumber pn);
 	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
 	uint32_t get_visible_enemies_power(uint32_t);
