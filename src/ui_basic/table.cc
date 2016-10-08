@@ -173,13 +173,17 @@ void Table<void*>::clear() {
 		delete entry;
 	}
 	entry_records_.clear();
-	multiselect_.clear();
 
 	if (scrollbar_)
 		scrollbar_->set_steps(1);
 	scrollpos_ = 0;
-	selection_ = no_selection_index();
 	last_click_time_ = -10000;
+	clear_selections();
+}
+
+void Table<void*>::clear_selections() {
+	multiselect_.clear();
+	selection_ = no_selection_index();
 	last_selection_ = no_selection_index();
 }
 
@@ -482,6 +486,9 @@ void Table<void*>::select(const uint32_t i) {
 		return;
 
 	selection_ = i;
+	if (is_multiselect_) {
+		multiselect_.insert(selection_);
+	}
 
 	selected(selection_);
 }
@@ -531,6 +538,7 @@ void Table<void*>::set_scrollpos(int32_t const i) {
  */
 void Table<void*>::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
+	multiselect_.clear();
 
 	const EntryRecordVector::iterator it = entry_records_.begin() + i;
 	delete *it;
@@ -539,6 +547,10 @@ void Table<void*>::remove(const uint32_t i) {
 		selection_ = no_selection_index();
 	else if (selection_ > i && selection_ != no_selection_index())
 		selection_--;
+
+	if (is_multiselect_ && selection_ != no_selection_index()) {
+		multiselect_.insert(selection_);
+	}
 
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 }
@@ -585,6 +597,10 @@ void Table<void*>::sort(const uint32_t Begin, uint32_t End) {
 			newselection = i;
 	}
 	selection_ = newselection;
+	multiselect_.clear();
+	if (is_multiselect_ && selection_ != no_selection_index()) {
+		multiselect_.insert(selection_);
+	}
 }
 
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {

@@ -59,6 +59,8 @@ private:
 	bool compare_status(uint32_t a, uint32_t b);
 	bool compare_type(uint32_t a, uint32_t b);
 	bool compare_time_sent(uint32_t a, uint32_t b);
+	bool should_be_hidden(const Widelands::Message& message);
+
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
@@ -67,6 +69,7 @@ private:
 	void set_filter_messages_tooltips();
 	std::string display_message_type_icon(Widelands::Message);
 	void update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message&);
+	void update_archive_button_tooltip();
 
 	UI::Table<uintptr_t>* list;
 	UI::MultilineTextarea message_body;

@@ -87,6 +87,7 @@ public:
 	bool has_selection() const;
 	uint32_t selection_index() const;
 	std::set<uint32_t> selections() const;
+	void clear_selections();
 	EntryRecord& get_record(uint32_t) const;
 	static Entry get(const EntryRecord&);
 	EntryRecord* find(Entry) const;
@@ -217,6 +218,8 @@ public:
 	std::set<uint32_t> selections() const {
 		return multiselect_;
 	}
+	void clear_selections();
+
 	uint32_t selection_index() const {
 		return selection_;
 	}

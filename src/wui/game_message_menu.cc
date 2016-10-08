@@ -59,8 +59,9 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
 
-	list = new UI::Table<uintptr_t>(
-	   this, kPadding, kButtonSize + 2 * kPadding, kWindowWidth - 2 * kPadding, kTableHeight);
+	list =
+	   new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
+	                            kWindowWidth - 2 * kPadding, kTableHeight, UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -116,12 +117,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	archivebtn_ = new UI::Button(this, "archive_or_restore_selected_messages", kPadding,
 	                             kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
 	                             g_gr->images().get("images/ui_basic/but2.png"),
-	                             g_gr->images().get("images/wui/messages/message_archive.png"),
-	                             /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-	                             (boost::format(_("Del: %s"))
-	                              /** TRANSLATORS: Tooltip in the messages window */
-	                              % _("Archive selected message"))
-	                                .str());
+	                             g_gr->images().get("images/wui/messages/message_archive.png"));
+	update_archive_button_tooltip();
 	archivebtn_->sigclicked.connect(boost::bind(&GameMessageMenu::archive_or_restore, this));
 
 	togglemodebtn_ = new UI::Button(
@@ -229,6 +226,14 @@ bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b) {
 	return false;  // shouldn't happen
 }
 
+bool GameMessageMenu::should_be_hidden(const Widelands::Message& message) {
+	// Wrong box
+	return ((mode == Archive) != (message.status() == Message::Status::kArchived)) ||
+	       // Filtered out
+	       (message_filter_ != Message::Type::kAllMessages &&
+	        message.message_type_category() != message_filter_);
+}
+
 static char const* const status_picture_filename[] = {"images/wui/messages/message_new.png",
                                                       "images/wui/messages/message_read.png",
                                                       "images/wui/messages/message_archived.png"};
@@ -246,13 +251,15 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 
 void GameMessageMenu::think() {
 	MessageQueue& mq = iplayer().player().messages();
+	size_t no_selections = list->selections().size();
+	size_t list_size = list->size();
 
 	// Update messages in the list and remove messages
 	// that should no longer be shown
 	for (uint32_t j = list->size(); j; --j) {
 		MessageId id_((*list)[j - 1]);
 		if (Message const* const message = mq[id_]) {
-			if ((mode == Archive) != (message->status() == Message::Status::kArchived)) {
+			if (should_be_hidden(*message)) {
 				list->remove(j - 1);
 			} else {
 				update_record(list->get_record(j - 1), *message);
@@ -266,25 +273,10 @@ void GameMessageMenu::think() {
 	for (const auto& temp_message : mq) {
 		MessageId const id = temp_message.first;
 		const Message& message = *temp_message.second;
-		Message::Status const status = message.status();
-		if ((mode == Archive) != (status == Message::Status::kArchived))
-			continue;
-		if (!list->find(id.value())) {
+		if (!should_be_hidden(message) && !list->find(id.value())) {
 			UI::Table<uintptr_t>::EntryRecord& er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
-		}
-	}
-
-	// Filter message type
-	if (message_filter_ != Message::Type::kAllMessages) {
-		for (uint32_t j = list->size(); j; --j) {
-			MessageId id_((*list)[j - 1]);
-			if (Message const* const message = mq[id_]) {
-				if (message->message_type_category() != message_filter_) {
-					list->remove(j - 1);
-				}
-			}
 		}
 	}
 
@@ -294,6 +286,10 @@ void GameMessageMenu::think() {
 	} else {
 		centerviewbtn_->set_enabled(false);
 		message_body.set_text(std::string());
+	}
+
+	if (list_size != list->size() || no_selections != list->selections().size()) {
+		update_archive_button_tooltip();
 	}
 }
 
@@ -330,6 +326,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 			                  "<p font-size=8> <br></p></rt>%s") %
 			    message->heading() % message->body())
 			      .str());
+			update_archive_button_tooltip();
 			return;
 		}
 	}
@@ -409,33 +406,27 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 }
 
 void GameMessageMenu::archive_or_restore() {
+	if (!list->has_selection()) {
+		return;
+	}
 	Widelands::Game& game = iplayer().game();
-	uint32_t const gametime = game.get_gametime();
-	Widelands::Player& player = iplayer().player();
-	Widelands::PlayerNumber const plnum = player.player_number();
-	bool work_done = false;
+	const Widelands::PlayerNumber plnum = iplayer().player().player_number();
 
-	switch (mode) {
-	case Inbox:
-		// Archive highlighted message
-		if (!work_done) {
-			if (!list->has_selection())
-				return;
-
+	std::set<uint32_t> selections = list->selections();
+	for (const uint32_t index : selections) {
+		const uintptr_t selected = list->get(list->get_record(index));
+		switch (mode) {
+		case Inbox:
+			// Archive highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusArchived(
-			   gametime, plnum, MessageId(list->get_selected())));
-		}
-		break;
-	case Archive:
-		// Restore highlighted message
-		if (!work_done) {
-			if (!list->has_selection())
-				return;
-
+			   game.get_gametime(), plnum, MessageId(selected)));
+			break;
+		case Archive:
+			// Restore highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusRead(
-			   gametime, plnum, MessageId(list->get_selected())));
+			   game.get_gametime(), plnum, MessageId(selected)));
+			break;
 		}
-		break;
 	}
 }
 
@@ -454,6 +445,7 @@ void GameMessageMenu::center_view() {
  * @param msgtype the types of messages to show
  */
 void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
+	list->clear_selections();
 	switch (msgtype) {
 	case Widelands::Message::Type::kGeologists:
 		toggle_filter_messages_button(*geologistsbtn_, msgtype);
@@ -588,11 +580,6 @@ void GameMessageMenu::toggle_mode() {
 		mode = Archive;
 		set_title(_("Messages: Archive"));
 		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
-		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
-		                          /** TRANSLATORS: Tooltip in the messages window */
-		                          % _("Restore selected message"))
-		                            .str());
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
 		togglemodebtn_->set_tooltip(_("Show Inbox"));
 		break;
@@ -600,13 +587,50 @@ void GameMessageMenu::toggle_mode() {
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
 		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
-		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
-		                          /** TRANSLATORS: Tooltip in the messages window */
-		                          % _("Archive selected message"))
-		                            .str());
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
 	}
+	update_archive_button_tooltip();
+}
+
+void GameMessageMenu::update_archive_button_tooltip() {
+	if (list->empty() || !list->has_selection()) {
+		archivebtn_->set_tooltip("");
+		archivebtn_->set_enabled(false);
+		return;
+	}
+	archivebtn_->set_enabled(true);
+	std::string tooltip = "";
+	size_t no_selections = list->selections().size();
+	switch (mode) {
+	case Archive:
+		if (no_selections > 1) {
+			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
+			 */
+			tooltip = (boost::format(ngettext("Restore the selected %d message",
+			                                  "Restore the selected %d messages", no_selections)) %
+			           no_selections)
+			             .str();
+		} else {
+			/** TRANSLATORS: Tooltip in the messages window */
+			tooltip = _("Restore selected message");
+		}
+		break;
+	case Inbox:
+		if (no_selections > 1) {
+			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
+			 */
+			tooltip = (boost::format(ngettext("Archive the selected %d message",
+			                                  "Archive the selected %d messages", no_selections)) %
+			           no_selections)
+			             .str();
+		} else {
+			/** TRANSLATORS: Tooltip in the messages window */
+			tooltip = _("Archive selected message");
+		}
+		break;
+	}
+	/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
+	archivebtn_->set_tooltip((boost::format(_("Del: %s")) % tooltip).str());
 }
