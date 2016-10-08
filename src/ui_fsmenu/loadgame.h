@@ -95,6 +95,7 @@ private:
 	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
+	std::string filename_list_string();
 
 	UI::Table<uintptr_t const> table_;
 
@@ -114,7 +115,7 @@ private:
 
 	UI::Button delete_;
 
-	UI::MultilineTextarea ta_errormessage_;
+	UI::MultilineTextarea ta_long_generic_message_;
 
 	int32_t const minimap_y_, minimap_w_, minimap_h_;
 	UI::Icon minimap_icon_;

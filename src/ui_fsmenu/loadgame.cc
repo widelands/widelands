@@ -148,11 +148,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              false,
              false),
 
-     ta_errormessage_(this,
-                      right_column_x_,
-                      get_y_from_preceding(ta_mapname_) + 2 * padding_,
-                      get_right_column_w(right_column_x_),
-                      delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
+     ta_long_generic_message_(this,
+                              right_column_x_,
+                              get_y_from_preceding(ta_mapname_) + 2 * padding_,
+                              get_right_column_w(right_column_x_),
+                              delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
 
      minimap_y_(get_y_from_preceding(ta_win_condition_) + 3 * padding_),
      minimap_w_(get_right_column_w(right_column_x_)),
@@ -283,6 +283,8 @@ void FullscreenMenuLoadGame::clicked_delete() {
 			           no_selections)
 			             .str();
 		}
+		message = (boost::format("%s\n%s") % message % filename_list_string()).str();
+
 	} else {
 		const SavegameData& gamedata = games_data_[table_.get_selected()];
 
@@ -332,6 +334,24 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	}
 }
 
+std::string FullscreenMenuLoadGame::filename_list_string() {
+	std::set<uint32_t> selections = table_.selections();
+	std::string message = "";
+	for (const uint32_t index : selections) {
+		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+		if (gamedata.errormessage.empty()) {
+			message =
+			   (boost::format("%s\n%s") % message
+			    /** TRANSLATORS %1% = map name, %2% = save date. */
+			    % (boost::format(_("%1%, saved on %2%")) % gamedata.mapname % gamedata.savedatestring))
+			      .str();
+		} else {
+			message = (boost::format("%s\n%s") % message % gamedata.filename).str();
+		}
+	}
+	return message;
+}
+
 bool FullscreenMenuLoadGame::set_has_selection() {
 	bool has_selection = table_.selections().size() < 2;
 	ok_.set_enabled(has_selection);
@@ -367,10 +387,10 @@ void FullscreenMenuLoadGame::entry_selected() {
 	if (set_has_selection()) {
 
 		const SavegameData& gamedata = games_data_[table_.get_selected()];
-		ta_errormessage_.set_text(gamedata.errormessage);
+		ta_long_generic_message_.set_text(gamedata.errormessage);
 
 		if (gamedata.errormessage.empty()) {
-			ta_errormessage_.set_visible(false);
+			ta_long_generic_message_.set_visible(false);
 			ta_mapname_.set_text(gamedata.mapname);
 			ta_gametime_.set_text(gametimestring(gamedata.gametime));
 
@@ -459,14 +479,16 @@ void FullscreenMenuLoadGame::entry_selected() {
 			minimap_icon_.set_no_frame();
 			minimap_image_.reset();
 
-			ta_errormessage_.set_visible(true);
+			ta_long_generic_message_.set_visible(true);
 			ok_.set_enabled(false);
 		}
 	} else if (selections > 1) {
 		label_mapname_.set_text(
-		   (boost::format(ngettext("Selected %d file.", "Selected %d files.", selections)) %
+		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
 		    selections)
 		      .str());
+		ta_long_generic_message_.set_visible(true);
+		ta_long_generic_message_.set_text(filename_list_string());
 	}
 }
 
