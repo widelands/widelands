@@ -60,7 +60,9 @@ Table<void*>::Table(
      last_selection_(no_selection_index()),
      sort_column_(0),
      sort_descending_(rowtype == TableRows::kSingleDescending ||
-                      rowtype == TableRows::kMultiDescending) {
+                      rowtype == TableRows::kMultiDescending),
+     is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
+     ctrl_down_(false) {
 	set_thinks(false);
 	set_can_focus(true);
 }
@@ -75,6 +77,7 @@ Table<void*>::~Table() {
 	for (Column& column : columns_) {
 		delete column.btn;
 	}
+	multiselect_.clear();
 }
 
 /// Add a new column to this table.
@@ -234,7 +237,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		if (idx == selection_) {
+		if (idx == selection_ || multiselect_.count(idx)) {
 			assert(2 <= get_eff_w());
 			dst.brighten_rect(Rect(Point(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
@@ -348,6 +351,11 @@ void Table<void*>::draw(RenderTarget& dst) {
  * handle key presses
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
+	if (is_multiselect_) {
+		if (code.sym & (SDLK_LCTRL | SDLK_RCTRL)) {
+			ctrl_down_ = down;
+		}
+	}
 	if (down) {
 		switch (code.sym) {
 		case SDLK_UP:
@@ -359,7 +367,6 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_2:
 			move_selection(1);
 			return true;
-
 		default:
 			break;  // not handled
 		}
@@ -381,6 +388,9 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
+		if (!ctrl_down_) {
+			multiselect_.clear();
+		}
 		uint32_t const time = SDL_GetTicks();
 
 		//  This hick hack is needed if any of the callback functions calls clear
@@ -392,7 +402,15 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 
 		uint32_t const row = (y + scrollpos_ - headerheight_) / get_lineheight();
 		if (row < entry_records_.size()) {
-			select(row);
+			if (is_multiselect_) {
+				if (!ctrl_down_) {
+					multiselect_.clear();
+				}
+				// NOCOM handle shift with ranged selection
+				toggle_entry(row);
+			} else {
+				select(row);
+			}
 			Columns::size_type const nr_cols = columns_.size();
 			for (uint8_t col = 0; col < nr_cols; ++col) {
 				const Column& column = columns_.at(col);
@@ -407,11 +425,11 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 			}
 		}
 
-		if  //  check if doubleclicked
-		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
-		    selection_ != no_selection_index())
+		// Check if doubleclicked
+		if (!ctrl_down_ && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
+		    last_selection_ == selection_ && selection_ != no_selection_index()) {
 			double_clicked(selection_);
-
+		}
 		return true;
 	}
 	default:
@@ -471,6 +489,22 @@ void Table<void*>::select(const uint32_t i) {
 	selection_ = i;
 
 	selected(selection_);
+}
+
+void Table<void*>::toggle_entry(uint32_t row) {
+	assert(is_multiselect_);
+	if (multiselect_.count(row)) {
+		multiselect_.erase(row);
+		// Find last selection
+		if (multiselect_.empty()) {
+			selection_ = no_selection_index();
+		} else {
+			select(*multiselect_.lower_bound(0));
+		}
+	} else {
+		multiselect_.insert(row);
+		select(row);
+	}
 }
 
 /**

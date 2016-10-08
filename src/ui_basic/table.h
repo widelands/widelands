@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <limits>
+#include <set>
 #include <vector>
 
 #include <boost/function.hpp>
@@ -91,6 +92,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
+	void toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
 		char const* what() const noexcept override {
@@ -233,6 +235,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
+	void toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
 		char const* what() const noexcept override {
@@ -296,10 +299,13 @@ private:
 	Scrollbar* scrollbar_;
 	int32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
+	std::set<uint32_t> multiselect_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
 	Columns::size_type sort_column_;
 	bool sort_descending_;
+	bool is_multiselect_;
+	bool ctrl_down_;  // Whether the ctrl key is being pressed;
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
