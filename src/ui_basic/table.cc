@@ -62,7 +62,8 @@ Table<void*>::Table(
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
      is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
-     ctrl_down_(false) {
+     ctrl_down_(false),
+     shift_down_(false) {
 	set_thinks(false);
 	set_can_focus(true);
 }
@@ -324,8 +325,17 @@ void Table<void*>::draw(RenderTarget& dst) {
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (is_multiselect_) {
-		if (code.sym & (SDLK_LCTRL | SDLK_RCTRL)) {
+		switch (code.sym) {
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+			shift_down_ = down;
+			break;
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
 			ctrl_down_ = down;
+			break;
+		default:
+			break;
 		}
 	}
 	if (down) {
@@ -354,15 +364,12 @@ bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const y) {
+bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y) {
 	if (get_can_focus())
 		focus();
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
-		if (!ctrl_down_) {
-			multiselect_.clear();
-		}
 		uint32_t const time = SDL_GetTicks();
 
 		//  This hick hack is needed if any of the callback functions calls clear
@@ -376,18 +383,34 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 		if (row < entry_records_.size()) {
 			play_click();
 			if (is_multiselect_) {
-				if (!ctrl_down_) {
+				// Ranged selection with Shift
+				if (shift_down_) {
 					multiselect_.clear();
+					if (has_selection()) {
+						const uint32_t last_selected = selection_index();
+						const uint32_t lower_bound = std::min(row, selection_);
+						const uint32_t upper_bound = std::max(row, selection_);
+						for (uint32_t i = lower_bound; i < upper_bound; ++i) {
+							toggle_entry(i);
+						}
+						selection_ = last_selected;
+					} else {
+						toggle_entry(row);
+					}
+				} else {
+					// Single selection without Ctrl
+					if (!ctrl_down_) {
+						multiselect_.clear();
+					}
+					toggle_entry(row);
 				}
-				// NOCOM handle shift with ranged selection
-				toggle_entry(row);
 			} else {
 				select(row);
 			}
 		}
 
 		// Check if doubleclicked
-		if (!ctrl_down_ && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
+		if (!ctrl_down_ && !shift_down_ && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
 		    last_selection_ == selection_ && selection_ != no_selection_index()) {
 			double_clicked(selection_);
 		}

@@ -293,7 +293,8 @@ private:
 	Columns::size_type sort_column_;
 	bool sort_descending_;
 	bool is_multiselect_;
-	bool ctrl_down_;  // Whether the ctrl key is being pressed;
+	bool ctrl_down_;   // Whether the ctrl key is being pressed
+	bool shift_down_;  // Whether the shift key is being pressed
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
