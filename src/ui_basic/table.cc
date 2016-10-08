@@ -341,6 +341,16 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	}
 	if (down) {
 		switch (code.sym) {
+		case SDLK_a:
+			if (is_multiselect_ && ctrl_down_ && !empty()) {
+				multiselect_.clear();
+				for (uint32_t i = 0; i < size(); ++i) {
+					toggle_entry(i);
+				}
+				selection_ = 0;
+				return true;
+			}
+			break;
 		case SDLK_UP:
 		case SDLK_KP_8:
 			move_selection(-1);
