@@ -66,8 +66,7 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false);
+	                Align = UI::Align::kLeft);
 
 	void set_column_title(uint8_t col, const std::string& title);
 
@@ -139,10 +138,6 @@ public:
 			return clr;
 		}
 
-		void set_checked(uint8_t col, bool checked);
-		void toggle(uint8_t col);
-		bool is_checked(uint8_t col) const;
-
 	private:
 		friend class Table<void*>;
 		void* entry_;
@@ -151,10 +146,6 @@ public:
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
-			bool d_checked;
-
-			Data() : d_checked(false) {
-			}
 		};
 		std::vector<Data> data_;
 	};
@@ -180,8 +171,7 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                Align = UI::Align::kLeft,
-	                bool is_checkbox_column = false);
+	                Align = UI::Align::kLeft);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
@@ -276,7 +266,6 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
 
@@ -286,7 +275,6 @@ private:
 		Button* btn;
 		uint32_t width;
 		Align alignment;
-		bool is_checkbox_column;
 		CompareFn compare;
 	};
 

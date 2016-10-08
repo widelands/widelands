@@ -84,8 +84,7 @@ Table<void*>::~Table() {
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
-                              Align const alignment,
-                              bool const is_checkbox_column) {
+                              Align const alignment) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -108,16 +107,7 @@ void Table<void*>::add_column(uint32_t const width,
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
 		c.alignment = alignment;
-		c.is_checkbox_column = is_checkbox_column;
-
-		if (is_checkbox_column) {
-			c.compare =
-			   boost::bind(&Table<void*>::default_compare_checkbox, this, columns_.size(), _1, _2);
-		} else {
-			c.compare =
-			   boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
-		}
-
+		c.compare = boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
 		columns_.push_back(c);
 	}
 	if (!scrollbar_) {
@@ -145,24 +135,6 @@ void Table<void*>::set_column_compare(uint8_t col, const Table<void*>::CompareFn
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	column.compare = fn;
-}
-
-void Table<void*>::EntryRecord::set_checked(uint8_t const col, bool const checked) {
-	Data& cell = data_.at(col);
-
-	cell.d_checked = checked;
-	cell.d_picture = g_gr->images().get(checked ? "images/ui_basic/checkbox_checked.png" :
-	                                              "images/ui_basic/checkbox_empty.png");
-}
-
-void Table<void*>::EntryRecord::toggle(uint8_t const col) {
-	set_checked(col, !is_checked(col));
-}
-
-bool Table<void*>::EntryRecord::is_checked(uint8_t const col) const {
-	const Data& cell = data_.at(col);
-
-	return cell.d_checked;
 }
 
 Table<void*>::EntryRecord* Table<void*>::find(const void* const entry) const
@@ -402,6 +374,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 
 		uint32_t const row = (y + scrollpos_ - headerheight_) / get_lineheight();
 		if (row < entry_records_.size()) {
+			play_click();
 			if (is_multiselect_) {
 				if (!ctrl_down_) {
 					multiselect_.clear();
@@ -410,18 +383,6 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 				toggle_entry(row);
 			} else {
 				select(row);
-			}
-			Columns::size_type const nr_cols = columns_.size();
-			for (uint8_t col = 0; col < nr_cols; ++col) {
-				const Column& column = columns_.at(col);
-				x -= column.width;
-				if (x <= 0) {
-					if (column.is_checkbox_column) {
-						play_click();
-						entry_records_.at(row)->toggle(col);
-					}
-					break;
-				}
 			}
 		}
 
@@ -514,10 +475,6 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
-	for (size_t i = 0; i < columns_.size(); ++i)
-		if (columns_.at(i).is_checkbox_column) {
-			result.data_.at(i).d_picture = g_gr->images().get("images/ui_basic/checkbox_empty.png");
-		}
 
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
@@ -594,16 +551,6 @@ void Table<void*>::sort(const uint32_t Begin, uint32_t End) {
 			newselection = i;
 	}
 	selection_ = newselection;
-}
-
-/**
- * Default comparison for checkbox columns:
- * checked items come before unchecked ones.
- */
-bool Table<void*>::default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b) {
-	EntryRecord& ea = get_record(a);
-	EntryRecord& eb = get_record(b);
-	return ea.is_checked(column) && !eb.is_checked(column);
 }
 
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
