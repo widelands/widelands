@@ -266,52 +266,76 @@ void FullscreenMenuLoadGame::clicked_delete() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const SavegameData& gamedata = games_data_[table_.get_selected()];
-
-	std::string message =
-	   (boost::format("%s %s\n") % label_mapname_.get_text() % gamedata.mapname).str();
-
-	message = (boost::format("%s %s %s\n") % message % label_win_condition_.get_text() %
-	           gamedata.wincondition)
-	             .str();
-
-	message =
-	   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
-
-	message = (boost::format("%s %s %s\n") % message % label_gametime_.get_text() %
-	           gametimestring(gamedata.gametime))
-	             .str();
-
-	message =
-	   (boost::format("%s %s %s\n\n") % message % label_players_.get_text() % gamedata.nrplayers)
-	      .str();
-
-	message = (boost::format("%s %s %s\n") % message % _("Filename:") % gamedata.filename).str();
-
-	if (is_replay_) {
-		message =
-		   (boost::format("%s\n\n%s") % _("Do you really want to delete this replay?") % message)
-		      .str();
+	std::set<uint32_t> selections = table_.selections();
+	size_t no_selections = selections.size();
+	std::string message;
+	if (no_selections > 1) {
+		if (is_replay_) {
+			message = (boost::format(ngettext("Do you really want to delete this %d replay?",
+			                                  "Do you really want to delete these %d replays?",
+			                                  no_selections)) %
+			           no_selections)
+			             .str();
+		} else {
+			message = (boost::format(ngettext("Do you really want to delete this %d game?",
+			                                  "Do you really want to delete these %d games?",
+			                                  no_selections)) %
+			           no_selections)
+			             .str();
+		}
 	} else {
+		const SavegameData& gamedata = games_data_[table_.get_selected()];
+
+		message = (boost::format("%s %s\n") % label_mapname_.get_text() % gamedata.mapname).str();
+
+		message = (boost::format("%s %s %s\n") % message % label_win_condition_.get_text() %
+		           gamedata.wincondition)
+		             .str();
+
 		message =
-		   (boost::format("%s\n\n%s") % _("Do you really want to delete this game?") % message).str();
+		   (boost::format("%s %s %s\n") % message % _("Save Date:") % gamedata.savedatestring).str();
+
+		message = (boost::format("%s %s %s\n") % message % label_gametime_.get_text() %
+		           gametimestring(gamedata.gametime))
+		             .str();
+
+		message =
+		   (boost::format("%s %s %s\n\n") % message % label_players_.get_text() % gamedata.nrplayers)
+		      .str();
+
+		message = (boost::format("%s %s %s\n") % message % _("Filename:") % gamedata.filename).str();
+
+		if (is_replay_) {
+			message =
+			   (boost::format("%s\n\n%s") % _("Do you really want to delete this replay?") % message)
+			      .str();
+		} else {
+			message =
+			   (boost::format("%s\n\n%s") % _("Do you really want to delete this game?") % message)
+			      .str();
+		}
 	}
 
 	UI::WLMessageBox confirmationBox(
-	   this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
+	   this, ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+
 	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		g_fs->fs_unlink(gamedata.filename);
-		if (is_replay_) {
-			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);
+		for (const uint32_t index : selections) {
+			const std::string& filename = games_data_[table_.get(table_.get_record(index))].filename;
+			g_fs->fs_unlink(filename);
+			if (is_replay_) {
+				g_fs->fs_unlink(filename + WLGF_SUFFIX);
+			}
 		}
 		fill_table();
 	}
 }
 
 bool FullscreenMenuLoadGame::set_has_selection() {
-	bool has_selection = table_.has_selection();
+	bool has_selection = table_.selections().size() < 2;
 	ok_.set_enabled(has_selection);
-	delete_.set_enabled(has_selection);
+	delete_.set_enabled(table_.has_selection());
 
 	if (!has_selection) {
 		label_mapname_.set_text(std::string());
@@ -339,6 +363,7 @@ bool FullscreenMenuLoadGame::set_has_selection() {
 }
 
 void FullscreenMenuLoadGame::entry_selected() {
+	size_t selections = table_.selections().size();
 	if (set_has_selection()) {
 
 		const SavegameData& gamedata = games_data_[table_.get_selected()];
@@ -437,6 +462,11 @@ void FullscreenMenuLoadGame::entry_selected() {
 			ta_errormessage_.set_visible(true);
 			ok_.set_enabled(false);
 		}
+	} else if (selections > 1) {
+		label_mapname_.set_text(
+		   (boost::format(ngettext("Selected %d file.", "Selected %d files.", selections)) %
+		    selections)
+		      .str());
 	}
 }
 
