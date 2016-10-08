@@ -173,6 +173,7 @@ void Table<void*>::clear() {
 		delete entry;
 	}
 	entry_records_.clear();
+	multiselect_.clear();
 
 	if (scrollbar_)
 		scrollbar_->set_steps(1);
@@ -390,7 +391,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 						const uint32_t last_selected = selection_index();
 						const uint32_t lower_bound = std::min(row, selection_);
 						const uint32_t upper_bound = std::max(row, selection_);
-						for (uint32_t i = lower_bound; i < upper_bound; ++i) {
+						for (uint32_t i = lower_bound; i <= upper_bound; ++i) {
 							toggle_entry(i);
 						}
 						selection_ = last_selected;

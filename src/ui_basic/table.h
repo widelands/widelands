@@ -86,6 +86,7 @@ public:
 	static uint32_t no_selection_index();
 	bool has_selection() const;
 	uint32_t selection_index() const;
+	std::set<uint32_t> selections() const;
 	EntryRecord& get_record(uint32_t) const;
 	static Entry get(const EntryRecord&);
 	EntryRecord* find(Entry) const;
@@ -211,6 +212,10 @@ public:
 	}
 	bool has_selection() const {
 		return selection_ != no_selection_index();
+	}
+	/// The set of highlighted entries in multiselect mode
+	std::set<uint32_t> selections() const {
+		return multiselect_;
 	}
 	uint32_t selection_index() const {
 		return selection_;
