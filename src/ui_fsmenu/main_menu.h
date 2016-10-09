@@ -22,6 +22,7 @@
 
 #include "graphic/graphic.h"
 #include "notifications/notifications.h"
+#include "ui_basic/box.h"
 #include "ui_fsmenu/base.h"
 
 /**
@@ -47,6 +48,7 @@ protected:
 	uint32_t padding_;
 
 	const std::string button_background_;
+	UI::Box vbox;
 
 private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>

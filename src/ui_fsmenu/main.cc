@@ -29,14 +29,6 @@ FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
 
      // Buttons
-     // This box needs to be a bit higher than in the other menus, because we have a lot of buttons
-     vbox(this,
-          box_x_,
-          box_y_ - buth_,
-          UI::Box::Vertical,
-          butw_,
-          get_h() - (box_y_ - buth_),
-          padding_),
      playtutorial(&vbox,
                   "play_tutorial",
                   0,
@@ -129,14 +121,14 @@ FullscreenMenuMain::FullscreenMenuMain()
      // Textlabels
      version(
         this,
-        get_w(),
-        get_h(),
+        0,
+        0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
         (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
         UI::Align::kBottomRight),
      copyright(this,
                0,
-               get_h() - 0.5 * buth_,
+               0,
                /** TRANSLATORS: Placeholders are the copyright years */
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
@@ -144,7 +136,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                UI::Align::kBottomLeft),
      gpl(this,
          0,
-         get_h(),
+         0,
          _("Licensed under the GNU General Public License V2.0"),
          UI::Align::kBottomLeft) {
 	playtutorial.sigclicked.connect(
@@ -196,7 +188,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 
 	vbox.add(&exit, UI::Align::kHCenter);
 
-	vbox.set_size(butw_, get_h() - vbox.get_y());
+	fit_to_screen();
 }
 
 void FullscreenMenuMain::clicked_ok() {
@@ -205,9 +197,10 @@ void FullscreenMenuMain::clicked_ok() {
 
 void FullscreenMenuMain::fit_to_screen() {
 	FullscreenMenuMainMenu::fit_to_screen();
-	version.set_pos(Point(get_w(), get_h()));
-	copyright.set_pos(Point(0, get_h() - 0.5 * buth_));
-	gpl.set_pos(Point(0, get_h()));
+	const int text_height = 0.5 * version.get_h() + padding_;
+	version.set_pos(Point(get_w() - version.get_w(), get_h() - text_height));
+	copyright.set_pos(Point(0, get_h() - 2 * text_height));
+	gpl.set_pos(Point(0, get_h() - text_height));
 
 	playtutorial.set_size(butw_, buth_);
 	singleplayer.set_size(butw_, buth_);
@@ -219,5 +212,6 @@ void FullscreenMenuMain::fit_to_screen() {
 	exit.set_size(butw_, buth_);
 
 	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	// This box needs to be a bit higher than in the other menus, because we have a lot of buttons
 	vbox.set_size(butw_, get_h() - vbox.get_y());
 }

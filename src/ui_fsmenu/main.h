@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"
@@ -38,7 +37,6 @@ protected:
 	void fit_to_screen() override;
 
 private:
-	UI::Box vbox;
 	UI::Button playtutorial;
 	UI::Button singleplayer;
 	UI::Button multiplayer;

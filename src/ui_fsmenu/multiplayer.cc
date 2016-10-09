@@ -30,10 +30,9 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, get_w() / 2, title_y_, _("Choose game type"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
 
      // Buttons
-     vbox(this, box_x_, box_y_, UI::Box::Vertical, butw_, get_h() - box_y_, padding_),
      metaserver(&vbox,
                 "metaserver",
                 0,
@@ -92,8 +91,6 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	vbox.add(&back, UI::Align::kHCenter);
 
-	vbox.set_size(butw_, get_h() - vbox.get_y());
-
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);
 	if (auto_log_) {
@@ -104,6 +101,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 		showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	}
+	fit_to_screen();
 }
 
 /// called if the showloginbox button was pressed
@@ -182,6 +180,6 @@ void FullscreenMenuMultiPlayer::fit_to_screen() {
 	lan.set_size(butw_, buth_);
 	back.set_size(butw_, buth_);
 
-	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_pos(Point(box_x_, box_y_));
 	vbox.set_size(butw_, get_h() - vbox.get_y());
 }

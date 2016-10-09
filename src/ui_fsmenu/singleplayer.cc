@@ -27,10 +27,9 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, get_w() / 2, title_y_, _("Single Player"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Single Player"), UI::Align::kHCenter),
 
      // Buttons
-     vbox(this, box_x_, box_y_, UI::Box::Vertical, butw_, get_h() - box_y_, padding_),
      new_game(&vbox,
               "new_game",
               0,
@@ -101,7 +100,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 
 	vbox.add(&back, UI::Align::kHCenter);
 
-	vbox.set_size(butw_, get_h() - vbox.get_y());
+	fit_to_screen();
 }
 
 void FullscreenMenuSinglePlayer::clicked_ok() {
@@ -119,6 +118,6 @@ void FullscreenMenuSinglePlayer::fit_to_screen() {
 	load_game.set_size(butw_, buth_);
 	back.set_size(butw_, buth_);
 
-	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_pos(Point(box_x_, box_y_));
 	vbox.set_size(butw_, get_h() - vbox.get_y());
 }
