@@ -107,3 +107,18 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 void FullscreenMenuSinglePlayer::clicked_ok() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
 }
+
+void FullscreenMenuSinglePlayer::fit_to_screen() {
+	title.set_size(get_w(), title.get_h());
+	FullscreenMenuMainMenu::fit_to_screen();
+
+	title.set_pos(Point(0, title_y_));
+
+	new_game.set_size(butw_, buth_);
+	campaign.set_size(butw_, buth_);
+	load_game.set_size(butw_, buth_);
+	back.set_size(butw_, buth_);
+
+	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_size(butw_, get_h() - vbox.get_y());
+}

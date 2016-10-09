@@ -45,6 +45,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
                 "",
                 true,
                 false),
+     showloginbox(nullptr),
      lan(&vbox,
          "lan",
          0,
@@ -166,4 +167,21 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 void FullscreenMenuMultiPlayer::clicked_ok() {
 	internet_login();
+}
+
+void FullscreenMenuMultiPlayer::fit_to_screen() {
+	title.set_size(get_w(), title.get_h());
+	FullscreenMenuMainMenu::fit_to_screen();
+
+	title.set_pos(Point(0, title_y_));
+
+	metaserver.set_size(butw_, buth_);
+	if (showloginbox) {
+		showloginbox->set_size(butw_, buth_);
+	}
+	lan.set_size(butw_, buth_);
+	back.set_size(butw_, buth_);
+
+	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_size(butw_, get_h() - vbox.get_y());
 }

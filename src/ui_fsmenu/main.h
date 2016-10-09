@@ -35,6 +35,7 @@ public:
 
 protected:
 	void clicked_ok() override;
+	void fit_to_screen() override;
 
 private:
 	UI::Box vbox;

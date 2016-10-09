@@ -202,3 +202,22 @@ FullscreenMenuMain::FullscreenMenuMain()
 void FullscreenMenuMain::clicked_ok() {
 	;  // do nothing
 }
+
+void FullscreenMenuMain::fit_to_screen() {
+	FullscreenMenuMainMenu::fit_to_screen();
+	version.set_pos(Point(get_w(), get_h()));
+	copyright.set_pos(Point(0, get_h() - 0.5 * buth_));
+	gpl.set_pos(Point(0, get_h()));
+
+	playtutorial.set_size(butw_, buth_);
+	singleplayer.set_size(butw_, buth_);
+	multiplayer.set_size(butw_, buth_);
+	replay.set_size(butw_, buth_);
+	editor.set_size(butw_, buth_);
+	options.set_size(butw_, buth_);
+	about.set_size(butw_, buth_);
+	exit.set_size(butw_, buth_);
+
+	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_size(butw_, get_h() - vbox.get_y());
+}

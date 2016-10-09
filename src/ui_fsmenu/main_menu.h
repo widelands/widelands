@@ -20,6 +20,8 @@
 #ifndef WL_UI_FSMENU_MAIN_MENU_H
 #define WL_UI_FSMENU_MAIN_MENU_H
 
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
 #include "ui_fsmenu/base.h"
 
 /**
@@ -37,12 +39,18 @@ public:
 	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
-	const uint32_t box_x_, box_y_;
-	const uint32_t butw_, buth_;
-	const uint32_t title_y_;
-	const uint32_t padding_;
+	virtual void fit_to_screen();
+
+	uint32_t box_x_, box_y_;
+	uint32_t butw_, buth_;
+	uint32_t title_y_;
+	uint32_t padding_;
 
 	const std::string button_background_;
+
+private:
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H
