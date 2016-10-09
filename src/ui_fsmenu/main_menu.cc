@@ -35,11 +35,6 @@ FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_ima
      padding_(buth_ / 3),
      button_background_("images/ui_basic//but3.png"),
      vbox(this, 0, 0, UI::Box::Vertical, 0, 0, padding_) {
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
-		   fit_to_screen();
-		});
 }
 
 void FullscreenMenuMainMenu::fit_to_screen() {

@@ -114,6 +114,10 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	fill_table();
 }
 
+void FullscreenMenuCampaignSelect::fit_to_screen() {
+	// NOCOM implement
+}
+
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
@@ -348,6 +352,10 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.set_sort_column(0);
 
 	table_.focus();
+}
+
+void FullscreenMenuCampaignMapSelect::fit_to_screen() {
+	// NOCOM implement
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

@@ -250,6 +250,10 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete chat_;
 }
 
+void FullscreenMenuLaunchMPG::fit_to_screen() {
+	// TODO(GunChleoc): Implement when we have redesigned this
+}
+
 void FullscreenMenuLaunchMPG::think() {
 	if (ctrl_)
 		ctrl_->think();

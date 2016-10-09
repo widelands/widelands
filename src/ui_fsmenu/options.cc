@@ -398,6 +398,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	language_list_.focus();
 }
 
+void FullscreenMenuOptions::fit_to_screen() {
+	// NOCOM implement
+}
+
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.

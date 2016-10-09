@@ -48,6 +48,11 @@ FullscreenMenuBase::FullscreenMenuBase() : FullscreenMenuBase("images/ui_fsmenu/
  */
 FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()), background_image_(bgpic) {
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.width, message.height);
+		   fit_to_screen();
+		});
 }
 
 FullscreenMenuBase::~FullscreenMenuBase() {

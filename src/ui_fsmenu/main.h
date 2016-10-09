@@ -34,9 +34,10 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void fit_to_screen() override;
 
 private:
+	void fit_to_screen() override;
+
 	UI::Button playtutorial;
 	UI::Button singleplayer;
 	UI::Button multiplayer;

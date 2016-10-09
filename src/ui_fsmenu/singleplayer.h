@@ -34,9 +34,10 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void fit_to_screen() override;
 
 private:
+	void fit_to_screen() override;
+
 	UI::Textarea title;
 	UI::Button new_game;
 	UI::Button campaign;

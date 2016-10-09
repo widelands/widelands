@@ -52,6 +52,8 @@ protected:
 	void fill_table() override;
 
 private:
+	void fit_to_screen() override;
+
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);

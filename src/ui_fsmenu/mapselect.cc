@@ -126,6 +126,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 }
 
+void FullscreenMenuMapSelect::fit_to_screen() {
+	// NOCOM implement
+}
+
 void FullscreenMenuMapSelect::think() {
 	if (ctrl_) {
 		ctrl_->think();

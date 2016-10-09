@@ -22,6 +22,8 @@
 
 #include <string>
 
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
 #include "ui_basic/panel.h"
 
 /**
@@ -81,11 +83,14 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
+	virtual void fit_to_screen() = 0;
 	virtual void clicked_back();
 	virtual void clicked_ok();
 
 private:
 	std::string background_image_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

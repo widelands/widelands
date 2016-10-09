@@ -98,6 +98,8 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
+	void fit_to_screen() override;
+
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 

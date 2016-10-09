@@ -47,6 +47,8 @@ protected:
 	void fill_table() override;
 
 private:
+	void fit_to_screen() override;
+
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
@@ -101,6 +103,8 @@ protected:
 	void fill_table() override;
 
 private:
+	void fit_to_screen() override;
+
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 	/**

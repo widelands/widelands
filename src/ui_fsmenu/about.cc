@@ -65,3 +65,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 
 	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
 }
+
+void FullscreenMenuAbout::fit_to_screen() {
+	// NOCOM implement
+}

@@ -237,6 +237,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	fill_table();
 }
 
+void FullscreenMenuLoadGame::fit_to_screen() {
+	// NOCOM implement
+}
+
 void FullscreenMenuLoadGame::think() {
 	if (ctrl_) {
 		ctrl_->think();

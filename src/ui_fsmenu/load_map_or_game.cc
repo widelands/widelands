@@ -74,6 +74,10 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
          false) {
 }
 
+void FullscreenMenuLoadMapOrGame::fit_to_screen() {
+	// NOCOM implement
+}
+
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();
 }

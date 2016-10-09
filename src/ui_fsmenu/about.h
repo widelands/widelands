@@ -33,6 +33,8 @@ public:
 	FullscreenMenuAbout();
 
 private:
+	void fit_to_screen() override;
+
 	uint32_t const butw_;
 	uint32_t const buth_;
 	uint32_t const hmargin_;

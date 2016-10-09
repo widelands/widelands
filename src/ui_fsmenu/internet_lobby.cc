@@ -159,6 +159,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 		connect_to_metaserver();
 }
 
+void FullscreenMenuInternetLobby::fit_to_screen() {
+	// NOCOM implement
+}
+
 /// think function of the UI (main loop)
 void FullscreenMenuInternetLobby::think() {
 	FullscreenMenuBase::think();

@@ -58,6 +58,8 @@ protected:
 	void clicked_back() override;
 
 private:
+	void fit_to_screen() override;
+
 	LuaInterface* lua_;
 
 	void change_map_or_save();
