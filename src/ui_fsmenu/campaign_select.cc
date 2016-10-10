@@ -115,7 +115,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 }
 
 void FullscreenMenuCampaignSelect::fit_to_screen() {
-	// NOCOM implement
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 /**
@@ -355,7 +355,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 }
 
 void FullscreenMenuCampaignMapSelect::fit_to_screen() {
-	// NOCOM implement
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

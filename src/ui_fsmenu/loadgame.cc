@@ -238,7 +238,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 }
 
 void FullscreenMenuLoadGame::fit_to_screen() {
-	// NOCOM implement
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 void FullscreenMenuLoadGame::think() {
