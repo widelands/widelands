@@ -81,7 +81,6 @@ GameMainMenu::GameMainMenu(InteractivePlayer& plr,
 	stock.sigclicked.connect(
 	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.stock)));
 
-// NOCOM we have this multiple times - can we refactor?
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	assert(!registry.on_create);                                                                    \
 	assert(!registry.on_delete);                                                                    \
