@@ -2,16 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
 # GunChleoc, 2015-2016
-# GunChleoc, 2014
+# GunChleoc, 2015-2016
+# GunChleoc, 2014-2015
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-13 10:56+0000\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-03 12:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -23,35 +23,35 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Estabeleça uma economia básica"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Começa a coletar materiais de construção básicas e fortifica o acampamento."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Construa uma cabana do lenhador"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Construa uma cabana do guarda-florestal"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construa uma pedreira"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construa um endurecedor de madeira"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Construa uma sentinela a este do teu território"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Depois, devia também construir uma quinta do colmo e um forno da cal."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -60,7 +60,7 @@ msgstr "Pôr em marcha uma pequena economia de alimentação"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Estabeleça uma economia de comida básica para alimentar o teu povo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a fisher’s hut"
@@ -68,11 +68,11 @@ msgstr "Construa uma cabana do pescador"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Construa uma cabana do caçador"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:43
 msgid "Build a well"
-msgstr "Construa um poço artesiano"
+msgstr "Construa um poço"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:44
 msgid "Build a farm"
@@ -84,7 +84,7 @@ msgstr "Construa uma padaria"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:50
 msgid "Build a cattle farm"
-msgstr "Construa uma Criação de Bois"
+msgstr "Construa uma criação de bois"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:52
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
@@ -95,18 +95,18 @@ msgstr "Lembra-te de construir uma criação de bois"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "À medida que as estradas crescem e a tua economia fica maior, tu deves fazer uso dos boi para ajudar a transportar as mercadorias mais rapidamente."
+msgstr "À medida que as estradas crescem e a tua economia fica maior, tu deves fazer uso dos bois para ajudar a transportar as mercadorias mais rapidamente."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 msgid "Build a tower"
-msgstr ""
+msgstr "Construa uma torre"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Construa uma torre a nordeste do teu território para teres uma visão mais alargada e para proteger o nosso povo de ataques de surpresa do inimigo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
@@ -117,38 +117,38 @@ msgstr "Explorar mais longe"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Constrói mais edifícios militares para explorar a região à volta do quartel-general e para assegurar a segurança do teu povo."
+msgstr "Construa mais edifícios militares para explorar a região à volta do quartel-general e para assegurar a segurança do seu povo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Construa infraestrutura de mineração"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:80
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Expande o teu território para as montanhas, envia geólogos para procurar minerais e carvão e põe em marcha a economia mineira construindo Minas, Tabernas, Fundições e a Loja do Ferreiro."
+msgstr "Expande o teu território para as montanhas, envia geólogos para procurar minerais e carvão e põe em marcha a economia mineira construindo minas, tabernas, fundições e a loja do ferreiro."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 msgid "Build a fortress"
-msgstr "Construa uma Fortaleza"
+msgstr "Construa uma fortaleza"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:88
 msgid "Build a fortress to the east of the mountains."
-msgstr "Constrói uma fortaleza a Este das montanhas."
+msgstr "Construa uma fortaleza a Este das montanhas."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Construa infraestrutura de treinamento"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Constrói uma arena de combate e uma campo de treinos a oeste das montanhas."
+msgstr "Construa uma arena de combate e um campo de treinos a oeste das montanhas."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
@@ -158,14 +158,14 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Melhora a tua loja do ferreiro para loja de machados para produzir armas e porém construa outra loja do ferreiro para assegurar a produção de ferramentas. Assim que o ferreiro alcança o nível seguinte (mestre ferreiro) podes melhorá-la até para uma fábrica de guerra que é capaz de produzir armas mais avançadas."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "Constrói uma loja de elmos a oeste das montanhas para providenciar melhores armaduras aos nossos guerreiros."
+msgstr "Construa uma loja de elmos a oeste das montanhas para providenciar melhores armaduras aos nossos guerreiros."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:106
@@ -174,7 +174,7 @@ msgstr "Construa um armazém"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Constrói um armazém a Oeste das montanhas."
+msgstr "Construa um armazém a Oeste das montanhas."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 msgid ""
@@ -187,7 +187,7 @@ msgstr "Os armazéns são em tudo semelhantes ao teu quartel-general, com a úni
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:115
 msgid "Build training sites"
-msgstr "Constrói os edifícios de treino militar"
+msgstr "Construa os edifícios de treino militar"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:117
 msgid ""
@@ -198,7 +198,7 @@ msgstr "Os campos de treinos assim como a arena de combate são usados para trei
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Os atributos são: saúde, ataque, defesa e evasão."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
@@ -208,7 +208,7 @@ msgstr "Construa os produtores de armas"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
 msgid "Build a helm smithy"
-msgstr "Construa um Armador de Elmos"
+msgstr "Construa uma loja de elmoss"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:142
@@ -225,7 +225,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Para atacar um inimigo tens de clicar na porta do edifício militar do adversário. Abrir-se-á um menu que te permite selecionar a quantidade de soldados que deverão atacar. Quando tiveres escolhido o número clica na cruz («&nbsp;Atacar&nbsp;»)."
+msgstr "Para atacar um inimigo tens de clicar na porta do edifício militar do adversário. Abrir-se-á um menu que te permite selecionar a quantidade de guerreiros que deverão atacar. Quando tiveres escolhido o número clica na cruz («&nbsp;Atacar&nbsp;»)."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:151
@@ -353,7 +353,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
-msgstr "Eu enviei alguns homens para se encontrarem com com o Kaliath na sua Fortaleza. Ele barricou a antiga entrada principal para a capital Al’thunran e agora está a tentar fechar o cerco à cidade. Ele não irá deixar ninguém entrar ou sair da cidade enquanto não houver brechas no cerco. Até agora, ele não respondeu a nenhuma das minhas mensagens. Mas enquanto espero uma resposta, irei treinar os meus guerreiros para que estejam a bom nível para a batalha que ai vem."
+msgstr "Eu enviei alguns homens para se encontrarem com com o Kalitath na sua fortaleza. Ele barricou a antiga entrada principal para a capital Al’thunran e agora está a tentar fechar o cerco à cidade. Ele não irá deixar ninguém entrar ou sair da cidade enquanto não houver brechas no cerco. Até agora, ele não respondeu a nenhuma das minhas mensagens. Mas enquanto espero uma resposta, irei treinar os meus guerreiros para que estejam a bom nível para a batalha que ai vem."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
 msgid "Your Loyal Companion"
@@ -435,7 +435,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "O Bolderano tem razão ! Não temos alimentação suficiente para sobreviver a este longo e frio inverno. Devemos começar por construir cabanas para o pescador e para o caçador. E, se tivermos espaço suficiente, construir também uma quinta e uma padaria ! Um dos nosso agricultores é muito inteligente e já arranjou uma espécie de plantas que se vai dar bem nestes solos."
+msgstr "O Bolderano tem razão ! Não temos alimentação suficiente para sobreviver a este longo e frio inverno. Devemos começar por construir um poço e cabanas para o pescador e para o caçador. E, se tivermos espaço suficiente, construir também uma quinta e uma padaria ! Um dos nosso agricultores é muito inteligente e já arranjou uma espécie de plantas que se vai dar bem nestes solos."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
@@ -459,7 +459,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "O Thron contou-me que descobriu trilhos na neve a nordeste do nosso acampamento. Ele deu instruções para que construíssemos uma torre para termos mais alcance visual sobre a área à volta do nosso Quartel-general e assim protegermos o nosso povo de ataques surpresa."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
 msgid "Further Exploration"
@@ -525,7 +525,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr "O Bolderano e eu estivemos a explorar a região das três montanhas. Um dos maiores problemas estratégicos com esta região é que apenas existem duas grandes passagens para o meio da montanha: uma a Norte e outra a Sul. Estas passagens são muito difíceis de controlar pelo que me parece que só existe uma forma de defender o local para que não caia em mais inimigas: Temos de construir uma Fortaleza a Este das montanhas !"
+msgstr "O Bolderano e eu estivemos a explorar a região das três montanhas. Um dos maiores problemas estratégicos com esta região é que apenas existem duas grandes passagens para o meio da montanha: uma a Norte e outra a Sul. Estas passagens são muito difíceis de controlar pelo que me parece que só existe uma forma de defender o local para que não caia em mais inimigas: Temos de construir uma fortaleza a Este das montanhas !"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
 msgid "Fortress Completed"
@@ -538,7 +538,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Finalmente ! A fortaleza acabou de ser construída, por isso a entrada para a tua colónia deve estar seguro por agora. No futuro temos de pensar em construir mais algumas fortificações como barreiras e torres nestas passagens, mas por agora podemos estar descansados."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
@@ -571,7 +571,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr "Os meus irmãos e os seus soldados estão mortos e para trás só deixaram morte e destruição. Ainda não encontrei um homem ou mulher do povo por entre as ruínas e só espero que eles tenham conseguido escapar a toda esta destruição e tenham começado uma vida novo num outro local qualquer."
+msgstr "Os meus irmãos e os seus guerreiros estão mortos e para trás só deixaram morte e destruição. Ainda não encontrei um homem ou mulher do povo por entre as ruínas e só espero que eles tenham conseguido escapar a toda esta destruição e tenham começado uma vida novo num outro local qualquer."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
@@ -622,7 +622,7 @@ msgstr "Assim seja !"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Transporte mais rápido"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
 msgid "Khantrukh says:"

@@ -24,7 +24,7 @@
 #define Name "Widelands"
 #define VerName "Widelands Build19"
 #define VerNumber "0.19.0.1"
-#define Copyright "Widelands Development Team 2001-2015"
+#define Copyright "Widelands Development Team 2001-2016"
 #define SetupFileName "Widelands-Build19-win64"
 
 ;General String
@@ -49,7 +49,7 @@ AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
 AppUpdatesURL={#URL}
-DefaultDirName={pf}\{#Name}
+DefaultDirName={sd}\bin\{#Name}
 DefaultGroupName={#Name}
 AllowNoIcons=true
 LicenseFile=..\..\..\COPYING

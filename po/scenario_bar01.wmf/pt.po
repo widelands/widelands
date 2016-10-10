@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-13 11:06+0000\n"
+"POT-Creation-Date: 2016-10-01 07:52+0000\n"
+"PO-Revision-Date: 2016-10-03 11:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr "Expande-te para Nordeste e constrói ai uma pedreira"
+msgstr "Expanda-se para Nordeste e construa ai uma pedreira"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -59,11 +59,11 @@ msgstr "Começa a construir minas na montanha"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Construa minas de carvão e de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Construa uma mina de carvão e uma mina de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -127,7 +127,7 @@ msgstr "Fornece alimentos aos mineiros"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Construa a Casa do Caçador, o Couteiro e uma Taberna"
+msgstr "Construa uma cabana to caçador, uma coutada e uma taberna"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
@@ -178,7 +178,7 @@ msgstr "O minério de ferro que os mineiros trazem à superfície ainda não é 
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Melhora os edificios e constrói uma mini-cervejeira"
+msgstr "Melhora os edifícios e construa uma cervejeira artesanal"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
@@ -200,7 +200,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Um mina normal apenas pode extrair um terço de todos os recursos que houver sob ela. Depois terá de ser aumentada para Mina funda para poder continuar a trabalhar devidamente. Para melhorar um edifício, escolhe-o e clica no botão apropriado na janela que foi aberta."
+msgstr "Um mina normal apenas pode extrair um terço de todos os recursos que houver sob ela. Depois terá de ser aumentada para mina funda para poder continuar a trabalhar devidamente. Para melhorar um edifício, escolhe-o e clica no botão apropriado na janela que foi aberta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -216,7 +216,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Estes edifícios em geral têm maiores exigências do que os edifícios básicos, por exemplo as Minas fundas precisam de lanches em vez de rações. Para isso a Taberna terá de ser transformada em Estalagem para poder produzir Lanches compostos por pão pita MAIS um segundo tipo de alimento (carne ou peixe) MAIS cerveja."
+msgstr "Estes edifícios em geral têm maiores exigências do que os edifícios básicos, por exemplo as minas fundas precisam de lanches em vez de rações. Para isso a taberna terá de ser transformada em hospedaria para poder produzir lanches compostos por pão pita MAIS um segundo tipo de alimento (carne ou peixe) MAIS cerveja."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
@@ -238,7 +238,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Maiores e melhores edifícios – incluindo os de cariz militar – requerem melhores materiais de construção. Não podem ser construídos a partir de madeira simples: a madeira têm antes de ser refinados em madeira queimada que é endurecida pelo endurecedor de madeira. Não te esqueças de construir um endurecedor de madeira antes de se esgotarem o estoque de madeira queimada, pois sem ela não te podes expandir."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -247,7 +247,7 @@ msgstr "Construa o forno da cal e a economia do carvão"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Construir o forno da cal alomentado por um poço e um forno ou uma mina de carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
@@ -287,7 +287,7 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:135
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Construa uma quinta do colmo"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:133
 msgid ""
@@ -300,7 +300,7 @@ msgstr "O terceiro material necessário para melhorar os edifícios é o colmo q
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr "Construa uma criação de animais"
+msgstr "Construa uma criação de bois"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -308,11 +308,11 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "Quando as estradas têm um tráfego intenso durante muito tempo, um carregador apenas não é suficiente para transportar as mercadorias rapidamente. Quando ocorrerem engarrafamentos, essas estradas empregam um segundo carregador: uma besta de carga que ajuda a carregar as mercadorias. Isto duplica a capacidade de transporte."
+msgstr "Quando as estradas têm um tráfego intenso durante muito tempo, um carregador apenas não é suficiente para transportar as mercadorias rapidamente. Quando ocorrerem engarrafamentos, essas estradas empregam um segundo carregador: um boi que ajuda a carregar as mercadorias. Isto duplica a capacidade de transporte."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Os bois de carga são criados nas criações de bois com recurso a trigo e água."
+msgstr "Os bois são criados nas criações de bois com recurso a trigo e água."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -326,7 +326,7 @@ msgstr "A história começa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
-msgstr "O Thron suspira…"
+msgstr "O Thron suspira …"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -477,7 +477,7 @@ msgstr "O conselheiro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "O Khantrukh nota …"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
@@ -508,7 +508,7 @@ msgstr "Durante a noite"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says…"
-msgstr ""
+msgstr "O Thron diz …"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -624,7 +624,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "Peço que me perdoe, ó Grande-chefe, mas tenho um gravíssimo problema para discutir consigo. As rochas perto do nosso campo estão a começar a escassear por isso vai ser só uma questão de tempo até que se esgotem."
+msgstr "Peço que me perdoe, ó Grande-chefe, mas tenho um gravíssimo problema para discutir consigo. Os rochedos perto do nosso campo estão a começar a escassear por isso vai ser só uma questão de tempo até que se esgotem."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
@@ -637,7 +637,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr "Apesar de isto não ser uma tarefa digna de um guerreiro, pelo menos mantém-os entretidos ! Thron, o que dirias a nós levarmos alguns dos nosso mais guerreiros mais inquietos  e nos aventurássemos um pouco mais perto da grande montanha Kal’mavrath ... talvez encontremos ai alguma pedra para satisfazer o nosso velho chefe?"
+msgstr "Apesar de isto não ser uma tarefa digna de um guerreiro, pelo menos mantém-os entretidos ! Thron, o que dirias a nós levarmos alguns dos nosso mais guerreiros mais inquietos  e nos aventurássemos um pouco mais perto da grande montanha Kal’mavrath ... talvez encontremos ai alguns rochedos grandes para satisfazer o nosso velho chefe?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
@@ -737,7 +737,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "A Norte da Grande Montanha existe uma planície! Porque não usas essa criação da Mãe Natureza para construir ai uma Quinta de cereais ? Para variar, já não comia uma sandes de pão pita acabado de cozer a muito tempo …"
+msgstr "A Norte da Grande Montanha existe uma planície! Porque não usas essa criação da Mãe Natureza para construir ai uma quinta ? Para variar, já não comia uma sandes de pão pita acabado de cozer a muito tempo …"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
@@ -801,7 +801,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "Então agora que temos as minas e os alimentos para as sustentar, devíamos transformar em coisas úteis os que os nossos bravos mineiros trazem ao cimo. O minério de ferro tem de ser derretido para fazer o ferro que irá ser levado para o forjado nas coisas que quisermos. E precisamos de carvão para manter o forno da Fundição a trabalhar."
+msgstr "Então agora que temos as minas e os alimentos para as sustentar, devíamos transformar em coisas úteis os que os nossos bravos mineiros trazem ao cimo. O minério de ferro tem de ser derretido para fazer o ferro que irá ser levado para o forjado nas coisas que quisermos. E precisamos de carvão para manter o forno da fundição a trabalhar."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:439
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
@@ -891,7 +891,7 @@ msgstr "Que fixe ! Os nossos telhados deixaram de pingar e já temos os materiai
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 msgid "We Need Oxen!"
-msgstr "Precisamos de Bois !"
+msgstr "Precisamos de bois !"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
@@ -925,7 +925,7 @@ msgstr "O Thron diz …"
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr "No outro dia o Bolderano pediu-me que o acompanhasse à nova Estalagem. Isso deixaria-me muito feliz - disse-me ele."
+msgstr "No outro dia o Bolderano pediu-me que o acompanhasse à nova hospedaria. Isso deixaria-me muito feliz - disse-me ele."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
