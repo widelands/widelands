@@ -137,7 +137,6 @@ void InteractiveGameBase::postload() {
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	// NOCOM this is broken in trunk already.
 	toggle_buildhelp_.set_perm_pressed(value);
 }
 
