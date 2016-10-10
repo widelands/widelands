@@ -117,9 +117,8 @@ void Table<void*>::add_column(uint32_t const width,
 		columns_.push_back(c);
 	}
 	if (!scrollbar_) {
-		scrollbar_ =
-		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-		                 Scrollbar::kSize, get_h() - headerheight_, false);
+		scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
+		                           get_h() - headerheight_, false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);
 		scrollbar_->set_singlestepsize(lineheight_);
@@ -522,6 +521,17 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 		return columns_[sort_column_].compare(b, a);
 	else
 		return columns_[sort_column_].compare(a, b);
+}
+
+void Table<void*>::layout() {
+	// NOCOM we can only finish this once we have a flexible column (being worked on in some other
+	// branch)
+	if (scrollbar_) {
+		scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
+		scrollbar_->set_pos(Point(get_w() - Scrollbar::kSize, headerheight_));
+		scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
+		scrollbar_->set_steps(entry_records_.size() * get_lineheight() - get_h() - headerheight_);
+	}
 }
 
 /**

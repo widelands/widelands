@@ -35,7 +35,7 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 }
 
 void FullscreenMenuIntro::fit_to_screen() {
-	; // Pressing any key will leave the intro, so no need to implement this here
+	;  // Pressing any key will leave the intro, so no need to implement this here
 }
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {

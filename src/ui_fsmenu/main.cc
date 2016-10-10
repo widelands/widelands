@@ -202,6 +202,7 @@ void FullscreenMenuMain::fit_to_screen() {
 	copyright.set_pos(Point(0, get_h() - 2 * text_height));
 	gpl.set_pos(Point(0, get_h() - text_height));
 
+	// NOCOM button resizing is broken
 	playtutorial.set_size(butw_, buth_);
 	singleplayer.set_size(butw_, buth_);
 	multiplayer.set_size(butw_, buth_);

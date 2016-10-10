@@ -264,6 +264,7 @@ private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
+	void layout() override;
 
 	struct Column;
 	using Columns = std::vector<Column>;

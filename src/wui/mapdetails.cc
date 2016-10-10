@@ -29,6 +29,7 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "graphic/font_handler1.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -74,16 +75,17 @@ MapDetails::MapDetails(
 
      style_(style),
      padding_(4),
-     main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
+	  max_h_(max_h),
+	  main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
                  0,
                  0,
-                 max_w - padding_,
-                 20,
+					  0,
+					  0,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, max_w, 20, ""),
+	  descr_(&main_box_, 0, 0, 0, 0, ""),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w)) {
 	name_label_.force_new_renderer();
@@ -92,9 +94,14 @@ MapDetails::MapDetails(
 	main_box_.add(&name_label_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.set_size(
-	   max_w, max_h);  // We need to initialize the width, set_max_height will set the height
-	set_max_height(max_h);
+	layout();
+}
+
+void MapDetails::layout() {
+	max_h_ = get_h();
+	name_label_.set_size(get_w() - padding_, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
+								2);
+	update_layout();
 }
 
 void MapDetails::clear() {
@@ -112,11 +119,11 @@ void MapDetails::update_layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
-		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
+		main_box_.set_size(get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
 	} else {
-		main_box_.set_size(main_box_.get_w(), max_h_);
+		main_box_.set_size(get_w(), max_h_);
 	}
-	descr_.set_size(descr_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
+	descr_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 	descr_.scroll_to_top();
 }
 

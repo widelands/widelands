@@ -41,6 +41,7 @@ public:
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
+	void layout() override;
 	const Style style_;
 	const int padding_;
 	int max_h_;
