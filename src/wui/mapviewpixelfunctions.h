@@ -60,35 +60,41 @@ void normalize_pix(const Widelands::Map&, Point& p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.
-inline void get_basepix(const Widelands::Coords& c, int32_t& px, int32_t& py) {
-	py = c.y * kTriangleHeight;
-	px = c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2);
+inline void get_basepix(const Widelands::Coords& c, const float zoom, int32_t* px, int32_t* py) {
+	*py = c.y * kTriangleHeight * zoom;
+	*px = c.x * kTriangleWidth * zoom + (c.y & 1) * (kTriangleWidth * zoom / 2);
 }
 
 /**
  * Calculate the on-screen position of the node.
  */
-inline void get_pix(const Widelands::FCoords& fc, int32_t& px, int32_t& py) {
-	get_basepix(fc, px, py);
+inline void get_pix(const Widelands::FCoords& fc, const float zoom, int32_t* px, int32_t* py) {
+	get_basepix(fc, zoom, px, py);
 	py -= fc.field->get_height() * kHeightFactor;
 }
 
-inline void
-get_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int32_t& py) {
-	get_pix(map.get_fcoords(c), px, py);
+inline void get_pix(const Widelands::Map& map,
+                    const Widelands::Coords& c,
+                    const float zoom,
+                    int32_t* px,
+                    int32_t* py) {
+	get_pix(map.get_fcoords(c), zoom, px, py);
 }
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
-inline void
-get_save_pix(const Widelands::Map& map, const Widelands::Coords& c, int32_t& px, int32_t& py) {
+inline void get_save_pix(const Widelands::Map& map,
+                         const Widelands::Coords& c,
+                         const float zoom,
+                         int32_t* px,
+                         int32_t* py) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);
 	fc.x = c.x;
 	fc.y = c.y;
-	get_pix(fc, px, py);
+	get_pix(fc, zoom, px, py);
 }
 
 }  // namespace MapviewPixelFunctions

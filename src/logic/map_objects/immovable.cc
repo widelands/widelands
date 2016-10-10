@@ -445,7 +445,8 @@ void Immovable::draw(const EditorGameBase& game,
                      const Point& pos) {
 	if (anim_) {
 		if (!anim_construction_total_)
-			dst.blit_animation(pos, anim_, game.get_gametime() - animstart_);
+			// NOCOM(#sirver): requires zoom
+			dst.blit_animation(pos, 1.f, anim_, game.get_gametime() - animstart_);
 		else
 			draw_construction(game, dst, pos);
 	}
@@ -483,11 +484,13 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.blit_animation(pos, anim_, (current_frame - 1) * frametime, player_color);
+		// NOCOM(#sirver): requires zoom
+		dst.blit_animation(pos, 1.f, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
-	dst.blit_animation(pos, anim_, current_frame * frametime, player_color,
+	// NOCOM(#sirver): requires zoom
+	dst.blit_animation(pos, 1.f, anim_, current_frame * frametime, player_color,
 	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string

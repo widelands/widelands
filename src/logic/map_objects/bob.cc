@@ -691,6 +691,7 @@ void Bob::move_update(Game& game, State&) {
 /// pos is the location, in pixels, of the node position_ (height is already
 /// taken into account).
 Point Bob::calc_drawpos(const EditorGameBase& game, const Point pos) const {
+	// NOCOM(#sirver): requires zoom.
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
@@ -758,10 +759,12 @@ void Bob::draw(const EditorGameBase& egbase, RenderTarget& dst, const Point& pos
 	if (anim_) {
 		auto* const owner = get_owner();
 		if (owner != nullptr) {
-			dst.blit_animation(calc_drawpos(egbase, pos), anim_, egbase.get_gametime() - animstart_,
+			// NOCOM(#sirver): requires zoom
+			dst.blit_animation(calc_drawpos(egbase, pos), 1.f, anim_, egbase.get_gametime() - animstart_,
 			                   owner->get_playercolor());
 		} else {
-			dst.blit_animation(calc_drawpos(egbase, pos), anim_, egbase.get_gametime() - animstart_);
+			// NOCOM(#sirver): requires zoom
+			dst.blit_animation(calc_drawpos(egbase, pos),  1.f,anim_, egbase.get_gametime() - animstart_);
 		}
 	}
 }

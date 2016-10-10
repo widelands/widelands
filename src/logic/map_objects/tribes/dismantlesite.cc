@@ -225,7 +225,8 @@ void DismantleSite::draw(const EditorGameBase& game,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst.blit_animation(pos, anim_, tanim, player_color);
+	// NOCOM(#sirver): requires zoom
+	dst.blit_animation(pos, 1.f, anim_, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
@@ -247,7 +248,8 @@ void DismantleSite::draw(const EditorGameBase& game,
 
 	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
 
-	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
+	// NOCOM(#sirver): zoom
+	dst.blit_animation(pos, 1.f, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_info(game, dst, pos);

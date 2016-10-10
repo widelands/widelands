@@ -596,8 +596,9 @@ void Building::draw(const EditorGameBase& game,
                     const FCoords& coords,
                     const Point& pos) {
 	if (coords == position_) {  // draw big buildings only once
+		// NOCOM(#sirver): requires zoom
 		dst.blit_animation(
-		   pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
+		   pos, 1.f, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 

@@ -229,7 +229,8 @@ void WatchWindow::think() {
 	if (upcast(Widelands::Bob, bob, views[cur_index].tracking.get(game()))) {
 		Point pos;
 
-		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), pos.x, pos.y);
+		// NOCOM(#sirver): needs zoom
+		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), 1.f, &pos.x, &pos.y);
 		pos = bob->calc_drawpos(game(), pos);
 
 		Widelands::Map& map = game().map();
@@ -289,7 +290,9 @@ void WatchWindow::do_follow() {
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob* const bob = bobs[i];
 			Point p;
-			MapviewPixelFunctions::get_pix(map, bob->get_position(), p.x, p.y);
+			// NOCOM(#sirver): needs zoom
+			// NOCOM(#sirver): function should take Point
+			MapviewPixelFunctions::get_pix(map, bob->get_position(), 1.f, &p.x, &p.y);
 			p = bob->calc_drawpos(g, p);
 			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 			InteractivePlayer* ipl = game().get_ipl();

@@ -142,16 +142,21 @@ void GameRenderer::draw(RenderTarget& dst,
                         const EditorGameBase& egbase,
                         const Point& view_offset,
                         const Player* player) {
+	// NOCOM(#sirver): this should be a parameter
+	const float zoom = 0.5;
 	Point tl_map = dst.get_offset() + view_offset;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
-	int minfx = tl_map.x / kTriangleWidth - 1;
-	int minfy = tl_map.y / kTriangleHeight - 1;
-	int maxfx = (tl_map.x + dst.get_rect().w + (kTriangleWidth / 2)) / kTriangleWidth;
-	int maxfy = (tl_map.y + dst.get_rect().h) / kTriangleHeight;
+	float triangle_width = kTriangleWidth * zoom;
+	float triangle_height = kTriangleHeight * zoom;
+	int minfx = std::floor(tl_map.x / triangle_width) - 1;
+	int minfy = std::floor(tl_map.y / triangle_height) - 1;
+	int maxfx = std::ceil((tl_map.x + dst.get_rect().w) / triangle_width) + 1;
+	int maxfy = std::ceil((tl_map.y + dst.get_rect().h) / triangle_height) + 1;
 
+	// NOCOM(#sirver): weird? correct!
 	// fudge for triangle boundary effects and for height differences
 	minfx -= 1;
 	minfy -= 1;
@@ -171,7 +176,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 	const uint32_t gametime = egbase.get_gametime();
 
-	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
+	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy, zoom);
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
@@ -182,7 +187,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			Coords coords(fx, fy);
 			int x, y;
-			MapviewPixelFunctions::get_basepix(coords, x, y);
+			MapviewPixelFunctions::get_basepix(coords, zoom, &x, &y);
 
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
@@ -203,7 +208,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			f.brightness = field_brightness(fcoords, gametime, map, player);
 
-			PlayerNumber owner_number = fcoords.field->get_owned_by();
+			const PlayerNumber owner_number = fcoords.field->get_owned_by();
 			if (owner_number > 0) {
 				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
 			} else {
@@ -228,14 +233,15 @@ void GameRenderer::draw(RenderTarget& dst,
 	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
 	RenderQueue::instance().enqueue(i);
 
+	// NOCOM(#sirver): bring back
 	// Enqueue the drawing of the dither layer.
-	i.program_id = RenderQueue::Program::kTerrainDither;
-	i.blend_mode = BlendMode::UseAlpha;
-	RenderQueue::instance().enqueue(i);
+	// i.program_id = RenderQueue::Program::kTerrainDither;
+	// i.blend_mode = BlendMode::UseAlpha;
+	// RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
-	i.program_id = RenderQueue::Program::kTerrainRoad;
-	RenderQueue::instance().enqueue(i);
+	// i.program_id = RenderQueue::Program::kTerrainRoad;
+	// RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
 }
@@ -249,6 +255,9 @@ void GameRenderer::draw_objects(RenderTarget& dst,
                                 int minfy,
                                 int maxfy) {
 	// TODO(sirver): this should use FieldsToDraw. Would simplify this function a lot.
+	// // NOCOM(#sirver): pass in zoom
+	const float zoom = 0.5;
+
 	static const uint32_t F = 0;
 	static const uint32_t R = 1;
 	static const uint32_t BL = 2;
@@ -266,11 +275,12 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			coords[BL] = map.bl_n(coords[F]);
 			coords[BR] = map.br_n(coords[F]);
 			Point pos[4];
-			MapviewPixelFunctions::get_basepix(Coords(fx, fy), pos[F].x, pos[F].y);
-			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), pos[R].x, pos[R].y);
+			MapviewPixelFunctions::get_basepix(Coords(fx, fy), zoom, &pos[F].x, &pos[F].y);
+			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), zoom, &pos[R].x, &pos[R].y);
 			MapviewPixelFunctions::get_basepix(
-			   Coords(fx + (fy & 1) - 1, fy + 1), pos[BL].x, pos[BL].y);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), pos[BR].x, pos[BR].y);
+			   Coords(fx + (fy & 1) - 1, fy + 1), zoom, &pos[BL].x, &pos[BL].y);
+			MapviewPixelFunctions::get_basepix(
+			   Coords(fx + (fy & 1), fy + 1), zoom, &pos[BR].x, &pos[BR].y);
 			for (uint32_t d = 0; d < 4; ++d) {
 				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
 				pos[d] -= view_offset;
@@ -300,11 +310,11 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 				const Player& owner = egbase.player(owner_number[F]);
 				uint32_t const anim_idx = owner.tribe().frontier_animation();
 				if (vision[F])
-					dst.blit_animation(pos[F], anim_idx, 0, owner.get_playercolor());
+					dst.blit_animation(pos[F], zoom, anim_idx, 0, owner.get_playercolor());
 				for (uint32_t d = 1; d < 4; ++d) {
 					if ((vision[F] || vision[d]) && isborder[d] &&
 					    (owner_number[d] == owner_number[F] || !owner_number[d])) {
-						dst.blit_animation(middle(pos[F], pos[d]), anim_idx, 0, owner.get_playercolor());
+						dst.blit_animation(middle(pos[F], pos[d]), zoom, anim_idx, 0, owner.get_playercolor());
 					}
 				}
 			}
@@ -349,7 +359,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 
 						if (cur_frame) {  // not the first frame
 							// draw the prev frame from top to where next image will be drawing
-							dst.blit_animation(pos[F], anim_idx, tanim - FRAME_LENGTH,
+							dst.blit_animation(pos[F], zoom, anim_idx, tanim - FRAME_LENGTH,
 							                   owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
 						} else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
@@ -360,11 +370,11 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 							} catch (MapObjectDescr::AnimationNonexistent&) {
 								a = csinf.was->get_animation("idle");
 							}
-							dst.blit_animation(pos[F], a, tanim - FRAME_LENGTH, owner->get_playercolor(),
+							dst.blit_animation(pos[F], zoom, a, tanim - FRAME_LENGTH, owner->get_playercolor(),
 							                   Rect(Point(0, 0), w, h - lines));
 						}
 						assert(lines <= h);
-						dst.blit_animation(pos[F], anim_idx, tanim, owner->get_playercolor(),
+						dst.blit_animation(pos[F], zoom, anim_idx, tanim, owner->get_playercolor(),
 						                   Rect(Point(0, h - lines), w, lines));
 					} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 						assert(owner != nullptr);
@@ -375,16 +385,16 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 						} catch (MapObjectDescr::AnimationNonexistent&) {
 							pic = building->get_animation("idle");
 						}
-						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
+						dst.blit_animation(pos[F], zoom, pic, 0, owner->get_playercolor());
 					} else if (map_object_descr->type() == MapObjectType::FLAG) {
 						assert(owner != nullptr);
 						dst.blit_animation(
-						   pos[F], owner->tribe().flag_animation(), 0, owner->get_playercolor());
+						   pos[F], zoom, owner->tribe().flag_animation(), 0, owner->get_playercolor());
 					} else if (const uint32_t pic = map_object_descr->main_animation()) {
 						if (owner != nullptr) {
-							dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
+							dst.blit_animation(pos[F], zoom, pic, 0, owner->get_playercolor());
 						} else {
-							dst.blit_animation(pos[F], pic, 0);
+							dst.blit_animation(pos[F], zoom, pic, 0);
 						}
 					}
 				}

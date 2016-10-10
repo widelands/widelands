@@ -4971,13 +4971,15 @@ int LuaField::set_raw_height(lua_State* L) {
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
 	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
+	// NOCOM(#sirver): needs zoom
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, 1.f, &px, &py);
 	lua_pushint32(L, px);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State* L) {
 	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
+	// NOCOM(#sirver): needs zoom
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, 1.f, &px, &py);
 	lua_pushint32(L, py);
 	return 1;
 }

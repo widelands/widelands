@@ -102,15 +102,17 @@ public:
 	          const Point& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
 
-	// Draw the 'animation' as it should appear at 'time' in this target at 'dst'. Optionally, the
-	// animation is
-	// tinted with 'player_color' and cropped to 'source_rect'.
-	void blit_animation(const Point& dst, uint32_t animation, uint32_t time);
+	// Draw the 'animation' as it should appear at 'time' in this target at
+	// 'dst'. Optionally, the animation is tinted with 'player_color' and
+	// cropped to 'source_rect'.
+	void blit_animation(const Point& dst, float zoom, uint32_t animation, uint32_t time);
 	void blit_animation(const Point& dst,
+	                    float zoom,
 	                    uint32_t animation,
 	                    uint32_t time,
 	                    const RGBColor& player_color);
 	void blit_animation(const Point& dst,
+	                    float zoom,
 	                    uint32_t animation,
 	                    uint32_t time,
 	                    const RGBColor& player_color,
@@ -134,6 +136,7 @@ protected:
 
 	// Does the actual blitting.
 	void do_blit_animation(const Point& dst,
+	                       const float zoom,
 	                       const Animation& animation,
 	                       uint32_t time,
 	                       const RGBColor* player_color,

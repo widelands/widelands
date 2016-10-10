@@ -294,37 +294,40 @@ void RenderTarget::tile(const Rect& rect,
 // TODO(unknown): Correctly calculate the stereo position for sound effects
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
-void RenderTarget::blit_animation(const Point& dst, uint32_t animation, uint32_t time) {
+void RenderTarget::blit_animation(const Point& dst, const float zoom, uint32_t animation, uint32_t time) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(dst, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
+	do_blit_animation(dst, zoom, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
 void RenderTarget::blit_animation(const Point& dst,
+		const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 	do_blit_animation(
-	   dst, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
+	   dst, zoom, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
 void RenderTarget::blit_animation(const Point& dst,
+                                  const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color,
                                   const Rect& source_rect) {
 	do_blit_animation(
-	   dst, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
+	   dst, zoom, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
 }
 
 void RenderTarget::do_blit_animation(const Point& dst,
+                                     const float zoom,
                                      const Animation& animation,
                                      uint32_t time,
                                      const RGBColor* player_color,
                                      const Rect& source_rect) {
-	Rect destination_rect(dst.x - animation.hotspot().x + source_rect.x,
-	                      dst.y - animation.hotspot().y + source_rect.y, source_rect.w,
-	                      source_rect.h);
+	Rect destination_rect(dst.x - (animation.hotspot().x + source_rect.x) * zoom,
+	                      dst.y - (animation.hotspot().y + source_rect.y) * zoom,
+	                      source_rect.w * zoom, source_rect.h * zoom);
 	Rect srcrc(source_rect);
 	if (to_surface_geometry(&destination_rect, &srcrc)) {
 		animation.blit(time, destination_rect.origin(), srcrc, player_color, surface_);

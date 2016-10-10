@@ -22,9 +22,6 @@
 
 #include <cmath>
 
-// hm, floats...
-// tried to be faster with fixed point arithmetics
-// it was, but i'll try to find other opts first
 struct Vector {
 	Vector() : x(0), y(0), z(0) {
 	}
@@ -32,8 +29,8 @@ struct Vector {
 	}
 
 	void normalize() {
-		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
-		if (fabs(f) < 0.00001)  // check for ==0
+		const float f = static_cast<float>(std::sqrt(x * x + y * y + z * z));
+		if (std::fabs(f) < 0.00001f)  // check for ==0
 			return;
 		x /= f;
 		y /= f;

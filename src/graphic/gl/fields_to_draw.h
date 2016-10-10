@@ -46,11 +46,12 @@ public:
 	FieldsToDraw() = default;
 
 	// Resize this fields to draw for reuse.
-	void reset(int minfx, int maxfx, int minfy, int maxfy) {
+	void reset(int minfx, int maxfx, int minfy, int maxfy, float zoom) {
 		min_fx_ = minfx;
 		max_fx_ = maxfx;
 		min_fy_ = minfy;
 		max_fy_ = maxfy;
+		zoom_ = zoom;
 		w_ = max_fx_ - min_fx_ + 1;
 		h_ = max_fy_ - min_fy_ + 1;
 		const size_t dimension = w_ * h_;
@@ -89,6 +90,9 @@ public:
 	}
 
 private:
+	// Zoom factor: 2 means triangles have double the size.
+	float zoom_;
+
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	int min_fx_;
 	int max_fx_;

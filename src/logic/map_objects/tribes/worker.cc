@@ -2516,11 +2516,13 @@ void Worker::draw_inner(const EditorGameBase& game, RenderTarget& dst, const Poi
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
+	// NOCOM(#sirver): requires zoom
 	dst.blit_animation(
-	   drawpos, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	   drawpos, 1.f, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		dst.blit_animation(drawpos - descr().get_ware_hotspot(),
+		// NOCOM(#sirver): requires zoom
+		dst.blit_animation(drawpos - descr().get_ware_hotspot(), 1.f,
 		                   carried_ware->descr().get_animation("idle"), 0, player_color);
 	}
 }

@@ -48,7 +48,8 @@ MapView::~MapView() {
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map& map = intbase().egbase().map();
 	Point p;
-	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
+	// NOCOM(#sirver): needs zoom
+	MapviewPixelFunctions::get_save_pix(map, c, 1.f, &p.x, &p.y);
 	p -= viewpoint_;
 
 	//  If the user has scrolled the node outside the viewable area, he most

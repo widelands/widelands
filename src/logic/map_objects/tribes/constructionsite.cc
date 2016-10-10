@@ -309,7 +309,8 @@ void ConstructionSite::draw(const EditorGameBase& game,
 
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst.blit_animation(pos, anim_, tanim, player_color);
+	// NOCOM(#sirver): requires zoom.
+	dst.blit_animation(pos, 1.f, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -351,8 +352,9 @@ void ConstructionSite::draw(const EditorGameBase& game,
 
 	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
+		//  NOCOM(#sirver): requires zoom
 		dst.blit_animation(
-		   pos, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
+		   pos, 1.f, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
@@ -366,13 +368,15 @@ void ConstructionSite::draw(const EditorGameBase& game,
 		}
 		const Animation& prev_building_anim =
 		   g_gr->animations().get_animation(prev_building_anim_idx);
-		dst.blit_animation(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
+		// NOCOM(#sirver): requires zoom.
+		dst.blit_animation(pos, 1.f, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
 		                   Rect(Point(0, 0), prev_building_anim.width(),
 		                        std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
+	// NOCOM(#sirver): requires zoom
+	dst.blit_animation(pos, 1.f, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_info(game, dst, pos);
