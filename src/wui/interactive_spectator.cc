@@ -94,10 +94,10 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
+	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
+	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
 	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
+		btn.set_perm_pressed(true);
 
 	INIT_BTN_HOOKS(chat_, toggle_chat_)
 	INIT_BTN_HOOKS(options_, toggle_options_menu_)

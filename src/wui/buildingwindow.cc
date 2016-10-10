@@ -431,10 +431,10 @@ void BuildingWindow::configure_workarea_button() {
 	if (toggle_workarea_) {
 		if (workarea_overlay_id_) {
 			toggle_workarea_->set_tooltip(_("Hide work area"));
-			toggle_workarea_->set_style(UI::Button::Style::kPermpressed);
+			toggle_workarea_->set_perm_pressed(true);
 		} else {
 			toggle_workarea_->set_tooltip(_("Show work area"));
-			toggle_workarea_->set_style(UI::Button::Style::kRaised);
+			toggle_workarea_->set_perm_pressed(false);
 		}
 	}
 }

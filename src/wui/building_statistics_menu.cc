@@ -724,7 +724,7 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 
 	// Update for current button
 	current_building_type_ = id;
-	building_buttons_[current_building_type_]->set_style(UI::Button::Style::kPermpressed);
+	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	low_production_reset_focus();
 	has_selection_ = true;

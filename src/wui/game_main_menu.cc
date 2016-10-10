@@ -84,10 +84,10 @@ GameMainMenu::GameMainMenu(InteractivePlayer& plr,
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	assert(!registry.on_create);                                                                    \
 	assert(!registry.on_delete);                                                                    \
-	registry.on_create = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kPermpressed);  \
-	registry.on_delete = std::bind(&UI::Button::set_style, &btn, UI::Button::Style::kRaised);       \
+	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
+	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
 	if (registry.window)                                                                            \
-		btn.set_style(UI::Button::Style::kPermpressed);
+		btn.set_perm_pressed(true);
 
 	INIT_BTN_HOOKS(windows_.general_stats, general_stats)
 	INIT_BTN_HOOKS(windows_.ware_stats, ware_stats)

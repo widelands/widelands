@@ -247,7 +247,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
-			tribe->set_style(UI::Button::Style::kRaised);
+			tribe->set_perm_pressed(false);
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
@@ -258,7 +258,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
-			tribe->set_style(UI::Button::Style::kRaised);
+			tribe->set_perm_pressed(false);
 			init->set_visible(false);
 			init->set_enabled(false);
 			return;
@@ -321,7 +321,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribe->set_tooltip(tribenames_[player_setting.tribe].c_str());
 				tribe->set_pic(tribepics_[player_setting.tribe]);
 			}
-			tribe->set_style(UI::Button::Style::kRaised);
+			tribe->set_perm_pressed(false);
 
 			if (player_setting.team) {
 				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
