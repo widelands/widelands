@@ -326,7 +326,8 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 	position_pix.x -= vp.x;
 	position_pix.y -= vp.y;
 	// Normalizing correct invalid pixel coordinates
-	MapviewPixelFunctions::normalize_pix(egbase_->map(), position_pix);
+	// NOCOM(#sirver): needs zoom
+	MapviewPixelFunctions::normalize_pix(egbase_->map(), 1.f, &position_pix);
 
 	// Make sure position is inside viewport
 	if (position_pix.x >= 0 && position_pix.x <= xres && position_pix.y >= 0 &&

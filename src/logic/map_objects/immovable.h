@@ -91,7 +91,24 @@ struct BaseImmovable : public MapObject {
 	 * if one can be chosen as main.
 	 */
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
-	virtual void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) = 0;
+
+	// Draw this immovable onto 'dst' choosing the frame appropriate for
+	// 'gametime'. 'show_text' decides if census and statistics are written too.
+	// The 'coords_to_draw' are passed one to give objects that occupy multiple
+	// fields a way to only draw themselves once. The 'point_on_dst' determines
+	// the point for the hotspot of the animation and 'zoom' determines how big
+	// the immovable will be plotted.
+	enum ShowText {
+		kNone = 0,
+		kCensus = 1,
+		kStatistics = 2,
+	};
+	virtual void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+				 float zoom,
+	          RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);
@@ -212,8 +229,12 @@ public:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+	          float zoom,
+	          RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
 	bool construct_ware(Game& game, DescriptionIndex index);
@@ -289,8 +310,11 @@ public:
 
 private:
 	void increment_program_pointer();
-
-	void draw_construction(const EditorGameBase&, RenderTarget&, Point);
+	void draw_construction(uint32_t gametime,
+	                       ShowText show_text,
+	                       const Point& point_on_dst,
+	                       float zoom,
+	                       RenderTarget* dst);
 };
 
 /**

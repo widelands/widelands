@@ -26,30 +26,36 @@
 
 namespace Widelands {
 
-void Flag::draw(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos) {
+// NOCOM(#sirver): move this to flag.cc?
+void Flag::draw(uint32_t gametime,
+                const ShowText,
+                const Coords&,
+                const Point& point_on_dst,
+                float zoom,
+                RenderTarget* dst) {
 	static struct {
 		int32_t x, y;
 	} ware_offsets[8] = {{-5, 1}, {-1, 3}, {3, 3}, {7, 1}, {-6, -3}, {-1, -2}, {3, -2}, {8, -3}};
 
 	const RGBColor& player_color = owner().get_playercolor();
-	// NOCOM(#sirver): requires zoom.
-	dst.blit_animation(
-	   pos, 1.f, owner().tribe().flag_animation(), game.get_gametime() - animstart_, player_color);
+	dst->blit_animation(
+	   point_on_dst, zoom, owner().tribe().flag_animation(), gametime - animstart_, player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
-		Point warepos = pos;
+		Point warepos = point_on_dst;
 		if (i < 8) {
-			// NOCOM(#sirver): must take zoom into account too.
-			warepos.x += ware_offsets[i].x;
-			warepos.y += ware_offsets[i].y;
-		} else
-			warepos.y -= 6 + (i - 8) * 3;
-		// NOCOM(#sirver): requires zoom
-		dst.blit_animation(warepos, 1.f, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
+			warepos.x += ware_offsets[i].x * zoom;
+			warepos.y += ware_offsets[i].y * zoom;
+		} else {
+			warepos.y -= (6 + (i - 8) * 3) * zoom;
+		}
+		dst->blit_animation(
+		   warepos, zoom, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) {
+void Road::draw(uint32_t, const ShowText, const Coords&, const Point&, float, RenderTarget*) {
 }
+
 }

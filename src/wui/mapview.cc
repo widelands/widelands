@@ -36,20 +36,18 @@ MapView::MapView(
      renderer_(new GameRenderer()),
      intbase_(player),
      viewpoint_(Point(0, 0)),
+	  zoom_(1.0),
      dragging_(false) {
 }
 
 MapView::~MapView() {
-	// explicit destructor so that smart pointer destructors
-	// with forward-declared types are properly instantiated
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map& map = intbase().egbase().map();
 	Point p;
-	// NOCOM(#sirver): needs zoom
-	MapviewPixelFunctions::get_save_pix(map, c, 1.f, &p.x, &p.y);
+	MapviewPixelFunctions::get_save_pix(map, c, zoom_, &p.x, &p.y);
 	p -= viewpoint_;
 
 	//  If the user has scrolled the node outside the viewable area, he most
@@ -84,9 +82,9 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		renderer_->rendermap(dst, egbase, viewpoint_, interactive_player->player());
+		renderer_->rendermap(egbase, viewpoint_, zoom_, interactive_player->player(), &dst);
 	} else {
-		renderer_->rendermap(dst, egbase, viewpoint_);
+		renderer_->rendermap(egbase, viewpoint_, zoom_, &dst);
 	}
 }
 
@@ -100,14 +98,14 @@ Set the viewpoint to the given pixel coordinates
 ===============
 */
 void MapView::set_viewpoint(Point vp, bool jump) {
-	if (vp == viewpoint_)
-		return;
-
-	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), vp);
+	// NOCOM(#sirver): was this actually correct, changing this to take zoom? Maybe we keep this without zoom?
+	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), zoom_, &vp);
 	viewpoint_ = vp;
 
-	if (changeview_)
+	// NOCOM(#sirver): why are there 2 callback functions?
+	if (changeview_) {
 		changeview_(vp, jump);
+	}
 	changeview(viewpoint_.x, viewpoint_.y);
 }
 
@@ -136,17 +134,13 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 	}
 	return true;
 }
+
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_)
 		stop_dragging();
 	return true;
 }
 
-/*
-===============
-Scroll the view according to mouse movement.
-===============
-*/
 bool MapView::handle_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (dragging_) {
@@ -161,6 +155,25 @@ bool MapView::handle_mousemove(
 	return true;
 }
 
+bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
+	if (which != 0) {
+		return false;
+	}
+
+	// NOCOM(#sirver): this should keep the center point in the center, but
+	// keeps the top left point centered.
+	Point point(viewpoint_.x / zoom_, viewpoint_.y / zoom_);
+
+	zoom_ += 0.01 * y;
+
+	point.x *= zoom_;
+	point.y *= zoom_;
+
+	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), 1., &point);
+	set_viewpoint(point, false);
+	return true;
+}
+
 /*
 ===============
 MapView::track_sel(int32_t mx, int32_t my)
@@ -170,7 +183,9 @@ Does not honour sel freeze.
 ===============
 */
 void MapView::track_sel(Point m) {
-	m += viewpoint_;
+	// NOCOM(#sirver): this is also wrong.
+	m.x = m.x * zoom_ + viewpoint_.x / zoom_;
+	m.y = m.y * zoom_ + viewpoint_.y / zoom_;
 	intbase_.set_sel_pos(
 	   MapviewPixelFunctions::calc_node_and_triangle(intbase().egbase().map(), m.x, m.y));
 }

@@ -764,7 +764,8 @@ void Bob::draw(const EditorGameBase& egbase, RenderTarget& dst, const Point& pos
 			                   owner->get_playercolor());
 		} else {
 			// NOCOM(#sirver): requires zoom
-			dst.blit_animation(calc_drawpos(egbase, pos),  1.f,anim_, egbase.get_gametime() - animstart_);
+			dst.blit_animation(
+			   calc_drawpos(egbase, pos), 1.f, anim_, egbase.get_gametime() - animstart_);
 		}
 	}
 }

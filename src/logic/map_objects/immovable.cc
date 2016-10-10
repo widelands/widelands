@@ -324,7 +324,6 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
  * Create an immovable of this type
 */
 Immovable& ImmovableDescr::create(EditorGameBase& egbase, const Coords& coords) const {
-	assert(this != nullptr);
 	Immovable& result = *new Immovable(*this);
 	result.position_ = coords;
 	result.init(egbase);
@@ -439,20 +438,27 @@ void Immovable::act(Game& game, uint32_t const data) {
 	}
 }
 
-void Immovable::draw(const EditorGameBase& game,
-                     RenderTarget& dst,
-                     const FCoords&,
-                     const Point& pos) {
-	if (anim_) {
-		if (!anim_construction_total_)
-			// NOCOM(#sirver): requires zoom
-			dst.blit_animation(pos, 1.f, anim_, game.get_gametime() - animstart_);
-		else
-			draw_construction(game, dst, pos);
+void Immovable::draw(uint32_t gametime,
+                     const ShowText show_text,
+                     const Coords&,
+                     const Point& point_on_dst,
+                     float zoom,
+                     RenderTarget* dst) {
+	if (!anim_) {
+		return;
+	}
+	if (!anim_construction_total_) {
+		dst->blit_animation(point_on_dst, zoom, anim_, gametime - animstart_);
+	} else {
+		draw_construction(gametime, show_text, point_on_dst, zoom, dst);
 	}
 }
 
-void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst, const Point pos) {
+void Immovable::draw_construction(const uint32_t gametime,
+                                  const ShowText show_text,
+                                  const Point& point_on_dst,
+                                  const float zoom,
+                                  RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;
 	if (program_ptr_ < program_->size())
 		constructionact =
@@ -463,7 +469,7 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	uint32_t done = 0;
 	if (anim_construction_done_ > 0) {
 		done = steptime * (anim_construction_done_ - 1);
-		done += std::min(steptime, game.get_gametime() - animstart_);
+		done += std::min(steptime, gametime - animstart_);
 	}
 
 	uint32_t total = anim_construction_total_ * steptime;
@@ -484,23 +490,20 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		// NOCOM(#sirver): requires zoom
-		dst.blit_animation(pos, 1.f, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(point_on_dst, zoom, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
-	// NOCOM(#sirver): requires zoom
-	dst.blit_animation(pos, 1.f, anim_, current_frame * frametime, player_color,
+	dst->blit_animation(point_on_dst, zoom, anim_, current_frame * frametime, player_color,
 	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	uint32_t const display_flags = game.get_ibase()->get_display_flags();
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, descr().descname(),
-	             display_flags & InteractiveBase::dfShowStatistics,
+	do_draw_info(show_text & ShowText::kCensus, descr().descname(),
+	             show_text & ShowText::kStatistics,
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
-	             dst, pos);
+	             *dst, point_on_dst);
 }
 
 /**

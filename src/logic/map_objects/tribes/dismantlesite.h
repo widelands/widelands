@@ -89,7 +89,12 @@ protected:
 
 	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+				 float zoom,
+	          RenderTarget* dst) override;
 };
 }
 

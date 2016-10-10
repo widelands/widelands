@@ -445,6 +445,7 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
+// NOCOM(#sirver): pass down showtext and maybe zoom?
 void MapObject::do_draw_info(bool show_census,
                              const std::string& census,
                              bool show_statictics,

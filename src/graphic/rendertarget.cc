@@ -300,7 +300,7 @@ void RenderTarget::blit_animation(const Point& dst, const float zoom, uint32_t a
 }
 
 void RenderTarget::blit_animation(const Point& dst,
-		const float zoom,
+                                  const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color) {
@@ -330,7 +330,7 @@ void RenderTarget::do_blit_animation(const Point& dst,
 	                      source_rect.w * zoom, source_rect.h * zoom);
 	Rect srcrc(source_rect);
 	if (to_surface_geometry(&destination_rect, &srcrc)) {
-		animation.blit(time, destination_rect.origin(), srcrc, player_color, surface_);
+		animation.blit(time, destination_rect, srcrc, player_color, surface_);
 	}
 
 	// Look if there is a sound effect registered for this frame and trigger the

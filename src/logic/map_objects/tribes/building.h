@@ -311,8 +311,14 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
-	void draw_info(const EditorGameBase&, RenderTarget&, const Point&);
+	void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+				 float zoom,
+	          RenderTarget* dst) override;
+	// NOCOM(#sirver): requires zoom?
+	void draw_info(ShowText show_text, const Point& point_on_dst, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

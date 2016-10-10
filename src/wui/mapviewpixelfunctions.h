@@ -56,7 +56,7 @@ inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
  */
 Widelands::NodeAndTriangle<> calc_node_and_triangle(const Widelands::Map&, uint32_t x, uint32_t y);
 
-void normalize_pix(const Widelands::Map&, Point& p);
+void normalize_pix(const Widelands::Map& map, const float zoom, Point* p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.

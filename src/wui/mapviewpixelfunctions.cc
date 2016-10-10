@@ -68,8 +68,8 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
 Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point b) {
-	normalize_pix(map, a);
-	normalize_pix(map, b);
+	normalize_pix(map, 1.f, &a);
+	normalize_pix(map, 1.f, &b);
 
 	Point diff = a - b;
 
@@ -93,8 +93,8 @@ Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point 
  * taking wrap-arounds into account.
 */
 uint32_t MapviewPixelFunctions::calc_pix_distance(const Map& map, Point a, Point b) {
-	normalize_pix(map, a);
-	normalize_pix(map, b);
+	normalize_pix(map, 1.f, &a);
+	normalize_pix(map, 1.f, &b);
 	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
@@ -262,19 +262,27 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 /**
  * Normalize pixel points of the map.
 */
-void MapviewPixelFunctions::normalize_pix(const Map& map, Point& p) {
+void MapviewPixelFunctions::normalize_pix(const Map& map, const float zoom, Point* p) {
+	float x = p->x;
+	float y = p->y;
 	{
-		const int32_t map_end_screen_x = get_map_end_screen_x(map);
-		while (p.x >= map_end_screen_x)
-			p.x -= map_end_screen_x;
-		while (p.x < 0)
-			p.x += map_end_screen_x;
+		const float map_end_screen_x = get_map_end_screen_x(map) * zoom;
+		while (x >= map_end_screen_x) {
+			x -= map_end_screen_x;
+		}
+		while (x < 0) {
+			x += map_end_screen_x;
+		}
 	}
 	{
-		const int32_t map_end_screen_y = get_map_end_screen_y(map);
-		while (p.y >= map_end_screen_y)
-			p.y -= map_end_screen_y;
-		while (p.y < 0)
-			p.y += map_end_screen_y;
+		const float map_end_screen_y = get_map_end_screen_y(map) * zoom;
+		while (y >= map_end_screen_y) {
+			y -= map_end_screen_y;
+		}
+		while (y < 0) {
+			y += map_end_screen_y;
+		}
 	}
+	p->x = static_cast<int>(std::round(x));
+	p->y = static_cast<int>(std::round(y));
 }

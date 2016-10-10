@@ -297,20 +297,20 @@ void ConstructionSite::wares_queue_callback(Game& game,
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw(const EditorGameBase& game,
-                            RenderTarget& dst,
-                            const FCoords& coords,
-                            const Point& pos) {
-	const uint32_t gametime = game.get_gametime();
+void ConstructionSite::draw(uint32_t gametime,
+                            ShowText show_text,
+                            const Coords& coords_to_draw,
+                            const Point& point_on_dst,
+                            float zoom,
+                            RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-
-	if (coords != position_)
+	// NOCOM(#sirver): can this be hoisted outsite of the draw function?
+	if (coords_to_draw != position_)
 		return;  // draw big buildings only once
 
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	// NOCOM(#sirver): requires zoom.
-	dst.blit_animation(pos, 1.f, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, zoom, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -352,9 +352,8 @@ void ConstructionSite::draw(const EditorGameBase& game,
 
 	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		//  NOCOM(#sirver): requires zoom
-		dst.blit_animation(
-		   pos, 1.f, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
+		dst->blit_animation(point_on_dst, zoom, anim_idx, tanim - FRAME_LENGTH, player_color,
+		                    Rect(Point(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
@@ -368,17 +367,17 @@ void ConstructionSite::draw(const EditorGameBase& game,
 		}
 		const Animation& prev_building_anim =
 		   g_gr->animations().get_animation(prev_building_anim_idx);
-		// NOCOM(#sirver): requires zoom.
-		dst.blit_animation(pos, 1.f, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
-		                   Rect(Point(0, 0), prev_building_anim.width(),
-		                        std::min<int>(prev_building_anim.height(), h - lines)));
+		dst->blit_animation(point_on_dst, zoom, prev_building_anim_idx, tanim - FRAME_LENGTH,
+		                    player_color,
+		                    Rect(Point(0, 0), prev_building_anim.width(),
+		                         std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	// NOCOM(#sirver): requires zoom
-	dst.blit_animation(pos, 1.f, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
+	dst->blit_animation(
+	   point_on_dst, zoom, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_info(game, dst, pos);
+	draw_info(show_text, point_on_dst, dst);
 }
 }

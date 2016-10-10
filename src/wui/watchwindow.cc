@@ -273,7 +273,8 @@ void WatchWindow::do_follow() {
 		//  therefore not of interest.
 		Point pos(mapview.get_viewpoint() + Point(mapview.get_w() / 2, mapview.get_h() / 2));
 		Widelands::Map& map = g.map();
-		MapviewPixelFunctions::normalize_pix(map, pos);
+		// NOCOM(#sirver): needs zoom
+		MapviewPixelFunctions::normalize_pix(map, 1.f, &pos);
 		std::vector<Widelands::Bob*> bobs;
 		//  Scan progressively larger circles around the given position for
 		//  suitable bobs.

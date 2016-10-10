@@ -71,8 +71,11 @@ public:
 	const Point& hotspot() const override;
 	Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(
-	   uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const override;
+	virtual void blit(uint32_t time,
+	                  const Rect& dstrc,
+	                  const Rect& srcrc,
+	                  const RGBColor* clr,
+	                  Surface*) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 private:
@@ -256,18 +259,16 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 }
 
 void NonPackedAnimation::blit(
-   uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
+   uint32_t time, const Rect& dstrc, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
 	assert(target);
 
 	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
 	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(
-		   Rect(dst.x, dst.y, srcrc.w, srcrc.h), *frames_.at(idx), srcrc, 1., BlendMode::UseAlpha);
+		target->blit(dstrc, *frames_.at(idx), srcrc, 1., BlendMode::UseAlpha);
 	} else {
-		target->blit_blended(
-		   Rect(dst.x, dst.y, srcrc.w, srcrc.h), *frames_.at(idx), *pcmasks_.at(idx), srcrc, *clr);
+		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), srcrc, *clr);
 	}
 }
 

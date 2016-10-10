@@ -586,24 +586,22 @@ bool Building::fetch_from_flag(Game&) {
 	return false;
 }
 
-/*
-===============
-Draw the building.
-===============
-*/
-void Building::draw(const EditorGameBase& game,
-                    RenderTarget& dst,
-                    const FCoords& coords,
-                    const Point& pos) {
-	if (coords == position_) {  // draw big buildings only once
-		// NOCOM(#sirver): requires zoom
-		dst.blit_animation(
-		   pos, 1.f, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
+
+// NOCOM(#sirver): ShowText -> DrawText?
+void Building::draw(uint32_t gametime,
+                    const ShowText show_text,
+                    const Coords& coords_to_draw,
+                    const Point& point_on_dst,
+                    float zoom,
+                    RenderTarget* dst) {
+	if (coords_to_draw == position_) {  // draw big buildings only once
+		dst->blit_animation(
+		   point_on_dst, zoom, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 
 		//  overlay strings (draw when enabled)
-		draw_info(game, dst, pos);
+		draw_info(show_text, point_on_dst, dst);
 	}
 }
 
@@ -612,24 +610,22 @@ void Building::draw(const EditorGameBase& game,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Point& pos) {
-	const InteractiveGameBase& igbase = dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
-	uint32_t const display_flags = igbase.get_display_flags();
-
-	bool show_statistics_string = display_flags & InteractiveBase::dfShowStatistics;
+void Building::draw_info(const ShowText show_text, const Point& point_on_dst, RenderTarget* dst) {
+	bool show_statistics_string = show_text & ShowText::kStatistics;
 	if (show_statistics_string) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase)) {
-			if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
-				show_statistics_string = false;
-			}
-		}
+		// NOCOM(#sirver): this has to be handled further up.
+		// if (upcast(InteractivePlayer const, iplayer, &igbase)) {
+			// if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
+				// show_statistics_string = false;
+			// }
+		// }
 	}
 	const std::string statistics_string =
 	   show_statistics_string ? info_string(InfoStringFormat::kStatistics) : "";
 
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus,
+	do_draw_info(show_text & ShowText::kCensus,
 	             info_string(InfoStringFormat::kCensus), show_statistics_string, statistics_string,
-	             dst, pos);
+	             *dst, point_on_dst);
 }
 
 int32_t

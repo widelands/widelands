@@ -84,6 +84,8 @@ struct MapView : public UI::Panel {
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 
 	void track_sel(Point m);
 
@@ -99,6 +101,7 @@ private:
 	InteractiveBase& intbase_;
 	ChangeViewFn changeview_;
 	Point viewpoint_;
+	float zoom_;
 	bool dragging_;
 };
 

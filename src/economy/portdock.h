@@ -96,7 +96,12 @@ public:
 
 	Flag& base_flag() override;
 	PositionList get_positions(const EditorGameBase&) const override;
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+				 float zoom,
+	          RenderTarget* dst) override;
 
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

@@ -106,7 +106,7 @@ public:
 		RGBAColor color;
 		FloatRect destination_rect;
 	};
-
+	
 	// TODO(sirver): these are really triangle arguments.
 	struct LineArguments {
 		std::vector<DrawLineProgram::PerVertexData> vertices;
@@ -121,6 +121,7 @@ public:
 		int renderbuffer_height;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
+		float zoom;
 		FloatRect destination_rect;
 	};
 

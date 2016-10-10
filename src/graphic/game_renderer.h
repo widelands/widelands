@@ -51,33 +51,38 @@ public:
 	// Renders the map from a player's point of view into the given
 	// drawing window. 'view_offset' is the offset of the upper left
 	// corner of the window into the map, in pixels.
-	void rendermap(RenderTarget& dst,
-	               const Widelands::EditorGameBase& egbase,
+	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Point& view_offset,
-	               const Widelands::Player& player);
+	               float zoom,
+	               const Widelands::Player& player,
+	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
-	void
-	rendermap(RenderTarget& dst, const Widelands::EditorGameBase& egbase, const Point& view_offset);
+	void rendermap(const Widelands::EditorGameBase& egbase,
+	               const Point& view_offset,
+	               float zoom,
+	               RenderTarget* dst);
 
 private:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
-	void draw(RenderTarget& dst,
-	          const Widelands::EditorGameBase& egbase,
+	void draw(const Widelands::EditorGameBase& egbase,
 	          const Point& view_offset,
-	          const Widelands::Player* player);
+				 float zoom,
+	          const Widelands::Player* player,
+	          RenderTarget* dst);
 
 	// Draws the objects (animations & overlays).
-	void draw_objects(RenderTarget& dst,
-	                  const Widelands::EditorGameBase& egbase,
+	void draw_objects(const Widelands::EditorGameBase& egbase,
 	                  const Point& view_offset,
 	                  const Widelands::Player* player,
 	                  int minfx,
 	                  int maxfx,
 	                  int minfy,
-	                  int maxfy);
+	                  int maxfy,
+	                  float zoom,
+	                  RenderTarget* dst);
 
 	// This is owned and handled by us, but handed to the RenderQueue, so we
 	// basically promise that this stays valid for one frame.

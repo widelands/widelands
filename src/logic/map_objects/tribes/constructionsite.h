@@ -114,7 +114,12 @@ protected:
 
 	static void wares_queue_callback(Game&, WaresQueue*, DescriptionIndex, void* data);
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          ShowText show_text,
+	          const Coords& coords_to_draw,
+	          const Point& point_on_dst,
+				 float zoom,
+	          RenderTarget* dst) override;
 
 private:
 	int32_t fetchfromflag_;  // # of wares to fetch from flag
