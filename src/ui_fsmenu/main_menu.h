@@ -20,6 +20,7 @@
 #ifndef WL_UI_FSMENU_MAIN_MENU_H
 #define WL_UI_FSMENU_MAIN_MENU_H
 
+#include "ui_basic/box.h"
 #include "ui_fsmenu/base.h"
 
 /**
@@ -37,12 +38,15 @@ public:
 	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
-	const uint32_t box_x_, box_y_;
-	const uint32_t butw_, buth_;
-	const uint32_t title_y_;
-	const uint32_t padding_;
+	void layout() override;
+
+	uint32_t box_x_, box_y_;
+	uint32_t butw_, buth_;
+	uint32_t title_y_;
+	uint32_t padding_;
 
 	const std::string button_background_;
+	UI::Box vbox;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H

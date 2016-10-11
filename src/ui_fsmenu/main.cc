@@ -29,14 +29,6 @@ FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
 
      // Buttons
-     // This box needs to be a bit higher than in the other menus, because we have a lot of buttons
-     vbox(this,
-          box_x_,
-          box_y_ - buth_,
-          UI::Box::Vertical,
-          butw_,
-          get_h() - (box_y_ - buth_),
-          padding_),
      playtutorial(&vbox,
                   "play_tutorial",
                   0,
@@ -129,14 +121,14 @@ FullscreenMenuMain::FullscreenMenuMain()
      // Textlabels
      version(
         this,
-        get_w(),
-        get_h(),
+        0,
+        0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
         (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
         UI::Align::kBottomRight),
      copyright(this,
                0,
-               get_h() - 0.5 * buth_,
+               0,
                /** TRANSLATORS: Placeholders are the copyright years */
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
@@ -144,7 +136,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                UI::Align::kBottomLeft),
      gpl(this,
          0,
-         get_h(),
+         0,
          _("Licensed under the GNU General Public License V2.0"),
          UI::Align::kBottomLeft) {
 	playtutorial.sigclicked.connect(
@@ -172,33 +164,46 @@ FullscreenMenuMain::FullscreenMenuMain()
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox.add(&playtutorial, UI::Align::kHCenter);
-	vbox.add(&singleplayer, UI::Align::kHCenter);
-	vbox.add(&multiplayer, UI::Align::kHCenter);
+	vbox.add(&playtutorial, UI::Align::kHCenter, true);
+	vbox.add(&singleplayer, UI::Align::kHCenter, true);
+	vbox.add(&multiplayer, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&replay, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&editor, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&options, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&about, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&exit, UI::Align::kHCenter, true);
 
-	vbox.add_space(2 * padding_);
-
-	vbox.add(&replay, UI::Align::kHCenter);
-
-	vbox.add_space(2 * padding_);
-
-	vbox.add(&editor, UI::Align::kHCenter);
-
-	vbox.add_space(2 * padding_);
-
-	vbox.add(&options, UI::Align::kHCenter);
-
-	vbox.add_space(2 * padding_);
-
-	vbox.add(&about, UI::Align::kHCenter);
-
-	vbox.add_space(5 * padding_);
-
-	vbox.add(&exit, UI::Align::kHCenter);
-
-	vbox.set_size(butw_, get_h() - vbox.get_y());
+	layout();
 }
 
 void FullscreenMenuMain::clicked_ok() {
 	;  // do nothing
+}
+
+void FullscreenMenuMain::layout() {
+	FullscreenMenuMainMenu::layout();
+	const int text_height = 0.5 * version.get_h() + padding_;
+	version.set_pos(Point(get_w() - version.get_w(), get_h() - text_height));
+	copyright.set_pos(Point(0, get_h() - 2 * text_height));
+	gpl.set_pos(Point(0, get_h() - text_height));
+
+	playtutorial.set_desired_size(butw_, buth_);
+	singleplayer.set_desired_size(butw_, buth_);
+	multiplayer.set_desired_size(butw_, buth_);
+	replay.set_desired_size(butw_, buth_);
+	editor.set_desired_size(butw_, buth_);
+	options.set_desired_size(butw_, buth_);
+	about.set_desired_size(butw_, buth_);
+	exit.set_desired_size(butw_, buth_);
+
+	// This box needs to be positioned a bit higher than in the other menus, because we have a lot of
+	// buttons
+	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_inner_spacing(padding_);
+	vbox.set_size(butw_, get_h() - vbox.get_y() - 5 * padding_);
 }
