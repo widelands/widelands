@@ -26,42 +26,36 @@
 
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),
-
-     // Values for alignment and size
-     butw_(get_w() / 5),
-     buth_(get_h() * 9 / 200),
-     hmargin_(get_w() * 19 / 200),
-     tab_panel_width_(get_inner_w() - 2 * hmargin_),
-     tab_panel_y_(get_h() * 14 / 100),
-
-     title_(this, get_w() / 2, buth_, _("About Widelands"), UI::Align::kCenter),
-
-     close_(this,
-            "close",
-            get_w() * 2 / 4 - butw_ / 2,
-            get_inner_h() - hmargin_,
-            butw_,
-            buth_,
-            g_gr->images().get("images/ui_basic/but2.png"),
-            _("Close"),
-            std::string(),
-            true,
-            false),
-
+     title_(this, 0, 0, _("About Widelands"), UI::Align::kCenter),
+     close_(this, "close", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("Close")),
      tabs_(this,
-           hmargin_,
            0,
-           tab_panel_width_,
-           get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
+           0,
+           0,
+           0,
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
-
 	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");
-
 	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
+	layout();
+}
+
+void FullscreenMenuAbout::layout() {
+	// Values for alignment and size
+	butw_ = get_w() / 5;
+	buth_ = get_h() * 9 / 200;
+	hmargin_ = get_w() * 19 / 200;
+	tab_panel_width_ = get_inner_w() - 2 * hmargin_;
+	tab_panel_y_ = get_h() * 14 / 100;
+
+	title_.set_size(get_w(), title_.get_h());
+	title_.set_pos(Point(0, buth_));
+	close_.set_size(butw_, buth_);
+	close_.set_pos(Point(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
+	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
 }
