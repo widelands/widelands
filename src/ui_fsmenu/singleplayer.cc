@@ -27,10 +27,9 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, get_w() / 2, title_y_, _("Single Player"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Single Player"), UI::Align::kHCenter),
 
      // Buttons
-     vbox(this, box_x_, box_y_, UI::Box::Vertical, butw_, get_h() - box_y_, padding_),
      new_game(&vbox,
               "new_game",
               0,
@@ -90,20 +89,34 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox.add(&new_game, UI::Align::kHCenter);
-	vbox.add(&campaign, UI::Align::kHCenter);
+	vbox.add(&new_game, UI::Align::kHCenter, true);
+	vbox.add(&campaign, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add(&load_game, UI::Align::kHCenter, true);
+	vbox.add_inf_space();
+	vbox.add_inf_space();
+	vbox.add_inf_space();
+	vbox.add(&back, UI::Align::kHCenter, true);
 
-	vbox.add_space(buth_);
-
-	vbox.add(&load_game, UI::Align::kHCenter);
-
-	vbox.add_space(6 * buth_);
-
-	vbox.add(&back, UI::Align::kHCenter);
-
-	vbox.set_size(butw_, get_h() - vbox.get_y());
+	layout();
 }
 
 void FullscreenMenuSinglePlayer::clicked_ok() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
+}
+
+void FullscreenMenuSinglePlayer::layout() {
+	title.set_size(get_w(), title.get_h());
+	FullscreenMenuMainMenu::layout();
+
+	title.set_pos(Point(0, title_y_));
+
+	new_game.set_desired_size(butw_, buth_);
+	campaign.set_desired_size(butw_, buth_);
+	load_game.set_desired_size(butw_, buth_);
+	back.set_desired_size(butw_, buth_);
+
+	vbox.set_pos(Point(box_x_, box_y_));
+	vbox.set_inner_spacing(padding_);
+	vbox.set_size(butw_, get_h() - vbox.get_y() - 3 * title_y_);
 }
