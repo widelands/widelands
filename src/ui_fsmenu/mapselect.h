@@ -52,7 +52,7 @@ protected:
 	void fill_table() override;
 
 private:
-	void fit_to_screen() override;
+	void layout() override;
 
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);

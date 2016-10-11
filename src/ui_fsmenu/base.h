@@ -83,7 +83,6 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
-	virtual void fit_to_screen() = 0;
 	virtual void clicked_back();
 	virtual void clicked_ok();
 

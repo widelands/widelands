@@ -36,7 +36,7 @@ protected:
 	void clicked_ok() override;
 
 private:
-	void fit_to_screen() override;
+	void layout() override;
 
 	UI::Button playtutorial;
 	UI::Button singleplayer;

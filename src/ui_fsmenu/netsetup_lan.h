@@ -57,7 +57,7 @@ protected:
 	void clicked_ok() override;
 
 private:
-	void fit_to_screen() override;
+	void layout() override;
 
 	uint32_t butx_;
 	uint32_t butw_;

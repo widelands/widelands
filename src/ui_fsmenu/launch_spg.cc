@@ -192,7 +192,7 @@ FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 	delete lua_;
 }
 
-void FullscreenMenuLaunchSPG::fit_to_screen() {
+void FullscreenMenuLaunchSPG::layout() {
 	// TODO(GunChleoc): Implement when we have redesigned this
 }
 

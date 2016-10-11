@@ -41,10 +41,10 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");
 	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
-	fit_to_screen();
+	layout();
 }
 
-void FullscreenMenuAbout::fit_to_screen() {
+void FullscreenMenuAbout::layout() {
 	// Values for alignment and size
 	butw_ = get_w() / 5;
 	buth_ = get_h() * 9 / 200;

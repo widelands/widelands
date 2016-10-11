@@ -38,8 +38,6 @@ protected:
 	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
-	void fit_to_screen() override;
-
 	UI::Textarea message_;
 };
 

@@ -33,7 +33,7 @@ public:
 	FullscreenMenuAbout();
 
 private:
-	void fit_to_screen() override;
+	void layout() override;
 
 	uint32_t butw_;
 	uint32_t buth_;

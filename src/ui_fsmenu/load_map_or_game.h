@@ -54,7 +54,7 @@ public:
 	FullscreenMenuLoadMapOrGame();
 
 protected:
-	void fit_to_screen() override;
+	void layout() override;
 
 	// Updates the information display on the right-hand side.
 	// Call this function when a different entry in the table gets selected.

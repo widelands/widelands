@@ -114,7 +114,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	fill_table();
 }
 
-void FullscreenMenuCampaignSelect::fit_to_screen() {
+void FullscreenMenuCampaignSelect::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
@@ -354,7 +354,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.focus();
 }
 
-void FullscreenMenuCampaignMapSelect::fit_to_screen() {
+void FullscreenMenuCampaignMapSelect::layout() {
 	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 

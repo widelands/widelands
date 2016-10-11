@@ -51,7 +51,7 @@ FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
-		   fit_to_screen();
+		   layout();
 		});
 }
 

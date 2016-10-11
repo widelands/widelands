@@ -52,10 +52,10 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
          _("OK"),
          std::string(),
          false) {
-	fit_to_screen();
+	layout();
 }
 
-void FullscreenMenuLoadMapOrGame::fit_to_screen() {
+void FullscreenMenuLoadMapOrGame::layout() {
 	// UI coordinates and spacers
 	tablex_ = get_w() * 47 / 2500;
 	tabley_ = get_h() * 17 / 50;

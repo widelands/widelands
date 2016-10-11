@@ -135,7 +135,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	joingame.set_enabled(false);
 }
 
-void FullscreenMenuNetSetupLAN::fit_to_screen() {
+void FullscreenMenuNetSetupLAN::layout() {
 	// NOCOM implement
 }
 

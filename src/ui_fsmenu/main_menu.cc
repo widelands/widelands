@@ -37,7 +37,7 @@ FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_ima
      vbox(this, 0, 0, UI::Box::Vertical, 0, 0, padding_) {
 }
 
-void FullscreenMenuMainMenu::fit_to_screen() {
+void FullscreenMenuMainMenu::layout() {
 	box_x_ = get_w() * 13 / 40;
 	box_y_ = get_h() * 6 / 25;
 	butw_ = get_w() * 7 / 20;

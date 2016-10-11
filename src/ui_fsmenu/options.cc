@@ -398,7 +398,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	language_list_.focus();
 }
 
-void FullscreenMenuOptions::fit_to_screen() {
+void FullscreenMenuOptions::layout() {
 	// NOCOM implement
 }
 

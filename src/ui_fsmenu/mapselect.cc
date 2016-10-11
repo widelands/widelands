@@ -119,12 +119,12 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	fit_to_screen();
+	layout();
 }
 
-void FullscreenMenuMapSelect::fit_to_screen() {
+void FullscreenMenuMapSelect::layout() {
 	title_.set_size(get_w(), title_.get_h());
-	FullscreenMenuLoadMapOrGame::fit_to_screen();
+	FullscreenMenuLoadMapOrGame::layout();
 	checkboxes_y_ = tabley_ - 4 * (cb_show_all_maps_->get_h() + checkbox_padding_) - 2 * padding_;
 	title_.set_pos(Point(0, checkboxes_y_ / 3));
 	checkboxes_.set_pos(Point(tablex_, checkboxes_y_));

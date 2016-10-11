@@ -61,7 +61,7 @@ protected:
 	void clicked_back() override;
 
 private:
-	void fit_to_screen() override;
+	void layout() override;
 
 	LuaInterface* lua_;
 

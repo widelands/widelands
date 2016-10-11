@@ -38,7 +38,7 @@ public:
 	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
-	void fit_to_screen() override;
+	void layout() override;
 
 	uint32_t box_x_, box_y_;
 	uint32_t butw_, buth_;
