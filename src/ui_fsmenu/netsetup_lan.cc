@@ -136,7 +136,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 }
 
 void FullscreenMenuNetSetupLAN::layout() {
-	// NOCOM implement
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 void FullscreenMenuNetSetupLAN::think() {

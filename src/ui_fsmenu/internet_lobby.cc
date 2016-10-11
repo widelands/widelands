@@ -160,7 +160,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 }
 
 void FullscreenMenuInternetLobby::layout() {
-	// NOCOM implement
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 /// think function of the UI (main loop)
