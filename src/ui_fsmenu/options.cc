@@ -93,58 +93,22 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
    : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
 
      // Values for alignment and size
-     butw_(get_w() / 5),
-     buth_(get_h() * 9 / 200),
-     hmargin_(get_w() * 19 / 200),
      padding_(10),
-     tab_panel_width_(get_inner_w() - 2 * hmargin_),
-     column_width_(tab_panel_width_ - padding_),
-     tab_panel_y_(get_h() * 14 / 100),
 
      // Title
-     title_(this, get_w() / 2, buth_, _("Options"), UI::Align::kHCenter),
+     title_(this, 0, 0, _("Options"), UI::Align::kHCenter),
 
      // Buttons
      cancel_(
-        this,
-        "cancel",
-        UI::g_fh1->fontset()->is_rtl() ? get_w() * 3 / 4 - butw_ / 2 : get_w() * 1 / 4 - butw_ / 2,
-        get_inner_h() - hmargin_,
-        butw_,
-        buth_,
-        g_gr->images().get("images/ui_basic/but0.png"),
-        _("Cancel"),
-        std::string(),
-        true,
-        false),
-     apply_(this,
-            "apply",
-            get_w() * 2 / 4 - butw_ / 2,
-            get_inner_h() - hmargin_,
-            butw_,
-            buth_,
-            g_gr->images().get("images/ui_basic/but0.png"),
-            _("Apply"),
-            std::string(),
-            true,
-            false),
-     ok_(this,
-         "ok",
-         UI::g_fh1->fontset()->is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
-         get_inner_h() - hmargin_,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("OK"),
-         std::string(),
-         true,
-         false),
+        this, "cancel", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Cancel")),
+     apply_(this, "apply", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Apply")),
+     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
 
      tabs_(this,
-           hmargin_,
            0,
-           tab_panel_width_,
-           get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
+           0,
+           0,
+           0,
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder),
 
@@ -157,32 +121,23 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
-     resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, true),
+     resolution_list_(&box_interface_, 0, 0, 0, 0, true),
 
-     fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
-     inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
+     fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", 0),
+     inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", 0),
 
-     sb_maxfps_(&box_interface_,
-                0,
-                0,
-                column_width_ / 2,
-                column_width_ / 4,
-                opt.maxfps,
-                0,
-                99,
-                _("Maximum FPS:")),
+     sb_maxfps_(&box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Point(0, 0), _("Snap windows only when overlapping"), "", column_width_),
-     dock_windows_to_edges_(
-        &box_windows_, Point(0, 0), _("Dock windows to edges"), "", column_width_),
+        &box_windows_, Point(0, 0), _("Snap windows only when overlapping"), "", 0),
+     dock_windows_to_edges_(&box_windows_, Point(0, 0), _("Dock windows to edges"), "", 0),
 
      sb_dis_panel_(&box_windows_,
                    0,
                    0,
-                   column_width_,
-                   200,
+                   0,
+                   0,
                    opt.panel_snap_distance,
                    0,
                    99,
@@ -192,8 +147,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      sb_dis_border_(&box_windows_,
                     0,
                     0,
-                    column_width_,
-                    200,
+                    0,
+                    0,
                     opt.border_snap_distance,
                     0,
                     99,
@@ -201,17 +156,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
-     fx_(&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", column_width_),
-     message_sound_(
-        &box_sound_, Point(0, 0), _("Play a sound at message arrival"), "", column_width_),
+     music_(&box_sound_, Point(0, 0), _("Enable Music"), "", 0),
+     fx_(&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", 0),
+     message_sound_(&box_sound_, Point(0, 0), _("Play a sound at message arrival"), "", 0),
 
      // Saving options
      sb_autosave_(&box_saving_,
                   0,
                   0,
-                  column_width_,
-                  250,
+                  0,
+                  0,
                   opt.autosave / 60,
                   0,
                   100,
@@ -223,8 +177,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      sb_rolling_autosave_(&box_saving_,
                           0,
                           0,
-                          column_width_,
-                          250,
+                          0,
+                          0,
                           opt.rolling_autosave,
                           1,
                           20,
@@ -237,21 +191,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
           Point(0, 0),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
-          column_width_),
-     write_syncstreams_(&box_saving_,
-                        Point(0, 0),
-                        _("Write syncstreams in network games to debug desyncs"),
-                        "",
-                        column_width_),
+          0),
+     write_syncstreams_(
+        &box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs"), "", 0),
 
      // Game options
      auto_roadbuild_mode_(&box_game_, Point(0, 0), _("Start building road after placing a flag")),
      show_workarea_preview_(&box_game_, Point(0, 0), _("Show buildings area preview")),
-     transparent_chat_(&box_game_,
-                       Point(0, 0),
-                       _("Show in-game chat with transparent background"),
-                       "",
-                       column_width_),
+     transparent_chat_(
+        &box_game_, Point(0, 0), _("Show in-game chat with transparent background"), "", 0),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
@@ -259,12 +207,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Language options
      label_language_(&box_language_, _("Language"), UI::Align::kLeft),
-     language_list_(&box_language_,
-                    0,
-                    0,
-                    column_width_ / 2,
-                    get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
-                    true),
+     language_list_(&box_language_, 0, 0, 0, 0, true),
 
      os_(opt) {
 	// Set up UI Elements
@@ -281,8 +224,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	if (os_.active_tab < tabs_.tabs().size()) {
 		tabs_.activate(os_.active_tab);
 	}
-
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_windows_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
@@ -396,10 +337,74 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Language options
 	add_languages_to_list(opt.language);
 	language_list_.focus();
+	layout();
 }
 
 void FullscreenMenuOptions::layout() {
-	// NOCOM implement
+
+	// Values for alignment and size
+	butw_ = get_w() / 5;
+	buth_ = get_h() * 9 / 200;
+	hmargin_ = get_w() * 19 / 200;
+	tab_panel_width_ = get_inner_w() - 2 * hmargin_;
+	column_width_ = tab_panel_width_ - padding_;
+	tab_panel_y_ = get_h() * 14 / 100;
+
+	// Title
+	title_.set_size(get_w(), title_.get_h());
+	title_.set_pos(Point(0, buth_));
+
+	// Buttons
+	cancel_.set_pos(Point(
+	   UI::g_fh1->fontset()->is_rtl() ? get_w() * 3 / 4 - butw_ / 2 : get_w() * 1 / 4 - butw_ / 2,
+	   get_inner_h() - hmargin_));
+	cancel_.set_size(butw_, buth_);
+
+	apply_.set_pos(Point(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
+	apply_.set_size(butw_, buth_);
+
+	ok_.set_pos(Point(
+	   UI::g_fh1->fontset()->is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
+	   get_inner_h() - hmargin_));
+	ok_.set_size(butw_, buth_);
+
+	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
+
+	// Interface
+	resolution_list_.set_desired_size(column_width_ / 2, 80);
+	fullscreen_.set_desired_size(column_width_, fullscreen_.get_h());
+	inputgrab_.set_desired_size(column_width_, inputgrab_.get_h());
+	sb_maxfps_.set_unit_width(column_width_ / 4);
+	sb_maxfps_.set_desired_size(column_width_ / 2, sb_maxfps_.get_h());
+
+	// Windows options
+	snap_win_overlap_only_.set_desired_size(column_width_, snap_win_overlap_only_.get_h());
+	dock_windows_to_edges_.set_desired_size(column_width_, dock_windows_to_edges_.get_h());
+	sb_dis_panel_.set_unit_width(200);
+	sb_dis_panel_.set_desired_size(column_width_, sb_dis_panel_.get_h());
+	sb_dis_border_.set_unit_width(200);
+	sb_dis_border_.set_desired_size(column_width_, sb_dis_border_.get_h());
+
+	// Sound options
+	music_.set_desired_size(column_width_, music_.get_h());
+	fx_.set_desired_size(column_width_, fx_.get_h());
+	message_sound_.set_desired_size(column_width_, message_sound_.get_h());
+
+	// Saving options
+	sb_autosave_.set_unit_width(250);
+	sb_autosave_.set_desired_size(column_width_, sb_autosave_.get_h());
+	sb_rolling_autosave_.set_unit_width(250);
+	sb_rolling_autosave_.set_desired_size(column_width_, sb_rolling_autosave_.get_h());
+	zip_.set_desired_size(column_width_, zip_.get_h());
+	write_syncstreams_.set_desired_size(column_width_, write_syncstreams_.get_h());
+
+	// Game options
+	transparent_chat_.set_desired_size(column_width_, transparent_chat_.get_h());
+
+	// Language options
+	language_list_.set_desired_size(
+	   column_width_ / 2, get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_);
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {

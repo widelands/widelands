@@ -106,13 +106,13 @@ private:
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 
-	uint32_t const butw_;
-	uint32_t const buth_;
-	uint32_t const hmargin_;
-	uint32_t const padding_;
-	uint32_t const tab_panel_width_;
-	uint32_t const column_width_;
-	uint32_t const tab_panel_y_;
+	const uint32_t padding_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t hmargin_;
+	uint32_t tab_panel_width_;
+	uint32_t column_width_;
+	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
 	UI::Button cancel_, apply_, ok_;
