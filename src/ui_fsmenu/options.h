@@ -25,6 +25,7 @@
 #include <string>
 #include <vector>
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"
@@ -115,6 +116,7 @@ private:
 	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
+	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 
 	// UI elements

@@ -88,7 +88,6 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-// TODO(GunChleoc): Arabic: This doesn't fit the window in Arabic.
 FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
    : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
 
@@ -99,11 +98,26 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      title_(this, 0, 0, _("Options"), UI::Align::kHCenter),
 
      // Buttons
-     cancel_(
-        this, "cancel", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Cancel")),
-     apply_(this, "apply", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Apply")),
-     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
+     button_box_(this, 0, 0, UI::Box::Horizontal),
+     cancel_(&button_box_,
+             "cancel",
+             0,
+             0,
+             0,
+             0,
+             g_gr->images().get("images/ui_basic/but0.png"),
+             _("Cancel")),
+     apply_(&button_box_,
+            "apply",
+            0,
+            0,
+            0,
+            0,
+            g_gr->images().get("images/ui_basic/but0.png"),
+            _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
 
+     // Tabs
      tabs_(this,
            0,
            0,
@@ -213,6 +227,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
+	// Buttons
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Align::kHCenter);
+	button_box_.add_inf_space();
+	button_box_.add(&apply_, UI::Align::kHCenter);
+	button_box_.add_inf_space();
+	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Align::kHCenter);
+
+	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
 	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
@@ -355,19 +377,13 @@ void FullscreenMenuOptions::layout() {
 	title_.set_pos(Point(0, buth_));
 
 	// Buttons
-	cancel_.set_pos(Point(
-	   UI::g_fh1->fontset()->is_rtl() ? get_w() * 3 / 4 - butw_ / 2 : get_w() * 1 / 4 - butw_ / 2,
-	   get_inner_h() - hmargin_));
-	cancel_.set_size(butw_, buth_);
+	cancel_.set_desired_size(butw_, buth_);
+	apply_.set_desired_size(butw_, buth_);
+	ok_.set_desired_size(butw_, buth_);
+	button_box_.set_pos(Point(hmargin_ + butw_ / 3, get_inner_h() - hmargin_));
+	button_box_.set_size(tab_panel_width_ - 2 * butw_ / 3, buth_);
 
-	apply_.set_pos(Point(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
-	apply_.set_size(butw_, buth_);
-
-	ok_.set_pos(Point(
-	   UI::g_fh1->fontset()->is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
-	   get_inner_h() - hmargin_));
-	ok_.set_size(butw_, buth_);
-
+	// Tabs
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
 
