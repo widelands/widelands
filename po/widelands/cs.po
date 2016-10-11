@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-01 07:52+0000\n"
-"PO-Revision-Date: 2016-10-02 10:09+0000\n"
+"POT-Creation-Date: 2016-10-07 07:04+0000\n"
+"PO-Revision-Date: 2016-10-09 09:34+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -782,7 +782,7 @@ msgstr "nepojmenovaný"
 #: ../../src/wui/game_main_menu_save_game.cc:232
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "Soubor s názvem '%s' již existuje. Chcete ho přepsat?"
+msgstr "Soubor s názvem \"%s\" již existuje. Chcete ho přepsat?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:260
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:274
@@ -1093,7 +1093,7 @@ msgstr "Nepřítel na tebe útočí"
 #: ../../src/logic/map_objects/tribes/production_program.cc:292
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "hospodářství potřebuje surovinu '%s'"
+msgstr "hospodářství potřebuje surovinu \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the

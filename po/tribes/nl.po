@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-24 07:02+0000\n"
-"PO-Revision-Date: 2016-09-26 22:13+0000\n"
+"POT-Creation-Date: 2016-10-07 07:04+0000\n"
+"PO-Revision-Date: 2016-10-08 18:52+0000\n"
 "Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -1266,7 +1266,7 @@ msgstr "De hoofdader van deze kolenmijn is uitgeput en het rendement is sterk ve
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deep Coal Mine"
-msgstr "Diepe kolenmijn"
+msgstr "Diepe Kolenmijn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:7
@@ -1343,7 +1343,7 @@ msgstr "De hoofdader van deze goudmijn is uitgeput en het rendement is sterk ver
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deep Gold Mine"
-msgstr "Diepe goudmijn"
+msgstr "Diepe Goudmijn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:7
@@ -1487,7 +1487,7 @@ msgstr "De houthakker die vanuit deze houthakkershut werkt kan geen bomen meer v
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
 msgctxt "barbarians_building"
 msgid "Metal Workshop"
-msgstr "Metaalbewerkerij"
+msgstr "Metaalwerkplaats"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1712,7 +1712,7 @@ msgstr "De hoofdader van deze kolenmijn is uitgeput en het rendement is sterk ve
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Coal Mine"
-msgstr "Diepe kolenmijn"
+msgstr "Diepe Kolenmijn"
 
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
 msgctxt "empire_building"
@@ -1781,7 +1781,7 @@ msgstr "De hoofdader van deze goudmijn is uitgeput en het rendement is sterk ver
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Gold Mine"
-msgstr "Diepe goudmijn"
+msgstr "Diepe Goudmijn"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:76
 msgctxt "empire_building"
@@ -1886,7 +1886,7 @@ msgstr "De hoofdader van deze marmermijn is uitgeput en het rendement is sterk v
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr "Diepe marmermijn"
+msgstr "Diepe Marmermijn"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:77
 msgctxt "empire_building"
@@ -2270,7 +2270,7 @@ msgstr "Hoofdkwartier"
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr "Hoofdkwartier scheepswrak"
+msgstr "Hoofdkwartier Scheepswrak"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/port/init.lua:7
@@ -2285,7 +2285,7 @@ msgid "Warehouse"
 msgstr "Magazijn"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "As"
@@ -2514,7 +2514,7 @@ msgstr "Barbaren"
 
 #: ../../data/tribes/preload.lua:18
 msgid "The mighty tribes of the east-lands."
-msgstr "De machtige stammen van het oosten."
+msgstr "De machtige stammen van het Oosten."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:33
@@ -2611,14 +2611,14 @@ msgid ""
 msgstr "Als deze speler van een belangrijk goed weinig voorraad heeft zal die automatisch worden aangevuld"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Schip"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Harnas"
@@ -3431,7 +3431,7 @@ msgstr "Hoofdmijnwerker"
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr "Meester Mijnwerker"
+msgstr "Meestermijnwerker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/ox/init.lua:19
@@ -3599,7 +3599,7 @@ msgstr "Mijnwerker"
 #: ../../data/tribes/workers/empire/miner_master/init.lua:17
 msgctxt "empire_worker"
 msgid "Master Miner"
-msgstr "Meester Mijnwerker"
+msgstr "Meestermijnwerker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:17
@@ -3617,7 +3617,7 @@ msgstr "Verkenner"
 #: ../../data/tribes/workers/empire/shepherd/init.lua:17
 msgctxt "empire_worker"
 msgid "Shepherd"
-msgstr "Schaapsherder"
+msgstr "Schapenboer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/shipwright/init.lua:26

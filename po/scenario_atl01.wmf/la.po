@@ -5,13 +5,15 @@
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015
+# Leonard Noack, 2016
+# Mark F <radick334@yahoo.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-07 07:04+0000\n"
+"PO-Revision-Date: 2016-10-08 19:53+0000\n"
+"Last-Translator: Mark F <radick334@yahoo.com>\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,19 +23,19 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Aedificium perditum!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Aedificium Oceanum āmīsīmus!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Aedificium perditum!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -53,11 +55,11 @@ msgstr "Lapidicinas aedifica"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Aedifica duas casas lignatoris"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Aedifica duas casas saltuarii"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -383,7 +385,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:173
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "Jundlina commentarium suam scribit"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:175
@@ -479,7 +481,7 @@ msgstr "Jundlina satisfacta"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:208
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "Commentarii Jundlinae"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:210
@@ -897,7 +899,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

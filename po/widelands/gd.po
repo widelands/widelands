@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-01 07:52+0000\n"
-"PO-Revision-Date: 2016-10-02 16:11+0000\n"
+"POT-Creation-Date: 2016-10-07 07:04+0000\n"
+"PO-Revision-Date: 2016-10-11 06:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -610,7 +610,7 @@ msgstr "Tagaichean:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:134
 #: ../../src/wui/suggested_teams_box.cc:102
 msgid "Suggested Teams:"
-msgstr "Sgiobaidhean a mholamaid:"
+msgstr "Sgiobaidhean molta:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:144
 #: ../../src/ui_fsmenu/launch_mpg.cc:651
@@ -2802,7 +2802,7 @@ msgstr "LAN / IP dìreach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:102
 msgid "Show login dialog"
-msgstr "Seall còmhradh clàraidh a-steach"
+msgstr "Seall an còmhradh clàraidh a-steach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:129
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/login_box.cc:66
