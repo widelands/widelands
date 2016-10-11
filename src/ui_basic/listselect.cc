@@ -302,6 +302,13 @@ uint32_t BaseListselect::get_eff_w() const {
 	return scrollbar_.is_enabled() ? get_w() - scrollbar_.get_w() : get_w();
 }
 
+void BaseListselect::layout() {
+	scrollbar_.set_size(scrollbar_.get_w(), get_h());
+	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
+	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
+	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+}
+
 /**
 Redraw the listselect box
 */

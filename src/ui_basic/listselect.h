@@ -96,6 +96,7 @@ struct BaseListselect : public Panel {
 	uint32_t get_lineheight() const;
 
 	uint32_t get_eff_w() const;
+	void layout() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
