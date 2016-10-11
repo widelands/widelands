@@ -25,6 +25,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
@@ -685,46 +686,51 @@ void Bob::move_update(Game& game, State&) {
 		return schedule_act(game, walkend_ - game.get_gametime());
 }
 
-/// Calculates the actual position to draw on from the base node position.
-/// This function takes walking etc. into account.
-///
-/// pos is the location, in pixels, of the node position_ (height is already
-/// taken into account).
-Point Bob::calc_drawpos(const EditorGameBase& game, const Point pos) const {
-	// NOCOM(#sirver): requires zoom.
+// Calculates the actual position to draw on from the base node position. This
+// function takes walking etc. into account.
+//
+// pos is the location, in pixels, of the node position_ on screen with zoom
+// and height taken into account.
+FloatPoint Bob::calc_drawpos(const EditorGameBase& game,
+                             const FloatPoint& field_on_dst,
+                             const float zoom) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
-	Point spos = pos, epos = pos;
+	FloatPoint spos = field_on_dst;
+	FloatPoint epos = field_on_dst;
+
+	const float triangle_w = kTriangleWidth * zoom;
+	const float triangle_h = kTriangleHeight * zoom;
 
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
-		spos.x += kTriangleWidth / 2;
-		spos.y += kTriangleHeight;
+		spos.x += triangle_w / 2.f;
+		spos.y += triangle_h;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
-		spos.x -= kTriangleWidth / 2;
-		spos.y += kTriangleHeight;
+		spos.x -= triangle_w / 2.f;
+		spos.y += triangle_h;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
-		spos.x += kTriangleWidth;
+		spos.x += triangle_w;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
-		spos.x -= kTriangleWidth;
+		spos.x -= triangle_w;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
-		spos.x += kTriangleWidth / 2;
-		spos.y -= kTriangleHeight;
+		spos.x += triangle_w / 2.f;
+		spos.y -= triangle_h;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
-		spos.x -= kTriangleWidth / 2;
-		spos.y -= kTriangleHeight;
+		spos.x -= triangle_w / 2.f;
+		spos.y -= triangle_h;
 		break;
 
 	case IDLE:
@@ -733,40 +739,38 @@ Point Bob::calc_drawpos(const EditorGameBase& game, const Point pos) const {
 	}
 
 	if (start.field) {
-		spos.y += end.field->get_height() * kHeightFactor;
-		spos.y -= start.field->get_height() * kHeightFactor;
+		spos.y += end.field->get_height() * kHeightFactor * zoom;
+		spos.y -= start.field->get_height() * kHeightFactor * zoom;
 
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
-		float f = static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_);
-
-		if (f < 0)
-			f = 0;
-		else if (f > 1)
-			f = 1;
-
-		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
-		epos.y = static_cast<int32_t>(f * epos.y + (1 - f) * spos.y);
+		const float f = math::clamp(
+				static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_),
+				0.f, 1.f);
+		epos.x = f * epos.x + (1.f - f) * spos.x;
+		epos.y = f * epos.y + (1.f - f) * spos.y;
 	}
-
 	return epos;
 }
 
 /// It LERPs between start and end position when we are walking.
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
-void Bob::draw(const EditorGameBase& egbase, RenderTarget& dst, const Point& pos) const {
-	if (anim_) {
-		auto* const owner = get_owner();
-		if (owner != nullptr) {
-			// NOCOM(#sirver): requires zoom
-			dst.blit_animation(calc_drawpos(egbase, pos), 1.f, anim_, egbase.get_gametime() - animstart_,
-			                   owner->get_playercolor());
-		} else {
-			// NOCOM(#sirver): requires zoom
-			dst.blit_animation(
-			   calc_drawpos(egbase, pos), 1.f, anim_, egbase.get_gametime() - animstart_);
-		}
+void Bob::draw(const EditorGameBase& egbase,
+               const FloatPoint& field_on_dst,
+               const float zoom,
+               RenderTarget* dst) const {
+	if (!anim_) {
+		return;
+	}
+
+	auto* const owner = get_owner();
+	const FloatPoint point_on_dst = calc_drawpos(egbase, field_on_dst, zoom);
+	if (owner != nullptr) {
+		dst->blit_animation(
+		   point_on_dst, zoom, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+	} else {
+		dst->blit_animation(point_on_dst, zoom, anim_, egbase.get_gametime() - animstart_);
 	}
 }
 

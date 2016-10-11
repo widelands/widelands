@@ -204,9 +204,14 @@ public:
 	/// Automatically select a task.
 	void init_auto_task(Game&) override;
 
-	Point calc_drawpos(const EditorGameBase&, Point) const;
+	FloatPoint
+	calc_drawpos(const EditorGameBase& game, const FloatPoint& field_on_dst, const float zoom) const;
+
 	/// Draw this soldier
-	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
+	void draw(const EditorGameBase&,
+	          const FloatPoint& point_on_dst,
+	          float zoom,
+	          RenderTarget* dst) const override;
 
 	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
 	void draw_info_icon(RenderTarget&, Point, bool anchor_below) const;

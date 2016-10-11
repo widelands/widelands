@@ -407,6 +407,8 @@ void InteractiveBase::move_view_to(const Coords c) {
 
 	const Map& map = egbase().map();
 	uint32_t const x = (c.x + (c.y & 1) * 0.5) * kTriangleWidth;
+	// NOCOM(#sirver): requires zoom.
+	// NOCOM(#sirver): should this not use a MapviewPixelFunctions
 	uint32_t const y = c.y * kTriangleHeight - map[c].get_height() * kHeightFactor;
 	if (m->minimap.window)
 		m->mm->set_view_pos(x, y);

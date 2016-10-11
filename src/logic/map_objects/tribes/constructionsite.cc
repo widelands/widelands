@@ -300,7 +300,7 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             ShowText show_text,
                             const Coords& coords_to_draw,
-                            const Point& point_on_dst,
+                            const FloatPoint& point_on_dst,
                             float zoom,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;

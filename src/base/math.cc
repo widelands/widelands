@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,4 @@
  *
  */
 
-#include "base/point.h"
-
-#include <cmath>
-
-FloatPoint middle(const FloatPoint& a, const FloatPoint& b) {
-	return FloatPoint((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
-}
-
-Point round(const FloatPoint& a) {
-	return Point(std::lround(a.x), std::lround(a.y));
-}
+// Dummy file as cmake cannot handle header only libraries :(.

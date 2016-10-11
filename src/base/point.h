@@ -66,14 +66,21 @@ template <typename T> struct GenericPoint {
 		return *this;
 	}
 
+	template<typename Type>
+	GenericPoint<Type> cast() const {
+		return GenericPoint<Type>(static_cast<Type>(x), static_cast<Type>(y));
+	}
+
 	T x, y;
 };
 
 using Point = GenericPoint<int>;
 using FloatPoint = GenericPoint<float>;
 
-/// Returns the point in the middle between a and b (rounded to integer
-/// values).
-Point middle(const Point& a, const Point& b);
+/// Returns the point in the middle between a and b.
+FloatPoint middle(const FloatPoint& a, const FloatPoint& b);
+
+// Returns an point rounded to the closest integer.
+Point round(const FloatPoint& a);
 
 #endif  // end of include guard: WL_BASE_POINT_H

@@ -441,7 +441,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const ShowText show_text,
                      const Coords&,
-                     const Point& point_on_dst,
+                     const FloatPoint& point_on_dst,
                      float zoom,
                      RenderTarget* dst) {
 	if (!anim_) {
@@ -456,7 +456,7 @@ void Immovable::draw(uint32_t gametime,
 
 void Immovable::draw_construction(const uint32_t gametime,
                                   const ShowText show_text,
-                                  const Point& point_on_dst,
+                                  const FloatPoint& point_on_dst,
                                   const float zoom,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;

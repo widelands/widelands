@@ -314,11 +314,11 @@ protected:
 	void draw(uint32_t gametime,
 	          ShowText show_text,
 	          const Coords& coords_to_draw,
-	          const Point& point_on_dst,
+	          const FloatPoint& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;
 	// NOCOM(#sirver): requires zoom?
-	void draw_info(ShowText show_text, const Point& point_on_dst, RenderTarget* dst);
+	void draw_info(ShowText show_text, const FloatPoint& point_on_dst, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

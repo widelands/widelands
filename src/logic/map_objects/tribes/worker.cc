@@ -2512,27 +2512,37 @@ void Worker::scout_update(Game& game, State& state) {
 	return;
 }
 
-void Worker::draw_inner(const EditorGameBase& game, RenderTarget& dst, const Point& drawpos) const {
+void Worker::draw_inner(const EditorGameBase& game,
+                  const FloatPoint& point_on_dst,
+                  const float zoom,
+                  RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	// NOCOM(#sirver): requires zoom
-	dst.blit_animation(
-	   drawpos, 1.f, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(
+	   point_on_dst, zoom, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		// NOCOM(#sirver): requires zoom
-		dst.blit_animation(drawpos - descr().get_ware_hotspot(), 1.f,
-		                   carried_ware->descr().get_animation("idle"), 0, player_color);
+		const FloatPoint hotspot = descr().get_ware_hotspot().cast<float>();
+		// NOCOM(#sirver): requires zoom for hotspot?
+		const FloatPoint location(
+		   point_on_dst.x - hotspot.x * zoom, point_on_dst.y - hotspot.y * zoom);
+		dst->blit_animation(
+		   location, zoom, carried_ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 
 /**
  * Draw the worker, taking the carried ware into account.
  */
-void Worker::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
-	if (get_current_anim())
-		draw_inner(game, dst, calc_drawpos(game, pos));
+void Worker::draw(const EditorGameBase& egbase,
+                  const FloatPoint& field_on_dst,
+                  const float zoom,
+                  RenderTarget* dst) const {
+	if (!get_current_anim()) {
+		return;
+	}
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, zoom), zoom, dst);
 }
 
 /*

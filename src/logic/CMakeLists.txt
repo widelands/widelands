@@ -209,6 +209,7 @@ wl_library(logic
     base_i18n
     base_log
     base_macros
+    base_math
     base_md5
     base_scoped_timer
     base_time_string

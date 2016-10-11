@@ -294,12 +294,15 @@ void RenderTarget::tile(const Rect& rect,
 // TODO(unknown): Correctly calculate the stereo position for sound effects
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
-void RenderTarget::blit_animation(const Point& dst, const float zoom, uint32_t animation, uint32_t time) {
+void RenderTarget::blit_animation(const FloatPoint& dst,
+                                  const float zoom,
+                                  uint32_t animation,
+                                  uint32_t time) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 	do_blit_animation(dst, zoom, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
-void RenderTarget::blit_animation(const Point& dst,
+void RenderTarget::blit_animation(const FloatPoint& dst,
                                   const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
@@ -309,7 +312,7 @@ void RenderTarget::blit_animation(const Point& dst,
 	   dst, zoom, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
-void RenderTarget::blit_animation(const Point& dst,
+void RenderTarget::blit_animation(const FloatPoint& dst,
                                   const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
@@ -319,7 +322,7 @@ void RenderTarget::blit_animation(const Point& dst,
 	   dst, zoom, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
 }
 
-void RenderTarget::do_blit_animation(const Point& dst,
+void RenderTarget::do_blit_animation(const FloatPoint& dst,
                                      const float zoom,
                                      const Animation& animation,
                                      uint32_t time,

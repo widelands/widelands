@@ -141,7 +141,8 @@ void PortDock::set_economy(Economy* e) {
 		expedition_bootstrap_->set_economy(e);
 }
 
-void PortDock::draw(uint32_t, const ShowText, const Coords&, const Point&, float, RenderTarget*) {
+void PortDock::draw(
+   uint32_t, const ShowText, const Coords&, const FloatPoint&, float, RenderTarget*) {
 	// do nothing
 }
 

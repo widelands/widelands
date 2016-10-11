@@ -62,11 +62,11 @@ void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 < get_w());
 	assert(0 < get_h());
 	assert(total_);
-	const float fraction = state_ < total_ ? static_cast<float>(state_) / total_ : 1.0;
+	const float fraction = state_ < total_ ? static_cast<float>(state_) / total_ : 1.0f;
 	assert(0 <= fraction);
 	assert(fraction <= 1);
 
-	const RGBColor color = fraction <= 0.33 ? RGBColor(255, 0, 0) : fraction <= 0.67 ?
+	const RGBColor color = fraction <= 0.33f ? RGBColor(255, 0, 0) : fraction <= 0.67f ?
 	                                          RGBColor(255, 255, 0) :
 	                                          RGBColor(0, 255, 0);
 
@@ -78,7 +78,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 		dst.fill_rect(Rect(Point(0, 0), w, get_h()), color);
 		dst.fill_rect(Rect(Point(w, 0), get_w() - w, get_h()), RGBColor(0, 0, 0));
 	} else {
-		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0 - fraction));
+		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0f - fraction));
 
 		dst.fill_rect(Rect(Point(0, 0), get_w(), h), RGBColor(0, 0, 0));
 		dst.fill_rect(Rect(Point(0, h), get_w(), get_h() - h), color);

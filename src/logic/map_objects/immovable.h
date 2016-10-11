@@ -106,7 +106,7 @@ struct BaseImmovable : public MapObject {
 	virtual void draw(uint32_t gametime,
 	          ShowText show_text,
 	          const Coords& coords_to_draw,
-	          const Point& point_on_dst,
+	          const FloatPoint& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) = 0;
 
@@ -232,7 +232,7 @@ public:
 	void draw(uint32_t gametime,
 	          ShowText show_text,
 	          const Coords& coords_to_draw,
-	          const Point& point_on_dst,
+	          const FloatPoint& point_on_dst,
 	          float zoom,
 	          RenderTarget* dst) override;
 
@@ -312,7 +312,7 @@ private:
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
 	                       ShowText show_text,
-	                       const Point& point_on_dst,
+	                       const FloatPoint& point_on_dst,
 	                       float zoom,
 	                       RenderTarget* dst);
 };

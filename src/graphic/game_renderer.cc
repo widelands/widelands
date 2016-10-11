@@ -194,16 +194,17 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have
 			// terrains and road graphics vertically mirrorerd.
-			int texture_x, texture_y;
+			FloatPoint texture_coords;
 			constexpr float kNoZoom = 1.f;
-			MapviewPixelFunctions::get_basepix(coords, kNoZoom, &texture_x, &texture_y);
-			f.texture_x = float(texture_x) / kTextureSideLength;
-			f.texture_y = -float(texture_y) / kTextureSideLength;
+			MapviewPixelFunctions::get_basepix(coords, kNoZoom, &texture_coords);
+			f.texture_x = texture_coords.x / kTextureSideLength;
+			f.texture_y = -texture_coords.y / kTextureSideLength;
 
-			int x, y;
-			MapviewPixelFunctions::get_basepix(coords, zoom, &x, &y);
-			f.gl_x = f.pixel_x = x + surface_offset.x;
-			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * kHeightFactor;
+			FloatPoint pixel_coords;
+			MapviewPixelFunctions::get_basepix(coords, zoom, &pixel_coords);
+			f.gl_x = f.pixel_x = pixel_coords.x + surface_offset.x;
+			f.gl_y = f.pixel_y =
+			   pixel_coords.y + surface_offset.y - fcoords.field->get_height() * kHeightFactor * zoom;
 			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
 
 			f.ter_d = fcoords.field->terrain_d();
@@ -275,16 +276,14 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			coords[R] = map.r_n(coords[F]);
 			coords[BL] = map.bl_n(coords[F]);
 			coords[BR] = map.br_n(coords[F]);
-			Point pos[4];
-			MapviewPixelFunctions::get_basepix(Coords(fx, fy), zoom, &pos[F].x, &pos[F].y);
-			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), zoom, &pos[R].x, &pos[R].y);
-			MapviewPixelFunctions::get_basepix(
-			   Coords(fx + (fy & 1) - 1, fy + 1), zoom, &pos[BL].x, &pos[BL].y);
-			MapviewPixelFunctions::get_basepix(
-			   Coords(fx + (fy & 1), fy + 1), zoom, &pos[BR].x, &pos[BR].y);
+			FloatPoint pos[4];
+			MapviewPixelFunctions::get_basepix(Coords(fx, fy), zoom, &pos[F]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), zoom, &pos[R]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), zoom, &pos[BL]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), zoom, &pos[BR]);
 			for (uint32_t d = 0; d < 4; ++d) {
-				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
-				pos[d] -= view_offset;
+				pos[d].y -= coords[d].field->get_height() * kHeightFactor * zoom;
+				pos[d] -= view_offset.cast<float>();
 			}
 
 			PlayerNumber owner_number[4];
@@ -327,7 +326,7 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 					          zoom, dst);
 				}
 				for (Bob* bob = coords[F].field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-					bob->draw(egbase, *dst, pos[F]);
+					bob->draw(egbase, pos[F], zoom, dst);
 				}
 			} else if (vision[F] == 1) {
 				const Player::Field& f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
@@ -410,7 +409,8 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 				overlay_info.clear();
 				overlay_manager.get_overlays(coords[F], &overlay_info);
 				for (const auto& overlay : overlay_info) {
-					dst->blit(pos[F] - overlay.hotspot, overlay.pic);
+					// NOCOM(#sirver): this also requires zoom and FloatPoint
+					dst->blit((pos[F] - overlay.hotspot.cast<float>()).cast<int>(), overlay.pic);
 				}
 			}
 

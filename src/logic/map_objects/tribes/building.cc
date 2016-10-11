@@ -591,7 +591,7 @@ bool Building::fetch_from_flag(Game&) {
 void Building::draw(uint32_t gametime,
                     const ShowText show_text,
                     const Coords& coords_to_draw,
-                    const Point& point_on_dst,
+                    const FloatPoint& point_on_dst,
                     float zoom,
                     RenderTarget* dst) {
 	if (coords_to_draw == position_) {  // draw big buildings only once
@@ -610,7 +610,9 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const ShowText show_text, const Point& point_on_dst, RenderTarget* dst) {
+void Building::draw_info(const ShowText show_text,
+                         const FloatPoint& point_on_dst,
+                         RenderTarget* dst) {
 	bool show_statistics_string = show_text & ShowText::kStatistics;
 	if (show_statistics_string) {
 		// NOCOM(#sirver): this has to be handled further up.

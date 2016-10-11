@@ -30,24 +30,25 @@ namespace Widelands {
 void Flag::draw(uint32_t gametime,
                 const ShowText,
                 const Coords&,
-                const Point& point_on_dst,
+                const FloatPoint& point_on_dst,
                 float zoom,
                 RenderTarget* dst) {
 	static struct {
-		int32_t x, y;
-	} ware_offsets[8] = {{-5, 1}, {-1, 3}, {3, 3}, {7, 1}, {-6, -3}, {-1, -2}, {3, -2}, {8, -3}};
+		float x, y;
+	} ware_offsets[8] = {{-5.f, 1.f},  {-1.f, 3.f},  {3.f, 3.f},  {7.f, 1.f},
+	                     {-6.f, -3.f}, {-1.f, -2.f}, {3.f, -2.f}, {8.f, -3.f}};
 
 	const RGBColor& player_color = owner().get_playercolor();
 	dst->blit_animation(
 	   point_on_dst, zoom, owner().tribe().flag_animation(), gametime - animstart_, player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
-		Point warepos = point_on_dst;
+		FloatPoint warepos = point_on_dst;
 		if (i < 8) {
 			warepos.x += ware_offsets[i].x * zoom;
 			warepos.y += ware_offsets[i].y * zoom;
 		} else {
-			warepos.y -= (6 + (i - 8) * 3) * zoom;
+			warepos.y -= (6.f + (i - 8.f) * 3.f) * zoom;
 		}
 		dst->blit_animation(
 		   warepos, zoom, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
@@ -55,7 +56,7 @@ void Flag::draw(uint32_t gametime,
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const ShowText, const Coords&, const Point&, float, RenderTarget*) {
+void Road::draw(uint32_t, const ShowText, const Coords&, const FloatPoint&, float, RenderTarget*) {
 }
 
 }

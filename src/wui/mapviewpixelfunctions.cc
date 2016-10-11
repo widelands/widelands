@@ -283,6 +283,6 @@ void MapviewPixelFunctions::normalize_pix(const Map& map, const float zoom, Poin
 			y += map_end_screen_y;
 		}
 	}
-	p->x = static_cast<int>(std::round(x));
-	p->y = static_cast<int>(std::round(y));
+	p->x = std::lround(x);
+	p->y = std::lround(y);
 }

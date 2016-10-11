@@ -176,8 +176,14 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const EditorGameBase&, RenderTarget&, const Point&) const;
-	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
+	void draw_inner(const EditorGameBase& game,
+	                const FloatPoint& point_on_dst,
+	                const float zoom,
+	                RenderTarget* dst) const;
+	void draw(const EditorGameBase&,
+	          const FloatPoint& field_on_dst,
+	          float zoom,
+	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
 
 	bool does_carry_ware() {

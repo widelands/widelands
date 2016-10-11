@@ -68,3 +68,9 @@ wl_library(base_time_string
   DEPENDS
     base_i18n
 )
+
+wl_library(base_math
+  SRCS
+    math.h
+    math.cc
+)

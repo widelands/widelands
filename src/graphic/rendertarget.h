@@ -105,13 +105,13 @@ public:
 	// Draw the 'animation' as it should appear at 'time' in this target at
 	// 'dst'. Optionally, the animation is tinted with 'player_color' and
 	// cropped to 'source_rect'.
-	void blit_animation(const Point& dst, float zoom, uint32_t animation, uint32_t time);
-	void blit_animation(const Point& dst,
+	void blit_animation(const FloatPoint& dst, float zoom, uint32_t animation, uint32_t time);
+	void blit_animation(const FloatPoint& dst,
 	                    float zoom,
 	                    uint32_t animation,
 	                    uint32_t time,
 	                    const RGBColor& player_color);
-	void blit_animation(const Point& dst,
+	void blit_animation(const FloatPoint& dst,
 	                    float zoom,
 	                    uint32_t animation,
 	                    uint32_t time,
@@ -135,7 +135,7 @@ protected:
 	bool to_surface_geometry(Rect* destination_rect, Rect* source_rect) const;
 
 	// Does the actual blitting.
-	void do_blit_animation(const Point& dst,
+	void do_blit_animation(const FloatPoint& dst,
 	                       const float zoom,
 	                       const Animation& animation,
 	                       uint32_t time,

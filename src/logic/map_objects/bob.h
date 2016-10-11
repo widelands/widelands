@@ -240,7 +240,7 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, uint32_t tdelta);
 	void skip_act();
-	Point calc_drawpos(const EditorGameBase&, Point) const;
+	FloatPoint calc_drawpos(const EditorGameBase&, const FloatPoint& field_on_dst, float zoom) const;
 	void set_owner(Player*);
 	Player* get_owner() const {
 		return owner_;
@@ -260,7 +260,12 @@ public:
 	///    onto the \p to node if this function allows it to.
 	virtual bool check_node_blocked(Game&, const FCoords&, bool commit);
 
-	virtual void draw(const EditorGameBase&, RenderTarget&, const Point&) const;
+	// Draws the bob onto the screen with 'field_on_dst' being the position of
+	// the field associated with this bob (if it is walking, that is its
+	// starting field) in pixel space of 'dst' (including zoom). The 'zoom' is
+	// required to draw the bob in the right size.
+	virtual void
+	draw(const EditorGameBase&, const FloatPoint& field_on_dst, float zoom, RenderTarget* dst) const;
 
 	// For debug
 	void log_general_info(const EditorGameBase&) override;

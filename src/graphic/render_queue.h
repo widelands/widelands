@@ -106,7 +106,7 @@ public:
 		RGBAColor color;
 		FloatRect destination_rect;
 	};
-	
+
 	// TODO(sirver): these are really triangle arguments.
 	struct LineArguments {
 		std::vector<DrawLineProgram::PerVertexData> vertices;

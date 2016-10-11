@@ -235,7 +235,10 @@ struct Ship : Bob {
 	void sink_ship(Game&);
 
 protected:
-	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
+	void draw(const EditorGameBase&,
+	          const FloatPoint& field_on_dst,
+	          float zoom,
+	          RenderTarget* dst) const override;
 
 private:
 	friend struct Fleet;

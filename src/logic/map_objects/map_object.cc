@@ -451,19 +451,22 @@ void MapObject::do_draw_info(bool show_census,
                              bool show_statictics,
                              const std::string& statictics,
                              RenderTarget& dst,
-                             const Point& pos) const {
+                             const FloatPoint& pos) const {
 	if (show_census || show_statictics) {
 		// We always render this so we can have a stable position for the statistics string.
 		const Image* rendered_census_info =
 		   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter), 120);
-		const Point census_pos(pos - Point(0, 48));
+		const FloatPoint census_pos = pos - FloatPoint(0, 48);
 
+		Point rounded_census_pos = round(census_pos);
 		if (show_census) {
-			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+			dst.blit(
+			   rounded_census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 
 		if (show_statictics && !statictics.empty()) {
-			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
+			// NOCOM(#sirver): should blit also take a FloatPoint?
+			dst.blit(rounded_census_pos + Point(0, rendered_census_info->height() / 2 + 10),
 			         UI::g_fh1->render(as_condensed(statictics)), BlendMode::UseAlpha,
 			         UI::Align::kCenter);
 		}

@@ -185,6 +185,7 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
+    base_math
     base_time_string
     chat
     economy

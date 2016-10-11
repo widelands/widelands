@@ -56,29 +56,28 @@ inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
  */
 Widelands::NodeAndTriangle<> calc_node_and_triangle(const Widelands::Map&, uint32_t x, uint32_t y);
 
-void normalize_pix(const Widelands::Map& map, const float zoom, Point* p);
+void normalize_pix(const Widelands::Map& map, float zoom, Point* p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.
-inline void get_basepix(const Widelands::Coords& c, const float zoom, int32_t* px, int32_t* py) {
-	*py = c.y * kTriangleHeight * zoom;
-	*px = c.x * kTriangleWidth * zoom + (c.y & 1) * (kTriangleWidth * zoom / 2);
+inline void get_basepix(const Widelands::Coords& c, const float zoom, FloatPoint* point) {
+	point->y = c.y * kTriangleHeight * zoom;
+	point->x = c.x * kTriangleWidth * zoom + (c.y & 1) * (kTriangleWidth * zoom / 2);
 }
 
 /**
  * Calculate the on-screen position of the node.
  */
-inline void get_pix(const Widelands::FCoords& fc, const float zoom, int32_t* px, int32_t* py) {
-	get_basepix(fc, zoom, px, py);
-	py -= fc.field->get_height() * kHeightFactor;
+inline void get_pix(const Widelands::FCoords& fc, const float zoom, FloatPoint* point) {
+	get_basepix(fc, zoom, point);
+	point->y -= fc.field->get_height() * kHeightFactor * zoom;
 }
 
 inline void get_pix(const Widelands::Map& map,
                     const Widelands::Coords& c,
                     const float zoom,
-                    int32_t* px,
-                    int32_t* py) {
-	get_pix(map.get_fcoords(c), zoom, px, py);
+                    FloatPoint* point) {
+	get_pix(map.get_fcoords(c), zoom, point);
 }
 
 // fx and fy might be out of range, must be normalized for the field
@@ -87,14 +86,13 @@ inline void get_pix(const Widelands::Map& map,
 inline void get_save_pix(const Widelands::Map& map,
                          const Widelands::Coords& c,
                          const float zoom,
-                         int32_t* px,
-                         int32_t* py) {
+                         FloatPoint* point) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);
 	fc.x = c.x;
 	fc.y = c.y;
-	get_pix(fc, zoom, px, py);
+	get_pix(fc, zoom, point);
 }
 
 }  // namespace MapviewPixelFunctions

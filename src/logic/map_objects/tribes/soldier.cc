@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -384,56 +385,53 @@ void Soldier::damage(const uint32_t value) {
 ///
 /// pos is the location, in pixels, of the node position_ (height is already
 /// taken into account).
-Point Soldier::calc_drawpos(const EditorGameBase& game, const Point pos) const {
+FloatPoint Soldier::calc_drawpos(const EditorGameBase& game,
+                                 const FloatPoint& field_on_dst,
+                                 const float zoom) const {
 	if (combat_walking_ == CD_NONE) {
-		return Bob::calc_drawpos(game, pos);
+		return Bob::calc_drawpos(game, field_on_dst, zoom);
 	}
 
 	bool moving = false;
-	Point spos = pos, epos = pos;
+	FloatPoint spos = field_on_dst, epos = field_on_dst;
 
+	const float triangle_width = kTriangleWidth * zoom;
 	switch (combat_walking_) {
 	case CD_WALK_W:
 		moving = true;
-		epos.x -= kTriangleWidth / 4;
+		epos.x -= triangle_width / 4;
 		break;
 	case CD_WALK_E:
 		moving = true;
-		epos.x += kTriangleWidth / 4;
+		epos.x += triangle_width / 4;
 		break;
 	case CD_RETURN_W:
 		moving = true;
-		spos.x -= kTriangleWidth / 4;
+		spos.x -= triangle_width / 4;
 		break;
 	case CD_RETURN_E:
 		moving = true;
-		spos.x += kTriangleWidth / 4;
+		spos.x += triangle_width / 4;
 		break;
 	case CD_COMBAT_W:
 		moving = false;
-		epos.x -= kTriangleWidth / 4;
+		epos.x -= triangle_width / 4;
 		break;
 	case CD_COMBAT_E:
 		moving = false;
-		epos.x += kTriangleWidth / 4;
+		epos.x += triangle_width / 4;
 		break;
 	case CD_NONE:
 		break;
 	}
 
 	if (moving) {
-
-		float f = static_cast<float>(game.get_gametime() - combat_walkstart_) /
-		          (combat_walkend_ - combat_walkstart_);
+		const float f = math::clamp(static_cast<float>(game.get_gametime() - combat_walkstart_) /
+		                               (combat_walkend_ - combat_walkstart_),
+		                            0.f, 1.f);
 		assert(combat_walkstart_ <= game.get_gametime());
 		assert(combat_walkstart_ < combat_walkend_);
-
-		if (f < 0)
-			f = 0;
-		else if (f > 1)
-			f = 1;
-
-		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
+		epos.x = f * epos.x + (1 - f) * spos.x;
 	}
 	return epos;
 }
@@ -441,15 +439,20 @@ Point Soldier::calc_drawpos(const EditorGameBase& game, const Point pos) const {
 /*
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
-void Soldier::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
-	if (const uint32_t anim = get_current_anim()) {
-		const Point drawpos = calc_drawpos(game, pos);
-		draw_info_icon(
-		   dst, Point(drawpos.x, drawpos.y - g_gr->animations().get_animation(anim).height() - 7),
-		   true);
-
-		draw_inner(game, dst, drawpos);
+void Soldier::draw(const EditorGameBase& game,
+                   const FloatPoint& field_on_dst,
+                   const float zoom,
+                   RenderTarget* dst) const {
+	const uint32_t anim = get_current_anim();
+	if (!anim) {
+		return;
 	}
+
+	const FloatPoint point_on_dst = calc_drawpos(game, field_on_dst, zoom);
+	draw_info_icon(*dst, Point(point_on_dst.x,
+	                           point_on_dst.y - g_gr->animations().get_animation(anim).height() - 7),
+	               true);
+	draw_inner(game, point_on_dst, zoom, dst);
 }
 
 /**
@@ -459,6 +462,7 @@ void Soldier::draw(const EditorGameBase& game, RenderTarget& dst, const Point& p
  * \p pt. Otherwise, the icon is drawn below and right of \p pt.
  */
 void Soldier::draw_info_icon(RenderTarget& dst, Point pt, bool anchor_below) const {
+	// NOCOM(#sirver): needs zoom
 	// Gather information to determine coordinates
 	uint32_t w;
 	w = kSoldierHealthBarWidth;

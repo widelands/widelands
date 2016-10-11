@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,25 @@
  *
  */
 
-#include "base/point.h"
+#ifndef WL_BASE_MATH_H
+#define WL_BASE_MATH_H
 
-#include <cmath>
+namespace math {
 
-FloatPoint middle(const FloatPoint& a, const FloatPoint& b) {
-	return FloatPoint((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
+// Returns 1 for positive and -1 for negative numbers.
+template <typename T>
+T sign(const T& val) {
+	return val < T(0.) ? T(-1.) : T(1.);
 }
 
-Point round(const FloatPoint& a) {
-	return Point(std::lround(a.x), std::lround(a.y));
+// Clamps 'val' to 'min' and 'max'.
+template <typename T>
+T clamp(const T& val, const T& low, const T& high) {
+	if (val < low) { return low; }
+	if (val > high) { return high; }
+	return val;
 }
+
+}  // namespace math
+
+#endif  // end of include guard: WL_BASE_MATH_H

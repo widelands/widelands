@@ -161,6 +161,7 @@ Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * kTriangleWidth;
 	int32_t vy = (coords.y) * kTriangleHeight;
 	Widelands::Map& map = game().map();
+	// NOCOM(#sirver): probably requires zoom
 	uint8_t height = map[coords].get_height() * kHeightFactor;
 
 	return Point(vx - mapview.get_w() / 2, vy - height - mapview.get_h() / 2);
@@ -227,11 +228,11 @@ void WatchWindow::think() {
 	}
 
 	if (upcast(Widelands::Bob, bob, views[cur_index].tracking.get(game()))) {
-		Point pos;
+		FloatPoint pos;
 
 		// NOCOM(#sirver): needs zoom
-		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), 1.f, &pos.x, &pos.y);
-		pos = bob->calc_drawpos(game(), pos);
+		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), 1.f, &pos);
+		pos = bob->calc_drawpos(game(), pos, 1.f);
 
 		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
@@ -240,7 +241,7 @@ void WatchWindow::think() {
 			// Not in sight
 			views[cur_index].tracking = nullptr;
 		} else {
-			mapview.set_viewpoint(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+			mapview.set_viewpoint(round(pos) - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
 		}
 	}
 }
@@ -290,12 +291,12 @@ void WatchWindow::do_follow() {
 		Widelands::Bob* closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob* const bob = bobs[i];
-			Point p;
+			FloatPoint p;
 			// NOCOM(#sirver): needs zoom
 			// NOCOM(#sirver): function should take Point
-			MapviewPixelFunctions::get_pix(map, bob->get_position(), 1.f, &p.x, &p.y);
-			p = bob->calc_drawpos(g, p);
-			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
+			MapviewPixelFunctions::get_pix(map, bob->get_position(), 1.f, &p);
+			p = bob->calc_drawpos(g, p, 1.f);
+			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p.cast<int>(), pos);
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
 			    (!ipl ||

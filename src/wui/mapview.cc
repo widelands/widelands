@@ -20,6 +20,7 @@
 #include "wui/mapview.h"
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -46,9 +47,9 @@ MapView::~MapView() {
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map& map = intbase().egbase().map();
-	Point p;
-	MapviewPixelFunctions::get_save_pix(map, c, zoom_, &p.x, &p.y);
-	p -= viewpoint_;
+	FloatPoint p;
+	MapviewPixelFunctions::get_save_pix(map, c, zoom_, &p);
+	p -= viewpoint_.cast<float>();
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
@@ -58,19 +59,13 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 		else if (p.y <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
 		else {
-			set_mouse_pos(p);
-			track_sel(p);
+			const Point rounded = round(p);
+			set_mouse_pos(rounded);
+			track_sel(rounded);
 		}
 	}
 }
 
-/*
-===============
-This is the guts!! this function draws the whole
-map the user can see. we spend a lot of time
-in this function
-===============
-*/
 void MapView::draw(RenderTarget& dst) {
 	Widelands::EditorGameBase& egbase = intbase().egbase();
 
@@ -164,7 +159,14 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	// keeps the top left point centered.
 	Point point(viewpoint_.x / zoom_, viewpoint_.y / zoom_);
 
-	zoom_ += 0.01 * y;
+	constexpr float kPercentPerMouseWheelTick = 0.02f;
+	zoom_ *= std::pow(1.f + math::sign(y) * kPercentPerMouseWheelTick, std::abs(y));
+
+	// Somewhat arbitrarily we limit the zoom to a reasonable value.
+	// This is for performance and to avoid numeric glitches with
+	// more extreme values.
+	constexpr float kMaxZoom = 4.f;
+	zoom_ = math::clamp(zoom_, 1.f / kMaxZoom, kMaxZoom);
 
 	point.x *= zoom_;
 	point.y *= zoom_;
