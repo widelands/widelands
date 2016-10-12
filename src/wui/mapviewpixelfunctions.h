@@ -60,37 +60,35 @@ void normalize_pix(const Widelands::Map& map, Point* p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.
-inline void get_basepix(const Widelands::Coords& c, FloatPoint* point) {
-	point->y = c.y * kTriangleHeight;
-	point->x = c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2);
+inline FloatPoint to_map_pixel_ignoring_height(const Widelands::Coords& c) {
+	return FloatPoint(
+	   c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2.f), c.y * kTriangleHeight);
 }
 
 /**
  * Calculate the on-screen position of the node.
  */
-inline void get_pix(const Widelands::FCoords& fc, FloatPoint* point) {
-	get_basepix(fc, point);
-	point->y -= fc.field->get_height() * kHeightFactor;
+inline FloatPoint to_map_pixel(const Widelands::FCoords& fc) {
+	FloatPoint p = to_map_pixel_ignoring_height(fc);
+	p.y -= fc.field->get_height() * kHeightFactor;
+	return p;
 }
 
-inline void get_pix(const Widelands::Map& map,
-                    const Widelands::Coords& c,
-                    FloatPoint* point) {
-	get_pix(map.get_fcoords(c), point);
+inline FloatPoint to_map_pixel(const Widelands::Map& map, const Widelands::Coords& c) {
+	return to_map_pixel(map.get_fcoords(c));
 }
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
-inline void get_save_pix(const Widelands::Map& map,
-                         const Widelands::Coords& c,
-                         FloatPoint* point) {
+inline FloatPoint to_map_pixel_with_normalization(const Widelands::Map& map,
+                                                  const Widelands::Coords& c) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);
 	fc.x = c.x;
 	fc.y = c.y;
-	get_pix(fc, point);
+	return to_map_pixel(fc);
 }
 
 }  // namespace MapviewPixelFunctions

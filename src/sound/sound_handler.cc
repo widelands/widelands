@@ -317,9 +317,7 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 	int32_t const yres = g_gr->get_yres();
 
 	// Get pixel coordinates of sound source from map coordinates
-	FloatPoint position_pix;
-	// NOCOM(#sirver): should return the point
-	MapviewPixelFunctions::get_pix(egbase_->map(), position_map, &position_pix);
+	FloatPoint position_pix = MapviewPixelFunctions::to_map_pixel(egbase_->map(), position_map);
 
 	// Adjust pixel coordinates to viewpoint
 	position_pix.x -= vp.x;

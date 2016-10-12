@@ -406,13 +406,12 @@ void InteractiveBase::move_view_to(const Coords c) {
 	assert(c.y < egbase().map().get_height());
 
 	const Map& map = egbase().map();
-	uint32_t const x = (c.x + (c.y & 1) * 0.5) * kTriangleWidth;
-	// NOCOM(#sirver): requires zoom.
-	// NOCOM(#sirver): should this not use a MapviewPixelFunctions
-	uint32_t const y = c.y * kTriangleHeight - map[c].get_height() * kHeightFactor;
-	if (m->minimap.window)
-		m->mm->set_view_pos(x, y);
-	minimap_warp(x, y);
+	const Point in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
+
+	if (m->minimap.window) {
+		m->mm->set_view_pos(in_mappixel.x, in_mappixel.y);
+	}
+	minimap_warp(in_mappixel.x, in_mappixel.y);
 }
 
 /*

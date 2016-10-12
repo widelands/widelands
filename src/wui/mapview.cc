@@ -51,22 +51,17 @@ Point MapView::get_viewpoint() const {
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map& map = intbase().egbase().map();
-	FloatPoint p;
-	MapviewPixelFunctions::get_save_pix(map, c, &p);
+	FloatPoint in_mappixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
+
+	const Point in_panel = round(panel_to_mappixel_.inverse().apply(in_mappixel));
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
-	if (p.x < get_w() && p.y < get_h()) {
-		if (p.x <= 0)
-			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width(), c.y));
-		else if (p.y <= 0)
-			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
-		else {
-			const Point rounded = round(panel_to_mappixel_.inverse().apply(p));
-			set_mouse_pos(rounded);
-			track_sel(rounded);
-		}
+	if (in_panel.x < 0 || in_panel.y < 0 || in_panel.x >= get_w() || in_panel.y >= get_h()) {
+		return;
 	}
+	set_mouse_pos(in_panel);
+	track_sel(in_panel);
 }
 
 void MapView::draw(RenderTarget& dst) {

@@ -143,14 +143,15 @@ void draw_objects(const EditorGameBase& egbase,
 			coords[R] = map.r_n(coords[F]);
 			coords[BL] = map.bl_n(coords[F]);
 			coords[BR] = map.br_n(coords[F]);
-			FloatPoint pos[4];
-			MapviewPixelFunctions::get_basepix(Coords(fx, fy), &pos[F]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), &pos[R]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), &pos[BL]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), &pos[BR]);
-			for (uint32_t d = 0; d < 4; ++d) {
-				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
-				pos[d] = mappixel_to_screen.apply(pos[d]);
+			FloatPoint pos[4] = {
+			   MapviewPixelFunctions::to_map_pixel_ignoring_height(Coords(fx, fy)),
+			   MapviewPixelFunctions::to_map_pixel_ignoring_height(Coords(fx + 1, fy)),
+			   MapviewPixelFunctions::to_map_pixel_ignoring_height(Coords(fx + (fy & 1) - 1, fy + 1)),
+			   MapviewPixelFunctions::to_map_pixel_ignoring_height(Coords(fx + (fy & 1), fy + 1)),
+			};
+			for (uint32_t i = 0; i < 4; ++i) {
+				pos[i].y -= coords[i].field->get_height() * kHeightFactor;
+				pos[i] = mappixel_to_screen.apply(pos[i]);
 			}
 
 			PlayerNumber owner_number[4];
@@ -380,16 +381,14 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have
 			// terrains and road graphics vertically mirrorerd.
-			FloatPoint texture_coords;
-			MapviewPixelFunctions::get_basepix(coords, &texture_coords);
-			f.texture_x = texture_coords.x / kTextureSideLength;
-			f.texture_y = -texture_coords.y / kTextureSideLength;
+			FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(coords);
+			f.texture_x = map_pixel.x / kTextureSideLength;
+			f.texture_y = -map_pixel.y / kTextureSideLength;
 
-			FloatPoint pixel_coords = texture_coords;
-			pixel_coords.y -= fcoords.field->get_height() * kHeightFactor;
+			map_pixel.y -= fcoords.field->get_height() * kHeightFactor;
 
 			// NOCOM(#sirver): pull out inverse?
-			const FloatPoint pixel = screen_to_mappixel.inverse().apply(pixel_coords);;
+			const FloatPoint pixel = screen_to_mappixel.inverse().apply(map_pixel);
 			f.gl_x = f.pixel_x = pixel.x;
 			f.gl_y = f.pixel_y = pixel.y;
 			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);

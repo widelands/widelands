@@ -4970,15 +4970,14 @@ int LuaField::set_raw_height(lua_State* L) {
       this field for the current interactive player
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
-	FloatPoint point;
-	// NOCOM(#sirver): this function shuold just return the point.
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, &point);
+	FloatPoint point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
 	lua_pushdouble(L, point.x);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State* L) {
-	FloatPoint point;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, &point);
+	FloatPoint point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
 	lua_pushdouble(L, point.y);
 	return 1;
 }

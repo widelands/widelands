@@ -228,10 +228,9 @@ void WatchWindow::think() {
 	}
 
 	if (upcast(Widelands::Bob, bob, views[cur_index].tracking.get(game()))) {
-		FloatPoint pos;
-
-		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), &pos);
-		pos = bob->calc_drawpos(game(), pos, 1.f);
+		const FloatPoint field_position =
+		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
+		const FloatPoint pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
@@ -289,11 +288,8 @@ void WatchWindow::do_follow() {
 		Widelands::Bob* closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob* const bob = bobs[i];
-			FloatPoint p;
-			// NOCOM(#sirver): needs zoom
-			// NOCOM(#sirver): function should return Point
-			MapviewPixelFunctions::get_pix(map, bob->get_position(), &p);
-			p = bob->calc_drawpos(g, p, 1.f);
+			const FloatPoint field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
+			const FloatPoint p = bob->calc_drawpos(g, field_position, 1.f);
 			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p.cast<int>(), pos);
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
