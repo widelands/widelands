@@ -17,15 +17,14 @@
  *
  */
 
-#ifndef WL_WUI_VECTOR_H
-#define WL_WUI_VECTOR_H
+#ifndef WL_BASE_VECTOR_H
+#define WL_BASE_VECTOR_H
 
 #include <cmath>
 
-struct Vector {
-	Vector() : x(0), y(0), z(0) {
-	}
-	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {
+// NOCOM(#sirver): move to point.h and ranem point to vector.
+struct Vector3f {
+	Vector3f(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {
 	}
 
 	void normalize() {
@@ -38,16 +37,16 @@ struct Vector {
 	}
 
 	// vector addition
-	Vector operator+(const Vector& other) const {
-		return Vector(x + other.x, y + other.y, z + other.z);
+	Vector3f operator+(const Vector3f& other) const {
+		return Vector3f(x + other.x, y + other.y, z + other.z);
 	}
 
 	// inner product
-	float operator*(const Vector& other) const {
+	float dot(const Vector3f& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 
 	float x, y, z;
 };
 
-#endif  // end of include guard: WL_WUI_VECTOR_H
+#endif  // end of include guard: WL_BASE_VECTOR_H

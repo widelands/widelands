@@ -4971,16 +4971,14 @@ int LuaField::set_raw_height(lua_State* L) {
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
 	FloatPoint point;
-	// NOCOM(#sirver): needs zoom
 	// NOCOM(#sirver): this function shuold just return the point.
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, 1.f, &point);
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, &point);
 	lua_pushdouble(L, point.x);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State* L) {
 	FloatPoint point;
-	// NOCOM(#sirver): needs zoom
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, 1.f, &point);
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, &point);
 	lua_pushdouble(L, point.y);
 	return 1;
 }

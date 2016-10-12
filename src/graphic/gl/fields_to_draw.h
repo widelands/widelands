@@ -26,6 +26,7 @@
 
 #include <stdint.h>
 
+#include "base/transform.h"
 #include "logic/map_objects/tribes/road_textures.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
@@ -43,15 +44,16 @@ public:
 		const RoadTextures* road_textures;  // Road Textures to use for drawing.
 	};
 
-	FieldsToDraw() = default;
+	FieldsToDraw() : screen_to_mappixel_(Transform2f::identity()) {
+	}
 
 	// Resize this fields to draw for reuse.
-	void reset(int minfx, int maxfx, int minfy, int maxfy, float zoom) {
+	void reset(int minfx, int maxfx, int minfy, int maxfy, const Transform2f& screen_to_mappixel) {
 		min_fx_ = minfx;
 		max_fx_ = maxfx;
 		min_fy_ = minfy;
 		max_fy_ = maxfy;
-		zoom_ = zoom;
+		screen_to_mappixel_ = screen_to_mappixel;
 		w_ = max_fx_ - min_fx_ + 1;
 		h_ = max_fy_ - min_fy_ + 1;
 		const size_t dimension = w_ * h_;
@@ -90,8 +92,7 @@ public:
 	}
 
 private:
-	// Zoom factor: 2 means triangles have double the size.
-	float zoom_;
+	Transform2f screen_to_mappixel_;
 
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	int min_fx_;

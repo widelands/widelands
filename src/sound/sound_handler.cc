@@ -318,16 +318,15 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 
 	// Get pixel coordinates of sound source from map coordinates
 	FloatPoint position_pix;
-	// NOCOM(#sirver): needs zoom.... but how?
-	MapviewPixelFunctions::get_pix(egbase_->map(), position_map, 1., &position_pix);
+	// NOCOM(#sirver): should return the point
+	MapviewPixelFunctions::get_pix(egbase_->map(), position_map, &position_pix);
 
 	// Adjust pixel coordinates to viewpoint
 	position_pix.x -= vp.x;
 	position_pix.y -= vp.y;
 	// Normalizing correct invalid pixel coordinates
-	// NOCOM(#sirver): needs zoom
 	Point rounded = round(position_pix);
-	MapviewPixelFunctions::normalize_pix(egbase_->map(), 1.f, &rounded);
+	MapviewPixelFunctions::normalize_pix(egbase_->map(), &rounded);
 
 	// Make sure position is inside viewport
 	if (rounded.x >= 0 && rounded.x <= xres && rounded.y >= 0 && rounded.y <= yres) {

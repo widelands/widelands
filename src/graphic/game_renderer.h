@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "base/point.h"
+#include "base/transform.h"
 #include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {
@@ -48,41 +49,27 @@ public:
 	GameRenderer();
 	~GameRenderer();
 
-	// Renders the map from a player's point of view into the given
-	// drawing window. 'view_offset' is the offset of the upper left
-	// corner of the window into the map, in pixels.
+	// Renders the map from a player's point of view into the given drawing
+	// window. The 'screen_to_mappixel' transform converts a screen pixel into a
+	// map pixel at zoom 1.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Point& view_offset,
-	               float zoom,
+	               const Transform2f& screen_to_mappixel,
 	               const Widelands::Player& player,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Point& view_offset,
-	               float zoom,
+	               const Transform2f& screen_to_mappixel,
 	               RenderTarget* dst);
 
 private:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
 	void draw(const Widelands::EditorGameBase& egbase,
-	          const Point& view_offset,
-				 float zoom,
+	               const Transform2f& screen_to_mappixel,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
-
-	// Draws the objects (animations & overlays).
-	void draw_objects(const Widelands::EditorGameBase& egbase,
-	                  const Point& view_offset,
-	                  const Widelands::Player* player,
-	                  int minfx,
-	                  int maxfx,
-	                  int minfy,
-	                  int maxfy,
-	                  float zoom,
-	                  RenderTarget* dst);
 
 	// This is owned and handled by us, but handed to the RenderQueue, so we
 	// basically promise that this stays valid for one frame.

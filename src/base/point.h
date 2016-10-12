@@ -46,6 +46,14 @@ template <typename T> struct GenericPoint {
 		return GenericPoint(x + other.x, y + other.y);
 	}
 
+	GenericPoint operator*(const float a) const {
+		return GenericPoint(a * x, a * y);
+	}
+
+	GenericPoint operator/(const float a) const {
+		return GenericPoint(x / a, y / a);
+	}
+
 	GenericPoint operator-() const {
 		return GenericPoint(-x, -y);
 	}

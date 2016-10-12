@@ -230,8 +230,7 @@ void WatchWindow::think() {
 	if (upcast(Widelands::Bob, bob, views[cur_index].tracking.get(game()))) {
 		FloatPoint pos;
 
-		// NOCOM(#sirver): needs zoom
-		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), 1.f, &pos);
+		MapviewPixelFunctions::get_pix(game().map(), bob->get_position(), &pos);
 		pos = bob->calc_drawpos(game(), pos, 1.f);
 
 		Widelands::Map& map = game().map();
@@ -274,8 +273,7 @@ void WatchWindow::do_follow() {
 		//  therefore not of interest.
 		Point pos(mapview.get_viewpoint() + Point(mapview.get_w() / 2, mapview.get_h() / 2));
 		Widelands::Map& map = g.map();
-		// NOCOM(#sirver): needs zoom
-		MapviewPixelFunctions::normalize_pix(map, 1.f, &pos);
+		MapviewPixelFunctions::normalize_pix(map, &pos);
 		std::vector<Widelands::Bob*> bobs;
 		//  Scan progressively larger circles around the given position for
 		//  suitable bobs.
@@ -293,8 +291,8 @@ void WatchWindow::do_follow() {
 			Widelands::Bob* const bob = bobs[i];
 			FloatPoint p;
 			// NOCOM(#sirver): needs zoom
-			// NOCOM(#sirver): function should take Point
-			MapviewPixelFunctions::get_pix(map, bob->get_position(), 1.f, &p);
+			// NOCOM(#sirver): function should return Point
+			MapviewPixelFunctions::get_pix(map, bob->get_position(), &p);
 			p = bob->calc_drawpos(g, p, 1.f);
 			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p.cast<int>(), pos);
 			InteractivePlayer* ipl = game().get_ipl();

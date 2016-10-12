@@ -20,6 +20,8 @@
 #ifndef WL_BASE_MATH_H
 #define WL_BASE_MATH_H
 
+#include "base/macros.h"
+
 namespace math {
 
 // Returns 1 for positive and -1 for negative numbers.

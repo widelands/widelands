@@ -116,149 +116,15 @@ uint8_t field_roads(const FCoords& coords,
 	return roads;
 }
 
-}  // namespace
-
-GameRenderer::GameRenderer() {
-}
-
-GameRenderer::~GameRenderer() {
-}
-
-void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Point& view_offset,
-                             const float zoom,
-                             const Widelands::Player& player,
-                             RenderTarget* dst) {
-	draw(egbase, view_offset, zoom, &player, dst);
-}
-
-void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Point& view_offset,
-                             const float zoom,
-                             RenderTarget* dst) {
-	draw(egbase, view_offset, zoom, nullptr, dst);
-}
-
-void GameRenderer::draw(const EditorGameBase& egbase,
-                        const Point& view_offset,
-                        const float zoom,
-                        const Player* player,
-                        RenderTarget* dst) {
-	Point tl_map = dst->get_offset() + view_offset;
-
-	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
-	assert(tl_map.y >= 0);
-
-	float triangle_width = kTriangleWidth * zoom;
-	float triangle_height = kTriangleHeight * zoom;
-	int minfx = std::floor(tl_map.x / triangle_width) - 1;
-	int minfy = std::floor(tl_map.y / triangle_height) - 1;
-	int maxfx = std::ceil((tl_map.x + dst->get_rect().w) / triangle_width) + 1;
-	int maxfy = std::ceil((tl_map.y + dst->get_rect().h) / triangle_height) + 1;
-
-	// NOCOM(#sirver): weird? correct!
-	// fudge for triangle boundary effects and for height differences
-	minfx -= 1;
-	minfy -= 1;
-	maxfx += 1;
-	maxfy += 10;
-
-	Surface* surface = dst->get_surface();
-	if (!surface)
-		return;
-
-	const Rect& bounding_rect = dst->get_rect();
-	const Point surface_offset = bounding_rect.origin() + dst->get_offset() - view_offset;
-	const int surface_width = surface->width();
-	const int surface_height = surface->height();
-
-	Map& map = egbase.map();
-	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
-	const uint32_t gametime = egbase.get_gametime();
-
-	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy, zoom);
-	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
-		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
-			FieldsToDraw::Field& f =
-			   *fields_to_draw_.mutable_field(fields_to_draw_.calculate_index(fx, fy));
-
-			f.fx = fx;
-			f.fy = fy;
-
-			Coords coords(fx, fy);
-
-			map.normalize_coords(coords);
-			const FCoords& fcoords = map.get_fcoords(coords);
-
-			// Texture coordinates for pseudo random tiling of terrain and road
-			// graphics. Since screen space X increases top-to-bottom and OpenGL
-			// increases bottom-to-top we flip the y coordinate to not have
-			// terrains and road graphics vertically mirrorerd.
-			FloatPoint texture_coords;
-			constexpr float kNoZoom = 1.f;
-			MapviewPixelFunctions::get_basepix(coords, kNoZoom, &texture_coords);
-			f.texture_x = texture_coords.x / kTextureSideLength;
-			f.texture_y = -texture_coords.y / kTextureSideLength;
-
-			FloatPoint pixel_coords;
-			MapviewPixelFunctions::get_basepix(coords, zoom, &pixel_coords);
-			f.gl_x = f.pixel_x = pixel_coords.x + surface_offset.x;
-			f.gl_y = f.pixel_y =
-			   pixel_coords.y + surface_offset.y - fcoords.field->get_height() * kHeightFactor * zoom;
-			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
-
-			f.ter_d = fcoords.field->terrain_d();
-			f.ter_r = fcoords.field->terrain_r();
-
-			f.brightness = field_brightness(fcoords, gametime, map, player);
-
-			const PlayerNumber owner_number = fcoords.field->get_owned_by();
-			if (owner_number > 0) {
-				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
-			} else {
-				f.road_textures = nullptr;
-			}
-
-			f.roads = field_roads(fcoords, map, edge_overlay_manager, player);
-		}
-	}
-
-	// Enqueue the drawing of the terrain.
-	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::kTerrainBase;
-	i.blend_mode = BlendMode::Copy;
-	i.terrain_arguments.destination_rect =
-	   FloatRect(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
-	             bounding_rect.w, bounding_rect.h);
-	i.terrain_arguments.gametime = gametime;
-	i.terrain_arguments.renderbuffer_width = surface_width;
-	i.terrain_arguments.renderbuffer_height = surface_height;
-	i.terrain_arguments.terrains = &egbase.world().terrains();
-	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
-	i.terrain_arguments.zoom = zoom;
-	RenderQueue::instance().enqueue(i);
-
-	// Enqueue the drawing of the dither layer.
-	i.program_id = RenderQueue::Program::kTerrainDither;
-	i.blend_mode = BlendMode::UseAlpha;
-	RenderQueue::instance().enqueue(i);
-
-	// Enqueue the drawing of the road layer.
-	i.program_id = RenderQueue::Program::kTerrainRoad;
-	RenderQueue::instance().enqueue(i);
-
-	draw_objects(egbase, view_offset, player, minfx, maxfx, minfy, maxfy, zoom, dst);
-}
-
-void GameRenderer::draw_objects(const EditorGameBase& egbase,
-                                const Point& view_offset,
-                                const Player* player,
-                                const int minfx,
-                                const int maxfx,
-                                const int minfy,
-                                const int maxfy,
-                                const float zoom,
-                                RenderTarget* dst) {
+// Draws the objects (animations & overlays).
+void draw_objects(const EditorGameBase& egbase,
+                  const Transform2f& mappixel_to_screen,
+                  const Player* player,
+                  const int minfx,
+                  const int maxfx,
+                  const int minfy,
+                  const int maxfy,
+                  RenderTarget* dst) {
 	// TODO(sirver): this should use FieldsToDraw. Would simplify this function a lot.
 	static const uint32_t F = 0;
 	static const uint32_t R = 1;
@@ -266,6 +132,7 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 	static const uint32_t BR = 3;
 	const Map& map = egbase.map();
 
+	const float zoom = mappixel_to_screen.zoom();
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
@@ -277,13 +144,13 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			coords[BL] = map.bl_n(coords[F]);
 			coords[BR] = map.br_n(coords[F]);
 			FloatPoint pos[4];
-			MapviewPixelFunctions::get_basepix(Coords(fx, fy), zoom, &pos[F]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), zoom, &pos[R]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), zoom, &pos[BL]);
-			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), zoom, &pos[BR]);
+			MapviewPixelFunctions::get_basepix(Coords(fx, fy), &pos[F]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), &pos[R]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), &pos[BL]);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), &pos[BR]);
 			for (uint32_t d = 0; d < 4; ++d) {
-				pos[d].y -= coords[d].field->get_height() * kHeightFactor * zoom;
-				pos[d] -= view_offset.cast<float>();
+				pos[d].y -= coords[d].field->get_height() * kHeightFactor;
+				pos[d] = mappixel_to_screen.apply(pos[d]);
 			}
 
 			PlayerNumber owner_number[4];
@@ -440,3 +307,133 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 		}
 	}
 }
+
+}  // namespace
+
+GameRenderer::GameRenderer() {
+}
+
+GameRenderer::~GameRenderer() {
+}
+
+void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
+                             const Transform2f& screen_to_mappixel,
+                             const Widelands::Player& player,
+                             RenderTarget* dst) {
+	draw(egbase, screen_to_mappixel, &player, dst);
+}
+
+void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
+                             const Transform2f& screen_to_mappixel,
+                             RenderTarget* dst) {
+	draw(egbase, screen_to_mappixel, nullptr, dst);
+}
+
+void GameRenderer::draw(const EditorGameBase& egbase,
+                        const Transform2f& screen_to_mappixel,
+                        const Player* player,
+                        RenderTarget* dst) {
+	FloatPoint tl_map = screen_to_mappixel.apply(dst->get_offset().cast<float>());
+	FloatPoint br_map = screen_to_mappixel.apply(dst->get_rect().opposite_of_origin().cast<float>());
+
+	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
+	assert(tl_map.y >= 0);
+
+	int minfx = std::floor(tl_map.x / kTriangleWidth) - 1;
+	int minfy = std::floor(tl_map.y / kTriangleHeight) - 1;
+	int maxfx = std::ceil(br_map.x / kTriangleWidth) + 1;
+	int maxfy = std::ceil(br_map.y / kTriangleHeight) + 1;
+
+	// NOCOM(#sirver): weird? correct!
+	// fudge for triangle boundary effects and for height differences
+	minfx -= 1;
+	minfy -= 1;
+	maxfx += 1;
+	maxfy += 10;
+
+	Surface* surface = dst->get_surface();
+	if (!surface)
+		return;
+
+	const Rect& bounding_rect = dst->get_rect();
+	const int surface_width = surface->width();
+	const int surface_height = surface->height();
+
+	Map& map = egbase.map();
+	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
+	const uint32_t gametime = egbase.get_gametime();
+
+	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy, screen_to_mappixel);
+	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
+		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
+			FieldsToDraw::Field& f =
+			   *fields_to_draw_.mutable_field(fields_to_draw_.calculate_index(fx, fy));
+
+			f.fx = fx;
+			f.fy = fy;
+
+			Coords coords(fx, fy);
+			map.normalize_coords(coords);
+			const FCoords& fcoords = map.get_fcoords(coords);
+
+			// Texture coordinates for pseudo random tiling of terrain and road
+			// graphics. Since screen space X increases top-to-bottom and OpenGL
+			// increases bottom-to-top we flip the y coordinate to not have
+			// terrains and road graphics vertically mirrorerd.
+			FloatPoint texture_coords;
+			MapviewPixelFunctions::get_basepix(coords, &texture_coords);
+			f.texture_x = texture_coords.x / kTextureSideLength;
+			f.texture_y = -texture_coords.y / kTextureSideLength;
+
+			FloatPoint pixel_coords = texture_coords;
+			pixel_coords.y -= fcoords.field->get_height() * kHeightFactor;
+
+			// NOCOM(#sirver): pull out inverse?
+			const FloatPoint pixel = screen_to_mappixel.inverse().apply(pixel_coords);;
+			f.gl_x = f.pixel_x = pixel.x;
+			f.gl_y = f.pixel_y = pixel.y;
+			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
+
+			f.ter_d = fcoords.field->terrain_d();
+			f.ter_r = fcoords.field->terrain_r();
+
+			f.brightness = field_brightness(fcoords, gametime, map, player);
+
+			const PlayerNumber owner_number = fcoords.field->get_owned_by();
+			if (owner_number > 0) {
+				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
+			} else {
+				f.road_textures = nullptr;
+			}
+
+			f.roads = field_roads(fcoords, map, edge_overlay_manager, player);
+		}
+	}
+
+	// Enqueue the drawing of the terrain.
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::kTerrainBase;
+	i.blend_mode = BlendMode::Copy;
+	i.terrain_arguments.destination_rect =
+	   FloatRect(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
+	             bounding_rect.w, bounding_rect.h);
+	i.terrain_arguments.gametime = gametime;
+	i.terrain_arguments.renderbuffer_width = surface_width;
+	i.terrain_arguments.renderbuffer_height = surface_height;
+	i.terrain_arguments.terrains = &egbase.world().terrains();
+	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
+	i.terrain_arguments.zoom = screen_to_mappixel.inverse().zoom();
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the dither layer.
+	i.program_id = RenderQueue::Program::kTerrainDither;
+	i.blend_mode = BlendMode::UseAlpha;
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the road layer.
+	i.program_id = RenderQueue::Program::kTerrainRoad;
+	RenderQueue::instance().enqueue(i);
+
+	draw_objects(egbase, screen_to_mappixel.inverse(), player, minfx, maxfx, minfy, maxfy, dst);
+}
+

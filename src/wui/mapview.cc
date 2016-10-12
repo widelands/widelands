@@ -21,6 +21,7 @@
 
 #include "base/macros.h"
 #include "base/math.h"
+#include "base/transform.h"
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -36,20 +37,22 @@ MapView::MapView(
    : UI::Panel(parent, x, y, w, h),
      renderer_(new GameRenderer()),
      intbase_(player),
-     viewpoint_(Point(0, 0)),
-	  zoom_(1.0),
+     panel_to_mappixel_(Transform2f::identity()),
      dragging_(false) {
 }
 
 MapView::~MapView() {
 }
 
+Point MapView::get_viewpoint() const {
+	return round(panel_to_mappixel_.translation());
+}
+
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map& map = intbase().egbase().map();
 	FloatPoint p;
-	MapviewPixelFunctions::get_save_pix(map, c, zoom_, &p);
-	p -= viewpoint_.cast<float>();
+	MapviewPixelFunctions::get_save_pix(map, c, &p);
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
@@ -59,7 +62,7 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 		else if (p.y <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
 		else {
-			const Point rounded = round(p);
+			const Point rounded = round(panel_to_mappixel_.inverse().apply(p));
 			set_mouse_pos(rounded);
 			track_sel(rounded);
 		}
@@ -77,9 +80,9 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		renderer_->rendermap(egbase, viewpoint_, zoom_, interactive_player->player(), &dst);
+		renderer_->rendermap(egbase, panel_to_mappixel_, interactive_player->player(), &dst);
 	} else {
-		renderer_->rendermap(egbase, viewpoint_, zoom_, &dst);
+		renderer_->rendermap(egbase, panel_to_mappixel_, &dst);
 	}
 }
 
@@ -93,15 +96,21 @@ Set the viewpoint to the given pixel coordinates
 ===============
 */
 void MapView::set_viewpoint(Point vp, bool jump) {
-	// NOCOM(#sirver): was this actually correct, changing this to take zoom? Maybe we keep this without zoom?
-	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), zoom_, &vp);
-	viewpoint_ = vp;
+	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), &vp);
+
+	panel_to_mappixel_ =
+	   Transform2f::from_translation(vp.cast<float>() - panel_to_mappixel_.translation())
+	      .chain(panel_to_mappixel_);
 
 	// NOCOM(#sirver): why are there 2 callback functions?
 	if (changeview_) {
 		changeview_(vp, jump);
 	}
-	changeview(viewpoint_.x, viewpoint_.y);
+	changeview(vp.x, vp.y);
+}
+
+void MapView::set_rel_viewpoint(Point vp, bool jump) {
+	set_viewpoint(get_viewpoint() + vp, jump);
 }
 
 void MapView::stop_dragging() {
@@ -138,6 +147,9 @@ bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 
 bool MapView::handle_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+	last_mouse_pos_.x = x;
+	last_mouse_pos_.y = y;
+
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
 			set_rel_viewpoint(Point(xdiff, ydiff), false);
@@ -150,28 +162,31 @@ bool MapView::handle_mousemove(
 	return true;
 }
 
+// NOCOM(#sirver): change handle_mousewheel to also pass through the mouse position
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	if (which != 0) {
 		return false;
 	}
 
-	// NOCOM(#sirver): this should keep the center point in the center, but
-	// keeps the top left point centered.
-	Point point(viewpoint_.x / zoom_, viewpoint_.y / zoom_);
-
+	const Transform2f translation =
+	   Transform2f::from_translation(FloatPoint(last_mouse_pos_.x, last_mouse_pos_.y));
+	Transform2f mappixel_to_panel = panel_to_mappixel_.inverse();
+	const float old_zoom = mappixel_to_panel.zoom();
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	zoom_ *= std::pow(1.f + math::sign(y) * kPercentPerMouseWheelTick, std::abs(y));
+	float zoom = old_zoom * static_cast<float>(std::pow(
+	                           1.f + math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
 
-	// Somewhat arbitrarily we limit the zoom to a reasonable value.
-	// This is for performance and to avoid numeric glitches with
-	// more extreme values.
+	// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
+	// performance and to avoid numeric glitches with more extreme values.
 	constexpr float kMaxZoom = 4.f;
-	zoom_ = math::clamp(zoom_, 1.f / kMaxZoom, kMaxZoom);
+	zoom = math::clamp(zoom, 1.f / kMaxZoom, kMaxZoom);
+	mappixel_to_panel = translation.chain(Transform2f::from_zoom(zoom / old_zoom))
+	                                   .chain(translation.inverse())
+	                                   .chain(mappixel_to_panel);
+	panel_to_mappixel_ = mappixel_to_panel.inverse();
 
-	point.x *= zoom_;
-	point.y *= zoom_;
-
-	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), 1., &point);
+	auto point = round(panel_to_mappixel_.translation());
+	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), &point);
 	set_viewpoint(point, false);
 	return true;
 }
@@ -184,10 +199,8 @@ Move the sel to the given mouse position.
 Does not honour sel freeze.
 ===============
 */
-void MapView::track_sel(Point m) {
-	// NOCOM(#sirver): this is also wrong.
-	m.x = m.x * zoom_ + viewpoint_.x / zoom_;
-	m.y = m.y * zoom_ + viewpoint_.y / zoom_;
-	intbase_.set_sel_pos(
-	   MapviewPixelFunctions::calc_node_and_triangle(intbase().egbase().map(), m.x, m.y));
+void MapView::track_sel(Point p) {
+	FloatPoint p_in_map = panel_to_mappixel_.apply(p.cast<float>());
+	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
+	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
 }

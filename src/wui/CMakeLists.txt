@@ -48,7 +48,6 @@ wl_library(wui_mapview_pixelfunctions
     mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
-    vector.h
   DEPENDS
     base_geometry
     logic

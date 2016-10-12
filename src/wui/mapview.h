@@ -25,6 +25,7 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/transform.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
 
@@ -65,13 +66,9 @@ struct MapView : public UI::Panel {
 	void warp_mouse_to_node(Widelands::Coords);
 
 	void set_viewpoint(Point vp, bool jump);
-	void set_rel_viewpoint(Point r, bool jump) {
-		set_viewpoint(viewpoint_ + r, jump);
-	}
+	void set_rel_viewpoint(Point r, bool jump);
 
-	Point get_viewpoint() const {
-		return viewpoint_;
-	}
+	Point get_viewpoint() const;
 	bool is_dragging() const {
 		return dragging_;
 	}
@@ -100,8 +97,8 @@ private:
 	std::unique_ptr<GameRenderer> renderer_;
 	InteractiveBase& intbase_;
 	ChangeViewFn changeview_;
-	Point viewpoint_;
-	float zoom_;
+	Transform2f panel_to_mappixel_;
+	Point last_mouse_pos_;
 	bool dragging_;
 };
 
