@@ -114,6 +114,10 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	fill_table();
 }
 
+void FullscreenMenuCampaignSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
+}
+
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
@@ -348,6 +352,10 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.set_sort_column(0);
 
 	table_.focus();
+}
+
+void FullscreenMenuCampaignMapSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

@@ -135,6 +135,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	joingame.set_enabled(false);
 }
 
+void FullscreenMenuNetSetupLAN::layout() {
+	// TODO(GunChleoc): Box layout and then implement
+}
+
 void FullscreenMenuNetSetupLAN::think() {
 	FullscreenMenuBase::think();
 

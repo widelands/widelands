@@ -61,6 +61,8 @@ protected:
 	void clicked_back() override;
 
 private:
+	void layout() override;
+
 	LuaInterface* lua_;
 
 	void select_map();
