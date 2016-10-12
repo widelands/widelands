@@ -117,9 +117,8 @@ void Table<void*>::add_column(uint32_t const width,
 		columns_.push_back(c);
 	}
 	if (!scrollbar_) {
-		scrollbar_ =
-		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-		                 Scrollbar::kSize, get_h() - headerheight_, false);
+		scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
+		                           get_h() - headerheight_, false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);
 		scrollbar_->set_singlestepsize(lineheight_);
@@ -522,6 +521,42 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 		return columns_[sort_column_].compare(b, a);
 	else
 		return columns_[sort_column_].compare(a, b);
+}
+
+void Table<void*>::layout() {
+	if (!columns_.empty()) {
+		// Find the widest column for resizing
+		int all_columns_width = scrollbar_ && scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+		size_t index = 0;
+		uint32_t widest_width = columns_[index].width;
+		for (size_t i = 1; i < columns_.size(); ++i) {
+			const uint32_t width = columns_[i].width;
+			all_columns_width += width;
+			if (width > widest_width) {
+				widest_width = width;
+				index = i;
+			}
+		}
+		// Now resize
+		Column& column = columns_.at(index);
+		// TODO(GunChleoc): The -11 was arrived at by trial and error - revisit this code when we get
+		// the scrollbar beautification branch in. This point might become moot.
+		column.width = column.width + get_w() - all_columns_width - 11;
+		column.btn->set_size(column.width, column.btn->get_h());
+		int offset = 0;
+		for (const auto& col : columns_) {
+			col.btn->set_pos(Point(offset, col.btn->get_y()));
+			offset = col.btn->get_x() + col.btn->get_w();
+		}
+	}
+
+	// Position the scrollbar
+	if (scrollbar_) {
+		scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
+		scrollbar_->set_pos(Point(get_w() - Scrollbar::kSize, headerheight_));
+		scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
+		scrollbar_->set_steps(entry_records_.size() * get_lineheight() - get_h() - headerheight_);
+	}
 }
 
 /**
