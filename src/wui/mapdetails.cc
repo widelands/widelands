@@ -70,13 +70,11 @@ std::string as_content(const std::string& txt, MapDetails::Style style) {
 }
 }  // namespace
 
-MapDetails::MapDetails(
-   Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style)
-   : UI::Panel(parent, x, y, max_w, max_h),
+MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style)
+   : UI::Panel(parent, x, y, w, h),
 
      style_(style),
      padding_(4),
-     max_h_(max_h),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
                  0,
@@ -88,7 +86,7 @@ MapDetails::MapDetails(
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
      suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w)) {
+        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
@@ -98,32 +96,23 @@ MapDetails::MapDetails(
 	layout();
 }
 
-void MapDetails::layout() {
-	max_h_ = get_h();
-	name_label_.set_size(
-	   get_w() - padding_,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
-	update_layout();
-}
-
 void MapDetails::clear() {
 	name_label_.set_text("");
 	descr_.set_text("");
 	suggested_teams_box_->hide();
 }
 
-void MapDetails::set_max_height(int new_height) {
-	max_h_ = new_height;
-	update_layout();
-}
+void MapDetails::layout() {
+	name_label_.set_size(
+	   get_w() - padding_,
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
 
-void MapDetails::update_layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
-		main_box_.set_size(get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
+		suggested_teams_box_->set_pos(Point(0, get_h() - suggested_teams_box_->get_h()));
+		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
 	} else {
-		main_box_.set_size(get_w(), max_h_);
+		main_box_.set_size(get_w(), get_h());
 	}
 	descr_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 	descr_.scroll_to_top();
@@ -137,7 +126,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		                      as_header(_("Directory:"), style_, true) %
 		                      as_content(mapdata.localized_name, style_))
 		                        .str());
-		main_box_.set_size(main_box_.get_w(), max_h_);
+		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
 		name_label_.set_text(
@@ -204,5 +193,5 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			suggested_teams_box_->show(mapdata.suggested_teams);
 		}
 	}
-	update_layout();
+	layout();
 }
