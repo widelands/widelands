@@ -96,6 +96,8 @@ wl_library(wui
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    economy_options_window.cc
+    economy_options_window.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -163,7 +165,6 @@ wl_library(wui
     story_message_box.h
     trainingsitewindow.cc
     transport_draw.cc
-    transport_ui.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
     unique_window_handler.cc
