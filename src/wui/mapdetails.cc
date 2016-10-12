@@ -27,14 +27,15 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
-#include "graphic/font_handler1.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
+#include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
 namespace {
@@ -75,17 +76,17 @@ MapDetails::MapDetails(
 
      style_(style),
      padding_(4),
-	  max_h_(max_h),
-	  main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     max_h_(max_h),
+     main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
                  0,
                  0,
-					  0,
-					  0,
+                 UI::Scrollbar::kSize,
+                 0,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	  descr_(&main_box_, 0, 0, 0, 0, ""),
+     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w)) {
 	name_label_.force_new_renderer();
@@ -99,8 +100,9 @@ MapDetails::MapDetails(
 
 void MapDetails::layout() {
 	max_h_ = get_h();
-	name_label_.set_size(get_w() - padding_, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-								2);
+	name_label_.set_size(
+	   get_w() - padding_,
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
 	update_layout();
 }
 

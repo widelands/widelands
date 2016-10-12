@@ -20,6 +20,7 @@
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
 
+#include <memory>
 #include <string>
 
 #include "graphic/graphic.h"
