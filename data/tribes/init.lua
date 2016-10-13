@@ -47,25 +47,23 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    end
 end
 
+print("Loading Tribes...")
+include "scripting/mapobjects.lua"
 
 -- ===================================
 --    Ships
 -- ===================================
 
--- TODO(sirver): Adding timing informations here would be really useful, also
--- for world/. This needs some sort of wrapping for the ScopedTimer class.
-
-print("Loading Ships")
 include "tribes/ships/atlanteans/init.lua"
 include "tribes/ships/barbarians/init.lua"
 include "tribes/ships/empire/init.lua"
 
+print_loading_message("ships")
 
 -- ===================================
 --    Wares
 -- ===================================
 
-print("Loading Wares")
 include "tribes/wares/armor/init.lua"
 include "tribes/wares/armor_chain/init.lua"
 include "tribes/wares/armor_gilded/init.lua"
@@ -152,12 +150,12 @@ include "tribes/wares/wheat/init.lua"
 include "tribes/wares/wine/init.lua"
 include "tribes/wares/wool/init.lua"
 
+print_loading_message("wares")
 
 -- ===================================
 --    Immovables
 -- ===================================
 
-print("Loading Immovables")
 include "tribes/immovables/ashes/init.lua"
 include "tribes/immovables/blackrootfield_harvested/init.lua"
 include "tribes/immovables/blackrootfield_medium/init.lua"
@@ -197,13 +195,12 @@ include "tribes/immovables/shipconstruction_atlanteans/init.lua"
 include "tribes/immovables/shipconstruction_barbarians/init.lua"
 include "tribes/immovables/shipconstruction_empire/init.lua"
 
+print_loading_message("immovables")
 
 -- ===================================
 --    Workers, Carriers & Soldiers
 -- ===================================
 
-
-print("Loading Workers")
 include "tribes/workers/atlanteans/carrier/init.lua"
 include "tribes/workers/atlanteans/armorsmith/init.lua"
 include "tribes/workers/atlanteans/baker/init.lua"
@@ -299,12 +296,12 @@ include "tribes/workers/empire/vintner/init.lua"
 include "tribes/workers/empire/weaponsmith/init.lua"
 include "tribes/workers/empire/weaver/init.lua"
 
+print_loading_message("workers")
 
 -- ===================================
 --    Warehouses
 -- ===================================
 
-print("Loading Warehouses")
 include "tribes/buildings/warehouses/atlanteans/headquarters/init.lua"
 include "tribes/buildings/warehouses/atlanteans/port/init.lua"
 include "tribes/buildings/warehouses/atlanteans/warehouse/init.lua"
@@ -317,12 +314,12 @@ include "tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua"
 include "tribes/buildings/warehouses/empire/port/init.lua"
 include "tribes/buildings/warehouses/empire/warehouse/init.lua"
 
+print_loading_message("warehouses")
 
 -- ===================================
 --    Productionsites
 -- ===================================
 
-print("Loading Productionsites")
 -- Atlanteans small
 include "tribes/buildings/productionsites/atlanteans/quarry/init.lua"
 include "tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua"
@@ -437,12 +434,12 @@ include "tribes/buildings/productionsites/empire/marblemine/init.lua"
 include "tribes/buildings/productionsites/empire/goldmine_deep/init.lua"
 include "tribes/buildings/productionsites/empire/goldmine/init.lua"
 
+print_loading_message("productionsites")
 
 -- ===================================
 --    Trainingsites
 -- ===================================
 
-print("Loading Trainingsites")
 include "tribes/buildings/trainingsites/atlanteans/dungeon/init.lua"
 include "tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua"
 include "tribes/buildings/trainingsites/barbarians/battlearena/init.lua"
@@ -451,12 +448,12 @@ include "tribes/buildings/trainingsites/empire/colosseum/init.lua"
 include "tribes/buildings/trainingsites/empire/arena/init.lua"
 include "tribes/buildings/trainingsites/empire/trainingcamp/init.lua"
 
+print_loading_message("trainingsites")
 
 -- ===================================
 --    Militarysites
 -- ===================================
 
-print("Loading Militarysites")
 include "tribes/buildings/militarysites/atlanteans/guardhouse/init.lua"
 include "tribes/buildings/militarysites/atlanteans/guardhall/init.lua"
 include "tribes/buildings/militarysites/atlanteans/tower_small/init.lua"
@@ -478,24 +475,22 @@ include "tribes/buildings/militarysites/empire/tower/init.lua"
 include "tribes/buildings/militarysites/empire/castle/init.lua"
 include "tribes/buildings/militarysites/empire/fortress/init.lua"
 
+print_loading_message("militarysites")
 
 -- ===================================
 --    Partially Finished Buildings
 -- ===================================
 
-print("Loading Partially Finished Buildings")
 include "tribes/buildings/partially_finished/constructionsite/init.lua"
 include "tribes/buildings/partially_finished/dismantlesite/init.lua"
 
+print_loading_message("partially finished buildings")
 
 -- ===================================
 --    Tribes
 -- ===================================
-print("Loading Atlanteans")
 include "tribes/atlanteans.lua"
-print("Loading Barbarians")
 include "tribes/barbarians.lua"
-print("Loading Empire")
 include "tribes/empire.lua"
 
-print("Finished loading tribes")
+print_loading_message("tribe infos")

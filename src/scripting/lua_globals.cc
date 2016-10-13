@@ -19,6 +19,7 @@
 
 #include "scripting/lua_globals.h"
 
+#include <chrono>
 #include <exception>
 
 #include <boost/format.hpp>
@@ -247,6 +248,18 @@ static int L_include(lua_State* L) {
 }
 
 /* RST
+.. function:: system_time()
+
+	Returns the current system clock in milliseconds.
+*/
+static int L_system_time(lua_State* L) {
+	using namespace std::chrono;
+	milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+	lua_pushinteger(L, ms.count());
+	return 1;
+}
+
+/* RST
 .. function:: get_build_id()
 
    returns the version string of this widelands executable.  Something like
@@ -263,6 +276,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
+                                          {"system_time", &L_system_time},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {
