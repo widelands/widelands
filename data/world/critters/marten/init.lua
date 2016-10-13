@@ -7,7 +7,7 @@ animations = {
       fps = 20,
    },
 }
-add_walking_animations(animations, dirname, "marten_walk", {15, 14}, 20)
+add_walking_animations(animations, "walk", dirname, "marten_walk", {15, 14}, 20)
 
 world:new_critter_type{
    name = "marten",

@@ -198,19 +198,6 @@ include "world/immovables/trees/umbrella_red/init.lua"
 
 print_loading_message("immovables")
 
--- Adds 6 animations for each walking direction into 'table'. The pictures are
--- searched for in 'dirname'. All files should look like this
--- 'basename'_(e|ne|se|sw|w|nw)_\d+.png. 'hotspot' is the hotspot for blitting.
-function add_walking_animations(table, dirname, basename, hotspot, fps)
-   for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-      table["walk_" .. dir] = {
-         pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
-         hotspot = hotspot,
-         fps = fps,
-      }
-   end
-end
-
 include "world/critters/badger/init.lua"
 include "world/critters/brownbear/init.lua"
 include "world/critters/bunny/init.lua"
