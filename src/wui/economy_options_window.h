@@ -56,35 +56,21 @@ private:
 	};
 
 	/**
-	 * Wraps the wares display together with some buttons
+	 * Wraps the wares/workers display together with some buttons
 	 */
-	struct EconomyOptionsWarePanel : UI::Box {
-		EconomyOptionsWarePanel(UI::Panel* parent,
-		                        InteractiveGameBase& igbase,
-		                        size_t economy_number,
-		                        Widelands::Player& owner);
+	struct EconomyOptionsPanel : UI::Box {
+		EconomyOptionsPanel(UI::Panel* parent,
+		                    InteractiveGameBase& igbase,
+		                    Widelands::WareWorker type,
+		                    size_t economy_number,
+		                    Widelands::Player& owner);
 
 		void set_economy_number(size_t economy_number);
-		void decrease_target();
-		void increase_target();
+		void change_target(int amount);
 		void reset_target();
 
-		size_t economy_number_;
-		Widelands::Player& owner_;
-		bool can_act_;
-		TargetWaresDisplay display_;
-	};
-	struct EconomyOptionsWorkerPanel : UI::Box {
-		EconomyOptionsWorkerPanel(UI::Panel* parent,
-		                          InteractiveGameBase& igbase,
-		                          size_t economy_number,
-		                          Widelands::Player& owner);
-
-		void set_economy_number(size_t economy_number);
-		void decrease_target();
-		void increase_target();
-		void reset_target();
-
+	private:
+		Widelands::WareWorker type_;
 		size_t economy_number_;
 		Widelands::Player& owner_;
 		bool can_act_;
@@ -94,8 +80,8 @@ private:
 	size_t economy_number_;
 	Widelands::Player& owner_;
 	UI::TabPanel tabpanel_;
-	EconomyOptionsWarePanel* ware_panel_;
-	EconomyOptionsWorkerPanel* worker_panel_;
+	EconomyOptionsPanel* ware_panel_;
+	EconomyOptionsPanel* worker_panel_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
