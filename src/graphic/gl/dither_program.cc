@@ -60,10 +60,10 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
-	back.gl_x = field.gl_x;
-	back.gl_y = field.gl_y;
-	back.texture_x = field.texture_x;
-	back.texture_y = field.texture_y;
+	back.gl_x = field.gl_position.x;
+	back.gl_y = field.gl_position.y;
+	back.texture_x = field.texture_coords.x;
+	back.texture_y = field.texture_coords.y;
 	back.brightness = field.brightness;
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
@@ -156,14 +156,16 @@ void DitherProgram::draw(const uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
+		const int brn_index = fields_to_draw.calculate_index(
+		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
 		if (brn_index == -1) {
 			continue;
 		}
 
 		// Dithering triangles for Down triangle.
-		const int bln_index =
-		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
+		const int bln_index = fields_to_draw.calculate_index(
+		   field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
+		   field.geometric_coords.y + 1);
 		if (bln_index != -1) {
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, current_index,
 			                             bln_index, field.ter_d, field.ter_r);
@@ -172,7 +174,8 @@ void DitherProgram::draw(const uint32_t gametime,
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, bln_index, brn_index,
 			                             current_index, field.ter_d, terrain_dd);
 
-			const int ln_index = fields_to_draw.calculate_index(field.fx - 1, field.fy);
+			const int ln_index =
+			   fields_to_draw.calculate_index(field.geometric_coords.x - 1, field.geometric_coords.y);
 			if (ln_index != -1) {
 				const int terrain_l = fields_to_draw.at(ln_index).ter_r;
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
@@ -181,7 +184,8 @@ void DitherProgram::draw(const uint32_t gametime,
 		}
 
 		// Dithering for right triangle.
-		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
+		const int rn_index =
+		   fields_to_draw.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
 		if (rn_index != -1) {
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index, brn_index,
 			                             rn_index, field.ter_r, field.ter_d);
@@ -189,8 +193,9 @@ void DitherProgram::draw(const uint32_t gametime,
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, rn_index,
 			                             current_index, field.ter_r, terrain_rr);
 
-			const int trn_index =
-			   fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy - 1);
+			const int trn_index = fields_to_draw.calculate_index(
+			   field.geometric_coords.x + (field.geometric_coords.y & 1),
+			   field.geometric_coords.y - 1);
 			if (trn_index != -1) {
 				const int terrain_u = fields_to_draw.at(trn_index).ter_d;
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, rn_index,

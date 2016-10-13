@@ -26,18 +26,24 @@
 
 #include <stdint.h>
 
+#include "base/point.h"
 #include "base/transform.h"
 #include "logic/map_objects/tribes/road_textures.h"
+#include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
 class FieldsToDraw {
 public:
 	struct Field {
-		int fx, fy;        // geometric coordinates (i.e. map coordinates that can be out of bounds).
-		float gl_x, gl_y;  // GL Position of this field.
-		float pixel_x, pixel_y;             // Pixel position relative to top left.
-		float texture_x, texture_y;         // Texture coordinates.
+		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
+		                                     // be out of bounds).
+		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
+		FloatPoint gl_position;  // GL Position of this field.
+		FloatPoint
+		   map_pixel;  // Pixel position relative to top left of the map, i.e. in map pixel frame.
+		FloatPoint screen_pixel;   // Screen pixel this will be plotted on.
+		FloatPoint texture_coords; // Texture coordinates.
 		float brightness;                   // brightness of the pixel
 		uint8_t ter_r, ter_d;               // Texture index of the right and down triangle.
 		uint8_t roads;                      // Bitmask of roads to render, see logic/roadtype.h.

@@ -60,8 +60,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	// The overshot of the road in either direction in percent.
 	static constexpr float kRoadElongationInPercent = .1;
 
-	const float delta_x = end.pixel_x - start.pixel_x;
-	const float delta_y = end.pixel_y - start.pixel_y;
+	const float delta_x = end.screen_pixel.x - start.screen_pixel.x;
+	const float delta_y = end.screen_pixel.y - start.screen_pixel.y;
 	const float vector_length = std::hypot(delta_x, delta_y);
 
 	const float road_overshoot_x = delta_x * kRoadElongationInPercent;
@@ -72,10 +72,12 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * zoom;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * zoom;
 
-	const Image& texture =
-	   road_type == Widelands::RoadType::kNormal ?
-	      start.road_textures->get_normal_texture(start.fx, start.fy, direction) :
-	      start.road_textures->get_busy_texture(start.fx, start.fy, direction);
+	const Image& texture = road_type == Widelands::RoadType::kNormal ?
+	                          // NOCOM(#sirver): change to take a coord
+	                          start.road_textures->get_normal_texture(
+	                             start.geometric_coords.x, start.geometric_coords.y, direction) :
+	                          start.road_textures->get_busy_texture(
+	                             start.geometric_coords.x, start.geometric_coords.y, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}
@@ -86,24 +88,24 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const FloatRect texture_rect = to_gl_texture(texture.blit_data());
 
 	vertices_.emplace_back(PerVertexData{
-	   start.pixel_x - road_overshoot_x + road_thickness_x,
-	   start.pixel_y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
+	   start.screen_pixel.x - road_overshoot_x + road_thickness_x,
+	   start.screen_pixel.y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
-	   start.pixel_x - road_overshoot_x - road_thickness_x,
-	   start.pixel_y - road_overshoot_y - road_thickness_y, texture_rect.x,
+	   start.screen_pixel.x - road_overshoot_x - road_thickness_x,
+	   start.screen_pixel.y - road_overshoot_y - road_thickness_y, texture_rect.x,
 	   texture_rect.y + texture_rect.h, start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
-	   end.pixel_x + road_overshoot_x + road_thickness_x,
-	   end.pixel_y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
+	   end.screen_pixel.x + road_overshoot_x + road_thickness_x,
+	   end.screen_pixel.y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
 	   texture_rect.y, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -117,8 +119,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
 
 	vertices_.emplace_back(PerVertexData{
-	   end.pixel_x + road_overshoot_x - road_thickness_x,
-	   end.pixel_y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
+	   end.screen_pixel.x + road_overshoot_x - road_thickness_x,
+	   end.screen_pixel.y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
 	   texture_rect.y + texture_rect.h, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -137,7 +139,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Road to right neighbor.
-		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
+		const int rn_index =
+		   fields_to_draw.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
 		if (rn_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
@@ -148,7 +151,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
+		const int brn_index = fields_to_draw.calculate_index(
+		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
 		if (brn_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
@@ -159,8 +163,9 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		const int bln_index =
-		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
+		const int bln_index = fields_to_draw.calculate_index(
+		   field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
+		   field.geometric_coords.y + 1);
 		if (bln_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
