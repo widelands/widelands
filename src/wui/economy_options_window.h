@@ -20,6 +20,8 @@
 #ifndef WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 #define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 
+#include <memory>
+
 #include "economy/economy.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/tabpanel.h"
@@ -32,9 +34,6 @@ struct EconomyOptionsWindow : public UI::Window {
 	~EconomyOptionsWindow();
 
 private:
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomyWindow>>
-	   economynotes_subscriber_;
-
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
 		TargetWaresDisplay(UI::Panel* const parent,
 		                   int32_t const x,
@@ -82,6 +81,8 @@ private:
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomyWindow>>
+		economynotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

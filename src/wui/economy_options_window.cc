@@ -19,14 +19,14 @@
 
 #include "wui/economy_options_window.h"
 
+#include <boost/lexical_cast.hpp>
+
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/button.h"
-
-#include <boost/lexical_cast.hpp>
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
