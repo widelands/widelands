@@ -220,7 +220,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	}
 	EditorGameBase& egbase = get_egbase(L);
 	const std::string tribe_name = luaL_checkstring(L, 2);
-	if (!egbase.tribes().tribe_exists(tribe_name)) {
+	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
 	const TribeDescr* descr =

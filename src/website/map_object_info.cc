@@ -478,7 +478,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
-	std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
+	std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",

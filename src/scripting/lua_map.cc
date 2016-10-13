@@ -2479,7 +2479,7 @@ int LuaWareDescription::get_helptext_script(lua_State* L) {
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Tribes& tribes = get_egbase(L).tribes();
-	if (tribes.tribe_exists(tribename)) {
+	if (Widelands::tribe_exists(tribename)) {
 		const DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
 		int tribeindex = tribes.tribe_index(tribename);
 		lua_pushboolean(L, tribes.get_tribe_descr(tribeindex)->is_construction_material(ware_index));

@@ -735,7 +735,7 @@ void NetClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
-			TribeBasicInfo info = Widelands::Tribes::tribeinfo(packet.string());
+			TribeBasicInfo info = Widelands::tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;

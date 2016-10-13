@@ -46,23 +46,23 @@ namespace Widelands {
 class WareDescr;
 class WorkerDescr;
 
+/// Returns a string vector with the names of all tribes.
+std::vector<std::string> get_all_tribenames();
+
+/// Returns a vector with the basic info for all tribes.
+std::vector<TribeBasicInfo> get_all_tribeinfos();
+
+/// Returns the basic preload info for a tribe.
+TribeBasicInfo tribeinfo(const std::string& tribename);
+
+/// Returns whether this tribe is listed in tribes/preload.lua.
+bool tribe_exists(const std::string& tribename);
+
 class Tribes {
 public:
 	Tribes();
 	~Tribes() {
 	}
-
-	/// Returns a string vector with the names of all tribes.
-	static std::vector<std::string> get_all_tribenames();
-
-	/// Returns a vector with the basic info for all tribes.
-	static std::vector<TribeBasicInfo> get_all_tribeinfos();
-
-	/// Returns the basic preload info for a tribe.
-	static TribeBasicInfo tribeinfo(const std::string& tribename);
-
-	/// Returns whether this tribe is listed in tribes/preload.lua.
-	static bool tribe_exists(const std::string& tribename);
 
 	/// Adds this building type to the tribe description.
 	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);

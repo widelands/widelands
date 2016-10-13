@@ -2655,7 +2655,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
-			if (!(egbase.tribes().tribe_exists(name))) {
+			if (!Widelands::tribe_exists(name)) {
 				throw GameDataError("unknown tribe '%s'", name.c_str());
 			}
 			name = lookup_table.lookup_worker(name, fr.c_string());
