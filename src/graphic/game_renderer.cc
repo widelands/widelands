@@ -330,6 +330,7 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
 	draw(egbase, screen_to_mappixel, nullptr, dst);
 }
 
+// NOCOM(#sirver): screen_to_mappixel is not correct - it needs to add dst->offset for mapviews
 void GameRenderer::draw(const EditorGameBase& egbase,
                         const Transform2f& screen_to_mappixel,
                         const Player* player,
@@ -374,8 +375,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			f.fy = fy;
 
 			Coords coords(fx, fy);
-			map.normalize_coords(coords);
-			const FCoords& fcoords = map.get_fcoords(coords);
 
 			// Texture coordinates for pseudo random tiling of terrain and road
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
@@ -384,6 +383,9 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(coords);
 			f.texture_x = map_pixel.x / kTextureSideLength;
 			f.texture_y = -map_pixel.y / kTextureSideLength;
+
+			map.normalize_coords(coords);
+			const FCoords& fcoords = map.get_fcoords(coords);
 
 			map_pixel.y -= fcoords.field->get_height() * kHeightFactor;
 
