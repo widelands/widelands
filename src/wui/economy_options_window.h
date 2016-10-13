@@ -23,15 +23,17 @@
 #include "economy/economy.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
-struct EconomyOptionsWindow : public UI::UniqueWindow {
+struct EconomyOptionsWindow : public UI::Window {
 	EconomyOptionsWindow(InteractiveGameBase& parent, Widelands::Economy& economy);
+	~EconomyOptionsWindow();
 
 private:
-	UI::TabPanel tabpanel_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomyWindow>>
+	   economynotes_subscriber_;
 
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
 		TargetWaresDisplay(UI::Panel* const parent,
@@ -40,13 +42,17 @@ private:
 		                   const Widelands::TribeDescr& tribe,
 		                   Widelands::WareWorker type,
 		                   bool selectable,
-								 Widelands::Economy& economy);
+		                   size_t economy_number,
+		                   Widelands::Player& owner);
+
+		void set_economy_number(size_t economy_number);
 
 	protected:
 		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
 
 	private:
-		Widelands::Economy& economy_;
+		size_t economy_number_;
+		Widelands::Player& owner_;
 	};
 
 	/**
@@ -55,27 +61,41 @@ private:
 	struct EconomyOptionsWarePanel : UI::Box {
 		EconomyOptionsWarePanel(UI::Panel* parent,
 		                        InteractiveGameBase& igbase,
-		                        Widelands::Economy& economy);
+		                        size_t economy_number,
+		                        Widelands::Player& owner);
+
+		void set_economy_number(size_t economy_number);
 		void decrease_target();
 		void increase_target();
 		void reset_target();
 
+		size_t economy_number_;
+		Widelands::Player& owner_;
 		bool can_act_;
 		TargetWaresDisplay display_;
-		Widelands::Economy& economy_;
 	};
 	struct EconomyOptionsWorkerPanel : UI::Box {
 		EconomyOptionsWorkerPanel(UI::Panel* parent,
 		                          InteractiveGameBase& igbase,
-		                          Widelands::Economy& economy);
+		                          size_t economy_number,
+		                          Widelands::Player& owner);
+
+		void set_economy_number(size_t economy_number);
 		void decrease_target();
 		void increase_target();
 		void reset_target();
 
+		size_t economy_number_;
+		Widelands::Player& owner_;
 		bool can_act_;
 		TargetWaresDisplay display_;
-		Widelands::Economy& economy_;
 	};
+
+	size_t economy_number_;
+	Widelands::Player& owner_;
+	UI::TabPanel tabpanel_;
+	EconomyOptionsWarePanel* ware_panel_;
+	EconomyOptionsWorkerPanel* worker_panel_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
