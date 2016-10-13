@@ -97,23 +97,93 @@ float field_brightness(const FCoords& fcoords,
 	return brightness / 255.;
 }
 
-// Returns the road that should be rendered here. The format is like in field,
-// but this is not the physically present road, but the one that should be
-// drawn (i.e. taking into account if there is fog of war involved or road
-// building overlays enabled).
-uint8_t field_roads(const FCoords& coords,
-                    const Map& map,
-                    const EdgeOverlayManager& edge_overlay_manager,
-                    const Player* const player) {
-	uint8_t roads;
-	if (player && !player->see_all()) {
-		const Player::Field& pf = player->fields()[Map::get_index(coords, map.get_width())];
-		roads = pf.roads | edge_overlay_manager.get_overlay(coords);
-	} else {
-		roads = coords.field->get_roads();
+void draw_objects_for_visible_field(const EditorGameBase& egbase,
+                                    const FieldsToDraw::Field& field,
+                                    const float zoom,
+												RenderTarget* dst) {
+	if (BaseImmovable* const imm = field.fcoords.field->get_immovable()) {
+		imm->draw(egbase.get_gametime(), BaseImmovable::ShowText::kNone, field.fcoords,
+		          field.screen_pixel, zoom, dst);
 	}
-	roads |= edge_overlay_manager.get_overlay(coords);
-	return roads;
+	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+		bob->draw(egbase, field.screen_pixel, zoom, dst);
+	}
+}
+
+void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                            const Player::Field& player_field,
+                                            const float zoom,
+                                            RenderTarget* dst) {
+	if (const MapObjectDescr* const map_object_descr = player_field.map_object_descr[TCoords<>::None]) {
+		if (player_field.constructionsite.becomes) {
+			assert(field.owner != nullptr);
+			const ConstructionsiteInformation& csinf = player_field.constructionsite;
+			// draw the partly finished constructionsite
+			uint32_t anim_idx;
+			try {
+				anim_idx = csinf.becomes->get_animation("build");
+			} catch (MapObjectDescr::AnimationNonexistent&) {
+				try {
+					anim_idx = csinf.becomes->get_animation("unoccupied");
+				} catch (MapObjectDescr::AnimationNonexistent) {
+					anim_idx = csinf.becomes->get_animation("idle");
+				}
+			}
+			const Animation& anim = g_gr->animations().get_animation(anim_idx);
+			const size_t nr_frames = anim.nr_frames();
+			uint32_t cur_frame =
+			   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+			uint32_t tanim = cur_frame * FRAME_LENGTH;
+
+			const uint16_t w = anim.width();
+			const uint16_t h = anim.height();
+			uint32_t lines = h * csinf.completedtime * nr_frames;
+			if (csinf.totaltime)
+				lines /= csinf.totaltime;
+			assert(h * cur_frame <= lines);
+			lines -= h * cur_frame;
+
+			if (cur_frame) {  // not the first frame
+				// draw the prev frame from top to where next image will be drawing
+				dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
+				                    field.owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
+			} else if (csinf.was) {
+				// Is the first frame, but there was another building here before,
+				// get its last build picture and draw it instead.
+				uint32_t a;
+				try {
+					a = csinf.was->get_animation("unoccupied");
+				} catch (MapObjectDescr::AnimationNonexistent&) {
+					a = csinf.was->get_animation("idle");
+				}
+				dst->blit_animation(field.screen_pixel, zoom, a, tanim - FRAME_LENGTH, field.owner->get_playercolor(),
+				                    Rect(Point(0, 0), w, h - lines));
+			}
+			assert(lines <= h);
+			dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim, field.owner->get_playercolor(),
+			                    Rect(Point(0, h - lines), w, lines));
+		} else if (upcast(const BuildingDescr, building, map_object_descr)) {
+			assert(field.owner != nullptr);
+			// this is a building therefore we either draw unoccupied or idle animation
+			uint32_t pic;
+			try {
+				pic = building->get_animation("unoccupied");
+			} catch (MapObjectDescr::AnimationNonexistent&) {
+				pic = building->get_animation("idle");
+			}
+			dst->blit_animation(field.screen_pixel, zoom, pic, 0, field.owner->get_playercolor());
+		} else if (map_object_descr->type() == MapObjectType::FLAG) {
+			assert(field.owner != nullptr);
+			dst->blit_animation(
+			   field.screen_pixel, zoom, field.owner->tribe().flag_animation(), 0, field.owner->get_playercolor());
+		} else if (const uint32_t pic = map_object_descr->main_animation()) {
+			if (field.owner != nullptr) {
+				dst->blit_animation(field.screen_pixel, zoom, pic, 0, field.owner->get_playercolor());
+			} else {
+				dst->blit_animation(field.screen_pixel, zoom, pic, 0);
+			}
+		}
+	}
 }
 
 // Draws the objects (animations & overlays).
@@ -122,173 +192,60 @@ void draw_objects(const EditorGameBase& egbase,
 						const FieldsToDraw& fields_to_draw,
                   const Player* player,
                   RenderTarget* dst) {
-	// TODO(sirver): this should use FieldsToDraw. Would simplify this function a lot.
-	static const uint32_t F = 0;
-	static const uint32_t R = 1;
-	static const uint32_t BL = 2;
-	static const uint32_t BR = 3;
-	const Map& map = egbase.map();
-
 	const float zoom = mappixel_to_screen.zoom();
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-		// NOCOM(#sirver): do not repeat work.
-		FCoords coords[4];
-		coords[F] = map.get_fcoords(field.fcoords);
-		coords[R] = map.r_n(coords[F]);
-		coords[BL] = map.bl_n(coords[F]);
-		coords[BR] = map.br_n(coords[F]);
-		FloatPoint pos[4] = {
-		   MapviewPixelFunctions::to_map_pixel_ignoring_height(field.geometric_coords),
-		   MapviewPixelFunctions::to_map_pixel_ignoring_height(
-		      Coords(field.geometric_coords.x + 1, field.geometric_coords.y)),
-		   MapviewPixelFunctions::to_map_pixel_ignoring_height(
-		      Coords(field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
-		             field.geometric_coords.y + 1)),
-		   MapviewPixelFunctions::to_map_pixel_ignoring_height(
-		      Coords(field.geometric_coords.x + (field.geometric_coords.y & 1),
-		             field.geometric_coords.y + 1)),
-		};
-		for (uint32_t i = 0; i < 4; ++i) {
-			pos[i].y -= coords[i].field->get_height() * kHeightFactor;
-			pos[i] = mappixel_to_screen.apply(pos[i]);
+		if (!field.all_neighbors_valid()) {
+			continue;
 		}
 
-		PlayerNumber owner_number[4];
-		bool isborder[4];
-		Vision vision[4] = {2, 2, 2, 2};
-		for (uint32_t d = 0; d < 4; ++d)
-			owner_number[d] = coords[d].field->get_owned_by();
-		for (uint32_t d = 0; d < 4; ++d)
-			isborder[d] = coords[d].field->is_border();
+		const FieldsToDraw::Field& rn = fields_to_draw.at(field.rn_index);
+		const FieldsToDraw::Field& bln = fields_to_draw.at(field.bln_index);
+		const FieldsToDraw::Field& brn = fields_to_draw.at(field.brn_index);
 
-		if (player && !player->see_all()) {
-			for (uint32_t d = 0; d < 4; ++d) {
-				const Player::Field& pf = player->fields()[map.get_index(coords[d], map.get_width())];
-				vision[d] = pf.vision;
-				if (pf.vision == 1) {
-					owner_number[d] = pf.owner;
-					isborder[d] = pf.border;
-				}
+		if (field.is_border) {
+			assert(field.owner != nullptr);
+			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
+			if (field.vision) {
+				dst->blit_animation(field.screen_pixel, zoom, anim_idx, 0, field.owner->get_playercolor());
 			}
-		}
-
-		if (isborder[F]) {
-			const Player& owner = egbase.player(owner_number[F]);
-			uint32_t const anim_idx = owner.tribe().frontier_animation();
-			if (vision[F])
-				dst->blit_animation(pos[F], zoom, anim_idx, 0, owner.get_playercolor());
-			for (uint32_t d = 1; d < 4; ++d) {
-				if ((vision[F] || vision[d]) && isborder[d] &&
-				    (owner_number[d] == owner_number[F] || !owner_number[d])) {
-					dst->blit_animation(
-					   middle(pos[F], pos[d]), zoom, anim_idx, 0, owner.get_playercolor());
+			for (const auto& nf : { rn, bln, brn }) {
+				if ((field.vision || nf.vision) && nf.is_border &&
+				    (field.owner == nf.owner || nf.owner == nullptr)) {
+					dst->blit_animation(middle(field.screen_pixel, nf.screen_pixel), zoom, anim_idx, 0,
+					                    field.owner->get_playercolor());
 				}
 			}
 		}
 
 		// NOCOM(#sirver): figure out census and statistics here.
-		if (1 < vision[F]) {  // Render stuff that belongs to the node.
-			if (BaseImmovable* const imm = coords[F].field->get_immovable()) {
-				imm->draw(
-				   egbase.get_gametime(), BaseImmovable::ShowText::kNone, coords[F], pos[F], zoom, dst);
-			}
-			for (Bob* bob = coords[F].field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-				bob->draw(egbase, pos[F], zoom, dst);
-			}
-		} else if (vision[F] == 1) {
-			const Player::Field& f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
-			const Player* owner = owner_number[F] ? egbase.get_player(owner_number[F]) : nullptr;
-			if (const MapObjectDescr* const map_object_descr =
-			       f_pl.map_object_descr[TCoords<>::None]) {
-				if (f_pl.constructionsite.becomes) {
-					assert(owner != nullptr);
-					const ConstructionsiteInformation& csinf = f_pl.constructionsite;
-					// draw the partly finished constructionsite
-					uint32_t anim_idx;
-					try {
-						anim_idx = csinf.becomes->get_animation("build");
-					} catch (MapObjectDescr::AnimationNonexistent&) {
-						try {
-							anim_idx = csinf.becomes->get_animation("unoccupied");
-						} catch (MapObjectDescr::AnimationNonexistent) {
-							anim_idx = csinf.becomes->get_animation("idle");
-						}
-					}
-					const Animation& anim = g_gr->animations().get_animation(anim_idx);
-					const size_t nr_frames = anim.nr_frames();
-					uint32_t cur_frame =
-					   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
-					uint32_t tanim = cur_frame * FRAME_LENGTH;
-
-					const uint16_t w = anim.width();
-					const uint16_t h = anim.height();
-					uint32_t lines = h * csinf.completedtime * nr_frames;
-					if (csinf.totaltime)
-						lines /= csinf.totaltime;
-					assert(h * cur_frame <= lines);
-					lines -= h * cur_frame;
-
-					if (cur_frame) {  // not the first frame
-						// draw the prev frame from top to where next image will be drawing
-						dst->blit_animation(pos[F], zoom, anim_idx, tanim - FRAME_LENGTH,
-						                    owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
-					} else if (csinf.was) {
-						// Is the first frame, but there was another building here before,
-						// get its last build picture and draw it instead.
-						uint32_t a;
-						try {
-							a = csinf.was->get_animation("unoccupied");
-						} catch (MapObjectDescr::AnimationNonexistent&) {
-							a = csinf.was->get_animation("idle");
-						}
-						dst->blit_animation(pos[F], zoom, a, tanim - FRAME_LENGTH,
-						                    owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
-					}
-					assert(lines <= h);
-					dst->blit_animation(pos[F], zoom, anim_idx, tanim, owner->get_playercolor(),
-					                    Rect(Point(0, h - lines), w, lines));
-				} else if (upcast(const BuildingDescr, building, map_object_descr)) {
-					assert(owner != nullptr);
-					// this is a building therefore we either draw unoccupied or idle animation
-					uint32_t pic;
-					try {
-						pic = building->get_animation("unoccupied");
-					} catch (MapObjectDescr::AnimationNonexistent&) {
-						pic = building->get_animation("idle");
-					}
-					dst->blit_animation(pos[F], zoom, pic, 0, owner->get_playercolor());
-				} else if (map_object_descr->type() == MapObjectType::FLAG) {
-					assert(owner != nullptr);
-					dst->blit_animation(
-					   pos[F], zoom, owner->tribe().flag_animation(), 0, owner->get_playercolor());
-				} else if (const uint32_t pic = map_object_descr->main_animation()) {
-					if (owner != nullptr) {
-						dst->blit_animation(pos[F], zoom, pic, 0, owner->get_playercolor());
-					} else {
-						dst->blit_animation(pos[F], zoom, pic, 0);
-					}
-				}
-			}
+		if (1 < field.vision) {  // Render stuff that belongs to the node.
+			draw_objects_for_visible_field(egbase, field, zoom, dst);
+		} else if (field.vision == 1) {
+			assert(player != nullptr);
+			const Map& map = egbase.map();
+			const Player::Field& player_field =
+			   player->fields()[map.get_index(field.fcoords, map.get_width())];
+			draw_objets_for_formerly_visible_field(field, player_field, zoom, dst);
 		}
 
 		const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
 		{
 			overlay_info.clear();
-			overlay_manager.get_overlays(coords[F], &overlay_info);
+			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
 				// NOCOM(#sirver): this also requires zoom and FloatPoint
-				dst->blit((pos[F] - overlay.hotspot.cast<float>()).cast<int>(), overlay.pic);
+				dst->blit((field.screen_pixel - overlay.hotspot.cast<float>()).cast<int>(), overlay.pic);
 			}
 		}
 
 		{
-			// Render overlays on the R triangle
+			// Render overlays on the right triangle
 			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::R), &overlay_info);
+			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
 
-			Point tripos((pos[F].x + pos[R].x + pos[BR].x) / 3, (pos[F].y + pos[R].y + pos[BR].y) / 3);
+			Point tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3, (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3);
 			for (const auto& overlay : overlay_info) {
 				dst->blit(tripos - overlay.hotspot, overlay.pic);
 			}
@@ -297,10 +254,10 @@ void draw_objects(const EditorGameBase& egbase,
 		{
 			// Render overlays on the D triangle
 			overlay_info.clear();
-			overlay_manager.get_overlays(TCoords<>(coords[F], TCoords<>::D), &overlay_info);
+			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
 
-			Point tripos(
-			   (pos[F].x + pos[BL].x + pos[BR].x) / 3, (pos[F].y + pos[BL].y + pos[BR].y) / 3);
+			Point tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3,
+			             (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3);
 			for (const auto& overlay : overlay_info) {
 				dst->blit(tripos - overlay.hotspot, overlay.pic);
 			}
@@ -372,38 +329,48 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 			f.geometric_coords = Coords(fx, fy);
 
+			f.ln_index = fields_to_draw_.calculate_index(fx - 1, fy);
+			f.rn_index = fields_to_draw_.calculate_index(fx + 1, fy);
+			f.trn_index = fields_to_draw_.calculate_index(fx + (fy & 1), fy - 1);
+			f.bln_index = fields_to_draw_.calculate_index(fx + (fy & 1) - 1, fy + 1);
+			f.brn_index = fields_to_draw_.calculate_index(fx + (fy & 1), fy + 1);
+
 			// Texture coordinates for pseudo random tiling of terrain and road
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have
 			// terrains and road graphics vertically mirrorerd.
-			f.map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
-			f.texture_coords.x = f.map_pixel.x / kTextureSideLength;
-			f.texture_coords.y = -f.map_pixel.y / kTextureSideLength;
+			FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
+			f.texture_coords.x = map_pixel.x / kTextureSideLength;
+			f.texture_coords.y = -map_pixel.y / kTextureSideLength;
 
 			Coords normalized = f.geometric_coords;
 			map.normalize_coords(normalized);
 			f.fcoords = map.get_fcoords(normalized);
 
-			f.map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
+			map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
 			// NOCOM(#sirver): pull out inverse?
-			f.gl_position = f.screen_pixel = screen_to_mappixel.inverse().apply(f.map_pixel);
+			f.gl_position = f.screen_pixel = screen_to_mappixel.inverse().apply(map_pixel);
 			pixel_to_gl_renderbuffer(
 			   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
 
-			f.ter_d = f.fcoords.field->terrain_d();
-			f.ter_r = f.fcoords.field->terrain_r();
-
 			f.brightness = field_brightness(f.fcoords, gametime, map, player);
 
-			const PlayerNumber owner_number = f.fcoords.field->get_owned_by();
-			if (owner_number > 0) {
-				f.road_textures = &egbase.player(owner_number).tribe().road_textures();
-			} else {
-				f.road_textures = nullptr;
+			PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr; 
+			f.is_border = f.fcoords.field->is_border();
+			f.vision = 2; 
+			f.roads = f.fcoords.field->get_roads();
+			if (player && !player->see_all()) {
+				const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
+				f.roads = pf.roads;
+				f.vision = pf.vision;
+				if (pf.vision == 1) {
+					f.owner = pf.owner != 0 ? &egbase.player(owned_by) : nullptr;
+					f.is_border = pf.border;
+				}
 			}
-
-			f.roads = field_roads(f.fcoords, map, edge_overlay_manager, player);
+			f.roads |= edge_overlay_manager.get_overlay(f.fcoords);
 		}
 	}
 

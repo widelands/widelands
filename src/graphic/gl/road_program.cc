@@ -72,11 +72,12 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * zoom;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * zoom;
 
+	assert(start.owner != nullptr);
 	const Image& texture = road_type == Widelands::RoadType::kNormal ?
 	                          // NOCOM(#sirver): change to take a coord
-	                          start.road_textures->get_normal_texture(
+	                          start.owner->tribe().road_textures().get_normal_texture(
 	                             start.geometric_coords.x, start.geometric_coords.y, direction) :
-	                          start.road_textures->get_busy_texture(
+	                          start.owner->tribe().road_textures().get_busy_texture(
 	                             start.geometric_coords.x, start.geometric_coords.y, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
@@ -139,39 +140,32 @@ void RoadProgram::draw(const int renderbuffer_width,
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Road to right neighbor.
-		const int rn_index =
-		   fields_to_draw.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
-		if (rn_index != -1) {
+		if (field.rn_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(rn_index),
+				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.rn_index),
 				         zoom, road, kEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
-		const int brn_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
-		if (brn_index != -1) {
+		if (field.brn_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(brn_index),
+				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.brn_index),
 				         zoom, road, kSouthEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
-		const int bln_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
-		   field.geometric_coords.y + 1);
-		if (bln_index != -1) {
+		if (field.bln_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(bln_index),
-				         zoom, road, kSouthWest, &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field,
+				         fields_to_draw.at(field.bln_index), zoom, road, kSouthWest, &gl_texture);
 			}
 		}
 	}

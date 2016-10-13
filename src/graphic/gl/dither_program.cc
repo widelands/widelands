@@ -156,50 +156,44 @@ void DitherProgram::draw(const uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
-		if (brn_index == -1) {
+		if (field.brn_index == -1) {
 			continue;
 		}
 
 		// Dithering triangles for Down triangle.
-		const int bln_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
-		   field.geometric_coords.y + 1);
-		if (bln_index != -1) {
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, current_index,
-			                             bln_index, field.ter_d, field.ter_r);
+		if (field.bln_index != -1) {
+			maybe_add_dithering_triangle(
+			   gametime, terrains, fields_to_draw, field.brn_index, current_index, field.bln_index,
+			   field.fcoords.field->terrain_d(), field.fcoords.field->terrain_r());
 
-			const int terrain_dd = fields_to_draw.at(bln_index).ter_r;
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, bln_index, brn_index,
-			                             current_index, field.ter_d, terrain_dd);
+			const int terrain_dd = fields_to_draw.at(field.bln_index).fcoords.field->terrain_r();
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.bln_index,
+			                             field.brn_index, current_index,
+			                             field.fcoords.field->terrain_d(), terrain_dd);
 
-			const int ln_index =
-			   fields_to_draw.calculate_index(field.geometric_coords.x - 1, field.geometric_coords.y);
-			if (ln_index != -1) {
-				const int terrain_l = fields_to_draw.at(ln_index).ter_r;
+			if (field.ln_index != -1) {
+				const int terrain_l = fields_to_draw.at(field.ln_index).fcoords.field->terrain_r();
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
-				                             bln_index, brn_index, field.ter_d, terrain_l);
+				                             field.bln_index, field.brn_index,
+				                             field.fcoords.field->terrain_d(), terrain_l);
 			}
 		}
 
 		// Dithering for right triangle.
-		const int rn_index =
-		   fields_to_draw.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
-		if (rn_index != -1) {
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index, brn_index,
-			                             rn_index, field.ter_r, field.ter_d);
-			int terrain_rr = fields_to_draw.at(rn_index).ter_d;
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, brn_index, rn_index,
-			                             current_index, field.ter_r, terrain_rr);
+		if (field.rn_index != -1) {
+			maybe_add_dithering_triangle(
+			   gametime, terrains, fields_to_draw, current_index, field.brn_index, field.rn_index,
+			   field.fcoords.field->terrain_r(), field.fcoords.field->terrain_d());
+			int terrain_rr = fields_to_draw.at(field.rn_index).fcoords.field->terrain_d();
+			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.brn_index,
+			                             field.rn_index, current_index,
+			                             field.fcoords.field->terrain_r(), terrain_rr);
 
-			const int trn_index = fields_to_draw.calculate_index(
-			   field.geometric_coords.x + (field.geometric_coords.y & 1),
-			   field.geometric_coords.y - 1);
-			if (trn_index != -1) {
-				const int terrain_u = fields_to_draw.at(trn_index).ter_d;
-				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, rn_index,
-				                             current_index, brn_index, field.ter_r, terrain_u);
+			if (field.trn_index != -1) {
+				const int terrain_u = fields_to_draw.at(field.trn_index).fcoords.field->terrain_d();
+				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.rn_index,
+				                             current_index, field.brn_index,
+				                             field.fcoords.field->terrain_r(), terrain_u);
 			}
 		}
 	}

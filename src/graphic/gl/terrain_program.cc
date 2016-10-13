@@ -101,33 +101,30 @@ void TerrainProgram::draw(uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
-		if (brn_index == -1) {
+		if (field.brn_index == -1) {
 			continue;
 		}
 
 		// Down triangle.
-		const int bln_index = fields_to_draw.calculate_index(
-		   field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
-		   field.geometric_coords.y + 1);
-		if (bln_index != -1) {
+		if (field.bln_index != -1) {
 			const FloatPoint texture_offset =
-			   to_gl_texture(terrains.get(field.ter_d).get_texture(gametime).blit_data()).origin();
+			   to_gl_texture(
+			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
+			      .origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(bln_index), texture_offset);
-			add_vertex(fields_to_draw.at(brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 		}
 
 		// Right triangle.
-		const int rn_index =
-		   fields_to_draw.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
-		if (rn_index != -1) {
+		if (field.rn_index != -1) {
 			const FloatPoint texture_offset =
-			   to_gl_texture(terrains.get(field.ter_r).get_texture(gametime).blit_data()).origin();
+			   to_gl_texture(
+			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())
+			      .origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(brn_index), texture_offset);
-			add_vertex(fields_to_draw.at(rn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
 		}
 	}
 

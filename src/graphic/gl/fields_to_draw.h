@@ -29,6 +29,8 @@
 #include "base/point.h"
 #include "base/transform.h"
 #include "logic/map_objects/tribes/road_textures.h"
+#include "logic/player.h"
+#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
@@ -40,14 +42,29 @@ public:
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
 		FloatPoint gl_position;  // GL Position of this field.
-		FloatPoint
-		   map_pixel;  // Pixel position relative to top left of the map, i.e. in map pixel frame.
 		FloatPoint screen_pixel;   // Screen pixel this will be plotted on.
 		FloatPoint texture_coords; // Texture coordinates.
 		float brightness;                   // brightness of the pixel
-		uint8_t ter_r, ter_d;               // Texture index of the right and down triangle.
+
+		// The next values are not necessarily the true data of this field, but what the player should see. For example
+		// in fog of war we always draw what we saw last.
 		uint8_t roads;                      // Bitmask of roads to render, see logic/roadtype.h.
-		const RoadTextures* road_textures;  // Road Textures to use for drawing.
+		bool is_border;
+		Widelands::Vision vision;
+		Widelands::Player* owner;  // can be nullptr.
+
+		// Index of neighbors in this 'FieldsToDraw'. -1 if this neighbor is not
+		// contained.
+		int ln_index;
+		int rn_index;
+		int trn_index;
+		int bln_index;
+		int brn_index; 
+
+		inline bool all_neighbors_valid() const {
+			return ln_index >= 0 && rn_index >= 0 && trn_index >= 0 && bln_index >= 0 &&
+			       brn_index >= 0;
+		}
 	};
 
 	FieldsToDraw() : screen_to_mappixel_(Transform2f::identity()) {
