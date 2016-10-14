@@ -1,26 +1,67 @@
+-- RST
+-- Building Helptexts
+-- ------------------
+--
+-- Each building has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
+-- The functions in this file return texts that are used for buildings by the Tribal Encyclopedia.
+--
+-- See also the helper functions in ``scripting/help/global_helptexts.lua``
+--
+
 -- This include can be removed when all help texts have been defined.
 include "tribes/scripting/help/global_helptexts.lua"
 
+-- RST
+-- .. function:: building_helptext_lore()
+--
+--    Returns a localized string with a lore helptext for this building.
+--    If you don't have a lore text yet, use ``no_lore_text_yet()`` from the ``global_helptexts.lua`` script.
+--
+--    :returns: Localized lore text
 function building_helptext_lore()
    -- TRANSLATORS#: Lore helptext for a building
    return no_lore_text_yet()
 end
 
+-- RST
+-- .. function:: building_helptext_lore_author()
+--
+--    Returns a localized string with a fictional author for the lore helptext for this building. The returned string can be empty.
+--    If you don't have an author yet, use ``no_lore_author_text_yet()`` from the ``global_helptexts.lua`` script.
+--
 function building_helptext_lore_author()
    -- TRANSLATORS#: Lore author helptext for a building
    return no_lore_author_text_yet()
 end
 
+-- RST
+-- .. function:: building_helptext_purpose()
+--
+--    Returns a localized string with a purpose helptext for this building. This should be individually defined for all buildings. You can use ``no_purpose_text_yet()`` from the ``global_helptexts.lua`` script if you're not ready to define this yet.
+--
+--    :returns: Localized purpose text
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
    return pgettext("building", "A building is being dismantled at this dismantlesite, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
 end
 
+-- RST
+-- .. function:: building_helptext_note()
+--
+--    Returns a localized string with a note that is added to the purpose. This can be empty.
+--
+--    :returns: Localized note text or empty string.
 function building_helptext_note()
    -- TRANSLATORS#: Note helptext for a building
    return ""
 end
 
+-- RST
+-- .. function:: building_helptext_performance()
+--
+--    Returns a localized string with a performance helptext for this building. You can use ``no_purpose_text_yet()`` from the ``global_helptexts.lua`` script if the performance hasn't been calculated yet. Leave empty when this isn't applicable (e.g. for militarysites or warehouses).
+--
+--    :returns: Localized performance text or empty string.
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
    return no_performance_text_yet()
