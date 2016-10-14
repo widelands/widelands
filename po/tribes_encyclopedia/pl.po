@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-07 07:04+0000\n"
-"PO-Revision-Date: 2016-10-10 10:53+0000\n"
+"POT-Creation-Date: 2016-10-11 09:11+0000\n"
+"PO-Revision-Date: 2016-10-11 21:19+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -1793,7 +1793,7 @@ msgstr "Zamknięcie okna"
 #: ../../data/tribes/scripting/help/controls.lua:19
 msgctxt "hotkey"
 msgid "Right-click"
-msgstr ""
+msgstr "Prawy przycisk myszy"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3362,7 +3362,7 @@ msgstr "Pszenica uprawiana jest na farmach i wykorzystywana w piekarniach, browa
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Pszenicę produkuje się w farmach i przetwarza w młynach i browarach. Także ośle farmy, owczarnie i chlewy muszą być zaopatrywane w pszenicę."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -3370,13 +3370,13 @@ msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr ""
+msgstr "To smakowite wino spożywane jest w kopalniach złota i marmuru. Produkuje się je w winiarniach."
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../data/tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Wełna to włosie owiec. Tkalnie robią z niej tkaninę."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
@@ -3418,7 +3418,7 @@ msgstr "Wypala węgiel."
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr ""
+msgstr "Sadzi i zbiera kukurydzę."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -3430,7 +3430,7 @@ msgstr "Hoduje ryby."
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The fisher fishes delicious fish."
-msgstr "Łowi pyszne ryby."
+msgstr "Rybak łowi pyszne ryby."
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/atlanteans/forester/helptexts.lua:3
@@ -3450,7 +3450,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse "
 "farm."
-msgstr "Konie pomagają przenosić towary na często używanych drogach. Hodowane są w stadninach."
+msgstr "Konie pomagają przenosić towary na zatłoczonych drogach. Hodowane są w stadninach."
 
 #. TRANSLATORS: Helptext for a worker: Horse Breeder
 #: ../../data/tribes/workers/atlanteans/horsebreeder/helptexts.lua:3
@@ -3458,7 +3458,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje silne atlantydzkie konie, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/atlanteans/hunter/helptexts.lua:3
@@ -3472,19 +3472,19 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroot and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Mieli czarny korzeń i kukurydzę, by uzyskać z nich odpowiednio mąkę korzenną i kaszę kukurydzianą."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub kamienie szlachetne."
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr "Tnie drzewo, aby wyprodukować deski."
+msgstr "Tnie drzewo na deski."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/atlanteans/scout/helptexts.lua:3
@@ -3503,7 +3503,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
@@ -3521,13 +3521,13 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Hoduje pająki dla jedwabiu."
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina bloki granitu z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/atlanteans/toolsmith/helptexts.lua:3
@@ -3563,7 +3563,7 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr ""
+msgstr "Piecze chleb pita dla pracowników."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -3571,20 +3571,20 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produkuje bronie dla żołnierzy i narzędzia dla pracowników."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Warzy piwo, by górnikom dopisywały energia i dobry humor."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../data/tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Produces the finest ales to keep soldiers strong and happy in training."
-msgstr ""
+msgstr "Produkuje najlepsze piwa, aby utrzymać żołnierzy silnych i zadowolonych podczas treningu."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
@@ -3602,7 +3602,7 @@ msgstr "Nosi przedmioty po twoich drogach."
 #: ../../data/tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Hoduje mocne woły dla wsparcia transportu towarów."
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
@@ -3620,7 +3620,7 @@ msgstr "Sieje na polach."
 #: ../../data/tribes/workers/barbarians/fisher/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Łowi ryby w morzu."
 
 #. TRANSLATORS: Helptext for a worker: Gamekeeper
 #: ../../data/tribes/workers/barbarians/gamekeeper/helptexts.lua:3
@@ -3628,13 +3628,13 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "Gajowy pilnuje, by naturalna populacja zwierząt nie została przetrzebiona."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Uprawia trzcinę."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -3646,7 +3646,7 @@ msgstr "Odkrywa zasoby do wydobycia."
 #: ../../data/tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Wykuwa hełmy dla żołnierzy."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/barbarians/hunter/helptexts.lua:3
@@ -3658,13 +3658,13 @@ msgstr "Myśliwy zapewnia Atlantydom świeże, surowe mięso."
 #: ../../data/tribes/workers/barbarians/innkeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produkuje jedzenie dla górników."
 
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../data/tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Mixes grout out of granite, water and coal in the lime kiln."
-msgstr ""
+msgstr "Miesza w wapienniku węgiel, granit i wodę uzyskując fugę."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
@@ -3680,14 +3680,14 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/barbarians/miner_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub granit."
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../data/tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "Woły pomagają w transporcie towarów na zatłoczonych drogach. Hoduje się je na farmach bydła."
 
 #. TRANSLATORS: Helptext for a worker: Ranger
 #: ../../data/tribes/workers/barbarians/ranger/helptexts.lua:3
@@ -3712,7 +3712,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/barbarians/soldier/helptexts.lua:3
@@ -3724,7 +3724,7 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/barbarians/stonemason/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina surowe kawałki granitu z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/barbarians/trainer/helptexts.lua:3
@@ -3736,7 +3736,7 @@ msgstr "Szkoli żołnierzy."
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Produkuje tkaninę na żagle statków."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/empire/armorsmith/helptexts.lua:3
@@ -3754,7 +3754,7 @@ msgstr "Piecze chleb dla pracowników."
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Warzy piwo."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
@@ -3766,7 +3766,7 @@ msgstr "Pracuje na placu budowy wznosząc nowe budynki."
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Pracuje w tartaku."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/empire/carrier/helptexts.lua:3
@@ -3786,7 +3786,7 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
+msgstr "Osły pomagają nosić przedmioty na często używanych drogach. Hodowane są na oślich farmach."
 
 #. TRANSLATORS: Helptext for a worker: Donkey Breeder
 #: ../../data/tribes/workers/empire/donkeybreeder/helptexts.lua:3
@@ -3794,7 +3794,7 @@ msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje słodkie i pomocne osły, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
@@ -3806,7 +3806,7 @@ msgstr "Sieje na polach."
 #: ../../data/tribes/workers/empire/fisher/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Łowi ryby w morzu."
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/empire/forester/helptexts.lua:3
@@ -3824,13 +3824,13 @@ msgstr "Odkrywa zasoby do wydobycia."
 #: ../../data/tribes/workers/empire/hunter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "Myśliwy zapewnia Atlantydom świeże, surowe mięso."
+msgstr "Myśliwy zapewnia kolonistom świeże, surowe mięso."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../data/tribes/workers/empire/innkeeper/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produkuje jedzenie dla górników."
 
 #. TRANSLATORS: Helptext for a worker: Lumberjack
 #: ../../data/tribes/workers/empire/lumberjack/helptexts.lua:3
@@ -3842,7 +3842,7 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Miele pszenicę na mąkę."
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
@@ -3850,13 +3850,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub marmur."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Hoduje świnie."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3
@@ -3869,7 +3869,7 @@ msgstr "Prowadzi zwiad jak Zbigniew Zwiadowca zwiedzający niezwiedzony teren w 
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Opiekuje się owcami."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
@@ -3881,7 +3881,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/empire/soldier/helptexts.lua:3
@@ -3893,7 +3893,7 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/empire/stonemason/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina bloki granitu i marmuru z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/empire/toolsmith/helptexts.lua:3
@@ -3911,13 +3911,13 @@ msgstr "Szkoli żołnierzy."
 #: ../../data/tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Uprawia winorośl."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Produkuje wino."
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/empire/weaponsmith/helptexts.lua:3
@@ -3929,4 +3929,4 @@ msgstr "Produkuje bronie dla żołnierzy."
 #: ../../data/tribes/workers/empire/weaver/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Produkuje tkaninę dla łodzi i żołnierzy."

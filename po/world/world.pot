@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-11 09:11+0000\n"
+"POT-Creation-Date: 2016-10-14 08:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -717,47 +717,47 @@ msgstr ""
 msgid "Red Umbrella Tree"
 msgstr ""
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:17
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../../data/world/init.lua:17
+#: ../../data/world/init.lua:23
 msgid "Artifacts"
 msgstr ""
 
-#: ../../data/world/init.lua:17
+#: ../../data/world/init.lua:23
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr ""
 
-#: ../../data/world/init.lua:23
+#: ../../data/world/init.lua:29
 msgid "Plants"
 msgstr ""
 
-#: ../../data/world/init.lua:29
+#: ../../data/world/init.lua:35
 msgid "Standing Stones"
 msgstr ""
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:41
 msgid "Rocks"
 msgstr ""
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:47
 msgid "Coniferous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:53
 msgid "Dead Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:59
 msgid "Deciduous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:59
+#: ../../data/world/init.lua:65
 msgid "Palm Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:65
+#: ../../data/world/init.lua:71
 msgid "Wasteland Trees"
 msgstr ""
 

@@ -2,8 +2,14 @@ world = wl.World()
 
 set_textdomain("world")
 
+print("Loading World...")
+include "scripting/mapobjects.lua"
+
 include "world/resources/init.lua"
+print_loading_message("resources")
+
 include "world/terrains/init.lua"
+print_loading_message("terrains")
 
 
 world:new_editor_immovable_category{
@@ -190,6 +196,8 @@ include "world/immovables/trees/twine/init.lua"
 include "world/immovables/trees/umbrella_green/init.lua"
 include "world/immovables/trees/umbrella_red/init.lua"
 
+print_loading_message("immovables")
+
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
 -- 'basename'_(e|ne|se|sw|w|nw)_\d+.png. 'hotspot' is the hotspot for blitting.
@@ -219,3 +227,5 @@ include "world/critters/stag/init.lua"
 include "world/critters/wildboar/init.lua"
 include "world/critters/wisent/init.lua"
 include "world/critters/wolf/init.lua"
+
+print_loading_message("critters")
