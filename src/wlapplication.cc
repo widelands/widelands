@@ -572,6 +572,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			break;
 		case SDL_MOUSEWHEEL:
 			if (cb && cb->mouse_wheel) {
+				ev.wheel
 				cb->mouse_wheel(ev.wheel.which, ev.wheel.x, ev.wheel.y);
 			}
 			break;

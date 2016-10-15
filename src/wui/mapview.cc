@@ -219,7 +219,6 @@ bool MapView::handle_mousemove(
 	return true;
 }
 
-// NOCOM(#sirver): change handle_mousewheel to also pass through the mouse position
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	if (which != 0) {
 		return false;
