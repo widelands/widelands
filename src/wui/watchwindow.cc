@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/rect.h"
 #include "graphic/graphic.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -73,7 +74,7 @@ struct WatchWindow : public UI::Window {
 
 protected:
 	void think() override;
-	void stop_tracking_by_drag(int32_t x, int32_t y);
+	void stop_tracking_by_drag(const FloatRect&);
 
 private:
 	void do_follow();
@@ -129,8 +130,8 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	}
 
 	mapview.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
-	mapview.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1, _2));
-	warp_mainview.connect(boost::bind(&InteractiveBase::move_view_to_point, &parent, _1));
+	mapview.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1));
+	warp_mainview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, &parent, _1));
 
 	add_view(coords);
 }
@@ -249,7 +250,7 @@ void WatchWindow::think() {
 When the user drags the mapview, we stop tracking.
 ===============
 */
-void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
+void WatchWindow::stop_tracking_by_drag(const FloatRect&) {
 	// Disable switching while dragging
 	if (mapview.is_dragging()) {
 		last_visit = game().get_gametime();

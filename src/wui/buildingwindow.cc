@@ -460,7 +460,7 @@ void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase().move_view_to(building().get_position());
+	igbase().center_view_on_coords(building().get_position());
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {

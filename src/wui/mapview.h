@@ -25,6 +25,7 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/rect.h"
 #include "base/transform.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
@@ -54,12 +55,7 @@ struct MapView : public UI::Panel {
 
 	void set_changeview(const ChangeViewFn& fn);
 
-	/**
-	 * Called whenever the view position changes, for whatever reason.
-	 *
-	 * Parameters are x/y position in screen coordinates.
-	 */
-	boost::signals2::signal<void(int32_t, int32_t)> changeview;
+	boost::signals2::signal<void(const FloatRect&)> changeview;
 
 	boost::signals2::signal<void()> fieldclicked;
 
@@ -69,6 +65,7 @@ struct MapView : public UI::Panel {
 	void set_rel_viewpoint(Point r, bool jump);
 
 	Point get_viewpoint() const;
+	FloatRect get_view_area() const;
 	bool is_dragging() const {
 		return dragging_;
 	}

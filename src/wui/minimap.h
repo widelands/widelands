@@ -42,10 +42,10 @@ struct MiniMap : public UI::UniqueWindow {
 
 	MiniMap(InteractiveBase& parent, Registry*);
 
-	boost::signals2::signal<void(int32_t, int32_t)> warpview;
+	boost::signals2::signal<void(const Point&)> warpview;
 
-	void set_view_pos(int32_t const x, int32_t const y) {
-		view_.set_view_pos(x, y);
+	void set_view(const FloatRect& rect) {
+		view_.set_view(rect);
 	}
 
 private:
@@ -71,7 +71,8 @@ private:
 		     uint32_t h,
 		     InteractiveBase&);
 
-		void set_view_pos(int32_t x, int32_t y);
+		// Set the currently viewed area in map pixel space.
+		void set_view(const FloatRect&);
 
 		void draw(RenderTarget&) override;
 
@@ -82,7 +83,7 @@ private:
 
 	private:
 		InteractiveBase& ibase_;
-		int32_t viewx_, viewy_;
+		FloatRect view_area_;
 		const Image* pic_map_spot_;
 
 		// This needs to be owned since it will be rendered by the RenderQueue

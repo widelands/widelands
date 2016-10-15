@@ -297,7 +297,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		menu.move_view_to(sp);
+		menu.center_view_on_coords(sp);
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);

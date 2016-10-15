@@ -481,7 +481,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().move_view_to(stats_vector[last_building_index_].pos);
+		iplayer().center_view_on_coords(stats_vector[last_building_index_].pos);
 	}
 	low_production_reset_focus();
 	update();

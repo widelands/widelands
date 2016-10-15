@@ -119,7 +119,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	m->quicknavigation->set_setview(boost::bind(&MapView::set_viewpoint, this, _1, true));
 	set_changeview(boost::bind(&QuickNavigation::view_changed, m->quicknavigation.get(), _1, _2));
 
-	changeview.connect(boost::bind(&InteractiveBase::mainview_move, this, _1, _2));
+	changeview.connect(boost::bind(&InteractiveBase::mainview_move, this, _1));
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -355,43 +355,10 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 }
 
-/** InteractiveBase::mainview_move(int32_t x, int32_t y)
- *
- * Signal handler for the main view's warpview updates the mini map's
- * viewpos marker position
- */
-void InteractiveBase::mainview_move(int32_t x, int32_t y) {
+void InteractiveBase::mainview_move(const FloatRect& map_view) {
 	if (m->minimap.window) {
-		const Map& map = egbase().map();
-		const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
-		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
-
-		x += get_w() >> 1;
-		if (x >= maxx)
-			x -= maxx;
-		y += get_h() >> 1;
-		if (y >= maxy)
-			y -= maxy;
-
-		m->mm->set_view_pos(x, y);
+		m->mm->set_view(map_view);
 	}
-}
-
-/*
-===============
-Called whenever the player clicks on a location on the minimap.
-Warps the main mapview position to the clicked location.
-===============
-*/
-void InteractiveBase::minimap_warp(int32_t x, int32_t y) {
-	x -= get_w() >> 1;
-	y -= get_h() >> 1;
-	const Map& map = egbase().map();
-	if (x < 0)
-		x += map.get_width() * kTriangleWidth;
-	if (y < 0)
-		y += map.get_height() * kTriangleHeight;
-	set_viewpoint(Point(x, y), true);
 }
 
 /*
@@ -399,7 +366,7 @@ void InteractiveBase::minimap_warp(int32_t x, int32_t y) {
 Move the mainview to the given position (in node coordinates)
 ===============
 */
-void InteractiveBase::move_view_to(const Coords c) {
+void InteractiveBase::center_view_on_coords(const Widelands::Coords& c) {
 	assert(0 <= c.x);
 	assert(c.x < egbase().map().get_width());
 	assert(0 <= c.y);
@@ -407,11 +374,7 @@ void InteractiveBase::move_view_to(const Coords c) {
 
 	const Map& map = egbase().map();
 	const Point in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
-
-	if (m->minimap.window) {
-		m->mm->set_view_pos(in_mappixel.x, in_mappixel.y);
-	}
-	minimap_warp(in_mappixel.x, in_mappixel.y);
+	center_view_on_map_pixel(in_mappixel);
 }
 
 /*
@@ -419,11 +382,9 @@ void InteractiveBase::move_view_to(const Coords c) {
 Center the mainview on the given position (in pixels)
 ===============
 */
-void InteractiveBase::move_view_to_point(Point pos) {
-	if (m->minimap.window)
-		m->mm->set_view_pos(pos.x, pos.y);
-
-	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2), true);
+void InteractiveBase::center_view_on_map_pixel(const Point& pos) {
+	const FloatRect view_area = get_view_area();
+	set_viewpoint(pos - Point(view_area.w / 2.f, view_area.h / 2.f), true);
 }
 
 // Open the minimap or close it if it's open
@@ -432,12 +393,8 @@ void InteractiveBase::toggle_minimap() {
 		delete m->minimap.window;
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::minimap_warp, this, _1, _2));
-
-		// make sure the viewpos marker is at the right pos to start with
-		const Point p = get_viewpoint();
-
-		mainview_move(p.x, p.y);
+		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
+		mainview_move(get_view_area());
 	}
 }
 

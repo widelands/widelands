@@ -117,8 +117,8 @@ public:
 	}
 	void set_sel_radius(uint32_t);
 
-	void move_view_to(Widelands::Coords);
-	void move_view_to_point(Point pos);
+	void center_view_on_coords(const Widelands::Coords& coords);
+	void center_view_on_map_pixel(const Point& pos);
 
 	//  display flags
 	uint32_t get_display_flags() const;
@@ -178,8 +178,7 @@ protected:
 
 	UI::UniqueWindow::Registry& minimap_registry();
 
-	void mainview_move(int32_t x, int32_t y);
-	void minimap_warp(int32_t x, int32_t y);
+	void mainview_move(const FloatRect&);
 
 	void draw_overlay(RenderTarget&) override;
 	bool handle_key(bool down, SDL_Keysym) override;

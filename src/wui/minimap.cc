@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/transform.h"
 #include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
@@ -39,29 +40,19 @@ MiniMap::View::View(UI::Panel& parent,
                     InteractiveBase& ibase)
    : UI::Panel(&parent, x, y, 10, 10),
      ibase_(ibase),
-     viewx_(0),
-     viewy_(0),
      pic_map_spot_(g_gr->images().get("images/wui/overlays/map_spot.png")),
      flags_(flags) {
 }
 
-/** MiniMap::View::set_view_pos(int32_t x, int32_t y)
- *
- * Set the view point marker to a new position.
- *
- * Args: x, y  new view point coordinates, in screen coordinates
- */
-void MiniMap::View::set_view_pos(const int32_t x, const int32_t y) {
-	viewx_ = x / kTriangleWidth;
-	viewy_ = y / kTriangleHeight;
+void MiniMap::View::set_view(const FloatRect& view_area) {
+	view_area_ = view_area;
 }
 
 void MiniMap::View::draw(RenderTarget& dst) {
-	minimap_image_ = draw_minimap(ibase_.egbase(), ibase_.get_player(),
-	                              (*flags_) & (MiniMapLayer::Zoom2) ?
-	                                 Point((viewx_ - get_w() / 4), (viewy_ - get_h() / 4)) :
-	                                 Point((viewx_ - get_w() / 2), (viewy_ - get_h() / 2)),
-	                              *flags_ | MiniMapLayer::ViewWindow);
+	// TODO(sirver): In the editor, this should be kStaticMap.
+	minimap_image_ =
+	   draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, MiniMapType::kStaticViewWindow,
+	                *flags_ | MiniMapLayer::ViewWindow);
 	dst.blit(Point(), minimap_image_.get());
 }
 
@@ -74,19 +65,13 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	//  calculates the coordinates corresponding to the mouse position
-	Widelands::Coords c;
-	if (*flags_ & MiniMapLayer::Zoom2)
-		c = Widelands::Coords(viewx_ + 1 - (get_w() / 2 - x) / 2, viewy_ + 1 - (get_h() / 2 - y) / 2);
-	else
-		c = Widelands::Coords(viewx_ + 1 - get_w() / 2 + x, viewy_ + 1 - get_h() / 2 + y);
-
-	ibase_.egbase().map().normalize_coords(c);
-
-	dynamic_cast<MiniMap&>(*get_parent()).warpview(c.x * kTriangleWidth, c.y * kTriangleHeight);
-
+	dynamic_cast<MiniMap&>(*get_parent())
+	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Point(x, y), view_area_,
+	                                       MiniMapType::kStaticViewWindow,
+	                                       *flags_ & MiniMapLayer::Zoom2));
 	return true;
 }
+
 bool MiniMap::View::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	return btn == SDL_BUTTON_LEFT;
 }

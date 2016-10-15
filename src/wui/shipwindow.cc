@@ -273,13 +273,13 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	igbase_.move_view_to(ship_.get_position());
+	igbase_.center_view_on_coords(ship_.get_position());
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
 	if (PortDock* destination = ship_.get_destination(igbase_.egbase())) {
-		igbase_.move_view_to(destination->get_warehouse()->get_position());
+		igbase_.center_view_on_coords(destination->get_warehouse()->get_position());
 	}
 }
 

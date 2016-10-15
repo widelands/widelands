@@ -101,7 +101,13 @@ void MapView::set_viewpoint(Point vp, bool jump) {
 	if (changeview_) {
 		changeview_(vp, jump);
 	}
-	changeview(vp.x, vp.y);
+	changeview(get_view_area());
+}
+
+FloatRect MapView::get_view_area() const {
+	const FloatPoint min = panel_to_mappixel_.apply(FloatPoint());
+	const FloatPoint max = panel_to_mappixel_.apply(FloatPoint(get_w(), get_h()));
+	return FloatRect(min.x, min.y, max.x - min.x, max.y - min.y);
 }
 
 void MapView::set_rel_viewpoint(Point vp, bool jump) {
