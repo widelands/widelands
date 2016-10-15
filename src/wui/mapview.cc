@@ -32,6 +32,35 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
+namespace  {
+
+// Returns the shortest distance between two points on a wrapping line of
+// length width.
+float shortest_distance_on_torus(float x1, float x2, const float width) {
+	if (x1 > x2) {
+		std::swap(x1, x2);
+	}
+	while (x2 - x1 > width / 2.f) {
+		x1 += width;
+	}
+	return x2 - x1;
+}
+
+// Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
+// point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
+// Containing is defined as such that the shortest distance between the center
+// of 'r' is smaller than (r.w / 2, r.h / 2). If 'p' is NOT contained in 'r'
+// this method will loop forever.
+FloatPoint move_inside(FloatPoint p, const FloatRect& r, float w, float h) {
+	while (p.x < r.x && r.x < r.x + r.w) { p.x += w; }
+	while (p.x > r.x && r.x > r.x + r.w) { p.x -= w; }
+	while (p.y < r.y && r.y < r.y + r.y) { p.y += h; }
+	while (p.y > r.y && r.y > r.y + r.y) { p.y -= h; }
+	return p;
+}
+
+}  // namespace 
+
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
    : UI::Panel(parent, x, y, w, h),
@@ -50,22 +79,42 @@ Point MapView::get_viewpoint() const {
 
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
-	log("#sirver c.x: %d,c.y: %d\n", c.x, c.y);
+	// This problem is surprisingly hard: We want to figure out if the
+	// 'minimap_pixel' is currently visible on screen and if so, what pixel it
+	// has. Since Wideland's map is a torus, the current 'view_area' could span
+	// the origin. Without loss of generality we only discuss x - y follows
+	// accordingly.
+	// Depending on the interpretation, the area spanning the origin means:
+	// 1) either view_area.x + view_area.w < view_area.x - which would be surprising to
+	//    the rest of Widelands.
+	// 2) map_pixel.x > get_map_end_screen_x(map).
+	//
+	// We are dealing with the problem in two steps: first we figure out if
+	// 'map_pixel' is visible on screen. To do this, we calculate the shortest
+	// distance to 'view_area.center()' on a torus. If the distance is less than
+	// 'view_area.w / 2', the point is visible.
+	// If that is the case, we move the point by adding or substracting
+	// 'get_map_end_screen_x()' such that the point is contained inside of
+	// 'view_area'. If we now apply 'panel_to_mappixel_' to 'map_pixel', we
+	// are guaranteed that the pixel we get back is inside the panel.
+
 	const Widelands::Map& map = intbase().egbase().map();
-	FloatPoint in_mappixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
-	log("#sirver in_mappixel.x: %f,in_mappixel.y: %f\n", in_mappixel.x, in_mappixel.y);
+	const FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
+	const FloatRect view_area = get_view_area();
 
-	auto foo = panel_to_mappixel_.inverse();
-	log("#sirver panel_to_mappixel: %f %f (%f)\n", foo.translation().x,
-	    foo.translation().y, foo.zoom());
-	const Point in_panel = round(panel_to_mappixel_.inverse().apply(in_mappixel));
-	log("#sirver in_panel.x: %d,in_panel.y: %d\n", in_panel.x, in_panel.y);
+	const FloatPoint view_center = view_area.center();
+	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
+	const int h = MapviewPixelFunctions::get_map_end_screen_y(map);
+	const float dist_x = shortest_distance_on_torus(view_center.x, map_pixel.x, w);
+	const float dist_y = shortest_distance_on_torus(view_center.y, map_pixel.y, h);
 
-	//  If the user has scrolled the node outside the viewable area, he most
-	//  surely doesn't want to jump there.
-	if (in_panel.x < 0 || in_panel.y < 0 || in_panel.x >= get_w() || in_panel.y >= get_h()) {
+	// Check if the point is visible on screen.
+	if (dist_x > view_area.w / 2.f || dist_y > view_area.h / 2.f) {
 		return;
 	}
+	const Point in_panel =
+	   round(panel_to_mappixel_.inverse().apply(move_inside(map_pixel, view_area, w, h)));
+
 	set_mouse_pos(in_panel);
 	track_sel(in_panel);
 }
@@ -103,21 +152,6 @@ void MapView::set_viewpoint(Point vp, bool jump) {
 	panel_to_mappixel_ =
 	   Transform2f::from_translation(vp.cast<float>() - panel_to_mappixel_.translation())
 	      .chain(panel_to_mappixel_);
-
-	// Normalize the translation to be positive. This guarantees that transform
-	// into pixel space are also always positive.
-	// NOCOM(#sirver): is this required? the jumping to coord is not properly
-	// working when zoomed out, but I cannot fathom yet why.
-	const uint32_t map_end_screen_x = MapviewPixelFunctions::get_map_end_screen_x(map);
-	const uint32_t map_end_screen_y = MapviewPixelFunctions::get_map_end_screen_y(map);
-	while (panel_to_mappixel_.translation().x < 0.f) {
-		panel_to_mappixel_ =
-		   Transform2f::from_translation(FloatPoint(map_end_screen_x, 0.f)).chain(panel_to_mappixel_);
-	}
-	while (panel_to_mappixel_.translation().y < 0.f) {
-		panel_to_mappixel_ =
-		   Transform2f::from_translation(FloatPoint(0.f, map_end_screen_y)).chain(panel_to_mappixel_);
-	}
 
 	// NOCOM(#sirver): why are there 2 callback functions?
 	if (changeview_) {

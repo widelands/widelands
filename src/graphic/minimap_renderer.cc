@@ -164,9 +164,8 @@ Point minimap_pixel_to_mappixel(const Widelands::Map& map,
 										  const bool zoom) {
 	assert(minimap_type == MiniMapType::kStaticViewWindow);
 
-	const FloatPoint view_center = middle(view_area.origin(), view_area.opposite_of_origin());
 	FloatPoint top_left =
-	   view_center -
+	   view_area.center() -
 	   FloatPoint(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
 
 	const float multiplier = zoom ? 2.f : 1.f;

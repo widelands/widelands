@@ -51,6 +51,11 @@ template <typename T> struct GenericRect {
 		return T(pt.x) >= x && T(pt.x) < x + w && T(pt.y) >= y && T(pt.y) < y + h;
 	}
 
+	// The center point of 'r'.
+	FloatPoint center() const {
+		return FloatPoint(x + w / 2.f, y + h / 2.f);
+	}
+
 	T x, y, w, h;
 };
 
