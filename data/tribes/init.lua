@@ -55,8 +55,6 @@ end
 -- TODO(sirver): Adding timing informations here would be really useful, also
 -- for world/. This needs some sort of wrapping for the ScopedTimer class.
 
-local old_time = os.clock()
-
 print("Loading Ships")
 include "tribes/ships/atlanteans/init.lua"
 include "tribes/ships/barbarians/init.lua"
