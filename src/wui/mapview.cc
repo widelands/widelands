@@ -50,10 +50,16 @@ Point MapView::get_viewpoint() const {
 
 /// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
+	log("#sirver c.x: %d,c.y: %d\n", c.x, c.y);
 	const Widelands::Map& map = intbase().egbase().map();
 	FloatPoint in_mappixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
+	log("#sirver in_mappixel.x: %f,in_mappixel.y: %f\n", in_mappixel.x, in_mappixel.y);
 
+	auto foo = panel_to_mappixel_.inverse();
+	log("#sirver panel_to_mappixel: %f %f (%f)\n", foo.translation().x,
+	    foo.translation().y, foo.zoom());
 	const Point in_panel = round(panel_to_mappixel_.inverse().apply(in_mappixel));
+	log("#sirver in_panel.x: %d,in_panel.y: %d\n", in_panel.x, in_panel.y);
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
@@ -91,11 +97,27 @@ Set the viewpoint to the given pixel coordinates
 ===============
 */
 void MapView::set_viewpoint(Point vp, bool jump) {
-	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), &vp);
+	const Widelands::Map& map = intbase().egbase().map();
+	MapviewPixelFunctions::normalize_pix(map, &vp);
 
 	panel_to_mappixel_ =
 	   Transform2f::from_translation(vp.cast<float>() - panel_to_mappixel_.translation())
 	      .chain(panel_to_mappixel_);
+
+	// Normalize the translation to be positive. This guarantees that transform
+	// into pixel space are also always positive.
+	// NOCOM(#sirver): is this required? the jumping to coord is not properly
+	// working when zoomed out, but I cannot fathom yet why.
+	const uint32_t map_end_screen_x = MapviewPixelFunctions::get_map_end_screen_x(map);
+	const uint32_t map_end_screen_y = MapviewPixelFunctions::get_map_end_screen_y(map);
+	while (panel_to_mappixel_.translation().x < 0.f) {
+		panel_to_mappixel_ =
+		   Transform2f::from_translation(FloatPoint(map_end_screen_x, 0.f)).chain(panel_to_mappixel_);
+	}
+	while (panel_to_mappixel_.translation().y < 0.f) {
+		panel_to_mappixel_ =
+		   Transform2f::from_translation(FloatPoint(0.f, map_end_screen_y)).chain(panel_to_mappixel_);
+	}
 
 	// NOCOM(#sirver): why are there 2 callback functions?
 	if (changeview_) {

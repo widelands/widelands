@@ -73,12 +73,11 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * zoom;
 
 	assert(start.owner != nullptr);
-	const Image& texture = road_type == Widelands::RoadType::kNormal ?
-	                          // NOCOM(#sirver): change to take a coord
-	                          start.owner->tribe().road_textures().get_normal_texture(
-	                             start.geometric_coords.x, start.geometric_coords.y, direction) :
-	                          start.owner->tribe().road_textures().get_busy_texture(
-	                             start.geometric_coords.x, start.geometric_coords.y, direction);
+	const Image& texture =
+	   road_type == Widelands::RoadType::kNormal ?
+	      start.owner->tribe().road_textures().get_normal_texture(
+	         start.geometric_coords, direction) :
+	      start.owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}

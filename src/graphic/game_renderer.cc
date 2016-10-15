@@ -297,16 +297,15 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
-	int minfx = std::floor(tl_map.x / kTriangleWidth) - 1;
-	int minfy = std::floor(tl_map.y / kTriangleHeight) - 1;
-	int maxfx = std::ceil(br_map.x / kTriangleWidth) + 1;
-	int maxfy = std::ceil(br_map.y / kTriangleHeight) + 1;
+	int minfx = std::floor(tl_map.x / kTriangleWidth);
+	int minfy = std::floor(tl_map.y / kTriangleHeight);
+	int maxfx = std::ceil(br_map.x / kTriangleWidth);
+	int maxfy = std::ceil(br_map.y / kTriangleHeight);
 
-	// NOCOM(#sirver): weird? correct!
-	// fudge for triangle boundary effects and for height differences
-	minfx -= 1;
-	minfy -= 1;
-	maxfx += 1;
+	// Adjust for triangle boundary effects and for height differences.
+	minfx -= 2;
+	maxfx += 2;
+	minfy -= 2;
 	maxfy += 10;
 
 	Surface* surface = dst->get_surface();
@@ -321,7 +320,8 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 	const uint32_t gametime = egbase.get_gametime();
 
-	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy, screen_to_mappixel);
+	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
+	const Transform2f mappixel_to_screen = screen_to_mappixel.inverse();
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
@@ -349,8 +349,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 			map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
-			// NOCOM(#sirver): pull out inverse?
-			f.gl_position = f.screen_pixel = screen_to_mappixel.inverse().apply(map_pixel);
+			f.gl_position = f.screen_pixel = mappixel_to_screen.apply(map_pixel);
 			pixel_to_gl_renderbuffer(
 			   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
 
@@ -386,7 +385,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.terrain_arguments.renderbuffer_height = surface_height;
 	i.terrain_arguments.terrains = &egbase.world().terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
-	i.terrain_arguments.zoom = screen_to_mappixel.inverse().zoom();
+	i.terrain_arguments.zoom = mappixel_to_screen.zoom();
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.
@@ -398,6 +397,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(egbase, screen_to_mappixel.inverse(), fields_to_draw_, player, dst);
+	draw_objects(egbase, mappixel_to_screen, fields_to_draw_, player, dst);
 }
 
