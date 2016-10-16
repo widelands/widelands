@@ -25,15 +25,10 @@
 #include "base/rect.h"
 #include "base/transform.h"
 #include "base/vector.h"
+#include "graphic/texture.h"
+#include "logic/editor_game_base.h"
 #include "logic/map.h"
-
-class StreamWrite;
-class Texture;
-
-namespace Widelands {
-class Player;
-class EditorGameBase;
-}
+#include "logic/player.h"
 
 // Layers for selecting what do display on the minimap.
 enum class MiniMapLayer {
@@ -87,13 +82,5 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Rectf& view_area,
                                       const MiniMapType& map_draw_type,
                                       MiniMapLayer layers);
-
-/// Render the minimap to a file. 1 pixel will be used for each fields.
-void write_minimap_image(const Widelands::EditorGameBase& egbase,
-                         Widelands::Player const* player,
-                         const Rectf& view_area,
-                         const MiniMapType& map_draw_type,
-                         MiniMapLayer layers,
-                         StreamWrite* const streamwrite);
 
 #endif  // end of include guard: WL_GRAPHIC_MINIMAP_RENDERER_H

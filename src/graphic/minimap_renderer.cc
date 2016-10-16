@@ -25,13 +25,9 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
-#include "graphic/image_io.h"
-#include "graphic/texture.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/player.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -210,16 +206,4 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	texture->unlock(Texture::Unlock_Update);
 
 	return texture;
-}
-
-// NOCOM(#sirver): this function is now rather unnecessary
-void write_minimap_image(const Widelands::EditorGameBase& egbase,
-                         Widelands::Player const* player,
-                         const Rectf& view_area,
-                         const MiniMapType& minimap_type,
-                         MiniMapLayer layers,
-                         ::StreamWrite* const streamwrite) {
-	assert(streamwrite != nullptr);
-	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, view_area, minimap_type, layers));
-	save_to_png(texture.get(), streamwrite, ColorType::RGBA);
 }

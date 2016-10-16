@@ -27,6 +27,7 @@
 #include "base/time_string.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -122,12 +123,15 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	if (sw.get() != nullptr) {
 		const MiniMapLayer layers =
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+		std::unique_ptr<Texture> texture;
 		if (ipl != nullptr) {  // Player
-			write_minimap_image(game, &ipl->player(), ipl->get_view_area(),
-			                    MiniMapType::kStaticViewWindow, layers, sw.get());
+			texture = draw_minimap(
+			   game, &ipl->player(), ipl->get_view_area(), MiniMapType::kStaticViewWindow, layers);
 		} else {  // Observer
-			write_minimap_image(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers, sw.get());
+			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
 		}
+		assert(texture != nullptr);
+		save_to_png(texture.get(), sw.get(), ColorType::RGBA);
 		sw->flush();
 	}
 }
