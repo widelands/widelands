@@ -58,22 +58,22 @@ public:
 	int32_t height() const;
 
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
-	void draw_rect(const Recti&, const RGBColor&);
-	void fill_rect(const Recti&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
-	void brighten_rect(const Recti&, int32_t factor);
+	void draw_rect(const Rectf&, const RGBColor&);
+	void fill_rect(const Rectf&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
+	void brighten_rect(const Rectf&, int32_t factor);
 
-	void blit(const Vector2i& dst,
+	void blit(const Vector2f& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
 	          UI::Align = UI::Align::kTopLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
-	void blit_monochrome(const Vector2i& dst,
+	void blit_monochrome(const Vector2f& dst,
 	                     const Image* image,
 	                     const RGBAColor& blend_mode,
 	                     UI::Align = UI::Align::kTopLeft);
 
-	void blitrect(const Vector2i& dst,
+	void blitrect(const Vector2f& dst,
 	              const Image* image,
 	              const Recti& src,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
@@ -83,16 +83,16 @@ public:
 	// multiplied with 'opacity' before blitting. The 'blend_mode'
 	// defines if values are blended with whats already there or just
 	// copied over.
-	// Recti's are taken by value on purpose.
-	void blitrect_scale(Recti destination_rect,
+	// Takes by value on purpose.
+	void blitrect_scale(Rectf destination_rect,
 	                    const Image* image,
 	                    Recti source_rect,
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// Like blitrect_scale. See MonochromeBlitProgram for details. Recti's are
-	// taken by value on purpose.
-	void blitrect_scale_monochrome(Recti destination_rect,
+	// Like blitrect_scale. See MonochromeBlitProgram for details. Takes by
+	// value on purpose.
+	void blitrect_scale_monochrome(Rectf destination_rect,
 	                               const Image* image,
 	                               Recti source_rect,
 	                               const RGBAColor& blend);
@@ -131,8 +131,8 @@ public:
 	}
 
 protected:
-	bool clip(Recti& r) const;
-	bool to_surface_geometry(Recti* destination_rect, Recti* source_rect) const;
+	bool clip(Rectf& r) const;
+	bool to_surface_geometry(Rectf* destination_rect, Rectf* source_rect) const;
 
 	// Does the actual blitting.
 	void do_blit_animation(const Vector2f& dst,

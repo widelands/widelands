@@ -77,7 +77,7 @@ template <typename T> struct Vector2 {
 
 	template<typename Type>
 	Vector2<Type> cast() const {
-		return Vector2<Type>(static_cast<Type>(x), static_cast<Type>(y));
+		return Vector2<Type>(Type(x), Type(y));
 	}
 
 	T x, y;

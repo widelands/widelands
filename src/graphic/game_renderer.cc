@@ -235,8 +235,8 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
-				// NOCOM(#sirver): this also requires zoom and Vector2f
-				dst->blit((field.screen_pixel - overlay.hotspot.cast<float>()).cast<int>(), overlay.pic);
+				// NOCOM(#sirver): this also requires zoom
+				dst->blit(field.screen_pixel - overlay.hotspot.cast<float>(), overlay.pic);
 			}
 		}
 
@@ -245,9 +245,10 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
 
-			Vector2i tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3, (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3);
+			Vector2f tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3.f,
+			                (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blit(tripos - overlay.hotspot, overlay.pic);
+				dst->blit(tripos - overlay.hotspot.cast<float>(), overlay.pic);
 			}
 		}
 
@@ -256,10 +257,10 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
 
-			Vector2i tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3,
-			             (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3);
+			Vector2f tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3.f,
+			                (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blit(tripos - overlay.hotspot, overlay.pic);
+				dst->blit(tripos - overlay.hotspot.cast<float>(), overlay.pic);
 			}
 		}
 	}

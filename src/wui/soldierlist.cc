@@ -281,11 +281,11 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows)
-		dst.fill_rect(Recti(Vector2i(0, 0), get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(Rectf(0.f, 0.f, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
 	if (capacity % kMaxColumns)
-		dst.fill_rect(Recti(Vector2i(0, icon_height_ * fullrows), icon_width_ * (capacity % kMaxColumns),
-		                   icon_height_),
-		              RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(
+		   Rectf(0.f, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
+		   RGBAColor(0, 0, 0, 0));
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
@@ -293,7 +293,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 		if (!soldier)
 			continue;
 
-		soldier->draw_info_icon(dst, icon.pos + Vector2i(kIconBorder, kIconBorder), false);
+		soldier->draw_info_icon(
+		   dst, icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), false);
 	}
 }
 

@@ -110,9 +110,10 @@ void BuildingWindow::draw(RenderTarget& dst) {
 	// TODO(sirver): chang this to directly blit the animation. This needs support for or removal of
 	// RenderTarget.
 	const Image* image = building().representative_image();
-	dst.blitrect_scale(Recti((get_inner_w() - image->width()) / 2,
-	                        (get_inner_h() - image->height()) / 2, image->width(), image->height()),
-	                   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
+	dst.blitrect_scale(
+	   Rectf((get_inner_w() - image->width()) / 2.f, (get_inner_h() - image->height()) / 2.f,
+	         image->width(), image->height()),
+	   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
 }
 
 /*

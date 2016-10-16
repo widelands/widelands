@@ -72,16 +72,16 @@ void ProgressBar::draw(RenderTarget& dst) {
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {
-		const uint32_t w = static_cast<uint32_t>(get_w() * fraction);
-		assert(w <= static_cast<uint32_t>(get_w()));
+		const float w = get_w() * fraction;
+		assert(w <= get_w());
 
-		dst.fill_rect(Recti(Vector2i(0, 0), w, get_h()), color);
-		dst.fill_rect(Recti(Vector2i(w, 0), get_w() - w, get_h()), RGBColor(0, 0, 0));
+		dst.fill_rect(Rectf(0.f, 0.f, w, get_h()), color);
+		dst.fill_rect(Rectf(w, 0.f, get_w() - w, get_h()), RGBColor(0, 0, 0));
 	} else {
 		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0f - fraction));
 
-		dst.fill_rect(Recti(Vector2i(0, 0), get_w(), h), RGBColor(0, 0, 0));
-		dst.fill_rect(Recti(Vector2i(0, h), get_w(), get_h() - h), color);
+		dst.fill_rect(Rectf(0.f, 0.f, get_w(), h), RGBColor(0, 0, 0));
+		dst.fill_rect(Rectf(0.f, h, get_w(), get_h() - h), color);
 	}
 
 	// Print the state in percent
@@ -89,8 +89,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	uint32_t percent = static_cast<uint32_t>(fraction * 100);
 	const std::string progress_text =
 	   (boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
-	const Vector2i pos(get_w() / 2, get_h() / 2);
-	dst.blit(
-	   pos, UI::g_fh1->render(as_uifont(progress_text)), BlendMode::UseAlpha, UI::Align::kCenter);
+	dst.blit(Vector2f(get_w() / 2.f, get_h() / 2.f), UI::g_fh1->render(as_uifont(progress_text)),
+	         BlendMode::UseAlpha, UI::Align::kCenter);
 }
 }

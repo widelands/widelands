@@ -53,11 +53,11 @@ Align mirror_alignment(Align alignment) {
 	return alignment;
 }
 
-void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2i* pt) {
+void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
 	// Vertical Align
 	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
 		if (static_cast<int>(align & Align::kVCenter))
-			pt->y -= h / 2;
+			pt->y -= h / 2.f;
 		else
 			pt->y -= h;
 	}
@@ -65,7 +65,7 @@ void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2i* pt) {
 	// Horizontal Align
 	if ((align & Align::kHorizontal) != Align::kLeft) {
 		if (static_cast<int>(align & Align::kHCenter))
-			pt->x -= w / 2;
+			pt->x -= w / 2.f;
 		else if (static_cast<int>(align & Align::kRight))
 			pt->x -= w;
 	}

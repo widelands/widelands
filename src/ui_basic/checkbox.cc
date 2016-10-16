@@ -113,18 +113,18 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
-		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
+		dst.blit(Vector2f((get_inner_w() - w) / 2., (get_inner_h() - h) / 2.), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
-			dst.draw_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBColor(229, 116, 2));
+			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(229, 116, 2));
 		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBColor(100, 100, 80));
+			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(100, 100, 80));
 		}
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
-		Vector2i image_anchor(0, 0);
-		Vector2i text_anchor(kStateboxSize + kPadding, 0);
+		Vector2f image_anchor(0.f, 0.f);
+		Vector2f text_anchor(kStateboxSize + kPadding, 0);
 
 		if (rendered_text_) {
 			if (UI::g_fh1->fontset()->is_rtl()) {
@@ -141,7 +141,7 @@ void Statebox::draw(RenderTarget& dst) {
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
-			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+			   Rectf(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
 	}
 }
 

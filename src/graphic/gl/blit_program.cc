@@ -190,7 +190,7 @@ void BlitProgram::draw_monochrome(const Rectf& dest_rect,
                                   const float z_value,
                                   const BlitData& texture,
                                   const RGBAColor& blend) {
-	draw({Arguments{dest_rect, z_value, texture, BlitData{0, 0, 0, Recti()}, blend,
+	draw({Arguments{dest_rect, z_value, texture, BlitData{0, 0, 0, Rectf()}, blend,
 	                BlendMode::UseAlpha, BlitMode::kMonochrome}});
 }
 

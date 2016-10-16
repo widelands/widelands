@@ -124,16 +124,16 @@ void WaresQueueDisplay::draw(RenderTarget& dst) {
 	uint32_t nr_wares_to_draw = std::min(queue_->get_filled(), cache_size_);
 	uint32_t nr_empty_to_draw = cache_size_ - nr_wares_to_draw;
 
-	Vector2i point;
+	Vector2f point;
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale(Recti(point.x, point.y, icon_->width(), icon_->height()), icon_,
+		dst.blitrect_scale(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
 		                   Recti(0, 0, icon_->width(), icon_->height()), 1.0, BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_monochrome(Recti(point.x, point.y, icon_->width(), icon_->height()), icon_,
+		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
 		                              Recti(0, 0, icon_->width(), icon_->height()),
 		                              RGBAColor(166, 166, 166, 127));
 	}

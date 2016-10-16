@@ -449,8 +449,9 @@ void Soldier::draw(const EditorGameBase& game,
 	}
 
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, zoom);
-	draw_info_icon(*dst, Vector2i(point_on_dst.x,
-	                           point_on_dst.y - g_gr->animations().get_animation(anim).height() - 7),
+	draw_info_icon(*dst,
+	               Vector2f(point_on_dst.x,
+	                        point_on_dst.y - g_gr->animations().get_animation(anim).height() - 7),
 	               true);
 	draw_inner(game, point_on_dst, zoom, dst);
 }
@@ -461,7 +462,7 @@ void Soldier::draw(const EditorGameBase& game,
  * \param anchor_below if \c true, the icon is drawn horizontally centered above
  * \p pt. Otherwise, the icon is drawn below and right of \p pt.
  */
-void Soldier::draw_info_icon(RenderTarget& dst, Vector2i pt, bool anchor_below) const {
+void Soldier::draw_info_icon(RenderTarget& dst, Vector2f pt, bool anchor_below) const {
 	// NOCOM(#sirver): needs zoom
 	// Gather information to determine coordinates
 	uint32_t w;
@@ -485,21 +486,21 @@ void Soldier::draw_info_icon(RenderTarget& dst, Vector2i pt, bool anchor_below) 
 	uint32_t totalheight = 5 + std::max<int>(hph + ath, evh + deh);
 
 	if (!anchor_below) {
-		pt.x += totalwidth / 2;
+		pt.x += totalwidth / 2.f;
 		pt.y += totalheight - 5;
 	} else {
 		pt.y -= 5;
 	}
 
 	// Draw energy bar
-	Recti energy_outer(Vector2i(pt.x - w, pt.y), w * 2, 5);
+	Rectf energy_outer(Vector2f(pt.x - w, pt.y), w * 2.f, 5.f);
 	dst.draw_rect(energy_outer, RGBColor(255, 255, 255));
 
 	assert(get_max_health());
 	uint32_t health_width = 2 * (w - 1) * current_health_ / get_max_health();
-	Recti energy_inner(Vector2i(pt.x - w + 1, pt.y + 1), health_width, 3);
-	Recti energy_complement(
-	   energy_inner.origin() + Vector2i(health_width, 0), 2 * (w - 1) - health_width, 3);
+	Rectf energy_inner(Vector2f(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Rectf energy_complement(
+	   energy_inner.origin() + Vector2f(health_width, 0), 2 * (w - 1) - health_width, 3);
 	const RGBColor& color = owner().get_playercolor();
 	RGBColor complement_color;
 
@@ -513,10 +514,10 @@ void Soldier::draw_info_icon(RenderTarget& dst, Vector2i pt, bool anchor_below) 
 
 	// Draw level pictures
 	{
-		dst.blit(pt + Vector2i(-atw, -(hph + ath)), attackpic);
-		dst.blit(pt + Vector2i(0, -(evh + deh)), defensepic);
-		dst.blit(pt + Vector2i(-hpw, -hph), healthpic);
-		dst.blit(pt + Vector2i(0, -evh), evadepic);
+		dst.blit(pt + Vector2f(-atw, -(hph + ath)), attackpic);
+		dst.blit(pt + Vector2f(0, -(evh + deh)), defensepic);
+		dst.blit(pt + Vector2f(-hpw, -hph), healthpic);
+		dst.blit(pt + Vector2f(0, -evh), evadepic);
 	}
 }
 
@@ -598,7 +599,7 @@ Battle* Soldier::get_battle() {
  * each other.
  */
 bool Soldier::can_be_challenged() {
-	if (current_health_ < 1) {  //< Soldier is dead!
+	if (current_health_ < 1) {  // Soldier is dead!
 		return false;
 	}
 	if (!is_on_battlefield()) {
@@ -900,9 +901,6 @@ void Soldier::attack_pop(Game& game, State&) {
 
 /**
  * Accept Bob when is a Soldier alive that is attacking the Player.
- *
- * \param g
- * \param p
  */
 struct FindBobSoldierAttackingPlayer : public FindBob {
 	FindBobSoldierAttackingPlayer(Game& g, Player& p) : player(p), game(g) {

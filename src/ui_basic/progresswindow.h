@@ -62,8 +62,8 @@ struct ProgressWindow {
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
-	Vector2i label_center_;
-	Recti label_rectangle_;
+	Vector2f label_center_;
+	Rectf label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
 

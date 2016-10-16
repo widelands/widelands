@@ -214,7 +214,7 @@ public:
 	          RenderTarget* dst) const override;
 
 	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
-	void draw_info_icon(RenderTarget&, Vector2i, bool anchor_below) const;
+	void draw_info_icon(RenderTarget&, Vector2f, bool anchor_below) const;
 
 	uint32_t get_current_health() const {
 		return current_health_;

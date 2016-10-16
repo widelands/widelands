@@ -38,7 +38,7 @@ struct BlitData {
 	int parent_height;
 
 	// The subrect in the parent texture.
-	Recti rect;
+	Rectf rect;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_BLIT_DATA_H

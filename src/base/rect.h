@@ -56,6 +56,11 @@ template <typename T> struct Rect {
 		return Vector2f(x + w / 2.f, y + h / 2.f);
 	}
 
+	template<typename Type>
+	Rect<Type> cast() const {
+		return Rect<Type>(Type(x), Type(y), Type(w), Type(h));
+	}
+
 	T x, y, w, h;
 };
 

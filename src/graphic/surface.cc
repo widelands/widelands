@@ -34,7 +34,7 @@
 namespace {
 
 // Adjust 'original' so that only 'src_rect' is actually blitted.
-BlitData adjust_for_src(BlitData blit_data, const Recti& src_rect) {
+BlitData adjust_for_src(BlitData blit_data, const Rectf& src_rect) {
 	blit_data.rect.x += src_rect.x;
 	blit_data.rect.y += src_rect.y;
 	blit_data.rect.w = src_rect.w;
@@ -107,12 +107,12 @@ void tesselate_line_strip(int w,
 
 }  // namespace
 
-void Surface::fill_rect(const Recti& rc, const RGBAColor& clr, BlendMode blend_mode) {
+void Surface::fill_rect(const Rectf& rc, const RGBAColor& clr, BlendMode blend_mode) {
 	const Rectf rect = rect_to_gl_renderbuffer(width(), height(), rc);
 	do_fill_rect(rect, clr, blend_mode);
 }
 
-void Surface::brighten_rect(const Recti& rc, const int32_t factor) {
+void Surface::brighten_rect(const Rectf& rc, const int32_t factor) {
 	if (!factor) {
 		return;
 	}
@@ -138,34 +138,34 @@ void Surface::draw_line_strip(std::vector<Vector2f> points,
 	do_draw_line_strip(std::move(vertices));
 }
 
-void Surface::blit_monochrome(const Recti& dst_rect,
+void Surface::blit_monochrome(const Rectf& dst_rect,
                               const Image& image,
-                              const Recti& src_rect,
+                              const Rectf& src_rect,
                               const RGBAColor& blend) {
 	const Rectf rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit_monochrome(rect, adjust_for_src(image.blit_data(), src_rect), blend);
 }
 
-void Surface::blit_blended(const Recti& dst_rect,
+void Surface::blit_blended(const Rectf& dst_rect,
                            const Image& image,
                            const Image& texture_mask,
-                           const Recti& src_rect,
+                           const Rectf& src_rect,
                            const RGBColor& blend) {
 	const Rectf rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit_blended(rect, adjust_for_src(image.blit_data(), src_rect),
 	                adjust_for_src(texture_mask.blit_data(), src_rect), blend);
 }
 
-void Surface::blit(const Recti& dst_rect,
+void Surface::blit(const Rectf& dst_rect,
                    const Image& image,
-                   const Recti& src_rect,
+                   const Rectf& src_rect,
                    float opacity,
                    BlendMode blend_mode) {
 	const Rectf rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit(rect, adjust_for_src(image.blit_data(), src_rect), opacity, blend_mode);
 }
 
-void draw_rect(const Recti& rc, const RGBColor& clr, Surface* surface) {
+void draw_rect(const Rectf& rc, const RGBColor& clr, Surface* surface) {
 	const Vector2f top_left = Vector2f(rc.x + 0.5f, rc.y + 0.5f);
 	const Vector2f top_right = Vector2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
 	const Vector2f bottom_right = Vector2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);

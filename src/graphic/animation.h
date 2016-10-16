@@ -83,8 +83,11 @@ public:
 	/// color used for blitting - the parameter can be 'nullptr', in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
-	virtual void blit(
-	   uint32_t time, const Recti& dstrc, const Recti& srcrc, const RGBColor* clr, Surface*) const = 0;
+	virtual void blit(uint32_t time,
+	                  const Rectf& dstrc,
+	                  const Rectf& srcrc,
+	                  const RGBColor* clr,
+	                  Surface*) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;

@@ -134,13 +134,13 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 	}
 
 	std::unique_ptr<Texture> texture_atlas(new Texture(root->r.w, root->r.h));
-	texture_atlas->fill_rect(Recti(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
+	texture_atlas->fill_rect(Rectf(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
 
 	const auto packed_texture_id = texture_atlas->blit_data().texture_id;
 	for (Block& block : packed) {
 		texture_atlas->blit(
-		   Recti(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
-		   *block.texture, Recti(0, 0, block.texture->width(), block.texture->height()), 1.,
+		   Rectf(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
+		   *block.texture, Rectf(0, 0, block.texture->width(), block.texture->height()), 1.,
 		   BlendMode::Copy);
 
 		pack_info->emplace_back(PackedTexture(

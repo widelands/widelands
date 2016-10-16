@@ -458,15 +458,13 @@ void MapObject::do_draw_info(bool show_census,
 		   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter), 120);
 		const Vector2f census_pos = pos - Vector2f(0, 48);
 
-		Vector2i rounded_census_pos = round(census_pos);
 		if (show_census) {
 			dst.blit(
-			   rounded_census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+			   census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 
 		if (show_statictics && !statictics.empty()) {
-			// NOCOM(#sirver): should blit also take a Vector2f?
-			dst.blit(rounded_census_pos + Vector2i(0, rendered_census_info->height() / 2 + 10),
+			dst.blit(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10),
 			         UI::g_fh1->render(as_condensed(statictics)), BlendMode::UseAlpha,
 			         UI::Align::kCenter);
 		}

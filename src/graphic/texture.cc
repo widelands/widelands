@@ -151,7 +151,7 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 	}
 
 	blit_data_ = BlitData{
-	   texture, parent_w, parent_h, subrect,
+	   texture, parent_w, parent_h, subrect.cast<float>(),
 	};
 }
 
@@ -172,7 +172,7 @@ int Texture::height() const {
 void Texture::init(uint16_t w, uint16_t h) {
 	blit_data_ = {
 	   0,  // initialized below
-	   w, h, Recti(0, 0, w, h),
+	   w, h, Rectf(0, 0, w, h),
 	};
 	if (w * h == 0) {
 		return;
@@ -258,7 +258,7 @@ void Texture::do_blit(const Rectf& dst_rect,
 		return;
 	}
 	setup_gl();
-	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Recti()},
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rectf()},
 	                             RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
 }
 

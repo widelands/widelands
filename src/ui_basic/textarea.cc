@@ -125,13 +125,12 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		Vector2i anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
-		                get_w() / 2 :
-		                static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0,
+		Vector2f anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
+		                get_w() / 2.f :
+		                static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0.f,
 		             static_cast<int>(align_ & UI::Align::kVCenter) ?
-		                get_h() / 2 :
-		                static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
-
+		                get_h() / 2.f :
+		                static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0.f);
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
 }
