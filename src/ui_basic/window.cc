@@ -234,7 +234,7 @@ void Window::center_to_parent() {
  */
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile(Rect(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
 	}
 }
 
@@ -252,19 +252,19 @@ void Window::draw_border(RenderTarget& dst) {
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i(0, 0), pic_top_, Rect(Vector2i(0, 0), pos, TP_B_PIXMAP_THICKNESS));
+		   (Vector2i(0, 0), pic_top_, Recti(Vector2i(0, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(Vector2i(pos, 0), pic_top_, Rect(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			dst.blitrect(Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
 			                                           HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
 		dst.blitrect(Vector2i(pos, 0), pic_top_,
-		             Rect(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, TP_B_PIXMAP_THICKNESS));
+		             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
@@ -285,7 +285,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
 			dst.blitrect  // left top thingy
 			   (Vector2i(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
-			    Rect(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
@@ -293,13 +293,13 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect(
-				   Vector2i(0, pos), pic_lborder_, Rect(Vector2i(0, VT_B_THINGY_PIXMAP_LEN),
+				   Vector2i(0, pos), pic_lborder_, Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN),
 				                                     VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
 
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
-			dst.blitrect(Vector2i(0, pos), pic_lborder_, Rect(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height),
+			dst.blitrect(Vector2i(0, pos), pic_lborder_, Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height),
 			                                               VT_B_PIXMAP_THICKNESS, height));
 		}
 
@@ -308,7 +308,7 @@ void Window::draw_border(RenderTarget& dst) {
 
 			dst.blitrect  // right top thingy
 			   (Vector2i(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
-			    Rect(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			    Recti(Vector2i(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
@@ -316,14 +316,14 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
-				             Rect(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
+				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
 				                  VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			dst.blitrect(
 			   Vector2i(right_border_x, pos), pic_rborder_,
-			   Rect(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
+			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
 		{  // Bottom border
@@ -331,18 +331,18 @@ void Window::draw_border(RenderTarget& dst) {
 
 			dst.blitrect  //  bottom left corner
 			   (Vector2i(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			    Rect(Vector2i(0, 0), pos, BT_B_PIXMAP_THICKNESS));
+			    Recti(Vector2i(0, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect(Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-				             Rect(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
+				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
 				                  BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 			dst.blitrect(Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			             Rect(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
+			             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
 }

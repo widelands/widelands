@@ -146,7 +146,7 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			if (cur_frame) {  // not the first frame
 				// draw the prev frame from top to where next image will be drawing
 				dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor(), Rect(Vector2i(0, 0), w, h - lines));
+				                    field.owner->get_playercolor(), Recti(Vector2i(0, 0), w, h - lines));
 			} else if (csinf.was) {
 				// Is the first frame, but there was another building here before,
 				// get its last build picture and draw it instead.
@@ -157,11 +157,11 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 					a = csinf.was->get_animation("idle");
 				}
 				dst->blit_animation(field.screen_pixel, zoom, a, tanim - FRAME_LENGTH, field.owner->get_playercolor(),
-				                    Rect(Vector2i(0, 0), w, h - lines));
+				                    Recti(Vector2i(0, 0), w, h - lines));
 			}
 			assert(lines <= h);
 			dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim, field.owner->get_playercolor(),
-			                    Rect(Vector2i(0, h - lines), w, lines));
+			                    Recti(Vector2i(0, h - lines), w, lines));
 		} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 			assert(field.owner != nullptr);
 			// this is a building therefore we either draw unoccupied or idle animation
@@ -312,7 +312,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	if (!surface)
 		return;
 
-	const Rect& bounding_rect = dst->get_rect();
+	const Recti& bounding_rect = dst->get_rect();
 	const int surface_width = surface->width();
 	const int surface_height = surface->height();
 
@@ -378,7 +378,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
 	i.terrain_arguments.destination_rect =
-	   FloatRect(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
+	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
 	             bounding_rect.w, bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;

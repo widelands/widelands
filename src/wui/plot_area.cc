@@ -209,7 +209,7 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::max(how_many_ticks, 1u);
 
 	// first, tile the background
-	dst.tile(Rect(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
+	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
 
 	// Draw coordinate system
 	// X Axis

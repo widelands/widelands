@@ -22,17 +22,17 @@
 
 #include "base/vector.h"
 
-template <typename T> struct GenericRect {
-	/// Generates a degenerate Rect at (0, 0) with no height or width.
-	GenericRect() : GenericRect(T(0), T(0), T(0), T(0)) {
+template <typename T> struct Rect {
+	/// Generates a degenerate Recti at (0, 0) with no height or width.
+	Rect() : Rect(T(0), T(0), T(0), T(0)) {
 	}
 
-	GenericRect(const T& gx, const T& gy, const T& W, const T& H) : x(gx), y(gy), w(W), h(H) {
+	Rect(const T& gx, const T& gy, const T& W, const T& H) : x(gx), y(gy), w(W), h(H) {
 	}
 
 	template <typename PointType>
-	GenericRect(const Vector2<PointType>& p, const T& width, const T& height)
-	   : GenericRect(T(p.x), T(p.y), width, height) {
+	Rect(const Vector2<PointType>& p, const T& width, const T& height)
+	   : Rect(T(p.x), T(p.y), width, height) {
 	}
 
 	/// The Vector2i (x, y).
@@ -59,7 +59,7 @@ template <typename T> struct GenericRect {
 	T x, y, w, h;
 };
 
-using Rect = GenericRect<int>;
-using FloatRect = GenericRect<float>;
+using Recti = Rect<int>;
+using Rectf = Rect<float>;
 
 #endif  // end of include guard: WL_BASE_RECT_H

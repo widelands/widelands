@@ -51,16 +51,16 @@ class Surface;
 class RenderTarget {
 public:
 	RenderTarget(Surface*);
-	void set_window(const Rect& rc, const Vector2i& ofs);
-	bool enter_window(const Rect& rc, Rect* previous, Vector2i* prevofs);
+	void set_window(const Recti& rc, const Vector2i& ofs);
+	bool enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs);
 
 	int32_t width() const;
 	int32_t height() const;
 
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
-	void draw_rect(const Rect&, const RGBColor&);
-	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
-	void brighten_rect(const Rect&, int32_t factor);
+	void draw_rect(const Recti&, const RGBColor&);
+	void fill_rect(const Recti&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
+	void brighten_rect(const Recti&, int32_t factor);
 
 	void blit(const Vector2i& dst,
 	          const Image* image,
@@ -75,7 +75,7 @@ public:
 
 	void blitrect(const Vector2i& dst,
 	              const Image* image,
-	              const Rect& src,
+	              const Recti& src,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Blits the 'source_rect' from 'image' into the
@@ -83,21 +83,21 @@ public:
 	// multiplied with 'opacity' before blitting. The 'blend_mode'
 	// defines if values are blended with whats already there or just
 	// copied over.
-	// Rect's are taken by value on purpose.
-	void blitrect_scale(Rect destination_rect,
+	// Recti's are taken by value on purpose.
+	void blitrect_scale(Recti destination_rect,
 	                    const Image* image,
-	                    Rect source_rect,
+	                    Recti source_rect,
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// Like blitrect_scale. See MonochromeBlitProgram for details. Rect's are
+	// Like blitrect_scale. See MonochromeBlitProgram for details. Recti's are
 	// taken by value on purpose.
-	void blitrect_scale_monochrome(Rect destination_rect,
+	void blitrect_scale_monochrome(Recti destination_rect,
 	                               const Image* image,
-	                               Rect source_rect,
+	                               Recti source_rect,
 	                               const RGBAColor& blend);
 
-	void tile(const Rect&,
+	void tile(const Recti&,
 	          const Image* image,
 	          const Vector2i& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
@@ -116,14 +116,14 @@ public:
 	                    uint32_t animation,
 	                    uint32_t time,
 	                    const RGBColor& player_color,
-	                    const Rect& source_rect);
+	                    const Recti& source_rect);
 
 	void reset();
 
 	Surface* get_surface() const {
 		return surface_;
 	}
-	const Rect& get_rect() const {
+	const Recti& get_rect() const {
 		return rect_;
 	}
 	const Vector2i& get_offset() const {
@@ -131,8 +131,8 @@ public:
 	}
 
 protected:
-	bool clip(Rect& r) const;
-	bool to_surface_geometry(Rect* destination_rect, Rect* source_rect) const;
+	bool clip(Recti& r) const;
+	bool to_surface_geometry(Recti* destination_rect, Recti* source_rect) const;
 
 	// Does the actual blitting.
 	void do_blit_animation(const Vector2f& dst,
@@ -140,12 +140,12 @@ protected:
 	                       const Animation& animation,
 	                       uint32_t time,
 	                       const RGBColor* player_color,
-	                       const Rect& source_rect);
+	                       const Recti& source_rect);
 
 	/// The target surface
 	Surface* surface_;
 	/// The current clip rectangle
-	Rect rect_;
+	Recti rect_;
 	/// Drawing offset
 	Vector2i offset_;
 };

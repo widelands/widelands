@@ -85,7 +85,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	// one texture atlas.
 	assert(*gl_texture == texture.blit_data().texture_id);
 
-	const FloatRect texture_rect = to_gl_texture(texture.blit_data());
+	const Rectf texture_rect = to_gl_texture(texture.blit_data());
 
 	vertices_.emplace_back(PerVertexData{
 	   start.screen_pixel.x - road_overshoot_x + road_thickness_x,

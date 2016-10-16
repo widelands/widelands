@@ -98,7 +98,7 @@ void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index) {
 void ItemWaresDisplay::draw(RenderTarget& dst) {
 	const Widelands::TribeDescr& tribe(player().tribe());
 
-	dst.fill_rect(Rect(Vector2i(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+	dst.fill_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		const Item& it = items_[idx];

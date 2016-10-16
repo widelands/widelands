@@ -72,8 +72,8 @@ public:
 	Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
-	                  const Rect& dstrc,
-	                  const Rect& srcrc,
+	                  const Recti& dstrc,
+	                  const Recti& srcrc,
 	                  const RGBColor* clr,
 	                  Surface*) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
@@ -224,11 +224,11 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	Texture* rv = new Texture(w, h);
 	if (!hasplrclrs_ || clr == nullptr) {
 		// No player color means we simply want an exact copy of the original image.
-		rv->blit(Rect(Vector2i(0, 0), w, h), *image, Rect(Vector2i(0, 0), w, h), 1., BlendMode::Copy);
+		rv->blit(Recti(Vector2i(0, 0), w, h), *image, Recti(Vector2i(0, 0), w, h), 1., BlendMode::Copy);
 	} else {
-		rv->fill_rect(Rect(Vector2i(0, 0), w, h), RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rect(Vector2i(0, 0), w, h), *image,
-		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Vector2i(0, 0), w, h), *clr);
+		rv->fill_rect(Recti(Vector2i(0, 0), w, h), RGBAColor(0, 0, 0, 0));
+		rv->blit_blended(Recti(Vector2i(0, 0), w, h), *image,
+		                 *g_gr->images().get(pc_mask_image_files_[0]), Recti(Vector2i(0, 0), w, h), *clr);
 	}
 	return rv;
 }
@@ -259,7 +259,7 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 }
 
 void NonPackedAnimation::blit(
-   uint32_t time, const Rect& dstrc, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
+   uint32_t time, const Recti& dstrc, const Recti& srcrc, const RGBColor* clr, Surface* target) const {
 	assert(target);
 
 	const uint32_t idx = current_frame(time);

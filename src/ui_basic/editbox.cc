@@ -359,26 +359,26 @@ void EditBox::draw(RenderTarget& odst) {
 	RenderTarget& dst = odst;
 
 	// Draw the background
-	dst.tile(Rect(Vector2i(0, 0), get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
+	dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rect(Vector2i(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(Vector2i(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rect(Vector2i(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(Vector2i(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(Vector2i(0, 0), get_w() - 1, 1), black);
-		dst.fill_rect(Rect(Vector2i(0, 1), get_w() - 2, 1), black);
+		dst.fill_rect(Recti(Vector2i(0, 0), get_w() - 1, 1), black);
+		dst.fill_rect(Recti(Vector2i(0, 1), get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(Vector2i(0, 0), 1, get_h() - 1), black);
-		dst.fill_rect(Rect(Vector2i(1, 0), 1, get_h() - 2), black);
+		dst.fill_rect(Recti(Vector2i(0, 0), 1, get_h() - 1), black);
+		dst.fill_rect(Recti(Vector2i(1, 0), 1, get_h() - 2), black);
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(Vector2i(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
@@ -410,18 +410,18 @@ void EditBox::draw(RenderTarget& odst) {
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			dst.blitrect(point, entry_text_im, Rect(linewidth - max_width, 0, linewidth, lineheight));
+			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
 			if (static_cast<int>(m_->align & UI::Align::kRight)) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point, entry_text_im,
-				             Rect(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
-				dst.blitrect(point, entry_text_im, Rect(-m_->scrolloffset, 0, max_width, lineheight));
+				dst.blitrect(point, entry_text_im, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
-		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
+		dst.blitrect(point, entry_text_im, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {

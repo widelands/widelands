@@ -154,12 +154,12 @@ void Button::draw(RenderTarget& dst) {
 	// Draw the background
 	if (!flat_ || draw_flat_background_) {
 		assert(pic_background_);
-		dst.fill_rect(Rect(Vector2i(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-		dst.tile(Rect(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
+		dst.fill_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
+		dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
 	}
 
 	if (enabled_ && highlighted_ && !flat_)
-		dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(Vector2i(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  If we've got a picture, draw it centered
 	if (pic_custom_) {
@@ -187,15 +187,15 @@ void Button::draw(RenderTarget& dst) {
 			int blit_height = image_scale * pic_custom_->height();
 
 			if (enabled_) {
-				dst.blitrect_scale(Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2,
+				dst.blitrect_scale(Recti((get_w() - blit_width) / 2, (get_h() - blit_height) / 2,
 				                        blit_width, blit_height),
-				                   pic_custom_, Rect(0, 0, pic_custom_->width(), pic_custom_->height()),
+				                   pic_custom_, Recti(0, 0, pic_custom_->width(), pic_custom_->height()),
 				                   1., BlendMode::UseAlpha);
 			} else {
 				dst.blitrect_scale_monochrome(
-				   Rect(
+				   Recti(
 				      (get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-				   pic_custom_, Rect(0, 0, pic_custom_->width(), pic_custom_->height()),
+				   pic_custom_, Recti(0, 0, pic_custom_->width(), pic_custom_->height()),
 				   RGBAColor(255, 255, 255, 127));
 			}
 		}
@@ -226,36 +226,36 @@ void Button::draw(RenderTarget& dst) {
 		//  button is a normal one, not flat
 		if (!draw_pressed) {
 			//  top edge
-			dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(Vector2i(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  left edge
-			dst.brighten_rect(Rect(Vector2i(0, 2), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(Vector2i(0, 2), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  bottom edge
-			dst.fill_rect(Rect(Vector2i(2, get_h() - 2), get_w() - 2, 1), black);
-			dst.fill_rect(Rect(Vector2i(1, get_h() - 1), get_w() - 1, 1), black);
+			dst.fill_rect(Recti(Vector2i(2, get_h() - 2), get_w() - 2, 1), black);
+			dst.fill_rect(Recti(Vector2i(1, get_h() - 1), get_w() - 1, 1), black);
 			//  right edge
-			dst.fill_rect(Rect(Vector2i(get_w() - 2, 2), 1, get_h() - 2), black);
-			dst.fill_rect(Rect(Vector2i(get_w() - 1, 1), 1, get_h() - 1), black);
+			dst.fill_rect(Recti(Vector2i(get_w() - 2, 2), 1, get_h() - 2), black);
+			dst.fill_rect(Recti(Vector2i(get_w() - 1, 1), 1, get_h() - 1), black);
 		} else {
 			//  bottom edge
-			dst.brighten_rect(Rect(Vector2i(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(Vector2i(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  right edge
-			dst.brighten_rect(Rect(Vector2i(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(Vector2i(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 			//  top edge
-			dst.fill_rect(Rect(Vector2i(0, 0), get_w() - 1, 1), black);
-			dst.fill_rect(Rect(Vector2i(0, 1), get_w() - 2, 1), black);
+			dst.fill_rect(Recti(Vector2i(0, 0), get_w() - 1, 1), black);
+			dst.fill_rect(Recti(Vector2i(0, 1), get_w() - 2, 1), black);
 			//  left edge
-			dst.fill_rect(Rect(Vector2i(0, 0), 1, get_h() - 1), black);
-			dst.fill_rect(Rect(Vector2i(1, 0), 1, get_h() - 2), black);
+			dst.fill_rect(Recti(Vector2i(0, 0), 1, get_h() - 1), black);
+			dst.fill_rect(Recti(Vector2i(1, 0), 1, get_h() - 2), black);
 		}
 	} else {
 		//  Button is flat, do not draw borders, instead, if it is pressed, draw
 		//  a box around it.
 		if (enabled_ && highlighted_) {
 			RGBAColor shade(100, 100, 100, 80);
-			dst.fill_rect(Rect(Vector2i(0, 0), get_w(), 2), shade);
-			dst.fill_rect(Rect(Vector2i(0, 2), 2, get_h() - 2), shade);
-			dst.fill_rect(Rect(Vector2i(0, get_h() - 2), get_w(), get_h()), shade);
-			dst.fill_rect(Rect(Vector2i(get_w() - 2, 0), get_w(), get_h()), shade);
+			dst.fill_rect(Recti(Vector2i(0, 0), get_w(), 2), shade);
+			dst.fill_rect(Recti(Vector2i(0, 2), 2, get_h() - 2), shade);
+			dst.fill_rect(Recti(Vector2i(0, get_h() - 2), get_w(), get_h()), shade);
+			dst.fill_rect(Recti(Vector2i(get_w() - 2, 0), get_w(), get_h()), shade);
 		}
 	}
 }

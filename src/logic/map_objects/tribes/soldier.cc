@@ -492,13 +492,13 @@ void Soldier::draw_info_icon(RenderTarget& dst, Vector2i pt, bool anchor_below) 
 	}
 
 	// Draw energy bar
-	Rect energy_outer(Vector2i(pt.x - w, pt.y), w * 2, 5);
+	Recti energy_outer(Vector2i(pt.x - w, pt.y), w * 2, 5);
 	dst.draw_rect(energy_outer, RGBColor(255, 255, 255));
 
 	assert(get_max_health());
 	uint32_t health_width = 2 * (w - 1) * current_health_ / get_max_health();
-	Rect energy_inner(Vector2i(pt.x - w + 1, pt.y + 1), health_width, 3);
-	Rect energy_complement(
+	Recti energy_inner(Vector2i(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Recti energy_complement(
 	   energy_inner.origin() + Vector2i(health_width, 0), 2 * (w - 1) - health_width, 3);
 	const RGBColor& color = owner().get_playercolor();
 	RGBColor complement_color;

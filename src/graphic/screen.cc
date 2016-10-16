@@ -53,7 +53,7 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	return std::unique_ptr<Texture>(new Texture(surface));
 }
 
-void Screen::do_blit(const FloatRect& dst_rect,
+void Screen::do_blit(const Rectf& dst_rect,
                      const BlitData& texture,
                      float opacity,
                      BlendMode blend_mode) {
@@ -68,7 +68,7 @@ void Screen::do_blit(const FloatRect& dst_rect,
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_blit_blended(const FloatRect& dst_rect,
+void Screen::do_blit_blended(const Rectf& dst_rect,
                              const BlitData& texture,
                              const BlitData& mask,
                              const RGBColor& blend) {
@@ -83,7 +83,7 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_blit_monochrome(const FloatRect& dst_rect,
+void Screen::do_blit_monochrome(const Rectf& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
@@ -105,7 +105,7 @@ void Screen::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vert
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+void Screen::do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	RenderQueue::Item i;
 	i.blend_mode = blend_mode;
 	i.program_id = RenderQueue::Program::kRect;

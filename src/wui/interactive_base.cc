@@ -355,7 +355,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 }
 
-void InteractiveBase::mainview_move(const FloatRect& map_view) {
+void InteractiveBase::mainview_move(const Rectf& map_view) {
 	if (m->minimap.window) {
 		m->mm->set_view(map_view);
 	}
@@ -383,7 +383,7 @@ Center the mainview on the given position (in pixels)
 ===============
 */
 void InteractiveBase::center_view_on_map_pixel(const Vector2i& pos) {
-	const FloatRect view_area = get_view_area();
+	const Rectf view_area = get_view_area();
 	set_viewpoint(pos - Vector2i(view_area.w / 2.f, view_area.h / 2.f), true);
 }
 

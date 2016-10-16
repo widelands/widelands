@@ -108,8 +108,8 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 			const float blend_b = current_args.blend.b / 255.;
 			const float blend_a = current_args.blend.a / 255.;
 
-			const FloatRect texture_rect = to_gl_texture(current_args.texture);
-			const FloatRect mask_rect = to_gl_texture(current_args.mask);
+			const Rectf texture_rect = to_gl_texture(current_args.texture);
+			const Rectf mask_rect = to_gl_texture(current_args.mask);
 			float program_flavor = 0;
 			switch (current_args.blit_mode) {
 			case BlitMode::kDirect:
@@ -176,7 +176,7 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	}
 }
 
-void BlitProgram::draw(const FloatRect& gl_dest_rect,
+void BlitProgram::draw(const Rectf& gl_dest_rect,
                        const float z_value,
                        const BlitData& texture,
                        const BlitData& mask,
@@ -186,11 +186,11 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 	                mask.texture_id != 0 ? BlitMode::kBlendedWithMask : BlitMode::kDirect}});
 }
 
-void BlitProgram::draw_monochrome(const FloatRect& dest_rect,
+void BlitProgram::draw_monochrome(const Rectf& dest_rect,
                                   const float z_value,
                                   const BlitData& texture,
                                   const RGBAColor& blend) {
-	draw({Arguments{dest_rect, z_value, texture, BlitData{0, 0, 0, Rect()}, blend,
+	draw({Arguments{dest_rect, z_value, texture, BlitData{0, 0, 0, Recti()}, blend,
 	                BlendMode::UseAlpha, BlitMode::kMonochrome}});
 }
 

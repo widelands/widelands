@@ -90,7 +90,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	return color;
 }
 
-void draw_view_window(const FloatRect& view_area, const bool zoom, Texture* texture) {
+void draw_view_window(const Rectf& view_area, const bool zoom, Texture* texture) {
 	const float divider = zoom ? 1.f : 2.f;
 	int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
 	int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
@@ -159,7 +159,7 @@ void do_draw_minimap(Texture* texture,
 
 Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Vector2i& minimap_pixel,
-                                const FloatRect& view_area,
+                                const Rectf& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom) {
 	assert(minimap_type == MiniMapType::kStaticViewWindow);
@@ -178,7 +178,7 @@ Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
 
 std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
-                                      const FloatRect& view_area,
+                                      const Rectf& view_area,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
 	assert(minimap_type == MiniMapType::kStaticViewWindow);
@@ -192,7 +192,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
-	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
+	texture->fill_rect(Recti(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
@@ -215,7 +215,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 // NOCOM(#sirver): this function is now rather unnecessary
 void write_minimap_image(const Widelands::EditorGameBase& egbase,
                          Widelands::Player const* player,
-                         const FloatRect& view_area,
+                         const Rectf& view_area,
                          const MiniMapType& minimap_type,
                          MiniMapLayer layers,
                          ::StreamWrite* const streamwrite) {

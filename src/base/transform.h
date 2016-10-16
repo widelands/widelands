@@ -23,7 +23,6 @@
 #include "base/macros.h"
 #include "base/vector.h"
 
-// NOCOM(#sirver): rename Vector2i to Vector2 (or just use use Vector and dump one of them?).
 class Transform2f {
 public:
 	Transform2f(const Vector2f& translation, const float zoom);

@@ -129,6 +129,6 @@ void TerrainProgram::draw(uint32_t gametime,
 	}
 
 	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
-	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	const Rectf texture_coordinates = to_gl_texture(blit_data);
 	gl_draw(blit_data.texture_id, texture_coordinates.w, texture_coordinates.h, z_value);
 }

@@ -60,11 +60,11 @@ void Icon::draw(RenderTarget& dst) {
 		int height = scale * get_h();
 		int x = (get_w() - width) / 2;
 		int y = (get_h() - height) / 2;
-		dst.blitrect_scale(Rect(x, y, width, height), pic_, Rect(0, 0, pic_->width(), pic_->height()),
+		dst.blitrect_scale(Recti(x, y, width, height), pic_, Recti(0, 0, pic_->width(), pic_->height()),
 		                   1., BlendMode::UseAlpha);
 	}
 	if (draw_frame_) {
-		dst.draw_rect(Rect(0, 0, get_w(), get_h()), framecolor_);
+		dst.draw_rect(Recti(0, 0, get_w(), get_h()), framecolor_);
 	}
 }
 }

@@ -74,7 +74,7 @@ struct WatchWindow : public UI::Window {
 
 protected:
 	void think() override;
-	void stop_tracking_by_drag(const FloatRect&);
+	void stop_tracking_by_drag(const Rectf&);
 
 private:
 	void do_follow();
@@ -250,7 +250,7 @@ void WatchWindow::think() {
 When the user drags the mapview, we stop tracking.
 ===============
 */
-void WatchWindow::stop_tracking_by_drag(const FloatRect&) {
+void WatchWindow::stop_tracking_by_drag(const Rectf&) {
 	// Disable switching while dragging
 	if (mapview.is_dragging()) {
 		last_visit = game().get_gametime();

@@ -55,7 +55,7 @@ struct MapView : public UI::Panel {
 
 	void set_changeview(const ChangeViewFn& fn);
 
-	boost::signals2::signal<void(const FloatRect&)> changeview;
+	boost::signals2::signal<void(const Rectf&)> changeview;
 
 	boost::signals2::signal<void()> fieldclicked;
 
@@ -65,7 +65,7 @@ struct MapView : public UI::Panel {
 	void set_rel_viewpoint(Vector2i r, bool jump);
 
 	Vector2i get_viewpoint() const;
-	FloatRect get_view_area() const;
+	Rectf get_view_area() const;
 	bool is_dragging() const {
 		return dragging_;
 	}

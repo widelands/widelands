@@ -225,7 +225,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Recti(Vector2i(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -235,7 +235,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rect(Vector2i(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Recti(Vector2i(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -277,8 +277,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 
 					// Create the scaled image
-					dst.blitrect_scale(Rect(draw_x, point.y + 1, blit_width, max_pic_height),
-					                   entry_picture, Rect(0, 0, picw, pich), 1., BlendMode::UseAlpha);
+					dst.blitrect_scale(Recti(draw_x, point.y + 1, blit_width, max_pic_height),
+					                   entry_picture, Recti(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
 					picw = blit_width;
@@ -328,12 +328,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 				if (i18n::has_rtl_character(
 				       entry_string.c_str(), 20)) {  // Restrict check for efficiency
 					dst.blitrect(
-					   point, entry_text_im, Rect(text_width - curw + picw, 0, text_width, lineheight));
+					   point, entry_text_im, Recti(text_width - curw + picw, 0, text_width, lineheight));
 				} else {
-					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+					dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
 				}
 			} else {
-				dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+				dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
 			}
 			curx += curw;
 		}

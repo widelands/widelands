@@ -59,7 +59,7 @@ ProgressWindow::~ProgressWindow() {
 void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, const uint32_t yres) {
 	label_center_.x = xres / 2;
 	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-	Rect wnd_rect(Vector2i(0, 0), xres, yres);
+	Recti wnd_rect(Vector2i(0, 0), xres, yres);
 
 	const uint32_t h =
 	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
@@ -71,9 +71,9 @@ void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, cons
 
 	const Image* bg = g_gr->images().get(background_);
 	rt.blitrect_scale(
-	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
+	   Recti(0, 0, xres, yres), bg, Recti(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
 
-	Rect border_rect = label_rectangle_;
+	Recti border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;

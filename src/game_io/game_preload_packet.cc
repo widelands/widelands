@@ -126,7 +126,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 			write_minimap_image(game, &ipl->player(), ipl->get_view_area(),
 			                    MiniMapType::kStaticViewWindow, layers, sw.get());
 		} else {  // Observer
-			write_minimap_image(game, nullptr, FloatRect(), MiniMapType::kStaticMap, layers, sw.get());
+			write_minimap_image(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers, sw.get());
 		}
 		sw->flush();
 	}

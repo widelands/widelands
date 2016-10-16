@@ -70,12 +70,12 @@ enum class MiniMapType {
 // Remember to call 'normalize_pix' after applying the transformation.
 Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Vector2i& minimap_pixel,
-                                const FloatRect& view_area,
+                                const Rectf& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom);
 
 Transform2f minimap_pixel_to_mappixel_transform(MiniMapType mini_map_type,
-                                                const FloatRect& view_area);
+                                                const Rectf& view_area);
 
 // Render the minimap. If player is not nullptr, it renders from that player's
 // point of view. The 'view_area' designates the currently visible area in the
@@ -84,14 +84,14 @@ Transform2f minimap_pixel_to_mappixel_transform(MiniMapType mini_map_type,
 // point in the resulting minimap.
 std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Widelands::Player* player,
-                                      const FloatRect& view_area,
+                                      const Rectf& view_area,
                                       const MiniMapType& map_draw_type,
                                       MiniMapLayer layers);
 
 /// Render the minimap to a file. 1 pixel will be used for each fields.
 void write_minimap_image(const Widelands::EditorGameBase& egbase,
                          Widelands::Player const* player,
-                         const FloatRect& view_area,
+                         const Rectf& view_area,
                          const MiniMapType& map_draw_type,
                          MiniMapLayer layers,
                          StreamWrite* const streamwrite);

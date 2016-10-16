@@ -51,7 +51,7 @@ float shortest_distance_on_torus(float x1, float x2, const float width) {
 // Containing is defined as such that the shortest distance between the center
 // of 'r' is smaller than (r.w / 2, r.h / 2). If 'p' is NOT contained in 'r'
 // this method will loop forever.
-Vector2f move_inside(Vector2f p, const FloatRect& r, float w, float h) {
+Vector2f move_inside(Vector2f p, const Rectf& r, float w, float h) {
 	while (p.x < r.x && r.x < r.x + r.w) { p.x += w; }
 	while (p.x > r.x && r.x > r.x + r.w) { p.x -= w; }
 	while (p.y < r.y && r.y < r.y + r.y) { p.y += h; }
@@ -100,7 +100,7 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 
 	const Widelands::Map& map = intbase().egbase().map();
 	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
-	const FloatRect view_area = get_view_area();
+	const Rectf view_area = get_view_area();
 
 	const Vector2f view_center = view_area.center();
 	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
@@ -160,10 +160,10 @@ void MapView::set_viewpoint(Vector2i vp, bool jump) {
 	changeview(get_view_area());
 }
 
-FloatRect MapView::get_view_area() const {
+Rectf MapView::get_view_area() const {
 	const Vector2f min = panel_to_mappixel_.apply(Vector2f());
 	const Vector2f max = panel_to_mappixel_.apply(Vector2f(get_w(), get_h()));
-	return FloatRect(min.x, min.y, max.x - min.x, max.y - min.y);
+	return Rectf(min.x, min.y, max.x - min.x, max.y - min.y);
 }
 
 void MapView::set_rel_viewpoint(Vector2i vp, bool jump) {

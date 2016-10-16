@@ -44,7 +44,7 @@ MiniMap::View::View(UI::Panel& parent,
      flags_(flags) {
 }
 
-void MiniMap::View::set_view(const FloatRect& view_area) {
+void MiniMap::View::set_view(const Rectf& view_area) {
 	view_area_ = view_area;
 }
 

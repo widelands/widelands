@@ -120,14 +120,14 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 // creation. Disables GL_SCISSOR_TEST at desctruction again.
 class ScopedScissor {
 public:
-	ScopedScissor(const FloatRect& rect);
+	ScopedScissor(const Rectf& rect);
 	~ScopedScissor();
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ScopedScissor);
 };
 
-ScopedScissor::ScopedScissor(const FloatRect& rect) {
+ScopedScissor::ScopedScissor(const Rectf& rect) {
 	glScissor(rect.x, rect.y, rect.w, rect.h);
 	glEnable(GL_SCISSOR_TEST);
 }

@@ -41,7 +41,7 @@ int32_t const h_space = 3;
  * rectangular bounding box.
  */
 struct Element {
-	explicit Element(const Rect& bounding_box) : bbox(bounding_box) {
+	explicit Element(const Recti& bounding_box) : bbox(bounding_box) {
 	}
 	virtual ~Element() {
 	}
@@ -52,11 +52,11 @@ struct Element {
 	 */
 	virtual void draw(RenderTarget& dst) = 0;
 
-	Rect bbox;
+	Recti bbox;
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect& bounding_box, const Image* init_image)
+	ImageElement(const Recti& bounding_box, const Image* init_image)
 	   : Element(bounding_box), image(init_image) {
 	}
 
@@ -68,7 +68,7 @@ struct ImageElement : Element {
 };
 
 struct TextlineElement : Element {
-	TextlineElement(const Rect& bounding_box,
+	TextlineElement(const Recti& bounding_box,
 	                const TextStyle& init_style,
 	                std::vector<std::string>::const_iterator words_begin,
 	                std::vector<std::string>::const_iterator words_end)
@@ -357,7 +357,7 @@ void RichText::parse(const std::string& rtext) {
 			if (!image)
 				continue;
 
-			Rect bbox;
+			Recti bbox;
 			bbox.x = text.images_width;
 			bbox.y = m->height;
 			bbox.w = image->width();
@@ -423,7 +423,7 @@ void RichText::parse(const std::string& rtext) {
 				TextBuilder::Elt elt;
 				elt.miny = elt.maxy = 0;
 
-				Rect bbox;
+				Recti bbox;
 				bbox.x = text.linewidth ? text.linewidth + text.spacewidth : 0;
 				bbox.y = 0;  // filled in later
 				bbox.w = 0;
@@ -489,13 +489,13 @@ void RichText::parse(const std::string& rtext) {
 void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) {
 	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
 	     ++elt) {
-		Rect oldbox;
+		Recti oldbox;
 		Vector2i oldofs;
-		Rect bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
+		Recti bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)
-				dst.fill_rect(Rect(Vector2i(0, 0), bbox.w, bbox.h), m->background_color);
+				dst.fill_rect(Recti(Vector2i(0, 0), bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

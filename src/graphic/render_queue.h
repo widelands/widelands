@@ -99,12 +99,12 @@ public:
 		BlitData texture;
 		BlitData mask;
 		RGBAColor blend;
-		FloatRect destination_rect;
+		Rectf destination_rect;
 	};
 
 	struct RectArguments {
 		RGBAColor color;
-		FloatRect destination_rect;
+		Rectf destination_rect;
 	};
 
 	// TODO(sirver): these are really triangle arguments.
@@ -122,7 +122,7 @@ public:
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
 		float zoom;
-		FloatRect destination_rect;
+		Rectf destination_rect;
 	};
 
 	// The union of all possible program arguments represents an Item that is

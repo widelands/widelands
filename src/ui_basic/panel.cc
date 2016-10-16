@@ -728,15 +728,15 @@ void Panel::do_draw(RenderTarget& dst) {
 	if (!is_visible())
 		return;
 
-	Rect outerrc;
+	Recti outerrc;
 	Vector2i outerofs;
 
-	if (!dst.enter_window(Rect(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
+	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
 
 	draw_border(dst);
 
-	Rect innerwindow(
+	Recti innerwindow(
 	   Vector2i(lborder_, tborder_), w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
 
 	if (dst.enter_window(innerwindow, nullptr, nullptr))
@@ -1051,7 +1051,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	uint16_t tip_width = rendered_text->width() + 4;
 	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rect r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
 	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
 	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)

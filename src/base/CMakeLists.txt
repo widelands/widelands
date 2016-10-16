@@ -52,7 +52,6 @@ wl_library(base_md5
     base_macros
 )
 
-
 wl_library(base_scoped_timer
   SRCS
     scoped_timer.h

@@ -249,7 +249,7 @@ void DismantleSite::draw(uint32_t gametime,
 	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
 
 	dst->blit_animation(
-	   point_on_dst, zoom, anim_idx, tanim, player_color, Rect(Vector2i(0, lines), w, h - lines));
+	   point_on_dst, zoom, anim_idx, tanim, player_color, Recti(Vector2i(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_info(show_text, point_on_dst, dst);

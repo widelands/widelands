@@ -116,9 +116,9 @@ void Statebox::draw(RenderTarget& dst) {
 		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
-			dst.draw_rect(Rect(Vector2i(0, 0), get_w(), get_h()), RGBColor(229, 116, 2));
+			dst.draw_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBColor(229, 116, 2));
 		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Rect(Vector2i(0, 0), get_w(), get_h()), RGBColor(100, 100, 80));
+			dst.draw_rect(Recti(Vector2i(0, 0), get_w(), get_h()), RGBColor(100, 100, 80));
 		}
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
@@ -137,11 +137,11 @@ void Statebox::draw(RenderTarget& dst) {
 
 		dst.blitrect(
 		   image_anchor, pic_graphics_,
-		   Rect(Vector2i(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
+		   Recti(Vector2i(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
-			   Rect(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
 	}
 }
 

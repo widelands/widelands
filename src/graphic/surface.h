@@ -46,42 +46,42 @@ public:
 
 	/// This draws a part of 'texture'.
 	void blit(
-	   const Rect& dst, const Image&, const Rect& srcrc, const float opacity, BlendMode blend_mode);
+	   const Recti& dst, const Image&, const Recti& srcrc, const float opacity, BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.
-	void blit_blended(const Rect& dst,
+	void blit_blended(const Recti& dst,
 	                  const Image& image,
 	                  const Image& texture_mask,
-	                  const Rect& srcrc,
+	                  const Recti& srcrc,
 	                  const RGBColor& blend);
 
 	/// This draws a grayed out version.
 	void
-	blit_monochrome(const Rect& dst, const Image&, const Rect& srcrc, const RGBAColor& multiplier);
+	blit_monochrome(const Recti& dst, const Image&, const Recti& srcrc, const RGBAColor& multiplier);
 
 	/// Draws a filled rect to the destination.
-	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
+	void fill_rect(const Recti&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.
 	void draw_line_strip(std::vector<Vector2f> points, const RGBColor& color, float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
-	void brighten_rect(const Rect&, int factor);
+	void brighten_rect(const Recti&, int factor);
 
 private:
 	/// The actual implementation of the methods below.
-	virtual void do_blit(const FloatRect& dst_rect,
+	virtual void do_blit(const Rectf& dst_rect,
 	                     const BlitData& texture,
 	                     float opacity,
 	                     BlendMode blend_mode) = 0;
 
-	virtual void do_blit_blended(const FloatRect& dst_rect,
+	virtual void do_blit_blended(const Rectf& dst_rect,
 	                             const BlitData& texture,
 	                             const BlitData& mask,
 	                             const RGBColor& blend) = 0;
 
-	virtual void do_blit_monochrome(const FloatRect& dst_rect,
+	virtual void do_blit_monochrome(const Rectf& dst_rect,
 	                                const BlitData& texture,
 	                                const RGBAColor& blend) = 0;
 
@@ -90,7 +90,7 @@ private:
 	virtual void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) = 0;
 
 	virtual void
-	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;
+	do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
@@ -98,6 +98,6 @@ private:
 /// Draws a rect (frame only) to the surface. The width of the surrounding line
 /// is 1 pixel, i.e. the transparent inner box of the drawn rectangle starts at
 /// (x+1, y+1) and has dimension (w - 2, h - 2).
-void draw_rect(const Rect& rect, const RGBColor&, Surface* destination);
+void draw_rect(const Recti& rect, const RGBColor&, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

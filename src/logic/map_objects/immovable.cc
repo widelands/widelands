@@ -495,7 +495,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	assert(lines <= curh);
 	dst->blit_animation(point_on_dst, zoom, anim_, current_frame * frametime, player_color,
-	                   Rect(Vector2i(0, curh - lines), curw, lines));
+	                   Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(show_text & ShowText::kCensus, descr().descname(),

@@ -178,7 +178,7 @@ protected:
 
 	UI::UniqueWindow::Registry& minimap_registry();
 
-	void mainview_move(const FloatRect&);
+	void mainview_move(const Rectf&);
 
 	void draw_overlay(RenderTarget&) override;
 	bool handle_key(bool down, SDL_Keysym) override;

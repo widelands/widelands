@@ -183,11 +183,11 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	const int width = std::min<int>(get_w(), im->width());
 
 	if (!m->transparent_) {
-		Rect rect(0, top, width, height);
+		Recti rect(0, top, width, height);
 		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128), BlendMode::Default);
 	}
 	int32_t topcrop = im->height() - height;
-	Rect cropRect(0, topcrop, width, height);
+	Recti cropRect(0, topcrop, width, height);
 
 	Vector2i pt(0, top);
 	dst.blitrect(pt, im, cropRect);

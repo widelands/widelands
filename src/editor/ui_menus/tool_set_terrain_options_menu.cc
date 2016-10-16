@@ -53,8 +53,8 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	// Blit the main terrain image
 	const Image& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-	texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()), terrain_texture,
-	              Rect(0, 0, terrain_texture.width(), terrain_texture.height()), 1.,
+	texture->blit(Recti(0, 0, terrain_texture.width(), terrain_texture.height()), terrain_texture,
+	              Recti(0, 0, terrain_texture.width(), terrain_texture.height()), 1.,
 	              BlendMode::UseAlpha);
 	Vector2i pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
@@ -64,9 +64,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		                terrain_descr.custom_tooltips().end());
 		tooltips.push_back(terrain_type.descname);
 
-		texture->blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
+		texture->blit(Recti(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
 		              *terrain_type.icon,
-		              Rect(0, 0, terrain_type.icon->width(), terrain_type.icon->height()), 1.,
+		              Recti(0, 0, terrain_type.icon->width(), terrain_type.icon->height()), 1.,
 		              BlendMode::UseAlpha);
 		pt.x += kSmallPicSize + 1;
 	}
