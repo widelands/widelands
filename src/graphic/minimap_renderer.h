@@ -23,7 +23,6 @@
 #include <memory>
 
 #include "base/rect.h"
-#include "base/transform.h"
 #include "base/vector.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
@@ -68,9 +67,6 @@ Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Rectf& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom);
-
-Transform2f minimap_pixel_to_mappixel_transform(MiniMapType mini_map_type,
-                                                const Rectf& view_area);
 
 // Render the minimap. If player is not nullptr, it renders from that player's
 // point of view. The 'view_area' designates the currently visible area in the
