@@ -492,6 +492,7 @@ struct EnemySiteObserver {
 
 	bool is_warehouse;
 	int32_t attack_soldiers_strength;
+	int32_t attack_soldiers_competency;
 	int32_t defenders_strength;
 	uint8_t stationed_soldiers;
 	uint32_t last_time_attackable;
@@ -584,6 +585,7 @@ struct ManagementData {
 	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
+	void set_mutation_multiplicator(uint8_t value) {mutation_multiplicator = value;};
 	bool test_consistency();
 
 private:
@@ -593,6 +595,7 @@ private:
 	uint16_t next_neuron_id;
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
+	uint16_t mutation_multiplicator;
 };
 
 // this is used to count militarysites by their size
