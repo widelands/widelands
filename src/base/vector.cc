@@ -17,14 +17,14 @@
  *
  */
 
-#include "base/point.h"
+#include "base/vector.h"
 
 #include <cmath>
 
-FloatPoint middle(const FloatPoint& a, const FloatPoint& b) {
-	return FloatPoint((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
+Vector2f middle(const Vector2f& a, const Vector2f& b) {
+	return Vector2f((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
 }
 
-Point round(const FloatPoint& a) {
-	return Point(std::lround(a.x), std::lround(a.y));
+Vector2i round(const Vector2f& a) {
+	return Vector2i(std::lround(a.x), std::lround(a.y));
 }

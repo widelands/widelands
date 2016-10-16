@@ -51,7 +51,7 @@ float shortest_distance_on_torus(float x1, float x2, const float width) {
 // Containing is defined as such that the shortest distance between the center
 // of 'r' is smaller than (r.w / 2, r.h / 2). If 'p' is NOT contained in 'r'
 // this method will loop forever.
-FloatPoint move_inside(FloatPoint p, const FloatRect& r, float w, float h) {
+Vector2f move_inside(Vector2f p, const FloatRect& r, float w, float h) {
 	while (p.x < r.x && r.x < r.x + r.w) { p.x += w; }
 	while (p.x > r.x && r.x > r.x + r.w) { p.x -= w; }
 	while (p.y < r.y && r.y < r.y + r.y) { p.y += h; }
@@ -73,7 +73,7 @@ MapView::MapView(
 MapView::~MapView() {
 }
 
-Point MapView::get_viewpoint() const {
+Vector2i MapView::get_viewpoint() const {
 	return round(panel_to_mappixel_.translation());
 }
 
@@ -99,10 +99,10 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	// are guaranteed that the pixel we get back is inside the panel.
 
 	const Widelands::Map& map = intbase().egbase().map();
-	const FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
+	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
 	const FloatRect view_area = get_view_area();
 
-	const FloatPoint view_center = view_area.center();
+	const Vector2f view_center = view_area.center();
 	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
 	const int h = MapviewPixelFunctions::get_map_end_screen_y(map);
 	const float dist_x = shortest_distance_on_torus(view_center.x, map_pixel.x, w);
@@ -112,7 +112,7 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	if (dist_x > view_area.w / 2.f || dist_y > view_area.h / 2.f) {
 		return;
 	}
-	const Point in_panel =
+	const Vector2i in_panel =
 	   round(panel_to_mappixel_.inverse().apply(move_inside(map_pixel, view_area, w, h)));
 
 	set_mouse_pos(in_panel);
@@ -145,7 +145,7 @@ void MapView::set_changeview(const MapView::ChangeViewFn& fn) {
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void MapView::set_viewpoint(Point vp, bool jump) {
+void MapView::set_viewpoint(Vector2i vp, bool jump) {
 	const Widelands::Map& map = intbase().egbase().map();
 	MapviewPixelFunctions::normalize_pix(map, &vp);
 
@@ -161,12 +161,12 @@ void MapView::set_viewpoint(Point vp, bool jump) {
 }
 
 FloatRect MapView::get_view_area() const {
-	const FloatPoint min = panel_to_mappixel_.apply(FloatPoint());
-	const FloatPoint max = panel_to_mappixel_.apply(FloatPoint(get_w(), get_h()));
+	const Vector2f min = panel_to_mappixel_.apply(Vector2f());
+	const Vector2f max = panel_to_mappixel_.apply(Vector2f(get_w(), get_h()));
 	return FloatRect(min.x, min.y, max.x - min.x, max.y - min.y);
 }
 
-void MapView::set_rel_viewpoint(Point vp, bool jump) {
+void MapView::set_rel_viewpoint(Vector2i vp, bool jump) {
 	set_viewpoint(get_viewpoint() + vp, jump);
 }
 
@@ -185,7 +185,7 @@ void MapView::stop_dragging() {
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
-		track_sel(Point(x, y));
+		track_sel(Vector2i(x, y));
 
 		fieldclicked();
 	} else if (btn == SDL_BUTTON_RIGHT) {
@@ -209,13 +209,13 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
-			set_rel_viewpoint(Point(xdiff, ydiff), false);
+			set_rel_viewpoint(Vector2i(xdiff, ydiff), false);
 		else
 			stop_dragging();
 	}
 
 	if (!intbase().get_sel_freeze())
-		track_sel(Point(x, y));
+		track_sel(Vector2i(x, y));
 	return true;
 }
 
@@ -225,7 +225,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	}
 
 	const Transform2f translation =
-	   Transform2f::from_translation(FloatPoint(last_mouse_pos_.x, last_mouse_pos_.y));
+	   Transform2f::from_translation(Vector2f(last_mouse_pos_.x, last_mouse_pos_.y));
 	Transform2f mappixel_to_panel = panel_to_mappixel_.inverse();
 	const float old_zoom = mappixel_to_panel.zoom();
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
@@ -255,8 +255,8 @@ Move the sel to the given mouse position.
 Does not honour sel freeze.
 ===============
 */
-void MapView::track_sel(Point p) {
-	FloatPoint p_in_map = panel_to_mappixel_.apply(p.cast<float>());
+void MapView::track_sel(Vector2i p) {
+	Vector2f p_in_map = panel_to_mappixel_.apply(p.cast<float>());
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
 	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
 }

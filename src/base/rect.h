@@ -20,7 +20,7 @@
 #ifndef WL_BASE_RECT_H
 #define WL_BASE_RECT_H
 
-#include "base/point.h"
+#include "base/vector.h"
 
 template <typename T> struct GenericRect {
 	/// Generates a degenerate Rect at (0, 0) with no height or width.
@@ -31,29 +31,29 @@ template <typename T> struct GenericRect {
 	}
 
 	template <typename PointType>
-	GenericRect(const GenericPoint<PointType>& p, const T& width, const T& height)
+	GenericRect(const Vector2<PointType>& p, const T& width, const T& height)
 	   : GenericRect(T(p.x), T(p.y), width, height) {
 	}
 
-	/// The Point (x, y).
-	GenericPoint<T> origin() const {
-		return GenericPoint<T>(x, y);
+	/// The Vector2i (x, y).
+	Vector2<T> origin() const {
+		return Vector2<T>(x, y);
 	}
 
 	/// The point (x + w, y + h).
-	GenericPoint<T> opposite_of_origin() const {
-		return GenericPoint<T>(x + w, y + h);
+	Vector2<T> opposite_of_origin() const {
+		return Vector2<T>(x + w, y + h);
 	}
 
 	/// Returns true if this rectangle contains the given point.
 	/// The bottom and right borders of the rectangle are considered to be excluded.
-	template <typename PointType> bool contains(const GenericPoint<PointType>& pt) const {
+	template <typename PointType> bool contains(const Vector2<PointType>& pt) const {
 		return T(pt.x) >= x && T(pt.x) < x + w && T(pt.y) >= y && T(pt.y) < y + h;
 	}
 
 	// The center point of 'r'.
-	FloatPoint center() const {
-		return FloatPoint(x + w / 2.f, y + h / 2.f);
+	Vector2f center() const {
+		return Vector2f(x + w / 2.f, y + h / 2.f);
 	}
 
 	T x, y, w, h;

@@ -189,6 +189,6 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	int32_t topcrop = im->height() - height;
 	Rect cropRect(0, topcrop, width, height);
 
-	Point pt(0, top);
+	Vector2i pt(0, top);
 	dst.blitrect(pt, im, cropRect);
 }

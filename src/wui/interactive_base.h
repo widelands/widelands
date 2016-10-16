@@ -118,7 +118,7 @@ public:
 	void set_sel_radius(uint32_t);
 
 	void center_view_on_coords(const Widelands::Coords& coords);
-	void center_view_on_map_pixel(const Point& pos);
+	void center_view_on_map_pixel(const Vector2i& pos);
 
 	//  display flags
 	uint32_t get_display_flags() const;
@@ -167,7 +167,7 @@ public:
 	// Returns the list of landmarks that have been mapped to the keys 0-9
 	const std::vector<QuickNavigation::Landmark>& landmarks();
 	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const Point& point);
+	void set_landmark(size_t key, const Vector2i& point);
 
 protected:
 	// Will be called whenever the buildhelp is changed with the new 'value'.
@@ -186,7 +186,7 @@ protected:
 	void unset_sel_picture();
 	void set_sel_picture(const char* const);
 	void adjust_toolbar_position() {
-		toolbar_.set_pos(Point((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
+		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
 
 	// TODO(sirver): why are these protected?

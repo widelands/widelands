@@ -42,7 +42,7 @@ struct MiniMap : public UI::UniqueWindow {
 
 	MiniMap(InteractiveBase& parent, Registry*);
 
-	boost::signals2::signal<void(const Point&)> warpview;
+	boost::signals2::signal<void(const Vector2i&)> warpview;
 
 	void set_view(const FloatRect& rect) {
 		view_.set_view(rect);

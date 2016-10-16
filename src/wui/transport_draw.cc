@@ -30,7 +30,7 @@ namespace Widelands {
 void Flag::draw(uint32_t gametime,
                 const ShowText,
                 const Coords&,
-                const FloatPoint& point_on_dst,
+                const Vector2f& point_on_dst,
                 float zoom,
                 RenderTarget* dst) {
 	static struct {
@@ -43,7 +43,7 @@ void Flag::draw(uint32_t gametime,
 	   point_on_dst, zoom, owner().tribe().flag_animation(), gametime - animstart_, player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
-		FloatPoint warepos = point_on_dst;
+		Vector2f warepos = point_on_dst;
 		if (i < 8) {
 			warepos.x += ware_offsets[i].x * zoom;
 			warepos.y += ware_offsets[i].y * zoom;
@@ -56,7 +56,7 @@ void Flag::draw(uint32_t gametime,
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const ShowText, const Coords&, const FloatPoint&, float, RenderTarget*) {
+void Road::draw(uint32_t, const ShowText, const Coords&, const Vector2f&, float, RenderTarget*) {
 }
 
 }

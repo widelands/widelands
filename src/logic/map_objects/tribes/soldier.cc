@@ -385,15 +385,15 @@ void Soldier::damage(const uint32_t value) {
 ///
 /// pos is the location, in pixels, of the node position_ (height is already
 /// taken into account).
-FloatPoint Soldier::calc_drawpos(const EditorGameBase& game,
-                                 const FloatPoint& field_on_dst,
+Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
+                                 const Vector2f& field_on_dst,
                                  const float zoom) const {
 	if (combat_walking_ == CD_NONE) {
 		return Bob::calc_drawpos(game, field_on_dst, zoom);
 	}
 
 	bool moving = false;
-	FloatPoint spos = field_on_dst, epos = field_on_dst;
+	Vector2f spos = field_on_dst, epos = field_on_dst;
 
 	const float triangle_width = kTriangleWidth * zoom;
 	switch (combat_walking_) {
@@ -440,7 +440,7 @@ FloatPoint Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const FloatPoint& field_on_dst,
+                   const Vector2f& field_on_dst,
                    const float zoom,
                    RenderTarget* dst) const {
 	const uint32_t anim = get_current_anim();
@@ -448,8 +448,8 @@ void Soldier::draw(const EditorGameBase& game,
 		return;
 	}
 
-	const FloatPoint point_on_dst = calc_drawpos(game, field_on_dst, zoom);
-	draw_info_icon(*dst, Point(point_on_dst.x,
+	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, zoom);
+	draw_info_icon(*dst, Vector2i(point_on_dst.x,
 	                           point_on_dst.y - g_gr->animations().get_animation(anim).height() - 7),
 	               true);
 	draw_inner(game, point_on_dst, zoom, dst);
@@ -461,7 +461,7 @@ void Soldier::draw(const EditorGameBase& game,
  * \param anchor_below if \c true, the icon is drawn horizontally centered above
  * \p pt. Otherwise, the icon is drawn below and right of \p pt.
  */
-void Soldier::draw_info_icon(RenderTarget& dst, Point pt, bool anchor_below) const {
+void Soldier::draw_info_icon(RenderTarget& dst, Vector2i pt, bool anchor_below) const {
 	// NOCOM(#sirver): needs zoom
 	// Gather information to determine coordinates
 	uint32_t w;
@@ -492,14 +492,14 @@ void Soldier::draw_info_icon(RenderTarget& dst, Point pt, bool anchor_below) con
 	}
 
 	// Draw energy bar
-	Rect energy_outer(Point(pt.x - w, pt.y), w * 2, 5);
+	Rect energy_outer(Vector2i(pt.x - w, pt.y), w * 2, 5);
 	dst.draw_rect(energy_outer, RGBColor(255, 255, 255));
 
 	assert(get_max_health());
 	uint32_t health_width = 2 * (w - 1) * current_health_ / get_max_health();
-	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Rect energy_inner(Vector2i(pt.x - w + 1, pt.y + 1), health_width, 3);
 	Rect energy_complement(
-	   energy_inner.origin() + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
+	   energy_inner.origin() + Vector2i(health_width, 0), 2 * (w - 1) - health_width, 3);
 	const RGBColor& color = owner().get_playercolor();
 	RGBColor complement_color;
 
@@ -513,10 +513,10 @@ void Soldier::draw_info_icon(RenderTarget& dst, Point pt, bool anchor_below) con
 
 	// Draw level pictures
 	{
-		dst.blit(pt + Point(-atw, -(hph + ath)), attackpic);
-		dst.blit(pt + Point(0, -(evh + deh)), defensepic);
-		dst.blit(pt + Point(-hpw, -hph), healthpic);
-		dst.blit(pt + Point(0, -evh), evadepic);
+		dst.blit(pt + Vector2i(-atw, -(hph + ath)), attackpic);
+		dst.blit(pt + Vector2i(0, -(evh + deh)), defensepic);
+		dst.blit(pt + Vector2i(-hpw, -hph), healthpic);
+		dst.blit(pt + Vector2i(0, -evh), evadepic);
 	}
 }
 

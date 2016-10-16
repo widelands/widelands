@@ -59,7 +59,7 @@ ProgressWindow::~ProgressWindow() {
 void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, const uint32_t yres) {
 	label_center_.x = xres / 2;
 	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-	Rect wnd_rect(Point(0, 0), xres, yres);
+	Rect wnd_rect(Vector2i(0, 0), xres, yres);
 
 	const uint32_t h =
 	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();

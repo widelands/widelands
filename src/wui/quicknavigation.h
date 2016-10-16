@@ -26,7 +26,7 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "base/point.h"
+#include "base/vector.h"
 
 namespace Widelands {
 class EditorGameBase;
@@ -40,14 +40,14 @@ class EditorGameBase;
  */
 struct QuickNavigation {
 	struct Landmark {
-		Point point;
+		Vector2i point;
 		bool set;
 
 		Landmark() : set(false) {
 		}
 	};
 
-	using SetViewFn = boost::function<void(Point)>;
+	using SetViewFn = boost::function<void(Vector2i)>;
 
 	QuickNavigation(const Widelands::EditorGameBase& egbase,
 	                uint32_t screenwidth,
@@ -55,10 +55,10 @@ struct QuickNavigation {
 
 	void set_setview(const SetViewFn& fn);
 
-	void view_changed(Point point, bool jump);
+	void view_changed(Vector2i point, bool jump);
 
 	// Set the landmark for 'index' to 'point'. 'index' must be < 10.
-	void set_landmark(size_t index, const Point& point);
+	void set_landmark(size_t index, const Vector2i& point);
 
 	// Returns a pointer to the first element in the landmarks array
 	const std::vector<Landmark>& landmarks() const {
@@ -68,7 +68,7 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(Point where);
+	void setview(Vector2i where);
 
 	const Widelands::EditorGameBase& egbase_;
 	uint32_t screenwidth_;
@@ -81,16 +81,16 @@ private:
 
 	bool havefirst_;
 	bool update_;
-	Point anchor_;
-	Point current_;
+	Vector2i anchor_;
+	Vector2i current_;
 
 	/**
 	 * Keeps track of what the player has looked at to allow jumping back and forth
 	 * in the history.
 	 */
 	/*@{*/
-	std::vector<Point> history_;
-	std::vector<Point>::size_type history_index_;
+	std::vector<Vector2i> history_;
+	std::vector<Vector2i>::size_type history_index_;
 	/*@}*/
 
 	/**

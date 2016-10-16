@@ -943,7 +943,7 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-               const FloatPoint& field_on_dst,
+               const Vector2f& field_on_dst,
                const float zoom,
                RenderTarget* dst) const {
 	Bob::draw(egbase, field_on_dst, zoom, dst);

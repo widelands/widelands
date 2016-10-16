@@ -22,9 +22,9 @@
 
 #include <memory>
 
-#include "base/point.h"
 #include "base/rect.h"
 #include "base/transform.h"
+#include "base/vector.h"
 #include "logic/map.h"
 
 class StreamWrite;
@@ -68,8 +68,8 @@ enum class MiniMapType {
 
 // Converts between minimap pixel and map pixel.
 // Remember to call 'normalize_pix' after applying the transformation.
-Point minimap_pixel_to_mappixel(const Widelands::Map& map,
-                                const Point& minimap_pixel,
+Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
+                                const Vector2i& minimap_pixel,
                                 const FloatRect& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom);

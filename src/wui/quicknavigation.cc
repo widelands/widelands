@@ -41,16 +41,16 @@ void QuickNavigation::set_setview(const QuickNavigation::SetViewFn& fn) {
 	setview_ = fn;
 }
 
-void QuickNavigation::setview(Point where) {
+void QuickNavigation::setview(Vector2i where) {
 	update_ = false;
 	setview_(where);
 	update_ = true;
 }
 
-void QuickNavigation::view_changed(Point newpos, bool jump) {
+void QuickNavigation::view_changed(Vector2i newpos, bool jump) {
 	if (havefirst_ && update_) {
 		if (!jump) {
-			Point delta = MapviewPixelFunctions::calc_pix_difference(egbase_.map(), newpos, anchor_);
+			Vector2i delta = MapviewPixelFunctions::calc_pix_difference(egbase_.map(), newpos, anchor_);
 
 			if (static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
 			    static_cast<uint32_t>(abs(delta.y)) > screenheight_)
@@ -75,7 +75,7 @@ void QuickNavigation::view_changed(Point newpos, bool jump) {
 	havefirst_ = true;
 }
 
-void QuickNavigation::set_landmark(size_t index, const Point& point) {
+void QuickNavigation::set_landmark(size_t index, const Vector2i& point) {
 	assert(index < landmarks_.size());
 	landmarks_[index].point = point;
 	landmarks_[index].set = true;

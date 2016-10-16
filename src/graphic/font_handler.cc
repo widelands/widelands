@@ -46,13 +46,13 @@ namespace {
  */
 void draw_caret(RenderTarget& dst,
                 const TextStyle& style,
-                const Point& dstpoint,
+                const Vector2i& dstpoint,
                 const std::string& text,
                 uint32_t caret_offset) {
 	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
 
 	const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-	Point caretpt;
+	Vector2i caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
 	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 
@@ -202,7 +202,7 @@ void FontHandler::Data::render_line(LineCacheEntry& lce) {
  */
 void FontHandler::draw_text(RenderTarget& dst,
                             const TextStyle& style,
-                            Point dstpoint,
+                            Vector2i dstpoint,
                             const std::string& text,
                             Align align,
                             uint32_t caret) {
@@ -215,7 +215,7 @@ void FontHandler::draw_text(RenderTarget& dst,
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
-		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
+		dst.blit(Vector2i(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
 		draw_caret(dst, style, dstpoint, copytext, caret);
@@ -226,7 +226,7 @@ void FontHandler::draw_text(RenderTarget& dst,
  */
 uint32_t FontHandler::draw_text_raw(RenderTarget& dst,
                                     const UI::TextStyle& style,
-                                    Point dstpoint,
+                                    Vector2i dstpoint,
                                     const std::string& text) {
 	const LineCacheEntry& lce = d->get_line(style, text);
 

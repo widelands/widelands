@@ -406,7 +406,7 @@ protected:
 	                  bool show_statictics,
 	                  const std::string& statictics,
 	                  RenderTarget& dst,
-	                  const FloatPoint& pos) const;
+	                  const Vector2f& pos) const;
 
 	void molog(char const* fmt, ...) const __attribute__((format(printf, 2, 3)));
 

@@ -64,7 +64,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	int32_t xplayertribe = w * 80 / 125;
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0), "");
+	d->btnEnablePlayer = new UI::Checkbox(this, Vector2i(xplayertype - 23, 0), "");
 	d->btnEnablePlayer->changedto.connect(
 	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Button(

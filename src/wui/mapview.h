@@ -43,7 +43,7 @@ struct MapView : public UI::Panel {
 	 * Parameters are x/y screen coordinates and whether the change should
 	 * be considered a "jump" or a smooth scrolling event.
 	 */
-	using ChangeViewFn = boost::function<void(Point, bool)>;
+	using ChangeViewFn = boost::function<void(Vector2i, bool)>;
 
 	MapView(UI::Panel* const parent,
 	        const int32_t x,
@@ -61,10 +61,10 @@ struct MapView : public UI::Panel {
 
 	void warp_mouse_to_node(Widelands::Coords);
 
-	void set_viewpoint(Point vp, bool jump);
-	void set_rel_viewpoint(Point r, bool jump);
+	void set_viewpoint(Vector2i vp, bool jump);
+	void set_rel_viewpoint(Vector2i r, bool jump);
 
-	Point get_viewpoint() const;
+	Vector2i get_viewpoint() const;
 	FloatRect get_view_area() const;
 	bool is_dragging() const {
 		return dragging_;
@@ -81,7 +81,7 @@ struct MapView : public UI::Panel {
 	bool
 	handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 
-	void track_sel(Point m);
+	void track_sel(Vector2i m);
 
 protected:
 	InteractiveBase& intbase() const {
@@ -95,7 +95,7 @@ private:
 	InteractiveBase& intbase_;
 	ChangeViewFn changeview_;
 	Transform2f panel_to_mappixel_;
-	Point last_mouse_pos_;
+	Vector2i last_mouse_pos_;
 	bool dragging_;
 };
 

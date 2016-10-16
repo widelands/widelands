@@ -359,26 +359,26 @@ void EditBox::draw(RenderTarget& odst) {
 	RenderTarget& dst = odst;
 
 	// Draw the background
-	dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_->background, Point(get_x(), get_y()));
+	dst.tile(Rect(Vector2i(0, 0), get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rect(Point(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(Vector2i(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rect(Point(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(Vector2i(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
-		dst.fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		dst.fill_rect(Rect(Vector2i(0, 0), get_w() - 1, 1), black);
+		dst.fill_rect(Rect(Vector2i(0, 1), get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
-		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+		dst.fill_rect(Rect(Vector2i(0, 0), 1, get_h() - 1), black);
+		dst.fill_rect(Rect(Vector2i(1, 0), 1, get_h() - 2), black);
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
@@ -393,7 +393,7 @@ void EditBox::draw(RenderTarget& odst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Point point(kMarginX, get_h() / 2);
+	Vector2i point(kMarginX, get_h() / 2);
 
 	if (static_cast<int>(m_->align & UI::Align::kRight)) {
 		point.x += max_width;
@@ -433,7 +433,7 @@ void EditBox::draw(RenderTarget& odst) {
 		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-		Point caretpt;
+		Vector2i caretpt;
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);

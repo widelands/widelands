@@ -53,7 +53,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	              g_gr->images().get("images/ui_basic/but5.png"), _("OK"), "", true, false);
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
-	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
+	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
 
 	std::string helptext;
 	try {

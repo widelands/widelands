@@ -71,7 +71,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 }
 
 void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
-                                const FloatPoint& texture_offset) {
+                                const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
@@ -107,7 +107,7 @@ void TerrainProgram::draw(uint32_t gametime,
 
 		// Down triangle.
 		if (field.bln_index != -1) {
-			const FloatPoint texture_offset =
+			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
 			      .origin();
@@ -118,7 +118,7 @@ void TerrainProgram::draw(uint32_t gametime,
 
 		// Right triangle.
 		if (field.rn_index != -1) {
-			const FloatPoint texture_offset =
+			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())
 			      .origin();

@@ -44,7 +44,7 @@ using namespace std;
 
 namespace {
 // Parses an array { 12, 23 } into a point.
-void get_point(const LuaTable& table, Point* p) {
+void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
 	if (pts.size() != 2) {
 		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
@@ -68,7 +68,7 @@ public:
 	uint16_t height() const override;
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
-	const Point& hotspot() const override;
+	const Vector2i& hotspot() const override;
 	Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
@@ -88,7 +88,7 @@ private:
 	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
-	Point hotspot_;
+	Vector2i hotspot_;
 	bool hasplrclrs_;
 	std::vector<std::string> image_files_;
 	std::vector<std::string> pc_mask_image_files_;
@@ -210,7 +210,7 @@ uint32_t NonPackedAnimation::frametime() const {
 	return frametime_;
 }
 
-const Point& NonPackedAnimation::hotspot() const {
+const Vector2i& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
@@ -224,11 +224,11 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	Texture* rv = new Texture(w, h);
 	if (!hasplrclrs_ || clr == nullptr) {
 		// No player color means we simply want an exact copy of the original image.
-		rv->blit(Rect(Point(0, 0), w, h), *image, Rect(Point(0, 0), w, h), 1., BlendMode::Copy);
+		rv->blit(Rect(Vector2i(0, 0), w, h), *image, Rect(Vector2i(0, 0), w, h), 1., BlendMode::Copy);
 	} else {
-		rv->fill_rect(Rect(Point(0, 0), w, h), RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rect(Point(0, 0), w, h), *image,
-		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Point(0, 0), w, h), *clr);
+		rv->fill_rect(Rect(Vector2i(0, 0), w, h), RGBAColor(0, 0, 0, 0));
+		rv->blit_blended(Rect(Vector2i(0, 0), w, h), *image,
+		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Vector2i(0, 0), w, h), *clr);
 	}
 	return rv;
 }

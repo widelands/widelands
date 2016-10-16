@@ -241,7 +241,7 @@ public:
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
 
-	void show_options(InteractiveGameBase&, bool avoid_fastclick = false, Point pos = Point(-1, -1));
+	void show_options(InteractiveGameBase&, bool avoid_fastclick = false, Vector2i pos = Vector2i(-1, -1));
 	void hide_options();
 	void refresh_options(InteractiveGameBase&);
 
@@ -314,11 +314,11 @@ protected:
 	void draw(uint32_t gametime,
 	          ShowText show_text,
 	          const Coords& coords_to_draw,
-	          const FloatPoint& point_on_dst,
+	          const Vector2f& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;
 	// NOCOM(#sirver): requires zoom?
-	void draw_info(ShowText show_text, const FloatPoint& point_on_dst, RenderTarget* dst);
+	void draw_info(ShowText show_text, const Vector2f& point_on_dst, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

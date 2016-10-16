@@ -53,7 +53,7 @@ void MiniMap::View::draw(RenderTarget& dst) {
 	minimap_image_ =
 	   draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, MiniMapType::kStaticViewWindow,
 	                *flags_ | MiniMapLayer::ViewWindow);
-	dst.blit(Point(), minimap_image_.get());
+	dst.blit(Vector2i(), minimap_image_.get());
 }
 
 /*
@@ -66,7 +66,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 		return false;
 
 	dynamic_cast<MiniMap&>(*get_parent())
-	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Point(x, y), view_area_,
+	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
 	                                       MiniMapType::kStaticViewWindow,
 	                                       *flags_ & MiniMapLayer::Zoom2));
 	return true;
@@ -219,17 +219,17 @@ void MiniMap::toggle(MiniMapLayer const button) {
 void MiniMap::resize() {
 	view_.set_zoom(*view_.flags_ & MiniMapLayer::Zoom2 ? 2 : 1);
 	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
-	button_terrn.set_pos(Point(but_w() * 0, view_.get_h() + but_h() * 0));
+	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 0));
 	button_terrn.set_size(but_w(), but_h());
-	button_owner.set_pos(Point(but_w() * 1, view_.get_h() + but_h() * 0));
+	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h() + but_h() * 0));
 	button_owner.set_size(but_w(), but_h());
-	button_flags.set_pos(Point(but_w() * 2, view_.get_h() + but_h() * 0));
+	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h() + but_h() * 0));
 	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(Point(but_w() * 0, view_.get_h() + but_h() * 1));
+	button_roads.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 1));
 	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(Point(but_w() * 1, view_.get_h() + but_h() * 1));
+	button_bldns.set_pos(Vector2i(but_w() * 1, view_.get_h() + but_h() * 1));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(Point(but_w() * 2, view_.get_h() + but_h() * 1));
+	button_zoom.set_pos(Vector2i(but_w() * 2, view_.get_h() + but_h() * 1));
 	button_zoom.set_size(but_w(), but_h());
 	move_inside_parent();
 }

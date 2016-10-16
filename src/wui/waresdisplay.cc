@@ -196,7 +196,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 		in_selection_[resetme.first] = false;
 	}
 
-	Point anchor_pos = ware_position(selection_anchor_);
+	Vector2i anchor_pos = ware_position(selection_anchor_);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
 	int32_t anchor_x = anchor_pos.x + WARE_MENU_PIC_WIDTH / 2;
@@ -245,7 +245,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 }
 
 void AbstractWaresDisplay::layout() {
-	curware_.set_pos(Point(0, get_inner_h() - 25));
+	curware_.set_pos(Vector2i(0, get_inner_h() - 25));
 	curware_.set_size(get_inner_w(), 20);
 }
 
@@ -281,8 +281,8 @@ const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order
 	NEVER_HERE();
 }
 
-Point AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {
-	Point p(2, 2);
+Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {
+	Vector2i p(2, 2);
 	if (horizontal_) {
 		p.x += icons_order_coords()[id].second * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].first *
@@ -303,7 +303,7 @@ Draw one ware icon + additional information.
 ===============
 */
 void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id) {
-	Point p = ware_position(id);
+	Vector2i p = ware_position(id);
 
 	bool draw_selected = selected_[id];
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
@@ -327,14 +327,14 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
 
-	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
+	dst.blit(p + Vector2i((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
 
 	dst.fill_rect(
-	   Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE), info_color_for_ware(id));
+	   Rect(p + Vector2i(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE), info_color_for_ware(id));
 
 	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	if (text)  // might be zero when there is no info text.
-		dst.blit(p + Point(w - text->width() - 1,
+		dst.blit(p + Vector2i(w - text->width() - 1,
 		                   WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()),
 		         text);
 }

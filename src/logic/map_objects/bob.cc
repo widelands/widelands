@@ -691,14 +691,14 @@ void Bob::move_update(Game& game, State&) {
 //
 // pos is the location, in pixels, of the node position_ on screen with zoom
 // and height taken into account.
-FloatPoint Bob::calc_drawpos(const EditorGameBase& game,
-                             const FloatPoint& field_on_dst,
+Vector2f Bob::calc_drawpos(const EditorGameBase& game,
+                             const Vector2f& field_on_dst,
                              const float zoom) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
-	FloatPoint spos = field_on_dst;
-	FloatPoint epos = field_on_dst;
+	Vector2f spos = field_on_dst;
+	Vector2f epos = field_on_dst;
 
 	const float triangle_w = kTriangleWidth * zoom;
 	const float triangle_h = kTriangleHeight * zoom;
@@ -757,7 +757,7 @@ FloatPoint Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const FloatPoint& field_on_dst,
+               const Vector2f& field_on_dst,
                const float zoom,
                RenderTarget* dst) const {
 	if (!anim_) {
@@ -765,7 +765,7 @@ void Bob::draw(const EditorGameBase& egbase,
 	}
 
 	auto* const owner = get_owner();
-	const FloatPoint point_on_dst = calc_drawpos(egbase, field_on_dst, zoom);
+	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, zoom);
 	if (owner != nullptr) {
 		dst->blit_animation(
 		   point_on_dst, zoom, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());

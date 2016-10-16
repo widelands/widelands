@@ -56,7 +56,7 @@ DitherProgram::~DitherProgram() {
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
                                const TrianglePoint triangle_point,
-                               const FloatPoint& texture_offset) {
+                               const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
@@ -98,7 +98,7 @@ void DitherProgram::maybe_add_dithering_triangle(
 	}
 	const Widelands::TerrainDescription& other_terrain_description = terrains.get(other_terrain);
 	if (terrains.get(my_terrain).dither_layer() < other_terrain_description.dither_layer()) {
-		const FloatPoint texture_offset =
+		const Vector2f texture_offset =
 		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
 		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
 		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);

@@ -44,7 +44,7 @@
 
 // Holds information for a view
 struct WatchWindowView {
-	Point view_point;
+	Vector2i view_point;
 	Widelands::ObjectPointer tracking;  //  if non-null, we're tracking a Bob
 };
 
@@ -62,12 +62,12 @@ struct WatchWindow : public UI::Window {
 		return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	}
 
-	boost::signals2::signal<void(Point)> warp_mainview;
+	boost::signals2::signal<void(Vector2i)> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void next_view();
 	void show_view();
-	Point calc_coords(Widelands::Coords);
+	Vector2i calc_coords(Widelands::Coords);
 	void save_coords();
 	void close_cur_view();
 	void toggle_buttons();
@@ -157,7 +157,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 }
 
 // Calc point on map from coords
-Point WatchWindow::calc_coords(Widelands::Coords const coords) {
+Vector2i WatchWindow::calc_coords(Widelands::Coords const coords) {
 	// Initial positioning
 	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * kTriangleWidth;
 	int32_t vy = (coords.y) * kTriangleHeight;
@@ -165,7 +165,7 @@ Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	// NOCOM(#sirver): probably requires zoom
 	uint8_t height = map[coords].get_height() * kHeightFactor;
 
-	return Point(vx - mapview.get_w() / 2, vy - height - mapview.get_h() / 2);
+	return Vector2i(vx - mapview.get_w() / 2, vy - height - mapview.get_h() / 2);
 }
 
 // Switch to next view
@@ -229,9 +229,9 @@ void WatchWindow::think() {
 	}
 
 	if (upcast(Widelands::Bob, bob, views[cur_index].tracking.get(game()))) {
-		const FloatPoint field_position =
+		const Vector2f field_position =
 		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
-		const FloatPoint pos = bob->calc_drawpos(game(), field_position, 1.f);
+		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
@@ -240,7 +240,7 @@ void WatchWindow::think() {
 			// Not in sight
 			views[cur_index].tracking = nullptr;
 		} else {
-			mapview.set_viewpoint(round(pos) - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+			mapview.set_viewpoint(round(pos) - Vector2i(mapview.get_w() / 2, mapview.get_h() / 2), false);
 		}
 	}
 }
@@ -271,7 +271,7 @@ void WatchWindow::do_follow() {
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
-		Point pos(mapview.get_viewpoint() + Point(mapview.get_w() / 2, mapview.get_h() / 2));
+		Vector2i pos(mapview.get_viewpoint() + Vector2i(mapview.get_w() / 2, mapview.get_h() / 2));
 		Widelands::Map& map = g.map();
 		MapviewPixelFunctions::normalize_pix(map, &pos);
 		std::vector<Widelands::Bob*> bobs;
@@ -289,8 +289,8 @@ void WatchWindow::do_follow() {
 		Widelands::Bob* closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob* const bob = bobs[i];
-			const FloatPoint field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
-			const FloatPoint p = bob->calc_drawpos(g, field_position, 1.f);
+			const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
+			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);
 			uint32_t const dist = MapviewPixelFunctions::calc_pix_distance(map, p.cast<int>(), pos);
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
@@ -310,7 +310,7 @@ void WatchWindow::do_follow() {
  * Cause the main mapview to jump to our current position.
  */
 void WatchWindow::do_goto() {
-	warp_mainview(mapview.get_viewpoint() + Point(mapview.get_w() / 2, mapview.get_h() / 2));
+	warp_mainview(mapview.get_viewpoint() + Vector2i(mapview.get_w() / 2, mapview.get_h() / 2));
 }
 
 /**

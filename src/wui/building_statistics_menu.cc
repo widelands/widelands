@@ -501,7 +501,7 @@ void BuildingStatisticsMenu::think() {
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
 		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
-		navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
 	}
 
 	// Update statistics

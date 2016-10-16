@@ -108,11 +108,11 @@ void GameTips::show_tip(int32_t index) {
 
 	uint16_t w = pic_background->width();
 	uint16_t h = pic_background->height();
-	Point pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
+	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
 	tips_area = Rect(pt, w, h);
 	rt.blit(pt, pic_background);
 
-	Point center(tips_area.x + tips_area.w / 2, tips_area.y + tips_area.h / 2);
+	Vector2i center(tips_area.x + tips_area.w / 2, tips_area.y + tips_area.h / 2);
 	const Image* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
-	rt.blit(center - Point(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
+	rt.blit(center - Vector2i(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
 }

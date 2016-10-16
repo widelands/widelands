@@ -21,22 +21,22 @@
 #define WL_BASE_TRANSFORM_H
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 
-// NOCOM(#sirver): rename Point to Point2 (or just use use Vector and dump one of them?).
+// NOCOM(#sirver): rename Vector2i to Vector2 (or just use use Vector and dump one of them?).
 class Transform2f {
 public:
-	Transform2f(const FloatPoint& translation, const float zoom);
+	Transform2f(const Vector2f& translation, const float zoom);
 
 	static Transform2f identity();
 	static Transform2f from_zoom(float zoom);
-	static Transform2f from_translation(const FloatPoint& translation);
+	static Transform2f from_translation(const Vector2f& translation);
 
-	const FloatPoint& translation() const { return translation_; }
+	const Vector2f& translation() const { return translation_; }
 	float zoom() const { return zoom_; }
 
 	// Transform this point by this transform.
-	FloatPoint apply(const FloatPoint& v) const;
+	Vector2f apply(const Vector2f& v) const;
 
 	// Returns B, so that B.apply(p) == this.apply(A.apply(p)).
 	Transform2f chain(const Transform2f& A) const;
@@ -45,7 +45,7 @@ public:
 	Transform2f inverse() const;
 
 private:
-	FloatPoint translation_;
+	Vector2f translation_;
 	float zoom_;
 };
 

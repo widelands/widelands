@@ -134,7 +134,7 @@ void MultilineTextarea::layout() {
 	recompute();
 
 	// Take care of the scrollbar
-	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
+	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
 }
@@ -144,7 +144,7 @@ void MultilineTextarea::layout() {
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
 	if (use_old_renderer_) {
-		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
+		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
 		const Image* text_im;
 		if (!is_richtext(text_)) {

@@ -373,7 +373,7 @@ void Ship::close_window() {
 void Ship::refresh_window(InteractiveGameBase& igb) {
 	// Only do something if there is actually a window
 	if (window_) {
-		Point window_position = window_->get_pos();
+		Vector2i window_position = window_->get_pos();
 		close_window();
 		show_window(igb, true);
 		// show window could theoretically fail if refresh_window was called at the very same moment

@@ -142,7 +142,7 @@ void PortDock::set_economy(Economy* e) {
 }
 
 void PortDock::draw(
-   uint32_t, const ShowText, const Coords&, const FloatPoint&, float, RenderTarget*) {
+   uint32_t, const ShowText, const Coords&, const Vector2f&, float, RenderTarget*) {
 	// do nothing
 }
 

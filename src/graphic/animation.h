@@ -29,8 +29,8 @@
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
-#include "base/point.h"
 #include "base/rect.h"
+#include "base/vector.h"
 
 class Image;
 class LuaTable;
@@ -68,7 +68,7 @@ public:
 
 	/// The hotspot of this animation. Note that this is ignored when blitting,
 	/// so the caller has to adjust for the hotspot himself.
-	virtual const Point& hotspot() const = 0;
+	virtual const Vector2i& hotspot() const = 0;
 
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be

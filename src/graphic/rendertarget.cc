@@ -35,7 +35,7 @@ RenderTarget::RenderTarget(Surface* surf) {
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(const Rect& rc, const Point& ofs) {
+void RenderTarget::set_window(const Rect& rc, const Vector2i& ofs) {
 	rect_ = rc;
 	offset_ = ofs;
 
@@ -69,7 +69,7 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs) {
  * Returns false if the subwindow is invisible. In that case, the window state
  * is not changed at all. Otherwise, the function returns true.
  */
-bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs) {
+bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Vector2i* prevofs) {
 	Rect newrect = rc;
 
 	if (clip(newrect)) {
@@ -104,10 +104,10 @@ int32_t RenderTarget::height() const {
 /**
  * This functions draws a line in the target
  */
-void RenderTarget::draw_line_strip(const std::vector<FloatPoint>& points,
+void RenderTarget::draw_line_strip(const std::vector<Vector2f>& points,
                                    const RGBColor& color,
                                    float line_width) {
-	std::vector<FloatPoint> adjusted_points;
+	std::vector<Vector2f> adjusted_points;
 	adjusted_points.reserve(points.size());
 	for (const auto& p : points) {
 		adjusted_points.emplace_back(p.x + offset_.x + rect_.x, p.y + offset_.y + rect_.y);
@@ -142,14 +142,14 @@ void RenderTarget::brighten_rect(const Rect& rect, int32_t factor) {
  *
  * This blit function copies the pixels to the destination surface.
  */
-void RenderTarget::blit(const Point& dst,
+void RenderTarget::blit(const Vector2i& dst,
                         const Image* image,
                         BlendMode blend_mode,
                         UI::Align align) {
-	Point destination_point(dst);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
-	Rect source_rect(Point(0, 0), image->width(), image->height());
+	Rect source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rect destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -157,14 +157,14 @@ void RenderTarget::blit(const Point& dst,
 	}
 }
 
-void RenderTarget::blit_monochrome(const Point& dst,
+void RenderTarget::blit_monochrome(const Vector2i& dst,
                                    const Image* image,
                                    const RGBAColor& blend_mode,
                                    UI::Align align) {
-	Point destination_point(dst);
+	Vector2i destination_point(dst);
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
-	Rect source_rect(Point(0, 0), image->width(), image->height());
+	Rect source_rect(Vector2i(0, 0), image->width(), image->height());
 	Rect destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -175,7 +175,7 @@ void RenderTarget::blit_monochrome(const Point& dst,
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
-void RenderTarget::blitrect(const Point& dst,
+void RenderTarget::blitrect(const Vector2i& dst,
                             const Image* image,
                             const Rect& gsrcrc,
                             BlendMode blend_mode) {
@@ -220,13 +220,13 @@ void RenderTarget::blitrect_scale_monochrome(Rect destination_rect,
  */
 void RenderTarget::tile(const Rect& rect,
                         const Image* image,
-                        const Point& gofs,
+                        const Vector2i& gofs,
                         BlendMode blend_mode) {
 	int32_t srcw = image->width();
 	int32_t srch = image->height();
 
 	Rect r(rect);
-	Point ofs(gofs);
+	Vector2i ofs(gofs);
 	if (clip(r)) {
 		if (offset_.x < 0)
 			ofs.x -= offset_.x;
@@ -294,25 +294,25 @@ void RenderTarget::tile(const Rect& rect,
 // TODO(unknown): Correctly calculate the stereo position for sound effects
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
-void RenderTarget::blit_animation(const FloatPoint& dst,
+void RenderTarget::blit_animation(const Vector2f& dst,
                                   const float zoom,
                                   uint32_t animation,
                                   uint32_t time) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(dst, zoom, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
+	do_blit_animation(dst, zoom, anim, time, nullptr, Rect(Vector2i(0, 0), anim.width(), anim.height()));
 }
 
-void RenderTarget::blit_animation(const FloatPoint& dst,
+void RenderTarget::blit_animation(const Vector2f& dst,
                                   const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 	do_blit_animation(
-	   dst, zoom, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
+	   dst, zoom, anim, time, &player_color, Rect(Vector2i(0, 0), anim.width(), anim.height()));
 }
 
-void RenderTarget::blit_animation(const FloatPoint& dst,
+void RenderTarget::blit_animation(const Vector2f& dst,
                                   const float zoom,
                                   uint32_t animation,
                                   uint32_t time,
@@ -322,7 +322,7 @@ void RenderTarget::blit_animation(const FloatPoint& dst,
 	   dst, zoom, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
 }
 
-void RenderTarget::do_blit_animation(const FloatPoint& dst,
+void RenderTarget::do_blit_animation(const Vector2f& dst,
                                      const float zoom,
                                      const Animation& animation,
                                      uint32_t time,

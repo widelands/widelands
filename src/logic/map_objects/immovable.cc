@@ -441,7 +441,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const ShowText show_text,
                      const Coords&,
-                     const FloatPoint& point_on_dst,
+                     const Vector2f& point_on_dst,
                      float zoom,
                      RenderTarget* dst) {
 	if (!anim_) {
@@ -456,7 +456,7 @@ void Immovable::draw(uint32_t gametime,
 
 void Immovable::draw_construction(const uint32_t gametime,
                                   const ShowText show_text,
-                                  const FloatPoint& point_on_dst,
+                                  const Vector2f& point_on_dst,
                                   const float zoom,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;
@@ -495,7 +495,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	assert(lines <= curh);
 	dst->blit_animation(point_on_dst, zoom, anim_, current_frame * frametime, player_color,
-	                   Rect(Point(0, curh - lines), curw, lines));
+	                   Rect(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(show_text & ShowText::kCensus, descr().descname(),

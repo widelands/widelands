@@ -192,7 +192,7 @@ int LuaPanel::get_mouse_position_x(lua_State* L) {
 }
 int LuaPanel::set_mouse_position_x(lua_State* L) {
 	assert(panel_);
-	Point p = panel_->get_mouse_position();
+	Vector2i p = panel_->get_mouse_position();
 	p.x = floor(luaL_checkdouble(L, -1));
 	panel_->set_mouse_pos(p);
 	return 1;
@@ -204,7 +204,7 @@ int LuaPanel::get_mouse_position_y(lua_State* L) {
 }
 int LuaPanel::set_mouse_position_y(lua_State* L) {
 	assert(panel_);
-	Point p = panel_->get_mouse_position();
+	Vector2i p = panel_->get_mouse_position();
 	p.y = floor(luaL_checkdouble(L, -1));
 	panel_->set_mouse_pos(p);
 	return 1;
@@ -244,27 +244,27 @@ int LuaPanel::set_height(lua_State* L) {
 */
 int LuaPanel::get_position_x(lua_State* L) {
 	assert(panel_);
-	Point p = panel_->to_parent(Point(0, 0));
+	Vector2i p = panel_->to_parent(Vector2i(0, 0));
 
 	lua_pushint32(L, p.x);
 	return 1;
 }
 int LuaPanel::set_position_x(lua_State* L) {
 	assert(panel_);
-	Point p(luaL_checkint32(L, -1) - panel_->get_lborder(), panel_->get_y());
+	Vector2i p(luaL_checkint32(L, -1) - panel_->get_lborder(), panel_->get_y());
 	panel_->set_pos(p);
 	return 1;
 }
 int LuaPanel::get_position_y(lua_State* L) {
 	assert(panel_);
-	Point p = panel_->to_parent(Point(0, 0));
+	Vector2i p = panel_->to_parent(Vector2i(0, 0));
 
 	lua_pushint32(L, p.y);
 	return 1;
 }
 int LuaPanel::set_position_y(lua_State* L) {
 	assert(panel_);
-	Point p(panel_->get_x(), luaL_checkint32(L, -1) - panel_->get_tborder());
+	Vector2i p(panel_->get_x(), luaL_checkint32(L, -1) - panel_->get_tborder());
 	panel_->set_pos(p);
 	return 1;
 }
@@ -289,9 +289,9 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 
 	UI::Panel* cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
-	Point cp = Point(0, 0);
+	Vector2i cp = Vector2i(0, 0);
 	while (cur && cur != panel_) {
-		cp += cur->to_parent(Point(0, 0));
+		cp += cur->to_parent(Vector2i(0, 0));
 		cur = cur->get_parent();
 	}
 
@@ -526,7 +526,7 @@ int LuaMapView::set_viewpoint_x(lua_State* L) {
 	}
 
 	MapView* mv = get();
-	Point p = mv->get_viewpoint();
+	Vector2i p = mv->get_viewpoint();
 	p.x = floor(luaL_checkdouble(L, -1));
 	mv->set_viewpoint(p, true);
 	return 0;
@@ -543,7 +543,7 @@ int LuaMapView::set_viewpoint_y(lua_State* L) {
 	}
 
 	MapView* mv = get();
-	Point p = mv->get_viewpoint();
+	Vector2i p = mv->get_viewpoint();
 	p.y = floor(luaL_checkdouble(L, -1));
 	mv->set_viewpoint(p, true);
 	return 0;

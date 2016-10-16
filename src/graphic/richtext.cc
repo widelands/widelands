@@ -61,7 +61,7 @@ struct ImageElement : Element {
 	}
 
 	void draw(RenderTarget& dst) override {
-		dst.blit(Point(0, 0), image);
+		dst.blit(Vector2i(0, 0), image);
 	}
 
 	const Image* image;
@@ -107,16 +107,16 @@ struct TextlineElement : Element {
 			}
 		}
 		// Now render
-		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), result_words[0]);
+		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i(0, 0), result_words[0]);
 
 		it = result_words.begin() + 1;
 		if (it != result_words.end()) {
 			do {
 				if (style.underline)
-					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+					x += g_fh->draw_text_raw(dst, style, Vector2i(x, 0), " ");
 				else
 					x += spacewidth;
-				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
+				x += g_fh->draw_text_raw(dst, style, Vector2i(x, 0), *it++);
 			} while (it != result_words.end());
 		}
 	}
@@ -486,16 +486,16 @@ void RichText::parse(const std::string& rtext) {
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget& dst, const Point& offset, bool background) {
+void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) {
 	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
 	     ++elt) {
 		Rect oldbox;
-		Point oldofs;
+		Vector2i oldofs;
 		Rect bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)
-				dst.fill_rect(Rect(Point(0, 0), bbox.w, bbox.h), m->background_color);
+				dst.fill_rect(Rect(Vector2i(0, 0), bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

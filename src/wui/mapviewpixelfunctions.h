@@ -20,7 +20,7 @@
 #ifndef WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 #define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
@@ -34,8 +34,8 @@ namespace MapviewPixelFunctions {
 
 float calc_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
 
-Point calc_pix_difference(const Widelands::Map&, Point, Point);
-uint32_t calc_pix_distance(const Widelands::Map&, Point, Point);
+Vector2i calc_pix_difference(const Widelands::Map&, Vector2i, Vector2i);
+uint32_t calc_pix_distance(const Widelands::Map&, Vector2i, Vector2i);
 
 inline uint32_t get_map_end_screen_x(const Widelands::Map& map) {
 	return map.get_width() * kTriangleWidth;
@@ -56,32 +56,32 @@ inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
  */
 Widelands::NodeAndTriangle<> calc_node_and_triangle(const Widelands::Map&, uint32_t x, uint32_t y);
 
-void normalize_pix(const Widelands::Map& map, Point* p);
+void normalize_pix(const Widelands::Map& map, Vector2i* p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.
-inline FloatPoint to_map_pixel_ignoring_height(const Widelands::Coords& c) {
-	return FloatPoint(
+inline Vector2f to_map_pixel_ignoring_height(const Widelands::Coords& c) {
+	return Vector2f(
 	   c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2.f), c.y * kTriangleHeight);
 }
 
 /**
  * Calculate the on-screen position of the node.
  */
-inline FloatPoint to_map_pixel(const Widelands::FCoords& fc) {
-	FloatPoint p = to_map_pixel_ignoring_height(fc);
+inline Vector2f to_map_pixel(const Widelands::FCoords& fc) {
+	Vector2f p = to_map_pixel_ignoring_height(fc);
 	p.y -= fc.field->get_height() * kHeightFactor;
 	return p;
 }
 
-inline FloatPoint to_map_pixel(const Widelands::Map& map, const Widelands::Coords& c) {
+inline Vector2f to_map_pixel(const Widelands::Map& map, const Widelands::Coords& c) {
 	return to_map_pixel(map.get_fcoords(c));
 }
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
-inline FloatPoint to_map_pixel_with_normalization(const Widelands::Map& map,
+inline Vector2f to_map_pixel_with_normalization(const Widelands::Map& map,
                                                   const Widelands::Coords& c) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);

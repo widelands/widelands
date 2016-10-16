@@ -225,7 +225,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -235,7 +235,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rect(Point(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Rect(Vector2i(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -247,7 +247,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Point point(curx, y);
+			Vector2i point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
@@ -292,7 +292,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - picw;
 					}
-					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
+					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}

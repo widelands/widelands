@@ -236,7 +236,7 @@ struct Ship : Bob {
 
 protected:
 	void draw(const EditorGameBase&,
-	          const FloatPoint& field_on_dst,
+	          const Vector2f& field_on_dst,
 	          float zoom,
 	          RenderTarget* dst) const override;
 

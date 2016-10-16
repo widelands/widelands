@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_ALIGN_H
 #define WL_GRAPHIC_ALIGN_H
 
-#include "base/point.h"
+#include "base/vector.h"
 
 namespace UI {
 
@@ -58,6 +58,6 @@ inline Align operator|(Align a, Align b) {
 }
 
 Align mirror_alignment(Align alignment);
-void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
+void correct_for_align(Align, uint32_t w, uint32_t h, Vector2i* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

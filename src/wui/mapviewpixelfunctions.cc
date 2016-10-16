@@ -65,11 +65,11 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
 /**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
-Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point b) {
+Vector2i MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2i a, Vector2i b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
 
-	Point diff = a - b;
+	Vector2i diff = a - b;
 
 	int32_t map_end_screen_x = get_map_end_screen_x(map);
 	if (diff.x > map_end_screen_x / 2)
@@ -90,7 +90,7 @@ Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point 
  * Calculate the pixel (currently Manhattan) distance between the two points,
  * taking wrap-arounds into account.
 */
-uint32_t MapviewPixelFunctions::calc_pix_distance(const Map& map, Point a, Point b) {
+uint32_t MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2i a, Vector2i b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
 	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
@@ -260,7 +260,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 /**
  * Normalize pixel points of the map.
 */
-void MapviewPixelFunctions::normalize_pix(const Map& map, Point* p) {
+void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2i* p) {
 	float x = p->x;
 	float y = p->y;
 	{

@@ -26,8 +26,8 @@
 #include <SDL.h>
 
 #include "base/macros.h"
-#include "base/point.h"
 #include "base/rect.h"
+#include "base/vector.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
 
@@ -44,11 +44,11 @@ BlitData adjust_for_src(BlitData blit_data, const Rect& src_rect) {
 
 // Get the normal of the line between 'start' and 'end'.
 template <typename PointType>
-FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
+Vector2f calculate_line_normal(const PointType& start, const PointType& end) {
 	const float dx = end.x - start.x;
 	const float dy = end.y - start.y;
 	const float len = std::hypot(dx, dy);
-	return FloatPoint(-dy / len, dx / len);
+	return Vector2f(-dy / len, dx / len);
 }
 
 // Tesselates the line made up of 'points' ino triangles and converts them into
@@ -60,7 +60,7 @@ void tesselate_line_strip(int w,
                           int h,
                           const RGBColor& color,
                           float line_width,
-                          const std::vector<FloatPoint>& points,
+                          const std::vector<Vector2f>& points,
                           std::vector<DrawLineProgram::PerVertexData>* vertices) {
 	const float r = color.r / 255.;
 	const float g = color.g / 255.;
@@ -69,27 +69,27 @@ void tesselate_line_strip(int w,
 	// Iterate over each line segment, i.e. all points but the last, convert
 	// them from pixel space to gl space and draw them.
 	for (size_t i = 0; i < points.size() - 1; ++i) {
-		const FloatPoint p1 = FloatPoint(points[i].x, points[i].y);
-		const FloatPoint p2 = FloatPoint(points[i + 1].x, points[i + 1].y);
+		const Vector2f p1 = Vector2f(points[i].x, points[i].y);
+		const Vector2f p2 = Vector2f(points[i + 1].x, points[i + 1].y);
 
-		const FloatPoint normal = calculate_line_normal(p1, p2);
-		const FloatPoint scaled_normal(0.5f * line_width * normal.x, 0.5f * line_width * normal.y);
+		const Vector2f normal = calculate_line_normal(p1, p2);
+		const Vector2f scaled_normal(0.5f * line_width * normal.x, 0.5f * line_width * normal.y);
 
 		// Quad points are created in rendering order for OpenGL.
 		{
-			FloatPoint p = p1 - scaled_normal;
+			Vector2f p = p1 - scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
 			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
 		}
 
 		{
-			FloatPoint p = p2 - scaled_normal;
+			Vector2f p = p2 - scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
 			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, 1.});
 		}
 
 		{
-			FloatPoint p = p1 + scaled_normal;
+			Vector2f p = p1 + scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
 			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
 		}
@@ -98,7 +98,7 @@ void tesselate_line_strip(int w,
 		vertices->push_back(vertices->at(vertices->size() - 2));
 
 		{
-			FloatPoint p = p2 + scaled_normal;
+			Vector2f p = p2 + scaled_normal;
 			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
 			vertices->emplace_back(DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, -1.});
 		}
@@ -124,7 +124,7 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor) {
 	do_fill_rect(rect, color, blend_mode);
 }
 
-void Surface::draw_line_strip(std::vector<FloatPoint> points,
+void Surface::draw_line_strip(std::vector<Vector2f> points,
                               const RGBColor& color,
                               float line_width) {
 	if (points.size() < 2) {
@@ -166,13 +166,13 @@ void Surface::blit(const Rect& dst_rect,
 }
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	const FloatPoint top_left = FloatPoint(rc.x + 0.5f, rc.y + 0.5f);
-	const FloatPoint top_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + 0.5f);
-	const FloatPoint bottom_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
-	const FloatPoint bottom_left = FloatPoint(rc.x + 0.5f, rc.y + rc.h - 0.5f);
+	const Vector2f top_left = Vector2f(rc.x + 0.5f, rc.y + 0.5f);
+	const Vector2f top_right = Vector2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
+	const Vector2f bottom_right = Vector2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
+	const Vector2f bottom_left = Vector2f(rc.x + 0.5f, rc.y + rc.h - 0.5f);
 
 	surface->draw_line_strip({top_left, top_right, bottom_right}, clr, 1);
 	// We need to split this up in order not to miss a pixel on the bottom right corner.
 	surface->draw_line_strip(
-	   {FloatPoint(bottom_right.x + 1, bottom_right.y), bottom_left, top_left}, clr, 1);
+	   {Vector2f(bottom_right.x + 1, bottom_right.y), bottom_left, top_left}, clr, 1);
 }

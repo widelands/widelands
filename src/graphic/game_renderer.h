@@ -23,8 +23,8 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "base/point.h"
 #include "base/transform.h"
+#include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {

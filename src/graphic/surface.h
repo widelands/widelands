@@ -64,7 +64,7 @@ public:
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.
-	void draw_line_strip(std::vector<FloatPoint> points, const RGBColor& color, float width);
+	void draw_line_strip(std::vector<Vector2f> points, const RGBColor& color, float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);

@@ -153,7 +153,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		}
 		// Open the new building window if needed
 		if (optionswindow_) {
-			Point window_position = optionswindow_->get_pos();
+			Vector2i window_position = optionswindow_->get_pos();
 			hide_options();
 			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
@@ -300,7 +300,7 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             ShowText show_text,
                             const Coords& coords_to_draw,
-                            const FloatPoint& point_on_dst,
+                            const Vector2f& point_on_dst,
                             float zoom,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
@@ -353,7 +353,7 @@ void ConstructionSite::draw(uint32_t gametime,
 	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
 		dst->blit_animation(point_on_dst, zoom, anim_idx, tanim - FRAME_LENGTH, player_color,
-		                    Rect(Point(0, 0), w, h - lines));
+		                    Rect(Vector2i(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
@@ -369,13 +369,13 @@ void ConstructionSite::draw(uint32_t gametime,
 		   g_gr->animations().get_animation(prev_building_anim_idx);
 		dst->blit_animation(point_on_dst, zoom, prev_building_anim_idx, tanim - FRAME_LENGTH,
 		                    player_color,
-		                    Rect(Point(0, 0), prev_building_anim.width(),
+		                    Rect(Vector2i(0, 0), prev_building_anim.width(),
 		                         std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
 	dst->blit_animation(
-	   point_on_dst, zoom, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
+	   point_on_dst, zoom, anim_idx, tanim, player_color, Rect(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_info(show_text, point_on_dst, dst);

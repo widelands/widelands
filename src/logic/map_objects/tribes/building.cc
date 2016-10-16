@@ -591,7 +591,7 @@ bool Building::fetch_from_flag(Game&) {
 void Building::draw(uint32_t gametime,
                     const ShowText show_text,
                     const Coords& coords_to_draw,
-                    const FloatPoint& point_on_dst,
+                    const Vector2f& point_on_dst,
                     float zoom,
                     RenderTarget* dst) {
 	if (coords_to_draw == position_) {  // draw big buildings only once
@@ -611,7 +611,7 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_info(const ShowText show_text,
-                         const FloatPoint& point_on_dst,
+                         const Vector2f& point_on_dst,
                          RenderTarget* dst) {
 	bool show_statistics_string = show_text & ShowText::kStatistics;
 	if (show_statistics_string) {

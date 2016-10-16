@@ -173,7 +173,7 @@ void EditorInteractive::register_overlays() {
 			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
 			assert(player_image);
 			mutable_field_overlay_manager()->register_overlay(
-			   sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			   sp, player_image, 8, Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
@@ -669,7 +669,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// Make sure that we will start at coordinates (0,0).
-		set_viewpoint(Point(0, 0), true);
+		set_viewpoint(Vector2i(0, 0), true);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));

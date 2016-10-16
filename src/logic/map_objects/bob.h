@@ -21,7 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_BOB_H
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
@@ -240,7 +240,7 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, uint32_t tdelta);
 	void skip_act();
-	FloatPoint calc_drawpos(const EditorGameBase&, const FloatPoint& field_on_dst, float zoom) const;
+	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float zoom) const;
 	void set_owner(Player*);
 	Player* get_owner() const {
 		return owner_;
@@ -265,7 +265,7 @@ public:
 	// starting field) in pixel space of 'dst' (including zoom). The 'zoom' is
 	// required to draw the bob in the right size.
 	virtual void
-	draw(const EditorGameBase&, const FloatPoint& field_on_dst, float zoom, RenderTarget* dst) const;
+	draw(const EditorGameBase&, const Vector2f& field_on_dst, float zoom, RenderTarget* dst) const;
 
 	// For debug
 	void log_general_info(const EditorGameBase&) override;

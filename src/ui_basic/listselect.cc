@@ -311,7 +311,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Vector2i(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		assert(get_h() < std::numeric_limits<int32_t>::max());
@@ -321,7 +321,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		Point point(1, y);
+		Vector2i point(1, y);
 		uint32_t maxw = get_eff_w() - 2;
 
 		// Highlight the current selected entry
@@ -346,7 +346,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
 			               y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}

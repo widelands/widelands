@@ -37,12 +37,11 @@ wl_library(base_i18n
 
 wl_library(base_geometry
   SRCS
-    point.cc
-    point.h
     rect.h
     transform.h
     transform.cc
     vector.h
+    vector.cc
 )
 
 wl_library(base_md5

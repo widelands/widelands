@@ -60,7 +60,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->set_viewpoint(Point(x, y), true);
+				ibase->set_viewpoint(Vector2i(x, y), true);
 
 				uint32_t const loaded_df =
 				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
@@ -78,7 +78,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					size_t no_of_landmarks = fr.unsigned_8();
 					for (size_t i = 0; i < no_of_landmarks; ++i) {
 						uint8_t set = fr.unsigned_8();
-						Point landmark(fr.signed_32(), fr.signed_32());
+						Vector2i landmark(fr.signed_32(), fr.signed_32());
 						if (set > 0) {
 							ibase->set_landmark(i, landmark);
 						}

@@ -161,13 +161,13 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Point::invalid(), jobid);
+			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Point::invalid(), jobid);
+			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 		if (upcast(InteractiveGameBase const, igbase, this))
 			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
@@ -255,7 +255,7 @@ FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInf
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), workarea_pics_[wa_index], 0, Point::invalid(), overlay_id);
+			   mr.location(), workarea_pics_[wa_index], 0, Vector2i::invalid(), overlay_id);
 		while (mr.advance(map));
 		wa_index++;
 		hollow_area.hole_radius = hollow_area.radius;
@@ -288,19 +288,19 @@ void InteractiveBase::think() {
 	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDL_SCANCODE_UP) ||
 		    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(0, -scrollval), false);
+			set_rel_viewpoint(Vector2i(0, -scrollval), false);
 		}
 		if (get_key_state(SDL_SCANCODE_DOWN) ||
 		    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(0, scrollval), false);
+			set_rel_viewpoint(Vector2i(0, scrollval), false);
 		}
 		if (get_key_state(SDL_SCANCODE_LEFT) ||
 		    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(-scrollval, 0), false);
+			set_rel_viewpoint(Vector2i(-scrollval, 0), false);
 		}
 		if (get_key_state(SDL_SCANCODE_RIGHT) ||
 		    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(scrollval, 0), false);
+			set_rel_viewpoint(Vector2i(scrollval, 0), false);
 		}
 	}
 	egbase().think();  // Call game logic here. The game advances.
@@ -330,7 +330,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
+			dst.blit(Vector2i(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
 			         UI::Align::kTopLeft);
 
 			static boost::format node_format("(%i, %i)");
@@ -341,7 +341,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
-		dst.blit(Point(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text), BlendMode::UseAlpha,
+		dst.blit(Vector2i(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text), BlendMode::UseAlpha,
 		         UI::Align::kBottomRight);
 	}
 
@@ -350,7 +350,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		const Image* rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(Point((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha,
+		dst.blit(Vector2i((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha,
 		         UI::Align::kLeft);
 	}
 }
@@ -373,7 +373,7 @@ void InteractiveBase::center_view_on_coords(const Widelands::Coords& c) {
 	assert(c.y < egbase().map().get_height());
 
 	const Map& map = egbase().map();
-	const Point in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
+	const Vector2i in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
 	center_view_on_map_pixel(in_mappixel);
 }
 
@@ -382,9 +382,9 @@ void InteractiveBase::center_view_on_coords(const Widelands::Coords& c) {
 Center the mainview on the given position (in pixels)
 ===============
 */
-void InteractiveBase::center_view_on_map_pixel(const Point& pos) {
+void InteractiveBase::center_view_on_map_pixel(const Vector2i& pos) {
 	const FloatRect view_area = get_view_area();
-	set_viewpoint(pos - Point(view_area.w / 2.f, view_area.h / 2.f), true);
+	set_viewpoint(pos - Vector2i(view_area.w / 2.f, view_area.h / 2.f), true);
 }
 
 // Open the minimap or close it if it's open
@@ -401,7 +401,7 @@ void InteractiveBase::toggle_minimap() {
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const Point& point) {
+void InteractiveBase::set_landmark(size_t key, const Vector2i& point) {
 	m->quicknavigation->set_landmark(key, point);
 }
 
@@ -700,7 +700,7 @@ void InteractiveBase::roadb_add_overlay() {
 			name = "images/wui/overlays/roadb_red.png";
 
 		field_overlay_manager_->register_overlay(
-		   neighb, g_gr->images().get(name), 7, Point::invalid(), road_buildhelp_overlay_jobid_);
+		   neighb, g_gr->images().get(name), 7, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
 	}
 }
 

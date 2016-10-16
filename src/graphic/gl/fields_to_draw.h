@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "logic/map_objects/tribes/road_textures.h"
 #include "logic/player.h"
 #include "logic/widelands.h"
@@ -40,9 +40,9 @@ public:
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
-		FloatPoint gl_position;  // GL Position of this field.
-		FloatPoint screen_pixel;   // Screen pixel this will be plotted on.
-		FloatPoint texture_coords; // Texture coordinates.
+		Vector2f gl_position;  // GL Position of this field.
+		Vector2f screen_pixel;   // Screen pixel this will be plotted on.
+		Vector2f texture_coords; // Texture coordinates.
 		float brightness;                   // brightness of the pixel
 
 		// The next values are not necessarily the true data of this field, but what the player should see. For example

@@ -19,19 +19,19 @@
 
 #include "base/transform.h"
 
-Transform2f::Transform2f(const FloatPoint& translation, const float zoom)
+Transform2f::Transform2f(const Vector2f& translation, const float zoom)
    : translation_(translation), zoom_(zoom) {
 }
 
 Transform2f Transform2f::identity() {
-	return Transform2f(FloatPoint(0.f, 0.f), 1.f);
+	return Transform2f(Vector2f(0.f, 0.f), 1.f);
 }
 
 Transform2f Transform2f::from_zoom(const float zoom) {
-	return Transform2f(FloatPoint(0.f, 0.f), zoom);
+	return Transform2f(Vector2f(0.f, 0.f), zoom);
 }
 
-Transform2f Transform2f::from_translation(const FloatPoint& translation) {
+Transform2f Transform2f::from_translation(const Vector2f& translation) {
 	return Transform2f(translation, 1.f);
 }
 
@@ -39,8 +39,8 @@ Transform2f Transform2f::chain(const Transform2f& other) const {
 	return Transform2f(other.translation_ * zoom_ + translation_, zoom_ * other.zoom_);
 }
 
-FloatPoint Transform2f::apply(const FloatPoint& v) const {
-	return FloatPoint(v.x * zoom_ + translation_.x, v.y * zoom_ + translation_.y);
+Vector2f Transform2f::apply(const Vector2f& v) const {
+	return Vector2f(v.x * zoom_ + translation_.x, v.y * zoom_ + translation_.y);
 }
 
 Transform2f Transform2f::inverse() const {

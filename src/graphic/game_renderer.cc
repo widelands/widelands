@@ -146,7 +146,7 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			if (cur_frame) {  // not the first frame
 				// draw the prev frame from top to where next image will be drawing
 				dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
+				                    field.owner->get_playercolor(), Rect(Vector2i(0, 0), w, h - lines));
 			} else if (csinf.was) {
 				// Is the first frame, but there was another building here before,
 				// get its last build picture and draw it instead.
@@ -157,11 +157,11 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 					a = csinf.was->get_animation("idle");
 				}
 				dst->blit_animation(field.screen_pixel, zoom, a, tanim - FRAME_LENGTH, field.owner->get_playercolor(),
-				                    Rect(Point(0, 0), w, h - lines));
+				                    Rect(Vector2i(0, 0), w, h - lines));
 			}
 			assert(lines <= h);
 			dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim, field.owner->get_playercolor(),
-			                    Rect(Point(0, h - lines), w, lines));
+			                    Rect(Vector2i(0, h - lines), w, lines));
 		} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 			assert(field.owner != nullptr);
 			// this is a building therefore we either draw unoccupied or idle animation
@@ -235,7 +235,7 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
-				// NOCOM(#sirver): this also requires zoom and FloatPoint
+				// NOCOM(#sirver): this also requires zoom and Vector2f
 				dst->blit((field.screen_pixel - overlay.hotspot.cast<float>()).cast<int>(), overlay.pic);
 			}
 		}
@@ -245,7 +245,7 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
 
-			Point tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3, (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3);
+			Vector2i tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3, (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3);
 			for (const auto& overlay : overlay_info) {
 				dst->blit(tripos - overlay.hotspot, overlay.pic);
 			}
@@ -256,7 +256,7 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
 
-			Point tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3,
+			Vector2i tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3,
 			             (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3);
 			for (const auto& overlay : overlay_info) {
 				dst->blit(tripos - overlay.hotspot, overlay.pic);
@@ -291,8 +291,8 @@ void GameRenderer::draw(const EditorGameBase& egbase,
                         const Transform2f& screen_to_mappixel,
                         const Player* player,
                         RenderTarget* dst) {
-	FloatPoint tl_map = screen_to_mappixel.apply(dst->get_offset().cast<float>());
-	FloatPoint br_map = screen_to_mappixel.apply(dst->get_rect().opposite_of_origin().cast<float>());
+	Vector2f tl_map = screen_to_mappixel.apply(dst->get_offset().cast<float>());
+	Vector2f br_map = screen_to_mappixel.apply(dst->get_rect().opposite_of_origin().cast<float>());
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
@@ -339,7 +339,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have
 			// terrains and road graphics vertically mirrorerd.
-			FloatPoint map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
+			Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
 			f.texture_coords.x = map_pixel.x / kTextureSideLength;
 			f.texture_coords.y = -map_pixel.y / kTextureSideLength;
 

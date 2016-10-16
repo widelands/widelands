@@ -94,7 +94,7 @@ void draw_view_window(const FloatRect& view_area, const bool zoom, Texture* text
 	const float divider = zoom ? 1.f : 2.f;
 	int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
 	int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
-	const Point texture_center(texture->width() / 2, texture->height() / 2);
+	const Vector2i texture_center(texture->width() / 2, texture->height() / 2);
 
 	bool draw = true;
 	for (int y = -half_height; y <= half_height; ++y) {
@@ -119,7 +119,7 @@ void draw_view_window(const FloatRect& view_area, const bool zoom, Texture* text
 void do_draw_minimap(Texture* texture,
                      const Widelands::EditorGameBase& egbase,
                      const Widelands::Player* player,
-                     const Point& top_left,
+                     const Vector2i& top_left,
                      MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
 	const uint16_t surface_h = texture->height();
@@ -157,20 +157,20 @@ void do_draw_minimap(Texture* texture,
 
 }  // namespace
 
-Point minimap_pixel_to_mappixel(const Widelands::Map& map,
-                                const Point& minimap_pixel,
+Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
+                                const Vector2i& minimap_pixel,
                                 const FloatRect& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom) {
 	assert(minimap_type == MiniMapType::kStaticViewWindow);
 
-	FloatPoint top_left =
+	Vector2f top_left =
 	   view_area.center() -
-	   FloatPoint(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+	   Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
 
 	const float multiplier = zoom ? 2.f : 1.f;
-	Point clicked =
-	   round(top_left + FloatPoint(minimap_pixel.x / multiplier * kTriangleWidth,
+	Vector2i clicked =
+	   round(top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                               minimap_pixel.y / multiplier * kTriangleHeight));
 	MapviewPixelFunctions::normalize_pix(map, &clicked);
 	return clicked;
@@ -196,13 +196,13 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
-	Point top_left = minimap_pixel_to_mappixel(map, Point(0, 0), view_area, minimap_type, zoom);
+	Vector2i top_left = minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
 	const Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
 	texture->lock();
 	do_draw_minimap(
-	   texture.get(), egbase, player, Point(node.x, node.y), layers);
+	   texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
 
 	if (layers & MiniMapLayer::ViewWindow) {
 		draw_view_window(view_area, zoom, texture.get());

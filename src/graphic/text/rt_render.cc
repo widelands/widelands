@@ -32,8 +32,8 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/point.h"
 #include "base/rect.h"
+#include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
 #include "graphic/graphic.h"
@@ -185,7 +185,7 @@ public:
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
 		for (const Reference& c : refs_)
-			if (c.dim.contains(Point(x, y)))
+			if (c.dim.contains(Vector2i(x, y)))
 				return c.ref;
 		return "";
 	}
@@ -536,7 +536,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	Texture* rv = new Texture(w_, h_);
 	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
-		Rect srcrect(Point(0, 0), min<int>(t.width(), w_ - curx), h_);
+		Rect srcrect(Vector2i(0, 0), min<int>(t.width(), w_ - curx), h_);
 		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
 	return rv;
@@ -620,7 +620,7 @@ public:
 		// Draw background image (tiling)
 		if (background_image_) {
 			Rect dst;
-			Rect srcrect(Point(0, 0), 1, 1);
+			Rect srcrect(Vector2i(0, 0), 1, 1);
 			for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
 				dst.x = curx;
 				dst.y = 0;
@@ -694,7 +694,7 @@ public:
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (is_background_color_set_) {
-			rv->fill_rect(Rect(Point(margin_.left, margin_.top), w_, h_), background_color_);
+			rv->fill_rect(Rect(Vector2i(margin_.left, margin_.top), w_, h_), background_color_);
 			set_alpha = false;
 		}
 
