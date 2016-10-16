@@ -26,7 +26,6 @@
 
 namespace Widelands {
 
-// NOCOM(#sirver): move this to flag.cc?
 void Flag::draw(uint32_t gametime,
                 const ShowText,
                 const Coords&,

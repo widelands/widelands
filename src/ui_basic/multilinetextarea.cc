@@ -170,9 +170,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = RICHTEXT_MARGIN;
 			}
 
-			dst.blitrect_scale(Rectf(anchor, 0, blit_width, blit_height), text_im,
-			                   Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height), 1.,
-			                   BlendMode::UseAlpha);
+			dst.blitrect(Vector2f(anchor, 0), text_im,
+			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
+			             BlendMode::UseAlpha);
 		}
 	}
 }

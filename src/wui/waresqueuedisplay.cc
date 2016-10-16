@@ -129,8 +129,8 @@ void WaresQueueDisplay::draw(RenderTarget& dst) {
 	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
-		                   Recti(0, 0, icon_->width(), icon_->height()), 1.0, BlendMode::UseAlpha);
+		dst.blitrect(Vector2f(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
+		             BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
 		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,

@@ -2524,7 +2524,6 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
-		// NOCOM(#sirver): requires zoom for hotspot?
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * zoom, point_on_dst.y - hotspot.y * zoom);
 		dst->blit_animation(
