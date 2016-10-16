@@ -325,7 +325,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	uint32_t anim_idx;
-	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
 	} catch (MapObjectDescr::AnimationNonexistent&) {
@@ -337,7 +336,7 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
+	const uint32_t cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;
 
@@ -345,8 +344,9 @@ void ConstructionSite::draw(uint32_t gametime,
 	const uint16_t h = anim.height();
 
 	uint32_t lines = h * info_.completedtime * nr_frames;
-	if (info_.totaltime)
+	if (info_.totaltime) {
 		lines /= info_.totaltime;
+	}
 	assert(h * cur_frame <= lines);
 	lines -= h * cur_frame;  //  This won't work if pictures have various sizes.
 
@@ -374,8 +374,8 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	assert(lines <= h);
-	dst->blit_animation(
-	   point_on_dst, zoom, anim_idx, tanim, player_color, Recti(Vector2i(0, h - lines), w, lines));
+	dst->blit_animation(point_on_dst, zoom, anim_idx, tanim,
+	                    player_color, Recti(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_info(show_text, point_on_dst, dst);

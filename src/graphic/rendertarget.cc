@@ -328,8 +328,8 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
                                      uint32_t time,
                                      const RGBColor* player_color,
                                      const Recti& source_rect) {
-	Recti destination_rect(dst.x - (animation.hotspot().x + source_rect.x) * zoom,
-	                      dst.y - (animation.hotspot().y + source_rect.y) * zoom,
+	Recti destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * zoom,
+	                      dst.y - (animation.hotspot().y - source_rect.y) * zoom,
 	                      source_rect.w * zoom, source_rect.h * zoom);
 	Recti srcrc(source_rect);
 	if (to_surface_geometry(&destination_rect, &srcrc)) {
