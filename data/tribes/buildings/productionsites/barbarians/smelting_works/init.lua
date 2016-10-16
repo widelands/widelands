@@ -35,6 +35,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       prohibited_till = 400,
+      forced_after = 2400,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
