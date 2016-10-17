@@ -235,8 +235,11 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
-				// NOCOM(#sirver): this also requires zoom
-				dst->blit(field.screen_pixel - overlay.hotspot.cast<float>(), overlay.pic);
+				dst->blitrect_scale(Rectf(field.screen_pixel - overlay.hotspot.cast<float>() * zoom,
+				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				                    overlay.pic,
+				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
+				                    BlendMode::UseAlpha);
 			}
 		}
 
@@ -248,7 +251,11 @@ void draw_objects(const EditorGameBase& egbase,
 			Vector2f tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3.f,
 			                (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blit(tripos - overlay.hotspot.cast<float>(), overlay.pic);
+				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
+				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				                    overlay.pic,
+				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
+				                    BlendMode::UseAlpha);
 			}
 		}
 
@@ -260,7 +267,11 @@ void draw_objects(const EditorGameBase& egbase,
 			Vector2f tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3.f,
 			                (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blit(tripos - overlay.hotspot.cast<float>(), overlay.pic);
+				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
+				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				                    overlay.pic,
+				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
+				                    BlendMode::UseAlpha);
 			}
 		}
 	}
