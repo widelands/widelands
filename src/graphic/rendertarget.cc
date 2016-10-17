@@ -194,7 +194,7 @@ void RenderTarget::blitrect(const Vector2f& dst,
 	}
 }
 
-// NOCOM(#sirver): can this be replaced through a simple zoom? For this one it seems not in all
+// NOCOM(#sirver): can this be replaced through a simple scale? For this one it seems not in all
 // cases, but in most.
 void RenderTarget::blitrect_scale(Rectf destination_rect,
                                   const Image* image,
@@ -287,7 +287,7 @@ void RenderTarget::tile(const Recti& rect,
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
-                                  const float zoom,
+                                  const float scale,
                                   uint32_t animation,
                                   uint32_t time) {
 	// TODO(unknown): Correctly calculate the stereo position for sound effects
@@ -295,39 +295,39 @@ void RenderTarget::blit_animation(const Vector2f& dst,
 	// What if the game runs very slowly or very quickly?
 	const Animation& anim = g_gr->animations().get_animation(animation);
 	do_blit_animation(
-	   dst, zoom, anim, time, nullptr, Recti(Vector2i(0, 0), anim.width(), anim.height()));
+	   dst, scale, anim, time, nullptr, Recti(Vector2i(0, 0), anim.width(), anim.height()));
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
-                                  const float zoom,
+                                  const float scale,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 	do_blit_animation(
-	   dst, zoom, anim, time, &player_color, Recti(Vector2i(0, 0), anim.width(), anim.height()));
+	   dst, scale, anim, time, &player_color, Recti(Vector2i(0, 0), anim.width(), anim.height()));
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
-                                  const float zoom,
+                                  const float scale,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color,
                                   const Recti& source_rect) {
 	do_blit_animation(
-	   dst, zoom, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
+	   dst, scale, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
 }
 
 void RenderTarget::do_blit_animation(const Vector2f& dst,
-                                     const float zoom,
+                                     const float scale,
                                      const Animation& animation,
                                      uint32_t time,
                                      const RGBColor* player_color,
                                      const Recti& source_rect_i) {
 	Rectf source_rect = source_rect_i.cast<float>();
-	Rectf destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * zoom,
-	                      dst.y - (animation.hotspot().y - source_rect.y) * zoom,
-	                      source_rect.w * zoom, source_rect.h * zoom);
+	Rectf destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * scale,
+	                      dst.y - (animation.hotspot().y - source_rect.y) * scale,
+	                      source_rect.w * scale, source_rect.h * scale);
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		animation.blit(time, destination_rect, source_rect, player_color, surface_);
 	}
