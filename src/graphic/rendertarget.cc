@@ -194,8 +194,6 @@ void RenderTarget::blitrect(const Vector2f& dst,
 	}
 }
 
-// NOCOM(#sirver): can this be replaced through a simple scale? For this one it seems not in all
-// cases, but in most.
 void RenderTarget::blitrect_scale(Rectf destination_rect,
                                   const Image* image,
                                   Recti source_rect_i,
@@ -207,7 +205,6 @@ void RenderTarget::blitrect_scale(Rectf destination_rect,
 	}
 }
 
-// NOCOM(#sirver): same question - for this one it seems yes.
 void RenderTarget::blitrect_scale_monochrome(Rectf destination_rect,
                                              const Image* image,
                                              Recti source_rect_i,
