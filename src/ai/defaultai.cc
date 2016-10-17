@@ -892,7 +892,7 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
 		persistent_data->ai_personality_early_militarysites = std::rand() % 20 + 20;
 		persistent_data->last_soldier_trained = kNever;
-		persistent_data->ai_personality_mil_upper_limit = std::rand() % 125 + 325;
+		persistent_data->ai_personality_mil_upper_limit = 0; // std::rand() % 125 + 325; NOCOM
 
 		// all zeroes
 		assert(persistent_data->neuron_weights.size() == 0);
@@ -972,10 +972,10 @@ void DefaultAI::late_initialization() {
 	management_data.set_mutation_multiplicator(1);
 	switch (type_) {
 		case DefaultAI::Type::kNormal:
-			management_data.set_mutation_multiplicator(12);
+			management_data.set_mutation_multiplicator(50);
 			break;
 		case DefaultAI::Type::kWeak:
-			management_data.set_mutation_multiplicator(3);
+			management_data.set_mutation_multiplicator(5);
 			break;
 		case DefaultAI::Type::kVeryWeak:
 			break;
@@ -1478,7 +1478,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (!field.is_militarysite) {
 		field.military_score_ += 100;
 		field.military_score_ -=
-		   field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51)) / 5;
+		   field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51)) / 2;
 		if (field.enemy_nearby) {
 			// speciic for enemy_nearby
 			// field.military_score_  += 50;
@@ -1510,7 +1510,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			// near border, but not enemy nearby
 			field.military_score_ += management_data.get_military_number_at(1);
 			field.military_score_ += management_data.neuron_pool[1].get_result_safe(
-			   field.military_loneliness / 50, kAbsValue);
+			   field.military_loneliness / 40, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[5].get_result_safe(
 			   (field.area_military_capacity + 4) / 5, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[9].get_result_safe(
@@ -1523,11 +1523,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			// inland
 			field.military_score_ += management_data.get_military_number_at(2);
 			field.military_score_ += management_data.neuron_pool[2].get_result_safe(
-			   field.military_loneliness / 50, kAbsValue);
+			   field.military_loneliness / 40, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[6].get_result_safe(
 			   (field.area_military_capacity + 4) / 5, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[10].get_result_safe(
-			   (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+			   (field.military_in_constr_nearby + field.military_unstationed) * 10, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[37].get_result_safe(
 			   static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
 		} else {
@@ -1551,7 +1551,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.military_score_ += management_data.get_military_number_at(9);
 		}
 		field.military_score_ +=
-		   management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 50, kAbsValue);
+		   management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 40, kAbsValue);
 		field.military_score_ -= management_data.neuron_pool[7].get_result_safe(
 		   (field.area_military_capacity + 4) / 5, kAbsValue) / 2;
 		field.military_score_ -= management_data.neuron_pool[11].get_result_safe(
@@ -1921,7 +1921,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	highest_nonmil_prio_ = 0;
 
 
-	const int32_t kBottomLimit = 0;  // is this variable needed now?
+	const int32_t kBottomLimit = std::abs(management_data.get_military_number_at(67));  // is this variable needed now?
 	// modifying least_military_score, down if more military sites are needed and vice versa
 
 	if (increase_score_limit) {
@@ -2595,6 +2595,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// if place+building is not good enough
 				if (prio <= persistent_data->target_military_score) {
 					continue;
+				}
+				if (prio > persistent_data->ai_personality_mil_upper_limit) {
+					persistent_data->ai_personality_mil_upper_limit = prio + std::abs(management_data.get_military_number_at(68)) * 3;
+					printf (" %d increasing ai_personality_mil_upper_limit to %3d\n", pn, persistent_data->ai_personality_mil_upper_limit);
 				}
 			} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 
@@ -5040,7 +5044,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		}
 	}
 
-	if (usefullness_score < 0) {
+	if (usefullness_score < 0 && (gametime - militarysites.front().built_time) > 2 * 60 * 1000) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			flags_to_be_removed.push_back(ms->base_flag().get_position());
@@ -6187,7 +6191,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.attack_soldiers_strength = strength;
 					assert (!attackers.empty());
 					site->second.attack_soldiers_competency = strength * 10 / attackers.size();
-					printf ("soldiers :%d, competency: %d\n", attackers.size(), site->second.attack_soldiers_competency);
+					//printf ("soldiers :%d, competency: %d\n", attackers.size(), site->second.attack_soldiers_competency);
 				}
 			} else {
 				site->second.attack_soldiers_strength = 0;
