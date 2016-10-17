@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-07 17:40+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 18:08+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr "Rakenna kaksi puunhakkaajan mökkiä ja saha"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Kaksi puunhakkaajan mökkiä ja saha."
+msgstr "Kaksi puunhakkaajan mökkiä ja saha"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
@@ -107,7 +107,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan, joka aluksi tekeytyi ystävällisiksi ja sitten hyökkäsi armeijani kimppuun yön pimeydessä."
+msgstr "Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan, joka aluksi tekeytyi ystävällisiksi ja sitten hyökkäsi armeijani kimppuun yön pimeydessä?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -199,7 +199,7 @@ msgstr "Paha enne"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:127
 msgid "Saledus looks around nervously…"
-msgstr "Saledus katselee ympärilleen levottomasti..."
+msgstr "Saledus katselee ympärilleen levottomasti…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -231,7 +231,7 @@ msgstr "Hetkellisesti turvassa"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Saledus speaks with a sigh of relief…"
-msgstr "Saledus puhuu helpottuneena..."
+msgstr "Saledus puhuu helpottuneena…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
@@ -255,7 +255,7 @@ msgstr "Nuori Amalea"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:154
 msgid "Amalea smiles…"
-msgstr "Amalea hymyilee"
+msgstr "Amalea hymyilee…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
@@ -279,7 +279,7 @@ msgstr "On täysin selvää, että tarvitsemme puuta laivamme korjaamiseksi. Jot
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"
-msgstr "Amalea suosittelee..."
+msgstr "Amalea suosittelee…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -301,7 +301,7 @@ msgstr "Mutta valitettavasti kaadetut puut ovat käyttökelvottomia laivamme kor
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
-msgstr "Amalea tulee sisään..."
+msgstr "Amalea tulee sisään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
@@ -341,7 +341,7 @@ msgstr "Tulevaisuutta ajatellessa"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:202
 msgid "Saledus notes…"
-msgstr "Saledus muistuttaa:"
+msgstr "Saledus muistuttaa…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
@@ -363,7 +363,7 @@ msgstr "Askel eteenpäin"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"
-msgstr "Saledus näyttää innostuneelta..."
+msgstr "Saledus näyttää innostuneelta…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216

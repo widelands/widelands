@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Mikel Alzibar <mikelalzibar@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-04 07:22+0000\n"
-"PO-Revision-Date: 2016-10-04 13:37+0000\n"
-"Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:01+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,11 +246,11 @@ msgstr "Jokalari edo talde bakoitza maparen azaleraren gehiengoa eskuratzen saia
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:29
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s-k lurraren %2$3.0f%% dauka (%4$i-tik  %3$i)."
+msgstr "%1$s-k lurraren %2$3.0f%% dauka (%4$i-tik %3$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:30
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s-k lurraren %2$3.0f%% eduki du (%4$i-tik  %3$i)."
+msgstr "%1$s-k lurraren %2$3.0f%% eduki du (%4$i-tik %3$i)."
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."

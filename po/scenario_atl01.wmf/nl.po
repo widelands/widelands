@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 16:49+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,19 +21,19 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Gebouw kwijt!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "We hebben een gebouw verloren aan de oceaan!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Gebouw kwijt!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -45,7 +45,7 @@ msgstr "Voer bouwmaterialen aan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr "Voer elementaire bouwmaterialen aan voor jouw economie"
+msgstr "Voer elementaire bouwmaterialen aan voor je economie:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -69,14 +69,14 @@ msgstr "Breid het grondgebied uit en ontdek"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr "Breidt uit en ontdek"
+msgstr "Breid uit en ontdek"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "Dit eiland is enorm en zolang we niet zeker weten dat we alleen zijn kunnen we niet relaxen. Ontdek en verover het, dit is de enige manier om ons te verdedigen tegen dreigingen van het eiland en Atlantis."
+msgstr "Dit eiland is enorm en zolang we niet zeker weten dat we alleen zijn kunnen we niet ontspannen. Ontdek en verover het, dit is de enige manier om ons te verdedigen tegen dreigingen van het eiland en Atlantis."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
@@ -96,7 +96,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Voedsel is erg belangrijk voor mijnen en militaire trainingsplaatsen. Zet een goed  werkende voedselomgeving op door in iedere geval een boerderij, een helmkruidkwekerij en een molen te bouwen. De beide soorten meel samen met water uit een put kunnen gebakken worden in een bakkerij, dus bouw ook een bakkerij en een put."
+msgstr "Voedsel is erg belangrijk voor mijnen en militaire trainingsplaatsen. Zet een goed werkende voedselomgeving op door in iedere geval een boerderij, een helmkruidkwekerij en een molen te bouwen. De beide soorten meel samen met water uit een waterput kunnen gebakken worden in een bakkerij, dus bouw ook een bakkerij en een waterput."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -114,15 +114,15 @@ msgstr "Bouw een boerderij en een helmkruidkwekerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Bouw een molen om maïsmeel en helmkruidbloem te maken"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr "Bouw een put"
+msgstr "Bouw een waterput"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Bouw een bakkerij om brood te bakken van maïsmeel, helmkruidbloem en water"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -157,7 +157,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "De wevers produceren spinnendoek en tabberds in de weverij. Spinnendoek is nodig om sommige gebouwen en kleding te maken, tabberds zijn de uniformen van de soldaten. De weverij heeft gouddraad en spinnengaren nodig. Spinnengaren wordt gemaakt door de spinnenboerderij en gouddraad wordt door de goudspinnerij van goud gemaakt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -165,11 +165,11 @@ msgstr "Bouw een weverij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr "Bouw een Spinnenboerderij"
+msgstr "Bouw een spinnenboerderij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Bouw een goudspinnerij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -185,7 +185,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "IJzererts, gouderts en kolen worden gedolven in de bijbehorende mijnen. De kristalmijn graaft naar kwarts en diamant – zeldzame materialen die zelden worden gevonden. Terwijl de mijnwerkers hiernaar zoeken, produceren ze een hoop graniet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -214,11 +214,11 @@ msgstr "Bouw een werktuigsmederij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Bouw trainingsgebouwen voor de soldaten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Trainingsgebouwen voor soldaten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -226,7 +226,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "Zoals alle stammen, trainen de Atlantiërs ook soldaten: de kerkers trainen de aanval – het belangrijkste kenmerk van de Atlantiërs – en het labyrint traint ontwijken, levenspunten en verdediging. De items die door de industrie worden geproduceerd worden gebruikt om betere soldaten te trainen in de twee trainingsgebouwen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
@@ -234,11 +234,11 @@ msgstr "Bouw een kerker en een labyrint"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
-msgstr "Bouw een magazijn en een paardenboerderij"
+msgstr "Bouw een magazijn en een paardenstal"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr "Magazijn en paardenboerderij"
+msgstr "Magazijn en paardenstal"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -246,7 +246,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Omdat het wegennetwerk langer en complexer wordt is het verstandig om paarden in te schakelen om de dragers te helpen. Paarden worden gefokt in de paardenboerderijen met water en maïs. Een magazijn kan eveneens helpen om het transportsysteem niet te laten instorten."
+msgstr "Omdat het wegennetwerk langer en complexer wordt is het verstandig om paarden in te schakelen om de dragers te helpen. Paarden worden gefokt in de paardenstallen met water en maïs. Een magazijn kan eveneens helpen om het transportsysteem niet te laten instorten."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
@@ -254,11 +254,11 @@ msgstr "Bouw een magazijn"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
-msgstr "Bouw een paardenboerderij"
+msgstr "Bouw een paardenstal"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
-msgstr "Bouw 3 schepen om van het eiland te vluchten"
+msgstr "Bouw drie schepen om van het eiland te vluchten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Escape From the Island"
@@ -269,7 +269,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "Er is een meer bovenop dit eiland. Bouw 3 schepen in deze wateren zodat je misschien je volk kan redden zodra het eiland volledig verzwolgen wordt door de oceaan."
+msgstr "Er is een meer bovenop dit eiland. Bouw drie schepen in deze wateren, dan heb je misschien een kans om je volk te redden voor het eiland volledig verzwolgen wordt door de oceaan."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a shipyard close to the lake to start building ships"
@@ -291,7 +291,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Een trotse stam bevolkte sinds het begin van de wereld op het verborgen en verloren eiland van Atlantis. Geheerst door de bloedlijn van Koning Ajanthul, de eerste mens die door de zegening van zeegod Lutas doven zeeniveau kon ademen, en de wijze geestelijken, die de link met Lutas verzorgen, floreerde ze en werden ze beschaafd."
+msgstr "Een trotse stam bevolkte sinds het begin van de wereld op het verborgen en verloren eiland van Atlantis. Geheerst door de bloedlijn van Koning Ajanthul, de eerste mens die door de zegening van zeegod Lutas boven zeeniveau kon ademen, en de wijze geestelijken, die de link met Lutas verzorgden, floreerden ze en werden ze beschaafd."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:141
@@ -302,7 +302,7 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr "Dit verhaal vind plaats tijdens de regeerperiode van Koning Askandor, de 43ste opvolger van Koning Ajanthul. Hij was een goede koning, regeerde Atlantis met wijsheid en visie. Maar bij het ouder worden werd hij steeds banger te sterven en ging op zoek naar een middel tegen de dood, ondanks dat de meeste geestelijken hem waarschuwden. Sommigen zeiden dat oneindig leven enkel voor de goden was en er naar te zoeken verboden."
+msgstr "Dit verhaal vindt plaats tijdens de regeerperiode van Koning Askandor, de 43ste opvolger van Koning Ajanthul. Hij was een goede koning, regeerde Atlantis met wijsheid en visie. Maar bij het ouder worden werd hij steeds banger te sterven en ging op zoek naar een middel tegen de dood, ondanks dat de meeste geestelijken hem waarschuwden. Sommigen zeiden dat oneindig leven enkel voor de goden was, en dat het verboden is er naar te zoeken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "Disgraced Before the God"
@@ -319,7 +319,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Maar alles leek goed. Alleen de paarden leken te voelen dat er iets verkeerd zat. In de nachten werden ze gek van angst. Het duurde niet lang totdat Paardefokker Xyndra uitgevogeld had wat er verkeerd met ze was: de zeespiegel voor hun stal rees steeds sneller."
+msgstr "Maar alles leek goed. Alleen de paarden leken te voelen dat er iets verkeerd zat. In de nachten werden ze gek van angst. Het duurde niet lang totdat paardefokker Xydra uitgevogeld had wat er verkeerd met ze was: de zeespiegel voor hun stal rees steeds sneller."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:151
@@ -337,7 +337,7 @@ msgstr "Opschudding en verwarring"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Chaos ontstaat…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -346,7 +346,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Schuldbewust pleegde de koning zelfmoord. Zonder een koning richtten de mensen zich tot de geestelijken, maar die hadden geen hulp te bieden. De meesten accepteerden hun lot, terwijl anderen probeerden de god van gedachten te veranderen door beesten te offeren in zijn tempel. Zonder succes…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -356,7 +356,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "Jundlina, de dochter van de overleden koning en de hoogste priester van de god, was de meest vastberaden geestelijke. Toen ontelbare offers de situatie niets veranderde overtuigde ze haarzelf dat om de god the kalmeren een groot persoonlijk offer nodig was. Dus offerde ze wat haar het meest dierbaar was: haar man, vader van haar enige kind."
+msgstr "Jundlina, de dochter van de overleden koning en de hoogste priester van de god, was de meest vastberaden geestelijke. Toen ontelbare offers de situatie niets veranderden overtuigde ze zichzelf dat om de god the kalmeren een groot persoonlijk offer nodig was. Dus offerde ze wat haar het meest dierbaar was: haar man, vader van haar enige kind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:163
@@ -368,14 +368,14 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Maar zelfs dit bracht de god niet op andere gedachten. Het water bleef stijgen. Bijna gek van schuld, pijn en woede, Jundlina werd een ketter: in het geheim verzamelde ze mensen uit het gewone volk die zich niet konden vinden in de beslissing van de geestelijken om de gods wil te accpeteren. Samen met hen stak ze de tempel in vuur en vlam en stal een schip om te vluchten uit de invloed van de god van Atlantis. Deze kleine groep richtte zich tot Satul, de god van het vuur en de grootste vijand van Lutas."
+msgstr "Maar zelfs dit bracht de god niet op andere gedachten. Het water bleef stijgen. Bijna gek van schuld, pijn en woede, werd Jundlina een ketter: in het geheim verzamelde ze mensen uit het gewone volk die zich niet konden vinden in de beslissing van de geestelijken om gods wil te accepteren. Samen met hen stak ze de tempel in vuur en vlam en stal een schip om te vluchten van de invloed die de god heeft op Atlantis. Deze kleine groep richtte zich tot Satul, de god van het vuur en de grootste vijand van Lutas."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:165
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr "Het zinkende Atlantis en haar verleden achter haar latend ging ze op zoek naar een plaats beschut door het vuur en beschermd van de zee."
+msgstr "Het zinkende Atlantis en haar verleden achter zich latend ging ze op zoek naar een plaats beschut door het vuur en beschermd van de zee."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid "The Princess’ Memoir"
@@ -404,7 +404,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr "De afgelopen week hebben we twee wachttorens op de bergen gebouwd dicht bij onze aanmeerplaats; en natuurlijk een hal voor ons allen. We hebben getalenteerde bouwers in onze groep, toch lijkt de stijl niet op wat we hadden in Atlantis. Ik hoop dat ze de volgende regen weerstaan. De torens zullen ons waarschuwen als een schip uit Atlantis ons volgt en als het eiland bewoont is zullen we dat ook op tijd waarnemen."
+msgstr "De afgelopen week hebben we twee wachttorens op de bergen gebouwd dicht bij onze aanmeerplaats; en natuurlijk een hal voor ons allen. We hebben getalenteerde bouwers in onze groep, toch lijkt de stijl niet op wat we hadden in Atlantis. Ik hoop dat de gebouwen de volgende regen weerstaan. De torens zullen ons waarschuwen als een schip uit Atlantis ons volgt en als het eiland bewoond is zullen we dat ook op tijd waarnemen."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:181
@@ -440,7 +440,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Mag Satul jullie verwarmen. Loftomor, je bent de eilands meest vermaarde architect. Sidolus jij bent de meest ervaren krijger en strateeg. Ik heb jullie bij me geroepen voor raad: Wat moet gedaan worden om dit ons nieuwe thuis te maken?"
+msgstr "Mag Satul jullie verwarmen. Loftomor, je bent de meest vermaarde architect op het eiland. Sidolus jij bent de meest ervaren krijger en strateeg. Ik heb jullie bij me geroepen voor raad: wat moet gedaan worden om dit ons nieuwe thuis te maken?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Loftomor Speaks"
@@ -456,7 +456,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Mag Satul u verwarmen Jundlina! Het belangrijkste om een nederzetting te bouwen zijn de bouwmaterialen. Er zijn wat bomen hier, dus moeten we enkele huizen maken voor de houtvesters en natuurlijk voor de boswachters zodat we niet zonder bomen komen te zitten. Oh, en we moeten de houtzagerij niet vergeten, omdat de meeste gebouwen niet alleen boomstammen nodig hebben. Sterkere gebouwen hebben ook graniet nodig, maar er is genoeg ten noordoosten van hier; we hoeven enkel een steengroeve te bouwen en mijn steenhouwers zullen snel aan het werk gaan."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -470,7 +470,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Mag Satul u verwarmen, Jundlina! Ik ben het eens met wat Loftomor voorstelt. We hebben een mooie voorraad bouwmaterialen nodig om ons grondgebied snel uit te breiden. Ik zal me niet veilig voelen op dit eiland zolang we niet alle kusten hebben gezien. Ik heb voldoende goede mannen uit Atlantis meegenomen. De militaire macht is beschikbaar. We hebben enkel gebouwen nodig om in te leven."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -488,7 +488,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Is bouwinfrastructuur is klaar en ik heb enkele dagen gekeken of ze goed samenwerken. Nu zijn er andere dringende zaken. Ik heb Colionder, mijn persoonlijke kok, bij me geroepen voor advies over enkele dingen."
+msgstr "Onze bouwinfrastructuur is klaar en ik heb enkele dagen gekeken of ze goed samenwerken. Nu zijn er andere dringende zaken. Ik heb Colionder, mijn persoonlijke kok, bij me geroepen voor advies over enkele dingen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:213
 msgid "Colionder Arrives"
@@ -518,7 +518,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Mag Satul ook jou verwarmen Colionder. Ik vroeg me af of er manier is om onze voedselproductie te centraliseren. We verliezen veel productiviteit doordat mensen hun eigen voedsel moeten maken. Ik denk dat als we verantwoordelijkheid delen, het beter voor ons allen is. Ik wil jouw gedachten hierover."
+msgstr "Mag Satul ook jou verwarmen Colionder. Ik vroeg me af of er manier is om onze voedselproductie te centraliseren. We verliezen veel productiviteit doordat mensen hun eigen voedsel moeten maken. Ik denk dat als we verantwoordelijkheden opdelen, het beter voor ons allen is. Ik wil jouw gedachten hierover."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
@@ -531,7 +531,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ahh, maar dat is onmogelijk om te veranderen. Het bereiden en eten van voedsel  is iets wat diep geworteld in ons Atlantiërs, het is gewoon een ceremonie die we nodig hebben voor ons welzijn. Dus ik denk dat we niet volledig kunnen ontnemen van individuen."
+msgstr "Ahh, maar dat is onmogelijk om te veranderen. Het bereiden en eten van voedsel is iets wat diep geworteld in ons Atlantiërs, het is gewoon een ceremonie die we nodig hebben voor ons welzijn. Dus ik denk dat we dit niet volledig kunnen ontnemen van individuen."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
@@ -541,7 +541,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Maar we kunnen er een compromis in vinden: Voor mij is het maken van brood een lastige taak: het malen van de helmkruid en maïs tot meel en dan bakken  van het brood is vervelend en saai: ik denk dat een meer industriële aanpak hier nuttig  zou zijn. Ik zou zelf graag gewoon elke dag vers brood geleverd aan huis krijgen."
+msgstr "Maar we kunnen er een compromis in vinden. Voor mij is het maken van brood een lastige taak: het malen van de helmkruid en maïs tot meel en dan brood  bakken is vervelend en saai: ik denk dat een meer industriële aanpak hier nuttig zou zijn. Ik zou zelf graag gewoon elke dag vers brood geleverd aan huis krijgen."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
@@ -552,7 +552,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Oooh, en nog belangrijker: het roken van vis en vlees om het te reinigen en hun smaak te verbeteren is verschrikkelijk. Mijn huis staat vol met rook en blijft nog weken stinken. Denk je niet dat dit zou kunnen worden gedaan in een apart gebouw waar de neveneffecten er niet toe doen? Ik denk dat die twee dingen zouden worden aanvaard door het volk en de bereidingstijden zouden verminderen zonder het ritueel weg te nemen."
+msgstr "Oooh, en nog belangrijker: het roken van vis en vlees om het te reinigen en de smaak te verbeteren is verschrikkelijk. Mijn huis staat vol met rook en blijft nog weken stinken. Denk je niet dat dit zou kunnen worden gedaan in een apart gebouw waar de neveneffecten er niet toe doen? Ik denk dat die twee dingen zouden worden aanvaard door het volk en de bereidingstijden zouden verminderen zonder het ritueel weg te nemen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:237
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -562,7 +562,7 @@ msgstr "Jundlina stemt in"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:240
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr "Je woorden klinken mij wijs Colionder. Dus dan moet dat maar."
+msgstr "Je woorden klinken mij wijs Colionder. Zo zal het dan wezen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
@@ -588,7 +588,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Mag Satul u verwarmen Jundlina. Mijn naam is Opol en ik ben de hoogste wever van het gilde dat met jou Atlantis en Lutas verlaten heeft. Ik kom inderdaad met slecht nieuws: We hebben geen spinnendoek meer. Geen enkele meter is meer te vinden in onze magazijnen. Kunt u het weversgilde helpen door de bouw van een weverij en een spinnenboerderij te regelen? De spinnen leveren de fijnste zijde en we zullen de beste spinnendoek er van maken."
+msgstr "Mag Satul u verwarmen Jundlina. Mijn naam is Opol en ik ben de hoogste wever van het gilde dat met jou Atlantis en Lutas verlaten heeft. Ik kom inderdaad met slecht nieuws: we hebben geen spinnendoek meer. Geen enkele meter is meer te vinden in onze magazijnen. Kunt u het weversgilde helpen door de bouw van een weverij en een spinnenboerderij te regelen? De spinnen leveren de fijnste zijde en we zullen er de beste spinnendoek van maken."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:262
@@ -605,7 +605,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "Mag Satul ook jou verwarmen Opol. Ik wilde de productie van spinnendoek uitstellen, maar ik begrijp je urgentie. Je suggestie klinkt redelijk, ik zal een weverij en spinnenboerderij bouwen. Ik zal ook een goudspinnerij bouwen zodat de gouden tabberds niet alleen van goud heten, maar ook zijn."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
 msgid "Opol Seeks Out Jundlina"
@@ -618,7 +618,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "Mag Satul u verwarmen Jundlina! De weverij, goudspinnerij en de spinnenboerderij zijn klaar en beginnen met werken op dit moment. De weversgilde is erg dankbaar voor uw ondersteuning en zal zijn woord houden en binnenkort de eerste tabberd afleveren."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:284
@@ -640,7 +640,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Mag Satul u verwarmen Jundlina. Heeft u overwogen om grondstoffen te delven in de bergen rondom ons? We hebben weinig kwarts en diamanten meer over voor onze gebouwen. Daarnaast kunnen we ook meer ijzer, goud en vooral kolen gebruiken. Als we een ruim aanbod van deze grondstoffen vinden, kunnen we beginnen met het produceren wapens en gereedschappen; dit zou enorm helpen. Natuurlijk hebben we dan een hoogoven, een wapensmederij, een harnassmederij en een werktuigsmederij nodig. En misschien zelfs meer."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
@@ -651,7 +651,7 @@ msgstr "Jundlina knikt"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Ik heb dit bekeken, Sidolus. Ik denk dat het tijd wordt. We maken er nu een prioriteit van. Je zult je industrie krijgen, en spoedig!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -683,7 +683,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Ik ben het met u eens en heb de probleemgevallen streng gestraft. Maar het is erg moeilijk om mijn mannen rustig te houden: ze vervelen zich en hebben niets te doen. Ik zou graag hun training opvoeren. Ik denk dat meer routine in hun leven ze zich bezig houden en richten op hun taken. Ik zou moeten een kerker en een labyrint voor hen hebben. Ik heb de plannen klaar, maar ik denk dat ze niet goedkoop zijn."
+msgstr "Ik ben het met u eens en heb de probleemgevallen streng gestraft. Maar het is erg moeilijk om mijn mannen rustig te houden: ze vervelen zich en hebben niets te doen. Ik zou graag hun training opvoeren. Ik denk dat meer routine in hun leven ze zal bezig houden, dan zullen ze zich richten op hun taken. Ik zou een kerker en een labyrint voor hen willen. Ik heb de plannen klaar, maar ik denk dat ze niet goedkoop zijn."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:322
@@ -692,7 +692,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "Ik vrees de kosten niet en werk zo lang het duurt aan de kust. Je krijgt je gebouwen. Maar weet dat ik geen enkele foute soldaat tolereer; als zoiets weer gebeurd zal ik jou verantwoordelijk voor hen houden. Ingerukt."
+msgstr "Ik vrees de kosten noch het werk, zo lang het je mensen in bedwang houdt. Je krijgt je gebouwen. Maar weet dat ik geen enkele foute soldaat tolereer; als zoiets weer gebeurd zal ik jou verantwoordelijk voor hen houden. Ingerukt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Received a Letter"
@@ -718,7 +718,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "Mensen klagen over de drukke straten en het trage vervoer. We moeten onze dragers op de wegen helpen. Ik besluit om een paardenboerderij te bouwen, zodat de paarden kunnen helpen met zware vracht."
+msgstr "Mensen klagen over de drukke straten en het trage vervoer. We moeten onze dragers op de wegen helpen. Ik besluit om een paardenstal te bouwen, zodat de paarden kunnen helpen met zware vracht."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:344
@@ -726,7 +726,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Een andere manier om de wegen te ontlasten is door magazijnen te bouwen. We hebben de bergen nu ingenomen, het lijkt een goed idee om een magazijn op het plateau te hebben om niet alle op en neer de hellingen te vervoeren."
+msgstr "Een andere manier om de wegen te ontlasten is door magazijnen te bouwen. We hebben de bergen nu ingenomen, het lijkt een goed idee om een magazijn op het plateau te hebben om niet alles op en af de hellingen te vervoeren."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:356
 msgid "A Dangerous Discovery"
@@ -746,7 +746,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr "We hebben een oud gebouw gevonden, vernietigd en verbrand door de vlammen. Ik ben bezorgd door deze vondst. Het gebouw lijkt niet op iets wat ik eerder gezien heb. Het is zeker niet ontworpen door een Atlantische Architect waarvan ik gehoord heb. Het bouwwerk is ruw en slordig. Maar de materialen zijn duurzaam: het hout wat gebruikt is lijkt op een vreemde manier gebrand te zijn voordat het gebruikt is als bouwmateriaal, het is hard als steen."
+msgstr "We hebben een oud gebouw gevonden, vernietigd en verbrand door de vlammen. Ik ben bezorgd door deze vondst. Het gebouw lijkt niet op iets wat ik eerder gezien heb. Het is zeker niet ontworpen door een Atlantische architect waarvan ik gehoord heb. Het bouwwerk is ruw en slordig. Maar de materialen zijn duurzaam: het hout wat gebruikt is lijkt op een vreemde manier gebrand te zijn voordat het gebruikt is als bouwmateriaal, het is hard als steen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:362
@@ -755,7 +755,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr "Betekend dit dat er anderen op het eiland zijn? Waar zijn ze dan? Ze werken met vuur, bidden ze dan ook tot Satul? Zijn ze vrienden of vijanden? En waarom is het gebouw afgebrand? Heeft dit eiland een oorlog gekend? Wordt er een oorlog gevoerd op dit moment?"
+msgstr "Ik ben beangstigd door de betekenis van deze vondst. Betekent dit dat er anderen op het eiland zijn? Waar zijn ze dan? Ze werken met vuur, bidden ze dan ook tot Satul? Zijn het vrienden of vijanden? En waarom is het gebouw afgebrand? Heeft dit eiland een oorlog gekend? Wordt er een oorlog gevoerd op dit moment?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:365
@@ -796,7 +796,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "En weer een van deze gebouwen. We weten dat een stam ze ooit bouwde om het hele eiland te beheersen. Maar ik ben niet meer bang voor mogelijke vijanden. We weten zo veel van het eiland en er is geen spoor van deze oude economie te vinden. Ik begin te relaxen, maar ik zal onze beschermer niet teleurstellen terwijl we dit prachtige eiland ontdekken. Maar zonder duidelijk gevaar voel ik me hier al erg thuis."
+msgstr "En weer één van deze gebouwen. We weten dat een stam ze ooit bouwde om het hele eiland te beheersen. Maar ik ben niet meer bang voor mogelijke vijanden. We weten zo veel van het eiland en er is geen spoor van deze oude economie te vinden. Ik begin me te ontspannen, maar ik zal onze beschermer niet teleurstellen terwijl we dit prachtige eiland ontdekken. Maar zonder duidelijk gevaar voel ik me hier al erg thuis."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"
@@ -873,14 +873,14 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Satul zij geprezen! Het is Ostur, de jonge scheepsbouwer, gelukt. We hebben drie schepen – nooit heb ik er robuustere gezien – met genoeg ruimte om ons allen mee te nemen en ook wat goederen. En deze redding kwam net op tijd: Lutas dreigt de rest van dit eiland op te slokken, het water stijgt elk uur sneller. Maar we kunnen nu ontsnappen en opnieuw beginnen in een ver afgelegen land…"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:449
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr ""
+msgstr "Ik verwacht een lange reis, maar we zullen het land van Satul uiteindelijk vinden. Dit is wat ik mijn volk heb beloofd. En mezelf."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:450
 msgid "Congratulations"
@@ -890,15 +890,15 @@ msgstr "Gefeliciteerd"
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
-msgstr "Deze missie is gewonnen. Ga verder met de volgende of blijf spelen zolang u wilt."
+msgstr "Deze missie is gewonnen. Ga verder met de volgende of blijf spelen zolang je wilt."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nieuwe opdracht"
-msgstr[1] "Nieuwe opdrachten"
+msgstr[0] "Nieuwe Doelstelling"
+msgstr[1] "Nieuwe Doelstellingen"

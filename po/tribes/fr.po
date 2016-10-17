@@ -3,6 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
+# GunChleoc, 2016
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Nicolas Auvray <na.itms76@gmail.com>, 2016
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-21 08:44+0000\n"
-"PO-Revision-Date: 2016-09-21 08:54+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:06+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1133,7 +1134,7 @@ msgstr "Plus d'eau"
 msgctxt "atlanteans_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr "Le porteur travaillant à ce puits ne trouve  plus d'eau dans sa zone de travail."
+msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans sa zone de travail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1462,7 +1463,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veine principale de fer de cette mine est épuisée. Attendez vous à une forte diminution dans la collecte de matières premières.  Cette mine ne peut plus être amélioré. Vous devriez penser donc pensez à la démanteler ou la détruire."
+msgstr "La veine principale de fer de cette mine est épuisée. Attendez vous à une forte diminution dans la collecte de matières premières. Cette mine ne peut plus être amélioré. Vous devriez penser donc pensez à la démanteler ou la détruire."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1842,7 +1843,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veine principale de fer de cette mine est épuisée. Attendez vous à une forte diminution dans la collecte de matières premières.  Cette mine ne peut plus être amélioré. Vous devriez penser donc pensez à la démanteler ou la détruire."
+msgstr "La veine principale de fer de cette mine est épuisée. Attendez vous à une forte diminution dans la collecte de matières premières. Cette mine ne peut plus être amélioré. Vous devriez penser donc pensez à la démanteler ou la détruire."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -2081,7 +2082,7 @@ msgstr "Puits"
 msgctxt "empire_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr "Le porteur travaillant à ce puits ne peut plus trouver d'au dans sa zone de travail."
+msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans sa zone de travail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:7
@@ -2291,7 +2292,7 @@ msgid "Warehouse"
 msgstr "Entrepôt"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Cendres"
@@ -2617,14 +2618,14 @@ msgid ""
 msgstr "Si ce joueur tombe à cours de ressources importantes, elles seront réapprovisionnées gratuitement"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Navire"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Armure"
