@@ -2,16 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
 # GunChleoc, 2015-2016
-# GunChleoc, 2014
+# GunChleoc, 2015-2016
+# GunChleoc, 2014-2015
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:04+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-03 09:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Construa um blocausse"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
@@ -32,11 +32,11 @@ msgstr "Blocausse"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Construa um blocausse no símbolo da casa vermelha no lado Este da floresta, à direita do seu quartel-general provisório."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr "Construa um lenhador"
+msgstr "Construa uma casa do lenhador"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
@@ -46,11 +46,11 @@ msgstr "Casa do Lenhador"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Constrói a casa do lenhador no sítio do símbolo da casa vermelha, a sul do teu quartel-general provisional."
+msgstr "Construa a casa do lenhador no sítio do símbolo da casa vermelha, a sul do seu quartel-general provisional."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr "Constrói duas casas do lenhador e uma serração"
+msgstr "Construa duas casas do lenhador e uma serração"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
@@ -60,24 +60,24 @@ msgstr "Duas casas do lenhador e uma serração"
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Constrói mais duas casas do lenhador e uma serração assim que haja espaço para elas."
+msgstr "Construa mais duas casas do lenhador e uma serração assim que haja espaço para elas."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
-msgstr "Construa um Florestal"
+msgstr "Construa uma casa do silvicultor"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr "Casa do Silvicultor"
+msgstr "Casa do silvicultor"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Constrói uma casa do silvicultor para preservar os recursos florestais nesta ilha."
+msgstr "Construa uma casa do silvicultor para preservar os recursos florestais nesta ilha."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
-msgstr "Construa uma Pedreira"
+msgstr "Construa uma pedreira"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
@@ -86,7 +86,7 @@ msgstr "Pedreira"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "Construa uma pedreira pelo sul para cortar granito e mármore dos rochedos."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -172,7 +172,7 @@ msgstr "O nosso navio está tão danificado que está a meter cada vez mais águ
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
-msgstr ""
+msgstr "Sobreviventes"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -277,7 +277,7 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr "Uma coisa é certa: precisamos de madeira para reparar o nosso navio. Por isso ontem andei pela floresta a procura de um bom local para construir uma casa para o lenhador e encontrei um a sul do nosso quartel-general provisório."
+msgstr "Uma coisa é certa: precisamos de madeira para reparar o nosso navio. Por isso ontem andei pela floresta a procura de um bom local para construir uma casa do lenhador e encontrei um a sul do nosso quartel-general provisório."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"

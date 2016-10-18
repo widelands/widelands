@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:08+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-03 12:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgstr "Construção"
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:46
 msgctxt "building"
 msgid "Dismantle Site"
-msgstr "Desmontar local"
+msgstr "Desmanchando edifício"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:75
@@ -462,7 +462,7 @@ msgstr "trabalhar"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:133
 msgid "forging a steel shield"
-msgstr "forjar escudo de ferro"
+msgstr "forjar escudo de aço"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
@@ -700,7 +700,7 @@ msgstr "plantar árvores"
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Gold Spinning Mill"
-msgstr "Ourivesaria"
+msgstr "Ourives"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:51
@@ -1093,7 +1093,7 @@ msgstr "Tecelagem"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
 msgid "weaving spidercloth"
-msgstr "tecer seda"
+msgstr "tecer teia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
@@ -1358,7 +1358,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "O veio principal desta mina de mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
+msgstr "O veio principal desta mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1417,7 +1417,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "O caçador nesta cabana do caçador não encontrou caça na sua área de trabalho. Lembra que podes  construir uma coutada para soltar mais caça."
+msgstr "O caçador nesta cabana do caçador não encontrou caça na sua área de trabalho. Lembra que podes construir uma coutada para soltar mais caça."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:7
@@ -1552,7 +1552,7 @@ msgstr "Cabana do guarda-florestal"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr "Colmo maduro"
+msgstr "Quinta do colmo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:54
@@ -2010,7 +2010,7 @@ msgstr "Vinha"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:55
 msgid "planting grapevines"
-msgstr "plantar vinha"
+msgstr "plantar videira"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
@@ -2023,7 +2023,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr "O viticultor nesta vinha não tem terra aberta para meter videira."
+msgstr "O vinheiro nesta vinha não tem terra aberta para meter videira."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
@@ -2111,28 +2111,28 @@ msgstr "a dormir"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "aperfeiçoar o ataque do guerreiro do nível 0 para o nível 1"
+msgstr "aperfeiçoar o ataque do soldado do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:146
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "aperfeiçoar o ataque do guerreiro do nível 1 para o nível 2"
+msgstr "aperfeiçoar o ataque do soldado do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:157
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "aperfeiçoar o ataque do guerreiro do nível 2 para o nível 3"
+msgstr "aperfeiçoar o ataque do soldado do nível 2 para o nível 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:168
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "aperfeiçoar o ataque do guerreiro do nível 3 para o nível 4"
+msgstr "aperfeiçoar o ataque do soldado do nível 3 para o nível 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
@@ -2143,19 +2143,19 @@ msgstr "Labirinto"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "aperfeiçoar a defesa do guerreiro do nível 0 para o nível 1"
+msgstr "aperfeiçoar a defesa do soldado do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "aperfeiçoar a defesa do guerreiro do nível 1 para o nível 2"
+msgstr "aperfeiçoar a defesa do soldado do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "aperfeiçoar a saúde do guerreiro do nível 0 para o nível 1"
+msgstr "aperfeiçoar a saúde do soldado do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
@@ -2163,14 +2163,14 @@ msgstr "aperfeiçoar a saúde do guerreiro do nível 0 para o nível 1"
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "aperfeiçoar a evasão do guerreiro do nível 0 para o nível 1"
+msgstr "aperfeiçoar a evasão do soldado do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "aperfeiçoar a evasão do guerreiro do nível 1 para o nível 2"
+msgstr "aperfeiçoar a evasão do soldado do nível 1 para o nível 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
@@ -2187,19 +2187,19 @@ msgstr "Campo de treinos"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "aperfeiçoar o ataque do guerreiro do nível 4 para o nível 5"
+msgstr "aperfeiçoar o ataque do soldado do nível 4 para o nível 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "aperfeiçoar a saúde do guerreiro do nível 1 para o nível 2"
+msgstr "aperfeiçoar a saúde do soldado do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "aperfeiçoar a saúde do guerreiro do nível 2 para o nível 3"
+msgstr "aperfeiçoar a saúde do soldado do nível 2 para o nível 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:7
@@ -2222,7 +2222,7 @@ msgstr "Campo de treinos"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "aperfeiçoar a saúde do guerreiro do nível 3 para o nível 4"
+msgstr "aperfeiçoar a saúde do soldado do nível 3 para o nível 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:61
@@ -2286,7 +2286,7 @@ msgid "Warehouse"
 msgstr "Armazém"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Cinzas"
@@ -2391,49 +2391,49 @@ msgstr "Campo minúsculo"
 #: ../../data/tribes/immovables/grapevine_medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Vinha média"
+msgstr "Videira média"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr "Vinha madura"
+msgstr "Videira madura"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_small/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr "Vinha pequena"
+msgstr "Videira pequena"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Vinha minúscula"
+msgstr "Videira minúscula"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr "Colmo médio"
+msgstr "Junco médio"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Reed (ripe)"
-msgstr "Colmo maduro"
+msgstr "Junco maduro"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_small/init.lua:7
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr "Colmo pequeno"
+msgstr "Junco pequeno"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr "Colmo minúsculo"
+msgstr "Junco minúsculo"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
@@ -2612,14 +2612,14 @@ msgid ""
 msgstr "Se este jogador ficar sem mercadorias importantes, serão repostas gratuitamente"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Navio"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Amadura"
@@ -2988,7 +2988,7 @@ msgstr "Escudo de guerra"
 #: ../../data/tribes/wares/shield_steel/init.lua:7
 msgctxt "ware"
 msgid "Steel Shield"
-msgstr "Escudo de ferro"
+msgstr "Escudo de aço"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/shovel/init.lua:7
@@ -3054,7 +3054,7 @@ msgstr "Seda de aranha"
 #: ../../data/tribes/wares/spidercloth/init.lua:7
 msgctxt "ware"
 msgid "Spidercloth"
-msgstr "Seda"
+msgstr "Tecido de teia"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/tabard/init.lua:7
@@ -3258,7 +3258,7 @@ msgstr "Defumador"
 #: ../../data/tribes/workers/atlanteans/soldier/init.lua:67
 msgctxt "atlanteans_worker"
 msgid "Soldier"
-msgstr "Guerreiro"
+msgstr "Soldado"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:17
@@ -3606,7 +3606,7 @@ msgstr "Mestre mineiro"
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:17
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr "Criador de Porcos"
+msgstr "Criador de porcos"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17
@@ -3636,7 +3636,7 @@ msgstr "Fundidor"
 #: ../../data/tribes/workers/empire/soldier/init.lua:67
 msgctxt "empire_worker"
 msgid "Soldier"
-msgstr "Guerreiro"
+msgstr "Soldado"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/stonemason/init.lua:23
@@ -3660,13 +3660,13 @@ msgstr "Treinador"
 #: ../../data/tribes/workers/empire/vinefarmer/init.lua:32
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr "Viticultor"
+msgstr "Vinheiro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/vintner/init.lua:18
 msgctxt "empire_worker"
 msgid "Vintner"
-msgstr "Vinheiro"
+msgstr "Vinicultor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/weaponsmith/init.lua:17

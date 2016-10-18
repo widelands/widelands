@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-28 21:51+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-09 09:29+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -22,35 +22,35 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Postav základ pro hospodářství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Začni těžit základní stavební materiály a opevni kemp."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Postav chatu dřevorubce"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Postav chatu lesníka"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postav lom"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Postav tesařství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Postav strážnici na východní hranici"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Měl by si postavit i rákosové pole a vápennou pec."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -59,19 +59,19 @@ msgstr "Vybuduj základní potravinné hospodářství"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Postav základní hospodářství aby si mohl dodávat lidem jídlo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Postav chatu rybáře"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Postav loveckou chatu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:43
 msgid "Build a well"
-msgstr ""
+msgstr "Postav studnu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:44
 msgid "Build a farm"
@@ -94,18 +94,18 @@ msgstr "Postav statek"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Jak se prodlužují tvé cesty a tvé hospodářství roste, měl by si zvážit využití volů aby ti pomohli přepravovat suroviny rychlejíi."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 msgid "Build a tower"
-msgstr ""
+msgstr "Postav věž"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Postav věž na severo východní hranici tvého území. Tím získáš větší přehled a ochráníš svůj lid před nenadálým útokem nepřítele."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
@@ -128,7 +128,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Rozšiř své území k horám, pošli geology hledat rudy, uhlí a postav těžební hospodářství tj. doly, hospody, slévárny a dílny na železo."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -157,14 +157,14 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Vylepši svou dílnu na železo na dílnu na sekery, abys mohl začít vyrábět zbraně, a postav nové dílny na železo, které budou dál vyrábět nástroje. Až tvůj kovář dosáhne další úrovně (mistr kovář), můžeš dílnu na sekery dále vylepšit na válečnou akademii, která vyrábí další zbraně."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Postav kovárnu na přilby na západ od hor aby tvoji vojáci měli lepší zbroj."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:106
@@ -207,7 +207,7 @@ msgstr "Vybuduj výrobu zbraní"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Postav kovárnu přileb"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:142
@@ -224,7 +224,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Abys zaútočil na nepřítele, klikni na dveře nepřátelské vojenské budovy. Objeví se okno, ve kterém zvolíš počet vojáků, kteří se zúčastní útoku. Až budeš mít počet vojáků nastavený, klikni na křížek ('zahájit útok')."
+msgstr "Abys zaútočil na nepřítele, klikni na dveře nepřátelské vojenské budovy. Objeví se okno, ve kterém zvolíš počet vojáků, kteří se zúčastní útoku. Až budeš mít počet vojáků nastavený, klikni na křížek (\"zahájit útok\")."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:151
@@ -244,7 +244,7 @@ msgstr "Blízko k domovu"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron vypadá zasmušile…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
@@ -284,7 +284,7 @@ msgstr "Pochybnosti"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth třese hlavou..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
@@ -434,7 +434,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth má pravdu! Nemáme dost jídla abychom přežili dlouhou a mrazivou zimu. Měli bychom začít stavět studny, chaty pro rybáře a lovce. Pokud najdeme dostatek místa, měli bychom postavit i obilné pole a pekárnu! Naši sedláci se zdají být velmi chytří - už se jim podařilo vypěstovat malou úrodu v této promrzlé půdě."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
 msgid "Food Economy Completed"
@@ -458,7 +458,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi řekl, abych prozkoumal stopy ve sněhu, vedoucí k naší severovýchodní osadě. Přikázal postavit věž abychom měli větší přehled na okolím a mohli lépe chránit lid před nenadálým útokem."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
 msgid "Further Exploration"
@@ -474,7 +474,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "První část opevnění, kterou Thron přikázal je hotova. V tuto chvíli se snaží obnovit důvěru a víru těch, kteří žijí obklopení těmto zdmi našeho nového příbytku jménem \"Ondun\", což znamená ve starém jazyce \"ti kdož čekají\". Thron ovšem ještě není spokojen - a já jeho obavy plně chápu: les je hluboký a frontová linie u Al’thunran je blízko. Jsem si jistý, že je tu tisíckrát větší nebezpečí než neznámé stopy."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:276
@@ -497,7 +497,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Právě jsem mluvil s velitelem naší hlídky. Řekl mi, že objevil hory na severo-východní a východní části našeho území. S trochou štěstí nám toto otevře novou cestu k přezbrojení našich mužů, protože jak si pamatuji, většina hor západně od Al’thunranu je bohatá na uhlí a železnou rudu."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
 msgid "Mining Economy Completed"
@@ -524,7 +524,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth a já jsme prozkoumali okolí tří hor. Jedním z hlavních strategických problémů je, že jsou tu dva větší průsmyky - jeden je severně a druhý jižně od hlavní hory. Tyto dva průsmyky bude velmi těžké ohlídat a proto se mi zdá, že máme pouze jedinou možnost, jak uchránit hory před nepřáteli: musíme postavit pevnost na východ od hor!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
 msgid "Fortress Completed"
@@ -537,7 +537,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Konečně! Pevnost je hotová, cesta do naší osady by měla být bezpečnější. V budoucnu bychom se měli zamyslet nad dalším opevněním v podobě hradeb a věží v průsmycích. Prozatím si ovšem můžeme vydechnout."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
@@ -549,7 +549,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Naše těžební hospodářství, zdá se, funguje skvěle, to jsou opravdu dobré zprávy! Nicméne zbývá spousta mužů a žen, kteří čekají na to, až dostanou práci, aby mohli pomoci našim vojákům, připravit se na válku, která přichází."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
@@ -581,7 +581,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Nic z té nádhery, co si pamatuji, nezůstalo, pouze ruiny starého hlavního města. Jsem z toho smutný ale zároveň se mi ulevilo. Ani jsem nedoufal, že znovu uvidím Al’thunran v jeho dávné kráse. Je to jen pár měsíců, co jsem přemýšlel, zda sem ještě někdy vkročím. Nyní je staré město opět v mých rukách a bez zaváhání obnovím jeho zašlou slávu s pomocí svého lidu. Nemohu se dočkat, až opět uvidím jeho dřívější krásu."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid "Victory"
@@ -591,7 +591,7 @@ msgstr "Vítězství"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Dokončil jsi poslední misi tutoriálové kampaně barbarů. Můžeš hrát dál, pokud chceš, v opačném případě se přesuň na další kampaň."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid "Military Assault"
@@ -621,7 +621,7 @@ msgstr "Budiž tedy!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Rychlejší přeprava"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
 msgid "Khantrukh says:"

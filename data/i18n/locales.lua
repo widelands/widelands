@@ -35,7 +35,7 @@ return {
    br = {
       name = "Brezhoneg",
       sort_name = "Brezhoneg",
-      font = "default"
+      font = "Dre ziouer"
    },
 
    ca = {
