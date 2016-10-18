@@ -449,76 +449,93 @@ void Soldier::draw(const EditorGameBase& game,
 	}
 
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, zoom);
-	draw_info_icon(*dst,
-	               Vector2f(point_on_dst.x,
-	                        point_on_dst.y - g_gr->animations().get_animation(anim).height() - 7),
-	               true);
+	draw_info_icon(
+	   point_on_dst -
+	      Vector2f(0.f, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * zoom),
+	   zoom, true, dst);
 	draw_inner(game, point_on_dst, zoom, dst);
 }
 
 /**
  * Draw the info icon (level indicators + health bar) for this soldier.
- *
- * \param anchor_below if \c true, the icon is drawn horizontally centered above
- * \p pt. Otherwise, the icon is drawn below and right of \p pt.
  */
-void Soldier::draw_info_icon(RenderTarget& dst, Vector2f pt, bool anchor_below) const {
-	// NOCOM(#sirver): needs zoom
-	// Gather information to determine coordinates
-	uint32_t w;
-	w = kSoldierHealthBarWidth;
+void Soldier::draw_info_icon(Vector2f draw_position,
+                             float zoom,
+                             const bool anchor_below,
+                             RenderTarget* dst) const {
+	// Since the graphics below are all pixel perfect and scaling them as floats
+	// looks weird, we round to the nearest fullest integer.
+	zoom = std::round(zoom);
+	if (zoom == 0.f) {
+		return;
+	}
 
 	const Image* healthpic = get_health_level_pic();
 	const Image* attackpic = get_attack_level_pic();
 	const Image* defensepic = get_defense_level_pic();
 	const Image* evadepic = get_evade_level_pic();
 
-	uint16_t hpw = healthpic->width();
-	uint16_t hph = healthpic->height();
-	uint16_t atw = attackpic->width();
-	uint16_t ath = attackpic->height();
-	uint16_t dew = defensepic->width();
-	uint16_t deh = defensepic->height();
-	uint16_t evw = evadepic->width();
-	uint16_t evh = evadepic->height();
+#ifndef NDEBUG
+	// This function assumes stuff about our data files: level icons are all the
+	// same size and this is smaller than the width of the healthbar. This
+	// simplifies the drawing code below a lot. Before it had a lot of if() that
+	// were never tested - since our data files never changed.
+	const int dimension = attackpic->width();
+	assert(attackpic->height() == dimension);
+	assert(healthpic->width() == dimension);
+	assert(healthpic->height() == dimension);
+	assert(defensepic->width() == dimension);
+	assert(defensepic->height() == dimension);
+	assert(evadepic->width() == dimension);
+	assert(evadepic->height() == dimension);
+	assert(kSoldierHealthBarWidth > dimension);
+#endif
 
-	uint32_t totalwidth = std::max<int>(std::max<int>(atw + dew, hpw + evw), 2 * w);
-	uint32_t totalheight = 5 + std::max<int>(hph + ath, evh + deh);
+	const float icon_size = healthpic->width();
+	const float half_width = kSoldierHealthBarWidth;
 
 	if (!anchor_below) {
-		pt.x += totalwidth / 2.f;
-		pt.y += totalheight - 5;
+		float totalwidth = 2 * half_width;
+		float totalheight = 5.f + 2 * icon_size;
+		draw_position.x += (totalwidth / 2.f) * zoom;
+		draw_position.y += (totalheight - 5.f) * zoom;
 	} else {
-		pt.y -= 5;
+		draw_position.y -= 5.f * zoom;
 	}
 
 	// Draw energy bar
-	Rectf energy_outer(Vector2f(pt.x - w, pt.y), w * 2.f, 5.f);
-	dst.draw_rect(energy_outer, RGBColor(255, 255, 255));
-
 	assert(get_max_health());
-	uint32_t health_width = 2 * (w - 1) * current_health_ / get_max_health();
-	Rectf energy_inner(Vector2f(pt.x - w + 1, pt.y + 1), health_width, 3);
-	Rectf energy_complement(
-	   energy_inner.origin() + Vector2f(health_width, 0), 2 * (w - 1) - health_width, 3);
+	const Rectf energy_outer(
+	   draw_position - Vector2f(half_width, 0.f) * zoom, half_width * 2.f * zoom, 5.f * zoom);
+	dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
+
+	float health_width = 2.f * (half_width - 1.f) * current_health_ / get_max_health();
+	Rectf energy_inner(
+	   draw_position + Vector2f(-half_width + 1.f, 1.f) * zoom, health_width * zoom, 3 * zoom);
+	Rectf energy_complement(energy_inner.origin() + Vector2f(health_width, 0.f) * zoom,
+	                        (2 * (half_width - 1) - health_width) * zoom, 3 * zoom);
+
 	const RGBColor& color = owner().get_playercolor();
 	RGBColor complement_color;
-
-	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3)
+	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3) {
 		complement_color = RGBColor(32, 32, 32);
-	else
+	} else {
 		complement_color = RGBColor(224, 224, 224);
-
-	dst.fill_rect(energy_inner, color);
-	dst.fill_rect(energy_complement, complement_color);
-
-	// Draw level pictures
-	{
-		dst.blit(pt + Vector2f(-atw, -(hph + ath)), attackpic);
-		dst.blit(pt + Vector2f(0, -(evh + deh)), defensepic);
-		dst.blit(pt + Vector2f(-hpw, -hph), healthpic);
-		dst.blit(pt + Vector2f(0, -evh), evadepic);
 	}
+
+	dst->fill_rect(energy_inner, color);
+	dst->fill_rect(energy_complement, complement_color);
+
+	const auto draw_level_image = [icon_size, zoom, &draw_position, dst](
+	   const Vector2f& offset, const Image* image) {
+		dst->blitrect_scale(
+		   Rectf(draw_position + offset * icon_size * zoom, icon_size * zoom, icon_size * zoom),
+		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+	};
+	draw_level_image(Vector2f(-1.f, -2.f), attackpic);
+	draw_level_image(Vector2f(0.f, -2.f), defensepic);
+	draw_level_image(Vector2f(-1.f, -1.f), healthpic);
+	draw_level_image(Vector2f(0.f, -1.f), evadepic);
 }
 
 /**

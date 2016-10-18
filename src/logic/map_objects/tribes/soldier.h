@@ -214,7 +214,14 @@ public:
 	          RenderTarget* dst) const override;
 
 	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
-	void draw_info_icon(RenderTarget&, Vector2f, bool anchor_below) const;
+
+	// Draw the info icon containing health bar and levels. If 'anchor_below' is
+	// true, the icon is drawn horizontally centered above Otherwise, the icon
+	// is drawn below and right of 'draw_position'.
+	void draw_info_icon(Vector2f draw_position,
+	                    const float zoom,
+	                    const bool anchor_below,
+	                    RenderTarget*) const;
 
 	uint32_t get_current_health() const {
 		return current_health_;
