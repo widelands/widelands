@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 17:41+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -406,7 +406,7 @@ msgstr "Neljä linnaa"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr "Heidä suunnattomat linnoituksensa ovat hyvin suojattuja, neljä vahvaa ja nälkäistä sotaherraa ovat saamassa päätökseen näiden maiden hallinnan..."
+msgstr "Heidän suunnattomat linnoituksensa ovat hyvin suojattuja, neljä vahvaa ja nälkäistä sotaherraa ovat saamassa päätökseen näiden maiden hallinnan…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -453,7 +453,7 @@ msgstr "Kultainen niemimaa"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista..."
+msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista…"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
@@ -510,7 +510,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr "Tämä järvi, syvällä ikimetsissä, on kauan ollut tunnettu sen kauneudesta ja paikan rikkumattomasta rauhasta. Nyt sen koskemattomuus on uhattuna, kun kaksi heimoa on saapunut sen rannoille..."
+msgstr "Tämä järvi, syvällä ikimetsissä, on kauan ollut tunnettu sen kauneudesta ja paikan rikkumattomasta rauhasta. Nyt sen koskemattomuus on uhattuna, kun kaksi heimoa on saapunut sen rannoille…"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
 msgid "Last Bastion"
@@ -726,7 +726,7 @@ msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr "Näiden kolmen keitaan ympärillä on jotain mystistä. Kukaan ei ole vielä niitä löytänyt. Ehkä sinä olet ensimmäinen, mutta ole varuillasi, koska on toisiakin etsijöitä."
+msgstr "Näiden kolmen keitaan ympärillä on jotain mystistä. Kukaan ei ole vielä niitä löytänyt. Ehkä sinä olet ensimmäinen, mutta ole varuillasi, koska on toisiakin etsijöitä!"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
@@ -736,7 +736,7 @@ msgstr "Tie vuorten läpi"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Tälle vuoristoiselle alueelle on asettunut kaksi prinsessaa. He ovat juuri nyt laajentamassa territoriaan, tietämättöminä siitä, etteivät he ole yksin."
+msgstr "Tälle vuoristoiselle alueelle on asettunut kaksi prinsessaa. He ovat juuri nyt laajentamassa territoriaan, tietämättöminä siitä, etteivät he ole yksin!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -759,7 +759,7 @@ msgstr "Kolme soturia"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr "Suunnattomat vuoret jakavat tämän maan kolmeen hedelmälliseen laaksoon. Mutta polku yhdistää laaksot toisiinsa ja siksi taistelu näyttää väistämättömältä."
+msgstr "Suunnattomat vuoret jakavat tämän maan kolmeen hedelmälliseen laaksoon. Mutta polku yhdistää laaksot toisiinsa ja siksi taistelu näyttää väistämättömältä!"
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
@@ -780,7 +780,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Neljä Craw Saarien mahtavaa satamaa ovat käyneet tavarakauppaa toistensa kanssa ikuisuuksia. Heistä kaikki tarvitsevat resursseja, joita he eivät pysty omalla alueellaan itse tuottamaan ja vaihtokauppana tarjoavat muita resursseja, joita muut eivät pysty tuottamaan. Perustuen tähän kaupankäyntiin, näiden neljän sataman välillä oli hyvin ystävällismieliset kauppasuhteet ja ihmiset elivät onnellisina Craw Saarilla – kunnes aivan äskettäin, kaksi satamista yhdistyivät muodostaen yhteisen kauppaliiton, mikä pakotti myös kahden muun muodostamaan liiton. Lopulta, oli vain ajan kysymys milloin ensimmäiset taistelut rikkoisivat näiden satamien niin pitkään kestäneen rauhallisen elinolon."
+msgstr "Neljä Craw Saarien mahtavaa satamaa ovat käyneet tavarakauppaa toistensa kanssa ikuisuuksia. Heistä kaikki tarvitsevat resursseja, joita he eivät pysty omalla alueellaan itse tuottamaan ja vaihtokauppana tarjoavat muita resursseja, joita muut eivät pysty tuottamaan. Perustuen tähän kaupankäyntiin, näiden neljän sataman välillä oli hyvin ystävällismieliset kauppasuhteet ja ihmiset elivät onnellisina Craw Saarilla – kunnes aivan äskettäin, kaksi satamista yhdistyivät muodostaen yhteisen kauppaliiton, mikä pakotti myös kahden muun muodostamaan liiton. Lopulta, oli vain ajan kysymys milloin ensimmäiset taistelut rikkoisivat näiden satamien niin pitkään kestäneen rauhallisen elinolon…"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
