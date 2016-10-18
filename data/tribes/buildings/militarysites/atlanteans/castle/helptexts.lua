@@ -1,4 +1,4 @@
--- Helptext documentation is in the dismantlesite code so it will appear below the other building documentation.
+-- The helptext documentation is located in /doc/sphinx/lua_tribes_buildings_rst.org
 
 -- This include can be removed when all help texts have been defined.
 include "tribes/scripting/help/global_helptexts.lua"
