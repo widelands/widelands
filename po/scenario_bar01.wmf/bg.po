@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Lyubomir Vasilev, 2015
-# Lyubomir Vasilev, 2015-2016
+# Любомир Василев, 2015-2016
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:02+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 07:53+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -338,7 +339,7 @@ msgstr "Минаха месеци, а ние все още се крием та�
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr "Бойците ми ловуват през деня и стоят будни през нощта – слушайки ехото от зловещите звуци на клането далеч сред древните дървета"
+msgstr "Бойците ми ловуват през деня и стоят будни през нощта – слушайки ехото от зловещите звуци на клането далеч сред древните дървета."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -869,7 +870,7 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr "Вожде, това е срамота! Добре е, че вече можем да произвеждаме вар за могъщи укрепления и величествени сгради – но това не спира покривите ни да текат! Може би младите харесват да прекарват нощите си под дъжда, но аз не мога да спя, когато капе по лицето ми."
+msgstr "Вожде, това е срамота! Добре е, че вече можем да произвеждаме вар за могъщи укрепления и величествени сгради – но това не спира покривите ни да текат! Може би младите харесват да прекарват нощите си под дъжда, но аз не мога да спя, когато капе по лицето ми!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
@@ -1027,7 +1028,7 @@ msgstr "Но се страхуват, че войната около Ал'тун
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

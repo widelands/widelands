@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-24 07:02+0000\n"
-"PO-Revision-Date: 2016-09-26 10:18+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-09 09:30+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -446,7 +446,7 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Tvrz nelze postavit přímo. Místo toho je nutné nejdříve vybudovat pevnost a teprve pak pevnost vylepšit na tvrz. To lze provést tak, že klikneš na pevnost a pak vybereš volbu 'Vylepšít na tvrz'."
+msgstr "Tvrz nelze postavit přímo. Místo toho je nutné nejdříve vybudovat pevnost a teprve pak pevnost vylepšit na tvrz. To lze provést tak, že klikneš na pevnost a pak vybereš volbu \"Vylepšít na tvrz\"."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
@@ -497,7 +497,7 @@ msgstr "Skvělá práce, tvrz je hotova. Co se to ale děje? Nepřátelské klan
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "K útoku na budovu klikni na jeho dveře, vyber počet vojáků, které chceš do útoku poslat a vyber tlačítko 'Útok'."
+msgstr "K útoku na budovu klikni na jeho dveře, vyber počet vojáků, které chceš do útoku poslat a vyber tlačítko \"Útok\"."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
@@ -535,7 +535,7 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr "Děkuji za odehrání tohoto tutorialu. Snad se ti líbil a naučil si se, jak vytvářet a trénovat vojáky, jak ovládat, kam mají jít a jak porazit nepřítele. Viděl si, jak snad můžeš nepřítele zničit? Trénovaní vojáci k dispozici je obrovská výhoda."
+msgstr "Děkuji za odehrání tohoto tutoriálu. Snad se ti líbil a naučil si se, jak vytvářet a trénovat vojáky, jak ovládat, kam mají jít a jak porazit nepřítele. Viděl si, jak snadno můžeš nepřítele přemoci? Trénovaní vojáci jsou obrovská výhoda."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:222
 msgid ""
