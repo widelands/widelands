@@ -266,6 +266,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 /**
  * Parse a tribes immovable from its init file.
+ *
+ * The contents of 'table' are documented in
+ * /data/tribes/immovables/ashes/init.lua
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,

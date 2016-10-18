@@ -43,6 +43,10 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
+  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
                                      const EditorGameBase& egbase)

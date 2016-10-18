@@ -1,4 +1,6 @@
 -- RST
+-- .. _lua_tribes_buildings_dismantlesites:
+--
 -- Dismantle Sites
 -- ---------------
 --

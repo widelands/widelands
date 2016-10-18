@@ -50,7 +50,9 @@
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
-
+/**
+  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
+  */
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,

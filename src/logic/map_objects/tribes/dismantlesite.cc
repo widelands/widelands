@@ -39,6 +39,11 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+  */
+
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
                                        const EditorGameBase& egbase)
