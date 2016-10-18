@@ -56,7 +56,6 @@ enum class MiniMapType {
 	kStaticViewWindow,
 
 	// Always align the map at (0, 0) and move the view window instead.
-	// NOCOM(#sirver): implement this.
 	kStaticMap,
 };
 

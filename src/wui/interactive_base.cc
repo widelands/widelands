@@ -419,7 +419,7 @@ InteractiveBase::minimap_registry()
 Exposes the Registry object of the minimap to derived classes
 ===========
 */
-UI::UniqueWindow::Registry& InteractiveBase::minimap_registry() {
+MiniMap::Registry& InteractiveBase::minimap_registry() {
 	return m->minimap;
 }
 

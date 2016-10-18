@@ -37,6 +37,7 @@
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
+#include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
 namespace Widelands {
@@ -176,7 +177,7 @@ protected:
 	void toggle_buildhelp();
 	void hide_minimap();
 
-	UI::UniqueWindow::Registry& minimap_registry();
+	MiniMap::Registry& minimap_registry();
 
 	void mainview_move(const Rectf&);
 

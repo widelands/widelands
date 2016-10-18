@@ -160,6 +160,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	      [this](const Widelands::NoteFieldResourceChanged& note) {
 		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
 		   });
+
+	minimap_registry().minimap_type = MiniMapType::kStaticMap;
 }
 
 void EditorInteractive::register_overlays() {

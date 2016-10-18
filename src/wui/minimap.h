@@ -30,13 +30,16 @@
 
 class InteractiveBase;
 
-struct MiniMap : public UI::UniqueWindow {
+class MiniMap : public UI::UniqueWindow {
+public:
 	struct Registry : public UI::UniqueWindow::Registry {
-		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
+		MiniMapLayer minimap_layers;
+		MiniMapType minimap_type;
 
 		Registry()
-		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
-		           MiniMapLayer::Road | MiniMapLayer::Building) {
+		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
+		                    MiniMapLayer::Road | MiniMapLayer::Building),
+		     minimap_type(MiniMapType::kStaticViewWindow) {
 		}
 	};
 
@@ -56,15 +59,11 @@ private:
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the
 	 * map, without any borders or gadgets.
-	 *
-	 * If the size of MiniMapView is not the same as the size of the map itself,
-	 * it will either show a subset of the map, or it will show the map more than
-	 * once.
-	 * The minimap always centers around the current viewpoint.
 	 */
 	struct View : public UI::Panel {
 		View(UI::Panel& parent,
-		     MiniMapLayer* flags,
+		     MiniMapLayer* minimap_layers,
+			  MiniMapType* minimap_type,
 		     int32_t x,
 		     int32_t y,
 		     uint32_t w,
@@ -91,7 +90,8 @@ private:
 		std::unique_ptr<Texture> minimap_image_;
 
 	public:
-		MiniMapLayer* flags_;
+		MiniMapLayer* minimap_layers_;
+		MiniMapType* minimap_type_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;

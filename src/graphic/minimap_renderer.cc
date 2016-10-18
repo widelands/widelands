@@ -86,17 +86,53 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	return color;
 }
 
-void draw_view_window(const Rectf& view_area, const bool zoom, Texture* texture) {
+void draw_view_window(const Map& map,
+                      const Rectf& view_area,
+                      const MiniMapType minimap_type,
+                      const bool zoom,
+                      Texture* texture) {
 	const float divider = zoom ? 1.f : 2.f;
-	int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
-	int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
-	const Vector2i texture_center(texture->width() / 2, texture->height() / 2);
+	const int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
+	const int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
+
+	Vector2i center_pixel;
+	switch (minimap_type) {
+		case MiniMapType::kStaticViewWindow:
+		   center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
+		   break;
+
+		case MiniMapType::kStaticMap: {
+		   Vector2i origin = round(view_area.center());
+		   MapviewPixelFunctions::normalize_pix(map, &origin);
+		   center_pixel =
+		      Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
+		   break;
+	   }
+	}
+
+	const int width = zoom ? map.get_width() * 2 : map.get_width();
+	const int height = zoom ? map.get_height() * 2 : map.get_height();
+	const auto make_red = [width, height, &texture](int x, int y) {
+		if (x < 0) {
+			x += width;
+		}
+		if (x >= width) {
+			x -= width;
+		}
+		if (y < 0) {
+			y += height;
+		}
+		if (y >= height) {
+			y -= height;
+		}
+		texture->set_pixel(x, y, kRed);
+	};
 
 	bool draw = true;
 	for (int y = -half_height; y <= half_height; ++y) {
 		if (draw) {
-			texture->set_pixel(-half_width + texture_center.x, y + texture_center.y, kRed);
-			texture->set_pixel(half_width + texture_center.x, y + texture_center.y, kRed);
+			make_red(-half_width + center_pixel.x, y + center_pixel.y);
+			make_red(half_width + center_pixel.x, y + center_pixel.y);
 		}
 		draw = !draw;
 	}
@@ -104,8 +140,8 @@ void draw_view_window(const Rectf& view_area, const bool zoom, Texture* texture)
 	draw = true;
 	for (int x = -half_width; x <= half_width; ++x) {
 		if (draw) {
-			texture->set_pixel(x + texture_center.x, -half_height + texture_center.y, kRed);
-			texture->set_pixel(x + texture_center.x, half_height + texture_center.y, kRed);
+			make_red(x + center_pixel.x, -half_height + center_pixel.y);
+			make_red(x + center_pixel.x, half_height + center_pixel.y);
 		}
 		draw = !draw;
 	}
@@ -158,18 +194,25 @@ Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Rectf& view_area,
                                 MiniMapType minimap_type,
 										  const bool zoom) {
-	assert(minimap_type == MiniMapType::kStaticViewWindow);
+	Vector2f top_left;
+	switch (minimap_type) {
+		case MiniMapType::kStaticViewWindow:
+			top_left =
+			view_area.center() -
+			Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+			break;
 
-	Vector2f top_left =
-	   view_area.center() -
-	   Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+		case MiniMapType::kStaticMap:
+			top_left = Vector2f(0., 0.);
+			break;
+	}
 
 	const float multiplier = zoom ? 2.f : 1.f;
-	Vector2i clicked =
+	Vector2i map_pixel =
 	   round(top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                               minimap_pixel.y / multiplier * kTriangleHeight));
-	MapviewPixelFunctions::normalize_pix(map, &clicked);
-	return clicked;
+	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
+	return map_pixel;
 }
 
 std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
@@ -177,8 +220,6 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Rectf& view_area,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
-	assert(minimap_type == MiniMapType::kStaticViewWindow);
-
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created texture could be cached and only redrawn two
 	//       or three times per second
@@ -201,7 +242,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	   texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
 
 	if (layers & MiniMapLayer::ViewWindow) {
-		draw_view_window(view_area, zoom, texture.get());
+		draw_view_window(map, view_area, minimap_type, zoom, texture.get());
 	}
 	texture->unlock(Texture::Unlock_Update);
 

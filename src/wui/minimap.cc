@@ -33,6 +33,7 @@
 
 MiniMap::View::View(UI::Panel& parent,
                     MiniMapLayer* flags,
+                    MiniMapType* type,
                     int32_t const x,
                     int32_t const y,
                     uint32_t const,
@@ -41,7 +42,8 @@ MiniMap::View::View(UI::Panel& parent,
    : UI::Panel(&parent, x, y, 10, 10),
      ibase_(ibase),
      pic_map_spot_(g_gr->images().get("images/wui/overlays/map_spot.png")),
-     flags_(flags) {
+     minimap_layers_(flags),
+     minimap_type_(type) {
 }
 
 void MiniMap::View::set_view(const Rectf& view_area) {
@@ -49,10 +51,9 @@ void MiniMap::View::set_view(const Rectf& view_area) {
 }
 
 void MiniMap::View::draw(RenderTarget& dst) {
-	// TODO(sirver): In the editor, this should be kStaticMap.
 	minimap_image_ =
-	   draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, MiniMapType::kStaticViewWindow,
-	                *flags_ | MiniMapLayer::ViewWindow);
+	   draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, *minimap_type_,
+	                *minimap_layers_ | MiniMapLayer::ViewWindow);
 	dst.blit(Vector2f(), minimap_image_.get());
 }
 
@@ -67,8 +68,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	dynamic_cast<MiniMap&>(*get_parent())
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
-	                                       MiniMapType::kStaticViewWindow,
-	                                       *flags_ & MiniMapLayer::Zoom2));
+	                                       *minimap_type_, *minimap_layers_ & MiniMapLayer::Zoom2));
 	return true;
 }
 
@@ -114,7 +114,7 @@ inline uint32_t MiniMap::but_h() const {
 }
 MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
    : UI::UniqueWindow(&ibase, "minimap", registry, 0, 0, _("Map")),
-     view_(*this, &registry->flags, 0, 0, 0, 0, ibase),
+     view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
      button_terrn(this,
                   "terrain",
@@ -210,14 +210,14 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 }
 
 void MiniMap::toggle(MiniMapLayer const button) {
-	*view_.flags_ = MiniMapLayer(*view_.flags_ ^ button);
+	*view_.minimap_layers_ = MiniMapLayer(*view_.minimap_layers_ ^ button);
 	if (button == MiniMapLayer::Zoom2)
 		resize();
 	update_button_permpressed();
 }
 
 void MiniMap::resize() {
-	view_.set_zoom(*view_.flags_ & MiniMapLayer::Zoom2 ? 2 : 1);
+	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2 ? 2 : 1);
 	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 0));
 	button_terrn.set_size(but_w(), but_h());
@@ -234,12 +234,11 @@ void MiniMap::resize() {
 	move_inside_parent();
 }
 
-// Makes the buttons reflect the selected layers
 void MiniMap::update_button_permpressed() {
-	button_terrn.set_perm_pressed(*view_.flags_ & MiniMapLayer::Terrain);
-	button_owner.set_perm_pressed(*view_.flags_ & MiniMapLayer::Owner);
-	button_flags.set_perm_pressed(*view_.flags_ & MiniMapLayer::Flag);
-	button_roads.set_perm_pressed(*view_.flags_ & MiniMapLayer::Road);
-	button_bldns.set_perm_pressed(*view_.flags_ & MiniMapLayer::Building);
-	button_zoom.set_perm_pressed(*view_.flags_ & MiniMapLayer::Zoom2);
+	button_terrn.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Terrain);
+	button_owner.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Owner);
+	button_flags.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Flag);
+	button_roads.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Road);
+	button_bldns.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Building);
+	button_zoom.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
 }
