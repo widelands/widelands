@@ -24,6 +24,11 @@ dirname = path.dirname(__file__)
 --    :arg table: This table contains all the data that the game engine will add to this building.
 --                In addition to the :ref:`lua_tribes_buildings_common`, it contains the following entries:
 --
+--    **size**
+--        *Mandatory*. In addition to the common size values ``"small"``,
+--        ``"medium"``, or ``"big"``, production sites can also have size ``"mine"``
+--        for defining a mine building to be built on mountains.
+--
 --    **working_positions**
 --        *Mandatory*. The name and amount for each worker type working at this
 --        building, e.g.::
@@ -31,7 +36,7 @@ dirname = path.dirname(__file__)
 --            working_positions = { atlanteans_armorsmith = 1 },
 --
 --    **inputs**
---        *Mandatory*. The name and amount for each ware input queue, e.g.::
+--        *Optional*. The name and amount for each ware input queue, e.g.::
 --
 --            inputs = {
 --                { name = "coal", amount = 10 },
@@ -40,7 +45,7 @@ dirname = path.dirname(__file__)
 --            },
 --
 --    **outputs**
---        *Mandatory*. The wares/workers produced by this building, e.g.::
+--        *Optional*. The wares/workers produced by this building, e.g.::
 --
 --            outputs = { "shield_advanced", "shield_steel" },
 --
@@ -65,7 +70,7 @@ dirname = path.dirname(__file__)
 --            *Mandatory*. The actual message. Translation needs to be fetched with pgettext.
 --
 --        **productivity_threshold**
---            *Mandatory*. An int value in percent to trigger the message.
+--            *Optional. Default:* ``100``. An int value in percent to trigger the message.
 --
 --        Example::
 --

@@ -24,12 +24,20 @@ dirname = path.dirname(__file__)
 --    :arg table: This table contains all the data that the game engine will add to this building.
 --                In addition to the :ref:`lua_tribes_buildings_common`, it contains the following entries:
 --
+--    **size**
+--        *Mandatory*. In addition to the common size values ``"small"``,
+--        ``"medium"``, or ``"big"``, warehouses can also have size ``"port"``
+--        for defining a port building.
+--
 --    **heal_per_second**
 --        *Mandatory*. The number of health points that a garrisoned soldier will heal each second.
 --
 --    **conquers**
---        *Optional*. The conquer radius for this building.
+--        *Optional. Default:* ``0``. The conquer radius for this building.
 --
+--    **destructible**
+--        *Optional. Default:* ``true``. Set this to ``false`` for headquarters.
+
 tribes:new_warehouse_type {
    msgctxt = "atlanteans_building",
    name = "atlanteans_headquarters",
