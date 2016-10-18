@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
+# Renaud Bouchard, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:25+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:08+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +39,7 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Mettre en place votre économie, la faire grandir et  fonctionner correctement est la partie la plus importante de Widelands. Mais vous ne pouvez pas contrôler directement vos ouvriers, ils agiront en fonction des conditions générales que vous aurez créé."
+msgstr "Mettre en place votre économie, la faire grandir et fonctionner correctement est la partie la plus importante de Widelands. Mais vous ne pouvez pas contrôler directement vos ouvriers, ils agiront en fonction des conditions générales que vous aurez créé."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
@@ -430,7 +431,7 @@ msgstr "Cette encyclopédie est accessible via"
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
-msgstr "le bouton d'aide en bas. Pour chaque marchandise de votre tribu, vous trouverez  un court texte d'aide, la liste des bâtiments qui la produisent ainsi que les marchandises requises."
+msgstr "le bouton d'aide en bas. Pour chaque marchandise de votre tribu, vous trouverez un court texte d'aide, la liste des bâtiments qui la produisent ainsi que les marchandises requises."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
@@ -719,6 +720,10 @@ msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
 msgstr "Fixez la quantité cible des colonnes de marbre à 20 et attendez que vos tailleurs de pierre les produisent."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Produisez 20 colonnes de marbre."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
