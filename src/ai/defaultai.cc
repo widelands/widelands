@@ -1484,7 +1484,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			// field.military_score_  += 50;
 			field.military_score_ += management_data.get_military_number_at(0);
 			field.military_score_ += std::abs(management_data.get_military_number_at(39));
-			field.military_score_ += management_data.neuron_pool[0].get_result_safe(
+			field.military_score_ -= management_data.neuron_pool[0].get_result_safe(
 			   field.military_loneliness / 50, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[4].get_result_safe(
 			   (field.area_military_capacity + 4) / 5, kAbsValue);
@@ -1509,7 +1509,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		} else if (field.near_border) {
 			// near border, but not enemy nearby
 			field.military_score_ += management_data.get_military_number_at(1);
-			field.military_score_ += management_data.neuron_pool[1].get_result_safe(
+			field.military_score_ -= management_data.neuron_pool[1].get_result_safe(
 			   field.military_loneliness / 40, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[5].get_result_safe(
 			   (field.area_military_capacity + 4) / 5, kAbsValue);
@@ -1522,7 +1522,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		} else if (field.inland) {
 			// inland
 			field.military_score_ += management_data.get_military_number_at(2);
-			field.military_score_ += management_data.neuron_pool[2].get_result_safe(
+			field.military_score_ -= management_data.neuron_pool[2].get_result_safe(
 			   field.military_loneliness / 40, kAbsValue);
 			field.military_score_ -= management_data.neuron_pool[6].get_result_safe(
 			   (field.area_military_capacity + 4) / 5, kAbsValue);
@@ -1550,7 +1550,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		} else {
 			field.military_score_ += management_data.get_military_number_at(9);
 		}
-		field.military_score_ +=
+		field.military_score_ -=
 		   management_data.neuron_pool[3].get_result_safe(field.military_loneliness / 40, kAbsValue);
 		field.military_score_ -= management_data.neuron_pool[7].get_result_safe(
 		   (field.area_military_capacity + 4) / 5, kAbsValue) / 2;
@@ -2495,10 +2495,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					else if (bo.is_shipyard) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 1 &&
+						if (bf->open_water_nearby > 3 &&
 						    seafaring_economy) {
 							printf (" Considering shipyard %d  %d  %d\n", bf->open_water_nearby, bo.total_count(), bo.unconnected_count);
-							prio += productionsites.size() * 5 + bf->open_water_nearby;
+							prio += productionsites.size() * 5 + bf->open_water_nearby * 2;
 						} else {
 							continue;
 						}
