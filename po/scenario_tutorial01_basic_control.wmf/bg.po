@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 07:51+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 20:06+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -858,6 +858,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Да демонтирате кариерата: някой строител ще дойде от щаба и ще демонтира кариерата тухла по тухла. Така ще си върнете част от ресурсите, вложени при строежа."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Разрушете двете кариери"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

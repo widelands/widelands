@@ -1,4 +1,4 @@
-### Build 19 until r8110
+### Build 19 until r8139
 
 
 * Animations, Icons and Overlays
@@ -57,7 +57,7 @@
   - New maps: Archipelago Sea, Dolomites, Wide World
   - Removed maps: Dry Riverbed, Long long way, War of the Valleys
   - Overhauled maps: Comet Islands, Full Moon, Glacier Lake, Kings and Queens,
-    Last Bastion, The Nile, Twin Lagoons, Volcanic Winter
+    Last Bastion, River Explorers, The Nile, Twin Lagoons, Volcanic Winter
   - Added "hint" to the json file created by wl_map_info for use on the website.
 
 
@@ -125,7 +125,6 @@
   - Other tribes’ buildings that have been conquered can now be dismantled
   - Balancing: Added gold to building cost for Atlantean training sites.
     Made Barbarian attack stronger.
-  - Trainers now need the same tools as a soldier.
   - When an expedition ship places a port, a bit of land is cleared of trees to
     make room for a few buildings.
   - Ports can be affected by terrain changes up to 3 tiles away from their original

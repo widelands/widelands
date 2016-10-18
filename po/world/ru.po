@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2016-04-07 22:57+0000\n"
 "Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -46,11 +46,11 @@ msgstr "лань"
 msgid "Duck"
 msgstr "утка"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "лось"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "лиса"
 
@@ -70,11 +70,11 @@ msgstr "северный олень"
 msgid "Sheep"
 msgstr "овца"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "олень"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "кабан"
 
@@ -82,7 +82,7 @@ msgstr "кабан"
 msgid "Wisent"
 msgstr "зубр"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "волк"
 
