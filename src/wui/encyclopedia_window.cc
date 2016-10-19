@@ -172,7 +172,7 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 			for (const std::string& parameter : entry.script_parameters) {
 				cr->push_arg(parameter);
 			}
-			cr->resume(); // NOCOM this warns about unaccessed keys.
+			cr->resume();  // NOCOM this warns about unaccessed keys.
 			table = cr->pop_table();
 		}
 		contents_.at(tab_name)->set_text(
