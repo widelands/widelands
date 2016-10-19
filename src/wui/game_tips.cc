@@ -59,9 +59,6 @@ void GameTips::load_tips(std::string name) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		cr->resume();
-		table = cr->pop_table();
 		std::unique_ptr<LuaTable> tip_table;
 		for (const int key : table->keys<int>()) {
 			tip_table = table->get_table(key);

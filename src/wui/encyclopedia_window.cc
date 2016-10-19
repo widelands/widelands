@@ -166,12 +166,13 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 	const EncyclopediaEntry& entry = lists_.at(tab_name)->get_selected();
 	try {
 		std::unique_ptr<LuaTable> table(lua_->run_script(entry.script_path));
+		table->do_not_warn_about_unaccessed_keys();
 		if (!entry.script_parameters.empty()) {
 			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 			for (const std::string& parameter : entry.script_parameters) {
 				cr->push_arg(parameter);
 			}
-			cr->resume();
+			cr->resume(); // NOCOM this warns about unaccessed keys.
 			table = cr->pop_table();
 		}
 		contents_.at(tab_name)->set_text(

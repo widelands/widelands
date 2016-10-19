@@ -25,6 +25,7 @@
 
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
@@ -41,6 +42,12 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
+		upcast(Widelands::Game, game, &parent.egbase());
+		if (game->game_controller()->get_game_type() == Widelands::GameController::GameType::SINGLEPLAYER) {
+			cr->push_arg("singleplayer");
+		} else {
+			cr->push_arg("multiplayer");
+		}
 		cr->resume();
 		init(parent, cr->pop_table());
 	} catch (LuaError& err) {
