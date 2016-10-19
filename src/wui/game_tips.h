@@ -39,7 +39,7 @@ private:
 		std::string text;
 		int32_t interval;
 	};
-	void load_tips(std::string);
+	void load_tips(std::string name);
 	void show_tip(int32_t index);
 
 	uint32_t lastUpdated_;

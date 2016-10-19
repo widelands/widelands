@@ -25,9 +25,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
-#include "profile/profile.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
-#define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
@@ -36,7 +36,7 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
      progressWindow_(progressWindow),
      registered_(false),
      lastTip_(0) {
-	// Loading texts-locals, for translating the tips
+	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
 	for (uint8_t i = 0; i < names.size(); ++i)
@@ -54,24 +54,25 @@ GameTips::~GameTips() {
 	stop();
 }
 
-/// Loads tips out of \var filename
+/// Loads tips out of \var name
 void GameTips::load_tips(std::string name) {
-	std::string filename = "txts/tips/" + name + ".tip";
 	try {
-		Profile prof(filename.c_str());
-		while (Section* const s = prof.get_next_section(nullptr)) {
-			char const* const text = s->get_string("text");
-			if (nullptr == text)
-				continue;
-
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->resume();
+		table = cr->pop_table();
+		std::unique_ptr<LuaTable> tip_table;
+		for (const int key : table->keys<int>()) {
+			tip_table = table->get_table(key);
 			Tip tip;
-			tip.text = text;
-			tip.interval = s->get_int("sec", DEFAULT_INTERVAL);
+			tip.text = tip_table->get_string("text");
+			tip.interval = tip_table->get_int("seconds");
 			tips_.push_back(tip);
 		}
-	} catch (std::exception&) {
-		// just ignore - tips do not impact game
-		return;
+	} catch (LuaError& err) {
+		log("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		// No further handling necessary - tips do not impact game
 	}
 }
 
