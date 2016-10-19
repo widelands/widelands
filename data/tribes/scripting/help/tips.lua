@@ -67,6 +67,7 @@ return {
       text = text .. h2(_"General")
       text = text .. format_tips(get_general_tips())
 
+      set_textdomain("tribes_encyclopedia")
       return {
         title = _"Tips",
         text = rt(text)

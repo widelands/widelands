@@ -264,3 +264,14 @@ function text_line(t1, t2, imgstr)
          t2 .. "<br></p><p font-size=8> <br></p></rt>"
    end
 end
+
+-- RST
+-- .. function:: paragraphdivider()
+--
+--    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function
+--    and need to divide the speech into multiple paragraphs.
+--
+--    :returns: <br></p><p font-size=8><br></p><p line-spacing=3 font-size=12>
+function paragraphdivider()
+   return ("<br></p><p font-size=8><br></p><p line-spacing=3 font-size=12>")
+end
