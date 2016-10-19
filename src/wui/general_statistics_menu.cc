@@ -46,6 +46,11 @@ static char const* const flag_pictures[] = {
    "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
    "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
    "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
+   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png",
+   // Repeat so we can have lots of players for the AI
+   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
+   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
+   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
    "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
 }  // namespace
 

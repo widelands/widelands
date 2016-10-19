@@ -53,6 +53,15 @@ static char const* const player_pictures_small[] = {
    "images/players/fsel_editor_set_player_05_pos.png",
    "images/players/fsel_editor_set_player_06_pos.png",
    "images/players/fsel_editor_set_player_07_pos.png",
+   "images/players/fsel_editor_set_player_08_pos.png",
+   // Repeat so we can have lots of players for the AI
+   "images/players/fsel_editor_set_player_01_pos.png",
+   "images/players/fsel_editor_set_player_02_pos.png",
+   "images/players/fsel_editor_set_player_03_pos.png",
+   "images/players/fsel_editor_set_player_04_pos.png",
+   "images/players/fsel_editor_set_player_05_pos.png",
+   "images/players/fsel_editor_set_player_06_pos.png",
+   "images/players/fsel_editor_set_player_07_pos.png",
    "images/players/fsel_editor_set_player_08_pos.png"};
 }  // namespace
 

@@ -63,6 +63,15 @@ static char const* const player_pictures[] = {"images/players/editor_player_01_s
                                               "images/players/editor_player_05_starting_pos.png",
                                               "images/players/editor_player_06_starting_pos.png",
                                               "images/players/editor_player_07_starting_pos.png",
+                                              "images/players/editor_player_08_starting_pos.png",
+                                              // Repeat so we can have lots of players for the AI
+                                              "images/players/editor_player_01_starting_pos.png",
+                                              "images/players/editor_player_02_starting_pos.png",
+                                              "images/players/editor_player_03_starting_pos.png",
+                                              "images/players/editor_player_04_starting_pos.png",
+                                              "images/players/editor_player_05_starting_pos.png",
+                                              "images/players/editor_player_06_starting_pos.png",
+                                              "images/players/editor_player_07_starting_pos.png",
                                               "images/players/editor_player_08_starting_pos.png"};
 
 using Widelands::Building;

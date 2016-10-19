@@ -45,8 +45,22 @@ static char const* const flag_pictures[] = {
    "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
    "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
    "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
+   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png",
+   // Repeat so we can have lots of players for the AI
+   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
+   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
+   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
    "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
 static char const* const player_pictures_small[] = {
+   "images/players/fsel_editor_set_player_01_pos.png",
+   "images/players/fsel_editor_set_player_02_pos.png",
+   "images/players/fsel_editor_set_player_03_pos.png",
+   "images/players/fsel_editor_set_player_04_pos.png",
+   "images/players/fsel_editor_set_player_05_pos.png",
+   "images/players/fsel_editor_set_player_06_pos.png",
+   "images/players/fsel_editor_set_player_07_pos.png",
+   "images/players/fsel_editor_set_player_08_pos.png",
+   // Repeat so we can have lots of players for the AI
    "images/players/fsel_editor_set_player_01_pos.png",
    "images/players/fsel_editor_set_player_02_pos.png",
    "images/players/fsel_editor_set_player_03_pos.png",
