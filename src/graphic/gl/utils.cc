@@ -170,7 +170,8 @@ void Program::build(const std::string& program_name) {
 }
 
 State::State()
-   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
+   : target_to_texture_(kMaxTextureTargets), last_active_texture_(NONE),
+     current_framebuffer_(0), current_framebuffer_texture_(0) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
@@ -181,7 +182,8 @@ void State::bind(const GLenum target, const GLuint texture) {
 }
 
 void State::do_bind(const GLenum target, const GLuint texture) {
-	const auto currently_bound_texture = target_to_texture_[target];
+	const unsigned target_idx = target - GL_TEXTURE0;
+	const auto currently_bound_texture = target_to_texture_[target_idx];
 	if (currently_bound_texture == texture) {
 		return;
 	}
@@ -191,23 +193,10 @@ void State::do_bind(const GLenum target, const GLuint texture) {
 	}
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	target_to_texture_[target] = texture;
-	texture_to_target_[currently_bound_texture] = NONE;
-	texture_to_target_[texture] = target;
-}
-
-void State::unbind_texture_if_bound(const GLuint texture) {
-	if (texture == 0) {
-		return;
-	}
-	const auto target = texture_to_target_[texture];
-	if (target != 0) {
-		do_bind(target, 0);
-	}
+	target_to_texture_[target_idx] = texture;
 }
 
 void State::delete_texture(const GLuint texture) {
-	unbind_texture_if_bound(texture);
 	glDeleteTextures(1, &texture);
 
 	if (current_framebuffer_texture_ == texture) {
@@ -227,7 +216,6 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	if (framebuffer != 0) {
-		unbind_texture_if_bound(texture);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
 		assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 	}

@@ -110,14 +110,8 @@ public:
 	void bind_framebuffer(GLuint framebuffer, GLuint texture);
 
 	// Wrapper around glActiveTexture() and glBindTexture(). We never unbind a
-	// texture, i.e. calls with texture == 0 are ignored. It costs only time and
-	// is only needed when the bounded texture is rendered on - see
-	// 'unbind_texture_if_bound'.
+	// texture, i.e. calls with texture == 0 are ignored.
 	void bind(GLenum target, GLuint texture);
-
-	// Checks if the texture is bound to any target. If so, unbinds it. This is
-	// needed before the texture is used as target for rendering.
-	void unbind_texture_if_bound(GLuint texture);
 
 	void delete_texture(GLuint texture);
 
@@ -126,8 +120,9 @@ public:
 	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);
 
 private:
-	std::unordered_map<GLenum, GLuint> target_to_texture_;
-	std::unordered_map<GLuint, GLenum> texture_to_target_;
+	static const unsigned kMaxTextureTargets = 16;
+
+	std::vector<GLuint> target_to_texture_;
 	std::unordered_set<GLint> enabled_attrib_arrays_;
 	GLenum last_active_texture_;
 	GLuint current_framebuffer_;
