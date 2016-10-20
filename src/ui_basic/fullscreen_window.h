@@ -68,6 +68,8 @@ protected:
 	void set_frame_image(FullscreenWindow::Frames id, const std::string& filename);
 	/// Add an overlay images to be blitted according to 'align'.
 	void add_overlay_image(const std::string& filename, UI::Align align);
+	/// Remove all overlay images
+	void clear_overlays();
 
 private:
 	/// Returns the image for the given frame position.

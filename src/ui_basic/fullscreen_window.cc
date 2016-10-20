@@ -58,6 +58,10 @@ void FullscreenWindow::add_overlay_image(const std::string& filename, UI::Align 
 	overlays_.push_back(std::make_pair(g_gr->images().get(filename), align));
 }
 
+void FullscreenWindow::clear_overlays() {
+	overlays_.clear();
+}
+
 void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id,
                                        const std::__cxx11::string& filename) {
 	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(filename)));

@@ -26,6 +26,7 @@
 
 #include "base/point.h"
 #include "base/rect.h"
+#include "ui_basic/fullscreen_window.h"
 
 class Image;
 class RenderTarget;
@@ -46,7 +47,7 @@ struct IProgressVisualization {
 };
 
 /// Manages a progress window on the screen.
-struct ProgressWindow {
+struct ProgressWindow : public UI::FullscreenWindow {
 	ProgressWindow(const std::string& background = std::string());
 	~ProgressWindow();
 
@@ -67,7 +68,7 @@ private:
 	VisualizationArray visualizations_;
 	std::string background_;
 
-	void draw_background(RenderTarget& rt, uint32_t xres, uint32_t yres);
+	void draw(RenderTarget&) override;
 	void update(bool repaint);
 };
 }
