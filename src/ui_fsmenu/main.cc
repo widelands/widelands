@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
+   : FullscreenMenuMainMenu(),
 
      // Buttons
      // This box needs to be a bit higher than in the other menus, because we have a lot of buttons
@@ -197,6 +197,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox.add(&exit, UI::Align::kHCenter);
 
 	vbox.set_size(butw_, get_h() - vbox.get_y());
+	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
 }
 
 void FullscreenMenuMain::clicked_ok() {

@@ -90,7 +90,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 // TODO(GunChleoc): Arabic: This doesn't fit the window in Arabic.
 FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
-   : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butw_(get_w() / 5),

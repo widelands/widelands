@@ -96,7 +96,7 @@ private:
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butw_(get_w() / 4),

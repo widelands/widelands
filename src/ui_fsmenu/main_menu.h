@@ -28,13 +28,8 @@
  */
 class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
-	/// Calls FullscreenMenuMainMenu(const std::string& background_image)
-	/// with a default background image
+	/// Assigns values for alignment and size, depending on screen size
 	FullscreenMenuMainMenu();
-
-	/// Sets the background image and assigns values
-	/// for alignment and size, depending on screen size
-	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
 	const uint32_t box_x_, box_y_;
