@@ -590,7 +590,7 @@ bool Building::fetch_from_flag(Game&) {
 void Building::draw(uint32_t gametime,
                     const DrawText draw_text,
                     const Vector2f& point_on_dst,
-                    float zoom,
+                    const float zoom,
                     RenderTarget* dst) {
 	dst->blit_animation(
 	   point_on_dst, zoom, anim_, gametime - animstart_, get_owner()->get_playercolor());
@@ -598,7 +598,7 @@ void Building::draw(uint32_t gametime,
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, dst);
+	draw_info(draw_text, point_on_dst, zoom, dst);
 }
 
 /*
@@ -608,11 +608,12 @@ Draw overlay help strings when enabled.
 */
 void Building::draw_info(const DrawText draw_text,
                          const Vector2f& point_on_dst,
+								 const float zoom,
                          RenderTarget* dst) {
 	const std::string statistics_string =
 	   (draw_text & DrawText::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
-	do_draw_info(draw_text & DrawText::kCensus, info_string(InfoStringFormat::kCensus),
-	             draw_text & DrawText::kStatistics, statistics_string, *dst, point_on_dst);
+	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
+	             zoom, dst);
 }
 
 int32_t

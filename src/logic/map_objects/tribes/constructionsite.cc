@@ -372,6 +372,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	                    player_color, Recti(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, dst);
+	draw_info(draw_text, point_on_dst, zoom, dst);
 }
 }

@@ -496,12 +496,11 @@ void Immovable::draw_construction(const uint32_t gametime,
 	                   Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(draw_text & DrawText::kCensus, descr().descname(),
-	             draw_text & DrawText::kStatistics,
+	do_draw_info(draw_text, descr().descname(),
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
-	             *dst, point_on_dst);
+	             point_on_dst, zoom, dst);
 }
 
 /**

@@ -247,6 +247,6 @@ void DismantleSite::draw(uint32_t gametime,
 	   point_on_dst, zoom, anim_idx, tanim, player_color, Recti(Vector2i(0, lines), w, h - lines));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, dst);
+	draw_info(draw_text, point_on_dst, zoom, dst);
 }
 }

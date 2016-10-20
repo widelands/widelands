@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -405,12 +406,12 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(bool show_census,
+	void do_draw_info(const DrawText& draw_text,
 	                  const std::string& census,
-	                  bool show_statictics,
 	                  const std::string& statictics,
-	                  RenderTarget& dst,
-	                  const Vector2f& pos) const;
+	                  const Vector2f& field_on_dst,
+	                  const float zoom,
+	                  RenderTarget* dst) const;
 
 	void molog(char const* fmt, ...) const __attribute__((format(printf, 2, 3)));
 

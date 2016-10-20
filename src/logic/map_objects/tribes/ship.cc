@@ -983,8 +983,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(draw_text & DrawText::kCensus, shipname_, draw_text & DrawText::kStatistics,
-	             statistics_string, *dst, calc_drawpos(egbase, field_on_dst, zoom));
+	do_draw_info(
+	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, zoom), zoom, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

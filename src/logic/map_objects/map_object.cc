@@ -445,29 +445,36 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-// NOCOM(#sirver): pass down showtext and maybe zoom?
-void MapObject::do_draw_info(bool show_census,
+void MapObject::do_draw_info(const DrawText& draw_text,
                              const std::string& census,
-                             bool show_statictics,
                              const std::string& statictics,
-                             RenderTarget& dst,
-                             const Vector2f& pos) const {
-	if (show_census || show_statictics) {
-		// We always render this so we can have a stable position for the statistics string.
-		const Image* rendered_census_info =
-		   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter), 120);
-		const Vector2f census_pos = pos - Vector2f(0, 48);
+                             const Vector2f& field_on_dst,
+                             float zoom,
+                             RenderTarget* dst) const {
+	if (draw_text == DrawText::kNone) {
+		return;
+	}
 
-		if (show_census) {
-			dst.blit(
-			   census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
-		}
+	// Rendering text is expensive, so let's just do it for only a few sizes.
+	zoom = std::round(zoom);
+	if (zoom == 0.f) {
+		return;
+	}
+	const int font_size = zoom * UI_FONT_SIZE_SMALL;
 
-		if (show_statictics && !statictics.empty()) {
-			dst.blit(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10),
-			         UI::g_fh1->render(as_condensed(statictics)), BlendMode::UseAlpha,
-			         UI::Align::kCenter);
-		}
+	// We always render this so we can have a stable position for the statistics string.
+	const Image* rendered_census_info =
+	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
+	const Vector2f census_pos = field_on_dst - Vector2f(0, 48) * zoom;
+
+	if (draw_text & DrawText::kCensus) {
+		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+	}
+
+	if (draw_text & DrawText::kStatistics && !statictics.empty()) {
+		dst->blit(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * zoom),
+		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size)),
+		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }
 
