@@ -101,9 +101,10 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
                                     const FieldsToDraw::Field& field,
                                     const float zoom,
 												RenderTarget* dst) {
-	if (BaseImmovable* const imm = field.fcoords.field->get_immovable()) {
-		imm->draw(egbase.get_gametime(), BaseImmovable::ShowText::kNone, field.fcoords,
-		          field.screen_pixel, zoom, dst);
+	BaseImmovable* const imm = field.fcoords.field->get_immovable();
+	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+		imm->draw(
+		   egbase.get_gametime(), BaseImmovable::ShowText::kNone, field.screen_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 		bob->draw(egbase, field.screen_pixel, zoom, dst);

@@ -313,7 +313,6 @@ protected:
 
 	void draw(uint32_t gametime,
 	          ShowText show_text,
-	          const Coords& coords_to_draw,
 	          const Vector2f& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;

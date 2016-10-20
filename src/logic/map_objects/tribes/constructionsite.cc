@@ -299,15 +299,10 @@ Draw the construction site.
 */
 void ConstructionSite::draw(uint32_t gametime,
                             ShowText show_text,
-                            const Coords& coords_to_draw,
                             const Vector2f& point_on_dst,
                             float zoom,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-	// NOCOM(#sirver): can this be hoisted outsite of the draw function?
-	if (coords_to_draw != position_)
-		return;  // draw big buildings only once
-
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	dst->blit_animation(point_on_dst, zoom, anim_, tanim, player_color);
@@ -337,7 +332,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
 	const uint32_t cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
-	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;
 
 	const uint16_t w = anim.width();

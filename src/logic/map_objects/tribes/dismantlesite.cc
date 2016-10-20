@@ -214,15 +214,10 @@ Draw it.
 */
 void DismantleSite::draw(uint32_t gametime,
                          const ShowText show_text,
-                         const Coords& coords_to_draw,
                          const Vector2f& point_on_dst,
                          float zoom,
                          RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-
-	if (coords_to_draw != position_)
-		return;  // draw big buildings only once
-
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker

@@ -440,7 +440,6 @@ void Immovable::act(Game& game, uint32_t const data) {
 
 void Immovable::draw(uint32_t gametime,
                      const ShowText show_text,
-                     const Coords&,
                      const Vector2f& point_on_dst,
                      float zoom,
                      RenderTarget* dst) {

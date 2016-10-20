@@ -590,19 +590,16 @@ bool Building::fetch_from_flag(Game&) {
 // NOCOM(#sirver): ShowText -> DrawText?
 void Building::draw(uint32_t gametime,
                     const ShowText show_text,
-                    const Coords& coords_to_draw,
                     const Vector2f& point_on_dst,
                     float zoom,
                     RenderTarget* dst) {
-	if (coords_to_draw == position_) {  // draw big buildings only once
-		dst->blit_animation(
-		   point_on_dst, zoom, anim_, gametime - animstart_, get_owner()->get_playercolor());
+	dst->blit_animation(
+	   point_on_dst, zoom, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
-		//  door animation?
+	//  door animation?
 
-		//  overlay strings (draw when enabled)
-		draw_info(show_text, point_on_dst, dst);
-	}
+	//  overlay strings (draw when enabled)
+	draw_info(show_text, point_on_dst, dst);
 }
 
 /*
