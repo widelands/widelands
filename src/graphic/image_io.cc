@@ -124,7 +124,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		// Write each row
-		texture->lock();
+		texture->lock(Texture::Lock_Preserve);
 
 		// Write each row
 		RGBAColor color;

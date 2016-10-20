@@ -50,6 +50,25 @@ public:
 	// Implements Image.
 	const BlitData& blit_data() const override;
 
+	enum LockMode {
+		/**
+		* Previously existing pixel data will be discarded.
+		*
+		* The contents of the texture will be undefined unless all pixels
+		* values are explicitly set and \ref unlock is called in Unlock_Update
+		* mode.
+		*/
+		Lock_Discard = 0,
+
+		/**
+		* The existing data in the texture will be preserved.
+		*
+		* Avoid this when possible, since the texture may have to be
+		* re-downloaded from the GPU which involves a graphics pipeline stall.
+		*/
+		Lock_Preserve
+	};
+
 	enum UnlockMode {
 		/**
 	    * Update mode will ensure that any changes in the pixel data
@@ -68,7 +87,7 @@ public:
 
 	// Lock/Unlock pairs must guard any of the direct pixel access using the
 	// functions below. Lock/Unlock pairs cannot be nested.
-	void lock();
+	void lock(LockMode);
 	void unlock(UnlockMode);
 
 	// Returns the color of the pixel.

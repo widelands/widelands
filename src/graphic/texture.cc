@@ -189,7 +189,7 @@ void Texture::init(uint16_t w, uint16_t h) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
-void Texture::lock() {
+void Texture::lock(LockMode mode) {
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
@@ -203,8 +203,10 @@ void Texture::lock() {
 
 	pixels_.reset(new uint8_t[width() * height() * 4]);
 
-	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
-	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());
+	if (mode == Lock_Preserve) {
+		Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
+		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());
+	}
 }
 
 void Texture::unlock(UnlockMode mode) {

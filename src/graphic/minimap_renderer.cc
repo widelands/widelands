@@ -192,9 +192,7 @@ void draw_minimap_int(Texture* texture,
 				}
 			}
 
-			if (pixel_color.r != 0 || pixel_color.g != 0 || pixel_color.b != 0) {
-				texture->set_pixel(x, y, pixel_color);
-			}
+			texture->set_pixel(x, y, pixel_color);
 		}
 	}
 }
@@ -214,9 +212,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
-	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
-
-	texture->lock();
+	texture->lock(Texture::Lock_Discard);
 	draw_minimap_int(texture.get(), egbase, player, viewpoint, layers);
 	texture->unlock(Texture::Unlock_Update);
 
