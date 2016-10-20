@@ -25,14 +25,14 @@
 #include <vector>
 
 #include "graphic/align.h"
-#include "ui_basic/panel.h"
+#include "ui_basic/fullscreen_window.h"
 
 /**
  * This class is the base class for a fullscreen menu.
  * A fullscreen menu is a menu which takes the full screen; it has the size
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
-class FullscreenMenuBase : public UI::Panel {
+class FullscreenMenuBase : public UI::FullscreenWindow {
 public:
 	enum class MenuTarget {
 		kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
@@ -68,65 +68,16 @@ public:
 		kJoingame
 	};
 
-	/// Access keys for frame overlay images
-	enum class Frames {
-		kCornerTopLeft,
-		kCornerTopRight,
-		kCornerBottomLeft,
-		kCornerBottomRight,
-		kEdgeLeftTile,
-		kEdgeRightTile,
-		kEdgeTopTile,
-		kEdgeBottomTile
-	};
-	struct FramesHash {
-		template <typename T> int operator()(T t) const {
-			return static_cast<int>(t);
-		}
-	};
-
 	/// A full screen main menu outside of the game/editor itself.
 	FullscreenMenuBase();
 	virtual ~FullscreenMenuBase();
-
-	void draw(RenderTarget&) override;
-
-	///\return the size for texts fitting to current resolution
-	int fs_small();
-	int fs_big();
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
-	/// Sets the image for the given frame position.
-	void set_frame_image(FullscreenMenuBase::Frames id, const std::string& filename);
-	/// Add an overlay images to be blitted according to 'align'.
-	void add_overlay_image(const std::string& filename, UI::Align align);
-
 	virtual void clicked_back();
 	virtual void clicked_ok();
-
-private:
-	/// Returns the image for the given frame position.
-	const Image* get_frame_image(FullscreenMenuBase::Frames id) const;
-	/**
-	 * Blit an image according to the given 'align'.
-	 * If 'tiling' is set to 'UI::Align::kVertical' or 'UI::Align::kHorizontal', the image will be
-	 * tiled.
-	 */
-	void blit_image(RenderTarget& dst,
-	                const Image* image,
-	                UI::Align align,
-	                UI::Align tiling = UI::Align::kLeft);
-
-	const std::string background_image_;
-	/// These overlay images will be blitted in the order they were added and according to the given
-	/// align.
-	std::vector<std::pair<const Image*, UI::Align>> overlays_;
-	/// Images for the edges. They will be blitted in top of the overlays_.
-	std::unordered_map<FullscreenMenuBase::Frames, const Image*, FullscreenMenuBase::FramesHash>
-	   frame_overlays_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

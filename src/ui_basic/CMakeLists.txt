@@ -10,6 +10,8 @@ wl_library(ui_basic
     editbox.h
     fileview_panel.cc
     fileview_panel.h
+    fullscreen_window.cc
+    fullscreen_window.h
     icon.cc
     icon.h
     icongrid.cc
