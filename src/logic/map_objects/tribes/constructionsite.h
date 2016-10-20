@@ -115,7 +115,7 @@ protected:
 	static void wares_queue_callback(Game&, WaresQueue*, DescriptionIndex, void* data);
 
 	void draw(uint32_t gametime,
-	          ShowText show_text,
+	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;

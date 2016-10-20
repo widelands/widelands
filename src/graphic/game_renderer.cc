@@ -100,14 +100,31 @@ float field_brightness(const FCoords& fcoords,
 void draw_objects_for_visible_field(const EditorGameBase& egbase,
                                     const FieldsToDraw::Field& field,
                                     const float zoom,
+												const DrawText draw_text,
+												const Player* player,
 												RenderTarget* dst) {
 	BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+		DrawText draw_text_for_this_immovable = draw_text;
+		const Player* owner = imm->get_owner();
+		if (player != nullptr && owner != nullptr && !player->see_all() &&
+		    player->is_hostile(*owner)) {
+			draw_text_for_this_immovable =
+			   static_cast<DrawText>(draw_text_for_this_immovable & ~DrawText::kStatistics);
+		}
+
 		imm->draw(
-		   egbase.get_gametime(), BaseImmovable::ShowText::kNone, field.screen_pixel, zoom, dst);
+		   egbase.get_gametime(), draw_text_for_this_immovable, field.screen_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-		bob->draw(egbase, field.screen_pixel, zoom, dst);
+		DrawText draw_text_for_this_immovable = draw_text;
+		const Player* owner = bob->get_owner();
+		if (player != nullptr && owner != nullptr && !player->see_all() &&
+		    player->is_hostile(*owner)) {
+			draw_text_for_this_immovable =
+			   static_cast<DrawText>(draw_text_for_this_immovable & ~DrawText::kStatistics);
+		}
+		bob->draw(egbase, draw_text_for_this_immovable, field.screen_pixel, zoom, dst);
 	}
 }
 
@@ -192,6 +209,7 @@ void draw_objects(const EditorGameBase& egbase,
                   const Transform2f& mappixel_to_screen,
 						const FieldsToDraw& fields_to_draw,
                   const Player* player,
+						const DrawText draw_text,
                   RenderTarget* dst) {
 	const float zoom = mappixel_to_screen.zoom();
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
@@ -220,10 +238,10 @@ void draw_objects(const EditorGameBase& egbase,
 			}
 		}
 
-		// NOCOM(#sirver): figure out census and statistics here.
 		if (1 < field.vision) {  // Render stuff that belongs to the node.
-			draw_objects_for_visible_field(egbase, field, zoom, dst);
+			draw_objects_for_visible_field(egbase, field, zoom, draw_text, player, dst);
 		} else if (field.vision == 1) {
+			// We never show census or statistics for objects in the fog.
 			assert(player != nullptr);
 			const Map& map = egbase.map();
 			const Player::Field& player_field =
@@ -289,19 +307,22 @@ GameRenderer::~GameRenderer() {
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Transform2f& screen_to_mappixel,
                              const Widelands::Player& player,
+									  const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, screen_to_mappixel, &player, dst);
+	draw(egbase, screen_to_mappixel, draw_text, &player, dst);
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Transform2f& screen_to_mappixel,
+                             const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, screen_to_mappixel, nullptr, dst);
+	draw(egbase, screen_to_mappixel, draw_text, nullptr, dst);
 }
 
 // NOCOM(#sirver): screen_to_mappixel is not correct - it needs to add dst->offset for mapviews
 void GameRenderer::draw(const EditorGameBase& egbase,
                         const Transform2f& screen_to_mappixel,
+								const DrawText draw_text,
                         const Player* player,
                         RenderTarget* dst) {
 	Vector2f tl_map = screen_to_mappixel.apply(dst->get_offset().cast<float>());
@@ -410,6 +431,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(egbase, mappixel_to_screen, fields_to_draw_, player, dst);
+	draw_objects(egbase, mappixel_to_screen, fields_to_draw_, player, draw_text, dst);
 }
 

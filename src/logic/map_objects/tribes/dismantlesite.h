@@ -90,7 +90,7 @@ protected:
 	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	void draw(uint32_t gametime,
-	          ShowText show_text,
+	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;

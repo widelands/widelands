@@ -943,15 +943,15 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-               const Vector2f& field_on_dst,
-               const float zoom,
-               RenderTarget* dst) const {
-	Bob::draw(egbase, field_on_dst, zoom, dst);
+                const DrawText& draw_text,
+                const Vector2f& field_on_dst,
+                const float zoom,
+                RenderTarget* dst) const {
+	Bob::draw(egbase, draw_text, field_on_dst, zoom, dst);
 
 	// Show ship name and current activity
-	uint32_t const display_flags = egbase.get_ibase()->get_display_flags();
 	std::string statistics_string = "";
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if (draw_text & DrawText::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -983,9 +983,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, shipname_,
-	             display_flags & InteractiveBase::dfShowStatistics, statistics_string, *dst,
-	             calc_drawpos(egbase, field_on_dst, zoom));
+	do_draw_info(draw_text & DrawText::kCensus, shipname_, draw_text & DrawText::kStatistics,
+	             statistics_string, *dst, calc_drawpos(egbase, field_on_dst, zoom));
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

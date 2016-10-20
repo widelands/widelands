@@ -26,6 +26,7 @@
 #include "base/transform.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "logic/map_objects/draw_text.h"
 
 namespace Widelands {
 class Player;
@@ -34,16 +35,7 @@ class EditorGameBase;
 
 class RenderTarget;
 
-/**
- * This abstract base class renders the main game view into an
- * arbitrary @ref RenderTarget.
- *
- * Specializations exist for SDL software rendering and for OpenGL rendering.
- *
- * Users of this class should keep instances alive for as long as possible,
- * so that target-specific optimizations (such as caching data) can
- * be effective.
- */
+// Renders the MapView on screen.
 class GameRenderer {
 public:
 	GameRenderer();
@@ -55,19 +47,22 @@ public:
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Transform2f& screen_to_mappixel,
 	               const Widelands::Player& player,
+						DrawText draw_text,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Transform2f& screen_to_mappixel,
+						DrawText draw_text,
 	               RenderTarget* dst);
 
 private:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
 	void draw(const Widelands::EditorGameBase& egbase,
-	               const Transform2f& screen_to_mappixel,
+	          const Transform2f& screen_to_mappixel,
+	          DrawText draw_text,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
 

@@ -26,6 +26,7 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/player.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
@@ -129,10 +130,21 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
+	int draw_text = DrawText::kNone;
+	auto display_flags = intbase().get_display_flags();
+	if (display_flags & InteractiveBase::dfShowCensus) {
+		draw_text |= DrawText::kCensus;
+	}
+	if (display_flags & InteractiveBase::dfShowStatistics) {
+		draw_text |= DrawText::kStatistics;
+	}
+
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		renderer_->rendermap(egbase, panel_to_mappixel_, interactive_player->player(), &dst);
+		renderer_->rendermap(
+		   egbase, panel_to_mappixel_, interactive_player->player(), 
+			static_cast<DrawText>(draw_text), &dst);
 	} else {
-		renderer_->rendermap(egbase, panel_to_mappixel_, &dst);
+		renderer_->rendermap(egbase, panel_to_mappixel_, static_cast<DrawText>(draw_text), &dst);
 	}
 }
 

@@ -306,6 +306,10 @@ public:
 	/// Called when a new logsink is set. Used to give general information.
 	virtual void log_general_info(const EditorGameBase&);
 
+	Player* get_owner() const {
+		return owner_;
+	}
+
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
 	// to files.
@@ -413,6 +417,7 @@ protected:
 	const MapObjectDescr* descr_;
 	Serial serial_;
 	LogSink* logsink_;
+	Player* owner_;
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking

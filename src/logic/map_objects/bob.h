@@ -25,6 +25,7 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/widelands_geometry.h"
@@ -242,9 +243,7 @@ public:
 	void skip_act();
 	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float zoom) const;
 	void set_owner(Player*);
-	Player* get_owner() const {
-		return owner_;
-	}
+
 	void set_position(EditorGameBase&, const Coords&);
 	const FCoords& get_position() const {
 		return position_;
@@ -264,8 +263,11 @@ public:
 	// the field associated with this bob (if it is walking, that is its
 	// starting field) in pixel space of 'dst' (including zoom). The 'zoom' is
 	// required to draw the bob in the right size.
-	virtual void
-	draw(const EditorGameBase&, const Vector2f& field_on_dst, float zoom, RenderTarget* dst) const;
+	virtual void draw(const EditorGameBase&,
+	                  const DrawText& draw_text,
+	                  const Vector2f& field_on_dst,
+	                  float zoom,
+	                  RenderTarget* dst) const;
 
 	// For debug
 	void log_general_info(const EditorGameBase&) override;
@@ -371,7 +373,6 @@ private:
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	Player* owner_;     ///< can be 0
 	FCoords position_;  ///< where are we right now?
 	Bob* linknext_;     ///< next object on this node
 	Bob** linkpprev_;

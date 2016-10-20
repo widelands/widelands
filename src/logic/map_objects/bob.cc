@@ -89,7 +89,6 @@ Bob& BobDescr::create(EditorGameBase& egbase, Player* const owner, const Coords&
 
 Bob::Bob(const BobDescr& init_descr)
    : MapObject(&init_descr),
-     owner_(nullptr),
      position_(FCoords(Coords(0, 0), nullptr)),  // not linked anywhere
      linknext_(nullptr),
      linkpprev_(nullptr),
@@ -757,6 +756,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
+               const DrawText&,
                const Vector2f& field_on_dst,
                const float zoom,
                RenderTarget* dst) const {

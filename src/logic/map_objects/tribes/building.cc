@@ -587,9 +587,8 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 
-// NOCOM(#sirver): ShowText -> DrawText?
 void Building::draw(uint32_t gametime,
-                    const ShowText show_text,
+                    const DrawText draw_text,
                     const Vector2f& point_on_dst,
                     float zoom,
                     RenderTarget* dst) {
@@ -599,7 +598,7 @@ void Building::draw(uint32_t gametime,
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(show_text, point_on_dst, dst);
+	draw_info(draw_text, point_on_dst, dst);
 }
 
 /*
@@ -607,24 +606,13 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const ShowText show_text,
+void Building::draw_info(const DrawText draw_text,
                          const Vector2f& point_on_dst,
                          RenderTarget* dst) {
-	bool show_statistics_string = show_text & ShowText::kStatistics;
-	if (show_statistics_string) {
-		// NOCOM(#sirver): this has to be handled further up.
-		// if (upcast(InteractivePlayer const, iplayer, &igbase)) {
-			// if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
-				// show_statistics_string = false;
-			// }
-		// }
-	}
 	const std::string statistics_string =
-	   show_statistics_string ? info_string(InfoStringFormat::kStatistics) : "";
-
-	do_draw_info(show_text & ShowText::kCensus,
-	             info_string(InfoStringFormat::kCensus), show_statistics_string, statistics_string,
-	             *dst, point_on_dst);
+	   (draw_text & DrawText::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(draw_text & DrawText::kCensus, info_string(InfoStringFormat::kCensus),
+	             draw_text & DrawText::kStatistics, statistics_string, *dst, point_on_dst);
 }
 
 int32_t

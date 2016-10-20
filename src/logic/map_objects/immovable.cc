@@ -340,7 +340,6 @@ IMPLEMENTATION
 
 Immovable::Immovable(const ImmovableDescr& imm_descr)
    : BaseImmovable(imm_descr),
-     owner_(nullptr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -439,7 +438,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const ShowText show_text,
+                     const DrawText draw_text,
                      const Vector2f& point_on_dst,
                      float zoom,
                      RenderTarget* dst) {
@@ -449,12 +448,12 @@ void Immovable::draw(uint32_t gametime,
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, zoom, anim_, gametime - animstart_);
 	} else {
-		draw_construction(gametime, show_text, point_on_dst, zoom, dst);
+		draw_construction(gametime, draw_text, point_on_dst, zoom, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const ShowText show_text,
+                                  const DrawText draw_text,
                                   const Vector2f& point_on_dst,
                                   const float zoom,
                                   RenderTarget* dst) {
@@ -497,8 +496,8 @@ void Immovable::draw_construction(const uint32_t gametime,
 	                   Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(show_text & ShowText::kCensus, descr().descname(),
-	             show_text & ShowText::kStatistics,
+	do_draw_info(draw_text & DrawText::kCensus, descr().descname(),
+	             draw_text & DrawText::kStatistics,
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
@@ -1184,7 +1183,7 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), owner_(nullptr), economy_(nullptr) {
+   : BaseImmovable(mo_descr), economy_(nullptr) {
 }
 
 /**

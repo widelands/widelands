@@ -312,12 +312,12 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 	void draw(uint32_t gametime,
-	          ShowText show_text,
+	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
 				 float zoom,
 	          RenderTarget* dst) override;
 	// NOCOM(#sirver): requires zoom?
-	void draw_info(ShowText show_text, const Vector2f& point_on_dst, RenderTarget* dst);
+	void draw_info(DrawText draw_text, const Vector2f& point_on_dst, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

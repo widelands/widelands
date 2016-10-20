@@ -209,6 +209,7 @@ public:
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
+	          const DrawText& draw_text,
 	          const Vector2f& point_on_dst,
 	          float zoom,
 	          RenderTarget* dst) const override;

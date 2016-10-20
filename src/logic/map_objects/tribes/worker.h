@@ -181,6 +181,7 @@ protected:
 	                const float zoom,
 	                RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
+	          const DrawText& draw_text,
 	          const Vector2f& field_on_dst,
 	          float zoom,
 	          RenderTarget* dst) const override;

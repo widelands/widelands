@@ -2535,6 +2535,7 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
+                  const DrawText&,
                   const Vector2f& field_on_dst,
                   const float zoom,
                   RenderTarget* dst) const {
