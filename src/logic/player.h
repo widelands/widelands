@@ -25,6 +25,7 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
+#include "graphic/playercolor.h"
 #include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
@@ -64,9 +65,6 @@ struct AttackController;
  */
 class Player {
 public:
-	// hard-coded playercolors
-	static const RGBColor Colors[MAX_PLAYERS];
-
 	struct BuildingStats {
 		bool is_constructionsite;
 		Coords pos;
@@ -130,7 +128,7 @@ public:
 		return team_number_;
 	}
 	const RGBColor& get_playercolor() const {
-		return Colors[player_number_ - 1];
+		return kPlayerColors[player_number_ - 1];
 	}
 	const TribeDescr& tribe() const {
 		return tribe_;

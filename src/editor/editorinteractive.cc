@@ -38,6 +38,7 @@
 #include "editor/ui_menus/tool_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -55,25 +56,6 @@
 #include "wui/interactive_base.h"
 
 namespace {
-
-static char const* const player_pictures[] = {"images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png",
-                                              // Repeat so we can have lots of players for the AI
-                                              "images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png"};
-
 using Widelands::Building;
 
 // Load all tribes from disk.
@@ -179,7 +161,9 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
+			const Image* player_image =
+			   playercolor_image(p - 1, g_gr->images().get("images/players/player_position.png"),
+			                     g_gr->images().get("images/players/player_position_pc.png"));
 			assert(player_image);
 			mutable_field_overlay_manager()->register_overlay(
 			   sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
@@ -552,10 +536,21 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
 
-	if (char const* const sel_pic = primary.get_sel(which))
-		set_sel_picture(sel_pic);
-	else
+	if (char const* const sel_pic = primary.get_sel(which)) {
+		// NOCOM Ugly hack, but if we change the tools' get_sel_impl() return value from string to
+		// Image, bad things happen?
+		// removing overlays is still broken
+		if (upcast(EditorSetStartingPosTool, starting_pos_tool, &primary)) {
+			set_sel_picture(
+			   playercolor_image(starting_pos_tool->get_current_player() - 1,
+			                     g_gr->images().get("images/players/player_position_menu.png"),
+			                     g_gr->images().get("images/players/player_position_menu_pc.png")));
+		} else {
+			set_sel_picture(g_gr->images().get(sel_pic));
+		}
+	} else {
 		unset_sel_picture();
+	}
 	set_sel_triangles(primary.operates_on_triangles());
 }
 

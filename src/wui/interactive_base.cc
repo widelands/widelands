@@ -199,12 +199,12 @@ void InteractiveBase::set_sel_radius(const uint32_t n) {
 /*
  * Set/Unset sel picture
  */
-void InteractiveBase::set_sel_picture(const char* const file) {
-	sel_.pic = g_gr->images().get(file);
+void InteractiveBase::set_sel_picture(const Image* image) {
+	sel_.pic = image;
 	set_sel_pos(get_sel_pos());  //  redraw
 }
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture("images/ui_basic/fsel.png");
+	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
 }
 
 bool InteractiveBase::buildhelp() const {

@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"
 #include "logic/editor_game_base.h"
@@ -40,19 +41,6 @@
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
-
-namespace {
-static char const* const flag_pictures[] = {
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png",
-   // Repeat so we can have lots of players for the AI
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
-}  // namespace
 
 using namespace Widelands;
 
@@ -90,7 +78,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	for (Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
-		const RGBColor& color = Player::Colors[i];
+		const RGBColor& color = kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
@@ -121,7 +109,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Image* player_image = g_gr->images().get(flag_pictures[p - 1]);
+		const Image* player_image =
+		   playercolor_image(p - 1, g_gr->images().get("images/players/genstats_player.png"),
+		                     g_gr->images().get("images/players/genstats_player_pc.png"));
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
 		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,

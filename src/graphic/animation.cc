@@ -34,6 +34,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
+#include "graphic/playercolor.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -213,21 +214,18 @@ const Point& NonPackedAnimation::hotspot() const {
 
 Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-
 	const Image* image = g_gr->images().get(image_files_[0]);
-	int w = image->width();
-	int h = image->height();
 
-	Texture* rv = new Texture(w, h);
 	if (!hasplrclrs_ || clr == nullptr) {
 		// No player color means we simply want an exact copy of the original image.
+		const int w = image->width();
+		const int h = image->height();
+		Texture* rv = new Texture(w, h);
 		rv->blit(Rect(Point(0, 0), w, h), *image, Rect(Point(0, 0), w, h), 1., BlendMode::Copy);
+		return rv;
 	} else {
-		rv->fill_rect(Rect(Point(0, 0), w, h), RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rect(Point(0, 0), w, h), *image,
-		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Point(0, 0), w, h), *clr);
+		return playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
 	}
-	return rv;
 }
 
 const std::string& NonPackedAnimation::representative_image_filename() const {

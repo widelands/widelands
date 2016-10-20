@@ -22,46 +22,9 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "wui/field_overlay_manager.h"
-
-namespace {
-static char const* const player_pictures[] = {"images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png",
-                                              // Repeat so we can have lots of players for the AI
-                                              "images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png"};
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png",
-   // Repeat so we can have lots of players for the AI
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
 
 // global variable to pass data from callback to class
 static int32_t current_player_;
@@ -97,7 +60,7 @@ int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands
 EditorSetStartingPosTool::EditorSetStartingPosTool()
    : EditorTool(*this, *this, false), current_sel_pic_(nullptr) {
 	current_player_ = 1;
-	fsel_picsname_ = "images/players/fsel_editor_set_player_01_pos.png";
+	fsel_picsname_ = "images/players/player_position_menu.png";
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
@@ -120,7 +83,9 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 		Widelands::Coords const old_sp = map->get_starting_pos(current_player_);
 
-		const Image* player_image = g_gr->images().get(player_pictures[current_player_ - 1]);
+		const Image* player_image = playercolor_image(
+		   get_current_player() - 1, g_gr->images().get("images/players/player_position.png"),
+		   g_gr->images().get("images/players/player_position_pc.png"));
 		assert(player_image);
 
 		//  check if field is valid
@@ -146,6 +111,7 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player() const {
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	current_player_ = i;
-	fsel_picsname_ = player_pictures_small[current_player_ - 1];
+	// NOCOM
+	fsel_picsname_ = "images/players/player_position_menu.png";
 	current_sel_pic_ = fsel_picsname_;
 }

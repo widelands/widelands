@@ -24,6 +24,7 @@
 
 #include "base/time_string.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
@@ -35,19 +36,6 @@
 #include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-
-namespace {
-static char const* const flag_pictures[] = {
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png",
-   // Repeat so we can have lots of players for the AI
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
-}  // namespace
 
 #define PADDING 4
 
@@ -158,7 +146,9 @@ void GameSummaryScreen::fill_data() {
 		Widelands::Player* p = game_.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
-		const Image* player_image = g_gr->images().get(flag_pictures[pes.player - 1]);
+		const Image* player_image =
+		   playercolor_image(pes.player - 1, g_gr->images().get("images/players/genstats_player.png"),
+		                     g_gr->images().get("images/players/genstats_player_pc.png"));
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team

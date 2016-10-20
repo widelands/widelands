@@ -227,7 +227,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-		this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h(), settings, butw_, buth_);
+	   this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h(), settings, butw_, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {

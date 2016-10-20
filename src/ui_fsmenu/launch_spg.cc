@@ -27,6 +27,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -43,27 +44,6 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
-
-namespace {
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png",
-   // Repeat so we can have lots of players for the AI
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
@@ -182,7 +162,9 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		const Image* player_image = g_gr->images().get(player_pictures_small[i]);
+		const Image* player_image =
+		   playercolor_image(i, g_gr->images().get("images/players/player_position_menu.png"),
+		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 
 		pos_[i] =

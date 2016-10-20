@@ -44,6 +44,11 @@ wl_library(logic_campaign_visibility
     profile
 )
 
+wl_library(logic_constants
+  SRCS
+    constants.h
+)
+
 wl_library(logic
   SRCS
     backtrace.cc
@@ -60,7 +65,6 @@ wl_library(logic
     cmd_luascript.h
     cmd_queue.cc
     cmd_queue.h
-    constants.h
     cookie_priority_queue.h
     description_maintainer.h
     editor_game_base.cc
@@ -219,12 +223,14 @@ wl_library(logic
     graphic
     graphic_color
     graphic_image_io
+    graphic_playercolor
     graphic_surface
     graphic_text_layout
     helper
     io_fileread
     io_filesystem
     io_stream
+    logic_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry
