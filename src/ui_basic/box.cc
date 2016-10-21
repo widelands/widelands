@@ -24,6 +24,7 @@
 #include <boost/bind.hpp>
 
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
 
@@ -210,7 +211,9 @@ void Box::update_positions() {
 	if (scrollbar_)
 		totalbreadth -= Scrollbar::kSize;
 
-	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
+	for (size_t i = 0; i < items_.size(); ++i) {
+		const size_t idx =
+		   (UI::g_fh1->fontset()->is_rtl() && orientation_ == Horizontal) ? items_.size() - 1 - i : i;
 		int depth, breadth;
 		get_item_size(idx, &depth, &breadth);
 
@@ -357,7 +360,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 	switch (it.type) {
 	case Item::ItemPanel: {
 		int32_t breadth, maxbreadth;
-
+		const UI::Align align = (orientation_ == Vertical && UI::g_fh1->fontset()->is_rtl()) ?
+		                           mirror_alignment(it.u.panel.align) :
+		                           it.u.panel.align;
 		if (orientation_ == Horizontal) {
 			breadth = it.u.panel.panel->get_inner_h();
 			maxbreadth = get_inner_h();
@@ -365,7 +370,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = it.u.panel.panel->get_inner_w();
 			maxbreadth = get_inner_w();
 		}
-		switch (it.u.panel.align) {
+		switch (align) {
 		case UI::Align::kHCenter:
 			breadth = (maxbreadth - breadth) / 2;
 			break;
@@ -389,4 +394,4 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		break;  //  no need to do anything
 	};
 }
-}
+}  // namespace UI
