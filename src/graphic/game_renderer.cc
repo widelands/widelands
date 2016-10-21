@@ -100,9 +100,9 @@ float field_brightness(const FCoords& fcoords,
 void draw_objects_for_visible_field(const EditorGameBase& egbase,
                                     const FieldsToDraw::Field& field,
                                     const float zoom,
-												const DrawText draw_text,
-												const Player* player,
-												RenderTarget* dst) {
+                                    const DrawText draw_text,
+                                    const Player* player,
+                                    RenderTarget* dst) {
 	BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
 		DrawText draw_text_for_this_immovable = draw_text;
@@ -114,7 +114,7 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 		}
 
 		imm->draw(
-		   egbase.get_gametime(), draw_text_for_this_immovable, field.screen_pixel, zoom, dst);
+		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 		DrawText draw_text_for_this_immovable = draw_text;
@@ -124,7 +124,7 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 			draw_text_for_this_immovable =
 			   static_cast<DrawText>(draw_text_for_this_immovable & ~DrawText::kStatistics);
 		}
-		bob->draw(egbase, draw_text_for_this_immovable, field.screen_pixel, zoom, dst);
+		bob->draw(egbase, draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 }
 
@@ -132,7 +132,8 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
                                             const Player::Field& player_field,
                                             const float zoom,
                                             RenderTarget* dst) {
-	if (const MapObjectDescr* const map_object_descr = player_field.map_object_descr[TCoords<>::None]) {
+	if (const MapObjectDescr* const map_object_descr =
+	       player_field.map_object_descr[TCoords<>::None]) {
 		if (player_field.constructionsite.becomes) {
 			assert(field.owner != nullptr);
 			const ConstructionsiteInformation& csinf = player_field.constructionsite;
@@ -163,8 +164,9 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 
 			if (cur_frame) {  // not the first frame
 				// draw the prev frame from top to where next image will be drawing
-				dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor(), Recti(Vector2i(0, 0), w, h - lines));
+				dst->blit_animation(field.rendertarget_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
+				                    field.owner->get_playercolor(),
+				                    Recti(Vector2i(0, 0), w, h - lines));
 			} else if (csinf.was) {
 				// Is the first frame, but there was another building here before,
 				// get its last build picture and draw it instead.
@@ -174,11 +176,13 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 				} catch (MapObjectDescr::AnimationNonexistent&) {
 					a = csinf.was->get_animation("idle");
 				}
-				dst->blit_animation(field.screen_pixel, zoom, a, tanim - FRAME_LENGTH, field.owner->get_playercolor(),
+				dst->blit_animation(field.rendertarget_pixel, zoom, a, tanim - FRAME_LENGTH,
+				                    field.owner->get_playercolor(),
 				                    Recti(Vector2i(0, 0), w, h - lines));
 			}
 			assert(lines <= h);
-			dst->blit_animation(field.screen_pixel, zoom, anim_idx, tanim, field.owner->get_playercolor(),
+			dst->blit_animation(field.rendertarget_pixel, zoom, anim_idx, tanim,
+			                    field.owner->get_playercolor(),
 			                    Recti(Vector2i(0, h - lines), w, lines));
 		} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 			assert(field.owner != nullptr);
@@ -189,16 +193,18 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			} catch (MapObjectDescr::AnimationNonexistent&) {
 				pic = building->get_animation("idle");
 			}
-			dst->blit_animation(field.screen_pixel, zoom, pic, 0, field.owner->get_playercolor());
+			dst->blit_animation(
+			   field.rendertarget_pixel, zoom, pic, 0, field.owner->get_playercolor());
 		} else if (map_object_descr->type() == MapObjectType::FLAG) {
 			assert(field.owner != nullptr);
-			dst->blit_animation(
-			   field.screen_pixel, zoom, field.owner->tribe().flag_animation(), 0, field.owner->get_playercolor());
+			dst->blit_animation(field.rendertarget_pixel, zoom, field.owner->tribe().flag_animation(),
+			                    0, field.owner->get_playercolor());
 		} else if (const uint32_t pic = map_object_descr->main_animation()) {
 			if (field.owner != nullptr) {
-				dst->blit_animation(field.screen_pixel, zoom, pic, 0, field.owner->get_playercolor());
+				dst->blit_animation(
+				   field.rendertarget_pixel, zoom, pic, 0, field.owner->get_playercolor());
 			} else {
-				dst->blit_animation(field.screen_pixel, zoom, pic, 0);
+				dst->blit_animation(field.rendertarget_pixel, zoom, pic, 0);
 			}
 		}
 	}
@@ -206,12 +212,12 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 
 // Draws the objects (animations & overlays).
 void draw_objects(const EditorGameBase& egbase,
-                  const Transform2f& mappixel_to_screen,
-						const FieldsToDraw& fields_to_draw,
+                  const Transform2f& mappixel_to_panel,
+                  const FieldsToDraw& fields_to_draw,
                   const Player* player,
-						const DrawText draw_text,
+                  const DrawText draw_text,
                   RenderTarget* dst) {
-	const float zoom = mappixel_to_screen.zoom();
+	const float zoom = mappixel_to_panel.zoom();
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
@@ -227,13 +233,14 @@ void draw_objects(const EditorGameBase& egbase,
 			assert(field.owner != nullptr);
 			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 			if (field.vision) {
-				dst->blit_animation(field.screen_pixel, zoom, anim_idx, 0, field.owner->get_playercolor());
+				dst->blit_animation(
+				   field.rendertarget_pixel, zoom, anim_idx, 0, field.owner->get_playercolor());
 			}
-			for (const auto& nf : { rn, bln, brn }) {
+			for (const auto& nf : {rn, bln, brn}) {
 				if ((field.vision || nf.vision) && nf.is_border &&
 				    (field.owner == nf.owner || nf.owner == nullptr)) {
-					dst->blit_animation(middle(field.screen_pixel, nf.screen_pixel), zoom, anim_idx, 0,
-					                    field.owner->get_playercolor());
+					dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), zoom,
+					                    anim_idx, 0, field.owner->get_playercolor());
 				}
 			}
 		}
@@ -254,11 +261,11 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(field.screen_pixel - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
-				                    overlay.pic,
-				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
-				                    BlendMode::UseAlpha);
+				dst->blitrect_scale(
+				   Rectf(field.rendertarget_pixel - overlay.hotspot.cast<float>() * zoom,
+				         overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				   overlay.pic, Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
+				   BlendMode::UseAlpha);
 			}
 		}
 
@@ -267,8 +274,10 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::R), &overlay_info);
 
-			Vector2f tripos((field.screen_pixel.x + rn.screen_pixel.x + brn.screen_pixel.x) / 3.f,
-			                (field.screen_pixel.y + rn.screen_pixel.y + brn.screen_pixel.y) / 3.f);
+			Vector2f tripos(
+			   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) / 3.f,
+			   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+			      3.f);
 			for (const auto& overlay : overlay_info) {
 				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
 				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
@@ -283,8 +292,11 @@ void draw_objects(const EditorGameBase& egbase,
 			overlay_info.clear();
 			overlay_manager.get_overlays(TCoords<>(field.fcoords, TCoords<>::D), &overlay_info);
 
-			Vector2f tripos((field.screen_pixel.x + bln.screen_pixel.x + brn.screen_pixel.x) / 3.f,
-			                (field.screen_pixel.y + bln.screen_pixel.y + brn.screen_pixel.y) / 3.f);
+			Vector2f tripos(
+			   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
+			      3.f,
+			   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
+			      3.f);
 			for (const auto& overlay : overlay_info) {
 				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
 				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
@@ -305,27 +317,28 @@ GameRenderer::~GameRenderer() {
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Transform2f& screen_to_mappixel,
+                             const Transform2f& panel_to_mappixel,
                              const Widelands::Player& player,
 									  const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, screen_to_mappixel, draw_text, &player, dst);
+	draw(egbase, panel_to_mappixel, draw_text, &player, dst);
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Transform2f& screen_to_mappixel,
+                             const Transform2f& panel_to_mappixel,
                              const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, screen_to_mappixel, draw_text, nullptr, dst);
+	draw(egbase, panel_to_mappixel, draw_text, nullptr, dst);
 }
 
-// NOCOM(#sirver): screen_to_mappixel is not correct - it needs to add dst->offset for mapviews
 void GameRenderer::draw(const EditorGameBase& egbase,
-                        const Transform2f& screen_to_mappixel,
+                        const Transform2f& panel_to_mappixel,
 								const DrawText draw_text,
                         const Player* player,
                         RenderTarget* dst) {
-	Vector2f tl_map = screen_to_mappixel.apply(dst->get_offset().cast<float>());
+	const Transform2f screen_to_mappixel = panel_to_mappixel.chain(
+	   Transform2f::from_translation(-dst->get_rect().origin().cast<float>()));
+	Vector2f tl_map = screen_to_mappixel.apply(dst->get_rect().origin().cast<float>());
 	Vector2f br_map = screen_to_mappixel.apply(dst->get_rect().opposite_of_origin().cast<float>());
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
@@ -383,9 +396,10 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 			map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
-			f.gl_position = f.screen_pixel = mappixel_to_screen.apply(map_pixel);
+			f.gl_position = f.surface_pixel = mappixel_to_screen.apply(map_pixel);
 			pixel_to_gl_renderbuffer(
 			   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
+			f.rendertarget_pixel = f.surface_pixel - dst->get_rect().origin().cast<float>();
 
 			f.brightness = field_brightness(f.fcoords, gametime, map, player);
 

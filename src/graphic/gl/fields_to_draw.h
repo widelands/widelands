@@ -41,7 +41,13 @@ public:
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
 		Vector2f gl_position;  // GL Position of this field.
-		Vector2f screen_pixel;   // Screen pixel this will be plotted on.
+
+		// Surface pixel this will be plotted on.
+		Vector2f surface_pixel;
+
+		// Rendertarget pixel this will be plotted on. This is only different by
+		// the Rendertarget::get_rect().origin() of the view window.
+		Vector2f rendertarget_pixel;   
 		Vector2f texture_coords; // Texture coordinates.
 		float brightness;                   // brightness of the pixel
 

@@ -60,8 +60,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	// The overshot of the road in either direction in percent.
 	static constexpr float kRoadElongationInPercent = .1;
 
-	const float delta_x = end.screen_pixel.x - start.screen_pixel.x;
-	const float delta_y = end.screen_pixel.y - start.screen_pixel.y;
+	const float delta_x = end.surface_pixel.x - start.surface_pixel.x;
+	const float delta_y = end.surface_pixel.y - start.surface_pixel.y;
 	const float vector_length = std::hypot(delta_x, delta_y);
 
 	const float road_overshoot_x = delta_x * kRoadElongationInPercent;
@@ -88,24 +88,24 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const Rectf texture_rect = to_gl_texture(texture.blit_data());
 
 	vertices_.emplace_back(PerVertexData{
-	   start.screen_pixel.x - road_overshoot_x + road_thickness_x,
-	   start.screen_pixel.y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
+	   start.surface_pixel.x - road_overshoot_x + road_thickness_x,
+	   start.surface_pixel.y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
-	   start.screen_pixel.x - road_overshoot_x - road_thickness_x,
-	   start.screen_pixel.y - road_overshoot_y - road_thickness_y, texture_rect.x,
+	   start.surface_pixel.x - road_overshoot_x - road_thickness_x,
+	   start.surface_pixel.y - road_overshoot_y - road_thickness_y, texture_rect.x,
 	   texture_rect.y + texture_rect.h, start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
-	   end.screen_pixel.x + road_overshoot_x + road_thickness_x,
-	   end.screen_pixel.y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
+	   end.surface_pixel.x + road_overshoot_x + road_thickness_x,
+	   end.surface_pixel.y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
 	   texture_rect.y, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -119,8 +119,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
 
 	vertices_.emplace_back(PerVertexData{
-	   end.screen_pixel.x + road_overshoot_x - road_thickness_x,
-	   end.screen_pixel.y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
+	   end.surface_pixel.x + road_overshoot_x - road_thickness_x,
+	   end.surface_pixel.y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
 	   texture_rect.y + texture_rect.h, end.brightness,
 	});
 	pixel_to_gl_renderbuffer(

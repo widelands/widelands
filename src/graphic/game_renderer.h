@@ -45,7 +45,7 @@ public:
 	// window. The 'screen_to_mappixel' transform converts a screen pixel into a
 	// map pixel at zoom 1.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Transform2f& screen_to_mappixel,
+	               const Transform2f& panel_to_mappixel,
 	               const Widelands::Player& player,
 						DrawText draw_text,
 	               RenderTarget* dst);
@@ -53,7 +53,7 @@ public:
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Transform2f& screen_to_mappixel,
+	               const Transform2f& panel_to_mappixel,
 						DrawText draw_text,
 	               RenderTarget* dst);
 

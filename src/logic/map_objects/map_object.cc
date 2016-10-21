@@ -393,7 +393,7 @@ MapObject IMPLEMENTATION
  * Zero-initialize a map object
  */
 MapObject::MapObject(const MapObjectDescr* const the_descr)
-   : descr_(the_descr), serial_(0), logsink_(nullptr), reserved_by_worker_(false), owner_(nullptr) {
+   : descr_(the_descr), serial_(0), logsink_(nullptr), owner_(nullptr), reserved_by_worker_(false) {
 }
 
 /**
