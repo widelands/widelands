@@ -161,12 +161,7 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* player_image =
-			   playercolor_image(p - 1, g_gr->images().get("images/players/player_position.png"),
-			                     g_gr->images().get("images/players/player_position_pc.png"));
-			assert(player_image);
-			mutable_field_overlay_manager()->register_overlay(
-			   sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);
 		}
 	}
 
