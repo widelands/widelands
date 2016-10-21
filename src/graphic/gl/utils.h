@@ -53,6 +53,7 @@ public:
 	// Creates and compiles shader objects based on the corresponding files in data/shaders,
 	// then links them into the program.
 	void build(const std::string& program_name);
+	void build_vp_fp(const std::string& vp_name, const std::string& fp_name);
 
 private:
 	const GLuint program_object_;
@@ -77,6 +78,11 @@ public:
 		if (object_) {
 			glDeleteBuffers(1, &object_);
 		}
+	}
+
+	// Returns the OpenGL object for direct use.
+	GLuint object() const {
+		return object_;
 	}
 
 	// Calls glBindBuffer on the underlying buffer data.

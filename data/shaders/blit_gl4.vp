@@ -1,0 +1,69 @@
+#version 130
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_ARB_shader_storage_buffer_object : enable
+
+// Varyings.
+out vec4 out_texture_coordinates;
+out vec4 out_blend;
+out float out_program_flavor;
+
+struct Rect {
+	float dst_x, dst_y, dst_width, dst_height;
+	uint src_x, src_y, src_width, src_height;
+	uint src_parent_width, src_parent_height;
+	uint mask_x, mask_y, mask_width, mask_height;
+	uint mask_parent_width, mask_parent_height;
+	uint blend_r, blend_g, blend_b, blend_a;
+	float program_flavor, z;
+};
+
+layout(binding=0) buffer ssbo_rects {
+	Rect rects[];
+};
+
+void main() {
+	// Determine rect and vertex relative to rect
+	uint rect_idx = uint(gl_VertexID) >> 2;
+	uint vertex_idx = uint(gl_VertexID) & 3u;
+	Rect r = rects[rect_idx];
+
+	out_program_flavor = r.program_flavor;
+
+	// Position
+	gl_Position = vec4(r.dst_x, r.dst_y, r.z, 1.);
+	if ((vertex_idx & 1u) != 0u)
+		gl_Position.x += r.dst_width;
+	if ((vertex_idx & 2u) != 0u)
+		gl_Position.y += r.dst_height;
+
+	// Texture coordinate
+	uint tx = r.src_x;
+	uint ty = r.src_y;
+	if ((vertex_idx & 1u) != 0u)
+		tx += r.src_width;
+	if ((vertex_idx & 2u) == 0u)
+		ty += r.src_height;
+	out_texture_coordinates.x = tx * (1. / r.src_parent_width);
+	out_texture_coordinates.y = 1.0 - ty * (1. / r.src_parent_height);
+
+	// Blending
+	out_blend.a = r.blend_a * (1. / 255.);
+
+//	if (out_program_flavor >= 1.) {
+		out_blend.r = r.blend_r * (1. / 255.);
+		out_blend.g = r.blend_g * (1. / 255.);
+		out_blend.b = r.blend_b * (1. / 255.);
+
+//		if (out_program_flavor >= 2.) {
+			// Mask texture coordinate
+			tx = r.mask_x;
+			ty = r.mask_y;
+			if ((vertex_idx & 1u) != 0u)
+				tx += r.mask_width;
+			if ((vertex_idx & 2u) == 0u)
+				ty += r.mask_height;
+			out_texture_coordinates.z = tx * (1. / r.mask_parent_width);
+			out_texture_coordinates.w = 1.0 - ty * (1. / r.mask_parent_height);
+//		}
+//	}
+}

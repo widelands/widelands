@@ -140,9 +140,9 @@ Program::~Program() {
 	}
 }
 
-void Program::build(const std::string& program_name) {
-	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
-	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
+void Program::build_vp_fp(const std::string& vp_name, const std::string& fp_name) {
+	std::string fragment_shader_source = read_file("shaders/" + fp_name + ".fp");
+	std::string vertex_shader_source = read_file("shaders/" + vp_name + ".vp");
 
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
 	vertex_shader_->compile(vertex_shader_source.c_str());
@@ -167,6 +167,10 @@ void Program::build(const std::string& program_name) {
 			throw wexception("Error linking:\n%s", infoLog.get());
 		}
 	}
+}
+
+void Program::build(const std::string& program_name) {
+	build_vp_fp(program_name, program_name);
 }
 
 State::State()

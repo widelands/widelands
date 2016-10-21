@@ -7,14 +7,15 @@ attribute vec3 attr_position;
 attribute vec4 attr_blend;
 attribute float attr_program_flavor;
 
-varying vec2 out_mask_texture_coordinate;
-varying vec2 out_texture_coordinate;
+// xy = texture_coordinate; zw = mask_texture_coordinate
+// Sharing a single varying in this way can save hardware resources.
+varying vec4 out_texture_coordinates;
 varying vec4 out_blend;
 varying float out_program_flavor;
 
 void main() {
-	out_mask_texture_coordinate = attr_mask_texture_position;
-	out_texture_coordinate = attr_texture_position;
+	out_texture_coordinates.zw = attr_mask_texture_position;
+	out_texture_coordinates.xy = attr_texture_position;
 	out_blend = attr_blend;
 	out_program_flavor = attr_program_flavor;
 	gl_Position = vec4(attr_position, 1.);
