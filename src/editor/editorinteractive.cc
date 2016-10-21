@@ -531,18 +531,8 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
 
-	if (char const* const sel_pic = primary.get_sel(which)) {
-		// NOCOM Ugly hack, but if we change the tools' get_sel_impl() return value from string to
-		// Image, bad things happen?
-		// removing overlays is still broken
-		if (upcast(EditorSetStartingPosTool, starting_pos_tool, &primary)) {
-			set_sel_picture(
-			   playercolor_image(starting_pos_tool->get_current_player() - 1,
-			                     g_gr->images().get("images/players/player_position_menu.png"),
-			                     g_gr->images().get("images/players/player_position_menu_pc.png")));
-		} else {
-			set_sel_picture(g_gr->images().get(sel_pic));
-		}
+	if (const Image* sel_pic = primary.get_sel(which)) {
+		set_sel_picture(sel_pic);
 	} else {
 		unset_sel_picture();
 	}
