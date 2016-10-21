@@ -289,9 +289,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						} else {
 							draw_x = point.x + (curw - blit_width) / 2;
 						}
-					}
-
-					if (static_cast<int>(alignment & UI::Align::kRight)) {
+					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x = point.x + curw - blit_width - 1;
 					}
 
