@@ -44,7 +44,12 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      color_(UI_FONT_CLR_FG),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
+     scrollbar_(this,
+                UI::g_fh1->fontset()->is_rtl() ? 0 : get_w() - Scrollbar::kSize,
+                0,
+                Scrollbar::kSize,
+                h,
+                false),
      scrollmode_(scroll_mode) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
@@ -134,7 +139,7 @@ void MultilineTextarea::layout() {
 	recompute();
 
 	// Take care of the scrollbar
-	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
+	scrollbar_.set_pos(Point(UI::g_fh1->fontset()->is_rtl() ? 0 : get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
 }
@@ -144,7 +149,10 @@ void MultilineTextarea::layout() {
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
 	if (use_old_renderer_) {
-		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
+		rt.draw(dst, Point((UI::g_fh1->fontset()->is_rtl() && scrollbar_.is_enabled()) ?
+		                      RICHTEXT_MARGIN + Scrollbar::kSize :
+		                      RICHTEXT_MARGIN,
+		                   RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
 		const Image* text_im;
 		if (!is_richtext(text_)) {
@@ -170,9 +178,12 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = RICHTEXT_MARGIN;
 			}
 
-			dst.blitrect_scale(Rect(anchor, 0, blit_width, blit_height), text_im,
-			                   Rect(0, scrollbar_.get_scrollpos(), blit_width, blit_height), 1.,
-			                   BlendMode::UseAlpha);
+			dst.blitrect_scale(Rect((UI::g_fh1->fontset()->is_rtl() && scrollbar_.is_enabled()) ?
+			                           anchor + Scrollbar::kSize :
+			                           anchor,
+			                        0, blit_width, blit_height),
+			                   text_im, Rect(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
+			                   1., BlendMode::UseAlpha);
 		}
 	}
 }

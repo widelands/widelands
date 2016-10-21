@@ -160,7 +160,7 @@ void Box::layout() {
 			sb_h = Scrollbar::kSize;
 			pagesize = get_inner_w() - Scrollbar::kSize;
 		} else {
-			sb_x = get_inner_w() - Scrollbar::kSize;
+			sb_x = UI::g_fh1->fontset()->is_rtl() ? 0 : get_inner_w() - Scrollbar::kSize;
 			sb_y = 0;
 			sb_w = Scrollbar::kSize;
 			sb_h = get_inner_h();
@@ -386,7 +386,11 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		if (orientation_ == Horizontal)
 			it.u.panel.panel->set_pos(Point(pos, breadth));
 		else
-			it.u.panel.panel->set_pos(Point(breadth, pos));
+			it.u.panel.panel->set_pos(
+			   Point((UI::g_fh1->fontset()->is_rtl() && scrollbar_ && scrollbar_->is_enabled()) ?
+			            breadth + Scrollbar::kSize :
+			            breadth,
+			         pos));
 		break;
 	}
 

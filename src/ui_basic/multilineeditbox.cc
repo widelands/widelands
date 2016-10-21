@@ -99,7 +99,12 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
 }
 
 MultilineEditbox::Data::Data(MultilineEditbox& o)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), false),
+   : scrollbar(&o,
+               UI::g_fh1->fontset()->is_rtl() ? 0 : o.get_w() - Scrollbar::kSize,
+               0,
+               Scrollbar::kSize,
+               o.get_h(),
+               false),
      cursor_pos(0),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),
@@ -449,7 +454,9 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 
 	d_->ww.set_draw_caret(has_focus());
 
-	d_->ww.draw(dst, Point(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
+	d_->ww.draw(dst, Point(UI::g_fh1->fontset()->is_rtl() ? Scrollbar::kSize - 4 : 0,
+	                       -int32_t(d_->scrollbar.get_scrollpos())),
+	            UI::Align::kLeft,
 	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
 }
 

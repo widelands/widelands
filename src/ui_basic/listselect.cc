@@ -55,7 +55,12 @@ BaseListselect::BaseListselect(Panel* const parent,
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
         kMargin),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
+     scrollbar_(this,
+                UI::g_fh1->fontset()->is_rtl() ? 0 : get_w() - Scrollbar::kSize,
+                0,
+                Scrollbar::kSize,
+                h,
+                false),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -321,7 +326,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		Point point(1, y);
+		Point point(
+		   (UI::g_fh1->fontset()->is_rtl() && scrollbar_.is_enabled()) ? 1 + Scrollbar::kSize : 1, y);
 		uint32_t maxw = get_eff_w() - 2;
 
 		// Highlight the current selected entry
@@ -346,7 +352,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_w() - er.pic->width() - 1 : 1,
 			               y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}
