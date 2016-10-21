@@ -27,11 +27,9 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -161,7 +159,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	init_.set_fontsize(smaller_fontsize);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
+	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		const Image* player_image =
 		   playercolor_image(i, g_gr->images().get("images/players/player_position_menu.png"),
 		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
@@ -337,11 +335,11 @@ void FullscreenMenuLaunchSPG::refresh() {
 		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::stateOpen ||
 		                                       player.state == PlayerSettings::stateComputer));
 	}
-	for (uint32_t i = nr_players_; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
 		pos_[i]->set_visible(false);
 
 	// update the player description groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < kMaxPlayers; ++i)
 		players_[i]->refresh();
 
 	win_condition_update();

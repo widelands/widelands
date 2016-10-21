@@ -30,7 +30,6 @@
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -416,7 +415,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	labels.back()->set_fontsize(small_font);
 
 	playerbox.set_size(w * 9 / 15, h - buth);
-	multi_player_player_groups.resize(MAX_PLAYERS);
+	multi_player_player_groups.resize(kMaxPlayers);
 	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
 		   &playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get(), tribepics_, tribenames_);
@@ -448,7 +447,7 @@ void MultiPlayerSetupGroup::refresh() {
 	}
 
 	// Update player groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
+	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		multi_player_player_groups.at(i)->refresh();
 	}
 }

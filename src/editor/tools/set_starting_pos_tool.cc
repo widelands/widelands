@@ -57,7 +57,7 @@ int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands
 }
 
 EditorSetStartingPosTool::EditorSetStartingPosTool()
-   : EditorTool(*this, *this, false), overlay_ids_(MAX_PLAYERS, 0) {
+   : EditorTool(*this, *this, false), overlay_ids_(kMaxPlayers, 0) {
 	current_player_ = 1;
 }
 

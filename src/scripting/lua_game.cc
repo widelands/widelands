@@ -26,7 +26,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
-#include "logic/constants.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
@@ -1250,7 +1249,7 @@ int LuaMessage::__eq(lua_State* L) {
  ==========================================================
  */
 Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
-	if (player_number_ > MAX_PLAYERS)
+	if (player_number_ > kMaxPlayers)
 		report_error(L, "Illegal player number %i", player_number_);
 	Player* rv = game.get_player(player_number_);
 	if (!rv)

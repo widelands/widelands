@@ -26,8 +26,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "graphic/playercolor.h"
-#include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -54,7 +52,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                  g_gr->images().get("images/ui_basic/but1.png"),
                  g_gr->images().get("images/ui_basic/scrollbar_up.png"),
                  _("Add player"),
-                 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
+                 parent.egbase().map().get_nrplayers() < kMaxPlayers),
      remove_last_player_(this,
                          "remove_last_player",
                          5,
@@ -88,7 +86,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 	posy_ = posy;
 
-	for (Widelands::PlayerNumber i = 0; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = 0; i < kMaxPlayers; ++i) {
 		plr_names_[i] = nullptr;
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
@@ -131,7 +129,7 @@ void EditorPlayerMenu::update() {
 	}
 
 	//  Now remove all the unneeded stuff.
-	for (Widelands::PlayerNumber i = nr_players; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = nr_players; i < kMaxPlayers; ++i) {
 		delete plr_names_[i];
 		plr_names_[i] = nullptr;
 		delete plr_set_pos_buts_[i];
@@ -200,7 +198,7 @@ void EditorPlayerMenu::update() {
 void EditorPlayerMenu::clicked_add_player() {
 	Widelands::Map& map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers() + 1;
-	assert(nr_players <= MAX_PLAYERS);
+	assert(nr_players <= kMaxPlayers);
 	map.set_nrplayers(nr_players);
 	{                             //  register new default name for this players
 		assert(nr_players <= 99);  //  2 decimal digits
@@ -211,7 +209,7 @@ void EditorPlayerMenu::clicked_add_player() {
 	}
 	map.set_scenario_player_tribe(nr_players, tribenames_[0]);
 	eia().set_need_save(true);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
+	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(true);
 	update();
 }
@@ -237,7 +235,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
+	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(1 < nr_players);
 
 	update();

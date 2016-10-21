@@ -118,7 +118,7 @@ void SuggestedTeamsBox::show(
 				is_first = false;
 
 				for (Widelands::PlayerNumber player : team) {
-					assert(player < MAX_PLAYERS);
+					assert(player < kMaxPlayers);
 					const Image* player_image = playercolor_image(
 					   player, g_gr->images().get("images/players/player_position_menu.png"),
 					   g_gr->images().get("images/players/player_position_menu_pc.png"));

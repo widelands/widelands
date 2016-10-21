@@ -26,9 +26,9 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -494,7 +494,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 	} else {
 		// Write client infos
 		std::string client_info =
-		   (settings.playernum >= 0) && (settings.playernum < MAX_PLAYERS) ?
+		   (settings.playernum >= 0) && (settings.playernum < kMaxPlayers) ?
 		      (boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
 		      _("You are a spectator.");
 		client_info_.set_text(client_info);
@@ -551,9 +551,9 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 	std::string infotext = _("Saved players are:");
-	std::string player_save_name[MAX_PLAYERS];
-	std::string player_save_tribe[MAX_PLAYERS];
-	std::string player_save_ai[MAX_PLAYERS];
+	std::string player_save_name[kMaxPlayers];
+	std::string player_save_tribe[kMaxPlayers];
+	std::string player_save_ai[kMaxPlayers];
 
 	uint8_t i = 1;
 	for (; i <= nr_players_; ++i) {

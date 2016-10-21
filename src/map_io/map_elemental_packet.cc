@@ -85,7 +85,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 					for (const std::string& player : players_string) {
 						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
-						assert(player_number < MAX_PLAYERS);
+						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}
 

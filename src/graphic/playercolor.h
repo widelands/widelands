@@ -22,10 +22,15 @@
 
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/constants.h"
+
+/// Maximum numbers of players in a game. The game logic code reserves 5 bits
+/// for player numbers, so it can keep track of 32 different player numbers, of
+/// which the value 0 means neutral and the values 1 .. 31 can be used as the
+/// numbers for actual players. So the upper limit of this value is 31.
+constexpr uint8_t kMaxPlayers = 16;
 
 // Hard coded player colors
-const RGBColor kPlayerColors[MAX_PLAYERS] = {
+const RGBColor kPlayerColors[kMaxPlayers] = {
    RGBColor(2, 2, 198),      // blue
    RGBColor(255, 41, 0),     // red
    RGBColor(255, 232, 0),    // yellow

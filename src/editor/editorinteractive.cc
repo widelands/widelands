@@ -158,7 +158,7 @@ void EditorInteractive::register_overlays() {
 
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
-	assert(nr_players <= MAX_PLAYERS);
+	assert(nr_players <= kMaxPlayers);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);

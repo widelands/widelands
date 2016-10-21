@@ -29,7 +29,6 @@ wl_library(graphic_playercolor
   DEPENDS
     graphic_color
     graphic_surface
-    logic_constants
 )
 
 wl_library(graphic_render_queue

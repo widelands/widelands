@@ -36,7 +36,6 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -261,7 +260,7 @@ void Player::update_team_players() {
 	if (!team_number_)
 		return;
 
-	for (PlayerNumber i = 1; i <= MAX_PLAYERS; ++i) {
+	for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
 		Player* other = egbase().get_player(i);
 		if (!other)
 			continue;

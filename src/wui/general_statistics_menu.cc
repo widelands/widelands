@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"
-#include "graphic/playercolor.h"
 #include "graphic/rendertarget.h"
 #include "logic/constants.h"
 #include "logic/editor_game_base.h"
