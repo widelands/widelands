@@ -85,15 +85,17 @@ void Table<void*>::add_column(uint32_t const width,
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
-	uint32_t complete_width = 0;
-	for (const Column& col : columns_) {
-		complete_width += col.width;
-	}
-
 	total_width_ += width;
 	set_desired_size(total_width_, get_h());
 
 	{
+		uint32_t complete_width = 0;
+		if (!UI::g_fh1->fontset()->is_rtl()) {
+			for (const Column& col : columns_) {
+				complete_width += col.width;
+			}
+		}
+
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
@@ -115,11 +117,20 @@ void Table<void*>::add_column(uint32_t const width,
 		}
 
 		columns_.push_back(c);
+
+		if (UI::g_fh1->fontset()->is_rtl()) {
+			int x = get_inner_w();
+			for (auto& column : columns_) {
+				column.btn->set_pos(Point(x - column.btn->get_w(), 0));
+				x -= column.btn->get_w();
+			}
+		}
 	}
 	if (!scrollbar_) {
-		scrollbar_ =
-		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-		                 Scrollbar::kSize, get_h() - headerheight_, false);
+		scrollbar_ = new Scrollbar(
+		   get_parent(),
+		   UI::g_fh1->fontset()->is_rtl() ? get_x() : get_x() + get_w() - Scrollbar::kSize,
+		   get_y() + headerheight_, Scrollbar::kSize, get_h() - headerheight_, false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);
 		scrollbar_->set_singlestepsize(lineheight_);
@@ -239,7 +250,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
-		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
+		for (uint32_t col_no = 0, curx = 0; col_no < nr_columns; ++col_no) {
+			const size_t i = UI::g_fh1->fontset()->is_rtl() ? nr_columns - 1 - col_no : col_no;
+			// The first column needs a scrollbar offset for RTL languages.
+			const int scrollbar_offset = (curx == 0 && UI::g_fh1->fontset()->is_rtl() && scrollbar_ &&
+			                              scrollbar_->is_enabled()) ?
+			                                Scrollbar::kSize :
+			                                0;
+
 			const Column& column = columns_[i];
 			int const curw = column.width;
 			Align alignment = mirror_alignment(column.alignment);
@@ -265,7 +283,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 					int blit_width = image_scale * picw;
 
 					if (entry_string.empty()) {
-						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
+						if (!UI::g_fh1->fontset()->is_rtl() && i == nr_columns - 1 &&
+						    scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2;
 						} else {
 							draw_x = point.x + (curw - blit_width) / 2;
@@ -273,7 +292,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 
 					if (static_cast<int>(alignment & UI::Align::kRight)) {
-						draw_x += curw - blit_width;
+						draw_x = point.x + curw - blit_width - 1;
 					}
 
 					// Create the scaled image
@@ -284,13 +303,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 					picw = blit_width;
 				} else {
 					if (entry_string.empty()) {
-						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
+						if (!UI::g_fh1->fontset()->is_rtl() && i == nr_columns - 1 &&
+						    scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2;
 						} else {
 							draw_x = point.x + (curw - picw) / 2;
 						}
 					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
-						draw_x += curw - picw;
+						draw_x = point.x + curw - picw - 1;
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
@@ -304,6 +324,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+
+			point.x += scrollbar_offset;
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
