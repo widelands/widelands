@@ -19,6 +19,7 @@
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
+  <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
@@ -127,6 +128,22 @@
     </p>
     <p>
       Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
+    </p>
+  </description>
+  <description xml:lang="la">
+    <p>
+      Tu es princeps de parva gens. Pensum tuum est coloniam excolere. Unusquisque homines gentis tuis opes augere auxilient.
+    </p>
+    <p>
+      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+  </description>
+  <description xml:lang="nl">
+    <p>
+      Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
+    </p>
+    <p>
+      Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun wedervaren in het Widelandsuniversum.  Maar je kunt je echt nederzetten, met je vrienden verbonden over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten.  Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
     </p>
   </description>
   <description xml:lang="pl">

@@ -1,423 +1,426 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:10+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/widelands/language/pl/)\n"
+"Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr ""
+msgstr "Żeglarstwo"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Samouczek żeglarstwa"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Witam ponownie. W tym samouczku dowiesz się najważniejszych rzeczy na temat żeglarstwa, to jest o statkach, portach i ekspedycjach."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "Ale pozwól mi najpierw zapoznać cię z twoim terytorium: tu na południu masz pełną gospodarkę z niemal wszystkim, czego ci potrzeba."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
-msgstr ""
+msgstr "Północna część"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Z kolei na północy masz tylko kopalnię i magazyn. Co prawda górnicy są dobrze zaopatrzeni w jedzenie, ale nie jesteśmy w stanie transportować rudy złota do huty na południu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Próbowaliśmy zbudować drogę, ale góra jest zbyt wielka i stroma. Mamy tylko jedno wyjście: musimy utworzyć szlak morski pomiędzy obiema częściami."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Ale bez pośpiechu: dopiero co się tu zjawiłeś i pewnie chcesz rzucić okiem na swój obóz. Też wezmę sobie krótką przerwę i wrócę niebawem."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
 msgid "Ports"
-msgstr ""
+msgstr "Porty"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
+msgstr "Do każdego pełnomorskiego przedsięwzięcia będziesz potrzebować portu na wybrzeżu. Porty są jak kwatera główna: mogą przechowywać towary, pracowników i żołnierzy. Zakwaterowani żołnierze opuszczą port automatycznie, jeśli przeciwnik go zaatakuje."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
 "tabs: wares and workers in the dock. They are waiting for a ship to "
 "transport them to another port. Currently, there are none because we have "
 "not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "Co więcej, porty pozwalają na transport towarów statkami. Kliknąwszy na posiadany już port uzyskasz dostęp do dodatkowych dwóch zakładek: towarów i pracowników w doku. Czekają oni na statek, który zabierze ich do innego portu. Obecnie nie ma w porcie nikogo, ponieważ nie zbudowaliśmy jeszcze drugiego portu. Zróbmy coś z tym!"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
-msgstr ""
+msgstr "Budowanie portów"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
 msgid "How to build a port"
-msgstr ""
+msgstr "Jak zbudować port"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
+msgstr "Porty to duże budynki, ale można je zbudować tylko w konkretnych miejscach: tych oznaczonych"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid "blue port space icon."
-msgstr ""
+msgstr "niebieską ikoną miejsca na port."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "Miejsca na port wybierane są przez projektanta mapy, więc mapa może je równie dobrze mieć jak i ich nie mieć. Mogą jednak być po prostu zajęte przez drzewa lub blokowane przez pobliskie budynki."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "Zauważyłeś już pewnie, że tego typu ikona znajduje się obok twojego zamku."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
 msgid "Build a port in the northern part of your camp."
-msgstr ""
+msgstr "Zbuduj port w północnej części obozowiska."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid "Build a port"
-msgstr ""
+msgstr "Zbuduj port"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Do transportu towarów statkiem zawsze potrzebujesz portu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:73
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Zbuduj port obok zamku na niebieskiej ikonie miejsca na port."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "Porty buduje się jak wszystkie inne budynki, ale można je zbudować tylko na niebieskich miejscach na port. Kliknij po postu na polu z ikoną, a menu budowy automatycznie zaproponuje budowę portu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "Choć porty funkcjonują jak magazyny, nie powinieneś budować ich więcej, niż trzeba: do ich budowy potrzebne są kwarc, diamenty i złoto, a to spory wydatek."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
 msgid "Constructing ships"
-msgstr ""
+msgstr "Szkutnictwo"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:83
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:83
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Zbudujmy statki"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Great. Your port has just been finished. Now we need some ships."
-msgstr ""
+msgstr "Świetnie. Port został właśnie ukończony. Teraz potrzeba nam statków."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid ""
 "Ships are constructed in a shipyard by a shipwright. We have to build one "
 "somewhere close to the shore."
-msgstr ""
+msgstr "Statki buduje szkutnik w stoczni. Będziemy musieli zbudować taką gdzieś blisko brzegu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr ""
+msgstr "Zbuduj stocznię blisko brzegu. To średni budynek."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Zbuduj stocznię"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:94
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:94
 msgid "Ships are produced in a shipyard."
-msgstr ""
+msgstr "Statki buduje się w stoczni."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Zbuduj stocznię w pobliżu brzegu w południowej części swojej bazy."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
+msgstr "Stocznia to średni budynek. Choć można ją zbudować gdziekolwiek, to szkutnik pracować może tylko przy wodzie, bez drzew ani dróg zabierających miejsce na brzegu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "Czekanie na statki"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
+msgstr "Bardzo dobrze. Twoja stocznia została zbudowana, a szkutnik od razu zabrał się do pracy. Do budowy statków będzie potrzebować belek, desek i pajęczej tkaniny, które zostaną zaniesione do stoczni."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr ""
+msgstr "Szkutnik będzie brać towary na wolne pole przy brzegu i budować tam statek. Gdy pierwszy statek zostanie ukończony, wyruszy na morze, a szkutnik zacznie budowę następnego."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "Poczekajmy teraz, aż będziemy mieli dwa statki. To powinno na razie nam wystarczyć."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
+msgstr "Powinieneś zaprzestać produkcji statków, gdy będziesz miał ich dość dużo. W przeciwnym przypadku twój szkutnik będzie marnować twoje belki i pajęczą tkaninę budując dziesiątki statków."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:112
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:112
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
+msgstr "To jest ikona zatrzymania produkcji. Znajdziesz ją w oknie budynku."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:114
 msgid "Construct two ships"
-msgstr ""
+msgstr "Zbuduj dwa statki"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
+msgstr "Statki budowane są automatycznie po zbudowaniu stoczni i dostarczeniu niezbędnych towarów."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid "Wait until the shipwright has constructed two ships."
-msgstr ""
+msgstr "Poczekaj, aż szkutnik zbuduje dwa statki."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "Nie zapomnij zatrzymać stoczni, gdy będziesz miał dość statków."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
-msgstr ""
+msgstr "Brak żelaza"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:127
 msgid "We lack iron"
-msgstr ""
+msgstr "Brakuje nam żelaza"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "Co prawda nie ukończyliśmy jeszcze drugiego statku, ale mamy pilny problem."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:129
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:129
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
+msgstr "Jak pewnie już zdążyłeś zauważyć, góra na zachodzie nie ma rud żelaza. Mamy dość węgla i rudy złota, ale bez rudy żelaza nie jesteśmy w stanie produkować narzędzi."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:130
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:130
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
+msgstr "Choć może to się okazać długie, kosztowne, może niebezpieczne - kto wie, co czyha w morskich głębinach? - nie mamy innego wyboru: musimy wyruszyć na ekspedycję w nieznane."
 
-#: TRANSLATORS This shall be the beginning of a poem
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
+#. TRANSLATORS: This shall be the beginning of a poem
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "Podróż przez morze, jak miła być może"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"
-msgstr ""
+msgstr "Ekspedycje"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:141
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
+msgstr "Ekspedycja polega na wysłaniu statku w poszukiwaniu nowych wysp, być może nawet założenia na nich kolonii."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:143
 msgid ""
 "Expeditions can be started in every port. Then, all needed wares are "
 "transported to that port. The wares are exactly those your tribe needs to "
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
+msgstr "Ekspedycję można zacząć w dowolnym porcie. Wszystkie potrzebne towary zostaną wówczas przetransportowane do tego portu. Są to dokładnie te towary, których potrzeba do budowy portu (twoim celem jest budowa portu na nowych ziemiach, więc to żadna niespodzianka), oczywiście potrzebny ci też będzie budowniczy. Gdy wszystko zostanie przygotowane, przypłynie statek, na który wszystko zostanie załadowane."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:144
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
-msgstr ""
+msgstr "Możesz sprawdzić niezbędne towary na piątej zakładce portu (która pojawi się po rozpoczęciu ekspedycji)."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "Now try this out. I will tell you later what the next steps are."
-msgstr ""
+msgstr "Spróbuj sam. Powiem ci później, co dalej."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "Rozpocznij ekspedycję z któregokolwiek portu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"
-msgstr ""
+msgstr "Rozpocznij ekspedycję"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition."
-msgstr ""
+msgstr "Rozpocznij ekspedycję."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
+msgstr "W tym celu kliknij na przycisku \"Rozpocznij ekspedycję\" w dowolnym porcie. Pojawi się nowa zakładka, w której pojawią się potrzebne towary."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
 msgid "Off to greener pastures"
-msgstr ""
+msgstr "Nowe horyzonty"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid "Start your expedition"
-msgstr ""
+msgstr "Rozpocznij ekspedycję"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
 msgid ""
 "Your expedition ship is ready. It is waiting for your orders in front of "
 "your port. It isn’t transporting wares anymore. Use its buttons to send your"
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Twój statek ekspedycyjny jest gotów i czeka na rozkazy przed twoim portem. Nie przewozi już towarów. Użyj jego przycisków, aby żeglować w jednym z sześciu głównych kierunków mapy Widelands. Jeśli dobijesz do brzegu, możesz mu rozkazać płynąć wzdłuż niego, szukając dogodnych miejsc na lądowanie."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "Jeśli znajdziesz miejsce na budowę portu, możesz go zbudować klikając na przycisk pośrodku okna sterowania statkiem."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
+msgstr "Towary zostaną wyładowane, a statek wróci do przewożenia towarów. Budowniczy rozpocznie zaś budowę portu."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:168
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "Znajdź wyspę z górą i dogodne miejsce na port na jej brzegu. Skolonizuj wyspę."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
 msgid "Found a settlement"
-msgstr ""
+msgstr "Załóż przyczółek"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr ""
+msgstr "Wyślij swój statek na wyspę, na której jest być może żelazo."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
+msgstr "Po kliknięciu na statek ekspedycyjny otworzy się okno, za pomocą którego możesz sterować statkiem."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "Znalazłszy adekwatne miejsce na port, zbuduj go."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Conclusion"
-msgstr ""
+msgstr "Wniosek"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulacje"
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
+msgstr "Doprowadziłeś ekspedycję do szczęśliwego końca i założyłeś nową kolonię. Wysłałem paru geologów - już donoszą, że znaleźli rudę żelaza."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
 "In this scenario, you’ve learned everything about seafaring: how to build "
 "ports and ships and how to send out an expedition. Remember that expeditions"
 " are sometimes the fastest way to reach essential resources – and sometimes "
 "the only one."
-msgstr ""
+msgstr "Nauczyłeś się w tym scenariuszu wszystkiego o żegludze: jak budować porty i statki i jak wysyłać ekspedycje. Pamiętaj, że ekspedycje to nieraz najszybsza, a czasem jedyna metoda dotarcia do niezbędnych surowców."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "But I want to speak a word of warning. Ports are like headquarters: they can"
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
+msgstr "Jedno słowo uwagi na koniec. Porty są jak kwatery główne - mogą być celem ataku przeciwnika. O ile twoja kwatera główna jest chroniona przez żołnierzy, to nowo zbudowany port nie jest. Unikaj osiedlania się obok wroga."
 
-#: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
-msgstr ""
+msgstr "Na tej mapie nie musisz obawiać się żadnych przeciwników. Jak zawsze możesz kontynuować grę i patrzeć, jak statki dostarczają towary do wyspy, gdy każesz budować tam nowe budynki. Na mapie jest też jeszcze jedna wyspa, na której możesz zbudować port."
 
-#: ../../scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
-#: ../../scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nowy cel"
+msgstr[1] "Nowe cele"
+msgstr[2] "Nowe cele"
