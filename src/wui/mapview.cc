@@ -21,7 +21,6 @@
 
 #include "base/macros.h"
 #include "base/math.h"
-#include "base/transform.h"
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -262,27 +261,23 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 		return false;
 	}
 
-	const Transform2f translation =
-	   Transform2f::from_translation(Vector2f(last_mouse_pos_.x, last_mouse_pos_.y));
-	Transform2f mappixel_to_panel = Transform2f(-viewpoint_ / zoom_, 1.f / zoom_);
-	const float old_zoom = mappixel_to_panel.zoom();
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = old_zoom * static_cast<float>(std::pow(
-	                           1.f + math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	float zoom = zoom_ * static_cast<float>(
+	                        std::pow(1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
 
 	// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
 	// performance and to avoid numeric glitches with more extreme values.
 	constexpr float kMaxZoom = 4.f;
 	zoom = math::clamp(zoom, 1.f / kMaxZoom, kMaxZoom);
-	mappixel_to_panel = translation.chain(Transform2f::from_zoom(zoom / old_zoom))
-	                                   .chain(translation.inverse())
-	                                   .chain(mappixel_to_panel);
-	Transform2f panel_to_mappixel_ = mappixel_to_panel.inverse();
-	zoom_ = panel_to_mappixel_.zoom();
 
-	auto point = round(panel_to_mappixel_.translation());
-	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), &point);
-	set_viewpoint(point, false);
+
+	// Zoom around the current mouse position. See
+	// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
+	// for a good explanation of this math.
+	const Vector2f offset = -last_mouse_pos_.cast<float>() * (zoom - zoom_);
+
+	zoom_ = zoom;
+	set_viewpoint(round(viewpoint_ + offset), false);
 	return true;
 }
 
