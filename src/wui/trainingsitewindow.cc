@@ -65,5 +65,8 @@ Create the training site information window.
 ===============
 */
 void TrainingSite::create_options_window(InteractiveGameBase& plr, UI::Window*& registry) {
-	new TrainingSiteWindow(plr, *this, registry);
+	ProductionSiteWindow* win
+		= dynamic_cast<ProductionSiteWindow*>(new TrainingSiteWindow(plr, *this, registry));
+	Building::options_window_connections.push_back(Building::workers_changed.connect(
+	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
 }
