@@ -75,8 +75,10 @@ void ProgressBar::draw(RenderTarget& dst) {
 		const uint32_t w = static_cast<uint32_t>(get_w() * fraction);
 		assert(w <= static_cast<uint32_t>(get_w()));
 
-		dst.fill_rect(Rect(Point(0, 0), w, get_h()), color);
-		dst.fill_rect(Rect(Point(w, 0), get_w() - w, get_h()), RGBColor(0, 0, 0));
+		dst.fill_rect(
+		   Rect(Point(UI::g_fh1->fontset()->is_rtl() ? get_w() - w : 0, 0), w, get_h()), color);
+		dst.fill_rect(Rect(Point(UI::g_fh1->fontset()->is_rtl() ? 0 : w, 0), get_w() - w, get_h()),
+		              RGBColor(0, 0, 0));
 	} else {
 		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0 - fraction));
 

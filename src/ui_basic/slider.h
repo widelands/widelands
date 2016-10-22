@@ -111,9 +111,10 @@ private:
 	int32_t value_;
 	int32_t relative_move_;
 
-	bool highlighted_;  //  mouse over
-	bool pressed_;      //  the cursor is pressed
-	bool enabled_;      //  enabled widget
+	bool highlighted_;   //  mouse over
+	bool pressed_;       //  the cursor is pressed
+	bool enabled_;       //  enabled widget
+	bool is_horizontal;  // True if get_w() > get_h()
 
 	const Image* pic_background_;  //  background texture (picture ID)
 

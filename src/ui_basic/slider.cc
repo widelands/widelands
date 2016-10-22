@@ -69,13 +69,14 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
+     is_horizontal(false),
      pic_background_(background_picture_id),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
-	calculate_cursor_position();
+	layout();
 }
 
 void Slider::set_value(int32_t new_value) {
@@ -98,10 +99,14 @@ void Slider::calculate_cursor_position() {
 	} else {
 		cursor_pos_ = (value_ - min_value_) * get_bar_size() / (max_value_ - min_value_);
 	}
+
+	if (is_horizontal && UI::g_fh1->fontset()->is_rtl()) {
+		cursor_pos_ = get_bar_size() - cursor_pos_;
+	}
 }
 
 void Slider::layout() {
-	Panel::layout();
+	is_horizontal = get_w() > get_h();
 	calculate_cursor_position();
 }
 
@@ -183,9 +188,13 @@ void Slider::draw_cursor(
 }
 
 /**
- * \brief Send an event when the slider is moved by used.
+ * \brief Send an event when the slider is moved by used. Also adjusts the value for rtl languages.
  */
 void Slider::send_value_changed() {
+	if (is_horizontal && UI::g_fh1->fontset()->is_rtl()) {
+		value_ = max_value_ - value_;
+	}
+
 	changed();
 	changedto(value_);
 }
