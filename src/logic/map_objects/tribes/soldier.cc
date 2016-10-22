@@ -479,7 +479,7 @@ void Soldier::draw_info_icon(Vector2f draw_position,
 #ifndef NDEBUG
 	// This function assumes stuff about our data files: level icons are all the
 	// same size and this is smaller than the width of the healthbar. This
-	// simplifies the drawing code below a lot. Before it had a lot of if() that
+	// simplifies the drawing code below a lot. Before it had a lot of if () that
 	// were never tested - since our data files never changed.
 	const int dimension = attackpic->width();
 	assert(attackpic->height() == dimension);

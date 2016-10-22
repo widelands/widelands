@@ -32,7 +32,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-namespace  {
+namespace {
 
 // Returns the shortest distance between two points on a wrapping line of
 // length width.
@@ -52,22 +52,30 @@ float shortest_distance_on_torus(float x1, float x2, const float width) {
 // of 'r' is smaller than (r.w / 2, r.h / 2). If 'p' is NOT contained in 'r'
 // this method will loop forever.
 Vector2f move_inside(Vector2f p, const Rectf& r, float w, float h) {
-	while (p.x < r.x && r.x < r.x + r.w) { p.x += w; }
-	while (p.x > r.x && r.x > r.x + r.w) { p.x -= w; }
-	while (p.y < r.y && r.y < r.y + r.y) { p.y += h; }
-	while (p.y > r.y && r.y > r.y + r.y) { p.y -= h; }
+	while (p.x < r.x && r.x < r.x + r.w) {
+		p.x += w;
+	}
+	while (p.x > r.x && r.x > r.x + r.w) {
+		p.x -= w;
+	}
+	while (p.y < r.y && r.y < r.y + r.y) {
+		p.y += h;
+	}
+	while (p.y > r.y && r.y > r.y + r.y) {
+		p.y -= h;
+	}
 	return p;
 }
 
-}  // namespace 
+}  // namespace
 
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
    : UI::Panel(parent, x, y, w, h),
      renderer_(new GameRenderer()),
      intbase_(player),
-	  viewpoint_(0.f, 0.f),
-	  zoom_(1.f),
+     viewpoint_(0.f, 0.f),
+     zoom_(1.f),
      dragging_(false) {
 }
 
@@ -146,9 +154,8 @@ void MapView::draw(RenderTarget& dst) {
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		renderer_->rendermap(
-		   egbase, viewpoint_, zoom_, interactive_player->player(), 
-			static_cast<DrawText>(draw_text), &dst);
+		renderer_->rendermap(egbase, viewpoint_, zoom_, interactive_player->player(),
+		                     static_cast<DrawText>(draw_text), &dst);
 	} else {
 		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<DrawText>(draw_text), &dst);
 	}
@@ -271,7 +278,6 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	// performance and to avoid numeric glitches with more extreme values.
 	constexpr float kMaxZoom = 4.f;
 	zoom = math::clamp(zoom, 1.f / kMaxZoom, kMaxZoom);
-
 
 	// Zoom around the current mouse position. See
 	// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate

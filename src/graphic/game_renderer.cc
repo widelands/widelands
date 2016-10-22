@@ -415,9 +415,9 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			f.brightness = field_brightness(f.fcoords, gametime, map, player);
 
 			PlayerNumber owned_by = f.fcoords.field->get_owned_by();
-			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr; 
+			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			f.vision = 2; 
+			f.vision = 2;
 			f.roads = f.fcoords.field->get_roads();
 			if (player && !player->see_all()) {
 				const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
@@ -458,4 +458,3 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 	draw_objects(egbase, scale, fields_to_draw_, player, draw_text, dst);
 }
-

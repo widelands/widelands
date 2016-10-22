@@ -40,20 +40,21 @@ public:
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
-		Vector2f gl_position;  // GL Position of this field.
+		Vector2f gl_position;        // GL Position of this field.
 
 		// Surface pixel this will be plotted on.
 		Vector2f surface_pixel;
 
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
-		Vector2f rendertarget_pixel;   
-		Vector2f texture_coords; // Texture coordinates.
-		float brightness;                   // brightness of the pixel
+		Vector2f rendertarget_pixel;
+		Vector2f texture_coords;  // Texture coordinates.
+		float brightness;         // brightness of the pixel
 
-		// The next values are not necessarily the true data of this field, but what the player should see. For example
-		// in fog of war we always draw what we saw last.
-		uint8_t roads;                      // Bitmask of roads to render, see logic/roadtype.h.
+		// The next values are not necessarily the true data of this field, but
+		// what the player should see. For example in fog of war we always draw
+		// what we saw last.
+		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
 		bool is_border;
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
@@ -64,7 +65,7 @@ public:
 		int rn_index;
 		int trn_index;
 		int bln_index;
-		int brn_index; 
+		int brn_index;
 
 		inline bool all_neighbors_valid() const {
 			return ln_index >= 0 && rn_index >= 0 && trn_index >= 0 && bln_index >= 0 &&
