@@ -102,7 +102,7 @@ void draw_view_window(const Map& map,
 		   break;
 
 		case MiniMapType::kStaticMap: {
-		   Vector2i origin = round(view_area.center());
+		   Vector2f origin = view_area.center();
 		   MapviewPixelFunctions::normalize_pix(map, &origin);
 		   center_pixel =
 		      Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
@@ -189,11 +189,11 @@ void do_draw_minimap(Texture* texture,
 
 }  // namespace
 
-Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
-                                const Vector2i& minimap_pixel,
-                                const Rectf& view_area,
-                                MiniMapType minimap_type,
-										  const bool zoom) {
+Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
+                                   const Vector2i& minimap_pixel,
+                                   const Rectf& view_area,
+                                   MiniMapType minimap_type,
+                                   const bool zoom) {
 	Vector2f top_left;
 	switch (minimap_type) {
 		case MiniMapType::kStaticViewWindow:
@@ -208,9 +208,8 @@ Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
 	}
 
 	const float multiplier = zoom ? 2.f : 1.f;
-	Vector2i map_pixel =
-	   round(top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
-	                               minimap_pixel.y / multiplier * kTriangleHeight));
+	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
+	                                         minimap_pixel.y / multiplier * kTriangleHeight);
 	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
 	return map_pixel;
 }
@@ -233,7 +232,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
-	Vector2i top_left = minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
+	Vector2f top_left = minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
 	const Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 

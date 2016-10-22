@@ -61,7 +61,7 @@ enum class MiniMapType {
 
 // Converts between minimap pixel and map pixel.
 // Remember to call 'normalize_pix' after applying the transformation.
-Vector2i minimap_pixel_to_mappixel(const Widelands::Map& map,
+Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Vector2i& minimap_pixel,
                                 const Rectf& view_area,
                                 MiniMapType minimap_type,

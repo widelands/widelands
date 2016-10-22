@@ -81,7 +81,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
-     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, this))),
      field_overlay_manager_(new FieldOverlayManager()),
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
@@ -116,10 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		});
 
 	toolbar_.set_layout_toplevel(true);
-	m->quicknavigation->set_setview(boost::bind(&MapView::set_viewpoint, this, _1, true));
-	set_changeview(boost::bind(&QuickNavigation::view_changed, m->quicknavigation.get(), _1, _2));
-
-	changeview.connect(boost::bind(&InteractiveBase::mainview_move, this, _1));
+	changeview.connect([this](bool) { mainview_move(); });
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -355,9 +352,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 }
 
-void InteractiveBase::mainview_move(const Rectf& map_view) {
+void InteractiveBase::mainview_move() {
 	if (m->minimap.window) {
-		m->mm->set_view(map_view);
+		m->mm->set_view(get_view_area());
 	}
 }
 
@@ -368,15 +365,15 @@ void InteractiveBase::toggle_minimap() {
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
 		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
-		mainview_move(get_view_area());
+		mainview_move();
 	}
 }
 
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const Vector2i& point) {
-	m->quicknavigation->set_landmark(key, point);
+void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view) {
+	m->quicknavigation->set_landmark(key, view);
 }
 
 /**

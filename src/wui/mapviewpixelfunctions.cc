@@ -65,22 +65,22 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
 /**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
-Vector2i MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2i a, Vector2i b) {
+Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
 
-	Vector2i diff = a - b;
+	Vector2f diff = a - b;
 
 	int32_t map_end_screen_x = get_map_end_screen_x(map);
-	if (diff.x > map_end_screen_x / 2)
+	if (diff.x > map_end_screen_x / 2.f)
 		diff.x -= map_end_screen_x;
-	else if (diff.x < -map_end_screen_x / 2)
+	else if (diff.x < -map_end_screen_x / 2.f)
 		diff.x += map_end_screen_x;
 
 	int32_t map_end_screen_y = get_map_end_screen_y(map);
-	if (diff.y > map_end_screen_y / 2)
+	if (diff.y > map_end_screen_y / 2.f)
 		diff.y -= map_end_screen_y;
-	else if (diff.y < -map_end_screen_y / 2)
+	else if (diff.y < -map_end_screen_y / 2.f)
 		diff.y += map_end_screen_y;
 
 	return diff;
@@ -90,7 +90,7 @@ Vector2i MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2i a, 
  * Calculate the pixel (currently Manhattan) distance between the two points,
  * taking wrap-arounds into account.
 */
-uint32_t MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2i a, Vector2i b) {
+float MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
 	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
@@ -260,7 +260,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 /**
  * Normalize pixel points of the map.
 */
-void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2i* p) {
+void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
 	float x = p->x;
 	float y = p->y;
 	{
@@ -281,6 +281,6 @@ void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2i* p) {
 			y += map_end_screen_y;
 		}
 	}
-	p->x = std::lround(x);
-	p->y = std::lround(y);
+	p->x = x;
+	p->y = y;
 }

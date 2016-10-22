@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "base/rect.h"
+#include "base/vector.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
 
@@ -36,14 +37,6 @@ class InteractiveBase;
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
 struct MapView : public UI::Panel {
-	/**
-	 * Callback function type for when the view position changes.
-	 *
-	 * Parameters are x/y screen coordinates and whether the change should
-	 * be considered a "jump" or a smooth scrolling event.
-	 */
-	using ChangeViewFn = boost::function<void(Vector2i, bool)>;
-
 	MapView(UI::Panel* const parent,
 	        const int32_t x,
 	        const int32_t y,
@@ -52,19 +45,21 @@ struct MapView : public UI::Panel {
 	        InteractiveBase&);
 	virtual ~MapView();
 
-	void set_changeview(const ChangeViewFn& fn);
-
-	boost::signals2::signal<void(const Rectf&)> changeview;
+	/**
+	 * Called when the view changed.  'jump' defines if the change should be
+	 * considered a "jump" or a smooth scrolling event.
+	 */
+	boost::signals2::signal<void(bool jump)> changeview;
 
 	boost::signals2::signal<void()> fieldclicked;
 
 	void warp_mouse_to_node(Widelands::Coords);
 
-	void set_viewpoint(Vector2i vp, bool jump);
+	void set_viewpoint(const Vector2f& vp, bool jump);
 	void center_view_on_coords(const Widelands::Coords& coords);
-	void center_view_on_map_pixel(const Vector2i& pos);
+	void center_view_on_map_pixel(const Vector2f& pos);
 
-	Vector2i get_viewpoint() const;
+	Vector2f get_viewpoint() const;
 	Rectf get_view_area() const;
 	float get_zoom() const;
 
@@ -87,7 +82,7 @@ struct MapView : public UI::Panel {
 	bool
 	handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 
-	void track_sel(Vector2i m);
+	void track_sel(const Vector2f& m);
 
 protected:
 	InteractiveBase& intbase() const {
@@ -105,7 +100,6 @@ private:
 
 	std::unique_ptr<GameRenderer> renderer_;
 	InteractiveBase& intbase_;
-	ChangeViewFn changeview_;
 	Vector2f viewpoint_;
 	float zoom_;
 	Vector2i last_mouse_pos_;

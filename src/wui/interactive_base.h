@@ -164,8 +164,9 @@ public:
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
 	const std::vector<QuickNavigation::Landmark>& landmarks();
+
 	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const Vector2i& point);
+	void set_landmark(size_t key, const QuickNavigation::View& view);
 
 protected:
 	// Will be called whenever the buildhelp is changed with the new 'value'.
@@ -176,7 +177,7 @@ protected:
 
 	MiniMap::Registry& minimap_registry();
 
-	void mainview_move(const Rectf&);
+	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
 	bool handle_key(bool down, SDL_Keysym) override;

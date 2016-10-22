@@ -34,18 +34,6 @@
 
 namespace {
 
-// Returns the shortest distance between two points on a wrapping line of
-// length width.
-float shortest_distance_on_torus(float x1, float x2, const float width) {
-	if (x1 > x2) {
-		std::swap(x1, x2);
-	}
-	while (x2 - x1 > width / 2.f) {
-		x1 += width;
-	}
-	return x2 - x1;
-}
-
 // Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
 // point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
 // Containing is defined as such that the shortest distance between the center
@@ -82,8 +70,8 @@ MapView::MapView(
 MapView::~MapView() {
 }
 
-Vector2i MapView::get_viewpoint() const {
-	return round(viewpoint_);
+Vector2f MapView::get_viewpoint() const {
+	return viewpoint_;
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
@@ -122,15 +110,14 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Vector2f view_center = view_area.center();
 	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
 	const int h = MapviewPixelFunctions::get_map_end_screen_y(map);
-	const float dist_x = shortest_distance_on_torus(view_center.x, map_pixel.x, w);
-	const float dist_y = shortest_distance_on_torus(view_center.y, map_pixel.y, h);
+	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, view_center, map_pixel);
 
 	// Check if the point is visible on screen.
-	if (dist_x > view_area.w / 2.f || dist_y > view_area.h / 2.f) {
+	if (dist.x > view_area.w / 2.f || dist.y > view_area.h / 2.f) {
 		return;
 	}
-	const Vector2i in_panel = round(to_panel(move_inside(map_pixel, view_area, w, h)));
-	set_mouse_pos(in_panel);
+	const Vector2f in_panel = to_panel(move_inside(map_pixel, view_area, w, h));
+	set_mouse_pos(round(in_panel));
 	track_sel(in_panel);
 }
 
@@ -161,10 +148,6 @@ void MapView::draw(RenderTarget& dst) {
 	}
 }
 
-void MapView::set_changeview(const MapView::ChangeViewFn& fn) {
-	changeview_ = fn;
-}
-
 float MapView::get_zoom() const {
 	return zoom_;
 }
@@ -178,17 +161,11 @@ void MapView::set_zoom(const float zoom) {
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void MapView::set_viewpoint(Vector2i vp, bool jump) {
+void MapView::set_viewpoint(const Vector2f& viewpoint, bool jump) {
+	viewpoint_ = viewpoint;
 	const Widelands::Map& map = intbase().egbase().map();
-	MapviewPixelFunctions::normalize_pix(map, &vp);
-
-	viewpoint_ = vp.cast<float>();
-
-	// NOCOM(#sirver): why are there 2 callback functions?
-	if (changeview_) {
-		changeview_(vp, jump);
-	}
-	changeview(get_view_area());
+	MapviewPixelFunctions::normalize_pix(map, &viewpoint_);
+	changeview(jump);
 }
 
 void MapView::center_view_on_coords(const Widelands::Coords& c) {
@@ -198,13 +175,13 @@ void MapView::center_view_on_coords(const Widelands::Coords& c) {
 	assert(0 <= c.y);
 	assert(c.y < map.get_height());
 
-	const Vector2i in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
+	const Vector2f in_mappixel = MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c));
 	center_view_on_map_pixel(in_mappixel);
 }
 
-void MapView::center_view_on_map_pixel(const Vector2i& pos) {
+void MapView::center_view_on_map_pixel(const Vector2f& pos) {
 	const Rectf view_area = get_view_area();
-	set_viewpoint(pos - Vector2i(view_area.w / 2.f, view_area.h / 2.f), true);
+	set_viewpoint(pos - Vector2f(view_area.w / 2.f, view_area.h / 2.f), true);
 }
 
 Rectf MapView::get_view_area() const {
@@ -212,7 +189,7 @@ Rectf MapView::get_view_area() const {
 }
 
 void MapView::pan_by(Vector2i delta_pixels) {
-	set_viewpoint(get_viewpoint() + delta_pixels * zoom_, false);
+	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * zoom_, false);
 }
 
 void MapView::stop_dragging() {
@@ -230,7 +207,7 @@ void MapView::stop_dragging() {
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
-		track_sel(Vector2i(x, y));
+		track_sel(Vector2f(x, y));
 
 		fieldclicked();
 	} else if (btn == SDL_BUTTON_RIGHT) {
@@ -261,7 +238,7 @@ bool MapView::handle_mousemove(
 	}
 
 	if (!intbase().get_sel_freeze())
-		track_sel(Vector2i(x, y));
+		track_sel(Vector2f(x, y));
 	return true;
 }
 
@@ -285,7 +262,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	const Vector2f offset = -last_mouse_pos_.cast<float>() * (zoom - zoom_);
 
 	zoom_ = zoom;
-	set_viewpoint(round(viewpoint_ + offset), false);
+	set_viewpoint(viewpoint_ + offset, false);
 	return true;
 }
 
@@ -297,8 +274,8 @@ Move the sel to the given mouse position.
 Does not honour sel freeze.
 ===============
 */
-void MapView::track_sel(Vector2i p) {
-	Vector2f p_in_map = to_map(p.cast<float>());
+void MapView::track_sel(const Vector2f& p) {
+	Vector2f p_in_map = to_map(p);
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
 	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
 }

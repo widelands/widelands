@@ -80,6 +80,36 @@ wl_library(wui_common
     ui_basic
 )
 
+wl_library(wui_quicknavigation
+  SRCS
+    quicknavigation.cc
+    quicknavigation.h
+  DEPENDS
+    base_geometry
+    logic
+    widelands_ball_of_mud
+    wui_mapview
+    wui_mapview_pixelfunctions
+)
+
+wl_library(wui_mapview
+  SRCS
+    mapview.cc
+    mapview.h
+  DEPENDS
+    base_geometry
+    base_macros
+    base_math
+    graphic
+    graphic_game_renderer
+    logic
+    logic_widelands_geometry
+    ui_basic
+    widelands_ball_of_mud
+    wui
+    wui_mapview_pixelfunctions
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -134,8 +164,6 @@ wl_library(wui
     login_box.cc
     login_box.h
     logmessage.h
-    mapview.cc
-    mapview.h
     militarysitewindow.cc
     minimap.cc
     minimap.h
@@ -149,8 +177,6 @@ wl_library(wui
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
-    quicknavigation.cc
-    quicknavigation.h
     shipwindow.cc
     soldiercapacitycontrol.cc
     soldiercapacitycontrol.h
@@ -184,14 +210,12 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
-    base_math
     base_time_string
     chat
     economy
     game_io
     graphic
     graphic_color
-    graphic_game_renderer
     graphic_minimap_renderer
     graphic_surface
     graphic_text
@@ -214,5 +238,7 @@ wl_library(wui
     wui_chat_ui
     wui_edge_overlay_manager
     wui_field_overlay_manager
+    wui_mapview
     wui_mapview_pixelfunctions
+    wui_quicknavigation
 )

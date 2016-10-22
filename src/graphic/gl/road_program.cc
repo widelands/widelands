@@ -50,7 +50,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
-									const float scale,
+                           const float scale,
                            const Widelands::RoadType road_type,
                            const Direction direction,
                            uint32_t* gl_texture) {
@@ -130,7 +130,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
 void RoadProgram::draw(const int renderbuffer_width,
                        const int renderbuffer_height,
                        const FieldsToDraw& fields_to_draw,
-							  const float scale,
+                       const float scale,
                        const float z_value) {
 	vertices_.clear();
 
@@ -143,8 +143,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.rn_index),
-				         scale, road, kEast, &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field,
+				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
 			}
 		}
 
@@ -153,8 +153,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.brn_index),
-				         scale, road, kSouthEast, &gl_texture);
+				add_road(renderbuffer_width, renderbuffer_height, field,
+				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
 			}
 		}
 

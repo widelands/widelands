@@ -35,8 +35,8 @@ namespace MapviewPixelFunctions {
 
 float calc_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
 
-Vector2i calc_pix_difference(const Widelands::Map&, Vector2i, Vector2i);
-uint32_t calc_pix_distance(const Widelands::Map&, Vector2i, Vector2i);
+Vector2f calc_pix_difference(const Widelands::Map&, Vector2f, Vector2f);
+float calc_pix_distance(const Widelands::Map&, Vector2f, Vector2f);
 
 inline uint32_t get_map_end_screen_x(const Widelands::Map& map) {
 	return map.get_width() * kTriangleWidth;
@@ -67,7 +67,7 @@ panel_to_map(const Vector2f& viewpoint, const float zoom, const Vector2f& panel_
  */
 Widelands::NodeAndTriangle<> calc_node_and_triangle(const Widelands::Map&, uint32_t x, uint32_t y);
 
-void normalize_pix(const Widelands::Map& map, Vector2i* p);
+void normalize_pix(const Widelands::Map& map, Vector2f* p);
 
 // Calculate the on-screen position of the node without taking height into
 // account.

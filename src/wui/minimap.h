@@ -45,7 +45,7 @@ public:
 
 	MiniMap(InteractiveBase& parent, Registry*);
 
-	boost::signals2::signal<void(const Vector2i&)> warpview;
+	boost::signals2::signal<void(const Vector2f&)> warpview;
 
 	void set_view(const Rectf& rect) {
 		view_.set_view(rect);

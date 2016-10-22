@@ -310,7 +310,7 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 	// Viewpoint is the point of the map in pixel which is shown in the upper
 	// left corner of window or fullscreen
 	const InteractiveBase& ibase = *egbase_->get_ibase();
-	Vector2i const vp = ibase.get_viewpoint();
+	Vector2f const vp = ibase.get_viewpoint();
 
 	// Resolution of window or fullscreen
 	int32_t const xres = g_gr->get_xres();
@@ -323,14 +323,13 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 	position_pix.x -= vp.x;
 	position_pix.y -= vp.y;
 	// Normalizing correct invalid pixel coordinates
-	Vector2i rounded = round(position_pix);
-	MapviewPixelFunctions::normalize_pix(egbase_->map(), &rounded);
+	MapviewPixelFunctions::normalize_pix(egbase_->map(), &position_pix);
 
 	// Make sure position is inside viewport
-	if (rounded.x >= 0 && rounded.x <= xres && rounded.y >= 0 && rounded.y <= yres) {
-		return rounded.x * 254 / xres;
+	if (position_pix.x >= 0 && position_pix.x <= xres && position_pix.y >= 0 &&
+	    position_pix.y <= yres) {
+		return position_pix.x * 254 / xres;
 	}
-
 	return -1;
 }
 

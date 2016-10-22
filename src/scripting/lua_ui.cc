@@ -515,7 +515,7 @@ void LuaMapView::__unpersist(lua_State* L) {
       to fields quickly.
 */
 int LuaMapView::get_viewpoint_x(lua_State* L) {
-	lua_pushuint32(L, get()->get_viewpoint().x);
+	lua_pushdouble(L, get()->get_viewpoint().x);
 	return 1;
 }
 int LuaMapView::set_viewpoint_x(lua_State* L) {
@@ -526,13 +526,13 @@ int LuaMapView::set_viewpoint_x(lua_State* L) {
 	}
 
 	MapView* mv = get();
-	Vector2i p = mv->get_viewpoint();
-	p.x = floor(luaL_checkdouble(L, -1));
+	Vector2f p = mv->get_viewpoint();
+	p.x = luaL_checkdouble(L, -1);
 	mv->set_viewpoint(p, true);
 	return 0;
 }
 int LuaMapView::get_viewpoint_y(lua_State* L) {
-	lua_pushuint32(L, get()->get_viewpoint().y);
+	lua_pushdouble(L, get()->get_viewpoint().y);
 	return 1;
 }
 int LuaMapView::set_viewpoint_y(lua_State* L) {
@@ -543,8 +543,8 @@ int LuaMapView::set_viewpoint_y(lua_State* L) {
 	}
 
 	MapView* mv = get();
-	Vector2i p = mv->get_viewpoint();
-	p.y = floor(luaL_checkdouble(L, -1));
+	Vector2f p = mv->get_viewpoint();
+	p.y = luaL_checkdouble(L, -1);
 	mv->set_viewpoint(p, true);
 	return 0;
 }
