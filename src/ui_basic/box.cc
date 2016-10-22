@@ -204,26 +204,28 @@ void Box::layout() {
 }
 
 void Box::update_positions() {
+	const bool is_horizontal_rtl = UI::g_fh1->fontset()->is_rtl() && orientation_ == Horizontal;
 	int32_t scrollpos = scrollbar_ ? scrollbar_->get_scrollpos() : 0;
 
-	uint32_t totaldepth = 0;
+	uint32_t totaldepth = is_horizontal_rtl ? get_inner_w() : 0;
 	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
 	if (scrollbar_)
 		totalbreadth -= Scrollbar::kSize;
 
-	for (size_t i = 0; i < items_.size(); ++i) {
-		const size_t idx =
-		   (UI::g_fh1->fontset()->is_rtl() && orientation_ == Horizontal) ? items_.size() - 1 - i : i;
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, breadth;
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
 			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
-			set_item_pos(idx, totaldepth - scrollpos);
+			set_item_pos(
+			   idx, is_horizontal_rtl ? totaldepth - depth - scrollpos : totaldepth - scrollpos);
 		}
-
-		totaldepth += depth;
-		totaldepth += inner_spacing_;
+		if (is_horizontal_rtl) {
+			totaldepth -= depth - inner_spacing_;
+		} else {
+			totaldepth += depth + inner_spacing_;
+		}
 	}
 }
 
