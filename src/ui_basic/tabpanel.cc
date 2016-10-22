@@ -275,7 +275,8 @@ void TabPanel::draw(RenderTarget& dst) {
 	int32_t x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
-		x = tabs_[idx]->get_x();
+		x = UI::g_fh1->fontset()->is_rtl() ? get_w() - tabs_[idx]->get_x() - tabs_[idx]->get_w() :
+		                                     tabs_[idx]->get_x();
 		tab_width = tabs_[idx]->get_w();
 
 		if (highlight_ == idx) {
@@ -329,8 +330,10 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	// draw the remaining separator
 	assert(x <= get_w());
-	dst.brighten_rect(Rect(Point(x + tab_width, kTabPanelButtonHeight - 2), get_w() - x, 2),
-	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
+	dst.brighten_rect(
+	   Rect(Point(UI::g_fh1->fontset()->is_rtl() ? 0 : x + tab_width, kTabPanelButtonHeight - 2),
+	        UI::g_fh1->fontset()->is_rtl() ? x : get_w() - x, 2),
+	   2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
 	if (border_type_ == TabPanel::Type::kBorder) {
@@ -397,6 +400,10 @@ size_t TabPanel::find_tab(int32_t x, int32_t y) const {
 	}
 
 	int32_t width = 0;
+	if (UI::g_fh1->fontset()->is_rtl()) {
+		x = get_w() - x;
+	}
+
 	for (size_t id = 0; id < tabs_.size(); ++id) {
 		width += tabs_[id]->get_w();
 		if (width > x) {
