@@ -50,7 +50,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
-									const float zoom,
+									const float scale,
                            const Widelands::RoadType road_type,
                            const Direction direction,
                            uint32_t* gl_texture) {
@@ -69,8 +69,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	// Find the reciprocal unit vector, so that we can calculate start and end
 	// points for the quad that will make the road.
-	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * zoom;
-	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * zoom;
+	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * scale;
+	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * scale;
 
 	assert(start.owner != nullptr);
 	const Image& texture =
@@ -130,7 +130,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
 void RoadProgram::draw(const int renderbuffer_width,
                        const int renderbuffer_height,
                        const FieldsToDraw& fields_to_draw,
-							  const float zoom,
+							  const float scale,
                        const float z_value) {
 	vertices_.clear();
 
@@ -144,7 +144,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.rn_index),
-				         zoom, road, kEast, &gl_texture);
+				         scale, road, kEast, &gl_texture);
 			}
 		}
 
@@ -154,7 +154,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field, fields_to_draw.at(field.brn_index),
-				         zoom, road, kSouthEast, &gl_texture);
+				         scale, road, kSouthEast, &gl_texture);
 			}
 		}
 
@@ -164,7 +164,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.bln_index), zoom, road, kSouthWest, &gl_texture);
+				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
 			}
 		}
 	}

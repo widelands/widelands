@@ -314,9 +314,9 @@ protected:
 	void draw(uint32_t gametime,
 	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
-				 float zoom,
+				 float scale,
 	          RenderTarget* dst) override;
-	void draw_info(DrawText draw_text, const Vector2f& point_on_dst, float zoom, RenderTarget* dst);
+	void draw_info(DrawText draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

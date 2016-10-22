@@ -440,22 +440,22 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const DrawText draw_text,
                      const Vector2f& point_on_dst,
-                     float zoom,
+                     float scale,
                      RenderTarget* dst) {
 	if (!anim_) {
 		return;
 	}
 	if (!anim_construction_total_) {
-		dst->blit_animation(point_on_dst, zoom, anim_, gametime - animstart_);
+		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, zoom, dst);
+		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
                                   const DrawText draw_text,
                                   const Vector2f& point_on_dst,
-                                  const float zoom,
+                                  const float scale,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;
 	if (program_ptr_ < program_->size())
@@ -488,11 +488,11 @@ void Immovable::draw_construction(const uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(point_on_dst, zoom, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
-	dst->blit_animation(point_on_dst, zoom, anim_, current_frame * frametime, player_color,
+	dst->blit_animation(point_on_dst, scale, anim_, current_frame * frametime, player_color,
 	                   Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
@@ -500,7 +500,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
-	             point_on_dst, zoom, dst);
+	             point_on_dst, scale, dst);
 }
 
 /**

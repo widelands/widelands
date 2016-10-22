@@ -21,6 +21,7 @@
 #define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
 #include "base/vector.h"
+#include "base/vector.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
@@ -43,6 +44,16 @@ inline uint32_t get_map_end_screen_x(const Widelands::Map& map) {
 
 inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
 	return map.get_height() * kTriangleHeight;
+}
+
+inline Vector2f
+map_to_panel(const Vector2f& viewpoint, const float zoom, const Vector2f& map_pixel) {
+	return map_pixel / zoom - viewpoint / zoom;
+}
+
+inline Vector2f
+panel_to_map(const Vector2f& viewpoint, const float zoom, const Vector2f& panel_pixel) {
+	return panel_pixel * zoom + viewpoint;
 }
 
 /**

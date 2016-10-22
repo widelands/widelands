@@ -44,7 +44,7 @@
 
 // Holds information for a view
 struct WatchWindowView {
-	Vector2f view_center;
+	Vector2i viewpoint;
 	float zoom;
 	Widelands::ObjectPointer tracking;  //  if non-null, we're tracking a Bob
 };
@@ -55,7 +55,6 @@ struct WatchWindow : public UI::Window {
 	            int32_t y,
 	            uint32_t w,
 	            uint32_t h,
-	            Widelands::Coords,
 	            bool single_window_ = false);
 	~WatchWindow();
 
@@ -67,8 +66,6 @@ struct WatchWindow : public UI::Window {
 
 	void add_view(Widelands::Coords);
 	void next_view();
-	void show_view();
-	Vector2i calc_coords(Widelands::Coords);
 	void save_coords();
 	void close_cur_view();
 	void toggle_buttons();
@@ -98,7 +95,6 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          int32_t const y,
                          uint32_t const w,
                          uint32_t const h,
-                         Widelands::Coords const coords,
                          bool const init_single_window)
    : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
      mapview_(this, 0, 0, 200, 166, parent),
@@ -133,8 +129,6 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
 	mapview_.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1));
 	warp_mainview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, &parent, _1));
-
-	add_view(coords);
 }
 
 /**
@@ -147,8 +141,10 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 		return;
 	WatchWindowView view;
 
+	mapview_.center_view_on_coords(coords);
+
 	view.tracking = nullptr;
-	view.view_center = MapviewPixelFunctions::to_map_pixel(game().map(), coords);
+	view.viewpoint = mapview_.get_viewpoint();
 	view.zoom = mapview_.get_zoom();
 	last_visit_ = game().get_gametime();
 
@@ -156,18 +152,6 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	set_current_view(views_.size() - 1, views_.size() > 1);
 	if (single_window_)
 		toggle_buttons();
-}
-
-// Calc point on map from coords
-Vector2i WatchWindow::calc_coords(Widelands::Coords const coords) {
-	// Initial positioning
-	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * kTriangleWidth;
-	int32_t vy = (coords.y) * kTriangleHeight;
-	Widelands::Map& map = game().map();
-	// NOCOM(#sirver): probably requires zoom
-	uint8_t height = map[coords].get_height() * kHeightFactor;
-
-	return Vector2i(vx - mapview_.get_w() / 2, vy - height - mapview_.get_h() / 2);
 }
 
 // Switch to next view
@@ -178,7 +162,7 @@ void WatchWindow::next_view() {
 // Saves the coordinates of a view if it was already shown (and possibly moved)
 void WatchWindow::save_coords() {
 	auto& view = views_[cur_index_];
-	view.view_center = mapview_.get_view_area().center();
+	view.viewpoint = mapview_.get_viewpoint();
 	view.zoom = mapview_.get_zoom();
 }
 
@@ -206,15 +190,8 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 		view_btns_[idx]->set_perm_pressed(true);
 	}
 	cur_index_ = idx;
-	show_view();
-}
-
-// Draws the current view
-void WatchWindow::show_view() {
-	mapview_.center_view_on_map_pixel(round(views_[cur_index_].view_center));
-	// NOCOM(#sirver): what about this true?
-	// NOCOM(#sirver): set zoom.
-	// mapview_.set_viewpoint(, true);
+	mapview_.set_zoom(views_[cur_index_].zoom);
+	mapview_.set_viewpoint(views_[cur_index_].viewpoint, true);
 }
 
 WatchWindow::~WatchWindow() {
@@ -238,7 +215,7 @@ void WatchWindow::think() {
 	if (upcast(Widelands::Bob, bob, views_[cur_index_].tracking.get(game()))) {
 		const Vector2f field_position =
 		   MapviewPixelFunctions::to_map_pixel(game().map(), bob->get_position());
-		const Vector2f pos = bob->calc_drawpos(game(), field_position, views_[cur_index_].zoom);
+		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		Widelands::Map& map = game().map();
 		// Drop the tracking if it leaves our vision range
@@ -354,10 +331,12 @@ Open a watch window.
 */
 void show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
-		if (g_watch_window)
-			g_watch_window->add_view(coords);
-		else
-			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords, true);
-	} else
-		new WatchWindow(parent, 250, 150, 200, 200, coords, false);
+		if (!g_watch_window) {
+			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
+		}
+		g_watch_window->add_view(coords);
+	} else {
+		auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
+		window->add_view(coords);
+	}
 }

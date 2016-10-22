@@ -97,12 +97,12 @@ struct BaseImmovable : public MapObject {
 	// 'gametime'. 'draw_text' decides if census and statistics are written too.
 	// The 'coords_to_draw' are passed one to give objects that occupy multiple
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
-	// the point for the hotspot of the animation and 'zoom' determines how big
+	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
 	virtual void draw(uint32_t gametime,
 	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
-				 float zoom,
+				 float scale,
 	          RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
@@ -224,7 +224,7 @@ public:
 	void draw(uint32_t gametime,
 	          DrawText draw_text,
 	          const Vector2f& point_on_dst,
-	          float zoom,
+	          float scale,
 	          RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
@@ -303,7 +303,7 @@ private:
 	void draw_construction(uint32_t gametime,
 	                       DrawText draw_text,
 	                       const Vector2f& point_on_dst,
-	                       float zoom,
+	                       float scale,
 	                       RenderTarget* dst);
 };
 

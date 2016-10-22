@@ -410,7 +410,7 @@ protected:
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,
-	                  const float zoom,
+	                  const float scale,
 	                  RenderTarget* dst) const;
 
 	void molog(char const* fmt, ...) const __attribute__((format(printf, 2, 3)));

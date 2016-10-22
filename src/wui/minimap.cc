@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/transform.h"
 #include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"

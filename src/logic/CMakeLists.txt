@@ -119,6 +119,7 @@ wl_library(logic
     widelands_geometry_io.cc
     widelands_geometry_io.h
     widelands.h
+    map_objects/draw_text.h
     map_objects/attackable.h
     map_objects/bob.cc
     map_objects/bob.h
@@ -126,15 +127,13 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
-    map_objects/immovable_program.h
     map_objects/immovable.cc
     map_objects/immovable.h
+    map_objects/immovable_program.h
     map_objects/map_object.cc
     map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
-    map_objects/walkingdir.cc
-    map_objects/walkingdir.h
     map_objects/tribes/battle.cc
     map_objects/tribes/battle.h
     map_objects/tribes/bill_of_materials.h
@@ -181,15 +180,17 @@ wl_library(logic
     map_objects/tribes/warelist.h
     map_objects/tribes/wareworker.h
     map_objects/tribes/workarea_info.h
+    map_objects/tribes/worker.cc
+    map_objects/tribes/worker.h
     map_objects/tribes/worker_descr.cc
     map_objects/tribes/worker_descr.h
     map_objects/tribes/worker_program.cc
     map_objects/tribes/worker_program.h
-    map_objects/tribes/worker.cc
-    map_objects/tribes/worker.h
-    map_objects/world/critter_program.h
+    map_objects/walkingdir.cc
+    map_objects/walkingdir.h
     map_objects/world/critter.cc
     map_objects/world/critter.h
+    map_objects/world/critter_program.h
     map_objects/world/editor_category.cc
     map_objects/world/editor_category.h
     map_objects/world/map_gen.cc

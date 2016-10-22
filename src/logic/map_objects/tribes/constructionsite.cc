@@ -300,12 +300,12 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             DrawText draw_text,
                             const Vector2f& point_on_dst,
-                            float zoom,
+                            float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst->blit_animation(point_on_dst, zoom, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -346,7 +346,7 @@ void ConstructionSite::draw(uint32_t gametime,
 
 	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst->blit_animation(point_on_dst, zoom, anim_idx, tanim - FRAME_LENGTH, player_color,
+		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color,
 		                    Recti(Vector2i(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
@@ -361,17 +361,17 @@ void ConstructionSite::draw(uint32_t gametime,
 		}
 		const Animation& prev_building_anim =
 		   g_gr->animations().get_animation(prev_building_anim_idx);
-		dst->blit_animation(point_on_dst, zoom, prev_building_anim_idx, tanim - FRAME_LENGTH,
+		dst->blit_animation(point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH,
 		                    player_color,
 		                    Recti(Vector2i(0, 0), prev_building_anim.width(),
 		                         std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst->blit_animation(point_on_dst, zoom, anim_idx, tanim,
+	dst->blit_animation(point_on_dst, scale, anim_idx, tanim,
 	                    player_color, Recti(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, zoom, dst);
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }

@@ -29,7 +29,7 @@ namespace Widelands {
 void Flag::draw(uint32_t gametime,
                 const DrawText,
                 const Vector2f& point_on_dst,
-                float zoom,
+                float scale,
                 RenderTarget* dst) {
 	static struct {
 		float x, y;
@@ -38,18 +38,18 @@ void Flag::draw(uint32_t gametime,
 
 	const RGBColor& player_color = owner().get_playercolor();
 	dst->blit_animation(
-	   point_on_dst, zoom, owner().tribe().flag_animation(), gametime - animstart_, player_color);
+	   point_on_dst, scale, owner().tribe().flag_animation(), gametime - animstart_, player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
 		Vector2f warepos = point_on_dst;
 		if (i < 8) {
-			warepos.x += ware_offsets[i].x * zoom;
-			warepos.y += ware_offsets[i].y * zoom;
+			warepos.x += ware_offsets[i].x * scale;
+			warepos.y += ware_offsets[i].y * scale;
 		} else {
-			warepos.y -= (6.f + (i - 8.f) * 3.f) * zoom;
+			warepos.y -= (6.f + (i - 8.f) * 3.f) * scale;
 		}
 		dst->blit_animation(
-		   warepos, zoom, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
+		   warepos, scale, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 

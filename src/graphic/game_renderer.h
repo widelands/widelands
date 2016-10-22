@@ -23,7 +23,6 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "base/transform.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/map_objects/draw_text.h"
@@ -42,26 +41,29 @@ public:
 	~GameRenderer();
 
 	// Renders the map from a player's point of view into the given drawing
-	// window. The 'screen_to_mappixel' transform converts a screen pixel into a
-	// map pixel at zoom 1.
+	// window. The 'viewpoint' is the top left screens pixel map pixel and
+	// 'scale' is the magnification of the view.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Transform2f& panel_to_mappixel,
+	               const Vector2f& viewpoint,
+	               float scale,
 	               const Widelands::Player& player,
-						DrawText draw_text,
+	               DrawText draw_text,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
 	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Transform2f& panel_to_mappixel,
-						DrawText draw_text,
+	               const Vector2f& viewpoint,
+	               float scale,
+	               DrawText draw_text,
 	               RenderTarget* dst);
 
 private:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
 	void draw(const Widelands::EditorGameBase& egbase,
-	          const Transform2f& screen_to_mappixel,
+	          const Vector2f& viewpoint,
+	          float scale,
 	          DrawText draw_text,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);

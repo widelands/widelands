@@ -67,6 +67,11 @@ struct MapView : public UI::Panel {
 	Vector2i get_viewpoint() const;
 	Rectf get_view_area() const;
 	float get_zoom() const;
+
+	// Set the zoom to the new value without changing view_point. For the user
+	// the view will perceivably jump.
+	void set_zoom(float zoom);
+
 	bool is_dragging() const {
 		return dragging_;
 	}

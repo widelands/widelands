@@ -38,8 +38,6 @@ wl_library(base_i18n
 wl_library(base_geometry
   SRCS
     rect.h
-    transform.h
-    transform.cc
     vector.h
     vector.cc
 )

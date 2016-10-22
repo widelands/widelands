@@ -205,13 +205,13 @@ public:
 	void init_auto_task(Game&) override;
 
 	Vector2f
-	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, const float zoom) const;
+	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, const float scale) const;
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
 	          const DrawText& draw_text,
 	          const Vector2f& point_on_dst,
-	          float zoom,
+	          float scale,
 	          RenderTarget* dst) const override;
 
 	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
@@ -220,7 +220,7 @@ public:
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2f draw_position,
-	                    const float zoom,
+	                    const float scale,
 	                    const bool anchor_below,
 	                    RenderTarget*) const;
 

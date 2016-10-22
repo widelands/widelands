@@ -121,7 +121,7 @@ public:
 		int renderbuffer_height;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
-		float zoom;
+		float scale;
 		Rectf destination_rect;
 	};
 

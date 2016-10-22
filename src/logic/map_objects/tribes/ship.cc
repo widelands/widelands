@@ -945,9 +945,9 @@ void Ship::sink_ship(Game& game) {
 void Ship::draw(const EditorGameBase& egbase,
                 const DrawText& draw_text,
                 const Vector2f& field_on_dst,
-                const float zoom,
+                const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, draw_text, field_on_dst, zoom, dst);
+	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string = "";
@@ -984,7 +984,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	}
 
 	do_draw_info(
-	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, zoom), zoom, dst);
+	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

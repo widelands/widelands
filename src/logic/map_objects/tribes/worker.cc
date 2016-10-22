@@ -2514,20 +2514,20 @@ void Worker::scout_update(Game& game, State& state) {
 
 void Worker::draw_inner(const EditorGameBase& game,
                   const Vector2f& point_on_dst,
-                  const float zoom,
+                  const float scale,
                   RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	dst->blit_animation(
-	   point_on_dst, zoom, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
 		const Vector2f location(
-		   point_on_dst.x - hotspot.x * zoom, point_on_dst.y - hotspot.y * zoom);
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
 		dst->blit_animation(
-		   location, zoom, carried_ware->descr().get_animation("idle"), 0, player_color);
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 
@@ -2537,12 +2537,12 @@ void Worker::draw_inner(const EditorGameBase& game,
 void Worker::draw(const EditorGameBase& egbase,
                   const DrawText&,
                   const Vector2f& field_on_dst,
-                  const float zoom,
+                  const float scale,
                   RenderTarget* dst) const {
 	if (!get_current_anim()) {
 		return;
 	}
-	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, zoom), zoom, dst);
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
 }
 
 /*

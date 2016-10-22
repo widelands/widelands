@@ -241,7 +241,7 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, uint32_t tdelta);
 	void skip_act();
-	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float zoom) const;
+	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
 
 	void set_position(EditorGameBase&, const Coords&);
@@ -261,12 +261,12 @@ public:
 
 	// Draws the bob onto the screen with 'field_on_dst' being the position of
 	// the field associated with this bob (if it is walking, that is its
-	// starting field) in pixel space of 'dst' (including zoom). The 'zoom' is
+	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
 	// required to draw the bob in the right size.
 	virtual void draw(const EditorGameBase&,
 	                  const DrawText& draw_text,
 	                  const Vector2f& field_on_dst,
-	                  float zoom,
+	                  float scale,
 	                  RenderTarget* dst) const;
 
 	// For debug

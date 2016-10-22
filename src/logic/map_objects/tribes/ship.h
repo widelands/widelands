@@ -238,7 +238,7 @@ protected:
 	void draw(const EditorGameBase&,
 	          const DrawText& draw_text,
 	          const Vector2f& field_on_dst,
-	          float zoom,
+	          float scale,
 	          RenderTarget* dst) const override;
 
 private:

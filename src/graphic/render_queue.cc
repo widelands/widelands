@@ -233,7 +233,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			break;
 
 		case Program::kTerrainBase: {
-			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			// ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			terrain_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
@@ -251,7 +251,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			road_program_->draw(item.terrain_arguments.renderbuffer_width,
 			                    item.terrain_arguments.renderbuffer_height,
-			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.zoom,
+			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale,
 			                    item.z_value + 2 * kOpenGlZDelta);
 			++i;
 		} break;

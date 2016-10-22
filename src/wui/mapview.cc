@@ -79,11 +79,11 @@ Vector2i MapView::get_viewpoint() const {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
-	return map_pixel / zoom_ - viewpoint_ / zoom_;
+	return MapviewPixelFunctions::map_to_panel(viewpoint_, zoom_, map_pixel);
 }
 
 Vector2f MapView::to_map(const Vector2f& panel_pixel) const {
-	return panel_pixel * zoom_ + viewpoint_;
+	return MapviewPixelFunctions::panel_to_map(viewpoint_, zoom_, panel_pixel);
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
@@ -145,13 +145,12 @@ void MapView::draw(RenderTarget& dst) {
 		draw_text |= DrawText::kStatistics;
 	}
 
-	const Transform2f panel_to_map(viewpoint_, zoom_);
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		renderer_->rendermap(
-		   egbase, panel_to_map, interactive_player->player(), 
+		   egbase, viewpoint_, zoom_, interactive_player->player(), 
 			static_cast<DrawText>(draw_text), &dst);
 	} else {
-		renderer_->rendermap(egbase, panel_to_map, static_cast<DrawText>(draw_text), &dst);
+		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<DrawText>(draw_text), &dst);
 	}
 }
 
@@ -159,9 +158,12 @@ void MapView::set_changeview(const MapView::ChangeViewFn& fn) {
 	changeview_ = fn;
 }
 
-// NOCOM(#sirver): rename zoom -> scale everywhere.
 float MapView::get_zoom() const {
 	return zoom_;
+}
+
+void MapView::set_zoom(const float zoom) {
+	zoom_ = zoom;
 }
 
 /*

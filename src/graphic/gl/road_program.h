@@ -42,7 +42,7 @@ public:
 	void draw(int renderbuffer_width,
 	          int renderbuffer_height,
 	          const FieldsToDraw& fields_to_draw,
-				 float zoom,
+				 float scale,
 	          float z_value);
 
 private:
@@ -62,7 +62,7 @@ private:
 	              int renderbuffer_height,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
-					  float zoom,
+					  float scale,
 	              const Widelands::RoadType road_type,
 	              const Direction direction,
 	              uint32_t* gl_texture);

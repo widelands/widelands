@@ -688,19 +688,19 @@ void Bob::move_update(Game& game, State&) {
 // Calculates the actual position to draw on from the base node position. This
 // function takes walking etc. into account.
 //
-// pos is the location, in pixels, of the node position_ on screen with zoom
+// pos is the location, in pixels, of the node position_ on screen with scale
 // and height taken into account.
 Vector2f Bob::calc_drawpos(const EditorGameBase& game,
                              const Vector2f& field_on_dst,
-                             const float zoom) const {
+                             const float scale) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
 	Vector2f spos = field_on_dst;
 	Vector2f epos = field_on_dst;
 
-	const float triangle_w = kTriangleWidth * zoom;
-	const float triangle_h = kTriangleHeight * zoom;
+	const float triangle_w = kTriangleWidth * scale;
+	const float triangle_h = kTriangleHeight * scale;
 
 	switch (walking_) {
 	case WALK_NW:
@@ -738,8 +738,8 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 	}
 
 	if (start.field) {
-		spos.y += end.field->get_height() * kHeightFactor * zoom;
-		spos.y -= start.field->get_height() * kHeightFactor * zoom;
+		spos.y += end.field->get_height() * kHeightFactor * scale;
+		spos.y -= start.field->get_height() * kHeightFactor * scale;
 
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
@@ -758,19 +758,19 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 void Bob::draw(const EditorGameBase& egbase,
                const DrawText&,
                const Vector2f& field_on_dst,
-               const float zoom,
+               const float scale,
                RenderTarget* dst) const {
 	if (!anim_) {
 		return;
 	}
 
 	auto* const owner = get_owner();
-	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, zoom);
+	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
 	if (owner != nullptr) {
 		dst->blit_animation(
-		   point_on_dst, zoom, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
 	} else {
-		dst->blit_animation(point_on_dst, zoom, anim_, egbase.get_gametime() - animstart_);
+		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
 }
 

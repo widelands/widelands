@@ -212,12 +212,11 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 
 // Draws the objects (animations & overlays).
 void draw_objects(const EditorGameBase& egbase,
-                  const Transform2f& mappixel_to_panel,
+                  const float zoom,
                   const FieldsToDraw& fields_to_draw,
                   const Player* player,
                   const DrawText draw_text,
                   RenderTarget* dst) {
-	const float zoom = mappixel_to_panel.zoom();
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
@@ -317,35 +316,45 @@ GameRenderer::~GameRenderer() {
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Transform2f& panel_to_mappixel,
+                             const Vector2f& viewpoint,
+                             const float zoom,
                              const Widelands::Player& player,
-									  const DrawText draw_text,
+                             const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, panel_to_mappixel, draw_text, &player, dst);
+	draw(egbase, viewpoint, zoom, draw_text, &player, dst);
 }
 
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
-                             const Transform2f& panel_to_mappixel,
+                             const Vector2f& viewpoint,
+                             const float zoom,
                              const DrawText draw_text,
                              RenderTarget* dst) {
-	draw(egbase, panel_to_mappixel, draw_text, nullptr, dst);
+	draw(egbase, viewpoint, zoom, draw_text, nullptr, dst);
 }
 
 void GameRenderer::draw(const EditorGameBase& egbase,
-                        const Transform2f& panel_to_mappixel,
-								const DrawText draw_text,
+                        const Vector2f& viewpoint,
+                        const float zoom,
+                        const DrawText draw_text,
                         const Player* player,
                         RenderTarget* dst) {
-	const Transform2f screen_to_mappixel = panel_to_mappixel.chain(
-	   Transform2f::from_translation(-dst->get_rect().origin().cast<float>()));
-	Vector2f tl_map = screen_to_mappixel.apply(dst->get_rect().origin().cast<float>());
-	Vector2f br_map = screen_to_mappixel.apply(dst->get_rect().opposite_of_origin().cast<float>());
+	assert(viewpoint.x >= 0);  // divisions involving negative numbers are bad
+	assert(viewpoint.y >= 0);
+	assert(dst->get_offset().x <= 0);
+	assert(dst->get_offset().y <= 0);
 
-	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
-	assert(tl_map.y >= 0);
+	int minfx = std::floor(viewpoint.x / kTriangleWidth);
+	int minfy = std::floor(viewpoint.y / kTriangleHeight);
 
-	int minfx = std::floor(tl_map.x / kTriangleWidth);
-	int minfy = std::floor(tl_map.y / kTriangleHeight);
+	// If a view window is partially moved outside of the display, its 'rect' is
+	// adjusted to be fully contained on the screen - i.e. x = 0 and width is
+	// made smaller. Its offset is made negativ to account for this change.
+	// To figure out which fields we need to draw, we have to add the absolute
+	// value of 'offset' to the actual dimension of the 'rect' to get to desired
+	// dimension of the 'rect'
+	const Vector2f br_map = MapviewPixelFunctions::panel_to_map(
+	   viewpoint, zoom, Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
+	                             dst->get_rect().h + std::abs(dst->get_offset().y)));
 	int maxfx = std::ceil(br_map.x / kTriangleWidth);
 	int maxfy = std::ceil(br_map.y / kTriangleHeight);
 
@@ -367,8 +376,8 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 	const uint32_t gametime = egbase.get_gametime();
 
+	const float scale = 1.f / zoom;
 	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
-	const Transform2f mappixel_to_screen = screen_to_mappixel.inverse();
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
@@ -396,10 +405,12 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 			map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
-			f.gl_position = f.surface_pixel = mappixel_to_screen.apply(map_pixel);
+			f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(viewpoint, zoom, map_pixel);
+			f.gl_position = f.surface_pixel = f.rendertarget_pixel +
+			                                  dst->get_rect().origin().cast<float>() +
+			                                  dst->get_offset().cast<float>();
 			pixel_to_gl_renderbuffer(
 			   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
-			f.rendertarget_pixel = f.surface_pixel - dst->get_rect().origin().cast<float>();
 
 			f.brightness = field_brightness(f.fcoords, gametime, map, player);
 
@@ -433,7 +444,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.terrain_arguments.renderbuffer_height = surface_height;
 	i.terrain_arguments.terrains = &egbase.world().terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
-	i.terrain_arguments.zoom = mappixel_to_screen.zoom();
+	i.terrain_arguments.scale = scale;
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.
@@ -445,6 +456,6 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
-	draw_objects(egbase, mappixel_to_screen, fields_to_draw_, player, draw_text, dst);
+	draw_objects(egbase, scale, fields_to_draw_, player, draw_text, dst);
 }
 
