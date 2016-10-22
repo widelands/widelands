@@ -972,7 +972,7 @@ void DefaultAI::late_initialization() {
 	management_data.set_mutation_multiplicator(1);
 	switch (type_) {
 		case DefaultAI::Type::kNormal:
-			management_data.set_mutation_multiplicator(50);
+			management_data.set_mutation_multiplicator(30);
 			break;
 		case DefaultAI::Type::kWeak:
 			management_data.set_mutation_multiplicator(5);
@@ -4441,26 +4441,26 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					needed_type = BuildingNecessity::kNeeded;
 				}
 			}
-			if (bo.type == BuildingObserver::Type::kProductionsite) {
-				if (bo.produces_building_material || bo.max_needed_preciousness >= 10) {
-					if (bo.total_count() == 0) {
-						needed_type = BuildingNecessity::kNeeded;
-					}
-				}
-			}
+			//if (bo.type == BuildingObserver::Type::kProductionsite) {
+				//if (bo.produces_building_material || bo.max_needed_preciousness >= 10) {
+					//if (bo.total_count() == 0) {
+						//needed_type = BuildingNecessity::kNeeded;
+					//}
+				//}
+			//}
 		} else {  // exemption after 25 minutes - 2 buildings allowed
 			if (bo.type == BuildingObserver::Type::kMine) {
 				if (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished <= 1) {
 					needed_type = BuildingNecessity::kNeeded;
 				}
 			}
-			if (bo.type == BuildingObserver::Type::kProductionsite) {
-				if (bo.produces_building_material || bo.max_needed_preciousness >= 10) {
-					if (bo.total_count() <= 1) {
-						needed_type = BuildingNecessity::kNeeded;
-					}
-				}
-			}
+			//if (bo.type == BuildingObserver::Type::kProductionsite) {
+				//if (bo.produces_building_material || bo.max_needed_preciousness >= 10) {
+					//if (bo.total_count() <= 1) {
+						//needed_type = BuildingNecessity::kNeeded;
+					//}
+				//}
+			//}
 		}
 	}
 
@@ -4619,8 +4619,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			const bool nb_4 = management_data.f_neuron_pool[25].get_result(
 				bo.cnt_under_construction + bo.unoccupied_count > 0,
 				needs_second_for_upgrade,
-				bo.produces_building_material,
-				gametime >= 25 * 60 * 1000,
+				wood_policy_ == WoodPolicy::kAllowRangers,
+				gametime >= 15 * 60 * 1000,
 				bo.inputs.empty());
 			
 			const bool nb_5 = management_data.f_neuron_pool[23].get_result(
@@ -4631,11 +4631,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			
 			if (nb_5) {
 				//is either needed
-				if (bo.produces_building_material && bo.total_count() <= 1 && bo.current_stats > 10) {
+				//if (bo.produces_building_material && bo.total_count() <= 1 && bo.current_stats > 10) {
 					return BuildingNecessity::kNeeded;
-				} else {
-					return needed_type;
-				}
+				//} else {
+					//return needed_type;
+				//}
 			} else {
 				return BuildingNecessity::kForbidden;
 			}
