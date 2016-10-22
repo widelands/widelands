@@ -118,9 +118,6 @@ public:
 	}
 	void set_sel_radius(uint32_t);
 
-	void center_view_on_coords(const Widelands::Coords& coords);
-	void center_view_on_map_pixel(const Vector2i& pos);
-
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);

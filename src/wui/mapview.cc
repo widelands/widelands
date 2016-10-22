@@ -67,7 +67,8 @@ MapView::MapView(
    : UI::Panel(parent, x, y, w, h),
      renderer_(new GameRenderer()),
      intbase_(player),
-     panel_to_mappixel_(Transform2f::identity()),
+	  viewpoint_(0.f, 0.f),
+	  zoom_(1.f),
      dragging_(false) {
 }
 
@@ -75,7 +76,15 @@ MapView::~MapView() {
 }
 
 Vector2i MapView::get_viewpoint() const {
-	return round(panel_to_mappixel_.translation());
+	return round(viewpoint_);
+}
+
+Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
+	return map_pixel / zoom_ - viewpoint_ / zoom_;
+}
+
+Vector2f MapView::to_map(const Vector2f& panel_pixel) const {
+	return panel_pixel * zoom_ + viewpoint_;
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
@@ -96,8 +105,8 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	// 'view_area.w / 2', the point is visible.
 	// If that is the case, we move the point by adding or substracting
 	// 'get_map_end_screen_x()' such that the point is contained inside of
-	// 'view_area'. If we now apply 'panel_to_mappixel_' to 'map_pixel', we
-	// are guaranteed that the pixel we get back is inside the panel.
+	// 'view_area'. If we now convert to panel pixels, we are guaranteed that
+	// the pixel we get back is inside the panel.
 
 	const Widelands::Map& map = intbase().egbase().map();
 	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
@@ -113,9 +122,7 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	if (dist_x > view_area.w / 2.f || dist_y > view_area.h / 2.f) {
 		return;
 	}
-	const Vector2i in_panel =
-	   round(panel_to_mappixel_.inverse().apply(move_inside(map_pixel, view_area, w, h)));
-
+	const Vector2i in_panel = round(to_panel(move_inside(map_pixel, view_area, w, h)));
 	set_mouse_pos(in_panel);
 	track_sel(in_panel);
 }
@@ -139,17 +146,23 @@ void MapView::draw(RenderTarget& dst) {
 		draw_text |= DrawText::kStatistics;
 	}
 
+	const Transform2f panel_to_map(viewpoint_, zoom_);
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		renderer_->rendermap(
-		   egbase, panel_to_mappixel_, interactive_player->player(), 
+		   egbase, panel_to_map, interactive_player->player(), 
 			static_cast<DrawText>(draw_text), &dst);
 	} else {
-		renderer_->rendermap(egbase, panel_to_mappixel_, static_cast<DrawText>(draw_text), &dst);
+		renderer_->rendermap(egbase, panel_to_map, static_cast<DrawText>(draw_text), &dst);
 	}
 }
 
 void MapView::set_changeview(const MapView::ChangeViewFn& fn) {
 	changeview_ = fn;
+}
+
+// NOCOM(#sirver): rename zoom -> scale everywhere.
+float MapView::get_zoom() const {
+	return zoom_;
 }
 
 /*
@@ -161,9 +174,7 @@ void MapView::set_viewpoint(Vector2i vp, bool jump) {
 	const Widelands::Map& map = intbase().egbase().map();
 	MapviewPixelFunctions::normalize_pix(map, &vp);
 
-	panel_to_mappixel_ =
-	   Transform2f::from_translation(vp.cast<float>() - panel_to_mappixel_.translation())
-	      .chain(panel_to_mappixel_);
+	viewpoint_ = vp.cast<float>();
 
 	// NOCOM(#sirver): why are there 2 callback functions?
 	if (changeview_) {
@@ -172,14 +183,28 @@ void MapView::set_viewpoint(Vector2i vp, bool jump) {
 	changeview(get_view_area());
 }
 
-Rectf MapView::get_view_area() const {
-	const Vector2f min = panel_to_mappixel_.apply(Vector2f());
-	const Vector2f max = panel_to_mappixel_.apply(Vector2f(get_w(), get_h()));
-	return Rectf(min.x, min.y, max.x - min.x, max.y - min.y);
+void MapView::center_view_on_coords(const Widelands::Coords& c) {
+	const Widelands::Map& map = intbase().egbase().map();
+	assert(0 <= c.x);
+	assert(c.x < map.get_width());
+	assert(0 <= c.y);
+	assert(c.y < map.get_height());
+
+	const Vector2i in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
+	center_view_on_map_pixel(in_mappixel);
 }
 
-void MapView::set_rel_viewpoint(Vector2i vp, bool jump) {
-	set_viewpoint(get_viewpoint() + vp, jump);
+void MapView::center_view_on_map_pixel(const Vector2i& pos) {
+	const Rectf view_area = get_view_area();
+	set_viewpoint(pos - Vector2i(view_area.w / 2.f, view_area.h / 2.f), true);
+}
+
+Rectf MapView::get_view_area() const {
+	return Rectf(viewpoint_, get_w() * zoom_, get_h() * zoom_);
+}
+
+void MapView::pan_by(Vector2i delta_pixels) {
+	set_viewpoint(get_viewpoint() + delta_pixels * zoom_, false);
 }
 
 void MapView::stop_dragging() {
@@ -220,10 +245,11 @@ bool MapView::handle_mousemove(
 	last_mouse_pos_.y = y;
 
 	if (dragging_) {
-		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
-			set_rel_viewpoint(Vector2i(xdiff, ydiff), false);
-		else
+		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
+			pan_by(Vector2i(xdiff, ydiff));
+		} else {
 			stop_dragging();
+		}
 	}
 
 	if (!intbase().get_sel_freeze())
@@ -238,7 +264,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 
 	const Transform2f translation =
 	   Transform2f::from_translation(Vector2f(last_mouse_pos_.x, last_mouse_pos_.y));
-	Transform2f mappixel_to_panel = panel_to_mappixel_.inverse();
+	Transform2f mappixel_to_panel = Transform2f(-viewpoint_ / zoom_, 1.f / zoom_);
 	const float old_zoom = mappixel_to_panel.zoom();
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
 	float zoom = old_zoom * static_cast<float>(std::pow(
@@ -251,7 +277,8 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	mappixel_to_panel = translation.chain(Transform2f::from_zoom(zoom / old_zoom))
 	                                   .chain(translation.inverse())
 	                                   .chain(mappixel_to_panel);
-	panel_to_mappixel_ = mappixel_to_panel.inverse();
+	Transform2f panel_to_mappixel_ = mappixel_to_panel.inverse();
+	zoom_ = panel_to_mappixel_.zoom();
 
 	auto point = round(panel_to_mappixel_.translation());
 	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), &point);
@@ -268,7 +295,7 @@ Does not honour sel freeze.
 ===============
 */
 void MapView::track_sel(Vector2i p) {
-	Vector2f p_in_map = panel_to_mappixel_.apply(p.cast<float>());
+	Vector2f p_in_map = to_map(p.cast<float>());
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
 	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
 }

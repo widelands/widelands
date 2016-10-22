@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "base/rect.h"
-#include "base/transform.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
 
@@ -62,10 +61,12 @@ struct MapView : public UI::Panel {
 	void warp_mouse_to_node(Widelands::Coords);
 
 	void set_viewpoint(Vector2i vp, bool jump);
-	void set_rel_viewpoint(Vector2i r, bool jump);
+	void center_view_on_coords(const Widelands::Coords& coords);
+	void center_view_on_map_pixel(const Vector2i& pos);
 
 	Vector2i get_viewpoint() const;
 	Rectf get_view_area() const;
+	float get_zoom() const;
 	bool is_dragging() const {
 		return dragging_;
 	}
@@ -88,13 +89,20 @@ protected:
 		return intbase_;
 	}
 
+	// Move the view by 'delta_pixels'.
+	void pan_by(Vector2i delta_pixels);
+
 private:
 	void stop_dragging();
+
+	Vector2f to_panel(const Vector2f& map_pixel) const;
+	Vector2f to_map(const Vector2f& panel_pixel) const;
 
 	std::unique_ptr<GameRenderer> renderer_;
 	InteractiveBase& intbase_;
 	ChangeViewFn changeview_;
-	Transform2f panel_to_mappixel_;
+	Vector2f viewpoint_;
+	float zoom_;
 	Vector2i last_mouse_pos_;
 	bool dragging_;
 };

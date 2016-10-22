@@ -288,19 +288,19 @@ void InteractiveBase::think() {
 	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDL_SCANCODE_UP) ||
 		    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Vector2i(0, -scrollval), false);
+			pan_by(Vector2i(0, -scrollval));
 		}
 		if (get_key_state(SDL_SCANCODE_DOWN) ||
 		    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Vector2i(0, scrollval), false);
+			pan_by(Vector2i(0, scrollval));
 		}
 		if (get_key_state(SDL_SCANCODE_LEFT) ||
 		    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Vector2i(-scrollval, 0), false);
+			pan_by(Vector2i(-scrollval, 0));
 		}
 		if (get_key_state(SDL_SCANCODE_RIGHT) ||
 		    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Vector2i(scrollval, 0), false);
+			pan_by(Vector2i(scrollval, 0));
 		}
 	}
 	egbase().think();  // Call game logic here. The game advances.
@@ -359,32 +359,6 @@ void InteractiveBase::mainview_move(const Rectf& map_view) {
 	if (m->minimap.window) {
 		m->mm->set_view(map_view);
 	}
-}
-
-/*
-===============
-Move the mainview to the given position (in node coordinates)
-===============
-*/
-void InteractiveBase::center_view_on_coords(const Widelands::Coords& c) {
-	assert(0 <= c.x);
-	assert(c.x < egbase().map().get_width());
-	assert(0 <= c.y);
-	assert(c.y < egbase().map().get_height());
-
-	const Map& map = egbase().map();
-	const Vector2i in_mappixel = round(MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c)));
-	center_view_on_map_pixel(in_mappixel);
-}
-
-/*
-===============
-Center the mainview on the given position (in pixels)
-===============
-*/
-void InteractiveBase::center_view_on_map_pixel(const Vector2i& pos) {
-	const Rectf view_area = get_view_area();
-	set_viewpoint(pos - Vector2i(view_area.w / 2.f, view_area.h / 2.f), true);
 }
 
 // Open the minimap or close it if it's open
