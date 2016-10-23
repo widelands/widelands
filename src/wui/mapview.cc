@@ -33,7 +33,7 @@
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
    : UI::Panel(parent, x, y, w, h),
-     renderer_(new GameRenderer()),
+     renderer_(GameRenderer::create()),
      intbase_(player),
      viewpoint_(Point(0, 0)),
      dragging_(false) {

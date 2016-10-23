@@ -51,6 +51,16 @@ public:
 			}
 		}
 
+		// The number of elements that have already been inserted.
+		size_t count() const {
+			return count_;
+		}
+
+		// The maximum number of elements that can be inserted.
+		size_t max() const {
+			return max_;
+		}
+
 		// Finish inserting. Return the buffer offset for the beginning of
 		// the inserted range, as must be passed to OpenGL.
 		GLintptr unmap() {

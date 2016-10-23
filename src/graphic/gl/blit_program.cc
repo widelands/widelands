@@ -25,8 +25,8 @@
 #include "graphic/blit_mode.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/coordinate_conversion.h"
-#include "graphic/gl/utils.h"
 #include "graphic/gl/streaming_buffer.h"
+#include "graphic/gl/utils.h"
 
 namespace {
 
@@ -294,10 +294,11 @@ BlitProgramGl4::BlitProgramGl4()
 }
 
 bool BlitProgramGl4::supported() {
+	// TODO(nha): implement this
 	// GLSL >= 1.30
 	// ARB_separate_shader_objects
 	// ARB_shader_storage_buffer_object
-	return true; //TODO
+	return true;
 }
 
 void BlitProgramGl4::draw(const std::vector<Arguments>& arguments) {
@@ -402,7 +403,7 @@ void BlitProgramGl4::draw(const std::vector<Arguments>& arguments) {
 		}
 	}
 
-	//TODO bind via state
+	// TODO(nha): bind via state
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
@@ -453,7 +454,7 @@ void BlitProgram::draw_monochrome(const FloatRect& dest_rect,
 
 // static
 BlitProgram& BlitProgram::instance() {
-	// TODO proper automatic choice
+	// TODO(nha): proper automatic choice
 	static BlitProgramGl4 blit_program;
 	return blit_program;
 }

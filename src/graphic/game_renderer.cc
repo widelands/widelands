@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include <memory>
 
 #include "graphic/gl/coordinate_conversion.h"
+#include "graphic/gl/fields_to_draw.h"
+#include "graphic/game_renderer_gl4.h"
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
@@ -70,6 +72,21 @@
 namespace {
 
 using namespace Widelands;
+
+class GameRendererGl2 : public GameRenderer {
+public:
+	// Draw the map for the given parameters (see rendermap). 'player'
+	// can be nullptr in which case the whole map is drawn.
+	void draw(RenderTarget& dst,
+	          const Widelands::EditorGameBase& egbase,
+	          const Point& view_offset,
+	          const Widelands::Player* player) override;
+
+private:
+	// This is owned and handled by us, but handed to the RenderQueue, so we
+	// basically promise that this stays valid for one frame.
+	FieldsToDraw fields_to_draw_;
+};
 
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
 // 'player' (which can be nullptr).
@@ -124,10 +141,16 @@ GameRenderer::GameRenderer() {
 GameRenderer::~GameRenderer() {
 }
 
+std::unique_ptr<GameRenderer>
+GameRenderer::create() {
+	if (GameRendererGl4::supported())
+		return std::unique_ptr<GameRenderer>(new GameRendererGl4);
+	return std::unique_ptr<GameRenderer>(new GameRendererGl2);
+}
+
 void GameRenderer::rendermap(RenderTarget& dst,
                              const Widelands::EditorGameBase& egbase,
                              const Point& view_offset,
-
                              const Widelands::Player& player) {
 	draw(dst, egbase, view_offset, &player);
 }
@@ -138,10 +161,10 @@ void GameRenderer::rendermap(RenderTarget& dst,
 	draw(dst, egbase, view_offset, nullptr);
 }
 
-void GameRenderer::draw(RenderTarget& dst,
-                        const EditorGameBase& egbase,
-                        const Point& view_offset,
-                        const Player* player) {
+void GameRendererGl2::draw(RenderTarget& dst,
+                           const EditorGameBase& egbase,
+                           const Point& view_offset,
+                           const Player* player) {
 	Point tl_map = dst.get_offset() + view_offset;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad

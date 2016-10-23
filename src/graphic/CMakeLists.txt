@@ -111,6 +111,8 @@ wl_library(graphic_terrain_programs
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
+    gl/terrain_program_gl4.cc
+    gl/terrain_program_gl4.h
     gl/dither_program.cc
     gl/dither_program.h
   DEPENDS
@@ -185,6 +187,8 @@ wl_library(graphic_game_renderer
   SRCS
     game_renderer.cc
     game_renderer.h
+    game_renderer_gl4.cc
+    game_renderer_gl4.h
   DEPENDS
     base_geometry
     base_macros

@@ -24,7 +24,6 @@
 
 #include "base/macros.h"
 #include "base/point.h"
-#include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {
 class Player;
@@ -37,16 +36,22 @@ class RenderTarget;
  * This abstract base class renders the main game view into an
  * arbitrary @ref RenderTarget.
  *
- * Specializations exist for SDL software rendering and for OpenGL rendering.
+ * Specializations exist for different OpenGL rendering paths.
  *
  * Users of this class should keep instances alive for as long as possible,
  * so that target-specific optimizations (such as caching data) can
  * be effective.
+ *
+ * Every instance can only perform one render operation per frame. When
+ * multiple views of the map are open, each needs its own instance of
+ * GameRenderer.
  */
 class GameRenderer {
 public:
-	GameRenderer();
-	~GameRenderer();
+	virtual ~GameRenderer();
+
+	// Create a game renderer instance.
+	static std::unique_ptr<GameRenderer> create();
 
 	// Renders the map from a player's point of view into the given
 	// drawing window. 'view_offset' is the offset of the upper left
@@ -58,16 +63,17 @@ public:
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
-	void
-	rendermap(RenderTarget& dst, const Widelands::EditorGameBase& egbase, const Point& view_offset);
+	void rendermap(RenderTarget& dst,
+	               const Widelands::EditorGameBase& egbase,
+	               const Point& view_offset);
 
-private:
-	// Draw the map for the given parameters (see rendermap). 'player'
-	// can be nullptr in which case the whole map is drawn.
-	void draw(RenderTarget& dst,
-	          const Widelands::EditorGameBase& egbase,
-	          const Point& view_offset,
-	          const Widelands::Player* player);
+protected:
+	GameRenderer();
+
+	virtual void draw(RenderTarget& dst,
+	                  const Widelands::EditorGameBase& egbase,
+	                  const Point& view_offset,
+	                  const Widelands::Player* player) = 0;
 
 	// Draws the objects (animations & overlays).
 	void draw_objects(RenderTarget& dst,
@@ -78,10 +84,6 @@ private:
 	                  int maxfx,
 	                  int minfy,
 	                  int maxfy);
-
-	// This is owned and handled by us, but handed to the RenderQueue, so we
-	// basically promise that this stays valid for one frame.
-	FieldsToDraw fields_to_draw_;
 
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };

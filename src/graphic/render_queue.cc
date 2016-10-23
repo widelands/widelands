@@ -30,6 +30,7 @@
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
+#include "graphic/gl/terrain_program_gl4.h"
 
 namespace {
 
@@ -139,10 +140,14 @@ ScopedScissor::~ScopedScissor() {
 }  // namespace
 
 RenderQueue::RenderQueue()
-   : next_z_(1),
-     terrain_program_(new TerrainProgram()),
-     dither_program_(new DitherProgram()),
-     road_program_(new RoadProgram()) {
+   : next_z_(1) {
+	if (!TerrainProgramGl4::supported()) {
+		terrain_program_.reset(new TerrainProgram);
+		dither_program_.reset(new DitherProgram);
+		road_program_.reset(new RoadProgram);
+	} else {
+		terrain_program_gl4_.reset(new TerrainProgramGl4);
+	}
 }
 
 // static
@@ -165,6 +170,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kTerrainBase:
 	case Program::kTerrainDither:
 	case Program::kTerrainRoad:
+	case Program::kTerrainGl4:
 		/* all fallthroughs intended */
 		break;
 
@@ -252,6 +258,14 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			road_program_->draw(
 			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
 			   *item.terrain_arguments.fields_to_draw, item.z_value + 2 * kOpenGlZDelta);
+			++i;
+		} break;
+
+		case Program::kTerrainGl4: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			terrain_program_gl4_->draw(item.terrain_gl4_arguments,
+			                           item.terrain_arguments.gametime,
+			                           item.z_value);
 			++i;
 		} break;
 

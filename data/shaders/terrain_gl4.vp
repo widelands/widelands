@@ -1,0 +1,182 @@
+#version 130
+#extension GL_ARB_uniform_buffer_object: enable
+
+// Per-vertex Attributes.
+// X,Y: relative vertex map coordinate
+// Z,W: relative triangle map coordinate
+//      low bit of Z: 0 for d-triangle, 1 for r-triangle
+//      bits 1&2 of Z: vertex ID for dithering
+in ivec4 in_vertex_coordinate;
+
+// Per-instance/patch Attributes.
+in ivec2 in_patch_coordinate;
+in vec2 in_patch_basepix;
+
+// Primary Constants.
+uniform vec2 u_position_scale;
+uniform vec2 u_position_offset;
+uniform float u_z_value;
+
+// Textures (map data).
+uniform usampler2D u_terrain_base;
+
+// Terrain information (secondary constants in a uniform buffer).
+struct Terrain {
+	vec2 offset;
+	int dither_layer;
+};
+
+layout(std140) uniform block_terrains {
+	Terrain u_terrains[128];
+};
+
+// Varyings: Output of vertex shader.
+
+// X,Y: offset into texture atlas
+// Z,W: texture coordinate
+out vec4 var_texture;
+
+// X,Y: offset into texture atlas
+// Z,W: dither texture coordinate
+out vec4 var_dither[3];
+
+out float var_brightness;
+
+// Constants
+const float kTriangleWidth = 64;
+const float kTriangleHeight = 32;
+const float kHeightFactor = 5;
+const float kTextureSideLength = 64;
+
+vec2 map_size;
+vec2 map_inv_size;
+
+float calc_brightness(uint node_ubrightness) {
+	// Brightness is really an 8-bit signed value, but it's stored in an
+	// GL_RGBA8UI texture, so here we use signed (arithmetic) shifts to do
+	// the conversion.
+	int node_brightness = int(node_ubrightness << 24) >> 24;
+	float brightness = 144. / 255. + node_brightness * (1. / 255.);
+	brightness = min(1., brightness * (255. / 160.));
+
+	//TODO: player brightness
+
+	return brightness;
+}
+
+uvec4 get_field_base(ivec2 coord) {
+	return texture(u_terrain_base, (coord + 0.5) * map_inv_size);
+}
+
+void main() {
+	map_size = vec2(textureSize(u_terrain_base, 0));
+	map_inv_size = 1. / map_size;
+
+	// Compute coordinate of field that owns the triangle to which this
+	// vertex belongs.
+	ivec2 field_coord;
+	field_coord.x = in_patch_coordinate.x + (in_vertex_coordinate.z >> 3);
+	field_coord.y = in_patch_coordinate.y + in_vertex_coordinate.w;
+
+	uvec4 field = get_field_base(field_coord);
+	bool is_down = (in_vertex_coordinate.z & 1) == 0;
+	uint dither_vid = uint((in_vertex_coordinate.z >> 1) & 3);
+	uint terrain = is_down ? field.y : field.x;
+
+	ivec2 node_coord = in_patch_coordinate.xy + in_vertex_coordinate.xy;
+	uvec4 node = get_field_base(node_coord);
+
+	// Vertex basepix
+	vec2 vertex_basepix = in_patch_basepix;
+	vertex_basepix.x += in_vertex_coordinate.x * kTriangleWidth;
+	if ((in_vertex_coordinate.y & 1) != 0)
+		vertex_basepix.x += kTriangleWidth / 2;
+	vertex_basepix.y += in_vertex_coordinate.y * kTriangleHeight;
+
+	// On-screen position
+	gl_Position.x = vertex_basepix.x;
+	gl_Position.y = vertex_basepix.y - node.z * kHeightFactor;
+	gl_Position.xy = gl_Position.xy * u_position_scale + u_position_offset;
+	gl_Position.z = u_z_value;
+	gl_Position.w = 1.;
+
+	// Brightness
+	var_brightness = calc_brightness(node.w);
+
+	// Texture coordinates
+	vec2 vertex_texcoord;
+	vertex_texcoord.x = vertex_basepix.x * (1. / kTextureSideLength);
+	vertex_texcoord.y = -vertex_basepix.y * (1. / kTextureSideLength);
+
+	// Base texture information
+	var_texture.xy = u_terrains[terrain].offset;
+	var_texture.zw = vertex_texcoord;
+
+	// Dithering. Vertices are labeled by their dither_vid. Note that the VIDs
+	// are different depending on whether the vertex is part of the r- or d-
+	// triangle.
+	//
+	//       2-1---d---0
+	//       / \     /
+	//      r  r\d  d
+	//     /     \ /
+	//    0---r--1-2
+	//
+	// Channel 0: opposite triangle of the same field
+	// Channel 1: x-major outside neighbor
+	// Channel 2: y-major outside neighbor
+	int dither_layer = u_terrains[terrain].dither_layer;
+	{
+		uint other_terrain = is_down ? field.x : field.y;
+
+		var_dither[0].zw = vec2(0.5, 0);
+
+		if (other_terrain != terrain) {
+			int other_dither_layer = u_terrains[other_terrain].dither_layer;
+
+			if (other_dither_layer > dither_layer) {
+				var_dither[0].xy = u_terrains[other_terrain].offset;
+				if (dither_vid != 0u)
+					var_dither[0].zw = vec2(2u - dither_vid, 1);
+			}
+		}
+	}
+	{
+		ivec2 other_coord = field_coord;
+		other_coord.x += is_down ? -1 : 1;
+		uvec4 other_field = get_field_base(other_coord);
+		uint other_terrain = is_down ? other_field.x : other_field.y;
+
+		var_dither[1].zw = vec2(0.5, 0);
+
+		if (other_terrain != terrain) {
+			int other_dither_layer = u_terrains[other_terrain].dither_layer;
+
+			if (other_dither_layer > dither_layer) {
+				var_dither[1].xy = u_terrains[other_terrain].offset;
+				if (dither_vid != 1u)
+					var_dither[1].zw = vec2(dither_vid / 2u, 1);
+			}
+		}
+	}
+	{
+		ivec2 other_coord = field_coord;
+		other_coord.y += is_down ? 1 : -1;
+		other_coord.x += is_down ? -1 : 0;
+		other_coord.x += ((field_coord.y & 1) != 0) ? 1 : 0;
+		uvec4 other_field = get_field_base(other_coord);
+		uint other_terrain = is_down ? other_field.x : other_field.y;
+
+		var_dither[2].zw = vec2(0.5, 0);
+
+		if (other_terrain != terrain) {
+			int other_dither_layer = u_terrains[other_terrain].dither_layer;
+
+			if (other_dither_layer > dither_layer) {
+				var_dither[2].xy = u_terrains[other_terrain].offset;
+				if (dither_vid != 2u)
+					var_dither[2].zw = vec2(1u - dither_vid, 1);
+			}
+		}
+	}
+}

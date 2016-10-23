@@ -38,6 +38,8 @@
 class DitherProgram;
 class RoadProgram;
 class TerrainProgram;
+class TerrainProgramGl4;
+struct TerrainGl4Arguments;
 
 // The RenderQueue is a singleton implementing the concept of deferred
 // rendering: Every rendering call that pretends to draw onto the screen will
@@ -83,6 +85,7 @@ public:
 		kTerrainBase,
 		kTerrainDither,
 		kTerrainRoad,
+		kTerrainGl4,
 		kBlit,
 		kRect,
 		kLine,
@@ -155,6 +158,7 @@ public:
 		TerrainArguments terrain_arguments;
 		RectArguments rect_arguments;
 		LineArguments line_arguments;
+		TerrainGl4Arguments* terrain_gl4_arguments;
 	};
 
 	static RenderQueue& instance();
@@ -178,6 +182,7 @@ private:
 	int next_z_;
 
 	std::unique_ptr<TerrainProgram> terrain_program_;
+	std::unique_ptr<TerrainProgramGl4> terrain_program_gl4_;
 	std::unique_ptr<DitherProgram> dither_program_;
 	std::unique_ptr<RoadProgram> road_program_;
 
