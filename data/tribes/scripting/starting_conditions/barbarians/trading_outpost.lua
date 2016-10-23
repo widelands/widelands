@@ -99,9 +99,8 @@ return {
       })
 
       -- Get all warehouse types
-      local plr = wl.Game().players[player.number]
       local warehouse_types = {}
-      for i, building in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
+      for i, building in ipairs(wl.Game():get_tribe_description(player.tribe_name).buildings) do
          if (building.type_name == "warehouse") then
             table.insert(warehouse_types, building_name)
          end
@@ -116,7 +115,7 @@ return {
       -- collect all ~warehouses and pick one to insert the wares
       local warehouses = {}
       for i, building_name in ipairs(warehouse_types) do
-            warehouses = array_combine(warehouses, plr:get_buildings(building_name))
+            warehouses = array_combine(warehouses, player:get_buildings(building_name))
       end
 
       if #warehouses > 0 then
@@ -129,23 +128,23 @@ return {
          local wh = warehouses[idx]
          local added = 0
 
-         if plr:get_wares("water") < 40 + #warehouses * 10 then
+         if player:get_wares("water") < 40 + #warehouses * 10 then
             wh:set_wares("water", wh:get_wares("water") + 20 + #warehouses * 2)
             added = added + 1
          end
-         if plr:get_wares("log") < 40 + #warehouses * 10 then
+         if player:get_wares("log") < 40 + #warehouses * 10 then
             wh:set_wares("log", wh:get_wares("log") + 20)
             added = added + 1
          end
-         if plr:get_wares("granite") < 30 + #warehouses * 10 then
+         if player:get_wares("granite") < 30 + #warehouses * 10 then
             wh:set_wares("granite", wh:get_wares("granite") +  10 + #warehouses * 2)
             added = added + 1
          end
-         if plr:get_wares("coal") < 70 + #warehouses * 10 then
+         if player:get_wares("coal") < 70 + #warehouses * 10 then
             wh:set_wares("coal", wh:get_wares("coal") + 25 + #warehouses * 5)
             added = added + 1
          end
-         if plr:get_wares("iron_ore") < 30 + #warehouses * 10 then
+         if player:get_wares("iron_ore") < 30 + #warehouses * 10 then
             wh:set_wares("iron_ore", wh:get_wares("iron_ore") + 10 + #warehouses * 2)
             added = added + 1
          end
@@ -153,15 +152,15 @@ return {
             wh:set_wares("fish", wh:get_wares("fish") + 10)
             added = added + 1
          end
-         if plr:get_wares("gold") < 20 + #warehouses * 5 then
+         if player:get_wares("gold") < 20 + #warehouses * 5 then
             wh:set_wares("gold", wh:get_wares("gold") + 3)
             added = added + 1
          end
-         if plr:get_wares("wheat") < 60 + #warehouses * 10 then
+         if player:get_wares("wheat") < 60 + #warehouses * 10 then
             wh:set_wares("wheat", wh:get_wares("wheat") + 15 + #warehouses * 2)
             added = added + 1
          end
-         if plr:get_wares("barbarians_bread") < 40 + #warehouses * 5 then
+         if player:get_wares("barbarians_bread") < 40 + #warehouses * 5 then
             wh:set_wares("barbarians_bread", wh:get_wares("barbarians_bread") + 8 + #warehouses * 2)
             added = added + 1
          end

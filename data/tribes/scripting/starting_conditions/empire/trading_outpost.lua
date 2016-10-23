@@ -105,9 +105,8 @@ return {
       })
 
       -- Get all warehouse types
-      local plr = wl.Game().players[player.number]
       local warehouse_types = {}
-      for i, building in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
+      for i, building in ipairs(wl.Game():get_tribe_description(player.tribe_name).buildings) do
          if (building.type_name == "warehouse") then
             table.insert(warehouse_types, building_name)
          end
@@ -122,7 +121,7 @@ return {
       -- collect all ~warehouses and pick one to insert the wares
       local warehouses = {}
       for i, building_name in ipairs(warehouse_types) do
-            warehouses = array_combine(warehouses, plr:get_buildings(building_name))
+            warehouses = array_combine(warehouses, player:get_buildings(building_name))
       end
 
       if #warehouses > 0 then
@@ -159,11 +158,11 @@ return {
          if wh:get_wares("gold") < 50 then
             wh:set_wares("gold", wh:get_wares("gold") + 1)
          end
-         if plr:get_wares("wheat") < 60 + #warehouses * 10 then
+         if player:get_wares("wheat") < 60 + #warehouses * 10 then
             wh:set_wares("wheat", wh:get_wares("wheat") + 10 + #warehouses * 2)
             added = added + 1
          end
-         if plr:get_wares("flour") < 30 + #warehouses * 10 then
+         if player:get_wares("flour") < 30 + #warehouses * 10 then
             wh:set_wares("flour", wh:get_wares("flour") + #warehouses * 5)
             added = added + 1
          end
