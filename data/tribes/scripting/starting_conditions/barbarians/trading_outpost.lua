@@ -102,7 +102,7 @@ return {
       local warehouse_types = {}
       for i, building in ipairs(wl.Game():get_tribe_description(player.tribe_name).buildings) do
          if (building.type_name == "warehouse") then
-            table.insert(warehouse_types, building_name)
+            table.insert(warehouse_types, building.name)
          end
       end
 
