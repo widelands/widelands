@@ -69,6 +69,42 @@ function campaign_message_box(message)
    message_box(wl.Game().players[1], message.title, message.body, message)
 end
 
+
+-- RST
+-- .. function:: add_campaign_objective(objective)
+--
+--    Adds an objective to a campaign.
+--
+--    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
+--
+--    :returns: The new objective.
+--
+function add_campaign_objective(objective)
+   if objective.obj_name then
+      return wl.Game().players[1]:add_objective(objective.obj_name, objective.obj_title, objective.obj_body)
+   else
+      return wl.Game().players[1]:add_objective(objective.name, objective.title, objective.body)
+   end
+end
+
+-- RST
+-- .. function:: set_objective_done(objective[, sleeptime])
+--
+--    Sets an objectve as done and sleeps for a bit.
+--
+--    :arg objective: The objective to be marked as done.
+--    :arg sleeptime: The milliseconds to sleep. Defaults to 3000.
+--
+function set_objective_done(objective, sleeptime)
+   objective.done = true
+   if not sleeptime then
+      sleep(3000)
+   else
+      sleep(sleeptime)
+   end
+end
+
+
 -- RST
 -- .. function:: message_box_objective(player, message)
 --
