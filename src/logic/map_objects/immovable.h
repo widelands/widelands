@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,6 +189,10 @@ public:
 	Immovable(const ImmovableDescr&);
 	~Immovable();
 
+	/// If this immovable was created by a building, this can be set in order to display information
+	/// about it. If this is a player immovable, you will need to set the owner first.
+	void set_antecedent(const BuildingDescr& building);
+
 	Player* get_owner() const {
 		return owner_;
 	}
@@ -230,6 +234,9 @@ public:
 	}
 
 protected:
+	// The building type that created this immovable, if any.
+	const BuildingDescr* antecedent_;
+
 	Player* owner_;
 	Coords position_;
 

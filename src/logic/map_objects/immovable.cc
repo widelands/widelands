@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -341,6 +341,7 @@ IMPLEMENTATION
 
 Immovable::Immovable(const ImmovableDescr& imm_descr)
    : BaseImmovable(imm_descr),
+     antecedent_(nullptr),
      owner_(nullptr),
      anim_(0),
      animstart_(0),
@@ -444,10 +445,16 @@ void Immovable::draw(const EditorGameBase& game,
                      const FCoords&,
                      const Point& pos) {
 	if (anim_) {
-		if (!anim_construction_total_)
+		if (!anim_construction_total_) {
 			dst.blit_animation(pos, anim_, game.get_gametime() - animstart_);
-		else
+			if (antecedent_) {
+				const uint32_t display_flags = game.get_ibase()->get_display_flags();
+				do_draw_info(display_flags & InteractiveBase::dfShowCensus, antecedent_->descname(),
+				             false, "", dst, pos);
+			}
+		} else {
 			draw_construction(game, dst, pos);
+		}
 	}
 }
 
@@ -517,7 +524,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersionImmovable = 7;
+constexpr uint8_t kCurrentPacketVersionImmovable = 8;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -538,6 +545,13 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	// Position
 	imm.position_ = read_coords_32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.position_);
+
+	if (packet_version >= 8) {
+		DescriptionIndex idx = fr.unsigned_8();
+		if (idx != INVALID_INDEX) {
+			imm.set_antecedent(*imm.get_owner()->tribe().get_building_descr(idx));
+		}
+	}
 
 	// Animation
 	char const* const animname = fr.c_string();
@@ -624,7 +638,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr)
-			log(" Tribe immovable has no owner!! ");
+			log(" Tribe immovable '%s' has no owner!! ", descr().name().c_str());
 		fw.c_string("tribes");
 	} else {
 		fw.c_string("world");
@@ -637,6 +651,8 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
+	fw.unsigned_8(antecedent_ ? get_owner()->tribe().building_index(antecedent_->name()) :
+	                            INVALID_INDEX);
 
 	// Animations
 	fw.string(descr().get_animation_name(anim_));
@@ -1229,6 +1245,15 @@ void PlayerImmovable::remove_worker(Worker& w) {
 		}
 
 	throw wexception("PlayerImmovable::remove_worker: not in list");
+}
+
+void Immovable::set_antecedent(const BuildingDescr& building) {
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
+		if (get_owner() == nullptr)
+			throw wexception("Set '%s' as antecedent for Tribe immovable '%s', but it has no owner.",
+			                 building.name().c_str(), descr().name().c_str());
+	}
+	antecedent_ = &building;
 }
 
 /**
