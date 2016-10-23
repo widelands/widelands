@@ -62,7 +62,10 @@ struct ProgressWindow {
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
-	Vector2f label_center_;
+
+	// This is an integer vector to make sure that we blit at pixel boundaries
+	// to avoid Texture subsampling.
+	Vector2i label_center_;
 	Rectf label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;

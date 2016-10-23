@@ -57,8 +57,8 @@ ProgressWindow::~ProgressWindow() {
 }
 
 void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, const uint32_t yres) {
-	label_center_.x = xres / 2.f;
-	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100.f;
+	label_center_.x = xres / 2;
+	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Recti wnd_rect(Vector2i(0, 0), xres, yres);
 
 	const uint32_t h =
@@ -103,7 +103,7 @@ void ProgressWindow::step(const std::string& description) {
 	draw_background(rt, xres, yres);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_,
+	rt.blit(label_center_.cast<float>(),
 	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
 	        BlendMode::UseAlpha, UI::Align::kCenter);
 
