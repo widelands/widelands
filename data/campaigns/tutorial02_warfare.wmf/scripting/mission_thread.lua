@@ -9,35 +9,39 @@ function intro()
    training()
 end
 
+function training2()
+   -- Teach about trainingsites and soldiers' abilities - concurrent part 2
+   sleep(2*60*1000)
+   o = message_box_objective(plr, trainingcamp1)
+   while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
+   set_objective_done(o)
+   message_box_objective(plr, trainingcamp2)
+end
+
 function training()
    -- Teach about trainingsites and soldiers' abilities
    sleep(5000) -- to let soldiers walk
 
    message_box_objective(plr, abilities)
    local o = message_box_objective(plr, battlearena1)
+   run(training2)
+
    while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
-   o.done = true
+   set_objective_done(o, 0)
    message_box_objective(plr, battlearena2)
-
-   o = message_box_objective(plr, trainingcamp1)
-   while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
-   o.done = true
-   message_box_objective(plr, trainingcamp2)
-
-   sleep(300)
-
-   military_buildings()
 end
 
 function military_buildings()
+   while #plr:get_buildings("barbarians_battlearena") == 0 or
+      #plr:get_buildings("barbarians_trainingcamp") == 0
+      do sleep(500)
+   end
    message_box_objective(plr, heroes_rookies)
    message_box_objective(plr, soldier_capacity)
    local o = message_box_objective(plr, dismantle)
 
    while #plr:get_buildings("barbarians_sentry") > 1 do sleep(200) end
-   o.done = true
-
-   sleep(2000)
+   set_objective_done(o)
 
    enhance_fortress()
 end
@@ -49,7 +53,7 @@ function enhance_fortress()
    local o = message_box_objective(plr, fortress_enhancement)
    while not (citadel_field.immovable and
       citadel_field.immovable.descr.name == "barbarians_citadel") do sleep(800) end
-   o.done = true
+   set_objective_done(o, 0)
 
    create_enemy()
 
@@ -91,14 +95,14 @@ function attack()
    while #plr2:get_buildings("empire_headquarters") > 0 do
       sleep(3000)
    end
-   o.done = true
+   set_objective_done(o)
 
    conclusion()
 end
 
 function conclusion()
-   sleep(4000)
    message_box_objective(plr, conclude_tutorial)
 end
 
 run(intro)
+run (military_buildings)
