@@ -203,10 +203,10 @@ void Button::draw(RenderTarget& dst) {
 		const Image* entry_text_im =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
 		                   enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
-
+		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		dst.blit(
-		   Vector2f((get_w() - entry_text_im->width()) / 2.f, (get_h() - entry_text_im->height()) / 2.f),
-		   entry_text_im);
+			Vector2f((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
+			entry_text_im);
 	}
 
 	//  draw border

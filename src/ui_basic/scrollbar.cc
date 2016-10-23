@@ -249,10 +249,10 @@ void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) 
 		int blit_width = image_scale * pic->width();
 		int blit_height = image_scale * pic->height();
 
-		dst.blitrect_scale(Rectf(r.origin().cast<float>() +
-		                            Vector2f((r.w - blit_width) / 2.f, (r.h - blit_height) / 2.f),
-		                         blit_width, blit_height),
-		                   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
+		dst.blitrect_scale(
+		   Rectf(r.origin() + Vector2f((r.w - blit_width) / 2.f, (r.h - blit_height) / 2.f),
+		         blit_width, blit_height),
+		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
 	}
 
 	// Draw border
