@@ -15,7 +15,6 @@ wl_library(wui_chat_ui
     chat
     graphic
     graphic_color
-    graphic_playercolor
     graphic_text
     graphic_text_layout
     logic
@@ -202,6 +201,7 @@ wl_library(wui
     io_fileread
     io_filesystem
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry

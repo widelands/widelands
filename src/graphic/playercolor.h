@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_PLAYER_COLOR_H
-#define WL_LOGIC_PLAYER_COLOR_H
+#ifndef WL_GRAPHIC_PLAYERCOLOR_H
+#define WL_GRAPHIC_PLAYERCOLOR_H
 
 #include "graphic/color.h"
 #include "graphic/image.h"
@@ -52,4 +52,4 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
 Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask);
 Image* playercolor_image(int player_number, const Image* image, const Image* color_mask);
 
-#endif  // end of include guard: WL_LOGIC_PLAYER_COLOR_H
+#endif  // end of include guard: WL_GRAPHIC_PLAYERCOLOR_H
