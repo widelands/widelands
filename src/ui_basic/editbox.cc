@@ -144,12 +144,6 @@ void EditBox::set_text(const std::string& t) {
 		m_->caret = m_->text.size();
 }
 
-/**
- * \return the maximum length of the input string
- */
-uint32_t EditBox::max_length() const {
-	return m_->maxLength;
-}
 
 /**
  * Set the maximum length of the input string.

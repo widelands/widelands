@@ -405,31 +405,6 @@ uint32_t EditorGameBase::add_trackpointer(void* const ptr) {
 	return lasttrackserial_;
 }
 
-/*
-===============
-Retrieve a previously stored pointer using the serial number.
-Returns 0 if the pointer has been removed.
-===============
-*/
-void* EditorGameBase::get_trackpointer(uint32_t const serial) {
-	std::map<uint32_t, void*>::iterator it = trackpointers_.find(serial);
-
-	if (it != trackpointers_.end())
-		return it->second;
-
-	return nullptr;
-}
-
-/*
-===============
-Remove the registered track pointer. Subsequent calls to get_trackpointer()
-using this serial number will return 0.
-===============
-*/
-void EditorGameBase::remove_trackpointer(uint32_t serial) {
-	trackpointers_.erase(serial);
-}
-
 /**
  * Cleanup for load
  *

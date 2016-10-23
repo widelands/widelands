@@ -176,8 +176,6 @@ public:
 	StreamWrite& syncstream();
 	Md5Checksum get_sync_hash() const;
 
-	bool get_allow_cheats();
-
 	void enqueue_command(Command* const);
 
 	void send_player_command(Widelands::PlayerCommand&);

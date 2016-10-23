@@ -162,8 +162,6 @@ public:
 	// unlike objects in the ObjectManager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
 	uint32_t add_trackpointer(void*);
-	void* get_trackpointer(uint32_t serial);
-	void remove_trackpointer(uint32_t serial);
 
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);

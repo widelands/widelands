@@ -140,12 +140,6 @@ void Game::sync_reset() {
 	log("[sync] Reset\n");
 }
 
-/**
- * Returns true if cheat codes have been activated (single-player only)
- */
-bool Game::get_allow_cheats() {
-	return true;
-}
 
 /**
  * \return a pointer to the \ref InteractivePlayer if any.
