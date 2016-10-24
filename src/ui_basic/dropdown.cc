@@ -63,10 +63,7 @@ BaseDropdown::BaseDropdown(
                      w - 24,
                      get_h(),
                      g_gr->images().get("images/ui_basic/but1.png"),
-                     label,
-                     "",
-                     true,
-                     false),
+							label),
      // Hook into parent so we can drop down outside the panel
      list_(parent, x, y + get_h(), w, 0, ListselectLayout::kDropdown),
      label_(label) {
