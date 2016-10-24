@@ -293,9 +293,7 @@ void Texture::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> ver
 	   {DrawLineProgram::Arguments{vertices, 0.f, BlendMode::UseAlpha}});
 }
 
-void Texture::do_fill_rect(const Rectf& dst_rect,
-                           const RGBAColor& color,
-                           BlendMode blend_mode) {
+void Texture::do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	if (blit_data_.texture_id == 0) {
 		return;
 	}

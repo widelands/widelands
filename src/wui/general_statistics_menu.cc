@@ -193,7 +193,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(
+		   hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
 		hbox2->add(btn, UI::Align::kLeft, false, true);
 	}
 

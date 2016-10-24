@@ -50,9 +50,8 @@ void MiniMap::View::set_view(const Rectf& view_area) {
 }
 
 void MiniMap::View::draw(RenderTarget& dst) {
-	minimap_image_ =
-	   draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, *minimap_type_,
-	                *minimap_layers_ | MiniMapLayer::ViewWindow);
+	minimap_image_ = draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, *minimap_type_,
+	                              *minimap_layers_ | MiniMapLayer::ViewWindow);
 	dst.blit(Vector2f(), minimap_image_.get());
 }
 

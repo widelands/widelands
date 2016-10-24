@@ -56,5 +56,4 @@ void Flag::draw(uint32_t gametime,
 /** The road is drawn by the terrain renderer via marked fields. */
 void Road::draw(uint32_t, const DrawText, const Vector2f&, float, RenderTarget*) {
 }
-
 }

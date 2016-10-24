@@ -91,26 +91,28 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-// NOCOM(#codereview): Idea for follow-up branch:
-// We get the numbers from the zoom boolean multiple times.
-// Why not store the zoom value in an int?
+	// NOCOM(#codereview): Idea for follow-up branch:
+	// We get the numbers from the zoom boolean multiple times.
+	// Why not store the zoom value in an int?
 	const float divider = zoom ? 1.f : 2.f;
-	const int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
-	const int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
+	const int half_width =
+	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
+	const int half_height =
+	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
 
 	Vector2i center_pixel;
 	switch (minimap_type) {
-		case MiniMapType::kStaticViewWindow:
-		   center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
-		   break;
+	case MiniMapType::kStaticViewWindow:
+		center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
+		break;
 
-		case MiniMapType::kStaticMap: {
-		   Vector2f origin = view_area.center();
-		   MapviewPixelFunctions::normalize_pix(map, &origin);
-		   center_pixel =
-		      Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
-		   break;
-	   }
+	case MiniMapType::kStaticMap: {
+		Vector2f origin = view_area.center();
+		MapviewPixelFunctions::normalize_pix(map, &origin);
+		center_pixel =
+		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
+		break;
+	}
 	}
 
 	const int width = zoom ? map.get_width() * 2 : map.get_width();
@@ -176,7 +178,8 @@ void do_draw_minimap(Texture* texture,
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				vision = 2;  // Seen right now.
-// NOCOM(#codereview): Why do we have 2 different ways of getting the fieldn's owner here?
+				// NOCOM(#codereview): Why do we have 2 different ways of getting the fieldn's owner
+				// here?
 				owner = f.field->get_owned_by();
 			} else if (player != nullptr) {
 				const auto& field = player->fields()[i];
@@ -200,15 +203,15 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                    const bool zoom) {
 	Vector2f top_left;
 	switch (minimap_type) {
-		case MiniMapType::kStaticViewWindow:
-			top_left =
-			view_area.center() -
-			Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
-			break;
+	case MiniMapType::kStaticViewWindow:
+		top_left =
+		   view_area.center() -
+		   Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+		break;
 
-		case MiniMapType::kStaticMap:
-			top_left = Vector2f(0., 0.);
-			break;
+	case MiniMapType::kStaticMap:
+		top_left = Vector2f(0., 0.);
+		break;
 	}
 
 	const float multiplier = zoom ? 2.f : 1.f;
@@ -236,13 +239,13 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
-	Vector2f top_left = minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
+	Vector2f top_left =
+	   minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
 	const Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
 	texture->lock();
-	do_draw_minimap(
-	   texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
+	do_draw_minimap(texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
 
 	if (layers & MiniMapLayer::ViewWindow) {
 		draw_view_window(map, view_area, minimap_type, zoom, texture.get());

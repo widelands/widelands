@@ -111,8 +111,8 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		if (it.worker) {
 			y += IWD_WorkerBaseline;
 			constexpr float kZoom = 1.f;
-			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)),
-			                   kZoom, tribe.get_worker_descr(it.index)->main_animation(), 0,
+			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)), kZoom,
+			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
 			                   player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;

@@ -26,8 +26,9 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&gb, "sound_options_menu", &registry, 160, 160, _("Sound Options")),
      ingame_music(this, Vector2i(hmargin(), vmargin()), _("Enable Music")),
-     ingame_sound(
-        this, Vector2i(hmargin(), vmargin() + kStateboxSize + vspacing()), _("Enable Sound Effects")),
+     ingame_sound(this,
+                  Vector2i(hmargin(), vmargin() + kStateboxSize + vspacing()),
+                  _("Enable Sound Effects")),
      ingame_music_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing(),

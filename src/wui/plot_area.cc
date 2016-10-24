@@ -168,7 +168,10 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 /**
  * print the string into the RenderTarget.
  */
-void draw_value(const string& value, const RGBColor& color, const Vector2f& pos, RenderTarget& dst) {
+void draw_value(const string& value,
+                const RGBColor& color,
+                const Vector2f& pos,
+                RenderTarget& dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
 	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align::kCenterRight);
 }
@@ -250,9 +253,9 @@ void draw_diagram(uint32_t time_ms,
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
-	                     Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
+	   kAxisLineColor, kAxisLinesWidth);
 	dst.draw_line_strip(
 	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
 	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},

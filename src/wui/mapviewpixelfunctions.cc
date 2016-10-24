@@ -39,7 +39,8 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
 	constexpr float kSin60 = 0.86603f;
 	constexpr float kLightFactor = -75.0f;
 
-	static Vector3f sun_vect = Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
+	static Vector3f sun_vect =
+	   Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
 
 	// find normal
 	// more guessed than thought about
@@ -262,7 +263,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 */
 void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
 
-// NOCOM(#codereview): Why not work directly on p->x, p->y, then we won't need the assignment on the bottom either.
+	// NOCOM(#codereview): Why not work directly on p->x, p->y, then we won't need the assignment on
+	// the bottom either.
 	float x = p->x;
 	float y = p->y;
 	{

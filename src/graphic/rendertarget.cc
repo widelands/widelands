@@ -153,8 +153,9 @@ void RenderTarget::blit(const Vector2f& dst,
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
-// NOCOM(#codereview): This is a very local constexpr. I am wondering whether this can be used more widely in a follow-up branch.
-// I seem to remember seeing 1. a lot in blitting calls.
+		// NOCOM(#codereview): This is a very local constexpr. I am wondering whether this can be used
+		// more widely in a follow-up branch.
+		// I seem to remember seeing 1. a lot in blitting calls.
 		constexpr float kFullyOpaque = 1.f;
 		surface_->blit(destination_rect, *image, source_rect, kFullyOpaque, blend_mode);
 	}
@@ -188,7 +189,7 @@ void RenderTarget::blitrect(const Vector2f& dst,
 	// We want to use the given srcrc, but we must make sure that we are not
 	// blitting outside of the boundaries of 'image'.
 	Rectf source_rect(gsrcrc.x, gsrcrc.y, std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
-	                 std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+	                  std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
 	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -325,8 +326,8 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
                                      const Recti& source_rect_i) {
 	Rectf source_rect = source_rect_i.cast<float>();
 	Rectf destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * scale,
-	                      dst.y - (animation.hotspot().y - source_rect.y) * scale,
-	                      source_rect.w * scale, source_rect.h * scale);
+	                       dst.y - (animation.hotspot().y - source_rect.y) * scale,
+	                       source_rect.w * scale, source_rect.h * scale);
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		animation.blit(time, destination_rect, source_rect, player_color, surface_);
 	}
@@ -428,8 +429,7 @@ bool RenderTarget::to_surface_geometry(Rectf* destination_rect, Rectf* source_re
 			return false;
 		}
 		const float new_destination_w = rect_.w - destination_rect->x;
-		source_rect->w =
-		    new_destination_w / destination_rect->w * source_rect->w;
+		source_rect->w = new_destination_w / destination_rect->w * source_rect->w;
 		destination_rect->w = new_destination_w;
 	}
 

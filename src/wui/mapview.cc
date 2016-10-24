@@ -131,7 +131,8 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-// NOCOM(#codereview): Rather than having an int an static_cast, how about defining operator | like we did for UI::Align?
+	// NOCOM(#codereview): Rather than having an int an static_cast, how about defining operator |
+	// like we did for UI::Align?
 	int draw_text = DrawText::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {

@@ -115,7 +115,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	if (init_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
 			view_btns_[i] = new UI::Button(this, "view", 74 + (17 * i), 200 - 34, 17, 34,
-			                              g_gr->images().get("images/ui_basic/but0.png"), "-");
+			                               g_gr->images().get("images/ui_basic/but0.png"), "-");
 			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
 		}
 
@@ -273,7 +273,8 @@ void WatchWindow::do_follow() {
 		Widelands::Bob* closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob* const bob = bobs[i];
-			const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
+			const Vector2f field_position =
+			   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);
 			const float dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 			InteractivePlayer* ipl = game().get_ipl();

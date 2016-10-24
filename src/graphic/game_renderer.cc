@@ -117,8 +117,8 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-// NOCOM(#codereview): This is a bob, so why is it called draw_text_for_this_immovable?
-// Now about: draw_text_for_this_map_object
+		// NOCOM(#codereview): This is a bob, so why is it called draw_text_for_this_immovable?
+		// Now about: draw_text_for_this_map_object
 		DrawText draw_text_for_this_immovable = draw_text;
 		const Player* owner = bob->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
@@ -397,7 +397,8 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have
 			// terrains and road graphics vertically mirrorerd.
-			Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
+			Vector2f map_pixel =
+			   MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
 			f.texture_coords.x = map_pixel.x / kTextureSideLength;
 			f.texture_coords.y = -map_pixel.y / kTextureSideLength;
 
@@ -439,8 +440,8 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
 	i.terrain_arguments.destination_rect =
-	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h,
-	             bounding_rect.w, bounding_rect.h);
+	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h, bounding_rect.w,
+	         bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;
 	i.terrain_arguments.renderbuffer_height = surface_height;
