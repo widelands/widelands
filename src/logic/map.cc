@@ -69,7 +69,8 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
-     pathfieldmgr_(new PathfieldManager) {
+     pathfieldmgr_(new PathfieldManager),
+     fields_base_version_(0) {
 }
 
 Map::~Map() {
@@ -386,6 +387,8 @@ void Map::set_origin(const Coords& new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
+
+	fields_base_version_++;
 }
 
 /*
@@ -403,6 +406,7 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	memset(fields_.get(), 0, sizeof(Field) * w * h);
 
 	pathfieldmgr_->set_size(w * h);
+	fields_base_version_++;
 }
 
 /*
@@ -1757,6 +1761,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 		clear_resources(f_sw_e);
 	}
 
+	fields_base_version_++;
 	Notifications::publish(NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &fields_[0])});
 
 	// Changing the terrain can affect ports, which can be up to 3 fields away.
@@ -1847,6 +1852,7 @@ uint32_t Map::set_height(const World& world, const FCoords fc, uint8_t const new
 	uint32_t radius = 2;
 	check_neighbour_heights(fc, radius);
 	recalc_for_field_area(world, Area<FCoords>(fc, radius));
+	fields_base_version_++;
 	return radius;
 }
 
@@ -1872,6 +1878,7 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 	} while (mr.advance(*this));
 	area.radius += regional_radius + 2;
 	recalc_for_field_area(world, area);
+	fields_base_version_++;
 	return area.radius;
 }
 
@@ -1913,6 +1920,7 @@ uint32_t Map::set_height(const World& world, Area<FCoords> area, HeightInterval 
 		area.radius = mr.radius();
 	}
 	recalc_for_field_area(world, area);
+	fields_base_version_++;
 	return area.radius;
 }
 

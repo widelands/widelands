@@ -275,6 +275,17 @@ public:
 		return height_;
 	}
 
+	// Returns a "map data version number" that is incremented whenever one of
+	// the following changes:
+	//  - width/height of the map
+	//  - some triangle's terrain
+	//  - some field's height
+	// The intention is that this allows the  rendering system can cache data
+	// that doesn't usually change during a game for performance.
+	uint32_t get_fields_base_version() const {
+		return fields_base_version_;
+	}
+
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
 	const std::string& get_scenario_player_tribe(PlayerNumber) const;
@@ -500,6 +511,8 @@ private:
 
 	PortSpacesSet port_spaces_;
 	Objectives objectives_;
+
+	uint32_t fields_base_version_;
 
 	void recalc_brightness(const FCoords&);
 	void recalc_nodecaps_pass1(const World& world, const FCoords&);

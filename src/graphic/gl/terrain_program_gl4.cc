@@ -113,6 +113,8 @@ TerrainBaseGl4::TerrainBaseGl4(const EditorGameBase& egbase)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	do_update();
 }
 
 TerrainBaseGl4::~TerrainBaseGl4() {
@@ -122,24 +124,19 @@ TerrainBaseGl4::~TerrainBaseGl4() {
 }
 
 void TerrainBaseGl4::update() {
-	// TODO(nha): upload only on changes
-	do_update();
+	if (fields_base_version_ != egbase().map().get_fields_base_version())
+		do_update();
 }
 
 void TerrainBaseGl4::do_update() {
 	auto& gl = Gl::State::instance();
-	const Map& map = egbase_.map();
+	const Map& map = egbase().map();
 	auto stream = uploads_.stream(uint(map.get_width()) * map.get_height());
 	MapIndex max_index = map.max_index();
 
 	for (MapIndex i = 0; i < max_index; ++i) {
 		const Field& f = map[i];
-		stream.emplace_back();
-		PerFieldData& d = stream.back();
-		d.terrain_r = f.terrain_r();
-		d.terrain_d = f.terrain_d();
-		d.height = f.get_height();
-		d.brightness = f.get_brightness();
+		stream.emplace_back(f.terrain_r(), f.terrain_d(), f.get_height(), f.get_brightness());
 	}
 
 	GLintptr offset = stream.unmap();
@@ -150,6 +147,8 @@ void TerrainBaseGl4::do_update() {
 				 GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, reinterpret_cast<void*>(offset));
 
 	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
+	fields_base_version_ = map.get_fields_base_version();
 }
 
 TerrainPlayerPerspectiveGl4::GlobalMap TerrainPlayerPerspectiveGl4::global_map_;

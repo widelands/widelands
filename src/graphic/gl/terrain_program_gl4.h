@@ -68,7 +68,13 @@ private:
 		uint8_t terrain_r;
 		uint8_t terrain_d;
 		uint8_t height;
-		uint8_t brightness;
+
+		// Will be interpreted as unsigned by the texel fetch in the shader.
+		int8_t brightness;
+
+		PerFieldData(uint8_t terrain_r_, uint8_t terrain_d_, uint8_t height_, int8_t brightness_)
+		  : terrain_r(terrain_r_), terrain_d(terrain_d_), height(height_), brightness(brightness_) {
+		}
 	};
 
 	typedef std::unordered_map<const Widelands::EditorGameBase*, std::weak_ptr<TerrainBaseGl4>> GlobalMap;
@@ -76,6 +82,7 @@ private:
 	static GlobalMap global_map_;
 
 	const Widelands::EditorGameBase& egbase_;
+	uint32_t fields_base_version_;
 
 	// The texture containing per-field information.
 	GLuint fields_texture_;

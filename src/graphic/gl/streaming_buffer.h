@@ -77,7 +77,7 @@ public:
 			assert(map_);
 			assert(count_ < max_);
 
-			std::allocator<T>().construct(&map_[count_], std::forward<Args>(args)...);
+			new(&map_[count_]) T(std::forward<Args>(args)...);
 			count_++;
 		}
 
