@@ -118,6 +118,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      toggle_buildhelp_(INIT_BUTTON("images/wui/menus/menu_toggle_buildhelp.png",
                                    "buildhelp",
                                    _("Show Building Spaces (on/off)"))),
+     reset_zoom_(INIT_BUTTON("images/wui/menus/menu_reset_zoom.png",
+                                   "reset_zoom",
+                                   _("Reset zoom to 1"))),
      toggle_player_menu_(
         INIT_BUTTON("images/wui/editor/editor_menu_player_menu.png", "players", _("Players"))),
      undo_(INIT_BUTTON("images/wui/editor/editor_undo.png", "undo", _("Undo"))),
@@ -129,6 +132,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   boost::bind(&EditorInteractive::toolsize_menu_btn, this));
 	toggle_minimap_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	reset_zoom_.sigclicked.connect(
+	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
 	toggle_player_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_playermenu, this));
 	undo_.sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 	redo_.sigclicked.connect([this] { history_->redo_action(egbase().world()); });
@@ -138,11 +143,15 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar_.add(&toggle_main_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_tool_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_toolsize_menu_, UI::Align::kLeft);
+	toolbar_.add(&toggle_player_menu_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
 	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
-	toolbar_.add(&toggle_player_menu_, UI::Align::kLeft);
+	toolbar_.add(&reset_zoom_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&undo_, UI::Align::kLeft);
 	toolbar_.add(&redo_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_help_, UI::Align::kLeft);
 	adjust_toolbar_position();
 

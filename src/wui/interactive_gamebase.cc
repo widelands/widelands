@@ -62,8 +62,11 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
 
      toggle_buildhelp_(INIT_BTN(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
+        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
+     reset_zoom_(INIT_BTN("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom to 1"))) {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+	reset_zoom_.sigclicked.connect(
+	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
 }
 
 /// \return a pointer to the running \ref Game instance.

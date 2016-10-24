@@ -104,12 +104,16 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	toolbar_.add(&toggle_options_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
 	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
+	toolbar_.add(&reset_zoom_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	if (multiplayer) {
 		toolbar_.add(&toggle_chat_, UI::Align::kLeft);
 		toggle_chat_.set_visible(false);
 		toggle_chat_.set_enabled(false);
+		toolbar_.add_space(15);
 	}
 
 	toolbar_.add(&toggle_objectives_, UI::Align::kLeft);
