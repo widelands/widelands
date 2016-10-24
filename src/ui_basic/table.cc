@@ -98,8 +98,7 @@ void Table<void*>::add_column(uint32_t const width,
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_,
-		                   g_gr->images().get("images/ui_basic/but3.png"), title, tooltip_string,
-		                   true, false);
+		                   g_gr->images().get("images/ui_basic/but3.png"), title, tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
