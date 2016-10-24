@@ -153,6 +153,8 @@ void RenderTarget::blit(const Vector2f& dst,
 	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
+// NOCOM(#codereview): This is a very local constexpr. I am wondering whether this can be used more widely in a follow-up branch.
+// I seem to remember seeing 1. a lot in blitting calls.
 		constexpr float kFullyOpaque = 1.f;
 		surface_->blit(destination_rect, *image, source_rect, kFullyOpaque, blend_mode);
 	}

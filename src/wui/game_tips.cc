@@ -113,6 +113,6 @@ void GameTips::show_tip(int32_t index) {
 
 	const Image* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
 	rt.blit(
-	   tips_area.center() - Vector2f(rendered_text->width() / 2.f, rendered_text->height() / 2.f),
+	   tips_area.center() - Vector2f(rendered_text->width() / 2, rendered_text->height() / 2),
 	   rendered_text);
 }

@@ -67,6 +67,9 @@ public:
 		int bln_index;
 		int brn_index;
 
+// NOCOM(#codereview): We tend to use numeric_limits to mark values as invalid.
+// Should we be consistent here, and preferably with a constexpr for it?
+// This can be done in a follow-up branch in any case.
 		inline bool all_neighbors_valid() const {
 			return ln_index >= 0 && rn_index >= 0 && trn_index >= 0 && bln_index >= 0 &&
 			       brn_index >= 0;

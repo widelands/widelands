@@ -201,6 +201,7 @@ public:
 	Immovable(const ImmovableDescr&);
 	~Immovable();
 
+// NOCOM(#codereview): move set_owner to superclass as well, where get_owner() is now.
 	void set_owner(Player*);
 
 	Coords get_position() const {

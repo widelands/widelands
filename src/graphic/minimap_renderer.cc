@@ -91,6 +91,9 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
+// NOCOM(#codereview): Idea for follow-up branch:
+// We get the numbers from the zoom boolean multiple times.
+// Why not store the zoom value in an int?
 	const float divider = zoom ? 1.f : 2.f;
 	const int half_width = round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
 	const int half_height = round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
@@ -173,6 +176,7 @@ void do_draw_minimap(Texture* texture,
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				vision = 2;  // Seen right now.
+// NOCOM(#codereview): Why do we have 2 different ways of getting the fieldn's owner here?
 				owner = f.field->get_owned_by();
 			} else if (player != nullptr) {
 				const auto& field = player->fields()[i];
@@ -220,7 +224,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
-	//       necesary. The created texture could be cached and only redrawn two
+	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
 	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();

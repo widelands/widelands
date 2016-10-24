@@ -117,6 +117,8 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+// NOCOM(#codereview): This is a bob, so why is it called draw_text_for_this_immovable?
+// Now about: draw_text_for_this_map_object
 		DrawText draw_text_for_this_immovable = draw_text;
 		const Player* owner = bob->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
@@ -348,7 +350,7 @@ void GameRenderer::draw(const EditorGameBase& egbase,
 
 	// If a view window is partially moved outside of the display, its 'rect' is
 	// adjusted to be fully contained on the screen - i.e. x = 0 and width is
-	// made smaller. Its offset is made negativ to account for this change.
+	// made smaller. Its offset is made negative to account for this change.
 	// To figure out which fields we need to draw, we have to add the absolute
 	// value of 'offset' to the actual dimension of the 'rect' to get to desired
 	// dimension of the 'rect'

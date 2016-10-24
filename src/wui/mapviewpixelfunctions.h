@@ -21,7 +21,6 @@
 #define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
 #include "base/vector.h"
-#include "base/vector.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"

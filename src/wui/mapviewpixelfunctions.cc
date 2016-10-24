@@ -261,6 +261,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
  * Normalize pixel points of the map.
 */
 void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
+
+// NOCOM(#codereview): Why not work directly on p->x, p->y, then we won't need the assignment on the bottom either.
 	float x = p->x;
 	float y = p->y;
 	{

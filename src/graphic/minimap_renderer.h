@@ -65,6 +65,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                 const Vector2i& minimap_pixel,
                                 const Rectf& view_area,
                                 MiniMapType minimap_type,
+// NOCOM(#codereview): Just a reminder to run clang-format before merging.
 										  const bool zoom);
 
 // Render the minimap. If player is not nullptr, it renders from that player's
