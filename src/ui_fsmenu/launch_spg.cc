@@ -73,10 +73,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  butw_,
                  buth_,
                  g_gr->images().get("images/ui_basic/but1.png"),
-                 _("Select map"),
-                 std::string(),
-                 false,
-                 false),
+                 _("Select map")),
      wincondition_(this,
                    "win_condition",
                    get_w() * 7 / 10,
@@ -84,10 +81,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                    butw_,
                    buth_,
                    g_gr->images().get("images/ui_basic/but1.png"),
-                   "",
-                   std::string(),
-                   false,
-                   false),
+                   ""),
      back_(this,
            "back",
            get_w() * 7 / 10,
@@ -95,10 +89,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
            butw_,
            buth_,
            g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back"),
-           std::string(),
-           true,
-           false),
+           _("Back")),
      ok_(this,
          "ok",
          get_w() * 7 / 10,
@@ -106,10 +97,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
          butw_,
          buth_,
          g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game"),
-         std::string(),
-         false,
-         false),
+         _("Start game")),
 
      // Text labels
      title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kHCenter),
@@ -179,7 +167,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
 		                  get_h() * 17 / 500, g_gr->images().get("images/ui_basic/but1.png"),
-		                  player_image, _("Switch to position"), false);
+		                  player_image, _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
 		players_[i] = new PlayerDescriptionGroup(

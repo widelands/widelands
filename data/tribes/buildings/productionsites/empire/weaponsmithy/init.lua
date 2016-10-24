@@ -92,8 +92,8 @@ tribes:new_productionsite_type {
          descname = _"forging a spear",
          actions = {
             "return=skipped unless economy needs spear",
-            "sleep=32000",
             "consume=coal iron planks",
+            "sleep=32000",
             "play_sound=sound/smiths smith 192",
             "animate=working 36000",
             "play_sound=sound/smiths sharpening 120",
@@ -106,8 +106,8 @@ tribes:new_productionsite_type {
          descname = _"forging an advanced spear",
          actions = {
             "return=skipped unless economy needs spear_advanced",
-            "sleep=32000",
             "consume=coal iron:2 planks",
+            "sleep=32000",
             "play_sound=sound/smiths smith 192",
             "animate=working 36000",
             "play_sound=sound/smiths sharpening 120",
@@ -120,8 +120,8 @@ tribes:new_productionsite_type {
          descname = _"forging a heavy spear",
          actions = {
             "return=skipped unless economy needs spear_heavy",
-            "sleep=32000",
             "consume=coal:2 gold iron planks",
+            "sleep=32000",
             "play_sound=sound/smiths smith 192",
             "animate=working 36000",
             "play_sound=sound/smiths sharpening 120",
@@ -134,8 +134,8 @@ tribes:new_productionsite_type {
          descname = _"forging a war spear",
          actions = {
             "return=skipped unless economy needs spear_war",
-            "sleep=32000",
             "consume=coal:2 gold iron:2 planks",
+            "sleep=32000",
             "play_sound=sound/smiths smith 192",
             "animate=working 36000",
             "play_sound=sound/smiths sharpening 120",
