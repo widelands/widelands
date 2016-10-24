@@ -81,7 +81,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
-     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, this))),
      field_overlay_manager_(new FieldOverlayManager()),
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
@@ -116,10 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		});
 
 	toolbar_.set_layout_toplevel(true);
-	m->quicknavigation->set_setview(boost::bind(&MapView::set_viewpoint, this, _1, true));
-	set_changeview(boost::bind(&QuickNavigation::view_changed, m->quicknavigation.get(), _1, _2));
-
-	changeview.connect(boost::bind(&InteractiveBase::mainview_move, this, _1, _2));
+	changeview.connect([this](bool) { mainview_move(); });
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -161,13 +158,13 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 		Widelands::MapTriangleRegion<> mr(map, Area<TCoords<>>(center.triangle, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Point::invalid(), jobid);
+			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, sel_.radius));
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), sel_.pic, 7, Point::invalid(), jobid);
+			   mr.location(), sel_.pic, 7, Vector2i::invalid(), jobid);
 		while (mr.advance(map));
 		if (upcast(InteractiveGameBase const, igbase, this))
 			if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
@@ -255,7 +252,7 @@ FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInf
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
 			field_overlay_manager_->register_overlay(
-			   mr.location(), workarea_pics_[wa_index], 0, Point::invalid(), overlay_id);
+			   mr.location(), workarea_pics_[wa_index], 0, Vector2i::invalid(), overlay_id);
 		while (mr.advance(map));
 		wa_index++;
 		hollow_area.hole_radius = hollow_area.radius;
@@ -288,19 +285,19 @@ void InteractiveBase::think() {
 	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDL_SCANCODE_UP) ||
 		    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(0, -scrollval), false);
+			pan_by(Vector2i(0, -scrollval));
 		}
 		if (get_key_state(SDL_SCANCODE_DOWN) ||
 		    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(0, scrollval), false);
+			pan_by(Vector2i(0, scrollval));
 		}
 		if (get_key_state(SDL_SCANCODE_LEFT) ||
 		    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(-scrollval, 0), false);
+			pan_by(Vector2i(-scrollval, 0));
 		}
 		if (get_key_state(SDL_SCANCODE_RIGHT) ||
 		    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() ^ KMOD_NUM))) {
-			set_rel_viewpoint(Point(scrollval, 0), false);
+			pan_by(Vector2i(scrollval, 0));
 		}
 	}
 	egbase().think();  // Call game logic here. The game advances.
@@ -330,7 +327,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_condensed(gametime);
-			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
+			dst.blit(Vector2f(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha,
 			         UI::Align::kTopLeft);
 
 			static boost::format node_format("(%i, %i)");
@@ -341,8 +338,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
-		dst.blit(Point(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text), BlendMode::UseAlpha,
-		         UI::Align::kBottomRight);
+		dst.blit(Vector2f(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text),
+		         BlendMode::UseAlpha, UI::Align::kBottomRight);
 	}
 
 	// Blit FPS when playing a game in debug mode.
@@ -350,79 +347,15 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		const Image* rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		dst.blit(Point((get_w() - rendered_text->width()) / 2, 5), rendered_text, BlendMode::UseAlpha,
-		         UI::Align::kLeft);
+		dst.blit(Vector2f((get_w() - rendered_text->width()) / 2, 5), rendered_text,
+		         BlendMode::UseAlpha, UI::Align::kLeft);
 	}
 }
 
-/** InteractiveBase::mainview_move(int32_t x, int32_t y)
- *
- * Signal handler for the main view's warpview updates the mini map's
- * viewpos marker position
- */
-void InteractiveBase::mainview_move(int32_t x, int32_t y) {
+void InteractiveBase::mainview_move() {
 	if (m->minimap.window) {
-		const Map& map = egbase().map();
-		const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
-		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
-
-		x += get_w() >> 1;
-		if (x >= maxx)
-			x -= maxx;
-		y += get_h() >> 1;
-		if (y >= maxy)
-			y -= maxy;
-
-		m->mm->set_view_pos(x, y);
+		m->mm->set_view(get_view_area());
 	}
-}
-
-/*
-===============
-Called whenever the player clicks on a location on the minimap.
-Warps the main mapview position to the clicked location.
-===============
-*/
-void InteractiveBase::minimap_warp(int32_t x, int32_t y) {
-	x -= get_w() >> 1;
-	y -= get_h() >> 1;
-	const Map& map = egbase().map();
-	if (x < 0)
-		x += map.get_width() * kTriangleWidth;
-	if (y < 0)
-		y += map.get_height() * kTriangleHeight;
-	set_viewpoint(Point(x, y), true);
-}
-
-/*
-===============
-Move the mainview to the given position (in node coordinates)
-===============
-*/
-void InteractiveBase::move_view_to(const Coords c) {
-	assert(0 <= c.x);
-	assert(c.x < egbase().map().get_width());
-	assert(0 <= c.y);
-	assert(c.y < egbase().map().get_height());
-
-	const Map& map = egbase().map();
-	uint32_t const x = (c.x + (c.y & 1) * 0.5) * kTriangleWidth;
-	uint32_t const y = c.y * kTriangleHeight - map[c].get_height() * kHeightFactor;
-	if (m->minimap.window)
-		m->mm->set_view_pos(x, y);
-	minimap_warp(x, y);
-}
-
-/*
-===============
-Center the mainview on the given position (in pixels)
-===============
-*/
-void InteractiveBase::move_view_to_point(Point pos) {
-	if (m->minimap.window)
-		m->mm->set_view_pos(pos.x, pos.y);
-
-	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2), true);
 }
 
 // Open the minimap or close it if it's open
@@ -431,20 +364,16 @@ void InteractiveBase::toggle_minimap() {
 		delete m->minimap.window;
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::minimap_warp, this, _1, _2));
-
-		// make sure the viewpos marker is at the right pos to start with
-		const Point p = get_viewpoint();
-
-		mainview_move(p.x, p.y);
+		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
+		mainview_move();
 	}
 }
 
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const Point& point) {
-	m->quicknavigation->set_landmark(key, point);
+void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view) {
+	m->quicknavigation->set_landmark(key, view);
 }
 
 /**
@@ -461,7 +390,7 @@ InteractiveBase::minimap_registry()
 Exposes the Registry object of the minimap to derived classes
 ===========
 */
-UI::UniqueWindow::Registry& InteractiveBase::minimap_registry() {
+MiniMap::Registry& InteractiveBase::minimap_registry() {
 	return m->minimap;
 }
 
@@ -742,7 +671,7 @@ void InteractiveBase::roadb_add_overlay() {
 			name = "images/wui/overlays/roadb_red.png";
 
 		field_overlay_manager_->register_overlay(
-		   neighb, g_gr->images().get(name), 7, Point::invalid(), road_buildhelp_overlay_jobid_);
+		   neighb, g_gr->images().get(name), 7, Vector2i::invalid(), road_buildhelp_overlay_jobid_);
 	}
 }
 

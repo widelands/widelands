@@ -322,7 +322,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 		/* no break */
 		case SDLK_HOME:
-			move_view_to(game().map().get_starting_pos(player_number_));
+			center_view_on_coords(game().map().get_starting_pos(player_number_));
 			return true;
 
 		case SDLK_KP_ENTER:

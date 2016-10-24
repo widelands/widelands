@@ -148,37 +148,37 @@ void Slider::draw_cursor(
 	RGBColor black(0, 0, 0);
 
 	dst.tile  //  background
-	   (Rect(Point(x, y), w, h), pic_background_, Point(get_x(), get_y()));
+	   (Recti(Vector2i(x, y), w, h), pic_background_, Vector2i(get_x(), get_y()));
 
 	if (highlighted_)
-		dst.brighten_rect(Rect(Point(x, y), w, h), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(x, y, w, h), MOUSE_OVER_BRIGHT_FACTOR);
 
 	if (pressed_) {       //  draw border
 		dst.brighten_rect  //  bottom edge
-		   (Rect(Point(x, y + h - 2), w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(x, y + h - 2, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
-		   (Rect(Point(x + w - 2, y), 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(x + w - 2, y, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rect(Point(x, y), w - 1, 1), black);
-		dst.fill_rect(Rect(Point(x, y + 1), w - 2, 1), black);
+		dst.fill_rect(Rectf(x, y, w - 1, 1), black);
+		dst.fill_rect(Rectf(x, y + 1, w - 2, 1), black);
 
 		//  left edge
-		dst.fill_rect(Rect(Point(x, y), 1, h - 1), black);
-		dst.fill_rect(Rect(Point(x + 1, y), 1, h - 2), black);
+		dst.fill_rect(Rectf(x, y, 1, h - 1), black);
+		dst.fill_rect(Rectf(x + 1, y, 1, h - 2), black);
 	} else {
 		dst.brighten_rect  //  top edge
-		   (Rect(Point(x, y), w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(x, y, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  left edge
-		   (Rect(Point(x, y + 2), 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(x, y + 2, 2, h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  bottom edge
-		dst.fill_rect(Rect(Point(x + 2, y + h - 2), w - 2, 1), black);
-		dst.fill_rect(Rect(Point(x + 1, y + h - 1), w - 1, 1), black);
+		dst.fill_rect(Rectf(x + 2, y + h - 2, w - 2, 1), black);
+		dst.fill_rect(Rectf(x + 1, y + h - 1, w - 1, 1), black);
 
 		//  right edge
-		dst.fill_rect(Rect(Point(x + w - 2, y + 2), 1, h - 2), black);
-		dst.fill_rect(Rect(Point(x + w - 1, y + 1), 1, h - 1), black);
+		dst.fill_rect(Rectf(x + w - 2, y + 2, 1, h - 2), black);
+		dst.fill_rect(Rectf(x + w - 1, y + 1, 1, h - 1), black);
 	}
 }
 
@@ -359,19 +359,18 @@ void HorizontalSlider::draw(RenderTarget& dst) {
 
 	if (get_bar_size() > 0) {
 		dst.brighten_rect  //  bottom edge
-		   (Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(get_x_gap(), get_h() / 2.f, get_bar_size(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
-		   (Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
-		    BUTTON_EDGE_BRIGHT_FACTOR);
+		   (Rectf(get_x_gap() + get_bar_size() - 2, get_y_gap(), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 		//  top edge
-		dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()), get_bar_size() - 1, 1), black);
-		dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
+		dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), get_bar_size() - 1, 1), black);
+		dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, get_bar_size() - 2, 1), black);
 	}
 
 	//  left edge
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()), 1, 4), black);
-	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
+	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, 4), black);
+	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, 3), black);
 
 	draw_cursor(dst, cursor_pos_, 0, cursor_size_, get_h());
 }
@@ -432,17 +431,17 @@ void VerticalSlider::draw(RenderTarget& dst) {
 	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect  //  right edge
-	   (Rect(Point(get_w() / 2, get_y_gap()), 2, get_bar_size()), BUTTON_EDGE_BRIGHT_FACTOR);
+	   (Rectf(get_w() / 2.f, get_y_gap(), 2, get_bar_size()), BUTTON_EDGE_BRIGHT_FACTOR);
 	dst.brighten_rect  //  bottom edge
-	   (Rect(Point(get_x_gap(), get_y_gap() + get_bar_size() - 2), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+	   (Rectf(get_x_gap(), get_y_gap() + get_bar_size() - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  left edge
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()), 1, get_bar_size() - 1), black);
-	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, get_bar_size() - 2), black);
+	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 1, get_bar_size() - 1), black);
+	dst.fill_rect(Rectf(get_x_gap() + 1, get_y_gap(), 1, get_bar_size() - 2), black);
 
 	//  top edge
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()), 4, 1), black);
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
+	dst.fill_rect(Rectf(get_x_gap(), get_y_gap(), 4, 1), black);
+	dst.fill_rect(Rectf(get_x_gap(), get_y_gap() + 1, 3, 1), black);
 
 	draw_cursor(dst, 0, cursor_pos_, get_w(), cursor_size_);
 }
@@ -535,7 +534,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		dst.blit(Point(gap_1 + i * gap_n, get_h()),
+		dst.blit(Vector2f(gap_1 + i * gap_n, get_h()),
 		         UI::g_fh1->render(
 		            as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2)),
 		         BlendMode::UseAlpha, UI::Align::kBottomCenter);
@@ -552,7 +551,7 @@ void DiscreteSlider::layout() {
 	uint32_t w = get_w();
 	uint32_t h = get_h();
 	assert(labels.size());
-	slider.set_pos(Point(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
+	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
 	                h -
 	                   UI::g_fh1

@@ -586,24 +586,19 @@ bool Building::fetch_from_flag(Game&) {
 	return false;
 }
 
-/*
-===============
-Draw the building.
-===============
-*/
-void Building::draw(const EditorGameBase& game,
-                    RenderTarget& dst,
-                    const FCoords& coords,
-                    const Point& pos) {
-	if (coords == position_) {  // draw big buildings only once
-		dst.blit_animation(
-		   pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
-		//  door animation?
+void Building::draw(uint32_t gametime,
+                    const DrawText draw_text,
+                    const Vector2f& point_on_dst,
+                    const float scale,
+                    RenderTarget* dst) {
+	dst->blit_animation(
+	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
-		//  overlay strings (draw when enabled)
-		draw_info(game, dst, pos);
-	}
+	//  door animation?
+
+	//  overlay strings (draw when enabled)
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
 
 /*
@@ -611,24 +606,14 @@ void Building::draw(const EditorGameBase& game,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Point& pos) {
-	const InteractiveGameBase& igbase = dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
-	uint32_t const display_flags = igbase.get_display_flags();
-
-	bool show_statistics_string = display_flags & InteractiveBase::dfShowStatistics;
-	if (show_statistics_string) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase)) {
-			if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
-				show_statistics_string = false;
-			}
-		}
-	}
+void Building::draw_info(const DrawText draw_text,
+                         const Vector2f& point_on_dst,
+								 const float scale,
+                         RenderTarget* dst) {
 	const std::string statistics_string =
-	   show_statistics_string ? info_string(InfoStringFormat::kStatistics) : "";
-
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus,
-	             info_string(InfoStringFormat::kCensus), show_statistics_string, statistics_string,
-	             dst, pos);
+	   (draw_text & DrawText::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
+	             scale, dst);
 }
 
 int32_t
