@@ -156,12 +156,12 @@ void DitherProgram::draw(const uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		if (field.brn_index == -1) {
+		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
 			continue;
 		}
 
 		// Dithering triangles for Down triangle.
-		if (field.bln_index != -1) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			maybe_add_dithering_triangle(
 			   gametime, terrains, fields_to_draw, field.brn_index, current_index, field.bln_index,
 			   field.fcoords.field->terrain_d(), field.fcoords.field->terrain_r());
@@ -171,7 +171,7 @@ void DitherProgram::draw(const uint32_t gametime,
 			                             field.brn_index, current_index,
 			                             field.fcoords.field->terrain_d(), terrain_dd);
 
-			if (field.ln_index != -1) {
+			if (field.ln_index != FieldsToDraw::kInvalidIndex) {
 				const int terrain_l = fields_to_draw.at(field.ln_index).fcoords.field->terrain_r();
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
 				                             field.bln_index, field.brn_index,
@@ -180,7 +180,7 @@ void DitherProgram::draw(const uint32_t gametime,
 		}
 
 		// Dithering for right triangle.
-		if (field.rn_index != -1) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			maybe_add_dithering_triangle(
 			   gametime, terrains, fields_to_draw, current_index, field.brn_index, field.rn_index,
 			   field.fcoords.field->terrain_r(), field.fcoords.field->terrain_d());
@@ -189,7 +189,7 @@ void DitherProgram::draw(const uint32_t gametime,
 			                             field.rn_index, current_index,
 			                             field.fcoords.field->terrain_r(), terrain_rr);
 
-			if (field.trn_index != -1) {
+			if (field.trn_index != FieldsToDraw::kInvalidIndex) {
 				const int terrain_u = fields_to_draw.at(field.trn_index).fcoords.field->terrain_d();
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.rn_index,
 				                             current_index, field.brn_index,

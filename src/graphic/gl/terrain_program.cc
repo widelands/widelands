@@ -101,12 +101,12 @@ void TerrainProgram::draw(uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		if (field.brn_index == -1) {
+		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
 			continue;
 		}
 
 		// Down triangle.
-		if (field.bln_index != -1) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
@@ -117,7 +117,7 @@ void TerrainProgram::draw(uint32_t gametime,
 		}
 
 		// Right triangle.
-		if (field.rn_index != -1) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())

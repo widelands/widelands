@@ -91,9 +91,6 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-	// NOCOM(#codereview): Idea for follow-up branch:
-	// We get the numbers from the zoom boolean multiple times.
-	// Why not store the zoom value in an int?
 	const float divider = zoom ? 1.f : 2.f;
 	const int half_width =
 	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
@@ -177,11 +174,16 @@ void do_draw_minimap(Texture* texture,
 			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
+				// This player has omnivision - show the field like it is in reality.
 				vision = 2;  // Seen right now.
-				// NOCOM(#codereview): Why do we have 2 different ways of getting the fieldn's owner
-				// here?
 				owner = f.field->get_owned_by();
 			} else if (player != nullptr) {
+				// This player might be affected by fog of war - instead of the
+				// reality, we show her what she last saw on this field. If she has
+				// vision of this field, this will be the same as reality -
+				// otherwise this shows reality as it was the last time she had
+				// vision on the field.
+				// If she never had vision, field.vision will be 0.
 				const auto& field = player->fields()[i];
 				vision = field.vision;
 				owner = field.owner;

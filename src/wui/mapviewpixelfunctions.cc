@@ -262,29 +262,18 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
  * Normalize pixel points of the map.
 */
 void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
-
-	// NOCOM(#codereview): Why not work directly on p->x, p->y, then we won't need the assignment on
-	// the bottom either.
-	float x = p->x;
-	float y = p->y;
-	{
-		const float map_end_screen_x = get_map_end_screen_x(map);
-		while (x >= map_end_screen_x) {
-			x -= map_end_screen_x;
-		}
-		while (x < 0) {
-			x += map_end_screen_x;
-		}
+	const float map_end_screen_x = get_map_end_screen_x(map);
+	while (p->x >= map_end_screen_x) {
+		p->x -= map_end_screen_x;
 	}
-	{
-		const float map_end_screen_y = get_map_end_screen_y(map);
-		while (y >= map_end_screen_y) {
-			y -= map_end_screen_y;
-		}
-		while (y < 0) {
-			y += map_end_screen_y;
-		}
+	while (p->x < 0) {
+		p->x += map_end_screen_x;
 	}
-	p->x = x;
-	p->y = y;
+	const float map_end_screen_y = get_map_end_screen_y(map);
+	while (p->y >= map_end_screen_y) {
+		p->y -= map_end_screen_y;
+	}
+	while (p->y < 0) {
+		p->y += map_end_screen_y;
+	}
 }

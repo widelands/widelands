@@ -131,20 +131,18 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-	// NOCOM(#codereview): Rather than having an int an static_cast, how about defining operator |
-	// like we did for UI::Align?
-	int draw_text = DrawText::kNone;
+	DrawText draw_text = DrawText::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		draw_text |= DrawText::kCensus;
+		draw_text = draw_text | DrawText::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		draw_text |= DrawText::kStatistics;
+		draw_text = draw_text | DrawText::kStatistics;
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
-		renderer_->rendermap(egbase, viewpoint_, zoom_, interactive_player->player(),
-		                     static_cast<DrawText>(draw_text), &dst);
+		renderer_->rendermap(
+		   egbase, viewpoint_, zoom_, interactive_player->player(), draw_text, &dst);
 	} else {
 		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<DrawText>(draw_text), &dst);
 	}

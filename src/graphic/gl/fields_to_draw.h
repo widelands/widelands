@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
 #include <cstddef>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -36,6 +37,8 @@
 // methods are inlined for performance reasons.
 class FieldsToDraw {
 public:
+	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
+
 	struct Field {
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
 		                                     // be out of bounds).
@@ -59,20 +62,18 @@ public:
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
 
-		// Index of neighbors in this 'FieldsToDraw'. -1 if this neighbor is not
-		// contained.
+		// Index of neighbors in this 'FieldsToDraw'. kInvalidIndex if this
+		// neighbor is not contained.
 		int ln_index;
 		int rn_index;
 		int trn_index;
 		int bln_index;
 		int brn_index;
 
-// NOCOM(#codereview): We tend to use numeric_limits to mark values as invalid.
-// Should we be consistent here, and preferably with a constexpr for it?
-// This can be done in a follow-up branch in any case.
 		inline bool all_neighbors_valid() const {
-			return ln_index >= 0 && rn_index >= 0 && trn_index >= 0 && bln_index >= 0 &&
-			       brn_index >= 0;
+			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
+			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
+			       brn_index != kInvalidIndex;
 		}
 	};
 
@@ -94,15 +95,16 @@ public:
 	}
 
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
-	// coordinates in the map. Returns -1 if this field is not in the fields_to_draw.
+	// coordinates in the map. Returns kInvalidIndex if this field is not in the
+	// fields_to_draw.
 	inline int calculate_index(int fx, int fy) const {
 		uint16_t xidx = fx - min_fx_;
 		if (xidx >= w_) {
-			return -1;
+			return kInvalidIndex;
 		}
 		uint16_t yidx = fy - min_fy_;
 		if (yidx >= h_) {
-			return -1;
+			return kInvalidIndex;
 		}
 		return yidx * w_ + xidx;
 	}

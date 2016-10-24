@@ -117,16 +117,14 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-		// NOCOM(#codereview): This is a bob, so why is it called draw_text_for_this_immovable?
-		// Now about: draw_text_for_this_map_object
-		DrawText draw_text_for_this_immovable = draw_text;
+		DrawText draw_text_for_this_bob = draw_text;
 		const Player* owner = bob->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
 		    player->is_hostile(*owner)) {
-			draw_text_for_this_immovable =
-			   static_cast<DrawText>(draw_text_for_this_immovable & ~DrawText::kStatistics);
+			draw_text_for_this_bob =
+			   static_cast<DrawText>(draw_text_for_this_bob & ~DrawText::kStatistics);
 		}
-		bob->draw(egbase, draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
+		bob->draw(egbase, draw_text_for_this_bob, field.rendertarget_pixel, zoom, dst);
 	}
 }
 

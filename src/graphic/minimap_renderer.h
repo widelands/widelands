@@ -62,11 +62,10 @@ enum class MiniMapType {
 // Converts between minimap pixel and map pixel.
 // Remember to call 'normalize_pix' after applying the transformation.
 Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
-                                const Vector2i& minimap_pixel,
-                                const Rectf& view_area,
-                                MiniMapType minimap_type,
-// NOCOM(#codereview): Just a reminder to run clang-format before merging.
-										  const bool zoom);
+                                   const Vector2i& minimap_pixel,
+                                   const Rectf& view_area,
+                                   MiniMapType minimap_type,
+                                   const bool zoom);
 
 // Render the minimap. If player is not nullptr, it renders from that player's
 // point of view. The 'view_area' designates the currently visible area in the

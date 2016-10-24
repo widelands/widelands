@@ -139,7 +139,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Road to right neighbor.
-		if (field.rn_index != -1) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
@@ -149,7 +149,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		if (field.brn_index != -1) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
@@ -159,7 +159,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		if (field.bln_index != -1) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
