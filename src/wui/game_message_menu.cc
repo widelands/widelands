@@ -77,35 +77,35 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	geologistsbtn_ =
 	   new UI::Button(this, "filter_geologists_messages", kPadding, kPadding, kButtonSize,
 	                  kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/fieldaction/menu_geologist.png"), "", true);
+	                  g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
 	geologistsbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
 	economybtn_ =
 	   new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/stats/genstats_nrwares.png"), "", true);
+	                  g_gr->images().get("images/wui/stats/genstats_nrwares.png"));
 	economybtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kEconomy));
 
 	seafaringbtn_ =
 	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/buildings/start_expedition.png"), "", true);
+	                  g_gr->images().get("images/wui/buildings/start_expedition.png"));
 	seafaringbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kSeafaring));
 
 	warfarebtn_ =
 	   new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/messages/messages_warfare.png"), "", true);
+	                  g_gr->images().get("images/wui/messages/messages_warfare.png"));
 	warfarebtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kWarfare));
 
 	scenariobtn_ =
 	   new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/menus/menu_objectives.png"), "", true);
+	                  g_gr->images().get("images/wui/menus/menu_objectives.png"));
 	scenariobtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
 
@@ -140,8 +140,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                  (boost::format(_("G: %s"))
 	                   /** TRANSLATORS: Tooltip in the messages window */
 	                   % _("Center main mapview on location"))
-	                     .str(),
-	                  false);
+	                     .str());
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 
 	if (get_usedefaultpos())
@@ -501,7 +500,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
                                                     Widelands::Message::Type msgtype) {
 	set_filter_messages_tooltips();
-	if (button.get_perm_pressed()) {
+	if (button.style() == UI::Button::Style::kPermpressed) {
 		button.set_perm_pressed(false);
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 	} else {

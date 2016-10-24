@@ -43,10 +43,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
             butw_,
             buth_,
             g_gr->images().get("images/ui_basic/but2.png"),
-            _("Close"),
-            std::string(),
-            true,
-            false),
+            _("Close")),
 
      tabs_(this,
            hmargin_,

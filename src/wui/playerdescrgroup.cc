@@ -67,25 +67,23 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	d->btnEnablePlayer = new UI::Checkbox(this, Vector2i(xplayertype - 23, 0), "");
 	d->btnEnablePlayer->changedto.connect(
 	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
-	d->btnPlayerType = new UI::Button(
-	   this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
-	   g_gr->images().get("images/ui_basic/but1.png"), std::string(), std::string(), true, false);
+	d->btnPlayerType =
+	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
+	                  g_gr->images().get("images/ui_basic/but1.png"), "");
 	d->btnPlayerType->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
-	d->btnPlayerTeam = new UI::Button(
-	   this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
-	   g_gr->images().get("images/ui_basic/but1.png"), std::string(), std::string(), true, false);
+	d->btnPlayerTeam =
+	   new UI::Button(this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
+	                  g_gr->images().get("images/ui_basic/but1.png"), "");
 	d->btnPlayerTeam->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
 	d->btnPlayerTribe = new UI::Button(this, "player_tribe", xplayertribe, 0, w - xplayertribe,
-	                                   h / 2, g_gr->images().get("images/ui_basic/but1.png"),
-	                                   std::string(), std::string(), true, false);
+	                                   h / 2, g_gr->images().get("images/ui_basic/but1.png"), "");
 	d->btnPlayerTribe->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
 	d->btnPlayerInit =
 	   new UI::Button(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), std::string(),
-	                  _("Initialization"), true, false);
+	                  g_gr->images().get("images/ui_basic/but1.png"), "", _("Initialization"));
 	d->btnPlayerInit->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
 

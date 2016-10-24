@@ -115,8 +115,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	if (init_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
 			view_btns_[i] = new UI::Button(this, "view", 74 + (17 * i), 200 - 34, 17, 34,
-			                              g_gr->images().get("images/ui_basic/but0.png"), "-",
-			                              std::string(), false);
+			                              g_gr->images().get("images/ui_basic/but0.png"), "-");
 			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
 		}
 
