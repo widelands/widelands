@@ -76,7 +76,7 @@ public:
 	}
 
 	void
-	add_wanted_building_window(const Widelands::Coords& coords, const Point point, bool was_minimal);
+	add_wanted_building_window(const Widelands::Coords& coords, const Vector2i point, bool was_minimal);
 	BuildingWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
@@ -105,7 +105,7 @@ protected:
 private:
 	void on_buildhelp_changed(const bool value) override;
 	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::tuple<const Widelands::Coords, const Point, bool>>
+	std::map<uint32_t, std::tuple<const Widelands::Coords, const Vector2i, bool>>
 	   wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>>
 	   buildingnotes_subscriber_;

@@ -316,8 +316,12 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
-	void draw_info(const EditorGameBase&, RenderTarget&, const Point&);
+	void draw(uint32_t gametime,
+	          DrawText draw_text,
+	          const Vector2f& point_on_dst,
+				 float scale,
+	          RenderTarget* dst) override;
+	void draw_info(DrawText draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
 

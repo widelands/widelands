@@ -5,7 +5,7 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander <7986337@gmail.com>, 2015
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
 # dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-28 00:10+0000\n"
-"Last-Translator: Владимир Куряев <istercul@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-16 14:53+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Постройте рядом с каждой хижиной дрово�
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Сами по себе, деревья растут очень медленно. Чтобы обеспечить себя древесиной, обязательно постройте лесничих."
+msgstr "Сами по себе, деревья растут очень медленно. Чтобы обеспечить себя древесиной, обязательно постройте домик лесничего."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -117,7 +117,7 @@ msgstr "вода"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr "ничего не найдено здесь"
+msgstr "Здесь ничего не найдено"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -943,7 +943,7 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Он принес новости, которые все меняют..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
@@ -977,11 +977,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Еще один холодный день"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Трон выглядит обеспокоенным..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
@@ -989,44 +989,44 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Зима застала нас врасплох. Многие из нас страдают от холода, но мы должны терпеть. День, когда мы сможем вернуться должен быть близко - он не может быть далеким."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "Я молился, чтобы стало теплее. Точно так же, как молился о том, чтобы война, наконец, подошла к концу."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Похоже, пока ни одна молитва не была услышана."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Дружественная деревня присоединилась к нам!"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:541
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "Мы нашли деревню с дружественными и весьма полезными людьми, которые были впечатлены нашим богатством, технологиями и военной мощью."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:544
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Они жили просто, но беспечно, охотой и сельским хозяйством. Они до сих пор не участвовали в каких-либо конфликтах и не готовы к борьбе."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:547
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Но они боятся, что война положит конец этой спокойной жизни. Поэтому они решили присоединиться к нам, надеясь, что мы поможем друг другу."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

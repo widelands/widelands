@@ -125,7 +125,10 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr),
+     fleet_(nullptr),
+     economy_(nullptr),
+     ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -936,13 +939,16 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
-	Bob::draw(game, dst, pos);
+void Ship::draw(const EditorGameBase& egbase,
+                const DrawText& draw_text,
+                const Vector2f& field_on_dst,
+                const float scale,
+                RenderTarget* dst) const {
+	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	uint32_t const display_flags = game.get_ibase()->get_display_flags();
 	std::string statistics_string = "";
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if (draw_text & DrawText::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -974,9 +980,8 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 		                       .str();
 	}
 
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, shipname_,
-	             display_flags & InteractiveBase::dfShowStatistics, statistics_string, dst,
-	             calc_drawpos(game, pos));
+	do_draw_info(
+	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

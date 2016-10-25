@@ -136,7 +136,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Point(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
+			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
 			         UI::Align::kTopRight);
 		}
 	}
@@ -170,7 +170,7 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 }
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
-                                                     const Point point,
+																	  const Vector2i point,
                                                      bool was_minimal) {
 	wanted_building_windows_.insert(
 	   std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));

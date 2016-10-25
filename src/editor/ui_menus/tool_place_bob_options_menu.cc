@@ -64,14 +64,14 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& 
 	}
 
 	const Image* tab_icon = g_gr->images().get("images/ui_basic/list_first_entry.png");
-	Point pos;
+	Vector2i pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
 	UI::Box* box = nullptr;
 	while (i < nr_bobs) {
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
-			pos = Point(5, 15);
+			pos = Vector2i(5, 15);
 			box = new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 			tabpanel_.add("icons", tab_icon, box);
 		}

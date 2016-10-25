@@ -21,12 +21,12 @@
 
 #include <memory>
 
-const Image& RoadTextures::get_normal_texture(int x, int y, int direction) const {
-	return *normal_textures_.at((x + y + direction) % normal_textures_.size());
+const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords, int direction) const {
+	return *normal_textures_.at((coords.x + coords.y + direction) % normal_textures_.size());
 }
 
-const Image& RoadTextures::get_busy_texture(int x, int y, int direction) const {
-	return *busy_textures_.at((x + y + direction) % busy_textures_.size());
+const Image& RoadTextures::get_busy_texture(const Widelands::Coords& coords, int direction) const {
+	return *busy_textures_.at((coords.x + coords.y + direction) % busy_textures_.size());
 }
 
 void RoadTextures::add_normal_road_texture(const Image* image) {

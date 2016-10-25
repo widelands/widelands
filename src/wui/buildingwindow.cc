@@ -124,9 +124,10 @@ void BuildingWindow::draw(RenderTarget& dst) {
 	// TODO(sirver): chang this to directly blit the animation. This needs support for or removal of
 	// RenderTarget.
 	const Image* image = building().representative_image();
-	dst.blitrect_scale(Rect((get_inner_w() - image->width()) / 2,
-	                        (get_inner_h() - image->height()) / 2, image->width(), image->height()),
-	                   image, Rect(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
+	dst.blitrect_scale(
+	   Rectf((get_inner_w() - image->width()) / 2.f, (get_inner_h() - image->height()) / 2.f,
+	         image->width(), image->height()),
+	   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
 }
 
 /*
@@ -474,7 +475,7 @@ void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase().move_view_to(building().get_position());
+	igbase().center_view_on_coords(building().get_position());
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {

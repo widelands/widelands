@@ -72,8 +72,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                  20,
                  g_gr->images().get("images/ui_basic/but1.png"),
                  g_gr->images().get("images/ui_basic/scrollbar_up.png"),
-                 _("Add player"),
-                 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
+                 _("Add player")),
      remove_last_player_(this,
                          "remove_last_player",
                          5,
@@ -82,8 +81,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                          20,
                          g_gr->images().get("images/ui_basic/but1.png"),
                          g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-                         _("Remove last player"),
-                         1 < parent.egbase().map().get_nrplayers()),
+                         _("Remove last player")),
      tribenames_(eia().egbase().tribes().get_all_tribenames()) {
 	add_player_.sigclicked.connect(
 	   boost::bind(&EditorPlayerMenu::clicked_add_player, boost::ref(*this)));
@@ -97,11 +95,11 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	set_inner_size(375, 135);
 
 	UI::Textarea* ta = new UI::Textarea(this, 0, 0, _("Number of Players"));
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
+	ta->set_pos(Vector2i((get_inner_w() - ta->get_w()) / 2, posy + 5));
 	posy += spacing + width;
 
 	nr_of_players_ta_ = new UI::Textarea(this, 0, 0, "5");
-	nr_of_players_ta_->set_pos(Point((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
+	nr_of_players_ta_->set_pos(Vector2i((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
 
 	posy += width + spacing + spacing;
 
@@ -211,6 +209,8 @@ void EditorPlayerMenu::update() {
 		plr_set_pos_buts_[p - 1]->set_pic(player_image);
 		posy += size + spacing;
 	}
+	add_player_.set_enabled(nr_players < MAX_PLAYERS);
+	remove_last_player_.set_enabled(1 < nr_players);
 	set_inner_size(get_inner_w(), posy + spacing);
 }
 
@@ -228,8 +228,6 @@ void EditorPlayerMenu::clicked_add_player() {
 	}
 	map.set_scenario_player_tribe(nr_players, tribenames_[0]);
 	eia().set_need_save(true);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
-	remove_last_player_.set_enabled(true);
 	update();
 }
 
@@ -252,9 +250,6 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
-	remove_last_player_.set_enabled(1 < nr_players);
-
 	update();
 	// TODO(SirVer): Take steps when the player is referenced someplace. Not
 	// TODO(SirVer): currently possible in the editor though.
@@ -297,7 +292,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		menu.move_view_to(sp);
+		menu.center_view_on_coords(sp);
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);

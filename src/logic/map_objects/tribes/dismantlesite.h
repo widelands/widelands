@@ -87,7 +87,11 @@ protected:
 		return DISMANTLESITE_STEP_TIME;
 	}
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          DrawText draw_text,
+	          const Vector2f& point_on_dst,
+				 float scale,
+	          RenderTarget* dst) override;
 };
 }
 

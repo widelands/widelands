@@ -69,6 +69,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "sleep=14000",
             "consume=barbarians_bread,fish,meat",
+            "play_sound=sound/barbarians/taverns inn 100",
             "animate=working 19000",
             "produce=ration"
          }
@@ -80,6 +81,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs snack",
             "sleep=15000",
             "consume=barbarians_bread fish,meat beer",
+            "play_sound=sound/barbarians/taverns inn 100",
             "animate=working 20000",
             "produce=snack"
          }

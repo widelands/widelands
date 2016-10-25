@@ -60,7 +60,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
 		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
 		                                 g_gr->images().get("images/ui_basic/but0.png"), _("Map"),
-		                                 _("Select a map"), true, false);
+		                                 _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
@@ -68,14 +68,14 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
 		                     g_gr->images().get("images/ui_basic/but0.png"),
 		                     /** Translators: This is a button to select a savegame */
-		                     _("Saved Game"), _("Select a saved game"), true, false);
+		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
 		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
 		                     buth, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"),
-		                     _("Cancel selection"), true, false);
+		                     _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));
@@ -118,9 +118,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          buth_,
                          g_gr->images().get("images/ui_basic/but1.png"),
                          g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
-                         _("Change map or saved game"),
-                         false,
-                         false),
+                         _("Change map or saved game")),
      ok_(this,
          "ok",
          right_column_x_,
@@ -128,10 +126,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
          butw_,
          buth_,
          g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game"),
-         std::string(),
-         false,
-         false),
+         _("Start game")),
      back_(this,
            "back",
            right_column_x_,
@@ -139,10 +134,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
            butw_,
            buth_,
            g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back"),
-           std::string(),
-           true,
-           false),
+           _("Back")),
      wincondition_(this,
                    "win_condition",
                    right_column_x_,
@@ -150,10 +142,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                    butw_,
                    buth_,
                    g_gr->images().get("images/ui_basic/but1.png"),
-                   "",
-                   std::string(),
-                   false,
-                   false),
+                   ""),
      help_button_(this,
                   "help",
                   right_column_x_ + butw_ - buth_,
@@ -162,9 +151,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   buth_,
                   g_gr->images().get("images/ui_basic/but1.png"),
                   g_gr->images().get("images/ui_basic/menu_help.png"),
-                  _("Show the help window"),
-                  true,
-                  false),
+                  _("Show the help window")),
 
      // Text labels
      title_(this, get_w() / 2, get_h() / 25, _("Multiplayer Game Setup"), UI::Align::kHCenter),
@@ -662,7 +649,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
 	suggested_teams_box_->set_pos(
-	   Point(suggested_teams_box_->get_x(),
+	   Vector2i(suggested_teams_box_->get_x(),
 	         back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
 }
 
