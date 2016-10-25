@@ -60,7 +60,7 @@ public:
 	/// Enables/disables the dropdown selection.
 	void set_enabled(bool on);
 	/// Move the dropdown. The dropdown's position is relative to the parent.
-	void set_pos(Point point) override;
+	void set_pos(Vector2i point) override;
 
 	/// The number of elements listed in the dropdown.
 	uint32_t size() const;

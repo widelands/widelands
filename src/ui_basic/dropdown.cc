@@ -63,7 +63,7 @@ BaseDropdown::BaseDropdown(
                      w - 24,
                      get_h(),
                      g_gr->images().get("images/ui_basic/but1.png"),
-							label),
+                     label),
      // Hook into parent so we can drop down outside the panel
      list_(parent, x, y + get_h(), w, 0, ListselectLayout::kDropdown),
      label_(label) {
@@ -120,9 +120,9 @@ void BaseDropdown::set_enabled(bool on) {
 	list_.set_visible(false);
 }
 
-void BaseDropdown::set_pos(Point point) {
+void BaseDropdown::set_pos(Vector2i point) {
 	UI::Panel::set_pos(point);
-	list_.set_pos(Point(point.x, point.y + get_h()));
+	list_.set_pos(Vector2i(point.x, point.y + get_h()));
 }
 
 void BaseDropdown::clear() {

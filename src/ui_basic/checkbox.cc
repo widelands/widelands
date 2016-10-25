@@ -33,7 +33,7 @@ namespace UI {
  * checkbox graphics.
 */
 Statebox::Statebox(Panel* const parent,
-                   Point const p,
+                   Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
@@ -49,7 +49,7 @@ Statebox::Statebox(Panel* const parent,
 }
 
 Statebox::Statebox(Panel* const parent,
-                   Point const p,
+                   Vector2i const p,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    uint32_t width)
@@ -114,18 +114,18 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
-		dst.blit(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
+		dst.blit(Vector2f((get_inner_w() - w) / 2., (get_inner_h() - h) / 2.), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
-			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), RGBColor(229, 116, 2));
+			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(229, 116, 2));
 		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100, 80));
+			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(100, 100, 80));
 		}
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
-		Point image_anchor(0, 0);
-		Point text_anchor(kStateboxSize + kPadding, 0);
+		Vector2f image_anchor(0.f, 0.f);
+		Vector2f text_anchor(kStateboxSize + kPadding, 0);
 
 		if (rendered_text_) {
 			if (UI::g_fh1->fontset()->is_rtl()) {
@@ -138,11 +138,11 @@ void Statebox::draw(RenderTarget& dst) {
 
 		dst.blitrect(
 		   image_anchor, pic_graphics_,
-		   Rect(Point(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
+		   Recti(Vector2i(flags_ & Is_Checked ? kStateboxSize : 0, 0), kStateboxSize, kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
-			   Rect(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+			   Rectf(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
 	}
 }
 

@@ -159,8 +159,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
                           _("In-game resolution")),
 
-     fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
-     inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
+     fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", column_width_),
+     inputgrab_(&box_interface_, Vector2i(0, 0), _("Grab Input"), "", column_width_),
 
      sb_maxfps_(&box_interface_,
                 0,
@@ -174,9 +174,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Point(0, 0), _("Snap windows only when overlapping"), "", column_width_),
+        &box_windows_, Vector2i(0, 0), _("Snap windows only when overlapping"), "", column_width_),
      dock_windows_to_edges_(
-        &box_windows_, Point(0, 0), _("Dock windows to edges"), "", column_width_),
+        &box_windows_, Vector2i(0, 0), _("Dock windows to edges"), "", column_width_),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -201,10 +201,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
-     fx_(&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", column_width_),
+     music_(&box_sound_, Vector2i(0, 0), _("Enable Music"), "", column_width_),
+     fx_(&box_sound_, Vector2i(0, 0), _("Enable Sound Effects"), "", column_width_),
      message_sound_(
-        &box_sound_, Point(0, 0), _("Play a sound at message arrival"), "", column_width_),
+        &box_sound_, Vector2i(0, 0), _("Play a sound at message arrival"), "", column_width_),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -234,28 +234,28 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
-          Point(0, 0),
+          Vector2i(0, 0),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           column_width_),
      write_syncstreams_(&box_saving_,
-                        Point(0, 0),
+                        Vector2i(0, 0),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         column_width_),
 
      // Game options
-     auto_roadbuild_mode_(&box_game_, Point(0, 0), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Point(0, 0), _("Show buildings area preview")),
+     auto_roadbuild_mode_(&box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
+     show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
      transparent_chat_(&box_game_,
-                       Point(0, 0),
+                       Vector2i(0, 0),
                        _("Show in-game chat with transparent background"),
                        "",
                        column_width_),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_game_, Point(0, 0), _("Use single watchwindow mode")),
+     single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
 
      os_(opt) {
 	// Set up UI Elements
@@ -272,7 +272,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		tabs_.activate(os_.active_tab);
 	}
 
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_windows_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());

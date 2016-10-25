@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -306,6 +307,10 @@ public:
 	/// Called when a new logsink is set. Used to give general information.
 	virtual void log_general_info(const EditorGameBase&);
 
+	Player* get_owner() const {
+		return owner_;
+	}
+
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
 	// to files.
@@ -401,18 +406,19 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(bool show_census,
+	void do_draw_info(const DrawText& draw_text,
 	                  const std::string& census,
-	                  bool show_statictics,
 	                  const std::string& statictics,
-	                  RenderTarget& dst,
-	                  const Point& pos) const;
+	                  const Vector2f& field_on_dst,
+	                  const float scale,
+	                  RenderTarget* dst) const;
 
 	void molog(char const* fmt, ...) const __attribute__((format(printf, 2, 3)));
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
 	LogSink* logsink_;
+	Player* owner_;
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking
