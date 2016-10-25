@@ -38,9 +38,8 @@ FullscreenMenuBase
 ==============================================================================
 */
 
-FullscreenMenuBase::FullscreenMenuBase():
-	FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg")
-	{}
+FullscreenMenuBase::FullscreenMenuBase() : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg") {
+}
 
 /**
  * Initialize a pre-game menu
@@ -48,25 +47,18 @@ FullscreenMenuBase::FullscreenMenuBase():
  * Args: bgpic  name of the background picture
  */
 FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
-
-	background_image_ = bgpic;
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()), background_image_(bgpic) {
 }
 
-FullscreenMenuBase::~FullscreenMenuBase()
-{
+FullscreenMenuBase::~FullscreenMenuBase() {
 }
-
 
 /**
  * Draw the background / splash screen
 */
-void FullscreenMenuBase::draw(RenderTarget & dst) {
+void FullscreenMenuBase::draw(RenderTarget& dst) {
 	const Image* bg = g_gr->images().get(background_image_);
-	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()),
-	                   bg,
-	                   Rect(0, 0, bg->width(), bg->height()),
-	                   1.,
+	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()), 1.,
 	                   BlendMode::UseAlpha);
 }
 
@@ -78,24 +70,22 @@ int FullscreenMenuBase::fs_big() {
 	return UI_FONT_SIZE_BIG * get_h() / 600;
 }
 
-bool FullscreenMenuBase::handle_key(bool down, SDL_Keysym code)
-{
+bool FullscreenMenuBase::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				clicked_ok();
-				return true;
-			case SDLK_ESCAPE:
-				clicked_back();
-				return true;
-			default:
-				break; // not handled
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		case SDLK_ESCAPE:
+			clicked_back();
+			return true;
+		default:
+			break;  // not handled
 		}
 	}
 	return UI::Panel::handle_key(down, code);
 }
-
 
 void FullscreenMenuBase::clicked_back() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);

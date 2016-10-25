@@ -34,15 +34,14 @@
 #include "graphic/sdl_utils.h"
 #include "graphic/surface.h"
 
-namespace  {
+namespace {
 
-namespace  {
+namespace {
 
 /**
  * \return the standard 32-bit RGBA format that we use for our textures.
  */
-const SDL_PixelFormat & rgba_format()
-{
+const SDL_PixelFormat& rgba_format() {
 	static SDL_PixelFormat format;
 	static bool init = false;
 	if (init)
@@ -64,7 +63,6 @@ const SDL_PixelFormat & rgba_format()
 }
 
 }  // namespace
-
 
 class GlFramebuffer {
 public:
@@ -96,26 +94,20 @@ bool is_bgr_surface(const SDL_PixelFormat& fmt) {
 	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
 }
 
-
 }  // namespace
 
-Texture::Texture(int w, int h)
-	: owns_texture_(false)
-{
+Texture::Texture(int w, int h) : owns_texture_(false) {
 	init(w, h);
 
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
 
-	glTexImage2D
-		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
-			GL_UNSIGNED_BYTE, nullptr);
+	glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
+	             GL_UNSIGNED_BYTE, nullptr);
 }
 
-Texture::Texture(SDL_Surface * surface, bool intensity)
-	: owns_texture_(false)
-{
+Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	init(surface->w, surface->h);
 
 	// Convert image data. BGR Surface support is an extension for
@@ -129,9 +121,9 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(width(), height());
 		assert(converted);
-		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceAlphaMod(converted, SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
-		SDL_SetSurfaceAlphaMod(surface,  SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceAlphaMod(surface, SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(surface, nullptr, converted, nullptr);
 		SDL_FreeSurface(surface);
@@ -145,30 +137,25 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 
 	Gl::swap_rows(width(), height(), surface->pitch, bpp, static_cast<uint8_t*>(surface->pixels));
 
-	glTexImage2D
-        (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), width(), height(), 0,
-		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), width(),
+	             height(), 0, pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
 }
 
 Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h)
-	: owns_texture_(false)
-{
+   : owns_texture_(false) {
 	if (parent_w == 0 || parent_h == 0) {
 		throw wexception("Created a sub Texture with zero height and width parent.");
 	}
 
-	blit_data_ = BlitData {
-		texture,
-		parent_w, parent_h,
-		subrect,
+	blit_data_ = BlitData{
+	   texture, parent_w, parent_h, subrect,
 	};
 }
 
-Texture::~Texture()
-{
+Texture::~Texture() {
 	if (owns_texture_) {
 		Gl::State::instance().delete_texture(blit_data_.texture_id);
 	}
@@ -182,12 +169,10 @@ int Texture::height() const {
 	return blit_data_.rect.h;
 }
 
-void Texture::init(uint16_t w, uint16_t h)
-{
+void Texture::init(uint16_t w, uint16_t h) {
 	blit_data_ = {
-		0, // initialized below
-		w, h,
-		Rect(0, 0, w, h),
+	   0,  // initialized below
+	   w, h, Rect(0, 0, w, h),
 	};
 	if (w * h == 0) {
 		return;
@@ -245,11 +230,7 @@ RGBAColor Texture::get_pixel(uint16_t x, uint16_t y) {
 	RGBAColor color;
 
 	SDL_GetRGBA(*reinterpret_cast<uint32_t*>(&pixels_[(height() - y - 1) * 4 * width() + 4 * x]),
-	            &rgba_format(),
-	            &color.r,
-	            &color.g,
-	            &color.b,
-	            &color.a);
+	            &rgba_format(), &color.r, &color.g, &color.b, &color.a);
 	return color;
 }
 
@@ -260,21 +241,19 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 
 	uint8_t* data = &pixels_[(height() - y - 1) * 4 * width() + 4 * x];
 	uint32_t packed_color = SDL_MapRGBA(&rgba_format(), color.r, color.g, color.b, color.a);
-	*(reinterpret_cast<uint32_t *>(data)) = packed_color;
+	*(reinterpret_cast<uint32_t*>(data)) = packed_color;
 }
-
 
 void Texture::setup_gl() {
 	assert(blit_data_.texture_id != 0);
-	Gl::State::instance().bind_framebuffer(
-	   GlFramebuffer::instance().id(), blit_data_.texture_id);
+	Gl::State::instance().bind_framebuffer(GlFramebuffer::instance().id(), blit_data_.texture_id);
 	glViewport(0, 0, width(), height());
 }
 
 void Texture::do_blit(const FloatRect& dst_rect,
-                     const BlitData& texture,
-                     float opacity,
-                     BlendMode blend_mode) {
+                      const BlitData& texture,
+                      float opacity,
+                      BlendMode blend_mode) {
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
@@ -310,12 +289,13 @@ void Texture::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> ver
 		return;
 	}
 	setup_gl();
-	DrawLineProgram::instance().draw({
-		DrawLineProgram::Arguments{vertices, 0.f, BlendMode::UseAlpha}});
+	DrawLineProgram::instance().draw(
+	   {DrawLineProgram::Arguments{vertices, 0.f, BlendMode::UseAlpha}});
 }
 
-void
-Texture::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+void Texture::do_fill_rect(const FloatRect& dst_rect,
+                           const RGBAColor& color,
+                           BlendMode blend_mode) {
 	if (blit_data_.texture_id == 0) {
 		return;
 	}

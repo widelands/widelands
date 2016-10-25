@@ -28,7 +28,6 @@
 
 #include "io/fileread.h"
 
-
 /** A collection of several pieces of music meant for the same situation.
  *
  * A Songset encapsulates a number of interchangeable pieces of (background)
@@ -44,21 +43,23 @@ struct Songset {
 	Songset();
 	~Songset();
 
-	void add_song(const std::string & filename);
-	Mix_Music * get_song();
-	bool empty() {return songs_.empty();}
+	void add_song(const std::string& filename);
+	Mix_Music* get_song();
+	bool empty() {
+		return songs_.empty();
+	}
 
 protected:
 	/// The filenames of all configured songs
-	std::vector < std::string > songs_;
+	std::vector<std::string> songs_;
 
 	/** Pointer to the song that is currently playing (actually the one that
 	 * was last started); needed for linear playback
 	 */
-	std::vector < std::string >::iterator current_song_;
+	std::vector<std::string>::iterator current_song_;
 
 	/// The current song
-	Mix_Music * m_;
+	Mix_Music* m_;
 
 	/** File reader object to fetch songs from disk when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
@@ -72,7 +73,7 @@ protected:
 	 * \sa fr_
 	 * \sa get_song()
 	 */
-	SDL_RWops * rwops_;
+	SDL_RWops* rwops_;
 };
 
 #endif  // end of include guard: WL_SOUND_SONGSET_H

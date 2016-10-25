@@ -206,6 +206,12 @@ return {
       font = "cjk"
    },
 
+   krl = {
+      name = "Karjala",
+      sort_name = "Karjala",
+      font = "default"
+   },
+
    la = {
       name = "Lingua latīna",
       sort_name = "Latina",

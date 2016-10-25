@@ -51,10 +51,10 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      gold = 8,
-      coal = 8,
-      cloth = 8
+      { name = "coal", amount = 8 },
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 },
+      { name = "cloth", amount = 8 }
    },
    outputs = {
       "armor_helmet",

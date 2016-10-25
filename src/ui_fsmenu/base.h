@@ -71,7 +71,7 @@ public:
 	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	///\return the size for texts fitting to current resolution
 	int fs_small();
@@ -87,6 +87,5 @@ protected:
 private:
 	std::string background_image_;
 };
-
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

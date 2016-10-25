@@ -49,42 +49,36 @@ class WaresQueue;
  */
 class WaresQueueDisplay : public UI::Panel {
 public:
-	enum {
-		CellWidth = WARE_MENU_PIC_WIDTH,
-		CellSpacing = 2,
-		Border = 4,
-		PriorityButtonSize = 10
-	};
+	enum { CellWidth = WARE_MENU_PIC_WIDTH, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
 
-	WaresQueueDisplay
-		(UI::Panel             * parent,
-		 int32_t x, int32_t y,
-		 InteractiveGameBase  & igb,
-		 Widelands::Building   & building,
-		 Widelands::WaresQueue * queue,
-		 bool = false);
+	WaresQueueDisplay(UI::Panel* parent,
+	                  int32_t x,
+	                  int32_t y,
+	                  InteractiveGameBase& igb,
+	                  Widelands::Building& building,
+	                  Widelands::WaresQueue* queue,
+	                  bool = false);
 	~WaresQueueDisplay();
 
 	void think() override;
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 private:
-	InteractiveGameBase  & igb_;
-	Widelands::Building   & building_;
-	Widelands::WaresQueue * queue_;
-	UI::Radiogroup        * priority_radiogroup_;
-	UI::Button   * increase_max_fill_;
-	UI::Button   * decrease_max_fill_;
-	Widelands::DescriptionIndex   ware_index_;
+	InteractiveGameBase& igb_;
+	Widelands::Building& building_;
+	Widelands::WaresQueue* queue_;
+	UI::Radiogroup* priority_radiogroup_;
+	UI::Button* increase_max_fill_;
+	UI::Button* decrease_max_fill_;
+	Widelands::DescriptionIndex ware_index_;
 	Widelands::WareWorker ware_type_;
-	const Image* icon_;            //< Index to ware's picture
+	const Image* icon_;  //< Index to ware's picture
 	const Image* max_fill_indicator_;
 
-
-	uint32_t         cache_size_;
-	uint32_t         cache_max_fill_;
-	uint32_t         total_height_;
-	bool             show_only_;
+	uint32_t cache_size_;
+	uint32_t cache_max_fill_;
+	uint32_t total_height_;
+	bool show_only_;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

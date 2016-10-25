@@ -4,13 +4,14 @@
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 18:24+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-08-20 19:43+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +21,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
-msgstr "Építs ki egy fagazdaságot"
+msgstr "Építs ki egy fatermelő gazdaságot"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Wood Economy"
-msgstr ""
+msgstr "Fatermelő gazdaság"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
@@ -136,7 +137,7 @@ msgstr "Hogy messze beláss az ellenség területére, építs tornyot."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Pusztítsd el a barbár törzset"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
@@ -146,7 +147,7 @@ msgstr "Pusztítsd el a barbár törzset"
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
-msgstr ""
+msgstr "Amint van elég katonád, támadd meg és semmisítsd meg a barbárok épületeit."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -272,7 +273,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Uram, nem akarok riadalmat kelteni, de találtam valamit, amitől elszorul a gyomrom, és ami félelmet kelt bennem. Amint a déli parton sétáltam, egy másik hajó maradványaira bukkantam. Nem tudom, vajon csak ennyi maradt-e abból a hajóból. Mindenesetre a maradványok nem tűnnek réginek."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
@@ -302,7 +303,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Uram, jó híreim vannak számodra: Ahogy kelet felé sétáltam, találtam egy nagyobb hegyet. Nem vagyok benne teljesen biztos – egy geológusnak meg kellene néznie, hogy igazam van-e – de úgy hiszem, hogy van pár hely a hegyen ahonnan márványt bányászhatnánk."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
@@ -359,7 +360,7 @@ msgstr "Amalea belép…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutius, nem gondolod, hogy elfelejtettél valami fontosat?"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
@@ -469,7 +470,7 @@ msgstr ""
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
-msgstr ""
+msgstr "Létrehoztál egy működő gazdaságot, új katonákat képeztél ki és elüldözted a barbárokat a szigetről."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
 msgid "As Time is Running By"
@@ -510,7 +511,7 @@ msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is,
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Új célkitűzés"

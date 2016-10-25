@@ -17,7 +17,6 @@
  *
  */
 
-
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
@@ -59,13 +58,13 @@ namespace UI {
 class Panel : public boost::signals2::trackable {
 public:
 	enum {
-		pf_handle_mouse = 1, ///< receive mouse events
-		pf_thinks = 2, ///< call think() function during run
-		pf_top_on_click = 4, ///< bring panel on top when clicked inside it
-		pf_die = 8, ///< this panel needs to die
-		pf_child_die = 16, ///< a child needs to die
-		pf_visible = 32, ///< render the panel
-		pf_can_focus = 64, ///< can receive the keyboard focus
+		pf_handle_mouse = 1,  ///< receive mouse events
+		pf_thinks = 2,        ///< call think() function during run
+		pf_top_on_click = 4,  ///< bring panel on top when clicked inside it
+		pf_die = 8,           ///< this panel needs to die
+		pf_child_die = 16,    ///< a child needs to die
+		pf_visible = 32,      ///< render the panel
+		pf_can_focus = 64,    ///< can receive the keyboard focus
 		/// children should snap only when overlapping the snap target
 		pf_snap_windows_only_when_overlapping = 128,
 		/// children should snap to the edges of this panel
@@ -76,25 +75,24 @@ public:
 		pf_handle_textinput = 1024,
 	};
 
-	Panel
-		(Panel * const nparent,
-		 int32_t  const nx, int32_t  const ny,
-		 int const nw, int const nh,
-		 const std::string& tooltip_text = std::string());
+	Panel(Panel* const nparent,
+	      int32_t const nx,
+	      int32_t const ny,
+	      int const nw,
+	      int const nh,
+	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
-	Panel * get_parent() const {return parent_;}
+	Panel* get_parent() const {
+		return parent_;
+	}
 
 	void free_children();
 
 	// Modal
-	enum class Returncodes {
-		kBack,
-		kOk
-	};
+	enum class Returncodes { kBack, kOk };
 
-	template<typename Returncode>
-	Returncode run() {
+	template <typename Returncode> Returncode run() {
 		return static_cast<Returncode>(do_run());
 	}
 	int do_run();
@@ -102,8 +100,7 @@ public:
 	/**
 	 * Cause run() to return as soon as possible, with the given return code
 	 */
-	template<typename Returncode>
-	void end_modal(const Returncode& code) {
+	template <typename Returncode> void end_modal(const Returncode& code) {
 		running_ = false;
 		return_code_ = static_cast<int>(code);
 	}
@@ -125,21 +122,37 @@ public:
 
 	void get_desired_size(int* w, int* h) const;
 
-	int32_t get_x() const {return x_;}
-	int32_t get_y() const {return y_;}
-	Point get_pos() const {return Point(x_, y_);}
+	int32_t get_x() const {
+		return x_;
+	}
+	int32_t get_y() const {
+		return y_;
+	}
+	Point get_pos() const {
+		return Point(x_, y_);
+	}
 	// int instead of uint because of overflow situations
-	int32_t get_w() const {return w_;}
-	int32_t get_h() const {return h_;}
+	int32_t get_w() const {
+		return w_;
+	}
+	int32_t get_h() const {
+		return h_;
+	}
 
-	Point to_parent(const Point &) const;
+	Point to_parent(const Point&) const;
 
-	virtual bool is_snap_target() const {return false;}
-	uint16_t get_border_snap_distance() const {return border_snap_distance_;}
+	virtual bool is_snap_target() const {
+		return false;
+	}
+	uint16_t get_border_snap_distance() const {
+		return border_snap_distance_;
+	}
 	void set_border_snap_distance(uint8_t const value) {
 		border_snap_distance_ = value;
 	}
-	uint8_t get_panel_snap_distance () const {return panel_snap_distance_;}
+	uint8_t get_panel_snap_distance() const {
+		return panel_snap_distance_;
+	}
 	void set_panel_snap_distance(uint8_t const value) {
 		panel_snap_distance_ = value;
 	}
@@ -154,10 +167,18 @@ public:
 	void set_inner_size(int nw, int nh);
 	void set_border(int l, int r, int t, int b);
 
-	int get_lborder() const {return lborder_;}
-	int get_rborder() const {return rborder_;}
-	int get_tborder() const {return tborder_;}
-	int get_bborder() const {return bborder_;}
+	int get_lborder() const {
+		return lborder_;
+	}
+	int get_rborder() const {
+		return rborder_;
+	}
+	int get_tborder() const {
+		return tborder_;
+	}
+	int get_bborder() const {
+		return bborder_;
+	}
 
 	int get_inner_w() const {
 		assert(lborder_ + rborder_ <= w_);
@@ -168,24 +189,42 @@ public:
 		return h_ - (tborder_ + bborder_);
 	}
 
-	const Panel * get_next_sibling () const {return next_;}
-	Panel       * get_next_sibling ()       {return next_;}
-	const Panel * get_prev_sibling () const {return prev_;}
-	Panel       * get_prev_sibling ()       {return prev_;}
-	const Panel * get_first_child  () const {return first_child_;}
-	Panel       * get_first_child  ()       {return first_child_;}
-	const Panel * get_last_child   () const {return last_child_;}
-	Panel       * get_last_child   ()       {return last_child_;}
+	const Panel* get_next_sibling() const {
+		return next_;
+	}
+	Panel* get_next_sibling() {
+		return next_;
+	}
+	const Panel* get_prev_sibling() const {
+		return prev_;
+	}
+	Panel* get_prev_sibling() {
+		return prev_;
+	}
+	const Panel* get_first_child() const {
+		return first_child_;
+	}
+	Panel* get_first_child() {
+		return first_child_;
+	}
+	const Panel* get_last_child() const {
+		return last_child_;
+	}
+	Panel* get_last_child() {
+		return last_child_;
+	}
 
 	void move_to_top();
 
 	// Drawing, visibility
-	bool is_visible() const {return flags_ & pf_visible;}
+	bool is_visible() const {
+		return flags_ & pf_visible;
+	}
 	void set_visible(bool on);
 
-	virtual void draw        (RenderTarget &);
-	virtual void draw_border (RenderTarget &);
-	virtual void draw_overlay(RenderTarget &);
+	virtual void draw(RenderTarget&);
+	virtual void draw_border(RenderTarget&);
+	virtual void draw_overlay(RenderTarget&);
 
 	// Events
 	virtual void think();
@@ -195,10 +234,9 @@ public:
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
+	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	virtual bool handle_mousemove
-		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	virtual bool handle_key(bool down, SDL_Keysym);
 	virtual bool handle_textinput(const std::string& text);
@@ -220,7 +258,9 @@ public:
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
-	bool get_can_focus() const {return flags_ & pf_can_focus;}
+	bool get_can_focus() const {
+		return flags_ & pf_can_focus;
+	}
 	bool has_focus() const {
 		assert(get_can_focus());
 		return (parent_->focus_ == this);
@@ -233,13 +273,23 @@ public:
 		else
 			flags_ &= ~pf_top_on_click;
 	}
-	bool get_top_on_click() const {return flags_ & pf_top_on_click;}
+	bool get_top_on_click() const {
+		return flags_ & pf_top_on_click;
+	}
 
-	static void set_allow_user_input(bool const t) {allow_user_input_ = t;}
-	static bool allow_user_input() {return allow_user_input_;}
+	static void set_allow_user_input(bool const t) {
+		allow_user_input_ = t;
+	}
+	static bool allow_user_input() {
+		return allow_user_input_;
+	}
 
-	void set_tooltip(const std::string& text) {tooltip_ = text;}
-	const std::string& tooltip() const {return tooltip_;}
+	void set_tooltip(const std::string& text) {
+		tooltip_ = text;
+	}
+	const std::string& tooltip() const {
+		return tooltip_;
+	}
 
 	virtual void die();
 
@@ -253,8 +303,9 @@ protected:
 	// Defines if think() should be called repeatedly. This is true on construction.
 	void set_thinks(bool yes);
 
-
-	bool keyboard_free() {return !(focus_);}
+	bool keyboard_free() {
+		return !(focus_);
+	}
 
 	virtual void update_desired_size();
 
@@ -262,7 +313,7 @@ protected:
 	static void play_new_chat_member();
 	static void play_new_chat_message();
 
-	static bool draw_tooltip(RenderTarget &, const std::string & text);
+	static bool draw_tooltip(RenderTarget&, const std::string& text);
 
 private:
 	bool handles_mouse() const {
@@ -277,36 +328,36 @@ private:
 
 	void check_child_death();
 
-	void do_draw(RenderTarget &);
-	void do_draw_inner(RenderTarget &);
+	void do_draw(RenderTarget&);
+	void do_draw_inner(RenderTarget&);
 	void do_think();
 
-	Panel * child_at_mouse_cursor
-		(int32_t mouse_x, int32_t mouse_y, Panel * child);
+	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);
 	void do_mousein(bool inside);
-	bool do_mousepress  (const uint8_t btn, int32_t x, int32_t y);
+	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
-	bool do_mousemove
-		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
 
-	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
-	static bool ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
+	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
+	static bool ui_mousepress(const uint8_t button, int32_t x, int32_t y);
 	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
-	static bool ui_mousemove
-		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static bool
+	ui_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static bool ui_mousewheel(uint32_t which, int32_t x, int32_t y);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
 
-	Panel * parent_;
-	Panel * next_, * prev_;
-	Panel * first_child_, * last_child_;
-	Panel * mousein_child_; //  child panel that the mouse is in
-	Panel * focus_; //  keyboard focus
+	Panel* parent_;
+	Panel* next_;
+	Panel* prev_;
+	Panel* first_child_;
+	Panel* last_child_;
+	Panel* mousein_child_;  //  child panel that the mouse is in
+	Panel* focus_;          //  keyboard focus
 
 	uint32_t flags_;
 
@@ -325,9 +376,9 @@ private:
 	int return_code_;
 
 	std::string tooltip_;
-	static Panel * modal_;
-	static Panel * mousegrab_;
-	static Panel * mousein_;
+	static Panel* modal_;
+	static Panel* mousegrab_;
+	static Panel* mousein_;
 	static bool allow_user_input_;
 	static const Image* default_cursor_;
 	static const Image* default_cursor_click_;
@@ -350,21 +401,23 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
  * A Panel with a name. Important for scripting
  */
 struct NamedPanel : public Panel {
-	NamedPanel
-		(Panel * const nparent, const std::string & name,
-		 int32_t  const nx, int32_t  const ny,
-		 int const nw, int const nh,
-		 const std::string & tooltip_text = std::string())
-		: Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name)
-	{
+	NamedPanel(Panel* const nparent,
+	           const std::string& name,
+	           int32_t const nx,
+	           int32_t const ny,
+	           int const nw,
+	           int const nh,
+	           const std::string& tooltip_text = std::string())
+	   : Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name) {
 	}
 
-	const std::string & get_name() const {return name_;}
+	const std::string& get_name() const {
+		return name_;
+	}
 
 private:
 	std::string name_;
 };
-
 }
 
 #endif  // end of include guard: WL_UI_BASIC_PANEL_H

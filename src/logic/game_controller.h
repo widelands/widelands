@@ -27,9 +27,8 @@
 namespace Widelands {
 class Game;
 class PlayerCommand;
-enum class PlayerEndResult: uint8_t;
+enum class PlayerEndResult : uint8_t;
 }
-
 
 /**
  * A game controller implements the policies surrounding the actual
@@ -43,16 +42,17 @@ enum class PlayerEndResult: uint8_t;
 class GameController {
 public:
 	enum class GameType : uint8_t {
-		SINGLEPLAYER = 1, // we don't want SINGLEPLAYER just because a value is empty
+		SINGLEPLAYER = 1,  // we don't want SINGLEPLAYER just because a value is empty
 		NETCLIENT,
 		NETHOST,
 		REPLAY
 	};
 
-	virtual ~GameController() {}
+	virtual ~GameController() {
+	}
 
 	virtual void think() = 0;
-	virtual void send_player_command(Widelands::PlayerCommand &) = 0;
+	virtual void send_player_command(Widelands::PlayerCommand&) = 0;
 	virtual int32_t get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 
@@ -83,7 +83,7 @@ public:
 	 */
 	bool is_paused_or_zero_speed() {
 		return is_paused() || real_speed() == 0;
-	};
+	}
 
 	/**
 	 * Sets whether the game is paused.
@@ -104,11 +104,10 @@ public:
 	 * \param result : the player result
 	 * \param info : The info string (\see \struct PlayerEndStatus)
 	 */
-	virtual void report_result
-	    (uint8_t /* player */,
-	     Widelands::PlayerEndResult /*result*/,
-	     const std::string & /* info */)
-	{}
+	virtual void report_result(uint8_t /* player */,
+	                           Widelands::PlayerEndResult /*result*/,
+	                           const std::string& /* info */) {
+	}
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_CONTROLLER_H

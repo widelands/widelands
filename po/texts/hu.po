@@ -4,14 +4,15 @@
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 12:49+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 10:22+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr "Licencelési információ a Widelandshez"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2016, Widelands fejlesztőcsapat"
+msgstr "Copyright 2002 - 2016, Widelands fejlesztőcsapat."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
@@ -427,7 +428,7 @@ msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvev�
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Néző mód: mindent lát, de senkit sem tud irányítani."
+msgstr "Néző mód: mindent lát, de senkit sem tud irányítani"
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -441,7 +442,7 @@ msgstr "Középen a játékosok beállításai láthatók. A játék megkezdés�
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)"
+msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
@@ -464,13 +465,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak."
+msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player"
-msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem nező) beállíthatja a törzset és a csapatot ahhoz a játékoshoz."
+msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem nező) beállíthatja a törzset és a csapatot ahhoz a játékoshoz"
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -600,7 +601,7 @@ msgstr "A prioritás gomb az építés ablakban arra való, hogy szabályozd a m
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "A „Gazdaság beállítása” menüben meghatározhatod az áruk kívánt mennyiségét. Ez a zászló menüből érhető el."
+msgstr "A „Gazdaság beállításai” menüben meghatározhatod az áruk kívánt mennyiségét. Ez a zászló menüből érhető el."
 
 #: ../../data/txts/tips/general_game.tip:34
 msgid ""
@@ -671,4 +672,4 @@ msgstr "Ha a csevegőüzenetet a „@játékosnév” kifejezéssel kezded, az �
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a www.widelands.org címen, és ismerd meg a többi játékost, játssz az Interneten!"
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a www.widelands.org címen, és ismerd meg a többi játékost, játssz az Interneten."

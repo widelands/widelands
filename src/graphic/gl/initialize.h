@@ -36,8 +36,7 @@ enum class Trace {
 	kYes,
 	kNo,
 };
-SDL_GLContext
-initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
+SDL_GLContext initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
 
 }  // namespace Gl
 

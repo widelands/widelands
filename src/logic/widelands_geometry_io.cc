@@ -100,7 +100,7 @@ void write_coords_32(StreamWrite* wr, const Coords& c) {
 	wr->unsigned_16(c.y);
 }
 
-void write_area_48(StreamWrite* wr, Area<Coords, uint16_t> const area) {
+void write_area_48(StreamWrite* wr, const Area<Coords, uint16_t>& area) {
 	write_coords_32(wr, area);
 	wr->unsigned_16(area.radius);
 }

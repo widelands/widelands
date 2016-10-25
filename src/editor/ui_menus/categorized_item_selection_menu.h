@@ -49,7 +49,7 @@ public:
 	   UI::Panel* parent,
 	   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
 	   const DescriptionMaintainer<DescriptionType>& descriptions,
-	   std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
+	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
 	   ToolType* const tool);
 
@@ -70,23 +70,28 @@ private:
 };
 
 template <typename DescriptionType, typename ToolType>
-CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu
-	(UI::Panel* parent,
-	const DescriptionMaintainer<Widelands::EditorCategory>& categories,
-	const DescriptionMaintainer<DescriptionType>& descriptions,
-	const std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)>
-		create_checkbox,
-	const std::function<void()> select_correct_tool,
-	ToolType* const tool) :
-	UI::Box(parent, 0, 0, UI::Box::Vertical),
-	descriptions_(descriptions),
-	select_correct_tool_(select_correct_tool),
-	protect_against_recursive_select_(false),
-	tab_panel_(this, 0, 0, nullptr),
-	current_selection_names_(this, 0, 0, 20, 20, "", UI::Align::kCenter,
-									 UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	tool_(tool)
-{
+CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
+   UI::Panel* parent,
+   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
+   const DescriptionMaintainer<DescriptionType>& descriptions,
+   const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
+      create_checkbox,
+   const std::function<void()> select_correct_tool,
+   ToolType* const tool)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     descriptions_(descriptions),
+     select_correct_tool_(select_correct_tool),
+     protect_against_recursive_select_(false),
+     tab_panel_(this, 0, 0, nullptr),
+     current_selection_names_(this,
+                              0,
+                              0,
+                              20,
+                              20,
+                              "",
+                              UI::Align::kCenter,
+                              UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     tool_(tool) {
 	add(&tab_panel_, UI::Align::kCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {

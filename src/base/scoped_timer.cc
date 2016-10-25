@@ -24,9 +24,7 @@
 
 #include "base/log.h"
 
-ScopedTimer::ScopedTimer(const std::string& message)
-		: message_(message)
-{
+ScopedTimer::ScopedTimer(const std::string& message) : message_(message) {
 	startime_ = SDL_GetTicks();
 	lasttime_ = startime_;
 }

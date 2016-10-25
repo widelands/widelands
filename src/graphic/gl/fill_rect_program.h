@@ -46,7 +46,6 @@ public:
 	          const RGBAColor& color,
 	          BlendMode blend_mode);
 
-
 	void draw(const std::vector<Arguments>& arguments);
 
 private:
@@ -90,6 +89,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(FillRectProgram);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H

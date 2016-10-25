@@ -36,19 +36,19 @@ namespace Widelands {
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
 struct CmdDeleteMessage : public Command {
-	CmdDeleteMessage
-		(uint32_t const t, PlayerNumber const p, MessageId const m)
-		: Command(t), player(p), message(m)
-	{}
+	CmdDeleteMessage(uint32_t const t, PlayerNumber const p, const MessageId& m)
+	   : Command(t), player(p), message(m) {
+	}
 
-	void execute (Game & game) override;
-	QueueCommandTypes id() const override {return QueueCommandTypes::kDeleteMessage;}
+	void execute(Game& game) override;
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kDeleteMessage;
+	}
 
 private:
 	PlayerNumber player;
-	MessageId    message;
+	MessageId message;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_CMD_DELETE_MESSAGE_H

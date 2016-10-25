@@ -2,12 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Arm Coon <armcoon@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 10:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "兵士、訓練和戰爭"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
@@ -42,7 +43,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "兵士的能力"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid ""
@@ -71,7 +72,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
-msgstr ""
+msgstr "生命:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
@@ -82,7 +83,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
-msgstr ""
+msgstr "攻擊:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:44
@@ -95,7 +96,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
-msgstr ""
+msgstr "防禦:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -110,7 +111,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
-msgstr ""
+msgstr "迴避:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -124,7 +125,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
 msgid "The Battle Arena"
-msgstr ""
+msgstr "格鬥場"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid "Now I have talked about training and levels. Let me elaborate on that."
@@ -157,11 +158,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid "Build a battle arena"
-msgstr ""
+msgstr "建立格鬥場"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "建立格鬥場。它是一閒大型建筑物。"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
@@ -219,7 +220,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
 msgid "The Training Camp"
-msgstr ""
+msgstr "訓練營"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 msgid ""
@@ -231,11 +232,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Build a training camp."
-msgstr ""
+msgstr "建立一閒訓練營。"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
 msgid "Build a training camp"
-msgstr ""
+msgstr "建立一閒訓練營。"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
@@ -276,7 +277,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "英雄與菜鳥"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
@@ -367,8 +368,8 @@ msgstr ""
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
 msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158

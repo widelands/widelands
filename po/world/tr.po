@@ -2,14 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Erdy, 2016
+# GunChleoc, 2016
 # Recep Hasanbaş <swarfhell@gmail.com>, 2015
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:56+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 19:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -42,11 +44,11 @@ msgstr "Geyik"
 msgid "Duck"
 msgstr "Ördek"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Kanada geyiği"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Tilki"
 
@@ -66,11 +68,11 @@ msgstr "Ren geyiği"
 msgid "Sheep"
 msgstr "Koyun"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Erkek geyik"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Yaban domuzu"
 
@@ -78,7 +80,7 @@ msgstr "Yaban domuzu"
 msgid "Wisent"
 msgstr "Bizon"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Kurt"
 
@@ -504,7 +506,7 @@ msgstr "Meşe Ağacı (Yaşlı)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:82
 msgid "Oak"
-msgstr ""
+msgstr "Meşe"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -679,17 +681,17 @@ msgstr "Yeşil Şemsiye Ağacı (Fidan)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:37
 msgid "Green Umbrella Tree (Pole)"
-msgstr " Şemsiye Ağacı (Sırı)"
+msgstr "Şemsiye Ağacı (Sırı)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:61
 msgid "Green Umbrella Tree (Mature)"
-msgstr " Şemsiye Ağacı (Yetişkin)"
+msgstr "Şemsiye Ağacı (Yetişkin)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:85
 msgid "Green Umbrella Tree (Old)"
-msgstr " Şemsiye Ağacı (Yaşlı)"
+msgstr "Şemsiye Ağacı (Yaşlı)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
@@ -811,7 +813,7 @@ msgstr "Çöl"
 
 #: ../../data/world/terrains/init.lua:33
 msgid "Meadow 1"
-msgstr ""
+msgstr "Çayır 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -844,15 +846,15 @@ msgstr ""
 
 #: ../../data/world/terrains/init.lua:86
 msgid "Meadow 2"
-msgstr ""
+msgstr "Çayır 2"
 
 #: ../../data/world/terrains/init.lua:107
 msgid "Meadow 3"
-msgstr ""
+msgstr "Çayır 3"
 
 #: ../../data/world/terrains/init.lua:127
 msgid "Meadow 4"
-msgstr ""
+msgstr "Çayır 4"
 
 #: ../../data/world/terrains/init.lua:147
 #: ../../data/world/terrains/init.lua:1002
@@ -873,28 +875,28 @@ msgstr "Dağ Çayırı"
 #: ../../data/world/terrains/init.lua:800
 #: ../../data/world/terrains/init.lua:1082
 msgid "Mountain 1"
-msgstr ""
+msgstr "Dağ 1"
 
 #: ../../data/world/terrains/init.lua:211
 #: ../../data/world/terrains/init.lua:535
 #: ../../data/world/terrains/init.lua:816
 #: ../../data/world/terrains/init.lua:1098
 msgid "Mountain 2"
-msgstr ""
+msgstr "Dağ 2"
 
 #: ../../data/world/terrains/init.lua:227
 #: ../../data/world/terrains/init.lua:551
 #: ../../data/world/terrains/init.lua:832
 #: ../../data/world/terrains/init.lua:1114
 msgid "Mountain 3"
-msgstr ""
+msgstr "Dağ 3"
 
 #: ../../data/world/terrains/init.lua:243
 #: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:848
 #: ../../data/world/terrains/init.lua:1130
 msgid "Mountain 4"
-msgstr ""
+msgstr "Dağ 4"
 
 #: ../../data/world/terrains/init.lua:259
 #: ../../data/world/terrains/init.lua:582
@@ -968,15 +970,15 @@ msgstr ""
 
 #: ../../data/world/terrains/init.lua:692
 msgid "Tundra 1"
-msgstr ""
+msgstr "Tundra 1"
 
 #: ../../data/world/terrains/init.lua:712
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../data/world/terrains/init.lua:732
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../data/world/terrains/init.lua:752
 msgid "Tundra Taiga"
@@ -992,11 +994,11 @@ msgstr "Buz"
 
 #: ../../data/world/terrains/init.lua:933
 msgid "Ice Floes 1"
-msgstr ""
+msgstr "Buz Kütleleri 1"
 
 #: ../../data/world/terrains/init.lua:950
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Buz Kütleleri 2"
 
 #: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
@@ -1012,16 +1014,16 @@ msgstr "Yüksek Dağ Çayırı"
 
 #: ../../data/world/terrains/init.lua:1183
 msgid "Desert 1"
-msgstr ""
+msgstr "Çöl 1"
 
 #: ../../data/world/terrains/init.lua:1199
 msgid "Desert 2"
-msgstr ""
+msgstr "Çöl 2"
 
 #: ../../data/world/terrains/init.lua:1215
 msgid "Desert 3"
-msgstr ""
+msgstr "Çöl 3"
 
 #: ../../data/world/terrains/init.lua:1231
 msgid "Desert 4"
-msgstr ""
+msgstr "Çöl 4"

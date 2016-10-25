@@ -25,40 +25,45 @@
 
 ///  Increases the height of a field by a value.
 struct EditorIncreaseHeightTool : public EditorTool {
-	EditorIncreaseHeightTool
-	(EditorDecreaseHeightTool & the_decrease_tool,
-	 EditorSetHeightTool    &   the_set_tool)
-		:
-		EditorTool(the_decrease_tool, the_set_tool),
-		decrease_tool_(the_decrease_tool), set_tool_(the_set_tool),
-		change_by_(1)
-	{}
+	EditorIncreaseHeightTool(EditorDecreaseHeightTool& the_decrease_tool,
+	                         EditorSetHeightTool& the_set_tool)
+	   : EditorTool(the_decrease_tool, the_set_tool),
+	     decrease_tool_(the_decrease_tool),
+	     set_tool_(the_set_tool),
+	     change_by_(1) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
+	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_increase_height.png";
 	}
 
-	int32_t get_change_by() const {return change_by_;}
-	void set_change_by(const int32_t n) {change_by_ = n;}
+	int32_t get_change_by() const {
+		return change_by_;
+	}
+	void set_change_by(const int32_t n) {
+		change_by_ = n;
+	}
 
-	EditorDecreaseHeightTool & decrease_tool() const {
+	EditorDecreaseHeightTool& decrease_tool() const {
 		return decrease_tool_;
 	}
-	EditorSetHeightTool    &   set_tool() const {return set_tool_;}
+	EditorSetHeightTool& set_tool() const {
+		return set_tool_;
+	}
 
 private:
 	EditorDecreaseHeightTool& decrease_tool_;

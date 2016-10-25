@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
 	},
 
 	inputs = {
-		ax = 8,
-		beer = 8,
-		barbarians_carrier = 8
+		{ name = "ax", amount = 8 },
+		{ name = "beer", amount = 8 },
+		{ name = "barbarians_carrier", amount = 8 }
 	},
 	outputs = {
 		"barbarians_soldier",

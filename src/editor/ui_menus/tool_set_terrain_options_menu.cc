@@ -53,34 +53,30 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	// Blit the main terrain image
 	const Image& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-	texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-					  terrain_texture,
-					  Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-					  1.,
-					  BlendMode::UseAlpha);
+	texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()), terrain_texture,
+	              Rect(0, 0, terrain_texture.width(), terrain_texture.height()), 1.,
+	              BlendMode::UseAlpha);
 	Point pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
 	// Collect tooltips and blit small icons representing "is" values
 	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
-                tooltips.insert(tooltips.end(),
-								terrain_descr.custom_tooltips().begin(),
-								terrain_descr.custom_tooltips().end());
+		tooltips.insert(tooltips.end(), terrain_descr.custom_tooltips().begin(),
+		                terrain_descr.custom_tooltips().end());
 		tooltips.push_back(terrain_type.descname);
 
 		texture->blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
-			 *terrain_type.icon,
-			 Rect(0, 0, terrain_type.icon->width(), terrain_type.icon->height()),
-			  1.,
-			  BlendMode::UseAlpha);
+		              *terrain_type.icon,
+		              Rect(0, 0, terrain_type.icon->width(), terrain_type.icon->height()), 1.,
+		              BlendMode::UseAlpha);
 		pt.x += kSmallPicSize + 1;
 	}
 	// Make sure we delete this later on.
 	offscreen_images->emplace_back(texture);
 
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
-	const std::string tooltip = ((boost::format(_("%1%: %2%")))
-								  % terrain_descr.descname()
-								  % i18n::localize_list(tooltips, i18n::ConcatenateWith::AND)).str();
+	const std::string tooltip = ((boost::format(_("%1%: %2%"))) % terrain_descr.descname() %
+	                             i18n::localize_list(tooltips, i18n::ConcatenateWith::AND))
+	                               .str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);
@@ -96,14 +92,11 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this,
-	      world.editor_terrain_categories(),
-	      world.terrains(),
+	      this, world.editor_terrain_categories(), world.terrains(),
 	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
 		   },
-	      [this] {select_correct_tool();},
-	      &tool));
+	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }
 

@@ -25,7 +25,6 @@
 #include "base/wexception.h"
 #include "logic/map_objects/tribes/tribes.h"
 
-
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
 	s.tribes = Widelands::Tribes::get_all_tribeinfos();
 	s.scenario = false;
@@ -37,7 +36,7 @@ void SinglePlayerGameSettingsProvider::set_scenario(bool const set) {
 	s.scenario = set;
 }
 
-const GameSettings & SinglePlayerGameSettingsProvider::settings() {
+const GameSettings& SinglePlayerGameSettingsProvider::settings() {
 	return s;
 }
 
@@ -53,7 +52,7 @@ bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_init (uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_init(uint8_t) {
 	return !s.scenario;
 }
 
@@ -69,8 +68,10 @@ std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
 }
 
-void SinglePlayerGameSettingsProvider::set_map (const std::string & mapname, const std::string & mapfilename,
-		uint32_t const maxplayers, bool const savegame) {
+void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
+                                               const std::string& mapfilename,
+                                               uint32_t const maxplayers,
+                                               bool const savegame) {
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
 	s.savegame = savegame;
@@ -79,18 +80,16 @@ void SinglePlayerGameSettingsProvider::set_map (const std::string & mapname, con
 	s.players.resize(maxplayers);
 
 	while (oldplayers < maxplayers) {
-		PlayerSettings & player = s.players[oldplayers];
-		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman :
-			PlayerSettings::stateComputer;
-		player.tribe                = s.tribes.at(0).name;
-		player.random_tribe         = false;
+		PlayerSettings& player = s.players[oldplayers];
+		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
+		player.tribe = s.tribes.at(0).name;
+		player.random_tribe = false;
 		player.initialization_index = 0;
 		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::stateComputer) {
-			const ComputerPlayer::ImplementationVector & impls =
-				ComputerPlayer::get_implementations();
+			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
@@ -103,7 +102,8 @@ void SinglePlayerGameSettingsProvider::set_map (const std::string & mapname, con
 	}
 }
 
-void SinglePlayerGameSettingsProvider::set_player_state (uint8_t const number, PlayerSettings::State state) {
+void SinglePlayerGameSettingsProvider::set_player_state(uint8_t const number,
+                                                        PlayerSettings::State state) {
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
@@ -113,8 +113,9 @@ void SinglePlayerGameSettingsProvider::set_player_state (uint8_t const number, P
 	s.players[number].state = state;
 }
 
-void SinglePlayerGameSettingsProvider::set_player_ai(uint8_t const number, const std::string & ai,
-		bool const random_ai) {
+void SinglePlayerGameSettingsProvider::set_player_ai(uint8_t const number,
+                                                     const std::string& ai,
+                                                     bool const random_ai) {
 	if (number < s.players.size()) {
 		s.players[number].ai = ai;
 		s.players[number].random_ai = random_ai;
@@ -125,11 +126,9 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
-	const ComputerPlayer::ImplementationVector & impls =
-		ComputerPlayer::get_implementations();
+	const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
-		ComputerPlayer::ImplementationVector::const_iterator it =
-			impls.begin();
+		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		do {
 			++it;
 			if ((*(it - 1))->name == s.players[number].ai)
@@ -141,9 +140,9 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		} else if (it == impls.end()) {
 			s.players[number].random_ai = true;
 			do {
-				uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+				uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 				it = impls.begin() + random;
-			} while ((*it)->name == "None");
+			} while ((*it)->name == "empty");
 		}
 		s.players[number].ai = (*it)->name;
 	}
@@ -151,13 +150,14 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 	s.players[number].state = PlayerSettings::stateComputer;
 }
 
-void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number, const std::string & tribe,
-		bool random_tribe) {
+void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
+                                                        const std::string& tribe,
+                                                        bool random_tribe) {
 	if (number >= s.players.size())
 		return;
 
 	std::string actual_tribe = tribe;
-	PlayerSettings & player = s.players[number];
+	PlayerSettings& player = s.players[number];
 	player.random_tribe = random_tribe;
 
 	if (random_tribe) {
@@ -166,8 +166,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number, co
 		actual_tribe = s.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes)
-	{
+	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == player.tribe) {
 			s.players[number].tribe = actual_tribe;
 			if (tmp_tribe.initializations.size() <= player.initialization_index) {
@@ -181,8 +180,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 	if (number >= s.players.size())
 		return;
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes)
-	{
+	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == s.players[number].tribe) {
 			if (index < tmp_tribe.initializations.size())
 				s.players[number].initialization_index = index;
@@ -205,12 +203,13 @@ void SinglePlayerGameSettingsProvider::set_player_shared(uint8_t, uint8_t) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::set_player_name(uint8_t const number, const std::string & name) {
+void SinglePlayerGameSettingsProvider::set_player_name(uint8_t const number,
+                                                       const std::string& name) {
 	if (number < s.players.size())
 		s.players[number].name = name;
 }
 
-void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, PlayerSettings const ps) {
+void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, const PlayerSettings& ps) {
 	if (number < s.players.size())
 		s.players[number] = ps;
 }
@@ -220,11 +219,8 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
-	if
-		(number < settings().players.size() &&
-		 (position.state == PlayerSettings::stateOpen ||
-		  position.state == PlayerSettings::stateComputer))
-	{
+	if (number < settings().players.size() && (position.state == PlayerSettings::stateOpen ||
+	                                           position.state == PlayerSettings::stateComputer)) {
 		set_player(number, player);
 		set_player(settings().playernum, position);
 		s.playernum = number;

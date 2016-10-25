@@ -38,15 +38,16 @@
 
 #include "base/point.h"
 
+namespace Widelands {
+class Game;
+}
 
-namespace Widelands {class Game;}
-
-///Thrown if a commandline parameter is faulty
+/// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
-	explicit ParameterError() : std::runtime_error("") {}
-	explicit ParameterError(std::string text)
-		: std::runtime_error(text)
-	{}
+	explicit ParameterError() : std::runtime_error("") {
+	}
+	explicit ParameterError(std::string text) : std::runtime_error(text) {
+	}
 };
 
 // Callbacks input events to the UI. All functions return true when the event
@@ -132,43 +133,54 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
-	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
+	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK};
+	enum GameType { NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK };
 
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-	bool should_die() const {return should_die_;}
+	bool should_die() const {
+		return should_die_;
+	}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDL_Scancode const key) const {return SDL_GetKeyboardState(nullptr)[key];}
+	bool get_key_state(SDL_Scancode const key) const {
+		return SDL_GetKeyboardState(nullptr)[key];
+	}
 
 	// @{
 	void warp_mouse(Point);
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Point get_mouse_position() const {return mouse_position_;}
+	Point get_mouse_position() const {
+		return mouse_position_;
+	}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
+	bool is_mouse_pressed() const {
+		return SDL_GetMouseState(nullptr, nullptr);
+	}
 
 	/// Swap left and right mouse key?
-	void set_mouse_swap(const bool swap) {mouse_swapped_ = swap;}
+	void set_mouse_swap(const bool swap) {
+		mouse_swapped_ = swap;
+	}
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
-	void set_mouse_lock(const bool locked) {mouse_locked_ = locked;}
+	void set_mouse_lock(const bool locked) {
+		mouse_locked_ = locked;
+	}
 	// @}
-
 
 	// Refresh the graphics settings with the latest options.
 	void refresh_graphics();
 
-	 // Pump SDL events and dispatch them.
-	void handle_input(InputCallback const *);
+	// Pump SDL events and dispatch them.
+	void handle_input(InputCallback const*);
 
 	void mainmenu();
 	void mainmenu_tutorial();
@@ -180,12 +192,12 @@ struct WLApplication {
 	bool load_game();
 	bool campaign_game();
 	void replay();
-	static void emergency_save(Widelands::Game &);
+	static void emergency_save(Widelands::Game&);
 
 private:
-	WLApplication(int argc, char const * const * argv);
+	WLApplication(int argc, char const* const* argv);
 
-	bool poll_event(SDL_Event &);
+	bool poll_event(SDL_Event&);
 
 	bool init_settings();
 	void init_language();
@@ -193,7 +205,7 @@ private:
 
 	void shutdown_hardware();
 
-	void parse_commandline(int argc, char const * const * argv);
+	void parse_commandline(int argc, char const* const* argv);
 	void handle_commandline_parameters();
 
 	void setup_homedir();
@@ -217,31 +229,28 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
-	// Log all output to this file if set, otherwise use cout
-	std::string logfile_;
-
 	GameType game_type_;
 
-	///True if left and right mouse button should be swapped
-	bool  mouse_swapped_;
+	/// True if left and right mouse button should be swapped
+	bool mouse_swapped_;
 
 	/// When apple is involved, the middle mouse button is sometimes send, even
 	/// if it wasn't pressed. We try to revert this and this helps.
-	bool  faking_middle_mouse_button_;
+	bool faking_middle_mouse_button_;
 
-	///The current position of the mouse pointer
+	/// The current position of the mouse pointer
 	Point mouse_position_;
 
-	///If true, the mouse cursor will \e not move with a mousemotion event:
-	///instead, the map will be scrolled
-	bool  mouse_locked_;
+	/// If true, the mouse cursor will \e not move with a mousemotion event:
+	/// instead, the map will be scrolled
+	bool mouse_locked_;
 
-	///If the mouse needs to be moved in warp_mouse(), this Point is
-	///used to cancel the resulting SDL_MouseMotionEvent.
+	/// If the mouse needs to be moved in warp_mouse(), this Point is
+	/// used to cancel the resulting SDL_MouseMotionEvent.
 	Point mouse_compensate_warp_;
 
-	///true if an external entity wants us to quit
-	bool   should_die_;
+	/// true if an external entity wants us to quit
+	bool should_die_;
 
 	std::string homedir_;
 
@@ -255,9 +264,9 @@ private:
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.
 	/// \note This is private on purpose. Read the class documentation.
-	static WLApplication * the_singleton;
+	static WLApplication* the_singleton;
 
-	void handle_mousebutton(SDL_Event &, InputCallback const *);
+	void handle_mousebutton(SDL_Event&, InputCallback const*);
 };
 
 #endif  // end of include guard: WL_WLAPPLICATION_H

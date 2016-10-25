@@ -3,16 +3,18 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2016
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 10:20+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,13 +140,13 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Először is, bal gombbal rákattintok a szimbólumra, ahová a favágó kunyhóját fel akarod építeni. Egy ablak fog megjelenni, ahol az épületek közt választhatok. Mivel egy sárga épületre fogok kattintani – amely azt jelenti, hogy kis és közepes épületek lehetnek rajta –, ezért a felépíthető közepes házakat fogom látni. A favágó kunyhója egy kis épület, ezért kiválasztom a kis épületek fület. Ezután kiválasztom a favágó kunyhóját."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr ""
+msgstr "Kattints az „OK” gombra hogy megnézz. Lassan csinálom: rákattintok – aztán kiválasztom a lapfült – és végül kiválasztom az épületet."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -167,7 +169,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Ezzel még nem végeztem. Még össze kell kötni a favágókunyhót az úthálózat többi részével. Letiltottad a „Út építése a zászlók elhelyezése után” beállítást (a megváltoztatáshoz válaszd a „Beállításokat„ a Widelands főmenüjében). Ezért kézzel váltottam át útépítési módba. Később elmondom azt hogyan kell. Az út megépítéséhez nincs más dolgom, mint a főhadiszállás kék zászlójára kattintani."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -272,7 +274,7 @@ msgid ""
 "If you click on the construction site, a window opens. You can see the wares"
 " that are still missing grayed out. You can also see the progress of this "
 "construction site."
-msgstr "Ha rákattintasz az építési területre, egy ablak nyílik meg. Láthatod hogy a még hiányzó áruk ki vannak szürkítve. Az építési terület előrehaladását is láthatod. "
+msgstr "Ha rákattintasz az építési területre, egy ablak nyílik meg. Láthatod hogy a még hiányzó áruk ki vannak szürkítve. Az építési terület előrehaladását is láthatod."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid ""
@@ -421,7 +423,7 @@ msgstr "Irány követ kitermelni"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "Nagyszerű. Na most arról a kőfejtőről…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
@@ -430,7 +432,7 @@ msgstr "Miként építsünk kőfejtőt"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "Építs egy kőfejtőt az itteni kövek mellé. Emlékszel hogy csináltad legutóbb?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -438,14 +440,14 @@ msgid ""
 "space were you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr ""
+msgstr "Győződj meg róla, hogy az épülethelyek megjelenítettek-e, aztán kattints arra a helyre, ahová az épületet szeretnéd, válaszd ki a megjelenő ablakban, és akkor elhelyezésre kerül. Ez egy jó alkalom a korábban bekapcsolt épülethely szimbólumok elmagyarázására."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "Négy dolgot építhetsz a mezőkre a Widelandsben: zászlókat, kis házakat, közepes házakat és nagy házakat. De nem minden mező tartalmazhat bármit. Az épülethely szimbólumok megkönnyítik a felismerést:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid "Everything can be built on the green house symbol."
@@ -475,11 +477,11 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Most pedig itt az ideje, hogy kipróbáld. A kőfejtő a kis házak között van, így, ha közepes vagy nagy ház helyre kattintasz, akkor válaszd a kis ház épületeit."
+msgstr "Most pedig itt az ideje, hogy kipróbáld. A kőfejtő a kis házak között van, így, ha közepes vagy nagy ház helyre kattintasz, akkor válaszd a kis ház épületeit!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Építs egy kőfejtőt a kövek mellé"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
@@ -489,20 +491,20 @@ msgstr "Építs egy kőfejtőt"
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "Van néhány kő a főhadiszállásodtól nyugatra. Építs melléjük egy kőfejtőt."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr ""
+msgstr "A kőfejtő egy kis ház, mint a favágó kunyhója. Ezért bármely mezőre építheted, amely piros, sárga vagy zöld házat mutat, amikor az épülethelyek be vannak kapcsolva (ehhez kattints a Szóközre)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "Kattints bármelyik házszimbólumra a kövek mellett, válaszd ki a kis épületek lapot a felnyíló ablakon, és kattints a kőfejtő szimbólumra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:293
@@ -654,7 +656,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
-msgstr ""
+msgstr "Építs egy második kőfejtőt"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
@@ -734,11 +736,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Az üzeneteket tartalmazó ablak az alsó ikonsor legutolsó elemére kattintva érhető el. Ez jelzi továbbá azt is, ha új üzenet érkezett. Ilyenkor megváltozik az ikon, illetve hangjelzés is hallható."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -838,7 +840,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "Üzenetek Érkeztek!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid ""
@@ -859,6 +861,10 @@ msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
+msgstr ""
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
@@ -888,7 +894,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
 msgid "Expanding Your Territory!"
-msgstr "A területed bővítése"
+msgstr "A területed bővítése!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 msgid ""
@@ -929,11 +935,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid "Expand your territory"
-msgstr ""
+msgstr "Bővítsd a területed"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Make your territory grow"
-msgstr ""
+msgstr "Növeld a területed"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
 msgid ""

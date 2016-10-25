@@ -34,7 +34,7 @@
 
 namespace Widelands {
 
-void CmdLuaCoroutine::execute (Game & game) {
+void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
@@ -45,19 +45,15 @@ void CmdLuaCoroutine::execute (Game & game) {
 			delete cr_;
 			cr_ = nullptr;
 		}
-	} catch (LuaError & e) {
+	} catch (LuaError& e) {
 		log("Error in Lua Coroutine\n");
 		log("%s\n", e.what());
 		log("Send message to all players and pause game");
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
-			Widelands::Message & msg =
-				*new Widelands::Message
-				(Message::Type::kGameLogic,
-				 game.get_gametime(),
-				 "Coroutine",
-				 "images/ui_basic/menu_help.png",
-				 "Lua Coroutine Failed",
-				 (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str());
+			Widelands::Message& msg = *new Widelands::Message(
+			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
+			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed",
+			   (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str());
 			game.player(i).add_message(game, msg, true);
 		}
 		game.game_controller()->set_desired_speed(0);
@@ -75,28 +71,25 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 			// This function is only called when saving/loading savegames. So save
 			// to cast here
 			upcast(LuaGameInterface, lgi, &egbase.lua());
-			assert(lgi); // If this is not true, this is not a game.
+			assert(lgi);  // If this is not true, this is not a game.
 
 			cr_ = lgi->read_coroutine(fr);
 		} else {
 			throw UnhandledVersionError("CmdLuaCoroutine", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("lua function: %s", e.what());
 	}
 }
-void CmdLuaCoroutine::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	// This function is only called when saving/loading savegames. So save to
 	// cast here
 	upcast(LuaGameInterface, lgi, &egbase.lua());
-	assert(lgi); // If this is not true, this is not a game.
+	assert(lgi);  // If this is not true, this is not a game.
 
 	lgi->write_coroutine(fw, cr_);
 }
-
 }

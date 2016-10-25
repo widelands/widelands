@@ -28,16 +28,18 @@ struct EditorInfoTool : public EditorTool {
 	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_info.png";
 	}
 
-	bool has_size_one() const override {return true;}
+	bool has_size_one() const override {
+		return true;
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INFO_TOOL_H

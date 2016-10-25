@@ -44,9 +44,9 @@ tribes:new_productionsite_type {
 	},
 
 	inputs = {
-		tabard = 8,
-		trident_light = 8,
-		atlanteans_carrier = 8
+		{ name = "tabard", amount = 8 },
+		{ name = "trident_light", amount = 8 },
+		{ name = "atlanteans_carrier", amount = 8 }
 	},
 	outputs = {
 		"atlanteans_soldier",

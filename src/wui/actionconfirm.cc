@@ -32,15 +32,13 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
-
 struct ActionConfirm : public UI::Window {
-	ActionConfirm
-		(InteractivePlayer & parent,
-		 const std::string & windowtitle,
-		 const std::string & message,
-		 Widelands::MapObject& map_object);
+	ActionConfirm(InteractivePlayer& parent,
+	              const std::string& windowtitle,
+	              const std::string& message,
+	              Widelands::MapObject& map_object);
 
-	InteractivePlayer & iaplayer() const {
+	InteractivePlayer& iaplayer() const {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
@@ -66,10 +64,9 @@ struct BulldozeConfirm : public ActionConfirm {
 	 * This is useful in the combination where \p todestroy is the base flag
 	 * of \p building.
 	 */
-	BulldozeConfirm
-		(InteractivePlayer & parent,
-		 Widelands::Building & building,
-		 Widelands::PlayerImmovable * todestroy = nullptr);
+	BulldozeConfirm(InteractivePlayer& parent,
+	                Widelands::Building& building,
+	                Widelands::PlayerImmovable* todestroy = nullptr);
 
 	void think() override;
 	void ok() override;
@@ -82,9 +79,7 @@ private:
  * Confirmation dialog box for the dismantle request for a building.
  */
 struct DismantleConfirm : public ActionConfirm {
-	DismantleConfirm
-		(InteractivePlayer & parent,
-		 Widelands::Building & building);
+	DismantleConfirm(InteractivePlayer& parent, Widelands::Building& building);
 
 	void think() override;
 	void ok() override;
@@ -94,25 +89,23 @@ struct DismantleConfirm : public ActionConfirm {
  * Confirmation dialog box for the enhance request for a building.
  */
 struct EnhanceConfirm : public ActionConfirm {
-	EnhanceConfirm
-		(InteractivePlayer & parent,
-		 Widelands::Building & building,
-		 const Widelands::DescriptionIndex & id);
+	EnhanceConfirm(InteractivePlayer& parent,
+	               Widelands::Building& building,
+	               const Widelands::DescriptionIndex& id);
 
 	void think() override;
 	void ok() override;
 
 private:
-    // Do not make this a reference - it is a stack variable in the caller
+	// Do not make this a reference - it is a stack variable in the caller
 	const Widelands::DescriptionIndex id_;
 };
-
 
 /**
  * Confirmation dialog box for the sink request for a ship.
  */
 struct ShipSinkConfirm : public ActionConfirm {
-	ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship);
+	ShipSinkConfirm(InteractivePlayer& parent, Widelands::Ship& ship);
 
 	void think() override;
 	void ok() override;
@@ -122,223 +115,171 @@ struct ShipSinkConfirm : public ActionConfirm {
  * Confirmation dialog box for the cancel expedition request for a ship.
  */
 struct ShipCancelExpeditionConfirm : public ActionConfirm {
-	ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship);
+	ShipCancelExpeditionConfirm(InteractivePlayer& parent, Widelands::Ship& ship);
 
 	void think() override;
 	void ok() override;
 };
 
-
-ActionConfirm::ActionConfirm
-	(InteractivePlayer & parent,
-	 const std::string & windowtitle,
-	 const std::string & message,
-	 Widelands::MapObject & map_object)
-	:
-	UI::Window
-		(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-	object_ (&map_object)
-{
+ActionConfirm::ActionConfirm(InteractivePlayer& parent,
+                             const std::string& windowtitle,
+                             const std::string& message,
+                             Widelands::MapObject& map_object)
+   : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
+     object_(&map_object) {
 	new UI::MultilineTextarea(this, 0, 0, 200, 74, message, UI::Align::kCenter);
 
-	UI::Button * okbtn =
-		new UI::Button
-			(this, "ok",
-			 UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_okay.png"));
+	UI::Button* okbtn = new UI::Button(this, "ok", UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80,
+	                                   34, g_gr->images().get("images/ui_basic/but4.png"),
+	                                   g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
-	UI::Button * cancelbtn =
-		new UI::Button
-			(this, "abort",
-			 UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_abort.png"));
+	UI::Button* cancelbtn =
+	   new UI::Button(this, "abort", UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
+	                  g_gr->images().get("images/ui_basic/but4.png"),
+	                  g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();
 	cancelbtn->center_mouse();
 }
 
-
 /*
 ===============
 Create the panels for bulldoze confirmation.
 ===============
 */
-BulldozeConfirm::BulldozeConfirm
-	(InteractivePlayer & parent,
-	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * todestroy)
-	:
-	ActionConfirm
-		(parent,
-		 _("Destroy building?"),
-		 (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname()).str(),
-		 building),
-	todestroy_(todestroy ? todestroy : &building)
-{
+BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
+                                 Widelands::Building& building,
+                                 Widelands::PlayerImmovable* todestroy)
+   : ActionConfirm(
+        parent,
+        _("Destroy building?"),
+        (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname())
+           .str(),
+        building),
+     todestroy_(todestroy ? todestroy : &building) {
 	// Nothing special to do
 }
-
 
 /*
 ===============
 Make sure the building still exists and can in fact be bulldozed.
 ===============
 */
-void BulldozeConfirm::think()
-{
-	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
-	upcast(Widelands::Building, building, object_ .get(egbase));
+void BulldozeConfirm::think() {
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
+	upcast(Widelands::Building, building, object_.get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
-	if
-		(!todestroy ||
-		 !building ||
-		 !iaplayer().can_act(building->owner().player_number())
-		 ||
-		 !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
+	if (!todestroy || !building || !iaplayer().can_act(building->owner().player_number()) ||
+	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 		die();
 }
-
 
 /**
  * The "Ok" button was clicked, so issue the CMD_BULLDOZE command for this building.
  */
-void BulldozeConfirm::ok()
-{
-	Widelands::Game & game = iaplayer().game();
+void BulldozeConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(game));
 
-	if
-		(todestroy &&
-		 building &&
-		 iaplayer().can_act(building->owner().player_number()) &&
-		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
-	{
-		game.send_player_bulldoze
-			(*todestroy, get_key_state(SDL_SCANCODE_LCTRL) << get_key_state(SDL_SCANCODE_RCTRL));
+	if (todestroy && building && iaplayer().can_act(building->owner().player_number()) &&
+	    (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
+		game.send_player_bulldoze(
+		   *todestroy, get_key_state(SDL_SCANCODE_LCTRL) << get_key_state(SDL_SCANCODE_RCTRL));
 	}
 
 	die();
 }
-
 
 /*
 ===============
 Create the panels for dismantle confirmation.
 ===============
 */
-DismantleConfirm::DismantleConfirm
-	(InteractivePlayer & parent,
-	 Widelands::Building & building)
-	:
-	ActionConfirm
-		(parent,
-		 _("Dismantle building?"),
-		 (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname()).str(),
-		 building)
-{
+DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Building& building)
+   : ActionConfirm(
+        parent,
+        _("Dismantle building?"),
+        (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname())
+           .str(),
+        building) {
 	// Nothing special to do
 }
-
 
 /*
 ===============
 Make sure the building still exists and can in fact be dismantled.
 ===============
 */
-void DismantleConfirm::think()
-{
-	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
+void DismantleConfirm::think() {
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if
-		(!building ||
-		 !iaplayer().can_act(building->owner().player_number())
-		 ||
-		 !(building->get_playercaps() & Widelands::Building::PCap_Dismantle))
+	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
+	    !(building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 		die();
 }
-
 
 /**
  * The "Ok" button was clicked, so issue the CMD_DISMANTLEBUILDING command for this building.
  */
-void DismantleConfirm::ok()
-{
-	Widelands::Game & game = iaplayer().game();
+void DismantleConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todismantle, object_.get(game));
 
-	if
-		(building &&
-		 iaplayer().can_act(building->owner().player_number()) &&
-		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
-	{
+	if (building && iaplayer().can_act(building->owner().player_number()) &&
+	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
 		game.send_player_dismantle(*todismantle);
 	}
 
 	die();
 }
 
-
 /*
 ===============
 Create the panels for enhancement confirmation.
 ===============
 */
-EnhanceConfirm::EnhanceConfirm
-	(InteractivePlayer & parent,
-	 Widelands::Building & building,
-	 const Widelands::DescriptionIndex & id)
-	:
-	ActionConfirm
-		(parent,
-		 _("Enhance building?"),
-		 (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname()).str(),
-		 building),
-	id_(id)
-{
+EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
+                               Widelands::Building& building,
+                               const Widelands::DescriptionIndex& id)
+   : ActionConfirm(
+        parent,
+        _("Enhance building?"),
+        (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname())
+           .str(),
+        building),
+     id_(id) {
 	// Nothing special to do
 }
-
 
 /*
 ===============
 Make sure the building still exists and can in fact be enhanced.
 ===============
 */
-void EnhanceConfirm::think()
-{
-	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
+void EnhanceConfirm::think() {
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if
-		(!building ||
-		 !iaplayer().can_act(building->owner().player_number())
-		 ||
-		 !(building->get_playercaps() & Widelands::Building::PCap_Enhancable))
+	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
+	    !(building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 		die();
 }
-
 
 /**
  * The "Ok" button was clicked, so issue the CMD_ENHANCEBUILDING command for this building.
  */
-void EnhanceConfirm::ok()
-{
-	Widelands::Game & game = iaplayer().game();
+void EnhanceConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Building, building, object_.get(game));
 
-	if
-		(building &&
-		 iaplayer().can_act(building->owner().player_number()) &&
-		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
-	{
+	if (building && iaplayer().can_act(building->owner().player_number()) &&
+	    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
 		game.send_player_enhance_building(*building, id_);
 	}
 
@@ -348,37 +289,31 @@ void EnhanceConfirm::ok()
 /**
  * Create the panels for confirmation.
  */
-ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
-	:
-	ActionConfirm(parent,
-					  _("Sink the ship?"),
-					  /** TRANSLATORS: %s is a ship name */
-					  (boost::format(_("Do you really want to sink %s?")) % ship.get_shipname()).str(),
-					  ship)
-{
+ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer& parent, Widelands::Ship& ship)
+   : ActionConfirm(parent,
+                   _("Sink the ship?"),
+                   /** TRANSLATORS: %s is a ship name */
+                   (boost::format(_("Do you really want to sink %s?")) % ship.get_shipname()).str(),
+                   ship) {
 	// Nothing special to do
 }
-
 
 /**
  * Make sure the ship still exists.
  */
-void ShipSinkConfirm::think()
-{
-	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
+void ShipSinkConfirm::think() {
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
 	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
 		die();
 }
 
-
 /**
  * The "Ok" button was clicked, so issue the CMD_ENHANCEBUILDING command for this building.
  */
-void ShipSinkConfirm::ok()
-{
-	Widelands::Game & game = iaplayer().game();
+void ShipSinkConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
 	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
@@ -388,20 +323,17 @@ void ShipSinkConfirm::ok()
 	die();
 }
 
-
 /**
  * Create the panels for confirmation.
  */
-ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
-	:
-	ActionConfirm(parent,
-					  _("Cancel expedition?"),
-					  _("Do you really want to cancel the active expedition?"),
-					  ship)
-{
+ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer& parent,
+                                                         Widelands::Ship& ship)
+   : ActionConfirm(parent,
+                   _("Cancel expedition?"),
+                   _("Do you really want to cancel the active expedition?"),
+                   ship) {
 	// Nothing special to do
 }
-
 
 /**
  * Make sure the ship still exists and that it is still in expedition mode and not colonizing.
@@ -419,26 +351,18 @@ void ShipCancelExpeditionConfirm::think() {
 /**
  * The "Ok" button was clicked, so issue the command for this building.
  */
-void ShipCancelExpeditionConfirm::ok()
-{
-	Widelands::Game & game = iaplayer().game();
+void ShipCancelExpeditionConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if
-		(ship
-		 &&
-		 iaplayer().can_act(ship->get_owner()->player_number())
-		 &&
-		 ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport
-		 &&
-		 ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing)
-	{
+	if (ship && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
+	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 
 	die();
 }
-
 
 /**
  * Create a BulldozeConfirm window.
@@ -451,11 +375,9 @@ void ShipCancelExpeditionConfirm::ok()
  * This is useful in the combination where \p todestroy is the base flag
  * of \p building
  */
-void show_bulldoze_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * const todestroy)
-{
+void show_bulldoze_confirm(InteractivePlayer& player,
+                           Widelands::Building& building,
+                           Widelands::PlayerImmovable* const todestroy) {
 	new BulldozeConfirm(player, building, todestroy);
 }
 
@@ -466,10 +388,7 @@ void show_bulldoze_confirm
  *
  * \param building this is the building that the confirmation dialog displays.
  */
-void show_dismantle_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building)
-{
+void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building) {
 	new DismantleConfirm(player, building);
 }
 
@@ -481,14 +400,11 @@ void show_dismantle_confirm
  * \param building this is the building that the confirmation dialog displays.
  * \param id building ID
  */
-void show_enhance_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 const Widelands::DescriptionIndex & id)
-{
+void show_enhance_confirm(InteractivePlayer& player,
+                          Widelands::Building& building,
+                          const Widelands::DescriptionIndex& id) {
 	new EnhanceConfirm(player, building, id);
 }
-
 
 /**
  * Create a ShipSinkConfirm window.
@@ -497,11 +413,9 @@ void show_enhance_confirm
  *
  * \param ship this is the ship that the confirmation dialog displays.
  */
-void show_ship_sink_confirm(InteractivePlayer & player, Widelands::Ship & ship)
-{
+void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
 	new ShipSinkConfirm(player, ship);
 }
-
 
 /**
  * Create a ShipCancelExpeditionConfirm window.
@@ -510,7 +424,6 @@ void show_ship_sink_confirm(InteractivePlayer & player, Widelands::Ship & ship)
  *
  * \param ship this is the ship that the confirmation dialog displays.
  */
-void show_ship_cancel_expedition_confirm(InteractivePlayer & player, Widelands::Ship & ship)
-{
+void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
 	new ShipCancelExpeditionConfirm(player, ship);
 }

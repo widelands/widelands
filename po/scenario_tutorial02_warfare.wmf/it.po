@@ -2,7 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
@@ -12,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 10:06+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +75,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Quando un soldato barbaro è allenato al massimo, ha salute livello %1%, attacco livello %2%, difesa livello %3% e elusione livello %4%. Un guerriero spaventoso, dunque! Le abilità individuali hanno il significato seguente:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
@@ -84,7 +86,7 @@ msgstr "Salute:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "La vita totale di un soldato. Un soldato barbaro inizia con %1% punti salute, e guadagnerà %2% punti salute ad ogni livello di salute."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -97,7 +99,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "L'ammontare di danni che un soldato infligge al nemico se l'attacco ha successo. Un soldato barbaro con attacco a livello 0 infligge ~%1% punti di danno alla salute quando colpisce un nemico. Per ogni livello di attacco, infligge %2% danni addizionali."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
@@ -112,7 +114,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr ""
+msgstr "La difesa è la percentuale che viene sottratta all'attacco quando si calcola il danno subito. I barbari non possono addestrarsi in questa abilità e hanno sempre la difesa a livello 0, che significa una riduzione del danno del %1%%%. Se un attaccante con un valore di attacco di 3500 colpisce un soldato barbaro, il barbaro perderà 3500·%2%%% = %3%%% punti salute."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
@@ -125,7 +127,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "L'evasione è la possibilità che il soldato ha di schivare un attacco. Un soldato barbaro di livello 0 ha una possibilità del %1%%% di evadere un attacco, il valore dellla percentuale aumenta di %2%%% per ogni livello."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
@@ -373,9 +375,9 @@ msgstr "Smantellare gli edifici militari"
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr "Puoi ridurre il numero dei soldai solo fino a uno. L'ultimo soldato in un edificio non uscirà mai (a meno che l'edificio non sia sotto attacco). Se vuoi usare quel soldato altrove, devi smantellare l'edificio (gli edifici di un'altra tribù non possono essere smantellati, solo distrutti)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr "Puoi solo ridurre il numero dei soldati fino a uno. L'ultimo soldato in un edificio non uscirà mai (a meno che l'edificio non sia sotto attacco). Se vuoi usare quel soldato altrove, devi smantellare o distruggere l'edificio."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""

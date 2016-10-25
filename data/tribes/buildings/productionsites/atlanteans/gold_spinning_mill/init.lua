@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      gold = 5
+      { name = "gold", amount = 5 }
    },
    outputs = {
       "gold_thread"

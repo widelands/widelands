@@ -31,8 +31,8 @@
 
 namespace Widelands {
 
-WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
-	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
+WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
+   : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
 
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Ware %s has no idle animation", table.get_string("name").c_str());
@@ -62,7 +62,6 @@ int WareDescr::preciousness(const std::string& tribename) const {
 	return kInvalidWare;
 }
 
-
 DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename) const {
 	if (default_target_quantities_.count(tribename) > 0) {
 		return default_target_quantities_.at(tribename);
@@ -75,8 +74,8 @@ bool WareDescr::has_demand_check(const std::string& tribename) const {
 }
 
 void WareDescr::set_has_demand_check(const std::string& tribename) {
-	if (default_target_quantities_.count(tribename) > 0
-		 && default_target_quantities_.at(tribename) == kInvalidWare) {
+	if (default_target_quantities_.count(tribename) > 0 &&
+	    default_target_quantities_.at(tribename) == kInvalidWare) {
 		default_target_quantities_.at(tribename) = 1;
 	}
 }
@@ -96,6 +95,4 @@ const std::set<DescriptionIndex>& WareDescr::consumers() const {
 const std::set<DescriptionIndex>& WareDescr::producers() const {
 	return producers_;
 }
-
-
 }

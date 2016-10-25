@@ -125,8 +125,8 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&,
-											 const TribesLegacyLookupTable& lookup_table);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
 };
 }
 

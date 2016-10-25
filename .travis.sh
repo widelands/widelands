@@ -27,8 +27,6 @@ until sudo apt-get install -qq --force-yes -y \
    libglew-dev \
    libicu-dev \
    libpng-dev \
-   libxml2-dev \
-   libyajl-dev \
    zlib1g-dev \
    libsdl2-dev \
    libsdl2-image-dev \
@@ -53,7 +51,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
 fi
 
 # Do the actual build.
-make -k -j1
+make -k -j3
 
 # Run the regression suite.
 cd ..

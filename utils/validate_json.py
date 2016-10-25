@@ -39,7 +39,7 @@ def validate_files_in_path(source_path):
 			print("\n" + str(failed) + " files are not valid JSON!");
 	return failed < 1
 
-sucess = False
+success = False
 
 if (len(sys.argv) == 2):
 	base_path = os.path.normpath(sys.argv[1])

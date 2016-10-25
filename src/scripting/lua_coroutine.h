@@ -45,10 +45,7 @@ public:
 	// The state of the coroutine, which can either be yielded, i.e. it expects
 	// to be resumed again or done which means that it will not do any more work
 	// and can be deleted.
-	enum {
-		DONE = 0,
-		YIELDED = LUA_YIELD
-	};
+	enum { DONE = 0, YIELDED = LUA_YIELD };
 
 	LuaCoroutine(lua_State* L);
 	virtual ~LuaCoroutine();

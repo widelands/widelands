@@ -7,6 +7,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
+option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -69,7 +70,9 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
-if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+if (APPLE OR WIN32 OR
+    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
   endif()
@@ -136,6 +139,13 @@ else()
      wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
   endif()
 
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    # g++-4.7 complains otherwise about <:: not being a valid token in
+    # unique_ptr<::Something>. Since this is common style in c++ though, we'd
+    # rather have it swallow this frog for us.
+    wl_add_flag(WL_GENERIC_CXX_FLAGS "-fpermissive")
+  endif()
+
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-pedantic")
@@ -188,6 +198,12 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_library(EXECINFO_LIBRARY NAMES execinfo)
   endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
+
+  # OpenBSD needs the X11 include directory in order to find GL/glu.h
+  if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+    find_package(X11 REQUIRED)
+    include_directories(${X11_INCLUDE_DIR})
+  endif ()
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (NOT DEFINED WL_VERSION)
@@ -235,7 +251,9 @@ install (
 
 # Installation.
 add_subdirectory(doc)
-add_subdirectory(po)
+if(OPTION_BUILD_TRANSLATIONS)
+  add_subdirectory(po)
+endif(OPTION_BUILD_TRANSLATIONS)
 add_subdirectory(src)
 
 # install files to the correct locations here

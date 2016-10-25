@@ -409,7 +409,7 @@ economy_settings3 = {
       listitem_bullet(_[[Set the target quantity for marble columns to 20 and wait for your stonemason to produce them.]])
    ),
    obj_name = "produce_marble_columns",
-   obj_title = "Produce 20 marble columns.",
+   obj_title = _"Produce 20 marble columns.",
    obj_body = rt(
       p(_[[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]) ..
       paragraphdivider() ..

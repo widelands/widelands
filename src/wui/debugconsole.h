@@ -50,14 +50,14 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	using HandlerFn = boost::function<void (const std::vector<std::string> &)>;
+	using HandlerFn = boost::function<void(const std::vector<std::string>&)>;
 
 	Handler();
 	virtual ~Handler();
 
 protected:
-	void addCommand(const std::string &, const HandlerFn &);
-	void setDefaultCommand(const HandlerFn &);
+	void addCommand(const std::string&, const HandlerFn&);
+	void setDefaultCommand(const HandlerFn&);
 
 private:
 	std::vector<std::string> commands_;
@@ -69,7 +69,7 @@ private:
  * the given command string, and the log of messages contains a log
  * of console messages.
  */
-ChatProvider * get_chat_provider();
+ChatProvider* get_chat_provider();
 
 /**
  * Write some output on the console.
@@ -81,8 +81,7 @@ ChatProvider * get_chat_provider();
  * \ref get_chat_provider(). Sending a message via \ref get_chat_provider()
  * executes a command, while this function writes to the console.
  */
-void write(const std::string & text);
-
+void write(const std::string& text);
 }
 
 #endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H

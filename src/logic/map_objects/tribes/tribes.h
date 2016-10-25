@@ -24,20 +24,20 @@
 
 #include "base/macros.h"
 #include "graphic/texture.h"
+#include "logic/description_maintainer.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
-#include "logic/description_maintainer.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
-#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
@@ -49,7 +49,8 @@ class WorkerDescr;
 class Tribes {
 public:
 	Tribes();
-	~Tribes() {}
+	~Tribes() {
+	}
 
 	/// Returns a string vector with the names of all tribes.
 	static std::vector<std::string> get_all_tribenames();
@@ -61,7 +62,7 @@ public:
 	static TribeBasicInfo tribeinfo(const std::string& tribename);
 
 	/// Returns whether this tribe is listed in tribes/preload.lua.
-	static bool tribe_exists(const std::string & tribename);
+	static bool tribe_exists(const std::string& tribename);
 
 	/// Adds this building type to the tribe description.
 	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);
@@ -137,7 +138,7 @@ public:
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
 	void set_ware_type_has_demand_check(const DescriptionIndex& ware_index,
-													const std::string& tribename) const;
+	                                    const std::string& tribename) const;
 	void set_worker_type_has_demand_check(const DescriptionIndex& worker_index) const;
 
 	/// Load tribes' graphics

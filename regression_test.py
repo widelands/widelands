@@ -80,7 +80,6 @@ class WidelandsTestCase(unittest.TestCase):
 
         Returns the stdout filename."""
         stdout_filename = os.path.join(self.run_dir, "stdout_{:02d}.txt".format(which_time))
-        log_filename = os.path.join(self.run_dir, "log_{:02d}.txt".format(which_time))
         if (os.path.exists(stdout_filename)):
             os.unlink(stdout_filename)
 
@@ -92,8 +91,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--homedir={}'.format(self.run_dir),
                     '--disable_fx=true',
                     '--disable_music=true',
-                    '--language=en_US',
-                    '--logfile={}'.format(log_filename) ]
+                    '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
             widelands = subprocess.Popen(
@@ -105,12 +103,6 @@ class WidelandsTestCase(unittest.TestCase):
                 stdout_file.write(str(line))
                 stdout_file.flush()
             widelands.communicate()
-
-            with open(log_filename,"r") as f:
-                for line in f:
-                    stdout_file.write(line)
-                stdout_file.flush()
-
             self.widelands_returncode = widelands.returncode
         return stdout_filename
 

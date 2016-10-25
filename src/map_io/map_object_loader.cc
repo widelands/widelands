@@ -32,27 +32,21 @@ bool MapObjectLoader::is_object_known(Serial const n) {
 	return objects_.find(n) != objects_.end();
 }
 
-
 /*
  * mark this object as saved
  */
-void MapObjectLoader::mark_object_as_loaded(MapObject & obj)
-{
+void MapObjectLoader::mark_object_as_loaded(MapObject& obj) {
 	loaded_objects_[&obj] = true;
 }
 
 /*
  * Return the number of unsaved objects
  */
-int32_t MapObjectLoader::get_nr_unloaded_objects()
-{
+int32_t MapObjectLoader::get_nr_unloaded_objects() {
 	int32_t result = 0;
-	std::map<MapObject *, bool>::const_iterator const loaded_obj_end =
-		loaded_objects_.end();
-	for
-		(std::map<MapObject *, bool>::const_iterator it = loaded_objects_.begin();
-		 it != loaded_obj_end;
-		 ++it)
+	std::map<MapObject*, bool>::const_iterator const loaded_obj_end = loaded_objects_.end();
+	for (std::map<MapObject*, bool>::const_iterator it = loaded_objects_.begin();
+	     it != loaded_obj_end; ++it)
 		if (!it->second)
 			++result;
 	return result;
@@ -63,8 +57,7 @@ int32_t MapObjectLoader::get_nr_unloaded_objects()
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::schedule_destroy(MapObject & obj)
-{
+void MapObjectLoader::schedule_destroy(MapObject& obj) {
 	schedule_destroy_.push_back(&obj);
 }
 
@@ -74,8 +67,7 @@ void MapObjectLoader::schedule_destroy(MapObject & obj)
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::schedule_act(Bob & bob)
-{
+void MapObjectLoader::schedule_act(Bob& bob) {
 	schedule_act_.push_back(&bob);
 }
 
@@ -84,8 +76,7 @@ void MapObjectLoader::schedule_act(Bob & bob)
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::load_finish_game(Game & g)
-{
+void MapObjectLoader::load_finish_game(Game& g) {
 	while (!schedule_destroy_.empty()) {
 		schedule_destroy_.back()->schedule_destroy(g);
 		schedule_destroy_.pop_back();
@@ -96,5 +87,4 @@ void MapObjectLoader::load_finish_game(Game & g)
 		schedule_act_.pop_back();
 	}
 }
-
 }

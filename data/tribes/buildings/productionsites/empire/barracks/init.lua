@@ -45,9 +45,9 @@ tribes:new_productionsite_type {
 	},
 
 	inputs = {
-		armor_helmet = 8,
-		spear_wooden = 8,
-		empire_carrier = 8
+		{ name = "armor_helmet", amount = 8 },
+		{ name = "spear_wooden", amount = 8 },
+		{ name = "empire_carrier", amount = 8 }
 	},
 	outputs = {
 		"empire_soldier",

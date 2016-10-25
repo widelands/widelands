@@ -36,17 +36,16 @@ struct GamePreloadPacket;
  * of a game out to a file.
  */
 struct GameLoader {
-	GameLoader(const std::string & path, Game &);
+	GameLoader(const std::string& path, Game&);
 	~GameLoader();
 
-	int32_t preload_game(GamePreloadPacket &);
-	int32_t    load_game(bool multiplayer = false);
+	int32_t preload_game(GamePreloadPacket&);
+	int32_t load_game(bool multiplayer = false);
 
 private:
-	FileSystem & fs_;
-	Game       & game_;
+	FileSystem& fs_;
+	Game& game_;
 };
-
 }
 
 #endif  // end of include guard: WL_GAME_IO_GAME_LOADER_H

@@ -27,15 +27,13 @@ EdgeOverlayManager::OverlayId EdgeOverlayManager::next_overlay_id() {
 	return current_overlay_id_;
 }
 
-void EdgeOverlayManager::register_overlay
-	(Widelands::Coords const c, uint8_t const where, OverlayId const overlay_id)
-{
+void EdgeOverlayManager::register_overlay(Widelands::Coords const c,
+                                          uint8_t const where,
+                                          OverlayId const overlay_id) {
 	const RegisteredRoadOverlays overlay = {overlay_id, where};
 	RegisteredRoadOverlaysMap::iterator it = overlays_.find(c);
 	if (it == overlays_.end())
-		overlays_.insert
-			(std::pair<const Widelands::Coords,
-			 RegisteredRoadOverlays>(c, overlay));
+		overlays_.insert(std::pair<const Widelands::Coords, RegisteredRoadOverlays>(c, overlay));
 	else
 		it->second = overlay;
 }
@@ -48,11 +46,10 @@ void EdgeOverlayManager::remove_overlay(const Widelands::Coords c) {
 
 void EdgeOverlayManager::remove_overlay(OverlayId const overlay_id) {
 	RegisteredRoadOverlaysMap::iterator it = overlays_.begin();
-	const RegisteredRoadOverlaysMap::const_iterator end =
-		overlays_.end();
+	const RegisteredRoadOverlaysMap::const_iterator end = overlays_.end();
 	while (it != end)
 		if (it->second.overlay_id == overlay_id)
-			overlays_.erase(it++); //  Necessary!
+			overlays_.erase(it++);  //  Necessary!
 		else
 			++it;
 }

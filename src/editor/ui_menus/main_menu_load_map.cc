@@ -83,6 +83,7 @@ void MainMenuLoadMap::entry_selected() {
 	if (!has_selection) {
 		map_details_.clear();
 	} else {
-		map_details_.update(maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		map_details_.update(
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
 	}
 }

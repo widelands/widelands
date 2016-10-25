@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-20 21:07+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-17 15:31+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Taigh coillteir"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Tog taigh coillteir aig an t-samhla taige dheirg gu deas air a’ phrìomh-àras agad."
+msgstr "Tog taigh coillteir air an t-samhla taighe dheirg gu deas air a’ phrìomh-àras agad."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -60,7 +60,7 @@ msgstr "Dà thaigh coillteir is muileann sàbhaidh"
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Tagh dà thaigh coillteir eile ’s muillean-sàbhaidh cho luath ’s a bhios rum agad."
+msgstr "Tagh dà thaigh coillteir eile ’s muileann sàbhaidh cho luath ’s a bhios rum agad."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
@@ -86,7 +86,7 @@ msgstr "Cuaraidh"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Tog cuaraidh gu deas gus gaireal ’s marbhal a ghearradh às na carraigean."
+msgstr "Tog cuaraidh ceann a deas gus gaireal ’s marmor a ghearradh às na carraigean."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -109,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Dè dh’èirich air ar n-impireachd? Tha mi ’ga fhaighneachd ann an da-rìribh – carson nach do leig an rìgh leam sabaid an aghaidh treubh uabhasach nan Tùsanach ud a chuir dreach a’ charaid shìtheil air an toiseach ’s a thug ionnsaigh air an fheachd agam ann an oidhche dhubh-dhorcha an uairsin?"
+msgstr "Dè dh’èirich air ar n-Impireachd? Tha mi ’ga fhaighneachd ann an da-rìribh – carson nach do leig an rìgh leam sabaid an aghaidh treubh uabhasach nan Tùsanach ud a chuir dreach a’ charaid shìtheil air an toiseach ’s a thug ionnsaigh air an fheachd agam air oidhche dhubh-dhorcha an uairsin?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -119,7 +119,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Le ceud gu leth duine nam fheachd, chaidh uallach a chur orm gus sùil a chumail air a’ chrìch taobh tuath a tha faisg air Monadh Ghaldain ann am mòr-choille àrsaidh àlainn. Thachair sinn ri treubh nan Tùsanach a bha càirdeil aig an toiseach. Rinn cuid dem dhaoine fiù ’s malart leotha agus thàinig an cuid chloinne thugainne gus meas a chur air an aodach ’s na h-airm glana spaideil againn."
+msgstr "Le ceud gu leth duine nam fheachd, chaidh uallach a chur orm gus sùil a chumail air a’ chrìch taobh tuath a tha faisg air Monadh Ghaldain ann am mòr-choille àrsaidh àlainn. Thachair sinn ri treubh nan Tùsanach a bha càirdeil aig an toiseach. Rinn cuid dem dhaoine fiù ’s malart leotha agus thàinig an cuid chloinne thugainne gus coimhead air an aodach ’s na h-airm glana spaideil againn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -130,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Ach rè a’ chòigeamh oidhche againn san sgìre ud, thug iad ionnsaigh gun adhbhar oirnn. Chaill mi dusanan de shàr-dhaoine agus chaidh mo ghlacadh ’s a chur air beulaibh a’ cheannaird aca. Dh’fheuch e smugaid orm ’s rinn e magadh orm is thuirt e rium gum fàgainn an dùthaich aige gun tilleadh. Cha robh e ag iarraidh barrachd tìre no an tìr againne, ach dh’innis e dhomh gur ann leotha-san a bhiodh a’ choille ud – agus gur ann leotha-san a bhiodh e gus am beireadh na spioradan air duine mu dheireadh a mhuinntire."
+msgstr "Ach rè a’ chòigeamh oidhche againn san sgìre ud, thug iad ionnsaigh gun adhbhar oirnn. Chaill mi dusanan de shàr-dhaoine agus chaidh mo ghlacadh ’s a chur air beulaibh a’ cheannaird aca. Dh’fheuch e smugaid orm ’s rinn e magadh orm is thuirt e rium gum fàgainn an dùthaich aige gun tilleadh. Cha robh e ag iarraidh barrachd tìre no an tìr againne, ach dh’innis e dhomh gur ann leotha-san a bhiodh a’ choille ud – agus gur ann leotha-san a bhiodh e gus am beireadh na spioradan air duine mu dheireadh a mhuinntire!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -185,7 +185,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Bhuail sinn tràigh nach aithne dhuinn agus fhuair sinn fois shìtheil fo na craobhan-pailm a tha a’ fàs air an oirthir. Ach ’s ann nach eil deagh naidheachd eile ann. Ag innse na fìrinn, nuair a dhùisg mi an-diugh, chan fhaca mi ach gainneamh timcheall oirnn."
+msgstr "Bhuail sinn tràigh nach aithne dhuinn agus fhuair sinn fois shìtheil fo na craobhan-pailm a tha a’ fàs air an oirthir. Ach ’s ann nach eil deagh naidheachd eile ann. A dh’innse na fìrinn, nuair a dhùisg mi an-diugh, chan fhaca mi ach gainneamh timcheall oirnn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:120
@@ -209,7 +209,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "A thighearna, ’s eagal leam nach eil sinn sàbhailte air an tìr chèin seo. Cò aige a tha fios dè na creutairean uabhasach a tha a’ fuireach taobh thall na coille sa mhòr-fhàsach ud? Dè dh’èiridh dhuinn ma thig na creutairean sin a-steach dhan choille, a’ feitheamh gus an doir iad ionnsaigh oirnn?"
+msgstr "A thighearna, ’s eagal leam nach eil sinn sàbhailte air an tìr chèin seo. Cò aige a tha fios dè na creutairean uabhasach a tha a’ fuireach taobh thall na coille sa mhòr-fhàsach ud? Dè dh’èireas dhuinn ma thig na creutairean sin a-steach dhan choille, a’ feitheamh gus an doir iad ionnsaigh oirnn?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -229,7 +229,7 @@ msgstr "Bu chòir dhuinn taigh-bloca a thogail taobh ear na coille. ’S urrainn
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Safe For Now"
-msgstr "Sàbhailte an-dràsa"
+msgstr "Sàbhailte aig an àm seo"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Saledus speaks with a sigh of relief…"
@@ -299,7 +299,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Ach gu mì-fhortanach, chan eil am fiodh mar a tha e gu feum gus an long a chàradh – feumaidh sinn maidean a dhèanamh dheth mar a dh’fheumas gach long is togalach mòr. Mar sin, bu chòir dhuinn muileann sàbhaidh a thogail – cho luath ’s a bhios rum gu leòr ann dha."
+msgstr "Ach gu mì-fhortanach, chan eil am fiodh mar a tha e gu feum gus an long a chàradh – feumaidh sinn na maidean a dhèanamh dheth a dh’fheumas gach long is togalach mòr. Mar sin, bu chòir dhuinn muileann sàbhaidh a thogail – cho luath ’s a bhios rum gu leòr ann dha."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
@@ -365,7 +365,7 @@ msgstr "Ceum air adhart"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"
-msgstr "Tha Saledus air a thogail…"
+msgstr "Chaidh cridhe Shaledus a thogail…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -373,7 +373,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "A thighearna, rinn sinn toiseach-tòiseachaidh an-diugh airson a’ chiad chaisteil againn. Thòisich an cuaraidh gu deas ag obair an-diugh agus bheir e graineal is marmor brèagha dhuinn a dh’aithghearr."
+msgstr "A thighearna, rinn sinn toiseach-tòiseachaidh an-diugh airson a’ chiad chaisteil againn. Thòisich an cuaraidh ceann a deas ag obair an-diugh agus bheir e gaireal is marmor brèagha dhuinn a dh’aithghearr."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219

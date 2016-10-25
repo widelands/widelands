@@ -26,27 +26,24 @@
 #include "wui/field_overlay_manager.h"
 
 namespace {
-static char const * const player_pictures[] = {
-	"images/players/editor_player_01_starting_pos.png",
-	"images/players/editor_player_02_starting_pos.png",
-	"images/players/editor_player_03_starting_pos.png",
-	"images/players/editor_player_04_starting_pos.png",
-	"images/players/editor_player_05_starting_pos.png",
-	"images/players/editor_player_06_starting_pos.png",
-	"images/players/editor_player_07_starting_pos.png",
-	"images/players/editor_player_08_starting_pos.png"
-};
-static char const * const player_pictures_small[] = {
-	"images/players/fsel_editor_set_player_01_pos.png",
-	"images/players/fsel_editor_set_player_02_pos.png",
-	"images/players/fsel_editor_set_player_03_pos.png",
-	"images/players/fsel_editor_set_player_04_pos.png",
-	"images/players/fsel_editor_set_player_05_pos.png",
-	"images/players/fsel_editor_set_player_06_pos.png",
-	"images/players/fsel_editor_set_player_07_pos.png",
-	"images/players/fsel_editor_set_player_08_pos.png"
-};
-} // namespace
+static char const* const player_pictures[] = {"images/players/editor_player_01_starting_pos.png",
+                                              "images/players/editor_player_02_starting_pos.png",
+                                              "images/players/editor_player_03_starting_pos.png",
+                                              "images/players/editor_player_04_starting_pos.png",
+                                              "images/players/editor_player_05_starting_pos.png",
+                                              "images/players/editor_player_06_starting_pos.png",
+                                              "images/players/editor_player_07_starting_pos.png",
+                                              "images/players/editor_player_08_starting_pos.png"};
+static char const* const player_pictures_small[] = {
+   "images/players/fsel_editor_set_player_01_pos.png",
+   "images/players/fsel_editor_set_player_02_pos.png",
+   "images/players/fsel_editor_set_player_03_pos.png",
+   "images/players/fsel_editor_set_player_04_pos.png",
+   "images/players/fsel_editor_set_player_05_pos.png",
+   "images/players/fsel_editor_set_player_06_pos.png",
+   "images/players/fsel_editor_set_player_07_pos.png",
+   "images/players/fsel_editor_set_player_08_pos.png"};
+}  // namespace
 
 // global variable to pass data from callback to class
 static int32_t current_player_;
@@ -54,9 +51,8 @@ static int32_t current_player_;
 /*
  * static callback function for overlay calculation
  */
-int32_t editor_tool_set_starting_pos_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map)
-{
+int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,
+                                              Widelands::Map& map) {
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
@@ -77,22 +73,20 @@ int32_t editor_tool_set_starting_pos_callback
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
 		return caps;
 
-
 	return 0;
 }
 
 EditorSetStartingPosTool::EditorSetStartingPosTool()
-	: EditorTool(*this, *this, false), current_sel_pic_(nullptr)
-{
+   : EditorTool(*this, *this, false), current_sel_pic_(nullptr) {
 	current_player_ = 1;
 	fsel_picsname_ = "images/players/fsel_editor_set_player_01_pos.png";
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
-                                                    Widelands::NodeAndTriangle<> const center,
+                                                    const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive& eia,
                                                     EditorActionArgs*,
-													Widelands::Map* map) {
+                                                    Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
@@ -113,13 +107,13 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
-			FieldOverlayManager * overlay_manager = eia.mutable_field_overlay_manager();
+			FieldOverlayManager* overlay_manager = eia.mutable_field_overlay_manager();
 			//  remove old overlay if any
 			overlay_manager->remove_overlay(old_sp, player_image);
 
 			//  add new overlay
 			overlay_manager->register_overlay(
-				center.node, player_image, 4, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			   center.node, player_image, 4, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map->set_starting_pos(current_player_, center.node);
@@ -128,12 +122,9 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 	return 1;
 }
 
-Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
-() const
-{
+Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player() const {
 	return current_player_;
 }
-
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	current_player_ = i;

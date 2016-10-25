@@ -21,37 +21,36 @@
 #define WL_EDITOR_TOOLS_SET_HEIGHT_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands_geometry.h"
 #include "logic/field.h"
+#include "logic/widelands_geometry.h"
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool()
-		: EditorTool(*this, *this), interval_(10, 10)
-	{}
+	EditorSetHeightTool() : EditorTool(*this, *this), interval_(10, 10) {
+	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
-	                          Widelands::NodeAndTriangle<> center,
+	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
-							  Widelands::Map* map) override;
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::World& world,
-	                         Widelands::NodeAndTriangle<> center,
+	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
-							 Widelands::Map* map) override;
+	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const * get_sel_impl() const override {
+	char const* get_sel_impl() const override {
 		return "images/wui/editor/fsel_editor_set_height.png";
 	}
 
 	Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
-	void set_interval(Widelands::HeightInterval const i) {
+	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 

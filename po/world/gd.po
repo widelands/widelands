@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:06+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 06:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,11 @@ msgstr "Fiadh"
 msgid "Duck"
 msgstr "Tunnag"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Lon"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Sionnach"
 
@@ -67,11 +67,11 @@ msgstr "Fast"
 msgid "Sheep"
 msgstr "Caora"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Damh"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Torc"
 
@@ -79,7 +79,7 @@ msgstr "Torc"
 msgid "Wisent"
 msgstr "Tarbh-allaidh"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Madadh-allaidh"
 
@@ -109,7 +109,7 @@ msgstr "Feur"
 #: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
 msgid "Artifact"
-msgstr "Fuigheall"
+msgstr "Ball-ealain"
 
 #: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
@@ -728,11 +728,11 @@ msgstr "Measgaichte"
 
 #: ../../data/world/init.lua:17
 msgid "Artifacts"
-msgstr "Fuighill"
+msgstr "Buill-ealain"
 
 #: ../../data/world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Fuighill”."
+msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Buill-ealain”."
 
 #: ../../data/world/init.lua:23
 msgid "Plants"

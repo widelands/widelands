@@ -41,11 +41,10 @@ namespace Widelands {
  * (TCoords<>::None).
  */
 template <typename CoordsType = TCoords<>, typename RadiusType = uint16_t>
-struct MapTriangleRegion
-{
-	MapTriangleRegion(const Map &, CoordsType, uint16_t radius);
+struct MapTriangleRegion {
+	MapTriangleRegion(const Map&, CoordsType, uint16_t radius);
 
-	const CoordsType & location() const;
+	const CoordsType& location() const;
 
 	/**
 	 * Moves on to the next location, traversing the region by row.
@@ -61,22 +60,24 @@ struct MapTriangleRegion
 	 * can then be redone by calling advance again, which will return true
 	 * until it reaches the first location the next time around, and so on.
 	 */
-	bool advance(const Map &);
+	bool advance(const Map&);
 };
 template <> struct MapTriangleRegion<FCoords> {
-	MapTriangleRegion(const Map & map, const Area<FCoords> area) :
-		area_(TCoords<FCoords>(area, TCoords<FCoords>::D), area.radius + 1),
-		rowwidth_        (area_.radius * 2 + 1),
-		remaining_in_row_(rowwidth_),
-		remaining_rows_  (area_.radius * 2)
-	{
-		for (uint8_t r = area_.radius; r; --r) map.get_tln(area_, &area_);
+	MapTriangleRegion(const Map& map, const Area<FCoords>& area)
+	   : area_(TCoords<FCoords>(area, TCoords<FCoords>::D), area.radius + 1),
+	     rowwidth_(area_.radius * 2 + 1),
+	     remaining_in_row_(rowwidth_),
+	     remaining_rows_(area_.radius * 2) {
+		for (uint8_t r = area_.radius; r; --r)
+			map.get_tln(area_, &area_);
 		left_ = area_;
 	}
 
-	const TCoords<FCoords> & location() const {return area_;}
+	const TCoords<FCoords>& location() const {
+		return area_;
+	}
 
-	bool advance(const Map & map) {
+	bool advance(const Map& map) {
 		if (--remaining_in_row_) {
 			if (area_.t == TCoords<FCoords>::D)
 				area_.t = TCoords<FCoords>::R;
@@ -85,42 +86,45 @@ template <> struct MapTriangleRegion<FCoords> {
 				map.get_rn(area_, &area_);
 			}
 		} else if (area_.radius < --remaining_rows_) {
-			map.get_bln(left_, &area_); left_ = area_;
+			map.get_bln(left_, &area_);
+			left_ = area_;
 			area_.t = TCoords<FCoords>::D;
 			remaining_in_row_ = rowwidth_ += 2;
 		} else if (remaining_rows_) {
-			map.get_brn(left_, &area_); left_ = area_;
+			map.get_brn(left_, &area_);
+			left_ = area_;
 			area_.t = TCoords<FCoords>::D;
 			remaining_in_row_ = rowwidth_ -= 2;
-		} else return false;
+		} else
+			return false;
 		return true;
 	}
 
 private:
-	Area<TCoords<FCoords> > area_;
-	FCoords                 left_;
-	uint16_t                rowwidth_;
-	uint16_t                remaining_in_row_;
-	uint16_t                remaining_rows_;
+	Area<TCoords<FCoords>> area_;
+	FCoords left_;
+	uint16_t rowwidth_;
+	uint16_t remaining_in_row_;
+	uint16_t remaining_rows_;
 };
-template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType> >
-{
-	MapTriangleRegion(const Map &, Area<TCoords<CoordsType>, uint16_t>);
+template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
+	MapTriangleRegion(const Map&, Area<TCoords<CoordsType>, uint16_t>);
 
-	const TCoords<CoordsType> & location() const {return location_;}
+	const TCoords<CoordsType>& location() const {
+		return location_;
+	}
 
-	bool advance(const Map &);
+	bool advance(const Map&);
 
 private:
 	const bool radius_is_odd_;
-	enum {Top, Upper, Lower, Bottom} phase_;
+	enum { Top, Upper, Lower, Bottom } phase_;
 	uint16_t remaining_rows_in_upper_phase_;
 	uint16_t remaining_rows_in_lower_phase_;
 	uint16_t row_length_, remaining_in_row_;
-	CoordsType          left_;
+	CoordsType left_;
 	TCoords<CoordsType> location_;
 };
-
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPTRIANGLEREGION_H

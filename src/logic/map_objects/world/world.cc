@@ -153,7 +153,7 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 }
 
 DescriptionIndex World::get_resource(const char* const name) const {
-	return strcmp(name, "none") ? resources_->get_index(name): Widelands::kNoResource;
+	return strcmp(name, "none") ? resources_->get_index(name) : Widelands::kNoResource;
 }
 
 /***

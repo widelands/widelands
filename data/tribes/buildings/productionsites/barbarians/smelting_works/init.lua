@@ -44,9 +44,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron_ore = 8,
-      gold_ore = 8,
-      coal = 8
+      { name = "coal", amount = 8 },
+      { name = "iron_ore", amount = 8 },
+      { name = "gold_ore", amount = 8 }
    },
    outputs = {
       "iron",
@@ -71,7 +71,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "sleep=32000",
             "consume=coal iron_ore",
+            "play_sound=sound/metal furnace 192",
             "animate=working 35000",
+            "play_sound=sound/metal ironping 80",
             "produce=iron"
          }
       },
@@ -82,7 +84,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold",
             "sleep=32000",
             "consume=coal gold_ore",
+            "play_sound=sound/metal furnace 192",
             "animate=working 35000",
+            "play_sound=sound/metal goldping 80",
             "produce=gold"
          }
       },

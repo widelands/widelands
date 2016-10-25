@@ -33,10 +33,9 @@
 #include "wui/interactive_player.h"
 
 TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
-													UI::UniqueWindow::Registry& registry,
-													LuaInterface* const lua)
-	: EncyclopediaWindow(parent, registry, lua)
-{
+                                       UI::UniqueWindow::Registry& registry,
+                                       LuaInterface* const lua)
+   : EncyclopediaWindow(parent, registry, lua) {
 	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
 		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
@@ -47,10 +46,9 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 	} catch (LuaError& err) {
 		log("Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
-					&parent,
-					_("Error!"),
-					(boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
+		   &parent, _("Error!"),
+		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
+		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
 }

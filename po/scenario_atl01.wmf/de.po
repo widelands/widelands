@@ -4,21 +4,22 @@
 # Translators:
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
+# Jonas Jonas <jonas.burger@googlemail.com>, 2016
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Venatrix, 2015
-# Venatrix, 2015-2016
+# Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014-2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-14 10:29+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-05-15 21:02+0000\n"
+"Last-Translator: Jonas Jonas <jonas.burger@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,16 +29,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Gebäude verloren!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Wir haben ein Gebäude an das Meer verloren!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Gebäude verloren!"
@@ -658,7 +659,7 @@ msgstr "Jundlina nickt"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr "Das habe ich in Betracht gezogen, Sidolus. Ich denke, es ist Zeit dazu. Wir werden dem jetzt Priorität einräumen. Ihr sollt Eure Industrie bekommen!"
+msgstr "Das habe ich in Betracht gezogen, Sidolus. Ich denke, es wird Zeit. Wir werden dem jetzt Priorität einräumen. Ihr sollt Eure Industrie bekommen!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -904,7 +905,7 @@ msgstr "Du hast diese Mission abgeschlossen. Fahre mit der nächsten fort oder s
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

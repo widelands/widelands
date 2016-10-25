@@ -1,5 +1,50 @@
+-- RST
+-- <tribename>.lua
+-- ---------------------
+--
+-- This file contains all the units for a tribe.
+
 dirname = path.dirname(__file__)
 
+-- RST
+-- .. function:: new_tribe(table)
+--
+--    This function adds all units to a tribe.
+--
+--    :arg table: This table contains all the data that the game engine will add to the tribe.
+--                It contains the following entries:
+--
+--    **name**: A string containing the internal name of the tribe.
+--
+--    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
+--
+--    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
+--
+--    **wares_order**: This defines all the wares that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
+--
+--    **workers_order**:  This defines all the workers that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
+--
+--    **immovables**: This defines all the immovables that this tribe uses.
+--
+--    **buildings**: This defines all the buildings that this tribe uses and their display order in the user interface.
+--
+--    **ship_names**: A list of strings with ship names presented to the user - be creative :)
+--
+--    **builder**:  The internal name of the tribe's builder. This unit needs to be defined in the ``workers_order`` table too.
+--
+--    **carrier**:  The internal name of the tribe's carrier. This unit needs to be defined in the ``workers_order`` table too.
+--
+--    **carrier2**:  The internal name of the tribe's beast of burden. This unit needs to be defined in the ``workers_order`` table too.
+--
+--    **geologist**:  The internal name of the tribe's geologist. This unit needs to be defined in the ``workers_order`` table too.
+--
+--    **soldier**: The internal name of the tribe's soldier. This unit needs to be defined in the ``workers_order`` table too.
+--
+--    **ship**: The internal name of the tribe's ship.
+--
+--    **headquarters**: The internal name of the tribe's headquarters building. This unit needs to be defined in the ``buildings`` table too.
+--
+--    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 tribes:new_tribe {
    name = "atlanteans",
 

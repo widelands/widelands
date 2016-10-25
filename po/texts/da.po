@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
-# Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 06:45+0000\n"
-"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 08:08+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,7 +66,7 @@ msgstr "Vi medsender også GPL'en som et tekstdokument sammen med Widelands."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "På Linux kan du finde filen COPYING i roden af kildeteksten eller den uafhængige binære pakke, eller i installationsmappen (f.eks. \"%1%\")."
+msgstr "På Linux kan du finde filen COPYING i roden af kildeteksten eller den uafhængige binære pakke, eller i installationsmappen (f.eks. »%1%«)."
 
 #: ../../data/txts/LICENSE.lua:31
 msgid ""
@@ -103,7 +103,7 @@ msgstr "Besøg Widelands' hjemmeside:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "Widelands er licenseret under GNU General Public License (GPL). For yderligere information, se filen \"COPYING\"."
+msgstr "Widelands er licenseret under GNU General Public License (GPL). For yderligere information, se filen »COPYING«."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -161,7 +161,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr "Hvilken version af Widelands du kører (dvs. enten byggenummeret\neller revisionsnummeret hvis du kører en udviklingsversion eller et dagligt byg)."
+msgstr "Hvilken version af Widelands du kører (dvs. enten byggenummeret\neller revisionsnummeret hvis du kører en udviklingsversion eller en dagligt bygning)."
 
 #: ../../data/txts/README.lua:36
 msgid ""
@@ -337,7 +337,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "I dette spil starter du på et lille stykke land med kun nogle få resurser.\nVia hjælp af disse skaber du et imperium med mange tusinde\nindbyggere. På vej mod dit mål skal du etablere en økonomisk\ninfrastruktur, udforske landet omkring dig og stå over for rivaliserende\nstammer."
+msgstr "I dette spil starter du på et lille stykke land med kun nogle få ressourser. Via disse skaber du et imperium med mange tusinde indbyggere. På vej mod dit mål skal du etablere en økonomisk infrastruktur, udforske landet omkring dig og stå over for rivaliserende stammer."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -369,7 +369,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Genafspilninger er et meget nyttigt værktøj til at finde fejl i spillogikken, så de kan være nyttige at vedhæfte til fejlrapporter. De optagede spil gemmes i mappen %s på Linux og Mac OS X. På Windows er de i undermappen \"replays\" i din installation af Widelands."
+msgstr "Genafspilninger er et meget nyttigt værktøj til at finde fejl i spillogikken, så de kan være nyttige at vedhæfte til fejlrapporter. De optagede spil gemmes i mappen %s på Linux og Mac OS X. På Windows er de i undermappen »replays« i din installation af Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -421,7 +421,7 @@ msgstr "På den venstre side er en liste over alle klienter inklusive dig. Du ka
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Spilleren med flagets farve. Hvis mere end én klient valgte den samme farve, så deler de kontrol over spilleren (\"fælles kongerige-tilstand\")."
+msgstr "Spilleren med flagets farve. Hvis mere end én klient valgte den samme farve, så deler de kontrol over spilleren (»fælles kongerige-tilstand«)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -441,7 +441,7 @@ msgstr "I midten er indstillingerne for spillerne. For at starte et spil skal hv
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Forbundet til en eller flere klienter (se \"Klientindstillinger\")."
+msgstr "Forbundet til en eller flere klienter (se »Klientindstillinger«)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
@@ -464,7 +464,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for \"type\"-knappen for en spiller. Værtsspillere kan også angive opsætningen af hver spiller (mængden af bygninger, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
+msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for knappen »type« for en spiller. Værtsspillere kan også angive opsætningen af hver spiller (mængden af bygninger, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -501,7 +501,7 @@ msgstr "Byg altid en skovfoged og et fiskeopdræt, så du ikke løber tør for t
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr "Hold øje med dine fiskere. Hvis fiskeresurserne i deres arbejdsområde udtømmes, så holder de op med at fiske."
+msgstr "Hold øje med dine fiskere. Hvis fiskeressourserne i deres arbejdsområde udtømmes, så holder de op med at fiske."
 
 #: ../../data/txts/tips/barbarians.tip:10
 msgid ""

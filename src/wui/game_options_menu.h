@@ -20,20 +20,18 @@
 #ifndef WL_WUI_GAME_OPTIONS_MENU_H
 #define WL_WUI_GAME_OPTIONS_MENU_H
 
-#include "wui/interactive_gamebase.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
+#include "wui/interactive_gamebase.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 struct GameOptionsMenu : public UI::UniqueWindow {
-	GameOptionsMenu
-		(InteractiveGameBase &,
-		 UI::UniqueWindow::Registry &,
-		 InteractiveGameBase::GameMainMenuWindows &);
+	GameOptionsMenu(InteractiveGameBase&,
+	                UI::UniqueWindow::Registry&,
+	                InteractiveGameBase::GameMainMenuWindows&);
 
 private:
 	InteractiveGameBase& igb_;
@@ -43,7 +41,7 @@ private:
 	UI::Button save_game_;
 	UI::Button exit_game_;
 
-	void clicked_sound    ();
+	void clicked_sound();
 	void clicked_save_game();
 	void clicked_exit_game();
 };
