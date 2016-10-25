@@ -68,7 +68,7 @@ struct MapView : public UI::Panel {
 	void set_zoom(float zoom);
 
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
-	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom. 
+	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel);
 
 	bool is_dragging() const {
