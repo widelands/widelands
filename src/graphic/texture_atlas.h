@@ -68,11 +68,11 @@ public:
 
 private:
 	struct Node {
-		Node(const Rect& init_r);
+		Node(const Recti& init_r);
 		void split(int w, int h);
 
 		bool used;
-		Rect r;
+		Recti r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
 

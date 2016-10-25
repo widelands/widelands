@@ -95,11 +95,11 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	set_inner_size(375, 135);
 
 	UI::Textarea* ta = new UI::Textarea(this, 0, 0, _("Number of Players"));
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
+	ta->set_pos(Vector2i((get_inner_w() - ta->get_w()) / 2, posy + 5));
 	posy += spacing + width;
 
 	nr_of_players_ta_ = new UI::Textarea(this, 0, 0, "5");
-	nr_of_players_ta_->set_pos(Point((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
+	nr_of_players_ta_->set_pos(Vector2i((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
 
 	posy += width + spacing + spacing;
 
@@ -292,7 +292,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		menu.move_view_to(sp);
+		menu.center_view_on_coords(sp);
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);

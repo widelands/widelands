@@ -30,9 +30,7 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
                                                Widelands::Map* map) {
 	map->set_origin(center.node);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.set_rel_viewpoint(Point(-(center.node.x * 2 + (center.node.y & 1)) * (kTriangleWidth / 2),
-	                            -center.node.y * kTriangleHeight),
-	                      true);
+	eia.center_view_on_coords(Widelands::Coords(0, 0));
 	return 0;
 }
 
@@ -46,8 +44,7 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
 	   map->get_width() - 1 - center.node.x, map->get_height() - 1 - center.node.y);
 	map->set_origin(nc);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.set_rel_viewpoint(
-	   Point(-(nc.x * 2 + (nc.y & 1)) * (kTriangleWidth / 2), -nc.y * kTriangleHeight), true);
+	eia.center_view_on_coords(Widelands::Coords(0, 0));
 	return 0;
 }
 

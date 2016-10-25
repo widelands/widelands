@@ -17,22 +17,14 @@
  *
  */
 
-#include "logic/map_objects/tribes/road_textures.h"
+#include "base/vector.h"
 
-#include <memory>
+#include <cmath>
 
-const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords, int direction) const {
-	return *normal_textures_.at((coords.x + coords.y + direction) % normal_textures_.size());
+Vector2f middle(const Vector2f& a, const Vector2f& b) {
+	return Vector2f((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
 }
 
-const Image& RoadTextures::get_busy_texture(const Widelands::Coords& coords, int direction) const {
-	return *busy_textures_.at((coords.x + coords.y + direction) % busy_textures_.size());
-}
-
-void RoadTextures::add_normal_road_texture(const Image* image) {
-	normal_textures_.emplace_back(image);
-}
-
-void RoadTextures::add_busy_road_texture(const Image* image) {
-	busy_textures_.emplace_back(image);
+Vector2i round(const Vector2f& a) {
+	return Vector2i(std::lround(a.x), std::lround(a.y));
 }

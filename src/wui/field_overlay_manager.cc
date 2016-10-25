@@ -36,7 +36,7 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	//  Special case for flag, which has a different formula for hotspot_y.
 	buildhelp_info->pic = g_gr->images().get(*filename);
 	buildhelp_info->hotspot =
-	   Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
+	   Vector2i(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const OverlayInfo* const buildhelp_infos_end = buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) {  // The other buildhelp overlays.
@@ -45,7 +45,7 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 			break;
 		buildhelp_info->pic = g_gr->images().get(*filename);
 		buildhelp_info->hotspot =
-		   Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
+		   Vector2i(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
 	}
 }
 
@@ -113,13 +113,13 @@ int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) con
 void FieldOverlayManager::register_overlay(const Widelands::TCoords<>& c,
                                            const Image* pic,
                                            int32_t const level,
-                                           Point hotspot,
+                                           Vector2i hotspot,
                                            OverlayId const overlay_id) {
 	assert(c.t <= 2);
 	assert(level != 5);  //  level == 5 is undefined behavior
 
-	if (hotspot == Point::invalid()) {
-		hotspot = Point(pic->width() / 2, pic->height() / 2);
+	if (hotspot == Vector2i::invalid()) {
+		hotspot = Vector2i(pic->width() / 2, pic->height() / 2);
 	}
 
 	RegisteredOverlaysMap& overlay_map = overlays_[c.t];

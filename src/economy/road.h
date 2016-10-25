@@ -118,7 +118,11 @@ protected:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          DrawText draw_text,
+	          const Vector2f& point_on_dst,
+				 float scale,
+	          RenderTarget* dst) override;
 
 private:
 	void set_path(EditorGameBase&, const Path&);

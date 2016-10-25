@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,27 @@
  *
  */
 
-#include "logic/map_objects/tribes/road_textures.h"
+#ifndef WL_BASE_MATH_H
+#define WL_BASE_MATH_H
 
-#include <memory>
+#include "base/macros.h"
 
-const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords, int direction) const {
-	return *normal_textures_.at((coords.x + coords.y + direction) % normal_textures_.size());
+namespace math {
+
+// Returns 1 for positive and -1 for negative numbers.
+template <typename T>
+T sign(const T& val) {
+	return val < T(0.) ? T(-1.) : T(1.);
 }
 
-const Image& RoadTextures::get_busy_texture(const Widelands::Coords& coords, int direction) const {
-	return *busy_textures_.at((coords.x + coords.y + direction) % busy_textures_.size());
+// Clamps 'val' to 'min' and 'max'.
+template <typename T>
+T clamp(const T& val, const T& low, const T& high) {
+	if (val < low) { return low; }
+	if (val > high) { return high; }
+	return val;
 }
 
-void RoadTextures::add_normal_road_texture(const Image* image) {
-	normal_textures_.emplace_back(image);
-}
+}  // namespace math
 
-void RoadTextures::add_busy_road_texture(const Image* image) {
-	busy_textures_.emplace_back(image);
-}
+#endif  // end of include guard: WL_BASE_MATH_H

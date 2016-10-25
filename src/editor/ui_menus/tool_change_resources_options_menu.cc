@@ -100,7 +100,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
 		const Widelands::ResourceDescription& resource = *world.get_resource(i);
-		radiogroup_.add_button(&resources_box_, Point(0, 0),
+		radiogroup_.add_button(&resources_box_, Vector2i(0, 0),
 		                       g_gr->images().get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Align::kLeft, false, true);
