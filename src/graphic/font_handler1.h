@@ -25,7 +25,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/text/font_set.h"
 

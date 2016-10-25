@@ -17,28 +17,4 @@
  *
  */
 
-#ifndef WL_GRAPHIC_GL_BLIT_DATA_H
-#define WL_GRAPHIC_GL_BLIT_DATA_H
-
-#include <stdint.h>
-
-#include "base/rect.h"
-
-// Information of the internal OpenGL data needed to properly blit this image.
-struct BlitData {
-	// The OpenGl name or id of the parent texture. The parent texture is either
-	// - the packed texture of the texture atlas, if this texture is part of a texture atlas.
-	// - the texture itself if it is a standalone texture.
-	uint32_t texture_id;
-
-	// Dimension of the parent texture, For stand alone textures this is the
-	// dimensions of the texture itself and therefore equal to
-	// rect.[w|h].
-	int parent_width;
-	int parent_height;
-
-	// The subrect in the parent texture.
-	Rectf rect;
-};
-
-#endif  // end of include guard: WL_GRAPHIC_GL_BLIT_DATA_H
+// Dummy file as cmake cannot handle header only libraries :(.

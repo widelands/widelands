@@ -83,7 +83,7 @@ protected:
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
 	const Widelands::TribeDescr::WaresOrderCoords& icons_order_coords() const;
-	virtual Point ware_position(Widelands::DescriptionIndex) const;
+	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
 

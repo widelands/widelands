@@ -37,7 +37,7 @@ FillRectProgram::FillRectProgram() {
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
-void FillRectProgram::draw(const FloatRect& destination_rect,
+void FillRectProgram::draw(const Rectf& destination_rect,
                            const float z_value,
                            const RGBAColor& color,
                            const BlendMode blend_mode) {
