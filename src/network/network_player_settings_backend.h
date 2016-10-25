@@ -20,13 +20,13 @@
 #ifndef WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 #define WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
 
 struct NetworkPlayerSettingsBackend {
 
 	NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
-		for (uint8_t i = 0; i < MAX_PLAYERS; ++i)
+		for (uint8_t i = 0; i < kMaxPlayers; ++i)
 			shared_in_tribe[i] = std::string();
 	}
 
@@ -37,7 +37,7 @@ struct NetworkPlayerSettingsBackend {
 	void refresh(uint8_t id);
 
 	GameSettingsProvider* const s;
-	std::string shared_in_tribe[MAX_PLAYERS];
+	std::string shared_in_tribe[kMaxPlayers];
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

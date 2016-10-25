@@ -52,7 +52,7 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
-	/// Do not use richtext for the \param title.
+	/// Do not use richtext for 'title'.
 	Window(Panel* parent,
 	       const std::string& name,
 	       int32_t x,
@@ -61,7 +61,7 @@ public:
 	       uint32_t h,
 	       const std::string& title);
 
-	/// This will set the window title. Do not use richtext for the \param text.
+	/// This will set the window title. Do not use richtext for 'text'.
 	void set_title(const std::string& text);
 	const std::string& get_title() const {
 		return title_;
