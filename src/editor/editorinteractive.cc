@@ -120,7 +120,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                                    _("Show Building Spaces (on/off)"))),
      reset_zoom_(INIT_BUTTON("images/wui/menus/menu_reset_zoom.png",
                                    "reset_zoom",
-                                   _("Reset zoom to 1"))),
+                                   _("Reset zoom"))),
      toggle_player_menu_(
         INIT_BUTTON("images/wui/editor/editor_menu_player_menu.png", "players", _("Players"))),
      undo_(INIT_BUTTON("images/wui/editor/editor_undo.png", "undo", _("Undo"))),
