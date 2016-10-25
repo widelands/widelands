@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 14:35+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 19:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -333,7 +333,7 @@ msgstr "Tha e riatanach gun gluais thu an sealladh agad ach am faigh thu seallad
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr "Is gun cleachd thu na h-iuchraichean saighde air a’ mheur-chlàr an dàrna dòigh."
+msgstr "Is gun cleachd thu na h-iuchraichean saighde air a’ mheur-chlàr a’ chiad dòigh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:195
 msgid ""
@@ -402,7 +402,7 @@ msgstr "Ionnsaich mar a chleachdas tu am meanbh-mhapa"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Fosgail am mean-mhapa ‘s tu a’ briogadh air an treas putan on aobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
+msgstr "Fosgail am mean-mhapa ‘s tu a’ briogadh air an treas putan on taobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -636,7 +636,7 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr "Cha toigh leis an luchd-obrach agad coiseachd a’ bhlàir. Feumaidh tu rathad a thogail on phrìomh-àras agad dhan làrach togail ach an urrainn dha na giùlanairean bathar a thogail dha. Seo ann dòigh as fhasa gus rathad a thogail: briog air bratach an làraich thogail, tagh “Tog rathad” is an uairsin briog air bratach a’ chinn-uidhe (seo an tè air beulaibh a’ phrìomh-àrais agad) mar a sheall mi dhut."
+msgstr "Cha toigh leis an luchd-obrach agad coiseachd a’ bhlàir. Feumaidh tu rathad a thogail on phrìomh-àras agad dhan làrach togail ach an urrainn dha na giùlanairean bathar a thogail dha. Seo an dòigh as fhasa gus rathad a thogail: briog air bratach an làraich thogail, tagh “Tog rathad” is an uairsin briog air bratach a’ chinn-uidhe (seo an tè air beulaibh a’ phrìomh-àrais agad) mar a sheall mi dhut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
@@ -860,6 +860,10 @@ msgid ""
 "resources you used for the construction."
 msgstr "A’ toirt a’ chuaraidh às a chèile: thig fear-togail on phrìomh-àras gus an cuaraidh a thoirt às a chèile beag air bheag. Le sin, gheibh thu cuid dhe na stòrasan a chleachd thu gus a thogail air ais."
 
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Mill an dà chuaraidh"
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
@@ -939,7 +943,7 @@ msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr "Ann an Widelands, feumaidh gu iomadh togalach a thogail agus bidh feum aca air torr ruim. Gus do ranntair a mheudachadh, feumaidh tu togalaichean an airm a thogail faisg air na crìochan agad. Tha taghadh dhe thogalaichean an airm aig gach treubh."
+msgstr "Ann an Widelands, feumaidh tu iomadh togalach a thogail agus bidh feum aca air torr ruim. Gus do ranntair a mheudachadh, feumaidh tu togalaichean an airm a thogail faisg air na crìochan agad. Tha taghadh dhe thogalaichean an airm aig gach treubh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
@@ -954,7 +958,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr "Cuimhnich nach gabh togalaichean mòra (ìomhaigheag uaine) a thogail air raointean togail meadhanach (buidhe) no beaga (dearga) ach gabhaidh togalaichean a thogail air raon a gheibh barrachd ruim dhaibh na tha feum aca air. Bu chòir dhut seo a chumail ’nad aire an-còmhnaidh nuair a bhios tu a’ sireadh àite freagarrach."
+msgstr "Cuimhnich nach gabh togalaichean mòra (ìomhaigheag uaine) a thogail air raointean togail meadhanach (buidhe) no beaga (dearga) ach gabhaidh togalaichean a thogail air raon a bheir barrachd ruim dhaibh na tha feum aca air. Bu chòir dhut seo a chumail ’nad aire an-còmhnaidh nuair a bhios tu a’ sireadh àite freagarrach."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
 msgid "Military Site Occupied"

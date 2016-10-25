@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-07 07:04+0000\n"
-"PO-Revision-Date: 2016-10-08 18:55+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-15 21:02+0000\n"
 "Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -2735,7 +2735,7 @@ msgstr "(C) %1%-%2% Widelands Ontwikkelingsteam"
 
 #: ../../src/ui_fsmenu/main.cc:148
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr "Vrijgegeven onder de GNU General Public License v2.0"
+msgstr "Uitgegeven onder de GNU General Public License v2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose a map"
@@ -3331,7 +3331,7 @@ msgstr "Wil je bestand %s echt verwijderen?"
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
-msgstr "Berichten: Inbox"
+msgstr "Berichten: Postbus"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Title"
@@ -3464,11 +3464,11 @@ msgstr "Berichten: archief"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
-msgstr "Plaats geselecteerd bericht terug in inbox"
+msgstr "Plaats geselecteerd bericht terug in postbus"
 
 #: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
-msgstr "Toon Inbox"
+msgstr "Toon Postbus"
 
 #: ../../src/wui/game_objectives_menu.cc:42
 #: ../../src/wui/interactive_player.cc:83
@@ -3804,7 +3804,7 @@ msgstr "Het aantal spelers"
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:34
 msgid "Pl."
-msgstr "Splr."
+msgstr "#S"
 
 #: ../../src/wui/maptable.cc:36 ../../src/wui/maptable.cc:64
 msgid "Filename"

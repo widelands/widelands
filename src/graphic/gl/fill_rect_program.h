@@ -30,7 +30,7 @@
 class FillRectProgram {
 public:
 	struct Arguments {
-		FloatRect destination_rect;
+		Rectf destination_rect;
 		float z_value;
 		RGBAColor color;
 		BlendMode blend_mode;
@@ -41,7 +41,7 @@ public:
 
 	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
 	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
-	void draw(const FloatRect& destination_rect,
+	void draw(const Rectf& destination_rect,
 	          float z_value,
 	          const RGBAColor& color,
 	          BlendMode blend_mode);
