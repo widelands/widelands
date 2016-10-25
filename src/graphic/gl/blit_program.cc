@@ -412,7 +412,7 @@ void BlitProgramGl4::setup_index_buffer(unsigned num_rects)
 	if (num_rects <= num_index_rects_)
 		return;
 
-	if (num_rects > 65536 / 6)
+	if (num_rects > 65536 / 4)
 		throw wexception("Too many rectangles for 16-bit indices");
 
 	std::vector<uint16_t> indices;
@@ -431,6 +431,7 @@ void BlitProgramGl4::setup_index_buffer(unsigned num_rects)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_index_buffer_.object());
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16_t) * indices.size(),
 	             indices.data(), GL_STATIC_DRAW);
+	num_index_rects_ = num_rects;
 }
 
 

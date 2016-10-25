@@ -19,13 +19,14 @@
 
 #include "graphic/gl/terrain_program_gl4.h"
 
+#include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "graphic/game_renderer_gl4.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
-#include "graphic/game_renderer_gl4.h"
 #include "graphic/image_io.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -34,6 +35,8 @@ using namespace Widelands;
 
 /**
  * This is the back-end of the GL4 rendering path.
+ *
+ * TODO(nha): upload based on dirtiness and/or "rolling" updates of N% per frame
  *
  * Per-field data is uploaded directly into integer-valued textures that span
  * the entire map, and vertex shaders do most of the heavy lifting. The
@@ -57,7 +60,6 @@ using namespace Widelands;
  *     R = field ownership
  *     B = road/flag/building data
  *    This information is re-uploaded every frame when a minimap is shown.
- * TODO(nha): upload based on dirtiness and/or "rolling" updates of N% per frame
  *
  * Terrain is rendered in patches of a fixed structure, and many patches are
  * rendered in one call via instancing. Per-instance data is processed in a
@@ -88,6 +90,12 @@ using namespace Widelands;
  *
  * OpenGL vertices of triangles are not shared; this allows separate textures
  * and dithering in a single pass.
+ *
+ * Road rendering is also handled here. Roads are rendered as two triangles per
+ * segment. Only per-road data is uploaded; the vertex shader sources data
+ * from the per-road buffer based on the vertex ID, and an index buffer
+ * (element array buffer in OpenGL terms) is used to share two vertices between
+ * the triangles that make up each segment.
  */
 
 TerrainBaseGl4::GlobalMap TerrainBaseGl4::global_map_;
@@ -115,6 +123,7 @@ TerrainBaseGl4::TerrainBaseGl4(const EditorGameBase& egbase)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	do_update();
+	upload_road_textures();
 }
 
 TerrainBaseGl4::~TerrainBaseGl4() {
@@ -151,6 +160,64 @@ void TerrainBaseGl4::do_update() {
 	fields_base_version_ = map.get_fields_base_version();
 }
 
+TerrainBaseGl4::PerRoadTextureData::PerRoadTextureData(const FloatRect& rect)
+  : x(rect.x), y(rect.y), w(rect.w), h(rect.h) {
+}
+
+void TerrainBaseGl4::upload_road_textures() {
+	std::vector<PerRoadTextureData> roads;
+	std::map<const TribeDescr*, unsigned> tribe_map;
+	PlayerNumber const nr_players = egbase().map().get_nrplayers();
+
+	player_roads_.resize(nr_players + 1);
+
+	iterate_players_existing_const(p, nr_players, egbase(), player) {
+		const TribeDescr& tribe = player->tribe();
+		auto it = tribe_map.find(&tribe);
+		if (it != tribe_map.end()) {
+			player_roads_[p] = player_roads_[it->second];
+		} else {
+			const auto& normal_textures = tribe.road_textures().get_normal_textures();
+			player_roads_[p].normal_roads = roads.size();
+			player_roads_[p].num_normal_roads = normal_textures.size();
+			for (const Image* image : normal_textures) {
+				const BlitData& blit_data = image->blit_data();
+				roads.emplace_back(to_gl_texture(blit_data));
+				road_texture_object_ = blit_data.texture_id;
+			}
+
+			const auto& busy_textures = tribe.road_textures().get_busy_textures();
+			player_roads_[p].busy_roads = roads.size();
+			player_roads_[p].num_busy_roads = busy_textures.size();
+			for (const Image* image : busy_textures)
+				roads.emplace_back(to_gl_texture(image->blit_data()));
+
+			tribe_map[&tribe] = p;
+		}
+	}
+
+	road_textures_.bind();
+	road_textures_.update(roads);
+}
+
+unsigned TerrainBaseGl4::road_texture_idx(PlayerNumber owner,
+                                          RoadType road_type,
+                                          const Coords& coords,
+                                          WalkingDir direction) const {
+	const PlayerRoads& roads = player_roads_[owner];
+	unsigned base, count;
+
+	if (road_type == RoadType::kNormal) {
+		base = roads.normal_roads;
+		count = roads.num_normal_roads;
+	} else {
+		base = roads.busy_roads;
+		count = roads.num_busy_roads;
+	}
+
+	return base + unsigned(coords.x + coords.y + direction) % count;
+}
+
 TerrainPlayerPerspectiveGl4::GlobalMap TerrainPlayerPerspectiveGl4::global_map_;
 
 std::shared_ptr<TerrainPlayerPerspectiveGl4>
@@ -179,33 +246,58 @@ void TerrainPlayerPerspectiveGl4::update() {
 	// TODO
 }
 
-TerrainProgramGl4::TerrainProgramGl4()
-  : terrain_data_(GL_UNIFORM_BUFFER), instance_data_(GL_ARRAY_BUFFER) {
+TerrainProgramGl4::Terrain::Terrain()
+  : terrain_data(GL_UNIFORM_BUFFER), instance_data(GL_ARRAY_BUFFER) {
 	// Initialize program.
-	gl_program_.build("terrain_gl4");
+	gl_program.build("terrain_gl4");
 
-	in_vertex_coordinate_ = glGetAttribLocation(gl_program_.object(), "in_vertex_coordinate");
-	in_patch_coordinate_ = glGetAttribLocation(gl_program_.object(), "in_patch_coordinate");
-	in_patch_basepix_ = glGetAttribLocation(gl_program_.object(), "in_patch_basepix");
+	in_vertex_coordinate = glGetAttribLocation(gl_program.object(), "in_vertex_coordinate");
+	in_patch_coordinate = glGetAttribLocation(gl_program.object(), "in_patch_coordinate");
+	in_patch_basepix = glGetAttribLocation(gl_program.object(), "in_patch_basepix");
 
-	u_position_scale_ = glGetUniformLocation(gl_program_.object(), "u_position_scale");
-	u_position_offset_ = glGetUniformLocation(gl_program_.object(), "u_position_offset");
-	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
-	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
+	u_position_scale = glGetUniformLocation(gl_program.object(), "u_position_scale");
+	u_position_offset = glGetUniformLocation(gl_program.object(), "u_position_offset");
+	u_z_value = glGetUniformLocation(gl_program.object(), "u_z_value");
+	u_texture_dimensions = glGetUniformLocation(gl_program.object(), "u_texture_dimensions");
 
-	u_terrain_base_ = glGetUniformLocation(gl_program_.object(), "u_terrain_base");
-	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
-	u_dither_texture_ = glGetUniformLocation(gl_program_.object(), "u_dither_texture");
+	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
+	u_terrain_texture = glGetUniformLocation(gl_program.object(), "u_terrain_texture");
+	u_dither_texture = glGetUniformLocation(gl_program.object(), "u_dither_texture");
 
-	block_terrains_idx_ = glGetUniformBlockIndex(gl_program_.object(), "block_terrains");
+	block_terrains_idx = glGetUniformBlockIndex(gl_program.object(), "block_terrains");
+}
 
+TerrainProgramGl4::Terrain::~Terrain() {
+}
+
+TerrainProgramGl4::Roads::Roads()
+  : road_data(GL_SHADER_STORAGE_BUFFER) {
+	num_index_roads = 0;
+
+	// Initialize program.
+	gl_program.build_vp_fp("road_gl4", "road");
+
+	u_position_scale = glGetUniformLocation(gl_program.object(), "u_position_scale");
+	u_position_offset = glGetUniformLocation(gl_program.object(), "u_position_offset");
+	u_z_value = glGetUniformLocation(gl_program.object(), "u_z_value");
+
+	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
+	u_texture = glGetUniformLocation(gl_program.object(), "u_texture");
+
+	block_textures_idx = glGetUniformBlockIndex(gl_program.object(), "block_textures");
+}
+
+TerrainProgramGl4::Roads::~Roads() {
+}
+
+TerrainProgramGl4::TerrainProgramGl4() {
 	// Initialize vertex buffer (every instance/path has the same structure).
 	init_vertex_data();
 
 	// Load mask texture for dithering.
-	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
+	terrain_.dither_mask.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
 
-	Gl::State::instance().bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
+	Gl::State::instance().bind(GL_TEXTURE0, terrain_.dither_mask->blit_data().texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
@@ -219,6 +311,8 @@ bool TerrainProgramGl4::supported() {
 	// TODO(nha): proper implementation
 	// GLSL >= 1.30
 	// GL_ARB_uniform_buffer_object
+	// GL_ARB_separate_shader_objects
+	// GL_ARB_shader_storage_buffer_object
 	return true;
 }
 
@@ -227,19 +321,14 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
                              float z_value) {
 	auto& gl = Gl::State::instance();
 
-	glUseProgram(gl_program_.object());
+	// First, draw the terrain.
+	glUseProgram(terrain_.gl_program.object());
 
 	// Coordinate transform from map coordinates to GL coordinates.
 	float scale_x = 2.0 / args->surface_width;
 	float scale_y = -2.0 / args->surface_height;
 	float offset_x = args->surface_offset.x * scale_x - 1.0;
 	float offset_y = args->surface_offset.y * scale_y + 1.0;
-// 			f.gl_x = f.pixel_x = x + surface_offset.x;
-// 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * kHeightFactor;
-// inline void pixel_to_gl_renderbuffer(const int width, const int height, float* x, float* y) {
-// 	*x = (*x / width) * 2.0f - 1.0f;
-// 	*y = 1.0f - (*y / height) * 2.0f;
-// }
 
 	// Texture size
 	const BlitData& blit_data = args->terrain->egbase().world().terrains().get(0).get_texture(0).blit_data();
@@ -248,34 +337,70 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	// Prepare uniforms.
 	upload_terrain_data(args, gametime);
 
-	glUniform2f(u_position_scale_, scale_x, scale_y);
-	glUniform2f(u_position_offset_, offset_x, offset_y);
-	glUniform1f(u_z_value_, z_value);
-	glUniform2f(u_texture_dimensions_, texture_coordinates.w, texture_coordinates.h);
+	glUniform2f(terrain_.u_position_scale, scale_x, scale_y);
+	glUniform2f(terrain_.u_position_offset, offset_x, offset_y);
+	glUniform1f(terrain_.u_z_value, z_value);
+	glUniform2f(terrain_.u_texture_dimensions, texture_coordinates.w, texture_coordinates.h);
 
 	// Prepare textures & sampler uniforms.
-	glUniform1i(u_terrain_base_, 0);
+	glUniform1i(terrain_.u_terrain_base, 0);
 	gl.bind(GL_TEXTURE0, args->terrain->texture());
 
-	glUniform1i(u_terrain_texture_, 1);
+	glUniform1i(terrain_.u_terrain_texture, 1);
 	gl.bind(GL_TEXTURE1, blit_data.texture_id);
 
-	glUniform1i(u_dither_texture_, 2);
-	gl.bind(GL_TEXTURE2, dither_mask_->blit_data().texture_id);
+	glUniform1i(terrain_.u_dither_texture, 2);
+	gl.bind(GL_TEXTURE2, terrain_.dither_mask->blit_data().texture_id);
 
 	// Setup vertex and instance attribute data.
 	gl.enable_vertex_attrib_array(
-	   {in_vertex_coordinate_, in_patch_coordinate_, in_patch_basepix_});
+	   {terrain_.in_vertex_coordinate, terrain_.in_patch_coordinate, terrain_.in_patch_basepix});
 
 	unsigned num_instances = upload_instance_data(args);
 
-	vertex_data_.bind();
-	glVertexAttribIPointer(in_vertex_coordinate_, 4, GL_INT, sizeof(PerVertexData), nullptr);
+	terrain_.vertex_data.bind();
+	glVertexAttribIPointer(terrain_.in_vertex_coordinate, 4, GL_INT, sizeof(PerVertexData), nullptr);
 
 	glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * kPatchWidth * kPatchHeight, num_instances);
 
-	glVertexBindingDivisor(in_patch_coordinate_, 0);
-	glVertexBindingDivisor(in_patch_basepix_, 0);
+	glVertexBindingDivisor(terrain_.in_patch_coordinate, 0);
+	glVertexBindingDivisor(terrain_.in_patch_basepix, 0);
+}
+
+void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,
+                                   float z_value) {
+	auto& gl = Gl::State::instance();
+
+	// Coordinate transform from map coordinates to GL coordinates.
+	float scale_x = 2.0 / args->surface_width;
+	float scale_y = -2.0 / args->surface_height;
+	float offset_x = args->surface_offset.x * scale_x - 1.0;
+	float offset_y = args->surface_offset.y * scale_y + 1.0;
+
+	glUseProgram(roads_.gl_program.object());
+
+	setup_road_index_buffer(args->roads.size());
+
+	// Prepare uniforms.
+	glUniform2f(roads_.u_position_scale, scale_x, scale_y);
+	glUniform2f(roads_.u_position_offset, offset_x, offset_y);
+	glUniform1f(roads_.u_z_value, z_value);
+
+	// Prepare textures & sampler uniforms.
+	// Texture0 is already set correctly.
+	glUniform1i(roads_.u_terrain_base, 0);
+
+	glUniform1i(roads_.u_texture, 1);
+	gl.bind(GL_TEXTURE1, args->terrain->road_texture_object());
+
+	glBindBufferBase(GL_UNIFORM_BUFFER, roads_.block_textures_idx,
+	                 args->terrain->road_textures_buffer_object());
+
+	upload_road_data(args);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, roads_.gl_index_buffer.object());
+	glDrawElements(GL_TRIANGLES, 6 * args->roads.size(), GL_UNSIGNED_SHORT, nullptr);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void TerrainProgramGl4::init_vertex_data() {
@@ -299,8 +424,8 @@ void TerrainProgramGl4::init_vertex_data() {
 
 	assert(vertices.size() == 6 * kPatchWidth * kPatchHeight);
 
-	vertex_data_.bind();
-	vertex_data_.update(vertices);
+	terrain_.vertex_data.bind();
+	terrain_.vertex_data.update(vertices);
 }
 
 // Upload the per-terrain texture data. This is done on every draw call because
@@ -311,7 +436,7 @@ void TerrainProgramGl4::init_vertex_data() {
 void TerrainProgramGl4::upload_terrain_data(const TerrainGl4Arguments* args,
                                             uint32_t gametime) {
 	const auto& terrains = args->terrain->egbase().world().terrains();
-	auto stream = terrain_data_.stream(terrains.size());
+	auto stream = terrain_.terrain_data.stream(terrains.size());
 
 	for (unsigned i = 0; i < terrains.size(); ++i) {
 		stream.emplace_back();
@@ -323,7 +448,8 @@ void TerrainProgramGl4::upload_terrain_data(const TerrainGl4Arguments* args,
 	}
 
 	GLintptr offset = stream.unmap();
-	glBindBufferRange(GL_UNIFORM_BUFFER, block_terrains_idx_, terrain_data_.object(),
+	glBindBufferRange(GL_UNIFORM_BUFFER, terrain_.block_terrains_idx,
+	                  terrain_.terrain_data.object(),
 	                  offset, sizeof(PerTerrainData) * terrains.size());
 }
 
@@ -341,7 +467,7 @@ unsigned TerrainProgramGl4::upload_instance_data(const TerrainGl4Arguments* args
 	int pw = (maxfx - minfx + kPatchWidth) / kPatchWidth;
 	int num_patches = pw * ph;
 
-	auto stream = instance_data_.stream(num_patches);
+	auto stream = terrain_.instance_data.stream(num_patches);
 	for (int py = 0; py < ph; ++py) {
 		for (int px = 0; px < pw; ++px) {
 			const int fx = minfx + px * kPatchWidth;
@@ -361,13 +487,55 @@ unsigned TerrainProgramGl4::upload_instance_data(const TerrainGl4Arguments* args
 
 	GLintptr offset = stream.unmap();
 
-	glVertexAttribIPointer(in_patch_coordinate_, 2, GL_INT, sizeof(PerInstanceData),
+	glVertexAttribIPointer(terrain_.in_patch_coordinate, 2, GL_INT, sizeof(PerInstanceData),
 	                       reinterpret_cast<void*>(offset + offsetof(PerInstanceData, coordinate)));
-	glVertexAttribPointer(in_patch_basepix_, 2, GL_FLOAT, GL_FALSE, sizeof(PerInstanceData),
+	glVertexAttribPointer(terrain_.in_patch_basepix, 2, GL_FLOAT, GL_FALSE, sizeof(PerInstanceData),
 	                      reinterpret_cast<void*>(offset + offsetof(PerInstanceData, basepix)));
 
-	glVertexBindingDivisor(in_patch_coordinate_, 1);
-	glVertexBindingDivisor(in_patch_basepix_, 1);
+	glVertexBindingDivisor(terrain_.in_patch_coordinate, 1);
+	glVertexBindingDivisor(terrain_.in_patch_basepix, 1);
 
 	return num_patches;
+}
+
+void TerrainProgramGl4::setup_road_index_buffer(unsigned num_roads) {
+	if (num_roads <= roads_.num_index_roads)
+		return;
+
+	if (num_roads > 65536 / 4)
+		throw wexception("Too many roads for 16-bit indices");
+
+	std::vector<uint16_t> indices;
+	indices.reserve(num_roads * 6);
+
+	for (unsigned i = 0; i < num_roads; ++i) {
+		indices.push_back(4 * i);
+		indices.push_back(4 * i + 1);
+		indices.push_back(4 * i + 2);
+
+		indices.push_back(4 * i + 2);
+		indices.push_back(4 * i + 1);
+		indices.push_back(4 * i + 3);
+	}
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, roads_.gl_index_buffer.object());
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16_t) * indices.size(),
+	             indices.data(), GL_STATIC_DRAW);
+	roads_.num_index_roads = num_roads;
+}
+
+void TerrainProgramGl4::upload_road_data(const TerrainGl4Arguments* args) {
+	assert(!args->roads.empty());
+
+	auto stream = roads_.road_data.stream(args->roads.size());
+
+	for (const TerrainGl4Arguments::Road& road : args->roads) {
+		stream.emplace_back(
+			Point(road.coord.x, road.coord.y), road.direction,
+			args->terrain->road_texture_idx(
+				road.owner, RoadType(road.type), road.coord, WalkingDir(road.direction)));
+	}
+
+	glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 0, roads_.road_data.object(),
+	                  stream.unmap(), args->roads.size() * sizeof(PerRoadData));
 }

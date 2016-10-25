@@ -33,6 +33,13 @@ public:
 	const Image& get_normal_texture(int x, int y, int direction) const;
 	const Image& get_busy_texture(int x, int y, int direction) const;
 
+	const std::vector<const Image*>& get_normal_textures() const {
+		return normal_textures_;
+	}
+	const std::vector<const Image*>& get_busy_textures() const {
+		return busy_textures_;
+	}
+
 	// Adds a new road texture.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);

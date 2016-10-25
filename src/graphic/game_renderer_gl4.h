@@ -20,18 +20,40 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_GL4_H
 #define WL_GRAPHIC_GAME_RENDERER_GL4_H
 
+#include <vector>
+
 #include "graphic/game_renderer.h"
+#include "logic/widelands_geometry.h"
 
 class TerrainBaseGl4;
 class TerrainPlayerPerspectiveGl4;
 
 struct TerrainGl4Arguments {
+	struct Road {
+		Widelands::Coords coord;
+
+		// One of the RoadTypes
+		uint8_t type;
+
+		// One of the WalkingDirs
+		uint8_t direction;
+
+		// Player number
+		uint8_t owner;
+
+		Road(Widelands::Coords coord_, uint8_t type_, uint8_t direction_, uint8_t owner_)
+		  : coord(coord_), type(type_), direction(direction_), owner(owner_) {
+		}
+	};
+	static_assert(sizeof(Road) == 8, "bad alignment");
+
 	std::shared_ptr<TerrainBaseGl4> terrain;
 	std::shared_ptr<TerrainPlayerPerspectiveGl4> perspective;
 	Point surface_offset;
 	int surface_width;
 	int surface_height;
 	int minfx, minfy, maxfx, maxfy;
+	std::vector<Road> roads;
 };
 
 /**
@@ -50,6 +72,8 @@ public:
 	          const Widelands::Player* player) override;
 
 private:
+	void scan_fields();
+
 	TerrainGl4Arguments args_;
 
 	DISALLOW_COPY_AND_ASSIGN(GameRendererGl4);

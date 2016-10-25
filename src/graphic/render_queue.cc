@@ -171,6 +171,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kTerrainDither:
 	case Program::kTerrainRoad:
 	case Program::kTerrainGl4:
+	case Program::kTerrainRoadGl4:
 		/* all fallthroughs intended */
 		break;
 
@@ -266,6 +267,13 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			terrain_program_gl4_->draw(item.terrain_gl4_arguments,
 			                           item.terrain_arguments.gametime,
 			                           item.z_value);
+			++i;
+		} break;
+
+		case Program::kTerrainRoadGl4: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			terrain_program_gl4_->draw_roads(item.terrain_gl4_arguments,
+			                                 item.z_value);
 			++i;
 		} break;
 

@@ -89,7 +89,7 @@ public:
 	}
 
 	// Compiles 'source'. Throws an exception on error.
-	void compile(const char* source);
+	void compile(const char* source, const char* shader_name = nullptr);
 
 private:
 	const GLenum type_;
@@ -110,7 +110,7 @@ Shader::~Shader() {
 	}
 }
 
-void Shader::compile(const char* source) {
+void Shader::compile(const char* source, const char* shader_name) {
 	glShaderSource(shader_object_, 1, &source, nullptr);
 
 	glCompileShader(shader_object_);
@@ -123,7 +123,8 @@ void Shader::compile(const char* source) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			glGetShaderInfoLog(shader_object_, infoLen, NULL, infoLog.get());
 			throw wexception(
-			   "Error compiling %s shader:\n%s", shader_to_string(type_).c_str(), infoLog.get());
+			   "Error compiling %s shader (%s):\n%s", shader_to_string(type_).c_str(),
+			   shader_name ? shader_name : "unnamed", infoLog.get());
 		}
 	}
 }
@@ -145,11 +146,11 @@ void Program::build_vp_fp(const std::string& vp_name, const std::string& fp_name
 	std::string vertex_shader_source = read_file("shaders/" + vp_name + ".vp");
 
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
-	vertex_shader_->compile(vertex_shader_source.c_str());
+	vertex_shader_->compile(vertex_shader_source.c_str(), vp_name.c_str());
 	glAttachShader(program_object_, vertex_shader_->object());
 
 	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
-	fragment_shader_->compile(fragment_shader_source.c_str());
+	fragment_shader_->compile(fragment_shader_source.c_str(), fp_name.c_str());
 	glAttachShader(program_object_, fragment_shader_->object());
 
 	glLinkProgram(program_object_);

@@ -1,0 +1,119 @@
+#version 130
+#extension GL_ARB_separate_shader_objects : enable
+#extension GL_ARB_shader_storage_buffer_object : enable
+#extension GL_ARB_uniform_buffer_object : enable
+
+// Attributes.
+uniform vec2 u_position_scale;
+uniform vec2 u_position_offset;
+uniform float u_z_value;
+
+// Textures (map data).
+uniform usampler2D u_terrain_base;
+
+// Road data.
+struct Road {
+	ivec2 start;
+	uint direction; // WALK_E = 2, WALK_SE = 3, WALK_SW = 4
+	uint texture;
+};
+
+layout(std140, binding=0) buffer ssbo_roads {
+	Road u_roads[];
+};
+
+// Road texture information.
+struct Texture {
+	float x, y, w, h;
+};
+
+layout(std140) uniform block_textures {
+	Texture u_textures[128];
+};
+
+// Outputs.
+varying vec2 out_texture_position;
+varying float out_brightness;
+
+// Constants
+// TODO(nha): a lot of this should be shared with terrain_gl4.vp
+const float kTriangleWidth = 64;
+const float kTriangleHeight = 32;
+const float kHeightFactor = 5;
+const float kTextureSideLength = 64;
+
+const float kRoadThicknessInPixels = 5.;
+const float kRoadElongationFraction = .1;
+
+vec2 map_size;
+vec2 map_inv_size;
+
+uvec4 get_field_base(ivec2 coord) {
+	return texture(u_terrain_base, (coord + 0.5) * map_inv_size);
+}
+
+float calc_brightness(uint node_ubrightness) {
+	// Brightness is really an 8-bit signed value, but it's stored in an
+	// GL_RGBA8UI texture, so here we use signed (arithmetic) shifts to do
+	// the conversion.
+	int node_brightness = int(node_ubrightness << 24) >> 24;
+	float brightness = 144. / 255. + node_brightness * (1. / 255.);
+	brightness = min(1., brightness * (255. / 160.));
+
+	//TODO: player brightness
+
+	return brightness;
+}
+
+void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness) {
+	uvec4 field = get_field_base(coord);
+	pix.x = coord.x * kTriangleWidth;
+	if ((coord.y & 1) != 0)
+		pix.x += kTriangleWidth / 2;
+	pix.y = coord.y * kTriangleHeight;
+	pix.y -= field.z * kHeightFactor;
+	node_brightness = field.w;
+}
+
+void main() {
+	map_size = vec2(textureSize(u_terrain_base, 0));
+	map_inv_size = 1. / map_size;
+
+	Road road = u_roads[gl_VertexID >> 2];
+	bool is_end = (gl_VertexID & 2) != 0;
+	bool is_right = (gl_VertexID & 1) != 0;
+
+	// Calculate end coordinate.
+	ivec2 end = road.start;
+	end.x += 3 - int(road.direction);
+	if (road.direction >= 3u) {
+		end.y += 1;
+		end.x += (road.start.y & 1) != 0 ? 1 : 0;
+	}
+
+	// Map coordinates
+	vec2 start_pix, end_pix;
+	uint start_node_brightness, end_node_brightness;
+	calc_pix(road.start, start_pix, start_node_brightness);
+	calc_pix(end, end_pix, end_node_brightness);
+
+	vec2 delta_pix = end_pix - start_pix;
+	vec2 road_overshoot = delta_pix * kRoadElongationFraction;
+	vec2 road_thickness = vec2(-delta_pix.y, delta_pix.x) * (kRoadThicknessInPixels / length(delta_pix));
+
+	vec2 pix =
+		(is_end ? end_pix + road_overshoot : start_pix - road_overshoot) +
+		(is_right ? -road_thickness : road_thickness);
+	gl_Position = vec4(pix * u_position_scale + u_position_offset, u_z_value, 1.);
+
+	// Brightness
+	out_brightness = calc_brightness(is_end ? end_node_brightness : start_node_brightness);
+
+	// Texture coordinates.
+	Texture tex = u_textures[road.texture];
+	out_texture_position = vec2(tex.x, tex.y);
+	if (is_end)
+		out_texture_position.x += tex.w;
+	if (!is_right)
+		out_texture_position.y += tex.h;
+}

@@ -25,10 +25,15 @@
 #include <unordered_map>
 
 #include "base/point.h"
+#include "base/rect.h"
 #include "graphic/gl/streaming_buffer.h"
 #include "graphic/gl/utils.h"
+#include "logic/map_objects/walkingdir.h"
+#include "logic/roadtype.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
+struct Coords;
 class EditorGameBase;
 class Player;
 }
@@ -56,6 +61,21 @@ public:
 		return fields_texture_;
 	}
 
+	GLint road_texture_object() const {
+		return road_texture_object_;
+	}
+
+	GLuint road_textures_buffer_object() const {
+		return road_textures_.object();
+	}
+
+	// Get the index into the road textures array stored in the road textures
+	// buffer.
+	unsigned road_texture_idx(Widelands::PlayerNumber owner,
+	                          Widelands::RoadType road_type,
+	                          const Widelands::Coords& coords,
+	                          Widelands::WalkingDir direction) const;
+
 	// Upload updated information to texture(s) if necessary.
 	void update();
 
@@ -63,6 +83,7 @@ private:
 	TerrainBaseGl4(const Widelands::EditorGameBase& egbase);
 
 	void do_update();
+	void upload_road_textures();
 
 	struct PerFieldData {
 		uint8_t terrain_r;
@@ -76,8 +97,23 @@ private:
 		  : terrain_r(terrain_r_), terrain_d(terrain_d_), height(height_), brightness(brightness_) {
 		}
 	};
+	static_assert(sizeof(PerFieldData) == 4, "incorrect padding");
 
-	typedef std::unordered_map<const Widelands::EditorGameBase*, std::weak_ptr<TerrainBaseGl4>> GlobalMap;
+	struct PerRoadTextureData {
+		float x, y, w, h;
+
+		PerRoadTextureData(const FloatRect& rect);
+	};
+	static_assert(sizeof(PerRoadTextureData) == 16, "incorrect padding");
+
+	struct PlayerRoads {
+		unsigned normal_roads = 0;
+		unsigned num_normal_roads = 1;
+		unsigned busy_roads = 0;
+		unsigned num_busy_roads = 1;
+	};
+
+	using GlobalMap = std::unordered_map<const Widelands::EditorGameBase*, std::weak_ptr<TerrainBaseGl4>>;
 
 	static GlobalMap global_map_;
 
@@ -88,6 +124,10 @@ private:
 	GLuint fields_texture_;
 
 	Gl::StreamingBuffer<PerFieldData> uploads_;
+
+	Gl::Buffer<PerRoadTextureData> road_textures_;
+	std::vector<PlayerRoads> player_roads_;
+	GLuint road_texture_object_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainBaseGl4);
 };
@@ -122,8 +162,8 @@ private:
 	TerrainPlayerPerspectiveGl4(const Widelands::EditorGameBase& egbase,
 	                            const Widelands::Player* player);
 
-	typedef std::pair<const Widelands::EditorGameBase*, const Widelands::Player*> GlobalKey;
-	typedef std::map<GlobalKey, std::weak_ptr<TerrainPlayerPerspectiveGl4>> GlobalMap;
+	using GlobalKey = std::pair<const Widelands::EditorGameBase*, const Widelands::Player*>;
+	using GlobalMap = std::map<GlobalKey, std::weak_ptr<TerrainPlayerPerspectiveGl4>>;
 
 	static GlobalMap global_map_;
 
@@ -135,10 +175,9 @@ private:
 
 class TerrainProgramGl4 {
 public:
-	// The patch height must be even. The patch size is chosen so that the
-	// number of vertices per patch is close to a power of two.
-	static constexpr unsigned kPatchWidth = 5;
-	static constexpr unsigned kPatchHeight = 4;
+	// The patch height must be even.
+	static constexpr unsigned kPatchWidth = 8;
+	static constexpr unsigned kPatchHeight = 8;
 
 public:
 	TerrainProgramGl4();
@@ -151,10 +190,16 @@ public:
 	          uint32_t gametime,
 	          float z_value);
 
+	// Draw roads.
+	void draw_roads(const TerrainGl4Arguments* args, float z_value);
+
 private:
 	void init_vertex_data();
 	void upload_terrain_data(const TerrainGl4Arguments* args, uint32_t gametime);
 	unsigned upload_instance_data(const TerrainGl4Arguments* args);
+
+	void setup_road_index_buffer(unsigned num_roads);
+	void upload_road_data(const TerrainGl4Arguments* args);
 
 	struct PerTerrainData {
 		FloatPoint offset;
@@ -179,37 +224,79 @@ private:
 	};
 	static_assert(sizeof(PerVertexData) == 16, "incorrect padding");
 
-	// The program used for drawing the terrain.
-	Gl::Program gl_program_;
+	struct PerRoadData {
+		Point start;
+		uint32_t direction;
+		uint32_t texture;
 
-	// Uniform buffer with per-terrain information.
-	Gl::StreamingBuffer<PerTerrainData> terrain_data_;
+		PerRoadData(const Point& start_, uint32_t direction_, uint32_t texture_)
+		  : start(start_), direction(direction_), texture(texture_) {
+		}
+	};
+	static_assert(sizeof(PerRoadData) == 16, "incorrect padding");
 
-	// Per-instance/patch data.
-	Gl::StreamingBuffer<PerInstanceData> instance_data_;
+	struct Terrain {
+		Terrain();
+		~Terrain();
 
-	// Per-vertex data.
-	Gl::Buffer<PerVertexData> vertex_data_;
+		// The program used for drawing the terrain.
+		Gl::Program gl_program;
 
-	std::unique_ptr<Texture> dither_mask_;
+		// Uniform buffer with per-terrain information.
+		Gl::StreamingBuffer<PerTerrainData> terrain_data;
 
-	// Vertex attributes.
-	GLint in_vertex_coordinate_;
-	GLint in_patch_coordinate_;
-	GLint in_patch_basepix_;
+		// Per-instance/patch data.
+		Gl::StreamingBuffer<PerInstanceData> instance_data;
 
-	// Uniforms.
-	GLint u_position_scale_;
-	GLint u_position_offset_;
-	GLint u_z_value_;
-	GLint u_texture_dimensions_;
+		// Per-vertex data.
+		Gl::Buffer<PerVertexData> vertex_data;
 
-	GLint u_terrain_base_;
-	GLint u_terrain_texture_;
-	GLint u_dither_texture_;
+		std::unique_ptr<Texture> dither_mask;
 
-	// Uniform block.
-	GLint block_terrains_idx_;
+		// Vertex attributes.
+		GLint in_vertex_coordinate;
+		GLint in_patch_coordinate;
+		GLint in_patch_basepix;
+
+		// Uniforms.
+		GLint u_position_scale;
+		GLint u_position_offset;
+		GLint u_z_value;
+		GLint u_texture_dimensions;
+
+		GLint u_terrain_base;
+		GLint u_terrain_texture;
+		GLint u_dither_texture;
+
+		// Uniform block.
+		GLint block_terrains_idx;
+	} terrain_;
+
+	struct Roads {
+		Roads();
+		~Roads();
+
+		// The program used for drawing the roads.
+		Gl::Program gl_program;
+
+		// Index (element array) buffer.
+		Gl::Buffer<uint16_t> gl_index_buffer;
+		unsigned num_index_roads;
+
+		// The per-road data buffer.
+		Gl::StreamingBuffer<PerRoadData> road_data;
+
+		// Uniforms.
+		GLint u_position_scale;
+		GLint u_position_offset;
+		GLint u_z_value;
+
+		GLint u_terrain_base;
+		GLint u_texture;
+
+		// Uniform block.
+		GLint block_textures_idx;
+	} roads_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainProgramGl4);
 };

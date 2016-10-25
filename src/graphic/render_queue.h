@@ -86,6 +86,7 @@ public:
 		kTerrainDither,
 		kTerrainRoad,
 		kTerrainGl4,
+		kTerrainRoadGl4,
 		kBlit,
 		kRect,
 		kLine,

@@ -24,7 +24,12 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/walkingdir.h"
 #include "logic/map.h"
+#include "logic/player.h"
+#include "logic/roadtype.h"
+#include "wui/edge_overlay_manager.h"
+#include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
 
 using namespace Widelands;
@@ -100,6 +105,8 @@ void GameRendererGl4::draw(RenderTarget& dst,
 	args_.surface_width = surface->width();
 	args_.surface_height = surface->height();
 
+	scan_fields();
+
 	// Enqueue the drawing of the terrain.
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kTerrainGl4;
@@ -113,5 +120,52 @@ void GameRendererGl4::draw(RenderTarget& dst,
 	i.terrain_gl4_arguments = &args_;
 	RenderQueue::instance().enqueue(i);
 
+	if (!args_.roads.empty()) {
+		i.program_id = RenderQueue::Program::kTerrainRoadGl4;
+		i.blend_mode = BlendMode::UseAlpha;
+		RenderQueue::instance().enqueue(i);
+	}
+
 	draw_objects(dst, egbase, view_offset, player, args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
+}
+
+void GameRendererGl4::scan_fields() {
+	const EditorGameBase& egbase = args_.perspective->egbase();
+	const Player* player = args_.perspective->player();
+	auto& map = egbase.map();
+	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
+
+	args_.roads.clear();
+
+	for (int fy = args_.minfy; fy <= args_.maxfy; ++fy) {
+		for (int fx = args_.minfx; fx <= args_.maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords coords = map.get_fcoords(ncoords);
+			uint8_t roads;
+			if (!player || player->see_all()) {
+				roads = coords.field->get_roads();
+			} else {
+				const Player::Field& pf = player->fields()[map.get_index(ncoords, map.get_width())];
+				roads = pf.roads;
+			}
+			if (player)
+				roads |= edge_overlay_manager.get_overlay(ncoords);
+
+			uint8_t type = (roads >> RoadType::kEast) & RoadType::kMask;
+			if (type) {
+				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_E, coords.field->get_owned_by());
+			}
+
+			type = (roads >> RoadType::kSouthEast) & RoadType::kMask;
+			if (type) {
+				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_SE, coords.field->get_owned_by());
+			}
+
+			type = (roads >> RoadType::kSouthWest) & RoadType::kMask;
+			if (type) {
+				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_SW, coords.field->get_owned_by());
+			}
+		}
+	}
 }

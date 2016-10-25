@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "graphic/game_renderer_gl4.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/game_renderer_gl4.h"
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
