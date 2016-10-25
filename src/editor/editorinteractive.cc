@@ -151,6 +151,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	      [this](const Widelands::NoteFieldResourceChanged& note) {
 		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
 		   });
+
+	minimap_registry().minimap_type = MiniMapType::kStaticMap;
 }
 
 void EditorInteractive::register_overlays() {
@@ -658,7 +660,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// Make sure that we will start at coordinates (0,0).
-		set_viewpoint(Point(0, 0), true);
+		set_viewpoint(Vector2f(0, 0), true);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));

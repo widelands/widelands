@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,19 +17,14 @@
  *
  */
 
-#include "graphic/playercolor.h"
+#include "base/vector.h"
 
-#include "graphic/texture.h"
+#include <cmath>
 
-Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
-	int w = image->width();
-	int h = image->height();
-	Texture* rv = new Texture(w, h);
-	rv->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-	rv->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
-	return rv;
+Vector2f middle(const Vector2f& a, const Vector2f& b) {
+	return Vector2f((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
 }
 
-Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
-	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
+Vector2i round(const Vector2f& a) {
+	return Vector2i(std::lround(a.x), std::lround(a.y));
 }

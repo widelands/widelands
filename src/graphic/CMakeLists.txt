@@ -133,6 +133,7 @@ wl_library(graphic_terrain_programs
     graphic_surface
     io_filesystem
     logic
+    logic_widelands_geometry
 )
 
 wl_library(graphic_draw_programs
@@ -218,7 +219,6 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
-    graphic_image_io
     graphic_surface
     logic
     wui_mapview_pixelfunctions

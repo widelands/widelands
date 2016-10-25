@@ -105,7 +105,7 @@ void EditorSetStartingPosTool::set_starting_pos(EditorInteractive& eia,
 	assert(player_image);
 
 	overlay_manager->register_overlay(
-	   c, player_image, 4, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y), overlay_id);
+	   c, player_image, 8, Vector2i(player_image->width() / 2, STARTING_POS_HOTSPOT_Y), overlay_id);
 
 	//  set new player pos
 	map->set_starting_pos(plnum, c);

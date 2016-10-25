@@ -53,7 +53,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
 
 	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");

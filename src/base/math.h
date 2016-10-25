@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,19 +17,27 @@
  *
  */
 
-#include "graphic/playercolor.h"
+#ifndef WL_BASE_MATH_H
+#define WL_BASE_MATH_H
 
-#include "graphic/texture.h"
+#include "base/macros.h"
 
-Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
-	int w = image->width();
-	int h = image->height();
-	Texture* rv = new Texture(w, h);
-	rv->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
-	rv->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
-	return rv;
+namespace math {
+
+// Returns 1 for positive and -1 for negative numbers.
+template <typename T>
+T sign(const T& val) {
+	return val < T(0.) ? T(-1.) : T(1.);
 }
 
-Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
-	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
+// Clamps 'val' to 'min' and 'max'.
+template <typename T>
+T clamp(const T& val, const T& low, const T& high) {
+	if (val < low) { return low; }
+	if (val > high) { return high; }
+	return val;
 }
+
+}  // namespace math
+
+#endif  // end of include guard: WL_BASE_MATH_H
