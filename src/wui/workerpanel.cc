@@ -77,14 +77,14 @@ protected:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
-	Point calc_pos(uint32_t row, uint32_t col) const;
+	Vector2i calc_pos(uint32_t row, uint32_t col) const;
 	const Worker * find_worker(int32_t x, int32_t y) const;
 
 	struct Icon {
 		Widelands::OPtr<Worker> worker;
 		uint32_t row;
 		uint32_t col;
-		Point pos;
+		Vector2i pos;
 
 		/**
 		 * Experience when last drawing
@@ -257,8 +257,8 @@ void WorkerPanel::think()
 	last_animate_time_ = curtime;
 
 	for (Icon& icon : icons_) {
-		Point goal = calc_pos(icon.row, icon.col);
-		Point dp = goal - icon.pos;
+		Vector2i goal = calc_pos(icon.row, icon.col);
+		Vector2i dp = goal - icon.pos;
 
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
@@ -279,7 +279,7 @@ void WorkerPanel::think()
 	}
 
 	if (changes) {
-		Point mousepos = get_mouse_position();
+		Vector2i mousepos = get_mouse_position();
 		mouseover_fn_(find_worker(mousepos.x, mousepos.y));
 	}
 }
@@ -291,16 +291,10 @@ void WorkerPanel::draw(RenderTarget & dst)
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows)
-		dst.fill_rect
-			(Rect(Point(0, 0), get_w(), icon_height_ * fullrows),
-			 RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(Rectf(0, 0, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
 	if (capacity % kMaxColumns)
-		dst.fill_rect
-			(Rect
-				(Point(0, icon_height_ * fullrows),
-				 icon_width_ * (capacity % kMaxColumns),
-				 icon_height_),
-			 RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(Rectf(0, icon_height_ * fullrows,
+			icon_width_ * (capacity % kMaxColumns), icon_height_), RGBAColor(0, 0, 0, 0));
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
@@ -308,14 +302,18 @@ void WorkerPanel::draw(RenderTarget & dst)
 		if (!worker)
 			continue;
 
-        dst.blit(icon.pos + Point(kIconBorder, kIconBorder), worker->descr().icon());
-		// TODO(Notabilis): Print experience on top of icon (optional)
+		// This should probably call something similar to soldier::draw_info_icon()
+		dst.blit(icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), worker->descr().icon());
+//		constexpr float kNoZoom = 1.f;
+//		worker->draw_info_icon(
+//		   icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), kNoZoom, false, &dst);
+		// TODO(Notabilis): Print experience on top of icon
 	}
 }
 
-Point WorkerPanel::calc_pos(uint32_t row, uint32_t col) const
+Vector2i WorkerPanel::calc_pos(uint32_t row, uint32_t col) const
 {
-	return Point(col * icon_width_, row * icon_height_);
+	return Vector2i(col * icon_width_, row * icon_height_);
 }
 
 /**
@@ -324,8 +322,8 @@ Point WorkerPanel::calc_pos(uint32_t row, uint32_t col) const
 const Worker * WorkerPanel::find_worker(int32_t x, int32_t y) const
 {
 	for (const Icon& icon : icons_) {
-		Rect r(icon.pos, icon_width_, icon_height_);
-		if (r.contains(Point(x, y))) {
+		Rectf r(icon.pos, icon_width_, icon_height_);
+		if (r.contains(Vector2i(x, y))) {
 			return icon.worker.get(egbase());
 		}
 	}
