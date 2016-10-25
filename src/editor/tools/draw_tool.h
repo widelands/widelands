@@ -43,8 +43,8 @@ struct EditorDrawTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const* get_sel_impl() const override {
-		return "EDITOR_DRAW_TOOL";
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/novalue.png");
 	}
 
 	void add_action(EditorToolAction ac, EditorActionArgs& args);

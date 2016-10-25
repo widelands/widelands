@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,12 +17,19 @@
  *
  */
 
-#ifndef WL_LOGIC_CONSTANTS_H
-#define WL_LOGIC_CONSTANTS_H
+#include "graphic/playercolor.h"
 
-#include <cstdint>
+#include "graphic/texture.h"
 
-/// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
+	int w = image->width();
+	int h = image->height();
+	Texture* rv = new Texture(w, h);
+	rv->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
+	rv->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
+	return rv;
+}
 
-#endif  // end of include guard: WL_LOGIC_CONSTANTS_H
+Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
+	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
+}

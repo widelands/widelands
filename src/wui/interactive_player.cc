@@ -31,7 +31,6 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
-#include "logic/constants.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -364,7 +363,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	}
 
 	int const n = atoi(args[1].c_str());
-	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
+	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
 	}
