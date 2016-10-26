@@ -28,8 +28,8 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -39,23 +39,6 @@
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
-
-namespace {
-static char const* const flag_pictures[] = {
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
@@ -117,25 +100,27 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (save_ != us.position) {
-				std::string pic;
+				const Image* position_image;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					pic = flag_pictures[us.position];
+					position_image = playercolor_image(
+					   us.position, g_gr->images().get("images/players/genstats_player.png"),
+					   g_gr->images().get("images/players/genstats_player_pc.png"));
 					temp_tooltip =
 					   (boost::format(_("Player %u")) % static_cast<unsigned int>(us.position + 1))
 					      .str();
 				} else {
-					pic = "images/wui/fieldaction/menu_tab_watch.png";
+					position_image = g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png");
 					temp_tooltip = _("Spectator");
 				}
 
 				// Either Button if changeable OR text if not
 				if (id_ == s->settings().usernum) {
-					type->set_pic(g_gr->images().get(pic));
+					type->set_pic(position_image);
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
 				} else {
-					type_icon->set_icon(g_gr->images().get(pic));
+					type_icon->set_icon(position_image);
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
@@ -174,7 +159,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     tribepics_(tp),
 	     tribenames_(tn) {
 		set_size(w, h);
-		const Image* player_image = g_gr->images().get(player_pictures_small[id]);
+		const Image* player_image =
+		   playercolor_image(id, g_gr->images().get("images/players/player_position_menu.png"),
+		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player, UI::Align::kHCenter);
@@ -266,7 +253,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_tooltip(_("Shared in"));
 			type->set_pic(g_gr->images().get("images/ui_fsmenu/shared_in.png"));
 			const Image* player_image =
-			   g_gr->images().get(player_pictures_small[player_setting.shared_in - 1]);
+			   playercolor_image(player_setting.shared_in - 1,
+			                     g_gr->images().get("images/players/player_position_menu.png"),
+			                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 			assert(player_image);
 			tribe->set_pic(player_image);
 			tribe->set_tooltip(
@@ -420,7 +409,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	labels.back()->set_fontsize(small_font);
 
 	playerbox.set_size(w * 9 / 15, h - buth);
-	multi_player_player_groups.resize(MAX_PLAYERS);
+	multi_player_player_groups.resize(kMaxPlayers);
 	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
 		   &playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get(), tribepics_, tribenames_);
@@ -452,7 +441,7 @@ void MultiPlayerSetupGroup::refresh() {
 	}
 
 	// Update player groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
+	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		multi_player_player_groups.at(i)->refresh();
 	}
 }

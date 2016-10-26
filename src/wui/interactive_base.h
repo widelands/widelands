@@ -183,7 +183,7 @@ protected:
 	bool handle_key(bool down, SDL_Keysym) override;
 
 	void unset_sel_picture();
-	void set_sel_picture(const char* const);
+	void set_sel_picture(const Image* image);
 	void adjust_toolbar_position() {
 		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}

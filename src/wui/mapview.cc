@@ -250,20 +250,22 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
 	float zoom = zoom_ * static_cast<float>(
 	                        std::pow(1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	zoom_around(zoom, last_mouse_pos_.cast<float>());
+	return true;
+}
 
+void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
 	// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
 	// performance and to avoid numeric glitches with more extreme values.
 	constexpr float kMaxZoom = 4.f;
-	zoom = math::clamp(zoom, 1.f / kMaxZoom, kMaxZoom);
+	new_zoom = math::clamp(new_zoom, 1.f / kMaxZoom, kMaxZoom);
 
 	// Zoom around the current mouse position. See
 	// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 	// for a good explanation of this math.
-	const Vector2f offset = -last_mouse_pos_.cast<float>() * (zoom - zoom_);
-
-	zoom_ = zoom;
+	const Vector2f offset = -panel_pixel * (new_zoom - zoom_);
+	zoom_ = new_zoom;
 	set_viewpoint(viewpoint_ + offset, false);
-	return true;
 }
 
 /*
@@ -279,3 +281,29 @@ void MapView::track_sel(const Vector2f& p) {
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
 	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
 }
+
+bool MapView::handle_key(bool down, SDL_Keysym code) {
+	if (!down) {
+		return false;
+	}
+	if (!code.mod & KMOD_CTRL) {
+		return false;
+	}
+
+	constexpr float kPercentPerKeyPress = 0.10f;
+	switch (code.sym) {
+	case SDLK_PLUS:
+		zoom_around(zoom_ - kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		return true;
+	case SDLK_MINUS:
+		zoom_around(zoom_ + kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		return true;
+	case SDLK_0:
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		return true;
+	default:
+		return false;
+	}
+	NEVER_HERE();
+}
+

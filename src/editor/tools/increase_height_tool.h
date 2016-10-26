@@ -47,8 +47,8 @@ struct EditorIncreaseHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
-	char const* get_sel_impl() const override {
-		return "images/wui/editor/fsel_editor_increase_height.png";
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/wui/editor/fsel_editor_increase_height.png");
 	}
 
 	int32_t get_change_by() const {

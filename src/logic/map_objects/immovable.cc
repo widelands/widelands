@@ -35,7 +35,6 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -530,7 +529,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
-		if (pn && pn <= MAX_PLAYERS) {
+		if (pn && pn <= kMaxPlayers) {
 			Player* plr = egbase().get_player(pn);
 			if (!plr)
 				throw GameDataError("Immovable::load: player %u does not exist", pn);
