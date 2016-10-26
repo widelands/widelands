@@ -43,8 +43,8 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	char const* get_sel_impl() const override {
-		return FSEL_EUPS_FILENAME;
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get(FSEL_EUPS_FILENAME);
 	}
 };
 
@@ -65,8 +65,8 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	char const* get_sel_impl() const override {
-		return FSEL_ESPS_FILENAME;
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get(FSEL_ESPS_FILENAME);
 	}
 };
 

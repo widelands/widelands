@@ -93,6 +93,7 @@ protected:
 	UI::UniqueWindow::Registry game_summary_;
 
 	UI::Button toggle_buildhelp_;
+	UI::Button reset_zoom_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;
