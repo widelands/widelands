@@ -42,7 +42,7 @@ function burn_tavern_down()
 
    o = message_box_objective(plr, inventory1)
    while not mv.windows.stock_menu do sleep(200) end
-   set_objective_done(o, 0)
+   set_objective_done(o, wl.Game().real_speed)
 
    o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
