@@ -97,7 +97,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 
 		registry_->window = this;
 		if (registry_->valid_pos) {
-			set_pos(Point(registry_->x, registry_->y));
+			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
 		if (registry_->on_create) {

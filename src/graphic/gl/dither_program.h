@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
@@ -66,7 +66,7 @@ private:
 	// this vertex.
 	void add_vertex(const FieldsToDraw::Field& field,
 	                TrianglePoint triangle_point,
-	                const FloatPoint& texture_offset);
+	                const Vector2f& texture_offset);
 
 	struct PerVertexData {
 		float gl_x;

@@ -26,9 +26,9 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -214,7 +214,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h() / 2, settings, butw_, buth_);
+	   this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h(), settings, butw_, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -481,7 +481,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 	} else {
 		// Write client infos
 		std::string client_info =
-		   (settings.playernum >= 0) && (settings.playernum < MAX_PLAYERS) ?
+		   (settings.playernum >= 0) && (settings.playernum < kMaxPlayers) ?
 		      (boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
 		      _("You are a spectator.");
 		client_info_.set_text(client_info);
@@ -538,9 +538,9 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 	std::string infotext = _("Saved players are:");
-	std::string player_save_name[MAX_PLAYERS];
-	std::string player_save_tribe[MAX_PLAYERS];
-	std::string player_save_ai[MAX_PLAYERS];
+	std::string player_save_name[kMaxPlayers];
+	std::string player_save_tribe[kMaxPlayers];
+	std::string player_save_ai[kMaxPlayers];
 
 	uint8_t i = 1;
 	for (; i <= nr_players_; ++i) {
@@ -649,7 +649,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
 	suggested_teams_box_->set_pos(
-	   Point(suggested_teams_box_->get_x(),
+	   Vector2i(suggested_teams_box_->get_x(),
 	         back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
 }
 

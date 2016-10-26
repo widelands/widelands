@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015
@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-26 08:36+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2015-03-01 01:00+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>\n"
-"Language-Team: Malay (http://www.transifex.com/projects/p/widelands/language/ms/)\n"
+"Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ms\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:15
-#: ../../maps/Plateau.wmf/scripting/texts.lua:17
-#: ../../maps/Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:17
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid "The Forbidden Island"
 msgstr "Pulau Larangan"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:18
-#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:18
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:69
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -34,49 +34,49 @@ msgid ""
 "positions."
 msgstr "Akhirnya! Kita berjaya melangkah masuk kearah kemenangan! Malam tadi, kita berjaya mendarat di pulau larangan dan mengalahkan beberapa orang pengawal yang memantau bahagian barat-daya pulau ini. Saya pasti tiada hulubalang yang menghidu kedatangan kita buat masa ini. Oleh itu kita perlu berdiam diri dan bina infrastruktur secepat yang mungkin. Selepas ini kita akan berupaya menyerang pertahanan mereka."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:26
-#: ../../maps/Plateau.wmf/scripting/texts.lua:28
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
 msgstr "Tawan Istana Purba"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:29
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Kalahkan Lanissa dan tawan istana purba"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:35
-#: ../../maps/Plateau.wmf/scripting/texts.lua:37
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
 msgstr "Kalahkan Erwyn"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:38
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Kalahkan Erwyn. Dia mengetuai kuasa ketenteraan pihak lawan yang terkuat di dalam pulau ini."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:43
-#: ../../maps/Plateau.wmf/scripting/texts.lua:45
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
 msgstr "Kalahkan Jomo"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:46
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Kalahkan Jomo. Dia bertanggungjawab mengurus bekalan makanan tentera."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:64
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:64
 msgid "First Briefing"
 msgstr "Taklimat Pertama"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:74
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:74
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:85
 msgid "Second Briefing"
 msgstr "Taklimat Kedua"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
 msgstr "Istana Purba"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -84,7 +84,7 @@ msgid ""
 "craft."
 msgstr "Penemuat hebat! Salah seorang peninjau kita telah menemui istana besar ditengah-tengah dataran lama. Istana tersebut sudah lama berada disitu dan dibina dalam gaya purba. Ia bukan hasil binaan orang-orang gasar."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:80
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:80
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -92,17 +92,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Diharap Lanissa tidak perasan kedatangan kita ke istana tersebut. Mungkin kita ada peluang menawan bangunan ini tanpa melibatkan pertempuran yang besar! Walaubagaimanapun, kita perlu menawan istana ini. Ia adalah kunci utama kemenangan kita di pulau larangan ini."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
 msgstr "Istana Purba Ditawan"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:90
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Hebat! Akhirnya tentera kita berjaya mengalahkan Lanissa dan tenteranya. Istana purba milik kita!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:91
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:91
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -115,46 +115,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "Sungguh menakjubkan kita dapat melihat jauh dari menara tertinggi istana ini. Kita dapat memantau keseluruhan pulau. Oh, patutlah kenapa Lanissa tidak dapat melihat pergerakan kita dan tidak membuat apa-apa persediaan. Lebih baik dia dalam keadaan sebegini. Perkara paling penting adalah saki-baki tentera musuh yang ada. Kita telah menemui kedudukan pihak musuh yang diketuai oleh Erwyn di utara dan timur istana. Dia merupakan hulubalang yang kuat dan sudah pasti memimpin pahlawan yang terkuat. Di sebelah selatan, kita dapat melihat beberapa infrastruktur bekalan makanan yang dikawal oleh Jomo – hulubalang yang lebih muda – dan kita perlu musnahkan infrastruktur tersebut supaya bekalan makanan pihak musuh terputus bekalan."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:96
-#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:96
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:105
 msgid "Another Briefing"
 msgstr "Taklimat Berikutnya"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:100
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:100
 msgid "Erwyn Defeated"
 msgstr "Erwyn Berjaya Dikalahkan"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:101
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Bagus! Etwyn menarik diri bila dia melihat bangunan terakhirnya musnah terbakar. Kurang seorang hulubalang di dalam pulau ini!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:109
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:109
 msgid "Jomo Defeated"
 msgstr "Jomo Berjaya Dikalahkan"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:110
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Tahniah! Jomo menarik diri bila dia melihat bangunan terakhirnya musnah terbakar. Kurang lagi seorang hulubalang di dalam pulau ini!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:114
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:114
 msgid "Last Briefing"
 msgstr "Taklimat Akhir"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:118
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:118
 msgid "Victory!"
 msgstr "Kemenangan Mutlak!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:119
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:119
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Akhirnya! Pulau ini milik kita sepenuhnya. Mulai sekarang kita perlu pertahankannya lebih baik berbanding hulubalang-hulubalang sebelum ini."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:120
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

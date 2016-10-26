@@ -26,7 +26,7 @@ dirname = path.dirname(__file__)
 --
 --    **name**: A string containing the internal name of this building.
 --
---    **descname**: The translatable display name. use ``pgettext`` with the ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` with the ``msgctxt`` above to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this building.
 --
@@ -144,8 +144,8 @@ tribes:new_productionsite_type {
          descname = _"forging an advanced shield",
          actions = {
             "return=skipped unless economy needs shield_advanced",
-            "sleep=32000",
             "consume=iron:2 coal:2 gold",
+            "sleep=32000",
             "animate=working 45000",
             "produce=shield_advanced"
          }

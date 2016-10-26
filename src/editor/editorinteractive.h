@@ -181,6 +181,7 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
+	UI::Button* reset_zoom_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 };

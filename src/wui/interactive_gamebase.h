@@ -31,8 +31,7 @@ enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	class GameMainMenuWindows {
-	public:
+	struct GameMainMenuWindows {
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
 		UI::UniqueWindow::Registry readme;
@@ -91,6 +90,7 @@ protected:
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
 	UI::Button* toggle_buildhelp_;
+	UI::Button* reset_zoom_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;

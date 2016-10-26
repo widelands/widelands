@@ -91,8 +91,8 @@ tribes:new_productionsite_type {
          descname = _"forging a suit of armor",
          actions = {
             "return=skipped unless economy needs armor",
-            "sleep=32000",
             "consume=iron coal cloth",
+            "sleep=32000",
             "animate=working 45000",
             "produce=armor"
          }
@@ -102,8 +102,8 @@ tribes:new_productionsite_type {
          descname = _"forging a suit of chain armor",
          actions = {
             "return=skipped unless economy needs armor_chain",
-            "sleep=32000",
             "consume=iron:2 coal cloth",
+            "sleep=32000",
             "animate=working 45000",
             "produce=armor_chain"
          }
@@ -113,8 +113,8 @@ tribes:new_productionsite_type {
          descname = _"forging a suit of gilded armor",
          actions = {
             "return=skipped unless economy needs armor_gilded",
-            "sleep=32000",
             "consume=iron:2 coal:2 cloth gold",
+            "sleep=32000",
             "animate=working 45000",
             "produce=armor_gilded"
          }

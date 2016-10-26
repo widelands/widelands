@@ -482,7 +482,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().move_view_to(stats_vector[last_building_index_].pos);
+		iplayer().center_view_on_coords(stats_vector[last_building_index_].pos);
 	}
 	low_production_reset_focus();
 	update();
@@ -502,7 +502,7 @@ void BuildingStatisticsMenu::think() {
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
 		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
-		navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
 	}
 
 	// Update statistics
@@ -724,7 +724,7 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 
 	// Update for current button
 	current_building_type_ = id;
-	building_buttons_[current_building_type_]->set_style(UI::Button::Style::kPermpressed);
+	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	low_production_reset_focus();
 	has_selection_ = true;

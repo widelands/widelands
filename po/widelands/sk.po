@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
@@ -9,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 07:43+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-26 07:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -33,14 +34,14 @@ msgstr[2] "Nové úlohy"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s a %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s alebo %2$s"
@@ -49,8 +50,8 @@ msgstr "%1$s alebo %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -58,7 +59,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s a %2$s"
@@ -579,7 +580,7 @@ msgid "Show Filenames"
 msgstr "Zobraziť názvy súborov"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:104
-#: ../../src/ui_fsmenu/loadgame.cc:330
+#: ../../src/ui_fsmenu/loadgame.cc:333
 #: ../../src/wui/game_main_menu_save_game.cc:70
 msgid "Map Name:"
 msgstr "Názov mapy:"
@@ -590,8 +591,8 @@ msgstr "Autori:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 #: ../../src/ui_fsmenu/campaign_select.cc:83
-#: ../../src/ui_fsmenu/campaign_select.cc:153
-#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:177
+#: ../../src/ui_fsmenu/campaign_select.cc:156
+#: ../../src/ui_fsmenu/campaign_select.cc:379 ../../src/wui/mapdetails.cc:177
 msgid "Description:"
 msgstr "Popis:"
 
@@ -651,7 +652,7 @@ msgid "Create Map"
 msgstr "Vytvoriť mapu"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:89
-#: ../../src/ui_fsmenu/loadgame.cc:332
+#: ../../src/ui_fsmenu/loadgame.cc:335
 msgid "Players:"
 msgstr "Hráči:"
 
@@ -767,7 +768,7 @@ msgid "Make Directory"
 msgstr "Vytvoriť priečinok"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:286 ../../src/ui_fsmenu/loadgame.cc:418
+#: ../../src/ui_fsmenu/loadgame.cc:289 ../../src/ui_fsmenu/loadgame.cc:421
 msgid "Filename:"
 msgstr "Názov súboru:"
 
@@ -2101,7 +2102,7 @@ msgid "Choose a campaign"
 msgstr "Zvoľte kampaň"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:91
-#: ../../src/ui_fsmenu/campaign_select.cc:313
+#: ../../src/ui_fsmenu/campaign_select.cc:317
 #: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "Return to the main menu"
 msgstr "Vrátiť sa do hlavného menu"
@@ -2144,106 +2145,106 @@ msgstr "Názov kmeňa"
 msgid "Campaign Name"
 msgstr "Názov kampane"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:150
+#: ../../src/ui_fsmenu/campaign_select.cc:153
 msgid "Campaign Name:"
 msgstr "Názov kampane:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:151
+#: ../../src/ui_fsmenu/campaign_select.cc:154
 msgid "Tribe:"
 msgstr "Kmeň:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:152
+#: ../../src/ui_fsmenu/campaign_select.cc:155
 msgid "Difficulty:"
 msgstr "Náročnosť:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:274
+#: ../../src/ui_fsmenu/campaign_select.cc:278
 msgid "Choose a scenario"
 msgstr "Zvoľte scenár"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:274
+#: ../../src/ui_fsmenu/campaign_select.cc:278
 msgid "Choose a tutorial"
 msgstr "Zvoľte tutoriál"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:315
+#: ../../src/ui_fsmenu/campaign_select.cc:319
 msgid "Play this tutorial"
 msgstr "Hrať tento tutoriál"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:316
+#: ../../src/ui_fsmenu/campaign_select.cc:320
 msgid "The name of this tutorial"
 msgstr "Názov tohto tutoriálu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:317
+#: ../../src/ui_fsmenu/campaign_select.cc:321
 msgid "What you will learn in this tutorial"
 msgstr "Čo sa dozviete v tomto tutoriáli"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:319
+#: ../../src/ui_fsmenu/campaign_select.cc:323
 msgid "Play this scenario"
 msgstr "Hrať tento scenár"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:320
+#: ../../src/ui_fsmenu/campaign_select.cc:324
 msgid "The name of this scenario"
 msgstr "Názov tohto scenára"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:334
+#: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The order in which the tutorials should be played"
 msgstr "Poradie, v ktorom by sa tutoriály mali hrať"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "Tutorial Name"
 msgstr "Názov tutoriálu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:337
+#: ../../src/ui_fsmenu/campaign_select.cc:341
 msgid "The number of this scenario in the campaign"
 msgstr "Poradie scenára v kampani"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:338
+#: ../../src/ui_fsmenu/campaign_select.cc:342
 msgid "Scenario Name"
 msgstr "Názov scenára"
 
 #. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:342
+#: ../../src/ui_fsmenu/campaign_select.cc:346
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:373
+#: ../../src/ui_fsmenu/campaign_select.cc:377
 msgid "Tutorial:"
 msgstr "Tutoriál:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:374 ../../src/wui/mapdetails.cc:136
+#: ../../src/ui_fsmenu/campaign_select.cc:378 ../../src/wui/mapdetails.cc:136
 msgid "Scenario:"
 msgstr "Scenár:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:388
+#: ../../src/ui_fsmenu/campaign_select.cc:392
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Súbor campaigns.conf obsahuje neplatnú cestu k súboru: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:399
+#: ../../src/ui_fsmenu/campaign_select.cc:403
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "Dizajnér tohto tutoriálu"
 msgstr[1] "Dizajnéri tohto tutoriálu"
 msgstr[2] "Dizajnéri tohto tutoriálu"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:402
+#: ../../src/ui_fsmenu/campaign_select.cc:406
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Dizajnér tohto scenára"
 msgstr[1] "Dizajnéri tohto scenára"
 msgstr[2] "Dizajnéri tohto scenára"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:405 ../../src/wui/mapdetails.cc:161
+#: ../../src/ui_fsmenu/campaign_select.cc:409 ../../src/wui/mapdetails.cc:161
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
 msgstr[1] "Autori:"
 msgstr[2] "Autori:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:432
+#: ../../src/ui_fsmenu/campaign_select.cc:436
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Vyberte si zo zoznamu tutoriál a potom stlačte „OK“."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:434
+#: ../../src/ui_fsmenu/campaign_select.cc:438
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Popis aktuálne vybraného tutoriálu sa zobrazuje vpravo."
@@ -2637,43 +2638,43 @@ msgid ""
 "the map’s name followed by the last objective achieved."
 msgstr "Názov súboru, ktorý sa použil pri uložení hry, po ktorom nasleduje názov mapy a prípadne aj posledná dokončená úloha."
 
-#: ../../src/ui_fsmenu/loadgame.cc:276
+#: ../../src/ui_fsmenu/loadgame.cc:279
 msgid "Save Date:"
 msgstr "Dátum uloženia:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:290
+#: ../../src/ui_fsmenu/loadgame.cc:293
 msgid "Do you really want to delete this replay?"
 msgstr "Naozaj chcete zmazať tento záznam?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:294
+#: ../../src/ui_fsmenu/loadgame.cc:297
 msgid "Do you really want to delete this game?"
 msgstr "Naozaj chcete zmazať túto hru?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:298
+#: ../../src/ui_fsmenu/loadgame.cc:301
 msgid "Confirm deleting file"
 msgstr "Potvrdenie vymazania súboru"
 
-#: ../../src/ui_fsmenu/loadgame.cc:331
+#: ../../src/ui_fsmenu/loadgame.cc:334
 msgid "Gametime:"
 msgstr "Herný čas:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:333
+#: ../../src/ui_fsmenu/loadgame.cc:336
 msgid "Win Condition:"
 msgstr "Podmienka na víťazstvo:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:362
+#: ../../src/ui_fsmenu/loadgame.cc:365
 msgid "Widelands Version:"
 msgstr "Verzia Widelands:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:519
+#: ../../src/ui_fsmenu/loadgame.cc:522
 msgid "Today, %1%:%2%"
 msgstr "Dnes, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:532
+#: ../../src/ui_fsmenu/loadgame.cc:535
 msgid "Yesterday, %1%:%2%"
 msgstr "Včera, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:538
+#: ../../src/ui_fsmenu/loadgame.cc:541
 msgid "%2% %1%, %3%"
 msgstr "%1%. %2% %3%"
 
@@ -2682,33 +2683,33 @@ msgstr "%1%. %2% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:559
+#: ../../src/ui_fsmenu/loadgame.cc:562
 msgid "SP"
 msgstr "SP"
 
-#: ../../src/ui_fsmenu/loadgame.cc:568
+#: ../../src/ui_fsmenu/loadgame.cc:571
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
-#: ../../src/ui_fsmenu/loadgame.cc:578
+#: ../../src/ui_fsmenu/loadgame.cc:581
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:595
+#: ../../src/ui_fsmenu/loadgame.cc:598
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Tento súbor je v nesprávnom formáte a nie je možné ho načítať. Možno bol vytvorený staršou verziou hry."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:598
+#: ../../src/ui_fsmenu/loadgame.cc:601
 msgid "Error message:"
 msgstr "Chybové hlásenie:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:611 ../../src/ui_fsmenu/loadgame.cc:613
+#: ../../src/ui_fsmenu/loadgame.cc:614 ../../src/ui_fsmenu/loadgame.cc:616
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Nekompatibilné: %s"
@@ -3420,7 +3421,7 @@ msgstr "%1% (Klávesová skratka: %2%)"
 #: ../../src/wui/game_message_menu.cc:519
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr ""
+msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:519
@@ -3435,12 +3436,12 @@ msgstr "Zobraziť iba správy od geológov"
 #: ../../src/wui/game_message_menu.cc:531
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr ""
+msgstr "Alt + 1"
 
 #: ../../src/wui/game_message_menu.cc:535
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr ""
+msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:535
@@ -3450,7 +3451,7 @@ msgstr "Zobraziť iba správy o ekonomike"
 #: ../../src/wui/game_message_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt + 3"
-msgstr ""
+msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:539
@@ -3460,7 +3461,7 @@ msgstr "Zobraziť iba správy o moreplavbe"
 #: ../../src/wui/game_message_menu.cc:543
 msgctxt "hotkey"
 msgid "Alt + 4"
-msgstr ""
+msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:543
@@ -3470,7 +3471,7 @@ msgstr "Zobraziť iba vojenské správy"
 #: ../../src/wui/game_message_menu.cc:547
 msgctxt "hotkey"
 msgid "Alt + 5"
-msgstr ""
+msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:547

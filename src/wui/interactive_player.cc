@@ -31,7 +31,6 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
-#include "logic/constants.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -78,13 +77,16 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { open_minimap(); };
+	minimap_registry().open_window = [this] { toggle_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-
-	if (multiplayer) {
+	reset_zoom_ = add_toolbar_button(
+		"wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	reset_zoom_->sigclicked.connect(
+		[this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+		if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
@@ -266,7 +268,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 		/* no break */
 		case SDLK_HOME:
-			move_view_to(game().map().get_starting_pos(player_number_));
+			center_view_on_coords(game().map().get_starting_pos(player_number_));
 			return true;
 
 		case SDLK_KP_ENTER:
@@ -308,7 +310,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	}
 
 	int const n = atoi(args[1].c_str());
-	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
+	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
 	}

@@ -6,13 +6,13 @@
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Venatrix, 2015
+# Elisabeth Jäger, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2016-03-02 09:51+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -514,7 +514,7 @@ msgstr "Du hast diese Mission vollendet. Du kannst, falls du möchtest, weitersp
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

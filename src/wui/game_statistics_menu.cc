@@ -44,7 +44,7 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	add_button("wui/menus/menu_building_stats", "building_stats", _("Building Statistics"),
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
-	box_.set_pos(Point(10, 10));
+	box_.set_pos(Vector2i(10, 10));
 	box_.set_size((34 + 5) * 4, 34);
 	set_inner_size(box_.get_w() + 20, box_.get_h() + 20);
 
