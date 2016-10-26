@@ -66,6 +66,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "sleep=14000",
             "consume=empire_bread,fish,meat",
+            "play_sound=sound/empire/taverns ration 100",
             "animate=working 19000",
             "produce=ration"
          }
@@ -77,6 +78,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs meal",
             "sleep=15000",
             "consume=empire_bread fish,meat",
+            "play_sound=sound/empire/taverns meal 100",
             "animate=working 20000",
             "produce=meal"
          }
