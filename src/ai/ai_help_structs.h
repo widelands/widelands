@@ -585,7 +585,9 @@ struct ManagementData {
 	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
-	void set_mutation_multiplicator(uint8_t value) {mutation_multiplicator = value;};
+	void set_mutation_multiplicator(uint8_t value) {
+		mutation_multiplicator = value;
+	};
 	bool test_consistency();
 
 private:
