@@ -3,15 +3,16 @@
 # 
 # Translators:
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-17 05:22+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:38
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Tämä on Widelands Build %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -41,13 +42,13 @@ msgstr " --<asetuksen-nimi>=arvo Ylikirjoittaa asetustiedoston asetuksen"
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=HAKEMISTO Käytä HAKEMISTO:a widelands data hakemistona."
+msgstr " --datadir=HAKEMISTO Käytä annettua hakemistoa widelandsin\n                      data tiedostoille"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=HAKEMISTO Käytä HAKEMISTO:a widelands asetustiedstoille,\n                      pelitallenteilla ja toistotiedostoille."
+msgstr " --homedir=HAKEMISTO Käytä HAKEMISTO:a widelands asetustiedstoille,\n                      pelitallenteilla ja toistotiedostoille"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
@@ -62,7 +63,7 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr "--coredump=[true|false]\nMuodostaa core dump tiedoston muistialueen\nylityksessä SDL:n käyttämisen sijaan"
 
 #: ../../src/wlapplication_messages.cc:64
 msgid ""
@@ -83,17 +84,17 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Käytetty lokalisaa
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr " --write_syncstreams=[true|false]\nLuo syncstream dump tiedostot verkkopelin debugaamisen helpottamiseksi "
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr "--autosave=[...] Automaattitallennus jokaisella n minuutilla"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr "--rolling_autosave=[...]\nKäytä näin montaa tiedostoa automaatisten tallennusten vierittämiseen"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Sound options:"
@@ -130,13 +131,13 @@ msgstr " --scenario=TIEDOSTO  Käynnistää annetun kartan suoraan kenaariona."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=TIEDOSTO  Avaa suoraan annetun pelitallennuksen"
+msgstr " --loadgame=TIEDOSTO  Avaa suoraan pelitallennuksen TIEDOSTO."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr "--script=TIEDOSTO Suorita annettu Lua skripti alustuksen jälkeen.\nToimii vain asetusten --scenario, --loadgame, tai --editor kanssa."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -148,11 +149,11 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr "--auto_roadbuild_mode=[true|false]\nAstuakko tienrakennusmoodiin\nautomaattisesti heti lipun sijoittamisen jälkeen,\nkun se ei ole vielä yhdistetty tiehen."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid "Graphic options:"
-msgstr ""
+msgstr "Grafiikkavallinnat:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -163,15 +164,15 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr "--fullscreen=[true|false]\nKäyttääkkö peli-ikkunalle koko näytön laajuutta."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr "--xres=[...] Ikkunan levelys pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr "--yres=[...] Ikkunan korkeus pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:123
 msgid "Options for the internal window manager:"
@@ -195,7 +196,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr "--dock_windows_to_edges=[true|false]\nTuhoa ikkunan reuna ruudun reunaa kohti\nsilloin kun ikkunan reuna on ruudun reunan vieressä."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid ""
@@ -215,7 +216,7 @@ msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Si
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose Käytä laajaa debug-tulostusta."
+msgstr " --verbose            Käytä laajaa debug-tulostusta"
 
 #: ../../src/wlapplication_messages.cc:149
 msgid " --help               Show this help"

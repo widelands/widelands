@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-08 16:37+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 06:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr "Feur"
 #: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
 msgid "Artifact"
-msgstr "Ball-ceàirde"
+msgstr "Ball-ealain"
 
 #: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
@@ -728,11 +728,11 @@ msgstr "Measgaichte"
 
 #: ../../data/world/init.lua:17
 msgid "Artifacts"
-msgstr "Buill-cheàirde"
+msgstr "Buill-ealain"
 
 #: ../../data/world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Buill-cheàirde”."
+msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Buill-ealain”."
 
 #: ../../data/world/init.lua:23
 msgid "Plants"

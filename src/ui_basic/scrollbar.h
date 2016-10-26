@@ -75,8 +75,8 @@ private:
 
 	void action(Area area);
 
-	void draw_button(RenderTarget&, Area, Rect);
-	void draw_area(RenderTarget&, Area, Rect);
+	void draw_button(RenderTarget&, Area, const Rectf&);
+	void draw_area(RenderTarget&, Area, const Rectf&);
 	void draw(RenderTarget&) override;
 	void think() override;
 

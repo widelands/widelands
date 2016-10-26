@@ -34,14 +34,14 @@ constexpr int kPadding = 1;
 
 }  // namespace
 
-TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
+TextureAtlas::Node::Node(const Recti& init_r) : used(false), r(init_r) {
 }
 
 void TextureAtlas::Node::split(int item_w, int item_h) {
 	assert(!used);
 
-	down.reset(new Node(Rect(r.x, r.y + item_h, r.w, r.h - item_h)));
-	right.reset(new Node(Rect(r.x + item_w, r.y, r.w - item_w, item_h)));
+	down.reset(new Node(Recti(r.x, r.y + item_h, r.w, r.h - item_h)));
+	right.reset(new Node(Recti(r.x + item_w, r.y, r.w - item_w, item_h)));
 	used = true;
 
 	// Note: we do not change the size of the root. It is not needed
@@ -77,21 +77,21 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
    const int max_dimension, const int texture_atlas_index, std::vector<PackedTexture>* pack_info) {
 
-	std::unique_ptr<Node> root(new Node(Rect(0, 0, blocks_.begin()->texture->width() + kPadding,
-	                                         blocks_.begin()->texture->height() + kPadding)));
+	std::unique_ptr<Node> root(new Node(Recti(0, 0, blocks_.begin()->texture->width() + kPadding,
+	                                          blocks_.begin()->texture->height() + kPadding)));
 
 	const auto grow_right = [&root](int delta_w) {
-		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w + delta_w, root->r.h)));
+		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w + delta_w, root->r.h)));
 		new_root->used = true;
-		new_root->right.reset(new Node(Rect(root->r.w, 0, delta_w, root->r.h)));
+		new_root->right.reset(new Node(Recti(root->r.w, 0, delta_w, root->r.h)));
 		new_root->down.reset(root.release());
 		root.reset(new_root.release());
 	};
 
 	const auto grow_down = [&root](int delta_h) {
-		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w, root->r.h + delta_h)));
+		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w, root->r.h + delta_h)));
 		new_root->used = true;
-		new_root->down.reset(new Node(Rect(0, root->r.h, root->r.w, delta_h)));
+		new_root->down.reset(new Node(Recti(0, root->r.h, root->r.w, delta_h)));
 		new_root->right.reset(root.release());
 		root.reset(new_root.release());
 	};
@@ -134,20 +134,20 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 	}
 
 	std::unique_ptr<Texture> texture_atlas(new Texture(root->r.w, root->r.h));
-	texture_atlas->fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
+	texture_atlas->fill_rect(Rectf(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
 
 	const auto packed_texture_id = texture_atlas->blit_data().texture_id;
 	for (Block& block : packed) {
 		texture_atlas->blit(
-		   Rect(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
-		   *block.texture, Rect(0, 0, block.texture->width(), block.texture->height()), 1.,
+		   Rectf(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
+		   *block.texture, Rectf(0, 0, block.texture->width(), block.texture->height()), 1.,
 		   BlendMode::Copy);
 
 		pack_info->emplace_back(PackedTexture(
 		   texture_atlas_index, block.index,
 		   std::unique_ptr<Texture>(new Texture(
 		      packed_texture_id,
-		      Rect(block.node->r.origin(), block.texture->width(), block.texture->height()),
+		      Recti(block.node->r.origin(), block.texture->width(), block.texture->height()),
 		      root->r.w, root->r.h))));
 	}
 	blocks_ = not_packed;
