@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -75,16 +75,16 @@ private:
 	uint32_t buth_;
 
 	UI::Button select_map_, wincondition_, back_, ok_;
-	UI::Button* pos_[MAX_PLAYERS];
+	UI::Button* pos_[kMaxPlayers];
 	UI::Textarea title_, mapname_;
 	UI::Textarea name_, type_, team_, tribe_, init_, wincondition_type_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;  // optional
-	PlayerDescriptionGroup* players_[MAX_PLAYERS];
+	PlayerDescriptionGroup* players_[kMaxPlayers];
 	std::string filename_;
 	std::string filename_proof_;  // local var. to check UI state
-	std::string player_save_name_[MAX_PLAYERS];
-	std::string player_save_tribe_[MAX_PLAYERS];
+	std::string player_save_name_[kMaxPlayers];
+	std::string player_save_tribe_[kMaxPlayers];
 	int8_t nr_players_;
 	bool is_scenario_;
 	std::vector<std::string> win_condition_scripts_;

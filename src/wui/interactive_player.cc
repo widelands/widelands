@@ -31,7 +31,6 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
-#include "logic/constants.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -104,12 +103,16 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	toolbar_.add(&toggle_options_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
 	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
+	toolbar_.add(&reset_zoom_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	if (multiplayer) {
 		toolbar_.add(&toggle_chat_, UI::Align::kLeft);
 		toggle_chat_.set_visible(false);
 		toggle_chat_.set_enabled(false);
+		toolbar_.add_space(15);
 	}
 
 	toolbar_.add(&toggle_objectives_, UI::Align::kLeft);
@@ -366,7 +369,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	}
 
 	int const n = atoi(args[1].c_str());
-	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
+	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
 	}

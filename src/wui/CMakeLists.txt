@@ -71,6 +71,7 @@ wl_library(wui_common
     base_i18n
     base_log
     graphic
+    graphic_playercolor
     graphic_text_layout
     io_filesystem
     logic
@@ -222,12 +223,14 @@ wl_library(wui
     graphic
     graphic_color
     graphic_minimap_renderer
+    graphic_playercolor
     graphic_surface
     graphic_text
     graphic_text_layout
     io_fileread
     io_filesystem
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     logic_widelands_geometry
