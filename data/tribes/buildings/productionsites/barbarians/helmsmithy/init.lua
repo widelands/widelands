@@ -89,8 +89,8 @@ tribes:new_productionsite_type {
          descname = _"forging a mask",
          actions = {
             "return=skipped unless economy needs helmet_mask",
-            "sleep=32000",
             "consume=coal iron:2",
+            "sleep=32000",
             "animate=working 45000",
             "produce=helmet_mask"
          }
@@ -100,8 +100,8 @@ tribes:new_productionsite_type {
          descname = _"forging a warhelm",
          actions = {
             "return=skipped unless economy needs helmet_warhelm",
-            "sleep=32000",
             "consume=coal gold iron:2",
+            "sleep=32000",
             "animate=working 55000",
             "produce=helmet_warhelm"
          }
