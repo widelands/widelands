@@ -119,7 +119,7 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 	void draw(uint32_t gametime,
-	          DrawText draw_text,
+	          WLDrawText draw_text,
 	          const Vector2f& point_on_dst,
 				 float scale,
 	          RenderTarget* dst) override;

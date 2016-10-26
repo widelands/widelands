@@ -940,7 +940,7 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-                const DrawText& draw_text,
+                const WLDrawText& draw_text,
                 const Vector2f& field_on_dst,
                 const float scale,
                 RenderTarget* dst) const {
@@ -948,7 +948,7 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	// Show ship name and current activity
 	std::string statistics_string = "";
-	if (draw_text & DrawText::kStatistics) {
+	if (draw_text & WLDrawText::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */

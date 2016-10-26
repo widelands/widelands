@@ -445,13 +445,13 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const DrawText& draw_text,
+void MapObject::do_draw_info(const WLDrawText& draw_text,
                              const std::string& census,
                              const std::string& statictics,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (draw_text == DrawText::kNone) {
+	if (draw_text == WLDrawText::kNone) {
 		return;
 	}
 
@@ -468,11 +468,11 @@ void MapObject::do_draw_info(const DrawText& draw_text,
 
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
 	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
-	if (draw_text & DrawText::kCensus) {
+	if (draw_text & WLDrawText::kCensus) {
 		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
-	if (draw_text & DrawText::kStatistics && !statictics.empty()) {
+	if (draw_text & WLDrawText::kStatistics && !statictics.empty()) {
 		const Vector2f statistics_pos =
 		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
 		      .cast<float>();
