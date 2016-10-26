@@ -62,7 +62,7 @@ public:
 		return buildcost_;
 	}
 
-	Point get_ware_hotspot() const {
+	Vector2i get_ware_hotspot() const {
 		return ware_hotspot_;
 	}
 
@@ -124,7 +124,7 @@ public:
 	}
 
 protected:
-	Point ware_hotspot_;
+	Vector2i ware_hotspot_;
 	Quantity default_target_quantity_;
 	std::string helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations walk_anims_;
