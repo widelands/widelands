@@ -264,7 +264,7 @@ public:
 	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
 	// required to draw the bob in the right size.
 	virtual void draw(const EditorGameBase&,
-	                  const WLDrawText& draw_text,
+	                  const TextToDraw& draw_text,
 	                  const Vector2f& field_on_dst,
 	                  float scale,
 	                  RenderTarget* dst) const;

@@ -312,11 +312,11 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 	void draw(uint32_t gametime,
-	          WLDrawText draw_text,
+	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
 				 float scale,
 	          RenderTarget* dst) override;
-	void draw_info(WLDrawText draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	void draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

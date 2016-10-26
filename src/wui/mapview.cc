@@ -131,20 +131,20 @@ void MapView::draw(RenderTarget& dst) {
 			return;
 	}
 
-	WLDrawText draw_text = WLDrawText::kNone;
+	TextToDraw draw_text = TextToDraw::kNone;
 	auto display_flags = intbase().get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		draw_text = draw_text | WLDrawText::kCensus;
+		draw_text = draw_text | TextToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		draw_text = draw_text | WLDrawText::kStatistics;
+		draw_text = draw_text | TextToDraw::kStatistics;
 	}
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		renderer_->rendermap(
 		   egbase, viewpoint_, zoom_, interactive_player->player(), draw_text, &dst);
 	} else {
-		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<WLDrawText>(draw_text), &dst);
+		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<TextToDraw>(draw_text), &dst);
 	}
 }
 

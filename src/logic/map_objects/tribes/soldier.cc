@@ -440,7 +440,7 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const WLDrawText&,
+                   const TextToDraw&,
                    const Vector2f& field_on_dst,
                    const float scale,
                    RenderTarget* dst) const {

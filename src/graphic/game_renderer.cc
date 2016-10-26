@@ -100,29 +100,29 @@ float field_brightness(const FCoords& fcoords,
 void draw_objects_for_visible_field(const EditorGameBase& egbase,
                                     const FieldsToDraw::Field& field,
                                     const float zoom,
-                                    const WLDrawText draw_text,
+                                    const TextToDraw draw_text,
                                     const Player* player,
                                     RenderTarget* dst) {
 	BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
-		WLDrawText draw_text_for_this_immovable = draw_text;
+		TextToDraw draw_text_for_this_immovable = draw_text;
 		const Player* owner = imm->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
 		    player->is_hostile(*owner)) {
 			draw_text_for_this_immovable =
-			   static_cast<WLDrawText>(draw_text_for_this_immovable & ~WLDrawText::kStatistics);
+			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
 		}
 
 		imm->draw(
 		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, zoom, dst);
 	}
 	for (Bob* bob = field.fcoords.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-		WLDrawText draw_text_for_this_bob = draw_text;
+		TextToDraw draw_text_for_this_bob = draw_text;
 		const Player* owner = bob->get_owner();
 		if (player != nullptr && owner != nullptr && !player->see_all() &&
 		    player->is_hostile(*owner)) {
 			draw_text_for_this_bob =
-			   static_cast<WLDrawText>(draw_text_for_this_bob & ~WLDrawText::kStatistics);
+			   static_cast<TextToDraw>(draw_text_for_this_bob & ~TextToDraw::kStatistics);
 		}
 		bob->draw(egbase, draw_text_for_this_bob, field.rendertarget_pixel, zoom, dst);
 	}
@@ -215,7 +215,7 @@ void draw_objects(const EditorGameBase& egbase,
                   const float zoom,
                   const FieldsToDraw& fields_to_draw,
                   const Player* player,
-                  const WLDrawText draw_text,
+                  const TextToDraw draw_text,
                   RenderTarget* dst) {
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
@@ -319,7 +319,7 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& viewpoint,
                              const float zoom,
                              const Widelands::Player& player,
-                             const WLDrawText draw_text,
+                             const TextToDraw draw_text,
                              RenderTarget* dst) {
 	draw(egbase, viewpoint, zoom, draw_text, &player, dst);
 }
@@ -327,7 +327,7 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& viewpoint,
                              const float zoom,
-                             const WLDrawText draw_text,
+                             const TextToDraw draw_text,
                              RenderTarget* dst) {
 	draw(egbase, viewpoint, zoom, draw_text, nullptr, dst);
 }
@@ -335,7 +335,7 @@ void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
 void GameRenderer::draw(const EditorGameBase& egbase,
                         const Vector2f& viewpoint,
                         const float zoom,
-                        const WLDrawText draw_text,
+                        const TextToDraw draw_text,
                         const Player* player,
                         RenderTarget* dst) {
 	assert(viewpoint.x >= 0);  // divisions involving negative numbers are bad

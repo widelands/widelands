@@ -47,7 +47,7 @@ public:
 	               const Vector2f& viewpoint,
 	               float scale,
 	               const Widelands::Player& player,
-	               WLDrawText draw_text,
+	               TextToDraw draw_text,
 	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
@@ -55,7 +55,7 @@ public:
 	void rendermap(const Widelands::EditorGameBase& egbase,
 	               const Vector2f& viewpoint,
 	               float scale,
-	               WLDrawText draw_text,
+	               TextToDraw draw_text,
 	               RenderTarget* dst);
 
 private:
@@ -64,7 +64,7 @@ private:
 	void draw(const Widelands::EditorGameBase& egbase,
 	          const Vector2f& viewpoint,
 	          float scale,
-	          WLDrawText draw_text,
+	          TextToDraw draw_text,
 	          const Widelands::Player* player,
 	          RenderTarget* dst);
 
