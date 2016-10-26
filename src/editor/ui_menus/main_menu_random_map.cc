@@ -33,13 +33,17 @@
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+
+namespace {
+// The map generator can't find starting positions for too many players
+constexpr uint8_t kMaxMapgenPlayers = 8;
+} // namespace
 
 using namespace Widelands;
 
@@ -406,7 +410,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
 		max_players_ = std::min(
-		   static_cast<size_t>(MAX_PLAYERS),
+			static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);
@@ -442,7 +446,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
 		max_players_ = std::min(
-		   static_cast<size_t>(MAX_PLAYERS),
+			static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);
