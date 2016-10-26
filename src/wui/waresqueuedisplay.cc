@@ -124,17 +124,17 @@ void WaresQueueDisplay::draw(RenderTarget& dst) {
 	uint32_t nr_wares_to_draw = std::min(queue_->get_filled(), cache_size_);
 	uint32_t nr_empty_to_draw = cache_size_ - nr_wares_to_draw;
 
-	Point point;
+	Vector2f point;
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale(Rect(point.x, point.y, icon_->width(), icon_->height()), icon_,
-		                   Rect(0, 0, icon_->width(), icon_->height()), 1.0, BlendMode::UseAlpha);
+		dst.blitrect(Vector2f(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
+		             BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_monochrome(Rect(point.x, point.y, icon_->width(), icon_->height()), icon_,
-		                              Rect(0, 0, icon_->width(), icon_->height()),
+		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
+		                              Recti(0, 0, icon_->width(), icon_->height()),
 		                              RGBAColor(166, 166, 166, 127));
 	}
 
@@ -156,7 +156,7 @@ void WaresQueueDisplay::update_priority_buttons() {
 		priority_radiogroup_ = nullptr;
 	}
 
-	Point pos = Point(cache_size_ * CellWidth + Border, 0);
+	Vector2i pos = Vector2i(cache_size_ * CellWidth + Border, 0);
 	pos.x = (cache_size_ + 2) * (CellWidth + CellSpacing) + Border;
 	pos.y = Border + (total_height_ - 2 * Border - 3 * PriorityButtonSize) / 2;
 

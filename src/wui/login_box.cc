@@ -42,9 +42,9 @@ LoginBox::LoginBox(Panel& parent)
 	                                        _("WARNING: Password will be shown and saved readable!"),
 	                                        UI::Align::kLeft);
 
-	cb_register = new UI::Checkbox(this, Point(margin, 110), _("Log in to a registered account"), "",
-	                               get_inner_w() - 2 * margin);
-	cb_auto_log = new UI::Checkbox(this, Point(margin, 135),
+	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
+	                               "", get_inner_w() - 2 * margin);
+	cb_auto_log = new UI::Checkbox(this, Vector2i(margin, 135),
 	                               _("Automatically use this login information from now on."), "",
 	                               get_inner_w() - 2 * margin);
 
