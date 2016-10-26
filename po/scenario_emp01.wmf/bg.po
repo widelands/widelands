@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-21 14:56+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 08:01+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -376,7 +376,7 @@ msgstr "Ваше величество, днес направихме голям�
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219
 msgid "Now we truly can look forward to settling down on another island."
-msgstr "Сега вече можем сериозно да планираме нашето заселване на някой друг остров"
+msgstr "Сега вече можем сериозно да планираме нашето заселване на някой друг остров."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
 msgid "Mission Complete"

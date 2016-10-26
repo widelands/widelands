@@ -23,7 +23,7 @@
 #include <map>
 #include <string>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "map_io/map_message_saver.h"
 
@@ -76,7 +76,7 @@ struct MapObjectSaver {
 	bool is_object_saved(const MapObject&);
 
 	/// \note Indexed by player number - 1.
-	MapMessageSaver message_savers[MAX_PLAYERS];
+	MapMessageSaver message_savers[kMaxPlayers];
 
 private:
 	struct MapObjectRec {

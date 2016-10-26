@@ -35,7 +35,7 @@ return {
          bformat(
             a2("http://wl.widelands.org"),
             a2("https://launchpad.net/widelands"),
-            a2("https://www.transifex.com/projects/p/widelands/"))
+            a2("https://www.transifex.com/widelands/"))
          .. "</p>"
    )
 }
