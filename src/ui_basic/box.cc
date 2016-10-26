@@ -169,7 +169,7 @@ void Box::layout() {
 			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, orientation_ == Horizontal));
 			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
-			scrollbar_->set_pos(Point(sb_x, sb_y));
+			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
 			scrollbar_->set_size(sb_w, sb_h);
 		}
 		scrollbar_->set_steps(totaldepth - pagesize);
@@ -379,9 +379,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		}
 
 		if (orientation_ == Horizontal)
-			it.u.panel.panel->set_pos(Point(pos, breadth));
+			it.u.panel.panel->set_pos(Vector2i(pos, breadth));
 		else
-			it.u.panel.panel->set_pos(Point(breadth, pos));
+			it.u.panel.panel->set_pos(Vector2i(breadth, pos));
 		break;
 	}
 

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -617,7 +618,7 @@ msgstr ""
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr "إضغط مفتاح كنترول + الارقام من 1 الى 9 لتخزين المواقع الهامه، ثم إستخدام مفاتيح الارقام من 1 الى 9 ﻹستدعائهم مره اخرى."
+msgstr "إضغط مفتاح كنترول + الارقام من 0 الى 9 لتخزين المواقع الهامه، ثم إستخدام مفاتيح الارقام من 0 الى 9 ﻹستدعائهم مره اخرى."
 
 #: ../../data/txts/tips/general_game.tip:46
 msgid ""

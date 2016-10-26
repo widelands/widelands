@@ -143,10 +143,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              butw_,
              buth_,
              g_gr->images().get("images/ui_basic/but0.png"),
-             _("Delete"),
-             std::string(),
-             false,
-             false),
+             _("Delete")),
 
      ta_long_generic_message_(this,
                               right_column_x_,
@@ -462,7 +459,7 @@ void FullscreenMenuLoadGame::entry_selected() {
 					}
 
 					minimap_icon_.set_size(w, h);
-					minimap_icon_.set_pos(Point(xpos, ypos));
+					minimap_icon_.set_pos(Vector2i(xpos, ypos));
 					minimap_icon_.set_frame(UI_FONT_CLR_FG);
 					minimap_icon_.set_visible(true);
 					minimap_icon_.set_icon(minimap_image_.get());

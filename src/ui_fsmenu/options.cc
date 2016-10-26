@@ -113,10 +113,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
         butw_,
         buth_,
         g_gr->images().get("images/ui_basic/but0.png"),
-        _("Cancel"),
-        std::string(),
-        true,
-        false),
+        _("Cancel")),
      apply_(this,
             "apply",
             get_w() * 2 / 4 - butw_ / 2,
@@ -124,10 +121,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             butw_,
             buth_,
             g_gr->images().get("images/ui_basic/but0.png"),
-            _("Apply"),
-            std::string(),
-            true,
-            false),
+            _("Apply")),
      ok_(this,
          "ok",
          UI::g_fh1->fontset()->is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
@@ -135,10 +129,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
          butw_,
          buth_,
          g_gr->images().get("images/ui_basic/but2.png"),
-         _("OK"),
-         std::string(),
-         true,
-         false),
+         _("OK")),
 
      tabs_(this,
            hmargin_,
@@ -159,8 +150,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
      resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, true),
 
-     fullscreen_(&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
-     inputgrab_(&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
+     fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", column_width_),
+     inputgrab_(&box_interface_, Vector2i(0, 0), _("Grab Input"), "", column_width_),
 
      sb_maxfps_(&box_interface_,
                 0,
@@ -174,9 +165,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Point(0, 0), _("Snap windows only when overlapping"), "", column_width_),
+        &box_windows_, Vector2i(0, 0), _("Snap windows only when overlapping"), "", column_width_),
      dock_windows_to_edges_(
-        &box_windows_, Point(0, 0), _("Dock windows to edges"), "", column_width_),
+        &box_windows_, Vector2i(0, 0), _("Dock windows to edges"), "", column_width_),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -201,10 +192,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
-     fx_(&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", column_width_),
+     music_(&box_sound_, Vector2i(0, 0), _("Enable Music"), "", column_width_),
+     fx_(&box_sound_, Vector2i(0, 0), _("Enable Sound Effects"), "", column_width_),
      message_sound_(
-        &box_sound_, Point(0, 0), _("Play a sound at message arrival"), "", column_width_),
+        &box_sound_, Vector2i(0, 0), _("Play a sound at message arrival"), "", column_width_),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -234,28 +225,28 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
-          Point(0, 0),
+          Vector2i(0, 0),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           column_width_),
      write_syncstreams_(&box_saving_,
-                        Point(0, 0),
+                        Vector2i(0, 0),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         column_width_),
 
      // Game options
-     auto_roadbuild_mode_(&box_game_, Point(0, 0), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Point(0, 0), _("Show buildings area preview")),
+     auto_roadbuild_mode_(&box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
+     show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
      transparent_chat_(&box_game_,
-                       Point(0, 0),
+                       Vector2i(0, 0),
                        _("Show in-game chat with transparent background"),
                        "",
                        column_width_),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_game_, Point(0, 0), _("Use single watchwindow mode")),
+     single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
 
      // Language options
      label_language_(&box_language_, _("Language"), UI::Align::kLeft),
@@ -282,7 +273,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		tabs_.activate(os_.active_tab);
 	}
 
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_windows_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());

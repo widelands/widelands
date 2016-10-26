@@ -309,9 +309,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
-	int32_t y = 1 + idx * lineheight - scrollpos_;
+	float y = 1 + idx * lineheight - scrollpos_;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		assert(get_h() < std::numeric_limits<int32_t>::max());
@@ -321,12 +321,12 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		Point point(1, y);
+		Vector2f point(1.f, y);
 		uint32_t maxw = get_eff_w() - 2;
 
 		// Highlight the current selected entry
 		if (idx == selection_) {
-			Rect r = Rect(point, maxw, lineheight_);
+			Rectf r(point, maxw, lineheight_);
 			if (r.x < 0) {
 				r.w += r.x;
 				r.x = 0;
@@ -346,8 +346,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			               y + (get_lineheight() - er.pic->height()) / 2),
+			dst.blit(Vector2f(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			                  y + (get_lineheight() - er.pic->height()) / 2.f),
 			         er.pic);
 		}
 
@@ -383,9 +383,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 			// We want this always on, e.g. for mixed language savegame filenames, or the languages
 			// list
 			dst.blitrect(point, entry_text_im,
-			             Rect(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
+			             Recti(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
 		} else {
-			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, entry_text_im->height()));
+			dst.blitrect(point, entry_text_im, Recti(0, 0, maxw, entry_text_im->height()));
 		}
 
 		y += lineheight;

@@ -22,6 +22,15 @@ wl_library(graphic_color
   USES_SDL2
 )
 
+wl_library(graphic_playercolor
+  SRCS
+    playercolor.cc
+    playercolor.h
+  DEPENDS
+    graphic_color
+    graphic_surface
+)
+
 wl_library(graphic_render_queue
   SRCS
     render_queue.cc
@@ -124,6 +133,7 @@ wl_library(graphic_terrain_programs
     graphic_surface
     io_filesystem
     logic
+    logic_widelands_geometry
 )
 
 wl_library(graphic_draw_programs
@@ -209,7 +219,6 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
-    graphic_image_io
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -255,6 +264,7 @@ wl_library(graphic
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
+    graphic_playercolor
     graphic_render_queue
     graphic_surface
     graphic_text
