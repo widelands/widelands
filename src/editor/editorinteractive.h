@@ -189,6 +189,7 @@ private:
 	UI::Button toggle_toolsize_menu_;
 	UI::Button toggle_minimap_;
 	UI::Button toggle_buildhelp_;
+	UI::Button reset_zoom_;
 	UI::Button toggle_player_menu_;
 	UI::Button undo_;
 	UI::Button redo_;

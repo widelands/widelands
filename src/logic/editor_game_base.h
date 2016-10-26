@@ -154,6 +154,7 @@ public:
 	uint32_t get_gametime() const {
 		return gametime_;
 	}
+	// TODO(GunChleoc): Get rid.
 	InteractiveBase* get_ibase() const {
 		return ibase_.get();
 	}

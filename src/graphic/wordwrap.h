@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/text_layout.h"
 
@@ -50,7 +50,7 @@ struct WordWrap {
 	}
 
 	void draw(RenderTarget& dst,
-	          Point where,
+	          Vector2i where,
 	          Align align = UI::Align::kLeft,
 	          uint32_t caret = std::numeric_limits<uint32_t>::max());
 

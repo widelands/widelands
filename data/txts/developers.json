@@ -2,7 +2,7 @@
 	"developers":[
 		{
 			"heading": "Chieftain",
-			"image": "images/players/genstats_enable_plr_01.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"members":[
@@ -13,7 +13,7 @@
 		},
 		{
 			"heading": "Elders",
-			"image": "images/players/genstats_enable_plr_04.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"subheading": "Graphics",
@@ -329,7 +329,7 @@
 		},
 		{
 			"heading": "Former Elders",
-			"image": "images/players/genstats_enable_plr_04.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"subheading": "Graphics",

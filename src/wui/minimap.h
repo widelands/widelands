@@ -30,22 +30,25 @@
 
 class InteractiveBase;
 
-struct MiniMap : public UI::UniqueWindow {
+class MiniMap : public UI::UniqueWindow {
+public:
 	struct Registry : public UI::UniqueWindow::Registry {
-		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
+		MiniMapLayer minimap_layers;
+		MiniMapType minimap_type;
 
 		Registry()
-		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
-		           MiniMapLayer::Road | MiniMapLayer::Building) {
+		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
+		                    MiniMapLayer::Road | MiniMapLayer::Building),
+		     minimap_type(MiniMapType::kStaticViewWindow) {
 		}
 	};
 
 	MiniMap(InteractiveBase& parent, Registry*);
 
-	boost::signals2::signal<void(int32_t, int32_t)> warpview;
+	boost::signals2::signal<void(const Vector2f&)> warpview;
 
-	void set_view_pos(int32_t const x, int32_t const y) {
-		view_.set_view_pos(x, y);
+	void set_view(const Rectf& rect) {
+		view_.set_view(rect);
 	}
 
 private:
@@ -56,22 +59,19 @@ private:
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the
 	 * map, without any borders or gadgets.
-	 *
-	 * If the size of MiniMapView is not the same as the size of the map itself,
-	 * it will either show a subset of the map, or it will show the map more than
-	 * once.
-	 * The minimap always centers around the current viewpoint.
 	 */
 	struct View : public UI::Panel {
 		View(UI::Panel& parent,
-		     MiniMapLayer* flags,
+		     MiniMapLayer* minimap_layers,
+			  MiniMapType* minimap_type,
 		     int32_t x,
 		     int32_t y,
 		     uint32_t w,
 		     uint32_t h,
 		     InteractiveBase&);
 
-		void set_view_pos(int32_t x, int32_t y);
+		// Set the currently viewed area in map pixel space.
+		void set_view(const Rectf&);
 
 		void draw(RenderTarget&) override;
 
@@ -82,7 +82,7 @@ private:
 
 	private:
 		InteractiveBase& ibase_;
-		int32_t viewx_, viewy_;
+		Rectf view_area_;
 		const Image* pic_map_spot_;
 
 		// This needs to be owned since it will be rendered by the RenderQueue
@@ -90,7 +90,8 @@ private:
 		std::unique_ptr<Texture> minimap_image_;
 
 	public:
-		MiniMapLayer* flags_;
+		MiniMapLayer* minimap_layers_;
+		MiniMapType* minimap_type_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;

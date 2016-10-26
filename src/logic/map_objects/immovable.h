@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -91,7 +92,18 @@ struct BaseImmovable : public MapObject {
 	 * if one can be chosen as main.
 	 */
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
-	virtual void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) = 0;
+
+	// Draw this immovable onto 'dst' choosing the frame appropriate for
+	// 'gametime'. 'draw_text' decides if census and statistics are written too.
+	// The 'coords_to_draw' are passed one to give objects that occupy multiple
+	// fields a way to only draw themselves once. The 'point_on_dst' determines
+	// the point for the hotspot of the animation and 'scale' determines how big
+	// the immovable will be plotted.
+	virtual void draw(uint32_t gametime,
+	          DrawText draw_text,
+	          const Vector2f& point_on_dst,
+				 float scale,
+	          RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);
@@ -193,9 +205,6 @@ public:
 	/// about it. If this is a player immovable, you will need to set the owner first.
 	void set_antecedent(const BuildingDescr& building);
 
-	Player* get_owner() const {
-		return owner_;
-	}
 	void set_owner(Player* player);
 
 	Coords get_position() const {
@@ -216,8 +225,11 @@ public:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          DrawText draw_text,
+	          const Vector2f& point_on_dst,
+	          float scale,
+	          RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
 	bool construct_ware(Game& game, DescriptionIndex index);
@@ -237,7 +249,6 @@ protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* antecedent_;
 
-	Player* owner_;
 	Coords position_;
 
 	uint32_t anim_;
@@ -296,8 +307,11 @@ public:
 
 private:
 	void increment_program_pointer();
-
-	void draw_construction(const EditorGameBase&, RenderTarget&, Point);
+	void draw_construction(uint32_t gametime,
+	                       DrawText draw_text,
+	                       const Vector2f& point_on_dst,
+	                       float scale,
+	                       RenderTarget* dst);
 };
 
 /**
@@ -367,7 +381,6 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Player* owner_;
 	Economy* economy_;
 
 	Workers workers_;
