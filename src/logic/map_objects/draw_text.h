@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,18 @@
  *
  */
 
-#include "base/point.h"
+#ifndef WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
+#define WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 
-Point middle(const Point& a, const Point& b) {
-	return Point((a.x + b.x) / 2, (a.y + b.y) / 2);
+enum DrawText {
+	kNone = 0,
+	kCensus = 1,
+	kStatistics = 2,
+};
+
+inline DrawText operator|(DrawText a, DrawText b) {
+	return static_cast<DrawText>(static_cast<int>(a) | static_cast<int>(b));
 }
+
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
+

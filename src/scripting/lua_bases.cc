@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
-#include "logic/constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -132,7 +131,7 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 	lua_newtable(L);
 
 	uint32_t idx = 1;
-	for (PlayerNumber i = 1; i <= MAX_PLAYERS; i++) {
+	for (PlayerNumber i = 1; i <= kMaxPlayers; i++) {
 		Player* rv = egbase.get_player(i);
 		if (!rv)
 			continue;
@@ -695,7 +694,7 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  ==========================================================
  */
 Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
-	if (player_number_ > MAX_PLAYERS)
+	if (player_number_ > kMaxPlayers)
 		report_error(L, "Illegal player number %i", player_number_);
 	Player* rv = egbase.get_player(player_number_);
 	if (!rv)

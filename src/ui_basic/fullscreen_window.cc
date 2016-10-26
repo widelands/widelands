@@ -81,7 +81,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
 	dst.tile(
-	   Rect(Point(0, 0), get_w(), get_h()), g_gr->images().get(background_image_), Point(0, 0));
+		Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i(0, 0));
 
 	// Optional overlays
 	for (const auto& overlay : overlays_) {
@@ -129,9 +129,9 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 			const int w = (static_cast<int>(tiling & UI::Align::kVertical)) ? image->width() : get_w();
 			const int h =
 			   (static_cast<int>(tiling & UI::Align::kHorizontal)) ? image->height() : get_h();
-			dst.tile(Rect(Point(x, y), w, h), image, Point(0, 0));
+			dst.tile(Recti(x, y, w, h), image, Vector2i(0, 0));
 		} else {
-			dst.blit(Point(x, y), image);
+			dst.blit(Vector2f(x, y), image);
 		}
 	}
 }

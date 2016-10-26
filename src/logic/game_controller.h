@@ -100,9 +100,6 @@ public:
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.
-	 * \param player : the player idx;
-	 * \param result : the player result
-	 * \param info : The info string (\see \struct PlayerEndStatus)
 	 */
 	virtual void report_result(uint8_t /* player */,
 	                           Widelands::PlayerEndResult /*result*/,

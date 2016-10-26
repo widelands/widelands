@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include "base/point.h"
 #include "base/rect.h"
 #include "ui_basic/fullscreen_window.h"
 
@@ -63,8 +62,11 @@ struct ProgressWindow : public UI::FullscreenWindow {
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
-	Point label_center_;
-	Rect label_rectangle_;
+
+	// This is an integer vector to make sure that we blit at pixel boundaries
+	// to avoid Texture subsampling.
+	Vector2i label_center_;
+	Rectf label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
 

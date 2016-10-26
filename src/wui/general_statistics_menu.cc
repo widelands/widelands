@@ -41,14 +41,6 @@
 #include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
-namespace {
-static char const* const flag_pictures[] = {
-   "images/players/genstats_enable_plr_01.png", "images/players/genstats_enable_plr_02.png",
-   "images/players/genstats_enable_plr_03.png", "images/players/genstats_enable_plr_04.png",
-   "images/players/genstats_enable_plr_05.png", "images/players/genstats_enable_plr_06.png",
-   "images/players/genstats_enable_plr_07.png", "images/players/genstats_enable_plr_08.png"};
-}  // namespace
-
 using namespace Widelands;
 
 #define PLOT_HEIGHT 130
@@ -85,7 +77,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	for (Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
-		const RGBColor& color = Player::Colors[i];
+		const RGBColor& color = kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
@@ -116,7 +108,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Image* player_image = g_gr->images().get(flag_pictures[p - 1]);
+		const Image* player_image =
+		   playercolor_image(p - 1, g_gr->images().get("images/players/genstats_player.png"),
+		                     g_gr->images().get("images/players/genstats_player_pc.png"));
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
 		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
@@ -137,63 +131,64 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	UI::Radiobutton* btn;
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"),
 	                       &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
 	                       &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"),
 	                       &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
-	radiogroup_.add_button(hbox2, Point(0, 0),
+	radiogroup_.add_button(hbox2, Vector2i(0, 0),
 	                       g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, Point(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(
+		   hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
 		hbox2->add(btn, UI::Align::kLeft, false, true);
 	}
 
@@ -215,7 +210,8 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 		my_registry_->time = plot_.get_time();
 		PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
-			my_registry_->selected_players[p - 1] = cbs_[p - 1]->get_perm_pressed();
+			my_registry_->selected_players[p - 1] =
+			   cbs_[p - 1]->style() == UI::Button::Style::kPermpressed;
 		}
 	}
 }
@@ -232,9 +228,9 @@ void GeneralStatisticsMenu::clicked_help() {
  */
 void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 	// This represents our player number
-	cbs_[id - 1]->set_perm_pressed(!cbs_[id - 1]->get_perm_pressed());
-
-	plot_.show_plot((id - 1) * ndatasets_ + selected_information_, cbs_[id - 1]->get_perm_pressed());
+	cbs_[id - 1]->toggle();
+	plot_.show_plot((id - 1) * ndatasets_ + selected_information_,
+	                cbs_[id - 1]->style() == UI::Button::Style::kPermpressed);
 }
 
 /*
@@ -245,7 +241,7 @@ void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (cbs_[i]) {
-			plot_.show_plot(i * ndatasets_ + id, cbs_[i]->get_perm_pressed());
+			plot_.show_plot(i * ndatasets_ + id, cbs_[i]->style() == UI::Button::Style::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
 	selected_information_ = id;

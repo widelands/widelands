@@ -60,17 +60,17 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	FullscreenWindow::draw(rt);
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
-	Rect wnd_rect(Point(0, 0), get_w(), get_h());
+	Recti wnd_rect(Vector2i(0, 0), get_w(), get_h());
 
 	const uint32_t h =
 	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
-	label_rectangle_.x = get_w() / 4;
-	label_rectangle_.w = get_w() / 2;
-	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
-	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.x = get_w() / 4.f;
+	label_rectangle_.w = get_w() / 2.f;
+	label_rectangle_.y = label_center_.y - h / 2.f - PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.h = h + 2.f * PROGRESS_STATUS_RECT_PADDING;
 
-	Rect border_rect = label_rectangle_;
+	Rectf border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
@@ -96,7 +96,7 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_,
+	rt.blit(label_center_.cast<float>(),
 	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
 	        BlendMode::UseAlpha, UI::Align::kCenter);
 
