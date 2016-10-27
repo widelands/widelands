@@ -158,12 +158,11 @@ inline static const char* npgettext_aux(const char* domain,
 
 #include <string.h>
 
-#if (((__GNUC__ >= 3 || __GNUG__ >= 2) &&                                                          \
-      !defined __STRICT_ANSI__) /* || __STDC_VERSION__ >= 199901L */)
-#define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 1
-#else
-#define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 0
-#endif
+ /* http://bug-gnulib.gnu.narkive.com/1Hoiy7Iw/c-support
+	 GCC supports variable-size arrays in C and C++ mode.
+	 ISO C++ supports variable-size arrays, but some older PGI and Sun compilers
+	 don't. */
+#define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS !(__GNUC__ >= 3 || (defined __cplusplus && !(defined __PGI || defined __SUNPRO_CC)))
 
 #if !GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
 #include <stdlib.h>
@@ -179,8 +178,7 @@ dcpgettext_expr(const char* domain, const char* msgctxt, const char* msgid, int 
 	size_t msgid_len = strlen(msgid) + 1;
 	const char* translation;
 #if GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
-	const size_t msg_ctxt_id_len = msgctxt_len + msgid_len;
-	char msg_ctxt_id[msg_ctxt_id_len];
+	char msg_ctxt_id[msgctxt_len + msgid_len];
 #else
 	char buf[1024];
 	char* msg_ctxt_id = (msgctxt_len + msgid_len <= sizeof(buf) ?
@@ -218,8 +216,7 @@ inline static const char* dcnpgettext_expr(const char* domain,
 	size_t msgid_len = strlen(msgid) + 1;
 	const char* translation;
 #if GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
-	const size_t msg_ctxt_id_len = msgctxt_len + msgid_len;
-	char msg_ctxt_id[msg_ctxt_id_len];
+	char msg_ctxt_id[msgctxt_len + msgid_len];
 #else
 	char buf[1024];
 	char* msg_ctxt_id = (msgctxt_len + msgid_len <= sizeof(buf) ?
