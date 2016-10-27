@@ -97,7 +97,7 @@ std::string as_game_tip(const std::string&);
   * smaller until it fits 'width'. The resulting font size will not go below
   * 'kMinimumFontSize'.
   */
-const Image* autofit_ui_text(const std::string& text,
+const UI::RenderedText* autofit_ui_text(const std::string& text,
                              int width = 0,
                              RGBColor color = UI_FONT_CLR_FG,
                              int fontsize = UI_FONT_SIZE_SMALL);

@@ -226,7 +226,7 @@ void Window::center_to_parent() {
 	Panel& parent = *get_parent();
 
 	set_pos(Vector2i((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
-	              (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
+	                 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
 }
 
 /**
@@ -234,7 +234,8 @@ void Window::center_to_parent() {
  */
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile(Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+		dst.tile(
+		   Recti(Vector2i(0, 0), get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
 	}
 }
 
@@ -257,8 +258,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(Vector2f(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
-			                                           HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2f(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -270,12 +272,12 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		const Image* text =
+		const UI::RenderedText* text =
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		dst.blit(Vector2f(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2), text,
-		         BlendMode::UseAlpha, UI::Align::kCenter);
+		draw_text(dst, Vector2i(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2), text,
+		          UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
@@ -295,15 +297,16 @@ void Window::draw_border(RenderTarget& dst) {
 			//  left bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
-				dst.blitrect(
-				   Vector2f(0, pos), pic_lborder_, Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN),
-				                                     VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
+				dst.blitrect(Vector2f(0, pos), pic_lborder_,
+				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
+				                   VT_B_MIDDLE_PIXMAP_LEN));
 
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
-			dst.blitrect(Vector2f(0, pos), pic_lborder_, Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height),
-			                                               VT_B_PIXMAP_THICKNESS, height));
+			dst.blitrect(
+			   Vector2f(0, pos), pic_lborder_,
+			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
 		}
 
 		{  // Right border
@@ -320,7 +323,7 @@ void Window::draw_border(RenderTarget& dst) {
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect(Vector2f(right_border_x, pos), pic_rborder_,
 				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
-				                  VT_B_MIDDLE_PIXMAP_LEN));
+				                   VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
@@ -340,12 +343,13 @@ void Window::draw_border(RenderTarget& dst) {
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect(Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
 				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
-				                  BT_B_PIXMAP_THICKNESS));
+				                   BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
-			dst.blitrect(Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2f(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
+			   Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
 }

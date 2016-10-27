@@ -382,8 +382,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 			// We want this always on, e.g. for mixed language savegame filenames, or the languages
 			// list
-			dst.blitrect(point, entry_text_im,
-			             Recti(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
+			dst.blitrect(point, entry_text_im, Recti(entry_text_im->width() - maxw + picw, 0, maxw,
+			                                         entry_text_im->height()));
 		} else {
 			dst.blitrect(point, entry_text_im, Recti(0, 0, maxw, entry_text_im->height()));
 		}

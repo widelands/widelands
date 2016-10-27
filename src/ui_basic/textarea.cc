@@ -83,7 +83,6 @@ void Textarea::update() {
 	if (layoutmode_ == AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position
 	}
-
 	rendered_text_ = autofit_ui_text(text_, fixed_width_, color_, fontsize_);
 
 	if (layoutmode_ == AutoMove) {
@@ -126,13 +125,13 @@ void Textarea::set_fixed_width(int w) {
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
+		Vector2i anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
 		                   get_w() / 2 :
 		                   static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0,
 		                static_cast<int>(align_ & UI::Align::kVCenter) ?
 		                   get_h() / 2 :
 		                   static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
-		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
+		draw_text(dst, anchor, rendered_text_, align_);
 	}
 }
 

@@ -59,7 +59,8 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
 		int new_height =
-		   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
+		   UI::g_fh1->render_multi(as_uifont(UI::g_fh1->fontset()->representative_character()))
+		      ->height() +
 		   4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
@@ -148,7 +149,8 @@ void Button::draw(RenderTarget& dst) {
 	// Draw the background
 	if (pic_background_) {
 		dst.fill_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-		dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
+		dst.tile(
+		   Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
 	}
 
 	if (enabled_ && highlighted_ && style_ != Style::kFlat)
@@ -193,13 +195,13 @@ void Button::draw(RenderTarget& dst) {
 
 	} else if (title_.length()) {
 		//  Otherwise draw title string centered
-		const Image* entry_text_im =
+		const UI::RenderedText* rendered_text =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
 		                   enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		dst.blit(
-			Vector2f((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
-			entry_text_im);
+		draw_text(dst, Vector2i((get_w() - rendered_text->width()) / 2,
+		                        (get_h() - rendered_text->height()) / 2),
+		          rendered_text);
 	}
 
 	//  draw border

@@ -29,6 +29,8 @@
 
 #include "base/macros.h"
 #include "base/vector.h"
+#include "graphic/align.h"
+#include "graphic/font_handler1.h"
 
 class RenderTarget;
 class Image;
@@ -225,6 +227,10 @@ public:
 	virtual void draw(RenderTarget&);
 	virtual void draw_border(RenderTarget&);
 	virtual void draw_overlay(RenderTarget&);
+	void draw_text(RenderTarget& dst,
+	               const Vector2i& position,
+	               const UI::RenderedText* text,
+	               UI::Align align = UI::Align::kTopLeft);
 
 	// Events
 	virtual void think();

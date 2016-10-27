@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,21 @@ private:
 
 namespace UI {
 
+int RenderedText::width() const {
+	int result = 0;
+	for (const auto& rect : texts) {
+		result = std::max(result, rect->point.x + rect->image->width());
+	}
+	return result;
+}
+int RenderedText::height() const {
+	int result = 0;
+	for (const auto& rect : texts) {
+		result = std::max(result, rect->point.y + rect->image->height());
+	}
+	return result;
+}
+
 // Utility class to render a rich text string. The returned string is cached in
 // the ImageCache, so repeated calls to render with the same arguments should not
 // be a problem.
@@ -118,19 +133,47 @@ public:
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {
+		for (auto& render_result : render_results_) {
+			delete render_result.second;
+		}
+		render_results_.clear();
 	}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
+		if (render_results_.count(hash) != 1) {
+			std::unique_ptr<RTImage> image(new RTImage(
+			   hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
+			// force the rich text to get rendered in case there is an exception thrown.
+			image->width();
 
-		if (image_cache_->has(hash))
-			return image_cache_->get(hash);
+			RenderedText* rendered_text = new RenderedText();
+			rendered_text->texts.push_back(std::unique_ptr<RenderedRect>(new RenderedRect(Vector2i(0, 0), image_cache_->insert(hash, std::move(image)))));
+			render_results_.insert(std::make_pair(hash, rendered_text));
+		} else {
+			assert(image_cache_->has(hash));
+		}
+		return image_cache_->get(hash);
+	}
 
-		std::unique_ptr<RTImage> image(
-		   new RTImage(hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
-		image->width();  // force the rich text to get rendered in case there is an exception thrown.
+	// NOCOM(GunChleoc): This will become the normal render function when we're done.
+	const RenderedText* render_multi(const string& text, uint16_t w = 0) override {
+		const string hash = boost::lexical_cast<string>(w) + text;
+		if (render_results_.count(hash) != 1) {
+			std::unique_ptr<RTImage> image(new RTImage(
+			   hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
+			// force the rich text to get rendered in case there is an exception thrown.
+			image->width();
 
-		return image_cache_->insert(hash, std::move(image));
+			RenderedText* rendered_text = new RenderedText();
+			// NOCOM only 1 texture so far, this needs to be implemented. We need to get the interface
+			// to work first though.
+			rendered_text->texts.push_back(std::unique_ptr<RenderedRect>(new RenderedRect(Vector2i(0, 0), image_cache_->insert(hash, std::move(image)))));
+			render_results_.insert(std::make_pair(hash, rendered_text));
+		} else {
+			assert(image_cache_->has(hash));
+		}
+		return (*render_results_.find(hash)).second;
 	}
 
 	UI::FontSet const* fontset() const override {
@@ -149,6 +192,7 @@ private:
 	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
+	std::unordered_map<std::string, RenderedText*> render_results_;
 };
 
 IFontHandler1* create_fonthandler(ImageCache* image_cache) {

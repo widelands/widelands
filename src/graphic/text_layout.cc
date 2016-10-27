@@ -141,11 +141,11 @@ std::string as_waresinfo(const std::string& txt) {
 	return f.str();
 }
 
-const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const Image* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+const UI::RenderedText* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+	const UI::RenderedText* result = UI::g_fh1->render_multi(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(
+			result = UI::g_fh1->render_multi(
 			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
