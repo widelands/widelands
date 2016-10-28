@@ -245,7 +245,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         column_width_),
 
      // Game options
-     auto_roadbuild_mode_(&box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
+     auto_roadbuild_mode_(
+        &box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
      show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
      transparent_chat_(&box_game_,
                        Vector2i(0, 0),

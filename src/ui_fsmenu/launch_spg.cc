@@ -213,7 +213,7 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		std::unique_ptr<Widelands::MapLoader> ml =
 		   map.get_correct_loader(settings_->settings().mapfilename);
 		if (ml != nullptr) {
-			// NOCOM(#codereview): pull out into a function? You want to reuse this in the MP anyways. 
+			// NOCOM(#codereview): pull out into a function? You want to reuse this in the MP anyways.
 			// NOCOM(GunChleoc): Why not simply reuse all of load_win_conditions() in the MP?
 			try {
 				ml->preload_map(true);
