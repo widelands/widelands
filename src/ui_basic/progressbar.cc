@@ -89,7 +89,10 @@ void ProgressBar::draw(RenderTarget& dst) {
 	uint32_t percent = static_cast<uint32_t>(fraction * 100);
 	const std::string progress_text =
 	   (boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
-	dst.blit(Vector2f(get_w() / 2.f, get_h() / 2.f), UI::g_fh1->render(as_uifont(progress_text)),
-	         BlendMode::UseAlpha, UI::Align::kCenter);
+	// NOCOM
+	Vector2i point(get_w() / 2.f, get_h() / 2.f);
+	const Image* rendered_text = UI::g_fh1->render_multi(as_uifont(progress_text))->texts[0]->image;
+	UI::correct_for_align(UI::Align::kCenter, rendered_text->width(), rendered_text->height(), &point);
+	dst.blit(point.cast<float>(), rendered_text);
 }
 }

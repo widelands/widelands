@@ -40,14 +40,14 @@ void replace_entities(std::string* text) {
 }
 
 uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render_multi(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
-uint32_t text_height(const std::string& text, int ptsize) {
+uint32_t text_height(int ptsize) {
 	return UI::g_fh1
-	   ->render(
-	      as_editorfont(text.empty() ? "." : text, ptsize - UI::g_fh1->fontset()->size_offset()))
+		->render_multi(
+			as_editorfont(UI::g_fh1->fontset()->representative_character(), ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->height();
 }
 

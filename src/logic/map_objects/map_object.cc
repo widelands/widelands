@@ -463,22 +463,22 @@ void MapObject::do_draw_info(const DrawText& draw_text,
 	const int font_size = scale * UI_FONT_SIZE_SMALL;
 
 	// We always render this so we can have a stable position for the statistics string.
+	// NOCOM
 	const Image* rendered_census_info =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
+		UI::g_fh1->render_multi(as_condensed(census, UI::Align::kCenter, font_size), 120)->texts[0]->image;
 
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
-	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
+	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (draw_text & DrawText::kCensus) {
-		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), rendered_census_info->height(), &position);
+		dst->blit(position.cast<float>(), rendered_census_info);
 	}
 
 	if (draw_text & DrawText::kStatistics && !statictics.empty()) {
-		const Vector2f statistics_pos =
-		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
-		      .cast<float>();
-		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size)),
-		          BlendMode::UseAlpha, UI::Align::kCenter);
+		position.y += rendered_census_info->height() / 2 + 10 * scale;
+		// NOCOM
+		const Image* statistics_image = UI::g_fh1->render_multi(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image;
+		dst->blit(position.cast<float>(), statistics_image);
 	}
 }
 

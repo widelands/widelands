@@ -28,6 +28,7 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
+#include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
@@ -231,6 +232,10 @@ public:
 	               const Vector2i& position,
 	               const UI::RenderedText* text,
 	               UI::Align align = UI::Align::kTopLeft);
+	void draw_text(RenderTarget& dst,
+						const Vector2i& position,
+						const UI::RenderedText* text,
+						Recti srcrect);
 
 	// Events
 	virtual void think();

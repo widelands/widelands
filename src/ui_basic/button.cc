@@ -58,10 +58,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
      clr_down_(229, 161, 2) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		int new_height =
-		   UI::g_fh1->render_multi(as_uifont(UI::g_fh1->fontset()->representative_character()))
-		      ->height() +
-		   4;
+		int new_height = text_height() + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}

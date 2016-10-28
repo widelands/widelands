@@ -505,7 +505,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             w - (w / labels_in.size()) + cursor_size,
             h -
                UI::g_fh1
-                  ->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+						->render_multi(as_condensed(UI::g_fh1->fontset()->representative_character(),
                                         UI::Align::kLeft,
                                         UI_FONT_SIZE_SMALL - 2))
                   ->height() -
@@ -534,10 +534,12 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		dst.blit(Vector2f(gap_1 + i * gap_n, get_h()),
-		         UI::g_fh1->render(
-		            as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2)),
-		         BlendMode::UseAlpha, UI::Align::kBottomCenter);
+		// NOCOM
+		const Image* rendered_text = UI::g_fh1->render_multi(
+												  as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2))->texts[0]->image;
+		Vector2i point(gap_1 + i * gap_n, get_h());
+		UI::correct_for_align(UI::Align::kBottomCenter, rendered_text->width(), rendered_text->height(), &point);
+		dst.blit(point.cast<float>(), rendered_text);
 	}
 }
 
@@ -555,7 +557,7 @@ void DiscreteSlider::layout() {
 	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
 	                h -
 	                   UI::g_fh1
-	                      ->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+								 ->render_multi(as_condensed(UI::g_fh1->fontset()->representative_character(),
 	                                            UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
 	                      ->height() +
 	                   2);

@@ -54,10 +54,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(
-	   UI::g_fh1
-	      ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
-	      ->height());
+	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 	                          scrollmode_ == ScrollMode::kScrollLogForced);
@@ -87,13 +84,10 @@ void MultilineTextarea::recompute() {
 	for (int i = 0; i < 2; ++i) {
 		if (!is_richtext(text_)) {
 			use_old_renderer_ = false;
-			const Image* text_im =
-			   UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
-			height = text_im->height();
+			height = UI::g_fh1->render_multi(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else if (force_new_renderer_) {
 			use_old_renderer_ = false;
-			const Image* text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
-			height = text_im->height();
+			height = UI::g_fh1->render_multi(text_, get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else {
 			use_old_renderer_ = true;
 			rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
@@ -146,15 +140,15 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
-		const Image* text_im;
+		const UI::RenderedText* rendered_text;
 		if (!is_richtext(text_)) {
-			text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
+			rendered_text = UI::g_fh1->render_multi(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 		} else {
-			text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+			rendered_text = UI::g_fh1->render_multi(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
 		}
 
-		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
-		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
+		uint32_t blit_width = std::min(rendered_text->width(), static_cast<int>(get_eff_w()));
+		uint32_t blit_height = std::min(rendered_text->height(), static_cast<int>(get_inner_h()));
 
 		if (blit_width > 0 && blit_height > 0) {
 			float anchor = 0.f;
@@ -169,10 +163,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 			default:
 				anchor = RICHTEXT_MARGIN;
 			}
-
-			dst.blitrect(Vector2f(anchor, 0), text_im,
-			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
-			             BlendMode::UseAlpha);
+			draw_text(dst, Vector2i(anchor, 0), rendered_text, Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height));
 		}
 	}
 }

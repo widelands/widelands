@@ -144,13 +144,9 @@ void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
  */
 void RenderTarget::blit(const Vector2f& dst,
                         const Image* image,
-                        BlendMode blend_mode,
-                        UI::Align align) {
-	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
-
+								BlendMode blend_mode) {
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
-	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
+	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		// I seem to remember seeing 1. a lot in blitting calls.
@@ -161,13 +157,9 @@ void RenderTarget::blit(const Vector2f& dst,
 
 void RenderTarget::blit_monochrome(const Vector2f& dst,
                                    const Image* image,
-                                   const RGBAColor& blend_mode,
-                                   UI::Align align) {
-	Vector2f destination_point(dst);
-	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
-
+											  const RGBAColor& blend_mode) {
 	Rectf source_rect(Vector2i(0, 0), image->width(), image->height());
-	Rectf destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
+	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		surface_->blit_monochrome(destination_rect, *image, source_rect, blend_mode);

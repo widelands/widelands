@@ -56,7 +56,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      rendered_text_(label_text.empty() ? nullptr :
-                                         UI::g_fh1->render(as_uifont(label_text),
+													  UI::g_fh1->render_multi(as_uifont(label_text),
                                                            width > (kStateboxSize + kPadding) ?
                                                               width - kStateboxSize - kPadding :
                                                               0)) {
@@ -124,7 +124,7 @@ void Statebox::draw(RenderTarget& dst) {
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
 		Vector2f image_anchor(0.f, 0.f);
-		Vector2f text_anchor(kStateboxSize + kPadding, 0);
+		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
 		if (rendered_text_) {
 			if (UI::g_fh1->fontset()->is_rtl()) {
@@ -132,7 +132,7 @@ void Statebox::draw(RenderTarget& dst) {
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::kLeft);
+			draw_text(dst, text_anchor, rendered_text_, UI::Align::kLeft);
 		}
 
 		dst.blitrect(

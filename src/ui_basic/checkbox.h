@@ -96,7 +96,7 @@ private:
 			flags_ |= flags;
 	}
 	const Image* pic_graphics_;
-	const Image* rendered_text_;
+	const UI::RenderedText* rendered_text_;
 };
 
 /**

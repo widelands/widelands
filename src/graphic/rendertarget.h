@@ -23,7 +23,6 @@
 #include <vector>
 
 #include "base/rect.h"
-#include "graphic/align.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
@@ -63,15 +62,13 @@ public:
 	void brighten_rect(const Rectf&, int32_t factor);
 
 	void blit(const Vector2f& dst,
-	          const Image* image,
-	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align::kTopLeft);
+				 const Image* image,
+				 BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Vector2f& dst,
-	                     const Image* image,
-	                     const RGBAColor& blend_mode,
-	                     UI::Align = UI::Align::kTopLeft);
+								const Image* image,
+								const RGBAColor& blend_mode);
 
 	void blitrect(const Vector2f& dst,
 	              const Image* image,

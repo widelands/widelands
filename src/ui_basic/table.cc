@@ -48,11 +48,8 @@ Table<void*>::Table(
    Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     headerheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        4),
-     lineheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
+	  headerheight_(text_height() + 4),
+	  lineheight_(text_height()),
      scrollbar_(nullptr),
      scrollpos_(0),
      selection_(no_selection_index()),
@@ -246,7 +243,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Vector2f point(curx, y);
+			Vector2i point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
@@ -302,7 +299,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_uifont(richtext_escape(entry_string)));
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
@@ -311,11 +308,11 @@ void Table<void*>::draw(RenderTarget& dst) {
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
-			int text_width = entry_text_im->width();
+			int text_width = rendered_text->width();
 			if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
 				text_width = text_width + scrollbar_->get_w();
 			}
-			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
+			UI::correct_for_align(alignment, text_width, rendered_text->height(), &point);
 
 			// Crop to column width while blitting
 			if ((curw + picw) < text_width) {
@@ -324,15 +321,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
-				if (i18n::has_rtl_character(
-				       entry_string.c_str(), 20)) {  // Restrict check for efficiency
-					dst.blitrect(
-					   point, entry_text_im, Recti(text_width - curw + picw, 0, text_width, lineheight));
+				// Restrict check for efficiency
+				if (i18n::has_rtl_character(entry_string.c_str(), 20)) {
+					draw_text(dst, point, rendered_text, Recti(text_width - curw + picw, 0, text_width, lineheight));
 				} else {
-					dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
+					draw_text(dst, point, rendered_text, Recti(0, 0, curw - picw, lineheight));
 				}
 			} else {
-				dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
+				draw_text(dst, point, rendered_text, Recti(0, 0, curw - picw, lineheight));
 			}
 			curx += curw;
 		}

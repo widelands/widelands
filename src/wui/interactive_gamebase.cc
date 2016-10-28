@@ -111,8 +111,11 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
-			         UI::Align::kTopRight);
+			// NOCOM
+			const Image* rendered_text = UI::g_fh1->render_multi(game_speed)->texts[0]->image;
+			Vector2i point(get_w() - 5, 5);
+			UI::correct_for_align(UI::Align::kTopRight, rendered_text->width(), rendered_text->height(), &point);
+			dst.blit(point.cast<float>(), rendered_text);
 		}
 	}
 }

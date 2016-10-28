@@ -421,9 +421,25 @@ void Panel::draw_text(RenderTarget& dst,
                       UI::Align align) {
 	// NOCOM
 	for (const auto& rect : text->texts) {
-		dst.blit(Vector2f(position.x + rect->point.x, position.y + rect->point.y), rect->image,
-		         BlendMode::UseAlpha, align);
+		Vector2i blit_point(position.x + rect->point.x,  position.y + rect->point.y);
+		UI::correct_for_align(align, rect->image->width(), rect->image->height(), &blit_point);
+		dst.blit(blit_point.cast<float>(), rect->image);
 	}
+}
+
+void Panel::draw_text(RenderTarget& dst,
+					const Vector2i& position,
+					const UI::RenderedText* text,
+					Recti srcrect) {
+	for (const auto& rect : text->texts) {
+		// NOCOM implement when we have actual data
+		//bool contains_origin = srcrect.contains(rect->point);
+		//bool contains_opposite = srcrect.contains(Vector2i(rect->point.x + rect->image->width(), rect->image->height()));
+		//if (contains_origin && contains_opposite) {
+			dst.blitrect(Vector2f(position.x + rect->point.x, position.y + rect->point.y), rect->image, srcrect);
+		//}
+	}
+
 }
 
 /**
@@ -1058,8 +1074,8 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
-	if (!rendered_text) {
+	const UI::RenderedText* rendered_text = g_fh1->render_multi(text_to_render, TIP_WIDTH_MAX);
+	if (rendered_text->texts.empty()) {
 		return false;
 	}
 	uint16_t tip_width = rendered_text->width() + 4;
@@ -1075,7 +1091,8 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
+	// NOCOM
+	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text->texts[0]->image);
 	return true;
 }
 }

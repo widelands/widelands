@@ -259,7 +259,7 @@ uint32_t WordWrap::width() const {
 uint32_t WordWrap::height() const {
 	uint16_t fontheight = 0;
 	if (!lines_.empty()) {
-		fontheight = text_height(lines_[0].text, style_.font->size());
+		fontheight = text_height(style_.font->size());
 	}
 
 	return fontheight * (lines_.size()) + 2 * LINE_MARGIN;
@@ -324,21 +324,23 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	Align alignment = mirror_alignment(align);
 
-	uint16_t fontheight = text_height(lines_[0].text, style_.font->size());
+	uint16_t fontheight = text_height(style_.font->size());
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
-		Vector2f point(where.x, where.y);
+		Vector2i point(where.x, where.y);
 
 		if (static_cast<int>(alignment & UI::Align::kRight)) {
 			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(as_editorfont(
+		const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_editorfont(
 		   lines_[line].text, style_.font->size() - UI::g_fh1->fontset()->size_offset(), style_.fg));
-		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
-		dst.blit(point, entry_text_im);
+		UI::correct_for_align(alignment, rendered_text->width(), fontheight, &point);
+		for (const auto& rect : rendered_text->texts) {
+			dst.blit(Vector2f(point.x + rect->point.x, point.y + rect->point.y), rect->image);
+		}
 
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
@@ -346,10 +348,10 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			int caret_x = text_width(line_to_caret, style_.font->size());
 
 			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-			Vector2f caretpt;
+			Vector2i caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
-			dst.blit(caretpt, caret_image);
+			dst.blit(caretpt.cast<float>(), caret_image);
 		}
 	}
 }

@@ -53,12 +53,8 @@ Align mirror_alignment(Align alignment) {
 	return alignment;
 }
 
-void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
-	// When correcting for align, we never move from pixel boundaries to
-	// sub-pixels, because this might lead from pixel-perfect rendering to
-	// subsampled rendering - this can lead to blurry texts. That is why we
-	// never do float divisions in this function.
-
+// Using Vector2i for pixel-perfect rendering.
+void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2i* pt) {
 	// Vertical Align
 	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
 		if (static_cast<int>(align & Align::kVCenter))

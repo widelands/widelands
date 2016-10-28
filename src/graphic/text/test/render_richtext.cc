@@ -138,6 +138,7 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
+		// NOCOM
 		std::unique_ptr<Texture> texture(
 		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
 

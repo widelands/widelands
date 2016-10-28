@@ -106,8 +106,7 @@ SpinBox::SpinBox(Panel* const parent,
 	uint32_t actual_w = std::max(w, unit_w);
 	uint32_t no_padding = (is_big ? 6 : 4);
 	// Give some height margin = 2 to keep the label from generating a scrollbar.
-	uint32_t texth =
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2;
+	uint32_t texth = text_height() + 2;
 	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.

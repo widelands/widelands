@@ -52,9 +52,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
-     label_height_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        2),
+	  label_height_(text_height() + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
      width_(&box_,

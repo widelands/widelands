@@ -165,7 +165,8 @@ uint32_t TabPanel::add(const std::string& name,
                        const std::string& title,
                        Panel* const panel,
                        const std::string& tooltip_text) {
-	const Image* pic = UI::g_fh1->render(as_uifont(title));
+	// NOCOM
+	const Image* pic = UI::g_fh1->render_multi(as_uifont(title))->texts[0]->image;
 	return add_tab(std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name,
 	               title, pic, tooltip_text, panel);
 }
@@ -302,7 +303,7 @@ void TabPanel::draw(RenderTarget& dst) {
 		} else {
 			dst.blit(Vector2f(x + kTabPanelTextMargin,
 			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2.f),
-			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
+						tabs_[idx]->pic);
 		}
 
 		// Draw top part of border

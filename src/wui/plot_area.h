@@ -97,6 +97,15 @@ struct WuiPlotArea : public UI::Panel {
 	std::vector<std::string> get_labels() const;
 
 protected:
+	void draw_value(const std::string& value,
+						 const RGBColor& color,
+						 const Vector2i& pos,
+						 RenderTarget& dst);
+	void draw_diagram(uint32_t time_ms,
+							const uint32_t inner_w,
+							const uint32_t inner_h,
+							const float xline_length,
+							RenderTarget& dst);
 	void draw_plot(RenderTarget& dst,
 	               float yoffset,
 	               const std::string& yscale_label,

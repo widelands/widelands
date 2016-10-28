@@ -52,9 +52,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                uint32_t const h,
                                bool const show_check)
    : Panel(parent, x, y, w, h),
-     lineheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        kMargin),
+	  lineheight_(text_height() + kMargin),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
      scrollpos_(0),
      selection_(no_selection_index()),
@@ -321,7 +319,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		Vector2f point(1.f, y);
+		Vector2i point(1, y);
 		uint32_t maxw = get_eff_w() - 2;
 
 		// Highlight the current selected entry
@@ -351,7 +349,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			         er.pic);
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(
+		const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_uifont(
 		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
 		Align alignment =
@@ -360,7 +358,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			point.x += maxw - picw;
 		}
 
-		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+		UI::correct_for_align(alignment, rendered_text->width(), rendered_text->height(), &point);
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
@@ -368,24 +366,24 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {
-			point.y += (lineheight_ - entry_text_im->height()) / 2;
+		if (get_lineheight() > static_cast<uint32_t>(rendered_text->height())) {
+			point.y += (lineheight_ - rendered_text->height()) / 2;
 		} else {
-			point.y -= (entry_text_im->height() - lineheight_) / 2;
+			point.y -= (rendered_text->height() - lineheight_) / 2;
 		}
 
 		// Crop to column width while blitting
 		if (static_cast<int>(alignment & UI::Align::kRight) &&
-		    (maxw + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+			 (maxw + picw) < static_cast<uint32_t>(rendered_text->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;
 
 			// We want this always on, e.g. for mixed language savegame filenames, or the languages
 			// list
-			dst.blitrect(point, entry_text_im, Recti(entry_text_im->width() - maxw + picw, 0, maxw,
-			                                         entry_text_im->height()));
+			draw_text(dst, point, rendered_text, Recti(rendered_text->width() - maxw + picw, 0, maxw,
+																	 rendered_text->height()));
 		} else {
-			dst.blitrect(point, entry_text_im, Recti(0, 0, maxw, entry_text_im->height()));
+			draw_text(dst, point, rendered_text, Recti(0, 0, maxw, rendered_text->height()));
 		}
 
 		y += lineheight;

@@ -201,7 +201,7 @@ void FontHandler::Data::render_line(LineCacheEntry& lce) {
  */
 void FontHandler::draw_text(RenderTarget& dst,
                             const TextStyle& style,
-                            Vector2i dstpoint_i,
+									 Vector2i dstpoint,
                             const std::string& text,
                             Align align,
                             uint32_t caret) {
@@ -211,14 +211,13 @@ void FontHandler::draw_text(RenderTarget& dst,
 	copytext = i18n::make_ligatures(copytext.c_str());
 	const LineCacheEntry& lce = d->get_line(style, copytext);
 
-	Vector2f dstpoint = dstpoint_i.cast<float>();
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());
 
 	if (caret <= copytext.size())
-		draw_caret(dst, style, dstpoint, copytext, caret);
+		draw_caret(dst, style, dstpoint.cast<float>(), copytext, caret);
 }
 
 /**

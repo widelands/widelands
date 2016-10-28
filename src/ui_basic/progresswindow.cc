@@ -61,8 +61,7 @@ void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, cons
 	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Recti wnd_rect(Vector2i(0, 0), xres, yres);
 
-	const uint32_t h =
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
+	const uint32_t h = text_height();
 
 	label_rectangle_.x = xres / 4.f;
 	label_rectangle_.w = xres / 2.f;
@@ -103,9 +102,10 @@ void ProgressWindow::step(const std::string& description) {
 	draw_background(rt, xres, yres);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_.cast<float>(),
-	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-	        BlendMode::UseAlpha, UI::Align::kCenter);
+	// NOCOM
+	const Image* rendered_text = UI::g_fh1->render_multi(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG))->texts[0]->image;
+	UI::correct_for_align(UI::Align::kCenter, rendered_text->width(), rendered_text->height(), &label_center_);
+	rt.blit(label_center_.cast<float>(), rendered_text);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows
