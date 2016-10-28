@@ -32,7 +32,6 @@
 namespace UI {
 
 /// Implementation for a dropdown menu that lets the user select a value.
-// NOCOM(#codereview): Move all function implementation in the .cc file for clarity. 
 class BaseDropdown : public Panel {
 protected:
 	/// \param parent     the parent panel
@@ -43,9 +42,7 @@ protected:
 	/// \param label      a label to prefix to the selected entry on the display button.
 	BaseDropdown(
 	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label);
-	~BaseDropdown() {
-		clear();
-	}
+	~BaseDropdown();
 
 public:
 	boost::signals2::signal<void()> selected;

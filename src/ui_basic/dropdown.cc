@@ -69,8 +69,6 @@ BaseDropdown::BaseDropdown(
      label_(label) {
 	list_.set_visible(false);
 	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));
-	// NOCOM(#codereview): I find this looks weird - having the button
-	// permanently pressed. Why did you decide on that?
 	display_button_.set_perm_pressed(true);
 	button_box_.add(&display_button_, UI::Align::kLeft);
 	button_box_.add(&push_button_, UI::Align::kLeft);
@@ -81,6 +79,10 @@ BaseDropdown::BaseDropdown(
 	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
+}
+
+BaseDropdown::~BaseDropdown() {
+	clear();
 }
 
 void BaseDropdown::add(const std::string& name,

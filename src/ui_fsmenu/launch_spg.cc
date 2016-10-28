@@ -289,7 +289,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 	last_win_condition_ = win_condition_dropdown_.get_selected();
 }
 
-// NOCOM(#codereview): Can this not be a free standing function? It seems it is not using any state.
+// TODO(GunChleoc): Turn this into a free standing function. It seems it is not using any state.
 std::unique_ptr<LuaTable>
 FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition_script,
                                                 std::set<std::string> tags) const {
