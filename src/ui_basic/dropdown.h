@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_DROPDOWN_H
 
 #include <deque>
+#include <memory>
 
 #include <boost/signals2.hpp>
 
@@ -141,7 +142,7 @@ public:
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string()) {
-		entry_cache_.push_back(new Entry(value));
+		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text);
 	}
 
@@ -153,17 +154,11 @@ public:
 	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
-		// NOCOM(#codereview): change the deque to contain unique_ptr<> and
-		// remove the manually deletion here.
-		for (Entry* entry : entry_cache_) {
-			delete entry;
-		}
-		entry_cache_.clear();
 	}
 
 private:
 	// Contains the actual elements. The BaseDropdown registers the indices only.
-	std::deque<Entry*> entry_cache_;
+	std::deque<std::unique_ptr<Entry>> entry_cache_;
 };
 
 }  // namespace UI

@@ -276,54 +276,34 @@ bool BaseListselect::has_selection() const {
  * \return the ID/entry value of the currently selected item.
  * The entry value is given as a parameter to \ref add
  *
- * Throws an exception when no item is selected.
+ * Returns no_selection_index() if no item has been selected.
  */
 uint32_t BaseListselect::get_selected() const {
-	// NOCOM(#codereview): Using exceptions here is wrong: this function should
-	// return a sentinal value that nothing is selected and the others should
-	// assert that something is seletected - i.e. the caller has to make sure
-	// that something is selected before calling the functions.
-	// Exceptions should only be used for something exceptional, not for side
-	// loading a diferent return value kind.
-	// Feel free to just add a TODO, but for your new functions, I suggest
-	// requiring that something is selected.
-	if (selection_ == no_selection_index())
-		throw NoSelection();
-
-	return entry_records_[selection_]->entry_;
+	return selection_ < entry_records_.size() ? entry_records_[selection_]->entry_ :
+	                                            no_selection_index();
 }
 
 /**
- * Remove the currently selected item. Throws an exception when no
- * item is selected.
+ * Remove the currently selected item. Requires an element to have been selected first.
  */
 void BaseListselect::remove_selected() {
-	// NOCOM(#codereview): I think these should assert that something is seletecd 
-	if (selection_ == no_selection_index())
-		throw NoSelection();
-
+	assert(selection_ != no_selection_index());
 	remove(selection_);
 }
 
 /**
- * \return The name of the currently selected entry.
- * \throw  NoSelection() if no entry has been selected
+ * \return The name of the currently selected entry. Requires an entry to have been selected.
  */
 const std::string& BaseListselect::get_selected_name() const {
-	if (selection_ == no_selection_index())
-		throw NoSelection();
-
+	assert(selection_ < entry_records_.size());
 	return entry_records_[selection_]->name;
 }
 
 /**
- * \return The tooltip for the currently selected entry.
- * \throw  NoSelection() if no entry has been selected
+ * \return The tooltip for the currently selected entry. Requires an entry to have been selected.
  */
 const std::string& BaseListselect::get_selected_tooltip() const {
-	if (selection_ == no_selection_index())
-		throw NoSelection();
-
+	assert(selection_ < entry_records_.size());
 	return entry_records_[selection_]->tooltip;
 }
 
@@ -409,7 +389,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2f(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-									y + (lineheight_ - er.pic->height()) / 2),
+			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
 

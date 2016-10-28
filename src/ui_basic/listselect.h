@@ -98,7 +98,6 @@ struct BaseListselect : public Panel {
 	void select(uint32_t i);
 	bool has_selection() const;
 
-	struct NoSelection {};
 	uint32_t get_selected() const;
 	void remove_selected();
 
