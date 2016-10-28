@@ -47,11 +47,11 @@ namespace UI {
  *       h
 */
 BaseListselect::BaseListselect(Panel* const parent,
-                               int32_t const x,
-                               int32_t const y,
-                               uint32_t const w,
-                               uint32_t const h,
-                               ListselectLayout selection_mode)
+                               const int32_t x,
+                               const int32_t y,
+                               const uint32_t w,
+                               const uint32_t h,
+                               const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
@@ -279,6 +279,14 @@ bool BaseListselect::has_selection() const {
  * Throws an exception when no item is selected.
  */
 uint32_t BaseListselect::get_selected() const {
+	// NOCOM(#codereview): Using exceptions here is wrong: this function should
+	// return a sentinal value that nothing is selected and the others should
+	// assert that something is seletected - i.e. the caller has to make sure
+	// that something is selected before calling the functions.
+	// Exceptions should only be used for something exceptional, not for side
+	// loading a diferent return value kind.
+	// Feel free to just add a TODO, but for your new functions, I suggest
+	// requiring that something is selected.
 	if (selection_ == no_selection_index())
 		throw NoSelection();
 
@@ -290,6 +298,7 @@ uint32_t BaseListselect::get_selected() const {
  * item is selected.
  */
 void BaseListselect::remove_selected() {
+	// NOCOM(#codereview): I think these should assert that something is seletecd 
 	if (selection_ == no_selection_index())
 		throw NoSelection();
 
@@ -366,8 +375,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
-		if (lineheight < 0)
+		if (lineheight < 0) {
 			break;
+		}
 
 		const EntryRecord& er = *entry_records_[idx];
 
@@ -428,8 +438,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - static_cast<int>(point.y), lineheight);
-		if (lineheight < 0)
+		if (lineheight < 0) {
 			break;
+		}
 
 		// Crop to column width while blitting
 		if (static_cast<int>(alignment & UI::Align::kRight) &&

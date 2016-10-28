@@ -80,7 +80,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                              butw_,
                              get_h() - get_h() * 4 / 10 - buth_,
                              ""),
-     last_win_condition_(""),
      back_(this,
            "back",
            get_w() * 7 / 10,
@@ -225,9 +224,10 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		std::unique_ptr<Widelands::MapLoader> ml =
 		   map.get_correct_loader(settings_->settings().mapfilename);
 		if (ml != nullptr) {
+			// NOCOM(#codereview): pull out into a function? You want to reuse this in the MP anyways. 
 			try {
 				ml->preload_map(true);
-				std::set<std::string> tags = map.get_tags();
+				const std::set<std::string> tags = map.get_tags();
 				// Make sure that the last win condition is still valid. If not, pick the first one
 				// available.
 				if (last_win_condition_.empty()) {
@@ -289,6 +289,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 	last_win_condition_ = win_condition_dropdown_.get_selected();
 }
 
+// NOCOM(#codereview): Can this not be a free standing function? It seems it is not using any state.
 std::unique_ptr<LuaTable>
 FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition_script,
                                                 std::set<std::string> tags) const {
@@ -300,7 +301,6 @@ FullscreenMenuLaunchSPG::win_condition_if_valid(const std::string& win_condition
 
 		// Skip this win condition if the map doesn't have all the required tags
 		if (t->has_key("map_tags")) {
-
 			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!tags.count(map_tag)) {
 					is_usable = false;

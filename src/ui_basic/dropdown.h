@@ -32,6 +32,7 @@
 namespace UI {
 
 /// Implementation for a dropdown menu that lets the user select a value.
+// NOCOM(#codereview): Move all function implementation in the .cc file for clarity. 
 class BaseDropdown : public Panel {
 protected:
 	/// \param parent     the parent panel
@@ -55,11 +56,15 @@ public:
 	/// Sets a label that will be prefixed to the currently selected element's name
 	/// and displayed on the display button.
 	void set_label(const std::string& text);
+
 	/// Sets the tooltip for the display button.
 	void set_tooltip(const std::string& text);
+
 	/// Enables/disables the dropdown selection.
 	void set_enabled(bool on);
-	/// Move the dropdown. The dropdown's position is relative to the parent.
+
+	/// Move the dropdown. The dropdown's position is relative to the parent in
+	/// pixels.
 	void set_pos(Vector2i point) override;
 
 	/// The number of elements listed in the dropdown.
@@ -151,6 +156,8 @@ public:
 	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
+		// NOCOM(#codereview): change the deque to contain unique_ptr<> and
+		// remove the manually deletion here.
 		for (Entry* entry : entry_cache_) {
 			delete entry;
 		}
