@@ -35,7 +35,6 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -438,7 +437,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const DrawText draw_text,
+                     const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
                      float scale,
                      RenderTarget* dst) {
@@ -453,7 +452,7 @@ void Immovable::draw(uint32_t gametime,
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const DrawText draw_text,
+                                  const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
                                   const float scale,
                                   RenderTarget* dst) {
@@ -530,7 +529,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
-		if (pn && pn <= MAX_PLAYERS) {
+		if (pn && pn <= kMaxPlayers) {
 			Player* plr = egbase().get_player(pn);
 			if (!plr)
 				throw GameDataError("Immovable::load: player %u does not exist", pn);

@@ -67,6 +67,10 @@ struct MapView : public UI::Panel {
 	// the view will perceivably jump.
 	void set_zoom(float zoom);
 
+	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
+	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
+	void zoom_around(float new_zoom, const Vector2f& panel_pixel);
+
 	bool is_dragging() const {
 		return dragging_;
 	}
@@ -81,6 +85,7 @@ struct MapView : public UI::Panel {
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool
 	handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void track_sel(const Vector2f& m);
 
