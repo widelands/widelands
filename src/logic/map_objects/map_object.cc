@@ -445,13 +445,13 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const DrawText& draw_text,
+void MapObject::do_draw_info(const TextToDraw& draw_text,
                              const std::string& census,
                              const std::string& statictics,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (draw_text == DrawText::kNone) {
+	if (draw_text == TextToDraw::kNone) {
 		return;
 	}
 
@@ -466,15 +466,14 @@ void MapObject::do_draw_info(const DrawText& draw_text,
 	// NOCOM
 	const Image* rendered_census_info =
 		UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120)->texts[0]->image;
-
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if (draw_text & DrawText::kCensus) {
+	if (draw_text & TextToDraw::kCensus) {
 		UI::correct_for_align(UI::Align::kCenter, rendered_census_info->width(), rendered_census_info->height(), &position);
 		dst->blit(position.cast<float>(), rendered_census_info);
 	}
-
-	if (draw_text & DrawText::kStatistics && !statictics.empty()) {
+	// NOCOM alignment is screwed up.
+	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
 		position.y += rendered_census_info->height() / 2 + 10 * scale;
 		// NOCOM
 		const Image* statistics_image = UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image;
