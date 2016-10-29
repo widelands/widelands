@@ -335,7 +335,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 
-		const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_editorfont(
+		const UI::RenderedText* rendered_text = UI::g_fh1->render(as_editorfont(
 		   lines_[line].text, style_.font->size() - UI::g_fh1->fontset()->size_offset(), style_.fg));
 		UI::correct_for_align(alignment, rendered_text->width(), fontheight, &point);
 		for (const auto& rect : rendered_text->texts) {

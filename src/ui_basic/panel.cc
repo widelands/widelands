@@ -1074,7 +1074,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const UI::RenderedText* rendered_text = g_fh1->render_multi(text_to_render, TIP_WIDTH_MAX);
+	const UI::RenderedText* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
 	if (rendered_text->texts.empty()) {
 		return false;
 	}

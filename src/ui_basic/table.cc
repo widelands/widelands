@@ -299,7 +299,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_uifont(richtext_escape(entry_string)));
+			const UI::RenderedText* rendered_text = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;

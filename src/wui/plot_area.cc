@@ -430,7 +430,7 @@ void WuiPlotArea::draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		const UI::RenderedText* xtick = UI::g_fh1->render_multi(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
+		const UI::RenderedText* xtick = UI::g_fh1->render(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		draw_text(dst, Vector2i(posx, inner_h - kSpaceBottom + 10), xtick, UI::Align::kCenter);
 
 		posx -= sub;
@@ -446,7 +446,7 @@ void WuiPlotArea::draw_diagram(uint32_t time_ms,
 		kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	const UI::RenderedText* xtick = UI::g_fh1->render_multi(xtick_text_style(get_generic_unit_name(unit)));
+	const UI::RenderedText* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	draw_text(dst,Vector2i(2, kSpacing + 2), xtick, UI::Align::kCenterLeft);
 }
 
@@ -458,7 +458,7 @@ void WuiPlotArea::draw_value(const std::string& value,
 					 const RGBColor& color,
 					 const Vector2i& pos,
 					 RenderTarget& dst) {
-	const UI::RenderedText* pic = UI::g_fh1->render_multi(ytick_text_style(value, color));
+	const UI::RenderedText* pic = UI::g_fh1->render(ytick_text_style(value, color));
 	draw_text(dst, pos, pic, UI::Align::kCenterRight);
 }
 

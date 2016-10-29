@@ -139,25 +139,8 @@ public:
 		render_results_.clear();
 	}
 
-	const Image* render(const string& text, uint16_t w = 0) override {
-		const string hash = boost::lexical_cast<string>(w) + text;
-		if (render_results_.count(hash) != 1) {
-			std::unique_ptr<RTImage> image(new RTImage(
-			   hash, texture_cache_.get(), [this] { return rt_renderer_.get(); }, text, w));
-			// force the rich text to get rendered in case there is an exception thrown.
-			image->width();
-
-			RenderedText* rendered_text = new RenderedText();
-			rendered_text->texts.push_back(std::unique_ptr<RenderedRect>(new RenderedRect(Vector2i(0, 0), image_cache_->insert(hash, std::move(image)))));
-			render_results_.insert(std::make_pair(hash, rendered_text));
-		} else {
-			assert(image_cache_->has(hash));
-		}
-		return image_cache_->get(hash);
-	}
-
 	// NOCOM(GunChleoc): This will become the normal render function when we're done.
-	const RenderedText* render_multi(const string& text, uint16_t w = 0) override {
+	const RenderedText* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
 		if (render_results_.count(hash) != 1) {
 			std::unique_ptr<RTImage> image(new RTImage(

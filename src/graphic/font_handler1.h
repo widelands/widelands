@@ -70,11 +70,10 @@ public:
 	}
 
 	/*
-	 * Renders the given text into an image. The image is cached and therefore
+	 * Renders the given text into an set of images. The images are cached and therefore
 	 * ownership remains with this class. Will throw on error.
 	 */
-	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
-	virtual const RenderedText* render_multi(const std::string& text, uint16_t w = 0) = 0;
+	virtual const RenderedText* render(const std::string& text, uint16_t w = 0) = 0;
 
 	/// Returns the font handler's current FontSet
 	virtual UI::FontSet const* fontset() const = 0;

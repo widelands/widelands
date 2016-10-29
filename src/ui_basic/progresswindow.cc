@@ -103,7 +103,7 @@ void ProgressWindow::step(const std::string& description) {
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	// NOCOM
-	const Image* rendered_text = UI::g_fh1->render_multi(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG))->texts[0]->image;
+	const Image* rendered_text = UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG))->texts[0]->image;
 	UI::correct_for_align(UI::Align::kCenter, rendered_text->width(), rendered_text->height(), &label_center_);
 	rt.blit(label_center_.cast<float>(), rendered_text);
 

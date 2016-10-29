@@ -40,13 +40,13 @@ void replace_entities(std::string* text) {
 }
 
 uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render_multi(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
 uint32_t text_height(int ptsize) {
 	return UI::g_fh1
-		->render_multi(
+		->render(
 			as_editorfont(UI::g_fh1->fontset()->representative_character(), ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->height();
 }
@@ -142,10 +142,10 @@ std::string as_waresinfo(const std::string& txt) {
 }
 
 const UI::RenderedText* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	const UI::RenderedText* result = UI::g_fh1->render_multi(as_uifont(richtext_escape(text), fontsize, color));
+	const UI::RenderedText* result = UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render_multi(
+			result = UI::g_fh1->render(
 			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}

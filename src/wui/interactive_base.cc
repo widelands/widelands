@@ -327,7 +327,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			// NOCOM
-			dst.blit(Vector2f(5, 5), UI::g_fh1->render_multi(as_condensed(gametime))->texts[0]->image);
+			dst.blit(Vector2f(5, 5), UI::g_fh1->render(as_condensed(gametime))->texts[0]->image);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
@@ -337,7 +337,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 // NOCOM
-		const Image* rendered_text = UI::g_fh1->render_multi(node_text)->texts[0]->image;
+		const Image* rendered_text = UI::g_fh1->render(node_text)->texts[0]->image;
 		Vector2i point(get_w() - 5, get_h() - 5);
 		UI::correct_for_align(UI::Align::kBottomRight, rendered_text->width(), rendered_text->height(), &point);
 		dst.blit(point.cast<float>(), rendered_text);
@@ -347,7 +347,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		// NOCOM
-		const Image* rendered_text = UI::g_fh1->render_multi(as_condensed(
+		const Image* rendered_text = UI::g_fh1->render(as_condensed(
 			(fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()))->texts[0]->image;
 		dst.blit(Vector2f((get_w() - rendered_text->width()) / 2, 5), rendered_text);
 	}

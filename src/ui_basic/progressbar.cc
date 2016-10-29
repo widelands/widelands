@@ -91,7 +91,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	   (boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
 	// NOCOM
 	Vector2i point(get_w() / 2.f, get_h() / 2.f);
-	const Image* rendered_text = UI::g_fh1->render_multi(as_uifont(progress_text))->texts[0]->image;
+	const Image* rendered_text = UI::g_fh1->render(as_uifont(progress_text))->texts[0]->image;
 	UI::correct_for_align(UI::Align::kCenter, rendered_text->width(), rendered_text->height(), &point);
 	dst.blit(point.cast<float>(), rendered_text);
 }

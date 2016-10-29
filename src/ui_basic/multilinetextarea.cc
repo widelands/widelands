@@ -84,10 +84,10 @@ void MultilineTextarea::recompute() {
 	for (int i = 0; i < 2; ++i) {
 		if (!is_richtext(text_)) {
 			use_old_renderer_ = false;
-			height = UI::g_fh1->render_multi(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
+			height = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else if (force_new_renderer_) {
 			use_old_renderer_ = false;
-			height = UI::g_fh1->render_multi(text_, get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
+			height = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN)->height();
 		} else {
 			use_old_renderer_ = true;
 			rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
@@ -142,9 +142,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	} else {
 		const UI::RenderedText* rendered_text;
 		if (!is_richtext(text_)) {
-			rendered_text = UI::g_fh1->render_multi(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
+			rendered_text = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 		} else {
-			rendered_text = UI::g_fh1->render_multi(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+			rendered_text = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
 		}
 
 		uint32_t blit_width = std::min(rendered_text->width(), static_cast<int>(get_eff_w()));

@@ -465,7 +465,7 @@ void MapObject::do_draw_info(const DrawText& draw_text,
 	// We always render this so we can have a stable position for the statistics string.
 	// NOCOM
 	const Image* rendered_census_info =
-		UI::g_fh1->render_multi(as_condensed(census, UI::Align::kCenter, font_size), 120)->texts[0]->image;
+		UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120)->texts[0]->image;
 
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
@@ -477,7 +477,7 @@ void MapObject::do_draw_info(const DrawText& draw_text,
 	if (draw_text & DrawText::kStatistics && !statictics.empty()) {
 		position.y += rendered_census_info->height() / 2 + 10 * scale;
 		// NOCOM
-		const Image* statistics_image = UI::g_fh1->render_multi(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image;
+		const Image* statistics_image = UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size))->texts[0]->image;
 		dst->blit(position.cast<float>(), statistics_image);
 	}
 }

@@ -349,7 +349,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			         er.pic);
 		}
 
-		const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_uifont(
+		const UI::RenderedText* rendered_text = UI::g_fh1->render(as_uifont(
 		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
 		Align alignment =

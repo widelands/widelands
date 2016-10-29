@@ -56,7 +56,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      rendered_text_(label_text.empty() ? nullptr :
-													  UI::g_fh1->render_multi(as_uifont(label_text),
+													  UI::g_fh1->render(as_uifont(label_text),
                                                            width > (kStateboxSize + kPadding) ?
                                                               width - kStateboxSize - kPadding :
                                                               0)) {

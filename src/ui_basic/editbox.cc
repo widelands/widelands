@@ -379,7 +379,7 @@ void EditBox::draw(RenderTarget& odst) {
 
 	const int max_width = get_w() - 2 * kMarginX;
 
-	const UI::RenderedText* rendered_text = UI::g_fh1->render_multi(as_editorfont(m_->text, m_->fontsize));
+	const UI::RenderedText* rendered_text = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
 	const int linewidth = rendered_text->width();
 	const int lineheight =
