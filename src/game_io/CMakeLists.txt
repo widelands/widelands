@@ -30,6 +30,7 @@ wl_library(game_io
     build_info
     economy
     graphic
+    graphic_image_io
     graphic_minimap_renderer
     io_fileread
     io_filesystem
@@ -42,4 +43,5 @@ wl_library(game_io
     scripting_lua_table
     wui
     wui_mapview_pixelfunctions
+    wui_mapview
 )

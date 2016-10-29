@@ -28,11 +28,6 @@
 #include "graphic/diranimations.h"
 #include "logic/map_objects/bob.h"
 
-namespace UI {
-class Window;
-}
-class InteractiveGameBase;
-
 namespace Widelands {
 
 class Economy;
@@ -56,6 +51,19 @@ struct NoteShipMessage {
 
 	NoteShipMessage(Ship* const init_ship, const Message& init_message)
 	   : ship(init_ship), message(init_message) {
+	}
+};
+
+struct NoteShipWindow {
+	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
+
+	Serial serial;
+
+	enum class Action { kRefresh, kClose };
+	const Action action;
+
+	NoteShipWindow(Serial init_serial, const Action& init_action)
+		: serial(init_serial), action(init_action) {
 	}
 };
 
@@ -119,7 +127,7 @@ struct Ship : Bob {
 	void start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
 
-	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr);
+	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
 
 	void log_general_info(const EditorGameBase&) override;
 
@@ -132,10 +140,6 @@ struct Ship : Bob {
 
 	void withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items);
 	void add_item(Game&, const ShippingItem& item);
-
-	void show_window(InteractiveGameBase&, bool avoid_fastclick = false);
-	void close_window();
-	void refresh_window(InteractiveGameBase&);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
 	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
@@ -169,42 +173,42 @@ struct Ship : Bob {
 	};
 
 	/// \returns the current state the ship is in
-	ShipStates get_ship_state() {
+	ShipStates get_ship_state() const {
 		return ship_state_;
 	}
 
 	/// \returns the current name of ship
-	const std::string& get_shipname() {
+	const std::string& get_shipname() const {
 		return shipname_;
 	}
 
 	/// \returns whether the ship is currently on an expedition
-	bool state_is_expedition() {
+	bool state_is_expedition() const {
 		return (ship_state_ == ShipStates::kExpeditionScouting ||
 		        ship_state_ == ShipStates::kExpeditionWaiting ||
 		        ship_state_ == ShipStates::kExpeditionPortspaceFound ||
 		        ship_state_ == ShipStates::kExpeditionColonizing);
 	}
 	/// \returns whether the ship is in transport mode
-	bool state_is_transport() {
+	bool state_is_transport() const {
 		return (ship_state_ == ShipStates::kTransport);
 	}
 	/// \returns whether a sink request for the ship is currently valid
-	bool state_is_sinkable() {
+	bool state_is_sinkable() const {
 		return (ship_state_ != ShipStates::kSinkRequest &&
 		        ship_state_ != ShipStates::kSinkAnimation &&
 		        ship_state_ != ShipStates::kExpeditionColonizing);
 	}
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
-	bool exp_dir_swimmable(Direction dir) {
+	bool exp_dir_swimmable(Direction dir) const {
 		if (!expedition_)
 			return false;
 		return expedition_->swimmable[dir - 1];
 	}
 
 	/// \returns whether the expedition ship is close to the coast
-	bool exp_close_to_coast() {
+	bool exp_close_to_coast() const {
 		if (!expedition_)
 			return false;
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
@@ -214,7 +218,7 @@ struct Ship : Bob {
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	const std::vector<Coords>& exp_port_spaces() {
+	const std::vector<Coords>& exp_port_spaces() const {
 		return expedition_->seen_port_buildspaces;
 	}
 
@@ -224,22 +228,25 @@ struct Ship : Bob {
 
 	// Returns integer of direction, or WalkingDir::IDLE if query invalid
 	// Intended for LUA scripting
-	WalkingDir get_scouting_direction();
+	WalkingDir get_scouting_direction() const;
 
 	// Returns integer of direction, or IslandExploreDirection::kNotSet
 	// if query invalid
 	// Intended for LUA scripting
-	IslandExploreDirection get_island_explore_direction();
+	IslandExploreDirection get_island_explore_direction() const;
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
 
 protected:
-	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
+	void draw(const EditorGameBase&,
+	          const TextToDraw& draw_text,
+	          const Vector2f& field_on_dst,
+	          float scale,
+	          RenderTarget* dst) const override;
 
 private:
 	friend struct Fleet;
-	friend struct ShipWindow;
 
 	void wakeup_neighbours(Game&);
 
@@ -260,8 +267,6 @@ private:
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  const std::string& picture);
-
-	UI::Window* window_;
 
 	Fleet* fleet_;
 	Economy* economy_;

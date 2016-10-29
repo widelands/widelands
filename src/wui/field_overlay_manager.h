@@ -25,7 +25,7 @@
 #include <set>
 #include <vector>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
 
@@ -55,12 +55,12 @@ struct FieldOverlayManager {
 	/// A overlay as drawn onto the screen.
 	struct OverlayInfo {
 		OverlayInfo() = default;
-		OverlayInfo(const Image* init_pic, const Point& init_hotspot)
+		OverlayInfo(const Image* init_pic, const Vector2i& init_hotspot)
 		   : pic(init_pic), hotspot(init_hotspot) {
 		}
 
 		const Image* pic;
-		Point hotspot;
+		Vector2i hotspot;
 	};
 
 	/// A function returning Field::nodecaps() for the build overlay. This can be
@@ -84,11 +84,11 @@ struct FieldOverlayManager {
 
 	/// Register an overlay at a location (node or triangle). hotspot is the point
 	/// of the picture that will be exactly over the location. If hotspot is
-	/// Point::invalid(), the center of the picture will be used as hotspot.
+	/// Vector2i::invalid(), the center of the picture will be used as hotspot.
 	void register_overlay(const Widelands::TCoords<>& coords,
 	                      const Image* pic,
 	                      int32_t level,
-	                      Point hotspot = Point::invalid(),
+	                      Vector2i hotspot = Vector2i::invalid(),
 	                      OverlayId overlay_id = 0);
 
 	/// removes all overlays when pic is nullptr.
@@ -111,14 +111,14 @@ private:
 	struct RegisteredOverlays {
 		RegisteredOverlays(const OverlayId init_overlay_id,
 		                   const Image* init_pic,
-		                   const Point init_hotspot,
+		                   const Vector2i init_hotspot,
 		                   const int init_level)
 		   : pic(init_pic), hotspot(init_hotspot), level(init_level) {
 			overlay_ids.insert(init_overlay_id);
 		}
 		std::set<OverlayId> overlay_ids;
 		const Image* pic;
-		Point hotspot;
+		Vector2i hotspot;
 		int level;
 	};
 

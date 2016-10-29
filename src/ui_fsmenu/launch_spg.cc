@@ -30,7 +30,6 @@
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -43,18 +42,6 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
-
-namespace {
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
@@ -73,10 +60,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  butw_,
                  buth_,
                  g_gr->images().get("images/ui_basic/but1.png"),
-                 _("Select map"),
-                 std::string(),
-                 false,
-                 false),
+                 _("Select map")),
      wincondition_(this,
                    "win_condition",
                    get_w() * 7 / 10,
@@ -84,10 +68,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                    butw_,
                    buth_,
                    g_gr->images().get("images/ui_basic/but1.png"),
-                   "",
-                   std::string(),
-                   false,
-                   false),
+                   ""),
      back_(this,
            "back",
            get_w() * 7 / 10,
@@ -95,10 +76,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
            butw_,
            buth_,
            g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back"),
-           std::string(),
-           true,
-           false),
+           _("Back")),
      ok_(this,
          "ok",
          get_w() * 7 / 10,
@@ -106,10 +84,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
          butw_,
          buth_,
          g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game"),
-         std::string(),
-         false,
-         false),
+         _("Start game")),
 
      // Text labels
      title_(this, get_w() / 2, get_h() / 10, _("Launch Game"), UI::Align::kHCenter),
@@ -172,14 +147,16 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	init_.set_fontsize(smaller_fontsize);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		const Image* player_image = g_gr->images().get(player_pictures_small[i]);
+	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
+		const Image* player_image =
+		   playercolor_image(i, g_gr->images().get("images/players/player_position_menu.png"),
+		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
 		                  get_h() * 17 / 500, g_gr->images().get("images/ui_basic/but1.png"),
-		                  player_image, _("Switch to position"), false);
+		                  player_image, _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
 		players_[i] = new PlayerDescriptionGroup(
@@ -346,11 +323,11 @@ void FullscreenMenuLaunchSPG::refresh() {
 		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::stateOpen ||
 		                                       player.state == PlayerSettings::stateComputer));
 	}
-	for (uint32_t i = nr_players_; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
 		pos_[i]->set_visible(false);
 
 	// update the player description groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < kMaxPlayers; ++i)
 		players_[i]->refresh();
 
 	win_condition_update();

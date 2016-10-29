@@ -84,9 +84,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
-	button_ok_ =
-	   new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	                  g_gr->images().get("images/ui_basic/but4.png"), _("OK"), std::string(), false);
+	button_ok_ = new UI::Button(this, "ok", DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+	                            g_gr->images().get("images/ui_basic/but4.png"), _("OK"));
 	button_ok_->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	UI::Button* cancelbtn =
@@ -143,7 +142,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	Widelands::GamePreloadPacket gpdp;
 	gl.preload_game(gpdp);  //  This has worked before, no problem
 	{ editbox_.set_text(FileSystem::filename_without_ext(name.c_str())); }
-	button_ok_->set_enabled(true);
+	edit_box_changed();
 
 	// Try to translate the map name.
 	{
@@ -196,6 +195,7 @@ void GameMainMenuSaveGame::fill_list() {
 		} catch (const WException&) {
 		}  //  we simply skip illegal entries
 	}
+	edit_box_changed();
 }
 
 void GameMainMenuSaveGame::select_by_name(std::string name) {

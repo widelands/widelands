@@ -61,7 +61,7 @@ Table<void*>::Table(Panel* const parent,
      button_background_(button_background),
      scrollbar_(nullptr),
      scrollbar_filler_button_(new Button(
-        this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "", "", false)),
+		  this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -79,6 +79,7 @@ Table<void*>::Table(Panel* const parent,
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
 	scrollbar_->set_pagesize(get_h() - lineheight_);
+	scrollbar_filler_button_->set_enabled(false);
 }
 
 /**
@@ -116,7 +117,7 @@ void Table<void*>::add_column(uint32_t const width,
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
-		                   title, tooltip_string, true, false);
+								 title, tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -242,7 +243,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -252,7 +253,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rect(Point(1, y), get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Rectf(1.f, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
@@ -264,14 +265,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Point point(curx, y);
+			Vector2f point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
 				const int pich = entry_picture->height();
 
-				int draw_x = point.x;
+				float draw_x = point.x;
 
 				// We want a bit of margin
 				int max_pic_height = lineheight - 3;
@@ -283,9 +284,9 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 					if (entry_string.empty()) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
-							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2;
+							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - blit_width) / 2;
+							draw_x = point.x + (curw - blit_width) / 2.f;
 						}
 					}
 
@@ -294,22 +295,22 @@ void Table<void*>::draw(RenderTarget& dst) {
 					}
 
 					// Create the scaled image
-					dst.blitrect_scale(Rect(draw_x, point.y + 1, blit_width, max_pic_height),
-					                   entry_picture, Rect(0, 0, picw, pich), 1., BlendMode::UseAlpha);
+					dst.blitrect_scale(Rectf(draw_x, point.y + 1.f, blit_width, max_pic_height),
+					                   entry_picture, Recti(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
 					picw = blit_width;
 				} else {
 					if (entry_string.empty()) {
 						if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
-							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2;
+							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - picw) / 2;
+							draw_x = point.x + (curw - picw) / 2.f;
 						}
 					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - picw;
 					}
-					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
+					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
 				}
 				point.x += picw;
 			}
@@ -325,7 +326,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
 			} else if (static_cast<int>(alignment & UI::Align::kHCenter)) {
-				point.x += (curw - picw) / 2;
+				point.x += (curw - picw) / 2.f;
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
@@ -345,12 +346,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 				if (i18n::has_rtl_character(
 				       entry_string.c_str(), 20)) {  // Restrict check for efficiency
 					dst.blitrect(
-					   point, entry_text_im, Rect(text_width - curw + picw, 0, text_width, lineheight));
+					   point, entry_text_im, Recti(text_width - curw + picw, 0, text_width, lineheight));
 				} else {
-					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+					dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
 				}
 			} else {
-				dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+				dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
 			}
 			curx += curw;
 		}
@@ -555,13 +556,13 @@ void Table<void*>::layout() {
 			column.btn->set_size(column.width, column.btn->get_h());
 			int offset = 0;
 			for (const auto& col : columns_) {
-				col.btn->set_pos(Point(offset, col.btn->get_y()));
+				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
 				offset = col.btn->get_x() + col.btn->get_w();
 			}
 			if (scrollbar_->is_enabled()) {
 				const UI::Button* last_column_btn = columns_.back().btn;
 				scrollbar_filler_button_->set_pos(
-				   Point(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+					Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
 				scrollbar_filler_button_->set_visible(true);
 			} else {
 				scrollbar_filler_button_->set_visible(false);

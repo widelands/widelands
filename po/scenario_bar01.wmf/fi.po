@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 18:55+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-16 16:16+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Tehdäksesi niin, sijoita lippu vuoren sivulle idässä (vaikka vuorimaastoon, ei vuoriniitylle). Kun klikkaat uuden lipun päällä, voit lähettää geologis sinne. Koska lippu on vuorella, geologit tulee etsimään malmia; muussa tapauksessa, he etsivät vettä. Sitten rakenna kaivos molemmille resurssityypeille, jotka he tulevat löytämään, valikoi sopiva kaivos rakennettavaksi:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
@@ -129,7 +129,7 @@ msgstr "Toimita kaivostyöläisillesi ruokaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Luo metsästäjä, riistanvartija ja krouvi."
+msgstr "Luo metsästäjä, riistanvartija ja krouvi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
@@ -154,7 +154,7 @@ msgstr "Leivo leipää"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
-msgstr "Rakenna kaivo, maatila ja leipomo."
+msgstr "Rakenna kaivo, maatila ja leipomo"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:77
 msgid ""
@@ -180,7 +180,7 @@ msgstr "Kaivostyöläisesi kaivama rautamalmi ei ole vielä käyttökelpoista �
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Laajenna rakennuksia ja rakenna pienpanimo."
+msgstr "Laajenna rakennuksia ja rakenna pienpanimo"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
@@ -210,7 +210,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Työntekijät saavat kokemusta onnistuneesta työstä. Riittävällä kokemuksella heistä tulee kehittyneemipiä työntekijöitä, jotka ovat tarpeellisia laajennettujen rakennuksien toiminnassa. Älä laajenna rakennusta ennen kuin sinulla on riittävästi kokeneita työntekijöitä laajennetun rakennuksen toiminnan pyörittämiseksi."
+msgstr "Työntekijät saavat kokemusta onnistuneesta työstä. Riittävällä kokemuksella heistä tulee kehittyneemipiä työntekijöitä, jotka ovat tarpeellisia laajennettujen rakennuksien toiminnassa. Älä laajenna rakennusta ennen kuin sinulla on riittävästi kokeneita työntekijöitä laajennetun rakennuksen toiminnan pyörittämiseksi!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -328,7 +328,7 @@ msgstr "Tarina Alkaa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
-msgstr "Thorn huokaisee..."
+msgstr "Thorn huokaisee…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -384,7 +384,7 @@ msgstr "Kuten isäni sanoi minulle, on aikoja jolloin taistella ja aikoja jolloi
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
-msgstr "Thorn pyörittää päätään..."
+msgstr "Thorn pyörittää päätään…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:206
@@ -420,7 +420,7 @@ msgstr "Tänään metsästäjäni toivat eteeni miehen, naisen ja pienen lapsen,
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr "Nousta vasten ketä tahansa, joka uhkaa meidän olemassaoloa, vaikka se olisikin omiesi verta ja mieltä."
+msgstr "Nousta vasten ketä tahansa, joka uhkaa meidän olemassaoloa, vaikka se olisikin omiesi verta ja mieltä?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
@@ -439,7 +439,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr "Ehkäpä meidän on aika ottaa täällä hieman rennommin. Ehkäpä on aika antaa uusi koti noille, jotka vielä elävät ja ajattelevat samalla tavalla, korvata mitä meille on nyt menetettyä? Ennen kuin voimme palata paikkaan, jota kerran kutsuimme meidän kodiksi..."
+msgstr "Ehkäpä meidän on aika ottaa täällä hieman rennommin. Ehkäpä on aika antaa uusi koti noille, jotka vielä elävät ja ajattelevat samalla tavalla, korvata mitä meille on nyt menetettyä? Ennen kuin voimme palata paikkaan, jota kerran kutsuimme meidän kodiksi…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Somebody Comes up to You"
@@ -447,7 +447,7 @@ msgstr "Joku Tulee Puheillesi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
-msgstr "Vanha mies kertoo..."
+msgstr "Vanha mies kertoo…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -462,7 +462,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr "VAin jumalat tietävät kuinka kkauan meidän täytyy pysyä täällä piilossa. Soturit toivovat, että joku päivä marssisimme takaisin kunniakkaasti, mutta epäilen vahvasti ettei se tule tapahtumaan lähiaikoina. Ja päiväthän ovat vielä lyhyitä ja kylmiä..."
+msgstr "VAin jumalat tietävät kuinka kkauan meidän täytyy pysyä täällä piilossa. Soturit toivovat, että joku päivä marssisimme takaisin kunniakkaasti, mutta epäilen vahvasti ettei se tule tapahtumaan lähiaikoina. Ja päiväthän ovat vielä lyhyitä ja kylmiä…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:248
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:321
@@ -479,7 +479,7 @@ msgstr "Neuvonantaja"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr "Khantrukh muistuttaa..."
+msgstr "Khantrukh muistuttaa…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
@@ -510,7 +510,7 @@ msgstr "Yöllä"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says…"
-msgstr "Thron kertoo..."
+msgstr "Thron kertoo…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -537,14 +537,14 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Taas kerran, nousin isäni haudalle, pyhään lehtoon, Kal’mavrathin valtavan huipun juurelle. Minä vain seisoin siellä, enkä tuntenut kuinka aika kului ja kylmä sade valui alas pimentyneeltä taivaalta..."
+msgstr "Taas kerran, nousin isäni haudalle, pyhään lehtoon, Kal’mavrathin valtavan huipun juurelle. Minä vain seisoin siellä, enkä tuntenut kuinka aika kului ja kylmä sade valui alas pimentyneeltä taivaalta…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr "Jotenkin se tuntui kuin olisin jättämässä jäähyväisiä. Ensimmäistä kertaa, ihmettelin mitä tulevaisuus saattaisi minulle tuoda..."
+msgstr "Jotenkin se tuntui kuin olisin jättämässä jäähyväisiä. Ensimmäistä kertaa, ihmettelin mitä tulevaisuus saattaisi minulle tuoda…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:291
 msgid "The Other Day"
@@ -552,7 +552,7 @@ msgstr "Toisena päivänä"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:292
 msgid "Thron says thoughtfully…"
-msgstr "Thron sanoo huomaavaisesti..."
+msgstr "Thron sanoo huomaavaisesti…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:294
@@ -568,7 +568,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr "Mutta kun katsoin yli metsien, saatoin silti nähdä mustaa savua taivaalla. Tiedän – se on vielä liian aikaista ja mitä hän toivoo ei tule tapahtumaan lähiaikoina. Hän voi silti olla oikeassa, mutta pelkään verilöylyä, joka palaisi liian nopeasti molempien puolien aiheuttamana."
+msgstr "Mutta kun katsoin yli metsien, saatoin silti nähdä mustaa savua taivaalla. Tiedän – se on vielä liian aikaista ja mitä hän toivoo ei tule tapahtumaan lähiaikoina. Hän voi silti olla oikeassa, mutta pelkään verilöylyä, joka palaisi liian nopeasti molempien puolien aiheuttamana…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "The Oath"
@@ -576,7 +576,7 @@ msgstr "Vala"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:303
 msgid "Thron looks furious…"
-msgstr "Thron näyttää raivostuneelta..."
+msgstr "Thron näyttää raivostuneelta…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:305
@@ -835,23 +835,23 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr ""
+msgstr "Kuten juuri havaitsin, meiltä on loppumassa puuhiili! Emme voi laittaa meidän sotureita johonkin mureneviin majoihin, ja vielä vähemmän vaarallisina aikoina kuten meidän!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Tarvitsemme puun kovettajan, ja me tarvitsemme sen nyt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:461
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth hymyilee..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr ""
+msgstr "No, vanha ystävä, tämän pitäisi varmistaa ettei meidän linnoitus murru meidän ensimmäisessä taistelussa vihollisien kanssa! Voimme nyt laajentaa turvallisesti!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:466
@@ -859,11 +859,11 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "Silti, se ei haittaisi vaikka keräisimme jonkin verran laastia meidän myöhempiä sotia varten; niin me voisimme, tulevia aikoja varten, rakentaa linnoitus jollaista kukaan ei ole koskaan maailmassa nähnyt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Khantrukh astuu sisään…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:474
@@ -873,16 +873,16 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "Heimopäällikkö, tämä on häpeällistä! Se on selvää, että voimme tuottaa laastia nyt mahtaviin linnoituksiin ja valtaviin rakennuksiin – se ei kuitenkaan estä meidän kattoja vuotamasta! Ehkäpä nuorimmat haluaisivat viettää yönsä sateessa, mutta en vain kykene nukahtamaan vesipisaroiden vuotaessa naamalleni!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "Nyt medän tulisi tehdä jotakin tehdä ongelmalle!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:483
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh näyttää huojentuneelta…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:485
@@ -893,7 +893,7 @@ msgstr "Erinomaista! Kattomme eivät enää vuoda, ja meillä on kaikki tarvitta
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Tarvitsemme Härkiä!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
@@ -902,7 +902,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "Sikäli kun meidän valtakunta laajenee isommaksi ja isommaksi, liikenne teillä musertavaa. Meidän rupuiset kantajamme eivät enää kykene kuljettamaan tavaroita niin nopeastu kuin me tarvitsisimme niitä. Ehdotan että annamme heille houkan apua kasvattamalla härkiä."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
@@ -910,7 +910,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "Ne ovat ällistyttäviä eläimiä: Härkä on yhtä nopea kuin ihminen, samalla paljon voimakkaampi ja hyvin taloudellinen: kaikki mitä tarvitsemme on vehnä ja vesi kasvattaaksemme niitä ja ne tulevat tekemään heidän työnsä teillä lojaalisti ja luotettavasti."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:500
 msgid "Mission Complete"
@@ -920,14 +920,14 @@ msgstr "Tehtävä suoritettu"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:516
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:539
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron puhuu…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr ""
+msgstr "Eräs päivä Boldreth pyysi minua mukaansa uuteen kestikievariin. Se ilahduttaisi minua, hän sanoi."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
@@ -936,12 +936,12 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "Kun katsoin ympärilleni, näin uskollisia kasvoja, luottaen, että voisin opastaa heitä läpi näiden pimeiden päivien. Silti ennen kuin voisin sanoa yhtään kiitollisuuden ja rohkaisun sanaa, yksi sotureistani juoksi kestikievariin sisään. Hän oli ollut kaukana metsässä viimepäivät ja kykenin näkemään kuinka uupunut hän oli."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Hänen tuomansa uutinen muutti kaiken…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
@@ -955,7 +955,7 @@ msgstr "Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamis
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid "One Full Moon Night"
-msgstr "Eräänä täydenkuun yönä..."
+msgstr "Eräänä täydenkuun yönä"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
@@ -979,7 +979,7 @@ msgstr "Toinen kuulas päivä"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
-msgstr "Thron näyttää huolestuneelta..."
+msgstr "Thron näyttää huolestuneelta…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
@@ -1017,14 +1017,14 @@ msgstr "Olemme löytäneet kylän, jossa asuu ystävällistä ja tuotteliasta v�
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "He ovat eläneet vaatimattomasti, mutta huolettomasti, metsästyksestä ja maanviljelystä. He eivät ole olleet toistaiseksi osallisina yhdessäkään yhteenotossa, ja he eivät ole valmiita taistelemaan."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:547
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "He kuitenkin pelkäävät sodan Al’thunranin ympärillä tuhoavan heidän elämäntavan Sen vuoksi, he ovat päättäneet liittyä meihin, toivoen että me voimme auttaa toinen toisiamme."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
@@ -1034,5 +1034,5 @@ msgstr "\"%s\""
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"
