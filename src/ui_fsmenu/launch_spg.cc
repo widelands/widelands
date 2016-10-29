@@ -33,7 +33,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/map.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -200,7 +199,7 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 /**
  * Fill the dropdown with the available win conditions.
  */
-void FullscreenMenuLaunchSPG::load_win_conditions() {
+void FullscreenMenuLaunchSPG::update_win_conditions() {
 	win_condition_dropdown_.clear();
 	if (settings_->settings().scenario) {
 		win_condition_dropdown_.set_label(_("Scenario"));
@@ -213,54 +212,8 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 		std::unique_ptr<Widelands::MapLoader> ml =
 		   map.get_correct_loader(settings_->settings().mapfilename);
 		if (ml != nullptr) {
-			// NOCOM(#codereview): pull out into a function? You want to reuse this in the MP anyways.
-			// NOCOM(GunChleoc): Why not simply reuse all of load_win_conditions() in the MP?
-			try {
-				ml->preload_map(true);
-				const std::set<std::string> tags = map.get_tags();
-				// Make sure that the last win condition is still valid. If not, pick the first one
-				// available.
-				if (last_win_condition_.empty()) {
-					last_win_condition_ = settings_->settings().win_condition_scripts.front();
-				}
-				std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-				for (const std::string& win_condition_script :
-				     settings_->settings().win_condition_scripts) {
-					if (t) {
-						break;
-					} else {
-						last_win_condition_ = win_condition_script;
-						t = win_condition_if_valid(last_win_condition_, tags);
-					}
-				}
-
-				// Now fill the dropdown.
-				for (const std::string& win_condition_script :
-				     settings_->settings().win_condition_scripts) {
-					try {
-						t = win_condition_if_valid(win_condition_script, tags);
-						if (t) {
-							i18n::Textdomain td("win_conditions");
-							win_condition_dropdown_.add(
-							   _(t->get_string("name")), win_condition_script, nullptr,
-							   win_condition_script == last_win_condition_, t->get_string("description"));
-						}
-					} catch (LuaTableKeyError& e) {
-						log("LaunchSPG: Error loading win condition: %s %s\n",
-						    win_condition_script.c_str(), e.what());
-					}
-				}
-			} catch (const std::exception& e) {
-				const std::string error_message =
-				   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
-				                    "could not be loaded.")) %
-				    settings_->settings().mapfilename)
-				      .str();
-				win_condition_dropdown_.set_label(_("Error"));
-				win_condition_dropdown_.set_tooltip(error_message);
-				log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
-			}
-
+			ml->preload_map(true);
+			load_win_conditions(map);
 		} else {
 			const std::string error_message =
 			   (boost::format(_("Unable to determine valid win conditions because the map '%s' could "
@@ -272,6 +225,53 @@ void FullscreenMenuLaunchSPG::load_win_conditions() {
 			log("LaunchSPG: No map loader: %s\n", error_message.c_str());
 		}
 		win_condition_dropdown_.set_enabled(true);
+	}
+}
+
+void FullscreenMenuLaunchSPG::load_win_conditions(const Widelands::Map& map) {
+	try {
+		const std::set<std::string> tags = map.get_tags();
+		// Make sure that the last win condition is still valid. If not, pick the first one
+		// available.
+		if (last_win_condition_.empty()) {
+			last_win_condition_ = settings_->settings().win_condition_scripts.front();
+		}
+		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
+		for (const std::string& win_condition_script :
+			  settings_->settings().win_condition_scripts) {
+			if (t) {
+				break;
+			} else {
+				last_win_condition_ = win_condition_script;
+				t = win_condition_if_valid(last_win_condition_, tags);
+			}
+		}
+
+		// Now fill the dropdown.
+		for (const std::string& win_condition_script :
+			  settings_->settings().win_condition_scripts) {
+			try {
+				t = win_condition_if_valid(win_condition_script, tags);
+				if (t) {
+					i18n::Textdomain td("win_conditions");
+					win_condition_dropdown_.add(
+						_(t->get_string("name")), win_condition_script, nullptr,
+						win_condition_script == last_win_condition_, t->get_string("description"));
+				}
+			} catch (LuaTableKeyError& e) {
+				log("LaunchSPG: Error loading win condition: %s %s\n",
+					 win_condition_script.c_str(), e.what());
+			}
+		}
+	} catch (const std::exception& e) {
+		const std::string error_message =
+			(boost::format(_("Unable to determine valid win conditions because the map '%s' "
+								  "could not be loaded.")) %
+			 settings_->settings().mapfilename)
+				.str();
+		win_condition_dropdown_.set_label(_("Error"));
+		win_condition_dropdown_.set_tooltip(error_message);
+		log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
@@ -396,7 +396,7 @@ void FullscreenMenuLaunchSPG::select_map() {
 
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
-	load_win_conditions();
+	update_win_conditions();
 }
 
 /**

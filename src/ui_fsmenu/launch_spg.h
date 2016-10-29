@@ -24,6 +24,7 @@
 #include <string>
 
 #include "graphic/playercolor.h"
+#include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
@@ -68,7 +69,9 @@ private:
 	void select_map();
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
-	void load_win_conditions();
+	void update_win_conditions();
+	/// Reads the win conditions that are available for the given map and adds the entries to the dropdown.
+	void load_win_conditions(const Widelands::Map& map);
 	/// Remembers the win condition that is currently selected in the dropdown.
 	void win_condition_selected();
 	/// If the win condition in 'win_condition_script' can be played with the map tags,
