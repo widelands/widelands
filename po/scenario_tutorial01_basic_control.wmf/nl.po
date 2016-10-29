@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-07 07:04+0000\n"
-"PO-Revision-Date: 2016-10-08 13:30+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-15 21:03+0000\n"
 "Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +293,7 @@ msgstr "Perfect, de houthakkershut is gebouwd.  Een houthakker zal er zijn intre
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr "Er Zijn wat Stenen in de Buurt"
+msgstr "Er Zijn wat Rotsen in de Buurt"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
@@ -305,7 +305,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Graniet kan gedolven worden in granietmijnen, maar de makkelijke manier is om naast stenen die boven de oppervlakte uitsteken een steengroeve te bouwen.  Het geval wil dat er een aantal liggen ten westen (dat wil zeggen: links) van het hoofdkwartier.  Ik zal je nu leren om het zicht hierheen te verplaatsen."
+msgstr "Graniet kan gedolven worden in granietmijnen, maar de makkelijke manier is om naast rotsen die boven de oppervlakte uitsteken een steengroeve te bouwen.  Het geval wil dat er een aantal liggen ten westen (dat wil zeggen: links) van het hoofdkwartier.  Ik zal je nu leren om het zicht hierheen te verplaatsen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -429,7 +429,7 @@ msgstr "Hoe Bouw je een Steengroeve"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "Bouw een steengroeve naast deze stenen.  Weet je nog hoe ik het deed voor de houthakkershut?"
+msgstr "Bouw een steengroeve naast deze rotsen.  Weet je nog hoe ik het deed voor de houthakkershut?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -761,26 +761,26 @@ msgstr "Het bericht in kwestie wordt dan naar je archief verplaatst.  Als je op 
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
-msgstr "Archiveer alle berichten die je op dit moment in je inbox hebt, ook dit hier."
+msgstr "Archiveer alle berichten die je op dit moment in je postbus hebt, ook dit hier."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
 msgid "Archive all messages in your inbox"
-msgstr "Archiveer alle berichten in je inbox"
+msgstr "Archiveer alle berichten in je postbus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
 msgid "Archive Your Inbox Messages"
-msgstr "Archiveer Berichten in je Inbox"
+msgstr "Archiveer Berichten in je Postbus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "Het berichtenvenster is een belangrijk hulpmiddel om het wedervaren van je stam goed te controleren.  Maar in een echt spel krijg je een hoop berichten.  Om niet in de war te raken moet je proberen om je inbox leeg te houden."
+msgstr "Het berichtenvenster is een belangrijk hulpmiddel om het wedervaren van je stam goed te controleren.  Maar in een echt spel krijg je een hoop berichten.  Om niet in de war te raken moet je proberen om je postbus leeg te houden."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
-msgstr "Archiveer nu alle berichten in je inbox."
+msgstr "Archiveer nu alle berichten in je postbus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
@@ -788,7 +788,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr "Om dit te doen open je het berichtenvenster door op \"n\" te drukken of op de tweede knop van rechts onderaan het scherm te klikken.  Het nieuwste bericht is automatisch geselecteerd.  Blijf klikken op \"Archiveer geselecteerd bericht\" tot alle berichten naar het archief verplaatst zijn en je inbox leeg is."
+msgstr "Om dit te doen open je het berichtenvenster door op \"n\" te drukken of op de tweede knop van rechts onderaan het scherm te klikken.  Het nieuwste bericht is automatisch geselecteerd.  Blijf klikken op \"Archiveer geselecteerd bericht\" tot alle berichten naar het archief verplaatst zijn en je postbus leeg is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -833,7 +833,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Goed gedaan!  We zullen nu eens bekijken hoe berichten werken in het echte spel.  Daartoe zal ik alle stenen weghalen van de arme steenhouwers in de steengroeves.  Wanneer ze de volgende keer proberen hun werk uit te voeren zullen ze een bericht sturen dat ze niets meer kunnen vinden in hun werkgebied."
+msgstr "Goed gedaan!  We zullen nu eens bekijken hoe berichten werken in het echte spel.  Daartoe zal ik alle rotsen weghalen van de arme steenhouwers in de steengroeves.  Wanneer ze de volgende keer proberen hun werk uit te voeren zullen ze een bericht sturen dat ze niets meer kunnen vinden in hun werkgebied."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
@@ -950,7 +950,7 @@ msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Een Barbaar kan je vier soorten militaire constructies bouwen: de wachtpost (klein), de barrière en de toren (beiden middelgroot) en de vesting (groot).  Bouw er één naar keuze."
+msgstr "Als Barbaar kan je vier soorten militaire constructies bouwen: de wachtpost (klein), de barrière en de toren (beiden middelgroot) en de vesting (groot).  Bouw er één naar keuze."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -1016,7 +1016,7 @@ msgstr "'Verlaat Spel'."
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr "Bedankt voor het spelen van de oefencampagne. Geniet van Widelands en bezoek ons eens op"
+msgstr "Bedankt voor het spelen van deze oefencampagne. Geniet van Widelands en bezoek ons eens op"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
@@ -1026,5 +1026,5 @@ msgstr "\"%s\""
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nieuwe opdracht"
-msgstr[1] "Nieuwe opdrachten"
+msgstr[0] "Nieuwe Doelstelling"
+msgstr[1] "Nieuwe Doelstellingen"

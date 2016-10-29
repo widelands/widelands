@@ -20,7 +20,7 @@
 #ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
 #define WL_WUI_GENERAL_STATISTICS_MENU_H
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
@@ -39,7 +39,7 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 		Registry()
 		   : UI::UniqueWindow::Registry(),
 		     selected_information(0),
-		     selected_players(true, MAX_PLAYERS),
+		     selected_players(true, kMaxPlayers),
 		     time(WuiPlotArea::TIME_GAME) {
 		}
 
@@ -57,7 +57,7 @@ private:
 	WuiPlotArea plot_;
 	UI::Radiogroup radiogroup_;
 	int32_t selected_information_;
-	UI::Button* cbs_[MAX_PLAYERS];
+	UI::Button* cbs_[kMaxPlayers];
 	uint32_t ndatasets_;
 
 	void clicked_help();

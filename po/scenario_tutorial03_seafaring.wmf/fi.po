@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-23 19:27+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 18:55+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgid ""
 "tabs: wares and workers in the dock. They are waiting for a ship to "
 "transport them to another port. Currently, there are none because we have "
 "not yet built a second port. So let’s change this!"
-msgstr "Vaihtoehtoisesti satamat tarjoavat mahdollisuuden rahdata tavaroita laivoilla. Kun klikkaat satamaa, joka sinulla jo on, huomaat kaksi lisävälilehteä.: tavarat ja työntekijät laiturilla."
+msgstr "Vaihtoehtoisesti, satamat tarjoavat mahdollisuuden rahdata tavaroita laivoilla. Kun klikkaat satamaa, joka sinulla jo on, huomaat kaksi lisävälilehteä: tavarat ja työntekijät laiturilla. He odottavat laivan kuljettavan heidät toiseen satamaan. Tällä hetkellä toinen satamaa puuttuu, koska emme ole rakentaneet toista satamaa. Joten tehdään sellainen!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
@@ -101,7 +101,7 @@ msgstr "Satamat ovat isoja rakennuksia, mutta niitä voi rakentaa vain erityisii
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid "blue port space icon."
-msgstr "sinisellä satamapaikka kuvakkeella"
+msgstr "sinisellä satamapaikka kuvakkeella."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid ""
@@ -273,7 +273,7 @@ msgstr "Vaikka se saattaa kestää kauan ja olla tyyristä ja vaarallista – ku
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
-msgstr "Seikkailu merellä, kuinka hauskaa se voikaan olla."
+msgstr "Seikkailu merellä, kuinka hauskaa se voikaan olla"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"

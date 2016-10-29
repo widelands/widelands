@@ -37,10 +37,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
               butw_,
               buth_,
               g_gr->images().get(button_background_),
-              _("New Game"),
-              "",
-              true,
-              false),
+              _("New Game")),
      campaign(&vbox,
               "campaigns",
               0,
@@ -48,10 +45,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
               butw_,
               buth_,
               g_gr->images().get(button_background_),
-              _("Campaigns"),
-              "",
-              true,
-              false),
+              _("Campaigns")),
      load_game(&vbox,
                "load_game",
                0,
@@ -59,21 +53,8 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
                butw_,
                buth_,
                g_gr->images().get(button_background_),
-               _("Load Game"),
-               "",
-               true,
-               false),
-     back(&vbox,
-          "back",
-          0,
-          0,
-          butw_,
-          buth_,
-          g_gr->images().get(button_background_),
-          _("Back"),
-          "",
-          true,
-          false) {
+               _("Load Game")),
+     back(&vbox, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
 	new_game.sigclicked.connect(
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kNewGame));
@@ -109,14 +90,14 @@ void FullscreenMenuSinglePlayer::layout() {
 	title.set_size(get_w(), title.get_h());
 	FullscreenMenuMainMenu::layout();
 
-	title.set_pos(Point(0, title_y_));
+	title.set_pos(Vector2i(0, title_y_));
 
 	new_game.set_desired_size(butw_, buth_);
 	campaign.set_desired_size(butw_, buth_);
 	load_game.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
 
-	vbox.set_pos(Point(box_x_, box_y_));
+	vbox.set_pos(Vector2i(box_x_, box_y_));
 	vbox.set_inner_spacing(padding_);
 	vbox.set_size(butw_, get_h() - vbox.get_y() - 3 * title_y_);
 }

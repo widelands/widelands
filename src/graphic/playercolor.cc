@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,19 @@
  *
  */
 
-#include "base/point.h"
+#include "graphic/playercolor.h"
 
-Point middle(const Point& a, const Point& b) {
-	return Point((a.x + b.x) / 2, (a.y + b.y) / 2);
+#include "graphic/texture.h"
+
+Image* playercolor_image(const RGBColor* clr, const Image* image, const Image* color_mask) {
+	int w = image->width();
+	int h = image->height();
+	Texture* rv = new Texture(w, h);
+	rv->fill_rect(Rectf(0, 0, w, h), RGBAColor(0, 0, 0, 0));
+	rv->blit_blended(Rectf(0, 0, w, h), *image, *color_mask, Rectf(0, 0, w, h), *clr);
+	return rv;
+}
+
+Image* playercolor_image(int player_number, const Image* image, const Image* color_mask) {
+	return playercolor_image(&kPlayerColors[player_number], image, color_mask);
 }

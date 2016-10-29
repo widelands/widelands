@@ -43,20 +43,20 @@ public:
 	std::unique_ptr<Texture> to_texture() const;
 
 private:
-	void do_blit(const FloatRect& dst_rect,
+	void do_blit(const Rectf& dst_rect,
 	             const BlitData& texture,
 	             float opacity,
 	             BlendMode blend_mode) override;
-	void do_blit_blended(const FloatRect& dst_rect,
+	void do_blit_blended(const Rectf& dst_rect,
 	                     const BlitData& texture,
 	                     const BlitData& mask,
 	                     const RGBColor& blend) override;
-	void do_blit_monochrome(const FloatRect& dst_rect,
+	void do_blit_monochrome(const Rectf& dst_rect,
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
 	void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) override;
 	void
-	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
+	do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	const int w_, h_;
 

@@ -5,13 +5,14 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-18 14:25+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,13 +42,13 @@ msgstr " --<config-entry-name>=hodnota přepíše jakékoli nastavení v configu
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=DIRNAME    Použij určený adresář pro Widelands datové soubory"
+msgstr "--datadir=DIRNAME Použij určený adresář pro Widelands\ndatové soubory"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=DIRNAME   Použij určený adresář pro Widelands config, uložené hry a záznamy"
+msgstr "--homedir=DIRNAME Použij určený adresář pro Widelands config,\nuložené hry a záznamy"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
@@ -68,7 +69,7 @@ msgstr " --coredump=[true|false]\n                      Generuje core dump při 
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...] Použité nastavení locale"
+msgstr "--language=[de_DE|sv_SE|...]\nJaký jazyk se má použít."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -136,7 +137,7 @@ msgstr " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR."
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FILENAME    Spusti uvedený Lua skript po inicializaci. Platné pouze s volbami --scenario, --loadgame, nebo --editor."
+msgstr "--script=FILENAME Spusti uvedený Lua skript po inicializaci.\nPlatné pouze s volbami --scenario, --loadgame nebo --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -148,7 +149,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr " --auto_roadbuild_mode=[true|false] Určení, zda spustit mód obnovy automaticky po umístění vlajky nenapojené na síť cest"
+msgstr "--auto_roadbuild_mode=[true|false]\nUrčuje, zda spustit mód stavění cest automaticky po umístění vlajky, která není napojená na cestu."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid "Graphic options:"
@@ -163,15 +164,15 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr " --fullscreen=[true|false] Zda hru spustit ve fullscreenu"
+msgstr "--fullscreen=[true|false]\nZda hru spustit v celoobrazovkém režimu."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...] Šířka okna v pixelech"
+msgstr "--xres=[...] Šířka okna v pixelech."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...] Výška okna v pixelech"
+msgstr "--yres=[...] Výška okna v pixelech."
 
 #: ../../src/wlapplication_messages.cc:123
 msgid "Options for the internal window manager:"
@@ -183,7 +184,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Přichytit okno k okraji obrazovky jakmile\n                      se okraj okna dostane do této vzdálenosti\n                      od okraje obrazovky."
+msgstr "--border_snap_distance=[0 ...]\nPřichytit okno k okraji obrazovky jakmile\nse okraj okna dostane do této vzdálenosti\nod okraje obrazovky."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -195,7 +196,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr " --dock_windows_to_edges=[true|false] Zruší okraj okna na okraji obrazovky, když je okraj okna blízko okraji obrazovky"
+msgstr "--dock_windows_to_edges=[true|false]\nZruší okraj okna na okraji obrazovky, když je okraj okna blízko okraji obrazovky."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid ""
@@ -203,7 +204,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Přichytit okno k okraji panelu jakmile se\n                      okraj okna dostane do této vzdálenosti\n                      od okraje jiného panelu."
+msgstr "--panel_snap_distance=[0 ...]\nPřichytit okno k okraji panelu jakmile se\nokraj okna dostane do této vzdálenosti\nod okraje jiného panelu."
 
 #: ../../src/wlapplication_messages.cc:142
 msgid ""
@@ -211,7 +212,7 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Přichytit okno k okraji panelu pouze\n                      pokud se okno a panel překrývají."
+msgstr "--snap_windows_only_when_overlapping=[yes|no]\nPřichytit okno k okraji panelu pouze\npokud se okno a panel překrývají."
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --verbose            Enable verbose debug messages"

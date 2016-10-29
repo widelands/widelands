@@ -45,8 +45,8 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
    : UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools")) {
 
 #define spacing 5
-	Point const offs(spacing, spacing);
-	Point pos = offs;
+	Vector2i const offs(spacing, spacing);
+	Vector2i pos = offs;
 	int32_t const width = 34;
 	int32_t const height = 34;
 

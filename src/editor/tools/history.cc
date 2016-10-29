@@ -94,7 +94,7 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 	   tool, static_cast<uint32_t>(ind), map, center, parent, tool.format_args(ind, parent));
 	if (draw && tool.is_undoable()) {
 		if (undo_stack_.empty() ||
-		    undo_stack_.front().tool.get_sel_impl() != std::string(draw_tool_.get_sel_impl())) {
+		    undo_stack_.front().tool.get_sel_impl() != draw_tool_.get_sel_impl()) {
 			EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent,
 			                    draw_tool_.format_args(EditorTool::First, parent));
 
