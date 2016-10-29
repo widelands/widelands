@@ -286,7 +286,7 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
 	}
-	if (!code.mod & KMOD_CTRL) {
+	if (!(code.mod & KMOD_CTRL)) {
 		return false;
 	}
 
