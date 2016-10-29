@@ -70,7 +70,8 @@ private:
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
 	void update_win_conditions();
-	/// Reads the win conditions that are available for the given map and adds the entries to the dropdown.
+	/// Reads the win conditions that are available for the given map and adds the entries to the
+	/// dropdown.
 	void load_win_conditions(const Widelands::Map& map);
 	/// Remembers the win condition that is currently selected in the dropdown.
 	void win_condition_selected();

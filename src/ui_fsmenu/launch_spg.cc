@@ -237,8 +237,7 @@ void FullscreenMenuLaunchSPG::load_win_conditions(const Widelands::Map& map) {
 			last_win_condition_ = settings_->settings().win_condition_scripts.front();
 		}
 		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-		for (const std::string& win_condition_script :
-			  settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
 			if (t) {
 				break;
 			} else {
@@ -248,27 +247,26 @@ void FullscreenMenuLaunchSPG::load_win_conditions(const Widelands::Map& map) {
 		}
 
 		// Now fill the dropdown.
-		for (const std::string& win_condition_script :
-			  settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
 					i18n::Textdomain td("win_conditions");
-					win_condition_dropdown_.add(
-						_(t->get_string("name")), win_condition_script, nullptr,
-						win_condition_script == last_win_condition_, t->get_string("description"));
+					win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
+					                            win_condition_script == last_win_condition_,
+					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log("LaunchSPG: Error loading win condition: %s %s\n",
-					 win_condition_script.c_str(), e.what());
+				log("LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+				    e.what());
 			}
 		}
 	} catch (const std::exception& e) {
 		const std::string error_message =
-			(boost::format(_("Unable to determine valid win conditions because the map '%s' "
-								  "could not be loaded.")) %
-			 settings_->settings().mapfilename)
-				.str();
+		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
+		                    "could not be loaded.")) %
+		    settings_->settings().mapfilename)
+		      .str();
 		win_condition_dropdown_.set_label(_("Error"));
 		win_condition_dropdown_.set_tooltip(error_message);
 		log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
