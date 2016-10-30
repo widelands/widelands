@@ -19,6 +19,8 @@
 
 #include "wui/mapview.h"
 
+#include <SDL.h>
+
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/game_renderer.h"
@@ -33,6 +35,13 @@
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
+
+	// NOCOM(#sirver): maybe replace set_zoom through set_view.
+	// NOCOM(#sirver): how to 'reverse' a plan?
+
+// Time of a frame in ms. We use a animation resolution of 60 fps, which should
+// be fast enough to feel smooth on all framerates.
+constexpr float kFrameTimeMs = 1000.f / 60.f;
 
 // Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
 // point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
@@ -55,6 +64,90 @@ Vector2f move_inside(Vector2f p, const Rectf& r, float w, float h) {
 	return p;
 }
 
+// Returns the view area, i.e. the currently visible rectangle in map pixel
+// space for the given 'view'.
+Rectf get_view_area(const MapView::View& view, const int width, const int height) {
+	return Rectf(view.viewpoint, width * view.zoom, height * view.zoom);
+}
+
+// 25% of the time accelerates, then 50% of the time linearly interpolate and
+// 25% of the time decelerate.
+template <typename Val> class AccelerateInterpolator {
+public:
+	AccelerateInterpolator(const Val& start, const Val& end, const int duration_ms)
+	   : start_(start),
+	     t0_(0.25 * duration_ms),
+	     t1_(0.75 * duration_ms),
+	     a_((end - start) / (t0_ * t1_)) {
+	}
+
+	Val operator()(const float dt) const {
+		return start_ + a_ * 0.5 * math::sqr(std::min(dt, t0_)) +
+		       (a_ * t0_) * std::max(0.f, dt - t0_) - a_ * 0.5f * math::sqr(std::max(0.f, dt - t1_));
+	}
+
+private:
+	Val start_;
+	float t0_;
+	float t1_;
+	Val a_;
+
+	DISALLOW_COPY_AND_ASSIGN(AccelerateInterpolator);
+};
+
+// Calculates a animation plan from 'start_viewpoint' to 'end_viewpoint' - both at 'zoom',
+// taking 'duraction_ms'. The animation is assumed to start_viewpoint at the
+// time of calling the function
+// NOCOM(#sirver): do everything in floats, only convert at the end.
+std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
+                                                     const Vector2f& start_viewpoint,
+                                                     const Vector2f& end_viewpoint,
+                                                     const float start_zoom,
+                                                     const int duration_ms,
+                                                     const int width,
+                                                     const int height) {
+	constexpr float kTargetZoom = 8.f;
+   // Viewpoint: Accelerate for 25% of time, then move constant, decelerate 25% of time
+	const float t0 = 0.25 * duration_ms;
+	const float t1 = 0.75 * duration_ms;
+
+	const float v_zoom = (kTargetZoom - start_zoom) / (duration_ms * 0.25);
+
+	// viewpoint as a_viewpoint function of time.
+	const auto zoom_t = [t0, t1, v_zoom, start_zoom, kTargetZoom](const float dt) {
+		if (dt < t0) {
+			return start_zoom + v_zoom * dt;
+		}
+		if (dt < t1) {
+			return kTargetZoom;
+		}
+		return kTargetZoom - (dt - t1) * v_zoom;
+	};
+
+	const Vector2f start_center =
+	   get_view_area(MapView::View{start_viewpoint, start_zoom}, width, height).center();
+	const Vector2f end_center =
+	   get_view_area(MapView::View{end_viewpoint, start_zoom}, width, height).center();
+	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
+	AccelerateInterpolator<Vector2f> center_point_interpolater(
+	   start_center, start_center + dist, duration_ms);
+
+	const uint32_t start_time = SDL_GetTicks();
+	std::vector<MapView::TimestampedView> plan;
+	for (float dt = 0; dt < duration_ms; dt += kFrameTimeMs) {
+		const float zoom = zoom_t(dt);
+		const Vector2f center_point = center_point_interpolater(dt);
+		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
+		plan.push_back(MapView::TimestampedView{
+		   static_cast<uint32_t>(std::lround(start_time + dt)), MapView::View{viewpoint, zoom}});
+	}
+
+	// Correct numeric instabilities. We want to land precisely at 'end_viewpoint'.
+	plan.push_back(
+	   MapView::TimestampedView{start_time + duration_ms, MapView::View{end_viewpoint, start_zoom}});
+	return plan;
+}
+
 }  // namespace
 
 MapView::MapView(
@@ -62,8 +155,7 @@ MapView::MapView(
    : UI::Panel(parent, x, y, w, h),
      renderer_(new GameRenderer()),
      intbase_(player),
-     viewpoint_(0.f, 0.f),
-     zoom_(1.f),
+     view_{Vector2f(0.f, 0.f), 1.f},
      dragging_(false) {
 }
 
@@ -71,15 +163,15 @@ MapView::~MapView() {
 }
 
 Vector2f MapView::get_viewpoint() const {
-	return viewpoint_;
+	return view_.viewpoint;
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
-	return MapviewPixelFunctions::map_to_panel(viewpoint_, zoom_, map_pixel);
+	return MapviewPixelFunctions::map_to_panel(view_.viewpoint, view_.zoom, map_pixel);
 }
 
 Vector2f MapView::to_map(const Vector2f& panel_pixel) const {
-	return MapviewPixelFunctions::panel_to_map(viewpoint_, zoom_, panel_pixel);
+	return MapviewPixelFunctions::panel_to_map(view_.viewpoint, view_.zoom, panel_pixel);
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
@@ -105,24 +197,38 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 
 	const Widelands::Map& map = intbase().egbase().map();
 	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
-	const Rectf view_area = get_view_area();
+	const Rectf area = view_area();
 
-	const Vector2f view_center = view_area.center();
+	const Vector2f view_center = area.center();
 	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
 	const int h = MapviewPixelFunctions::get_map_end_screen_y(map);
 	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, view_center, map_pixel);
 
 	// Check if the point is visible on screen.
-	if (dist.x > view_area.w / 2.f || dist.y > view_area.h / 2.f) {
+	if (dist.x > area.w / 2.f || dist.y > area.h / 2.f) {
 		return;
 	}
-	const Vector2f in_panel = to_panel(move_inside(map_pixel, view_area, w, h));
+	const Vector2f in_panel = to_panel(move_inside(map_pixel, area, w, h));
 	set_mouse_pos(round(in_panel));
 	track_sel(in_panel);
 }
 
 void MapView::draw(RenderTarget& dst) {
 	Widelands::EditorGameBase& egbase = intbase().egbase();
+
+	if (!current_plan_.empty()) {
+		uint32_t now = SDL_GetTicks();
+		size_t i = 0;
+		while (i < current_plan_.size() && current_plan_[i].t < now) {
+			++i;
+		}
+		if (i == current_plan_.size()) {
+			current_plan_.clear();
+		} else {
+			set_zoom(current_plan_[i].view.zoom);
+			set_viewpoint(current_plan_[i].view.viewpoint, false);
+		}
+	}
 
 	if (upcast(Widelands::Game, game, &egbase)) {
 		// Bail out if the game isn't actually loaded.
@@ -142,18 +248,18 @@ void MapView::draw(RenderTarget& dst) {
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		renderer_->rendermap(
-		   egbase, viewpoint_, zoom_, interactive_player->player(), draw_text, &dst);
+		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
 	} else {
-		renderer_->rendermap(egbase, viewpoint_, zoom_, static_cast<TextToDraw>(draw_text), &dst);
+		renderer_->rendermap(egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
 	}
 }
 
 float MapView::get_zoom() const {
-	return zoom_;
+	return view_.zoom;
 }
 
 void MapView::set_zoom(const float zoom) {
-	zoom_ = zoom;
+	view_.zoom = zoom;
 }
 
 /*
@@ -162,9 +268,9 @@ Set the viewpoint to the given pixel coordinates
 ===============
 */
 void MapView::set_viewpoint(const Vector2f& viewpoint, bool jump) {
-	viewpoint_ = viewpoint;
+	view_.viewpoint = viewpoint;
 	const Widelands::Map& map = intbase().egbase().map();
-	MapviewPixelFunctions::normalize_pix(map, &viewpoint_);
+	MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
 	changeview(jump);
 }
 
@@ -180,16 +286,19 @@ void MapView::center_view_on_coords(const Widelands::Coords& c) {
 }
 
 void MapView::center_view_on_map_pixel(const Vector2f& pos) {
-	const Rectf view_area = get_view_area();
-	set_viewpoint(pos - Vector2f(view_area.w / 2.f, view_area.h / 2.f), true);
+	const Rectf area = view_area();
+	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
+	const Widelands::Map& map = intbase().egbase().map();
+	current_plan_ =
+	   plan_animation(map, view_.viewpoint, target_view, view_.zoom, 10000, get_w(), get_h());
 }
 
-Rectf MapView::get_view_area() const {
-	return Rectf(viewpoint_, get_w() * zoom_, get_h() * zoom_);
+Rectf MapView::view_area() const {
+	return get_view_area(view_, get_w(), get_h());
 }
 
 void MapView::pan_by(Vector2i delta_pixels) {
-	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * zoom_, false);
+	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * view_.zoom, false);
 }
 
 void MapView::stop_dragging() {
@@ -248,7 +357,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	}
 
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = zoom_ * static_cast<float>(
+	float zoom = view_.zoom * static_cast<float>(
 	                        std::pow(1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
 	zoom_around(zoom, last_mouse_pos_.cast<float>());
 	return true;
@@ -263,9 +372,9 @@ void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
 	// Zoom around the current mouse position. See
 	// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 	// for a good explanation of this math.
-	const Vector2f offset = -panel_pixel * (new_zoom - zoom_);
-	zoom_ = new_zoom;
-	set_viewpoint(viewpoint_ + offset, false);
+	const Vector2f offset = -panel_pixel * (new_zoom - view_.zoom);
+	view_.zoom = new_zoom;
+	set_viewpoint(view_.viewpoint + offset, false);
 }
 
 /*
@@ -293,10 +402,10 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	constexpr float kPercentPerKeyPress = 0.10f;
 	switch (code.sym) {
 	case SDLK_PLUS:
-		zoom_around(zoom_ - kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		zoom_around(view_.zoom - kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
 		return true;
 	case SDLK_MINUS:
-		zoom_around(zoom_ + kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		zoom_around(view_.zoom + kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
 		return true;
 	case SDLK_0:
 		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f));
@@ -306,4 +415,3 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 	NEVER_HERE();
 }
-

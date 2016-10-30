@@ -67,6 +67,7 @@ end
 --                             PUBLIC FUNCTIONS
 -- =======================================================================
 
+-- NOCOM(#sirver): replace everything in this file through engine functions.
 -- RST
 -- .. function:: timed_scroll(pts[, dt = 20])
 --

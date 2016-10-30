@@ -19,6 +19,8 @@
 
 #include "scripting/lua_root.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "logic/cmd_luacoroutine.h"
@@ -195,16 +197,17 @@ int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 2)
-		report_error(L, "Too little arguments!");
+		report_error(L, "Too few arguments!");
 	if (nargs == 3) {
 		runtime = luaL_checkuint32(L, 3);
 		lua_pop(L, 1);
 	}
 
-	LuaCoroutine* cr = new LuaCoroutine(luaL_checkthread(L, 2));
+	std::unique_ptr<LuaCoroutine> cr(new LuaCoroutine(luaL_checkthread(L, 2)));
 	lua_pop(L, 2);  // Remove coroutine and Game object from stack
 
-	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, cr));
+	get_game(L).enqueue_command(
+	   new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
 
 	return 0;
 }

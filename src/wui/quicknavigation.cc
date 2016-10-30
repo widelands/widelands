@@ -41,7 +41,7 @@ void QuickNavigation::setview(const View& view) {
 }
 
 void QuickNavigation::view_changed(bool jump) {
-	const Rectf view_area = map_view_->get_view_area();
+	const Rectf view_area = map_view_->view_area();
 	if (havefirst_ && update_) {
 		if (!jump) {
 			// Check if the anchor is moved outside the screen. If that is the

@@ -51,7 +51,7 @@ public:
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
 
 	// Input/output for coroutines.
-	LuaCoroutine* read_coroutine(FileRead&);
+	std::unique_ptr<LuaCoroutine> read_coroutine(FileRead&);
 	void write_coroutine(FileWrite&, LuaCoroutine*);
 
 	// Input output for the global game state.

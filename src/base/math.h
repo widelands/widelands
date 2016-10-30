@@ -38,6 +38,11 @@ T clamp(const T& val, const T& low, const T& high) {
 	return val;
 }
 
+// A simple square function.
+template <typename T> T sqr(const T& a) {
+	return a * a;
+}
+
 }  // namespace math
 
 #endif  // end of include guard: WL_BASE_MATH_H

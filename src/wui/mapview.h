@@ -37,6 +37,22 @@ class InteractiveBase;
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
 struct MapView : public UI::Panel {
+	struct View {
+		// Mappixel of top-left pixel of this MapView.
+		Vector2f viewpoint;
+
+		// Current zoom value.
+		float zoom;
+	};
+
+	struct TimestampedView {
+		// Time in milliseconds since the game was launched. Animations always
+		// happen in real-time, not in gametime. Therefore they are also not
+		// affected by pause.
+		uint32_t t;
+		View view;
+	};
+
 	MapView(UI::Panel* const parent,
 	        const int32_t x,
 	        const int32_t y,
@@ -60,7 +76,7 @@ struct MapView : public UI::Panel {
 	void center_view_on_map_pixel(const Vector2f& pos);
 
 	Vector2f get_viewpoint() const;
-	Rectf get_view_area() const;
+	Rectf view_area() const;
 	float get_zoom() const;
 
 	// Set the zoom to the new value without changing view_point. For the user
@@ -105,10 +121,12 @@ private:
 
 	std::unique_ptr<GameRenderer> renderer_;
 	InteractiveBase& intbase_;
-	Vector2f viewpoint_;
-	float zoom_;
+	View view_;
 	Vector2i last_mouse_pos_;
 	bool dragging_;
+
+	// If not empty(), the MapView is currently following this animation plan.
+	std::vector<TimestampedView> current_plan_;
 };
 
 #endif  // end of include guard: WL_WUI_MAPVIEW_H

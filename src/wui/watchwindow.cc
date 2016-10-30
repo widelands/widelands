@@ -295,7 +295,7 @@ void WatchWindow::do_follow() {
  * Cause the main mapview_ to jump to our current position.
  */
 void WatchWindow::do_goto() {
-	warp_mainview(mapview_.get_view_area().center());
+	warp_mainview(mapview_.view_area().center());
 }
 
 /**

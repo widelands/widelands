@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_CMD_LUACOROUTINE_H
 #define WL_LOGIC_CMD_LUACOROUTINE_H
 
+#include <memory>
 #include <string>
 
 #include "logic/cmd_queue.h"
@@ -28,15 +29,13 @@
 namespace Widelands {
 
 struct CmdLuaCoroutine : public GameLogicCommand {
-	CmdLuaCoroutine() : GameLogicCommand(0), cr_(nullptr) {
+	CmdLuaCoroutine() : GameLogicCommand(0) {
 	}  // For savegame loading
-	CmdLuaCoroutine(uint32_t const init_duetime, LuaCoroutine* const cr)
-	   : GameLogicCommand(init_duetime), cr_(cr) {
+	CmdLuaCoroutine(uint32_t const init_duetime, std::unique_ptr<LuaCoroutine> cr)
+	   : GameLogicCommand(init_duetime), cr_(std::move(cr)) {
 	}
 
-	~CmdLuaCoroutine() {
-		delete cr_;
-	}
+	~CmdLuaCoroutine();
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -49,7 +48,7 @@ struct CmdLuaCoroutine : public GameLogicCommand {
 	void execute(Game&) override;
 
 private:
-	LuaCoroutine* cr_;
+	std::unique_ptr<LuaCoroutine> cr_;
 };
 }
 
