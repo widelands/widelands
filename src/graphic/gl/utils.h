@@ -53,12 +53,11 @@ public:
 	// Creates and compiles shader objects based on the corresponding files in data/shaders,
 	// then links them into the program.
 	void build(const std::string& program_name);
-	void build_vp_fp(const std::string& vp_name, const std::string& fp_name);
+	void build_vp_fp(const std::vector<std::string>& vp_names,
+	                 const std::vector<std::string>& fp_names);
 
 private:
 	const GLuint program_object_;
-	std::unique_ptr<Shader> vertex_shader_;
-	std::unique_ptr<Shader> fragment_shader_;
 
 	DISALLOW_COPY_AND_ASSIGN(Program);
 };

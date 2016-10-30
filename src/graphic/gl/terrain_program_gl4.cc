@@ -249,11 +249,10 @@ void TerrainPlayerPerspectiveGl4::update() {
 TerrainProgramGl4::Terrain::Terrain()
   : terrain_data(GL_UNIFORM_BUFFER), instance_data(GL_ARRAY_BUFFER) {
 	// Initialize program.
-	gl_program.build("terrain_gl4");
+	gl_program.build_vp_fp({"terrain_gl4", "terrain_common_gl4"}, {"terrain_gl4"});
 
 	in_vertex_coordinate = glGetAttribLocation(gl_program.object(), "in_vertex_coordinate");
 	in_patch_coordinate = glGetAttribLocation(gl_program.object(), "in_patch_coordinate");
-	in_patch_basepix = glGetAttribLocation(gl_program.object(), "in_patch_basepix");
 
 	u_position_scale = glGetUniformLocation(gl_program.object(), "u_position_scale");
 	u_position_offset = glGetUniformLocation(gl_program.object(), "u_position_offset");
@@ -275,7 +274,7 @@ TerrainProgramGl4::Roads::Roads()
 	num_index_roads = 0;
 
 	// Initialize program.
-	gl_program.build_vp_fp("road_gl4", "road");
+	gl_program.build_vp_fp({"road_gl4", "terrain_common_gl4"}, {"road"});
 
 	u_position_scale = glGetUniformLocation(gl_program.object(), "u_position_scale");
 	u_position_offset = glGetUniformLocation(gl_program.object(), "u_position_offset");
@@ -354,7 +353,7 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 
 	// Setup vertex and instance attribute data.
 	gl.enable_vertex_attrib_array(
-	   {terrain_.in_vertex_coordinate, terrain_.in_patch_coordinate, terrain_.in_patch_basepix});
+	   {terrain_.in_vertex_coordinate, terrain_.in_patch_coordinate});
 
 	unsigned num_instances = upload_instance_data(args);
 
@@ -364,7 +363,6 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * kPatchWidth * kPatchHeight, num_instances);
 
 	glVertexBindingDivisor(terrain_.in_patch_coordinate, 0);
-	glVertexBindingDivisor(terrain_.in_patch_basepix, 0);
 }
 
 void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,
@@ -477,11 +475,6 @@ unsigned TerrainProgramGl4::upload_instance_data(const TerrainGl4Arguments* args
 			PerInstanceData& i = stream.back();
 			i.coordinate.x = fx;
 			i.coordinate.y = fy;
-
-			int x, y;
-			MapviewPixelFunctions::get_basepix(Coords(fx, fy), x, y);
-			i.basepix.x = x;
-			i.basepix.y = y;
 		}
 	}
 
@@ -489,11 +482,8 @@ unsigned TerrainProgramGl4::upload_instance_data(const TerrainGl4Arguments* args
 
 	glVertexAttribIPointer(terrain_.in_patch_coordinate, 2, GL_INT, sizeof(PerInstanceData),
 	                       reinterpret_cast<void*>(offset + offsetof(PerInstanceData, coordinate)));
-	glVertexAttribPointer(terrain_.in_patch_basepix, 2, GL_FLOAT, GL_FALSE, sizeof(PerInstanceData),
-	                      reinterpret_cast<void*>(offset + offsetof(PerInstanceData, basepix)));
 
 	glVertexBindingDivisor(terrain_.in_patch_coordinate, 1);
-	glVertexBindingDivisor(terrain_.in_patch_basepix, 1);
 
 	return num_patches;
 }

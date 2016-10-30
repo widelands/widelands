@@ -82,6 +82,7 @@ const char* gl_error_to_string(const GLenum err) {
 class Shader {
 public:
 	Shader(GLenum type);
+	Shader(Shader&& other);
 	~Shader();
 
 	GLuint object() const {
@@ -92,8 +93,8 @@ public:
 	void compile(const char* source, const char* shader_name = nullptr);
 
 private:
-	const GLenum type_;
-	const GLuint shader_object_;
+	GLenum type_;
+	GLuint shader_object_;
 
 	DISALLOW_COPY_AND_ASSIGN(Shader);
 };
@@ -102,6 +103,12 @@ Shader::Shader(GLenum type) : type_(type), shader_object_(glCreateShader(type)) 
 	if (!shader_object_) {
 		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
 	}
+}
+
+Shader::Shader(Shader&& other) {
+	type_ = other.type_;
+	shader_object_ = other.shader_object_;
+	other.shader_object_ = 0;
 }
 
 Shader::~Shader() {
@@ -141,17 +148,23 @@ Program::~Program() {
 	}
 }
 
-void Program::build_vp_fp(const std::string& vp_name, const std::string& fp_name) {
-	std::string fragment_shader_source = read_file("shaders/" + fp_name + ".fp");
-	std::string vertex_shader_source = read_file("shaders/" + vp_name + ".vp");
+void Program::build_vp_fp(const std::vector<std::string>& vp_names,
+                          const std::vector<std::string>& fp_names) {
+	// Shader objects are marked for deletion immediately, but the GL holds
+	// onto them as long as they're attached to the program object.
+	for (const std::string& vp_name : vp_names) {
+		std::string vertex_shader_source = read_file("shaders/" + vp_name + ".vp");
+		Shader shader(GL_VERTEX_SHADER);
+		shader.compile(vertex_shader_source.c_str(), vp_name.c_str());
+		glAttachShader(program_object_, shader.object());
+	}
 
-	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
-	vertex_shader_->compile(vertex_shader_source.c_str(), vp_name.c_str());
-	glAttachShader(program_object_, vertex_shader_->object());
-
-	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
-	fragment_shader_->compile(fragment_shader_source.c_str(), fp_name.c_str());
-	glAttachShader(program_object_, fragment_shader_->object());
+	for (const std::string& fp_name : fp_names) {
+		std::string fragment_shader_source = read_file("shaders/" + fp_name + ".fp");
+		Shader shader(GL_FRAGMENT_SHADER);
+		shader.compile(fragment_shader_source.c_str(), fp_name.c_str());
+		glAttachShader(program_object_, shader.object());
+	}
 
 	glLinkProgram(program_object_);
 
@@ -171,7 +184,7 @@ void Program::build_vp_fp(const std::string& vp_name, const std::string& fp_name
 }
 
 void Program::build(const std::string& program_name) {
-	build_vp_fp(program_name, program_name);
+	build_vp_fp({program_name}, {program_name});
 }
 
 State::State()

@@ -285,7 +285,7 @@ void BlitProgramGl2::draw(const std::vector<Arguments>& arguments) {
 
 BlitProgramGl4::BlitProgramGl4()
   : gl_rects_buffer_(GL_ARRAY_BUFFER) {
-	gl_program_.build_vp_fp("blit_gl4", "blit");
+	gl_program_.build_vp_fp({"blit_gl4"}, {"blit"});
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
 	u_mask_ = glGetUniformLocation(gl_program_.object(), "u_mask");

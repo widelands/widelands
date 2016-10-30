@@ -210,9 +210,8 @@ private:
 
 	struct PerInstanceData {
 		Point coordinate;
-		FloatPoint basepix;
 	};
-	static_assert(sizeof(PerInstanceData) == 16, "incorrect padding");
+	static_assert(sizeof(PerInstanceData) == 8, "incorrect padding");
 
 	struct PerVertexData {
 		Point vertex_coordinate;
@@ -256,7 +255,6 @@ private:
 		// Vertex attributes.
 		GLint in_vertex_coordinate;
 		GLint in_patch_coordinate;
-		GLint in_patch_basepix;
 
 		// Uniforms.
 		GLint u_position_scale;

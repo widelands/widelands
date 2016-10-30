@@ -1,6 +1,13 @@
 #version 130
 #extension GL_ARB_uniform_buffer_object: enable
 
+// From terrain_common_gl4:
+void init_common();
+uvec4 get_field_base(ivec2 coord);
+float calc_brightness(uint node_ubrightness);
+void calc_basepix(ivec2 coord, out vec2 basepix, out float heightpix, out uint node_brightness);
+void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness);
+
 // Per-vertex Attributes.
 // X,Y: relative vertex map coordinate
 // Z,W: relative triangle map coordinate
@@ -10,15 +17,11 @@ in ivec4 in_vertex_coordinate;
 
 // Per-instance/patch Attributes.
 in ivec2 in_patch_coordinate;
-in vec2 in_patch_basepix;
 
 // Primary Constants.
 uniform vec2 u_position_scale;
 uniform vec2 u_position_offset;
 uniform float u_z_value;
-
-// Textures (map data).
-uniform usampler2D u_terrain_base;
 
 // Terrain information (secondary constants in a uniform buffer).
 struct Terrain {
@@ -43,34 +46,10 @@ out vec4 var_dither[3];
 out float var_brightness;
 
 // Constants
-const float kTriangleWidth = 64;
-const float kTriangleHeight = 32;
-const float kHeightFactor = 5;
 const float kTextureSideLength = 64;
 
-vec2 map_size;
-vec2 map_inv_size;
-
-float calc_brightness(uint node_ubrightness) {
-	// Brightness is really an 8-bit signed value, but it's stored in an
-	// GL_RGBA8UI texture, so here we use signed (arithmetic) shifts to do
-	// the conversion.
-	int node_brightness = int(node_ubrightness << 24) >> 24;
-	float brightness = 144. / 255. + node_brightness * (1. / 255.);
-	brightness = min(1., brightness * (255. / 160.));
-
-	//TODO: player brightness
-
-	return brightness;
-}
-
-uvec4 get_field_base(ivec2 coord) {
-	return texture(u_terrain_base, (coord + 0.5) * map_inv_size);
-}
-
 void main() {
-	map_size = vec2(textureSize(u_terrain_base, 0));
-	map_inv_size = 1. / map_size;
+	init_common();
 
 	// Compute coordinate of field that owns the triangle to which this
 	// vertex belongs.
@@ -84,24 +63,20 @@ void main() {
 	uint terrain = is_down ? field.y : field.x;
 
 	ivec2 node_coord = in_patch_coordinate.xy + in_vertex_coordinate.xy;
-	uvec4 node = get_field_base(node_coord);
+	uint node_brightness;
+	float node_heightpix;
+	vec2 vertex_basepix;
 
-	// Vertex basepix
-	vec2 vertex_basepix = in_patch_basepix;
-	vertex_basepix.x += in_vertex_coordinate.x * kTriangleWidth;
-	if ((in_vertex_coordinate.y & 1) != 0)
-		vertex_basepix.x += kTriangleWidth / 2;
-	vertex_basepix.y += in_vertex_coordinate.y * kTriangleHeight;
-
+	calc_basepix(node_coord, vertex_basepix, node_heightpix, node_brightness);
 	// On-screen position
 	gl_Position.x = vertex_basepix.x;
-	gl_Position.y = vertex_basepix.y - node.z * kHeightFactor;
+	gl_Position.y = vertex_basepix.y - node_heightpix;
 	gl_Position.xy = gl_Position.xy * u_position_scale + u_position_offset;
 	gl_Position.z = u_z_value;
 	gl_Position.w = 1.;
 
 	// Brightness
-	var_brightness = calc_brightness(node.w);
+	var_brightness = calc_brightness(node_brightness);
 
 	// Texture coordinates
 	vec2 vertex_texcoord;
