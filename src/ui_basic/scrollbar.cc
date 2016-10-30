@@ -233,7 +233,7 @@ void Scrollbar::action(Area const area) {
 	set_scrollpos(pos);
 }
 
-void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) {
+void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
 
 	// Draw the picture
@@ -285,7 +285,7 @@ void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) 
 	}
 }
 
-void Scrollbar::draw_area(RenderTarget& dst, const Area area, const Rectf& r) {
+void Scrollbar::draw_area(RenderTarget& dst, Area area, const Rectf& r) {
 	//  background
 	dst.brighten_rect(r, area == pressed_ ? 2 * MOUSE_OVER_BRIGHT_FACTOR : MOUSE_OVER_BRIGHT_FACTOR);
 	if (horizontal_) {
