@@ -67,9 +67,6 @@ BaseListselect::BaseListselect(Panel* const parent,
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
-	scrollbar_.set_singlestepsize(lineheight_);
-	scrollbar_.set_pagesize(h - 2 * lineheight_);
-	scrollbar_.set_steps(1);
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		uint32_t pic_h;
@@ -82,6 +79,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 		max_pic_width_ = 0;
 	}
 	set_can_focus(true);
+	layout();
 }
 
 /**
@@ -140,7 +138,7 @@ void BaseListselect::add(const std::string& name,
 
 	entry_records_.push_back(er);
 
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	layout();
 
 	if (sel)
 		select(entry_records_.size() - 1);
@@ -176,7 +174,7 @@ void BaseListselect::add_front(const std::string& name,
 
 	entry_records_.push_front(er);
 
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	layout();
 
 	if (sel)
 		select(0);
@@ -319,7 +317,8 @@ uint32_t BaseListselect::get_eff_w() const {
 void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h() +
+	                     (selection_mode_ == ListselectLayout::kDropdown ? kMargin : 0));
 }
 
 /**
@@ -328,7 +327,7 @@ Redraw the listselect box
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	const int eff_h =
-	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - 4 : get_inner_h();
+	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - 2 * kMargin : get_inner_h();
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
