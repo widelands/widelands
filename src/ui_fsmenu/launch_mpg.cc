@@ -650,7 +650,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	suggested_teams_box_->show(map.get_suggested_teams());
 	suggested_teams_box_->set_pos(
 	   Vector2i(suggested_teams_box_->get_x(),
-	         back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
+	            back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
 }
 
 /// Show help
