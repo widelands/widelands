@@ -113,7 +113,7 @@ private:
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
 
-	uint32_t max_list_height_;
+	int max_list_height_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button push_button_;

@@ -111,7 +111,7 @@ struct BaseListselect : public Panel {
 	}
 
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint32_t get_lineheight() const;
+	int get_lineheight() const;
 
 	uint32_t get_eff_w() const;
 
@@ -144,8 +144,8 @@ private:
 	};
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
-	uint32_t max_pic_width_;
-	uint32_t lineheight_;
+	int max_pic_width_;
+	int lineheight_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
