@@ -317,8 +317,11 @@ uint32_t BaseListselect::get_eff_w() const {
 void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h() +
-	                     (selection_mode_ == ListselectLayout::kDropdown ? kMargin : 0));
+	const int steps = entry_records_.size() * get_lineheight() - get_h();
+	scrollbar_.set_steps(steps);
+	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
+		scrollbar_.set_steps(steps + kMargin);
+	}
 }
 
 /**
@@ -327,7 +330,7 @@ Redraw the listselect box
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	const int eff_h =
-	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - 2 * kMargin : get_inner_h();
+	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - kMargin : get_inner_h();
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
@@ -346,7 +349,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.fill_rect(Rectf(get_w() - 2.f, 1.f, 1.f, get_h() - 1.f), black);
 		dst.fill_rect(Rectf(get_w() - 1.f, 0.f, 1.f, get_h()), black);
 	} else {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), ms_darken_value);
+		dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
 	}
 
 	while (idx < entry_records_.size()) {
