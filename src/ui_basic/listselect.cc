@@ -50,8 +50,8 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t x,
                                const int32_t y,
                                const uint32_t w,
-										 const uint32_t h,
-										 const Image* button_background,
+                               const uint32_t h,
+                               const Image* button_background,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(

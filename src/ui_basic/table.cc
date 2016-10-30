@@ -60,8 +60,8 @@ Table<void*>::Table(Panel* const parent,
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
      button_background_(button_background),
      scrollbar_(nullptr),
-     scrollbar_filler_button_(new Button(
-		  this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
+     scrollbar_filler_button_(
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -117,7 +117,7 @@ void Table<void*>::add_column(uint32_t const width,
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
-								 title, tooltip_string);
+		                   title, tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -562,7 +562,7 @@ void Table<void*>::layout() {
 			if (scrollbar_->is_enabled()) {
 				const UI::Button* last_column_btn = columns_.back().btn;
 				scrollbar_filler_button_->set_pos(
-					Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
 				scrollbar_filler_button_->set_visible(true);
 			} else {
 				scrollbar_filler_button_->set_visible(false);
