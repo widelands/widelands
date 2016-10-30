@@ -260,13 +260,13 @@ void TabPanel::draw(RenderTarget& dst) {
 	if (pic_background_) {
 		if (!tabs_.empty()) {
 			dst.tile(Recti(Vector2i(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(),
-			              kTabPanelButtonHeight - 2),
+			               kTabPanelButtonHeight - 2),
 			         pic_background_, Vector2i(get_x(), get_y()));
 		}
 		assert(kTabPanelButtonHeight - 2 <= get_h());
-		dst.tile(
-		   Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(), get_h() - kTabPanelButtonHeight + 2),
-		   pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
+		dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
+		               get_h() - kTabPanelButtonHeight + 2),
+		         pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
 	}
 
 	RGBColor black(0, 0, 0);
@@ -279,8 +279,7 @@ void TabPanel::draw(RenderTarget& dst) {
 		tab_width = tabs_[idx]->get_w();
 
 		if (highlight_ == idx) {
-			dst.brighten_rect(
-			   Rectf(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
+			dst.brighten_rect(Rectf(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
 		}
 
 		assert(tabs_[idx]->pic);
@@ -297,13 +296,13 @@ void TabPanel::draw(RenderTarget& dst) {
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
 			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
-			        (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
+			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
 			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1.,
 			   BlendMode::UseAlpha);
 		} else {
-			dst.blit(
-			   Vector2f(x + kTabPanelTextMargin, (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2.f),
-			   tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
+			dst.blit(Vector2f(x + kTabPanelTextMargin,
+			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2.f),
+			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
 		}
 
 		// Draw top part of border
@@ -317,8 +316,7 @@ void TabPanel::draw(RenderTarget& dst) {
 			dst.brighten_rect(
 			   Rectf(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
-			dst.brighten_rect(
-			   Rectf(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Rectf(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 			dst.brighten_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
 			                  2 * BUTTON_EDGE_BRIGHT_FACTOR);

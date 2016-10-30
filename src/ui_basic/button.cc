@@ -65,6 +65,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
 		set_size(w, new_height);
 	}
 	set_thinks(false);
+	set_can_focus(true);
 }
 
 Button::Button  //  for pictorial buttons
@@ -91,6 +92,7 @@ Button::Button  //  for pictorial buttons
      pic_custom_(fg_pic),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
+	set_can_focus(true);
 }
 
 Button::~Button() {
@@ -127,6 +129,8 @@ void Button::set_enabled(bool const on) {
 	if (enabled_ == on)
 		return;
 
+	set_can_focus(on);
+
 	// disabled buttons should look different...
 	if (on)
 		enabled_ = true;
@@ -148,7 +152,8 @@ void Button::draw(RenderTarget& dst) {
 	// Draw the background
 	if (pic_background_) {
 		dst.fill_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-		dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
+		dst.tile(
+		   Recti(Vector2i(0, 0), get_w(), get_h()), pic_background_, Vector2i(get_x(), get_y()));
 	}
 
 	if (enabled_ && highlighted_ && style_ != Style::kFlat)
@@ -198,8 +203,8 @@ void Button::draw(RenderTarget& dst) {
 		                   enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		dst.blit(
-			Vector2f((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
-			entry_text_im);
+		   Vector2f((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
+		   entry_text_im);
 	}
 
 	//  draw border
@@ -294,6 +299,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		return false;
 
 	if (enabled_) {
+		focus();
 		grab_mouse(true);
 		pressed_ = true;
 		if (repeating_) {
