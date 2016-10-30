@@ -6,6 +6,8 @@ wl_library(ui_basic
     button.h
     checkbox.cc
     checkbox.h
+    dropdown.cc
+    dropdown.h
     editbox.cc
     editbox.h
     fileview_panel.cc
