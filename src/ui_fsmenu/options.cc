@@ -144,17 +144,20 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     box_language_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      // Interface options
-     label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
-     resolution_list_(&box_interface_,
-                      0,
-                      0,
-                      column_width_ / 2,
-                      80,
-                      g_gr->images().get("images/ui_basic/but3.png"),
-                      true),
+     language_dropdown_(&box_interface_,
+                        0,
+                        0,
+                        column_width_ / 2,
+                        get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 4 * padding_,
+                        _("Language")),
+     resolution_dropdown_(&box_interface_,
+                          0,
+                          0,
+                          column_width_ / 2,
+                          get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
+                          _("In-game resolution")),
 
      fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", column_width_),
      inputgrab_(&box_interface_, Vector2i(0, 0), _("Grab Input"), "", column_width_),
@@ -242,7 +245,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         column_width_),
 
      // Game options
-     auto_roadbuild_mode_(&box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
+     auto_roadbuild_mode_(
+        &box_game_, Vector2i(0, 0), _("Start building road after placing a flag")),
      show_workarea_preview_(&box_game_, Vector2i(0, 0), _("Show buildings area preview")),
      transparent_chat_(&box_game_,
                        Vector2i(0, 0),
@@ -253,17 +257,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
-
-     // Language options
-     label_language_(&box_language_, _("Language"), UI::Align::kLeft),
-     language_list_(&box_language_,
-                    0,
-                    0,
-                    column_width_ / 2,
-                    get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
-                    g_gr->images().get("images/ui_basic/but3.png"),
-                    true),
-
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
@@ -273,7 +266,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_game", _("Game"), &box_game_, "");
-	tabs_.add("options_language", _("Language"), &box_language_, "");
 
 	// We want the last active tab when "Apply" was clicked.
 	if (os_.active_tab < tabs_.tabs().size()) {
@@ -287,11 +279,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_saving_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_game_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
-	box_language_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
-	box_interface_.add(&label_resolution_, UI::Align::kLeft);
-	box_interface_.add(&resolution_list_, UI::Align::kLeft);
+	box_interface_.add(&language_dropdown_, UI::Align::kLeft);
+	box_interface_.add(&resolution_dropdown_, UI::Align::kLeft);
 	box_interface_.add(&fullscreen_, UI::Align::kLeft);
 	box_interface_.add(&inputgrab_, UI::Align::kLeft);
 	box_interface_.add(&sb_maxfps_, UI::Align::kLeft);
@@ -318,10 +309,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&show_workarea_preview_, UI::Align::kLeft);
 	box_game_.add(&transparent_chat_, UI::Align::kLeft);
 	box_game_.add(&single_watchwin_, UI::Align::kLeft);
-
-	// Language
-	box_language_.add(&label_language_, UI::Align::kLeft);
-	box_language_.add(&language_list_, UI::Align::kLeft);
 
 	// Bind actions
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
@@ -353,18 +340,18 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected = resolutions_[i].xres == opt.xres && resolutions_[i].yres == opt.yres;
 		did_select_a_res |= selected;
-		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
-		resolution_list_.add(
-		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(),
-		   nullptr, nullptr, selected);
+		resolution_dropdown_.add(
+		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
+		   nullptr, selected);
 	}
 	if (!did_select_a_res) {
-		resolution_list_.add(
-		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), nullptr, nullptr, true);
 		uint32_t entry = resolutions_.size();
 		resolutions_.resize(entry + 1);
 		resolutions_[entry].xres = opt.xres;
 		resolutions_[entry].yres = opt.yres;
+		resolution_dropdown_.add(
+		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), entry, nullptr, true);
 	}
 
 	fullscreen_.set_state(opt.fullscreen);
@@ -393,14 +380,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Language options
 	add_languages_to_list(opt.language);
-	language_list_.focus();
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_list_.add(_("Try system language"), "", nullptr, current_locale == "");
-	language_list_.add("English", "en", nullptr, current_locale == "en");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Add translation directories to the list
 	std::vector<LanguageEntry> entries;
@@ -449,8 +435,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	std::sort(entries.begin(), entries.end());
 	for (const LanguageEntry& entry : entries) {
-		language_list_.add(entry.descname.c_str(), entry.localename, nullptr,
-		                   entry.localename == selected_locale, "");
+		language_dropdown_.add(entry.descname.c_str(), entry.localename, nullptr,
+		                       entry.localename == selected_locale, "");
 	}
 }
 
@@ -461,9 +447,14 @@ void FullscreenMenuOptions::clicked_apply() {
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Write all data from UI elements
 	// Interface options
-	const uint32_t res_index = resolution_list_.selection_index();
-	os_.xres = resolutions_[res_index].xres;
-	os_.yres = resolutions_[res_index].yres;
+	if (language_dropdown_.has_selection()) {
+		os_.language = language_dropdown_.get_selected();
+	}
+	if (resolution_dropdown_.has_selection()) {
+		const uint32_t res_index = resolution_dropdown_.get_selected();
+		os_.xres = resolutions_[res_index].xres;
+		os_.yres = resolutions_[res_index].yres;
+	}
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
@@ -490,11 +481,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.show_warea = show_workarea_preview_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
-
-	// Language options
-	if (language_list_.has_selection()) {
-		os_.language = language_list_.get_selected();
-	}
 
 	// Last tab for reloading the options menu
 	os_.active_tab = tabs_.active();
