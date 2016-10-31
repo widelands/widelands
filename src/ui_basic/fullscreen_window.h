@@ -21,10 +21,13 @@
 #define WL_UI_BASIC_FULLSCREEN_WINDOW_H
 
 #include <string>
+#include <memory>
 #include <unordered_map>
 #include <vector>
 
 #include "graphic/align.h"
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -91,6 +94,9 @@ private:
 	/// Images for the edges. They will be blitted in top of the overlays_.
 	std::unordered_map<FullscreenWindow::Frames, const Image*, FullscreenWindow::FramesHash>
 	   frame_overlays_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+		graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 #endif  // end of include guard: WL_UI_BASIC_FULLSCREEN_WINDOW_H

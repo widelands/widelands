@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,17 +19,6 @@
 
 #include "ui_fsmenu/base.h"
 
-#include <cstdio>
-
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
-#include "graphic/image.h"
-#include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
-#include "io/filesystem/filesystem.h"
-#include "wlapplication.h"
-
 /*
 ==============================================================================
 
@@ -40,15 +29,8 @@ FullscreenMenuBase
 
 /**
  * Initialize a pre-game menu
- *
- * Args: bgpic  name of the background picture
  */
 FullscreenMenuBase::FullscreenMenuBase() : UI::FullscreenWindow() {
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
-		   layout();
-		});
 }
 
 FullscreenMenuBase::~FullscreenMenuBase() {

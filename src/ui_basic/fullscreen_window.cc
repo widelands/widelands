@@ -37,7 +37,12 @@ namespace UI {
 
 FullscreenWindow::FullscreenWindow()
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     background_image_("images/ui_fsmenu/ui_fsmenu.png") {
+	  background_image_("images/ui_fsmenu/background.png") {
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+		[this](const GraphicResolutionChanged& message) {
+			set_size(message.width, message.height);
+			layout();
+		});
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "images/ui_fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "images/ui_fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "images/ui_fsmenu/bottom_left.png");
