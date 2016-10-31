@@ -47,6 +47,7 @@ FullscreenWindow::FullscreenWindow()
 	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "images/ui_fsmenu/right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "images/ui_fsmenu/top.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "images/ui_fsmenu/bottom.png");
+	add_overlay_image("images/ui_fsmenu/center.png", UI::Align::kCenter);
 }
 
 FullscreenWindow::~FullscreenWindow() {
