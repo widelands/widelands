@@ -213,7 +213,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const DrawText draw_text,
+                         const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
                          float scale,
                          RenderTarget* dst) {
