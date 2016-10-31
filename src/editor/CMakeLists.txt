@@ -93,6 +93,7 @@ wl_library(editor
     base_macros
     base_scoped_timer
     graphic
+    graphic_playercolor
     graphic_surface
     io_filesystem
     logic

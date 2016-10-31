@@ -42,16 +42,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
 
      // Main buttons
      back_(this, "back", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Back")),
-     ok_(this,
-         "ok",
-         0,
-         0,
-         0,
-         0,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("OK"),
-         std::string(),
-         false) {
+     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")) {
 	layout();
 }
 
@@ -69,9 +60,9 @@ void FullscreenMenuLoadMapOrGame::layout() {
 
 	// Main buttons
 	back_.set_size(butw_, buth_);
-	back_.set_pos(Point(right_column_x_, buty_));
+	back_.set_pos(Vector2i(right_column_x_, buty_));
 	ok_.set_size(butw_, buth_);
-	ok_.set_pos(Point(get_w() - right_column_margin_ - butw_, buty_));
+	ok_.set_pos(Vector2i(get_w() - right_column_margin_ - butw_, buty_));
 }
 
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {

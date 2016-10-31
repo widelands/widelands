@@ -109,7 +109,7 @@ void MapDetails::layout() {
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Point(0, get_h() - suggested_teams_box_->get_h()));
+		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
 		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
 	} else {
 		main_box_.set_size(get_w(), get_h());
