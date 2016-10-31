@@ -348,8 +348,14 @@ public:
 template <typename Entry> class Table<Entry* const> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -372,8 +378,14 @@ public:
 template <typename Entry> class Table<const Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -400,8 +412,14 @@ public:
 template <typename Entry> class Table<Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
-	Table(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending = false)
-	   : Base(parent, x, y, w, h, descending) {
+	Table(Panel* parent,
+	      int32_t x,
+	      int32_t y,
+	      uint32_t w,
+	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      const bool descending = false)
+	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
