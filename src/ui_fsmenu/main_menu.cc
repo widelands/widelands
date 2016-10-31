@@ -29,5 +29,15 @@ FullscreenMenuMainMenu::FullscreenMenuMainMenu()
      buth_(get_h() * 9 / 200),
      title_y_(get_h() * 3 / 40),
      padding_(buth_ / 3),
-     button_background_("images/ui_basic//but3.png") {
+     button_background_("images/ui_basic//but3.png"),
+     vbox_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_) {
+}
+
+void FullscreenMenuMainMenu::layout() {
+	box_x_ = get_w() * 13 / 40;
+	box_y_ = get_h() * 6 / 25;
+	butw_ = get_w() * 7 / 20;
+	buth_ = get_h() * 9 / 200;
+	title_y_ = get_h() * 3 / 40;
+	padding_ = buth_ / 3;
 }

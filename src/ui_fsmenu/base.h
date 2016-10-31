@@ -20,12 +20,16 @@
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "graphic/align.h"
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
 #include "ui_basic/fullscreen_window.h"
+#include "ui_basic/panel.h"
 
 /**
  * This class is the base class for a fullscreen menu.
@@ -78,6 +82,10 @@ public:
 protected:
 	virtual void clicked_back();
 	virtual void clicked_ok();
+
+private:
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

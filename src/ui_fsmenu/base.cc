@@ -44,6 +44,11 @@ FullscreenMenuBase
  * Args: bgpic  name of the background picture
  */
 FullscreenMenuBase::FullscreenMenuBase() : UI::FullscreenWindow() {
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.width, message.height);
+		   layout();
+		});
 }
 
 FullscreenMenuBase::~FullscreenMenuBase() {
