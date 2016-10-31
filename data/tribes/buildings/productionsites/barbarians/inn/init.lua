@@ -66,10 +66,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=14000",
+            "sleep=5000",
             "consume=barbarians_bread,fish,meat",
-            "animate=working 19000",
+            "play_sound=sound/barbarians/taverns inn 100",
+            "animate=working 18000",
+            "sleep=10000",
             "produce=ration"
          }
       },
@@ -77,10 +80,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
          descname = _"preparing a snack",
          actions = {
+            -- time total: 37
             "return=skipped unless economy needs snack",
-            "sleep=15000",
+            "sleep=5000",
             "consume=barbarians_bread fish,meat beer",
-            "animate=working 20000",
+            "play_sound=sound/barbarians/taverns inn 100",
+            "animate=working 22000",
+            "sleep=10000",
             "produce=snack"
          }
       },

@@ -36,10 +36,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   butw_,
                   buth_,
                   g_gr->images().get(button_background_),
-                  _("Play Tutorial"),
-                  "",
-                  true,
-                  false),
+                  _("Play Tutorial")),
      singleplayer(&vbox,
                   "single_player",
                   0,
@@ -47,10 +44,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   butw_,
                   buth_,
                   g_gr->images().get(button_background_),
-                  _("Single Player"),
-                  "",
-                  true,
-                  false),
+                  _("Single Player")),
      multiplayer(&vbox,
                  "multi_player",
                  0,
@@ -58,10 +52,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                  butw_,
                  buth_,
                  g_gr->images().get(button_background_),
-                 _("Multiplayer"),
-                 "",
-                 true,
-                 false),
+                 _("Multiplayer")),
      replay(&vbox,
             "replay",
             0,
@@ -69,32 +60,11 @@ FullscreenMenuMain::FullscreenMenuMain()
             butw_,
             buth_,
             g_gr->images().get(button_background_),
-            _("Watch Replay"),
-            "",
-            true,
-            false),
-     editor(&vbox,
-            "editor",
-            0,
-            0,
-            butw_,
-            buth_,
-            g_gr->images().get(button_background_),
-            _("Editor"),
-            "",
-            true,
-            false),
-     options(&vbox,
-             "options",
-             0,
-             0,
-             butw_,
-             buth_,
-             g_gr->images().get(button_background_),
-             _("Options"),
-             "",
-             true,
-             false),
+            _("Watch Replay")),
+     editor(
+        &vbox, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
+     options(
+        &vbox, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Options")),
      about(&vbox,
            "about",
            0,
@@ -102,10 +72,7 @@ FullscreenMenuMain::FullscreenMenuMain()
            butw_,
            buth_,
            g_gr->images().get(button_background_),
-           _("About Widelands"),
-           "",
-           true,
-           false),
+           _("About Widelands")),
      exit(&vbox,
           "exit",
           0,
@@ -113,10 +80,7 @@ FullscreenMenuMain::FullscreenMenuMain()
           butw_,
           buth_,
           g_gr->images().get(button_background_),
-          _("Exit Widelands"),
-          "",
-          true,
-          false),
+          _("Exit Widelands")),
 
      // Textlabels
      version(
@@ -188,9 +152,9 @@ void FullscreenMenuMain::clicked_ok() {
 void FullscreenMenuMain::layout() {
 	FullscreenMenuMainMenu::layout();
 	const int text_height = 0.5 * version.get_h() + padding_;
-	version.set_pos(Point(get_w() - version.get_w(), get_h() - text_height));
-	copyright.set_pos(Point(0, get_h() - 2 * text_height));
-	gpl.set_pos(Point(0, get_h() - text_height));
+	version.set_pos(Vector2i(get_w() - version.get_w(), get_h() - text_height));
+	copyright.set_pos(Vector2i(0, get_h() - 2 * text_height));
+	gpl.set_pos(Vector2i(0, get_h() - text_height));
 
 	playtutorial.set_desired_size(butw_, buth_);
 	singleplayer.set_desired_size(butw_, buth_);
@@ -203,7 +167,7 @@ void FullscreenMenuMain::layout() {
 
 	// This box needs to be positioned a bit higher than in the other menus, because we have a lot of
 	// buttons
-	vbox.set_pos(Point(box_x_, box_y_ - buth_));
+	vbox.set_pos(Vector2i(box_x_, box_y_ - buth_));
 	vbox.set_inner_spacing(padding_);
 	vbox.set_size(butw_, get_h() - vbox.get_y() - 5 * padding_);
 }

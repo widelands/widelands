@@ -53,9 +53,9 @@ void FullscreenMenuAbout::layout() {
 	tab_panel_y_ = get_h() * 14 / 100;
 
 	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Point(0, buth_));
+	title_.set_pos(Vector2i(0, buth_));
 	close_.set_size(butw_, buth_);
-	close_.set_pos(Point(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
-	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
+	close_.set_pos(Vector2i(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
+	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
 	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
 }

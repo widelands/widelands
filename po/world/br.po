@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
@@ -40,11 +40,11 @@ msgstr ""
 msgid "Duck"
 msgstr ""
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr ""
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr ""
 
@@ -64,11 +64,11 @@ msgstr ""
 msgid "Sheep"
 msgstr ""
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr ""
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Wisent"
 msgstr ""
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr ""
 
