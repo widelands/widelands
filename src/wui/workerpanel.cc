@@ -304,9 +304,6 @@ void WorkerPanel::draw(RenderTarget & dst)
 
 		// This should probably call something similar to soldier::draw_info_icon()
 		dst.blit(icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), worker->descr().icon());
-//		constexpr float kNoZoom = 1.f;
-//		worker->draw_info_icon(
-//		   icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), kNoZoom, false, &dst);
 		// TODO(Notabilis): Print experience on top of icon
 	}
 }

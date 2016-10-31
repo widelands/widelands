@@ -25,11 +25,11 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 48, 65 },
+			hotspot = { 44, 65 },
 		},
-		working = { -- NOCOM make animations
+		working = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 48, 65 },
+			hotspot = { 44, 65 },
 		}
 	},
 
@@ -43,11 +43,11 @@ tribes:new_productionsite_type {
 		atlanteans_trainer = 1
 	},
 
-	inputs = {
-		{ name = "tabard", amount = 8 },
-		{ name = "trident_light", amount = 8 },
-		{ name = "atlanteans_carrier", amount = 8 }
-	},
+   inputs = {
+      { name = "tabard", amount = 8 },
+      { name = "trident_light", amount = 8 },
+      { name = "atlanteans_carrier", amount = 8 }
+   },
 	outputs = {
 		"atlanteans_soldier",
    },
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
 				"sleep=15000",
 				"return=skipped unless economy needs atlanteans_soldier",
 				"consume=tabard trident_light atlanteans_carrier",
-				"animate=working 15000", -- NOCOM we have no working animation
+				"animate=working 15000",
 				"recruit=atlanteans_soldier"
 			}
 		},

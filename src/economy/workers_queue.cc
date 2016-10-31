@@ -72,15 +72,16 @@ void WorkersQueue::drop(Worker & worker) {
 }
 
 void WorkersQueue::remove_workers(Quantity amount) {
-#warning TODO(Notabilis): Check if there are any ressources lost when removing workers
+// TODO(Notabilis): Check if there are any resources lost when removing workers
 // Especially if there are any worker-memory-objects left or too much is removed
+// I am not sure about how it should be done, so please check it
 
     assert(workers_.size() >= amount);
 
 	Game & game = dynamic_cast<Game&>(owner().egbase());
 
     for (Quantity i = 0; i < amount; i++) {
-        // TODO(Notabilis): Remove from economy (Not sure if required)
+        // Maybe: Remove from economy (I don't think this is required)
         // owner_.economy().remove_workers(worker_type_, amount);
         // Remove worker
 		(*(workers_.begin()))->schedule_destroy(game);

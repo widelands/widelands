@@ -24,11 +24,11 @@ tribes:new_productionsite_type {
 	},
 
    animations = {
-		idle = { -- NOCOM make animations
+		idle = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		},
-		working = { -- NOCOM make animations
+		working = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		}
@@ -44,11 +44,11 @@ tribes:new_productionsite_type {
 		empire_trainer = 1
 	},
 
-	inputs = {
-		{ name = "armor_helmet", amount = 8 },
-		{ name = "spear_wooden", amount = 8 },
-		{ name = "empire_carrier", amount = 8 }
-	},
+   inputs = {
+      { name = "armor_helmet", amount = 8 },
+      { name = "spear_wooden", amount = 8 },
+      { name = "empire_carrier", amount = 8 }
+   },
 	outputs = {
 		"empire_soldier",
    },
@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
 				"sleep=15000",
 				"return=skipped unless economy needs empire_soldier",
 				"consume=armor_helmet spear_wooden empire_carrier",
-				"animate=working 15000", -- NOCOM we have no working animation
+				"animate=working 15000",
 				"recruit=empire_soldier"
 			}
 		},

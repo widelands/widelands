@@ -22,11 +22,11 @@ tribes:new_productionsite_type {
 	},
 
    animations = {
-		idle = { -- NOCOM make animations
+		idle = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		},
-		working = { -- NOCOM make animations
+		working = { -- TODO(GunChleoc): make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
 			hotspot = { 52, 64 },
 		}
@@ -42,11 +42,11 @@ tribes:new_productionsite_type {
 		barbarians_trainer = 1
 	},
 
-	inputs = {
-		{ name = "ax", amount = 8 },
-		{ name = "beer", amount = 8 },
-		{ name = "barbarians_carrier", amount = 8 }
-	},
+   inputs = {
+      { name = "ax", amount = 8 },
+      { name = "beer", amount = 8 },
+      { name = "barbarians_carrier", amount = 8 }
+   },
 	outputs = {
 		"barbarians_soldier",
    },
@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
 				"sleep=15000",
 				"return=skipped unless economy needs barbarians_soldier",
 				"consume=ax beer barbarians_carrier",
-				"animate=working 15000", -- NOCOM we have no working animation
+				"animate=working 15000",
 				"recruit=barbarians_soldier"
 			}
 		},
