@@ -60,13 +60,13 @@ public:
 	FullscreenWindow();
 	virtual ~FullscreenWindow();
 
-	void draw(RenderTarget&) override;
-
 	///\return the size for texts fitting to current resolution
 	int fs_small();
 	int fs_big();
 
 protected:
+	void draw(RenderTarget&) override;
+
 	/// Sets the image for the given frame position.
 	void set_frame_image(FullscreenWindow::Frames id, const std::string& filename);
 	/// Add an overlay images to be blitted according to 'align'.
