@@ -20,8 +20,11 @@
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
 
+#include <memory>
 #include <string>
 
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
 #include "ui_basic/panel.h"
 
 /**
@@ -86,6 +89,8 @@ protected:
 
 private:
 	std::string background_image_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

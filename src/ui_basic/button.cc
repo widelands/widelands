@@ -63,6 +63,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
 		set_size(w, new_height);
 	}
 	set_thinks(false);
+	set_can_focus(true);
 }
 
 Button::Button  //  for pictorial buttons
@@ -89,6 +90,7 @@ Button::Button  //  for pictorial buttons
      pic_custom_(fg_pic),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
+	set_can_focus(true);
 }
 
 Button::~Button() {
@@ -124,6 +126,8 @@ void Button::set_title(const std::string& title) {
 void Button::set_enabled(bool const on) {
 	if (enabled_ == on)
 		return;
+
+	set_can_focus(on);
 
 	// disabled buttons should look different...
 	if (on)
@@ -293,6 +297,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		return false;
 
 	if (enabled_) {
+		focus();
 		grab_mouse(true);
 		pressed_ = true;
 		if (repeating_) {

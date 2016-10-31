@@ -116,7 +116,7 @@ public:
 	// Geometry
 	void set_size(int nw, int nh);
 	void set_desired_size(int w, int h);
-	void set_pos(Vector2i);
+	virtual void set_pos(Vector2i);
 	virtual void move_inside_parent();
 	virtual void layout();
 
