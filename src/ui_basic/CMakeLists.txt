@@ -65,6 +65,7 @@ wl_library(ui_basic
     graphic_text
     graphic_text_layout
     io_filesystem
+    notifications
     profile
     scripting_lua_interface
     scripting_lua_table
