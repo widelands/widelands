@@ -37,7 +37,7 @@
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
                                                          bool registered)
-   : FullscreenMenuBase("images/ui_fsmenu/internetmenu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butx_(get_w() * 13 / 40),

@@ -344,6 +344,8 @@ include "tribes/buildings/productionsites/atlanteans/shipyard/init.lua"
 include "tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua"
+include "tribes/buildings/productionsites/atlanteans/barracks/init.lua"
+
 -- Atlanteans big
 include "tribes/buildings/productionsites/atlanteans/horsefarm/init.lua"
 include "tribes/buildings/productionsites/atlanteans/farm/init.lua"
@@ -381,6 +383,8 @@ include "tribes/buildings/productionsites/barbarians/shipyard/init.lua"
 include "tribes/buildings/productionsites/barbarians/warmill/init.lua"
 include "tribes/buildings/productionsites/barbarians/ax_workshop/init.lua"
 include "tribes/buildings/productionsites/barbarians/metal_workshop/init.lua"
+include "tribes/buildings/productionsites/barbarians/barracks/init.lua"
+
 -- Barbarians big
 include "tribes/buildings/productionsites/barbarians/cattlefarm/init.lua"
 include "tribes/buildings/productionsites/barbarians/farm/init.lua"
@@ -427,6 +431,8 @@ include "tribes/buildings/productionsites/empire/piggery/init.lua"
 include "tribes/buildings/productionsites/empire/sheepfarm/init.lua"
 include "tribes/buildings/productionsites/empire/weaving_mill/init.lua"
 include "tribes/buildings/productionsites/empire/weaponsmithy/init.lua"
+include "tribes/buildings/productionsites/empire/barracks/init.lua"
+
 -- Empire mines
 include "tribes/buildings/productionsites/empire/coalmine_deep/init.lua"
 include "tribes/buildings/productionsites/empire/coalmine/init.lua"
