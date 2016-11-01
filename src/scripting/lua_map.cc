@@ -4235,7 +4235,7 @@ int LuaProductionSite::set_wares(lua_State* L) {
 	}
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
-			if (sp.second == wwWARE)
+			if (sp.first.second == wwWARE)
 				report_error(L, "<%s> can't be stored in this building: %s!",
 						tribe.get_ware_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
 			else
