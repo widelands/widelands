@@ -78,12 +78,12 @@ end
 --       wares
 --          A table of (name,count) as expected by
 --          :meth:`wl.map.Warehouse.set_wares`. This is valid for
---          :class:`wl.map.Warehouse` and ignored otherwise.
+--          :class:`wl.map.Warehouse` and must not be used otherwise.
 --       inputs
 --          A table of (name,count) as expected by
 --          :meth:`wl.map.ProductionSite.set_inputs`. Inputs are wares or workers
 --          which are consumed by the building. This is valid for
---          :class:`wl.map.ProductionSite` and ignored otherwise.
+--          :class:`wl.map.ProductionSite` and must not be used otherwise.
 --       soldiers
 --          A table of (soldier_descr,count) as expected by
 --          :meth:`wl.map.HasSoldiers.set_soldiers`.  If this is nil, the site
