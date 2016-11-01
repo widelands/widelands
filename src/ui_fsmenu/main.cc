@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
+   : FullscreenMenuMainMenu(),
 
      // Buttons
      playtutorial(&vbox_,
@@ -141,6 +141,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add(&about, UI::Align::kHCenter, true);
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Align::kHCenter, true);
+
+	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
 
 	layout();
 }

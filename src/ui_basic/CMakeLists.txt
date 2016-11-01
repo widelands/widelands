@@ -12,6 +12,8 @@ wl_library(ui_basic
     editbox.h
     fileview_panel.cc
     fileview_panel.h
+    fullscreen_window.cc
+    fullscreen_window.h
     icon.cc
     icon.h
     icongrid.cc
@@ -63,6 +65,7 @@ wl_library(ui_basic
     graphic_text
     graphic_text_layout
     io_filesystem
+    notifications
     profile
     scripting_lua_interface
     scripting_lua_table

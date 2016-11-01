@@ -20,11 +20,7 @@
 #include "ui_fsmenu/main_menu.h"
 
 FullscreenMenuMainMenu::FullscreenMenuMainMenu()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/ui_fsmenu.jpg") {
-}
-
-FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_image)
-   : FullscreenMenuBase(background_image),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      box_x_(get_w() * 13 / 40),
