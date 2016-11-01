@@ -81,6 +81,14 @@ void Box::set_min_desired_breadth(uint32_t min) {
 }
 
 /**
+ * Sets the value for the inner spacing.
+ * \note This does not relayout the box.
+ */
+void Box::set_inner_spacing(uint32_t size) {
+	inner_spacing_ = size;
+}
+
+/**
  * Compute the desired size based on our children. This assumes that the
  * infinite space is zero, and is later on also re-used to calculate the
  * space assigned to an infinite space.
@@ -198,7 +206,7 @@ void Box::layout() {
 			infspace_count--;
 		}
 
-	// Forth pass: Update positions of all other items
+	// Fourth pass: Update positions of all other items
 	update_positions();
 }
 

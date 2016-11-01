@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_SINGLEPLAYER_H
 #define WL_UI_FSMENU_SINGLEPLAYER_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"
@@ -37,8 +36,9 @@ protected:
 	void clicked_ok() override;
 
 private:
+	void layout() override;
+
 	UI::Textarea title;
-	UI::Box vbox;
 	UI::Button new_game;
 	UI::Button campaign;
 	UI::Button load_game;
