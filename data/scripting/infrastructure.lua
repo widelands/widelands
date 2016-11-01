@@ -110,8 +110,8 @@ function prefilled_buildings(p, ...)
          b:set_soldiers(bdescr.soldiers)
       end
       -- Fill with wares if this is requested
-      if b.valid_wares and bdescr.wares then b:set_wares(bdescr.wares) end
-      if b.valid_inputs and bdescr.inputs then b:set_inputs(bdescr.inputs) end
+      if bdescr.wares then b:set_wares(bdescr.wares) end
+      if bdescr.inputs then b:set_inputs(bdescr.inputs) end
    end
 end
 
