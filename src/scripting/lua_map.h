@@ -1033,15 +1033,15 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_valid_wares(lua_State* L);
+	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
-	int get_wares(lua_State* L);
+	int get_inputs(lua_State* L);
 	int get_workers(lua_State* L);
-	int set_wares(lua_State* L);
+	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
 
 	/*

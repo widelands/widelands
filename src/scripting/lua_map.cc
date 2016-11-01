@@ -4171,15 +4171,15 @@ ProductionSite
 */
 const char LuaProductionSite::className[] = "ProductionSite";
 const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
-   METHOD(LuaProductionSite, set_wares),
-   METHOD(LuaProductionSite, get_wares),
+   METHOD(LuaProductionSite, set_inputs),
+   METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
-   PROP_RO(LuaProductionSite, valid_wares),
+   PROP_RO(LuaProductionSite, valid_inputs),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4189,7 +4189,7 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
  ==========================================================
  */
 // documented in parent class
-int LuaProductionSite::get_valid_wares(lua_State* L) {
+int LuaProductionSite::get_valid_inputs(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	ProductionSite* ps = get(L, egbase);
 
@@ -4221,7 +4221,7 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
  ==========================================================
  */
 // documented in parent class
-int LuaProductionSite::set_wares(lua_State* L) {
+int LuaProductionSite::set_inputs(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
 	InputMap setpoints = parse_set_input_arguments(L, tribe);
@@ -4264,7 +4264,7 @@ int LuaProductionSite::set_wares(lua_State* L) {
 }
 
 // documented in parent class
-int LuaProductionSite::get_wares(lua_State* L) {
+int LuaProductionSite::get_inputs(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
 

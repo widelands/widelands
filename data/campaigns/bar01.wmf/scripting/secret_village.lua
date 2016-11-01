@@ -101,13 +101,13 @@ function reveal_village()
       {"barbarians_gamekeepers_hut", 56, 12},
       {"barbarians_farm", 56, 16},
       {"barbarians_well", 54, 18},
-      {"barbarians_bakery", 55, 20, wares = {wheat = 6, water = 6}},
+      {"barbarians_bakery", 55, 20, inputs = {wheat = 6, water = 6}},
       {"barbarians_lumberjacks_hut", 56, 21},
       {"barbarians_lumberjacks_hut", 55, 22},
       {"barbarians_lumberjacks_hut", 54, 24},
       {"barbarians_rangers_hut", 57, 24},
       {"barbarians_rangers_hut", 55, 25},
-      {"barbarians_wood_hardener", 54, 26, wares = {log = 8}},
+      {"barbarians_wood_hardener", 54, 26, inputs = {log = 8}},
       -- to make it more realistic
       {"barbarians_warehouse", 53, 28,
          wares = {
@@ -116,11 +116,11 @@ function reveal_village()
             meat = 30
          }
       },
-      {"barbarians_inn", 55, 28, wares = {barbarians_bread = 4, meat = 4}},
-      {"barbarians_tavern", 57, 28, wares = {barbarians_bread = 4, meat = 4}},
+      {"barbarians_inn", 55, 28, inputs = {barbarians_bread = 4, meat = 4}},
+      {"barbarians_tavern", 57, 28, inputs = {barbarians_bread = 4, meat = 4}},
       {"barbarians_well", 52, 30},
       {"barbarians_farm", 54, 33},
-      {"barbarians_bakery", 51, 35, wares = {wheat = 6, water = 6}},
+      {"barbarians_bakery", 51, 35, inputs = {wheat = 6, water = 6}},
       {"barbarians_well", 52, 37}
    )
 

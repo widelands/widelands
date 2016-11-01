@@ -65,7 +65,7 @@ end
 --       prefilled_buildings(wl.Game().players[1],
 --          {"sentry", 57, 9}, -- Sentry completely full with soldiers
 --          {"sentry", 57, 9, soldier={[{0,0,0,0}]=1}}, -- Sentry with one soldier
---          {"bakery", 55, 20, wares = {wheat=6, water=6}}, -- bakery with wares and workers
+--          {"bakery", 55, 20, inputs = {wheat=6, water=6}}, -- bakery with wares and workers
 --          {"well", 52, 30}, -- a well with workers
 --       )
 --
@@ -77,9 +77,13 @@ end
 --
 --       wares
 --          A table of (name,count) as expected by
---          :meth:`wl.map.ProductionSite.set_wares`. This is valid for
---          :class:`wl.map.ProductionSite` and :class:`wl.map.Warehouse` and
---          ignored otherwise.
+--          :meth:`wl.map.Warehouse.set_wares`. This is valid for
+--          :class:`wl.map.Warehouse` and ignored otherwise.
+--       inputs
+--          A table of (name,count) as expected by
+--          :meth:`wl.map.ProductionSite.set_inputs`. Inputs are wares or workers
+--          which are consumed by the building. This is valid for
+--          :class:`wl.map.ProductionSite` and ignored otherwise.
 --       soldiers
 --          A table of (soldier_descr,count) as expected by
 --          :meth:`wl.map.HasSoldiers.set_soldiers`.  If this is nil, the site
@@ -106,7 +110,8 @@ function prefilled_buildings(p, ...)
          b:set_soldiers(bdescr.soldiers)
       end
       -- Fill with wares if this is requested
-      if bdescr.wares then b:set_wares(bdescr.wares) end
+      if b.valid_wares and bdescr.wares then b:set_wares(bdescr.wares) end
+      if b.valid_inputs and bdescr.inputs then b:set_inputs(bdescr.inputs) end
    end
 end
 
