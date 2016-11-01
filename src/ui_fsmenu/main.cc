@@ -26,10 +26,10 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
+   : FullscreenMenuMainMenu(),
 
      // Buttons
-     playtutorial(&vbox,
+     playtutorial(&vbox_,
                   "play_tutorial",
                   0,
                   0,
@@ -37,7 +37,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   buth_,
                   g_gr->images().get(button_background_),
                   _("Play Tutorial")),
-     singleplayer(&vbox,
+     singleplayer(&vbox_,
                   "single_player",
                   0,
                   0,
@@ -45,7 +45,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   buth_,
                   g_gr->images().get(button_background_),
                   _("Single Player")),
-     multiplayer(&vbox,
+     multiplayer(&vbox_,
                  "multi_player",
                  0,
                  0,
@@ -53,7 +53,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                  buth_,
                  g_gr->images().get(button_background_),
                  _("Multiplayer")),
-     replay(&vbox,
+     replay(&vbox_,
             "replay",
             0,
             0,
@@ -62,10 +62,10 @@ FullscreenMenuMain::FullscreenMenuMain()
             g_gr->images().get(button_background_),
             _("Watch Replay")),
      editor(
-        &vbox, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
+        &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
      options(
-        &vbox, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Options")),
-     about(&vbox,
+        &vbox_, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Options")),
+     about(&vbox_,
            "about",
            0,
            0,
@@ -73,7 +73,7 @@ FullscreenMenuMain::FullscreenMenuMain()
            buth_,
            g_gr->images().get(button_background_),
            _("About Widelands")),
-     exit(&vbox,
+     exit(&vbox_,
           "exit",
           0,
           0,
@@ -128,19 +128,21 @@ FullscreenMenuMain::FullscreenMenuMain()
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox.add(&playtutorial, UI::Align::kHCenter, true);
-	vbox.add(&singleplayer, UI::Align::kHCenter, true);
-	vbox.add(&multiplayer, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&replay, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&editor, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&options, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&about, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&exit, UI::Align::kHCenter, true);
+	vbox_.add(&playtutorial, UI::Align::kHCenter, true);
+	vbox_.add(&singleplayer, UI::Align::kHCenter, true);
+	vbox_.add(&multiplayer, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&replay, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&editor, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&options, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&about, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&exit, UI::Align::kHCenter, true);
+
+	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
 
 	layout();
 }
@@ -167,7 +169,7 @@ void FullscreenMenuMain::layout() {
 
 	// This box needs to be positioned a bit higher than in the other menus, because we have a lot of
 	// buttons
-	vbox.set_pos(Vector2i(box_x_, box_y_ - buth_));
-	vbox.set_inner_spacing(padding_);
-	vbox.set_size(butw_, get_h() - vbox.get_y() - 5 * padding_);
+	vbox_.set_pos(Vector2i(box_x_, box_y_ - buth_));
+	vbox_.set_inner_spacing(padding_);
+	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
 }
