@@ -37,11 +37,11 @@ namespace UI {
 
 FullscreenWindow::FullscreenWindow()
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-	  background_image_("images/ui_fsmenu/background.png") {
+     background_image_("images/ui_fsmenu/background.png") {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-		[this](const GraphicResolutionChanged& message) {
-			set_size(message.width, message.height);
-			layout();
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.width, message.height);
+		   layout();
 		});
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "images/ui_fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "images/ui_fsmenu/top_right.png");
@@ -68,8 +68,7 @@ void FullscreenWindow::clear_overlays() {
 	overlays_.clear();
 }
 
-void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id,
-                                       const std::__cxx11::string& filename) {
+void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id, const std::string& filename) {
 	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(filename)));
 }
 
@@ -86,8 +85,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
 */
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
-	dst.tile(
-		Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i(0, 0));
+	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i(0, 0));
 
 	// Optional overlays
 	for (const auto& overlay : overlays_) {
