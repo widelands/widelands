@@ -36,14 +36,14 @@ WorkersQueue::WorkersQueue
     (PlayerImmovable &       init_owner,
 	 DescriptionIndex        const init_worker,
 	 uint8_t           const init_max_size)
-    : owner_(init_owner),
-	  worker_type_(init_worker),
-	  max_capacity_(init_max_size),
-	  capacity_(init_max_size),
-	  request_(nullptr)
-{
+    : owner_(init_owner), worker_type_(init_worker), max_capacity_(init_max_size),
+	  capacity_(init_max_size), workers_(), request_(nullptr) {
+	// Can happen when loading a game
 	if (worker_type_ != INVALID_INDEX)
 		update_request();
+
+	// TODO(Notabilis): When set_filled() is called here, a later script call to set the worker of the
+	// building will fail. Not sure if this is a bug and/or a bug of this class. I don't really think so.
 }
 
 void WorkersQueue::set_capacity(Quantity capacity) {
@@ -76,10 +76,12 @@ void WorkersQueue::remove_workers(Quantity amount) {
 // Especially if there are any worker-memory-objects left or too much is removed
 // I am not sure about how it should be done, so please check it
 
-    assert(workers_.size() >= amount);
+    assert(get_filled() >= amount);
 
 	Game & game = dynamic_cast<Game&>(owner().egbase());
 
+	// Note: This might be slow (removing from start) but we want to consume
+	// the first worker in the queue first
     for (Quantity i = 0; i < amount; i++) {
         // Maybe: Remove from economy (I don't think this is required)
         // owner_.economy().remove_workers(worker_type_, amount);
@@ -92,9 +94,39 @@ void WorkersQueue::remove_workers(Quantity amount) {
 	update_request();
 }
 
+Quantity WorkersQueue::get_filled() const {
+	return workers_.size();
+}
+
+void WorkersQueue::set_filled(Quantity amount) {
+
+	if (amount > max_capacity())
+		amount = max_capacity_;
+	const size_t currentAmount = get_filled();
+	if (amount == currentAmount)
+		return;
+
+	// Now adjust them
+	while (get_filled() < amount) {
+		// Create new worker
+		const TribeDescr& tribe = owner().tribe();
+		const WorkerDescr* worker_descr = tribe.get_worker_descr(worker_type_);
+		EditorGameBase& egbase = owner().egbase();
+		// Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
+		Worker& w = worker_descr->create(egbase, owner(), nullptr, owner_.get_positions(egbase).front());
+		if (incorporate_worker(egbase, w) == -1) {
+			NEVER_HERE();
+		}
+	}
+	if (currentAmount > amount) {
+		// Drop workers
+		remove_workers(currentAmount - amount);
+	}
+}
+
 int WorkersQueue::incorporate_worker(EditorGameBase & egbase, Worker & w) {
 	if (w.get_location(egbase) != &(owner_)) {
-		if (workers_.size() + 1 > max_capacity_) {
+		if (get_filled() + 1 > max_capacity_) {
 			return -1;
         }
 		w.set_location(&(owner_));
@@ -108,7 +140,6 @@ int WorkersQueue::incorporate_worker(EditorGameBase & egbase, Worker & w) {
     // Not quite sure about next line, the training sites are doing it inside add_worker().
     // But that method is not available for ware/worker-queues.
     // But anyway: Add worker to queue
-	// TODO(Notabilis): Maybe only do when not already in the queue, not sure (on loading or so)
     workers_.push_back(&w);
 
 	// Make sure the request count is reduced or the request is deleted.
@@ -118,18 +149,20 @@ int WorkersQueue::incorporate_worker(EditorGameBase & egbase, Worker & w) {
 
 void WorkersQueue::remove_from_economy(Economy &) {
 	if (worker_type_ != INVALID_INDEX) {
-        // Removal of workers is not required, this is done by the building (or so)
+        // Setting request_->economy to nullptr will crash the game on load,
+        // but dropping the request and creating a new one in add_to_economy
+        // works fine
 		if (request_) {
-			request_->set_economy(nullptr);
+			delete request_;
+			request_ = nullptr;
 		}
+        // Removal of workers from the economy is not required, this is done by the building (or so)
 	}
 }
 
-void WorkersQueue::add_to_economy(Economy & e) {
-
+void WorkersQueue::add_to_economy(Economy &) {
 	if (worker_type_ != INVALID_INDEX) {
-		if (request_)
-			request_->set_economy(&e);
+			update_request();
 	}
 }
 
@@ -147,8 +180,9 @@ void WorkersQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos) {
 	if (request_) {
 		fw.unsigned_8(1);
 		request_->write(fw, game, mos);
-	} else
+	} else {
 		fw.unsigned_8(0);
+	}
     // Store references to the workers
     fw.unsigned_32(workers_.size());
     for (Worker * w : workers_) {
@@ -176,8 +210,9 @@ void WorkersQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol) {
 						 WorkersQueue::request_callback,
 						 wwWORKER);
 				request_->read(fr, game, mol);
-			} else
+			} else {
 				request_ = nullptr;
+			}
             size_t nr_workers = fr.unsigned_32();
             assert(nr_workers <= capacity_);
             assert(workers_.empty());

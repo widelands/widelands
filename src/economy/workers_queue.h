@@ -37,8 +37,6 @@ class Worker;
 /**
  * Similar to WaresQueue but for workers.
  */
-// TODO(Notabilis): Lua support is missing.
-// Add functions to scripting/lua_map.* to allow filling the queue per script
 class WorkersQueue {
 public:
 
@@ -103,6 +101,21 @@ public:
      * There have to be at least the given amount of workers in the queue.
      */
     void remove_workers(Quantity amount);
+
+    /**
+     * Returns the amount of workers currently in this building.
+     * @return The number of workers.
+     */
+    Quantity get_filled() const;
+
+	/**
+	 * Adds new workers to the queue.
+	 * The current capacity is not modified, the maximal capacity is respected.
+	 * If the given amount is smaller than the current one, the workers will
+	 * be removed silently.
+	 * @param amount The number of workers which should be inside.
+	*/
+	void set_filled(Quantity amount);
 
 	/**
 	 * Add a new worker into this site.

@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
@@ -148,11 +149,13 @@ struct SoldierMapDescr {
 
 using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
 using WaresMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using InputMap = std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
 using WorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
 using PlrInfluence = std::pair<Widelands::PlayerNumber, Widelands::MilitaryInfluence>;
 using WaresSet = std::set<Widelands::DescriptionIndex>;
+using InputSet = std::set<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier*>;
 
@@ -226,6 +229,105 @@ GET_INDEX(worker)
 PARSERS(ware, Ware)
 PARSERS(worker, Worker)
 #undef PARSERS
+
+// Versions of the above macros which accept wares and workers
+InputSet parse_get_input_arguments(
+   lua_State* L, const TribeDescr& tribe, bool* return_number) {
+	/* takes either "all", a name or an array of names */
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2)
+		report_error(L, "Wrong number of arguments to get_inputs!");
+	*return_number = false;
+	InputSet rv;
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			for (const DescriptionIndex& i : tribe.wares()) {
+				rv.insert(std::make_pair(i, wwWARE));
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				rv.insert(std::make_pair(i, wwWORKER));
+			}
+		} else {
+			/* Only one item requested */
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(index, wwWARE));
+				*return_number = true;
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(index, wwWORKER));
+					*return_number = true;
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+		}
+	} else {
+		/* array of names */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -1);
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(index, wwWARE));
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(index, wwWORKER));
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+			lua_pop(L, 1);
+		}
+	}
+	return rv;
+}
+
+InputMap parse_set_input_arguments(lua_State* L, const TribeDescr& tribe) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2 && nargs != 3)
+		report_error(L, "Wrong number of arguments to set_inputs!");
+	InputMap rv;
+	if (nargs == 3) {
+		/* name amount */
+		std::string what = luaL_checkstring(L, 2);
+		DescriptionIndex index = tribe.ware_index(what);
+		if (tribe.has_ware(index)) {
+			rv.insert(std::make_pair(std::make_pair(index, wwWARE), luaL_checkuint32(L, 3)));
+		} else {
+			index = tribe.worker_index(what);
+			if (tribe.has_worker(index)) {
+				rv.insert(std::make_pair(std::make_pair(index, wwWORKER), luaL_checkuint32(L, 3)));
+			} else {
+				report_error(L, "Invalid input: <%s>", what.c_str());
+			}
+		}
+	} else {
+		/* array of (name, count) */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -2);
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(std::make_pair(index, wwWARE), luaL_checkuint32(L, -1)));
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(std::make_pair(index, wwWORKER), luaL_checkuint32(L, -1)));
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+			lua_pop(L, 1);
+		}
+	}
+	return rv;
+}
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 	WaresMap rv;
@@ -4098,6 +4200,12 @@ int LuaProductionSite::get_valid_wares(lua_State* L) {
 		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
 	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		const WorkerDescr* descr = egbase.tribes().get_worker_descr(input_worker.first);
+		lua_pushstring(L, descr->name());
+		lua_pushuint32(L, input_worker.second);
+		lua_rawset(L, -3);
+	}
 	return 1;
 }
 
@@ -4112,28 +4220,44 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
-
 // documented in parent class
 int LuaProductionSite::set_wares(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
-	WaresMap setpoints = parse_set_wares_arguments(L, tribe);
+	InputMap setpoints = parse_set_input_arguments(L, tribe);
 
-	WaresSet valid_wares;
+	InputSet valid_inputs;
 	for (const auto& input_ware : ps->descr().inputs()) {
-		valid_wares.insert(input_ware.first);
+		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
+	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		valid_inputs.insert(std::make_pair(input_worker.first, wwWORKER));
 	}
 	for (const auto& sp : setpoints) {
-		if (!valid_wares.count(sp.first)) {
-			report_error(L, "<%s> can't be stored in this building: %s!",
-			             tribe.get_ware_descr(sp.first)->name().c_str(), ps->descr().name().c_str());
+		if (!valid_inputs.count(sp.first)) {
+			if (sp.second == wwWARE)
+				report_error(L, "<%s> can't be stored in this building: %s!",
+						tribe.get_ware_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
+			else
+				report_error(L, "<%s> can't be stored in this building: %s!",
+						tribe.get_worker_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
 		}
-		WaresQueue& wq = ps->waresqueue(sp.first);
-		if (sp.second > wq.get_max_size()) {
-			report_error(
-			   L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+		if (sp.first.second == wwWARE) {
+			WaresQueue& wq = ps->waresqueue(sp.first.first);
+			if (sp.second > wq.get_max_size()) {
+				report_error(
+				   L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+			}
+			wq.set_filled(sp.second);
+		} else {
+			assert(sp.first.second == wwWORKER);
+			WorkersQueue& wq = ps->workersqueue(sp.first.first);
+			if (sp.second > wq.max_capacity()) {
+				report_error(
+				   L, "Not enough space for %u workers, only for %i", sp.second, wq.max_capacity());
+			}
+			wq.set_filled(sp.second);
 		}
-		wq.set_filled(sp.second);
 	}
 
 	return 0;
@@ -4145,29 +4269,39 @@ int LuaProductionSite::get_wares(lua_State* L) {
 	const TribeDescr& tribe = ps->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = parse_get_wares_arguments(L, tribe, &return_number);
+	InputSet input_set = parse_get_input_arguments(L, tribe, &return_number);
 
-	WaresSet valid_wares;
+	InputSet valid_inputs;
 	for (const auto& input_ware : ps->descr().inputs()) {
-		valid_wares.insert(input_ware.first);
+		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
+	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		valid_inputs.insert(std::make_pair(input_worker.first, wwWORKER));
 	}
 
-	if (wares_set.size() == tribe.get_nrwares())  // Want all returned
-		wares_set = valid_wares;
+	if (input_set.size() == tribe.get_nrwares() + tribe.get_nrworkers())  // Want all returned
+		input_set = valid_inputs;
 
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Widelands::DescriptionIndex& ware : wares_set) {
+	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
-		if (valid_wares.count(ware))
-			cnt = ps->waresqueue(ware).get_filled();
+		if (valid_inputs.count(input)) {
+			if (input.second == wwWARE)
+				cnt = ps->waresqueue(input.first).get_filled();
+			else
+				cnt = ps->workersqueue(input.first).get_filled();
+		}
 
 		if (return_number) {  // this is the only thing the customer wants to know
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
+			if (input.second == wwWARE)
+				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
+			else
+				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
