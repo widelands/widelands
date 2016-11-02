@@ -317,11 +317,11 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 	void draw(uint32_t gametime,
-	          DrawText draw_text,
+	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
 				 float scale,
 	          RenderTarget* dst) override;
-	void draw_info(DrawText draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	void draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
 
