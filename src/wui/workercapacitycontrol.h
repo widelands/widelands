@@ -33,11 +33,10 @@ class Building;
 class WorkersQueue;
 }
 
-UI::Panel * create_worker_capacity_control
-	(UI::Panel & parent,
-	 InteractiveGameBase & igb,
-	 Widelands::Building & building,
-	 Widelands::DescriptionIndex index,
-	 Widelands::WorkersQueue & workers);
+UI::Panel* create_worker_capacity_control(UI::Panel& parent,
+                                          InteractiveGameBase& igb,
+                                          Widelands::Building& building,
+                                          Widelands::DescriptionIndex index,
+                                          Widelands::WorkersQueue& workers);
 
 #endif  // end of include guard: WL_WUI_WORKERCAPACITYCONTROL_H

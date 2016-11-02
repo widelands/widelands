@@ -31,11 +31,11 @@
  * Adapted copy of \ref SoldierCapacityControl
  */
 struct WorkerCapacityControl : UI::Box {
-	WorkerCapacityControl
-		(UI::Panel * parent, InteractiveGameBase & igb,
-		 Widelands::Building & building,
-		 Widelands::DescriptionIndex index,
-		 Widelands::WorkersQueue & workers);
+	WorkerCapacityControl(UI::Panel* parent,
+	                      InteractiveGameBase& igb,
+	                      Widelands::Building& building,
+	                      Widelands::DescriptionIndex index,
+	                      Widelands::WorkersQueue& workers);
 
 protected:
 	void think() override;
@@ -45,39 +45,49 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	InteractiveGameBase & igbase_;
-	Widelands::Building & building_;
+	InteractiveGameBase& igbase_;
+	Widelands::Building& building_;
 	Widelands::DescriptionIndex index_;
-	Widelands::WorkersQueue & workers_;
+	Widelands::WorkersQueue& workers_;
 
 	UI::Button decrease_;
 	UI::Button increase_;
 	UI::Textarea value_;
 };
 
-WorkerCapacityControl::WorkerCapacityControl
-	(UI::Panel * parent, InteractiveGameBase & igb,
-	 Widelands::Building & building,
-	 Widelands::DescriptionIndex index,
-	 Widelands::WorkersQueue & workers)
-:
-Box(parent, 0, 0, Horizontal),
-igbase_(igb),
-building_(building),
-index_(index),
-workers_(workers),
-decrease_
-	(this, "decrease", 0, 0, 32, 32,
-	 g_gr->images().get("images/ui_basic/but4.png"),
-	 g_gr->images().get("images/wui/buildings/menu_down_train.png"), _("Decrease capacity")),
-increase_
-	(this, "increase", 0, 0, 32, 32,
-	 g_gr->images().get("images/ui_basic/but4.png"),
-	 g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Increase capacity")),
-value_(this, "199", UI::Align::kCenter)
-{
-	decrease_.sigclicked.connect(boost::bind(&WorkerCapacityControl::click_decrease, boost::ref(*this)));
-	increase_.sigclicked.connect(boost::bind(&WorkerCapacityControl::click_increase, boost::ref(*this)));
+WorkerCapacityControl::WorkerCapacityControl(UI::Panel* parent,
+                                             InteractiveGameBase& igb,
+                                             Widelands::Building& building,
+                                             Widelands::DescriptionIndex index,
+                                             Widelands::WorkersQueue& workers)
+   : Box(parent, 0, 0, Horizontal),
+     igbase_(igb),
+     building_(building),
+     index_(index),
+     workers_(workers),
+     decrease_(this,
+               "decrease",
+               0,
+               0,
+               32,
+               32,
+               g_gr->images().get("images/ui_basic/but4.png"),
+               g_gr->images().get("images/wui/buildings/menu_down_train.png"),
+               _("Decrease capacity")),
+     increase_(this,
+               "increase",
+               0,
+               0,
+               32,
+               32,
+               g_gr->images().get("images/ui_basic/but4.png"),
+               g_gr->images().get("images/wui/buildings/menu_up_train.png"),
+               _("Increase capacity")),
+     value_(this, "199", UI::Align::kCenter) {
+	decrease_.sigclicked.connect(
+	   boost::bind(&WorkerCapacityControl::click_decrease, boost::ref(*this)));
+	increase_.sigclicked.connect(
+	   boost::bind(&WorkerCapacityControl::click_increase, boost::ref(*this)));
 
 	add(new UI::Textarea(this, _("Capacity")), UI::Align::kHCenter);
 	add(&decrease_, UI::Align::kHCenter);
@@ -90,8 +100,7 @@ value_(this, "199", UI::Align::kCenter)
 	set_thinks(true);
 }
 
-void WorkerCapacityControl::think()
-{
+void WorkerCapacityControl::think() {
 	uint32_t const capacity = workers_.capacity();
 	char buffer[sizeof("4294967295")];
 
@@ -103,26 +112,22 @@ void WorkerCapacityControl::think()
 	increase_.set_enabled(can_act && workers_.max_capacity() > capacity);
 }
 
-void WorkerCapacityControl::change_worker_capacity(int16_t delta)
-{
+void WorkerCapacityControl::change_worker_capacity(int16_t delta) {
 	igbase_.game().send_player_change_worker_capacity(building_, workers_.get_worker(), delta);
 }
 
-void WorkerCapacityControl::click_decrease()
-{
+void WorkerCapacityControl::click_decrease() {
 	change_worker_capacity(-1);
 }
 
-void WorkerCapacityControl::click_increase()
-{
+void WorkerCapacityControl::click_increase() {
 	change_worker_capacity(1);
 }
 
-UI::Panel * create_worker_capacity_control
-	(UI::Panel & parent, InteractiveGameBase & igb,
-	 Widelands::Building & building,
-	 Widelands::DescriptionIndex index,
-	 Widelands::WorkersQueue & workers)
-{
+UI::Panel* create_worker_capacity_control(UI::Panel& parent,
+                                          InteractiveGameBase& igb,
+                                          Widelands::Building& building,
+                                          Widelands::DescriptionIndex index,
+                                          Widelands::WorkersQueue& workers) {
 	return new WorkerCapacityControl(&parent, igb, building, index, workers);
 }

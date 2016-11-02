@@ -33,11 +33,10 @@ class Building;
 class WorkersQueue;
 }
 
-void add_worker_panel
-	(UI::TabPanel * parent,
-	 InteractiveGameBase & igb,
-	 Widelands::Building & building,
-	 Widelands::DescriptionIndex index,
-	 Widelands::WorkersQueue & workers_queue);
+void add_worker_panel(UI::TabPanel* parent,
+                      InteractiveGameBase& igb,
+                      Widelands::Building& building,
+                      Widelands::DescriptionIndex index,
+                      Widelands::WorkersQueue& workers_queue);
 
 #endif  // end of include guard: WL_WUI_WORKERPANEL_H

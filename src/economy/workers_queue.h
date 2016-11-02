@@ -20,9 +20,9 @@
 #ifndef WL_ECONOMY_WORKERS_QUEUE_H
 #define WL_ECONOMY_WORKERS_QUEUE_H
 
-#include <vector>
 #include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
+#include <vector>
 
 namespace Widelands {
 
@@ -39,34 +39,41 @@ class Worker;
  */
 class WorkersQueue {
 public:
+	/**
+	 * Default constructor
+	 */
+	WorkersQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
-    /**
-     * Default constructor
-     */
-    WorkersQueue(PlayerImmovable &, DescriptionIndex, uint8_t size);
-
-    /**
-     * The type of workers required here.
-     */
-	DescriptionIndex get_worker() const {return worker_type_;}
+	/**
+	 * The type of workers required here.
+	 */
+	DescriptionIndex get_worker() const {
+		return worker_type_;
+	}
 
 	/**
 	 * \return a list of workers that are currently in the building.
 	 */
-	std::vector<Worker *> workers() const {return workers_;};
+	std::vector<Worker*> workers() const {
+		return workers_;
+	};
 
 	/**
 	 * \return the maximum number of workers that this building can be
 	 * configured to hold.
 	 */
-	Quantity max_capacity() const {return max_capacity_;};
+	Quantity max_capacity() const {
+		return max_capacity_;
+	};
 
 	/**
 	 * Is in [0, max_capacity()].
 	 * \return the number of workers this building is configured to hold
 	 * right now.
 	 */
-	Quantity capacity() const {return capacity_;};
+	Quantity capacity() const {
+		return capacity_;
+	};
 
 	/**
 	 * Sets the capacity for workers of this building.
@@ -79,13 +86,9 @@ public:
 
 	void change_capacity(int32_t const difference) {
 		Quantity const old_capacity = capacity();
-		Quantity const new_capacity =
-			std::min
-				(static_cast<Quantity>
-				 	(std::max
-				 	 	(static_cast<int32_t>(old_capacity) + difference,
-				 	 	 0)),
-				 max_capacity_);
+		Quantity const new_capacity = std::min(
+		   static_cast<Quantity>(std::max(static_cast<int32_t>(old_capacity) + difference, 0)),
+		   max_capacity_);
 		if (old_capacity != new_capacity)
 			set_capacity(new_capacity);
 	}
@@ -94,19 +97,19 @@ public:
 	 * Evict the given worker from the building immediately,
 	 * without changing the building's capacity.
 	 */
-	void drop(Worker &);
+	void drop(Worker&);
 
-    /**
-     * Removes the given amount of workers from the game.
-     * There have to be at least the given amount of workers in the queue.
-     */
-    void remove_workers(Quantity amount);
+	/**
+	 * Removes the given amount of workers from the game.
+	 * There have to be at least the given amount of workers in the queue.
+	 */
+	void remove_workers(Quantity amount);
 
-    /**
-     * Returns the amount of workers currently in this building.
-     * @return The number of workers.
-     */
-    Quantity get_filled() const;
+	/**
+	 * Returns the amount of workers currently in this building.
+	 * @return The number of workers.
+	 */
+	Quantity get_filled() const;
 
 	/**
 	 * Adds new workers to the queue.
@@ -121,31 +124,31 @@ public:
 	 * Add a new worker into this site.
 	 * \return -1 if there is no space for him, 0 on success.
 	 */
-	int incorporate_worker(EditorGameBase &, Worker &);
+	int incorporate_worker(EditorGameBase&, Worker&);
 
-	void remove_from_economy(Economy &);
-	void add_to_economy(Economy &);
+	void remove_from_economy(Economy&);
+	void add_to_economy(Economy&);
 
-	Player & owner() const {return owner_.owner();}
+	Player& owner() const {
+		return owner_.owner();
+	}
 
-	void read (FileRead  &, Game &, MapObjectLoader &);
-	void write(FileWrite &, Game &, MapObjectSaver  &);
+	void read(FileRead&, Game&, MapObjectLoader&);
+	void write(FileWrite&, Game&, MapObjectSaver&);
 
 private:
+	/**
+	 * Callback when a request is fulfilled and a worker enters the queue.
+	 */
+	static void request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-    /**
-     * Callback when a request is fulfilled and a worker enters the queue.
-     */
-	static void request_callback
-		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
-
-    /**
-     * Updates the request for further workers.
-     * Should be called when a worker is added or removed.
-     */
+	/**
+	 * Updates the request for further workers.
+	 * Should be called when a worker is added or removed.
+	 */
 	void update_request();
 
-	PlayerImmovable & owner_;
+	PlayerImmovable& owner_;
 	/// Type of the stored worker
 	DescriptionIndex worker_type_;
 	/// Number of workers that fit into the queue maximum.
@@ -153,13 +156,12 @@ private:
 	/// Number of workers that fit currently into the queue.
 	Quantity capacity_;
 
-    /// The workers currently in the queue
-    std::vector<Worker *> workers_;
+	/// The workers currently in the queue
+	std::vector<Worker*> workers_;
 
-    /// Currently pending request
-	Request * request_;
+	/// Currently pending request
+	Request* request_;
 };
-
 }
 
-#endif // WL_ECONOMY_WORKERS_QUEUE_H
+#endif  // WL_ECONOMY_WORKERS_QUEUE_H

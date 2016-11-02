@@ -149,7 +149,8 @@ struct SoldierMapDescr {
 
 using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
 using WaresMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
-using InputMap = std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
+using InputMap =
+   std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
 using WorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
@@ -231,8 +232,7 @@ PARSERS(worker, Worker)
 #undef PARSERS
 
 // Versions of the above macros which accept wares and workers
-InputSet parse_get_input_arguments(
-   lua_State* L, const TribeDescr& tribe, bool* return_number) {
+InputSet parse_get_input_arguments(lua_State* L, const TribeDescr& tribe, bool* return_number) {
 	/* takes either "all", a name or an array of names */
 	int32_t nargs = lua_gettop(L);
 	if (nargs != 2)
@@ -2101,11 +2101,11 @@ int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
 			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
 			for (const auto& entry : group.first) {
-			    const DescriptionIndex& index = entry.first;
-                if (entry.second == wwWARE)
-                    lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(index)->name());
-                else
-                    lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(index)->name());
+				const DescriptionIndex& index = entry.first;
+				if (entry.second == wwWARE)
+					lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(index)->name());
+				else
+					lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(index)->name());
 				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
 			}
@@ -4237,10 +4237,12 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		if (!valid_inputs.count(sp.first)) {
 			if (sp.first.second == wwWARE)
 				report_error(L, "<%s> can't be stored in this building: %s!",
-						tribe.get_ware_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
+				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
+				             ps->descr().name().c_str());
 			else
 				report_error(L, "<%s> can't be stored in this building: %s!",
-						tribe.get_worker_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
+				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
+				             ps->descr().name().c_str());
 		}
 		if (sp.first.second == wwWARE) {
 			WaresQueue& wq = ps->waresqueue(sp.first.first);

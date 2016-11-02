@@ -40,7 +40,6 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/workercapacitycontrol.h"
 
-
 using Widelands::Worker;
 using Widelands::WorkersQueue;
 using Widelands::DescriptionIndex;
@@ -49,36 +48,39 @@ using Widelands::Building;
 namespace {
 
 constexpr uint32_t kMaxColumns = 6;
-constexpr uint32_t kAnimateSpeed = 300; ///< in pixels per second
+constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
 constexpr uint32_t kIconBorder = 2;
 
-} // namespace
+}  // namespace
 
 /**
  * Iconic representation of workers in a queue.
  * Adapted copy of \ref SoldierPanel
  */
 struct WorkerPanel : UI::Panel {
-	using WorkerFn = boost::function<void (const Worker *)>;
+	using WorkerFn = boost::function<void(const Worker*)>;
 
-	WorkerPanel(UI::Panel & parent, Widelands::EditorGameBase & egbase, WorkersQueue & workers_queue);
+	WorkerPanel(UI::Panel& parent, Widelands::EditorGameBase& egbase, WorkersQueue& workers_queue);
 
-	Widelands::EditorGameBase & egbase() const {return egbase_;}
+	Widelands::EditorGameBase& egbase() const {
+		return egbase_;
+	}
 
 	void think() override;
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
-	void set_mouseover(const WorkerFn & fn);
-	void set_click(const WorkerFn & fn);
+	void set_mouseover(const WorkerFn& fn);
+	void set_click(const WorkerFn& fn);
 
 protected:
 	void handle_mousein(bool inside) override;
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
 	Vector2i calc_pos(uint32_t row, uint32_t col) const;
-	const Worker * find_worker(int32_t x, int32_t y) const;
+	const Worker* find_worker(int32_t x, int32_t y) const;
 
 	struct Icon {
 		Widelands::OPtr<Worker> worker;
@@ -90,11 +92,11 @@ private:
 		 * Experience when last drawing
 		 */
 		uint32_t cache_experience;
-        // The experience is currently not shown on top of the icon,
-        // this remains as further work.
+		// The experience is currently not shown on top of the icon,
+		// this remains as further work.
 	};
 
-	Widelands::EditorGameBase & egbase_;
+	Widelands::EditorGameBase& egbase_;
 	WorkersQueue& workers_;
 
 	WorkerFn mouseover_fn_;
@@ -111,24 +113,18 @@ private:
 	int32_t last_animate_time_;
 };
 
-WorkerPanel::WorkerPanel
-	(UI::Panel & parent,
-	 Widelands::EditorGameBase & gegbase,
-	 WorkersQueue & workers_queue)
-:
-Panel(&parent, 0, 0, 0, 0),
-egbase_(gegbase),
-workers_(workers_queue),
-last_animate_time_(0)
-{
+WorkerPanel::WorkerPanel(UI::Panel& parent,
+                         Widelands::EditorGameBase& gegbase,
+                         WorkersQueue& workers_queue)
+   : Panel(&parent, 0, 0, 0, 0), egbase_(gegbase), workers_(workers_queue), last_animate_time_(0) {
 	{
-	    // Fetch the icon of some worker and retrieve its size
-	    assert(egbase_.tribes().nrtribes() > 0);
-	    assert(egbase_.tribes().nrworkers() > 0);
-	    // ID=0 should be the first worker created and anyone is good enough
-        const Image * some_icon = egbase_.tribes().get_worker_descr(0)->icon();
-        icon_width_ = some_icon->width();
-        icon_height_ = some_icon->height();
+		// Fetch the icon of some worker and retrieve its size
+		assert(egbase_.tribes().nrtribes() > 0);
+		assert(egbase_.tribes().nrworkers() > 0);
+		// ID=0 should be the first worker created and anyone is good enough
+		const Image* some_icon = egbase_.tribes().get_worker_descr(0)->icon();
+		icon_width_ = some_icon->width();
+		icon_height_ = some_icon->height();
 	}
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
@@ -149,7 +145,7 @@ last_animate_time_(0)
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Worker * worker : workers_.workers()) {
+	for (Worker* worker : workers_.workers()) {
 		Icon icon;
 		icon.worker = worker;
 		icon.row = row;
@@ -167,35 +163,33 @@ last_animate_time_(0)
 /**
  * Set the callback function that indicates which worker the mouse is over.
  */
-void WorkerPanel::set_mouseover(const WorkerPanel::WorkerFn & fn)
-{
+void WorkerPanel::set_mouseover(const WorkerPanel::WorkerFn& fn) {
 	mouseover_fn_ = fn;
 }
 
 /**
  * Set the callback function that is called when a worker is clicked.
  */
-void WorkerPanel::set_click(const WorkerPanel::WorkerFn & fn)
-{
+void WorkerPanel::set_click(const WorkerPanel::WorkerFn& fn) {
 	click_fn_ = fn;
 }
 
-void WorkerPanel::think()
-{
+void WorkerPanel::think() {
 	bool changes = false;
 	uint32_t capacity = workers_.capacity();
 
 	// Update worker list and target row/col:
-	std::vector<Worker *> workerlist = workers_.workers();
+	std::vector<Worker*> workerlist = workers_.workers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
 	// First pass: check whether existing icons are still valid, and compact them
 	for (uint32_t idx = 0; idx < icons_.size(); ++idx) {
-		Icon & icon = icons_[idx];
-		Worker * worker = icon.worker.get(egbase());
+		Icon& icon = icons_[idx];
+		Worker* worker = icon.worker.get(egbase());
 		if (worker) {
-			std::vector<Worker *>::iterator it = std::find(workerlist.begin(), workerlist.end(), worker);
+			std::vector<Worker*>::iterator it =
+			   std::find(workerlist.begin(), workerlist.end(), worker);
 			if (it != workerlist.end())
 				workerlist.erase(it);
 			else
@@ -209,10 +203,8 @@ void WorkerPanel::think()
 			continue;
 		}
 
-		while
-			(icon.row &&
-			 (row_occupancy[icon.row] >= kMaxColumns ||
-			  icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity))
+		while (icon.row && (row_occupancy[icon.row] >= kMaxColumns ||
+		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity))
 			icon.row--;
 
 		icon.col = row_occupancy[icon.row]++;
@@ -234,9 +226,8 @@ void WorkerPanel::think()
 
 		std::vector<Icon>::iterator insertpos = icons_.begin();
 
-		for (std::vector<Icon>::iterator icon_iter = icons_.begin();
-			  icon_iter != icons_.end();
-			  ++icon_iter) {
+		for (std::vector<Icon>::iterator icon_iter = icons_.begin(); icon_iter != icons_.end();
+		     ++icon_iter) {
 
 			if (icon_iter->row <= icon.row)
 				insertpos = icon_iter + 1;
@@ -269,7 +260,7 @@ void WorkerPanel::think()
 		icon.pos += dp;
 
 		// Check whether experience of the worker has changed
-		Worker * worker = icon.worker.get(egbase());
+		Worker* worker = icon.worker.get(egbase());
 		uint32_t experience = worker->get_current_experience();
 
 		if (experience != icon.cache_experience) {
@@ -284,8 +275,7 @@ void WorkerPanel::think()
 	}
 }
 
-void WorkerPanel::draw(RenderTarget & dst)
-{
+void WorkerPanel::draw(RenderTarget& dst) {
 	// Fill a region matching the current site capacity with black
 	uint32_t capacity = workers_.capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
@@ -293,12 +283,13 @@ void WorkerPanel::draw(RenderTarget & dst)
 	if (fullrows)
 		dst.fill_rect(Rectf(0, 0, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
 	if (capacity % kMaxColumns)
-		dst.fill_rect(Rectf(0, icon_height_ * fullrows,
-			icon_width_ * (capacity % kMaxColumns), icon_height_), RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(
+		   Rectf(0, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
+		   RGBAColor(0, 0, 0, 0));
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
-		const Worker * worker = icon.worker.get(egbase());
+		const Worker* worker = icon.worker.get(egbase());
 		if (!worker)
 			continue;
 
@@ -308,16 +299,14 @@ void WorkerPanel::draw(RenderTarget & dst)
 	}
 }
 
-Vector2i WorkerPanel::calc_pos(uint32_t row, uint32_t col) const
-{
+Vector2i WorkerPanel::calc_pos(uint32_t row, uint32_t col) const {
 	return Vector2i(col * icon_width_, row * icon_height_);
 }
 
 /**
  * Return the worker (if any) at the given coordinates.
  */
-const Worker * WorkerPanel::find_worker(int32_t x, int32_t y) const
-{
+const Worker* WorkerPanel::find_worker(int32_t x, int32_t y) const {
 	for (const Icon& icon : icons_) {
 		Rectf r(icon.pos, icon_width_, icon_height_);
 		if (r.contains(Vector2i(x, y))) {
@@ -328,29 +317,22 @@ const Worker * WorkerPanel::find_worker(int32_t x, int32_t y) const
 	return nullptr;
 }
 
-void WorkerPanel::handle_mousein(bool inside)
-{
+void WorkerPanel::handle_mousein(bool inside) {
 	if (!inside && mouseover_fn_)
 		mouseover_fn_(nullptr);
 }
 
-bool WorkerPanel::handle_mousemove
-	(uint8_t /* state */,
-	 int32_t x,
-	 int32_t y,
-	 int32_t /* xdiff */,
-	 int32_t /* ydiff */)
-{
+bool WorkerPanel::handle_mousemove(
+   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
 	if (mouseover_fn_)
 		mouseover_fn_(find_worker(x, y));
 	return true;
 }
 
-bool WorkerPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
-{
+bool WorkerPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Worker * worker = find_worker(x, y))
+			if (const Worker* worker = find_worker(x, y))
 				click_fn_(worker);
 		}
 		return true;
@@ -363,41 +345,37 @@ bool WorkerPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
  * List of workers
  */
 struct WorkerList : UI::Box {
-	WorkerList
-		(UI::Panel & parent,
-		 InteractiveGameBase & igb,
-		 Building & building,
-		 DescriptionIndex index,
-		 WorkersQueue & workers_queue);
+	WorkerList(UI::Panel& parent,
+	           InteractiveGameBase& igb,
+	           Building& building,
+	           DescriptionIndex index,
+	           WorkersQueue& workers_queue);
 
 private:
-	void mouseover(const Worker * worker);
-	void eject(const Worker * worker);
+	void mouseover(const Worker* worker);
+	void eject(const Worker* worker);
 
 	InteractiveGameBase& igbase_;
 	Building& building_;
 	DescriptionIndex index_;
-	WorkersQueue & workers_queue_;
+	WorkersQueue& workers_queue_;
 	WorkerPanel workerpanel_;
 	UI::Textarea infotext_;
 };
 
-WorkerList::WorkerList
-	(UI::Panel & parent,
-	 InteractiveGameBase & igb,
-	 Building & building,
-	 DescriptionIndex index,
-	 WorkersQueue & workers_queue)
-:
-UI::Box(&parent, 0, 0, UI::Box::Vertical),
+WorkerList::WorkerList(UI::Panel& parent,
+                       InteractiveGameBase& igb,
+                       Building& building,
+                       DescriptionIndex index,
+                       WorkersQueue& workers_queue)
+   : UI::Box(&parent, 0, 0, UI::Box::Vertical),
 
-igbase_(igb),
-building_(building),
-index_(index),
-workers_queue_(workers_queue),
-workerpanel_(*this, igb.egbase(), workers_queue),
-infotext_(this, _("Click worker to send away"))
-{
+     igbase_(igb),
+     building_(building),
+     index_(index),
+     workers_queue_(workers_queue),
+     workerpanel_(*this, igb.egbase(), workers_queue),
+     infotext_(this, _("Click worker to send away")) {
 	add(&workerpanel_, UI::Align::kHCenter);
 
 	add_space(2);
@@ -408,50 +386,43 @@ infotext_(this, _("Click worker to send away"))
 	workerpanel_.set_click(boost::bind(&WorkerList::eject, this, _1));
 
 	// We don't want translators to translate this twice, so it's a bit involved.
-	int w = UI::g_fh1->render(
-				  as_uifont((boost::format("%s ") // We need some extra space to fix bug 724169
-								 /** TRANSLATORS: Workertype (current experience / required experience) */
-								 % (boost::format(_("%1$s (Exp: %2$u/%3$u)"))
-									 % 8 % 8 % 8)).str()))->width();
-	uint32_t maxtextwidth = std::max(w,
-												UI::g_fh1->render(as_uifont(_("Click worker to send away")))->width());
+	int w = UI::g_fh1
+	           ->render(as_uifont(
+	              (boost::format("%s ")  // We need some extra space to fix bug 724169
+	               /** TRANSLATORS: Workertype (current experience / required experience) */
+	               % (boost::format(_("%1$s (Exp: %2$u/%3$u)")) % 8 % 8 % 8))
+	                 .str()))
+	           ->width();
+	uint32_t maxtextwidth =
+	   std::max(w, UI::g_fh1->render(as_uifont(_("Click worker to send away")))->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
-	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
 	buttons->add_inf_space();
-	buttons->add
-		(create_worker_capacity_control(*buttons, igb, building, index_, workers_queue_),
-		 UI::Align::kRight);
+	buttons->add(create_worker_capacity_control(*buttons, igb, building, index_, workers_queue_),
+	             UI::Align::kRight);
 
 	add(buttons, UI::Align::kHCenter, true);
 }
 
-void WorkerList::mouseover(const Worker * worker)
-{
+void WorkerList::mouseover(const Worker* worker) {
 	if (!worker) {
 		infotext_.set_text(_("Click worker to send away"));
 		return;
 	}
 
 	if (worker->needs_experience()) {
-		infotext_.set_text(
-			(boost::format(_("%1$s (Exp: %2$u/%3$u)"))
-				% worker->descr().descname()
-				% worker->get_current_experience()
-				% worker->descr().get_needed_experience()
-			).str()
-		);
+		infotext_.set_text((boost::format(_("%1$s (Exp: %2$u/%3$u)")) % worker->descr().descname() %
+		                    worker->get_current_experience() %
+		                    worker->descr().get_needed_experience())
+		                      .str());
 	} else {
-		infotext_.set_text(
-			(boost::format(_("%1$s (Exp: -/-)"))
-				% worker->descr().descname()
-		).str());
+		infotext_.set_text((boost::format(_("%1$s (Exp: -/-)")) % worker->descr().descname()).str());
 	}
 }
 
-void WorkerList::eject(const Worker * worker)
-{
+void WorkerList::eject(const Worker* worker) {
 	uint32_t const capacity_min = 0;
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < workers_queue_.workers().size();
@@ -460,16 +431,14 @@ void WorkerList::eject(const Worker * worker)
 		igbase_.game().send_player_drop_worker(building_, worker->serial());
 }
 
-void add_worker_panel
-	(UI::TabPanel * parent,
-	 InteractiveGameBase & igb,
-	 Widelands::Building & building,
-	 DescriptionIndex index,
-	 Widelands::WorkersQueue & workers_queue)
-{
+void add_worker_panel(UI::TabPanel* parent,
+                      InteractiveGameBase& igb,
+                      Widelands::Building& building,
+                      DescriptionIndex index,
+                      Widelands::WorkersQueue& workers_queue) {
 
-    const Widelands::WorkerDescr * desc = igb.egbase().tribes().get_worker_descr(workers_queue.get_worker());
+	const Widelands::WorkerDescr* desc =
+	   igb.egbase().tribes().get_worker_descr(workers_queue.get_worker());
 	parent->add(desc->name(), desc->icon(),
-                 new WorkerList(*parent, igb, building, index, workers_queue),
-                 desc->descname());
+	            new WorkerList(*parent, igb, building, index, workers_queue), desc->descname());
 }

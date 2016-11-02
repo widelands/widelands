@@ -689,7 +689,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			nr_queues = fr.unsigned_16();
 			assert(!productionsite.input_worker_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				WorkersQueue * wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
+				WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
 				if (!game.tribes().worker_exists(wq->get_worker())) {
@@ -1143,7 +1143,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	for (uint16_t i = 0; i < input_queues_size; ++i)
 		productionsite.input_queues_[i]->write(fw, game, mos);
 
-    const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
+	const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
 	fw.unsigned_16(input_worker_queues_size);
 	for (uint16_t i = 0; i < input_worker_queues_size; ++i)
 		productionsite.input_worker_queues_[i]->write(fw, game, mos);

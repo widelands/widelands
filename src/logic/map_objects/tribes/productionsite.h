@@ -88,7 +88,7 @@ public:
 	const BillOfMaterials& inputs() const {
 		return inputs_;
 	}
-	const BillOfMaterials & input_workers() const {
+	const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
 	using Output = std::set<DescriptionIndex>;
@@ -313,8 +313,8 @@ protected:  // TrainingSite must have access to this stuff
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
-	InputQueues input_queues_;  ///< input queues for all inputs
-	InputWorkerQueues input_worker_queues_; ///< input queues for workers
+	InputQueues input_queues_;               ///< input queues for all inputs
+	InputWorkerQueues input_worker_queues_;  ///< input queues for workers
 	std::vector<bool> statistics_;
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:

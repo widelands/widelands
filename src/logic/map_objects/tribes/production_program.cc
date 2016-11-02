@@ -68,7 +68,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -114,7 +114,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
@@ -213,50 +213,48 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		char const terminator = *parameters;
 		*parameters = '\0';
 
-        WareWorker type = wwWARE;
+		WareWorker type = wwWARE;
 
-        // Try as ware
+		// Try as ware
 		DescriptionIndex ware_index = tribes.ware_index(ware);
 		if (tribes.ware_exists(ware_index)) {
-            for (BillOfMaterials::const_iterator input_it = inputs.begin();
-                input_it != inputs.end(); ++input_it) {
-                if (input_it == inputs.end()) {
-                    throw GameDataError
-                        ("%s is not declared as an input (\"%s=<count>\" was not "
-                         "found in the [inputs] section)",
-                         ware, ware);
-                } else if (input_it->first == ware_index) {
-                    count_max += input_it->second;
-                    break;
-                }
-            }
-        } else {
-            ware_index = tribes.worker_index(ware);
-            if (tribes.worker_exists(ware_index)) {
-                // It is a worker
-                type = wwWORKER;
-                for (BillOfMaterials::const_iterator input_it = input_workers.begin();
-                    input_it != input_workers.end(); ++input_it) {
-                    if (input_it == input_workers.end()) {
-                        throw GameDataError
-                            ("%s is not declared as an input (\"%s=<count>\" was not "
-                             "found in the [inputs] section)",
-                             ware, ware);
-                    } else if (input_it->first == ware_index) {
-                        count_max += input_it->second;
-                        break;
-                    }
-                }
-            } else {
-                throw GameDataError("Unknown ware or worker type \"%s\"", ware);
-            }
-        }
+			for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end();
+			     ++input_it) {
+				if (input_it == inputs.end()) {
+					throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
+					                    "found in the [inputs] section)",
+					                    ware, ware);
+				} else if (input_it->first == ware_index) {
+					count_max += input_it->second;
+					break;
+				}
+			}
+		} else {
+			ware_index = tribes.worker_index(ware);
+			if (tribes.worker_exists(ware_index)) {
+				// It is a worker
+				type = wwWORKER;
+				for (BillOfMaterials::const_iterator input_it = input_workers.begin();
+				     input_it != input_workers.end(); ++input_it) {
+					if (input_it == input_workers.end()) {
+						throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
+						                    "found in the [inputs] section)",
+						                    ware, ware);
+					} else if (input_it->first == ware_index) {
+						count_max += input_it->second;
+						break;
+					}
+				}
+			} else {
+				throw GameDataError("Unknown ware or worker type \"%s\"", ware);
+			}
+		}
 
 		if (group.first.size() && ware_index <= group.first.begin()->first)
-			throw GameDataError
-				("wrong order of ware types within group: ware type %s appears "
-				 "after ware type %s (fix order!)",
-				 ware, tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
+			throw GameDataError("wrong order of ware types within group: ware type %s appears "
+			                    "after ware type %s (fix order!)",
+			                    ware,
+			                    tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
 		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
 		*parameters = terminator;
 		switch (terminator) {
@@ -367,14 +365,14 @@ ProductionProgram::ActReturn::SiteHas::SiteHas(char*& parameters,
 bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) const {
 	uint8_t count = group.second;
 	for (WaresQueue* ip_queue : ps.warequeues()) {
-        for (auto it = group.first.begin(); it != group.first.end(); it++) {
-            if (it->first == ip_queue->get_ware() && it->second == wwWARE) {
-                uint8_t const filled = ip_queue->get_filled();
-                if (count <= filled)
-                    return true;
-                count -= filled;
-                break;
-            }
+		for (auto it = group.first.begin(); it != group.first.end(); it++) {
+			if (it->first == ip_queue->get_ware() && it->second == wwWARE) {
+				uint8_t const filled = ip_queue->get_filled();
+				if (count <= filled)
+					return true;
+				count -= filled;
+				break;
+			}
 		}
 	}
 	return false;
@@ -797,8 +795,8 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
 	try {
 		for (;;) {
 			consumed_wares_.resize(consumed_wares_.size() + 1);
-			parse_ware_type_group
-				(parameters, *consumed_wares_.rbegin(), tribes, descr.inputs(), descr.input_workers());
+			parse_ware_type_group(
+			   parameters, *consumed_wares_.rbegin(), tribes, descr.inputs(), descr.input_workers());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
@@ -846,7 +844,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 					} else {
 						consumption_quantities_wares[i] += nr_available;
 						it->second -= nr_available;
-						++it; //  Now check if the next group includes this ware type.
+						++it;  //  Now check if the next group includes this ware type.
 					}
 					break;
 				}
@@ -857,7 +855,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		}
 	}
 
-    // Same for workers
+	// Same for workers
 	for (size_t i = 0; i < workerqueues.size(); ++i) {
 		DescriptionIndex const worker_type = workerqueues[i]->get_worker();
 		uint8_t nr_available = workerqueues[i]->workers().size();
@@ -940,7 +938,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
-	} else { //  we fulfilled all consumption requirements
+	} else {  //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < warequeues.size(); ++i)
 			if (uint8_t const q = consumption_quantities_wares[i]) {
 				assert(q <= warequeues[i]->get_filled());

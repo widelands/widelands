@@ -125,17 +125,17 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 					inputs_.push_back(WareAmount(idx, amount));
 				} else {
-				    idx = egbase.tribes().worker_index(ware_name);
-				    if (egbase.tribes().worker_exists(idx)) {
-                        for (const auto& temp_inputs : input_workers()) {
-                            if (temp_inputs.first == idx) {
-                                throw wexception("duplicated");
-                            }
-                        }
-                        input_workers_.push_back(WareAmount(idx, amount));
-                    } else {
-                        throw wexception("tribes do not define a ware or worker type with this name");
-                    }
+					idx = egbase.tribes().worker_index(ware_name);
+					if (egbase.tribes().worker_exists(idx)) {
+						for (const auto& temp_inputs : input_workers()) {
+							if (temp_inputs.first == idx) {
+								throw wexception("duplicated");
+							}
+						}
+						input_workers_.push_back(WareAmount(idx, amount));
+					} else {
+						throw wexception("tribes do not define a ware or worker type with this name");
+					}
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
@@ -345,15 +345,15 @@ WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
-WorkersQueue & ProductionSite::workersqueue(DescriptionIndex const wi) {
+WorkersQueue& ProductionSite::workersqueue(DescriptionIndex const wi) {
 	// Check for perfect match first
-	for (WorkersQueue * ip_queue : input_worker_queues_) {
+	for (WorkersQueue* ip_queue : input_worker_queues_) {
 		if (ip_queue->get_worker() == wi) {
 			return *ip_queue;
 		}
 	}
 	// No perfect match, check for similar jobs
-	for (WorkersQueue * ip_queue : input_worker_queues_) {
+	for (WorkersQueue* ip_queue : input_worker_queues_) {
 		if (owner().egbase().tribes().get_worker_descr(wi)->can_act_as(ip_queue->get_worker())) {
 			return *ip_queue;
 		}
@@ -433,14 +433,10 @@ void ProductionSite::init(EditorGameBase& egbase) {
 	for (WareRange i(inputs); i; ++i)
 		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
 
-	const BillOfMaterials & input_workers = descr().input_workers();
+	const BillOfMaterials& input_workers = descr().input_workers();
 	input_worker_queues_.resize(input_workers.size());
 	for (WareRange i(input_workers); i; ++i) {
-		input_worker_queues_[i.i] =
-			new WorkersQueue
-			(*this,
-			 i.current->first,
-			 i.current->second);
+		input_worker_queues_[i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
 	}
 
 	//  Request missing workers.
@@ -468,7 +464,7 @@ void ProductionSite::set_economy(Economy* const e) {
 		for (WaresQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
-		for (WorkersQueue * ip_queue : input_worker_queues_) {
+		for (WorkersQueue* ip_queue : input_worker_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
@@ -482,7 +478,7 @@ void ProductionSite::set_economy(Economy* const e) {
 		for (WaresQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
-		for (WorkersQueue * ip_queue : input_worker_queues_) {
+		for (WorkersQueue* ip_queue : input_worker_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
