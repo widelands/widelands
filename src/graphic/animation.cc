@@ -78,6 +78,9 @@ public:
 	                  const RGBColor* clr,
 	                  Surface*) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
+	float scale() const override {
+		return scale_;
+	}
 
 private:
 	// Loads the graphics if they are not yet loaded.
@@ -274,12 +277,11 @@ void NonPackedAnimation::blit(uint32_t time,
 	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
-	// NOCOM textures wander when scrolling + zoomed in.
-	const Rectf scaled_source = Rectf(srcrc.x, srcrc.y, srcrc.w * scale_, srcrc.h * scale_);
+	// Scale is set from the outside in order to deal with the edge of the screen.
 	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(dstrc, *frames_.at(idx), scaled_source, 1., BlendMode::UseAlpha);
+		target->blit(dstrc, *frames_.at(idx), srcrc, 1., BlendMode::UseAlpha);
 	} else {
-		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), scaled_source, *clr);
+		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), srcrc, *clr);
 	}
 }
 
