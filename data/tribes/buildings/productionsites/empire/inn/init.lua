@@ -63,11 +63,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=14000",
+            "sleep=10000",
             "consume=empire_bread,fish,meat",
             "play_sound=sound/empire/taverns ration 100",
             "animate=working 19000",
+            "sleep=4000",
             "produce=ration"
          }
       },
@@ -75,11 +77,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _"preparing a meal",
          actions = {
+            -- time total: 40
             "return=skipped unless economy needs meal",
-            "sleep=15000",
+            "sleep=10000",
             "consume=empire_bread fish,meat",
             "play_sound=sound/empire/taverns meal 100",
-            "animate=working 20000",
+            "animate=working 25000",
+            "sleep=5000",
             "produce=meal"
          }
       },

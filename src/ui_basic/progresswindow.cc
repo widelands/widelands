@@ -45,7 +45,7 @@ namespace {
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background) {
+ProgressWindow::ProgressWindow(const std::string& background) : UI::FullscreenWindow() {
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -56,22 +56,19 @@ ProgressWindow::~ProgressWindow() {
 	}
 }
 
-void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, const uint32_t yres) {
-	label_center_.x = xres / 2;
-	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-	Recti wnd_rect(Vector2i(0, 0), xres, yres);
+void ProgressWindow::draw(RenderTarget& rt) {
+	FullscreenWindow::draw(rt);
+	label_center_.x = get_w() / 2;
+	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
+	Recti wnd_rect(Vector2i(0, 0), get_w(), get_h());
 
 	const uint32_t h =
 	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
-	label_rectangle_.x = xres / 4.f;
-	label_rectangle_.w = xres / 2.f;
+	label_rectangle_.x = get_w() / 4.f;
+	label_rectangle_.w = get_w() / 2.f;
 	label_rectangle_.y = label_center_.y - h / 2.f - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2.f * PROGRESS_STATUS_RECT_PADDING;
-
-	const Image* bg = g_gr->images().get(background_);
-	rt.blitrect_scale(Rectf(0.f, 0.f, xres, yres), bg, Recti(0, 0, bg->width(), bg->height()), 1.,
-	                  BlendMode::UseAlpha);
 
 	Rectf border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
@@ -84,23 +81,19 @@ void ProgressWindow::draw_background(RenderTarget& rt, const uint32_t xres, cons
 
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
-	RenderTarget& rt = *g_gr->get_render_target();
+	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		background_ = file_name;
+		add_overlay_image(file_name, UI::Align::kCenter);
 	} else {
-		background_ = "images/loadscreens/progress.png";
+		add_overlay_image("images/loadscreens/progress.png", UI::Align::kBottomLeft);
 	}
-	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
+	draw(*g_gr->get_render_target());
 }
 
 void ProgressWindow::step(const std::string& description) {
 	RenderTarget& rt = *g_gr->get_render_target();
-
-	const uint32_t xres = g_gr->get_xres();
-	const uint32_t yres = g_gr->get_yres();
-
 	// always repaint the background first
-	draw_background(rt, xres, yres);
+	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	rt.blit(label_center_.cast<float>(),
