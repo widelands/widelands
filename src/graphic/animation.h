@@ -73,7 +73,7 @@ public:
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
 	/// 'nullptr', in which case the neutral image will be returned.
-	virtual Image* representative_image(const RGBColor* clr) const = 0;
+	virtual const Image* representative_image(const RGBColor* clr) const = 0;
 	/// The filename of the image used for the first frame, without player color.
 	virtual const std::string& representative_image_filename() const = 0;
 
@@ -121,7 +121,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Animation>> animations_;
-	std::map<uint32_t, std::unique_ptr<Image>> representative_images_;
+	std::map<uint32_t, std::unique_ptr<const Image>> representative_images_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_H

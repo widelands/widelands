@@ -70,7 +70,7 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Vector2i& hotspot() const override;
-	Image* representative_image(const RGBColor* clr) const override;
+	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
 	                  const Rectf& dstrc,
@@ -93,6 +93,7 @@ private:
 	bool hasplrclrs_;
 	std::vector<std::string> image_files_;
 	std::vector<std::string> pc_mask_image_files_;
+	float scale_;
 
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
@@ -105,7 +106,7 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), hasplrclrs_(false), play_once_(false) {
+   : frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -144,9 +145,19 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 				throw wexception("Animation is missing player color file: %s", image_file.c_str());
 			}
 		}
+
+		if (table.has_key("scale")) {
+			scale_ = table.get_double("scale");
+			if (scale_ <= 0.0f) {
+				throw wexception(
+				   "Animation scale %f needs to be > 0.0f. First image of this animation is %s", scale_,
+				   image_files_[0].c_str());
+			}
+		}
+
 		assert(!image_files_.empty());
 		assert(pc_mask_image_files_.size() == image_files_.size() || pc_mask_image_files_.empty());
-
+		assert(scale_ > 0);
 	} catch (const LuaError& e) {
 		throw wexception("Error in animation table: %s", e.what());
 	}
@@ -194,12 +205,12 @@ void NonPackedAnimation::load_graphics() {
 
 uint16_t NonPackedAnimation::width() const {
 	ensure_graphics_are_loaded();
-	return frames_[0]->width();
+	return frames_[0]->width() / scale_;
 }
 
 uint16_t NonPackedAnimation::height() const {
 	ensure_graphics_are_loaded();
-	return frames_[0]->height();
+	return frames_[0]->height() / scale_;
 }
 
 uint16_t NonPackedAnimation::nr_frames() const {
@@ -215,20 +226,17 @@ const Vector2i& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
+const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
 	const Image* image = g_gr->images().get(image_files_[0]);
-
-	if (!hasplrclrs_ || clr == nullptr) {
-		// No player color means we simply want an exact copy of the original image.
-		const int w = image->width();
-		const int h = image->height();
-		Texture* rv = new Texture(w, h);
-		rv->blit(Rectf(0, 0, w, h), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
-		return rv;
-	} else {
-		return playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
+	if (hasplrclrs_ && clr) {
+		image = playercolor_image(clr, image, g_gr->images().get(pc_mask_image_files_[0]));
 	}
+	const int w = image->width();
+	const int h = image->height();
+	Texture* rv = new Texture(w / scale_, h / scale_);
+	rv->blit(Rectf(0, 0, w / scale_, h / scale_), *image, Rectf(0, 0, w, h), 1., BlendMode::Copy);
+	return rv;
 }
 
 const std::string& NonPackedAnimation::representative_image_filename() const {
@@ -266,10 +274,12 @@ void NonPackedAnimation::blit(uint32_t time,
 	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
+	// NOCOM textures wander when scrolling + zoomed in.
+	const Rectf scaled_source = Rectf(srcrc.x, srcrc.y, srcrc.w * scale_, srcrc.h * scale_);
 	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(dstrc, *frames_.at(idx), srcrc, 1., BlendMode::UseAlpha);
+		target->blit(dstrc, *frames_.at(idx), scaled_source, 1., BlendMode::UseAlpha);
 	} else {
-		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), srcrc, *clr);
+		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), scaled_source, *clr);
 	}
 }
 
@@ -315,9 +325,9 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
 	if (representative_images_.count(id) != 1) {
-		representative_images_.insert(std::make_pair(
-		   id,
-		   std::unique_ptr<Image>(g_gr->animations().get_animation(id).representative_image(clr))));
+		representative_images_.insert(
+		   std::make_pair(id, std::unique_ptr<const Image>(
+		                         g_gr->animations().get_animation(id).representative_image(clr))));
 	}
 	return representative_images_.at(id).get();
 }
