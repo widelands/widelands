@@ -440,7 +440,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const DrawText draw_text,
+                     const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
                      float scale,
                      RenderTarget* dst) {
@@ -455,7 +455,7 @@ void Immovable::draw(uint32_t gametime,
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const DrawText draw_text,
+                                  const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
                                   const float scale,
                                   RenderTarget* dst) {

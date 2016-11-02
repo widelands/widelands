@@ -47,6 +47,7 @@ wl_library(logic_campaign_visibility
 wl_library(logic_constants
   SRCS
     constants.h
+    constants.cc
 )
 
 wl_library(logic

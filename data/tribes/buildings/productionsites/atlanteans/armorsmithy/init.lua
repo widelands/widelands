@@ -146,10 +146,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
          descname = _"forging a steel shield",
          actions = {
+            -- time total: 90
             "return=skipped unless economy needs shield_steel",
-            "sleep=32000",
+            "sleep=45000",  -- +13 enlarge
             "consume=iron:2 coal:2",
-            "animate=working 35000",
+            "animate=working 45000",  -- +10 enlarge
             "produce=shield_steel"
          }
       },
@@ -157,10 +158,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
          descname = _"forging an advanced shield",
          actions = {
+            -- time total: 110
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=50000",  -- +18 enlarge
+            "animate=working 60000",  -- +15 enlarge
             "produce=shield_advanced"
          }
       },
