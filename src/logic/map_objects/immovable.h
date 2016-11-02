@@ -100,7 +100,7 @@ struct BaseImmovable : public MapObject {
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
 	virtual void draw(uint32_t gametime,
-	          DrawText draw_text,
+	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
 				 float scale,
 	          RenderTarget* dst) = 0;
@@ -226,7 +226,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void draw(uint32_t gametime,
-	          DrawText draw_text,
+	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
 	          float scale,
 	          RenderTarget* dst) override;
@@ -308,7 +308,7 @@ public:
 private:
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
-	                       DrawText draw_text,
+	                       TextToDraw draw_text,
 	                       const Vector2f& point_on_dst,
 	                       float scale,
 	                       RenderTarget* dst);
