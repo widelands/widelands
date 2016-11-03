@@ -7,6 +7,7 @@ tribes:new_warehouse_type {
    descname = pgettext("barbarians_building", "Warehouse"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
+   representative_image = dirname .. "representative_image.png",
    size = "medium",
 
    buildcost = {

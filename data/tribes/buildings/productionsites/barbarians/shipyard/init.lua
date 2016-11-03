@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("barbarians_building", "Shipyard"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
+   representative_image = dirname .. "representative_image.png",
    size = "medium",
    needs_seafaring = true,
 
