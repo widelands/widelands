@@ -46,7 +46,8 @@ struct FontHandler {
 	               const std::string& text,
 	               Align align = UI::Align::kCenterLeft,
 	               uint32_t caret = std::numeric_limits<uint32_t>::max());
-	uint32_t draw_text_raw(RenderTarget&, const TextStyle&, Vector2i dstpoint, const std::string& text);
+	uint32_t
+	draw_text_raw(RenderTarget&, const TextStyle&, Vector2i dstpoint, const std::string& text);
 
 	void get_size(const TextStyle&,
 	              const std::string& text,

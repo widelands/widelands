@@ -100,10 +100,10 @@ struct BaseImmovable : public MapObject {
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
 	virtual void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-				 float scale,
-	          RenderTarget* dst) = 0;
+	                  TextToDraw draw_text,
+	                  const Vector2f& point_on_dst,
+	                  float scale,
+	                  RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);

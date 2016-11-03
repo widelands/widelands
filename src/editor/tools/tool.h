@@ -23,9 +23,9 @@
 #define MAX_TOOL_AREA 9
 
 #include "base/macros.h"
+#include "editor/tools/action_args.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "editor/tools/action_args.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -104,7 +104,7 @@ public:
 	}
 
 protected:
-	EditorTool& second_, &third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:
