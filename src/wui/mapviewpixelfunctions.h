@@ -92,7 +92,7 @@ inline Vector2f to_map_pixel(const Widelands::Map& map, const Widelands::Coords&
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
 inline Vector2f to_map_pixel_with_normalization(const Widelands::Map& map,
-                                                  const Widelands::Coords& c) {
+                                                const Widelands::Coords& c) {
 	Widelands::Coords c1 = c;
 	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);
