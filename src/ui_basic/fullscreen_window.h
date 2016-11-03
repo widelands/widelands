@@ -20,8 +20,8 @@
 #ifndef WL_UI_BASIC_FULLSCREEN_WINDOW_H
 #define WL_UI_BASIC_FULLSCREEN_WINDOW_H
 
-#include <string>
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <vector>
 
@@ -96,7 +96,7 @@ private:
 	   frame_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-		graphic_resolution_changed_subscriber_;
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 #endif  // end of include guard: WL_UI_BASIC_FULLSCREEN_WINDOW_H

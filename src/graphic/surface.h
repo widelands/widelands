@@ -45,8 +45,11 @@ public:
 	virtual int height() const = 0;
 
 	/// This draws a part of 'texture'.
-	void blit(
-	   const Rectf& dst, const Image&, const Rectf& srcrc, const float opacity, BlendMode blend_mode);
+	void blit(const Rectf& dst,
+	          const Image&,
+	          const Rectf& srcrc,
+	          const float opacity,
+	          BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.
 	void blit_blended(const Rectf& dst,
@@ -71,19 +74,16 @@ public:
 
 private:
 	/// The actual implementation of the methods below.
-	virtual void do_blit(const Rectf& dst_rect,
-	                     const BlitData& texture,
-	                     float opacity,
-	                     BlendMode blend_mode) = 0;
+	virtual void
+	do_blit(const Rectf& dst_rect, const BlitData& texture, float opacity, BlendMode blend_mode) = 0;
 
 	virtual void do_blit_blended(const Rectf& dst_rect,
 	                             const BlitData& texture,
 	                             const BlitData& mask,
 	                             const RGBColor& blend) = 0;
 
-	virtual void do_blit_monochrome(const Rectf& dst_rect,
-	                                const BlitData& texture,
-	                                const RGBAColor& blend) = 0;
+	virtual void
+	do_blit_monochrome(const Rectf& dst_rect, const BlitData& texture, const RGBAColor& blend) = 0;
 
 	// Takes argument by value for micro optimization: the argument might then
 	// be moved by the compiler instead of copied.
