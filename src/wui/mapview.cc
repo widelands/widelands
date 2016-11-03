@@ -306,4 +306,3 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 	NEVER_HERE();
 }
-

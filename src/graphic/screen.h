@@ -55,8 +55,7 @@ private:
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
 	void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) override;
-	void
-	do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
+	void do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	const int w_, h_;
 

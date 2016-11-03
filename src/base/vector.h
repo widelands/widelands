@@ -75,8 +75,7 @@ template <typename T> struct Vector2 {
 		return *this;
 	}
 
-	template<typename Type>
-	Vector2<Type> cast() const {
+	template <typename Type> Vector2<Type> cast() const {
 		return Vector2<Type>(Type(x), Type(y));
 	}
 
