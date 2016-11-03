@@ -111,7 +111,7 @@ void MapDetails::set_max_height(int new_height) {
 void MapDetails::update_layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
+		suggested_teams_box_->set_pos(Vector2i(0, max_h_ - suggested_teams_box_->get_h()));
 		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
 	} else {
 		main_box_.set_size(main_box_.get_w(), max_h_);

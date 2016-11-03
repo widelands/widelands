@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Ivan Bižaca <biza@malilosinj.info>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 20:14+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Croatian (http://www.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +50,7 @@ msgstr "Ova zemlja je naša zemlja"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Ovaj vodič objašnjava rukovanje vojnicima i treniranje vojske. Također, uvodi i borbu. "
+msgstr "Ovaj vodič objašnjava rukovanje vojnicima i treniranje vojske. Također, uvodi i borbu."
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"

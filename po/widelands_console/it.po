@@ -2,6 +2,8 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
@@ -9,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-03 19:07+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +85,7 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      La lingua da utiliz
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr " --write_syncstreams=[true|false]\nCreare il file syncstream dump per aiutare il debug del gioco in rete."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -136,7 +138,7 @@ msgstr " --loadgame=NOMEFILE  Carica direttamente il salvataggio NOMEFILE."
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr "--script=FILENAME Eseguire il dato script Lua dopo l'inizializzazione.\nValido solo con --scenario, --loadgame o --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -148,7 +150,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false]\nEntrerete nella modalità Roadbuilding\nautomaticamente dopo aver piazzato una bandiera che\nnon è collegata a una strada."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid "Graphic options:"
@@ -163,7 +165,7 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false]\nSe attivare lo schermo intero\ncome area di gioco."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid " --xres=[...]         Width of the window in pixel."
@@ -195,7 +197,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\nEliminare il bordo della finestra attorno ai\nlati dello schermo quando i lati della finestra\nsono vicini ai lati dello schermo."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid ""

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Lyubomir Vasilev, 2015
+# Любомир Василев, 2015
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:02+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 20:04+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -248,7 +249,7 @@ msgstr "Вие затворихте прозореца със статистик
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr "Моля, отворете го отново и изберете втория раздел (средни сгради)"
+msgstr "Моля, отворете го отново и изберете втория раздел (средни сгради)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:128
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
@@ -269,7 +270,7 @@ msgstr "Добре. В списъка видяхте, че нямате пове
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
-msgstr "Натиснете бутона „Запаси“"
+msgstr "Натиснете бутона „Запаси“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
@@ -279,7 +280,7 @@ msgstr "Можете също така да използвате клавиша 
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."
-msgstr "Отворете прозореца със запасите си"
+msgstr "Отворете прозореца със запасите си."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 msgid ""
@@ -298,7 +299,7 @@ msgstr "Прозорецът със запасите има четири раз�
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "Гледайки дажбите, в момента имате само общо пет, които може би са на път за някъде. Пет дажби не са много за такава голяма икономика"
+msgstr "Гледайки дажбите, в момента имате само общо пет, които може би са на път за някъде. Пет дажби не са много за такава голяма икономика."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -316,7 +317,7 @@ msgstr "третия раздел („Стоки на склад“), ще пр�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid "Switch to the third tab in the stock menu window."
-msgstr "Превключете на третия раздел в прозореца със запасите"
+msgstr "Превключете на третия раздел в прозореца със запасите."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:164
 msgid ""
@@ -358,7 +359,7 @@ msgstr "Вие затворихте прозореца със запасите, 
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 msgid "Open the stock window again."
-msgstr "Отворете прозореца със запасите отново"
+msgstr "Отворете прозореца със запасите отново."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
@@ -393,11 +394,11 @@ msgstr "След като вече имате информация, трябва
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
-msgstr "Постройте поне две механи"
+msgstr "Постройте поне две механи."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
-msgstr "Постройте нови механи"
+msgstr "Постройте нови механи."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -569,7 +570,7 @@ msgstr "Последните два раздела Ви помагат да пр
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Close this window when you’re done."
-msgstr "Затворете този прозорец, когато сте готови"
+msgstr "Затворете този прозорец, когато сте готови."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Close the ware statistics window."
@@ -718,6 +719,10 @@ msgid ""
 "stonemason to produce them."
 msgstr "Задайте целевото количество на мраморните колони на 20 и изчакайте каменоделецът да ги произведе."
 
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Произведете 20 мраморни колони."
+
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
@@ -839,7 +844,7 @@ msgstr "Това беше последното обучение, което съ
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

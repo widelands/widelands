@@ -3,16 +3,18 @@
 # 
 # Translators:
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Renaud Bouchard, 2015-2016
+# syl_, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-11 09:55+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-16 06:46+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -254,7 +256,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Maintenant que vous avez segmenté la route en deux parties avec un porteur sur chacune. Cela signifie moins de travail pour eux et de meilleurs rendements pour nous. Vous devrez presque toujours placer autant de drapeaux que possibles sur vos routes. "
+msgstr "Maintenant que vous avez segmenté la route en deux parties avec un porteur sur chacune. Cela signifie moins de travail pour eux et de meilleurs rendements pour nous. Vous devrez presque toujours placer autant de drapeaux que possibles sur vos routes."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
@@ -735,11 +737,11 @@ msgstr "Salut, c'est encore moi ! Cette fois ci, je vous ai envoyé un message. 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "La fenêtre des messages peut être activée par le bouton situé dans le coin inférieur droit de l'écran. Ce bouton change aussi d'apparence si de nouveaux messages sont disponibles, mais il y a également un son de cloche qui retentit lorsque vous recevez un nouveau message."
+msgstr "La fenêtre des messages peut être activée par le second bouton situé dans le coin inférieur droit de l'écran. Ce bouton change aussi d'apparence si de nouveaux messages sont disponibles, mais il y a également un son de cloche qui retentit lorsque vous recevez un nouveau message."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -747,7 +749,7 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr "Vous avez actuellement deux messages. Celui que vous lisez en ce moment et celui qui vous a prévenu qu'un nouveau quartier général a été ajouté à votre économie. Apprenons comment archiver les messages : sélectionnez d'abord le message à archiver en cliquant dessus dans la liste des messages. Puis cliquez sur le "
+msgstr "Vous avez actuellement deux messages. Celui que vous lisez en ce moment et celui qui vous a prévenu qu'un nouveau quartier général a été ajouté à votre économie. Apprenons comment archiver les messages : sélectionnez d'abord le message à archiver en cliquant dessus dans la liste des messages. Puis cliquez sur le"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
@@ -778,7 +780,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "La fenêtre des messages est la pierre angulaire du plein contrôle du destin de votre tribu. Mais vous recevrez beaucoup de messages durant une vraie partie. Pour garder les idées claires, il vaut mieux que vous gardiez votre boîte de réception vide. "
+msgstr "La fenêtre des messages est la pierre angulaire du plein contrôle du destin de votre tribu. Mais vous recevrez beaucoup de messages durant une vraie partie. Pour garder les idées claires, il vaut mieux que vous gardiez votre boîte de réception vide."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
@@ -835,7 +837,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Bien joué ! Voyons comment fonctionnent réellement les messages dans une vraie partie. Pour cela, je vais enlever toutes les roches aux pauvres tailleurs de pierre dans leur carrière. Ils vont chacun envoyer un message pour dire qu'ils ne peuvent trouver de travail dans leur périmètre la prochaine fois qu'ils vont vouloir travailler. "
+msgstr "Bien joué ! Voyons comment fonctionnent réellement les messages dans une vraie partie. Pour cela, je vais enlever toutes les roches aux pauvres tailleurs de pierre dans leur carrière. Ils vont chacun envoyer un message pour dire qu'ils ne peuvent trouver de travail dans leur périmètre la prochaine fois qu'ils vont vouloir travailler."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
@@ -853,7 +855,7 @@ msgstr "Vous avez reçu quelques messages. Vous voyez comment le bouton en-bas d
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Combustion de la carrière : c'est la façon la plus rapide de dégager l'espace. Tant que le travailleur abandonne la construction, les marchandises seront perdues. "
+msgstr "Combustion de la carrière : c'est la façon la plus rapide de dégager l'espace. Tant que le travailleur abandonne la construction, les marchandises seront perdues."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -861,6 +863,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Démantèlement de la carrière : un constructeur marchera des quartiers généraux pour démonter la carrière pièce par pièce. Ainsi, vous regagnez une partie des ressources que vous avez utilisées pour la construction."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Détruisez les deux carrières"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
@@ -930,7 +936,7 @@ msgstr "La guérite est le seul site militaire qui va sur un petit terrain à b�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid "Expand your territory"
-msgstr "Étendez votre territoire "
+msgstr "Étendez votre territoire"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Make your territory grow"

@@ -4,14 +4,15 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # Javier Mora <morehash@gmail.com>, 2015
-# Madkat Here, 2015
+# Madkat Here, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:16+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "En este escenario te voy a hablar acerca de los soldados, su entrenamiento y su profesión: la guerra. Aunque Widelands es sobre construir, no sobre destruir, hay un enemigo que a veces tienes que derrotar. Además la guerra está principalmente enfocada en la economía, no en la estrategia militar, y sus mecánicas merecen una explicación. "
+msgstr "En este escenario te voy a hablar acerca de los soldados, su entrenamiento y su profesión: la guerra. Aunque Widelands es sobre construir, no sobre destruir, hay un enemigo que a veces tienes que derrotar. Además la guerra está principalmente enfocada en la economía, no en la estrategia militar, y sus mecánicas merecen una explicación."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
@@ -71,7 +72,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Si un soldado Bárbaro está completamente entrenado, tiene vida nivel %1%, ataque nivel %2%, defensa nivel %3% y evasión nivel %4%. ¡Sería un guerrero temible entonces! Las habilidades individuales tienen el siguiente significado:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
@@ -82,7 +83,7 @@ msgstr "Vida:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "La vida total de un soldado. Un soldado Bárbaro empieza con %1% puntos de vida, y ganará %2% puntos con cada nivel de vida."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -95,7 +96,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "La cantidad de daño que un soldado puede infligir al enemigo cuando el ataque es exitoso. Un soldado Bárbaro con ataque nivel 0 inflige ~%1% puntos de vida como daño cuando acierta al golpear a un enemigo. Por cada nivel de ataque gana %2% puntos de daño."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
@@ -110,7 +111,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr ""
+msgstr "La defensa es el porcentaje de puntos de ataque que se resta del daño recibido. Los Bárbaros no pueden entrenar esta habilidad y por tanto siempre tienen defensa nivel 0, lo que significa que el daño recibido siempre se reduce un %1%%%. Si un atacante con un valor de ataque de 3500 puntos alcanza a un soldado Bárbaro, el Bárbaro perderá 3500·%2%%% = %3% puntos de vida"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
@@ -123,7 +124,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "Evasión es la posibilidad de que el soldado esquive un ataque. Un Bárbaro nivel 0 tiene un %1%%% de posibilidades de evadir un ataque, y se incrementa un %2%%% por nivel."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
@@ -371,9 +372,9 @@ msgstr "Desmantelando edificios militares"
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desmantelar el edificio (edificios de una tribu ajena a la tuya solamente podrán ser destruidos, no desmantelados)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desmantelar el edificio o incendiarlo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
@@ -453,7 +454,7 @@ msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr "Tus soldados dejarán la fortaleza mientras se realiza la obra. Eso significa que tu fortaleza perderá su influencia militar como  he descrito anteriormente."
+msgstr "Tus soldados dejarán la fortaleza mientras se realiza la obra. Eso significa que tu fortaleza perderá su influencia militar como he descrito anteriormente."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid "Enhance your fortress to a citadel now."

@@ -75,14 +75,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              butw_,
              buth_,
              g_gr->images().get("images/ui_basic/but0.png"),
-             _("Delete"),
-             std::string(),
-             false,
-             false),
+				 _("Delete")),
      game_(g),
      settings_(gsp),
      ctrl_(gc) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	delete_.set_enabled(false);
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
@@ -113,6 +111,9 @@ void FullscreenMenuLoadGame::think() {
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
+	if (!load_or_save_.has_selection()) {
+		return;
+	}
 	const SavegameData* gamedata = load_or_save_.entry_selected();
 	if (gamedata && gamedata->errormessage.empty()) {
 		filename_ = gamedata->filename;

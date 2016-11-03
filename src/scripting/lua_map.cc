@@ -4970,15 +4970,15 @@ int LuaField::set_raw_height(lua_State* L) {
       this field for the current interactive player
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
-	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
-	lua_pushint32(L, px);
+	Vector2f point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
+	lua_pushdouble(L, point.x);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State* L) {
-	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
-	lua_pushint32(L, py);
+	Vector2f point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
+	lua_pushdouble(L, point.y);
 	return 1;
 }
 
@@ -5295,7 +5295,7 @@ int LuaField::region(lua_State* L) {
       * :const:`port`: Can a port be build here?
       * :const:`flag`: Can a flag be build here?
       * :const:`walkable`: Is this field passable for walking bobs?
-      * :const:`swimable`: Is this field passable for swimming bobs?
+		* :const:`swimmable`: Is this field passable for swimming bobs?
 */
 int LuaField::has_caps(lua_State* L) {
 	FCoords f = fcoords(L);

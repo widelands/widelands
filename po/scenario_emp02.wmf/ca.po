@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 11:47+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 19:48+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +178,7 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr "Per fi! Aquesta illa pareix feta per nosaltres! És un regal dels déus per a la nostra gent i per a mi mateix. Fins ara, només hem vist una petita part d'aquesta illa, però només aquest tros és suficient per fer-me pensar que hem trobat un tresor valuós, una terra com un paradís. "
+msgstr "Per fi! Aquesta illa pareix feta per nosaltres! És un regal dels déus per a la nostra gent i per a mi mateix. Fins ara, només hem vist una petita part d'aquesta illa, però només aquest tros és suficient per fer-me pensar que hem trobat un tresor valuós, una terra com un paradís."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
@@ -509,7 +510,7 @@ msgstr "Heu completat aquesta missió. Podeu continuar jugant si voleu, altramen
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

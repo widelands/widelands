@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-07-25 11:49+0000\n"
-"PO-Revision-Date: 2016-07-27 20:01+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 07:58+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Opbyg en lille infrastruktur til mad"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Byg en grundlæggende infrastruktere til at producere mad så dit folk får noget at spise."
+msgstr "Byg en grundlæggende infrastruktur til at producere mad så dit folk får noget at spise."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a fisher’s hut"
@@ -496,7 +496,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr "Jeg har netop talt med lederen af vores patrulje. Han fortalte mig, at de har fundet nogle bjerge i nordøst og øst for vores territorium. Med en smule held vil dette åbne en ny chance for bevæbning af vores mænd, da jeg efter min hukommelse mener, at resten af bjergene vest for Al'thunran indeholder kul og nogle malmkilder"
+msgstr "Jeg har netop talt med lederen af vores patrulje. Han fortalte mig, at de har fundet nogle bjerge i nordøst og øst for vores territorium. Med en smule held vil dette åbne en ny chance for bevæbning af vores mænd, da jeg efter min hukommelse mener, at resten af bjergene vest for Al'thunran indeholder kul og nogle malmkilder."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
 msgid "Mining Economy Completed"

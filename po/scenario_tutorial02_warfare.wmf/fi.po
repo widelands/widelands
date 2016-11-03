@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-24 19:38+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:13+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "Tässä skenaariossa, miinä kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista, ei hajottamista, täällä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen, ei sotilaallisiin strategioihin, ja sen mekaniikat ovat selvityksen arvoisia. "
+msgstr "Tässä skenaariossa, miinä kerron teille sotilaista, heidän koulutuksestaan ja heidän ammatistaan: sodankäynnistä. Vaikka Widelands on pääasiassa rakentamista, ei hajottamista, täällä on vastustaja, joka sinun joskus pitää voittaa. Silti sodankäynti keskittyy pääasiassa talouteen, ei sotilaallisiin strategioihin, ja sen mekaniikat ovat selvityksen arvoisia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
@@ -54,7 +55,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Uusi sotilas luodaan kuten työntekijä: kun sotilasrakennus tarvitsee sotilaan, kantaja nappaa tarvittavat aseet ja haarniskan (päämajastasi) ja kävelee uuteen rakennukseesi. Tavallinen Barbaarisotilas ei käytä haarniskaa,  hän tarvitsee ainoastaan kirveen."
+msgstr "Uusi sotilas luodaan kuten työntekijä: kun sotilasrakennus tarvitsee sotilaan, kantaja nappaa tarvittavat aseet ja haarniskan (päämajastasi) ja kävelee uuteen rakennukseesi. Tavallinen Barbaarisotilas ei käytä haarniskaa, hän tarvitsee ainoastaan kirveen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -82,7 +83,7 @@ msgstr "Terveys:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr "Sotilaan elämän määrä. Barbaarisotilas aloittaa arvoilla %1% terveys ja hän saa %2%  terveyttä jokaisella tasolla."
+msgstr "Sotilaan elämän määrä. Barbaarisotilas aloittaa arvoilla %1% terveys ja hän saa %2% terveyttä jokaisella tasolla."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -199,7 +200,7 @@ msgstr "Saadaksesi lisätietoja voit katsoa rakennuksen ohjeruutua, joka löytyy
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "Oppiaksesi kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa heidän kuvakkeita. Niitä on muutettu punaisilla täplillä."
+msgstr "Oppiaksesi kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa heidän kuvakkeita. Niitä on muutettu punaisilla täplillä:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
@@ -211,7 +212,7 @@ msgstr "Punaisten täplien puuttuminen tarkoittaa ettei sotilasta ole koulutettu
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "Jokaista onnistunutta koulutusta kohden sotilaasi vahvistuu. Se osoitetaan yhdellä punaisella pisteellä.  Tämä sotilas on tasolla 1  väistelykoulutuksessa."
+msgstr "Jokaista onnistunutta koulutusta kohden sotilaasi vahvistuu. Se osoitetaan yhdellä punaisella pisteellä. Tämä sotilas on tasolla 1 väistelykoulutuksessa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
@@ -300,7 +301,7 @@ msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "Alkuasetukset riippuvat rakennuksen tyypistä. Barbaareille vartiomökki on ainoa rakennus, joka laittaa oletuksena alokkaat etusijalle. Sinun tulee muuttaa asetukset vastaamaan kunkin hetken tarpeita.."
+msgstr "Alkuasetukset riippuvat rakennuksen tyypistä. Barbaareille vartiomökki on ainoa rakennus, joka laittaa oletuksena alokkaat etusijalle. Sinun tulee muuttaa asetukset vastaamaan kunkin hetken tarpeita."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
@@ -371,9 +372,9 @@ msgstr "Sotilasrakennuksen purkaminen"
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr "Voit vähentää sotilaiden määrän minimissään yhteen. Rakennuksen viimeinen sotilas ei koskaan tule ulos (ellei kyseinen rakennus ole hyökkäyksen kohteena). Jos haluat sotilaittesi olevan jossakin muualla, sinun täytyy purkaa rakennus (vihollisheimon rakennuksia ei voi purkaa, ainoastaan polttaa)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr "Voit vähentää sotilaiden määrän minimissään yhteen. Rakennuksen viimeinen sotilas ei koskaan tule ulos (ellei kyseinen rakennus ole hyökkäyksen kohteena). Jos haluat sotilaasi olevan jossakin muualla, sinun täytyy purkaa tai polttaa rakennus. "
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
@@ -405,7 +406,7 @@ msgstr "Voit käyttää tämän mahdollisuuden tutustua muihin vaihtoehtoihin: a
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Dismantle your north-western sentry"
-msgstr "Pura sinun vartiomökki luoteessa "
+msgstr "Pura sinun vartiomökki luoteessa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid ""
@@ -490,7 +491,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen. "
+msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
@@ -522,7 +523,7 @@ msgstr "Kukista Vihollisesi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid "Defeat the nearby enemy."
-msgstr "Kukista läheinen vihollinen"
+msgstr "Kukista läheinen vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
@@ -549,7 +550,7 @@ msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr "Olet nyt valmis pelaamaan kampanjoita. Ne opettavat sinulle erilaisista heimotalouksista. Voit myös pelata loput opetuspelit, mutta ne eivät ole välttämättömiä kampanjoissa onnistumiseksi "
+msgstr "Olet nyt valmis pelaamaan kampanjoita. Ne opettavat sinulle erilaisista heimotalouksista. Voit myös pelata loput opetuspelit, mutta ne eivät ole välttämättömiä kampanjoissa onnistumiseksi."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
+      { name = "log", amount = 8 }
    },
    outputs = {
       "coal"

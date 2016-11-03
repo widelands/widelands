@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-06 07:12+0000\n"
-"PO-Revision-Date: 2016-08-09 14:10+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 07:49+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -192,31 +192,31 @@ msgstr "De krævede varer bliver også leveret. For succesfuld træning, så du 
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr ""
+msgstr "For yderligere information kan du bruge bygningernes hjælpevindue, tilgængelig via spørgsmålstegnet i hvert bygnings vindue."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "For at se hvor langt dine soldater er med deres træning, så kig på deres ikoner. De ændres med røde punktummer:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "Ingen røde punktummer betyder at soldaten ikke er trænet, så soldaten har niveau 0. Alle dine nye rekrutter har niveau 0."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "Med hvert succesfuldt træningstrin bliver dine soldater stærkere. Dette vises med en rød prik. Denne soldat er på niveau 1 i undvigelsestræning."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Når din soldat har nået det højeste muligt niveau (i dette tilfælde niveau 2), vises dette med en hvid baggrundsfarve."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
@@ -229,43 +229,43 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "Der er er et andet træningsanlæg: Træningslejren. Det er også en stor bygning og for at komplementere kamparenaen, så trænes her angreb og helbred (husk, barbarsoldaterne kan ikke trænes i forsvar)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Build a training camp."
-msgstr ""
+msgstr "Byg en træningslejr."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
 msgid "Build a training camp"
-msgstr ""
+msgstr "Byg en træningslejr"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "Kamparenaen træner kun soldater i undvigelse. For at få den stærkeste mulige soldat, så skal du også bygge en træningslejr, som træner i angreb og helbred."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr ""
+msgstr "Glimrende, vores træningslejr er nu også færdig. Nu vil intet hindre os i at få de stærkeste krigere som verden har set."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "For at træne i træningslejren, skal vores soldater have mad ligesom i kamparenaen, men ikke stærk øl. I stedet skal de bruge forskellige økser til angrebstræning og hjelme for helbredstræning."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr ""
+msgstr "Dette udstyr fremstilles i smedje fra kul, jern og undertiden guld. Du vil lære mere om dette i det andet scenarie i barbarkampagnen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
@@ -274,17 +274,17 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier with evade level 0 "
 "has a 30% chance of evading, while a Barbarian soldier at the same level "
 "only has a 25% chance."
-msgstr ""
+msgstr "Du skal også huske på, at hver af de tre stammer i Widelands har deres egne måder at træne på, så bygningerne og varerne er forskellige. Desuden kan niveauerne på evnerne ikke sammenlignes: en imperiesoldat med undvigelsesniveau 0 har en 30 % sandsynlighed for at undvige, mens en barbarsoldat på samme niveau kun har en 25 % sandsynlighed."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Helte og nybegyndere"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "Mens vores soldater træner, så lad mig fortælle dig hvad vi kan bruge dem til."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid ""
@@ -292,29 +292,29 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr ""
+msgstr "I hver militærbygning kan du angive præferencer for helte (trænede soldater) eller nybegyndere. Fra til til anden, vil en soldat gå ud af bygningen og automatisk blive erstattet af en stærkere/svagere - det var hvad du så tidligere."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "Den oprindelige indstilling afhænger af bygningstypen. For barbarerne, er vagttårnet den eneste bygning som foretrækker nybegyndere som standard. Du kan ændre denne indstilling, så den passer til dine behov."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr ""
+msgstr "Når du udvider i ingen mands land, så kan du lade dine bygninger foretrække nybegyndere. Når du planlægger at angribe, så send dine helte ind i det område. Erobrede bygninger foretrækker altid helte."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:139
 msgid "Soldier capacity"
-msgstr ""
+msgstr "Soldaterkapacitet"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "Justering af antallet af soldater"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid ""
@@ -323,56 +323,56 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr ""
+msgstr "Der er en anden måde du kan kontrollere styrken for en militærbygning: ved antallet af soldater stationeret der. Bare klik på piletasterne for at øge eller sænke det ønskede antal soldater. Hver bygning har en maksimal kapacitet. I tilfældet med fortet er det f.eks. fem."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "Hvis du ønsker at sende en bestemt soldat væk, så kan du bare klikke på denne. Soldaten vil så blive erstattet af en anden soldat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Lad mig beskrive hvad tallene i statistikstrengen betyder. Denne streng kan indeholde op til tre tal, f.eks. »1 (+5) soldat (+2)«."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "Det første tal beskriver hvor mange soldater der er i øjeblikket i denne bygning. I dette eksempel, er kun 1 soldat efterladt indenfor (hver militærbyning er altid bevogtet af mindst en soldat)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "Det andet tal fortæller hvor mange yderligere soldater, der bor i denne bygning, men som i øjeblikket er udenfor. De fem soldater kan f.eks. angribe en fjende. De vil returnere, når de har haft succes."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
+msgstr "Det tredje tal indikerer de manglende soldater. Fra de otte soldater (1 + 5 + 2) du ønsker at have her, er to måske døde. De vil blive erstattet af nye soldater fra dit lager, hvis muligt."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:154
 msgid "Dismantle your sentry"
-msgstr ""
+msgstr "Riv dit vagttårn ned"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "Nedrivning af militære bygninger"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr ""
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
+msgstr "Du kan kun reducere antallet af soldater til en. Den sidste soldat i en bygning kommer aldrig ud (med mindre at bygningen bliver angrebet). Hvis du ønsker at have din soldat et andet sted, så skal du rive bygningen ned eller brænde den."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
@@ -383,28 +383,28 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "Ødelæggelse af en militærbygning er altid forbundet med en risiko: Landet er stadig dit, men er ikke længere beskyttet. Enhver fjende, som bygger sine egne militære anlæg kan overtage landet uden kamp, hvorved dine bygninger bryder i brand. Derudover kan dele af landet blive skjult i krigståge. Du bør derfor kun rive militære bygninger ned, som befinder sig dybt inde i dit territorium, hvor du er sikret mod fjender."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Har du set dit vagttårn? Da det ikke kan indeholde en masse soldater og befinder sig ved et stærkt fort, så er det ret ubrugeligt."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Dismantle it."
-msgstr ""
+msgstr "Riv bygningen ned."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
+msgstr "Du kan også benytte lejligheden til at blive bekendt med de andre indstillinger: præferencen for helte/nybegyndere og kapaciteten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Riv dit nordvestlige vagttårn ned"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid ""
@@ -412,11 +412,11 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "Du kan kontrollere antallet af soldater udstationeret i et militæranlæg med piletasterne. Hvis du ønsker også at få din sidste soldat ud, så skal du ødelægge den. Bygningen vil dog ikke længere beskytte dit territorium, hvilket gør det sårbart over for fjendtlige angreb."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "Riv dit nordvestlige vagttårn ned, det ved fortet."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
@@ -489,27 +489,27 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "Glimrende arbejde, kastellet er færdigt. Med hvad er det? En fjendtlig stamme har bosat sig tæt på os mens kastellet var under konstruktion! Kan du se hvordan de har taget et stykke af vores land? Og vores skovhugger har nu mistet sit arbejdsområde. Det var det jeg mente. Lad os tage vores land tilbage og besejre fjenden!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "For at angribe en bygning, klik på dens døre, vælg antallet af soldater, du ønsker at sende og klik på knappen »Angrib«."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Dine soldater vil komme fra alle nærliggende militære bygninger. Forsvarerne vil ligeledes komme fra alle nærliggende militære bygninger hos fjenden og møde dine styrker."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "Angrib og erobr alle militære bygninger hos fjenden og ødelæg deres hovedkvarter."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
 msgid "Defeat the enemy tribe"

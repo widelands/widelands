@@ -42,10 +42,10 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      gold = 8,
-      coal = 8,
-      planks = 8
+      { name = "planks", amount = 8 },
+      { name = "coal", amount = 8 },
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 }
    },
    outputs = {
       "trident_light",
@@ -72,11 +72,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
          descname = _"forging a light trident",
          actions = {
+            -- time total: 64
             "return=skipped unless economy needs trident_light",
-            "sleep=20000",
+            "sleep=27000",    -- +7 enlarge
             "consume=iron planks",
             "play_sound=sound/smiths smith 192",
-            "animate=working 21000",
+            "animate=working 28000",  -- +7 enlarge
             "play_sound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_light"
@@ -86,11 +87,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
          descname = _"forging a long trident",
          actions = {
+            -- time total: 102
             "return=skipped unless economy needs trident_long",
-            "sleep=32000",
             "consume=iron coal planks",
+            "sleep=47000",  -- +15 enlarge
             "play_sound=sound/smiths smith 192",
-            "animate=working 36000",
+            "animate=working 46000",  -- +10 enlarge
             "play_sound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_long"
@@ -100,11 +102,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
          descname = _"forging a steel trident",
          actions = {
+            -- time total: 110
             "return=skipped unless economy needs trident_steel",
-            "sleep=32000",
             "consume=iron:2 coal planks",
+            "sleep=50000",  -- +18 enlarge
             "play_sound=sound/smiths smith 192",
-            "animate=working 36000",
+            "animate=working 51000",  -- +15 enlarge
             "play_sound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_steel"
@@ -114,11 +117,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
          descname = _"forging a double trident",
          actions = {
+            -- time total: 115
             "return=skipped unless economy needs trident_double",
-            "sleep=32000",
             "consume=iron coal:2 planks gold",
+            "sleep=55000",  -- +23 enlarge
             "play_sound=sound/smiths smith 192",
-            "animate=working 36000",
+            "animate=working 51000",  -- +15 enlarge
             "play_sound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_double"
@@ -128,11 +132,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
          descname = _"forging a heavy double trident",
          actions = {
-            "return=skipped unless economy needs trident_heavy_double",
-            "sleep=32000",
+             -- time total: 120
+           "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
+            "sleep=55000",  -- +23 enlarge
             "play_sound=sound/smiths smith 192",
-            "animate=working 36000",
+            "animate=working 56000",  -- +20 enlarge
             "play_sound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_heavy_double"

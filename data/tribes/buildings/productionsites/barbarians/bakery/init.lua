@@ -45,8 +45,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 6,
-      water = 6
+      { name = "water", amount = 6 },
+      { name = "wheat", amount = 6 }
    },
    outputs = {
       "barbarians_bread"

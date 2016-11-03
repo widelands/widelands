@@ -2,17 +2,19 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Adrián Magro <nomeapelidos@gmail.com>, 2016
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
+# GunChleoc, 2016
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015
+# Madkat Here, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 16:38+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,35 +25,35 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Crea una economía básica"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Empieza a recoger materiales básicos de construcción, y fortifica el campamento."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Construye una cabaña de leñador"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Construye una cabaña de guardabosques."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construye una cantera"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construye un endurecedor de madera"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Construye un centinela en la frontera oriental"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Debes construir eventualmente un patio de caña y un horno de cal."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -129,7 +131,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Expande tu territorio hacia las montañas, envías geólogos para buscar minerales y carbón y construye una economía minera con minas, tabernas, forja y taller del metal. "
+msgstr "Expande tu territorio hacia las montañas, envías geólogos para buscar minerales y carbón y construye una economía minera con minas, tabernas, forja y taller del metal."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -203,7 +205,7 @@ msgstr "Los atributos son: vida, ataque, defensa y evasión."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
 msgid "Build weapons production"
-msgstr "Construye producción de armas "
+msgstr "Construye producción de armas"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
@@ -217,7 +219,7 @@ msgstr "Destruye el ejército Kalitath"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr "Destruye al ejército Kalitath y expande tu territorio al este. "
+msgstr "Destruye al ejército Kalitath y expande tu territorio al este."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid ""
@@ -644,5 +646,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nuevo objetivo "
+msgstr[0] "Nuevo objetivo"
 msgstr[1] "Nuevos objetivos"

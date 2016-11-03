@@ -6,7 +6,7 @@ set_textdomain("texts")
 return {
    title = _"Readme",
    text =
-rt("image=images/logos/wl-logo-64.png image-align=center text-align=center") ..
+rt("image=images/logos/wl-ico-32.png image-align=center text-align=center") ..
 rt("text-align=center",
    p("font-size=38 font-face=Widelands/Widelands font-color=#2F9131", [[Widelands]]) ..
    p("font-size=14 font-style=italic text-align=center", _[[an open source strategy game]])) ..

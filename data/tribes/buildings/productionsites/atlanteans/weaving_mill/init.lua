@@ -43,8 +43,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      spider_silk = 8,
-      gold_thread = 4
+      { name = "spider_silk", amount = 8 },
+      { name = "gold_thread", amount = 4 }
    },
    outputs = {
       "spidercloth",
@@ -68,9 +68,10 @@ tribes:new_productionsite_type {
          descname = _"weaving spidercloth",
          actions = {
             "return=skipped unless economy needs spidercloth",
-            "sleep=20000",
+            "sleep=10000",
             "consume=spider_silk",
             "animate=working 20000",
+            "sleep=10000",
             "produce=spidercloth"
          }
       },
@@ -79,9 +80,10 @@ tribes:new_productionsite_type {
          descname = _"tailoring a tabard",
          actions = {
             "return=skipped unless economy needs tabard",
-            "sleep=20000",
+            "sleep=10000",
             "consume=spider_silk",
-            "animate=working 20000",
+            "animate=working 25000",
+            "sleep=5000",
             "produce=tabard"
          }
       },
@@ -90,9 +92,11 @@ tribes:new_productionsite_type {
          descname = _"tailoring a golden tabard",
          actions = {
             "return=skipped unless economy needs tabard_golden",
-            "sleep=20000",
+            "sleep=2000",
             "consume=spider_silk gold_thread",
-            "animate=working 20000",
+            "sleep=3000",
+            "animate=working 30000",
+            "sleep=5000",
             "produce=tabard_golden"
          }
       },

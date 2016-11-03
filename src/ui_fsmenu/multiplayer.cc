@@ -30,43 +30,27 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, get_w() / 2, title_y_, _("Choose game type"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
 
      // Buttons
-     vbox(this, box_x_, box_y_, UI::Box::Vertical, butw_, get_h() - box_y_, padding_),
-     metaserver(&vbox,
+     metaserver(&vbox_,
                 "metaserver",
                 0,
                 0,
                 butw_,
                 buth_,
                 g_gr->images().get(button_background_),
-                _("Internet game"),
-                "",
-                true,
-                false),
-     lan(&vbox,
+                _("Internet game")),
+     showloginbox(nullptr),
+     lan(&vbox_,
          "lan",
          0,
          0,
          butw_,
          buth_,
          g_gr->images().get(button_background_),
-         _("LAN / Direct IP"),
-         "",
-         true,
-         false),
-     back(&vbox,
-          "back",
-          0,
-          0,
-          butw_,
-          buth_,
-          g_gr->images().get(button_background_),
-          _("Back"),
-          "",
-          true,
-          false) {
+         _("LAN / Direct IP")),
+     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
 
@@ -80,29 +64,21 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox.add(&metaserver, UI::Align::kHCenter);
-	vbox.add(&lan, UI::Align::kHCenter);
-
-	// Multiple add_space calls to get the same height for the back button as in the single player
-	// menu
-	vbox.add_space(buth_);
-	vbox.add_space(buth_);
-	vbox.add_space(6 * buth_);
-
-	vbox.add(&back, UI::Align::kHCenter);
-
-	vbox.set_size(butw_, get_h() - vbox.get_y());
+	vbox_.add(&metaserver, UI::Align::kHCenter, true);
+	vbox_.add(&lan, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&back, UI::Align::kHCenter, true);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);
 	if (auto_log_) {
 		showloginbox = new UI::Button(
-		   this, "login_dialog", box_x_ + butw_ + buth_ / 4, get_h() * 6 / 25, buth_, buth_,
-		   g_gr->images().get("images/ui_basic/but1.png"),
-		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"), true, false);
+		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but1.png"),
+		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
 		showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	}
+	layout();
 }
 
 /// called if the showloginbox button was pressed
@@ -166,4 +142,24 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 void FullscreenMenuMultiPlayer::clicked_ok() {
 	internet_login();
+}
+
+void FullscreenMenuMultiPlayer::layout() {
+	title.set_size(get_w(), title.get_h());
+	FullscreenMenuMainMenu::layout();
+
+	title.set_pos(Vector2i(0, title_y_));
+
+	metaserver.set_size(butw_, buth_);
+	if (showloginbox) {
+		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
+		showloginbox->set_size(buth_, buth_);
+	}
+	metaserver.set_desired_size(butw_, buth_);
+	lan.set_desired_size(butw_, buth_);
+	back.set_desired_size(butw_, buth_);
+
+	vbox_.set_pos(Vector2i(box_x_, box_y_));
+	vbox_.set_inner_spacing(padding_);
+	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 3 * title_y_);
 }

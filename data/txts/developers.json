@@ -2,7 +2,7 @@
 	"developers":[
 		{
 			"heading": "Chieftain",
-			"image": "images/players/genstats_enable_plr_01.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"members":[
@@ -13,7 +13,7 @@
 		},
 		{
 			"heading": "Elders",
-			"image": "images/players/genstats_enable_plr_04.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"subheading": "Graphics",
@@ -92,7 +92,7 @@
 						"Andreas Eriksson",
 						"Mark Scott",
 						"Teppo Mäenpää",
-						"Steven De Herdt",
+						"Steven De Herdt (stdh)",
 						"Charly Ghislain (cghislai)",
 						"Tino Miegel (TinoM)",
 						"Tibor Bamhor (tiborb95)",
@@ -143,7 +143,8 @@
 						"Chuck Wilder (chuckw)",
 						"Astuur",
 						"Gerrit Familiegrosskopf (kingcreole)",
-						"Florian Angermeier (fraang)"
+						"Florian Angermeier (fraang)",
+						"DragonAtma"
 					]
 				}
 			]
@@ -202,7 +203,8 @@
 						"Jenia",
 						"Robnick",
 						"wl-zocker",
-						"king of nowhere"
+						"king of nowhere",
+						"kaputtnik"
 					]
 				}
 			]
@@ -304,7 +306,8 @@
 						"Holger Rapp (SirVer)",
 						"Stanislaw Gackowski (Soeb)",
 						"Markus Pfitzner (janus)",
-						"Tobi"
+						"Tobi",
+						"kaputtnik"
 					]
 				},
 				{
@@ -319,14 +322,15 @@
 						"Alexander Kahl (wolfpac)",
 						"Stanislaw Gackowski (Soeb)",
 						"Hanna Podewski (kristin)",
-						"king of nowhere"
+						"king of nowhere",
+						"GunChleoc"
 					]
 				}
 			]
 		},
 		{
 			"heading": "Former Elders",
-			"image": "images/players/genstats_enable_plr_04.png",
+			"image": "images/players/genstats_player.png",
 			"entries":[
 				{
 					"subheading": "Graphics",

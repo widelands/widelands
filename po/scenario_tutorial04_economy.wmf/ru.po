@@ -4,15 +4,16 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# GunChleoc, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-08 15:25+0000\n"
-"Last-Translator: Alexander Bikmeyev <bikmeyev@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:07+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,7 +109,7 @@ msgstr "Во-первых, вам нужно открыть меню стати�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "Afterwards, choose the ‘Building statistics’."
-msgstr "После этого, выберите  \"Статистика построек\"."
+msgstr "После этого, выберите \"Статистика построек\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
@@ -137,7 +138,7 @@ msgstr "Откройте его. Это можно сделать из меню 
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
-msgstr "Меню \"Статистика\" может быть вызвано нажатием второй кнопки внизу. Оно состоит из нескольких окон, содержащих информацию об игре. "
+msgstr "Меню \"Статистика\" может быть вызвано нажатием второй кнопки внизу. Оно состоит из нескольких окон, содержащих информацию об игре."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
@@ -205,7 +206,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 msgid "Look up your number of taverns in the building statistics window."
-msgstr ""
+msgstr "Проверьте, сколько у вас таверн в окне Статистика построек."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
@@ -213,7 +214,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Проверьте, сколько у вас таверн."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -719,6 +720,10 @@ msgstr ""
 msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
 msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 08:57+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 20:06+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -251,7 +251,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Сега пътят е разделен на две части, като по всяка се движи един носач. Това означава по-малко работа за него и по-добра ефективност за нас. Затова трябва винаги да поставяте колкото може повече флагове на пътищата си"
+msgstr "Сега пътят е разделен на две части, като по всяка се движи един носач. Това означава по-малко работа за него и по-добра ефективност за нас. Затова трябва винаги да поставяте колкото може повече флагове на пътищата си."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
@@ -359,7 +359,7 @@ msgstr "Отлично. Има и по-бърз начин за преместв
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "Просто натиснете и задръжте десния бутон на мишката върху произволно място на картата. След това преместете мишката. Вместо показалеца, обаче, ще се премести изгледа. Опитайте"
+msgstr "Просто натиснете и задръжте десния бутон на мишката върху произволно място на картата. След това преместете мишката. Вместо показалеца, обаче, ще се премести изгледа. Опитайте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Move your view with the mouse"
@@ -732,11 +732,11 @@ msgstr "Здравейте, пак съм аз! Този път Ви изпра�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Прозорецът за съобщения може да бъде превключен чрез бутона, който е най-отдясно в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
+msgstr "Прозорецът за съобщения може да бъде превключен чрез втория бутон от дясно наляво, в долния край на екрана. Той ще смени облика си когато има нови съобщения, а също така ще чуете и иззвъняване, в момента на получаването на ново съобщение."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -858,6 +858,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Да демонтирате кариерата: някой строител ще дойде от щаба и ще демонтира кариерата тухла по тухла. Така ще си върнете част от ресурсите, вложени при строежа."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Разрушете двете кариери"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

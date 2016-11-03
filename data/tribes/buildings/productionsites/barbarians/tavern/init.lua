@@ -46,9 +46,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 4,
-      barbarians_bread = 4,
-      meat = 4
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "barbarians_bread", amount = 4 }
    },
    outputs = {
       "ration"
@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
             "sleep=14000",
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
-            "play_sound=sound/taverns dishes 100",
+            "play_sound=sound/barbarians/taverns tavern 100",
             "animate=working 19000",
             "produce=ration"
          },

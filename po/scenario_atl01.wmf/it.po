@@ -3,7 +3,9 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# Cristiano, 2015
+# Cristiano Magro, 2015
+# Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -12,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-03 14:36+0000\n"
+"Last-Translator: Cristiano Magro\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,16 +26,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Edificio perso!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Edificio perso!"
@@ -160,7 +162,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "I tessitori producono tessuto di ragno e tabards nella tessitura. Il tessuto di ragno è necessaria per la costruzione di alcuni edifici e abbigliamento, mentre pettorine sono le uniformi dei soldati. La tessitura ha bisogno di filo di ragno e di seta d'oro come materia prima. La seta di ragno è prodotta da allevamento dei ragni, mentre filo d'oro è prodotta dal mulino di filatura dell'oro."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -188,7 +190,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "Il ferro grezzo, l'oro grezzo e il carbone sono estratti nelle rispettive miniere. Dalle miniere di cristallo si estraggono quarzi e diamanti - sono tutti materiali preziosi e trovati molto raramente. Mentre li si ricerca, vengono prodotte molto granito."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -459,7 +461,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Possa Satul riscaldarti, Jundlina! La cosa più importante per costruire un insediamento sono i materiali da costruzione. Ci sono degli alberi qui, quindi dovremmo costruire degli alloggi per qualche taglialegna ed ovviamente anche per le guardie forestali, così da non rimanere senza alberi. Oh, e non dobbiamo dimenticare la segheria, perché la maggior parte degli edifici non può essere costruita con solo tronchi. Gli edifici più robusti hanno anche bisogno di granito, ma ve ne è abbondanza a nord-est di qui; dobbiamo solo costruire una cava e i miei tagliapietre cominceranno prontamente a lavorare."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -555,7 +557,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "Oooh e ancora più importante: affumicare pesce e carne, per purificarli e migliorare il loro gusto è terribile. Dopo la  mia casa è piena di fumo e puzza per settimane. Non pensi che questo potrebbe essere fatto in un edificio speciale in cui gli effetti collaterali non contano? Credo che queste due cose sarebbero state accettate dal popolo e ridurrebbe il tempo di cottura senza togliere il rituale."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:237
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -643,7 +645,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Possa Satul riscaldare te, Jundlina! Hai preso in considerazione di estrarre beni dalle montagne intorno a noi? Stiamo finendo il quarzo ed i diamanti per i nostri edifici. Potremmo inoltre utilizzare più ferro, oro e specialmente carbone. Se trovassimo un'ampia disponibilità di queste materie prime, potremmo cominciare a produrre armi ed attrezzi: ci aiuterebbe enormemente. Naturalmente avremmo bisogno di fonderie, una fucina di armi, una fucina di armature ed una fucina di attrezzi. E magari anche altro."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
@@ -654,7 +656,7 @@ msgstr "Jundlina annuisce"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Ho considerato questo, Sidolus. Credo che sia giunto il momento. Ne faremo una priorità per ora. Dovrete ottenere presto la vostra industria!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -900,7 +902,7 @@ msgstr "Hai vinto questa missione. Continua con la prossima o continua a giocare
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"

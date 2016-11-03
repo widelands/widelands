@@ -42,11 +42,11 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      fish = 4,
-      barbarians_bread = 4,
-      meat = 4,
-      beer_strong = 4,
-      beer = 4
+      { name = "fish", amount = 4 },
+      { name = "meat", amount = 4 },
+      { name = "barbarians_bread", amount = 4 },
+      { name = "beer", amount = 4 },
+      { name = "beer_strong", amount = 4 }
    },
    outputs = {
       "ration",
@@ -69,9 +69,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=33000",
+            "sleep=23000",
             "consume=barbarians_bread,fish,meat",
+            "play_sound=sound/barbarians/taverns tavern 100",
+            "sleep=10000",
             "produce=ration"
          }
       },
@@ -79,9 +82,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
          descname = _"preparing a snack",
          actions = {
+            -- time total: 37
             "return=skipped unless economy needs snack",
-            "sleep=35000",
+            "sleep=5000",
             "consume=barbarians_bread fish,meat beer",
+            "play_sound=sound/barbarians/taverns biginn 100",
+            "sleep=32000",
             "produce=snack"
          }
       },
@@ -89,9 +95,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _"preparing a meal",
          actions = {
+            -- time total: 40
             "return=skipped unless economy needs meal",
-            "sleep=37000",
+            "sleep=5000",
             "consume=barbarians_bread fish,meat beer_strong",
+            "play_sound=sound/barbarians/taverns biginn 100",
+            "sleep=35000",
             "produce=meal"
          }
       },

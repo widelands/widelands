@@ -4,14 +4,15 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# GunChleoc, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 22:56+0000\n"
-"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-02 06:50+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +81,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
 " weapon smithy, armor smithy and smelting works)."
-msgstr "Постройте Домик каменщика, а затем выстройте добывающую и производственную инфраструктуру (Угольную шахту и/или Домик углежога, Шахту железной руды, Мастерскую, Оружейную, Бронную и Литейную) "
+msgstr "Постройте Домик каменщика, а затем выстройте добывающую и производственную инфраструктуру (Угольную шахту и/или Домик углежога, Шахту железной руды, Мастерскую, Оружейную, Бронную и Литейную)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -225,7 +226,7 @@ msgstr "Скалы"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Позже, я спустился к скалам на юге и искал место, где мы могли бы построить каменоломню, чтобы получить гранит для постройки более прочных зданий."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
@@ -255,7 +256,7 @@ msgstr "Камень для поселения"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
-msgstr ""
+msgstr "Отлично! Сегодня строительство каменоломни было закончено. Теперь мы получим достаточно гранита и мрамора для строительства зданий."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
@@ -287,7 +288,7 @@ msgstr "Возможно, люди с того судна побывали в т
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Я молю Вас быть осторожным и построить несколько Казарм или Караульных башен вокруг нашего поселения."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"
@@ -355,7 +356,7 @@ msgstr "Еда для шахтеров"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "Amalea enters…"
-msgstr "входит Амалия..."
+msgstr "Входит Амалия..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207

@@ -118,7 +118,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	   boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
 
 	fill_table();
-
 	center_to_parent();
 	move_to_top();
 

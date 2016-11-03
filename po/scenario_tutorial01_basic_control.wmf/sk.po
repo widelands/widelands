@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 21:59+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-16 16:29+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -733,11 +733,11 @@ msgstr "Zdravím, som to opäť ja! Tentoraz som vám poslal správu. Hra vás p
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
-"The message window can be toggled by the button on the very right at the "
-"bottom of the screen. This button will also change appearance whenever new "
+"The message window can be toggled by the second button from the right at the"
+" bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Okno so správami možno prepnúť pomocou najpravejšieho tlačidla naspodku obrazovky. Keď dostanete novú správu, toto tlačidlo zmení svoj vzhľad. Zároveň sa pri každej novej správe prehrá zvuk zvonca."
+msgstr "Okno so správami možno prepnúť pomocou druhého tlačidla sprava naspodku obrazovky. Keď dostanete novú správu, vzhľad tohto tlačidla sa zmení. Okrem toho sa pri každej novej správe prehrá zvuk zvonca."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -859,6 +859,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Rozobratie kameňolomu: staviteľ opustí ústredie a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Zničte obe kameňolomy"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

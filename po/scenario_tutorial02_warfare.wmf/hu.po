@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-20 19:55+0000\n"
-"Last-Translator: litoll <litoll@freemail.hu>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 10:21+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +99,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
-msgstr "Védekezés"
+msgstr "Védekezés:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -160,7 +161,7 @@ msgstr "Amíg arra várunk, hogy elkészüljön a harci aréna, valószínűleg 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid "Build a battle arena"
-msgstr "Építs egy harci arénát."
+msgstr "Építs egy harci arénát"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena. It is a big building."
@@ -229,7 +230,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Van egy második kiképzőhely: a kiképzőtábor. Ez szintén egy nagy épület és hogy kiegészítse a harci arénát, a támadást és az életerőt fejleszti (ne feledd, a barbár katonáknak nem lehet fejleszteni a védelmét). "
+msgstr "Van egy második kiképzőhely: a kiképzőtábor. Ez szintén egy nagy épület és hogy kiegészítse a harci arénát, a támadást és az életerőt fejleszti (ne feledd, a barbár katonáknak nem lehet fejleszteni a védelmét)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
@@ -370,8 +371,8 @@ msgstr ""
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
-" to have your soldier elsewhere, you will have to dismantle the building "
-"(buildings of an alien tribe cannot be dismantled, only be burned down)."
+" to have your soldier elsewhere, you will have to dismantle or burn down the"
+" building."
 msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158

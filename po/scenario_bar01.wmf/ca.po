@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Juanjo, 2015
 # Juanjo, 2015-2016
 # Juanjo, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 11:47+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-14 19:49+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -736,7 +737,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Al nord de la gran muntanya hi ha una plana. Per què no usem l'espai que la mare natura ens dóna i hi construïm una granja? Estic segur que gaudiria de menjar pita fresca per variar… "
+msgstr "Al nord de la gran muntanya hi ha una plana. Per què no usem l'espai que la mare natura ens dóna i hi construïm una granja? Estic segur que gaudiria de menjar pita fresca per variar…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
@@ -1028,7 +1029,7 @@ msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

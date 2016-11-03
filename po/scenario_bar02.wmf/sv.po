@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 06:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -191,7 +192,7 @@ msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "-Träningsanläggningar som träningsläger eller stridsarenor används för att träna soldater i deras olika attribut. Dessa attribut är viktiga i strider, och ju bättre en soldat är, ju högre är sannolikheten att han vinner striden."
+msgstr "Träningsanläggningar som träningsläger eller stridsarenor används för att träna soldater i deras olika attribut. Dessa attribut är viktiga i strider, och ju bättre en soldat är, ju högre är sannolikheten att han vinner striden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "The attributes are: health, attack, defense and evade."

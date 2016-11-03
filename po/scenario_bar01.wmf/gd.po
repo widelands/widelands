@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-16 11:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -138,13 +138,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Sealgaidh an t-sealgair beathaichean fhad ’s a nì an geamair cinnteach nach tèid iad à bith. Nì taigh-tàirn greim-bidhe airson na mèinnearan agad dhen fheòil an uairsin."
+msgstr "Sealgaidh an t-sealgair beathaichean fhad ’s a nì an geamair cinnteach nach dèid iad à bith. Nì taigh-tàirn greim-bidhe dhen fheòil airson nam mèinnearan agad an uairsin."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Chan e seo ach a’ chiad ball-eisimpleir de bhathar a bhios feumach air giullachd mur cleachd togalach dàrnach e – bidh feadhainn eile ann an uairsin."
+msgstr "Chan e seo ach a’ chiad ball-eisimpleir de bhathar a bhios feumach air giullachd mur cleachd togalach dàrnach e – chì thu feadhainn eile ann an uairsin."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
@@ -200,7 +200,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Chan urrainn do mhèinn àbhaisteach ach an treas pàirt dhen stòras a tha foidhpe a ghearradh às an talamh; feumaidh tu a leasachadh an uairsin gu mèinn domhainn ach an obraich i mar bu chòir fhathast. Gus togalach a leasachadh, tagh e agus briog air a’ phutan iomchaidh san uinneag a nochdas."
+msgstr "Chan urrainn do mhèinn àbhaisteach ach an treas pàirt dhen stòras a tha foidhpe a ghearradh às an talamh; feumaidh tu a leasachadh an uairsin gu mèinn dhomhainn ach an obraich i mar bu chòir fhathast. Gus togalach a leasachadh, tagh e agus briog air a’ phutan iomchaidh san uinneag a nochdas."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -208,7 +208,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Gheibh obraichean eòlas le obair soirbheachail. Thèid iad ’nan obraichean as àrda nuair a bhios eòlas gu leòr aca agus bi feum agad air an seòrsa seo de dh’obraiche gus togalach leasaichte a ruith. Na leasaich togalach mus eil obraichean àrda gu leòr agad gus an togalach leasaichte a ruith!"
+msgstr "Gheibh luchd-obrach eòlas le obair shoirbheachail. Thèid iad ’nan neach-obrach as àrda nuair a bhios eòlas gu leòr aca agus bidh feum agad air an t-seòrsa seo de neach-obrach gus togalach leasaichte a ruith. Na leasaich togalach mus eil luchd-obrach àrda gu leòr agad gus an togalach leasaichte a ruith!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -238,7 +238,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Tha togalaichean nas fhearr ’s nas motha  – a’ gabhail a-steach a h-uile togalach an airm – feumach air stuthan togail nas fhearr. Cha ghabh an togail a-mach à fiodh simplidh  –  feumaidh cruadhaichear fiodha am fiodh a leasachadh gu fiodh an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha mus ruith thu a-mach à fiodh cruaidh oir chan urrainn dhut do ranntair a leudachadh às aonais."
+msgstr "Tha togalaichean nas fhearr ’s nas motha – a’ gabhail a-steach gach togalach an airm – feumach air stuthan togail nas fhearr. Chan fhoghainn fiodh simplidh gus an togail – feumaidh cruadhaichear fiodha am fiodh a leasachadh gu fiodh cruaidh an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha mus ruith thu a-mach à fiodh cruaidh oir chan urrainn dhut do ranntair a leudachadh às aonais."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -247,7 +247,7 @@ msgstr "Tog àth-aoil is eaconamaidh guail"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Tog àth-aoil le taic tobair is sluic guail-fhiodha no mèinne guail."
+msgstr "Tog àth-aoil le taic tobair is sluic guail-fhiodha no mèinne guail"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
@@ -261,14 +261,14 @@ msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr "Tog tobair ann an àite far a bheil uisge san talamh. Lorgaidh clach-eòlaiche uisge dhut nuair a chuireas tu gu bratach nach eil air beinn e."
+msgstr "Tog tobar air àite far a bheil uisge san talamh. Lorgaidh clach-eòlaiche uisge dhut nuair a chuireas tu gu bratach nach eil air beinn e."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "A chum gun gairm thu clach-eòlaiche ach an lorg e uisge dhut, briog air bratach san sfìre far a bheil thu airson sireadh agus briog air a’ phutan “Cuir clach-eòlaiche gus an làrach a rùrachadh” an uairsin."
+msgstr "A chum gun gairm thu clach-eòlaiche ach an lorg e uisge dhut, briog air bratach san sgìre far a bheil thu airson sireadh agus briog air a’ phutan “Cuir clach-eòlaiche gus rùrachadh an-seo” an uairsin."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
@@ -308,7 +308,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "Nuair a bhios eallach mòr ri ghiùlain a’ feitheamh air na rathaidean, chan fhoghainn giùlanair a-mhàin gus an toirt on dàrna bhratach gun bhratach eile gu luath. Mar sin, thig stad air an trafaig agad. ’S urrainn do dhàrna giùlanair obair air rathad mar seo: damh a chuidicheas leat gus am bathar a ghiùlan. ’S urrainn dhut an dà chuid de bhathar a ghluasad mar sin."
+msgstr "Nuair a bhios eallach mòr ri ghiùlan a’ feitheamh air na rathaidean, chan fhoghainn giùlanair a-mhàin gus an toirt on dàrna bhratach gun bhratach eile gu luath. Mar sin, thig stad air an trafaig agad. ’S urrainn do dhàrna giùlanair obair air rathad mar seo: sin damh a chuidicheas leat gus am bathar a ghiùlan. ’S urrainn dhut an dà uiread de bhathar a ghluasad mar sin."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -322,7 +322,7 @@ msgstr "Togaidh tu daimh ann an taigh-buaile le cruithneachd ’s uisge."
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:226
 msgid "The Story Begins"
-msgstr "Tha an sgeulachd air tòiseachadh"
+msgstr "Toiseach na sgeulachd"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
@@ -340,20 +340,20 @@ msgstr "’S ann fad mìosan a tha sinn ’nar falach sna seann choilltean dubha
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr "Tha na gaisgich agam ris an t-sealg air an latha ach chan fhaigh iad chadal air an oidhche – cluinnidh iad faram a’ mhillidh chruaidh o fhad air falbh fhathast am measg nan craobhan."
+msgstr "Tha na gaisgich agam ris an t-sealg air an latha ach chan fhaigh iad cadal air an oidhche – cluinnidh iad faram a’ mhillidh chruaidh o fhad air falbh fhathast am measg nan craobhan."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr "Chì sinn na teintein a tha a’ slugadh Al’tùnran on a sheo, o mhìltean air falbh."
+msgstr "Chì sinn na teintean a tha a’ slugadh Al’tùnran on a sheo, o mhìltean air falbh."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:174
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr "Tha na solasan dearga a’ boillsgeadh san dorchadas ’s a’ dannsa ri ruitheam nan drumaichean-cogaidh a thadhlas orm fiù ’s nan trom-laighean agam."
+msgstr "Tha na solasan dearga a’ boillsgeadh san dorchadas ’s a’ dannsa ri ruitheam nan drumaichean-cogaidh a thadhlas orm fiù sna trom-laighean agam."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:185
@@ -361,7 +361,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Tha cnàmhan m’ athar ’nan tàmh gu sìtheil san dearbh talamh air an do chuir e crìoch air leagadh na fala gun chiall a dh’èirich eadarainn uair. ’S duilich leam nach do mhair an t-sìth aige ach ginealach."
+msgstr "Tha cnàmhan m’ athar ’nan tàmh sìtheil san dearbh thalamh air an do chuir e crìoch air leagadh na fala gun chiall a dh’èirich eadarainn uair a bha siud. ’S duilich leam nach do mhair an t-sìth aige ach ginealach."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:188
@@ -378,7 +378,7 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr "Mar a dh’innis m’ athair dhomh, bidh amannan cogaidh ann agus amannan gus dol am falach ’s a dh’fheitheamh, a’ feuchainn nach dig cadal no bàs ort mus tig an t-àm dhut. Mar sin, ’s e feitheamh a nì mi."
+msgstr "Mar a dh’innis m’ athair dhomh, bidh amannan cogaidh ann agus amannan gus dol am falach ’s a’ feitheamh, feuch nach dig an cadal no bàs ort mus dig an t-àm dhut. Mar sin, ’s e feitheamh a nì mi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
@@ -399,7 +399,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "Tha na dh’innseas iad dhuinn mu na gnìomhan a rinn ar cinneadh truagh. Thug mi seachad iomadh oidhche gun tàmh no cadal is nas sgìthe na chreideadh tu. Ach nuair a dhùineas mi mo dhà shùil, chì mi an dùn a thog m’ athair ’na theine. Thug a’ chathair am measg nan craobh a bhiodh ’na samhla dhen aonta agus sìth eadarainn a-mach à chèile sinn a-nis."
+msgstr "Tha na dh’innseas iad dhuinn mu na gnìomhan a rinn ar cinneadh truagh. Thug mi seachad iomadh oidhche gun tàmh no cadal is nas sgìthe na chreideadh tu. Ach nuair a dhùineas mi mo dhà shùil, chì mi an dùn a thog m’ athair ’na theine. ’S e adhbhar còmhstri a tha sa chathair am measg nan craobh a-nis a bhiodh ’na samhla dhen aonta agus sìth eadarainn uair."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:218
@@ -411,7 +411,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "Thug na sealgairean agam daoine, boireannaich ’s clann òga thugam an-diugh a bha air am falach sa choille, a’ feuchainn ri teicheadh on chogadh, gràin is dìoghaltas am measg nan treubhan a tha a’ toirt ionnsaigh air càch a chèile, dìreach mar a rinneadh iad o chionn fhada nuair nach robh sinn ach ’nar beathaichean fiadhaich fo bhuaidh is smachd an nàdair. Cha ghabh gin dhe mo bhràithrean a’ chathair fhiodha os làimh gu bràth tuilleadh o nach eil gin dhe na treubhan làidir gu leòr gus càch a cheannsachadh. Cha bhi againn ach milleadh gun chrìch ach… an e sin a th’ ann? Na dh’innis m’ athair dhomh?"
+msgstr "Thug na sealgairean agam daoine, boireannaich ’s clann òga thugam an-diugh a bha air am falach sa choille, a’ feuchainn ri teicheadh on chogadh, gràin is dìoghaltas am measg nan treubhan a tha a’ toirt ionnsaigh air càch a chèile, dìreach mar a rinneadh iad o shean nuair nach robh sinn ach ’nar beathaichean fiadhaich fo bhuaidh is smachd an nàdair. Cha ghabh gin dhe mo bhràithrean a’ chathair fhiodha os làimh gu bràth tuilleadh o nach eil gin dhe na treubhan làidir gu leòr gus càch a cheannsachadh. Cha bhi againn ach milleadh gun chrìch ach… an e sin a th’ ann? Na dh’innis m’ athair dhomh?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:221
@@ -428,7 +428,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Tha barrachd iomagain air Boldrad gach latha. Tha an leann-dubh a’ tighinn air mo chuideachd on a tha an geamhradh gu bhith tighinn oirnn agus chan eil sinn a’ fuireach ach ann am bothanan. Cha robh mi an dùil fuireach san fhàsach seo cho fada sin – ach cha shaoilinn a-riamh gum maireadh an còmhstri gun chiall seo eadar mo dhà bhràthair cho fada."
+msgstr "Tha Boldrad fo bharrachd uallach gach latha. Tha an leann-dubh a’ tighinn air mo chuideachd on a tha an geamhradh gu bhith tighinn oirnn agus chan eil sinn a’ fuireach ach ann am bothanan. Cha robh mi an dùil fuireach san fhàsach seo cho fada sin – ach cha shaoilinn a-riamh gum maireadh an còmhstri gun chiall seo eadar mo dhà bhràthair cho fada sin."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232
@@ -437,7 +437,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr "’S dòcha gun dàinig an t-àm gun dèanadh sinn ar beatha ann a sheo beagan nas cofhurtaile. ’S dòcha gun tàinig an t-àm a bheireamaid dachaigh ùr dhan fheadhainn a tha a’ fuireach ’s a’ beachdachadh còmhla, an àite an dachaigh a chaill sinn. Gus an dig an t-àm a thilleamaid dhan àite a bhiodh ’na dhachaigh dhuinn uair…"
+msgstr "’S dòcha gun dàinig an t-àm gun dèanadh sinn ar beatha ann a sheo beagan nas cofhurtaile. ’S dòcha gun dàinig an t-àm a bheireamaid dachaigh ùr dhan fheadhainn a tha a’ fuireach ’s a’ beachdachadh còmhla, an àite an dachaigh a chaill sinn. Gus an dig an t-àm a thilleamaid dhan àite a bhiodh ’na dhachaigh dhuinn uair…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Somebody Comes up to You"
@@ -452,7 +452,7 @@ msgstr "Tha bodach a’ bruidhinn riut…"
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr "Fàilte, a cheannaird. ’S mise Kantrach is tha mi beò fad iomadh geamhradh. Gum faodainn ur cuideachadh le comhairle sna dubh-làithean seo."
+msgstr "Fàilte, a cheannaird. ’S mise Kantrach is tha mi air tighinn beò tro iomadh geamhradh. Gum faodainn ur cuideachadh le comhairle sna dubh-làithean seo."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
@@ -460,7 +460,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr "Chan eil fios aig na diathan dè cho fada ’s a dh’fheumas sinn fuireach ’nar falach ann a sheo. Tha na gaisgich an dòchas nach bi e fada gun tèid leinn tilleadh ’s gun dèanadh sinn a’ chùis air an nàmhaid, ach tha mi fhìn fo amharas nach tachair seo a dh’aithghearr. Agus tha na làithean air am fàs goirid is fuair oirnn…"
+msgstr "Chan eil fios aig na diathan dè cho fada ’s a dh’fheumas sinn fuireach ’nar falach ann a sheo. Tha na gaisgich an dòchas nach bi e fada gus an dèid leinn tilleadh ’s gus an dèan sinn a’ chùis air an nàmhaid, ach tha mi fhìn fo amharas nach tachair seo a dh’aithghearr. Agus tha na làithean air am fàs goirid is fuair oirnn…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:248
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:321
@@ -499,7 +499,7 @@ msgstr "Ach cuimhnichibh oirbh – is ar dìleab a tha sna coilltean seo a dh’
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "Mar sin, bu chòir dhuinn bothanan maoir-choille a thogail ach an cuireadh sinn craobhan ùra an àite na feadhna a leag sinn agus togamaid e cho faisg air a’ bhothan coillteir ’s a ghabhas."
+msgstr "Mar sin, bu chòir dhuinn bothanan maoir-choille a thogail ach an cuireadh sinn craobhan ùra an àite na feadhna a leag sinn agus togamaid iad cho faisg air a’ bhothan coillteir ’s a ghabhas."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
@@ -535,7 +535,7 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Thadhail mi air uaigh m’ athar a-rithist, ann an doire naomh aig bonn sgurr Chal’mabhraid. Chuir mi an ùine seachad ’nam sheasamh ann agus cha do mhothaich mi air an ùine a’ dol seachad no air an uisge fhuair a’ dòrtadh orm o na speuran dorcha…"
+msgstr "Thadhail mi air uaigh m’ athar a-rithist, ann an doire naomh aig bonn sgurr Chal’mabhraid. Chuir mi an ùine seachad ’nam sheasamh ann agus cha do mhothaich mi air an ùine a’ dol seachad no air an uisge fhuair a dhòirt orm o na speuran dorcha…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -612,7 +612,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "An ann gu bheil thu airson ar n-ullachadh ach am fuirich sinn sna coilltean seo nas fhaide, a Throin? Uill, tuigidh mi an gliocas a th’ ann, ach tha fadachd ’nam chridhe gus an till sinn gu Al’tùnran gu soirbheachail. Tha sinn air fuireach ro fhada mar-thà fad ’s a tha ar cuideachd a’ sabaid an aghaidh càch a chèile air a’ bhlàr agus tha na tuaghan is claidheamhan againn air am fàs meirgeach."
+msgstr "An ann gu bheil thu airson ar n-ullachadh ach am fuirich sinn sna coilltean seo nas fhaide, a Throin? Uill, tuigidh mi an gliocas a th’ ann, ach tha fadachd ’nam chridhe gus an till sinn gu Al’tùnran gu soirbheachail. Tha sinn air fuireach ro fhada ann a sheo mar-thà fad ’s a tha ar cuideachd a’ sabaid an aghaidh càch a chèile air a’ bhlàr agus tha na tuaghan is claidheamhan againn air am fàs meirgeach."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
@@ -637,7 +637,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr "Ged nach e obair dàna gaisgich a th’ ann, seo rudeigin as urrainn dhuinn dèanamh co-dhiù! A Throin, dè do bheachd nan doirinn cuid dhe na gaisgich as an-fhoiseile againn còmhla rium ach an rùraich sinn nas fhaisge air beinn mhòr Chal’mabhraid – ’s dòcha gun lorg sinn barrachd charraigean mòra ann ach am biodh am bodach toilichte?"
+msgstr "Ged nach e obair dhàna gaisgich a th’ ann, seo rud as urrainn dhuinn dèanamh co-dhiù! A Throin, dè do bheachd nan doirinn cuid dhe na gaisgich as an-fhoiseile againn còmhla rium ach an rùraich sinn nas fhaisge air beinn mhòr Chal’mabhraid – ’s dòcha gun lorg sinn barrachd charraigean mòra ann ach am biodh am bodach toilichte?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
@@ -646,7 +646,7 @@ msgstr "Tha Kantrach mì-thoilichte…"
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid "Old man? Disrespectful youth!"
-msgstr "Bodach, an e? Òganaich gun spèis!"
+msgstr "Bodach, an e? Òganaich mhì-mhodhail!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:347
@@ -655,7 +655,7 @@ msgstr "Tha Kantrach toilichte…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
-msgstr "Mu dheireadh thall! Bu chòir do na carraigean ud mairsinn ùine mhath."
+msgstr "Mu dheireadh thall! Bu chòir do na carraigean ud mairsinn greis mhath."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
@@ -674,7 +674,7 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr "Dèanamaid leudachadh gu ear. Seo seans dha na bodaich ach am biodh iad feumail dhuinn o àm gu àm! Cuireamaid an fheadhainn ann a bhios eòlach air teanga nan clach ach an lorg iad rùintean-dìomhair na beinne!"
+msgstr "Dèanamaid leudachadh gu ear. Seo teans dha na bodaich ach am biodh iad feumail dhuinn o àm gu àm! Cuireamaid an fheadhainn ann a bhios eòlach air teanga nan clach ach an lorg iad rùintean-dìomhair na beinne!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth laughs…"
@@ -753,7 +753,7 @@ msgstr "Chaidh na sealgairean againn a-mach dha na coilltean, a Throin."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Bidh biadh math agad a bhios iomchaidh do cheannard nan cinnidhean uile ro dubhradh na grèine le cinnt!"
+msgstr "Bidh biadh math agad a bhios iomchaidh do cheannard nan cinnidhean uile ro dhubhradh na grèine le cinnt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
@@ -773,7 +773,7 @@ msgstr "Madainn bhrèagha"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
-msgstr "Tha Tron aige…"
+msgstr "Tha Tron a’ mothachadh…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:423
@@ -788,7 +788,7 @@ msgstr "Dh’fhosgail taigh-tàirn airson ar muinntir an-dè. Ged nach eil subha
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:426
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr "’S dòcha gun do thòisich sinn air àite a chruthachadh ris an doirinn… dachaigh."
+msgstr "’S dòcha gun do thòisich sinn air àite a chruthachadh air an doirinn… dachaigh."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Boldreth remarks…"
@@ -833,7 +833,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Mhothaich mi gu bheil am fiodh cruaidh gu bhith ruith oirnn! Chan urrainn dha na gaisgich againn fuireach ann an tobhtaichean briste, gu h-àraidh rè ama cunnartaich mar a tha oirnn!"
+msgstr "Mhothaich mi gu bheil am fiodh cruaidh gu bhith ruith oirnn! Chan urrainn dha na gaisgich againn fuireach ann an tobhtaichean briste, gu h-àraidh rè ama chunnartaich mar a tha oirnne!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:455
@@ -849,7 +849,7 @@ msgstr "Tha fiamh a’ ghàire air Boldrad…"
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr "Uill, a sheann charaid, saoilidh mi nach tuiteadh an daingneachadh againn le ciad sluagh-ghairm an nàmhad tuilleadh! ’S urrainn dhuinn ar ranntair a leudachadh gu sàbhailte a-nis!"
+msgstr "Uill, a sheann charaid, saoilidh mi nach tuit an daingneachadh againn le ciad sluagh-ghairm an nàmhad tuilleadh! ’S urrainn dhuinn ar ranntair a leudachadh gu sàbhailte a-nis!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:466
@@ -887,7 +887,7 @@ msgstr "Fhuair Kantrach faochadh…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Sgoinneil! Chan dig an t-uisge tro ar mullaichean tuilleadh agus tha stuth-togail againn airson, uill, togalach spaideil mòr sam bith a thogras sinn!"
+msgstr "Sgoinneil! Chan dig an t-uisge tro ar mullaichean tuilleadh agus tha stuth-togail againn airson… tha… canamaid togalach spaideil mòr sam bith a thogras sinn!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 msgid "We Need Oxen!"
@@ -908,7 +908,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr "’S e beathaichean iongantach a th’ annta: Tha an damh cho luath ’s a tha duine ach tha e mòran nas treasa gun fheumalachdan mòra air: chan eil sinn feumach ach air cruithneachd is uisge ach an togadh sinn iad agus nì iad an obair air na rathaidean gu dìleas agus gu h-earbsach."
+msgstr "’S e beathaichean iongantach a th’ annta: Tha an damh cho luath ’s a tha duine ach tha e mòran nas treasa gun fheumalachdan mòra air: chan eil sinn feumach ach air cruithneachd is uisge gus an togail agus nì iad an obair air na rathaidean gu dìleas agus gu h-earbsach."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:500
 msgid "Mission Complete"
@@ -925,7 +925,7 @@ msgstr "Tha Tron a’ bruidhinn…"
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr "An latha a bha seo, iarr Boldrad orm gun digeadh mi còmhla ris dhan taigh-òil ùr. Thuirt e gun togadh e mo chridhe."
+msgstr "An latha a bha siud, dh’iarr Boldrad orm gun digeadh mi còmhla ris dhan taigh-òil ùr. Thuirt e gun togadh e mo chridhe."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
@@ -985,7 +985,7 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr "Tha an geamhradh air tighinn oirnn. Tha mòran dhuinn a’ fulang leis an fhuachd, ach feumaidh sinn cumail a’ dol. Cha chreid mi gur ann fada an latha as urrainn dhuinn tilleadh – chan fhaod e bhith."
+msgstr "Tha an geamhradh air tighinn oirnn. Tha mòran dhuinn a’ fulang leis an fhuachd, ach feumaidh sinn cumail a’ dol. Cha chreid mi gur ann fada gus an latha as urrainn dhuinn tilleadh – chan fhaod e bhith."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
@@ -1008,7 +1008,7 @@ msgstr "Tha baile càirdeach air aontadh rinn!"
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr "Lorg sinn baile le muinntir càirdeil tarbhach ann agus dhrùidh an t-sealbh, teicneolas ’s neart againn orra."
+msgstr "Lorg sinn baile le muinntir càirdeil tarbhach ann agus dhrùidh an t-sealbh, teicneolas agus neart againn orra."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:544
@@ -1029,7 +1029,7 @@ msgstr "Ach tha eagal orra gun cuir an cogadh mu Al’tùnran crìoch air an dò
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

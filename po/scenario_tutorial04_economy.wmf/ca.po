@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 11:48+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 20:31+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +61,7 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three castles."
-msgstr "Però un dia vau descobrir un indret erm amb edificis abandonats a l'est. Hi notàveu una estranya aura i ningú hi volia posar el peu. Però no es podia deixar la frontera indefensa i per això hi vas construir tres castells. "
+msgstr "Però un dia vau descobrir un indret erm amb edificis abandonats a l'est. Hi notàveu una estranya aura i ningú hi volia posar el peu. Però no es podia deixar la frontera indefensa i per això hi vas construir tres castells."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
@@ -265,7 +266,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "A la llista, haureu vist que no teniu ni tavernes ni hostals. Això significa que no produïu racions. Però, primer mirem què ens queda en estoc. "
+msgstr "A la llista, haureu vist que no teniu ni tavernes ni hostals. Això significa que no produïu racions. Però, primer mirem què ens queda en estoc."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
@@ -718,6 +719,10 @@ msgid ""
 "stonemason to produce them."
 msgstr "Ajusteu a 20 la quantitat desitjada de columnes de marbre i espereu fins que el picapedrer les produeixi."
 
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Produeix 20 columnes de marbre."
+
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
@@ -839,7 +844,7 @@ msgstr "Aquest era l'últim tutorial que us tenia preparat. Us he ensenyat tot e
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"
