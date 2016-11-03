@@ -135,7 +135,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	// Player number
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
-	// Map Position
+// Map Position
 #ifndef NDEBUG
 	if (ibase) {
 		assert(0 <= ibase->get_viewpoint().x);

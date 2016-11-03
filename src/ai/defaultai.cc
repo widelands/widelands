@@ -892,7 +892,7 @@ void DefaultAI::late_initialization() {
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// f.e. human player played this player before
 	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
-		 // Current gametime is better then 'kNoExpedition'
+		// Current gametime is better then 'kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
 	}
 }

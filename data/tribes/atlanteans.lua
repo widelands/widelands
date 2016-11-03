@@ -246,6 +246,7 @@ tribes:new_tribe {
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
       "atlanteans_shipyard",
+      "atlanteans_barracks",
 
       -- Big
       "atlanteans_horsefarm",

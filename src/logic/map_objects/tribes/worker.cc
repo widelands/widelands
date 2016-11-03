@@ -2513,9 +2513,9 @@ void Worker::scout_update(Game& game, State& state) {
 }
 
 void Worker::draw_inner(const EditorGameBase& game,
-                  const Vector2f& point_on_dst,
-                  const float scale,
-                  RenderTarget* dst) const {
+                        const Vector2f& point_on_dst,
+                        const float scale,
+                        RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 

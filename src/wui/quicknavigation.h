@@ -53,8 +53,7 @@ struct QuickNavigation {
 		}
 	};
 
-	QuickNavigation(const Widelands::EditorGameBase& egbase,
-	                MapView* map_view);
+	QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
 	void set_landmark(size_t index, const View& view);

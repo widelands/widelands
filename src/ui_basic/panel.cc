@@ -820,7 +820,7 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 		// Found a child at the position
 		if (child->do_mousewheel(
 		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                          child->get_y() + child->get_tborder()))) {
+		                                             child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 		// Break after the first hit panel in the list. The panels are ordered from top to bottom,

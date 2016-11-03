@@ -721,7 +721,7 @@ public:
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
 				Rectf dst(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
-				                node_texture->height());
+				          node_texture->height());
 				Rectf src(0, 0, node_texture->width(), node_texture->height());
 				rv->blit(
 				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
