@@ -491,12 +491,13 @@ void Immovable::draw_construction(const uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(
+		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
 	dst->blit_animation(point_on_dst, scale, anim_, current_frame * frametime, player_color,
-	                   Recti(Vector2i(0, curh - lines), curw, lines));
+	                    Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
@@ -546,9 +547,12 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	imm.set_position(egbase(), imm.position_);
 
 	if (packet_version >= 8) {
-		DescriptionIndex idx = fr.unsigned_8();
-		if (idx != INVALID_INDEX) {
-			imm.set_antecedent(*imm.get_owner()->tribe().get_building_descr(idx));
+		Player* owner = imm.get_owner();
+		if (owner) {
+			DescriptionIndex idx = owner->tribe().building_index(fr.string());
+			if (owner->tribe().has_building(idx)) {
+				imm.set_antecedent(*owner->tribe().get_building_descr(idx));
+			}
 		}
 	}
 
@@ -650,8 +654,9 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
-	fw.unsigned_8(antecedent_ ? get_owner()->tribe().building_index(antecedent_->name()) :
-	                            INVALID_INDEX);
+	if (get_owner()) {
+		fw.string(antecedent_ ? antecedent_->name() : "");
+	}
 
 	// Animations
 	fw.string(descr().get_animation_name(anim_));
