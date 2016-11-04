@@ -122,7 +122,7 @@
   - New win condition: Artifacts
   - Added New starting condition "Trading Outpost" that will periodically give
     the player some wares if needed (cheat mode)
-  - Other tribes buildings that have been conquered can now be dismantled
+  - Other tribes' buildings that have been conquered can now be dismantled
   - Balancing: Added gold to building cost for Atlantean training sites.
     Made Barbarian attack stronger.
   - When an expedition ship places a port, a bit of land is cleared of trees to
