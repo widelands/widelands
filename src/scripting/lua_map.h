@@ -1006,6 +1006,10 @@ public:
 	int get_workers(lua_State*);
 	int set_wares(lua_State*);
 	int set_workers(lua_State*);
+	int get_ware_policies(lua_State*);
+	int get_worker_policies(lua_State*);
+	int set_ware_policies(lua_State*);
+	int set_worker_policies(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
 	int start_expedition(lua_State*);

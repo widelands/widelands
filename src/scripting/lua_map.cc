@@ -3868,6 +3868,41 @@ Warehouse
 
    Every Headquarter or Warehouse on the Map is of this type.
 */
+
+/* RST
+   .. method:: get_ware_policies(which)
+
+      Gets the policies how the warehouse should handle the given wares.
+      The method to handle is one of the strings SP_Normal, SP_Prefer, SP_DontStock, SP_Remove.
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :returns: :class:`string` or :class:`table`
+*/
+
+/* RST
+   .. method:: get_worker_policies(which)
+
+      Same as :meth:`Warehouse.get_ware_policies` but for workers.
+*/
+
+/* RST
+   .. method:: set_ware_policies(which, policy)
+
+      Sets the policies how the warehouse should handle the given wares.
+      The method to handle is one of the strings SP_Normal, SP_Prefer, SP_DontStock, SP_Remove.
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :arg policy: the policy to apply for all the wares given in `which`.
+*/
+
+/* RST
+   .. method:: set_worker_policies(which, policy)
+
+      Same as :meth:`Warehouse.set_ware_policies` but for workers.
+*/
+
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, set_wares),
@@ -3876,6 +3911,10 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, get_workers),
    METHOD(LuaWarehouse, set_soldiers),
    METHOD(LuaWarehouse, get_soldiers),
+   METHOD(LuaWarehouse, set_ware_policies),
+   METHOD(LuaWarehouse, get_ware_policies),
+   METHOD(LuaWarehouse, set_worker_policies),
+   METHOD(LuaWarehouse, get_worker_policies),
    METHOD(LuaWarehouse, start_expedition),
    METHOD(LuaWarehouse, cancel_expedition),
    {nullptr, nullptr},
@@ -3971,7 +4010,81 @@ WH_SET(worker, Worker)
 WH_GET(ware, Ware)
 // documented in parent class
 WH_GET(worker, Worker)
-#undef GET
+#undef WH_GET
+
+
+inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
+	switch (p) {
+		case Warehouse::StockPolicy::SP_Normal:
+			lua_pushstring(L, "SP_Normal");
+			break;
+		case Warehouse::StockPolicy::SP_Prefer:
+			lua_pushstring(L, "SP_Prefer");
+			break;
+		case Warehouse::StockPolicy::SP_DontStock:
+			lua_pushstring(L, "SP_DontStock");
+			break;
+		case Warehouse::StockPolicy::SP_Remove:
+			lua_pushstring(L, "SP_Remove");
+			break;
+	}
+}
+
+inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+	std::string str = luaL_checkstring(L, index);
+	if (str == "SP_Normal")
+		return Warehouse::StockPolicy::SP_Normal;
+	else if (str == "SP_Prefer")
+		return Warehouse::StockPolicy::SP_Prefer;
+	else if (str == "SP_DontStock")
+		return Warehouse::StockPolicy::SP_DontStock;
+	else if (str == "SP_Remove")
+		return Warehouse::StockPolicy::SP_Remove;
+	else
+		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
+}
+
+
+#define WH_SET_POLICY(type, btype)                                                                        \
+	int LuaWarehouse::set_##type##_policies(lua_State* L) {                                           \
+		Warehouse* wh = get(L, get_egbase(L));                                                    \
+		Warehouse::StockPolicy p = string_to_wh_policy(L, -1);                                    \
+		lua_pop(L, 1);                                                                            \
+		bool return_number = false;                                                               \
+		btype##sSet set = parse_get_##type##s_arguments(L, wh->owner().tribe(), &return_number);  \
+		lua_newtable(L);                                                                          \
+		for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) {                        \
+			wh->set_##type##_policy(*i, p);                                                   \
+		}                                                                                         \
+		return 0;                                                                                 \
+	}
+WH_SET_POLICY(ware, Ware)
+WH_SET_POLICY(worker, Worker)
+#undef WH_SET_POLICY
+
+
+#define WH_GET_POLICY(type, btype)                                                                        \
+	int LuaWarehouse::get_##type##_policies(lua_State* L) {                                           \
+		Warehouse* wh = get(L, get_egbase(L));                                                    \
+		const Tribes& tribes = get_egbase(L).tribes();                                            \
+		bool return_number = false;                                                               \
+		btype##sSet set = parse_get_##type##s_arguments(L, wh->owner().tribe(), &return_number);  \
+		lua_newtable(L);                                                                          \
+		if (return_number)                                                                        \
+			wh_policy_to_string(L, wh->get_##type##_policy(*set.begin()));                    \
+		else {                                                                                    \
+			lua_newtable(L);                                                                  \
+			for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) {                \
+				lua_pushstring(L, tribes.get_##type##_descr(*i)->name());                 \
+				wh_policy_to_string(L, wh->get_##type##_policy(*i));                      \
+				lua_rawset(L, -3);                                                        \
+			}                                                                                 \
+		}                                                                                         \
+		return 1;                                                                                 \
+	}
+WH_GET_POLICY(ware, Ware)
+WH_GET_POLICY(worker, Worker)
+#undef WH_GET_POLICY
 
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {
