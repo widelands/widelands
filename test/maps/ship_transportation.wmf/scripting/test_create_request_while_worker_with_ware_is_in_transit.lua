@@ -1,7 +1,7 @@
 run(function()
    sleep(100)
 
-   game.desired_speed = 42 * 1000
+   game.desired_speed = 10 * 1000
 
    create_southern_port()
    create_northern_port()
@@ -16,9 +16,9 @@ run(function()
 
    -- plant a tree inside the street to the right of the lumberjack hut
 
-   assert_equal(map:get_field(23,3).immovable, nil)
+   assert_equal(nil, map:get_field(23,3).immovable)
    tree = map:place_immovable("oak_summer_old", map:get_field(23,3), "world")
-   assert_not_equal(map:get_field(23,3).immovable, nil)
+   assert_not_equal(nil, map:get_field(23,3).immovable)
 
    -- set logs and woodcutters to "remove from here" in the port
    np = northern_port()
@@ -43,13 +43,27 @@ run(function()
    while not (ship:get_workers() == 1) do
       sleep(100)
    end
-   assert_equal(ship:get_workers(), 1)
+   assert_equal(1, ship:get_workers())
    -- no wares since the worker is still carrying the log
-   assert_equal(ship:get_wares(), 0)
+   assert_equal(0, ship:get_wares())
 
    -- start to build a lumberjack on the second port while the required log is still in transit
-   p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 17), true, true)
+   local cons = p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 17), true, true)
    connected_road(p1, map:get_field(18,18).immovable, "l,tl|", true)
+
+   -- give the log time to reach the building site
+   while not (ship:get_workers() == 0) do
+      sleep(100)
+   end
+   sleep(3000)
+
+   cons:destroy()
+   
+   sleep(6000)
+   -- check if both lumberjack and log come to rest in the port
+   -- if it is possible to check for the log in the building site that would be an alternative
+   assert_equal(1, southern_port():get_wares("log"))
+   assert_equal(1, southern_port():get_workers("barbarians_lumberjack"))
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
