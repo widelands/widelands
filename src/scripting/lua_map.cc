@@ -3890,11 +3890,11 @@ Warehouse
    .. method:: set_ware_policies(which, policy)
 
       Sets the policies how the warehouse should handle the given wares.
-      The method to handle is one of the strings SP_Normal, SP_Prefer, SP_DontStock, SP_Remove.
 
       :arg which: behaves like for :meth:`HasWares.get_wares`.
 
       :arg policy: the policy to apply for all the wares given in `which`.
+      :type policy: a string out of "SP_Normal", "SP_Prefer", "SP_DontStock", "SP_Remove".
 */
 
 /* RST
