@@ -10,15 +10,15 @@
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
-# Madkat Here, 2015
+# Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:59+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1890,7 +1890,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Debería considerar  mejorala, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Debería considerar mejorala, desmantelarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -2295,7 +2295,7 @@ msgid "Warehouse"
 msgstr "Almacén"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Cenizas"
@@ -2548,31 +2548,31 @@ msgstr "Esta tribu es conocida desde los cuentos más antiguos. Los hijos e hija
 
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Enciclopedia Tribal"
 
 #: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Introducción"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
-msgstr ""
+msgstr "Controles"
 
 #: ../../data/tribes/scripting/help/init.lua:73
 msgid "Wares"
-msgstr ""
+msgstr "Mercancías"
 
 #: ../../data/tribes/scripting/help/init.lua:80
 msgid "Workers"
-msgstr ""
+msgstr "Trabajadores"
 
 #: ../../data/tribes/scripting/help/init.lua:87
 msgid "Buildings"
-msgstr ""
+msgstr "Construcciones"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2587,7 +2587,7 @@ msgstr "Pueblo Fortificado"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid " Start the game with a fortified military installation"
-msgstr ""
+msgstr "Inicia el juego con una instalación militar fortificada"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
@@ -2601,14 +2601,14 @@ msgstr "Cuartel General"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Inicia el juego con tu cuartel general únicamente"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
 msgid "Trading Outpost"
-msgstr ""
+msgstr "Puesto Comercial"
 
 #. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
 #. condition
@@ -2618,17 +2618,17 @@ msgstr ""
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr ""
+msgstr "Si este jugador se queda sin mercancías importantes, estas serán reemplazadas de forma gratuita"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Barco"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Armadura"

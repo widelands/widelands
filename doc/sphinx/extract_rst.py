@@ -47,6 +47,12 @@ lua_dirs = (
      'constructionsite', 'lua_tribes_units'),
     ('data/tribes/buildings/partially_finished/dismantlesite',
      'dismantlesite', 'lua_tribes_units'),
+     ('data/tribes/immovables/ashes',
+     'immovables', 'lua_tribes_units'),
+     ('data/tribes/ships/atlanteans',
+     'ships', 'lua_tribes_units'),
+     ('data/tribes/wares/armor',
+     'wares', 'lua_tribes_units'),
 )
 
 

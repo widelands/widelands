@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-10 12:19+0000\n"
-"PO-Revision-Date: 2016-09-13 06:53+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-21 16:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -702,7 +702,7 @@ msgstr "craobh a chur"
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Gold Spinning Mill"
-msgstr "Ceàrdach snìomhadair òir"
+msgstr "Ceàrdach òr-shnìomhaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:51
@@ -2000,7 +2000,7 @@ msgstr "Ceàrdach acainnean"
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:96
 msgid "making a basket"
-msgstr "basgaid a dhèanamh"
+msgstr "cliabh a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:7
@@ -2184,7 +2184,7 @@ msgstr "Raon catha"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
 msgctxt "barbarians_building"
 msgid "Training Camp"
-msgstr "Campa trèanaidh"
+msgstr "Campa oideachaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
@@ -2219,7 +2219,7 @@ msgstr "Coileasam"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr "Campa trèanaidh"
+msgstr "Campa oideachaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
@@ -2288,7 +2288,7 @@ msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Luaithre"
@@ -2580,7 +2580,7 @@ msgstr "Baile daingnichte"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid " Start the game with a fortified military installation"
-msgstr "Tòisich an geama le ionad daignichte an airm"
+msgstr "Tòisich an geama le ionad daingnichte an airm"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
@@ -2614,14 +2614,14 @@ msgid ""
 msgstr "Nuair a dh’fhàsas batharan cudromach a’ chluicheadair seo gann, thèid an lìontachadh an-asgaidh"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Long"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Armachd"
@@ -2684,7 +2684,7 @@ msgstr "Tuagh-ghaisgich"
 #: ../../data/tribes/wares/basket/init.lua:7
 msgctxt "ware"
 msgid "Basket"
-msgstr "Basgaid"
+msgstr "Cliabh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/beer/init.lua:7
@@ -3152,7 +3152,7 @@ msgstr "Tuathanach fhreumhagan"
 #: ../../data/tribes/workers/atlanteans/builder/init.lua:27
 msgctxt "atlanteans_worker"
 msgid "Builder"
-msgstr "Togalaiche"
+msgstr "Fear-togail"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/carrier/init.lua:19
@@ -3338,7 +3338,7 @@ msgstr "Sàr-leannair"
 #: ../../data/tribes/workers/barbarians/builder/init.lua:27
 msgctxt "barbarians_worker"
 msgid "Builder"
-msgstr "Togalaiche"
+msgstr "Fear-togail"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/carrier/init.lua:18
@@ -3512,7 +3512,7 @@ msgstr "Leannair"
 #: ../../data/tribes/workers/empire/builder/init.lua:27
 msgctxt "empire_worker"
 msgid "Builder"
-msgstr "Togalaiche"
+msgstr "Fear-togail"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/carpenter/init.lua:17

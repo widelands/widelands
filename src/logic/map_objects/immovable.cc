@@ -35,7 +35,6 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -324,7 +323,6 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
  * Create an immovable of this type
 */
 Immovable& ImmovableDescr::create(EditorGameBase& egbase, const Coords& coords) const {
-	assert(this != nullptr);
 	Immovable& result = *new Immovable(*this);
 	result.position_ = coords;
 	result.init(egbase);
@@ -341,7 +339,6 @@ IMPLEMENTATION
 
 Immovable::Immovable(const ImmovableDescr& imm_descr)
    : BaseImmovable(imm_descr),
-     owner_(nullptr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -439,19 +436,26 @@ void Immovable::act(Game& game, uint32_t const data) {
 	}
 }
 
-void Immovable::draw(const EditorGameBase& game,
-                     RenderTarget& dst,
-                     const FCoords&,
-                     const Point& pos) {
-	if (anim_) {
-		if (!anim_construction_total_)
-			dst.blit_animation(pos, anim_, game.get_gametime() - animstart_);
-		else
-			draw_construction(game, dst, pos);
+void Immovable::draw(uint32_t gametime,
+                     const TextToDraw draw_text,
+                     const Vector2f& point_on_dst,
+                     float scale,
+                     RenderTarget* dst) {
+	if (!anim_) {
+		return;
+	}
+	if (!anim_construction_total_) {
+		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
+	} else {
+		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
 	}
 }
 
-void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst, const Point pos) {
+void Immovable::draw_construction(const uint32_t gametime,
+                                  const TextToDraw draw_text,
+                                  const Vector2f& point_on_dst,
+                                  const float scale,
+                                  RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;
 	if (program_ptr_ < program_->size())
 		constructionact =
@@ -462,7 +466,7 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	uint32_t done = 0;
 	if (anim_construction_done_ > 0) {
 		done = steptime * (anim_construction_done_ - 1);
-		done += std::min(steptime, game.get_gametime() - animstart_);
+		done += std::min(steptime, gametime - animstart_);
 	}
 
 	uint32_t total = anim_construction_total_ * steptime;
@@ -483,21 +487,20 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.blit_animation(pos, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(
+		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
-	dst.blit_animation(pos, anim_, current_frame * frametime, player_color,
-	                   Rect(Point(0, curh - lines), curw, lines));
+	dst->blit_animation(point_on_dst, scale, anim_, current_frame * frametime, player_color,
+	                    Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	uint32_t const display_flags = game.get_ibase()->get_display_flags();
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, descr().descname(),
-	             display_flags & InteractiveBase::dfShowStatistics,
+	do_draw_info(draw_text, descr().descname(),
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
-	             dst, pos);
+	             point_on_dst, scale, dst);
 }
 
 /**
@@ -527,7 +530,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
-		if (pn && pn <= MAX_PLAYERS) {
+		if (pn && pn <= kMaxPlayers) {
 			Player* plr = egbase().get_player(pn);
 			if (!plr)
 				throw GameDataError("Immovable::load: player %u does not exist", pn);
@@ -1179,7 +1182,7 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), owner_(nullptr), economy_(nullptr) {
+   : BaseImmovable(mo_descr), economy_(nullptr) {
 }
 
 /**

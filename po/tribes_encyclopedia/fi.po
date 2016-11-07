@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-15 06:30+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-22 17:53+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -365,7 +365,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "”Uusi soturin kirves tekee sen hallitsija neljänneksi parhaimmaksi – tai sen tekijän huonoimmaksi.”"
+msgstr "‘Uusi soturin kirves tekee sen hallitsija neljänneksi parhaimmaksi – tai sen tekijän huonoimmaksi.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -577,7 +577,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr "”Hän pitää eläimistä ja tykkää kasvattaa niitä<br>\nkuten me pidämme ruuanlaitosta ja työdä niitä.”"
+msgstr "‘Hän pitää eläimistä ja tykkää kasvattaa niitä<br>\nkuten me pidämme ruuanlaitosta ja työdä niitä.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -614,7 +614,7 @@ msgstr "”Pehmeää ja täydellistä.<br> Ja vieläpä aikaa ja säätä kestä
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "Ote periteikkäästä barbaarilaulusta<br> 'Aarteemme maan alla'"
+msgstr "Ote periteikkäästä barbaarilaulusta<br> 'Aarteemme maan alla'."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -760,7 +760,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "”Kun näen hakkuni kuluvan päivästä toiseen, tiedän tekeväni työtä jolla on tarkoitus.”"
+msgstr "‘Kun näen hakkuni kuluvan päivästä toiseen, tiedän tekeväni työtä jolla on tarkoitus.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -819,7 +819,7 @@ msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kaivos voi tuottaa rautamal
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "”Tekee uutta kiveä vanhasta tulen ja veden avulla.”"
+msgstr "‘Tekee uutta kiveä vanhasta tulen ja veden avulla.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -873,7 +873,7 @@ msgstr "Krumta, Chat’Karuthin puuseppä"
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The lumberjack’s hut needs trees to fell within the work area."
-msgstr "Puunhakkaajan mökki tarvitsee työskentelyalueella puita kaadettavaksi.javascript:;"
+msgstr "Puunhakkaajan mökki tarvitsee työskentelyalueella puita kaadettavaksi."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
@@ -888,7 +888,7 @@ msgstr "Puunhakkaaja tarvitsee %s kaataakseen puun, joka ei sisällä aikaa, jok
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr "”Me saamme kaiken toimimaan!”"
+msgstr "‘Me saamme kaiken toimimaan!’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -978,7 +978,7 @@ msgstr "”Hän, joka kasvattaa kaksi puuta siinä kuin muut yhden, ylittää t�
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Chat’Karuth in a conversation with a Ranger"
-msgstr "Chat’Karuthin ja metsänvartijan keskustelusta."
+msgstr "Chat’Karuthin ja metsänvartijan keskustelusta"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:19
@@ -1000,7 +1000,7 @@ msgstr "Metsänvartija tarvitsee %s istuttaakseen puun, mikä ei sisällä aikaa
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr "”Me kasvatamme katon pääsi päälle”"
+msgstr "‘Me kasvatamme katon pääsi päälle’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
@@ -1254,7 +1254,7 @@ msgstr "Kievarinpitäjä tarvitsee keskimäärin %1% ruoka-annosten valmistamise
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Plants grapevines and harvests grapes."
-msgstr "Kasvattaa viinirypäleitä"
+msgstr "Kasvattaa viinirypäleitä."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/helptexts.lua:16
@@ -1280,7 +1280,7 @@ msgstr "Tuottaa viiniä."
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:17
 msgctxt "atlanteans_building"
 msgid "Trains soldiers in ‘Attack’."
-msgstr "Kouluttaa sotilaita hyökkäyksessä"
+msgstr "Kouluttaa sotilaille ‘Hyökkäystä’."
 
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:19
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:19
@@ -1299,7 +1299,7 @@ msgstr "Kouluttaa sotilaille 'Hyökkäystä', 'Väistelyä' ja 'Terveyttä'."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "”Vihollisen hutilointi on taistelijan paras ystävä.”"
+msgstr "‘Vihollisen hutilointi on taistelijan paras ystävä.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
@@ -1353,7 +1353,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr "”Voimakas ei anna anteeksi tai unohda, mutta kostaa kärsityt vääryydet – menneisyydestä ja kaikki tulevat.”"
+msgstr "‘Voimakas ei anna anteeksi tai unohda, mutta kostaa kärsityt vääryydet – menneisyydestä ja kaikki tulevat.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
@@ -1365,7 +1365,7 @@ msgstr "Päällikkö Chat’Karuth puheessaan hänen armeijalle."
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr "Kouluttaa sotilasta hyökkäyksessä ja iskujen vastaanotossa"
+msgstr "Kouluttaa sotilaille ‘Hyökkäystä’ ja ‘Terveyttä’."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:16
 msgctxt "barbarians_building"
@@ -1411,7 +1411,7 @@ msgstr "Keisarikunnan sotilaita ei voi kouluttaa puollustautumaan; he ovat mitä
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:17
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr "Kouluttaa sotilasta hyökkäyksessä ja iskujen vastaanotossa"
+msgstr "Kouluttaa sotilaille ‘Hyökkäystä’ ja ‘Terveyttä’."
 
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:19
 msgctxt "empire_building"
@@ -1746,30 +1746,30 @@ msgid "%s or better"
 msgstr "%s tai kokeneempi"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:646
+#: ../../data/tribes/scripting/help/building_help.lua:647
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Työkalu: "
 msgstr[1] "Työvälineet: "
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:653
 msgid "Experience levels:"
 msgstr "Taitotaso:"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:653
-#: ../../data/tribes/scripting/help/building_help.lua:662
+#: ../../data/tribes/scripting/help/building_help.lua:655
+#: ../../data/tribes/scripting/help/building_help.lua:664
 #: ../../data/tribes/scripting/help/worker_help.lua:157
 #: ../../data/tribes/scripting/help/worker_help.lua:166
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s yleneemä kohti %s (%s EP)"
 
-#: ../../data/tribes/scripting/help/building_help.lua:685
+#: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Production"
 msgstr "Tuotanto"
 
-#: ../../data/tribes/scripting/help/building_help.lua:686
+#: ../../data/tribes/scripting/help/building_help.lua:688
 msgid "Performance:"
 msgstr "Suoriutuminen:"
 
@@ -1978,33 +1978,63 @@ msgstr "Seuraavat vaihtoehtoiset pikanäppäimet ovat käytettävissä viestiruu
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:76
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show all messages"
 msgstr "Näytä kaikki viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show geologists’ messages only"
 msgstr "Näytä vain geologien viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:80
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show economy messages only"
 msgstr "Näytä vain talouden viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show seafaring messages only"
-msgstr "Näytä vain merenkulut viestit:"
+msgstr "Näytä vain merenkulut viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show warfare messages only"
 msgstr "Näytä vain sodankäynnin viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:86
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show scenario messages only"
-msgstr "Näytä vain skenaarioviestit:"
+msgstr "Näytä vain skenaarioviestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:88
@@ -2075,20 +2105,28 @@ msgstr "Rakennukset"
 msgid "About Widelands"
 msgstr "Tietoa Widelandsista"
 
-#: ../../data/tribes/scripting/help/ware_help.lua:34
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. Languages using Chinese script probably want to lose the blank space here.
+#: ../../data/tribes/scripting/help/ware_help.lua:33
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#: ../../data/tribes/scripting/help/ware_help.lua:36
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
 msgstr "Tarkoitus"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-#: ../../data/tribes/scripting/help/ware_help.lua:54
+#: ../../data/tribes/scripting/help/ware_help.lua:56
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
 msgstr "Tuottaja"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:97
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Tuotetut tavarat:"
@@ -2096,7 +2134,7 @@ msgstr[1] "Tuotetut tavarat:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:158
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Kuluttajat"
@@ -2156,8 +2194,8 @@ msgstr[1] "Korotetaan %1% pistettä jokaista taso kohden."
 #: ../../data/tribes/scripting/help/worker_help.lua:224
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
-msgstr[0] "Korkein taso on %1%"
-msgstr[1] "Korkein taso on %1%"
+msgstr[0] "Korkein taso on %1%."
+msgstr[1] "Korkein taso on %1%."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Attack"
@@ -3272,7 +3310,7 @@ msgstr "Tämä on keskikokoinen atrain. Niitä tuottaa aseseppä ja käyttää e
 #: ../../data/tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr "Vesi on elämälle välttämätöntä."
+msgstr "Vesi on elämälle välttämätöntä!"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:6
@@ -3516,7 +3554,7 @@ msgstr "Kaataa puita."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr "Leipoo pitaleipää kaivostyöläisille"
+msgstr "Leipoo pitaleipää kaivostyöläisille."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -3567,7 +3605,7 @@ msgstr "Polttaa hiiliä."
 #: ../../data/tribes/workers/barbarians/farmer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Plants fields."
-msgstr "Kylvää peltoja"
+msgstr "Kylvää peltoja."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/barbarians/fisher/helptexts.lua:3
@@ -3753,7 +3791,7 @@ msgstr "Tuottaa suloisia ja hyödyllisiä aaseja tavaroiden kuljetusavuksi."
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Plants fields."
-msgstr "Kylvää peltoja"
+msgstr "Kylvää peltoja."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/empire/fisher/helptexts.lua:3
@@ -3822,7 +3860,7 @@ msgstr "Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alu
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr "Paimentaa lampaita"
+msgstr "Paimentaa lampaita."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3

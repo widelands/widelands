@@ -4,6 +4,7 @@
 # Translators:
 # Cristiano Magro, 2015
 # Cristiano Magro, 2016
+# Cristiano Magro, 2016
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -13,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:45+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -476,7 +477,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più  in fretta."
+msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
@@ -724,6 +725,10 @@ msgid ""
 "stonemason to produce them."
 msgstr ""
 
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Produci 20 colonne di marmo."
+
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
@@ -734,7 +739,7 @@ msgstr ""
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr ""
+msgstr "Per essere pronti a nuove fortificazioni, devi produrre 20 colonne di marmo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:417
 msgid ""

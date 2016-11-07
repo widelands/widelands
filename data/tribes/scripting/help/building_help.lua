@@ -82,7 +82,7 @@ function dependencies_training_food(foods)
          food_warenames[countfood] = ware_description.descname
          food_images[countfood] = ware_description.icon_name
       end
-      local text = localize_list(food_warenames, "or")
+      local text = localize_list(food_warenames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
@@ -642,8 +642,10 @@ function building_help_crew_string(tribe, building_description)
 
       if (number_of_workers > 0) then
          local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
-         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-         result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         if (tool_string ~= "") then
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+            result = result .. rt(h3(ngettext("Worker uses:","Workers use:", number_of_workers))) .. tool_string
+         end
       end
 
       if(becomes_description) then

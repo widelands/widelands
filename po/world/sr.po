@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-23 09:44+0000\n"
+"Last-Translator: Zlatko Savich <zlajonja@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,63 +25,63 @@ msgstr "Jazavac"
 
 #: ../../data/world/critters/brownbear/init.lua:14
 msgid "Brown bear"
-msgstr ""
+msgstr "Medved"
 
 #: ../../data/world/critters/bunny/init.lua:13
 msgid "Bunny"
-msgstr "Зец"
+msgstr "Zec"
 
 #: ../../data/world/critters/chamois/init.lua:14
 msgid "Chamois"
-msgstr ""
+msgstr "Divokoza"
 
 #: ../../data/world/critters/deer/init.lua:14
 msgid "Deer"
-msgstr "Јелен"
+msgstr "Jelen"
 
 #: ../../data/world/critters/duck/init.lua:18
 msgid "Duck"
-msgstr "Патка"
+msgstr "Patka"
 
 #: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
-msgstr ""
+msgstr "Los"
 
 #: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
-msgstr "Лисица"
+msgstr "Lisica"
 
 #: ../../data/world/critters/lynx/init.lua:14
 msgid "Lynx"
-msgstr ""
+msgstr "Ris"
 
 #: ../../data/world/critters/marten/init.lua:14
 msgid "Marten"
-msgstr ""
+msgstr "Kuna"
 
 #: ../../data/world/critters/reindeer/init.lua:14
 msgid "Reindeer"
-msgstr ""
+msgstr "Irvas"
 
 #: ../../data/world/critters/sheep/init.lua:18
 msgid "Sheep"
-msgstr "Овца"
+msgstr "Ovca"
 
 #: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
-msgstr ""
+msgstr "Jelen"
 
 #: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
-msgstr ""
+msgstr "Vepar"
 
 #: ../../data/world/critters/wisent/init.lua:14
 msgid "Wisent"
-msgstr ""
+msgstr "Bizon"
 
 #: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
-msgstr ""
+msgstr "Vuk"
 
 #: ../../data/world/immovables/bush1/init.lua:5
 #: ../../data/world/immovables/bush2/init.lua:5
@@ -89,27 +89,27 @@ msgstr ""
 #: ../../data/world/immovables/bush4/init.lua:5
 #: ../../data/world/immovables/bush5/init.lua:5
 msgid "Bush"
-msgstr "Жбун"
+msgstr "Žbun"
 
 #: ../../data/world/immovables/cactus1/init.lua:5
 #: ../../data/world/immovables/cactus2/init.lua:5
 #: ../../data/world/immovables/cactus3/init.lua:5
 #: ../../data/world/immovables/cactus4/init.lua:5
 msgid "Cactus"
-msgstr "Кактус"
+msgstr "Kaktus"
 
 #: ../../data/world/immovables/grass1/init.lua:5
 #: ../../data/world/immovables/grass2/init.lua:5
 #: ../../data/world/immovables/grass3/init.lua:5
 msgid "Grass"
-msgstr "Трава"
+msgstr "Trava"
 
 #: ../../data/world/immovables/manmade/artifacts/artifact00/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact01/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
 #: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
 msgid "Artifact"
-msgstr ""
+msgstr "Artefakt"
 
 #: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
@@ -121,22 +121,22 @@ msgstr ""
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Ruin"
-msgstr ""
+msgstr "Ruina"
 
 #: ../../data/world/immovables/manmade/debris00/init.lua:5
 #: ../../data/world/immovables/manmade/debris01/init.lua:5
 #: ../../data/world/immovables/manmade/debris02/init.lua:5
 msgid "Debris"
-msgstr ""
+msgstr "Ruševina"
 
 #: ../../data/world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
-msgstr ""
+msgstr "Sneško Belić"
 
 #: ../../data/world/immovables/mushroom1/init.lua:5
 #: ../../data/world/immovables/mushroom2/init.lua:5
 msgid "Mushroom"
-msgstr "Печурка"
+msgstr "Pečurka"
 
 #: ../../data/world/immovables/pebble1/init.lua:5
 #: ../../data/world/immovables/pebble2/init.lua:5
@@ -145,59 +145,59 @@ msgstr "Печурка"
 #: ../../data/world/immovables/pebble5/init.lua:5
 #: ../../data/world/immovables/pebble6/init.lua:5
 msgid "Pebble"
-msgstr "Шљунак"
+msgstr "Šljunak"
 
 #: ../../data/world/immovables/rocks/blackland_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks1/init.lua:12
 msgid "Rocks 1"
-msgstr ""
+msgstr "Stene 1"
 
 #: ../../data/world/immovables/rocks/blackland_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks2/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks2/init.lua:12
 msgid "Rocks 2"
-msgstr ""
+msgstr "Stene 2"
 
 #: ../../data/world/immovables/rocks/blackland_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks3/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks3/init.lua:12
 msgid "Rocks 3"
-msgstr ""
+msgstr "Stene 3"
 
 #: ../../data/world/immovables/rocks/blackland_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks4/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks4/init.lua:12
 msgid "Rocks 4"
-msgstr ""
+msgstr "Stene 4"
 
 #: ../../data/world/immovables/rocks/blackland_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks5/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks5/init.lua:12
 msgid "Rocks 5"
-msgstr ""
+msgstr "Stene 5"
 
 #: ../../data/world/immovables/rocks/blackland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/greenland_rocks6/init.lua:12
 #: ../../data/world/immovables/rocks/winterland_rocks6/init.lua:12
 msgid "Rocks 6"
-msgstr ""
+msgstr "Stene 6"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
 msgid "Skeleton"
-msgstr "Костур"
+msgstr "Kostur"
 
 #: ../../data/world/immovables/skeleton2/init.lua:5
 #: ../../data/world/immovables/skeleton4/init.lua:5
 msgid "Seashell"
-msgstr ""
+msgstr "Školjka"
 
 #: ../../data/world/immovables/standing_stones/standing_stone1_desert/init.lua:5
 #: ../../data/world/immovables/standing_stones/standing_stone1_summer/init.lua:5
@@ -222,12 +222,12 @@ msgstr ""
 #: ../../data/world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../data/world/immovables/standing_stones/standing_stone7/init.lua:5
 msgid "Standing Stone"
-msgstr ""
+msgstr "Menhir"
 
 #. TRANSLATORS: This track is made of footprints in the snow
 #: ../../data/world/immovables/track_winter/init.lua:6
 msgid "Track"
-msgstr ""
+msgstr "Snežna staza"
 
 #: ../../data/world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/birch/init.lua:85
 msgid "Birch"
-msgstr ""
+msgstr "Breza"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
@@ -341,11 +341,11 @@ msgstr ""
 #: ../../data/world/immovables/trees/deadtree5/init.lua:5
 #: ../../data/world/immovables/trees/deadtree6/init.lua:5
 msgid "Dead Tree"
-msgstr "Мртво дрво"
+msgstr "Mrtvo drvo"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:12
 msgid "Fallen Tree"
-msgstr ""
+msgstr "Srušeno drvo"
 
 #: ../../data/world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
@@ -410,7 +410,7 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
-msgstr ""
+msgstr "Javor"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
@@ -501,11 +501,11 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/oak/init.lua:81
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Hrast (Stari)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:82
 msgid "Oak"
-msgstr ""
+msgstr "Hrast"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -724,11 +724,11 @@ msgstr ""
 
 #: ../../data/world/init.lua:11
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Razno"
 
 #: ../../data/world/init.lua:17
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakti"
 
 #: ../../data/world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -736,7 +736,7 @@ msgstr ""
 
 #: ../../data/world/init.lua:23
 msgid "Plants"
-msgstr ""
+msgstr "Biljke"
 
 #: ../../data/world/init.lua:29
 msgid "Standing Stones"
@@ -744,7 +744,7 @@ msgstr "Стене"
 
 #: ../../data/world/init.lua:35
 msgid "Rocks"
-msgstr ""
+msgstr "Stene"
 
 #: ../../data/world/init.lua:41
 msgid "Coniferous Trees"
@@ -752,7 +752,7 @@ msgstr ""
 
 #: ../../data/world/init.lua:47
 msgid "Dead Trees"
-msgstr ""
+msgstr "Mrtvo drveće"
 
 #: ../../data/world/init.lua:53
 msgid "Deciduous Trees"
@@ -760,27 +760,27 @@ msgstr ""
 
 #: ../../data/world/init.lua:59
 msgid "Palm Trees"
-msgstr ""
+msgstr "Palmino drveće"
 
 #: ../../data/world/init.lua:65
 msgid "Wasteland Trees"
-msgstr ""
+msgstr "Pustinjsko drveće"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"
-msgstr "Угаљ"
+msgstr "Ugalj"
 
 #: ../../data/world/resources/init.lua:27
 msgid "Gold"
-msgstr "Злато"
+msgstr "Zlato"
 
 #: ../../data/world/resources/init.lua:41
 msgid "Iron"
-msgstr "Гвожђе"
+msgstr "Gvožđe"
 
 #: ../../data/world/resources/init.lua:55
 msgid "Stones"
-msgstr "Камење"
+msgstr "Kamenje"
 
 #: ../../data/world/resources/init.lua:69
 #: ../../data/world/terrains/init.lua:362
@@ -788,31 +788,31 @@ msgstr "Камење"
 #: ../../data/world/terrains/init.lua:967
 #: ../../data/world/terrains/init.lua:1263
 msgid "Water"
-msgstr "Вода"
+msgstr "Voda"
 
 #: ../../data/world/resources/init.lua:83
 msgid "Fish"
-msgstr "Риба"
+msgstr "Riba"
 
 #: ../../data/world/terrains/init.lua:4
 msgid "Summer"
-msgstr ""
+msgstr "Leto"
 
 #: ../../data/world/terrains/init.lua:9
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustoš"
 
 #: ../../data/world/terrains/init.lua:14
 msgid "Winter"
-msgstr ""
+msgstr "Zima"
 
 #: ../../data/world/terrains/init.lua:19
 msgid "Desert"
-msgstr "Пустиња"
+msgstr "Pustinja"
 
 #: ../../data/world/terrains/init.lua:33
 msgid "Meadow 1"
-msgstr ""
+msgstr "Livada 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -845,184 +845,184 @@ msgstr ""
 
 #: ../../data/world/terrains/init.lua:86
 msgid "Meadow 2"
-msgstr ""
+msgstr "Livada 2"
 
 #: ../../data/world/terrains/init.lua:107
 msgid "Meadow 3"
-msgstr ""
+msgstr "Livada 3"
 
 #: ../../data/world/terrains/init.lua:127
 msgid "Meadow 4"
-msgstr ""
+msgstr "Livada 4"
 
 #: ../../data/world/terrains/init.lua:147
 #: ../../data/world/terrains/init.lua:1002
 msgid "Steppe"
-msgstr ""
+msgstr "Stepa"
 
 #: ../../data/world/terrains/init.lua:163
 msgid "Barren Steppe"
-msgstr ""
+msgstr "Jalova stepa"
 
 #: ../../data/world/terrains/init.lua:179
 #: ../../data/world/terrains/init.lua:1042
 msgid "Mountain Meadow"
-msgstr ""
+msgstr "Planinski proplanak"
 
 #: ../../data/world/terrains/init.lua:195
 #: ../../data/world/terrains/init.lua:519
 #: ../../data/world/terrains/init.lua:800
 #: ../../data/world/terrains/init.lua:1082
 msgid "Mountain 1"
-msgstr ""
+msgstr "Planina 1"
 
 #: ../../data/world/terrains/init.lua:211
 #: ../../data/world/terrains/init.lua:535
 #: ../../data/world/terrains/init.lua:816
 #: ../../data/world/terrains/init.lua:1098
 msgid "Mountain 2"
-msgstr ""
+msgstr "Planina 2"
 
 #: ../../data/world/terrains/init.lua:227
 #: ../../data/world/terrains/init.lua:551
 #: ../../data/world/terrains/init.lua:832
 #: ../../data/world/terrains/init.lua:1114
 msgid "Mountain 3"
-msgstr ""
+msgstr "Planina 3"
 
 #: ../../data/world/terrains/init.lua:243
 #: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:848
 #: ../../data/world/terrains/init.lua:1130
 msgid "Mountain 4"
-msgstr ""
+msgstr "Planina 4"
 
 #: ../../data/world/terrains/init.lua:259
 #: ../../data/world/terrains/init.lua:582
 #: ../../data/world/terrains/init.lua:863
 #: ../../data/world/terrains/init.lua:1145
 msgid "Forested Mountain 1"
-msgstr ""
+msgstr "Šumovita planina 1"
 
 #: ../../data/world/terrains/init.lua:279
 #: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:882
 #: ../../data/world/terrains/init.lua:1164
 msgid "Forested Mountain 2"
-msgstr ""
+msgstr "Šumovita planina 2"
 
 #: ../../data/world/terrains/init.lua:299
 msgid "Swamp"
-msgstr ""
+msgstr "Močvara"
 
 #: ../../data/world/terrains/init.lua:315
 #: ../../data/world/terrains/init.lua:620
 #: ../../data/world/terrains/init.lua:917
 #: ../../data/world/terrains/init.lua:1247
 msgid "Beach"
-msgstr ""
+msgstr "Plaža"
 
 #: ../../data/world/terrains/init.lua:329
 #: ../../data/world/terrains/init.lua:784
 msgid "Snow"
-msgstr ""
+msgstr "Sneg"
 
 #: ../../data/world/terrains/init.lua:345
 msgid "Lava"
-msgstr ""
+msgstr "Lava"
 
 #: ../../data/world/terrains/init.lua:383
 msgid "Ashes 1"
-msgstr ""
+msgstr "Pepeo 1"
 
 #: ../../data/world/terrains/init.lua:403
 msgid "Ashes 2"
-msgstr ""
+msgstr "Pepeo 2"
 
 #: ../../data/world/terrains/init.lua:423
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Tvrdo tlo 1"
 
 #: ../../data/world/terrains/init.lua:443
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Tvrdo tlo 2"
 
 #: ../../data/world/terrains/init.lua:463
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Tvrdo tlo 3"
 
 #: ../../data/world/terrains/init.lua:483
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Tvrdo tlo 4"
 
 #: ../../data/world/terrains/init.lua:503
 msgid "Igneous Rocks"
-msgstr ""
+msgstr "Magmatske stene"
 
 #: ../../data/world/terrains/init.lua:636
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Lava stene 1"
 
 #: ../../data/world/terrains/init.lua:653
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Lava stene 2"
 
 #: ../../data/world/terrains/init.lua:692
 msgid "Tundra 1"
-msgstr ""
+msgstr "Tundra 1"
 
 #: ../../data/world/terrains/init.lua:712
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../data/world/terrains/init.lua:732
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../data/world/terrains/init.lua:752
 msgid "Tundra Taiga"
-msgstr ""
+msgstr "Tundra tajga"
 
 #: ../../data/world/terrains/init.lua:768
 msgid "Taiga"
-msgstr ""
+msgstr "Tajga"
 
 #: ../../data/world/terrains/init.lua:901
 msgid "Ice"
-msgstr ""
+msgstr "Led"
 
 #: ../../data/world/terrains/init.lua:933
 msgid "Ice Floes 1"
-msgstr ""
+msgstr "Santa leda 1"
 
 #: ../../data/world/terrains/init.lua:950
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Santa leda 2"
 
 #: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
-msgstr ""
+msgstr "Suva zemlja"
 
 #: ../../data/world/terrains/init.lua:1022
 msgid "Meadow"
-msgstr ""
+msgstr "Poljana"
 
 #: ../../data/world/terrains/init.lua:1062
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Visokoplaninska livada"
 
 #: ../../data/world/terrains/init.lua:1183
 msgid "Desert 1"
-msgstr ""
+msgstr "Pustinja 1"
 
 #: ../../data/world/terrains/init.lua:1199
 msgid "Desert 2"
-msgstr ""
+msgstr "Pustinja 2"
 
 #: ../../data/world/terrains/init.lua:1215
 msgid "Desert 3"
-msgstr ""
+msgstr "Pustinja 3"
 
 #: ../../data/world/terrains/init.lua:1231
 msgid "Desert 4"
-msgstr ""
+msgstr "Pustinja 4"

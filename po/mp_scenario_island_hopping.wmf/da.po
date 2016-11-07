@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
-"PO-Revision-Date: 2016-07-05 19:53+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-15 07:53+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Regler"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Velkommen til ø-hop."
+msgstr "Velkommen til ø-hop"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""

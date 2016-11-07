@@ -143,10 +143,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
              butw_,
              buth_,
              g_gr->images().get("images/ui_basic/but0.png"),
-             _("Delete"),
-             std::string(),
-             false,
-             false),
+             _("Delete")),
 
      ta_errormessage_(this,
                       right_column_x_,
@@ -252,6 +249,9 @@ bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t row
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
 	const SavegameData& gamedata = games_data_[table_.get_selected()];
 	if (gamedata.errormessage.empty()) {
 		filename_ = gamedata.filename;
@@ -406,7 +406,7 @@ void FullscreenMenuLoadGame::entry_selected() {
 					}
 
 					minimap_icon_.set_size(w, h);
-					minimap_icon_.set_pos(Point(xpos, ypos));
+					minimap_icon_.set_pos(Vector2i(xpos, ypos));
 					minimap_icon_.set_frame(UI_FONT_CLR_FG);
 					minimap_icon_.set_visible(true);
 					minimap_icon_.set_icon(minimap_image_.get());
@@ -619,6 +619,7 @@ void FullscreenMenuLoadGame::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {

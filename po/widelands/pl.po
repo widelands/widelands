@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 11:48+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-20 09:38+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -39,14 +39,14 @@ msgstr[2] "Nowe cele"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:34 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s i %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:36 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s lub %2$s"
@@ -55,8 +55,8 @@ msgstr "%1$s lub %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:35
-#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:38
+#: ../../data/scripting/formatting.lua:43 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -64,7 +64,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s i %2$s"
@@ -585,7 +585,7 @@ msgid "Show Filenames"
 msgstr "Pokazuj nazwy plików"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:104
-#: ../../src/ui_fsmenu/loadgame.cc:330
+#: ../../src/ui_fsmenu/loadgame.cc:333
 #: ../../src/wui/game_main_menu_save_game.cc:70
 msgid "Map Name:"
 msgstr "Nazwa mapy:"
@@ -596,8 +596,8 @@ msgstr "Autorzy:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 #: ../../src/ui_fsmenu/campaign_select.cc:83
-#: ../../src/ui_fsmenu/campaign_select.cc:153
-#: ../../src/ui_fsmenu/campaign_select.cc:375 ../../src/wui/mapdetails.cc:177
+#: ../../src/ui_fsmenu/campaign_select.cc:156
+#: ../../src/ui_fsmenu/campaign_select.cc:379 ../../src/wui/mapdetails.cc:177
 msgid "Description:"
 msgstr "Opis:"
 
@@ -657,7 +657,7 @@ msgid "Create Map"
 msgstr "Stwórz mapę"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:89
-#: ../../src/ui_fsmenu/loadgame.cc:332
+#: ../../src/ui_fsmenu/loadgame.cc:335
 msgid "Players:"
 msgstr "Gracze:"
 
@@ -773,7 +773,7 @@ msgid "Make Directory"
 msgstr "Utwórz katalog"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:75
-#: ../../src/ui_fsmenu/loadgame.cc:286 ../../src/ui_fsmenu/loadgame.cc:418
+#: ../../src/ui_fsmenu/loadgame.cc:289 ../../src/ui_fsmenu/loadgame.cc:421
 msgid "Filename:"
 msgstr "Nazwa pliku:"
 
@@ -987,7 +987,7 @@ msgid "Loading map…"
 msgstr "Wczytywanie mapy..."
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:374
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1304
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1331
 msgid "Loading…"
 msgstr "Wczytywanie..."
 
@@ -1690,7 +1690,7 @@ msgid ""
 msgstr "Widelands nie mogło się połączyć z wybranym adresem.\nAlbo żaden serwer nie jest uruchomiony na domniemanym\nporcie, albo serwer został wyłączony, kiedy próbowano się połączyć."
 
 #: ../../src/network/netclient.cc:177 ../../src/network/nethost.cc:702
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1224
 msgid "Preparing game"
 msgstr "Przygotowywanie gry"
 
@@ -2107,7 +2107,7 @@ msgid "Choose a campaign"
 msgstr "Wybierz kampanię"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:91
-#: ../../src/ui_fsmenu/campaign_select.cc:313
+#: ../../src/ui_fsmenu/campaign_select.cc:317
 #: ../../src/ui_fsmenu/loadgame.cc:178
 msgid "Return to the main menu"
 msgstr "Powrót do menu głównego"
@@ -2150,106 +2150,106 @@ msgstr "Nazwa plemienia"
 msgid "Campaign Name"
 msgstr "Nazwa kampanii"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:150
+#: ../../src/ui_fsmenu/campaign_select.cc:153
 msgid "Campaign Name:"
 msgstr "Nazwa kampanii:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:151
+#: ../../src/ui_fsmenu/campaign_select.cc:154
 msgid "Tribe:"
 msgstr "Plemię:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:152
+#: ../../src/ui_fsmenu/campaign_select.cc:155
 msgid "Difficulty:"
 msgstr "Poziom trudności:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:274
+#: ../../src/ui_fsmenu/campaign_select.cc:278
 msgid "Choose a scenario"
 msgstr "Wybierz scenariusz"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:274
+#: ../../src/ui_fsmenu/campaign_select.cc:278
 msgid "Choose a tutorial"
 msgstr "Wybierz samouczek"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:315
+#: ../../src/ui_fsmenu/campaign_select.cc:319
 msgid "Play this tutorial"
 msgstr "Zagraj w ten samouczek"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:316
+#: ../../src/ui_fsmenu/campaign_select.cc:320
 msgid "The name of this tutorial"
 msgstr "Nazwa samouczka"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:317
+#: ../../src/ui_fsmenu/campaign_select.cc:321
 msgid "What you will learn in this tutorial"
 msgstr "Materiał przerabiany w samouczku"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:319
+#: ../../src/ui_fsmenu/campaign_select.cc:323
 msgid "Play this scenario"
 msgstr "Zagraj w ten scenariusz"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:320
+#: ../../src/ui_fsmenu/campaign_select.cc:324
 msgid "The name of this scenario"
 msgstr "Nazwa scenariusza"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:334
+#: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The order in which the tutorials should be played"
 msgstr "Zalecana kolejność przechodzenia samouczków"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "Tutorial Name"
 msgstr "Nazwa samouczka"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:337
+#: ../../src/ui_fsmenu/campaign_select.cc:341
 msgid "The number of this scenario in the campaign"
 msgstr "Numer scenariusza w kampanii"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:338
+#: ../../src/ui_fsmenu/campaign_select.cc:342
 msgid "Scenario Name"
 msgstr "Nazwa scenariusza"
 
 #. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:342
+#: ../../src/ui_fsmenu/campaign_select.cc:346
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:373
+#: ../../src/ui_fsmenu/campaign_select.cc:377
 msgid "Tutorial:"
 msgstr "Samouczek:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:374 ../../src/wui/mapdetails.cc:136
+#: ../../src/ui_fsmenu/campaign_select.cc:378 ../../src/wui/mapdetails.cc:136
 msgid "Scenario:"
 msgstr "Scenariusz:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:388
+#: ../../src/ui_fsmenu/campaign_select.cc:392
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Błędna ścieżka do pliku w campaigns.conf: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:399
+#: ../../src/ui_fsmenu/campaign_select.cc:403
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "Projektant samouczka"
 msgstr[1] "Projektanci samouczka"
 msgstr[2] "Projektanci samouczka"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:402
+#: ../../src/ui_fsmenu/campaign_select.cc:406
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Projektant scenariusza"
 msgstr[1] "Projektanci scenariusza"
 msgstr[2] "Projektanci scenariusza"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:405 ../../src/wui/mapdetails.cc:161
+#: ../../src/ui_fsmenu/campaign_select.cc:409 ../../src/wui/mapdetails.cc:161
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
 msgstr[1] "Autorzy:"
 msgstr[2] "Autorzy:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:432
+#: ../../src/ui_fsmenu/campaign_select.cc:436
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Wybierz scenariusz z listy i naciśnij \"OK\"."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:434
+#: ../../src/ui_fsmenu/campaign_select.cc:438
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Po prawej znajdziesz opis wybranego obecnie scenariusza."
@@ -2643,43 +2643,43 @@ msgid ""
 "the map’s name followed by the last objective achieved."
 msgstr "Nazwa pliku zapisu gry i następująca po niej nazwa mapy albo nazwa mapy i ostatni osiągnięty cel."
 
-#: ../../src/ui_fsmenu/loadgame.cc:276
+#: ../../src/ui_fsmenu/loadgame.cc:279
 msgid "Save Date:"
 msgstr "Data zapisu:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:290
+#: ../../src/ui_fsmenu/loadgame.cc:293
 msgid "Do you really want to delete this replay?"
 msgstr "Czy na pewno chcesz usunąć tę powtórkę?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:294
+#: ../../src/ui_fsmenu/loadgame.cc:297
 msgid "Do you really want to delete this game?"
 msgstr "Czy na pewno chcesz usunąć tę grę?"
 
-#: ../../src/ui_fsmenu/loadgame.cc:298
+#: ../../src/ui_fsmenu/loadgame.cc:301
 msgid "Confirm deleting file"
 msgstr "Potwierdź usunięcie pliku"
 
-#: ../../src/ui_fsmenu/loadgame.cc:331
+#: ../../src/ui_fsmenu/loadgame.cc:334
 msgid "Gametime:"
 msgstr "Czas gry:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:333
+#: ../../src/ui_fsmenu/loadgame.cc:336
 msgid "Win Condition:"
 msgstr "Warunek zwycięstwa:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:362
+#: ../../src/ui_fsmenu/loadgame.cc:365
 msgid "Widelands Version:"
 msgstr "Wersja Widelands:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:519
+#: ../../src/ui_fsmenu/loadgame.cc:522
 msgid "Today, %1%:%2%"
 msgstr "Dzisiaj, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:532
+#: ../../src/ui_fsmenu/loadgame.cc:535
 msgid "Yesterday, %1%:%2%"
 msgstr "Wczoraj, %1%:%2%"
 
-#: ../../src/ui_fsmenu/loadgame.cc:538
+#: ../../src/ui_fsmenu/loadgame.cc:541
 msgid "%2% %1%, %3%"
 msgstr "%1% %2%, %3%"
 
@@ -2688,33 +2688,33 @@ msgstr "%1% %2%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:559
+#: ../../src/ui_fsmenu/loadgame.cc:562
 msgid "SP"
 msgstr "1G"
 
-#: ../../src/ui_fsmenu/loadgame.cc:568
+#: ../../src/ui_fsmenu/loadgame.cc:571
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
-#: ../../src/ui_fsmenu/loadgame.cc:578
+#: ../../src/ui_fsmenu/loadgame.cc:581
 msgid "MP (%1%)"
 msgstr "WG (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:595
+#: ../../src/ui_fsmenu/loadgame.cc:598
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Nie można wczytać pliku, gdyż jest on w złym formacie. Możliwe, że został on utworzony przez starszą wersję Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:598
+#: ../../src/ui_fsmenu/loadgame.cc:601
 msgid "Error message:"
 msgstr "Komunikat błędu:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:611 ../../src/ui_fsmenu/loadgame.cc:613
+#: ../../src/ui_fsmenu/loadgame.cc:614 ../../src/ui_fsmenu/loadgame.cc:616
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Niekompatybilny: %s"
@@ -2973,11 +2973,11 @@ msgstr "Kampanie"
 msgid "Load Game"
 msgstr "Wczytaj grę"
 
-#: ../../src/wlapplication.cc:996
+#: ../../src/wlapplication.cc:1023
 msgid "Game data error"
 msgstr "Błąd danych gry"
 
-#: ../../src/wlapplication.cc:1005
+#: ../../src/wlapplication.cc:1032
 #, c-format
 msgid ""
 "\n"
@@ -2985,7 +2985,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nProsimy o poinformowanie o błędzie, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windowsie). Używasz build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1038
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3355,7 +3355,7 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Czy na pewno chcesz usunąć plik %s?"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:581
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr "Wiadomości: odebrane"
 
@@ -3385,20 +3385,20 @@ msgstr "Czas"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:121
-#: ../../src/wui/game_message_menu.cc:572
-#: ../../src/wui/game_message_menu.cc:584
+#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:604
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:123
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Archive selected message"
 msgstr "Archiwizuj wybraną wiadomość"
 
 #: ../../src/wui/game_message_menu.cc:131
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Archive"
 msgstr "Pokaż archiwum"
 
@@ -3414,55 +3414,85 @@ msgid "Center main mapview on location"
 msgstr "Wycentruj główną kamerę na lokacji"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:498
-#: ../../src/wui/game_message_menu.cc:509
-#: ../../src/wui/game_message_menu.cc:513
 #: ../../src/wui/game_message_menu.cc:517
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:533
+#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:545
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Klawisz: %2%)"
 
+#: ../../src/wui/game_message_menu.cc:519
+msgctxt "hotkey"
+msgid "Alt + 0"
+msgstr "Alt + 0"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:500
+#: ../../src/wui/game_message_menu.cc:519
 msgid "Show all messages"
 msgstr "Pokazuj wszystkie wiadomości"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:511
+#: ../../src/wui/game_message_menu.cc:530
 msgid "Show geologists' messages only"
 msgstr "Pokazuj tylko wiadomości geologów"
 
+#: ../../src/wui/game_message_menu.cc:531
+msgctxt "hotkey"
+msgid "Alt + 1"
+msgstr "Alt + 1"
+
+#: ../../src/wui/game_message_menu.cc:535
+msgctxt "hotkey"
+msgid "Alt + 2"
+msgstr "Alt + 2"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show economy messages only"
 msgstr "Pokazuj tylko wiadomości o gospodarce"
 
+#: ../../src/wui/game_message_menu.cc:539
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:519
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show seafaring messages only"
 msgstr "Pokazuj tylko wiadomości morskie"
 
+#: ../../src/wui/game_message_menu.cc:543
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:543
 msgid "Show warfare messages only"
 msgstr "Pokazuj tylko wiadmości wojenne"
 
+#: ../../src/wui/game_message_menu.cc:547
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show scenario messages only"
 msgstr "Pokazuj tylko wiadomości scenariusza"
 
-#: ../../src/wui/game_message_menu.cc:569
+#: ../../src/wui/game_message_menu.cc:589
 msgid "Messages: Archive"
 msgstr "Wiadomości: archiwum"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:574
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Restore selected message"
 msgstr "Przywróć wybraną wiadomość"
 
-#: ../../src/wui/game_message_menu.cc:577
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Pokaż wiadomości odebrane"
 

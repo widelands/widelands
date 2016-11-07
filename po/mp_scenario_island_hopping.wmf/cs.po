@@ -5,13 +5,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
+# Milan Fašina <matrix17@seznam.cz>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 11:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-25 15:08+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,12 +35,12 @@ msgstr "15 minut"
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:223
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
@@ -57,21 +58,21 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr "Island Hopping je tradiční turnaj kultury Antlantiďanů. Pravidla hry jsou jednoduchá: Začínáš se základnou na jednom z ostrovů. Jakmile dokončíš hrad na konci prvního ostrova, obdržíš na druhém ostrově další základnu, ve které bude všechno zboží z první základny."
+msgstr "Island Hopping je tradiční turnaj kultury Antlanťanů. Pravidla hry jsou jednoduchá: Začínáš s hlavní budovou na jednom z ostrovů. Jakmile dokončíš hrad na konci prvního ostrova, obdržíš na druhém ostrově další hlavní budovu, ve které budou všechny suroviny z první hlavní budovy."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "Jakmile dokončíš hrad v cílovém místě na druhém ostrově, obdržíš třetí základnu na třetím ostrově. Abys vyhrál, musíš vybudovat hrad uprostřed třetího ostrova a udržet ho 20 minut."
+msgstr "Jakmile dokončíš hrad v cílovém místě na druhém ostrově, obdržíš třetí hlavní budovu na třetím ostrově. Abys vyhrál, musíš vybudovat hrad uprostřed třetího ostrova a udržet ho 20 minut."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr "Kdykoliv dokončíš ostrov, dostaneš bonusové zboží v závislosti na tom, kolik hráčů dokončilo ostrov před tebou. Čím dřív skončíš, tím méně zboží dostaneš. Níže se můžeš podívat na detaily."
+msgstr "Kdykoliv dokončíš ostrov, dostaneš bonusové suroviny v závislosti na tom, kolik hráčů dokončilo ostrov před tebou. Čím dřív skončíš, tím méně surovin dostaneš. Níže se můžeš podívat na detaily."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
 msgid ""
@@ -79,7 +80,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "Příprav se na to, že na prvním ostrově najdeš pouze kamení a dřevo, na druhém pouze louky a suroviny. Ekonomika, kterou vybuduješ ti bude vydělávat pořád ale k těžbě se dostaneš až postoupíš na další ostrov."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."

@@ -125,13 +125,13 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		Point anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
-		                get_w() / 2 :
-		                static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0,
-		             static_cast<int>(align_ & UI::Align::kVCenter) ?
-		                get_h() / 2 :
-		                static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
-
+		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
+		Vector2f anchor(static_cast<int>(align_ & UI::Align::kHCenter) ?
+		                   get_w() / 2 :
+		                   static_cast<int>(align_ & UI::Align::kRight) ? get_w() : 0,
+		                static_cast<int>(align_ & UI::Align::kVCenter) ?
+		                   get_h() / 2 :
+		                   static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
 }
@@ -155,7 +155,7 @@ void Textarea::collapse() {
 	else if (static_cast<int>(align_ & UI::Align::kBottom))
 		y += h;
 
-	set_pos(Point(x, y));
+	set_pos(Vector2i(x, y));
 	set_size(0, 0);
 }
 
@@ -180,7 +180,7 @@ void Textarea::expand() {
 	else if (static_cast<int>(align_ & UI::Align::kBottom))
 		y -= h;
 
-	set_pos(Point(x, y));
+	set_pos(Vector2i(x, y));
 	set_size(w, h);
 }
 

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:31+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -583,7 +583,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera di carbone è esaurita. La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -621,7 +621,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera di cristallo è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera di cristallo è esaurita. La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -1344,7 +1344,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La vena principale di questa miniera d'oro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera d'oro è esaurita. La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1443,7 +1443,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera di ferro è esaurita. La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1727,7 +1727,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera di carbone è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera di carbone è esaurita. La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -1796,7 +1796,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera d'oro è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera d'oro è esaurita. La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -1901,7 +1901,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "La vena principale di questa miniera dimarmo è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può più essere migliorata, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
+msgstr "La vena principale di questa miniera dimarmo è esaurita. La produttività sarà estremamente scarsa. Questa miniera non può più essere migliorata, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -2292,7 +2292,7 @@ msgid "Warehouse"
 msgstr "Magazzino"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:7
+#: ../../data/tribes/immovables/ashes/init.lua:38
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Ceneri"
@@ -2421,25 +2421,25 @@ msgstr "Vigna (minuscola)"
 #: ../../data/tribes/immovables/reed_medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Canna (media)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Canna (matura)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_small/init.lua:7
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr ""
+msgstr "Canna (piccola)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Canna (minuscola)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
@@ -2618,14 +2618,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:20
+#: ../../data/tribes/ships/atlanteans/init.lua:53
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Nave"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:7
+#: ../../data/tribes/wares/armor/init.lua:48
 msgctxt "ware"
 msgid "Armor"
 msgstr "Armatura"
@@ -2718,7 +2718,7 @@ msgstr "Farina di radici nere"
 #: ../../data/tribes/wares/blackwood/init.lua:7
 msgctxt "ware"
 msgid "Blackwood"
-msgstr ""
+msgstr "Legno trattato"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:7
@@ -3078,7 +3078,7 @@ msgstr "Tabarro Dorato"
 #: ../../data/tribes/wares/thatch_reed/init.lua:7
 msgctxt "ware"
 msgid "Thatch Reed"
-msgstr ""
+msgstr "Paglia di canne"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_double/init.lua:7

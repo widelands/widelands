@@ -56,7 +56,13 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 0-9")), _"Remember and go to previously remembered locations") ..
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 1-9")), _"Remember and go to previously remembered locations") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) +")), _"Increase zoom") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) -")), _"Decrease zoom") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 0")), _"Reset zoom") ..
                -- TRANSLATORS: This is an access key combination.
                dl(help_format_hotkey(","), _"Go to the previous location") ..
                -- TRANSLATORS: This is an access key combination.
@@ -73,17 +79,17 @@ return {
          h3(_"In the message window, the following additional shortcuts are available:") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("0"), _"Show all messages") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 0")), _"Show all messages") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("1"), _"Show geologists’ messages only") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 1")), _"Show geologists’ messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("2"), _"Show economy messages only") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 2")), _"Show economy messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("3"), _"Show seafaring messages only") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 3")), _"Show seafaring messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("4"), _"Show warfare messages only") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 4")), _"Show warfare messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("5"), _"Show scenario messages only") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show scenario messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Jump to the location corresponding to the current message") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.

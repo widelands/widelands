@@ -888,6 +888,13 @@ void DefaultAI::late_initialization() {
 	} else {
 		throw wexception("Corrupted AI data");
 	}
+
+	// Sometimes there can be a ship in expedition, but expedition start time is not given
+	// f.e. human player played this player before
+	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
+		// Current gametime is better then 'kNoExpedition'
+		persistent_data->expedition_start_time = gametime;
+	}
 }
 
 /**
@@ -4176,7 +4183,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return needed_type;
 			} else if (bo.total_count() == 0) {
 				return needed_type;
-			} else if (bo.current_stats > 10 + 70 / bo.outputs.size()) {
+			} else if (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) {
 				assert(bo.last_building_built != kNever);
 				if (gametime < bo.last_building_built + 10 * 60 * 1000) {
 					// Previous building built less then 10 minutes ago
@@ -4204,7 +4211,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
 			return BuildingNecessity::kNeeded;
-		} else if (bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
+		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;

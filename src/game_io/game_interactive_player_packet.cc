@@ -30,7 +30,22 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+namespace {
+
+constexpr uint16_t kCurrentPacketVersion = 4;
+
+void load_landmarks_pre_zoom(FileRead* fr, InteractiveBase* ibase) {
+	size_t no_of_landmarks = fr->unsigned_8();
+	for (size_t i = 0; i < no_of_landmarks; ++i) {
+		uint8_t set = fr->unsigned_8();
+		QuickNavigation::View view = {Vector2f(fr->signed_32(), fr->signed_32()), 1.f};
+		if (set > 0) {
+			ibase->set_landmark(i, view);
+		}
+	}
+}
+
+}  // namespace
 
 void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -55,12 +70,19 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
-			int32_t const x = fr.unsigned_16();
-			int32_t const y = fr.unsigned_16();
+			float viewpoint_x, viewpoint_y;
+			if (packet_version <= 3) {
+				viewpoint_x = fr.unsigned_16();
+				viewpoint_y = fr.unsigned_16();
+			} else {
+				viewpoint_x = fr.float_32();
+				viewpoint_y = fr.float_32();
+			}
+
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->set_viewpoint(Point(x, y), true);
+				ibase->set_viewpoint(Vector2f(viewpoint_x, viewpoint_y), true);
 
 				uint32_t const loaded_df =
 				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
@@ -73,14 +95,19 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			}
 
 			// Map landmarks
-			if (packet_version >= 3) {
-				if (InteractiveBase* const ibase = game.get_ibase()) {
+			if (InteractiveBase* const ibase = game.get_ibase()) {
+				if (packet_version == 3) {
+					load_landmarks_pre_zoom(&fr, ibase);
+				} else if (packet_version >= 4) {
 					size_t no_of_landmarks = fr.unsigned_8();
 					for (size_t i = 0; i < no_of_landmarks; ++i) {
 						uint8_t set = fr.unsigned_8();
-						Point landmark(fr.signed_32(), fr.signed_32());
+						const float x = fr.float_32();
+						const float y = fr.float_32();
+						const float zoom = fr.float_32();
+						QuickNavigation::View view = {Vector2f(x, y), zoom};
 						if (set > 0) {
-							ibase->set_landmark(i, landmark);
+							ibase->set_landmark(i, view);
 						}
 					}
 				}
@@ -108,13 +135,15 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	// Player number
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
-	// Map Position
+// Map Position
+#ifndef NDEBUG
 	if (ibase) {
 		assert(0 <= ibase->get_viewpoint().x);
 		assert(0 <= ibase->get_viewpoint().y);
 	}
-	fw.unsigned_16(ibase ? ibase->get_viewpoint().x : 0);
-	fw.unsigned_16(ibase ? ibase->get_viewpoint().y : 0);
+#endif
+	fw.float_32(ibase ? ibase->get_viewpoint().x : 0.f);
+	fw.float_32(ibase ? ibase->get_viewpoint().y : 0.f);
 
 	// Display flags
 	fw.unsigned_32(ibase ? ibase->get_display_flags() : 0);
@@ -124,8 +153,9 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	fw.unsigned_8(landmarks.size());
 	for (const QuickNavigation::Landmark& landmark : landmarks) {
 		fw.unsigned_8(landmark.set ? 1 : 0);
-		fw.signed_32(landmark.point.x);
-		fw.signed_32(landmark.point.y);
+		fw.float_32(landmark.view.viewpoint.x);
+		fw.float_32(landmark.view.viewpoint.y);
+		fw.float_32(landmark.view.zoom);
 	}
 
 	fw.write(fs, "binary/interactive_player");

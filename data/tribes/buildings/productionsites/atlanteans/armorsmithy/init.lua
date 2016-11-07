@@ -26,7 +26,7 @@ dirname = path.dirname(__file__)
 --
 --    **name**: A string containing the internal name of this building.
 --
---    **descname**: The translatable display name. use ``pgettext`` with the ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` with the ``msgctxt`` above to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this building.
 --
@@ -132,10 +132,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
          descname = _"forging a steel shield",
          actions = {
+            -- time total: 90
             "return=skipped unless economy needs shield_steel",
-            "sleep=32000",
+            "sleep=45000",  -- +13 enlarge
             "consume=iron:2 coal:2",
-            "animate=working 35000",
+            "animate=working 45000",  -- +10 enlarge
             "produce=shield_steel"
          }
       },
@@ -143,10 +144,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
          descname = _"forging an advanced shield",
          actions = {
+            -- time total: 110
             "return=skipped unless economy needs shield_advanced",
-            "sleep=32000",
             "consume=iron:2 coal:2 gold",
-            "animate=working 45000",
+            "sleep=50000",  -- +18 enlarge
+            "animate=working 60000",  -- +15 enlarge
             "produce=shield_advanced"
          }
       },

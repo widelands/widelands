@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2016-03-02 08:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -43,11 +43,11 @@ msgstr "Cervo"
 msgid "Duck"
 msgstr "Pato"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "Alce"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Raposa"
 
@@ -67,11 +67,11 @@ msgstr "Rena"
 msgid "Sheep"
 msgstr "Ovelha"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Especulador"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Javali selvagem"
 
@@ -79,7 +79,7 @@ msgstr "Javali selvagem"
 msgid "Wisent"
 msgstr "Bisonte"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Lobo"
 
