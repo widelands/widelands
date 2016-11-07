@@ -329,8 +329,8 @@ private:
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
 	
-	//used for AI training (bonus for attacking)
-	//uint32_t attack_count_; NOCOM
+	//id of iron_ore to identify iron mines in mines_per_type map
+	int32_t iron_ore_id = -1;
 
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
