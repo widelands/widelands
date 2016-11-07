@@ -788,13 +788,17 @@ HasWares
    HasWares is an interface that all :class:`PlayerImmovable` objects
    that can contain wares implement. This is at the time of this writing
    :class:`~wl.map.Flag`, :class:`~wl.map.Warehouse` and
-   :class:`~wl.map.ProductionSite`.
+   :class:`~wl.map.ProductionSite`. Note that for production sites and
+   training sites the methods are called `*_inputs` instead of `*_wares`
+   and might also return/accept workers which are consumed.
 */
 
 /* RST
    .. method:: get_wares(which)
 
       Gets the number of wares that currently reside here.
+      This method is called `get_inputs` for production sites and
+      additionally lists workers which are consumed by the building.
 
       :arg which:  can be either of
 
@@ -822,6 +826,8 @@ HasWares
       a ware name and an amount to set it too. Or it takes a table of
       (ware name, amount) pairs. Wares are created and added to an economy out
       of thin air.
+      This method is called `set_inputs` for production sites and additionally
+      can be used to add workers which are consumed by the building.
 
       :arg which: name of ware or (ware_name, amount) table
       :type which: :class:`string` or :class:`table`
@@ -837,6 +843,8 @@ HasWares
       :class:`~wl.map.ProductionSite` this is the information what wares
       and how much can be stored as inputs. For unconstrained storage (like
       :class:`~wl.map.Warehouse`) this is :const:`nil`.
+      This method is called `valid_inputs` for production sites and
+      additionally lists workers which are consumed by the building.
 
       You can use this to quickly fill a building:
 
