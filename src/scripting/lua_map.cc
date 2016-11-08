@@ -785,20 +785,15 @@ HasWares
 
 .. class:: HasWares
 
-   HasWares is an interface that all :class:`PlayerImmovable` objects
+   HasWares is an interface that most :class:`PlayerImmovable` objects
    that can contain wares implement. This is at the time of this writing
-   :class:`~wl.map.Flag`, :class:`~wl.map.Warehouse` and
-   :class:`~wl.map.ProductionSite`. Note that for production sites and
-   training sites the methods are called `*_inputs` instead of `*_wares`
-   and might also return/accept workers which are consumed.
+   :class:`~wl.map.Flag` and :class:`~wl.map.Warehouse`.
 */
 
 /* RST
    .. method:: get_wares(which)
 
       Gets the number of wares that currently reside here.
-      This method is called `get_inputs` for production sites and
-      additionally lists workers which are consumed by the building.
 
       :arg which:  can be either of
 
@@ -823,11 +818,9 @@ HasWares
    .. method:: set_wares(which[, amount])
 
       Sets the wares available in this location. Either takes two arguments,
-      a ware name and an amount to set it too. Or it takes a table of
+      a ware name and an amount to set it to. Or it takes a table of
       (ware name, amount) pairs. Wares are created and added to an economy out
       of thin air.
-      This method is called `set_inputs` for production sites and additionally
-      can be used to add workers which are consumed by the building.
 
       :arg which: name of ware or (ware_name, amount) table
       :type which: :class:`string` or :class:`table`
@@ -843,8 +836,6 @@ HasWares
       :class:`~wl.map.ProductionSite` this is the information what wares
       and how much can be stored as inputs. For unconstrained storage (like
       :class:`~wl.map.Warehouse`) this is :const:`nil`.
-      This method is called `valid_inputs` for production sites and
-      additionally lists workers which are consumed by the building.
 
       You can use this to quickly fill a building:
 
@@ -854,14 +845,85 @@ HasWares
 */
 
 /* RST
+HasInputs
+--------
+
+.. class:: HasInputs
+
+   HasInputs is an interface that some :class:`PlayerImmovable` objects
+   implement. At the time of this writing these are
+   :class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
+   This interface is similar to :class:`HasWares` but additionally allows
+   to set workers as inputs. These workers are consumed by the production
+   or trainings programm.
+*/
+
+/* RST
+   .. method:: get_inputs(which)
+
+      Gets the number of wares and workers that currently reside here
+      for consumption.
+
+      :arg which:  can be either of
+
+      * the string :const:`all`.
+           In this case the function will return a
+           :class:`table` of (ware/worker name,amount) pairs that gives
+           information about all ware information available for this object.
+      * a ware/worker name.
+         In this case a single integer is returned. No check is made
+         if this ware makes sense for this location, you can for example ask a
+         :const:`lumberjacks_hut` for the number of :const:`raw_stone` he has
+         and he will return 0.
+      * an :class:`array` of ware names.
+         In this case a :class:`table` of
+         (ware/worker name,amount) pairs is returned where only the requested
+         wares/workers are listed. All other entries are :const:`nil`.
+
+      :returns: :class:`integer` or :class:`table`
+*/
+
+/* RST
+   .. method:: set_inputs(which[, amount])
+
+      Sets the wares/workers available in this location which will
+      be consumed by the production/training programm. Either takes two arguments,
+      a ware/worker name and an amount to set it to. Or it takes a table of
+      (ware/worker name, amount) pairs. Wares are created and added to an
+      economy out of thin air.
+
+      :arg which: name of ware/worker or (ware/worker name, amount) table
+      :type which: :class:`string` or :class:`table`
+      :arg amount: this many units will be available after the call
+      :type amount: :class:`integer`
+*/
+
+/* RST
+   .. attribute:: valid_inputs
+
+      (RO) A :class:`table` of (ware/worker name, count) which describes how
+      many wares/workers can be stored here for consumption. For example for a
+      :class:`~wl.map.ProductionSite` this is the information what wares/workers
+      and can be stored in which amount as inputs.
+
+      You can use this to quickly fill a building:
+
+      .. code-block:: lua
+
+         if b.valid_inputs then b:set_inputs(b.valid_inputs) end
+*/
+
+/* RST
 HasWorkers
 ----------
 
 .. class:: HasWorkers
 
-   Analogon to :class:`HasWares`, but for Workers. Supported at the time of
-   this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse` and
-   :class:`~wl.map.ProductionSite`.
+   Analogon to :class:`HasWares`, but for Workers. Supported at the time
+   of this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse`
+   and :class:`~wl.map.ProductionSite`. In the case of ProductionSites
+   these methods allow access to the workers which do the work instead of
+   workers which are consumed as accessed by the methods of :class:`HasInputs`.
 */
 
 /* RST
@@ -2218,7 +2280,7 @@ TrainingSiteDescription
 	A static description of a tribe's trainingsite, so it can be used in help files
 	without having to access an actual building on the map.
 	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-	See also class BuildingDescription and class MapObjectDescription for more properties.
+	See also class ProductionSiteDescription and class MapObjectDescription for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -4173,7 +4235,7 @@ ProductionSite
 
 .. class:: ProductionSite
 
-   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
+   Child of: :class:`Building`, :class:`HasInputs`, :class:`HasWorkers`
 
    Every building that produces anything.
 */
@@ -4404,7 +4466,7 @@ TrainingSite
 
 .. class:: TrainingSite
 
-   Child of: :class:`Building`, :class:`HasSoldiers`
+   Child of: :class:`ProductionSite`, :class:`HasSoldiers`
 
    Miltary Buildings
 */
