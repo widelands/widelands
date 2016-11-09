@@ -48,7 +48,7 @@ using Widelands::Building;
 namespace {
 
 constexpr uint32_t kMaxColumns = 6;
-constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
+constexpr uint32_t kAnimateSpeed = 300;  ///< in frames per second
 constexpr uint32_t kIconBorder = 2;
 
 }  // namespace
@@ -57,6 +57,7 @@ constexpr uint32_t kIconBorder = 2;
  * Iconic representation of workers in a queue.
  * Adapted copy of \ref SoldierPanel
  */
+// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to avoid code duplication.
 struct WorkerPanel : UI::Panel {
 	using WorkerFn = boost::function<void(const Worker*)>;
 
@@ -92,7 +93,7 @@ private:
 		 * Experience when last drawing
 		 */
 		uint32_t cache_experience;
-		// The experience is currently not shown on top of the icon,
+		// TODO(Notabilis): The experience is currently not shown on top of the icon,
 		// this remains as further work.
 	};
 
@@ -216,8 +217,9 @@ void WorkerPanel::think() {
 		icon.worker = workerlist.back();
 		workerlist.pop_back();
 		icon.row = 0;
-		while (row_occupancy[icon.row] >= kMaxColumns)
+		while (row_occupancy[icon.row] >= kMaxColumns) {
 			icon.row++;
+		}
 		icon.col = row_occupancy[icon.row]++;
 		icon.pos = calc_pos(icon.row, icon.col);
 
@@ -229,8 +231,9 @@ void WorkerPanel::think() {
 		for (std::vector<Icon>::iterator icon_iter = icons_.begin(); icon_iter != icons_.end();
 		     ++icon_iter) {
 
-			if (icon_iter->row <= icon.row)
+			if (icon_iter->row <= icon.row) {
 				insertpos = icon_iter + 1;
+			}
 
 			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + icon_width_);
 		}
@@ -254,8 +257,9 @@ void WorkerPanel::think() {
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
 
-		if (dp.x != 0 || dp.y != 0)
+		if (dp.x != 0 || dp.y != 0) {
 			changes = true;
+		}
 
 		icon.pos += dp;
 
@@ -280,12 +284,14 @@ void WorkerPanel::draw(RenderTarget& dst) {
 	uint32_t capacity = workers_.capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
 
-	if (fullrows)
+	if (fullrows) {
 		dst.fill_rect(Rectf(0, 0, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
-	if (capacity % kMaxColumns)
+	}
+	if (capacity % kMaxColumns) {
 		dst.fill_rect(
 		   Rectf(0, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
 		   RGBAColor(0, 0, 0, 0));
+	}
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
@@ -427,8 +433,9 @@ void WorkerList::eject(const Worker* worker) {
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < workers_queue_.workers().size();
 
-	if (can_act && over_min)
+	if (can_act && over_min) {
 		igbase_.game().send_player_drop_worker(building_, worker->serial());
+	}
 }
 
 void add_worker_panel(UI::TabPanel* parent,

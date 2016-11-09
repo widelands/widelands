@@ -172,7 +172,7 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 /**
  * Write this player command to a file. Call this from base classes
  */
-constexpr uint16_t kCurrentPacketVersionPlayerCommand = 2;
+constexpr uint16_t kCurrentPacketVersionPlayerCommand = 3;
 
 void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
@@ -187,7 +187,7 @@ void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionPlayerCommand) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
 			if (!egbase.get_player(sender_))
@@ -1448,8 +1448,11 @@ CmdDropWorker::CmdDropWorker(StreamRead& des) : PlayerCommand(0, des.unsigned_8(
 void CmdDropWorker::execute(Game& game) {
 	if (upcast(ProductionSite, building, game.objects().get_object(serial))) {
 		if (&building->owner() == game.get_player(sender())) {
-			if (upcast(Worker, w, game.objects().get_object(worker)))
+			// NOCOM(#codereview): I'm not a fan of optional braces - they can cause bugs.
+			// So, I've added some.
+			if (upcast(Worker, w, game.objects().get_object(worker))) {
 				building->workersqueue(w->descr().worker_index()).drop(*w);
+			}
 		}
 	}
 }

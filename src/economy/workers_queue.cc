@@ -42,8 +42,9 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
      workers_(),
      request_(nullptr) {
 	// Can happen when loading a game
-	if (worker_type_ != INVALID_INDEX)
+	if (worker_type_ != INVALID_INDEX) {
 		update_request();
+	}
 
 	// TODO(Notabilis): When set_filled() is called here, a later script call to set the worker of
 	// the
@@ -76,7 +77,7 @@ void WorkersQueue::drop(Worker& worker) {
 }
 
 void WorkersQueue::remove_workers(Quantity amount) {
-	// TODO(Notabilis): Check if there are any resources lost when removing workers
+	// NOCOM(Notabilis): Check if there are any resources lost when removing workers
 	// Especially if there are any worker-memory-objects left or too much is removed
 	// I am not sure about how it should be done, so please check it
 
@@ -104,8 +105,9 @@ Quantity WorkersQueue::get_filled() const {
 
 void WorkersQueue::set_filled(Quantity amount) {
 
-	if (amount > max_capacity())
+	if (amount > max_capacity()) {
 		amount = max_capacity_;
+	}
 	const size_t currentAmount = get_filled();
 	if (amount == currentAmount)
 		return;
@@ -116,7 +118,6 @@ void WorkersQueue::set_filled(Quantity amount) {
 		const TribeDescr& tribe = owner().tribe();
 		const WorkerDescr* worker_descr = tribe.get_worker_descr(worker_type_);
 		EditorGameBase& egbase = owner().egbase();
-		// Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
 		Worker& w =
 		   worker_descr->create(egbase, owner(), nullptr, owner_.get_positions(egbase).front());
 		if (incorporate_worker(egbase, w) == -1) {
@@ -252,6 +253,7 @@ void WorkersQueue::update_request() {
 			// This happened after I kicked the Chief Miner from its mine.
 			// The Master Miners in the headquarters however show no intentions of entering the
 			// building
+			// NOCOM(#codereview): We need to find a way to fix this - I also have a related NOCOM in productionsite.cc
 		}
 
 		request_->set_count(capacity_ - workers_.size());

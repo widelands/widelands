@@ -56,7 +56,7 @@ public:
 	 */
 	std::vector<Worker*> workers() const {
 		return workers_;
-	};
+	}
 
 	/**
 	 * \return the maximum number of workers that this building can be
@@ -64,7 +64,7 @@ public:
 	 */
 	Quantity max_capacity() const {
 		return max_capacity_;
-	};
+	}
 
 	/**
 	 * Is in [0, max_capacity()].
@@ -73,7 +73,7 @@ public:
 	 */
 	Quantity capacity() const {
 		return capacity_;
-	};
+	}
 
 	/**
 	 * Sets the capacity for workers of this building.
@@ -113,7 +113,7 @@ public:
 
 	/**
 	 * Adds new workers to the queue.
-	 * The current capacity is not modified, the maximal capacity is respected.
+	 * The current capacity is not modified, the maximum capacity is respected.
 	 * If the given amount is smaller than the current one, the workers will
 	 * be removed silently.
 	 * @param amount The number of workers which should be inside.
@@ -121,7 +121,7 @@ public:
 	void set_filled(Quantity amount);
 
 	/**
-	 * Add a new worker into this site.
+	 * Add a new worker to this site.
 	 * \return -1 if there is no space for him, 0 on success.
 	 */
 	int incorporate_worker(EditorGameBase&, Worker&);

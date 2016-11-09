@@ -201,6 +201,7 @@ void ProductionProgram::Action::building_work_failed(Game&, ProductionSite&, Wor
 void ProductionProgram::parse_ware_type_group(char*& parameters,
                                               WareTypeGroup& group,
                                               const Tribes& tribes,
+// NOCOM(#codereview): rename this to input_wares for consistency
                                               const BillOfMaterials& inputs,
                                               const BillOfMaterials& input_workers) {
 	std::set<std::pair<DescriptionIndex, WareWorker>>::iterator last_insert_pos = group.first.end();
@@ -218,6 +219,9 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		// Try as ware
 		DescriptionIndex ware_index = tribes.ware_index(ware);
 		if (tribes.ware_exists(ware_index)) {
+			// NOCOM(#codereview): While we're touching this code, use a range-based for loop
+			// We were still using C++98 when this code was written, but we don't need an explicit iterator here now.
+			// for (const WareAmount& ware_amount : inputs) or for (const auto& ware_amount : inputs)
 			for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end();
 			     ++input_it) {
 				if (input_it == inputs.end()) {
@@ -234,6 +238,7 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			if (tribes.worker_exists(ware_index)) {
 				// It is a worker
 				type = wwWORKER;
+				// NOCOM(#codereview): Use a range-based for loop
 				for (BillOfMaterials::const_iterator input_it = input_workers.begin();
 				     input_it != input_workers.end(); ++input_it) {
 					if (input_it == input_workers.end()) {
@@ -357,6 +362,7 @@ ProductionProgram::ActReturn::SiteHas::SiteHas(char*& parameters,
                                                const ProductionSiteDescr& descr,
                                                const Tribes& tribes) {
 	try {
+		// NOCOM(#codereview): Rename inputs() to input_wares() for consistency
 		parse_ware_type_group(parameters, group, tribes, descr.inputs(), descr.input_workers());
 	} catch (const WException& e) {
 		throw GameDataError("has ware_type1[,ware_type2[,...]][:N]: %s", e.what());
@@ -365,6 +371,7 @@ ProductionProgram::ActReturn::SiteHas::SiteHas(char*& parameters,
 bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) const {
 	uint8_t count = group.second;
 	for (WaresQueue* ip_queue : ps.warequeues()) {
+		// NOCOM(#codereview): Use range-based for loop
 		for (auto it = group.first.begin(); it != group.first.end(); it++) {
 			if (it->first == ip_queue->get_ware() && it->second == wwWARE) {
 				uint8_t const filled = ip_queue->get_filled();
@@ -829,6 +836,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		//  any thing from the currently considered input queue.
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
 			found = false;
+			// NOCOM(#codereview): Why not call it ware_it
 			for (auto it2 = it->first.begin(); it2 != it->first.end(); it2++) {
 				if (it2->first == ware_type && it2->second == wwWARE) {
 					found = true;
@@ -863,6 +871,10 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
 			found = false;
+			// NOCOM(#codereview): Why not call it worker_it
+			// We also have the same loop twice here, for wares and workers. Pull out a function?
+			// Might be easier if WaresQueue and WorkersQueue had a common superclass, or if we change the
+			// user interface so that workers wueues are more similar to wares queues.
 			for (auto it2 = it->first.begin(); it2 != it->first.end(); it2++) {
 				if (it2->first == worker_type && it2->second == wwWORKER) {
 					found = true;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
  * Widget to control the capacity of \ref ProductionBuilding
  * Adapted copy of \ref SoldierCapacityControl
  */
+// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to avoid code duplication.
 struct WorkerCapacityControl : UI::Box {
 	WorkerCapacityControl(UI::Panel* parent,
 	                      InteractiveGameBase& igb,
@@ -102,6 +103,8 @@ WorkerCapacityControl::WorkerCapacityControl(UI::Panel* parent,
 
 void WorkerCapacityControl::think() {
 	uint32_t const capacity = workers_.capacity();
+	// NOCOM(#codereview): We should use boost::format or boost::lexical_cast here.
+	// While we're at it, fix the code in SoldierCapacityControl as well.
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);

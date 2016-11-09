@@ -804,7 +804,7 @@ HasWares
       * a ware name.
          In this case a single integer is returned. No check is made
          if this ware makes sense for this location, you can for example ask a
-         :const:`lumberjacks_hut` for the number of :const:`raw_stone` he has
+         :const:`lumberjacks_hut` for the number of :const:`granite` he has
          and he will return 0.
       * an :class:`array` of ware names.
          In this case a :class:`table` of
@@ -870,15 +870,15 @@ HasInputs
            In this case the function will return a
            :class:`table` of (ware/worker name,amount) pairs that gives
            information about all ware information available for this object.
-      * a ware/worker name.
-         In this case a single integer is returned. No check is made
-         if this ware makes sense for this location, you can for example ask a
-         :const:`lumberjacks_hut` for the number of :const:`raw_stone` he has
-         and he will return 0.
-      * an :class:`array` of ware names.
-         In this case a :class:`table` of
-         (ware/worker name,amount) pairs is returned where only the requested
-         wares/workers are listed. All other entries are :const:`nil`.
+      * a ware or worker name.
+           In this case a single integer is returned. No check is made
+           if this ware/worker makes sense for this location, you can for example ask a
+           :const:`lumberjacks_hut` for the number of :const:`granite` he has
+           and he will return 0.
+      * an :class:`array` of ware and worker names.
+           In this case a :class:`table` of
+           (ware/worker name,amount) pairs is returned where only the requested
+           wares/workers are listed. All other entries are :const:`nil`.
 
       :returns: :class:`integer` or :class:`table`
 */
@@ -921,7 +921,7 @@ HasWorkers
 
    Analogon to :class:`HasWares`, but for Workers. Supported at the time
    of this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse`
-   and :class:`~wl.map.ProductionSite`. In the case of ProductionSites
+   and :class:`~wl.map.ProductionSite`. In the case of ProductionSites,
    these methods allow access to the workers which do the work instead of
    workers which are consumed as accessed by the methods of :class:`HasInputs`.
 */
@@ -2280,7 +2280,7 @@ TrainingSiteDescription
 	A static description of a tribe's trainingsite, so it can be used in help files
 	without having to access an actual building on the map.
 	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-	See also class ProductionSiteDescription and class MapObjectDescription for more properties.
+	See also :class:`ProductionSiteDescription` and :class:`MapObjectDescription` for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
