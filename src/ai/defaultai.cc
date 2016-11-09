@@ -5000,8 +5000,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 				if (tmp_fcoords.field->nodecaps() & MOVECAPS_SWIM) {
 					if (i == 7) {
 						possible_directions.push_back(dir);
-						break;  // not needed but.....
 					}
+				} else {
+					break;
 				}
 			}
 		}
