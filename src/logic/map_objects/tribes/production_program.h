@@ -100,7 +100,7 @@ struct ProductionProgram {
 	static void parse_ware_type_group(char*& parameters,
 	                                  WareTypeGroup& group,
 	                                  const Tribes& tribes,
-	                                  const BillOfMaterials& inputs,
+	                                  const BillOfMaterials& input_wares,
 	                                  const BillOfMaterials& input_workers);
 
 	/// Returns from the program.

@@ -1448,8 +1448,6 @@ CmdDropWorker::CmdDropWorker(StreamRead& des) : PlayerCommand(0, des.unsigned_8(
 void CmdDropWorker::execute(Game& game) {
 	if (upcast(ProductionSite, building, game.objects().get_object(serial))) {
 		if (&building->owner() == game.get_player(sender())) {
-			// NOCOM(#codereview): I'm not a fan of optional braces - they can cause bugs.
-			// So, I've added some.
 			if (upcast(Worker, w, game.objects().get_object(worker))) {
 				building->workersqueue(w->descr().worker_index()).drop(*w);
 			}

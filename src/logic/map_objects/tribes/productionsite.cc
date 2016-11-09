@@ -118,12 +118,12 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				}
 				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const auto& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					inputs_.push_back(WareAmount(idx, amount));
+					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
 					idx = egbase.tribes().worker_index(ware_name);
 					if (egbase.tribes().worker_exists(idx)) {
@@ -337,7 +337,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 }
 
 WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue* ip_queue : input_queues_) {
+	for (WaresQueue* ip_queue : input_ware_queues_) {
 		if (ip_queue->get_ware() == wi) {
 			return *ip_queue;
 		}
@@ -430,10 +430,10 @@ void ProductionSite::calc_statistics() {
 void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	const BillOfMaterials& inputs = descr().inputs();
-	input_queues_.resize(inputs.size());
-	for (WareRange i(inputs); i; ++i)
-		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	const BillOfMaterials& input_wares = descr().input_wares();
+	input_ware_queues_.resize(input_wares.size());
+	for (WareRange i(input_wares); i; ++i)
+		input_ware_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
 
 	const BillOfMaterials& input_workers = descr().input_workers();
 	input_worker_queues_.resize(input_workers.size());
@@ -463,7 +463,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
  */
 void ProductionSite::set_economy(Economy* const e) {
 	if (Economy* const old = get_economy()) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (WaresQueue* ip_queue : input_ware_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 		for (WorkersQueue* ip_queue : input_worker_queues_) {
@@ -477,7 +477,7 @@ void ProductionSite::set_economy(Economy* const e) {
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (WaresQueue* ip_queue : input_ware_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 		for (WorkersQueue* ip_queue : input_worker_queues_) {
@@ -505,11 +505,11 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < input_queues_.size(); ++i) {
-		input_queues_[i]->cleanup();
-		delete input_queues_[i];
+	for (uint32_t i = 0; i < input_ware_queues_.size(); ++i) {
+		input_ware_queues_[i]->cleanup();
+		delete input_ware_queues_[i];
 	}
-	input_queues_.clear();
+	input_ware_queues_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -837,7 +837,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* queue : input_queues_) {
+	for (WaresQueue* queue : input_ware_queues_) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());

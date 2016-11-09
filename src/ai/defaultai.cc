@@ -575,7 +575,7 @@ void DefaultAI::late_initialization() {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
-			for (const auto& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -686,7 +686,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const auto& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes

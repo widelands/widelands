@@ -95,6 +95,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 }
 
 void SoldierCapacityControl::think() {
+	// NOCOM(#codereview): We should use boost::format or boost::lexical_cast here.
 	SoldierControl* soldiers = dynamic_cast<SoldierControl*>(&building_);
 	uint32_t const capacity = soldiers->soldier_capacity();
 	char buffer[sizeof("4294967295")];

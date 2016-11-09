@@ -2068,7 +2068,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const auto& input_ware : get()->inputs()) {
+	for (const auto& input_ware : get()->input_wares()) {
 		lua_pushint32(L, index++);
 		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
@@ -4264,7 +4264,7 @@ int LuaProductionSite::get_valid_inputs(lua_State* L) {
 	ProductionSite* ps = get(L, egbase);
 
 	lua_newtable(L);
-	for (const auto& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().input_wares()) {
 		const WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_ware.second);
@@ -4297,7 +4297,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	InputMap setpoints = parse_set_input_arguments(L, tribe);
 
 	InputSet valid_inputs;
-	for (const auto& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().input_wares()) {
 		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
 	}
 	for (const auto& input_worker : ps->descr().input_workers()) {
@@ -4344,7 +4344,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	InputSet input_set = parse_get_input_arguments(L, tribe, &return_number);
 
 	InputSet valid_inputs;
-	for (const auto& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().input_wares()) {
 		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
 	}
 	for (const auto& input_worker : ps->descr().input_workers()) {

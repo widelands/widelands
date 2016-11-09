@@ -674,7 +674,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.program_time_ = fr.signed_32();
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.input_queues_.size());
+			assert(!productionsite.input_ware_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
@@ -682,7 +682,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!game.tribes().ware_exists(wq->get_ware())) {
 					delete wq;
 				} else {
-					productionsite.input_queues_.push_back(wq);
+					productionsite.input_ware_queues_.push_back(wq);
 				}
 			}
 
@@ -1140,10 +1140,10 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.unsigned_8(productionsite.program_timer_);
 	fw.signed_32(productionsite.program_time_);
 
-	const uint16_t input_queues_size = productionsite.input_queues_.size();
+	const uint16_t input_queues_size = productionsite.input_ware_queues_.size();
 	fw.unsigned_16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i) {
-		productionsite.input_queues_[i]->write(fw, game, mos);
+		productionsite.input_ware_queues_[i]->write(fw, game, mos);
 	}
 
 	const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
