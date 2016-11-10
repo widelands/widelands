@@ -31,7 +31,7 @@
   <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <releases>
-    <release date="2016-10-25" version="Build 19-rc1"/>
+    <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
     <release date="2011-04-15" version="Build 16"/>
