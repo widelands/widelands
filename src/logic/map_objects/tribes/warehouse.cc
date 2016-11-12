@@ -191,8 +191,10 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	if (req.get_type() == wwWORKER)
-		return warehouse_->count_workers(game, req.get_index(), req.get_requirements());
+	if (req.get_type() == wwWORKER) {
+		return warehouse_->count_workers(game, req.get_index(),
+										req.get_requirements(), req.get_exact_match());
+	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
@@ -735,7 +737,8 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * requirements.
  */
 Quantity
-Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware, const Requirements& req) {
+Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
+						const Requirements& req, bool exact) {
 	Quantity sum = 0;
 
 	do {
@@ -751,8 +754,11 @@ Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware, const Re
 				}
 			}
 		}
-
-		ware = owner().tribe().get_worker_descr(ware)->becomes();
+		if (!exact) {
+			ware = owner().tribe().get_worker_descr(ware)->becomes();
+		} else {
+			ware = INVALID_INDEX;
+		}
 	} while (owner().tribe().has_ware(ware));
 
 	return sum;
@@ -1173,7 +1179,7 @@ void Warehouse::aggressor(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (!count_workers(game, soldier_index, noreq))
+	if (!count_workers(game, soldier_index, noreq, false))
 		return;
 
 	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
@@ -1185,7 +1191,7 @@ bool Warehouse::attack(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (count_workers(game, soldier_index, noreq)) {
+	if (count_workers(game, soldier_index, noreq, false)) {
 		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");

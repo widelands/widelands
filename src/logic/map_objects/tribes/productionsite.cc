@@ -346,22 +346,13 @@ WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
 }
 
 WorkersQueue& ProductionSite::workersqueue(DescriptionIndex const wi) {
-	// Check for perfect match first
+	// Check for perfect match
 	for (WorkersQueue* ip_queue : input_worker_queues_) {
 		if (ip_queue->get_worker() == wi) {
 			return *ip_queue;
 		}
 	}
-	// No perfect match, check for similar jobs
-	for (WorkersQueue* ip_queue : input_worker_queues_) {
-		// NOCOM(#codereview): I think this is problematic - precious higher-ranking workers can be
-		// consumed here
-		// for cheap lower-level needs. As a parallel, think of a mine without upgrades consuming
-		// meals instead of rations.
-		if (owner().egbase().tribes().get_worker_descr(wi)->can_act_as(ip_queue->get_worker())) {
-			return *ip_queue;
-		}
-	}
+	// Only check for perfect matches since they are requested by the queue
 	throw wexception("%s (%u) has no WorkersQueue for %u", descr().name().c_str(), serial(), wi);
 }
 

@@ -266,17 +266,10 @@ void WorkersQueue::update_request() {
 	if (workers_.size() < capacity_) {
 		if (!request_) {
 			request_ = new Request(owner_, worker_type_, WorkersQueue::request_callback, wwWORKER);
-			// TODO(Notabilis): If it is possible to restrict the request to exactly the worker-type
-			// of this queue, do so. Currently there are sometimes improved workers (e.g. Chief Miner)
-			// coming to enter the building (where Miners are requested).
-			// This happened after I kicked the Chief Miner from its mine.
-			// The Master Miners in the headquarters however show no intentions of entering the
-			// building
-			// NOCOM(#codereview): We need to find a way to fix this - I also have a related NOCOM in
-			// productionsite.cc
 		}
 
 		request_->set_count(capacity_ - workers_.size());
+		request_->set_exact_match(true);
 	} else if (workers_.size() >= capacity_) {
 		delete request_;
 		request_ = nullptr;
