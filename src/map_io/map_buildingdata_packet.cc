@@ -62,7 +62,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
