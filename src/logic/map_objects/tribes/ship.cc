@@ -125,10 +125,7 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr),
-     fleet_(nullptr),
-     economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -940,7 +937,7 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-                const DrawText& draw_text,
+                const TextToDraw& draw_text,
                 const Vector2f& field_on_dst,
                 const float scale,
                 RenderTarget* dst) const {
@@ -948,7 +945,7 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	// Show ship name and current activity
 	std::string statistics_string = "";
-	if (draw_text & DrawText::kStatistics) {
+	if (draw_text & TextToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -980,8 +977,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(
-	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	             scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

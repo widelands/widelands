@@ -529,7 +529,7 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 /// This conquers a given area because of a new (military) building that is set
 /// there.
-void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
+void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area, bool conquer_guarded_location) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -539,7 +539,7 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 
-	do_conquer_area(player_area, true);
+	do_conquer_area(player_area, true, 0, conquer_guarded_location);
 
 	//  Players are not allowed to have their immovables on their borders.
 	//  Therefore the area must be enlarged before calling
@@ -603,10 +603,10 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 // testsuite).
 void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
                                      bool const conquer,
-                                     PlayerNumber const preferred_player,
+									 PlayerNumber const preferred_player,
+									 bool const conquer_guarded_location_by_superior_influence,
                                      bool const neutral_when_no_influence,
-                                     bool const neutral_when_competing_influence,
-                                     bool const conquer_guarded_location_by_superior_influence) {
+                                     bool const neutral_when_competing_influence) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);

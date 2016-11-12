@@ -437,7 +437,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const DrawText draw_text,
+                     const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
                      float scale,
                      RenderTarget* dst) {
@@ -452,7 +452,7 @@ void Immovable::draw(uint32_t gametime,
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const DrawText draw_text,
+                                  const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
                                   const float scale,
                                   RenderTarget* dst) {
@@ -487,12 +487,13 @@ void Immovable::draw_construction(const uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(
+		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
 	dst->blit_animation(point_on_dst, scale, anim_, current_frame * frametime, player_color,
-	                   Recti(Vector2i(0, curh - lines), curw, lines));
+	                    Recti(Vector2i(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),

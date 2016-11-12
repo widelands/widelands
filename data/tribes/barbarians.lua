@@ -201,6 +201,7 @@ tribes:new_tribe {
       "barbarians_warmill",
       "barbarians_ax_workshop",
       "barbarians_shipyard",
+      "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",

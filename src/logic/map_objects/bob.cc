@@ -691,8 +691,8 @@ void Bob::move_update(Game& game, State&) {
 // pos is the location, in pixels, of the node position_ on screen with scale
 // and height taken into account.
 Vector2f Bob::calc_drawpos(const EditorGameBase& game,
-                             const Vector2f& field_on_dst,
-                             const float scale) const {
+                           const Vector2f& field_on_dst,
+                           const float scale) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
@@ -744,8 +744,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
 		const float f = math::clamp(
-				static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_),
-				0.f, 1.f);
+		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 	}
@@ -756,7 +755,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const DrawText&,
+               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {

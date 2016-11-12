@@ -261,6 +261,9 @@ private:
 	std::string datadir_;
 	std::string datadir_for_testing_;
 
+	/// Prevent toggling fullscreen on and off from flickering
+	uint32_t last_resolution_change_;
+
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.
 	/// \note This is private on purpose. Read the class documentation.
