@@ -51,17 +51,18 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
 	// building will fail. Not sure if this is a bug and/or a bug of this class. I don't really think
 	// so.
 	/*
-	NOCOM(#codereview): For testing, I added this to data/tribes/scripting/starting_conditions/barbarians/headquarters.lua
+	NOCOM(#codereview): For testing, I added this to
+	data/tribes/scripting/starting_conditions/barbarians/headquarters.lua
 
-		 prefilled_buildings(player, {"barbarians_barracks", sf.x + 5, sf.y + 5,
-			 inputs = {barbarians_carrier = 2}
-		 })
+	    prefilled_buildings(player, {"barbarians_barracks", sf.x + 5, sf.y + 5,
+	       inputs = {barbarians_carrier = 2}
+	    })
 
-	And it works fine. If I set the value higher than allowed, I get a Lua error in my inbox, which is correct behaviour.
+	And it works fine. If I set the value higher than allowed, I get a Lua error in my inbox, which
+	is correct behaviour.
 	Is this the error that you mean, or are you getting something else?
 
 	*/
-
 }
 
 void WorkersQueue::set_capacity(Quantity capacity) {
@@ -95,7 +96,8 @@ void WorkersQueue::remove_workers(Quantity amount) {
 
 	// NOCOM(#codereview): schedule->destroy sould take care of any memory issues.
 	// Not sure about the economy().remove_workers myself. If this is called when the worker
-	// is consumed to create a soldier, we should remove it from the economy. I better create a recruit
+	// is consumed to create a soldier, we should remove it from the economy. I better create a
+	// recruit
 	// so we will get better testing data.
 
 	assert(get_filled() >= amount);
@@ -270,7 +272,8 @@ void WorkersQueue::update_request() {
 			// This happened after I kicked the Chief Miner from its mine.
 			// The Master Miners in the headquarters however show no intentions of entering the
 			// building
-			// NOCOM(#codereview): We need to find a way to fix this - I also have a related NOCOM in productionsite.cc
+			// NOCOM(#codereview): We need to find a way to fix this - I also have a related NOCOM in
+			// productionsite.cc
 		}
 
 		request_->set_count(capacity_ - workers_.size());

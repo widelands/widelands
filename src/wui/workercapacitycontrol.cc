@@ -30,7 +30,8 @@
  * Widget to control the capacity of \ref ProductionBuilding
  * Adapted copy of \ref SoldierCapacityControl
  */
-// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to avoid code duplication.
+// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to
+// avoid code duplication.
 struct WorkerCapacityControl : UI::Box {
 	WorkerCapacityControl(UI::Panel* parent,
 	                      InteractiveGameBase& igb,

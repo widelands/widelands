@@ -219,10 +219,12 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		DescriptionIndex ware_index = tribes.ware_index(ware);
 		if (tribes.ware_exists(ware_index)) {
 			// NOCOM(#codereview): While we're touching this code, use a range-based for loop
-			// We were still using C++98 when this code was written, but we don't need an explicit iterator here now.
-			// for (const WareAmount& ware_amount : input_wares) or for (const auto& ware_amount : input_wares)
-			for (BillOfMaterials::const_iterator input_it = input_wares.begin(); input_it != input_wares.end();
-			     ++input_it) {
+			// We were still using C++98 when this code was written, but we don't need an explicit
+			// iterator here now.
+			// for (const WareAmount& ware_amount : input_wares) or for (const auto& ware_amount :
+			// input_wares)
+			for (BillOfMaterials::const_iterator input_it = input_wares.begin();
+			     input_it != input_wares.end(); ++input_it) {
 				if (input_it == input_wares.end()) {
 					throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
 					                    "found in the [inputs] section)",
@@ -799,8 +801,8 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
 	try {
 		for (;;) {
 			consumed_wares_.resize(consumed_wares_.size() + 1);
-			parse_ware_type_group(
-			   parameters, *consumed_wares_.rbegin(), tribes, descr.input_wares(), descr.input_workers());
+			parse_ware_type_group(parameters, *consumed_wares_.rbegin(), tribes, descr.input_wares(),
+			                      descr.input_workers());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
@@ -869,7 +871,8 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 			found = false;
 			// NOCOM(#codereview)
 			// We also have the same loop twice here, for wares and workers. Pull out a function?
-			// Might be easier if WaresQueue and WorkersQueue had a common superclass, or if we change the
+			// Might be easier if WaresQueue and WorkersQueue had a common superclass, or if we change
+			// the
 			// user interface so that workers wueues are more similar to wares queues.
 			for (auto worker_it = it->first.begin(); worker_it != it->first.end(); worker_it++) {
 				if (worker_it->first == worker_type && worker_it->second == wwWORKER) {

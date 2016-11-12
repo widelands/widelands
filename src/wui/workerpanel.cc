@@ -57,7 +57,8 @@ constexpr uint32_t kIconBorder = 2;
  * Iconic representation of workers in a queue.
  * Adapted copy of \ref SoldierPanel
  */
-// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to avoid code duplication.
+// NOCOM(#codereview): If we go for this UI version, we should try to create a common superclass to
+// avoid code duplication.
 struct WorkerPanel : UI::Panel {
 	using WorkerFn = boost::function<void(const Worker*)>;
 

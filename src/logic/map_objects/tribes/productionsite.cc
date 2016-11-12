@@ -354,8 +354,10 @@ WorkersQueue& ProductionSite::workersqueue(DescriptionIndex const wi) {
 	}
 	// No perfect match, check for similar jobs
 	for (WorkersQueue* ip_queue : input_worker_queues_) {
-		// NOCOM(#codereview): I think this is problematic - precious higher-ranking workers can be consumed here
-		// for cheap lower-level needs. As a parallel, think of a mine without upgrades consuming meals instead of rations.
+		// NOCOM(#codereview): I think this is problematic - precious higher-ranking workers can be
+		// consumed here
+		// for cheap lower-level needs. As a parallel, think of a mine without upgrades consuming
+		// meals instead of rations.
 		if (owner().egbase().tribes().get_worker_descr(wi)->can_act_as(ip_queue->get_worker())) {
 			return *ip_queue;
 		}
