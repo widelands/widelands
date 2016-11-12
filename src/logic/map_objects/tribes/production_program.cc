@@ -213,47 +213,33 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		char const terminator = *parameters;
 		*parameters = '\0';
 
-		WareWorker type = wwWARE;
-
 		// Try as ware
+		WareWorker type = wwWARE;
+		const BillOfMaterials *input_list = &input_wares;
 		DescriptionIndex ware_index = tribes.ware_index(ware);
-		if (tribes.ware_exists(ware_index)) {
-			// NOCOM(#codereview): While we're touching this code, use a range-based for loop
-			// We were still using C++98 when this code was written, but we don't need an explicit
-			// iterator here now.
-			// for (const WareAmount& ware_amount : input_wares) or for (const auto& ware_amount :
-			// input_wares)
-			for (BillOfMaterials::const_iterator input_it = input_wares.begin();
-			     input_it != input_wares.end(); ++input_it) {
-				if (input_it == input_wares.end()) {
-					throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
-					                    "found in the [inputs] section)",
-					                    ware, ware);
-				} else if (input_it->first == ware_index) {
-					count_max += input_it->second;
-					break;
-				}
-			}
-		} else {
+		if (!tribes.ware_exists(ware_index)) {
 			ware_index = tribes.worker_index(ware);
 			if (tribes.worker_exists(ware_index)) {
 				// It is a worker
 				type = wwWORKER;
-				// NOCOM(#codereview): Use a range-based for loop
-				for (BillOfMaterials::const_iterator input_it = input_workers.begin();
-				     input_it != input_workers.end(); ++input_it) {
-					if (input_it == input_workers.end()) {
-						throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
-						                    "found in the [inputs] section)",
-						                    ware, ware);
-					} else if (input_it->first == ware_index) {
-						count_max += input_it->second;
-						break;
-					}
-				}
+				input_list = &input_workers;
 			} else {
 				throw GameDataError("Unknown ware or worker type \"%s\"", ware);
 			}
+		}
+
+		bool found = false;
+		for (const WareAmount& input : *input_list) {
+			if (input.first == ware_index) {
+				count_max += input.second;
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
+								"found in the [inputs] section)",
+								ware, ware);
 		}
 
 		if (group.first.size() && ware_index <= group.first.begin()->first)
