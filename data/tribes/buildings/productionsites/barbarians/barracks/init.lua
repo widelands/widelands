@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "ax", amount = 8 },
-      { name = "barbarians_carrier", amount = 8 }
+      { name = "barbarians_recruit", amount = 8 }
    },
    outputs = {
       "barbarians_soldier",
@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs barbarians_soldier",
-            "consume=ax barbarians_carrier",
+            "consume=ax barbarians_recruit",
             "animate=working 15000",
             "recruit=barbarians_soldier"
          }

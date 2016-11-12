@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "armor_helmet", amount = 8 },
       { name = "spear_wooden", amount = 8 },
-      { name = "empire_carrier", amount = 8 }
+      { name = "empire_recruit", amount = 8 }
    },
    outputs = {
       "empire_soldier",
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs empire_soldier",
-            "consume=armor_helmet spear_wooden empire_carrier",
+            "consume=armor_helmet spear_wooden empire_recruit",
             "animate=working 15000",
             "recruit=empire_soldier"
          }
