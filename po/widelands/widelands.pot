@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"POT-Creation-Date: 2016-11-12 07:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -195,8 +195,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:102
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66
-#: ../../src/wui/interactive_player.cc:79
+#: ../../src/wui/game_options_menu.cc:66 ../../src/wui/interactive_player.cc:79
 #: ../../src/wui/interactive_spectator.cc:54
 msgid "Main Menu"
 msgstr ""
@@ -2231,8 +2230,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/internet_lobby.cc:80
 #: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:76
 #: ../../src/ui_fsmenu/load_map_or_game.cc:60
-#: ../../src/ui_fsmenu/multiplayer.cc:53
-#: ../../src/ui_fsmenu/netsetup_lan.cc:70
+#: ../../src/ui_fsmenu/multiplayer.cc:53 ../../src/ui_fsmenu/netsetup_lan.cc:70
 #: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Back"
 msgstr ""
@@ -2263,8 +2261,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
-#: ../../src/ui_fsmenu/options.cc:269
+#: ../../src/ui_fsmenu/internet_lobby.cc:138 ../../src/ui_fsmenu/options.cc:269
 msgid "Game"
 msgstr ""
 
@@ -3254,8 +3251,7 @@ msgstr ""
 msgid "General Statistics"
 msgstr ""
 
-#: ../../src/wui/game_main_menu.cc:56
-#: ../../src/wui/ware_statistics_menu.cc:106
+#: ../../src/wui/game_main_menu.cc:56 ../../src/wui/ware_statistics_menu.cc:106
 msgid "Ware Statistics"
 msgstr ""
 
@@ -3308,8 +3304,7 @@ msgstr ""
 msgid "Do you really want to delete the file %s?"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:601
+#: ../../src/wui/game_message_menu.cc:51 ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr ""
 

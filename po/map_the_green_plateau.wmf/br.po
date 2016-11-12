@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-02 10:37+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-23 23:07+0000\n"
 "Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr ""
+msgstr "Aloubiñ ar C'hastell-Kozh"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
@@ -46,7 +46,7 @@ msgstr ""
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
-msgstr ""
+msgstr "Pilit Erwyn"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:38
 msgid ""
@@ -57,7 +57,7 @@ msgstr ""
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
-msgstr ""
+msgstr "Pilit Jomo"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
-msgstr ""
+msgstr "Ur C'hastell-Kozh"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
@@ -94,7 +94,7 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
-msgstr ""
+msgstr "Kastell-Kozh Aloubet "
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:90
 msgid ""
