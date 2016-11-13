@@ -296,8 +296,8 @@ void MapSaver::save() {
 
 	// Write minimap
 	{
-		std::unique_ptr<Texture> minimap(draw_minimap(
-		   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 		FileWrite fw;
 		save_to_png(minimap.get(), &fw, ColorType::RGBA);
 		fw.write(fs_, "minimap.png");

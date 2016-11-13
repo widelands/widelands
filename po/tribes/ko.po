@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-11-03 16:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -464,7 +464,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:145
 msgid "forging an advanced shield"
 msgstr ""
 
@@ -479,6 +479,21 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
 msgid "baking bread"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Barracks"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+msgid "recruiting soldier"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -844,7 +859,7 @@ msgid "grinding corn"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:76
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:77
 msgid "grinding blackroot"
 msgstr ""
 
@@ -933,9 +948,9 @@ msgid "smelting iron"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr ""
 
@@ -951,7 +966,7 @@ msgid "smoking meat"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 msgid "smoking fish"
 msgstr ""
 
@@ -977,12 +992,12 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
 msgid "making a pair of buckets"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:107
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:111
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:116
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:120
 msgid "making fire tongs"
@@ -990,56 +1005,56 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:124
 msgid "making a fishing net"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:137
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:140
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:144
 msgid "making a hammer"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:140
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:150
 msgid "making a hook pole"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:151
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:163
 msgid "making a hunting bow"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
 msgid "making milking tongs"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:189
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:176
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:180
 msgid "making a pick"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:184
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:192
 msgid "making a saw"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:195
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:188
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:204
 msgid "making a scythe"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:206
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:228
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:200
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:216
 msgid "making a shovel"
@@ -1059,25 +1074,25 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:103
 msgid "forging a steel trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:118
 msgid "forging a double trident"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:133
 msgid "forging a heavy double trident"
 msgstr ""
 
@@ -1094,13 +1109,13 @@ msgid "weaving spidercloth"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
 msgid "tailoring a tabard"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
 msgid "tailoring a golden tabard"
 msgstr ""
 
@@ -1174,14 +1189,14 @@ msgid "forging an ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:97
 msgid "forging a sharp ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:112
 msgid "forging a broad ax"
 msgstr ""
 
@@ -1189,6 +1204,12 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Bakery"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
+msgctxt "barbarians_building"
+msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1207,14 +1228,14 @@ msgid "preparing a ration"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:81
 msgid "preparing a snack"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:90
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:78
 msgid "preparing a meal"
 msgstr ""
 
@@ -1393,12 +1414,12 @@ msgid "forging a helmet"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:90
 msgid "forging a mask"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:100
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:102
 msgid "forging a warhelm"
 msgstr ""
 
@@ -1601,19 +1622,19 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:127
 msgid "forging a bronze ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:142
 msgid "forging a battle ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:157
 msgid "forging a warrior’s ax"
 msgstr ""
 
@@ -1660,19 +1681,19 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
 msgid "forging a suit of armor"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
 msgid "forging a suit of chain armor"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:113
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
 msgid "forging a suit of gilded armor"
 msgstr ""
 
@@ -1680,6 +1701,12 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:7
 msgctxt "empire_building"
 msgid "Bakery"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
+msgctxt "empire_building"
+msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2036,25 +2063,25 @@ msgid "forging a wooden spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:93
 msgid "forging a spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:108
 msgid "forging an advanced spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:123
 msgid "forging a heavy spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:138
 msgid "forging a war spear"
 msgstr ""
 

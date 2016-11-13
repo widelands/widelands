@@ -88,8 +88,8 @@ int main(int argc, char** argv) {
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
-		std::unique_ptr<Texture> minimap(draw_minimap(
-		   egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 
 		// Write minimap
 		{

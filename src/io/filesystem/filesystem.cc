@@ -60,9 +60,8 @@
 #define PATH_MAX MAX_PATH
 #endif
 
-FileSystem::FileSystem()
-   : root_("")
-{}
+FileSystem::FileSystem() : root_("") {
+}
 
 /**
  * \param path A file or directory name

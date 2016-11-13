@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-03 14:28+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-23 23:03+0000\n"
+"Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
-msgstr ""
+msgstr "Stadegoù"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "Marc'hadourzhioù-Flod"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
@@ -36,17 +37,17 @@ msgstr ""
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i poent"
+msgstr[1] "%i poent"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
-msgstr ""
+msgstr "Reolennoù"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
-msgstr ""
+msgstr "Floderien"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
@@ -81,7 +82,7 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "Notennoù"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""

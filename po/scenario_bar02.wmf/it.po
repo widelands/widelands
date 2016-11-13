@@ -3,9 +3,9 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# Cristiano Magro, 2015
-# Cristiano Magro, 2016
-# Cristiano Magro, 2016
+# xno, 2015
+# xno, 2016
+# xno, 2016
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 19:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-25 16:36+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -193,14 +193,14 @@ msgstr "I magazzini sono simili al tuo quartier generale, con la sola differenza
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:115
 msgid "Build training sites"
-msgstr "Costruisci un'area di addestramento"
+msgstr "Costruisci dei centri di addestramento"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:117
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "I siti di addestramento, come un campo di addestramento o un'arena di battaglia, vengono utilizzati per la formazione dei soldati nei loro diversi attributi. Questi attributi sono importanti negli scontri e migliore è un soldato, maggiore sarà la possibilità di vincere una battaglia."
+msgstr "I centri di addestramento, come un campo di addestramento o un'arena di battaglia, vengono utilizzati per la formazione dei soldati nei loro diversi attributi. Questi attributi sono importanti negli scontri e migliore è un soldato, maggiore sarà la possibilità di vincere una battaglia."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "The attributes are: health, attack, defense and evade."
@@ -259,7 +259,7 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr "In questi ultimi giorni siamo giunti più vicini alla nostra capitale. Diverse persone si sono unite alla nostra marcia ed hanno riposto le loro speranza su di me. Temo comunque che non siamo abbastanza forti per riprendere la battaglia con i miei fratelli."
+msgstr "In questi ultimi giorni siamo giunti più vicini alla nostra capitale. Diverse persone si sono unite alla nostra marcia e hanno riposto le loro speranza su di me. Temo comunque che non siamo abbastanza forti per riprendere la battaglia con i miei fratelli."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:166
@@ -465,7 +465,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "Thron mi ha detto che ha scoperto delle tracce nella neve a nordest del nostro insediamento. Ha dato istruzioni affinché venga costruita una torre, in modo da avere una visuale più ampia dell'area circostante, in modo da poter proteggere la nostra gente da eventuali attacchi a sorpresa"
+msgstr "Thron mi ha detto che ha scoperto delle tracce nella neve a nord-est del nostro insediamento. Ha dato istruzioni affinché venga costruito una torre, in modo da avere una visuale più ampia dell'area circostante, in modo da poter proteggere la nostra gente da eventuali attacchi a sorpresa"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
 msgid "Further Exploration"
@@ -544,7 +544,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr "Finalmente! La fortezza è stata appena completata, così l'entrata al nostro insediamento dovrebbe essere sicuro per ora. Per il futuro si potrebbe pensare alla costruzione di alcune fortificazioni come fortini e torri presso i passaggi, ma per ora siamo in grado di prendere fiato."
+msgstr "Finalmente! La fortezza è stata appena completata, così l'entrata al nostro insediamento dovrebbe essere sicura per ora. Per il futuro, si potrebbe pensare alla costruzione di alcune fortificazioni come fortini e torri presso i passaggi, ma per ora siamo in grado di prendere fiato."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
 msgid "Enhanced Economy and Training"
@@ -568,7 +568,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "I nostri geologi hanno trovato molti depositi minerari di ferro, carbone e anche oro. Dovremmo migliorare le nostre attuali miniere non appena i minatori diventeranno più esperti. Dovremmo costruire qualche altra miniera, una più grande infrastruttura alimentare per fornire ai nostri uomini cibo sufficiente ed una maggiore economia di trasformazione. Ma ancora non è tutto - la maggior parte dei nostri soldati sono piuttosto giovani e non hanno una buona arma né sono ben addestrati. Dovremmo costruire dei siti di addestramento per prepararli ai loro futuri compiti."
+msgstr "I nostri geologi hanno trovato molti depositi minerari di ferro, carbone e anche oro. Dovremmo migliorare le nostre attuali miniere non appena i minatori diventeranno più esperti. Dovremmo costruire qualche altra miniera, una più grande infrastruttura alimentare per fornire ai nostri uomini cibo sufficiente ed una maggiore economia di trasformazione. Ma ancora non è tutto - la maggior parte dei nostri soldati sono piuttosto giovani e non hanno una buona arma, né sono ben addestrati. Dovremmo costruire dei siti di addestramento per prepararli ai loro futuri compiti."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331

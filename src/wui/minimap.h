@@ -63,7 +63,7 @@ private:
 	struct View : public UI::Panel {
 		View(UI::Panel& parent,
 		     MiniMapLayer* minimap_layers,
-			  MiniMapType* minimap_type,
+		     MiniMapType* minimap_type,
 		     int32_t x,
 		     int32_t y,
 		     uint32_t w,

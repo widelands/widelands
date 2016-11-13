@@ -31,6 +31,10 @@
 
 namespace Widelands {
 
+/**
+ * The contents of 'table' are documented in
+ * /data/tribes/wares/armor/init.lua
+ */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
    : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
 

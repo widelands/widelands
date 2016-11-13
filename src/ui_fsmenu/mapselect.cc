@@ -81,7 +81,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	   new UI::Box(this, tablex_, checkboxes_y_, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
-	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Vector2i(0, 0), _("Show original map names"));
+	cb_dont_localize_mapnames_ =
+	   new UI::Checkbox(vbox, Vector2i(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));

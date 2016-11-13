@@ -139,6 +139,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                   % _("Center main mapview on location"))
 	                     .str());
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
+	centerviewbtn_->set_enabled(false);
 
 	if (get_usedefaultpos())
 		center_to_parent();

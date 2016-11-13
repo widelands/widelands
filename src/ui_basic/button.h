@@ -39,7 +39,7 @@ struct Button : public NamedPanel {
 	enum class Style {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed
-		kFlat         // Flat button with simple coloured outline
+		kFlat          // Flat button with simple coloured outline
 	};
 
 	enum class ImageMode {
@@ -107,7 +107,6 @@ struct Button : public NamedPanel {
 
 	/// Convenience function. If 'pressed', sets the style to kPermpressed, otherwise to kRaised.
 	void set_perm_pressed(bool pressed);
-
 
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
