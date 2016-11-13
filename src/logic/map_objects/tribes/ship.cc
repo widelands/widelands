@@ -125,10 +125,7 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr),
-     fleet_(nullptr),
-     economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -980,8 +977,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(
-	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	             scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {
