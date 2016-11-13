@@ -231,6 +231,10 @@ Warehouse Building
 ==============================
 */
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const EditorGameBase& egbase)
