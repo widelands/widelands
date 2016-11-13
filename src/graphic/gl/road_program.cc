@@ -72,12 +72,17 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * scale;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * scale;
 
-	assert(end.owner != nullptr);
+	assert(start.owner != nullptr || end.owner != nullptr);
+
+	Widelands::Player* visible_owner = start.owner;
+	if (start.owner == nullptr) {
+		visible_owner = end.owner;
+	}
+
 	const Image& texture =
-	   road_type == Widelands::RoadType::kNormal ?
-	      end.owner->tribe().road_textures().get_normal_texture(
-	         end.geometric_coords, direction) :
-	      end.owner->tribe().road_textures().get_busy_texture(end.geometric_coords, direction);
+		road_type == Widelands::RoadType::kNormal ?
+			visible_owner->tribe().road_textures().get_normal_texture(start.geometric_coords, direction) :
+			visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}
