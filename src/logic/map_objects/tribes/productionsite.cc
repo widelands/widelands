@@ -338,7 +338,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 
 WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue* ip_queue : input_ware_queues_) {
-		if (ip_queue->get_ware() == wi) {
+		if (ip_queue->get_index() == wi) {
 			return *ip_queue;
 		}
 	}
@@ -348,7 +348,7 @@ WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
 WorkersQueue& ProductionSite::workersqueue(DescriptionIndex const wi) {
 	// Check for perfect match
 	for (WorkersQueue* ip_queue : input_worker_queues_) {
-		if (ip_queue->get_worker() == wi) {
+		if (ip_queue->get_index() == wi) {
 			return *ip_queue;
 		}
 	}
@@ -833,8 +833,8 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	for (WaresQueue* queue : input_ware_queues_) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;

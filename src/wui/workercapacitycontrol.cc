@@ -103,7 +103,7 @@ WorkerCapacityControl::WorkerCapacityControl(UI::Panel* parent,
 }
 
 void WorkerCapacityControl::think() {
-	uint32_t const capacity = workers_.capacity();
+	uint32_t const capacity = workers_.get_filled();
 	// NOCOM(#codereview): We should use boost::format or boost::lexical_cast here.
 	// While we're at it, fix the code in SoldierCapacityControl as well.
 	char buffer[sizeof("4294967295")];
@@ -113,11 +113,11 @@ void WorkerCapacityControl::think() {
 
 	bool const can_act = igbase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && 0 < capacity);
-	increase_.set_enabled(can_act && workers_.max_capacity() > capacity);
+	increase_.set_enabled(can_act && workers_.get_max_size() > capacity);
 }
 
 void WorkerCapacityControl::change_worker_capacity(int16_t delta) {
-	igbase_.game().send_player_change_worker_capacity(building_, workers_.get_worker(), delta);
+	igbase_.game().send_player_change_worker_capacity(building_, workers_.get_index(), delta);
 }
 
 void WorkerCapacityControl::click_decrease() {

@@ -358,7 +358,7 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 	uint8_t count = group.second;
 	for (WaresQueue* ip_queue : ps.warequeues()) {
 		for (const auto& ware_type : group.first) {
-			if (ware_type.first == ip_queue->get_ware() && ware_type.second == wwWARE) {
+			if (ware_type.first == ip_queue->get_index() && ware_type.second == wwWARE) {
 				uint8_t const filled = ip_queue->get_filled();
 				if (count <= filled)
 					return true;
@@ -813,7 +813,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 	//  each of them.
 	bool found;
 	for (size_t i = 0; i < warequeues.size(); ++i) {
-		DescriptionIndex const ware_type = warequeues[i]->get_ware();
+		DescriptionIndex const ware_type = warequeues[i]->get_index();
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities_wares[i] = 0;
 
@@ -849,8 +849,8 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 	// Same for workers
 	for (size_t i = 0; i < workerqueues.size(); ++i) {
-		DescriptionIndex const worker_type = workerqueues[i]->get_worker();
-		uint8_t nr_available = workerqueues[i]->workers().size();
+		DescriptionIndex const worker_type = workerqueues[i]->get_index();
+		uint8_t nr_available = workerqueues[i]->get_filled();
 		consumption_quantities_workers[i] = 0;
 
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
@@ -942,12 +942,12 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
 
 				// Update consumption statistic
-				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
+				ps.owner().ware_consumed(warequeues[i]->get_index(), q);
 			}
 		for (size_t i = 0; i < workerqueues.size(); ++i)
 			if (uint8_t const q = consumption_quantities_workers[i]) {
-				assert(q <= workerqueues[i]->workers().size());
-				workerqueues[i]->remove_workers(q);
+				assert(q <= workerqueues[i]->get_filled());
+				workerqueues[i]->set_filled(workerqueues[i]->get_filled() - q);
 			}
 		return ps.program_step(game);
 	}
@@ -1611,7 +1611,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 
 	// Second step: give ware to worker
 	WareInstance* ware =
-	   new WareInstance(wq->get_ware(), game.tribes().get_ware_descr(wq->get_ware()));
+	   new WareInstance(wq->get_index(), game.tribes().get_ware_descr(wq->get_index()));
 	ware->init(game);
 	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);

@@ -71,8 +71,9 @@ void ExpeditionBootstrap::is_ready(Game& game) {
 
 // static
 void ExpeditionBootstrap::ware_callback(Game& game,
-                                        WaresQueue*,
+                                        InputQueue*,
                                         DescriptionIndex,
+                                        Worker*,
                                         void* const data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->is_ready(game);
@@ -147,7 +148,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		warehouse->insert_wares(wq->get_ware(), wq->get_filled());
+		warehouse->insert_wares(wq->get_index(), wq->get_filled());
 		wq->cleanup();
 	}
 	wares_.clear();
@@ -180,7 +181,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 
 WaresQueue& ExpeditionBootstrap::waresqueue(DescriptionIndex index) const {
 	for (const std::unique_ptr<WaresQueue>& wq : wares_) {
-		if (wq->get_ware() == index) {
+		if (wq->get_index() == index) {
 			return *wq.get();
 		}
 	}
@@ -224,7 +225,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
                                                         std::vector<Worker*>* return_workers,
                                                         std::vector<WareInstance*>* return_wares) {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		const DescriptionIndex ware_index = wq->get_ware();
+		const DescriptionIndex ware_index = wq->get_index();
 		for (uint32_t j = 0; j < wq->get_filled(); ++j) {
 			WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
 			temp->init(game);
@@ -291,7 +292,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 		wq->read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 
-		if (wq->get_ware() == INVALID_INDEX) {
+		if (wq->get_index() == INVALID_INDEX) {
 			delete wq;
 		} else {
 			wares_.emplace_back(wq);

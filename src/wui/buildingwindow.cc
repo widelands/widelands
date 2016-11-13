@@ -37,9 +37,9 @@
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/helpwindow.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
-#include "wui/waresqueuedisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
@@ -453,7 +453,7 @@ void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
                                              Widelands::WaresQueue* const wq,
                                              bool show_only) {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
+	box->add(new InputQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
 }
 
 /**

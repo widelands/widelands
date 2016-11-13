@@ -40,6 +40,8 @@ wl_library(economy
     ware_instance.cc
     ware_instance.h
     warehousesupply.h
+    input_queue.cc
+    input_queue.h
     wares_queue.cc
     wares_queue.h
     workers_queue.cc

@@ -152,6 +152,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    inputqueuedisplay.cc
+    inputqueuedisplay.h
     interactive_base.cc
     interactive_base.h
     interactive_gamebase.cc
@@ -179,15 +181,11 @@ wl_library(wui
     productionsitewindow.cc
     productionsitewindow.h
     shipwindow.cc
-    workercapacitycontrol.cc
-    workercapacitycontrol.h
     shipwindow.h
     soldiercapacitycontrol.cc
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
-    workerpanel.cc
-    workerpanel.h
     stock_menu.cc
     stock_menu.h
     story_message_box.cc
@@ -204,8 +202,6 @@ wl_library(wui
     warehousewindow.cc
     waresdisplay.cc
     waresdisplay.h
-    waresqueuedisplay.cc
-    waresqueuedisplay.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2

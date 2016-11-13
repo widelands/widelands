@@ -78,7 +78,7 @@ Access to the wares queues by id
 */
 WaresQueue& ConstructionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue* ware : wares_) {
-		if (ware->get_ware() == wi) {
+		if (ware->get_index() == wi) {
 			return *ware;
 		}
 	}
@@ -236,8 +236,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		WaresQueue* queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -256,7 +256,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update consumption statistic
-			owner().ware_consumed(wq.get_ware(), 1);
+			owner().ware_consumed(wq.get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -278,12 +278,13 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 /*
 ===============
-Called by WaresQueue code when an ware has arrived
+Called by InputQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback(Game& game,
-                                            WaresQueue*,
+                                            InputQueue*,
                                             DescriptionIndex,
+                                            Worker*,
                                             void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 

@@ -4324,9 +4324,9 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		} else {
 			assert(sp.first.second == wwWORKER);
 			WorkersQueue& wq = ps->workersqueue(sp.first.first);
-			if (sp.second > wq.max_capacity()) {
+			if (sp.second > wq.get_max_size()) {
 				report_error(
-				   L, "Not enough space for %u workers, only for %i", sp.second, wq.max_capacity());
+				   L, "Not enough space for %u workers, only for %i", sp.second, wq.get_max_size());
 			}
 			wq.set_filled(sp.second);
 		}

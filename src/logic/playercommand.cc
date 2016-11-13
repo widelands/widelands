@@ -23,8 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
-#include "economy/wares_queue.h"
-#include "economy/workers_queue.h"
+#include "economy/input_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
@@ -80,7 +79,7 @@ enum {
 	PLCMD_MESSAGESETSTATUSREAD = 18,
 	PLCMD_MESSAGESETSTATUSARCHIVED = 19,
 	PLCMD_SETSTOCKPOLICY = 20,
-	PLCMD_SETWAREMAXFILL = 21,
+	PLCMD_SETINPUTMAXFILL = 21,
 	PLCMD_DISMANTLEBUILDING = 22,
 	PLCMD_EVICTWORKER = 23,
 	PLCMD_MILITARYSITESETSOLDIERPREFERENCE = 24,
@@ -89,9 +88,7 @@ enum {
 	PLCMD_SHIP_EXPLORE = 27,
 	PLCMD_SHIP_CONSTRUCT = 28,
 	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30,
-	PLCMD_DROPWORKER = 31,
-	PLCMD_CHANGEWORKERCAPACITY = 32
+	PLCMD_SHIP_CANCELEXPEDITION = 30
 };
 
 /*** class PlayerCommand ***/
@@ -130,10 +127,6 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEnhanceBuilding(des);
 	case PLCMD_CHANGETRAININGOPTIONS:
 		return new CmdChangeTrainingOptions(des);
-	case PLCMD_DROPWORKER:
-		return new CmdDropWorker(des);
-	case PLCMD_CHANGEWORKERCAPACITY:
-		return new CmdChangeWorkerCapacity(des);
 	case PLCMD_DROPSOLDIER:
 		return new CmdDropSoldier(des);
 	case PLCMD_CHANGESOLDIERCAPACITY:
@@ -156,8 +149,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMessageSetStatusArchived(des);
 	case PLCMD_SETSTOCKPOLICY:
 		return new CmdSetStockPolicy(des);
-	case PLCMD_SETWAREMAXFILL:
-		return new CmdSetWareMaxFill(des);
+	case PLCMD_SETINPUTMAXFILL:
+		return new CmdSetInputMaxFill(des);
 	case PLCMD_DISMANTLEBUILDING:
 		return new CmdDismantleBuilding(des);
 	case PLCMD_EVICTWORKER:
@@ -1084,18 +1077,20 @@ void CmdSetWarePriority::serialize(StreamWrite& ser) {
 }
 
 /*** class Cmd_SetWareMaxFill ***/
-CmdSetWareMaxFill::CmdSetWareMaxFill(const uint32_t init_duetime,
+CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
                                      const PlayerNumber init_sender,
                                      PlayerImmovable& imm,
                                      const DescriptionIndex index,
+                                     const WareWorker type,
                                      const uint32_t max_fill)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
+     type_(type),
      max_fill_(max_fill) {
 }
 
-void CmdSetWareMaxFill::execute(Game& game) {
+void CmdSetInputMaxFill::execute(Game& game) {
 	upcast(Building, b, game.objects().get_object(serial_));
 
 	if (!b)
@@ -1103,50 +1098,70 @@ void CmdSetWareMaxFill::execute(Game& game) {
 	if (b->owner().player_number() != sender())
 		return;
 
-	b->waresqueue(index_).set_max_fill(max_fill_);
+	b->inputqueue(index_, type_).set_max_fill(max_fill_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWareMaxFill = 1;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 1;
 
-void CmdSetWareMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionCmdSetWareMaxFill);
+void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
 
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
+	if (type_ == wwWARE) {
+		fw.unsigned_8(0);
+	} else {
+		fw.unsigned_8(1);
+	}
 	fw.unsigned_32(max_fill_);
 }
 
-void CmdSetWareMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetWareMaxFill) {
+		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
+			if (fr.unsigned_8() == 0) {
+				type_ = wwWARE;
+			} else {
+				type_ = wwWORKER;
+			}
 			max_fill_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(
-			   "CmdSetWareMaxFill", packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
+			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("set ware max fill: %s", e.what());
 	}
 }
 
-CmdSetWareMaxFill::CmdSetWareMaxFill(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()),
-     serial_(des.unsigned_32()),
-     index_(des.signed_32()),
-     max_fill_(des.unsigned_32()) {
+CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	index_ = des.signed_32();
+	if (des.unsigned_8() == 0) {
+	type_ = wwWARE;
+	} else {
+	type_ = wwWORKER;
+	}
+	max_fill_ = des.unsigned_32();
 }
 
-void CmdSetWareMaxFill::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWAREMAXFILL);
+void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_SETINPUTMAXFILL);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
+	if (type_ == wwWARE) {
+		ser.unsigned_8(0);
+	} else {
+		ser.unsigned_8(1);
+	}
 	ser.unsigned_32(max_fill_);
 }
 
@@ -1436,120 +1451,6 @@ void CmdChangeTrainingOptions::write(FileWrite& fw, EditorGameBase& egbase, MapO
 
 	fw.unsigned_8(static_cast<uint8_t>(attribute));
 	fw.unsigned_16(value);
-}
-
-/*** class Cmd_DropWorker ***/
-
-CmdDropWorker::CmdDropWorker(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();  //  Serial of the building
-	worker = des.unsigned_32();  //  Serial of worker
-}
-
-void CmdDropWorker::execute(Game& game) {
-	if (upcast(ProductionSite, building, game.objects().get_object(serial))) {
-		if (&building->owner() == game.get_player(sender())) {
-			if (upcast(Worker, w, game.objects().get_object(worker))) {
-				building->workersqueue(w->descr().worker_index()).drop(*w);
-			}
-		}
-	}
-}
-
-void CmdDropWorker::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_DROPWORKER);
-	ser.unsigned_8(sender());
-	ser.unsigned_32(serial);
-	ser.unsigned_32(worker);
-}
-
-constexpr uint16_t kCurrentPacketVersionCmdDropWorker = 1;
-
-void CmdDropWorker::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdDropWorker) {
-			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
-			worker = get_object_serial_or_zero<Worker>(fr.unsigned_32(), mol);
-		} else {
-			throw UnhandledVersionError(
-			   "CmdDropWorker", packet_version, kCurrentPacketVersionCmdDropWorker);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("drop worker: %s", e.what());
-	}
-}
-
-void CmdDropWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
-	fw.unsigned_16(kCurrentPacketVersionCmdDropWorker);
-	// Write base classes
-	PlayerCommand::write(fw, egbase, mos);
-
-	//  site serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
-	//  worker serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(worker)));
-}
-
-/*** Cmd_ChangeWorkerCapacity ***/
-
-CmdChangeWorkerCapacity::CmdChangeWorkerCapacity(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();
-	worker_type_ = des.signed_32();
-	val = des.signed_16();
-}
-
-void CmdChangeWorkerCapacity::execute(Game& game) {
-	if (upcast(ProductionSite, building, game.objects().get_object(serial))) {
-		if (&building->owner() == game.get_player(sender())) {
-			building->workersqueue(worker_type_).change_capacity(val);
-		}
-	}
-}
-
-void CmdChangeWorkerCapacity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_CHANGEWORKERCAPACITY);
-	ser.unsigned_8(sender());
-	ser.unsigned_32(serial);
-	ser.signed_32(worker_type_);
-	ser.signed_16(val);
-}
-
-constexpr uint16_t kCurrentPacketVersionChangeWorkerCapacity = 1;
-
-void CmdChangeWorkerCapacity::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionChangeWorkerCapacity) {
-			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			worker_type_ = fr.signed_32();
-			val = fr.signed_16();
-		} else {
-			throw UnhandledVersionError(
-			   "CmdChangeWorkerCapacity", packet_version, kCurrentPacketVersionChangeWorkerCapacity);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("change worker capacity: %s", e.what());
-	}
-}
-
-void CmdChangeWorkerCapacity::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
-	fw.unsigned_16(kCurrentPacketVersionChangeWorkerCapacity);
-	// Write base classes
-	PlayerCommand::write(fw, egbase, mos);
-
-	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
-
-	// Now queue index
-	fw.signed_32(worker_type_);
-
-	// Now capacity
-	fw.signed_16(val);
 }
 
 /*** class Cmd_DropSoldier ***/

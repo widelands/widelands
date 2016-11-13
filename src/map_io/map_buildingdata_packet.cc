@@ -679,7 +679,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
-				if (!game.tribes().ware_exists(wq->get_ware())) {
+				if (!game.tribes().ware_exists(wq->get_index())) {
 					delete wq;
 				} else {
 					productionsite.input_ware_queues_.push_back(wq);
@@ -693,7 +693,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
 					wq->read(fr, game, mol);
 
-					if (!game.tribes().worker_exists(wq->get_worker())) {
+					if (!game.tribes().worker_exists(wq->get_index())) {
 						delete wq;
 					} else {
 						productionsite.input_worker_queues_.push_back(wq);

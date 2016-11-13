@@ -3118,8 +3118,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		for (auto& queue : site.site->warequeues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
-				game().send_player_set_ware_max_fill(
-				   *site.site, queue->get_ware(), queue->get_max_size());
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), wwWARE, queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3220,7 +3220,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			// reducing input queues
 			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), 0);
+				game().send_player_set_input_max_fill(*site.site, queue->get_index(), wwWARE, 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
@@ -4381,10 +4381,10 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// now modifying max_fill of armors and weapons
 		for (std::string pattern : armors_and_weapons) {
 
-			if (tribe_->get_ware_descr(warequeues1[i]->get_ware())->name().find(pattern) !=
+			if (tribe_->get_ware_descr(warequeues1[i]->get_index())->name().find(pattern) !=
 			    std::string::npos) {
 				if (warequeues1[i]->get_max_fill() > 1) {
-					game().send_player_set_ware_max_fill(*ts, warequeues1[i]->get_ware(), 1);
+					game().send_player_set_input_max_fill(*ts, warequeues1[i]->get_index(), wwWARE, 1);
 					continue;
 				}
 			}
@@ -4412,7 +4412,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
 		nr_warequeues = warequeues2.size();
 		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_ware()) > 0) {
+			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) > 0) {
 				filled += warequeues2[i]->get_filled();
 			}
 		}
@@ -4422,7 +4422,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		// checking non subsitutes
 		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_ware()) == 0) {
+			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) == 0) {
 				const uint32_t required_amount =
 				   (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
 				if (warequeues2[i]->get_filled() < required_amount) {

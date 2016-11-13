@@ -46,10 +46,6 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdEnhanceBuilding();
 	case QueueCommandTypes::kBulldoze:
 		return *new CmdBulldoze();
-	case QueueCommandTypes::kDropWorker:
-		return *new CmdDropWorker();
-	case QueueCommandTypes::kChangeWorkerCapacity:
-		return *new CmdChangeWorkerCapacity();
 	case QueueCommandTypes::kChangeTrainingOptions:
 		return *new CmdChangeTrainingOptions();
 	case QueueCommandTypes::kDropSoldier:
@@ -68,8 +64,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetWorkerTargetQuantity();
 	case QueueCommandTypes::kResetWorkerTargetQuantity:
 		return *new CmdResetWorkerTargetQuantity();
-	case QueueCommandTypes::kSetWareMaxFill:
-		return *new CmdSetWareMaxFill();
+	case QueueCommandTypes::kSetInputMaxFill:
+		return *new CmdSetInputMaxFill();
 	case QueueCommandTypes::kMessageSetStatusRead:
 		return *new CmdMessageSetStatusRead();
 	case QueueCommandTypes::kMessageSetStatusArchived:

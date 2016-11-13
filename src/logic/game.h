@@ -198,10 +198,8 @@ public:
 	                                   int32_t type,
 	                                   DescriptionIndex index,
 	                                   int32_t prio);
-	void send_player_set_ware_max_fill(PlayerImmovable&, DescriptionIndex index, uint32_t);
+	void send_player_set_input_max_fill(PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
-	void send_player_drop_worker(Building&, int32_t serial);
-	void send_player_change_worker_capacity(Building&, DescriptionIndex worker_type, int16_t delta);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
 	void send_player_enemyflagaction(const Flag&, PlayerNumber, uint32_t count);

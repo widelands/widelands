@@ -493,21 +493,21 @@ private:
 	int32_t priority_;
 };
 
-struct CmdSetWareMaxFill : public PlayerCommand {
-	CmdSetWareMaxFill() : PlayerCommand(), serial_(0), index_(), max_fill_(0) {
+struct CmdSetInputMaxFill : public PlayerCommand {
+	CmdSetInputMaxFill() : PlayerCommand(), serial_(0), index_(), type_(wwWARE), max_fill_(0) {
 	}  // For savegame loading
-	CmdSetWareMaxFill(
-	   uint32_t duetime, PlayerNumber, PlayerImmovable&, DescriptionIndex, uint32_t maxfill);
+	CmdSetInputMaxFill(
+	   uint32_t duetime, PlayerNumber, PlayerImmovable&, DescriptionIndex, WareWorker, uint32_t maxfill);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kSetWareMaxFill;
+		return QueueCommandTypes::kSetInputMaxFill;
 	}
 
-	CmdSetWareMaxFill(StreamRead&);
+	CmdSetInputMaxFill(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -515,6 +515,7 @@ struct CmdSetWareMaxFill : public PlayerCommand {
 private:
 	Serial serial_;
 	DescriptionIndex index_;
+	WareWorker type_;
 	uint32_t max_fill_;
 };
 
@@ -672,61 +673,6 @@ private:
 	Serial serial;
 	TrainingAttribute attribute;
 	int32_t value;
-};
-
-struct CmdDropWorker : public PlayerCommand {
-	CmdDropWorker() : PlayerCommand(), serial(0), worker(0) {
-	}  //  for savegames
-	CmdDropWorker(const uint32_t t, const int32_t p, Building& b, const int32_t init_worker)
-	   : PlayerCommand(t, p), serial(b.serial()), worker(init_worker) {
-	}
-
-	// Write these commands to a file (for savegames)
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kDropWorker;
-	}
-
-	CmdDropWorker(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-
-private:
-	Serial serial;
-	Serial worker;
-};
-
-struct CmdChangeWorkerCapacity : public PlayerCommand {
-	CmdChangeWorkerCapacity() : PlayerCommand(), serial(0), worker_type_(), val(0) {
-	}  //  for savegames
-	CmdChangeWorkerCapacity(const uint32_t t,
-	                        const int32_t p,
-	                        Building& b,
-	                        DescriptionIndex worker_type,
-	                        const int16_t delta)
-	   : PlayerCommand(t, p), serial(b.serial()), worker_type_(worker_type), val(delta) {
-	}
-
-	// Write these commands to a file (for savegames)
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kChangeWorkerCapacity;
-	}
-
-	CmdChangeWorkerCapacity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-
-private:
-	Serial serial;
-	DescriptionIndex worker_type_;
-	int16_t val;
 };
 
 struct CmdDropSoldier : public PlayerCommand {

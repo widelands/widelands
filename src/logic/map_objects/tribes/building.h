@@ -49,6 +49,7 @@ namespace Widelands {
 struct Flag;
 struct Message;
 class TribeDescr;
+class InputQueue;
 class WaresQueue;
 class WorkersQueue;
 
@@ -235,6 +236,9 @@ public:
 		update_statistics_string(&statistics_string_);
 		return statistics_string_;
 	}
+
+	/// \returns the queue for the matching ware or worker type or \throws WException.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
 
 	/// \returns the queue for a ware type or \throws WException.
 	virtual WaresQueue& waresqueue(DescriptionIndex);

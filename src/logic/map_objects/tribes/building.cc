@@ -30,7 +30,10 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
+#include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
@@ -46,6 +49,7 @@
 #include "logic/player.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
+
 
 namespace Widelands {
 
@@ -464,6 +468,14 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		}
 	}
 	return result;
+}
+
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
+	if (t == wwWARE) {
+		return waresqueue(wi);
+	} else {
+		return workersqueue(wi);
+	}
 }
 
 WaresQueue& Building::waresqueue(DescriptionIndex const wi) {

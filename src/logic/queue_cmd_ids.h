@@ -60,7 +60,7 @@ enum class QueueCommandTypes {
 
 	// 17 was a command related to old events. removed
 
-	kSetWareMaxFill = 18,
+	kSetInputMaxFill = 18,
 
 	kMessageSetStatusRead = 21,
 	kMessageSetStatusArchived,
@@ -71,9 +71,6 @@ enum class QueueCommandTypes {
 	kEvictWorker,
 
 	kMilitarysiteSetSoldierPreference,  // 26
-
-	kDropWorker,
-	kChangeWorkerCapacity,
 
 	kSinkShip = 121,
 	kShipCancelExpedition,
