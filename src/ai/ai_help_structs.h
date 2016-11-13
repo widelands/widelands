@@ -84,7 +84,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
    {0, 17, 25, 32, 38, 44, 49, 53, 58, 62, 66, 70, 74, 78, 81, 84, 88, 91, 94, 97, 100},
 };
 
-constexpr int magic_numbers_size = 70;
+constexpr int magic_numbers_size = 100;
 constexpr int neuron_pool_size = 80;
 constexpr int f_neuron_pool_size = 40;
 constexpr int f_neuron_bit_size = 32;
