@@ -540,6 +540,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 				for (uint32_t i = 0; i < stock; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
+				/// NOCOM(Notabilis): Assert does not always hold
 				assert(!incorporated_workers_.count(id) || incorporated_workers_[id].empty());
 			} else {
 				// We are in the load-game sequence...

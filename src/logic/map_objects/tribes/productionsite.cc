@@ -504,6 +504,12 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 	input_ware_queues_.clear();
 
+	for (uint32_t i = 0; i < input_worker_queues_.size(); ++i) {
+		input_worker_queues_[i]->cleanup();
+		delete input_worker_queues_[i];
+	}
+	input_worker_queues_.clear();
+
 	Building::cleanup(egbase);
 }
 

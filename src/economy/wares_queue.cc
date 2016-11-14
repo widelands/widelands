@@ -61,7 +61,7 @@ void WaresQueue::entered(DescriptionIndex index,
 #ifndef NDEBUG
 						Worker* worker
 #else
-						Worker*,
+						Worker*
 #endif
 						) {
 
