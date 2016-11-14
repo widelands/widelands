@@ -428,9 +428,11 @@ void Warehouse::init(EditorGameBase& egbase) {
 	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers()) {
-		egbase.conquer_area(PlayerArea<Area<FCoords>>(
-		   player.player_number(),
-		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)), true);
+		egbase.conquer_area(
+		   PlayerArea<Area<FCoords>>(
+		      player.player_number(),
+		      Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)),
+		   true);
 	}
 
 	if (descr().get_isport()) {
@@ -528,35 +530,23 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		portdock_ = nullptr;
 	}
 
-	// This will empty the stock and launch all workers including incorporated
-	// ones.
+	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
+	// the stock.
 	if (upcast(Game, game, &egbase)) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
-			Quantity stock = workers.stock(id);
-			// Separate behaviour for the case of loading the game
-			// (which does save/destroy/reload) and simply destroying ingame
+			// If the game is running, have the workers flee the warehouse.
 			if (game->is_loaded()) {
-				// This game is really running
-				Quantity worker_counter = 0;
-				for (Quantity i = 0; i < stock; ++i, ++worker_counter) {
-					// Make sure that we won't flood the map with carriers etc.
-					if (worker_counter < kFleeingUnitsCap) {
-						launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
-					} else {
-						break;
-					}
+				// We have kFleeingUnitsCap to make sure that we won't flood the map with carriers etc.
+				Quantity stock = workers.stock(id);
+				for (Quantity i = 0; i < stock && i < kFleeingUnitsCap; ++i) {
+					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
-				// Remove the remaining stock in case we hit the cap
-				stock = workers.stock(id);
-				if (stock > 0) {
-					remove_workers(id, stock);
-				}
-				assert(!incorporated_workers_.count(id) || incorporated_workers_[id].empty());
-			} else {
-				// We are in the load-game sequence...
-				remove_workers(id, stock);
 			}
+			// Make sure that all workers are gone
+			remove_workers(id, workers.stock(id));
+			assert(!game->is_loaded() ||
+			       (!incorporated_workers_.count(id) || incorporated_workers_[id].empty()));
 		}
 	}
 	incorporated_workers_.clear();
