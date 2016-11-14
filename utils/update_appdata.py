@@ -134,3 +134,6 @@ dest_file.write(desktop)
 dest_file.close()
 
 print("Done!")
+
+from subprocess import call
+call(["appstreamcli", "validate", base_path + "/debian/widelands.appdata.xml"])
