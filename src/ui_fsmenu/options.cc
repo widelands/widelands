@@ -257,7 +257,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
-
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
