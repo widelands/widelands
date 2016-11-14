@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,17 +19,6 @@
 
 #include "ui_fsmenu/base.h"
 
-#include <cstdio>
-
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
-#include "graphic/image.h"
-#include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
-#include "io/filesystem/filesystem.h"
-#include "wlapplication.h"
-
 /*
 ==============================================================================
 
@@ -38,41 +27,13 @@ FullscreenMenuBase
 ==============================================================================
 */
 
-FullscreenMenuBase::FullscreenMenuBase() : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg") {
-}
-
 /**
  * Initialize a pre-game menu
- *
- * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()), background_image_(bgpic) {
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
-		   layout();
-		});
+FullscreenMenuBase::FullscreenMenuBase() : UI::FullscreenWindow() {
 }
 
 FullscreenMenuBase::~FullscreenMenuBase() {
-}
-
-/**
- * Draw the background / splash screen
-*/
-void FullscreenMenuBase::draw(RenderTarget& dst) {
-	const Image* bg = g_gr->images().get(background_image_);
-	dst.blitrect_scale(Rectf(0, 0, get_w(), get_h()), bg, Recti(0, 0, bg->width(), bg->height()), 1.,
-	                   BlendMode::UseAlpha);
-}
-
-int FullscreenMenuBase::fs_small() {
-	return UI_FONT_SIZE_SMALL * get_h() / 600;
-}
-
-int FullscreenMenuBase::fs_big() {
-	return UI_FONT_SIZE_BIG * get_h() / 600;
 }
 
 bool FullscreenMenuBase::handle_key(bool down, SDL_Keysym code) {

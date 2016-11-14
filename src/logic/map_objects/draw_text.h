@@ -31,4 +31,3 @@ inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
-

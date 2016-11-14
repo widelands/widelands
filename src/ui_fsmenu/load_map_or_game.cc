@@ -32,7 +32,7 @@
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
-   : FullscreenMenuBase("images/ui_fsmenu/choosemapmenu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      padding_(4),

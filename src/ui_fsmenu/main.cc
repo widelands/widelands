@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/mainmenu.jpg"),
+   : FullscreenMenuMainMenu(),
 
      // Buttons
      playtutorial(&vbox_,
@@ -63,8 +63,14 @@ FullscreenMenuMain::FullscreenMenuMain()
             _("Watch Replay")),
      editor(
         &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
-     options(
-        &vbox_, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Options")),
+     options(&vbox_,
+             "options",
+             0,
+             0,
+             butw_,
+             buth_,
+             g_gr->images().get(button_background_),
+             _("Options")),
      about(&vbox_,
            "about",
            0,
@@ -141,6 +147,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add(&about, UI::Align::kHCenter, true);
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Align::kHCenter, true);
+
+	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
 
 	layout();
 }
