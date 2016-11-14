@@ -46,7 +46,7 @@ protected:
 	uint32_t padding_;
 
 	const std::string button_background_;
-	UI::Box vbox;
+	UI::Box vbox_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H
