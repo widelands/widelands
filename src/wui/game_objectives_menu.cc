@@ -48,6 +48,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    FULL_OBJECTIVE_TEXT,
                    "",
                    UI::Align::kLeft,
+                   g_gr->images().get("images/ui_basic/but1.png"),
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())

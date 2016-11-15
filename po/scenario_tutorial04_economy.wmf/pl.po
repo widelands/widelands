@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-14 14:17+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-19 23:06+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -487,7 +487,7 @@ msgstr "W menu statystyk znajduje się również"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
-msgstr "przycisk \"Statystyki towarów\"."
+msgstr "przycisk \"Statystyki magazynu\"."
 
 #. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
@@ -496,11 +496,11 @@ msgstr "Kliknij na nim."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:262
 msgid "Open the ware statistics window."
-msgstr "Otwórz okno statystyk towarów."
+msgstr "Otwórz okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
-msgstr "Otwórz okno statystyk towarów dostępne z menu statystyk."
+msgstr "Otwórz okno statystyk magazynu dostępne z menu statystyk."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -518,7 +518,7 @@ msgstr "trzecią zakładkę (\"Stan ekonomii\")."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
-msgstr "Przełącz się na trzecią zakładkę w oknie statystyk towarów."
+msgstr "Przełącz się na trzecią zakładkę w oknie statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
@@ -544,7 +544,7 @@ msgstr "Kliknij na ostatniej zakładce, gdy będziesz chciał kontynuować."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Switch to the last tab in the ware statistics menu window."
-msgstr "Przejdź do ostatniej zakładki w oknie statystyk towarów."
+msgstr "Przejdź do ostatniej zakładki w oknie statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
 msgid ""
@@ -575,7 +575,7 @@ msgstr "Zamknij to okno, jak skończysz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Close the ware statistics window."
-msgstr "Zamknij okno statystyk towarów."
+msgstr "Zamknij okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
@@ -585,23 +585,23 @@ msgstr "Okno zapasów pokazuje, ile masz w tej chwili towarów. Porównaj inform
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid "When you have finished, close the ware statistics window."
-msgstr "Jak skończysz, zamknij okno statystyk towarów."
+msgstr "Jak skończysz, zamknij okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:327
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
 msgid "You closed the ware statistics window!"
-msgstr "Zamknąłeś okno statystyk towarów!"
+msgstr "Zamknąłeś okno statystyk magazynu!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:329
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the third tab?"
-msgstr "Zamknąłeś okno statystyk towarów, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać trzecią zakładkę?"
+msgstr "Zamknąłeś okno statystyk magazynu, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać trzecią zakładkę?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 msgid "Open the ware statistics window again."
-msgstr "Otwórz ponownie okno statystyk towarów."
+msgstr "Otwórz ponownie okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:340
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
@@ -609,13 +609,13 @@ msgid ""
 "You closed the ware statistics menu window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Zamknąłeś okno statystyk towarów, zanim skończyłem ci o nim mówić. Jeśli już wszystko wiesz, czuj się uprawniony do opuszczenia tego samouczka w dowolnej chwili."
+msgstr "Zamknąłeś okno statystyk magazynu, zanim skończyłem ci o nim mówić. Jeśli już wszystko wiesz, czuj się uprawniony do opuszczenia tego samouczka w dowolnej chwili."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr "Zamknąłeś okno statystyk towarów, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać czwartą zakładkę?"
+msgstr "Zamknąłeś okno statystyk magazynu, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać czwartą zakładkę?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
