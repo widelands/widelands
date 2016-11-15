@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-11-03 16:12+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-12 07:18+0000\n"
+"PO-Revision-Date: 2016-11-12 14:57+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,13 +22,13 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "«&nbsp;%s&nbsp;»"
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"
-msgstr[1] "Novos objetivos"
+msgstr[1] "Novos Objetivos"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -242,7 +242,7 @@ msgstr "Mostrar lotes de construção (ligar/desligar)"
 #: ../../src/editor/editorinteractive.cc:113
 #: ../../src/wui/interactive_gamebase.cc:66
 msgid "Reset zoom"
-msgstr ""
+msgstr "Reiniciar zoom"
 
 #: ../../src/editor/editorinteractive.cc:115
 #: ../../src/ui_fsmenu/launch_mpg.cc:172
@@ -2048,13 +2048,13 @@ msgstr "%1% (%2%)"
 #: ../../src/ui_basic/dropdown.cc:58 ../../src/ui_basic/dropdown.cc:122
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Selecionar um elemento"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:154
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Não Seleccionado"
 
 #: ../../src/ui_basic/spinbox.cc:140
 msgid "Decrease the value"
@@ -2085,8 +2085,8 @@ msgstr[1] "%d minutos"
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixeis"
 
 #: ../../src/ui_fsmenu/about.cc:37 ../../src/ui_fsmenu/main.cc:81
 msgid "About Widelands"
@@ -2514,11 +2514,11 @@ msgstr "Muda para a posição"
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
 "loaded."
-msgstr ""
+msgstr "Incapaz de determinar condições de vitória válidas porque o mapa '%s' não pôde ser carregado."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:270
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/ui_fsmenu/loadgame.cc:67
@@ -2913,7 +2913,7 @@ msgstr "Comprime os ficheiros de dados do Widelands (mapas, repetições, e salv
 
 #: ../../src/ui_fsmenu/options.cc:243
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Escrever as sincronisações -syncstreams- nos jogos em rede para apurar as desincronisações"
 
 #: ../../src/ui_fsmenu/options.cc:249
 msgid "Start building road after placing a flag"
@@ -3285,7 +3285,7 @@ msgstr "Sala de conversa"
 
 #: ../../src/wui/game_chat_menu.cc:58
 msgid "Script console"
-msgstr ""
+msgstr "Consola de programação "
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
