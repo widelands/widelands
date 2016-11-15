@@ -390,12 +390,18 @@ void FullscreenMenuOptions::layout() {
 
 	// Interface
 	// NOCOM fix this
+	log("\nNOCOM Options language_dropdown_ layout\n");
 	language_dropdown_.set_desired_size(
 	   column_width_ / 2, get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 4 * padding_);
+	log("\nNOCOM Options resolution_dropdown_ layout\n");
 	resolution_dropdown_.set_desired_size(
 	   column_width_ / 2, get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_);
+	log("\nNOCOM Options layout dropdowns done\n");
 
+	// NOCOM resizing removes items below dropdowns.
+	log("\nNOCOM Options layout start squashing\n");
 	fullscreen_.set_desired_size(column_width_, fullscreen_.get_h());
+	log("\nNOCOM Options layout end squashing\n");
 	inputgrab_.set_desired_size(column_width_, inputgrab_.get_h());
 	sb_maxfps_.set_unit_width(column_width_ / 4);
 	sb_maxfps_.set_desired_size(column_width_ / 2, sb_maxfps_.get_h());

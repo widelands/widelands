@@ -29,6 +29,16 @@
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 
+namespace {
+
+int base_height() {
+	return std::max(
+	   24,
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+}
+
+}  // namespace
+
 namespace UI {
 
 BaseDropdown::BaseDropdown(UI::Panel* parent,
@@ -39,15 +49,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const std::string& label,
                            const Image* background,
                            const Image* button_background)
-   : UI::Panel(
-        parent,
-        x,
-        y,
-        w,
-        std::max(24,
-                 UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
-                       ->height() +
-                    2)),  // Height only to fit the button, so we can use this in Box layout.
+   : UI::Panel(parent,
+               x,
+               y,
+               w,
+               base_height()),  // Height only to fit the button, so we can use this in Box layout.
      max_list_height_(h - 2 * get_h()),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
@@ -76,10 +82,35 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
+	layout();
 }
 
 BaseDropdown::~BaseDropdown() {
 	clear();
+}
+
+void BaseDropdown::layout() {
+	log("\nNOCOM old size was: %d %d\n", get_w(), get_h());
+	log("NOCOM button box: %d %d\n", button_box_.get_w(), button_box_.get_h());
+	log("NOCOM display button: %d %d\n", display_button_.get_w(), display_button_.get_h());
+	log("NOCOM push button: %d %d\n", push_button_.get_w(), push_button_.get_h());
+
+	const int base_h = base_height();
+	const int h = get_h();
+	const int w = get_w();
+	max_list_height_ = h - 2 * base_h;
+	button_box_.set_size(w, base_h);
+
+	display_button_.set_desired_size(w - 24, base_h);
+	list_.set_desired_size(w, max_list_height_);  // NOCOM list height is 0 anyway
+
+	set_desired_size(w, base_h);
+	log("NOCOM new size is: %d %d\n", get_w(), get_h());
+	log("NOCOM button box: %d %d\n", button_box_.get_w(), button_box_.get_h());
+	log("NOCOM display button: %d %d\n", display_button_.get_w(), display_button_.get_h());
+	log("NOCOM push button: %d %d\n", push_button_.get_w(), push_button_.get_h());
+	log("NOCOM list: %d %d\n", list_.get_w(), list_.get_h());
+	get_parent()->layout();
 }
 
 void BaseDropdown::add(const std::string& name,
