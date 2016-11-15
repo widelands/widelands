@@ -81,6 +81,8 @@ public:
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	void set_height(int height);
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
