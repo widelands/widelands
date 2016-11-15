@@ -72,9 +72,8 @@ Table<void*>::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ =
-		new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_,
-	                 Scrollbar::kSize, get_h() - headerheight_, button_background);
+	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
+	                           get_h() - headerheight_, button_background);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -547,17 +546,18 @@ void Table<void*>::layout() {
 		return;
 	}
 
-	// Position the scrollbar
+	// Position and update the scrollbar
 	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
 	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
 	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
+	// Find a column to resize
 	size_t resizeable_column = std::numeric_limits<size_t>::max();
 	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
 		resizeable_column = flexible_column_;
 	} else {
-		// Find the widest column for resizing
+		// Use the widest column
 		int all_columns_width = scrollbar_ && scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 		uint32_t widest_width = columns_[resizeable_column].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
@@ -570,7 +570,7 @@ void Table<void*>::layout() {
 		}
 	}
 
-	// If we have a flexible column, adjust the column sizes.
+	// If we have a resizeable column, adjust the column sizes.
 	if (resizeable_column != std::numeric_limits<size_t>::max()) {
 		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 		for (const auto& column : columns_) {
@@ -589,7 +589,7 @@ void Table<void*>::layout() {
 			if (scrollbar_->is_enabled()) {
 				const UI::Button* last_column_btn = columns_.back().btn;
 				scrollbar_filler_button_->set_pos(
-					Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
 				scrollbar_filler_button_->set_visible(true);
 			} else {
 				scrollbar_filler_button_->set_visible(false);
