@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2016-01-03 22:24+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "Ikke implementeret endnu"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:12
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Beklager, dette kort er endnu ikke implementeret."
 
-#: ../../scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "»%s"
 
-#: ../../scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nyt mål"

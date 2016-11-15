@@ -85,7 +85,7 @@ SpinBox::SpinBox(Panel* const parent,
                  int32_t const maxval,
                  const std::string& label_text,
                  const SpinBox::Units& unit,
-                 const Image* background,
+                 const Image* button_background,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
@@ -105,12 +105,13 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->background = background;
+	sbi_->background = button_background;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
-	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft,
-	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	sbi_->label =
+	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft, button_background,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label, UI::Align::kHCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);

@@ -3,9 +3,9 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
-# Cristiano Magro, 2015
-# Cristiano Magro, 2016
-# Cristiano Magro, 2016
+# xno, 2015
+# xno, 2016
+# xno, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-03 14:36+0000\n"
-"Last-Translator: Cristiano Magro\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-25 16:36+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,16 +26,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Edificio perso!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Edificio perso!"
@@ -219,11 +219,11 @@ msgstr "Costruisci una fucina di strumenti."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr "Costruisci dei campi di addestramento per i soldati"
+msgstr "Costruisci dei centri di addestramento per i soldati"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr "Campi di addestramento per i soldati"
+msgstr "Centri di addestramento per i soldati"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""

@@ -31,7 +31,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "economy/road.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "logic/constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -174,7 +173,7 @@ Player& EditorGameBase::player(const int32_t n) const {
 
 void EditorGameBase::inform_players_about_ownership(MapIndex const i,
                                                     PlayerNumber const new_owner) {
-	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
 		if (1 < player_field.vision) {
 			player_field.owner = new_owner;
@@ -184,7 +183,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
 	if (!Road::is_road_descr(descr))
-		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
 				player_field.map_object_descr[TCoords<>::None] = descr;
@@ -206,7 +205,7 @@ void EditorGameBase::set_map(Map* const new_map) {
 }
 
 void EditorGameBase::allocate_player_maps() {
-	iterate_players_existing(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
 	}
 }
@@ -483,7 +482,7 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
-	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_;
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
@@ -530,7 +529,7 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 /// This conquers a given area because of a new (military) building that is set
 /// there.
-void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
+void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area, bool conquer_guarded_location) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -540,7 +539,7 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 
-	do_conquer_area(player_area, true);
+	do_conquer_area(player_area, true, 0, conquer_guarded_location);
 
 	//  Players are not allowed to have their immovables on their borders.
 	//  Therefore the area must be enlarged before calling
@@ -604,10 +603,10 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 // testsuite).
 void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
                                      bool const conquer,
-                                     PlayerNumber const preferred_player,
+									 PlayerNumber const preferred_player,
+									 bool const conquer_guarded_location_by_superior_influence,
                                      bool const neutral_when_no_influence,
-                                     bool const neutral_when_competing_influence,
-                                     bool const conquer_guarded_location_by_superior_influence) {
+                                     bool const neutral_when_competing_influence) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);

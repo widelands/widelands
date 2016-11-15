@@ -29,13 +29,8 @@
  */
 class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
-	/// Calls FullscreenMenuMainMenu(const std::string& background_image)
-	/// with a default background image
+	/// Assigns values for alignment and size, depending on screen size
 	FullscreenMenuMainMenu();
-
-	/// Sets the background image and assigns values
-	/// for alignment and size, depending on screen size
-	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
 	void layout() override;
@@ -46,7 +41,7 @@ protected:
 	uint32_t padding_;
 
 	const std::string button_background_;
-	UI::Box vbox;
+	UI::Box vbox_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H

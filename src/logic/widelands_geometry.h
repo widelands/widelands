@@ -38,6 +38,7 @@ struct Extent {
 /**
  * Structure used to store map coordinates
  */
+// TODO(sirver): This should go away and be replaced by Vector2i16.
 struct Coords {
 	Coords();
 	Coords(int16_t nx, int16_t ny);

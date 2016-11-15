@@ -33,40 +33,24 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
 
      // Buttons
-     metaserver(&vbox,
+     metaserver(&vbox_,
                 "metaserver",
                 0,
                 0,
                 butw_,
                 buth_,
                 g_gr->images().get(button_background_),
-                _("Internet game"),
-                "",
-                true,
-                false),
+                _("Internet game")),
      showloginbox(nullptr),
-     lan(&vbox,
+     lan(&vbox_,
          "lan",
          0,
          0,
          butw_,
          buth_,
          g_gr->images().get(button_background_),
-         _("LAN / Direct IP"),
-         "",
-         true,
-         false),
-     back(&vbox,
-          "back",
-          0,
-          0,
-          butw_,
-          buth_,
-          g_gr->images().get(button_background_),
-          _("Back"),
-          "",
-          true,
-          false) {
+         _("LAN / Direct IP")),
+     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
 
@@ -80,17 +64,17 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox.add(&metaserver, UI::Align::kHCenter, true);
-	vbox.add(&lan, UI::Align::kHCenter, true);
-	vbox.add_inf_space();
-	vbox.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&metaserver, UI::Align::kHCenter, true);
+	vbox_.add(&lan, UI::Align::kHCenter, true);
+	vbox_.add_inf_space();
+	vbox_.add(&back, UI::Align::kHCenter, true);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);
 	if (auto_log_) {
 		showloginbox = new UI::Button(
 		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but1.png"),
-		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"), true, false);
+		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
 		showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	}
@@ -164,18 +148,18 @@ void FullscreenMenuMultiPlayer::layout() {
 	title.set_size(get_w(), title.get_h());
 	FullscreenMenuMainMenu::layout();
 
-	title.set_pos(Point(0, title_y_));
+	title.set_pos(Vector2i(0, title_y_));
 
 	metaserver.set_size(butw_, buth_);
 	if (showloginbox) {
-		showloginbox->set_pos(Point(box_x_ + butw_ + padding_ / 2, box_y_));
+		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
 		showloginbox->set_size(buth_, buth_);
 	}
 	metaserver.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
 
-	vbox.set_pos(Point(box_x_, box_y_));
-	vbox.set_inner_spacing(padding_);
-	vbox.set_size(butw_, get_h() - vbox.get_y() - 3 * title_y_);
+	vbox_.set_pos(Vector2i(box_x_, box_y_));
+	vbox_.set_inner_spacing(padding_);
+	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 3 * title_y_);
 }

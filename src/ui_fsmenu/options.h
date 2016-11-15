@@ -28,7 +28,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/listselect.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
@@ -126,11 +126,10 @@ private:
 	UI::Box box_sound_;
 	UI::Box box_saving_;
 	UI::Box box_game_;
-	UI::Box box_language_;
 
 	// Interface options
-	UI::Textarea label_resolution_;
-	UI::Listselect<void*> resolution_list_;
+	UI::Dropdown<std::string> language_dropdown_;
+	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
 	UI::SpinBox sb_maxfps_;
@@ -157,10 +156,6 @@ private:
 	UI::Checkbox show_workarea_preview_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
-
-	// Language options
-	UI::Textarea label_language_;
-	UI::Listselect<std::string> language_list_;
 
 	OptionsCtrl::OptionsStruct os_;
 

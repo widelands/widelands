@@ -55,6 +55,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
                   MapDetails::Style::kFsMenu),
+
      basedir_("maps"),
      settings_(settings),
      ctrl_(ctrl),
@@ -80,7 +81,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
-	cb_dont_localize_mapnames_ = new UI::Checkbox(hbox, Point(0, 0), _("Show original map names"));
+	cb_dont_localize_mapnames_ =
+	   new UI::Checkbox(hbox, Vector2i(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
@@ -126,13 +128,13 @@ void FullscreenMenuMapSelect::layout() {
 	title_.set_size(get_w(), title_.get_h());
 	FullscreenMenuLoadMapOrGame::layout();
 	checkboxes_y_ = tabley_ - 4 * (cb_show_all_maps_->get_h() + checkbox_padding_) - 2 * padding_;
-	title_.set_pos(Point(0, checkboxes_y_ / 3));
-	checkboxes_.set_pos(Point(tablex_, checkboxes_y_));
+	title_.set_pos(Vector2i(0, checkboxes_y_ / 3));
+	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
 	checkboxes_.set_size(get_w() - 2 * tablex_, tabley_ - checkboxes_y_);
 	table_.set_size(tablew_, tableh_);
-	table_.set_pos(Point(tablex_, tabley_));
+	table_.set_pos(Vector2i(tablex_, tabley_));
 	map_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	map_details_.set_pos(Point(right_column_x_, tabley_));
+	map_details_.set_pos(Vector2i(right_column_x_, tabley_));
 }
 
 void FullscreenMenuMapSelect::think() {
@@ -299,7 +301,7 @@ FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::st
 	int32_t id = tags_ordered_.size();
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
 	cb->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Align::kLeft, true);
