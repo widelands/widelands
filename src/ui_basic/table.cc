@@ -497,12 +497,11 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
-	for (size_t i = 0; i < columns_.size(); ++i)
+	for (size_t i = 0; i < columns_.size(); ++i) {
 		if (columns_.at(i).is_checkbox_column) {
 			result.data_.at(i).d_picture = g_gr->images().get("images/ui_basic/checkbox_empty.png");
 		}
-
-	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
+	}
 
 	if (do_select) {
 		select(entry_records_.size() - 1);
@@ -528,12 +527,12 @@ void Table<void*>::remove(const uint32_t i) {
 	const EntryRecordVector::iterator it = entry_records_.begin() + i;
 	delete *it;
 	entry_records_.erase(it);
-	if (selection_ == i)
+	if (selection_ == i) {
 		selection_ = no_selection_index();
-	else if (selection_ > i && selection_ != no_selection_index())
+	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
-
-	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
+	}
+	layout();
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
@@ -552,8 +551,7 @@ void Table<void*>::layout() {
 	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
 	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
 	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
-	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - get_h() - headerheight_);
-	// NOCOM scrollbar height is broken, c.f. Messages menu.
+	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	size_t resizeable_column = std::numeric_limits<size_t>::max();
 	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
