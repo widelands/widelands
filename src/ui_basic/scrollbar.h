@@ -23,6 +23,7 @@
 #include <boost/signals2.hpp>
 
 #include "base/rect.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -37,7 +38,13 @@ struct Scrollbar : public Panel {
 	static constexpr int kSize = 24;
 
 public:
-	Scrollbar(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
+	Scrollbar(Panel* parent,
+	          int32_t x,
+	          int32_t y,
+	          uint32_t w,
+	          uint32_t h,
+	          const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	          bool horiz = false);
 
 	boost::signals2::signal<void(int32_t)> moved;
 
@@ -76,7 +83,7 @@ private:
 	void action(Area area);
 
 	void draw_button(RenderTarget&, Area, const Rectf&);
-	void draw_area(RenderTarget&, Area, const Rectf&);
+	void draw_area(RenderTarget& dst, Area area, const Rectf& r);
 	void draw(RenderTarget&) override;
 	void think() override;
 
@@ -100,7 +107,6 @@ private:
 
 	const Image* pic_minus_;  ///< left/up
 	const Image* pic_plus_;   ///< right/down
-	const Image* pic_background_;
 	const Image* pic_buttons_;
 };
 }

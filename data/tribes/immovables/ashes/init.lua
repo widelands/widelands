@@ -1,4 +1,6 @@
 -- RST
+-- .. _lua_tribes_immovables:
+--
 -- Tribe Immovables
 -- ----------------
 --

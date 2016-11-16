@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-05-20 21:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-23 23:09+0000\n"
+"Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:16
 msgid "Artifacts"
-msgstr ""
+msgstr "Daraozadoù"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid ""
@@ -28,7 +29,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid "No Artifacts"
-msgstr ""
+msgstr "Daraozadoù ebet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid ""
@@ -39,7 +40,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:62
 msgid "New Artifact Found"
-msgstr ""
+msgstr "Daraozadoù Nevez Kavet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Your team found a new artifact."
@@ -47,7 +48,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:66
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Daraozadoù Kollet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:67
 msgid "One of your team’s artifacts was stolen by an enemy."
@@ -55,7 +56,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:70
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Daraozadoù Aloubet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:71
 msgid "Your team stole an artifact from an enemy."
@@ -65,7 +66,7 @@ msgstr ""
 #. "Steve, Robert, David"
 #: ../../data/scripting/win_conditions/artifacts.lua:141
 msgid ", "
-msgstr ""
+msgstr ","
 
 #: ../../data/scripting/win_conditions/artifacts.lua:148
 msgid "Overview:"
@@ -76,8 +77,8 @@ msgstr ""
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i daraozad"
+msgstr[1] "%i daraozadoù"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:153

@@ -141,7 +141,7 @@ for category in developers:
 		lua_string += "}," # entries
 
 		lua_string += "}," # category
-lua_string += "} end" # developers
+lua_string += "} end\n" # developers
 
 print("Writing developers")
 dest_filename = "developers.lua"

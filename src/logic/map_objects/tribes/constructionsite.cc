@@ -41,6 +41,10 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -329,7 +333,8 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	const uint32_t cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
+	const uint32_t cur_frame =
+	   info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	tanim = cur_frame * FRAME_LENGTH;
 
 	const uint16_t w = anim.width();
@@ -362,12 +367,12 @@ void ConstructionSite::draw(uint32_t gametime,
 		dst->blit_animation(point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH,
 		                    player_color,
 		                    Recti(Vector2i(0, 0), prev_building_anim.width(),
-		                         std::min<int>(prev_building_anim.height(), h - lines)));
+		                          std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst->blit_animation(point_on_dst, scale, anim_idx, tanim,
-	                    player_color, Recti(Vector2i(0, h - lines), w, lines));
+	dst->blit_animation(
+	   point_on_dst, scale, anim_idx, tanim, player_color, Recti(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

@@ -50,7 +50,9 @@
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
-
+/**
+  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
+  */
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
@@ -578,7 +580,6 @@ bool Building::fetch_from_flag(Game&) {
 	return false;
 }
 
-
 void Building::draw(uint32_t gametime,
                     const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
@@ -600,7 +601,7 @@ Draw overlay help strings when enabled.
 */
 void Building::draw_info(const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
-								 const float scale,
+                         const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
 	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";

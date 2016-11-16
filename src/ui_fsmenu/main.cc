@@ -63,8 +63,14 @@ FullscreenMenuMain::FullscreenMenuMain()
             _("Watch Replay")),
      editor(
         &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
-     options(
-        &vbox_, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Options")),
+     options(&vbox_,
+             "options",
+             0,
+             0,
+             butw_,
+             buth_,
+             g_gr->images().get(button_background_),
+             _("Options")),
      about(&vbox_,
            "about",
            0,

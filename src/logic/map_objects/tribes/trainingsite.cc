@@ -41,6 +41,10 @@ namespace Widelands {
 
 const uint32_t TrainingSite::training_state_multiplier_ = 12;
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
+  */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
                                      const EditorGameBase& egbase)

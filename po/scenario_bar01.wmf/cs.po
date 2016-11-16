@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-09 09:31+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-30 11:06+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Postav chatu lesníka vedle každé chaty dřevorubce."
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Stromy přirozeně rostou pomalu. Aby si měl dost kmenů, je potřeba postavit lesníky."
+msgstr "Stromy, jak už to tak chodí, rostou pomalu. Aby si měl dost kmenů, je potřeba postavit lesníky."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -295,7 +295,7 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Třetím materiálem nutným pro vylepšení budov je doškový rákos, užívaný pro zakrytí střechy. Doškový rákos je pěstovaný zahradníkem okolo jeho budovy, rákosového pole."
+msgstr "Třetím materiálem nutným pro vylepšení budov je rákos, užívaný pro zakrytí střechy. Rákos pěstuje zahradník okolo své budovy, rákosového pole."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
