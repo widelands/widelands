@@ -45,8 +45,7 @@ namespace UI {
  *       h
 */
 Table<void*>::Table(
-   Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const Image* button_background,
-                    const bool descending, TableRows rowtype)
+	Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const Image* button_background, TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(
@@ -65,8 +64,8 @@ Table<void*>::Table(
      sort_column_(0),
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
+	  flexible_column_(std::numeric_limits<size_t>::max()),
      is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
-     flexible_column_(std::numeric_limits<size_t>::max(),
      ctrl_down_(false),
      shift_down_(false) {
 	set_thinks(false);
@@ -99,8 +98,8 @@ Table<void*>::~Table() {
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
-                              TableColumnType column_type,
-                              Align const alignment) {
+                              Align const alignment,
+                              TableColumnType column_type) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -124,16 +123,12 @@ void Table<void*>::add_column(uint32_t const width,
 		c.alignment = alignment;
 		c.compare = boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
 		columns_.push_back(c);
+		if (column_type == TableColumnType::kFlexible) {
+			assert(flexible_column_ == std::numeric_limits<size_t>::max());
+			flexible_column_ = columns_.size() - 1;
+		}
 	}
-	if (!scrollbar_) {
-		scrollbar_ =
-		   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-		                 Scrollbar::kSize, get_h() - headerheight_, false);
-		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
-		scrollbar_->set_steps(1);
-		scrollbar_->set_singlestepsize(lineheight_);
-		scrollbar_->set_pagesize(get_h() - lineheight_);
-	}
+	layout();
 }
 
 void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
@@ -195,14 +190,14 @@ void Table<void*>::clear() {
 	clear_selections();
 }
 
-uint32_t Table<void*>::get_eff_w() const {
-	return scrollbar_->is_enabled() ? get_w() - scrollbar_->get_w() : get_w();
-}
-
 void Table<void*>::clear_selections() {
 	multiselect_.clear();
 	selection_ = no_selection_index();
 	last_selection_ = no_selection_index();
+}
+
+uint32_t Table<void*>::get_eff_w() const {
+	return scrollbar_->is_enabled() ? get_w() - scrollbar_->get_w() : get_w();
 }
 
 void Table<void*>::fit_height(uint32_t entries) {
@@ -399,7 +394,7 @@ bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const y) {
+bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y) {
 	if (get_can_focus())
 		focus();
 
@@ -663,7 +658,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), use_clr(false) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,

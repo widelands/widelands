@@ -25,6 +25,8 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -35,14 +37,22 @@ namespace UI {
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
 protected:
-	/// \param parent     the parent panel
-	/// \param x          the x-position within 'parent'
-	/// \param y          the y-position within 'parent'
-	/// \param w          the dropdown's width
-	/// \param h          the maximum height for the dropdown list
-	/// \param label      a label to prefix to the selected entry on the display button.
-	BaseDropdown(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label);
+	/// \param parent             the parent panel
+	/// \param x                  the x-position within 'parent'
+	/// \param y                  the y-position within 'parent'
+	/// \param w                  the dropdown's width
+	/// \param h                  the maximum height for the dropdown list
+	/// \param label              a label to prefix to the selected entry on the display button.
+	/// \param background         the background image for this dropdown
+	/// \param button_background  the background image all buttons in this dropdown
+	BaseDropdown(Panel* parent,
+	             int32_t x,
+	             int32_t y,
+	             uint32_t w,
+	             uint32_t h,
+	             const std::string& label,
+	             const Image* background,
+	             const Image* button_background);
 	~BaseDropdown();
 
 public:
@@ -103,7 +113,7 @@ private:
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
 
-	uint32_t max_list_height_;
+	int max_list_height_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button push_button_;
@@ -117,15 +127,23 @@ private:
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
-	/// \param parent     the parent panel
-	/// \param x          the x-position within 'parent'
-	/// \param y          the y-position within 'parent'
-	/// \param w          the dropdown's width
-	/// \param h          the maximum height for the dropdown list
-	/// \param label      a label to prefix to the selected entry on the display button.
-	///                   entry.
-	Dropdown(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
-	   : BaseDropdown(parent, x, y, w, h, label) {
+	/// \param parent             the parent panel
+	/// \param x                  the x-position within 'parent'
+	/// \param y                  the y-position within 'parent'
+	/// \param w                  the dropdown's width
+	/// \param h                  the maximum height for the dropdown list
+	/// \param label              a label to prefix to the selected entry on the display button.
+	/// \param background         the background image for this dropdown
+	/// \param button_background  the background image all buttons in this dropdown
+	Dropdown(Panel* parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& label,
+	         const Image* background = g_gr->images().get("images/ui_basic/but1.png"),
+	         const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"))
+	   : BaseDropdown(parent, x, y, w, h, label, background, button_background) {
 	}
 	~Dropdown() {
 		clear();

@@ -66,7 +66,6 @@ for description in descriptions_en:
 	descriptions += "    <p>\n"
 	descriptions += "      " + description + "\n"
 	descriptions += "    </p>\n"
-descriptions += "  </description>\n"
 
 # For .desktop
 generic_names = "GenericName=" + generic_name_en + "\n"
@@ -90,14 +89,13 @@ for translation_filename in translation_files:
 		generic_name = translation["category"]
 		if generic_name != generic_name_en:
 			generic_names += "GenericName[" + lang_code + "]="+ generic_name +"\n" # .desktop
-		if translation["description"] != descriptions_en:
-			descriptions += "  <description xml:lang=\"" + lang_code + "\">\n" # appdata.xml
+		if translation["description"] != descriptions_en: # appdata.xml
 			for description in translation["description"]:
-				descriptions += "    <p>\n"
+				descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
 				descriptions += "      " + description + "\n"
 				descriptions += "    </p>\n"
-			descriptions += "  </description>\n"
 		translation_file.close()
+descriptions += "  </description>\n"
 
 print("- Writing widelands.appdata.xml")
 input_file = open(appdata_input_filename, "r")
@@ -134,3 +132,6 @@ dest_file.write(desktop)
 dest_file.close()
 
 print("Done!")
+
+from subprocess import call
+call(["appstreamcli", "validate", base_path + "/debian/widelands.appdata.xml"])

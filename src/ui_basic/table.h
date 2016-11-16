@@ -264,9 +264,7 @@ public:
 	uint32_t get_lineheight() const {
 		return lineheight_ + 2;
 	}
-	uint32_t get_eff_w() const {
-		return get_w();
-	}
+	uint32_t get_eff_w() const;
 
 	/// Adjust the desired size to fit the height needed for the number of entries.
 	/// If entries == 0, the current entries are used.
@@ -284,14 +282,13 @@ private:
 	bool sort_helper(uint32_t a, uint32_t b);
 	void layout() override;
 
-	struct Column;
-	using Columns = std::vector<Column>;
 	struct Column {
 		Button* btn;
 		uint32_t width;
 		Align alignment;
 		CompareFn compare;
 	};
+	using Columns = std::vector<Column>;
 
 	static const int32_t ms_darken_value = -20;
 
