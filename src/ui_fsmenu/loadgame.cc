@@ -85,7 +85,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::TableRows::kMultiDescending),
+     table_(this,
+            tablex_,
+            tabley_,
+            tablew_,
+            tableh_,
+            g_gr->images().get("images/ui_basic/but3.png"),
+            UI::TableRows::kMultiDescending),
 
      is_replay_(is_replay),
      // Main title

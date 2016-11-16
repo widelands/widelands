@@ -29,6 +29,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -36,6 +37,7 @@ struct Scrollbar;
 struct Button;
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
+enum class TableColumnType { kFixed, kFlexible };
 
 /** A table with columns and lines.
  *
@@ -56,6 +58,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -66,7 +69,8 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                Align = UI::Align::kLeft);
+	                Align = UI::Align::kLeft,
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
 
@@ -164,6 +168,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -173,7 +178,8 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                Align = UI::Align::kLeft);
+	                Align = UI::Align::kLeft,
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
@@ -276,6 +282,7 @@ public:
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
+	void layout() override;
 
 	struct Column;
 	using Columns = std::vector<Column>;
@@ -292,7 +299,10 @@ private:
 	uint32_t total_width_;
 	uint32_t headerheight_;
 	int32_t lineheight_;
+	const Image* button_background_;
 	Scrollbar* scrollbar_;
+	// A disabled button that will fill the space above the scroll bar
+	UI::Button* scrollbar_filler_button_;
 	int32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
 	std::set<uint32_t> multiselect_;
@@ -300,6 +310,8 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	Columns::size_type sort_column_;
 	bool sort_descending_;
+	// This column will grow/shrink depending on the scrollbar being present
+	size_t flexible_column_;
 	bool is_multiselect_;
 	bool ctrl_down_;   // Whether the ctrl key is being pressed
 	bool shift_down_;  // Whether the shift key is being pressed
@@ -318,8 +330,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -347,8 +360,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -376,8 +390,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -409,8 +424,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
@@ -444,8 +460,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -475,8 +492,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
+	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, rowtype) {
+	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 };
 }
