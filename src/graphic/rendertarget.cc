@@ -326,11 +326,7 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
 	Rectf destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * scale,
 	                       dst.y - (animation.hotspot().y - source_rect.y) * scale,
 	                       source_rect.w * scale, source_rect.h * scale);
-	source_rect.w *= animation.scale();
-	source_rect.h *= animation.scale();
-	if (to_surface_geometry(&destination_rect, &source_rect)) {
-		animation.blit(time, destination_rect, source_rect, player_color, surface_);
-	}
+	animation.blit(*this, time, destination_rect, source_rect, player_color, surface_);
 
 	// Look if there is a sound effect registered for this frame and trigger the
 	// effect (see SoundHandler::stereo_position).

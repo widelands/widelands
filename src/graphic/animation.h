@@ -31,6 +31,7 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
+#include "graphic/rendertarget.h"
 
 class Image;
 class LuaTable;
@@ -83,7 +84,8 @@ public:
 	/// color used for blitting - the parameter can be 'nullptr', in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
-	virtual void blit(uint32_t time,
+	virtual void blit(RenderTarget& dst,
+	                  uint32_t time,
 	                  const Rectf& dstrc,
 	                  const Rectf& srcrc,
 	                  const RGBColor* clr,
@@ -91,7 +93,6 @@ public:
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;
-	virtual float scale() const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);

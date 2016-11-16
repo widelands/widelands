@@ -72,15 +72,13 @@ public:
 	const Vector2i& hotspot() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(uint32_t time,
+	virtual void blit(RenderTarget& dst,
+	                  uint32_t time,
 	                  const Rectf& dstrc,
 	                  const Rectf& srcrc,
 	                  const RGBColor* clr,
 	                  Surface*) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
-	float scale() const override {
-		return scale_;
-	}
 
 private:
 	// Loads the graphics if they are not yet loaded.
@@ -267,21 +265,24 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 	}
 }
 
-void NonPackedAnimation::blit(uint32_t time,
+void NonPackedAnimation::blit(RenderTarget& dst,
+                              uint32_t time,
                               const Rectf& dstrc,
                               const Rectf& srcrc,
                               const RGBColor* clr,
                               Surface* target) const {
 	assert(target);
-
-	const uint32_t idx = current_frame(time);
-	assert(idx < nr_frames());
-
-	// Scale is set from the outside in order to deal with the edge of the screen.
-	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(dstrc, *frames_.at(idx), srcrc, 1., BlendMode::UseAlpha);
-	} else {
-		target->blit_blended(dstrc, *frames_.at(idx), *pcmasks_.at(idx), srcrc, *clr);
+	Rectf source_rect(srcrc.x, srcrc.y, srcrc.w * scale_, srcrc.h * scale_);
+	Rectf destination_rect(dstrc);
+	if (dst.to_surface_geometry(&destination_rect, &source_rect)) {
+		const uint32_t idx = current_frame(time);
+		assert(idx < nr_frames());
+		if (!hasplrclrs_ || clr == nullptr) {
+			target->blit(destination_rect, *frames_.at(idx), source_rect, 1., BlendMode::UseAlpha);
+		} else {
+			target->blit_blended(
+			   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
+		}
 	}
 }
 
