@@ -133,6 +133,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
+
 	adjust_toolbar_position();
 
 #ifndef NDEBUG
