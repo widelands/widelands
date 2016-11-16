@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-11-08 05:54+0000\n"
+"POT-Creation-Date: 2016-11-12 07:18+0000\n"
+"PO-Revision-Date: 2016-11-14 07:29+0000\n"
 "Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -1003,92 +1003,92 @@ msgstr "Punctul de pornire lipsește"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr ""
+msgstr "Widelands nu a putut porni jocul deoarece jucătorul %u nu are un punct de pornire.\nPentru a rezolva această problemă poți adăuga un punct de start folosind Editorul Widelands."
 
 #: ../../src/logic/game_data_error.cc:48
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr ""
+msgstr "Acest joc a fost salvat folosind o versiune veche de Widelands și nu mia poate fi încarcat, sau este o versiune mai nouă și nu poate fi folosită încă."
 
 #: ../../src/logic/map.h:181
 msgid "No description defined"
-msgstr ""
+msgstr "Nu exista o descriere definită"
 
 #: ../../src/logic/map_objects/immovable.cc:501
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:70
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% construit"
 
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:96
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% demontat"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:118
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% soldați (+%2%)"
+msgstr[1] "%1% soldați (+%2%)"
+msgstr[2] "%1% soldați (+%2%)"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:122
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u soldați"
+msgstr[1] "%u soldați"
+msgstr[2] "%u soldați"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:130
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1%(+%2%) soldați (+%3%)"
+msgstr[1] "%1%(+%2%) soldați (+%3%)"
+msgstr[2] "%1%(+%2%) soldați (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:136
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1%(+%2%) soldați"
+msgstr[1] "%1%(+%2%) soldați"
+msgstr[2] "%1%(+%2%) soldați"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:770
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "Pierdut!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:771
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Unitate militară pierdută!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy Defeated!"
-msgstr ""
+msgstr "Inamic înfrânt!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:811
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Inamic la unitate înfrânt!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:853
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Atac!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:853
 msgid "You are under attack"
-msgstr ""
+msgstr "Ești atacat"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1096,7 +1096,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:292
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "economia are nevoie de ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
@@ -1104,7 +1104,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:301
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "economia nu are nevoie de ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1112,14 +1112,14 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:314
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "economia are nevoie de muncitor ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/map_objects/tribes/production_program.cc:324
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "economia nu are nevoie de muncitor ‘%s’"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are
@@ -1141,29 +1141,29 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:369
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "clădirea are următoarele bunuri: %s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:391
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "clădirea nu are următoarele bunuri: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:404
 msgid "a worker needs experience"
-msgstr ""
+msgstr "un muncitor are nevoie de experiență"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:410
 msgid "the workers need no experience"
-msgstr ""
+msgstr "muncitorii nu au nevoie de experiență"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1182,23 +1182,23 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:858
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "Nu s-a pornit %1$s pentru că %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:519
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "Complet %1$s pentru că %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:524
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "Sărit %1$s pentru că %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:719
 msgid "No use for ships on this map!"
-msgstr ""
+msgstr "Nave nefolositoare pe această hartă"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1236,16 +1236,16 @@ msgstr[2] ""
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1236
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nici un soldat de antrenat"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1245
 #: ../../src/logic/map_objects/tribes/production_program.cc:1322
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nu a fost găsit nici un soldat pentru acest nivel de antrenare"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:257
 msgid "(not occupied)"
-msgstr ""
+msgstr "(neocupat)"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:264
 msgid "Worker missing"
@@ -1256,7 +1256,7 @@ msgstr[2] ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:271
 msgid "(stopped)"
-msgstr ""
+msgstr "(oprit)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -1264,104 +1264,104 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:622
 #, c-format
 msgid "%i%%"
-msgstr ""
+msgstr "%i%%"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:914
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Nu se mai găsesc resurse!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:412
 msgid "Port Space"
-msgstr ""
+msgstr "Spațiu pentru port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:412
 msgid "Port Space Found"
-msgstr ""
+msgstr "Spațiu pentru port găsit"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:413
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "O navă de expediție a găsit un noi spațiu pentru a construi un port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:534
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Insula circumnavigată"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:534
 msgctxt "ship"
 msgid "Waiting"
-msgstr ""
+msgstr "Așteptând"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:535
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "O navă de expediție a navigat în jurul insulei fără nici un eventiment"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:599
 msgid "Coast Reached"
-msgstr ""
+msgstr "Ajuns la mal"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/map_objects/tribes/ship.cc:599
 msgid "Land Ahoy!"
-msgstr ""
+msgstr "Țărm la orizont"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:600
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "O navă de expediție a ajuns la mal și așteaptă viitoarele tale comenzi."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:654
 msgid "New port construction site is gone"
-msgstr ""
+msgstr "Noul spațiu pentru construirea portului a dispărut"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:654
 msgid "Port Lost!"
-msgstr ""
+msgstr "Portul este pierdut!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:655
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Descărcarea bunurilor eșuată, expediția este anulată."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:830
 msgctxt "ship"
 msgid "Expedition"
-msgstr ""
+msgstr "Expediție"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:830
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Gata de expediție"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:831
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "O navă de expediție îți așteaptă comenzile"
 
 #. * TRANSLATORS: This is a ship state
 #: ../../src/logic/map_objects/tribes/ship.cc:952
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr ""
+msgstr "Navigare"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:956
 msgctxt "ship_state"
 msgid "Waiting"
-msgstr ""
+msgstr "Așteaptă"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:960
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr ""
+msgstr "Căutare"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "A fost găsit un spațiu pentru port"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
@@ -1369,24 +1369,24 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/ship.cc:969
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "A fost găsită o colonie"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1349
 #: ../../src/logic/map_objects/tribes/soldier.cc:1355
 msgid "Logic error"
-msgstr ""
+msgstr "Eroare logică"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:415
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Un nou port a fost adăugat economiei tale"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:418
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Un nou sediu central a fost adăugat economiei tale"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:421
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Un nou depozit a fost adăugat economiei tale"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:114
 #, c-format
