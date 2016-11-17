@@ -243,8 +243,8 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
 		}
 	}
-	// We can't scale down images in the font renderer yet, so we need an extra representative image
-	// if the animation has high resolution.
+	// TODO(GunChleoc): We can't scale down images in the font renderer yet, so we need an extra
+	// representative image if the animation has high resolution.
 	if (table.has_key("representative_image")) {
 		representative_image_filename_ = table.get_string("representative_image");
 	}

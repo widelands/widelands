@@ -116,7 +116,7 @@ public:
 	                    uint32_t animation,
 	                    uint32_t time,
 	                    const RGBColor& player_color,
-	                    const Recti& source_rect);
+	                    const int percent_from_bottom);
 
 	void reset();
 
@@ -141,7 +141,7 @@ protected:
 	                       const Animation& animation,
 	                       uint32_t time,
 	                       const RGBColor* player_color,
-	                       const Recti& source_rect);
+	                       const int percent_from_bottom = 100);
 
 	/// The target surface
 	Surface* surface_;

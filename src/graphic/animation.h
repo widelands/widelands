@@ -58,18 +58,13 @@ public:
 	}
 
 	/// The dimensions of this animation.
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
+	virtual float height() const = 0;
 
 	/// The number of animation frames of this animation.
 	virtual uint16_t nr_frames() const = 0;
 
 	/// The number of milliseconds each frame will be displayed.
 	virtual uint32_t frametime() const = 0;
-
-	/// The hotspot of this animation. Note that this is ignored when blitting,
-	/// so the caller has to adjust for the hotspot himself.
-	virtual const Vector2i& hotspot() const = 0;
 
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
@@ -86,10 +81,10 @@ public:
 	/// operation and must be non-null.
 	virtual void blit(RenderTarget& dst,
 	                  uint32_t time,
-	                  const Rectf& dstrc,
-	                  const Rectf& srcrc,
+	                  const Vector2f& position,
+	                  const float scale,
 	                  const RGBColor* clr,
-	                  Surface*) const = 0;
+	                  const int percent_from_bottom) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;

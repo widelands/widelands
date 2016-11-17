@@ -481,10 +481,6 @@ void Immovable::draw_construction(const uint32_t gametime,
 	uint32_t frametime = g_gr->animations().get_animation(anim_).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
-	const uint16_t curw = anim.width();
-	const uint16_t curh = anim.height();
-
-	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
 	assert(get_owner() != nullptr);  // Who would build something they do not own?
 	const RGBColor& player_color = get_owner()->get_playercolor();
@@ -494,14 +490,15 @@ void Immovable::draw_construction(const uint32_t gametime,
 		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
-	assert(lines <= curh);
-	dst->blit_animation(point_on_dst, scale, anim_, current_frame * frametime, player_color,
-	                    Recti(Vector2i(0, curh - lines), curw, lines));
+	const int percent = ((done % units_per_frame) * 100) / units_per_frame;
+
+	dst->blit_animation(
+	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
+	              (boost::format(_("%i%% built")) % percent).str())
 	                .str(),
 	             point_on_dst, scale, dst);
 }

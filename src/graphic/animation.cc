@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
-#include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
@@ -65,19 +64,17 @@ public:
 	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
-	uint16_t width() const override;
-	uint16_t height() const override;
+	float height() const override;
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
-	const Vector2i& hotspot() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(RenderTarget& dst,
 	                  uint32_t time,
-	                  const Rectf& dstrc,
-	                  const Rectf& srcrc,
+	                  const Vector2f& position,
+	                  const float scale,
 	                  const RGBColor* clr,
-	                  Surface*) const override;
+	                  const int percent_from_bottom) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 private:
@@ -150,9 +147,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		if (table.has_key("scale")) {
 			scale_ = table.get_double("scale");
 			if (scale_ <= 0.0f) {
-				throw wexception(
-					"Animation scale needs to be > 0.0f, but it is %f. The first image of this animation is %s", scale_,
-				   image_files_[0].c_str());
+				throw wexception("Animation scale needs to be > 0.0f, but it is %f. The first image of "
+				                 "this animation is %s",
+				                 scale_, image_files_[0].c_str());
 			}
 		}
 
@@ -204,12 +201,7 @@ void NonPackedAnimation::load_graphics() {
 	}
 }
 
-uint16_t NonPackedAnimation::width() const {
-	ensure_graphics_are_loaded();
-	return frames_[0]->width() / scale_;
-}
-
-uint16_t NonPackedAnimation::height() const {
+float NonPackedAnimation::height() const {
 	ensure_graphics_are_loaded();
 	return frames_[0]->height() / scale_;
 }
@@ -221,10 +213,6 @@ uint16_t NonPackedAnimation::nr_frames() const {
 
 uint32_t NonPackedAnimation::frametime() const {
 	return frametime_;
-}
-
-const Vector2i& NonPackedAnimation::hotspot() const {
-	return hotspot_;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
@@ -240,6 +228,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	return rv;
 }
 
+// TODO(GunChleoc): This is only here for the font renderers.
 const std::string& NonPackedAnimation::representative_image_filename() const {
 	return image_files_[0];
 }
@@ -267,23 +256,32 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 
 void NonPackedAnimation::blit(RenderTarget& dst,
                               uint32_t time,
-                              const Rectf& dstrc,
-                              const Rectf& srcrc,
+                              const Vector2f& position,
+                              const float scale,
                               const RGBColor* clr,
-                              Surface* target) const {
-	assert(target);
-	Rectf source_rect(srcrc.x, srcrc.y, srcrc.w * scale_, srcrc.h * scale_);
-	Rectf destination_rect(dstrc);
-	// to_surface_geometry clips against window and source bitmap, returns false if blitting is
-	// unnecessary because image is not inside the target surface.
-	if (dst.to_surface_geometry(&destination_rect, &source_rect)) {
-		const uint32_t idx = current_frame(time);
-		assert(idx < nr_frames());
-		if (!hasplrclrs_ || clr == nullptr) {
-			target->blit(destination_rect, *frames_.at(idx), source_rect, 1., BlendMode::UseAlpha);
-		} else {
-			target->blit_blended(
-			   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
+                              const int percent_from_bottom) const {
+	ensure_graphics_are_loaded();
+	assert(percent_from_bottom <= 100);
+	if (percent_from_bottom > 0) {
+		// Scaling for zoom and animation image size.
+		float height = percent_from_bottom * frames_[0]->height() / 100;
+		Rectf source_rect(0.f, frames_[0]->height() - height, frames_[0]->width(), height);
+		Rectf destination_rect(position.x - (hotspot_.x - source_rect.x / scale_) * scale,
+		                       position.y - (hotspot_.y - source_rect.y / scale_) * scale,
+		                       source_rect.w * scale / scale_, source_rect.h * scale / scale_);
+
+		// The function to_surface_geometry clips against window and source bitmap, returns false if
+		// blitting is unnecessary because image is not inside the target surface.
+		if (dst.to_surface_geometry(&destination_rect, &source_rect)) {
+			const uint32_t idx = current_frame(time);
+			assert(idx < nr_frames());
+			if (!hasplrclrs_ || clr == nullptr) {
+				dst.get_surface()->blit(
+				   destination_rect, *frames_.at(idx), source_rect, 1., BlendMode::UseAlpha);
+			} else {
+				dst.get_surface()->blit_blended(
+				   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
+			}
 		}
 	}
 }
