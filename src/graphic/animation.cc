@@ -151,7 +151,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			scale_ = table.get_double("scale");
 			if (scale_ <= 0.0f) {
 				throw wexception(
-				   "Animation scale %f needs to be > 0.0f. First image of this animation is %s", scale_,
+					"Animation scale needs to be > 0.0f, but it is %f. The first image of this animation is %s", scale_,
 				   image_files_[0].c_str());
 			}
 		}
@@ -274,6 +274,8 @@ void NonPackedAnimation::blit(RenderTarget& dst,
 	assert(target);
 	Rectf source_rect(srcrc.x, srcrc.y, srcrc.w * scale_, srcrc.h * scale_);
 	Rectf destination_rect(dstrc);
+	// to_surface_geometry clips against window and source bitmap, returns false if blitting is
+	// unnecessary because image is not inside the target surface.
 	if (dst.to_surface_geometry(&destination_rect, &source_rect)) {
 		const uint32_t idx = current_frame(time);
 		assert(idx < nr_frames());
