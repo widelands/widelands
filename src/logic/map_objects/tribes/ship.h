@@ -63,7 +63,7 @@ struct NoteShipWindow {
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
-		: serial(init_serial), action(init_action) {
+	   : serial(init_serial), action(init_action) {
 	}
 };
 
@@ -240,7 +240,7 @@ struct Ship : Bob {
 
 protected:
 	void draw(const EditorGameBase&,
-	          const DrawText& draw_text,
+	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
 	          float scale,
 	          RenderTarget* dst) const override;

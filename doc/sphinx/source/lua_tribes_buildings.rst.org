@@ -1,0 +1,142 @@
+Buildings
+=========
+
+Buildings are defined in their ``init.lua`` file. They also have a corresponding ``helptexts.lua`` file that contains their help texts.
+
+Types of Buildings
+------------------
+
+Widelands knows about the following types of buildings:
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME
+
+.. _lua_tribes_buildings_common:
+
+Common Building Properties
+--------------------------
+
+Buildings are defined with Lua functions called ``new_<building_type>_type{table}``. The contents of ``table`` depend on the type of building that you are defining. The common properties shared by all buildings are:
+
+
+**msgctxt**
+    *Mandatory*. The context that Gettext will use to disambiguate the translations for
+    strings in this table, e.g.::
+
+        msgctxt = "atlanteans_building",
+
+**name**
+    *Mandatory*. A string containing the internal name of this building, e.g.::
+
+        name = "atlanteans_fortress",
+
+**descname**
+    *Mandatory*. The translatable display name. Use ``pgettext`` with the ``msgctxt``
+    above to fetch the string, e.g.::
+
+        descname = pgettext("atlanteans_building", "Fortress"),
+
+**helptext_script**
+    *Mandatory*. The full path to the ``helptexts.lua`` script for this building.
+
+**icon**
+    *Mandatory*. The full path to the menu icon for this building.
+
+**size**
+    *Mandatory*. The size of this building: ``"small"``, ``"medium"``, or ``"big"``.
+
+**vision_range**
+    *Optional. Default:* ``0``. The size of the radius that the building sees.
+
+**buildcost**
+    *Optional*. A table with the wares used to build this building, containing
+    warename - amount pairs, e.g.::
+
+        buildcost = { log = 4, granite = 2 }
+
+    When ``buildcost`` is defined, you also need to define ``return_on_dismantle``.
+
+**return_on_dismantle**
+    *Optional*. The wares that this building will give back to the player when it is
+    dismantled, e.g.::
+
+        buildcost = { log = 2, granite = 1 }
+
+**enhancement**
+    *Optional*. The name of a building that this building can be enhanced to, e.g.::
+
+        enhancement = "atlanteans_fancy_building",
+
+    If ``enhancement`` is defined, the building that this building enhances
+    to will need to define ``enhancement_cost`` and
+    ``return_on_dismantle_on_enhanced``.
+
+**enhancement_cost**
+    *Optional*. The wares needed to upgrade this building, e.g.::
+
+        enhancement_cost = { log = 1, granite = 1 }
+
+**return_on_dismantle_on_enhanced**
+    *Optional*. The wares that this enhanced building will give back to the player
+    when it is dismantled, e.g.::
+
+        return_on_dismantle_on_enhanced = { granite = 1 }
+
+**animations**
+    *Mandatory*. A table containing all animations for this building. Every building
+    needs to have an ``idle`` animation. Other animations that a building
+    can have are ``build``, ``working``, ``unoccupied``. Mines also have
+    an ``unoccupied`` animation.
+    See :doc:`animations` for a detailed description of the animation format.
+
+**needs_seafaring**
+    *Optional. Default:* ``false``. Set to ``true`` if this building will only be available on seafaring maps.
+
+**aihints**
+    *Mandatory*. A list of name - value pairs with hints for the AI. Can be empty.
+
+
+Help Texts
+----------
+
+Each building has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
+The functions in this file return texts that are used for buildings by the Tribal Encyclopedia.
+
+See also the helper functions in :ref:`lua_tribes_global_helptexts.lua`.
+
+
+.. function:: building_helptext_lore()
+
+   Returns a localized string with a lore helptext for this building.
+   If you don't have a lore text yet, use ``no_lore_text_yet()`` from the ``lua_tribes_global_helptexts.lua`` script.
+
+
+.. function:: building_helptext_lore_author()
+
+   Returns a localized string with a fictional author for the lore helptext for this building. The returned string can be empty.
+   If you don't have an author yet, use ``no_lore_author_text_yet()`` from the :ref:`lua_tribes_global_helptexts.lua` script.
+
+   :returns: Localized lore text
+
+
+.. function:: building_helptext_purpose()
+
+   Returns a localized string with a purpose helptext for this building. This should be individually defined for all buildings. You can use ``no_purpose_text_yet()`` from the :ref:`lua_tribes_global_helptexts.lua` script if you're not ready to define this yet.
+
+   :returns: Localized purpose text
+
+
+.. function:: building_helptext_note()
+
+   Returns a localized string with a note that is added to the purpose. This can be empty.
+
+   :returns: Localized note text or empty string.
+
+
+.. function:: building_helptext_performance()
+
+   Returns a localized string with a performance helptext for this building. You can use ``no_purpose_text_yet()`` from the :ref:`lua_tribes_global_helptexts.lua` script if the performance hasn't been calculated yet. Leave empty when this isn't applicable (e.g. for militarysites or warehouses).
+
+   :returns: Localized performance text or empty string.
