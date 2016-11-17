@@ -318,7 +318,9 @@ Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Pl
 Create an immovable at the given location.
 If tribe is not zero, create a immovable of a player (not a PlayerImmovable
 but an immovable defined by the players tribe)
-Does not perform any placability checks.
+Does not perform any placeability checks.
+If this immovable was created by a building, 'former_building' can be set in order to display
+information about it.
 ===============
 */
 Immovable& EditorGameBase::create_immovable(const Coords& c,

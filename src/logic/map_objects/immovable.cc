@@ -324,7 +324,9 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 
 /**
  * Create an immovable of this type
-*/
+ * If this immovable was created by a building, 'former_building' can be set
+ * in order to display information about it.
+ */
 Immovable& ImmovableDescr::create(EditorGameBase& egbase,
                                   const Coords& coords,
                                   const Building* former_building) const {
