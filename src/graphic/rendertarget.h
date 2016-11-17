@@ -130,10 +130,9 @@ public:
 		return offset_;
 	}
 
-	bool to_surface_geometry(Rectf* destination_rect, Rectf* source_rect) const;
-
 protected:
 	bool clip(Rectf& r) const;
+	bool to_surface_geometry(Rectf* destination_rect, Rectf* source_rect) const;
 
 	// Does the actual blitting.
 	void do_blit_animation(const Vector2f& dst,

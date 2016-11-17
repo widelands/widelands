@@ -31,7 +31,7 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
-#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 
 class Image;
 class LuaTable;
@@ -60,6 +60,16 @@ public:
 	/// The dimensions of this animation.
 	virtual float height() const = 0;
 
+	/// The size of the animation source images. Use 'percent_from_bottom' to crop the animation.
+	virtual Rectf source_rectangle(int percent_from_bottom) const = 0;
+
+	/// Calculates the destination rectangle for blitting the animation.
+	/// 'position' is where the top left corner of the animation will end up,
+	/// 'source_rect' is the rectangle calculated by source_rectangle,
+	/// 'scale' is the zoom scale.
+	virtual Rectf
+	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const = 0;
+
 	/// The number of animation frames of this animation.
 	virtual uint16_t nr_frames() const = 0;
 
@@ -74,17 +84,16 @@ public:
 	virtual const std::string& representative_image_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
-	/// so that the given point is at the top left of the frame. Srcrc defines
-	/// the part of the animation that should be blitted. The 'clr' is the player
-	/// color used for blitting - the parameter can be 'nullptr', in which case the
-	/// neutral image will be blitted. The Surface is the target for the blit
-	/// operation and must be non-null.
-	virtual void blit(RenderTarget& dst,
-	                  uint32_t time,
-	                  const Vector2f& position,
-	                  const float scale,
+	/// into the given 'destination_rect'.
+	/// 'source_rect' defines the part of the animation that should be blitted.
+	/// The 'clr' is the player color used for blitting - the parameter can be 'nullptr',
+	/// in which case the neutral image will be blitted. The Surface is the 'target'
+	/// for the blit operation and must be non-null.
+	virtual void blit(uint32_t time,
+	                  const Rectf& source_rect,
+	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  const int percent_from_bottom) const = 0;
+	                  Surface* target) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;

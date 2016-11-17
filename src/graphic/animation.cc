@@ -65,16 +65,19 @@ public:
 
 	// Implements Animation.
 	float height() const override;
+	Rectf source_rectangle(int percent_from_bottom) const override;
+	Rectf destination_rectangle(const Vector2f& position,
+	                            const Rectf& source_rect,
+	                            float scale) const override;
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(RenderTarget& dst,
-	                  uint32_t time,
-	                  const Vector2f& position,
-	                  const float scale,
+	virtual void blit(uint32_t time,
+	                  const Rectf& source_rect,
+	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  const int percent_from_bottom) const override;
+	                  Surface* target) const override;
 	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 private:
@@ -254,35 +257,35 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 	}
 }
 
-void NonPackedAnimation::blit(RenderTarget& dst,
-                              uint32_t time,
-                              const Vector2f& position,
-                              const float scale,
-                              const RGBColor* clr,
-                              const int percent_from_bottom) const {
+Rectf NonPackedAnimation::source_rectangle(int percent_from_bottom) const {
 	ensure_graphics_are_loaded();
-	assert(percent_from_bottom <= 100);
-	if (percent_from_bottom > 0) {
-		// Scaling for zoom and animation image size.
-		float height = percent_from_bottom * frames_[0]->height() / 100;
-		Rectf source_rect(0.f, frames_[0]->height() - height, frames_[0]->width(), height);
-		Rectf destination_rect(position.x - (hotspot_.x - source_rect.x / scale_) * scale,
-		                       position.y - (hotspot_.y - source_rect.y / scale_) * scale,
-		                       source_rect.w * scale / scale_, source_rect.h * scale / scale_);
+	float height = percent_from_bottom * frames_[0]->height() / 100;
+	return Rectf(0.f, frames_[0]->height() - height, frames_[0]->width(), height);
+}
 
-		// The function to_surface_geometry clips against window and source bitmap, returns false if
-		// blitting is unnecessary because image is not inside the target surface.
-		if (dst.to_surface_geometry(&destination_rect, &source_rect)) {
-			const uint32_t idx = current_frame(time);
-			assert(idx < nr_frames());
-			if (!hasplrclrs_ || clr == nullptr) {
-				dst.get_surface()->blit(
-				   destination_rect, *frames_.at(idx), source_rect, 1., BlendMode::UseAlpha);
-			} else {
-				dst.get_surface()->blit_blended(
-				   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
-			}
-		}
+Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
+                                                const Rectf& source_rect,
+                                                float scale) const {
+	ensure_graphics_are_loaded();
+	return Rectf(position.x - (hotspot_.x - source_rect.x / scale_) * scale,
+	             position.y - (hotspot_.y - source_rect.y / scale_) * scale,
+	             source_rect.w * scale / scale_, source_rect.h * scale / scale_);
+}
+
+void NonPackedAnimation::blit(uint32_t time,
+                              const Rectf& source_rect,
+                              const Rectf& destination_rect,
+                              const RGBColor* clr,
+                              Surface* target) const {
+	ensure_graphics_are_loaded();
+	assert(target);
+	const uint32_t idx = current_frame(time);
+	assert(idx < nr_frames());
+	if (!hasplrclrs_ || clr == nullptr) {
+		target->blit(destination_rect, *frames_.at(idx), source_rect, 1., BlendMode::UseAlpha);
+	} else {
+		target->blit_blended(
+		   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
 	}
 }
 

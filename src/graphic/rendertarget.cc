@@ -320,7 +320,16 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
                                      uint32_t time,
                                      const RGBColor* player_color,
                                      const int percent_from_bottom) {
-	animation.blit(*this, time, dst, scale, player_color, percent_from_bottom);
+
+	assert(percent_from_bottom <= 100);
+	if (percent_from_bottom > 0) {
+		// Scaling for zoom and animation image size, then fit screen edges.
+		Rectf srcrc = animation.source_rectangle(percent_from_bottom);
+		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
+		if (to_surface_geometry(&dstrc, &srcrc)) {
+			animation.blit(time, srcrc, dstrc, player_color, surface_);
+		}
+	}
 
 	// Look if there is a sound effect registered for this frame and trigger the
 	// effect (see SoundHandler::stereo_position).
