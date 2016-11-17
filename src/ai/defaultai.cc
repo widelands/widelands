@@ -472,11 +472,11 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kManagementUpdate:
 			management_data.review(
 			   gametime, player_number(), player_statistics.get_player_power(player_number()),
-			   player_statistics.get_player_power(player_number()) -
-			      player_statistics.get_enemies_max_power(),
+			   static_cast<int32_t>(player_statistics.get_player_power(player_number())) -
+			      static_cast<int32_t>(player_statistics.get_enemies_max_power()),
 			   player_statistics.get_player_land(player_number()),
-			   player_statistics.get_player_land(player_number()) -
-			      player_statistics.get_enemies_max_land(),
+			   static_cast<int32_t>(player_statistics.get_player_land(player_number())) -
+			      static_cast<int32_t>(player_statistics.get_enemies_max_land()),
 			   (persistent_data->last_attacked_player != std::numeric_limits<int16_t>::max()));
 			set_taskpool_task_time(
 			   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
@@ -994,7 +994,7 @@ void DefaultAI::late_initialization() {
 	management_data.set_mutation_multiplicator(1);
 	switch (type_) {
 	case DefaultAI::Type::kNormal:
-		management_data.set_mutation_multiplicator(25);  // Final value will be like 50 - 100
+		management_data.set_mutation_multiplicator(40);  // Final value will be like 50 - 100
 		break;
 	case DefaultAI::Type::kWeak:
 		management_data.set_mutation_multiplicator(15);
