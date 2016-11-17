@@ -158,7 +158,7 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			if (csinf.totaltime) {
 				percent /= csinf.totaltime;
 			}
-			percent -= 100 * cur_frame;  // NOCOM test this
+			percent -= 100 * cur_frame;
 
 			if (cur_frame) {  // not the first frame
 				// Draw the prev frame
