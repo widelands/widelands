@@ -340,7 +340,7 @@ void ConstructionSite::draw(uint32_t gametime,
 	tanim = cur_frame * FRAME_LENGTH;
 
 	if (cur_frame) {  //  not the first pic
-		// Draw the complete prev pic , so we won't un into trouble if images have different sizes
+		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
 		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color);
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
