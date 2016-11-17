@@ -62,7 +62,7 @@ struct UniqueWindow : public Window {
 		~Registry();
 
 		/// The 'button' will be permpressed or not depending on whether this window is
-		/// open (on_create/on_delete calback function hooks).
+		/// open (on_create/on_delete callback function hooks).
 		/// This can be assigned only once.
 		void assign_toggle_button(UI::Button* button);
 
