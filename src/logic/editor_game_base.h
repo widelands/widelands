@@ -171,7 +171,7 @@ public:
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
-	void conquer_area(PlayerArea<Area<FCoords>>);
+	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
 	void conquer_area_no_building(PlayerArea<Area<FCoords>> const);
 
 	void cleanup_objects() {
@@ -238,10 +238,10 @@ private:
 	///  influence becomes greater than the owner's influence.
 	virtual void do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	                             bool conquer,
-	                             PlayerNumber preferred_player = 0,
+								 PlayerNumber preferred_player = 0,
+								 bool conquer_guarded_location_by_superior_influence = false,
 	                             bool neutral_when_no_influence = false,
-	                             bool neutral_when_competing_influence = false,
-	                             bool conquer_guarded_location_by_superior_influence = false);
+	                             bool neutral_when_competing_influence = false);
 	void cleanup_playerimmovables_area(PlayerArea<Area<FCoords>>);
 
 	// Changes the owner of 'fc' from the current player to the new player and

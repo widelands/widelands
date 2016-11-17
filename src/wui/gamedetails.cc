@@ -94,6 +94,7 @@ GameDetails::GameDetails(
                  20,
                  "",
                  UI::Align::kLeft,
+					  g_gr->images().get("images/ui_basic/but3.png"), // NOCOM adjust according to fsmenu/wui
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_,
             0,
@@ -102,6 +103,7 @@ GameDetails::GameDetails(
             80,
             "",
             UI::Align::kLeft,
+				g_gr->images().get("images/ui_basic/but3.png"), // NOCOM adjust according to fsmenu/wui
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&main_box_, 0, 0, max_w - 2 * padding_, max_h - 2 * padding_, nullptr) {
 	name_label_.force_new_renderer();

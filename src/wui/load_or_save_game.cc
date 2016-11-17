@@ -78,7 +78,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                FileType filetype,
                                GameDetails::Style style,
                                bool localize_autosave)
-   : table_(parent, tablex, tabley, tablew, tableh, true),
+// NOCOM adjust table image depending on fsmenu/wui
+	: table_(parent, tablex, tabley, tablew, tableh, g_gr->images().get("images/ui_basic/but3.png"), false),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description

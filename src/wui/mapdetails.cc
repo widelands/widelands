@@ -82,6 +82,7 @@ MapDetails::MapDetails(
                  20,
                  "",
                  UI::Align::kLeft,
+                 g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, max_w, 20, ""),
      suggested_teams_box_(

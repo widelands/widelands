@@ -4,13 +4,14 @@
 # Translators:
 # Endrju <endrjux@gmail.com>, 2005
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Tomasz Pudło <wptom@wp.pl>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 10:18+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-19 22:18+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgstr "Opcje:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<nazwa-pozycji-ustawień>=wartość nadpisuje dowolne ustawienie pliku konfiguracyjnego"
+msgstr "--<nazwa-pozycji-ustawień>=wartość nadpisuje dowolne ustawienie\npliku konfiguracyjnego"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
@@ -47,7 +48,7 @@ msgstr "--datadir=KATALOG Użyj podanego katalogu jako katalogu danych\nwideland
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=KATALOG Użyj podanego katalogu jako katalogu opcji,\nzapisów gry i powtórek widelands"
+msgstr "--homedir=KATALOG Użyj podanego katalogu jako katalogu opcji,\nzapisów gry i powtórek widelands"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
@@ -62,13 +63,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr " --coredump=[true|false]\nTworzy coredump przy naruszeniu ochrony\npamięci zamiast korzystać z SDL"
+msgstr "--coredump=[true|false]\nTworzy coredump przy naruszeniu ochrony pamięci zamiast\nkorzystać z SDL"
 
 #: ../../src/wlapplication_messages.cc:64
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|pl_PL|...]\nLocale do użycia."
+msgstr "--language=[de_DE|pl_PL|...]\nLocale do użycia."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -83,7 +84,7 @@ msgstr " --language=[de_DE|pl_PL|...]\nLocale do użycia."
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr " --write_syncstreams=[true|false]\nTworzy pliki zrzutu strumienia synchronizacji pomocne w odpluskwianiu gier sieciowych."
+msgstr "--write_syncstreams=[true|false]\nTworzy pliki zrzutu strumienia synchronizacji pomocne\nw odpluskwianiu gier sieciowych."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -101,19 +102,19 @@ msgstr "Opcje dźwięku:"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound Uruchamia grę bez dźwięku."
+msgstr "--nosound Uruchamia grę bez dźwięku."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx Wyłącza efekty dźwiękowe."
+msgstr "--disable_fx Wyłącza efekty dźwiękowe."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --disable_music      Disable music."
-msgstr " --disable_music Wyłącza muzykę."
+msgstr "--disable_music Wyłącza muzykę."
 
 #: ../../src/wlapplication_messages.cc:87
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip Nie zapisuj plików jako binarnych archiwów zip."
+msgstr "--nozip Nie zapisuj plików jako binarnych archiwów zip."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
