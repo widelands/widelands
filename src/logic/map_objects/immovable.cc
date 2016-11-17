@@ -1263,11 +1263,9 @@ void PlayerImmovable::remove_worker(Worker& w) {
 }
 
 void Immovable::set_former_building(const BuildingDescr& building) {
-	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
-		if (get_owner() == nullptr)
-			throw wexception("Set '%s' as antecedent for Tribe immovable '%s', but it has no owner.",
-			                 building.name().c_str(), descr().name().c_str());
-	}
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr)
+		throw wexception("Set '%s' as former building for Tribe immovable '%s', but it has no owner.",
+		                 building.name().c_str(), descr().name().c_str());
 	former_building_ = &building;
 }
 
