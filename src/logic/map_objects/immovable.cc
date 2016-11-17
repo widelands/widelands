@@ -325,8 +325,10 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 /**
  * Create an immovable of this type
 */
-Immovable& ImmovableDescr::create(EditorGameBase& egbase, const Coords& coords) const {
-	Immovable& result = *new Immovable(*this);
+Immovable& ImmovableDescr::create(EditorGameBase& egbase,
+                                  const Coords& coords,
+                                  const Building* former_building) const {
+	Immovable& result = *new Immovable(*this, former_building);
 	result.position_ = coords;
 	result.init(egbase);
 	return result;
@@ -340,9 +342,9 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const ImmovableDescr& imm_descr)
+Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building* former_building)
    : BaseImmovable(imm_descr),
-     antecedent_(nullptr),
+     former_building_(former_building ? &former_building->descr() : nullptr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -350,6 +352,9 @@ Immovable::Immovable(const ImmovableDescr& imm_descr)
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0) {
+	if (former_building) {
+		set_owner(former_building->get_owner());
+	}
 }
 
 Immovable::~Immovable() {
@@ -362,16 +367,17 @@ BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) cons
 	return rv;
 }
 
+void BaseImmovable::set_owner(Player* player) {
+	assert(owner_ == nullptr);
+	owner_ = player;
+}
+
 int32_t Immovable::get_size() const {
 	return descr().get_size();
 }
 
 bool Immovable::get_passable() const {
 	return descr().get_size() < BIG;
-}
-
-void Immovable::set_owner(Player* player) {
-	owner_ = player;
 }
 
 void Immovable::start_animation(const EditorGameBase& egbase, uint32_t const anim) {
@@ -450,8 +456,8 @@ void Immovable::draw(uint32_t gametime,
 	}
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
-		if (antecedent_) {
-			do_draw_info(draw_text, antecedent_->descname(), "", point_on_dst, scale, dst);
+		if (former_building_) {
+			do_draw_info(draw_text, former_building_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
 		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
@@ -554,7 +560,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		if (owner) {
 			DescriptionIndex idx = owner->tribe().building_index(fr.string());
 			if (owner->tribe().has_building(idx)) {
-				imm.set_antecedent(*owner->tribe().get_building_descr(idx));
+				imm.set_former_building(*owner->tribe().get_building_descr(idx));
 			}
 		}
 	}
@@ -658,7 +664,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
 	if (get_owner()) {
-		fw.string(antecedent_ ? antecedent_->name() : "");
+		fw.string(former_building_ ? former_building_->name() : "");
 	}
 
 	// Animations
@@ -1254,23 +1260,21 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
-void Immovable::set_antecedent(const BuildingDescr& building) {
+void Immovable::set_former_building(const BuildingDescr& building) {
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr)
 			throw wexception("Set '%s' as antecedent for Tribe immovable '%s', but it has no owner.",
 			                 building.name().c_str(), descr().name().c_str());
 	}
-	antecedent_ = &building;
+	former_building_ = &building;
 }
 
 /**
  * Set the immovable's owner. Currently, it can only be set once.
 */
-void PlayerImmovable::set_owner(Player* const new_owner) {
+void PlayerImmovable::set_owner(Player* new_owner) {
 	assert(owner_ == nullptr);
-
 	owner_ = new_owner;
-
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 }
 
