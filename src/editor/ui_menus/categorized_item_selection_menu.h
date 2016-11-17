@@ -90,6 +90,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               20,
                               "",
                               UI::Align::kCenter,
+                              g_gr->images().get("images/ui_basic/but1.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
 	add(&tab_panel_, UI::Align::kCenter);

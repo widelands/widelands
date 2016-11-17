@@ -48,7 +48,11 @@ public:
 	void add_tab(const std::string& lua_script);
 
 private:
+	void update_tab_size(size_t index);
+	void layout() override;
 	const uint32_t padding_;
+	int contents_width_;
+	int contents_height_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;
