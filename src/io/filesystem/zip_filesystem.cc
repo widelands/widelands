@@ -86,8 +86,8 @@ void ZipFilesystem::ZipFile::open_for_unzip() {
 	unz_file_info file_info;
 	char filename_inzip[256];
 	for (;;) {
-		unzGetCurrentFileInfo(read_handle_, &file_info, filename_inzip,
-		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		unzGetCurrentFileInfo(
+		   read_handle_, &file_info, filename_inzip, sizeof(filename_inzip), nullptr, 0, nullptr, 0);
 		if (first_entry.empty()) {
 			first_entry = filename_inzip;
 			longest_prefix = first_entry.size();

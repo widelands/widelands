@@ -62,8 +62,15 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
    : UI::Panel(&parent, 0, 0, 350, 200),
      egbase_(egbase),
      object_(&obj),
-     log_(
-        this, 0, 0, 350, 200, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollLog) {
+     log_(this,
+          0,
+          0,
+          350,
+          200,
+          "",
+          UI::Align::kLeft,
+          g_gr->images().get("images/ui_basic/but1.png"),
+          UI::MultilineTextarea::ScrollMode::kScrollLog) {
 	obj.set_logsink(this);
 }
 

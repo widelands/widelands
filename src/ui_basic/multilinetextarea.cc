@@ -38,13 +38,14 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const uint32_t h,
                                      const std::string& text,
                                      const Align align,
+                                     const Image* button_background,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
      color_(UI_FONT_CLR_FG),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
      scrollmode_(scroll_mode) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
