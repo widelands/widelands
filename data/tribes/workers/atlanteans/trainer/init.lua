@@ -21,9 +21,8 @@ tribes:new_worker_type {
 
    buildcost = {
       atlanteans_carrier = 1,
-      -- TODO (GunChleoc): Add back in when we have a casern
-      --trident_light = 1,
-      --tabard = 1
+      trident_light = 1,
+      tabard = 1
    },
 
    animations = animations,
