@@ -20,8 +20,7 @@ tribes:new_worker_type {
 
    buildcost = {
       barbarians_carrier = 1,
-      -- TODO (GunChleoc): Add back in when we have a casern
-      --ax = 1
+      ax = 1
    },
 
    animations = animations,

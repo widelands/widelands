@@ -76,6 +76,7 @@ Slider::Slider(Panel* const parent,
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
+	set_can_focus(true);
 	layout();
 }
 
@@ -209,6 +210,7 @@ void Slider::set_enabled(const bool enabled) {
 	if (enabled_ == enabled)
 		return;
 
+	set_can_focus(enabled);
 	enabled_ = enabled;
 	if (!enabled) {
 		pressed_ = false;
@@ -408,6 +410,7 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
+	focus();
 	if (x >= cursor_pos_ && x <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(x);
@@ -478,6 +481,7 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
+	focus();
 	if (y >= cursor_pos_ && y <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(y);

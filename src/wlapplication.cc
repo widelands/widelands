@@ -289,7 +289,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #else
      homedir_(FileSystem::get_homedir() + "/.widelands"),
 #endif
-     redirected_stdio_(false) {
+     redirected_stdio_(false),
+     last_resolution_change_(0) {
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
@@ -519,10 +520,14 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 			return true;
 
 		case SDLK_f: {
-			// toggle fullscreen
-			bool value = !g_gr->fullscreen();
-			g_gr->set_fullscreen(value);
-			g_options.pull_section("global").set_bool("fullscreen", value);
+			// Toggle fullscreen
+			const uint32_t time = SDL_GetTicks();
+			if (time - last_resolution_change_ > 250) {
+				last_resolution_change_ = time;
+				bool value = !g_gr->fullscreen();
+				g_gr->set_fullscreen(value);
+				g_options.pull_section("global").set_bool("fullscreen", value);
+			}
 			return true;
 		}
 

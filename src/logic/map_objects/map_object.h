@@ -406,7 +406,7 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(const DrawText& draw_text,
+	void do_draw_info(const TextToDraw& draw_text,
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,

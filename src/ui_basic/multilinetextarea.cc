@@ -38,6 +38,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const uint32_t h,
                                      const std::string& text,
                                      const Align align,
+                                     const Image* button_background,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
@@ -49,7 +50,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                 0,
                 Scrollbar::kSize,
                 h,
-                false),
+					 button_background),
      scrollmode_(scroll_mode) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
