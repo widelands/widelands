@@ -348,7 +348,7 @@ void ConstructionSite::draw(uint32_t gametime,
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		const uint32_t prev_building_anim_idx = prev_building->get_animation(
-		   prev_building->is_animation_known("unoccupied") ? "unoccupied " : "idle");
+			prev_building->is_animation_known("unoccupied") ? "unoccupied" : "idle");
 		dst->blit_animation(
 		   point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color);
 	}
