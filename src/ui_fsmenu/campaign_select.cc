@@ -42,7 +42,7 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
 
      // Main Title
      title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kHCenter),
@@ -106,7 +106,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	table_.add_column(45, _("Diff."), _("Difficulty"), UI::Align::kLeft);
 	table_.add_column(100, _("Tribe"), _("Tribe Name"), UI::Align::kLeft);
 	table_.add_column(
-	   table_.get_w() - 100 - 45, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft);
+	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
 	table_.set_sort_column(0);
@@ -118,6 +118,9 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
  * OK was clicked, after an entry of campaignlist got selected.
  */
 void FullscreenMenuCampaignSelect::clicked_ok() {
+	if (!table_.has_selection()) {
+		return;
+	}
 	get_campaign();
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
@@ -241,6 +244,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
@@ -265,7 +269,7 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
  */
 FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
 
      // Main title
      title_(this,
@@ -340,7 +344,8 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	/** TRANSLATORS: Campaign scenario number table header */
 	table_.add_column(35, _("#"), number_tooltip, UI::Align::kLeft);
-	table_.add_column(table_.get_w() - 35, name_tooltip, name_tooltip, UI::Align::kLeft);
+	table_.add_column(
+	   0, name_tooltip, name_tooltip, UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_sort_column(0);
 
 	table_.focus();
@@ -491,4 +496,5 @@ void FullscreenMenuCampaignMapSelect::fill_table() {
 	if (table_.size()) {
 		table_.select(0);
 	}
+	set_has_selection();
 }

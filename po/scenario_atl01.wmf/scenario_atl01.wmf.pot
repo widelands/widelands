@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 15:44+0000\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr ""
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr ""
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr ""

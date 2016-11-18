@@ -11,12 +11,12 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
-# Matteo Viarengo <enthusedquill6@gmail.com>, 2016
+# theo the best <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
 "PO-Revision-Date: 2016-09-14 19:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"

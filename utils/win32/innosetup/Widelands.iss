@@ -24,7 +24,7 @@
 #define Name "Widelands"
 #define VerName "Widelands Build19"
 #define VerNumber "0.19.0.1"
-#define Copyright "Widelands Development Team 2001-2015"
+#define Copyright "Widelands Development Team 2001-2016"
 #define SetupFileName "Widelands-Build19-win64"
 
 ;General String
@@ -40,6 +40,7 @@
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
 #define DLLFolder GetEnv("MINGWPATH")
+#define Version GetEnv("APPVEYOR_BUILD_VERSION") + GetEnv("CONFIGURATION") + GetEnv("PLATFORM")
 
 [Setup]
 AppName={#Name}
@@ -49,7 +50,7 @@ AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
 AppUpdatesURL={#URL}
-DefaultDirName={pf}\{#Name}
+DefaultDirName={sd}\bin\{#Name}
 DefaultGroupName={#Name}
 AllowNoIcons=true
 LicenseFile=..\..\..\COPYING
@@ -68,7 +69,7 @@ UninstallDisplayIcon={app}\unins000.exe
 UninstallDisplayName={#VerName}
 VersionInfoCopyright={#Publisher}
 InternalCompressLevel=max
-AppID={{WIDELANDS-WIN32-IS}
+AppID={#Version}
 AppCopyright={#Copyright}
 ChangesAssociations=yes
 PrivilegesRequired=lowest

@@ -25,36 +25,32 @@
 
 static const uint32_t MaxHistorySize = 32;
 
-QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase,
-                                 uint32_t screenwidth,
-                                 uint32_t screenheight)
-   : egbase_(egbase), landmarks_(10) {
-	screenwidth_ = screenwidth;
-	screenheight_ = screenheight;
-
+QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view)
+   : egbase_(egbase), map_view_(map_view), landmarks_(10) {
+	map_view->changeview.connect([this](const bool jump) { view_changed(jump); });
 	havefirst_ = false;
 	update_ = true;
 	history_index_ = 0;
 }
 
-void QuickNavigation::set_setview(const QuickNavigation::SetViewFn& fn) {
-	setview_ = fn;
-}
-
-void QuickNavigation::setview(Point where) {
+void QuickNavigation::setview(const View& view) {
 	update_ = false;
-	setview_(where);
+	map_view_->set_zoom(view.zoom);
+	map_view_->set_viewpoint(view.viewpoint, true);
 	update_ = true;
 }
 
-void QuickNavigation::view_changed(Point newpos, bool jump) {
+void QuickNavigation::view_changed(bool jump) {
+	const Rectf view_area = map_view_->get_view_area();
 	if (havefirst_ && update_) {
 		if (!jump) {
-			Point delta = MapviewPixelFunctions::calc_pix_difference(egbase_.map(), newpos, anchor_);
-
-			if (static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
-			    static_cast<uint32_t>(abs(delta.y)) > screenheight_)
+			// Check if the anchor is moved outside the screen. If that is the
+			// case, we did jump.
+			const Vector2f dist =
+			   MapviewPixelFunctions::calc_pix_difference(egbase_.map(), anchor_, view_area.center());
+			if (dist.x > view_area.w / 2.f || dist.y > view_area.w / 2.f) {
 				jump = true;
+			}
 		}
 
 		if (jump) {
@@ -68,16 +64,18 @@ void QuickNavigation::view_changed(Point newpos, bool jump) {
 	}
 
 	if (jump || !havefirst_) {
-		anchor_ = newpos;
+		anchor_ = view_area.center();
 	}
 
-	current_ = newpos;
+	current_ = View{
+	   map_view_->get_viewpoint(), map_view_->get_zoom(),
+	};
 	havefirst_ = true;
 }
 
-void QuickNavigation::set_landmark(size_t index, const Point& point) {
+void QuickNavigation::set_landmark(size_t index, const View& view) {
 	assert(index < landmarks_.size());
-	landmarks_[index].point = point;
+	landmarks_[index].view = view;
 	landmarks_[index].set = true;
 }
 
@@ -87,7 +85,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	if (!down)
 		return false;
 
-	if (key.sym >= SDLK_0 && key.sym <= SDLK_9) {
+	if (key.sym >= SDLK_1 && key.sym <= SDLK_9) {
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);
 
@@ -96,8 +94,9 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		if (ctrl) {
 			set_landmark(which, current_);
 		} else {
-			if (landmarks_[which].set)
-				setview_(landmarks_[which].point);
+			if (landmarks_[which].set) {
+				setview(landmarks_[which].view);
+			}
 		}
 		return true;
 	}

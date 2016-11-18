@@ -20,7 +20,11 @@
 #ifndef WL_WUI_MAPVIEWPIXELCONSTANTS_H
 #define WL_WUI_MAPVIEWPIXELCONSTANTS_H
 
-//  These are constants with the unit pixel.
+// These are constants with the unit map pixel, i.e. at zoom = 1 a triangle on
+// screen is kTriangleWidth pixels wide. Map pixelspace is used in many places
+// when the hexagonal fields coordinate space is insufficient. For example draw
+// calculations first figure out where something needs to be drawn in map pixel
+// space, then this is converted into screen space taking zoom into account.
 constexpr int kTriangleWidth = 64;
 constexpr int kTriangleHeight = 32;
 constexpr int kHeightFactor = 5;
