@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 10:48+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-19 22:32+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Widelands to gra strategiczna oparta na powolnej rozbudowie skupiona bardziej na budowaniu, niż na niszczeniu. Ten samouczek nauczy Cię podstaw gry."
+msgstr "Widelands to gra strategiczna oparta na powolnej rozbudowie skupiona bardziej na budowaniu, niż na niszczeniu. Ten samouczek nauczy cię podstaw gry."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -160,7 +160,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "To jeszcze nie wszystko. Wciąż muszę połączyć chatę drwala z resztą sieci dróg. Po rozpoczęciu budowy automatycznie zostałem przełączony w tryb budowania dróg, więc wszystko, co muszę zrobić, to kliknąć niebieską flagę przed kwaterą główną."
+msgstr "To jeszcze nie wszystko. Muszę jeszcze połączyć chatę drwala z resztą sieci dróg. Po rozpoczęciu budowy automatycznie zostałem przełączony w tryb budowania dróg, więc jedyne, co muszę zrobić, to kliknąć niebieską flagę przed kwaterą główną."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -718,7 +718,7 @@ msgstr "Pozwól mi szybko ci to udostępnić. Pamiętaj - klawisze to C i S. Mo�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:390
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr "Teraz wiemy już, co jest grane. Poczekajmy na ukończenie kamieniołomów."
+msgstr "Teraz wiemy już, co się dzieje. Poczekajmy na ukończenie kamieniołomów."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:397
 msgid "Messages"
@@ -864,6 +864,10 @@ msgid ""
 "resources you used for the construction."
 msgstr "Rozebrać kamieniołom: z kwatery głównej wysłany zostanie budowniczy, aby rozebrać budynek kawałek po kawałku. Pozwoli ci to odzyskać część surowców użytych do jego budowy."
 
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Zniszcz oba kamieniołomy"
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
@@ -911,7 +915,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Zdobywanie terytorium sprowadza się do budowy budynku wojskowego na granicy twojego terytorium. Barbarzyńcy mogą budować kilka rodzajów takich budynków: posterunki, bariery, donżony, fortece i cytadele. Im większy budynek, tym bardziej jest kosztowny, tym więcej terenu kontroluje i tym więcej żołnierzy można w nim umieścić. Budynki różnią się także w kwestii pola widzenia: budynki z wieżami pozwalają widzieć dalej."
+msgstr "Zdobywanie terytorium sprowadza się do budowy budynku wojskowego na granicy twojego terytorium. Barbarzyńcy mogą budować kilka rodzajów takich budynków: posterunki, bariery, wieże, fortece i cytadele. Im większy budynek, tym bardziej jest kosztowny, tym więcej terenu kontroluje i tym więcej żołnierzy można w nim umieścić. Budynki różnią się także w kwestii pola widzenia: budynki z wieżami pozwalają widzieć dalej."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""

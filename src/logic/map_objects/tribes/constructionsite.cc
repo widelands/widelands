@@ -41,6 +41,10 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -153,7 +157,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		}
 		// Open the new building window if needed
 		if (optionswindow_) {
-			Point window_position = optionswindow_->get_pos();
+			Vector2i window_position = optionswindow_->get_pos();
 			hide_options();
 			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
@@ -297,19 +301,15 @@ void ConstructionSite::wares_queue_callback(Game& game,
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw(const EditorGameBase& game,
-                            RenderTarget& dst,
-                            const FCoords& coords,
-                            const Point& pos) {
-	const uint32_t gametime = game.get_gametime();
+void ConstructionSite::draw(uint32_t gametime,
+                            TextToDraw draw_text,
+                            const Vector2f& point_on_dst,
+                            float scale,
+                            RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-
-	if (coords != position_)
-		return;  // draw big buildings only once
-
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst.blit_animation(pos, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -324,7 +324,6 @@ void ConstructionSite::draw(const EditorGameBase& game,
 	}
 
 	uint32_t anim_idx;
-	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
 	} catch (MapObjectDescr::AnimationNonexistent&) {
@@ -336,23 +335,24 @@ void ConstructionSite::draw(const EditorGameBase& game,
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
-	// Redefine tanim
+	const uint32_t cur_frame =
+	   info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	tanim = cur_frame * FRAME_LENGTH;
 
 	const uint16_t w = anim.width();
 	const uint16_t h = anim.height();
 
 	uint32_t lines = h * info_.completedtime * nr_frames;
-	if (info_.totaltime)
+	if (info_.totaltime) {
 		lines /= info_.totaltime;
+	}
 	assert(h * cur_frame <= lines);
 	lines -= h * cur_frame;  //  This won't work if pictures have various sizes.
 
 	if (cur_frame) {  //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.blit_animation(
-		   pos, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
+		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color,
+		                    Recti(Vector2i(0, 0), w, h - lines));
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
@@ -366,15 +366,17 @@ void ConstructionSite::draw(const EditorGameBase& game,
 		}
 		const Animation& prev_building_anim =
 		   g_gr->animations().get_animation(prev_building_anim_idx);
-		dst.blit_animation(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
-		                   Rect(Point(0, 0), prev_building_anim.width(),
-		                        std::min<int>(prev_building_anim.height(), h - lines)));
+		dst->blit_animation(point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH,
+		                    player_color,
+		                    Recti(Vector2i(0, 0), prev_building_anim.width(),
+		                          std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
+	dst->blit_animation(
+	   point_on_dst, scale, anim_idx, tanim, player_color, Recti(Vector2i(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_info(game, dst, pos);
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }

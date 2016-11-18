@@ -20,10 +20,13 @@
 #ifndef WL_UI_FSMENU_LAUNCH_SPG_H
 #define WL_UI_FSMENU_LAUNCH_SPG_H
 
+#include <memory>
 #include <string>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
+#include "logic/map.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
@@ -64,9 +67,19 @@ private:
 	LuaInterface* lua_;
 
 	void select_map();
-	void win_condition_clicked();
-	void win_condition_update();
-	void win_condition_load();
+	/// Loads all win conditions that can be played with the map into the selection dropdown.
+	/// Disables the dropdown if the map is a scenario.
+	void update_win_conditions();
+	/// Reads the win conditions that are available for the given map and adds the entries to the
+	/// dropdown.
+	void load_win_conditions(const Widelands::Map& map);
+	/// Remembers the win condition that is currently selected in the dropdown.
+	void win_condition_selected();
+	/// If the win condition in 'win_condition_script' can be played with the map tags,
+	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
+	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
+	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
+	                                                 std::set<std::string> tags) const;
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
@@ -74,21 +87,22 @@ private:
 	uint32_t butw_;
 	uint32_t buth_;
 
-	UI::Button select_map_, wincondition_, back_, ok_;
-	UI::Button* pos_[MAX_PLAYERS];
+	UI::Button select_map_;
+	UI::Dropdown<std::string> win_condition_dropdown_;
+	std::string last_win_condition_;
+	UI::Button back_, ok_;
+	UI::Button* pos_[kMaxPlayers];
 	UI::Textarea title_, mapname_;
 	UI::Textarea name_, type_, team_, tribe_, init_, wincondition_type_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;  // optional
-	PlayerDescriptionGroup* players_[MAX_PLAYERS];
+	PlayerDescriptionGroup* players_[kMaxPlayers];
 	std::string filename_;
 	std::string filename_proof_;  // local var. to check UI state
-	std::string player_save_name_[MAX_PLAYERS];
-	std::string player_save_tribe_[MAX_PLAYERS];
+	std::string player_save_name_[kMaxPlayers];
+	std::string player_save_tribe_[kMaxPlayers];
 	int8_t nr_players_;
 	bool is_scenario_;
-	std::vector<std::string> win_condition_scripts_;
-	uint8_t cur_wincondition_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

@@ -2,7 +2,8 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Anton Khabarov <2233009@gmail.com>, 2015
+# Andrew Doubletrouble <vermilionjack@gmail.com>, 2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016
 # dr&mx <dronmax@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-20 21:03+0000\n"
-"PO-Revision-Date: 2016-05-28 00:18+0000\n"
-"Last-Translator: Владимир Куряев <istercul@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-02 06:19+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,16 +28,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Строение потеряно!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Строение уничтожено морем!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Строение потеряно!"
@@ -191,7 +192,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Железная руда, золотая руда и уголь добываются в соответственных шахтах. Кристальная шахта ищет кварц и алмазы — оба являются драгоценными материалами и их находят очень редко. В поисках этих редких минералов, Кристальная шахта будет добывать много гранита."
+msgstr "Железная руда, золотая руда и уголь добываются в соответствующих шахтах. В кристальной шахте добывают кварц и алмазы — оба являются драгоценными материалами и их находят очень редко. В поисках этих редких минералов, в Кристальной шахте будут добывать много гранита."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -462,7 +463,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Да согреет тебя Сатул, Джандлина! Самое необходимое для строительства поселения – строительные материалы. Деревья здесь есть, поэтому мы должны построить жилье для нескольких лесорубов и, конечно, для лесников, чтобы не вырубить все деревья. Да, и мы не должны забывать о лесопилке, большинство зданий не могут быть построены из одних только бревен. Для более прочных зданий понадобится камень, который в изобилии встречается к северо-востоку отсюда. Нужно только построить каменоломню и мои каменщики сразу приступят к работе."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -476,7 +477,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Да согреет тебя Сатул, Джандлина! Я одобряю предложение Лофтомора. Нам нужно обеспечить производство строительных материалов, чтобы быстро осваивать территорию. Как можно чувствовать себя в безопасности, если мы еще не видели всех берегов этого острова? Я привел из Атлантиды много толковых людей. У нас есть и военная сила. Не хватает только домов для расселения."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -657,7 +658,7 @@ msgstr "Джандлина кивает"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Я обдумала это, Сидолюс. Думаю, настало время сделать это приоритетной задачей. Скоро вы получите свою промышленность!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -879,7 +880,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Хвала Сатулу! Остур, молодой кораблестроитель, справился. У нас три корабля крепче которых я еще не видела, и в них достаточно места, чтобы перевезти и нас самих и часть наших товаров. Это спасение пришло как раз вовремя: Лютас собирается проглотить остальную часть этого острова, вода с каждым часом поднимается все быстрее. Но мы уже можем сбежать и начать все сначала в какой-нибудь отдаленной стране..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:449

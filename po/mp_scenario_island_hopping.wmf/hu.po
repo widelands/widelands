@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2016-01-12 18:05+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-09-19 10:13+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,41 +19,38 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
 msgstr "5 perc"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
 msgstr "10 perc"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:78
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
 msgstr "15 perc"
 
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:99 ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "Status"
 msgstr "Állapot"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:112
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:223 ../../maps/MP
-#: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:223
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Szabályok"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Üdvözlünk a szigetugráson!"
+msgstr "Üdvözlünk az Ugrás szigeten"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
 "Island Hopping is a traditional tournament in Atlantean culture. The rules "
 "of the game are simple: you start with a headquarters on an island. When you"
@@ -62,21 +59,21 @@ msgid ""
 "first headquarters."
 msgstr "A szigetugrás az atlantiszi kultúra egy hagyományos versenye. A játék szabályai egyszerűek: Egy szigeten kezdesz egy főhadiszállással. Ha befejezel egy várat az első sziget végén, akkor egy második szigeten kapsz egy második főhadiszállást, melybe minden áru átkerül az első főhadiszállásodból."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
 msgstr "Ha befejezel egy várat a második sziget célhelyén, kapsz egy harmadik főhadiszállást a harmadik szigeten. A játék megnyeréséhez fel kell építened és 20 percig meg kell tartanod egy várat a harmadik sziget közepén."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
 msgstr "Amikor végzel egy szigettel, ráadás árukat is kapsz attól függően, hogy hány játékos fejezte be előtted a szigetet. Minél hamarabb végzel, annál kevesebb árut kapsz. Lásd alább a részleteket."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
 msgid ""
 "The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
@@ -84,79 +81,79 @@ msgid ""
 " new island."
 msgstr "A kulcs az, hogy az első sziget csak követ és fát nyújt, a második pedig csak legelőket és forrásokat. A gazdaságok, amiket hátrahagysz, folytatják a munkát, de termékeikhez csak akkor jutsz hozzá, amikor elérsz egy új szigetet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
 msgstr "Végül pedig légy óvatos, ne pazarold el a kvarcodat és a gyémántokat."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"
 msgstr "Befejezési jutalmak"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
 msgid "First Island"
 msgstr "Első sziget"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 msgid "1st to finish"
 msgstr "Az elsőként befejezőé"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "2nd to finish"
 msgstr "A másodikként befejezőé"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "3rd to finish"
 msgstr "A harmadikként befejezőé"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "4th to finish"
 msgstr "A negyedikként befejezőé"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 msgid "Second Island"
 msgstr "Második sziget"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:42
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "%1$s érte el elsőként a(z) %2$i. szigetet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "%1$s érte el másodikként a(z) %2$i. szigetet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "%1$s érte el harmadikként a(z) %2$i. szigetet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "%1$s érte el negyedikként a(z) %2$i. szigetet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:49
 msgid "The reward for this feat amounts to:"
 msgstr "Jutalma:"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s immár a Domb királya, és 20 perc múlva megnyeri a játékot, hacsak addig valaki el nem foglalja a dombot."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s elvesztette az uralmat a domb felett."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:55
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s eddig volt a Domb királya: %2$s!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:58
 #, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s megnyerte a játékot. Gratulálunk!"

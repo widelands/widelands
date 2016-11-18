@@ -7,6 +7,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
+option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -69,8 +70,8 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
-if (APPLE OR WIN32 OR 
-    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR 
+if (APPLE OR WIN32 OR
+    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
@@ -250,7 +251,9 @@ install (
 
 # Installation.
 add_subdirectory(doc)
-add_subdirectory(po)
+if(OPTION_BUILD_TRANSLATIONS)
+  add_subdirectory(po)
+endif(OPTION_BUILD_TRANSLATIONS)
 add_subdirectory(src)
 
 # install files to the correct locations here

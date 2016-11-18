@@ -120,14 +120,14 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 // creation. Disables GL_SCISSOR_TEST at desctruction again.
 class ScopedScissor {
 public:
-	ScopedScissor(const FloatRect& rect);
+	ScopedScissor(const Rectf& rect);
 	~ScopedScissor();
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ScopedScissor);
 };
 
-ScopedScissor::ScopedScissor(const FloatRect& rect) {
+ScopedScissor::ScopedScissor(const Rectf& rect) {
 	glScissor(rect.x, rect.y, rect.w, rect.h);
 	glEnable(GL_SCISSOR_TEST);
 }
@@ -249,9 +249,10 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::kTerrainRoad: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			road_program_->draw(
-			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
-			   *item.terrain_arguments.fields_to_draw, item.z_value + 2 * kOpenGlZDelta);
+			road_program_->draw(item.terrain_arguments.renderbuffer_width,
+			                    item.terrain_arguments.renderbuffer_height,
+			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale,
+			                    item.z_value + 2 * kOpenGlZDelta);
 			++i;
 		} break;
 

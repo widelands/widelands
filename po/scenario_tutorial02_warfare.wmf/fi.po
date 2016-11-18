@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:12+0000\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Uusi sotilas luodaan kuten työntekijä: kun sotilasrakennus tarvitsee sotilaan, kantaja nappaa tarvittavat aseet ja haarniskan (päämajastasi) ja kävelee uuteen rakennukseesi. Tavallinen Barbaarisotilas ei käytä haarniskaa,  hän tarvitsee ainoastaan kirveen."
+msgstr "Uusi sotilas luodaan kuten työntekijä: kun sotilasrakennus tarvitsee sotilaan, kantaja nappaa tarvittavat aseet ja haarniskan (päämajastasi) ja kävelee uuteen rakennukseesi. Tavallinen Barbaarisotilas ei käytä haarniskaa, hän tarvitsee ainoastaan kirveen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -83,7 +83,7 @@ msgstr "Terveys:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr "Sotilaan elämän määrä. Barbaarisotilas aloittaa arvoilla %1% terveys ja hän saa %2%  terveyttä jokaisella tasolla."
+msgstr "Sotilaan elämän määrä. Barbaarisotilas aloittaa arvoilla %1% terveys ja hän saa %2% terveyttä jokaisella tasolla."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -200,7 +200,7 @@ msgstr "Saadaksesi lisätietoja voit katsoa rakennuksen ohjeruutua, joka löytyy
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "Oppiaksesi kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa heidän kuvakkeita. Niitä on muutettu punaisilla täplillä."
+msgstr "Oppiaksesi kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa heidän kuvakkeita. Niitä on muutettu punaisilla täplillä:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
@@ -212,7 +212,7 @@ msgstr "Punaisten täplien puuttuminen tarkoittaa ettei sotilasta ole koulutettu
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "Jokaista onnistunutta koulutusta kohden sotilaasi vahvistuu. Se osoitetaan yhdellä punaisella pisteellä.  Tämä sotilas on tasolla 1  väistelykoulutuksessa."
+msgstr "Jokaista onnistunutta koulutusta kohden sotilaasi vahvistuu. Se osoitetaan yhdellä punaisella pisteellä. Tämä sotilas on tasolla 1 väistelykoulutuksessa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
@@ -301,7 +301,7 @@ msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "Alkuasetukset riippuvat rakennuksen tyypistä. Barbaareille vartiomökki on ainoa rakennus, joka laittaa oletuksena alokkaat etusijalle. Sinun tulee muuttaa asetukset vastaamaan kunkin hetken tarpeita.."
+msgstr "Alkuasetukset riippuvat rakennuksen tyypistä. Barbaareille vartiomökki on ainoa rakennus, joka laittaa oletuksena alokkaat etusijalle. Sinun tulee muuttaa asetukset vastaamaan kunkin hetken tarpeita."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
@@ -374,7 +374,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr ""
+msgstr "Voit vähentää sotilaiden määrän minimissään yhteen. Rakennuksen viimeinen sotilas ei koskaan tule ulos (ellei kyseinen rakennus ole hyökkäyksen kohteena). Jos haluat sotilaasi olevan jossakin muualla, sinun täytyy purkaa tai polttaa rakennus. "
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
@@ -523,7 +523,7 @@ msgstr "Kukista Vihollisesi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid "Defeat the nearby enemy."
-msgstr "Kukista läheinen vihollinen"
+msgstr "Kukista läheinen vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
