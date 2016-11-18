@@ -4,11 +4,6 @@
 # scan-build/clang (obviously)
 # gcc (used on non-Darwin platforms) 
 
-#Beware:
-# Running scan-build from llvm 3.2 will list a large number of false positives
-# ("Called C++ object pointer is null" and "Dereference of null pointer").
-# Running a newer version is recommended.
-
 if ! [ -d build ]; then
   echo "This script should be run from the root directory."
   exit 1

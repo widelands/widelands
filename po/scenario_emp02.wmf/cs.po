@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 16:48+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-30 11:06+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Hospodáření se dřevem"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Postav tři domky pro dřevorubce, domek lesníka a pilu."
+msgstr "Postav tři domky dřevorubce, domek lesníka a pilu."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
@@ -42,7 +42,7 @@ msgstr "Lom"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Postav lom jižně od své základny."
+msgstr "Postav lom jižně od své hlavní budovy."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -54,7 +54,7 @@ msgstr "Chraň svoji kolonii"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Postav nějaké malé pevnosti a strážnice okolo kolonie."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -70,22 +70,22 @@ msgstr "Rozšiř své území na východ a začni v horách těžit mramor."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr ""
+msgstr "Postav domek kameníka a těžební infrastrukturu"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr ""
+msgstr "Domek kameníka a těžební infrastruktura"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
 " weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "Postav kameníka a pak dokonči infrastrukturu pro těžbu a produkci (důl na uhlí a/nebo milíř na dřevěné uhlí, důl na železo, dílnu, zbrojířství, platnéřství a slévárnu)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
-msgstr "Zásobuj horníky jídlem"
+msgstr "Zajisti jídlo pro horníky"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
@@ -96,27 +96,27 @@ msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr "Abychom zajistili našim horníkům jídlo, musíme vybudovat hosinec. A abychom jim nabídli dobré a silné nápoje, měli bychom postavit pivovar a vinný sklep."
+msgstr "Abychom zajistili našim horníkům jídlo, musíme vybudovat hospodu. A abychom jim nabídli dobré a silné nápoje, měli bychom postavit pivovar a vinný sklep."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
-msgstr "To samozřejmě znamená, že budeme potřebovat více surovin pro přípravu tohoto jídla - jako jsou ryby, maso a chléb. Aby jsi zajistil toto jídlo, budeš potřebovat postavit rybáře, farmu, mlýn a pekaře."
+msgstr "To samozřejmě znamená, že budeme potřebovat více surovin pro přípravu tohoto jídla - jako jsou ryby, maso a chléb. Aby jsi zajistil toto jídlo, budeš potřebovat postavit domek rybáře, obilné pole, mlýn a pekárnu."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr "Možná budeš potřebovat i domek pro lovce, chovatele vepřů, vinohrad a nějaké studny."
+msgstr "Možná budeš potřebovat i domek lovce, vepřín, vinohrad a nějaké ty studny."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr "Záleží na tobě, co chceš vybudovat. Ale měj na paměti, že uhelné a železnorudné doly vyžadují pivo, zatímco mramorové a zlaté doly chtějí víno. A všechny typy dolů také potřebují minimálně porce, které se vyrábí z chleba NEBO masa NEBO ryb."
+msgstr "Záleží na tobě, co chceš vybudovat. Ale měj na paměti, že doly na uhlí a železo vyžadují pivo, zatímco doly na mramor a zlato vyžadují víno. Všechny typy dolů také potřebují příděly, které se vyrábí z chleba NEBO masa NEBO ryb."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -155,7 +155,7 @@ msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr "Nakonec postav pevnost na poloostrově (nedaleko místa, kde stál hlavní stan Barbarů) aby si ostatním kmenům v oblasti se zde usadit."
+msgstr "Nakonec postav pevnost na poloostrově (nedaleko místa, kde stála hlavní budova Barbarů) aby si ostatním kmenům zabránil usadit se v této oblasti."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -188,7 +188,7 @@ msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr "Na tomto ostrově začneme žít nový život, vybudujeme zde, v exilu, základnu, která se snad stane naším novým, nádherným domovem."
+msgstr "Na tomto ostrově začneme žít nový život, vybudujeme zde, v exilu, hlásku, která se snad stane naším novým, nádherným domovem."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
@@ -208,14 +208,14 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Ale do té doby nechť uplyne ještě mnoho let! Teď se musíme soustředit na přítomnost a vybudovat nějaké domky pro dřevorubce a pilu, abychom získali základní stavební materiál."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Ale nesmíme zapomenout na uchování tohoto přírodního bohatství. Tyto lesy musí přetrvat navždy, proto bychom určitě měli postavit i domek lesníka."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
@@ -226,7 +226,7 @@ msgstr "Skály"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Později jsem se byl projít ke skalám na jihu a poohlédnout se po místě, kde bychom mohli vybudovat lom a získat tak žulu na větší budovy."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
@@ -249,14 +249,14 @@ msgstr "Dobré zprávy! Dnes byly dokončeny budovy pro zpracování dřeva. Nyn
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr ""
+msgstr "Kamení pro kolonii"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
-msgstr ""
+msgstr "Výborně! Dnes byl dokončen lom. Teď už budeme mít dostatek žuly a mramoru na stavbu větších budov."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
@@ -274,7 +274,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Pane, nerad bych podněcoval paniku ale našel jsem něco, co mi leží v žaludku a šíří to vlny strachu až do mého srdce. Cestou na jižní pobřeží, jsem našel zbytky jiné lodi. Nevím, zda jsou ty kusy vše, co z té lodi zbylo. V každém případě ty kusy nevypadají staře."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
@@ -288,7 +288,7 @@ msgstr "Je tu možnost, že lidé, kteří se na té lodi plavili, byli zastiže
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Buď prosím obezřetný a postav pár malých pevností nebo strážnic kolem naší kolonie."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"
@@ -304,7 +304,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Pane, mám pro Vás dobré zprávy: Cestou na jich jsem našel velkou horu. Nejsem si jistý - geolog by ji měl prohlédnout, zda se nemýlím - ale věřím, že by se tam dal těžit mramor."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
@@ -317,7 +317,7 @@ msgstr "Byl by to dobrý zdroj kvalitního mramoru. Několikanásobně větší 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Prosím, rozšiř území k horám a zační těžit mramor."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:190
 msgid "Further Mountains"
@@ -325,7 +325,7 @@ msgstr "Další pohoří"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:191
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Saledus je rozrušený"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:193
@@ -335,7 +335,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron ore and coal mines (or "
 "at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Bohové, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a ta druhá železné rudy. Měli bychom bezodkladně zahájit stavbu dolů na uhlí a železnou rudu (nebo alespoň milířů na dřevěné uhlí), slévárny, dílny, platnéřsví a zbrojařství."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
@@ -343,7 +343,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "Nicméně: na všechny tyto velké budovy budeme potřebovat lepší a elegantnější stavební materiály. Takže je třeba postavit domek kameníka, který bude vyrábět mramorové sloupy."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199
@@ -361,7 +361,7 @@ msgstr "Vchází Amalea…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutiusi, nemyslíš, že jsi zapomněl na něco důležitého?"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
@@ -381,7 +381,7 @@ msgstr "Co si myslíš o tom, že bychom jim pomohli? Ndokážu říci přesně,
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid "Our New Tavern"
-msgstr "Náš nový hostinec"
+msgstr "Naše nová hospoda"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Amalea smiles"
@@ -392,7 +392,7 @@ msgstr "Amalea se usmívá"
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Právě jsem navštívil naši novou hospodu \"U palem\". Pivo, které podávají je velmi dobré. Vážně by si tam měl na jedno zajít."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
@@ -428,7 +428,7 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Nejprve jsem naivně doufal, že jde o mírumilovný kmen, ale jakmile mě jeden z nich uviděl, rozeběhli se na mne a okamžitě zaútočili svými vrhacími oštěpy. Děkuji Bohům, že se mi podařilo utéct, skrýt se a večer pod rouškou tmy, dorazit zpět do bezpečí našeho tábora."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:241
@@ -499,7 +499,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "Zpráva byla určena mně, prosila mě o návrat do Fremilu. Impérium je prý ve válce s Barbary. Byli napadeni ze severu kmenem, na který jsem nesměl zaútočit. Vím, co musím udělat…"
+msgstr "Zpráva byla určena mně, prosila mě o návrat do Fremilu. Císařství je prý ve válce s Barbary. Byli napadeni ze severu kmenem, na který jsem nesměl zaútočit. Vím, co musím udělat…"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
 msgid ""

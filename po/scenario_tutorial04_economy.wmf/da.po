@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2009,2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 08:07+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 07:09+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,7 +294,7 @@ msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "Varelagerets menuvindue har fire faneblade. Det første (og  i øjeblikket valgte) viser dig alle dine nuværende varer, inklusive dem på veje, ved flag og i bygninger afventende brug."
+msgstr "Varelagerets menuvindue har fire faneblade. Det første (og i øjeblikket valgte) viser dig alle dine nuværende varer, inklusive dem på veje, ved flag og i bygninger afventende brug."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
@@ -711,13 +712,17 @@ msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr "Lad os prøve det: Den nuværende målmængde for marmorsøjler er 10. Øg den for at forberede det tilfælde  hvor du hurtigt skal bygge dine fæstningsværker op."
+msgstr "Lad os prøve det: Den nuværende målmængde for marmorsøjler er 10. Øg den for at forberede det tilfælde hvor du hurtigt skal bygge dine fæstningsværker op."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
 msgstr "Angiv målmængden for marmorsøjler til 20 og vent på at din stenhugger fremstiller dem."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Fremstil 20 marmorkolonner."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""

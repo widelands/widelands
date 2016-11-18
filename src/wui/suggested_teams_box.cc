@@ -23,18 +23,7 @@
 #include <string>
 
 #include "graphic/graphic.h"
-
-namespace {
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
+#include "graphic/playercolor.h"
 
 namespace UI {
 
@@ -52,10 +41,11 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
              orientation,
              max_x,
              max_y,
-             g_gr->images().get(player_pictures_small[0])->height()),
+             g_gr->images().get("images/players/player_position_menu.png")->height()),
      padding_(padding),
      indent_(indent),
-     label_height_(g_gr->images().get(player_pictures_small[0])->height() + padding) {
+     label_height_(g_gr->images().get("images/players/player_position_menu.png")->height() +
+                   padding) {
 	player_icons_.clear();
 	suggested_teams_.clear();
 	set_size(max_x, max_y);
@@ -128,8 +118,11 @@ void SuggestedTeamsBox::show(
 				is_first = false;
 
 				for (Widelands::PlayerNumber player : team) {
-					assert(player < MAX_PLAYERS);
-					const Image* player_image = g_gr->images().get(player_pictures_small[player]);
+					assert(player < kMaxPlayers);
+					const Image* player_image = playercolor_image(
+					   player, g_gr->images().get("images/players/player_position_menu.png"),
+					   g_gr->images().get("images/players/player_position_menu_pc.png"));
+
 					assert(player_image);
 					player_icon = new UI::Icon(
 					   lineup_box_, 0, 0, player_image->width(), player_image->height(), player_image);

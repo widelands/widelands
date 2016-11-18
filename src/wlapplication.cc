@@ -289,7 +289,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #else
      homedir_(FileSystem::get_homedir() + "/.widelands"),
 #endif
-     redirected_stdio_(false) {
+     redirected_stdio_(false),
+     last_resolution_change_(0) {
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
@@ -465,7 +466,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	case SDL_MOUSEMOTION:
 		ev.motion.xrel += mouse_compensate_warp_.x;
 		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Point(0, 0);
+		mouse_compensate_warp_ = Vector2i(0, 0);
 
 		if (mouse_locked_) {
 			warp_mouse(mouse_position_);
@@ -519,10 +520,14 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 			return true;
 
 		case SDLK_f: {
-			// toggle fullscreen
-			bool value = !g_gr->fullscreen();
-			g_gr->set_fullscreen(value);
-			g_options.pull_section("global").set_bool("fullscreen", value);
+			// Toggle fullscreen
+			const uint32_t time = SDL_GetTicks();
+			if (time - last_resolution_change_ > 250) {
+				last_resolution_change_ = time;
+				bool value = !g_gr->fullscreen();
+				g_gr->set_fullscreen(value);
+				g_options.pull_section("global").set_bool("fullscreen", value);
+			}
 			return true;
 		}
 
@@ -576,7 +581,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_MOUSEMOTION:
-			mouse_position_ = Point(ev.motion.x, ev.motion.y);
+			mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
 				cb->mouse_move(
@@ -654,10 +659,10 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 /// eliminate the motion event in poll_event()
 ///
 /// \param position The new mouse position
-void WLApplication::warp_mouse(const Point position) {
+void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
 
-	Point cur_position;
+	Vector2i cur_position;
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		mouse_compensate_warp_ += cur_position - position;

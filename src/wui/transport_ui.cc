@@ -122,7 +122,8 @@ private:
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                                                   \
 	b = new UI::Button(buttons, #callback, 0, 0, 34, 34,                                            \
-	                   g_gr->images().get("images/ui_basic/but4.png"), text, tooltip, can_act_);    \
+	                   g_gr->images().get("images/ui_basic/but4.png"), text, tooltip);              \
+	b->set_enabled(can_act_);                                                                       \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this));                   \
 	buttons->add(b, UI::Align::kHCenter);
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
@@ -193,7 +194,8 @@ private:
 			UI::Button* b = nullptr;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                                                 \
 	b = new UI::Button(buttons, #callback, 0, 0, 34, 34,                                            \
-	                   g_gr->images().get("images/ui_basic/but4.png"), text, tooltip, can_act_);    \
+	                   g_gr->images().get("images/ui_basic/but4.png"), text, tooltip);              \
+	b->set_enabled(can_act_);                                                                       \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this));                 \
 	buttons->add(b, UI::Align::kHCenter);
 
