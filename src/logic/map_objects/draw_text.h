@@ -20,15 +20,14 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 #define WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 
-enum DrawText {
+enum TextToDraw {
 	kNone = 0,
 	kCensus = 1,
 	kStatistics = 2,
 };
 
-inline DrawText operator|(DrawText a, DrawText b) {
-	return static_cast<DrawText>(static_cast<int>(a) | static_cast<int>(b));
+inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
+	return static_cast<TextToDraw>(static_cast<int>(a) | static_cast<int>(b));
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
-

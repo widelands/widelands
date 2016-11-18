@@ -39,6 +39,11 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+  */
+
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
                                        const EditorGameBase& egbase)
@@ -213,7 +218,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const DrawText draw_text,
+                         const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
                          float scale,
                          RenderTarget* dst) {

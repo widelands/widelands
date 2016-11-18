@@ -44,6 +44,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
+                     const Image* button_background,
                      bool const horiz)
    : Panel(parent, x, y, w, h),
      horizontal_(horiz),
@@ -60,8 +61,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_background_(g_gr->images().get("images/ui_basic/scrollbar_background.png")),
-     pic_buttons_(g_gr->images().get("images/ui_basic/but3.png")) {
+     pic_buttons_(button_background) {
 	set_thinks(true);
 	layout();
 }
@@ -233,7 +233,7 @@ void Scrollbar::action(Area const area) {
 	set_scrollpos(pos);
 }
 
-void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) {
+void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
 
 	// Draw the picture
@@ -271,7 +271,8 @@ void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) 
 		dst.fill_rect(Rectf(r.origin() + Vector2f(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
-		dst.brighten_rect(Rectf(r.origin() + Vector2f(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(
+		   Rectf(r.origin() + Vector2f(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
 		dst.brighten_rect(
 		   Rectf(r.origin() + Vector2f(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -284,23 +285,33 @@ void Scrollbar::draw_button(RenderTarget& dst, const Area area, const Rectf& r) 
 	}
 }
 
-void Scrollbar::draw_area(RenderTarget& dst, const Area area, const Rectf& r) {
-	dst.tile(r.cast<int>(), pic_background_, Vector2i(get_x(), get_y()) + r.origin().cast<int>());
-
-	if (area == pressed_)
-		dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);
+void Scrollbar::draw_area(RenderTarget& dst, Area area, const Rectf& r) {
+	//  background
+	dst.brighten_rect(r, area == pressed_ ? 2 * MOUSE_OVER_BRIGHT_FACTOR : MOUSE_OVER_BRIGHT_FACTOR);
+	if (horizontal_) {
+		//  top edge
+		dst.brighten_rect(Rectf(r.x, r.y, r.w - 1.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(r.x, r.y + 1.f, r.w - 2.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		//  bottom edge
+		dst.brighten_rect(Rectf(r.x, r.h - 2.f, r.w, 2.f), BUTTON_EDGE_BRIGHT_FACTOR);
+	} else {
+		//  right edge
+		dst.brighten_rect(Rectf(r.w - 2.f, r.y, 2.f, r.h), BUTTON_EDGE_BRIGHT_FACTOR);
+		//  left edge
+		dst.brighten_rect(Rectf(r.x, r.y, 1.f, r.h - 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(r.x + 1.f, r.y, 1.f, r.h - 2.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+	}
 }
 
 /**
  * Draw the scrollbar.
 */
 void Scrollbar::draw(RenderTarget& dst) {
-	uint32_t knobpos = get_knob_pos();
-	uint32_t knobsize = get_knob_size();
-
 	if (!is_enabled()) {
 		return;  // Don't draw a scrollbar that doesn't do anything
 	}
+	uint32_t knobpos = get_knob_pos();
+	uint32_t knobsize = get_knob_size();
 
 	if (horizontal_) {
 		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_w())) {

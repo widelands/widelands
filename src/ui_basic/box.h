@@ -62,6 +62,7 @@ struct Box : public Panel {
 	}
 
 	void set_min_desired_breadth(uint32_t min);
+	void set_inner_spacing(uint32_t size);
 
 protected:
 	void layout() override;
