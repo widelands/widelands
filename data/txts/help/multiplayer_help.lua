@@ -12,7 +12,7 @@ return {
 
       result = result .. rt(h2(_"Client settings"))
       result = result .. rt(p(_"On the left side is a list of all clients including you. You can set your role with the button following your nickname. Available roles are:"))
-      result = result .. picture_li("images/players/genstats_enable_plr_08.png", _"The player with the color of the flag. If more than one client selected the same color, these share control over the player (‘shared kingdom mode’).")
+      result = result .. picture_li("images/players/genstats_player.png", _"The player with the color of the flag. If more than one client selected the same color, these share control over the player (‘shared kingdom mode’).")
       result = result .. picture_li("images/wui/fieldaction/menu_tab_watch.png", _"Spectator mode, meaning you can see everything, but cannot control any player")
 
       result = result .. rt(h2(_"Player settings"))

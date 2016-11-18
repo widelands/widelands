@@ -70,16 +70,15 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
-                                const FloatPoint& texture_offset) {
+void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
-	back.gl_x = field.gl_x;
-	back.gl_y = field.gl_y;
+	back.gl_x = field.gl_position.x;
+	back.gl_y = field.gl_position.y;
 	back.brightness = field.brightness;
-	back.texture_x = field.texture_x;
-	back.texture_y = field.texture_y;
+	back.texture_x = field.texture_coords.x;
+	back.texture_y = field.texture_coords.y;
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
 }
@@ -101,34 +100,34 @@ void TerrainProgram::draw(uint32_t gametime,
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
-		if (brn_index == -1) {
+		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
 			continue;
 		}
 
 		// Down triangle.
-		const int bln_index =
-		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
-		if (bln_index != -1) {
-			const FloatPoint texture_offset =
-			   to_gl_texture(terrains.get(field.ter_d).get_texture(gametime).blit_data()).origin();
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+			const Vector2f texture_offset =
+			   to_gl_texture(
+			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
+			      .origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(bln_index), texture_offset);
-			add_vertex(fields_to_draw.at(brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 		}
 
 		// Right triangle.
-		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
-		if (rn_index != -1) {
-			const FloatPoint texture_offset =
-			   to_gl_texture(terrains.get(field.ter_r).get_texture(gametime).blit_data()).origin();
+		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+			const Vector2f texture_offset =
+			   to_gl_texture(
+			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())
+			      .origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(brn_index), texture_offset);
-			add_vertex(fields_to_draw.at(rn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
 		}
 	}
 
 	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
-	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	const Rectf texture_coordinates = to_gl_texture(blit_data);
 	gl_draw(blit_data.texture_id, texture_coordinates.w, texture_coordinates.h, z_value);
 }

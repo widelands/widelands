@@ -40,7 +40,7 @@ using namespace Widelands;
 
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent, const CritterDescr& critter_descr) {
 	const Image* pic = critter_descr.representative_image();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), pic, critter_descr.descname());
+	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i(0, 0), pic, critter_descr.descname());
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));

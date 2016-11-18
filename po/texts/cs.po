@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-29 19:53+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-30 11:04+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -609,13 +609,13 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Spravování tvých zpráv může být efektivnější: stisknuti 'N' pro přístup ke zprávám a poté stisknuti 'G' k přemístění k objektu a klávesa 'Delete' archivuje zprávy."
+msgstr "Spravování tvých zpráv může být efektivnější: stisknuti \"N\" pro přístup ke zprávám a poté stisknuti \"G\" k přemístění k objektu a klávesa \"Delete\" archivuje zprávy."
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr "Použijte ',' (čárku) a '.' (tečku) k přesunu mezi naposledy navštívenými místy ve světě."
+msgstr "Použijte \",\" (čárku) a \".\" (tečku) k přesunu mezi naposledy navštívenými místy ve světě."
 
 #: ../../data/txts/tips/general_game.tip:42
 msgid ""
@@ -655,19 +655,19 @@ msgstr "Hospodářství se skládá ze staveb a vlajek pospojovaných cestama. Z
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Můžete použít klávesy 'Page Up' a 'Page Down' k nastaveni rychlosti - ta je pak nastavena všem stejně."
+msgstr "Můžete použít klávesy \"Page Up\" a \"Page Down\" k nastaveni rychlosti - ta je pak nastavena všem stejně."
 
 #: ../../data/txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Na začátku řádku zprávy chatu můžeš použít '/me', které se přeloží na přezdívku hráče: '/me je unavený' se přeloží na -> 'Přezdívka_hráče je unavený'."
+msgstr "Můžeš použít \"/me\" na začátku zprávy: \"/me je unavený\" se zobrazí jako -> \"Přezdívka_hráče je unavený\"."
 
 #: ../../data/txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "Pro odeslání zprávy pouze jednomu hráči, napište na začátek zprávy '@jméno'."
+msgstr "Pro odeslání zprávy pouze jednomu hráči, napište na začátek zprávy \"@jméno\"."
 
 #: ../../data/txts/tips/singleplayer.tip:2
 msgid ""

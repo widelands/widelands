@@ -33,8 +33,9 @@ build_script:
   - cmd: cd build
   - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON %APPVEYOR_BUILD_FOLDER%"
-  - cmd: ninja
-
+  # Appveyor does not provide enough memory to build/link thex64 debug build in parallel (Oct 2016)
+  # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
+  - cmd: "IF \"%PLATFORM%\" == \"x64\" (IF \"%CONFIGURATION%\" == \"Debug\" (ninja -j 1) ELSE (ninja)) ELSE (ninja)"
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
   - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
@@ -47,13 +48,6 @@ artifacts:
 platform: 
   - x64
   - x86
-
-matrix:
-  allow_failures:
-    # Appveyor does not provide enough memory to link this build (Sep 2016)
-    # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
-    - platform: x64
-      configuration: Debug
 
 configuration:
   - Release

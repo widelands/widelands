@@ -540,8 +540,8 @@ Tribes
 
 .. class:: Tribes
 
-   This offers access to the objects available for the tribes and allows to add
-   new objects.
+	This offers access to the objects available for the tribes and allows to add
+	new objects. See :ref:`lua_tribes` for detailed documentation.
 */
 
 const char LuaTribes::className[] = "Tribes";
@@ -590,12 +590,13 @@ void LuaTribes::__unpersist(lua_State*) {
  */
 
 /* RST
-   .. method:: new_constructionsite_type(table)
+	.. method:: new_constructionsite_type{table}
 
-      Adds a new constructionsite building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new constructionsite building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_constructionsites` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_constructionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -613,12 +614,13 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_dismantlesite_type(table)
+	.. method:: new_dismantlesite_type{table}
 
-      Adds a new disnamtlesite building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new disnamtlesite building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_dismantlesites` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_dismantlesite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -636,12 +638,13 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_militarysite_type(table)
+	.. method:: new_militarysite_type{table}
 
-      Adds a new militarysite building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new militarysite building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_militarysites` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_militarysite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -659,12 +662,13 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_productionsite_type(table)
+	.. method:: new_productionsite_type{table}
 
-      Adds a new productionsite building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new productionsite building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_productionsites` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_productionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -682,12 +686,13 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_trainingsite_type(table)
+	.. method:: new_trainingsite_type{table}
 
-      Adds a new trainingsite building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new trainingsite building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_trainingsites` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_trainingsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -705,12 +710,13 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_warehouse_type(table)
+	.. method:: new_warehouse_type{table}
 
-      Adds a new warehouse building type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new warehouse building type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_buildings_warehouses` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_warehouse_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -728,12 +734,13 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_immovable_type(table)
+	.. method:: new_immovable_type{table}
 
-      Adds a new immovable type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new immovable type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_immovables` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -750,12 +757,13 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_ship_type(table)
+	.. method:: new_ship_type{table}
 
-      Adds a new ship type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new ship type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_ships` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_ship_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -772,12 +780,13 @@ int LuaTribes::new_ship_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_ware_type(table)
+	.. method:: new_ware_type{table}
 
-      Adds a new ware type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new ware type. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_wares` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_ware_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -794,12 +803,12 @@ int LuaTribes::new_ware_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_carrier_type(table)
+	.. method:: new_carrier_type{table}
 
-      Adds a new carrier worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new carrier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
 
-      :returns: :const:`nil`
+		:returns: :const:`nil`
 */
 int LuaTribes::new_carrier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -817,12 +826,12 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_soldier_type(table)
+	.. method:: new_soldier_type{table}
 
-      Adds a new soldier worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new soldier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
 
-      :returns: :const:`nil`
+		:returns: :const:`nil`
 */
 int LuaTribes::new_soldier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -840,12 +849,12 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_worker_type(table)
+	.. method:: new_worker_type{table}
 
-      Adds a new worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
 
-      :returns: :const:`nil`
+		:returns: :const:`nil`
 */
 int LuaTribes::new_worker_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -863,12 +872,13 @@ int LuaTribes::new_worker_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_tribe(table)
+	.. method:: new_tribe{table}
 
-      Adds a new tribe. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
+		Adds a new tribe. Takes a single argument, a table with
+		the descriptions. See :ref:`lua_tribes_<tribename>.lua` for detailed
+		documentation.
 
-      :returns: :const:`nil`
+		:returns: :const:`0`
 */
 int LuaTribes::new_tribe(lua_State* L) {
 	if (lua_gettop(L) != 2) {

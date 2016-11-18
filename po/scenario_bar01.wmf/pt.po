@@ -6,13 +6,14 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
+# zecas <jjorge@free.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-01 07:52+0000\n"
-"PO-Revision-Date: 2016-10-03 11:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-12 07:18+0000\n"
+"PO-Revision-Date: 2016-11-12 14:47+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,13 +28,13 @@ msgstr "Construa duas cabanas dos guardas-florestais"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Construa uma cabana do silvicultor perto de cada cabana de lenhador"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Obviamente, as árvores crescem devagarinho. Para se assegurar de ter troncos suficientes, tem de construir cabanas de silvicultor."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -47,11 +48,11 @@ msgstr "Expande-te para Nordeste até aos rochedos"
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Construa edifícios militares (como sentinelas ou barreiras) para expandir o seu território"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Expanda-se para os rochedos ao Nordeste e construa ai uma pedreira"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -73,7 +74,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Para as construir, primeiro coloca uma bandeira no flanco Este da montanha (em terreno montanhoso e não de prado). Ao clicares na bandeira podes enviar para ai os teus geólogos. Quando a bandeira for colocada numa montanha, os geólogos procurarão por minerais ; de outro modo procurariam água. Assim que aparecerem os resultados das pesquisas constrói uma mina de cada um dos recursos encontrados, escolhendo o bom tipo de mina :"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
@@ -119,7 +120,7 @@ msgstr "nada foi encontrado aqui"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "As minas só podem ser construídas nas montanhas. As zonas possíveis aparecem com símbolos laranja de minas."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
@@ -182,17 +183,17 @@ msgstr "Melhora os edifícios e construa uma cervejeira artesanal"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Melhore uma mina e a taberna, e construa uma cervejeira artesanal."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Melhore a mina de carvão ou de ferro em mina profunda, e melhore a taberna em hospedaria."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Também construa uma cervejeira artesanal."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -254,7 +255,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Edifícios melhores também precisam de melhores materiais de construção para além da Madeira queimada. Um deles é a Argamassa que é produzida a partir da mistura de granito e água, e cozida com carvão no Forno da Cal."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
@@ -268,20 +269,20 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Para pedir a um geólogo de procurar água, carregue numa bandeira da zona que pretende explorar e escolha o botão marcado 'Enviar geólogo para explorar a zona."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "O carvão pode ser obtido construindo uma carvoeira ou uma mina de carvão. Queimar troncos para obter carvão é lento. Só deveria construir uma carvoeira quando não houver carvão disponível."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Construa um forno da cal e um poço. Além disso, construa uma carvoeira ou uma mina de carvão para o alimentar."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
@@ -382,7 +383,7 @@ msgstr "Tal como o meu pai me disse, tens de saber quando lutar, quando ficar e 
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron abana a babeça..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:206
@@ -484,7 +485,7 @@ msgstr "O Khantrukh nota …"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Vejo que já construiu uma pedreira e duas cabanas de lenhadores. É um bom arranque se quisermos ficar aqui mais tempo."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:254
@@ -499,7 +500,7 @@ msgstr "Não nunca esqueças: estas florestas são uma herança que nos foi conf
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Portanto, para reimplantar as árvores que cortamos, deveríamos construir algumas cabanas de silvicultores, de preferência perto das cabanas dos lenhadores. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
@@ -603,7 +604,7 @@ msgstr "O teu leal companheiro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "O carajoso Boldreth avança-se para ti…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
@@ -1015,14 +1016,14 @@ msgstr "Encontramos uma aldeia com pessoas amigáveis e produtivas que ficaram i
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Eles viveram de maneira simples e feliz, da caça e de culturas. Nunca se encontraram envolvidos em conflitos, e não estão prontos para combater."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:547
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Mas temem que a guerra cerca de Al'thunran vai acabar com esta vida. Portanto, decidiram de juntarse connosco, esperando que nos poderemos ajudar mutualmente."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

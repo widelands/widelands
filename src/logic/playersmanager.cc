@@ -22,7 +22,6 @@
 #include <cstring>
 
 #include "base/wexception.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
@@ -39,7 +38,7 @@ PlayersManager::~PlayersManager() {
 }
 
 void PlayersManager::cleanup() {
-	const Player* const* const players_end = players_ + MAX_PLAYERS;
+	const Player* const* const players_end = players_ + kMaxPlayers;
 	for (Player** p = players_; p < players_end; ++p) {
 		delete *p;
 		*p = nullptr;
@@ -49,7 +48,7 @@ void PlayersManager::cleanup() {
 
 void PlayersManager::remove_player(PlayerNumber plnum) {
 	assert(1 <= plnum);
-	assert(plnum <= MAX_PLAYERS);
+	assert(plnum <= kMaxPlayers);
 
 	Player*& p = players_[plnum - 1];
 	if (p) {
@@ -67,7 +66,7 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
                                    const std::string& name,
                                    TeamNumber team) {
 	assert(1 <= player_number);
-	assert(player_number <= MAX_PLAYERS);
+	assert(player_number <= kMaxPlayers);
 
 	Player*& p = players_[player_number - 1];
 	if (p) {

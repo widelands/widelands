@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-28 22:03+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-30 11:04+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší spustit normální hru a zjistit si vše sám. V opačném případě se mnou prosím zůstaň, už nejsem nejmladší ani nejrychlejší."
+msgstr "Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší, spustit normální hru a zjistit si vše sám. V opačném případě se mnou prosím zůstaň, už nejsem nejmladší ani nejrychlejší."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -403,7 +403,7 @@ msgstr "Naučit se používat minimapu"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Otevři minimapu použitím třetího tlačítka zleva dole na obrazovce nebo pomocí klávesy 'm'."
+msgstr "Otevři minimapu použitím třetího tlačítka zleva dole na obrazovce nebo pomocí klávesy \"M\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -413,7 +413,7 @@ msgstr "Pohraj si chvíli s vrstvami (cesty, vlajky atd.)"
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr "Zavři minimapu až budeš připraven pokračovat pomocí stejného tlačítka nebo klávesy 'm'. Samozřejmě funguje i kliknutí pravou myší."
+msgstr "Zavři minimapu až budeš připraven pokračovat pomocí stejného tlačítka nebo klávesy \"M\". Samozřejmě funguje i kliknutí pravou myší."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
@@ -650,7 +650,7 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Vypadá to, že jsi zničil stavební místo pro lom, který jsme chtěli postavit. Jelikož potřebujeme žulu, navrhuji, aby jsi předchozí uloženou pozici. Naštěstí se čas od času vytvářejí. Jdi do hlavní nabídky a vyber 'Hra jednoho hráče' → 'Načíst hru'. A buď prosím příště opatrnější."
+msgstr "Vypadá to, že jsi zničil stavební místo pro lom, který jsme chtěli postavit. Jelikož potřebujeme žulu, navrhuji, aby jsi předchozí uloženou pozici. Naštěstí se čas od času vytvářejí. Jdi do hlavní nabídky a vyber \"Hra jednoho hráče\" → \"Načíst hru\". A buď prosím příště opatrnější."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -789,7 +789,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr "Za tímto účelem otevři okno zpráv stiskem \"n\" nebo klikem na tlačítko nejvíce vpravo ve spodní části obrazovky. Nejnovější zpráva bude označena automaticky. Klikej na tlačítko 'Archivovat vybranou zprávu', dokud nebudou všechny zprávy archivovány a seznam nebude prázdný."
+msgstr "Za tímto účelem otevři okno zpráv stiskem \"n\" nebo klikem na tlačítko nejvíce vpravo ve spodní části obrazovky. Nejnovější zpráva bude označena automaticky. Klikej na tlačítko \"Archivovat vybranou zprávu\", dokud nebudou všechny zprávy archivovány a seznam nebude prázdný."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -1007,7 +1007,7 @@ msgstr "Pro opuštění hry a návrat do hlavní nabídky, klikni na"
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
-msgstr "Tlačítko 'Hlavní nabídka' úplně vlevo na spodní části obrazovky. Potom klikni na"
+msgstr "Tlačítko \"Hlavní nabídka\" úplně vlevo na spodní části obrazovky. Potom klikni na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."

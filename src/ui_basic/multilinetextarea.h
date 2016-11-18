@@ -53,6 +53,7 @@ struct MultilineTextarea : public Panel {
 	   const uint32_t h,
 	   const std::string& text = std::string(),
 	   const Align = UI::Align::kLeft,
+	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
 	const std::string& get_text() const {

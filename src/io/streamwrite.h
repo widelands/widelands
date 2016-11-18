@@ -82,6 +82,12 @@ public:
 		uint32_t const y = little_32(x);
 		data(&y, 4);
 	}
+	void float_32(const float x) {
+		uint32_t y;
+		memcpy(&y, &x, 4);
+		y = little_32(y);
+		data(&y, 4);
+	}
 	void string(const std::string& str) {
 		data(str.c_str(), str.size() + 1);
 	}
