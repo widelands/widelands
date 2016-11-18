@@ -20,8 +20,12 @@
 #ifndef WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H
 #define WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H
 
+#include <vector>
+
 #include "editor/tools/tool.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
+#include "wui/field_overlay_manager.h"
 
 // How much place should be left around a player position
 // where no other player can start
@@ -37,8 +41,10 @@ struct EditorSetStartingPosTool : public EditorTool {
 	                          EditorInteractive&,
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;
-	char const* get_sel_impl() const override {
-		return current_sel_pic_;
+	const Image* get_sel_impl() const override {
+		return playercolor_image(get_current_player() - 1,
+		                         g_gr->images().get("images/players/player_position_menu.png"),
+		                         g_gr->images().get("images/players/player_position_menu_pc.png"));
 	}
 
 	Widelands::PlayerNumber get_current_player() const;
@@ -46,10 +52,13 @@ struct EditorSetStartingPosTool : public EditorTool {
 	bool has_size_one() const override {
 		return true;
 	}
+	void set_starting_pos(EditorInteractive& eia,
+	                      Widelands::PlayerNumber plnum,
+	                      const Widelands::Coords& c,
+	                      Widelands::Map* map);
 
 private:
-	char const* fsel_picsname_;
-	char const* current_sel_pic_;
+	std::vector<FieldOverlayManager::OverlayId> overlay_ids_;
 };
 
 int32_t editor_tool_set_starting_pos_callback(const Widelands::TCoords<Widelands::FCoords>& c,

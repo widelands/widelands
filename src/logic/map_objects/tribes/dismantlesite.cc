@@ -39,6 +39,11 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+  */
+
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
                                        const EditorGameBase& egbase)
@@ -212,20 +217,16 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 Draw it.
 ===============
 */
-void DismantleSite::draw(const EditorGameBase& game,
-                         RenderTarget& dst,
-                         const FCoords& coords,
-                         const Point& pos) {
-	const uint32_t gametime = game.get_gametime();
+void DismantleSite::draw(uint32_t gametime,
+                         const TextToDraw draw_text,
+                         const Vector2f& point_on_dst,
+                         float scale,
+                         RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-
-	if (coords != position_)
-		return;  // draw big buildings only once
-
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst.blit_animation(pos, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
@@ -247,9 +248,10 @@ void DismantleSite::draw(const EditorGameBase& game,
 
 	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
 
-	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
+	dst->blit_animation(
+	   point_on_dst, scale, anim_idx, tanim, player_color, Recti(Vector2i(0, lines), w, h - lines));
 
 	// Draw help strings
-	draw_info(game, dst, pos);
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }

@@ -67,6 +67,7 @@ public:
 	uint16_t unsigned_16();
 	int32_t signed_32();
 	uint32_t unsigned_32();
+	float float_32();
 	std::string string();
 	virtual char const* c_string() {
 		throw;

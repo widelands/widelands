@@ -26,7 +26,8 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "base/point.h"
+#include "base/vector.h"
+#include "wui/mapview.h"
 
 namespace Widelands {
 class EditorGameBase;
@@ -39,26 +40,23 @@ class EditorGameBase;
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
+	struct View {
+		Vector2f viewpoint;
+		float zoom;
+	};
+
 	struct Landmark {
-		Point point;
+		View view;
 		bool set;
 
 		Landmark() : set(false) {
 		}
 	};
 
-	using SetViewFn = boost::function<void(Point)>;
+	QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view);
 
-	QuickNavigation(const Widelands::EditorGameBase& egbase,
-	                uint32_t screenwidth,
-	                uint32_t screenheight);
-
-	void set_setview(const SetViewFn& fn);
-
-	void view_changed(Point point, bool jump);
-
-	// Set the landmark for 'index' to 'point'. 'index' must be < 10.
-	void set_landmark(size_t index, const Point& point);
+	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
+	void set_landmark(size_t index, const View& view);
 
 	// Returns a pointer to the first element in the landmarks array
 	const std::vector<Landmark>& landmarks() const {
@@ -68,29 +66,24 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(Point where);
+	void setview(const View& where);
+	void view_changed(bool jump);
 
 	const Widelands::EditorGameBase& egbase_;
-	uint32_t screenwidth_;
-	uint32_t screenheight_;
-
-	/**
-	 * This is the callback function that we call to request a change in view position.
-	 */
-	SetViewFn setview_;
+	MapView* map_view_;
 
 	bool havefirst_;
 	bool update_;
-	Point anchor_;
-	Point current_;
+	Vector2f anchor_;  // center of last view in mappixel.
+	View current_;
 
 	/**
 	 * Keeps track of what the player has looked at to allow jumping back and forth
 	 * in the history.
 	 */
 	/*@{*/
-	std::vector<Point> history_;
-	std::vector<Point>::size_type history_index_;
+	std::vector<View> history_;
+	size_t history_index_;
 	/*@}*/
 
 	/**
