@@ -5,6 +5,5 @@ Widelands Scripting Reference
    :maxdepth: 3
 
    core
-   autogen_toc_lua_world
-   lua_tribes
+   map_objects
    autogen_toc_auxiliary

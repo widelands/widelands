@@ -38,6 +38,7 @@
 #include "editor/ui_menus/tool_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
+#include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -55,16 +56,6 @@
 #include "wui/interactive_base.h"
 
 namespace {
-
-static char const* const player_pictures[] = {"images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png"};
-
 using Widelands::Building;
 
 // Load all tribes from disk.
@@ -118,6 +109,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      toggle_buildhelp_(INIT_BUTTON("images/wui/menus/menu_toggle_buildhelp.png",
                                    "buildhelp",
                                    _("Show Building Spaces (on/off)"))),
+     reset_zoom_(
+        INIT_BUTTON("images/wui/menus/menu_reset_zoom.png", "reset_zoom", _("Reset zoom"))),
      toggle_player_menu_(
         INIT_BUTTON("images/wui/editor/editor_menu_player_menu.png", "players", _("Players"))),
      undo_(INIT_BUTTON("images/wui/editor/editor_undo.png", "undo", _("Undo"))),
@@ -129,6 +122,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   boost::bind(&EditorInteractive::toolsize_menu_btn, this));
 	toggle_minimap_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_minimap, this));
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	reset_zoom_.sigclicked.connect(
+	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
 	toggle_player_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_playermenu, this));
 	undo_.sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 	redo_.sigclicked.connect([this] { history_->redo_action(egbase().world()); });
@@ -138,11 +133,15 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar_.add(&toggle_main_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_tool_menu_, UI::Align::kLeft);
 	toolbar_.add(&toggle_toolsize_menu_, UI::Align::kLeft);
+	toolbar_.add(&toggle_player_menu_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
 	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
-	toolbar_.add(&toggle_player_menu_, UI::Align::kLeft);
+	toolbar_.add(&reset_zoom_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&undo_, UI::Align::kLeft);
 	toolbar_.add(&redo_, UI::Align::kLeft);
+	toolbar_.add_space(15);
 	toolbar_.add(&toggle_help_, UI::Align::kLeft);
 	adjust_toolbar_position();
 
@@ -160,6 +159,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	      [this](const Widelands::NoteFieldResourceChanged& note) {
 		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
 		   });
+
+	minimap_registry().minimap_type = MiniMapType::kStaticMap;
 }
 
 void EditorInteractive::register_overlays() {
@@ -167,13 +168,10 @@ void EditorInteractive::register_overlays() {
 
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
-	assert(nr_players <= MAX_PLAYERS);
+	assert(nr_players <= kMaxPlayers);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
-			assert(player_image);
-			mutable_field_overlay_manager()->register_overlay(
-			   sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
+			tools_->set_starting_pos.set_starting_pos(*this, p, sp, &map);
 		}
 	}
 
@@ -543,10 +541,11 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
 
-	if (char const* const sel_pic = primary.get_sel(which))
+	if (const Image* sel_pic = primary.get_sel(which)) {
 		set_sel_picture(sel_pic);
-	else
+	} else {
 		unset_sel_picture();
+	}
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
@@ -669,7 +668,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// Make sure that we will start at coordinates (0,0).
-		set_viewpoint(Point(0, 0), true);
+		set_viewpoint(Vector2f(0, 0), true);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));

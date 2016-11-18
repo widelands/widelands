@@ -39,7 +39,7 @@ struct Statebox : public Panel {
 	 * Pictorial Statebox
 	 */
 	Statebox(Panel* parent,
-	         Point,
+	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
 
@@ -49,7 +49,7 @@ struct Statebox : public Panel {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Statebox(Panel* parent,
-	         Point,
+	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0);
@@ -111,7 +111,7 @@ struct Checkbox : public Statebox {
 	 * Pictorial Checkbox
 	 */
 	Checkbox(Panel* const parent,
-	         Point const p,
+	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
 	   : Statebox(parent, p, pic, tooltip_text) {
@@ -123,7 +123,7 @@ struct Checkbox : public Statebox {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Checkbox(Panel* const parent,
-	         Point const p,
+	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)

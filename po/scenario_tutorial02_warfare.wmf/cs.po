@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-28 06:50+0000\n"
-"PO-Revision-Date: 2016-09-28 22:07+0000\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-28 19:45+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr "Představení"
+msgstr "Úvod"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
@@ -123,7 +123,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "Únik je šance, že voják odrazí útok. Barbar na úrovni 0 má %1%%% šanci odrazit útok a tato šance se zvyšuje s krokem %2%%% na každé úrovni."
+msgstr "Odražení je šance, že voják odrazí útok. Barbar na úrovni 0 má %1%%% šanci odrazit útok a tato šance se zvyšuje s krokem %2%%% na každé úrovni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
@@ -446,7 +446,7 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Tvrz nelze postavit přímo. Místo toho je nutné nejdříve vybudovat pevnost a teprve pak pevnost vylepšit na tvrz. To lze provést tak, že klikneš na pevnost a pak vybereš volbu 'Vylepšít na tvrz'."
+msgstr "Tvrz nelze postavit přímo. Místo toho je nutné nejdříve vybudovat pevnost a teprve pak pevnost vylepšit na tvrz. To lze provést tak, že klikneš na pevnost a pak vybereš volbu \"Vylepšít na tvrz\"."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
@@ -497,7 +497,7 @@ msgstr "Skvělá práce, tvrz je hotova. Co se to ale děje? Nepřátelské klan
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "K útoku na budovu klikni na jeho dveře, vyber počet vojáků, které chceš do útoku poslat a vyber tlačítko 'Útok'."
+msgstr "K útoku na budovu klikni na jeho dveře, vyber počet vojáků, které chceš do útoku poslat a vyber tlačítko \"Útok\"."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""

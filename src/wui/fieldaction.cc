@@ -283,7 +283,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Point(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button

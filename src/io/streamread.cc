@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdarg>
 #include <cstdio>
+#include <cstring>
 
 #include "base/wexception.h"
 
@@ -87,6 +88,15 @@ uint32_t StreamRead::unsigned_32() {
 	uint32_t x;
 	data_complete(&x, 4);
 	return little_32(x);
+}
+
+float StreamRead::float_32() {
+	uint32_t x;
+	data_complete(&x, 4);
+	x = little_32(x);
+	float rv;
+	memcpy(&rv, &x, 4);
+	return rv;
 }
 
 std::string StreamRead::string() {

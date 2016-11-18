@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-21 08:44+0000\n"
-"PO-Revision-Date: 2016-09-21 21:56+0000\n"
-"Last-Translator: stdh\n"
+"POT-Creation-Date: 2016-10-15 08:42+0000\n"
+"PO-Revision-Date: 2016-10-17 06:59+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr "Artefacten"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Zoek antieke artefacten.  Wanneer ze allemaal gevonden zijn wint het team dat er de meeste bezit."
+msgstr "Zoek antieke artefacten. Wanneer ze allemaal gevonden zijn wint het team dat er de meeste bezit."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid "No Artifacts"
@@ -38,7 +39,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on https://launchpad.net/widelands and specify your Widelands "
 "version and the map you tried to load."
-msgstr "Er bevinden zich geen Artefacten op deze kaart.  Dit zou niet mogen gebeuren.  Dien alstublieft een bug in op https://launchpad.net/widelands, waarbij je je versie van Widelands en de kaart die je probeerde te laden duidelijk aangeeft."
+msgstr "Er bevinden zich geen Artefacten op deze kaart. Dit zou niet mogen gebeuren. Dien alstublieft een bug in op https://launchpad.net/widelands, waarbij je je versie van Widelands en de kaart die je probeerde te laden duidelijk aangeeft."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:62
 msgid "New Artifact Found"
@@ -101,7 +102,7 @@ msgstr "Verzamelaars"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Je krijgt punten voor waardevolle goederen in je opslagplaatsen.  Na vier uur wint de speler met het hoogste aantal goederen het spel."
+msgstr "Je krijgt punten voor waardevolle goederen in je opslagplaatsen. Na vier uur wint de speler met het hoogste aantal goederen het spel."
 
 #: ../../data/scripting/win_conditions/collectors.lua:25
 msgid "Points"

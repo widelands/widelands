@@ -40,7 +40,7 @@ protected:
 
 private:
 	EditorInteractive& eia();
-	void clicked_ok();
+	void clicked_ok() override;
 	void clicked_make_directory();
 	void clicked_edit_options();
 	void clicked_item();

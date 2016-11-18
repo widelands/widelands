@@ -25,7 +25,7 @@
 #include <string>
 #include <vector>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
@@ -47,15 +47,15 @@ private:
 	EditorInteractive& eia();
 	UI::UniqueWindow::Registry allow_buildings_menu_;
 	UI::Textarea* nr_of_players_ta_;
-	UI::EditBox* plr_names_[MAX_PLAYERS];
+	UI::EditBox* plr_names_[kMaxPlayers];
 	UI::Button add_player_, remove_last_player_;
-	UI::Button* plr_make_infrastructure_buts_[MAX_PLAYERS], *plr_set_pos_buts_[MAX_PLAYERS],
-	   *plr_set_tribes_buts_[MAX_PLAYERS];
+	UI::Button *plr_make_infrastructure_buts_[kMaxPlayers], *plr_set_pos_buts_[kMaxPlayers],
+	   *plr_set_tribes_buts_[kMaxPlayers];
 
 	std::vector<std::string> tribenames_;
 
 	/// List of the tribes currently selected for all players
-	std::string selected_tribes_[MAX_PLAYERS];
+	std::string selected_tribes_[kMaxPlayers];
 
 	int32_t posy_;
 
