@@ -382,7 +382,7 @@ MapObject IMPLEMENTATION
  * Zero-initialize a map object
  */
 MapObject::MapObject(const MapObjectDescr* const the_descr)
-   : descr_(the_descr), serial_(0), logsink_(nullptr), reserved_by_worker_(false) {
+   : descr_(the_descr), serial_(0), logsink_(nullptr), owner_(nullptr), reserved_by_worker_(false) {
 }
 
 /**
@@ -434,27 +434,40 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(bool show_census,
+void MapObject::do_draw_info(const TextToDraw& draw_text,
                              const std::string& census,
-                             bool show_statictics,
                              const std::string& statictics,
-                             RenderTarget& dst,
-                             const Point& pos) const {
-	if (show_census || show_statictics) {
-		// We always render this so we can have a stable position for the statistics string.
-		const Image* rendered_census_info =
-		   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter), 120);
-		const Point census_pos(pos - Point(0, 48));
+                             const Vector2f& field_on_dst,
+                             float scale,
+                             RenderTarget* dst) const {
+	if (draw_text == TextToDraw::kNone) {
+		return;
+	}
 
-		if (show_census) {
-			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
-		}
+	// Rendering text is expensive, so let's just do it for only a few sizes.
+	scale = std::round(scale);
+	if (scale == 0.f) {
+		return;
+	}
+	const int font_size = scale * UI_FONT_SIZE_SMALL;
 
-		if (show_statictics && !statictics.empty()) {
-			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
-			         UI::g_fh1->render(as_condensed(statictics)), BlendMode::UseAlpha,
-			         UI::Align::kCenter);
-		}
+	// We always render this so we can have a stable position for the statistics string.
+	const Image* rendered_census_info =
+	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
+
+	// Rounding guarantees that text aligns with pixels to avoid subsampling.
+	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
+	if (draw_text & TextToDraw::kCensus) {
+		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+	}
+
+	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
+		const Vector2f statistics_pos =
+		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
+		      .cast<float>();
+		dst->blit(statistics_pos,
+		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size)),
+		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }
 

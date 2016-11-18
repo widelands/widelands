@@ -231,6 +231,10 @@ Warehouse Building
 ==============================
 */
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const EditorGameBase& egbase)
@@ -425,7 +429,7 @@ void Warehouse::init(EditorGameBase& egbase) {
 	if (uint32_t const conquer_radius = descr().get_conquers()) {
 		egbase.conquer_area(PlayerArea<Area<FCoords>>(
 		   player.player_number(),
-		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)));
+		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)), true);
 	}
 
 	if (descr().get_isport()) {

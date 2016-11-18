@@ -59,7 +59,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&);
+	Data(MultilineEditbox&, const Image* button_background);
 	void refresh_ww();
 
 	void update();
@@ -87,8 +87,9 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
                                    uint32_t w,
                                    uint32_t h,
                                    const std::string& text,
-                                   const Image* background)
-   : Panel(parent, x, y, w, h), d_(new Data(*this)) {
+                                   const Image* background,
+                                   const Image* button_background)
+   : Panel(parent, x, y, w, h), d_(new Data(*this, button_background)) {
 	d_->background = background;
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -98,8 +99,8 @@ MultilineEditbox::MultilineEditbox(Panel* parent,
 	set_text(text);
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), false),
+MultilineEditbox::Data::Data(MultilineEditbox& o, const Image* button_background)
+   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
      cursor_pos(0),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),
@@ -417,32 +418,32 @@ void MultilineEditbox::focus(bool topcaller) {
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
 	// Draw the background
-	dst.tile(Rect(Point(0, 0), get_w(), get_h()), d_->background, Point(get_x(), get_y()));
+	dst.tile(Recti(Vector2i(0, 0), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rect(Point(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(0.f, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rect(Point(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
-		dst.fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		dst.fill_rect(Rectf(0, 0, get_w() - 1, 1), black);
+		dst.fill_rect(Rectf(0, 1, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
-		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+		dst.fill_rect(Rectf(0, 0, 1, get_h() - 1), black);
+		dst.fill_rect(Rectf(1, 0, 1, get_h() - 2), black);
 	}
 
 	if (has_focus())
-		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	d_->refresh_ww();
 
 	d_->ww.set_draw_caret(has_focus());
 
-	d_->ww.draw(dst, Point(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
+	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
 	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
 }
 

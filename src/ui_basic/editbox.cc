@@ -353,26 +353,26 @@ void EditBox::draw(RenderTarget& odst) {
 	RenderTarget& dst = odst;
 
 	// Draw the background
-	dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_->background, Point(get_x(), get_y()));
+	dst.tile(Recti(0, 0, get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
-		dst.brighten_rect(Rect(Point(0, get_h() - 2), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(0, get_h() - 2, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst.brighten_rect(Rect(Point(get_w() - 2, 0), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(get_w() - 2, 0, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(Point(0, 0), get_w() - 1, 1), black);
-		dst.fill_rect(Rect(Point(0, 1), get_w() - 2, 1), black);
+		dst.fill_rect(Rectf(0.f, 0.f, get_w() - 1, 1), black);
+		dst.fill_rect(Rectf(0.f, 1.f, get_w() - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
-		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
+		dst.fill_rect(Rectf(0.f, 0.f, 1, get_h() - 1), black);
+		dst.fill_rect(Rectf(1.f, 0.f, 1, get_h() - 2), black);
 	}
 
 	if (has_focus()) {
-		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
@@ -387,7 +387,7 @@ void EditBox::draw(RenderTarget& odst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Point point(kMarginX, get_h() / 2);
+	Vector2f point(kMarginX, get_h() / 2.f);
 
 	if (static_cast<int>(m_->align & UI::Align::kRight)) {
 		point.x += max_width;
@@ -399,23 +399,23 @@ void EditBox::draw(RenderTarget& odst) {
 	if (max_width < linewidth) {
 		// Fix positioning for BiDi languages.
 		if (UI::g_fh1->fontset()->is_rtl()) {
-			point.x = 0;
+			point.x = 0.f;
 		}
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			dst.blitrect(point, entry_text_im, Rect(linewidth - max_width, 0, linewidth, lineheight));
+			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
 			if (static_cast<int>(m_->align & UI::Align::kRight)) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point, entry_text_im,
-				             Rect(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
-				dst.blitrect(point, entry_text_im, Rect(-m_->scrolloffset, 0, max_width, lineheight));
+				dst.blitrect(point, entry_text_im, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
-		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
+		dst.blitrect(point, entry_text_im, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
@@ -427,9 +427,9 @@ void EditBox::draw(RenderTarget& odst) {
 		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-		Point caretpt;
+		Vector2f caretpt;
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
-		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
 		dst.blit(caretpt, caret_image);
 	}
 }

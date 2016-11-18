@@ -449,7 +449,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl())
-			get_ipl()->move_view_to(map().get_starting_pos(get_ipl()->player_number()));
+			get_ipl()->center_view_on_coords(map().get_starting_pos(get_ipl()->player_number()));
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources(world());

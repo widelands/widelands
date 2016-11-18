@@ -88,7 +88,7 @@ void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index) {
 void ItemWaresDisplay::draw(RenderTarget& dst) {
 	const Widelands::TribeDescr& tribe(player().tribe());
 
-	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+	dst.fill_rect(Rectf(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		const Item& it = items_[idx];
@@ -100,13 +100,14 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 
 		if (it.worker) {
 			y += IWD_WorkerBaseline;
-			dst.blit_animation(Point(x + (IWD_ItemWidth / 2), y + (IWD_ItemHeight / 2)),
+			constexpr float kZoom = 1.f;
+			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)), kZoom,
 			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
 			                   player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon())
-				dst.blit(Point(x, y), tribe.get_ware_descr(it.index)->icon());
+				dst.blit(Vector2f(x, y), tribe.get_ware_descr(it.index)->icon());
 		}
 	}
 }
