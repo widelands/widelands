@@ -26,11 +26,18 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
+
+enum class ListselectLayout {
+	kPlain,     // Highlight the selected element
+	kDropdown,  // When the mouse moves, instantly select the element that the mouse hovers over
+	kShowCheck  // Show a green arrow in front of the selected element
+};
 
 /**
  * This class defines a list-select box whose entries are defined by a name
@@ -39,8 +46,13 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false);
+	BaseListselect(Panel* parent,
+	               int32_t x,
+	               int32_t y,
+	               uint32_t w,
+	               uint32_t h,
+	               const Image* button_background,
+	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect();
 
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -88,14 +100,22 @@ struct BaseListselect : public Panel {
 	void select(uint32_t i);
 	bool has_selection() const;
 
-	struct NoSelection {};
 	uint32_t get_selected() const;
 	void remove_selected();
 
+	const std::string& get_selected_name() const;
+	const std::string& get_selected_tooltip() const;
+
+	void set_background(const Image* background) {
+		background_ = background;
+	}
+
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint32_t get_lineheight() const;
+	int get_lineheight() const;
 
 	uint32_t get_eff_w() const;
+
+	void layout() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
@@ -124,22 +144,29 @@ private:
 	};
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
-	uint32_t max_pic_width_;
-	uint32_t lineheight_;
+	int max_pic_width_;
+	int lineheight_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks
-	bool show_check_;          //  show a green arrow left of selected element
+	ListselectLayout selection_mode_;
 	const Image* check_pic_;
+	const Image* background_;
 	std::string current_tooltip_;
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : BaseListselect(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           ListselectLayout selection_mode = ListselectLayout::kPlain)
+	   : BaseListselect(parent, x, y, w, h, button_background, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -167,6 +194,10 @@ template <typename Entry> struct Listselect : public BaseListselect {
 		return entry_cache_[BaseListselect::get_selected()];
 	}
 
+	void set_background(const Image* background) {
+		BaseListselect::set_background(background);
+	}
+
 private:
 	std::deque<Entry> entry_cache_;
 };
@@ -181,8 +212,14 @@ private:
 template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
 	using Base = Listselect<Entry*>;
 
-	Listselect(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool show_check = false)
-	   : Base(parent, x, y, w, h, show_check) {
+	Listselect(Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           uint32_t w,
+	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           ListselectLayout selection_mode = ListselectLayout::kPlain)
+	   : Base(parent, x, y, w, h, button_background, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -206,6 +243,10 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 
 	Entry& get_selected() const {
 		return *Base::get_selected();
+	}
+
+	void set_background(const Image* background) {
+		*Base::set_background(background);
 	}
 };
 }

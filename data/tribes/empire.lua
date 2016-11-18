@@ -206,6 +206,7 @@ tribes:new_tribe {
       "empire_toolsmithy",
       "empire_armorsmithy",
       "empire_shipyard",
+      "empire_barracks",
 
       -- Big
       "empire_donkeyfarm",
