@@ -90,7 +90,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 // TODO(GunChleoc): Arabic: This doesn't fit the window in Arabic.
 FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
-   : FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butw_(get_w() / 5),
@@ -257,7 +257,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i(0, 0), _("Use single watchwindow mode")),
-
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);

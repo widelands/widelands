@@ -386,8 +386,8 @@ void Soldier::damage(const uint32_t value) {
 /// pos is the location, in pixels, of the node position_ (height is already
 /// taken into account).
 Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
-                                 const Vector2f& field_on_dst,
-                                 const float scale) const {
+                               const Vector2f& field_on_dst,
+                               const float scale) const {
 	if (combat_walking_ == CD_NONE) {
 		return Bob::calc_drawpos(game, field_on_dst, scale);
 	}

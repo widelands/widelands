@@ -6,13 +6,14 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
+# zecas <jjorge@free.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-03 09:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-12 07:18+0000\n"
+"PO-Revision-Date: 2016-11-12 15:26+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,7 +149,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "Não via outra maneira para restaurar a minha honra que não fosse lutar contra os Bárbaros. Por isso deixei Fremil e parti em busca de um novo mundo, uma nova vida algures mais a Sul. Agora estou a navegar no Golfo das Pérolas com a minha família, alguns dos meus amigos e um punhado dos meus melhores soldados."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
@@ -161,7 +162,7 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "Parece que termos navegado até este Golfo das Pérolas foi um dos nossos maiores erros. A natureza virou-se contra nós e meteu-nos esta escura e violenta tempestade. Já não sei há quanto tempo começaram as estas ondas maiores que o nosso navio, mas ainda é perigoso ir lá fora."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:105
@@ -225,7 +226,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Devíamos construir uma barreira no lado Este da floresta. Depois um de nós pode ficar de vigia na escuridão e manter-nos a salvo das criaturas."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Safe For Now"
@@ -240,7 +241,7 @@ msgstr "Saladeus suspira de alívio e diz…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "Senhor, informo que a construção da barreira terminou, e enviei para lá um dos nossos melhores soldados  para vigiar o deserto."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:148
@@ -269,7 +270,7 @@ msgstr "Olá Lutius, acabei de encontrar com Saledus lá fora."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Falou-me acerca da barreira. Sabes que não sou daqueles que pensam que precisamos de mais barreiras. Antes pelo contrário penso que devemos-nos concentrar em outras coisas por agora."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:162
@@ -290,7 +291,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "Recebi uma mensagem a dizer que o nosso lenhador começou a trabalhar hoje. Talvez fosse uma boa ideia esperar que ele abrisse uma clareira onde possamos construir mais duas casas de lenhador, para que possamos produzir rapidamente mais troncos."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:174
@@ -299,7 +300,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Mas infelizmente os troncos não servem para reparar o nosso navio - precisamos de pranchas, tanto para os navios como para os edifícios maiores. Por isso temos de construir uma serração - assim que tenhamos espaço para isso."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
@@ -315,7 +316,7 @@ msgstr "Tenho duas coisas importantes para falar-te… primeiro a boa:"
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "Já vi que a construção da serração terminou, daí já podermos começar a serrar a madeira, que os lenhadores estão a cortar, para fazermos tábuas."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -350,7 +351,7 @@ msgstr "Saledus faz notar…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "Senhor, estive a pensar nos rochedos na costa sul desta território. Podíamos tirar deles granito muito útil e mármore bonito."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:207
@@ -365,7 +366,7 @@ msgstr "Um passo em frente"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus parece excitado..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
@@ -373,7 +374,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "Senhor, hoje estamos muito mais perto do nosso primeiro castelo. A pedreira que fica a sul começou a trabalhar hoje e vai brevemente fornecer-nos granito e mármore."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219

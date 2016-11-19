@@ -105,6 +105,10 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 
 }  // namespace
 
+/**
+ * The contents of 'table' are documented in
+ * /data/tribes/ships/atlanteans/init.lua
+ */
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
@@ -125,10 +129,7 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr),
-     fleet_(nullptr),
-     economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -980,8 +981,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(
-	   draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	             scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

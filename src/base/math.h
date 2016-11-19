@@ -25,16 +25,18 @@
 namespace math {
 
 // Returns 1 for positive and -1 for negative numbers.
-template <typename T>
-T sign(const T& val) {
+template <typename T> T sign(const T& val) {
 	return val < T(0.) ? T(-1.) : T(1.);
 }
 
 // Clamps 'val' to 'min' and 'max'.
-template <typename T>
-T clamp(const T& val, const T& low, const T& high) {
-	if (val < low) { return low; }
-	if (val > high) { return high; }
+template <typename T> T clamp(const T& val, const T& low, const T& high) {
+	if (val < low) {
+		return low;
+	}
+	if (val > high) {
+		return high;
+	}
 	return val;
 }
 

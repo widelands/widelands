@@ -26,15 +26,19 @@
 #include "base/i18n.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
-#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 
 namespace UI {
 
-BaseDropdown::BaseDropdown(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
+BaseDropdown::BaseDropdown(UI::Panel* parent,
+                           int32_t x,
+                           int32_t y,
+                           uint32_t w,
+                           uint32_t h,
+                           const std::string& label,
+                           const Image* background,
+                           const Image* button_background)
    : UI::Panel(
         parent,
         x,
@@ -53,22 +57,15 @@ BaseDropdown::BaseDropdown(
                   0,
                   24,
                   get_h(),
-                  g_gr->images().get("images/ui_basic/but3.png"),
+                  button_background,
                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                   pgettext("dropdown", "Select Item")),
-     display_button_(&button_box_,
-                     "dropdown_label",
-                     0,
-                     0,
-                     w - 24,
-                     get_h(),
-                     g_gr->images().get("images/ui_basic/but1.png"),
-                     label),
+     display_button_(&button_box_, "dropdown_label", 0, 0, w - 24, get_h(), background, label),
      // Hook into parent so we can drop down outside the panel
-     list_(parent, x, y + get_h(), w, 0, ListselectLayout::kDropdown),
+     list_(parent, x, y + get_h(), w, 0, button_background, ListselectLayout::kDropdown),
      label_(label) {
 	list_.set_visible(false);
-	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));
+	list_.set_background(background);
 	display_button_.set_perm_pressed(true);
 	button_box_.add(&display_button_, UI::Align::kLeft);
 	button_box_.add(&push_button_, UI::Align::kLeft);

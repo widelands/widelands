@@ -33,11 +33,13 @@ public:
 	FullscreenMenuAbout();
 
 private:
-	uint32_t const butw_;
-	uint32_t const buth_;
-	uint32_t const hmargin_;
-	uint32_t const tab_panel_width_;
-	uint32_t const tab_panel_y_;
+	void layout() override;
+
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t hmargin_;
+	uint32_t tab_panel_width_;
+	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
 	UI::Button close_;

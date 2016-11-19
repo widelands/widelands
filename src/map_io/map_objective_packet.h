@@ -26,7 +26,6 @@ namespace Widelands {
 
 void read_objective_data(FileSystem&, EditorGameBase&);
 void write_objective_data(FileSystem&, EditorGameBase&);
-
 }
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECTIVE_PACKET_H
