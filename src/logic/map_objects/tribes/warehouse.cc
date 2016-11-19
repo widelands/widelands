@@ -832,8 +832,8 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	//  When this is done, the get_incorporated_workers method above must
 	//  be reworked so that workers are recreated, and rescheduled for
 	//  incorporation.
-	if (upcast(Carrier, carrier, w)) {
-		carrier->remove(egbase);
+	if (w->descr().buildcost().empty()) {
+		w->remove(egbase);
 		return;
 	}
 
