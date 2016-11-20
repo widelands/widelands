@@ -163,7 +163,7 @@ inline static const char* npgettext_aux(const char* domain,
    ISO C++ supports variable-size arrays, but some older PGI and Sun compilers
    don't. */
 #define GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS                                               \
-	!(__GNUC__ >= 3 || (defined __cplusplus && !(defined __PGI || defined __SUNPRO_CC)))
+	!(__GNUC__ >= 3 || (defined(__cplusplus) && !(defined(__PGI) || defined(__SUNPRO_CC))))
 
 #if !GETTEXT_LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
 #include <stdlib.h>
