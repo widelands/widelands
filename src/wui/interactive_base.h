@@ -179,7 +179,7 @@ protected:
 	/// \param bind_default_toggle: If true, the button will toggle with its 'window'.
 	UI::Button* add_toolbar_button(const std::string& image_basename,
 	                               const std::string& name,
-	                               const std::string& tooltip,
+	                               const std::string& tooltip_text,
 	                               UI::UniqueWindow::Registry* window = nullptr,
 	                               bool bind_default_toggle = false);
 

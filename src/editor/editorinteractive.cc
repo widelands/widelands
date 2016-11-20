@@ -92,6 +92,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
+     undo_(nullptr),
+     redo_(nullptr),
      tools_(new Tools()),
      history_(new EditorHistory(*undo_, *redo_)) {
 	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true);
@@ -113,10 +115,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
 
-	reset_zoom_ = add_toolbar_button(
-		"wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect(
-		[this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
 
 	add_toolbar_button(
 	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);

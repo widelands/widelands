@@ -82,11 +82,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-	reset_zoom_ = add_toolbar_button(
-		"wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect(
-		[this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
-		if (multiplayer) {
+	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {

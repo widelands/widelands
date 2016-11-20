@@ -162,9 +162,6 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	std::unique_ptr<Tools> tools_;
-	std::unique_ptr<EditorHistory> history_;
-
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
 	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry toolmenu_;
@@ -184,6 +181,9 @@ private:
 	UI::Button* reset_zoom_;
 	UI::Button* undo_;
 	UI::Button* redo_;
+
+	std::unique_ptr<Tools> tools_;
+	std::unique_ptr<EditorHistory> history_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H
