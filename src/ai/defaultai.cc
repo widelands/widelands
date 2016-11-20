@@ -2997,8 +2997,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (RoadCandidates.get_winner(&winner_hash, (gametime % 4 > 0) ? 1 : 2)) {
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
-		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
-		assert(pathcost >= 0);
+		assert(map.findpath(flag.get_position(), target_coords, 0, path, check) >= 0);
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
@@ -3561,11 +3560,11 @@ bool DefaultAI::marine_main_decisions() {
 		if (!ship_free) {
 			enough_ships = FleetStatus::kNeedShip;
 
-		// we want at least as many free ships as we have ports
+			// we want at least as many free ships as we have ports
 		} else if (int(allships.size()) - ports_count - expeditions_in_progress < 0) {
 			enough_ships = FleetStatus::kNeedShip;
 
-		// if ships utilization is too high
+			// if ships utilization is too high
 		} else if (persistent_data->ships_utilization > 5000) {
 			enough_ships = FleetStatus::kNeedShip;
 
@@ -3599,7 +3598,7 @@ bool DefaultAI::marine_main_decisions() {
 	}
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
-	if (ports_count > 0  && expeditions_in_progress == 0  && expeditions_in_prep == 0 &&
+	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
 	    persistent_data->no_more_expeditions == kFalse && ship_free) {
 
 		// we need to find a port
@@ -3724,7 +3723,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 /**
  * This is part of check_ships() function separated due to readibility purpuses
  */
- void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
+void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
 
@@ -4885,8 +4884,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	// abort if any player - including self - is too near to the spot (radius 8)
 	// TODO(toptopple): extract function for player distance only
-	if (other_player_accessible(8, &tested_fields, &mineable_fields_count,
-	    candidate_spot, WalkSearch::kAnyPlayer)) {
+	if (other_player_accessible(
+	       8, &tested_fields, &mineable_fields_count, candidate_spot, WalkSearch::kAnyPlayer)) {
 		return 0;
 	}
 
@@ -4900,7 +4899,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	// abort if we run into other player
 	if (other_player_accessible(persistent_data->colony_scan_area, &tested_fields,
-	    &mineable_fields_count, candidate_spot, search_type)) {
+	                            &mineable_fields_count, candidate_spot, search_type)) {
 		return 0;
 	}
 
@@ -4945,12 +4944,11 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	return score;
 }
 
-
 // this is called whenever ship received a notification that requires
 // navigation decisions (these notifiation are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
-    Map& map = game().map();
+	Map& map = game().map();
 	const int32_t gametime = game().get_gametime();
 	// probability for island exploration repetition
 	const int repeat_island_prob = 20;
@@ -4966,7 +4964,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	if (!so.ship->exp_port_spaces().empty()) {  // making sure we have possible portspaces
 
 		// we score the place (value max == 8)
-		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) *2;
+		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
 
 		if (game().logic_rand() % 8 < spot_score) {  // we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
@@ -4988,20 +4986,20 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// 2. Go on with expedition
 
-    // we were not here before
+	// we were not here before
 	if (first_time_here) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 
-	// we were here before but we might randomly repeat island exploration
+		// we were here before but we might randomly repeat island exploration
 	} else if (game().logic_rand() % 100 < repeat_island_prob) {
 		// let's add randomness to the Brown's molecule movement of ship
 		// TODO(toptopple): make the following decision dependent on ship state != circle-island
-		Widelands::IslandExploreDirection dir = game().logic_rand() % 10 < 5 ?
-		     Widelands::IslandExploreDirection::kClockwise :
-		     Widelands::IslandExploreDirection::kCounterClockwise;
+		Widelands::IslandExploreDirection dir =
+		   game().logic_rand() % 10 < 5 ? Widelands::IslandExploreDirection::kClockwise :
+		                                  Widelands::IslandExploreDirection::kCounterClockwise;
 		game().send_player_ship_explore_island(*so.ship, dir);
 
-    // we head for open sea again
+		// we head for open sea again
 	} else {
 		// determine swimmable directions
 		std::vector<Direction> possible_directions;
@@ -5026,7 +5024,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// 2.A No there is no open sea
 			// ## test-out of cancel-expedition method
 			// ## circle island has danger of endless repetition
-			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and rethink'
+			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and
+			// rethink'
 			game().send_player_cancel_expedition_ship(*so.ship);
 			// game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 
