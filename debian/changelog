@@ -1,3 +1,60 @@
+widelands (1:19+repack-1widelands1) UNRELEASED; urgency=medium
+
+  * Merged Debian packaging of Widelands 1:19+repack-1. Remaining changes:
+    - Build using embedded minizip since we support older Ubuntu releases where
+      the package is not available.
+    - Offer translations for appdata file.
+    - Dropped patches:
+        mips_gcc_ICE_with-03
+        s390_new_architecture
+      Build 19 built successfully on mips and s390x, so removed these patches.
+      (They were already commented out in Debian)
+
+ -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 20 Nov 2016 11:03:07 +0100
+
+widelands (1:19+repack-1) unstable; urgency=medium
+
+  * New upstream release. New features highlight:
+    - Seafaring AI and other AI improvements
+    - Message filtering
+    - New in-game and in-editor help system
+    - Efficient graphics loading and rendering.
+    - New starting condition “Trading Outpost”
+    - New win condition “Artifacts”
+    - 4 Tutorials
+    - Improved Barbarians and Empire campaigns
+    - 3 new maps
+    - No separate worlds anymore. All terrains can now be used on all
+      maps. Old maps stay compatible.
+    - No separate tribes anymore: Though in game the tribes still seem
+      separate, they are in fact now the same tribe with different
+      buildings and workers enabled. This allows for interesting
+      concepts down the line like a mixed economy or trading.
+    - New animations, overlay images and icons
+    - New forested mountains terrains
+    - Many menu redesigns
+    - Improved support for non-Latin scripts and right-to-left languages
+    - Various small balance changes (for example more experience in mines,
+      stronger barbarian soldiers)
+    - Behind the scenes: move to SDL 2, Build system refactoring, move to
+      c++ 11, continuous integration, move to Transifex and merge bot.
+      Also tons of cleanups to the code base.
+
+  * Package is manually repacked to mv debian/ debian.orig/ in
+    upstream tar file.
+  * Change the build-dependencies of SDL to the one of SDL2
+  * Update our patches:
+    - Drop patch kfreebsd-integrated-libraries (integrated upstream)
+    - Comment mips and s390 patches: they may be useless nowadays
+  * Take the new man page from the upstream debian package.
+  * Take the new copyright file from upstream debian package.
+  * New d/watch file by Steven De Herdt (Closes: #844005)
+  * New d/p/system-wide_minizip to not use the embeeded minizip
+    (provided by upstream developpers)
+  * d/control: Bump standards-version to 3.9.8 (remove menu file)
+
+ -- Martin Quinson <mquinson@debian.org>  Sat, 19 Nov 2016 18:36:01 +0100
+
 widelands (1:18-3widelands1) UNRELEASED; urgency=medium
 
   * Merged Debian packaging of Widelands 1:18-3. Remaining changes:
