@@ -16,6 +16,8 @@ widelands (1:19+repack-1widelands1) UNRELEASED; urgency=medium
       the package is not available.
     - Made widelands.desktop localizable.
     - Translations for appdata and desktop file.
+    - Re-added font entries to copyright file, since we will most likely be using
+      the embedded fonts.
 
  -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 20 Nov 2016 11:03:07 +0100
 
