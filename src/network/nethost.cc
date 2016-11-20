@@ -26,7 +26,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -2007,8 +2006,7 @@ void NetHost::handle_network() {
 			} catch (const DisconnectException& e) {
 				disconnect_client(i, e.what());
 			} catch (const ProtocolException& e) {
-				disconnect_client(
-				   i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
+				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
 			} catch (const std::exception& e) {
 				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 			}
@@ -2241,8 +2239,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
 		if (x != file_->md5sum) {
-			log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(),
-			    file_->md5sum.c_str());
+			log(
+			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 			return;  // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file_->parts.size())
