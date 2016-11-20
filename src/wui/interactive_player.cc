@@ -75,6 +75,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
+	toolbar_.add_space(15);
+
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
@@ -85,6 +87,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect(
 	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	toolbar_.add_space(15);
 	if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
@@ -92,6 +95,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 			}
 		};
+	toolbar_.add_space(15);
 	}
 
 	add_toolbar_button(

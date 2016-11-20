@@ -65,6 +65,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 	};
 
+	toolbar_.add_space(15);
+
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
@@ -76,6 +78,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect(
 	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+
+	toolbar_.add_space(15);
 
 	if (is_multiplayer()) {
 		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);

@@ -108,6 +108,15 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
 
 	add_toolbar_button(
+		"wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
+	playermenu_.open_window = [this] {
+		select_tool(tools_->set_starting_pos, EditorTool::First);
+		new EditorPlayerMenu(*this, playermenu_);
+	};
+
+	toolbar_.add_space(15);
+
+	add_toolbar_button(
 	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
@@ -119,18 +128,15 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	reset_zoom_->sigclicked.connect(
 	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
 
-	add_toolbar_button(
-	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
-	playermenu_.open_window = [this] {
-		select_tool(tools_->set_starting_pos, EditorTool::First);
-		new EditorPlayerMenu(*this, playermenu_);
-	};
+	toolbar_.add_space(15);
 
 	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
 	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 
 	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
+
+	toolbar_.add_space(15);
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };

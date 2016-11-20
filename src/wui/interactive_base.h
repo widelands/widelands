@@ -208,6 +208,8 @@ protected:
 	// so we can call unassign_toggle_button on them in the destructor.
 	std::vector<UI::UniqueWindow::Registry> registries_;
 
+	UI::Box toolbar_;
+
 private:
 	void resize_chat_overlay();
 	void roadb_add_overlay();
@@ -234,7 +236,6 @@ private:
 		FieldOverlayManager::OverlayId jobid;
 	} sel_;
 
-	UI::Box toolbar_;
 	std::unique_ptr<InteractiveBaseInternals> m;
 
 	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
