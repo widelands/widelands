@@ -1,15 +1,21 @@
 widelands (1:19+repack-1widelands1) UNRELEASED; urgency=medium
 
   * Merged Debian packaging of Widelands 1:19+repack-1. Remaining changes:
+    - Disabled all Debian-patches since applying them might cause conflicts as
+      development moves along in latest trunk. They mostly concern 
+      architectures which we don't have access to build/test with normally, so
+      they would be hard to maintain.
+    - Dropped patches:
+        system-wide_minizip
+          (Should be included in trunk once we iron out the remaining bugs)
+        mips_gcc_ICE_with-03
+        s390_new_architecture
+          (Build 19 built successfully on mips and s390x, so removed these
+          patches. They were already commented out in Debian)
     - Build using embedded minizip since we support older Ubuntu releases where
       the package is not available.
     - Made widelands.desktop localizable.
     - Translations for appdata and desktop file.
-    - Dropped patches:
-        mips_gcc_ICE_with-03
-        s390_new_architecture
-      Build 19 built successfully on mips and s390x, so removed these patches.
-      (They were already commented out in Debian)
 
  -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 20 Nov 2016 11:03:07 +0100
 
