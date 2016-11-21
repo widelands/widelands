@@ -60,8 +60,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	void set_player_number(uint8_t const number) override;
 
 	std::string get_win_condition_script() override;
-	void set_win_condition_script(std::string wc) override;
-	void next_win_condition() override;
+	void set_win_condition_script(const std::string& wc) override;
 
 private:
 	GameSettings s;

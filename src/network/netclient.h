@@ -90,8 +90,7 @@ struct NetClient : public GameController,
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
 	void set_player_shared(uint8_t number, uint8_t shared) override;
-	void set_win_condition_script(std::string) override;
-	void next_win_condition() override;
+	void set_win_condition_script(const std::string& wc) override;
 	std::string get_win_condition_script() override;
 
 	// ChatProvider interface

@@ -269,21 +269,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		return host_->settings().win_condition_script;
 	}
 
-	void set_win_condition_script(std::string wc) override {
+	void set_win_condition_script(const std::string& wc) override {
 		host_->set_win_condition_script(wc);
-	}
-
-	void next_win_condition() override {
-		if (wincondition_scripts_.empty()) {
-			wincondition_scripts_ = host_->settings().win_condition_scripts;
-			current_wincondition_ = -1;
-		}
-
-		if (can_change_map()) {
-			current_wincondition_++;
-			current_wincondition_ %= wincondition_scripts_.size();
-			set_win_condition_script(wincondition_scripts_[current_wincondition_]);
-		}
 	}
 
 private:
@@ -1378,7 +1365,7 @@ void NetHost::set_player_number(uint8_t const number) {
 	switch_to_player(0, number);
 }
 
-void NetHost::set_win_condition_script(std::string wc) {
+void NetHost::set_win_condition_script(const std::string& wc) {
 	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
@@ -2241,8 +2228,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
 		if (x != file_->md5sum) {
-			log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(),
-			    file_->md5sum.c_str());
+			log(
+			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 			return;  // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file_->parts.size())

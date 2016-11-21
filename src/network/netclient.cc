@@ -398,12 +398,9 @@ std::string NetClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void NetClient::set_win_condition_script(std::string) {
+void NetClient::set_win_condition_script(const std::string& wc) {
 	// Clients are not allowed to change this
-}
-
-void NetClient::next_win_condition() {
-	// Clients are not allowed to change this
+	NEVER_HERE();
 }
 
 void NetClient::set_player_number(uint8_t const number) {

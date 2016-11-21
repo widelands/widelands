@@ -24,6 +24,7 @@
 #include <string>
 
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
@@ -63,9 +64,20 @@ private:
 	void change_map_or_save();
 	void select_map();
 	void select_saved_game();
-	void win_condition_clicked();
-	void win_condition_update();
-	void win_condition_load();
+	/// Loads all win conditions that can be played with the map into the selection dropdown.
+	/// Disables the dropdown if the map is a scenario.
+	void update_win_conditions();
+	/// Reads the win conditions that are available for the given map and adds the entries to the
+	/// dropdown.
+	void load_win_conditions(const Widelands::Map& map);
+	/// Remembers the win condition that is currently selected in the dropdown.
+	void win_condition_selected();
+	/// If the win condition in 'win_condition_script' can be played with the map tags,
+	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
+	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
+	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
+	                                                 std::set<std::string> tags) const;
+
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();
@@ -82,7 +94,10 @@ private:
 	int32_t const label_height_;
 	int32_t const right_column_x_;
 
-	UI::Button change_map_or_save_, ok_, back_, wincondition_;
+	UI::Button change_map_or_save_;
+	UI::Dropdown<std::string> win_condition_dropdown_;
+	std::string last_win_condition_;
+	UI::Button ok_, back_;
 	UI::Button help_button_;
 	UI::Textarea title_, mapname_, clients_, players_, map_, wincondition_type_;
 	UI::MultilineTextarea map_info_, client_info_;
