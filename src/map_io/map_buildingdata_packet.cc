@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
+#include "economy/input_queue.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/warehousesupply.h"
@@ -674,7 +675,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.program_time_ = fr.signed_32();
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.input_ware_queues_.size());
+			assert(!productionsite.input_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
@@ -682,13 +683,12 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!game.tribes().ware_exists(wq->get_index())) {
 					delete wq;
 				} else {
-					productionsite.input_ware_queues_.push_back(wq);
+					productionsite.input_queues_.push_back(wq);
 				}
 			}
 
 			if (packet_version > 5) {
 				nr_queues = fr.unsigned_16();
-				assert(!productionsite.input_worker_queues_.size());
 				for (uint16_t i = 0; i < nr_queues; ++i) {
 					WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
 					wq->read(fr, game, mol);
@@ -696,7 +696,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					if (!game.tribes().worker_exists(wq->get_index())) {
 						delete wq;
 					} else {
-						productionsite.input_worker_queues_.push_back(wq);
+						productionsite.input_queues_.push_back(wq);
 					}
 				}
 			}
@@ -1140,16 +1140,27 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.unsigned_8(productionsite.program_timer_);
 	fw.signed_32(productionsite.program_time_);
 
-	const uint16_t input_queues_size = productionsite.input_ware_queues_.size();
-	fw.unsigned_16(input_queues_size);
-	for (uint16_t i = 0; i < input_queues_size; ++i) {
-		productionsite.input_ware_queues_[i]->write(fw, game, mos);
+	// Get number of ware queues. Not very pretty but avoids changing the save file format
+	uint16_t input_ware_queues_size = 0;
+	for (InputQueue *iq : productionsite.inputqueues()) {
+		if (iq->get_type() == wwWARE) {
+			input_ware_queues_size++;
+		}
+	}
+	// Write count of ware queues and ware queues
+	fw.unsigned_16(input_ware_queues_size);
+	for (InputQueue *iq : productionsite.inputqueues()) {
+		if (iq->get_type() == wwWARE) {
+			iq->write(fw, game, mos);
+		}
 	}
 
-	const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
-	fw.unsigned_16(input_worker_queues_size);
-	for (uint16_t i = 0; i < input_worker_queues_size; ++i) {
-		productionsite.input_worker_queues_[i]->write(fw, game, mos);
+	// Same for worker queues
+	fw.unsigned_16(productionsite.input_queues_.size() - input_ware_queues_size);
+	for (InputQueue *iq : productionsite.inputqueues()) {
+		if (iq->get_type() == wwWORKER) {
+			iq->write(fw, game, mos);
+		}
 	}
 
 	const uint16_t statistics_size = productionsite.statistics_.size();

@@ -195,8 +195,7 @@ public:
 		production_result_ = text;
 	}
 
-	WaresQueue& waresqueue(DescriptionIndex) override;
-	WorkersQueue& workersqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -210,14 +209,9 @@ public:
 
 	void set_economy(Economy*) override;
 
-	using InputQueues = std::vector<WaresQueue*>;
-	const InputQueues& warequeues() const {
-		return input_ware_queues_;
-	}
-
-	using InputWorkerQueues = std::vector<WorkersQueue*>;
-	const InputWorkerQueues& workerqueues() const {
-		return input_worker_queues_;
+	using InputQueues = std::vector<InputQueue*>;
+	const InputQueues& inputqueues() const {
+		return input_queues_;
 	}
 
 	const std::vector<Worker*>& workers() const;
@@ -313,8 +307,7 @@ protected:  // TrainingSite must have access to this stuff
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
-	InputQueues input_ware_queues_;          ///< input queues for all inputs
-	InputWorkerQueues input_worker_queues_;  ///< input queues for workers
+	InputQueues input_queues_;          ///< input queues for all inputs
 	std::vector<bool> statistics_;
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:

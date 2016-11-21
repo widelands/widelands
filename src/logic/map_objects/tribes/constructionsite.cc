@@ -76,14 +76,20 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-WaresQueue& ConstructionSite::waresqueue(DescriptionIndex const wi) {
+InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+    // There are no worker queues here
+    // Hopefully, our construction sites are save enough not to kill workers
+    if (type != wwWARE) {
+		throw wexception("%s (%u) (building %s) has no WorkersQueues", descr().name().c_str(),
+					 serial(), building_->name().c_str());
+	}
 	for (WaresQueue* ware : wares_) {
 		if (ware->get_index() == wi) {
 			return *ware;
 		}
 	}
 	throw wexception("%s (%u) (building %s) has no WaresQueue for %u", descr().name().c_str(),
-	                 serial(), building_->name().c_str(), wi);
+					 serial(), building_->name().c_str(), wi);
 }
 
 /*

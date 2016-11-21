@@ -3115,11 +3115,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
 		bool resetting_wares = false;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
 				game().send_player_set_input_max_fill(
-				   *site.site, queue->get_index(), wwWARE, queue->get_max_size());
+				   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3133,7 +3133,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// The site is in process of emptying its input queues
 		// Counting remaining wares in the site now
 		int32_t left_wares = 0;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			left_wares += queue->get_filled();
 		}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
@@ -3219,8 +3219,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (doing_upgrade) {
 
 			// reducing input queues
-			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_input_max_fill(*site.site, queue->get_index(), wwWARE, 0);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(*site.site, queue->get_index(), queue->get_type(), 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
@@ -3528,10 +3528,8 @@ bool DefaultAI::marine_main_decisions() {
 
 			// counting stocks
 			uint8_t stocked_wares = 0;
-			std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
-			size_t const nr_warequeues = warequeues.size();
-			for (size_t i = 0; i < nr_warequeues; ++i) {
-				stocked_wares += warequeues[i]->get_filled();
+			for (const auto* iq : ps_obs.site->inputqueues()) {
+				stocked_wares += iq->get_filled();
 			}
 			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
@@ -3574,10 +3572,8 @@ bool DefaultAI::marine_main_decisions() {
 				// make sure it is fully stocked
 				// counting stocks
 				uint8_t stocked_wares = 0;
-				std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
-				size_t const nr_warequeues = warequeues.size();
-				for (size_t i = 0; i < nr_warequeues; ++i) {
-					stocked_wares += warequeues[i]->get_filled();
+				for (const auto* iq : ps_obs.site->inputqueues()) {
+					stocked_wares += iq->get_filled();
 				}
 				if (stocked_wares < 16) {
 					continue;
@@ -4369,22 +4365,25 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	// reducing ware queues
 	// - for armours and weapons to 1
 	// - for others to 6
-	std::vector<WaresQueue*> const warequeues1 = tso.site->warequeues();
-	size_t nr_warequeues = warequeues1.size();
-	for (size_t i = 0; i < nr_warequeues; ++i) {
+	for (InputQueue* iq : tso.site->inputqueues()) {
+
+		// Only check ware queues
+		if (iq->get_type() != wwWARE) {
+			continue;
+		}
 
 		// if it was decreased yet
-		if (warequeues1[i]->get_max_fill() <= 1) {
+		if (iq->get_max_fill() <= 1) {
 			continue;
 		}
 
 		// now modifying max_fill of armors and weapons
 		for (std::string pattern : armors_and_weapons) {
 
-			if (tribe_->get_ware_descr(warequeues1[i]->get_index())->name().find(pattern) !=
+			if (tribe_->get_ware_descr(iq->get_index())->name().find(pattern) !=
 			    std::string::npos) {
-				if (warequeues1[i]->get_max_fill() > 1) {
-					game().send_player_set_input_max_fill(*ts, warequeues1[i]->get_index(), wwWARE, 1);
+				if (iq->get_max_fill() > 1) {
+					game().send_player_set_input_max_fill(*ts, iq->get_index(), wwWARE, 1);
 					continue;
 				}
 			}
@@ -4409,11 +4408,12 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
-		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
-		nr_warequeues = warequeues2.size();
-		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) > 0) {
-				filled += warequeues2[i]->get_filled();
+		for (const InputQueue* iq : tso.site->inputqueues()) {
+			if (iq->get_type() != wwWARE) {
+				continue;
+			}
+			if (tso.bo->substitute_inputs.count(iq->get_index()) > 0) {
+				filled += iq->get_filled();
 			}
 		}
 		if (filled < 5) {
@@ -4421,12 +4421,15 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// checking non subsitutes
-		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) == 0) {
+		for (const InputQueue* iq : tso.site->inputqueues()) {
+			if (iq->get_type() != wwWARE) {
+				continue;
+			}
+			if (tso.bo->substitute_inputs.count(iq->get_index()) == 0) {
 				const uint32_t required_amount =
-				   (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
-				if (warequeues2[i]->get_filled() < required_amount) {
-					shortage += required_amount - warequeues2[i]->get_filled();
+				   (iq->get_max_fill() < 5) ? iq->get_max_fill() : 5;
+				if (iq->get_filled() < required_amount) {
+					shortage += required_amount - iq->get_filled();
 				}
 			}
 		}
