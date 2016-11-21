@@ -72,8 +72,10 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip);
 	box_.add(button, UI::Align::kLeft);
 	if (window) {
-		window->assign_toggle_button(button);
-		registries_.push_back(*window);
+		if (!window->on_create) {
+			window->assign_toggle_button(button);
+			registries_.push_back(*window);
+		}
 		button->sigclicked.connect(
 		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
 	}
