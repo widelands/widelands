@@ -37,11 +37,11 @@ private:
 	/// \param image_basename:      File path for button image starting from 'images' and without
 	///                             file extension
 	/// \param name:                Internal name of the button
-	/// \param tooltip:             The button tooltip
+	/// \param tooltip_text:        The button tooltip
 	/// \param window:              The window that's associated with this button.
 	UI::Button* add_button(const std::string& image_basename,
 	                       const std::string& name,
-	                       const std::string& tooltip,
+								  const std::string& tooltip_text,
 	                       UI::UniqueWindow::Registry* window);
 
 	InteractivePlayer& player_;
