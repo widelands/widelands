@@ -6,6 +6,7 @@ wl_library(ai
     ai_hints.h
     computer_player.cc
     computer_player.h
+    defaultai_seafaring.cc
     defaultai.cc
     defaultai.h
   DEPENDS

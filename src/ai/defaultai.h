@@ -28,6 +28,7 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "economy/wares_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -233,6 +234,19 @@ private:
 private:
 	// Variables of default AI
 	DefaultAI::Type type_;
+
+	// handfull of constants used for expeditions/colonization
+	static constexpr int kColonyScanStartArea = 35;
+	static constexpr int kColonyScanMinArea = 10;
+	static constexpr int kExpeditionMaxDuration = 120 * 60 * 1000;
+	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+	static constexpr uint32_t kNoExpedition = 0;
+	static constexpr int kShipCheckInterval = 5 * 1000;
+
+	static constexpr int8_t kUncalculated = -1;
+	static constexpr uint8_t kFalse = 0;
+	static constexpr uint8_t kTrue = 1;
 
 	// collect statistics on how many times which job was run
 	uint32_t sched_stat_[20] = {0};
