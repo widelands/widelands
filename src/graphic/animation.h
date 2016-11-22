@@ -57,7 +57,7 @@ public:
 	virtual ~Animation() {
 	}
 
-	/// The dimensions of this animation.
+	/// The height of this animation.
 	virtual float height() const = 0;
 
 	/// The size of the animation source images. Use 'percent_from_bottom' to crop the animation.
