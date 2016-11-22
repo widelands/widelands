@@ -247,7 +247,7 @@ public:
 
 protected:
 	// The building type that created this immovable, if any.
-	const BuildingDescr* former_building_;
+	const BuildingDescr* former_building_descr_;
 
 	Coords position_;
 

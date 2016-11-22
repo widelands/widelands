@@ -346,7 +346,7 @@ IMPLEMENTATION
 
 Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building* former_building)
    : BaseImmovable(imm_descr),
-     former_building_(former_building ? &former_building->descr() : nullptr),
+     former_building_descr_(former_building ? &former_building->descr() : nullptr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -354,7 +354,7 @@ Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building*
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0) {
-	if (former_building) {
+	if (former_building != nullptr) {
 		set_owner(former_building->get_owner());
 	}
 }
@@ -458,8 +458,8 @@ void Immovable::draw(uint32_t gametime,
 	}
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
-		if (former_building_) {
-			do_draw_info(draw_text, former_building_->descname(), "", point_on_dst, scale, dst);
+		if (former_building_descr_) {
+			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
 		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
@@ -666,7 +666,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
 	if (get_owner()) {
-		fw.string(former_building_ ? former_building_->name() : "");
+		fw.string(former_building_descr_ ? former_building_descr_->name() : "");
 	}
 
 	// Animations
@@ -1266,7 +1266,7 @@ void Immovable::set_former_building(const BuildingDescr& building) {
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr)
 		throw wexception("Set '%s' as former building for Tribe immovable '%s', but it has no owner.",
 		                 building.name().c_str(), descr().name().c_str());
-	former_building_ = &building;
+	former_building_descr_ = &building;
 }
 
 /**
