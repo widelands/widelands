@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("barbarians_building", "Shipyard"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
+   representative_image = dirname .. "representative_image.png",
    size = "medium",
    needs_seafaring = true,
 
@@ -26,6 +27,7 @@ tribes:new_productionsite_type {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 62, 48 },
+         scale = 3.26
       },
       build = {
          pictures = path.list_files(dirname .. "build_??.png"),

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-04-02 19:42+0000\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"PO-Revision-Date: 2016-11-15 07:51+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -212,8 +212,8 @@ msgid "Campaign Story"
 msgstr "Kampagnen"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Häuptling"
+msgid "Chieftains"
+msgstr "Häuptlinge"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
