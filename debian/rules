@@ -80,6 +80,6 @@ override_dh_auto_install:
 override_dh_install:
 	dh_install --fail-missing
 
-# TODO need to figure out what this does
-get-orig-source:
-	uscan --verbose --force-download
+# Just build the current trunk, don't replace with any potentially newer versions.
+#get-orig-source:
+#	uscan --verbose --force-download
