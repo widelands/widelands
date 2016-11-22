@@ -104,29 +104,24 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	box_.set_size(width, sound_.get_h() + 2 * save_game_.get_h() + vgap + 3 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	sound_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
+	windows_.sound_options.open_window = [this] {
+		new GameOptionsSoundMenu(igb_, windows_.sound_options);
+	};
+	sound_.sigclicked.connect(
+	   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.sound_options)));
 	save_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
 	exit_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
-	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
-	if (registry.window)                                                                            \
-		btn.set_perm_pressed(true);
-
-	INIT_BTN_HOOKS(windows_.sound_options, sound_)
+	windows_.sound_options.assign_toggle_button(&sound_);
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void GameOptionsMenu::clicked_sound() {
-	if (windows_.sound_options.window)
-		delete windows_.sound_options.window;
-	else
-		new GameOptionsSoundMenu(igb_, windows_.sound_options);
+GameOptionsMenu::~GameOptionsMenu() {
+	windows_.sound_options.unassign_toggle_button();
 }
 
 void GameOptionsMenu::clicked_save_game() {
