@@ -737,7 +737,7 @@ void show_field_action(InteractiveBase* const ibase,
 	// Force closing of old fieldaction windows. This is necessary because
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
-	delete registry->window;
+	registry->destroy();
 	*registry = UI::UniqueWindow::Registry();
 
 	if (!ibase->is_building_road()) {
