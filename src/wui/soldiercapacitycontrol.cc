@@ -19,6 +19,8 @@
 
 #include "wui/soldiercapacitycontrol.h"
 
+#include <boost/lexical_cast.hpp>
+
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
@@ -95,13 +97,11 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 }
 
 void SoldierCapacityControl::think() {
-	// NOCOM(#codereview): We should use boost::format or boost::lexical_cast here.
-	SoldierControl* soldiers = dynamic_cast<SoldierControl*>(&building_);
-	uint32_t const capacity = soldiers->soldier_capacity();
-	char buffer[sizeof("4294967295")];
 
-	sprintf(buffer, "%2u", capacity);
-	value_.set_text(buffer);
+	SoldierControl* soldiers = dynamic_cast<SoldierControl*>(&building_);
+
+	uint32_t const capacity = soldiers->soldier_capacity();
+	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
 	bool const can_act = igbase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
