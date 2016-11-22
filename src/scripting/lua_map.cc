@@ -444,7 +444,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	// The idea is to change as little as possible
 	for (const WorkersMap::value_type& sp : setpoints) {
 		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
-		if (!valid_workers.count(sp.first))
+		if (sp.second != 0 && !valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
 		Widelands::Quantity cur = 0;

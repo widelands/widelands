@@ -44,23 +44,6 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
      workers_() {
 	if (index_ != INVALID_INDEX)
 		update();
-	// TODO(Notabilis): When set_filled() is called here, a later script call to set the worker of
-	// the
-	// building will fail. Not sure if this is a bug and/or a bug of this class. I don't really think
-	// so.
-	/*
-	NOCOM(#codereview): For testing, I added this to
-	data/tribes/scripting/starting_conditions/barbarians/headquarters.lua
-
-	    prefilled_buildings(player, {"barbarians_barracks", sf.x + 5, sf.y + 5,
-	       inputs = {barbarians_carrier = 2}
-	    })
-
-	And it works fine. If I set the value higher than allowed, I get a Lua error in my inbox, which
-	is correct behaviour.
-	Is this the error that you mean, or are you getting something else?
-
-	*/
 }
 
 /**

@@ -344,7 +344,7 @@ struct PlayerImmovable : public BaseImmovable {
 	/**
 	 * \return a list of workers that are currently located at this
 	 * immovable. This is not the same as the list of production
-	 * workers returned by \ref ProductionSite::get_production_workers
+	 * workers returned by \ref ProductionSite::working_positions
 	 */
 	const Workers& get_workers() const {
 		return workers_;
