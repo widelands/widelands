@@ -86,7 +86,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 constexpr int magic_numbers_size = 100;
 constexpr int neuron_pool_size = 80;
-constexpr int f_neuron_pool_size = 40;
+constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
