@@ -82,7 +82,7 @@ private:
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomyWindow>>
-		economynotes_subscriber_;
+	   economynotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

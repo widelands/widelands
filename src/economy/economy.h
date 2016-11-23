@@ -58,9 +58,7 @@ struct NoteEconomyWindow {
 	enum class Action { kRefresh, kClose };
 	const Action action;
 
-	NoteEconomyWindow(size_t init_old,
-							size_t init_new,
-	                  const Action& init_action)
+	NoteEconomyWindow(size_t init_old, size_t init_new, const Action& init_action)
 	   : old_economy(init_old), new_economy(init_new), action(init_action) {
 	}
 };
