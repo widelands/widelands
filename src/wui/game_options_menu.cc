@@ -130,7 +130,7 @@ void GameOptionsMenu::clicked_save_game() {
 }
 
 void GameOptionsMenu::clicked_exit_game() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		new GameOptionsMenuExitConfirmBox(*get_parent(), igb_);

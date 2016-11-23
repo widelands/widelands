@@ -187,8 +187,7 @@ void BulldozeConfirm::ok() {
 
 	if (todestroy && building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
-		game.send_player_bulldoze(
-		   *todestroy, get_key_state(SDL_SCANCODE_LCTRL) << get_key_state(SDL_SCANCODE_RCTRL));
+		game.send_player_bulldoze(*todestroy, SDL_GetModState() & KMOD_CTRL);
 	}
 
 	die();

@@ -257,7 +257,7 @@ void EditorInteractive::think() {
 
 void EditorInteractive::exit() {
 	if (need_save_) {
-		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb(this, _("Unsaved Map"),
