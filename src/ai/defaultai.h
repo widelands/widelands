@@ -165,8 +165,6 @@ private:
 	// for productionsites
 	Widelands::BuildingNecessity
 	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
-	// for militarysites (overloading the function)
-	Widelands::BuildingNecessity check_building_necessity(uint8_t, uint32_t);
 
 	void sort_task_pool();
 	void sort_by_priority();
@@ -188,21 +186,15 @@ private:
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);
-	bool check_trainingsites(uint32_t);
 	bool check_mines_(uint32_t);
-	bool check_militarysites(uint32_t);
-	bool check_enemy_sites(uint32_t);
 
 	void print_stats();
 
-	// return single number of strength of vector of soldiers
-	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
 	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
-	void count_military_vacant_positions();
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible
@@ -227,7 +219,6 @@ private:
 	void gain_building(Widelands::Building&, bool found_on_load);
 	void lose_building(const Widelands::Building&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
-	void soldier_trained(const Widelands::TrainingSite&);
 	bool check_supply(const Widelands::BuildingObserver&);
 	void print_land_stats();
 
@@ -243,6 +234,17 @@ private:
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions();
 	bool check_ships(uint32_t);
+
+	// Functions used for war and training stuff / defaultai_warfare.cc
+	bool check_militarysites(uint32_t);
+	bool check_enemy_sites(uint32_t);
+	void count_military_vacant_positions();
+	bool check_trainingsites(uint32_t);
+	// return single number of strength of vector of soldiers
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
+	// for militarysites (overloading the function)
+	Widelands::BuildingNecessity check_building_necessity(uint8_t, uint32_t);
+	void soldier_trained(const Widelands::TrainingSite&);
 
 	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};
