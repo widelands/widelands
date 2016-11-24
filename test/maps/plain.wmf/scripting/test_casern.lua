@@ -1,5 +1,5 @@
 run(function()
-   sleep(5000)
+   sleep(8000)
 
    assert_equal(1, #p1:get_buildings("barbarians_headquarters"))
 
@@ -34,7 +34,7 @@ run(function()
    assert_equal(nil, rv.meat)
 
    -- Sleep long enough to train a soldier. But ax are missing so nothing should happen
-   sleep(40000)
+   sleep(60000)
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
    assert_equal(3, rv.barbarians_recruit)
@@ -44,13 +44,12 @@ run(function()
    rv = br:get_inputs("all")
    assert_equal(3, rv.ax)
    assert_equal(0, rv.barbarians_recruit)
-   sleep(40000)
+   sleep(60000)
    rv = br:get_inputs("all")
    assert_equal(3, rv.ax)
    assert_equal(0, rv.barbarians_recruit)
 
    -- Connect road to hq, start training
---   local road = p1:place_road(fhq, "r", "r", "r")
    connected_road(p1, fhq, "r,r,r|", true)
    br:set_inputs{barbarians_recruit=3}
    rv = br:get_inputs("all")
@@ -63,7 +62,7 @@ run(function()
    -- No sense checking for recruits, they are for free
    assert_equal(0, rv.barbarians_soldier)
 
-   sleep(150000)
+   sleep(200000)
 
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
@@ -76,7 +75,7 @@ run(function()
 
    -- Ax out of the warehouse
    hq:set_wares{ax=2}
-   sleep(100000)
+   sleep(150000)
 
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
