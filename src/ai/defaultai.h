@@ -28,6 +28,7 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "economy/economy.h"
 #include "economy/wares_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -344,6 +345,11 @@ private:
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 	static constexpr uint32_t kNoExpedition = 0;
 	static constexpr int kShipCheckInterval = 5 * 1000;
+
+	// used by defaultai_seafaring.cc
+	// duration of military campaign
+	static constexpr int kCampaignDuration = 15 * 60 * 1000;
+	static constexpr int kTrainingSitesCheckInterval = 15 * 1000;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

@@ -7,6 +7,7 @@ wl_library(ai
     computer_player.cc
     computer_player.h
     defaultai_seafaring.cc
+    defaultai_warfare.cc
     defaultai.cc
     defaultai.h
   DEPENDS
