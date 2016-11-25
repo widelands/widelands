@@ -427,9 +427,11 @@ void Warehouse::init(EditorGameBase& egbase) {
 	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers()) {
-		egbase.conquer_area(PlayerArea<Area<FCoords>>(
-		   player.player_number(),
-		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)), true);
+		egbase.conquer_area(
+		   PlayerArea<Area<FCoords>>(
+		      player.player_number(),
+		      Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)),
+		   true);
 	}
 
 	if (descr().get_isport()) {
@@ -824,7 +826,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 
 	supply_->add_workers(worker_index, 1);
 
-	//  We remove carriers, but we keep other workers around.
+	//  We remove free workers, but we keep other workers around.
 	//  TODO(unknown): Remove all workers that do not have properties such as experience.
 	//  And even such workers should be removed and only a small record
 	//  with the experience (and possibly other data that must survive)
@@ -832,8 +834,8 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	//  When this is done, the get_incorporated_workers method above must
 	//  be reworked so that workers are recreated, and rescheduled for
 	//  incorporation.
-	if (upcast(Carrier, carrier, w)) {
-		carrier->remove(egbase);
+	if (w->descr().is_buildable() && w->descr().buildcost().empty()) {
+		w->remove(egbase);
 		return;
 	}
 

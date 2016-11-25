@@ -5335,7 +5335,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire") {
 		tribe = Tribes::kEmpire;
 	} else {
-		throw wexception("AI warning: Unable to calculate strenght for player of tribe %s",
+		throw wexception("AI warning: Unable to calculate strength for player of tribe %s",
 		                 soldiers.at(0)->get_owner()->tribe().name().c_str());
 	}
 

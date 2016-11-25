@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"PO-Revision-Date: 2016-11-15 06:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -208,8 +208,8 @@ msgid "Campaign Story"
 msgstr "Kampanjer"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Høvding"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"

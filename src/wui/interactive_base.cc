@@ -133,8 +133,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 }
 
 InteractiveBase::~InteractiveBase() {
-	if (buildroad_)
+	if (buildroad_) {
 		abort_build_road();
+	}
+	for (auto& registry : registries_) {
+		registry.unassign_toggle_button();
+	}
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -215,6 +219,26 @@ void InteractiveBase::show_buildhelp(bool t) {
 
 void InteractiveBase::toggle_buildhelp() {
 	show_buildhelp(!field_overlay_manager_->buildhelp());
+}
+
+UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,
+                                                const std::string& name,
+                                                const std::string& tooltip_text,
+                                                UI::UniqueWindow::Registry* window,
+                                                bool bind_default_toggle) {
+	UI::Button* button = new UI::Button(
+	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
+	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	toolbar_.add(button, UI::Align::kLeft);
+	if (window) {
+		window->assign_toggle_button(button);
+		registries_.push_back(*window);
+		if (bind_default_toggle) {
+			button->sigclicked.connect(
+			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
+		}
+	}
+	return button;
 }
 
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
@@ -380,7 +404,7 @@ void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
 void InteractiveBase::hide_minimap() {
-	delete m->minimap.window;
+	m->minimap.destroy();
 }
 
 /**
