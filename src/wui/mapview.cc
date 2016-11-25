@@ -39,6 +39,10 @@ namespace {
 	// NOCOM(#sirver): maybe replace set_zoom through set_view.
 	// NOCOM(#sirver): how to 'reverse' a plan?
 
+// Takes t in [0, 1] and returns a value in [0, 1] that defines how much the
+// previous values should be used in a path.
+using EasingFunction = std::function<float (float t)>;
+
 // Time of a frame in ms. We use a animation resolution of 60 fps, which should
 // be fast enough to feel smooth on all framerates.
 constexpr float kFrameTimeMs = 1000.f / 60.f;
@@ -70,29 +74,67 @@ Rectf get_view_area(const MapView::View& view, const int width, const int height
 	return Rectf(view.viewpoint, width * view.zoom, height * view.zoom);
 }
 
-// 25% of the time accelerates, then 50% of the time linearly interpolate and
-// 25% of the time decelerate.
-template <typename Val> class AccelerateInterpolator {
+float ease_in_cubic(const float t) {
+	return std::pow(t, 3.);
+}
+
+float ease_out_cubic(const float t) {
+	return 1.f - ease_in_cubic(1.f - t);
+}
+
+float linear(const float t) {
+	return t;
+}
+
+float constant(const float /* t */) {
+	return 1.;
+}
+
+template <typename T>
+struct KeyFrame {
+	float time_ms;
+	T value;
+};
+
+template <typename T>
+class Interpolator {
 public:
-	AccelerateInterpolator(const Val& start, const Val& end, const int duration_ms)
-	   : start_(start),
-	     t0_(0.25 * duration_ms),
-	     t1_(0.75 * duration_ms),
-	     a_((end - start) / (t0_ * t1_)) {
+	Interpolator(std::vector<KeyFrame<T>> keyframes, std::vector<EasingFunction> easing_functions)
+	   : keyframes_(std::move(keyframes)), easing_functions_(std::move(easing_functions)) {
+#ifndef NDEBUG
+		assert(keyframes_.size() >= 2);
+		assert(keyframes_.size() == easing_functions_.size() + 1);
+		for (size_t i = 1; i < keyframes_.size(); ++i) {
+			assert(keyframes_[i-1].time_ms < keyframes_[i].time_ms);
+		}
+#endif
 	}
 
-	Val operator()(const float dt) const {
-		return start_ + a_ * 0.5 * math::sqr(std::min(dt, t0_)) +
-		       (a_ * t0_) * std::max(0.f, dt - t0_) - a_ * 0.5f * math::sqr(std::max(0.f, dt - t1_));
+	T value(const float time_ms) {
+		if (time_ms <= keyframes_.front().time_ms) {
+			return keyframes_.front().value;
+		}
+		if (time_ms >= keyframes_.back().time_ms) {
+			return keyframes_.back().value;
+		}
+
+		size_t i = 0;
+		while (i < keyframes_.size() && keyframes_[i].time_ms < time_ms) {
+			++i;
+		}
+		assert(i > 0);
+		const float percent_into_interval =
+		   static_cast<float>(time_ms - keyframes_[i - 1].time_ms) /
+		   static_cast<float>(keyframes_[i].time_ms - keyframes_[i - 1].time_ms);
+		const float t = easing_functions_[i-1](percent_into_interval);
+		return keyframes_[i-1].value * (1.0f - t) + keyframes_[i].value * t;
 	}
 
 private:
-	Val start_;
-	float t0_;
-	float t1_;
-	Val a_;
+	std::vector<KeyFrame<T>> keyframes_;
+	std::vector<EasingFunction> easing_functions_;
 
-	DISALLOW_COPY_AND_ASSIGN(AccelerateInterpolator);
+	DISALLOW_COPY_AND_ASSIGN(Interpolator);
 };
 
 // Calculates a animation plan from 'start_viewpoint' to 'end_viewpoint' - both at 'zoom',
@@ -108,35 +150,53 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
                                                      const int height) {
 	constexpr float kTargetZoom = 8.f;
    // Viewpoint: Accelerate for 25% of time, then move constant, decelerate 25% of time
-	const float t0 = 0.25 * duration_ms;
-	const float t1 = 0.75 * duration_ms;
 
-	const float v_zoom = (kTargetZoom - start_zoom) / (duration_ms * 0.25);
+	// const float v_zoom = (kTargetZoom - start_zoom) / (duration_ms * 0.25);
 
-	// viewpoint as a_viewpoint function of time.
-	const auto zoom_t = [t0, t1, v_zoom, start_zoom, kTargetZoom](const float dt) {
-		if (dt < t0) {
-			return start_zoom + v_zoom * dt;
-		}
-		if (dt < t1) {
-			return kTargetZoom;
-		}
-		return kTargetZoom - (dt - t1) * v_zoom;
-	};
+	   // NOCOM(#sirver): change to always start at 0.
+	Interpolator<float> zoom_t(
+	   {
+	      {0.f, start_zoom},
+	      {0.25f * duration_ms, kTargetZoom},
+	      {0.75f * duration_ms, kTargetZoom},
+	      {1.0f * duration_ms, start_zoom},
+	   },
+	   {ease_in_cubic, constant, ease_out_cubic});
 
 	const Vector2f start_center =
 	   get_view_area(MapView::View{start_viewpoint, start_zoom}, width, height).center();
 	const Vector2f end_center =
 	   get_view_area(MapView::View{end_viewpoint, start_zoom}, width, height).center();
-	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
-	AccelerateInterpolator<Vector2f> center_point_interpolater(
-	   start_center, start_center + dist, duration_ms);
+	const Vector2f center_point_change =
+	   MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
 
+	Interpolator<Vector2f> center_point_t(
+	   {
+	      {0, start_center},
+			{0.25f * duration_ms, start_center + center_point_change * 0.25f},
+			{0.75f * duration_ms, start_center + center_point_change * 0.75f},
+	      {1.0f * duration_ms, start_center + center_point_change},
+	   },
+	   {ease_in_cubic, linear, ease_out_cubic});
 	const uint32_t start_time = SDL_GetTicks();
 	std::vector<MapView::TimestampedView> plan;
+
 	for (float dt = 0; dt < duration_ms; dt += kFrameTimeMs) {
-		const float zoom = zoom_t(dt);
-		const Vector2f center_point = center_point_interpolater(dt);
+		float zoom = zoom_t.value(dt);
+		// Check if our target field is already visible on screen. If that is the
+		// case, we do not zoom out further.
+		if (!plan.empty()) {
+			const auto& view = get_view_area(plan.back().view, width, height);
+			const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(
+			   map, view.center(), start_center + center_point_change);
+			if (std::abs(dist.x) < view.w / 2.0f && std::abs(dist.y) < view.h / 2.0f) {
+				log("#sirver dist.x: %f,dist.w: %f,view.w: %f,view.h: %f\n", dist.x, dist.y, view.w, view.h);
+				zoom = std::min(plan.back().view.zoom, zoom);
+			}
+		}
+		// NOCOM(#sirver): what
+		zoom = 1.f;
+		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan.push_back(MapView::TimestampedView{
 		   static_cast<uint32_t>(std::lround(start_time + dt)), MapView::View{viewpoint, zoom}});
@@ -200,15 +260,15 @@ void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Rectf area = view_area();
 
 	const Vector2f view_center = area.center();
-	const int w = MapviewPixelFunctions::get_map_end_screen_x(map);
-	const int h = MapviewPixelFunctions::get_map_end_screen_y(map);
 	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, view_center, map_pixel);
 
 	// Check if the point is visible on screen.
-	if (dist.x > area.w / 2.f || dist.y > area.h / 2.f) {
+	if (std::abs(dist.x) > area.w / 2.f || std::abs(dist.y) > area.h / 2.f) {
 		return;
 	}
-	const Vector2f in_panel = to_panel(move_inside(map_pixel, area, w, h));
+	const Vector2f in_panel =
+	   to_panel(move_inside(map_pixel, area, MapviewPixelFunctions::get_map_end_screen_x(map),
+	                        MapviewPixelFunctions::get_map_end_screen_y(map)));
 	set_mouse_pos(round(in_panel));
 	track_sel(in_panel);
 }
