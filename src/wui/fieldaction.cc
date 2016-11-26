@@ -605,7 +605,7 @@ void FieldActionWindow::act_ripflag() {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	if (upcast(Widelands::Flag, flag, node_.field->get_immovable())) {
-		bool ctrl_pressed = SDL_GetModState() & KMOD_CTRL;
+		const bool ctrl_pressed = SDL_GetModState() & KMOD_CTRL;
 		if (Building* const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
 				if (ctrl_pressed) {
