@@ -259,8 +259,8 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 
 Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom) const {
 	ensure_graphics_are_loaded();
-	float height = percent_from_bottom * frames_[0]->height() / 100;
-	return Rectf(0.f, frames_[0]->height() - height, frames_[0]->width(), height);
+	float h = percent_from_bottom * frames_[0]->height() / 100;
+	return Rectf(0.f, frames_[0]->height() - h, frames_[0]->width(), h);
 }
 
 Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
