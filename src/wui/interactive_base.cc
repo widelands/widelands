@@ -502,15 +502,14 @@ void InteractiveBase::finish_build_road() {
 		else
 			egbase().get_player(road_build_player_)->build_road(*new Widelands::Path(*buildroad_));
 
-		if (allow_user_input() &&
-		    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
+		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
 			//  place flags
 			const Map& map = egbase().map();
 			const std::vector<Coords>& c_vector = buildroad_->get_coords();
 			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
-			if (get_key_state(SDL_SCANCODE_LSHIFT) || get_key_state(SDL_SCANCODE_RSHIFT)) {
+			if (SDL_GetModState() & KMOD_SHIFT) {
 				for //  start to end
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
