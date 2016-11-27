@@ -398,7 +398,7 @@ std::string NetClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void NetClient::set_win_condition_script(const std::string& wc) {
+void NetClient::set_win_condition_script(const std::string&) {
 	// Clients are not allowed to change this
 	NEVER_HERE();
 }
