@@ -1,0 +1,54 @@
+// Helper functions that are shared by the vertex shaders for terrain and
+// roads.
+#version 130
+#extension GL_ARB_uniform_buffer_object: enable
+
+// Textures (map data).
+uniform usampler2D u_terrain_base;
+uniform sampler2D u_player_brightness;
+
+// Constants
+const float kTriangleWidth = 64;
+const float kTriangleHeight = 32;
+const float kHeightFactor = 5;
+
+vec2 map_size;
+vec2 map_inv_size;
+
+void init_common() {
+	map_size = vec2(textureSize(u_terrain_base, 0));
+	map_inv_size = 1. / map_size;
+}
+
+uvec4 get_field_base(ivec2 coord) {
+	return texture(u_terrain_base, (coord + 0.5) * map_inv_size);
+}
+
+float calc_brightness(ivec2 coord, uint node_ubrightness) {
+	// Brightness is really an 8-bit signed value, but it's stored in an
+	// GL_RGBA8UI texture, so here we use signed (arithmetic) shifts to do
+	// the conversion.
+	int node_brightness = int(node_ubrightness << 24) >> 24;
+	float brightness = 144. / 255. + node_brightness * (1. / 255.);
+	brightness = min(1., brightness * (255. / 160.));
+
+	brightness *= texture(u_player_brightness, (coord + 0.5) * map_inv_size).r;
+
+	return brightness;
+}
+
+void calc_basepix(ivec2 coord, out vec2 basepix, out float heightpix, out uint node_brightness) {
+	uvec4 field = get_field_base(coord);
+	basepix.x = coord.x * kTriangleWidth;
+	if ((coord.y & 1) != 0)
+		basepix.x += kTriangleWidth / 2;
+	basepix.y = coord.y * kTriangleHeight;
+	heightpix = field.z * kHeightFactor;
+	node_brightness = field.w;
+}
+
+void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness) {
+	float heightpix;
+	calc_basepix(coord, pix, heightpix, node_brightness);
+	pix.y -= heightpix;
+}

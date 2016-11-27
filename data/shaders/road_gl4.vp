@@ -6,7 +6,7 @@
 // From terrain_common_gl4:
 void init_common();
 uvec4 get_field_base(ivec2 coord);
-float calc_brightness(uint node_ubrightness);
+float calc_brightness(ivec2 coord, uint node_ubrightness);
 void calc_basepix(ivec2 coord, out vec2 basepix, out float heightpix, out uint node_brightness);
 void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness);
 
@@ -74,7 +74,9 @@ void main() {
 	gl_Position = vec4(pix * u_position_scale + u_position_offset, u_z_value, 1.);
 
 	// Brightness
-	out_brightness = calc_brightness(is_end ? end_node_brightness : start_node_brightness);
+	out_brightness = calc_brightness(
+		is_end ? end : road.start,
+		is_end ? end_node_brightness : start_node_brightness);
 
 	// Texture coordinates.
 	Texture tex = u_textures[road.texture];

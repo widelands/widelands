@@ -4,7 +4,7 @@
 // From terrain_common_gl4:
 void init_common();
 uvec4 get_field_base(ivec2 coord);
-float calc_brightness(uint node_ubrightness);
+float calc_brightness(ivec2 coord, uint node_ubrightness);
 void calc_basepix(ivec2 coord, out vec2 basepix, out float heightpix, out uint node_brightness);
 void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness);
 
@@ -76,7 +76,7 @@ void main() {
 	gl_Position.w = 1.;
 
 	// Brightness
-	var_brightness = calc_brightness(node_brightness);
+	var_brightness = calc_brightness(node_coord, node_brightness);
 
 	// Texture coordinates
 	vec2 vertex_texcoord;

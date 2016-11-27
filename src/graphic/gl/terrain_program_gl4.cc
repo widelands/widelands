@@ -38,6 +38,8 @@ using namespace Widelands;
  *
  * TODO(nha): upload based on dirtiness and/or "rolling" updates of N% per frame
  *
+ * TODO(nha): terrain knowledge is actually per-player
+ *
  * Per-field data is uploaded directly into integer-valued textures that span
  * the entire map, and vertex shaders do most of the heavy lifting. The
  * following textures are used:
@@ -236,14 +238,68 @@ TerrainPlayerPerspectiveGl4::get(const Widelands::EditorGameBase& egbase,
 
 TerrainPlayerPerspectiveGl4::TerrainPlayerPerspectiveGl4(const Widelands::EditorGameBase& egbase,
                                                          const Widelands::Player* player)
-  : egbase_(egbase), player_(player) {
+  : egbase_(egbase), player_(player), uploads_(GL_PIXEL_UNPACK_BUFFER) {
+	glGenTextures(1, &brightness_texture_);
 }
 
 TerrainPlayerPerspectiveGl4::~TerrainPlayerPerspectiveGl4() {
+	if (brightness_texture_)
+		glDeleteTextures(1, &brightness_texture_);
 }
 
 void TerrainPlayerPerspectiveGl4::update() {
-	// TODO
+	auto& gl = Gl::State::instance();
+	bool see_all = !player_ || player_->see_all();
+
+	// TODO(nha): update only what is necessary
+
+	if (see_all) {
+		auto stream = uploads_.stream(1);
+		stream.emplace_back(255);
+		GLintptr offset = stream.unmap();
+		uploads_.bind();
+
+		gl.bind(GL_TEXTURE0, brightness_texture_);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, 1, 1, 0, GL_RED, GL_UNSIGNED_BYTE,
+		             reinterpret_cast<void*>(offset));
+	} else {
+		const Map& map = egbase().map();
+		uint32_t gametime = egbase().get_gametime();
+		MapIndex max_index = map.max_index();
+		auto stream = uploads_.stream(max_index);
+		uint8_t* data = stream.add(max_index);
+
+		for (MapIndex i = 0; i < max_index; ++i) {
+			const Player::Field& pf = player_->fields()[i];
+			if (pf.vision == 0) {
+				*data++ = 0;
+			} else if (pf.vision == 1) {
+				static const uint32_t kDecayTimeInMs = 20000;
+				const Duration time_ago = gametime - pf.time_node_last_unseen;
+				if (time_ago < kDecayTimeInMs) {
+					*data++ = 255 * (2 * kDecayTimeInMs - time_ago) / (2 * kDecayTimeInMs);
+				} else {
+					*data++ = 128;
+				}
+			} else {
+				*data++ = 255;
+			}
+		}
+
+		GLintptr offset = stream.unmap();
+		uploads_.bind();
+
+		gl.bind(GL_TEXTURE0, brightness_texture_);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, map.get_width(), map.get_height(), 0,
+		             GL_RED, GL_UNSIGNED_BYTE, reinterpret_cast<void*>(offset));
+	}
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
 TerrainProgramGl4::Terrain::Terrain()
@@ -260,6 +316,7 @@ TerrainProgramGl4::Terrain::Terrain()
 	u_texture_dimensions = glGetUniformLocation(gl_program.object(), "u_texture_dimensions");
 
 	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
+	u_player_brightness = glGetUniformLocation(gl_program.object(), "u_player_brightness");
 	u_terrain_texture = glGetUniformLocation(gl_program.object(), "u_terrain_texture");
 	u_dither_texture = glGetUniformLocation(gl_program.object(), "u_dither_texture");
 
@@ -281,6 +338,7 @@ TerrainProgramGl4::Roads::Roads()
 	u_z_value = glGetUniformLocation(gl_program.object(), "u_z_value");
 
 	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
+	u_player_brightness = glGetUniformLocation(gl_program.object(), "u_player_brightness");
 	u_texture = glGetUniformLocation(gl_program.object(), "u_texture");
 
 	block_textures_idx = glGetUniformBlockIndex(gl_program.object(), "block_textures");
@@ -345,11 +403,14 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	glUniform1i(terrain_.u_terrain_base, 0);
 	gl.bind(GL_TEXTURE0, args->terrain->texture());
 
-	glUniform1i(terrain_.u_terrain_texture, 1);
-	gl.bind(GL_TEXTURE1, blit_data.texture_id);
+	glUniform1i(terrain_.u_player_brightness, 1);
+	gl.bind(GL_TEXTURE1, args->perspective->player_brightness_texture());
 
-	glUniform1i(terrain_.u_dither_texture, 2);
-	gl.bind(GL_TEXTURE2, terrain_.dither_mask->blit_data().texture_id);
+	glUniform1i(terrain_.u_terrain_texture, 2);
+	gl.bind(GL_TEXTURE2, blit_data.texture_id);
+
+	glUniform1i(terrain_.u_dither_texture, 3);
+	gl.bind(GL_TEXTURE3, terrain_.dither_mask->blit_data().texture_id);
 
 	// Setup vertex and instance attribute data.
 	gl.enable_vertex_attrib_array(
@@ -385,11 +446,12 @@ void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,
 	glUniform1f(roads_.u_z_value, z_value);
 
 	// Prepare textures & sampler uniforms.
-	// Texture0 is already set correctly.
+	// Texture0&1 are already set correctly.
 	glUniform1i(roads_.u_terrain_base, 0);
+	glUniform1i(roads_.u_player_brightness, 1);
 
-	glUniform1i(roads_.u_texture, 1);
-	gl.bind(GL_TEXTURE1, args->terrain->road_texture_object());
+	glUniform1i(roads_.u_texture, 2);
+	gl.bind(GL_TEXTURE2, args->terrain->road_texture_object());
 
 	glBindBufferBase(GL_UNIFORM_BUFFER, roads_.block_textures_idx,
 	                 args->terrain->road_textures_buffer_object());

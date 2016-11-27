@@ -155,6 +155,10 @@ public:
 		return player_;
 	}
 
+	GLuint player_brightness_texture() const {
+		return brightness_texture_;
+	}
+
 	// Upload updated information to texture(s) if necessary.
 	void update();
 
@@ -169,6 +173,15 @@ private:
 
 	const Widelands::EditorGameBase& egbase_;
 	const Widelands::Player* player_;
+
+	Gl::StreamingBuffer<uint8_t> uploads_;
+
+	// Whether the current brightness texture assumes that the player sees
+	// all (i.e., it is 1x1).
+	bool see_all_;
+
+	// Brightness texture: GL_R8.
+	GLuint brightness_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainPlayerPerspectiveGl4);
 };
@@ -263,6 +276,7 @@ private:
 		GLint u_texture_dimensions;
 
 		GLint u_terrain_base;
+		GLint u_player_brightness;
 		GLint u_terrain_texture;
 		GLint u_dither_texture;
 
@@ -290,6 +304,7 @@ private:
 		GLint u_z_value;
 
 		GLint u_terrain_base;
+		GLint u_player_brightness;
 		GLint u_texture;
 
 		// Uniform block.
