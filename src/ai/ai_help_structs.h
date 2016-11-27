@@ -565,7 +565,7 @@ struct ManagementData {
 	std::vector<FNeuron> f_neuron_pool;
 	Widelands::Player::AiPersistentState* pd;
 
-	void mutate(uint32_t);
+	void mutate(uint32_t, PlayerNumber = 0);
 	void review(uint32_t, PlayerNumber, uint32_t, int32_t, uint32_t, int32_t, bool);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);

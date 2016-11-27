@@ -99,7 +99,7 @@ constexpr int kCampaignDuration = 15 * 60 * 1000;
 constexpr int kMaxJobs = 4;
 
 //for Mutation speed
-constexpr int kMutationSpeed = 50;
+constexpr int kMutationSpeed = 40;
 
 using namespace Widelands;
 
@@ -4750,7 +4750,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(77)) / 20),
 			spots_<kSpotsTooLittle,		
 		    big_buildings_score >
-		          msites_total * 10 / (10 + management_data.get_military_number_at(64) / 20),
+		          msites_total * 10 / (10 + management_data.get_military_number_at(33) / 20),
 		    soldier_status_ == SoldiersStatus::kShortage ||
 		          soldier_status_ == SoldiersStatus::kBadShortage);
 		if (management_data.f_neuron_pool[40].get_result(
@@ -5062,7 +5062,69 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		}
 	}
 
-	if (usefullness_score < 0 && (gametime - militarysites.front().built_time) > 2 * 60 * 1000) {
+	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
+	Quantity const current_target = ms->soldier_capacity();
+	const bool mman1 = management_data.f_neuron_pool[48].get_result(
+		usefullness_score < 0,
+		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		bf.enemy_accessible_,
+		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		current_target < total_capacity);
+	const bool mman2 = management_data.f_neuron_pool[49].get_result(		
+		current_target > 1,
+		soldier_status_ == SoldiersStatus::kShortage,
+		current_target > total_capacity / 2 + 1,
+		usefullness_score < 0,
+		(gametime - militarysites.front().built_time) > 2 * 60 * 1000);
+	const bool mman3 = management_data.f_neuron_pool[50].get_result(
+		bf.enemy_accessible_,
+		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		current_target < total_capacity,
+		current_target > 1,
+		current_target > total_capacity / 2 + 1);
+	const bool mman4 = management_data.f_neuron_pool[51].get_result(	
+		bf.enemy_accessible_,
+		current_target > 1,
+		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		soldier_status_ == SoldiersStatus::kShortage,
+		usefullness_score < 0);
+
+	const bool mman5 = management_data.f_neuron_pool[52].get_result(	
+		bf.enemy_accessible_,
+		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		soldier_status_ == SoldiersStatus::kShortage,
+		usefullness_score < 0) ;
+
+	
+	const bool to_destroy =	 management_data.f_neuron_pool[23].get_result(
+		mman1,
+		mman2,
+		mman3,
+		mman4,
+		mman5);
+
+	const bool to_decrease = management_data.f_neuron_pool[45].get_result(
+		mman4,
+		mman2,
+		mman5,
+		mman4);
+
+	const bool to_increase = management_data.f_neuron_pool[46].get_result(
+		mman4,
+		mman1,
+		mman3,
+		mman5,
+		mman2);
+
+	const bool prefer_rookies = management_data.f_neuron_pool[47].get_result(
+		mman4,
+		mman1,
+		mman3,
+		mman2,
+		mman5);
+	
+	if (to_destroy) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			flags_to_be_removed.push_back(ms->base_flag().get_position());
@@ -5071,49 +5133,90 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		} else {
 			game().send_player_bulldoze(*ms);
 			military_last_dismantle_ = game().get_gametime();
-		}
-	} else if (!bf.enemy_accessible_) {
-		uint32_t const j = ms->soldier_capacity();
-
-		if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
-		} else if (j > 1) {
-			game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
-		}
-	} else {
-		// set preferHeroes and modify number of soldiers
-		Quantity const total_capacity = ms->max_soldier_capacity();
-		Quantity const target_capacity = ms->soldier_capacity();
-
-		if (total_capacity != target_capacity && (soldier_status_ == SoldiersStatus::kEnough ||
-		                                          soldier_status_ == SoldiersStatus::kFull)) {
-			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
-			changed = true;
-		}
-
-		if (soldier_status_ == SoldiersStatus::kShortage && target_capacity == 1 &&
-		    total_capacity > 1) {
-			game().send_player_change_soldier_capacity(*ms, +1);
-			changed = true;
-		}
-
-		if (soldier_status_ == SoldiersStatus::kShortage &&
-		    target_capacity > total_capacity / 2 + 1) {
+		}		
+	} else if (to_decrease){
+		if (current_target > 1) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
-
-		if (soldier_status_ == SoldiersStatus::kBadShortage && target_capacity > 1) {
-			game().send_player_change_soldier_capacity(*ms, -1);
-			changed = true;
-		}
-
-		// and also set preference to Heroes
-		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+	} else if (to_increase) {
+		if (current_target < total_capacity) {
+			game().send_player_change_soldier_capacity(*ms, 1);
 			changed = true;
 		}
 	}
+	
+	if (prefer_rookies && MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+			changed = true;
+		}
+	if (!prefer_rookies && MilitarySite::kPrefersRookies == ms->get_soldier_preference()) {
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+			changed = true;
+		}
+		
+	// inputs:
+	// usefullness_score < 0 
+	// (gametime - militarysites.front().built_time) > 2 * 60 * 1000)
+	// bf.enemy_accessible_
+	// (soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull)
+	// current_target < total_capacity
+	// current_target > 1
+	// soldier_status_ == SoldiersStatus::kShortage
+	// target_capacity > total_capacity / 2 + 1
+
+	//if (usefullness_score < 0 && (gametime - militarysites.front().built_time) > 2 * 60 * 1000) {
+		//changed = true;
+		//if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+			//flags_to_be_removed.push_back(ms->base_flag().get_position());
+			//game().send_player_dismantle(*ms);
+			//military_last_dismantle_ = game().get_gametime();
+		//} else {
+			//game().send_player_bulldoze(*ms);
+			//military_last_dismantle_ = game().get_gametime();
+		//}
+	//} else if (!bf.enemy_accessible_) {
+		//uint32_t const j = ms->soldier_capacity();
+
+		//if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+		//} else if (j > 1) {
+			//game().send_player_change_soldier_capacity(*ms, (j > 2) ? -2 : -1);
+		//}
+	//} else {
+		//// set preferHeroes and modify number of soldiers
+		//Quantity const total_capacity = ms->max_soldier_capacity();
+		//Quantity const target_capacity = ms->soldier_capacity();
+
+		//if (total_capacity != target_capacity && (soldier_status_ == SoldiersStatus::kEnough ||
+		                                          //soldier_status_ == SoldiersStatus::kFull)) {
+			//game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
+			//changed = true;
+		//}
+
+		//if (soldier_status_ == SoldiersStatus::kShortage && target_capacity == 1 &&
+		    //total_capacity > 1) {
+			//game().send_player_change_soldier_capacity(*ms, +1);
+			//changed = true;
+		//}
+
+		//if (soldier_status_ == SoldiersStatus::kShortage &&
+		    //target_capacity > total_capacity / 2 + 1) {
+			//game().send_player_change_soldier_capacity(*ms, -1);
+			//changed = true;
+		//}
+
+		//if (soldier_status_ == SoldiersStatus::kBadShortage && target_capacity > 1) {
+			//game().send_player_change_soldier_capacity(*ms, -1);
+			//changed = true;
+		//}
+
+		//// and also set preference to Heroes
+		//if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
+			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+			//changed = true;
+		//}
+	//}
 
 	// reorder:;
 	militarysites.push_back(militarysites.front());
