@@ -39,11 +39,6 @@ namespace {
 	// NOCOM(#sirver): maybe replace set_zoom through set_view.
 	// NOCOM(#sirver): how to 'reverse' a plan?
 
-// Takes t in [0, 1] and returns a value in [0, 1] that defines how much the
-// previous values should be used in a path.
-	// NOCOM(#sirver): delete again?
-using EasingFunction = std::function<float (float t)>;
-
 // Time of a frame in ms. We use a animation resolution of 60 fps, which should
 // be fast enough to feel smooth on all framerates.
 constexpr float kFrameTimeMs = 1000.f / 60.f;
@@ -75,27 +70,10 @@ Rectf get_view_area(const MapView::View& view, const int width, const int height
 	return Rectf(view.viewpoint, width * view.zoom, height * view.zoom);
 }
 
-float ease_in_cubic(const float t) {
-	return std::pow(t, 3.);
-}
-
-float ease_out_cubic(const float t) {
-	return 1.f - ease_in_cubic(1.f - t);
-}
-
-float linear(const float t) {
-	return t;
-}
-
-float constant(const float /* t */) {
-	return 1.;
-}
-
 template <typename T>
 struct KeyFrame {
 	float time_ms;
 	T value;
-	T velocity;
 };
 
 constexpr float pow2(float t) {
@@ -105,27 +83,14 @@ constexpr float pow3(float t) {
 	return t * t * t;
 }
 
-constexpr float h00(const float t) {
-	return 2.f * pow3(t) - 3.f * pow2(t) + 1.f;
-}
-constexpr float h10(const float t) {
-	return pow3(t) - 2.f*pow2(t) + t;
-}
-constexpr float h01(const float t) {
-	return -2.f * pow3(t) + 3.f * pow2(t);
-}
-constexpr float h11(const float t) {
-	return pow3(t) - pow2(t);
-}
-
+// NOCOM(#sirver): Explain interpolator properties, i.e number of required keypoints
 template <typename T>
 class Interpolator {
 public:
-	Interpolator(std::vector<KeyFrame<T>> keyframes, std::vector<EasingFunction> easing_functions)
-	   : keyframes_(std::move(keyframes)), easing_functions_(std::move(easing_functions)) {
+	Interpolator(std::vector<KeyFrame<T>> keyframes)
+	   : keyframes_(std::move(keyframes)) {
 #ifndef NDEBUG
-		assert(keyframes_.size() >= 2);
-		assert(keyframes_.size() == easing_functions_.size() + 1);
+		assert(keyframes_.size() >= 4);
 		for (size_t i = 1; i < keyframes_.size(); ++i) {
 			assert(keyframes_[i-1].time_ms < keyframes_[i].time_ms);
 		}
@@ -141,26 +106,41 @@ public:
 		}
 
 		size_t i = 0;
-		while (i < keyframes_.size() && keyframes_[i].time_ms < time_ms) {
+		while (i < keyframes_.size() && keyframes_[i].time_ms <= time_ms) {
 			++i;
 		}
-		assert(i > 0);
-		const auto xk = keyframes_[i-1].time_ms;
-		const auto pk = keyframes_[i-1].value;
-		const auto mk = keyframes_[i-1].velocity;
-		const auto xk1 = keyframes_[i].time_ms;
-		const auto pk1 = keyframes_[i].value;
-		const auto mk1 = keyframes_[i].velocity;
 
-		const float t =
-		   static_cast<float>(time_ms - keyframes_[i - 1].time_ms) /
-		   static_cast<float>(keyframes_[i].time_ms - keyframes_[i - 1].time_ms);
-		return pk*h00(t) + mk*h10(t)*(xk1-xk) + pk1*h01(t) + mk1*h11(t)*(xk1-xk);
+		// NOCOM(#sirver): are these assumptions right?
+		// The interpolated point must be in the second interval or later.
+		assert(i > 1);
+		// The interpolated point must not in the last interval.
+		assert(i <= keyframes_.size() - 1);
+		assert(keyframes_[i-1].time_ms <= time_ms);
+		assert(time_ms <= keyframes_[i].time_ms);
+
+		// const float ts0 = keyframes_[i-2].time_ms;
+		const float ts1 = keyframes_[i-1].time_ms;
+		const float ts2 = keyframes_[i].time_ms;
+		// const float ts3 = keyframes_[i+1].time_ms;
+
+		const T& p0 = keyframes_[i-2].value;
+		const T& p1 = keyframes_[i-1].value;
+		const T& p2 = keyframes_[i].value;
+		const T& p3 = keyframes_[i+1].value;
+
+		float u = (time_ms - ts1) / (ts2 - ts1);
+		log("#sirver u: %f\n", u);
+
+		const Vector2f c0 = p1;
+		const Vector2f c1 = -p0 / 2.0f + p2 / 2.0f;
+		const Vector2f c2 = p0 - p1 * (5.0f / 2.0f) + p2 * 2 - p3 / 2.0f;
+		const Vector2f c3 = -p0 / 2.0f + p1 * (3.0f / 2.0f) - p2 * (3.0f / 2.0f) + p3 / 2.0f;
+
+		return c0 + c1 * u + c2 * pow2(u) + c3 * pow3(u);
 	}
 
 private:
 	std::vector<KeyFrame<T>> keyframes_;
-	std::vector<EasingFunction> easing_functions_;
 
 	DISALLOW_COPY_AND_ASSIGN(Interpolator);
 };
@@ -182,14 +162,14 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	// const float v_zoom = (kTargetZoom - start_zoom) / (duration_ms * 0.25);
 
 	   // NOCOM(#sirver): change to always start at 0.
-	Interpolator<float> zoom_t(
-	   {
-	      {0.f, start_zoom, 0.f},
-	      {0.25f * duration_ms, kTargetZoom, 0.f},
-	      {0.75f * duration_ms, kTargetZoom, 0.f},
-	      {1.0f * duration_ms, start_zoom, 0.f},
-	   },
-	   {ease_in_cubic, constant, ease_out_cubic});
+	// Interpolator<float> zoom_t(
+		// {
+			// {0.f, start_zoom, 0.f},
+			// {0.25f * duration_ms, kTargetZoom, 0.f},
+			// {0.75f * duration_ms, kTargetZoom, 0.f},
+			// {1.0f * duration_ms, start_zoom, 0.f},
+		// },
+		// {ease_in_cubic, constant, ease_out_cubic});
 
 	const Vector2f start_center =
 	   get_view_area(MapView::View{start_viewpoint, start_zoom}, width, height).center();
@@ -198,21 +178,26 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	const Vector2f center_point_change =
 	   MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
 
-	const Vector2f velocity = (center_point_change * 0.5f) / duration_ms;
-	Interpolator<Vector2f> center_point_t(
-	   {
-	      {0, start_center, Vector2f()},
-			{0.25f * duration_ms, start_center + center_point_change * 0.25f, velocity},
-			{0.75f * duration_ms, start_center + center_point_change * 0.75f, velocity},
-	      {1.0f * duration_ms, start_center + center_point_change, Vector2f()},
-	   },
-	   {ease_in_cubic, linear, ease_out_cubic});
+	const std::vector<KeyFrame<Vector2f>> keyframes = {
+	   {-0.5f * duration_ms, start_center},
+	   {0.f, start_center},
+	   {0.25f * duration_ms, start_center + center_point_change * 0.25f},
+	   {0.75f * duration_ms, start_center + center_point_change * 0.75f},
+	   {1.0f * duration_ms, start_center + center_point_change},
+	   {1.5f * duration_ms, start_center + center_point_change},
+	};
+
+	Interpolator<Vector2f> center_point_t(keyframes);
 	const uint32_t start_time = SDL_GetTicks();
 	std::vector<MapView::TimestampedView> plan;
 
 	log("#sirver #####################\n");
+	for (const auto& keyframe : keyframes) {
+		log("#sirver %.4f,%.4f,%.4f\n", keyframe.time_ms, keyframe.value.x, keyframe.value.y);
+	}
+	log("#sirver #####################\n");
 	for (float dt = 0; dt < duration_ms; dt += kFrameTimeMs) {
-		float zoom = zoom_t.value(dt);
+		// float zoom = zoom_t.value(dt);
 		// Check if our target field is already visible on screen. If that is the
 		// case, we do not zoom out further.
 		// NOCOM(#sirver): brping this back?
@@ -225,8 +210,7 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 				// zoom = std::min(plan.back().view.zoom, zoom);
 			// }
 		// }
-		// NOCOM(#sirver): what
-		zoom = 1.f;
+		const float zoom = 1.f;
 		const Vector2f center_point = center_point_t.value(dt);
 		log("#sirver %.4f,%.4f,%.4f\n", dt, center_point.x, center_point.y);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
