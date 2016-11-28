@@ -240,7 +240,14 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
 		select_saved_game();
 	}
-	update_win_conditions(); // NOCOM get the client in line!
+	update_win_conditions();
+	// Tell the client about the current win condition
+	// NOCOM move into update_win_conditions?
+	if (win_condition_dropdown_.has_selection()) {
+		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+	} else {
+		settings_->set_win_condition_script(last_win_condition_);
+	}
 }
 
 /**
