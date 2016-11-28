@@ -404,7 +404,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 	change_map_or_save_.set_visible(settings_->can_change_map());
 
 	if (!settings_->can_change_map()) {
-		// update_win_conditions(); // NOCOM new
+		update_win_conditions(); // NOCOM We can have the wrong win condition in the client here
 		if (!init_win_condition_label()) {
 			try {
 				std::unique_ptr<LuaTable> t = win_condition_if_valid(
