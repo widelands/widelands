@@ -254,6 +254,7 @@ protected:
 	uint32_t consume_interval_;
 
 	/// The currently pending request.
+	// NOCOM(#codereview): this should probaby be a unique ptr
 	Request* request_;
 
 	/// The function to call on fulfilled request.

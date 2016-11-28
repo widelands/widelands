@@ -737,6 +737,8 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
+// NOCOM(#codereview): change 'bool exact' to be an enum: enum class Match {
+// kExact, kCompatible } to make callsites easier to understand.
 Quantity
 Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
 						const Requirements& req, bool exact) {
