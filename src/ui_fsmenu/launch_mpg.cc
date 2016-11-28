@@ -405,15 +405,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (!settings_->can_change_map()) {
 		// update_win_conditions(); // NOCOM new
-		if (settings_->settings().scenario) {
-			win_condition_dropdown_.set_label(_("Scenario"));
-			win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
-		} else if (settings_->settings().savegame) {  // NOCOM duplication
-			/** Translators: This is a game type */
-			win_condition_dropdown_.set_label(_("Saved Game"));
-			win_condition_dropdown_.set_tooltip(
-			   _("The game is a saved game – the win condition was set before."));
-		} else {
+		if (!init_win_condition_label()) {
 			try {
 				std::unique_ptr<LuaTable> t = win_condition_if_valid(
 				   settings_->get_win_condition_script(), std::set<std::string>());

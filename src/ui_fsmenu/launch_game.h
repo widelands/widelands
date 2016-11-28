@@ -62,6 +62,10 @@ protected:
 
 	LuaInterface* lua_;
 
+	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this is a scenario or a savegame.
+	/// Creates a blank label/tooltip and returns 'false' otherwise.
+	bool init_win_condition_label();
+
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
 	void update_win_conditions();
