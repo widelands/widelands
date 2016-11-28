@@ -240,8 +240,7 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
 		select_saved_game();
 	}
-	update_win_conditions();  // NOCOM new
-	                          // NOCOM get the client in line!
+	update_win_conditions(); // NOCOM get the client in line!
 }
 
 /**
@@ -340,7 +339,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		                  "finished!?!"),
 		                settings_->settings().mapfilename.c_str());
 	if (settings_->can_launch()) {
-		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());  // NOCOM new
+		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 	}
 }
@@ -399,7 +398,6 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (!settings_->can_change_map()) {
 		// update_win_conditions(); // NOCOM new
-		// win_condition_dropdown_.set_label("Foo NOCOM");
 		if (settings_->settings().scenario) {
 			win_condition_dropdown_.set_label(_("Scenario"));
 			win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));

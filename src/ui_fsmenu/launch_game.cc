@@ -101,11 +101,11 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 	win_condition_dropdown_.clear();
 	win_condition_dropdown_.set_enabled(settings_->can_change_map() &&
 	                                    !settings_->settings().savegame &&
-	                                    !settings_->settings().scenario);  // NOCOM new
+													!settings_->settings().scenario);
 	if (settings_->settings().scenario) {
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
-	} else if (settings_->settings().savegame) {  // NOCOM new
+	} else if (settings_->settings().savegame) {
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
@@ -130,7 +130,7 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 			log("Launch Game: No map loader: %s\n", error_message.c_str());
 		}
 		if (settings_->can_change_map()) {
-			win_condition_selected();  // NOCOM new
+			win_condition_selected();
 		}
 	}
 }
@@ -180,7 +180,6 @@ void FullscreenMenuLaunchGame::load_win_conditions(const Widelands::Map& map) {
 	}
 }
 
-// TODO(GunChleoc): Turn this into a free standing function. It seems it is not using any state.
 std::unique_ptr<LuaTable>
 FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
                                                  std::set<std::string> tags) const {
