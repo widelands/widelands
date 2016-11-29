@@ -870,8 +870,21 @@ void DefaultAI::late_initialization() {
 		throw wexception("Corrupted AI data");
 	}
 
+	// initialise max duration of single ship's expedition
+	uint32_t ar1 = uint32_t(map.get_height()) * map.get_width();
+	uint32_t rt1 = round(sqrt(ar1));
+	printf("--- EXPEDITION MAP AREA ROOT == %u\n", rt1);
+	int scope = 320 - 64;
+	int off = rt1 - 64;
+	if (off < 0) off = 0;
+	if (off > scope) off = scope;
+	expedition_max_duration = kExpeditionMinDuration +
+			double(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
+	printf("--- EXPEDITION MAX DURATION == %u\n", expedition_max_duration/1000);
+	assert(expedition_max_duration >= kExpeditionMinDuration && expedition_max_duration > 0);
+
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
-	// f.e. human player played this player before
+	// e.g. human player played this player before
 	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
 		// Current gametime is better then 'kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
@@ -4131,7 +4144,7 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 		}
 }
 
-// walk and search for territory controlled by other player
+// walk and search for territory controlled by some player type
 // usually scanning radius is enough but sometimes we must walk to
 // verify that an enemy territory is really accessible by land
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
@@ -4179,7 +4192,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 				return true;
 			}
 
-			// if anybody but not me
+			// if somebody but not me
 			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
 				*tested_fields = done.size();
 				return true;
