@@ -135,11 +135,12 @@ return {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
-      set_textdomain("win_conditions")
       local msg = ""
       if remaining_time <= 0 then
-         msg = p(_"The game is over.")
+         set_textdomain("widelands")
+         msg = p(_"Game over")
       else
+         set_textdomain("win_conditions")
          local h = math.floor(remaining_time / 60)
          local m = remaining_time % 60
          -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
