@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"PO-Revision-Date: 2016-11-28 21:53+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,93 +20,93 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:11
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
-msgstr ""
+msgstr "Bediening"
 
 #: ../../data/scripting/editor/editor_controls.lua:14
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:17
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:19
 msgid "Toggle main menu"
-msgstr ""
+msgstr "Schakel hoofdmenu aan/uit"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
 #: ../../data/scripting/editor/editor_controls.lua:21
 msgid "Toggle tools menu"
-msgstr ""
+msgstr "Schakel gereedschapsmenu aan/uit"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle player menu"
-msgstr ""
+msgstr "Schakel spelersmenu aan/uit"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Redo"
-msgstr ""
+msgstr "Overdoen"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Activate information tool"
-msgstr ""
+msgstr "Informatiegereedschap activeren"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:33
 msgctxt "hotkey"
 msgid "Ctrl + L"
-msgstr ""
+msgstr "Ctrl + L"
 
 #: ../../data/scripting/editor/editor_controls.lua:33
 msgid "Load map"
-msgstr ""
+msgstr "Kaart laden"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgctxt "hotkey"
 msgid "Ctrl + S"
-msgstr ""
+msgstr "Ctrl + S"
 
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Save map"
-msgstr ""
+msgstr "Kaart opslaan"
 
 #: ../../data/scripting/editor/editor_controls.lua:39
 msgid "Tools"
-msgstr ""
+msgstr "Gereedschap"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
 msgid "1-0"
-msgstr ""
+msgstr "1-0"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
-msgstr ""
+msgstr "Gereedschapsgrootte veranderen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgid ""
@@ -124,14 +125,14 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Klik"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
@@ -143,69 +144,69 @@ msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: ../../data/scripting/editor/editor_help.lua:59
 #: ../../data/scripting/editor/editor_introduction.lua:12
 msgid "Introduction"
-msgstr ""
+msgstr "Inleiding"
 
 #: ../../data/scripting/editor/editor_help.lua:74
 msgid "Terrains"
-msgstr ""
+msgstr "Terreinen"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Trees"
-msgstr ""
+msgstr "Bomen"
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "De Widelands Editor"
 
 #: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Deze editor is bedoeld voor spelers die hun eigen kaarten willen ontwerpen om in Widelands te gebruiken."
 
 #: ../../data/scripting/editor/editor_introduction.lua:15
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Zoals je kunt zien, is deze editor nog een stevig werk in uitvoering en als de editor beter en beter wordt, zal deze tekst ook langer en completer worden."
 
 #: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "Deze wiki bevat ook een korte handleiding hoe een kaart te maken."
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Grondstoffen"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
 msgid_plural "Valid Resources:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Geldige Grondstof:"
+msgstr[1] "Geldige Grondstoffen:"
 
 #: ../../data/scripting/editor/terrain_help.lua:34
 msgid "Default:"
-msgstr ""
+msgstr "Standaard:"
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:36
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:67
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Kans dat bomen groeien"
 
 #: ../../data/scripting/editor/terrain_help.lua:72
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Hier zullen geen bomen groeien."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
@@ -216,4 +217,4 @@ msgstr ""
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
