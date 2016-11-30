@@ -175,7 +175,8 @@ private:
  * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code) : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
+	explicit ProtocolException(uint8_t code)
+	   : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
 	}
 
 	/// \returns the command number of the received message

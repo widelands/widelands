@@ -60,7 +60,8 @@ public:
 	/// The height of this animation.
 	virtual float height() const = 0;
 
-	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the animation.
+	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
+	/// animation.
 	virtual Rectf source_rectangle(int percent_from_bottom) const = 0;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.
