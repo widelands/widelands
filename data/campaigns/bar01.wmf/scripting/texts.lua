@@ -201,7 +201,7 @@ briefing_msg_04 = {
 
 
 briefing_msg_05 = {
-   title = _"The Story Begins",
+   title = _"Thron is Contemplating the War",
    body = thron(_"Thron is shaking his head…",
       -- TRANSLATORS: Thron
       _([[Yet the war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.]])
@@ -214,7 +214,7 @@ briefing_msg_05 = {
 
 
 briefing_msg_06 = {
-   title = _"The Story Begins",
+   title = _"Thron is Contemplating the War",
    body = thron(
       -- TRANSLATORS: Thron
       _([[Today my hunters brought men, women and little children before me who had hidden out in the forests, trying to escape the war, hate and revenge that rage among the tribes fighting each other like in olden times, when we were no more but wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughter, unless… is this it? As father told me?]])
@@ -226,7 +226,7 @@ briefing_msg_06 = {
 
 
 briefing_msg_07 = {
-   title = _"The Story Begins",
+   title = _"Thron is Considering the Future",
    body = thron(
       -- TRANSLATORS: Thron
       _([[Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long – but I never thought my brothers would engage in this senseless battle for so long either.]])
