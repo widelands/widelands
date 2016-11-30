@@ -107,7 +107,7 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 #ifndef _WIN32
 void terminate(int) {
 	log("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-		 " Update your sound driver and/or SDL to fix this problem\n");
+	    " Update your sound driver and/or SDL to fix this problem\n");
 	raise(SIGKILL);
 #endif
 }
@@ -801,11 +801,12 @@ void WLApplication::shutdown_hardware() {
 	delete g_gr;
 	g_gr = nullptr;
 
-	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
-	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
+// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 #ifndef _WIN32
 	signal(SIGALRM, terminate);
-	// TODO(GunChleoc): alarm is a POSIX function. If we found a Windows equivalent, we could call terminate in Windows as well.
+	// TODO(GunChleoc): alarm is a POSIX function. If we found a Windows equivalent, we could call
+	// terminate in Windows as well.
 	alarm(5);
 #endif
 
