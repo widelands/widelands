@@ -175,17 +175,16 @@ private:
  * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code) {
-		what_ = boost::lexical_cast<std::string>(static_cast<unsigned int>(code)).c_str();
+	explicit ProtocolException(uint8_t code) : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
 	}
 
 	/// \returns the command number of the received message
 	const char* what() const noexcept override {
-		return what_;
+		return what_.c_str();
 	}
 
 private:
-	const char* what_;
+	const std::string what_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H
