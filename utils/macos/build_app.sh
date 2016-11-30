@@ -38,27 +38,10 @@ function MakeDMG {
    hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
 }
 
-function FixDependencies {
-   binary=$1; shift
-
-   echo "Copying dynamic libraries for ${binary} ..."
-
-   DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix icu4c)/lib/"
-   DYLD_FALLBACK_LIBRARY_PATH+=":$(brew --prefix boost)/lib/"
-   export DYLD_FALLBACK_LIBRARY_PATH
-   dylibbundler -b -of \
-      -p '@executable_path/' \
-      -d $DESTINATION/Widelands.app/Contents/MacOS \
-      -x $DESTINATION/Widelands.app/Contents/MacOS/${binary}
-}
-
-function CopyAndFixDependencies {
+function CopyLibrary {
    path=$1; shift
-
    cp $path "$DESTINATION/Widelands.app/Contents/MacOS/"
    chmod 644 "$DESTINATION/Widelands.app/Contents/MacOS/$(basename ${path})"
-
-   FixDependencies "$(basename ${path})"
 }
 
 function MakeAppPackage {
@@ -99,13 +82,26 @@ EOF
    echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
 
-   FixDependencies widelands
+   echo "Copying dynamic libraries for SDL_image ... "
+   CopyLibrary "$(brew --prefix libpng)/lib/libpng.dylib"
+   CopyLibrary "$(brew --prefix jpeg)/lib/libjpeg.dylib"
+
+   echo "Copying dynamic libraries for SDL_mixer ... "
+   CopyLibrary $(brew --prefix libogg)/lib/libogg.dylib
+   CopyLibrary $(brew --prefix libvorbis)/lib/libvorbis.dylib
+   CopyLibrary $(brew --prefix libvorbis)/lib/libvorbisfile.dylib
+
+   $SOURCE_DIR/utils/macos/fix_dependencies.py \
+      $DESTINATION/Widelands.app/Contents/MacOS/widelands \
+      $DESTINATION/Widelands.app/Contents/MacOS/*.dylib
 }
 
 function BuildWidelands() {
    PREFIX_PATH="$(brew --prefix libpng)"
-   PREFIX_PATH=";$(brew --prefix jpeg)"
-   PREFIX_PATH=";$(brew --prefix python)"
+   PREFIX_PATH+=";$(brew --prefix jpeg)"
+   PREFIX_PATH+=";$(brew --prefix libpng)"
+   PREFIX_PATH+=";$(brew --prefix python)"
+   PREFIX_PATH+=";$(brew --prefix zlib)"
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
 
