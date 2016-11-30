@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1626,7 +1626,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 msgctxt "barbarians_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2055,7 +2055,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
 msgctxt "empire_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2556,7 +2556,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-msgid " Start the game with a fortified military installation"
+msgid "Start the game with a fortified military installation"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition

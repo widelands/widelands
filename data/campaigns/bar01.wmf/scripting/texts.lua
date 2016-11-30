@@ -63,7 +63,7 @@ obj_basic_food = {
    name = "basic food began",
    title = _"Provide your miners with food",
    number = 3,
-   body = objective_text(_"Build a hunter, a gamekeeper and a tavern",
+   body = objective_text(_"Build a hunter’s hut, a gamekeeper’s hut and a tavern",
       listitem_bullet(_"In order to work, your miners need food.") ..
       listitem_arrow(_"A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.") .. " " ..
       _([[This is only the first example of a ware which has to be refined before being used in a secondary building – others will follow.]]))
