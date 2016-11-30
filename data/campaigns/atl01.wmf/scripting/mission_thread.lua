@@ -18,6 +18,12 @@ function intro()
 end
 
 function build_warehouse_and_horsefarm()
+   -- Make sure that we can feed the horses at all.
+   while not check_for_buildings(p1, {
+      atlanteans_farm = 1,
+      atlanteans_well = 1,
+   }) do sleep(2500) end
+
    -- Sleeps until one of the given fields is owned by p1.
    local function wait_for_owns_a_field(fields)
       local fowned = nil
