@@ -96,12 +96,12 @@ end
 --    :arg sleeptime: The milliseconds to sleep. Defaults to 3000.
 --
 function set_objective_done(objective, sleeptime)
-   objective.done = true
    if not sleeptime then
       sleep(3000)
    else
       sleep(sleeptime)
    end
+   objective.done = true
 end
 
 
