@@ -106,7 +106,7 @@ void EditorToolPlaceBobOptionsMenu::clicked(int32_t const n, bool const t) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
 	//  TODO(unknown): usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
 	if (!t && (!multiselect || pit_.get_nr_enabled() == 1)) {
 		checkboxes_[n]->set_state(true);
 		return;

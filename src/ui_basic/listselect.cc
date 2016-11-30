@@ -51,12 +51,13 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t y,
                                const uint32_t w,
                                const uint32_t h,
+                               const Image* button_background,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(
         UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
         kMargin),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
@@ -66,12 +67,9 @@ BaseListselect::BaseListselect(Panel* const parent,
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
-	scrollbar_.set_singlestepsize(lineheight_);
-	scrollbar_.set_pagesize(h - 2 * lineheight_);
-	scrollbar_.set_steps(1);
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		uint32_t pic_h;
+		int pic_h;
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		pic_h = check_pic_->height();
@@ -81,6 +79,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 		max_pic_width_ = 0;
 	}
 	set_can_focus(true);
+	layout();
 }
 
 /**
@@ -125,10 +124,10 @@ void BaseListselect::add(const std::string& name,
 	er->use_clr = false;
 	er->name = name;
 	er->tooltip = tooltip_text;
-	uint32_t entry_height = lineheight_;
+	int entry_height = lineheight_;
 	if (pic) {
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
+		int w = pic->width();
+		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
 		if (max_pic_width_ < w)
 			max_pic_width_ = w;
@@ -139,7 +138,7 @@ void BaseListselect::add(const std::string& name,
 
 	entry_records_.push_back(er);
 
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	layout();
 
 	if (sel)
 		select(entry_records_.size() - 1);
@@ -161,10 +160,10 @@ void BaseListselect::add_front(const std::string& name,
 	er->name = name;
 	er->tooltip = tooltip_text;
 
-	uint32_t entry_height = lineheight_;
+	int entry_height = lineheight_;
 	if (pic) {
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
+		int w = pic->width();
+		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
 		if (max_pic_width_ < w)
 			max_pic_width_ = w;
@@ -175,7 +174,7 @@ void BaseListselect::add_front(const std::string& name,
 
 	entry_records_.push_front(er);
 
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	layout();
 
 	if (sel)
 		select(0);
@@ -307,7 +306,7 @@ const std::string& BaseListselect::get_selected_tooltip() const {
 	return entry_records_[selection_]->tooltip;
 }
 
-uint32_t BaseListselect::get_lineheight() const {
+int BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }
 
@@ -318,7 +317,11 @@ uint32_t BaseListselect::get_eff_w() const {
 void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
-	scrollbar_.set_steps(entry_records_.size() * get_lineheight() - get_h());
+	const int steps = entry_records_.size() * get_lineheight() - get_h();
+	scrollbar_.set_steps(steps);
+	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
+		scrollbar_.set_steps(steps + kMargin);
+	}
 }
 
 /**
@@ -327,7 +330,7 @@ Redraw the listselect box
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	const int eff_h =
-	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - 4 : get_inner_h();
+	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - kMargin : get_inner_h();
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
@@ -346,20 +349,23 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.fill_rect(Rectf(get_w() - 2.f, 1.f, 1.f, get_h() - 1.f), black);
 		dst.fill_rect(Rectf(get_w() - 1.f, 0.f, 1.f, get_h()), black);
 	} else {
-		dst.brighten_rect(Rectf(0.f, 0.f, get_w(), get_h()), ms_darken_value);
+		dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
 	}
 
-	int lineheight = lineheight_;
 	while (idx < entry_records_.size()) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
+
+		const EntryRecord& er = *entry_records_[idx];
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(
+		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
+
+		int lineheight = std::max(get_lineheight(), entry_text_im->height());
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
 		if (lineheight < 0) {
 			break;
 		}
-
-		const EntryRecord& er = *entry_records_[idx];
 
 		Vector2f point(selection_mode_ == ListselectLayout::kDropdown ? 3.f : 1.f, y);
 		uint32_t maxw =
@@ -384,17 +390,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 			}
 		}
 
-		uint32_t picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+		int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2f(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			                  y + (lineheight_ - er.pic->height()) / 2),
+			                  y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}
-
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(
-		   richtext_escape(er.name), UI_FONT_SIZE_SMALL, er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
 		Align alignment =
 		   i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
@@ -410,7 +413,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (lineheight_ > static_cast<uint32_t>(entry_text_im->height())) {
+		if (get_lineheight() > entry_text_im->height()) {
 			point.y += (lineheight_ - entry_text_im->height()) / 2;
 		} else {
 			point.y -= (entry_text_im->height() - lineheight_) / 2;

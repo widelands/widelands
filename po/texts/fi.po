@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-13 19:32+0000\n"
+"POT-Creation-Date: 2016-11-20 09:44+0000\n"
+"PO-Revision-Date: 2016-11-20 19:35+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -210,8 +210,8 @@ msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Päällikkö"
+msgid "Chieftains"
+msgstr "Päälliköt"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
