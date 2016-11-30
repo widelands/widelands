@@ -292,8 +292,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
 	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
 	// What if the game runs very slowly or very quickly?
 	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(
-	   dst, scale, anim, time, nullptr, Recti(Vector2i(0, 0), anim.width(), anim.height()));
+	do_blit_animation(dst, scale, anim, time, nullptr);
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
@@ -302,8 +301,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   uint32_t time,
                                   const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(
-	   dst, scale, anim, time, &player_color, Recti(Vector2i(0, 0), anim.width(), anim.height()));
+	do_blit_animation(dst, scale, anim, time, &player_color);
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
@@ -311,9 +309,9 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   uint32_t animation,
                                   uint32_t time,
                                   const RGBColor& player_color,
-                                  const Recti& source_rect) {
-	do_blit_animation(
-	   dst, scale, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
+                                  const int percent_from_bottom) {
+	do_blit_animation(dst, scale, g_gr->animations().get_animation(animation), time, &player_color,
+	                  percent_from_bottom);
 }
 
 void RenderTarget::do_blit_animation(const Vector2f& dst,
@@ -321,13 +319,16 @@ void RenderTarget::do_blit_animation(const Vector2f& dst,
                                      const Animation& animation,
                                      uint32_t time,
                                      const RGBColor* player_color,
-                                     const Recti& source_rect_i) {
-	Rectf source_rect = source_rect_i.cast<float>();
-	Rectf destination_rect(dst.x - (animation.hotspot().x - source_rect.x) * scale,
-	                       dst.y - (animation.hotspot().y - source_rect.y) * scale,
-	                       source_rect.w * scale, source_rect.h * scale);
-	if (to_surface_geometry(&destination_rect, &source_rect)) {
-		animation.blit(time, destination_rect, source_rect, player_color, surface_);
+                                     const int percent_from_bottom) {
+
+	assert(percent_from_bottom <= 100);
+	if (percent_from_bottom > 0) {
+		// Scaling for zoom and animation image size, then fit screen edges.
+		Rectf srcrc = animation.source_rectangle(percent_from_bottom);
+		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
+		if (to_surface_geometry(&dstrc, &srcrc)) {
+			animation.blit(time, srcrc, dstrc, player_color, surface_);
+		}
 	}
 
 	// Look if there is a sound effect registered for this frame and trigger the

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"POT-Creation-Date: 2016-11-26 07:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -193,88 +193,90 @@ msgstr ""
 msgid "Loading tribes"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:102
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66 ../../src/wui/interactive_player.cc:79
-#: ../../src/wui/interactive_spectator.cc:54
+#: ../../src/wui/game_options_menu.cc:66 ../../src/wui/interactive_player.cc:69
+#: ../../src/wui/interactive_spectator.cc:48
 msgid "Main Menu"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:104
+#: ../../src/editor/editorinteractive.cc:103
 #: ../../src/editor/ui_menus/tool_menu.cc:45
 msgid "Tools"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:106
+#: ../../src/editor/editorinteractive.cc:107
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:108
-#: ../../src/wui/interactive_player.cc:83
-#: ../../src/wui/interactive_spectator.cc:56
-msgid "Minimap"
-msgstr ""
-
 #: ../../src/editor/editorinteractive.cc:111
-#: ../../src/wui/interactive_gamebase.cc:65
-msgid "Show Building Spaces (on/off)"
-msgstr ""
-
-#: ../../src/editor/editorinteractive.cc:113
-#: ../../src/wui/interactive_gamebase.cc:66
-msgid "Reset zoom"
-msgstr ""
-
-#: ../../src/editor/editorinteractive.cc:115
 #: ../../src/ui_fsmenu/launch_mpg.cc:172
 msgid "Players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:116
+#: ../../src/editor/editorinteractive.cc:120
+#: ../../src/wui/interactive_player.cc:81
+#: ../../src/wui/interactive_spectator.cc:71
+msgid "Minimap"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:124
+#: ../../src/wui/interactive_player.cc:85
+#: ../../src/wui/interactive_spectator.cc:75
+msgid "Show Building Spaces (on/off)"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:127
+#: ../../src/wui/interactive_player.cc:87
+#: ../../src/wui/interactive_spectator.cc:78
+msgid "Reset zoom"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:133
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:117
+#: ../../src/editor/editorinteractive.cc:136
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:118
+#: ../../src/editor/editorinteractive.cc:141
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:201
+#: ../../src/editor/editorinteractive.cc:199
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:202
+#: ../../src/editor/editorinteractive.cc:200
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:215 ../../src/logic/game.cc:217
+#: ../../src/editor/editorinteractive.cc:213 ../../src/logic/game.cc:217
 #: ../../src/logic/game.cc:270
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:265
+#: ../../src/editor/editorinteractive.cc:263
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:266
+#: ../../src/editor/editorinteractive.cc:264
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:583
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:586
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:535
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -282,7 +284,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:624
+#: ../../src/editor/editorinteractive.cc:589
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 #: ../../src/logic/map.h:180
@@ -290,7 +292,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:631
+#: ../../src/editor/editorinteractive.cc:596
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -990,7 +992,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:504
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -3011,7 +3013,7 @@ msgid "Send more soldiers"
 msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:67
-#: ../../src/wui/game_main_menu.cc:65
+#: ../../src/wui/game_statistics_menu.cc:44
 msgid "Building Statistics"
 msgstr ""
 
@@ -3228,8 +3230,8 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:78
-#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:92
+#: ../../src/wui/interactive_spectator.cc:85
 msgid "Chat"
 msgstr ""
 
@@ -3242,28 +3244,10 @@ msgstr ""
 msgid "Debug Field"
 msgstr ""
 
-#: ../../src/wui/game_main_menu.cc:36
-msgid "Statistics Menu"
-msgstr ""
-
-#: ../../src/wui/game_main_menu.cc:47
-#: ../../src/wui/general_statistics_menu.cc:51
-msgid "General Statistics"
-msgstr ""
-
-#: ../../src/wui/game_main_menu.cc:56 ../../src/wui/ware_statistics_menu.cc:106
-msgid "Ware Statistics"
-msgstr ""
-
-#: ../../src/wui/game_main_menu.cc:74 ../../src/wui/stock_menu.cc:36
-#: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
-msgid "Stock"
-msgstr ""
-
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:61
 #: ../../src/wui/game_options_menu.cc:89
-#: ../../src/wui/interactive_spectator.cc:53
+#: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr ""
 
@@ -3444,7 +3428,7 @@ msgid "Show Inbox"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:82
+#: ../../src/wui/interactive_player.cc:102
 msgid "Objectives"
 msgstr ""
 
@@ -3478,6 +3462,25 @@ msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:50
 msgid "Sound Effects Volume"
+msgstr ""
+
+#: ../../src/wui/game_statistics_menu.cc:36
+msgid "Statistics Menu"
+msgstr ""
+
+#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/general_statistics_menu.cc:51
+msgid "General Statistics"
+msgstr ""
+
+#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/ware_statistics_menu.cc:106
+msgid "Ware Statistics"
+msgstr ""
+
+#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/ware_statistics_menu.cc:148 ../../src/wui/waresdisplay.cc:68
+msgid "Stock"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:43
@@ -3599,33 +3602,33 @@ msgid "PAUSE"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:108
+#: ../../src/wui/interactive_gamebase.cc:94
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:81
-#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/interactive_player.cc:73
+#: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:85
-#: ../../src/wui/interactive_player.cc:202
+#: ../../src/wui/interactive_player.cc:106
+#: ../../src/wui/interactive_player.cc:156
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:86
+#: ../../src/wui/interactive_player.cc:109
 msgid "Tribal Encyclopedia"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/interactive_player.cc:161
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/wui/interactive_spectator.cc:52
+#: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
 msgstr ""
 
