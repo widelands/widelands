@@ -88,7 +88,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-		  _("Low Productivity"),
+        _("Low Productivity"),
         UI::Align::kBottomLeft),
      unproductive_percent_(
         &unproductive_box_,
