@@ -5,14 +5,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Nora Ghaoui, 2016
 # Rick van der Zwet <info@rickvanderzwet.nl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-15 06:27+0000\n"
-"PO-Revision-Date: 2016-11-15 06:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"PO-Revision-Date: 2016-11-28 22:56+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +210,7 @@ msgstr "Campagneverhaal"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "Stamhoofden"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
