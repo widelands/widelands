@@ -43,6 +43,9 @@ function FixDependencies {
 
    echo "Copying dynamic libraries for ${binary} ..."
 
+   DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix icu4c)/lib/"
+   DYLD_FALLBACK_LIBRARY_PATH+=":$(brew --prefix boost)/lib/"
+   export DYLD_FALLBACK_LIBRARY_PATH
    dylibbundler -b -of \
       -p '@executable_path/' \
       -d $DESTINATION/Widelands.app/Contents/MacOS \
@@ -97,28 +100,34 @@ EOF
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
 
    FixDependencies widelands
-
-   echo "Copying dynamic libraries for SDL_image ... "
-   pushd $DESTINATION/Widelands.app/Contents/MacOS/
-   ln -s libpng*.dylib libpng.dylib
-   popd
-   CopyAndFixDependencies "/usr/local/lib/libjpeg.dylib"
-
-   echo "Copying dynamic libraries for SDL_mixer ... "
-   CopyAndFixDependencies /usr/local/lib/libogg.dylib
-   CopyAndFixDependencies /usr/local/lib/libvorbis.dylib
-   CopyAndFixDependencies /usr/local/lib/libvorbisfile.dylib
 }
 
 function BuildWidelands() {
+   PREFIX_PATH="$(brew --prefix libpng)"
+   PREFIX_PATH=";$(brew --prefix jpeg)"
+   PREFIX_PATH=";$(brew --prefix python)"
+   PREFIX_PATH+=";/usr/local"
+   PREFIX_PATH+=";/usr/local/Homebrew"
+
+   export SDL2DIR="$(brew --prefix sdl2)"
+   export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
+   export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
+   export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
+   export SDL2NETDIR="$(brew --prefix sdl2_net)"
+   export BOOST_ROOT="$(brew --prefix boost)"
+   export ICU_ROOT="$(brew --prefix icu4c)"
+
    cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(cd $(dirname $0); pwd)/compiler_wrapper.sh" \
+      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/gcc-6" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/g++-6" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="10.7" \
       -DCMAKE_OSX_SYSROOT:PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
-      -DCMAKE_PREFIX_PATH:PATH="/usr/local"
+      -DGLEW_INCLUDE_DIR:PATH="$(brew --prefix glew)/include" \
+      -DGLEW_LIBRARY:PATH="$(brew --prefix glew)/lib/libGLEW.dylib" \
+      -DCMAKE_PREFIX_PATH:PATH="${PREFIX_PATH}"
    ninja
 
    echo "Done building."

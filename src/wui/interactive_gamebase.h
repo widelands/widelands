@@ -49,7 +49,6 @@ public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
-	                    bool chatenabled = false,
 	                    bool multiplayer = false);
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
@@ -86,14 +85,12 @@ protected:
 
 	GameMainMenuWindows main_windows_;
 	ChatProvider* chat_provider_;
-	bool chatenabled_;
 	bool multiplayer_;
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
-
-	UI::Button toggle_buildhelp_;
-	UI::Button reset_zoom_;
+	UI::Button* toggle_buildhelp_;
+	UI::Button* reset_zoom_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;
