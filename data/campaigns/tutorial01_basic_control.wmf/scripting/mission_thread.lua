@@ -67,7 +67,7 @@ function build_lumberjack()
 
    blocker:lift_blocks()
 
-   sleep(15000)
+   sleep(30000)
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
@@ -378,7 +378,7 @@ function expansion()
 end
 
 function conclusion()
-   sleep(10000) -- to give the player time to see his expanded area
+   sleep(5000) -- to give the player time to see his expanded area
 
    -- Conclude the tutorial with final words and information
    -- on how to quit
