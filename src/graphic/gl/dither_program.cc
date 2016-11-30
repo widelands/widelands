@@ -81,6 +81,8 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 0.;
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 

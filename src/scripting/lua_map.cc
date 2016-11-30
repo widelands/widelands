@@ -1511,6 +1511,8 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -4476,6 +4478,8 @@ int LuaShip::get_state(lua_State* L) {
 			break;
 		case Ship::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -4506,6 +4510,8 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			break;
 		case WalkingDir::IDLE:
 			return 0;
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -4557,6 +4563,7 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			lua_pushstring(L, "cw");
 			break;
 		case IslandExploreDirection::kNotSet:
+		default:
 			return 0;
 		}
 		return 1;

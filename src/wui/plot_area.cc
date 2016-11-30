@@ -150,8 +150,9 @@ uint32_t ms_to_unit(Units unit, uint32_t ms) {
 	case Units::kMinutesGeneric:
 	case Units::kMinutesNarrow:
 		return ms / kMinutes;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 /**

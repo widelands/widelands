@@ -98,6 +98,7 @@ bool MapData::compare_names(const MapData& other) {
 		break;
 
 	case MapData::DisplayType::kMapnamesLocalized:
+	default:
 		this_name = localized_name;
 		other_name = other.localized_name;
 		break;

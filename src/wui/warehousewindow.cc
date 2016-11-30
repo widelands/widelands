@@ -88,6 +88,7 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 		pic = g_gr->images().get(pic_policy_remove);
 		break;
 	case Warehouse::SP_Normal:
+	default:
 		// don't draw anything for the normal policy
 		return;
 	}

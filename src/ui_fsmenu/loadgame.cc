@@ -585,6 +585,8 @@ void FullscreenMenuLoadGame::fill_table() {
 				case GameController::GameType::REPLAY:
 					gametypestring = "";
 					break;
+				default:
+					NEVER_HERE();
 				}
 				te.set_string(1, gametypestring);
 				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname));

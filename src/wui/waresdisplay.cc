@@ -267,8 +267,9 @@ const Widelands::TribeDescr::WaresOrder& AbstractWaresDisplay::icons_order() con
 		return tribe_.wares_order();
 	case Widelands::wwWORKER:
 		return tribe_.workers_order();
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {
@@ -277,8 +278,9 @@ const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order
 		return tribe_.wares_order_coords();
 	case Widelands::wwWORKER:
 		return tribe_.workers_order_coords();
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {

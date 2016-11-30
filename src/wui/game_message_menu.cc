@@ -473,6 +473,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		toggle_filter_messages_button(*scenariobtn_, msgtype);
 		break;
 
+		/* NOCOM
 	case Widelands::Message::Type::kNoMessages:
 	case Widelands::Message::Type::kAllMessages:
 	case Widelands::Message::Type::kGameLogic:
@@ -485,6 +486,8 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
+	*/
+	default:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -579,8 +582,9 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message messag
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
 		return "images/wui/messages/message_new.png";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void GameMessageMenu::toggle_mode() {
@@ -610,5 +614,7 @@ void GameMessageMenu::toggle_mode() {
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }

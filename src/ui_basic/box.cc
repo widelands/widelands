@@ -322,6 +322,8 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 		*depth = it.u.space;
 		*breadth = 0;
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -397,6 +399,8 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
+	default:
+		NEVER_HERE();
 	};
 }
 }

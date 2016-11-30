@@ -110,8 +110,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 	case QueueCommandTypes::kReplaySyncRead:
 	case QueueCommandTypes::kReplayEnd:
 	case QueueCommandTypes::kNone:
+	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", static_cast<unsigned int>(id));
 	}
-	NEVER_HERE();
 }
 }

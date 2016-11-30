@@ -280,6 +280,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		pop_task(game);
 		remove(game);
 		return;
+	default:
+		NEVER_HERE();
 	}
 
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
@@ -693,8 +695,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
 	}
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void Ship::set_economy(Game& game, Economy* e) {
@@ -974,6 +977,7 @@ void Ship::draw(const EditorGameBase& egbase,
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
+		default:
 			break;
 		}
 		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %

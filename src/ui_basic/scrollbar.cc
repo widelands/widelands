@@ -226,6 +226,7 @@ void Scrollbar::action(Area const area) {
 		break;
 	case Knob:
 	case None:
+	default:
 		return;
 	}
 

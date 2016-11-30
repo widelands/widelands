@@ -197,6 +197,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				newstate = PlayerSettings::stateClosed;
 			break;
 		}
+		default:
+			NEVER_HERE();
 		}
 
 		host_->set_player_state(number, newstate, true);

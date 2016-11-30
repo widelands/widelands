@@ -95,6 +95,8 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 		descname = _("unwalkable");
 		icon = g_gr->images().get("images/wui/editor/terrain_unwalkable.png");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 

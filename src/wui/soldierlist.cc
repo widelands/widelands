@@ -445,6 +445,7 @@ void SoldierList::think() {
 			soldier_preference_.set_state(1);
 			break;
 		case Widelands::MilitarySite::kNoPreference:
+		default:
 			soldier_preference_.set_state(-1);
 			break;
 		}

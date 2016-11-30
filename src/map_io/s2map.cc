@@ -219,8 +219,9 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 		return "blackland";
 	case S2MapLoader::WINTERLAND:
 		return "winterland";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 /// Returns S2 terrain index into (pre one-world) terrain names. Those are then
