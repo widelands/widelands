@@ -261,7 +261,7 @@ order_msg_2_build_a_tower = {
    title = _"Tracks",
    body = boldreth(_"Boldreth says:",
       -- TRANSLATORS: Boldreth
-      _([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower,  to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
+      _([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower, to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
       .. new_objectives(obj_build_a_tower)
 }
 

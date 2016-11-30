@@ -19,7 +19,7 @@ text=_"Holding down Alt switches the second alternative tool on (if it exists)."
 sec=6
 
 [Tip 6]
-text=_"The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse cursor."
+text=_"The number keys (0 - 9) allow you to directly set the size of the selected area around your mouse cursor."
 sec=6
 
 [Tip 7]
