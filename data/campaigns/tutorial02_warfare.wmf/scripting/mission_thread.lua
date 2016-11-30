@@ -9,6 +9,9 @@ function intro()
    training()
 end
 
+local trainingcamp_done = false
+local battlearena_done = false
+
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
    sleep(2*60*1000)
@@ -16,6 +19,7 @@ function training2()
    while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
    set_objective_done(o)
    message_box_objective(plr, trainingcamp2)
+   trainingcamp_done = true
 end
 
 function training()
@@ -29,13 +33,11 @@ function training()
    while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
    set_objective_done(o, 0)
    message_box_objective(plr, battlearena2)
+   battlearena_done = true
 end
 
 function military_buildings()
-   while #plr:get_buildings("barbarians_battlearena") == 0 or
-      #plr:get_buildings("barbarians_trainingcamp") == 0
-      do sleep(500)
-   end
+   while not trainingcamp_done or not battlearena_done do sleep(3000) end
    message_box_objective(plr, heroes_rookies)
    message_box_objective(plr, soldier_capacity)
    local o = message_box_objective(plr, dismantle)
