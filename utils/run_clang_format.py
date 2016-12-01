@@ -32,7 +32,6 @@ def main():
 
     sys.stdout.write('Running clang-format ')
     for filename in find_cplusplus_files():
-        # print "Formatting %r" % filename
         sys.stdout.write('.')
         sys.stdout.flush()
         call(['clang-format-3.8', '-i', filename])
