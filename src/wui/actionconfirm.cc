@@ -127,18 +127,24 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              Widelands::MapObject& map_object)
    : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
      object_(&map_object) {
-	new UI::MultilineTextarea(this, 0, 0, 200, 74, message, UI::Align::kCenter);
+	// NOCOM(Gunchleoc): Box layout while we're at it.
+	UI::MultilineTextarea* textarea =
+	   new UI::MultilineTextarea(this, 0, 6, 200, 74, message, UI::Align::kCenter,
+	                             g_gr->images().get("images/ui_basic/but1.png"),
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-	UI::Button* okbtn = new UI::Button(this, "ok", UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80,
-	                                   34, g_gr->images().get("images/ui_basic/but4.png"),
+	UI::Button* okbtn = new UI::Button(this, "ok", UI::g_fh1->fontset()->is_rtl() ? 6 : 114,
+	                                   textarea->get_y() + textarea->get_h() + 20, 80, 34,
+	                                   g_gr->images().get("images/ui_basic/but4.png"),
 	                                   g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
-	UI::Button* cancelbtn =
-	   new UI::Button(this, "abort", UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
-	                  g_gr->images().get("images/ui_basic/but4.png"),
-	                  g_gr->images().get("images/wui/menu_abort.png"));
+	UI::Button* cancelbtn = new UI::Button(this, "abort", UI::g_fh1->fontset()->is_rtl() ? 114 : 6,
+	                                       textarea->get_y() + textarea->get_h() + 20, 80, 34,
+	                                       g_gr->images().get("images/ui_basic/but4.png"),
+	                                       g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
+	set_inner_size(get_inner_w(), cancelbtn->get_y() + cancelbtn->get_h() + 6);
 
 	center_to_parent();
 	cancelbtn->center_mouse();
@@ -152,12 +158,10 @@ Create the panels for bulldoze confirmation.
 BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
                                  Widelands::Building& building,
                                  Widelands::PlayerImmovable* todestroy)
-   : ActionConfirm(
-        parent,
-        _("Destroy building?"),
-        (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname())
-           .str(),
-        building),
+   : ActionConfirm(parent,
+                   _("Destroy building?"),
+                   _("Do you really want to destroy this building?"),
+                   building),
      todestroy_(todestroy ? todestroy : &building) {
 	// Nothing special to do
 }
@@ -199,12 +203,10 @@ Create the panels for dismantle confirmation.
 ===============
 */
 DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Building& building)
-   : ActionConfirm(
-        parent,
-        _("Dismantle building?"),
-        (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname())
-           .str(),
-        building) {
+   : ActionConfirm(parent,
+                   _("Dismantle building?"),
+                   _("Do you really want to dismantle this building?"),
+                   building) {
 	// Nothing special to do
 }
 
@@ -249,8 +251,12 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
    : ActionConfirm(
         parent,
         _("Enhance building?"),
-        (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname())
-           .str(),
+        building.descr().type() == Widelands::MapObjectType::MILITARYSITE ?
+           (boost::format("%s\n\n%s") % _("Do you really want to enhance this building?") %
+            /** TRANSLATORS: Warning message when player wants to enhance a military building */
+            _("Be careful if the enemy is near!"))
+              .str() :
+           _("Do you really want to enhance this building?"),
         building),
      id_(id) {
 	// Nothing special to do
