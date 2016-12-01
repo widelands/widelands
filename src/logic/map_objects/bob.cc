@@ -733,6 +733,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		break;
 
 	case IDLE:
+	default:
 		start.field = nullptr;
 		break;
 	}

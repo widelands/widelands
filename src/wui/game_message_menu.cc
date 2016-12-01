@@ -438,6 +438,8 @@ void GameMessageMenu::archive_or_restore() {
 			   gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -472,21 +474,6 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kScenario:
 		toggle_filter_messages_button(*scenariobtn_, msgtype);
 		break;
-
-		/* NOCOM
-	case Widelands::Message::Type::kNoMessages:
-	case Widelands::Message::Type::kAllMessages:
-	case Widelands::Message::Type::kGameLogic:
-	case Widelands::Message::Type::kGeologistsCoal:
-	case Widelands::Message::Type::kGeologistsGold:
-	case Widelands::Message::Type::kGeologistsStones:
-	case Widelands::Message::Type::kGeologistsIron:
-	case Widelands::Message::Type::kGeologistsWater:
-	case Widelands::Message::Type::kEconomySiteOccupied:
-	case Widelands::Message::Type::kWarfareSiteDefeated:
-	case Widelands::Message::Type::kWarfareSiteLost:
-	case Widelands::Message::Type::kWarfareUnderAttack:
-	*/
 	default:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;

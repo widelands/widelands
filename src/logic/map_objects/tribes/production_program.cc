@@ -614,6 +614,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, 10);
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
