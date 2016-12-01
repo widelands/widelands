@@ -452,8 +452,8 @@ void Warehouse::init_containers(Player& player) {
 	supply_->set_nrwares(nr_wares);
 	supply_->set_nrworkers(nr_workers);
 
-	ware_policy_.resize(nr_wares, SP_Normal);
-	worker_policy_.resize(nr_workers, SP_Normal);
+	ware_policy_.resize(nr_wares, StockPolicy::kNormal);
+	worker_policy_.resize(nr_workers, StockPolicy::kNormal);
 
 	uint8_t nr_worker_types_without_cost = player.tribe().worker_types_without_cost().size();
 	next_worker_without_cost_spawn_.resize(nr_worker_types_without_cost, never());
@@ -1237,14 +1237,14 @@ void Warehouse::set_worker_policy(DescriptionIndex ware, Warehouse::StockPolicy 
 }
 
 /**
- * Check if there are remaining wares with stock policy \ref SP_Remove,
+ * Check if there are remaining wares with \ref Warehouse::StockPolicy::kRemove,
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
-			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
+			if (get_ware_policy(ware) != Warehouse::StockPolicy::kRemove || !get_wares().stock(ware))
 				continue;
 
 			launch_ware(game, ware);
@@ -1254,7 +1254,7 @@ void Warehouse::check_remove_stock(Game& game) {
 
 	for (DescriptionIndex widx = 0; widx < static_cast<DescriptionIndex>(worker_policy_.size());
 	     ++widx) {
-		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
+		if (get_worker_policy(widx) != Warehouse::StockPolicy::kRemove || !get_workers().stock(widx))
 			continue;
 
 		Worker& worker = launch_worker(game, widx, Requirements());
