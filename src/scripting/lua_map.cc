@@ -1511,6 +1511,7 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
+		break;
 	default:
 		NEVER_HERE();
 	}
