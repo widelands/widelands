@@ -20,6 +20,9 @@ widelands (1:19+repack-1widelands1) UNRELEASED; urgency=medium
     - Re-added font entries to copyright file, since we will most likely be using
       the embedded fonts.
     - Modified rules to use our embedded fonts and install all binaries.
+    - Comment out get-orig-source. We just want to build current trunk
+    - Try to install appdata file in regular package instead of the -data one.
+      Though neither seem to work :(
 
  -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 20 Nov 2016 11:03:07 +0100
 
