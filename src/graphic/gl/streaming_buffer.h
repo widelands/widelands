@@ -83,7 +83,7 @@ public:
 
 		// Append space for count items, return a pointer to the first one.
 		T* add(size_t count) {
-			assert(count < max_ && count_ <= max_ - count);
+			assert(count <= max_ && count_ <= max_ - count);
 			T* ret = &map_[count_];
 			count_ += count;
 			return ret;
