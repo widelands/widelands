@@ -871,20 +871,26 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Initialise the max duration of a single ship's expedition
-// NOCOM(#codereview): I have no idea what ar1 and rt1 could mean. Can you come up with more descriptive variable names?
+	// NOCOM(#codereview): I have no idea what ar1 and rt1 could mean. Can you come up with more
+	// descriptive variable names?
 	uint32_t ar1 = uint32_t(map.get_height()) * map.get_width();
 	uint32_t rt1 = round(sqrt(ar1));
-// NOCOM(#codereview): FYI - never use printf, always sprintf. We have a handy logging function in base/log.h though.
+	// NOCOM(#codereview): FYI - never use printf, always sprintf. We have a handy logging function
+	// in base/log.h though.
 	log("--- EXPEDITION MAP AREA ROOT == %u\n", rt1);
 	int scope = 320 - 64;
 	int off = rt1 - 64;
-	if (off < 0) off = 0;
-	if (off > scope) off = scope;
-	expedition_max_duration = kExpeditionMinDuration +
-			static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
-	log("--- EXPEDITION MAX DURATION == %u\n", expedition_max_duration/1000);
-// NOCOM(#codereview): We can drop the second condition, it is alreday met by the first condition (kExpeditionMinDuration is > 0)
-// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
+	if (off < 0)
+		off = 0;
+	if (off > scope)
+		off = scope;
+	expedition_max_duration =
+	   kExpeditionMinDuration +
+	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
+	log("--- EXPEDITION MAX DURATION == %u\n", expedition_max_duration / 1000);
+	// NOCOM(#codereview): We can drop the second condition, it is alreday met by the first condition
+	// (kExpeditionMinDuration is > 0)
+	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
 	assert(expedition_max_duration >= kExpeditionMinDuration && expedition_max_duration > 0);
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
@@ -3487,7 +3493,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	return false;
 }
-
 
 /**
  * checks the first mine in list, takes care if it runs out of

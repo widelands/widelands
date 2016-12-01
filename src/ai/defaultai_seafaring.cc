@@ -225,10 +225,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
-// NOCOM(#codereview): I like the renaming. We don't seem to be doing any iterator manipulation (e.g. erase) here, so a range-based for-loop
-// would be easier to read. We were still using C++98 when this loop was first written, so it would benefit from
-// some refactoring.
-// for (const ShipObserver& so : allships) {
+		// NOCOM(#codereview): I like the renaming. We don't seem to be doing any iterator
+		// manipulation (e.g. erase) here, so a range-based for-loop
+		// would be easier to read. We were still using C++98 when this loop was first written, so it
+		// would benefit from
+		// some refactoring.
+		// for (const ShipObserver& so : allships) {
 		for (std::list<ShipObserver>::iterator so = allships.begin(); so != allships.end(); ++so) {
 
 			const Widelands::Ship::ShipStates ship_state = so->ship->get_ship_state();
@@ -255,7 +257,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 			// only two states need an attention
 			if ((so->ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-			     so->ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
+			     so->ship->get_ship_state() ==
+			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
 			    !so->waiting_for_command_) {
 				if (gametime - so->last_command_time > 180 * 1000) {
 					so->waiting_for_command_ = true;
@@ -327,7 +330,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 /**
  * This is part of check_ships() function separated for readability
  */
- void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
+void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
 	uint32_t expedition_time = gametime - persistent_data->expedition_start_time;
@@ -338,18 +341,19 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		persistent_data->expedition_start_time = gametime;
 		expedition_ship_ = so.ship->serial();
 
-	// Expedition is overdue, setting no_more_expeditions = true
-	// Also we attempt to cancel expedition (the code for cancellation may not work properly)
-// NOCOM(#codereview): Always add your own nick to new TODO comments. This way, if anybody else wants to work on it
-// in the future, they can ask you if you still remember what it was about if they need to.
-	// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
+		// Expedition is overdue, setting no_more_expeditions = true
+		// Also we attempt to cancel expedition (the code for cancellation may not work properly)
+		// NOCOM(#codereview): Always add your own nick to new TODO comments. This way, if anybody
+		// else wants to work on it
+		// in the future, they can ask you if you still remember what it was about if they need to.
+		// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
 		assert(persistent_data->expedition_start_time > 0);
 		persistent_data->colony_scan_area = kColonyScanMinArea;
 		persistent_data->no_more_expeditions = kTrue;
 		game().send_player_cancel_expedition_ship(*so.ship);
 
-	// For known and running expedition
+		// For known and running expedition
 	} else {
 		// decrease persistent_data->colony_scan_area based on elapsed time
 		assert(persistent_data->expedition_start_time > kNoExpedition);
@@ -395,10 +399,9 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	}
 }
 
-Widelands::IslandExploreDirection DefaultAI::randomExploreDirection () {
-	return game().logic_rand() % 20 < 10 ?
-	     Widelands::IslandExploreDirection::kClockwise :
-	     Widelands::IslandExploreDirection::kCounterClockwise;
+Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
+	return game().logic_rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :
+	                                       Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -435,7 +438,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	}
 
 	// 2. Go on with expedition
-    // we were not here before
+	// we were not here before
 	// OR we might randomly repeat island exploration
 	if (first_time_here || game().logic_rand() % 100 < repeat_island_prob) {
 		if (first_time_here) {
@@ -457,8 +460,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// send the ship to circle island
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 
-
-    // we head for open sea again
+		// we head for open sea again
 	} else {
 		// determine swimmable directions
 		std::vector<Direction> possible_directions;
@@ -481,14 +483,15 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we test if there is open sea
 		if (possible_directions.empty()) {
 			// 2.A No there is no open sea
-			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and wait-state'
+			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and
+			// wait-state'
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			log("EXPLORE- jamming spot, cont CIRCLE, dir=%u\n", so.island_circ_direction);
 
 		} else {
 			// 2.B Yes, pick one of available directions
 			const Direction direction =
-			      possible_directions.at(game().logic_rand() % possible_directions.size());
+			   possible_directions.at(game().logic_rand() % possible_directions.size());
 			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
 			log("EXPLORE- break free FOR SEA, dir=%u\n", direction);
@@ -499,4 +502,3 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	so.waiting_for_command_ = false;
 	return;
 }
-
