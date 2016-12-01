@@ -19,16 +19,16 @@
 
 #include "graphic/gl/terrain_program_gl4.h"
 
-#include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
-#include "logic/map.h"
 #include "graphic/game_renderer_gl4.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
 #include "graphic/image_io.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/editor_game_base.h"
+#include "logic/map.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "wui/mapviewpixelfunctions.h"
 
 using namespace Widelands;
