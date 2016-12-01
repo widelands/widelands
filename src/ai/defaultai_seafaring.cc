@@ -225,6 +225,10 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
+// NOCOM(#codereview): I like the renaming. We don't seem to be doing any iterator manipulation (e.g. erase) here, so a range-based for-loop
+// would be easier to read. We were still using C++98 when this loop was first written, so it would benefit from
+// some refactoring.
+// for (const ShipObserver& so : allships) {
 		for (std::list<ShipObserver>::iterator so = allships.begin(); so != allships.end(); ++so) {
 
 			const Widelands::Ship::ShipStates ship_state = so->ship->get_ship_state();
@@ -328,24 +332,26 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
 	uint32_t expedition_time = gametime - persistent_data->expedition_start_time;
 
-	// obviously a new expedition
+	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
 		assert(persistent_data->expedition_start_time == kNoExpedition);
 		persistent_data->expedition_start_time = gametime;
 		expedition_ship_ = so.ship->serial();
 
-	// expedition is overdue, setting no_more_expeditions = true
-	// also we attempt to cancel expedition (the code for cancellation may not work properly)
-	// TODO(unknown): - test expedition cancellation deeply (may need to be fixed)
+	// Expedition is overdue, setting no_more_expeditions = true
+	// Also we attempt to cancel expedition (the code for cancellation may not work properly)
+// NOCOM(#codereview): Always add your own nick to new TODO comments. This way, if anybody else wants to work on it
+// in the future, they can ask you if you still remember what it was about if they need to.
+	// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
 		assert(persistent_data->expedition_start_time > 0);
 		persistent_data->colony_scan_area = kColonyScanMinArea;
 		persistent_data->no_more_expeditions = kTrue;
 		game().send_player_cancel_expedition_ship(*so.ship);
 
-	// for known and running expedition
+	// For known and running expedition
 	} else {
-		// decrease persistent_data->colony_scan_area based on lapsed time
+		// decrease persistent_data->colony_scan_area based on elapsed time
 		assert(persistent_data->expedition_start_time > kNoExpedition);
 		assert(expedition_time < expedition_max_duration);
 
@@ -396,7 +402,7 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection () {
 }
 
 // this is called whenever ship received a notification that requires
-// navigation decisions (these notification are processes not in 'real time')
+// navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
 	Map& map = game().map();
@@ -433,19 +439,19 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// OR we might randomly repeat island exploration
 	if (first_time_here || game().logic_rand() % 100 < repeat_island_prob) {
 		if (first_time_here) {
-			printf("EXPLORE- first time here\n");
+			log("EXPLORE- first time here\n");
 		} else {
-			printf("EXPLORE- here before\n");
+			log("EXPLORE- here before\n");
 		}
 
-		// determine direction of island circle movement
+		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
 		// in this case we create a new direction at random, otherwise continue circle movement
 		if (!so.ship->is_island_circling()) {
 			so.island_circ_direction = randomExploreDirection();
-			printf("EXPLORE- set new SAIL direction: %u\n", so.island_circ_direction);
+			log("EXPLORE- set new SAIL direction: %u\n", so.island_circ_direction);
 		} else {
-			printf("EXPLORE- continue ISLAND CIRCLE, dir=%u\n", so.island_circ_direction);
+			log("EXPLORE- continue ISLAND CIRCLE, dir=%u\n", so.island_circ_direction);
 		}
 
 		// send the ship to circle island
@@ -477,7 +483,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// 2.A No there is no open sea
 			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and wait-state'
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-			printf("EXPLORE- jamming spot, cont CIRCLE, dir=%u\n", so.island_circ_direction);
+			log("EXPLORE- jamming spot, cont CIRCLE, dir=%u\n", so.island_circ_direction);
 
 		} else {
 			// 2.B Yes, pick one of available directions
@@ -485,7 +491,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			      possible_directions.at(game().logic_rand() % possible_directions.size());
 			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
-			printf("EXPLORE- break free FOR SEA, dir=%u\n", direction);
+			log("EXPLORE- break free FOR SEA, dir=%u\n", direction);
 		}
 	}
 
