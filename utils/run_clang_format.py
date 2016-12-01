@@ -34,7 +34,7 @@ def main():
     for filename in find_cplusplus_files():
         sys.stdout.write('.')
         sys.stdout.flush()
-        call(['clang-format-3.8', '-i', filename])
+        call(['clang-format', '-i', filename])
     print '\nFormatting finished.'
     return 0
 
