@@ -3471,7 +3471,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	return false;
 }
 
-
 /**
  * checks the first mine in list, takes care if it runs out of
  * resources and finally reenqueues it at the end of the list.

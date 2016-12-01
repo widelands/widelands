@@ -7,8 +7,6 @@ Forwarded-Upstream: should be
  src/wlapplication.cc            |    4 ++++
  2 files changed, 8 insertions(+)
 
-Index: b/src/io/filesystem/filesystem.cc
-===================================================================
 --- a/src/io/filesystem/filesystem.cc
 +++ b/src/io/filesystem/filesystem.cc
 @@ -60,6 +60,10 @@
@@ -20,15 +18,13 @@ Index: b/src/io/filesystem/filesystem.cc
 +#endif
 +
  FileSystem::FileSystem()
- {
- 	m_root = "";
-Index: b/src/wlapplication.cc
-===================================================================
+    : root_("")
+ {}
 --- a/src/wlapplication.cc
 +++ b/src/wlapplication.cc
 @@ -92,6 +92,10 @@
- #endif
- #endif
+ #include "wui/interactive_player.h"
+ #include "wui/interactive_spectator.h"
  
 +#ifndef PATH_MAX /* This happens, for example on the Hurd architecture */
 + #define PATH_MAX 1024
