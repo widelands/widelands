@@ -48,7 +48,7 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& 
 	const Widelands::World& world = parent.egbase().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
-		std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<double>(nr_bobs)))), 24U), 12U);
+	   std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<double>(nr_bobs)))), 24U), 12U);
 
 	set_center_panel(&tabpanel_);
 

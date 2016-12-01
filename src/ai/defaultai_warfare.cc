@@ -166,8 +166,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			break;
 		case DefaultAI::Type::kVeryWeak:
 			training_score = -2;
-		default:
-			; // Do nothing
+		default:;  // Do nothing
 		}
 	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
 		// was any soldier trained within last 10 minutes
@@ -180,8 +179,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			break;
 		case DefaultAI::Type::kVeryWeak:
 			training_score = -1;
-		default:
-			; // Do nothing
+		default:;  // Do nothing
 		}
 	}
 	// Also we should have at least some training sites to be more willing to attack

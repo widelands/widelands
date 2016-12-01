@@ -585,8 +585,12 @@ void FullscreenMenuLoadGame::fill_table() {
 				case GameController::GameType::REPLAY:
 					gametypestring = "";
 					break;
+#ifdef _WIN32
+				// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler
+				// warning in clang. There is no natural default for this function.
 				default:
 					NEVER_HERE();
+#endif
 				}
 				te.set_string(1, gametypestring);
 				te.set_string(2, map_filename(gamedata.filename, gamedata.mapname));

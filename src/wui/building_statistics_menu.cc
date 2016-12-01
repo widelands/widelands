@@ -478,8 +478,11 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		}
 		break;
 	}
-	default:
-		NEVER_HERE();
+#ifdef _WIN32
+	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
+	// in clang. There is no natural default for this function.
+	default:;  // Do nothing
+#endif
 	}
 
 	if (found) {

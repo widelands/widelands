@@ -425,8 +425,8 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
 			log("InternetGaming: Server time offset is %d second(s).\n", time_offset_);
 			std::string temp =
-				(boost::format(ngettext("Server time offset is %d second.",
-												"Server time offset is %d seconds.", time_offset_)) %
+			   (boost::format(ngettext("Server time offset is %d second.",
+			                           "Server time offset is %d seconds.", time_offset_)) %
 			    time_offset_)
 			      .str();
 			format_and_add_chat("", "", true, temp);

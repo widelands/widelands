@@ -322,8 +322,12 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 		*depth = it.u.space;
 		*breadth = 0;
 		break;
+#ifdef _WIN32
+	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
+	// in clang. There is no natural default for this function.
 	default:
 		NEVER_HERE();
+#endif
 	}
 }
 
@@ -399,8 +403,11 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
-	default:
-		NEVER_HERE();
+#ifdef _WIN32
+	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
+	// in clang. There is no natural default for this function.
+	default:;  // Do nothing
+#endif
 	};
 }
 }

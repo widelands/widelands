@@ -303,6 +303,7 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();
+	case (Units::kNone):
 	default:
 		return (boost::format("%d") % value).str();
 	}

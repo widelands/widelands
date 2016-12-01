@@ -118,6 +118,9 @@ std::string get_value_with_unit(Units unit, int value) {
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
 		return (boost::format(npgettext("unit_narrow", "%1%m", "%1%m", value)) % value).str();
+	case Units::kMinutesGeneric:
+	case Units::kHourGeneric:
+	case Units::kDayGeneric:
 	default:
 		NEVER_HERE();
 	}
@@ -134,6 +137,9 @@ std::string get_generic_unit_name(Units unit) {
 	case Units::kMinutesGeneric:
 		/** TRANSLATORS: Generic unit label. Used in statistics. */
 		return pgettext("unit_generic", "minutes");
+	case Units::kMinutesNarrow:
+	case Units::kHourNarrow:
+	case Units::kDayNarrow:
 	default:
 		NEVER_HERE();
 	}
