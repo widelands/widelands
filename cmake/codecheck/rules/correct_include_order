@@ -45,9 +45,10 @@ class EvalMatches( object ):
             delims = set(entry[1] for entry in block)
             if len(delims) != 1:
                 errors.append((fn, block[0][0], """Use either '"' or '<' for all includes in a block."""))
-            if sorted(includes) != includes:
-                errors.append((fn, block[0][0], "Include block is not sorted alphabetically."))
-                return errors
+            for include_sorted, include_actual in zip(sorted(includes), includes):
+                if include_sorted != include_actual:
+                    errors.append((fn, block[0][0], "Include block is not sorted alphabetically: '%s' must be included before '%s'" % (include_sorted, include_actual)))
+                    return errors
 
         if ".cc" in fn:
             base_file = os.path.basename(fn)[:-3]
