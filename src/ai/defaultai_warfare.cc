@@ -21,7 +21,6 @@
 
 using namespace Widelands;
 
-
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	Map& map = game().map();
@@ -434,7 +433,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	return true;
 }
 
-
 // this just counts free positions in military and training sites
 void DefaultAI::count_military_vacant_positions() {
 	// counting vacant positions
@@ -697,7 +695,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	return changed;
 }
 
-
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
 // ones ready to attack
 int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& soldiers) {
@@ -757,7 +754,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	return static_cast<int32_t>(final / 2500);
 }
 
-
 // Now we can prohibit some militarysites, based on size, the goal is not to
 // exhaust AI resources on the beginning of the game
 // We count bigger buildings, medium ones get 1 points, big ones 2 points
@@ -804,7 +800,6 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size, const 
 		return BuildingNecessity::kAllowed;
 	}
 }
-
 
 // This is called when soldier left the trainingsite
 // the purpose is to set soldier capacity to 0

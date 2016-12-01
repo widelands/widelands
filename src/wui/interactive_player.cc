@@ -95,7 +95,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 			}
 		};
-	toolbar_.add_space(15);
+		toolbar_.add_space(15);
 	}
 
 	add_toolbar_button(
