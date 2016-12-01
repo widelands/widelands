@@ -17,7 +17,7 @@ struct Rect {
 	float program_flavor, z;
 };
 
-layout(binding=0) buffer ssbo_rects {
+layout(std140, binding=0) buffer ssbo_rects {
 	Rect rects[];
 };
 
