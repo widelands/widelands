@@ -144,10 +144,12 @@ public:
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(const Coords&,
 	                            DescriptionIndex idx,
-	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld,
+	                            const Building* former_building = nullptr);
 	Immovable& create_immovable(const Coords&,
 	                            const std::string& name,
-	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld,
+	                            const Building* former_building = nullptr);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 
@@ -238,8 +240,8 @@ private:
 	///  influence becomes greater than the owner's influence.
 	virtual void do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	                             bool conquer,
-								 PlayerNumber preferred_player = 0,
-								 bool conquer_guarded_location_by_superior_influence = false,
+	                             PlayerNumber preferred_player = 0,
+	                             bool conquer_guarded_location_by_superior_influence = false,
 	                             bool neutral_when_no_influence = false,
 	                             bool neutral_when_competing_influence = false);
 	void cleanup_playerimmovables_area(PlayerArea<Area<FCoords>>);
