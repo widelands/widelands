@@ -220,6 +220,10 @@ void State::delete_texture(const GLuint texture) {
 	if (current_framebuffer_texture_ == texture) {
 		current_framebuffer_texture_ = 0;
 	}
+	for (unsigned i = 0; i < target_to_texture_.size(); ++i) {
+		if (target_to_texture_[i] == texture)
+			target_to_texture_[i] = 0;
+	}
 }
 
 void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
