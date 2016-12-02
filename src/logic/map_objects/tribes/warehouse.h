@@ -105,7 +105,7 @@ public:
 		kDontStock = 2,
 
 		/**
-		 * Like \ref kDontStock, but in addition, existing stock of this ware
+	    * Like \ref kDontStock, but in addition, existing stock of this ware
 	    * will be transported out of the warehouse over time.
 	    */
 		kRemove = 3,
