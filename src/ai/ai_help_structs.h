@@ -88,6 +88,7 @@ constexpr int magic_numbers_size = 100;
 constexpr int neuron_pool_size = 80;
 constexpr int f_neuron_pool_size = 60;
 constexpr int f_neuron_bit_size = 32;
+constexpr int MutationRatePosition = 42;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -126,17 +127,14 @@ struct FindNodeEnemiesBuilding {
 	Game& game;
 };
 
-// When looking for unowned terrain to acquire, we are actually
-// only interested in fields we can walk on.
-// Fields should either be completely unowned or owned by an opposing player_
-struct FindNodeUnowned {
-	FindNodeUnowned(Player* p, Game& g, bool oe = false);
+// We need to count walkable fields owned by enemy
+struct FindEnemyNodeWalkable {
+	FindEnemyNodeWalkable(Player* p, Game& g);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
-	bool only_enemies;
 };
 
 // Sometimes we need to know how many nodes our allies owns
@@ -266,6 +264,7 @@ struct BuildableField {
 	bool enemy_accessible_;
 
 	uint16_t unowned_land_nearby;
+	uint16_t enemy_owned_land_nearby;
 	uint16_t unowned_buildable_spots_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
@@ -585,9 +584,9 @@ struct ManagementData {
 	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
-	void set_mutation_multiplicator(uint8_t value) {
-		mutation_multiplicator = value;
-	};
+	//void set_mutation_rate(uint8_t value) { NOCOM
+		//mutation_rate = value;
+	//};
 	bool test_consistency();
 
 private:
@@ -597,7 +596,6 @@ private:
 	uint16_t next_neuron_id;
 	uint16_t next_bi_neuron_id;
 	uint16_t performance_change;
-	uint16_t mutation_multiplicator;
 };
 
 // this is used to count militarysites by their size
