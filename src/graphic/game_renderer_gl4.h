@@ -25,8 +25,7 @@
 #include "graphic/game_renderer.h"
 #include "logic/widelands_geometry.h"
 
-class TerrainBaseGl4;
-class TerrainPlayerPerspectiveGl4;
+class TerrainInformationGl4;
 
 struct TerrainGl4Arguments {
 	struct Road {
@@ -47,8 +46,7 @@ struct TerrainGl4Arguments {
 	};
 	static_assert(sizeof(Road) == 8, "bad alignment");
 
-	std::shared_ptr<TerrainBaseGl4> terrain;
-	std::shared_ptr<TerrainPlayerPerspectiveGl4> perspective;
+	std::shared_ptr<TerrainInformationGl4> terrain;
 	Point surface_offset;
 	int surface_width;
 	int surface_height;

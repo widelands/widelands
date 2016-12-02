@@ -44,24 +44,23 @@ using namespace Widelands;
  * the entire map, and vertex shaders do most of the heavy lifting. The
  * following textures are used:
  *
- * TerrainBaseGl4: data that is independent of player perspective, GL_RGBA8UI:
+ * Fields texture: data that is usually constant throughout a game, GL_RGBA8UI:
  *  R = r-triangle texture index
  *  G = d-triangle texture index
  *  B = height
  *  A = brightness
- * This information is constant during the game but can be modified in the
- * editor.
+ * This information can be modified in the editor and in scenarios. Note that
+ * the triangle textures depend on the player perspective.
  *
- * TerrainPlayerPerspectiveGl4: data that depends on the player (or omniscient)
- * perspective:
- *  - Variable information (GL_R8UI):
- *     R = player-perspective-dependent brightness modulation
- *    This information is re-uploaded every frame.
+ * Player brightness texture:
+ *  R = player-perspective-dependent brightness modulation
+ * This information is re-uploaded every frame.
  *
- *  - Semi-permanent information (GL_RG8UI):
- *     R = field ownership
- *     B = road/flag/building data
- *    This information is re-uploaded every frame when a minimap is shown.
+ * Semi-permanent information (GL_RG8UI):
+ *  R = field ownership
+ *  B = road/flag/building data
+ * This information is only needed for the minimap, and re-uploaded every frame
+ * when it is shown.
  *
  * Terrain is rendered in patches of a fixed structure, and many patches are
  * rendered in one call via instancing. Per-instance data is processed in a
@@ -100,21 +99,26 @@ using namespace Widelands;
  * the triangles that make up each segment.
  */
 
-TerrainBaseGl4::GlobalMap TerrainBaseGl4::global_map_;
+TerrainInformationGl4::GlobalMap TerrainInformationGl4::global_map_;
 
-std::shared_ptr<TerrainBaseGl4>
-TerrainBaseGl4::get(const EditorGameBase& egbase) {
-	auto it = global_map_.find(&egbase);
+std::shared_ptr<TerrainInformationGl4>
+TerrainInformationGl4::get(const Widelands::EditorGameBase& egbase,
+                           const Widelands::Player* player) {
+	GlobalKey key(&egbase, player);
+	auto it = global_map_.find(key);
 	if (it != global_map_.end())
 		return it->second.lock();
 
-	std::shared_ptr<TerrainBaseGl4> instance(new TerrainBaseGl4(egbase));
-	global_map_[&egbase] = instance;
+	std::shared_ptr<TerrainInformationGl4> instance(
+		new TerrainInformationGl4(egbase, player));
+	global_map_[key] = instance;
 	return instance;
 }
 
-TerrainBaseGl4::TerrainBaseGl4(const EditorGameBase& egbase)
-  : egbase_(egbase), uploads_(GL_PIXEL_UNPACK_BUFFER) {
+TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& egbase,
+                                             const Widelands::Player* player)
+  : egbase_(egbase), player_(player), uploads_(GL_PIXEL_UNPACK_BUFFER) {
+	glGenTextures(1, &brightness_texture_);
 	glGenTextures(1, &fields_texture_);
 
 	auto& gl = Gl::State::instance();
@@ -124,30 +128,42 @@ TerrainBaseGl4::TerrainBaseGl4(const EditorGameBase& egbase)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	do_update();
+	fields_update();
 	upload_road_textures();
 }
 
-TerrainBaseGl4::~TerrainBaseGl4() {
-	glDeleteTextures(1, &fields_texture_);
+TerrainInformationGl4::~TerrainInformationGl4() {
+	if (brightness_texture_)
+		glDeleteTextures(1, &brightness_texture_);
 
-	global_map_.erase(&egbase_);
+	if (fields_texture_)
+		glDeleteTextures(1, &fields_texture_);
+
+	global_map_.erase(GlobalKey(&egbase_, player_));
 }
 
-void TerrainBaseGl4::update() {
+void TerrainInformationGl4::update() {
 	if (fields_base_version_ != egbase().map().get_fields_base_version())
-		do_update();
+		fields_update();
+
+	brightness_update();
 }
 
-void TerrainBaseGl4::do_update() {
+void TerrainInformationGl4::fields_update() {
 	auto& gl = Gl::State::instance();
 	const Map& map = egbase().map();
-	auto stream = uploads_.stream(uint(map.get_width()) * map.get_height());
+	auto stream = uploads_.stream(sizeof(PerFieldData) * uint(map.get_width()) * map.get_height());
+	PerFieldData* fd =
+		reinterpret_cast<PerFieldData*>
+			(stream.add(sizeof(PerFieldData) * uint(map.get_width()) * map.get_height()));
 	MapIndex max_index = map.max_index();
 
 	for (MapIndex i = 0; i < max_index; ++i) {
 		const Field& f = map[i];
-		stream.emplace_back(f.terrain_r(), f.terrain_d(), f.get_height(), f.get_brightness());
+		fd[i].terrain_r = f.terrain_r();
+		fd[i].terrain_d = f.terrain_d();
+		fd[i].height = f.get_height();
+		fd[i].brightness = f.get_brightness();
 	}
 
 	GLintptr offset = stream.unmap();
@@ -162,11 +178,11 @@ void TerrainBaseGl4::do_update() {
 	fields_base_version_ = map.get_fields_base_version();
 }
 
-TerrainBaseGl4::PerRoadTextureData::PerRoadTextureData(const FloatRect& rect)
+TerrainInformationGl4::PerRoadTextureData::PerRoadTextureData(const FloatRect& rect)
   : x(rect.x), y(rect.y), w(rect.w), h(rect.h) {
 }
 
-void TerrainBaseGl4::upload_road_textures() {
+void TerrainInformationGl4::upload_road_textures() {
 	std::vector<PerRoadTextureData> roads;
 	std::map<const TribeDescr*, unsigned> tribe_map;
 	PlayerNumber const nr_players = egbase().map().get_nrplayers();
@@ -202,10 +218,10 @@ void TerrainBaseGl4::upload_road_textures() {
 	road_textures_.update(roads);
 }
 
-unsigned TerrainBaseGl4::road_texture_idx(PlayerNumber owner,
-                                          RoadType road_type,
-                                          const Coords& coords,
-                                          WalkingDir direction) const {
+unsigned TerrainInformationGl4::road_texture_idx(PlayerNumber owner,
+                                                 RoadType road_type,
+                                                 const Coords& coords,
+                                                 WalkingDir direction) const {
 	const PlayerRoads& roads = player_roads_[owner];
 	unsigned base, count;
 
@@ -220,34 +236,7 @@ unsigned TerrainBaseGl4::road_texture_idx(PlayerNumber owner,
 	return base + unsigned(coords.x + coords.y + direction) % count;
 }
 
-TerrainPlayerPerspectiveGl4::GlobalMap TerrainPlayerPerspectiveGl4::global_map_;
-
-std::shared_ptr<TerrainPlayerPerspectiveGl4>
-TerrainPlayerPerspectiveGl4::get(const Widelands::EditorGameBase& egbase,
-                                 const Widelands::Player* player) {
-	GlobalKey key(&egbase, player);
-	auto it = global_map_.find(key);
-	if (it != global_map_.end())
-		return it->second.lock();
-
-	std::shared_ptr<TerrainPlayerPerspectiveGl4> instance(
-		new TerrainPlayerPerspectiveGl4(egbase, player));
-	global_map_[key] = instance;
-	return instance;
-}
-
-TerrainPlayerPerspectiveGl4::TerrainPlayerPerspectiveGl4(const Widelands::EditorGameBase& egbase,
-                                                         const Widelands::Player* player)
-  : egbase_(egbase), player_(player), uploads_(GL_PIXEL_UNPACK_BUFFER) {
-	glGenTextures(1, &brightness_texture_);
-}
-
-TerrainPlayerPerspectiveGl4::~TerrainPlayerPerspectiveGl4() {
-	if (brightness_texture_)
-		glDeleteTextures(1, &brightness_texture_);
-}
-
-void TerrainPlayerPerspectiveGl4::update() {
+void TerrainInformationGl4::brightness_update() {
 	auto& gl = Gl::State::instance();
 	bool see_all = !player_ || player_->see_all();
 
@@ -401,10 +390,10 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 
 	// Prepare textures & sampler uniforms.
 	glUniform1i(terrain_.u_terrain_base, 0);
-	gl.bind(GL_TEXTURE0, args->terrain->texture());
+	gl.bind(GL_TEXTURE0, args->terrain->fields_texture());
 
 	glUniform1i(terrain_.u_player_brightness, 1);
-	gl.bind(GL_TEXTURE1, args->perspective->player_brightness_texture());
+	gl.bind(GL_TEXTURE1, args->terrain->player_brightness_texture());
 
 	glUniform1i(terrain_.u_terrain_texture, 2);
 	gl.bind(GL_TEXTURE2, blit_data.texture_id);

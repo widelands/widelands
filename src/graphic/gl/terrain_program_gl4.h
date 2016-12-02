@@ -42,23 +42,33 @@ struct TerrainGl4Arguments;
 class Texture;
 
 /**
- * This class maintains the permanent terrain information texture.
+ * This class maintains the terrain information textures.
  */
-class TerrainBaseGl4 {
+class TerrainInformationGl4 {
 public:
-	~TerrainBaseGl4();
+	~TerrainInformationGl4();
 
-	// Get the global terrain base instance associated to the given editor/game
-	// instance.
-	static std::shared_ptr<TerrainBaseGl4>
-	get(const Widelands::EditorGameBase& egbase);
+	// Get the global instance associated to the given editor/game instance
+	// and player perspective. If player is nullptr, an omniscient perspective
+	// is returned.
+	static std::shared_ptr<TerrainInformationGl4>
+	get(const Widelands::EditorGameBase& egbase,
+	    const Widelands::Player* player = nullptr);
 
 	const Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
 
-	GLuint texture() const {
+	const Widelands::Player* player() const {
+		return player_;
+	}
+
+	GLuint fields_texture() const {
 		return fields_texture_;
+	}
+
+	GLuint player_brightness_texture() const {
+		return brightness_texture_;
 	}
 
 	GLint road_texture_object() const {
@@ -80,10 +90,15 @@ public:
 	void update();
 
 private:
-	TerrainBaseGl4(const Widelands::EditorGameBase& egbase);
+	TerrainInformationGl4(const Widelands::EditorGameBase& egbase,
+	                      const Widelands::Player* player);
 
-	void do_update();
+	using GlobalKey = std::pair<const Widelands::EditorGameBase*, const Widelands::Player*>;
+	using GlobalMap = std::map<GlobalKey, std::weak_ptr<TerrainInformationGl4>>;
+
+	void fields_update();
 	void upload_road_textures();
+	void brightness_update();
 
 	struct PerFieldData {
 		uint8_t terrain_r;
@@ -92,10 +107,6 @@ private:
 
 		// Will be interpreted as unsigned by the texel fetch in the shader.
 		int8_t brightness;
-
-		PerFieldData(uint8_t terrain_r_, uint8_t terrain_d_, uint8_t height_, int8_t brightness_)
-		  : terrain_r(terrain_r_), terrain_d(terrain_d_), height(height_), brightness(brightness_) {
-		}
 	};
 	static_assert(sizeof(PerFieldData) == 4, "incorrect padding");
 
@@ -113,68 +124,16 @@ private:
 		unsigned num_busy_roads = 1;
 	};
 
-	using GlobalMap = std::unordered_map<const Widelands::EditorGameBase*, std::weak_ptr<TerrainBaseGl4>>;
-
-	static GlobalMap global_map_;
-
-	const Widelands::EditorGameBase& egbase_;
-	uint32_t fields_base_version_;
-
-	// The texture containing per-field information.
-	GLuint fields_texture_;
-
-	Gl::StreamingBuffer<PerFieldData> uploads_;
-
-	Gl::Buffer<PerRoadTextureData> road_textures_;
-	std::vector<PlayerRoads> player_roads_;
-	GLuint road_texture_object_;
-
-	DISALLOW_COPY_AND_ASSIGN(TerrainBaseGl4);
-};
-
-/**
- * This class maintains the terrain information textures that depend on player
- * perspective.
- */
-class TerrainPlayerPerspectiveGl4 {
-public:
-	~TerrainPlayerPerspectiveGl4();
-
-	// Get the global instance associated to the given editor/game instance
-	// and player perspective. If player is nullptr, an omniscient perspective
-	// is returned.
-	static std::shared_ptr<TerrainPlayerPerspectiveGl4>
-	get(const Widelands::EditorGameBase& egbase,
-	    const Widelands::Player* player = nullptr);
-
-	const Widelands::EditorGameBase& egbase() const {
-		return egbase_;
-	}
-
-	const Widelands::Player* player() const {
-		return player_;
-	}
-
-	GLuint player_brightness_texture() const {
-		return brightness_texture_;
-	}
-
-	// Upload updated information to texture(s) if necessary.
-	void update();
-
-private:
-	TerrainPlayerPerspectiveGl4(const Widelands::EditorGameBase& egbase,
-	                            const Widelands::Player* player);
-
-	using GlobalKey = std::pair<const Widelands::EditorGameBase*, const Widelands::Player*>;
-	using GlobalMap = std::map<GlobalKey, std::weak_ptr<TerrainPlayerPerspectiveGl4>>;
-
 	static GlobalMap global_map_;
 
 	const Widelands::EditorGameBase& egbase_;
 	const Widelands::Player* player_;
+	uint32_t fields_base_version_;
 
 	Gl::StreamingBuffer<uint8_t> uploads_;
+
+	// The texture containing per-field information.
+	GLuint fields_texture_;
 
 	// Whether the current brightness texture assumes that the player sees
 	// all (i.e., it is 1x1).
@@ -183,7 +142,12 @@ private:
 	// Brightness texture: GL_R8.
 	GLuint brightness_texture_;
 
-	DISALLOW_COPY_AND_ASSIGN(TerrainPlayerPerspectiveGl4);
+	// Road textures information
+	Gl::Buffer<PerRoadTextureData> road_textures_;
+	std::vector<PlayerRoads> player_roads_;
+	GLuint road_texture_object_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainInformationGl4);
 };
 
 class TerrainProgramGl4 {

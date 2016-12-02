@@ -41,13 +41,13 @@ using namespace Widelands;
  * TODO(nha): minimap rendering
  *
  * Only terrain rendering (terrain textures, dithering, and roads) differs
- * substantially from the GL2 rendering path. To avoid CPU work, persistent
- * objects Terrain{Base,PlayerPerspective}Gl4 maintain texture data and other
- * information across frames.
+ * substantially from the GL2 rendering path. To avoid CPU work, a persistent
+ * TerrainInformationGl4 object maintains texture data and other information
+ * across frames.
  *
  * The GameRendererGl4 contains per-view information, but the underlying
- * Terrain*Gl4 instances are automatically shared between different views when
- * possible.
+ * TerrainInformationGl4 instance is automatically shared between different
+ * views when possible.
  */
 
 GameRendererGl4::GameRendererGl4() {
@@ -69,17 +69,11 @@ void GameRendererGl4::draw(RenderTarget& dst,
 		return;
 
 	// Upload map changes.
-	if (!args_.terrain || &args_.terrain->egbase() != &egbase)
-		args_.terrain = TerrainBaseGl4::get(egbase);
+	if (!args_.terrain || &args_.terrain->egbase() != &egbase ||
+	    args_.terrain->player() != player)
+		args_.terrain = TerrainInformationGl4::get(egbase, player);
 
 	args_.terrain->update();
-
-	if (!args_.perspective ||
-	    &args_.perspective->egbase() != &egbase ||
-	    args_.perspective->player() != player)
-		args_.perspective = TerrainPlayerPerspectiveGl4::get(egbase, player);
-
-	args_.perspective->update();
 
 	// Determine the set of patches to draw.
 	Point tl_map = dst.get_offset() + view_offset;
@@ -130,8 +124,8 @@ void GameRendererGl4::draw(RenderTarget& dst,
 }
 
 void GameRendererGl4::scan_fields() {
-	const EditorGameBase& egbase = args_.perspective->egbase();
-	const Player* player = args_.perspective->player();
+	const EditorGameBase& egbase = args_.terrain->egbase();
+	const Player* player = args_.terrain->player();
 	auto& map = egbase.map();
 	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 
