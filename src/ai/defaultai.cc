@@ -877,7 +877,7 @@ void DefaultAI::late_initialization() {
 	uint32_t rt1 = round(sqrt(ar1));
 	// NOCOM(#codereview): FYI - never use printf, always sprintf. We have a handy logging function
 	// in base/log.h though.
-	log("--- EXPEDITION MAP AREA ROOT == %u\n", rt1);
+	//log("--- EXPEDITION MAP AREA ROOT == %u\n", rt1);
 	int scope = 320 - 64;
 	int off = rt1 - 64;
 	if (off < 0)
@@ -887,7 +887,7 @@ void DefaultAI::late_initialization() {
 	expedition_max_duration =
 	   kExpeditionMinDuration +
 	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
-	log("--- EXPEDITION MAX DURATION == %u\n", expedition_max_duration / 1000);
+	log(" %d: expedition max duration: %d, map area root: %d\n", expedition_max_duration / 1000, rt1);
 	// NOCOM(#codereview): We can drop the second condition, it is alreday met by the first condition
 	// (kExpeditionMinDuration is > 0)
 	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?

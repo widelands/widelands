@@ -410,6 +410,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	Map& map = game().map();
 	const int32_t gametime = game().get_gametime();
+	PlayerNumber const pn = player_->player_number();
 	// probability for island exploration repetition
 	const int repeat_island_prob = 20;
 
@@ -442,9 +443,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// OR we might randomly repeat island exploration
 	if (first_time_here || game().logic_rand() % 100 < repeat_island_prob) {
 		if (first_time_here) {
-			log("EXPLORE- first time here\n");
+			log("%d %s: portspace at %3dx%3d, visited first time\n", pn, so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
 		} else {
-			log("EXPLORE- here before\n");
+			log("%d %s: portspace at %3dx%3d, visited before\n", pn, so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
 		}
 
 		// Determine direction of island circle movement
@@ -452,9 +453,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// in this case we create a new direction at random, otherwise continue circle movement
 		if (!so.ship->is_island_circling()) {
 			so.island_circ_direction = randomExploreDirection();
-			log("EXPLORE- set new SAIL direction: %u\n", so.island_circ_direction);
+			log("%d %s: new exploration sail direction: %u\n", pn, so.ship->get_shipname().c_str(), so.island_circ_direction);
 		} else {
-			log("EXPLORE- continue ISLAND CIRCLE, dir=%u\n", so.island_circ_direction);
+			log("%d %s: exploration - continue island circle, dir=%u\n", pn, so.ship->get_shipname().c_str(), so.island_circ_direction);
 		}
 
 		// send the ship to circle island
@@ -486,7 +487,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// TODO(unknown): we should implement a 'rescue' procedure like 'sail for x fields and
 			// wait-state'
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-			log("EXPLORE- jamming spot, cont CIRCLE, dir=%u\n", so.island_circ_direction);
+			log("%d %s: exploration - jamming spot, cont CIRCLE, dir=%u\n", pn, so.ship->get_shipname().c_str(), so.island_circ_direction);
 
 		} else {
 			// 2.B Yes, pick one of available directions
@@ -494,7 +495,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			   possible_directions.at(game().logic_rand() % possible_directions.size());
 			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
-			log("EXPLORE- break free FOR SEA, dir=%u\n", direction);
+			log("%d %s: exploration - break free FOR SEA,d dir=%u\n", pn, so.ship->get_shipname().c_str(),  direction);
 		}
 	}
 
