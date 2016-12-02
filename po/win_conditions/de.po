@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-18 05:39+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -44,42 +44,46 @@ msgid ""
 "version and the map you tried to load."
 msgstr "Es gibt keine Artefakte auf dieser Karte. Das sollte nicht passieren. Bitte melde den Fehler auf https://launchpad.net/widelands und gib sowohl deine Widelands-Version als auch die Karte, die du laden wolltest, an."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:62
-msgid "New Artifact Found"
-msgstr "Neues Artefakt gefunden"
-
+#. TRANSLATORS: Keep this as short as possible. You can also translate this as
+#. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:63
+msgid "Artifact Found"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
 msgstr "Dein Team hat ein neues Artefakt entdeckt."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:66
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "Artifact Lost"
 msgstr "Artefakt verloren"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:67
+#: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Ein Artefakt deines Teams wurde von einem Gegner gestohlen."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:70
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "Artifact Conquered"
 msgstr "Artefakt erobert"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:71
+#: ../../data/scripting/win_conditions/artifacts.lua:74
 msgid "Your team stole an artifact from an enemy."
 msgstr "Dein Team hat ein Artefakt von einem Feind gestohlen."
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:141
+#: ../../data/scripting/win_conditions/artifacts.lua:144
 msgid ", "
 msgstr ", "
 
-#: ../../data/scripting/win_conditions/artifacts.lua:148
+#: ../../data/scripting/win_conditions/artifacts.lua:151
 msgid "Overview:"
 msgstr "Übersicht:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:151
-#: ../../data/scripting/win_conditions/artifacts.lua:164
+#: ../../data/scripting/win_conditions/artifacts.lua:154
+#: ../../data/scripting/win_conditions/artifacts.lua:167
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -87,13 +91,13 @@ msgstr[0] "%i Artefakt"
 msgstr[1] "%i Artefakte"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:153
+#: ../../data/scripting/win_conditions/artifacts.lua:156
 msgid "%1$s owns %2$s."
 msgstr "%1$s besitzt %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:166
+#: ../../data/scripting/win_conditions/artifacts.lua:169
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Team %1$i (%2$s) besitzt %3$s."
 
@@ -311,7 +315,8 @@ msgstr "Du hast dieses Spiel verloren!"
 msgid "Status"
 msgstr "Status"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:25
+#. TRANSLATORS: This is an overview for all players.
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:26
 msgid "Player overview:"
 msgstr "Spieler-Übersicht:"
 
