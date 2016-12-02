@@ -176,6 +176,13 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
 endif()
 
+  if(WIN32)
+    # This conflicts with the clang warnings, which are much more intelligent.
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wnoswitch-default")
+  endif()
+
+
+
 # Turn some warnings into errors.
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
