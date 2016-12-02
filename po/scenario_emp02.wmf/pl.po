@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-14 17:19+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 13:00+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -78,8 +78,8 @@ msgstr "Pracownia kamieniarza i infrastruktura górnicza"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
 msgstr "Zbuduj pracownię kamieniarza, a następnie dokończ infrastrukturę górniczą i produkcyjną (kopalnię węgla i/lub smolarnię, kopalnię rudy żelaza, warsztat, pracownie zbrojmistrza i płatnerza oraz hutę)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
@@ -112,9 +112,9 @@ msgstr "Możesz też potrzebować kwatery myśliwego, chlewu, plantacji winoroś
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
 msgstr "Od ciebie zależy, co chcesz zbudować. Ale pamiętaj - kopalnie węgla i żelaza potrzebują piwa, zaś kopalnie marmuru i złota wina, wszystkie zaś wymagają przynajmniej racji produkowanych z chleba LUB mięsa LUB ryby."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
@@ -331,8 +331,8 @@ msgstr "Saledus jest podekscytowany"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
 msgstr "Na bogów, co za niewiarygodne szczęście! Znaleźliśmy dwie kolejne góry i wygląda na to, że jedna ma duże ilości węgla, a druga rud żelaza! Radzę natychmiast zacząć budować kopalnie węgla (albo przynajmniej smolarnie) i rudy żelaza, hutę, warsztat i pracownie zbrojmistrza i płatnerza."
 

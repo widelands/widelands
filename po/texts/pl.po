@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-15 06:27+0000\n"
-"PO-Revision-Date: 2016-11-15 07:34+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 13:07+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -50,8 +50,8 @@ msgstr "Niniejsza gra jest wolna i darmowa (FOSS), opublikowana na licencji GNU 
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Więcej informacji na temat GPL i wolnego oprogramowania (FOSS) znajdziesz na stronie: %s"
+"webpage: %s"
+msgstr "Więcej informacji na temat GPL i wolnego oprogramowania znajdziesz na stronie: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -427,8 +427,8 @@ msgstr "Gracz o danym kolorze flagi. Jeśli więcej niż jeden klient wybrał te
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Tryb obserwatora, w którym widzisz cała mapę, lecz nie możesz kontrolować żadnego gracza"
+"player."
+msgstr "Tryb obserwatora, w którym widzisz całą mapę, lecz nie możesz kontrolować żadnego gracza."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -464,14 +464,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr "Ostatnie trzy mogą być ustawione przez klienta-hosta poprzez kliknięcie lewym przyciskiem myszy na przycisk \"typ\" gracza. Host może również ustawić stan początkowy każdego gracza (początkowy zestaw budynków, towarów i pracowników) oraz plemiona i drużyny graczy komputerowych."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Każdy klient połączony z graczem (w roli 'gracz') może ustawić plemię i drużynę tego gracza"
+" and the team for that player."
+msgstr "Każdy klient połączony z graczem (w roli 'gracz') może ustawić plemię i drużynę tego gracza."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -543,9 +543,9 @@ msgstr "Przytrzymanie Alt przełącza na alternatywne narzędzie (jeśli istniej
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Możesz szybko ustawić rozmiar terenu zaznaczanego wokół kursora korzystając z klawiszy od 0 do 9."
+msgstr "Możesz szybko ustawić rozmiar terenu zaznaczanego wokół kursora korzystając z klawiszy (0-9)."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
