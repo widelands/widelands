@@ -78,4 +78,4 @@ bzr commit -m "Fetched translations and updated catalogues."
 bzr push lp:widelands
 
 # Push catalogues to Transifex
-#tx push -s
+tx push -s
