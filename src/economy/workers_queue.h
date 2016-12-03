@@ -53,7 +53,7 @@ public:
 	}
 #endif
 
-	Quantity get_filled() const {
+	Quantity get_filled() const override {
 		return workers_.size();
 	}
 

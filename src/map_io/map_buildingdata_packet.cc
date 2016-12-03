@@ -149,7 +149,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					}
 					// Only construction sites may have an empty list
 					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
-						throw GameDataError("Failed to read %s %u: No former buildings informations.\n"
+						throw GameDataError("Failed to read %s %u: No former buildings information.\n"
 						                    "Your savegame is corrupted",
 						                    building.descr().descname().c_str(), building.serial());
 					}

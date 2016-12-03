@@ -841,7 +841,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
-			defenders = wh->count_workers(game, wh->owner().tribe().soldier(), noreq, false);
+			defenders = wh->count_workers(game, wh->owner().tribe().soldier(), noreq, Warehouse::Match::kExact);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;

@@ -44,23 +44,6 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
      workers_() {
 	if (index_ != INVALID_INDEX)
 		update();
-	// TODO(Notabilis): When set_filled() is called here, a later script call to set the worker of
-	// the
-	// building will fail. Not sure if this is a bug and/or a bug of this class. I don't really think
-	// so.
-	/*
-	NOCOM(#codereview): For testing, I added this to
-	data/tribes/scripting/starting_conditions/barbarians/headquarters.lua
-
-	    prefilled_buildings(player, {"barbarians_barracks", sf.x + 5, sf.y + 5,
-	       inputs = {barbarians_carrier = 2}
-	    })
-
-	And it works fine. If I set the value higher than allowed, I get a Lua error in my inbox, which
-	is correct behaviour.
-	Is this the error that you mean, or are you getting something else?
-
-	*/
 }
 
 /**
@@ -69,7 +52,8 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
 void WorkersQueue::cleanup() {
 	assert(index_ != INVALID_INDEX);
 
-	set_filled(0);
+	// Seems like workers don't need to be removed (done by building?)
+	workers_.clear();
 	max_size_ = 0;
 	max_fill_ = 0;
 
@@ -92,6 +76,7 @@ void WorkersQueue::entered(DescriptionIndex index,
 	if (worker->get_location(egbase) != &(owner_)) {
 		worker->set_location(&(owner_));
 	}
+	assert(worker->get_location(egbase) == &owner_);
 
 	// Bind the worker into this house, hide him on the map
 	if (upcast(Game, game, &egbase)) {
@@ -108,8 +93,7 @@ void WorkersQueue::entered(DescriptionIndex index,
 void WorkersQueue::remove_from_economy(Economy&) {
 	if (index_ != INVALID_INDEX) {
 		if (request_) {
-			delete request_;
-			request_ = nullptr;
+			request_.reset();
 		}
 		// Removal of workers from the economy is not required, this is done by the building (or so)
 	}
@@ -128,33 +112,41 @@ void WorkersQueue::set_filled(Quantity filled) {
 	if (filled > max_size_) {
 		filled = max_size_;
 	}
-	const size_t currentAmount = get_filled();
-	if (filled == currentAmount)
+	if (filled == get_filled())
 		return;
 
 	// Now adjust them
+	const TribeDescr& tribe = owner().tribe();
+	const WorkerDescr* worker_descr = tribe.get_worker_descr(index_);
+	EditorGameBase& egbase = owner().egbase();
+	upcast(Game, game, &egbase);
+	assert(game != nullptr);
+
+	// Add workers
 	while (get_filled() < filled) {
 		// Create new worker
-		const TribeDescr& tribe = owner().tribe();
-		const WorkerDescr* worker_descr = tribe.get_worker_descr(index_);
-		EditorGameBase& egbase = owner().egbase();
 		Worker& w =
-		   worker_descr->create(egbase, owner(), nullptr, owner_.get_positions(egbase).front());
-		entered(index_, &w);
+		   worker_descr->create(egbase, owner(), &owner_, owner_.get_positions(egbase).front());
+		assert(w.get_location(egbase) == &owner_);
+		w.start_task_idle(*game, 0, -1);
+		workers_.push_back(&w);
 	}
-	if (currentAmount > filled) {
-		// Remove workers
-		EditorGameBase& egbase = owner().egbase();
-		upcast(Game, game, &egbase);
-		// Note: This might be slow (removing from start) but we want to consume
-		// the first worker in the queue first
-		for (Quantity i = 0; i < currentAmount - filled; i++) {
-			// Remove worker
-			(*(workers_.begin()))->schedule_destroy(*game);
-			// Remove reference from list
-			workers_.erase(workers_.begin());
-		}
+	assert(get_filled() >= filled);
+
+	// Remove workers
+	// Note: This might be slow (removing from start) but we want to consume
+	// the first worker in the queue first
+	while (get_filled() > filled) {
+		// Remove worker
+		assert(!workers_.empty());
+		Worker *w = workers_.front();
+		assert(w->get_location(egbase) == &owner_);
+		// Remove from game
+		w->schedule_destroy(*game);
+		// Remove reference from list
+		workers_.erase(workers_.begin());
 	}
+	assert(get_filled() == filled);
 	update();
 }
 

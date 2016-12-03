@@ -41,6 +41,10 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -342,42 +346,26 @@ void ConstructionSite::draw(uint32_t gametime,
 	   info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	tanim = cur_frame * FRAME_LENGTH;
 
-	const uint16_t w = anim.width();
-	const uint16_t h = anim.height();
-
-	uint32_t lines = h * info_.completedtime * nr_frames;
-	if (info_.totaltime) {
-		lines /= info_.totaltime;
-	}
-	assert(h * cur_frame <= lines);
-	lines -= h * cur_frame;  //  This won't work if pictures have various sizes.
-
 	if (cur_frame) {  //  not the first pic
-		//  draw the prev pic from top to where next image will be drawing
-		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color,
-		                    Recti(Vector2i(0, 0), w, h - lines));
+		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
+		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color);
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		uint32_t prev_building_anim_idx;
-		try {
-			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (MapObjectDescr::AnimationNonexistent&) {
-			prev_building_anim_idx = prev_building->get_animation("idle");
-		}
-		const Animation& prev_building_anim =
-		   g_gr->animations().get_animation(prev_building_anim_idx);
-		dst->blit_animation(point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH,
-		                    player_color,
-		                    Recti(Vector2i(0, 0), prev_building_anim.width(),
-		                          std::min<int>(prev_building_anim.height(), h - lines)));
+		const uint32_t prev_building_anim_idx = prev_building->get_animation(
+		   prev_building->is_animation_known("unoccupied") ? "unoccupied" : "idle");
+		dst->blit_animation(
+		   point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color);
 	}
-
-	assert(lines <= h);
-	dst->blit_animation(
-	   point_on_dst, scale, anim_idx, tanim, player_color, Recti(Vector2i(0, h - lines), w, lines));
+	// Now blit a segment of the current construction phase from the bottom.
+	int percent = 100 * info_.completedtime * nr_frames;
+	if (info_.totaltime) {
+		percent /= info_.totaltime;
+	}
+	percent -= 100 * cur_frame;
+	dst->blit_animation(point_on_dst, scale, anim_idx, tanim, player_color, percent);
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

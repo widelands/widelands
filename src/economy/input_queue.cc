@@ -57,15 +57,14 @@ void InputQueue::update() {
 
 	if (get_filled() < max_fill_) {
 		if (!request_) {
-			request_ = new Request(owner_, index_, InputQueue::request_callback, type_);
+			request_.reset(new Request(owner_, index_, InputQueue::request_callback, type_));
+			request_->set_exact_match(true); // Required for worker queues, ignored for wares anyway
 		}
 
 		request_->set_count(max_fill_ - get_filled());
 		request_->set_required_interval(consume_interval_);
-		request_->set_exact_match(true); // Required for worker queues, ignored for wares anyway
 	} else {
-		delete request_;
-		request_ = nullptr;
+		request_.reset();
 	}
 }
 
@@ -129,7 +128,6 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {
-			delete request_;
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
 				index_ = owner().tribe().ware_index(fr.c_string());
@@ -141,10 +139,11 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			max_fill_ = fr.signed_32();
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
-				request_ = new Request (owner_, 0, InputQueue::request_callback, type_);
+				request_.reset(new Request (owner_, 0, InputQueue::request_callback, type_));
 				request_->read(fr, game, mol);
-			} else
-				request_ = nullptr;
+			} else {
+				request_.reset();
+			}
 
 			read_child(fr, game, mol);
 

@@ -261,7 +261,7 @@ void ShipWindow::act_destination() {
 
 /// Sink the ship if confirmed
 void ShipWindow::act_sink() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		igbase_.game().send_player_sink_ship(ship_);
 	} else {
 		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
@@ -275,7 +275,7 @@ void ShipWindow::act_debug() {
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		igbase_.game().send_player_cancel_expedition_ship(ship_);
 	} else {
 		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);

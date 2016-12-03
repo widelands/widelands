@@ -48,7 +48,7 @@ public:
 	}
 #endif
 
-	Quantity get_filled() const {
+	Quantity get_filled() const override {
 		return filled_;
 	}
 

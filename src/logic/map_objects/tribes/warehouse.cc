@@ -193,7 +193,8 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	if (req.get_type() == wwWORKER) {
 		return warehouse_->count_workers(game, req.get_index(),
-										req.get_requirements(), req.get_exact_match());
+					req.get_requirements(),
+					(req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
 	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
@@ -233,6 +234,10 @@ Warehouse Building
 ==============================
 */
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const EditorGameBase& egbase)
@@ -739,7 +744,7 @@ bool Warehouse::fetch_from_flag(Game& game) {
  */
 Quantity
 Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
-						const Requirements& req, bool exact) {
+						const Requirements& req, Match exact) {
 	Quantity sum = 0;
 
 	do {
@@ -755,7 +760,7 @@ Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
 				}
 			}
 		}
-		if (!exact) {
+		if (exact == Match::kCompatible) {
 			ware = owner().tribe().get_worker_descr(ware)->becomes();
 		} else {
 			ware = INVALID_INDEX;
@@ -829,7 +834,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 
 	supply_->add_workers(worker_index, 1);
 
-	//  We remove carriers, but we keep other workers around.
+	//  We remove free workers, but we keep other workers around.
 	//  TODO(unknown): Remove all workers that do not have properties such as experience.
 	//  And even such workers should be removed and only a small record
 	//  with the experience (and possibly other data that must survive)
@@ -837,8 +842,8 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	//  When this is done, the get_incorporated_workers method above must
 	//  be reworked so that workers are recreated, and rescheduled for
 	//  incorporation.
-	if (upcast(Carrier, carrier, w)) {
-		carrier->remove(egbase);
+	if (w->descr().is_buildable() && w->descr().buildcost().empty()) {
+		w->remove(egbase);
 		return;
 	}
 
@@ -1180,7 +1185,7 @@ void Warehouse::aggressor(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (!count_workers(game, soldier_index, noreq, false))
+	if (!count_workers(game, soldier_index, noreq, Match::kCompatible))
 		return;
 
 	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
@@ -1192,7 +1197,7 @@ bool Warehouse::attack(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (count_workers(game, soldier_index, noreq, false)) {
+	if (count_workers(game, soldier_index, noreq, Match::kCompatible)) {
 		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");

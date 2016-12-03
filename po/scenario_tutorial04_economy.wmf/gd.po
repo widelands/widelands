@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-21 09:57+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -204,16 +204,13 @@ msgid ""
 msgstr "Foghnaidh dhen mhìneachadh an-dràsta. Nise, feuch e. Tha sinn airson faighinn a-mach a bheil taighean-tàirn againn fhathast, mar sin feumaidh tu taba nan “Togalaichean meadhanach” a thaghadh. Dùin uinneag stadastaireachd nan togalach an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad ann an uinneag stadastaireachd nan togalach."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Tagh taba nan “Togalaichean meadhanach” ann an uinneag stadastaireachd nan togalach."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""

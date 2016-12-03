@@ -55,6 +55,10 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
+  */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,

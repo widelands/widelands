@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-20 09:29+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 13:01+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -541,11 +541,11 @@ msgstr "Hmm, myślę, że to niewykonalne. Samodzielne przygotowywanie jedzenia 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Ale możemy znaleźć kompromis. Dla mnie, pieczenie chleba to męczące zadanie - mielenie mąki i późniejsze wypiekanie to nudna i żmudna robota: przydałoby się tu bardziej przemysłowe podejście. Osobiście chciałbym, żeby dostarczano mi po prostu codziennie na próg domu świeży chleb."
+msgstr "Ale możemy znaleźć kompromis. Dla mnie, pieczenie chleba to męczące zadanie - mielenie korzeni i kukurydzy i późniejsze wypiekanie to nudna i żmudna robota; przydałoby się tu bardziej przemysłowe podejście. Osobiście chciałbym, żeby dostarczano mi po prostu codziennie na próg domu świeży chleb."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

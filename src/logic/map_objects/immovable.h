@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ class WorldLegacyLookupTable;
 
 namespace Widelands {
 
+class Building;
 class Economy;
 class Map;
 class TerrainAffinity;
@@ -84,6 +85,8 @@ struct BaseImmovable : public MapObject {
 
 	virtual int32_t get_size() const = 0;
 	virtual bool get_passable() const = 0;
+
+	virtual void set_owner(Player* player);
 
 	using PositionList = std::vector<Coords>;
 	/**
@@ -136,7 +139,8 @@ public:
 	}
 	ImmovableProgram const* get_program(const std::string&) const;
 
-	Immovable& create(EditorGameBase&, const Coords&) const;
+	Immovable&
+	create(EditorGameBase&, const Coords&, const Widelands::Building* former_building) const;
 
 	MapObjectDescr::OwnerType owner_type() const {
 		return owner_type_;
@@ -198,10 +202,10 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	Immovable(const ImmovableDescr&);
+	/// If this immovable was created by a building, 'former_building' can be set in order to display
+	/// information about it.
+	Immovable(const ImmovableDescr&, const Widelands::Building* former_building = nullptr);
 	~Immovable();
-
-	void set_owner(Player*);
 
 	Coords get_position() const {
 		return position_;
@@ -242,6 +246,9 @@ public:
 	}
 
 protected:
+	// The building type that created this immovable, if any.
+	const BuildingDescr* former_building_descr_;
+
 	Coords position_;
 
 	uint32_t anim_;
@@ -299,6 +306,10 @@ public:
 	                               const TribesLegacyLookupTable& tribes_lookup_table);
 
 private:
+	/// If this immovable was created by a building, this can be set in order to display information
+	/// about it. If this is a player immovable, you will need to set the owner first.
+	void set_former_building(const BuildingDescr& building);
+
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
 	                       TextToDraw draw_text,
@@ -344,7 +355,7 @@ struct PlayerImmovable : public BaseImmovable {
 	/**
 	 * \return a list of workers that are currently located at this
 	 * immovable. This is not the same as the list of production
-	 * workers returned by \ref ProductionSite::get_production_workers
+	 * workers returned by \ref ProductionSite::working_positions
 	 */
 	const Workers& get_workers() const {
 		return workers_;
@@ -367,7 +378,7 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void receive_worker(Game&, Worker& worker);
 	/*@}*/
 
-	void set_owner(Player*);
+	void set_owner(Player*) override;
 
 protected:
 	void init(EditorGameBase&) override;
