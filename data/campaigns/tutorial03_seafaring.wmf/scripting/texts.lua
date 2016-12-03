@@ -44,7 +44,7 @@ tell_about_port = {
    body = rt(
       h1(_"Ports") ..
       p(_[[For everything you do on the high seas, you need a port at the shore. Ports are like headquarters: they can store wares, workers and soldiers. The soldiers inside will automatically come out when an enemy attacks the port.]]) ..
-      p(_[[Additionally, ports offer the possibility of transporting wares via ships. When you click on the port you already have, you will notice two additional tabs: wares and workers in the dock. They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let’s change this!]])
+      p(_[[Additionally, ports offer the possibility of transporting wares via ships. When you click on the port you already have, you will notice two additional tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let’s change this!]])
    ),
    h = 350
 }

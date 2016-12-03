@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-13 19:32+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,8 +52,8 @@ msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public Licens
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Lisätietoa vapaista ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -210,8 +210,8 @@ msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Päällikkö"
+msgid "Chieftains"
+msgstr "Päälliköt"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -429,8 +429,8 @@ msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Katsoja-tila, jossa voit nähdä kaiken, mutta et voi hallita mitään pelaajaa"
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -466,14 +466,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Vain pelin avannut taho (host) voi lisäksi säätää kolmea seuraavaa asetusta: Pelaajien alkutilanne, tekoälypelaajien heimo- sekä joukkuevalinnat"
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Jokainen pelaajaan liitetty asiakas (\"Rooli\" on pelaaja) voi asettaa oman pelaajan heimon ja joukkueen"
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -545,9 +545,9 @@ msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näpp
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Voit valita työkalun koon numeronäppäimillä (1-0)."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

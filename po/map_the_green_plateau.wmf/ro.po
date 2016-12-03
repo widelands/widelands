@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-03 15:16+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"PO-Revision-Date: 2016-11-19 17:55+0000\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:17
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid "The Forbidden Island"
-msgstr ""
+msgstr "Insula interzisă"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:18
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:69
@@ -31,7 +32,7 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr ""
+msgstr "În sfârşit! Tocmai am făcut primul pas spre victorie! Aseară, am ajuns pe insula interzisă şi am învins cele câteva gărzi care vegheau partea de nord-vest a insulei. Sunt destul de sigur că nici unul dintre celelalte căpetenii nu ne-au detectat până acum, deci ar trebui să rămânem silenţioşi şi să ne construim infrastructura. În curând vom fi suficient de puternici pentru a le ataca poziţiile"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28

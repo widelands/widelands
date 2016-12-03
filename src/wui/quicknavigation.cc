@@ -89,9 +89,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);
 
-		bool ctrl = WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
-		            WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
-		if (ctrl) {
+		if (key.mod & KMOD_CTRL) {
 			set_landmark(which, current_);
 		} else {
 			if (landmarks_[which].set) {

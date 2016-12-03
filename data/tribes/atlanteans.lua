@@ -1,4 +1,6 @@
 -- RST
+-- .. _lua_tribes_<tribename>.lua:
+--
 -- <tribename>.lua
 -- ---------------------
 --
@@ -7,7 +9,7 @@
 dirname = path.dirname(__file__)
 
 -- RST
--- .. function:: new_tribe(table)
+-- .. function:: new_tribe{table}
 --
 --    This function adds all units to a tribe.
 --
