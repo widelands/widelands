@@ -6,12 +6,13 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
+# zecas <jjorge@free.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-03 11:41+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +55,7 @@ msgstr "Proteja a tua colónia"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Construa algumas barreiras e sentinelas à volta da colónia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -79,9 +80,9 @@ msgstr "Uma casa do pedreiro e a infraestrutura mineira"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
-msgstr "Construa uma casa do pedreiro e depois a infraestrutura de mineração e produção (mina e/no forno de carvão, mina de ferro, fundição, loja do ferramenteiro, loja do armeiro, ferreiro de armas e uma fundição)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -103,20 +104,20 @@ msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "É óbvio que isto significa que vamos precisar de mais recursos para preparar esta comida - como peixe, carne ou pão. Para obter isto, deveria construir uma casa do pescador, uma quinta, um moinho e uma padaria."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
-msgstr ""
+msgstr "Talvez vai também precisar de uma casa do caçador, duma criação de porcos, duma vinha e dalguns poços."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr "Fica a teu cargo escolheres o que irá ser construído. Mas lembra-te que: as minas de carvão e de ferro precisam de cerveja: as minas de mármore e de ouro precisam de vinho e elas todas precisam no mínimo de rações que são produzidas OU com pão OU carne OU peixe."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -226,7 +227,7 @@ msgstr "Os rochedos"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Mais tarde, caminhei por entre os rochedos no Sul e procurei um local onde possamos construir uma pedreira para obtermos algum granito de que os edifícios maiores precisam."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
@@ -288,7 +289,7 @@ msgstr "Talvez as pessoas a bordo desse navio também tenham sido apanhadas na t
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Peço-te que sejas cauteloso e construas umas barreiras ou algumas sentinelas à volta da nossa colónia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"
@@ -317,7 +318,7 @@ msgstr "A ser verdade isto vai melhorar a nossa produção de mármore, bem para
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "por favor, expanda-se para a montanha e começe a extrair mármore."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:190
 msgid "Further Mountains"
@@ -332,10 +333,10 @@ msgstr "Saledus está excitado"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Pelos Deuses! Isto foi uma inacreditável sorte divina! Encontrámos mais duas montanhas e parece que existe lá uma grande quantidade de carvão e minério de ferro. Temos imediatamente de começar a construir minas de ferro e de carvão (um forno de carvão também serve), uma fundição, um ferreiro de armas e lojas do ferramenteiro e do armeiro."
+msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
@@ -343,7 +344,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "Porém, para podermos construir isto precisamos de materiais de construção melhores e mais elegantes. Assim, temos de construir uma casa do escultor, que corte colunas com o mármore."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199

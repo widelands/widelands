@@ -4,7 +4,7 @@
 # Translators:
 # Andrew Doubletrouble <vermilionjack@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
-# dr&mx <dronmax@gmail.com>, 2015
+# Максим Дронь <dronmax@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 06:19+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:41+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -544,11 +544,11 @@ msgstr "Ох, боюсь, это невозможно изменить. Приг
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Здесь возможен компромисс: как по мне, производство хлеба - очень хлопотная задача. Размол козельца и кукурузы в муку и затем выпекание хлеба - утомительный и скучный процесс. Думаю, здесь был бы полезен  промышленный подход. Мне, например, хотелось бы, чтобы свежий хлеб ежедневно поставлялся в мой дом."
+msgstr ""
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
