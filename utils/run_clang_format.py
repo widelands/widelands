@@ -11,15 +11,15 @@ from subprocess import call
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description='Run clang-format over the code base.'
-                                )
+    p = argparse.ArgumentParser(
+        description='Run clang-format over the code base.')
     return p.parse_args()
 
 
 def find_cplusplus_files():
     for (dirpath, _, filenames) in os.walk('./src'):
         for filename in filenames:
-            if os.path.splitext(filename)[-1].lower() == '.cc' or os.path.splitext(filename)[-1].lower() == '.h':
+            if os.path.splitext(filename)[-1].lower() in ['.cc', '.h']:
                 yield os.path.join(dirpath, filename)
 
 
