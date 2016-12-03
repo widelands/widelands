@@ -27,7 +27,7 @@ SPACES_PER_TAB = 3
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description='Fix common whitespace errors in Lua files and run clang-format over the code base. Recurses over all relevant files.')
+        description='Fix common whitespace errors in Lua files, run clang-format over the code base and pyformat over the utils directory. Recurses over all relevant files.')
     return p.parse_args()
 
 
