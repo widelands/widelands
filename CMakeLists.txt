@@ -174,13 +174,9 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
+  # This conflicts with the clang warnings, which are much more intelligent.
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-default")
 endif()
-
-  if(WIN32)
-    # This conflicts with the clang warnings, which are much more intelligent.
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-default")
-  endif()
-
 
 
 # Turn some warnings into errors.
