@@ -657,11 +657,11 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case (MapObjectType::BOB):
 	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
-	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-		                static_cast<int>(mo->descr().type()))
-		                  .str());
+							 static_cast<int>(mo->descr().type()))
+								.str());
 	}
+	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
@@ -1512,8 +1512,6 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }
@@ -3213,9 +3211,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case (MapObjectType::ROAD):
 	case (MapObjectType::PORTDOCK):
 	case (MapObjectType::WARE):
-	default:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
+	NEVER_HERE();
 }
 
 #undef CAST_TO_LUA
@@ -4479,8 +4477,6 @@ int LuaShip::get_state(lua_State* L) {
 			break;
 		case Ship::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
-		default:
-			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -4511,8 +4507,6 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			break;
 		case WalkingDir::IDLE:
 			return 0;
-		default:
-			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -4564,7 +4558,6 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			lua_pushstring(L, "cw");
 			break;
 		case IslandExploreDirection::kNotSet:
-		default:
 			return 0;
 		}
 		return 1;

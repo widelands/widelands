@@ -643,8 +643,6 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 	case MapWas::kGloballyMutated:
 		break;
-	default:
-		NEVER_HERE();
 	}
 
 	mutable_field_overlay_manager()->remove_all_overlays();

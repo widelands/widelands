@@ -174,7 +174,6 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				s.set_string("status", "read");
 				break;
 			case Message::Status::kArchived:  //  The default status. Do not write.
-			default:
 				break;
 			}
 			if (message.serial()) {

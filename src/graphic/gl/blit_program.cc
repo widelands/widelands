@@ -112,15 +112,16 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 			const Rectf mask_rect = to_gl_texture(current_args.mask);
 			float program_flavor = 0;
 			switch (current_args.blit_mode) {
+			case BlitMode::kDirect:
+				program_flavor = 0.;
+				break;
+
 			case BlitMode::kMonochrome:
 				program_flavor = 1.;
 				break;
+
 			case BlitMode::kBlendedWithMask:
 				program_flavor = 2.;
-				break;
-			case BlitMode::kDirect:
-			default:
-				program_flavor = 0.;
 				break;
 			}
 

@@ -455,8 +455,6 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 			players_.set_value(max_players_);
 		}
 		normalize_landmass(n);
-	default:
-		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }

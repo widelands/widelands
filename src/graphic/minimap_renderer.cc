@@ -110,8 +110,6 @@ void draw_view_window(const Map& map,
 		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
 		break;
 	}
-	default:
-		NEVER_HERE();
 	}
 
 	const int width = zoom ? map.get_width() * 2 : map.get_width();
@@ -216,8 +214,6 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 	case MiniMapType::kStaticMap:
 		top_left = Vector2f(0., 0.);
 		break;
-	default:
-		NEVER_HERE();
 	}
 
 	const float multiplier = zoom ? 2.f : 1.f;

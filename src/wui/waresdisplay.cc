@@ -267,12 +267,6 @@ const Widelands::TribeDescr::WaresOrder& AbstractWaresDisplay::icons_order() con
 		return tribe_.wares_order();
 	case Widelands::wwWORKER:
 		return tribe_.workers_order();
-#ifdef _WIN32
-	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
-	// in clang. There is no natural default for this function.
-	default:
-		NEVER_HERE();
-#endif
 	}
 	NEVER_HERE();
 }
@@ -283,12 +277,6 @@ const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order
 		return tribe_.wares_order_coords();
 	case Widelands::wwWORKER:
 		return tribe_.workers_order_coords();
-#ifdef _WIN32
-	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
-	// in clang. There is no natural default for this function.
-	default:
-		NEVER_HERE();
-#endif
 	}
 	NEVER_HERE();
 }

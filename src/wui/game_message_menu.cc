@@ -438,8 +438,6 @@ void GameMessageMenu::archive_or_restore() {
 			   gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
-	default:
-		NEVER_HERE();
 	}
 }
 
@@ -487,7 +485,6 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
-	default:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -570,14 +567,37 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message messag
 		return "images/wui/menus/menu_objectives.png";
 	case Widelands::Message::Type::kGameLogic:
 		return "images/ui_basic/menu_help.png";
-	default:
+	case Widelands::Message::Type::kNoMessages:
+	case Widelands::Message::Type::kAllMessages:
+	case Widelands::Message::Type::kGeologistsCoal:
+	case Widelands::Message::Type::kGeologistsGold:
+	case Widelands::Message::Type::kGeologistsStones:
+	case Widelands::Message::Type::kGeologistsIron:
+	case Widelands::Message::Type::kGeologistsWater:
+	case Widelands::Message::Type::kEconomySiteOccupied:
+	case Widelands::Message::Type::kWarfareSiteDefeated:
+	case Widelands::Message::Type::kWarfareSiteLost:
+	case Widelands::Message::Type::kWarfareUnderAttack:
 		return "images/wui/messages/message_new.png";
 	}
+	NEVER_HERE();
 }
 
 void GameMessageMenu::toggle_mode() {
 	list->clear();
 	switch (mode) {
+	case Inbox:
+		mode = Archive;
+		set_title(_("Messages: Archive"));
+		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
+		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
+		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
+		                          /** TRANSLATORS: Tooltip in the messages window */
+		                          % _("Restore selected message"))
+		                            .str());
+		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
+		togglemodebtn_->set_tooltip(_("Show Inbox"));
+		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
@@ -589,18 +609,6 @@ void GameMessageMenu::toggle_mode() {
 		                            .str());
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
-		break;
-	default:  // Inbox
-		mode = Archive;
-		set_title(_("Messages: Archive"));
-		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
-		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
-		                          /** TRANSLATORS: Tooltip in the messages window */
-		                          % _("Restore selected message"))
-		                            .str());
-		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
-		togglemodebtn_->set_tooltip(_("Show Inbox"));
 		break;
 	}
 }

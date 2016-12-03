@@ -98,11 +98,6 @@ bool MapData::compare_names(const MapData& other) {
 		break;
 
 	case MapData::DisplayType::kMapnamesLocalized:
-#ifdef _WIN32
-	// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler warning
-	// in clang. There is no natural default for this function.
-	default:
-#endif
 		this_name = localized_name;
 		other_name = other.localized_name;
 		break;

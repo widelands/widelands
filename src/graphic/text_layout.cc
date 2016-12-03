@@ -100,7 +100,8 @@ std::string as_aligned(const std::string& txt,
 		alignment = "center";
 	}
 
-	std::string font_face = "";
+	std::string font_face = "sans";
+
 	switch (face) {
 	case UI::FontSet::Face::kCondensed:
 		font_face = "condensed";
@@ -109,7 +110,6 @@ std::string as_aligned(const std::string& txt,
 		font_face = "serif";
 		break;
 	case UI::FontSet::Face::kSans:
-	default:
 		font_face = "sans";
 		break;
 	}

@@ -445,11 +445,6 @@ void SoldierList::think() {
 			soldier_preference_.set_state(1);
 			break;
 		case Widelands::MilitarySite::kNoPreference:
-#ifdef _WIN32
-		// If this isn't here, we get a compiler warning in Windows. If it is, we get a compiler
-		// warning in clang. There is no natural default for this function.
-		default:
-#endif
 			soldier_preference_.set_state(-1);
 			break;
 		}

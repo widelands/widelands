@@ -76,9 +76,8 @@ bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeAny:
 		return true;
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 bool FindNodeImmovableSize::accept(const Map&, const FCoords& coord) const {

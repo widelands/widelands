@@ -898,8 +898,6 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		break;
 	case None:
 		break;
-	default:
-		NEVER_HERE();
 	}
 
 	program_timer_ = true;

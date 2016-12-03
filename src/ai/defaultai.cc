@@ -202,7 +202,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 					   break;
 				   }
 			   }
-		   default:;  // Do nothing
 		   }
 		});
 }
@@ -444,7 +443,6 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + 19 * 1000, SchedulerTaskId::kCheckEnemySites);
 			break;
 		case SchedulerTaskId::kUnset:
-		default:
 			NEVER_HERE();
 		}
 	}
