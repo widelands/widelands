@@ -4044,24 +4044,38 @@ inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) 
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-
-#define WH_SET_POLICY(type, btype)                                                                        \
-	int LuaWarehouse::set_##type##_policies(lua_State* L) {                                           \
-		Warehouse* wh = get(L, get_egbase(L));                                                    \
-		Warehouse::StockPolicy p = string_to_wh_policy(L, -1);                                    \
-		lua_pop(L, 1);                                                                            \
-		bool return_number = false;                                                               \
-		btype##sSet set = parse_get_##type##s_arguments(L, wh->owner().tribe(), &return_number);  \
-		lua_newtable(L);                                                                          \
-		for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) {                        \
-			wh->set_##type##_policy(*i, p);                                                   \
-		}                                                                                         \
-		return 0;                                                                                 \
+int LuaWarehouse::set_ware_policies(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	lua_pop(L, 1);
+	bool return_number = false;
+	WaresSet set = parse_get_wares_arguments(L, wh->owner().tribe(), &return_number);
+	lua_newtable(L);
+	for (WaresSet::iterator i = set.begin(); i != set.end(); ++i) {
+		wh->set_ware_policy(*i, p);
 	}
-WH_SET_POLICY(ware, Ware)
-WH_SET_POLICY(worker, Worker)
-#undef WH_SET_POLICY
+	return 0;
+}
 
+int LuaWarehouse::set_worker_policies(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	lua_pop(L, 1);
+	bool return_number = false;
+	WorkersSet set = parse_get_workers_arguments(L, wh->owner().tribe(), &return_number);
+	lua_newtable(L);
+	const TribeDescr& tribe = wh->owner().tribe();
+	for (WorkersSet::iterator i = set.begin(); i != set.end(); ++i) {
+		// If the worker does not cost anything, ignore it
+		// Otherwise, an unlimited stream of carriers might leave the warehouse
+		if (tribe.get_worker_descr(*i)->is_buildable()
+				&& tribe.get_worker_descr(*i)->buildcost().empty()) {
+			continue;
+		}
+		wh->set_worker_policy(*i, p);
+	}
+	return 0;
+}
 
 #define WH_GET_POLICY(type, btype)                                                                        \
 	int LuaWarehouse::get_##type##_policies(lua_State* L) {                                           \
