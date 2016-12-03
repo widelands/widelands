@@ -54,9 +54,10 @@ using namespace Widelands;
  *  R = player-perspective-dependent brightness modulation
  * This information is re-uploaded every frame.
  *
- * Semi-permanent information (GL_RG8UI):
- *  R = field ownership
- *  B = road/flag/building data
+ * Semi-permanent information (GL_R8UI):
+ *  R = bits 0..5: field ownership (player number)
+ *      bits 6..7: road/flag/building data:
+ *                 0: nothing, 1: road, 2: flag, 3: building
  * This information is only needed for the minimap, and re-uploaded every frame
  * when it is shown.
  *
@@ -118,6 +119,7 @@ TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& eg
   : egbase_(egbase), player_(player), uploads_(GL_PIXEL_UNPACK_BUFFER) {
 	glGenTextures(1, &brightness_texture_);
 	glGenTextures(1, &fields_texture_);
+	glGenTextures(1, &minimap_texture_);
 
 	auto& gl = Gl::State::instance();
 	gl.bind(GL_TEXTURE0, fields_texture_);
@@ -126,8 +128,15 @@ TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& eg
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+	gl.bind(GL_TEXTURE0, minimap_texture_);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 	fields_update();
 	upload_road_textures();
+	upload_constant_textures();
 }
 
 TerrainInformationGl4::~TerrainInformationGl4() {
@@ -136,6 +145,12 @@ TerrainInformationGl4::~TerrainInformationGl4() {
 
 	if (fields_texture_)
 		glDeleteTextures(1, &fields_texture_);
+
+	if (minimap_texture_)
+		glDeleteTextures(1, &minimap_texture_);
+
+	if (terrain_color_texture_)
+		glDeleteTextures(1, &terrain_color_texture_);
 
 	global_map_.erase(GlobalKey(&egbase_, player_));
 }
@@ -146,6 +161,53 @@ void TerrainInformationGl4::update() {
 		fields_update();
 
 	brightness_update();
+}
+
+void TerrainInformationGl4::update_minimap() {
+	update();
+
+	// Re-upload minimap data.
+	auto& gl = Gl::State::instance();
+	const Map& map = egbase().map();
+	MapIndex max_index = map.max_index();
+	std::vector<uint8_t> data;
+	const bool see_all = !player() || player()->see_all();
+
+	auto detail_bits = [&](const Widelands::BaseImmovable* imm) -> uint8_t {
+		if (imm) {
+			Widelands::MapObjectType type = imm->descr().type();
+			if (type == Widelands::MapObjectType::ROAD)
+				return 1u << 6;
+			if (type == Widelands::MapObjectType::FLAG)
+				return 2u << 6;
+			if (type >= Widelands::MapObjectType::BUILDING)
+				return 3u << 6;
+		}
+		return 0;
+	};
+
+	data.resize(max_index);
+	if (see_all) {
+		for (MapIndex i = 0; i < max_index; ++i) {
+			const Field& f = map[i];
+			data[i] = f.get_owned_by();
+			data[i] |= detail_bits(f.get_immovable());
+		}
+	} else {
+		for (MapIndex i = 0; i < max_index; ++i) {
+			const Player::Field& pf = player()->fields()[i];
+			data[i] = pf.owner;
+
+			if (pf.vision >= 2) {
+				const Field& f = map[i];
+				data[i] |= detail_bits(f.get_immovable());
+			}
+		}
+	}
+
+	gl.bind(GL_TEXTURE0, minimap_texture_);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, map.get_width(), map.get_height(), 0,
+	             GL_RED_INTEGER, GL_UNSIGNED_BYTE, data.data());
 }
 
 void TerrainInformationGl4::fields_update() {
@@ -306,6 +368,42 @@ void TerrainInformationGl4::brightness_update() {
 	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
+void TerrainInformationGl4::upload_constant_textures() {
+	auto& gl = Gl::State::instance();
+	const auto& terrains = egbase().world().terrains();
+	std::vector<RGBColor> colors;
+
+	for (Widelands::DescriptionIndex i = 0; i < terrains.size(); ++i)
+		colors.push_back(terrains.get(i).get_minimap_color(0));
+
+	glGenTextures(1, &terrain_color_texture_);
+
+	gl.bind(GL_TEXTURE0, terrain_color_texture_);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, colors.size(), 1, 0, GL_RGB, GL_UNSIGNED_BYTE,
+	             colors.data());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	colors.resize(MAX_PLAYERS);
+	for (int i = 1; i <= MAX_PLAYERS; ++i) {
+		const Widelands::Player* player = egbase().get_player(i);
+		if (player)
+			colors[i - 1] = player->get_playercolor();
+	}
+
+	glGenTextures(1, &player_color_texture_);
+
+	gl.bind(GL_TEXTURE0, player_color_texture_);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, colors.size(), 1, 0, GL_RGB, GL_UNSIGNED_BYTE,
+	             colors.data());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
+
 TerrainProgramGl4::Terrain::Terrain()
   : terrain_data(GL_UNIFORM_BUFFER), instance_data(GL_ARRAY_BUFFER) {
 	// Initialize program.
@@ -349,6 +447,30 @@ TerrainProgramGl4::Roads::Roads()
 }
 
 TerrainProgramGl4::Roads::~Roads() {
+}
+
+TerrainProgramGl4::MiniMap::MiniMap()
+  : vertex_data(GL_ARRAY_BUFFER) {
+	gl_program.build_vp_fp({"minimap_gl4"}, {"minimap_gl4"});
+
+	in_position = glGetAttribLocation(gl_program.object(), "in_position");
+	in_field = glGetAttribLocation(gl_program.object(), "in_field");
+
+	u_layer_terrain = glGetUniformLocation(gl_program.object(), "u_layer_terrain");
+	u_layer_owner = glGetUniformLocation(gl_program.object(), "u_layer_owner");
+	u_layer_details = glGetUniformLocation(gl_program.object(), "u_layer_details");
+
+	u_frame_topleft = glGetUniformLocation(gl_program.object(), "u_frame_topleft");
+	u_frame_bottomright = glGetUniformLocation(gl_program.object(), "u_frame_bottomright");
+
+	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
+	u_player_brightness = glGetUniformLocation(gl_program.object(), "u_player_brightness");
+	u_minimap_extra = glGetUniformLocation(gl_program.object(), "u_minimap_extra");
+	u_terrain_color = glGetUniformLocation(gl_program.object(), "u_terrain_color");
+	u_player_color = glGetUniformLocation(gl_program.object(), "u_player_color");
+}
+
+TerrainProgramGl4::MiniMap::~MiniMap() {
 }
 
 TerrainProgramGl4::TerrainProgramGl4() {
@@ -428,6 +550,105 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * kPatchWidth * kPatchHeight, num_instances);
 
 	glVertexBindingDivisor(terrain_.in_patch_coordinate, 0);
+}
+
+void TerrainProgramGl4::draw_minimap(const TerrainGl4Arguments* args,
+                                     float z_value) {
+	auto& gl = Gl::State::instance();
+	const Widelands::Map& map = args->terrain->egbase().map();
+
+	glUseProgram(minimap_.gl_program.object());
+
+	// Prepare minimap setting uniforms
+	glUniform1i(minimap_.u_layer_terrain, (args->minimap_layers & MiniMapLayer::Terrain) ? 1 : 0);
+	glUniform1i(minimap_.u_layer_owner, (args->minimap_layers & MiniMapLayer::Owner) ? 1 : 0);
+
+	uint details = 0;
+	if (args->minimap_layers & MiniMapLayer::Road)
+		details |= 1;
+	if (args->minimap_layers & MiniMapLayer::Flag)
+		details |= 2;
+	if (args->minimap_layers & MiniMapLayer::Building)
+		details |= 4;
+
+	glUniform1ui(minimap_.u_layer_details, details);
+
+	// Prepare textures & sampler uniforms.
+	glUniform1i(minimap_.u_terrain_base, 0);
+	gl.bind(GL_TEXTURE0, args->terrain->fields_texture());
+
+	glUniform1i(minimap_.u_player_brightness, 1);
+	gl.bind(GL_TEXTURE1, args->terrain->player_brightness_texture());
+
+	glUniform1i(minimap_.u_minimap_extra, 2);
+	gl.bind(GL_TEXTURE2, args->terrain->minimap_texture());
+
+	glUniform1i(minimap_.u_terrain_color, 3);
+	gl.bind(GL_TEXTURE3, args->terrain->terrain_color_texture());
+
+	glUniform1i(minimap_.u_player_color, 4);
+	gl.bind(GL_TEXTURE4, args->terrain->player_color_texture());
+
+	glUniform2i(minimap_.u_frame_topleft, args->minfx, args->minfy);
+	glUniform2i(minimap_.u_frame_bottomright, args->maxfx, args->maxfy);
+
+	// Compute coordinates and upload vertex data.
+	float width = map.get_width();
+	float height = map.get_height();
+
+	if (args->minimap_layers & MiniMapLayer::Zoom2) {
+		width *= 2;
+		height *= 2;
+	}
+
+	float left = args->surface_offset.x;
+	float right = left + width;
+	float top = args->surface_offset.y;
+	float bottom = top + height;
+
+	pixel_to_gl_renderbuffer(args->surface_width, args->surface_height, &left, &top);
+	pixel_to_gl_renderbuffer(args->surface_width, args->surface_height, &right, &bottom);
+
+	float tx = args->minimap_tl_fx * (1.0 / map.get_width());
+	float ty = args->minimap_tl_fy * (1.0 / map.get_height());
+
+	auto stream = minimap_.vertex_data.stream(4);
+	MiniMap::VertexData* v = stream.add(4);
+
+	v[0].x = left;
+	v[0].y = top;
+	v[0].z = z_value;
+	v[0].tx = tx;
+	v[0].ty = ty;
+
+	v[1].x = left;
+	v[1].y = bottom;
+	v[1].z = z_value;
+	v[1].tx = tx;
+	v[1].ty = ty + 1.0;
+
+	v[2].x = right;
+	v[2].y = top;
+	v[2].z = z_value;
+	v[2].tx = tx + 1.0;
+	v[2].ty = ty;
+
+	v[3].x = right;
+	v[3].y = bottom;
+	v[3].z = z_value;
+	v[3].tx = tx + 1.0;
+	v[3].ty = ty + 1.0;
+
+	GLintptr offset = stream.unmap();
+
+	gl.enable_vertex_attrib_array({minimap_.in_position, minimap_.in_field});
+
+	minimap_.vertex_data.bind();
+	Gl::vertex_attrib_pointer(minimap_.in_position, 3, sizeof(MiniMap::VertexData), offset);
+	Gl::vertex_attrib_pointer(minimap_.in_field, 2, sizeof(MiniMap::VertexData),
+	                          offset + offsetof(MiniMap::VertexData, tx));
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,

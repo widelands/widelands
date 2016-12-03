@@ -48,7 +48,7 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::Program::kHighestProgramId <= 8,
+static_assert(RenderQueue::Program::kHighestProgramId <= 16,
               "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
@@ -172,6 +172,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kTerrainRoad:
 	case Program::kTerrainGl4:
 	case Program::kTerrainRoadGl4:
+	case Program::kMiniMapGl4:
 		/* all fallthroughs intended */
 		break;
 
@@ -274,6 +275,13 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			terrain_program_gl4_->draw_roads(item.terrain_gl4_arguments,
 			                                 item.z_value);
+			++i;
+		} break;
+
+		case Program::kMiniMapGl4: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			terrain_program_gl4_->draw_minimap(item.terrain_gl4_arguments,
+			                                   item.z_value);
 			++i;
 		} break;
 

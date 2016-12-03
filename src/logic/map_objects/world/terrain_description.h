@@ -80,7 +80,7 @@ public:
 
 	// Return the basic terrain colour to be used in the minimap.
 	// 'shade' must be a brightness value, i.e. in [-128, 127].
-	const RGBColor& get_minimap_color(int shade);
+	const RGBColor& get_minimap_color(int shade) const;
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
 	Is get_is() const;

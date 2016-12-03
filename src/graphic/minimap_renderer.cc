@@ -24,8 +24,11 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "graphic/game_renderer_gl4.h"
+#include "graphic/gl/terrain_program_gl4.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
@@ -119,6 +122,25 @@ bool is_minimap_frameborder(const Widelands::FCoords& f,
 	return isframepixel;
 }
 
+// Calculate the field coordinates of the dotted frame indicating where the
+// main map view is currently centered, without wrap-around.
+void calc_minimap_frame(const Widelands::Map& map,
+                        const Point& viewpoint,
+                        Point& topleft,
+                        Point& bottomright) {
+	int32_t xsize = g_gr->get_xres() / kTriangleWidth / 2;
+	int32_t ysize = g_gr->get_yres() / kTriangleHeight / 2;
+
+	const int32_t mapwidth = map.get_width();
+	const int32_t mapheight = map.get_height();
+
+	topleft.x = viewpoint.x + mapwidth / 2 - xsize;
+	topleft.y = viewpoint.y + mapheight / 2 - ysize;
+
+	bottomright.x = viewpoint.x + mapwidth / 2 + xsize;
+	bottomright.y = viewpoint.y + mapheight / 2 + ysize;
+}
+
 // Does the actual work of drawing the minimap.
 void draw_minimap_int(Texture* texture,
                       const Widelands::EditorGameBase& egbase,
@@ -130,29 +152,21 @@ void draw_minimap_int(Texture* texture,
 	const uint16_t surface_h = texture->height();
 	const uint16_t surface_w = texture->width();
 
-	// size of the display frame
-	int32_t xsize = g_gr->get_xres() / kTriangleWidth / 2;
-	int32_t ysize = g_gr->get_yres() / kTriangleHeight / 2;
-
-	const int32_t mapwidth = egbase.get_map().get_width();
+	const int32_t mapwidth = map.get_width();
 	const int32_t mapheight = map.get_height();
 
-	Point ptopleft;  // top left point of the current display frame
-	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
+	Point ptopleft, pbottomright;
+	calc_minimap_frame(map, viewpoint, ptopleft, pbottomright);
+
 	if (ptopleft.x < 0) {
 		ptopleft.x += mapwidth;
 	}
-	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
 	if (ptopleft.y < 0) {
 		ptopleft.y += mapheight;
 	}
-
-	Point pbottomright;  // bottom right point of the current display frame
-	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
 	if (pbottomright.x >= mapwidth) {
 		pbottomright.x -= mapwidth;
 	}
-	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
 	if (pbottomright.y >= mapheight) {
 		pbottomright.y -= mapheight;
 	}
@@ -240,6 +254,62 @@ private:
 	std::unique_ptr<Texture> texture_;
 };
 
+/**
+ * Mini-map renderer that delegates to the GL4 programs for mini-map drawing
+ * in a pixel shader.
+ */
+class MiniMapRendererGl4 : public MiniMapRenderer {
+public:
+	MiniMapRendererGl4(const Widelands::EditorGameBase& egbase,
+	                   const Widelands::Player* player)
+	  : MiniMapRenderer(egbase, player) {
+		  args_.terrain = TerrainInformationGl4::get(egbase, player);
+	}
+
+	void draw(RenderTarget& dst,
+	          const Point& viewpoint,
+	          MiniMapLayer layers) override {
+		Surface* surface = dst.get_surface();
+		if (!surface)
+			return;
+
+		args_.terrain->update_minimap();
+
+		Point frame_topleft, frame_bottomright;
+		calc_minimap_frame(egbase().map(), viewpoint, frame_topleft, frame_bottomright);
+
+		args_.minfx = frame_topleft.x;
+		args_.minfy = frame_topleft.y;
+		args_.maxfx = frame_bottomright.x;
+		args_.maxfy = frame_bottomright.y;
+
+		args_.minimap_tl_fx = viewpoint.x;
+		args_.minimap_tl_fy = viewpoint.y;
+		args_.minimap_layers = layers;
+
+		const Rect& bounding_rect = dst.get_rect();
+
+		args_.surface_offset = bounding_rect.origin() + dst.get_offset();
+		args_.surface_width = surface->width();
+		args_.surface_height = surface->height();
+
+		// Enqueue the drawing.
+		RenderQueue::Item i;
+		i.program_id = RenderQueue::Program::kMiniMapGl4;
+		i.blend_mode = BlendMode::Copy;
+		i.terrain_arguments.destination_rect =
+			FloatRect(bounding_rect.x, args_.surface_height - bounding_rect.y - bounding_rect.h,
+			          bounding_rect.w, bounding_rect.h);
+		i.terrain_arguments.renderbuffer_width = args_.surface_width;
+		i.terrain_arguments.renderbuffer_height = args_.surface_height;
+		i.terrain_gl4_arguments = &args_;
+		RenderQueue::instance().enqueue(i);
+	}
+
+private:
+	TerrainGl4Arguments args_;
+};
+
 }  // namespace
 
 void write_minimap_image_field(const EditorGameBase& egbase,
@@ -291,5 +361,7 @@ MiniMapRenderer::MiniMapRenderer(const Widelands::EditorGameBase& egbase,
 std::unique_ptr<MiniMapRenderer>
 MiniMapRenderer::create(const Widelands::EditorGameBase& egbase,
                         const Widelands::Player* player) {
-	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));
+	// TODO(nha): automatic selection
+// 	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));
+	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererGl4(egbase, player));
 }

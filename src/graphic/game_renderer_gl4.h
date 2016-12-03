@@ -23,10 +23,15 @@
 #include <vector>
 
 #include "graphic/game_renderer.h"
+#include "graphic/minimap_layer.h"
 #include "logic/widelands_geometry.h"
 
 class TerrainInformationGl4;
 
+/**
+ * This structure is used for the @ref RenderQueue by terrain rendering, road
+ * rendering, and minimap rendering. Each use only uses a subset of memers.
+ */
 struct TerrainGl4Arguments {
 	struct Road {
 		Widelands::Coords coord;
@@ -52,6 +57,9 @@ struct TerrainGl4Arguments {
 	int surface_height;
 	int minfx, minfy, maxfx, maxfy;
 	std::vector<Road> roads;
+
+	int minimap_tl_fx, minimap_tl_fy;
+	MiniMapLayer minimap_layers;
 };
 
 /**

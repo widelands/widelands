@@ -266,7 +266,7 @@ void TerrainDescription::set_minimap_color(const RGBColor& color) {
 	}
 }
 
-const RGBColor& TerrainDescription::get_minimap_color(int shade) {
+const RGBColor& TerrainDescription::get_minimap_color(int shade) const {
 	assert(-128 <= shade && shade <= 127);
 	return minimap_colors_[128 + shade];
 }

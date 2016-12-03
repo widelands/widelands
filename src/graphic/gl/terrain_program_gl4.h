@@ -79,6 +79,18 @@ public:
 		return road_textures_.object();
 	}
 
+	GLuint minimap_texture() const {
+		return minimap_texture_;
+	}
+
+	GLuint terrain_color_texture() const {
+		return terrain_color_texture_;
+	}
+
+	GLuint player_color_texture() const {
+		return player_color_texture_;
+	}
+
 	// Get the index into the road textures array stored in the road textures
 	// buffer.
 	unsigned road_texture_idx(Widelands::PlayerNumber owner,
@@ -88,6 +100,7 @@ public:
 
 	// Upload updated information to texture(s) if necessary.
 	void update();
+	void update_minimap();
 
 private:
 	TerrainInformationGl4(const Widelands::EditorGameBase& egbase,
@@ -99,6 +112,7 @@ private:
 	void fields_update();
 	void upload_road_textures();
 	void brightness_update();
+	void upload_constant_textures();
 
 	struct PerFieldData {
 		uint8_t terrain_r;
@@ -148,6 +162,15 @@ private:
 	std::vector<PlayerRoads> player_roads_;
 	GLuint road_texture_object_;
 
+	// Texture containing additional, minimap-only information.
+	GLuint minimap_texture_;
+
+	// Texture containing terrain colors for minimap.
+	GLuint terrain_color_texture_;
+
+	// Texture containing player colors.
+	GLuint player_color_texture_;
+
 	DISALLOW_COPY_AND_ASSIGN(TerrainInformationGl4);
 };
 
@@ -167,6 +190,10 @@ public:
 	void draw(const TerrainGl4Arguments* args,
 	          uint32_t gametime,
 	          float z_value);
+
+	// Draws a mini-map.
+	void draw_minimap(const TerrainGl4Arguments* args,
+	                  float z_value);
 
 	// Draw roads.
 	void draw_roads(const TerrainGl4Arguments* args, float z_value);
@@ -275,6 +302,41 @@ private:
 		// Uniform block.
 		GLint block_textures_idx;
 	} roads_;
+
+	struct MiniMap {
+		MiniMap();
+		~MiniMap();
+
+		struct VertexData {
+			float x, y, z;
+			float tx, ty;
+		};
+		static_assert(sizeof(VertexData) == 20, "incorrect padding");
+
+		// The program used for drawing the minimap.
+		Gl::Program gl_program;
+
+		// The vertex array.
+		Gl::StreamingBuffer<VertexData> vertex_data;
+
+		// Vertex attributes.
+		GLint in_position;
+		GLint in_field;
+
+		// Uniforms.
+		GLint u_layer_terrain;
+		GLint u_layer_owner;
+		GLint u_layer_details;
+
+		GLint u_frame_topleft;
+		GLint u_frame_bottomright;
+
+		GLint u_terrain_base;
+		GLint u_player_brightness;
+		GLint u_minimap_extra;
+		GLint u_terrain_color;
+		GLint u_player_color;
+	} minimap_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainProgramGl4);
 };

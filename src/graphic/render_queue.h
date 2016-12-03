@@ -87,6 +87,7 @@ public:
 		kTerrainRoad,
 		kTerrainGl4,
 		kTerrainRoadGl4,
+		kMiniMapGl4,
 		kBlit,
 		kRect,
 		kLine,

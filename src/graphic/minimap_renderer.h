@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/point.h"
+#include "graphic/minimap_layer.h"
 
 class RenderTarget;
 class StreamWrite;
@@ -30,28 +31,6 @@ class StreamWrite;
 namespace Widelands {
 class Player;
 class EditorGameBase;
-}
-
-// Layers for selecting what do display on the minimap.
-enum class MiniMapLayer {
-	Terrain = 1,
-	Owner = 2,
-	Flag = 4,
-	Road = 8,
-	Building = 16,
-	Zoom2 = 32,
-	ViewWindow = 64,
-};
-
-// A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
-inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
-	return MiniMapLayer(static_cast<int>(left) | static_cast<int>(right));
-}
-inline int operator&(MiniMapLayer left, MiniMapLayer right) {
-	return static_cast<int>(left) & static_cast<int>(right);
-}
-inline MiniMapLayer operator^(MiniMapLayer left, MiniMapLayer right) {
-	return MiniMapLayer(static_cast<int>(left) ^ static_cast<int>(right));
 }
 
 /**
