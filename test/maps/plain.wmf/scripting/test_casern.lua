@@ -34,7 +34,7 @@ run(function()
    assert_equal(nil, rv.meat)
 
    -- Sleep long enough to train a soldier. But ax are missing so nothing should happen
-   sleep(60000)
+   sleep(35000)
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
    assert_equal(3, rv.barbarians_recruit)
@@ -44,7 +44,7 @@ run(function()
    rv = br:get_inputs("all")
    assert_equal(3, rv.ax)
    assert_equal(0, rv.barbarians_recruit)
-   sleep(60000)
+   sleep(35000)
    rv = br:get_inputs("all")
    assert_equal(3, rv.ax)
    assert_equal(0, rv.barbarians_recruit)
@@ -62,7 +62,7 @@ run(function()
    -- No sense checking for recruits, they are for free
    assert_equal(0, rv.barbarians_soldier)
 
-   sleep(200000)
+   sleep(100000)
 
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
@@ -75,7 +75,7 @@ run(function()
 
    -- Ax out of the warehouse
    hq:set_wares{ax=2}
-   sleep(150000)
+   sleep(100000)
 
    rv = br:get_inputs("all")
    assert_equal(0, rv.ax)
