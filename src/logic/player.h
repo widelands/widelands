@@ -437,6 +437,10 @@ public:
 		return t;
 	}
 
+	uint32_t get_terrain_vision_version() const {
+		return terrain_vision_version_;
+	}
+
 	/**
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
@@ -636,6 +640,7 @@ private:
 	std::unordered_set<std::string> remaining_shipnames_;
 
 	Field* fields_;
+	uint32_t terrain_vision_version_; /**< for lazy updates of rendering data, not saved */
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
 	Economies economies_;

@@ -129,6 +129,7 @@ private:
 	const Widelands::EditorGameBase& egbase_;
 	const Widelands::Player* player_;
 	uint32_t fields_base_version_;
+	uint32_t terrain_vision_version_;
 
 	Gl::StreamingBuffer<uint8_t> uploads_;
 

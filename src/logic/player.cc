@@ -145,6 +145,7 @@ Player::Player(EditorGameBase& the_egbase,
      civil_blds_lost_(0),
      civil_blds_defeated_(0),
      fields_(nullptr),
+     terrain_vision_version_(0),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
      ai_(""),
@@ -909,6 +910,9 @@ void Player::rediscover_node(const Map& map,
 	assert(&field < fields_ + map.max_index());
 
 	{  // discover everything (above the ground) in this field
+		if (field.terrains.d != f.field->get_terrains().d ||
+		    field.terrains.r != f.field->get_terrains().r)
+			terrain_vision_version_++;
 		field.terrains = f.field->get_terrains();
 		field.roads = f.field->get_roads();
 		field.owner = f.field->get_owned_by();
@@ -973,6 +977,8 @@ void Player::rediscover_node(const Map& map,
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
+			if (tr_field.terrains.d != tr.field->terrain_d())
+				terrain_vision_version_++;
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
 			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
@@ -982,6 +988,9 @@ void Player::rediscover_node(const Map& map,
 		FCoords tl = map.tl_n(f);
 		Field& tl_field = fields_[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
+			if (tl_field.terrains.d != tl.field->terrain_d() ||
+			    tl_field.terrains.r != tl.field->terrain_r())
+				terrain_vision_version_++;
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
 			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
@@ -991,6 +1000,8 @@ void Player::rediscover_node(const Map& map,
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
+			if (l_field.terrains.r != l.field->terrain_r())
+				terrain_vision_version_++;
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
 			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();

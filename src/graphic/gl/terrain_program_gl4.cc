@@ -38,8 +38,6 @@ using namespace Widelands;
  *
  * TODO(nha): upload based on dirtiness and/or "rolling" updates of N% per frame
  *
- * TODO(nha): terrain knowledge is actually per-player
- *
  * Per-field data is uploaded directly into integer-valued textures that span
  * the entire map, and vertex shaders do most of the heavy lifting. The
  * following textures are used:
@@ -143,7 +141,8 @@ TerrainInformationGl4::~TerrainInformationGl4() {
 }
 
 void TerrainInformationGl4::update() {
-	if (fields_base_version_ != egbase().map().get_fields_base_version())
+	if (fields_base_version_ != egbase().map().get_fields_base_version() ||
+	    (player() && terrain_vision_version_ != player()->get_terrain_vision_version()))
 		fields_update();
 
 	brightness_update();
@@ -157,13 +156,27 @@ void TerrainInformationGl4::fields_update() {
 		reinterpret_cast<PerFieldData*>
 			(stream.add(sizeof(PerFieldData) * uint(map.get_width()) * map.get_height()));
 	MapIndex max_index = map.max_index();
+	const bool see_all = !player() || player()->see_all();
 
-	for (MapIndex i = 0; i < max_index; ++i) {
-		const Field& f = map[i];
-		fd[i].terrain_r = f.terrain_r();
-		fd[i].terrain_d = f.terrain_d();
-		fd[i].height = f.get_height();
-		fd[i].brightness = f.get_brightness();
+	if (see_all) {
+		for (MapIndex i = 0; i < max_index; ++i) {
+			const Field& f = map[i];
+			fd[i].terrain_r = f.terrain_r();
+			fd[i].terrain_d = f.terrain_d();
+			fd[i].height = f.get_height();
+			fd[i].brightness = f.get_brightness();
+		}
+	} else {
+		const Player::Field* player_fields = player()->fields();
+
+		for (MapIndex i = 0; i < max_index; ++i) {
+			const Field& f = map[i];
+			const Player::Field& pf = player_fields[i];
+			fd[i].terrain_r = pf.terrains.r;
+			fd[i].terrain_d = pf.terrains.d;
+			fd[i].height = f.get_height();
+			fd[i].brightness = f.get_brightness();
+		}
 	}
 
 	GLintptr offset = stream.unmap();
@@ -176,6 +189,8 @@ void TerrainInformationGl4::fields_update() {
 	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
 	fields_base_version_ = map.get_fields_base_version();
+	if (player())
+		terrain_vision_version_ = player()->get_terrain_vision_version();
 }
 
 TerrainInformationGl4::PerRoadTextureData::PerRoadTextureData(const FloatRect& rect)
