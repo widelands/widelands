@@ -180,11 +180,11 @@ private:
 	std::string clientname_;
 	std::string clientrights_;
 
-	/// informations of the clients game
+	/// information of the clients game
 	std::string gamename_;
 	std::string gameip_;
 
-	/// Metaserver informations
+	/// Metaserver information
 	bool clientupdateonmetaserver_;
 	bool gameupdateonmetaserver_;
 	bool clientupdate_;

@@ -205,7 +205,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 	Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
-		// Save informations for recreation, if window is reopened
+		// Save information for recreation, if window is reopened
 		my_registry_->selected_information = selected_information_;
 		my_registry_->time = plot_.get_time();
 		PlayerNumber const nr_players = game.map().get_nrplayers();
