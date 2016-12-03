@@ -178,7 +178,7 @@ endif()
 
   if(WIN32)
     # This conflicts with the clang warnings, which are much more intelligent.
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wnoswitch-default")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-default")
   endif()
 
 
