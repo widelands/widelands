@@ -193,7 +193,8 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	if (req.get_type() == wwWORKER) {
 		return warehouse_->count_workers(game, req.get_index(),
-										req.get_requirements(), req.get_exact_match());
+					req.get_requirements(),
+					(req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
 	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
@@ -737,11 +738,9 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-// NOCOM(#codereview): change 'bool exact' to be an enum: enum class Match {
-// kExact, kCompatible } to make callsites easier to understand.
 Quantity
 Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
-						const Requirements& req, bool exact) {
+						const Requirements& req, Match exact) {
 	Quantity sum = 0;
 
 	do {
@@ -757,7 +756,7 @@ Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
 				}
 			}
 		}
-		if (!exact) {
+		if (exact == Match::kCompatible) {
 			ware = owner().tribe().get_worker_descr(ware)->becomes();
 		} else {
 			ware = INVALID_INDEX;
@@ -1182,7 +1181,7 @@ void Warehouse::aggressor(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (!count_workers(game, soldier_index, noreq, false))
+	if (!count_workers(game, soldier_index, noreq, Match::kCompatible))
 		return;
 
 	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
@@ -1194,7 +1193,7 @@ bool Warehouse::attack(Soldier& enemy) {
 	DescriptionIndex const soldier_index = owner().tribe().soldier();
 	Requirements noreq;
 
-	if (count_workers(game, soldier_index, noreq, false)) {
+	if (count_workers(game, soldier_index, noreq, Match::kCompatible)) {
 		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");

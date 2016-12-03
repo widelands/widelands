@@ -111,6 +111,22 @@ public:
 		SP_Remove = 3,
 	};
 
+	/**
+	 * Whether worker indices in count_workers() have to match exactly.
+	 */
+	enum class Match {
+		/**
+		 * Return the number of workers with matching indices.
+		 */
+		kExact,
+
+		/**
+		 * Return the number of workers with matching indices or
+		 * which are more experienced workers of the given lower type.
+		 */
+		kCompatible
+	};
+
 	Warehouse(const WarehouseDescr&);
 	virtual ~Warehouse();
 
@@ -181,7 +197,7 @@ public:
 
 	bool fetch_from_flag(Game&) override;
 
-	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&, bool);
+	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&, Match);
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
