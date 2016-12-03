@@ -1,7 +1,7 @@
 run(function()
    sleep(100)
 
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 50 * 1000
 
    create_southern_port()
    create_northern_port()
