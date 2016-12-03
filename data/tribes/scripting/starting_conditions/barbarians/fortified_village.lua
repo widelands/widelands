@@ -10,7 +10,7 @@ return {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
-   tooltip = _" Start the game with a fortified military installation",
+   tooltip = _"Start the game with a fortified military installation",
    func =  function(plr, shared_in_start)
 
       local sf = wl.Game().map.player_slots[plr.number].starting_field

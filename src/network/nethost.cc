@@ -2241,8 +2241,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
 		if (x != file_->md5sum) {
-			log("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(),
-			    file_->md5sum.c_str());
+			log(
+			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 			return;  // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file_->parts.size())
