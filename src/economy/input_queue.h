@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_INPUT_QUEUE_H
 #define WL_ECONOMY_INPUT_QUEUE_H
 
+#include <memory>
+
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
@@ -254,8 +256,7 @@ protected:
 	uint32_t consume_interval_;
 
 	/// The currently pending request.
-	// NOCOM(#codereview): this should probaby be a unique ptr
-	Request* request_;
+	std::unique_ptr<Request> request_;
 
 	/// The function to call on fulfilled request.
 	CallbackFn* callback_fn_;

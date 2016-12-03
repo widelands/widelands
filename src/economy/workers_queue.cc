@@ -93,8 +93,7 @@ void WorkersQueue::entered(DescriptionIndex index,
 void WorkersQueue::remove_from_economy(Economy&) {
 	if (index_ != INVALID_INDEX) {
 		if (request_) {
-			delete request_;
-			request_ = nullptr;
+			request_.reset();
 		}
 		// Removal of workers from the economy is not required, this is done by the building (or so)
 	}
