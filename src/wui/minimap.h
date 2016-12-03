@@ -87,7 +87,7 @@ private:
 
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
-		std::unique_ptr<Texture> minimap_image_;
+		std::unique_ptr<MiniMapRenderer> renderer_;
 
 	public:
 		MiniMapLayer* flags_;

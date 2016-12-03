@@ -57,12 +57,17 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y) {
 }
 
 void MiniMap::View::draw(RenderTarget& dst) {
-	minimap_image_ = draw_minimap(ibase_.egbase(), ibase_.get_player(),
-	                              (*flags_) & (MiniMapLayer::Zoom2) ?
-	                                 Point((viewx_ - get_w() / 4), (viewy_ - get_h() / 4)) :
-	                                 Point((viewx_ - get_w() / 2), (viewy_ - get_h() / 2)),
-	                              *flags_ | MiniMapLayer::ViewWindow);
-	dst.blit(Point(), minimap_image_.get());
+	const Widelands::EditorGameBase& egbase = ibase_.egbase();
+	const Widelands::Player* player = ibase_.get_player();
+
+	if (!renderer_ || &egbase != &renderer_->egbase() || player != renderer_->player())
+		renderer_ = MiniMapRenderer::create(egbase, player);
+
+	renderer_->draw(dst,
+	                (*flags_) & (MiniMapLayer::Zoom2) ?
+	                Point((viewx_ - get_w() / 4), (viewy_ - get_h() / 4)) :
+	                Point((viewx_ - get_w() / 2), (viewy_ - get_h() / 2)),
+	                *flags_ | MiniMapLayer::ViewWindow);
 }
 
 /*

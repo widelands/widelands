@@ -26,6 +26,7 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -197,8 +198,6 @@ void draw_minimap_int(Texture* texture,
 	}
 }
 
-}  // namespace
-
 std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
@@ -217,6 +216,39 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	texture->unlock(Texture::Unlock_Update);
 
 	return texture;
+}
+
+/**
+ * Mini-map renderer implementation that generates a mini-map texture in
+ * software and blits it.
+ */
+class MiniMapRendererSoftware : public MiniMapRenderer {
+public:
+	MiniMapRendererSoftware(const Widelands::EditorGameBase& egbase,
+	                        const Widelands::Player* player)
+	  : MiniMapRenderer(egbase, player) {
+	}
+
+	void draw(RenderTarget& dst,
+	          const Point& viewpoint,
+	          MiniMapLayer layers) override {
+		texture_ = draw_minimap(egbase(), player(), viewpoint, layers);
+		dst.blit(Point(), texture_.get());
+	}
+
+private:
+	std::unique_ptr<Texture> texture_;
+};
+
+}  // namespace
+
+void write_minimap_image_field(const EditorGameBase& egbase,
+                               const Player* player,
+                               const Point& viewpoint,
+                               MiniMapLayer layers,
+                               ::StreamWrite* const streamwrite) {
+	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
+	save_to_png(texture.get(), streamwrite, ColorType::RGBA);
 }
 
 void write_minimap_image(const EditorGameBase& egbase,
@@ -248,6 +280,16 @@ void write_minimap_image(const EditorGameBase& egbase,
 	viewpoint.y -= map_h / 2;
 
 	// Render minimap
-	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	save_to_png(texture.get(), streamwrite, ColorType::RGBA);
+	write_minimap_image_field(egbase, player, viewpoint, layers, streamwrite);
+}
+
+MiniMapRenderer::MiniMapRenderer(const Widelands::EditorGameBase& egbase,
+                                 const Widelands::Player* player)
+  : egbase_(egbase), player_(player) {
+}
+
+std::unique_ptr<MiniMapRenderer>
+MiniMapRenderer::create(const Widelands::EditorGameBase& egbase,
+                        const Widelands::Player* player) {
+	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));
 }
