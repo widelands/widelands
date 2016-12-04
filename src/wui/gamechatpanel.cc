@@ -42,6 +42,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              h - 25,
              "",
              UI::Align::kLeft,
+             g_gr->images().get("images/ui_basic/but1.png"),
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2),
      chat_message_counter(std::numeric_limits<uint32_t>::max()) {

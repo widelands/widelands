@@ -44,6 +44,10 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
 **icon**
     *Mandatory*. The full path to the menu icon for this building.
 
+**representative_image**
+    *Optional*. The full path to a representative image for this building.
+    This is needed if the building has a scaled "idle" animation.
+
 **size**
     *Mandatory*. The size of this building: ``"small"``, ``"medium"``, or ``"big"``.
 
