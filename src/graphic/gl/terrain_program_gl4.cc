@@ -677,9 +677,11 @@ void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,
 	glUniform1f(roads_.u_z_value, z_value);
 
 	// Prepare textures & sampler uniforms.
-	// Texture0&1 are already set correctly.
 	glUniform1i(roads_.u_terrain_base, 0);
+	gl.bind(GL_TEXTURE0, args->terrain->fields_texture());
+
 	glUniform1i(roads_.u_player_brightness, 1);
+	gl.bind(GL_TEXTURE1, args->terrain->player_brightness_texture());
 
 	glUniform1i(roads_.u_texture, 2);
 	gl.bind(GL_TEXTURE2, args->terrain->road_texture_object());

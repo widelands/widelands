@@ -6,6 +6,7 @@
 // From terrain_common_gl4:
 void init_common();
 uvec4 get_field_base(ivec2 coord);
+float calc_node_brightness(uint node_ubrightness);
 float calc_brightness(ivec2 coord, uint node_ubrightness);
 void calc_basepix(ivec2 coord, out vec2 basepix, out float heightpix, out uint node_brightness);
 void calc_pix(ivec2 coord, out vec2 pix, out uint node_brightness);

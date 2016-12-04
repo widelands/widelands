@@ -24,13 +24,18 @@ uvec4 get_field_base(ivec2 coord) {
 	return texture(u_terrain_base, (coord + 0.5) * map_inv_size);
 }
 
-float calc_brightness(ivec2 coord, uint node_ubrightness) {
+float calc_node_brightness(uint node_ubrightness) {
 	// Brightness is really an 8-bit signed value, but it's stored in an
 	// GL_RGBA8UI texture, so here we use signed (arithmetic) shifts to do
 	// the conversion.
 	int node_brightness = int(node_ubrightness << 24) >> 24;
 	float brightness = 144. / 255. + node_brightness * (1. / 255.);
 	brightness = min(1., brightness * (255. / 160.));
+	return brightness;
+}
+
+float calc_brightness(ivec2 coord, uint node_ubrightness) {
+	float brightness = calc_node_brightness(node_ubrightness);
 
 	brightness *= texture(u_player_brightness, (coord + 0.5) * map_inv_size).r;
 
