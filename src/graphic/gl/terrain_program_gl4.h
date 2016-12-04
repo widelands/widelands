@@ -55,6 +55,8 @@ public:
 	get(const Widelands::EditorGameBase& egbase,
 	    const Widelands::Player* player = nullptr);
 
+	static void prepare_frame();
+
 	const Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
@@ -112,6 +114,7 @@ private:
 	void fields_update();
 	void upload_road_textures();
 	void brightness_update();
+	void do_update_minimap();
 	void upload_constant_textures();
 
 	struct PerFieldData {
@@ -144,15 +147,13 @@ private:
 	const Widelands::Player* player_;
 	uint32_t fields_base_version_;
 	uint32_t terrain_vision_version_;
+	bool need_update_;
+	bool need_update_minimap_;
 
 	Gl::StreamingBuffer<uint8_t> uploads_;
 
 	// The texture containing per-field information.
 	GLuint fields_texture_;
-
-	// Whether the current brightness texture assumes that the player sees
-	// all (i.e., it is 1x1).
-	bool see_all_;
 
 	// Brightness texture: GL_R8.
 	GLuint brightness_texture_;

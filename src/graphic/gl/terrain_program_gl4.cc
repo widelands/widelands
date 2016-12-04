@@ -137,6 +137,9 @@ TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& eg
 	fields_update();
 	upload_road_textures();
 	upload_constant_textures();
+
+	need_update_ = false;
+	need_update_minimap_ = false;
 }
 
 TerrainInformationGl4::~TerrainInformationGl4() {
@@ -156,16 +159,37 @@ TerrainInformationGl4::~TerrainInformationGl4() {
 }
 
 void TerrainInformationGl4::update() {
-	if (fields_base_version_ != egbase().map().get_fields_base_version() ||
-	    (player() && terrain_vision_version_ != player()->get_terrain_vision_version()))
-		fields_update();
-
-	brightness_update();
+	need_update_ = true;
 }
 
 void TerrainInformationGl4::update_minimap() {
 	update();
 
+	need_update_minimap_ = true;
+}
+
+void TerrainInformationGl4::prepare_frame() {
+	for (auto& entries : global_map_) {
+		std::shared_ptr<TerrainInformationGl4> ti = entries.second.lock();
+
+		if (ti->need_update_) {
+			if (ti->fields_base_version_ != ti->egbase().map().get_fields_base_version() ||
+				(ti->player() && ti->terrain_vision_version_ != ti->player()->get_terrain_vision_version()))
+				ti->fields_update();
+
+			ti->brightness_update();
+
+			ti->need_update_ = false;
+		}
+
+		if (ti->need_update_minimap_) {
+			ti->do_update_minimap();
+			ti->need_update_minimap_ = false;
+		}
+	}
+}
+
+void TerrainInformationGl4::do_update_minimap() {
 	// Re-upload minimap data.
 	auto& gl = Gl::State::instance();
 	const Map& map = egbase().map();

@@ -199,6 +199,8 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
 
+	TerrainInformationGl4::prepare_frame();
+
 	Gl::State::instance().bind_framebuffer(0, 0);
 	glViewport(0, 0, screen_width, screen_height);
 
