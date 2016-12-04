@@ -10,7 +10,8 @@ this small script to fix leading tabs in Lua files to spaces.
 It also saves files in unix file endings ("\r\n") and strips empty lines at the
 end of files and whitespace characters at the end of lines.
 
-After fixing the Lua tabs, this script also executes clang-format over the src directory and pyformat over the utils directory.
+After fixing the Lua tabs, this script also executes clang-format over the src
+directory and pyformat over the utils directory.
 
 """
 
@@ -27,7 +28,9 @@ SPACES_PER_TAB = 3
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description='Fix common whitespace errors in Lua files, run clang-format over the code base and pyformat over the utils directory. Recurses over all relevant files.')
+        description='Fix common whitespace errors in Lua files, run clang-format'
+        ' over the code base and pyformat over the utils directory.'
+        ' Recurses over all relevant files.')
     return p.parse_args()
 
 
