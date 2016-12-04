@@ -137,7 +137,8 @@ void InteractivePlayer::think() {
 					//  we are already in roadbuilding mode from the call below.
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
-					fieldaction_.destroy();
+					delete fieldaction_.window;
+					fieldaction_.window = nullptr;
 					warp_mouse_to_node(flag_to_connect_);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
