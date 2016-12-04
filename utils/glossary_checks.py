@@ -26,6 +26,7 @@ import csv
 import os.path
 import re
 import sys
+import traceback
 
 # Parses a CSV file into a 2-dimensional array.
 
@@ -295,19 +296,24 @@ def main():
         print('Usage: utils/glossary_checks.py <relative-path-to-glossary>')
         return 1
 
-    # Prepare the paths
-    glossary_file = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), sys.argv[1]))
+    try:
+        # Prepare the paths
+        glossary_file = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), sys.argv[1]))
 
-    if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
-        print('There is no glossary file at ' + glossary_file)
+        if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
+            print('There is no glossary file at ' + glossary_file)
+            return 1
+
+        input_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '../po'))
+        output_path = make_path(os.path.dirname(__file__), '../po_validation')
+        return check_translations_with_glossary(input_path, output_path, glossary_file)
+
+    except Exception:
+        print('Something went wrong:')
+        traceback.print_exc()
         return 1
-
-    input_path = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), '../po'))
-    output_path = make_path(os.path.dirname(__file__), '../po_validation')
-
-    return check_translations_with_glossary(input_path, output_path, glossary_file)
 
 if __name__ == '__main__':
     sys.exit(main())
