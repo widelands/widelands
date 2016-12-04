@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-"""
-Runs a glossary check on all po files and writes the check results to
+"""Runs a glossary check on all po files and writes the check results to
 po_validation/glossary.
 
 You will need to provide an export of the Transifex glossary and specify it at
@@ -18,6 +17,7 @@ Source    Translation    Comment             Translation will be matched against
 sheep     sheep          Nice, fluffy!       'sheep'
 ax        axe            axes|               'axe', 'axes'
 click     click          clicking|clicked    'click', 'clicking', 'clicked'
+
 """
 
 from collections import defaultdict
@@ -28,6 +28,8 @@ import re
 import sys
 
 # Parses a CSV file into a 2-dimensional array.
+
+
 def read_csv_file(filepath):
     result = []
     with open(filepath) as csvfile:
@@ -37,6 +39,8 @@ def read_csv_file(filepath):
     return result
 
 # Helper function for creating inflections of English words.
+
+
 def is_vowel(character):
     return character == 'a' or character == 'e' or character == 'i' or character == 'o' or character == 'u' or character == 'y'
 
@@ -44,6 +48,8 @@ def is_vowel(character):
 # irregular plurals, but it's good enough for our purpose
 # Glossary contains pluralized terms, so we don't add any plural forms for
 # strings ending in 's'.
+
+
 def make_english_plural(word):
     result = ''
     if not word.endswith('s'):
@@ -57,6 +63,8 @@ def make_english_plural(word):
 
 # Create inflected forms of English verb: -ed and -ing forms.
 # Will create nonsense for irregular verbs.
+
+
 def make_english_verb_forms(word):
     result = []
     if word.endswith('e'):
@@ -78,14 +86,20 @@ def make_english_verb_forms(word):
     return result
 
 # An entry in our parsed glossaries
+
+
 class glossary_entry:
+
     def __init__(self):
          # Base form of the term, followed by any inflected forms
         self.terms = []
-         # Base form of the translation, followed by any inflected forms
+        # Base form of the translation, followed by any inflected forms
         self.translations = []
 
-# Build a glossary from the given Transifex glossary csv file for the given locale
+# Build a glossary from the given Transifex glossary csv file for the
+# given locale
+
+
 def load_glossary(glossary_file, locale):
     result = []
     counter = 0
@@ -125,7 +139,7 @@ def load_glossary(glossary_file, locale):
             # Misuse the comment field to provide a list of inflected forms.
             # Otherwise, we would get tons of false positive hits in the checks
             # later on and the translators would have our heads on a platter.
-            delimiter = "|"
+            delimiter = '|'
             if len(row[comment_index].strip()) > 1 and delimiter in row[comment_index]:
                 inflections = row[comment_index].split(delimiter)
                 for inflection in inflections:
@@ -137,7 +151,10 @@ def load_glossary(glossary_file, locale):
     return result
 
 # Information about a translation that failed a check
+
+
 class failed_entry:
+
     def __init__(self):
         # Source text
         self.source = ''
@@ -151,6 +168,8 @@ class failed_entry:
         self.translation = ''
 
 # The actual check
+
+
 def check_file(csv_file, glossary):
     result = ''
     translations = read_csv_file(csv_file)
@@ -180,14 +199,16 @@ def check_file(csv_file, glossary):
                         # Now make sure that it's whole words!
                         # We won't want to match "AI" against "again" etc.
                         # Case-insensitive is sufficient for now
-                        source_regex = re.compile('.+[\s,.]'+term+'[\s,.].+', re.IGNORECASE)
+                        source_regex = re.compile(
+                            '.+[\s,.]' + term + '[\s,.].+', re.IGNORECASE)
                         if source_regex.match(row[source_index]):
                             # Now verify the translation against all translation
                             # variations from the glossary
                             translation_has_term = False
                             for translation in entry.translations:
                                 if translation.lower() in row[target_index].lower():
-                                    translation_regex = re.compile('^|(.+\W)'+translation+'(\W.+)|$', re.IGNORECASE)
+                                    translation_regex = re.compile(
+                                        '^|(.+\W)' + translation + '(\W.+)|$', re.IGNORECASE)
                                     if translation_regex.match(row[target_index]):
                                         translation_has_term = True
                                         break
@@ -203,11 +224,14 @@ def check_file(csv_file, glossary):
     if len(hits) > 0:
         result = '"glossary_term","glossary_translation","source","target","location"\n'
         for hit in hits:
-            row = '"%s","%s","%s","%s","%s"\n'%(hit.term, hit.translation, hit.source, hit.target, hit.location)
+            row = '"%s","%s","%s","%s","%s"\n' % (
+                hit.term, hit.translation, hit.source, hit.target, hit.location)
             result = result + row
     return result
 
 # Creates the correct form of the path and makes sure that it exists
+
+
 def make_path(base_path, subdir):
     result = os.path.abspath(os.path.join(base_path, subdir))
     if not os.path.exists(result):
@@ -217,9 +241,11 @@ def make_path(base_path, subdir):
 # Main loop. Loads the Transifex glossary, converts all po files for languages
 # that have glossary entries to csv files, runs the check and then writes any
 # hits into csv files.
+
+
 def check_translations_with_glossary(input_path, output_path, glossary_file):
-    csv_path = make_path(output_path, "csv")
-    hits_path = make_path(output_path, "glossary")
+    csv_path = make_path(output_path, 'csv')
+    hits_path = make_path(output_path, 'glossary')
 
     glossaries = defaultdict(list)
     source_directories = sorted(os.listdir(input_path), key=str.lower)
@@ -235,13 +261,16 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                     locale = source_filename[0:-3]
                     # Load the glossary if we haven't seen this locale before
                     if len(glossaries[locale]) < 1:
-                        sys.stdout.write("Loading glossary for " + locale)
-                        glossaries[locale].append(load_glossary(glossary_file, locale))
-                        sys.stdout.write(' - %d entries\n' % len(glossaries[locale][0]))
+                        sys.stdout.write('Loading glossary for ' + locale)
+                        glossaries[locale].append(
+                            load_glossary(glossary_file, locale))
+                        sys.stdout.write(' - %d entries\n' %
+                                         len(glossaries[locale][0]))
                         sys.stdout.flush()
                     # Only bother with locales that have glossary entries
                     if len(glossaries[locale][0]) > 0:
-                        csv_file = os.path.abspath(os.path.join(csv_path, dirname + "_" + locale + ".csv"))
+                        csv_file = os.path.abspath(os.path.join(
+                            csv_path, dirname + '_' + locale + '.csv'))
                         # Convert to csv for easy parsing
                         call(['po2csv', '--progress=none', po_file, csv_file])
 
@@ -249,7 +278,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         hits = check_file(csv_file, glossaries[locale][0])
                         if len(hits) > 0:
                             locale_output_path = make_path(hits_path, locale)
-                            dest_filepath = locale_output_path + '/' +  dirname + "_" + locale + ".csv"
+                            dest_filepath = locale_output_path + '/' + dirname + '_' + locale + '.csv'
                             with open(dest_filepath, 'wt') as dest_file:
                                 dest_file.write(hits)
 
@@ -258,22 +287,25 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
     os.rmdir(csv_path)
     return 0
 
+
 def main():
     if (len(sys.argv) == 2):
-        print("Running glossary checks:")
+        print('Running glossary checks:')
     else:
-        print("Usage: utils/glossary_checks.py <relative-path-to-glossary>")
+        print('Usage: utils/glossary_checks.py <relative-path-to-glossary>')
         return 1
 
     # Prepare the paths
-    glossary_file = os.path.abspath(os.path.join(os.path.dirname(__file__), sys.argv[1]))
+    glossary_file = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), sys.argv[1]))
 
     if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
-        print("There is no glossary file at " + glossary_file)
+        print('There is no glossary file at ' + glossary_file)
         return 1
 
-    input_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../po"))
-    output_path = make_path(os.path.dirname(__file__), "../po_validation")
+    input_path = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), '../po'))
+    output_path = make_path(os.path.dirname(__file__), '../po_validation')
 
     return check_translations_with_glossary(input_path, output_path, glossary_file)
 
