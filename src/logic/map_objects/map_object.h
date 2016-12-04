@@ -213,12 +213,15 @@ private:
  * be fully created.
 */
 
-/// If you find a better way to do this that doesn't cost a virtual function
-/// or additional member variable, go ahead
+// Use a pure static_cast in release builds, which should end up as plain
+// pointer arithmetic, but add a dynamic_cast in an assertion as an additional
+// safe-guard in debug builds.
 #define MO_DESCR(type)                                                                             \
 public:                                                                                            \
-	const type& descr() const {                                                                     \
-		return dynamic_cast<const type&>(*descr_);                                                   \
+	const type& descr() const {                                                                    \
+		const type* converted = static_cast<const type*>(descr_);                                  \
+		assert(converted == dynamic_cast<const type*>(descr_));                                    \
+		return *converted;                                                                         \
 	}
 
 class MapObject {
