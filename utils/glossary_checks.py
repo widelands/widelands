@@ -315,6 +315,8 @@ def main():
     except Exception:
         print('Something went wrong:')
         traceback.print_exc()
+        csv_path = make_path(output_path, 'csv')
+        os.rmdir(csv_path)
         return 1
 
 if __name__ == '__main__':
