@@ -256,29 +256,26 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         # The csv file is no longer needed, delete it.
                         os.remove(csv_file)
     os.rmdir(csv_path)
-    success = True
+    return 0
 
-success = False
+def main():
+    if (len(sys.argv) == 2):
+        print("Running glossary checks:")
+    else:
+        print("Usage: utils/glossary_checks.py <relative-path-to-glossary>")
+        return 1
 
-if (len(sys.argv) == 2):
-    print("Running glossary checks:")
-else:
-    print("Usage: utils/glossary_checks.py <relative-path-to-glossary>")
-    sys.exit(1)
+    # Prepare the paths
+    glossary_file = os.path.abspath(os.path.join(os.path.dirname(__file__), sys.argv[1]))
 
-# Prepare the paths
-glossary_file = os.path.abspath(os.path.join(os.path.dirname(__file__), sys.argv[1]))
+    if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
+        print("There is no glossary file at " + glossary_file)
+        return 1
 
-if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
-    print("There is no glossary file at " + glossary_file)
-    sys.exit(1)
+    input_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../po"))
+    output_path = make_path(os.path.dirname(__file__), "../po_validation")
 
-input_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../po"))
-output_path = make_path(os.path.dirname(__file__), "../po_validation")
+    return check_translations_with_glossary(input_path, output_path, glossary_file)
 
-success = check_translations_with_glossary(input_path, output_path, glossary_file)
-
-if success:
-    sys.exit(0)
-else:
-    sys.exit(1)
+if __name__ == '__main__':
+    sys.exit(main())
