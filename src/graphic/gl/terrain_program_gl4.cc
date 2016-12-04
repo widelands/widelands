@@ -320,7 +320,13 @@ void TerrainInformationGl4::brightness_update() {
 	// TODO(nha): update only what is necessary
 
 	if (see_all) {
-		auto stream = uploads_.stream(1);
+		// Pixel unpacking has a per-row alignment of 4 bytes. Usually this
+		// is not a problem for us, because maps' widths are always multiples
+		// of 4, but in this particular case, OpenGL implementations disagree
+		// about whether the alignment should be considered for the bounds
+		// check in glTexImage2D. If we only allocate 1 byte, some
+		// implementations flag a GL_INVALID_OPERATION.
+		auto stream = uploads_.stream(4);
 		stream.emplace_back(255);
 		GLintptr offset = stream.unmap();
 		uploads_.bind();
