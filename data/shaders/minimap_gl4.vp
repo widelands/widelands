@@ -1,0 +1,11 @@
+#version 130
+
+in vec3 in_position;
+in vec2 in_field; // Fractional field
+
+out vec2 var_field;
+
+void main() {
+	gl_Position = vec4(in_position, 1.);
+	var_field = in_field;
+}
