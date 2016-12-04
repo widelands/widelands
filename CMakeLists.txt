@@ -184,9 +184,6 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 IF (WIN32)
-  # This conflicts with the clang warnings, which are much more intelligent.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-default")
-
   add_definitions(-DMINGW_HAS_SECURE_API)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
