@@ -4,6 +4,9 @@
 """Runs a glossary check on all po files and writes the check results to
 po_validation/glossary.
 
+You will need to have the Translate Toolkit installed in order for the checks to work:
+http://toolkit.translatehouse.org/
+
 You will need to provide an export of the Transifex glossary and specify it at
 the command line. Make sure to select "Include glossary notes in file" when
 exporting the csv from Transifex.
@@ -49,8 +52,8 @@ def make_english_plural(word):
     """Create plural forms for nouns.
 
     This will create a few nonsense entries for irregular plurals, but
-    it's good enough for our purpose Glossary contains pluralized terms,
-    so we don't add any plural forms for strings ending in 's'.
+    it's good enough for our purpose. Glossary contains pluralized
+    terms, so we don't add any plural forms for strings ending in 's'.
 
     """
     result = ''
@@ -65,7 +68,7 @@ def make_english_plural(word):
 
 
 def make_english_verb_forms(word):
-    """Create inflected forms of English verb: -ed and -ing forms.
+    """Create inflected forms of an English verb: -ed and -ing forms.
 
     Will create nonsense for irregular verbs.
 
@@ -75,7 +78,7 @@ def make_english_verb_forms(word):
         result.append(word[0:-1] + 'ing')
         result.append(word + 'd')
     elif is_vowel(word[-2:-1]) and not is_vowel(word[-1]):
-        # The consonant is duplicated if the last syllable is stressed.
+        # The consonant is duplicated here if the last syllable is stressed.
         # We can't detect stress, so we add both variants.
         result.append(word + word[-1] + 'ing')
         result.append(word + 'ing')
@@ -148,7 +151,6 @@ def load_glossary(glossary_file, locale):
                     entry.translations.append(inflection.strip())
 
             result.append(entry)
-            #print(" ".join(entry.terms) + " " + " ".join(entry.translations))
         counter = counter + 1
     return result
 
@@ -165,7 +167,7 @@ class failed_entry:
         self.location = ''
         # The glossary term that failed the check
         self.term = ''
-        # The base form of the translated term
+        # The base form of the translated glossary term
         self.translation = ''
 
 
@@ -193,7 +195,7 @@ def check_file(csv_file, glossary):
         else:
             for entry in glossary:
                 for term in entry.terms:
-                    # Check if the text containts the glossary term.
+                    # Check if the text contains the glossary term.
                     # Regex is slow, so we do this preliminary check
                     if term.lower() in row[source_index].lower():
                         # Now make sure that it's whole words!
