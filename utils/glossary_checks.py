@@ -41,7 +41,8 @@ def read_csv_file(filepath):
 
 def is_vowel(character):
     """Helper function for creating inflections of English words."""
-    return character == 'a' or character == 'e' or character == 'i' or character == 'o' or character == 'u' or character == 'y'
+    return character == 'a' or character == 'e' or character == 'i' \
+        or character == 'o' or character == 'u' or character == 'y'
 
 
 def make_english_plural(word):
@@ -279,7 +280,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         hits = check_file(csv_file, glossaries[locale][0])
                         if len(hits) > 0:
                             locale_output_path = make_path(hits_path, locale)
-                            dest_filepath = locale_output_path + '/' + dirname + '_' + locale + '.csv'
+                            dest_filepath = locale_output_path + '/' + dirname \
+                                + '_' + locale + '.csv'
                             with open(dest_filepath, 'wt') as dest_file:
                                 dest_file.write(hits)
 
