@@ -28,10 +28,9 @@ import re
 import sys
 import traceback
 
-# Parses a CSV file into a 2-dimensional array.
-
 
 def read_csv_file(filepath):
+    """Parses a CSV file into a 2-dimensional array."""
     result = []
     with open(filepath) as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -39,19 +38,20 @@ def read_csv_file(filepath):
             result.append(row)
     return result
 
-# Helper function for creating inflections of English words.
-
 
 def is_vowel(character):
+    """Helper function for creating inflections of English words."""
     return character == 'a' or character == 'e' or character == 'i' or character == 'o' or character == 'u' or character == 'y'
-
-# Create plural forms for nouns. This will create a few nonsense entries for
-# irregular plurals, but it's good enough for our purpose
-# Glossary contains pluralized terms, so we don't add any plural forms for
-# strings ending in 's'.
 
 
 def make_english_plural(word):
+    """Create plural forms for nouns.
+
+    This will create a few nonsense entries for irregular plurals, but
+    it's good enough for our purpose Glossary contains pluralized terms,
+    so we don't add any plural forms for strings ending in 's'.
+
+    """
     result = ''
     if not word.endswith('s'):
         if word.endswith('y') and not is_vowel(word[-2:-1]):
@@ -62,11 +62,13 @@ def make_english_plural(word):
             result = word + 's'
     return result
 
-# Create inflected forms of English verb: -ed and -ing forms.
-# Will create nonsense for irregular verbs.
-
 
 def make_english_verb_forms(word):
+    """Create inflected forms of English verb: -ed and -ing forms.
+
+    Will create nonsense for irregular verbs.
+
+    """
     result = []
     if word.endswith('e'):
         result.append(word[0:-1] + 'ing')
@@ -86,10 +88,9 @@ def make_english_verb_forms(word):
         result.append(word + 'ed')
     return result
 
-# An entry in our parsed glossaries
-
 
 class glossary_entry:
+    """An entry in our parsed glossaries."""
 
     def __init__(self):
          # Base form of the term, followed by any inflected forms
@@ -97,11 +98,10 @@ class glossary_entry:
         # Base form of the translation, followed by any inflected forms
         self.translations = []
 
-# Build a glossary from the given Transifex glossary csv file for the
-# given locale
-
 
 def load_glossary(glossary_file, locale):
+    """Build a glossary from the given Transifex glossary csv file for the
+    given locale."""
     result = []
     counter = 0
     term_index = 0
@@ -151,10 +151,9 @@ def load_glossary(glossary_file, locale):
         counter = counter + 1
     return result
 
-# Information about a translation that failed a check
-
 
 class failed_entry:
+    """Information about a translation that failed a check."""
 
     def __init__(self):
         # Source text
@@ -168,10 +167,9 @@ class failed_entry:
         # The base form of the translated term
         self.translation = ''
 
-# The actual check
-
 
 def check_file(csv_file, glossary):
+    """Run the actual check."""
     result = ''
     translations = read_csv_file(csv_file)
     source_index = 0
@@ -230,21 +228,23 @@ def check_file(csv_file, glossary):
             result = result + row
     return result
 
-# Creates the correct form of the path and makes sure that it exists
-
 
 def make_path(base_path, subdir):
+    """Creates the correct form of the path and makes sure that it exists."""
     result = os.path.abspath(os.path.join(base_path, subdir))
     if not os.path.exists(result):
         os.makedirs(result)
     return result
 
-# Main loop. Loads the Transifex glossary, converts all po files for languages
-# that have glossary entries to csv files, runs the check and then writes any
-# hits into csv files.
-
 
 def check_translations_with_glossary(input_path, output_path, glossary_file):
+    """Main loop.
+
+    Loads the Transifex glossary, converts all po files for languages
+    that have glossary entries to csv files, runs the check and then
+    writes any hits into csv files.
+
+    """
     csv_path = make_path(output_path, 'csv')
     hits_path = make_path(output_path, 'glossary')
 
@@ -290,6 +290,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
 
 
 def main():
+    """Checks whether we are in the correct directory and everything's there,
+    then runs a glossary check over all PO files."""
     if (len(sys.argv) == 2):
         print('Running glossary checks:')
     else:
