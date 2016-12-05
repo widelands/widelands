@@ -53,6 +53,7 @@ namespace Widelands {
 namespace {
 
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
 // game.
@@ -529,24 +530,23 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		portdock_ = nullptr;
 	}
 
-	// This will empty the stock and launch all workers including incorporated
-	// ones.
+	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
+	// the stock.
 	if (upcast(Game, game, &egbase)) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
-			const uint32_t stock = workers.stock(id);
-			// Separate behaviour for the case of loading the game
-			// (which does save/destroy/reload) and simply destroying ingame
+			// If the game is running, have the workers flee the warehouse.
 			if (game->is_loaded()) {
-				// This game is really running
-				for (uint32_t i = 0; i < stock; ++i) {
+				// We have kFleeingUnitsCap to make sure that we won't flood the map with carriers etc.
+				Quantity stock = workers.stock(id);
+				for (Quantity i = 0; i < stock && i < kFleeingUnitsCap; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
-				assert(!incorporated_workers_.count(id) || incorporated_workers_[id].empty());
-			} else {
-				// We are in the load-game sequence...
-				remove_workers(id, stock);
 			}
+			// Make sure that all workers are gone
+			remove_workers(id, workers.stock(id));
+			assert(!game->is_loaded() ||
+			       (!incorporated_workers_.count(id) || incorporated_workers_[id].empty()));
 		}
 	}
 	incorporated_workers_.clear();

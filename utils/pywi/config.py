@@ -1,21 +1,21 @@
-"""
-Read and write Widelands-style conf files
-"""
+"""Read and write Widelands-style conf files."""
 
 # TODO(sirver): This should be used for the Website as well.
 
 import collections
 import re
 
-SECTION=1
-ENTRY=2
+SECTION = 1
+ENTRY = 2
 
 Line = collections.namedtuple('Line', ('text', 'type', 'key', 'value'))
 
 _re_section = re.compile('\[(.+?)\]')
 _re_entry = re.compile('(\\S+?)\\s*=_?\\s*([^#]*)')
 
+
 class Section(object):
+
     def __init__(self, file, line):
         self.file = file
         self.line = line
@@ -67,15 +67,18 @@ class Section(object):
                 break
             if line.text:
                 lastnonempty = ofs
-        self.file.insert_line(self.line + lastnonempty + 1, '%s = %s' % (key, value))
+        self.file.insert_line(self.line + lastnonempty +
+                              1, '%s = %s' % (key, value))
+
 
 class File(object):
-    """
-    Represent a Widelands-style conf file.
+    """Represent a Widelands-style conf file.
 
-    This class stores the original source of the file,
-    thus preserving comments and formatting where possible.
+    This class stores the original source of the file, thus preserving
+    comments and formatting where possible.
+
     """
+
     def __init__(self):
         self.lines = []
         self._sections = {}
@@ -85,9 +88,7 @@ class File(object):
             print >>filp, line.text
 
     def insert_line(self, where, line):
-        """
-        Pre-parse and insert the given line
-        """
+        """Pre-parse and insert the given line."""
         if where < 0:
             where = len(self.lines) + where
         self.lines.insert(where, self._parse_line(line))
@@ -164,9 +165,7 @@ class File(object):
         raise KeyError("no section '%s' found" % (name))
 
     def itersections(self):
-        """
-        Iterate through (name, section) pairs
-        """
+        """Iterate through (name, section) pairs."""
         for idx, line in enumerate(self.lines):
             if line.type == SECTION:
                 if idx + 1 not in self._sections:
@@ -175,9 +174,7 @@ class File(object):
 
 
 def read(filp):
-    """
-    Read the given file object as a Widelands-style conf file.
-    """
+    """Read the given file object as a Widelands-style conf file."""
     f = File()
     for line in filp:
         f.insert_line(len(f.lines), line)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 14:33+0000\n"
+"POT-Creation-Date: 2016-12-02 08:04+0000\n"
+"PO-Revision-Date: 2016-12-02 10:01+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -127,8 +127,12 @@ msgid_plural "Total: %i points"
 msgstr[0] "Общо: %i точка"
 msgstr[1] "Общо: %i точки"
 
+#: ../../data/scripting/win_conditions/collectors.lua:141
+msgid "The game has ended."
+msgstr "Играта приключи."
+
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:144
+#: ../../data/scripting/win_conditions/collectors.lua:148
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -136,31 +140,31 @@ msgstr[0] "%i минута"
 msgstr[1] "%i минути"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:149
+#: ../../data/scripting/win_conditions/collectors.lua:153
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% час и %2%"
 msgstr[1] "%1% часа и %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:152
+#: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% час"
 msgstr[1] "%1% часа"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:156
+#: ../../data/scripting/win_conditions/collectors.lua:160
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Играта свършва след %s."
 
-#: ../../data/scripting/win_conditions/collectors.lua:168
+#: ../../data/scripting/win_conditions/collectors.lua:173
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Състояние на отбор %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:170
+#: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

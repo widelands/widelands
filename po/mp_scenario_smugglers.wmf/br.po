@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-23 23:03+0000\n"
+"POT-Creation-Date: 2016-12-02 08:04+0000\n"
+"PO-Revision-Date: 2016-12-02 17:08+0000\n"
 "Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid "Game over!"
-msgstr ""
+msgstr "Echu gant ar c'hoari!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
