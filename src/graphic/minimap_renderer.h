@@ -28,8 +28,10 @@
 
 class RenderTarget;
 class StreamWrite;
+class Texture;
 
 namespace Widelands {
+class Map;
 class Player;
 class EditorGameBase;
 }

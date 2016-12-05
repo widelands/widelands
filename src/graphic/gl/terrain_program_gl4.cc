@@ -279,7 +279,7 @@ void TerrainInformationGl4::fields_update() {
 		terrain_vision_version_ = player()->get_terrain_vision_version();
 }
 
-TerrainInformationGl4::PerRoadTextureData::PerRoadTextureData(const FloatRect& rect)
+TerrainInformationGl4::PerRoadTextureData::PerRoadTextureData(const Rectf& rect)
   : x(rect.x), y(rect.y), w(rect.w), h(rect.h) {
 }
 
@@ -416,8 +416,8 @@ void TerrainInformationGl4::upload_constant_textures() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	colors.resize(MAX_PLAYERS);
-	for (int i = 1; i <= MAX_PLAYERS; ++i) {
+	colors.resize(kMaxPlayers);
+	for (int i = 1; i <= kMaxPlayers; ++i) {
 		const Widelands::Player* player = egbase().get_player(i);
 		if (player)
 			colors[i - 1] = player->get_playercolor();
@@ -545,7 +545,7 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 
 	// Texture size
 	const BlitData& blit_data = args->terrain->egbase().world().terrains().get(0).get_texture(0).blit_data();
-	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	const Rectf texture_coordinates = to_gl_texture(blit_data);
 
 	// Prepare uniforms.
 	upload_terrain_data(args, gametime);
@@ -840,7 +840,7 @@ void TerrainProgramGl4::upload_road_data(const TerrainGl4Arguments* args) {
 
 	for (const TerrainGl4Arguments::Road& road : args->roads) {
 		stream.emplace_back(
-			Point(road.coord.x, road.coord.y), road.direction,
+			Vector2i(road.coord.x, road.coord.y), road.direction,
 			args->terrain->road_texture_idx(
 				road.owner, RoadType(road.type), road.coord, WalkingDir(road.direction)));
 	}

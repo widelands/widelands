@@ -38,8 +38,6 @@ using namespace Widelands;
  * This is the front-end of the GL4 rendering path. See game_renderer.cc for a
  * general overview of terrain rendering.
  *
- * TODO(nha): minimap rendering
- *
  * Only terrain rendering (terrain textures, dithering, and roads) differs
  * substantially from the GL2 rendering path. To avoid CPU work, a persistent
  * TerrainInformationGl4 object maintains texture data and other information
@@ -60,13 +58,17 @@ bool GameRendererGl4::supported() {
 	return TerrainProgramGl4::supported();
 }
 
-void GameRendererGl4::draw(RenderTarget& dst,
-                           const EditorGameBase& egbase,
-                           const Point& view_offset,
-                           const Player* player) {
-	Surface* surface = dst.get_surface();
+void GameRendererGl4::draw(const EditorGameBase& egbase,
+                           const Vector2f& view_offset,
+                           const float zoom,
+                           const TextToDraw draw_text,
+                           const Player* player,
+                           RenderTarget* dst) {
+	Surface* surface = dst->get_surface();
 	if (!surface)
 		return;
+
+	// TODO(nha): handle zoom
 
 	// Upload map changes.
 	if (!args_.terrain || &args_.terrain->egbase() != &egbase ||
@@ -76,15 +78,15 @@ void GameRendererGl4::draw(RenderTarget& dst,
 	args_.terrain->update();
 
 	// Determine the set of patches to draw.
-	Point tl_map = dst.get_offset() + view_offset;
+	Vector2f tl_map = dst->get_offset().cast<float>() / zoom + view_offset;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
 	args_.minfx = tl_map.x / kTriangleWidth - 1;
 	args_.minfy = tl_map.y / kTriangleHeight - 1;
-	args_.maxfx = (tl_map.x + dst.get_rect().w + (kTriangleWidth / 2)) / kTriangleWidth;
-	args_.maxfy = (tl_map.y + dst.get_rect().h) / kTriangleHeight;
+	args_.maxfx = (tl_map.x + dst->get_rect().w / zoom + (kTriangleWidth / 2)) / kTriangleWidth;
+	args_.maxfy = (tl_map.y + dst->get_rect().h / zoom) / kTriangleHeight;
 
 	// fudge for triangle boundary effects and for height differences
 	args_.minfx -= 1;
@@ -92,10 +94,11 @@ void GameRendererGl4::draw(RenderTarget& dst,
 	args_.maxfx += 1;
 	args_.maxfy += 10;
 
-	const Rect& bounding_rect = dst.get_rect();
+	const Recti& bounding_rect = dst->get_rect();
 	const uint32_t gametime = egbase.get_gametime();
 
-	args_.surface_offset = bounding_rect.origin() + dst.get_offset() - view_offset;
+	args_.zoom = zoom;
+	args_.surface_offset = (bounding_rect.origin() + dst->get_offset()).cast<float>() / zoom - view_offset;
 	args_.surface_width = surface->width();
 	args_.surface_height = surface->height();
 
@@ -106,8 +109,8 @@ void GameRendererGl4::draw(RenderTarget& dst,
 	i.program_id = RenderQueue::Program::kTerrainGl4;
 	i.blend_mode = BlendMode::Copy;
 	i.terrain_arguments.destination_rect =
-	   FloatRect(bounding_rect.x, args_.surface_height - bounding_rect.y - bounding_rect.h,
-	             bounding_rect.w, bounding_rect.h);
+	   Rectf(bounding_rect.x, args_.surface_height - bounding_rect.y - bounding_rect.h,
+	         bounding_rect.w, bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = args_.surface_width;
 	i.terrain_arguments.renderbuffer_height = args_.surface_height;
@@ -120,7 +123,8 @@ void GameRendererGl4::draw(RenderTarget& dst,
 		RenderQueue::instance().enqueue(i);
 	}
 
-	draw_objects(dst, egbase, view_offset, player, args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
+// TODO(nha): draw_objects as part of scan_fields
+// 	draw_objects(dst, egbase, view_offset, player, args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
 }
 
 void GameRendererGl4::scan_fields() {

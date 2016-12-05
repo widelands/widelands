@@ -24,7 +24,6 @@
 #include <memory>
 #include <unordered_map>
 
-#include "base/point.h"
 #include "base/rect.h"
 #include "graphic/gl/streaming_buffer.h"
 #include "graphic/gl/utils.h"
@@ -130,7 +129,7 @@ private:
 	struct PerRoadTextureData {
 		float x, y, w, h;
 
-		PerRoadTextureData(const FloatRect& rect);
+		PerRoadTextureData(const Rectf& rect);
 	};
 	static_assert(sizeof(PerRoadTextureData) == 16, "incorrect padding");
 
@@ -208,20 +207,20 @@ private:
 	void upload_road_data(const TerrainGl4Arguments* args);
 
 	struct PerTerrainData {
-		FloatPoint offset;
+		Vector2f offset;
 		int dither_layer;
 		float padding[1];
 	};
 	static_assert(sizeof(PerTerrainData) == 16, "incorrect padding");
 
 	struct PerInstanceData {
-		Point coordinate;
+		Vector2i coordinate;
 	};
 	static_assert(sizeof(PerInstanceData) == 8, "incorrect padding");
 
 	struct PerVertexData {
-		Point vertex_coordinate;
-		Point triangle_coordinate;
+		Vector2i vertex_coordinate;
+		Vector2i triangle_coordinate;
 
 		PerVertexData(int vx, int vy, int tx, int ty, bool r, uint dither_vid)
 		  : vertex_coordinate(vx, vy), triangle_coordinate((tx << 3) | (dither_vid << 1) | r, ty) {
@@ -230,11 +229,11 @@ private:
 	static_assert(sizeof(PerVertexData) == 16, "incorrect padding");
 
 	struct PerRoadData {
-		Point start;
+		Vector2i start;
 		uint32_t direction;
 		uint32_t texture;
 
-		PerRoadData(const Point& start_, uint32_t direction_, uint32_t texture_)
+		PerRoadData(const Vector2i& start_, uint32_t direction_, uint32_t texture_)
 		  : start(start_), direction(direction_), texture(texture_) {
 		}
 	};

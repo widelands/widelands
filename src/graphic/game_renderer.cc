@@ -77,11 +77,12 @@ class GameRendererGl2 : public GameRenderer {
 public:
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
-	void draw(RenderTarget& dst,
-	          const Widelands::EditorGameBase& egbase,
+	void draw(const Widelands::EditorGameBase& egbase,
 	          const Vector2f& view_offset,
-	          float scale,
-	          const Widelands::Player* player) override;
+	          const float scale,
+	          const TextToDraw draw_text,
+	          const Widelands::Player* player,
+	          RenderTarget* dst) override;
 
 private:
 	// This is owned and handled by us, but handed to the RenderQueue, so we
@@ -337,8 +338,8 @@ GameRenderer::create() {
 void GameRenderer::rendermap(const Widelands::EditorGameBase& egbase,
                              const Vector2f& view_offset,
                              float zoom,
-                             TextToDraw draw_text,
                              const Widelands::Player& player,
+                             TextToDraw draw_text,
                              RenderTarget* dst) {
 	draw(egbase, view_offset, zoom, draw_text, &player, dst);
 }

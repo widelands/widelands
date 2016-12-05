@@ -52,7 +52,8 @@ struct TerrainGl4Arguments {
 	static_assert(sizeof(Road) == 8, "bad alignment");
 
 	std::shared_ptr<TerrainInformationGl4> terrain;
-	Point surface_offset;
+	float zoom;
+	Vector2f surface_offset;
 	int surface_width;
 	int surface_height;
 	int minfx, minfy, maxfx, maxfy;
@@ -72,10 +73,12 @@ public:
 
 	static bool supported();
 
-	void draw(RenderTarget& dst,
-	          const Widelands::EditorGameBase& egbase,
-	          const Point& view_offset,
-	          const Widelands::Player* player) override;
+	void draw(const Widelands::EditorGameBase& egbase,
+	          const Vector2f& view_offset,
+	          const float zoom,
+	          const TextToDraw draw_text,
+	          const Widelands::Player* player,
+	          RenderTarget* dst) override;
 
 private:
 	void scan_fields();

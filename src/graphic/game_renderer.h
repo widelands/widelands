@@ -85,14 +85,12 @@ protected:
 
 	// Draws the objects (animations & overlays).
 	// TODO(nha): does this still exist?
-	void draw_objects(RenderTarget& dst,
-	                  const Widelands::EditorGameBase& egbase,
-	                  const Point& view_offset,
+	void draw_objects(const Widelands::EditorGameBase& egbase,
+	                  const float zoom,
+	                  const FieldsToDraw &fields_to_draw,
 	                  const Widelands::Player* player,
-	                  int minfx,
-	                  int maxfx,
-	                  int minfy,
-	                  int maxfy);
+	                  const TextToDraw draw_text,
+	                  RenderTarget* dst);
 
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };

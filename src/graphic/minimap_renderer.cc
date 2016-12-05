@@ -290,7 +290,7 @@ public:
 
 		const Recti& bounding_rect = dst.get_rect();
 
-		args_.surface_offset = bounding_rect.origin() + dst.get_offset();
+		args_.surface_offset = (bounding_rect.origin() + dst.get_offset()).cast<float>();
 		args_.surface_width = surface->width();
 		args_.surface_height = surface->height();
 
