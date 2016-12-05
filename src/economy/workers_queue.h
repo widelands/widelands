@@ -20,9 +20,9 @@
 #ifndef WL_ECONOMY_WORKERS_QUEUE_H
 #define WL_ECONOMY_WORKERS_QUEUE_H
 
+#include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
-#include "economy/input_queue.h"
 
 namespace Widelands {
 
@@ -67,7 +67,6 @@ public:
 	void set_max_fill(Quantity q) override;
 
 protected:
-
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
 
@@ -76,7 +75,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-
 }
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

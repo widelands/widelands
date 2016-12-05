@@ -116,14 +116,14 @@ public:
 	 */
 	enum class Match {
 		/**
-		 * Return the number of workers with matching indices.
-		 */
+	    * Return the number of workers with matching indices.
+	    */
 		kExact,
 
 		/**
-		 * Return the number of workers with matching indices or
-		 * which are more experienced workers of the given lower type.
-		 */
+	    * Return the number of workers with matching indices or
+	    * which are more experienced workers of the given lower type.
+	    */
 		kCompatible
 	};
 

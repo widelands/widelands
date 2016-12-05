@@ -43,12 +43,12 @@ class Request;
  */
 class InputQueue {
 public:
-
 	/**
 	 * Destructor.
 	 * Does nothing currently.
 	 */
-	virtual ~InputQueue() { }
+	virtual ~InputQueue() {
+	}
 
 	/**
 	 * The declaration of a callback function which can be registered to get notified
@@ -59,7 +59,8 @@ public:
 	 * @param worker The worker which arrived, if the queue is a WorkersQueue.
 	 * @param data Unspecified data which has been given when calling set_callback().
 	 */
-	using CallbackFn = void(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
+	using CallbackFn =
+	   void(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
 	/**
 	 * Returns the index of the ware or worker which is handled by the queue.
@@ -70,9 +71,9 @@ public:
 	}
 
 	/**
-     * Get the maximum amount of wares or workers which should be stored here.
-     * This is a value which can be influenced by the player with the provided buttons.
-     * @return The maximum number of wares or workers which should be here.
+	  * Get the maximum amount of wares or workers which should be stored here.
+	  * This is a value which can be influenced by the player with the provided buttons.
+	  * @return The maximum number of wares or workers which should be here.
 	 */
 	Quantity get_max_fill() const {
 		return max_fill_;
@@ -207,7 +208,8 @@ protected:
 	 * @param w The arrived worker or \c nullptr.
 	 * @param b The building where the ware or worker arrived at.
 	 */
-	static void request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& b);
+	static void
+	request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& b);
 
 	/**
 	 * Updates the request.

@@ -55,11 +55,13 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      total_height_(0),
      show_only_(show_only) {
 	if (type_ == Widelands::wwWARE) {
-		const Widelands::WareDescr& ware = *queue->owner().tribe().get_ware_descr(queue_->get_index());
+		const Widelands::WareDescr& ware =
+		   *queue->owner().tribe().get_ware_descr(queue_->get_index());
 		set_tooltip(ware.descname().c_str());
 		icon_ = ware.icon();
 	} else {
-		const Widelands::WorkerDescr& worker = *queue->owner().tribe().get_worker_descr(queue_->get_index());
+		const Widelands::WorkerDescr& worker =
+		   *queue->owner().tribe().get_worker_descr(queue_->get_index());
 		set_tooltip(worker.descname().c_str());
 		icon_ = worker.icon();
 	}

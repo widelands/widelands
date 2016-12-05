@@ -51,7 +51,6 @@
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
-
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;

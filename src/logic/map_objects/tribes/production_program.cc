@@ -215,7 +215,7 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 
 		// Try as ware
 		WareWorker type = wwWARE;
-		const BillOfMaterials *input_list = &input_wares;
+		const BillOfMaterials* input_list = &input_wares;
 		DescriptionIndex ware_index = tribes.ware_index(ware);
 		if (!tribes.ware_exists(ware_index)) {
 			ware_index = tribes.worker_index(ware);
@@ -238,8 +238,8 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		}
 		if (!found) {
 			throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
-								"found in the [inputs] section)",
-								ware, ware);
+			                    "found in the [inputs] section)",
+			                    ware, ware);
 		}
 
 		if (group.first.size() && ware_index <= group.first.begin()->first)

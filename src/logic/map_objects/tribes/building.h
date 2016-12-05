@@ -244,7 +244,7 @@ public:
 	virtual WaresQueue& waresqueue(DescriptionIndex);
 
 	/// \returns the queue for a worker type or \throws WException.
-	virtual WorkersQueue & workersqueue(DescriptionIndex);
+	virtual WorkersQueue& workersqueue(DescriptionIndex);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

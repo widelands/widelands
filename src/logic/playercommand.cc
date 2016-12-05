@@ -1078,11 +1078,11 @@ void CmdSetWarePriority::serialize(StreamWrite& ser) {
 
 /*** class Cmd_SetWareMaxFill ***/
 CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
-                                     const PlayerNumber init_sender,
-                                     PlayerImmovable& imm,
-                                     const DescriptionIndex index,
-                                     const WareWorker type,
-                                     const uint32_t max_fill)
+                                       const PlayerNumber init_sender,
+                                       PlayerImmovable& imm,
+                                       const DescriptionIndex index,
+                                       const WareWorker type,
+                                       const uint32_t max_fill)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
@@ -1140,14 +1140,13 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 	}
 }
 
-CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	index_ = des.signed_32();
 	if (des.unsigned_8() == 0) {
-	type_ = wwWARE;
+		type_ = wwWARE;
 	} else {
-	type_ = wwWORKER;
+		type_ = wwWORKER;
 	}
 	max_fill_ = des.unsigned_32();
 }
