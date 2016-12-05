@@ -429,8 +429,9 @@ void ProductionSite::init(EditorGameBase& egbase) {
 
 	const BillOfMaterials& input_wares = descr().input_wares();
 	input_ware_queues_.resize(input_wares.size());
-	for (WareRange i(input_wares); i; ++i)
+	for (WareRange i(input_wares); i; ++i) {
 		input_ware_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	}
 
 	const BillOfMaterials& input_workers = descr().input_workers();
 	input_worker_queues_.resize(input_workers.size());

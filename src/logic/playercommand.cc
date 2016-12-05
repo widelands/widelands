@@ -1101,6 +1101,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	b->inputqueue(index_, type_).set_max_fill(max_fill_);
 }
 
+// NOCOM(#codereview): You added new data to the packet, so we need to increase the packet version.
 constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 1;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {

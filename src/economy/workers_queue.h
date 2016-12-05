@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ public:
 	}
 
 	/// Temporary. Do not use.
+	/// NOCOM(#codereview): Do we still need this?
 	std::vector<Worker*> workers() const {
 		return workers_;
 	}

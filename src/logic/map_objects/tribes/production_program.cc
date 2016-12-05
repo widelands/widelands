@@ -373,10 +373,11 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		if (entry.second == wwWARE)
+		if (entry.second == wwWARE) {
 			condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
-		else
+		} else {
 			condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
+		}
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -390,7 +391,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tri
 
 	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
-	   (boost::format(_("the building has the following wares: %s")) % condition).str();
+		(boost::format(_("the building has the following wares: %s")) % condition).str();
 	return result;
 }
 
@@ -398,10 +399,11 @@ std::string
 ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		if (entry.second == wwWARE)
+		if (entry.second == wwWARE) {
 			condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
-		else
+		} else {
 			condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
+		}
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -415,7 +417,7 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 
 	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
-	   (boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
+		(boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
 	return result;
 }
 
@@ -890,10 +892,11 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
-				if (entry.second == wwWARE)
+				if (entry.second == wwWARE) {
 					ware_list.push_back(tribe.get_ware_descr(entry.first)->descname());
-				else
+				} else {
 					ware_list.push_back(tribe.get_worker_descr(entry.first)->descname());
+				}
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 
@@ -936,19 +939,21 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
 	} else {  //  we fulfilled all consumption requirements
-		for (size_t i = 0; i < warequeues.size(); ++i)
+		for (size_t i = 0; i < warequeues.size(); ++i) {
 			if (uint8_t const q = consumption_quantities_wares[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
 
-				// Update consumption statistic
+				// Update consumption statistics
 				ps.owner().ware_consumed(warequeues[i]->get_index(), q);
 			}
-		for (size_t i = 0; i < workerqueues.size(); ++i)
+		}
+		for (size_t i = 0; i < workerqueues.size(); ++i) {
 			if (uint8_t const q = consumption_quantities_workers[i]) {
 				assert(q <= workerqueues[i]->get_filled());
 				workerqueues[i]->set_filled(workerqueues[i]->get_filled() - q);
 			}
+		}
 		return ps.program_step(game);
 	}
 }

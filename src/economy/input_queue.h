@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,8 @@ class Request;
 /**
  * Base class for input queues of wares and workers.
  * Mentioning "wares" in the following nearly always means "wares or workers".
- * @todo Add builder-queue to expeditions?
- * @todo Create regression tests (for WorkersQueue)
+ * TODO(Notablis): Add builder-queue to expeditions?
+ * TODO(Notablis): Create regression tests (for WorkersQueue)
  */
 class InputQueue {
 public:
@@ -64,7 +64,7 @@ public:
 
 	/**
 	 * Returns the index of the ware or worker which is handled by the queue.
-	 * @param The DescriptionIndex of whatever is stored here.
+	 * @return The DescriptionIndex of whatever is stored here.
 	 */
 	DescriptionIndex get_index() const {
 		return index_;
@@ -105,7 +105,7 @@ public:
 
 	/**
 	 * Clear the queue appropriately.
-	 * Implementing classes should call update() at last to remove the request.
+	 * Implementing classes should call update() at the end to remove the request.
 	 */
 	virtual void cleanup() = 0;
 
@@ -150,7 +150,7 @@ public:
 
 	/**
 	 * Change fill status of the queue. This creates or removes wares as required.
-	 * Note that the wares are created out of thin air respectively are removed without
+	 * Note that the wares are created out of thin air and respectively are removed without
 	 * dropping them on the street.
 	 * @param q The number of wares which are stored here.
 	 */
@@ -177,7 +177,7 @@ public:
 	 * Overwrites the state of this class with the read data.
 	 * @param fr A stream to read the data from.
 	 * @param game The game this queue will be part of.
-	 * @param mol Don't know. Required to pass to Request::read().
+	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
 	void read(FileRead& f, Game& g, MapObjectLoader& mol);
 
@@ -185,19 +185,19 @@ public:
 	 * Writes the state of this class.
 	 * @param fw A stream to write the data to.
 	 * @param game The game this queue is part of.
-	 * @param mos Don't know. Required to pass to Request::write().
+	 * @param mos The game/map saver that handles the saving. Required to pass to Request::write().
 	 */
 	void write(FileWrite& w, Game& g, MapObjectSaver& s);
 
 protected:
 	/**
 	 * Pre-initialize a InputQueue.
-	 * @param init_owner The building the queue is part of.
-	 * @param init_index The index of the ware or worker that will be stored.
-	 * @param init_max_size The maximum amount that can be stored.
-	 * @param init_type Whether wares or workers are stored in this queue.
+	 * @param owner The building the queue is part of.
+	 * @param index The index of the ware or worker that will be stored.
+	 * @param max_size The maximum amount that can be stored.
+	 * @param type Whether wares or workers are stored in this queue.
 	*/
-	InputQueue(PlayerImmovable&, DescriptionIndex, uint8_t size, WareWorker);
+	InputQueue(PlayerImmovable& owner, DescriptionIndex index, uint8_t max_size, WareWorker type);
 
 	/**
 	 * Called when an item arrives at the owning building.
@@ -214,6 +214,8 @@ protected:
 	/**
 	 * Updates the request.
 	 * You must call this after every call to set_*().
+	 * NOCOM(#codeReview): Is it possible to have the set_*() functions call it,
+	 * then make this function protected?
 	*/
 	void update();
 
@@ -230,7 +232,7 @@ protected:
 	 * Overwrites the state of the subclass with the read data.
 	 * @param fr A stream to read the data from.
 	 * @param game The game this queue will be part of.
-	 * @param mol Don't know.
+	 * @param mol The game/map loader that handles the loading.
 	 */
 	virtual void read_child(FileRead& f, Game& g, MapObjectLoader& mol) = 0;
 
@@ -238,17 +240,17 @@ protected:
 	 * Writes the state of the subclass.
 	 * @param fw A stream to write the data to.
 	 * @param game The game this queue is part of.
-	 * @param mos Don't know.
+	 * @param mos The game/map saver that handles the saving.
 	 */
 	virtual void write_child(FileWrite& w, Game& g, MapObjectSaver& s) = 0;
 
 	/// The building this queue is part of.
 	PlayerImmovable& owner_;
-	/// ID of stored whatever.
+	/// ID of stored ware/worker.
 	DescriptionIndex index_;
-	/// Amount that fit into the queue maximum.
+	/// The amount that will fit into the queue maximum.
 	Quantity max_size_;
-	/// Amount that should be ideally in this queue.
+	/// The amount that should be ideally in this queue.
 	Quantity max_fill_;
 
 	/// Whether wares or workers are stored in the queue.
@@ -262,7 +264,7 @@ protected:
 
 	/// The function to call on fulfilled request.
 	CallbackFn* callback_fn_;
-	/// Undefined data to pass to function.
+	/// Unspecified data to pass to function.
 	void* callback_data_;
 };
 }

@@ -4305,14 +4305,15 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	}
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
-			if (sp.first.second == wwWARE)
+			if (sp.first.second == wwWARE) {
 				report_error(L, "<%s> can't be stored in this building: %s!",
 				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
 				             ps->descr().name().c_str());
-			else
+			} else {
 				report_error(L, "<%s> can't be stored in this building: %s!",
 				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
 				             ps->descr().name().c_str());
+			}
 		}
 		if (sp.first.second == wwWARE) {
 			WaresQueue& wq = ps->waresqueue(sp.first.first);
@@ -4360,20 +4361,22 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
 		if (valid_inputs.count(input)) {
-			if (input.second == wwWARE)
+			if (input.second == wwWARE) {
 				cnt = ps->waresqueue(input.first).get_filled();
-			else
+			} else {
 				cnt = ps->workersqueue(input.first).get_filled();
+			}
 		}
 
 		if (return_number) {  // this is the only thing the customer wants to know
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			if (input.second == wwWARE)
+			if (input.second == wwWARE) {
 				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
-			else
+			} else {
 				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
+			}
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
