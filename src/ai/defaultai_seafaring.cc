@@ -445,7 +445,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
 		// in this case we create a new direction at random, otherwise continue circle movement
-		if (!so.ship->is_island_circling()) {
+		if (!so.ship->is_exploring_island()) {
 			so.island_circ_direction = randomExploreDirection();
 			log("%d: %s: new exploration - sailing in direction: %u\n", pn,
 			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));

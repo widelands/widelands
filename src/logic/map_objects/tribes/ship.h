@@ -208,8 +208,7 @@ struct Ship : Bob {
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-// NOCOM(#codereview): For consistency, call this "is_exploring_island"
-	bool is_island_circling () {
+	bool is_exploring_island () {
 		return expedition_->island_exploration;
 	}
 
