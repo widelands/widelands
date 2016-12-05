@@ -871,15 +871,10 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Initialise the max duration of a single ship's expedition
-	// NOCOM(#codereview): I have no idea what ar1 and rt1 could mean. Can you come up with more
-	// descriptive variable names?
-	uint32_t ar1 = uint32_t(map.get_height()) * map.get_width();
-	uint32_t rt1 = round(sqrt(ar1));
-	// NOCOM(#codereview): FYI - never use printf, always sprintf. We have a handy logging function
-	// in base/log.h though.
-	//log("--- EXPEDITION MAP AREA ROOT == %u\n", rt1);
+	const uint32_t map_area = uint32_t(map.get_height()) * map.get_width();
+	const uint32_t map_area_root = round(sqrt(map_area));
 	int scope = 320 - 64;
-	int off = rt1 - 64;
+	int off = map_area_root - 64;
 	if (off < 0)
 		off = 0;
 	if (off > scope)
@@ -887,9 +882,10 @@ void DefaultAI::late_initialization() {
 	expedition_max_duration =
 	   kExpeditionMinDuration +
 	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
-	log(" %d: expedition max duration: %d, map area root: %d\n", expedition_max_duration / 1000, rt1);
-	// NOCOM(#codereview): We can drop the second condition, it is alreday met by the first condition
-	// (kExpeditionMinDuration is > 0)
+	log(" %d: expedition max duration: %u, map area root: %u\n",
+		player_number(), expedition_max_duration / 1000,
+		map_area_root);
+	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
 	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
 	assert(expedition_max_duration >= kExpeditionMinDuration && expedition_max_duration > 0);
 

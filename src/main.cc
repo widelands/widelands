@@ -1,3 +1,9 @@
+#include <unistd.h>
+#include <unistd.h>
+#include <unistd.h>
+#include <unistd.h>
+#include <unistd.h>
+#include <unistd.h>
 /*
  * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
  *
