@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
@@ -41,7 +41,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
                          const EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
-     ware_hotspot_(Point(0, 15)),
+     ware_hotspot_(Vector2i(0, 15)),
      buildable_(false),
      needed_experience_(INVALID_INDEX),
      becomes_(INVALID_INDEX),
@@ -122,7 +122,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	}
 	if (table.has_key("ware_hotspot")) {
 		items_table = table.get_table("ware_hotspot");
-		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
+		ware_hotspot_ = Vector2i(items_table->get_int(1), items_table->get_int(2));
 	}
 }
 

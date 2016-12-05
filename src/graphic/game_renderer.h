@@ -23,7 +23,9 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
+#include "graphic/gl/fields_to_draw.h"
+#include "logic/map_objects/draw_text.h"
 
 namespace Widelands {
 class Player;
@@ -53,29 +55,36 @@ public:
 	// Create a game renderer instance.
 	static std::unique_ptr<GameRenderer> create();
 
-	// Renders the map from a player's point of view into the given
-	// drawing window. 'view_offset' is the offset of the upper left
-	// corner of the window into the map, in pixels.
-	void rendermap(RenderTarget& dst,
-	               const Widelands::EditorGameBase& egbase,
-	               const Point& view_offset,
-	               const Widelands::Player& player);
+	// Renders the map from a player's point of view into the given drawing
+	// window. The 'viewpoint' is the top left screens pixel map pixel and
+	// 'scale' is the magnification of the view.
+	void rendermap(const Widelands::EditorGameBase& egbase,
+	               const Vector2f& viewpoint,
+	               float scale,
+	               const Widelands::Player& player,
+	               TextToDraw draw_text,
+	               RenderTarget* dst);
 
 	// Renders the map from an omniscient perspective. This is used
 	// for spectators, players that see all, and in the editor.
-	void rendermap(RenderTarget& dst,
-	               const Widelands::EditorGameBase& egbase,
-	               const Point& view_offset);
+	void rendermap(const Widelands::EditorGameBase& egbase,
+	               const Vector2f& viewpoint,
+	               float scale,
+	               TextToDraw draw_text,
+	               RenderTarget* dst);
 
 protected:
 	GameRenderer();
 
-	virtual void draw(RenderTarget& dst,
-	                  const Widelands::EditorGameBase& egbase,
-	                  const Point& view_offset,
-	                  const Widelands::Player* player) = 0;
+	virtual void draw(const Widelands::EditorGameBase& egbase,
+	                  const Vector2f& view_offset,
+	                  const float zoom,
+	                  const TextToDraw draw_text,
+	                  const Widelands::Player* player,
+	                  RenderTarget* dst) = 0;
 
 	// Draws the objects (animations & overlays).
+	// TODO(nha): does this still exist?
 	void draw_objects(RenderTarget& dst,
 	                  const Widelands::EditorGameBase& egbase,
 	                  const Point& view_offset,

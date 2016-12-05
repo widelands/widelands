@@ -75,14 +75,14 @@ protected:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
-	Point calc_pos(uint32_t row, uint32_t col) const;
+	Vector2i calc_pos(uint32_t row, uint32_t col) const;
 	const Soldier* find_soldier(int32_t x, int32_t y) const;
 
 	struct Icon {
 		Widelands::OPtr<Soldier> soldier;
 		uint32_t row;
 		uint32_t col;
-		Point pos;
+		Vector2i pos;
 
 		/**
 		 * Keep track of how we last rendered this soldier,
@@ -242,8 +242,8 @@ void SoldierPanel::think() {
 	last_animate_time_ = curtime;
 
 	for (Icon& icon : icons_) {
-		Point goal = calc_pos(icon.row, icon.col);
-		Point dp = goal - icon.pos;
+		Vector2i goal = calc_pos(icon.row, icon.col);
+		Vector2i dp = goal - icon.pos;
 
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
@@ -270,7 +270,7 @@ void SoldierPanel::think() {
 	}
 
 	if (changes) {
-		Point mousepos = get_mouse_position();
+		Vector2i mousepos = get_mouse_position();
 		mouseover_fn_(find_soldier(mousepos.x, mousepos.y));
 	}
 }
@@ -280,12 +280,14 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	uint32_t capacity = soldiers_.soldier_capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
 
-	if (fullrows)
-		dst.fill_rect(Rect(Point(0, 0), get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
-	if (capacity % kMaxColumns)
-		dst.fill_rect(Rect(Point(0, icon_height_ * fullrows), icon_width_ * (capacity % kMaxColumns),
-		                   icon_height_),
-		              RGBAColor(0, 0, 0, 0));
+	if (fullrows) {
+		dst.fill_rect(Rectf(0.f, 0.f, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
+	}
+	if (capacity % kMaxColumns) {
+		dst.fill_rect(
+		   Rectf(0.f, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
+		   RGBAColor(0, 0, 0, 0));
+	}
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
@@ -293,12 +295,14 @@ void SoldierPanel::draw(RenderTarget& dst) {
 		if (!soldier)
 			continue;
 
-		soldier->draw_info_icon(dst, icon.pos + Point(kIconBorder, kIconBorder), false);
+		constexpr float kNoZoom = 1.f;
+		soldier->draw_info_icon(
+		   icon.pos.cast<float>() + Vector2f(kIconBorder, kIconBorder), kNoZoom, false, &dst);
 	}
 }
 
-Point SoldierPanel::calc_pos(uint32_t row, uint32_t col) const {
-	return Point(col * icon_width_, row * icon_height_);
+Vector2i SoldierPanel::calc_pos(uint32_t row, uint32_t col) const {
+	return Vector2i(col * icon_width_, row * icon_height_);
 }
 
 /**
@@ -306,8 +310,8 @@ Point SoldierPanel::calc_pos(uint32_t row, uint32_t col) const {
  */
 const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
 	for (const Icon& icon : icons_) {
-		Rect r(icon.pos, icon_width_, icon_height_);
-		if (r.contains(Point(x, y))) {
+		Recti r(icon.pos, icon_width_, icon_height_);
+		if (r.contains(Vector2i(x, y))) {
 			return icon.soldier.get(egbase());
 		}
 	}
@@ -394,10 +398,10 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
-		soldier_preference_.add_button(buttons, Point(0, 0),
+		soldier_preference_.add_button(buttons, Vector2i(0, 0),
 		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer Rookies"));
-		soldier_preference_.add_button(buttons, Point(32, 0),
+		soldier_preference_.add_button(buttons, Vector2i(32, 0),
 		                               g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer Heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-21 16:05+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 16:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
@@ -44,7 +44,7 @@ msgid "Garrisons soldiers to expand your territory."
 msgstr "Cuir saighdearan ’nan gearastan ann gus do ranntair a leudachadh."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
@@ -112,6 +112,14 @@ msgid ""
 "blackroot."
 msgstr "Feumaidh an tuathanach fhreumhagan %1% sa chuibheas gus bad fhreumhagan a chur ’s a bhuain."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -244,9 +252,9 @@ msgstr "Tochlaidh i clach-iarainn às na beanntan."
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Bleithidh e freumhagan is coirce gus min-freumhaige is min-coirce a dhèanamh."
+msgstr "Bleithidh e freumhagan is coirce gus min-fhreumhaige is min-choirce a dhèanamh."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -285,6 +293,14 @@ msgid ""
 "between ports."
 msgstr "Togaidh e longan a chleachdas do threubh airson tuineachadh thar chuain is airson malart eadar puirt."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -405,8 +421,8 @@ msgstr "’S e an togalach air ìre meadhanach ann an sreath de thrì togalaiche
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:67
-#: ../../data/tribes/scripting/help/global_helptexts.lua:97
+#: ../../data/tribes/scripting/help/global_helptexts.lua:69
+#: ../../data/tribes/scripting/help/global_helptexts.lua:99
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1328,8 +1344,8 @@ msgstr "Cha ghabh saighdearan nan Tùsanach oideachadh ann an “Dìon” agus b
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:80
-#: ../../data/tribes/scripting/help/global_helptexts.lua:96
+#: ../../data/tribes/scripting/help/global_helptexts.lua:82
+#: ../../data/tribes/scripting/help/global_helptexts.lua:98
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1548,8 +1564,8 @@ msgstr "Slàinte:"
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog."
 msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing gach diog."
 msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puingean gach diog."
@@ -1926,131 +1942,164 @@ msgstr "Home"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 0-9"
-msgstr "(Ctrl +) 0-9"
+msgid "(Ctrl +) 1-9"
+msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr "Cuimhnich is rach dha na h-ionadan air an cuimhneachadh roimhe"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/tribes/scripting/help/controls.lua:61
+msgctxt "hotkey"
+msgid "(Ctrl +) +"
+msgstr "(Ctrl +) +"
+
+#: ../../data/tribes/scripting/help/controls.lua:61
+msgid "Increase zoom"
+msgstr "Meudaich an sùm"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgctxt "hotkey"
+msgid "(Ctrl +) -"
+msgstr "(Ctrl +) -"
+
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgid "Decrease zoom"
+msgstr "Lùghdaich an sùm"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgctxt "hotkey"
+msgid "(Ctrl +) 0"
+msgstr "(Ctrl +) 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgid "Reset zoom"
+msgstr "Ath-shuidhich an sùm"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Go to the previous location"
 msgstr "Rach dhan ionad roimhe"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:69
 msgid "Go to the next location"
 msgstr "Rach dhan ath-ionad"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Take a screenshot"
 msgstr "Tog glacadh-sgrìn"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgid "Quit the game immediately"
 msgstr "Fàg an geama sa bhad"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Seall a’ chonsoil dhì-bhugachaidh (le togail dì-bhugachaidh a-mhàin)"
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Tha na h-ath-ghoiridean a bharrachd seo ri fhaighinn ann an uinneag nan teachdaireachd:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show all messages"
 msgstr "Seall a h-uile teachdaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show geologists’ messages only"
 msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show economy messages only"
 msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show seafaring messages only"
 msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show warfare messages only"
 msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show scenario messages only"
 msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Jump to the location corresponding to the current message"
 msgstr "Gearr leum dhan ionad a tha co-cheangailte ris an teachdaireachd làithreach"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Archive/Restore the current message"
 msgstr "Cuir an teachdaireachd làithreach dhan tasglann no aisig i"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
@@ -2073,24 +2122,24 @@ msgstr[3] "Caitheamh bhatharan:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:21
-#: ../../data/tribes/scripting/help/global_helptexts.lua:43
+#: ../../data/tribes/scripting/help/global_helptexts.lua:23
+#: ../../data/tribes/scripting/help/global_helptexts.lua:45
 msgid "Text needed"
 msgstr "Tha teacsa a dhìth"
 
 #. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
 #. hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:32
+#: ../../data/tribes/scripting/help/global_helptexts.lua:34
 msgid "Source needed"
 msgstr "Tha tùs a dhìth"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:54
+#: ../../data/tribes/scripting/help/global_helptexts.lua:56
 msgid "Calculation needed"
 msgstr "Cha deach seo àireamhachadh fhathast"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:95
+#: ../../data/tribes/scripting/help/global_helptexts.lua:97
 msgid "%1% and %2%"
 msgstr "%1% ’s %2%"
 
@@ -2391,7 +2440,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
-msgstr "Thèid min-freumhaige a shaothrachadh à freumhagan ann am muileann. Cleachdaidh tu ann an taighean-fuine i gus aran blasta a dhèanamh."
+msgstr "Thèid min-fhreumhaige a shaothrachadh à freumhagan ann am muileann. Cleachdaidh tu ann an taighean-fuine i gus aran blasta a dhèanamh."
 
 #. TRANSLATORS: Helptext for a ware: Blackwood
 #: ../../data/tribes/wares/blackwood/helptexts.lua:4
@@ -2408,7 +2457,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Nì thu an t-aran blasta seo à min-coirce, min-freumhaige is uisge sna taighean-fuine. Tha na mèinnearan, rabhadairean is saighdearan ann an ionadan-oideachaidh (cuartanan is tuill-dhubha) measail air mar bhiadh bunasach."
+msgstr "Nì thu an t-aran blasta seo à min-choirce, min-fhreumhaige is uisge sna taighean-fuine. Tha na mèinnearan, rabhadairean is saighdearan ann an ionadan-oideachaidh (cuartanan is tuill-dhubha) measail air mar bhiadh bunasach."
 
 #. TRANSLATORS: Helptext for a ware: Pitta Bread
 #: ../../data/tribes/wares/bread_barbarians/helptexts.lua:4
@@ -2524,7 +2573,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Cornmeal is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
-msgstr "Saothraichidh tu min-coirce à coirce ann am muileann is ’s e seo aon dhe na trì pàirtean dhen aran a nì na h-Atlantaich sna taighean-fuine."
+msgstr "Saothraichidh tu min-choirce à coirce ann am muileann is ’s e seo aon dhe na trì pàirtean dhen aran a nì na h-Atlantaich sna taighean-fuine."
 
 #. TRANSLATORS: Helptext for a ware: Diamond
 #: ../../data/tribes/wares/diamond/helptexts.lua:4
@@ -3319,8 +3368,8 @@ msgstr "’S e a’ chiad mhuirgheadh a thèid a chleachdadh gus saighdearan oid
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
 msgstr "Seo a’ mhuirgheadh mheadhanach. Saothraichidh tu sa cheàrdach arm i is thèid a cleachdadh le saighdearan adhartach san toll-dubh – le biadh – gus an ionnsaigh oideachadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
@@ -3422,6 +3471,15 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Loisgidh e gual."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TODO(GunChleoc): This is unused
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -3478,9 +3536,9 @@ msgstr "Bheir an sealgair sitheann amh ùr dha na h-Atlantaich."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Bleithidh e freumhagan is coirce gus min-freumhaige is min-coirce a dhèanamh."
+msgstr "Bleithidh e freumhagan is coirce gus min-fhreumhaige is min-choirce a dhèanamh."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3

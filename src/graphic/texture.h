@@ -39,7 +39,7 @@ public:
 
 	// Create a logical texture that is a 'subrect' (in Pixel) in
 	// another texture. Ownership of 'texture' is not taken.
-	Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h);
+	Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h);
 
 	virtual ~Texture();
 
@@ -102,20 +102,19 @@ private:
 	void init(uint16_t w, uint16_t h);
 
 	// Implements surface.
-	void do_blit(const FloatRect& dst_rect,
+	void do_blit(const Rectf& dst_rect,
 	             const BlitData& texture,
 	             float opacity,
 	             BlendMode blend_mode) override;
-	void do_blit_blended(const FloatRect& dst_rect,
+	void do_blit_blended(const Rectf& dst_rect,
 	                     const BlitData& texture,
 	                     const BlitData& mask,
 	                     const RGBColor& blend) override;
-	void do_blit_monochrome(const FloatRect& dst_rect,
+	void do_blit_monochrome(const Rectf& dst_rect,
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
 	void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) override;
-	void
-	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
+	void do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	// True if we own the texture, i.e. if we need to delete it.
 	bool owns_texture_;

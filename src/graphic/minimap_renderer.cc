@@ -32,10 +32,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/player.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -44,10 +42,15 @@ using namespace Widelands;
 namespace {
 
 const RGBColor kWhite(255, 255, 255);
+const RGBColor kRed(255, 0, 0);
 
 // Blend two colors.
 inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
 	return RGBColor((c1.r + c2.r) / 2, (c1.g + c2.g) / 2, (c1.b + c2.b) / 2);
+}
+
+int round_up_to_nearest_even(int number) {
+	return number % 2 == 0 ? number : number + 1;
 }
 
 // Returns the color to be used in the minimap for the given field.
@@ -89,39 +92,70 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	return color;
 }
 
-// Draws the dotted frame border onto the minimap.
-bool is_minimap_frameborder(const Widelands::FCoords& f,
-                            const Point& ptopleft,
-                            const Point& pbottomright,
-                            int32_t mapwidth,
-                            int32_t mapheight,
-                            int32_t modx,
-                            int32_t mody) {
-	bool isframepixel = false;
+void draw_view_window(const Map& map,
+                      const Rectf& view_area,
+                      const MiniMapType minimap_type,
+                      const bool zoom,
+                      Texture* texture) {
+	const float divider = zoom ? 1.f : 2.f;
+	const int half_width =
+	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
+	const int half_height =
+	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
 
-	if (ptopleft.x <= pbottomright.x) {
-		if (f.x >= ptopleft.x && f.x <= pbottomright.x &&
-		    (f.y == ptopleft.y || f.y == pbottomright.y) && f.x % 2 == modx)
-			isframepixel = true;
-	} else {
-		if (((f.x >= ptopleft.x && f.x <= mapwidth) || (f.x >= 0 && f.x <= pbottomright.x)) &&
-		    (f.y == ptopleft.y || f.y == pbottomright.y) && (f.x % 2) == modx)
-			isframepixel = true;
+	Vector2i center_pixel;
+	switch (minimap_type) {
+	case MiniMapType::kStaticViewWindow:
+		center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
+		break;
+
+	case MiniMapType::kStaticMap: {
+		Vector2f origin = view_area.center();
+		MapviewPixelFunctions::normalize_pix(map, &origin);
+		center_pixel =
+		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
+		break;
+	}
 	}
 
-	if (ptopleft.y <= pbottomright.y) {
-		if (f.y >= ptopleft.y && f.y <= pbottomright.y &&
-		    (f.x == ptopleft.x || f.x == pbottomright.x) && f.y % 2 == mody)
-			isframepixel = true;
-	} else {
-		if (((f.y >= ptopleft.y && f.y <= mapheight) || (f.y >= 0 && f.y <= pbottomright.y)) &&
-		    (f.x == ptopleft.x || f.x == pbottomright.x) && f.y % 2 == mody)
-			isframepixel = true;
+	const int width = zoom ? map.get_width() * 2 : map.get_width();
+	const int height = zoom ? map.get_height() * 2 : map.get_height();
+	const auto make_red = [width, height, &texture](int x, int y) {
+		if (x < 0) {
+			x += width;
+		}
+		if (x >= width) {
+			x -= width;
+		}
+		if (y < 0) {
+			y += height;
+		}
+		if (y >= height) {
+			y -= height;
+		}
+		texture->set_pixel(x, y, kRed);
+	};
+
+	bool draw = true;
+	for (int y = -half_height; y <= half_height; ++y) {
+		if (draw) {
+			make_red(-half_width + center_pixel.x, y + center_pixel.y);
+			make_red(half_width + center_pixel.x, y + center_pixel.y);
+		}
+		draw = !draw;
 	}
 
-	return isframepixel;
+	draw = true;
+	for (int x = -half_width; x <= half_width; ++x) {
+		if (draw) {
+			make_red(x + center_pixel.x, -half_height + center_pixel.y);
+			make_red(x + center_pixel.x, half_height + center_pixel.y);
+		}
+		draw = !draw;
+	}
 }
 
+#if 0
 // Calculate the field coordinates of the dotted frame indicating where the
 // main map view is currently centered, without wrap-around.
 void calc_minimap_frame(const Widelands::Map& map,
@@ -140,43 +174,22 @@ void calc_minimap_frame(const Widelands::Map& map,
 	bottomright.x = viewpoint.x + mapwidth / 2 + xsize;
 	bottomright.y = viewpoint.y + mapheight / 2 + ysize;
 }
+#endif
 
 // Does the actual work of drawing the minimap.
-void draw_minimap_int(Texture* texture,
-                      const Widelands::EditorGameBase& egbase,
-                      const Widelands::Player* player,
-                      const Point& viewpoint,
-                      MiniMapLayer layers) {
+void do_draw_minimap(Texture* texture,
+                     const Widelands::EditorGameBase& egbase,
+                     const Widelands::Player* player,
+                     const Vector2i& top_left,
+                     MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
-
 	const uint16_t surface_h = texture->height();
 	const uint16_t surface_w = texture->width();
-
-	const int32_t mapwidth = map.get_width();
-	const int32_t mapheight = map.get_height();
-
-	Point ptopleft, pbottomright;
-	calc_minimap_frame(map, viewpoint, ptopleft, pbottomright);
-
-	if (ptopleft.x < 0) {
-		ptopleft.x += mapwidth;
-	}
-	if (ptopleft.y < 0) {
-		ptopleft.y += mapheight;
-	}
-	if (pbottomright.x >= mapwidth) {
-		pbottomright.x -= mapwidth;
-	}
-	if (pbottomright.y >= mapheight) {
-		pbottomright.y -= mapheight;
-	}
-
-	uint32_t modx = pbottomright.x % 2;
-	uint32_t mody = pbottomright.y % 2;
+	const int32_t mapwidth = egbase.get_map().get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
 		Widelands::FCoords f(
-		   Widelands::Coords(viewpoint.x, viewpoint.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
+		   Widelands::Coords(top_left.x, top_left.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
 		map.normalize_coords(f);
 		f.field = &map[f];
 		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
@@ -185,51 +198,30 @@ void draw_minimap_int(Texture* texture,
 				move_r(mapwidth, f, i);
 			}
 
-			RGBColor pixel_color;
-			if ((layers & MiniMapLayer::ViewWindow) &&
-			    is_minimap_frameborder(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
-				pixel_color = RGBColor(255, 0, 0);
-			} else {
-				uint16_t vision =
-				   0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
-				Widelands::PlayerNumber owner = 0;
-				if (player == nullptr || player->see_all()) {
-					vision = 2;  // Seen right now.
-					owner = f.field->get_owned_by();
-				} else if (player != nullptr) {
-					const auto& field = player->fields()[i];
-					vision = field.vision;
-					owner = field.owner;
-				}
-
-				if (vision > 0) {
-					pixel_color = calc_minimap_color(egbase, f, layers, owner, vision > 1);
-				}
+			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
+			Widelands::PlayerNumber owner = 0;
+			if (player == nullptr || player->see_all()) {
+				// This player has omnivision - show the field like it is in reality.
+				vision = 2;  // Seen right now.
+				owner = f.field->get_owned_by();
+			} else if (player != nullptr) {
+				// This player might be affected by fog of war - instead of the
+				// reality, we show her what she last saw on this field. If she has
+				// vision of this field, this will be the same as reality -
+				// otherwise this shows reality as it was the last time she had
+				// vision on the field.
+				// If she never had vision, field.vision will be 0.
+				const auto& field = player->fields()[i];
+				vision = field.vision;
+				owner = field.owner;
 			}
 
-			texture->set_pixel(x, y, pixel_color);
+			RGBColor color;
+			if (vision > 0)
+				color = calc_minimap_color(egbase, f, layers, owner, vision > 1);
+			texture->set_pixel(x, y, color);
 		}
 	}
-}
-
-std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
-                                      const Player* player,
-                                      const Point& viewpoint,
-                                      MiniMapLayer layers) {
-	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
-	//       necesary. The created texture could be cached and only redrawn two
-	//       or three times per second
-	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
-
-	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
-
-	texture->lock(Texture::Lock_Discard);
-	draw_minimap_int(texture.get(), egbase, player, viewpoint, layers);
-	texture->unlock(Texture::Unlock_Update);
-
-	return texture;
 }
 
 /**
@@ -244,10 +236,11 @@ public:
 	}
 
 	void draw(RenderTarget& dst,
-	          const Point& viewpoint,
+	          const Rectf& viewarea,
+	          MiniMapType type,
 	          MiniMapLayer layers) override {
-		texture_ = draw_minimap(egbase(), player(), viewpoint, layers);
-		dst.blit(Point(), texture_.get());
+		texture_ = draw_minimap(egbase(), player(), viewarea, type, layers);
+		dst.blit(Vector2f(), texture_.get());
 	}
 
 private:
@@ -267,14 +260,19 @@ public:
 	}
 
 	void draw(RenderTarget& dst,
-	          const Point& viewpoint,
+	          const Rectf& viewpoint,
+	          MiniMapType type,
 	          MiniMapLayer layers) override {
 		Surface* surface = dst.get_surface();
 		if (!surface)
 			return;
 
+		// TODO(nha): handle MiniMapType
+
 		args_.terrain->update_minimap();
 
+#if 0
+		// TODO(nha): frame
 		Point frame_topleft, frame_bottomright;
 		calc_minimap_frame(egbase().map(), viewpoint, frame_topleft, frame_bottomright);
 
@@ -282,12 +280,15 @@ public:
 		args_.minfy = frame_topleft.y;
 		args_.maxfx = frame_bottomright.x;
 		args_.maxfy = frame_bottomright.y;
+#else
+		args_.minfx = args_.maxfx = args_.minfy = args_.maxfy = 0;
+#endif
 
 		args_.minimap_tl_fx = viewpoint.x;
 		args_.minimap_tl_fy = viewpoint.y;
 		args_.minimap_layers = layers;
 
-		const Rect& bounding_rect = dst.get_rect();
+		const Recti& bounding_rect = dst.get_rect();
 
 		args_.surface_offset = bounding_rect.origin() + dst.get_offset();
 		args_.surface_width = surface->width();
@@ -298,8 +299,8 @@ public:
 		i.program_id = RenderQueue::Program::kMiniMapGl4;
 		i.blend_mode = BlendMode::Copy;
 		i.terrain_arguments.destination_rect =
-			FloatRect(bounding_rect.x, args_.surface_height - bounding_rect.y - bounding_rect.h,
-			          bounding_rect.w, bounding_rect.h);
+			Rectf(bounding_rect.x, args_.surface_height - bounding_rect.y - bounding_rect.h,
+			      bounding_rect.w, bounding_rect.h);
 		i.terrain_arguments.renderbuffer_width = args_.surface_width;
 		i.terrain_arguments.renderbuffer_height = args_.surface_height;
 		i.terrain_gl4_arguments = &args_;
@@ -312,45 +313,60 @@ private:
 
 }  // namespace
 
-void write_minimap_image_field(const EditorGameBase& egbase,
-                               const Player* player,
-                               const Point& viewpoint,
-                               MiniMapLayer layers,
-                               ::StreamWrite* const streamwrite) {
-	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	save_to_png(texture.get(), streamwrite, ColorType::RGBA);
+Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
+                                   const Vector2i& minimap_pixel,
+                                   const Rectf& view_area,
+                                   MiniMapType minimap_type,
+                                   const bool zoom) {
+	Vector2f top_left;
+	switch (minimap_type) {
+	case MiniMapType::kStaticViewWindow:
+		top_left =
+		   view_area.center() -
+		   Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+		break;
+
+	case MiniMapType::kStaticMap:
+		top_left = Vector2f(0., 0.);
+		break;
+	}
+
+	const float multiplier = zoom ? 2.f : 1.f;
+	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
+	                                         minimap_pixel.y / multiplier * kTriangleHeight);
+	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
+	return map_pixel;
 }
 
-void write_minimap_image(const EditorGameBase& egbase,
-                         const Player* player,
-                         const Point& gviewpoint,
-                         MiniMapLayer layers,
-                         ::StreamWrite* const streamwrite) {
-	assert(streamwrite != nullptr);
+std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
+                                      const Player* player,
+                                      const Rectf& view_area,
+                                      const MiniMapType& minimap_type,
+                                      MiniMapLayer layers) {
+	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
+	//       necessary. The created texture could be cached and only redrawn two
+	//       or three times per second
+	const Map& map = egbase.map();
+	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
+	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
 
-	Point viewpoint(gviewpoint);
+	// Center the view on the middle of the 'view_area'.
+	const bool zoom = layers & MiniMapLayer::Zoom2;
+	Vector2f top_left =
+	   minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
+	const Coords node =
+	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
-	// map dimension
-	const int16_t map_w = egbase.get_map().get_width();
-	const int16_t map_h = egbase.get_map().get_height();
-	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(egbase.get_map());
-	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(egbase.get_map());
-	// adjust the viewpoint top topleft in map coords
-	viewpoint.x += g_gr->get_xres() / 2;
-	if (viewpoint.x >= maxx) {
-		viewpoint.x -= maxx;
+	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
+	texture->lock(Texture::Lock_Discard);
+	do_draw_minimap(texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
+
+	if (layers & MiniMapLayer::ViewWindow) {
+		draw_view_window(map, view_area, minimap_type, zoom, texture.get());
 	}
-	viewpoint.y += g_gr->get_yres() / 2;
-	if (viewpoint.y >= maxy) {
-		viewpoint.y -= maxy;
-	}
-	viewpoint.x /= kTriangleWidth;
-	viewpoint.y /= kTriangleHeight;
-	viewpoint.x -= map_w / 2;
-	viewpoint.y -= map_h / 2;
+	texture->unlock(Texture::Unlock_Update);
 
-	// Render minimap
-	write_minimap_image_field(egbase, player, viewpoint, layers, streamwrite);
+	return texture;
 }
 
 MiniMapRenderer::MiniMapRenderer(const Widelands::EditorGameBase& egbase,

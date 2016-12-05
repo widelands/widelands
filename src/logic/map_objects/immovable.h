@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -37,6 +38,7 @@ class WorldLegacyLookupTable;
 
 namespace Widelands {
 
+class Building;
 class Economy;
 class Map;
 class TerrainAffinity;
@@ -84,6 +86,8 @@ struct BaseImmovable : public MapObject {
 	virtual int32_t get_size() const = 0;
 	virtual bool get_passable() const = 0;
 
+	virtual void set_owner(Player* player);
+
 	using PositionList = std::vector<Coords>;
 	/**
 	 * Return all coordinates occupied by this Immovable. We gurantee that the
@@ -91,7 +95,18 @@ struct BaseImmovable : public MapObject {
 	 * if one can be chosen as main.
 	 */
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
-	virtual void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) = 0;
+
+	// Draw this immovable onto 'dst' choosing the frame appropriate for
+	// 'gametime'. 'draw_text' decides if census and statistics are written too.
+	// The 'coords_to_draw' are passed one to give objects that occupy multiple
+	// fields a way to only draw themselves once. The 'point_on_dst' determines
+	// the point for the hotspot of the animation and 'scale' determines how big
+	// the immovable will be plotted.
+	virtual void draw(uint32_t gametime,
+	                  TextToDraw draw_text,
+	                  const Vector2f& point_on_dst,
+	                  float scale,
+	                  RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);
@@ -124,7 +139,8 @@ public:
 	}
 	ImmovableProgram const* get_program(const std::string&) const;
 
-	Immovable& create(EditorGameBase&, const Coords&) const;
+	Immovable&
+	create(EditorGameBase&, const Coords&, const Widelands::Building* former_building) const;
 
 	MapObjectDescr::OwnerType owner_type() const {
 		return owner_type_;
@@ -186,13 +202,10 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	Immovable(const ImmovableDescr&);
+	/// If this immovable was created by a building, 'former_building' can be set in order to display
+	/// information about it.
+	Immovable(const ImmovableDescr&, const Widelands::Building* former_building = nullptr);
 	~Immovable();
-
-	Player* get_owner() const {
-		return owner_;
-	}
-	void set_owner(Player* player);
 
 	Coords get_position() const {
 		return position_;
@@ -212,8 +225,11 @@ public:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          TextToDraw draw_text,
+	          const Vector2f& point_on_dst,
+	          float scale,
+	          RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
 	bool construct_ware(Game& game, DescriptionIndex index);
@@ -230,7 +246,9 @@ public:
 	}
 
 protected:
-	Player* owner_;
+	// The building type that created this immovable, if any.
+	const BuildingDescr* former_building_descr_;
+
 	Coords position_;
 
 	uint32_t anim_;
@@ -288,9 +306,16 @@ public:
 	                               const TribesLegacyLookupTable& tribes_lookup_table);
 
 private:
-	void increment_program_pointer();
+	/// If this immovable was created by a building, this can be set in order to display information
+	/// about it. If this is a player immovable, you will need to set the owner first.
+	void set_former_building(const BuildingDescr& building);
 
-	void draw_construction(const EditorGameBase&, RenderTarget&, Point);
+	void increment_program_pointer();
+	void draw_construction(uint32_t gametime,
+	                       TextToDraw draw_text,
+	                       const Vector2f& point_on_dst,
+	                       float scale,
+	                       RenderTarget* dst);
 };
 
 /**
@@ -353,14 +378,13 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void receive_worker(Game&, Worker& worker);
 	/*@}*/
 
-	void set_owner(Player*);
+	void set_owner(Player*) override;
 
 protected:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Player* owner_;
 	Economy* economy_;
 
 	Workers workers_;

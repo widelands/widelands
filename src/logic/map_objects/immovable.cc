@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -266,6 +265,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 /**
  * Parse a tribes immovable from its init file.
+ *
+ * The contents of 'table' are documented in
+ * /data/tribes/immovables/ashes/init.lua
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
@@ -322,10 +324,13 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 
 /**
  * Create an immovable of this type
-*/
-Immovable& ImmovableDescr::create(EditorGameBase& egbase, const Coords& coords) const {
-	assert(this != nullptr);
-	Immovable& result = *new Immovable(*this);
+ * If this immovable was created by a building, 'former_building' can be set
+ * in order to display information about it.
+ */
+Immovable& ImmovableDescr::create(EditorGameBase& egbase,
+                                  const Coords& coords,
+                                  const Building* former_building) const {
+	Immovable& result = *new Immovable(*this, former_building);
 	result.position_ = coords;
 	result.init(egbase);
 	return result;
@@ -339,9 +344,9 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const ImmovableDescr& imm_descr)
+Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building* former_building)
    : BaseImmovable(imm_descr),
-     owner_(nullptr),
+     former_building_descr_(former_building ? &former_building->descr() : nullptr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -349,6 +354,9 @@ Immovable::Immovable(const ImmovableDescr& imm_descr)
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0) {
+	if (former_building != nullptr) {
+		set_owner(former_building->get_owner());
+	}
 }
 
 Immovable::~Immovable() {
@@ -361,16 +369,17 @@ BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) cons
 	return rv;
 }
 
+void BaseImmovable::set_owner(Player* player) {
+	assert(owner_ == nullptr);
+	owner_ = player;
+}
+
 int32_t Immovable::get_size() const {
 	return descr().get_size();
 }
 
 bool Immovable::get_passable() const {
 	return descr().get_size() < BIG;
-}
-
-void Immovable::set_owner(Player* player) {
-	owner_ = player;
 }
 
 void Immovable::start_animation(const EditorGameBase& egbase, uint32_t const anim) {
@@ -439,19 +448,29 @@ void Immovable::act(Game& game, uint32_t const data) {
 	}
 }
 
-void Immovable::draw(const EditorGameBase& game,
-                     RenderTarget& dst,
-                     const FCoords&,
-                     const Point& pos) {
-	if (anim_) {
-		if (!anim_construction_total_)
-			dst.blit_animation(pos, anim_, game.get_gametime() - animstart_);
-		else
-			draw_construction(game, dst, pos);
+void Immovable::draw(uint32_t gametime,
+                     const TextToDraw draw_text,
+                     const Vector2f& point_on_dst,
+                     float scale,
+                     RenderTarget* dst) {
+	if (!anim_) {
+		return;
+	}
+	if (!anim_construction_total_) {
+		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
+		if (former_building_descr_) {
+			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+		}
+	} else {
+		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
 	}
 }
 
-void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst, const Point pos) {
+void Immovable::draw_construction(const uint32_t gametime,
+                                  const TextToDraw draw_text,
+                                  const Vector2f& point_on_dst,
+                                  const float scale,
+                                  RenderTarget* dst) {
 	const ImmovableProgram::ActConstruction* constructionact = nullptr;
 	if (program_ptr_ < program_->size())
 		constructionact =
@@ -462,7 +481,7 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	uint32_t done = 0;
 	if (anim_construction_done_ > 0) {
 		done = steptime * (anim_construction_done_ - 1);
-		done += std::min(steptime, game.get_gametime() - animstart_);
+		done += std::min(steptime, gametime - animstart_);
 	}
 
 	uint32_t total = anim_construction_total_ * steptime;
@@ -474,30 +493,26 @@ void Immovable::draw_construction(const EditorGameBase& game, RenderTarget& dst,
 	uint32_t frametime = g_gr->animations().get_animation(anim_).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
-	const uint16_t curw = anim.width();
-	const uint16_t curh = anim.height();
-
-	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
 	assert(get_owner() != nullptr);  // Who would build something they do not own?
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.blit_animation(pos, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(
+		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
 	}
 
-	assert(lines <= curh);
-	dst.blit_animation(pos, anim_, current_frame * frametime, player_color,
-	                   Rect(Point(0, curh - lines), curw, lines));
+	const int percent = ((done % units_per_frame) * 100) / units_per_frame;
+
+	dst->blit_animation(
+	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	uint32_t const display_flags = game.get_ibase()->get_display_flags();
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, descr().descname(),
-	             display_flags & InteractiveBase::dfShowStatistics,
+	do_draw_info(draw_text, descr().descname(),
 	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
-	             dst, pos);
+	             point_on_dst, scale, dst);
 }
 
 /**
@@ -517,7 +532,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersionImmovable = 7;
+constexpr uint8_t kCurrentPacketVersionImmovable = 8;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -527,7 +542,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
-		if (pn && pn <= MAX_PLAYERS) {
+		if (pn && pn <= kMaxPlayers) {
 			Player* plr = egbase().get_player(pn);
 			if (!plr)
 				throw GameDataError("Immovable::load: player %u does not exist", pn);
@@ -538,6 +553,16 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	// Position
 	imm.position_ = read_coords_32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.position_);
+
+	if (packet_version >= 8) {
+		Player* owner = imm.get_owner();
+		if (owner) {
+			DescriptionIndex idx = owner->tribe().building_index(fr.string());
+			if (owner->tribe().has_building(idx)) {
+				imm.set_former_building(*owner->tribe().get_building_descr(idx));
+			}
+		}
+	}
 
 	// Animation
 	char const* const animname = fr.c_string();
@@ -624,7 +649,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr)
-			log(" Tribe immovable has no owner!! ");
+			log(" Tribe immovable '%s' has no owner!! ", descr().name().c_str());
 		fw.c_string("tribes");
 	} else {
 		fw.c_string("world");
@@ -637,6 +662,9 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
+	if (get_owner()) {
+		fw.string(former_building_descr_ ? former_building_descr_->name() : "");
+	}
 
 	// Animations
 	fw.string(descr().get_animation_name(anim_));
@@ -1179,7 +1207,7 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), owner_(nullptr), economy_(nullptr) {
+   : BaseImmovable(mo_descr), economy_(nullptr) {
 }
 
 /**
@@ -1231,14 +1259,19 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
+void Immovable::set_former_building(const BuildingDescr& building) {
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr)
+		throw wexception("Set '%s' as former building for Tribe immovable '%s', but it has no owner.",
+		                 building.name().c_str(), descr().name().c_str());
+	former_building_descr_ = &building;
+}
+
 /**
  * Set the immovable's owner. Currently, it can only be set once.
 */
-void PlayerImmovable::set_owner(Player* const new_owner) {
+void PlayerImmovable::set_owner(Player* new_owner) {
 	assert(owner_ == nullptr);
-
 	owner_ = new_owner;
-
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 }
 

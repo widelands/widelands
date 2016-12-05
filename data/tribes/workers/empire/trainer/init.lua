@@ -21,9 +21,8 @@ tribes:new_worker_type {
 
    buildcost = {
       empire_carrier = 1,
-      -- TODO (GunChleoc): Add back in when we have a casern
-      --armor_helmet = 1,
-      --spear_wooden = 1
+      armor_helmet = 1,
+      spear_wooden = 1
    },
 
    animations = animations,

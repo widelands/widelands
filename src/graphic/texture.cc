@@ -144,14 +144,14 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	SDL_FreeSurface(surface);
 }
 
-Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h)
+Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h)
    : owns_texture_(false) {
 	if (parent_w == 0 || parent_h == 0) {
 		throw wexception("Created a sub Texture with zero height and width parent.");
 	}
 
 	blit_data_ = BlitData{
-	   texture, parent_w, parent_h, subrect,
+	   texture, parent_w, parent_h, subrect.cast<float>(),
 	};
 }
 
@@ -172,7 +172,7 @@ int Texture::height() const {
 void Texture::init(uint16_t w, uint16_t h) {
 	blit_data_ = {
 	   0,  // initialized below
-	   w, h, Rect(0, 0, w, h),
+	   w, h, Rectf(0, 0, w, h),
 	};
 	if (w * h == 0) {
 		return;
@@ -252,7 +252,7 @@ void Texture::setup_gl() {
 	glViewport(0, 0, width(), height());
 }
 
-void Texture::do_blit(const FloatRect& dst_rect,
+void Texture::do_blit(const Rectf& dst_rect,
                       const BlitData& texture,
                       float opacity,
                       BlendMode blend_mode) {
@@ -260,11 +260,11 @@ void Texture::do_blit(const FloatRect& dst_rect,
 		return;
 	}
 	setup_gl();
-	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rect()},
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rectf()},
 	                             RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
 }
 
-void Texture::do_blit_blended(const FloatRect& dst_rect,
+void Texture::do_blit_blended(const Rectf& dst_rect,
                               const BlitData& texture,
                               const BlitData& mask,
                               const RGBColor& blend) {
@@ -276,7 +276,7 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
 	BlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend, BlendMode::UseAlpha);
 }
 
-void Texture::do_blit_monochrome(const FloatRect& dst_rect,
+void Texture::do_blit_monochrome(const Rectf& dst_rect,
                                  const BlitData& texture,
                                  const RGBAColor& blend) {
 	if (blit_data_.texture_id == 0) {
@@ -295,9 +295,7 @@ void Texture::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> ver
 	   {DrawLineProgram::Arguments{vertices, 0.f, BlendMode::UseAlpha}});
 }
 
-void Texture::do_fill_rect(const FloatRect& dst_rect,
-                           const RGBAColor& color,
-                           BlendMode blend_mode) {
+void Texture::do_fill_rect(const Rectf& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	if (blit_data_.texture_id == 0) {
 		return;
 	}

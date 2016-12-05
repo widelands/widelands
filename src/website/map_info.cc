@@ -88,10 +88,13 @@ int main(int argc, char** argv) {
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+
 		// Write minimap
 		{
 			FileWrite fw;
-			write_minimap_image_field(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain, &fw);
+			save_to_png(minimap.get(), &fw, ColorType::RGBA);
 			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 

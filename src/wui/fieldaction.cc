@@ -282,7 +282,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Point(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -605,18 +605,17 @@ void FieldActionWindow::act_ripflag() {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	if (upcast(Widelands::Flag, flag, node_.field->get_immovable())) {
+		const bool ctrl_pressed = SDL_GetModState() & KMOD_CTRL;
 		if (Building* const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
-				if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-					game->send_player_bulldoze(
-					   *flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+				if (ctrl_pressed) {
+					game->send_player_bulldoze(*flag, ctrl_pressed);
 				} else {
 					show_bulldoze_confirm(*iaplayer, *building, flag);
 				}
 			}
 		} else {
-			game->send_player_bulldoze(
-			   *flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+			game->send_player_bulldoze(*flag, ctrl_pressed);
 		}
 	}
 }
@@ -656,8 +655,7 @@ void FieldActionWindow::act_removeroad() {
 	Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(node_))) {
 		upcast(Game, game, &ibase().egbase());
-		game->send_player_bulldoze(
-		   *road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+		game->send_player_bulldoze(*road, SDL_GetModState() & KMOD_CTRL);
 	}
 	okdialog();
 }
@@ -737,7 +735,7 @@ void show_field_action(InteractiveBase* const ibase,
 	// Force closing of old fieldaction windows. This is necessary because
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
-	delete registry->window;
+	registry->destroy();
 	*registry = UI::UniqueWindow::Registry();
 
 	if (!ibase->is_building_road()) {

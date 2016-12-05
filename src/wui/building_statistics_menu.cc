@@ -88,7 +88,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-        _("Low Productivity "),
+        _("Low Productivity"),
         UI::Align::kBottomLeft),
      unproductive_percent_(
         &unproductive_box_,
@@ -264,36 +264,36 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
 	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
 	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
 	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
 	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
 	   g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
 	   g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
 	   g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
 	   g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"), false);
+	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
 	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kOwned, true));
@@ -335,7 +335,8 @@ bool BuildingStatisticsMenu::add_button(
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
-	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "", false, true);
+	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
+	   UI::Button::Style::kFlat);
 	button_box->add(building_buttons_[id], UI::Align::kLeft);
 
 	owned_labels_[id] =
@@ -481,7 +482,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().move_view_to(stats_vector[last_building_index_].pos);
+		iplayer().center_view_on_coords(stats_vector[last_building_index_].pos);
 	}
 	low_production_reset_focus();
 	update();
@@ -501,7 +502,7 @@ void BuildingStatisticsMenu::think() {
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
 		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
-		navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
 	}
 
 	// Update statistics
@@ -630,7 +631,7 @@ void BuildingStatisticsMenu::update() {
 				                                                                     0);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Productivity "));
+				unproductive_label_.set_text(_("Low Productivity"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
 				unproductive_percent_.set_visible(true);
@@ -718,12 +719,11 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 		if (building_button == nullptr) {
 			continue;
 		}
-		building_button->set_flat(true);
+		building_button->set_style(UI::Button::Style::kFlat);
 	}
 
 	// Update for current button
 	current_building_type_ = id;
-	building_buttons_[current_building_type_]->set_flat(false);
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	low_production_reset_focus();
