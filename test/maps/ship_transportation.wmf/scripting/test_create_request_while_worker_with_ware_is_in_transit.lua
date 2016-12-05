@@ -17,24 +17,22 @@ run(function()
    -- plant a tree inside the street to the right of the lumberjack hut
 
    assert_equal(nil, map:get_field(23,3).immovable)
-   tree = map:place_immovable("oak_summer_old", map:get_field(23,3), "world")
+   map:place_immovable("oak_summer_old", map:get_field(23,3), "world")
    assert_not_equal(nil, map:get_field(23,3).immovable)
 
    -- set logs and woodcutters to "remove from here" in the port
    np = northern_port()
-   np:set_ware_policies("log", "SP_Remove")
-   np:set_worker_policies("barbarians_lumberjack", "SP_Remove")
+   np:set_ware_policies("log", "remove")
+   np:set_worker_policies("barbarians_lumberjack", "remove")
 
    -- aaand action!
 
    -- sleep until the tree has been felled
-   -- comparision is a hack. How do I find out, whether a MapObject (tree) is valid?
-   while (tree == map:get_field(23,3).immovable) do
+   while (map:get_field(23,3).immovable.descr:has_attribute("tree")) do
       sleep(100)
    end
-   print("tree felled")
    -- some more sleep since "removal of tree" and "worker has log" are not at the same time
-   sleep(2000)
+   sleep(1000)
    -- now the worker should have the tree
 
 

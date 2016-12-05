@@ -3873,7 +3873,13 @@ Warehouse
    .. method:: get_ware_policies(which)
 
       Gets the policies how the warehouse should handle the given wares.
-      The method to handle is one of the strings SP_Normal, SP_Prefer, SP_DontStock, SP_Remove.
+      The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
+
+      Usage example:
+      .. code-block:: lua
+
+         wh:get_ware_policies({"ax", "coal"})
+         -- Returns a table like {ax="normal", coal="prefer"}
 
       :arg which: behaves like for :meth:`HasWares.get_wares`.
 
@@ -3891,10 +3897,15 @@ Warehouse
 
       Sets the policies how the warehouse should handle the given wares.
 
+      Usage example:
+      .. code-block:: lua
+
+         wh:set_ware_policies("coal", "prefer")
+
       :arg which: behaves like for :meth:`HasWares.get_wares`.
 
       :arg policy: the policy to apply for all the wares given in `which`.
-      :type policy: a string out of "SP_Normal", "SP_Prefer", "SP_DontStock", "SP_Remove".
+      :type policy: a string out of "normal", "prefer", "dontstock", "remove".
 */
 
 /* RST
@@ -4016,29 +4027,29 @@ WH_GET(worker, Worker)
 inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 	switch (p) {
 		case Warehouse::StockPolicy::SP_Normal:
-			lua_pushstring(L, "SP_Normal");
+			lua_pushstring(L, "normal");
 			break;
 		case Warehouse::StockPolicy::SP_Prefer:
-			lua_pushstring(L, "SP_Prefer");
+			lua_pushstring(L, "prefer");
 			break;
 		case Warehouse::StockPolicy::SP_DontStock:
-			lua_pushstring(L, "SP_DontStock");
+			lua_pushstring(L, "dontstock");
 			break;
 		case Warehouse::StockPolicy::SP_Remove:
-			lua_pushstring(L, "SP_Remove");
+			lua_pushstring(L, "remove");
 			break;
 	}
 }
 
 inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
-	if (str == "SP_Normal")
+	if (str == "normal")
 		return Warehouse::StockPolicy::SP_Normal;
-	else if (str == "SP_Prefer")
+	else if (str == "prefer")
 		return Warehouse::StockPolicy::SP_Prefer;
-	else if (str == "SP_DontStock")
+	else if (str == "dontstock")
 		return Warehouse::StockPolicy::SP_DontStock;
-	else if (str == "SP_Remove")
+	else if (str == "remove")
 		return Warehouse::StockPolicy::SP_Remove;
 	else
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
