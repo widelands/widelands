@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 19:07+0000\n"
+"POT-Creation-Date: 2016-12-02 08:04+0000\n"
+"PO-Revision-Date: 2016-12-03 23:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -3693,7 +3693,7 @@ msgstr "Togalaichean sìobhalta air an call"
 
 #: ../../src/wui/general_statistics_menu.cc:186
 msgid "Military"
-msgstr "An airm"
+msgstr "An t-arm"
 
 #: ../../src/wui/interactive_gamebase.cc:45
 msgid "PAUSE"
