@@ -1,0 +1,11 @@
+This package embeeds lua-eris ( https://github.com/fnuecke/eris ), a
+fork of Lua 5.3 for better data persistance. It replaces and provides
+the classical lua interpreter.
+
+This library should be packaged separately, but widelands already
+changed its lua version several times in the past, and this perticular
+version does not seem to be widely used. I would prefer to see some
+real interest from other communities before separating lua-eris.
+
+
+                              -- Martin Quinson, November 2016.

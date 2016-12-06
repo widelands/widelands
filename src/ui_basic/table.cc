@@ -71,9 +71,8 @@ Table<void*>::Table(
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ =
-	   new Scrollbar(get_parent(), get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
-	                 Scrollbar::kSize, get_h() - headerheight_, button_background);
+	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
+	                           get_h() - headerheight_, button_background);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -537,8 +536,6 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
 
-	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
-
 	if (do_select) {
 		select(entry_records_.size() - 1);
 		scrollbar_->set_scrollpos(std::numeric_limits<int32_t>::max());
@@ -564,34 +561,62 @@ void Table<void*>::remove(const uint32_t i) {
 	const EntryRecordVector::iterator it = entry_records_.begin() + i;
 	delete *it;
 	entry_records_.erase(it);
-	if (selection_ == i)
+	if (selection_ == i) {
 		selection_ = no_selection_index();
-	else if (selection_ > i && selection_ != no_selection_index())
+	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
-
+	}
 	if (is_multiselect_ && selection_ != no_selection_index()) {
 		multiselect_.insert(selection_);
 	}
-
-	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
+	layout();
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
-	if (sort_descending_)
+	if (sort_descending_) {
 		return columns_[sort_column_].compare(b, a);
-	else
+	} else {
 		return columns_[sort_column_].compare(a, b);
+	}
 }
 
 void Table<void*>::layout() {
-	// If we have a flexible column, adjust the column sizes.
+	if (columns_.empty()) {
+		return;
+	}
+
+	// Position and update the scrollbar
+	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
+	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
+	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
+	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
+
+	// Find a column to resize
+	size_t resizeable_column = std::numeric_limits<size_t>::max();
 	if (flexible_column_ != std::numeric_limits<size_t>::max()) {
+		resizeable_column = flexible_column_;
+	} else {
+		// Use the widest column
+		int all_columns_width = scrollbar_ && scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+		uint32_t widest_width = columns_[resizeable_column].width;
+		for (size_t i = 1; i < columns_.size(); ++i) {
+			const uint32_t width = columns_[i].width;
+			all_columns_width += width;
+			if (width > widest_width) {
+				widest_width = width;
+				resizeable_column = i;
+			}
+		}
+	}
+
+	// If we have a resizeable column, adjust the column sizes.
+	if (resizeable_column != std::numeric_limits<size_t>::max()) {
 		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 		for (const auto& column : columns_) {
 			all_columns_width += column.width;
 		}
 		if (all_columns_width != get_w()) {
-			Column& column = columns_.at(flexible_column_);
+			Column& column = columns_.at(resizeable_column);
 			column.width = column.width + get_w() - all_columns_width;
 			column.btn->set_size(column.width, column.btn->get_h());
 			int offset = 0;
@@ -599,6 +624,7 @@ void Table<void*>::layout() {
 				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
 				offset = col.btn->get_x() + col.btn->get_w();
 			}
+
 			if (scrollbar_->is_enabled()) {
 				const UI::Button* last_column_btn = columns_.back().btn;
 				scrollbar_filler_button_->set_pos(

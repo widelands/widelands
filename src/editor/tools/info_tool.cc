@@ -168,7 +168,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		   (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str() +
 		   "\n";
 	} else {
-		buf += "• " + std::string(_("Players: -")) + "\n";
+		buf += "• " + std::string(_("Players: –")) + "\n";
 	}
 
 	buf += "• " + (boost::format(_("Author: %s")) % map->get_author()).str() + "\n";
