@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-20 09:44+0000\n"
-"PO-Revision-Date: 2016-11-25 13:08+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,8 +50,8 @@ msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public Licen
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "További információk a szabad és nyílt forrású szoftverekről valamint a GPL-ről ezen a weboldalon: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -427,8 +427,8 @@ msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvev�
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Néző mód: mindent lát, de senkit sem tud irányítani"
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -464,14 +464,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak"
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem nező) beállíthatja a törzset és a csapatot ahhoz a játékoshoz"
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -543,9 +543,9 @@ msgstr "Az Alt nyomva tartásával válthatsz a második alternatív eszközre (
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "A számbillentyűk (0–9) lehetővé teszik, hogy közvetlenül megadd az egérkurzor körül kiválasztott terület nagyságát."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

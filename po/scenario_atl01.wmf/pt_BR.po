@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 20:18+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -540,11 +540,11 @@ msgstr "Ah ! Mas acho que vai ser impossível mudar isso. A preparação e as re
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Para mim, fazer pão é uma tarefa difícil: moer as raízes negras e o milho para fazer farinha e depois fazer pão é entediante e cansativo. Acho que devíamos procurar uma solução mais industrial, pois não devo ser só eu a gostar de pão recém feito entregue em minha casa todos os dias."
+msgstr ""
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

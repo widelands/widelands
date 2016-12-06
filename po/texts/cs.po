@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-15 06:27+0000\n"
-"PO-Revision-Date: 2016-11-17 20:40+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,8 +51,8 @@ msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -428,8 +428,8 @@ msgstr "Hráč a barva jeho vlajky. Pokud si více hráčů zvolí stejnou barvu
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "A mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče"
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -465,14 +465,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Poslední tři může nastavit pouze hostitel hry klikem na tlačítko \"typ\" hráče. Hostitel může také nastavit výchozí podmínky každého hráče (budovy, suroviny a dělníky, které hráč dostane do začátku), kmen a tým počítačovým hráčům"
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Každý klient připojený k hráči (který není divák), může pro zvoleného hráče nastavit kmen a tým"
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -544,9 +544,9 @@ msgstr "Držení klávesy Alt aktivuje druhý alternativní nástroj (pokud exis
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Pomocí kláves čísel (1 - 0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

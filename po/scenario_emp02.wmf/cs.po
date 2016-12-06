@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-30 11:06+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,9 +79,9 @@ msgstr "Domek kameníka a těžební infrastruktura"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
-msgstr "Postav kameníka a pak dokonči infrastrukturu pro těžbu a produkci (důl na uhlí a/nebo milíř na dřevěné uhlí, důl na železo, dílnu, zbrojířství, platnéřství a slévárnu)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -113,10 +113,10 @@ msgstr "Možná budeš potřebovat i domek lovce, vepřín, vinohrad a nějaké 
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr "Záleží na tobě, co chceš vybudovat. Ale měj na paměti, že doly na uhlí a železo vyžadují pivo, zatímco doly na mramor a zlato vyžadují víno. Všechny typy dolů také potřebují příděly, které se vyrábí z chleba NEBO masa NEBO ryb."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -332,10 +332,10 @@ msgstr "Saledus je rozrušený"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Bohové, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a ta druhá železné rudy. Měli bychom bezodkladně zahájit stavbu dolů na uhlí a železnou rudu (nebo alespoň milířů na dřevěné uhlí), slévárny, dílny, platnéřsví a zbrojařství."
+msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196

@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-20 09:44+0000\n"
-"PO-Revision-Date: 2016-11-20 19:34+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,9 +257,9 @@ msgstr "Kaivaa rautamalmia maasta vuoristoisessa maastossa."
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Jauhaa mustajuurta ja maissia tuottaakseen mustajuurimaustetta ja maissijauhoa tässä järjestyksessä."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -1565,10 +1565,10 @@ msgstr "Parantuminen:"
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "Paikallaoleva sotilas paranee %d terveyspistettä per sekuntti"
-msgstr[1] "Paikallaoleva sotilas paranee %d terveys pistettä per sekuntti"
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -3351,9 +3351,9 @@ msgstr "Tämän keihän päähän on kiinnitetty teräspiikki. Asepajan tuotos. 
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
-msgstr "Tämä on keskikokoinen atrain. Niitä tuottaa aseseppä ja käyttää edistyneet sotilaat tyrmässä – yhdessä ruuan kanssa – koulutautuakseen hyökkäystaitotasolta 1 tasolle 2."
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3519,9 +3519,9 @@ msgstr "Metsästäjä tuo riistalihaa väellesi."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Jauhaa mustajuurta ja maissia tuottaakseen mustajuurimaustetta ja maissijauhoa tässä järjestyksessä."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3

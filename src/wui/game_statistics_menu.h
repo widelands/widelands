@@ -41,7 +41,7 @@ private:
 	/// \param window:              The window that's associated with this button.
 	UI::Button* add_button(const std::string& image_basename,
 	                       const std::string& name,
-								  const std::string& tooltip_text,
+	                       const std::string& tooltip_text,
 	                       UI::UniqueWindow::Registry* window);
 
 	InteractivePlayer& player_;

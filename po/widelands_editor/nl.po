@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-26 07:46+0000\n"
-"PO-Revision-Date: 2016-11-28 21:53+0000\n"
-"Last-Translator: Nora Ghaoui\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,8 +94,8 @@ msgstr "Gereedschap"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
+msgid "0-9"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
