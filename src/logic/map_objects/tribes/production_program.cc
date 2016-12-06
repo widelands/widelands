@@ -391,7 +391,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tri
 
 	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
-		(boost::format(_("the building has the following wares: %s")) % condition).str();
+	   (boost::format(_("the building has the following wares: %s")) % condition).str();
 	return result;
 }
 
@@ -417,7 +417,7 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 
 	/** TRANSLATORS: %s is a list of wares*/
 	std::string result =
-		(boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
+	   (boost::format(_("the building doesn’t have the following wares: %s")) % condition).str();
 	return result;
 }
 

@@ -71,7 +71,8 @@ void WaresQueue::entered(DescriptionIndex index,
 	// Update
 	set_filled(filled_ + 1);
 	// NOCOM(#codereview): It there a specific reason that you remove the callback function here?
-	// I don't know the conomy code, so I'm asking to make sure that we don't accidentally misss someting.
+	// I don't know the conomy code, so I'm asking to make sure that we don't accidentally misss
+	// someting.
 }
 
 void WaresQueue::remove_from_economy(Economy& e) {

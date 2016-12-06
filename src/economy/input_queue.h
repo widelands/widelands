@@ -38,10 +38,10 @@ class Request;
 /**
  * Base class for input queues of wares and workers.
  * Mentioning "wares" in the following nearly always means "wares or workers".
- * TODO(Notablis): Add builder-queue to expeditions?
- * TODO(Notablis): Create regression tests (for WorkersQueue)
  */
 class InputQueue {
+	// TODO(Notablis): Add builder-queue to expeditions?
+	// TODO(Notablis): Create regression tests (for WorkersQueue)
 public:
 	/**
 	 * Destructor.
