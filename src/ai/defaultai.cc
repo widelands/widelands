@@ -885,9 +885,8 @@ void DefaultAI::late_initialization() {
 	log(" %d: expedition max duration: %u, map area root: %u\n",
 		player_number(), expedition_max_duration / 1000,
 		map_area_root);
-	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
-	// How about adding a second assert for kExpeditionMaxDuration, would that be of value here?
-	assert(expedition_max_duration >= kExpeditionMinDuration && expedition_max_duration > 0);
+	assert(expedition_max_duration >= kExpeditionMinDuration);
+	assert(expedition_max_duration <= kExpeditionMaxDuration);
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// e.g. human player played this player before

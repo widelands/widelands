@@ -225,9 +225,9 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
-		for (std::list<ShipObserver>::iterator so = allships.begin(); so != allships.end(); ++so) {
+		for (ShipObserver& so : allships) {
 
-			const Widelands::Ship::ShipStates ship_state = so->ship->get_ship_state();
+			const Widelands::Ship::ShipStates ship_state = so.ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
 			if (ship_state == Widelands::Ship::ShipStates::kExpeditionWaiting ||
@@ -239,43 +239,43 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// - expedition_start_time
 				// - expected_colony_scan
 				// - no_more_expeditions_
-				check_ship_in_expedition(*so, gametime);
+				check_ship_in_expedition(so, gametime);
 
 				// We are not in expedition mode (or perhaps building a colonisation port)
 				// so resetting start time
-			} else if (expedition_ship_ == so->ship->serial()) {
+			} else if (expedition_ship_ == so.ship->serial()) {
 				// Obviously expedition just ended
 				persistent_data->expedition_start_time = kNoExpedition;
 				expedition_ship_ = kNoShip;
 			}
 
 			// only two states need an attention
-			if ((so->ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-			     so->ship->get_ship_state() ==
+			if ((so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+				  so.ship->get_ship_state() ==
 			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
-			    !so->waiting_for_command_) {
-				if (gametime - so->last_command_time > 180 * 1000) {
-					so->waiting_for_command_ = true;
+				 !so.waiting_for_command_) {
+				if (gametime - so.last_command_time > 180 * 1000) {
+					so.waiting_for_command_ = true;
 					log(
 					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
 					   "here?...\n",
-					   player_number(), so->ship->get_shipname().c_str(), so->ship->get_position().x,
-					   so->ship->get_position().y, (gametime - so->last_command_time) / 1000);
+						player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						so.ship->get_position().y, (gametime - so.last_command_time) / 1000);
 				}
 			}
 			// if ships is waiting for command
-			if (so->waiting_for_command_) {
-				expedition_management(*so);
+			if (so.waiting_for_command_) {
+				expedition_management(so);
 				action_taken = true;
 			}
 
 			// Checking utilization
-			if (so->ship->get_ship_state() == Widelands::Ship::ShipStates::kTransport) {
+			if (so.ship->get_ship_state() == Widelands::Ship::ShipStates::kTransport) {
 				// Good utilization is 10 pieces of ware onboard, to track utilization we use range
 				// 0-10000
 				// to avoid float or rounding errors if integers in range 0-100
 				const int16_t tmp_util =
-				   (so->ship->get_nritems() > 10) ? 10000 : so->ship->get_nritems() * 1000;
+					(so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
 				// This number is kind of average
 				persistent_data->ships_utilization =
 				   persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
