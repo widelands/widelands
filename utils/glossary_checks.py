@@ -159,6 +159,10 @@ class failed_entry:
     """Information about a translation that failed a check."""
 
     def __init__(self):
+        # The locale where the check failed
+        self.locale = ''
+        # The po file containing the failed translation
+        self.po_file = ''
         # Source text
         self.source = ''
         # Target text
@@ -171,9 +175,8 @@ class failed_entry:
         self.translation = ''
 
 
-def check_file(csv_file, glossary):
+def check_file(csv_file, glossaries, locale, po_file):
     """Run the actual check."""
-    result = ''
     translations = read_csv_file(csv_file)
     source_index = 0
     target_index = 0
@@ -193,7 +196,7 @@ def check_file(csv_file, glossary):
                     location_index = colum_counter
                 colum_counter = colum_counter + 1
         else:
-            for entry in glossary:
+            for entry in glossaries[locale][0]:
                 for term in entry.terms:
                     # Check if the text contains the glossary term.
                     # Regex is slow, so we do this preliminary check
@@ -221,15 +224,11 @@ def check_file(csv_file, glossary):
                                 hit.location = row[location_index]
                                 hit.term = entry.terms[0]
                                 hit.translation = entry.translations[0]
+                                hit.locale = locale
+                                hit.po_file = po_file
                                 hits.append(hit)
         counter = counter + 1
-    if len(hits) > 0:
-        result = '"glossary_term","glossary_translation","source","target","location"\n'
-        for hit in hits:
-            row = '"%s","%s","%s","%s","%s"\n' % (
-                hit.term, hit.translation, hit.source, hit.target, hit.location)
-            result = result + row
-    return result
+    return hits
 
 
 def make_path(base_path, subdir):
@@ -249,7 +248,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
 
     """
     csv_path = make_path(output_path, 'csv')
-    hits_path = make_path(output_path, 'glossary')
+    hits = []
+    locale_list = []
 
     glossaries = defaultdict(list)
     source_directories = sorted(os.listdir(input_path), key=str.lower)
@@ -273,22 +273,31 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         sys.stdout.flush()
                     # Only bother with locales that have glossary entries
                     if len(glossaries[locale][0]) > 0:
+                        locale_list.append(locale)
                         csv_file = os.path.abspath(os.path.join(
                             csv_path, dirname + '_' + locale + '.csv'))
                         # Convert to csv for easy parsing
                         call(['po2csv', '--progress=none', po_file, csv_file])
 
                         # Now run the actual check
-                        hits = check_file(csv_file, glossaries[locale][0])
-                        if len(hits) > 0:
-                            locale_output_path = make_path(hits_path, locale)
-                            dest_filepath = locale_output_path + '/' + dirname \
-                                + '_' + locale + '.csv'
-                            with open(dest_filepath, 'wt') as dest_file:
-                                dest_file.write(hits)
+                        current_hits = check_file(csv_file, glossaries, locale, dirname)
+                        for hit in current_hits:
+                            hits.append(hit)
 
                         # The csv file is no longer needed, delete it.
                         os.remove(csv_file)
+
+    for locale in locale_list:
+        locale_result ='"glossary_term","glossary_translation","source","target","file","location"\n'
+        for hit in hits:
+            if hit.locale == locale:
+                row = '"%s","%s","%s","%s","%s","%s"\n' % (
+                hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
+                locale_result = locale_result + row
+        dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
+        with open(dest_filepath, 'wt') as dest_file:
+            dest_file.write(locale_result)
+
     os.rmdir(csv_path)
     return 0
 
