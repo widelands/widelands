@@ -59,7 +59,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false) {
-	curdir_ = basedir_, title_.set_fontsize(UI_FONT_SIZE_BIG);
+	curdir_ = basedir_;
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {

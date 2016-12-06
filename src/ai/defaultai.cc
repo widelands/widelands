@@ -2978,8 +2978,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (RoadCandidates.get_winner(&winner_hash, (gametime % 4 > 0) ? 1 : 2)) {
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
+#ifndef NDEBUG
 		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
 		assert(pathcost >= 0);
+#else
+		map.findpath(flag.get_position(), target_coords, 0, path, check);
+#endif
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
