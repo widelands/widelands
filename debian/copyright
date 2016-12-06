@@ -24,52 +24,24 @@ License: GPL-2+
 
 Files: src/third_party/eris/*
 Copyright: 2013 Florian Nücke, 1994–2013 Lua.org, PUC-Rio.
-License:
-Eris
-Copyright (c) 2013 Florian Nücke.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
------------------------------------------------------------------------------
-
-Lua 5.2.2 from http://www.lua.org/ with patches http://www.lua.org/bugs.html
-slightly modified to access internal library functions for persistence.
-
-Copyright © 1994–2013 Lua.org, PUC-Rio.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+License: Eris
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
 
 Files: src/third_party/minizip/*
 Copyright 1995-2013 Jean-loup Gailly and Mark Adler.
@@ -100,23 +72,7 @@ Licens: zlib license (BSD like)
 
 Files: data/i18n/fonts/Culmus/*
 Copyright: 2010 by Yoram Gnat (gyoramg@users.sourceforge.net).
-License: This package is distributed under the terms of GNU General Public License
-version 2 (see file GNU-GPL).
----------------------------------------------------------------------
-
-"Taamey Frank CLM" fonts are copyright (C) 2010 by Yoram Gnat
-(gyoramg@users.sourceforge.net). All rights reserved.
-
-As a special exception, if you create a document which uses
-this font, and embed this font or unaltered portions of this
-font into the document, this font does not by itself cause
-the resulting document to be covered by the
-GNU General Public License. This exception does not however
-invalidate any other reasons why the document might be covered
-by the GNU General Public License. If you modify this font,
-you may extend this exception to your version of the font,
-but you are not obligated to do so. If you do not wish to do so,
-delete this exception statement from your version.
+License: GPL-2+
 
 Files: data/i18n/fonts/Nakula/*
 Copyright: Nakula Devanagari font © 2006 University of Cambridge. Designed and developed by  IMRC, India. Latin and Cyrillic glyphs from the font Nimbus Roman No9 L Regular, © 1999 (URW)++ Design & Development; Cyrillic glyphs by Valek Filippov © 2001-2002.
@@ -368,7 +324,6 @@ This License becomes null and void to the extent applicable to Fonts or Font Sof
 The Font Software may be sold as part of a larger software package but no copy of one or more of the Font Software typefaces may be sold by itself.
 THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
 Except as contained in this notice, the names of Gnome, the Gnome Foundation, and Bitstream Inc., shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Font Software without prior written authorization from the Gnome Foundation or Bitstream Inc., respectively. For further information, contact: fonts at gnome dot org.
-
 
 Files: data/i18n/fonts/Widelands/Widelands.ttf
 Copyright: 2006-2010, Peter Schwanemann (Peter (AT) drehatlas (DOT) de)

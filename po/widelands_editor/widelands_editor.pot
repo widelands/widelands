@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-12 07:18+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -85,7 +85,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. Localize, but do not change the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
+msgid "0-9"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:42

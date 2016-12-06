@@ -38,6 +38,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -443,8 +444,9 @@ void Building::destroy(EditorGameBase& egbase) {
 	const Coords pos = position_;
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
-	if (fire)
-		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe);
+	if (fire) {
+		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe, this);
+	}
 }
 
 std::string Building::info_string(const InfoStringFormat& format) {
@@ -464,6 +466,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
+		break;
 	}
 	return result;
 }

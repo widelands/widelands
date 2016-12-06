@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 19:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 20:48+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,8 +77,8 @@ msgstr "Taller de la pedra i infraestructura minera"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
 msgstr "Construïu un taller de la pedra. Després podreu completar la infraestructura de mineria i producció (mina de carbó i/o kiln de carbó vegetal, mina de ferro, forn de metalls i tallers d'eines, armes i armadures)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
@@ -111,9 +111,9 @@ msgstr "Potser també necessitareu una casa de caçador, un criador de porcs, un
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
 msgstr "Heu de decidir quins edificis construir. Però recordeu, les mines de carbó i mineral de ferro necessiten cervesa i les de marbre i or necessiten vi. Totes les mines també necessiten almenys racions, que es produeixen amb pa i carn o peix."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
@@ -330,8 +330,8 @@ msgstr "En Saledus sembla entusiasmat"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
 msgstr "Pels déus! Un increïble cop de sort! Hi ha dues muntanyes més i sembla que una té una quantitat important de carbó i l'altra de mineral de ferro. Hauríem de començar a construir immediatament mines de mineral de ferro i de carbó (o almenys kilns de carbó vegetal), forns de metalls i tallers d'eines, armes i armadures."
 
