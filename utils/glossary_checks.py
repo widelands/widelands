@@ -191,26 +191,26 @@ def contains_term(string, term):
     return result
 
 
-def source_contains_term(source_to_check, entry, term, glossary):
-    """Check if the source string contains the glossary term while filtering
+def source_contains_term(source_to_check, entry, glossary):
+    """Checks if the source string contains the glossary entry while filtering
     out superstrings from the glossary, e.g. we don't want to check 'arena'
     against 'battle arena'."""
-    result = False
     source_to_check = source_to_check.lower()
-    term = term.lower()
-    if term in source_to_check:
-        source_regex = re.compile('.+[\s,.]' + term + '[\s,.].+')
-        if source_regex.match(source_to_check):
-            for entry2 in glossary:
-                if entry.terms[0] != entry2.terms[0]:
-                    for term2 in entry2.terms:
-                        term2 = term2.lower()
-                        if term2 != term and term in term2 and term2 in source_to_check:
-                            source_to_check = source_to_check.replace(
-                                term2, '')
-            # Check if the source still contains the term to check
-            result = contains_term(source_to_check, term)
-    return result
+    for term in entry.terms:
+        term = term.lower()
+        if term in source_to_check:
+            source_regex = re.compile('.+[\s,.]' + term + '[\s,.].+')
+            if source_regex.match(source_to_check):
+                for entry2 in glossary:
+                    if entry.terms[0] != entry2.terms[0]:
+                        for term2 in entry2.terms:
+                            term2 = term2.lower()
+                            if term2 != term and term in term2 and term2 in source_to_check:
+                                source_to_check = source_to_check.replace(
+                                    term2, '')
+                # Check if the source still contains the term to check
+                return contains_term(source_to_check, term)
+    return False
 
 
 def check_file(csv_file, glossaries, locale, po_file):
@@ -235,28 +235,27 @@ def check_file(csv_file, glossaries, locale, po_file):
                 colum_counter = colum_counter + 1
         else:
             for entry in glossaries[locale][0]:
-                for term in entry.terms:
-                    # Check if the source text contains the glossary term.
-                    # Filter out superstrings, e.g. we don't want to check
-                    # "arena" against "battle arena"
-                    if source_contains_term(row[source_index], entry, term, glossaries[locale][0]):
-                        # Now verify the translation against all translation
-                        # variations from the glossary
-                        translation_has_term = False
-                        for translation in entry.translations:
-                            if contains_term(row[target_index], translation):
-                                translation_has_term = True
-                                break
-                        if not translation_has_term:
-                            hit = failed_entry()
-                            hit.source = row[source_index]
-                            hit.target = row[target_index]
-                            hit.location = row[location_index]
-                            hit.term = entry.terms[0]
-                            hit.translation = entry.translations[0]
-                            hit.locale = locale
-                            hit.po_file = po_file
-                            hits.append(hit)
+                # Check if the source text contains the glossary term.
+                # Filter out superstrings, e.g. we don't want to check
+                # "arena" against "battle arena"
+                if source_contains_term(row[source_index], entry, glossaries[locale][0]):
+                    # Now verify the translation against all translation
+                    # variations from the glossary
+                    translation_has_term = False
+                    for translation in entry.translations:
+                        if contains_term(row[target_index], translation):
+                            translation_has_term = True
+                            break
+                    if not translation_has_term:
+                        hit = failed_entry()
+                        hit.source = row[source_index]
+                        hit.target = row[target_index]
+                        hit.location = row[location_index]
+                        hit.term = entry.terms[0]
+                        hit.translation = entry.translations[0]
+                        hit.locale = locale
+                        hit.po_file = po_file
+                        hits.append(hit)
         counter = counter + 1
     return hits
 
