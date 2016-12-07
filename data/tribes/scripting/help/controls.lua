@@ -104,7 +104,7 @@ return {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Jump to the location corresponding to the current message") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Del")), _"Archive/Restore the current message")
+               dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")
           )
       )
 }
