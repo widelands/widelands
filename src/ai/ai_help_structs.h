@@ -565,7 +565,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, int32_t, uint32_t, int32_t, bool);
+	void review(uint32_t, PlayerNumber, uint32_t, int32_t, uint32_t, int32_t, uint16_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {
@@ -681,7 +681,7 @@ struct FlagsForRoads {
 	// Updating walking distance over existing roads
 	void set_road_distance(Widelands::Coords coords, int32_t distance);
 	// Finally we query the flag that we will build a road to
-	bool get_winner(uint32_t* winner_hash, uint32_t pos);
+	bool get_winner(uint32_t* winner_hash);
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from

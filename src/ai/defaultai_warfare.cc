@@ -455,7 +455,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// how many attack soldiers we can send?
-	uint32_t attackers = player_->find_attack_soldiers(*flag);
+	int32_t attackers = player_->find_attack_soldiers(*flag);
+	assert (attackers < 500);
 
 	// Of course not all of them:
 	// reduce by 0-3 for attackers below 10
@@ -469,12 +470,16 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	attackers = attackers - (gametime % 3) - ((above_ten > 0) ? gametime % above_ten : 0);
 	attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) / 10;
+	assert (attackers < 500);
 
 	if (attackers <= 0) {
 		return false;
 	}
 
-	game().send_player_enemyflagaction(*flag, player_number(), attackers);
+	attackers_count_ += static_cast<uint16_t>(attackers);
+	assert (attackers_count_ < 5000);
+
+	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
 
 	last_attack_time_ = gametime;
 	persistent_data->last_attacked_player = flag->owner().player_number();

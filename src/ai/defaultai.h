@@ -260,6 +260,7 @@ private:
 	void soldier_trained(const Widelands::TrainingSite&);
 	SoldiersStatus soldier_status_;
 	uint32_t military_status_last_updated;
+	uint16_t attackers_count_;
 
 	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};

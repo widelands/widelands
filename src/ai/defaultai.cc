@@ -91,6 +91,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      type_(t),
      player_(nullptr),
      tribe_(nullptr),
+     attackers_count_(0),
      next_ai_think_(0),
      scheduler_delay_counter_(0),
      wood_policy_(WoodPolicy::kAllowRangers),
@@ -450,7 +451,7 @@ void DefaultAI::think() {
 			   player_statistics.get_player_land(player_number()),
 			   static_cast<int32_t>(player_statistics.get_player_land(player_number())) -
 			      static_cast<int32_t>(player_statistics.get_enemies_max_land()),
-			   (persistent_data->last_attacked_player != std::numeric_limits<int16_t>::max()));
+			   attackers_count_);
 			set_taskpool_task_time(
 			   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
@@ -3397,7 +3398,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// Well and finally building the winning road
 	uint32_t winner_hash = 0;
-	if (RoadCandidates.get_winner(&winner_hash, (gametime % 4 > 0) ? 1 : 2)) {
+	if (RoadCandidates.get_winner(&winner_hash)) {
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
 		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
