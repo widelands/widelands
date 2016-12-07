@@ -882,8 +882,9 @@ void DefaultAI::late_initialization() {
 	expedition_max_duration =
 	   kExpeditionMinDuration +
 	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
-	log(" %d: expedition max duration: %u, map area root: %u\n",
+	log(" %d: expedition max duration = %u (%u minutes), map area root: %u\n",
 		player_number(), expedition_max_duration / 1000,
+		expedition_max_duration / 60000,
 		map_area_root);
 	assert(expedition_max_duration >= kExpeditionMinDuration);
 	assert(expedition_max_duration <= kExpeditionMaxDuration);

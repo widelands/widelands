@@ -343,10 +343,10 @@ private:
 	std::unordered_set<uint32_t> expedition_visited_spots;
 
 	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr int kColonyScanStartArea = 35;
-	static constexpr int kColonyScanMinArea = 10;
-	static constexpr int kExpeditionMinDuration = 60 * 60 * 1000;
-	static constexpr int kExpeditionMaxDuration = 210 * 60 * 1000;
+	static constexpr uint32_t kColonyScanStartArea = 35;
+	static constexpr uint32_t kColonyScanMinArea = 12;
+	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
+	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
 	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 	static constexpr uint32_t kNoExpedition = 0;
