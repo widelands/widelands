@@ -28,6 +28,7 @@ from subprocess import call, check_output, CalledProcessError
 import csv
 import os.path
 import re
+import subprocess
 import sys
 import traceback
 
@@ -227,14 +228,17 @@ hunspell_locales = defaultdict(list)
 def set_has_hunspell_locale(hunspell_locale, csv_dir):
     """Tries calling hunspell with the given locale and returns false if it has failed."""
     hunspell_temppath = os.path.abspath(os.path.join(csv_dir, "temp.txt"))
-    #print(locale.locale)
     with open(hunspell_temppath, 'wt') as hunspell_tempfile:
         hunspell_tempfile.write("foo")
         try:
-            hunspell_result = check_output(['hunspell', '-d', hunspell_locale.locale, '-s', hunspell_temppath])
+            hunspell_result = check_output(['hunspell', '-d', hunspell_locale.locale, '-s', hunspell_temppath], stderr=subprocess.STDOUT)
+            if "error" in hunspell_result:
+                print("Error loading Hunspell dictionary for locale " + hunspell_locale.locale + ": " + hunspell_result.split('\n', 1)[0])
+                return False
             hunspell_locale.is_available = True
             return True
         except CalledProcessError:
+            print("Error loading Hunspell dictionary for locale " + hunspell_locale.locale)
             return False
 
 def get_hunspell_locale(locale):
@@ -246,7 +250,7 @@ def get_hunspell_locale(locale):
 def load_hunspell_locales(csv_dir):
     """Registers locales for Hunspell. Maps a list of generic locales to specific locales and checks which dictionaries are available."""
     print("Looking for Hunspell dictionaries");
-    # NOCOM UTF-8 -> microsoft-cp1251 hunspell_locales["bg"].append("bg_BG")
+    hunspell_locales["bg"].append(HunspellLocale("bg_BG"))
     hunspell_locales["br"].append(HunspellLocale("br_FR"))
     hunspell_locales["ca"].append(HunspellLocale("ca_ES"))
     hunspell_locales["da"].append(HunspellLocale("da_DK"))
@@ -259,7 +263,7 @@ def load_hunspell_locales(csv_dir):
     hunspell_locales["eo"].append(HunspellLocale("eo"))
     hunspell_locales["es"].append(HunspellLocale("es_ES"))
     hunspell_locales["et"].append(HunspellLocale("et_EE"))
-    #hunspell_locales["eu"].append(HunspellLocale("eu_ES"))
+    hunspell_locales["eu"].append(HunspellLocale("eu_ES"))
     hunspell_locales["fa"].append(HunspellLocale("fa_IR"))
     hunspell_locales["fi"].append(HunspellLocale("fi_FI"))
     hunspell_locales["fr"].append(HunspellLocale("fr_FR"))
@@ -284,7 +288,7 @@ def load_hunspell_locales(csv_dir):
     hunspell_locales["nb"].append(HunspellLocale("nb_NO"))
     hunspell_locales["nds"].append(HunspellLocale("nds_DE"))
     hunspell_locales["nl"].append(HunspellLocale("nl_NL"))
-    # warning: line 190: incompatible stripping characters and condition hunspell_locales["nn"].append(HunspellLocale("nn_NO"))
+    hunspell_locales["nn"].append(HunspellLocale("nn_NO"))
     hunspell_locales["oc"].append(HunspellLocale("oc_FR"))
     hunspell_locales["pl"].append(HunspellLocale("pl_PL"))
     hunspell_locales["pt"].append(HunspellLocale("pt_PT"))
