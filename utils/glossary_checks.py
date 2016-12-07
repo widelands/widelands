@@ -337,6 +337,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         # The csv file is no longer needed, delete it.
                         os.remove(csv_file)
 
+    hits = sorted(hits, key=lambda failed_entry: failed_entry.translation)
     for locale in locale_list:
         locale_result = '"glossary_term","glossary_translation","source","target","file","location"\n'
         for hit in hits:
