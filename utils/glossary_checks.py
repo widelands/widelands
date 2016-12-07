@@ -175,6 +175,44 @@ class failed_entry:
         self.translation = ''
 
 
+def contains_term(string, term):
+    """Checks whether 'string' contains 'term' as a whole word.
+
+    This check is case-ionsensitive.
+
+    """
+    result = False
+    # Regex is slow, so we do this preliminary check
+    if term.lower() in string.lower():
+        # Now make sure that it's whole words!
+        # We won't want to match "AI" against "again" etc.
+        regex = re.compile('^|(.+\W)' + term + '(\W.+)|$', re.IGNORECASE)
+        result = regex.match(string)
+    return result
+
+
+def source_contains_term(source_to_check, entry, term, glossary):
+    """Check if the source string contains the glossary term while filtering
+    out superstrings from the glossary, e.g. we don't want to check 'arena'
+    against 'battle arena'."""
+    result = False
+    source_to_check = source_to_check.lower()
+    term = term.lower()
+    if term in source_to_check:
+        source_regex = re.compile('.+[\s,.]' + term + '[\s,.].+')
+        if source_regex.match(source_to_check):
+            for entry2 in glossary:
+                if entry.terms[0] != entry2.terms[0]:
+                    for term2 in entry2.terms:
+                        term2 = term2.lower()
+                        if term2 != term and term in term2 and term2 in source_to_check:
+                            source_to_check = source_to_check.replace(
+                                term2, '')
+            # Check if the source still contains the term to check
+            result = contains_term(source_to_check, term)
+    return result
+
+
 def check_file(csv_file, glossaries, locale, po_file):
     """Run the actual check."""
     translations = read_csv_file(csv_file)
@@ -198,35 +236,27 @@ def check_file(csv_file, glossaries, locale, po_file):
         else:
             for entry in glossaries[locale][0]:
                 for term in entry.terms:
-                    # Check if the text contains the glossary term.
-                    # Regex is slow, so we do this preliminary check
-                    if term.lower() in row[source_index].lower():
-                        # Now make sure that it's whole words!
-                        # We won't want to match "AI" against "again" etc.
-                        # Case-insensitive is sufficient for now
-                        source_regex = re.compile(
-                            '.+[\s,.]' + term + '[\s,.].+', re.IGNORECASE)
-                        if source_regex.match(row[source_index]):
-                            # Now verify the translation against all translation
-                            # variations from the glossary
-                            translation_has_term = False
-                            for translation in entry.translations:
-                                if translation.lower() in row[target_index].lower():
-                                    translation_regex = re.compile(
-                                        '^|(.+\W)' + translation + '(\W.+)|$', re.IGNORECASE)
-                                    if translation_regex.match(row[target_index]):
-                                        translation_has_term = True
-                                        break
-                            if not translation_has_term:
-                                hit = failed_entry()
-                                hit.source = row[source_index]
-                                hit.target = row[target_index]
-                                hit.location = row[location_index]
-                                hit.term = entry.terms[0]
-                                hit.translation = entry.translations[0]
-                                hit.locale = locale
-                                hit.po_file = po_file
-                                hits.append(hit)
+                    # Check if the source text contains the glossary term.
+                    # Filter out superstrings, e.g. we don't want to check
+                    # "arena" against "battle arena"
+                    if source_contains_term(row[source_index], entry, term, glossaries[locale][0]):
+                        # Now verify the translation against all translation
+                        # variations from the glossary
+                        translation_has_term = False
+                        for translation in entry.translations:
+                            if contains_term(row[target_index], translation):
+                                translation_has_term = True
+                                break
+                        if not translation_has_term:
+                            hit = failed_entry()
+                            hit.source = row[source_index]
+                            hit.target = row[target_index]
+                            hit.location = row[location_index]
+                            hit.term = entry.terms[0]
+                            hit.translation = entry.translations[0]
+                            hit.locale = locale
+                            hit.po_file = po_file
+                            hits.append(hit)
         counter = counter + 1
     return hits
 
@@ -237,6 +267,26 @@ def make_path(base_path, subdir):
     if not os.path.exists(result):
         os.makedirs(result)
     return result
+
+
+def delete_path(path):
+    """Deletes the directory specified by 'path' and all its subdirectories and
+    file contents."""
+    if os.path.exists(path) and not os.path.isfile(path):
+        files = sorted(os.listdir(path), key=str.lower)
+        for deletefile in files:
+            deleteme = os.path.abspath(os.path.join(path, deletefile))
+            if os.path.isfile(deleteme):
+                try:
+                    os.remove(deleteme)
+                except Exception:
+                    print('Failed to delete file ' + deleteme)
+            else:
+                delete_path(deleteme)
+        try:
+            os.rmdir(path)
+        except Exception:
+            print('Failed to delete path ' + deleteme)
 
 
 def check_translations_with_glossary(input_path, output_path, glossary_file):
@@ -280,7 +330,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         call(['po2csv', '--progress=none', po_file, csv_file])
 
                         # Now run the actual check
-                        current_hits = check_file(csv_file, glossaries, locale, dirname)
+                        current_hits = check_file(
+                            csv_file, glossaries, locale, dirname)
                         for hit in current_hits:
                             hits.append(hit)
 
@@ -288,17 +339,17 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                         os.remove(csv_file)
 
     for locale in locale_list:
-        locale_result ='"glossary_term","glossary_translation","source","target","file","location"\n'
+        locale_result = '"glossary_term","glossary_translation","source","target","file","location"\n'
         for hit in hits:
             if hit.locale == locale:
                 row = '"%s","%s","%s","%s","%s","%s"\n' % (
-                hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
+                    hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
         dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
         with open(dest_filepath, 'wt') as dest_file:
             dest_file.write(locale_result)
 
-    os.rmdir(csv_path)
+    delete_path(csv_path)
     return 0
 
 
@@ -328,8 +379,7 @@ def main():
     except Exception:
         print('Something went wrong:')
         traceback.print_exc()
-        csv_path = make_path(output_path, 'csv')
-        os.rmdir(csv_path)
+        delete_path(make_path(output_path, 'csv'))
         return 1
 
 if __name__ == '__main__':
