@@ -318,6 +318,15 @@ def append_hunspell_stems(csv_dir, hunspell_locale, translation):
         print("Failed to run hunspell for locale: " + hunspell_locale)
     return translation
 
+def translation_has_term(entry, target):
+    """ Verify the target translation against all translation variations from the glossary"""
+    result = False
+    for translation in entry.translations:
+        if contains_term(target, translation):
+            result = True
+            break
+    return result
+
 def check_file(csv_file, glossaries, locale, po_file):
     """Run the actual check."""
     translations = read_csv_file(csv_file)
@@ -342,9 +351,6 @@ def check_file(csv_file, glossaries, locale, po_file):
                     location_index = colum_counter
                 colum_counter = colum_counter + 1
         elif hunspell_locale != "":
-            # Add Hunspell stems for better matches
-            target_to_check = append_hunspell_stems(csv_dir, hunspell_locale, row[target_index])
-
             for entry in glossaries[locale][0]:
                 # Check if the source text contains the glossary term.
                 # Filter out superstrings, e.g. we don't want to check
@@ -352,21 +358,19 @@ def check_file(csv_file, glossaries, locale, po_file):
                 if source_contains_term(row[source_index], entry, glossaries[locale][0]):
                     # Now verify the translation against all translation
                     # variations from the glossary
-                    translation_has_term = False
-                    for translation in entry.translations:
-                        if contains_term(target_to_check, translation):
-                            translation_has_term = True
-                            break
-                    if not translation_has_term:
-                        hit = FailedTranslation()
-                        hit.source = row[source_index]
-                        hit.target = row[target_index]
-                        hit.location = row[location_index]
-                        hit.term = entry.terms[0]
-                        hit.translation = entry.translations[0]
-                        hit.locale = locale
-                        hit.po_file = po_file
-                        hits.append(hit)
+                    if not translation_has_term(entry, row[target_index]):
+                        # Add Hunspell stems for better matches and try again
+                        target_to_check = append_hunspell_stems(csv_dir, hunspell_locale, row[target_index])
+                        if not translation_has_term(entry, target_to_check):
+                            hit = FailedTranslation()
+                            hit.source = row[source_index]
+                            hit.target = row[target_index]
+                            hit.location = row[location_index]
+                            hit.term = entry.terms[0]
+                            hit.translation = entry.translations[0]
+                            hit.locale = locale
+                            hit.po_file = po_file
+                            hits.append(hit)
         counter = counter + 1
     return hits
 
