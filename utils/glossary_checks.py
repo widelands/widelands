@@ -20,11 +20,11 @@ Source    Translation    Comment             Translation will be matched against
 sheep     sheep          Nice, fluffy!       'sheep'
 ax        axe            axes|               'axe', 'axes'
 click     click          clicking|clicked    'click', 'clicking', 'clicked'
-
+click     click          clicking | clicked  'click', 'clicking', 'clicked'
 """
 
 from collections import defaultdict
-from subprocess import call
+from subprocess import call, check_output, CalledProcessError
 import csv
 import os.path
 import re
@@ -93,7 +93,7 @@ def make_english_verb_forms(word):
     return result
 
 
-class glossary_entry:
+class GlossaryEntry:
     """An entry in our parsed glossaries."""
 
     def __init__(self):
@@ -128,7 +128,7 @@ def load_glossary(glossary_file, locale):
                 colum_counter = colum_counter + 1
         # If there is a translation, parse the entry
         elif len(row[translation_index].strip()) > 0:
-            entry = glossary_entry()
+            entry = GlossaryEntry()
             entry.terms.append(row[term_index].strip())
             if row[wordclass_index] == 'Noun':
                 plural = make_english_plural(entry.terms[0])
@@ -155,7 +155,7 @@ def load_glossary(glossary_file, locale):
     return result
 
 
-class failed_entry:
+class FailedTranslation:
     """Information about a translation that failed a check."""
 
     def __init__(self):
@@ -212,6 +212,111 @@ def source_contains_term(source_to_check, entry, glossary):
                 return contains_term(source_to_check, term)
     return False
 
+class HunspellLocale:
+    """A specific locale for Hunspell, plus whether its dictionary is installed."""
+
+    def __init__(self, locale):
+         # Specific language/country code for Hunspell, e.g. el_GR
+        self.locale = locale
+        # Whether a dictionary has been found for the locale
+        self.is_available = False
+
+hunspell_locales = defaultdict(list)
+""" Hunspell needs specific locales"""
+
+def set_has_hunspell_locale(hunspell_locale, csv_dir):
+    """Tries calling hunspell with the given locale and returns false if it has failed."""
+    hunspell_temppath = os.path.abspath(os.path.join(csv_dir, "temp.txt"))
+    #print(locale.locale)
+    with open(hunspell_temppath, 'wt') as hunspell_tempfile:
+        hunspell_tempfile.write("foo")
+        try:
+            hunspell_result = check_output(['hunspell', '-d', hunspell_locale.locale, '-s', hunspell_temppath])
+            hunspell_locale.is_available = True
+            return True
+        except CalledProcessError:
+            return False
+
+def get_hunspell_locale(locale):
+    """Returns the corresponding Hunspell locale for this locale, or empty string if not available."""
+    if len(hunspell_locales[locale]) == 1 and hunspell_locales[locale][0].is_available:
+        return hunspell_locales[locale][0].locale
+    return ""
+
+def load_hunspell_locales(csv_dir):
+    """Registers locales for Hunspell. Maps a list of generic locales to specific locales and checks which dictionaries are available."""
+    print("Looking for Hunspell dictionaries");
+    # NOCOM UTF-8 -> microsoft-cp1251 hunspell_locales["bg"].append("bg_BG")
+    hunspell_locales["br"].append(HunspellLocale("br_FR"))
+    hunspell_locales["ca"].append(HunspellLocale("ca_ES"))
+    hunspell_locales["da"].append(HunspellLocale("da_DK"))
+    hunspell_locales["cs"].append(HunspellLocale("cs_CZ"))
+    hunspell_locales["de"].append(HunspellLocale("de_DE"))
+    hunspell_locales["el"].append(HunspellLocale("el_GR"))
+    hunspell_locales["en_CA"].append(HunspellLocale("en_CA"))
+    hunspell_locales["en_GB"].append(HunspellLocale("en_GB"))
+    hunspell_locales["en_US"].append(HunspellLocale("en_US"))
+    hunspell_locales["eo"].append(HunspellLocale("eo"))
+    hunspell_locales["es"].append(HunspellLocale("es_ES"))
+    hunspell_locales["et"].append(HunspellLocale("et_EE"))
+    #hunspell_locales["eu"].append(HunspellLocale("eu_ES"))
+    hunspell_locales["fa"].append(HunspellLocale("fa_IR"))
+    hunspell_locales["fi"].append(HunspellLocale("fi_FI"))
+    hunspell_locales["fr"].append(HunspellLocale("fr_FR"))
+    hunspell_locales["gd"].append(HunspellLocale("gd_GB"))
+    hunspell_locales["gl"].append(HunspellLocale("gl_ES"))
+    hunspell_locales["he"].append(HunspellLocale("he_IL"))
+    hunspell_locales["hr"].append(HunspellLocale("hr_HR"))
+    hunspell_locales["hu"].append(HunspellLocale("hu_HU"))
+    hunspell_locales["ia"].append(HunspellLocale("ia"))
+    hunspell_locales["id"].append(HunspellLocale("id_ID"))
+    hunspell_locales["it"].append(HunspellLocale("it_IT"))
+    hunspell_locales["ja"].append(HunspellLocale("ja_JP"))
+    hunspell_locales["jv"].append(HunspellLocale("jv_ID"))
+    hunspell_locales["ka"].append(HunspellLocale("ka_GE"))
+    hunspell_locales["ko"].append(HunspellLocale("ko_KR"))
+    hunspell_locales["krl"].append(HunspellLocale("krl_RU"))
+    hunspell_locales["la"].append(HunspellLocale("la"))
+    hunspell_locales["lt"].append(HunspellLocale("lt_LT"))
+    hunspell_locales["mr"].append(HunspellLocale("mr_IN"))
+    hunspell_locales["ms"].append(HunspellLocale("ms_MY"))
+    hunspell_locales["my"].append(HunspellLocale("my_MM"))
+    hunspell_locales["nb"].append(HunspellLocale("nb_NO"))
+    hunspell_locales["nds"].append(HunspellLocale("nds_DE"))
+    hunspell_locales["nl"].append(HunspellLocale("nl_NL"))
+    # warning: line 190: incompatible stripping characters and condition hunspell_locales["nn"].append(HunspellLocale("nn_NO"))
+    hunspell_locales["oc"].append(HunspellLocale("oc_FR"))
+    hunspell_locales["pl"].append(HunspellLocale("pl_PL"))
+    hunspell_locales["pt"].append(HunspellLocale("pt_PT"))
+    hunspell_locales["ro"].append(HunspellLocale("ro_RO"))
+    hunspell_locales["ru"].append(HunspellLocale("ru_RU"))
+    hunspell_locales["rw"].append(HunspellLocale("rw_RW"))
+    hunspell_locales["si"].append(HunspellLocale("si_LK"))
+    hunspell_locales["sk"].append(HunspellLocale("sk_SK"))
+    hunspell_locales["sl"].append(HunspellLocale("sl_SI"))
+    hunspell_locales["sr"].append(HunspellLocale("sr_RS"))
+    hunspell_locales["sv"].append(HunspellLocale("sv_SE"))
+    hunspell_locales["tr"].append(HunspellLocale("tr_TR"))
+    hunspell_locales["uk"].append(HunspellLocale("uk_UA"))
+    hunspell_locales["vi"].append(HunspellLocale("vi_VN"))
+    hunspell_locales["zh_CN"].append(HunspellLocale("zh_CN"))
+    hunspell_locales["zh_TW"].append(HunspellLocale("zh_TW"))
+    for locale in hunspell_locales:
+        set_has_hunspell_locale(hunspell_locales[locale][0], csv_dir)
+
+def append_hunspell_stems(csv_dir, hunspell_locale, translation):
+    """ Use hunspell to append the stems for terms found = less work for glossary editors.
+    The effectiveness of this check depends on how good the hunspell data is."""
+    hunspell_temppath = os.path.abspath(os.path.join(csv_dir, "temp.txt"))
+    with open(hunspell_temppath, 'wt') as hunspell_tempfile:
+        hunspell_tempfile.write(translation)
+    try:
+        hunspell_result = check_output(['hunspell', '-d', hunspell_locale, '-s', hunspell_temppath])
+        if hunspell_result != "":
+            translation = " ".join([translation, hunspell_result])
+    except CalledProcessError:
+        print("Failed to run hunspell for locale: " + hunspell_locale)
+    return translation
 
 def check_file(csv_file, glossaries, locale, po_file):
     """Run the actual check."""
@@ -221,6 +326,9 @@ def check_file(csv_file, glossaries, locale, po_file):
     location_index = 0
     hits = []
     counter = 0
+    has_hunspell = True
+    csv_dir = os.path.dirname(csv_file)
+    hunspell_locale = get_hunspell_locale(locale)
     for row in translations:
         # Detect the column indices
         if counter == 0:
@@ -233,7 +341,10 @@ def check_file(csv_file, glossaries, locale, po_file):
                 elif header == 'location':
                     location_index = colum_counter
                 colum_counter = colum_counter + 1
-        else:
+        elif hunspell_locale != "":
+            # Add Hunspell stems for better matches
+            target_to_check = append_hunspell_stems(csv_dir, hunspell_locale, row[target_index])
+
             for entry in glossaries[locale][0]:
                 # Check if the source text contains the glossary term.
                 # Filter out superstrings, e.g. we don't want to check
@@ -243,11 +354,11 @@ def check_file(csv_file, glossaries, locale, po_file):
                     # variations from the glossary
                     translation_has_term = False
                     for translation in entry.translations:
-                        if contains_term(row[target_index], translation):
+                        if contains_term(target_to_check, translation):
                             translation_has_term = True
                             break
                     if not translation_has_term:
-                        hit = failed_entry()
+                        hit = FailedTranslation()
                         hit.source = row[source_index]
                         hit.target = row[target_index]
                         hit.location = row[location_index]
@@ -288,7 +399,7 @@ def delete_path(path):
             print('Failed to delete path ' + deleteme)
 
 
-def check_translations_with_glossary(input_path, output_path, glossary_file):
+def check_translations_with_glossary(input_path, output_path, glossary_file, only_locale):
     """Main loop.
 
     Loads the Transifex glossary, converts all po files for languages
@@ -301,6 +412,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
     locale_list = []
 
     glossaries = defaultdict(list)
+    load_hunspell_locales(csv_path)
+
     source_directories = sorted(os.listdir(input_path), key=str.lower)
     for dirname in source_directories:
         dirpath = os.path.join(input_path, dirname)
@@ -312,42 +425,46 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
                 po_file = dirpath + '/' + source_filename
                 if source_filename.endswith('.po'):
                     locale = source_filename[0:-3]
-                    # Load the glossary if we haven't seen this locale before
-                    if len(glossaries[locale]) < 1:
-                        sys.stdout.write('Loading glossary for ' + locale)
-                        glossaries[locale].append(
-                            load_glossary(glossary_file, locale))
-                        sys.stdout.write(' - %d entries\n' %
-                                         len(glossaries[locale][0]))
-                        sys.stdout.flush()
-                    # Only bother with locales that have glossary entries
-                    if len(glossaries[locale][0]) > 0:
-                        locale_list.append(locale)
-                        csv_file = os.path.abspath(os.path.join(
-                            csv_path, dirname + '_' + locale + '.csv'))
-                        # Convert to csv for easy parsing
-                        call(['po2csv', '--progress=none', po_file, csv_file])
+                    if locale == "all" or locale == only_locale:
+                        # Load the glossary if we haven't seen this locale before
+                        if len(glossaries[locale]) < 1:
+                            sys.stdout.write('Loading glossary for ' + locale)
+                            glossaries[locale].append(
+                                load_glossary(glossary_file, locale))
+                            sys.stdout.write(' - %d entries\n' %
+                                             len(glossaries[locale][0]))
+                            sys.stdout.flush()
+                        # Only bother with locales that have glossary entries
+                        if len(glossaries[locale][0]) > 0:
+                            locale_list.append(locale)
+                            csv_file = os.path.abspath(os.path.join(
+                                csv_path, dirname + '_' + locale + '.csv'))
+                            # Convert to csv for easy parsing
+                            call(['po2csv', '--progress=none', po_file, csv_file])
 
-                        # Now run the actual check
-                        current_hits = check_file(
-                            csv_file, glossaries, locale, dirname)
-                        for hit in current_hits:
-                            hits.append(hit)
+                            # Now run the actual check
+                            current_hits = check_file(
+                                csv_file, glossaries, locale, dirname)
+                            for hit in current_hits:
+                                hits.append(hit)
 
-                        # The csv file is no longer needed, delete it.
-                        os.remove(csv_file)
+                            # The csv file is no longer needed, delete it.
+                            os.remove(csv_file)
 
-    hits = sorted(hits, key=lambda failed_entry: failed_entry.translation)
+    hits = sorted(hits, key=lambda FailedTranslation: FailedTranslation.translation)
     for locale in locale_list:
         locale_result = '"glossary_term","glossary_translation","source","target","file","location"\n'
+        counter = 0
         for hit in hits:
             if hit.locale == locale:
                 row = '"%s","%s","%s","%s","%s","%s"\n' % (
                     hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
+                counter = counter + 1
         dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
         with open(dest_filepath, 'wt') as dest_file:
             dest_file.write(locale_result)
+        print("Locale %s has %d entries."%(locale, counter))
 
     delete_path(csv_path)
     return 0
@@ -356,16 +473,19 @@ def check_translations_with_glossary(input_path, output_path, glossary_file):
 def main():
     """Checks whether we are in the correct directory and everything's there,
     then runs a glossary check over all PO files."""
-    if (len(sys.argv) == 2):
+    if len(sys.argv) == 2 or len(sys.argv) == 3 :
         print('Running glossary checks:')
     else:
-        print('Usage: utils/glossary_checks.py <relative-path-to-glossary>')
+        print('Usage: utils/glossary_checks.py <relative-path-to-glossary> [locale]')
         return 1
 
     try:
         # Prepare the paths
         glossary_file = os.path.abspath(os.path.join(
             os.path.dirname(__file__), sys.argv[1]))
+        locale = "all"
+        if sys.argv[2]:
+            locale = sys.argv[2]
 
         if (not (os.path.exists(glossary_file) and os.path.isfile(glossary_file))):
             print('There is no glossary file at ' + glossary_file)
@@ -374,7 +494,7 @@ def main():
         input_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../po'))
         output_path = make_path(os.path.dirname(__file__), '../po_validation')
-        return check_translations_with_glossary(input_path, output_path, glossary_file)
+        return check_translations_with_glossary(input_path, output_path, glossary_file, locale)
 
     except Exception:
         print('Something went wrong:')
