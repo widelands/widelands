@@ -415,17 +415,17 @@ void GameMessageMenu::archive_or_restore() {
 
 	std::set<uint32_t> selections = list->selections();
 	for (const uint32_t index : selections) {
-		const uintptr_t selected = list->get(list->get_record(index));
+		const uintptr_t selected_record = list->get(list->get_record(index));
 		switch (mode) {
 		case Inbox:
 			// Archive highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusArchived(
-			   game.get_gametime(), plnum, MessageId(selected)));
+				game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		case Archive:
 			// Restore highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusRead(
-			   game.get_gametime(), plnum, MessageId(selected)));
+				game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		}
 	}
@@ -602,36 +602,36 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		return;
 	}
 	archivebtn_->set_enabled(true);
-	std::string tooltip = "";
+	std::string button_tooltip = "";
 	size_t no_selections = list->selections().size();
 	switch (mode) {
 	case Archive:
 		if (no_selections > 1) {
 			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 			 */
-			tooltip = (boost::format(ngettext("Restore the selected %d message",
+			button_tooltip = (boost::format(ngettext("Restore the selected %d message",
 			                                  "Restore the selected %d messages", no_selections)) %
 			           no_selections)
 			             .str();
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
-			tooltip = _("Restore selected message");
+			button_tooltip = _("Restore selected message");
 		}
 		break;
 	case Inbox:
 		if (no_selections > 1) {
 			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 			 */
-			tooltip = (boost::format(ngettext("Archive the selected %d message",
+			button_tooltip = (boost::format(ngettext("Archive the selected %d message",
 			                                  "Archive the selected %d messages", no_selections)) %
 			           no_selections)
 			             .str();
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
-			tooltip = _("Archive selected message");
+			button_tooltip = _("Archive selected message");
 		}
 		break;
 	}
 	/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-	archivebtn_->set_tooltip((boost::format(_("Del: %s")) % tooltip).str());
+	archivebtn_->set_tooltip((boost::format(_("Del: %s")) % button_tooltip).str());
 }
