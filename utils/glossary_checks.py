@@ -133,13 +133,17 @@ def load_glossary(glossary_file, locale):
                     term_index = colum_counter
                 elif header == 'pos':
                     wordclass_index = colum_counter
-                elif header == 'translation_' + locale:
+                elif header == 'translation_' + locale or header == locale:
                     translation_index = colum_counter
                 elif header == 'comment_' + locale:
                     comment_index = colum_counter
                 colum_counter = colum_counter + 1
         # If there is a translation, parse the entry
         elif len(row[translation_index].strip()) > 0:
+            if translation_index == 0:
+                raise Exception('Locale %s is missing from glossary file.'%locale)
+            if comment_index == 0:
+                raise Exception('Comment field for locale %s is missing from glossary file.'%locale)
             entry = GlossaryEntry()
             entry.terms.append(row[term_index].strip())
             if row[wordclass_index] == 'Noun':
