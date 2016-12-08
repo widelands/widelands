@@ -658,8 +658,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-							 static_cast<int>(mo->descr().type()))
-								.str());
+		                static_cast<int>(mo->descr().type()))
+		                  .str());
 	}
 	NEVER_HERE();
 }

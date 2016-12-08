@@ -765,8 +765,7 @@ void show_field_action(InteractiveBase* const ibase,
 		bool finish = false;
 		if (dynamic_cast<const Widelands::Flag*>(i)) {
 			finish = true;
-		}
-		else if (dynamic_cast<const Widelands::Road*>(i)) {
+		} else if (dynamic_cast<const Widelands::Road*>(i)) {
 			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 				upcast(Game, game, &player->egbase());
 				game->send_player_build_flag(player->player_number(), target);

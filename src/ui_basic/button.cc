@@ -351,7 +351,7 @@ void Button::toggle() {
 		style_ = UI::Button::Style::kRaised;
 		break;
 	case UI::Button::Style::kFlat:
-		break; // Do nothing for flat buttons
+		break;  // Do nothing for flat buttons
 	}
 }
 }
