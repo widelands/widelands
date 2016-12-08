@@ -7,6 +7,10 @@ po_validation/glossary.
 You will need to have the Translate Toolkit installed in order for the checks to work:
 http://toolkit.translatehouse.org/
 
+This script also uses hunspell to reduce the number of false positive hits, so
+install as many of the needed hunspell dictionaries as you can find. This script
+will inform you about missing hunspell locales.
+
 You will need to provide an export of the Transifex glossary and specify it at
 the command line. Make sure to select "Include glossary notes in file" when
 exporting the csv from Transifex.
@@ -30,6 +34,7 @@ import os.path
 import re
 import subprocess
 import sys
+import time
 import traceback
 
 
@@ -354,7 +359,7 @@ def check_file(csv_file, glossaries, locale, po_file):
                 elif header == 'location':
                     location_index = colum_counter
                 colum_counter = colum_counter + 1
-        elif hunspell_locale != "":
+        else:
             for entry in glossaries[locale][0]:
                 # Check if the source text contains the glossary term.
                 # Filter out superstrings, e.g. we don't want to check
@@ -362,20 +367,22 @@ def check_file(csv_file, glossaries, locale, po_file):
                 if source_contains_term(row[source_index], entry, glossaries[locale][0]):
                     # Now verify the translation against all translation
                     # variations from the glossary
-                    if not translation_has_term(entry, row[target_index]):
-                        # Add Hunspell stems for better matches and try again
-                        # We do it here because the Hunspell manipulation is slow.
+                    term_found = translation_has_term(entry, row[target_index])
+                    # Add Hunspell stems for better matches and try again
+                    # We do it here because the Hunspell manipulation is slow.
+                    if not term_found and hunspell_locale != "":
                         target_to_check = append_hunspell_stems(csv_dir, hunspell_locale, row[target_index])
-                        if not translation_has_term(entry, target_to_check):
-                            hit = FailedTranslation()
-                            hit.source = row[source_index]
-                            hit.target = row[target_index]
-                            hit.location = row[location_index]
-                            hit.term = entry.terms[0]
-                            hit.translation = entry.translations[0]
-                            hit.locale = locale
-                            hit.po_file = po_file
-                            hits.append(hit)
+                        term_found = translation_has_term(entry, target_to_check)
+                    if term_found:
+                        hit = FailedTranslation()
+                        hit.source = row[source_index]
+                        hit.target = row[target_index]
+                        hit.location = row[location_index]
+                        hit.term = entry.terms[0]
+                        hit.translation = entry.translations[0]
+                        hit.locale = locale
+                        hit.po_file = po_file
+                        hits.append(hit)
         counter = counter + 1
     return hits
 
@@ -492,6 +499,7 @@ def main():
         return 1
 
     try:
+        print("Current time: %s"%time.ctime())
         # Prepare the paths
         glossary_file = os.path.abspath(os.path.join(
             os.path.dirname(__file__), sys.argv[1]))
@@ -506,7 +514,9 @@ def main():
         input_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../po'))
         output_path = make_path(os.path.dirname(__file__), '../po_validation')
-        return check_translations_with_glossary(input_path, output_path, glossary_file, locale)
+        result = check_translations_with_glossary(input_path, output_path, glossary_file, locale)
+        print("Current time: %s"%time.ctime())
+        return result
 
     except Exception:
         print('Something went wrong:')
