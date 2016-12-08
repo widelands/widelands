@@ -230,9 +230,9 @@ class HunspellLocale:
 hunspell_locales = defaultdict(list)
 """ Hunspell needs specific locales"""
 
-def set_has_hunspell_locale(hunspell_locale, csv_dir):
+def set_has_hunspell_locale(hunspell_locale, temp_path):
     """Tries calling hunspell with the given locale and returns false if it has failed."""
-    hunspell_temppath = os.path.abspath(os.path.join(csv_dir, "temp.txt"))
+    hunspell_temppath = os.path.abspath(os.path.join(temp_path, "temp.txt"))
     with open(hunspell_temppath, 'wt') as hunspell_tempfile:
         hunspell_tempfile.write("foo")
         try:
@@ -252,7 +252,7 @@ def get_hunspell_locale(locale):
         return hunspell_locales[locale][0].locale
     return ""
 
-def load_hunspell_locales(csv_dir):
+def load_hunspell_locales(temp_path):
     """Registers locales for Hunspell. Maps a list of generic locales to specific locales and checks which dictionaries are available."""
     print("Looking for Hunspell dictionaries");
     hunspell_locales["bg"].append(HunspellLocale("bg_BG"))
@@ -311,12 +311,12 @@ def load_hunspell_locales(csv_dir):
     hunspell_locales["zh_CN"].append(HunspellLocale("zh_CN"))
     hunspell_locales["zh_TW"].append(HunspellLocale("zh_TW"))
     for locale in hunspell_locales:
-        set_has_hunspell_locale(hunspell_locales[locale][0], csv_dir)
+        set_has_hunspell_locale(hunspell_locales[locale][0], temp_path)
 
-def append_hunspell_stems(csv_dir, hunspell_locale, translation):
+def append_hunspell_stems(temp_path, hunspell_locale, translation):
     """ Use hunspell to append the stems for terms found = less work for glossary editors.
     The effectiveness of this check depends on how good the hunspell data is."""
-    hunspell_temppath = os.path.abspath(os.path.join(csv_dir, "temp.txt"))
+    hunspell_temppath = os.path.abspath(os.path.join(temp_path, "temp.txt"))
     with open(hunspell_temppath, 'wt') as hunspell_tempfile:
         hunspell_tempfile.write(translation)
     try:
@@ -345,7 +345,7 @@ def check_file(csv_file, glossaries, locale, po_file):
     hits = []
     counter = 0
     has_hunspell = True
-    csv_dir = os.path.dirname(csv_file)
+    temp_path = os.path.dirname(csv_file)
     hunspell_locale = get_hunspell_locale(locale)
     for row in translations:
         # Detect the column indices
@@ -371,7 +371,7 @@ def check_file(csv_file, glossaries, locale, po_file):
                     # Add Hunspell stems for better matches and try again
                     # We do it here because the Hunspell manipulation is slow.
                     if not term_found and hunspell_locale != "":
-                        target_to_check = append_hunspell_stems(csv_dir, hunspell_locale, row[target_index])
+                        target_to_check = append_hunspell_stems(temp_path, hunspell_locale, row[target_index])
                         term_found = translation_has_term(entry, target_to_check)
                     if term_found:
                         hit = FailedTranslation()
@@ -424,12 +424,12 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
 
     """
     print("Locale: " + only_locale)
-    csv_path = make_path(output_path, 'csv')
+    temp_path = make_path(output_path, 'temp_glossary')
     hits = []
     locale_list = defaultdict(list)
 
     glossaries = defaultdict(list)
-    load_hunspell_locales(csv_path)
+    load_hunspell_locales(temp_path)
 
     source_directories = sorted(os.listdir(input_path), key=str.lower)
     for dirname in source_directories:
@@ -456,7 +456,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                             if len(locale_list[locale]) < 1:
                                 locale_list[locale].append(locale)
                             csv_file = os.path.abspath(os.path.join(
-                                csv_path, dirname + '_' + locale + '.csv'))
+                                temp_path, dirname + '_' + locale + '.csv'))
                             # Convert to csv for easy parsing
                             call(['po2csv', '--progress=none', po_file, csv_file])
 
@@ -485,7 +485,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
         # Uncomment this line to print a statistic of the number of hits for each locale
         # print("%s\t%d"%(locale, counter))
 
-    delete_path(csv_path)
+    delete_path(temp_path)
     return 0
 
 
@@ -521,7 +521,7 @@ def main():
     except Exception:
         print('Something went wrong:')
         traceback.print_exc()
-        delete_path(make_path(output_path, 'csv'))
+        delete_path(make_path(output_path, 'temp_glossary'))
         return 1
 
 if __name__ == '__main__':
