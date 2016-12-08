@@ -66,7 +66,7 @@ def make_english_plural(word):
     if not word.endswith('s'):
         if word.endswith('y') and not is_vowel(word[-2:-1]):
             result = word[0:-1] + 'ies'
-        elif word.endswith('z') or word.endswith('x'):
+        elif word.endswith('z') or word.endswith('x') or word.endswith('ch') or word.endswith('sh') or word.endswith('o'):
             result = word + 'es'
         else:
             result = word + 's'
@@ -96,6 +96,12 @@ def make_english_verb_forms(word):
     else:
         result.append(word + 'ing')
         result.append(word + 'ed')
+    # 3rd person s has the same pattern as noun plurals.
+    # We ommitted words ending on s i the plural, so we add them here.
+    if word.endswith('s'):
+        result.append(word + 'es')
+    else:
+        result.append(make_english_plural(word))
     return result
 
 
