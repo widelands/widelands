@@ -262,9 +262,8 @@ def get_hunspell_locale(locale):
         return hunspell_locales[locale][0].locale
     return ""
 
-def load_hunspell_locales(temp_path):
-    """Registers locales for Hunspell. Maps a list of generic locales to specific locales and checks which dictionaries are available."""
-    print("Looking for Hunspell dictionaries");
+def load_hunspell_locales(temp_path, locale):
+    """Registers locales for Hunspell. Maps a list of generic locales to specific locales and checks which dictionaries are available. If locale != "all", load only the dictionary for the given locale. """
     hunspell_locales["bg"].append(HunspellLocale("bg_BG"))
     hunspell_locales["br"].append(HunspellLocale("br_FR"))
     hunspell_locales["ca"].append(HunspellLocale("ca_ES"))
@@ -320,8 +319,14 @@ def load_hunspell_locales(temp_path):
     hunspell_locales["vi"].append(HunspellLocale("vi_VN"))
     hunspell_locales["zh_CN"].append(HunspellLocale("zh_CN"))
     hunspell_locales["zh_TW"].append(HunspellLocale("zh_TW"))
-    for locale in hunspell_locales:
+    if locale == "all":
+        print("Looking for Hunspell dictionaries");
+        for locale in hunspell_locales:
+            set_has_hunspell_locale(hunspell_locales[locale][0], temp_path)
+    else:
+        print("Looking for Hunspell dictionary");
         set_has_hunspell_locale(hunspell_locales[locale][0], temp_path)
+
 
 def append_hunspell_stems(temp_path, hunspell_locale, translation):
     """ Use hunspell to append the stems for terms found = less work for glossary editors.
@@ -439,14 +444,15 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
     locale_list = defaultdict(list)
 
     glossaries = defaultdict(list)
-    load_hunspell_locales(temp_path)
+    load_hunspell_locales(temp_path, only_locale)
 
     source_directories = sorted(os.listdir(input_path), key=str.lower)
     for dirname in source_directories:
         dirpath = os.path.join(input_path, dirname)
         if os.path.isdir(dirpath):
             source_files = sorted(os.listdir(dirpath), key=str.lower)
-            print('Checking ' + dirname)
+            sys.stdout.write("\nChecking text domain '" + dirname + "': ")
+            sys.stdout.flush()
             failed = 0
             for source_filename in source_files:
                 po_file = dirpath + '/' + source_filename
@@ -455,14 +461,16 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                     if only_locale == "all" or locale == only_locale:
                         # Load the glossary if we haven't seen this locale before
                         if len(glossaries[locale]) < 1:
-                            sys.stdout.write('Loading glossary for ' + locale)
+                            sys.stdout.write('\nLoading glossary for ' + locale)
                             glossaries[locale].append(
                                 load_glossary(glossary_file, locale))
-                            sys.stdout.write(' - %d entries\n' %
+                            sys.stdout.write(' - %d entries ' %
                                              len(glossaries[locale][0]))
                             sys.stdout.flush()
                         # Only bother with locales that have glossary entries
                         if len(glossaries[locale][0]) > 0:
+                            sys.stdout.write(locale+" ")
+                            sys.stdout.flush()
                             if len(locale_list[locale]) < 1:
                                 locale_list[locale].append(locale)
                             csv_file = os.path.abspath(os.path.join(
