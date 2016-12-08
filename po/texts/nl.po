@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 20:39+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Dit spel is Vrije, Openbron-Software (FOSS: Free and Open Source Softwar
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Je kunt meer informatie over FOSS en de GPL vinden door de volgende webpagina te bezoeken: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -429,7 +429,7 @@ msgstr "De speler met de kleur van de vlag.  Als meer dan één cliënt dezelfde
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player."
-msgstr ""
+msgstr "Toeschouwer modus, wat betekent dat je alles kunt zien, maar geen enkele speler kunt besturen."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -466,13 +466,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "De laatste drie kunnen alleen worden gekozen door de hosting cliënt door de klikken op de 'type' knop van een speler. Hostspelers kunnen ook de beginsituatie van elke speler (de gebouwen, goederen en werkers waarmee de speler begint) en de stam en het team van computerspelers instellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "Elke cliënt die verbonden is met een speler (die dus geen toeschouwer is) kan de stam en het team voor die speler instellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -546,7 +546,7 @@ msgstr "Alt ingedrukt houden zet het tweede alternatieve gereedschap aan (als di
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Met de numerieke toetsen (0 - 9) kun je direct de grootte van het geselecteerde gebied rond je muiscursor instellen."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

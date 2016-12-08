@@ -466,6 +466,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
+		break;
 	}
 	return result;
 }
