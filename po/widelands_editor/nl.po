@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 20:55+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgstr "Gereedschap"
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
 msgid "0-9"
-msgstr ""
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
@@ -112,13 +112,13 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Plaats nieuwe elementen op de kaart, of verhoog elementen op de kaart met de waarde gekozen in 'Verhoog/Verlaag waarde'"
 
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Verwijder elementen van de kaart, of verlaag elementen op de kaart met de waarde gekozen in 'Verhoog/Verlaag waarde'"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -136,11 +136,11 @@ msgstr "Ctrl + Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Geef elementen op de kaart de waarde gekozen in 'Stel Waarde in'"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
-msgstr ""
+msgstr "Editor Help"
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
@@ -212,7 +212,7 @@ msgstr "Hier zullen geen bomen groeien."
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Voorkeursterreinen"
 
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39
