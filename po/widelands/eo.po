@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-06 21:02+0000\n"
+"Last-Translator: fenris <fenris.kcf@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,13 +23,13 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nova celo"
+msgstr[1] "Novaj celoj"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -66,14 +66,14 @@ msgstr "%1$s kaj %2$s"
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:157
 msgid "No Space"
-msgstr ""
+msgstr "Nenia spaco"
 
 #: ../../data/scripting/infrastructure.lua:158
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Kelkaj da viaj konstruaĵoj ne havis sufiĉe da spaco kaj do ne estis konstruitaj. Tio kaŭzas malavantaĝon por vi; eble pli bonas rekomencigi la mapon kun justaj kondiĉoj."
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
@@ -250,7 +250,7 @@ msgstr "Montri konstruad-spacojn (ŝaltita/malŝaltita)"
 #: ../../src/wui/interactive_player.cc:87
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
-msgstr ""
+msgstr "Normigi zomadon"
 
 #: ../../src/editor/editorinteractive.cc:133
 msgid "Undo"
@@ -416,7 +416,7 @@ msgstr "Estas: %s"
 #: ../../src/editor/tools/info_tool.cc:137
 #, c-format
 msgid "Editor Category: %s"
-msgstr ""
+msgstr "Redaktila kategorio: %s"
 
 #: ../../src/editor/tools/info_tool.cc:141
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:121
@@ -459,7 +459,7 @@ msgstr "Ludantoj: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: –"
-msgstr ""
+msgstr "Ludantoj: –"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -532,20 +532,20 @@ msgstr "Eliri redaktilon"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:228
 #: ../../src/wui/mapdata.cc:164
 msgid "My Maps"
-msgstr ""
+msgstr "Miaj mapoj"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:71
 #: ../../src/wui/mapdata.cc:161
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Multludantaj misioj"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:74
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:228
 #, c-format
 msgid "Current Directory: %s"
-msgstr ""
+msgstr "Elektita dosierujo: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
@@ -621,8 +621,8 @@ msgstr "Proponata skipoj:"
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Ludanto"
+msgstr[1] "%u Ludantoj"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:157
 msgid "Main Options"
@@ -750,7 +750,7 @@ msgstr "Kreanta mapon hazardan…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:577
 msgid "Random Map"
-msgstr ""
+msgstr "Hazarda mapo"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -763,7 +763,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "La mapo estis generita. Pli bone certigu, ke la komencaj pozicioj de la ludantoj ne malbonas; ekz. komenca pozicio ne estu sur insuleto aŭ ĉe la pinto de monto."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:29
@@ -809,7 +809,7 @@ msgstr "Eraro dum konservado de mapo!\nKonservita map-dosiero eble estas difekta
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Entajpu dosieruj-nomon:"
 
 #: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
@@ -850,26 +850,26 @@ msgstr "Altec-ilaj opcioj"
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Altigi/malaltigi valoron:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:73
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set Value:"
-msgstr ""
+msgstr "Meti valoron:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:65
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Klaku je la mapo sen/kun premita majuskliga klavo por altigi/malaltigi la landon"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Klaku je la mapo kun premita stirklavo por meti la landalton"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
@@ -881,12 +881,12 @@ msgstr "Krudmaterialoj"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Klaku je la mapo sen/kun premita majuskliga klavo por altigi/malaltigi la kvanton de la elektita krudmaterialo"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "Klaku je la mapo kun premita stirklavo por meti la kvanton de la elektita krudmaterialo"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -894,7 +894,7 @@ msgstr "Ŝanĝi alton"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:60
 msgid "Random height"
-msgstr ""
+msgstr "Hazarda alto"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:125
 msgid "Terrain"
@@ -922,15 +922,15 @@ msgstr "Agordi la pozicion, kiu havu la koordinatojn (0, 0). Tiu estos la maldek
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:39
 msgid "Random Height Options"
-msgstr ""
+msgstr "Hazardaj alt-agordoj"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Minimuma alto:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Maksimuma alto:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
@@ -942,11 +942,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
-msgstr ""
+msgstr "Hazarda alto"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:103
 msgid "Fixed Height"
-msgstr ""
+msgstr "Fiksa alto"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1032,29 +1032,29 @@ msgstr "%u%% malkonstruita"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:122
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldato (+%2%)"
+msgstr[1] "%1% soldatoj (+%2%)"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:126
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u soldato"
+msgstr[1] "%u soldatoj"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:134
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldato (+%3%)"
+msgstr[1] "%1%(+%2%) soldatoj (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:140
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldato"
+msgstr[1] "%1%(+%2%) soldatoj"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:774
@@ -1138,7 +1138,7 @@ msgstr "la ekonomio ne bezonas la laboriston ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1019
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:369
 #, c-format
@@ -1314,7 +1314,7 @@ msgstr "Haveno perdita!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "La malŝarĝado de la varoj fiaskis; la ekspedicio estis ĉesigita."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:834
@@ -1334,7 +1334,7 @@ msgstr "Ekspedici-ŝipo atendas viajn komandojn."
 #: ../../src/logic/map_objects/tribes/ship.cc:956
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr ""
+msgstr "Navigante"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -1348,13 +1348,13 @@ msgstr "Atendante"
 #: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr "Skoltanta"
+msgstr "Skoltante"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "Ejo por haveno trovita"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
@@ -1362,7 +1362,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/ship.cc:973
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "Kreante kolonion"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1349
 #: ../../src/logic/map_objects/tribes/soldier.cc:1355
@@ -1386,14 +1386,14 @@ msgstr "Nova stokejo aldoniĝis al via ekonomio."
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "devus ekspluati la krudmaterialon %s, kiu ne ekzistas en la mondo; la mondo ne taŭgas por la tribo"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:214
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "devus bredi la krudmaterial-tipon %s, kiu ne ekzistas en la mondo; la tribo ne taŭgas por la mondo"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:856
 msgid "A geologist found resources."
@@ -1409,8 +1409,8 @@ msgstr "Via %s ne povas trovi vojon por iri hejmen kaj mortiĝos verŝajne."
 #: ../../src/wui/productionsitewindow.cc:97
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Laboristo"
+msgstr[1] "Laboristoj"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1654
 msgid "Worker got lost!"
@@ -1424,7 +1424,7 @@ msgstr "kultivebla"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:80
 msgid "navigable"
-msgstr ""
+msgstr "navigebla"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:85

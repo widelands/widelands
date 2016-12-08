@@ -31,12 +31,12 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	uint32_t tested_fields = 0;
 
 	// protocol out
-	log("%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn,
-	    candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
+	log("%d: (%3dx%3d) expedition spot scoring, colony_scan_area == %u\n", pn, candidate_spot.x,
+	    candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
 	if (other_player_accessible(kColonyScanMinArea, &tested_fields, &mineable_fields_count,
-			                    candidate_spot, WalkSearch::kAnyPlayer)) {
+	                            candidate_spot, WalkSearch::kAnyPlayer)) {
 		return 0;
 	}
 
@@ -256,16 +256,16 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 			// only two states need an attention
 			if ((so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-				  so.ship->get_ship_state() ==
+			     so.ship->get_ship_state() ==
 			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
-				 !so.waiting_for_command_) {
+			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > 180 * 1000) {
 					so.waiting_for_command_ = true;
 					log(
 					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
 					   "here?...\n",
-						player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						so.ship->get_position().y, (gametime - so.last_command_time) / 1000);
+					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
+					   so.ship->get_position().y, (gametime - so.last_command_time) / 1000);
 				}
 			}
 
@@ -281,7 +281,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// 0-10000
 				// to avoid float or rounding errors if integers in range 0-100
 				const int16_t tmp_util =
-					(so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
+				   (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
 				// This number is kind of average
 				persistent_data->ships_utilization =
 				   persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
@@ -428,7 +428,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
 		log("%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-		    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y, spot_score);
+		    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y,
+		    spot_score);
 
 		// we make a decision based on the score value and random
 		if (game().logic_rand() % 8 < spot_score) {
@@ -461,8 +462,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			log("%d: %s: new island exploration - direction: %u\n", pn,
 			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));
 		} else {
-			log("%d: %s: continue island circumvention, dir=%u\n", pn,
-			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));
+			log("%d: %s: continue island circumvention, dir=%u\n", pn, so.ship->get_shipname().c_str(),
+			    static_cast<uint32_t>(so.island_circ_direction));
 		}
 
 		// send the ship to circle island
