@@ -32,7 +32,7 @@ tribes:new_militarysite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 60 },
+         hotspot = { 46, 58 },
       }
    },
 
