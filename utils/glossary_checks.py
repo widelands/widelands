@@ -464,7 +464,7 @@ def check_file(csv_file, glossaries, locale, po_file):
                             temp_path, hunspell_locale, row[target_index])
                         term_found = translation_has_term(
                             entry, target_to_check)
-                    if term_found:
+                    if not term_found:
                         hit = FailedTranslation()
                         hit.source = row[source_index]
                         hit.target = row[target_index]
