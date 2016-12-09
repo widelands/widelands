@@ -11,6 +11,8 @@ This script also uses hunspell to reduce the number of false positive hits, so
 install as many of the needed hunspell dictionaries as you can find. This script
 will inform you about missing hunspell locales.
 
+For Debian-based Linux: sudo apt-get install translate-toolkit hunspell hunspell-ar hunspell-bg hunspell-br hunspell-ca hunspell-cs hunspell-da hunspell-de-de hunspell-el hunspell-en-ca hunspell-en-gb hunspell-en-us hunspell-eu hunspell-fr hunspell-gd hunspell-gl hunspell-he hunspell-hr hunspell-hu hunspell-it hunspell-ko hunspell-lt hunspell-nl hunspell-no hunspell-pl hunspell-pt-br hunspell-pt-pt hunspell-ro hunspell-ru hunspell-si hunspell-sk hunspell-sl hunspell-sr hunspell-sv hunspell-uk hunspell-vi
+
 You will need to provide an export of the Transifex glossary and specify it at
 the command line. Make sure to select "Include glossary notes in file" when
 exporting the csv from Transifex.
@@ -297,6 +299,7 @@ def load_glossary(glossary_file, locale):
     result = []
     counter = 0
     term_index = 0
+    term_comment_index = 0
     wordclass_index = 0
     translation_index = 0
     comment_index = 0
@@ -307,6 +310,8 @@ def load_glossary(glossary_file, locale):
             for header in row:
                 if header == 'term':
                     term_index = colum_counter
+                elif header == 'comment':
+                    term_comment_index = colum_counter
                 elif header == 'pos':
                     wordclass_index = colum_counter
                 elif header == 'translation_' + locale or header == locale:
@@ -315,7 +320,8 @@ def load_glossary(glossary_file, locale):
                     comment_index = colum_counter
                 colum_counter = colum_counter + 1
         # If there is a translation, parse the entry
-        elif len(row[translation_index].strip()) > 0:
+        # We also have some obsolete terms in the glossary that we want to filter out.
+        elif len(row[translation_index].strip()) > 0 and not row[term_comment_index].startswith('OBSOLETE'):
             if translation_index == 0:
                 raise Exception(
                     'Locale %s is missing from glossary file.' % locale)
