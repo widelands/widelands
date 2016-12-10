@@ -13,16 +13,15 @@ end
 function burn_tavern_down()
    sleep(500)
    scroll_smoothly_to(tavern_field)
-   sleep(250)
+   sleep(1000)
    tavern_field.immovable:destroy()
-   sleep(50)
+   sleep(1000)
    message_box_objective(plr, tavern_burnt_down)
-   sleep(2000)
+   sleep(500)
    local o = message_box_objective(plr, building_stat)
    while not mv.windows.building_statistics do sleep(100) end
-   o.done = true
+   set_objective_done(o, wl.Game().real_speed)
 
-   sleep(wl.Game().real_speed) -- The building statistics window needs some time to build up
    o = message_box_objective(plr,explain_building_stat)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
    local o2 = add_campaign_objective(reopen_building_stat_obj)
@@ -39,28 +38,26 @@ function burn_tavern_down()
       sleep(200)
    end
    while mv.windows.building_statistics do sleep(100) end
-   o.done = true
+   set_objective_done(o, 0)
 
-   sleep(2000)
    o = message_box_objective(plr, inventory1)
    while not mv.windows.stock_menu do sleep(200) end
-   o.done = true
+   set_objective_done(o, wl.Game().real_speed)
 
    o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
    o2 = add_campaign_objective(reopen_stock_menu_obj)
    o2.visible = false
-   while not o.done do
+   while not mv.windows.stock_menu.tabs["wares_in_warehouses"].active do
       if not mv.windows.stock_menu then
          o2.visible = true
          message_box_objective(plr, reopen_stock_menu)
          while not mv.windows.stock_menu do sleep(200) end
          o2.visible = false
       end
-      if mv.windows.stock_menu.tabs["wares_in_warehouses"].active then o.done = true end
       sleep(200)
    end
-
+   set_objective_done(o, 0)
    message_box_objective(plr, inventory3)
 
    sleep(2000)
@@ -70,57 +67,54 @@ function burn_tavern_down()
    message_box_objective(plr, ware_encyclopedia) -- a small insert
 
    while #plr:get_buildings("empire_tavern") < 2 do sleep(500) end
-   o.done = true
+   set_objective_done(o, 0)
 
    plan_the_future()
 end
 
 function plan_the_future()
-   sleep(2000)
    message_box_objective(plr, building_priority_settings)
    sleep(30*1000) -- give the user time to try it out
 
    local o = message_box_objective(plr, ware_stats1)
    while not mv.windows.ware_statistics do sleep(200) end
-   o.done = true
+   set_objective_done(o, 0)
 
    o = message_box_objective(plr, ware_stats2)
    local o2 = add_campaign_objective(reopen_ware_stats1_obj)
    o2.visible = false
-   while not o.done do
+   while not mv.windows.ware_statistics.tabs["economy_health"].active do
       if not mv.windows.ware_statistics then
          o2.visible = true
          message_box_objective(plr, reopen_ware_stats1)
          while not mv.windows.ware_statistics do sleep(200) end
          o2.visible = false
       end
-      if mv.windows.ware_statistics.tabs["economy_health"].active then o.done = true end
       sleep(200)
    end
+   set_objective_done(o, 0)
 
    o = message_box_objective(plr, ware_stats3)
    o2 = add_campaign_objective(reopen_ware_stats2_obj)
    o2.visible = false
-   while not o.done do
+   while not mv.windows.ware_statistics.tabs["stock"].active  do
       if not mv.windows.ware_statistics then
          o2.visible = true
          message_box_objective(plr, reopen_ware_stats2)
          while not mv.windows.ware_statistics do sleep(200) end
          o2.visible = false
       end
-      if mv.windows.ware_statistics.tabs["stock"].active then o.done = true end
       sleep(200)
    end
+   set_objective_done(o, 0)
 
    o = message_box_objective(plr, ware_stats4)
    while mv.windows.ware_statistics do sleep(500) end
-   o.done = true
-
-   sleep(2000)
+   set_objective_done(o)
 
    o = message_box_objective(plr, economy_settings1)
    while not mv.windows.economy_options do sleep(200) end
-   o.done = true
+   set_objective_done(o, 0)
    message_box_objective(plr, economy_settings2)
    o = message_box_objective(plr, economy_settings3)
 
@@ -141,7 +135,7 @@ function plan_the_future()
       end
       sleep(500)
    end
-   o.done = true
+   set_objective_done(o)
 
    -- if the minimum_storage_per_warehouse feature is introduced, use the gold mountain to the northeast for explanation
    conclude()

@@ -52,6 +52,8 @@ protected:
 	void fill_table() override;
 
 private:
+	void layout() override;
+
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
@@ -62,9 +64,11 @@ private:
 	void tagbox_changed(int32_t, bool);
 
 	int32_t const checkbox_space_;
-	int32_t const checkboxes_y_;
+	const int checkbox_padding_;
+	int32_t checkboxes_y_;
 
 	UI::Textarea title_;
+	UI::Box checkboxes_;
 
 	MapTable table_;
 	MapDetails map_details_;

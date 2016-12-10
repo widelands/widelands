@@ -26,7 +26,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -1994,8 +1993,7 @@ void NetHost::handle_network() {
 			} catch (const DisconnectException& e) {
 				disconnect_client(i, e.what());
 			} catch (const ProtocolException& e) {
-				disconnect_client(
-				   i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
+				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
 			} catch (const std::exception& e) {
 				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 			}

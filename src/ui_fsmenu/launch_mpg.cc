@@ -203,6 +203,11 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete chat_;
 }
 
+void FullscreenMenuLaunchMPG::layout() {
+	// TODO(GunChleoc): Implement when we have redesigned this
+}
+
+
 /**
  * Set a new chat provider.
  *

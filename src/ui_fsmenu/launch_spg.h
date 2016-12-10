@@ -60,6 +60,8 @@ protected:
 	void clicked_back() override;
 
 private:
+	void layout() override;
+
 	void select_map();
 	void win_condition_selected() override;
 	void set_scenario_values();

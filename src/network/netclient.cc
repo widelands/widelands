@@ -23,7 +23,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/warning.h"
@@ -891,7 +890,7 @@ void NetClient::handle_network() {
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
-		disconnect("PROTOCOL_EXCEPTION", boost::lexical_cast<std::string>(e.number()));
+		disconnect("PROTOCOL_EXCEPTION", e.what());
 	} catch (const std::exception& e) {
 		disconnect("SOMETHING_WRONG", e.what());
 	}

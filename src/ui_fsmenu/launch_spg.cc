@@ -126,6 +126,10 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 }
 
+void FullscreenMenuLaunchSPG::layout() {
+	// TODO(GunChleoc): Implement when we have redesigned this
+}
+
 /**
  * Select a map as a first step in launching a game, before
  * showing the actual setup menu.

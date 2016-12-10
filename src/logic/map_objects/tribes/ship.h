@@ -207,6 +207,11 @@ struct Ship : Bob {
 		return expedition_->swimmable[dir - 1];
 	}
 
+	// whether the ship's expedition is in state "island-exploration" (circular movement)
+	bool is_exploring_island() {
+		return expedition_->island_exploration;
+	}
+
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() const {
 		if (!expedition_)
