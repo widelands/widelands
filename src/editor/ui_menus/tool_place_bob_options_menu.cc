@@ -48,7 +48,7 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu(EditorInteractive& 
 	const Widelands::World& world = parent.egbase().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
-	   std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U), 12U);
+	   std::max(std::min(static_cast<uint32_t>(ceil(sqrt(static_cast<double>(nr_bobs)))), 24U), 12U);
 
 	set_center_panel(&tabpanel_);
 
@@ -106,7 +106,7 @@ void EditorToolPlaceBobOptionsMenu::clicked(int32_t const n, bool const t) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
 	//  TODO(unknown): usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
 	if (!t && (!multiselect || pit_.get_nr_enabled() == 1)) {
 		checkboxes_[n]->set_state(true);
 		return;

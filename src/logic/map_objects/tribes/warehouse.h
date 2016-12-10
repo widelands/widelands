@@ -85,30 +85,30 @@ public:
 	 * \note The values of this enum are written directly into savegames,
 	 * so be careful when changing them.
 	 */
-	enum StockPolicy {
+	enum class StockPolicy {
 		/**
 	    * The default policy allows stocking wares without any special priority.
 	    */
-		SP_Normal = 0,
+		kNormal = 0,
 
 		/**
 	    * As long as there are warehouses with this policy for a ware, all
 	    * available unstocked supplies will be transferred to warehouses
 	    * with this policy.
 	    */
-		SP_Prefer = 1,
+		kPrefer = 1,
 
 		/**
 	    * If a ware has this stock policy, no more of this ware will enter
 	    * the warehouse.
 	    */
-		SP_DontStock = 2,
+		kDontStock = 2,
 
 		/**
-	    * Like \ref SP_DontStock, but in addition, existing stock of this ware
+	    * Like \ref kDontStock, but in addition, existing stock of this ware
 	    * will be transported out of the warehouse over time.
 	    */
-		SP_Remove = 3,
+		kRemove = 3,
 	};
 
 	Warehouse(const WarehouseDescr&);

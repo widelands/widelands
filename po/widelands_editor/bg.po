@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 07:51+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:03+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -94,8 +94,8 @@ msgstr "Инструменти"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
+msgid "0-9"
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"

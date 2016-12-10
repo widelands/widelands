@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-19 06:45+0000\n"
+"POT-Creation-Date: 2016-12-02 08:04+0000\n"
+"PO-Revision-Date: 2016-12-02 08:08+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -41,42 +41,46 @@ msgid ""
 "version and the map you tried to load."
 msgstr "Chan eil ball-ealain air a’ mhapa seo. Dèan aithris air buga air https://launchpad.net/widelands ag innse dè an tionndadh de Widelands a th’ agad is dè am mapa a dh’fheuch thu ri luchdadh."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:62
-msgid "New Artifact Found"
+#. TRANSLATORS: Keep this as short as possible. You can also translate this as
+#. "New artifact"
+#: ../../data/scripting/win_conditions/artifacts.lua:63
+msgid "Artifact Found"
 msgstr "Ball-ealain ùr"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:63
+#: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
 msgstr "Lorg an sgioba agad ball-ealain ùr."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:66
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "Artifact Lost"
 msgstr "Call buill-ealain"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:67
+#: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Chaidh fear dhe na buill-ealain aig an sgioba agad a ghoid le nàmhaid."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:70
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "Artifact Conquered"
 msgstr "Togail buill-ealain"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:71
+#: ../../data/scripting/win_conditions/artifacts.lua:74
 msgid "Your team stole an artifact from an enemy."
 msgstr "Bhuinnig an sgioba agad ball-ealain o nàmhaid."
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:141
+#: ../../data/scripting/win_conditions/artifacts.lua:144
 msgid ", "
 msgstr ", "
 
-#: ../../data/scripting/win_conditions/artifacts.lua:148
+#: ../../data/scripting/win_conditions/artifacts.lua:151
 msgid "Overview:"
 msgstr "Foir-shealladh:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:151
-#: ../../data/scripting/win_conditions/artifacts.lua:164
+#: ../../data/scripting/win_conditions/artifacts.lua:154
+#: ../../data/scripting/win_conditions/artifacts.lua:167
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -86,13 +90,13 @@ msgstr[2] "%i buill-ealain"
 msgstr[3] "%i ball-ealain"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:153
+#: ../../data/scripting/win_conditions/artifacts.lua:156
 msgid "%1$s owns %2$s."
 msgstr "Tha %2$s aig %1$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:166
+#: ../../data/scripting/win_conditions/artifacts.lua:169
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Tha %3$s aig sgioba %1$i (%2$s)."
 
@@ -129,8 +133,12 @@ msgstr[1] "Iomlan: %i phuing"
 msgstr[2] "Iomlan: %i puingean"
 msgstr[3] "Iomlan: %i puing"
 
+#: ../../data/scripting/win_conditions/collectors.lua:141
+msgid "The game has ended."
+msgstr "Thàinig an geama gu crìch."
+
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:144
+#: ../../data/scripting/win_conditions/collectors.lua:148
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -140,7 +148,7 @@ msgstr[2] "%i mionaidean"
 msgstr[3] "%i mionaid"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:149
+#: ../../data/scripting/win_conditions/collectors.lua:153
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% uair ’s %2%"
@@ -149,7 +157,7 @@ msgstr[2] "%1% uairean ’s %2%"
 msgstr[3] "%1% uair ’s %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:152
+#: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% uair"
@@ -158,17 +166,17 @@ msgstr[2] "%1% uairean"
 msgstr[3] "%1% uair"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:156
+#: ../../data/scripting/win_conditions/collectors.lua:160
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Thig an geama gu crìch an ceann %s."
 
-#: ../../data/scripting/win_conditions/collectors.lua:168
+#: ../../data/scripting/win_conditions/collectors.lua:173
 #, lua-format
 msgid "Status for Team %d"
 msgstr "An staid airson Sgioba %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:170
+#: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -328,7 +336,8 @@ msgstr "Chaill thu an geama seo!"
 msgid "Status"
 msgstr "Staid"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:25
+#. TRANSLATORS: This is an overview for all players.
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:26
 msgid "Player overview:"
 msgstr "Foir-shealladh nan cluicheadair:"
 
