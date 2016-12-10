@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "logic/game_controller.h"
-#include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "scripting/lua_coroutine.h"

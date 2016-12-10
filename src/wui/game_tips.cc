@@ -55,7 +55,7 @@ GameTips::~GameTips() {
 }
 
 /// Loads tips out of \var name
-void GameTips::load_tips(std::string name) {
+void GameTips::load_tips(const std::string& name) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
