@@ -13,6 +13,9 @@ include "scripting/format_scenario.lua"
 local tribe = wl.Game():get_tribe_description("barbarians")
 local soldier = wl.Game():get_worker_description(tribe.soldier)
 
+local empire_tribe = wl.Game():get_tribe_description("empire")
+local empire_soldier = wl.Game():get_worker_description(empire_tribe.soldier)
+
 -- =============
 -- Texts below
 -- =============
@@ -118,7 +121,7 @@ trainingcamp2 = {
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
       p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]]) ..
       p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
-      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
+      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]:bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
    )
 }
 
