@@ -39,7 +39,7 @@ return {
          h2(_"Tools") ..
          p(
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "1-0")), _"Change tool size") ..
+            dl(help_format_hotkey(pgettext("hotkey", "0-9")), _"Change tool size") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
             dl(help_format_hotkey(pgettext("hotkey", "Click")), _"Place new elements on the map, or increase map elements by the value selected by ‘Increase/Decrease value’") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.

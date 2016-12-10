@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -127,8 +127,8 @@ msgid "Provide your miners with food"
 msgstr "Subminístralles alimentos aos teus mineiros"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
-msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Constrúe unha choza para un cazador, unha cabana para un zoólogo e unha taberna"
+msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."

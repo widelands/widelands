@@ -44,6 +44,8 @@ protected:
 	void clicked_ok() override;
 
 private:
+	void layout() override;
+
 	uint32_t butx_;
 	uint32_t butw_;
 	uint32_t buth_;

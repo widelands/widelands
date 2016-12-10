@@ -21,7 +21,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse cursor.",
+      text = _"The number keys (0 - 9) allow you to directly set the size of the selected area around your mouse cursor.",
       seconds = 6
    },
    {

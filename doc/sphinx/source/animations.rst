@@ -7,6 +7,7 @@ Animations are defined as Lua tables. They look like this::
       idle = {
          pictures = path.list_files(path.dirname(__file__) .. "idle_??.png"),
          hotspot = { 5, 7 },
+         scale = 2.5,
          fps = 4,
          sound_effect = {
             directory = "sound/foo",
@@ -29,6 +30,10 @@ hotspot
 
 fps
    *Optional*. The frames per second for this animation if you want to deviate from the default fps. Do not specify this value if you have only 1 animation frame.
+
+scale
+   *Optional*. If the animation should be blitted at any other scale than 1:1,
+   specify the float value here. For example, if the animation images are 2.5 times the size of what should be blitted at default zoom, use ``scale = 2.5``.
 
 sound_effect
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence.
