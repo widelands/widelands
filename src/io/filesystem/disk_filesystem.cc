@@ -262,7 +262,7 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 		                 fspath.c_str(), directory_.c_str());
 	}
 	if (!fspath.is_directory_) {
-		throw wexception("RealFSImpl: unable to unlink directoy, path '%s' in directory '%s'"
+		throw wexception("RealFSImpl: unable to unlink directory, path '%s' in directory '%s'"
 		                 " is not a directory",
 		                 fspath.c_str(), directory_.c_str());
 	}

@@ -9,14 +9,15 @@
 # GunChleoc, 2014
 # hugues martin, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
+# Renaud Bouchard, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 20:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 21:00+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,25 +28,25 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr "Construisez deux cabanes de garde sylviculteur"
+msgstr "Construisez deux cabanes de sylviculteur"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Construisez une cabane de garde sylviculteur à côté de chaque cabane du bûcheron."
+msgstr "Construisez une cabane de sylviculteur à côté de chaque cabane du bûcheron."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Naturellement, les arbres poussent lentement. Pour être sur d'avoir assez de bois, vous devez produire des gardes sylviculteur."
+msgstr "Naturellement, les arbres poussent lentement. Pour être sur d'avoir assez de bois, vous devez créer des sylviculteurs."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr "Développez-vous vers le nord est et construisez une carrière"
+msgstr "Développez votre territoire vers le nord-est et construisez une carrière"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr "S'étendre au nord-est vers les rochers"
+msgstr "Développez votre territoire vers le nord-est jusqu'aux rochers"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -55,11 +56,11 @@ msgstr "Construisez des bâtiments militaires (comme des guérites ou des barric
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Allez jusqu'aux rochers au nord-est de votre position et construisez y une carrière."
+msgstr "Allez jusqu'aux rochers au nord-est de votre position et construisez une carrière là-bas."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
-msgstr "Commencez à construire des mines dans la montagne"
+msgstr "Commencez à construire des mines sur la montagne"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
@@ -105,11 +106,11 @@ msgstr "beaucoup d'or"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid "a bit of granite"
-msgstr "un peu de granit"
+msgstr "un peu de granite"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:55
 msgid "a lot of granite"
-msgstr "beaucoup de granit"
+msgstr "beaucoup de granite"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:56
 msgid "water"
@@ -123,19 +124,19 @@ msgstr "rien n'a été trouvé ici"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Les mines ne peuvent êtres construites que sur des terrains montagneux. Les endroits adaptés pour des mines sont affichés pas des symboles de mine orange."
+msgstr "Les mines ne peuvent êtres construites que sur des terrains montagneux. Les endroits adaptés pour des mines sont affichés par des symboles de mine orange."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "Provide your miners with food"
 msgstr "Fournissez de la nourriture à vos mineurs"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
-msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Construisez un chasseur, un garde-chasse et une taverne"
+msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
+msgstr "Construisez une hutte de chasseur, une hutte de garde-chasse et une taverne"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
-msgstr "Pour travailler, les mineurs ont besoin de nourriture."
+msgstr "Pour travailler, vos mineurs ont besoin de nourriture."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid ""
@@ -152,7 +153,7 @@ msgstr "Ce n'est que le premier exemple de matériaux qui doivent être transfor
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
-msgstr "Fait du pain"
+msgstr "Cuit du pain"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
@@ -168,7 +169,7 @@ msgstr "Il est possible de produire d'autres types de nourriture, comme les pêc
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Raffinez vous ressources minières"
+msgstr "Raffinez vos ressources minières"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
@@ -182,11 +183,11 @@ msgstr "Le minerai de fer que vos mineurs extraient n'est pas utilisable en l'é
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Améliorez vos bâtiments et construisez une petite brasserie"
+msgstr "Améliorez vos bâtiments et construisez une micro-brasserie"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Améliorez une mine et la taverne, puis construisez une petite brasserie."
+msgstr "Améliorez une mine et la taverne, puis construisez une micro-brasserie."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
@@ -196,7 +197,7 @@ msgstr "Améliorez la mine de charbon ou la mine de fer vers une mine profonde e
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr "Construisez aussi une petite brasserie."
+msgstr "Construisez aussi une micro-brasserie."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -233,7 +234,7 @@ msgstr "Vous pouvez bien entendu améliorer toutes les mines vers des mines prof
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a wood hardener"
-msgstr "Construisez un durcisseur de bois"
+msgstr "Créez un durcisseur de bois"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
@@ -246,12 +247,12 @@ msgstr "Les plus grands et meilleurs bâtiments, y compris les bâtiments milita
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Construisez un four à chaux et une économie du charbon"
+msgstr "Construisez un four à chaux et une économie charbonnière"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Construisez un four à chaux, approvisionné par un puits et un four ou une mine de charbon"
+msgstr "Construisez un four à chaux, approvisionné par un puits et proche d'un four à charbon ou une mine de charbon"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
@@ -304,7 +305,7 @@ msgstr "Le troisième matériau nécessaire pour améliorer les constructions so
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr "Construisez une ferme à bétail"
+msgstr "Construisez une ferme d'élevage"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -326,7 +327,7 @@ msgstr "Les bœufs sont élevés dans les fermes de bétail à partir d'eau et d
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:226
 msgid "The Story Begins"
-msgstr "L'histoire commence"
+msgstr "L' histoire commence"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
@@ -386,7 +387,7 @@ msgstr "Comme Père me le disait, il y a un temps pour la guerre et un temps pou
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
-msgstr "Thron bouge sa tête de gauche à droite ..."
+msgstr "Thron remue la tête..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:206
@@ -481,7 +482,7 @@ msgstr "Le conseiller"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr "Khantrukh note…"
+msgstr "Khantrukh constate…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
@@ -607,7 +608,7 @@ msgstr "Votre loyal compagnon"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
-msgstr "Le brave Boldreth se tient à vos côtés..."
+msgstr "Le brave Boldreth se tient à votre côté..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
@@ -620,7 +621,7 @@ msgstr "Alors tu veux nous préparer pour un plus long séjour dans ces forêts,
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
-msgstr "Kantruckh nous rejoint..."
+msgstr "Kantruckh se joint à nous..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:324
@@ -645,7 +646,7 @@ msgstr "Bien que ce ne soit certainement pas une tâche de guerrier, ceci doit �
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
-msgstr "Khantrukh grogne..."
+msgstr "Khantrukh grommèle..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
@@ -659,7 +660,7 @@ msgstr "Khantrukh acquiesce, satisfait..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
-msgstr "Enfin ! Ces rochers devraient durer un bon moment."
+msgstr "Enfin ! Ces rochers devraient nous suffire pour un moment."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
@@ -694,7 +695,7 @@ msgstr "Par la barbe de Chat'Karuth, c'est impressionnant ! Imagine ce que nous 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:369
 msgid "It might even be enough to…"
-msgstr "Il pourrait y en avoir assez pour..."
+msgstr "Il pourrait même y en avoir assez pour..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:374
 msgid "Khantrukh interrupts…"
@@ -728,12 +729,12 @@ msgstr "Il semble y avoir du gibier en abondance dans ces forêts, nous pourrion
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
-msgstr "L'ancien fait un bond en l'air..."
+msgstr "L'ancien sursaute..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid "Wisdom commands to seek variety."
-msgstr "Commandez sagement pour chercher la variété."
+msgstr "Commandez sagement pour chercher la diversité."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:398
@@ -745,7 +746,7 @@ msgstr "Le nord de la grande montagne est une vaste plaine, pourquoi n'utiliseri
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
-msgstr "Boldreth est réconforté..."
+msgstr "Boldreth acclame..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406
@@ -761,7 +762,7 @@ msgstr "Je te promet qu'avant le levé du soleil tu auras un magnifique repas di
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
-msgstr "Khantrukh regarde par-delà les plaines..."
+msgstr "Khantrukh scrute au delà des plaines..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:416
@@ -829,7 +830,7 @@ msgstr "Bien sûr, c'est froid et sombre, et bien peu s'aventurent volontairemen
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
-msgstr "Boldreth semble concerné…"
+msgstr "Boldreth semble préoccupé…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -943,7 +944,7 @@ msgstr "En regardant autour de moi, j'ai vu des visages fidèles, certains que j
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
-msgstr "Les nouvelles qu'il nous a rapporté changent tout..."
+msgstr "Les nouvelles qu'il nous a rapporté ont tout changé..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
@@ -953,7 +954,7 @@ msgstr "Victoire"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Vous avez complété cette mission. Vous pouvez continuer à jouer si vous le désirez, autrement passez à la mission suivante."
+msgstr "Vous avez accomplis cette mission. Vous pouvez continuer à jouer si vous le désirez, autrement passez à la mission suivante."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid "One Full Moon Night"
@@ -1001,7 +1002,7 @@ msgstr "J'ai prié pour un redoux, comme j'ai prié pour que la guerre cesse enf
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr "Jusqu'à présent, il semble qu'aucune de mes prières n'aient été exaucées."
+msgstr "Jusqu'à présent, il semble qu'aucune des prières n'aient été exaucées."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "A friendly village has joined us!"

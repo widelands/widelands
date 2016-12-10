@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 16:15+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 18:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -192,7 +192,7 @@ msgstr "Tha am bathar air a bheil feum ’ga ghiùlan thuige cuideachd. Bidh feu
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr "Airson barrachd fiosrachaidh, thoir sùil air uinneag taice an togalaich a gheibh thu leis a’ chomharra-cheiste ann an uinneag gach togalaich."
+msgstr "Airson barrachd fiosrachaidh, thoir sùil air uinneag cobharach an togalaich a gheibh thu leis a’ chomharra-cheiste ann an uinneag gach togalaich."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
@@ -265,7 +265,7 @@ msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr "Nithear an uidheamachd seo ann an ceàrdaichean airm is armachd dhe ghual, iarrainn agus aig amannan dhe dh’òr. Ionnsaichidh tu barrachd mu dhèidhinn san dàrna chnàmh-sgeul aig iomairt nan Tùsanach."
+msgstr "Nithear an uidheamachd seo ann an ceàrdaichean airm is armachd dhe ghual, iarainn agus aig amannan dhe dh’òr. Ionnsaichidh tu barrachd mu dhèidhinn san dàrna chnàmh-sgeul aig iomairt nan Tùsanach."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
@@ -452,7 +452,7 @@ msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr "Fàgaidh na saighdearan agad an dùn fad ’s a tha an togail a’ dol air adhart. Is ciall dha seo gun caill an dùn a bhuaidh mar a mhìnich mi gu h-àrd."
+msgstr "Fàgaidh na saighdearan agad an dùn fad ’s a tha an togail a’ dol air adhart. Is ciall dha seo gun caill an dùn a bhuaidh air an ranntair mar a mhìnich mi gu h-àrd."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid "Enhance your fortress to a citadel now."

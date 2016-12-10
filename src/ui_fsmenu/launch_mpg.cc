@@ -615,7 +615,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 }
 
 /**
- * load map informations and update the UI
+ * load map information and update the UI
  */
 void FullscreenMenuLaunchMPG::load_map_info() {
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data

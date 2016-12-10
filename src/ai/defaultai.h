@@ -28,6 +28,8 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "economy/economy.h"
+#include "economy/wares_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -139,22 +141,30 @@ struct DefaultAI : ComputerPlayer {
 	static VeryWeakImpl very_weak_impl;
 
 private:
+	// Variables of default AI
+	DefaultAI::Type type_;
+	Widelands::Player* player_;
+	Widelands::TribeDescr const* tribe_;
+
+	// This points to persistent data stored in Player object
+	Widelands::Player::AiPersistentState* persistent_data;
+
+	static constexpr int8_t kUncalculated = -1;
+	static constexpr uint8_t kFalse = 0;
+	static constexpr uint8_t kTrue = 1;
+
 	void late_initialization();
 
 	void update_all_buildable_fields(uint32_t);
 	void update_all_mineable_fields(uint32_t);
 	void update_all_not_buildable_fields();
-
 	void update_buildable_field(Widelands::BuildableField&, uint16_t = 6, bool = false);
 	void update_mineable_field(Widelands::MineableField&);
-
 	void update_productionsite_stats();
 
-	// for productionsites
+	// for production sites
 	Widelands::BuildingNecessity
 	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
-	// for militarysites (overloading the function)
-	Widelands::BuildingNecessity check_building_necessity(uint8_t, uint32_t);
 
 	void sort_task_pool();
 	void sort_by_priority();
@@ -173,23 +183,18 @@ private:
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(Widelands::Road&);
+
 	bool check_economies();
 	bool check_productionsites(uint32_t);
-	bool check_trainingsites(uint32_t);
 	bool check_mines_(uint32_t);
-	bool check_militarysites(uint32_t);
-	bool marine_main_decisions();
-	bool check_ships(uint32_t);
-	bool check_enemy_sites(uint32_t);
+
 	void print_stats();
-	// return single number of strength of vector of soldiers
-	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
+
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
 	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
-	void count_military_vacant_positions();
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible
@@ -206,9 +211,6 @@ private:
 	                                       Widelands::Coords,
 	                                       const Widelands::BuildingObserver&);
 
-	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
-	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	Widelands::BuildingObserver& get_building_observer(char const*);
 
@@ -216,40 +218,45 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&, bool found_on_load);
 	void lose_building(const Widelands::Building&);
-	void gain_ship(Widelands::Ship&, NewShip);
-	void check_ship_in_expedition(Widelands::ShipObserver&, uint32_t);
-	void expedition_management(Widelands::ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
-	void soldier_trained(const Widelands::TrainingSite&);
-
 	bool check_supply(const Widelands::BuildingObserver&);
-
 	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
 	template <typename T> void check_range(const T, const T, const T, const char*);
 	template <typename T> void check_range(const T, const T, const char*);
 
-private:
-	// Variables of default AI
-	DefaultAI::Type type_;
+	// Functions used for seafaring / defaultai_seafaring.cc
+	Widelands::IslandExploreDirection randomExploreDirection();
+	void gain_ship(Widelands::Ship&, NewShip);
+	void check_ship_in_expedition(Widelands::ShipObserver&, uint32_t);
+	void expedition_management(Widelands::ShipObserver&);
+	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
+	uint8_t spot_scoring(Widelands::Coords candidate_spot);
+	bool marine_main_decisions();
+	bool check_ships(uint32_t);
 
-	// collect statistics on how many times which job was run
+	// Functions used for war and training stuff / defaultai_warfare.cc
+	bool check_militarysites(uint32_t);
+	bool check_enemy_sites(uint32_t);
+	void count_military_vacant_positions();
+	bool check_trainingsites(uint32_t);
+	// return single number of strength of vector of soldiers
+	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
+	// for militarysites (overloading the function)
+	Widelands::BuildingNecessity check_building_necessity(uint8_t, uint32_t);
+	void soldier_trained(const Widelands::TrainingSite&);
+
+	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};
-
-	Widelands::Player* player_;
-	Widelands::TribeDescr const* tribe_;
-
-	std::vector<Widelands::BuildingObserver> buildings_;
-	uint32_t num_prod_constructionsites;
-	uint32_t num_ports;
-
-	uint32_t last_attack_time_;
-	// check ms in this interval - will auto-adjust
-	uint32_t enemysites_check_delay_;
+	uint32_t next_ai_think_;
+	// this is helping counter to track how many scheduler tasks are too delayed
+	// the purpose is to print out a warning that the game is pacing too fast
+	int32_t scheduler_delay_counter_;
 
 	WoodPolicy wood_policy_;
 
+	std::vector<Widelands::BuildingObserver> buildings_;
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<Widelands::BuildableField*> buildable_fields;
 	Widelands::BlockedFields blocked_fields;
@@ -266,32 +273,49 @@ private:
 	std::list<Widelands::WarehouseSiteObserver> warehousesites;
 	std::list<Widelands::TrainingSiteObserver> trainingsites;
 	std::list<Widelands::ShipObserver> allships;
+	std::vector<Widelands::WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
 	std::vector<Widelands::SchedulerTask> taskPool;
 	std::map<uint32_t, Widelands::EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
-	// returns count of mines of the same type (output)
+
+	// used for statistics of buildings
+	uint32_t num_prod_constructionsites;
+	uint32_t num_ports;
+	uint16_t numof_warehouses_;
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 	std::map<int32_t, Widelands::MilitarySiteSizeObserver> msites_per_size;
-	// returns count of militarysites
+	// for militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
-
+	uint16_t military_last_dismantle_;
+	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
+	                                // building build
 	int32_t limit_cnt_target(int32_t, int32_t);
-
-	std::vector<Widelands::WareObserver> wares;
-
-	uint32_t next_ai_think_;
-	uint32_t next_mine_construction_due_;
-	uint32_t inhibit_road_building_;
 	uint32_t time_of_last_construction_;
+	uint32_t next_mine_construction_due_;
+
+	// for training sites per type
+	int16_t ts_basic_count_;
+	int16_t ts_basic_const_count_;
+	int16_t ts_advanced_count_;
+	int16_t ts_advanced_const_count_;
+	int16_t ts_without_trainers_;
+
+	// for roads
+	uint32_t inhibit_road_building_;
+	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
+
 	uint32_t enemy_last_seen_;
+	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
+	uint32_t last_attack_time_;
+	// check ms in this interval - will auto-adjust
+	uint32_t enemysites_check_delay_;
 
-	uint16_t numof_warehouses_;
-
+	int32_t spots_;  // sum of buildable fields
 	bool new_buildings_stop_;
 
 	// when territory is expanded for every candidate field benefits are calculated
@@ -302,42 +326,38 @@ private:
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
-	uint16_t military_last_dismantle_;
-	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
-	                                // building build
-	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
-
-	bool seafaring_economy;  // false by default, until first port space is found
-	uint32_t expedition_ship_;
-
-	int32_t spots_;                 // sum of buildable fields
-	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
-	// statistics for training sites per type
-	int16_t ts_basic_count_;
-	int16_t ts_basic_const_count_;
-	int16_t ts_advanced_count_;
-	int16_t ts_advanced_const_count_;
-	int16_t ts_without_trainers_;
-
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
-
-	// this is helping counter to track how many scheduler tasks are too delayed
-	// the purpose is to print out a warning that the game is pacing too fast
-	int32_t scheduler_delay_counter_;
-
-	// This points to persistent data stored in Player object
-	Widelands::Player::AiPersistentState* persistent_data;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
 	std::vector<std::string> const armors_and_weapons = {
 	   "ax", "armor", "helm", "lance", "trident", "tabard", "shield", "mask", "spear"};
 
+	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
-
+	bool seafaring_economy;  // false by default, until first port space is found
+	uint32_t expedition_ship_;
+	uint32_t expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
+	std::unordered_set<uint32_t> expedition_visited_spots;
 
+	// common for defaultai.cc and defaultai_seafaring.cc
+	static constexpr uint32_t kColonyScanStartArea = 35;
+	static constexpr uint32_t kColonyScanMinArea = 12;
+	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
+	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
+	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+	static constexpr uint32_t kNoExpedition = 0;
+	static constexpr int kShipCheckInterval = 5 * 1000;
+
+	// used by defaultai_seafaring.cc
+	// duration of military campaign
+	static constexpr int kCampaignDuration = 15 * 60 * 1000;
+	static constexpr int kTrainingSitesCheckInterval = 15 * 1000;
+
+	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
