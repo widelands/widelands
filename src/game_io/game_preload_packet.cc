@@ -110,36 +110,6 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
-	/* NOCOM with Economy tutorial - tavern burn down:
-	 *
-	 * Clearing for road at (98, 54)
-Clearing for road at (99, 54)
-done
-Fatal exception: std::bad_cast
-Game: Writing Preload Data ...
-Thread 1 "widelands" received signal SIGSEGV, Segmentation fault.
-0x00000000011ea0d0 in Widelands::GamePreloadPacket::write (this=0x7fffffffacd0, fs=..., game=...)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/game_io/game_preload_packet.cc:113
-113		s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
-(gdb) backtrace
-#0  0x00000000011ea0d0 in Widelands::GamePreloadPacket::write (this=0x7fffffffacd0, fs=..., game=...)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/game_io/game_preload_packet.cc:113
-#1  0x00000000011ea90b in Widelands::GameSaver::save (this=0x7fffffffae00)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/game_io/game_saver.cc:51
-#2  0x0000000000e3995b in SaveHandler::save_game (this=0x7fffffffb1e8, game=..., complete_filename="save/2016-11-30T09.30.44.wgf",
-	 error=0x7fffffffaea0) at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/logic/save_handler.cc:215
-#3  0x0000000000ccb031 in WLApplication::emergency_save (game=...)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/wlapplication.cc:1362
-#4  0x0000000000cc9332 in WLApplication::mainmenu_tutorial (this=0x19d7190)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/wlapplication.cc:1072
-#5  0x0000000000cc8d27 in WLApplication::mainmenu (this=0x19d7190)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/wlapplication.cc:996
-#6  0x0000000000cc585e in WLApplication::run (this=0x19d7190)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/wlapplication.cc:442
-#7  0x0000000000cc3d01 in main (argc=1, argv=0x7fffffffdd88)
-	 at /home/bratzbert/sources/widelands/bug-1426465-scenario-timings/src/main.cc:49
-	 * */
-
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
 
 	prof.write("preload", false, fs);
