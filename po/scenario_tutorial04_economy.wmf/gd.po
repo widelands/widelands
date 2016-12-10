@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-21 09:57+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -204,16 +204,13 @@ msgid ""
 msgstr "Foghnaidh dhen mhìneachadh an-dràsta. Nise, feuch e. Tha sinn airson faighinn a-mach a bheil taighean-tàirn againn fhathast, mar sin feumaidh tu taba nan “Togalaichean meadhanach” a thaghadh. Dùin uinneag stadastaireachd nan togalach an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad ann an uinneag stadastaireachd nan togalach."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Tagh taba nan “Togalaichean meadhanach” ann an uinneag stadastaireachd nan togalach."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -268,7 +265,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Ceart mar-thà. Chunnaic thu air an liosta nach eil taigh-tàirn no taigh-seinnse sam bith air fhàgail dhut. Is ciall dha seo nach eil thu a’ dèanamh greimeagan. Ach bheireamaid sùil air na tha san stòras againn fhathast."
+msgstr "Ceart mar-thà. Chunnaic thu air an liosta nach eil taigh-tàirn no taigh-òil sam bith air fhàgail dhut. Is ciall dha seo nach eil thu a’ dèanamh greimeagan. Ach bheireamaid sùil air na tha san stòras againn fhathast."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
@@ -278,7 +275,7 @@ msgstr "Briog air a’ phutan “An stòras”."
 msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
-msgstr "’S urrainn dhut an iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
+msgstr "’S urrainn dhut a’ ghrad-iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."

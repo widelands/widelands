@@ -1691,14 +1691,6 @@ void CmdSetStockPolicy::execute(Game& game) {
 				return;
 			}
 
-			switch (policy_) {
-			case Warehouse::SP_Normal:
-			case Warehouse::SP_Prefer:
-			case Warehouse::SP_DontStock:
-			case Warehouse::SP_Remove:
-				break;
-			}
-
 			if (isworker_) {
 				if (!(game.tribes().worker_exists(ware_))) {
 					log("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(), ware_);
@@ -1729,7 +1721,7 @@ void CmdSetStockPolicy::serialize(StreamWrite& ser) {
 	ser.unsigned_32(warehouse_);
 	ser.unsigned_8(isworker_);
 	ser.unsigned_8(ware_);
-	ser.unsigned_8(policy_);
+	ser.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
 constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
@@ -1758,6 +1750,6 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_32(warehouse_);
 	fw.unsigned_8(isworker_);
 	fw.unsigned_8(ware_);
-	fw.unsigned_8(policy_);
+	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 }

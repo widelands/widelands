@@ -151,6 +151,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 		connect_to_metaserver();
 }
 
+void FullscreenMenuInternetLobby::layout() {
+	// TODO(GunChleoc): Box layout and then implement
+}
+
 /// think function of the UI (main loop)
 void FullscreenMenuInternetLobby::think() {
 	FullscreenMenuBase::think();
