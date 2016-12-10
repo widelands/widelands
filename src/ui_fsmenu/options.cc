@@ -136,13 +136,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      language_dropdown_(&box_interface_,
                         0,
                         0,
-                        column_width_ / 2,
+								100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         _("Language")),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
-                          column_width_ / 2,
+								  100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           _("In-game resolution")),
 
