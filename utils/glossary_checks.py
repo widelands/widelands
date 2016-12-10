@@ -570,7 +570,7 @@ def main():
         print('Running glossary checks:')
     else:
         print(
-            'Usage: utils/glossary_checks.py <relative-path-to-glossary> [locale]')
+            'Usage: glossary_checks.py <relative-path-to-glossary> [locale]')
         return 1
 
     try:
