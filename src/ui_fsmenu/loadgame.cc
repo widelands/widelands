@@ -329,10 +329,10 @@ void FullscreenMenuLoadGame::clicked_delete() {
 
 	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		for (const uint32_t index : selections) {
-			const std::string& filename = games_data_[table_.get(table_.get_record(index))].filename;
-			g_fs->fs_unlink(filename);
+			const std::string& deleteme = games_data_[table_.get(table_.get_record(index))].filename;
+			g_fs->fs_unlink(deleteme);
 			if (is_replay_) {
-				g_fs->fs_unlink(filename + WLGF_SUFFIX);
+				g_fs->fs_unlink(deleteme + WLGF_SUFFIX);
 			}
 		}
 		fill_table();
