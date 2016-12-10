@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H
-#define WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H
+#ifndef WL_EDITOR_UI_MENUS_TOOL_PLACE_CRITTER_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_TOOL_PLACE_CRITTER_OPTIONS_MENU_H
 
 #include <memory>
 #include <vector>
@@ -43,4 +43,4 @@ private:
 	   multi_select_menu_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_tool_place_critter_options_menu_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_CRITTER_OPTIONS_MENU_H
