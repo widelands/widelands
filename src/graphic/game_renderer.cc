@@ -154,19 +154,16 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
 			uint32_t tanim = cur_frame * FRAME_LENGTH;
 
-			const uint16_t w = anim.width();
-			const uint16_t h = anim.height();
-			uint32_t lines = h * csinf.completedtime * nr_frames;
-			if (csinf.totaltime)
-				lines /= csinf.totaltime;
-			assert(h * cur_frame <= lines);
-			lines -= h * cur_frame;
+			uint32_t percent = 100 * csinf.completedtime * nr_frames;
+			if (csinf.totaltime) {
+				percent /= csinf.totaltime;
+			}
+			percent -= 100 * cur_frame;
 
 			if (cur_frame) {  // not the first frame
-				// draw the prev frame from top to where next image will be drawing
+				// Draw the prev frame
 				dst->blit_animation(field.rendertarget_pixel, zoom, anim_idx, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor(),
-				                    Recti(Vector2i(0, 0), w, h - lines));
+				                    field.owner->get_playercolor());
 			} else if (csinf.was) {
 				// Is the first frame, but there was another building here before,
 				// get its last build picture and draw it instead.
@@ -177,13 +174,10 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 					a = csinf.was->get_animation("idle");
 				}
 				dst->blit_animation(field.rendertarget_pixel, zoom, a, tanim - FRAME_LENGTH,
-				                    field.owner->get_playercolor(),
-				                    Recti(Vector2i(0, 0), w, h - lines));
+				                    field.owner->get_playercolor());
 			}
-			assert(lines <= h);
 			dst->blit_animation(field.rendertarget_pixel, zoom, anim_idx, tanim,
-			                    field.owner->get_playercolor(),
-			                    Recti(Vector2i(0, h - lines), w, lines));
+			                    field.owner->get_playercolor(), percent);
 		} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 			assert(field.owner != nullptr);
 			// this is a building therefore we either draw unoccupied or idle animation

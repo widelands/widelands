@@ -125,7 +125,11 @@ SupplyProviders IdleWareSupply::provider_type(Game* game) const {
 	if (is_a(Ship, loc)) {
 		return SupplyProviders::kShip;
 	}
-
+	if (upcast(Worker, worker, loc)) {
+		if (worker->is_shipping()) {
+			return SupplyProviders::kShip;
+		}
+	}
 	return SupplyProviders::kFlagOrRoad;
 }
 

@@ -59,14 +59,17 @@ return {
       end
 
       local found_artifact = {
-         title = _"New Artifact Found",
+         -- TRANSLATORS: Keep this as short as possible. You can also translate this as "New artifact"
+         title = _"Artifact Found",
          body = rt(p(_[[Your team found a new artifact.]]))
       }
       local lost_artifact = {
+         -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Lost",
          body = rt(p(_[[One of your team’s artifacts was stolen by an enemy.]]))
       }
       local stole_artifact = {
+         -- TRANSLATORS: Keep this as short as possible.
          title = _"Artifact Conquered",
          body = rt(p(_[[Your team stole an artifact from an enemy.]]))
       }
