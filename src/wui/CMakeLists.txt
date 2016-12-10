@@ -132,8 +132,8 @@ wl_library(wui
     fieldaction.h
     game_debug_ui.cc
     game_debug_ui.h
-    game_main_menu.cc
-    game_main_menu.h
+    game_statistics_menu.cc
+    game_statistics_menu.h
     game_main_menu_save_game.cc
     game_main_menu_save_game.h
     game_message_menu.cc

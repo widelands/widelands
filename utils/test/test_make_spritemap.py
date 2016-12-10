@@ -5,10 +5,13 @@ import os
 import sys
 import unittest
 
-sys.path.append(os.path.normpath(os.path.dirname(os.path.abspath(__file__)) + '/..'))
+sys.path.append(os.path.normpath(
+    os.path.dirname(os.path.abspath(__file__)) + '/..'))
 import make_spritemap
 
+
 class TestMinimumAverageCostRectangle(unittest.TestCase):
+
     def test_case1(self):
         FRAGMENT_COST = 4
         bitmask = np.array([
@@ -17,11 +20,14 @@ class TestMinimumAverageCostRectangle(unittest.TestCase):
             [True, False, False],
             [True, False, False]
         ])
-        cost, rectangle = make_spritemap.minimum_average_cost_rectangle(bitmask, FRAGMENT_COST=FRAGMENT_COST)
+        cost, rectangle = make_spritemap.minimum_average_cost_rectangle(
+            bitmask, FRAGMENT_COST=FRAGMENT_COST)
         self.assertEqual(rectangle, (2, 0, 4, 1))
         self.assertAlmostEqual(cost, (FRAGMENT_COST + 2) / 2.0)
 
+
 class TestMinimumAverageCostGrow(unittest.TestCase):
+
     def test_basic_right(self):
         bitmask = np.array([
             [False, False, False, False],
@@ -30,11 +36,13 @@ class TestMinimumAverageCostGrow(unittest.TestCase):
             [False, True,  False, False],
             [False, False, False, False],
         ])
-        cost, rectangle = make_spritemap.minimum_average_cost_grow(bitmask, (2, 1, 4, 2))
+        cost, rectangle = make_spritemap.minimum_average_cost_grow(
+            bitmask, (2, 1, 4, 2))
         self.assertEqual(rectangle, (2, 1, 4, 3))
         self.assertAlmostEqual(cost, 2.0)
 
-        cost, rectangle = make_spritemap.minimum_average_cost_grow(bitmask, (2, 1, 4, 3))
+        cost, rectangle = make_spritemap.minimum_average_cost_grow(
+            bitmask, (2, 1, 4, 3))
         self.assertEqual(rectangle, (2, 1, 4, 3))
         self.assertEqual(cost, None)
 
@@ -46,7 +54,8 @@ class TestMinimumAverageCostGrow(unittest.TestCase):
             [True,  False, False, False],
             [False, False, False, False],
         ])
-        cost, rectangle = make_spritemap.minimum_average_cost_grow(bitmask, (2, 3, 4, 4))
+        cost, rectangle = make_spritemap.minimum_average_cost_grow(
+            bitmask, (2, 3, 4, 4))
         self.assertEqual(rectangle, (2, 0, 4, 4))
         self.assertAlmostEqual(cost, 3.0)
 
@@ -58,7 +67,8 @@ class TestMinimumAverageCostGrow(unittest.TestCase):
             [False, False, False, True],
             [False, False, False, False],
         ])
-        cost, rectangle = make_spritemap.minimum_average_cost_grow(bitmask, (3, 1, 4, 2))
+        cost, rectangle = make_spritemap.minimum_average_cost_grow(
+            bitmask, (3, 1, 4, 2))
         self.assertEqual(rectangle, (2, 1, 4, 2))
         self.assertAlmostEqual(cost, 1.0)
 
@@ -69,17 +79,17 @@ class TestMinimumAverageCostGrow(unittest.TestCase):
             [False, True,  False, False],
             [False, False, False, False],
         ])
-        cost, rectangle = make_spritemap.minimum_average_cost_grow(bitmask, (2, 1, 3, 2))
+        cost, rectangle = make_spritemap.minimum_average_cost_grow(
+            bitmask, (2, 1, 3, 2))
         self.assertEqual(rectangle, (2, 1, 4, 2))
         self.assertAlmostEqual(cost, 1.0)
 
 
 class TestComputeRectangleCovering(unittest.TestCase):
+
     def test_basic(self):
-        """
-        Tests a case where the optimal solution consists of a single
-        minimum average cost rectangle.
-        """
+        """Tests a case where the optimal solution consists of a single minimum
+        average cost rectangle."""
         FRAGMENT_COST = 4
         bitmask = np.array([
             [False, False, False, False],
@@ -96,10 +106,8 @@ class TestComputeRectangleCovering(unittest.TestCase):
         self.assertItemsEqual(rectangles, [(2, 1, 4, 3)])
 
     def test_grow(self):
-        """
-        Tests a case where the optimal solution can be found
-        by growing the initial minimum average cost rectangle.
-        """
+        """Tests a case where the optimal solution can be found by growing the
+        initial minimum average cost rectangle."""
         FRAGMENT_COST = 4
         bitmask = np.array([
             [False, False, False, False, False, False],
@@ -118,10 +126,8 @@ class TestComputeRectangleCovering(unittest.TestCase):
         self.assertItemsEqual(rectangles, [(2, 1, 6, 3)])
 
     def test_nogrow(self):
-        """
-        Similar to test_grow, but tests a situation in which
-        growing the initial rectangle is in fact not optimal.
-        """
+        """Similar to test_grow, but tests a situation in which growing the
+        initial rectangle is in fact not optimal."""
         FRAGMENT_COST = 4
         bitmask = np.array([
             [False, False, False, False, False, False],
@@ -140,9 +146,7 @@ class TestComputeRectangleCovering(unittest.TestCase):
         self.assertItemsEqual(rectangles, [(2, 1, 6, 2), (2, 2, 3, 4)])
 
     def test_diag_growth_bug(self):
-        """
-        Regression test for a silly bug.
-        """
+        """Regression test for a silly bug."""
         FRAGMENT_COST = 4
         bitmask = np.array([
             [True,  False, False, False],
