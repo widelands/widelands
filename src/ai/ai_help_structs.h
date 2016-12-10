@@ -584,9 +584,7 @@ struct ManagementData {
 	}
 	int16_t get_military_number_at(uint8_t);
 	void set_military_number_at(uint8_t, int16_t);
-	//void set_mutation_rate(uint8_t value) { NOCOM
-		//mutation_rate = value;
-	//};
+	int8_t shift_weight_value(int8_t, bool = true);
 	bool test_consistency();
 
 private:

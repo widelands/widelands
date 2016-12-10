@@ -330,7 +330,7 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 Immovable& ImmovableDescr::create(EditorGameBase& egbase,
                                   const Coords& coords,
                                   const Building* former_building) const {
-	Immovable& result = *new Immovable(*this, former_building);
+	Immovable& result = *new Immovable(*this, nullptr); //NOCOM
 	result.position_ = coords;
 	result.init(egbase);
 	return result;
