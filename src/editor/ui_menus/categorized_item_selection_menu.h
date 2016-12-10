@@ -149,7 +149,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
 	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {

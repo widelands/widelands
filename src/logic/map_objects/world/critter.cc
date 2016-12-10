@@ -244,7 +244,8 @@ void Critter::roam_update(Game& game, State& state) {
 		                        game.random_location(get_position(), 2),  //  Pick a random target.
 		                        3, descr().get_walk_anims()))
 			return;
-		idle_time_min = 1, idle_time_rnd = 1000;
+		idle_time_min = 1;
+		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
 	return start_task_idle(

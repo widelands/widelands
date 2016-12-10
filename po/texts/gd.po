@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-22 02:50+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Seo geama saor is Open Source (FOSS) fo cheadachas GNU General Public Li
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Gheibh thu barrachd fiosrachaidh air FOSS is an GPL air an làrach-lìn a leanas: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -78,7 +78,7 @@ msgstr "Air Windows, lorgaidh tu am faidhle air a bheil COPYING.txt sa phasgan s
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "Air MacOS, lorgaidh tu am faidhle air a bheil COPYING san tasg-lann a luchdaich thu a-nuas on làrach-lìn."
+msgstr "Air MacOS, lorgaidh tu am faidhle air a bheil COPYING san tasglann a luchdaich thu a-nuas on làrach-lìn."
 
 #: ../../data/txts/LICENSE.lua:34
 msgid ""
@@ -207,8 +207,8 @@ msgid "Campaign Story"
 msgstr "Sgeulachd nan iomairtean"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Ceannard"
+msgid "Chieftains"
+msgstr "Ceannardan"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -415,7 +415,7 @@ msgstr "Roghainnean a’ chliant"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr "Tha liosta dhe na h-uile cliant air an tabh deas, a’ gabhail a-steach thu fhèin. ’S urrainn dhut do dhreuchd a shuidheachadh leis a’ phutain às dèidh d’ far-ainm. Seo na dreuchdan a tha ri làimh:"
+msgstr "Tha liosta dhe na h-uile cliant air an tabh deas, a’ gabhail a-steach thu fhèin. ’S urrainn dhut do dhreuchd a shuidheachadh leis a’ phutan às dèidh d’ far-ainm. Seo na dreuchdan a tha ri làimh:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
@@ -426,8 +426,8 @@ msgstr "An cluicheadair aig a bheil bratach leis an dath seo. Ma thagh barrachd 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Modh amhairc, ’s e seo gum faic thu a h-uile rud ach cha bhi smachd agad air cluicheadair"
+"player."
+msgstr "Modh amhairc, ’s e seo gum faic thu a h-uile rud ach cha bhi smachd agad air cluicheadair."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -463,13 +463,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seòrsa de thogalaichean, bhathar is luchd-obrach leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
+"with) and the tribe and team for computer players."
+msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seata de thogalaichean, bhathar is obraichean leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr "’S urrainn do gach cliant a bhios ceangailte ri cluicheadair (nach eil ’na amharc) treubh is sgioba a’ chluicheadair sin a shuidheachadh."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -495,7 +495,7 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. M
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Tog bothan maoir-choille is ionad-àraich èisg an-còmhnaidh ach nach ruith fiodh no biadh ort."
+msgstr "Tog taigh planntair-choille is ionad-àraich èisg an-còmhnaidh ach nach ruith am fiodh no biadh ort."
 
 #: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
 msgid ""
@@ -542,7 +542,7 @@ msgstr "Ma chumas tu Alt sìos, nì seo suids dhan inneal dàrnach eile (ma tha 
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr "’S urrainn dhut meud an raoin a thèid a thaghadh mu chùrsair na luchaige agad a shuidheachadh sa bhad leis na h-iuchraichean àireimh (0 - 9)."
 

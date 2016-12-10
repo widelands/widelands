@@ -35,10 +35,7 @@
 #include "wlapplication.h"
 
 namespace {
-
-using namespace Widelands;
-
-UI::Checkbox* create_critter_checkbox(UI::Panel* parent, const CritterDescr& critter_descr) {
+UI::Checkbox* create_critter_checkbox(UI::Panel* parent, const Widelands::CritterDescr& critter_descr) {
 	const Image* pic = critter_descr.representative_image();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i(0, 0), pic, critter_descr.descname());
 	const int kMinClickableArea = 24;
@@ -56,7 +53,7 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
 	      this, world.editor_critter_categories(), world.critters(),
-	      [this](UI::Panel* cb_parent, const CritterDescr& critter_descr) {
+			[this](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
 		   },
 	      [this] { select_correct_tool(); }, &tool));

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 16:18+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 16:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -78,8 +78,8 @@ msgstr "Taigh clachair is bun-structar mèinnearachd"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
 msgstr "Tog taigh clachair agus bun-structar mèinnearachd ’s dèanadais slàn (mèinn guail agus / no sloc guail-fhiodha, mèinn iarainn, ceàrdach acainnean, ceàrdach arm, ceàrdach armachd agus ceàrdach leaghadair)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
@@ -112,9 +112,9 @@ msgstr "’S dòcha gum bi feum agad air taigh-sealgair, fail, fìon-lios agus t
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
 msgstr "Tha e suas riut fhèin na tha thu airson togail. ach thoir an aire – bidh mèinnean guail ’s iarainn feumach air leann agus mèinnean marmoir ’s òir air fìon agus bidh gach mèinn feumach air greimeagan co-dhiù a nì thu de dh’aran no feòil no iasg."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
@@ -331,8 +331,8 @@ msgstr "Tha Saledus air a thogail"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
 msgstr "A dhiathan, abair thusa gur e deagh-fhortan a tha seo! Tha dà bheinn eile ann agus coltas air an dàrna tè gu bheil grunn guail innte agus clach-iarainn san tè eile. Mholainn-sa gun tog sibh mèinnean iarainn ’s guail (no sluic guail-fhiodha) sa bhad agus ceàrdaichean leaghadair, acainnean, armachd ’s arm."
 

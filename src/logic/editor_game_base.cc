@@ -320,23 +320,27 @@ Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Pl
 Create an immovable at the given location.
 If tribe is not zero, create a immovable of a player (not a PlayerImmovable
 but an immovable defined by the players tribe)
-Does not perform any placability checks.
+Does not perform any placeability checks.
+If this immovable was created by a building, 'former_building' can be set in order to display
+information about it.
 ===============
 */
 Immovable& EditorGameBase::create_immovable(const Coords& c,
                                             DescriptionIndex const idx,
-                                            MapObjectDescr::OwnerType type) {
+                                            MapObjectDescr::OwnerType type,
+                                            const Building* former_building) {
 	const ImmovableDescr& descr =
 	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
 	                                                 world().get_immovable_descr(idx));
 	assert(&descr);
 	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
-	return descr.create(*this, c);
+	return descr.create(*this, c, former_building);
 }
 
 Immovable& EditorGameBase::create_immovable(const Coords& c,
                                             const std::string& name,
-                                            MapObjectDescr::OwnerType type) {
+                                            MapObjectDescr::OwnerType type,
+                                            const Building* former_building) {
 	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
@@ -353,7 +357,7 @@ Immovable& EditorGameBase::create_immovable(const Coords& c,
 			   name.c_str());
 		}
 	}
-	return create_immovable(c, idx, type);
+	return create_immovable(c, idx, type, former_building);
 }
 
 /**
@@ -531,7 +535,8 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 /// This conquers a given area because of a new (military) building that is set
 /// there.
-void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area, bool conquer_guarded_location) {
+void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
+                                  bool conquer_guarded_location) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -605,8 +610,8 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 // testsuite).
 void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
                                      bool const conquer,
-									 PlayerNumber const preferred_player,
-									 bool const conquer_guarded_location_by_superior_influence,
+                                     PlayerNumber const preferred_player,
+                                     bool const conquer_guarded_location_by_superior_influence,
                                      bool const neutral_when_no_influence,
                                      bool const neutral_when_competing_influence) {
 	assert(0 <= player_area.x);
