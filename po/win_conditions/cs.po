@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-02 08:04+0000\n"
-"PO-Revision-Date: 2016-12-02 08:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-04 16:07+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "Na této mapě nejsou žádné artefakty. To by se nemělo stát. Prosí
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Artifact Found"
-msgstr ""
+msgstr "Nalezen artefakt"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
@@ -133,7 +133,7 @@ msgstr[2] "Celkem: %i bodů"
 
 #: ../../data/scripting/win_conditions/collectors.lua:141
 msgid "The game has ended."
-msgstr ""
+msgstr "Hra skončila."
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:148

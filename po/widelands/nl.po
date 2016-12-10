@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 21:14+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +459,7 @@ msgstr "Spelers: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: –"
-msgstr ""
+msgstr "Spelers: –"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -809,7 +809,7 @@ msgstr "Fout Tijdens Opslaan Kaart!\nOpgeslagen kaart is mogelijk onbruikbaar!\n
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Voer mapnaam in: "
 
 #: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
@@ -2989,14 +2989,14 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s)."
-msgstr ""
+msgstr "Rapporteer a.u.b. dit probleem om ons te helpen Widelands te verbeteren. Je kunt gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder Windows). Je gebruikt build %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1043
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Voeg deze informatie a.u.b. toe aan je rapport.\n\nWidelands probeert het spel te bewaren als er een fout optreedt tijdens het spel. Vaak - helaas niet altijd - is het mogelijk om dit bestand te laden en verder te spelen."
 
 #: ../../src/wui/actionconfirm.cc:157
 msgid "Destroy building?"
@@ -3074,14 +3074,14 @@ msgstr "In bezit:"
 
 #: ../../src/wui/building_statistics_menu.cc:84
 msgid "Under Construction:"
-msgstr "In opbouw:"
+msgstr "In aanbouw:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:91
 #: ../../src/wui/building_statistics_menu.cc:634
 msgid "Low Productivity"
-msgstr ""
+msgstr "Lage Productiviteit"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'

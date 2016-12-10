@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 16:09+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 18:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -499,7 +499,7 @@ msgstr "Ach cuimhnichibh oirbh – is ar dìleab a tha sna coilltean seo a dh’
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "Mar sin, bu chòir dhuinn bothanan maoir-choille a thogail ach an cuireadh sinn craobhan ùra an àite na feadhna a leag sinn agus togamaid iad cho faisg air a’ bhothan coillteir ’s a ghabhas."
+msgstr "Mar sin, bu chòir dhuinn bothain maoir-choille a thogail ach an cuireadh sinn craobhan ùra an àite na feadhna a leag sinn agus togamaid iad cho faisg air a’ bhothan coillteir ’s a ghabhas."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
@@ -737,7 +737,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "Tha raon mòr gu tuath air a’ bheinn mhòr – nach cleachd sinn an t-àite a thug Màthair Nàdar dhuinn gus tuathanas a thogail? Tha mo mhiann-sa air aran tùr ùr a-nis…"
+msgstr "Tha raon mòr gu tuath air a’ bheinn mhòr – nach cleachd sinn an t-àite a thug Màthair Nàdar dhuinn gus tuathanas a thogail? Tha mo mhiann-sa air aran tur ùr a-nis…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
