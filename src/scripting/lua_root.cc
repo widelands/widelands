@@ -299,7 +299,7 @@ World
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_critter_type),
-	METHOD(LuaWorld, new_editor_critter_category),
+   METHOD(LuaWorld, new_editor_critter_category),
    METHOD(LuaWorld, new_editor_immovable_category),
    METHOD(LuaWorld, new_editor_terrain_category),
    METHOD(LuaWorld, new_immovable_type),
@@ -486,7 +486,6 @@ int LuaWorld::new_editor_terrain_category(lua_State* L) {
 	}
 	return 0;
 }
-
 
 /* RST
 	.. method:: new_editor_critter_category(table)
