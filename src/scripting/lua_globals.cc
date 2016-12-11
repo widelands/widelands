@@ -20,6 +20,7 @@
 #include "scripting/lua_globals.h"
 
 #include <exception>
+#include <memory>
 
 #include <boost/format.hpp>
 
