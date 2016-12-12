@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-21 08:44+0000\n"
-"PO-Revision-Date: 2016-09-23 09:44+0000\n"
+"POT-Creation-Date: 2016-11-20 09:44+0000\n"
+"PO-Revision-Date: 2016-11-24 13:40+0000\n"
 "Last-Translator: Zlatko Savich <zlajonja@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -291,7 +291,7 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Breza (Mladica)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:35
 msgid "Birch (Pole)"
@@ -303,7 +303,7 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/birch/init.lua:84
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Breza (Stara)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:85
 msgid "Birch"

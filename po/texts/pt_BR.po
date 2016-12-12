@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-21 15:05+0000\n"
-"Last-Translator: Renata Campos <renata.p.campos@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +49,7 @@ msgstr "Este jogo é gratuito e de Fonte Aberta(Open Source) (FOSS), licenciado 
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
@@ -207,8 +207,8 @@ msgid "Campaign Story"
 msgstr "Campanha"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Chefe"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -426,7 +426,7 @@ msgstr ""
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
+"player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
@@ -463,13 +463,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -542,9 +542,9 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "As teclas numéricas (1-0) permitem definir diretamente o tamanho da área selecionada em torno do seu cursor do mouse."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

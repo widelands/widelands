@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-06-29 06:36+0000\n"
-"PO-Revision-Date: 2016-07-05 19:40+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,9 +77,9 @@ msgstr "Stenbrud og mineinfrastruktur"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
-msgstr "Byg et stenhuggeri og så en fuldstændig mine- og produktionsinfrastruktur (kulmine og/eller trækulsovn, jernmalmmine, værktøjssmedje, våbensmedje, rustningssmedje og smelteværker)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -111,10 +111,10 @@ msgstr "Måske skal du også bruge et jægerhus, en svinestald, en vingård og n
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr "Det er op til dig hvad du ønsker at bygge. Men husk - kul- og jernmalmminer kræver øl, marmor- og guldminer kræver vin og alle miner kræver mindst fødevarer, som fremstilles fra brød ELLER kød ELLER fisk."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -330,8 +330,8 @@ msgstr "Saledus er begejstret"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
 msgstr ""
 
@@ -341,25 +341,25 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "For alle disse større bygninger skal vi bruge bedre og mere elegante byggematerialer. Så du skal bygge et hus for stenhuggeren, som vil fremstille søjler af marmor."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199
 msgid "After everything, we can now begin to live like we did in Fremil."
-msgstr ""
+msgstr "Efter alt det vi har været igennem, så kan vi nu begynde et liv som vi kender fra Fremil."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Mad for minearbejderne"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Amalea træder ind ..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutius, glemte du ikke noget vigtigt?"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
@@ -368,14 +368,14 @@ msgid ""
 "a more comfortable life, but the people working in the mines are unhappy "
 "with the current situation. They have to do hard work and have no time for "
 "making their own food."
-msgstr ""
+msgstr "Det er selvfølgelig en god ide at bygge miner, som vil give os et mere komfortabelt liv, men folkene, der arbejder i minerne er utilfredse med den nuværende situatoin. De skal udføre et hårdt arbejde og har ikke tid til at lave deres egen mad."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:213
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Hvad med at hjælpe dem? Jeg kan ikke præcis fortælle hvad vi skal bruge ... men her er mine anbefalinger:"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid "Our New Tavern"
@@ -390,14 +390,14 @@ msgstr "Amalea  smiler"
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Jeg har lige besøgt vores nye værtshus »Ved palmerne«. Øllen der serverer er god. Du bør også nyde en skænk der."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr ""
+msgstr "Det er godt at se, at vi nu har et varmere og mere bekendt miljø på vores ø. Mange tak, Lutius."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:228
 msgid "The Barbarians"
@@ -409,7 +409,7 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
+msgstr "Ved guderne! Det er virkelig frygteligt. Det ser ud til at vi står over for en test - og det ser ud til, at Saledus havde ret om sin frygt vedrørende det skibsvrag han fandt."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
@@ -417,7 +417,7 @@ msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr ""
+msgstr "I dag, mens jeg gik ned langs vores østlige kyst, fik jeg et shok. Jeg fik øje på en af disse hadede, onde, barbarstammer, som vi har haft så mange problemer med tidligere."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:238
@@ -426,17 +426,17 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Først var jeg naiv og håbede at de var fredelige, men så snart at de så mig, løb de mod mig og begyndte at angribe mig med deres kastespyd. Takket være gud kunne jeg flygte og skjule mig, før jeg trak mig tilbage til vores koloni i ly af mørket."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:241
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
-msgstr ""
+msgstr "Vi må straks begynde at bygge stærkere militære bygninger."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "Command to Attack"
-msgstr ""
+msgstr "Kommando til angreb"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:250
@@ -444,7 +444,7 @@ msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
+msgstr "Det er gode nyheder. Den første større militære bygning er færdig og mineinfrastrukturen bliver bedre og bedre. Nu bør vi forberede os for kamp."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:263
@@ -455,7 +455,7 @@ msgstr "Sejr"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:259
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
-msgstr ""
+msgstr "I dag er en stolt dag. Vi har kæmpet for vores nye hjem og var sejrrig."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
@@ -463,17 +463,17 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Der er stadig nogle få barbarer skjult på vores ø, men jeg er sikker på, at vi snart vil finde dem. Hver barbar som ikke angriber os vil blive sat i en båd med de andre fredelige og sendt tilbage til deres land."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
-msgstr ""
+msgstr "Du har etableret en fungerende økonomi, trænet nye soldater og fordrevet barbarerne fra øen."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
 msgid "As Time is Running By"
-msgstr ""
+msgstr "Som tiden går"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
 msgid "7 days later…"
@@ -488,7 +488,7 @@ msgstr "En besked"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr ""
+msgstr "I dag landede en brevdue på vores ø. Den medbragte en besked, som fylder mig med mørke tanker og øger min frygt."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
@@ -497,7 +497,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
+msgstr "Beskeden var adresseret til mig, bønfaldt mig om at komme tilbage til Fremil. Den sagde, at imperiet er i krig med barbarerne. De blev angrebet fra nord af stammen, som jeg ikke måtte angribe. Det er tydeligt for mig, hvad jeg må gøre ..."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
 msgid ""

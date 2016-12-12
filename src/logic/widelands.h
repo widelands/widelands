@@ -33,7 +33,9 @@ namespace Widelands {
 //  Type definitions for the game logic.
 using MilitaryInfluence = uint16_t;
 
-using PlayerNumber = uint8_t;  /// 5 bits used, so 0 .. 31
+/// 5 bits used, so 0 .. 31
+/// Data type must match kMaxPlayers in graphics/playercolor.h
+using PlayerNumber = uint8_t;
 inline PlayerNumber neutral() {
 	return 0;
 }

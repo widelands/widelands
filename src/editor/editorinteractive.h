@@ -154,20 +154,13 @@ private:
 	// Registers the overlays for player starting positions.
 	void register_overlays();
 
-	void tool_menu_btn();
-	void toolsize_menu_btn();
-	void toggle_mainmenu();
-	void toggle_playermenu();
-	void toggle_help();
+	void on_buildhelp_changed(const bool value) override;
 
 	//  state variables
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
 	bool is_painting_;
-
-	std::unique_ptr<Tools> tools_;
-	std::unique_ptr<EditorHistory> history_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
 	   field_resource_changed_subscriber_;
@@ -184,15 +177,13 @@ private:
 	UI::UniqueWindow::Registry resourcesmenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
-	UI::Button toggle_main_menu_;
-	UI::Button toggle_tool_menu_;
-	UI::Button toggle_toolsize_menu_;
-	UI::Button toggle_minimap_;
-	UI::Button toggle_buildhelp_;
-	UI::Button toggle_player_menu_;
-	UI::Button undo_;
-	UI::Button redo_;
-	UI::Button toggle_help_;
+	UI::Button* toggle_buildhelp_;
+	UI::Button* reset_zoom_;
+	UI::Button* undo_;
+	UI::Button* redo_;
+
+	std::unique_ptr<Tools> tools_;
+	std::unique_ptr<EditorHistory> history_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

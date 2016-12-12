@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2011 - 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/map_objects/tribes/ship.h"
+#include "wui/shipwindow.h"
 
 #include "base/macros.h"
 #include "economy/portdock.h"
@@ -29,10 +29,9 @@
 #include "ui_basic/box.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
-#include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/itemwaresdisplay.h"
 
+namespace {
 static const char pic_goto[] = "images/wui/ship/menu_ship_goto.png";
 static const char pic_destination[] = "images/wui/ship/menu_ship_destination.png";
 static const char pic_sink[] = "images/wui/ship/menu_ship_sink.png";
@@ -47,70 +46,51 @@ static const char pic_scout_e[] = "images/wui/ship/ship_scout_e.png";
 static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
 static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
 static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port_space.png";
+}  // namespace
 
-namespace Widelands {
+using namespace Widelands;
 
-/**
- * Display information about a ship.
- */
-struct ShipWindow : UI::Window {
-	ShipWindow(InteractiveGameBase& igb, Ship& ship, const std::string& title);
-	virtual ~ShipWindow();
+ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
+   : Window(&igb, "shipwindow", 0, 0, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
+	init(false);
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
+	   [this](const Widelands::NoteShipWindow& note) {
+		   if (note.serial == ship_.serial()) {
+			   switch (note.action) {
+			   // The ship state has changed, e.g. expedition canceled
+			   case Widelands::NoteShipWindow::Action::kRefresh:
+				   init(true);
+				   break;
+			   // The ship is no more
+			   case Widelands::NoteShipWindow::Action::kClose:
+				   // Stop this from thinking to avoid segfaults
+				   set_thinks(false);
+				   die();
+				   break;
+			   default:
+				   break;
+			   }
+		   }
+		});
+}
 
-	void think() override;
-
-	UI::Button* make_button(UI::Panel* parent,
-	                        const std::string& name,
-	                        const std::string& title,
-	                        const std::string& picname,
-	                        boost::function<void()> callback);
-
-	void act_goto();
-	void act_destination();
-	void act_sink();
-	void act_debug();
-	void act_cancel_expedition();
-	void act_scout_towards(WalkingDir);
-	void act_construct_port();
-	void act_explore_island(IslandExploreDirection);
-
-private:
-	InteractiveGameBase& igbase_;
-	Ship& ship_;
-
-	UI::Button* btn_goto_;
-	UI::Button* btn_destination_;
-	UI::Button* btn_sink_;
-	UI::Button* btn_debug_;
-	UI::Button* btn_cancel_expedition_;
-	UI::Button* btn_explore_island_cw_;
-	UI::Button* btn_explore_island_ccw_;
-	UI::Button*
-	   btn_scout_[LAST_DIRECTION];  // format: DIRECTION - 1, as 0 is normally the current location.
-	UI::Button* btn_construct_port_;
-	ItemWaresDisplay* display_;
-};
-
-ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, const std::string& title)
-   : Window(&igb, "shipwindow", 0, 0, 0, 0, title), igbase_(igb), ship_(ship) {
-	assert(!ship_.window_);
+void ShipWindow::init(bool avoid_fastclick) {
 	assert(ship_.get_owner());
-	ship_.window_ = this;
 
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 
-	display_ = new ItemWaresDisplay(vbox, *ship.get_owner());
-	display_->set_capacity(ship.descr().get_capacity());
-	vbox->add(display_, UI::Align::kHCenter, false);
+	display_ = new ItemWaresDisplay(vbox_.get(), *ship_.get_owner());
+	display_->set_capacity(ship_.descr().get_capacity());
+	vbox_->add(display_, UI::Align::kHCenter, false);
 
 	// Expedition buttons
 	if (ship_.state_is_expedition()) {
-		UI::Box* exp_top = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_top, UI::Align::kHCenter, false);
-		UI::Box* exp_mid = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_mid, UI::Align::kHCenter, false);
-		UI::Box* exp_bot = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-		vbox->add(exp_bot, UI::Align::kHCenter, false);
+		UI::Box* exp_top = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_top, UI::Align::kHCenter, false);
+		UI::Box* exp_mid = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_mid, UI::Align::kHCenter, false);
+		UI::Box* exp_bot = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+		vbox_->add(exp_bot, UI::Align::kHCenter, false);
 
 		btn_scout_[WALK_NW - 1] =
 		   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
@@ -160,8 +140,8 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, const std::string& 
 	}
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(buttons, UI::Align::kLeft, false);
+	UI::Box* buttons = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+	vbox_->add(buttons, UI::Align::kLeft, false);
 
 	btn_goto_ = make_button(
 	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
@@ -188,17 +168,13 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship, const std::string& 
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_, UI::Align::kLeft, false);
 	}
-	set_center_panel(vbox);
+	set_center_panel(vbox_.get());
 	set_thinks(true);
-
-	center_to_parent();
-	move_out_of_the_way();
 	set_fastclick_panel(btn_goto_);
-}
-
-ShipWindow::~ShipWindow() {
-	assert(ship_.window_ == this);
-	ship_.window_ = nullptr;
+	if (!avoid_fastclick) {
+		move_out_of_the_way();
+		warp_mouse_to_fastclick_panel();
+	}
 }
 
 void ShipWindow::think() {
@@ -273,19 +249,19 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	igbase_.move_view_to(ship_.get_position());
+	igbase_.center_view_on_coords(ship_.get_position());
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
 	if (PortDock* destination = ship_.get_destination(igbase_.egbase())) {
-		igbase_.move_view_to(destination->get_warehouse()->get_position());
+		igbase_.center_view_on_coords(destination->get_warehouse()->get_position());
 	}
 }
 
 /// Sink the ship if confirmed
 void ShipWindow::act_sink() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		igbase_.game().send_player_sink_ship(ship_);
 	} else {
 		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
@@ -299,7 +275,7 @@ void ShipWindow::act_debug() {
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		igbase_.game().send_player_cancel_expedition_ship(ship_);
 	} else {
 		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
@@ -335,52 +311,3 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 		return;
 	igbase_.game().send_player_ship_explore_island(ship_, direction);
 }
-
-/**
- * Show the window for this ship as long as it is not sinking:
- * either bring it to the front, or create it.
- */
-void Ship::show_window(InteractiveGameBase& igb, bool avoid_fastclick) {
-	// No window, if ship is sinking
-	if (ship_state_ == ShipStates::kSinkRequest || ship_state_ == ShipStates::kSinkAnimation)
-		return;
-
-	if (window_) {
-		if (window_->is_minimal())
-			window_->restore();
-		window_->move_to_top();
-	} else {
-		const std::string& title = get_shipname();
-		new ShipWindow(igb, *this, title);
-		if (!avoid_fastclick)
-			window_->warp_mouse_to_fastclick_panel();
-	}
-}
-
-/**
- * Close the window for this ship.
- */
-void Ship::close_window() {
-	if (window_) {
-		delete window_;
-		window_ = nullptr;
-	}
-}
-
-/**
- * refreshes the window of this ship - useful if some ui elements have to be removed or added
- */
-void Ship::refresh_window(InteractiveGameBase& igb) {
-	// Only do something if there is actually a window
-	if (window_) {
-		Point window_position = window_->get_pos();
-		close_window();
-		show_window(igb, true);
-		// show window could theoretically fail if refresh_window was called at the very same moment
-		// as the ship begins to sink
-		if (window_)
-			window_->set_pos(window_position);
-	}
-}
-
-}  // namespace Widelands

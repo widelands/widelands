@@ -7,14 +7,14 @@
 # GunChleoc, 2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
-# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 12:29+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
@@ -46,7 +46,7 @@ msgid "Garrisons soldiers to expand your territory."
 msgstr "Katonákat szállásol be hogy terjeszkedj."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
@@ -114,6 +114,14 @@ msgid ""
 "blackroot."
 msgstr "A feketegyökér termesztőnek átlagosan %1% szükséges, hogy elvessen és leszedjen egy kötegnyi feketegyökeret."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -246,9 +254,9 @@ msgstr "Hegyes terepen vasércet ás ki a földből."
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Feketegyökeret és kukoricát őröl feketegyökérlisztté és kukoricalisztté."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -287,6 +295,14 @@ msgid ""
 "between ports."
 msgstr "Hajókat készít, amelyeket tengerentúli gyarmatosításra és kikötők közti kereskedelemre használnak."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -407,8 +423,8 @@ msgstr "A barbár fegyverkészítő műhely a köztes termelőhely három épül
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:67
-#: ../../data/tribes/scripting/help/global_helptexts.lua:97
+#: ../../data/tribes/scripting/help/global_helptexts.lua:69
+#: ../../data/tribes/scripting/help/global_helptexts.lua:99
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1328,8 +1344,8 @@ msgstr "A barbár katonákat nem lehet a „Védelem” képességben képezni, 
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:80
-#: ../../data/tribes/scripting/help/global_helptexts.lua:96
+#: ../../data/tribes/scripting/help/global_helptexts.lua:82
+#: ../../data/tribes/scripting/help/global_helptexts.lua:98
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1546,10 +1562,10 @@ msgstr "Gyógyítás:"
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként"
-msgstr[1] "A beszállásolt katonák %d életerő pontot gyógyulnak másodpercenként"
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1743,30 +1759,30 @@ msgid "%s or better"
 msgstr "%s vagy jobb"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:646
+#: ../../data/tribes/scripting/help/building_help.lua:647
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Munkás használja:"
 msgstr[1] "Munkások használják:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:653
 msgid "Experience levels:"
 msgstr "Tapasztalati szintek:"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:653
-#: ../../data/tribes/scripting/help/building_help.lua:662
+#: ../../data/tribes/scripting/help/building_help.lua:655
+#: ../../data/tribes/scripting/help/building_help.lua:664
 #: ../../data/tribes/scripting/help/worker_help.lua:157
 #: ../../data/tribes/scripting/help/worker_help.lua:166
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s erre: %s (%s TP)"
 
-#: ../../data/tribes/scripting/help/building_help.lua:685
+#: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Production"
 msgstr "Termelés"
 
-#: ../../data/tribes/scripting/help/building_help.lua:686
+#: ../../data/tribes/scripting/help/building_help.lua:688
 msgid "Performance:"
 msgstr "Teljesítmény:"
 
@@ -1920,131 +1936,164 @@ msgstr "Otthon"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 0-9"
-msgstr "(Ctrl +) 0-9"
+msgid "(Ctrl +) 1-9"
+msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr "Jegyezz meg helyszíneket és ugorj korábban megjegyzett helyszínekre"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/tribes/scripting/help/controls.lua:61
+msgctxt "hotkey"
+msgid "(Ctrl +) +"
+msgstr "(Ctrl +) +"
+
+#: ../../data/tribes/scripting/help/controls.lua:61
+msgid "Increase zoom"
+msgstr "Közelítés növelése"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgctxt "hotkey"
+msgid "(Ctrl +) -"
+msgstr "(Ctrl +) -"
+
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgid "Decrease zoom"
+msgstr "Közelítése csökkentése"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgctxt "hotkey"
+msgid "(Ctrl +) 0"
+msgstr "(Ctrl +) 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgid "Reset zoom"
+msgstr "Közelítés visszaállítása"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Go to the previous location"
 msgstr "Ugorj az előző helyszínre"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:69
 msgid "Go to the next location"
 msgstr "Ugorj a következő helyszínre"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Take a screenshot"
 msgstr "Képernyőkép készítése"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgid "Quit the game immediately"
 msgstr "Azonnali kilépés a játékból"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Megjeleníti a hibakereső konzolt (csak hibakeresési fordítás esetén)"
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Az üzenetablakban a következő gyorsbillentyűk használhatóak:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show all messages"
 msgstr "Minden üzenet megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show geologists’ messages only"
 msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show economy messages only"
 msgstr "Csak a gazdasági üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show seafaring messages only"
 msgstr "Csak a hajózási üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show warfare messages only"
 msgstr "Csak a hadi üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show scenario messages only"
 msgstr "Csak a küldetés üzeneteinek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Jump to the location corresponding to the current message"
 msgstr "Ugrás arra a helyre, amelyről a kiválasztott üzenet szól"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Archive/Restore the current message"
 msgstr "A jelenlegi üzenetet archiválása/helyreállítása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Törlés"
@@ -2065,24 +2114,24 @@ msgstr[1] "Elfogyasztott áruk:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:21
-#: ../../data/tribes/scripting/help/global_helptexts.lua:43
+#: ../../data/tribes/scripting/help/global_helptexts.lua:23
+#: ../../data/tribes/scripting/help/global_helptexts.lua:45
 msgid "Text needed"
 msgstr "Szöveg kellene ide"
 
 #. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
 #. hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:32
+#: ../../data/tribes/scripting/help/global_helptexts.lua:34
 msgid "Source needed"
 msgstr "Forrás kellene ide"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:54
+#: ../../data/tribes/scripting/help/global_helptexts.lua:56
 msgid "Calculation needed"
 msgstr "Kiszámítás kellene ide"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:95
+#: ../../data/tribes/scripting/help/global_helptexts.lua:97
 msgid "%1% and %2%"
 msgstr "%1% és %2%"
 
@@ -2102,20 +2151,28 @@ msgstr "Épületek"
 msgid "About Widelands"
 msgstr "A Widelands névjegye"
 
-#: ../../data/tribes/scripting/help/ware_help.lua:34
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. Languages using Chinese script probably want to lose the blank space here.
+#: ../../data/tribes/scripting/help/ware_help.lua:33
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#: ../../data/tribes/scripting/help/ware_help.lua:36
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
 msgstr "Rendeltetés"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-#: ../../data/tribes/scripting/help/ware_help.lua:54
+#: ../../data/tribes/scripting/help/ware_help.lua:56
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
 msgstr "Termelő"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:97
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Termelt áru:"
@@ -2123,7 +2180,7 @@ msgstr[1] "Termelt áruk:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:158
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Fogyasztó"
@@ -3291,9 +3348,9 @@ msgstr "Ennek a lándzsának vasból van a hegye. A fegyverkovács műhelyben k�
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
-msgstr "Ez a közepes szigony. A fegyverkovács műhelyben készül, és képzett katonák használják a kazamatában – élelemmel együtt – támadási szintjük 1.-ről 2. szintre fejlesztéséhez."
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3394,6 +3451,15 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Faszenet éget."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TODO(GunChleoc): This is unused
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -3450,9 +3516,9 @@ msgstr "A vadász jó hússal látja el a hódítókat."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Feketegyökeret és kukoricát őröl feketegyökérlisztté és kukoricalisztté."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3

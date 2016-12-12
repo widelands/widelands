@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-24 07:02+0000\n"
-"PO-Revision-Date: 2016-09-27 09:51+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-04 16:30+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -87,7 +87,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Tato hra je poskytována tak-jak-je a bez jakékoli záruky. Pro více informací a podporu se na nás obrať na stránkách %1% (Stránky, Wiki, Fórum na dotazy nebo obecnou podporu), %2% (Hlášení chyb), a %3% (Překlady)."
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
@@ -105,7 +105,7 @@ msgstr "Navštiv domovskou stránku projektu Widelands:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands je licencováno pod GNU General Public License (GPL). Pro více informací se podívejte do souboru \"COPYING\"."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -118,7 +118,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands je po stránce vlastností skoro hotový a hrát ho je zábava, ve více hráčích je to ještě lepší. I tak ale zbývá spousta práce v mnoha směrech. Pokud by si měl zájem se zapojit do jeho tvorby - ať už tvorbou grafiky, opravou chyb, přidáváním vlastností, překládáním nebo vytvářením nových map - spoj se s námi na naší domovské stránce."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -129,7 +129,7 @@ msgstr "Widelands pomoc"
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Nápovědu ke hře i editoru najdeš pod tlačítkem nápověda dole v nabídce nebo stiskem %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
@@ -163,7 +163,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "Kterou verzi Widelands používáš (tj. buď číslo sestavení nebo\nčíslo revize, pokud používáš vývojovou verzi nebo denní build.)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
@@ -186,7 +186,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "Pokud máš k dispozici uloženou hru nebo záznam, na kterém je problém vidět (například pád, u kterého je těžké poznat, co ho působí), prosím přilož ho také. Více informací je také v sekci Záznamy, níže."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -209,8 +209,8 @@ msgid "Campaign Story"
 msgstr "Kampaně"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Náčelník"
+msgid "Chieftains"
+msgstr "Náčelníci"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -318,7 +318,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "Pokud potřebuješ dokumentaci nebo pomoc s Widelands nebo jeho editorem, určitě navštiv naši domovskou stránku na %s. Tam najdeš online nápovědu v naší wiki."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -330,7 +330,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands je real-time strategie šířená zdarma s otevřeným zdrojovým kódem, obsahuje kampaň pro jednoho hráče a hru více hráčů. Hra je inspirována Settlers II ale je rozmanitější a jde více do hloubky. I přes to je snadné začít hrát díky hratelným tutoriálům."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -339,7 +339,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "V této hře začneš na malém kousku světa jen s trochou surovin. Pomocí nich postupně vybuduješ impérium čítající tisíce obyvatel. Na tvé cestě k tomuto cíli vybuduješ hospodářskou infrastrukturu, objevíš nové země kolem sebe a postavíš se konkurenčním kmenům."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -352,7 +352,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands zaznamenává každou hru, kterou hraješ, do dvou souborů. První z nich má příponu .wrpl.wgf a obsahuje původní uloženou hru. Druhý má příponu .wrpl a obsahuje všechny příkazy, které byly vydány všemi hráči, jako stavba cest nebo útok na nepřítele. Zbytek názvů souborů odkazuje na čas, kdy si začal hru hrát."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -362,7 +362,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Při volbě Sledovat záznam v hlavní nabídce bude odehraná hra přesně rekonstruovaná pro sledování. Upozorňujeme však, že i velmi malá změna v datech hry nebo Widelands programu může vést k tomu, že záznam nebude kompatibilní a dojde k desynchronizaci. Stejně tak dojde k desynchronizaci, když má ve hře více hráčů jeden z hráčů jinou verzi hry."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -371,7 +371,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Záznamy jsou velmi dobrým nástrojem pro odhalení chyb v logice hry a lze je použít jako přílohu k hlášení chyb. Soubory záznamů jsou ukládány do adresáře %s na Linuxu a Max OS X. V systému Windows jsou v adresáři \"replays\" tvojí Widelands instalace."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -417,19 +417,19 @@ msgstr "Nastavení klienta"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Vlevo je seznam všech klientů včetně tebe. Můžeš nastavit svou roli tlačítkem vedle tvé přezdívky. Dostupné role jsou:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Hráč a barva jeho vlajky. Pokud si více hráčů zvolí stejnou barvu, sdílí společně ovládání (\"mód sdíleného království\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr ""
+"player."
+msgstr "A mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -439,22 +439,22 @@ msgstr "Nastavení hráče"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "Uprostřed jsou nastavení pro hráče. Pro zahájení hry, každý z hráčů musí být jeden z následujících:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Připojeno k jednomu nebo více klientům (viz. \"Nastavení klientů\")."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Připojeno k počítačovému hráči (obličej na obrázku stejně jako text při najetí kurzoru myši, vyjadřují sílu aktuálně vybraného počítačového hráče)."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Nastaveno jako sdílená počáteční pozice s jiným hráčem."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
@@ -465,14 +465,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr ""
+"with) and the tribe and team for computer players."
+msgstr "Poslední tři může nastavit pouze hostitel, klikem na hráčovo tlačítko \"typ\". Hostitel může také nastavit startovní podmínky všech hráčů (budovy, zboží a pracovníky, které hráč dostane na začátku), kmen a týmy u počítačových hráčů."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr ""
+" and the team for that player."
+msgstr "Každý klient připojený k hráči (který není divák), může pro zvoleného hráče nastavit kmen a tým."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -484,14 +484,14 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Na pravé straně jsou informace o zvolené mapě nebo uložené hře. Tlačítko vedle názvu mapy umožňuje hostiteli hry vybrat jinou mapu. Dále hostitel může nastavit specifické podmínky vítězství a samozřejmě také zahájit hru, jakmile jsou všichni hráči nastaveni."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Některé budovy, jako například obilné pole, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
 #: ../../data/txts/tips/atlanteans.tip:6
 msgid ""
@@ -503,7 +503,7 @@ msgstr "Nikdy nezapomeň postavit domek lesníka nebo porybného, aby ti nedošl
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Pozorně sleduj své rybáře. Když se vyčerpají zásoby ryb v jejich oblasti, přestanou rybařit."
 
 #: ../../data/txts/tips/barbarians.tip:10
 msgid ""
@@ -515,44 +515,44 @@ msgstr "Nikdy nezapomeň postavit chaty pro lesníka a hajného, aby ti nedošly
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr "Obecnou nápovědu k editoru, stejně jako krátké návody můžeš najít v naší wiki na www.widelands.org"
+msgstr "Obecnou nápovědu k editoru, stejně jako krátké tutoriály můžeš najít v naší wiki na www.widelands.org"
 
 #: ../../data/txts/tips/editor.tip:6
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Můžeš vybrat vícero druhů zvířat tak, že při výběru budeš držet Ctrl. Jestliže pak klikneš na mapu, umístíš jeden ze zvolených druhů zvířat."
 
 #: ../../data/txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "Stejně jako u zvířat můžeš také vybrat vícero útvarů nebo povrchových textur pomocí Ctrl+klik."
 
 #: ../../data/txts/tips/editor.tip:14
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Držení klávesy Shift přepíná na alternativní nástroj. Ten je většinou opakem normálního nástroje (např. mazání místo umisťování objektu)."
 
 #: ../../data/txts/tips/editor.tip:18
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Držení klávesy Alt aktivuje druhý alternativní nástroj (pokud existuje)."
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Pomocí kláves čísel (1 - 0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
+msgstr "Pomocí numerických kláves (0 - 9) můžeš nastavit velikost vybrané oblasti v okolí kurzoru myši."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Mezerník funguje stejně jako v normální hře. Přepíná, zda jsou vidět místa ke stavění."
 
 #: ../../data/txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -574,7 +574,7 @@ msgstr "Předtím než postavíš důl nebo studnu, pošli na vyhlédnuté míst
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Své území můžeš rozšiřovat stavěním různých vojenských budov - strážnic, pevností, malých pevností, atd."
 
 #: ../../data/txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -609,13 +609,13 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Spravování tvých zpráv může být efektivnější: stisknuti 'N' pro přístup ke zprávám a poté stisknuti 'G' k přemístění k objektu a klávesa 'Delete' archivuje zprávy."
+msgstr "Spravování tvých zpráv může být efektivnější: stisknuti \"N\" pro přístup ke zprávám a poté stisknuti \"G\" k přemístění k objektu a klávesa \"Delete\" archivuje zprávy."
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr "Použijte ',' (čárku) a '.' (tečku) k přesunu mezi naposledy navštívenými místy ve světě."
+msgstr "Použijte \",\" (čárku) a \".\" (tečku) k přesunu mezi naposledy navštívenými místy ve světě."
 
 #: ../../data/txts/tips/general_game.tip:42
 msgid ""
@@ -655,19 +655,19 @@ msgstr "Hospodářství se skládá ze staveb a vlajek pospojovaných cestama. Z
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Můžete použít klávesy 'Page Up' a 'Page Down' k nastaveni rychlosti - ta je pak nastavena všem stejně."
+msgstr "Můžete použít klávesy \"Page Up\" a \"Page Down\" k nastaveni rychlosti - ta je pak nastavena všem stejně."
 
 #: ../../data/txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Na začátku řádku zprávy chatu můžeš použít '/me', které se přeloží na přezdívku hráče: '/me je unavený' se přeloží na -> 'Přezdívka_hráče je unavený'."
+msgstr "Můžeš použít \"/me\" na začátku zprávy: \"/me je unavený\" se zobrazí jako -> \"Přezdívka_hráče je unavený\"."
 
 #: ../../data/txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "Pro odeslání zprávy pouze jednomu hráči, napište na začátek zprávy '@jméno'."
+msgstr "Pro odeslání zprávy pouze jednomu hráči, napište na začátek zprávy \"@jméno\"."
 
 #: ../../data/txts/tips/singleplayer.tip:2
 msgid ""

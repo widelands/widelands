@@ -19,6 +19,8 @@
 
 #include "ui_basic/unique_window.h"
 
+#include <boost/bind.hpp>
+
 namespace UI {
 /*
 ==============================================================================
@@ -65,6 +67,21 @@ UniqueWindow::Registry::~Registry() {
 	delete window;
 }
 
+void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
+	assert(!on_create);
+	assert(!on_delete);
+	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
+	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
+	if (window) {
+		button->set_style(UI::Button::Style::kPermpressed);
+	}
+}
+
+void UniqueWindow::Registry::unassign_toggle_button() {
+	on_create = 0;
+	on_delete = 0;
+}
+
 /**
  * Register, position according to the registry information.
 */
@@ -80,7 +97,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 
 		registry_->window = this;
 		if (registry_->valid_pos) {
-			set_pos(Point(registry_->x, registry_->y));
+			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
 		if (registry_->on_create) {

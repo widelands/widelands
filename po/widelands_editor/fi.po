@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-17 12:44+0000\n"
-"PO-Revision-Date: 2016-08-24 19:35+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,8 +94,8 @@ msgstr "Työkalut"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
+msgid "0-9"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
@@ -112,13 +112,13 @@ msgstr "Klikkaus"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Sijoita uusia elementtejä kartalle tai kasvata karttaelementtejä 'Nosto/laskumäärä' valitsimella."
+msgstr "Sijoita uusia elementtejä kartalle, tai kasvata karttaelementtejä valitsimella ‘Nosto/laskumäärä’"
 
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Poista elementit kartalta tai vähennä karttaelementtejä 'Nosto/laskumäärä' valinnalla."
+msgstr "Poista elementit kartalta, tai vähennä karttaelementtejä valitsimella ‘Nosto/laskumäärä’"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -136,7 +136,7 @@ msgstr "Ctrl + Klikkaus"
 
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Aseta karttaelementtejä 'Asetusarvo' valinnalla."
+msgstr "Aseta karttaelementtejä valitsimella ‘Asetusarvo’"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
@@ -187,8 +187,8 @@ msgstr "Resurssit"
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
 msgid_plural "Valid Resources:"
-msgstr[0] "Validit Resurssit"
-msgstr[1] "Validit resurssit:"
+msgstr[0] "Validit Resurssit:"
+msgstr[1] "Validit Resurssit:"
 
 #: ../../data/scripting/editor/terrain_help.lua:34
 msgid "Default:"
@@ -210,11 +210,11 @@ msgstr "Puita ei tule kasvamaan täällä."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:17
+#: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Suositellut maastot "
 
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"

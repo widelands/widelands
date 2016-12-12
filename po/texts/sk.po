@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 11:14+0000\n"
-"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,8 +48,8 @@ msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) li
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Ak sa chcete dozvedieť viac o FOSS a GPL, navštívte túto webovú stránku: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -206,8 +206,8 @@ msgid "Campaign Story"
 msgstr "Kampane"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Náčelník"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -425,8 +425,8 @@ msgstr "Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, z
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom."
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -462,14 +462,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Posledné tri môže nastaviť len hostujúci klient kliknutím ľavým tlačidlom myši na tlačidlo Typ hráča. Hostujúci hráči ďalej dokážu nastaviť inicializáciu každého hráča (budovy, výrobky a pracovníkov, s ktorými hráč začína) a kmeň a tím počítačových hráčov."
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Každý klient spojený s hráčom (ktorý nie je divák) môže nastaviť kmeň aj tím tohto hráča."
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -541,9 +541,9 @@ msgstr "Podržaním klávesu Alt možno zapnúť druhý alternatívny nástroj (
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Numerické klávesy (1 - 0) vám umožňujú priamo nastaviť veľkosť označenej oblasti okolo vášho ukazovateľa myši."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

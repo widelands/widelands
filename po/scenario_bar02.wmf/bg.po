@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-08 14:14+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:03+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,7 @@ msgstr "Разбийте армията на Калитат"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr "Разбийте армията на Калитат и разширете територията си на изток"
+msgstr "Разбийте армията на Калитат и разширете територията си на изток."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid ""
@@ -308,7 +308,7 @@ msgstr "Историята продължава"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
 msgid "Boldreth says:"
-msgstr "Болдрет казва…"
+msgstr "Болдрет казва:"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
@@ -416,7 +416,7 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr "Тази сутрин открих Трон обезпокоен. Беше се завърнал от патрулиране късно през нощта и беше поседнал, подпрян на едно дърво, с поглед към лагера. Кавгите и споровете се увеличават и зимата ни стяга в хватката си. Трябва да сложим храна в складовете си, за да преживеем дългата студена зима."
+msgstr "Тази сутрин открих Трон обезпокоен. Беше се завърнал от патрулиране късно през нощта и беше поседнал, подпрян на едно дърво, с поглед към лагера. Кавгите и споровете се увеличават и зимата ни стяга в хватката си. Трябва да сложим храна в складовете си, за да преживеем дългата, студена зима!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
 msgid "The Advisor"
@@ -455,8 +455,8 @@ msgstr "Следи"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a tower,  to have a greater visual"
-" range over the area around our hall to protect our people from sudden "
+"settlement. He has instructed us to build a tower, to have a greater visual "
+"range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr "Трон ми каза, че е забелязал следи в снега в североизточния край на селището. Той ни нареди да построим кула, за да имаме по-голям обхват на видимост върху територията около залата ни, така че да защитим хората си от внезапни нападения."
 

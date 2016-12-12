@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 07:51+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:28+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -313,8 +313,8 @@ msgid ""
 msgstr "Има три начина за преместване на изгледа. Първият е да използвате стрелките на клавиатурата. Опитайте го."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
-msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr "Натиснете бутона „Добре“ и преместете изгледа, използвайки стрелките на клавиатурата"
+msgid "Click the ‘OK’ button and then move the view using the cursor keys."
+msgstr "Натиснете бутона „Добре“ и преместете изгледа, използвайки стрелките на клавиатурата."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -752,9 +752,9 @@ msgstr "бутона „Архивиране на избраното съобщ�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
-"Once you have deleted a message, another message will be selected "
+"Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr "След като изтриете едно съобщение, автоматично ще бъде избрано друго в списъка."
+msgstr "След като архивирате едно съобщение, автоматично ще бъде избрано друго в списъка."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -783,11 +783,11 @@ msgstr "Архивирайте всички съобщения във входя
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
-"To do so, open the message window by pressing ‘n’ or clicking the rightmost "
-"button at the very bottom of the screen. The newest message will be marked "
-"for you automatically. Keep clicking the ‘Archive selected message’ button "
-"until all messages have been archived and the list is empty."
-msgstr "За да направите това, отворете прозореца със съобщения, като натиснете клавиша „n“ или бутона, който е най-отдясно в долната част на екрана. Най-новото съобщение ще бъде отбелязано автоматично. Натискайте бутона „Архивиране на избраното съобщение“ докато не бъдат архивирани всички и списъкът не се изпразни."
+"To do so, open the message window by pressing ‘n’ or clicking the second "
+"button from the right at the very bottom of the screen. The newest message "
+"will be marked for you automatically. Keep clicking the ‘Archive selected "
+"message’ button until all messages have been archived and the list is empty."
+msgstr "За да направите това, отворете прозореца със съобщения, като натиснете клавиша „n“ или втория бутон от дясно наляво в долната част на екрана. Най-новото съобщение ще бъде отбелязано автоматично. Натискайте бутона „Архивиране на избраното съобщение“ докато не бъдат архивирани всички и списъкът не се изпразни."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -858,6 +858,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Да демонтирате кариерата: някой строител ще дойде от щаба и ще демонтира кариерата тухла по тухла. Така ще си върнете част от ресурсите, вложени при строежа."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Разрушете двете кариери"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

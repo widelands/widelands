@@ -3,13 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # MikeNow <m.nowot@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:16+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr "Twoja Gospodarka i jej Ustawienia"
+msgstr "Gospodarka i jej ustawienia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
@@ -30,30 +31,30 @@ msgstr "Gospodarka"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Witaj znowu. W tym samouczku, powiem Ci co możesz zrobić, żeby sprawdzić stan Twojej gospodarki."
+msgstr "Witaj ponownie. W tym samouczku nauczę cię, jak sprawdzać, czy twoja gospodarka pracuje jak trzeba."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Tworzenie sprawnie działającej gospodarki jest główną częścią Widelands. Mimo to, nie możesz bezpośrednio kierować robotnikami - będą się przystowywać do warunków jakie im stworzysz."
+msgstr "Tworzenie sprawnie działającej, rozwijającej się gospodarki jest istotą Widelands. Nie będziesz jednak bezpośrednio kierować pracownikami - zamiast tego wydajesz im ogólne dyrektywy."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "Tego właśnie nauczysz się w tym samouczku: co możesz zrobić by wytworzyć te warunki?"
+msgstr "Tego właśnie nauczysz się w tym samouczku: co możesz zrobić, by określić te dyrektywy?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
-msgstr "Spokojny Kraj"
+msgstr "Spokojny kraj"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr "Teraz coś o mapie: osiedliłeś się w ładnej dolinie między dwoma górami bogatymi w marmur, rudę żelaza i węgiel. Mieliście nadzieje na spokojne życie."
+msgstr "Teraz coś o mapie: osiedliłeś się w ładnej dolinie między dwoma górami bogatymi w marmur, rudę żelaza i węgiel. Mieliście nadzieję na spokojne życie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -61,13 +62,13 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three castles."
-msgstr "Ale pewnego dnia odkryłeś jałowe pustkowie z uposzczonymi budynkami na wschodzie. Niosła się stamtąd dziwna aura i nikt nie ośmielił się tam pójść. Mimo to, granica nie mogła zostać bez obrony, więc zbudowałeś trzy zamki."
+msgstr "Ale pewnego dnia odkryłeś jałowe pustkowie z opuszczonymi budynkami na wschodzie. Niosła się stamtąd dziwna aura i nikt nie ośmielił się tam pójść. Mimo to nie mogliście zostawić granicy bez ochrony, więc zbudowałeś trzy zamki."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr "Nie byłeś przygotowany na wojnę i teraz musisz się śpieszyć by stworzyć armie."
+msgstr "Nie byłeś przygotowany na wojnę i teraz musisz się śpieszyć, by wyszkolić armię."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
@@ -82,7 +83,7 @@ msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr "O nie, patrz: tawerna płonie! W tym całym pośpiechu gospodyni przypadkowo upuściła pochodnie. Nic jej nie jest, ale nie ugasiliśmy pożaru na czas."
+msgstr "Och nie, spójrz: tawerna płonie! W tym całym pośpiechu gospodyni przypadkowo upuściła pochodnię. Nic jej nie jest, ale nie ugasiliśmy pożaru na czas."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
@@ -96,7 +97,7 @@ msgstr "Sprawdź swoje tawerny"
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Na początek powinniśmy sprawdzić, ile tawern aktualnie mamy. Widelands pozwala Ci to łatwo sprawdzić w odpowiednim oknie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid ""
@@ -111,17 +112,17 @@ msgstr "Następnie wybierz 'Statystyki budynków'."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
 msgid "Open the building statistics window."
-msgstr "Otwórz okno statystyk budnków."
+msgstr "Otwórz okno statystyk budynków."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "You can also use the hotkey ‘b’."
-msgstr ""
+msgstr "Możesz użyć skrótu klawiszowego \"b\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr "Okno statystyk budynków pokazuje Ci przegląd budynków jakie posiadasz."
+msgstr "Okno statystyk budynków pokazuje ci przegląd budynków, jakie posiadasz."
 
 #. TRANSLATORS: "it" refers to the building statistics window
 #. TRANSLATORS: "it" refers to the stock menu window
@@ -135,34 +136,34 @@ msgstr "Otwórz je. Możesz je znaleźć w panelu statystyk."
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
-msgstr "Panel statystyk można otworzyć za pomocą drugiego guzika na dole. Pokazuje kilka okien z informacjami o grze."
+msgstr "Panel statystyk można otworzyć za pomocą drugiego przycisku na dole. Pokazuje kilka okien z informacjami o grze."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
-msgstr ""
+msgstr "Statystyki budynków"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr ""
+msgstr "To jest okno statystyk budynków. Wyświetla ono listę wszystkich posiadanych przez ciebie budynków posortowaną po rozmiarze."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:81
 msgid "Let me now explain what all those numbers mean:"
-msgstr ""
+msgstr "Pozwól, że wyjaśnię, co znaczą liczby na dole:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "\"2/1\" pod kamieniołomem: oznacza, że masz dwa kamieniołomy i jeszcze jeden jest budowany."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "''0%\": średnia produktywność wszystkich budynków tego typu. Dopiero co zacząłeś grę, więc żaden z budynków nie zaczął jeszcze pracy, ale zabiorą się do niej niebawem."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
@@ -170,48 +171,45 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "\"2/4\" pod twoją strażnicą. Budynki wojskowe wyświetlają liczbę zakwaterowanych żołnierzy zamiast produktywności. W strażnicach powinno być czterech żołnierzy, ale tylko dwóch jest w nich łącznie zakwaterowanych. To znaczy, że mamy dwa wolne miejsca - naprawdę potrzeba nam więcej wojsk."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
-msgstr ""
+msgstr "W obu przypadkach kolor (zielony -żółty - czerwony) ocenia, jak dobra jest to wartość."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "Kliknięcie na budynku da ci dostęp do wszystkich budynków tego typu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "Jeśli nie masz budynków jakiegoś typu, będzie on wyszarzony."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "Now it’s your turn"
-msgstr ""
+msgstr "Teraz twój ruch"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium Buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr ""
+msgstr "Tyle tłumaczenia na razie wystarczy. Spróbuj teraz sam. Chcemy sprawdzić, czy mamy jeszcze jakieś tawerny, więc musisz wybrać zakładkę \"Średnie budynki\". Następnie zamknij okno statystyk budynków."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Sprawdź Twoją liczbę tawern w oknie statystyk budynków."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Sprawdź, ile masz tawern."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
-msgstr ""
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Wybierz zakładkę \"Średnie budynki\" w oknie statystyk budynków."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -219,37 +217,37 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr ""
+msgstr "Pod każdym budynkiem znajdują się dwie linie. Pierwsza pokazuje, ile masz budynków i ile dodatkowo jest budowanych. Druga pokazuje średnią produktywność, jeśli jest to budynek produkcyjny lub liczbę zakwaterowanych i docelową liczbę żołnierzy w przypadku budynków wojskowych."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid "Close the building statistics window when you are done."
-msgstr "Zamknij okno statystyk budynków kiedy skończysz."
+msgstr "Zamknij okno statystyk budynków, kiedy skończysz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:105
 msgid "You closed the building statistics window!"
-msgstr ""
+msgstr "Zamknąłeś okno statystyk budynków!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr ""
+msgstr "Zamknąłeś okno statystyk budynków. Nie zauważyłem, abyś przełączył się na zakładkę średnich budynków, aby sprawdzić liczbę tawern. Czy mógłbyś być tak miły i sprawdzić to dla mnie?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:116
 msgid "Open the building statistics window again."
-msgstr ""
+msgstr "Otwórz ponownie okno statystyk budynków."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:118
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr ""
+msgstr "Zamknąłeś okno statystyk budynków bez sprawdzenia liczby posiadanych tawern."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr ""
+msgstr "Otwórz je proszę ponownie i wybierz drugą zakładkę (średnie budynki)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:128
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
@@ -266,17 +264,17 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "W porządku. Na tej liście widać, że nie masz już żadnych tawern i karczm. To znaczy, że nie produkujesz żywności. Ale zobaczmy co jest w zapasach."
+msgstr "W porządku. Na tej liście widać, że nie masz już żadnych tawern i karczm. To znaczy, że nie produkujesz żywności. Ale zobaczmy, co jest w zapasach."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
-msgstr "Kliknij na przycisk 'Zapasy'."
+msgstr "Kliknij na przycisk 'Zasoby'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
-msgstr "Możesz też używsz klawiszu 'i' (jak w 'inwentarzu') by otworzyć okno szybciej."
+msgstr "Możesz też użyć skrótu klawiszowego \"i\" (jak \"inwentarz\"), aby otworzyć okno szybciej."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."
@@ -286,102 +284,102 @@ msgstr "Otwórz okno zapasów."
 msgid ""
 "The stock menu window gives you an overview over the wares you currently "
 "have."
-msgstr "Panel zapasów pokazuje przegląd Twoich towarów."
+msgstr "Okno zapasów pokazuje przegląd twoich towarów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:153
 msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "Panel zapasów ma cztery zakładki. Pierwsza (aktualnie wybrana) pokazuje wszystkie Twoje towary, w tym te w drodze, przy flagach i w budynkach czekających na przetwarzanie."
+msgstr "Panel zapasów ma cztery zakładki. Pierwsza (aktualnie wybrana) pokazuje wszystkie twoje towary, w tym te w drodze, przy flagach i w budynkach czekających na przetwarzanie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr ""
+msgstr "Racji, jak widać, jest tylko pięć, wszystkie pewnie już w drodze. Pięć racji to raczej mało, jak na tak dużą ekonomię."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr ""
+msgstr "Druga zakładka pokazuje wszystkich pracowników, tak samo zsumowanych z dróg i z budynków."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid "Now have a look at these two tabs. When you click on the"
-msgstr ""
+msgstr "Pobaw się trochę tymi zakładkami. Gdy klikniesz"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
-msgstr ""
+msgstr "trzecią zakładkę (\"Towary w magazynach\"), przejdziemy dalej."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid "Switch to the third tab in the stock menu window."
-msgstr ""
+msgstr "Przełącz się na trzecią zakładkę w menu zasobów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:164
 msgid ""
 "Have a look at the first two tabs in the stock menu window. They show all "
 "the wares and workers you have."
-msgstr ""
+msgstr "Przyjrzyj się dwóm pierwszym zakładkom w menu zasobów. Pokazują one wszystkie twoje zapasy i pracowników."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:166
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid "When you have seen enough, switch to the third tab."
-msgstr ""
+msgstr "Jak się już napatrzysz, przejdź do trzeciej zakładki."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:173
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr ""
+msgstr "Trzecia zakładka pokazuje wszystkie towary przechowywane w kwaterze głównej, magazynach i portach. Nie są one nigdzie potrzebne i stanowią twoją rezerwę."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:174
 msgid "The fourth tab shows the same thing for workers."
-msgstr ""
+msgstr "Czwarta zakładka pokazuje to samo dla pracowników."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:175
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr ""
+msgstr "Z trzeciej zakładki wynika, że w kwaterze głównej nie ma już racji - to niedobrze!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Zamknąłeś okno zasobów!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:184
 msgid ""
 "You have closed the stock menu window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zamknąłeś okno zasobów, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać trzecią zakładkę?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 msgid "Open the stock window again."
-msgstr ""
+msgstr "Otwórz ponownie okno zasobów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
 "You closed the stock menu window before I finished telling you everything "
 "about it. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Zamknąłeś okno zasobów, zanim skończyłem ci o nim mówić. Jeśli już wszystko wiesz, czuj się uprawniony do opuszczenia tego samouczka w dowolnej chwili."
 
 #. TRANSLATORS: "it" refers to the stock menu window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "W przeciwnym przypadku otwórz je ponownie i wybierz trzecią zakładkę."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "New taverns"
-msgstr ""
+msgstr "Nowe tawerny"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "We need new taverns"
-msgstr ""
+msgstr "Potrzebujemy nowych tawern"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
@@ -389,73 +387,73 @@ msgid ""
 "than one tavern – two or three are better. Remember: as long as we don’t "
 "produce rations, our miners won’t dig for ore. And without iron, we cannot "
 "forge a single helm."
-msgstr ""
+msgstr "Skoro wiemy już, jak sprawy stoją, powinniśmy zadziałać. Powinniśmy pewnie zbudować więcej, niż jedną tawernę - dwie lub trzy powinny wystarczyć. Pamiętaj: jak długo nie będziemy produkować racji, tak długo nasi górnicy nie będą wydobywać rud. A bez żelaza nie wykujemy ani jednego hełmu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
-msgstr ""
+msgstr "Zbuduj co najmniej dwie tawerny."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
-msgstr ""
+msgstr "Zbuduj nowe tawerny."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
-msgstr ""
+msgstr "Aby nasze kopalnie mogły działać, potrzebujemy racji - im więcej, tym lepiej."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 msgid "Ware Encyclopedia"
-msgstr ""
+msgstr "Encyklopedia towarów"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid ""
 "I am not sure if you could follow my remarks. Why do we need rations to get "
 "soldiers?"
-msgstr ""
+msgstr "Nie do końca wiem, czy za mną nadążasz. Dlaczego potrzebujemy racji, aby rekrutować wojsko?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid ""
 "When you’ve played a lot, you will know such things by heart. But when "
 "you’re unsure what this tribe needs for a special ware, you can easily look "
 "it up in your tribe’s ware encyclopedia."
-msgstr ""
+msgstr "Po dłuższej grze będziesz znał takie rzeczy na pamięć. Jeśli jednak nie jesteś pewien, czego dane plemię potrzebuje do jakiegoś towaru, możesz to łatwo sprawdzić w encyklopedii towarów twojego plemienia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "This encyclopedia can be accessed via"
-msgstr ""
+msgstr "Do tej encyklopedii możesz się dostać za pomocą"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
-msgstr ""
+msgstr "przycisku pomocy na dole. Dla każdego towaru pokazuje ona krótki tekst pomocy, listę budynków produkujących towar i niezbędne towary do jego produkcji."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
 "If you want, you can try it out. A soldier needs a wooden spear and a helmet"
 " – from there on out, you can search backwards."
-msgstr ""
+msgstr "Spróbuj sam, jeśli chcesz. Żołnierz potrzebuje drewnianej włóczni i hełmu - od tych towarów możesz zacząć szukać wstecz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
-msgstr ""
+msgstr "Ustawienia priorytetów"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:239
 msgid "Send the wares where they’re needed"
-msgstr ""
+msgstr "Wysyłaj towary tam, gdzie ich potrzeba"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:240
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr ""
+msgstr "Świetnie. Nasze tawerny zostały zbudowane i dostarczają nam racji."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:241
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr ""
+msgstr "W tej chwili racje dostarczane są do wszystkich kopalni. Jeśli chcesz nadać jednej z nich specjalny priorytet, wystarczy, że otworzysz jej okno. W zakładce towarów obok każdego towaru znajdują się \"światła drogowe\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid ""
@@ -463,7 +461,7 @@ msgid ""
 "delivered less frequently. Green means that as many wares as possible should"
 " be delivered to this building, maybe because it produces something "
 "important."
-msgstr ""
+msgstr "Kliknięcie na czerwonej kropce (niski priorytet) sprawi, że towar dostarczany będzie rzadziej. Zielona oznacza, że do budynku należy dostarczać tyle towarów, ile tylko się da, być może dlatego, że produkuje on coś ważnego."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 msgid ""
@@ -471,59 +469,59 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr ""
+msgstr "W naszej sytuacji chciałbyś pewnie, aby piekarnie pracowały jak najszybciej, ponieważ dostarczają one towary do tawern, więc mógłbyś ustawić wodę dla tawern na najwyższy priorytet. Pozostałe budynki (np. ośla farma) będą w tym momencie dostawać mniej wody, ale piekarnie będą pracować szybciej."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Statystyki towarów"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "In the statistics menu, there is also a"
-msgstr ""
+msgstr "W menu statystyk znajduje się również"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
-msgstr ""
+msgstr "przycisk \"Statystyki magazynu\"."
 
 #. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid "Click on it."
-msgstr ""
+msgstr "Kliknij na nim."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:262
 msgid "Open the ware statistics window."
-msgstr ""
+msgstr "Otwórz okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
-msgstr ""
+msgstr "Otwórz okno statystyk magazynu dostępne z menu statystyk."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "In this menu window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "W tym oknie możesz wybierać towary, aby sprawdzić, jak zmienia się ich produkcja i zużycie w czasie. Spróbuj sprawdzić parę towarów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "I’ll continue as soon as you click on the"
-msgstr ""
+msgstr "Przejdziemy dalej, jak tylko klikniesz na"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
 msgid "third tab (‘Economy Health’)."
-msgstr ""
+msgstr "trzecią zakładkę (\"Stan ekonomii\")."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
-msgstr ""
+msgstr "Przełącz się na trzecią zakładkę w oknie statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr ""
+msgstr "Pierwsze dwie zakładki pokazują produkcję i zużycie dowolnego towaru. Możesz przełączać między nimi klikając na nie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
 msgid ""
@@ -531,76 +529,76 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr ""
+msgstr "W tej zakładce przedstawiona jest różnica między produkcją i zużyciem, czyli \"zdrowie ekonomii\". Od razu w niej widać, która wartość jest wyższa dla danego towaru, czyli czy go przybywa, czy ubywa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:292
 msgid "Now try this out. You can also compare it with the two previous tabs."
-msgstr ""
+msgstr "Spróbuj sam. Możesz również porównać ją z poprzednimi dwiema zakładkami."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "Click on the last tab when I should continue."
-msgstr ""
+msgstr "Kliknij na ostatniej zakładce, gdy będziesz chciał kontynuować."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Switch to the last tab in the ware statistics menu window."
-msgstr ""
+msgstr "Przejdź do ostatniej zakładki w oknie statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr ""
+msgstr "Trzecia zakładka pokazuje \"zdrowie\" danego towaru. Gdy wartość jest dodatnia, jego zapasy rosną."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
 msgid "When you have seen enough, switch to the fourth tab."
-msgstr ""
+msgstr "Jak się już napatrzysz, przejdź do czwartej zakładki."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr ""
+msgstr "W ostatniej zakładce pokazane są łączne zapasy. Będą one rosnąć, gdy \"zdrowie\" ekonomii jest dodatnie, w przeciwnym przypadku będzie spadać. Porównaj oba wykresy!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr ""
+msgstr "Ostatnie dwie zakładki to dobre mierniki tego, których towarów będzie wkrótce brakować. Pamiętaj, by sprawdzać je regularnie!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Close this window when you’re done."
-msgstr ""
+msgstr "Zamknij to okno, jak skończysz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Close the ware statistics window."
-msgstr ""
+msgstr "Zamknij okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr ""
+msgstr "Okno zapasów pokazuje, ile masz w tej chwili towarów. Porównaj informacje ze wszystkich czterech zakładek, aby zrozumieć związek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "Jak skończysz, zamknij okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:327
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Zamknąłeś okno statystyk magazynu!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:329
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zamknąłeś okno statystyk magazynu, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać trzecią zakładkę?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 msgid "Open the ware statistics window again."
-msgstr ""
+msgstr "Otwórz ponownie okno statystyk magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:340
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
@@ -608,73 +606,73 @@ msgid ""
 "You closed the ware statistics menu window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Zamknąłeś okno statystyk magazynu, zanim skończyłem ci o nim mówić. Jeśli już wszystko wiesz, czuj się uprawniony do opuszczenia tego samouczka w dowolnej chwili."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Zamknąłeś okno statystyk magazynu, choć nie skończyłem jeszcze z moimi objaśnieniami. Czy mógłbyś proszę otworzyć je ponownie i wybrać czwartą zakładkę?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr ""
+msgstr "W przeciwnym przypadku otwórz je ponownie i wybierz czwartą zakładkę."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
 msgid "Economy options"
-msgstr ""
+msgstr "Opcje gospodarki"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid ""
 "I’ve shown you our stock menu window, where you could see which wares are at"
 " the warehouses. You remember?"
-msgstr ""
+msgstr "Pokazałem ci wcześniej okno zapasów, które podawało liczbę zasobów w magazynach. Pamiętasz?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Powiem ci teraz, jak określić, ile towarów chcesz mieć docelowo. Okno pozwalające to ustawić można otworzyć z poziomu dowolnej flagi i nazywa się \"Konfiguruj gospodarkę.\""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "This is the icon."
-msgstr ""
+msgstr "To właśnie ta ikona."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
 msgid "Open this window."
-msgstr ""
+msgstr "Otwórz to okno."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:382
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "Otwórz okno \"Konfiguruj gospodarkę\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "The window can be accessed by clicking on any flag you own."
-msgstr ""
+msgstr "Do okna można się dostać klikając na dowolnej posiadanej fladze."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
-msgstr ""
+msgstr "To okno wygląda podobnie do okna zasobów, lecz ma na dole dodatkowe przyciski."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr ""
+msgstr "Najpierw musisz wybrać jeden lub więcej towarów (możesz również kliknąć i przeciągnąć lewym przyciskiem myszy). Następnie możesz wybrać docelową ilość wybranych towarów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr ""
+msgstr "Większość budynków będzie produkować jedynie, gdy zapasy w twoim magazynie będą mniejsze, niż docelowa wartość, więc dobrze jest określić, jaka ma być ta rezerwa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:396
 msgid ""
@@ -682,7 +680,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr ""
+msgstr "Na przykład: domyślną wartością dla kos jest 1. Jeśli zbudujesz farmę, tragarz weźmie kosę i zostanie rolnikiem. Nie zostanie wówczas żadna kosa, ale docelowa wartość to 1, więc twój rzemieślnik zabierze się za robienie nowej."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:397
 msgid ""
@@ -690,7 +688,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr ""
+msgstr "Jeśli zbudujesz dwie farmy, tylko jedna z nich natychmiast rozpocznie pracę. Druga będzie musiała czekać na pracownika, któremu potrzeba kosy. Gdybyś ustawił docelową wartość na 2, dostępne byłyby od razu dwie kosy i obie farmy mogłyby natychmiast zacząć pracę."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
@@ -698,84 +696,88 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr ""
+msgstr "Zmieniając docelową ilość możesz zatem określać, w które towary/narzędzia będą przerabiane twoje zasoby (w tym przypadku żelazo), lub też czy towary mają być przechowywane dopóki nie będziesz wiedział, co chcesz z nich zrobić."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr ""
+msgstr "Jedynie budynki, które zużywają towary przejmują się tymi ustawieniami. Towary produkujące za darmo (jak farmy lub studnie) będą pracować zawsze."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:407
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr ""
+msgstr "Spróbujmy teraz: obecna liczba docelowa marmurowych kolumn to 10. Zwiększ ją na wypadek konieczności szybkiej budowy fortyfikacji."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
-msgstr ""
+msgstr "Ustaw docelową liczbę marmurowych kolumn na 20 i poczekaj, aż twój kamieniarz je wyprodukuje."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Wyprodukuj 20 marmurowych kolumn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr ""
+msgstr "Czasem będziesz potrzebować zasobów szybko - szybciej, niż można je wyprodukować. Warto na takie sytuacje mieć gotową rezerwę."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:416
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr ""
+msgstr "Aby przygotować się do budowy dodatkowych fortyfikacji, powinieneś wyprodukować 20 marmurowych kolumn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:417
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr ""
+msgstr "Twój kamieniarz nie będzie produkować marmurowych kolumn, gdy nie są one potrzebne. Powinieneś zwiększyć liczbę docelową."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:418
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
 "window, you can decide how many wares of each type you wish to have in "
 "stock."
-msgstr ""
+msgstr "Aby to zrobić, kliknij na dowolnej fladze i wybierz opcję \"Konfiguruj gospodarkę\". W tym oknie możesz zdecydować, ile towarów każdego typu chcesz mieć w zapasie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:425
 msgid "Warehouse Preferences"
-msgstr ""
+msgstr "Ustawienia magazynów"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 msgid "Bring the marble columns to the front line"
-msgstr ""
+msgstr "Przenieś marmurowe kolumny na linię frontu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
-msgstr ""
+msgstr "Produkcja marmurowych kolumn idzie nieźle, ale dobrze by było, gdyby były przechowywane tam, gdzie są potrzebne."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr ""
+msgstr "Zazwyczaj produkowane towary przenosi się do najbliższego magazynu, jeśli nie potrzeba ich gdzie indziej. W tym przypadku jest to nasza kwatera główna. Bardziej przydałyby się jednak w magazynie przy naszej fortecy."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr ""
+msgstr "Każdy magazyn ma cztery przyciski do ustawiania preferencji towarów. Przesunąwszy myszkę nad każdy z nich otrzymasz podpowiedzi mówiące, co każdy z nich robi."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:440
 msgid "Bring all the marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Przenieś wszystkie marmurowe kolumny do magazynu na linii frontu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:433
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:441
@@ -783,39 +785,39 @@ msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr ""
+msgstr "Aby to zrobić, musisz zrobić dwie rzeczy. Po pierwsze musisz ustawić preferowanie marmurowych kolumn w magazynie docelowym. Wszystkie marmurowe kolumny będą w miarę możliwości przenoszone do tego magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:442
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr ""
+msgstr "Następnie, aby wynieść marmurowe kolumny z kwatery głównej, musisz kliknąć dla niej na przycisku usunięcia towarów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid "Bring 20 marble columns to the front line."
-msgstr ""
+msgstr "Przenieś 20 marmurowych kolumn na linię frontu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:439
 msgid ""
 "To decide where your wares get stored, you can use the preference buttons in"
 " the warehouses."
-msgstr ""
+msgstr "Aby określić, gdzie towary mają być przechowywane, możesz użyć przycisków preferencji towarów w magazynach."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:447
 msgid "Borders Secured"
-msgstr ""
+msgstr "Granice zabezpieczone"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:449
 msgid "We’re safe now"
-msgstr ""
+msgstr "Jesteśmy bezpieczni"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
-msgstr ""
+msgstr "Świetnie. Mamy teraz tyle marmurowych kolumn, że w przypadku agresji możemy wzmocnić nasze fortyfikacje. Ale nie sądzę, by to było potrzebne. Jak na razie nie zjawił się żaden wróg."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""
@@ -824,7 +826,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr ""
+msgstr "Mam nadzieję, że nauczyłem cię, jak funkcjonuje ekonomia w Widelands. Opcji jest dużo i na początku mogą trochę dezorientować. Możliwe, że zrozumiałeś tylko niektóre koncepty, ale nie ma obawy. Wypróbuj je w paru grach, oswój się z nimi i poeksperymentuj. Zawsze możesz wrócić do tego samouczka i nauczyć się ich do końca!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
 msgid ""
@@ -833,16 +835,16 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "To ostatni samouczek, jaki dla ciebie przygotowałem. Nauczyłem cię wszystkiego, co umiem. Ten świat wciąż skrywa sekrety, których nie znam. Poszukam teraz dla siebie zacisznego miejsca do spędzenia jesieni życia. Jeśli masz jeszcze jakieś pytania, społeczność Widelands na pewno ci pomoże. Możesz ją znaleźć na:"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nowy cel"
+msgstr[1] "Nowe cele"
+msgstr[2] "Nowe cele"

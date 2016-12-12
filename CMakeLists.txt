@@ -176,6 +176,7 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
 endif()
 
+
 # Turn some warnings into errors.
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")

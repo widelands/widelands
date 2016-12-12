@@ -2,12 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-01 08:03+0000\n"
-"PO-Revision-Date: 2016-09-01 08:05+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "C'hwek hag Aes Atav"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
@@ -30,7 +31,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Degemer mat e Tutorial Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
@@ -49,7 +50,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "Splujit"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
@@ -94,7 +95,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Diskouez spas ar savadurioù"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
@@ -311,7 +312,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
-msgid "Click the ‘OK’ button and then move the view using the cursor keys"
+msgid "Click the ‘OK’ button and then move the view using the cursor keys."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
@@ -750,7 +751,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
-"Once you have deleted a message, another message will be selected "
+"Once you have archived a message, another message will be selected "
 "automatically from the list."
 msgstr ""
 
@@ -781,10 +782,10 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
-"To do so, open the message window by pressing ‘n’ or clicking the rightmost "
-"button at the very bottom of the screen. The newest message will be marked "
-"for you automatically. Keep clicking the ‘Archive selected message’ button "
-"until all messages have been archived and the list is empty."
+"To do so, open the message window by pressing ‘n’ or clicking the second "
+"button from the right at the very bottom of the screen. The newest message "
+"will be marked for you automatically. Keep clicking the ‘Archive selected "
+"message’ button until all messages have been archived and the list is empty."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
@@ -855,6 +856,10 @@ msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
+msgstr ""
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 10:57+0000\n"
-"PO-Revision-Date: 2016-09-14 12:23+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Bygning tabt!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
 msgstr "Vi mistede en bygning til havet!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Bygning tabt!"
@@ -123,7 +123,7 @@ msgstr "Byg en brønd"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "Byg et bageri til fremstilling af brød fra kornmel, rodfrugtmel og vand."
+msgstr "Byg et bageri til fremstilling af brød fra kornmel, rodfrugtmel og vand"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -137,7 +137,7 @@ msgstr "Byg et fiskerhus tæt på vandet for at få rå fisk"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Byg et fiskeopdræt tæt på fiskerne for at sikre at fiskene ikke uddør."
+msgstr "Byg et fiskeopdræt tæt på fiskerne for at sikre at fiskene ikke uddør"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -441,7 +441,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Må Satul varme jer begge. Loftomor, du har været øens mest anerkendte arkitekt. Sidolus, du er en erfaren kriger og strateg. Jeg har hidkaldt jer for at søge jeres råd: Hvad skal der gøres for at dette kan blive vores nye hjem."
+msgstr "Må Satul varme jer begge. Loftomor, du har været øens mest anerkendte arkitekt. Sidolus, du er en erfaren kriger og strateg. Jeg har hidkaldt jer for at søge jeres råd: Hvad skal der gøres for at dette kan blive vores nye hjem?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Loftomor Speaks"
@@ -538,11 +538,11 @@ msgstr "Ah, men jeg tror det er umuligt at ændre. Det at tilberede og spise mad
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Men vi kan måske finde et kompromis: For mig, er fremstillingen af brød en besværlig opgave. Maling af rodfrugter og korn til mel og så bagning efterfølgende er trættende og kedeligt; en mere industriel fremgangsmåde kan være nyttig her. Jeg ville i hvert fald elske at have frisk brød leveret til mit hus hver dag."
+msgstr ""
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
@@ -567,7 +567,7 @@ msgstr "Dine ord lyder kloge, Colionder. Sådan bliver det."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
-msgstr "Jundlina gennemser rapporterne."
+msgstr "Jundlina gennemser rapporterne"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:250

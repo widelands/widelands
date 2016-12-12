@@ -40,6 +40,7 @@
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
 #define DLLFolder GetEnv("MINGWPATH")
+#define Version GetEnv("APPVEYOR_BUILD_VERSION") + GetEnv("CONFIGURATION") + GetEnv("PLATFORM")
 
 [Setup]
 AppName={#Name}
@@ -49,7 +50,7 @@ AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
 AppUpdatesURL={#URL}
-DefaultDirName={pf}\{#Name}
+DefaultDirName={sd}\bin\{#Name}
 DefaultGroupName={#Name}
 AllowNoIcons=true
 LicenseFile=..\..\..\COPYING
@@ -68,7 +69,7 @@ UninstallDisplayIcon={app}\unins000.exe
 UninstallDisplayName={#VerName}
 VersionInfoCopyright={#Publisher}
 InternalCompressLevel=max
-AppID={{WIDELANDS-WIN32-IS}
+AppID={#Version}
 AppCopyright={#Copyright}
 ChangesAssociations=yes
 PrivilegesRequired=lowest

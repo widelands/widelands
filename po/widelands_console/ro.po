@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"PO-Revision-Date: 2016-11-19 17:48+0000\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:38
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Acesta este Widelands Build %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"

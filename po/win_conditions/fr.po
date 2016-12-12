@@ -7,13 +7,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
+# nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 15:40+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 10:39+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -30,55 +31,59 @@ msgstr "Artefacts"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "La recherche d'anciens artefacts.  Une fois qu'ils sont tous trouvés, l'équipe qui détient le plus grands nombres d'artefact gagne la partie."
+msgstr "La recherche d'anciens artefacts. Une fois qu'ils sont tous trouvés, l'équipe qui détient le plus grands nombres d'artefact gagne la partie."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:55
+#: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid "No Artifacts"
 msgstr "Pas d'artefacts"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:55
+#: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on https://launchpad.net/widelands and specify your Widelands "
 "version and the map you tried to load."
 msgstr "Il n'y a pas d'artefacts sur cette carte. Cela n'est pas censé arrivé. Merci de remplir un rapport de bug sur https://launchpad.net/widelands en spécifiant votre version de Widelands et la carte que vous avez essayez de charger."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:61
-msgid "New Artifact Found"
-msgstr "Nouvel artefact trouvé"
+#. TRANSLATORS: Keep this as short as possible. You can also translate this as
+#. "New artifact"
+#: ../../data/scripting/win_conditions/artifacts.lua:63
+msgid "Artifact Found"
+msgstr "Artefact trouvé"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:62
+#: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
 msgstr "Votre équipe à trouvé un nouvel artefact."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:65
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "Artifact Lost"
 msgstr "Artefact perdu"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:66
+#: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Un des artefacts de votre équipe a été dérobé par l'ennemi."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:69
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "Artifact Conquered"
 msgstr "Artefact conquis"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:70
+#: ../../data/scripting/win_conditions/artifacts.lua:74
 msgid "Your team stole an artifact from an enemy."
 msgstr "Votre équipe à volé un artefact à l’ennemi."
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:140
+#: ../../data/scripting/win_conditions/artifacts.lua:144
 msgid ", "
 msgstr ", "
 
-#: ../../data/scripting/win_conditions/artifacts.lua:147
+#: ../../data/scripting/win_conditions/artifacts.lua:151
 msgid "Overview:"
 msgstr "Aperçu :"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:150
-#: ../../data/scripting/win_conditions/artifacts.lua:163
+#: ../../data/scripting/win_conditions/artifacts.lua:154
+#: ../../data/scripting/win_conditions/artifacts.lua:167
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -86,13 +91,13 @@ msgstr[0] "%i artefact"
 msgstr[1] "%i artefacts"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:152
+#: ../../data/scripting/win_conditions/artifacts.lua:156
 msgid "%1$s owns %2$s."
 msgstr "%1$s détient %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:165
+#: ../../data/scripting/win_conditions/artifacts.lua:169
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "L'équipe %1$i (%2$s) détient %3$s."
 
@@ -127,8 +132,12 @@ msgid_plural "Total: %i points"
 msgstr[0] "Total : %i point"
 msgstr[1] "Total : %i points"
 
+#: ../../data/scripting/win_conditions/collectors.lua:141
+msgid "The game has ended."
+msgstr "Le jeu s'est terminé."
+
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:144
+#: ../../data/scripting/win_conditions/collectors.lua:148
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -136,31 +145,31 @@ msgstr[0] "%i minute"
 msgstr[1] "%i minutes"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:149
+#: ../../data/scripting/win_conditions/collectors.lua:153
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% heure et %2%"
 msgstr[1] "%1% heures et %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:152
+#: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% heure"
 msgstr[1] "%1% heures"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:156
+#: ../../data/scripting/win_conditions/collectors.lua:160
 #, lua-format
 msgid "The game will end in %s."
 msgstr "La partie s'achèvera dans %s."
 
-#: ../../data/scripting/win_conditions/collectors.lua:168
+#: ../../data/scripting/win_conditions/collectors.lua:173
 #, lua-format
 msgid "Status for Team %d"
 msgstr "État de l'équipe %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:170
+#: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -265,7 +274,7 @@ msgstr[0] "Autrement le jeu s'achèvera dans %i minute."
 msgstr[1] "Autrement le jeu s'achèvera dans %i minutes."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:86
+#: ../../data/scripting/win_conditions/wood_gnome.lua:87
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
@@ -310,28 +319,29 @@ msgstr "Vous avez perdu cette partie !"
 msgid "Status"
 msgstr "État"
 
-#: ../../data/scripting/win_conditions/win_condition_texts.lua:25
+#. TRANSLATORS: This is an overview for all players.
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:26
 msgid "Player overview:"
 msgstr "Aperçu du joueur :"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:16
+#: ../../data/scripting/win_conditions/wood_gnome.lua:17
 msgid "Wood Gnome"
 msgstr "Gnome des bois"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:19
+#: ../../data/scripting/win_conditions/wood_gnome.lua:20
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr "En tant que gnome des bois vous aimez les grandes forêts, donc votre tâche est d'avoir plus d'arbres sur votre territoire que n'importe quel autre joueur.La partie se terminera après 4 heures de jeu. Celui avec le plus d'arbres à ce moment gagnera la partie."
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:22
+#: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "Trees owned"
 msgstr "Arbres possédés"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:92
-#: ../../data/scripting/win_conditions/wood_gnome.lua:146
-#: ../../data/scripting/win_conditions/wood_gnome.lua:151
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
+#: ../../data/scripting/win_conditions/wood_gnome.lua:143
+#: ../../data/scripting/win_conditions/wood_gnome.lua:148
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -339,16 +349,16 @@ msgstr[0] "%i arbre"
 msgstr[1] "%i arbres"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:95
+#: ../../data/scripting/win_conditions/wood_gnome.lua:94
 msgid "%1$s has %2$s at the moment."
 msgstr "%1$s a %2$s pour le moment."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
+#: ../../data/scripting/win_conditions/wood_gnome.lua:145
 msgid "%1$s had %2$s."
 msgstr "%1$s a eu %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:154
+#: ../../data/scripting/win_conditions/wood_gnome.lua:151
 msgid "The winner is %1$s with %2$s."
 msgstr "Le gagnant est %1$s avec %2$s."

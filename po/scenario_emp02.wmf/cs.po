@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-24 07:02+0000\n"
-"PO-Revision-Date: 2016-09-27 13:13+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-04 16:24+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -79,9 +79,9 @@ msgstr "Domek kameníka a těžební infrastruktura"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
-msgstr ""
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
+msgstr "Postav domek kameníka a pak dokonči infrastrukturu pro těžbu a produkci (důl na uhlí a/nebo milíř na dřevěné uhlí, důl na železo, dílnu, zbrojířství, platnéřství a slévárnu)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -113,10 +113,10 @@ msgstr "Možná budeš potřebovat i domek lovce, vepřín, vinohrad a nějaké 
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr "Záleží na tobě, co chceš vybudovat. Ale měj na paměti, že doly na uhlí a železo vyžadují pivo, zatímco doly na mramor a zlato vyžadují víno. Všechny typy dolů také potřebují svačiny, které se vyrábí z chleba NEBO masa NEBO ryb."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr "Záleží na tobě, co chceš vybudovat. Ale měj na paměti - doly na uhlí a železo vyžadují pivo, zatímco doly na mramor a zlato vyžadují víno a všechny doly potřebují příděly, které se vyrábí z chleba NEBO masa NEBO ryb."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -208,14 +208,14 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Ale do té doby nechť uplyne ještě mnoho let! Teď se musíme soustředit na přítomnost a vybudovat nějaké domky pro dřevorubce a pilu, abychom získali základní stavební materiál."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Ale nesmíme zapomenout na uchování tohoto přírodního bohatství. Tyto lesy musí přetrvat navždy, proto bychom určitě měli postavit i domek lesníka."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
@@ -226,7 +226,7 @@ msgstr "Skály"
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Později jsem se byl projít ke skalám na jihu a poohlédnout se po místě, kde bychom mohli vybudovat lom a získat tak žulu na větší budovy."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
@@ -256,7 +256,7 @@ msgstr "Kamení pro kolonii"
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
-msgstr ""
+msgstr "Výborně! Dnes byl dokončen lom. Teď už budeme mít dostatek žuly a mramoru na stavbu větších budov."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
@@ -274,7 +274,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Pane, nerad bych podněcoval paniku ale našel jsem něco, co mi leží v žaludku a šíří to vlny strachu až do mého srdce. Cestou na jižní pobřeží, jsem našel zbytky jiné lodi. Nevím, zda jsou ty kusy vše, co z té lodi zbylo. V každém případě ty kusy nevypadají staře."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
@@ -288,7 +288,7 @@ msgstr "Je tu možnost, že lidé, kteří se na té lodi plavili, byli zastiže
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Buď prosím obezřetný a postav pár malých pevností nebo strážnic kolem naší kolonie."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Marble on the Mountain"
@@ -304,7 +304,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Pane, mám pro Vás dobré zprávy: Cestou na jich jsem našel velkou horu. Nejsem si jistý - geolog by ji měl prohlédnout, zda se nemýlím - ale věřím, že by se tam dal těžit mramor."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
@@ -332,10 +332,10 @@ msgstr "Saledus je rozrušený"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "U všech bohů, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a druhá železné rudy. Radím ti okamžitě postavit důl na uhlí a železnou rudu (nebo alespoň milíř na dřevěné uhlí), slévárny, dílny, platnéřsví a zbrojařství."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
@@ -343,7 +343,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "Nicméně: na všechny tyto velké budovy budeme potřebovat lepší a elegantnější stavební materiály. Takže je třeba postavit domek kameníka, který bude vyrábět mramorové sloupy."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199
@@ -361,7 +361,7 @@ msgstr "Vchází Amalea…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutiusi, nemyslíš, že jsi zapomněl na něco důležitého?"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
@@ -392,7 +392,7 @@ msgstr "Amalea se usmívá"
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Právě jsem navštívil naši novou hospodu \"U palem\". Pivo, které podávají je velmi dobré. Vážně by si tam měl na jedno zajít."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
@@ -428,7 +428,7 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Nejprve jsem naivně doufal, že jde o mírumilovný kmen, ale jakmile mě jeden z nich uviděl, rozeběhli se na mne a okamžitě zaútočili svými vrhacími oštěpy. Děkuji Bohům, že se mi podařilo utéct, skrýt se a večer pod rouškou tmy, dorazit zpět do bezpečí našeho tábora."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:241

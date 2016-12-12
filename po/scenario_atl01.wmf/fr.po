@@ -6,15 +6,16 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2016
+# nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-11 13:35+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 00:08+0000\n"
+"Last-Translator: nicolas jardin <niko472006@sfr.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,16 +25,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Bâtiment perdu !"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
-msgstr "Nous avons perdu un bâtiment dans l'océan!"
+msgstr "Nous avons perdu un bâtiment dans l'océan !"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Bâtiment perdu !"
@@ -540,11 +541,11 @@ msgstr "Ahh, mais je pense que ceci est impossible à changer. Préparer et mang
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Mais nous pourrions trouver un compromis entre les deux: Pour moi, faire du pain est un tâche rébarbative: moudre les racines noires et le maïs pour la farine puis faire le pain n'est pas aisé et ennuyeux: Je sens qu'une approche plus industrielle serait la bienvenue. J'aimerais bien pour une fois avoir du pain frais livré à la maison tous les jours."
+msgstr "Mais nous pourrions trouver un compromis entre nous deux: Pour moi, faire du pain est une tâche rébarbative: moudre les racines noires et le maïs pour la farine puis faire le pain n'est pas aisé et ennuyeux: Je sens qu'une approche plus industrielle serait la bienvenue. J'aimerais bien pour une fois avoir du pain frais livré à la maison tous les jours."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

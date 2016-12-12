@@ -15,4 +15,5 @@ file. The ``init.lua`` script will load the unit to be used in the game, and
 .. toctree::
    :maxdepth: 3
 
+   autogen_toc_lua_tribes_buildings
 REPLACE_ME

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-23 23:07+0000\n"
+"Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,39 +19,39 @@ msgstr ""
 
 #: ../../data/world/critters/badger/init.lua:14
 msgid "Badger"
-msgstr ""
+msgstr "Broc'h"
 
 #: ../../data/world/critters/brownbear/init.lua:14
 msgid "Brown bear"
-msgstr ""
+msgstr "Arzh Gell"
 
 #: ../../data/world/critters/bunny/init.lua:13
 msgid "Bunny"
-msgstr ""
+msgstr "Konifl"
 
 #: ../../data/world/critters/chamois/init.lua:14
 msgid "Chamois"
-msgstr ""
+msgstr "Gavr-Menez"
 
 #: ../../data/world/critters/deer/init.lua:14
 msgid "Deer"
-msgstr ""
+msgstr "Karv"
 
 #: ../../data/world/critters/duck/init.lua:18
 msgid "Duck"
-msgstr ""
+msgstr "Houad"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
-msgstr ""
+msgstr "Wapiti"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
-msgstr ""
+msgstr "Louarn"
 
 #: ../../data/world/critters/lynx/init.lua:14
 msgid "Lynx"
-msgstr ""
+msgstr "Lynks"
 
 #: ../../data/world/critters/marten/init.lua:14
 msgid "Marten"
@@ -58,25 +59,25 @@ msgstr ""
 
 #: ../../data/world/critters/reindeer/init.lua:14
 msgid "Reindeer"
-msgstr ""
+msgstr "Karv-Erc'h"
 
 #: ../../data/world/critters/sheep/init.lua:18
 msgid "Sheep"
-msgstr ""
+msgstr "Dañvad"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
-msgstr ""
+msgstr "Karv"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
-msgstr ""
+msgstr "Morc'h-gouez"
 
 #: ../../data/world/critters/wisent/init.lua:14
 msgid "Wisent"
 msgstr ""
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr ""
 

@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-08-26 10:14+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-11-03 16:07+0000\n"
+"PO-Revision-Date: 2016-10-23 23:05+0000\n"
+"Last-Translator: Wanibzh29 <allannkorh@yahoo.fr>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:38
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Widelands eo Savit %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -28,7 +29,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr ""
+msgstr "Dibarzhioù:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr "-- enrolladenn-emgefre=[...] Enrollañ en un doare emgefreek pep n munutenn"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
@@ -94,7 +95,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Sound options:"
-msgstr ""
+msgstr "Dibarzhioù ar son:"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid " --nosound            Starts the game with sound disabled."

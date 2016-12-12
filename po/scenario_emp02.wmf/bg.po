@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Lyubomir Vasilev, 2015-2016
+# Любомир Василев, 2015-2016
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:02+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:05+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,8 +77,8 @@ msgstr "Каменоделска къща и минна инфраструкте
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
 msgstr "Постройте каменоделска къща и след това цялостна минна и производствена промишлености (мина за въглища и/или пещ за въглища, мина за желязна руда, ковачница за инструменти, ковачница за брони и топилна)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
@@ -110,10 +111,10 @@ msgstr "Може да имате нужда и от ловджийска къщ�
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr "От Вас зависи какво искате да построите. Но помнете – мините за въглища и желязна руда се нуждаят от бира, мините за мрамор и злато се нуждаят от вино, а всички мини като цяло се нуждаят от хранителни дажби, които се произвеждат от хляб ИЛИ месо ИЛИ риба."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr "От Вас зависи какво искате да построите. Но помнете – мините за въглища и желязо се нуждаят от бира, мините за мрамор и злато се нуждаят от вино, а всички мини като цяло се нуждаят от хранителни дажби, които се произвеждат от хляб ИЛИ месо ИЛИ риба."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -329,10 +330,10 @@ msgstr "Саледий е развълнуван"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Слава на боговете, това е невероятен късмет! Има още две планини и изглежда, че едната има огромни залежи на въглища, а другата – на желязна руда. Съветвам Ви веднага да построите мини за въглища и желязна руда (или поне пещи за въглища), топилни, ковачници за инструменти, брони и оръжия."
+msgstr "Слава на боговете, това е невероятен късмет! Има още две планини и изглежда, че едната има огромни залежи на въглища, а другата – на желязна руда. Съветвам Ви веднага да построите мини за въглища и желязо (или поне пещи за въглища), топилни, ковачници за инструменти, брони и оръжия."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
@@ -487,7 +488,7 @@ msgstr "Съобщение"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr "Днес един гълъб кацна на острова ни. Той донесе съобщение, което ме изпълва с мрачни мисли и отново връща страховете ми"
+msgstr "Днес един гълъб кацна на острова ни. Той донесе съобщение, което ме изпълва с мрачни мисли и отново връща страховете ми."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
@@ -509,7 +510,7 @@ msgstr "Вие завършихте тази мисия. Ако искате, м
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

@@ -36,7 +36,6 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -87,17 +86,6 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 }
 
 namespace Widelands {
-
-const RGBColor Player::Colors[MAX_PLAYERS] = {
-   RGBColor(2, 2, 198),      // blue
-   RGBColor(255, 41, 0),     // red
-   RGBColor(255, 232, 0),    // yellow
-   RGBColor(59, 223, 3),     // green
-   RGBColor(57, 57, 57),     // black/dark gray
-   RGBColor(255, 172, 0),    // orange
-   RGBColor(215, 0, 218),    // purple
-   RGBColor(255, 255, 255),  // white
-};
 
 /**
  * Find the longest possible enhancement chain leading to the given
@@ -272,7 +260,7 @@ void Player::update_team_players() {
 	if (!team_number_)
 		return;
 
-	for (PlayerNumber i = 1; i <= MAX_PLAYERS; ++i) {
+	for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
 		Player* other = egbase().get_player(i);
 		if (!other)
 			continue;
@@ -465,8 +453,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
-		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);

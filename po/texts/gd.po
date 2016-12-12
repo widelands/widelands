@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-20 08:22+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Seo geama saor is Open Source (FOSS) fo cheadachas GNU General Public Li
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Gheibh thu barrachd fiosrachaidh air FOSS is an GPL air an làrach-lìn a leanas: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -78,7 +78,7 @@ msgstr "Air Windows, lorgaidh tu am faidhle air a bheil COPYING.txt sa phasgan s
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "Air MacOS, lorgaidh tu am faidhle air a bheil COPYING san tasg-lann a luchdaich thu a-nuas on làrach-lìn."
+msgstr "Air MacOS, lorgaidh tu am faidhle air a bheil COPYING san tasglann a luchdaich thu a-nuas on làrach-lìn."
 
 #: ../../data/txts/LICENSE.lua:34
 msgid ""
@@ -116,7 +116,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Tha sinn air cha mhòr a h-uile gleus a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha an-còmhnaidh barrachd obrach ri dèanamh co-dhiù sna h-uile roinn. Nam bu toigh leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu gleusan ùra ris, an eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
+msgstr "Tha sinn air cha mhòr a h-uile gleus a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha barrachd obrach ri dèanamh an-còmhnaidh co-dhiù sna h-uile roinn. Nam bu toigh leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu gleusan ùra ris, an eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -136,15 +136,15 @@ msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
-msgstr "A’ dèanamh aithris air bugaichean"
+msgstr "Aithris air bugaichean"
 
 #: ../../data/txts/README.lua:29
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Ma thachras tu air buga, an innis thu dhuinn mu dheidhinn air tracaiche nam buga againn?"
+msgstr "Ma thachras tu air buga, an innis thu dhuinn mu dhèidhinn air tracaiche nam buga againn?"
 
 #: ../../data/txts/README.lua:31
 msgid "Please provide enough background information. Tell us:"
-msgstr "Feuch an doir thu cùl-fhiosrachaidh dhuinn. Innis dhuinn:"
+msgstr "Feuch an doir thu cùl-fhiosrachadh dhuinn. Innis dhuinn:"
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
@@ -177,14 +177,14 @@ msgstr "Am mapa a bha thu a’ cluiche nuair a thachair am buga."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Cuir glacadh-sgrìn no dhà ris ma tha am buga mu dheidhinn rudeigin nach dèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an duilgheadais."
+msgstr "Cuir glacadh-sgrìn no dhà ris ma tha am buga mu dhèidhinn rudeigin nach dèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an duilgheadais."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "Ma tha thu air geama no ath-chluiche a shàbhaladh a nochdas an duilgheadas (mar eisimpleir airson tuislidhean far nach eil e furasta ràdh dè na dh’adhbharaich iad) feuch an cuir thu iad ann cuideachd. Seall air an earran air ath-chluichean gu h-ìosail airson barrachd fiosrachaidh."
+msgstr "Ma tha thu air geama no ath-chluiche a shàbhaladh a nochdas an duilgheadas (mar eisimpleir airson tuislidhean far nach eil e furasta ràdh dè na dh’adhbharaich iad) feuch an cuir thu iad ann cuideachd. Seall air an earrann air ath-chluichean gu h-ìosail airson barrachd fiosrachaidh."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -196,23 +196,23 @@ msgstr "Eadar-theangadairean aig Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
-msgstr "Atlantach"
+msgstr "Na h-Atlantaich"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
-msgstr "Tùsanach"
+msgstr "Na Tùsanaich"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
 msgstr "Sgeulachd nan iomairtean"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Ceannard"
+msgid "Chieftains"
+msgstr "Ceannardan"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr "Prògramairean"
+msgstr "Prògramachadh"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
@@ -256,7 +256,7 @@ msgstr "Duilleag-dhachaigh"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr "Prògramairean na duilleige-dachaigh"
+msgstr "Prògramachadh na duilleige-dachaigh"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
@@ -272,7 +272,7 @@ msgstr "Mapaichean is miseanan"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr "Ceòladairean"
+msgstr "Ceòl"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
@@ -328,7 +328,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "’S e geama ro-innleachd fìor-ùine saor is open source a th’ ann an Widelands le iomairtean aon-chluicheadair is modh ioma-chluicheadair. ’S ann gun do chuir Settlers II an geama nur n-inntinn ach tha barrachd caochlaidh is doimhne ann. Tha e furasta gu leòr tòiseachadh air co-dhiù le oideachadh a ghabhas cluiche."
+msgstr "’S e geama ro-innleachd fìor-ùine saor is open source a th’ ann an Widelands le iomairtean aon-chluicheadair is modh ioma-chluicheadair. ’S ann gun do chuir Settlers II an geama ’nar n-inntinn ach tha barrachd caochlaidh is doimhne ann. Tha e furasta gu leòr tòiseachadh air co-dhiù le oideachadh a ghabhas cluiche."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -350,7 +350,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Clàraichidh Widelands na h-uile geama a chluicheas tu ann an dà fhaidhle. Tha leudachan .wrpl.wgf air an dàrna fear is thèid toiseach a’ gheama a shàbhaladh ann. Tha leudachan .wrpl air an fhear eile is tha na h-uile àithne a chuir gach cluicheadair seachad na bhroinn a leithid togail rathaid no ionnsaigh air an nàmhad. Innsidh an corr dhe na h-ainmean faidhle dhut cuin a thòisich thu air a’ gheama."
+msgstr "Clàraichidh Widelands na h-uile geama a chluicheas tu ann an dà fhaidhle. Tha leudachan .wrpl.wgf air an dàrna fear is thèid toiseach a’ gheama a shàbhaladh ann. Tha leudachan .wrpl air an fhear eile is tha na h-uile àithne a chuir gach cluicheadair seachad na bhroinn a leithid togail rathaid no ionnsaigh air an nàmhaid. Innsidh an corr dhe na h-ainmean faidhle dhut cuin a thòisich thu air a’ gheama."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -360,7 +360,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Leis an roghainn “Coimhead air ath-chluiche” sa phrìomh clàr-taice, thèid geama a chluich thu roimhe ath-thogail ach an coimhead thu air. Thoir an aire co-dhiù gum faod atharraichean beaga air faidhlichean dàta a’ gheama no air an fhaidhle so-ghnìomhaichte Widelands adhbharachadh nach eil ath-chluiche co-chòrdail tuilleadh is gun caill i an “sioncronachadh”. Tha seo coltach ris na duilgheadasan leis an t-sioncronachadh ann an geama lìonraidh nuair a bhios tionndadh dhen gheama eadar-dhealaichte aig aonar dhe na cluicheadairean."
+msgstr "Leis an roghainn “Coimhead air ath-chluiche” sa phrìomh chlàr-taice, thèid geama a chluich thu roimhe ath-thogail ach an coimhead thu air. Thoir an aire co-dhiù gum faod atharraichean beaga air faidhlichean dàta a’ gheama no air an fhaidhle so-ghnìomhaichte Widelands adhbharachadh nach eil ath-chluiche co-chòrdail tuilleadh is gun caill i an “sioncronachadh”. Tha seo coltach ris na duilgheadasan leis an t-sioncronachadh ann an geama lìonraidh nuair a bhios tionndadh dhen gheama eadar-dhealaichte aig aonar dhe na cluicheadairean."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -415,7 +415,7 @@ msgstr "Roghainnean a’ chliant"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr "Tha liosta dhe na h-uile cliant air an tabh deas, a’ gabhail a-steach thu fhèin. ’S urrainn dhut do dhreuchd a shuidheachadh leis a’ phutain às dèidh d’ far-ainm. Seo na dreuchdan a tha ri làimh:"
+msgstr "Tha liosta dhe na h-uile cliant air an tabh deas, a’ gabhail a-steach thu fhèin. ’S urrainn dhut do dhreuchd a shuidheachadh leis a’ phutan às dèidh d’ far-ainm. Seo na dreuchdan a tha ri làimh:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
@@ -426,8 +426,8 @@ msgstr "An cluicheadair aig a bheil bratach leis an dath seo. Ma thagh barrachd 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Modh amhairc, ’s e seo gum faic thu a h-uile rud ach cha bhi smachd agad air cluicheadair"
+"player."
+msgstr "Modh amhairc, ’s e seo gum faic thu a h-uile rud ach cha bhi smachd agad air cluicheadair."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -452,7 +452,7 @@ msgstr "Ceangailte ri cluicheadair coimpiutair (innsidh an dà chuid an t-aodann
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr "’Na co-phàirteach ann an ionad-tòiseachaidh airson cluicheadair eile."
+msgstr "’Na cho-phàirteach ann an ionad-tòiseachaidh airson cluicheadair eile."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
@@ -463,13 +463,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seòrsa de thogalaichean, bhathar is luchd-obrach leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
+"with) and the tribe and team for computer players."
+msgstr "Cha ghabh an trì rud mu dheireadh dhiubh a shuidheachadh ach leis a’ chliant a bhios ’na òstair ’s esan a’ briogadh leis a’ phutan clì air putan “seòrsa” aig cluicheadair. ’S urrainn do chluicheadairean òstair an tòiseachadh aig gach cluicheadair (an seata de thogalaichean, bhathar is obraichean leis an tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean coimpiutair a rèiteachadh cuideachd."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr "’S urrainn do gach cliant a bhios ceangailte ri cluicheadair (nach eil ’na amharc) treubh is sgioba a’ chluicheadair sin a shuidheachadh."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -495,7 +495,7 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. M
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Tog bothan maoir-choille is ionad-àraich èisg an-còmhnaidh ach nach ruith fiodh no biadh ort."
+msgstr "Tog taigh planntair-choille is ionad-àraich èisg an-còmhnaidh ach nach ruith am fiodh no biadh ort."
 
 #: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
 msgid ""
@@ -542,9 +542,9 @@ msgstr "Ma chumas tu Alt sìos, nì seo suids dhan inneal dàrnach eile (ma tha 
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "’S urrainn dhut meud an raoin a thèid a thaghadh mu chùrsair na luchaige agad a shuidheachadh sa bhad leis na h-iuchraichean àireimh (1 - 0)."
+msgstr "’S urrainn dhut meud an raoin a thèid a thaghadh mu chùrsair na luchaige agad a shuidheachadh sa bhad leis na h-iuchraichean àireimh (0 - 9)."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -631,7 +631,7 @@ msgstr "’S urrainn dhut gach bratach gun chiad ghobhal a thoirt air falbh ’s
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr "Thèid saighdearan ùra a thrusadh sa phrìomh-àras no ann an taigh-stòrais ma tha na h-uile acainn a bhios a dhìth orra ri làimh. Leasaichidh na h-ionadan-trèanaidh na comasan aca an uairsin."
+msgstr "Thèid saighdearan ùra a thrusadh sa phrìomh-àras no ann an taigh-stòrais ma tha na h-uile acainn a bhios a dhìth orra ri làimh. Leasaichidh na h-ionadan-oideachaidh na comasan aca an uairsin."
 
 #: ../../data/txts/tips/general_game.tip:54
 msgid ""

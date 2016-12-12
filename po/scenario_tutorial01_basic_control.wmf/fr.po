@@ -7,15 +7,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
+# nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015-2016
 # syl_, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 20:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 23:54+0000\n"
+"Last-Translator: nicolas jardin <niko472006@sfr.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -318,7 +319,7 @@ msgid ""
 msgstr "Il y a trois moyens de bouger votre vue. Le premier en utilisant les touches du curseur de votre clavier. Allez y ,essayez !"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
-msgid "Click the ‘OK’ button and then move the view using the cursor keys"
+msgid "Click the ‘OK’ button and then move the view using the cursor keys."
 msgstr "Cliquez sur le bouton \"OK\" et déplacez la vue à l'aide des flèches"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
@@ -757,9 +758,9 @@ msgstr "bouton 'Archiver le message sélectionné' pour le déplacer dans vos ar
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
-"Once you have deleted a message, another message will be selected "
+"Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr "Lorsque vous avez effacé un message, un autre message est automatiquement sélectionné dans la liste."
+msgstr "Lorsque vous avez archivé un message, un autre message est automatiquement sélectionné dans la liste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -788,11 +789,11 @@ msgstr "Archivez tous les messages de votre boîte de réception dès à présen
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
-"To do so, open the message window by pressing ‘n’ or clicking the rightmost "
-"button at the very bottom of the screen. The newest message will be marked "
-"for you automatically. Keep clicking the ‘Archive selected message’ button "
-"until all messages have been archived and the list is empty."
-msgstr "Pour ce faire, ouvrez la fenêtre des messages en appuyant sur \"n\" ou cliquez sur le bouton le plus à droite au bas de l'écran. Le message le plus récent sera automatiquement sélectionné. Cliquez sur le bouton \"Archiver le message sélectionné\" jusqu'à ce que tous les messages aient été archivés et la liste vidée."
+"To do so, open the message window by pressing ‘n’ or clicking the second "
+"button from the right at the very bottom of the screen. The newest message "
+"will be marked for you automatically. Keep clicking the ‘Archive selected "
+"message’ button until all messages have been archived and the list is empty."
+msgstr "Pour ce faire, ouvrez la fenêtre des messages en appuyant sur \"n\" ou cliquez sur le bouton droit en bas tout à droite de l'écran. Le message le plus récent sera automatiquement sélectionné. Cliquez sur le bouton \"Archiver le message sélectionné\" jusqu'à ce que tous les messages aient été archivés et la liste vidée."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -863,6 +864,10 @@ msgid ""
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Démantèlement de la carrière : un constructeur marchera des quartiers généraux pour démonter la carrière pièce par pièce. Ainsi, vous regagnez une partie des ressources que vous avez utilisées pour la construction."
+
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
+msgid "Destroy the two quarries"
+msgstr "Détruisez les deux carrières"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""

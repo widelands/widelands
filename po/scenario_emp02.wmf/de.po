@@ -2,19 +2,20 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Venatrix, 2015
+# Elisabeth Jäger, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:51+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-08 09:13+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,8 +82,8 @@ msgstr "Steinmetz und Mineninfrastruktur"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
 msgstr "Baue einen Steinmetz und vervollständige dann die Minen- und erzverarbeitende Infrastuktur (Kohlemine und/oder Köhlerei, Eisenerzmine, Hochofen, Werkzeugmacher, Waffen- und Rüstungsschmiede)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
@@ -115,9 +116,9 @@ msgstr "Möglicherweise brauchst du auch ein Jagdhaus, eine Schweinezucht, einen
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
 msgstr "Es liegt bei dir, was du baust. Aber bedenke: Kohle-  und Eisenerzminen benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch bestehen."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
@@ -334,8 +335,8 @@ msgstr "Saledus ist aufgeregt"
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
 msgstr "Bei den Göttern, das ist ein unglaublicher Glückstreffer! Dort sind zwei weitere Berge, und es scheint, einer enthielte eine große Menge an Kohle und der andere an Eisenerz. Ich rate Euch, sofort damit zu beginnen, Eisenerzminen und Kohleminen (oder zumindest Köhlereien), Hochöfen, Werkzeugmacher sowie Waffen- und Rüstungsschmieden zu bauen."
 
@@ -514,7 +515,7 @@ msgstr "Du hast diese Mission vollendet. Du kannst, falls du möchtest, weitersp
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

@@ -2,12 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Wanibzh29 <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-06 09:44+0000\n"
-"PO-Revision-Date: 2016-05-06 09:45+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +20,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Savit un armezh dre-ziouer"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
@@ -35,7 +36,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Savit ur Vengleuz"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
@@ -72,7 +73,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:44
 msgid "Build a farm"
-msgstr ""
+msgstr "Savit un atant"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a bakery"
@@ -452,8 +453,8 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a tower,  to have a greater visual"
-" range over the area around our hall to protect our people from sudden "
+"settlement. He has instructed us to build a tower, to have a greater visual "
+"range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr ""
 

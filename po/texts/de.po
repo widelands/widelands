@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-02 19:42+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-08 09:17+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unte
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Webseite: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -212,8 +212,8 @@ msgid "Campaign Story"
 msgstr "Kampagnen"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Häuptling"
+msgid "Chieftains"
+msgstr "Häuptlinge"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -431,8 +431,8 @@ msgstr "Der Spieler mit der Farbe der Flagge. Falls mehrere Clients dieselbe Far
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Beobachter-Modus bedeutet, dass du alles sehen kannst, aber keinen Spieler steuerst"
+"player."
+msgstr "Beobachter-Modus bedeutet, dass du alles sehen kannst, aber keinen Spieler steuerst."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -468,13 +468,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr "Die letzten drei können nur durch den Host durch Klicken auf „Typ“ des Spielers, gesetzt werden. Der Host kann darüber hinaus die Startbedingungen der einzelnen Spieler (die Menge von Gebäuden, Waren und Arbeitern, mit denen der Spieler beginnt) und den Stamm für die Computerspieler einstellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr "Jeder Client, der mit einem Spieler (keinem Beobachter) verknüpft ist, kann den Stamm und das Team dieses Spielers einstellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -547,9 +547,9 @@ msgstr "Wenn du ALT gedrückt hältst, wird das zweite alternative Werkzeug akti
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Die Zahlentasten (1 - 0) erlauben dir, direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
+msgstr "Die Zahlentasten (0 - 9) erlauben dir, direkt die Größe der Bearbeitungsfläche um den Mauszeiger zu setzen."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

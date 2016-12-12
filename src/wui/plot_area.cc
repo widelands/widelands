@@ -118,9 +118,12 @@ std::string get_value_with_unit(Units unit, int value) {
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
 		return (boost::format(npgettext("unit_narrow", "%1%m", "%1%m", value)) % value).str();
-	default:
+	case Units::kMinutesGeneric:
+	case Units::kHourGeneric:
+	case Units::kDayGeneric:
 		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 std::string get_generic_unit_name(Units unit) {
@@ -134,9 +137,12 @@ std::string get_generic_unit_name(Units unit) {
 	case Units::kMinutesGeneric:
 		/** TRANSLATORS: Generic unit label. Used in statistics. */
 		return pgettext("unit_generic", "minutes");
-	default:
+	case Units::kMinutesNarrow:
+	case Units::kHourNarrow:
+	case Units::kDayNarrow:
 		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 uint32_t ms_to_unit(Units unit, uint32_t ms) {
@@ -168,7 +174,10 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 /**
  * print the string into the RenderTarget.
  */
-void draw_value(const string& value, const RGBColor& color, const Point& pos, RenderTarget& dst) {
+void draw_value(const string& value,
+                const RGBColor& color,
+                const Vector2f& pos,
+                RenderTarget& dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
 	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align::kCenterRight);
 }
@@ -209,25 +218,25 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::max(how_many_ticks, 1u);
 
 	// first, tile the background
-	dst.tile(Rect(Point(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Point(0, 0));
+	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line_strip({FloatPoint(kSpacing, inner_h - kSpaceBottom),
-	                     FloatPoint(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
 	                    kAxisLineColor, kAxisLinesWidth);
 	// Arrow
 	dst.draw_line_strip(
 	   {
-	      FloatPoint(kSpacing + 5, inner_h - kSpaceBottom - 3),
-	      FloatPoint(kSpacing, inner_h - kSpaceBottom),
-	      FloatPoint(kSpacing + 5, inner_h - kSpaceBottom + 3),
+	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom - 3),
+	      Vector2f(kSpacing, inner_h - kSpaceBottom),
+	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
 	   },
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  Y Axis
-	dst.draw_line_strip({FloatPoint(inner_w - kSpaceRight, kSpacing),
-	                     FloatPoint(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
 	                    kAxisLineColor, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
@@ -235,32 +244,32 @@ void draw_diagram(uint32_t time_ms,
 	float posx = inner_w - kSpaceRight;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line_strip({FloatPoint(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
-		                     FloatPoint(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
+		dst.draw_line_strip({Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
+		                     Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
 		                    kAxisLineColor, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		dst.blit(Point(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 10), xtick,
-		         BlendMode::UseAlpha, UI::Align::kCenter);
+		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10), xtick, BlendMode::UseAlpha,
+		         UI::Align::kCenter);
 
 		posx -= sub;
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line_strip({FloatPoint(inner_w - kSpaceRight, kSpacing),
-	                     FloatPoint(inner_w - kSpaceRight - 3, kSpacing)},
-	                    kAxisLineColor, kAxisLinesWidth);
 	dst.draw_line_strip(
-	   {FloatPoint(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
-	    FloatPoint(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
+	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
+	   kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
+	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	dst.blit(Point(2, kSpacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
+	dst.blit(Vector2f(2.f, kSpacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
 }
 
 }  // namespace
@@ -446,7 +455,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 
 	//  print the maximal value into the top right corner
 	draw_value(yscale_label, RGBColor(60, 125, 0),
-	           Point(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
+	           Vector2f(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
@@ -480,7 +489,7 @@ void WuiPlotArea::draw_plot_line(RenderTarget& dst,
 			ly -= static_cast<int32_t>(scale_value(yline_length_, highest_scale, value));
 		}
 
-		std::vector<FloatPoint> points;
+		std::vector<Vector2f> points;
 		points.emplace_back(lx, ly);
 
 		for (int32_t i = dataset->size() - 1; i > 0 && posx > kSpacing; --i) {
@@ -632,11 +641,11 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
-	           Point(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
+	           Vector2f(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
 
 	// draw zero line
-	dst.draw_line_strip({FloatPoint(get_inner_w() - kSpaceRight, yoffset),
-	                     FloatPoint(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
+	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
+	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
 	                    kZeroLineColor, kPlotLinesWidth);
 }
 

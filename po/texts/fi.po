@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-14 18:22+0000\n"
-"PO-Revision-Date: 2016-09-14 19:15+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -36,24 +36,24 @@ msgstr "Lisenssi"
 
 #: ../../data/txts/LICENSE.lua:20
 msgid "Licensing information for Widelands"
-msgstr "Pelin lisenssi:"
+msgstr "Widelands pelin lisenssi"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2016 Widelands-kehittäjät"
+msgstr "Copyright 2002 - 2016 Widelands-kehittäjät."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public License (GPL) V2.0"
+msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Lisätietoa vapaista ohjelmistoista ja GPL-lisenssistä osoitteesta %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -88,7 +88,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta. Lisätietoja ja tukea voit etsiä osoitteista %1% (Kotisivut, Wiki, Foorumi kysymyksille tai yleistuki), %2% (Virheraportointi), ja %3% (Kielikäännökset)."
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
@@ -106,7 +106,7 @@ msgstr "Widelands-projektin kotisivut:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. Lisätietoa COPYING -tiedostosta"
+msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. Lisätietoa tiedostossa ‘COPYING’."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -119,7 +119,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands on sangen toimiva peli, ja hauska erityisesti moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusia karttoja, ohjelmoida uusia ominaisuuksia tai parantaa käännöksiä -- tule kotisivullemme!"
+msgstr "Widelands on sangen toimiva peli, ja hauska erityisesti moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusia karttoja, ohjelmoida uusia ominaisuuksia tai parantaa käännöksiä -- tule kotisivullemme."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
@@ -151,7 +151,7 @@ msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen pa
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt"
+msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt."
 
 #: ../../data/txts/README.lua:34
 msgid ""
@@ -210,8 +210,8 @@ msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Päällikkö"
+msgid "Chieftains"
+msgstr "Päälliköt"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -303,7 +303,7 @@ msgstr "Käännökset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr "Ruudut"
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
@@ -395,7 +395,7 @@ msgstr "Näytä/piilota rakennusten nimet"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa."
+msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
@@ -429,8 +429,8 @@ msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Katsoja-tila, jossa voit nähdä kaiken, mutta et voi hallita mitään pelaajaa."
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -466,14 +466,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Vain pelin avannut taho (host) voi lisäksi säätää kolmea seuraavaa asetusta: Pelaajien alkutilanne, tekoälypelaajien heimo- sekä joukkuevalinnat."
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Jokainen pelaajaan liitetty asiakas (\"Rooli\" on pelaaja) voi asettaa oman pelaajan heimon ja joukkueen."
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -545,15 +545,15 @@ msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näpp
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Voit valita työkalun koon numeronäppäimillä (1-0)."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Välilyönti toimii samoin kuin pelissä; näyttää/piilottaa rakennusvihjeet."
+msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennusalueet näkymän päälle tai pois."
 
 #: ../../data/txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -575,7 +575,7 @@ msgstr "Muista lähettää geologi tutkimaan alue ennen kuin rakennat kaivon tai
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "Laajenna maa-aluettasi sotilasrakennuksilla (vartijamökki, linnoitus, jne.)"
+msgstr "Laajenna maa-aluettasi sotilasrakennuksilla – Vartijamökki, Linnoitus, jne."
 
 #: ../../data/txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -591,7 +591,7 @@ msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeutt
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitteessa www.widelands.org"
+msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitteessa www.widelands.org."
 
 #: ../../data/txts/tips/general_game.tip:26
 msgid ""
@@ -640,7 +640,7 @@ msgstr "Uusia sotilaita rektytoidaan päämajassa ja varastoissa tarpeen mukaan,
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Jos pidät CTRL-näppäintä pohjassa, sivuutan turhat varmistuskysymykset rakenuksia päivitettäessä ja tuhottaessa. Vain rohkeille!"
+msgstr "Jos tunnet olevasi rohkea, pidä CTRL-näppäintä pohjassa saat sivuutettua turhat varmistuskysymykset rakenuksia laajenenttaessa, päivitettäessä ja tuhottaessa."
 
 #: ../../data/txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -674,4 +674,4 @@ msgstr "Jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittam
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr "Ovatko tietokonevastustajamme liian tylsiä? Käy verkkosivuillamme osoitteessa www.widelands.org (tai irkissä freenode-verkon kanavalla #widelands) ja tapaa muita pelaajia pelataksesi verkossa!"
+msgstr "Ovatko tietokonevastustajamme liian tylsiä? Käy verkkosivuillamme osoitteessa www.widelands.org (tai irkissä freenode-verkon kanavalla #widelands) ja tapaa muita pelaajia pelataksesi verkossa."

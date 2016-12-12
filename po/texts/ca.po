@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-05-14 08:33+0000\n"
-"PO-Revision-Date: 2016-05-19 08:04+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 20:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), dist
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web (en anglès): %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -207,8 +207,8 @@ msgid "Campaign Story"
 msgstr "Històries de les campanyes"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Cap"
+msgid "Chieftains"
+msgstr "Caps"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -426,8 +426,8 @@ msgstr "El jugador amb el color de la bandera. Si més d'un client selecciona el
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Mode d'espectador, en cas que vulguis veure la partida sense controlar cap jugador"
+"player."
+msgstr "Mode d'espectador, en cas que vulguis veure la partida sense controlar cap jugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -463,13 +463,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr "L'última de les tres només la pot activar el servidor clicant el botó de «tipus» de jugador. Els jugadors amfitrions poden escollir la posició d'inici de cada jugador (incloent els edificis, béns i treballadors inicials), la cultura i l'equip dels jugadors que controlen les IA."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr "Cada client connectat a un jugador (excepte els espectadors) pot escollir la cultura i l'equip del jugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -542,9 +542,9 @@ msgstr "Mantenint premuda la tecla «Alt», s'executarà la segona funció alter
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Les tecles de números (0…9) permeten seleccionar la mida de l'àrea al voltant del cursor."
+msgstr "Les tecles de números (0 - 9) permeten seleccionar la mida de l'àrea al voltant del cursor."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

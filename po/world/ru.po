@@ -4,17 +4,18 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# dr&mx <dronmax@gmail.com>, 2015
+# Максим Дронь <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
+# Денис Шабанов <shadenis2015@gmail.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 22:57+0000\n"
-"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
+"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"PO-Revision-Date: 2016-11-28 18:10+0000\n"
+"Last-Translator: Денис Шабанов <shadenis2015@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,11 +47,11 @@ msgstr "лань"
 msgid "Duck"
 msgstr "утка"
 
-#: ../../data/world/critters/elk/init.lua:14
+#: ../../data/world/critters/elk/init.lua:19
 msgid "Elk"
 msgstr "лось"
 
-#: ../../data/world/critters/fox/init.lua:14
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "лиса"
 
@@ -70,11 +71,11 @@ msgstr "северный олень"
 msgid "Sheep"
 msgstr "овца"
 
-#: ../../data/world/critters/stag/init.lua:14
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "олень"
 
-#: ../../data/world/critters/wildboar/init.lua:14
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "кабан"
 
@@ -82,7 +83,7 @@ msgstr "кабан"
 msgid "Wisent"
 msgstr "зубр"
 
-#: ../../data/world/critters/wolf/init.lua:14
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "волк"
 
@@ -393,7 +394,7 @@ msgstr "лиана (старая)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:90
 msgid "Liana Tree"
-msgstr ""
+msgstr "лиана"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
@@ -413,7 +414,7 @@ msgstr "клён (старый)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
-msgstr ""
+msgstr "клён"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
@@ -528,7 +529,7 @@ msgstr "пальмировая пальма (старая)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "пальмировая пальма"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -608,7 +609,7 @@ msgstr "королевская пальма (старая)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "королевская пальма"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -628,7 +629,7 @@ msgstr "рябина (старая)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:85
 msgid "Rowan"
-msgstr ""
+msgstr "рябина"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
@@ -673,7 +674,7 @@ msgstr "витуха (старая)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "витуха"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13

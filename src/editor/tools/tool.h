@@ -24,6 +24,8 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -67,7 +69,7 @@ public:
 		   .handle_undo_impl(world, center, parent, args, map);
 	}
 
-	const char* get_sel(const ToolIndex i) {
+	const Image* get_sel(const ToolIndex i) {
 		return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
 	}
 
@@ -96,13 +98,13 @@ public:
 	                                 Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const char* get_sel_impl() const = 0;
+	virtual const Image* get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {
 		return false;
 	}
 
 protected:
-	EditorTool& second_, &third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:

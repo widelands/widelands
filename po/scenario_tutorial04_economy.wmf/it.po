@@ -2,9 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano Magro, 2015
-# Cristiano Magro, 2016
-# Cristiano Magro, 2016
+# xno, 2015
+# xno, 2016
+# xno, 2016
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 13:40+0000\n"
-"Last-Translator: Cristiano Magro\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -208,16 +208,13 @@ msgid ""
 msgstr "Per ora basta spiegazioni. Ora prova tu. Vogliamo sapere se abbiamo ancora taverne, quindi devi scegliere la linguetta 'edifici medi'. Chiudi il menù dellle statistiche sugli edifici dopo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Ricerca il numero delle tue taverne nella finestra delle statistiche sugli edifici."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Guarda quante taverne hai."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Seleziona la scheda degli \"Edifici Medi\" nella finestra delle statistiche sugli edifici."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Guarda quante taverne hai."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -477,7 +474,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più  in fretta."
+msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270

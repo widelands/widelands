@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-15 07:23+0000\n"
-"PO-Revision-Date: 2016-09-15 15:40+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -204,16 +204,13 @@ msgid ""
 msgstr "Foghnaidh dhen mhìneachadh an-dràsta. Nise, feuch e. Tha sinn airson faighinn a-mach a bheil taighean-tàirn againn fhathast, mar sin feumaidh tu taba nan “Togalaichean meadhanach” a thaghadh. Dùin uinneag stadastaireachd nan togalach an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad ann an uinneag stadastaireachd nan togalach."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Tagh taba nan “Togalaichean meadhanach” ann an uinneag stadastaireachd nan togalach."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -221,7 +218,7 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr "Tha dà loidhne fo gach togalach. Seallaidh an dàrna tè an àireamh de thogalaichean a th’ agad is co mheud a tha ’gan togail. Seallaidh an loidhne eile an cinneasachadh cuibheasach mas e togalach saothrachaidh no ionad-trèanaidh a th’ ann no na saighdearan a tha ’nan gearastan ann ’s a tha thu ag iarraidh ann an togalaichean an airm."
+msgstr "Tha dà loidhne fo gach togalach. Seallaidh an dàrna tè an àireamh de thogalaichean a th’ agad is co mheud a tha ’gan togail. Seallaidh an loidhne eile an cinneasachadh cuibheasach mas e togalach saothrachaidh no ionad-oideachaidh a th’ ann no na saighdearan a tha ’nan gearastan ann ’s a tha thu ag iarraidh ann an togalaichean an airm."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid "Close the building statistics window when you are done."
@@ -268,7 +265,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Ceart mar-thà. Chunnaic thu air an liosta nach eil taigh-tàirn no taigh-seinnse sam bith air fhàgail dhut. Is ciall dha seo nach eil thu a’ dèanamh greimeagan. Ach bheireamaid sùil air na tha san stòras againn fhathast."
+msgstr "Ceart mar-thà. Chunnaic thu air an liosta nach eil taigh-tàirn no taigh-òil sam bith air fhàgail dhut. Is ciall dha seo nach eil thu a’ dèanamh greimeagan. Ach bheireamaid sùil air na tha san stòras againn fhathast."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
@@ -278,7 +275,7 @@ msgstr "Briog air a’ phutan “An stòras”."
 msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
-msgstr "’S urrainn dhut an iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
+msgstr "’S urrainn dhut a’ ghrad-iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."
@@ -421,7 +418,7 @@ msgid ""
 "When you’ve played a lot, you will know such things by heart. But when "
 "you’re unsure what this tribe needs for a special ware, you can easily look "
 "it up in your tribe’s ware encyclopedia."
-msgstr "Nuair a bhios tu air cluiche gu tric, bi a leithid eòlais air do theangaidh. Ach mura h-eil thu cinnteach dè a dh’fheumas an treubh seo airson bathair shònraichte, ’s urrainn dhut seo a rannsachadh ann an leabhar-eòlais bathar do threubha."
+msgstr "Nuair a bhios tu air cluiche gu tric, bidh a leithid eòlais air do theangaidh. Ach mura h-eil thu cinnteach dè a dh’fheumas an treubh seo airson bathair shònraichte, ’s urrainn dhut seo a rannsachadh ann an leabhar-eòlais bathar do threubha."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "This encyclopedia can be accessed via"
@@ -720,6 +717,10 @@ msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
 msgstr "Suidhich uiread-amais nan colbhan marmoir air 20 agus fuirich ort gus am bi an clachair air an dèanamh."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:412
+msgid "Produce 20 marble columns."
+msgstr "Saothraich 20 colbh marmoir."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""

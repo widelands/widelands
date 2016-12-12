@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2009,2016
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-21 08:44+0000\n"
-"PO-Revision-Date: 2016-09-21 13:45+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -202,16 +203,13 @@ msgid ""
 msgstr "Det er nok forklaring for nu. Prøv det selv nu. Vi ønsker at vide, om vi stadig har værtshuse, så du skal vælge fanebladet »Mellembygninger«. Luk menuen for bygningsstatistik efterfølgende."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
-msgid "Look up your number of taverns in the building statistics window."
-msgstr "Slå antallet af værtshuse op i bygningsstatistikkens vindue."
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+msgid "Look up how many taverns you have."
+msgstr "Slå op hvor mange traktørsteder du har."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Vælg fanebladet »Mellembygninger« i bygningsstatistikkens vindue."
-
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
-msgid "Look up how many taverns you have."
-msgstr "Slå op hvor mange traktørsteder du har."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -293,7 +291,7 @@ msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "Varelagerets menuvindue har fire faneblade. Det første (og  i øjeblikket valgte) viser dig alle dine nuværende varer, inklusive dem på veje, ved flag og i bygninger afventende brug."
+msgstr "Varelagerets menuvindue har fire faneblade. Det første (og i øjeblikket valgte) viser dig alle dine nuværende varer, inklusive dem på veje, ved flag og i bygninger afventende brug."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
@@ -711,7 +709,7 @@ msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr "Lad os prøve det: Den nuværende målmængde for marmorsøjler er 10. Øg den for at forberede det tilfælde  hvor du hurtigt skal bygge dine fæstningsværker op."
+msgstr "Lad os prøve det: Den nuværende målmængde for marmorsøjler er 10. Øg den for at forberede det tilfælde hvor du hurtigt skal bygge dine fæstningsværker op."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid ""

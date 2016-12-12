@@ -3,17 +3,19 @@
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
+# GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-09-19 07:41+0000\n"
-"PO-Revision-Date: 2016-09-19 07:42+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-12-01 13:02+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +24,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
@@ -45,7 +47,7 @@ msgid "Garrisons soldiers to expand your territory."
 msgstr "Koszaruje żołnierzy rozszerzając twoje terytorium."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
@@ -74,7 +76,7 @@ msgstr "Jeśli brakuje ci żołnierzy do zajmowania nowych budynków wojskowych,
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
 msgctxt "building"
 msgid "A new building is being built at this construction site."
-msgstr ""
+msgstr "Na placu budowy odbywa się konstrukcja nowego budynku."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
@@ -83,7 +85,7 @@ msgid ""
 "A building is being dismantled at this dismantlesite, returning some of the "
 "resources that were used during this building’s construction to your tribe’s"
 " stores."
-msgstr ""
+msgstr "Plac rozbiórki rozbiera budynek na części zwracając część materiałów użytych do jego konstrukcji z powrotem do magazynów."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -91,19 +93,19 @@ msgctxt "atlanteans_building"
 msgid ""
 "Forges shields that are used for training soldiers’ defense in the "
 "labyrinth."
-msgstr ""
+msgstr "Wykuwa tarcze wykorzystywane do szkolenia obrony żołnierzy w labiryncie."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
-msgstr ""
+msgstr "Piecze chleb, który dostarcza się górnikom, zwiadowcom i żołnierzom."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
-msgstr ""
+msgstr "Sieje i zbiera czarne korzenie."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:26
@@ -111,15 +113,23 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer needs %1% on average to sow and harvest a bundle of "
 "blackroot."
-msgstr ""
+msgstr "Farmer czarnych korzeni potrzebuje średnio %1%, aby zasiać i zebrać jedną wiązkę czarnych korzeni."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
 msgctxt "building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Wypala węgiel drzewny z pni."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -130,50 +140,50 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Wydobywa węgiel w górach."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Carves precious stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Poszukuje kamieni szlachetnych w górach."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
-msgstr ""
+msgstr "Sieje i zbiera kukurydzę."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:26
 msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
-msgstr ""
+msgstr "Farmer potrzebuje średnio %1%, aby zasiać i zebrać snop kukurydzy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish."
-msgstr ""
+msgstr "Hoduje ryby."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Łowi ryby na brzegu w pobliżu domku."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid ""
 "Build a fish breeder’s house close to the fisher’s house to make sure that "
 "you don’t run out of fish."
-msgstr ""
+msgstr "Zbuduj chatę hodowcy ryb w pobliżu domku rybaka, by nie zabrakło mu ryb do łowienia."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Domek rybaka potrzebuje na obszarze pracy wód zasobnych w ryby."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
@@ -181,7 +191,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:16
 msgctxt "building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Sadzi drzewa w okolicy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:21
@@ -189,13 +199,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Leśniczówka potrzebuje na obszarze pracy wolnej przestrzeni, na której można sadzić drzewa."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Spins gold thread out of gold."
-msgstr ""
+msgstr "Tka ze złota złotą nić."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/helptexts.lua:16
@@ -206,7 +216,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Wydobywa rudę złota na terenach górskich."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/helptexts.lua:16
@@ -214,7 +224,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje silne atlantydzkie konie, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
@@ -222,13 +232,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:16
 msgctxt "building"
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Poluje na zwierzynę dla mięsa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Kwatera myśliwego potrzebuje na swoim obszarze pracy zwierząt, na które można polować."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/helptexts.lua:16
@@ -239,34 +249,34 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Wydobywa rudę żelaza na terenach górskich."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Mieli czarny korzeń i kukurydzę, by uzyskać z nich odpowiednio mąkę korzenną i kaszę kukurydzianą."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Pozyskuje granit z głazów w okolicy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kamieniołom potrzebuje głazów na obszarze pracy, z których będzie pozyskiwać kamień."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/helptexts.lua:16
 msgctxt "building"
 msgid "Saws logs to produce planks."
-msgstr ""
+msgstr "Tnie drzewo na deski."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
@@ -274,7 +284,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Bada nieznane tereny."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
@@ -284,15 +294,23 @@ msgctxt "building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr ""
+msgstr "Buduje statki wykorzystywane do kolonizacji nowych lądów i handlu pomiędzy portami."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/helptexts.lua:16
 msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr ""
+msgstr "Wytapia żelazo i złoto z ich rud."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/helptexts.lua:16
@@ -300,13 +318,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon."
-msgstr ""
+msgstr "Wędzie rybę i mięso, które dostarcza się górnikom i zwiadowcom, a także żołnierzom w podziemiach."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Hoduje pająki dla jedwabiu."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/helptexts.lua:16
@@ -314,7 +332,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/helptexts.lua:16
 msgctxt "building"
 msgid "Forges all the tools that your workers need."
-msgstr ""
+msgstr "Wykuwa wszelkie narzędzia potrzebne twoim pracownikom."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/helptexts.lua:16
@@ -322,7 +340,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Forges tridents to equip the soldiers and to train their attack in the "
 "dungeon."
-msgstr ""
+msgstr "Wykuwa trójzęby dostarczane żołnierzom jako wyposażenie i do treningu w podziemiach."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/helptexts.lua:16
@@ -330,7 +348,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and "
 "train the soldiers."
-msgstr ""
+msgstr "Tka pajęczą tkaninę na budynki i żagle statków oraz tabardy na wyposażenie i do szkolenia żołnierzy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
@@ -338,7 +356,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
 msgctxt "building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Czerpie wodę z głębin."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:16
@@ -346,13 +364,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:16
 msgctxt "building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Ścina okoliczne drzewa i obrąbuje je do postaci kłód."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Chata drwala potrzebuje drzew do ścinania na swoim obszarze pracy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:3
@@ -361,7 +379,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr ""
+msgstr "\"Nowo wykuty topór wojownika ujawnia, co najlepsze w jego posiadaczu - lub co najgorsze w jego twórcy.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -370,13 +388,13 @@ msgctxt "barbarians_building"
 msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
-msgstr ""
+msgstr "Stare barbarzyńskie przysłowie<br> mówiące o konieczności podejmowania czasem pewnego ryzyka."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces axes, sharp axes and broad axes."
-msgstr ""
+msgstr "Produkuje topory, ostre topory i szerokie topory."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:18
@@ -385,7 +403,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is an upgrade from the metal workshop but doesn’t "
 "require additional qualification for the worker."
-msgstr ""
+msgstr "Barbarzyńska fabryka toporów jest pośrednim ogniwem w łańcuchu trzech budynków. Jest ulepszeniem narzędziowni, ale nie wymaga dodatkowych umiejętności od pracownika."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -406,8 +424,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:67
-#: ../../data/tribes/scripting/help/global_helptexts.lua:97
+#: ../../data/tribes/scripting/help/global_helptexts.lua:69
+#: ../../data/tribes/scripting/help/global_helptexts.lua:99
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -420,7 +438,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
-msgstr ""
+msgstr "Wszystkie trzy bronie produkowane są tak samo szybko, ale wymagają różnych materiałów."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
@@ -430,13 +448,13 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "type of ax in about %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek może produkować topory każdego typu średnio co %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr ""
+msgstr "Piecze chleb pita tak dla żołnierzy, jak i dla górników."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -445,7 +463,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek może produkować chleb pita średnio co %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -453,20 +471,20 @@ msgctxt "barbarians_building"
 msgid ""
 "Prepares rations for scouts and rations, snacks and meals to feed all "
 "miners."
-msgstr ""
+msgstr "Przygotowuje racje dla zwiadowców oraz racje, przekąski i posiłki dla górników."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:16
 msgctxt "building"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Warzy piwo, by górnikom dopisywały energia i dobry humor."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Hoduje mocne woły dla wsparcia transportu towarów."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
@@ -475,7 +493,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek wyprodukuje wołu w średnio %s."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:3
@@ -484,7 +502,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>\n"
 "Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "Wieki temu Barbarzyńcy nauczyli się drążyć zbocza gór w poszukiwaniu tego czarnego materiału zasilającego ich piece. <br>\nDrewno może służyć do podtrzymywania domowego ogniska i skutecznie cię ogrzeje, lecz gdy przychodzi do pracy ze złotem czy żelazem, na wysokości zadania stanie jedynie węgiel."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:19
@@ -494,7 +512,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie jedynie %s surowca. Po jego wyczerpaniu będzie miała jedynie 5%% szans na znalezienie węgla."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
@@ -502,7 +520,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje węgiel średnio co 32.5 sekundy."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
@@ -510,7 +528,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje węgiel średnio co 19.5 sekundy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -520,7 +538,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokładów. Nawet jednak po jego wyczerpaniu będzie miała %s szans na znalezienie więcej węgla."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
@@ -528,45 +546,45 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje węgiel średnio co 14.4 sekundy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests wheat."
-msgstr ""
+msgstr "Sieje i zbiera pszenicę."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
-msgstr ""
+msgstr "Farmer potrzebuje średnio %1%, aby zasiać i zebrać snop pszenicy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr ""
+msgstr "\"Że niby co, że moje ryby są nieświeże?!\""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Fishes on the coast near the fisher’s hut."
-msgstr ""
+msgstr "Łowi ryby na brzegu w pobliżu chaty rybaka."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The fisher’s hut needs water full of fish within the work area."
-msgstr ""
+msgstr "Chata rybaka potrzebuje na obszarze pracy wód zasobnych w ryby."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The fisher pauses %s before going to work again."
-msgstr ""
+msgstr "Rybak czeka %s, zanim wróci do pracy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:3
@@ -574,25 +592,25 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr ""
+msgstr "\"Równie mocno kocha zwierzęta hodować,<br>\n\t\t\tjak my kochamy je jeść i przyrządzać.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Barbarzyńska rymowanka"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Releases animals into the wild to steady the meat production."
-msgstr ""
+msgstr "Wypuszcza zwierzęta na swobodę, aby podtrzymać produkcję mięsa."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The gamekeeper pauses 52.5 seconds before going to work again."
-msgstr ""
+msgstr "Gajowy czeka 52.5 sekundy, zanim wróci do pracy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -602,7 +620,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity…’"
-msgstr ""
+msgstr "\"Miękkie i giętkie.<br> A jednak nienaruszone przez czas i pogodę.<br> Promienie słońca przekute w wieczność...\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -611,7 +629,7 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr ""
+msgstr "Fragment \"Naszych Podziemnych Skarbów\",<br> tradycyjnej barbarzyńskiej pieśni."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -621,7 +639,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie jedynie %s surowca. Po jego wyczerpaniu będzie miała jedynie 5%% szans na znalezienie rudy złota."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
@@ -630,7 +648,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę złota średnio co %s."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
@@ -638,7 +656,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
 " on average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę złota średnio co 19.5 sekundy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -648,7 +666,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokładów. Nawet jednak po jego wyczerpaniu będzie miała %s szans na znalezienie więcej rudy złota."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -656,13 +674,13 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
 " on average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę złota średnio co 18.5 sekundy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
-msgstr ""
+msgstr "\"Poradzę sobie, panie, i z toną granitu, ale nie zniosę dłużej tej próżnej gadaniny.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
@@ -673,13 +691,13 @@ msgid ""
 "Stonford in the year of the great flood. <br> The same man had all the 244 "
 "granite blocks ready only a week later, and they still fortify the city’s "
 "levee."
-msgstr ""
+msgstr "To zdanie było odpowiedzią, jakiej górnik Rimbert – później znany jako Rimbert samotnik – udzielił, kiedy został poproszony o pozostanie na swoim miejscu podczas nadzwyczajnego zebrania w Stonfordzie w roku wielkiej powodzi. <br> To on wydobył w ciągu zaledwie tygodnia od tego czasu 244 bloki granitu, które do dziś umacniają miejskie wały przeciwpowodziowe."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
-msgstr ""
+msgstr "Pozyskuje granit ze skał na terenach górskich."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:19
@@ -689,13 +707,13 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokładów. Nawet jednak po jego wyczerpaniu będzie miała %s szans na znalezienie więcej granitu."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
 msgctxt "barbarians_building"
 msgid "It cannot be upgraded."
-msgstr ""
+msgstr "Nie można jej ulepszyć."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -704,7 +722,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje granit średnio co %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -712,7 +730,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Forges helmets that are used for training soldiers’ health in the training "
 "camp."
-msgstr ""
+msgstr "Wykuwa hełmy wykorzystywane do szkolenia zdrowia żołnierzy w obozie szkoleniowym."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:3
@@ -720,26 +738,26 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr ""
+msgstr "\"Cichy jak pantera,<br> zwinny jak łasica,<br> szybki jak strzała,<br> śmiercionośny jak żmija.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "\"Sztuka Łowiecka\""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The hunter’s hut needs animals to hunt within the work area."
-msgstr ""
+msgstr "Chata myśliwego potrzebuje na swoim obszarze pracy zwierząt, na które można polować."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The hunter pauses %s before going to work again."
-msgstr ""
+msgstr "Myśliwy czeka %s, zanim wróci do pracy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -747,7 +765,7 @@ msgctxt "building"
 msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in the"
 " basic and deep mines."
-msgstr ""
+msgstr "Przygotowuje racje dla zwiadowców oraz racje i przekąski dla górników w zwykłych i głębokich kopalniach."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:3
@@ -757,7 +775,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr ""
+msgstr "\"Widząc, jak mój kilof zużywa się dzień po dniu, uświadamiam sobie, dlaczego moja praca jest ważna.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -765,7 +783,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Quote from an anonymous miner."
-msgstr ""
+msgstr "Wypowiedź nieznanego górnika."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:18
@@ -775,7 +793,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie jedynie %s surowca. Po jego wyczerpaniu będzie miała jedynie 5%% szans na znalezienie rudy żelaza."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
@@ -784,7 +802,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę żelaza średnio co %s."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
@@ -792,7 +810,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
 " on average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę żelaza średnio co 39.5 sekundy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -802,7 +820,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr ""
+msgstr "Ta kopalnia wydobędzie całość surowca aż do najgłębszych pokładów. Nawet jednak po jego wyczerpaniu będzie miała %s szans na znalezienie więcej rudy żelaza."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -810,13 +828,13 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
 " on average."
-msgstr ""
+msgstr "Jeśli dostawy żywności są stabilne, ta kopalnia produkuje rudę żelaza średnio co 17.6 sekundy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "\"Ogniem i wodą czyni stary kamień nowym.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:8
@@ -824,7 +842,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
 " ‘new stone’ now is an important building material."
-msgstr ""
+msgstr "Odpowiedź Ragnalda Dziecka na pytanie, co robi w błocie. Jego \"nowy kamień\" jest teraz ważnym materiałem budowlanym."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:13
@@ -832,7 +850,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Processes granite to make ‘grout’, a substance that solidifies and so "
 "reinforces masonry."
-msgstr ""
+msgstr "Wapiennik przetwarza kamień na \"fugę\", substancję, która krzepnąc wzmacnia mur."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -840,7 +858,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The lime kiln’s output will only go to construction sites that need it. "
 "Those are predominantly houses that work with fire, and some military sites."
-msgstr ""
+msgstr "Produkt wapiennika trafi tylko do budynków, które go potrzebują. Są to głównie te pracujące z ogniem oraz niektóre budynki wojskowe."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
@@ -849,7 +867,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce grout "
 "in about %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek wyprodukuje fugę w średnio %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:3
@@ -858,19 +876,19 @@ msgid ""
 "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
 " lumberjack.’"
-msgstr ""
+msgstr "\"Zetnij drzewo w dwieście ciosów, a jesteś dzieckiem. Zetnij je w sto, a jesteś żołnierzem. \nZetnij je w pięćdziesiąt, a jesteś bohaterem. Zetnij je w dwadzieścia, a wkrótce zostaniesz szanowanym drwalem.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "Krumta, stolarz Chat'Karutha"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The lumberjack’s hut needs trees to fell within the work area."
-msgstr ""
+msgstr "Chata drwala potrzebuje drzew do ścinania na swoim obszarze pracy."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
@@ -879,13 +897,13 @@ msgctxt "barbarians_building"
 msgid ""
 "The lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
-msgstr ""
+msgstr "Drwal ścina drzewo w %s, nie licząc czasu dotarcia na miejsce i z powrotem do chaty."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
-msgstr ""
+msgstr "\"Sprawiamy, że działa!\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:8
@@ -893,7 +911,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
-msgstr ""
+msgstr "Napis na progu zniszczonej Starej Kuźni w Harradsheimie, najstarszej znanej kuźni."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:18
@@ -902,7 +920,7 @@ msgid ""
 "The Barbarian metal workshop is the basic production site in a series of "
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
-msgstr ""
+msgstr "Barbarzyńska narzędziownia to najbardziej podstawowy z trzech budynków tego typu. Produkuje wszystkie narzędzia, jakie potrzebne są barbarzyńcom. Pozostałe produkują broń."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -911,7 +929,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "tool in about %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek wyprodukuje dowolne narzędzie w średnio %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:3
@@ -919,13 +937,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
-msgstr ""
+msgstr "\"Niech pierwsze oddali pragnienie, drugie pozwoli ci się odprężyć; dopij resztkę trzeciego i ruszaj na kolejną zmianę!\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Widespread toast among miners"
-msgstr ""
+msgstr "Popularny wśród górników toast"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:13
@@ -933,7 +951,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr ""
+msgstr "Mały browar produkuje podłej jakości piwo. Jest ono istotnym elementem przekąsek, jakie przygotowywane są przez karczmy i duże karczmy dla górników pracujących w głębokich kopalniach."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
@@ -942,26 +960,26 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in"
 " about %s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek wyprodukuje piwo w średnio %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina surowe kawałki granitu ze skał."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:21
 msgctxt "barbarians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kamieniołom potrzebuje głazów na obszarze pracy, z których będzie pozyskiwać kamień."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The stonemason pauses %s before going back to work again."
-msgstr ""
+msgstr "Kamieniarz czeka %s, zanim wróci do pracy."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:4
@@ -969,20 +987,20 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
-msgstr ""
+msgstr "\"Ten, kto umie wyhodować dwa drzewa, gdzie normalnie wyrosłoby jedno, wart jest więcej od najważniejszego z generałów!\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Chat’Karuth in a conversation with a Ranger"
-msgstr ""
+msgstr "Chat'Karuth w rozmowie z leśnikiem"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:19
 msgctxt "barbarians_building"
 msgid ""
 "The ranger’s hut needs free space within the work area to plant the trees."
-msgstr ""
+msgstr "Leśniczówka potrzebuje wolnej przestrzeni na obszarze pracy, na której można sadzić drzewa."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:24
@@ -991,26 +1009,26 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger needs %s to plant a tree, not counting the time he needs to reach"
 " the destination and go home again."
-msgstr ""
+msgstr "Leśnik sadzi drzewo w %s, nie licząc czasu dotarcia na miejsce i z powrotem do leśniczówki."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
-msgstr ""
+msgstr "\"Uprawiamy dachy\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the Guild of Gardeners"
-msgstr ""
+msgstr "Hasło Gildii Ogrodników"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
 "Cultivates reed that serves two different purposes for the Barbarian tribe."
-msgstr ""
+msgstr "Uprawia trzcinę mającą dla barbarzyńców dwa zastosowania."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
@@ -1018,26 +1036,26 @@ msgctxt "barbarians_building"
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr ""
+msgstr "Trzcina jest tradycyjnym materiałem do pokrycia dachów, tka się z niej również niezwykle wytrzymałe płótno na żagle."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
-msgstr ""
+msgstr "Paprociarnia produkuje snop trzciny średnio co %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
 msgctxt "building"
 msgid "Prepares rations to feed the scouts and miners."
-msgstr ""
+msgstr "Przygotowuje racje dla zwiadowców i górników."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
-msgstr ""
+msgstr "Produkuje wszystkie rodzaje toporów, jakich Barbarzyńcy potrzebują do prowadzenia wojny."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
@@ -1045,20 +1063,20 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an ax workshop."
-msgstr ""
+msgstr "Barbarzyńska kuźnia jest najbardziej zaawansowanym budynkiem produkującym broń. Dlatego też buduje się ją ulepszając warsztat toporów."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
 msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr ""
+msgstr "Wszystkie bronie produkowane są tak samo szybko, ale lepsze bronie wymagają więcej surowców. Dwie ostatnie wykorzystują złoto."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of thatch reed."
-msgstr ""
+msgstr "Tka tkaninę z trzciny."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -1066,7 +1084,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr ""
+msgstr "\"Jak słodkim jest źródło życia<br> spadające z nieba<br> i pojące ziemię.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
@@ -1074,14 +1092,14 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Pieśń stworzona przez Barda Sigurda,<br>kiedy spadł pierwszy deszcz po Wielkiej Suszy, w 21. roku rządów Chat'Karutha."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Tragarz czerpie jedno wiadro wody w %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
@@ -1089,7 +1107,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Hardens logs by fire into blackwood, which is used to construct robust "
 "buildings."
-msgstr ""
+msgstr "Utwardza drewno ogniem tworząc czarne drewno używane do budowy wytrzymałych budynków."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/helptexts.lua:16
@@ -1097,25 +1115,25 @@ msgctxt "empire_building"
 msgid ""
 "Forges armor and helmets that are used for training soldiers’ health in the "
 "training camp."
-msgstr ""
+msgstr "Wykuwa zbroje i hełmy wykorzystywane do szkolenia zdrowia żołnierzy w obozie szkoleniowym."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/bakery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Bakes bread for soldiers and miners alike."
-msgstr ""
+msgstr "Piecze chleb tak dla żołnierzy, jak i dla górników."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/bakery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
-msgstr ""
+msgstr "Piekarz potrzebuje średnio %1%, aby upiec jeden bochenek chleba."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The brewer needs %1% on average to brew a vat of beer."
-msgstr ""
+msgstr "Piwowar potrzebuje średnio %1%, aby uwarzyć kocioł piwa."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
@@ -1123,25 +1141,25 @@ msgctxt "empire_building"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje słodkie i pomocne osły, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
-msgstr ""
+msgstr "Farmer potrzebuje średnio %1%, aby zasiać i zebrać snop pszenicy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Łowi ryby na brzegu w pobliżu domku rybaka."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Domek rybaka potrzebuje na obszarze pracy wód zasobnych w ryby."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:21
@@ -1149,13 +1167,13 @@ msgctxt "empire_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Leśniczówka potrzebuje wolnej przestrzeni na obszarze pracy, na której można sadzić drzewa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Kwatera myśliwego potrzebuje na swoim obszarze pracy zwierząt, na które można polować."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/inn/helptexts.lua:16
@@ -1163,7 +1181,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in all"
 " mines."
-msgstr ""
+msgstr "Przygotowuje racje dla zwiadowców oraz racje i przekąski dla górników we wszelkich kopalniach."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/inn/helptexts.lua:26
@@ -1172,86 +1190,86 @@ msgid ""
 "The innkeeper needs %1% on average to prepare a ration and a meal. If the "
 "economy doesn’t need both, the innkeeper needs %2% on average to prepare one"
 " ration or one meal."
-msgstr ""
+msgstr "Karczmarz potrzebuje średnio %1%, aby przyrządzić rację i posiłek. Jeśli ekonomii nie potrzeba jednej z tych rzeczy, karczmarz potrzebuje średnio %2%, aby przyrządzić rację lub posiłek."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The lumberjack's house needs trees to fell within the work area."
-msgstr ""
+msgstr "Chata drwala potrzebuje drzew do ścinania na swoim obszarze pracy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
-msgstr ""
+msgstr "Czerpie marmur i granit ze skał na terenach górskich."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/mill/helptexts.lua:16
 msgctxt "building"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Miele pszenicę na mąkę."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The miller needs %1% on average to grind wheat into a sack of flour."
-msgstr ""
+msgstr "Młynarz potrzebuje średnio %1%, aby zmielić pszenicę na jeden wór mąki."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Breeds pigs for their meat."
-msgstr ""
+msgstr "Hoduje świnie na mięso."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The pig breeder needs %1% on average to raise and slaughter a pig."
-msgstr ""
+msgstr "Świniopas potrzebuje średnio %1%, aby uchować i zarżnąć jedną świnię."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina bloki granitu i marmuru z okolicznych skał."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/quarry/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kamieniołom potrzebuje głazów na obszarze pracy, z których będzie pozyskiwać kamień."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Keeps sheep for their wool."
-msgstr ""
+msgstr "Chowa owce na wełnę."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
-msgstr ""
+msgstr "Rzeźbi z marmuru marmurowe kolumny."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/tavern/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Prepares rations to feed the scouts and miners."
-msgstr ""
+msgstr "Przygotowuje racje dla zwiadowców i górników."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/tavern/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The innkeeper needs %1% on average to prepare a ration."
-msgstr ""
+msgstr "Karczmarz potrzebuje średnio %1%, aby przygotować rację."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Plants grapevines and harvests grapes."
-msgstr ""
+msgstr "Sadzi winorośl i zbiera winogrona."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/helptexts.lua:16
@@ -1259,19 +1277,19 @@ msgctxt "empire_building"
 msgid ""
 "Forges spears to equip the soldiers and to train their attack in the "
 "training camp."
-msgstr ""
+msgstr "Wykuwa włócznie dostarczane żołnierzom jako wyposażenie i do szkolenia ataku w obozie szkoleniowym."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Weaves cloth out of wool."
-msgstr ""
+msgstr "Tka tkaninę z wełny."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/winery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Produces wine."
-msgstr ""
+msgstr "Produkuje wino."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:17
@@ -1283,7 +1301,7 @@ msgstr "Trenuje żołnierzy w ataku."
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:19
 msgctxt "atlanteans_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Wyposaża żołnierzy w niezbędne broń i pancerz."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/helptexts.lua:17
@@ -1296,26 +1314,26 @@ msgstr "Szkoli żołnierzy w obronie, uniku i zdrowiu."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr ""
+msgstr "\"Nie ma lepszego przyjaciela na polu bitwy niż chybiony cios przeciwnika.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr ""
+msgstr "Przypisywane Neidhardtowi, sławnemu trenerowi."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Trenuje żołnierzy w unikach."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr ""
+msgstr "'Unik' zwiększa szansę żołnierza na uniknięcie ataku przeciwnika."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:21
@@ -1324,12 +1342,12 @@ msgctxt "barbarians_building"
 msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
 "initial level."
-msgstr ""
+msgstr "Barbarzyńscy żołnierze nie mogą być szkoleni w obronie i pozostaną na swoim początkowym poziomie."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:80
-#: ../../data/tribes/scripting/help/global_helptexts.lua:96
+#: ../../data/tribes/scripting/help/global_helptexts.lua:82
+#: ../../data/tribes/scripting/help/global_helptexts.lua:98
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1343,7 +1361,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, arena bitewna może wyszkolić żołnierza w uniku z poziomu 0 do najwyższego poziomu średnio w %1$s i %2$s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:3
@@ -1351,24 +1369,24 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr ""
+msgstr "\"Silny nie wybaczy ani nie zapomni, lecz pomści się za wyrządzoną niesprawiedliwość, tak za przeszłą, jak i za każdą przyszłą.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Chief Chat’Karuth in a speech to his army."
-msgstr ""
+msgstr "Wódz Chat'Karuth w przemówieniu do swojej armii."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Trenuje żołnierzy w ataku i zdrowiu."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Wyposaża żołnierzy w niezbędne broń i pancerz."
 
 #. TRANSLATORS: Performance helptext for a building. Placeholders are for "4
 #. minutes" and "40 seconds"
@@ -1378,14 +1396,14 @@ msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %1$s and %2$s on "
 "average."
-msgstr ""
+msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, obóz szkoleniowy może wyszkolić żołnierza w ataku i zdrowiu do najwyższego poziomu średnio w %1$s i %2$s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:17
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/helptexts.lua:17
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Trenuje żołnierzy w unikach."
 
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:19
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/helptexts.lua:19
@@ -1393,7 +1411,7 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr ""
+msgstr "'Unik' zwiększa szansę żołnierza na uniknięcie ataku przeciwnika."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:24
@@ -1403,18 +1421,18 @@ msgctxt "empire_building"
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
-msgstr ""
+msgstr "Żołnierze Imperium nie mogą być ćwiczeni w obronie i pozostają na jej oryginalnym poziomie."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:17
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Trenuje żołnierzy w ataku i zdrowiu."
 
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:19
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Wyposaża żołnierzy w niezbędne broń i pancerz."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/helptexts.lua:16
@@ -1434,7 +1452,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Służy za bazę do zamorskiej kolonizacji i handlu. Przechowuje również twoich żołnierzy, towary i narzędzia."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
@@ -1444,7 +1462,7 @@ msgctxt "building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Twoi żołnierze i pracownicy znajdą tu schronienie. Przechowuje również twoje towary i narzędzia."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:16
@@ -1466,7 +1484,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Służy za bazę do zamorskiej kolonizacji i handlu. Przechowuje również twoich żołnierzy, towary i narzędzia."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -1486,13 +1504,13 @@ msgctxt "empire_building"
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
+msgstr "Choć statek ten utknął na mieliźnie, wciąż może służyć za schronienie dla twoich ludzi. Można w nim także przechowywać towary i narzędzia."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:22
 msgctxt "empire_building"
 msgid "The headquarters shipwreck is your main building."
-msgstr ""
+msgstr "Kwatera główna, nawet ulokowana we wraku statku, to twój najważniejszy budynek."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/port/helptexts.lua:16
@@ -1500,7 +1518,7 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Służy za bazę do zamorskiej kolonizacji i handlu. Przechowuje również twoich żołnierzy, towary i narzędzia."
 
 #: ../../data/tribes/scripting/help/building_help.lua:87
 #: ../../data/tribes/scripting/help/format_help.lua:143
@@ -1510,21 +1528,21 @@ msgstr "%s i"
 
 #: ../../data/tribes/scripting/help/building_help.lua:96
 msgid "Food:"
-msgstr ""
+msgstr "Żywność:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:144
 msgid "Equipment:"
-msgstr ""
+msgstr "Wyposażenie:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
 #: ../../data/tribes/scripting/help/building_help.lua:167
 msgid "Lore"
-msgstr "Opis"
+msgstr "W przekazach"
 
 #: ../../data/tribes/scripting/help/building_help.lua:175
 #: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
-msgstr "Ogólne"
+msgstr "Ogólnie"
 
 #: ../../data/tribes/scripting/help/building_help.lua:176
 msgid "Purpose:"
@@ -1542,16 +1560,16 @@ msgstr "Promień obszaru pracy:"
 #: ../../data/tribes/scripting/help/building_help.lua:213
 #: ../../data/tribes/scripting/help/building_help.lua:218
 msgid "Healing:"
-msgstr "Trening zdrowia:"
+msgstr "Leczenie:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
+msgstr[0] "Zakwaterowani żołnierze leczą %d punkt zdrowia co sekundę."
+msgstr[1] "Zakwaterowani żołnierze leczą %d punkty zdrowia co sekundę."
+msgstr[2] "Zakwaterowani żołnierze leczą %d punktów zdrowia co sekundę."
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1604,11 +1622,11 @@ msgstr "Zależności"
 
 #: ../../data/tribes/scripting/help/building_help.lua:355
 msgid "Health Training"
-msgstr ""
+msgstr "Szkolenie zdrowia"
 
 #: ../../data/tribes/scripting/help/building_help.lua:356
 msgid "Trains ‘Health’ from %1% up to %2%"
-msgstr ""
+msgstr "Szkoli zdrowie od poz. %1% do poz. %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:372
@@ -1619,29 +1637,29 @@ msgstr "Żołnierze:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:368
 msgid "Attack Training"
-msgstr ""
+msgstr "Szkolenie ataku"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
 #: ../../data/tribes/scripting/help/building_help.lua:370
 msgid "Trains ‘Attack’ from %1% up to %2%"
-msgstr ""
+msgstr "Szkoli atak od poz. %1% do poz. %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Defense Training"
-msgstr ""
+msgstr "Szkolenie obrony"
 
 #: ../../data/tribes/scripting/help/building_help.lua:382
 msgid "Trains ‘Defense’ from %1% up to %2%"
-msgstr ""
+msgstr "Szkoli obronę od poz. %1% do poz. %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:394
 msgid "Evade Training"
-msgstr ""
+msgstr "Szkolenie uniku"
 
 #: ../../data/tribes/scripting/help/building_help.lua:395
 msgid "Trains ‘Evade’ from %1% up to %2%"
-msgstr ""
+msgstr "Szkoli unik od poz. %1% do poz. %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
@@ -1745,79 +1763,79 @@ msgid "%s or better"
 msgstr "%s lub lepszy"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:646
+#: ../../data/tribes/scripting/help/building_help.lua:647
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Pracownik używa:"
 msgstr[1] "Pracownicy używają:"
 msgstr[2] "Pracownicy używają:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:653
 msgid "Experience levels:"
 msgstr "Poziomy doświadczenia:"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:653
-#: ../../data/tribes/scripting/help/building_help.lua:662
+#: ../../data/tribes/scripting/help/building_help.lua:655
+#: ../../data/tribes/scripting/help/building_help.lua:664
 #: ../../data/tribes/scripting/help/worker_help.lua:157
 #: ../../data/tribes/scripting/help/worker_help.lua:166
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s do: %s (%s PD)"
 
-#: ../../data/tribes/scripting/help/building_help.lua:685
+#: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Production"
 msgstr "Produkcja"
 
-#: ../../data/tribes/scripting/help/building_help.lua:686
+#: ../../data/tribes/scripting/help/building_help.lua:688
 msgid "Performance:"
 msgstr "Produktywność:"
 
 #: ../../data/tribes/scripting/help/controls.lua:13
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
-msgstr ""
+msgstr "Sterowanie"
 
 #: ../../data/tribes/scripting/help/controls.lua:16
 msgid "Window Control"
-msgstr ""
+msgstr "Sterowanie oknami"
 
 #: ../../data/tribes/scripting/help/controls.lua:19
 msgid "Close window"
-msgstr ""
+msgstr "Zamknięcie okna"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:19
 msgctxt "hotkey"
 msgid "Right-click"
-msgstr ""
+msgstr "Prawy przycisk myszy"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:21
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
-msgstr ""
+msgstr "Środkowy przycisk myszy lub Ctrl + lewy przycisk myszy"
 
 #: ../../data/tribes/scripting/help/controls.lua:21
 msgid "Minimize/Maximize window"
-msgstr ""
+msgstr "Minimalizacja/maksymalizacja okna"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:23
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
-msgstr ""
+msgstr "Ctrl + lewy przycisk myszy na przycisku"
 
 #: ../../data/tribes/scripting/help/controls.lua:23
 msgid "Skip confirmation dialog"
-msgstr ""
+msgstr "Ominięcie okna potwierdzenia"
 
 #: ../../data/tribes/scripting/help/controls.lua:25
 msgid "Road Control"
-msgstr ""
+msgstr "Sterowanie drogami"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1825,232 +1843,265 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
-msgstr ""
+msgstr "Ctrl + lewy przycisk myszy"
 
 #: ../../data/tribes/scripting/help/controls.lua:28
 msgid "While connecting two flags: Place flags automatically"
-msgstr ""
+msgstr "Przy łączeniu dwóch flag: automatycznie umieść flagi"
 
 #: ../../data/tribes/scripting/help/controls.lua:30
 msgid "While removing a flag: Remove all flags up to the first junction"
-msgstr ""
+msgstr "Przy usuwaniu flagi: usuń wszystkie flagi do pierwszego skrzyżowania"
 
 #: ../../data/tribes/scripting/help/controls.lua:32
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #: ../../data/tribes/scripting/help/controls.lua:35
 msgid "Increase game speed"
-msgstr ""
+msgstr "Zwiększenie szybkości gry"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:35
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgid "Decrease game speed"
-msgstr ""
+msgstr "Zmniejszenie szybkości gry"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:37
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:39
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../data/tribes/scripting/help/controls.lua:39
 msgid "Pause the game"
-msgstr ""
+msgstr "Wstrzymanie gry"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
 #: ../../data/tribes/scripting/help/controls.lua:41
 msgid "Toggle census"
-msgstr ""
+msgstr "Przełącza spis ludności"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:43
 msgid "Toggle statistics"
-msgstr ""
+msgstr "Przełącza statystyki"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:47
 msgid "Toggle objectives"
-msgstr ""
+msgstr "Przełącza cele"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
 #: ../../data/tribes/scripting/help/controls.lua:49
 msgid "Toggle messages (‘news’)"
-msgstr ""
+msgstr "Przełącza cele (\"wiadomości\")"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:51
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Encyklopedia plemion"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/tribes/scripting/help/controls.lua:53
 msgid "Toggle stock inventory"
-msgstr ""
+msgstr "Przełącza inwentarz"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
 #: ../../data/tribes/scripting/help/controls.lua:55
 msgid "Toggle building statistics"
-msgstr ""
+msgstr "Przełącza statystyki budynków"
 
 #: ../../data/tribes/scripting/help/controls.lua:57
 msgid "Center main mapview on starting location"
-msgstr ""
+msgstr "Centruje główną kamerę na pozycji startowej"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:57
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 0-9"
-msgstr ""
+msgid "(Ctrl +) 1-9"
+msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
-msgstr ""
+msgstr "Zapamiętuje i przechodzi do zapamiętanych pozycji"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/tribes/scripting/help/controls.lua:61
-msgid "Go to the previous location"
-msgstr ""
+msgctxt "hotkey"
+msgid "(Ctrl +) +"
+msgstr "(Ctrl +) +"
 
-#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:61
+msgid "Increase zoom"
+msgstr "Przybliż"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/tribes/scripting/help/controls.lua:63
-msgid "Go to the next location"
-msgstr ""
+msgctxt "hotkey"
+msgid "(Ctrl +) -"
+msgstr "(Ctrl +) -"
+
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgid "Decrease zoom"
+msgstr "Oddal"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
-msgid "Ctrl + F11"
-msgstr ""
+msgid "(Ctrl +) 0"
+msgstr "(Ctrl +) 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:65
-msgid "Take a screenshot"
-msgstr ""
+msgid "Reset zoom"
+msgstr "Zresetuj przybliżenie"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:67
+msgid "Go to the previous location"
+msgstr "Przechodzi do poprzedniej pozycji"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:69
+msgid "Go to the next location"
+msgstr "Przechodzi do następnej pozycji"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:71
+msgctxt "hotkey"
+msgid "Ctrl + F11"
+msgstr "Ctrl +F11"
+
+#: ../../data/tribes/scripting/help/controls.lua:71
+msgid "Take a screenshot"
+msgstr "Robi zrzut ekranu"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgctxt "hotkey"
 msgid "Ctrl + F10"
-msgstr ""
+msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgid "Quit the game immediately"
-msgstr ""
+msgstr "Natychmiast kończy grę"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgctxt "hotkey"
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show the debug console (only in debug-builds)"
-msgstr ""
+msgstr "Pokazuje konsolę debugowania (tylko w buildach debugowych)"
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "W oknie wiadomości dostępne są następujące skróty klawiszowe:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr ""
+msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show all messages"
-msgstr ""
+msgstr "Pokazuje wszystkie wiadomości"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr ""
+msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości geologów"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr ""
+msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show economy messages only"
-msgstr ""
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgctxt "hotkey"
-msgid "Alt + 3"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgid "Show seafaring messages only"
-msgstr ""
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgctxt "hotkey"
-msgid "Alt + 4"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgid "Show warfare messages only"
-msgstr ""
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgctxt "hotkey"
-msgid "Alt + 5"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid "Show scenario messages only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości gospodarcze"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:88
-msgid "Jump to the location corresponding to the current message"
-msgstr ""
+msgctxt "hotkey"
+msgid "Alt + 3"
+msgstr "Alt + 3"
+
+#: ../../data/tribes/scripting/help/controls.lua:88
+msgid "Show seafaring messages only"
+msgstr "Pokazuje tylko wiadomości morskie"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:90
+msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
 
 #: ../../data/tribes/scripting/help/controls.lua:90
+msgid "Show warfare messages only"
+msgstr "Pokazuje tylko wiadomości wojskowe"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:92
+msgctxt "hotkey"
+msgid "Alt + 5"
+msgstr "Alt + 5"
+
+#: ../../data/tribes/scripting/help/controls.lua:92
+msgid "Show scenario messages only"
+msgstr "Pokazuje tylko wiadomości scenariusza"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:94
+msgid "Jump to the location corresponding to the current message"
+msgstr "Przechodzi do pozycji związanej z aktualną wiadomością"
+
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Archive/Restore the current message"
-msgstr ""
+msgstr "Archiwizuje/odtwarza obecną wiadomość"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
@@ -2063,85 +2114,93 @@ msgstr "%1$dx %2$s"
 #: ../../data/tribes/scripting/help/format_help.lua:162
 msgid "Ware consumed:"
 msgid_plural "Wares consumed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zużywany towar:"
+msgstr[1] "Zużywane towary:"
+msgstr[2] "Zużywane towary:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:21
-#: ../../data/tribes/scripting/help/global_helptexts.lua:43
+#: ../../data/tribes/scripting/help/global_helptexts.lua:23
+#: ../../data/tribes/scripting/help/global_helptexts.lua:45
 msgid "Text needed"
 msgstr "Potrzeba tekstu"
 
 #. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
 #. hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:32
+#: ../../data/tribes/scripting/help/global_helptexts.lua:34
 msgid "Source needed"
 msgstr "Potrzeba źródła"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:54
+#: ../../data/tribes/scripting/help/global_helptexts.lua:56
 msgid "Calculation needed"
 msgstr "Wymagane obliczenia"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:95
+#: ../../data/tribes/scripting/help/global_helptexts.lua:97
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% i %2%"
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Wprowadzenie"
 
 #: ../../data/tribes/scripting/help/init.lua:73
 msgid "Wares"
-msgstr ""
+msgstr "Towary"
 
 #: ../../data/tribes/scripting/help/init.lua:87
 msgid "Buildings"
-msgstr ""
+msgstr "Budynki"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "O Widelands"
 
-#: ../../data/tribes/scripting/help/ware_help.lua:34
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. Languages using Chinese script probably want to lose the blank space here.
+#: ../../data/tribes/scripting/help/ware_help.lua:33
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#: ../../data/tribes/scripting/help/ware_help.lua:36
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
-msgstr ""
+msgstr "Przeznaczenie"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-#: ../../data/tribes/scripting/help/ware_help.lua:54
+#: ../../data/tribes/scripting/help/ware_help.lua:56
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
-msgstr ""
+msgstr "Producent"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:97
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Produkowany towar:"
+msgstr[1] "Produkowane towary:"
+msgstr[2] "Produkowane towary:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:158
 msgid "Consumer"
 msgid_plural "Consumers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Konsument"
+msgstr[1] "Konsumenci"
+msgstr[2] "Konsumenci"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zatrudniony pracownik:"
+msgstr[1] "Zatrudnieni pracownicy:"
+msgstr[2] "Zatrudnieni pracownicy:"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
 #. work
@@ -2149,41 +2208,41 @@ msgstr[2] ""
 #: ../../data/tribes/scripting/help/worker_help.lua:105
 msgid "Works at"
 msgid_plural "Works at"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pracuje w:"
+msgstr[1] "Pracuje w:"
+msgstr[2] "Pracuje w:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Worker uses"
-msgstr ""
+msgstr "Pracownik używa:"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:156
 msgid "Experience levels"
-msgstr ""
+msgstr "Poziomy doświadczenia"
 
 #. TRANSLATORS: Soldier levels
 #: ../../data/tribes/scripting/help/worker_help.lua:177
 msgid "Levels"
-msgstr ""
+msgstr "Poziomy"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Health"
-msgstr ""
+msgstr "Zdrowie"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../data/tribes/scripting/help/worker_help.lua:183
 msgid "Starts at %1% points."
-msgstr ""
+msgstr "Startowa liczba punktów: %1%."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
 #: ../../data/tribes/scripting/help/worker_help.lua:186
 #: ../../data/tribes/scripting/help/worker_help.lua:197
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zwiększa się o %1% punkt na każdy poziom."
+msgstr[1] "Zwiększa się o %1% punkty na każdy poziom."
+msgstr[2] "Zwiększa się o %1% punktów na każdy poziom."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
 #: ../../data/tribes/scripting/help/worker_help.lua:189
@@ -2192,43 +2251,43 @@ msgstr[2] ""
 #: ../../data/tribes/scripting/help/worker_help.lua:224
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Maksymalny poziom to %1%."
+msgstr[1] "Maksymalny poziom to %1%."
+msgstr[2] "Maksymalny poziom to %1%."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Attack"
-msgstr ""
+msgstr "Atak"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../data/tribes/scripting/help/worker_help.lua:194
 msgid "A random value between %1% and %2% points is added to each attack."
-msgstr ""
+msgstr "Do każdego ataku dodawana jest losowa wartość od %1% do %2% punktów."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:201
 msgid "Defense"
-msgstr ""
+msgstr "Obrona"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205
 #: ../../data/tribes/scripting/help/worker_help.lua:213
 #: ../../data/tribes/scripting/help/worker_help.lua:220
 #, lua-format
 msgid "Starts at %d%%."
-msgstr ""
+msgstr "Startowa wartość: %d%%."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:207
 #: ../../data/tribes/scripting/help/worker_help.lua:222
 #, lua-format
 msgid "Increased by %d%% for each level."
-msgstr ""
+msgstr "Zwiększa się o %d%% na każdy poziom."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:214
 msgid "This soldier cannot be trained in defense."
-msgstr ""
+msgstr "Tego żołnierza nie da się szkolić w obronie."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:217
 msgid "Evade"
-msgstr ""
+msgstr "Unik"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
@@ -2237,7 +2296,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr ""
+msgstr "Podstawowa zbroja żołnierzy Imperium. Produkowana jest w pracowni płatnerza i wykorzystywana w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 1 do poziomu 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../data/tribes/wares/armor_chain/helptexts.lua:4
@@ -2246,7 +2305,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr ""
+msgstr "Kolczuga to średnia zbroja żołnierzy Imperium. Wytwarza się ją w pracowni płatnerza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 2 do poziomu 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../data/tribes/wares/armor_gilded/helptexts.lua:4
@@ -2255,7 +2314,7 @@ msgid ""
 "The gilded armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
+msgstr "Pozłacana zbroja to najmocniejszy typ zbroi na wyposażeniu żołnierzy Imperium. Wytwarza się ją w pracowni płatnerza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 3 do poziomu 4."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/armor_helmet/helptexts.lua:4
@@ -2265,7 +2324,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Hełm to podstawa obrony dla wojownika. Produkuje go pracownia płatnerza. Wraz z drewnianą włócznią stanowi on wyposażenie młodych żołnierzy. Hełmy wykorzystuje się także w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 0 do poziomu 1."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../data/tribes/wares/ax/helptexts.lua:4
@@ -2273,7 +2332,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "The ax is the basic weapon of the Barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "Topór to podstawowa broń Barbarzyńców. Każdy młody żołnierz jest w taki wyposażony."
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../data/tribes/wares/ax_battle/helptexts.lua:4
@@ -2283,7 +2342,7 @@ msgid ""
 "produced in the war mill. Only trained soldiers are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
-msgstr ""
+msgstr "To jedna z groźniejszych broni produkowanych przez Barbarzyńców. Produkuje się ją w kuźni. Jedynie wyćwiczeni wojownicy potrafią obchodzić się z tą bronią. Wykorzystywana jest w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 3 do poziomu 4."
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../data/tribes/wares/ax_broad/helptexts.lua:4
@@ -2292,7 +2351,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr ""
+msgstr "Szerokie topory produkuje się w warsztacie toporów oraz kuźni. Wykorzystywane są w obozie szkoleniowym - razem z jedzeniem - do uczenia żołnierzy podstaw walki - podnoszenia umiejętności ataku z poziomu 1 do 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../data/tribes/wares/ax_bronze/helptexts.lua:4
@@ -2302,7 +2361,7 @@ msgid ""
 "soldiers can use it. It is produced at the war mill and used in the training"
 " camp – together with food – to train soldiers from attack level 2 to level "
 "3."
-msgstr ""
+msgstr "Topór z brązu to broń, którą niełatwo władać. Mogą się nim posługiwać tylko wyćwiczeni żołnierze. Produkowany jest w kuźni i wykorzystywany w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do poziomu 3."
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../data/tribes/wares/ax_sharp/helptexts.lua:4
@@ -2312,7 +2371,7 @@ msgid ""
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr ""
+msgstr "Ta potężna broń wykorzystywana jest do uczenia młodych żołnierzy walki. Jest ona cięższa i ostrzejsza, niż typowy topór. Produkowana jest w warsztatach toporów oraz kuźniach i wykorzystywana w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 0 do poziomu 1."
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../data/tribes/wares/ax_warriors/helptexts.lua:4
@@ -2322,7 +2381,7 @@ msgid ""
 "soldiers ever were able to handle this huge and powerful ax. It is produced "
 "in a war mill and used – together with food – in a training camp to train "
 "soldiers from attack level 4 to level 5."
-msgstr ""
+msgstr "Topór wojownika to najgroźniejsza ze wszystkich barbarzyńskich broni. Nieliczni są w stanie posługiwać się tymi wielkimi, potężnymi toporami. Produkowane są w kuźni i wykorzystywane w obozie szkoleniowym - razem z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 4 do poziomu 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../data/tribes/wares/basket/helptexts.lua:4
@@ -2330,7 +2389,7 @@ msgctxt "empire_ware"
 msgid ""
 "This basket is needed by the vine farmer for harvesting the grapes. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "Kosze potrzebne są hodowcom winorośli do zbierania winogron. Produkuje je warsztat."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:4
@@ -2338,7 +2397,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Beer is produced in micro breweries and used in inns and big inns to produce"
 " snacks."
-msgstr ""
+msgstr "Piwo produkowane jest w małych browarach i wykorzystywane w karczmach i dużych karczmach do przygotowywania przekąsek."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:6
@@ -2346,7 +2405,7 @@ msgctxt "empire_ware"
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by"
 " miners in coal and iron mines."
-msgstr ""
+msgstr "To piwo produkowane jest w browarze z pszenicy i wody. Spożywają je górnicy w kopalniach węgla i żelaza."
 
 #. TRANSLATORS: Helptext for a ware: Strong Beer
 #: ../../data/tribes/wares/beer_strong/helptexts.lua:4
@@ -2356,7 +2415,7 @@ msgid ""
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
-msgstr ""
+msgstr "Tylko to piwo jest uznawane przez żołnierzy na arenie bitewnej. Niektórzy mówią, że to właśnie w tym trunku zamyka się cała potęga Barbarzyńców. Wykorzystuje się je do ćwiczenia umiejętności uniku żołnierzy z poziomu 0 do poziomów 1 i 2. Używane jest także w dużych karczmach do przyrządzania posiłków."
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
@@ -2381,7 +2440,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
-msgstr ""
+msgstr "To wypalane drewno jest twarde jak żelazo i wykorzystywane do budowy wielu budynków. Produkowane jest z kłód w lakierni drewna."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_atlanteans/helptexts.lua:4
@@ -2390,7 +2449,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Smakowity chleb jest wypiekany w piekarniach z mąki kukurydzianej, mąki z czarnego korzenia i wody. Stanowi podstawę diety górników, zwiadowców i na placach treningowych (labirynt i podziemia)."
+msgstr "Smakowity chleb jest wypiekany w piekarniach z kaszy kukurydzianej, mąki z czarnego korzenia i wody. Stanowi podstawę diety górników, zwiadowców i na placach treningowych (labirynt i podziemia)."
 
 #. TRANSLATORS: Helptext for a ware: Pitta Bread
 #: ../../data/tribes/wares/bread_barbarians/helptexts.lua:4
@@ -2400,7 +2459,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr ""
+msgstr "Barbarzyńscy piekarze to mistrzowie w wypiekaniu płaskiego, smakowitego chleba pita. Przyrządza się go z pszenicy, wody według sekretnego przepisu. Chleb pita wykorzystuje się w tawernach, karczmach oraz dużych karczmach do przygotowywania racji, przekąsek oraz posiłków. Spożywany jest także w budynkach szkoleniowych (obozach szkoleniowych oraz arenach bitewnych)."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_empire/helptexts.lua:4
@@ -2409,19 +2468,19 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Piekarze Imperium produkują wyjątkowo smakowity chleb z mąki i wody. Wykorzystuje się go w tawernach i karczmach, by produkować racje i posiłki. Chleb jest także wykorzystywany w budynkach szkoleniowych (arena, koloseum, obóz szkoleniowy)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
-msgstr ""
+msgstr "Łopata do chleba jest narzędziem piekarza, każdy piekarz potrzebuje własnej."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr ""
+msgstr "Łopaty do chleba produkuje rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:8
@@ -2430,26 +2489,26 @@ msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
 "cease to be produced by the building if it is enhanced to an ax workshop and"
 " war mill)."
-msgstr ""
+msgstr "Łopata do chleba, jak inne narzędzia, produkowana jest w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr ""
+msgstr "Łopaty do chleba produkuje rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr "Duże wiadra dla hodowców ryb. Wytwarza je warsztat."
+msgstr "Duże wiadra dla hodowców ryb. Wytwarza je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
 "Cloth is needed for Barbarian ships. It is produced out of thatch reed."
-msgstr ""
+msgstr "Tkanina jest potrzebna do budowy statków Barbarzyńców. Jest produkowana z trzciny."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -2457,14 +2516,14 @@ msgctxt "empire_ware"
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
 " smithy."
-msgstr ""
+msgstr "Tkanina niezbędna jest do budowy niektórych budynków. Wykorzystuje się ją także w pracowniach płatnerza."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:4
 msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
-msgstr ""
+msgstr "Węgiel wydobywany jest w kopalniach węgla lub wypalany z belek w smolarni."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:6
@@ -2472,7 +2531,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal."
-msgstr ""
+msgstr "Piece Atlantydzkich hut oraz pracowni płatnerza i zbrojmistrza zasilane są węglem."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:8
@@ -2481,7 +2540,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr ""
+msgstr "Do podtrzymania ognia barbarzyńcy zwykle wykorzystują węgiel. Wiele budynków wykorzystuje węgiel: wapienniki, huty, warsztaty toporów, kuźnie i warsztaty płatnerzy."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:10
@@ -2489,7 +2548,7 @@ msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal."
-msgstr ""
+msgstr "Paleniska Imperialnych hut, pracowni płatnerzy i zbrojmistrzów zazwyczaj opalane są węglem."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -2498,7 +2557,7 @@ msgid ""
 "This corn is processed in the mill into fine cornmeal that every Atlantean "
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
-msgstr "Kukurydza mielona jest w młynie celem uzyskania doskonałej mąki, której potrzebuje każdy atlantydzki piekarz do wyrobu dobrego chleba. Także stadniny i fermy pająków muszą być zaopatrywane w kukurydzę."
+msgstr "Kukurydza mielona jest w młynie celem uzyskania doskonałej kaszy, której potrzebuje każdy atlantydzki piekarz do wyrobu dobrego chleba. Także stadniny i fermy pająków muszą być zaopatrywane w kukurydzę."
 
 #. TRANSLATORS: Helptext for a ware: Cornmeal
 #: ../../data/tribes/wares/cornmeal/helptexts.lua:4
@@ -2506,7 +2565,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Cornmeal is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
-msgstr "Mąka kukurydziana jest mielona w młynie i jest jednym z trzech składników potrzebnych do pieczenia w piekarniach Atlantydzkiego chleba."
+msgstr "Kasza kukurydziana jest mielona w młynie i jest jednym z trzech składników potrzebnych do pieczenia w piekarniach Atlantydzkiego chleba."
 
 #. TRANSLATORS: Helptext for a ware: Diamond
 #: ../../data/tribes/wares/diamond/helptexts.lua:4
@@ -2520,7 +2579,7 @@ msgstr "Drogocenne diamenty używane są do budowy niektórych ekskluzywnych bud
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
 msgid "The felling ax is the tool of the lumberjack to chop down trees."
-msgstr ""
+msgstr "Topór to narzędzie drwala."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:6
@@ -2528,26 +2587,26 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Topory produkowane są w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Felling axes are produced by the toolsmith."
-msgstr ""
+msgstr "Topory produkuje rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
 msgid ""
 "Fire tongs are the tools of the smelter, who works in the smelting works."
-msgstr "Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są w warsztacie."
+msgstr "Szczypce stanowią narzędzia hutnika pracującego w hucie."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
@@ -2555,13 +2614,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Produkowane są w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
 msgctxt "empire_ware_fire_tongs"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -2579,7 +2638,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Oprócz chleba pita i mięsa, również ryby są elementem diety Barbarzyńców. Są używane w tawernach, karczmach, dużych karczmach i budynkach szkoleniowych (obozach szkoleniowych i arenach bitewnych)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -2587,7 +2646,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Poza chlebem i mięsem, także ryby są częścią diety obywatela Imperium. Ryby wykorzystuje się w tawernach, karczmach i budynkach szkoleniowych (arena, koloseum, obóz szkoleniowy)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -2599,7 +2658,7 @@ msgstr "Sieć rybacka używana przez rybaka produkowana jest przez rzemieślnika
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:4
 msgctxt "ware"
 msgid "Fishing rods are needed by fishers to catch fish."
-msgstr ""
+msgstr "Wędki potrzebne są rybakom do łowienia ryb."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:6
@@ -2608,13 +2667,13 @@ msgid ""
 "They are one of the basic tools produced in a metal workshop (but cease to "
 "be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "To jedno z podstawowych narzędzi produkowanych w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:8
 msgctxt "empire_ware_fishing_rod"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Flour
 #: ../../data/tribes/wares/flour/helptexts.lua:4
@@ -2622,7 +2681,7 @@ msgctxt "empire_ware"
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr "Czarne korzenie mielone są na mąkę w młynie. Wypieka się z niej w piekarni smakowity chleb."
+msgstr "Mąkę produkuje się w młynach z pszenicy i wykorzystuje w piekarni do produkcji smakowitego imperialnego chleba."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:4
@@ -2630,7 +2689,7 @@ msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is obtained out of gold ore "
 "in a smelting works."
-msgstr ""
+msgstr "Złoto to najcenniejszy z metali, który uzyskuje się z rudy złota w hucie."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
@@ -2638,7 +2697,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Gold is used by the armor smithy, the weapon smithy and the gold spinning "
 "mill."
-msgstr ""
+msgstr "Złoto używane jest przez płatnerza, zbrojmistrza i tkacza złota."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
@@ -2647,7 +2706,7 @@ msgid ""
 "Only very important things are embellished with gold. It is used as a "
 "precious building material and to produce different axes (in the war mill) "
 "and different parts of armor (in the helm smithy)."
-msgstr ""
+msgstr "Tylko najważniejsze rzeczy dekoruje się złotem. Wykorzystuje się je jako cenny materiał budowlany oraz do produkcji różnorakich toporów (w kuźni) oraz zbroi (u płatnerza)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -2655,7 +2714,7 @@ msgctxt "empire_ware"
 msgid ""
 "Armor and weapons are embellished with gold in the armor smithy and the "
 "weapon smithy."
-msgstr ""
+msgstr "Broń i zbroje dekoruje się złotem w pracowniach płatnerza i zbrojmistrza."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
@@ -2672,31 +2731,31 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Złota nić, tkana w tkalni złota, wykorzystywana jest w tkalni złota do tkania drogocennych złotych kamizelek."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:4
 msgctxt "ware"
 msgid "Granite is a basic building material."
-msgstr ""
+msgstr "Granit jest jednym z podstawowych materiałów budowlanych."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "The Atlanteans produce granite blocks in quarries and crystal mines."
-msgstr ""
+msgstr "Atlantydzi produkują bloki granitu w kamieniołomach i kopalniach kryształów."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid "The Barbarians produce granite blocks in quarries and granite mines."
-msgstr ""
+msgstr "Barbarzyńcy produkują bloki granitu w kamieniołomach i kopalniach granitu."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "The Empire produces granite blocks in quarries and marble mines."
-msgstr ""
+msgstr "Imperium produkuje bloki granitu w kamieniołomach i kopalniach marmuru."
 
 #. TRANSLATORS: Helptext for a ware: Grape
 #: ../../data/tribes/wares/grape/helptexts.lua:4
@@ -2704,7 +2763,7 @@ msgctxt "empire_ware"
 msgid ""
 "These grapes are the base for a tasty wine. They are harvested in a vineyard"
 " and processed in a winery."
-msgstr ""
+msgstr "Te winogrona to baza dla dobrego wina. Zbiera się je w plantacjach winorośli i przetwarza w winiarniach."
 
 #. TRANSLATORS: Helptext for a ware: Grout
 #: ../../data/tribes/wares/grout/helptexts.lua:4
@@ -2712,13 +2771,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Granite can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
-msgstr ""
+msgstr "Granit może zostać przetworzony do postaci fugi stanowiącej jednolity, niepalny materiał budowlany. Fugę produkuje się w wapiennikach."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
 msgctxt "ware"
 msgid "The hammer is an essential tool."
-msgstr ""
+msgstr "Młotek to podstawowe narzędzie."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:6
@@ -2726,7 +2785,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Młotków potrzebują geolodzy, budowniczowie, płatnerze i zbrojmistrzowie. Upewnij się, że zawsze masz choć kilka w zapasie! Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:8
@@ -2736,7 +2795,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Młotków potrzebują geolodzy, budowniczowie, płatnerze i zbrojmistrzowie. Upewnij się, że zawsze masz choć kilka w zapasie! To jedno z podstawowych narzędzi produkowanych w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -2744,7 +2803,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Młotków potrzebują geolodzy, budowniczowie, płatnerze i zbrojmistrzowie. Upewnij się, że zawsze masz choć kilka w zapasie! Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/helmet/helptexts.lua:4
@@ -2753,7 +2812,7 @@ msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Hełm to podstawowa ochrona żołnierza. Produkowany jest przez płatnerza i wykorzystywany w obozie szkoleniowym - razem z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 0 do poziomu 1."
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../data/tribes/wares/helmet_mask/helptexts.lua:4
@@ -2762,7 +2821,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr ""
+msgstr "To najlepsza z barbarzyńskich zbroi. Produkowana jest u płatnerza i wykorzystywana w obozie szkoleniowym - razem z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 2 do poziomu 3."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../data/tribes/wares/helmet_warhelm/helptexts.lua:4
@@ -2771,7 +2830,7 @@ msgid ""
 "A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Hełm wojownika to ulepszony ekwipunek barbarzyńskich żołnierzy. Produkowany jest przez płatnerza i wykorzystywany w obozie szkoleniowym - razem z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 1 do poziomu 2."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../data/tribes/wares/hook_pole/helptexts.lua:4
@@ -2779,14 +2838,14 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
-msgstr "Te haki używane są przez wędzarza do zwieszania mięsa i ryb ze stropu wędzarni. Produkowane są przez warsztat."
+msgstr "Te haki używane są przez wędzarza do zwieszania mięsa i ryb ze stropu wędzarni. Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Bow
 #: ../../data/tribes/wares/hunting_bow/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr "Ten łuk wykorzystywany jest przez atlantydzkich myśliwych. Produkowany jest w warsztacie."
+msgstr "Ten łuk wykorzystywany jest przez atlantydzkich myśliwych. Produkowany jest przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:4
@@ -2794,7 +2853,7 @@ msgctxt "ware"
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal"
 " in one blow. It is only used by hunters."
-msgstr ""
+msgstr "Ta dzida jest wystarczająco lekka, by można było nią rzucać, a jednocześnie wystarczająco ciężka, by jednym ciosem powalić każde zwierzę. Wykorzystywana jest jedynie przez myśliwych."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:6
@@ -2802,25 +2861,25 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Dzidy produkowane są w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
 msgctxt "empire_ware_hunting_spear"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is extracted from iron ore in the smelting works."
-msgstr ""
+msgstr "Żelazo wytapia się z rudy żelaza w hucie."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr ""
+msgstr "Używa się go w warsztacie, u płatnerza i zbrojmistrza."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -2828,13 +2887,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is used to produce weapons and tools in the metal workshop, ax workshop, "
 "war mill and helm smithy."
-msgstr ""
+msgstr "Wykorzystuje się je do produkcji broni i narzędzi w narzędziowni, warsztacie toporów, kuźni i warsztacie płatnerza."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Weapons, armor and tools are made of iron."
-msgstr ""
+msgstr "Broń, zbroje i narzędzia robi się z żelaza."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -2852,7 +2911,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "Jak można przygotować posiłek, przekąskę czy chociaż rację bez narzędzi kuchennych? Przypilnuj, by ich nie zabrakło, zlecając ich produkcję w narzędziowni (pamiętaj, że przestaną być produkowane po jej ulepszeniu)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -2860,7 +2919,7 @@ msgctxt "empire_ware"
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgstr "Jak można przyrządzać racje lub posiłki bez narzędzi kuchennych? Produkuje się je w warsztatach i wykorzystuje w tawernach i karczmach."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -2868,7 +2927,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr ""
+msgstr "Belki są ważnym, podstawowym materiałem budowlanym. Produkuje się je ścinając drzewa."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:6
@@ -2877,7 +2936,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr ""
+msgstr "Atlantydzi produkują z belek w tartaku deski wykorzystywane do budowy niemal każdego atlantydzkiego budynku. Oprócz tego kłody wykorzystywane są przez smolarnię, warsztat i wędzarnię."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:8
@@ -2887,7 +2946,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr ""
+msgstr "Drzewa ścinane są przez barbarzyńskich drwali; leśnicy dbają, by ich nie zabrakło. Pnie drzew są również niezbędne w narzędziowniach do produkcji podstawowych narzędzi, a także w smolarni do produkcji węgla drzewnego. Lakiernia drewna przetwarza surowe drewno wypalając je i przetwarzając do postaci twardego jak żelazo czarnego drewna."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:10
@@ -2896,7 +2955,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr ""
+msgstr "Drzewa ścinane są przez imperialnych drwali; leśnicy dbają, by ich nie zabrakło. W tartakach wytwarza się z nich deski. Surowego drewna potrzebują również smolarnia i warsztat."
 
 #. TRANSLATORS: Helptext for a ware: Marble
 #: ../../data/tribes/wares/marble/helptexts.lua:4
@@ -2905,7 +2964,7 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as a building material and gets chiseled into "
 "marble columns in the stonemason’s house."
-msgstr ""
+msgstr "Marmur to piękny kamień, który wycina się w górach lub produkuje w kamieniołomach. Marmur jest materiałem budowlanym, z którego rzeźbi się marmurowe kolumny w pracowniach kamieniarza."
 
 #. TRANSLATORS: Helptext for a ware: Marble Column
 #: ../../data/tribes/wares/marble_column/helptexts.lua:4
@@ -2914,7 +2973,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr ""
+msgstr "Marmurowe kolumny reprezentują wysoki poziom kultury w Imperium, więc wymagane są do budowy niemalże każdego większego budynku. Produkuje się je z marmuru w pracowniach kamieniarza."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -2922,7 +2981,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
-msgstr ""
+msgstr "Posiłek przygotowywany jest z chleba pita, mocnego piwa i ryb/mięsa w dużej karczmie. Taka pożywna porcja to dokładnie to, czego potrzeba górnikom w głębszych kopalniach."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:6
@@ -2930,7 +2989,7 @@ msgctxt "empire_ware"
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
-msgstr ""
+msgstr "Posiłek z prawdziwego zdarzenia produkowany jest w karczmach z chleba i ryb/mięsa. Zaspokaja potrzeby górników w głębokich kopalniach."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:4
@@ -2938,7 +2997,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunters."
-msgstr ""
+msgstr "Mięso jest źródłem mnóstwa energii. Pozyskują je myśliwi polujący na zwierzynę."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:6
@@ -2946,7 +3005,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to mines and "
 "training sites (dungeon and labyrinth)."
-msgstr ""
+msgstr "Mięso należy wpierw uwędzić w wędzarni, następnie dostarcza się je do kopalń i budynków szkoleniowych (podziemi i labiryntu)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:8
@@ -2955,7 +3014,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Mięso wykorzystywane jest w tawernach, karczmach i dużych karczmach do przyrządzania racji, przekąsek i posiłków dla górników. Potrzebne jest także do treningu żołnierzy w budynkach szkoleniowych (obozach szkoleniowych i arenach bitewnych)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -2964,7 +3023,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Innym źródłem mięsa jest wieprzowina z chlewów. Mięso wykorzystywane jest w tawernach i karczmach do przyrządzania posiłków dla górników oraz do treningu żołnierzy w budynkach szkoleniowych (arenach, koloseach i obozach szkoleniowych)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4
@@ -2972,7 +3031,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Szczypce używane przez hodowców pająków do ich dojenia. Produkowane przez warsztat."
+msgstr "Szczypce używane są przez hodowców pająków do ich dojenia. Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:4
@@ -2980,7 +3039,7 @@ msgctxt "ware"
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr "Kilof jest używany przez kamieniarzy i górników. Produkowany w warsztacie."
+msgstr "Kilofy są używane przez kamieniarzy i górników. Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:6
@@ -2989,7 +3048,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Kilofy wykorzystywane są przez kamieniarzy i górników. Produkowane są w narzędziowni (która traci możliwość jego produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -2997,37 +3056,37 @@ msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
 "toolsmith."
-msgstr ""
+msgstr "Kilofy są używane przez kamieniarzy i górników. Produkowane są przez rzemieślnika."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
 msgid "Planks are an important building material."
-msgstr ""
+msgstr "Deski są ważnym materiałem budowlanym."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:7
 msgctxt "atlanteans_ware_planks"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Produkuje je tartak z belek."
 
 #: ../../data/tribes/wares/planks/helptexts.lua:8
 msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
-msgstr ""
+msgstr "Deski wykorzystywane są przez zbrojmistrza i stocznię do produkcji różnych trójzębów oraz potężnych statków."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:11
 msgctxt "empire_ware_planks"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Produkuje je tartak z belek."
 
 #: ../../data/tribes/wares/planks/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
-msgstr ""
+msgstr "Wykorzystuje je także pracownia zbrojmistrza."
 
 #. TRANSLATORS: Helptext for a ware: Quartz
 #: ../../data/tribes/wares/quartz/helptexts.lua:4
@@ -3035,7 +3094,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "These transparent quartz gems are used to build some exclusive buildings. "
 "They are produced in a crystal mine."
-msgstr "Ten przezroczysty kwarc używany jest do budowy niektórych ekskluzywnych budynków. Wydobywany jest w kopalni kryształów."
+msgstr "Te przezroczyste kryształy kwarcu używane są do budowy niektórych ekskluzywnych budynków. Wydobywane są w kopalni kryształów."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:4
@@ -3043,7 +3102,7 @@ msgctxt "ware"
 msgid ""
 "A small bite to keep miners strong and working. The scout also consumes "
 "rations on his scouting trips."
-msgstr ""
+msgstr "Mała przekąska, by górnicy mogli zachować pełnię sił i pracować dalej. Racje spożywane są także przez zwiadowców w trakcie prowadzenia misji."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:6
@@ -3051,13 +3110,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
 " pitta bread."
-msgstr ""
+msgstr "Racje przyrządzane są w tawernach, karczmach lub dużych karczmach z ryb, mięsa lub chleba pita."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
-msgstr ""
+msgstr "Racje produkuje się w tawernach z ryb lub mięsa lub chleba."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -3065,25 +3124,25 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr ""
+msgstr "Piłę wykorzystują w swojej pracy tracz, drwal i warsztat. Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:6
 msgctxt "empire_ware"
 msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
-msgstr ""
+msgstr "Ta piła potrzebna jest traczom. Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:4
 msgctxt "ware"
 msgid "The scythe is the tool of the farmers."
-msgstr ""
+msgstr "Kosa jest narzędziem rolników."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Kosy produkuje rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:8
@@ -3091,13 +3150,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Scythes are produced by the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Kosy produkowane są w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr ""
+msgstr "Kosy produkuje rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Shield
 #: ../../data/tribes/wares/shield_advanced/helptexts.lua:4
@@ -3106,7 +3165,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr ""
+msgstr "Te zaawansowane tarcze używane są przez najlepszych atlantydzkich żołnierzy. Produkowane są u płatnerza i wykorzystywane w labiryncie razem z jedzeniem do podnoszenia umiejętności obrony żołnierzy z poziomu 1 do poziomu 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../data/tribes/wares/shield_steel/helptexts.lua:4
@@ -3120,7 +3179,7 @@ msgstr "Stalowe tarcze produkowane są u płatnerza i wykorzystywane w labirynci
 #: ../../data/tribes/wares/shovel/helptexts.lua:4
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
-msgstr ""
+msgstr "Łopaty są niezbędne do pracy z roślinami."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:6
@@ -3128,7 +3187,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Therefore the forester and the blackroot farmer use them. They are produced "
 "by the toolsmith."
-msgstr ""
+msgstr "Przydają się ona zatem leśniczemu i farmerowi czarnych korzeni. Wytwarza je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:8
@@ -3137,7 +3196,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Wykorzystują je zatem ogrodnicy oraz leśnicy. Produkowane są w narzędziowni (która traci możliwość ich produkcji z chwilą ulepszenia jej do warsztatu toporów lub kuźni)."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -3145,7 +3204,7 @@ msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Stanowi ona zatem niezbędne narzędzie leśnika i hodowcy winorośli. Produkuje je rzemieślnik."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -3170,7 +3229,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "Coś więcej na ząb niż zwykła racja specjalnie dla górników pracujących w głębokich kopalniach. Przyrządzana jest w karczmach i dużych karczmach z ryb/mięsa, chleba pita i piwa."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4
@@ -3179,7 +3238,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr ""
+msgstr "Ta włócznia ma żelazny kolec. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 0 do poziomu 1."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../data/tribes/wares/spear_advanced/helptexts.lua:4
@@ -3188,7 +3247,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
+msgstr "Długa włócznia ze stalowym grotem. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 1 do poziomu 2."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../data/tribes/wares/spear_heavy/helptexts.lua:4
@@ -3197,7 +3256,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "Mocna włócznia ze stalowym czubkiem i niewielkim ostrzem. Produkuje się ją w pracowni zbrojmistrza i wykorzystuje w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do poziomu 3."
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../data/tribes/wares/spear_war/helptexts.lua:4
@@ -3206,7 +3265,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
+msgstr "To najlepsza i najostrzejsza broń stworzona przez zbrojmistrzów Imperium dla jego żołnierzy. Wykorzystuje się ją w obozach szkoleniowych - wraz z jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 3 do poziomu 4."
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../data/tribes/wares/spear_wooden/helptexts.lua:4
@@ -3215,7 +3274,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
+msgstr "Ta drewniana włócznia jest podstawową bronią w systemie wojskowym Imperium. Produkuje się ją w pracowni zbrojmistrza. Wraz z hełmem stanowi wyposażenie każdego młodego żołnierza."
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../data/tribes/wares/spider_silk/helptexts.lua:4
@@ -3223,7 +3282,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "Jedwab ten jest produkowany przez pająki hodowane na fermach pająków. Wykorzystuje się go do tworzenia pajęczej tkaniny w tkalni."
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../data/tribes/wares/spidercloth/helptexts.lua:4
@@ -3232,7 +3291,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "Pajęcza tkanina powstaje z pajęczego jedwabiu w tkalni. Wykorzystywana jest w warsztacie oraz stoczni. Oprócz tego używana jest do konstrukcji niektórych zaawansowanych budynków."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -3240,7 +3299,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "Kamizelka i lekki trójząb stanowią podstawowy ekwipunek młodego żołnierza. Kamizelki są produkowane w tkalni."
+msgstr "Tabard i lekki trójząb stanowią podstawowy ekwipunek młodego żołnierza. Tabardy są produkowane w tkalni."
 
 #. TRANSLATORS: Helptext for a ware: Golden Tabard
 #: ../../data/tribes/wares/tabard_golden/helptexts.lua:4
@@ -3249,7 +3308,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr ""
+msgstr "Złote tabardy produkowane są w atlantydzkich tkalniach ze złotej nici. Używane są w labiryncie razem z jedzeniem do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 0 do poziomu 1."
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
@@ -3257,7 +3316,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "Trzcinę produkuje się w paprociarni i wykorzystuje do budowy nieprzemakalnych dachów budynków."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -3285,7 +3344,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "Jest to podstawowa broń atlantydzkich żołnierzy. Razem z kamizelką stanowi wyposażenie młodych żołnierzy. Lekkie trójzęby produkowane są przez zbrojmistrzów - tak jak wszystkie inne trójzęby."
+msgstr "Jest to podstawowa broń atlantydzkich żołnierzy. Razem z tabardem stanowi wyposażenie młodych żołnierzy. Lekkie trójzęby produkowane są przez zbrojmistrzów - tak jak wszystkie inne trójzęby."
 
 #. TRANSLATORS: Helptext for a ware: Long Trident
 #: ../../data/tribes/wares/trident_long/helptexts.lua:4
@@ -3301,21 +3360,21 @@ msgstr "Długi trójząb to pierwszy trójząb wykorzystywany w szkoleniu żołn
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
-msgstr ""
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
+msgstr "Średni trójząb produkowany jest przez zbrojmistrza i wraz z jedzeniem wykorzystywany w podziemiach przez doświadczonych żołnierzy do podnoszenia umiejętności ataku z poziomu 1 do poziomu 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "Woda to esencja życia!"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "Woda niezbędna jest do funkcjonowania piekarni, stadniny oraz fermy pająków."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:8
@@ -3323,7 +3382,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Water is used in the bakery, the micro brewery and the brewery. The lime "
 "kiln and the cattle farm also need to be supplied with water."
-msgstr ""
+msgstr "Woda wykorzystywana jest w piekarni, małym i średnim browarze. Także wapienniki i farmy bydła potrzebują wody do funkcjonowania."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:10
@@ -3331,13 +3390,13 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr ""
+msgstr "Wodę wykorzystują piekarnie i browary. Także ośla farma, owczarnia i chlew muszą być zaopatrywane w wodę."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4
 msgctxt "ware"
 msgid "Wheat is essential for survival."
-msgstr ""
+msgstr "Pszenica to podstawa przetrwania."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:6
@@ -3345,14 +3404,14 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr ""
+msgstr "Pszenica uprawiana jest na farmach i wykorzystywana w piekarniach, browarach i małych browarach. Także farmy bydła muszą być zaopatrywane w pszenicę."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:8
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Pszenicę produkuje się w farmach i przetwarza w młynach i browarach. Także ośle farmy, owczarnie i chlewy muszą być zaopatrywane w pszenicę."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -3360,13 +3419,13 @@ msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr ""
+msgstr "To smakowite wino spożywane jest w kopalniach złota i marmuru. Produkuje się je w winiarniach."
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../data/tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Wełna to włosie owiec. Tkalnie robią z niej tkaninę."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:3
@@ -3404,11 +3463,20 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Wypala węgiel."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TODO(GunChleoc): This is unused
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr ""
+msgstr "Sadzi i zbiera kukurydzę."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -3420,7 +3488,7 @@ msgstr "Hoduje ryby."
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The fisher fishes delicious fish."
-msgstr "Łowi pyszne ryby."
+msgstr "Rybak łowi pyszne ryby."
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/atlanteans/forester/helptexts.lua:3
@@ -3440,7 +3508,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse "
 "farm."
-msgstr "Konie pomagają przenosić towary na często używanych drogach. Hodowane są w stadninach."
+msgstr "Konie pomagają przenosić towary na zatłoczonych drogach. Hodowane są w stadninach."
 
 #. TRANSLATORS: Helptext for a worker: Horse Breeder
 #: ../../data/tribes/workers/atlanteans/horsebreeder/helptexts.lua:3
@@ -3448,7 +3516,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje silne atlantydzkie konie, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/atlanteans/hunter/helptexts.lua:3
@@ -3460,21 +3528,21 @@ msgstr "Myśliwy zapewnia Atlantydom świeże, surowe mięso."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Mieli czarny korzeń i kukurydzę, by uzyskać z nich odpowiednio mąkę korzenną i kaszę kukurydzianą."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub kamienie szlachetne."
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr "Tnie drzewo, aby wyprodukować deski."
+msgstr "Tnie drzewo na deski."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/atlanteans/scout/helptexts.lua:3
@@ -3493,7 +3561,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
@@ -3511,13 +3579,13 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "Hoduje pająki dla jedwabiu."
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina bloki granitu z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/atlanteans/toolsmith/helptexts.lua:3
@@ -3553,7 +3621,7 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
-msgstr ""
+msgstr "Piecze chleb pita dla pracowników."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -3561,20 +3629,20 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produkuje bronie dla żołnierzy i narzędzia dla pracowników."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Warzy piwo, by górnikom dopisywały energia i dobry humor."
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../data/tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Produces the finest ales to keep soldiers strong and happy in training."
-msgstr ""
+msgstr "Produkuje najlepsze piwa, aby utrzymać żołnierzy silnych i zadowolonych podczas treningu."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
@@ -3592,7 +3660,7 @@ msgstr "Nosi przedmioty po twoich drogach."
 #: ../../data/tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Hoduje mocne woły dla wsparcia transportu towarów."
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
@@ -3610,7 +3678,7 @@ msgstr "Sieje na polach."
 #: ../../data/tribes/workers/barbarians/fisher/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Łowi ryby w morzu."
 
 #. TRANSLATORS: Helptext for a worker: Gamekeeper
 #: ../../data/tribes/workers/barbarians/gamekeeper/helptexts.lua:3
@@ -3618,13 +3686,13 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "Gajowy pilnuje, by naturalna populacja zwierząt nie została przetrzebiona."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Uprawia trzcinę."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -3636,7 +3704,7 @@ msgstr "Odkrywa zasoby do wydobycia."
 #: ../../data/tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "Wykuwa hełmy dla żołnierzy."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/barbarians/hunter/helptexts.lua:3
@@ -3648,13 +3716,13 @@ msgstr "Myśliwy zapewnia Atlantydom świeże, surowe mięso."
 #: ../../data/tribes/workers/barbarians/innkeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produkuje jedzenie dla górników."
 
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../data/tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Mixes grout out of granite, water and coal in the lime kiln."
-msgstr ""
+msgstr "Miesza w wapienniku węgiel, granit i wodę uzyskując fugę."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
@@ -3670,14 +3738,14 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/barbarians/miner_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub granit."
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../data/tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "Woły pomagają w transporcie towarów na zatłoczonych drogach. Hoduje się je na farmach bydła."
 
 #. TRANSLATORS: Helptext for a worker: Ranger
 #: ../../data/tribes/workers/barbarians/ranger/helptexts.lua:3
@@ -3702,7 +3770,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/barbarians/soldier/helptexts.lua:3
@@ -3714,7 +3782,7 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/barbarians/stonemason/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina surowe kawałki granitu z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/barbarians/trainer/helptexts.lua:3
@@ -3726,7 +3794,7 @@ msgstr "Szkoli żołnierzy."
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "Produkuje tkaninę na żagle statków."
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/empire/armorsmith/helptexts.lua:3
@@ -3744,7 +3812,7 @@ msgstr "Piecze chleb dla pracowników."
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Warzy piwo."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
@@ -3756,7 +3824,7 @@ msgstr "Pracuje na placu budowy wznosząc nowe budynki."
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Pracuje w tartaku."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/empire/carrier/helptexts.lua:3
@@ -3776,7 +3844,7 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr ""
+msgstr "Osły pomagają nosić przedmioty na często używanych drogach. Hodowane są na oślich farmach."
 
 #. TRANSLATORS: Helptext for a worker: Donkey Breeder
 #: ../../data/tribes/workers/empire/donkeybreeder/helptexts.lua:3
@@ -3784,7 +3852,7 @@ msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "Hoduje słodkie i pomocne osły, które dodawane są do systemu transportu."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
@@ -3796,7 +3864,7 @@ msgstr "Sieje na polach."
 #: ../../data/tribes/workers/empire/fisher/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Łowi ryby w morzu."
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/empire/forester/helptexts.lua:3
@@ -3814,13 +3882,13 @@ msgstr "Odkrywa zasoby do wydobycia."
 #: ../../data/tribes/workers/empire/hunter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "Myśliwy zapewnia Atlantydom świeże, surowe mięso."
+msgstr "Myśliwy zapewnia kolonistom świeże, surowe mięso."
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../data/tribes/workers/empire/innkeeper/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produkuje jedzenie dla górników."
 
 #. TRANSLATORS: Helptext for a worker: Lumberjack
 #: ../../data/tribes/workers/empire/lumberjack/helptexts.lua:3
@@ -3832,7 +3900,7 @@ msgstr "Ścina drzewa."
 #: ../../data/tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Miele pszenicę na mąkę."
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
@@ -3840,13 +3908,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub marmur."
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Hoduje świnie."
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3
@@ -3859,7 +3927,7 @@ msgstr "Prowadzi zwiad jak Zbigniew Zwiadowca zwiedzający niezwiedzony teren w 
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Opiekuje się owcami."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
@@ -3871,7 +3939,7 @@ msgstr "Pracuje w stoczni budując nowe statki."
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "Wytapia metale z rud."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/empire/soldier/helptexts.lua:3
@@ -3883,7 +3951,7 @@ msgstr "Broń i podbijaj!"
 #: ../../data/tribes/workers/empire/stonemason/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr ""
+msgstr "Wycina bloki granitu i marmuru z okolicznych skał."
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/empire/toolsmith/helptexts.lua:3
@@ -3901,13 +3969,13 @@ msgstr "Szkoli żołnierzy."
 #: ../../data/tribes/workers/empire/vinefarmer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Uprawia winorośl."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Produkuje wino."
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/empire/weaponsmith/helptexts.lua:3
@@ -3919,4 +3987,4 @@ msgstr "Produkuje bronie dla żołnierzy."
 #: ../../data/tribes/workers/empire/weaver/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Produkuje tkaninę dla łodzi i żołnierzy."
