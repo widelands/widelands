@@ -81,8 +81,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// TODO(GunChleoc): This should not be here for Militarysites.
-	// Check if they can inherit from Building directly.
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
@@ -136,55 +134,44 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// Are we only a production site?
-	// If not, we might not have a worker
-	if (table.has_key("working_positions")) {
-		items_table = table.get_table("working_positions");
-		for (const std::string& worker_name : items_table->keys<std::string>()) {
-			int amount = items_table->get_int(worker_name);
-			try {
-				if (amount < 1 || 255 < amount) {
-					throw wexception("count is out of range 1 .. 255");
-				}
-				DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
-				if (egbase.tribes().worker_exists(woi)) {
-					for (const auto& wp : working_positions()) {
-						if (wp.first == woi) {
-							throw wexception("duplicated");
-						}
-					}
-					working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
-				} else {
-					throw wexception("invalid");
-				}
-			} catch (const WException& e) {
-				throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
+	items_table = table.get_table("working_positions");
+	for (const std::string& worker_name : items_table->keys<std::string>()) {
+		int amount = items_table->get_int(worker_name);
+		try {
+			if (amount < 1 || 255 < amount) {
+				throw wexception("count is out of range 1 .. 255");
 			}
+			DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
+			if (egbase.tribes().worker_exists(woi)) {
+				for (const auto& wp : working_positions()) {
+					if (wp.first == woi) {
+						throw wexception("duplicated");
+					}
+				}
+				working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			} else {
+				throw wexception("invalid");
+			}
+		} catch (const WException& e) {
+			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
 	}
 
-	// TODO(SirVer): this mixes militarysite concepts into the production site
-	// - maybe those building should not be in a inheritance relationship.
-	if (working_positions().empty() && !table.has_key("max_soldiers")) {
-		throw wexception("no working/soldier positions");
-	}
 
 	// Get programs
-	if (table.has_key("programs")) {
-		items_table = table.get_table("programs");
-		for (std::string program_name : items_table->keys<std::string>()) {
-			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
-			try {
-				if (programs_.count(program_name)) {
-					throw wexception("this program has already been declared");
-				}
-				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-				programs_[program_name] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-				                         program_table->get_table("actions"), egbase, this));
-			} catch (const std::exception& e) {
-				throw wexception("program %s: %s", program_name.c_str(), e.what());
+	items_table = table.get_table("programs");
+	for (std::string program_name : items_table->keys<std::string>()) {
+		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		try {
+			if (programs_.count(program_name)) {
+				throw wexception("this program has already been declared");
 			}
+			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(
+				new ProductionProgram(program_name, _(program_table->get_string("descname")),
+											 program_table->get_table("actions"), egbase, this));
+		} catch (const std::exception& e) {
+			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 }

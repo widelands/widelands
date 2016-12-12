@@ -45,9 +45,8 @@ uint32_t text_width(const std::string& text, int ptsize) {
 }
 
 uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1
-	   ->render(
-	      as_editorfont(text.empty() ? "." : text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
+	                                       ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->height();
 }
 
