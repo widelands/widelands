@@ -550,6 +550,7 @@ struct FNeuron {
 	void flip_bit(uint8_t);
 	// void set(uint8_t);
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
+	bool get_position(uint8_t);
 	uint32_t get_int();
 
 private:
