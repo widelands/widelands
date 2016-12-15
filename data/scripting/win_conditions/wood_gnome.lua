@@ -116,7 +116,6 @@ return {
       pic = "images/wui/stats/genstats_trees.png",
       calculator = function(p)
          local pts = _calc_points(p)
-         print(("p.number: %q, pts: %q"):format(p.number, pts[p.number]))
          return pts[p.number]
       end,
    }
