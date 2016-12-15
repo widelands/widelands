@@ -202,8 +202,8 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	/// If this immovable was created by a building, 'former_building_desr' can be set in order to display
-	/// information about it.
+	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
+	/// display information about it.
 	Immovable(const ImmovableDescr&,
 	          const Widelands::BuildingDescr* former_building_descr = nullptr);
 	~Immovable();

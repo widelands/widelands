@@ -239,9 +239,9 @@ Building::Building(const BuildingDescr& building_descr)
 }
 
 Building::~Building() {
-	log("#sirver Destroying building this: %p\n", this);
-	if (optionswindow_)
+	if (optionswindow_) {
 		hide_options();
+	}
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
