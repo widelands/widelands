@@ -140,7 +140,7 @@ public:
 	ImmovableProgram const* get_program(const std::string&) const;
 
 	Immovable&
-	create(EditorGameBase&, const Coords&, const Widelands::Building* former_building) const;
+	create(EditorGameBase&, const Coords&, const Widelands::BuildingDescr* former_building_descr) const;
 
 	MapObjectDescr::OwnerType owner_type() const {
 		return owner_type_;
@@ -202,9 +202,10 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	/// If this immovable was created by a building, 'former_building' can be set in order to display
-	/// information about it.
-	Immovable(const ImmovableDescr&, const Widelands::Building* former_building = nullptr);
+	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
+	/// display information about it.
+	Immovable(const ImmovableDescr&,
+	          const Widelands::BuildingDescr* former_building_descr = nullptr);
 	~Immovable();
 
 	Coords get_position() const {
