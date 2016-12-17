@@ -57,14 +57,20 @@ return {
          return _plrpoints
       end
 
-      -- init the playerpoints for each player
+      -- clear out the table. We count afresh.
+      for k,v in pairs(_plrpoints) do 
+         _plrpoints[k] = 0
+      end
+      
+      -- Insert all players who are still in the game.
       for idx,plr in ipairs(plrs) do
          _plrpoints[plr.number] = 0
       end
+      
       for idf,f in ipairs(fields) do
          -- check if field is owned by a player
          local owner = f.owner
-         if owner then
+         if owner and not owner.defeated then
             owner = owner.number
             -- check if field has an immovable
             local imm = f.immovable
