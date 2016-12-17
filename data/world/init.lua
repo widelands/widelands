@@ -100,6 +100,9 @@ world:new_editor_critter_category {
    items_per_row = 10,
 }
 
+-- NOCOM(#codereview): I do not understand the reordering here. I think
+-- alphabetically is preferable to keep future diffs smaller. If there is a
+-- deeper reason behind the reordering, you should add a comment here.
 include "world/immovables/grass1/init.lua"
 include "world/immovables/grass2/init.lua"
 include "world/immovables/grass3/init.lua"
