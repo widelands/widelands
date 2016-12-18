@@ -774,8 +774,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 
 	Immovable& newimm = game.create_immovable(
 	   pos, state.ivar2, state.svar1 == "tribe" ? MapObjectDescr::OwnerType::kTribe :
-	                                              MapObjectDescr::OwnerType::kWorld);
-	newimm.set_owner(get_owner());
+	                                              MapObjectDescr::OwnerType::kWorld,
+	   get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
 		state.objvar1 = &newimm;
@@ -847,7 +847,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe);
+		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {

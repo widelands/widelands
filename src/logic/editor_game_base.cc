@@ -328,36 +328,49 @@ information about it.
 Immovable& EditorGameBase::create_immovable(const Coords& c,
                                             DescriptionIndex const idx,
                                             MapObjectDescr::OwnerType type,
-                                            const Building* former_building) {
-	const ImmovableDescr& descr =
-	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
-	                                                 world().get_immovable_descr(idx));
-	assert(&descr);
-	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
-	return descr.create(*this, c, former_building);
+                                            Player* owner) {
+	return do_create_immovable(c, idx, type, owner, nullptr);
 }
 
-Immovable& EditorGameBase::create_immovable(const Coords& c,
-                                            const std::string& name,
-                                            MapObjectDescr::OwnerType type,
-                                            const Building* former_building) {
+Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
+                                                      const std::string& name,
+                                                      MapObjectDescr::OwnerType type,
+                                                      Player* owner,
+                                                      const BuildingDescr* former_building_descr) {
 	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
 		if (!tribes().immovable_exists(idx)) {
 			throw wexception(
-			   "EditorGameBase::create_immovable(%i, %i): %s is not defined for the tribes", c.x, c.y,
-			   name.c_str());
+			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the tribes",
+			   c.x, c.y, name.c_str());
 		}
 	} else {
 		idx = world().get_immovable_index(name.c_str());
 		if (idx == INVALID_INDEX) {
 			throw wexception(
-			   "EditorGameBase::create_immovable(%i, %i): %s is not defined for the world", c.x, c.y,
-			   name.c_str());
+			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the world",
+			   c.x, c.y, name.c_str());
 		}
 	}
-	return create_immovable(c, idx, type, former_building);
+	return do_create_immovable(c, idx, type, owner, former_building_descr);
+}
+
+Immovable& EditorGameBase::do_create_immovable(const Coords& c,
+                                               DescriptionIndex const idx,
+                                               MapObjectDescr::OwnerType type,
+                                               Player* owner,
+                                               const BuildingDescr* former_building_descr) {
+	const ImmovableDescr& descr =
+	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
+	                                                 world().get_immovable_descr(idx));
+	assert(&descr);
+	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
+	Immovable& immovable = descr.create(*this, c, former_building_descr);
+	if (owner != nullptr) {
+		immovable.set_owner(owner);
+	}
+	return immovable;
 }
 
 /**

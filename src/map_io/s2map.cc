@@ -724,7 +724,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
-		egbase.create_immovable(location, idx, Widelands::MapObjectDescr::OwnerType::kWorld);
+		egbase.create_immovable(
+		   location, idx, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	};
 
 	uint8_t c;

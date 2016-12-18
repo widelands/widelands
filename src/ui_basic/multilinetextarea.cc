@@ -162,11 +162,11 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
 
 		if (blit_width > 0 && blit_height > 0) {
-			float anchor = 0.f;
+			int anchor = 0;
 			Align alignment = mirror_alignment(align_);
 			switch (alignment & UI::Align::kHorizontal) {
 			case UI::Align::kHCenter:
-				anchor = (get_eff_w() - blit_width) / 2.f;
+				anchor = (get_eff_w() - blit_width) / 2;
 				break;
 			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
