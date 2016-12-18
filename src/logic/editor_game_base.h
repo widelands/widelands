@@ -142,15 +142,13 @@ public:
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
-	Immovable& create_immovable(const Coords&,
-	                            DescriptionIndex idx,
-	                            MapObjectDescr::OwnerType,
-										 Player* owner);
+	Immovable&
+	create_immovable(const Coords&, DescriptionIndex idx, MapObjectDescr::OwnerType, Player* owner);
 	Immovable& create_immovable_with_name(const Coords&,
-	                            const std::string& name,
-	                            MapObjectDescr::OwnerType,
-										 Player* owner,
-	                            const BuildingDescr* former_building);
+	                                      const std::string& name,
+	                                      MapObjectDescr::OwnerType,
+	                                      Player* owner,
+	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 

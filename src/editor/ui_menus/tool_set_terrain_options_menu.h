@@ -39,8 +39,9 @@ struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 	virtual ~EditorToolSetTerrainOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription,
-	                                             EditorSetTerrainTool>> multi_select_menu_;
+	std::unique_ptr<
+	   CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>>
+	   multi_select_menu_;
 	std::vector<std::unique_ptr<const Image>> offscreen_images_;
 };
 

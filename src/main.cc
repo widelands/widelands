@@ -65,7 +65,8 @@ int main(int argc, char* argv[]) {
 		     << "') in outermost handler!\nThe exception said: " << e.what()
 		     << "\n\nThis should not happen. Please file a bug report on version " << build_id()
 		     << '(' << build_type() << ')' << ".\n"
-		     << "and remember to specify your operating system.\n\n" << flush;
+		     << "and remember to specify your operating system.\n\n"
+		     << flush;
 		delete g_app;
 
 		return 1;
@@ -74,7 +75,8 @@ int main(int argc, char* argv[]) {
 		     << "') in outermost handler!\nThe exception said: " << e.what()
 		     << "\n\nThis should not happen. Please file a bug report on version " << build_id()
 		     << '(' << build_type() << ')' << ".\n"
-		     << "and remember to specify your operating system.\n\n" << flush;
+		     << "and remember to specify your operating system.\n\n"
+		     << flush;
 		delete g_app;
 
 		return 1;

@@ -331,10 +331,10 @@ Immovable& EditorGameBase::create_immovable(const Coords& c,
 }
 
 Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
-                                            const std::string& name,
-                                            MapObjectDescr::OwnerType type,
-														  Player* owner,
-                                            const BuildingDescr* former_building_descr) {
+                                                      const std::string& name,
+                                                      MapObjectDescr::OwnerType type,
+                                                      Player* owner,
+                                                      const BuildingDescr* former_building_descr) {
 	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
@@ -355,10 +355,10 @@ Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
 }
 
 Immovable& EditorGameBase::do_create_immovable(const Coords& c,
-                                            DescriptionIndex const idx,
-                                            MapObjectDescr::OwnerType type,
-														  Player* owner,
-                                            const BuildingDescr* former_building_descr) {
+                                               DescriptionIndex const idx,
+                                               MapObjectDescr::OwnerType type,
+                                               Player* owner,
+                                               const BuildingDescr* former_building_descr) {
 	const ImmovableDescr& descr =
 	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
 	                                                 world().get_immovable_descr(idx));
@@ -370,7 +370,6 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
 	}
 	return immovable;
 }
-
 
 /**
  * Instantly create a ship at the given x/y location.

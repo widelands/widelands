@@ -139,8 +139,9 @@ public:
 	}
 	ImmovableProgram const* get_program(const std::string&) const;
 
-	Immovable&
-	create(EditorGameBase&, const Coords&, const Widelands::BuildingDescr* former_building_descr) const;
+	Immovable& create(EditorGameBase&,
+	                  const Coords&,
+	                  const Widelands::BuildingDescr* former_building_descr) const;
 
 	MapObjectDescr::OwnerType owner_type() const {
 		return owner_type_;

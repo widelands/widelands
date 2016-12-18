@@ -344,7 +344,8 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::BuildingDescr* former_building_descr)
+Immovable::Immovable(const ImmovableDescr& imm_descr,
+                     const Widelands::BuildingDescr* former_building_descr)
    : BaseImmovable(imm_descr),
      former_building_descr_(former_building_descr),
      anim_(0),
