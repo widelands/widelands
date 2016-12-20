@@ -789,8 +789,8 @@ void DefaultAI::late_initialization() {
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
 	if (kDoReview) {
 		taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
-	                                 SchedulerTaskId::kManagementUpdate, 7, "Management update"));
-								 }
+		                                 SchedulerTaskId::kManagementUpdate, 7, "Management update"));
+	}
 
 	Map& map = game().map();
 
@@ -917,12 +917,12 @@ void DefaultAI::late_initialization() {
 		check_range<uint16_t>(persistent_data->ships_utilization, 0, 10000, "ships_utilization_");
 		check_range<int32_t>(
 		   persistent_data->ai_personality_attack_margin, 15, "ai_personality_attack_margin");
-		check_range<uint32_t>(
-		   persistent_data->ai_productionsites_ratio, 5, 15, "ai_productionsites_ratio");
-		check_range<int32_t>(persistent_data->ai_personality_wood_difference, -20, 19,
-		                     "ai_personality_wood_difference");
-		check_range<uint32_t>(persistent_data->ai_personality_early_militarysites, 20, 40,
-		                      "ai_personality_early_militarysites");
+		//check_range<uint32_t>(
+		   //persistent_data->ai_productionsites_ratio, 5, 15, "ai_productionsites_ratio");
+		//check_range<int32_t>(persistent_data->ai_personality_wood_difference, -20, 19,
+		                     //"ai_personality_wood_difference");
+		//check_range<uint32_t>(persistent_data->ai_personality_early_militarysites, 20, 40,
+		                      //"ai_personality_early_militarysites");
 
 		printf("MN: %lu  %d %d\n", persistent_data->magic_numbers.size(),
 		       persistent_data->magic_numbers_size, magic_numbers_size);
@@ -980,6 +980,8 @@ void DefaultAI::late_initialization() {
 
 	// just to be sure we have iron mines identified
 	assert(iron_ore_id >= 0);
+	
+	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
 }
 
 /**
@@ -1488,65 +1490,79 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.inland = true;
 	}
 
+	int16_t inputs[2 * f_neuron_bit_size] = {0};
 
-	int16_t inputs [f_neuron_bit_size] = {0};
-	
-	// Land and resource	
-	inputs[0] = -field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51)) / 2;
-	inputs[1] = management_data.neuron_pool[0].get_result_safe(
-			   field.military_loneliness / 50, kAbsValue);
-	inputs[2] = -1 * management_data.neuron_pool[8].get_result_safe(
-			   (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+	// Land and resource
+	inputs[0] =
+	   -field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51)) / 2;
+	inputs[1] =
+	   management_data.neuron_pool[0].get_result_safe(field.military_loneliness / 50, kAbsValue);
+	inputs[2] = -1 *
+	            management_data.neuron_pool[8].get_result_safe(
+	               (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
 	inputs[3] = -2 *
-			   management_data.neuron_pool[74].get_result_safe(
-			      (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
+	            management_data.neuron_pool[74].get_result_safe(
+	               (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
 	inputs[4] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
-		-std::abs(management_data.get_military_number_at(32)) : 0;
-	inputs[5] = -2 *
-		   management_data.neuron_pool[13].get_result_safe(field.military_stationed * 2, kAbsValue);
+	               -std::abs(management_data.get_military_number_at(32)) :
+	               0;
+	inputs[5] =
+	   -2 * management_data.neuron_pool[13].get_result_safe(field.military_stationed * 2, kAbsValue);
 	inputs[6] = field.unowned_buildable_spots_nearby *
-	                         std::abs(management_data.get_military_number_at(11)) / 40;
+	            std::abs(management_data.get_military_number_at(11)) / 40;
 	inputs[7] = management_data.neuron_pool[62].get_result_safe(
-	                            field.unowned_buildable_spots_nearby, kAbsValue) /
-	                         5;
+	               field.unowned_buildable_spots_nearby, kAbsValue) /
+	            5;
 	inputs[8] = management_data.neuron_pool[22].get_result_safe(
-	                               (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue) *
-	                            resource_necessity_mines_ / 100;
-	inputs[9] = 2 * management_data.neuron_pool[24].get_result_safe(field.rocks_nearby * 2, kAbsValue);
+	               (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue) *
+	            resource_necessity_mines_ / 100;
+	inputs[9] =
+	   2 * management_data.neuron_pool[24].get_result_safe(field.rocks_nearby * 2, kAbsValue);
 	inputs[10] = management_data.neuron_pool[25].get_result_safe(field.water_nearby, kAbsValue);
 	inputs[11] = resource_necessity_water_needed_ *
-	   management_data.neuron_pool[26].get_result_safe(field.distant_water, kAbsValue);
+	             management_data.neuron_pool[26].get_result_safe(field.distant_water, kAbsValue);
 	inputs[12] = management_data.neuron_pool[27].get_result_safe(field.trees_nearby, kAbsValue);
-	inputs[13] = (field.portspace_nearby == ExtendedBool::kTrue) ? std::abs(management_data.get_military_number_at(5) / 6) : 0;
+	inputs[13] = (field.portspace_nearby == ExtendedBool::kTrue) ?
+	                std::abs(management_data.get_military_number_at(5) / 6) :
+	                0;
 
 	// combined numbers:
 	if (field.rocks_nearby > 0 && field.water_nearby > 0 && field.trees_nearby) {
 		inputs[14] = std::abs(management_data.get_military_number_at(6));
 	}
 	// one shot numbers
-	inputs[15] = (field.unowned_mines_spots_nearby > 0) ? std::abs(management_data.get_military_number_at(58)) : 0;
-	inputs[16] = (field.unowned_buildable_spots_nearby > 0) ? std::abs(management_data.get_military_number_at(59)) : 0;
-	inputs[17] = (field.unowned_land_nearby > 0) ? std::abs(management_data.get_military_number_at(52)) : 0;
-	inputs[18] = -1 * (field.military_in_constr_nearby + field.military_unstationed) *
-		std::abs(management_data.get_military_number_at(12) / 2);
+	inputs[15] = (field.unowned_mines_spots_nearby > 0) ?
+	                std::abs(management_data.get_military_number_at(58)) :
+	                0;
+	inputs[16] = (field.unowned_buildable_spots_nearby > 0) ?
+	                std::abs(management_data.get_military_number_at(59)) :
+	                0;
+	inputs[17] =
+	   (field.unowned_land_nearby > 0) ? std::abs(management_data.get_military_number_at(52)) : 0;
+	inputs[18] = -2 * (field.military_in_constr_nearby + field.military_unstationed) *
+	             std::abs(management_data.get_military_number_at(12) / 2);
 
-	
 	// Enemy nearby
-	inputs[19] = management_data.neuron_pool[73].get_result_safe(
-			   field.enemy_owned_land_nearby / 5, kAbsValue);	
-	inputs[20] = -1 * management_data.neuron_pool[4].get_result_safe(
-			   (field.area_military_capacity + 4) / 5, kAbsValue);
-	inputs[21] = -1 * management_data.neuron_pool[53].get_result_safe(
-			   field.ally_military_presence * 2, kAbsValue);
-	inputs[22] = 2 * management_data.neuron_pool[54].get_result_safe(
-			   field.enemy_military_presence * 2, kAbsValue);
-	inputs[23] = management_data.neuron_pool[61].get_result_safe(
-			   field.enemy_military_presence / 3, kAbsValue);			   
-	inputs[24] = -1 *
-			   management_data.neuron_pool[75].get_result_safe(field.own_military_presence, kAbsValue);
-	inputs[25] = -2 * management_data.neuron_pool[36].get_result_safe(
-			   static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);	
-	inputs[26] = management_data.neuron_pool[21].get_result_safe(
+	inputs[19] =
+	   management_data.neuron_pool[73].get_result_safe(field.enemy_owned_land_nearby / 5, kAbsValue);
+	inputs[20] = -1 *
+	             management_data.neuron_pool[4].get_result_safe(
+	                (field.area_military_capacity + 4) / 5, kAbsValue);
+	inputs[21] =
+	   -1 *
+	   management_data.neuron_pool[53].get_result_safe(field.ally_military_presence * 2, kAbsValue);
+	inputs[22] =
+	   2 *
+	   management_data.neuron_pool[54].get_result_safe(field.enemy_military_presence * 2, kAbsValue);
+	inputs[23] =
+	   management_data.neuron_pool[61].get_result_safe(field.enemy_military_presence / 3, kAbsValue);
+	inputs[24] =
+	   -1 * management_data.neuron_pool[75].get_result_safe(field.own_military_presence, kAbsValue);
+	inputs[25] = -2 *
+	             management_data.neuron_pool[36].get_result_safe(
+	                static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
+	inputs[26] =
+	   management_data.neuron_pool[21].get_result_safe(
 	      ((field.unowned_land_nearby + field.enemy_owned_land_nearby) + 8) / 9, kAbsValue) *
 	   resource_necessity_territory_ / 100;
 	inputs[27] = (field.enemy_accessible_) ? management_data.get_military_number_at(55) : 0;
@@ -1557,35 +1573,118 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	inputs[30] = management_data.get_military_number_at(46);
 	inputs[31] = management_data.get_military_number_at(47);
 
-	//Fneurons per situation
-	uint8_t applyied_neuron=53;   //f_neuron_pool[53]
+	// second neuron
+	inputs[32] =
+	   -5 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51));
+	inputs[33] =
+	   5 *
+	   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
+	inputs[34] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
+	                -std::abs(management_data.get_military_number_at(81)) :
+	                0;
+	inputs[35] = 5 *
+	             management_data.neuron_pool[11].get_result_safe(
+	                field.unowned_buildable_spots_nearby, kAbsValue);
+	inputs[36] =
+	   5 *
+	   management_data.neuron_pool[12].get_result_safe(field.unowned_mines_spots_nearby, kAbsValue) *
+	   resource_necessity_mines_ / 100;
+	inputs[37] = 2 * management_data.neuron_pool[14].get_result_safe(field.rocks_nearby, kAbsValue);
+	inputs[38] = 10 * management_data.neuron_pool[15].get_result_safe(field.water_nearby, kAbsValue);
+	inputs[39] = 5 * resource_necessity_water_needed_ *
+	             management_data.neuron_pool[17].get_result_safe(field.distant_water, kAbsValue);
+	inputs[40] = 2 * management_data.neuron_pool[18].get_result_safe(field.trees_nearby, kAbsValue);
+	inputs[41] =
+	   5 * management_data.neuron_pool[50].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
+	inputs[42] =
+	   -25 * management_data.neuron_pool[51].get_result_safe(field.area_military_capacity, kAbsValue);
+	inputs[43] =
+	   -10 *
+	   management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
+	inputs[44] =
+	   10 *
+	   management_data.neuron_pool[56].get_result_safe(field.enemy_military_presence, kAbsValue);
+	inputs[45] =
+	   -10 * management_data.neuron_pool[58].get_result_safe(field.own_military_presence, kAbsValue);
+	inputs[46] = -10 *
+	             management_data.neuron_pool[59].get_result_safe(
+	                static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
+	inputs[47] = 10 *
+	             management_data.neuron_pool[65].get_result_safe(
+	                (field.unowned_land_nearby + field.enemy_owned_land_nearby), kAbsValue) *
+	             resource_necessity_territory_ / 100;
+	inputs[48] = (field.enemy_accessible_) ? management_data.get_military_number_at(80) : 0;
+	inputs[49] =  -10 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(82));
+	inputs[50] =  -25 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(83));
+	inputs[51] =  -100 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(84));
+	inputs[52] =
+	   -10 * management_data.neuron_pool[64].get_result_safe(field.own_military_presence, kAbsValue);
+	inputs[53] = (field.military_in_constr_nearby > 0) ? 5 * management_data.get_military_number_at(85) : 0;
+	inputs[54] = (field.enemy_accessible_) ? management_data.get_military_number_at(56) * 2 : 0;
+	inputs[55] = 3 *
+	   management_data.neuron_pool[76].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
+	inputs[56] = 10 * resource_necessity_water_needed_ *
+	             management_data.neuron_pool[77].get_result_safe(field.distant_water, kAbsValue);
+	inputs[56] = 3 * std::min(inputs[3], inputs[4]);
+	inputs[57] = 3 * std::min(inputs[5], inputs[6]);
+	inputs[58] = 3 * std::min(inputs[7], inputs[8]);		
+	
+	// Fneurons per situation
+	// f_neuron_pool[7]
+	uint8_t applyied_neuron[2] = {53, 7};  // f_neuron_pool[53]
 	uint8_t multiplicator = std::abs(management_data.get_military_number_at(48)) +
-			std::abs(management_data.get_military_number_at(39)) 	;
+	                        std::abs(management_data.get_military_number_at(39));
 	if (field.enemy_nearby) {
-		applyied_neuron = 54; //f_neuron_pool[54]
+		applyied_neuron[0] = 54;  // f_neuron_pool[54]
+		applyied_neuron[1] = 9;   // f_neuron_pool[9]
 		multiplicator = std::abs(management_data.get_military_number_at(49)) +
-			std::abs(management_data.get_military_number_at(40)) 	;
+		                std::abs(management_data.get_military_number_at(40));
 	} else if (field.enemy_accessible_) {
-		applyied_neuron = 55; //f_neuron_pool[55]
+		applyied_neuron[0] = 55;  // f_neuron_pool[55]
+		applyied_neuron[1] = 12;  // f_neuron_pool[12]
 		multiplicator = std::abs(management_data.get_military_number_at(30)) +
-			std::abs(management_data.get_military_number_at(53)) 	;
+		                std::abs(management_data.get_military_number_at(53));
 	} else if (field.is_militarysite) {
-		applyied_neuron = 56; //f_neuron_pool[56]
+		applyied_neuron[0] = 56;  // f_neuron_pool[56]
+		applyied_neuron[1] = 57;  // f_neuron_pool[57]
 		multiplicator = std::abs(management_data.get_military_number_at(31)) +
-			std::abs(management_data.get_military_number_at(50)) 	;
-	} 		
-	
-	
-	for (int i = 0; i < f_neuron_bit_size; i = i+1) {
-		if (management_data.f_neuron_pool[applyied_neuron].get_position(i)) {
-			field.military_score_ += inputs[i];
-			//printf ("Applying position %d: %d\n", i, inputs[i]);
-			if (inputs[i] < -200 || inputs[i] > 200) {
-				printf ("Value too high for position %d: %d\n", i, inputs[i]);
-				}
-		} 
+		                std::abs(management_data.get_military_number_at(50));
 	}
-	field.military_score_  = field.military_score_  * multiplicator / 300;
+
+	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
+		if (management_data.f_neuron_pool[applyied_neuron[0]].get_position(i)) {
+			field.military_score_ += inputs[i];
+			// printf ("Applying position %d: %d\n", i, inputs[i]);
+			// if (inputs[i] < -200 || inputs[i] > 200) {
+			// printf ("Value too high for position %d: %d\n", i, inputs[i]);
+			//}
+		}
+		if (management_data.f_neuron_pool[applyied_neuron[1]].get_position(i)) {
+			field.military_score_ += inputs[i + f_neuron_bit_size];
+			// printf ("Applying position %d: %d\n", i, inputs[i]);
+			// if (inputs[i+f_neuron_bit_size] < -200 || inputs[i] > 200) {
+			// printf ("Value too high for position %d: %d\n", i+f_neuron_bit_size,
+			// inputs[i+f_neuron_bit_size]);
+			//}
+		}
+	}
+	field.military_score_ = field.military_score_ * multiplicator / 300;
+	
+	//// Statistics for inputs utilization
+	//std::vector<uint8_t> neurons1 = {53, 54, 55, 56};
+	//std::vector<uint8_t> neurons2 = {7, 9, 12, 57};
+	
+	//for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
+		//uint8_t count1 = 0;
+		//uint8_t count2 = 0;		
+		//for (int j = 0; j < 4; j = j + 1){
+			//count1 += management_data.f_neuron_pool[neurons1[j]].get_position(i);
+			//count2 += management_data.f_neuron_pool[neurons2[j]].get_position(i);
+		//}
+		//printf ("neuron %d used %d times\n", i, count1);
+		//printf ("neuron %d not %d times\n", i+f_neuron_bit_size, count2);
+	//}	
+	
 
 	if (field.is_militarysite && verbose)
 		printf("actual score: %4d b\n", field.military_score_);
@@ -1810,7 +1909,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	   virtual_mines >= 5,
 	   player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
 	   (num_prod_constructionsites + mines_in_constr()) >
-	      (productionsites.size() + mines_built()) / persistent_data->ai_productionsites_ratio + 2);
+	      (productionsites.size() + mines_built()) / productionsites_ratio_);
 
 	const bool nbs_2 = management_data.f_neuron_pool[14].get_result(
 	   gametime > 45 * 60 * 1000, mines_.size() < 2, needs_boost_economy,
@@ -1828,7 +1927,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	   virtual_mines >= 5,
 	   player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn),
 	   (num_prod_constructionsites + mines_in_constr()) >
-	      (productionsites.size() + mines_built()) / persistent_data->ai_productionsites_ratio + 2);
+	      (productionsites.size() + mines_built()) / productionsites_ratio_);
 
 	const bool ms_2 = management_data.f_neuron_pool[18].get_result(
 	   gametime > 45 * 60 * 1000,
@@ -1903,7 +2002,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// Under some circumstances we prohibit new productionsites
 	new_buildings_stop_ = management_data.f_neuron_pool[8].get_result(
 	   (num_prod_constructionsites + mines_in_constr()) >
-	      (productionsites.size() + mines_built()) / persistent_data->ai_productionsites_ratio + 2,
+	      (productionsites.size() + mines_built()) / productionsites_ratio_,
 	   has_enough_space, (num_prod_constructionsites + productionsites.size()) >
 	                        (msites_in_constr() + militarysites.size()) *
 	                           (5 + std::abs(management_data.get_military_number_at(28)) / 40),
@@ -1916,7 +2015,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// it is proportion to the size of economy). Plus some positive 'margin'
 	const int32_t stocked_wood_margin = calculate_stocklevel(wood_index) -
 	                                    productionsites.size() * 2 - num_prod_constructionsites +
-	                                    persistent_data->ai_personality_wood_difference;
+	                                    management_data.get_military_number_at(87) / 5;
 	if (gametime < 15 * 60 * 1000) {
 		wood_policy_ = WoodPolicy::kAllowRangers;
 	} else if (stocked_wood_margin > 80) {
@@ -2131,7 +2230,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 			}
 
-			if (time(nullptr) % 3 == 0 && bo.total_count() > 0) {
+			if (std::rand() % 3 == 0 && bo.total_count() > 0) {
 				continue;
 			}  // add randomnes and ease AI
 
@@ -2480,10 +2579,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					;
 				}  // it is ok, go on
 				else if (bo.expansion_type) {
-					if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
+					if (bo.desc->get_size() == 2 && std::rand() % 2 >= 1) {
 						continue;
 					}
-					if (bo.desc->get_size() == 3 && gametime % 4 >= 1) {
+					if (bo.desc->get_size() == 3 && std::rand() % 4 >= 1) {
 						continue;
 					};
 				} else {
@@ -2504,7 +2603,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					;  // no bonus for score
 				} else if (management_data.f_neuron_pool[10].get_result(
 				              prio_for_size == 1, bf->enemy_nearby || bf->enemy_owned_land_nearby > 5,
-				              spots_ < kSpotsTooLittle, bf->unowned_land_nearby > 5,
+				              spots_<kSpotsTooLittle, bf->unowned_land_nearby> 5,
 				              bf->unowned_buildable_spots_nearby > 0)) {
 					prio +=
 					   management_data.neuron_pool[29].get_result_safe(prio_for_size * 10, kAbsValue) /
@@ -2866,7 +2965,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismantled
 		// if there is shortage of spots we do it always
 		if (last_road_dismantled_ + 15 * 1000 < gametime &&
-		    (gametime % 5 == 0 || spots_ < kSpotsTooLittle)) {
+		    (std::rand() % 5 == 0 || spots_ < kSpotsTooLittle)) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
@@ -2930,7 +3029,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	} else if (!has_building && flag.nr_of_roads() == 1) {
 		// This is end of road without any building, we do not initiate interconnection thus
 		return false;
-	} else if (flag.nr_of_roads() == 1 || gametime % 10 == 0) {
+	} else if (flag.nr_of_roads() == 1 || std::rand() % 10 == 0) {
 		if (spots_ > kSpotsEnough) {
 			// This is the normal situation
 			create_shortcut_road(flag, 15, 22, gametime);

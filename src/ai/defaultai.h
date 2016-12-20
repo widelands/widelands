@@ -332,6 +332,8 @@ private:
 	uint32_t enemysites_check_delay_;
 
 	int32_t spots_;  // sum of buildable fields
+	
+	int16_t productionsites_ratio_;
 
 	bool new_buildings_stop_;
 	bool needs_boost_economy;

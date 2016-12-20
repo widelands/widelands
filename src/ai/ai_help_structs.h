@@ -590,6 +590,7 @@ struct ManagementData {
 
 private:
 	int32_t scores[3];
+	uint8_t primary_parent;
 	uint32_t last_mutate_time;
 	uint16_t review_count;
 	uint16_t next_neuron_id;

@@ -468,7 +468,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint32_t above_ten = (attackers > 10) ? attackers - 10 : 0;
 	above_ten = (above_ten > 30) ? 30 : above_ten;
 
-	attackers = attackers - (gametime % 3) - ((above_ten > 0) ? gametime % above_ten : 0);
+	attackers = attackers - (std::rand() % 3) - ((above_ten > 0) ? std::rand() % above_ten : 0);
 	attackers += management_data.neuron_pool[48].get_result_safe(training_score / 2, kAbsValue) / 10;
 	assert (attackers < 500);
 
@@ -963,11 +963,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	const uint32_t msites_total = msites_built() + msites_in_constr();
 
 	if (size == BaseImmovable::SMALL) {  // this function is intended for medium and bigger sites
-		const bool input1 = management_data.f_neuron_pool[37].get_result( //NOCOM
+		const bool input1 = management_data.f_neuron_pool[37].get_result(
 			mines_built() <=2,
 			mines_per_type[iron_ore_id].total_count() == 0,
 			msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(76)) / 20),
-			spots_<kSpotsTooLittle,
+			spots_ < kSpotsTooLittle,
 			player_statistics.get_enemies_max_land() > player_statistics.get_player_land(pn));
 		const bool input2 = management_data.f_neuron_pool[38].get_result( 
 			msites_in_constr() == 0, (military_last_build_ + 5 * 60 * 1000 > gametime),
@@ -978,7 +978,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		const bool input3 = management_data.f_neuron_pool[39].get_result( 
 			mines_per_type[iron_ore_id].total_count() == 0,
 			msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(77)) / 20),
-			spots_<kSpotsTooLittle,		
+			spots_ < kSpotsTooLittle,		
 		    big_buildings_score >
 		          msites_total * 10 / (10 + management_data.get_military_number_at(33) / 20),
 		    soldier_status_ == SoldiersStatus::kShortage ||
