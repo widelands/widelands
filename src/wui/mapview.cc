@@ -36,12 +36,26 @@
 
 namespace {
 
-	// NOCOM(#sirver): maybe replace set_zoom through set_view.
-	// NOCOM(#sirver): how to 'reverse' a plan?
+// NOCOM(#sirver): maybe replace set_zoom through set_view.
+// NOCOM(#sirver): how to 'reverse' a plan?
 
-// NOCOM(#sirver): document
-constexpr float kInterpolationDeltaMs = 100.f;
-constexpr uint32_t kAnimationTimeMs = 1500;
+// Number of keyframes to generate for a plan. The more points, the smoother
+// the animation (though we also lineraly interpolate between keyframes) and
+// the more work.
+constexpr int kNumKeyFrames = 102;
+
+// The maximum zoom to use in moving animations.
+constexpr float kMaxAnimationZoom = 8.f;
+
+// The time used for paning only automated map movement.
+constexpr float kPanOnlyAnimationTimeMs = 500.f;
+
+// The time used for zooming and paning automated map movement.
+constexpr float kPanAndZoomAnimationTimeMs = 1500.f;
+
+// If the difference between the current zoom and the target zoom in an
+// animation plan is smaller than this value, we will do a pan-only movement.
+constexpr float kPanOnlyZoomThreshold = 0.25f;
 
 // Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
 // point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
@@ -146,7 +160,7 @@ private:
 
 
 template <typename T>
-T linear_interpolate(float t, const T& a, const T& b) {
+T mix(float t, const T& a, const T& b) {
 	return a * (1.f - t) + b * t;
 }
 
@@ -154,23 +168,48 @@ T linear_interpolate(float t, const T& a, const T& b) {
 template <typename T>
 class SmoothstepInterpolator {
 public:
-	SmoothstepInterpolator(const Vector2f& start, const Vector2f& end, float dt)
+	SmoothstepInterpolator(const T& start, const T& end, float dt)
 	   : start_(start), end_(end), dt_(dt) {
 	}
 
 	T value(const float time_ms) {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
-		return linear_interpolate(pow2(t) * (3.f - 2.f * t), start_, end_);
+		return mix(pow2(t) * (3.f - 2.f * t), start_, end_);
 		// NOCOM(#sirver): Smootherstep - maybe accelerations too slowly, but definitvely smoother.
-		// return linear_interpolate(pow3(t) * (t * (t * 6.f - 15.f) + 10.f), start_, end_);
+		// return mix(pow3(t) * (t * (t * 6.f - 15.f) + 10.f), start_, end_);
 	}
 
 private:
-	Vector2f start_, end_;
+	T start_, end_;
 	float dt_;
 
 	DISALLOW_COPY_AND_ASSIGN(SmoothstepInterpolator);
 };
+
+template <typename T, typename P>
+class SymmetricInterpolator {
+public:
+	SymmetricInterpolator(const T& start, const T& end, float dt)
+	   : inner_(start, end, dt / 2.f), dt_(dt) {
+	}
+
+	T value(const float time_ms) {
+		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
+		if (t < 0.5f) {
+			return inner_.value(t * dt_);
+		} else {
+			return inner_.value((1.f - t) * dt_);
+		}
+	}
+
+private:
+	P inner_;
+	float dt_;
+
+	DISALLOW_COPY_AND_ASSIGN(SymmetricInterpolator);
+};
+
+
 
 // Calculates a animation plan from 'start' to 'end_viewpoint' - both at 'zoom',
 // taking 'duraction_ms'. The animation is assumed to start at the
@@ -180,24 +219,8 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
                                                      const Vector2f& start,
                                                      const Vector2f& end,
                                                      const float start_zoom,
-                                                     const int duration_ms,
                                                      const int width,
                                                      const int height) {
-	constexpr float kTargetZoom = 8.f;
-   // Viewpoint: Accelerate for 25% of time, then move constant, decelerate 25% of time
-
-	// const float v_zoom = (kTargetZoom - start_zoom) / (duration_ms * 0.25);
-
-	   // NOCOM(#sirver): change to always start at 0.
-	// Interpolator<float> zoom_t(
-		// {
-			// {0.f, start_zoom, 0.f},
-			// {0.25f * duration_ms, kTargetZoom, 0.f},
-			// {0.75f * duration_ms, kTargetZoom, 0.f},
-			// {1.0f * duration_ms, start_zoom, 0.f},
-		// },
-		// {ease_in_cubic, constant, ease_out_cubic});
-
 	const Vector2f start_center =
 	   get_view_area(MapView::View{start, start_zoom}, width, height).center();
 	const Vector2f end_center =
@@ -205,36 +228,30 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	const Vector2f center_point_change =
 	   MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
 
-	// const std::vector<KeyFrame<Vector2f>> keyframes = {
-		// {-0.5f * duration_ms, start_center},
-		// {0.f, start_center},
-		// {0.25f * duration_ms, start_center + center_point_change * 0.25f},
-		// {0.75f * duration_ms, start_center + center_point_change * 0.75f},
-		// {1.0f * duration_ms, start_center + center_point_change},
-		// {1.5f * duration_ms, start_center + center_point_change},
-	// };
+	// Heuristic: How many screens is the target point away from the current
+	// viewpoint? We use it to decide the zoom out factor and scroll speed.
+	float num_screens = std::max(std::abs(center_point_change.x) / (width * start_zoom),
+	                             std::abs(center_point_change.y) / (height * start_zoom));
+
+	// If the target is 4 screens away, we zoom out to x4. If we would not zoom
+	// out, we do not interpolate the zoom at all. This avoids rounding errors.
+	const float target_zoom = math::clamp(num_screens, start_zoom, kMaxAnimationZoom);
+	const float delta_zoom = target_zoom - start_zoom;
+	const bool pan_and_zoom_animation = delta_zoom > kPanOnlyZoomThreshold;
+	const float duration_ms =
+	   pan_and_zoom_animation ? kPanAndZoomAnimationTimeMs : kPanOnlyAnimationTimeMs;
+
+	SymmetricInterpolator<float, SmoothstepInterpolator<float>> zoom_t(
+	   start_zoom, target_zoom, static_cast<float>(duration_ms));
 
 	SmoothstepInterpolator<Vector2f> center_point_t(
 	   start_center, start_center + center_point_change, duration_ms);
 	const uint32_t start_time = SDL_GetTicks();
 	std::vector<MapView::TimestampedView> plan;
 	plan.push_back(MapView::TimestampedView{start_time, MapView::View{start, start_zoom}});
-
-	for (float dt = kInterpolationDeltaMs; dt < duration_ms; dt += kInterpolationDeltaMs) {
-		// float zoom = zoom_t.value(dt);
-		// Check if our target field is already visible on screen. If that is the
-		// case, we do not zoom out further.
-		// NOCOM(#sirver): brping this back?
-		// if (!plan.empty()) {
-			// const auto& view = get_view_area(plan.back().view, width, height);
-			// const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(
-				// map, view.center(), start_center + center_point_change);
-			// if (std::abs(dist.x) < view.w / 2.0f && std::abs(dist.y) < view.h / 2.0f) {
-				// log("#sirver dist.x: %f,dist.w: %f,view.w: %f,view.h: %f\n", dist.x, dist.y, view.w, view.h);
-				// zoom = std::min(plan.back().view.zoom, zoom);
-			// }
-		// }
-		const float zoom = 1.f;
+	for (int i = 1; i < kNumKeyFrames - 2; i++) {
+		float dt = (duration_ms / kNumKeyFrames) * i;
+		const float zoom = pan_and_zoom_animation ? zoom_t.value(dt) : start_zoom;
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan.push_back(MapView::TimestampedView{
@@ -244,14 +261,8 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	const Vector2f end_viewpoint = (start_center + center_point_change) -
 	                               Vector2f(width * start_zoom / 2.f, height * start_zoom / 2.f);
 	plan.push_back(
-	   MapView::TimestampedView{start_time + duration_ms, MapView::View{end_viewpoint, start_zoom}});
-
-	log("#sirver ###########################\n");
-	for (const auto& entry : plan) {
-		log("#sirver %d,%.4f,%.4f\n", entry.t, entry.view.viewpoint.x, entry.view.viewpoint.y);
-	}
-	log("#sirver #####################\n");
-
+	   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + duration_ms)),
+	                            MapView::View{end_viewpoint, start_zoom}});
 	return plan;
 }
 
@@ -336,12 +347,12 @@ void MapView::draw(RenderTarget& dst) {
 			float t = (now - current_plan_[i - 1].t) /
 			          static_cast<float>(current_plan_[i].t - current_plan_[i - 1].t);
 			const float zoom =
-			   (1.f - t) * current_plan_[i-1].view.zoom + t * current_plan_[i].view.zoom;
+			   mix(t, current_plan_[i - 1].view.zoom, current_plan_[i].view.zoom);
 			set_zoom(zoom);
-			const Vector2f viewpoint =
-			   current_plan_[i - 1].view.viewpoint * (1.f - t) + current_plan_[i].view.viewpoint * t;
+			const Vector2f viewpoint = mix(
+			   t, current_plan_[i - 1].view.viewpoint, current_plan_[i].view.viewpoint);
 			set_viewpoint(viewpoint, false);
-			log("#sirver %d,%.4f,%.4f\n", now, viewpoint.x, viewpoint.y);
+			// log("#sirver %d,%.4f,%.4f,%.4f\n", now, viewpoint.x, viewpoint.y, zoom);
 		}
 	}
 
@@ -404,11 +415,8 @@ void MapView::center_view_on_map_pixel(const Vector2f& pos) {
 	const Rectf area = view_area();
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
 	const Widelands::Map& map = intbase().egbase().map();
-	int w = get_w();
-	int h = get_h();
-	log("#sirver w: %d,h: %d\n", w, h);
 	current_plan_ =
-	   plan_animation(map, view_.viewpoint, target_view, view_.zoom, kAnimationTimeMs, get_w(), get_h());
+	   plan_animation(map, view_.viewpoint, target_view, view_.zoom, get_w(), get_h());
 }
 
 Rectf MapView::view_area() const {
