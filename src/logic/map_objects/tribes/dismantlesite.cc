@@ -229,8 +229,8 @@ void DismantleSite::draw(uint32_t gametime,
 	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	const uint32_t anim_idx = building_->get_animation(
-		building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
+	const uint32_t anim_idx =
+	   building_->get_animation(building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
 	dst->blit_animation(
 	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
 

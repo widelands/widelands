@@ -38,34 +38,31 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
      padding_(4),
      indent_(10),
      label_height_(20),
-     tablex_(get_w() * 47 / 2500),
-     tabley_(get_h() * 17 / 50),
-     tablew_(get_w() * 711 / 1250),
-     tableh_(get_h() * 6083 / 10000),
      right_column_margin_(15),
-     right_column_x_(tablex_ + tablew_ + right_column_margin_),
-     buty_(get_h() * 9 / 10),
-     butw_((get_w() - right_column_x_ - right_column_margin_) / 2 - padding_),
-     buth_(get_h() * 9 / 200),
-     right_column_tab_(get_w() - right_column_margin_ - butw_),
 
      // Main buttons
-     back_(this,
-           "back",
-           right_column_x_,
-           buty_,
-           butw_,
-           buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back")),
-     ok_(this,
-         "ok",
-         get_w() - right_column_margin_ - butw_,
-         buty_,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("OK")) {
+     back_(this, "back", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Back")),
+     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")) {
+	layout();
+}
+
+void FullscreenMenuLoadMapOrGame::layout() {
+	// UI coordinates and spacers
+	tablex_ = get_w() * 47 / 2500;
+	tabley_ = get_h() * 17 / 50;
+	tablew_ = get_w() * 711 / 1250;
+	tableh_ = get_h() * 6083 / 10000;
+	right_column_x_ = tablex_ + tablew_ + right_column_margin_;
+	buty_ = get_h() * 9 / 10;
+	butw_ = (get_w() - right_column_x_ - right_column_margin_) / 2 - padding_;
+	buth_ = get_h() * 9 / 200;
+	right_column_tab_ = get_w() - right_column_margin_ - butw_;
+
+	// Main buttons
+	back_.set_size(butw_, buth_);
+	back_.set_pos(Vector2i(right_column_x_, buty_));
+	ok_.set_size(butw_, buth_);
+	ok_.set_pos(Vector2i(get_w() - right_column_margin_ - butw_, buty_));
 }
 
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {

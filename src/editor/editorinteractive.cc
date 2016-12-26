@@ -108,7 +108,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
 
 	add_toolbar_button(
-		"wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
+	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
 	playermenu_.open_window = [this] {
 		select_tool(tools_->set_starting_pos, EditorTool::First);
 		new EditorPlayerMenu(*this, playermenu_);
@@ -257,7 +257,7 @@ void EditorInteractive::think() {
 
 void EditorInteractive::exit() {
 	if (need_save_) {
-		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb(this, _("Unsaved Map"),
@@ -369,8 +369,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 		case SDLK_0:
-			set_sel_radius_and_update_menu(9);
-			handled = true;
+			if (!(code.mod & KMOD_CTRL)) {
+				set_sel_radius_and_update_menu(9);
+				handled = true;
+			}
 			break;
 
 		case SDLK_LSHIFT:
