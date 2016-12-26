@@ -453,9 +453,29 @@ void BlitProgram::draw_monochrome(const Rectf& dest_rect,
 	                BlendMode::UseAlpha, BlitMode::kMonochrome}});
 }
 
+namespace {
+
+class BlitProgramHolder {
+public:
+	BlitProgramHolder() {
+		if (BlitProgramGl4::supported())
+			program_.reset(new BlitProgramGl4);
+		else
+			program_.reset(new BlitProgramGl2);
+	}
+
+	BlitProgram& program() {
+		return *program_;
+	}
+
+private:
+	std::unique_ptr<BlitProgram> program_;
+};
+
+} // namespace
+
 // static
 BlitProgram& BlitProgram::instance() {
-	// TODO(nha): proper automatic choice
-	static BlitProgramGl4 blit_program;
-	return blit_program;
+	static BlitProgramHolder holder;
+	return holder.program();
 }
