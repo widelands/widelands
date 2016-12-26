@@ -378,6 +378,7 @@ std::unique_ptr<MiniMapRenderer>
 MiniMapRenderer::create(const Widelands::EditorGameBase& egbase,
                         const Widelands::Player* player) {
 	// TODO(nha): automatic selection
-// 	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));
-	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererGl4(egbase, player));
+	if (TerrainProgramGl4::supported())
+		return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererGl4(egbase, player));
+	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));
 }

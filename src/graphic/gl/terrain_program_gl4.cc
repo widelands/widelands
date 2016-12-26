@@ -526,6 +526,7 @@ bool TerrainProgramGl4::supported() {
 	// GL_ARB_uniform_buffer_object
 	// GL_ARB_separate_shader_objects
 	// GL_ARB_shader_storage_buffer_object
+	return false;
 	return true;
 }
 

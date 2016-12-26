@@ -58,6 +58,7 @@ void MiniMap::View::draw(RenderTarget& dst) {
 
 	renderer_->draw(dst, view_area_, *minimap_type_,
 	                *minimap_layers_ | MiniMapLayer::ViewWindow);
+// TODO(nha): cleanup
 // 	minimap_image_ = draw_minimap(ibase_.egbase(), ibase_.get_player(), view_area_, *minimap_type_,
 // 	                              *minimap_layers_ | MiniMapLayer::ViewWindow);
 // 	dst.blit(Vector2f(), minimap_image_.get());
