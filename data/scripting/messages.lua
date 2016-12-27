@@ -141,8 +141,9 @@ function message_box_objective(player, message)
          x,y = wl.ui.MapView().viewpoint_x, wl.ui.MapView().viewpoint_y
          -- player:message_box jumps, so nothing to do for us
       else
-      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
-      -- In this time, could user can scroll elsewhere, giving weird results.
+      -- This is necessary. Otherwise, we would scroll and then wait until the
+      -- road is finished. In this time, user can scroll elsewhere, giving
+      -- weird results.
          if not message.show_instantly then
             wait_for_roadbuilding()
          end

@@ -84,80 +84,13 @@ Rectf get_view_area(const MapView::View& view, const int width, const int height
 	return Rectf(view.viewpoint, width * view.zoom, height * view.zoom);
 }
 
-template <typename T>
-struct KeyFrame {
-	float time_ms;
-	T value;
-};
-
 constexpr float pow2(float t) {
 	return t * t;
 }
+
 constexpr float pow3(float t) {
 	return t * t * t;
 }
-
-// NOCOM(#sirver): Explain interpolator properties, i.e number of required keypoints
-template <typename T>
-class Interpolator {
-public:
-	Interpolator(std::vector<KeyFrame<T>> keyframes)
-	   : keyframes_(std::move(keyframes)) {
-#ifndef NDEBUG
-		assert(keyframes_.size() >= 4);
-		for (size_t i = 1; i < keyframes_.size(); ++i) {
-			assert(keyframes_[i-1].time_ms < keyframes_[i].time_ms);
-		}
-#endif
-	}
-
-	T value(const float time_ms) {
-		if (time_ms <= keyframes_.front().time_ms) {
-			return keyframes_.front().value;
-		}
-		if (time_ms >= keyframes_.back().time_ms) {
-			return keyframes_.back().value;
-		}
-
-		size_t i = 0;
-		while (i < keyframes_.size() && keyframes_[i].time_ms <= time_ms) {
-			++i;
-		}
-
-		// NOCOM(#sirver): are these assumptions right?
-		// The interpolated point must be in the second interval or later.
-		assert(i > 1);
-		// The interpolated point must not in the last interval.
-		assert(i <= keyframes_.size() - 1);
-		assert(keyframes_[i-1].time_ms <= time_ms);
-		assert(time_ms <= keyframes_[i].time_ms);
-
-		// const float ts0 = keyframes_[i-2].time_ms;
-		const float ts1 = keyframes_[i-1].time_ms;
-		const float ts2 = keyframes_[i].time_ms;
-		// const float ts3 = keyframes_[i+1].time_ms;
-
-		const T& p0 = keyframes_[i-2].value;
-		const T& p1 = keyframes_[i-1].value;
-		const T& p2 = keyframes_[i].value;
-		const T& p3 = keyframes_[i+1].value;
-
-		float u = (time_ms - ts1) / (ts2 - ts1);
-
-		const Vector2f c0 = p1;
-		const Vector2f c1 = -p0 / 2.0f + p2 / 2.0f;
-		const Vector2f c2 = p0 - p1 * (5.0f / 2.0f) + p2 * 2 - p3 / 2.0f;
-		const Vector2f c3 = -p0 / 2.0f + p1 * (3.0f / 2.0f) - p2 * (3.0f / 2.0f) + p3 / 2.0f;
-
-		return c0 + c1 * u + c2 * pow2(u) + c3 * pow3(u);
-	}
-
-private:
-	std::vector<KeyFrame<T>> keyframes_;
-
-	DISALLOW_COPY_AND_ASSIGN(Interpolator);
-};
-
 
 template <typename T>
 T mix(float t, const T& a, const T& b) {
@@ -423,6 +356,11 @@ Rectf MapView::view_area() const {
 	return get_view_area(view_, get_w(), get_h());
 }
 
+const MapView::View& view() const {
+	return view_;
+}
+
+
 void MapView::pan_by(Vector2i delta_pixels) {
 	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * view_.zoom, false);
 }
@@ -501,6 +439,14 @@ void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
 	const Vector2f offset = -panel_pixel * (new_zoom - view_.zoom);
 	view_.zoom = new_zoom;
 	set_viewpoint(view_.viewpoint + offset, false);
+}
+
+bool MapView::is_dragging() const {
+	return dragging_;
+}
+
+bool MapView::is_animating() const {
+	return !current_plan_.empty();
 }
 
 /*

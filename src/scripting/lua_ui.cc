@@ -486,12 +486,16 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, start_road_building),
    METHOD(LuaMapView, abort_road_building),
    METHOD(LuaMapView, close),
+   METHOD(LuaMapView, center_on),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RW(LuaMapView, viewpoint_x), PROP_RW(LuaMapView, viewpoint_y),
-   PROP_RW(LuaMapView, buildhelp),   PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),  PROP_RO(LuaMapView, is_building_road),
+   PROP_RW(LuaMapView, view),
+   PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, is_animating),
    {nullptr, nullptr, nullptr},
 };
 
@@ -507,18 +511,34 @@ void LuaMapView::__unpersist(lua_State* L) {
  * Properties
  */
 /* RST
-   .. attribute:: viewpoint_x, viewpoint_y
+   .. attribute:: view
 
-      (RW) The current view position of this view. This defines the map position
-      (in pixels) that the top left pixel of this map view currently sees. This
-      can be used together with :attr:`wl.map.Field.viewpoint` to move the view
-      to fields quickly.
+		(RW) The current view of the map. This is a table containing 'x', 'y',
+		'zoom'. This defines the map position (in pixels) that the top left pixel
+		of this map view currently sees and the internal zoom parameter.
 */
-int LuaMapView::get_viewpoint_x(lua_State* L) {
-	lua_pushdouble(L, get()->get_viewpoint().x);
+int LuaMapView::get_view(lua_State* L) {
+	const MapView::View& view = get()->view();
+
+	lua_newtable(L);
+	lua_pushstring(L, "x");
+	lua_pushdouble(L, view.viewpoint.x);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "y");
+	lua_pushdouble(L, view.viewpoint.y);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "zoom");
+	lua_pushdouble(L, view.zoom);
+	lua_rawset(L, -3);
+
 	return 1;
 }
-int LuaMapView::set_viewpoint_x(lua_State* L) {
+
+// NOCOM(#sirver): can we get rid of this function?
+// NOCOM(#sirver): grep for "viewpoint" in Lua files.
+int LuaMapView::set_view(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	// don't move view in replays
 	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
@@ -526,26 +546,20 @@ int LuaMapView::set_viewpoint_x(lua_State* L) {
 	}
 
 	MapView* mv = get();
-	Vector2f p = mv->get_viewpoint();
-	p.x = luaL_checkdouble(L, -1);
-	mv->set_viewpoint(p, true);
+	LuaTable table(L);  // Will pop the table eventually.
+	MapView::View view;
+	view.viewpoint.x = table.get_double("x");
+	view.viewpoint.y = table.get_double("y");
+	view.zoom = table.get_double("zoom");
+
+	mv->set_zoom(view.zoom);
+	mv->set_viewpoint(view.viewpoint, true);
 	return 0;
 }
-int LuaMapView::get_viewpoint_y(lua_State* L) {
-	lua_pushdouble(L, get()->get_viewpoint().y);
-	return 1;
-}
-int LuaMapView::set_viewpoint_y(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
-		return 0;
-	}
 
-	MapView* mv = get();
-	Vector2f p = mv->get_viewpoint();
-	p.y = luaL_checkdouble(L, -1);
-	mv->set_viewpoint(p, true);
+// NOCOM(#sirver): document
+int LuaMapView::center_on(lua_State* L) {
+	get()->center_view_on_coords((*get_user_class<LuaMaps::LuaField>(L, 2))->coords());
 	return 0;
 }
 
@@ -602,6 +616,16 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 	return 1;
 }
 
+
+/* RST
+   .. attribute:: is_animating
+
+		(RO) True if this MapView is currently paning or zooming.
+*/
+int LuaMapView::get_is_animating(lua_State* L) {
+	lua_pushboolean(L, get()->is_animating());
+	return 1;
+}
 /*
  * Lua Functions
  */

@@ -75,8 +75,10 @@ struct MapView : public UI::Panel {
 	void center_view_on_coords(const Widelands::Coords& coords);
 	void center_view_on_map_pixel(const Vector2f& pos);
 
+
 	Vector2f get_viewpoint() const;
 	Rectf view_area() const;
+	const View& view() const;
 	float get_zoom() const;
 
 	// Set the zoom to the new value without changing view_point. For the user
@@ -87,9 +89,9 @@ struct MapView : public UI::Panel {
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel);
 
-	bool is_dragging() const {
-		return dragging_;
-	}
+	// NOCOM(#sirver): document
+	bool is_dragging() const;
+	bool is_animating() const;
 
 	// Drawing
 	void draw(RenderTarget&) override;

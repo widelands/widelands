@@ -207,10 +207,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_viewpoint_x(lua_State*);
-	int set_viewpoint_x(lua_State*);
-	int get_viewpoint_y(lua_State*);
-	int set_viewpoint_y(lua_State*);
+	int get_view(lua_State*);
+	int set_view(lua_State*);
 	int get_buildhelp(lua_State* L);
 	int set_buildhelp(lua_State* L);
 	int get_census(lua_State* L);
@@ -218,6 +216,7 @@ public:
 	int get_statistics(lua_State* L);
 	int set_statistics(lua_State* L);
 	int get_is_building_road(lua_State* L);
+	int get_is_animating(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -226,6 +225,7 @@ public:
 	int click(lua_State* L);
 	int abort_road_building(lua_State* L);
 	int start_road_building(lua_State* L);
+	int center_on(lua_State* L);
 
 	/*
 	 * C Methods
