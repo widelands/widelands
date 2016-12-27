@@ -141,36 +141,36 @@ void RoadProgram::draw(const int renderbuffer_width,
 	vertices_.clear();
 
 	uint32_t gl_texture = 0;
-	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
-		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
+		const FieldsToDraw::Field& field = cursor.field();
 
 		// Road to right neighbor.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.rn_valid()) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
+				         cursor.rn(), scale, road, kEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
-		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.brn_valid()) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
+				         cursor.brn(), scale, road, kSouthEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.bln_valid()) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
+				         cursor.bln(), scale, road, kSouthWest, &gl_texture);
 			}
 		}
 	}
