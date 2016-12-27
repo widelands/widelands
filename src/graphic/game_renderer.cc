@@ -405,12 +405,6 @@ void GameRendererGl2::draw(const EditorGameBase& egbase,
 
 			f.geometric_coords = Coords(fx, fy);
 
-			f.ln_index = fields_to_draw_.calculate_index(fx - 1, fy);
-			f.rn_index = fields_to_draw_.calculate_index(fx + 1, fy);
-			f.trn_index = fields_to_draw_.calculate_index(fx + (fy & 1), fy - 1);
-			f.bln_index = fields_to_draw_.calculate_index(fx + (fy & 1) - 1, fy + 1);
-			f.brn_index = fields_to_draw_.calculate_index(fx + (fy & 1), fy + 1);
-
 			// Texture coordinates for pseudo random tiling of terrain and road
 			// graphics. Since screen space X increases top-to-bottom and OpenGL
 			// increases bottom-to-top we flip the y coordinate to not have

@@ -61,20 +61,6 @@ public:
 		bool is_border;
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
-
-		// Index of neighbors in this 'FieldsToDraw'. kInvalidIndex if this
-		// neighbor is not contained.
-		int ln_index;
-		int rn_index;
-		int trn_index;
-		int bln_index;
-		int brn_index;
-
-		inline bool all_neighbors_valid() const {
-			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
-			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
-			       brn_index != kInvalidIndex;
-		}
 	};
 
 	// For iteration over fields.
