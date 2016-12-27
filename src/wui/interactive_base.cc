@@ -388,7 +388,10 @@ void InteractiveBase::toggle_minimap() {
 		delete m->minimap.window;
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
+		m->mm->warpview.connect([this](const Vector2f& map_pixel) {
+			// NOCOM(#sirver): Experiment with interactive or jumping?
+			center_on_map_pixel(map_pixel, Transition::Jump);
+		});
 		mainview_move();
 	}
 }

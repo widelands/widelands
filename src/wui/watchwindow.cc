@@ -127,7 +127,10 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 
 	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
 	mapview_.changeview.connect([this](bool) { stop_tracking_by_drag(); });
-	warp_mainview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, &parent, _1));
+	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
+			// NOCOM(#sirver): experiment with Smooth and Jump
+			parent.center_on_map_pixel(map_pixel, MapView::Transition::Smooth);
+	});
 }
 
 /**
@@ -140,7 +143,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 		return;
 	WatchWindowView view;
 
-	mapview_.center_view_on_coords(coords);
+	mapview_.center_on_coords(coords, MapView::Transition::Jump);
 
 	view.tracking = nullptr;
 	view.viewpoint = mapview_.get_viewpoint();
@@ -190,7 +193,7 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 	}
 	cur_index_ = idx;
 	mapview_.set_zoom(views_[cur_index_].zoom);
-	mapview_.set_viewpoint(views_[cur_index_].viewpoint, true);
+	mapview_.set_viewpoint(views_[cur_index_].viewpoint, MapView::Transition::Jump);
 }
 
 WatchWindow::~WatchWindow() {
@@ -223,7 +226,7 @@ void WatchWindow::think() {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
-			mapview_.center_view_on_map_pixel(pos);
+			mapview_.center_on_map_pixel(pos, MapView::Transition::Jump);
 		}
 	}
 }

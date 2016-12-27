@@ -518,6 +518,7 @@ void LuaMapView::__unpersist(lua_State* L) {
 		of this map view currently sees and the internal zoom parameter.
 */
 int LuaMapView::get_view(lua_State* L) {
+	// NOCOM(#sirver): actually, I'd rather not expose zoom?
 	const MapView::View& view = get()->view();
 
 	lua_newtable(L);
@@ -553,13 +554,14 @@ int LuaMapView::set_view(lua_State* L) {
 	view.zoom = table.get_double("zoom");
 
 	mv->set_zoom(view.zoom);
-	mv->set_viewpoint(view.viewpoint, true);
+	mv->set_viewpoint(view.viewpoint, MapView::Transition::Smooth);
 	return 0;
 }
 
 // NOCOM(#sirver): document
 int LuaMapView::center_on(lua_State* L) {
-	get()->center_view_on_coords((*get_user_class<LuaMaps::LuaField>(L, 2))->coords());
+	get()->center_on_coords(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
 

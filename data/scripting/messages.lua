@@ -130,15 +130,18 @@ function message_box_objective(player, message)
    message.h = message.h or 400
    message.w = message.w or 450
 
-   local way
+   local view
 
+   -- NOCOM(#sirver): reset zoom should animate
+   -- NOCOM(#sirver): fix mouse movements
+   -- NOCOM(#sirver): ctrl+1-9 does not work properly with animation
    if message.field then
       -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
       -- In this time, could user can scroll elsewhere, giving weird results.
       if not message.show_instantly then
          wait_for_roadbuilding()
       end
-      way = scroll_smoothly_to(message.field)
+      view = scroll_smoothly_to(message.field);
    end
 
    if message.position then
@@ -165,7 +168,7 @@ function message_box_objective(player, message)
    end
 
    if (message.field and message.scroll_back) then
-      timed_scroll(array_reverse(way))
+      scroll_smoothly_to_view(view);
    end
 
    if message.obj_name then

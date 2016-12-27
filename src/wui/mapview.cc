@@ -284,7 +284,7 @@ void MapView::draw(RenderTarget& dst) {
 			set_zoom(zoom);
 			const Vector2f viewpoint = mix(
 			   t, current_plan_[i - 1].view.viewpoint, current_plan_[i].view.viewpoint);
-			set_viewpoint(viewpoint, false);
+			set_viewpoint(viewpoint, Transition::Jump);
 			// log("#sirver %d,%.4f,%.4f,%.4f\n", now, viewpoint.x, viewpoint.y, zoom);
 		}
 	}
@@ -326,14 +326,26 @@ void MapView::set_zoom(const float zoom) {
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void MapView::set_viewpoint(const Vector2f& viewpoint, bool jump) {
-	view_.viewpoint = viewpoint;
-	const Widelands::Map& map = intbase().egbase().map();
-	MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
-	changeview(jump);
+void MapView::set_viewpoint(const Vector2f& target_view, const Transition& transition) {
+	switch (transition) {
+		case Transition::Smooth: {
+			const Widelands::Map& map = intbase().egbase().map();
+			current_plan_ =
+				plan_animation(map, view_.viewpoint, target_view, view_.zoom, get_w(), get_h());
+			return;
+	   }
+
+	   case Transition::Jump:
+			view_.viewpoint = target_view;
+			const Widelands::Map& map = intbase().egbase().map();
+			MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
+			changeview(false /* jump */ ); // NOCOM(#sirver): I truly hate this function :/
+			return;
+	}
+	NEVER_HERE();
 }
 
-void MapView::center_view_on_coords(const Widelands::Coords& c) {
+void MapView::center_on_coords(const Widelands::Coords& c, const Transition& transition) {
 	const Widelands::Map& map = intbase().egbase().map();
 	assert(0 <= c.x);
 	assert(c.x < map.get_width());
@@ -341,28 +353,26 @@ void MapView::center_view_on_coords(const Widelands::Coords& c) {
 	assert(c.y < map.get_height());
 
 	const Vector2f in_mappixel = MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c));
-	center_view_on_map_pixel(in_mappixel);
+	center_on_map_pixel(in_mappixel, transition);
 }
 
-void MapView::center_view_on_map_pixel(const Vector2f& pos) {
+void MapView::center_on_map_pixel(const Vector2f& pos, const Transition& transition) {
 	const Rectf area = view_area();
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
-	const Widelands::Map& map = intbase().egbase().map();
-	current_plan_ =
-	   plan_animation(map, view_.viewpoint, target_view, view_.zoom, get_w(), get_h());
+	set_viewpoint(target_view, transition);
 }
 
 Rectf MapView::view_area() const {
 	return get_view_area(view_, get_w(), get_h());
 }
 
-const MapView::View& view() const {
+const MapView::View& MapView::view() const {
 	return view_;
 }
 
 
 void MapView::pan_by(Vector2i delta_pixels) {
-	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * view_.zoom, false);
+	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * view_.zoom, Transition::Jump);
 }
 
 void MapView::stop_dragging() {
@@ -438,7 +448,7 @@ void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
 	// for a good explanation of this math.
 	const Vector2f offset = -panel_pixel * (new_zoom - view_.zoom);
 	view_.zoom = new_zoom;
-	set_viewpoint(view_.viewpoint + offset, false);
+	set_viewpoint(view_.viewpoint + offset, Transition::Jump);
 }
 
 bool MapView::is_dragging() const {

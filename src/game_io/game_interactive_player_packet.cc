@@ -82,7 +82,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->set_viewpoint(Vector2f(viewpoint_x, viewpoint_y), true);
+				ibase->set_viewpoint(Vector2f(viewpoint_x, viewpoint_y), MapView::Transition::Jump);
 
 				uint32_t const loaded_df =
 				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;

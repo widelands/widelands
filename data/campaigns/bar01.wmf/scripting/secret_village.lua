@@ -12,9 +12,9 @@ function village_thread()
 
    reveal_village()
 
-   local pts = scroll_smoothly_to(map:get_field(55, 25), 3000)
+   local prior_view = scroll_smoothly_to(map:get_field(55, 25))
    campaign_message_box(msg_village)
-   timed_scroll(array_reverse(pts), 10)
+   scroll_smoothly_to_view(prior_view)
 
    sleep(1500)
 end

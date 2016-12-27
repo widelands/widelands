@@ -65,16 +65,20 @@ struct MapView : public UI::Panel {
 	 * Called when the view changed.  'jump' defines if the change should be
 	 * considered a "jump" or a smooth scrolling event.
 	 */
+	// NOCOM(#sirver): change to enum
 	boost::signals2::signal<void(bool jump)> changeview;
 
 	boost::signals2::signal<void()> fieldclicked;
 
+	enum class Transition { Smooth, Jump };
+
+	// NOCOM(#sirver): change to Transition
 	void warp_mouse_to_node(Widelands::Coords);
 
-	void set_viewpoint(const Vector2f& vp, bool jump);
-	void center_view_on_coords(const Widelands::Coords& coords);
-	void center_view_on_map_pixel(const Vector2f& pos);
-
+	// NOCOM(#sirver): document
+	void set_viewpoint(const Vector2f& vp, const Transition& transition);
+	void center_on_coords(const Widelands::Coords& coords, const Transition& transition);
+	void center_on_map_pixel(const Vector2f& pos, const Transition& transition);
 
 	Vector2f get_viewpoint() const;
 	Rectf view_area() const;

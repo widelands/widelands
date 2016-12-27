@@ -4,13 +4,10 @@ include "scripting/coroutine.lua"
 -- ui.lua
 -- ---------------
 --
--- This script contains one function to make a nice move transition from
--- the players current viewpoint to another place on the map.
+-- This script contains UI related functions like for moving the mouse or the
+-- view or clicking on fields and UI elements.
 --
 
--- =======================================================================
---                             PRIVATE FUNCTIONS
--- =======================================================================
 function _calc_move(start, dest, g_T)
    local T = g_T or 1000
 
@@ -63,54 +60,10 @@ function _calc_move(start, dest, g_T)
    return rv
 end
 
--- =======================================================================
---                             PUBLIC FUNCTIONS
--- =======================================================================
-
 -- NOCOM(#sirver): replace everything in this file through engine functions.
+-- NOCOM(#sirver): fix documentation
 -- RST
--- .. function:: timed_scroll(pts[, dt = 20])
---
---    Moves the view in the given trajectory sleeping dt in between moves. This
---    is most useful in combination with :func:`scroll_smoothly_to`.
---    scroll_smoothly_to moves to a given location and this function can be
---    used to reverse the movement precisely:
---
---    .. code-block:: lua
---
---       include "scripting/table.lua" -- for reverse()
---
---       -- Move there in one second
---       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))
---       -- Move back in one second
---       timed_scroll(array_reverse(pts))
---
---    :arg pts: an array of points, that is tables with ``x`` and ``y`` members
---       that define the viewpoints to set the view to.
---    :type pts: :class:`array`
---    :arg dt: Time in ms to sleep between the move points.
---    :type dt: :class:`integer`
-function timed_scroll(points, gdt)
-   local dt = gdt or 20
-   local mv = wl.ui.MapView()
-
-   local old_speed = wl.Game().desired_speed
-   -- Set the speed to normal speed (1.0x). Otherwise, the scrolling would also
-   -- be faster, which is probably not intended.
-   wl.Game().desired_speed = 1000
-
-   for idx,p in ipairs(points) do
-      mv.viewpoint_x = p.x
-      mv.viewpoint_y = p.y
-
-      sleep(dt)
-   end
-   wl.Game().desired_speed = old_speed
-end
-
-
--- RST
--- .. function:: scroll_smoothly_to_pos(x, y[, T = 1000])
+-- .. function:: scroll_smoothly_to_view(view)
 --
 --    Make a nice moving transition in a given time to the viewpoint x, y.
 --    The function will return as soon as the transition is completed.
@@ -124,58 +77,34 @@ end
 --
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
-function scroll_smoothly_to_pos(x, y, g_T)
-   local start = {
-      x = wl.ui.MapView().viewpoint_x,
-      y = wl.ui.MapView().viewpoint_y
-   }
-   local dest = { x = x, y = y }
-
-   local pts = _calc_move(start, dest, g_T)
-
-   timed_scroll(pts)
-
-   return pts
+-- NOCOM(#sirver): fix documentation
+function scroll_smoothly_to_view(view)
+   local mv = wl.ui.MapView()
+   mv.view = view;
+   while mv.is_animating do
+      sleep(41)
+   end
 end
 
 -- RST
--- .. function:: scroll_smoothly_to(f[, T = 1000])
+-- .. function:: scroll_smoothly_to(f)
 --
---    Make a nice moving transition in a given time to center the Field(x,y).
+--    Make a nice moving transition to the center of the Field(x,y).
 --    The function will return as soon as the transition is completed.
 --
 --    :arg f: Field to center the view on
 --    :type r: :class:`wl.map.Field`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
 --
---    :returns: an :class:`array` with the intermediate points that were
---       targeted
-function scroll_smoothly_to(f, g_T)
+--    :returns: the prior view of MapView.
+function scroll_smoothly_to(f)
    local mv = wl.ui.MapView()
-   local x, y
-   local map = wl.Game().map
-   if math.abs(f.viewpoint_x - mv.viewpoint_x) <
-      math.abs(f.viewpoint_x + 64 * map.width - mv.viewpoint_x)
-   then
-      x = f.viewpoint_x
-   else
-      x = f.viewpoint_x + map.width * 64
+   local view = mv.view;
+   mv:center_on(f)
+   while mv.is_animating do
+      sleep(41)
    end
-
-
-   if math.abs(f.viewpoint_y - mv.viewpoint_y) <
-      math.abs(f.viewpoint_y + 32 * map.height - mv.viewpoint_y)
-   then
-      y = f.viewpoint_y
-   else
-      y = f.viewpoint_y + map.height * 32
-   end
-
-   return scroll_smoothly_to_pos(x - mv.width / 2, y - mv.height / 2, g_T)
+   return view
 end
-
-
 
 -- RST
 -- .. function:: timed_mouse(pts[, dt = 20])
@@ -247,10 +176,12 @@ end
 --
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
+-- NOCOM(#sirver): this is the only use of Field.viewpoint_{x,y}
 function mouse_smoothly_to(f, g_T)
    local mv = wl.ui.MapView()
-   local dx, dy = f.viewpoint_x - mv.viewpoint_x,
-      f.viewpoint_y - mv.viewpoint_y
+   local view = mv.view
+   local dx, dy = f.viewpoint_x - mv.view.x,
+      f.viewpoint_y - mv.view.y
 
    -- FixMe: we need the width and height of triangles here to fix
    -- for situations where we are close to the borders of the map. Because
@@ -262,7 +193,7 @@ function mouse_smoothly_to(f, g_T)
    if dy < 0 then dy = dy + map.height * 32 end
 
    if dx > mv.width or dy > mv.height then
-      scroll_smoothly_to(f, g_T)
+      scroll_smoothly_to(f)
       return mouse_smoothly_to(f, g_T)
    else
       return mouse_smoothly_to_pos(dx, dy, g_T)
@@ -369,14 +300,14 @@ end
 
 
 -- RST
--- .. function:: wait_for_roadbuilding_and_scroll(f[, T = 1000])
+-- .. function:: wait_for_roadbuilding_and_scroll(f)
 --
 --    Sleeps while player is in roadbuilding mode, then calls
---    scroll_smoothly_to(f[, T = 1000]).
+--    scroll_smoothly_to(f).
 --
 --    :returns: an :class:`array` with the intermediate points that
 --       were targeted
-function wait_for_roadbuilding_and_scroll(f, g_T)
+function wait_for_roadbuilding_and_scroll(f)
    wait_for_roadbuilding()
-   return scroll_smoothly_to(f, g_T)
+   return scroll_smoothly_to(f)
 end
