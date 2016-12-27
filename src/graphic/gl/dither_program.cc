@@ -87,10 +87,9 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 void DitherProgram::maybe_add_dithering_triangle(
    const uint32_t gametime,
    const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-   const FieldsToDraw& fields_to_draw,
-   const int idx1,
-   const int idx2,
-   const int idx3,
+   const FieldsToDraw::Field& f1,
+   const FieldsToDraw::Field& f2,
+   const FieldsToDraw::Field& f3,
    const int my_terrain,
    const int other_terrain) {
 	if (my_terrain == other_terrain) {
@@ -100,9 +99,9 @@ void DitherProgram::maybe_add_dithering_triangle(
 	if (terrains.get(my_terrain).dither_layer() < other_terrain_description.dither_layer()) {
 		const Vector2f texture_offset =
 		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
-		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
-		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);
-		add_vertex(fields_to_draw.at(idx3), TrianglePoint::kBottomMiddle, texture_offset);
+		add_vertex(f1, TrianglePoint::kTopRight, texture_offset);
+		add_vertex(f2, TrianglePoint::kTopLeft, texture_offset);
+		add_vertex(f3, TrianglePoint::kBottomMiddle, texture_offset);
 	}
 }
 
@@ -150,49 +149,49 @@ void DitherProgram::draw(const uint32_t gametime,
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 3);
 
-	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
-		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
+		const FieldsToDraw::Field& field = cursor.field();
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
+		if (!cursor.brn_valid()) {
 			continue;
 		}
 
 		// Dithering triangles for Down triangle.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.bln_valid()) {
 			maybe_add_dithering_triangle(
-			   gametime, terrains, fields_to_draw, field.brn_index, current_index, field.bln_index,
+			   gametime, terrains, cursor.brn(), cursor.field(), cursor.bln(),
 			   field.fcoords.field->terrain_d(), field.fcoords.field->terrain_r());
 
-			const int terrain_dd = fields_to_draw.at(field.bln_index).fcoords.field->terrain_r();
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.bln_index,
-			                             field.brn_index, current_index,
+			const int terrain_dd = cursor.bln().fcoords.field->terrain_r();
+			maybe_add_dithering_triangle(gametime, terrains, cursor.bln(),
+			                             cursor.brn(), cursor.field(),
 			                             field.fcoords.field->terrain_d(), terrain_dd);
 
-			if (field.ln_index != FieldsToDraw::kInvalidIndex) {
-				const int terrain_l = fields_to_draw.at(field.ln_index).fcoords.field->terrain_r();
-				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
-				                             field.bln_index, field.brn_index,
+			if (cursor.ln_valid()) {
+				const int terrain_l = cursor.ln().fcoords.field->terrain_r();
+				maybe_add_dithering_triangle(gametime, terrains, cursor.field(),
+				                             cursor.bln(), cursor.brn(),
 				                             field.fcoords.field->terrain_d(), terrain_l);
 			}
 		}
 
 		// Dithering for right triangle.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.rn_valid()) {
 			maybe_add_dithering_triangle(
-			   gametime, terrains, fields_to_draw, current_index, field.brn_index, field.rn_index,
+			   gametime, terrains, cursor.field(), cursor.brn(), cursor.rn(),
 			   field.fcoords.field->terrain_r(), field.fcoords.field->terrain_d());
-			int terrain_rr = fields_to_draw.at(field.rn_index).fcoords.field->terrain_d();
-			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.brn_index,
-			                             field.rn_index, current_index,
+			int terrain_rr = cursor.rn().fcoords.field->terrain_d();
+			maybe_add_dithering_triangle(gametime, terrains, cursor.brn(),
+			                             cursor.rn(), cursor.field(),
 			                             field.fcoords.field->terrain_r(), terrain_rr);
 
-			if (field.trn_index != FieldsToDraw::kInvalidIndex) {
-				const int terrain_u = fields_to_draw.at(field.trn_index).fcoords.field->terrain_d();
-				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.rn_index,
-				                             current_index, field.brn_index,
+			if (cursor.trn_valid()) {
+				const int terrain_u = cursor.trn().fcoords.field->terrain_d();
+				maybe_add_dithering_triangle(gametime, terrains, cursor.rn(),
+				                             cursor.field(), cursor.brn(),
 				                             field.fcoords.field->terrain_r(), terrain_u);
 			}
 		}

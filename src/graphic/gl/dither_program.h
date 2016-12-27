@@ -54,10 +54,9 @@ private:
 	void maybe_add_dithering_triangle(
 	   uint32_t gametime,
 	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	   const FieldsToDraw& fields_to_draw,
-	   int idx1,
-	   int idx2,
-	   int idx3,
+	   const FieldsToDraw::Field& f1,
+	   const FieldsToDraw::Field& f2,
+	   const FieldsToDraw::Field& f3,
 	   int my_terrain,
 	   int other_terrain);
 
