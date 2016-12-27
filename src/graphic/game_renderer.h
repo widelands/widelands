@@ -86,7 +86,7 @@ protected:
 	// Draws the objects (animations & overlays).
 	void draw_objects(const Widelands::EditorGameBase& egbase,
 	                  const float zoom,
-	                  const FieldsToDrawGl2 &fields_to_draw,
+	                  const FieldsToDrawRefBase& fields_to_draw,
 	                  const Widelands::Player* player,
 	                  const TextToDraw draw_text,
 	                  RenderTarget* dst);

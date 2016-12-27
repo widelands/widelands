@@ -36,8 +36,26 @@
 template<typename FTD>
 class FieldsToDrawCursor;
 
-struct FieldToDrawGl2 {
+template<typename F>
+class FieldsToDrawRef;
+
+struct FieldToDrawBase {
 	Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
+	Vector2f rendertarget_pixel;
+
+	// The next values are not necessarily the true data of this field, but
+	// what the player should see. For example in fog of war we always draw
+	// what we saw last.
+	//
+	// Note: we put the roads member variable here for better alignment even
+	// though it isn't needed in the Gl4 path.
+	Widelands::Player* owner;  // can be nullptr.
+	uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
+	bool is_border;
+	Widelands::Vision vision;
+};
+
+struct FieldToDrawGl2 : FieldToDrawBase {
 	Vector2f gl_position;        // GL Position of this field.
 
 	// Surface pixel this will be plotted on.
@@ -45,29 +63,17 @@ struct FieldToDrawGl2 {
 
 	// Rendertarget pixel this will be plotted on. This is only different by
 	// the Rendertarget::get_rect().origin() of the view window.
-	Vector2f rendertarget_pixel;
 	Vector2f texture_coords;  // Texture coordinates.
 	float brightness;         // brightness of the pixel
-
-	// The next values are not necessarily the true data of this field, but
-	// what the player should see. For example in fog of war we always draw
-	// what we saw last.
-	uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
-	bool is_border;
-	Widelands::Vision vision;
-	Widelands::Player* owner;  // can be nullptr.
 };
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
-template<typename Field_>
-class FieldsToDraw {
+class FieldsToDrawBase {
 public:
-	using Field = Field_;
-
 	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
 
-	FieldsToDraw() {
+	FieldsToDrawBase() {
 	}
 
 	// Resize this fields to draw for reuse.
@@ -77,11 +83,6 @@ public:
 		min_fy_ = minfy;
 		max_fy_ = maxfy;
 		w_ = max_fx_ - min_fx_ + 1;
-		h_ = max_fy_ - min_fy_ + 1;
-		const size_t dimension = w_ * h_;
-		if (fields_.size() != dimension) {
-			fields_.resize(dimension);
-		}
 	}
 
 	int min_fx() const {
@@ -104,6 +105,38 @@ public:
 		return w_;
 	}
 
+protected:
+	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
+	int min_fx_;
+	int max_fx_;
+	int min_fy_;
+	int max_fy_;
+
+	// Width in number of fields.
+	int w_;
+};
+
+// Helper struct that contains the data needed for drawing all fields. All
+// methods are inlined for performance reasons.
+template<typename Field_>
+class FieldsToDraw : public FieldsToDrawBase {
+public:
+	using Field = Field_;
+
+	FieldsToDraw() {
+	}
+
+	// Resize this fields to draw for reuse.
+	void reset(int minfx, int maxfx, int minfy, int maxfy) {
+		FieldsToDrawBase::reset(minfx, maxfx, minfy, maxfy);
+
+		int h = max_fy_ - min_fy_ + 1;
+		const size_t dimension = this->get_w() * h;
+		if (fields_.size() != dimension) {
+			fields_.resize(dimension);
+		}
+	}
+
 	// The number of fields to draw.
 	inline size_t size() const {
 		return fields_.size();
@@ -121,20 +154,52 @@ public:
 	FieldsToDrawCursor<const FieldsToDraw> cursor() const;
 
 private:
-	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
-	int min_fx_;
-	int max_fx_;
-	int min_fy_;
-	int max_fy_;
+	template<typename F>
+	friend class FieldsToDrawRef;
 
-	// Width and height in number of fields.
-	int w_;
-	int h_;
+	const Field* get_fields() const {
+		return &fields_[0];
+	}
+
+	intptr_t get_fields_stride() const {
+		return sizeof(fields_[0]);
+	}
 
 	std::vector<Field> fields_;
 };
 
+template<typename Field_>
+class FieldsToDrawRef : public FieldsToDrawBase {
+public:
+	using Field = Field_;
+
+	template<typename FTD>
+	FieldsToDrawRef(const FTD& fields_to_draw) {
+		reset(fields_to_draw.min_fx(), fields_to_draw.max_fx(),
+		      fields_to_draw.min_fy(), fields_to_draw.max_fy());
+
+		// First assign to type Field* for type-checking, before reinterpreting
+		// to the char* that will be used for pointer arithmetic.
+		const Field* fields = fields_to_draw.get_fields();
+
+		fields_ = reinterpret_cast<const char*>(fields);
+		stride_ = fields_to_draw.get_fields_stride();
+	}
+
+	const Field& operator[](int index) const {
+		const char* base = fields_ + index * stride_;
+		return *reinterpret_cast<const Field*>(base);
+	}
+
+	FieldsToDrawCursor<const FieldsToDrawRef> cursor() const;
+
+private:
+	const char* fields_;
+	intptr_t stride_;
+};
+
 using FieldsToDrawGl2 = FieldsToDraw<FieldToDrawGl2>;
+using FieldsToDrawRefBase = FieldsToDrawRef<FieldToDrawBase>;
 
 // For iteration over fields.
 //
@@ -261,6 +326,8 @@ public:
 private:
 	template<typename F>
 	void type_check(const FieldsToDraw<F>&) {}
+	template<typename F>
+	void type_check(const FieldsToDrawRef<F>&) {}
 
 	FTD& fields_;
 
@@ -276,6 +343,11 @@ inline FieldsToDrawCursor<FieldsToDraw<F>> FieldsToDraw<F>::cursor() {
 
 template<typename F>
 inline FieldsToDrawCursor<const FieldsToDraw<F>> FieldsToDraw<F>::cursor() const {
+	return {*this};
+}
+
+template<typename F>
+inline FieldsToDrawCursor<const FieldsToDrawRef<F>> FieldsToDrawRef<F>::cursor() const {
 	return {*this};
 }
 

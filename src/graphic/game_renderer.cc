@@ -117,7 +117,7 @@ float field_brightness(const FCoords& fcoords,
 }
 
 void draw_objects_for_visible_field(const EditorGameBase& egbase,
-                                    const FieldToDrawGl2& field,
+                                    const FieldToDrawBase& field,
                                     const float zoom,
                                     const TextToDraw draw_text,
                                     const Player* player,
@@ -147,7 +147,7 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 	}
 }
 
-void draw_objets_for_formerly_visible_field(const FieldToDrawGl2& field,
+void draw_objets_for_formerly_visible_field(const FieldToDrawBase& field,
                                             const Player::Field& player_field,
                                             const float zoom,
                                             RenderTarget* dst) {
@@ -228,20 +228,20 @@ void draw_objets_for_formerly_visible_field(const FieldToDrawGl2& field,
 // Draws the objects (animations & overlays).
 void GameRenderer::draw_objects(const EditorGameBase& egbase,
                                 const float zoom,
-                                const FieldsToDrawGl2& fields_to_draw,
+                                const FieldsToDrawRefBase& fields_to_draw,
                                 const Player* player,
                                 const TextToDraw draw_text,
                                 RenderTarget* dst) {
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
-		const FieldToDrawGl2& field = cursor.field();
+		const FieldToDrawBase& field = cursor.field();
 		if (!cursor.all_neighbors_valid()) {
 			continue;
 		}
 
-		const FieldToDrawGl2& rn = cursor.rn();
-		const FieldToDrawGl2& bln = cursor.bln();
-		const FieldToDrawGl2& brn = cursor.brn();
+		const FieldToDrawBase& rn = cursor.rn();
+		const FieldToDrawBase& bln = cursor.bln();
+		const FieldToDrawBase& brn = cursor.brn();
 
 		if (field.is_border) {
 			assert(field.owner != nullptr);
