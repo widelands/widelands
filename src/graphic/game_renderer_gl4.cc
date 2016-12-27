@@ -80,7 +80,7 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 
 	// Determine the set of patches to draw.
 	float scale = 1.f / zoom;
-	Vector2f tl_map = dst->get_offset().cast<float>() * zoom + view_offset;
+	Vector2f tl_map = view_offset - dst->get_offset().cast<float>() * zoom;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
