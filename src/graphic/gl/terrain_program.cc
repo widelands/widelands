@@ -94,36 +94,36 @@ void TerrainProgram::draw(uint32_t gametime,
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 3);
 
-	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
-		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
+		const FieldsToDraw::Field& field = cursor.field();
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
+		if (!cursor.brn_valid()) {
 			continue;
 		}
 
 		// Down triangle.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.bln_valid()) {
 			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
 			      .origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
+			add_vertex(field, texture_offset);
+			add_vertex(cursor.bln(), texture_offset);
+			add_vertex(cursor.brn(), texture_offset);
 		}
 
 		// Right triangle.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (cursor.rn_valid()) {
 			const Vector2f texture_offset =
 			   to_gl_texture(
 			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())
 			      .origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
+			add_vertex(field, texture_offset);
+			add_vertex(cursor.brn(), texture_offset);
+			add_vertex(cursor.rn(), texture_offset);
 		}
 	}
 
