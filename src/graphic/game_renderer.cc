@@ -227,7 +227,7 @@ void draw_objets_for_formerly_visible_field(const FieldToDrawBase& field,
 
 // Draws the objects (animations & overlays).
 void GameRenderer::draw_objects(const EditorGameBase& egbase,
-                                const float zoom,
+                                const float scale,
                                 const FieldsToDrawRefBase& fields_to_draw,
                                 const Player* player,
                                 const TextToDraw draw_text,
@@ -248,26 +248,26 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 			if (field.vision) {
 				dst->blit_animation(
-				   field.rendertarget_pixel, zoom, anim_idx, 0, field.owner->get_playercolor());
+				   field.rendertarget_pixel, scale, anim_idx, 0, field.owner->get_playercolor());
 			}
 			for (const auto& nf : {rn, bln, brn}) {
 				if ((field.vision || nf.vision) && nf.is_border &&
 				    (field.owner == nf.owner || nf.owner == nullptr)) {
-					dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), zoom,
+					dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), scale,
 					                    anim_idx, 0, field.owner->get_playercolor());
 				}
 			}
 		}
 
 		if (1 < field.vision) {  // Render stuff that belongs to the node.
-			draw_objects_for_visible_field(egbase, field, zoom, draw_text, player, dst);
+			draw_objects_for_visible_field(egbase, field, scale, draw_text, player, dst);
 		} else if (field.vision == 1) {
 			// We never show census or statistics for objects in the fog.
 			assert(player != nullptr);
 			const Map& map = egbase.map();
 			const Player::Field& player_field =
 			   player->fields()[map.get_index(field.fcoords, map.get_width())];
-			draw_objets_for_formerly_visible_field(field, player_field, zoom, dst);
+			draw_objets_for_formerly_visible_field(field, player_field, scale, dst);
 		}
 
 		const FieldOverlayManager& overlay_manager = egbase.get_ibase()->field_overlay_manager();
@@ -276,8 +276,8 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			overlay_manager.get_overlays(field.fcoords, &overlay_info);
 			for (const auto& overlay : overlay_info) {
 				dst->blitrect_scale(
-				   Rectf(field.rendertarget_pixel - overlay.hotspot.cast<float>() * zoom,
-				         overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				   Rectf(field.rendertarget_pixel - overlay.hotspot.cast<float>() * scale,
+				         overlay.pic->width() * scale, overlay.pic->height() * scale),
 				   overlay.pic, Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
 				   BlendMode::UseAlpha);
 			}
@@ -293,8 +293,8 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
 			      3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * scale,
+				                          overlay.pic->width() * scale, overlay.pic->height() * scale),
 				                    overlay.pic,
 				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
 				                    BlendMode::UseAlpha);
@@ -312,8 +312,8 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
 			   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
 			      3.f);
 			for (const auto& overlay : overlay_info) {
-				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * zoom,
-				                          overlay.pic->width() * zoom, overlay.pic->height() * zoom),
+				dst->blitrect_scale(Rectf(tripos - overlay.hotspot.cast<float>() * scale,
+				                          overlay.pic->width() * scale, overlay.pic->height() * scale),
 				                    overlay.pic,
 				                    Recti(0, 0, overlay.pic->width(), overlay.pic->height()), 1.f,
 				                    BlendMode::UseAlpha);

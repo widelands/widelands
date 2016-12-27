@@ -81,9 +81,10 @@ public:
 	          RenderTarget* dst) override;
 
 private:
-	void scan_fields();
+	void scan_fields(const Vector2f& view_offset);
 
 	TerrainGl4Arguments args_;
+	FieldsToDrawBase fields_to_draw_;
 
 	DISALLOW_COPY_AND_ASSIGN(GameRendererGl4);
 };

@@ -31,6 +31,7 @@
 #include "wui/edge_overlay_manager.h"
 #include "wui/interactive_base.h"
 #include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 
 using namespace Widelands;
 
@@ -78,15 +79,16 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	args_.terrain->update();
 
 	// Determine the set of patches to draw.
-	Vector2f tl_map = dst->get_offset().cast<float>() / zoom + view_offset;
+	float scale = 1.f / zoom;
+	Vector2f tl_map = dst->get_offset().cast<float>() * scale + view_offset;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
 	args_.minfx = tl_map.x / kTriangleWidth - 1;
 	args_.minfy = tl_map.y / kTriangleHeight - 1;
-	args_.maxfx = (tl_map.x + dst->get_rect().w / zoom + (kTriangleWidth / 2)) / kTriangleWidth;
-	args_.maxfy = (tl_map.y + dst->get_rect().h / zoom) / kTriangleHeight;
+	args_.maxfx = (tl_map.x + dst->get_rect().w * zoom + (kTriangleWidth / 2)) / kTriangleWidth;
+	args_.maxfy = (tl_map.y + dst->get_rect().h * zoom) / kTriangleHeight;
 
 	// fudge for triangle boundary effects and for height differences
 	args_.minfx -= 1;
@@ -98,12 +100,13 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	const uint32_t gametime = egbase.get_gametime();
 
 	args_.zoom = zoom;
-	args_.surface_offset = (bounding_rect.origin() + dst->get_offset()).cast<float>() / zoom - view_offset;
+	args_.surface_offset = (bounding_rect.origin() + dst->get_offset()).cast<float>() * scale - view_offset;
 	args_.surface_width = surface->width();
 	args_.surface_height = surface->height();
 
+	scan_fields(view_offset);
+
 	// Enqueue the drawing of the terrain.
-	// Note: roads will be accumulated later, during scan_fields.
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kTerrainGl4;
 	i.blend_mode = BlendMode::Copy;
@@ -122,49 +125,71 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 		RenderQueue::instance().enqueue(i);
 	}
 
-	scan_fields();
-
-// TODO(nha): draw_objects as part of scan_fields
-// 	draw_objects(dst, egbase, view_offset, player, args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
+	draw_objects(egbase, scale, fields_to_draw_, player, draw_text, dst);
 }
 
-void GameRendererGl4::scan_fields() {
+void GameRendererGl4::scan_fields(const Vector2f& view_offset) {
 	const EditorGameBase& egbase = args_.terrain->egbase();
 	const Player* player = args_.terrain->player();
 	auto& map = egbase.map();
 	const EdgeOverlayManager& edge_overlay_manager = egbase.get_ibase()->edge_overlay_manager();
 
 	args_.roads.clear();
+	fields_to_draw_.reset(args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
 
-	for (int fy = args_.minfy; fy <= args_.maxfy; ++fy) {
-		for (int fx = args_.minfx; fx <= args_.maxfx; ++fx) {
-			Coords ncoords(fx, fy);
-			map.normalize_coords(ncoords);
-			FCoords coords = map.get_fcoords(ncoords);
-			uint8_t roads;
-			if (!player || player->see_all()) {
-				roads = coords.field->get_roads();
-			} else {
-				const Player::Field& pf = player->fields()[map.get_index(ncoords, map.get_width())];
-				roads = pf.roads;
-			}
-			if (player)
-				roads |= edge_overlay_manager.get_overlay(ncoords);
+	for (auto cursor = fields_to_draw_.cursor(); cursor.valid(); cursor.next()) {
+		FieldToDrawBase& f = cursor.mutable_field();
 
-			uint8_t type = (roads >> RoadType::kEast) & RoadType::kMask;
-			if (type) {
-				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_E, coords.field->get_owned_by());
-			}
+		Vector2f map_pixel =
+		   MapviewPixelFunctions::to_map_pixel_ignoring_height(cursor.geometric_coords());
 
-			type = (roads >> RoadType::kSouthEast) & RoadType::kMask;
-			if (type) {
-				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_SE, coords.field->get_owned_by());
-			}
+		Coords normalized = cursor.geometric_coords();
+		map.normalize_coords(normalized);
+		f.fcoords = map.get_fcoords(normalized);
 
-			type = (roads >> RoadType::kSouthWest) & RoadType::kMask;
-			if (type) {
-				args_.roads.emplace_back(Coords(fx, fy), type, WalkingDir::WALK_SW, coords.field->get_owned_by());
+		map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
+
+		f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(view_offset, args_.zoom, map_pixel);
+
+		PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+		f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
+		f.is_border = f.fcoords.field->is_border();
+		f.vision = 2;
+		if (player && !player->see_all()) {
+			const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
+			f.vision = pf.vision;
+			if (pf.vision == 1) {
+				f.owner = pf.owner != 0 ? &egbase.player(owned_by) : nullptr;
+				f.is_border = pf.border;
 			}
+		}
+
+		uint8_t roads;
+		if (!player || player->see_all()) {
+			roads = f.fcoords.field->get_roads();
+		} else {
+			const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
+			roads = pf.roads;
+		}
+		if (player)
+			roads |= edge_overlay_manager.get_overlay(f.fcoords);
+
+		uint8_t type = (roads >> RoadType::kEast) & RoadType::kMask;
+		if (type) {
+			args_.roads.emplace_back(cursor.geometric_coords(), type,
+			                         WalkingDir::WALK_E, f.fcoords.field->get_owned_by());
+		}
+
+		type = (roads >> RoadType::kSouthEast) & RoadType::kMask;
+		if (type) {
+			args_.roads.emplace_back(cursor.geometric_coords(), type,
+			                         WalkingDir::WALK_SE, f.fcoords.field->get_owned_by());
+		}
+
+		type = (roads >> RoadType::kSouthWest) & RoadType::kMask;
+		if (type) {
+			args_.roads.emplace_back(cursor.geometric_coords(), type,
+			                         WalkingDir::WALK_SW, f.fcoords.field->get_owned_by());
 		}
 	}
 }

@@ -69,11 +69,11 @@ struct FieldToDrawGl2 : FieldToDrawBase {
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
-class FieldsToDrawBase {
+class FieldsToDrawImplBase {
 public:
 	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
 
-	FieldsToDrawBase() {
+	FieldsToDrawImplBase() {
 	}
 
 	// Resize this fields to draw for reuse.
@@ -119,7 +119,7 @@ protected:
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
 template<typename Field_>
-class FieldsToDraw : public FieldsToDrawBase {
+class FieldsToDraw : public FieldsToDrawImplBase {
 public:
 	using Field = Field_;
 
@@ -128,7 +128,7 @@ public:
 
 	// Resize this fields to draw for reuse.
 	void reset(int minfx, int maxfx, int minfy, int maxfy) {
-		FieldsToDrawBase::reset(minfx, maxfx, minfy, maxfy);
+		FieldsToDrawImplBase::reset(minfx, maxfx, minfy, maxfy);
 
 		int h = max_fy_ - min_fy_ + 1;
 		const size_t dimension = this->get_w() * h;
@@ -169,7 +169,7 @@ private:
 };
 
 template<typename Field_>
-class FieldsToDrawRef : public FieldsToDrawBase {
+class FieldsToDrawRef : public FieldsToDrawImplBase {
 public:
 	using Field = Field_;
 
@@ -198,6 +198,7 @@ private:
 	intptr_t stride_;
 };
 
+using FieldsToDrawBase = FieldsToDraw<FieldToDrawBase>;
 using FieldsToDrawGl2 = FieldsToDraw<FieldToDrawGl2>;
 using FieldsToDrawRefBase = FieldsToDrawRef<FieldToDrawBase>;
 
