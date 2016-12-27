@@ -38,7 +38,7 @@ public:
 	// Draws the terrain.
 	void draw(uint32_t gametime,
 	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	          const FieldsToDraw& fields_to_draw,
+	          const FieldsToDrawGl2& fields_to_draw,
 	          float z_value);
 
 private:
@@ -54,16 +54,16 @@ private:
 	void maybe_add_dithering_triangle(
 	   uint32_t gametime,
 	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	   const FieldsToDraw::Field& f1,
-	   const FieldsToDraw::Field& f2,
-	   const FieldsToDraw::Field& f3,
+	   const FieldToDrawGl2& f1,
+	   const FieldToDrawGl2& f2,
+	   const FieldToDrawGl2& f3,
 	   int my_terrain,
 	   int other_terrain);
 
 	// Adds the 'field' as an vertex to the 'vertices_'. The 'order_index'
 	// defines which texture position in the dithering texture will be used for
 	// this vertex.
-	void add_vertex(const FieldsToDraw::Field& field,
+	void add_vertex(const FieldToDrawGl2& field,
 	                TrianglePoint triangle_point,
 	                const Vector2f& texture_offset);
 

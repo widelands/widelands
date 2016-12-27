@@ -36,7 +36,7 @@ public:
 	// Draws the terrain.
 	void draw(uint32_t gametime,
 	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	          const FieldsToDraw& fields_to_draw,
+	          const FieldsToDrawGl2& fields_to_draw,
 	          float z_value);
 
 private:
@@ -54,7 +54,7 @@ private:
 	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
-	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_coordinates);
+	void add_vertex(const FieldToDrawGl2& field, const Vector2f& texture_coordinates);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;

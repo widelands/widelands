@@ -70,7 +70,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset) {
+void TerrainProgram::add_vertex(const FieldToDrawGl2& field, const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
@@ -85,7 +85,7 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f
 
 void TerrainProgram::draw(uint32_t gametime,
                           const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                          const FieldsToDraw& fields_to_draw,
+                          const FieldsToDrawGl2& fields_to_draw,
                           float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
@@ -95,7 +95,7 @@ void TerrainProgram::draw(uint32_t gametime,
 	vertices_.reserve(fields_to_draw.size() * 3);
 
 	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
-		const FieldsToDraw::Field& field = cursor.field();
+		const FieldToDrawGl2& field = cursor.field();
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to

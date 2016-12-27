@@ -54,7 +54,7 @@ DitherProgram::DitherProgram() {
 DitherProgram::~DitherProgram() {
 }
 
-void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
+void DitherProgram::add_vertex(const FieldToDrawGl2& field,
                                const TrianglePoint triangle_point,
                                const Vector2f& texture_offset) {
 	vertices_.emplace_back();
@@ -87,9 +87,9 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 void DitherProgram::maybe_add_dithering_triangle(
    const uint32_t gametime,
    const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-   const FieldsToDraw::Field& f1,
-   const FieldsToDraw::Field& f2,
-   const FieldsToDraw::Field& f3,
+   const FieldToDrawGl2& f1,
+   const FieldToDrawGl2& f2,
+   const FieldToDrawGl2& f3,
    const int my_terrain,
    const int other_terrain) {
 	if (my_terrain == other_terrain) {
@@ -140,7 +140,7 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 
 void DitherProgram::draw(const uint32_t gametime,
                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                         const FieldsToDraw& fields_to_draw,
+                         const FieldsToDrawGl2& fields_to_draw,
                          const float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
@@ -150,7 +150,7 @@ void DitherProgram::draw(const uint32_t gametime,
 	vertices_.reserve(fields_to_draw.size() * 3);
 
 	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
-		const FieldsToDraw::Field& field = cursor.field();
+		const FieldToDrawGl2& field = cursor.field();
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to

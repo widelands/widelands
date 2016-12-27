@@ -41,7 +41,7 @@ public:
 	// space.
 	void draw(int renderbuffer_width,
 	          int renderbuffer_height,
-	          const FieldsToDraw& fields_to_draw,
+	          const FieldsToDrawGl2& fields_to_draw,
 	          float scale,
 	          float z_value);
 
@@ -61,8 +61,8 @@ private:
 	void add_road(int renderbuffer_width,
 	              int renderbuffer_height,
 	              Widelands::Coords geometric_coords,
-	              const FieldsToDraw::Field& start,
-	              const FieldsToDraw::Field& end,
+	              const FieldToDrawGl2& start,
+	              const FieldToDrawGl2& end,
 	              float scale,
 	              const Widelands::RoadType road_type,
 	              const Direction direction,

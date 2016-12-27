@@ -49,8 +49,8 @@ RoadProgram::~RoadProgram() {
 void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
                            Widelands::Coords geometric_coords,
-                           const FieldsToDraw::Field& start,
-                           const FieldsToDraw::Field& end,
+                           const FieldToDrawGl2& start,
+                           const FieldToDrawGl2& end,
                            const float scale,
                            const Widelands::RoadType road_type,
                            const Direction direction,
@@ -136,14 +136,14 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 void RoadProgram::draw(const int renderbuffer_width,
                        const int renderbuffer_height,
-                       const FieldsToDraw& fields_to_draw,
+                       const FieldsToDrawGl2& fields_to_draw,
                        const float scale,
                        const float z_value) {
 	vertices_.clear();
 
 	uint32_t gl_texture = 0;
 	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
-		const FieldsToDraw::Field& field = cursor.field();
+		const FieldToDrawGl2& field = cursor.field();
 
 		// Road to right neighbor.
 		if (cursor.rn_valid()) {

@@ -87,7 +87,7 @@ public:
 private:
 	// This is owned and handled by us, but handed to the RenderQueue, so we
 	// basically promise that this stays valid for one frame.
-	FieldsToDraw fields_to_draw_;
+	FieldsToDrawGl2 fields_to_draw_;
 };
 
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
@@ -117,7 +117,7 @@ float field_brightness(const FCoords& fcoords,
 }
 
 void draw_objects_for_visible_field(const EditorGameBase& egbase,
-                                    const FieldsToDraw::Field& field,
+                                    const FieldToDrawGl2& field,
                                     const float zoom,
                                     const TextToDraw draw_text,
                                     const Player* player,
@@ -147,7 +147,7 @@ void draw_objects_for_visible_field(const EditorGameBase& egbase,
 	}
 }
 
-void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
+void draw_objets_for_formerly_visible_field(const FieldToDrawGl2& field,
                                             const Player::Field& player_field,
                                             const float zoom,
                                             RenderTarget* dst) {
@@ -228,20 +228,20 @@ void draw_objets_for_formerly_visible_field(const FieldsToDraw::Field& field,
 // Draws the objects (animations & overlays).
 void GameRenderer::draw_objects(const EditorGameBase& egbase,
                                 const float zoom,
-                                const FieldsToDraw& fields_to_draw,
+                                const FieldsToDrawGl2& fields_to_draw,
                                 const Player* player,
                                 const TextToDraw draw_text,
                                 RenderTarget* dst) {
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
 	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
-		const FieldsToDraw::Field& field = cursor.field();
+		const FieldToDrawGl2& field = cursor.field();
 		if (!cursor.all_neighbors_valid()) {
 			continue;
 		}
 
-		const FieldsToDraw::Field& rn = cursor.rn();
-		const FieldsToDraw::Field& bln = cursor.bln();
-		const FieldsToDraw::Field& brn = cursor.brn();
+		const FieldToDrawGl2& rn = cursor.rn();
+		const FieldToDrawGl2& bln = cursor.bln();
+		const FieldToDrawGl2& brn = cursor.brn();
 
 		if (field.is_border) {
 			assert(field.owner != nullptr);
@@ -399,7 +399,7 @@ void GameRendererGl2::draw(const EditorGameBase& egbase,
 	const float scale = 1.f / zoom;
 	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
 	for (auto cursor = fields_to_draw_.cursor(); cursor.valid(); cursor.next()) {
-		FieldsToDraw::Field& f = cursor.mutable_field();
+		FieldToDrawGl2& f = cursor.mutable_field();
 
 		// Texture coordinates for pseudo random tiling of terrain and road
 		// graphics. Since screen space X increases top-to-bottom and OpenGL

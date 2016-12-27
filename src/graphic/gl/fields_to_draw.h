@@ -36,33 +36,36 @@
 template<typename FTD>
 class FieldsToDrawCursor;
 
+struct FieldToDrawGl2 {
+	Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
+	Vector2f gl_position;        // GL Position of this field.
+
+	// Surface pixel this will be plotted on.
+	Vector2f surface_pixel;
+
+	// Rendertarget pixel this will be plotted on. This is only different by
+	// the Rendertarget::get_rect().origin() of the view window.
+	Vector2f rendertarget_pixel;
+	Vector2f texture_coords;  // Texture coordinates.
+	float brightness;         // brightness of the pixel
+
+	// The next values are not necessarily the true data of this field, but
+	// what the player should see. For example in fog of war we always draw
+	// what we saw last.
+	uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
+	bool is_border;
+	Widelands::Vision vision;
+	Widelands::Player* owner;  // can be nullptr.
+};
+
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
+template<typename Field_>
 class FieldsToDraw {
 public:
+	using Field = Field_;
+
 	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
-
-	struct Field {
-		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
-		Vector2f gl_position;        // GL Position of this field.
-
-		// Surface pixel this will be plotted on.
-		Vector2f surface_pixel;
-
-		// Rendertarget pixel this will be plotted on. This is only different by
-		// the Rendertarget::get_rect().origin() of the view window.
-		Vector2f rendertarget_pixel;
-		Vector2f texture_coords;  // Texture coordinates.
-		float brightness;         // brightness of the pixel
-
-		// The next values are not necessarily the true data of this field, but
-		// what the player should see. For example in fog of war we always draw
-		// what we saw last.
-		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
-		bool is_border;
-		Widelands::Vision vision;
-		Widelands::Player* owner;  // can be nullptr.
-	};
 
 	FieldsToDraw() {
 	}
@@ -131,13 +134,15 @@ private:
 	std::vector<Field> fields_;
 };
 
+using FieldsToDrawGl2 = FieldsToDraw<FieldToDrawGl2>;
+
 // For iteration over fields.
 //
 // Template for const-correctness.
 template<typename FTD>
 class FieldsToDrawCursor {
 public:
-	using Field = FieldsToDraw::Field;
+	using Field = typename FTD::Field;
 
 	FieldsToDrawCursor(FTD& fields_to_draw)
 	  : fields_(fields_to_draw) {
@@ -254,7 +259,8 @@ public:
 	}
 
 private:
-	void type_check(const FieldsToDraw&) {}
+	template<typename F>
+	void type_check(const FieldsToDraw<F>&) {}
 
 	FTD& fields_;
 
@@ -263,11 +269,13 @@ private:
 	int index_;
 };
 
-inline FieldsToDrawCursor<FieldsToDraw> FieldsToDraw::cursor() {
+template<typename F>
+inline FieldsToDrawCursor<FieldsToDraw<F>> FieldsToDraw<F>::cursor() {
 	return {*this};
 }
 
-inline FieldsToDrawCursor<const FieldsToDraw> FieldsToDraw::cursor() const {
+template<typename F>
+inline FieldsToDrawCursor<const FieldsToDraw<F>> FieldsToDraw<F>::cursor() const {
 	return {*this};
 }
 
