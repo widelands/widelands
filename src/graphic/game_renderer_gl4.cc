@@ -102,9 +102,8 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	args_.surface_width = surface->width();
 	args_.surface_height = surface->height();
 
-	scan_fields();
-
 	// Enqueue the drawing of the terrain.
+	// Note: roads will be accumulated later, during scan_fields.
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kTerrainGl4;
 	i.blend_mode = BlendMode::Copy;
@@ -122,6 +121,8 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 		i.blend_mode = BlendMode::UseAlpha;
 		RenderQueue::instance().enqueue(i);
 	}
+
+	scan_fields();
 
 // TODO(nha): draw_objects as part of scan_fields
 // 	draw_objects(dst, egbase, view_offset, player, args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);

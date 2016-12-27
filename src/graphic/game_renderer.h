@@ -84,7 +84,6 @@ protected:
 	                  RenderTarget* dst) = 0;
 
 	// Draws the objects (animations & overlays).
-	// TODO(nha): does this still exist?
 	void draw_objects(const Widelands::EditorGameBase& egbase,
 	                  const float zoom,
 	                  const FieldsToDraw &fields_to_draw,

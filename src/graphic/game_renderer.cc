@@ -233,15 +233,15 @@ void GameRenderer::draw_objects(const EditorGameBase& egbase,
                                 const TextToDraw draw_text,
                                 RenderTarget* dst) {
 	std::vector<FieldOverlayManager::OverlayInfo> overlay_info;
-	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
-		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-		if (!field.all_neighbors_valid()) {
+	for (auto cursor = fields_to_draw.cursor(); cursor.valid(); cursor.next()) {
+		const FieldsToDraw::Field& field = cursor.field();
+		if (!cursor.all_neighbors_valid()) {
 			continue;
 		}
 
-		const FieldsToDraw::Field& rn = fields_to_draw.at(field.rn_index);
-		const FieldsToDraw::Field& bln = fields_to_draw.at(field.bln_index);
-		const FieldsToDraw::Field& brn = fields_to_draw.at(field.brn_index);
+		const FieldsToDraw::Field& rn = cursor.rn();
+		const FieldsToDraw::Field& bln = cursor.bln();
+		const FieldsToDraw::Field& brn = cursor.brn();
 
 		if (field.is_border) {
 			assert(field.owner != nullptr);

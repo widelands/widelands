@@ -77,6 +77,124 @@ public:
 		}
 	};
 
+	// For iteration over fields.
+	//
+	// Template for const-correctness.
+	class Cursor {
+	public:
+		Cursor(const FieldsToDraw& fields_to_draw)
+		  : fields_(fields_to_draw) {
+			  geometric_coords_.x = fields_.min_fx_;
+			  geometric_coords_.y = fields_.min_fy_;
+			  geometric_tblx_shift_ = (fields_.min_fy_ & 1) - 1;
+
+			  index_ = 0;
+		}
+
+		bool valid() const {
+			return index_ >= 0;
+		}
+
+		void next() {
+			assert(valid());
+
+			index_++;
+			geometric_coords_.x++;
+			if (geometric_coords_.x > fields_.max_fx_) {
+				geometric_coords_.x = fields_.min_fx_;
+				geometric_tblx_shift_ = -1 - geometric_tblx_shift_;
+				geometric_coords_.y++;
+				if (geometric_coords_.y > fields_.max_fy_)
+					index_ = kInvalidIndex;
+			}
+		}
+
+		const Field& field() const {
+			assert(valid());
+			return fields_.fields_[index_];
+		}
+
+		Widelands::Coords geometric_coords() const {
+			assert(valid());
+			return geometric_coords_;
+		}
+
+		bool tln_valid() const {
+			assert(valid());
+			return (geometric_coords_.y > fields_.min_fy_) &&
+			       (geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx_);
+		}
+
+		const Field& tln() const {
+			assert(tln_valid());
+			return fields_.fields_[index_ + geometric_tblx_shift_ - fields_.w_];
+		}
+
+		bool trn_valid() const {
+			assert(valid());
+			return (geometric_coords_.y > fields_.min_fy_) &&
+			       (geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx_);
+		}
+
+		const Field& trn() const {
+			assert(trn_valid());
+			return fields_.fields_[index_ + geometric_tblx_shift_ + 1 - fields_.w_];
+		}
+
+		bool ln_valid() const {
+			assert(valid());
+			return (geometric_coords_.x - 1 >= fields_.min_fx_);
+		}
+
+		const Field& ln() const {
+			assert(ln_valid());
+			return fields_.fields_[index_ - 1];
+		}
+
+		bool rn_valid() const {
+			assert(valid());
+			return (geometric_coords_.x + 1 <= fields_.max_fx_);
+		}
+
+		const Field& rn() const {
+			assert(rn_valid());
+			return fields_.fields_[index_ + 1];
+		}
+
+		bool bln_valid() const {
+			assert(valid());
+			return (geometric_coords_.y < fields_.max_fy_) &&
+			       (geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx_);
+		}
+
+		const Field& bln() const {
+			assert(bln_valid());
+			return fields_.fields_[index_ + geometric_tblx_shift_ + fields_.w_];
+		}
+
+		bool brn_valid() const {
+			assert(valid());
+			return (geometric_coords_.y < fields_.max_fy_) &&
+			       (geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx_);
+		}
+
+		const Field& brn() const {
+			assert(brn_valid());
+			return fields_.fields_[index_ + geometric_tblx_shift_ + 1 + fields_.w_];
+		}
+
+		bool all_neighbors_valid() const {
+			return tln_valid() && brn_valid();
+		}
+
+	private:
+		const FieldsToDraw& fields_;
+
+		Widelands::Coords geometric_coords_;
+		int geometric_tblx_shift_; // top/bottom left neighbor geometric x-coordinate offset
+		int index_;
+	};
+
 	FieldsToDraw() {
 	}
 
@@ -122,6 +240,10 @@ public:
 	// Returns a mutable field at 'index' which must be in bound.
 	inline Field* mutable_field(const int index) {
 		return &fields_[index];
+	}
+
+	Cursor cursor() const {
+		return Cursor(*this);
 	}
 
 private:
