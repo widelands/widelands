@@ -539,8 +539,8 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	glUseProgram(terrain_.gl_program.object());
 
 	// Coordinate transform from map coordinates to GL coordinates.
-	float scale_x = 2.0 / args->surface_width;
-	float scale_y = -2.0 / args->surface_height;
+	float scale_x = 2.0 / args->surface_width * args->scale;
+	float scale_y = -2.0 / args->surface_height * args->scale;
 	float offset_x = args->surface_offset.x * scale_x - 1.0;
 	float offset_y = args->surface_offset.y * scale_y + 1.0;
 
@@ -687,8 +687,8 @@ void TerrainProgramGl4::draw_roads(const TerrainGl4Arguments* args,
 	auto& gl = Gl::State::instance();
 
 	// Coordinate transform from map coordinates to GL coordinates.
-	float scale_x = 2.0 / args->surface_width;
-	float scale_y = -2.0 / args->surface_height;
+	float scale_x = 2.0 / args->surface_width * args->scale;
+	float scale_y = -2.0 / args->surface_height * args->scale;
 	float offset_x = args->surface_offset.x * scale_x - 1.0;
 	float offset_y = args->surface_offset.y * scale_y + 1.0;
 

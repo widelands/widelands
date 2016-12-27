@@ -52,7 +52,7 @@ struct TerrainGl4Arguments {
 	static_assert(sizeof(Road) == 8, "bad alignment");
 
 	std::shared_ptr<TerrainInformationGl4> terrain;
-	float zoom;
+	float scale;
 	Vector2f surface_offset;
 	int surface_width;
 	int surface_height;

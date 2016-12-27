@@ -80,7 +80,7 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 
 	// Determine the set of patches to draw.
 	float scale = 1.f / zoom;
-	Vector2f tl_map = dst->get_offset().cast<float>() * scale + view_offset;
+	Vector2f tl_map = dst->get_offset().cast<float>() * zoom + view_offset;
 
 	assert(tl_map.x >= 0);  // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
@@ -99,8 +99,8 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	const Recti& bounding_rect = dst->get_rect();
 	const uint32_t gametime = egbase.get_gametime();
 
-	args_.zoom = zoom;
-	args_.surface_offset = (bounding_rect.origin() + dst->get_offset()).cast<float>() * scale - view_offset;
+	args_.scale = scale;
+	args_.surface_offset = (bounding_rect.origin() + dst->get_offset()).cast<float>() * zoom - view_offset;
 	args_.surface_width = surface->width();
 	args_.surface_height = surface->height();
 
@@ -149,7 +149,7 @@ void GameRendererGl4::scan_fields(const Vector2f& view_offset) {
 
 		map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
-		f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(view_offset, args_.zoom, map_pixel);
+		f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(view_offset, 1. / args_.scale, map_pixel);
 
 		PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 		f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
