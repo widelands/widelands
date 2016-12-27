@@ -398,53 +398,50 @@ void GameRendererGl2::draw(const EditorGameBase& egbase,
 
 	const float scale = 1.f / zoom;
 	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
-	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
-		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
-			FieldsToDraw::Field& f =
-			   *fields_to_draw_.mutable_field(fields_to_draw_.calculate_index(fx, fy));
+	for (auto cursor = fields_to_draw_.cursor(); cursor.valid(); cursor.next()) {
+		FieldsToDraw::Field& f = cursor.mutable_field();
 
-			f.geometric_coords = Coords(fx, fy);
+		f.geometric_coords = cursor.geometric_coords();
 
-			// Texture coordinates for pseudo random tiling of terrain and road
-			// graphics. Since screen space X increases top-to-bottom and OpenGL
-			// increases bottom-to-top we flip the y coordinate to not have
-			// terrains and road graphics vertically mirrorerd.
-			Vector2f map_pixel =
-			   MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
-			f.texture_coords.x = map_pixel.x / kTextureSideLength;
-			f.texture_coords.y = -map_pixel.y / kTextureSideLength;
+		// Texture coordinates for pseudo random tiling of terrain and road
+		// graphics. Since screen space X increases top-to-bottom and OpenGL
+		// increases bottom-to-top we flip the y coordinate to not have
+		// terrains and road graphics vertically mirrorerd.
+		Vector2f map_pixel =
+		   MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
+		f.texture_coords.x = map_pixel.x / kTextureSideLength;
+		f.texture_coords.y = -map_pixel.y / kTextureSideLength;
 
-			Coords normalized = f.geometric_coords;
-			map.normalize_coords(normalized);
-			f.fcoords = map.get_fcoords(normalized);
+		Coords normalized = f.geometric_coords;
+		map.normalize_coords(normalized);
+		f.fcoords = map.get_fcoords(normalized);
 
-			map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
+		map_pixel.y -= f.fcoords.field->get_height() * kHeightFactor;
 
-			f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(viewpoint, zoom, map_pixel);
-			f.gl_position = f.surface_pixel = f.rendertarget_pixel +
-			                                  dst->get_rect().origin().cast<float>() +
-			                                  dst->get_offset().cast<float>();
-			pixel_to_gl_renderbuffer(
-			   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
+		f.rendertarget_pixel = MapviewPixelFunctions::map_to_panel(viewpoint, zoom, map_pixel);
+		f.gl_position = f.surface_pixel = f.rendertarget_pixel +
+		                                  dst->get_rect().origin().cast<float>() +
+		                                  dst->get_offset().cast<float>();
+		pixel_to_gl_renderbuffer(
+		   surface_width, surface_height, &f.gl_position.x, &f.gl_position.y);
 
-			f.brightness = field_brightness(f.fcoords, gametime, map, player);
+		f.brightness = field_brightness(f.fcoords, gametime, map, player);
 
-			PlayerNumber owned_by = f.fcoords.field->get_owned_by();
-			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
-			f.is_border = f.fcoords.field->is_border();
-			f.vision = 2;
-			f.roads = f.fcoords.field->get_roads();
-			if (player && !player->see_all()) {
-				const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
-				f.roads = pf.roads;
-				f.vision = pf.vision;
-				if (pf.vision == 1) {
-					f.owner = pf.owner != 0 ? &egbase.player(owned_by) : nullptr;
-					f.is_border = pf.border;
-				}
+		PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+		f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
+		f.is_border = f.fcoords.field->is_border();
+		f.vision = 2;
+		f.roads = f.fcoords.field->get_roads();
+		if (player && !player->see_all()) {
+			const Player::Field& pf = player->fields()[map.get_index(f.fcoords, map.get_width())];
+			f.roads = pf.roads;
+			f.vision = pf.vision;
+			if (pf.vision == 1) {
+				f.owner = pf.owner != 0 ? &egbase.player(owned_by) : nullptr;
+				f.is_border = pf.border;
 			}
-			f.roads |= edge_overlay_manager.get_overlay(f.fcoords);
 		}
+		f.roads |= edge_overlay_manager.get_overlay(f.fcoords);
 	}
 
 	// Enqueue the drawing of the terrain.

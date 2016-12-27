@@ -33,6 +33,9 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
+template<typename FTD>
+class FieldsToDrawCursor;
+
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
 class FieldsToDraw {
@@ -63,124 +66,6 @@ public:
 		Widelands::Player* owner;  // can be nullptr.
 	};
 
-	// For iteration over fields.
-	//
-	// Template for const-correctness.
-	class Cursor {
-	public:
-		Cursor(const FieldsToDraw& fields_to_draw)
-		  : fields_(fields_to_draw) {
-			  geometric_coords_.x = fields_.min_fx_;
-			  geometric_coords_.y = fields_.min_fy_;
-			  geometric_tblx_shift_ = (fields_.min_fy_ & 1) - 1;
-
-			  index_ = 0;
-		}
-
-		bool valid() const {
-			return index_ >= 0;
-		}
-
-		void next() {
-			assert(valid());
-
-			index_++;
-			geometric_coords_.x++;
-			if (geometric_coords_.x > fields_.max_fx_) {
-				geometric_coords_.x = fields_.min_fx_;
-				geometric_tblx_shift_ = -1 - geometric_tblx_shift_;
-				geometric_coords_.y++;
-				if (geometric_coords_.y > fields_.max_fy_)
-					index_ = kInvalidIndex;
-			}
-		}
-
-		const Field& field() const {
-			assert(valid());
-			return fields_.fields_[index_];
-		}
-
-		Widelands::Coords geometric_coords() const {
-			assert(valid());
-			return geometric_coords_;
-		}
-
-		bool tln_valid() const {
-			assert(valid());
-			return (geometric_coords_.y > fields_.min_fy_) &&
-			       (geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx_);
-		}
-
-		const Field& tln() const {
-			assert(tln_valid());
-			return fields_.fields_[index_ + geometric_tblx_shift_ - fields_.w_];
-		}
-
-		bool trn_valid() const {
-			assert(valid());
-			return (geometric_coords_.y > fields_.min_fy_) &&
-			       (geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx_);
-		}
-
-		const Field& trn() const {
-			assert(trn_valid());
-			return fields_.fields_[index_ + geometric_tblx_shift_ + 1 - fields_.w_];
-		}
-
-		bool ln_valid() const {
-			assert(valid());
-			return (geometric_coords_.x - 1 >= fields_.min_fx_);
-		}
-
-		const Field& ln() const {
-			assert(ln_valid());
-			return fields_.fields_[index_ - 1];
-		}
-
-		bool rn_valid() const {
-			assert(valid());
-			return (geometric_coords_.x + 1 <= fields_.max_fx_);
-		}
-
-		const Field& rn() const {
-			assert(rn_valid());
-			return fields_.fields_[index_ + 1];
-		}
-
-		bool bln_valid() const {
-			assert(valid());
-			return (geometric_coords_.y < fields_.max_fy_) &&
-			       (geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx_);
-		}
-
-		const Field& bln() const {
-			assert(bln_valid());
-			return fields_.fields_[index_ + geometric_tblx_shift_ + fields_.w_];
-		}
-
-		bool brn_valid() const {
-			assert(valid());
-			return (geometric_coords_.y < fields_.max_fy_) &&
-			       (geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx_);
-		}
-
-		const Field& brn() const {
-			assert(brn_valid());
-			return fields_.fields_[index_ + geometric_tblx_shift_ + 1 + fields_.w_];
-		}
-
-		bool all_neighbors_valid() const {
-			return tln_valid() && brn_valid();
-		}
-
-	private:
-		const FieldsToDraw& fields_;
-
-		Widelands::Coords geometric_coords_;
-		int geometric_tblx_shift_; // top/bottom left neighbor geometric x-coordinate offset
-		int index_;
-	};
-
 	FieldsToDraw() {
 	}
 
@@ -196,6 +81,26 @@ public:
 		if (fields_.size() != dimension) {
 			fields_.resize(dimension);
 		}
+	}
+
+	int min_fx() const {
+		return min_fx_;
+	}
+
+	int max_fx() const {
+		return max_fx_;
+	}
+
+	int min_fy() const {
+		return min_fy_;
+	}
+
+	int max_fy() const {
+		return max_fy_;
+	}
+
+	int get_w() const {
+		return w_;
 	}
 
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
@@ -228,9 +133,16 @@ public:
 		return &fields_[index];
 	}
 
-	Cursor cursor() const {
-		return Cursor(*this);
+	Field& operator[](int index) {
+		return fields_[index];
 	}
+
+	const Field& operator[](int index) const {
+		return fields_[index];
+	}
+
+	FieldsToDrawCursor<FieldsToDraw> cursor();
+	FieldsToDrawCursor<const FieldsToDraw> cursor() const;
 
 private:
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
@@ -245,5 +157,143 @@ private:
 
 	std::vector<Field> fields_;
 };
+
+// For iteration over fields.
+//
+// Template for const-correctness.
+template<typename FTD>
+class FieldsToDrawCursor {
+public:
+	using Field = FieldsToDraw::Field;
+
+	FieldsToDrawCursor(FTD& fields_to_draw)
+	  : fields_(fields_to_draw) {
+		type_check(fields_to_draw);
+
+		geometric_coords_.x = fields_.min_fx();
+		geometric_coords_.y = fields_.min_fy();
+		geometric_tblx_shift_ = (fields_.min_fy() & 1) - 1;
+
+		index_ = 0;
+	}
+
+	bool valid() const {
+		return index_ >= 0;
+	}
+
+	void next() {
+		assert(valid());
+
+		index_++;
+		geometric_coords_.x++;
+		if (geometric_coords_.x > fields_.max_fx()) {
+			geometric_coords_.x = fields_.min_fx();
+			geometric_tblx_shift_ = -1 - geometric_tblx_shift_;
+			geometric_coords_.y++;
+			if (geometric_coords_.y > fields_.max_fy())
+				index_ = -1;
+		}
+	}
+
+	const Field& field() const {
+		assert(valid());
+		return fields_[index_];
+	}
+
+	Field& mutable_field() {
+		assert(valid());
+		return fields_[index_];
+	}
+
+	Widelands::Coords geometric_coords() const {
+		assert(valid());
+		return geometric_coords_;
+	}
+
+	bool tln_valid() const {
+		assert(valid());
+		return (geometric_coords_.y > fields_.min_fy()) &&
+				(geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx());
+	}
+
+	const Field& tln() const {
+		assert(tln_valid());
+		return fields_[index_ + geometric_tblx_shift_ - fields_.get_w()];
+	}
+
+	bool trn_valid() const {
+		assert(valid());
+		return (geometric_coords_.y > fields_.min_fy()) &&
+				(geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx());
+	}
+
+	const Field& trn() const {
+		assert(trn_valid());
+		return fields_[index_ + geometric_tblx_shift_ + 1 - fields_.get_w()];
+	}
+
+	bool ln_valid() const {
+		assert(valid());
+		return (geometric_coords_.x - 1 >= fields_.min_fx());
+	}
+
+	const Field& ln() const {
+		assert(ln_valid());
+		return fields_[index_ - 1];
+	}
+
+	bool rn_valid() const {
+		assert(valid());
+		return (geometric_coords_.x + 1 <= fields_.max_fx());
+	}
+
+	const Field& rn() const {
+		assert(rn_valid());
+		return fields_[index_ + 1];
+	}
+
+	bool bln_valid() const {
+		assert(valid());
+		return (geometric_coords_.y < fields_.max_fy()) &&
+				(geometric_coords_.x + geometric_tblx_shift_ >= fields_.min_fx());
+	}
+
+	const Field& bln() const {
+		assert(bln_valid());
+		return fields_[index_ + geometric_tblx_shift_ + fields_.get_w()];
+	}
+
+	bool brn_valid() const {
+		assert(valid());
+		return (geometric_coords_.y < fields_.max_fy()) &&
+				(geometric_coords_.x + geometric_tblx_shift_ + 1 <= fields_.max_fx());
+	}
+
+	const Field& brn() const {
+		assert(brn_valid());
+		return fields_[index_ + geometric_tblx_shift_ + 1 + fields_.get_w()];
+	}
+
+	bool all_neighbors_valid() const {
+		return tln_valid() && brn_valid();
+	}
+
+private:
+	void type_check(const FieldsToDraw&) {}
+
+	FTD& fields_;
+
+	Widelands::Coords geometric_coords_;
+	int geometric_tblx_shift_; // top/bottom left neighbor geometric x-coordinate offset
+	int index_;
+};
+
+inline FieldsToDrawCursor<FieldsToDraw> FieldsToDraw::cursor() {
+	return {*this};
+}
+
+inline FieldsToDrawCursor<const FieldsToDraw> FieldsToDraw::cursor() const {
+	return {*this};
+}
 
 #endif  // end of include guard: WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
