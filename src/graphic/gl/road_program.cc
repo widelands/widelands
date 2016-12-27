@@ -48,6 +48,7 @@ RoadProgram::~RoadProgram() {
 
 void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
+                           Widelands::Coords geometric_coords,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const float scale,
@@ -82,8 +83,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const Image& texture =
 	   road_type == Widelands::RoadType::kNormal ?
 	      visible_owner->tribe().road_textures().get_normal_texture(
-	         start.geometric_coords, direction) :
-	      visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
+	         geometric_coords, direction) :
+	      visible_owner->tribe().road_textures().get_busy_texture(geometric_coords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}
@@ -149,7 +150,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field,
+				add_road(renderbuffer_width, renderbuffer_height, cursor.geometric_coords(), field,
 				         cursor.rn(), scale, road, kEast, &gl_texture);
 			}
 		}
@@ -159,7 +160,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field,
+				add_road(renderbuffer_width, renderbuffer_height, cursor.geometric_coords(), field,
 				         cursor.brn(), scale, road, kSouthEast, &gl_texture);
 			}
 		}
@@ -169,7 +170,7 @@ void RoadProgram::draw(const int renderbuffer_width,
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(renderbuffer_width, renderbuffer_height, field,
+				add_road(renderbuffer_width, renderbuffer_height, cursor.geometric_coords(), field,
 				         cursor.bln(), scale, road, kSouthWest, &gl_texture);
 			}
 		}

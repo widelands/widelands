@@ -60,6 +60,7 @@ private:
 	enum Direction { kEast, kSouthEast, kSouthWest };
 	void add_road(int renderbuffer_width,
 	              int renderbuffer_height,
+	              Widelands::Coords geometric_coords,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              float scale,

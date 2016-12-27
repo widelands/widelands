@@ -43,8 +43,6 @@ public:
 	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
 
 	struct Field {
-		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
-		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
 		Vector2f gl_position;        // GL Position of this field.
 
@@ -180,6 +178,8 @@ public:
 		return fields_[index_];
 	}
 
+	// Return current geometric coordinates (i.e. map coordinates that can
+	// be out of bounds).
 	Widelands::Coords geometric_coords() const {
 		assert(valid());
 		return geometric_coords_;

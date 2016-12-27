@@ -401,18 +401,16 @@ void GameRendererGl2::draw(const EditorGameBase& egbase,
 	for (auto cursor = fields_to_draw_.cursor(); cursor.valid(); cursor.next()) {
 		FieldsToDraw::Field& f = cursor.mutable_field();
 
-		f.geometric_coords = cursor.geometric_coords();
-
 		// Texture coordinates for pseudo random tiling of terrain and road
 		// graphics. Since screen space X increases top-to-bottom and OpenGL
 		// increases bottom-to-top we flip the y coordinate to not have
 		// terrains and road graphics vertically mirrorerd.
 		Vector2f map_pixel =
-		   MapviewPixelFunctions::to_map_pixel_ignoring_height(f.geometric_coords);
+		   MapviewPixelFunctions::to_map_pixel_ignoring_height(cursor.geometric_coords());
 		f.texture_coords.x = map_pixel.x / kTextureSideLength;
 		f.texture_coords.y = -map_pixel.y / kTextureSideLength;
 
-		Coords normalized = f.geometric_coords;
+		Coords normalized = cursor.geometric_coords();
 		map.normalize_coords(normalized);
 		f.fcoords = map.get_fcoords(normalized);
 
