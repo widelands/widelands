@@ -588,6 +588,8 @@ void TerrainProgramGl4::draw_minimap(const TerrainGl4Arguments* args,
                                      float z_value) {
 	auto& gl = Gl::State::instance();
 	const Widelands::Map& map = args->terrain->egbase().map();
+	float width = map.get_width();
+	float height = map.get_height();
 
 	glUseProgram(minimap_.gl_program.object());
 
@@ -621,13 +623,10 @@ void TerrainProgramGl4::draw_minimap(const TerrainGl4Arguments* args,
 	glUniform1i(minimap_.u_player_color, 4);
 	gl.bind(GL_TEXTURE4, args->terrain->player_color_texture());
 
-	glUniform2i(minimap_.u_frame_topleft, args->minfx, args->minfy);
-	glUniform2i(minimap_.u_frame_bottomright, args->maxfx, args->maxfy);
+	glUniform2f(minimap_.u_frame_topleft, (args->minfx + 0.25) / width, (args->minfy + 0.25) / height);
+	glUniform2f(minimap_.u_frame_bottomright, (args->maxfx - 0.25) / width, (args->maxfy - 0.25) / height);
 
 	// Compute coordinates and upload vertex data.
-	float width = map.get_width();
-	float height = map.get_height();
-
 	if (args->minimap_layers & MiniMapLayer::Zoom2) {
 		width *= 2;
 		height *= 2;

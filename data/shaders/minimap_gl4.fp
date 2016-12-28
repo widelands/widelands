@@ -16,8 +16,8 @@ uniform bool u_layer_terrain;
 uniform bool u_layer_owner;
 uniform uint u_layer_details;
 
-uniform ivec2 u_frame_topleft;
-uniform ivec2 u_frame_bottomright;
+uniform vec2 u_frame_topleft;
+uniform vec2 u_frame_bottomright;
 
 // Textures (map data).
 uniform usampler2D u_terrain_base;
@@ -36,26 +36,42 @@ float calc_node_brightness(uint node_ubrightness) {
 	return brightness;
 }
 
+// Return true if a and b are closer than threshold modulo 1.
+bool wrap_close(float a, float b, float threshold) {
+	float dist = a - b;
+	dist -= floor(dist + 0.5);
+	return abs(dist) < threshold;
+}
+
 void main() {
 	float player_brightness = texture(u_player_brightness, var_field).r;
 
 	// Determine whether we're on the frame
-	ivec2 map_size = textureSize(u_terrain_base, 0);
-	ivec2 fc = ivec2(var_field * map_size);
-	int c_dist = -1;
-	bool below_high = false;
+	bool on_frame = false;
+	float dfdx = dFdx(var_field.x) * 0.5;
+	float dfdy = dFdy(var_field.y) * 0.5;
+	float low, high, pix;
 
-	if (fc.x == u_frame_topleft.x || fc.x == u_frame_bottomright.x) {
-		c_dist = fc.y - u_frame_topleft.y;
-		below_high = fc.y <= u_frame_bottomright.y;
-	} else if (fc.y == u_frame_topleft.y || fc.y == u_frame_bottomright.y) {
-		c_dist = fc.x - u_frame_topleft.x;
-		below_high = fc.x <= u_frame_bottomright.x;
+	if (wrap_close(var_field.x, u_frame_topleft.x, dfdx) ||
+	    wrap_close(var_field.x, u_frame_bottomright.x, dfdx)) {
+		on_frame = true;
+		low = u_frame_topleft.y;
+		high = u_frame_bottomright.y;
+		pix = var_field.y;
+	} else if (wrap_close(var_field.y, u_frame_topleft.y, dfdy) ||
+	           wrap_close(var_field.y, u_frame_bottomright.y, dfdy)) {
+		on_frame = true;
+		low = u_frame_topleft.x;
+		high = u_frame_bottomright.x;
+		pix = var_field.x;
 	}
 
-	if (below_high && c_dist >= 0 && (c_dist & 1) == 0) {
-		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-		return;
+	if (on_frame) {
+		pix -= floor(pix - low); // Normalize to range [low, low + 1)
+		if (pix >= low && pix <= high) {
+			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+			return;
+		}
 	}
 
 	// Determine minimap color

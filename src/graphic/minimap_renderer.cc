@@ -155,27 +155,6 @@ void draw_view_window(const Map& map,
 	}
 }
 
-#if 0
-// Calculate the field coordinates of the dotted frame indicating where the
-// main map view is currently centered, without wrap-around.
-void calc_minimap_frame(const Widelands::Map& map,
-                        const Point& viewpoint,
-                        Point& topleft,
-                        Point& bottomright) {
-	int32_t xsize = g_gr->get_xres() / kTriangleWidth / 2;
-	int32_t ysize = g_gr->get_yres() / kTriangleHeight / 2;
-
-	const int32_t mapwidth = map.get_width();
-	const int32_t mapheight = map.get_height();
-
-	topleft.x = viewpoint.x + mapwidth / 2 - xsize;
-	topleft.y = viewpoint.y + mapheight / 2 - ysize;
-
-	bottomright.x = viewpoint.x + mapwidth / 2 + xsize;
-	bottomright.y = viewpoint.y + mapheight / 2 + ysize;
-}
-#endif
-
 // Does the actual work of drawing the minimap.
 void do_draw_minimap(Texture* texture,
                      const Widelands::EditorGameBase& egbase,
@@ -271,30 +250,24 @@ public:
 
 		args_.terrain->update_minimap();
 
+		const Recti& bounding_rect = dst.get_rect();
+
 		// Center the view on the middle of the 'view_area'.
 		const bool zoom = layers & MiniMapLayer::Zoom2;
 		Vector2f top_left =
 			minimap_pixel_to_mappixel(egbase().map(), Vector2i(0, 0), view_area, minimap_type, zoom);
 		const Coords node =
 			MapviewPixelFunctions::calc_node_and_triangle(egbase().map(), top_left.x, top_left.y).node;
-#if 0
-		// TODO(nha): frame
-		Point frame_topleft, frame_bottomright;
-		calc_minimap_frame(egbase().map(), viewpoint, frame_topleft, frame_bottomright);
 
-		args_.minfx = frame_topleft.x;
-		args_.minfy = frame_topleft.y;
-		args_.maxfx = frame_bottomright.x;
-		args_.maxfy = frame_bottomright.y;
-#else
-		args_.minfx = args_.maxfx = args_.minfy = args_.maxfy = 0;
-#endif
+		// Calculate frame coordinates
+		args_.minfx = view_area.x / kTriangleWidth;
+		args_.minfy = view_area.y / kTriangleHeight;
+		args_.maxfx = (view_area.x + view_area.w) / kTriangleWidth;
+		args_.maxfy = (view_area.y + view_area.h) / kTriangleHeight;
 
 		args_.minimap_tl_fx = node.x;
 		args_.minimap_tl_fy = node.y;
 		args_.minimap_layers = layers;
-
-		const Recti& bounding_rect = dst.get_rect();
 
 		args_.surface_offset = (bounding_rect.origin() + dst.get_offset()).cast<float>();
 		args_.surface_width = surface->width();
