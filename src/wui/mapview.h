@@ -21,6 +21,7 @@
 #define WL_WUI_MAPVIEW_H
 
 #include <memory>
+#include <queue>
 
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
@@ -120,6 +121,10 @@ protected:
 private:
 	void stop_dragging();
 
+	// Returns the target view of the last entry in 'move_plans_' or (now,
+	// 'view_') if we are not animating.
+	TimestampedView animation_target_view() const;
+
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2f& panel_pixel) const;
 
@@ -129,8 +134,8 @@ private:
 	Vector2i last_mouse_pos_;
 	bool dragging_;
 
-	// If not empty(), the MapView is currently following this animation plan.
-	std::vector<TimestampedView> current_plan_;
+	// The queue of plans to execute as animations.
+	std::deque<std::deque<TimestampedView>> move_plans_;
 };
 
 #endif  // end of include guard: WL_WUI_MAPVIEW_H
