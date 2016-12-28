@@ -65,14 +65,15 @@ struct MapView : public UI::Panel {
 	 * Called when the view changed.  'jump' defines if the change should be
 	 * considered a "jump" or a smooth scrolling event.
 	 */
-	// NOCOM(#sirver): change to enum
+	// NOCOM(#sirver): change to using 'Transition'
 	boost::signals2::signal<void(bool jump)> changeview;
 
 	boost::signals2::signal<void()> fieldclicked;
 
 	enum class Transition { Smooth, Jump };
 
-	// NOCOM(#sirver): change to Transition
+	// Moves the mouse cursor so that it is directly above the given node. Does
+	// nothing if the node is not currently visible on screen.
 	void warp_mouse_to_node(Widelands::Coords);
 
 	// NOCOM(#sirver): document
@@ -91,24 +92,22 @@ struct MapView : public UI::Panel {
 
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
-	void zoom_around(float new_zoom, const Vector2f& panel_pixel);
+	void zoom_around(float new_zoom, const Vector2f& panel_pixel, const Transition& transition);
 
 	// NOCOM(#sirver): document
 	bool is_dragging() const;
 	bool is_animating() const;
 
-	// Drawing
-	void draw(RenderTarget&) override;
+	void track_sel(const Vector2f& m);
 
-	// Event handling
+	// Implementing Panel.
+	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
-
-	void track_sel(const Vector2f& m);
 
 protected:
 	InteractiveBase& intbase() const {

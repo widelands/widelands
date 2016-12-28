@@ -132,7 +132,6 @@ function message_box_objective(player, message)
 
    local view
 
-   -- NOCOM(#sirver): reset zoom should animate
    -- NOCOM(#sirver): fix mouse movements
    -- NOCOM(#sirver): ctrl+1-9 does not work properly with animation
    if message.field then

@@ -37,7 +37,6 @@
 namespace {
 
 // NOCOM(#sirver): maybe replace set_zoom through set_view.
-// NOCOM(#sirver): how to 'reverse' a plan?
 
 // Number of keyframes to generate for a plan. The more points, the smoother
 // the animation (though we also lineraly interpolate between keyframes) and
@@ -48,10 +47,10 @@ constexpr int kNumKeyFrames = 102;
 constexpr float kMaxAnimationZoom = 8.f;
 
 // The time used for paning only automated map movement.
-constexpr float kPanOnlyAnimationTimeMs = 500.f;
+constexpr float kShortAnimationMs = 500.f;
 
 // The time used for zooming and paning automated map movement.
-constexpr float kPanAndZoomAnimationTimeMs = 1500.f;
+constexpr float kLongAnimationMs = 1500.f;
 
 // If the difference between the current zoom and the target zoom in an
 // animation plan is smaller than this value, we will do a pan-only movement.
@@ -105,7 +104,7 @@ public:
 	   : start_(start), end_(end), dt_(dt) {
 	}
 
-	T value(const float time_ms) {
+	T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		return mix(pow2(t) * (3.f - 2.f * t), start_, end_);
 		// NOCOM(#sirver): Smootherstep - maybe accelerations too slowly, but definitvely smoother.
@@ -126,7 +125,7 @@ public:
 	   : inner_(start, end, dt / 2.f), dt_(dt) {
 	}
 
-	T value(const float time_ms) {
+	T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return inner_.value(t * dt_);
@@ -142,13 +141,9 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(SymmetricInterpolator);
 };
 
-
-
-// Calculates a animation plan from 'start' to 'end_viewpoint' - both at 'zoom',
-// taking 'duraction_ms'. The animation is assumed to start at the
-// time of calling the function
-// NOCOM(#sirver): do everything in floats, only convert at the end.
-std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
+// Calculates a animation plan from 'start' to 'end' - both at 'start_zoom'.
+// The animation is assumed to start at the time of calling the function
+std::vector<MapView::TimestampedView> plan_map_transition(const Widelands::Map& map,
                                                      const Vector2f& start,
                                                      const Vector2f& end,
                                                      const float start_zoom,
@@ -172,12 +167,12 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	const float delta_zoom = target_zoom - start_zoom;
 	const bool pan_and_zoom_animation = delta_zoom > kPanOnlyZoomThreshold;
 	const float duration_ms =
-	   pan_and_zoom_animation ? kPanAndZoomAnimationTimeMs : kPanOnlyAnimationTimeMs;
+	   pan_and_zoom_animation ? kLongAnimationMs : kShortAnimationMs;
 
-	SymmetricInterpolator<float, SmoothstepInterpolator<float>> zoom_t(
+	const SymmetricInterpolator<float, SmoothstepInterpolator<float>> zoom_t(
 	   start_zoom, target_zoom, static_cast<float>(duration_ms));
 
-	SmoothstepInterpolator<Vector2f> center_point_t(
+	const SmoothstepInterpolator<Vector2f> center_point_t(
 	   start_center, start_center + center_point_change, duration_ms);
 	const uint32_t start_time = SDL_GetTicks();
 	std::vector<MapView::TimestampedView> plan;
@@ -196,6 +191,30 @@ std::vector<MapView::TimestampedView> plan_animation(const Widelands::Map& map,
 	plan.push_back(
 	   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + duration_ms)),
 	                            MapView::View{end_viewpoint, start_zoom}});
+	return plan;
+}
+
+// Plan a animation zoom around 'center' starting at 'start_zoom' and ending at 'end_zoom'.
+std::vector<MapView::TimestampedView> plan_zoom_transition(const Vector2f& center,
+                                                           const float start_zoom,
+                                                           const float end_zoom,
+                                                           const int width,
+                                                           const int height) {
+	const SmoothstepInterpolator<float> zoom_t(start_zoom, end_zoom, kShortAnimationMs);
+	const uint32_t start_time = SDL_GetTicks();
+	std::vector<MapView::TimestampedView> plan;
+	const auto push = [&](const float dt, const float zoom) {
+		plan.push_back(
+		   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + dt)),
+		                            {center - Vector2f(zoom * width, zoom * height) * 0.5f, zoom}});
+	};
+
+	push(0, start_zoom);
+	for (int i = 1; i < kNumKeyFrames - 2; i++) {
+		float dt = (kShortAnimationMs / kNumKeyFrames) * i;
+		push(dt, zoom_t.value(dt));
+	}
+	push(kShortAnimationMs, end_zoom);
 	return plan;
 }
 
@@ -225,7 +244,6 @@ Vector2f MapView::to_map(const Vector2f& panel_pixel) const {
 	return MapviewPixelFunctions::panel_to_map(view_.viewpoint, view_.zoom, panel_pixel);
 }
 
-/// Moves the mouse cursor so that it is directly above the given node
 void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	// This problem is surprisingly hard: We want to figure out if the
 	// 'minimap_pixel' is currently visible on screen and if so, what pixel it
@@ -277,7 +295,7 @@ void MapView::draw(RenderTarget& dst) {
 			current_plan_.clear();
 		} else if (i > 0) {
 			// Linearly interpolate between the next and the last.
-			float t = (now - current_plan_[i - 1].t) /
+			const float t = (now - current_plan_[i - 1].t) /
 			          static_cast<float>(current_plan_[i].t - current_plan_[i - 1].t);
 			const float zoom =
 			   mix(t, current_plan_[i - 1].view.zoom, current_plan_[i].view.zoom);
@@ -285,7 +303,6 @@ void MapView::draw(RenderTarget& dst) {
 			const Vector2f viewpoint = mix(
 			   t, current_plan_[i - 1].view.viewpoint, current_plan_[i].view.viewpoint);
 			set_viewpoint(viewpoint, Transition::Jump);
-			// log("#sirver %d,%.4f,%.4f,%.4f\n", now, viewpoint.x, viewpoint.y, zoom);
 		}
 	}
 
@@ -326,21 +343,21 @@ void MapView::set_zoom(const float zoom) {
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void MapView::set_viewpoint(const Vector2f& target_view, const Transition& transition) {
+void MapView::set_viewpoint(const Vector2f& target_viewport, const Transition& transition) {
+	const Widelands::Map& map = intbase().egbase().map();
 	switch (transition) {
-		case Transition::Smooth: {
-			const Widelands::Map& map = intbase().egbase().map();
-			current_plan_ =
-				plan_animation(map, view_.viewpoint, target_view, view_.zoom, get_w(), get_h());
-			return;
-	   }
+	case Transition::Jump: {
+		view_.viewpoint = target_viewport;
+		MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
+		changeview(false /* jump */);  // NOCOM(#sirver): I truly hate this function :/
+		return;
+	}
 
-	   case Transition::Jump:
-			view_.viewpoint = target_view;
-			const Widelands::Map& map = intbase().egbase().map();
-			MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
-			changeview(false /* jump */ ); // NOCOM(#sirver): I truly hate this function :/
-			return;
+	case Transition::Smooth: {
+		current_plan_ =
+		   plan_map_transition(map, view_.viewpoint, target_viewport, view_.zoom, get_w(), get_h());
+		return;
+	}
 	}
 	NEVER_HERE();
 }
@@ -433,11 +450,13 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
 	float zoom = view_.zoom * static_cast<float>(
 	                        std::pow(1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
-	zoom_around(zoom, last_mouse_pos_.cast<float>());
+	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }
 
-void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
+void MapView::zoom_around(float new_zoom,
+                          const Vector2f& panel_pixel,
+                          const Transition& transition) {
 	// Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
 	// performance and to avoid numeric glitches with more extreme values.
 	constexpr float kMaxZoom = 4.f;
@@ -446,9 +465,23 @@ void MapView::zoom_around(float new_zoom, const Vector2f& panel_pixel) {
 	// Zoom around the current mouse position. See
 	// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 	// for a good explanation of this math.
-	const Vector2f offset = -panel_pixel * (new_zoom - view_.zoom);
-	view_.zoom = new_zoom;
-	set_viewpoint(view_.viewpoint + offset, Transition::Jump);
+	const Vector2f target_view = view_.viewpoint - panel_pixel * (new_zoom - view_.zoom);
+
+	switch (transition) {
+	case Transition::Jump:
+		set_viewpoint(target_view, Transition::Jump);
+		view_.zoom = new_zoom;
+		return;
+
+	case Transition::Smooth: {
+		const int w = get_w();
+		const int h = get_h();
+		current_plan_ =
+		   plan_zoom_transition(get_view_area(view_, w, h).center(), view_.zoom, new_zoom, w, h);
+		return;
+	}
+	}
+	NEVER_HERE();
 }
 
 bool MapView::is_dragging() const {
@@ -484,13 +517,15 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	constexpr float kPercentPerKeyPress = 0.10f;
 	switch (code.sym) {
 	case SDLK_PLUS:
-		zoom_around(view_.zoom - kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		zoom_around(view_.zoom - kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f),
+		            Transition::Smooth);
 		return true;
 	case SDLK_MINUS:
-		zoom_around(view_.zoom + kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		zoom_around(view_.zoom + kPercentPerKeyPress, Vector2f(get_w() / 2.f, get_h() / 2.f),
+		            Transition::Smooth);
 		return true;
 	case SDLK_0:
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f));
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
 		return true;
 	default:
 		return false;
