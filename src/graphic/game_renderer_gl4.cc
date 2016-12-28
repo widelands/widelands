@@ -69,8 +69,6 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	if (!surface)
 		return;
 
-	// TODO(nha): handle zoom
-
 	// Upload map changes.
 	if (!args_.terrain || &args_.terrain->egbase() != &egbase ||
 	    args_.terrain->player() != player)
@@ -90,7 +88,8 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	args_.maxfx = (tl_map.x + dst->get_rect().w * zoom + (kTriangleWidth / 2)) / kTriangleWidth;
 	args_.maxfy = (tl_map.y + dst->get_rect().h * zoom) / kTriangleHeight;
 
-	// fudge for triangle boundary effects and for height differences
+	// Fudge for triangle boundary effects, for height differences, and for
+	// large immovables.
 	args_.minfx -= 1;
 	args_.minfy -= 1;
 	args_.maxfx += 3;
