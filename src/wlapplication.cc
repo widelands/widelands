@@ -737,6 +737,7 @@ bool WLApplication::init_settings() {
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
 	s.get_int("rolling_autosave");
+	s.get_bool("disable_gl4");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
 	s.get_bool("workareapreview");

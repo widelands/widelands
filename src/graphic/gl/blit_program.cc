@@ -27,6 +27,7 @@
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/streaming_buffer.h"
 #include "graphic/gl/utils.h"
+#include "profile/profile.h"
 
 namespace {
 
@@ -154,6 +155,8 @@ BlitProgram::~BlitProgram() {
 }
 
 BlitProgramGl2::BlitProgramGl2() {
+	log("Using GL2 rendering path\n");
+
 	gl_program_.build("blit");
 
 	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
@@ -285,6 +288,8 @@ void BlitProgramGl2::draw(const std::vector<Arguments>& arguments) {
 
 BlitProgramGl4::BlitProgramGl4()
   : gl_rects_buffer_(GL_ARRAY_BUFFER) {
+	log("Using GL4 rendering path\n");
+
 	gl_program_.build_vp_fp({"blit_gl4"}, {"blit"});
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
@@ -298,7 +303,7 @@ bool BlitProgramGl4::supported() {
 	// GLSL >= 1.30
 	// ARB_separate_shader_objects
 	// ARB_shader_storage_buffer_object
-	return true;
+	return !g_options.pull_section("global").get_bool("disable_gl4", false);
 }
 
 void BlitProgramGl4::draw(const std::vector<Arguments>& arguments) {

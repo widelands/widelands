@@ -29,6 +29,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
+#include "profile/profile.h"
 #include "wui/mapviewpixelfunctions.h"
 
 using namespace Widelands;
@@ -527,7 +528,7 @@ bool TerrainProgramGl4::supported() {
 	// GL_ARB_separate_shader_objects
 	// GL_ARB_shader_storage_buffer_object
 // 	return false;
-	return true;
+	return !g_options.pull_section("global").get_bool("disable_gl4", false);
 }
 
 void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,

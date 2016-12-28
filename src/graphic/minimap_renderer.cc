@@ -260,8 +260,8 @@ public:
 	}
 
 	void draw(RenderTarget& dst,
-	          const Rectf& viewpoint,
-	          MiniMapType type,
+	          const Rectf& view_area,
+	          MiniMapType minimap_type,
 	          MiniMapLayer layers) override {
 		Surface* surface = dst.get_surface();
 		if (!surface)
@@ -271,6 +271,12 @@ public:
 
 		args_.terrain->update_minimap();
 
+		// Center the view on the middle of the 'view_area'.
+		const bool zoom = layers & MiniMapLayer::Zoom2;
+		Vector2f top_left =
+			minimap_pixel_to_mappixel(egbase().map(), Vector2i(0, 0), view_area, minimap_type, zoom);
+		const Coords node =
+			MapviewPixelFunctions::calc_node_and_triangle(egbase().map(), top_left.x, top_left.y).node;
 #if 0
 		// TODO(nha): frame
 		Point frame_topleft, frame_bottomright;
@@ -284,8 +290,8 @@ public:
 		args_.minfx = args_.maxfx = args_.minfy = args_.maxfy = 0;
 #endif
 
-		args_.minimap_tl_fx = viewpoint.x;
-		args_.minimap_tl_fy = viewpoint.y;
+		args_.minimap_tl_fx = node.x;
+		args_.minimap_tl_fy = node.y;
 		args_.minimap_layers = layers;
 
 		const Recti& bounding_rect = dst.get_rect();
