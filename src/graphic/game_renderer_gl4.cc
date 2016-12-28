@@ -93,7 +93,7 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	// fudge for triangle boundary effects and for height differences
 	args_.minfx -= 1;
 	args_.minfy -= 1;
-	args_.maxfx += 1;
+	args_.maxfx += 3;
 	args_.maxfy += 10;
 
 	const Recti& bounding_rect = dst->get_rect();
