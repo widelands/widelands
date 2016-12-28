@@ -46,12 +46,17 @@ struct MapView : public UI::Panel {
 		float zoom;
 	};
 
+	// Time in milliseconds since the game was launched. Animations always
+	// happen in real-time, not in gametime. Therefore they are also not
+	// affected by pause.
 	struct TimestampedView {
-		// Time in milliseconds since the game was launched. Animations always
-		// happen in real-time, not in gametime. Therefore they are also not
-		// affected by pause.
 		uint32_t t;
 		View view;
+	};
+
+	struct TimestampedMouse {
+		uint32_t t;
+		Vector2f pixel;
 	};
 
 	MapView(UI::Panel* const parent,
@@ -75,7 +80,8 @@ struct MapView : public UI::Panel {
 
 	// Moves the mouse cursor so that it is directly above the given node. Does
 	// nothing if the node is not currently visible on screen.
-	void warp_mouse_to_node(Widelands::Coords);
+	void mouse_to_field(const Widelands::Coords& coords, const Transition& transition);
+	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// NOCOM(#sirver): document
 	void set_viewpoint(const Vector2f& vp, const Transition& transition);
@@ -98,8 +104,7 @@ struct MapView : public UI::Panel {
 	// NOCOM(#sirver): document
 	bool is_dragging() const;
 	bool is_animating() const;
-
-	void track_sel(const Vector2f& m);
+	bool is_visible(const Widelands::Coords& coords);
 
 	// Implementing Panel.
 	void draw(RenderTarget&) override;
@@ -121,12 +126,19 @@ protected:
 private:
 	void stop_dragging();
 
-	// Returns the target view of the last entry in 'move_plans_' or (now,
+	// Returns the target view of the last entry in 'view_plans_' or (now,
 	// 'view_') if we are not animating.
 	TimestampedView animation_target_view() const;
 
+	// Returns the target mouse position 'mouse_plans_' or (now,
+	// current mouse) if we are not animating.
+	TimestampedMouse animation_target_mouse() const;
+
+	// Move the sel to the given mouse position. Does not honour sel freeze.
+	void track_sel(const Vector2i& m);
+
 	Vector2f to_panel(const Vector2f& map_pixel) const;
-	Vector2f to_map(const Vector2f& panel_pixel) const;
+	Vector2f to_map(const Vector2i& panel_pixel) const;
 
 	std::unique_ptr<GameRenderer> renderer_;
 	InteractiveBase& intbase_;
@@ -135,7 +147,8 @@ private:
 	bool dragging_;
 
 	// The queue of plans to execute as animations.
-	std::deque<std::deque<TimestampedView>> move_plans_;
+	std::deque<std::deque<TimestampedView>> view_plans_;
+	std::deque<std::deque<TimestampedMouse>> mouse_plans_;
 };
 
 #endif  // end of include guard: WL_WUI_MAPVIEW_H

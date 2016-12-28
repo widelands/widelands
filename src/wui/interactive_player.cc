@@ -139,7 +139,7 @@ void InteractivePlayer::think() {
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
-					warp_mouse_to_node(flag_to_connect_);
+					mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));

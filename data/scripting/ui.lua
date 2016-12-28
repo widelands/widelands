@@ -8,58 +8,15 @@ include "scripting/coroutine.lua"
 -- view or clicking on fields and UI elements.
 --
 
-function _calc_move(start, dest, g_T)
-   local T = g_T or 1000
-
-   local delta = { x = dest.x - start.x, y = dest.y - start.y }
-
-   -- Accelerate for 25% of time, then move constant, decelerate 25% of time
-   local t0 = 0.25*T
-   local t1 = 0.75*T
-   local a = { x = delta.x/(t0*t1), y = delta.y/(t0*t1) }
-
-   local function s(t)
-      if t < t0 then
-         return {
-            x = start.x + 0.5*a.x*t*t,
-            y = start.y + 0.5*a.y*t*t
-         }
-      elseif t < t1 then
-         return {
-            x = start.x + 0.5*a.x*t0*t0 + (a.x*t0)*(t-t0),
-            y = start.y + 0.5*a.y*t0*t0 + (a.y*t0)*(t-t0)
-         }
-      else
-         return {
-            x = start.x + 0.5*a.x*t0*t0 +
-               (a.x*t0)*(t-t0) - 0.5*a.x*(t-t1)*(t-t1),
-            y = start.y + 0.5*a.y*t0*t0 +
-               (a.y*t0)*(t-t0) - 0.5*a.y*(t-t1)*(t-t1)
-         }
-      end
+-- Wait until the mapview is done animating.
+function _await_animation()
+   local mv = wl.ui.MapView()
+   while mv.is_animating do
+      sleep(41)
    end
-
-   local t = 0
-   local dt = 20
-   local rv = {}
-   while t < T do
-      local cpos = s(t)
-      rv[#rv+1] = {
-         x = cpos.x,
-         y = cpos.y,
-      }
-      t = t + dt
-   end
-
-   -- Correct some numerical instabilities
-   rv[#rv+1] = {
-      x = dest.x,
-      y = dest.y
-   }
-
-   return rv
 end
 
+-- NOCOM(#sirver): remove smoothly in here.
 -- NOCOM(#sirver): replace everything in this file through engine functions.
 -- NOCOM(#sirver): fix documentation
 -- RST
@@ -78,12 +35,11 @@ end
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
 -- NOCOM(#sirver): fix documentation
+-- NOCOM(#sirver): rename to scroll_to_viewpoint
 function scroll_smoothly_to_view(view)
-   local mv = wl.ui.MapView()
-   mv.view = view;
-   while mv.is_animating do
-      sleep(41)
-   end
+   _await_animation()
+   wl.ui.MapView().view = view;
+   _await_animation()
 end
 
 -- RST
@@ -97,70 +53,33 @@ end
 --
 --    :returns: the prior view of MapView.
 function scroll_smoothly_to(f)
+   _await_animation()
    local mv = wl.ui.MapView()
    local view = mv.view;
    mv:center_on(f)
-   while mv.is_animating do
-      sleep(41)
-   end
+   _await_animation()
    return view
 end
 
 -- RST
--- .. function:: timed_mouse(pts[, dt = 20])
---
---    Mouses the cursor in the given trajectory sleeping dt in between moves.
---
---    :arg pts: an array of points, that is tables with ``x`` and ``y`` members
---       that define the intermediate points the mouse should pass through.
---    :type pts: :class:`array`
---    :arg dt: Time in ms to sleep between the move points.
---    :type dt: :class:`integer`
-function timed_mouse(points, gdt)
-   local dt = gdt or 20
-   local mv = wl.ui.MapView()
-
-   local old_speed = wl.Game().desired_speed
-   -- Set the speed to normal speed (1.0x). Otherwise, the mouse movement would also
-   -- be faster, which is probably not intended.
-   wl.Game().desired_speed = 1000
-
-   for idx,p in ipairs(points) do
-      mv.mouse_position_x = p.x
-      mv.mouse_position_y = p.y
-
-      sleep(dt)
-   end
-
-   wl.Game().desired_speed = old_speed
-end
-
--- RST
--- .. function:: mouse_smoothly_to_pos(x, y[, T = 1000])
+-- .. function:: mouse_to_pixel(x, y[, T = 1000])
 --
 --    Make a nice moving transition for the mouse to the given pixels relative
 --    to the top left corner of the screen.
 --
---    :arg x: x position to center the view on
+--    :arg x: x position to move the mouse to
 --    :type x: :class:`integer`
---    :arg y: y position to center the view on
+--    :arg y: y position to move the mouse to
 --    :type y: :class:`integer`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
 --    :returns: an :class:`array` with the intermediate points that were targeted
-function mouse_smoothly_to_pos(x, y, g_T)
-   local start = {
-      x = wl.ui.MapView().mouse_position_x,
-      y = wl.ui.MapView().mouse_position_y
-   }
-
-   local dest = { x = x, y = y }
-   pts = _calc_move(start, dest, g_T)
-
-   timed_mouse(pts)
-
-   return pts
+-- NOCOM(#sirver): remove g_T
+function mouse_to_pixel(x, y, g_T)
+   _await_animation()
+   wl.ui.MapView():mouse_to_pixel(x, y)
+   _await_animation()
 end
 
 -- RST
@@ -177,27 +96,19 @@ end
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
 -- NOCOM(#sirver): this is the only use of Field.viewpoint_{x,y}
+-- NOCOM(#sirver): remove timing?
+-- NOCOM(#sirver): all functions in here should _await_animation at the beginning too.
 function mouse_smoothly_to(f, g_T)
+   _await_animation()
    local mv = wl.ui.MapView()
-   local view = mv.view
-   local dx, dy = f.viewpoint_x - mv.view.x,
-      f.viewpoint_y - mv.view.y
-
-   -- FixMe: we need the width and height of triangles here to fix
-   -- for situations where we are close to the borders of the map. Because
-   -- these functions are not used very often, I decided to enter them here
-   -- directly instead of wrapping this up properly. I hope this will not
-   -- lead to problems in the future.
-   local map = wl.Game().map
-   if dx < 0 then dx = dx + map.width * 64 end
-   if dy < 0 then dy = dy + map.height * 32 end
-
-   if dx > mv.width or dy > mv.height then
+   if not mv:is_visible(f) then
       scroll_smoothly_to(f)
       return mouse_smoothly_to(f, g_T)
-   else
-      return mouse_smoothly_to_pos(dx, dy, g_T)
    end
+
+   -- NOCOM(#sirver): rename center_on to center_on_field? find some symmetry in here.
+   mv:mouse_to_field(f);
+   _await_animation()
 end
 
 -- RST
@@ -213,9 +124,9 @@ end
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
 function mouse_smoothly_to_panel(panel, g_T)
+   _await_animation()
    local x, y = wl.ui.MapView():get_descendant_position(panel)
-
-   return mouse_smoothly_to_pos(
+   return mouse_to_pixel(
       x + panel.width / 2,
       y + panel.height / 2,
       g_T
@@ -295,6 +206,7 @@ end
 --    :returns: :const:`nil`
 --
 function wait_for_roadbuilding()
+   _await_animation()
    while (wl.ui.MapView().is_building_road) do sleep(2000) end
 end
 
@@ -308,6 +220,7 @@ end
 --    :returns: an :class:`array` with the intermediate points that
 --       were targeted
 function wait_for_roadbuilding_and_scroll(f)
+   _await_animation()
    wait_for_roadbuilding()
    return scroll_smoothly_to(f)
 end

@@ -217,6 +217,24 @@ std::deque<MapView::TimestampedView> plan_zoom_transition(const uint32_t start_t
 	return plan;
 }
 
+// Plan a mouse movement 'start' and ending at 'target'.
+std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::TimestampedMouse& start,
+                                                            const Vector2i& target) {
+	const SmoothstepInterpolator<Vector2f> mouse_t(
+	   start.pixel, target.cast<float>(), kShortAnimationMs);
+	std::deque<MapView::TimestampedMouse> plan;
+
+	plan.push_back(start);
+	for (int i = 1; i < kNumKeyFrames - 2; i++) {
+		float dt = (kShortAnimationMs / kNumKeyFrames) * i;
+		plan.push_back(MapView::TimestampedMouse{
+		   static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt)});
+	}
+	plan.push_back(MapView::TimestampedMouse{
+	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>()});
+	return plan;
+}
+
 }  // namespace
 
 MapView::MapView(
@@ -239,59 +257,76 @@ Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
 	return MapviewPixelFunctions::map_to_panel(view_.viewpoint, view_.zoom, map_pixel);
 }
 
-Vector2f MapView::to_map(const Vector2f& panel_pixel) const {
-	return MapviewPixelFunctions::panel_to_map(view_.viewpoint, view_.zoom, panel_pixel);
+Vector2f MapView::to_map(const Vector2i& panel_pixel) const {
+	return MapviewPixelFunctions::panel_to_map(
+	   view_.viewpoint, view_.zoom, panel_pixel.cast<float>());
 }
 
-void MapView::warp_mouse_to_node(Widelands::Coords const c) {
-	// This problem is surprisingly hard: We want to figure out if the
-	// 'minimap_pixel' is currently visible on screen and if so, what pixel it
-	// has. Since Wideland's map is a torus, the current 'view_area' could span
-	// the origin. Without loss of generality we only discuss x - y follows
-	// accordingly.
-	// Depending on the interpretation, the area spanning the origin means:
-	// 1) either view_area.x + view_area.w < view_area.x - which would be surprising to
-	//    the rest of Widelands.
-	// 2) map_pixel.x > get_map_end_screen_x(map).
-	//
-	// We are dealing with the problem in two steps: first we figure out if
-	// 'map_pixel' is visible on screen. To do this, we calculate the shortest
-	// distance to 'view_area.center()' on a torus. If the distance is less than
-	// 'view_area.w / 2', the point is visible.
-	// If that is the case, we move the point by adding or substracting
-	// 'get_map_end_screen_x()' such that the point is contained inside of
-	// 'view_area'. If we now convert to panel pixels, we are guaranteed that
-	// the pixel we get back is inside the panel.
-
+bool MapView::is_visible(const Widelands::Coords& c) {
+	// We figure out if 'map_pixel' is visible on screen. To do this, we
+	// calculate the shortest distance to 'view_area.center()' on a torus. If
+	// the distance is less than 'view_area.w / 2', the point is visible.
 	const Widelands::Map& map = intbase().egbase().map();
 	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
 	const Rectf area = view_area();
-
 	const Vector2f view_center = area.center();
 	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, view_center, map_pixel);
 
 	// Check if the point is visible on screen.
-	if (std::abs(dist.x) > area.w / 2.f || std::abs(dist.y) > area.h / 2.f) {
+	return std::abs(dist.x) <= (area.w / 2.f) && std::abs(dist.y) <= (area.h / 2.f);
+}
+
+void MapView::mouse_to_field(const Widelands::Coords& c, const Transition& transition) {
+	if (!is_visible(c)) {
 		return;
 	}
+
+	// We want to figure out which 'panel_pixel' the 'map_pixel'. Since
+	// Wideland's map is a torus, the current 'view_area' could span the origin.
+	// Without loss of generality we only discuss x - y follows accordingly.
+	// Depending on the interpretation, the area spanning the origin means:
+	// 1) either view_area.x + view_area.w < view_area.x - which would be surprising to
+	//    the rest of Widelands.
+	// 2) map_pixel.x > get_map_end_screen_x(map).
+	// We move the point by adding or substracting 'get_map_end_screen_x()' such
+	// that the point is contained inside of 'view_area'. If we now convert to
+	// panel pixels, we are guaranteed that the pixel we get back is inside the
+	// panel.
+	const Widelands::Map& map = intbase().egbase().map();
+	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
 	const Vector2f in_panel =
-	   to_panel(move_inside(map_pixel, area, MapviewPixelFunctions::get_map_end_screen_x(map),
+	   to_panel(move_inside(map_pixel, view_area(), MapviewPixelFunctions::get_map_end_screen_x(map),
 	                        MapviewPixelFunctions::get_map_end_screen_y(map)));
-	set_mouse_pos(round(in_panel));
-	track_sel(in_panel);
+	mouse_to_pixel(round(in_panel), transition);
+}
+
+void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition) {
+	switch (transition) {
+	case Transition::Jump:
+		track_sel(pixel);
+		set_mouse_pos(pixel);
+		return;
+
+	case Transition::Smooth: {
+		const TimestampedMouse current = animation_target_mouse();
+		mouse_plans_.push_back(plan_mouse_transition(current, pixel));
+		return;
+	}
+	}
+	NEVER_HERE();
 }
 
 void MapView::draw(RenderTarget& dst) {
 	Widelands::EditorGameBase& egbase = intbase().egbase();
 
 	uint32_t now = SDL_GetTicks();
-	while (!move_plans_.empty()) {
-		auto& plan = move_plans_.front();
+	while (!view_plans_.empty()) {
+		auto& plan = view_plans_.front();
 		while (plan.size() > 1 && plan[1].t < now) {
 			plan.pop_front();
 		}
 		if (plan.size() == 1) {
-			move_plans_.pop_front();
+			view_plans_.pop_front();
 			continue;
 		}
 
@@ -301,6 +336,22 @@ void MapView::draw(RenderTarget& dst) {
 		set_zoom(zoom);
 		const Vector2f viewpoint = mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint);
 		set_viewpoint(viewpoint, Transition::Jump);
+		break;
+	}
+
+	while (!mouse_plans_.empty()) {
+		auto& plan = mouse_plans_.front();
+		while (plan.size() > 1 && plan[1].t < now) {
+			plan.pop_front();
+		}
+		if (plan.size() == 1) {
+			mouse_plans_.pop_front();
+			continue;
+		}
+
+		// Linearly interpolate between the next and the last.
+		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		mouse_to_pixel(round(mix(t, plan[0].pixel, plan[1].pixel)), Transition::Jump);
 		break;
 	}
 
@@ -353,7 +404,7 @@ void MapView::set_viewpoint(const Vector2f& target_viewport, const Transition& t
 
 	case Transition::Smooth: {
 		const TimestampedView current = animation_target_view();
-		move_plans_.push_back(plan_map_transition(current.t, map, current.view.viewpoint,
+		view_plans_.push_back(plan_map_transition(current.t, map, current.view.viewpoint,
 		                                          target_viewport, current.view.zoom, get_w(),
 		                                          get_h()));
 		return;
@@ -410,8 +461,7 @@ void MapView::stop_dragging() {
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		stop_dragging();
-		track_sel(Vector2f(x, y));
-
+		track_sel(Vector2i(x, y));
 		fieldclicked();
 	} else if (btn == SDL_BUTTON_RIGHT) {
 		dragging_ = true;
@@ -441,7 +491,7 @@ bool MapView::handle_mousemove(
 	}
 
 	if (!intbase().get_sel_freeze())
-		track_sel(Vector2f(x, y));
+		track_sel(Vector2i(x, y));
 	return true;
 }
 
@@ -450,12 +500,13 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 		return false;
 	}
 
-	if (!is_animating()) {
-		constexpr float kPercentPerMouseWheelTick = 0.02f;
-		float zoom = view_.zoom * static_cast<float>(std::pow(
-		                             1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
-		zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
+	if (is_animating()) {
+		return true;
 	}
+	constexpr float kPercentPerMouseWheelTick = 0.02f;
+	float zoom = view_.zoom * static_cast<float>(std::pow(
+		                          1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }
 
@@ -482,7 +533,7 @@ void MapView::zoom_around(float new_zoom,
 	case Transition::Smooth: {
 		const int w = get_w();
 		const int h = get_h();
-		move_plans_.push_back(plan_zoom_transition(
+		view_plans_.push_back(plan_zoom_transition(
 		   current.t, get_view_area(current.view, w, h).center(), current.view.zoom, new_zoom, w, h));
 		return;
 	}
@@ -495,18 +546,10 @@ bool MapView::is_dragging() const {
 }
 
 bool MapView::is_animating() const {
-	return !move_plans_.empty();
+	return !view_plans_.empty() || !mouse_plans_.empty();
 }
 
-/*
-===============
-MapView::track_sel(int32_t mx, int32_t my)
-
-Move the sel to the given mouse position.
-Does not honour sel freeze.
-===============
-*/
-void MapView::track_sel(const Vector2f& p) {
+void MapView::track_sel(const Vector2i& p) {
 	Vector2f p_in_map = to_map(p);
 	intbase_.set_sel_pos(MapviewPixelFunctions::calc_node_and_triangle(
 	   intbase().egbase().map(), p_in_map.x, p_in_map.y));
@@ -540,9 +583,16 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 }
 
 MapView::TimestampedView MapView::animation_target_view() const {
-	if (!is_animating()) {
+	if (view_plans_.empty()) {
 		return TimestampedView{SDL_GetTicks(), view_};
 	}
-	return move_plans_.back().back();
+	return view_plans_.back().back();
+}
+
+MapView::TimestampedMouse MapView::animation_target_mouse() const {
+	if (mouse_plans_.empty()) {
+		return TimestampedMouse{SDL_GetTicks(), get_mouse_position().cast<float>()};
+	}
+	return mouse_plans_.back().back();
 }
 

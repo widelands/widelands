@@ -73,11 +73,9 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, buttons),          PROP_RO(LuaPanel, tabs),
-   PROP_RO(LuaPanel, windows),          PROP_RW(LuaPanel, mouse_position_x),
-   PROP_RW(LuaPanel, mouse_position_y), PROP_RW(LuaPanel, position_x),
-   PROP_RW(LuaPanel, position_y),       PROP_RW(LuaPanel, width),
-   PROP_RW(LuaPanel, height),           {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, buttons),    PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),
+   PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),
+   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
@@ -177,36 +175,6 @@ int LuaPanel::get_windows(lua_State* L) {
 	lua_newtable(L);
 	put_all_visible_windows_into_table(L, panel_);
 
-	return 1;
-}
-
-/* RST
-   .. attribute:: mouse_position_x, mouse_position_y
-
-      (RW) The current mouse position relative to this Panels position
-*/
-int LuaPanel::get_mouse_position_x(lua_State* L) {
-	assert(panel_);
-	lua_pushint32(L, panel_->get_mouse_position().x);
-	return 1;
-}
-int LuaPanel::set_mouse_position_x(lua_State* L) {
-	assert(panel_);
-	Vector2i p = panel_->get_mouse_position();
-	p.x = floor(luaL_checkdouble(L, -1));
-	panel_->set_mouse_pos(p);
-	return 1;
-}
-int LuaPanel::get_mouse_position_y(lua_State* L) {
-	assert(panel_);
-	lua_pushint32(L, panel_->get_mouse_position().y);
-	return 1;
-}
-int LuaPanel::set_mouse_position_y(lua_State* L) {
-	assert(panel_);
-	Vector2i p = panel_->get_mouse_position();
-	p.y = floor(luaL_checkdouble(L, -1));
-	panel_->set_mouse_pos(p);
 	return 1;
 }
 
@@ -487,6 +455,9 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, abort_road_building),
    METHOD(LuaMapView, close),
    METHOD(LuaMapView, center_on),
+   METHOD(LuaMapView, is_visible),
+   METHOD(LuaMapView, mouse_to_field),
+   METHOD(LuaMapView, mouse_to_pixel),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
@@ -561,6 +532,27 @@ int LuaMapView::set_view(lua_State* L) {
 // NOCOM(#sirver): document
 int LuaMapView::center_on(lua_State* L) {
 	get()->center_on_coords(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::is_visible(lua_State* L) {
+	lua_pushboolean(L, get()->is_visible((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	return 1;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::mouse_to_pixel(lua_State* L) {
+	int x = luaL_checkint32(L, 2);
+	int y = luaL_checkint32(L, 3);
+	get()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
+	return 0;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::mouse_to_field(lua_State* L) {
+	get()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
@@ -642,7 +634,8 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	get()->warp_mouse_to_node((*get_user_class<LuaMaps::LuaField>(L, 2))->coords());
+	get()->mouse_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Jump);
 	get()->fieldclicked();
 	return 0;
 }
@@ -666,7 +659,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	Widelands::Coords starting_field =
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
 
-	me->warp_mouse_to_node(starting_field);
+	me->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number());
 
 	return 0;

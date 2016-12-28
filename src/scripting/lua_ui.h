@@ -70,10 +70,6 @@ public:
 	int get_buttons(lua_State* L);
 	int get_tabs(lua_State* L);
 	int get_windows(lua_State* L);
-	int get_mouse_position_x(lua_State* L);
-	int get_mouse_position_y(lua_State* L);
-	int set_mouse_position_x(lua_State* L);
-	int set_mouse_position_y(lua_State* L);
 	int get_width(lua_State* L);
 	int set_width(lua_State* L);
 	int get_height(lua_State* L);
@@ -226,6 +222,9 @@ public:
 	int abort_road_building(lua_State* L);
 	int start_road_building(lua_State* L);
 	int center_on(lua_State* L);
+	int is_visible(lua_State* L);
+	int mouse_to_field(lua_State* L);
+	int mouse_to_pixel(lua_State* L);
 
 	/*
 	 * C Methods
