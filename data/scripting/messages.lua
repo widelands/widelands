@@ -140,7 +140,7 @@ function message_box_objective(player, message)
       if not message.show_instantly then
          wait_for_roadbuilding()
       end
-      view = scroll_smoothly_to(message.field);
+      view = scroll_to_field(message.field);
    end
 
    if message.position then
@@ -167,7 +167,7 @@ function message_box_objective(player, message)
    end
 
    if (message.field and message.scroll_back) then
-      scroll_smoothly_to_view(view);
+      scroll_to_viewpoint(view);
    end
 
    if message.obj_name then

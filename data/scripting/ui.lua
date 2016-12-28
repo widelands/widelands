@@ -16,11 +16,9 @@ function _await_animation()
    end
 end
 
--- NOCOM(#sirver): remove smoothly in here.
--- NOCOM(#sirver): replace everything in this file through engine functions.
--- NOCOM(#sirver): fix documentation
+-- NOCOM(#sirver): fix documentation everywhere in this file.
 -- RST
--- .. function:: scroll_smoothly_to_view(view)
+-- .. function:: scroll_to_viewpoint(view)
 --
 --    Make a nice moving transition in a given time to the viewpoint x, y.
 --    The function will return as soon as the transition is completed.
@@ -32,18 +30,14 @@ end
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
---    :returns: an :class:`array` with the intermediate points that were
---       targeted
--- NOCOM(#sirver): fix documentation
--- NOCOM(#sirver): rename to scroll_to_viewpoint
-function scroll_smoothly_to_view(view)
+function scroll_to_viewpoint(view)
    _await_animation()
    wl.ui.MapView().view = view;
    _await_animation()
 end
 
 -- RST
--- .. function:: scroll_smoothly_to(f)
+-- .. function:: scroll_to_field(f)
 --
 --    Make a nice moving transition to the center of the Field(x,y).
 --    The function will return as soon as the transition is completed.
@@ -52,7 +46,7 @@ end
 --    :type r: :class:`wl.map.Field`
 --
 --    :returns: the prior view of MapView.
-function scroll_smoothly_to(f)
+function scroll_to_field(f)
    _await_animation()
    local mv = wl.ui.MapView()
    local view = mv.view;
@@ -62,7 +56,7 @@ function scroll_smoothly_to(f)
 end
 
 -- RST
--- .. function:: mouse_to_pixel(x, y[, T = 1000])
+-- .. function:: mouse_to_pixel(x, y)
 --
 --    Make a nice moving transition for the mouse to the given pixels relative
 --    to the top left corner of the screen.
@@ -73,17 +67,14 @@ end
 --    :type y: :class:`integer`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
---
---    :returns: an :class:`array` with the intermediate points that were targeted
--- NOCOM(#sirver): remove g_T
-function mouse_to_pixel(x, y, g_T)
+function mouse_to_pixel(x, y)
    _await_animation()
    wl.ui.MapView():mouse_to_pixel(x, y)
    _await_animation()
 end
 
 -- RST
--- .. function:: mouse_smoothly_to(f[, T = 1000])
+-- .. function:: mouse_to_field(f)
 --
 --    Move the mouse on the given field. Make sure that the field is inside
 --    the current view area.
@@ -92,18 +83,13 @@ end
 --    :type f: :class:`wl.map.Field`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
---
---    :returns: an :class:`array` with the intermediate points that were
---       targeted
--- NOCOM(#sirver): this is the only use of Field.viewpoint_{x,y}
--- NOCOM(#sirver): remove timing?
--- NOCOM(#sirver): all functions in here should _await_animation at the beginning too.
-function mouse_smoothly_to(f, g_T)
+function mouse_to_field(f)
    _await_animation()
    local mv = wl.ui.MapView()
    if not mv:is_visible(f) then
-      scroll_smoothly_to(f)
-      return mouse_smoothly_to(f, g_T)
+      scroll_to_field(f)
+      mouse_to_field(f)
+      return
    end
 
    -- NOCOM(#sirver): rename center_on to center_on_field? find some symmetry in here.
@@ -112,7 +98,7 @@ function mouse_smoothly_to(f, g_T)
 end
 
 -- RST
--- .. function:: mouse_smoothly_to_panel(panel[, T = 1000])
+-- .. function:: mouse_to_panel(panel)
 --
 --    Move the mouse to the center of the given ui element.
 --
@@ -120,21 +106,14 @@ end
 --    :type panel: :class:`wl.ui.Panel`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
---
---    :returns: an :class:`array` with the intermediate points that were
---       targeted
-function mouse_smoothly_to_panel(panel, g_T)
+function mouse_to_panel(panel)
    _await_animation()
    local x, y = wl.ui.MapView():get_descendant_position(panel)
-   return mouse_to_pixel(
-      x + panel.width / 2,
-      y + panel.height / 2,
-      g_T
-   )
+   mouse_to_pixel(x + panel.width / 2, y + panel.height / 2)
 end
 
 -- RST
--- .. function:: click_building(p, building_name[, T = 1000])
+-- .. function:: click_building(p, building_name)
 --
 --    Click on the first building of the given name for the given player.
 --
@@ -147,9 +126,9 @@ end
 --
 --    :returns: :const:`true` if a building was clicked
 --
-function click_building(p, building_name, g_T)
+function click_building(p, building_name)
    local building = p:get_buildings(building_name)[1]
-   mouse_smoothly_to(building.fields[1], g_T)
+   mouse_to_field(building.fields[1])
    wl.ui.MapView():click(building.fields[1])
    return true
 end
@@ -189,8 +168,6 @@ end
 --
 --    Closes all currently open windows.
 --
---    :returns: :const:`nil`
---
 function close_windows()
    for k,v in pairs(wl.ui.MapView().windows) do
       v:close()
@@ -203,8 +180,6 @@ end
 --
 --    Sleeps while player is in roadbuilding mode.
 --
---    :returns: :const:`nil`
---
 function wait_for_roadbuilding()
    _await_animation()
    while (wl.ui.MapView().is_building_road) do sleep(2000) end
@@ -215,12 +190,11 @@ end
 -- .. function:: wait_for_roadbuilding_and_scroll(f)
 --
 --    Sleeps while player is in roadbuilding mode, then calls
---    scroll_smoothly_to(f).
+--    scroll_to_field(f).
 --
---    :returns: an :class:`array` with the intermediate points that
---       were targeted
+--    :returns: the prior view of MapView.
 function wait_for_roadbuilding_and_scroll(f)
    _await_animation()
    wait_for_roadbuilding()
-   return scroll_smoothly_to(f)
+   return scroll_to_field(f)
 end

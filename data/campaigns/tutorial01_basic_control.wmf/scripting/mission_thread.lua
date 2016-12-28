@@ -34,8 +34,8 @@ function build_lumberjack()
    local blocker = UserInputDisabler:new()
    close_windows()
 
-   scroll_smoothly_to(first_lumberjack_field)
-   mouse_smoothly_to(first_lumberjack_field)
+   scroll_to_field(first_lumberjack_field)
+   mouse_to_field(first_lumberjack_field)
    sleep(500)
    message_box_objective(plr, lumberjack_message_02)
    sleep(500)
@@ -77,8 +77,8 @@ function build_lumberjack()
       close_windows()
 
       local f = map:get_field(14,11)
-      scroll_smoothly_to(f)
-      mouse_smoothly_to(f)
+      scroll_to_field(f)
+      mouse_to_field(f)
 
       blocker:lift_blocks()
 

@@ -178,7 +178,7 @@ function expand_and_build_marblemine()
    p1:allow_buildings{"empire_blockhouse", "empire_sentry"}
 
    -- Go back to where we were
-   scroll_smoothly_to_view(prior_view)
+   scroll_to_viewpoint(prior_view)
 
    -- sleep while not owning 26, 21
    while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
@@ -198,7 +198,7 @@ function expand_and_build_marblemine()
       do sleep(2133) end set_objective_done(o, 0) end)
 
    -- Go back to where we were
-   scroll_smoothly_to_view(prior_view)
+   scroll_to_viewpoint(prior_view)
 end
 
 function barbarians_thread()

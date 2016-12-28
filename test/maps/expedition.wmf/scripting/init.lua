@@ -71,7 +71,7 @@ function click_on_ship(which_ship)
          local field = map:get_field(x,y)
          for idx, bob in ipairs(field.bobs) do
             if bob == which_ship then
-               mouse_smoothly_to(field, 1)
+               mouse_to_field(field, 1)
                wl.ui.MapView():click(field)
                return
             end

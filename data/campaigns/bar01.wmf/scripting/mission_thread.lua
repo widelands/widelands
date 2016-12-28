@@ -53,13 +53,13 @@ function introduction_thread()
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
    plr:reveal_fields(rocks:region(6))
-   local prior_view = scroll_smoothly_to(rocks)
+   local prior_view = scroll_to_field(rocks)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)
 
    -- Move back
-   scroll_smoothly_to_view(prior_view)
+   scroll_to_viewpoint(prior_view)
 
    sleep(50000)
    message_box_objective(plr, msg_story_1)
