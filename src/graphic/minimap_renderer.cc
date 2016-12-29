@@ -252,22 +252,41 @@ public:
 
 		const Recti& bounding_rect = dst.get_rect();
 
-		// Center the view on the middle of the 'view_area'.
+		// Determine the field shown at the top-left of the minimap.
 		const bool zoom = layers & MiniMapLayer::Zoom2;
 		Vector2f top_left =
 			minimap_pixel_to_mappixel(egbase().map(), Vector2i(0, 0), view_area, minimap_type, zoom);
 		const Coords node =
 			MapviewPixelFunctions::calc_node_and_triangle(egbase().map(), top_left.x, top_left.y).node;
 
-		// Calculate frame coordinates
-		args_.minfx = view_area.x / kTriangleWidth;
-		args_.minfy = view_area.y / kTriangleHeight;
-		args_.maxfx = (view_area.x + view_area.w) / kTriangleWidth;
-		args_.maxfy = (view_area.y + view_area.h) / kTriangleHeight;
-
 		args_.minimap_tl_fx = node.x;
 		args_.minimap_tl_fy = node.y;
 		args_.minimap_layers = layers;
+
+		// Calculate frame coordinates
+		int frame_width = view_area.w / kTriangleWidth;
+		int frame_height = view_area.h / kTriangleHeight;
+
+		Vector2i center_field;
+		switch (minimap_type) {
+		case MiniMapType::kStaticViewWindow:
+			center_field.x = node.x + egbase().map().get_width() / 2;
+			center_field.y = node.y + egbase().map().get_height() / 2;
+			break;
+
+		case MiniMapType::kStaticMap: {
+			Vector2f origin = view_area.center();
+			MapviewPixelFunctions::normalize_pix(egbase().map(), &origin);
+			center_field.x = origin.x / kTriangleWidth;
+			center_field.y = origin.y / kTriangleHeight;
+			break;
+		}
+		}
+
+		args_.minfx = center_field.x - frame_width / 2;
+		args_.minfy = center_field.y - frame_height / 2;
+		args_.maxfx = center_field.x + frame_width / 2;
+		args_.maxfy = center_field.y + frame_height / 2;
 
 		args_.surface_offset = (bounding_rect.origin() + dst.get_offset()).cast<float>();
 		args_.surface_width = surface->width();

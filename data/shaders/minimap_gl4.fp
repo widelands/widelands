@@ -11,7 +11,6 @@ uniform uint u_layer_details;
 
 uniform vec2 u_frame_topleft;
 uniform vec2 u_frame_bottomright;
-uniform vec2 u_frame_width;
 
 // Textures (map data).
 uniform usampler2D u_terrain_base;
@@ -42,22 +41,24 @@ void main() {
 
 	// Determine whether we're on the frame
 	bool on_frame = false;
+	float dfdx = abs(dFdx(var_field.x)) * 0.5;
+	float dfdy = abs(dFdy(var_field.y)) * 0.5;
 	float low, high, pix, width;
 
-	if (wrap_close(var_field.x, u_frame_topleft.x, u_frame_width.x) ||
-	    wrap_close(var_field.x, u_frame_bottomright.x, u_frame_width.x)) {
+	if (wrap_close(var_field.x, u_frame_topleft.x, dfdx) ||
+	    wrap_close(var_field.x, u_frame_bottomright.x, dfdx)) {
 		on_frame = true;
 		low = u_frame_topleft.y;
 		high = u_frame_bottomright.y;
 		pix = var_field.y;
-		width = u_frame_width.y;
-	} else if (wrap_close(var_field.y, u_frame_topleft.y, u_frame_width.y) ||
-	           wrap_close(var_field.y, u_frame_bottomright.y, u_frame_width.y)) {
+		width = dfdy;
+	} else if (wrap_close(var_field.y, u_frame_topleft.y, dfdy) ||
+	           wrap_close(var_field.y, u_frame_bottomright.y, dfdy)) {
 		on_frame = true;
 		low = u_frame_topleft.x;
 		high = u_frame_bottomright.x;
 		pix = var_field.x;
-		width = u_frame_width.x;
+		width = dfdx;
 	}
 
 	if (on_frame) {
