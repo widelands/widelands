@@ -40,13 +40,8 @@ class EditorGameBase;
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
-	struct View {
-		Vector2f viewpoint;
-		float zoom;
-	};
-
 	struct Landmark {
-		View view;
+		MapView::View view;
 		bool set;
 
 		Landmark() : set(false) {
@@ -56,7 +51,7 @@ struct QuickNavigation {
 	QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
-	void set_landmark(size_t index, const View& view);
+	void set_landmark(size_t index, const MapView::View& view);
 
 	// Returns a pointer to the first element in the landmarks array
 	const std::vector<Landmark>& landmarks() const {
@@ -66,7 +61,7 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(const View& where);
+	void setview(const MapView::View& where);
 	void view_changed(bool jump);
 
 	const Widelands::EditorGameBase& egbase_;
@@ -75,14 +70,14 @@ private:
 	bool havefirst_;
 	bool update_;
 	Vector2f anchor_;  // center of last view in mappixel.
-	View current_;
+	MapView::View current_;
 
 	/**
 	 * Keeps track of what the player has looked at to allow jumping back and forth
 	 * in the history.
 	 */
 	/*@{*/
-	std::vector<View> history_;
+	std::vector<MapView::View> history_;
 	size_t history_index_;
 	/*@}*/
 

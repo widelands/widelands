@@ -85,10 +85,9 @@ struct MapView : public UI::Panel {
 
 	// NOCOM(#sirver): document
 	void set_viewpoint(const Vector2f& vp, const Transition& transition);
-	void center_on_coords(const Widelands::Coords& coords, const Transition& transition);
-	void center_on_map_pixel(const Vector2f& pos, const Transition& transition);
+	void scroll_to_field(const Widelands::Coords& coords, const Transition& transition);
+	void scroll_to_map_pixel(const Vector2f& pos, const Transition& transition);
 
-	Vector2f get_viewpoint() const;
 	Rectf view_area() const;
 	const View& view() const;
 	float get_zoom() const;
@@ -104,7 +103,7 @@ struct MapView : public UI::Panel {
 	// NOCOM(#sirver): document
 	bool is_dragging() const;
 	bool is_animating() const;
-	bool is_visible(const Widelands::Coords& coords);
+	bool is_visible(const Widelands::Coords& coords) const;
 
 	// Implementing Panel.
 	void draw(RenderTarget&) override;

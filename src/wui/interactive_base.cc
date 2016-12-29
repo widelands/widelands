@@ -389,7 +389,7 @@ void InteractiveBase::toggle_minimap() {
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
 		m->mm->warpview.connect(
-		   [this](const Vector2f& map_pixel) { center_on_map_pixel(map_pixel, Transition::Smooth); });
+		   [this](const Vector2f& map_pixel) { scroll_to_map_pixel(map_pixel, Transition::Smooth); });
 		mainview_move();
 	}
 }
@@ -397,7 +397,7 @@ void InteractiveBase::toggle_minimap() {
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view) {
+void InteractiveBase::set_landmark(size_t key, const MapView::View& view) {
 	m->quicknavigation->set_landmark(key, view);
 }
 

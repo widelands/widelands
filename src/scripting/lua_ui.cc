@@ -454,14 +454,15 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, start_road_building),
    METHOD(LuaMapView, abort_road_building),
    METHOD(LuaMapView, close),
-   METHOD(LuaMapView, center_on),
+   METHOD(LuaMapView, scroll_to_field),
+   METHOD(LuaMapView, scroll_to_map_pixel),
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RW(LuaMapView, view),
+   PROP_RO(LuaMapView, center_map_pixel),
    PROP_RW(LuaMapView, buildhelp),
    PROP_RW(LuaMapView, census),
    PROP_RW(LuaMapView, statistics),
@@ -482,79 +483,23 @@ void LuaMapView::__unpersist(lua_State* L) {
  * Properties
  */
 /* RST
-   .. attribute:: view
+   .. attribute:: center_map_pixel
 
-		(RW) The current view of the map. This is a table containing 'x', 'y',
-		'zoom'. This defines the map position (in pixels) that the top left pixel
-		of this map view currently sees and the internal zoom parameter.
+		(RO) The map position (in pixels) that the center pixel of this map view
+		currently sees. This is a table containing 'x', 'y'.
 */
-int LuaMapView::get_view(lua_State* L) {
-	// NOCOM(#sirver): actually, I'd rather not expose zoom?
-	const MapView::View& view = get()->view();
-
+int LuaMapView::get_center_map_pixel(lua_State* L) {
+	const Vector2f center = get()->view_area().center();
 	lua_newtable(L);
+
 	lua_pushstring(L, "x");
-	lua_pushdouble(L, view.viewpoint.x);
+	lua_pushdouble(L, center.x);
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "y");
-	lua_pushdouble(L, view.viewpoint.y);
+	lua_pushdouble(L, center.y);
 	lua_rawset(L, -3);
-
-	lua_pushstring(L, "zoom");
-	lua_pushdouble(L, view.zoom);
-	lua_rawset(L, -3);
-
 	return 1;
-}
-
-// NOCOM(#sirver): can we get rid of this function?
-// NOCOM(#sirver): grep for "viewpoint" in Lua files.
-int LuaMapView::set_view(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
-		return 0;
-	}
-
-	MapView* mv = get();
-	LuaTable table(L);  // Will pop the table eventually.
-	MapView::View view;
-	view.viewpoint.x = table.get_double("x");
-	view.viewpoint.y = table.get_double("y");
-	view.zoom = table.get_double("zoom");
-
-	mv->set_zoom(view.zoom);
-	mv->set_viewpoint(view.viewpoint, MapView::Transition::Smooth);
-	return 0;
-}
-
-// NOCOM(#sirver): document
-int LuaMapView::center_on(lua_State* L) {
-	get()->center_on_coords(
-	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
-	return 0;
-}
-
-// NOCOM(#sirver): document
-int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(L, get()->is_visible((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
-	return 1;
-}
-
-// NOCOM(#sirver): document
-int LuaMapView::mouse_to_pixel(lua_State* L) {
-	int x = luaL_checkint32(L, 2);
-	int y = luaL_checkint32(L, 3);
-	get()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
-	return 0;
-}
-
-// NOCOM(#sirver): document
-int LuaMapView::mouse_to_field(lua_State* L) {
-	get()->mouse_to_field(
-	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
-	return 0;
 }
 
 /* RST
@@ -692,6 +637,48 @@ int LuaMapView::close(lua_State* /* l */) {
 	get()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	return 0;
 }
+
+// NOCOM(#sirver): document
+int LuaMapView::scroll_to_map_pixel(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	// don't move view in replays
+	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+		return 0;
+	}
+
+	const Vector2f center(luaL_checkdouble(L, 2), luaL_checkdouble(L, 3));
+	get()->scroll_to_map_pixel(center, MapView::Transition::Smooth);
+	return 0;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::scroll_to_field(lua_State* L) {
+	get()->scroll_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::is_visible(lua_State* L) {
+	lua_pushboolean(L, get()->is_visible((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	return 1;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::mouse_to_pixel(lua_State* L) {
+	int x = luaL_checkint32(L, 2);
+	int y = luaL_checkint32(L, 3);
+	get()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
+	return 0;
+}
+
+// NOCOM(#sirver): document
+int LuaMapView::mouse_to_field(lua_State* L) {
+	get()->mouse_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
 
 /*
  * C Functions

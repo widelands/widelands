@@ -12,9 +12,9 @@ function village_thread()
 
    reveal_village()
 
-   local prior_view = scroll_to_field(map:get_field(55, 25))
+   local prior_center = scroll_to_field(map:get_field(55, 25))
    campaign_message_box(msg_village)
-   scroll_to_viewpoint(prior_view)
+   scroll_to_map_pixel(prior_center)
 
    sleep(1500)
 end

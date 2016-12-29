@@ -249,10 +249,6 @@ MapView::MapView(
 MapView::~MapView() {
 }
 
-Vector2f MapView::get_viewpoint() const {
-	return view_.viewpoint;
-}
-
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
 	return MapviewPixelFunctions::map_to_panel(view_.viewpoint, view_.zoom, map_pixel);
 }
@@ -262,7 +258,7 @@ Vector2f MapView::to_map(const Vector2i& panel_pixel) const {
 	   view_.viewpoint, view_.zoom, panel_pixel.cast<float>());
 }
 
-bool MapView::is_visible(const Widelands::Coords& c) {
+bool MapView::is_visible(const Widelands::Coords& c) const {
 	// We figure out if 'map_pixel' is visible on screen. To do this, we
 	// calculate the shortest distance to 'view_area.center()' on a torus. If
 	// the distance is less than 'view_area.w / 2', the point is visible.
@@ -413,7 +409,7 @@ void MapView::set_viewpoint(const Vector2f& target_viewport, const Transition& t
 	NEVER_HERE();
 }
 
-void MapView::center_on_coords(const Widelands::Coords& c, const Transition& transition) {
+void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
 	const Widelands::Map& map = intbase().egbase().map();
 	assert(0 <= c.x);
 	assert(c.x < map.get_width());
@@ -421,10 +417,10 @@ void MapView::center_on_coords(const Widelands::Coords& c, const Transition& tra
 	assert(c.y < map.get_height());
 
 	const Vector2f in_mappixel = MapviewPixelFunctions::to_map_pixel(map.get_fcoords(c));
-	center_on_map_pixel(in_mappixel, transition);
+	scroll_to_map_pixel(in_mappixel, transition);
 }
 
-void MapView::center_on_map_pixel(const Vector2f& pos, const Transition& transition) {
+void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transition) {
 	const Rectf area = view_area();
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
 	set_viewpoint(target_view, transition);
@@ -443,7 +439,7 @@ void MapView::pan_by(Vector2i delta_pixels) {
 	if (is_animating()) {
 		return;
 	}
-	set_viewpoint(get_viewpoint() + delta_pixels.cast<float>() * view_.zoom, Transition::Jump);
+	set_viewpoint(view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, Transition::Jump);
 }
 
 void MapView::stop_dragging() {

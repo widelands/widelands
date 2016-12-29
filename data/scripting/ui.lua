@@ -8,7 +8,7 @@ include "scripting/coroutine.lua"
 -- view or clicking on fields and UI elements.
 --
 
--- Wait until the mapview is done animating.
+-- Sleep until we are done animating.
 function _await_animation()
    local mv = wl.ui.MapView()
    while mv.is_animating do
@@ -16,57 +16,55 @@ function _await_animation()
    end
 end
 
--- NOCOM(#sirver): fix documentation everywhere in this file.
 -- RST
--- .. function:: scroll_to_viewpoint(view)
+-- .. function:: scroll_to_map_pixel(map_pixel)
 --
---    Make a nice moving transition in a given time to the viewpoint x, y.
---    The function will return as soon as the transition is completed.
+--    Make a nice moving transition to center on the 'map_pixel', which is a table
+--    that must contain 'x' and 'y' keys. The function will return as soon as
+--    the transition is completed.
 --
---    :arg x: x position to center the view on
---    :type x: :class:`integer`
---    :arg y: y position to center the view on
---    :type y: :class:`integer`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
+--    :arg map_pixel: pixel to focus on.
+--    :type map_pixel: :class:`table`
 --
-function scroll_to_viewpoint(view)
+function scroll_to_map_pixel(map_pixel)
    _await_animation()
-   wl.ui.MapView().view = view;
+   mv:scroll_to_map_pixel(map_pixel.x, map_pixel.y);
    _await_animation()
 end
 
 -- RST
--- .. function:: scroll_to_field(f)
+-- .. function:: scroll_to_field(field)
 --
---    Make a nice moving transition to the center of the Field(x,y).
---    The function will return as soon as the transition is completed.
+--    Make a nice moving transition to center the 'field' on screen. The
+--    function will return as soon as the transition is completed.
 --
---    :arg f: Field to center the view on
---    :type r: :class:`wl.map.Field`
+--    :arg field: Field to center the view on
+--    :type field: :class:`wl.map.Field`
 --
---    :returns: the prior view of MapView.
-function scroll_to_field(f)
+--    :returns: the prior center map pixel of the MapView as a table containing
+--    'x' and 'y' keys.
+--    
+function scroll_to_field(field)
    _await_animation()
    local mv = wl.ui.MapView()
-   local view = mv.view;
-   mv:center_on(f)
+   local center_map_pixel = mv.center_map_pixel;
+   mv:scroll_to_field(field)
    _await_animation()
-   return view
+   return center_map_pixel
 end
 
 -- RST
 -- .. function:: mouse_to_pixel(x, y)
 --
 --    Make a nice moving transition for the mouse to the given pixels relative
---    to the top left corner of the screen.
+--    to the top left corner of the screen. The function will return as soon as
+--    the transition is completed.
 --
 --    :arg x: x position to move the mouse to
 --    :type x: :class:`integer`
 --    :arg y: y position to move the mouse to
 --    :type y: :class:`integer`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
+--    
 function mouse_to_pixel(x, y)
    _await_animation()
    wl.ui.MapView():mouse_to_pixel(x, y)
@@ -74,38 +72,37 @@ function mouse_to_pixel(x, y)
 end
 
 -- RST
--- .. function:: mouse_to_field(f)
+-- .. function:: mouse_to_field(field)
 --
---    Move the mouse on the given field. Make sure that the field is inside
---    the current view area.
---
---    :arg f: Field to mouse to
---    :type f: :class:`wl.map.Field`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
-function mouse_to_field(f)
+--    Move the mouse on the given field. Makes sure that the field is inside
+--    the current view area by scrolling the view if necessary. The function
+--    will return as soon as the transition is completed.
+--    
+--    :arg field: Field to mouse to
+--    :type field: :class:`wl.map.Field`
+--    
+function mouse_to_field(field)
    _await_animation()
    local mv = wl.ui.MapView()
-   if not mv:is_visible(f) then
-      scroll_to_field(f)
-      mouse_to_field(f)
+   if not mv:is_visible(field) then
+      scroll_to_field(field)
+      mouse_to_field(field)
       return
    end
 
-   -- NOCOM(#sirver): rename center_on to center_on_field? find some symmetry in here.
-   mv:mouse_to_field(f);
+   mv:mouse_to_field(field);
    _await_animation()
 end
 
 -- RST
 -- .. function:: mouse_to_panel(panel)
 --
---    Move the mouse to the center of the given ui element.
---
+--    Move the mouse to the center of the given ui element. The function will
+--    return as soon as the transition is completed.
+--    
 --    :arg panel: Panel to mouse to
 --    :type panel: :class:`wl.ui.Panel`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
+--    
 function mouse_to_panel(panel)
    _await_animation()
    local x, y = wl.ui.MapView():get_descendant_position(panel)
@@ -113,20 +110,18 @@ function mouse_to_panel(panel)
 end
 
 -- RST
--- .. function:: click_building(p, building_name)
+-- .. function:: click_building(player, building_name)
 --
---    Click on the first building of the given name for the given player.
+--    Click on the first building of type 'building_name' owned by 'player'.
 --
---    :arg p: Player to search building for.
---    :type p: :class:`wl.game.Player`
+--    :arg player: Player to search building for.
+--    :type player: :class:`wl.game.Player`
 --    :arg building_name: Building name to look for.
 --    :type building_name: :class:`string`
---    :arg T: Time in ms to take for the transition.
---    :type T: :class:`integer`
 --
 --    :returns: :const:`true` if a building was clicked
 --
-function click_building(p, building_name)
+function click_building(player, building_name)
    local building = p:get_buildings(building_name)[1]
    mouse_to_field(building.fields[1])
    wl.ui.MapView():click(building.fields[1])
@@ -136,8 +131,8 @@ end
 -- RST
 -- .. function:: click_button(name)
 --
---    Goes through all open windows and searches for a button of the given name
---    and, if found, clicks it.
+--    Searches through all open windows for a button named 'name' and, if
+--    found, clicks it.
 --
 --    :arg name: Name of the button to click.
 --    :type name: :class:`string`.
@@ -166,7 +161,7 @@ end
 -- RST
 -- .. function:: close_windows()
 --
---    Closes all currently open windows.
+--    Closes all open windows.
 --
 function close_windows()
    for k,v in pairs(wl.ui.MapView().windows) do
@@ -187,14 +182,14 @@ end
 
 
 -- RST
--- .. function:: wait_for_roadbuilding_and_scroll(f)
+-- .. function:: wait_for_roadbuilding_and_scroll(field)
 --
 --    Sleeps while player is in roadbuilding mode, then calls
---    scroll_to_field(f).
+--    scroll_to_field(field).
 --
---    :returns: the prior view of MapView.
-function wait_for_roadbuilding_and_scroll(f)
+--    :returns: The return value of `scroll_to_field`.
+function wait_for_roadbuilding_and_scroll(field)
    _await_animation()
    wait_for_roadbuilding()
-   return scroll_to_field(f)
+   return scroll_to_field(field)
 end

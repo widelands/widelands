@@ -280,7 +280,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n)) {
-		menu.center_on_coords(sp, MapView::Transition::Smooth);
+		menu.scroll_to_field(sp, MapView::Transition::Smooth);
 	}
 
 	//  select tool set mplayer

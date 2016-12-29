@@ -171,14 +171,14 @@ function expand_and_build_marblemine()
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
    -- Move to the shipparts
-   local prior_view = wait_for_roadbuilding_and_scroll(shipparts)
+   local prior_center = wait_for_roadbuilding_and_scroll(shipparts)
 
    campaign_message_box(saledus_1)
    local o = add_campaign_objective(obj_build_military_buildings)
    p1:allow_buildings{"empire_blockhouse", "empire_sentry"}
 
    -- Go back to where we were
-   scroll_to_viewpoint(prior_view)
+   scroll_to_map_pixel(prior_center)
 
    -- sleep while not owning 26, 21
    while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
@@ -189,7 +189,7 @@ function expand_and_build_marblemine()
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
-   prior_view = wait_for_roadbuilding_and_scroll(marblemountains)
+   prior_center = wait_for_roadbuilding_and_scroll(marblemountains)
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
@@ -198,7 +198,7 @@ function expand_and_build_marblemine()
       do sleep(2133) end set_objective_done(o, 0) end)
 
    -- Go back to where we were
-   scroll_to_viewpoint(prior_view)
+   scroll_to_map_pixel(prior_center)
 end
 
 function barbarians_thread()

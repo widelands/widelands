@@ -107,9 +107,9 @@ function learn_to_move()
    local o = message_box_objective(plr, inform_about_rocks)
 
    function _wait_for_move()
-      local view = wl.ui.MapView().view
-      while view.x == wl.ui.MapView().view.x and
-            view.y == wl.ui.MapView().view.y do
+      local center_map_pixel = wl.ui.MapView().center_map_pixel
+      while center_map_pixel.x == wl.ui.MapView().center_map_pixel.x and
+            center_map_pixel.y == wl.ui.MapView().center_map_pixel.y do
          sleep(300)
       end
    end

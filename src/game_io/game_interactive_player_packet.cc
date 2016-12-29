@@ -38,7 +38,7 @@ void load_landmarks_pre_zoom(FileRead* fr, InteractiveBase* ibase) {
 	size_t no_of_landmarks = fr->unsigned_8();
 	for (size_t i = 0; i < no_of_landmarks; ++i) {
 		uint8_t set = fr->unsigned_8();
-		QuickNavigation::View view = {Vector2f(fr->signed_32(), fr->signed_32()), 1.f};
+		MapView::View view = {Vector2f(fr->signed_32(), fr->signed_32()), 1.f};
 		if (set > 0) {
 			ibase->set_landmark(i, view);
 		}
@@ -70,19 +70,19 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
-			float viewpoint_x, viewpoint_y;
+			Vector2f center_map_pixel;
 			if (packet_version <= 3) {
-				viewpoint_x = fr.unsigned_16();
-				viewpoint_y = fr.unsigned_16();
+				center_map_pixel.x = fr.unsigned_16();
+				center_map_pixel.y = fr.unsigned_16();
 			} else {
-				viewpoint_x = fr.float_32();
-				viewpoint_y = fr.float_32();
+				center_map_pixel.x = fr.float_32();
+				center_map_pixel.y = fr.float_32();
 			}
 
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->set_viewpoint(Vector2f(viewpoint_x, viewpoint_y), MapView::Transition::Jump);
+				ibase->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 
 				uint32_t const loaded_df =
 				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
@@ -105,7 +105,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						const float x = fr.float_32();
 						const float y = fr.float_32();
 						const float zoom = fr.float_32();
-						QuickNavigation::View view = {Vector2f(x, y), zoom};
+						MapView::View view = {Vector2f(x, y), zoom};
 						if (set > 0) {
 							ibase->set_landmark(i, view);
 						}
@@ -135,15 +135,14 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	// Player number
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
-// Map Position
-#ifndef NDEBUG
-	if (ibase) {
-		assert(0 <= ibase->get_viewpoint().x);
-		assert(0 <= ibase->get_viewpoint().y);
+	if (ibase != nullptr) {
+		Vector2f center = ibase->view_area().center();
+		fw.float_32(center.x);
+		fw.float_32(center.y);
+	} else {
+		fw.float_32(0.f);
+		fw.float_32(0.f);
 	}
-#endif
-	fw.float_32(ibase ? ibase->get_viewpoint().x : 0.f);
-	fw.float_32(ibase ? ibase->get_viewpoint().y : 0.f);
 
 	// Display flags
 	fw.unsigned_32(ibase ? ibase->get_display_flags() : 0);

@@ -203,8 +203,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_view(lua_State*);
-	int set_view(lua_State*);
+	int get_center_map_pixel(lua_State*);
 	int get_buildhelp(lua_State* L);
 	int set_buildhelp(lua_State* L);
 	int get_census(lua_State* L);
@@ -221,7 +220,8 @@ public:
 	int click(lua_State* L);
 	int abort_road_building(lua_State* L);
 	int start_road_building(lua_State* L);
-	int center_on(lua_State* L);
+	int scroll_to_map_pixel(lua_State* L);
+	int scroll_to_field(lua_State* L);
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);

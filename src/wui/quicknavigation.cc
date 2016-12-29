@@ -33,11 +33,12 @@ QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase, MapVie
 	history_index_ = 0;
 }
 
-void QuickNavigation::setview(const View& view) {
+void QuickNavigation::setview(const MapView::View& view) {
 	update_ = false;
 	map_view_->set_zoom(view.zoom);
 	// NOCOM(#sirver): experiment withi smooth
 	map_view_->set_viewpoint(view.viewpoint, MapView::Transition::Smooth);
+	// NOCOM(#sirver): try to get rid of set_viewpoint
 	update_ = true;
 }
 
@@ -68,13 +69,11 @@ void QuickNavigation::view_changed(bool jump) {
 		anchor_ = view_area.center();
 	}
 
-	current_ = View{
-	   map_view_->get_viewpoint(), map_view_->get_zoom(),
-	};
+	current_ = map_view_->view();
 	havefirst_ = true;
 }
 
-void QuickNavigation::set_landmark(size_t index, const View& view) {
+void QuickNavigation::set_landmark(size_t index, const MapView::View& view) {
 	assert(index < landmarks_.size());
 	landmarks_[index].view = view;
 	landmarks_[index].set = true;
