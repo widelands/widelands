@@ -330,6 +330,7 @@ private:
 
 		GLint u_frame_topleft;
 		GLint u_frame_bottomright;
+		GLint u_frame_width;
 
 		GLint u_terrain_base;
 		GLint u_player_brightness;

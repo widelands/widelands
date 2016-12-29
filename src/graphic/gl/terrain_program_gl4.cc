@@ -493,6 +493,7 @@ TerrainProgramGl4::MiniMap::MiniMap()
 
 	u_frame_topleft = glGetUniformLocation(gl_program.object(), "u_frame_topleft");
 	u_frame_bottomright = glGetUniformLocation(gl_program.object(), "u_frame_bottomright");
+	u_frame_width = glGetUniformLocation(gl_program.object(), "u_frame_width");
 
 	u_terrain_base = glGetUniformLocation(gl_program.object(), "u_terrain_base");
 	u_player_brightness = glGetUniformLocation(gl_program.object(), "u_player_brightness");
@@ -597,6 +598,7 @@ void TerrainProgramGl4::draw_minimap(const TerrainGl4Arguments* args,
 	glUniform1i(minimap_.u_layer_terrain, (args->minimap_layers & MiniMapLayer::Terrain) ? 1 : 0);
 	glUniform1i(minimap_.u_layer_owner, (args->minimap_layers & MiniMapLayer::Owner) ? 1 : 0);
 
+	float frame_width = (args->minimap_layers & MiniMapLayer::Zoom2) ? 0.25 : 0.5;
 	uint details = 0;
 	if (args->minimap_layers & MiniMapLayer::Road)
 		details |= 1;
@@ -623,8 +625,9 @@ void TerrainProgramGl4::draw_minimap(const TerrainGl4Arguments* args,
 	glUniform1i(minimap_.u_player_color, 4);
 	gl.bind(GL_TEXTURE4, args->terrain->player_color_texture());
 
-	glUniform2f(minimap_.u_frame_topleft, (args->minfx + 0.25) / width, (args->minfy + 0.25) / height);
-	glUniform2f(minimap_.u_frame_bottomright, (args->maxfx - 0.25) / width, (args->maxfy - 0.25) / height);
+	glUniform2f(minimap_.u_frame_topleft, (args->minfx + 0.001) / width, (args->minfy + 0.001) / height);
+	glUniform2f(minimap_.u_frame_bottomright, (args->maxfx - 0.001) / width, (args->maxfy - 0.001) / height);
+	glUniform2f(minimap_.u_frame_width, frame_width / width, frame_width / height);
 
 	// Compute coordinates and upload vertex data.
 	if (args->minimap_layers & MiniMapLayer::Zoom2) {
