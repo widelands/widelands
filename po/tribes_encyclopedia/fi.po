@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-26 16:27+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,6 +117,7 @@ msgid ""
 "blackroot."
 msgstr "Mustajuuriviljelijät tarvitsevat keskimäärin  %1% kylvämiseen ja mustajuurinipun korjaamiseen."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
@@ -259,7 +260,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Jauhaa mustajuuria ja maissia tuottaakseen mustajuurimaustetta ja maissijauhoa tässä järjestyksessä."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -1567,8 +1568,8 @@ msgstr "Parantuminen:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Varuskuntasotilaat paranevat %d terveys pistettä per sekuntti."
+msgstr[1] "Varuskuntasotilaat paranevat %d terveys pistettä per sekuntti."
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -3353,7 +3354,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr ""
+msgstr "Tämä on keskikokoinen atrain. Niitä tuottaa aseseppä ja käyttää edistyneet sotilaat tyrmässä – yhdessä ruuan kanssa – koulutautuakseen hyökkäystaitotasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3521,7 +3522,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Jauhaa mustajuuria ja maissia tuottaakseen mustajuurimaustetta ja maissijauhoa tässä järjestyksessä."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3

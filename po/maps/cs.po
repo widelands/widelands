@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-19 20:27+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -530,11 +530,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Rozmarní bohové nevyslyšeli naše modlitby. Místo toho sílící sluneční svit zahřívá Zemi tisícinásobně, rozpouští ledovce a lidé se skryli pod zem. Ale nyní – vysoko v majestátních horách, na posledním kousku země, se ukrývají dva přeživší kmeny. I přesto, že se bohové smilovali a klima se začalo opět ochlazovat, voda stále stoupá a stoupá. Na poslední bezpečné místo - do nejvyšších hor, kde množství zlata a místo stačí stěží pro přežití jednoho kmene - vedou dvě stezky. Ale pamatuj, buď opatrný... život na tomto posledním malém kousku země bude tvrdý."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Nezapomeň se starat o své zásoby dřeva, budeš je potřebovat."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -588,13 +588,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Pouze jeden malý kopec ve středu mapy spojuje čtyři soupeřící kmeny. Doveď svou armádu na kopec a vybuduj obrovskou pevnost, jako důkaz své svrchovanosti!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Ve středu je místo pouze na jednu pevnost. Vodu lze najít všude, není tedy třeba posílat geology."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
