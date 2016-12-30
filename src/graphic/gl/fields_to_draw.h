@@ -131,7 +131,7 @@ public:
 		FieldsToDrawImplBase::reset(minfx, maxfx, minfy, maxfy);
 
 		int h = max_fy_ - min_fy_ + 1;
-		const size_t dimension = this->get_w() * h;
+		const size_t dimension = FieldsToDrawImplBase::get_w() * h;
 		if (fields_.size() != dimension) {
 			fields_.resize(dimension);
 		}
@@ -321,7 +321,11 @@ public:
 	}
 
 	bool all_neighbors_valid() const {
-		return tln_valid() && brn_valid();
+		assert(valid());
+		return (geometric_coords_.y > fields_.min_fy() &&
+		        geometric_coords_.y < fields_.max_fy() &&
+		        geometric_coords_.x > fields_.min_fx() &&
+		        geometric_coords_.x < fields_.max_fx());
 	}
 
 private:

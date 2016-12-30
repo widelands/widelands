@@ -74,8 +74,6 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	    args_.terrain->player() != player)
 		args_.terrain = TerrainInformationGl4::get(egbase, player);
 
-	args_.terrain->update();
-
 	// Determine the set of patches to draw.
 	float scale = 1.f / zoom;
 	Vector2f tl_map = view_offset - dst->get_offset().cast<float>() * zoom;
@@ -104,6 +102,8 @@ void GameRendererGl4::draw(const EditorGameBase& egbase,
 	args_.surface_height = surface->height();
 
 	scan_fields(view_offset);
+
+	args_.terrain->update(args_.minfx, args_.maxfx, args_.minfy, args_.maxfy);
 
 	// Enqueue the drawing of the terrain.
 	RenderQueue::Item i;

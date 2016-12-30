@@ -19,6 +19,7 @@
 
 #include "graphic/gl/blit_program.h"
 
+#include <memory>
 #include <vector>
 
 #include "base/log.h"

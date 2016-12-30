@@ -37,8 +37,6 @@ using namespace Widelands;
 /**
  * This is the back-end of the GL4 rendering path.
  *
- * TODO(nha): upload based on dirtiness and/or "rolling" updates of N% per frame
- *
  * Per-field data is uploaded directly into integer-valued textures that span
  * the entire map, and vertex shaders do most of the heavy lifting. The
  * following textures are used:
@@ -122,6 +120,7 @@ TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& eg
 	glGenTextures(1, &fields_texture_);
 	glGenTextures(1, &minimap_texture_);
 
+	const Map& map = egbase.map();
 	auto& gl = Gl::State::instance();
 	gl.bind(GL_TEXTURE0, fields_texture_);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -129,18 +128,30 @@ TerrainInformationGl4::TerrainInformationGl4(const Widelands::EditorGameBase& eg
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+	gl.bind(GL_TEXTURE0, brightness_texture_);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, map.get_width(), map.get_height(), 0,
+	             GL_RED, GL_UNSIGNED_BYTE, NULL);
+	brightness_see_all_ = false;
+
 	gl.bind(GL_TEXTURE0, minimap_texture_);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, map.get_width(), map.get_height(), 0,
+	             GL_RED_INTEGER, GL_UNSIGNED_BYTE, NULL);
 
 	fields_update();
 	upload_road_textures();
 	upload_constant_textures();
 
-	need_update_ = false;
+	updated_minimap_ = false;
 	need_update_minimap_ = false;
+	minimap_update_next_ = 0;
 }
 
 TerrainInformationGl4::~TerrainInformationGl4() {
@@ -159,34 +170,219 @@ TerrainInformationGl4::~TerrainInformationGl4() {
 	global_map_.erase(GlobalKey(&egbase_, player_));
 }
 
-void TerrainInformationGl4::update() {
-	need_update_ = true;
+/// Add @p rect to @p rects, merging it with any overlapping or touching
+/// pre-existing rects (where merging means that the rectangles are replaced by
+/// a single rectangle that contains their union). The order of rectangles in
+/// @p rects is not preserved.
+///
+/// Rectangles are interpreted as half-open.
+static void add_rect(std::vector<Recti>& rects, const Recti& rect) {
+	Recti new_rect = rect;
+
+	for (size_t i = 0; i < rects.size(); ++i) {
+		// Merge rectangles even if they only touch instead of fully overlapping.
+		// The rationale is that reducing the number of uploads is often a
+		// benefit even when the total size of uploads becomes larger.
+		if (new_rect.x + new_rect.w < rects[i].x ||
+		    rects[i].x + rects[i].w < new_rect.x ||
+		    new_rect.y + new_rect.h < rects[i].y ||
+		    rects[i].y + rects[i].h < new_rect.y)
+			continue;
+
+		rects[i] = rects.back();
+		rects.pop_back();
+		i--;
+	}
+
+	rects.push_back(new_rect);
+}
+
+void TerrainInformationGl4::update(int minfx, int maxfx, int minfy, int maxfy) {
+	const Map& map = egbase().map();
+	int width = map.get_width();
+	int height = map.get_height();
+
+	auto normalize = [](int& min, int& max, int size) {
+		while (min < 0) {
+			min += size;
+			max += size;
+		}
+		while (min >= size) {
+			min -= size;
+			max -= size;
+		}
+	};
+
+	normalize(minfx, maxfx, width);
+	normalize(minfy, maxfy, height);
+
+	// Ensure proper row alignment during texture uploads.
+	minfx = (minfx / 4) * 4;
+	maxfx = ((maxfx + 4) / 4) * 4 - 1;
+
+	auto add = [&](int startx, int endx) {
+		add_rect(update_, Recti(startx, minfy, endx - startx, std::min(maxfy + 1, height) - minfy));
+		if (maxfy >= height)
+			add_rect(update_, Recti(startx, 0, endx - startx, std::min(maxfy + 1 - height, height)));
+	};
+
+	add(minfx, std::min(maxfx + 1, width));
+	if (maxfx >= width)
+		add(0, std::min(maxfx + 1 - width, width));
 }
 
 void TerrainInformationGl4::update_minimap() {
-	update();
-
 	need_update_minimap_ = true;
+}
+
+void TerrainInformationGl4::do_prepare_frame() {
+	const Map& map = egbase().map();
+
+	if (need_update_minimap_) {
+		if (!updated_minimap_) {
+			// Need a full update when the minimap is drawn for the first
+			// time.
+			update_.clear();
+			update_.emplace_back(0, 0, map.get_width(), map.get_height());
+		} else {
+			// For the minimap, we want to do rolling texture updates of
+			// stripes that cover the whole width or height of the map,
+			// depending on which is smaller. For consistency and simplicity,
+			// expand all other dirty rectangles to full strips as well.
+			//
+			// Furthermore, use stripes of a size that is a multiple of a small
+			// power of two, since that likely has bandwidth benefits due to
+			// how textures are laid out in memory. This also avoids confusion
+			// due to pixel (un)packing row alignments.
+			unsigned width = map.get_width();
+			unsigned height = map.get_height();
+			bool horiz = width <= height;
+			std::vector<std::pair<unsigned, unsigned>> stripes;
+
+			// Massage existing stripes, effectively a form of insertion sort.
+			stripes.reserve(update_.size() + 1);
+			for (size_t i = 0; i < update_.size(); ++i) {
+				unsigned min = horiz ? update_[i].y : update_[i].x;
+				unsigned max = min + (horiz ? update_[i].h : update_[i].w);
+
+				min = (min / 8) * 8;
+				max = ((max + 7) / 8) * 8;
+
+				size_t j;
+				for (j = 0; j < stripes.size(); ++j) {
+					if (max < stripes[j].first) {
+						stripes.insert(stripes.begin() + j, std::make_pair(min, max));
+						break;
+					}
+
+					if (min <= stripes[j].second) {
+						stripes[j].first = std::min(stripes[j].first, min);
+						stripes[j].second = std::max(stripes[j].second, max);
+
+						size_t k;
+						for (k = j + 1; k < stripes.size(); ++k) {
+							if (stripes[j].second < stripes[k].first)
+								break;
+
+							stripes[j].second = std::max(stripes[j].second, stripes[k].second);
+						}
+
+						stripes.erase(stripes.begin() + j + 1, stripes.begin() + k);
+						break;
+					}
+				}
+				if (j >= stripes.size())
+					stripes.emplace_back(min, max);
+			}
+
+			if (stripes.empty() || stripes[0].first != 0 ||
+			    stripes[0].second < (horiz ? height : width)) {
+				// Add a stripe (or expand an existing one) for the rolling minimap
+				// update.
+				if (minimap_update_next_ >= (horiz ? height : width))
+					minimap_update_next_ = 0;
+
+				unsigned min = minimap_update_next_;
+				size_t j;
+				for (j = 0; j < stripes.size(); ++j) {
+					unsigned max = min + 8;
+					if (max < stripes[j].first) {
+						stripes.insert(stripes.begin() + j, std::make_pair(min, max));
+						break;
+					}
+
+					if (min <= stripes[j].second) {
+						if (min < stripes[j].first) {
+							assert(max == stripes[j].first); // due to multiples of 8
+							stripes[j].first = min;
+							break;
+						}
+
+						min = minimap_update_next_ = stripes[j].second;
+						if (min >= (horiz ? height : width)) {
+							min = 0;
+							j = 0;
+							continue;
+						}
+						max = std::min(min + 8, horiz ? height : width);
+						stripes[j].second = max;
+
+						size_t k;
+						for (k = j + 1; k < stripes.size(); ++k) {
+							if (stripes[j].second < stripes[k].first)
+								break;
+
+							stripes[j].second = std::max(stripes[j].second, stripes[k].second);
+						}
+						stripes.erase(stripes.begin() + j + 1, stripes.begin() + k);
+						break;
+					}
+				}
+				if (j >= stripes.size())
+					stripes.emplace_back(min, min + 8);
+
+				minimap_update_next_ += 8;
+			}
+
+			// Convert stripes back to update rectangles.
+			update_.resize(stripes.size());
+			for (size_t i = 0; i < stripes.size(); ++i) {
+				if (horiz) {
+					update_[i].x = 0;
+					update_[i].w = width;
+					update_[i].y = stripes[i].first;
+					update_[i].h = stripes[i].second - stripes[i].first;
+				} else {
+					update_[i].y = 0;
+					update_[i].h = height;
+					update_[i].x = stripes[i].first;
+					update_[i].w = stripes[i].second - stripes[i].first;
+				}
+			}
+		}
+	}
+
+	// Fields data updates are guarded by version numbers instead of
+	// rectangles.
+	if (fields_base_version_ != map.get_fields_base_version() ||
+	    (player() && terrain_vision_version_ != player()->get_terrain_vision_version()))
+		fields_update();
+
+	brightness_update();
+
+	if (need_update_minimap_)
+		do_update_minimap();
+
+	update_.clear();
+	updated_minimap_ = need_update_minimap_;
+	need_update_minimap_ = false;
 }
 
 void TerrainInformationGl4::prepare_frame() {
 	for (auto& entries : global_map_) {
 		std::shared_ptr<TerrainInformationGl4> ti = entries.second.lock();
 
-		if (ti->need_update_) {
-			if (ti->fields_base_version_ != ti->egbase().map().get_fields_base_version() ||
-				(ti->player() && ti->terrain_vision_version_ != ti->player()->get_terrain_vision_version()))
-				ti->fields_update();
-
-			ti->brightness_update();
-
-			ti->need_update_ = false;
-		}
-
-		if (ti->need_update_minimap_) {
-			ti->do_update_minimap();
-			ti->need_update_minimap_ = false;
-		}
+		ti->do_prepare_frame();
 	}
 }
 
@@ -194,7 +390,7 @@ void TerrainInformationGl4::do_update_minimap() {
 	// Re-upload minimap data.
 	auto& gl = Gl::State::instance();
 	const Map& map = egbase().map();
-	MapIndex max_index = map.max_index();
+	unsigned width = map.get_width();
 	std::vector<uint8_t> data;
 	const bool see_all = !player() || player()->see_all();
 
@@ -211,28 +407,39 @@ void TerrainInformationGl4::do_update_minimap() {
 		return 0;
 	};
 
-	data.resize(max_index);
-	if (see_all) {
-		for (MapIndex i = 0; i < max_index; ++i) {
-			const Field& f = map[i];
-			data[i] = f.get_owned_by();
-			data[i] |= detail_bits(f.get_immovable());
-		}
-	} else {
-		for (MapIndex i = 0; i < max_index; ++i) {
-			const Player::Field& pf = player()->fields()[i];
-			data[i] = pf.owner;
+	gl.bind(GL_TEXTURE0, minimap_texture_);
 
-			if (pf.vision >= 2) {
-				const Field& f = map[i];
-				data[i] |= detail_bits(f.get_immovable());
+	for (const Recti& rect : update_) {
+		data.resize(rect.w * rect.h);
+		if (see_all) {
+			unsigned i = 0;
+			for (unsigned y = 0; y < unsigned(rect.h); ++y) {
+				unsigned idx = (rect.y + y) * width + rect.x;
+				for (unsigned x = 0; x < unsigned(rect.w); ++x, ++i, ++idx) {
+					const Field& f = map[idx];
+					data[i] = f.get_owned_by();
+					data[i] |= detail_bits(f.get_immovable());
+				}
+			}
+		} else {
+			unsigned i = 0;
+			for (unsigned y = 0; y < unsigned(rect.h); ++y) {
+				unsigned idx = (rect.y + y) * width + rect.x;
+				for (unsigned x = 0; x < unsigned(rect.w); ++x, ++i, ++idx) {
+					const Player::Field& pf = player()->fields()[idx];
+					data[i] = pf.owner;
+
+					if (pf.vision >= 2) {
+						const Field& f = map[idx];
+						data[i] |= detail_bits(f.get_immovable());
+					}
+				}
 			}
 		}
-	}
 
-	gl.bind(GL_TEXTURE0, minimap_texture_);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, map.get_width(), map.get_height(), 0,
-	             GL_RED_INTEGER, GL_UNSIGNED_BYTE, data.data());
+		glTexSubImage2D(GL_TEXTURE_2D, 0, rect.x, rect.y, rect.w, rect.h,
+		                GL_RED_INTEGER, GL_UNSIGNED_BYTE, data.data());
+	}
 }
 
 void TerrainInformationGl4::fields_update() {
@@ -342,61 +549,64 @@ void TerrainInformationGl4::brightness_update() {
 	auto& gl = Gl::State::instance();
 	bool see_all = !player_ || player_->see_all();
 
-	// TODO(nha): update only what is necessary
+	gl.bind(GL_TEXTURE0, brightness_texture_);
 
 	if (see_all) {
-		// Pixel unpacking has a per-row alignment of 4 bytes. Usually this
-		// is not a problem for us, because maps' widths are always multiples
-		// of 4, but in this particular case, OpenGL implementations disagree
-		// about whether the alignment should be considered for the bounds
-		// check in glTexImage2D. If we only allocate 1 byte, some
-		// implementations flag a GL_INVALID_OPERATION.
-		auto stream = uploads_.stream(4);
-		stream.emplace_back(255);
-		GLintptr offset = stream.unmap();
-		uploads_.bind();
+		if (!brightness_see_all_) {
+			// Pixel unpacking has a per-row alignment of 4 bytes. Usually this
+			// is not a problem for us, because maps' widths are always multiples
+			// of 4, but in this particular case, OpenGL implementations disagree
+			// about whether the alignment should be considered for the bounds
+			// check in glTexImage2D. If we only allocate 1 byte, some
+			// implementations flag a GL_INVALID_OPERATION.
+			static const uint8_t data[4] = {255, 255, 255, 255};
 
-		gl.bind(GL_TEXTURE0, brightness_texture_);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, 1, 1, 0, GL_RED, GL_UNSIGNED_BYTE,
-		             reinterpret_cast<void*>(offset));
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, 1, 1, 0, GL_RED, GL_UNSIGNED_BYTE,
+			             data);
+			brightness_see_all_ = true;
+		}
 	} else {
 		const Map& map = egbase().map();
+		int width = map.get_width();
+		int height = map.get_height();
 		uint32_t gametime = egbase().get_gametime();
-		MapIndex max_index = map.max_index();
-		auto stream = uploads_.stream(max_index);
-		uint8_t* data = stream.add(max_index);
+		std::vector<uint8_t> data;
 
-		for (MapIndex i = 0; i < max_index; ++i) {
-			const Player::Field& pf = player_->fields()[i];
-			if (pf.vision == 0) {
-				*data++ = 0;
-			} else if (pf.vision == 1) {
-				static const uint32_t kDecayTimeInMs = 20000;
-				const Duration time_ago = gametime - pf.time_node_last_unseen;
-				if (time_ago < kDecayTimeInMs) {
-					*data++ = 255 * (2 * kDecayTimeInMs - time_ago) / (2 * kDecayTimeInMs);
-				} else {
-					*data++ = 128;
-				}
-			} else {
-				*data++ = 255;
-			}
+		if (brightness_see_all_) {
+			// Resize the texture when switching between see-all and not-see-all.
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, width, height, 0, GL_RED,
+			             GL_UNSIGNED_BYTE, NULL);
+			brightness_see_all_ = false;
 		}
 
-		GLintptr offset = stream.unmap();
-		uploads_.bind();
+		for (const Recti& rect : update_) {
+			data.resize(rect.w * rect.h);
 
-		gl.bind(GL_TEXTURE0, brightness_texture_);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, map.get_width(), map.get_height(), 0,
-		             GL_RED, GL_UNSIGNED_BYTE, reinterpret_cast<void*>(offset));
+			unsigned dst = 0;
+			for (unsigned y = 0; y < unsigned(rect.h); ++y) {
+				unsigned src = (rect.y + y) * width + rect.x;
+				for (unsigned x = 0; x < unsigned(rect.w); ++x, ++src, ++dst) {
+					const Player::Field& pf = player_->fields()[src];
+					if (pf.vision == 0) {
+						data[dst] = 0;
+					} else if (pf.vision == 1) {
+						static const uint32_t kDecayTimeInMs = 20000;
+						const Duration time_ago = gametime - pf.time_node_last_unseen;
+						if (time_ago < kDecayTimeInMs) {
+							data[dst] = 255 * (2 * kDecayTimeInMs - time_ago) / (2 * kDecayTimeInMs);
+						} else {
+							data[dst] = 128;
+						}
+					} else {
+						data[dst] = 255;
+					}
+				}
+			}
+
+			glTexSubImage2D(GL_TEXTURE_2D, 0, rect.x, rect.y, rect.w, rect.h,
+			                GL_RED, GL_UNSIGNED_BYTE, &data[0]);
+		}
 	}
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
 void TerrainInformationGl4::upload_constant_textures() {

@@ -99,8 +99,8 @@ public:
 	                          const Widelands::Coords& coords,
 	                          Widelands::WalkingDir direction) const;
 
-	// Upload updated information to texture(s) if necessary.
-	void update();
+	// Mark regions/types of information that need to be updated.
+	void update(int minfx, int maxfx, int minfy, int maxfy);
 	void update_minimap();
 
 private:
@@ -110,6 +110,7 @@ private:
 	using GlobalKey = std::pair<const Widelands::EditorGameBase*, const Widelands::Player*>;
 	using GlobalMap = std::map<GlobalKey, std::weak_ptr<TerrainInformationGl4>>;
 
+	void do_prepare_frame();
 	void fields_update();
 	void upload_road_textures();
 	void brightness_update();
@@ -146,8 +147,10 @@ private:
 	const Widelands::Player* player_;
 	uint32_t fields_base_version_;
 	uint32_t terrain_vision_version_;
-	bool need_update_;
+	std::vector<Recti> update_;
+	bool updated_minimap_;
 	bool need_update_minimap_;
+	unsigned minimap_update_next_;
 
 	Gl::StreamingBuffer<uint8_t> uploads_;
 
@@ -156,6 +159,7 @@ private:
 
 	// Brightness texture: GL_R8.
 	GLuint brightness_texture_;
+	bool brightness_see_all_;
 
 	// Road textures information
 	Gl::Buffer<PerRoadTextureData> road_textures_;
