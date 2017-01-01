@@ -238,6 +238,8 @@ void TerrainInformationGl4::update_minimap() {
 void TerrainInformationGl4::do_prepare_frame() {
 	const Map& map = egbase().map();
 
+	upload_terrain_data();
+
 	if (need_update_minimap_) {
 		if (!updated_minimap_) {
 			// Need a full update when the minimap is drawn for the first
@@ -545,6 +547,27 @@ unsigned TerrainInformationGl4::road_texture_idx(PlayerNumber owner,
 	return base + unsigned(coords.x + coords.y + direction) % count;
 }
 
+// Upload the per-terrain texture data. This is done on every draw call because
+// it depends on the gametime.
+void TerrainInformationGl4::upload_terrain_data() {
+	uint32_t gametime = egbase().get_gametime();
+	const auto& terrains = egbase().world().terrains();
+	std::vector<PerTerrainData> data;
+
+	data.resize(terrains.size());
+
+	for (unsigned i = 0; i < terrains.size(); ++i) {
+		PerTerrainData& terrain = data[i];
+		const TerrainDescription& descr = terrains.get(i);
+		terrain.offset =
+			to_gl_texture(descr.get_texture(gametime).blit_data()).origin();
+		terrain.dither_layer = descr.dither_layer();
+	}
+
+	terrain_data_.bind();
+	terrain_data_.update(data);
+}
+
 void TerrainInformationGl4::brightness_update() {
 	auto& gl = Gl::State::instance();
 	bool see_all = !player_ || player_->see_all();
@@ -646,7 +669,7 @@ void TerrainInformationGl4::upload_constant_textures() {
 }
 
 TerrainProgramGl4::Terrain::Terrain()
-  : terrain_data(GL_UNIFORM_BUFFER), instance_data(GL_ARRAY_BUFFER) {
+  : instance_data(GL_ARRAY_BUFFER) {
 	// Initialize program.
 	gl_program.build_vp_fp({"terrain_gl4", "terrain_common_gl4"}, {"terrain_gl4"});
 
@@ -752,6 +775,8 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
                              float z_value) {
 	auto& gl = Gl::State::instance();
 
+	assert(gametime == args->terrain->egbase().get_gametime());
+
 	// First, draw the terrain.
 	glUseProgram(terrain_.gl_program.object());
 
@@ -766,7 +791,8 @@ void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
 	const Rectf texture_coordinates = to_gl_texture(blit_data);
 
 	// Prepare uniforms.
-	upload_terrain_data(args, gametime);
+	glBindBufferBase(GL_UNIFORM_BUFFER, terrain_.block_terrains_idx,
+	                 args->terrain->terrain_data_buffer_object());
 
 	glUniform2f(terrain_.u_position_scale, scale_x, scale_y);
 	glUniform2f(terrain_.u_position_offset, offset_x, offset_y);
@@ -960,31 +986,6 @@ void TerrainProgramGl4::init_vertex_data() {
 
 	terrain_.vertex_data.bind();
 	terrain_.vertex_data.update(vertices);
-}
-
-// Upload the per-terrain texture data. This is done on every draw call because
-// it depends on the gametime.
-//
-// TODO(nha): it seems reasonable to make this part of TerrainBaseGl4, since
-// all views should refer to the same gametime.
-void TerrainProgramGl4::upload_terrain_data(const TerrainGl4Arguments* args,
-                                            uint32_t gametime) {
-	const auto& terrains = args->terrain->egbase().world().terrains();
-	auto stream = terrain_.terrain_data.stream(terrains.size());
-
-	for (unsigned i = 0; i < terrains.size(); ++i) {
-		stream.emplace_back();
-		PerTerrainData& terrain = stream.back();
-		const TerrainDescription& descr = terrains.get(i);
-		terrain.offset =
-			to_gl_texture(descr.get_texture(gametime).blit_data()).origin();
-		terrain.dither_layer = descr.dither_layer();
-	}
-
-	GLintptr offset = stream.unmap();
-	glBindBufferRange(GL_UNIFORM_BUFFER, terrain_.block_terrains_idx,
-	                  terrain_.terrain_data.object(),
-	                  offset, sizeof(PerTerrainData) * terrains.size());
 }
 
 // Determine which instances/patches to draw, upload the data and set up the

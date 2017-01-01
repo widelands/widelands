@@ -80,6 +80,10 @@ public:
 		return road_textures_.object();
 	}
 
+	GLuint terrain_data_buffer_object() const {
+		return terrain_data_.object();
+	}
+
 	GLuint minimap_texture() const {
 		return minimap_texture_;
 	}
@@ -113,9 +117,17 @@ private:
 	void do_prepare_frame();
 	void fields_update();
 	void upload_road_textures();
+	void upload_terrain_data();
 	void brightness_update();
 	void do_update_minimap();
 	void upload_constant_textures();
+
+	struct PerTerrainData {
+		Vector2f offset;
+		int dither_layer;
+		float padding[1];
+	};
+	static_assert(sizeof(PerTerrainData) == 16, "incorrect padding");
 
 	struct PerFieldData {
 		uint8_t terrain_r;
@@ -166,6 +178,9 @@ private:
 	std::vector<PlayerRoads> player_roads_;
 	GLuint road_texture_object_;
 
+	// Uniform buffer with per-terrain information.
+	Gl::Buffer<PerTerrainData> terrain_data_;
+
 	// Texture containing additional, minimap-only information.
 	GLuint minimap_texture_;
 
@@ -210,13 +225,6 @@ private:
 	void setup_road_index_buffer(unsigned num_roads);
 	void upload_road_data(const TerrainGl4Arguments* args);
 
-	struct PerTerrainData {
-		Vector2f offset;
-		int dither_layer;
-		float padding[1];
-	};
-	static_assert(sizeof(PerTerrainData) == 16, "incorrect padding");
-
 	struct PerInstanceData {
 		Vector2i coordinate;
 	};
@@ -249,9 +257,6 @@ private:
 
 		// The program used for drawing the terrain.
 		Gl::Program gl_program;
-
-		// Uniform buffer with per-terrain information.
-		Gl::StreamingBuffer<PerTerrainData> terrain_data;
 
 		// Per-instance/patch data.
 		Gl::StreamingBuffer<PerInstanceData> instance_data;

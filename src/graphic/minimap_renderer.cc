@@ -246,8 +246,6 @@ public:
 		if (!surface)
 			return;
 
-		// TODO(nha): handle MiniMapType
-
 		args_.terrain->update_minimap();
 
 		const Recti& bounding_rect = dst.get_rect();
@@ -375,7 +373,6 @@ MiniMapRenderer::MiniMapRenderer(const Widelands::EditorGameBase& egbase,
 std::unique_ptr<MiniMapRenderer>
 MiniMapRenderer::create(const Widelands::EditorGameBase& egbase,
                         const Widelands::Player* player) {
-	// TODO(nha): automatic selection
 	if (TerrainProgramGl4::supported())
 		return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererGl4(egbase, player));
 	return std::unique_ptr<MiniMapRenderer>(new MiniMapRendererSoftware(egbase, player));

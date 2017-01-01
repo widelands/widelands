@@ -415,7 +415,6 @@ void BlitProgramGl4::draw(const std::vector<Arguments>& arguments) {
 		}
 	}
 
-	// TODO(nha): bind via state
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
