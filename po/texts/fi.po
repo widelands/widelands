@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-24 16:44+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public Licens
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -430,7 +430,7 @@ msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee 
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player."
-msgstr ""
+msgstr "Sivustakatsojatila, jossa voit nähdä kaiken, mutta et voi hallita mitään pelaajaa."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -467,13 +467,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tavarat ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "Jokainen pelaajaan liitetty asiakas (joka ei ole sivustakatsoja) voi asettaa oman pelaajan heimon ja joukkueen."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -547,7 +547,7 @@ msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näpp
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Numeronäppäimillä (0 - 9) voit suoraan asettaa valitun alueen koon hiiresi kohdistimen ympärillä."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
