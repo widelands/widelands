@@ -867,7 +867,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		if (bob) {
 			game.create_ship(c, type_name, player);
 		} else {
-			Immovable& imm = game.create_immovable_with_name(
+			game.create_immovable_with_name(
 			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
 		}
 	} else
