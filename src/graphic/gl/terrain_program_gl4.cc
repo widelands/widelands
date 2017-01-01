@@ -771,11 +771,8 @@ bool TerrainProgramGl4::supported() {
 }
 
 void TerrainProgramGl4::draw(const TerrainGl4Arguments* args,
-                             uint32_t gametime,
                              float z_value) {
 	auto& gl = Gl::State::instance();
-
-	assert(gametime == args->terrain->egbase().get_gametime());
 
 	// First, draw the terrain.
 	glUseProgram(terrain_.gl_program.object());

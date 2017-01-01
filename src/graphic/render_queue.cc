@@ -269,7 +269,6 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		case Program::kTerrainGl4: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			terrain_program_gl4_->draw(item.terrain_gl4_arguments,
-			                           item.terrain_arguments.gametime,
 			                           item.z_value);
 			++i;
 		} break;

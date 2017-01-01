@@ -207,7 +207,6 @@ public:
 
 	// Draws the terrain.
 	void draw(const TerrainGl4Arguments* args,
-	          uint32_t gametime,
 	          float z_value);
 
 	// Draws a mini-map.
