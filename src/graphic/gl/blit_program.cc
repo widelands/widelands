@@ -156,7 +156,7 @@ BlitProgram::~BlitProgram() {
 }
 
 BlitProgramGl2::BlitProgramGl2() {
-	log("Using GL2 rendering path\n");
+	log("Using GL2 blit path\n");
 
 	gl_program_.build("blit");
 
@@ -289,7 +289,7 @@ void BlitProgramGl2::draw(const std::vector<Arguments>& arguments) {
 
 BlitProgramGl4::BlitProgramGl4()
   : gl_rects_buffer_(GL_ARRAY_BUFFER) {
-	log("Using GL4 rendering path\n");
+	log("Using GL4 blit path\n");
 
 	gl_program_.build_vp_fp({"blit_gl4"}, {"blit"});
 
@@ -300,10 +300,16 @@ BlitProgramGl4::BlitProgramGl4()
 }
 
 bool BlitProgramGl4::supported() {
-	// TODO(nha): implement this
-	// GLSL >= 1.30
-	// ARB_separate_shader_objects
-	// ARB_shader_storage_buffer_object
+	const auto& caps = Gl::State::instance().capabilities();
+
+	if (caps.glsl_version < 130)
+		return false;
+
+	if (!caps.ARB_separate_shader_objects ||
+	    !caps.ARB_shader_storage_buffer_object ||
+	    !caps.ARB_uniform_buffer_object)
+		return false;
+
 	return !g_options.pull_section("global").get_bool("disable_gl4", false);
 }
 

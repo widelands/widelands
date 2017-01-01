@@ -135,6 +135,8 @@ SDL_GLContext initialize(
 	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
 	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
+	Gl::State::instance().check_capabilities();
+
 	glDrawBuffer(GL_BACK);
 
 	glDisable(GL_DEPTH_TEST);

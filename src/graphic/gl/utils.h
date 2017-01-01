@@ -104,6 +104,17 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Buffer);
 };
 
+// Selected GL capabilities that are queried during initialization.
+struct Capabilities {
+	unsigned glsl_version = 0; // major * 100 + minor
+
+	bool ARB_separate_shader_objects = false;
+	bool ARB_shader_storage_buffer_object = false;
+	bool ARB_uniform_buffer_object = false;
+
+	void check();
+};
+
 // Some GL drivers do not remember the current pipeline state. If you rebind a
 // texture that has already bound to the same target, they will happily stall
 // the pipeline. We therefore cache the state of the GL driver in this class
@@ -124,6 +135,12 @@ public:
 	// that are activated. 'entries' is taken by value on purpose.
 	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);
 
+	const Capabilities& capabilities() const {
+		return caps_;
+	}
+
+	void check_capabilities();
+
 private:
 	static const unsigned kMaxTextureTargets = 16;
 
@@ -132,6 +149,7 @@ private:
 	GLenum last_active_texture_;
 	GLuint current_framebuffer_;
 	GLuint current_framebuffer_texture_;
+	Capabilities caps_;
 
 	State();
 

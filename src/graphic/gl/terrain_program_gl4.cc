@@ -715,6 +715,8 @@ TerrainProgramGl4::MiniMap::~MiniMap() {
 }
 
 TerrainProgramGl4::TerrainProgramGl4() {
+	log("Using GL4 terrain rendering path\n");
+
 	// Initialize vertex buffer (every instance/path has the same structure).
 	init_vertex_data();
 
@@ -732,12 +734,16 @@ TerrainProgramGl4::~TerrainProgramGl4() {
 }
 
 bool TerrainProgramGl4::supported() {
-	// TODO(nha): proper implementation
-	// GLSL >= 1.30
-	// GL_ARB_uniform_buffer_object
-	// GL_ARB_separate_shader_objects
-	// GL_ARB_shader_storage_buffer_object
-// 	return false;
+	const auto& caps = Gl::State::instance().capabilities();
+
+	if (caps.glsl_version < 130)
+		return false;
+
+	if (!caps.ARB_separate_shader_objects ||
+	    !caps.ARB_shader_storage_buffer_object ||
+	    !caps.ARB_uniform_buffer_object)
+		return false;
+
 	return !g_options.pull_section("global").get_bool("disable_gl4", false);
 }
 

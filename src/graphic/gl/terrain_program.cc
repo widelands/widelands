@@ -30,6 +30,8 @@
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
 // We target OpenGL 2.1 for the desktop here.
 TerrainProgram::TerrainProgram() {
+	log("Using GL2 terrain rendering path\n");
+
 	gl_program_.build("terrain");
 
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");

@@ -187,9 +187,45 @@ void Program::build(const std::string& program_name) {
 	build_vp_fp({program_name}, {program_name});
 }
 
+void Capabilities::check() {
+	// Reset all variables
+	*this = {};
+
+	const char* glsl_version_string = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	int major = 0, minor = 0;
+
+	if (sscanf(glsl_version_string, "%d.%d", &major, &minor) != 2)
+		log("Warning: Malformed GLSL version string: %s\n", glsl_version_string);
+
+	glsl_version = major * 100 + minor;
+
+	GLint num_extensions;
+	glGetIntegerv(GL_NUM_EXTENSIONS, &num_extensions);
+
+	for (GLint i = 0; i < num_extensions; ++i) {
+		const char* extension = reinterpret_cast<const char*>(glGetStringi(GL_EXTENSIONS, i));
+
+#define EXTENSION(basename) \
+		do { \
+			if (!strcmp(extension, "GL_" #basename)) \
+				basename = true; \
+		} while (false)
+
+		EXTENSION(ARB_separate_shader_objects);
+		EXTENSION(ARB_shader_storage_buffer_object);
+		EXTENSION(ARB_uniform_buffer_object);
+
+#undef EXTENSION
+	}
+}
+
 State::State()
    : target_to_texture_(kMaxTextureTargets), last_active_texture_(NONE),
      current_framebuffer_(0), current_framebuffer_texture_(0) {
+}
+
+void State::check_capabilities() {
+	caps_.check();
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
