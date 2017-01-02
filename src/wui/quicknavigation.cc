@@ -19,53 +19,15 @@
 
 #include "wui/quicknavigation.h"
 
-#include "logic/editor_game_base.h"
 #include "wlapplication.h"
-#include "wui/mapviewpixelfunctions.h"
 
-static const uint32_t MaxHistorySize = 32;
-
-QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view)
-   : egbase_(egbase), map_view_(map_view), landmarks_(10) {
-	map_view->changeview.connect([this](const bool jump) { view_changed(jump); });
+QuickNavigation::QuickNavigation(MapView* map_view)
+   : map_view_(map_view), landmarks_(10) {
+	map_view->changeview.connect([this] { view_changed(); });
 	havefirst_ = false;
-	update_ = true;
-	history_index_ = 0;
 }
 
-void QuickNavigation::setview(const MapView::View& view) {
-	update_ = false;
-	map_view_->set_view(view, MapView::Transition::Smooth);
-	update_ = true;
-}
-
-void QuickNavigation::view_changed(bool jump) {
-	const Rectf view_area = map_view_->view_area();
-	if (havefirst_ && update_) {
-		if (!jump) {
-			// Check if the anchor is moved outside the screen. If that is the
-			// case, we did jump.
-			const Vector2f dist =
-			   MapviewPixelFunctions::calc_pix_difference(egbase_.map(), anchor_, view_area.center());
-			if (dist.x > view_area.w / 2.f || dist.y > view_area.w / 2.f) {
-				jump = true;
-			}
-		}
-
-		if (jump) {
-			if (history_index_ < history_.size())
-				history_.erase(history_.begin() + history_index_, history_.end());
-			history_.push_back(current_);
-			if (history_.size() > MaxHistorySize)
-				history_.erase(history_.begin(), history_.end() - MaxHistorySize);
-			history_index_ = history_.size();
-		}
-	}
-
-	if (jump || !havefirst_) {
-		anchor_ = view_area.center();
-	}
-
+void QuickNavigation::view_changed() {
 	current_ = map_view_->view();
 	havefirst_ = true;
 }
@@ -90,27 +52,8 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 			set_landmark(which, current_);
 		} else {
 			if (landmarks_[which].set) {
-				setview(landmarks_[which].view);
+				map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
 			}
-		}
-		return true;
-	}
-
-	if (key.sym == SDLK_COMMA) {
-		if (history_index_ > 0) {
-			if (history_index_ >= history_.size()) {
-				history_.push_back(current_);
-			}
-			history_index_--;
-			setview(history_[history_index_]);
-		}
-		return true;
-	}
-
-	if (key.sym == SDLK_PERIOD) {
-		if (history_index_ + 1 < history_.size()) {
-			history_index_++;
-			setview(history_[history_index_]);
 		}
 		return true;
 	}

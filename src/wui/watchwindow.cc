@@ -125,7 +125,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	}
 
 	mapview_.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
-	mapview_.changeview.connect([this](bool) { stop_tracking_by_drag(); });
+	mapview_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});

@@ -417,7 +417,7 @@ void MapView::set_view(const View& view, const Transition& transition) {
 	case Transition::Jump: {
 		view_ = view;
 		MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
-		changeview(false /* jump */);  // NOCOM(#sirver): I truly hate this function :/
+		changeview();
 		return;
 	}
 

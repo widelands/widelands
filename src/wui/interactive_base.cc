@@ -81,7 +81,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
-     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, this))),
+     m(new InteractiveBaseInternals(new QuickNavigation(this))),
      field_overlay_manager_(new FieldOverlayManager()),
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
@@ -116,7 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		});
 
 	toolbar_.set_layout_toplevel(true);
-	changeview.connect([this](bool) { mainview_move(); });
+	changeview.connect([this] { mainview_move(); });
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));

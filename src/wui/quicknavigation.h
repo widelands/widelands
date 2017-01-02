@@ -29,10 +29,6 @@
 #include "base/vector.h"
 #include "wui/mapview.h"
 
-namespace Widelands {
-class EditorGameBase;
-}
-
 /**
  * Provide quick navigation shortcuts.
  *
@@ -44,11 +40,10 @@ struct QuickNavigation {
 		MapView::View view;
 		bool set;
 
-		Landmark() : set(false) {
-		}
+		Landmark() : set(false) {}
 	};
 
-	QuickNavigation(const Widelands::EditorGameBase& egbase, MapView* map_view);
+	QuickNavigation(MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
 	void set_landmark(size_t index, const MapView::View& view);
@@ -61,29 +56,14 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(const MapView::View& where);
-	void view_changed(bool jump);
+	void view_changed();
 
-	const Widelands::EditorGameBase& egbase_;
 	MapView* map_view_;
 
 	bool havefirst_;
-	bool update_;
-	Vector2f anchor_;  // center of last view in mappixel.
 	MapView::View current_;
 
-	/**
-	 * Keeps track of what the player has looked at to allow jumping back and forth
-	 * in the history.
-	 */
-	/*@{*/
-	std::vector<MapView::View> history_;
-	size_t history_index_;
-	/*@}*/
-
-	/**
-	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
-	 */
+	// Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
 	std::vector<Landmark> landmarks_;
 };
 

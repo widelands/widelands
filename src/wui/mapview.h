@@ -67,13 +67,10 @@ struct MapView : public UI::Panel {
 	        InteractiveBase&);
 	virtual ~MapView();
 
-	/**
-	 * Called when the view changed.  'jump' defines if the change should be
-	 * considered a "jump" or a smooth scrolling event.
-	 */
-	// NOCOM(#sirver): change to using 'Transition'
-	boost::signals2::signal<void(bool jump)> changeview;
+	// Called whenever the view changed, also during automatic animations.
+	boost::signals2::signal<void()> changeview;
 
+	// Called when the user clicked on a field.
 	boost::signals2::signal<void()> fieldclicked;
 
 	enum class Transition { Smooth, Jump };
