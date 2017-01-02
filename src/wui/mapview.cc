@@ -92,10 +92,6 @@ constexpr float pow2(float t) {
 	return t * t;
 }
 
-constexpr float pow3(float t) {
-	return t * t * t;
-}
-
 template <typename T>
 T mix(float t, const T& a, const T& b) {
 	return a * (1.f - t) + b * t;
@@ -112,8 +108,6 @@ public:
 	T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		return mix(pow2(t) * (3.f - 2.f * t), start_, end_);
-		// NOCOM(#sirver): Smootherstep - maybe accelerations too slowly, but definitvely smoother.
-		// return mix(pow3(t) * (t * (t * 6.f - 15.f) + 10.f), start_, end_);
 	}
 
 private:
