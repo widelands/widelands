@@ -122,7 +122,7 @@ end
 --    :returns: :const:`true` if a building was clicked
 --
 function click_building(player, building_name)
-   local building = p:get_buildings(building_name)[1]
+   local building = player:get_buildings(building_name)[1]
    mouse_to_field(building.fields[1])
    wl.ui.MapView():click(building.fields[1])
    return true
