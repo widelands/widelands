@@ -141,7 +141,7 @@ private:
 // function, but it allows us to parametrize over 'zoom_t' withouth a heap
 // allocation.
 template <typename T>
-void do_plan_map_transition(const uint32_t start_time,
+void do_plan_map_transition(uint32_t start_time,
                             const float duration_ms,
                             const SmoothstepInterpolator<Vector2f>& center_point_t,
                             const T& zoom_t,
