@@ -181,17 +181,24 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 	const Vector2f end_center = get_view_area(end, width, height).center();
 	const Vector2f center_point_change =
 	   MapviewPixelFunctions::calc_pix_difference(map, end_center, start_center);
+	const float zoom_change = std::abs(start.zoom - end.zoom);
 
 	// Heuristic: How many screens is the target point away from the current
 	// viewpoint? We use it to decide the zoom out factor and scroll speed.
 	float num_screens = std::max(std::abs(center_point_change.x) / (width * start.zoom),
 	                             std::abs(center_point_change.y) / (height * start.zoom));
 
+	// Do nothing if we are close.
+	if (zoom_change < 0.25f && std::abs(center_point_change.x) < 10 &&
+	    std::abs(center_point_change.y) < 10) {
+		return {};
+	}
+
 	// If the target is more than a copule screens away or we change the zoom we
 	// do a sort of jumping animation - zoom out, move and zoom back in.
 	// Otherwise we we just linearly interpolate the zoom.
-	const bool jumping_animation = num_screens > kPanOnlyDistanceThreshold ||
-	                               std::abs(start.zoom - end.zoom) > kPanOnlyZoomThreshold;
+	const bool jumping_animation =
+	   num_screens > kPanOnlyDistanceThreshold || zoom_change > kPanOnlyZoomThreshold;
 	const float duration_ms =
 	   jumping_animation ? kLongAnimationMs : kShortAnimationMs;
 
@@ -336,7 +343,10 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 
 	case Transition::Smooth: {
 		const TimestampedMouse current = animation_target_mouse();
-		mouse_plans_.push_back(plan_mouse_transition(current, pixel));
+		const auto plan = plan_mouse_transition(current, pixel);
+		if (!plan.empty()) {
+			mouse_plans_.push_back(plan);
+		}
 		return;
 	}
 	}
@@ -419,8 +429,10 @@ void MapView::set_view(const View& view, const Transition& transition) {
 
 	case Transition::Smooth: {
 		const TimestampedView current = animation_target_view();
-		view_plans_.push_back(
-		   plan_map_transition(current.t, map, current.view, view, get_w(), get_h()));
+		const auto plan = plan_map_transition(current.t, map, current.view, view, get_w(), get_h());
+		if (!plan.empty()) {
+			view_plans_.push_back(plan);
+		}
 		return;
 	}
 	}
@@ -540,8 +552,11 @@ void MapView::zoom_around(float new_zoom,
 	case Transition::Smooth: {
 		const int w = get_w();
 		const int h = get_h();
-		view_plans_.push_back(plan_zoom_transition(
-		   current.t, get_view_area(current.view, w, h).center(), current.view.zoom, new_zoom, w, h));
+		const auto plan = plan_zoom_transition(
+		   current.t, get_view_area(current.view, w, h).center(), current.view.zoom, new_zoom, w, h);
+		if (!plan.empty()) {
+			view_plans_.push_back(plan);
+		}
 		return;
 	}
 	}
