@@ -34,7 +34,8 @@
 
 namespace Widelands {
 
-CmdLuaCoroutine::~CmdLuaCoroutine() {}
+CmdLuaCoroutine::~CmdLuaCoroutine() {
+}
 
 void CmdLuaCoroutine::execute(Game& game) {
 	try {

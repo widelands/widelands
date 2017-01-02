@@ -82,7 +82,7 @@ struct MapView : public UI::Panel {
 
 	// Moves the view so that 'coords' is centered.
 	void scroll_to_field(const Widelands::Coords& coords, const Transition& transition);
-	
+
 	// Moves the view so that 'pos' is centered. The 'pos' is in map pixel
 	// coordinates.
 	void scroll_to_map_pixel(const Vector2f& pos, const Transition& transition);

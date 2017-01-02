@@ -206,8 +206,7 @@ int LuaGame::launch_coroutine(lua_State* L) {
 	std::unique_ptr<LuaCoroutine> cr(new LuaCoroutine(luaL_checkthread(L, 2)));
 	lua_pop(L, 2);  // Remove coroutine and Game object from stack
 
-	get_game(L).enqueue_command(
-	   new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
+	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
 
 	return 0;
 }

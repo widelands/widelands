@@ -40,7 +40,8 @@ struct QuickNavigation {
 		MapView::View view;
 		bool set;
 
-		Landmark() : set(false) {}
+		Landmark() : set(false) {
+		}
 	};
 
 	QuickNavigation(MapView* map_view);

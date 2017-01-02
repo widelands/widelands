@@ -58,7 +58,6 @@ constexpr float kPanOnlyZoomThreshold = 0.25f;
 // we will do a pan-only movement.
 constexpr float kPanOnlyDistanceThreshold = 2.0f;
 
-
 // Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
 // point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
 // Containing is defined as such that the shortest distance between the center
@@ -90,14 +89,12 @@ constexpr float pow2(float t) {
 	return t * t;
 }
 
-template <typename T>
-T mix(float t, const T& a, const T& b) {
+template <typename T> T mix(float t, const T& a, const T& b) {
 	return a * (1.f - t) + b * t;
 }
 
 // https://en.wikipedia.org/wiki/Smoothstep
-template <typename T>
-class SmoothstepInterpolator {
+template <typename T> class SmoothstepInterpolator {
 public:
 	SmoothstepInterpolator(const T& start, const T& end, float dt)
 	   : start_(start), end_(end), dt_(dt) {
@@ -117,11 +114,11 @@ private:
 
 // In the first half smoothly interpolate from 'start' to 'middle', then in the
 // second half interpolate till 'end'.
-template <typename T>
-class DoubleSmoothstepInterpolator {
+template <typename T> class DoubleSmoothstepInterpolator {
 public:
 	DoubleSmoothstepInterpolator(const T& start, const T& middle, const T& end, float dt)
-	   : first_(start, middle, dt / 2.f), second_(middle, end, dt / 2.f), dt_(dt) {}
+	   : first_(start, middle, dt / 2.f), second_(middle, end, dt / 2.f), dt_(dt) {
+	}
 
 	T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
@@ -191,8 +188,7 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 	// Otherwise we we just linearly interpolate the zoom.
 	const bool jumping_animation =
 	   num_screens > kPanOnlyDistanceThreshold || zoom_change > kPanOnlyZoomThreshold;
-	const float duration_ms =
-	   jumping_animation ? kLongAnimationMs : kShortAnimationMs;
+	const float duration_ms = jumping_animation ? kLongAnimationMs : kShortAnimationMs;
 
 	std::deque<MapView::TimestampedView> plan;
 	plan.push_back(MapView::TimestampedView{start_time, start});
@@ -405,7 +401,8 @@ void MapView::draw(RenderTarget& dst) {
 		renderer_->rendermap(
 		   egbase, view_.viewpoint, view_.zoom, interactive_player->player(), draw_text, &dst);
 	} else {
-		renderer_->rendermap(egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
+		renderer_->rendermap(
+		   egbase, view_.viewpoint, view_.zoom, static_cast<TextToDraw>(draw_text), &dst);
 	}
 }
 
@@ -454,7 +451,6 @@ Rectf MapView::view_area() const {
 const MapView::View& MapView::view() const {
 	return view_;
 }
-
 
 void MapView::pan_by(Vector2i delta_pixels) {
 	if (is_animating()) {
@@ -517,7 +513,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	}
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
 	float zoom = view_.zoom * static_cast<float>(std::pow(
-		                          1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	                             1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
 	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }
@@ -609,4 +605,3 @@ MapView::TimestampedMouse MapView::animation_target_mouse() const {
 	}
 	return mouse_plans_.back().back();
 }
-

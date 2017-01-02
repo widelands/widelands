@@ -462,12 +462,9 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RO(LuaMapView, center_map_pixel),
-   PROP_RW(LuaMapView, buildhelp),
-   PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),
-   PROP_RO(LuaMapView, is_building_road),
-   PROP_RO(LuaMapView, is_animating),
+   PROP_RO(LuaMapView, center_map_pixel), PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),           PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road), PROP_RO(LuaMapView, is_animating),
    {nullptr, nullptr, nullptr},
 };
 
@@ -554,7 +551,6 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 	lua_pushboolean(L, get()->is_building_road());
 	return 1;
 }
-
 
 /* RST
    .. attribute:: is_animating
@@ -723,7 +719,6 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
-
 
 /*
  * C Functions

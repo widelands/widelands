@@ -21,8 +21,7 @@
 
 #include "wlapplication.h"
 
-QuickNavigation::QuickNavigation(MapView* map_view)
-   : map_view_(map_view), landmarks_(10) {
+QuickNavigation::QuickNavigation(MapView* map_view) : map_view_(map_view), landmarks_(10) {
 	map_view->changeview.connect([this] { view_changed(); });
 	havefirst_ = false;
 }
