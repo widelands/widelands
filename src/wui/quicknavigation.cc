@@ -35,10 +35,7 @@ QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase, MapVie
 
 void QuickNavigation::setview(const MapView::View& view) {
 	update_ = false;
-	map_view_->set_zoom(view.zoom);
-	// NOCOM(#sirver): experiment withi smooth
-	map_view_->set_viewpoint(view.viewpoint, MapView::Transition::Smooth);
-	// NOCOM(#sirver): try to get rid of set_viewpoint
+	map_view_->set_view(view, MapView::Transition::Smooth);
 	update_ = true;
 }
 

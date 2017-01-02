@@ -84,17 +84,12 @@ struct MapView : public UI::Panel {
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// NOCOM(#sirver): document
-	void set_viewpoint(const Vector2f& vp, const Transition& transition);
+	void set_view(const View& view, const Transition& transition);
 	void scroll_to_field(const Widelands::Coords& coords, const Transition& transition);
 	void scroll_to_map_pixel(const Vector2f& pos, const Transition& transition);
 
 	Rectf view_area() const;
 	const View& view() const;
-	float get_zoom() const;
-
-	// Set the zoom to the new value without changing view_point. For the user
-	// the view will perceivably jump.
-	void set_zoom(float zoom);
 
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.

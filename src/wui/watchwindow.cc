@@ -188,8 +188,7 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 		view_btns_[idx]->set_perm_pressed(true);
 	}
 	cur_index_ = idx;
-	mapview_.set_zoom(views_[cur_index_].view.zoom);
-	mapview_.set_viewpoint(views_[cur_index_].view.viewpoint, MapView::Transition::Jump);
+	mapview_.set_view(views_[cur_index_].view, MapView::Transition::Jump);
 }
 
 WatchWindow::~WatchWindow() {
