@@ -36,8 +36,6 @@
 
 namespace {
 
-// NOCOM(#sirver): check all public member functions in mapview for their usefulness.
-
 // Number of keyframes to generate for a plan. The more points, the smoother
 // the animation (though we also lineraly interpolate between keyframes) and
 // the more work.

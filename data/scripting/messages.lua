@@ -132,7 +132,6 @@ function message_box_objective(player, message)
 
    local center_pixel
 
-   -- NOCOM(#sirver): ctrl+1-9 does not work properly with animation
    if message.field then
       -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
       -- In this time, could user can scroll elsewhere, giving weird results.

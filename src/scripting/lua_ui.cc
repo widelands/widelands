@@ -572,7 +572,7 @@ int LuaMapView::get_is_animating(lua_State* L) {
 /* RST
    .. method:: click(field)
 
-      Moves the mouse onto a field and clicks it just like the user would
+      Jumps the mouse onto a field and clicks it just like the user would
       have.
 
       :arg field: the field to click on
@@ -638,7 +638,18 @@ int LuaMapView::close(lua_State* /* l */) {
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+   .. method:: scroll_to_map_pixel(x, y)
+
+		Starts an animation to center the view on top of the pixel (x, y) in map
+		pixel space. Use `is_animating` to check if the animation is still going
+		on.
+
+      :arg x: x coordinate of the pixel
+      :type x: number
+      :arg y: y coordinate of the pixel
+      :type y: number
+*/
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	// don't move view in replays
@@ -651,20 +662,45 @@ int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+   .. method:: scroll_to_map_pixel(field)
+
+		Starts an animation to center the view on top of the 'field'. Use
+		`is_animating` to check if the animation is still going on.
+
+      :arg field: the field to center on
+      :type field: :class:`wl.map.Field`
+*/
 int LuaMapView::scroll_to_field(lua_State* L) {
 	get()->scroll_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+   .. method:: is_visible(field)
+
+		Returns `true` if `field` is currently visible in the map view.
+
+      :arg field: the field
+      :type field: :class:`wl.map.Field`
+*/
 int LuaMapView::is_visible(lua_State* L) {
 	lua_pushboolean(L, get()->is_visible((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
 	return 1;
 }
 
-// NOCOM(#sirver): document
+/* RST
+   .. method:: mouse_to_pixel(x, y)
+
+		Starts a animation to move the mouse onto the pixel (x, y) of this panel.
+		Use `is_animating` to check if the animation is still going on.
+
+      :arg x: x coordinate of the pixel
+      :type x: number
+      :arg y: y coordinate of the pixel
+      :type y: number
+*/
 int LuaMapView::mouse_to_pixel(lua_State* L) {
 	int x = luaL_checkint32(L, 2);
 	int y = luaL_checkint32(L, 3);
@@ -672,7 +708,16 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+   .. method:: mouse_to_field(field)
+
+		Starts a animation to move the mouse onto the 'field'. If 'field' is not
+		visible on the screen currently, does nothing. Use `is_animating` to
+		check if the animation is still going on.
+
+      :arg field: the field
+      :type field: :class:`wl.map.Field`
+*/
 int LuaMapView::mouse_to_field(lua_State* L) {
 	get()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);

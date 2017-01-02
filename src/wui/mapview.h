@@ -73,29 +73,47 @@ struct MapView : public UI::Panel {
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void()> fieldclicked;
 
+	// Defines if an animation should be immediate (one-frame) or nicely
+	// animated for the user to follow.
 	enum class Transition { Smooth, Jump };
 
-	// Moves the mouse cursor so that it is directly above the given node. Does
-	// nothing if the node is not currently visible on screen.
-	void mouse_to_field(const Widelands::Coords& coords, const Transition& transition);
-	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
-
-	// NOCOM(#sirver): document
+	// Set the view to 'view'.
 	void set_view(const View& view, const Transition& transition);
+
+	// Moves the view so that 'coords' is centered.
 	void scroll_to_field(const Widelands::Coords& coords, const Transition& transition);
+	
+	// Moves the view so that 'pos' is centered. The 'pos' is in map pixel
+	// coordinates.
 	void scroll_to_map_pixel(const Vector2f& pos, const Transition& transition);
 
+	// Moves the mouse cursor so that it is directly above the given field. Does
+	// nothing if the field is not currently visible on screen.
+	void mouse_to_field(const Widelands::Coords& coords, const Transition& transition);
+
+	// Moves the mouse to the 'pixel' in the current panel. With 'transition' ==
+	// Jump, this behaves exactly like 'set_mouse_pos'.
+	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
+
+	// The current view area visible in the MapView in map pixel coordinates.
+	// The returned value always has 'x' > 0 and 'y' > 0.
 	Rectf view_area() const;
+
+	// The current view.
 	const View& view() const;
 
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel, const Transition& transition);
 
-	// NOCOM(#sirver): document
-	bool is_dragging() const;
-	bool is_animating() const;
+	// Returns true if 'coords' is currenty visible on screen.
 	bool is_visible(const Widelands::Coords& coords) const;
+
+	// True if the user is currently dragging the map.
+	bool is_dragging() const;
+
+	// True if a 'Transition::Smooth' animation is playing.
+	bool is_animating() const;
 
 	// Implementing Panel.
 	void draw(RenderTarget&) override;
