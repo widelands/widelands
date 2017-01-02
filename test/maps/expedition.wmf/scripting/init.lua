@@ -66,12 +66,16 @@ function stable_save(safename)
 end
 
 function click_on_ship(which_ship)
+   local mv = wl.ui.MapView()
    for x=0,map.width-1 do
       for y=0,map.height-1 do
          local field = map:get_field(x,y)
          for idx, bob in ipairs(field.bobs) do
             if bob == which_ship then
-               mouse_to_field(field, 1)
+               if not mv:is_visible(field) then
+                  scroll_to_field(field)
+                  click_on_ship(which_ship)
+               end
                wl.ui.MapView():click(field)
                return
             end
