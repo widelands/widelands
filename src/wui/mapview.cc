@@ -58,27 +58,6 @@ constexpr float kPanOnlyZoomThreshold = 0.25f;
 // we will do a pan-only movement.
 constexpr float kPanOnlyDistanceThreshold = 2.0f;
 
-// Given 'p' on a torus of dimension ('h', 'h') and 'r' that contains this
-// point, change 'p' so that r.x < p.x < r.x + r.w and similar for y.
-// Containing is defined as such that the shortest distance between the center
-// of 'r' is smaller than (r.w / 2, r.h / 2). If 'p' is NOT contained in 'r'
-// this method will loop forever.
-Vector2f move_inside(Vector2f p, const Rectf& r, float w, float h) {
-	while (p.x < r.x && r.x < r.x + r.w) {
-		p.x += w;
-	}
-	while (p.x > r.x && r.x > r.x + r.w) {
-		p.x -= w;
-	}
-	while (p.y < r.y && r.y < r.y + r.y) {
-		p.y += h;
-	}
-	while (p.y > r.y && r.y > r.y + r.y) {
-		p.y -= h;
-	}
-	return p;
-}
-
 // Returns the view area, i.e. the currently visible rectangle in map pixel
 // space for the given 'view'.
 Rectf get_view_area(const MapView::View& view, const int width, const int height) {
@@ -263,6 +242,57 @@ std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::Times
 
 }  // namespace
 
+MapView::ViewArea::ViewArea(const Rectf& rect, const Widelands::Map& map) : rect_(rect), map_(map) {
+}
+
+bool MapView::ViewArea::contains(const Widelands::Coords& c) const {
+	return contains_map_pixel(MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c));
+}
+
+Vector2f MapView::ViewArea::move_inside(const Widelands::Coords& c) const {
+	// We want to figure out to which pixel 'c' maps inside our rect_. Since
+	// Wideland's map is a torus, the current 'rect_' could span the origin.
+	// Without loss of generality we only discuss x - y follows accordingly.
+	// Depending on the interpretation, the area spanning the origin means:
+	// 1) either view_area.x + view_area.w < view_area.x - which would be
+	// surprising to the rest of Widelands.
+	// 2) map_pixel.x > get_map_end_screen_x(map).
+	// We move the point by adding or substracting 'get_map_end_screen_x()' such
+	// that the point is contained inside of 'rect_'. If we now convert to
+	// panel pixels, we are guaranteed that the pixel we get back is inside the
+	// screen bounds.
+	Vector2f p = MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c);
+	assert(contains_map_pixel(p));
+
+	const float w = MapviewPixelFunctions::get_map_end_screen_x(map_);
+	const float h = MapviewPixelFunctions::get_map_end_screen_y(map_);
+	while (p.x < rect_.x && rect_.x < rect_.x + rect_.w) {
+		p.x += w;
+	}
+	while (p.x > rect_.x && rect_.x > rect_.x + rect_.w) {
+		p.x -= w;
+	}
+	while (p.y < rect_.y && rect_.y < rect_.y + rect_.y) {
+		p.y += h;
+	}
+	while (p.y > rect_.y && rect_.y > rect_.y + rect_.y) {
+		p.y -= h;
+	}
+	return p;
+}
+
+bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
+	// We figure out if 'map_pixel' is visible on screen. To do this, we
+	// calculate the shortest distance to 'view_area.center()' on a torus. If
+	// the distance is less than 'view_area.w / 2', the point is visible.
+	const Vector2f view_center = rect_.center();
+	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map_, view_center, map_pixel);
+
+	// Check if the point is visible on screen.
+	return std::abs(dist.x) <= (rect_.w / 2.f) && std::abs(dist.y) <= (rect_.h / 2.f);
+}
+
+
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
    : UI::Panel(parent, x, y, w, h),
@@ -284,42 +314,12 @@ Vector2f MapView::to_map(const Vector2i& panel_pixel) const {
 	   view_.viewpoint, view_.zoom, panel_pixel.cast<float>());
 }
 
-bool MapView::is_visible(const Widelands::Coords& c) const {
-	// We figure out if 'map_pixel' is visible on screen. To do this, we
-	// calculate the shortest distance to 'view_area.center()' on a torus. If
-	// the distance is less than 'view_area.w / 2', the point is visible.
-	const Widelands::Map& map = intbase().egbase().map();
-	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
-	const Rectf area = view_area();
-	const Vector2f view_center = area.center();
-	const Vector2f dist = MapviewPixelFunctions::calc_pix_difference(map, view_center, map_pixel);
-
-	// Check if the point is visible on screen.
-	return std::abs(dist.x) <= (area.w / 2.f) && std::abs(dist.y) <= (area.h / 2.f);
-}
-
 void MapView::mouse_to_field(const Widelands::Coords& c, const Transition& transition) {
-	if (!is_visible(c)) {
+	const ViewArea area = view_area();
+	if (!area.contains(c)) {
 		return;
 	}
-
-	// We want to figure out which 'panel_pixel' the 'map_pixel'. Since
-	// Wideland's map is a torus, the current 'view_area' could span the origin.
-	// Without loss of generality we only discuss x - y follows accordingly.
-	// Depending on the interpretation, the area spanning the origin means:
-	// 1) either view_area.x + view_area.w < view_area.x - which would be surprising to
-	//    the rest of Widelands.
-	// 2) map_pixel.x > get_map_end_screen_x(map).
-	// We move the point by adding or substracting 'get_map_end_screen_x()' such
-	// that the point is contained inside of 'view_area'. If we now convert to
-	// panel pixels, we are guaranteed that the pixel we get back is inside the
-	// panel.
-	const Widelands::Map& map = intbase().egbase().map();
-	const Vector2f map_pixel = MapviewPixelFunctions::to_map_pixel_with_normalization(map, c);
-	const Vector2f in_panel =
-	   to_panel(move_inside(map_pixel, view_area(), MapviewPixelFunctions::get_map_end_screen_x(map),
-	                        MapviewPixelFunctions::get_map_end_screen_y(map)));
-	mouse_to_pixel(round(in_panel), transition);
+	mouse_to_pixel(round(to_panel(area.move_inside(c))), transition);
 }
 
 void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition) {
@@ -439,13 +439,13 @@ void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& tran
 }
 
 void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transition) {
-	const Rectf area = view_area();
+	const Rectf area = view_area().rect();
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
 	set_view(View{target_view, view_.zoom}, transition);
 }
 
-Rectf MapView::view_area() const {
-	return get_view_area(view_, get_w(), get_h());
+MapView::ViewArea MapView::view_area() const {
+	return ViewArea(get_view_area(view_, get_w(), get_h()), intbase().egbase().map());
 }
 
 const MapView::View& MapView::view() const {

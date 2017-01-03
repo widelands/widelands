@@ -486,7 +486,7 @@ void LuaMapView::__unpersist(lua_State* L) {
 		currently sees. This is a table containing 'x', 'y'.
 */
 int LuaMapView::get_center_map_pixel(lua_State* L) {
-	const Vector2f center = get()->view_area().center();
+	const Vector2f center = get()->view_area().rect().center();
 	lua_newtable(L);
 
 	lua_pushstring(L, "x");
@@ -682,7 +682,8 @@ int LuaMapView::scroll_to_field(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(L, get()->is_visible((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	lua_pushboolean(
+	   L, get()->view_area().contains((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
 	return 1;
 }
 

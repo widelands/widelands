@@ -28,6 +28,7 @@
 
 #include "base/rect.h"
 #include "base/vector.h"
+#include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
 
@@ -37,7 +38,36 @@ class InteractiveBase;
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
-struct MapView : public UI::Panel {
+class MapView : public UI::Panel {
+public:
+	// A rectangle on a Torus (i.e. a Widelands Map).
+	class ViewArea {
+		public:
+		   // View in map pixels that is spanned by this.
+		   const Rectf& rect() const { return rect_; }
+
+			// Returns true if 'coords' is contained inside this view. Containing
+			// is defined as such that the shortest distance between the center of
+			// 'rect()' is smaller than (rect().w / 2, rect().h / 2).
+			bool contains(const Widelands::Coords& coords) const;
+
+			// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
+			// for y. This requires that 'contains' would return true for 'coords', otherwise this will
+			// be an infinite loop.
+			Vector2f move_inside(const Widelands::Coords& coords) const;
+
+		private:
+			friend class MapView;
+
+			ViewArea(const Rectf& rect, const Widelands::Map& map);
+
+			// Returns true if 'map_pixel' is inside this view area.
+			bool contains_map_pixel(const Vector2f& map_pixel) const;
+
+			const Rectf rect_;
+			const Widelands::Map& map_;
+	};
+
 	struct View {
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
@@ -97,7 +127,7 @@ struct MapView : public UI::Panel {
 
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
-	Rectf view_area() const;
+	ViewArea view_area() const;
 
 	// The current view.
 	const View& view() const;
@@ -105,9 +135,6 @@ struct MapView : public UI::Panel {
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel, const Transition& transition);
-
-	// Returns true if 'coords' is currenty visible on screen.
-	bool is_visible(const Widelands::Coords& coords) const;
 
 	// True if the user is currently dragging the map.
 	bool is_dragging() const;

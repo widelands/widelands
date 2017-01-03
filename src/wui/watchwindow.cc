@@ -252,7 +252,7 @@ void WatchWindow::do_follow() {
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
-		Vector2f center_map_pixel = mapview_.view_area().center();
+		Vector2f center_map_pixel = mapview_.view_area().rect().center();
 		Widelands::Map& map = g.map();
 		MapviewPixelFunctions::normalize_pix(map, &center_map_pixel);
 		std::vector<Widelands::Bob*> bobs;
@@ -293,7 +293,7 @@ void WatchWindow::do_follow() {
  * Cause the main mapview_ to jump to our current position.
  */
 void WatchWindow::do_goto() {
-	warp_mainview(mapview_.view_area().center());
+	warp_mainview(mapview_.view_area().rect().center());
 }
 
 /**

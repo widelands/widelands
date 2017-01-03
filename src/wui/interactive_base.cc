@@ -378,7 +378,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 void InteractiveBase::mainview_move() {
 	if (m->minimap.window) {
-		m->mm->set_view(view_area());
+		m->mm->set_view(view_area().rect());
 	}
 }
 

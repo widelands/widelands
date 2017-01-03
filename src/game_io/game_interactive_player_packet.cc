@@ -136,7 +136,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
 	if (ibase != nullptr) {
-		Vector2f center = ibase->view_area().center();
+		Vector2f center = ibase->view_area().rect().center();
 		fw.float_32(center.x);
 		fw.float_32(center.y);
 	} else {

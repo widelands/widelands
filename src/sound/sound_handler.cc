@@ -309,16 +309,12 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 
 	// Viewpoint is the point of the map in pixel which is shown in the upper
 	// left corner of window or fullscreen
-	const InteractiveBase& ibase = *egbase_->get_ibase();
-	if (!ibase.is_visible(position_map)) {
+	const MapView::ViewArea view_area = egbase_->get_ibase()->view_area();
+	if (!view_area.contains(position_map)) {
 		return -1;
 	}
-
-	// Get pixel coordinates of sound source from map coordinates
-	const Vector2f position_pix = MapviewPixelFunctions::to_map_pixel(egbase_->map(), position_map);
-
-	const Rectf view_area = ibase.view_area();
-	return static_cast<int>((position_pix.x - view_area.x) * 254 / view_area.w);
+	const Vector2f position_pix = view_area.move_inside(position_map);
+	return static_cast<int>((position_pix.x - view_area.rect().x) * 254 / view_area.rect().w);
 }
 
 /** Find out whether to actually play a certain effect right now or rather not
