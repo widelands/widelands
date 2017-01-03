@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-08 17:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-24 16:02+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,7 +320,7 @@ msgstr "Tuntematon"
 msgid "Loading map “%s”…"
 msgstr "Lataan karttaa \"%s\"…"
 
-#: ../../src/editor/map_generator.cc:712
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr "Satunnainen pelaaja"
 
@@ -463,7 +463,7 @@ msgstr "Pelaajia: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: –"
-msgstr ""
+msgstr "Pelaajia: –"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -813,7 +813,7 @@ msgstr "Virhe tallennettaessa karttaa!\nTallennettu karttatiedosto voi olla rikk
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Anna Hakemiston Nimi: "
 
 #: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
@@ -1020,7 +1020,7 @@ msgstr "Tallennustiedosto ei ole yhteensopiva tämän Widelands-version kanssa."
 msgid "No description defined"
 msgstr "Kuvausta ei määritelty"
 
-#: ../../src/logic/map_objects/immovable.cc:513
+#: ../../src/logic/map_objects/immovable.cc:511
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -1241,29 +1241,29 @@ msgstr "Ei koulutettavia sotilaita!"
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:247
 msgid "(not occupied)"
 msgstr "(tyhjillään)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:268
+#: ../../src/logic/map_objects/tribes/productionsite.cc:254
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Työläinen puuttuu"
 msgstr[1] "Työläisiä puuttuu"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:275
+#: ../../src/logic/map_objects/tribes/productionsite.cc:261
 msgid "(stopped)"
 msgstr "(pysäytetty)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:374
+#: ../../src/logic/map_objects/tribes/productionsite.cc:360
 #: ../../src/wui/building_statistics_menu.cc:622
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:918
+#: ../../src/logic/map_objects/tribes/productionsite.cc:904
 msgid "Can’t find any more resources!"
 msgstr "Resurssit lopussa!"
 
@@ -1536,8 +1536,8 @@ msgstr "HUOMIO: Sain paketin %s, vaikka olen CONNECTING-tilassa."
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aikaero palvelimeen on %d sekuntia."
+msgstr[1] "Aikaero palvelimeen on %d sekuntia."
 
 #: ../../src/network/internet_gaming.cc:452
 #, c-format
@@ -1982,7 +1982,7 @@ msgstr "Lähetän osan %1$s tiedostosta %2$s koneelle %3$s"
 #: ../../src/network/network_gaming_messages.cc:170
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
-msgstr "Pelaaja \"%s\" lyötiin. Hän on nyt tarkkailijana."
+msgstr "Pelaaja ‘%s’ lyötiin ja hänestä tuli sivustakatsoja."
 
 #: ../../src/network/network_gaming_messages.cc:171
 #, c-format
@@ -2048,13 +2048,13 @@ msgstr "%1% (%2%)"
 #: ../../src/ui_basic/dropdown.cc:62 ../../src/ui_basic/dropdown.cc:119
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Valitse Esine"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:151
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Ei Valittu"
 
 #: ../../src/ui_basic/spinbox.cc:140
 msgid "Decrease the value"
@@ -2986,57 +2986,60 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s)."
-msgstr ""
+msgstr "Ole hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsia. Löydät asiaankuuluvat viestit ohjelman standarditulosteesta (stdout.txt tiedosto Windowsissa). Käytät koontiversiota  %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1047
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Ole hyvä ja liitä tämä tieto raporttiisi.\n\nWidelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. Pelin voi usein – mutta ei aina – ladata ja jatkaa taas pelaamista. "
 
-#: ../../src/wui/actionconfirm.cc:157
+#: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
 msgstr "Tuhoa rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:158
-#, c-format
-msgid "Do you really want to destroy this %s?"
-msgstr "Haluatko varmasti tuhota tämän %s?"
+#: ../../src/wui/actionconfirm.cc:177
+msgid "Do you really want to destroy this building?"
+msgstr "Haluatko varmasti tuhota tämän rakennuksen?"
 
-#: ../../src/wui/actionconfirm.cc:204
+#: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
 msgstr "Puretaanko rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:205
-#, c-format
-msgid "Do you really want to dismantle this %s?"
-msgstr "Haluatko oikeasti purkaa %s:n?"
+#: ../../src/wui/actionconfirm.cc:222
+msgid "Do you really want to dismantle this building?"
+msgstr "Haluatko varmasti purkaa tämän rakennuksen?"
 
-#: ../../src/wui/actionconfirm.cc:251
+#: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
 msgstr "Laajennetaanko rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:252
-#, c-format
-msgid "Do you really want to enhance this %s?"
-msgstr "Haluatko oikeasti laajentaa %s:n?"
+#: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
+msgid "Do you really want to enhance this building?"
+msgstr "Haluatko varmasti laajentaa tätä rakennusta?"
 
-#: ../../src/wui/actionconfirm.cc:293
+#. * TRANSLATORS: Warning message when player wants to enhance a military
+#. building
+#: ../../src/wui/actionconfirm.cc:271
+msgid "Be careful if the enemy is near!"
+msgstr "Ole varovainen, jos vihollinen on lähellä!"
+
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
 msgstr "Upotetaanko alus?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:295
+#: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Haluatko todellakin upottaa aluksen %s?"
 
-#: ../../src/wui/actionconfirm.cc:331
+#: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
 msgstr "Peru tutkimusmatka?"
 
-#: ../../src/wui/actionconfirm.cc:332
+#: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Haluatko perua meneilläänolevan tutkimusmatkan?"
 
@@ -3078,7 +3081,7 @@ msgstr "Työn alla:"
 #: ../../src/wui/building_statistics_menu.cc:91
 #: ../../src/wui/building_statistics_menu.cc:634
 msgid "Low Productivity"
-msgstr ""
+msgstr "Alhainen Tuottavuus"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
@@ -3880,7 +3883,7 @@ msgstr "vapaa"
 
 #: ../../src/wui/multiplayersetupgroup.cc:114
 msgid "Spectator"
-msgstr "Katsoja"
+msgstr "Sivustakatsoja"
 
 #: ../../src/wui/multiplayersetupgroup.cc:253
 msgid "Shared in"

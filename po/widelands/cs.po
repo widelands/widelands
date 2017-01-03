@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-09 22:13+0000\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-19 20:07+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -318,7 +318,7 @@ msgstr "Neznámý"
 msgid "Loading map “%s”…"
 msgstr "Načítám mapu \"%s\"..."
 
-#: ../../src/editor/map_generator.cc:712
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr "Náhodný hráč"
 
@@ -1019,7 +1019,7 @@ msgstr "Hra byla uložena v jiné verzi Widelands než je vaše a nelze ji proto
 msgid "No description defined"
 msgstr "Bez popisu"
 
-#: ../../src/logic/map_objects/immovable.cc:513
+#: ../../src/logic/map_objects/immovable.cc:511
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -1247,30 +1247,30 @@ msgstr "Nemáte vojáky k trénování!"
 msgid "No soldier found for this training level!"
 msgstr "Nebyl nalezen voják pro tuto úroveň výcviku!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:247
 msgid "(not occupied)"
 msgstr "(neobydleno)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:268
+#: ../../src/logic/map_objects/tribes/productionsite.cc:254
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Chybí dělník"
 msgstr[1] "Chybí dělníci"
 msgstr[2] "Chybí dělníci"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:275
+#: ../../src/logic/map_objects/tribes/productionsite.cc:261
 msgid "(stopped)"
 msgstr "(zastaveno)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:374
+#: ../../src/logic/map_objects/tribes/productionsite.cc:360
 #: ../../src/wui/building_statistics_menu.cc:622
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:918
+#: ../../src/logic/map_objects/tribes/productionsite.cc:904
 msgid "Can’t find any more resources!"
 msgstr "Nelze najít další suroviny!"
 
@@ -3010,48 +3010,51 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Prosíme uveď tuto informaci v hlášení chyby.\n\nWidelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní."
 
-#: ../../src/wui/actionconfirm.cc:157
+#: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
 msgstr "Zničit budovu?"
 
-#: ../../src/wui/actionconfirm.cc:158
-#, c-format
-msgid "Do you really want to destroy this %s?"
-msgstr "Opravdu chceš zničit tuto budovu (%s)?"
+#: ../../src/wui/actionconfirm.cc:177
+msgid "Do you really want to destroy this building?"
+msgstr "Opravdu chceš zničit tuto budovu?"
 
-#: ../../src/wui/actionconfirm.cc:204
+#: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
 msgstr "Rozebrat budovu?"
 
-#: ../../src/wui/actionconfirm.cc:205
-#, c-format
-msgid "Do you really want to dismantle this %s?"
-msgstr "Opravdu chcete rozebrat %s?"
+#: ../../src/wui/actionconfirm.cc:222
+msgid "Do you really want to dismantle this building?"
+msgstr "Opravdu chceš rozebrat tuto budovu?"
 
-#: ../../src/wui/actionconfirm.cc:251
+#: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
 msgstr "Vylepšit budovu?"
 
-#: ../../src/wui/actionconfirm.cc:252
-#, c-format
-msgid "Do you really want to enhance this %s?"
-msgstr "Opravdu chcete vylepšit %s?"
+#: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
+msgid "Do you really want to enhance this building?"
+msgstr "Opravdu chceš vylepšit tuto budovu?"
 
-#: ../../src/wui/actionconfirm.cc:293
+#. * TRANSLATORS: Warning message when player wants to enhance a military
+#. building
+#: ../../src/wui/actionconfirm.cc:271
+msgid "Be careful if the enemy is near!"
+msgstr "Buď opatrný, když je nepřítel poblíž!"
+
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
 msgstr "Potopit loď?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:295
+#: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Opravdu chcete potopit %s?"
 
-#: ../../src/wui/actionconfirm.cc:331
+#: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
 msgstr "Zrušit výpravu?"
 
-#: ../../src/wui/actionconfirm.cc:332
+#: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Opravdu chcete zrušit probíhající výpravu?"
 

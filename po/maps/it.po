@@ -2,9 +2,9 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano Magro, 2016
-# Cristiano Magro, 2016
-# Cristiano Magro, 2016
+# xno, 2016
+# xno, 2016
+# xno, 2016
 # GunChleoc, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-24 14:18+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-12-15 15:23+0000\n"
+"PO-Revision-Date: 2016-12-15 15:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -526,16 +526,19 @@ msgstr "Un altro barbaro – modificato da king_of_nowhere"
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
-"sunlight heated up the Earth thousandfold and melted glaciers and people "
+"sunlight heated up the Earth a thousandfold and melted glaciers and people "
 "were plunged into the deep. But now – high in the majestic mountains, on the"
 " last scrap of land – two surviving tribes are sheltering. Even though the "
 "Gods showed mercy and the climate thus turned cooler again, the water is "
 "still rising and rising. Onto the last secure place – the highest mountain "
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
-"living space is also a hard and small place to live. Don’t forget to take "
-"care of your timber supplies, you’ll need them."
-msgstr "Gli dei capricciosi non hanno ascoltato le nostre preghiere. Invece, la luce del sole è aumentata, sciogliendo i ghiacciai e affondando i popoli nelle profondità. Ma ora - tra le montagne maestose, sull'ultimo pezzo ddi terra emersa - si sono rifugiate due tribù sopravvissute. Anche se gli dei hanno mostrato pietà e il clima è tornato più fresco, il livello dell'acqua continua a salire sempre più. Solo due opposti sentieri conducono all'ultimo luogo sicuro: la più alta catena montuosa dove l'ammontare di oro e lo spazio per vivere sono a malapena sufficienti per una tribù. Ma ricorda, sii attento... questo ultimo spazio abitabile è piccolo e la vita è dura. Non dimenticare di fare scorta di legname, ti servirà."
+"living space is also a hard and small place to live."
+msgstr ""
+
+#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+msgid "Don’t forget to take care of your timber supplies, you’ll need them."
+msgstr ""
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -587,11 +590,15 @@ msgstr "Appuntamento"
 #: ../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr "Solamente una piccola collina al centro della mappa connette queste quattro tribù rivali. Guida il tuo esercito dritto verso questa collina e costruisci una roccaforte gigantesca come segno della tua superiorità! Suggerimento: Nel centro c'è spazio solo per una roccaforte. L'acqua si trova ovunque, quindi non c'è bisogno di inviare geologi."
+"tribes. Lead your army to this hill right away and build a giant stronghold "
+"as a sign of your superiority!"
+msgstr ""
+
+#: ../../data/maps/Rendez-Vous.wmf/elemental:11
+msgid ""
+"There is space for only one stronghold in the centre. Water can be found "
+"everywhere, so there is no need to send out geologists."
+msgstr ""
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"

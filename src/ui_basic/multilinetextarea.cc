@@ -56,8 +56,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(
-	   UI::g_fh1->render(
-	               as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
+	   UI::g_fh1
+	      ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
 	      ->height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
@@ -158,11 +158,11 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
 
 		if (blit_width > 0 && blit_height > 0) {
-			float anchor = 0.f;
+			int anchor = 0;
 			Align alignment = mirror_alignment(align_);
 			switch (alignment & UI::Align::kHorizontal) {
 			case UI::Align::kHCenter:
-				anchor = (get_eff_w() - blit_width) / 2.f;
+				anchor = (get_eff_w() - blit_width) / 2;
 				break;
 			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;

@@ -157,7 +157,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-
 	// Get programs
 	items_table = table.get_table("programs");
 	for (std::string program_name : items_table->keys<std::string>()) {
@@ -168,8 +167,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
 			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-				new ProductionProgram(program_name, _(program_table->get_string("descname")),
-											 program_table->get_table("actions"), egbase, this));
+			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
+			                         program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}

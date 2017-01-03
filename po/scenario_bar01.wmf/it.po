@@ -6,7 +6,7 @@
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015
+# Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
 # Tommaso Amici <tommaso.amici@gmail.com>, 2015
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-22 15:07+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -384,7 +384,7 @@ msgstr "Come mi diceva mio padre, ci sono tempi per combattere e tempi per aspet
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron sta contemplando la guerra"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
@@ -428,7 +428,7 @@ msgstr "Per combattere contro chiunque minacci la nostra esistenza, anche se si 
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron sta pensando al futuro"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232

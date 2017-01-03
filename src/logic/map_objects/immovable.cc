@@ -329,8 +329,8 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
  */
 Immovable& ImmovableDescr::create(EditorGameBase& egbase,
                                   const Coords& coords,
-                                  const Building* former_building) const {
-	Immovable& result = *new Immovable(*this, former_building);
+                                  const BuildingDescr* former_building_descr) const {
+	Immovable& result = *new Immovable(*this, former_building_descr);
 	result.position_ = coords;
 	result.init(egbase);
 	return result;
@@ -344,9 +344,10 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building* former_building)
+Immovable::Immovable(const ImmovableDescr& imm_descr,
+                     const Widelands::BuildingDescr* former_building_descr)
    : BaseImmovable(imm_descr),
-     former_building_descr_(former_building ? &former_building->descr() : nullptr),
+     former_building_descr_(former_building_descr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -354,9 +355,6 @@ Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building*
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0) {
-	if (former_building != nullptr) {
-		set_owner(former_building->get_owner());
-	}
 }
 
 Immovable::~Immovable() {
@@ -869,9 +867,8 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		if (bob) {
 			game.create_ship(c, type_name, player);
 		} else {
-			Immovable& imm = game.create_immovable(c, type_name, owner_type);
-			if (player)
-				imm.set_owner(player);
+			game.create_immovable_with_name(
+			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
 		}
 	} else
 		immovable.program_step(game);
@@ -924,7 +921,8 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_type);
+		game.create_immovable_with_name(
+		   f, type_name, owner_type, nullptr /* owner */, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
@@ -1024,7 +1022,8 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
 		    logic_rand_as_double(&game) < probability_to_grow(descr.terrain_affinity(), new_location,
 		                                                      map, game.world().terrains())) {
-			game.create_immovable(mr.location(), type_name, descr.owner_type());
+			game.create_immovable_with_name(mr.location(), type_name, descr.owner_type(),
+			                                nullptr /* owner */, nullptr /* former_building_descr */);
 		}
 	}
 
