@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-21 23:16+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -379,7 +379,7 @@ msgstr "As father told me, there are times to fight and times to lie and wait, t
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron is Contemplating the War"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
@@ -423,7 +423,7 @@ msgstr "To rise against whoever threatens our very existence, even though it may
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron is Considering the Future"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232
