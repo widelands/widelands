@@ -152,12 +152,13 @@ struct FindNodeAllyOwned {
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
 struct FindNodeUnownedMineable {
-	FindNodeUnownedMineable(Player* p, Game& g);
+	FindNodeUnownedMineable(Player* p, Game& g, const int32_t t = INVALID_INDEX);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
+	int32_t ore_type;
 };
 
 // When looking for unowned terrain to acquire, we must
@@ -269,6 +270,7 @@ struct BuildableField {
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
 	uint8_t unowned_mines_spots_nearby;
+	bool unowned_iron_mines_nearby;
 	uint8_t trees_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
@@ -374,6 +376,7 @@ struct BuildingObserver {
 	bool is_fisher;    // need to identify fishers
 	bool is_port;
 	bool is_shipyard;
+	bool is_barracks;
 	bool space_consumer;       // farm, vineyard... = true
 	bool expansion_type;       // military building used that can be used to control area
 	bool fighting_type;        // military building built near enemies

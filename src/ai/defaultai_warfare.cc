@@ -688,7 +688,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	const bool verbose = false;
+	//const bool verbose = false; NOCOM
 
 	// Check next militarysite
 	bool changed = false;
@@ -702,82 +702,21 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	int16_t usefullness_score = 0;
 	BuildableField bf(f);
-	if (military_last_dismantle_ + 2 * 60 * 1000 < gametime) {  // 2 minutes between every dismantle
-		update_buildable_field(bf);
-
-		usefullness_score += bf.military_score_;
-
-		if (verbose && (bf.enemy_nearby)) {
-			printf(" %d MSite: at %3dx%3d, enemy: %s / accessible: %s, usefulness score: %4d\n",
-			       player_number(), f.x, f.y, (bf.enemy_nearby) ? "Y" : "N",
-			       (bf.enemy_accessible_) ? "Y" : "N", usefullness_score);
-		}
+	update_buildable_field(bf);
+	usefullness_score += bf.military_score_ / 10;
+	if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
+		usefullness_score += 10;
 	}
+	usefullness_score -= static_cast<int16_t>(soldier_status_);
+	usefullness_score += (bf.enemy_accessible_) ? 2 : 0;
+	
+	const bool dism_treshold = 3 + management_data.get_military_number_at(89) / 24;
+	const bool pref_treshold = 10 + management_data.get_military_number_at(90) / 15;
 
 	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
 	Quantity const current_target = ms->soldier_capacity();
-	const bool mman1 = management_data.f_neuron_pool[48].get_result(
-		usefullness_score < 100 + management_data.get_military_number_at(88),
-		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		bf.enemy_accessible_,
-		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		current_target < total_capacity);
-	const bool mman2 = management_data.f_neuron_pool[49].get_result(		
-		current_target > 1,
-		soldier_status_ == SoldiersStatus::kShortage,
-		current_target > total_capacity / 2 + 1,
-		usefullness_score < 100 + management_data.get_military_number_at(89),
-		(gametime - militarysites.front().built_time) > 2 * 60 * 1000);
-	const bool mman3 = management_data.f_neuron_pool[50].get_result(
-		bf.enemy_accessible_,
-		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		current_target < total_capacity,
-		current_target > 1,
-		current_target > total_capacity / 2 + 1);
-	const bool mman4 = management_data.f_neuron_pool[51].get_result(	
-		bf.enemy_accessible_,
-		current_target > 1,
-		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		soldier_status_ == SoldiersStatus::kShortage,
-		usefullness_score < 100 + management_data.get_military_number_at(91));
 
-	const bool mman5 = management_data.f_neuron_pool[52].get_result(	
-		bf.enemy_accessible_,
-		(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		soldier_status_ == SoldiersStatus::kShortage,
-		usefullness_score < 100 + management_data.get_military_number_at(90)) ;
-
-	
-	const bool to_destroy = (usefullness_score < 0) ? true : management_data.f_neuron_pool[44].get_result(
-		mman1,
-		mman4,
-		mman2,
-		mman5,
-		mman4);
-	
-	const bool to_decrease = management_data.f_neuron_pool[45].get_result(
-		mman1,
-		mman4,
-		mman2,
-		mman5,
-		mman4);
-
-	const bool to_increase = management_data.f_neuron_pool[46].get_result(
-		mman4,
-		mman1,
-		mman3,
-		mman5,
-		mman2);
-
-	const bool prefer_rookies = management_data.f_neuron_pool[47].get_result(
-		mman4,
-		mman1,
-		mman3,
-		mman2,
-		mman5);
-	
-	if (to_destroy) {
+	if (usefullness_score < dism_treshold) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			flags_to_be_removed.push_back(ms->base_flag().get_position());
@@ -787,32 +726,146 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_bulldoze(*ms);
 			military_last_dismantle_ = game().get_gametime();
 		}		
-	} else if (to_decrease){
-		if (current_target > 1) {
+	} else if (usefullness_score < pref_treshold) {
+		// this site is not that important but is to be preserved
+		if (current_target > 1){
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
+			}
+		if (ms->get_soldier_preference() == MilitarySite::kPrefersHeroes) {
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+			changed = true;
 		}
-	} else if (to_increase) {
+	} else {
+		// this is important military site
 		if (current_target < total_capacity) {
 			game().send_player_change_soldier_capacity(*ms, 1);
 			changed = true;
 		}
-	}
-	
-	if (prefer_rookies && MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
-			changed = true;
-		}
-	if (!prefer_rookies && MilitarySite::kPrefersRookies == ms->get_soldier_preference()) {
+		if (ms->get_soldier_preference() == MilitarySite::kPrefersRookies) {
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
 			changed = true;
 		}
+	}
+	
+
+	
+	//if (military_last_dismantle_ + 2 * 60 * 1000 < gametime) {  // 2 minutes between every dismantle
+		//update_buildable_field(bf);
+
+		//usefullness_score += bf.military_score_ / 10;
+
+		//if (verbose && (bf.enemy_nearby)) {
+			//printf(" %d MSite: at %3dx%3d, enemy: %s / accessible: %s, usefulness score: %4d\n",
+			       //player_number(), f.x, f.y, (bf.enemy_nearby) ? "Y" : "N",
+			       //(bf.enemy_accessible_) ? "Y" : "N", usefullness_score);
+		//}
+	//}
+
+
+	//int32_t tmp_score = 
+
+
+
+	//const bool mman1 = management_data.f_neuron_pool[48].get_result(
+		//usefullness_score < 100 + management_data.get_military_number_at(88),
+		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		//bf.enemy_accessible_,
+		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		//current_target < total_capacity);
+	//const bool mman2 = management_data.f_neuron_pool[49].get_result(		
+		//current_target > 1,
+		//soldier_status_ == SoldiersStatus::kShortage,
+		//current_target > total_capacity / 2 + 1,
+		//usefullness_score < 100 + management_data.get_military_number_at(89),
+		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000);
+	//const bool mman3 = management_data.f_neuron_pool[50].get_result(
+		//bf.enemy_accessible_,
+		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		//current_target < total_capacity,
+		//current_target > 1,
+		//current_target > total_capacity / 2 + 1);
+	//const bool mman4 = management_data.f_neuron_pool[51].get_result(	
+		//bf.enemy_accessible_,
+		//current_target > 1,
+		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		//soldier_status_ == SoldiersStatus::kShortage,
+		//usefullness_score < 100 + management_data.get_military_number_at(91));
+
+	//const bool mman5 = management_data.f_neuron_pool[52].get_result(	
+		//bf.enemy_accessible_,
+		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
+		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
+		//soldier_status_ == SoldiersStatus::kShortage,
+		//usefullness_score < 100 + management_data.get_military_number_at(90)) ;
+
+	
+	//const bool to_destroy = (usefullness_score < 0) ? true : management_data.f_neuron_pool[44].get_result(
+		//mman1,
+		//mman4,
+		//mman2,
+		//mman5,
+		//mman4);
+	
+	//const bool to_decrease = management_data.f_neuron_pool[45].get_result(
+		//mman1,
+		//mman4,
+		//mman2,
+		//mman5,
+		//mman4);
+
+	//const bool to_increase = management_data.f_neuron_pool[46].get_result(
+		//mman4,
+		//mman1,
+		//mman3,
+		//mman5,
+		//mman2);
+
+	//const bool prefer_rookies = management_data.f_neuron_pool[47].get_result(
+		//mman4,
+		//mman1,
+		//mman3,
+		//mman2,
+		//mman5);
+	
+	//if (to_destroy) {
+		
+	//} else if (to_decrease){
+		//if (current_target > 1) {
+			//game().send_player_change_soldier_capacity(*ms, -1);
+			//changed = true;
+		//}
+	//} else if (to_increase) {
+		//if (current_target < total_capacity) {
+			//game().send_player_change_soldier_capacity(*ms, 1);
+			//changed = true;
+		//}
+	//}
+	
+	//if (prefer_rookies && MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+			//changed = true;
+		//}
+	//if (!prefer_rookies && MilitarySite::kPrefersRookies == ms->get_soldier_preference()) {
+			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+			//changed = true;
+		//}
 		
 
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
 	return changed;
+}
+
+uint32_t DefaultAI::barracks_count() {
+	uint32_t count = 0;
+	for (auto ps : productionsites) {
+		if (ps.bo->is_barracks) {
+			count += ps.bo->total_count();
+		}
+	}
+	return count;
 }
 
 // This calculates strength of vector of soldiers, f.e. soldiers in a building or
