@@ -3870,7 +3870,7 @@ Warehouse
 */
 
 /* RST
-   .. method:: get_ware_policies(which)
+   .. method:: get_warehouse_policies(which)
 
       Gets the policies how the warehouse should handle the given wares.
       The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
@@ -3878,7 +3878,7 @@ Warehouse
       Usage example:
       .. code-block:: lua
 
-         wh:get_ware_policies({"ax", "coal"})
+         wh:get_warehouse_policies({"ax", "coal"})
          -- Returns a table like {ax="normal", coal="prefer"}
 
       :arg which: behaves like for :meth:`HasWares.get_wares`.
@@ -3887,20 +3887,14 @@ Warehouse
 */
 
 /* RST
-   .. method:: get_worker_policies(which)
-
-      Same as :meth:`Warehouse.get_ware_policies` but for workers.
-*/
-
-/* RST
-   .. method:: set_ware_policies(which, policy)
+   .. method:: set_warehouse_policies(which, policy)
 
       Sets the policies how the warehouse should handle the given wares.
 
       Usage example:
       .. code-block:: lua
 
-         wh:set_ware_policies("coal", "prefer")
+         wh:set_warehouse_policies("coal", "prefer")
 
       :arg which: behaves like for :meth:`HasWares.get_wares`.
 
@@ -3908,11 +3902,6 @@ Warehouse
       :type policy: a string out of "normal", "prefer", "dontstock", "remove".
 */
 
-/* RST
-   .. method:: set_worker_policies(which, policy)
-
-      Same as :meth:`Warehouse.set_ware_policies` but for workers.
-*/
 
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
@@ -3922,10 +3911,8 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, get_workers),
    METHOD(LuaWarehouse, set_soldiers),
    METHOD(LuaWarehouse, get_soldiers),
-   METHOD(LuaWarehouse, set_ware_policies),
-   METHOD(LuaWarehouse, get_ware_policies),
-   METHOD(LuaWarehouse, set_worker_policies),
-   METHOD(LuaWarehouse, get_worker_policies),
+   METHOD(LuaWarehouse, set_warehouse_policies),
+   METHOD(LuaWarehouse, get_warehouse_policies),
    METHOD(LuaWarehouse, start_expedition),
    METHOD(LuaWarehouse, cancel_expedition),
    {nullptr, nullptr},
@@ -4023,21 +4010,20 @@ WH_GET(ware, Ware)
 WH_GET(worker, Worker)
 #undef WH_GET
 
-
 inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 	switch (p) {
-		case Warehouse::StockPolicy::SP_Normal:
-			lua_pushstring(L, "normal");
-			break;
-		case Warehouse::StockPolicy::SP_Prefer:
-			lua_pushstring(L, "prefer");
-			break;
-		case Warehouse::StockPolicy::SP_DontStock:
-			lua_pushstring(L, "dontstock");
-			break;
-		case Warehouse::StockPolicy::SP_Remove:
-			lua_pushstring(L, "remove");
-			break;
+	case Warehouse::StockPolicy::SP_Normal:
+		lua_pushstring(L, "normal");
+		break;
+	case Warehouse::StockPolicy::SP_Prefer:
+		lua_pushstring(L, "prefer");
+		break;
+	case Warehouse::StockPolicy::SP_DontStock:
+		lua_pushstring(L, "dontstock");
+		break;
+	case Warehouse::StockPolicy::SP_Remove:
+		lua_pushstring(L, "remove");
+		break;
 	}
 }
 
@@ -4055,61 +4041,177 @@ inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) 
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-int LuaWarehouse::set_ware_policies(lua_State* L) {
-	Warehouse* wh = get(L, get_egbase(L));
-	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
-	lua_pop(L, 1);
-	bool return_number = false;
-	WaresSet set = parse_get_wares_arguments(L, wh->owner().tribe(), &return_number);
-	lua_newtable(L);
-	for (WaresSet::iterator i = set.begin(); i != set.end(); ++i) {
-		wh->set_ware_policy(*i, p);
-	}
-	return 0;
+bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+	wh->set_ware_policy(idx, p);
+	return true;
 }
 
-int LuaWarehouse::set_worker_policies(lua_State* L) {
-	Warehouse* wh = get(L, get_egbase(L));
-	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
-	lua_pop(L, 1);
-	bool return_number = false;
-	WorkersSet set = parse_get_workers_arguments(L, wh->owner().tribe(), &return_number);
-	lua_newtable(L);
+/**
+ * Sets the given policy for the given ware in the given warehouse and return true.
+ * If the no ware with the given name exists for the tribe of the warehouse, return false.
+ */
+bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
-	for (WorkersSet::iterator i = set.begin(); i != set.end(); ++i) {
-		// If the worker does not cost anything, ignore it
-		// Otherwise, an unlimited stream of carriers might leave the warehouse
-		if (tribe.get_worker_descr(*i)->is_buildable()
-				&& tribe.get_worker_descr(*i)->buildcost().empty()) {
-			continue;
-		}
-		wh->set_worker_policy(*i, p);
+	DescriptionIndex idx = tribe.ware_index(name);
+	if (!tribe.has_ware(idx)) {
+		return false;
 	}
+	return do_set_ware_policy(wh, idx, p);
+}
+
+bool do_set_worker_policy(Warehouse* wh,
+                          const DescriptionIndex idx,
+                          const Warehouse::StockPolicy p) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	// If the worker does not cost anything, ignore it
+	// Otherwise, an unlimited stream of carriers might leave the warehouse
+	if (tribe.get_worker_descr(idx)->is_buildable() &&
+	    tribe.get_worker_descr(idx)->buildcost().empty()) {
+		return true;
+	}
+	wh->set_worker_policy(idx, p);
+	return true;
+}
+
+/**
+ * Sets the given policy for the given worker in the given warehouse and return true.
+ * Also return true if the given worker does not cost anything but do not set its policy.
+ * If the no worker with the given name exists for the tribe of the warehouse, return false.
+ */
+bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	DescriptionIndex idx = tribe.worker_index(name);
+	if (!tribe.has_worker(idx)) {
+		return false;
+	}
+	return do_set_worker_policy(wh, idx, p);
+}
+
+int LuaWarehouse::set_warehouse_policies(lua_State* L) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 3)
+		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
+
+	Warehouse* wh = get(L, get_egbase(L));
+	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	lua_pop(L, 1);
+	const TribeDescr& tribe = wh->owner().tribe();
+
+	// takes either "all", a name or an array of names
+	if (lua_isstring(L, 2)) {
+		const std::string& what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			for (const DescriptionIndex& i : tribe.wares()) {
+				do_set_ware_policy(wh, i, p);
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				do_set_worker_policy(wh, i, p);
+			}
+		} else {
+			// Only one item requested
+			if (!do_set_ware_policy(wh, what, p) && !do_set_worker_policy(wh, what, p)) {
+				// Unknown whatever, abort
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+		}
+	} else {
+		// array of names
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			const std::string& what = luaL_checkstring(L, -1);
+			if (!do_set_ware_policy(wh, what, p) && !do_set_worker_policy(wh, what, p)) {
+				// Note that this will change the policy for entries earlier in the list
+				// but when the user provides broken data its his own fault
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+			lua_pop(L, 1);
+		}
+	}
+
 	return 0;
 }
 
-#define WH_GET_POLICY(type, btype)                                                                        \
-	int LuaWarehouse::get_##type##_policies(lua_State* L) {                                           \
-		Warehouse* wh = get(L, get_egbase(L));                                                    \
-		const Tribes& tribes = get_egbase(L).tribes();                                            \
-		bool return_number = false;                                                               \
-		btype##sSet set = parse_get_##type##s_arguments(L, wh->owner().tribe(), &return_number);  \
-		lua_newtable(L);                                                                          \
-		if (return_number)                                                                        \
-			wh_policy_to_string(L, wh->get_##type##_policy(*set.begin()));                    \
-		else {                                                                                    \
-			lua_newtable(L);                                                                  \
-			for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) {                \
-				lua_pushstring(L, tribes.get_##type##_descr(*i)->name());                 \
-				wh_policy_to_string(L, wh->get_##type##_policy(*i));                      \
-				lua_rawset(L, -3);                                                        \
-			}                                                                                 \
-		}                                                                                         \
-		return 1;                                                                                 \
+#define WH_GET_POLICY(type)                                                                        \
+	int do_get_##type##_policy(                                                                     \
+	   lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
+		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
+		return 1;                                                                                    \
 	}
-WH_GET_POLICY(ware, Ware)
-WH_GET_POLICY(worker, Worker)
+WH_GET_POLICY(ware)
+WH_GET_POLICY(worker)
 #undef WH_GET_POLICY
+
+bool do_get_ware_policy(lua_State* L, Warehouse* wh, const std::string& name) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	DescriptionIndex idx = tribe.ware_index(name);
+	if (!tribe.has_ware(idx)) {
+		return false;
+	}
+	do_get_ware_policy(L, wh, idx);
+	return true;
+}
+
+bool do_get_worker_policy(lua_State* L, Warehouse* wh, const std::string& name) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	DescriptionIndex idx = tribe.worker_index(name);
+	if (!tribe.has_worker(idx)) {
+		return false;
+	}
+	do_get_worker_policy(L, wh, idx);
+	return true;
+}
+
+int LuaWarehouse::get_warehouse_policies(lua_State* L) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2)
+		report_error(L, "Wrong number of arguments to get_warehouse_policies!");
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+	// takes either "all", a single name or an array of names
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			lua_newtable(L);
+			for (const DescriptionIndex& i : tribe.wares()) {
+				std::string name = tribe.get_ware_descr(i)->name();
+				lua_pushstring(L, name.c_str());
+				do_get_ware_policy(L, wh, i);
+				lua_rawset(L, -3);
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				std::string name = tribe.get_worker_descr(i)->name();
+				lua_pushstring(L, name.c_str());
+				do_get_worker_policy(L, wh, i);
+				lua_rawset(L, -3);
+			}
+		} else {
+			// Only one item requested
+			if (!do_get_ware_policy(L, wh, what) && !do_get_worker_policy(L, wh, what)) {
+				// Unknown whatever, abort
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+		}
+	} else {
+		// array of names
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_newtable(L);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			// Stack is: ... input_table new_table nil input_key input_value
+			// input_value is the name of the ware or worker and will be added into the new table
+			// input_key is an index and is dropped by the next call of lua_next()
+			const std::string& what = luaL_checkstring(L, -1);
+			if (!do_get_ware_policy(L, wh, what) && !do_get_worker_policy(L, wh, what)) {
+				// Note that this will change the policy for entries earlier in the list
+				// but when the user provides broken data its his own fault
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+			lua_rawset(L, -4);
+		}
+	}
+	return 1;
+}
 
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {

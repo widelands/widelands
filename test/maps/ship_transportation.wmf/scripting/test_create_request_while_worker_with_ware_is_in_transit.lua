@@ -22,8 +22,7 @@ run(function()
 
    -- set logs and woodcutters to "remove from here" in the port
    np = northern_port()
-   np:set_ware_policies("log", "remove")
-   np:set_worker_policies("barbarians_lumberjack", "remove")
+   np:set_warehouse_policies({"log", "barbarians_lumberjack"}, "remove")
 
    -- aaand action!
 
@@ -56,7 +55,7 @@ run(function()
    sleep(3000)
 
    cons:destroy()
-   
+
    sleep(6000)
    -- check if both lumberjack and log come to rest in the port
    -- if it is possible to check for the log in the building site that would be an alternative
