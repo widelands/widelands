@@ -242,7 +242,8 @@ std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::Times
 
 }  // namespace
 
-MapView::ViewArea::ViewArea(const Rectf& rect, const Widelands::Map& map) : rect_(rect), map_(map) {
+MapView::ViewArea::ViewArea(const Rectf& init_rect, const Widelands::Map& map)
+   : rect_(init_rect), map_(map) {
 }
 
 bool MapView::ViewArea::contains(const Widelands::Coords& c) const {
@@ -357,11 +358,11 @@ void MapView::draw(RenderTarget& dst) {
 
 		// Linearly interpolate between the next and the last.
 		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
-		const View view = {
+		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
 		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
 		};
-		set_view(view, Transition::Jump);
+		set_view(new_view, Transition::Jump);
 		break;
 	}
 
@@ -406,11 +407,11 @@ void MapView::draw(RenderTarget& dst) {
 	}
 }
 
-void MapView::set_view(const View& view, const Transition& transition) {
+void MapView::set_view(const View& target_view, const Transition& transition) {
 	const Widelands::Map& map = intbase().egbase().map();
 	switch (transition) {
 	case Transition::Jump: {
-		view_ = view;
+		view_ = target_view;
 		MapviewPixelFunctions::normalize_pix(map, &view_.viewpoint);
 		changeview();
 		return;
@@ -418,7 +419,8 @@ void MapView::set_view(const View& view, const Transition& transition) {
 
 	case Transition::Smooth: {
 		const TimestampedView current = animation_target_view();
-		const auto plan = plan_map_transition(current.t, map, current.view, view, get_w(), get_h());
+		const auto plan =
+		   plan_map_transition(current.t, map, current.view, target_view, get_w(), get_h());
 		if (!plan.empty()) {
 			view_plans_.push_back(plan);
 		}
