@@ -3902,7 +3902,6 @@ Warehouse
       :type policy: a string out of "normal", "prefer", "dontstock", "remove".
 */
 
-
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, set_wares),
@@ -4133,34 +4132,23 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 }
 
 #define WH_GET_POLICY(type)                                                                        \
-	int do_get_##type##_policy(                                                                     \
-	   lua_State* L, Warehouse* wh, const DescriptionIndex idx) {          \
-		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
-		return 1;                                                                                    \
+	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {     \
+		wh_policy_to_string(L, wh->get_##type##_policy(idx));                              \
+	}                                                                                          \
+                                                                                                   \
+	bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {        \
+		const TribeDescr& tribe = wh->owner().tribe();                                     \
+		DescriptionIndex idx = tribe.type##_index(name);                                   \
+		if (!tribe.has_##type(idx)) {                                                      \
+			return false;                                                              \
+		}                                                                                  \
+		do_get_##type##_policy(L, wh, idx);                                                \
+		return true;                                                                       \
 	}
+
 WH_GET_POLICY(ware)
 WH_GET_POLICY(worker)
 #undef WH_GET_POLICY
-
-bool do_get_ware_policy(lua_State* L, Warehouse* wh, const std::string& name) {
-	const TribeDescr& tribe = wh->owner().tribe();
-	DescriptionIndex idx = tribe.ware_index(name);
-	if (!tribe.has_ware(idx)) {
-		return false;
-	}
-	do_get_ware_policy(L, wh, idx);
-	return true;
-}
-
-bool do_get_worker_policy(lua_State* L, Warehouse* wh, const std::string& name) {
-	const TribeDescr& tribe = wh->owner().tribe();
-	DescriptionIndex idx = tribe.worker_index(name);
-	if (!tribe.has_worker(idx)) {
-		return false;
-	}
-	do_get_worker_policy(L, wh, idx);
-	return true;
-}
 
 int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 	int32_t nargs = lua_gettop(L);
