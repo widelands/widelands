@@ -3869,39 +3869,6 @@ Warehouse
    Every Headquarter or Warehouse on the Map is of this type.
 */
 
-/* RST
-   .. method:: get_warehouse_policies(which)
-
-      Gets the policies how the warehouse should handle the given wares.
-      The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
-
-      Usage example:
-      .. code-block:: lua
-
-         wh:get_warehouse_policies({"ax", "coal"})
-         -- Returns a table like {ax="normal", coal="prefer"}
-
-      :arg which: behaves like for :meth:`HasWares.get_wares`.
-
-      :returns: :class:`string` or :class:`table`
-*/
-
-/* RST
-   .. method:: set_warehouse_policies(which, policy)
-
-      Sets the policies how the warehouse should handle the given wares.
-
-      Usage example:
-      .. code-block:: lua
-
-         wh:set_warehouse_policies("coal", "prefer")
-
-      :arg which: behaves like for :meth:`HasWares.get_wares`.
-
-      :arg policy: the policy to apply for all the wares given in `which`.
-      :type policy: a string out of "normal", "prefer", "dontstock", "remove".
-*/
-
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, set_wares),
@@ -4009,6 +3976,7 @@ WH_GET(ware, Ware)
 WH_GET(worker, Worker)
 #undef WH_GET
 
+// Transforms the given warehouse policy to a string which is used by the lua code
 inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 	switch (p) {
 	case Warehouse::StockPolicy::SP_Normal:
@@ -4026,6 +3994,7 @@ inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 	}
 }
 
+// Transforms the given string from the lua code to a warehouse policy
 inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal")
@@ -4086,6 +4055,21 @@ bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehous
 	return do_set_worker_policy(wh, idx, p);
 }
 
+/* RST
+   .. method:: set_warehouse_policies(which, policy)
+
+      Sets the policies how the warehouse should handle the given wares.
+
+      Usage example:
+      .. code-block:: lua
+
+         wh:set_warehouse_policies("coal", "prefer")
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :arg policy: the policy to apply for all the wares given in `which`.
+      :type policy: a string out of "normal", "prefer", "dontstock", "remove".
+*/
 int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 	int32_t nargs = lua_gettop(L);
 	if (nargs != 3)
@@ -4131,6 +4115,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 	return 0;
 }
 
+// Gets the warehouse policy by ware/worker-name or id
 #define WH_GET_POLICY(type)                                                                        \
 	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {     \
 		wh_policy_to_string(L, wh->get_##type##_policy(idx));                              \
@@ -4150,6 +4135,22 @@ WH_GET_POLICY(ware)
 WH_GET_POLICY(worker)
 #undef WH_GET_POLICY
 
+/* RST
+   .. method:: get_warehouse_policies(which)
+
+      Gets the policies how the warehouse should handle the given wares.
+      The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
+
+      Usage example:
+      .. code-block:: lua
+
+         wh:get_warehouse_policies({"ax", "coal"})
+         -- Returns a table like {ax="normal", coal="prefer"}
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :returns: :class:`string` or :class:`table`
+*/
 int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 	int32_t nargs = lua_gettop(L);
 	if (nargs != 2)
