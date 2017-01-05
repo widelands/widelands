@@ -76,6 +76,7 @@ public:
 	int set_team(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
+	int get_produced_wares_count(lua_State* L);
 
 	/*
 	 * Lua methods

@@ -106,7 +106,8 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives), PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, messages),   PROP_RO(LuaPlayer, inbox),
    PROP_RW(LuaPlayer, team),       PROP_RO(LuaPlayer, tribe),
-   PROP_RW(LuaPlayer, see_all),    {nullptr, nullptr, nullptr},
+   PROP_RW(LuaPlayer, see_all),    PROP_RO(LuaPlayer, produced_wares_count),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -271,6 +272,25 @@ int LuaPlayer::get_see_all(lua_State* const L) {
 	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
+
+/* RST
+   .. attribute:: produced_wares_count
+
+      (RO) An array of wares produced byt the player with produced quantity. 
+*/
+int LuaPlayer::get_produced_wares_count(lua_State* L) {
+	Player& p = get(L, get_egbase(L));
+	const TribeDescr& tribe = p.tribe();
+
+	lua_newtable(L);
+	for (const DescriptionIndex& idx : tribe.wares()) {
+		lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+		lua_pushuint32(L, p.get_current_produced_statistics_(idx));
+		lua_settable(L, -3);			
+	}
+	return 1;
+}
+
 
 /*
  ==========================================================
