@@ -46,12 +46,6 @@ public:
 	~WorkersQueue() override {
 		assert(index_ == INVALID_INDEX);
 	}
-
-	/// Temporary. Do not use.
-	/// NOCOM(#codereview): Do we still need this?
-	std::vector<Worker*> workers() const {
-		return workers_;
-	}
 #endif
 
 	Quantity get_filled() const override {

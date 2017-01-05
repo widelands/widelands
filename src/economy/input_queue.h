@@ -40,8 +40,6 @@ class Request;
  * Mentioning "wares" in the following nearly always means "wares or workers".
  */
 class InputQueue {
-	// TODO(Notablis): Add builder-queue to expeditions?
-	// TODO(Notablis): Create regression tests (for WorkersQueue)
 public:
 	/**
 	 * Destructor.
@@ -214,8 +212,6 @@ protected:
 	/**
 	 * Updates the request.
 	 * You must call this after every call to set_*().
-	 * NOCOM(#codeReview): Is it possible to have the set_*() functions call it,
-	 * then make this function protected?
 	*/
 	void update();
 

@@ -548,9 +548,6 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 			}
 			// Make sure that all workers are gone
 			remove_workers(id, workers.stock(id));
-			// NOCOM(Notabilis): Assert does not always hold
-			// NOCOM(#codereview): I don't understand what you mean here.
-			//  Also, we changed the loop a bit in trunk- is this comment still valid?
 			assert(!game->is_loaded() ||
 			       (!incorporated_workers_.count(id) || incorporated_workers_[id].empty()));
 		}

@@ -857,11 +857,6 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
 			found = false;
-			// NOCOM(#codereview)
-			// We also have the same loop twice here, for wares and workers. Pull out a function?
-			// Might be easier if WaresQueue and WorkersQueue had a common superclass, or if we change
-			// the
-			// user interface so that workers wueues are more similar to wares queues.
 			for (auto worker_it = it->first.begin(); worker_it != it->first.end(); worker_it++) {
 				if (worker_it->first == worker_type && worker_it->second == wwWORKER) {
 					found = true;

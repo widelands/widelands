@@ -1101,8 +1101,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	b->inputqueue(index_, type_).set_max_fill(max_fill_);
 }
 
-// NOCOM(#codereview): You added new data to the packet, so we need to increase the packet version.
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 1;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 2;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1122,14 +1121,16 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
-			if (fr.unsigned_8() == 0) {
-				type_ = wwWARE;
-			} else {
-				type_ = wwWORKER;
+			if (packet_version > 1) {
+				if (fr.unsigned_8() == 0) {
+					type_ = wwWARE;
+				} else {
+					type_ = wwWORKER;
+				}
 			}
 			max_fill_ = fr.unsigned_32();
 		} else {
