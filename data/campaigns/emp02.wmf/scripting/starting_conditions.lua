@@ -14,7 +14,11 @@ prefilled_buildings(p1,
          basket = 1,
          empire_bread = 8,
          bread_paddle = 2,
-         cloth = 5,
+         -- NOCOM(Notabilis): The barracks need 1 cloth, the rest is for armor.
+         -- However, cloth can not be produced. Is this a problem? Apart from
+         -- really strange player behavior it should be enough.
+         -- (8 in armor smithy, 3 made to armor and stored, 1 for barracks)
+         cloth = 15,
          coal = 12,
          felling_ax = 6,
          fire_tongs = 2,
