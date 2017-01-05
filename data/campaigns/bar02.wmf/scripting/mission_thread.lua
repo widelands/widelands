@@ -188,6 +188,7 @@ function mining_and_trainingsites()
       "barbarians_ax_workshop",
       "barbarians_warmill",
       "barbarians_helmsmithy",
+      "barbarians_barracks",
       "barbarians_battlearena",
       "barbarians_trainingcamp",
       "barbarians_inn",
@@ -208,7 +209,7 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
+   while not check_for_buildings(p1, {barbarians_barracks = 1, barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
       sleep(6523)
    end
    set_objective_done(o)
