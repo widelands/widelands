@@ -396,8 +396,8 @@ void InteractiveBase::toggle_minimap() {
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view) {
-	m->quicknavigation->set_landmark(key, view);
+void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& landmark_view) {
+	m->quicknavigation->set_landmark(key, landmark_view);
 }
 
 /**

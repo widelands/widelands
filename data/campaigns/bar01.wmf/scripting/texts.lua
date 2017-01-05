@@ -187,7 +187,7 @@ briefing_msg_03 = {
       -- TRANSLATORS: Thron
       _[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]]),
    field = grave,
-   position = "topleft"
+   position = "topleft",
 }
 
 
@@ -195,35 +195,38 @@ briefing_msg_04 = {
    title = _"The Story Begins",
    body = thron(
       -- TRANSLATORS: Thron
-      _[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do wait.]])
+      _[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do wait.]]),
+   position = "topleft",
 }
 
 
 briefing_msg_05 = {
-   title = _"The Story Begins",
+   title = _"Thron is Contemplating the War",
    body = thron(_"Thron is shaking his head…",
       -- TRANSLATORS: Thron
       _([[Yet the war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _([[The stories they tell about the deeds of our kin are sad to hear. I’ve spent nights lying awake, restless, more tired than I ever believed one could be. Yet whenever I close my eyes, I see the fortress my father built consumed by flames. The Throne Among the Trees, the symbol of unity and peace among our kin, became the wedge that drives us apart.]])),
-   field = sf -- scroll back when showing this and the next few message boxes
+   field = al_thunran,
+   position = "topleft",
 }
 
 
 briefing_msg_06 = {
-   title = _"The Story Begins",
+   title = _"Thron is Contemplating the War",
    body = thron(
       -- TRANSLATORS: Thron
       _([[Today my hunters brought men, women and little children before me who had hidden out in the forests, trying to escape the war, hate and revenge that rage among the tribes fighting each other like in olden times, when we were no more but wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughter, unless… is this it? As father told me?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
-      _([[To rise against whoever threatens our very existence, even though it may be one of your own blood or mind?]]))
+      _([[To rise against whoever threatens our very existence, even though it may be one of your own blood or mind?]])),
+   field = sf,
 }
 
 
 briefing_msg_07 = {
-   title = _"The Story Begins",
+   title = _"Thron is Considering the Future",
    body = thron(
       -- TRANSLATORS: Thron
       _([[Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long – but I never thought my brothers would engage in this senseless battle for so long either.]])
@@ -240,7 +243,8 @@ briefing_msg_08 = {
       _[[Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.]]
       .. paragraphdivider() ..
       -- TRANSLATORS: Khantrukh
-      _[[Only the gods know for how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are short and cold…]])
+      _[[Only the gods know for how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are short and cold…]]),
+   field = sf -- scroll back when showing this and the next few message boxes
 }
 
 

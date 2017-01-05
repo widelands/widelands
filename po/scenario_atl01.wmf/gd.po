@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 16:14+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 18:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Nì na figheadairean sìoda agus lèintean ann an taigh nam beart. Bidh feum air sìoda gus cuid a thogalaichean a thogail agus a chum aodaich. Cuideachd, ’s e èideadh nan saighdearan a tha sna lèintean. Bidh taigh nam beart feumach air snàth òir agus snàth-sìoda mar stuth bhunasach. Tha snàth-sìoda ’ga dhèanamh ann an rainse dhamhan fhad ’s a tha snàth òir ’ga dhèanamh à òr ann an ceàrdach òr-shnìomhaidh."
+msgstr "Nì na breabadairean sìoda agus lèintean ann an taigh nam beart. Bidh feum air sìoda gus cuid a thogalaichean a thogail agus a chum aodaich. Cuideachd, ’s e èideadh nan saighdearan a tha sna lèintean. Bidh taigh nam beart feumach air snàth òir agus snàth-sìoda mar stuth bhunasach. Tha snàth-sìoda ’ga dhèanamh ann an rainse dhamhan fhad ’s a tha snàth òir ’ga dhèanamh à òr ann an ceàrdach òr-shnìomhaidh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -259,7 +259,7 @@ msgstr "Tog stàball"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
-msgstr "Tog 3 bàtaichean gus teicheadh on eilean"
+msgstr "Tog 3 longan gus teicheadh on eilean"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Escape From the Island"
