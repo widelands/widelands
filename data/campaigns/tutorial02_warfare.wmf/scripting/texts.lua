@@ -34,7 +34,7 @@ abilities = {
    position = "topright",
    title = _"Soldiers’ abilities",
    body = rt(
-      p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
+      p(_[[New soldiers are created differently from normal workers: recruits are walking from a warehouse (or your headquarters) to the barracks where they receive some basic training and become soldiers. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       -- TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
       p((_[[If a Barbarian soldier is fully trained, he has level %1% health, level %2% attack, level %3% defense and level %4% evade. This is one fearsome warrior then! The individual abilities have the following meaning:]]):bformat(soldier.max_health_level, soldier.max_attack_level, soldier.max_defense_level, soldier.max_evade_level))
