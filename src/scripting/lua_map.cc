@@ -4042,9 +4042,9 @@ bool do_set_worker_policy(Warehouse* wh,
 }
 
 /**
- * Sets the given policy for the given worker in the given warehouse and return true.
- * Also return true if the given worker does not cost anything but do not set its policy.
- * If the no worker with the given name exists for the tribe of the warehouse, return false.
+ * Sets the given policy for the given worker in the given warehouse and returns true.
+ * Also returns true if the given worker does not cost anything but in this case does not set its policy.
+ * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
 bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
@@ -4058,7 +4058,7 @@ bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehous
 /* RST
    .. method:: set_warehouse_policies(which, policy)
 
-      Sets the policies how the warehouse should handle the given wares.
+      Sets the policies how the warehouse should handle the given wares and workers.
 
       Usage example:
       .. code-block:: lua
@@ -4067,7 +4067,7 @@ bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehous
 
       :arg which: behaves like for :meth:`HasWares.get_wares`.
 
-      :arg policy: the policy to apply for all the wares given in `which`.
+      :arg policy: the policy to apply for all the wares and workers given in `which`.
       :type policy: a string out of "normal", "prefer", "dontstock", "remove".
 */
 int LuaWarehouse::set_warehouse_policies(lua_State* L) {
@@ -4138,7 +4138,7 @@ WH_GET_POLICY(worker)
 /* RST
    .. method:: get_warehouse_policies(which)
 
-      Gets the policies how the warehouse should handle the given wares.
+      Gets the policies how the warehouse should handle the given wares and workers.
       The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
 
       Usage example:
