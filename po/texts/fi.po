@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor@sahtor.net>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-24 16:44+0000\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2017-01-01 15:47+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Copyright 2002 - 2016 Widelands-kehittäjät."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public License (GPL) V2.0."
+msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format

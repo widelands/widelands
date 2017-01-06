@@ -4,16 +4,16 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2017-01-01 14:31+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -531,11 +531,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Oikuttelevat Jumalat eivät vastanneet rukouksiimme. Sen sijaan, voimistuva auringonvalo lämmitti maata tuhatkertaisesti ja sulatti jäätiköt sekä syöksi ihmiset turmioon. Mutta nyt – korkealla majesteettisilla vuorilla, viimeisellä maatilkulla – kaksi jäljelle jäänyttä heimoa ovat suojautuneena. Jumalien osoittaman armon myötä ilmasto tuli viileämmäksi, mutta veden pinta silti jatkoi nousuaan. Viimeisellä turvallisella paikalla – korkeimmalla vuorijonolla, jossa riittää kultaa ja tilaa tyydyttävästi yhden heimon tarpeisiin – on vain kaksi vastakkaista suuntausta vallalla. Muista olla varovainen… tämä viimeinen elinkelpoinen tila on kova ja pieni paikka elää. "
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Älä unohda huolehtia puutavarastasi, tulet tarvitsemaan niitä."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -589,13 +589,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Vain pieni kukkula kartan keskellä yhdistää näitä neljää kilpailevaa heimoa. Johda armeijasi tuolle kukkulalle pikimmiten ja rakenna sinne jättiläsmäinen tukikohta merkiksi ylivoimaisuudestasi!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Keskellä on tilaa vain yhdelle tukikohdalle. Vettä voi löytää kaikkialta, joten geologin lähettämiselle ei ole tarvetta."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
