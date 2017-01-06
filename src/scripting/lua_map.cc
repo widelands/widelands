@@ -657,11 +657,11 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case (MapObjectType::BOB):
 	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
-	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
 		                  .str());
 	}
+	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
@@ -990,13 +990,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 	} else {
 		report_error(
 		   L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
@@ -1511,6 +1513,7 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
+		break;
 	}
 	return 1;
 }
@@ -3210,9 +3213,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case (MapObjectType::ROAD):
 	case (MapObjectType::PORTDOCK):
 	case (MapObjectType::WARE):
-	default:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
+	NEVER_HERE();
 }
 
 #undef CAST_TO_LUA
@@ -3979,16 +3982,16 @@ WH_GET(worker, Worker)
 // Transforms the given warehouse policy to a string which is used by the lua code
 inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 	switch (p) {
-	case Warehouse::StockPolicy::SP_Normal:
+	case Warehouse::StockPolicy::kNormal:
 		lua_pushstring(L, "normal");
 		break;
-	case Warehouse::StockPolicy::SP_Prefer:
+	case Warehouse::StockPolicy::kPrefer:
 		lua_pushstring(L, "prefer");
 		break;
-	case Warehouse::StockPolicy::SP_DontStock:
+	case Warehouse::StockPolicy::kDontStock:
 		lua_pushstring(L, "dontstock");
 		break;
-	case Warehouse::StockPolicy::SP_Remove:
+	case Warehouse::StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
 	}
@@ -3998,13 +4001,13 @@ inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
 inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal")
-		return Warehouse::StockPolicy::SP_Normal;
+		return Warehouse::StockPolicy::kNormal;
 	else if (str == "prefer")
-		return Warehouse::StockPolicy::SP_Prefer;
+		return Warehouse::StockPolicy::kPrefer;
 	else if (str == "dontstock")
-		return Warehouse::StockPolicy::SP_DontStock;
+		return Warehouse::StockPolicy::kDontStock;
 	else if (str == "remove")
-		return Warehouse::StockPolicy::SP_Remove;
+		return Warehouse::StockPolicy::kRemove;
 	else
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }

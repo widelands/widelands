@@ -329,8 +329,8 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
  */
 Immovable& ImmovableDescr::create(EditorGameBase& egbase,
                                   const Coords& coords,
-                                  const Building* former_building) const {
-	Immovable& result = *new Immovable(*this, former_building);
+                                  const BuildingDescr* former_building_descr) const {
+	Immovable& result = *new Immovable(*this, former_building_descr);
 	result.position_ = coords;
 	result.init(egbase);
 	return result;
@@ -344,9 +344,10 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building* former_building)
+Immovable::Immovable(const ImmovableDescr& imm_descr,
+                     const Widelands::BuildingDescr* former_building_descr)
    : BaseImmovable(imm_descr),
-     former_building_descr_(former_building ? &former_building->descr() : nullptr),
+     former_building_descr_(former_building_descr),
      anim_(0),
      animstart_(0),
      program_(nullptr),
@@ -354,9 +355,6 @@ Immovable::Immovable(const ImmovableDescr& imm_descr, const Widelands::Building*
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0) {
-	if (former_building != nullptr) {
-		set_owner(former_building->get_owner());
-	}
 }
 
 Immovable::~Immovable() {
@@ -532,6 +530,11 @@ Load/save support
 ==============================
 */
 
+// We neeed 2 packet versions for map loading: Packet version 7 will load in older versions of
+// Widelands, so we have a dynamic version number - it is only set higher than
+// kCurrentPacketVersionImmovableNoFormerBuildings during saving if we have an immovable with
+// a former building assigned to it.
+constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 7;
 constexpr uint8_t kCurrentPacketVersionImmovable = 8;
 
 // Supporting older versions for map loading
@@ -554,7 +557,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	imm.position_ = read_coords_32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.position_);
 
-	if (packet_version >= 8) {
+	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
 		Player* owner = imm.get_owner();
 		if (owner) {
 			DescriptionIndex idx = owner->tribe().building_index(fr.string());
@@ -645,7 +648,10 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.unsigned_8(HeaderImmovable);
-	fw.unsigned_8(kCurrentPacketVersionImmovable);
+	const uint8_t packet_version = former_building_descr_ == nullptr ?
+	                                  kCurrentPacketVersionImmovableNoFormerBuildings :
+	                                  kCurrentPacketVersionImmovable;
+	fw.unsigned_8(packet_version);
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr)
@@ -662,8 +668,11 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
-	if (get_owner()) {
-		fw.string(former_building_descr_ ? former_building_descr_->name() : "");
+	if (get_owner() && former_building_descr_) {
+		assert(packet_version > kCurrentPacketVersionImmovableNoFormerBuildings);
+		fw.string(former_building_descr_->name());
+	} else {
+		assert(packet_version == kCurrentPacketVersionImmovableNoFormerBuildings);
 	}
 
 	// Animations
@@ -858,9 +867,8 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		if (bob) {
 			game.create_ship(c, type_name, player);
 		} else {
-			Immovable& imm = game.create_immovable(c, type_name, owner_type);
-			if (player)
-				imm.set_owner(player);
+			game.create_immovable_with_name(
+			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
 		}
 	} else
 		immovable.program_step(game);
@@ -913,7 +921,8 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_type);
+		game.create_immovable_with_name(
+		   f, type_name, owner_type, nullptr /* owner */, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
@@ -1013,7 +1022,8 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
 		    logic_rand_as_double(&game) < probability_to_grow(descr.terrain_affinity(), new_location,
 		                                                      map, game.world().terrains())) {
-			game.create_immovable(mr.location(), type_name, descr.owner_type());
+			game.create_immovable_with_name(mr.location(), type_name, descr.owner_type(),
+			                                nullptr /* owner */, nullptr /* former_building_descr */);
 		}
 	}
 

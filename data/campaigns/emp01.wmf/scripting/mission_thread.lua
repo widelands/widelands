@@ -30,7 +30,7 @@ function mission_thread()
    p1:allow_buildings{"empire_blockhouse"}
    local o = add_campaign_objective(obj_build_blockhouse)
    while #p1:get_buildings("empire_blockhouse") < 1 do sleep(3249) end
-   o.done = true
+   set_objective_done(o)
 
    -- Blockhouse is completed now
    campaign_message_box(saledus_2)
@@ -38,7 +38,7 @@ function mission_thread()
    o = add_campaign_objective(obj_build_lumberjack)
    campaign_message_box(amalea_1)
    while #p1:get_buildings("empire_lumberjacks_house") < 1 do sleep(3249) end
-   o.done = true
+   set_objective_done(o)
 
    -- Lumberjack is now build
    campaign_message_box(amalea_2)
@@ -46,14 +46,14 @@ function mission_thread()
    o = add_campaign_objective(obj_build_sawmill_and_lumberjacks)
    while not check_for_buildings(p1, { empire_lumberjacks_house = 3, empire_sawmill = 1})
       do sleep(2343) end
-   o.done = true
+   set_objective_done(o)
 
    -- Now the lady demands a forester after having us cut down the whole forest.
    campaign_message_box(amalea_3)
    o = add_campaign_objective(obj_build_forester)
    p1:allow_buildings{"empire_foresters_house"}
    while not check_for_buildings(p1, { empire_foresters_house = 1 }) do sleep(2434) end
-   o.done = true
+   set_objective_done(o)
 
 
    -- Now a quarry
@@ -61,7 +61,7 @@ function mission_thread()
    o = add_campaign_objective(obj_build_quarry)
    p1:allow_buildings{"empire_quarry"}
    while not check_for_buildings(p1, { empire_quarry = 1 }) do sleep(2434) end
-   o.done = true
+   set_objective_done(o)
 
    -- All buildings done. Got home
    campaign_message_box(saledus_4)

@@ -17,10 +17,8 @@ function starting_infos()
    while not wl.ui.MapView().buildhelp do
       sleep(200)
    end
-   o.done = true
+   set_objective_done(o, 500)
    wl.ui.MapView():abort_road_building()
-
-   sleep(500)
 
    build_lumberjack()
 end
@@ -69,7 +67,7 @@ function build_lumberjack()
 
    blocker:lift_blocks()
 
-   sleep(15000)
+   sleep(30000)
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
@@ -86,9 +84,7 @@ function build_lumberjack()
 
       -- Wait for flag
       while not (f.immovable and f.immovable.descr.type_name == "flag") do sleep(300) end
-      o.done = true
-
-      sleep(300)
+      set_objective_done(o, 300)
 
       message_box_objective(plr, lumberjack_message_06)
    else
@@ -120,14 +116,12 @@ function learn_to_move()
    end
 
    _wait_for_move()
-   o.done = true
-   sleep(3000) -- Give the player a chance to try this some more
+   set_objective_done(o)
 
    o = message_box_objective(plr, tell_about_right_drag_move)
 
    _wait_for_move()
-   o.done = true
-   sleep(3000) -- Give the player a chance to try this some more
+   set_objective_done(o)
 
    o = message_box_objective(plr, tell_about_minimap)
 
@@ -135,8 +129,7 @@ function learn_to_move()
    while not wl.ui.MapView().windows.minimap do sleep(100) end
    while wl.ui.MapView().windows.minimap do sleep(100) end
 
-   o.done = true
-   sleep(500)
+   set_objective_done(o, 500)
 
    message_box_objective(plr, congratulate_and_on_to_quarry)
 
@@ -161,7 +154,7 @@ function build_a_quarry()
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
 
-   o.done = true
+   set_objective_done(o, 0)
    register_immovable_as_allowed(cs)
 
    local function _rip_road()
@@ -238,7 +231,7 @@ function build_a_quarry()
    census_and_statistics()
 
    while #plr:get_buildings("barbarians_quarry") < 2 do sleep(1400) end
-   o.done = true
+   set_objective_done(o, 0)
 
    messages()
 end
@@ -271,7 +264,7 @@ function second_quarry()
       if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
    end
 
-   o.done = true
+   set_objective_done(o, 0)
    register_immovable_as_allowed(cs)
 end
 
@@ -310,15 +303,13 @@ function messages()
    local o = add_campaign_objective(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end
-   o.done = true
-
-   sleep(500)
+   set_objective_done(o, 500)
 
    local o = message_box_objective(plr, closing_msg_window_00)
 
    -- Wait for messages window to close
    while wl.ui.MapView().windows.messages do sleep(300) end
-   o.done = true
+   set_objective_done(o, 0)
 
    message_box_objective(plr, closing_msg_window_01)
 
@@ -351,9 +342,7 @@ function destroy_quarries()
    terminate_bad_boy_sentinel = true
 
    while #plr:get_buildings("barbarians_quarry") > 0 do sleep(200) end
-   o.done = true
-
-   sleep(3000)
+   set_objective_done(o)
 
    expansion()
 end
@@ -382,15 +371,14 @@ function expansion()
       sleep(500)
    end
 
-   o.done = true
-   sleep(4000)
+   set_objective_done(o)
    message_box_objective(plr, military_building_finished)
 
    conclusion()
 end
 
 function conclusion()
-   sleep(10000) -- to give the player time to see his expanded area
+   sleep(5000) -- to give the player time to see his expanded area
 
    -- Conclude the tutorial with final words and information
    -- on how to quit
