@@ -71,6 +71,8 @@ tribes:new_soldier_type {
 
    animations = animations,
 
+   default_target_quantity = 10,
+
    -- Battle attributes - initial values and per level increase
    health = {
       max_level = 1,
