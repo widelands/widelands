@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 07:59+0000\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 14:02+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -538,11 +538,11 @@ msgstr "Хмм, мисля, че не можем да променим това.
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Но можем да намерим някакво решение. За мен правенето на хляб е неприятна задача. Смилането на черния корен и царевицата и изпичането на хляба след това е продължително и скучно. Смятам, че един по-промишлен подход би помогнал тук. Аз, например, бих се радвал просто да получавам пресния хляб в дома си всеки ден."
+msgstr "Но можем да намерим някакво решение. За мен правенето на хляб е неприятна задача. Смилането на черните корени и царевицата и изпичането на хляба след това е продължително и скучно. Смятам, че един по-промишлен подход би помогнал тук. Аз, например, бих се радвал просто да получавам пресния хляб в дома си всеки ден."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-23 18:47+0000\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-26 17:14+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -541,11 +541,11 @@ msgstr "Ahaa, mutta luulempa, että tätä on mahdotonta muuttaa. Ruuan valmista
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Mutta saataisimme löytää kompromissin siihen: minulle, leivän tekeminen on työläs tehtävä. Mustajuuren ja maissin jauhaminen jauhoiksi ja sitten leivän leipominen on tylsää ja ikävystyttävää; minusta tuntuu, että teolistuneempi lähestymistapa saattaisi olla täällä avuksi. Pitäisin siitä jos talooni olisi toimitettu joka päivä tuoretta leipää."
+msgstr "Mutta saataisimme löytää kompromissin siihen: minulle, leivän tekeminen on työläs tehtävä. Mustajuurien ja maissin jauhaminen jauhoiksi ja sitten leivän leipominen on tylsää ja ikävystyttävää; minusta tuntuu, että teolistuneempi lähestymistapa saattaisi olla täällä avuksi. Pitäisin siitä jos talooni olisi toimitettu joka päivä tuoretta leipää."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

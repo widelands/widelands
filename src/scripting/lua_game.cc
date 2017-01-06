@@ -26,7 +26,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
-#include "logic/constants.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
@@ -448,7 +447,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->move_view_to(c);
+			game.get_ipl()->center_view_on_coords(c);
 		}
 		lua_pop(L, 1);
 	}
@@ -1194,6 +1193,8 @@ int LuaMessage::get_status(lua_State* L) {
 	case Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -1250,7 +1251,7 @@ int LuaMessage::__eq(lua_State* L) {
  ==========================================================
  */
 Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
-	if (player_number_ > MAX_PLAYERS)
+	if (player_number_ > kMaxPlayers)
 		report_error(L, "Illegal player number %i", player_number_);
 	Player* rv = game.get_player(player_number_);
 	if (!rv)

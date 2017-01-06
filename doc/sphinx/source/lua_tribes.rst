@@ -1,3 +1,5 @@
+.. _lua_tribes:
+
 Scripts for Tribes
 ==================
 

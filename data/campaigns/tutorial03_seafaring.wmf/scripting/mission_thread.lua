@@ -21,7 +21,7 @@ function build_port()
    local o = message_box_objective(plr, tell_about_port_building)
 
    while #plr:get_buildings("atlanteans_port") < 2 do sleep(200) end
-   o.done = true
+   set_objective_done(o)
 
    build_ships()
 end
@@ -32,7 +32,7 @@ function build_ships()
    plr:allow_buildings{"atlanteans_shipyard"}
 
    while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(200) end
-   o.done = true
+   set_objective_done(o)
 
    local o = message_box_objective(plr, tell_about_ships)
 
@@ -40,7 +40,7 @@ function build_ships()
    while #plr:get_ships() < 1 do sleep(30*1000) end
    sleep(5*60*1000)
 
-   o.done = true
+   set_objective_done(o)
 
    expedition()
 end
@@ -58,12 +58,12 @@ function expedition()
    end
 
    while not _ship_ready_for_expedition() do sleep(1000) end
-   o.done = true
+   set_objective_done(o)
 
    o = message_box_objective(plr, expedition3)
 
    while #plr:get_buildings("atlanteans_port") < 3 do sleep(200) end
-   o.done = true
+   set_objective_done(o)
 
    -- places 5 signs with iron to show the player he really found some iron ore
    local fields = map:get_field(97,35):region(3)

@@ -104,13 +104,13 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
+#ifndef _WIN32
 void terminate(int) {
 	log("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
 	    " Update your sound driver and/or SDL to fix this problem\n");
-#ifndef _WIN32
 	raise(SIGKILL);
-#endif
 }
+#endif
 
 /**
  * Returns the widelands executable path.
@@ -156,9 +156,11 @@ bool is_absolute_path(const std::string& path) {
 std::string absolute_path_if_not_windows(const std::string& path) {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	realpath(path.c_str(), buffer);
-	log("Realpath: %s\n", buffer);
-	return std::string(buffer);
+	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
+	char* rp = realpath(path.c_str(), buffer);
+	log("Realpath: %s\n", rp);
+	assert(rp);
+	return std::string(rp);
 #else
 	return path;
 #endif
@@ -289,7 +291,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #else
      homedir_(FileSystem::get_homedir() + "/.widelands"),
 #endif
-     redirected_stdio_(false) {
+     redirected_stdio_(false),
+     last_resolution_change_(0) {
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
@@ -465,7 +468,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	case SDL_MOUSEMOTION:
 		ev.motion.xrel += mouse_compensate_warp_.x;
 		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Point(0, 0);
+		mouse_compensate_warp_ = Vector2i(0, 0);
 
 		if (mouse_locked_) {
 			warp_mouse(mouse_position_);
@@ -519,10 +522,14 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 			return true;
 
 		case SDLK_f: {
-			// toggle fullscreen
-			bool value = !g_gr->fullscreen();
-			g_gr->set_fullscreen(value);
-			g_options.pull_section("global").set_bool("fullscreen", value);
+			// Toggle fullscreen
+			const uint32_t time = SDL_GetTicks();
+			if (time - last_resolution_change_ > 250) {
+				last_resolution_change_ = time;
+				bool value = !g_gr->fullscreen();
+				g_gr->set_fullscreen(value);
+				g_options.pull_section("global").set_bool("fullscreen", value);
+			}
 			return true;
 		}
 
@@ -576,7 +583,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_MOUSEMOTION:
-			mouse_position_ = Point(ev.motion.x, ev.motion.y);
+			mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
 				cb->mouse_move(
@@ -654,10 +661,10 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 /// eliminate the motion event in poll_event()
 ///
 /// \param position The new mouse position
-void WLApplication::warp_mouse(const Point position) {
+void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
 
-	Point cur_position;
+	Vector2i cur_position;
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		mouse_compensate_warp_ += cur_position - position;
@@ -794,10 +801,12 @@ void WLApplication::shutdown_hardware() {
 	delete g_gr;
 	g_gr = nullptr;
 
+// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 #ifndef _WIN32
-	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
-	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
+	// TODO(GunChleoc): alarm is a POSIX function. If we found a Windows equivalent, we could call
+	// terminate in Windows as well.
 	alarm(5);
 #endif
 
@@ -1027,18 +1036,19 @@ void WLApplication::mainmenu() {
 		catch (const std::exception& e) {
 			messagetitle = "Unexpected error during the game";
 			message = e.what();
-			message +=
+			message += "\n\n";
+			message += (boost::format(_("Please report this problem to help us improve Widelands. "
+			                            "You will find related messages in the standard output "
+			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
+			            build_id().c_str() % build_type().c_str())
+			              .str();
 
-			   (boost::format(_("\n\nPlease report this problem to help us improve Widelands. "
-			                    "You will find related messages in the standard output "
-			                    "(stdout.txt on Windows). You are using build %1$s (%2$s). ")) %
-			    build_id().c_str() % build_type().c_str())
-			      .str();
-
-			message += _("Please add this information to your report.\n\n"
+			message = (boost::format("%s\n\n%s") % message %
+			           _("Please add this information to your report.\n\n"
 			             "Widelands attempts to create a savegame when errors occur "
 			             "during the game. It is often – though not always – possible "
-			             "to load it and continue playing.\n");
+			             "to load it and continue playing."))
+			             .str();
 		}
 #endif
 	}
@@ -1350,6 +1360,7 @@ void WLApplication::replay() {
 * Try to save the game instance if possible
  */
 void WLApplication::emergency_save(Widelands::Game& game) {
+	log("FATAL ERROR - game crashed. Attempting emergency save.\n");
 	if (game.is_loaded()) {
 		try {
 			SaveHandler& save_handler = game.save_handler();

@@ -32,8 +32,8 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/point.h"
 #include "base/rect.h"
+#include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
 #include "graphic/graphic.h"
@@ -173,7 +173,7 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 }
 
 struct Reference {
-	Rect dim;
+	Recti dim;
 	string ref;
 };
 
@@ -185,7 +185,7 @@ public:
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
 		for (const Reference& c : refs_)
-			if (c.dim.contains(Point(x, y)))
+			if (c.dim.contains(Vector2i(x, y)))
 				return c.ref;
 		return "";
 	}
@@ -469,7 +469,7 @@ public:
 	const vector<Reference> get_references() override {
 		vector<Reference> rv;
 		if (!nodestyle_.reference.empty()) {
-			Reference r = {Rect(0, 0, w_, h_), nodestyle_.reference};
+			Reference r = {Recti(0, 0, w_, h_), nodestyle_.reference};
 			rv.push_back(r);
 		}
 		return rv;
@@ -501,7 +501,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rect(0, 0, img.width(), img.height()), img, Rect(0, 0, img.width(), img.height()), 1.,
+	rv->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
 	         BlendMode::Copy);
 	return rv;
 }
@@ -536,8 +536,8 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
 	Texture* rv = new Texture(w_, h_);
 	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
-		Rect srcrect(Point(0, 0), min<int>(t.width(), w_ - curx), h_);
-		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
+		Rectf srcrect(0.f, 0.f, min<int>(t.width(), w_ - curx), h_);
+		rv->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
 	return rv;
 }
@@ -557,7 +557,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
 			Texture* rv = new Texture(w_, h_);
-			rv->fill_rect(Rect(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
+			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -619,8 +619,8 @@ public:
 
 		// Draw background image (tiling)
 		if (background_image_) {
-			Rect dst;
-			Rect srcrect(Point(0, 0), 1, 1);
+			Rectf dst;
+			Rectf srcrect(0, 0, 1, 1);
 			for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
 				dst.x = curx;
 				dst.y = 0;
@@ -629,7 +629,7 @@ public:
 				rv->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
 			}
 		} else {
-			rv->fill_rect(Rect(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
+			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
 		}
 		return rv;
 	}
@@ -689,19 +689,19 @@ public:
 			throw TextureTooBig(error_message);
 		}
 		Texture* rv = new Texture(width(), height());
-		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+		rv->fill_rect(Rectf(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (is_background_color_set_) {
-			rv->fill_rect(Rect(Point(margin_.left, margin_.top), w_, h_), background_color_);
+			rv->fill_rect(Rectf(margin_.left, margin_.top, w_, h_), background_color_);
 			set_alpha = false;
 		}
 
 		// Draw background image (tiling)
 		if (background_image_) {
-			Rect dst;
-			Rect src(0, 0, 0, 0);
+			Rectf dst;
+			Rectf src(0, 0, 0, 0);
 
 			for (uint16_t cury = margin_.top; cury < h_ + margin_.top;
 			     cury += background_image_->height()) {
@@ -720,10 +720,9 @@ public:
 		for (RenderNode* n : nodes_to_render_) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
-				Rect dst = Rect(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
-				                node_texture->height());
-				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
-
+				Rectf dst(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
+				          node_texture->height());
+				Rectf src(0, 0, node_texture->width(), node_texture->height());
 				rv->blit(
 				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
 				delete node_texture;
@@ -754,7 +753,7 @@ public:
 		nodes_to_render_ = n;
 	}
 	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const string& s) {
-		Reference r = {Rect(gx, gy, w, h), s};
+		Reference r = {Recti(gx, gy, w, h), s};
 		refs_.push_back(r);
 	}
 
@@ -790,8 +789,8 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(image_.width(), image_.height());
-	rv->blit(Rect(0, 0, image_.width(), image_.height()), image_,
-	         Rect(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
+	rv->blit(Rectf(0, 0, image_.width(), image_.height()), image_,
+	         Rectf(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-09 10:54+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-04 16:26+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
@@ -45,7 +45,7 @@ msgid "Garrisons soldiers to expand your territory."
 msgstr "Umísti vojáky do vojenských budov, tím rozšíříš své území."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
@@ -113,6 +113,14 @@ msgid ""
 "blackroot."
 msgstr "Pěstitel rozrazilu potřebuje v průměru %1% na zasetí sklizení otýpky rozrazilu."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -245,9 +253,9 @@ msgstr "Doluje železnou rudu v horském terénu."
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Drtí rozrazil na drcený rozrazil a mele kukuřici na kukuřičnou mouku."
+msgstr "Mele rozrazil a kukuřici na drcený rozrazil a kukuřičnou mouku."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -286,6 +294,14 @@ msgid ""
 "between ports."
 msgstr "Staví lodě, které se používají k zámořské kolonizaci a na obchodování mezi přístavy."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -406,8 +422,8 @@ msgstr "Barbarská dílna na sekery je středně pokročilá výrobní budova v 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:67
-#: ../../data/tribes/scripting/help/global_helptexts.lua:97
+#: ../../data/tribes/scripting/help/global_helptexts.lua:69
+#: ../../data/tribes/scripting/help/global_helptexts.lua:99
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1018,14 +1034,14 @@ msgctxt "barbarians_building"
 msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
-msgstr "Rákos na došky je tradiční materiál na pokrývku střech a je také vetkán do neuvěřitelně odolné látky, která se používá na plachty lodí."
+msgstr "Rákos je tradiční materiál na pokrývku střech a je také vetkán do neuvěřitelně odolné látky, která se používá na plachty lodí."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
-msgstr "Rákosové pole dokáže vyrobit snop rákosu na došky v průměru za %s."
+msgstr "Rákosové pole dokáže vyrobit snop rákosu v průměru za %s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
@@ -1058,7 +1074,7 @@ msgstr "Všechny zbraně potřebují stejnou dávku času, abys je mohl vyrobit,
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of thatch reed."
-msgstr "Spřádá látku z rákosových došků."
+msgstr "Spřádá látku z rákosu."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -1066,7 +1082,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
-msgstr ""
+msgstr "\"Ó jaký sladký zdroj života,<br>který přichází z hůry nebeské<br>a dává zemi vláhu.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
@@ -1074,7 +1090,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Píseň napsaná Sigurdem Pěvcem,<br>když dopadly první kapky deště po velkém suchu 21. roku vlády Chat’Karuth’s."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1109,13 +1125,13 @@ msgstr "Peče chléb pro vojáky, horníky atd."
 #: ../../data/tribes/buildings/productionsites/empire/bakery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
-msgstr ""
+msgstr "Pekař potřebuje v průměru %1% aby mohl péci bochníky chleba."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The brewer needs %1% on average to brew a vat of beer."
-msgstr ""
+msgstr "Sládek potřebuje v průměru %1% aby mohl navařit sud piva."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
@@ -1172,7 +1188,7 @@ msgid ""
 "The innkeeper needs %1% on average to prepare a ration and a meal. If the "
 "economy doesn’t need both, the innkeeper needs %2% on average to prepare one"
 " ration or one meal."
-msgstr ""
+msgstr "Hostinský potřebuje v průměru %1% aby mohl připravit příděl a jídlo. Pokud hospodářství nepotřebuje oboje, hostinský potřebuje v průměru %2% aby připravil buď jeden příděl nebo jedno jídlo."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
@@ -1197,7 +1213,7 @@ msgstr "Mele pšenici na mouku."
 #: ../../data/tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The miller needs %1% on average to grind wheat into a sack of flour."
-msgstr ""
+msgstr "Mlynář potřebuje v průměru %1% aby mohl semlít přenici na pytel mouky."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
@@ -1209,7 +1225,7 @@ msgstr "Chová vepře na maso."
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The pig breeder needs %1% on average to raise and slaughter a pig."
-msgstr ""
+msgstr "Pasáček vepřů potřebuje v průměru %1% aby mohl vykrmit a porazit prase."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
@@ -1245,7 +1261,7 @@ msgstr "Připrav příděly k nakrmení průzkumníků a horníků."
 #: ../../data/tribes/buildings/productionsites/empire/tavern/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The innkeeper needs %1% on average to prepare a ration."
-msgstr ""
+msgstr "Hostinský potřebuje v průměru %1% aby mohl připravit příděl."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
@@ -1308,14 +1324,14 @@ msgstr "Údajně pochází od slavného cvičitele Neidhardta."
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Evade’."
-msgstr "Trénuje vojáky ve vyhýbání."
+msgstr "Trénuje vojáky v odrážení."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "\"Vyhnutí\" zvyšuje vojákovu šanci nebýt zasažen nepřítelem a také zůstat neovlivněn."
+msgstr "\"Odražení\" zvyšuje vojákovu šanci nebýt zasažen nepřítelem a také zůstat nezraněn."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:21
@@ -1328,8 +1344,8 @@ msgstr "Vojáci barbarů nemohou být trénováni v \"obraně\" a proto zůstáv
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:80
-#: ../../data/tribes/scripting/help/global_helptexts.lua:96
+#: ../../data/tribes/scripting/help/global_helptexts.lua:82
+#: ../../data/tribes/scripting/help/global_helptexts.lua:98
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1343,7 +1359,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může bitevní aréna trénovat únik jednoho vojáka z 0 až na nejvyšší úroveň za v průměru %1$s a %2$s."
+msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může bitevní aréna trénovat odrážení jednoho vojáka z 0 až na nejvyšší úroveň za v průměru %1$s a %2$s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:3
@@ -1351,7 +1367,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr ""
+msgstr "\"Ten, kdo je silný by neměl odpustit ani zapomenout, ale pomstít nespravedlnost, kterou vytrpěl - v minulosti i budoucnosti.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
@@ -1378,7 +1394,7 @@ msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %1$s and %2$s on "
 "average."
-msgstr ""
+msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může výcvikový tábor vytrénovat útok a zdraví jednoho vojáka na nejvyšší úroveň za v průměru %1$s a %2$s."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:17
@@ -1393,7 +1409,7 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr ""
+msgstr "\"Odražení\" zvyšuje vojákovu šanci nebýt zasažen nepřítelem a také zůstat nezraněn."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:24
@@ -1403,7 +1419,7 @@ msgctxt "empire_building"
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
-msgstr ""
+msgstr "Vojáci císařství nemohou být trénováni v \"obraně\" a proto zůstává na úrovni, se kterou přišli."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/helptexts.lua:17
@@ -1486,7 +1502,7 @@ msgctxt "empire_building"
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr ""
+msgstr "Ačkoliv tato loď najela na mělčinu, stále může sloužit jako ubytování pro tvůj lid. Také skladuje tvé suroviny a nástroje."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:22
@@ -1547,11 +1563,11 @@ msgstr "Uzdravování:"
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "Voják ve vojenské budově se uzdravuje %d bodů zdraví za sekundu"
-msgstr[1] "Vojáci ve vojenské budově se uzdravují %d bodů zdraví za sekundu"
-msgstr[2] "Vojáci ve vojenské budově se uzdravují %d bodů zdraví za sekundu"
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
+msgstr[0] "Voják ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
+msgstr[1] "Vojáci ve vojenské budově se uzdravují %d bodů zdraví za sekundu."
+msgstr[2] "Vojáků ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1923,131 +1939,164 @@ msgstr "Home"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
-msgid "(Ctrl +) 0-9"
-msgstr "(Ctrl +) 0-9"
+msgid "(Ctrl +) 1-9"
+msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
 msgstr "Zapamatovat a jít na předchozí zapamatovanou pozici"
 
-#. TRANSLATORS: This is an access key combination.
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
 #: ../../data/tribes/scripting/help/controls.lua:61
+msgctxt "hotkey"
+msgid "(Ctrl +) +"
+msgstr "(Ctrl +) +"
+
+#: ../../data/tribes/scripting/help/controls.lua:61
+msgid "Increase zoom"
+msgstr "Přiblížit"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgctxt "hotkey"
+msgid "(Ctrl +) -"
+msgstr "(Ctrl +) -"
+
+#: ../../data/tribes/scripting/help/controls.lua:63
+msgid "Decrease zoom"
+msgstr "Oddálit"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgctxt "hotkey"
+msgid "(Ctrl +) 0"
+msgstr "(Ctrl +) 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:65
+msgid "Reset zoom"
+msgstr "Obnovit přiblížení"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Go to the previous location"
 msgstr "Návrat na předchozí místo"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:63
+#: ../../data/tribes/scripting/help/controls.lua:69
 msgid "Go to the next location"
 msgstr "Jít na následující místo"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:65
+#: ../../data/tribes/scripting/help/controls.lua:71
 msgid "Take a screenshot"
 msgstr "Udělat screenshot"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:74
 msgid "Quit the game immediately"
 msgstr "Okamžitě ukončit hru"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:70
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Zobrazit konzoli pro ladění (pouze v testovacím sestavení)"
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "V okně zpráv jsou k dispozici následující zkratky:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show all messages"
 msgstr "Zobrazit všechny zprávy"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:78
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show geologists’ messages only"
 msgstr "Zobrazit pouze zprávy od geologa"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show economy messages only"
 msgstr "Zobrazit pouze zprávy o hospodářství"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show seafaring messages only"
 msgstr "Zobrazit pouze námořní zprávy"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Show warfare messages only"
 msgstr "Zobrazit pouze válečné zprávy"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Show scenario messages only"
 msgstr "Zobrazit pouze zprávy scénáře"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:94
 msgid "Jump to the location corresponding to the current message"
 msgstr "Jít na pozici odpovídající aktuální zprávě"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgid "Archive/Restore the current message"
 msgstr "Archivovat/Obnovit vybranou zprávu"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:96
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
@@ -2069,24 +2118,24 @@ msgstr[2] "Spotřebovaných suroviny:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:21
-#: ../../data/tribes/scripting/help/global_helptexts.lua:43
+#: ../../data/tribes/scripting/help/global_helptexts.lua:23
+#: ../../data/tribes/scripting/help/global_helptexts.lua:45
 msgid "Text needed"
 msgstr "Text chybí"
 
 #. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
 #. hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:32
+#: ../../data/tribes/scripting/help/global_helptexts.lua:34
 msgid "Source needed"
 msgstr "Zdroj chybí"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:54
+#: ../../data/tribes/scripting/help/global_helptexts.lua:56
 msgid "Calculation needed"
 msgstr "Nutný výpočet"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:95
+#: ../../data/tribes/scripting/help/global_helptexts.lua:97
 msgid "%1% and %2%"
 msgstr "%1% a %2%"
 
@@ -2263,7 +2312,7 @@ msgid ""
 "The gilded armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
+msgstr "Zlacená zbroj je nejsilnější zbroj, kterou může voják císařství mít. Vyrábí se v platnéřství a používá se ve výcvikovém táboře - spolu s jídlem- na výcvik zdraví vojáků z úrovně 3 na úroveň 4."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/armor_helmet/helptexts.lua:4
@@ -2273,7 +2322,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Přilba poskytuje základní ochranu válečníkům. Vyrábí se v platnéřství. Ve spojení s dřevěným oštěpem, je to vybavení vhodné pro mladé vojáky. Přilby se také používají ve výcvikových táborech - spolu s jídlem - k trénování zdraví z úrovně 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../data/tribes/wares/ax/helptexts.lua:4
@@ -2300,7 +2349,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr ""
+msgstr "Široká sekera se vyrábí v dílně na sekery a válečné akademii. Používá se ve výcvikovém táboře - spolu s jídlem - k trénování vojáků se základní znalostí boje, zvýší úroveň útoku z 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../data/tribes/wares/ax_bronze/helptexts.lua:4
@@ -2310,7 +2359,7 @@ msgid ""
 "soldiers can use it. It is produced at the war mill and used in the training"
 " camp – together with food – to train soldiers from attack level 2 to level "
 "3."
-msgstr ""
+msgstr "Bronzová sekera je považována za zbraň, kterou je těžké ovládnout. Pouze zkušení vojáci ji umí používat. Vyrábí se ve válečné akademii a používá se ve výcvikovém táboře - spolu s jídlem - k výcviku útoku z úrovně 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../data/tribes/wares/ax_sharp/helptexts.lua:4
@@ -2320,7 +2369,7 @@ msgid ""
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr ""
+msgstr "Mladí vojáci jsou pyšní, že se mohou učit bojovat s touto mocnou zbraní. Je těžší a ostřejší než běžná sekera. Vyrábí se v dílnách na sekery a válečných akademiích. Ve výcvikových táborech se používá - spolu s jídlem - k výcviku útoku z úrovně 0 na 1."
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../data/tribes/wares/ax_warriors/helptexts.lua:4
@@ -2330,7 +2379,7 @@ msgid ""
 "soldiers ever were able to handle this huge and powerful ax. It is produced "
 "in a war mill and used – together with food – in a training camp to train "
 "soldiers from attack level 4 to level 5."
-msgstr ""
+msgstr "Válečná sekera je nejnebezpečnější ze všech barbarských zbraní. Pouze hrstka vojáků je schopna zacházet s tak velkou a silnou zbraní. Vyrábí se ve válečné akademii a používá se - spolu s jídlem - ve výcvikovém táboře k trénování útoku z úrovně 4 na úroveň 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../data/tribes/wares/basket/helptexts.lua:4
@@ -2354,7 +2403,7 @@ msgctxt "empire_ware"
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by"
 " miners in coal and iron mines."
-msgstr ""
+msgstr "Pivo se vaří v pivovaru z pšenice a vody. Pijí jej horníci v dolech na uhlí a železo."
 
 #. TRANSLATORS: Helptext for a ware: Strong Beer
 #: ../../data/tribes/wares/beer_strong/helptexts.lua:4
@@ -2364,7 +2413,7 @@ msgid ""
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
-msgstr ""
+msgstr "Jedině tohle pivo je přijatelné pro vojáky v bitevní aréně. Někteří říkají, že síla barbarů spočívá v tomto pivu. Pomáhá trénovat odrážení vojáků z úrovně 0 na 1 až 2. Silné pivo se také používá ve velkých hostincích na přípravu jídel."
 
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
@@ -2389,7 +2438,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
-msgstr ""
+msgstr "Toto tvrzené dřevo je stejně tvrdé jako železo a používá se v několika budovách. Vyrábí se z kmenů v tesařství."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_atlanteans/helptexts.lua:4
@@ -2408,7 +2457,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr ""
+msgstr "Barbarští pekaři jsou nejlepší v pečení těchto placatých a chutných chlebových placek. Vyrábí se z pšenice a vody podle tajného receptu. Chlebové placky se používají v hospodách, hostincích a velkých hostincích k přípravě přídělů, svačin a jídel. Také jsou potřeba pro cvičiště (výcvikový tábor a bitevní aréna)."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_empire/helptexts.lua:4
@@ -2429,7 +2478,7 @@ msgstr "Lopata na chléb je nářadí pekaře a každý pekař potřebuje svoji.
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr "Lopatu na chléb vyrábí nástrojař."
+msgstr "Lopaty na chléb vyrábí nástrojař."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:8
@@ -2438,13 +2487,13 @@ msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
 "cease to be produced by the building if it is enhanced to an ax workshop and"
 " war mill)."
-msgstr ""
+msgstr "Lopata na chléb se vyrábí v dílně na železo stejně jako ostatní nástroje (ale přestane se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr ""
+msgstr "Lopaty na chléb vyrábí nástrojař."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -2457,7 +2506,7 @@ msgstr "Velké kýble pro porybného - vyrábí se v dílně."
 msgctxt "barbarians_ware"
 msgid ""
 "Cloth is needed for Barbarian ships. It is produced out of thatch reed."
-msgstr ""
+msgstr "Látka je potřeba na lodě barbarů. Vyrábí se z rákosu."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -2480,7 +2529,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal."
-msgstr ""
+msgstr "Atlantské ohně ve slévárně, platnéřství a zbrojířství jsou udržovány uhlím."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:8
@@ -2489,7 +2538,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr ""
+msgstr "Barbarské ohně jsou většinou udržovány uhlím. Uhlí spotřebovává několik budov: vápenná pec, slévárna, dílna na sekery, válečná akademie a kovárna přileb."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:10
@@ -2497,7 +2546,7 @@ msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal."
-msgstr ""
+msgstr "Císařské ohně ve slévárně, platnéřství a zbrojířství jsou obvykle udržovány uhlím."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -2536,7 +2585,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Těžební sekery se vyrábí v dílně na železo (ale přestanou se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
@@ -2563,7 +2612,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Vyrábí se v dílně na železo (ale přestanou se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
@@ -2587,7 +2636,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Krom chlebových placek a masa jsou i ryby potravou barbarů. Používají se v hospodách, hostincích, velkých hostincích a cvičištích (výcvikový tábor a bitevní aréna)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -2616,7 +2665,7 @@ msgid ""
 "They are one of the basic tools produced in a metal workshop (but cease to "
 "be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "Je to jeden z základních nástrojů, který se vyrábí v dílně na železo (ale přestane se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:8
@@ -2638,7 +2687,7 @@ msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is obtained out of gold ore "
 "in a smelting works."
-msgstr ""
+msgstr "Zlato je nejdražší ze všech kovů a získává se ze zlaté rudy ve slévárně."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
@@ -2646,7 +2695,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Gold is used by the armor smithy, the weapon smithy and the gold spinning "
 "mill."
-msgstr ""
+msgstr "Zlato se používá v platnéřství, zbrojířství a používáho i tkadlec zlata."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
@@ -2655,7 +2704,7 @@ msgid ""
 "Only very important things are embellished with gold. It is used as a "
 "precious building material and to produce different axes (in the war mill) "
 "and different parts of armor (in the helm smithy)."
-msgstr ""
+msgstr "Pouze ty nejdůležitější věci jsou zdobeny zlatem. Používá se coby vzácný stavební materiál a na výrobu různých seker (ve válečné akademii) a na výrobu různých částí zbroje (v kovárně na přilby)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -2680,7 +2729,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Toto vlákno, vyrobené ze zlata tkalcem zlata, se používá na výrobu jedinečných zlatých vest v tkalcovně."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:4
@@ -2720,7 +2769,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Granite can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
-msgstr ""
+msgstr "Žulu lze zpracovat na maltu, která je pevným a nehořlavým stavebním materiálem. Malta se vyrábí ve vápenné peci."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
@@ -2734,7 +2783,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Geologové, stavitelé, zbrojíři a platnéři. Všichni potřebují kladivo. Postarej se o to, aby si měl vždy nějaké v zásobě! Vyrábí je nástrojař."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:8
@@ -2744,7 +2793,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Geologové, stavitelé, kováři a kováři přileb. Všichni potřebují kladivo. Postarej se o to, aby si měl vždy nějaké v zásobě! Je to jeden ze základních nástrojů, který se vyrábí v dílně na železo (ale přestane se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -2752,7 +2801,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr ""
+msgstr "Geologové, stavitelé, zbrojíři a platnéři. Všichni potřebují kladivo. Postarej se o to, aby si měl vždy nějaké v zásobě! Vyrábí je nástrojař."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/helmet/helptexts.lua:4
@@ -2761,7 +2810,7 @@ msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Přilba poskytuje základní ochranu vojákům. Vyrábí se v kovárně přileb a používá se ve výcvikovém táboře - spolu s jídlem - na výcvik zdraví z úrovně 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../data/tribes/wares/helmet_mask/helptexts.lua:4
@@ -2770,7 +2819,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr ""
+msgstr "Toto je nejlepší barbarská zbroj. Vyrábí se v kovárně přileb a používá se ve výcvikovém táboře - spolu s jídlem - na výcvik zdraví z úrovně 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../data/tribes/wares/helmet_warhelm/helptexts.lua:4
@@ -2779,7 +2828,7 @@ msgid ""
 "A warhelm is an enhanced armor for Barbarian soldiers. It is produced in a "
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Válečná přilba je nejlepší zbroj barbarských vojáků. Vyrábí se v kovárně přileb a používá se ve výcvikovém táboře - spolu s jídlem - na výcvik zdraví z úrovně 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../data/tribes/wares/hook_pole/helptexts.lua:4
@@ -2810,7 +2859,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Lovecký oštěp se vyrábí v dílně na železo (ale přestane se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
@@ -2828,7 +2877,7 @@ msgstr "Ze železa se vyrábí zbraně, zbroj i některé nástroje. Železo poc
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr ""
+msgstr "Používá se v dílně, platnéřství a zbrojířství."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -2836,7 +2885,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is used to produce weapons and tools in the metal workshop, ax workshop, "
 "war mill and helm smithy."
-msgstr ""
+msgstr "Používá se na výrobu zbraní a nástrojů v dílně na železo, dílně na sekery, válečné akademii a kovárně příleb."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
@@ -2860,7 +2909,7 @@ msgid ""
 "Be sure to have a metal workshop to produce this basic tool (but it ceases "
 "to be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr ""
+msgstr "Jak můžu připravovat jídlo, svačinu nebo příděl, když v kuchyni není kuchařské náčiní? Ujisti se, že máš postavenou dílnu na železo aby si mohl vyrábět základní nástroje (ty se přestanou vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -2885,7 +2934,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr ""
+msgstr "Atlanťané vyrábí z kmenů prkna, která jsou potřeba téměř na všechny budovy. Dále kmeny potřebují ke své práci také pila, milíř na dřevěné uhlí, nástrojař a udírna."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:8
@@ -2895,7 +2944,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr ""
+msgstr "Barbarští dřevorubci kácejí stromy; lesníci se starají o stromy a pěstují je. Kmeny se používají v dílně na železo na výrobů základních nástrojů a v milíři na dřevěné uhlí na výrobu uhlí. Tesařství vylepšuje kmeny na tvrzené dřevo, tvrzením v ohni."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:10
@@ -2904,7 +2953,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr ""
+msgstr "Císařští dřevorubci kácejí stromy; lesníci se starají o stromy a pěstují je. Kmeny se používají v milíři na dřevěné uhlí, dílně a pile."
 
 #. TRANSLATORS: Helptext for a ware: Marble
 #: ../../data/tribes/wares/marble/helptexts.lua:4
@@ -2930,7 +2979,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
-msgstr ""
+msgstr "Jídlo se vyrábí z chlebových placek, silného piva a ryb/masa ve velkém hostinci. Vydatná strava je přesně to, co dělníci v hlubším dole potřebují."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:6
@@ -2954,7 +3003,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to mines and "
 "training sites (dungeon and labyrinth)."
-msgstr ""
+msgstr "Maso je potřeba vyudit v udírně před tím, než je dopraveno do dolů a cvičišť (kobky a labyrint)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:8
@@ -2963,7 +3012,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr ""
+msgstr "Maso se používá v hospodách, hostincích a velkých hostincích k přípravě přídělů, svačin a jídel pro horníky. Konzumují ho i na cvičištích (výcvikový tábor a bitevní aréna)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -2972,7 +3021,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr ""
+msgstr "Maso se dá také získat z vepřů ve vepřínech. Používá se v hostincích a hospodách k přípravě obědů pro horníky a cvičiště (aréna, koloseum a výcvikový tábor)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4
@@ -2997,7 +3046,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Krumpáče používají kameníci a horníci. Vyrábí se v dílně na železo (ale přestanou se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -3051,7 +3100,7 @@ msgctxt "ware"
 msgid ""
 "A small bite to keep miners strong and working. The scout also consumes "
 "rations on his scouting trips."
-msgstr ""
+msgstr "Malé sousto udrží pracující horníky při síle. Průzkumník také potřebuje příděly aby se mohl vydávat na průzkum."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:6
@@ -3099,7 +3148,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Scythes are produced by the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Kosy se vyrábí v dílně na železo (ale přestanou se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:10
@@ -3114,7 +3163,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr ""
+msgstr "Tyto vylepšené štíty používají nejlepší atlantští vojáci. Vyrábějí se v platnéřství a používají se v labyrintu - spolu s jídlem - k výcviku obrany vojáků z úrovně 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../data/tribes/wares/shield_steel/helptexts.lua:4
@@ -3122,7 +3171,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
-msgstr "Tento ocelový štít se vyrábí v platnéřství a používá se v labyrintu - společně s jídlem - k výcviků obrany vojáků z úrovně 0 na úroveň 1."
+msgstr "Ocelový štít se vyrábí v platnéřství a používá se v labyrintu - spolu s jídlem - k výcviku obrany vojáků z úrovně 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:4
@@ -3145,7 +3194,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "Proto je zahradník a lesník používají. Vyrábí se v dílně na železo (ale přestanou se tam vyrábět, když je budova vylepšena na dílnu na sekery a válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -3178,7 +3227,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "Větší porce než je příděl, určená pro horníky v hlubinných dolech. Připravuje se v hostinci nebo velkém hostinci z ryb/masa, chlebových placek a piva."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4
@@ -3187,7 +3236,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr ""
+msgstr "Oštěp se železným hrotem. Vyrábí se ve zbrojířství a používá se ve výcvikovém táboře - spolu s jídlem - k výcviku útoku vojáků z úrovně 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../data/tribes/wares/spear_advanced/helptexts.lua:4
@@ -3196,7 +3245,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
+msgstr "Vylepšený oštěp s ocelovým hrotem. Vyrábí se ve zbrojířství a používá se ve výcvikovém táboře - spolu s jídlem - k výcviku útoku vojáků z úrovně 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../data/tribes/wares/spear_heavy/helptexts.lua:4
@@ -3205,7 +3254,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "Těžký oštěp s ocelovým hrotem a malou čepelí. Vyrábí se ve zbrojířství a používá se ve výcvikovém táboře - spolu s jídlem - k výcviku útoku vojáků z úrovně 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../data/tribes/wares/spear_war/helptexts.lua:4
@@ -3214,7 +3263,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
+msgstr "Nejlepší a nejostřejší zbraň, jakou umí císařský zbrojíř pro vojáky vyrobit. Používá se ve výcvikovém táboře - spolu s jídlem - k výcviku útoku vojáků z úrovně 3 na úroveň 4."
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../data/tribes/wares/spear_wooden/helptexts.lua:4
@@ -3223,7 +3272,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
+msgstr "Dřevěné kopí je základní zbraní císařských vojenských jednotek. Vyrábí se ve zbrojířství. Společně s helmou tvoří základní výbavu mladých rekrutů."
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../data/tribes/wares/spider_silk/helptexts.lua:4
@@ -3231,7 +3280,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "Pavoučí hedvábí vyrábí pavouci, kteří jsou chováni na pavoučích farmách. Zpracovává se na pavoučí látku v tkalcovně."
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../data/tribes/wares/spidercloth/helptexts.lua:4
@@ -3240,7 +3289,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "Pavoučí látka se vyrábí z pavoučího hedvábí v tkalcovně. Používá se v dílně a loděnici. Také na stavbu některých pokročilých budov je vyžadována pavoučí látka."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -3265,7 +3314,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "Rákos se pěstuje na rákosovém poli a používá se na stavbu střech."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -3274,7 +3323,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "Dvojitý trojzubec je jedním z nejlepších trojzubců vyráběných v atlantských zbrojířstvích. Používá se v kobkách - společně s jídlem - k výcviků utoku vojáků z úrovně 2 na úroveň 3."
+msgstr "Dvojitý trojzubec je jedním z nejlepších trojzubců vyráběných v atlantských zbrojířstvích. Používá se v kobkách - spolu s jídlem - k výcviku útoku vojáků z úrovně 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Double Trident
 #: ../../data/tribes/wares/trident_heavy_double/helptexts.lua:4
@@ -3284,7 +3333,7 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr "Toto je nejnebezpečnější zbraň atlantské armády. Boj s touto zbraní ovládají pouze ti nejlepší vojáci. Vyrábí se ve zbrojířství a používá se v kobkách - společně s jídlem - k výcviků vojáků, zlepšení útoku z úrovně 3 na úroveň 4."
+msgstr "Toto je nejnebezpečnější zbraň atlantské armády. Boj s touto zbraní ovládají pouze ti nejlepší vojáci. Vyrábí se ve zbrojířství a používá se v kobkách - spolu s jídlem - k výcviku útoku vojáků z úrovně 3 na úroveň 4."
 
 #. TRANSLATORS: Helptext for a ware: Light Trident
 #: ../../data/tribes/wares/trident_light/helptexts.lua:4
@@ -3309,9 +3358,9 @@ msgstr "Dlouhý trojzubec je první trojzubec pro trénování vojáků. Vyráb�
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
-msgstr ""
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
+msgstr "Toto je střední trojzubec. Vyrábí se ve zbrojířství a používají ho zkušení vojáci v kobkách - spolu s jídlem - k výcviku útoku vojáků z úrovně 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3353,14 +3402,14 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr ""
+msgstr "Pšenice se pěstuje na obilných polích a zpracovávají ji pekaři, malé pivovary a pivovary. I statky musí být zásobeny pšenicí."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:8
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Pšenice se pěstuje na obilných polích a zpracovávají ji mlýny a pivovary. I statky musí být zásobeny pšenicí. I oslí farmy, ovčince a vepříny musí být zásobeny pšenicí."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -3412,6 +3461,15 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Vypaluje uhlí."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TODO(GunChleoc): This is unused
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -3468,9 +3526,9 @@ msgstr "Lovec zajišťuje kolonistům přísun čerstvého masa."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr "Mele rozrazil a kukuřici na drcený rozrazil a kukuřičnou mouku."
+msgstr "Drtí rozrazil na drcený rozrazil a mele kukuřici na kukuřičnou mouku."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
@@ -3632,7 +3690,7 @@ msgstr "Hajný se vypouštěním zvěře do přírody stará o to, aby populace 
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr "Pěstuje rákos na došky."
+msgstr "Pěstuje rákos."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3

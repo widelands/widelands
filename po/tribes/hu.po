@@ -6,12 +6,13 @@
 # Dániel Varga <vargad88@gmail.com>, 2007
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-08-20 00:14+0000\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-19 17:57+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -21,32 +22,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:65
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
 msgctxt "atlanteans_building"
 msgid "Castle"
 msgstr "Vár"
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:104
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:92
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:40
 msgid "Your soldiers have occupied your castle."
 msgstr "A katonáid elfoglalták a várad."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:105
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:93
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:41
 msgid "Your castle discovered an aggressor."
 msgstr "A várad felfedezett egy támadót."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:106
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:94
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:42
 msgid "Your castle is under attack."
 msgstr "A váradat megtámadták."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:107
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:95
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:43
 msgid "The enemy defeated your soldiers at the castle."
 msgstr "Az ellenség legyőzte a katonáidat a várnál."
 
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:108
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:96
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:44
 msgid "Your soldiers defeated the enemy at the castle."
 msgstr "A katonáid legyőzték az ellenséget a várnál."
@@ -400,26 +401,26 @@ msgstr "Torony"
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
-#: ../../data/tribes/buildings/partially_finished/constructionsite/init.lua:46
+#: ../../data/tribes/buildings/partially_finished/constructionsite/init.lua:30
 msgctxt "building"
 msgid "Construction Site"
 msgstr "Építési terület"
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings being
 #. taken apart
-#: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:46
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:30
 msgctxt "building"
 msgid "Dismantle Site"
 msgstr "Épület lebontása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:89
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
 msgstr "Páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:124
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:60
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
@@ -442,7 +443,7 @@ msgstr "Páncélkovács műhely"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:51
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:69
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:51
@@ -462,13 +463,13 @@ msgstr "működik"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:133
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:147
 msgid "forging a steel shield"
 msgstr "acélpajzs kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:159
 msgid "forging an advanced shield"
 msgstr "fejlesztett pajzs kovácsolása"
 
@@ -484,6 +485,21 @@ msgstr "Pékség"
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
 msgid "baking bread"
 msgstr "kenyér sütése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Barracks"
+msgstr "Laktanya"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+msgid "recruiting soldier"
+msgstr "katona toborzása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -848,7 +864,7 @@ msgid "grinding corn"
 msgstr "kukorica őrlése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:76
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:77
 msgid "grinding blackroot"
 msgstr "feketegyökér őrlése"
 
@@ -918,7 +934,7 @@ msgstr "Hajógyár"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 msgid "constructing a ship"
 msgstr "hajó építése"
@@ -937,9 +953,9 @@ msgid "smelting iron"
 msgstr "vas olvasztása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr "arany olvasztása"
 
@@ -955,7 +971,7 @@ msgid "smoking meat"
 msgstr "hús füstölése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 msgid "smoking fish"
 msgstr "hal füstölése"
 
@@ -981,12 +997,12 @@ msgstr "péklapát készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
 msgid "making a pair of buckets"
 msgstr "egy pár vödör készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:107
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:111
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:116
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:120
 msgid "making fire tongs"
@@ -994,56 +1010,56 @@ msgstr "parázsfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:124
 msgid "making a fishing net"
 msgstr "halászháló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:137
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:140
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:144
 msgid "making a hammer"
 msgstr "kalapács készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:140
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:150
 msgid "making a hook pole"
 msgstr "kampós rudat készít"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:151
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:163
 msgid "making a hunting bow"
 msgstr "vadászíj készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
 msgid "making milking tongs"
 msgstr "fejőfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:189
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:176
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:180
 msgid "making a pick"
 msgstr "csákány készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:184
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:192
 msgid "making a saw"
 msgstr "fűrész készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:195
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:188
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:204
 msgid "making a scythe"
 msgstr "kasza készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:206
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:228
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:200
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:216
 msgid "making a shovel"
@@ -1063,25 +1079,25 @@ msgstr "könnyű szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
 msgstr "hosszú szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:103
 msgid "forging a steel trident"
 msgstr "acélszigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:115
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:118
 msgid "forging a double trident"
 msgstr "kétvégű szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:133
 msgid "forging a heavy double trident"
 msgstr "nehéz kétvégű szigony kovácsolása"
 
@@ -1098,13 +1114,13 @@ msgid "weaving spidercloth"
 msgstr "pókszövet szövése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
 msgid "tailoring a tabard"
 msgstr "köntös szabása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
 msgid "tailoring a golden tabard"
 msgstr "aranyköntös szabása"
 
@@ -1128,9 +1144,8 @@ msgstr "Kifogyott a víz"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a munkaterületén."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1178,14 +1193,14 @@ msgid "forging an ax"
 msgstr "fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:89
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:97
 msgid "forging a sharp ax"
 msgstr "éles fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:103
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:110
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:112
 msgid "forging a broad ax"
 msgstr "széles fejsze kovácsolása"
 
@@ -1194,6 +1209,12 @@ msgstr "széles fejsze kovácsolása"
 msgctxt "barbarians_building"
 msgid "Bakery"
 msgstr "Pékség"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
+msgctxt "barbarians_building"
+msgid "Barracks"
+msgstr "Laktanaya"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1211,14 +1232,14 @@ msgid "preparing a ration"
 msgstr "harapnivaló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:81
 msgid "preparing a snack"
 msgstr "uzsonna készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:90
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:78
 msgid "preparing a meal"
 msgstr "ebéd készítése"
 
@@ -1397,12 +1418,12 @@ msgid "forging a helmet"
 msgstr "sisak kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:90
 msgid "forging a mask"
 msgstr "maszk kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:100
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:102
 msgid "forging a warhelm"
 msgstr "harci sisak kovácsolása"
 
@@ -1605,19 +1626,19 @@ msgstr "Fegyverkészítő műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:124
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:127
 msgid "forging a bronze ax"
 msgstr "bronz fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:138
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:142
 msgid "forging a battle ax"
 msgstr "csatabalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:152
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:157
 msgid "forging a warrior’s ax"
 msgstr "harci fejsze kovácsolása"
 
@@ -1641,9 +1662,8 @@ msgstr "Kút"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 msgctxt "barbarians_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "A hordár aki ennél a kútnál dolgozik nem talál vizet a munkaterületén."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -1664,19 +1684,19 @@ msgstr "Páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
 msgid "forging a suit of armor"
 msgstr "páncél kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
 msgid "forging a suit of chain armor"
 msgstr "lánc páncél kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:113
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
 msgid "forging a suit of gilded armor"
 msgstr "aranyozott páncél kovácsolása"
 
@@ -1685,6 +1705,12 @@ msgstr "aranyozott páncél kovácsolása"
 msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Pékség"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
+msgctxt "empire_building"
+msgid "Barracks"
+msgstr "Laktanya"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:7
@@ -2040,25 +2066,25 @@ msgid "forging a wooden spear"
 msgstr "fa lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:93
 msgid "forging a spear"
 msgstr "lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:108
 msgid "forging an advanced spear"
 msgstr "fejlesztett lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:123
 msgid "forging a heavy spear"
 msgstr "nehéz lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:138
 msgid "forging a war spear"
 msgstr "harci lándzsa kovácsolása"
 
@@ -2076,9 +2102,8 @@ msgstr "Kút"
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
 msgctxt "empire_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "A hordár aki ennél a kútnál dolgozik nem talál vizet a munkaterületén."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "A hordár, aki ennél a kútnál dolgozik, nem talál vizet a kútjában."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:7
@@ -2092,13 +2117,13 @@ msgid "making wine"
 msgstr "bort készít"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:55
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "Kazamata"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:127
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:156
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
@@ -2109,28 +2134,28 @@ msgid "sleeping"
 msgstr "alszik"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:146
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:157
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
 msgid "upgrading soldier attack from level 3 to level 4"
@@ -2227,7 +2252,7 @@ msgid "upgrading soldier health from level 3 to level 4"
 msgstr "katona életerejének feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:61
+#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:47
 msgctxt "atlanteans_building"
 msgid "Headquarters"
 msgstr "Főhadiszállás"
@@ -2288,7 +2313,7 @@ msgid "Warehouse"
 msgstr "Raktár"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:38
+#: ../../data/tribes/immovables/ashes/init.lua:40
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Hamu"
@@ -2579,7 +2604,7 @@ msgstr "Erődített falu"
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-msgid " Start the game with a fortified military installation"
+msgid "Start the game with a fortified military installation"
 msgstr "A játék indítása egy erődített katonai létesítménnyel"
 
 #. TRANSLATORS: This is the name of a starting condition
@@ -2614,14 +2639,14 @@ msgid ""
 msgstr "Ha ez a játékos fogytán van a fontos nyersanyagoknak, akkor ingyen pótlásra kerülnek"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:53
+#: ../../data/tribes/ships/atlanteans/init.lua:55
 #: ../../data/tribes/ships/barbarians/init.lua:16
 #: ../../data/tribes/ships/empire/init.lua:16
 msgid "Ship"
 msgstr "Hajó"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:48
+#: ../../data/tribes/wares/armor/init.lua:50
 msgctxt "ware"
 msgid "Armor"
 msgstr "Páncél"

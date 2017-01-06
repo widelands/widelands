@@ -657,11 +657,11 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case (MapObjectType::BOB):
 	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
-	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
 		                  .str());
 	}
+	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
@@ -990,13 +990,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 	} else {
 		report_error(
 		   L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
@@ -1511,6 +1513,7 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
+		break;
 	}
 	return 1;
 }
@@ -3210,9 +3213,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case (MapObjectType::ROAD):
 	case (MapObjectType::PORTDOCK):
 	case (MapObjectType::WARE):
-	default:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
+	NEVER_HERE();
 }
 
 #undef CAST_TO_LUA
@@ -4970,15 +4973,15 @@ int LuaField::set_raw_height(lua_State* L) {
       this field for the current interactive player
 */
 int LuaField::get_viewpoint_x(lua_State* L) {
-	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
-	lua_pushint32(L, px);
+	Vector2f point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
+	lua_pushdouble(L, point.x);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State* L) {
-	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
-	lua_pushint32(L, py);
+	Vector2f point =
+	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
+	lua_pushdouble(L, point.y);
 	return 1;
 }
 

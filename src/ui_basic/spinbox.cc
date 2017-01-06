@@ -84,7 +84,7 @@ SpinBox::SpinBox(Panel* const parent,
                  int32_t const maxval,
                  const std::string& label_text,
                  const SpinBox::Units& unit,
-                 const Image* background,
+                 const Image* button_background,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
@@ -98,7 +98,7 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->background = background;
+	sbi_->background = button_background;
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 
@@ -126,9 +126,9 @@ SpinBox::SpinBox(Panel* const parent,
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
-	UI::MultilineTextarea* label =
-	   new UI::MultilineTextarea(box_, 0, 0, w - unit_w - no_padding * padding, texth, label_text,
-	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	UI::MultilineTextarea* label = new UI::MultilineTextarea(
+	   box_, 0, 0, w - unit_w - no_padding * padding, texth, label_text, UI::Align::kLeft,
+	   button_background, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(label, UI::Align::kHCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
@@ -303,9 +303,10 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();
-	default:
+	case (Units::kNone):
 		return (boost::format("%d") % value).str();
 	}
+	NEVER_HERE();
 }
 
 }  // namespace UI
