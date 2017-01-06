@@ -113,14 +113,15 @@ end
 -- RST
 -- .. function:: help_consumed_wares(building, program_name)
 --
---    Returns information for which wares in which amounts are consumed by a produciton program.
+--    Returns information for which wares and workers in which amounts are consumed by a production program.
 --
---    :arg tribe: The :class:`LuaBuildingDescription` for the building that runs the program
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that consumes the ware
+--    :arg building: The :class:`LuaBuildingDescription` for the building that runs the program
 --    :arg program_name: The name of the production program that the info is collected for
 --
 --    :returns: A "Ware(s) consumed:" section with image_lines
 --
-function help_consumed_wares(building, program_name)
+function help_consumed_wares(tribe, building, program_name)
    local result = ""
    local consumed_wares_string = ""
    local consumed_wares_counter = 0
@@ -131,9 +132,14 @@ function help_consumed_wares(building, program_name)
       local consumed_amount = {}
       local count = 1
       for consumed_ware, amount in pairs(warelist) do
-         local ware_description = wl.Game():get_ware_description(consumed_ware)
-         consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, ware_description.descname)
-         consumed_images[count] = ware_description.icon_name
+         local description
+         if tribe:has_ware(consumed_ware) then
+            description = wl.Game():get_ware_description(consumed_ware)
+         else
+            description = wl.Game():get_worker_description(consumed_ware)
+         end
+         consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, description.descname)
+         consumed_images[count] = description.icon_name
          consumed_amount[count] = amount
          count = count + 1
          consumed_wares_counter = consumed_wares_counter + amount
