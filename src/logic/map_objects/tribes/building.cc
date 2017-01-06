@@ -242,8 +242,9 @@ Building::Building(const BuildingDescr& building_descr)
 }
 
 Building::~Building() {
-	if (optionswindow_)
+	if (optionswindow_) {
 		hide_options();
+	}
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -445,10 +446,14 @@ applicable.
 void Building::destroy(EditorGameBase& egbase) {
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
+	Player* building_owner = get_owner();
+	const BuildingDescr* building_descr = &descr();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire) {
-		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe, this);
+		egbase.create_immovable_with_name(pos, "destroyed_building",
+		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
+		                                  building_descr);
 	}
 }
 
@@ -469,6 +474,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
+		break;
 	}
 	return result;
 }

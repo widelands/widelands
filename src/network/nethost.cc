@@ -26,7 +26,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -1740,7 +1739,6 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 void NetHost::check_hung_clients() {
 	assert(d->game != nullptr);
 
-	int nrready = 0;
 	int nrdelayed = 0;
 	int nrhung = 0;
 
@@ -1751,7 +1749,6 @@ void NetHost::check_hung_clients() {
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
 		if (delta == 0) {
-			++nrready;
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
@@ -2007,8 +2004,7 @@ void NetHost::handle_network() {
 			} catch (const DisconnectException& e) {
 				disconnect_client(i, e.what());
 			} catch (const ProtocolException& e) {
-				disconnect_client(
-				   i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
+				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
 			} catch (const std::exception& e) {
 				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 			}

@@ -977,7 +977,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		fw.unsigned_8(1);
 		fw.string(tribe.get_ware_descr(i)->name());
 		fw.unsigned_32(wares.stock(i));
-		fw.unsigned_8(warehouse.get_ware_policy(i));
+		fw.unsigned_8(static_cast<uint8_t>(warehouse.get_ware_policy(i)));
 	}
 	fw.unsigned_8(0);
 	const WareList& workers = warehouse.supply_->get_workers();
@@ -985,7 +985,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		fw.unsigned_8(1);
 		fw.string(tribe.get_worker_descr(i)->name());
 		fw.unsigned_32(workers.stock(i));
-		fw.unsigned_8(warehouse.get_worker_policy(i));
+		fw.unsigned_8(static_cast<uint8_t>(warehouse.get_worker_policy(i)));
 	}
 	fw.unsigned_8(0);
 

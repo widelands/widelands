@@ -69,6 +69,7 @@ function campaign_message_box(message)
    message_box(wl.Game().players[1], message.title, message.body, message)
 end
 
+
 -- RST
 -- .. function:: add_campaign_objective(objective)
 --
@@ -87,6 +88,24 @@ function add_campaign_objective(objective)
 end
 
 -- RST
+-- .. function:: set_objective_done(objective[, sleeptime])
+--
+--    Sets an objectve as done and sleeps for a bit.
+--
+--    :arg objective: The objective to be marked as done.
+--    :arg sleeptime: The milliseconds to sleep. Defaults to 3000.
+--
+function set_objective_done(objective, sleeptime)
+   if not sleeptime then
+      sleep(3000)
+   else
+      sleep(sleeptime)
+   end
+   objective.done = true
+end
+
+
+-- RST
 -- .. function:: message_box_objective(player, message)
 --
 --    Calls message_box(player, message.title, message.body, message). Also adds an objective defined in obj_name, obj_title and obj_body.
@@ -97,9 +116,6 @@ end
 --
 --    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
 --
---    :arg append_objective: If true, the objective text is appended to the message.body using new_objectives(). Default: False.
---       :arg obj_number: or :arg number: Used for the plural formatting in new_objectives. Default: 1.
---    :arg jump_to_field: If true, the view jumps to the message.field rather than scroll to it. Does nothing if the field is nil. Default: False, i.e. the view will scroll.
 --    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
 --    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
 --    :arg show_instantly: If true, the message box is shown immediately. If false, this function calls message_box(), which waits until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
@@ -108,27 +124,21 @@ end
 
 -- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
 function message_box_objective(player, message)
-   message.jump_to_field = message.jump_to_field or false
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
    message.append_objective = message.append_objective or false
    message.h = message.h or 400
    message.w = message.w or 450
 
-   local way, x, y
+   local way
 
    if message.field then
-      if message.jump_to_field then
-         x,y = wl.ui.MapView().viewpoint_x, wl.ui.MapView().viewpoint_y
-         -- player:message_box jumps, so nothing to do for us
-      else
       -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
       -- In this time, could user can scroll elsewhere, giving weird results.
-         if not message.show_instantly then
-            wait_for_roadbuilding()
-         end
-         way = scroll_smoothly_to(message.field)
+      if not message.show_instantly then
+         wait_for_roadbuilding()
       end
+      way = scroll_smoothly_to(message.field)
    end
 
    if message.position then
@@ -144,13 +154,6 @@ function message_box_objective(player, message)
       end
    end
 
-   if (message.obj_name and message.append_objective) then
-      message.obj_number = message.obj_number or message.number or 1
-      -- because new_objectives needs a body
-      local obj = {body = objective_text(message.obj_title, message.obj_body), number = message.obj_number}
-      message.body = message.body .. new_objectives(obj)
-   end
-
    if message.show_instantly then
       -- message_box takes care of this, but player:message_box does not
       local user_input = wl.ui.get_user_input_allowed()
@@ -162,12 +165,7 @@ function message_box_objective(player, message)
    end
 
    if (message.field and message.scroll_back) then
-      if message.jump_to_field then
-         wl.ui.MapView().viewpoint_x = x
-         wl.ui.MapView().viewpoint_y = y
-      else
-         timed_scroll(array_reverse(way))
-      end
+      timed_scroll(array_reverse(way))
    end
 
    if message.obj_name then

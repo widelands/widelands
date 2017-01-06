@@ -58,6 +58,8 @@ protected:
 	void clicked_back() override;
 
 private:
+	void layout() override;
+
 	LuaInterface* lua_;
 
 	void change_map_or_save();

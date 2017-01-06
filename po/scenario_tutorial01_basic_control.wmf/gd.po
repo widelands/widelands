@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 16:12+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -213,7 +213,7 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Mar as giorra na roinnean-rathaid agad ’s ann nas luaithe a thèid am bathar agad a ghiùlan. Bu chòir dhut dèanamh cinnteach gu bheil an uiread a ghabhas de bhrataich air na rathaidean agad air sàilleibh seo."
+msgstr "Mar as giorra na roinnean-rathaid agad ’s ann nas luaithe a thèid am bathar agad a ghiùlan. Bu chòir dhut dèanamh cinnteach gu bheil an uiread a ghabhas de bhrataichean air na rathaidean agad air sàilleibh seo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:129
 msgid ""
@@ -402,7 +402,7 @@ msgstr "Ionnsaich mar a chleachdas tu am meanbh-mhapa"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Fosgail am mean-mhapa ‘s tu a’ briogadh air an treas putan on taobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
+msgstr "Fosgail am meanbh-mhapa ‘s tu a’ briogadh air an treas putan on taobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -780,7 +780,7 @@ msgstr "Tha uinneag nan teachdaireachd cudromach gus fortan na treubha agad a st
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
-msgstr "Cuir na h-uile teachdaireachd agad dhan tasglann a-nis."
+msgstr "Cuir na h-uile teachdaireachd a tha sa bhogsa a-steach agad dhan tasglann a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
@@ -833,7 +833,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile carraig air falbh o na clachairean bochda a-nis. Cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dhaibh creagan a lorg san roinn obrach aca tuilleadh an ath thuras a dh’fheuchas iad ri obair a dhèanamh."
+msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile carraig air falbh o chlachairean bochda nan cuaraidhean a-nis. An ath thuras a dh’fheuchas e ri obair a dhèanamh, cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dha creagan a lorg san raon-obrach aige tuilleadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
