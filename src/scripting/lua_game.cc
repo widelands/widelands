@@ -99,6 +99,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_suitability),
    METHOD(LuaPlayer, allow_workers),
    METHOD(LuaPlayer, switchplayer),
+   METHOD(LuaPlayer, get_produced_wares_count),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -106,8 +107,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives), PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, messages),   PROP_RO(LuaPlayer, inbox),
    PROP_RW(LuaPlayer, team),       PROP_RO(LuaPlayer, tribe),
-   PROP_RW(LuaPlayer, see_all),    PROP_RO(LuaPlayer, produced_wares_count),
-   {nullptr, nullptr, nullptr},
+   PROP_RW(LuaPlayer, see_all),    {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -272,25 +272,6 @@ int LuaPlayer::get_see_all(lua_State* const L) {
 	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
-
-/* RST
-   .. attribute:: produced_wares_count
-
-      (RO) An array of wares produced byt the player with produced quantity. 
-*/
-int LuaPlayer::get_produced_wares_count(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	const TribeDescr& tribe = p.tribe();
-
-	lua_newtable(L);
-	for (const DescriptionIndex& idx : tribe.wares()) {
-		lua_pushstring(L, tribe.get_ware_descr(idx)->name());
-		lua_pushuint32(L, p.get_current_produced_statistics_(idx));
-		lua_settable(L, -3);			
-	}
-	return 1;
-}
-
 
 /*
  ==========================================================
@@ -890,6 +871,67 @@ int LuaPlayer::switchplayer(lua_State* L) {
 		ipl->set_player_number(newplayer);
 	}
 	return 0;
+}
+
+/* RST
+   .. method:: produced_wares_count(what)
+
+      Returns count of wares produced byt the player up to now.
+      'what' can be either an "all" or single ware name or an array of names. If single
+      ware name is given, integer is returned, otherwise the table is returned.
+     
+*/
+int LuaPlayer::get_produced_wares_count(lua_State* L) {
+	Player& p = get(L, get_egbase(L));
+	const TribeDescr& tribe = p.tribe();
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2) {
+		report_error(L, "One argument is required for produced_wares_count()");
+	}
+	std::vector<DescriptionIndex> requested_wares;
+	DescriptionIndex single_ware = INVALID_INDEX;
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what != "all") {
+			single_ware = tribe.ware_index(what);
+			if (single_ware == INVALID_INDEX) {
+				report_error(L, "Unrecognized ware %s", what.c_str());
+			}
+		}
+	} else {
+		/* array of names */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -1);
+			lua_pop(L, 1);
+			requested_wares.push_back(tribe.ware_index(what));
+			if (requested_wares.back() == INVALID_INDEX) {
+				report_error(L, "Unrecognized ware %s", what.c_str());
+			}
+		}
+	}
+
+	if (single_ware != INVALID_INDEX) {
+		lua_pushuint32(L, p.get_current_produced_statistics_(single_ware));
+	} else if (requested_wares.empty()) {
+		// we return all wares
+		lua_newtable(L);
+		for (const DescriptionIndex& idx : tribe.wares()) {
+			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+			lua_pushuint32(L, p.get_current_produced_statistics_(idx));
+			lua_settable(L, -3);
+		}
+	} else {
+		// we return requested wares
+		lua_newtable(L);
+		for (const DescriptionIndex& idx : requested_wares) {
+			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+			lua_pushuint32(L, p.get_current_produced_statistics_(idx));
+			lua_settable(L, -3);
+		}
+	}
+	return 1;
 }
 
 /*
