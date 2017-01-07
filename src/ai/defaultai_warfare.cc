@@ -688,7 +688,24 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		return false;
 	}
 
-	//const bool verbose = false; NOCOM
+
+	if (gametime % 100 == 0) {
+		for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
+			if ( !management_data.f_neuron_pool[53].get_position(i) &&
+			 !management_data.f_neuron_pool[54].get_position(i) &&
+			 !management_data.f_neuron_pool[55].get_position(i) &&
+			 !management_data.f_neuron_pool[56].get_position(i)) {
+				 printf (" neuron bit on position %d not used\n", i);
+			}
+			if ( !management_data.f_neuron_pool[7].get_position(i) &&
+			 !management_data.f_neuron_pool[9].get_position(i) &&
+			 !management_data.f_neuron_pool[12].get_position(i) &&
+			 !management_data.f_neuron_pool[74].get_position(i)) {
+				 printf (" neuron bit on position %d not used\n", i+32);
+			}		
+		}
+	}
+
 
 	// Check next militarysite
 	bool changed = false;
@@ -707,11 +724,18 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
 		usefullness_score += 10;
 	}
+	
+	if (militarysites.front().built_time + 2 * 60 * 1000 > gametime) {
+		usefullness_score += 10;
+	}
+	
 	usefullness_score -= static_cast<int16_t>(soldier_status_);
 	usefullness_score += (bf.enemy_accessible_) ? 2 : 0;
 	
-	const bool dism_treshold = 3 + management_data.get_military_number_at(89) / 24;
-	const bool pref_treshold = 10 + management_data.get_military_number_at(90) / 15;
+	const int32_t dism_treshold = 5 - management_data.get_military_number_at(89) / 6;
+	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) / 3);
+	
+	printf ("%2d: militarysite current score: %4d, tresholds: %3d  %3d\n", player_number(), usefullness_score, dism_treshold, pref_treshold);
 
 	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
 	Quantity const current_target = ms->soldier_capacity();

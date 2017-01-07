@@ -1380,8 +1380,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// Search in a radius of range
 	map.find_immovables(Area<FCoords>(field.coords, production_area + 2), &immovables);
 
+	// functions seems to return duplicates, so we will use serial numbers to filter them out
+	std::set<uint32_t> unique_serials;
+
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
+		if (!unique_serials.insert(base_immovable.serial()).second){
+			continue; // serial was not inserted in the set, so this is duplicate
+		}
 
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable)) {
 
@@ -1409,6 +1415,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.military_in_constr_nearby = 0;
 	field.military_loneliness = 1000;
 	field.unconnected_nearby = false;
+	field.own_non_military_nearby = 0;
 
 	// Now testing military aspects
 	immovables.clear();
@@ -1417,10 +1424,15 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// We are interested in unconnected immovables, but we must be also close to connected ones
 	bool any_connected_imm = false;
 	bool any_unconnected_imm = false;
+	unique_serials.clear();
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
+
+		if (!unique_serials.insert(base_immovable.serial()).second){
+			continue; // serial was not inserted in the set, so this is duplicate
+		}
 
 		// testing if immovable is owned by someone else and collecting some statistics
 		if (upcast(Building const, building, &base_immovable)) {
@@ -1494,9 +1506,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						field.military_loneliness *= static_cast<double_t>(dist) / radius;
 					}
 				}
+			} else {
+				field.own_non_military_nearby +=1;
 			}
 		}
 	}
+	
 	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
 		field.unconnected_nearby = true;
 	}
@@ -1532,148 +1547,162 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	int16_t inputs[2 * f_neuron_bit_size] = {0};
 
-	// Land and resource
-	inputs[0] =
-	   -field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51)) / 2;
-	inputs[1] =
-	   management_data.neuron_pool[0].get_result_safe(field.military_loneliness / 50, kAbsValue);
-	inputs[2] = -1 *
-	            management_data.neuron_pool[8].get_result_safe(
-	               (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
-	inputs[3] = -2 *
-	            management_data.neuron_pool[74].get_result_safe(
-	               (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
-	inputs[4] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
-	               -std::abs(management_data.get_military_number_at(32)) :
-	               0;
-	inputs[5] =
-	   -2 * management_data.neuron_pool[13].get_result_safe(field.military_stationed * 2, kAbsValue);
-	inputs[6] = field.unowned_buildable_spots_nearby *
+	// Land
+	//  unowned_buildable_spots_nearby
+	inputs[1] = std::min<int16_t>(field.unowned_buildable_spots_nearby, 40) *
 	            std::abs(management_data.get_military_number_at(11)) / 40;
-	inputs[7] = management_data.neuron_pool[62].get_result_safe(
+	inputs[2] = management_data.neuron_pool[62].get_result_safe(
 	               field.unowned_buildable_spots_nearby, kAbsValue) /
-	            5;
-	inputs[8] = management_data.neuron_pool[22].get_result_safe(
-	               (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue) *
-	            resource_necessity_mines_ / 100;
-	inputs[9] =
-	   2 * management_data.neuron_pool[24].get_result_safe(field.rocks_nearby * 2, kAbsValue);
-	inputs[10] = management_data.neuron_pool[25].get_result_safe(field.water_nearby, kAbsValue);
-	inputs[11] = resource_necessity_water_needed_ *
-	             management_data.neuron_pool[26].get_result_safe(field.distant_water, kAbsValue);
-	inputs[12] = management_data.neuron_pool[27].get_result_safe(field.trees_nearby, kAbsValue);
-	inputs[13] = (field.portspace_nearby == ExtendedBool::kTrue) ?
-	                std::abs(management_data.get_military_number_at(5) / 6) :
-	                0;
-
-	// combined numbers:
-	if (field.rocks_nearby > 0 && field.water_nearby > 0 && field.trees_nearby) {
-		inputs[14] = std::abs(management_data.get_military_number_at(6));
-	}
-	// one shot numbers
-	inputs[15] = (field.unowned_mines_spots_nearby > 0) ?
-	                std::abs(management_data.get_military_number_at(58)) :
-	                0;
-	inputs[16] = (field.unowned_buildable_spots_nearby > 0) ?
+	            5;	
+	inputs[3] = (field.unowned_buildable_spots_nearby > 0) ?
 	                std::abs(management_data.get_military_number_at(59)) :
 	                0;
-	inputs[17] =
+	
+	//  unowned land
+	inputs[4] =
 	   (field.unowned_land_nearby > 0) ? std::abs(management_data.get_military_number_at(52)) : 0;
-	inputs[18] = -2 * (field.military_in_constr_nearby + field.military_unstationed) *
-	             std::abs(management_data.get_military_number_at(12) / 2);
-
-	// Enemy nearby
-	inputs[19] =
-	   management_data.neuron_pool[73].get_result_safe(field.enemy_owned_land_nearby / 5, kAbsValue);
-	inputs[20] = -1 *
-	             management_data.neuron_pool[4].get_result_safe(
-	                (field.area_military_capacity + 4) / 5, kAbsValue);
-	inputs[21] =
-	   -1 *
-	   management_data.neuron_pool[53].get_result_safe(field.ally_military_presence * 2, kAbsValue);
-	inputs[22] =
-	   2 *
-	   management_data.neuron_pool[54].get_result_safe(field.enemy_military_presence * 2, kAbsValue);
-	inputs[23] =
-	   management_data.neuron_pool[61].get_result_safe(field.enemy_military_presence / 3, kAbsValue);
-	inputs[24] =
-	   -1 * management_data.neuron_pool[75].get_result_safe(field.own_military_presence, kAbsValue);
-	inputs[25] = -2 *
-	             management_data.neuron_pool[36].get_result_safe(
-	                static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
-	inputs[26] =
+	inputs[5] =
 	   management_data.neuron_pool[21].get_result_safe(
 	      ((field.unowned_land_nearby + field.enemy_owned_land_nearby) + 8) / 9, kAbsValue) *
 	   resource_necessity_territory_ / 100;
-	inputs[27] = (field.enemy_accessible_) ? management_data.get_military_number_at(55) : 0;
+	
+	
+	// portspace nearby
+	inputs[6] = (field.portspace_nearby == ExtendedBool::kTrue) ?
+	                std::abs(management_data.get_military_number_at(5)) :
+	                0;	
+	
+	//  military in constr nearby
+	inputs[7] =
+	   -1 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51));
 
-	// other vanilla
-	inputs[28] = management_data.get_military_number_at(44);
-	inputs[29] = management_data.get_military_number_at(45);
-	inputs[30] = management_data.get_military_number_at(46);
-	inputs[31] = management_data.get_military_number_at(47);
-
-	// second neuron
-	inputs[32] =
-	   -5 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(51));
-	inputs[33] =
-	   5 *
-	   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
-	inputs[34] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
+	inputs[8] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
 	                -std::abs(management_data.get_military_number_at(81)) :
 	                0;
-	inputs[35] = 5 *
-	             management_data.neuron_pool[11].get_result_safe(
+	inputs[9] = management_data.neuron_pool[11].get_result_safe(
 	                field.unowned_buildable_spots_nearby, kAbsValue);
-	inputs[36] =
-	   5 *
+
+	inputs[10] =  -1 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(82));
+	inputs[11] =  -1 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(83));
+	inputs[12] =
+	   -1 * std::min<int16_t>(field.military_in_constr_nearby, 2) * std::abs(management_data.get_military_number_at(51)) / 2;
+	inputs[14] = (field.military_in_constr_nearby > 0) ? 5 * management_data.get_military_number_at(85) : 0;
+	inputs[15] = 100;
+	inputs[16] = -100;	
+
+	// military loneliness
+	inputs[17] = field.military_loneliness	* std::abs(management_data.get_military_number_at(53)) / 10;
+	inputs[18] =
+	   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
+
+
+	// resources
+	//  mines
+	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) {
+		inputs[19] = std::abs(management_data.get_military_number_at(92));
+	}
+	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <= 1) {
+		inputs[20] = std::abs(management_data.get_military_number_at(93));
+	}
+	inputs[21] =
 	   management_data.neuron_pool[12].get_result_safe(field.unowned_mines_spots_nearby, kAbsValue) *
 	   resource_necessity_mines_ / 100;
-	inputs[37] = 2 * management_data.neuron_pool[14].get_result_safe(field.rocks_nearby, kAbsValue);
-	inputs[38] = 10 * management_data.neuron_pool[15].get_result_safe(field.water_nearby, kAbsValue);
-	inputs[39] = 5 * resource_necessity_water_needed_ *
-	             management_data.neuron_pool[17].get_result_safe(field.distant_water, kAbsValue);
-	inputs[40] = 2 * management_data.neuron_pool[18].get_result_safe(field.trees_nearby, kAbsValue);
+	inputs[22] = management_data.neuron_pool[22].get_result_safe(
+	               (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue) *
+	            resource_necessity_mines_ / 100;
+	inputs[23] = (field.unowned_mines_spots_nearby > 0) ?
+	                std::abs(management_data.get_military_number_at(58)) :
+	
+	// rocks, water, trees
+	inputs[24] = management_data.neuron_pool[14].get_result_safe(field.rocks_nearby, kAbsValue);
+	inputs[25] =
+	   management_data.neuron_pool[24].get_result_safe(field.rocks_nearby * 2, kAbsValue);
+	
+	inputs[26] = management_data.neuron_pool[15].get_result_safe(field.water_nearby, kAbsValue);
+	inputs[27] = management_data.neuron_pool[25].get_result_safe(field.water_nearby / 2, kAbsValue);
+	
+	inputs[28] = resource_necessity_water_needed_ *
+	             management_data.neuron_pool[17].get_result_safe(field.distant_water, kAbsValue) / 100;
+	
+	inputs[29] = management_data.neuron_pool[18].get_result_safe(field.trees_nearby, kAbsValue);
+	inputs[30] = management_data.neuron_pool[27].get_result_safe(field.trees_nearby / 2, kAbsValue);
+
+	if (field.rocks_nearby > 0 && field.water_nearby > 0 && field.trees_nearby) {
+		inputs[31] = std::abs(management_data.get_military_number_at(6));
+	}
+
+	inputs[33] = std::max(inputs[24],  std::max(inputs[26], inputs[28]));
+	inputs[34] = std::max(inputs[25],  std::max(inputs[27], inputs[29]));
+
+	//  own non-militarysites nearby
+	inputs[35] = management_data.neuron_pool[18].get_result_safe(field.own_non_military_nearby, kAbsValue);
+
+	
+	// military and enemies
+	//  own sites (finished, unstationed)
+
+	inputs[37] = -1 *
+	            management_data.neuron_pool[8].get_result_safe(
+	               (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+	inputs[38] = -1 *
+	            management_data.neuron_pool[74].get_result_safe(
+	               (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
+	inputs[39] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
+	               -std::abs(management_data.get_military_number_at(32)) :
+	               0;
+	inputs[40] = -1 * (field.military_in_constr_nearby + field.military_unstationed) *
+	             std::abs(management_data.get_military_number_at(12) / 2);
+
+	//  own stationed
 	inputs[41] =
-	   5 * management_data.neuron_pool[50].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
-	inputs[42] =
-	   -25 * management_data.neuron_pool[51].get_result_safe(field.area_military_capacity, kAbsValue);
+	   -1 * management_data.neuron_pool[13].get_result_safe(field.military_stationed * 2, kAbsValue);
+
+	inputs[42] = -1 *
+	             management_data.neuron_pool[4].get_result_safe(
+	                (field.area_military_capacity + 4) / 5, kAbsValue);
 	inputs[43] =
-	   -10 *
-	   management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
+	   -1 * management_data.neuron_pool[75].get_result_safe(field.own_military_presence);
+
 	inputs[44] =
-	   10 *
-	   management_data.neuron_pool[56].get_result_safe(field.enemy_military_presence, kAbsValue);
-	inputs[45] =
-	   -10 * management_data.neuron_pool[58].get_result_safe(field.own_military_presence, kAbsValue);
+	   -1 * management_data.neuron_pool[58].get_result_safe(field.own_military_presence, kAbsValue);
 	inputs[46] = -10 *
 	             management_data.neuron_pool[59].get_result_safe(
 	                static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
-	inputs[47] = 10 *
-	             management_data.neuron_pool[65].get_result_safe(
-	                (field.unowned_land_nearby + field.enemy_owned_land_nearby), kAbsValue) *
-	             resource_necessity_territory_ / 100;
-	inputs[48] = (field.enemy_accessible_) ? management_data.get_military_number_at(80) : 0;
-	inputs[49] =  -10 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(82));
-	inputs[50] =  -25 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(83));
-	inputs[51] =  -100 * field.military_in_constr_nearby * std::abs(management_data.get_military_number_at(84));
-	inputs[52] =
-	   -10 * management_data.neuron_pool[64].get_result_safe(field.own_military_presence, kAbsValue);
-	inputs[53] = (field.military_in_constr_nearby > 0) ? 5 * management_data.get_military_number_at(85) : 0;
-	inputs[54] = (field.enemy_accessible_) ? management_data.get_military_number_at(56) * 2 : 0;
-	inputs[55] = 3 *
+	inputs[47] = -5 * std::min<int16_t>(field.own_military_presence, 20);
+	inputs[48] = -10 * std::min<int16_t>(field.own_military_presence, 10);	                
+	                	
+	//  enemies, and allies
+	inputs[50] =
+	   management_data.neuron_pool[73].get_result_safe(field.enemy_owned_land_nearby / 5, kAbsValue);
+	inputs[51] = 
 	   management_data.neuron_pool[76].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
-	inputs[56] = 10 * resource_necessity_water_needed_ *
-	             management_data.neuron_pool[77].get_result_safe(field.distant_water, kAbsValue);
-	inputs[56] = 3 * std::min(inputs[3], inputs[4]);
-	inputs[57] = 3 * std::min(inputs[5], inputs[6]);
-	inputs[58] = 3 * std::min(inputs[7], inputs[8]);		
-	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) {
-		inputs[59] = std::abs(management_data.get_military_number_at(92));
-	}
-	if (field.unowned_iron_mines_nearby && (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <= 1) {
-		inputs[60] = std::abs(management_data.get_military_number_at(93));
-	}
+	inputs[52] =
+	   management_data.neuron_pool[54].get_result_safe(field.enemy_military_presence * 2, kAbsValue);
+	inputs[53] =
+	   management_data.neuron_pool[61].get_result_safe(field.enemy_military_presence / 3, kAbsValue);
+	inputs[54] = (field.enemy_accessible_) ? management_data.get_military_number_at(55) : 0;
+	inputs[55] =
+	  management_data.neuron_pool[50].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
+	inputs[56] =  -5 * std::min<int16_t>(field.area_military_capacity, 20);
+
+	inputs[57] =
+	   management_data.neuron_pool[56].get_result_safe(field.enemy_military_presence * 2, kAbsValue);
+
+	inputs[58] = management_data.neuron_pool[65].get_result_safe(
+	                (field.unowned_land_nearby + field.enemy_owned_land_nearby) / 2, kAbsValue) *
+	             resource_necessity_territory_ / 100;
+	inputs[59] = (field.enemy_accessible_) ? management_data.get_military_number_at(80) : 0;
+	inputs[60] =
+	   -1 *
+	   management_data.neuron_pool[53].get_result_safe(field.ally_military_presence * 2, kAbsValue);
+	inputs[61] =
+	   -1 *
+	   management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
+
+	// other vanilla
+	inputs[62] = -150;
+	inputs[63] = 150;
+
 	
 	// Fneurons per situation
 	// f_neuron_pool[7]

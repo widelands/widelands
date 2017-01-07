@@ -301,6 +301,7 @@ struct BuildableField {
 	// unconnected buildings nearby
 	bool unconnected_nearby;
 	int16_t military_unstationed;
+	int16_t own_non_military_nearby;
 	Widelands::ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
