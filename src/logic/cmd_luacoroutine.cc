@@ -91,6 +91,6 @@ void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	upcast(LuaGameInterface, lgi, &egbase.lua());
 	assert(lgi);  // If this is not true, this is not a game.
 
-	lgi->write_coroutine(fw, cr_.get());
+	lgi->write_coroutine(fw, *cr_);
 }
 }

@@ -52,7 +52,7 @@ public:
 
 	// Input/output for coroutines.
 	std::unique_ptr<LuaCoroutine> read_coroutine(FileRead&);
-	void write_coroutine(FileWrite&, LuaCoroutine*);
+	void write_coroutine(FileWrite&, const LuaCoroutine&);
 
 	// Input output for the global game state.
 	void read_global_env(FileRead&, Widelands::MapObjectLoader&, uint32_t);

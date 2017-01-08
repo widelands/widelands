@@ -47,6 +47,7 @@ namespace {
 
 constexpr int kDefaultMusicVolume = 64;
 constexpr int kDefaultFxVolume = 128;
+constexpr int kNumMixingChannels = 32;
 
 void report_initalization_error(const char* msg) {
 	log("WARNING: Failed to initialize sound system: %s\n", msg);
@@ -127,6 +128,10 @@ void SoundHandler::init() {
 	if ((initted & kMixInitFlags) != kMixInitFlags) {
 		initialization_error("No Ogg support in SDL_Mixer.");
 		return;
+	}
+
+	if (Mix_AllocateChannels(kNumMixingChannels) != kNumMixingChannels) {
+		initialization_error(Mix_GetError());
 	}
 
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
@@ -444,9 +449,9 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx()) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
-		if (chan == -1)
-			log("SoundHandler: Mix_PlayChannel failed\n");
-		else {
+		if (chan == -1) {
+			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
+		} else {
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());
 
