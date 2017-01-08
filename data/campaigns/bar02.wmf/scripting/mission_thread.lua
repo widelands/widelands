@@ -359,7 +359,7 @@ function mission_complete()
 
    p1:reveal_fields(map:get_field(4,9):region(6))
 
-   local pts = scroll_to_field(map:get_field(4,5))
+   scroll_to_field(map:get_field(4,5))
 
    campaign_message_box(story_msg_7)
 

@@ -37,17 +37,17 @@
 namespace {
 
 // Number of keyframes to generate for a plan. The more points, the smoother
-// the animation (though we also lineraly interpolate between keyframes) and
-// the more work.
+// the animation (though we also lineraly interpolate between keyframes), but
+// it also means more computational work to plan the animation.
 constexpr int kNumKeyFrames = 102;
 
 // The maximum zoom to use in moving animations.
 constexpr float kMaxAnimationZoom = 8.f;
 
-// The time used for paning only automated map movement.
+// The time used for panning automated map movement only.
 constexpr float kShortAnimationMs = 500.f;
 
-// The time used for zooming and paning automated map movement.
+// The time used for zooming and panning automated map movement.
 constexpr float kLongAnimationMs = 1500.f;
 
 // If the difference between the current zoom and the target zoom in an
@@ -64,10 +64,8 @@ Rectf get_view_area(const MapView::View& view, const int width, const int height
 	return Rectf(view.viewpoint, width * view.zoom, height * view.zoom);
 }
 
-constexpr float pow2(float t) {
-	return t * t;
-}
-
+// Returns the linear interpolation of 'a' and 'b' depending on 't' in [0,
+// 1].
 template <typename T> T mix(float t, const T& a, const T& b) {
 	return a * (1.f - t) + b * t;
 }
@@ -81,7 +79,7 @@ public:
 
 	T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
-		return mix(pow2(t) * (3.f - 2.f * t), start_, end_);
+		return mix(math::sqr(t) * (3.f - 2.f * t), start_, end_);
 	}
 
 private:
@@ -137,8 +135,8 @@ void do_plan_map_transition(uint32_t start_time,
 	}
 }
 
-// Calculates a animation plan from 'start' to 'end'. Employs heuristics to
-// decide what sort of transitions are taken and how long it takes.
+// Calculates an animation plan from 'start' to 'end'. Employs heuristics
+// to decide what sort of transitions are taken and how long it takes.
 std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_time,
                                                          const Widelands::Map& map,
                                                          const MapView::View& start,
@@ -198,7 +196,8 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 	return plan;
 }
 
-// Plan a animation zoom around 'center' starting at 'start_zoom' and ending at 'end_zoom'.
+// Plan an animation zoom around 'center' starting at 'start_zoom' and
+// ending at 'end_zoom'.
 std::deque<MapView::TimestampedView> plan_zoom_transition(const uint32_t start_time,
                                                           const Vector2f& center,
                                                           const float start_zoom,

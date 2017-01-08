@@ -690,7 +690,7 @@ int LuaMapView::is_visible(lua_State* L) {
 /* RST
    .. method:: mouse_to_pixel(x, y)
 
-		Starts a animation to move the mouse onto the pixel (x, y) of this panel.
+		Starts an animation to move the mouse onto the pixel (x, y) of this panel.
 		Use `is_animating` to check if the animation is still going on.
 
       :arg x: x coordinate of the pixel
@@ -708,7 +708,7 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 /* RST
    .. method:: mouse_to_field(field)
 
-		Starts a animation to move the mouse onto the 'field'. If 'field' is not
+		Starts an animation to move the mouse onto the 'field'. If 'field' is not
 		visible on the screen currently, does nothing. Use `is_animating` to
 		check if the animation is still going on.
 
