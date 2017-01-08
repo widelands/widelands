@@ -130,7 +130,7 @@ function message_box_objective(player, message)
    message.h = message.h or 400
    message.w = message.w or 450
 
-   local way
+   local center_pixel
 
    if message.field then
       -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
@@ -138,7 +138,7 @@ function message_box_objective(player, message)
       if not message.show_instantly then
          wait_for_roadbuilding()
       end
-      way = scroll_smoothly_to(message.field)
+      center_pixel = scroll_to_field(message.field);
    end
 
    if message.position then
@@ -165,7 +165,7 @@ function message_box_objective(player, message)
    end
 
    if (message.field and message.scroll_back) then
-      timed_scroll(array_reverse(way))
+      scroll_to_map_pixel(center_pixel);
    end
 
    if message.obj_name then
