@@ -28,7 +28,7 @@ end
 --
 function scroll_to_map_pixel(map_pixel)
    _await_animation()
-   mv:scroll_to_map_pixel(map_pixel.x, map_pixel.y);
+   wl.ui.MapView():scroll_to_map_pixel(map_pixel.x, map_pixel.y)
    _await_animation()
 end
 
@@ -47,7 +47,7 @@ end
 function scroll_to_field(field)
    _await_animation()
    local mv = wl.ui.MapView()
-   local center_map_pixel = mv.center_map_pixel;
+   local center_map_pixel = mv.center_map_pixel
    mv:scroll_to_field(field)
    _await_animation()
    return center_map_pixel
@@ -90,7 +90,7 @@ function mouse_to_field(field)
       return
    end
 
-   mv:mouse_to_field(field);
+   mv:mouse_to_field(field)
    _await_animation()
 end
 
