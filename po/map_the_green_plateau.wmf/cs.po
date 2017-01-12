@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-30 11:02+0000\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2016-12-31 21:35+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr "Musíš porazit Erwyna. Velí nejsilnějším nepřátelským vojákům 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
-msgstr "Musíš porazit Joma"
+msgstr "Poraž Joma"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."

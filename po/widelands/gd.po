@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 11:01+0000\n"
+"POT-Creation-Date: 2016-12-15 15:23+0000\n"
+"PO-Revision-Date: 2016-12-15 17:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -494,7 +494,7 @@ msgstr "Làithreach: %s"
 #: ../../src/editor/ui_menus/help.cc:42
 #: ../../src/editor/ui_menus/player_menu.cc:266
 #: ../../src/ui_fsmenu/multiplayer.cc:133
-#: ../../src/wui/encyclopedia_window.cc:146
+#: ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:49
 msgid "Error!"
 msgstr "Mearachd!"
@@ -1255,11 +1255,11 @@ msgstr "Chan eil saighdear ri oideachadh ann!"
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:248
 msgid "(not occupied)"
 msgstr "(falamh)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:268
+#: ../../src/logic/map_objects/tribes/productionsite.cc:255
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Tha neach-obrach a dhìth"
@@ -1267,19 +1267,19 @@ msgstr[1] "Tha luchd-obrach a dhìth"
 msgstr[2] "Tha luchd-obrach a dhìth"
 msgstr[3] "Tha luchd-obrach a dhìth"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:275
+#: ../../src/logic/map_objects/tribes/productionsite.cc:262
 msgid "(stopped)"
 msgstr "(’na stad)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:374
+#: ../../src/logic/map_objects/tribes/productionsite.cc:361
 #: ../../src/wui/building_statistics_menu.cc:622
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:918
+#: ../../src/logic/map_objects/tribes/productionsite.cc:905
 msgid "Can’t find any more resources!"
 msgstr "Cha deach stòras a lorg tuilleadh!"
 
@@ -3027,48 +3027,51 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Feuch an cuir thu am fiosrachadh seo ris an aithris agad.\n\nFeuchaidh Widelands ris an geama a shàbhaladh nuair a thachras mearachd rè a’ gheama. ’S urrainn dhut a luchdadh is leantainn air adhart leis a gheama mar as trice, ged nach obraich seo an-còmhnaidh."
 
-#: ../../src/wui/actionconfirm.cc:157
+#: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
 msgstr "Dearbh milleadh an togalaich"
 
-#: ../../src/wui/actionconfirm.cc:158
-#, c-format
-msgid "Do you really want to destroy this %s?"
-msgstr "Am mill sinn seo dha-rìribh: %s?"
+#: ../../src/wui/actionconfirm.cc:177
+msgid "Do you really want to destroy this building?"
+msgstr "A bheil thu cinnteach gu bheil thu airson an togalach seo a mhilleadh?"
 
-#: ../../src/wui/actionconfirm.cc:204
+#: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
 msgstr "Dearbh an toirt às a chèile"
 
-#: ../../src/wui/actionconfirm.cc:205
-#, c-format
-msgid "Do you really want to dismantle this %s?"
-msgstr "An doir sinn seo às a chèile dha-rìribh: %s?"
+#: ../../src/wui/actionconfirm.cc:222
+msgid "Do you really want to dismantle this building?"
+msgstr "A bheil thu cinnteach gu bheil thu airson an togalach seo a thoirt às a chèile?"
 
-#: ../../src/wui/actionconfirm.cc:251
+#: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
 msgstr "Dearbh an leasachadh"
 
-#: ../../src/wui/actionconfirm.cc:252
-#, c-format
-msgid "Do you really want to enhance this %s?"
-msgstr "An leasaich sinn seo dha-rìribh: %s?"
+#: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
+msgid "Do you really want to enhance this building?"
+msgstr "A bheil thu cinnteach gu bheil thu airson an togalach seo a leasachadh?"
 
-#: ../../src/wui/actionconfirm.cc:293
+#. * TRANSLATORS: Warning message when player wants to enhance a military
+#. building
+#: ../../src/wui/actionconfirm.cc:271
+msgid "Be careful if the enemy is near!"
+msgstr "Thoir an aire ma tha an nàmhaid faisg ort!"
+
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
 msgstr "An cuir sinn an long fodha?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:295
+#: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "A bheil thu cinnteach gu bheil thu airson %s a chur fodha?"
 
-#: ../../src/wui/actionconfirm.cc:331
+#: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
 msgstr "Dearbh sgur dhen triall"
 
-#: ../../src/wui/actionconfirm.cc:332
+#: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
 msgstr "A bheil thu airson sgur dhen triall ghnìomhach?"
 
@@ -4111,7 +4114,6 @@ msgstr "Rum"
 msgid "Click soldier to send away"
 msgstr "Briog air saighdear gus a chur air falbh"
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"

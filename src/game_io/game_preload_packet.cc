@@ -126,7 +126,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		std::unique_ptr<Texture> texture;
 		if (ipl != nullptr) {  // Player
 			texture = draw_minimap(
-			   game, &ipl->player(), ipl->get_view_area(), MiniMapType::kStaticViewWindow, layers);
+			   game, &ipl->player(), ipl->view_area().rect(), MiniMapType::kStaticViewWindow, layers);
 		} else {  // Observer
 			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
 		}

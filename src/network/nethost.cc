@@ -1739,7 +1739,6 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 void NetHost::check_hung_clients() {
 	assert(d->game != nullptr);
 
-	int nrready = 0;
 	int nrdelayed = 0;
 	int nrhung = 0;
 
@@ -1750,7 +1749,6 @@ void NetHost::check_hung_clients() {
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
 		if (delta == 0) {
-			++nrready;
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {

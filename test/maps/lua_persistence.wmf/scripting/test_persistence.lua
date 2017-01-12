@@ -61,8 +61,6 @@ function save_coroutine()
    }
 
    mapview = wl.ui.MapView()
-   mapview.viewpoint_x = 10
-   mapview.viewpoint_y = 40
    mapview.statistics = false
    mapview.census = true
 
@@ -143,8 +141,6 @@ function check_coroutine()
    assert_true(myset:contains(map:get_field(10,11)))
 
    mapview = wl.ui.MapView()
-   assert_equal(mapview.viewpoint_x, 10)
-   assert_equal(mapview.viewpoint_y, 40)
    assert_equal(false, mapview.statistics)
    assert_equal(true, mapview.census)
 

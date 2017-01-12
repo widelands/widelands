@@ -53,14 +53,13 @@ function introduction_thread()
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
    plr:reveal_fields(rocks:region(6))
-   local way = scroll_smoothly_nordwards_to(rocks, 1500)
-
+   local prior_center = scroll_to_field(rocks)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)
 
    -- Move back
-   timed_scroll(array_reverse(way), 10)
+   scroll_to_map_pixel(prior_center)
 
    sleep(50000)
    message_box_objective(plr, msg_story_1)
