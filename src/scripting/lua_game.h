@@ -76,7 +76,6 @@ public:
 	int set_team(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
-	int get_produced_wares_count(lua_State* L);
 
 	/*
 	 * Lua methods
@@ -97,6 +96,7 @@ public:
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
+	int get_produced_wares_count(lua_State* L);
 
 	/*
 	 * C methods

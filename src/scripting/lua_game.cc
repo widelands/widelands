@@ -890,47 +890,23 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
 	}
 	std::vector<DescriptionIndex> requested_wares;
 	DescriptionIndex single_ware = INVALID_INDEX;
-	if (lua_isstring(L, 2)) {
-		std::string what = luaL_checkstring(L, -1);
-		if (what != "all") {
-			single_ware = tribe.ware_index(what);
-			if (single_ware == INVALID_INDEX) {
-				report_error(L, "Unrecognized ware %s", what.c_str());
-			}
-		}
-	} else {
-		/* array of names */
-		luaL_checktype(L, 2, LUA_TTABLE);
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			std::string what = luaL_checkstring(L, -1);
-			lua_pop(L, 1);
-			requested_wares.push_back(tribe.ware_index(what));
-			if (requested_wares.back() == INVALID_INDEX) {
-				report_error(L, "Unrecognized ware %s", what.c_str());
-			}
-		}
-	}
+	bool all_items = false;
+
+	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, requested_wares, &all_items, true);
 
 	if (single_ware != INVALID_INDEX) {
-		lua_pushuint32(L, p.get_current_produced_statistics_(single_ware));
-	} else if (requested_wares.empty()) {
-		// we return all wares
-		lua_newtable(L);
-		for (const DescriptionIndex& idx : tribe.wares()) {
-			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
-			lua_pushuint32(L, p.get_current_produced_statistics_(idx));
-			lua_settable(L, -3);
-		}
-	} else {
-		// we return requested wares
+		lua_pushuint32(L, p.get_current_produced_statistics(single_ware));
+	} else if (!requested_wares.empty()) {
 		lua_newtable(L);
 		for (const DescriptionIndex& idx : requested_wares) {
 			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
-			lua_pushuint32(L, p.get_current_produced_statistics_(idx));
+			lua_pushuint32(L, p.get_current_produced_statistics(idx));
 			lua_settable(L, -3);
 		}
+	} else {
+		NEVER_HERE();
 	}
+
 	return 1;
 }
 
@@ -976,6 +952,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 	}
 }
+
 int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 	Player& p = get(L, get_egbase(L));
 

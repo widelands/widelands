@@ -147,8 +147,7 @@ struct SoldierMapDescr {
 };
 
 using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
-using WaresMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
-using WorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using WaresWorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
 using PlrInfluence = std::pair<Widelands::PlayerNumber, Widelands::MilitaryInfluence>;
@@ -156,79 +155,8 @@ using WaresSet = std::set<Widelands::DescriptionIndex>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier*>;
 
-// parses the get argument for all classes that can be asked for their
-// current wares. Returns a set with all DescriptionIndices that must be considered.
-#define GET_INDEX(type)                                                                            \
-	DescriptionIndex get_##type##_index(                                                            \
-	   lua_State* L, const TribeDescr& tribe, const std::string& what) {                            \
-		DescriptionIndex idx = tribe.type##_index(what);                                             \
-		if (!tribe.has_##type(idx))                                                                  \
-			report_error(L, "Invalid " #type ": <%s>", what.c_str());                                 \
-		return idx;                                                                                  \
-	}
-GET_INDEX(ware)
-GET_INDEX(worker)
-#undef GET_INDEX
-
-#define PARSERS(type, btype)                                                                       \
-	btype##sSet parse_get_##type##s_arguments(                                                      \
-	   lua_State* L, const TribeDescr& tribe, bool* return_number) {                                \
-		/* takes either "all", a name or an array of names */                                        \
-		int32_t nargs = lua_gettop(L);                                                               \
-		if (nargs != 2)                                                                              \
-			report_error(L, "Wrong number of arguments to get_" #type "!");                           \
-		*return_number = false;                                                                      \
-		btype##sSet rv;                                                                              \
-		if (lua_isstring(L, 2)) {                                                                    \
-			std::string what = luaL_checkstring(L, -1);                                               \
-			if (what == "all") {                                                                      \
-				for (const DescriptionIndex& i : tribe.type##s()) {                                    \
-					rv.insert(i);                                                                       \
-				}                                                                                      \
-			} else {                                                                                  \
-				/* Only one item requested */                                                          \
-				rv.insert(get_##type##_index(L, tribe, what));                                         \
-				*return_number = true;                                                                 \
-			}                                                                                         \
-		} else {                                                                                     \
-			/* array of names */                                                                      \
-			luaL_checktype(L, 2, LUA_TTABLE);                                                         \
-			lua_pushnil(L);                                                                           \
-			while (lua_next(L, 2) != 0) {                                                             \
-				rv.insert(get_##type##_index(L, tribe, luaL_checkstring(L, -1)));                      \
-				lua_pop(L, 1);                                                                         \
-			}                                                                                         \
-		}                                                                                            \
-		return rv;                                                                                   \
-	}                                                                                               \
-                                                                                                   \
-	btype##sMap parse_set_##type##s_arguments(lua_State* L, const TribeDescr& tribe) {              \
-		int32_t nargs = lua_gettop(L);                                                               \
-		if (nargs != 2 && nargs != 3)                                                                \
-			report_error(L, "Wrong number of arguments to set_" #type "!");                           \
-		btype##sMap rv;                                                                              \
-		if (nargs == 3) {                                                                            \
-			/* name amount */                                                                         \
-			rv.insert(btype##Amount(                                                                  \
-			   get_##type##_index(L, tribe, luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));        \
-		} else {                                                                                     \
-			/* array of (name, count) */                                                              \
-			luaL_checktype(L, 2, LUA_TTABLE);                                                         \
-			lua_pushnil(L);                                                                           \
-			while (lua_next(L, 2) != 0) {                                                             \
-				rv.insert(btype##Amount(                                                               \
-				   get_##type##_index(L, tribe, luaL_checkstring(L, -2)), luaL_checkuint32(L, -1)));   \
-				lua_pop(L, 1);                                                                         \
-			}                                                                                         \
-		}                                                                                            \
-		return rv;                                                                                   \
-	}
-PARSERS(ware, Ware)
-PARSERS(worker, Worker)
-#undef PARSERS
-
-WaresMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
-	WaresMap rv;
+WaresWorkersMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
+	WaresWorkersMap rv;
 
 	for (const WareInstance* ware : f.get_wares()) {
 		DescriptionIndex i = tribes.ware_index(ware->descr().name());
@@ -246,8 +174,8 @@ static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) 
 }
 
 // Return the valid workers for a Road.
-WorkersMap get_valid_workers_for(const Road& r) {
-	WorkersMap valid_workers;
+WaresWorkersMap get_valid_workers_for(const Road& r) {
+	WaresWorkersMap valid_workers;
 	valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
 
 	if (r.get_roadtype() == RoadType::kBusy)
@@ -257,8 +185,8 @@ WorkersMap get_valid_workers_for(const Road& r) {
 }
 
 // Returns the valid workers allowed in 'pi'.
-WorkersMap get_valid_workers_for(const ProductionSite& ps) {
-	WorkersMap rv;
+WaresWorkersMap get_valid_workers_for(const ProductionSite& ps) {
+	WaresWorkersMap rv;
 	for (const auto& item : ps.descr().working_positions()) {
 		rv.insert(WorkerAmount(item.first, item.second));
 	}
@@ -266,9 +194,9 @@ WorkersMap get_valid_workers_for(const ProductionSite& ps) {
 }
 
 // Translate the given Workers map into a (string, count) Lua table.
-int workers_map_to_lua(lua_State* L, const WorkersMap& valid_workers) {
+int workers_map_to_lua(lua_State* L, const WaresWorkersMap& valid_workers) {
 	lua_newtable(L);
-	for (const WorkersMap::value_type& item : valid_workers) {
+	for (const WaresWorkersMap::value_type& item : valid_workers) {
 		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(item.first)->name());
 		lua_pushuint32(L, item.second);
 		lua_rawset(L, -3);
@@ -277,13 +205,15 @@ int workers_map_to_lua(lua_State* L, const WorkersMap& valid_workers) {
 }
 
 // Does most of the work of get_workers for player immovables (buildings and roads mainly).
-int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& valid_workers) {
+int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMap& valid_workers) {
 	const TribeDescr& tribe = pi.owner().tribe();
 
-	bool return_number = false;
-	WorkersSet set = parse_get_workers_arguments(L, tribe, &return_number);
+	DescriptionIndex worker_index = INVALID_INDEX;
+	std::vector<DescriptionIndex> workers_list;
+	bool all_items = false;
+	parse_wares_workers_list(L, tribe, &worker_index, workers_list, &all_items, false);
 
-	WorkersMap c_workers;
+	WaresWorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
@@ -293,28 +223,29 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == tribe.get_nrworkers()) {  // Wants all returned
-		set.clear();
-		for (const WorkersMap::value_type& v : valid_workers) {
-			set.insert(v.first);
-		}
-	}
-
-	if (!return_number)
-		lua_newtable(L);
-
-	for (const DescriptionIndex& i : set) {
-		Widelands::Quantity cnt = 0;
-		if (c_workers.count(i))
-			cnt = c_workers[i];
-
-		if (return_number) {
-			lua_pushuint32(L, cnt);
-			break;
+	if (worker_index != INVALID_INDEX) {
+		if (c_workers.count(worker_index)) {
+			lua_pushuint32(L, c_workers[worker_index]);
 		} else {
+			lua_pushuint32(L, 0);
+		}
+	} else {
+
+		if (all_items) {  // Wants all returned
+			workers_list.clear();
+			for (const WaresWorkersMap::value_type& v : valid_workers) {
+				workers_list.push_back(v.first);
+			}
+		}
+		lua_newtable(L);
+		for (const DescriptionIndex& i : workers_list) {
+			Widelands::Quantity cnt = 0;
+			if (c_workers.count(i)) {
+				cnt = c_workers[i];
+			}
 			lua_pushstring(L, tribe.get_worker_descr(i)->name());
 			lua_pushuint32(L, cnt);
-			lua_rawset(L, -3);
+			lua_settable(L, -3);
 		}
 	}
 	return 1;
@@ -322,13 +253,14 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 
 // Does most of the work of set_workers for player immovables (buildings and roads mainly).
 template <typename T>
-int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_workers) {
+int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& valid_workers) {
 	EditorGameBase& egbase = get_egbase(L);
 	const TribeDescr& tribe = pi->owner().tribe();
 
-	WorkersMap setpoints = parse_set_workers_arguments(L, tribe);
+	WaresWorkersMap setpoints;
+	parse_wares_workers_counted(L, tribe, setpoints, false);
 
-	WorkersMap c_workers;
+	WaresWorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
@@ -340,13 +272,13 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	}
 
 	// The idea is to change as little as possible
-	for (const WorkersMap::value_type& sp : setpoints) {
+	for (const WaresWorkersMap::value_type& sp : setpoints) {
 		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
 		Widelands::Quantity cur = 0;
-		WorkersMap::iterator i = c_workers.find(sp.first);
+		WaresWorkersMap::iterator i = c_workers.find(sp.first);
 		if (i != c_workers.end())
 			cur = i->second;
 
@@ -663,6 +595,115 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	}
 	NEVER_HERE();
 }
+
+void parse_wares_workers_list(lua_State* L,
+                              const TribeDescr& tribe,
+                              Widelands::DescriptionIndex* single_item,
+                              std::vector<Widelands::DescriptionIndex>& item_list,
+                              bool* all_items,
+                              bool is_ware) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2) {
+		report_error(L, "One argument is required for produced_wares_count()");
+	}
+
+	/* If we have single string as an argument */
+	if (lua_isstring(L, 2)) {
+
+		std::string what = luaL_checkstring(L, -1);
+		if (what != "all") {
+			if (is_ware) {
+				*single_item = tribe.ware_index(what);
+			} else {
+				*single_item = tribe.worker_index(what);
+			}
+			if (*single_item == INVALID_INDEX) {
+				report_error(L, "Unrecognized ware/worker %s", what.c_str());
+			}
+		} else {
+			*all_items = true;
+			if (is_ware) {
+				for (auto idx : tribe.wares()) {
+					item_list.push_back(idx);
+				}
+			} else {
+				for (auto idx : tribe.workers()) {
+					item_list.push_back(idx);
+				}
+			}
+		}
+	} else {
+		/* we got array of names */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -1);
+			lua_pop(L, 1);
+			if (is_ware) {
+				item_list.push_back(tribe.ware_index(what));
+			} else {
+				item_list.push_back(tribe.worker_index(what));
+			}
+			if (item_list.back() == INVALID_INDEX) {
+				report_error(L, "Unrecognized ware %s", what.c_str());
+			}
+		}
+	}
+	assert((*single_item == INVALID_INDEX) != item_list.empty());
+}
+
+void parse_wares_workers_counted(lua_State* L,
+                                 const TribeDescr& tribe,
+                                 WaresWorkersMap& ware_workers_list,
+                                 bool is_ware) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2 && nargs != 3) {
+		report_error(L, "Wrong number of arguments to set ware/worker method!");
+	}
+
+	// we either received, two items string,int:
+	if (nargs == 3) {
+
+		if (is_ware) {
+			if (tribe.ware_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", luaL_checkstring(L, 2));
+			}
+			ware_workers_list.insert(
+			   WareAmount(tribe.ware_index(luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));
+		} else {
+			if (tribe.worker_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
+			}
+			ware_workers_list.insert(
+			   WorkerAmount(tribe.worker_index(luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));
+		}
+	} else {
+		// or we got a table
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			if (is_ware) {
+				if (tribe.ware_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+					report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
+				}
+			} else {
+				if (tribe.worker_index(luaL_checkstring(L, -2)) == INVALID_INDEX) {
+					report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+				}
+			}
+
+			if (is_ware) {
+				ware_workers_list.insert(
+				   WareAmount(tribe.ware_index(luaL_checkstring(L, -2)), luaL_checkuint32(L, -1)));
+			} else {
+				ware_workers_list.insert(
+				   WorkerAmount(tribe.worker_index(luaL_checkstring(L, -2)), luaL_checkuint32(L, -1)));
+			}
+			lua_pop(L, 1);
+		}
+	}
+}
+
 #undef CAST_TO_LUA
 
 /*
@@ -3506,8 +3547,9 @@ int LuaFlag::set_wares(lua_State* L) {
 	Flag* f = get(L, egbase);
 	const Tribes& tribes = egbase.tribes();
 
-	WaresMap setpoints = parse_set_wares_arguments(L, f->owner().tribe());
-	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
+	WaresWorkersMap setpoints;
+	parse_wares_workers_counted(L, f->owner().tribe(), setpoints, true);
+	WaresWorkersMap c_wares = count_wares_on_flag_(*f, tribes);
 
 	Widelands::Quantity nwares = 0;
 
@@ -3521,7 +3563,7 @@ int LuaFlag::set_wares(lua_State* L) {
 	// The idea is to change as little as possible on this flag
 	for (const auto& sp : setpoints) {
 		uint32_t cur = 0;
-		WaresMap::iterator i = c_wares.find(sp.first);
+		WaresWorkersMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
 			cur = i->second;
 
@@ -3550,6 +3592,11 @@ int LuaFlag::set_wares(lua_State* L) {
 				f->add_ware(egbase, ware);
 			}
 		}
+		if (sp.second > 0) {  // NOCOM temporarily?
+			c_wares = count_wares_on_flag_(*f, tribes);
+			assert(c_wares.count(sp.first) == 1);
+			assert(c_wares[sp.first] = sp.second);
+		}
 	}
 	return 0;
 }
@@ -3559,37 +3606,42 @@ int LuaFlag::get_wares(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
 	Flag* flag = get(L, egbase);
+	const TribeDescr& tribe = flag->owner().tribe();
 
-	bool return_number = false;
-	WaresSet wares_set = parse_get_wares_arguments(L, flag->owner().tribe(), &return_number);
+	DescriptionIndex ware_index = INVALID_INDEX;
+	std::vector<DescriptionIndex> ware_list;
+	bool all_items = false;
+	parse_wares_workers_list(L, tribe, &ware_index, ware_list, &all_items, true);
 
-	WaresMap wares = count_wares_on_flag_(*flag, tribes);
+	WaresWorkersMap wares = count_wares_on_flag_(*flag, tribes);
 
-	if (wares_set.size() == flag->owner().tribe().get_nrwares()) {  // Want all returned
-		wares_set.clear();
-
-		for (const auto& ware : wares) {
-			wares_set.insert(ware.first);
+	// Here we create the output - either a single integer of table of pairs
+	if (ware_index != INVALID_INDEX) {
+		uint32_t wares_here = 0;
+		if (wares.count(ware_index)) {
+			wares_here = wares[ware_index];
 		}
-	}
-
-	if (!return_number)
+		lua_pushuint32(L, wares_here);
+	} else {
+		// or it is a list of wares
+		assert(!ware_list.empty());
 		lua_newtable(L);
+		// iterating over list of queryied wares
+		for (auto idx : ware_list) {
 
-	for (const Widelands::DescriptionIndex& ware : wares_set) {
-		Widelands::Quantity count = 0;
-		if (wares.count(ware))
-			count = wares[ware];
-
-		if (return_number) {
-			lua_pushuint32(L, count);
-			break;
-		} else {
-			lua_pushstring(L, tribes.get_ware_descr(ware)->name());
-			lua_pushuint32(L, count);
-			lua_rawset(L, -3);
+			uint32_t cnt = 0;
+			if (wares.count(idx)) {
+				cnt = wares[idx];
+			}
+			// the information is pushed if count > 0, or the ware was explicitely asked for
+			if (!all_items || cnt > 0) {
+				lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+				lua_pushuint32(L, cnt);
+				lua_settable(L, -3);
+			}
 		}
 	}
+
 	return 1;
 }
 
@@ -3931,50 +3983,92 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
-#define WH_SET(type, btype)                                                                        \
-	int LuaWarehouse::set_##type##s(lua_State* L) {                                                 \
-		Warehouse* wh = get(L, get_egbase(L));                                                       \
-		btype##sMap setpoints = parse_set_##type##s_arguments(L, wh->owner().tribe());               \
-                                                                                                   \
-		for (btype##sMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) {               \
-			int32_t d = i->second - wh->get_##type##s().stock(i->first);                              \
-			if (d < 0)                                                                                \
-				wh->remove_##type##s(i->first, -d);                                                    \
-			else if (d > 0)                                                                           \
-				wh->insert_##type##s(i->first, d);                                                     \
-		}                                                                                            \
-		return 0;                                                                                    \
-	}
-// documented in parent class
-WH_SET(ware, Ware)
-// documented in parent class
-WH_SET(worker, Worker)
-#undef WH_SET
 
-#define WH_GET(type, btype)                                                                        \
-	int LuaWarehouse::get_##type##s(lua_State* L) {                                                 \
-		Warehouse* wh = get(L, get_egbase(L));                                                       \
-		const Tribes& tribes = get_egbase(L).tribes();                                               \
-		bool return_number = false;                                                                  \
-		btype##sSet set = parse_get_##type##s_arguments(L, wh->owner().tribe(), &return_number);     \
-		lua_newtable(L);                                                                             \
-		if (return_number)                                                                           \
-			lua_pushuint32(L, wh->get_##type##s().stock(*set.begin()));                               \
-		else {                                                                                       \
-			lua_newtable(L);                                                                          \
-			for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) {                        \
-				lua_pushstring(L, tribes.get_##type##_descr(*i)->name());                              \
-				lua_pushuint32(L, wh->get_##type##s().stock(*i));                                      \
-				lua_rawset(L, -3);                                                                     \
-			}                                                                                         \
-		}                                                                                            \
-		return 1;                                                                                    \
+int LuaWarehouse::get_workers(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+
+	// Parsing the argument(s), result will be either single index
+	// or list of indexes
+	DescriptionIndex worker_index = INVALID_INDEX;
+	std::vector<DescriptionIndex> workers_list;
+	bool all_items = false;
+	parse_wares_workers_list(L, tribe, &worker_index, workers_list, &all_items, false);
+
+	// Here we create the output - either a single integer of table of pairs
+	if (worker_index != INVALID_INDEX) {
+		lua_pushuint32(L, wh->get_workers().stock(worker_index));
+	} else if (!workers_list.empty()) {
+		lua_newtable(L);
+		for (auto idx : workers_list) {
+			lua_pushstring(L, tribe.get_worker_descr(idx)->name());
+			lua_pushuint32(L, wh->get_workers().stock(idx));
+			lua_settable(L, -3);
+		}
+	} else {
+		NEVER_HERE();
 	}
-// documented in parent class
-WH_GET(ware, Ware)
-// documented in parent class
-WH_GET(worker, Worker)
-#undef GET
+	return 1;
+}
+
+int LuaWarehouse::get_wares(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+
+	// Parsing the argument(s), result will be either single index
+	// or list of indexes
+	DescriptionIndex ware_index = INVALID_INDEX;
+	std::vector<DescriptionIndex> ware_list;
+	bool all_items = false;
+	parse_wares_workers_list(L, tribe, &ware_index, ware_list, &all_items, true);
+
+	// Here we create the output - either a single integer of table of pairs
+	if (ware_index != INVALID_INDEX) {
+		lua_pushuint32(L, wh->get_wares().stock(ware_index));
+	} else if (!ware_list.empty()) {
+		lua_newtable(L);
+		for (auto idx : ware_list) {
+			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+			lua_pushuint32(L, wh->get_wares().stock(idx));
+			lua_settable(L, -3);
+		}
+	} else {
+		NEVER_HERE();
+	}
+	return 1;
+}
+
+int LuaWarehouse::set_wares(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+	WaresWorkersMap setpoints;
+	parse_wares_workers_counted(L, tribe, setpoints, true);
+
+	for (WaresWorkersMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) {
+		int32_t d = i->second - wh->get_wares().stock(i->first);
+		if (d < 0)
+			wh->remove_wares(i->first, -d);
+		else if (d > 0)
+			wh->insert_wares(i->first, d);
+	}
+	return 0;
+}
+
+int LuaWarehouse::set_workers(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+	WaresWorkersMap setpoints;
+	parse_wares_workers_counted(L, tribe, setpoints, false);
+
+	for (WaresWorkersMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) {
+		int32_t d = i->second - wh->get_workers().stock(i->first);
+		if (d < 0)
+			wh->remove_workers(i->first, -d);
+		else if (d > 0)
+			wh->insert_workers(i->first, d);
+	}
+	return 0;
+}
 
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {
@@ -4116,7 +4210,9 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 int LuaProductionSite::set_wares(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
-	WaresMap setpoints = parse_set_wares_arguments(L, tribe);
+	WaresWorkersMap setpoints;
+	// = parse_set_wares_arguments(L, tribe);
+	parse_wares_workers_counted(L, tribe, setpoints, true);
 
 	WaresSet valid_wares;
 	for (const auto& input_ware : ps->descr().inputs()) {
@@ -4143,32 +4239,48 @@ int LuaProductionSite::get_wares(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
 
-	bool return_number = false;
-	WaresSet wares_set = parse_get_wares_arguments(L, tribe, &return_number);
+	// Parsing the arguments, result will be single index or list of indexes
+	DescriptionIndex ware_index = INVALID_INDEX;
+	std::vector<DescriptionIndex> ware_list;
+	bool all_items = false;
+	parse_wares_workers_list(L, tribe, &ware_index, ware_list, &all_items, true);
 
+	// Here we identify wares that are allowed as input for the site
 	WaresSet valid_wares;
 	for (const auto& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
 
-	if (wares_set.size() == tribe.get_nrwares())  // Want all returned
-		wares_set = valid_wares;
+	// This indicates that all wares are needed, but only some of them are allowed
+	if (all_items) {
+		ware_list.clear();
+		for (auto item : valid_wares) {
+			ware_list.push_back(item);
+		}
+	}
 
-	if (!return_number)
-		lua_newtable(L);
-
-	for (const Widelands::DescriptionIndex& ware : wares_set) {
+	// We return single integer for single ware
+	if (ware_index != INVALID_INDEX) {
 		uint32_t cnt = 0;
-		if (valid_wares.count(ware))
-			cnt = ps->waresqueue(ware).get_filled();
-
-		if (return_number) {  // this is the only thing the customer wants to know
-			lua_pushuint32(L, cnt);
-			break;
-		} else {
+		if (valid_wares.count(ware_index)) {
+			cnt = ps->waresqueue(ware_index).get_filled();
+		}
+		lua_pushuint32(L, cnt);
+		// else //{ NOCOM is this needed, or should be ignored quietly?
+		// throw LuaError((boost::format("Ware '%s' isn't allowed for the productionsite.") %
+		// tribe.get_ware_descr(ware_index)->name()).str());
+		//}
+	} else {  // we return table
+		assert(!ware_list.empty());
+		lua_newtable(L);
+		for (const Widelands::DescriptionIndex& ware : ware_list) {
+			uint32_t cnt = 0;
+			if (valid_wares.count(ware)) {
+				cnt = ps->waresqueue(ware).get_filled();
+			}
 			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, cnt);
-			lua_rawset(L, -3);
+			lua_settable(L, -3);
 		}
 	}
 	return 1;

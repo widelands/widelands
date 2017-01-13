@@ -144,3 +144,22 @@ function player_building_access:test_access()
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end
+-- ================
+-- Players production statistics
+-- ================
+--include "scripting/coroutine.lua" -- for sleep NOCOM, it does not work
+
+player_production_statistics = lunit.TestCase("Players production statistics")
+function player_building_access:test_single()
+   self.bs = {
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("barbarians_quarry", map:get_field(8,10)),
+   }
+   --old_logs = player1:get_produced_wares_count('log')
+   assert_equal((player1:get_produced_wares_count('all'))['log'], player1:get_produced_wares_count('log'))
+   --  while player1:get_produced_wares_count('log') ==  old_logs do
+	-- NOCOM - I cannot make it work, sleep does not work
+    --sleep(10)
+   --end
+end

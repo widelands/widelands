@@ -522,7 +522,7 @@ public:
 		return economies_.size();
 	}
 
-	uint32_t get_current_produced_statistics_(uint8_t);
+	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable&, Soldier&);
