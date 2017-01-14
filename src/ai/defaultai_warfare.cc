@@ -689,22 +689,22 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	}
 
 
-	if (gametime % 100 == 0) {
-		for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
-			if ( !management_data.f_neuron_pool[53].get_position(i) &&
-			 !management_data.f_neuron_pool[54].get_position(i) &&
-			 !management_data.f_neuron_pool[55].get_position(i) &&
-			 !management_data.f_neuron_pool[56].get_position(i)) {
-				 printf (" neuron bit on position %d not used\n", i);
-			}
-			if ( !management_data.f_neuron_pool[7].get_position(i) &&
-			 !management_data.f_neuron_pool[9].get_position(i) &&
-			 !management_data.f_neuron_pool[12].get_position(i) &&
-			 !management_data.f_neuron_pool[74].get_position(i)) {
-				 printf (" neuron bit on position %d not used\n", i+32);
-			}		
-		}
-	}
+	//if (gametime % 100 == 0) {
+		//for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
+			//if ( !management_data.f_neuron_pool[5 3].get_position(i) &&
+			 //!management_data.f_neuron_pool[5 4].get_position(i) &&
+			 //!management_data.f_neuron_pool[5 5].get_position(i) &&
+			 //!management_data.f_neuron_pool[5 6].get_position(i)) {
+				 //printf (" neuron bit on position %d not used\n", i);
+			//}
+			//if ( !management_data.f_neuron_pool[7].get_position(i) &&
+			 //!management_data.f_neuron_pool[9 ].get_position(i) &&
+			 //!management_data.f_neuron_pool[1 2].get_position(i) &&
+			 //!management_data.f_neuron_pool[7 4].get_position(i)) {
+				 //printf (" neuron bit on position %d not used\n", i+32);
+			//}		
+		//}
+	//}
 
 
 	// Check next militarysite
@@ -733,10 +733,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	usefullness_score += (bf.enemy_accessible_) ? 2 : 0;
 	
 	const int32_t dism_treshold = 5 - management_data.get_military_number_at(89) / 6;
-	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) / 3);
+	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
 	
-	printf ("%2d: militarysite current score: %4d, tresholds: %3d  %3d\n", player_number(), usefullness_score, dism_treshold, pref_treshold);
-
 	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
 	Quantity const current_target = ms->soldier_capacity();
 
@@ -772,110 +770,6 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		}
 	}
 	
-
-	
-	//if (military_last_dismantle_ + 2 * 60 * 1000 < gametime) {  // 2 minutes between every dismantle
-		//update_buildable_field(bf);
-
-		//usefullness_score += bf.military_score_ / 10;
-
-		//if (verbose && (bf.enemy_nearby)) {
-			//printf(" %d MSite: at %3dx%3d, enemy: %s / accessible: %s, usefulness score: %4d\n",
-			       //player_number(), f.x, f.y, (bf.enemy_nearby) ? "Y" : "N",
-			       //(bf.enemy_accessible_) ? "Y" : "N", usefullness_score);
-		//}
-	//}
-
-
-	//int32_t tmp_score = 
-
-
-
-	//const bool mman1 = management_data.f_neuron_pool[48].get_result(
-		//usefullness_score < 100 + management_data.get_military_number_at(88),
-		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		//bf.enemy_accessible_,
-		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		//current_target < total_capacity);
-	//const bool mman2 = management_data.f_neuron_pool[49].get_result(		
-		//current_target > 1,
-		//soldier_status_ == SoldiersStatus::kShortage,
-		//current_target > total_capacity / 2 + 1,
-		//usefullness_score < 100 + management_data.get_military_number_at(89),
-		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000);
-	//const bool mman3 = management_data.f_neuron_pool[50].get_result(
-		//bf.enemy_accessible_,
-		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		//current_target < total_capacity,
-		//current_target > 1,
-		//current_target > total_capacity / 2 + 1);
-	//const bool mman4 = management_data.f_neuron_pool[51].get_result(	
-		//bf.enemy_accessible_,
-		//current_target > 1,
-		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		//soldier_status_ == SoldiersStatus::kShortage,
-		//usefullness_score < 100 + management_data.get_military_number_at(91));
-
-	//const bool mman5 = management_data.f_neuron_pool[52].get_result(	
-		//bf.enemy_accessible_,
-		//(soldier_status_ == SoldiersStatus::kEnough || soldier_status_ == SoldiersStatus::kFull),
-		//(gametime - militarysites.front().built_time) > 2 * 60 * 1000,
-		//soldier_status_ == SoldiersStatus::kShortage,
-		//usefullness_score < 100 + management_data.get_military_number_at(90)) ;
-
-	
-	//const bool to_destroy = (usefullness_score < 0) ? true : management_data.f_neuron_pool[44].get_result(
-		//mman1,
-		//mman4,
-		//mman2,
-		//mman5,
-		//mman4);
-	
-	//const bool to_decrease = management_data.f_neuron_pool[45].get_result(
-		//mman1,
-		//mman4,
-		//mman2,
-		//mman5,
-		//mman4);
-
-	//const bool to_increase = management_data.f_neuron_pool[46].get_result(
-		//mman4,
-		//mman1,
-		//mman3,
-		//mman5,
-		//mman2);
-
-	//const bool prefer_rookies = management_data.f_neuron_pool[47].get_result(
-		//mman4,
-		//mman1,
-		//mman3,
-		//mman2,
-		//mman5);
-	
-	//if (to_destroy) {
-		
-	//} else if (to_decrease){
-		//if (current_target > 1) {
-			//game().send_player_change_soldier_capacity(*ms, -1);
-			//changed = true;
-		//}
-	//} else if (to_increase) {
-		//if (current_target < total_capacity) {
-			//game().send_player_change_soldier_capacity(*ms, 1);
-			//changed = true;
-		//}
-	//}
-	
-	//if (prefer_rookies && MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
-			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
-			//changed = true;
-		//}
-	//if (!prefer_rookies && MilitarySite::kPrefersRookies == ms->get_soldier_preference()) {
-			//game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
-			//changed = true;
-		//}
-		
-
 	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
@@ -972,69 +866,114 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	bo.primary_priority = 0;
 
+	//const uint32_t msites_total = msites_built() + msites_in_constr();
+
 	uint32_t const big_buildings_score =
 	   msites_per_size[2].in_construction + msites_per_size[2].finished +
 	   msites_per_size[3].in_construction * 2 + msites_per_size[3].finished * 2;
 
-	const uint32_t msites_total = msites_built() + msites_in_constr();
-
-	if (size == BaseImmovable::SMALL) {  // this function is intended for medium and bigger sites
-		const bool input1 = management_data.f_neuron_pool[37].get_result(
-			mines_built() <=2,
-			mines_per_type[iron_ore_id].total_count() == 0,
-			msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(76)) / 20),
-			spots_ < kSpotsTooLittle,
-			player_statistics.get_enemies_max_land() > player_statistics.get_player_land(pn));
-		const bool input2 = management_data.f_neuron_pool[38].get_result( 
-			msites_in_constr() == 0, (military_last_build_ + 5 * 60 * 1000 > gametime),
-		       big_buildings_score >
-		          msites_total * 10 / (10 + management_data.get_military_number_at(14) / 20),
-		       soldier_status_ == SoldiersStatus::kShortage ||
-		          soldier_status_ == SoldiersStatus::kBadShortage);
-		const bool input3 = management_data.f_neuron_pool[39].get_result( 
-			mines_per_type[iron_ore_id].total_count() == 0,
-			msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(77)) / 20),
-			spots_ < kSpotsTooLittle,		
-		    big_buildings_score >
-		          msites_total * 10 / (10 + management_data.get_military_number_at(33) / 20),
-		    soldier_status_ == SoldiersStatus::kShortage ||
-		          soldier_status_ == SoldiersStatus::kBadShortage);
-		if (management_data.f_neuron_pool[40].get_result(
-		       input1, input2, input3)) {
-			return BuildingNecessity::kNotNeeded;
-		} else {
-			return BuildingNecessity::kAllowed;
-		}
+	if (size != BaseImmovable::SMALL){
+		bo.primary_priority += (static_cast<int16_t>(msites_per_size[1].finished + msites_per_size[1].in_construction - 3) 
+			- static_cast<int16_t>(big_buildings_score)) 
+				* std::abs(management_data.get_military_number_at(14) / 5);
 	}
 
-
-	// Now for medium and big buildings
-	const bool input1 = management_data.f_neuron_pool[41].get_result( //NOCOM
-		bo.build_material_shortage,
-		mines_per_type[iron_ore_id].total_count() == 0,
-		msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(78))) / 20,
-		spots_<kSpotsTooLittle,
-		player_statistics.get_enemies_max_land() > player_statistics.get_player_land(pn));
-	const bool input2 = management_data.f_neuron_pool[42].get_result( 
-		msites_in_constr() == 0, (military_last_build_ + 5 * 60 * 1000 > gametime),
-	       big_buildings_score >
-	          msites_total * 10 / (10 + management_data.get_military_number_at(14) / 20),
-	       soldier_status_ == SoldiersStatus::kShortage ||
-	          soldier_status_ == SoldiersStatus::kBadShortage);
-	const bool input3 = management_data.f_neuron_pool[43].get_result( 
-		mines_per_type[iron_ore_id].total_count() == 0,
-		msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(79))) / 20,
-		spots_<kSpotsTooLittle,		
-	    big_buildings_score >
-	          msites_total * 10 / (10 + management_data.get_military_number_at(64) / 20),
-	    soldier_status_ == SoldiersStatus::kShortage ||
-	          soldier_status_ == SoldiersStatus::kBadShortage);
-	if (management_data.f_neuron_pool[44].get_result(
-	       input1, input2, input3, bo.build_material_shortage)) {
-		return BuildingNecessity::kNotNeeded;
-	} else {
-		return BuildingNecessity::kAllowed;
+	if (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)){
+		bo.primary_priority += std::abs(management_data.get_military_number_at(33) / 3);
 	}
+	if (spots_ < kSpotsTooLittle) {
+		bo.primary_priority += std::abs(management_data.get_military_number_at(78) / 3) * size;
+	}
+
+	if (mines_per_type[iron_ore_id].total_count() == 0) {
+		bo.primary_priority += std::abs(management_data.get_military_number_at(77)) / 3;
+	}
+
+	if (msites_in_constr() == 0) {
+		bo.primary_priority += std::abs(management_data.get_military_number_at(79)) / 3;
+	}
+
+	return BuildingNecessity::kAllowed;
+
+	//const uint32_t msites_total = msites_built() + msites_in_constr();
+
+	//if (size == BaseImmovable::SMALL) {  // this function is intended for medium and bigger sites
+		//const bool input1 = management_data.f_neuron_pool[37].get_result(
+			//mines_built() <=2,
+			//mines_per_type[iron_ore_id].total_count() == 0,
+			//msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(76)) / 20),
+			//spots_ < kSpotsTooLittle,
+			//player_statistics.get_enemies_max_land() > player_statistics.get_player_land(pn));
+		//const bool input2 = management_data.f_neuron_pool[38].get_result( 
+			//msites_in_constr() == 0, (military_last_build_ + 5 * 60 * 1000 > gametime),
+		       //big_buildings_score >
+		          //msites_total * 10 / (10 + management_data.get_military_number_at(14) / 20),
+		       //soldier_status_ == SoldiersStatus::kShortage ||
+		          //soldier_status_ == SoldiersStatus::kBadShortage);
+		//const bool input3 = management_data.f_neuron_pool[39].get_result( 
+			//mines_per_type[iron_ore_id].total_count() == 0,
+			//msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(77)) / 20),
+			//spots_ < kSpotsTooLittle,		
+		    //big_buildings_score >
+		          //msites_total * 10 / (10 + management_data.get_military_number_at(33) / 20),
+		    //soldier_status_ == SoldiersStatus::kShortage ||
+		          //soldier_status_ == SoldiersStatus::kBadShortage);
+		
+		//const bool intermed1 = management_data.f_neuron_pool[41].get_result(
+		       //input1, input2, input3);
+		//const bool intermed2 = management_data.f_neuron_pool[42].get_result(
+		       //input1, input2, input3);
+		//const bool intermed3 = management_data.f_neuron_pool[43].get_result(
+		       //input1, input3, input3);		   		       
+		
+		//if (management_data.f_neuron_pool[44].get_result(
+		       //intermed1, intermed2, intermed3)) {
+			//return BuildingNecessity::kNotNeeded;
+		//} else {
+			//return BuildingNecessity::kAllowed;
+		//}
+	//} else {
+		//return BuildingNecessity::kAllowed;
+	//}
+
+
+	//// Now for medium and big buildings
+	//const bool input1 = management_data.f_neuron_pool[21].get_result( //NOCOM
+		//bo.build_material_shortage,
+		//mines_per_type[iron_ore_id].total_count() == 0,
+		//msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(78))) / 20,
+		//spots_<kSpotsTooLittle,
+		//player_statistics.get_enemies_max_land() > player_statistics.get_player_land(pn));
+	//const bool input2 = management_data.f_neuron_pool[22].get_result( 
+		//msites_in_constr() == 0, (military_last_build_ + 5 * 60 * 1000 > gametime),
+	       //big_buildings_score >
+	          //msites_total * 10 / (10 + management_data.get_military_number_at(14) / 20),
+	       //soldier_status_ == SoldiersStatus::kShortage ||
+	          //soldier_status_ == SoldiersStatus::kBadShortage);
+	//const bool input3 = management_data.f_neuron_pool[23].get_result( 
+		//mines_per_type[iron_ore_id].total_count() == 0,
+		//msites_in_constr() <= static_cast<uint32_t>(std::abs(management_data.get_military_number_at(79))) / 20,
+		//spots_<kSpotsTooLittle,		
+	    //big_buildings_score >
+	          //msites_total * 10 / (10 + management_data.get_military_number_at(64) / 20),
+	    //soldier_status_ == SoldiersStatus::kShortage ||
+	          //soldier_status_ == SoldiersStatus::kBadShortage);
+
+	//// Intermediate results
+	//const bool intermed1 = management_data.f_neuron_pool[24].get_result(
+	       //input1, input2, input3);
+	//const bool intermed2 = management_data.f_neuron_pool[25].get_result(
+	       //input1, input2, input3);
+	//const bool intermed3 = management_data.f_neuron_pool[26].get_result(
+	       //input1, input3, input3);		   		       
+	
+	//// Final decision
+	//if (management_data.f_neuron_pool[33].get_result(
+	       //intermed1, intermed2, intermed3)) {
+		//return BuildingNecessity::kNotNeeded;
+	//} else {
+		//return BuildingNecessity::kAllowed;
+	//}
 }
 
 // This is called when soldier left the trainingsite
