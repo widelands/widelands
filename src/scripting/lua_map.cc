@@ -213,6 +213,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 	bool all_items = false;
 	parse_wares_workers_list(L, tribe, &worker_index, workers_list, &all_items, false);
 
+	// c_workers is map (index:count) of all workers at the immovable
 	WaresWorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
@@ -223,6 +224,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 		}
 	}
 
+	// We return quantity for asked worker
 	if (worker_index != INVALID_INDEX) {
 		if (c_workers.count(worker_index)) {
 			lua_pushuint32(L, c_workers[worker_index]);
@@ -230,8 +232,8 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 			lua_pushuint32(L, 0);
 		}
 	} else {
-
-		if (all_items) {  // Wants all returned
+		// or array of worker:quantity
+		if (all_items) {  // 'all' was required, otherwise we return only asked workers
 			workers_list.clear();
 			for (const WaresWorkersMap::value_type& v : valid_workers) {
 				workers_list.push_back(v.first);
@@ -257,9 +259,11 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	EditorGameBase& egbase = get_egbase(L);
 	const TribeDescr& tribe = pi->owner().tribe();
 
+	// setpoints is map of index:quantity
 	WaresWorkersMap setpoints;
 	parse_wares_workers_counted(L, tribe, setpoints, false);
 
+	// c_workers is actual statistics, the map index:quantity
 	WaresWorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
@@ -596,6 +600,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	NEVER_HERE();
 }
 
+// This is used for get_ware/workers functions, when argument can be
+// 'all', single ware/worker, or array of ware/workers
 void parse_wares_workers_list(lua_State* L,
                               const TribeDescr& tribe,
                               Widelands::DescriptionIndex* single_item,
@@ -612,6 +618,7 @@ void parse_wares_workers_list(lua_State* L,
 
 		std::string what = luaL_checkstring(L, -1);
 		if (what != "all") {
+			// This is name of ware/worker
 			if (is_ware) {
 				*single_item = tribe.ware_index(what);
 			} else {
@@ -621,6 +628,7 @@ void parse_wares_workers_list(lua_State* L,
 				report_error(L, "Unrecognized ware/worker %s", what.c_str());
 			}
 		} else {
+			// we collect all wares/workers and push it to item_list
 			*all_items = true;
 			if (is_ware) {
 				for (auto idx : tribe.wares()) {
@@ -633,7 +641,7 @@ void parse_wares_workers_list(lua_State* L,
 			}
 		}
 	} else {
-		/* we got array of names */
+		/* we got array of names, and so fill the indexes into item_list */
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
@@ -652,6 +660,7 @@ void parse_wares_workers_list(lua_State* L,
 	assert((*single_item == INVALID_INDEX) != item_list.empty());
 }
 
+// Very similar to above function, but expects numbers for every received ware/worker
 void parse_wares_workers_counted(lua_State* L,
                                  const TribeDescr& tribe,
                                  WaresWorkersMap& ware_workers_list,
@@ -661,7 +670,7 @@ void parse_wares_workers_counted(lua_State* L,
 		report_error(L, "Wrong number of arguments to set ware/worker method!");
 	}
 
-	// we either received, two items string,int:
+	// We either received, two items string,int:
 	if (nargs == 3) {
 
 		if (is_ware) {
@@ -678,7 +687,7 @@ void parse_wares_workers_counted(lua_State* L,
 			   WorkerAmount(tribe.worker_index(luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));
 		}
 	} else {
-		// or we got a table
+		// or we got a table with name:quantity
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {

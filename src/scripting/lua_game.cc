@@ -895,16 +895,17 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
 	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, requested_wares, &all_items, true);
 
 	if (single_ware != INVALID_INDEX) {
+		// We return single number
 		lua_pushuint32(L, p.get_current_produced_statistics(single_ware));
-	} else if (!requested_wares.empty()) {
+	} else {
+		// We return array of ware:quantity
+		assert(!requested_wares.empty());
 		lua_newtable(L);
 		for (const DescriptionIndex& idx : requested_wares) {
 			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
 			lua_pushuint32(L, p.get_current_produced_statistics(idx));
 			lua_settable(L, -3);
 		}
-	} else {
-		NEVER_HERE();
 	}
 
 	return 1;
