@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-22 15:08+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -496,13 +496,13 @@ msgid "Barracks"
 msgstr "Caserma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
 msgid "recruiting soldier"
-msgstr ""
+msgstr "reclutando un soldato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -2545,7 +2545,7 @@ msgstr "Barbari"
 
 #: ../../data/tribes/preload.lua:18
 msgid "The mighty tribes of the east-lands."
-msgstr ""
+msgstr "Le potenti tribù delle terre orientali."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:33

@@ -37,10 +37,6 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between recently visited places in the world.",
-      seconds = 4
-   },
-   {
       text = _"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them.",
       seconds = 4
    },

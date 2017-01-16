@@ -5,7 +5,7 @@ function mission_thread()
 
    -- Initial messages
    local sea = wl.Game().map:get_field(50,25)
-   scroll_smoothly_to(sea,0)
+   scroll_to_field(sea,0)
 
    campaign_message_box(diary_page_1)
    sleep(200)
@@ -20,7 +20,7 @@ function mission_thread()
 
    -- Back home
    include "map:scripting/starting_conditions.lua"
-   scroll_smoothly_to(wl.Game().map.player_slots[1].starting_field)
+   scroll_to_field(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
    ship:remove()
 
