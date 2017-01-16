@@ -25,6 +25,7 @@
   <summary xml:lang="ro">Un joc strategic de construire în timp real</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
+  <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
@@ -104,7 +105,7 @@
       Egy kis klán régense vagy. A feladatod az, hogy felépíts egy folyamatosan növekvő települést. A klánod minden tagja kiveszi a részét a nyersanyagok termeléséből, hogy tovább segítse ezt a növekedést.
     </p>
     <p xml:lang="hu">
-      A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amik törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat - vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
+      A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
     </p>
     <p xml:lang="it">
       Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
@@ -153,6 +154,12 @@
     </p>
     <p xml:lang="sr">
       Widelands (Širozemlje) nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite medjusobno u pepelu rata. Widelands takođe u ponudi ima i AI da te izazove.
+    </p>
+    <p xml:lang="sv">
+      Du är ledaren för en liten klan. Din uppgift är att bygga en växande bosättning. Varje medlem i din klan gör sin del i att producera mer resurser för ytterligare tillväxt.
+    </p>
+    <p xml:lang="sv">
+      Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Bosättandet börjar på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig.
     </p>
     <p xml:lang="uk">
       Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.

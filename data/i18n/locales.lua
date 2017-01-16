@@ -128,6 +128,12 @@ return {
       font = "default"
    },
 
+   ga = {
+      name = "Gaeilge",
+      sort_name = "ga",
+      font = "default"
+   },
+
    gd = {
       name = "Gàidhlig",
       sort_name = "Gaidhlig",

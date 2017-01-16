@@ -73,7 +73,7 @@ private:
 
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
-	void write(FileWrite&);
+	void write(FileWrite&) const;
 	void read(lua_State*, FileRead&);
 
 	lua_State* lua_state_;

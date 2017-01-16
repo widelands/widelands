@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:34+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-22 15:10+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -322,7 +322,7 @@ msgstr "Sconosciuto"
 msgid "Loading map “%s”…"
 msgstr "Caricamento della mappa \"%s\" in corso..."
 
-#: ../../src/editor/map_generator.cc:712
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr "Giocatore casuale"
 
@@ -498,7 +498,7 @@ msgstr "Attualmente selezionati: %s"
 #: ../../src/editor/ui_menus/help.cc:42
 #: ../../src/editor/ui_menus/player_menu.cc:266
 #: ../../src/ui_fsmenu/multiplayer.cc:133
-#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:49
 msgid "Error!"
 msgstr "Errore!"
@@ -1022,7 +1022,7 @@ msgstr "Questa partita è stata salvata da una versione più vecchia di Wideland
 msgid "No description defined"
 msgstr "Nessuna descrizione definita"
 
-#: ../../src/logic/map_objects/immovable.cc:513
+#: ../../src/logic/map_objects/immovable.cc:511
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -1243,29 +1243,29 @@ msgstr "Nessun soldato da addestrare!"
 msgid "No soldier found for this training level!"
 msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:248
+#: ../../src/logic/map_objects/tribes/productionsite.cc:247
 msgid "(not occupied)"
 msgstr "(non occupato)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:254
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Lavoratore assente"
 msgstr[1] "Lavoratori assenti"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:261
 msgid "(stopped)"
 msgstr "(interrotto)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:361
+#: ../../src/logic/map_objects/tribes/productionsite.cc:360
 #: ../../src/wui/building_statistics_menu.cc:622
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:905
+#: ../../src/logic/map_objects/tribes/productionsite.cc:904
 msgid "Can’t find any more resources!"
 msgstr "Non è possibile trovare altre risorse!"
 
@@ -3003,7 +3003,7 @@ msgstr "Distruggi la costruzione?"
 
 #: ../../src/wui/actionconfirm.cc:177
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Vuoi davvero distruggere questo edificio?"
 
 #: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
@@ -3011,7 +3011,7 @@ msgstr "Smantellare l'edificio?"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Vuoi davvero smantellare questo edificio?"
 
 #: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
@@ -3019,13 +3019,13 @@ msgstr "Potenziare l'edificio?"
 
 #: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
 msgid "Do you really want to enhance this building?"
-msgstr ""
+msgstr "Vuoi davvero migliorare questo edificio?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
 #: ../../src/wui/actionconfirm.cc:271
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Sii prudente se il nemico è vicino!"
 
 #: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
@@ -3083,7 +3083,7 @@ msgstr "In costruzione:"
 #: ../../src/wui/building_statistics_menu.cc:91
 #: ../../src/wui/building_statistics_menu.cc:634
 msgid "Low Productivity"
-msgstr ""
+msgstr "Produttività bassa"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
@@ -4074,6 +4074,7 @@ msgstr "Capacità"
 msgid "Click soldier to send away"
 msgstr "Clicca soldato per inviarlo via"
 
+#. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"

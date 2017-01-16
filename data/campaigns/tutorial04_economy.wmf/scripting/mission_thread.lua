@@ -12,7 +12,7 @@ end
 
 function burn_tavern_down()
    sleep(500)
-   scroll_smoothly_to(tavern_field)
+   scroll_to_field(tavern_field)
    sleep(1000)
    tavern_field.immovable:destroy()
    sleep(1000)
