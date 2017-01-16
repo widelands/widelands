@@ -1360,6 +1360,7 @@ void WLApplication::replay() {
 * Try to save the game instance if possible
  */
 void WLApplication::emergency_save(Widelands::Game& game) {
+	log("FATAL ERROR - game crashed. Attempting emergency save.\n");
 	if (game.is_loaded()) {
 		try {
 			SaveHandler& save_handler = game.save_handler();

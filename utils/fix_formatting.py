@@ -81,6 +81,8 @@ def main():
 
     sys.stdout.write('\nFormatting C++ ')
     for filename in find_files('./src', ['.cc', '.h']):
+        if 'third_party' in filename:
+            continue
         sys.stdout.write('.')
         sys.stdout.flush()
         call(['clang-format', '-i', filename])

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:55+0000\n"
+"POT-Creation-Date: 2016-12-10 10:58+0000\n"
+"PO-Revision-Date: 2016-12-10 14:03+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -318,9 +318,6 @@ msgstr "Els bous es crien en granges de bous amb blat i aigua."
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:182
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:195
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:203
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:215
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:226
 msgid "The Story Begins"
 msgstr "Comença l'aventura"
 
@@ -381,18 +378,23 @@ msgid ""
 msgstr "Com em va dir el meu pare, hi ha moments per lluitar i moments per mentir i esperar, sense adormir-se ni morir abans que arribi el moment adequat. I per això espero."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
+msgid "Thron is Contemplating the War"
+msgstr "En Thron està contemplant la guerra"
+
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
 msgstr "En Thron nega amb el cap…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:207
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
 msgstr "Tot i que la guerra continua. Més i més dels nostres germans i germanes fugen de la brutal guerra que es lliura baix els arbres de la capital."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:210
 msgid ""
 "The stories they tell about the deeds of our kin are sad to hear. I’ve spent"
 " nights lying awake, restless, more tired than I ever believed one could be."
@@ -402,7 +404,7 @@ msgid ""
 msgstr "Les històries parlen de fets que fan posar tristos els nostres familiars. He passat nits despert, sense descansar… Cada cop que tanco els ulls, veig la fortalesa que el meu pare construí engolida per les flames. El Tron Entre es Arbres, el símbol de la unitat i pau entre les nostres famílies s'ha convertit en allò que ens separa."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:220
 msgid ""
 "Today my hunters brought men, women and little children before me who had "
 "hidden out in the forests, trying to escape the war, hate and revenge that "
@@ -414,14 +416,18 @@ msgid ""
 msgstr "Avui els caçadors m'han portat homes, dones i infants davant meu. S'amagaven als boscos, intentant escapar de la guerra, odi i venjances que hi ha entre les tribus que lluiten entre elles com en temps passats, quan només érem bèsties salvatges controlats per instints. Cap dels meus germans aconseguirà controlar el tron de fusta, cap de les tribus serà prou forta per guanyar a l'altra. Aquesta carnisseria no acabarà mai, a no ser que… tal com em va dir el meu pare…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:221
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
 msgstr "Enfrontar-nos a qualsevol que amenaci la nostra pau, encara que sigui algú de la vostra pròpia sang?"
 
-#. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
+msgid "Thron is Considering the Future"
+msgstr "En Thron està considerant sobre el futur"
+
+#. TRANSLATORS: Thron
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232
 msgid ""
 "Boldreth seems more and more torn as the days go by. The spirits of my "
 "fellows sink as the cold season approaches, and we are still living in no "
@@ -431,7 +437,7 @@ msgid ""
 msgstr "Cada dia que passa, en Boldreth sembla cada cop més indecís. Els ànims de la meva gent no estan bé i l'hivern s'apropa. I encara estem aquí, vivint en cabanes i barraques. No volia quedar-me aquí tant de temps, però tampoc haguera pensat mai que els meus germans s'embolicarien amb batalles durant tant de temps."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid ""
 "Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps"
 " it’s time to give those who still live and think united a new home, "
@@ -439,55 +445,55 @@ msgid ""
 "called our home…"
 msgstr "Potser és hora d'acomodar-nos una mica. Els que quedem vius i estem units ens mereixem una nova llar, que reemplaci tot el que vam perdre. Fins que puguem tornar al lloc que abans anomenàvem llar…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
 msgid "Somebody Comes up to You"
 msgstr "Algú se us aproxima"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:241
 msgid "An old man says…"
 msgstr "Un home vell diu…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr "Hola, cabdill. Sóc en Khantrukh i he vist passar molts hiverns. Per favor, permeteu-me ajudar amb els meus consells en aquests dies foscos."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:246
 msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
 msgstr "Només els déus saben quant de temps ens haurem d'amagar aquí. Els guerrers esperen tornar a marxar de nou un dia d'aquests, però dubto seriosament que això passi aviat. I els dies són curts i freds…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:248
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:321
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:337
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:345
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:373
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:392
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:413
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:438
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:471
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:349
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:377
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:396
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:442
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
 msgid "The Advisor"
 msgstr "El conseller"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:253
 msgid "Khantrukh notes…"
 msgstr "En Khantrukh afegeix…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
 msgstr "He vist que heu construït una pedrera i dues cabanes de llenyataire. Això és un bon començament si volem quedar-nos-hi més temps."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:258
 msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
@@ -495,23 +501,23 @@ msgid ""
 msgstr "Però no oblideu mai que aquests boscos són la nostra herència, llegada pels nostres ancestres. Sempre hem de respectar-los i tenir-ne cura. El que agafem, ho hem de tornar."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:261
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
 msgstr "Per això, per substituir els arbres que talem, haurem de construir algunes cabanes de guarda forestal, si pot ser, properes a les cabanes dels llenyataires."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:267
 msgid "In the Night"
 msgstr "En la nit"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:264
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:282
 msgid "Thron says…"
 msgstr "En Thron diu…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:270
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
@@ -519,18 +525,18 @@ msgid ""
 msgstr "Durant una altra nit sense dormir, m'he dirigit al turó i he mirat cap al nord. Els focs encara cremen, satisfent la seva gana amb el llegat del meu pare."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:269
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:273
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
 msgstr "Són un recordatori constant de per què ens hem d'amagar aquí… i per què haurem de tornar-hi al final!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:281
 msgid "At the Tomb"
 msgstr "A la tomba"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:284
 msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
@@ -538,29 +544,29 @@ msgid ""
 msgstr "Un altre cop, he anat a la tomba del meu pare, en una arbreda sagrada al peu de la gran punxeguda Kal'mavrath. M'he quedat dret i no he sentit ni les hores passar ni la pluja freda caient del cel enfosquit…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:287
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
 msgstr "D'alguna manera, pareixia un comiat. Per primer cop, em pregunto què ens depararà el futur…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "The Other Day"
 msgstr "L'altre dia"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:296
 msgid "Thron says thoughtfully…"
 msgstr "En Thron diu pensatiu…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:298
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr "Fa molt de temps, en Boldreth vingué cap a mi. El seu consell va ser desplaçar-se cap a un lloc proper a la llar, per donar un cop al primer signe d'alçar-se les forces del meu germà."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:301
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
@@ -568,16 +574,16 @@ msgid ""
 " too fast would cause on both sides…"
 msgstr "Però quan miro per damunt del bosc només veig fum alçant-se al cel. Ja ho sé: és massa aviat i ara mateix no tenim cap oportunitat. Potser té raó, però temo el vessament de sang si tornem ara…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "The Oath"
 msgstr "La promesa"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
 msgid "Thron looks furious…"
 msgstr "En Thron sembla furiós…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:309
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
@@ -585,28 +591,28 @@ msgid ""
 msgstr "Avui, els meus guerrers han trobat un home vell que vagava ferit pel fosc bosc. Hem escoltat horroritzats mentre ens explicava les atrocitats que havia vist que passaven a l'Al'thunran."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:312
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr "Aquí mateix torno a fer la promesa: no pararé fins que acabi aquesta bogeria d'una vegada!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:313
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:328
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:363
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:403
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:430
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:449
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:356
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:385
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:407
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:434
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:453
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:464
 msgid "Your Loyal Companion"
 msgstr "El vostre lleial company"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid "Brave Boldreth steps to your side…"
 msgstr "El valent Boldreth s'aproxima al teu costat…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:320
 msgid ""
 "So you want to prepare us for a longer stay in these forests, Thron? Well, I"
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
@@ -614,24 +620,24 @@ msgid ""
 " battlefield, and our axes and swords have turned rusty over time."
 msgstr "Així que ens voleu preparar per quedar-nos més temps en aquests boscos, Thron? Bé, és una sàvia decisió, encara que jo voldria tornar a Al'thunran. Massa temps hem esperat mentre els nostres germans lluiten en batalles inacabables i les nostres espases i destrals s'han rovellat amb el pas del temps."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:326
 msgid "Khantrukh joins in…"
 msgstr "En Khantrukh s'afegeix…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:328
 msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr "Perdoneu, si us plau, però tinc un cas urgent per parlar amb vós. Les roques del nostre camp s'esgoten ràpid amb les eines dels nostres treballadors. S'acabaran molt aviat."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "Boldreth jumps up…"
 msgstr "El Boldreth salta…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
 msgid ""
 "While it is certainly no worthy task for a warrior, at least it is something"
 " to do! Thron, what would you say about my taking a few of our most restless"
@@ -639,65 +645,65 @@ msgid ""
 " – maybe we will find some more big rocks to please the old man?"
 msgstr "Tot i que no és una tasca per a un guerrer, almenys és alguna cosa per fer! Thron, crec que hauria d'agafar els guerrers més inquiets i aventurar-nos més prop de la gran muntanya del Kal'mavrath. Potser hi trobarem roques més grans per tranquil·litzar el pedrer."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Khantrukh grumbles…"
 msgstr "En Khantrukh es queixa…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:345
 msgid "Old man? Disrespectful youth!"
 msgstr "Home vell? Maleducat!"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:351
 msgid "Khantrukh nods satisfied…"
 msgstr "En Khantrukh assenteix satisfet…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "At last! These rocks should last for a while."
 msgstr "Per fi! Aquestes roques ens haurien de durar bastant temps."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:357
 msgid "Boldreth exclaims…"
 msgstr "En Boldreth exclama…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:359
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr "Mireu! A l'est hi ha la gran muntanya del Kal'mavrath! Em pregunto quins tresors la natura deu haver-hi amagats baix les seves faldes!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
 msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr "Expandim-nos cap a l'est. Hi ha la possibilitat que els geòlegs ancians ens siguin útils! Enviem aquells que entenen la llengua de les pedres per descobrir els secrets de la muntanya!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth laughs…"
 msgstr "En Boldreth riu…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:366
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr "Per la barba d'en Chat’Karuth, increïble! Imagina per què podem utilitzar aquest carbó i ferro!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:369
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:373
 msgid "It might even be enough to…"
 msgstr "Potser és suficient fins i tot per…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:374
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:378
 msgid "Khantrukh interrupts…"
 msgstr "En Khantrukh interromp…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:376
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:380
 msgid ""
 "While this is true, we should consider it later, for now other obstacles are"
 " at hand. The miners will definitely demand greater rations for working high"
@@ -705,78 +711,78 @@ msgid ""
 "not be easy."
 msgstr "Encara que tens raó, ho haurem de tenir en compte després, perquè ara tenim altres problemes. Els miners volen racions més grans per treballar a les fredes mines de la muntanya i proveir el que necessiten no serà fàcil."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:386
 msgid "Boldreth nods…"
 msgstr "En Boldreth assenteix…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:384
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:388
 msgid "I have to hand it to you: you are right here, old man."
 msgstr "Us ho he d'entregar a vós. Aquí esteu, ancià."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:387
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:391
 msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr "Sembla haver-hi molts animals als boscos: hem de caçar-ne més. I, no cal dir-ho, la nostra gent ha d'aclamar la nova taverna. Ei! Li podríem posar de nom «L'orgull d'en Thron» o alguna cosa per l'estil si voleu!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:397
 msgid "The elder jumps into the air…"
 msgstr "El vell salta a l'aire…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:395
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:399
 msgid "Wisdom commands to seek variety."
 msgstr "La saviesa ordena buscar varietat."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:398
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:402
 msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
 msgstr "Al nord de la gran muntanya hi ha una plana. Per què no usem l'espai que la mare natura ens dóna i hi construïm una granja? Estic segur que gaudiria de menjar pita fresca per variar…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:408
 msgid "Boldreth cheers up…"
 msgstr "En Boldreth s'anima…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:410
 msgid "Our hunters are out in the forests, Thron."
 msgstr "Els nostres caçadors estan per fora, als boscos, Thron."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:413
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
 msgstr "Us ho prometo: abans que es pongui el sol, tindreu un magnífic àpat digne del cabdill de tots els clans!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:418
 msgid "Khantrukh gazes over the plains…"
 msgstr "En Khantrukh escodrinya la plana…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:420
 msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr "No és preciosa la vista dels camps daurats, creixent pacíficament, dansant al vent? I crec que el flequer ja ve de camí, amb el seu pa més deliciós, només reservat per al nostre cap!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:424
 msgid "A Beautiful Morning"
 msgstr "Un matí preciós"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 msgid "Thron recognizes…"
 msgstr "En Thron admet…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 msgid ""
 "A tavern opened for our people yesterday. While I am hardly in the mood for "
 "celebration, I noticed how much this tiny bit of home means to my people. "
@@ -785,17 +791,17 @@ msgid ""
 msgstr "Ahir va obrir una taverna per a la nostra gent. Mentre que no estic molt per celebracions, he vist el significat d'aquest petit tros de llar per a la meva gent. Les seves cançons ompliren l'aire fins ben endinsada la nit i estaven amb millors ànims l'endemà."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:430
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
 msgstr "Potser estem creant a poc a poc un lloc al qual potser li podrem dir llar."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:431
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 msgid "Boldreth remarks…"
 msgstr "En Boldreth fa una observació…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:437
 msgid ""
 "So now that we have both the mines and the food to sustain them, we should "
 "bring what our brave miners gain for us into a more useful state. The iron "
@@ -803,32 +809,32 @@ msgid ""
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
 msgstr "Així que ara que tenim mines i menjar per fer-les funcionar, hauríem de transformar el que extreuen els miners i fer-ne alguna cosa útil. El mineral s'ha de reduir i obtenir-ne lingots de ferro per fer després el que vulguem. I necessitem carbó per mantenir els forns ben alimentats."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:439
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:443
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:494
 msgid "Khantrukh speaks…"
 msgstr "En Khantrukh parla…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:445
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
 msgstr "Els miners extreuen menys minerals cada dia que passa! Si en volem més, hem de baixar fins al cor de la muntanya!"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:444
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:448
 msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
 msgstr "Com no, és fosc i fa fred en aquestes profunditats. Poques persones s'atreveixen voluntàriament a anar-hi. Els hauríem de recompensar amb racions més grans. I una pinta de cervesa o dues per animar-los."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:450
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:454
 msgid "Boldreth seems concerned…"
 msgstr "En Boldreth sembla preocupat…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:456
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
@@ -836,35 +842,35 @@ msgid ""
 msgstr "Tal com temia: ens falta fusta endurida! No podem posar els nostres guerrers en cabanes mig tombades. I menys encara ara, en temps tan perillosos!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:459
 msgid "We need a wood hardener, and we need one now!"
 msgstr "Necessitem un enduridor de fusta. I el necessitem ara!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:461
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:465
 msgid "Boldreth smiles…"
 msgstr "En Boldreth somriu:"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:467
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
 msgstr "Bé, vell amic, això hauria d'assegurar que les nostres fortificacions no cauran al primer crit de batalla dels enemics. Ara ja podem expandir-nos de forma segura!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:466
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:470
 msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
 msgstr "Tot i això, no aniria malament acumular lletades de calç per a altres campanyes: amb reserves suficients, si calgués, podríem construir una fortalesa com el món no n'ha vist cap fins avui!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
 msgid "Khantrukh steps in…"
 msgstr "En Khantrukh entra a la conversa…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:474
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:478
 msgid ""
 "Chieftain, this is a disgrace! It is well that we can produce grout for "
 "mighty fortifications and great buildings now – only this does not prevent "
@@ -874,27 +880,27 @@ msgid ""
 msgstr "Cap! És una desgràcia! Podem fer lletades de calç per a les fortificacions i edificis grans, però això no evita que les teulades tinguin goteres! Potser als més joves els agrada passar les nits sota la pluja, però jo no puc dormir mentre em cauen gotes d'aigua a la cara!"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:481
 msgid "Now this is a problem we should do something about!"
 msgstr "Hauríem de fer alguna cosa amb aquest problema!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Khantrukh seems relieved…"
 msgstr "En Khantrukh sembla alleujat…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr "Magnífic! Les nostres teulades ja no gotegen més i tenim tot els materials que necessitem per fer qualsevol edifici monumental que vulguem!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid "We Need Oxen!"
 msgstr "Necessitem bous!"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
@@ -903,32 +909,32 @@ msgid ""
 msgstr "Tal com el regne es va fent més i més gran, el trànsit pels nostres camins es fa cada cop més incontrolable. Els nostres pobres transportistes ja no poden transportar tot el que els hi demanem. Us suggereixo que els ajudem donant-los-hi bous de càrrega."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:499
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr "Són animals fantàstics: el bou és tan ràpid com un humà però és molt més fort i més frugal: només li cal blat i aigua per criar-lo i faran el seu treball en els camins lleialment i de manera fiable."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
 msgid "Mission Complete"
 msgstr "Missió completa"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:516
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:543
 msgid "Thron speaks…"
 msgstr "En Thron parla…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "L'altre dia, en Boldreth em va demanar d'acompanyar-lo al nou hostal. Em va dir que m'alegraria."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:510
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -937,33 +943,33 @@ msgid ""
 msgstr "Quan he mirat al voltant, he vist cares esperançades. Confien en mi per guiar-los en aquests foscos dies. Abans que pogués dir res per agrair-los-hi o encoratjar-los, un dels soldats ha entrat corrent a l'hostal. Havia estat patrullant el bosc els últims dies i vèiem que estava cansat."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "The news he brought changed everything…"
 msgstr "Les notícies que ens ha portat ho canvien tot…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
 msgid "Victory"
 msgstr "Victòria"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Heu completat aquesta missió. Podeu continuar jugant si voleu, altrament continueu amb la següent missió."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:519
 msgid "One Full Moon Night"
 msgstr "Una nit de lluna plena"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:522
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Una nit, mentre la Lluna resplendia, vaig pujar fins al cim del Kal'mavrath."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -971,16 +977,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Quan vaig mirar a l'horitzó, encara hi veia els llums carmesins. És increïble amb quanta passió els meus germans lluiten en aquesta guerra. Temo el moment en què torni a veure l'Al'thunran: quan hi arribem, hi quedarà alguna cosa més a banda de cendres i ruïnes on abans estava la preciosa capital?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:529
 msgid "Another Cold Day"
 msgstr "Un altre dia fred"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
 msgid "Thron looks worried…"
 msgstr "En Thron sembla preocupat…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:532
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -988,37 +994,37 @@ msgid ""
 msgstr "L'hivern és a sobre nostre. Molts de nosaltres ja patim el fred, tot i que l'hem d'aguantar. El dia que tornarem no pot ser molt lluny. Ja no pot ser-ho molt més."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:535
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "He pregat perquè faci bon temps altre cop i també que la guerra acabi aviat."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Fins ara, sembla que cap pregària ha funcionat."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:542
 msgid "A friendly village has joined us!"
 msgstr "Una aldea amiga se us ha unit!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:541
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:545
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "Hem trobat una aldea amb gent amistosa i productiva, impressionats per les nostres riqueses, tecnologies i forces."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:548
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "Han viscut senzillament i de forma despreocupada, caçant i conreant aliments. Però fins ara no s'ha involucrat en conflictes i no estan preparats per lluitar."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:547
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:551
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
