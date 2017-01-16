@@ -525,7 +525,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::okdialog() {
-	ibase().warp_mouse_to_node(node_);
+	ibase().mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 

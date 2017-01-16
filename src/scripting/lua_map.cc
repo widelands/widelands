@@ -990,13 +990,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 	} else {
 		report_error(
 		   L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
@@ -4862,8 +4864,6 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RW(LuaField, terd),
    PROP_RW(LuaField, height),
    PROP_RW(LuaField, raw_height),
-   PROP_RO(LuaField, viewpoint_x),
-   PROP_RO(LuaField, viewpoint_y),
    PROP_RW(LuaField, resource),
    PROP_RW(LuaField, resource_amount),
    PROP_RO(LuaField, initial_resource_amount),
@@ -4962,25 +4962,6 @@ int LuaField::set_raw_height(lua_State* L) {
 	f.field->set_height(height);
 
 	return 0;
-}
-
-/* RST
-   .. attribute:: viewpoint_x, viewpoint_y
-
-      (RO) Returns the position in pixels to move the view to to center
-      this field for the current interactive player
-*/
-int LuaField::get_viewpoint_x(lua_State* L) {
-	Vector2f point =
-	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
-	lua_pushdouble(L, point.x);
-	return 1;
-}
-int LuaField::get_viewpoint_y(lua_State* L) {
-	Vector2f point =
-	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
-	lua_pushdouble(L, point.y);
-	return 1;
 }
 
 /* RST

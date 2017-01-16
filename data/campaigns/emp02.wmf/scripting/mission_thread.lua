@@ -28,7 +28,7 @@ function building_materials()
       }) do sleep(2342) end
 
       campaign_message_box(diary_page_6)
-      o_woodeconomy.done = true
+      set_objective_done(o_woodeconomy)
    end)
 
 
@@ -39,7 +39,7 @@ function building_materials()
    -- Check for completeness of the quarry
    run(function()
       while not check_for_buildings(p1, {empire_quarry=1}) do sleep(3423) end
-      o_quarry.done = true
+      set_objective_done(o_quarry)
 
       campaign_message_box(diary_page_7)
    end)
@@ -100,7 +100,7 @@ function food_thread()
           #rv.empire_piggery + #rv.empire_bakery) > 0 then break end
       sleep(4857)
    end
-   o.done = true
+   set_objective_done(o)
 end
 
 function mining_infrastructure()
@@ -159,7 +159,7 @@ function mining_infrastructure()
          #rv.empire_weaponsmithy > 0 then break end
       sleep(4948)
    end
-   o.done = true
+   set_objective_done(o)
    mining_infrastructure_done = true
 end
 
@@ -171,34 +171,34 @@ function expand_and_build_marblemine()
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
    -- Move to the shipparts
-   local pts = wait_for_roadbuilding_and_scroll(shipparts)
+   local prior_center = wait_for_roadbuilding_and_scroll(shipparts)
 
    campaign_message_box(saledus_1)
    local o = add_campaign_objective(obj_build_military_buildings)
    p1:allow_buildings{"empire_blockhouse", "empire_sentry"}
 
    -- Go back to where we were
-   timed_scroll(array_reverse(pts))
+   scroll_to_map_pixel(prior_center)
 
    -- sleep while not owning 26, 21
    while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
-   o.done = true
+   set_objective_done(o)
 
    -- Marble Mountains
    local marblemountains = wl.Game().map:get_field(35,19)
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
-   pts = wait_for_roadbuilding_and_scroll(marblemountains)
+   prior_center = wait_for_roadbuilding_and_scroll(marblemountains)
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
    o = add_campaign_objective(obj_build_marblemine)
    run(function() while not check_for_buildings(p1, {empire_marblemine = 1})
-      do sleep(2133) end  o.done = true end)
+      do sleep(2133) end set_objective_done(o, 0) end)
 
    -- Go back to where we were
-   timed_scroll(array_reverse(pts))
+   scroll_to_map_pixel(prior_center)
 end
 
 function barbarians_thread()
@@ -239,7 +239,7 @@ function barbarians_thread()
       end
       sleep(2342)
    end
-   o.done = true
+   set_objective_done(o)
 
    -- Wait till the mining infrastructure is also up
    while not mining_infrastructure_done do
@@ -254,7 +254,7 @@ function barbarians_thread()
       wl.Game().map:get_field(60,65):region(6))
    do sleep(2435) end
 
-   o.done = true
+   set_objective_done(o)
 
    -- Show victory message
    campaign_message_box(diary_page_10)

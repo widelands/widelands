@@ -39,7 +39,9 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	   Vector2i(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const OverlayInfo* const buildhelp_infos_end = buildhelp_info + Widelands::Field::Buildhelp_None;
-	for (;; ++buildhelp_info, ++filename) {  // The other buildhelp overlays.
+	for (;;) {  // The other buildhelp overlays.
+		++buildhelp_info;
+		++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
 		buildhelp_info->pic = g_gr->images().get(*filename);

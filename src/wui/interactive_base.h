@@ -167,7 +167,7 @@ public:
 	const std::vector<QuickNavigation::Landmark>& landmarks();
 
 	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const QuickNavigation::View& view);
+	void set_landmark(size_t key, const MapView::View& view);
 
 protected:
 	/// Adds a toolbar button to the toolbar
