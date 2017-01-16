@@ -43,7 +43,7 @@ end
 --
 --    :returns: the prior center map pixel of the MapView as a table containing
 --    'x' and 'y' keys.
---    
+--
 function scroll_to_field(field)
    _await_animation()
    local mv = wl.ui.MapView()
@@ -64,7 +64,7 @@ end
 --    :type x: :class:`integer`
 --    :arg y: y position to move the mouse to
 --    :type y: :class:`integer`
---    
+--
 function mouse_to_pixel(x, y)
    _await_animation()
    wl.ui.MapView():mouse_to_pixel(x, y)
@@ -77,10 +77,10 @@ end
 --    Move the mouse on the given field. Makes sure that the field is inside
 --    the current view area by scrolling the view if necessary. The function
 --    will return as soon as the transition is completed.
---    
+--
 --    :arg field: Field to mouse to
 --    :type field: :class:`wl.map.Field`
---    
+--
 function mouse_to_field(field)
    _await_animation()
    local mv = wl.ui.MapView()
@@ -99,10 +99,10 @@ end
 --
 --    Move the mouse to the center of the given ui element. The function will
 --    return as soon as the transition is completed.
---    
+--
 --    :arg panel: Panel to mouse to
 --    :type panel: :class:`wl.ui.Panel`
---    
+--
 function mouse_to_panel(panel)
    _await_animation()
    local x, y = wl.ui.MapView():get_descendant_position(panel)

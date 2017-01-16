@@ -2,219 +2,221 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# D M <hunter12@home.se>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
 "POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2017-01-10 19:42+0000\n"
-"Last-Translator: D M <hunter12@home.se>\n"
-"Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
+"PO-Revision-Date: 2016-03-24 07:33+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Irish (http://www.transifex.com/widelands/widelands/language/ga/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ga\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
-msgstr "Spelkontroller"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:14
 msgid "Keyboard Shortcuts"
-msgstr "Snabbtangenter"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:17
 msgid "Help"
-msgstr "Hjälp"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:19
 msgid "Toggle main menu"
-msgstr "Växla huvudmeny"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
 #: ../../data/scripting/editor/editor_controls.lua:21
 msgid "Toggle tools menu"
-msgstr "Växla verktygsmeny"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Toggle player menu"
-msgstr "Växla spelarmeny"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Undo"
-msgstr "Ångra"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Redo"
-msgstr "Gör om"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Activate information tool"
-msgstr "Aktivera informationsverktyget"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:33
 msgctxt "hotkey"
 msgid "Ctrl + L"
-msgstr "'Ctrl' + 'L'"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:33
 msgid "Load map"
-msgstr "Ladda karta"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgctxt "hotkey"
 msgid "Ctrl + S"
-msgstr "'Ctrl' + 'S'"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Save map"
-msgstr "Spara karta"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:39
 msgid "Tools"
-msgstr "Verktyg"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
 msgid "0-9"
-msgstr "0-9"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
-msgstr "Ändra verktygsstorlek"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgctxt "hotkey"
 msgid "Click"
-msgstr "Klicka"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Placera nya element på kartan, eller öka kartelement med värdet som väljs med 'Öka/minska värde' "
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Tag bort element från kartan, eller minska kartelement med värdet som välja med 'Öka/minska värde'"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:46
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "'Shift' + klicka"
+msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr "'Ctrl' + klicka"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_controls.lua:48
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Ställ in kartelement till värdet som väljs med 'Sätt värde'"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
-msgstr "Kartredigerare hjälp"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr "Allmänt"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:59
 #: ../../data/scripting/editor/editor_introduction.lua:12
 msgid "Introduction"
-msgstr "Introduktion"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:74
 msgid "Terrains"
-msgstr "Terräng"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Trees"
-msgstr "Träd"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
-msgstr "Widelands kartredigerare"
+msgstr ""
 
 #: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "Denna kartredigerare är ämnad för spelare som vill designa sina egna kartor att användas i Widelands."
+msgstr ""
 
 #: ../../data/scripting/editor/editor_introduction.lua:15
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Som du kan se är denna kartredigerare ett pågående arbete och i samma takt som redigeraren blir bättre och bättre kommer denna text att bli längre och mer komplett."
+msgstr ""
 
 #: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr "Denna beskrivning innehåller också en kort handledning om hur man bygger en karta."
+msgstr ""
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr "Resurser"
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
 msgid_plural "Valid Resources:"
-msgstr[0] "Giltig resurs:"
-msgstr[1] "Giltiga resurser:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #: ../../data/scripting/editor/terrain_help.lua:34
 msgid "Default:"
-msgstr "Standard:"
+msgstr ""
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:36
 msgid "%1%x %2%"
-msgstr "%1%x %2%"
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:67
 msgid "Probability of trees growing"
-msgstr "Sannolikhet för träd att gro"
+msgstr ""
 
 #: ../../data/scripting/editor/terrain_help.lua:72
 msgid "No trees will grow here."
-msgstr "Inga träd kommer att gro här."
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
-msgstr "Föredragen terräng"
+msgstr ""
 
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39
 msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
+msgstr ""

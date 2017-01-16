@@ -292,7 +292,6 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 	return std::abs(dist.x) <= (rect_.w / 2.f) && std::abs(dist.y) <= (rect_.h / 2.f);
 }
 
-
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
    : UI::Panel(parent, x, y, w, h),
