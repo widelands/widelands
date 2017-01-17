@@ -34,16 +34,17 @@
 
 namespace Widelands {
 
+CmdLuaCoroutine::~CmdLuaCoroutine() {
+}
+
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, cr_));
-			cr_ = nullptr;  // Remove our ownership so we don't delete.
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
-			delete cr_;
-			cr_ = nullptr;
+			cr_.reset();
 		}
 	} catch (LuaError& e) {
 		log("Error in Lua Coroutine\n");
@@ -90,6 +91,6 @@ void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	upcast(LuaGameInterface, lgi, &egbase.lua());
 	assert(lgi);  // If this is not true, this is not a game.
 
-	lgi->write_coroutine(fw, cr_);
+	lgi->write_coroutine(fw, *cr_);
 }
 }

@@ -85,8 +85,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect(
-	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
 	toolbar_.add_space(15);
 	if (multiplayer) {
 		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
@@ -138,7 +139,7 @@ void InteractivePlayer::think() {
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
 					fieldaction_.destroy();
-					warp_mouse_to_node(flag_to_connect_);
+					mouse_to_field(flag_to_connect_, MapView::Transition::Jump);
 					set_sel_pos(Widelands::NodeAndTriangle<>(
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TCoords<>::D)));
@@ -271,7 +272,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 		/* no break */
 		case SDLK_HOME:
-			center_view_on_coords(game().map().get_starting_pos(player_number_));
+			scroll_to_field(game().map().get_starting_pos(player_number_), Transition::Smooth);
 			return true;
 
 		case SDLK_KP_ENTER:
