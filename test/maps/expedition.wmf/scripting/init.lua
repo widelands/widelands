@@ -320,8 +320,6 @@ function test_transporting_works()
    hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
 
-   log_starting_count = p1:get_produced_wares_count("log")
-
    port:start_expedition()
    wait_for_message("Expedition")
 
@@ -364,11 +362,6 @@ function test_transporting_works()
 
    -- Check that the first lumberjack house got his worker.
    assert_equal(1, map:get_field(17, 1).immovable:get_workers("barbarians_lumberjack"))
-
-   -- were some logs produced in the meantime?
-   assert(p1:get_produced_wares_count("log") > log_starting_count)
-   -- various ways to get produced wares count should return the same results
-   assert_equal(p1:get_produced_wares_count("log"), (p1:get_produced_wares_count("all"))["log"])
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
