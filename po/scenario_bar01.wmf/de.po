@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-06 13:06+0000\n"
+"PO-Revision-Date: 2016-12-11 21:29+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -385,7 +385,7 @@ msgstr "Wie mein Vater mir erzählte, gibt es Zeiten zum Kämpfen und Zeiten zum
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron sinnt über den Krieg nach"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
@@ -429,7 +429,7 @@ msgstr "Stehe auf gegen jeden, der unsere schiere Existenz bedroht, möge er auc
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron denkt über die Zukunft nach"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232

@@ -448,7 +448,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->center_view_on_coords(c);
+			game.get_ipl()->scroll_to_field(c, MapView::Transition::Jump);
 		}
 		lua_pop(L, 1);
 	}

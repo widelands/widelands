@@ -36,9 +36,9 @@ class World;
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
- * modify height, place bob, place critter, place building. A Tool only makes
- * one function (like delete_building, place building, modify building are 3
- * tools).
+ * modify height, place immovable, place critter, place building. A Tool only
+ * makes one function (like delete_building, place building, modify building
+ * are 3 tools).
  */
 class EditorTool {
 public:

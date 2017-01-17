@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-21 22:23+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -381,7 +381,7 @@ msgstr "Mijn vader vertelde me dat er tijden zijn om te vechten en tijden om te 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron denkt na over de Oorlog"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
@@ -425,7 +425,7 @@ msgstr "Sta op tegen wie dan ook die ons bedreigt in ons bestaan, zelfs als het 
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron denkt na over de Toekomst"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232

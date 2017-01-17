@@ -29,9 +29,13 @@ namespace Widelands {
 EditorCategory::EditorCategory(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
-     image_file_(table.get_string("picture")) {
+     image_file_(table.get_string("picture")),
+     items_per_row_(table.get_int("items_per_row")) {
 	if (!g_fs->file_exists(image_file_)) {
 		throw GameDataError("EditorCategory %s has non-existing \"picture\".", name_.c_str());
+	}
+	if (items_per_row_ <= 0) {
+		throw GameDataError("EditorCategory %s has less than 1 item per row.", name_.c_str());
 	}
 }
 
@@ -47,6 +51,10 @@ const Image* EditorCategory::picture() const {
 	const Image* image = g_gr->images().get(image_file_);
 	assert(image);
 	return image;
+}
+
+int EditorCategory::items_per_row() const {
+	return items_per_row_;
 }
 
 }  // namespace Widelands
