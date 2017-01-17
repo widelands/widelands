@@ -17,12 +17,13 @@
  *
  */
 
-#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_critter_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
@@ -30,11 +31,11 @@
  * Choses an object to place randomly from all enabled
  * and places this on the current field
 */
-int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
-                                              const Widelands::NodeAndTriangle<>& center,
-                                              EditorInteractive& parent,
-                                              EditorActionArgs* args,
-                                              Widelands::Map* map) {
+int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::World& world,
+                                                  const Widelands::NodeAndTriangle<>& center,
+                                                  EditorInteractive& parent,
+                                                  EditorActionArgs* args,
+                                                  Widelands::Map* map) {
 
 	if (get_nr_enabled() && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -43,7 +44,8 @@ int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
 		do {
 			Widelands::Bob* const mbob = mr.location().field->get_first_bob();
 			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
-			args->new_bob_type.push_back(world.get_bob_descr(get_random_enabled()));
+			args->new_bob_type.push_back(dynamic_cast<const Widelands::BobDescr*>(
+			   world.get_critter_descr(get_random_enabled())));
 		} while (mr.advance(*map));
 	}
 
@@ -67,12 +69,12 @@ int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
 		return 0;
 }
 
-int32_t
-EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
-                                     const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                     EditorInteractive& parent,
-                                     EditorActionArgs* args,
-                                     Widelands::Map* map) {
+int32_t EditorPlaceCritterTool::handle_undo_impl(
+   const Widelands::World&,
+   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+   EditorInteractive& parent,
+   EditorActionArgs* args,
+   Widelands::Map* map) {
 	if (!args->new_bob_type.empty()) {
 		Widelands::EditorGameBase& egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -97,6 +99,6 @@ EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
 		return 0;
 }
 
-EditorActionArgs EditorPlaceBobTool::format_args_impl(EditorInteractive& parent) {
+EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }

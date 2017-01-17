@@ -7,6 +7,11 @@
 --  Former greenland  --
 ------------------------
 
+-- NOCOM(#codereview): I hope reordering here does not break savegames? I think it should not.
+-- NOCOM(#codereview): A comment that reordering effects the editor?
+-- NOCOM(#codereview): When switching between wasteland and winter, the window
+-- size of the terrain selection jumps. Maybe reorder so that we always have
+-- the same num rows/cols?
 
 greenland = {
    heights = {

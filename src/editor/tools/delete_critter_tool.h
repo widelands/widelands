@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef WL_EDITOR_TOOLS_DELETE_BOB_TOOL_H
-#define WL_EDITOR_TOOLS_DELETE_BOB_TOOL_H
+#ifndef WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H
+#define WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H
 
 #include "editor/tools/tool.h"
 
-/// Deletes bob from the map.
-struct EditorDeleteBobTool : public EditorTool {
-	EditorDeleteBobTool() : EditorTool(*this, *this) {
+/// Deletes critter from the map.
+struct EditorDeleteCritterTool : public EditorTool {
+	EditorDeleteCritterTool() : EditorTool(*this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -46,4 +46,4 @@ struct EditorDeleteBobTool : public EditorTool {
 	}
 };
 
-#endif  // end of include guard: WL_EDITOR_TOOLS_DELETE_BOB_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H
