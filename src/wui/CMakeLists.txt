@@ -87,10 +87,8 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     base_geometry
-    logic
     widelands_ball_of_mud
     wui_mapview
-    wui_mapview_pixelfunctions
 )
 
 wl_library(wui_mapview

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-04 07:02+0000\n"
-"PO-Revision-Date: 2016-12-04 16:26+0000\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2016-12-31 21:36+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -113,6 +113,7 @@ msgid ""
 "blackroot."
 msgstr "Pěstitel rozrazilu potřebuje v průměru %1% na zasetí sklizení otýpky rozrazilu."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
@@ -3607,7 +3608,7 @@ msgstr "Vyrábí zbraně pro vojáky."
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Vyrábí látky pro vojáky, lodě a budovy."
+msgstr "Vyrábí pavoučí látku pro budovy, lodě a vojáky."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3

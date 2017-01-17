@@ -434,10 +434,14 @@ void Building::destroy(EditorGameBase& egbase) {
 	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kClose));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
+	Player* building_owner = get_owner();
+	const BuildingDescr* building_descr = &descr();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire) {
-		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe, this);
+		egbase.create_immovable_with_name(pos, "destroyed_building",
+		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
+		                                  building_descr);
 	}
 }
 

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:42+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-19 18:05+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public Licen
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "További információkat találhatsz a szabad és nyílt forrású szoftverekről, valamint a GPL-ről, ha meglátogatod ezt a weboldalt: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -428,7 +428,7 @@ msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvev�
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player."
-msgstr ""
+msgstr "Néző mód: mindent láthatsz, de egy játékost sem sem tudsz irányítani."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -545,7 +545,7 @@ msgstr "Az Alt nyomva tartásával válthatsz a második alternatív eszközre (
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "A számbillentyűk (0–9) lehetővé teszik, hogy közvetlenül megadd az egérkurzor körül kiválasztott terület nagyságát."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

@@ -200,7 +200,7 @@ void Player::create_default_infrastructure() {
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(cr)));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < further_shared_in_player_.size(); ++n) {
@@ -213,7 +213,7 @@ void Player::create_default_infrastructure() {
 			      ->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(ncr)));
 		}
 	} else
 		throw WLWarning(_("Missing starting position"),

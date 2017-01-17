@@ -186,7 +186,14 @@ For each group, the number of wares specified in count is produced. The produced
 
 mine
 ----
-Takes resources from the ground. This command type is subject to change.
+Takes resources from the ground. It takes as arguments first the resource
+name, after this the radius for searching for the resource around the building
+field. The next values is the percentage of starting resources that can be dug
+out before this mine is exhausted. The next value is the percentage that this
+building still produces something even if it is exhausted. And the last value
+is the percentage chance that a worker is gaining experience on failure - this
+is to guarantee that you can eventually extend a mine, even though it was
+exhausted for a while already.
 
 check_soldier
 -------------
