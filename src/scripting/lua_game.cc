@@ -890,9 +890,8 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
 	}
 	std::vector<DescriptionIndex> requested_wares;
 	DescriptionIndex single_ware = INVALID_INDEX;
-	bool all_items = false;
 
-	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, requested_wares, &all_items, true);
+	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, &requested_wares, true);
 
 	if (single_ware != INVALID_INDEX) {
 		// We return single number

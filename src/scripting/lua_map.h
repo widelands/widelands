@@ -52,6 +52,9 @@ class TribeDescr;
 
 namespace LuaMaps {
 
+// Used as return for parse_ware_workers_* functions
+enum class RequestedWareWorker { kAll, kSingle, kList, kUndefined };
+
 /*
  * Base class for all classes in wl.map
  */
@@ -1354,16 +1357,15 @@ using WareWorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity
 
 int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
 int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo);
-void parse_wares_workers_list(lua_State*,
-                              const Widelands::TribeDescr&,
-                              Widelands::DescriptionIndex*,
-                              std::vector<Widelands::DescriptionIndex>&,
-                              bool*,
-                              bool is_ware);
-void parse_wares_workers_counted(lua_State*,
-                                 const Widelands::TribeDescr&,
-                                 WareWorkersMap&,
-                                 bool is_ware);
+RequestedWareWorker parse_wares_workers_list(lua_State*,
+                                             const Widelands::TribeDescr&,
+                                             Widelands::DescriptionIndex*,
+                                             std::vector<Widelands::DescriptionIndex>*,
+                                             bool is_ware);
+RequestedWareWorker parse_wares_workers_counted(lua_State*,
+                                                const Widelands::TribeDescr&,
+                                                WareWorkersMap*,
+                                                bool is_ware);
 void luaopen_wlmap(lua_State*);
 
 }  // namespace LuaMap
