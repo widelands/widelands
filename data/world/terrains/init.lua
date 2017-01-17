@@ -3,13 +3,13 @@ world:new_editor_terrain_category{
    name = "summer",
    descname = _ "Summer",
    picture = "world/pics/editor_terrain_category_green.png",
-   items_per_row = 7,
+   items_per_row = 6,
 }
 world:new_editor_terrain_category{
    name = "wasteland",
    descname = _ "Wasteland",
    picture = "world/pics/editor_terrain_category_wasteland.png",
-   items_per_row = 7,
+   items_per_row = 6,
 }
 world:new_editor_terrain_category{
    name = "winter",
