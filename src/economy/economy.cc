@@ -701,6 +701,9 @@ struct RSPairStruct {
  * Walk all Requests and find potential transfer candidates.
 */
 void Economy::process_requests(Game& game, RSPairStruct& s) {
+	// Algorithm can decide that wares are not to be delivered to productionsite
+	// right now, therefore we need to shcedule next pairing
+	bool postponed_pairing_needed = false;
 	for (Request* temp_req : requests_) {
 		Request& req = *temp_req;
 
@@ -734,6 +737,9 @@ void Economy::process_requests(Game& game, RSPairStruct& s) {
 
 		int32_t const priority = req.get_priority(cost);
 		if (priority < 0) {
+			// We dont "pair" the req with supply now, and dont set s.nexttimer right now
+			// but should not forget about this productionsite waiting for the building material
+			postponed_pairing_needed = true;
 			continue;
 		}
 
@@ -745,6 +751,10 @@ void Economy::process_requests(Game& game, RSPairStruct& s) {
 		rsp.pairid = ++s.pairid;
 
 		s.queue.push(rsp);
+	}
+	if (postponed_pairing_needed && s.nexttimer < 0) {
+		// so no other pair set the timer, so we set them now for after 30 seconds
+		s.nexttimer = 30 * 1000;
 	}
 }
 
