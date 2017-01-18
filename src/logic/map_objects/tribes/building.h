@@ -189,15 +189,15 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
-struct NoteBuildingWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::BuildingWindow)
+struct NoteBuilding {
+	CAN_BE_SENT_AS_NOTE(NoteId::Building)
 
 	Serial serial;
 
 	enum class Action { kRefresh, kClose, kStartWarp, kFinishWarp, kWorkersChanged };
 	const Action action;
 
-	NoteBuildingWindow(Serial init_serial, const Action& init_action)
+	NoteBuilding(Serial init_serial, const Action& init_action)
 	   : serial(init_serial), action(init_action) {
 	}
 };

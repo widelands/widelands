@@ -105,7 +105,7 @@ private:
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::tuple<const Widelands::Coords, const Vector2i, bool>>
 	   wanted_building_windows_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>>
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   buildingnotes_subscriber_;
 };
 

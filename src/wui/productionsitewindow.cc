@@ -46,11 +46,11 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            ProductionSite& ps,
                                            bool avoid_fastclick)
    : BuildingWindow(parent, ps, avoid_fastclick) {
-	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
-	   [this](const Widelands::NoteBuildingWindow& note) {
+	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
 		   if (note.serial == building().serial()) {
 			   switch (note.action) {
-			   case Widelands::NoteBuildingWindow::Action::kWorkersChanged:
+			   case Widelands::NoteBuilding::Action::kWorkersChanged:
 				   update_worker_table();
 				   break;
 			   default:

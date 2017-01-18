@@ -61,10 +61,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
 	  playertype_(pt) {
-	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>(
-	   [this](const Widelands::NoteBuildingWindow& note) {
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
-		   case Widelands::NoteBuildingWindow::Action::kFinishWarp: {
+		   case Widelands::NoteBuilding::Action::kFinishWarp: {
 			   if (upcast(
 			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
 				   const Widelands::Coords coords = building->get_position();

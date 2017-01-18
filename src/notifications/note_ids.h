@@ -36,7 +36,7 @@ enum class NoteId : uint32_t {
 	TrainingSiteSoldierTrained,
 	ShipMessage,
 	ShipWindow,
-	BuildingWindow,
+	Building,
 	GraphicResolutionChanged,
 	NoteExpeditionCanceled
 };

@@ -140,7 +140,7 @@ void ExpeditionBootstrap::start() {
 
 	// Update the user interface
 	Notifications::publish(
-	   NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
+	   NoteBuilding(warehouse->serial(), NoteBuilding::Action::kRefresh));
 }
 
 void ExpeditionBootstrap::cancel(Game& game) {
@@ -162,7 +162,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 
 	// Update the user interface
 	Notifications::publish(
-	   NoteBuildingWindow(warehouse->serial(), NoteBuildingWindow::Action::kRefresh));
+	   NoteBuilding(warehouse->serial(), NoteBuilding::Action::kRefresh));
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 

@@ -106,7 +106,7 @@ private:
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuildingWindow>>
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   buildingnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };

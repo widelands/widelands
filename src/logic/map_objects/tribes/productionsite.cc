@@ -613,7 +613,7 @@ void ProductionSite::request_worker_callback(
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
 	Notifications::publish(
-	   NoteBuildingWindow(psite.serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	   NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**
@@ -693,7 +693,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
-	Notifications::publish(NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kRefresh));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kRefresh));
 }
 
 /**
@@ -896,7 +896,7 @@ void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
 	Notifications::publish(
-	   NoteBuildingWindow(serial(), NoteBuildingWindow::Action::kWorkersChanged));
+	   NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes) {

@@ -694,7 +694,7 @@ void Player::enhance_or_dismantle(Building* building,
 		}
 
 		Notifications::publish(
-		   NoteBuildingWindow(building->serial(), NoteBuildingWindow::Action::kClose));
+		   NoteBuilding(building->serial(), NoteBuilding::Action::kClose));
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.

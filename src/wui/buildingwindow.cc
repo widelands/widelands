@@ -53,19 +53,19 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      workarea_overlay_id_(0),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
-	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuildingWindow>([this](
-	   const Widelands::NoteBuildingWindow& note) {
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>([this](
+		const Widelands::NoteBuilding& note) {
 		if (note.serial == building_.serial()) {
 			switch (note.action) {
 			// The building's state has changed
-			case Widelands::NoteBuildingWindow::Action::kRefresh:
+			case Widelands::NoteBuilding::Action::kRefresh:
 				init(true);
 				break;
 			// The building is no more
-			case Widelands::NoteBuildingWindow::Action::kStartWarp:
+			case Widelands::NoteBuilding::Action::kStartWarp:
 				igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
 			// Fallthrough intended
-			case Widelands::NoteBuildingWindow::Action::kClose:
+			case Widelands::NoteBuilding::Action::kClose:
 				// Stop everybody from thinking to avoid segfaults
 				set_thinks(false);
 				vbox_.reset(nullptr);
