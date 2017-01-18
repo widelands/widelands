@@ -879,7 +879,6 @@ int LuaPlayer::switchplayer(lua_State* L) {
       Returns count of wares produced byt the player up to now.
       'what' can be either an "all" or single ware name or an array of names. If single
       ware name is given, integer is returned, otherwise the table is returned.
-     
 */
 int LuaPlayer::get_produced_wares_count(lua_State* L) {
 	Player& p = get(L, get_egbase(L));
