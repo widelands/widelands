@@ -116,14 +116,29 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	if (resource != coord.field->get_resources()) {
 		return false;
 	}
-	if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
-		return true;
+	if (strictness == AnimalBreedable::kYes) {
+		// We test actual breedability
+		if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
+			return true;
+		}
+	} else {
+		// We test potential breedability, just resources are now full
+		if (coord.field->get_resources_amount() == coord.field->get_initial_res_amount()) {
+			return true;
+		}		
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
-		if (resource == neighb.field->get_resources() &&
-		    neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
-			return true;
+		if (strictness == AnimalBreedable::kYes) {
+			if (resource == neighb.field->get_resources() &&
+				neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
+				return true;
+			}
+		} else {
+			if (resource == neighb.field->get_resources() &&
+				neighb.field->get_resources_amount() == neighb.field->get_initial_res_amount()) {
+				return true;
+			}			
 		}
 	}
 	return false;

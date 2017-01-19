@@ -28,6 +28,8 @@
 
 namespace Widelands {
 
+enum class AnimalBreedable {kYes, kAnimalFull};
+
 struct FCoords;
 class Map;
 
@@ -174,15 +176,16 @@ private:
 	DescriptionIndex resource;
 };
 
-/// Accepts a node if it has the given resource type and remaining capacity.
+/// Accepts a node if it has the given resource type and a) has remaining capacity, b) is full
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(DescriptionIndex res) : resource(res) {
+	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kYes) : resource(res), strictness(br) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
+	AnimalBreedable strictness;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable

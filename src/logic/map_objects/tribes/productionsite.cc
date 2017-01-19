@@ -896,20 +896,32 @@ void ProductionSite::train_workers(Game& game) {
 	Building::workers_changed();
 }
 
-void ProductionSite::notify_player(Game& game, uint8_t minutes) {
+void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
 	if (last_stat_percent_ == 0 ||
 	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_heading().empty()) {
-			set_production_result(_("Can’t find any more resources!"));
+			 
+		// figuring out return string
+		std::string return_message = "Can’t find any more resources!"; 	 
+		if (type == FailNotificationType::kPrimary) {
+			if (!descr().out_of_resource_heading().empty()) {
+				return_message = descr().out_of_resource_heading();
+			}
 		} else {
-			set_production_result(descr().out_of_resource_heading());
+			return_message = "All reachable fields are full of resource.";
+		}
+			
+		if (descr().out_of_resource_heading().empty()) {
+			set_production_result(_(return_message));
+		} else  {
+			set_production_result(return_message);
 
 			assert(!descr().out_of_resource_message().empty());
 			send_message(game, Message::Type::kEconomy, descr().out_of_resource_title(),
-			             descr().icon_filename(), descr().out_of_resource_heading(),
+			             descr().icon_filename(), return_message,
 			             descr().out_of_resource_message(), true, minutes * 60000, 0);
 		}
+		
 		// The following sends "out of resources" messages to be picked up by AI
 		// used as information for dismantling and upgrading buildings
 		if (descr().get_ismine()) {

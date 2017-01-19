@@ -43,6 +43,8 @@ class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
+enum class FailNotificationType {kPrimary, kSecondary};
+
 /**
  * Every building that is part of the economics system is a production site.
  *
@@ -214,7 +216,7 @@ public:
 	bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
-	void notify_player(Game& game, uint8_t minutes);
+	void notify_player(Game& game, uint8_t minutes, FailNotificationType type = FailNotificationType::kPrimary);
 	void unnotify_player();
 
 	void set_default_anim(std::string);

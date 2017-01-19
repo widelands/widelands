@@ -509,10 +509,36 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeSpace(get_location(game)));
 
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
+		// This is default note "out of resources" sent to a player
+		FailNotificationType fail_notification_type = FailNotificationType::kPrimary;
+		
+		// BUT this can be breeder and all nodes are full of fish, we need to send different note
+		// to a player, but first verify that there is at least one such node
+		
+		// Following should pick a fishbreeder
+		if (action.sparam1.size() && action.iparam4) {
+			printf (" Testing resources for full resources\n");
+			// we create another functor
+			FindNodeAnd functor2;
+			functor2.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
+			functor2.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			if (action.iparam5 > -1)
+				functor2.add(FindNodeImmovableAttribute(action.iparam5), true);
+		
+			if (action.iparam3)
+				functor2.add(FindNodeSpace(get_location(game)));	
+			
+			// now check for almost breedability
+			if (map.find_reachable_fields(area, &list, cstep, functor2)) {
+				printf (" ... yes, this is the case\n");
+				// So we change the type of notification	
+				fail_notification_type = FailNotificationType::kSecondary;
+			}
+		}
 		molog("  no space found\n");
 
 		if (upcast(ProductionSite, productionsite, get_location(game)))
-			productionsite->notify_player(game, 30);
+			productionsite->notify_player(game, 30, fail_notification_type);
 
 		send_signal(game, "fail");
 		pop_task(game);
