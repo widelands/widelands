@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
-#define WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
+#ifndef WL_EDITOR_TOOLS_PLACE_CRITTER_TOOL_H
+#define WL_EDITOR_TOOLS_PLACE_CRITTER_TOOL_H
 
-#include "editor/tools/delete_bob_tool.h"
+#include "editor/tools/delete_critter_tool.h"
 #include "editor/tools/multi_select.h"
 
-/// Places bobs on the map.
-struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
-	EditorPlaceBobTool(EditorDeleteBobTool& tool) : EditorTool(tool, tool) {
+/// Places critters on the map.
+struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
+	EditorPlaceCritterTool(EditorDeleteCritterTool& tool) : EditorTool(tool, tool) {
 	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -43,8 +43,8 @@ struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_place_bob.png");
+		return g_gr->images().get("images/wui/editor/fsel_editor_place_critter.png");
 	}
 };
 
-#endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_BOB_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_CRITTER_TOOL_H

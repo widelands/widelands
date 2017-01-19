@@ -42,30 +42,32 @@ class MapView : public UI::Panel {
 public:
 	// A rectangle on a Torus (i.e. a Widelands Map).
 	class ViewArea {
-		public:
-		   // View in map pixels that is spanned by this.
-		   const Rectf& rect() const { return rect_; }
+	public:
+		// View in map pixels that is spanned by this.
+		const Rectf& rect() const {
+			return rect_;
+		}
 
-			// Returns true if 'coords' is contained inside this view. Containing
-			// is defined as such that the shortest distance between the center of
-			// 'rect()' is smaller than (rect().w / 2, rect().h / 2).
-			bool contains(const Widelands::Coords& coords) const;
+		// Returns true if 'coords' is contained inside this view. Containing
+		// is defined as such that the shortest distance between the center of
+		// 'rect()' is smaller than (rect().w / 2, rect().h / 2).
+		bool contains(const Widelands::Coords& coords) const;
 
-			// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
-			// for y. This requires that 'contains' would return true for 'coords', otherwise this will
-			// be an infinite loop.
-			Vector2f move_inside(const Widelands::Coords& coords) const;
+		// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
+		// for y. This requires that 'contains' would return true for 'coords', otherwise this will
+		// be an infinite loop.
+		Vector2f move_inside(const Widelands::Coords& coords) const;
 
-		private:
-			friend class MapView;
+	private:
+		friend class MapView;
 
-			ViewArea(const Rectf& rect, const Widelands::Map& map);
+		ViewArea(const Rectf& rect, const Widelands::Map& map);
 
-			// Returns true if 'map_pixel' is inside this view area.
-			bool contains_map_pixel(const Vector2f& map_pixel) const;
+		// Returns true if 'map_pixel' is inside this view area.
+		bool contains_map_pixel(const Vector2f& map_pixel) const;
 
-			const Rectf rect_;
-			const Widelands::Map& map_;
+		const Rectf rect_;
+		const Widelands::Map& map_;
 	};
 
 	struct View {

@@ -95,6 +95,7 @@ obj_remove_the_barbarians = {
    title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
+      listitem_bullet(_[[Build a barracks to start training soldiers.]]) ..
       listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
       listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
    ),
