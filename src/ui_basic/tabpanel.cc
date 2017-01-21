@@ -289,19 +289,19 @@ void TabPanel::draw(RenderTarget& dst) {
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
-			   std::min(1., std::min(static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
+				std::min(1., std::min(static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
 			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()));
 
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
-			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
-			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
-			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1.,
+				Rectf(x + (kTabPanelButtonHeight - picture_width) / 2,
+						(kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
+				tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else {
 			dst.blit(Vector2f(x + kTabPanelTextMargin,
-			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2.f),
+									(kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
 			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
 		}
 
