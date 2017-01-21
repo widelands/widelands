@@ -496,8 +496,12 @@ private:
 struct CmdSetInputMaxFill : public PlayerCommand {
 	CmdSetInputMaxFill() : PlayerCommand(), serial_(0), index_(), type_(wwWARE), max_fill_(0) {
 	}  // For savegame loading
-	CmdSetInputMaxFill(
-	   uint32_t duetime, PlayerNumber, PlayerImmovable&, DescriptionIndex, WareWorker, uint32_t maxfill);
+	CmdSetInputMaxFill(uint32_t duetime,
+	                   PlayerNumber,
+	                   PlayerImmovable&,
+	                   DescriptionIndex,
+	                   WareWorker,
+	                   uint32_t maxfill);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;

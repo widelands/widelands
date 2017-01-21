@@ -350,7 +350,8 @@ void Button::toggle() {
 	case UI::Button::Style::kPermpressed:
 		style_ = UI::Button::Style::kRaised;
 		break;
-	default:;  // Do nothing for flat buttons
+	case UI::Button::Style::kFlat:
+		break;  // Do nothing for flat buttons
 	}
 }
 }

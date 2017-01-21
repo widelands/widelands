@@ -94,7 +94,7 @@ Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, 
 float MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
-	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
+	uint32_t dx = std::abs(a.x - b.x), dy = std::abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2)
@@ -204,7 +204,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 				      map[Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
 				            .get_height() *
 				         kHeightFactor;
-				ldy = Y_b - Y_a, pdy = Y_b - y;
+				ldy = Y_b - Y_a;
+				pdy = Y_b - y;
 				pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
@@ -231,7 +232,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 			   Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1), TCoords<>::D);
 		} else {
 			Y_b = screen_y_base - map[Coords(right_col, next_row_number)].get_height() * kHeightFactor;
-			ldy = Y_b - Y_a, pdy = Y_b - y;
+			ldy = Y_b - Y_a;
+			pdy = Y_b - y;
 			pdx = (col_number + 1) * (kTriangleWidth / 2) - x;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.

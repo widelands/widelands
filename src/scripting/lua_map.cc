@@ -758,11 +758,11 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case (MapObjectType::BOB):
 	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
-	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
 		                  .str());
 	}
+	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
@@ -1161,13 +1161,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
+		m = &egbase.create_immovable(
+		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 	} else {
 		report_error(
 		   L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
@@ -1682,6 +1684,7 @@ int LuaImmovableDescription::get_owner_type(lua_State* L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
+		break;
 	}
 	return 1;
 }
@@ -2039,7 +2042,7 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
-   METHOD(LuaProductionSiteDescription, consumed_wares),
+	METHOD(LuaProductionSiteDescription, consumed_wares_workers),
    METHOD(LuaProductionSiteDescription, produced_wares),
    METHOD(LuaProductionSiteDescription, recruited_workers),
    {nullptr, nullptr},
@@ -2151,7 +2154,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: consumed_wares
+	.. attribute:: consumed_wares_workers
 
 		:arg program_name: the name of the production program that we want to get the consumed wares for
 		:type tribename: :class:`string`
@@ -2159,14 +2162,14 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
 			  Multiple entries in {ware name} are alternatives (OR logic)).
 */
-int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
+int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
 	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const ProductionProgram& program = *programs.at(program_name);
 		lua_newtable(L);
 		int counter = 0;
-		for (const auto& group : program.consumed_wares()) {
+		for (const auto& group : program.consumed_wares_workers()) {
 			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
 			for (const auto& entry : group.first) {
@@ -3385,9 +3388,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case (MapObjectType::ROAD):
 	case (MapObjectType::PORTDOCK):
 	case (MapObjectType::WARE):
-	default:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
+	NEVER_HERE();
 }
 
 #undef CAST_TO_LUA
@@ -4043,6 +4046,7 @@ Warehouse
 
    Every Headquarter or Warehouse on the Map is of this type.
 */
+
 const char LuaWarehouse::className[] = "Warehouse";
 const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, set_wares),
@@ -4051,6 +4055,8 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, get_workers),
    METHOD(LuaWarehouse, set_soldiers),
    METHOD(LuaWarehouse, get_soldiers),
+   METHOD(LuaWarehouse, set_warehouse_policies),
+   METHOD(LuaWarehouse, get_warehouse_policies),
    METHOD(LuaWarehouse, start_expedition),
    METHOD(LuaWarehouse, cancel_expedition),
    {nullptr, nullptr},
@@ -4146,7 +4152,233 @@ WH_SET(worker, Worker)
 WH_GET(ware, Ware)
 // documented in parent class
 WH_GET(worker, Worker)
-#undef GET
+#undef WH_GET
+
+// Transforms the given warehouse policy to a string which is used by the lua code
+inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
+	switch (p) {
+	case Warehouse::StockPolicy::kNormal:
+		lua_pushstring(L, "normal");
+		break;
+	case Warehouse::StockPolicy::kPrefer:
+		lua_pushstring(L, "prefer");
+		break;
+	case Warehouse::StockPolicy::kDontStock:
+		lua_pushstring(L, "dontstock");
+		break;
+	case Warehouse::StockPolicy::kRemove:
+		lua_pushstring(L, "remove");
+		break;
+	}
+}
+
+// Transforms the given string from the lua code to a warehouse policy
+inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+	std::string str = luaL_checkstring(L, index);
+	if (str == "normal")
+		return Warehouse::StockPolicy::kNormal;
+	else if (str == "prefer")
+		return Warehouse::StockPolicy::kPrefer;
+	else if (str == "dontstock")
+		return Warehouse::StockPolicy::kDontStock;
+	else if (str == "remove")
+		return Warehouse::StockPolicy::kRemove;
+	else
+		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
+}
+
+bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+	wh->set_ware_policy(idx, p);
+	return true;
+}
+
+/**
+ * Sets the given policy for the given ware in the given warehouse and return true.
+ * If the no ware with the given name exists for the tribe of the warehouse, return false.
+ */
+bool do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	DescriptionIndex idx = tribe.ware_index(name);
+	if (!tribe.has_ware(idx)) {
+		return false;
+	}
+	return do_set_ware_policy(wh, idx, p);
+}
+
+bool do_set_worker_policy(Warehouse* wh,
+                          const DescriptionIndex idx,
+                          const Warehouse::StockPolicy p) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	// If the worker does not cost anything, ignore it
+	// Otherwise, an unlimited stream of carriers might leave the warehouse
+	if (tribe.get_worker_descr(idx)->is_buildable() &&
+	    tribe.get_worker_descr(idx)->buildcost().empty()) {
+		return true;
+	}
+	wh->set_worker_policy(idx, p);
+	return true;
+}
+
+/**
+ * Sets the given policy for the given worker in the given warehouse and returns true.
+ * Also returns true if the given worker does not cost anything but in this case does not set its policy.
+ * If no worker with the given name exists for the tribe of the warehouse, return false.
+ */
+bool do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+	const TribeDescr& tribe = wh->owner().tribe();
+	DescriptionIndex idx = tribe.worker_index(name);
+	if (!tribe.has_worker(idx)) {
+		return false;
+	}
+	return do_set_worker_policy(wh, idx, p);
+}
+
+/* RST
+   .. method:: set_warehouse_policies(which, policy)
+
+      Sets the policies how the warehouse should handle the given wares and workers.
+
+      Usage example:
+      .. code-block:: lua
+
+         wh:set_warehouse_policies("coal", "prefer")
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :arg policy: the policy to apply for all the wares and workers given in `which`.
+      :type policy: a string out of "normal", "prefer", "dontstock", "remove".
+*/
+int LuaWarehouse::set_warehouse_policies(lua_State* L) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 3)
+		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
+
+	Warehouse* wh = get(L, get_egbase(L));
+	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	lua_pop(L, 1);
+	const TribeDescr& tribe = wh->owner().tribe();
+
+	// takes either "all", a name or an array of names
+	if (lua_isstring(L, 2)) {
+		const std::string& what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			for (const DescriptionIndex& i : tribe.wares()) {
+				do_set_ware_policy(wh, i, p);
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				do_set_worker_policy(wh, i, p);
+			}
+		} else {
+			// Only one item requested
+			if (!do_set_ware_policy(wh, what, p) && !do_set_worker_policy(wh, what, p)) {
+				// Unknown whatever, abort
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+		}
+	} else {
+		// array of names
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			const std::string& what = luaL_checkstring(L, -1);
+			if (!do_set_ware_policy(wh, what, p) && !do_set_worker_policy(wh, what, p)) {
+				// Note that this will change the policy for entries earlier in the list
+				// but when the user provides broken data its his own fault
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+			lua_pop(L, 1);
+		}
+	}
+
+	return 0;
+}
+
+// Gets the warehouse policy by ware/worker-name or id
+#define WH_GET_POLICY(type)                                                                        \
+	void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {     \
+		wh_policy_to_string(L, wh->get_##type##_policy(idx));                              \
+	}                                                                                          \
+                                                                                                   \
+	bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {        \
+		const TribeDescr& tribe = wh->owner().tribe();                                     \
+		DescriptionIndex idx = tribe.type##_index(name);                                   \
+		if (!tribe.has_##type(idx)) {                                                      \
+			return false;                                                              \
+		}                                                                                  \
+		do_get_##type##_policy(L, wh, idx);                                                \
+		return true;                                                                       \
+	}
+
+WH_GET_POLICY(ware)
+WH_GET_POLICY(worker)
+#undef WH_GET_POLICY
+
+/* RST
+   .. method:: get_warehouse_policies(which)
+
+      Gets the policies how the warehouse should handle the given wares and workers.
+      The method to handle is one of the strings "normal", "prefer", "dontstock", "remove".
+
+      Usage example:
+      .. code-block:: lua
+
+         wh:get_warehouse_policies({"ax", "coal"})
+         -- Returns a table like {ax="normal", coal="prefer"}
+
+      :arg which: behaves like for :meth:`HasWares.get_wares`.
+
+      :returns: :class:`string` or :class:`table`
+*/
+int LuaWarehouse::get_warehouse_policies(lua_State* L) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2)
+		report_error(L, "Wrong number of arguments to get_warehouse_policies!");
+	Warehouse* wh = get(L, get_egbase(L));
+	const TribeDescr& tribe = wh->owner().tribe();
+	// takes either "all", a single name or an array of names
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			lua_newtable(L);
+			for (const DescriptionIndex& i : tribe.wares()) {
+				std::string name = tribe.get_ware_descr(i)->name();
+				lua_pushstring(L, name.c_str());
+				do_get_ware_policy(L, wh, i);
+				lua_rawset(L, -3);
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				std::string name = tribe.get_worker_descr(i)->name();
+				lua_pushstring(L, name.c_str());
+				do_get_worker_policy(L, wh, i);
+				lua_rawset(L, -3);
+			}
+		} else {
+			// Only one item requested
+			if (!do_get_ware_policy(L, wh, what) && !do_get_worker_policy(L, wh, what)) {
+				// Unknown whatever, abort
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+		}
+	} else {
+		// array of names
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_newtable(L);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			// Stack is: ... input_table new_table nil input_key input_value
+			// input_value is the name of the ware or worker and will be added into the new table
+			// input_key is an index and is dropped by the next call of lua_next()
+			const std::string& what = luaL_checkstring(L, -1);
+			if (!do_get_ware_policy(L, wh, what) && !do_get_worker_policy(L, wh, what)) {
+				// Note that this will change the policy for entries earlier in the list
+				// but when the user provides broken data its his own fault
+				report_error(L, "Unknown name: <%s>", what.c_str());
+			}
+			lua_rawset(L, -4);
+		}
+	}
+	return 1;
+}
 
 // documented in parent class
 int LuaWarehouse::get_soldiers(lua_State* L) {
@@ -4304,14 +4536,15 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	}
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
-			if (sp.first.second == wwWARE)
+			if (sp.first.second == wwWARE) {
 				report_error(L, "<%s> can't be stored in this building: %s!",
 				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
 				             ps->descr().name().c_str());
-			else
+			} else {
 				report_error(L, "<%s> can't be stored in this building: %s!",
 				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
 				             ps->descr().name().c_str());
+			}
 		}
 		InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
 		if (sp.second > iq.get_max_size()) {
@@ -4356,10 +4589,11 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			if (input.second == wwWARE)
+			if (input.second == wwWARE) {
 				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
-			else
+			} else {
 				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
+			}
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
@@ -5057,8 +5291,6 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RW(LuaField, terd),
    PROP_RW(LuaField, height),
    PROP_RW(LuaField, raw_height),
-   PROP_RO(LuaField, viewpoint_x),
-   PROP_RO(LuaField, viewpoint_y),
    PROP_RW(LuaField, resource),
    PROP_RW(LuaField, resource_amount),
    PROP_RO(LuaField, initial_resource_amount),
@@ -5157,25 +5389,6 @@ int LuaField::set_raw_height(lua_State* L) {
 	f.field->set_height(height);
 
 	return 0;
-}
-
-/* RST
-   .. attribute:: viewpoint_x, viewpoint_y
-
-      (RO) Returns the position in pixels to move the view to to center
-      this field for the current interactive player
-*/
-int LuaField::get_viewpoint_x(lua_State* L) {
-	Vector2f point =
-	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
-	lua_pushdouble(L, point.x);
-	return 1;
-}
-int LuaField::get_viewpoint_y(lua_State* L) {
-	Vector2f point =
-	   MapviewPixelFunctions::to_map_pixel_with_normalization(get_egbase(L).map(), coords_);
-	lua_pushdouble(L, point.y);
-	return 1;
 }
 
 /* RST

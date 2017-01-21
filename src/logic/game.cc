@@ -306,7 +306,7 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -455,7 +455,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl())
-			get_ipl()->center_view_on_coords(map().get_starting_pos(get_ipl()->player_number()));
+			get_ipl()->scroll_to_field(
+			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources(world());
@@ -704,11 +705,11 @@ void Game::send_player_set_ware_priority(PlayerImmovable& imm,
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
-                                         DescriptionIndex const index,
-                                         WareWorker type,
-                                         uint32_t const max_fill) {
-	send_player_command(
-	   *new CmdSetInputMaxFill(get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+                                          DescriptionIndex const index,
+                                          WareWorker type,
+                                          uint32_t const max_fill) {
+	send_player_command(*new CmdSetInputMaxFill(
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,

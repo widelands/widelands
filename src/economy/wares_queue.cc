@@ -36,8 +36,7 @@ namespace Widelands {
 WaresQueue::WaresQueue(PlayerImmovable& init_owner,
                        DescriptionIndex const init_ware,
                        uint8_t const init_max_size)
-   : InputQueue(init_owner, init_ware, init_max_size, wwWARE),
-     filled_(0) {
+   : InputQueue(init_owner, init_ware, init_max_size, wwWARE), filled_(0) {
 	if (index_ != INVALID_INDEX)
 		update();
 }
@@ -59,11 +58,11 @@ void WaresQueue::cleanup() {
 
 void WaresQueue::entered(DescriptionIndex index,
 #ifndef NDEBUG
-						Worker* worker
+                         Worker* worker
 #else
-						Worker*
+                         Worker*
 #endif
-						) {
+) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);
@@ -130,5 +129,4 @@ void WaresQueue::read_child(FileRead& fr, Game&, MapObjectLoader&) {
 		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
-
 }

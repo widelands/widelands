@@ -53,6 +53,7 @@ namespace Widelands {
 namespace {
 
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
 // game.
@@ -192,9 +193,9 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	if (req.get_type() == wwWORKER) {
-		return warehouse_->count_workers(game, req.get_index(),
-					req.get_requirements(),
-					(req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
+		return warehouse_->count_workers(
+		   game, req.get_index(), req.get_requirements(),
+		   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
 	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
@@ -455,8 +456,8 @@ void Warehouse::init_containers(Player& player) {
 	supply_->set_nrwares(nr_wares);
 	supply_->set_nrworkers(nr_workers);
 
-	ware_policy_.resize(nr_wares, SP_Normal);
-	worker_policy_.resize(nr_workers, SP_Normal);
+	ware_policy_.resize(nr_wares, StockPolicy::kNormal);
+	worker_policy_.resize(nr_workers, StockPolicy::kNormal);
 
 	uint8_t nr_worker_types_without_cost = player.tribe().worker_types_without_cost().size();
 	next_worker_without_cost_spawn_.resize(nr_worker_types_without_cost, never());
@@ -532,25 +533,23 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		portdock_ = nullptr;
 	}
 
-	// This will empty the stock and launch all workers including incorporated
-	// ones.
+	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
+	// the stock.
 	if (upcast(Game, game, &egbase)) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
-			const uint32_t stock = workers.stock(id);
-			// Separate behaviour for the case of loading the game
-			// (which does save/destroy/reload) and simply destroying ingame
+			// If the game is running, have the workers flee the warehouse.
 			if (game->is_loaded()) {
-				// This game is really running
-				for (uint32_t i = 0; i < stock; ++i) {
+				// We have kFleeingUnitsCap to make sure that we won't flood the map with carriers etc.
+				Quantity stock = workers.stock(id);
+				for (Quantity i = 0; i < stock && i < kFleeingUnitsCap; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
-				/// NOCOM(Notabilis): Assert does not always hold
-				assert(!incorporated_workers_.count(id) || incorporated_workers_[id].empty());
-			} else {
-				// We are in the load-game sequence...
-				remove_workers(id, stock);
 			}
+			// Make sure that all workers are gone
+			remove_workers(id, workers.stock(id));
+			assert(!game->is_loaded() ||
+			       (!incorporated_workers_.count(id) || incorporated_workers_[id].empty()));
 		}
 	}
 	incorporated_workers_.clear();
@@ -742,9 +741,10 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-Quantity
-Warehouse::count_workers(const Game& /* game */, DescriptionIndex ware,
-						const Requirements& req, Match exact) {
+Quantity Warehouse::count_workers(const Game& /* game */,
+                                  DescriptionIndex ware,
+                                  const Requirements& req,
+                                  Match exact) {
 	Quantity sum = 0;
 
 	do {
@@ -1245,14 +1245,14 @@ void Warehouse::set_worker_policy(DescriptionIndex ware, Warehouse::StockPolicy 
 }
 
 /**
- * Check if there are remaining wares with stock policy \ref SP_Remove,
+ * Check if there are remaining wares with \ref Warehouse::StockPolicy::kRemove,
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
-			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
+			if (get_ware_policy(ware) != Warehouse::StockPolicy::kRemove || !get_wares().stock(ware))
 				continue;
 
 			launch_ware(game, ware);
@@ -1262,7 +1262,7 @@ void Warehouse::check_remove_stock(Game& game) {
 
 	for (DescriptionIndex widx = 0; widx < static_cast<DescriptionIndex>(worker_policy_.size());
 	     ++widx) {
-		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
+		if (get_worker_policy(widx) != Warehouse::StockPolicy::kRemove || !get_workers().stock(widx))
 			continue;
 
 		Worker& worker = launch_worker(game, widx, Requirements());

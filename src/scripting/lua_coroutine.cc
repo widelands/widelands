@@ -143,7 +143,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 }
 
 constexpr uint8_t kCoroutineDataPacketVersion = 4;
-void LuaCoroutine::write(FileWrite& fw) {
+void LuaCoroutine::write(FileWrite& fw) const {
 	fw.unsigned_8(kCoroutineDataPacketVersion);
 
 	fw.unsigned_32(ninput_args_);

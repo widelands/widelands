@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 21:04+0000\n"
+"POT-Creation-Date: 2016-12-02 08:04+0000\n"
+"PO-Revision-Date: 2016-12-02 19:07+0000\n"
 "Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -2791,7 +2791,7 @@ msgstr "Corn"
 #: ../../data/tribes/wares/cornmeal/init.lua:7
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr "Cornmeal"
+msgstr "Cornflour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/diamond/init.lua:7

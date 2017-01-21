@@ -70,11 +70,8 @@ void ExpeditionBootstrap::is_ready(Game& game) {
 }
 
 // static
-void ExpeditionBootstrap::ware_callback(Game& game,
-                                        InputQueue*,
-                                        DescriptionIndex,
-                                        Worker*,
-                                        void* const data) {
+void ExpeditionBootstrap::ware_callback(
+   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->is_ready(game);
 }

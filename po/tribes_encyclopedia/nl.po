@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-18 17:02+0000\n"
+"PO-Revision-Date: 2016-12-21 22:45+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,6 +111,7 @@ msgid ""
 "blackroot."
 msgstr "De helmkruidkweker heeft gemiddeld %1% nodig om een bos helmkruid te zaaien en te oogsten."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
@@ -2281,7 +2282,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr "Standaard harnas voor keizerlijke soldaten. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 1 naar 2."
+msgstr "Standaard harnas voor soldaten van het Imperium. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 1 naar 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../data/tribes/wares/armor_chain/helptexts.lua:4
@@ -2290,7 +2291,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr "De maliënkolder is een middelsterk harnas voor keizerlijke soldaten. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 2 naar 3."
+msgstr "De maliënkolder is een middelsterk harnas voor soldaten van het Imperium. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 2 naar 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../data/tribes/wares/armor_gilded/helptexts.lua:4
@@ -2453,7 +2454,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "De bakkers van het keizerrijk maken smakelijk brood uit meel en water. Het wordt gebruikt in taveernes en herbergen om porties en maaltijden te maken. Brood wordt ook gebruikt in de trainingsgebouwen (arena, colosseum, trainingskamp)."
+msgstr "De bakkers van het Imperium maken smakelijk brood uit meel en water. Het wordt gebruikt in tavernes en herbergen om rantsoenen en maaltijden te maken. Brood wordt ook gebruikt in de trainingsgebouwen (arena, colosseum, trainingskamp)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -2631,7 +2632,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr "Naast brood en vlees is ook vis een voedingsmiddel voor het keizerrijk. Vis wordt gebruikt in taveernes, herbergen en trainingsgebouwen (arena, colosseum, trainingskamp)."
+msgstr "Naast brood en vlees is ook vis een voedingsmiddel voor het Imperium. Vis wordt gebruikt in tavernes, herbergen en trainingsgebouwen (arena, colosseum, trainingskamp)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -2666,7 +2667,7 @@ msgctxt "empire_ware"
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr "Meel wordt geproduceerd door de molen uit tarwe en is nodig in de bakkerij om het heerlijke keizerlijke brood te maken."
+msgstr "Meel wordt geproduceerd door de molen uit tarwe en is nodig in de bakkerij om het heerlijke Imperiale brood te maken."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:4
@@ -2904,7 +2905,7 @@ msgctxt "empire_ware"
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr "Hoe kan men een portie of maaltijd bereiden zonder keukengerei? Ze worden geproduceerd in een werktuidsmederij en gebruikt in taveernes en herbergen."
+msgstr "Hoe kan men een rantsoen of maaltijd bereiden zonder keukengerei? Ze worden geproduceerd in een werktuigsmederij en gebruikt in tavernes en herbergen."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -2958,7 +2959,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr "Marmerzuilen zijn symbolisch voor de hoge keizerlijke cultuur, dus worden ze gebruikt in bijna ieder groot gebouw. Ze worden geproduceerd uit marmer bij een steenhouwer."
+msgstr "Marmerzuilen zijn symbolisch voor de hoge Imperiale cultuur, dus worden ze gebruikt in bijna ieder groot gebouw. Ze worden geproduceerd uit marmer bij een steenhouwer."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -3434,7 +3435,7 @@ msgstr "Plant en oogst ereprijs."
 #: ../../data/tribes/workers/atlanteans/builder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
+msgstr "Werkt op werven om nieuwe gebouwen op te richten."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/atlanteans/carrier/helptexts.lua:3
@@ -3633,7 +3634,7 @@ msgstr "Produceert de lekkerste bier om krijgers sterk en opgewekt te houden tij
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
+msgstr "Werkt op werven om nieuwe gebouwen op te richten."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/barbarians/carrier/helptexts.lua:3
@@ -3803,7 +3804,7 @@ msgstr "Maakt bier."
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
+msgstr "Werkt op werven om nieuwe gebouwen op te richten."
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3

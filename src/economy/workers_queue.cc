@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "economy/workers_queue.h"
 
-
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
@@ -38,10 +37,9 @@ namespace Widelands {
  * Pre-initialize a WorkersQueue
 */
 WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
-                       DescriptionIndex const init_ware,
-                       uint8_t const init_max_size)
-   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER),
-     workers_() {
+                           DescriptionIndex const init_ware,
+                           uint8_t const init_max_size)
+   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER), workers_() {
 	if (index_ != INVALID_INDEX)
 		update();
 }
@@ -65,8 +63,7 @@ void WorkersQueue::cleanup() {
 /**
  * Called when a worker arrives at the owning building.
 */
-void WorkersQueue::entered(DescriptionIndex index,
-						Worker* worker) {
+void WorkersQueue::entered(DescriptionIndex index, Worker* worker) {
 
 	assert(worker != nullptr);
 	assert(get_filled() < max_size_);
@@ -139,7 +136,7 @@ void WorkersQueue::set_filled(Quantity filled) {
 	while (get_filled() > filled) {
 		// Remove worker
 		assert(!workers_.empty());
-		Worker *w = workers_.front();
+		Worker* w = workers_.front();
 		assert(w->get_location(egbase) == &owner_);
 		// Remove from game
 		w->schedule_destroy(*game);
@@ -196,5 +193,4 @@ void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
 		throw GameDataError("workersqueue: %s", e.what());
 	}
 }
-
 }

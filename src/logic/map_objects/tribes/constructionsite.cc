@@ -291,11 +291,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 Called by InputQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(Game& game,
-                                            InputQueue*,
-                                            DescriptionIndex,
-                                            Worker*,
-                                            void* const data) {
+void ConstructionSite::wares_queue_callback(
+   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_)

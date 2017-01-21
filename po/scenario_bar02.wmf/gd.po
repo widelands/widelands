@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 16:10+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -353,7 +353,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
-msgstr "Tha mi air daoine a chur airson coinneamh ri Kalitath san daingean aige. Tha e air an t-seann phrìomh-dhoras dhan chathair-bhaile a bhacadh agus tha e a’ feuchainn ri sèist a chur ri Al’tùnran. Cha leig e le duine beò tighinn a-steach no falbh on bhaile fhad ’s a tha an cearcall aige slàn. Cha d’ fhuair mi freagairt uaithe dha na teachdaireachdan agam fhathast. Ach chan eil sinn a’ call ùine fhad ’s a tha sinn a’ feitheamh. Cumaidh mi orm le àrdachadh nan saighdearan agam is an t-ullachadh airson a’ chogaidh."
+msgstr "Tha mi air daoine a chur airson coinneamh ri Kalitath san dùn aige. Tha e air an t-seann phrìomh-dhoras dhan chathair-bhaile a bhacadh agus tha e a’ feuchainn ri sèist a chur ri Al’tùnran. Cha leig e le duine beò tighinn a-steach no falbh on bhaile fhad ’s a tha an cearcall aige slàn. Cha d’ fhuair mi freagairt uaithe dha na teachdaireachdan agam fhathast. Ach chan eil sinn a’ call ùine fhad ’s a tha sinn a’ feitheamh. Cumaidh mi orm le àrdachadh nan saighdearan agam is an t-ullachadh airson a’ chogaidh."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
 msgid "Your Loyal Companion"
@@ -550,7 +550,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "Tha coltas gu bheil eaconamaidh nam mèinnean againn ag obair mar bu chòir, seo deagh naidheachd mar-thà! Co-dhiù no co-dheth, tha mòran fhireannach is bhoireannach a’ feitheamh san talla againn gus dleastanas a ghabhail os làimh ach an cuidicheadh iad leis an ullachadh airson a’ chogaidh a tha romhainn."
+msgstr "Tha coltas gu bheil eaconamaidh nam mèinnean againn ag obair mar bu chòir, seo deagh naidheachd mar-thà! Co-dhiù no co-dheth, tha mòran fhireannach is bhoireannach a’ feitheamh san talla againn gus dleastanas a ghabhail os làimh ach an cuidicheadh iad na saighdearan leis an ullachadh airson a’ chogaidh a tha romhainn."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322

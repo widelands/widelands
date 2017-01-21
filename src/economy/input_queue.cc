@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,6 @@
 
 namespace Widelands {
 
-
 InputQueue::InputQueue(PlayerImmovable& init_owner,
                        DescriptionIndex const init_index,
                        uint8_t const init_max_size,
@@ -58,7 +57,7 @@ void InputQueue::update() {
 	if (get_filled() < max_fill_) {
 		if (!request_) {
 			request_.reset(new Request(owner_, index_, InputQueue::request_callback, type_));
-			request_->set_exact_match(true); // Required for worker queues, ignored for wares anyway
+			request_->set_exact_match(true);  // Required for worker queues, ignored for wares anyway
 		}
 
 		request_->set_count(max_fill_ - get_filled());
@@ -139,7 +138,7 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			max_fill_ = fr.signed_32();
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
-				request_.reset(new Request (owner_, 0, InputQueue::request_callback, type_));
+				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
 				request_->read(fr, game, mol);
 			} else {
 				request_.reset();
@@ -179,7 +178,6 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 		fw.unsigned_8(0);
 	}
 
-    write_child(fw, game, mos);
+	write_child(fw, game, mos);
 }
-
 }

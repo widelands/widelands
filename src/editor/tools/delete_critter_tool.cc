@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor/tools/delete_bob_tool.h"
+#include "editor/tools/delete_critter_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/field.h"
@@ -27,12 +27,12 @@
 /**
  * Deletes the bob at the given location
 */
-int32_t
-EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
-                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                       EditorInteractive& parent,
-                                       EditorActionArgs* args,
-                                       Widelands::Map* map) {
+int32_t EditorDeleteCritterTool::handle_click_impl(
+   const Widelands::World&,
+   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+   EditorInteractive& parent,
+   EditorActionArgs* args,
+   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	const int32_t radius = args->sel_radius;
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -49,18 +49,18 @@ EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
 	return radius + 2;
 }
 
-int32_t
-EditorDeleteBobTool::handle_undo_impl(const Widelands::World& world,
-                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive& parent,
-                                      EditorActionArgs* args,
-                                      Widelands::Map* map) {
+int32_t EditorDeleteCritterTool::handle_undo_impl(
+   const Widelands::World& world,
+   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+   EditorInteractive& parent,
+   EditorActionArgs* args,
+   Widelands::Map* map) {
 
-	uint32_t ret = parent.tools()->place_bob.handle_undo_impl(world, center, parent, args, map);
+	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(world, center, parent, args, map);
 	args->old_bob_type.clear();
 	return ret;
 }
 
-EditorActionArgs EditorDeleteBobTool::format_args_impl(EditorInteractive& parent) {
+EditorActionArgs EditorDeleteCritterTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 #ifndef WL_ECONOMY_WORKERS_QUEUE_H
 #define WL_ECONOMY_WORKERS_QUEUE_H
 
+#include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
-#include "economy/input_queue.h"
 
 namespace Widelands {
 
@@ -46,11 +46,6 @@ public:
 	~WorkersQueue() override {
 		assert(index_ == INVALID_INDEX);
 	}
-
-	/// Temporary. Do not use.
-	std::vector<Worker*> workers() const {
-		return workers_;
-	}
 #endif
 
 	Quantity get_filled() const override {
@@ -67,7 +62,6 @@ public:
 	void set_max_fill(Quantity q) override;
 
 protected:
-
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
 
@@ -76,7 +70,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-
 }
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

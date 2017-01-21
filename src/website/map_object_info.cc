@@ -265,7 +265,8 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 					fw.write_key_value_string("name", ware.name());
 					fw.close_element();
 					fw.write_key_value_int("amount", input.second);
-					fw.close_brace(true, consumes_counter, productionsite->input_wares().size());  // Input
+					fw.close_brace(
+					   true, consumes_counter, productionsite->input_wares().size());  // Input
 					++consumes_counter;
 				}
 				fw.close_array(1, 5);  // Consumes - we need a comma

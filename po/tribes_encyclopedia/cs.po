@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2016-12-31 21:36+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,6 +113,7 @@ msgid ""
 "blackroot."
 msgstr "Pěstitel rozrazilu potřebuje v průměru %1% na zasetí sklizení otýpky rozrazilu."
 
+#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
@@ -255,7 +256,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Mele rozrazil a kukuřici na drcený rozrazil a kukuřičnou mouku."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -1565,9 +1566,9 @@ msgstr "Uzdravování:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Voják ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
+msgstr[1] "Vojáci ve vojenské budově se uzdravují %d bodů zdraví za sekundu."
+msgstr[2] "Vojáků ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -3360,7 +3361,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr ""
+msgstr "Toto je střední trojzubec. Vyrábí se ve zbrojířství a používají ho zkušení vojáci v kobkách - spolu s jídlem - k výcviku útoku vojáků z úrovně 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
@@ -3528,7 +3529,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Drtí rozrazil na drcený rozrazil a mele kukuřici na kukuřičnou mouku."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
@@ -3607,7 +3608,7 @@ msgstr "Vyrábí zbraně pro vojáky."
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Vyrábí látky pro vojáky, lodě a budovy."
+msgstr "Vyrábí pavoučí látku pro budovy, lodě a vojáky."
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3

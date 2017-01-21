@@ -76,8 +76,8 @@ struct ProductionProgram {
 		 */
 		virtual void building_work_failed(Game&, ProductionSite&, Worker&) const;
 
-		const Groups& consumed_wares() const {
-			return consumed_wares_;
+		const Groups& consumed_wares_workers() const {
+			return consumed_wares_workers_;
 		}
 		const BillOfMaterials& produced_wares() const {
 			return produced_wares_;
@@ -87,7 +87,7 @@ struct ProductionProgram {
 		}
 
 	protected:
-		Groups consumed_wares_;
+		Groups consumed_wares_workers_;
 		BillOfMaterials produced_wares_;
 		BillOfMaterials recruited_workers_;
 
@@ -541,7 +541,7 @@ struct ProductionProgram {
 	size_t size() const;
 	const ProductionProgram::Action& operator[](size_t const idx) const;
 
-	const ProductionProgram::Groups& consumed_wares() const;
+	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
 
@@ -549,7 +549,7 @@ private:
 	std::string name_;
 	std::string descname_;
 	std::vector<std::unique_ptr<Action>> actions_;
-	ProductionProgram::Groups consumed_wares_;
+	ProductionProgram::Groups consumed_wares_workers_;
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };

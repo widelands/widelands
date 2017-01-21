@@ -21,6 +21,7 @@
 
 #include "io/fileread.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -49,11 +50,11 @@ void MapBobPacket::read_bob(FileRead& fr,
 	const std::string name = lookup_table.lookup_critter(read_name);
 	try {
 		const World& world = egbase.world();
-		DescriptionIndex const idx = world.get_bob(name.c_str());
+		DescriptionIndex const idx = world.get_critter(name.c_str());
 		if (idx == INVALID_INDEX)
 			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
 
-		const BobDescr& descr = *world.get_bob_descr(idx);
+		const CritterDescr& descr = *world.get_critter_descr(idx);
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves

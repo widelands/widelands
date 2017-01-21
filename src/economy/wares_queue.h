@@ -20,9 +20,9 @@
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
+#include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
-#include "economy/input_queue.h"
 
 namespace Widelands {
 
@@ -60,7 +60,6 @@ public:
 	void set_filled(Quantity) override;
 
 protected:
-
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
 
