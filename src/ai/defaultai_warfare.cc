@@ -707,9 +707,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		tribe = Tribes::kBarbarians;
 	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire") {
 		tribe = Tribes::kEmpire;
-	} else {
-		throw wexception("AI warning: Unable to calculate strength for player of tribe %s",
-		                 soldiers.at(0)->get_owner()->tribe().name().c_str());
 	}
 
 	float health = 0;
@@ -732,14 +729,12 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 			defense += static_cast<float>(97 - 8 * soldier->get_defense_level()) / 100;
 			evade += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
 			break;
-		case (Tribes::kEmpire):
+		default: // Empire and tribes added by modders
 			health += 130 + 21 * soldier->get_health_level();
 			attack += 14 + 8 * soldier->get_attack_level();
 			defense += static_cast<float>(95 - 8 * soldier->get_defense_level()) / 100;
 			evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 			break;
-		case (Tribes::kNone):
-			NEVER_HERE();
 		}
 
 		final += (attack * health) / (defense * evade);
