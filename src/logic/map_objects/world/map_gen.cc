@@ -309,7 +309,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
 
 			for (size_t jx = 0; jx < category.num_critters(); jx++)
-				if (world.get_bob(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX)
+				if (world.get_critter(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX)
 					throw wexception("unknown critter %s", category.get_critter(jx).c_str());
 		}
 	}

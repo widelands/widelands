@@ -419,7 +419,7 @@ field_flooded_msg = {
       pre_func = function()
          local lake_field = map:get_field(75,80)
          p1:reveal_fields(lake_field:region(10))
-         scroll_smoothly_to(lake_field)
+         scroll_to_field(lake_field)
          sleep(200)
       end,
       body = ostur(

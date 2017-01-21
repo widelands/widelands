@@ -114,7 +114,7 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
-		dst.blit(Vector2f((get_inner_w() - w) / 2., (get_inner_h() - h) / 2.), pic_graphics_);
+		dst.blit(Vector2f((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
 			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(229, 116, 2));

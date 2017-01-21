@@ -1006,6 +1006,8 @@ public:
 	int get_workers(lua_State*);
 	int set_wares(lua_State*);
 	int set_workers(lua_State*);
+	int get_warehouse_policies(lua_State*);
+	int set_warehouse_policies(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
 	int start_expedition(lua_State*);
@@ -1268,8 +1270,6 @@ public:
 	int get___hash(lua_State*);
 	int get_x(lua_State* L);
 	int get_y(lua_State* L);
-	int get_viewpoint_x(lua_State* L);
-	int get_viewpoint_y(lua_State* L);
 	int get_height(lua_State* L);
 	int set_height(lua_State* L);
 	int get_raw_height(lua_State* L);

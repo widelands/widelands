@@ -81,7 +81,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
-     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, this))),
+     m(new InteractiveBaseInternals(new QuickNavigation(this))),
      field_overlay_manager_(new FieldOverlayManager()),
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
@@ -116,7 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		});
 
 	toolbar_.set_layout_toplevel(true);
-	changeview.connect([this](bool) { mainview_move(); });
+	changeview.connect([this] { mainview_move(); });
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -378,7 +378,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 void InteractiveBase::mainview_move() {
 	if (m->minimap.window) {
-		m->mm->set_view(get_view_area());
+		m->mm->set_view(view_area().rect());
 	}
 }
 
@@ -388,7 +388,8 @@ void InteractiveBase::toggle_minimap() {
 		delete m->minimap.window;
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
+		m->mm->warpview.connect(
+		   [this](const Vector2f& map_pixel) { scroll_to_map_pixel(map_pixel, Transition::Smooth); });
 		mainview_move();
 	}
 }
@@ -396,7 +397,8 @@ void InteractiveBase::toggle_minimap() {
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& landmark_view) {
+
+void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
 	m->quicknavigation->set_landmark(key, landmark_view);
 }
 
