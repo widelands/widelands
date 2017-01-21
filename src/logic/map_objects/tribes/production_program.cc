@@ -788,14 +788,14 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
                                           const Tribes& tribes) {
 	try {
 		for (;;) {
-			consumed_wares_.resize(consumed_wares_.size() + 1);
-			parse_ware_type_group(parameters, *consumed_wares_.rbegin(), tribes, descr.input_wares(),
+			consumed_wares_workers_.resize(consumed_wares_workers_.size() + 1);
+			parse_ware_type_group(parameters, *consumed_wares_workers_.rbegin(), tribes, descr.input_wares(),
 			                      descr.input_workers());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
 		}
-		if (consumed_wares_.empty()) {
+		if (consumed_wares_workers_.empty()) {
 			throw GameDataError("expected ware_type1[,ware_type2[,...]][:N] ...");
 		}
 	} catch (const WException& e) {
@@ -809,7 +809,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 	std::vector<uint8_t> consumption_quantities_wares(warequeues.size(), 0);
 	std::vector<uint8_t> consumption_quantities_workers(workerqueues.size(), 0);
 
-	Groups l_groups = consumed_wares_;  //  make a copy for local modification
+	Groups l_groups = consumed_wares_workers_;  //  make a copy for local modification
 
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
@@ -1698,8 +1698,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		}
 
 		const ProductionProgram::Action& action = *actions_.back().get();
-		for (const auto& group : action.consumed_wares()) {
-			consumed_wares_.push_back(group);
+		for (const auto& group : action.consumed_wares_workers()) {
+			consumed_wares_workers_.push_back(group);
 		}
 		// Add produced wares. If the ware already exists, increase the amount
 		for (const auto& ware : action.produced_wares()) {
@@ -1737,8 +1737,8 @@ const ProductionProgram::Action& ProductionProgram::operator[](size_t const idx)
 	return *actions_.at(idx).get();
 }
 
-const ProductionProgram::Groups& ProductionProgram::consumed_wares() const {
-	return consumed_wares_;
+const ProductionProgram::Groups& ProductionProgram::consumed_wares_workers() const {
+	return consumed_wares_workers_;
 }
 const Buildcost& ProductionProgram::produced_wares() const {
 	return produced_wares_;

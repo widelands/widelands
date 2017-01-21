@@ -2043,7 +2043,7 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
-   METHOD(LuaProductionSiteDescription, consumed_wares),
+	METHOD(LuaProductionSiteDescription, consumed_wares_workers),
    METHOD(LuaProductionSiteDescription, produced_wares),
    METHOD(LuaProductionSiteDescription, recruited_workers),
    {nullptr, nullptr},
@@ -2155,7 +2155,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: consumed_wares
+	.. attribute:: consumed_wares_workers
 
 		:arg program_name: the name of the production program that we want to get the consumed wares for
 		:type tribename: :class:`string`
@@ -2163,14 +2163,14 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
 			  Multiple entries in {ware name} are alternatives (OR logic)).
 */
-int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
+int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
 	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const ProductionProgram& program = *programs.at(program_name);
 		lua_newtable(L);
 		int counter = 0;
-		for (const auto& group : program.consumed_wares()) {
+		for (const auto& group : program.consumed_wares_workers()) {
 			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
 			for (const auto& entry : group.first) {

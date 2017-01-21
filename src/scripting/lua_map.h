@@ -370,7 +370,7 @@ public:
 	 * Lua methods
 	 */
 
-	int consumed_wares(lua_State*);
+	int consumed_wares_workers(lua_State*);
 	int produced_wares(lua_State*);
 	int recruited_workers(lua_State*);
 
