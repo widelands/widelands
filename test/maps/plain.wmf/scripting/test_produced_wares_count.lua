@@ -19,7 +19,7 @@ run(function()
    while (starting_count == player1:get_produced_wares_count('log')) do
      sleep(1000)
    end
-   
+
    -- some logs produced by now
    assert(player1:get_produced_wares_count('log') > 0)
 

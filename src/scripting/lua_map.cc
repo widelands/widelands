@@ -235,7 +235,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 	} else {
 		// or array of worker:quantity
 		if (parse_output == RequestedWareWorker::kAll) {  // 'all' was required, otherwise we return
-		                                                  // only asked workers
+			                                               // only asked workers
 			workers_list.clear();
 			for (const WaresWorkersMap::value_type& v : valid_workers) {
 				workers_list.push_back(v.first);

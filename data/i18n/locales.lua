@@ -130,7 +130,7 @@ return {
 
    ga = {
       name = "Gaeilge",
-      sort_name = "ga",
+      sort_name = "Gaeilge",
       font = "default"
    },
 

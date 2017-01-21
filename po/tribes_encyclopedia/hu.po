@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2017-01-07 10:07+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:53+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,7 +114,6 @@ msgid ""
 "blackroot."
 msgstr "A feketegyökér termesztőnek átlagosan %1% szükséges, hogy elvessen és leszedjen egy kötegnyi feketegyökeret."
 
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
@@ -1977,124 +1976,114 @@ msgstr "(Ctrl +) 0"
 msgid "Reset zoom"
 msgstr "Közelítés visszaállítása"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgid "Go to the previous location"
-msgstr "Ugorj az előző helyszínre"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:69
-msgid "Go to the next location"
-msgstr "Ugorj a következő helyszínre"
-
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr "Képernyőkép készítése"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr "Azonnali kilépés a játékból"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Megjeleníti a hibakereső konzolt (csak hibakeresési fordítás esetén)"
 
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Az üzenetablakban a következő gyorsbillentyűk használhatóak:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show all messages"
 msgstr "Minden üzenet megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show geologists’ messages only"
 msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show economy messages only"
 msgstr "Csak a gazdasági üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show seafaring messages only"
 msgstr "Csak a hajózási üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show warfare messages only"
 msgstr "Csak a hadi üzenetek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show scenario messages only"
 msgstr "Csak a küldetés üzeneteinek megjelenítése"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Jump to the location corresponding to the current message"
 msgstr "Ugrás arra a helyre, amelyről a kiválasztott üzenet szól"
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Archive/Restore the current message"
 msgstr "A jelenlegi üzenetet archiválása/helyreállítása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Törlés"

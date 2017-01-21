@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -453,18 +453,18 @@ msgid "Descr: %s"
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #, c-format
 msgid "Current: %s …"
 msgstr ""
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:194
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:197
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:177
 #, c-format
 msgid "Current: %s"
@@ -531,7 +531,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
-#: ../../src/scripting/lua_game.cc:431 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
 #: ../../src/ui_fsmenu/helpwindow.cc:52
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
 #: ../../src/ui_fsmenu/options.cc:132
@@ -870,7 +870,9 @@ msgstr ""
 msgid "Random height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:125
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
+#: ../../src/wui/minimap.cc:125
 msgid "Terrain"
 msgstr ""
 
@@ -880,7 +882,7 @@ msgid "Immovables"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:63
-#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:42
+#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
 msgid "Animals"
 msgstr ""
 
@@ -929,16 +931,12 @@ msgstr ""
 msgid "%1%: %2%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-msgid "Terrain Select"
-msgstr ""
-
 #: ../../src/editor/ui_menus/toolsize_menu.cc:80
 #, c-format
 msgid "Current Size: %u"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:234
+#: ../../src/logic/editor_game_base.cc:235
 msgid "Loading graphics"
 msgstr ""
 
@@ -1988,7 +1986,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1046 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr ""
 

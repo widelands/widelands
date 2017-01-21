@@ -87,7 +87,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 					uint32_t value = fr.unsigned_32();
 					if (value < 0xffffffff) {
 						if (upcast(Flag const, flag, map[value].get_immovable())) {
-							assert(flag->get_economy()->owner().player_number() == player->player_number());
+							assert(flag->get_economy()->owner().player_number() ==
+							       player->player_number());
 							EconomyDataPacket d(flag->get_economy());
 							d.read(fr);
 						} else {
@@ -101,7 +102,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 								// We are interested only in current player's ships
 								if (ship->get_owner() == player) {
 									assert(ship->get_economy());
-									assert(ship->get_economy()->owner().player_number() == player->player_number());
+									assert(ship->get_economy()->owner().player_number() ==
+									       player->player_number());
 									EconomyDataPacket d(ship->get_economy());
 									d.read(fr);
 									read_this_economy = true;
