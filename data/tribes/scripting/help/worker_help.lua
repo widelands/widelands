@@ -72,7 +72,7 @@ function worker_help_producers_string(tribe, worker_description)
 
             -- Now collect the consumed wares for each filtered program and print the program info
             for j, program_name in ipairs(producing_programs) do
-               result = result .. help_consumed_wares(building, program_name)
+               result = result .. help_consumed_wares_workers(tribe, building, program_name)
                if (recruited_workers_counters[program_name] > 0) then
                   result = result
                      -- TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite

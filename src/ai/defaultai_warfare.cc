@@ -490,10 +490,10 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// now modifying max_fill of armors and weapons
 		for (std::string pattern : armors_and_weapons) {
 
-			if (tribe_->get_ware_descr(warequeues1[i]->get_ware())->name().find(pattern) !=
+			if (tribe_->get_ware_descr(warequeues1[i]->get_index())->name().find(pattern) !=
 			    std::string::npos) {
 				if (warequeues1[i]->get_max_fill() > 1) {
-					game().send_player_set_ware_max_fill(*ts, warequeues1[i]->get_ware(), 1);
+					game().send_player_set_input_max_fill(*ts, warequeues1[i]->get_index(), wwWARE, 1);
 					continue;
 				}
 			}
@@ -521,7 +521,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
 		nr_warequeues = warequeues2.size();
 		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_ware()) > 0) {
+			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) > 0) {
 				filled += warequeues2[i]->get_filled();
 			}
 		}
@@ -531,7 +531,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		// checking non subsitutes
 		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_ware()) == 0) {
+			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) == 0) {
 				const uint32_t required_amount =
 				   (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
 				if (warequeues2[i]->get_filled() < required_amount) {

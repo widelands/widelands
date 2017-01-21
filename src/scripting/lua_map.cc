@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
@@ -152,8 +153,107 @@ using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
 using PlrInfluence = std::pair<Widelands::PlayerNumber, Widelands::MilitaryInfluence>;
 using WaresSet = std::set<Widelands::DescriptionIndex>;
+using InputSet = std::set<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier*>;
+
+// Versions of the above macros which accept wares and workers
+InputSet parse_get_input_arguments(lua_State* L, const TribeDescr& tribe, bool* return_number) {
+	/* takes either "all", a name or an array of names */
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2)
+		report_error(L, "Wrong number of arguments to get_inputs!");
+	*return_number = false;
+	InputSet rv;
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			for (const DescriptionIndex& i : tribe.wares()) {
+				rv.insert(std::make_pair(i, wwWARE));
+			}
+			for (const DescriptionIndex& i : tribe.workers()) {
+				rv.insert(std::make_pair(i, wwWORKER));
+			}
+		} else {
+			/* Only one item requested */
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(index, wwWARE));
+				*return_number = true;
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(index, wwWORKER));
+					*return_number = true;
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+		}
+	} else {
+		/* array of names */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -1);
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(index, wwWARE));
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(index, wwWORKER));
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+			lua_pop(L, 1);
+		}
+	}
+	return rv;
+}
+
+InputMap parse_set_input_arguments(lua_State* L, const TribeDescr& tribe) {
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2 && nargs != 3)
+		report_error(L, "Wrong number of arguments to set_inputs!");
+	InputMap rv;
+	if (nargs == 3) {
+		/* name amount */
+		std::string what = luaL_checkstring(L, 2);
+		DescriptionIndex index = tribe.ware_index(what);
+		if (tribe.has_ware(index)) {
+			rv.insert(std::make_pair(std::make_pair(index, wwWARE), luaL_checkuint32(L, 3)));
+		} else {
+			index = tribe.worker_index(what);
+			if (tribe.has_worker(index)) {
+				rv.insert(std::make_pair(std::make_pair(index, wwWORKER), luaL_checkuint32(L, 3)));
+			} else {
+				report_error(L, "Invalid input: <%s>", what.c_str());
+			}
+		}
+	} else {
+		/* array of (name, count) */
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			std::string what = luaL_checkstring(L, -2);
+			DescriptionIndex index = tribe.ware_index(what);
+			if (tribe.has_ware(index)) {
+				rv.insert(std::make_pair(std::make_pair(index, wwWARE), luaL_checkuint32(L, -1)));
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					rv.insert(std::make_pair(std::make_pair(index, wwWORKER), luaL_checkuint32(L, -1)));
+				} else {
+					report_error(L, "Invalid input: <%s>", what.c_str());
+				}
+			}
+			lua_pop(L, 1);
+		}
+	}
+	return rv;
+}
 
 WaresWorkersMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 	WaresWorkersMap rv;
@@ -262,7 +362,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	const TribeDescr& tribe = pi->owner().tribe();
 
 	// setpoints is map of index:quantity
-	WaresWorkersMap setpoints;
+	InputMap setpoints;
 	parse_wares_workers_counted(L, tribe, &setpoints, false);
 
 	// c_workers is actual statistics, the map index:quantity
@@ -273,18 +373,19 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 			c_workers.insert(WorkerAmount(i, 1));
 		else
 			c_workers[i] += 1;
-		if (!setpoints.count(i))
-			setpoints.insert(WorkerAmount(i, 0));
+		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER)))
+			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
 	}
 
 	// The idea is to change as little as possible
-	for (const WaresWorkersMap::value_type& sp : setpoints) {
-		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
-		if (!valid_workers.count(sp.first))
+	for (const auto& sp : setpoints) {
+		const Widelands::DescriptionIndex& index = sp.first.first;
+		const WorkerDescr* wdes = tribe.get_worker_descr(index);
+		if (sp.second != 0 && !valid_workers.count(index))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
 		Widelands::Quantity cur = 0;
-		WaresWorkersMap::iterator i = c_workers.find(sp.first);
+		WaresWorkersMap::iterator i = c_workers.find(index);
 		if (i != c_workers.end())
 			cur = i->second;
 
@@ -292,7 +393,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 		if (d < 0) {
 			while (d) {
 				for (const Worker* w : pi->get_workers()) {
-					if (tribe.worker_index(w->descr().name()) == sp.first) {
+					if (tribe.worker_index(w->descr().name()) == index) {
 						const_cast<Worker*>(w)->remove(egbase);
 						++d;
 						break;
@@ -668,7 +769,7 @@ RequestedWareWorker parse_wares_workers_list(lua_State* L,
 // Very similar to above function, but expects numbers for every received ware/worker
 RequestedWareWorker parse_wares_workers_counted(lua_State* L,
                                                 const TribeDescr& tribe,
-                                                WaresWorkersMap* ware_workers_list,
+																InputMap* ware_workers_list,
                                                 bool is_ware) {
 	RequestedWareWorker result = RequestedWareWorker::kUndefined;
 	int32_t nargs = lua_gettop(L);
@@ -685,13 +786,13 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 				report_error(L, "Illegal ware %s", luaL_checkstring(L, 2));
 			}
 			ware_workers_list->insert(
-			   WareAmount(tribe.ware_index(luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));
+				std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE), luaL_checkuint32(L, 3)));
 		} else {
 			if (tribe.worker_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
 				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
 			}
 			ware_workers_list->insert(
-			   WorkerAmount(tribe.worker_index(luaL_checkstring(L, 2)), luaL_checkuint32(L, 3)));
+				std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, 3)));
 		}
 	} else {
 		result = RequestedWareWorker::kList;
@@ -711,10 +812,10 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 			if (is_ware) {
 				ware_workers_list->insert(
-				   WareAmount(tribe.ware_index(luaL_checkstring(L, -2)), luaL_checkuint32(L, -1)));
+					std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)), Widelands::WareWorker::wwWARE), luaL_checkuint32(L, -1)));
 			} else {
 				ware_workers_list->insert(
-				   WorkerAmount(tribe.worker_index(luaL_checkstring(L, -2)), luaL_checkuint32(L, -1)));
+					std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)), Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, -1)));
 			}
 			lua_pop(L, 1);
 		}
@@ -742,10 +843,9 @@ HasWares
 
 .. class:: HasWares
 
-   HasWares is an interface that all :class:`PlayerImmovable` objects
+   HasWares is an interface that most :class:`PlayerImmovable` objects
    that can contain wares implement. This is at the time of this writing
-   :class:`~wl.map.Flag`, :class:`~wl.map.Warehouse` and
-   :class:`~wl.map.ProductionSite`.
+   :class:`~wl.map.Flag` and :class:`~wl.map.Warehouse`.
 */
 
 /* RST
@@ -762,7 +862,7 @@ HasWares
       * a ware name.
          In this case a single integer is returned. No check is made
          if this ware makes sense for this location, you can for example ask a
-         :const:`lumberjacks_hut` for the number of :const:`raw_stone` he has
+         :const:`lumberjacks_hut` for the number of :const:`granite` he has
          and he will return 0.
       * an :class:`array` of ware names.
          In this case a :class:`table` of
@@ -776,7 +876,7 @@ HasWares
    .. method:: set_wares(which[, amount])
 
       Sets the wares available in this location. Either takes two arguments,
-      a ware name and an amount to set it too. Or it takes a table of
+      a ware name and an amount to set it to. Or it takes a table of
       (ware name, amount) pairs. Wares are created and added to an economy out
       of thin air.
 
@@ -803,14 +903,85 @@ HasWares
 */
 
 /* RST
+HasInputs
+--------
+
+.. class:: HasInputs
+
+   HasInputs is an interface that some :class:`PlayerImmovable` objects
+   implement. At the time of this writing these are
+   :class:`~wl.map.ProductionSite` and :class:`~wl.map.TrainingSite`.
+   This interface is similar to :class:`HasWares` but additionally allows
+   to set workers as inputs. These workers are consumed by the production
+   or trainings programm.
+*/
+
+/* RST
+   .. method:: get_inputs(which)
+
+      Gets the number of wares and workers that currently reside here
+      for consumption.
+
+      :arg which:  can be either of
+
+      * the string :const:`all`.
+           In this case the function will return a
+           :class:`table` of (ware/worker name,amount) pairs that gives
+           information about all ware information available for this object.
+      * a ware or worker name.
+           In this case a single integer is returned. No check is made
+           if this ware/worker makes sense for this location, you can for example ask a
+           :const:`lumberjacks_hut` for the number of :const:`granite` he has
+           and he will return 0.
+      * an :class:`array` of ware and worker names.
+           In this case a :class:`table` of
+           (ware/worker name,amount) pairs is returned where only the requested
+           wares/workers are listed. All other entries are :const:`nil`.
+
+      :returns: :class:`integer` or :class:`table`
+*/
+
+/* RST
+   .. method:: set_inputs(which[, amount])
+
+      Sets the wares/workers available in this location which will
+      be consumed by the production/training programm. Either takes two arguments,
+      a ware/worker name and an amount to set it to. Or it takes a table of
+      (ware/worker name, amount) pairs. Wares are created and added to an
+      economy out of thin air.
+
+      :arg which: name of ware/worker or (ware/worker name, amount) table
+      :type which: :class:`string` or :class:`table`
+      :arg amount: this many units will be available after the call
+      :type amount: :class:`integer`
+*/
+
+/* RST
+   .. attribute:: valid_inputs
+
+      (RO) A :class:`table` of (ware/worker name, count) which describes how
+      many wares/workers can be stored here for consumption. For example for a
+      :class:`~wl.map.ProductionSite` this is the information what wares/workers
+      and can be stored in which amount as inputs.
+
+      You can use this to quickly fill a building:
+
+      .. code-block:: lua
+
+         if b.valid_inputs then b:set_inputs(b.valid_inputs) end
+*/
+
+/* RST
 HasWorkers
 ----------
 
 .. class:: HasWorkers
 
-   Analogon to :class:`HasWares`, but for Workers. Supported at the time of
-   this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse` and
-   :class:`~wl.map.ProductionSite`.
+   Analogon to :class:`HasWares`, but for Workers. Supported at the time
+   of this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse`
+   and :class:`~wl.map.ProductionSite`. In the case of ProductionSites,
+   these methods allow access to the workers which do the work instead of
+   workers which are consumed as accessed by the methods of :class:`HasInputs`.
 */
 
 /* RST
@@ -1930,7 +2101,7 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
-   METHOD(LuaProductionSiteDescription, consumed_wares),
+	METHOD(LuaProductionSiteDescription, consumed_wares_workers),
    METHOD(LuaProductionSiteDescription, produced_wares),
    METHOD(LuaProductionSiteDescription, recruited_workers),
    {nullptr, nullptr},
@@ -1958,7 +2129,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const auto& input_ware : get()->inputs()) {
+	for (const auto& input_ware : get()->input_wares()) {
 		lua_pushint32(L, index++);
 		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
@@ -2042,7 +2213,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 }
 
 /* RST
-	.. attribute:: consumed_wares
+	.. attribute:: consumed_wares_workers
 
 		:arg program_name: the name of the production program that we want to get the consumed wares for
 		:type tribename: :class:`string`
@@ -2050,18 +2221,22 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
 			  Multiple entries in {ware name} are alternatives (OR logic)).
 */
-int LuaProductionSiteDescription::consumed_wares(lua_State* L) {
+int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
 	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const ProductionProgram& program = *programs.at(program_name);
 		lua_newtable(L);
 		int counter = 0;
-		for (const auto& group : program.consumed_wares()) {
+		for (const auto& group : program.consumed_wares_workers()) {
 			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
-			for (const DescriptionIndex& ware_index : group.first) {
-				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
+			for (const auto& entry : group.first) {
+				const DescriptionIndex& index = entry.first;
+				if (entry.second == wwWARE)
+					lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(index)->name());
+				else
+					lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(index)->name());
 				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
 			}
@@ -2166,7 +2341,7 @@ TrainingSiteDescription
 	A static description of a tribe's trainingsite, so it can be used in help files
 	without having to access an actual building on the map.
 	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-	See also class BuildingDescription and class MapObjectDescription for more properties.
+	See also :class:`ProductionSiteDescription` and :class:`MapObjectDescription` for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -3565,7 +3740,7 @@ int LuaFlag::set_wares(lua_State* L) {
 	Flag* f = get(L, egbase);
 	const Tribes& tribes = egbase.tribes();
 
-	WaresWorkersMap setpoints;
+	InputMap setpoints;
 	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
 	WaresWorkersMap c_wares = count_wares_on_flag_(*f, tribes);
 
@@ -3573,15 +3748,16 @@ int LuaFlag::set_wares(lua_State* L) {
 
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
-		if (!setpoints.count(ware.first))
-			setpoints.insert(Widelands::WareAmount(ware.first, 0));
+		if (!setpoints.count(std::make_pair(ware.first, Widelands::WareWorker::wwWARE)))
+			setpoints.insert(std::make_pair(std::make_pair(ware.first, Widelands::WareWorker::wwWARE), 0));
 		nwares += ware.second;
 	}
 
 	// The idea is to change as little as possible on this flag
 	for (const auto& sp : setpoints) {
 		uint32_t cur = 0;
-		WaresWorkersMap::iterator i = c_wares.find(sp.first);
+		const Widelands::DescriptionIndex& index = sp.first.first;
+		WaresWorkersMap::iterator i = c_wares.find(index);
 		if (i != c_wares.end())
 			cur = i->second;
 
@@ -3594,7 +3770,7 @@ int LuaFlag::set_wares(lua_State* L) {
 		if (d < 0) {
 			while (d) {
 				for (const WareInstance* ware : f->get_wares()) {
-					if (tribes.ware_index(ware->descr().name()) == sp.first) {
+					if (tribes.ware_index(ware->descr().name()) == index) {
 						const_cast<WareInstance*>(ware)->remove(egbase);
 						++d;
 						break;
@@ -3603,9 +3779,9 @@ int LuaFlag::set_wares(lua_State* L) {
 			}
 		} else if (d > 0) {
 			// add wares
-			const WareDescr& wd = *tribes.get_ware_descr(sp.first);
+			const WareDescr& wd = *tribes.get_ware_descr(index);
 			for (int32_t j = 0; j < d; j++) {
-				WareInstance& ware = *new WareInstance(sp.first, &wd);
+				WareInstance& ware = *new WareInstance(index, &wd);
 				ware.init(egbase);
 				f->add_ware(egbase, ware);
 			}
@@ -3613,8 +3789,8 @@ int LuaFlag::set_wares(lua_State* L) {
 #ifndef NDEBUG
 		if (sp.second > 0) {
 			c_wares = count_wares_on_flag_(*f, tribes);
-			assert(c_wares.count(sp.first) == 1);
-			assert(c_wares[sp.first] = sp.second);
+			assert(c_wares.count(index) == 1);
+			assert(c_wares[index] = sp.second);
 		}
 #endif
 	}
@@ -4059,15 +4235,17 @@ int LuaWarehouse::get_wares(lua_State* L) {
 int LuaWarehouse::set_wares(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
 	const TribeDescr& tribe = wh->owner().tribe();
-	WaresWorkersMap setpoints;
+	InputMap setpoints;
 	parse_wares_workers_counted(L, tribe, &setpoints, true);
 
-	for (WaresWorkersMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) {
-		int32_t d = i->second - wh->get_wares().stock(i->first);
-		if (d < 0)
-			wh->remove_wares(i->first, -d);
-		else if (d > 0)
-			wh->insert_wares(i->first, d);
+	for (const auto& ware : setpoints) {
+		const Widelands::DescriptionIndex& index = ware.first.first;
+		int32_t d = ware.second - wh->get_wares().stock(index);
+		if (d < 0) {
+			wh->remove_wares(index, -d);
+		} else if (d > 0) {
+			wh->insert_wares(index, d);
+		}
 	}
 	return 0;
 }
@@ -4075,15 +4253,17 @@ int LuaWarehouse::set_wares(lua_State* L) {
 int LuaWarehouse::set_workers(lua_State* L) {
 	Warehouse* wh = get(L, get_egbase(L));
 	const TribeDescr& tribe = wh->owner().tribe();
-	WaresWorkersMap setpoints;
+	InputMap setpoints;
 	parse_wares_workers_counted(L, tribe, &setpoints, false);
 
-	for (WaresWorkersMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) {
-		int32_t d = i->second - wh->get_workers().stock(i->first);
-		if (d < 0)
-			wh->remove_workers(i->first, -d);
-		else if (d > 0)
-			wh->insert_workers(i->first, d);
+	for (const auto& worker : setpoints) {
+		const Widelands::DescriptionIndex& index = worker.first.first;
+		int32_t d = worker.second - wh->get_workers().stock(index);
+		if (d < 0) {
+			wh->remove_workers(index, -d);
+		} else if (d > 0) {
+			wh->insert_workers(index, d);
+		}
 	}
 	return 0;
 }
@@ -4174,21 +4354,21 @@ ProductionSite
 
 .. class:: ProductionSite
 
-   Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
+   Child of: :class:`Building`, :class:`HasInputs`, :class:`HasWorkers`
 
    Every building that produces anything.
 */
 const char LuaProductionSite::className[] = "ProductionSite";
 const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
-   METHOD(LuaProductionSite, set_wares),
-   METHOD(LuaProductionSite, get_wares),
+   METHOD(LuaProductionSite, set_inputs),
+   METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
-   PROP_RO(LuaProductionSite, valid_wares),
+   PROP_RO(LuaProductionSite, valid_inputs),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4198,15 +4378,21 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
  ==========================================================
  */
 // documented in parent class
-int LuaProductionSite::get_valid_wares(lua_State* L) {
+int LuaProductionSite::get_valid_inputs(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	ProductionSite* ps = get(L, egbase);
 
 	lua_newtable(L);
-	for (const auto& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().input_wares()) {
 		const WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_ware.second);
+		lua_rawset(L, -3);
+	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		const WorkerDescr* descr = egbase.tribes().get_worker_descr(input_worker.first);
+		lua_pushstring(L, descr->name());
+		lua_pushuint32(L, input_worker.second);
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -4223,76 +4409,95 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
-
 // documented in parent class
-int LuaProductionSite::set_wares(lua_State* L) {
+int LuaProductionSite::set_inputs(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
-	WaresWorkersMap setpoints;
+	InputMap setpoints = parse_set_input_arguments(L, tribe);
 
 	parse_wares_workers_counted(L, tribe, &setpoints, true);
 
-	WaresSet valid_wares;
-	for (const auto& input_ware : ps->descr().inputs()) {
-		valid_wares.insert(input_ware.first);
+	InputSet valid_inputs;
+	for (const auto& input_ware : ps->descr().input_wares()) {
+		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
+	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		valid_inputs.insert(std::make_pair(input_worker.first, wwWORKER));
 	}
 	for (const auto& sp : setpoints) {
-		if (!valid_wares.count(sp.first)) {
-			report_error(L, "<%s> can't be stored in this building: %s!",
-			             tribe.get_ware_descr(sp.first)->name().c_str(), ps->descr().name().c_str());
+		if (!valid_inputs.count(sp.first)) {
+			if (sp.first.second == wwWARE) {
+				report_error(L, "<%s> can't be stored in this building: %s!",
+				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
+				             ps->descr().name().c_str());
+			} else {
+				report_error(L, "<%s> can't be stored in this building: %s!",
+				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
+				             ps->descr().name().c_str());
+			}
 		}
-		WaresQueue& wq = ps->waresqueue(sp.first);
-		if (sp.second > wq.get_max_size()) {
-			report_error(
-			   L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+		if (sp.first.second == wwWARE) {
+			WaresQueue& wq = ps->waresqueue(sp.first.first);
+			if (sp.second > wq.get_max_size()) {
+				report_error(
+				   L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+			}
+			wq.set_filled(sp.second);
+		} else {
+			assert(sp.first.second == wwWORKER);
+			WorkersQueue& wq = ps->workersqueue(sp.first.first);
+			if (sp.second > wq.get_max_size()) {
+				report_error(
+				   L, "Not enough space for %u workers, only for %i", sp.second, wq.get_max_size());
+			}
+			wq.set_filled(sp.second);
 		}
-		wq.set_filled(sp.second);
 	}
 
 	return 0;
 }
 
 // documented in parent class
-int LuaProductionSite::get_wares(lua_State* L) {
+int LuaProductionSite::get_inputs(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
 
-	// Parsing the arguments, result will be single index or list of indexes
-	DescriptionIndex ware_index = INVALID_INDEX;
-	std::vector<DescriptionIndex> ware_list;
-	RequestedWareWorker parse_output =
-	   parse_wares_workers_list(L, tribe, &ware_index, &ware_list, true);
+	bool return_number = false;
+	InputSet input_set = parse_get_input_arguments(L, tribe, &return_number);
 
-	// Here we identify wares that are allowed as input for the site
-	WaresSet valid_wares;
-	for (const auto& input_ware : ps->descr().inputs()) {
-		valid_wares.insert(input_ware.first);
+	InputSet valid_inputs;
+	for (const auto& input_ware : ps->descr().input_wares()) {
+		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
+	}
+	for (const auto& input_worker : ps->descr().input_workers()) {
+		valid_inputs.insert(std::make_pair(input_worker.first, wwWORKER));
 	}
 
-	// This indicates that all wares are needed, but only some of them are allowed
-	if (parse_output == RequestedWareWorker::kAll) {
-		ware_list.clear();
-		for (auto item : valid_wares) {
-			ware_list.push_back(item);
-		}
-	}
+	if (input_set.size() == tribe.get_nrwares() + tribe.get_nrworkers())  // Want all returned
+		input_set = valid_inputs;
 
-	// We return single integer for single ware
-	if (ware_index != INVALID_INDEX) {
-		uint32_t cnt = 0;
-		if (valid_wares.count(ware_index)) {
-			cnt = ps->waresqueue(ware_index).get_filled();
-		}
-		lua_pushuint32(L, cnt);
-	} else {  // we return table
-		assert(!ware_list.empty());
+	if (!return_number)
 		lua_newtable(L);
-		for (const Widelands::DescriptionIndex& ware : ware_list) {
-			uint32_t cnt = 0;
-			if (valid_wares.count(ware)) {
-				cnt = ps->waresqueue(ware).get_filled();
+
+	for (const auto& input : input_set) {
+		uint32_t cnt = 0;
+		if (valid_inputs.count(input)) {
+			if (input.second == wwWARE) {
+				cnt = ps->waresqueue(input.first).get_filled();
+			} else {
+				cnt = ps->workersqueue(input.first).get_filled();
 			}
-			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
+		}
+
+		if (return_number) {  // this is the only thing the customer wants to know
+			lua_pushuint32(L, cnt);
+			break;
+		} else {
+			if (input.second == wwWARE) {
+				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
+			} else {
+				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
+			}
 			lua_pushuint32(L, cnt);
 			lua_settable(L, -3);
 		}
@@ -4385,7 +4590,7 @@ TrainingSite
 
 .. class:: TrainingSite
 
-   Child of: :class:`Building`, :class:`HasSoldiers`
+   Child of: :class:`ProductionSite`, :class:`HasSoldiers`
 
    Miltary Buildings
 */

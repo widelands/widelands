@@ -84,7 +84,7 @@ private:
 
 	// Handles arriving workers and wares.
 	static void worker_callback(Game&, Request& r, DescriptionIndex, Worker*, PlayerImmovable&);
-	static void ware_callback(Game& game, WaresQueue*, DescriptionIndex, void* const data);
+	static void ware_callback(Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data);
 	void handle_worker_callback(Game&, Request&, Worker*);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.

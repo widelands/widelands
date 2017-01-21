@@ -84,7 +84,7 @@ return {
       })
 
       place_building_in_region(player, "atlanteans_toolsmithy", sf:region(11), {
-         wares = {
+         inputs = {
             iron = 6,
             log = 6,
             spidercloth = 4
@@ -92,13 +92,13 @@ return {
       })
 
       place_building_in_region(player, "atlanteans_sawmill", sf:region(11), {
-         wares = {
+         inputs = {
             log = 8
          }
       })
 
       place_building_in_region(player, "atlanteans_hunters_house", sf:region(11), {
-         wares = {}
+         inputs = {}
       })
 
       place_building_in_region(player, "atlanteans_tower", sf:region(13), {
