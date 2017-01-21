@@ -1354,7 +1354,7 @@ public:
 };
 
 using InputMap =
-	std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
+   std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
 
 int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
 int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo);
@@ -1364,9 +1364,9 @@ RequestedWareWorker parse_wares_workers_list(lua_State*,
                                              std::vector<Widelands::DescriptionIndex>*,
                                              bool is_ware);
 RequestedWareWorker parse_wares_workers_counted(lua_State*,
-																const Widelands::TribeDescr&,
-																LuaMaps::InputMap*,
-																bool is_ware);
+                                                const Widelands::TribeDescr&,
+                                                LuaMaps::InputMap*,
+                                                bool is_ware);
 void luaopen_wlmap(lua_State*);
 
 }  // namespace LuaMap

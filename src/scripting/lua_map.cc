@@ -769,7 +769,7 @@ RequestedWareWorker parse_wares_workers_list(lua_State* L,
 // Very similar to above function, but expects numbers for every received ware/worker
 RequestedWareWorker parse_wares_workers_counted(lua_State* L,
                                                 const TribeDescr& tribe,
-																InputMap* ware_workers_list,
+                                                InputMap* ware_workers_list,
                                                 bool is_ware) {
 	RequestedWareWorker result = RequestedWareWorker::kUndefined;
 	int32_t nargs = lua_gettop(L);
@@ -785,14 +785,17 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 			if (tribe.ware_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
 				report_error(L, "Illegal ware %s", luaL_checkstring(L, 2));
 			}
-			ware_workers_list->insert(
-				std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE), luaL_checkuint32(L, 3)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE),
+			   luaL_checkuint32(L, 3)));
 		} else {
 			if (tribe.worker_index(luaL_checkstring(L, 2)) == INVALID_INDEX) {
 				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
 			}
 			ware_workers_list->insert(
-				std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, 3)));
+			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, 2)),
+			                                 Widelands::WareWorker::wwWORKER),
+			                  luaL_checkuint32(L, 3)));
 		}
 	} else {
 		result = RequestedWareWorker::kList;
@@ -812,10 +815,14 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 			if (is_ware) {
 				ware_workers_list->insert(
-					std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)), Widelands::WareWorker::wwWARE), luaL_checkuint32(L, -1)));
+				   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
+				                                 Widelands::WareWorker::wwWARE),
+				                  luaL_checkuint32(L, -1)));
 			} else {
 				ware_workers_list->insert(
-					std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)), Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, -1)));
+				   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
+				                                 Widelands::WareWorker::wwWORKER),
+				                  luaL_checkuint32(L, -1)));
 			}
 			lua_pop(L, 1);
 		}
@@ -2101,7 +2108,7 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
-	METHOD(LuaProductionSiteDescription, consumed_wares_workers),
+   METHOD(LuaProductionSiteDescription, consumed_wares_workers),
    METHOD(LuaProductionSiteDescription, produced_wares),
    METHOD(LuaProductionSiteDescription, recruited_workers),
    {nullptr, nullptr},
@@ -3749,7 +3756,8 @@ int LuaFlag::set_wares(lua_State* L) {
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(std::make_pair(ware.first, Widelands::WareWorker::wwWARE)))
-			setpoints.insert(std::make_pair(std::make_pair(ware.first, Widelands::WareWorker::wwWARE), 0));
+			setpoints.insert(
+			   std::make_pair(std::make_pair(ware.first, Widelands::WareWorker::wwWARE), 0));
 		nwares += ware.second;
 	}
 
