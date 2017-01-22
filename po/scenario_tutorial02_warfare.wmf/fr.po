@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 11:00+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -52,11 +52,11 @@ msgstr "Capacités des soldats"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Un nouveau soldat est créé de la même façon qu'un ouvrier : lorsqu'un bâtiment militaire requiert un soldat, un porteur récupère les armes et armures requises dans un entrepôt (ou votre quartier général) puis se rend dans votre nouveau bâtiment par la route. Le soldat Barbare de base n'utilise pas d'armure, il n'a besoin que d'une hache."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -277,7 +277,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr ""
+msgstr "Vous devriez aussi garder à l'esprit que chacune des trois tribus de Widelans on leurs manières de s'entrainer, alors les bâtiments et marchandises sont différents. Aussi, les niveaux d'habiletés ne peuvent êtres comparés: un soldat impérial possède une attaque de base de %1% au niveau 0, alors qu'un soldat barbare du même niveau aura une attaque de base de seulement %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132

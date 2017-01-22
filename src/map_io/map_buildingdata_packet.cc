@@ -30,6 +30,7 @@
 #include "economy/request.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -61,7 +62,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -547,7 +548,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
                                                 MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionProductionsite) {
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
 			const BillOfMaterials& working_positions = pr_descr.working_positions();
@@ -673,15 +674,30 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.program_time_ = fr.signed_32();
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.input_queues_.size());
+			assert(!productionsite.input_ware_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
-				if (!game.tribes().ware_exists(wq->get_ware())) {
+				if (!game.tribes().ware_exists(wq->get_index())) {
 					delete wq;
 				} else {
-					productionsite.input_queues_.push_back(wq);
+					productionsite.input_ware_queues_.push_back(wq);
+				}
+			}
+
+			if (packet_version > 5) {
+				nr_queues = fr.unsigned_16();
+				assert(!productionsite.input_worker_queues_.size());
+				for (uint16_t i = 0; i < nr_queues; ++i) {
+					WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
+					wq->read(fr, game, mol);
+
+					if (!game.tribes().worker_exists(wq->get_index())) {
+						delete wq;
+					} else {
+						productionsite.input_worker_queues_.push_back(wq);
+					}
 				}
 			}
 
@@ -1124,10 +1140,17 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.unsigned_8(productionsite.program_timer_);
 	fw.signed_32(productionsite.program_time_);
 
-	const uint16_t input_queues_size = productionsite.input_queues_.size();
+	const uint16_t input_queues_size = productionsite.input_ware_queues_.size();
 	fw.unsigned_16(input_queues_size);
-	for (uint16_t i = 0; i < input_queues_size; ++i)
-		productionsite.input_queues_[i]->write(fw, game, mos);
+	for (uint16_t i = 0; i < input_queues_size; ++i) {
+		productionsite.input_ware_queues_[i]->write(fw, game, mos);
+	}
+
+	const uint16_t input_worker_queues_size = productionsite.input_worker_queues_.size();
+	fw.unsigned_16(input_worker_queues_size);
+	for (uint16_t i = 0; i < input_worker_queues_size; ++i) {
+		productionsite.input_worker_queues_[i]->write(fw, game, mos);
+	}
 
 	const uint16_t statistics_size = productionsite.statistics_.size();
 	fw.unsigned_16(statistics_size);

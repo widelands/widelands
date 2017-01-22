@@ -46,7 +46,7 @@ function mission_thread()
    p1:hide_fields(way)
 
    -- Move to the castle
-   scroll_smoothly_to(castle)
+   scroll_to_field(castle)
 
    campaign_message_box(briefing_2_found_ancient_castle)
    o.done = true
@@ -56,7 +56,7 @@ function mission_thread()
    while #p1:get_buildings"atlanteans_castle" < 1 do sleep(2345) end
    o.done = true
 
-   scroll_smoothly_to(castle)
+   scroll_to_field(castle)
 
    p1:reveal_fields(castle:region(18))
    campaign_message_box(briefing_3_captured_ancient_castle)

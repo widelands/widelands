@@ -64,8 +64,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetWorkerTargetQuantity();
 	case QueueCommandTypes::kResetWorkerTargetQuantity:
 		return *new CmdResetWorkerTargetQuantity();
-	case QueueCommandTypes::kSetWareMaxFill:
-		return *new CmdSetWareMaxFill();
+	case QueueCommandTypes::kSetInputMaxFill:
+		return *new CmdSetInputMaxFill();
 	case QueueCommandTypes::kMessageSetStatusRead:
 		return *new CmdMessageSetStatusRead();
 	case QueueCommandTypes::kMessageSetStatusArchived:

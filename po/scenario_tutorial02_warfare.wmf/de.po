@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Bamstam, 2015
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 11:00+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -54,11 +54,11 @@ msgstr "Fähigkeiten der Soldaten"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Ein neuer Soldat wird wie ein Arbeiter erschaffen: Wenn ein Militärgebäude einen Soldaten benötigt, schnappt sich ein Träger die benötigte Waffe und Rüstung aus einem Lagerhaus (oder deinem Hauptquartier) und macht sich auf den Weg zu deinem neuen Gebäude. Die einfachen Soldaten der Barbaren benutzen keine Rüstung, sie brauchen nur eine Axt."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -279,7 +279,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr ""
+msgstr "Auch solltest du immer bedenken, dass jeder der drei Stämme in Widelands seine eigene Art des Trainings sowie eigene Gebäude und Waren hat. Ebenso können auch die Fähigkeiten nicht verglichen werden: Ein imperialer Soldat hat einen Grundangriffswert von %1% auf Stufe 0, wohingegen ein barbarischer Krieger der gleichen Stufe nur einen Grundangriffswert von %2% hat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
@@ -477,7 +477,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "Diese Zitadelle kann 12 Soldaten aufnehmen und ist das größte Militärgebäude, das die Barbaren bauen können. Sie kostet außerdem eine Menge Rohstoffe und braucht lange, um gebaut zu werden. Sie ist am besten geeignet, um strategisch wichtige Punkte wie enge Übergänge oder Berge zu schützen."
+msgstr "Diese Zitadelle kann 12 Krieger aufnehmen und ist das größte Militärgebäude, das die Barbaren bauen können. Sie kostet außerdem eine Menge Rohstoffe und braucht lange, um gebaut zu werden. Sie ist am besten geeignet, um strategisch wichtige Punkte wie enge Übergänge oder Berge zu schützen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat your Enemy"

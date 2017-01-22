@@ -10,9 +10,34 @@ function introduction()
    burn_tavern_down()
 end
 
+function wait_for_window_and_tab_or_complain(
+   window_name,
+   tab_name,
+   objective, complain_msg
+)
+   while true do
+      -- This waits for the window to be opened.
+      if not mv.windows[window_name] then
+         objective.visible = true
+         message_box_objective(plr, complain_msg)
+         while not mv.windows[window_name] do sleep(200) end
+         objective.visible = false
+      end
+
+      -- But it might be closed at any point in time. If it is open and the
+      -- correct tab is active, we terminate the loop.
+      if mv.windows[window_name] and
+         mv.windows[window_name].tabs[tab_name].active
+      then
+         break
+      end
+      sleep(200)
+   end
+end
+
 function burn_tavern_down()
    sleep(500)
-   scroll_smoothly_to(tavern_field)
+   scroll_to_field(tavern_field)
    sleep(1000)
    tavern_field.immovable:destroy()
    sleep(1000)
@@ -26,17 +51,11 @@ function burn_tavern_down()
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
    local o2 = add_campaign_objective(reopen_building_stat_obj)
    o2.visible = false
-   local medium_tab_active = false
-   while not medium_tab_active do
-      if not mv.windows.building_statistics then
-         o2.visible = true
-         message_box_objective(plr, reopen_building_stat)
-         while not mv.windows.building_statistics do sleep(200) end
-         o2.visible = false
-      end
-      if mv.windows.building_statistics.tabs["building_stats_medium"].active then medium_tab_active = true end
-      sleep(200)
-   end
+   wait_for_window_and_tab_or_complain(
+      "building_statistics",
+      "building_stats_medium",
+      o2, reopen_building_stat
+   )
    while mv.windows.building_statistics do sleep(100) end
    set_objective_done(o, 0)
 
@@ -45,18 +64,16 @@ function burn_tavern_down()
    set_objective_done(o, wl.Game().real_speed)
 
    o = message_box_objective(plr, inventory2)
-   -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
+   -- We cannot create several objectives with the same name. Therefore, we
+   -- create o2 here once and change its visibility
    o2 = add_campaign_objective(reopen_stock_menu_obj)
    o2.visible = false
-   while not mv.windows.stock_menu.tabs["wares_in_warehouses"].active do
-      if not mv.windows.stock_menu then
-         o2.visible = true
-         message_box_objective(plr, reopen_stock_menu)
-         while not mv.windows.stock_menu do sleep(200) end
-         o2.visible = false
-      end
-      sleep(200)
-   end
+
+   wait_for_window_and_tab_or_complain(
+      "stock_menu",
+      "wares_in_warehouses",
+      o2, reopen_stock_menu
+   )
    set_objective_done(o, 0)
    message_box_objective(plr, inventory3)
 
@@ -83,29 +100,23 @@ function plan_the_future()
    o = message_box_objective(plr, ware_stats2)
    local o2 = add_campaign_objective(reopen_ware_stats1_obj)
    o2.visible = false
-   while not mv.windows.ware_statistics.tabs["economy_health"].active do
-      if not mv.windows.ware_statistics then
-         o2.visible = true
-         message_box_objective(plr, reopen_ware_stats1)
-         while not mv.windows.ware_statistics do sleep(200) end
-         o2.visible = false
-      end
-      sleep(200)
-   end
+
+   wait_for_window_and_tab_or_complain(
+      "ware_statistics",
+      "economy_health",
+      o2, reopen_ware_stats1
+   )
    set_objective_done(o, 0)
 
    o = message_box_objective(plr, ware_stats3)
    o2 = add_campaign_objective(reopen_ware_stats2_obj)
    o2.visible = false
-   while not mv.windows.ware_statistics.tabs["stock"].active  do
-      if not mv.windows.ware_statistics then
-         o2.visible = true
-         message_box_objective(plr, reopen_ware_stats2)
-         while not mv.windows.ware_statistics do sleep(200) end
-         o2.visible = false
-      end
-      sleep(200)
-   end
+
+   wait_for_window_and_tab_or_complain(
+      "ware_statistics",
+      "stock",
+      o2, reopen_ware_stats2
+   )
    set_objective_done(o, 0)
 
    o = message_box_objective(plr, ware_stats4)

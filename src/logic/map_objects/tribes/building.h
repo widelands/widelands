@@ -49,7 +49,9 @@ namespace Widelands {
 struct Flag;
 struct Message;
 class TribeDescr;
+class InputQueue;
 class WaresQueue;
+class WorkersQueue;
 
 class Building;
 
@@ -235,8 +237,14 @@ public:
 		return statistics_string_;
 	}
 
+	/// \returns the queue for the matching ware or worker type or \throws WException.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
+
 	/// \returns the queue for a ware type or \throws WException.
 	virtual WaresQueue& waresqueue(DescriptionIndex);
+
+	/// \returns the queue for a worker type or \throws WException.
+	virtual WorkersQueue& workersqueue(DescriptionIndex);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

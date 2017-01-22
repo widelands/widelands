@@ -144,3 +144,16 @@ function player_building_access:test_access()
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end
+-- ================
+-- Players production statistics
+-- ================
+player_production_statistics = lunit.TestCase("Players production statistics")
+function player_building_access:test_single()
+   self.bs = {
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("barbarians_quarry", map:get_field(8,10)),
+   }
+
+   assert_equal((player1:get_produced_wares_count('all'))['log'], player1:get_produced_wares_count('log'))
+end

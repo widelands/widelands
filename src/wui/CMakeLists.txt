@@ -87,10 +87,8 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     base_geometry
-    logic
     widelands_ball_of_mud
     wui_mapview
-    wui_mapview_pixelfunctions
 )
 
 wl_library(wui_mapview
@@ -152,6 +150,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    inputqueuedisplay.cc
+    inputqueuedisplay.h
     interactive_base.cc
     interactive_base.h
     interactive_gamebase.cc
@@ -200,8 +200,6 @@ wl_library(wui
     warehousewindow.cc
     waresdisplay.cc
     waresdisplay.h
-    waresqueuedisplay.cc
-    waresqueuedisplay.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2
