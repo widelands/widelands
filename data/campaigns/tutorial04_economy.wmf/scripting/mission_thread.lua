@@ -12,7 +12,7 @@ end
 
 function wait_for_window_and_tab_or_complain(
    window_name,
-   tab_name, 
+   tab_name,
    objective, complain_msg
 )
    while true do
@@ -26,7 +26,7 @@ function wait_for_window_and_tab_or_complain(
 
       -- But it might be closed at any point in time. If it is open and the
       -- correct tab is active, we terminate the loop.
-      if mv.windows[window_name] and 
+      if mv.windows[window_name] and
          mv.windows[window_name].tabs[tab_name].active
       then
          break

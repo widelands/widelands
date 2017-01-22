@@ -4650,8 +4650,6 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	const TribeDescr& tribe = ps->owner().tribe();
 	InputMap setpoints = parse_set_input_arguments(L, tribe);
 
-	parse_wares_workers_counted(L, tribe, &setpoints, true);
-
 	InputSet valid_inputs;
 	for (const auto& input_ware : ps->descr().input_wares()) {
 		valid_inputs.insert(std::make_pair(input_ware.first, wwWARE));
