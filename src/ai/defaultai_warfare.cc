@@ -699,19 +699,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		return 0;
 	}
 
-	Tribes tribe = Tribes::kNone;
-
-	if (soldiers.at(0)->get_owner()->tribe().name() == "atlanteans") {
-		tribe = Tribes::kAtlanteans;
-	} else if (soldiers.at(0)->get_owner()->tribe().name() == "barbarians") {
-		tribe = Tribes::kBarbarians;
-	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire") {
-		tribe = Tribes::kEmpire;
-	} else {
-		throw wexception("AI warning: Unable to calculate strength for player of tribe %s",
-		                 soldiers.at(0)->get_owner()->tribe().name().c_str());
-	}
-
 	float health = 0;
 	float attack = 0;
 	float defense = 0;
@@ -719,29 +706,17 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	float final = 0;
 
 	for (Soldier* soldier : soldiers) {
-		switch (tribe) {
-		case (Tribes::kAtlanteans):
-			health = 135 + 40 * soldier->get_health_level();
-			attack = 14 + 8 * soldier->get_attack_level();
-			defense = static_cast<float>(94 - 8 * soldier->get_defense_level()) / 100;
-			evade = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kBarbarians):
-			health += 130 + 28 * soldier->get_health_level();
-			attack += 14 + 7 * soldier->get_attack_level();
-			defense += static_cast<float>(97 - 8 * soldier->get_defense_level()) / 100;
-			evade += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kEmpire):
-			health += 130 + 21 * soldier->get_health_level();
-			attack += 14 + 8 * soldier->get_attack_level();
-			defense += static_cast<float>(95 - 8 * soldier->get_defense_level()) / 100;
-			evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kNone):
-			NEVER_HERE();
-		}
-
+		const SoldierDescr& descr = soldier->descr();
+		health = descr.get_base_health() +
+					 descr.get_health_incr_per_level() * soldier->get_health_level();
+		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
+		          descr.get_base_min_attack() +
+					 descr.get_attack_incr_per_level() * soldier->get_attack_level();
+		defense =
+			100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
+		evade =
+			100 - descr.get_base_evade() -
+									 descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
 
