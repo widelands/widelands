@@ -788,8 +788,8 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
 	try {
 		for (;;) {
 			consumed_wares_workers_.resize(consumed_wares_workers_.size() + 1);
-			parse_ware_type_group(parameters, *consumed_wares_workers_.rbegin(), tribes, descr.input_wares(),
-			                      descr.input_workers());
+			parse_ware_type_group(parameters, *consumed_wares_workers_.rbegin(), tribes,
+			                      descr.input_wares(), descr.input_workers());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
