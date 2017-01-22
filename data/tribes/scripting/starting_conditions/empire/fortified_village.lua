@@ -74,7 +74,7 @@ return {
       })
 
       place_building_in_region(plr, "empire_colosseum", sf:region(11), {
-         wares = {
+         inputs = {
             empire_bread = 8,
             fish = 4,
             meat = 4,
@@ -82,7 +82,7 @@ return {
       })
 
       place_building_in_region(plr, "empire_trainingcamp", sf:region(11), {
-         wares = {
+         inputs = {
             fish = 2,
             meat = 2,
             armor_helmet = 2,
@@ -90,7 +90,7 @@ return {
       })
 
       place_building_in_region(plr, "empire_armorsmithy", sf:region(11), {
-         wares = {
+         inputs = {
                gold = 4,
                coal = 8,
                cloth = 5,
@@ -98,20 +98,20 @@ return {
       })
 
       place_building_in_region(plr, "empire_toolsmithy", sf:region(11), {
-         wares = {
+         inputs = {
             iron = 8,
          }
       })
 
       place_building_in_region(plr, "empire_weaponsmithy", sf:region(11), {
-         wares = {
+         inputs = {
             coal = 4,
             planks = 8,
          }
       })
 
       place_building_in_region(plr, "empire_sawmill", sf:region(11), {
-         wares = {
+         inputs = {
             log = 1,
          }
       })

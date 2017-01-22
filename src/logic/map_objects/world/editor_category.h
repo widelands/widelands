@@ -44,10 +44,14 @@ public:
 	/// The menu image for the category.
 	const Image* picture() const;
 
+	/// The number of items displayed in each row.
+	int items_per_row() const;
+
 private:
 	const std::string name_;
 	const std::string descname_;
 	const std::string image_file_;
+	const int items_per_row_;
 	DISALLOW_COPY_AND_ASSIGN(EditorCategory);
 };
 

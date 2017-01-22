@@ -350,6 +350,7 @@ void MapView::draw(RenderTarget& dst) {
 			plan.pop_front();
 		}
 		if (plan.size() == 1) {
+			set_view(plan[0].view, Transition::Jump);
 			view_plans_.pop_front();
 			continue;
 		}
@@ -370,6 +371,7 @@ void MapView::draw(RenderTarget& dst) {
 			plan.pop_front();
 		}
 		if (plan.size() == 1) {
+			mouse_to_pixel(round(plan[0].pixel), Transition::Jump);
 			mouse_plans_.pop_front();
 			continue;
 		}
