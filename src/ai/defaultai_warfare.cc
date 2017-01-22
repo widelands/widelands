@@ -707,20 +707,16 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 
 	for (Soldier* soldier : soldiers) {
 		const SoldierDescr& descr = soldier->descr();
-		health = (descr.get_base_health() +
-		          descr.get_health_incr_per_level() * soldier->get_health_level()) /
-		         100;
-		attack = ((descr.get_base_max_attack() - descr.get_base_min_attack()) / 2 +
+		health = descr.get_base_health() +
+					 descr.get_health_incr_per_level() * soldier->get_health_level();
+		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2 +
 		          descr.get_base_min_attack() +
-		          descr.get_attack_incr_per_level() * soldier->get_attack_level()) /
-		         100;
+					 descr.get_attack_incr_per_level() * soldier->get_attack_level();
 		defense =
-		   static_cast<float>(100 - descr.get_base_defense() - 8 * soldier->get_defense_level()) /
-		   100;
+			100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
 		evade =
-		   static_cast<float>(100 - descr.get_base_evade() -
-		                      descr.get_evade_incr_per_level() / 100 * soldier->get_evade_level()) /
-		   100;
+			100 - descr.get_base_evade() -
+									 descr.get_evade_incr_per_level() / 100 * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
 
