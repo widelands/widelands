@@ -267,6 +267,7 @@ struct BuildableField {
 	uint16_t unowned_land_nearby;
 	uint16_t enemy_owned_land_nearby;
 	uint16_t unowned_buildable_spots_nearby;
+	uint16_t nearest_buildable_spot_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
 	uint8_t unowned_mines_spots_nearby;

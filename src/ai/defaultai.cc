@@ -1178,11 +1178,24 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_enemy_owned_walkable);
 	// printf ("enemy nearby: %4d\n",field.enemy_owned_land_nearby);
 
+	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();  //NOCOM
 	if (field.unowned_land_nearby > 0) {
+		std::vector<Coords> found_buildable_fields;
+		
 		field.unowned_buildable_spots_nearby = map.find_fields(
-		   Area<FCoords>(field.coords, buildable_spots_check_area), nullptr, find_unowned_buildable);
+		   Area<FCoords>(field.coords, buildable_spots_check_area), &found_buildable_fields, find_unowned_buildable);
+		//Now iterate over fields to get nearest one
+		for (auto& coords :  found_buildable_fields) {
+			const uint32_t cur_distance = map.calc_distance(coords, field.coords);
+			if (cur_distance < field.nearest_buildable_spot_nearby) {
+				field.nearest_buildable_spot_nearby = cur_distance;
+			}
+		}
+		//printf ("nearest buildable distance %d\n", field.nearest_buildable_spot_nearby);
+		   
 	} else {
 		field.unowned_buildable_spots_nearby = 0;
+		
 	}
 
 	// Is this near border  // get rid of allyownedfields
@@ -2671,6 +2684,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= bo.build_material_shortage * 500;  // prohibitive
 				}
 
+				// is nearest buildable spot reachable in regard to conquer radius
+				
+				// field.nearest_buildable_spot_nearby //NOCOM
+				if (bf->nearest_buildable_spot_nearby < bo.desc->get_conquers() - 1) {
+					prio += std::abs(management_data.get_military_number_at(88));
+					}
+
 				// additional score for bigger buildings
 				const int32_t prio_for_size = bo.desc->get_size() - 1;
 				if (prio_for_size == 0) {
@@ -3675,8 +3695,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		assert(site.bo->total_count() == 1);
 		for (auto& queue : site.site->warequeues()) {
 			if (queue->get_max_fill() > 2) {
-				game().send_player_set_ware_max_fill(
-				   *site.site, queue->get_ware(), 2);
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), 2);
 			}
 		}
 		printf ("%2d: barracks here, %s, soldier status: %d [0-1-3-6]\n",
@@ -4309,7 +4329,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// First deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
-			bo.max_needed_preciousness = bo.max_preciousness;
+			if (!bo.is_barracks) {
+				bo.max_needed_preciousness = bo.max_preciousness;
+			} else {
+				//barracks has no genuine preciousness as by now
+				bo.max_needed_preciousness = 5;
+			}
 			return BuildingNecessity::kForced;
 		} else if (bo.prohibited_till > gametime) {
 			return BuildingNecessity::kForbidden;
@@ -5243,7 +5268,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
-			for (const auto& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.input_wares()) {
 				if (materials.count(temp_input.first) == 0) {
 					materials.insert(temp_input.first);
 				}
