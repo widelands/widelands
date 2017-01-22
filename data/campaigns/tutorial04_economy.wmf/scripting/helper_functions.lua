@@ -24,5 +24,7 @@ function filled_buildings_one_soldier(p, ...)
       -- Fill with wares
       if bdescr.wares then b:set_wares(bdescr.wares)
       elseif b.valid_wares then b:set_wares(b.valid_wares) end
+      if bdescr.inputs then b:set_inputs(bdescr.inputs)
+      elseif b.valid_inputs then b:set_inputs(b.valid_inputs) end
    end
 end

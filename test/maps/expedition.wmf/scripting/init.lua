@@ -320,7 +320,6 @@ function test_transporting_works()
    hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
 
-
    port:start_expedition()
    wait_for_message("Expedition")
 

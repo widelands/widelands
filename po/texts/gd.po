@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-04 07:02+0000\n"
-"PO-Revision-Date: 2016-12-07 19:13+0000\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -611,39 +611,33 @@ msgstr "Stiùirich na teachdaireachdan agad nas èifeachdaiche: brùth air “N�
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Cleachd na h-iuchraichean “,” (cromag) is “.” (puing) gus leum a ghearradh eadar na h-ionadan air an t-saoghail air an do thadhail thu o chionn ghoirid."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Brùth Ctrl+(0-9) gus ionadan cudromach a stòradh is brùth air 0-9 an uairsin gus dol ann."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "’S urrainn dhut gach bratach gun chiad ghobhal a thoirt air falbh ’s tu a’ cumail sìos CTRL fhad ’s a bhios tu a’ toirt rathad air falbh."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Thèid saighdearan ùra a thrusadh sa phrìomh-àras no ann an taigh-stòrais ma tha na h-uile acainn a bhios a dhìth orra ri làimh. Leasaichidh na h-ionadan-oideachaidh na comasan aca an uairsin."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Ma tha thu coma mu chunnart, ma chumas tu Ctrl sìos ’s tu a’ briogadh air putan leasachaidh, millidh no toirt às a chèile an togalaich, gearraidh tu leum thairis air an dearbhadh."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Brùth air I gus uinneag an stòrais a thoglachadh gu luath."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

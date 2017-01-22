@@ -60,6 +60,7 @@ Request::Request(PlayerImmovable& init_target,
      economy_(init_target.get_economy()),
      index_(index),
      count_(1),
+     exact_match_(false),
      callbackfn_(cbfn),
      required_time_(init_target.owner().egbase().get_gametime()),
      required_interval_(0),
@@ -346,6 +347,13 @@ void Request::set_count(uint32_t const count) {
 		else if (!wasopen && is_open())
 			economy_->add_request(*this);
 	}
+}
+
+/**
+ * Sets whether a worker supply has to match exactly or if a can_act_as() comparison is good enough.
+ */
+void Request::set_exact_match(bool match) {
+	exact_match_ = match;
 }
 
 /**

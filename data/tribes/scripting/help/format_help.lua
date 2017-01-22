@@ -111,34 +111,44 @@ end
 
 
 -- RST
--- .. function:: help_consumed_wares(building, program_name)
+-- .. function:: help_consumed_wares_workers(building, program_name)
 --
---    Returns information for which wares in which amounts are consumed by a produciton program.
+--    Returns information for which wares and workers in which amounts are consumed by a production program.
 --
---    :arg tribe: The :class:`LuaBuildingDescription` for the building that runs the program
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that consumes the ware
+--    :arg building: The :class:`LuaBuildingDescription` for the building that runs the program
 --    :arg program_name: The name of the production program that the info is collected for
 --
 --    :returns: A "Ware(s) consumed:" section with image_lines
 --
-function help_consumed_wares(building, program_name)
+function help_consumed_wares_workers(tribe, building, program_name)
    local result = ""
-   local consumed_wares_string = ""
-   local consumed_wares_counter = 0
-   local consumed_wares = building:consumed_wares(program_name)
-   for countlist, warelist in pairs(consumed_wares) do
-      local consumed_warenames = {}
+   local consumed_items_string = ""
+   local consumed_items_counter = 0
+   local consumed_wares_workers = building:consumed_wares_workers(program_name)
+   local consumes_wares = false
+   local consumes_workers = false
+   for countlist, itemlist in pairs(consumed_wares_workers) do
+      local consumed_itemnames = {}
       local consumed_images = {}
       local consumed_amount = {}
       local count = 1
-      for consumed_ware, amount in pairs(warelist) do
-         local ware_description = wl.Game():get_ware_description(consumed_ware)
-         consumed_warenames[count] = _"%1$dx %2$s":bformat(amount, ware_description.descname)
-         consumed_images[count] = ware_description.icon_name
+      for consumed_item, amount in pairs(itemlist) do
+         local description
+         if tribe:has_ware(consumed_item) then
+            description = wl.Game():get_ware_description(consumed_item)
+            consumes_wares = true
+         else
+            description = wl.Game():get_worker_description(consumed_item)
+            consumes_workers = true
+         end
+         consumed_itemnames[count] = _"%1$dx %2$s":bformat(amount, description.descname)
+         consumed_images[count] = description.icon_name
          consumed_amount[count] = amount
          count = count + 1
-         consumed_wares_counter = consumed_wares_counter + amount
+         consumed_items_counter = consumed_items_counter + amount
       end
-      local text = localize_list(consumed_warenames, "or", "tribes_encyclopedia")
+      local text = localize_list(consumed_itemnames, "or", "tribes_encyclopedia")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
@@ -155,12 +165,23 @@ function help_consumed_wares(building, program_name)
             image_counter = image_counter + 1
          end
       end
-      consumed_wares_string = image_line(images, 1, p(text)) .. consumed_wares_string
+      consumed_items_string = image_line(images, 1, p(text)) .. consumed_items_string
    end
-   if (consumed_wares_counter > 0) then
-      -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
-      result = result .. rt(h3(ngettext("Ware consumed:", "Wares consumed:", consumed_wares_counter)))
-      result = result .. consumed_wares_string
+   if (consumed_items_counter > 0) then
+      local consumed_header = ""
+      if (consumes_workers) then
+         if (consumes_wares) then
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by a productionsite
+            consumed_header = _("Wares and workers consumed:")
+         else
+            -- TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a productionsite
+            consumed_header = _("Workers consumed:")
+         end
+      else
+         -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
+         consumed_header = _("Wares consumed:")
+      end
+      result = result .. rt(h3(consumed_header)) .. consumed_items_string
    end
    return result
 end

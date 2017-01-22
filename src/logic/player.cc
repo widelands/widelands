@@ -1080,8 +1080,21 @@ void Player::sample_statistics() {
 void Player::ware_produced(DescriptionIndex const wareid) {
 	assert(ware_productions_.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
-
 	++current_produced_statistics_[wareid];
+}
+
+/**
+ * Return count of produced wares for ware index
+ */
+uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
+	assert(wareid < egbase().tribes().nrwares());
+	assert(wareid < ware_productions_.size());
+	assert(wareid < current_produced_statistics_.size());
+	uint32_t sum = current_produced_statistics_[wareid];
+	for (const auto stat : *get_ware_production_statistics(wareid)) {
+		sum += stat;
+	}
+	return sum;
 }
 
 /**
