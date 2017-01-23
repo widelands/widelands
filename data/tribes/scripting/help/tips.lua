@@ -41,7 +41,10 @@ end
 
 return {
    func = function(tribename, game_type)
-      local text = ""
+      set_textdomain("tribes_encyclopedia")
+      local text = h2(_"General")
+      text = text .. format_tips(get_general_tips())
+
       set_textdomain("tribes_encyclopedia")
       if (tribename == "atlanteans") then
          text = text .. h2(_"Atlanteans")
@@ -62,10 +65,6 @@ return {
          text = text .. h2(_"Multiplayer")
          text = text .. format_tips(get_multiplayer_tips())
       end
-
-      set_textdomain("tribes_encyclopedia")
-      text = text .. h2(_"General")
-      text = text .. format_tips(get_general_tips())
 
       set_textdomain("tribes_encyclopedia")
       return {
