@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-enum class AnimalBreedable {kYes, kAnimalFull};
+enum class AnimalBreedable {kYes, kAnimalFull, kNoAnimal};
 
 struct FCoords;
 class Map;
