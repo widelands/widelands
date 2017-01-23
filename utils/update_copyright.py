@@ -34,7 +34,6 @@ def main():
 
         # Now update the Buildinfo
         filename = os.path.join(src_path, "build_info.h")
-        #print(filename)
         lines = read_text_file(filename).strip().split('\n')
         new_lines = []
         regex = re.compile('(.*constexpr uint16_t kWidelandsCopyrightEnd = )(\d\d\d\d)(;)')
