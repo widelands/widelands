@@ -179,7 +179,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				do {
 					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 					it = impls.begin() + random;
-				} while ((*it)->name == "empty");
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 				set_player_ai(number, (*it)->name, true);
 				newstate = PlayerSettings::stateComputer;
 				break;

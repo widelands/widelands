@@ -55,9 +55,15 @@ struct ComputerPlayer {
 	 * \see get_implementations()
 	 */
 	struct Implementation {
+		enum class Type {
+			kEmpty,
+			kDefault
+		};
+
 		std::string name;
 		std::string descname;
 		std::string icon_filename;
+		Type type;
 		virtual ~Implementation() {
 		}
 		virtual ComputerPlayer* instantiate(Widelands::Game&, Widelands::PlayerNumber) const = 0;

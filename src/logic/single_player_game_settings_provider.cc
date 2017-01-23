@@ -142,7 +142,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 			do {
 				uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 				it = impls.begin() + random;
-			} while ((*it)->name == "empty");
+			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s.players[number].ai = (*it)->name;
 	}
