@@ -556,7 +556,7 @@ void DefaultAI::late_initialization() {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
-			for (const auto& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -667,7 +667,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const auto& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes
@@ -3120,8 +3120,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		for (auto& queue : site.site->warequeues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
-				game().send_player_set_ware_max_fill(
-				   *site.site, queue->get_ware(), queue->get_max_size());
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), wwWARE, queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3222,7 +3222,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			// reducing input queues
 			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), 0);
+				game().send_player_set_input_max_fill(*site.site, queue->get_index(), wwWARE, 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;

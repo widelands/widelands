@@ -82,20 +82,20 @@ return {
       })
 
       place_building_in_region(player, "empire_toolsmithy", sf:region(11), {
-         wares = {
+         inputs = {
             iron = 8,
             log = 8
          }
       })
 
       place_building_in_region(player, "empire_sawmill", sf:region(11), {
-         wares = {
+         inputs = {
             log = 8
          }
       })
 
       place_building_in_region(player, "empire_hunters_house", sf:region(11), {
-         wares = {}
+         inputs = {}
       })
 
       place_building_in_region(player, "empire_tower", sf:region(13), {
