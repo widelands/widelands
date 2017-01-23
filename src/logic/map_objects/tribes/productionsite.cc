@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
@@ -326,24 +327,13 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 	}
 }
 
-WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue* ip_queue : input_ware_queues_) {
-		if (ip_queue->get_index() == wi) {
+InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	for (InputQueue* ip_queue : input_queues_) {
+		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
-}
-
-WorkersQueue& ProductionSite::workersqueue(DescriptionIndex const wi) {
-	// Check for perfect match
-	for (WorkersQueue* ip_queue : input_worker_queues_) {
-		if (ip_queue->get_index() == wi) {
-			return *ip_queue;
-		}
-	}
-	// Only check for perfect matches since they are requested by the queue
-	throw wexception("%s (%u) has no WorkersQueue for %u", descr().name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -414,15 +404,15 @@ void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
 	const BillOfMaterials& input_wares = descr().input_wares();
-	input_ware_queues_.resize(input_wares.size());
+	const BillOfMaterials& input_workers = descr().input_workers();
+	input_queues_.resize(input_wares.size() + input_workers.size());
+
 	for (WareRange i(input_wares); i; ++i) {
-		input_ware_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
 	}
 
-	const BillOfMaterials& input_workers = descr().input_workers();
-	input_worker_queues_.resize(input_workers.size());
 	for (WareRange i(input_workers); i; ++i) {
-		input_worker_queues_[i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
+		input_queues_[input_wares.size() + i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
 	}
 
 	//  Request missing workers.
@@ -447,10 +437,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
  */
 void ProductionSite::set_economy(Economy* const e) {
 	if (Economy* const old = get_economy()) {
-		for (WaresQueue* ip_queue : input_ware_queues_) {
-			ip_queue->remove_from_economy(*old);
-		}
-		for (WorkersQueue* ip_queue : input_worker_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
@@ -461,10 +448,7 @@ void ProductionSite::set_economy(Economy* const e) {
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue* ip_queue : input_ware_queues_) {
-			ip_queue->add_to_economy(*e);
-		}
-		for (WorkersQueue* ip_queue : input_worker_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
@@ -489,17 +473,11 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < input_ware_queues_.size(); ++i) {
-		input_ware_queues_[i]->cleanup();
-		delete input_ware_queues_[i];
+	for (InputQueue *iq : input_queues_) {
+		iq->cleanup();
+		delete iq;
 	}
-	input_ware_queues_.clear();
-
-	for (uint32_t i = 0; i < input_worker_queues_.size(); ++i) {
-		input_worker_queues_[i]->cleanup();
-		delete input_worker_queues_[i];
-	}
-	input_worker_queues_.clear();
+	input_queues_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -827,8 +805,9 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* queue : input_ware_queues_) {
-		if (queue->get_filled() > queue->get_max_fill()) {
+	// Input-workers are coming out by themselves
+	for (InputQueue* queue : input_queues_) {
+		if (queue->get_type() == wwWARE && queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
 			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);

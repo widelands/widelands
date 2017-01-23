@@ -31,8 +31,7 @@
 #include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/wares_queue.h"
-#include "economy/workers_queue.h"
+#include "economy/input_queue.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -356,9 +355,9 @@ ProductionProgram::ActReturn::SiteHas::SiteHas(char*& parameters,
 }
 bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) const {
 	uint8_t count = group.second;
-	for (WaresQueue* ip_queue : ps.warequeues()) {
-		for (const auto& ware_type : group.first) {
-			if (ware_type.first == ip_queue->get_index() && ware_type.second == wwWARE) {
+	for (InputQueue* ip_queue : ps.inputqueues()) {
+		for (const auto& input_type : group.first) {
+			if (input_type.first == ip_queue->get_index() && input_type.second == ip_queue->get_type()) {
 				uint8_t const filled = ip_queue->get_filled();
 				if (count <= filled)
 					return true;
@@ -804,39 +803,38 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
 }
 
 void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) const {
-	std::vector<WaresQueue*> const warequeues = ps.warequeues();
-	std::vector<WorkersQueue*> const workerqueues = ps.workerqueues();
-	std::vector<uint8_t> consumption_quantities_wares(warequeues.size(), 0);
-	std::vector<uint8_t> consumption_quantities_workers(workerqueues.size(), 0);
+	std::vector<InputQueue*> const inputqueues = ps.inputqueues();
+	std::vector<uint8_t> consumption_quantities(inputqueues.size(), 0);
 
 	Groups l_groups = consumed_wares_workers_;  //  make a copy for local modification
 
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
 	bool found;
-	for (size_t i = 0; i < warequeues.size(); ++i) {
-		DescriptionIndex const ware_type = warequeues[i]->get_index();
-		uint8_t nr_available = warequeues[i]->get_filled();
-		consumption_quantities_wares[i] = 0;
+	for (size_t i = 0; i < inputqueues.size(); ++i) {
+		DescriptionIndex const input_index = inputqueues[i]->get_index();
+		WareWorker const input_type = inputqueues[i]->get_type();
+		uint8_t nr_available = inputqueues[i]->get_filled();
+		consumption_quantities[i] = 0;
 
 		//  Iterate over all consume groups and see if they want us to consume
 		//  any thing from the currently considered input queue.
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
 			found = false;
-			for (auto ware_it = it->first.begin(); ware_it != it->first.end(); ware_it++) {
-				if (ware_it->first == ware_type && ware_it->second == wwWARE) {
+			for (auto input_it = it->first.begin(); input_it != it->first.end(); input_it++) {
+				if (input_it->first == input_index && input_it->second == input_type) {
 					found = true;
 					if (it->second <= nr_available) {
 						//  There are enough wares of the currently considered type
 						//  to fulfill the requirements of the current group. We can
 						//  therefore erase the group.
-						consumption_quantities_wares[i] += it->second;
+						consumption_quantities[i] += it->second;
 						nr_available -= it->second;
 						it = l_groups.erase(it);
 						//  No increment here, erase moved next element to the position
 						//  pointed to by it.
 					} else {
-						consumption_quantities_wares[i] += nr_available;
+						consumption_quantities[i] += nr_available;
 						it->second -= nr_available;
 						++it;  //  Now check if the next group includes this ware type.
 					}
@@ -844,34 +842,6 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				}
 			}
 			// group does not request ware
-			if (!found)
-				++it;
-		}
-	}
-
-	// Same for workers
-	for (size_t i = 0; i < workerqueues.size(); ++i) {
-		DescriptionIndex const worker_type = workerqueues[i]->get_index();
-		uint8_t nr_available = workerqueues[i]->get_filled();
-		consumption_quantities_workers[i] = 0;
-
-		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();) {
-			found = false;
-			for (auto worker_it = it->first.begin(); worker_it != it->first.end(); worker_it++) {
-				if (worker_it->first == worker_type && worker_it->second == wwWORKER) {
-					found = true;
-					if (it->second <= nr_available) {
-						consumption_quantities_workers[i] += it->second;
-						nr_available -= it->second;
-						it = l_groups.erase(it);
-					} else {
-						consumption_quantities_workers[i] += nr_available;
-						it->second -= nr_available;
-						++it;
-					}
-					break;
-				}
-			}
 			if (!found)
 				++it;
 		}
@@ -934,19 +904,15 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
 	} else {  //  we fulfilled all consumption requirements
-		for (size_t i = 0; i < warequeues.size(); ++i) {
-			if (uint8_t const q = consumption_quantities_wares[i]) {
-				assert(q <= warequeues[i]->get_filled());
-				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
+		for (size_t i = 0; i < inputqueues.size(); ++i) {
+			if (uint8_t const q = consumption_quantities[i]) {
+				assert(q <= inputqueues[i]->get_filled());
+				inputqueues[i]->set_filled(inputqueues[i]->get_filled() - q);
 
 				// Update consumption statistics
-				ps.owner().ware_consumed(warequeues[i]->get_index(), q);
-			}
-		}
-		for (size_t i = 0; i < workerqueues.size(); ++i) {
-			if (uint8_t const q = consumption_quantities_workers[i]) {
-				assert(q <= workerqueues[i]->get_filled());
-				workerqueues[i]->set_filled(workerqueues[i]->get_filled() - q);
+				if (inputqueues[i]->get_type() == wwWARE) {
+					ps.owner().ware_consumed(inputqueues[i]->get_index(), q);
+				}
 			}
 		}
 		return ps.program_step(game);
@@ -1508,7 +1474,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	DescriptionIndex available_resource = INVALID_INDEX;
 
 	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
-		if (psite.waresqueue(it->first).get_filled() > 0) {
+		if (psite.inputqueue(it->first, wwWARE).get_filled() > 0) {
 			available_resource = it->first;
 			break;
 		}
@@ -1597,7 +1563,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
-		WaresQueue& thiswq = psite.waresqueue(it->first);
+		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE));
 		if (thiswq.get_filled() > 0) {
 			wq = &thiswq;
 			break;

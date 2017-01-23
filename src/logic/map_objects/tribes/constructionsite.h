@@ -89,7 +89,7 @@ public:
 		return info_;
 	}
 
-	WaresQueue& waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {
