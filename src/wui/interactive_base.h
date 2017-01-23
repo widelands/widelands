@@ -161,18 +161,31 @@ public:
 	}
 
 	void toggle_minimap();
+	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
 	const std::vector<QuickNavigation::Landmark>& landmarks();
 
 	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const QuickNavigation::View& view);
+	void set_landmark(size_t key, const MapView::View& view);
 
 protected:
+	/// Adds a toolbar button to the toolbar
+	/// \param image_basename:      File path for button image starting from 'images' and without
+	///                             file extension
+	/// \param name:                Internal name of the button
+	/// \param tooltip:             The button tooltip
+	/// \param window:              The window that's associated with this button.
+	/// \param bind_default_toggle: If true, the button will toggle with its 'window'.
+	UI::Button* add_toolbar_button(const std::string& image_basename,
+	                               const std::string& name,
+	                               const std::string& tooltip_text,
+	                               UI::UniqueWindow::Registry* window = nullptr,
+	                               bool bind_default_toggle = false);
+
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
 
-	void toggle_buildhelp();
 	void hide_minimap();
 
 	MiniMap::Registry& minimap_registry();
@@ -190,6 +203,11 @@ protected:
 
 	// TODO(sirver): why are these protected?
 	ChatOverlay* chat_overlay_;
+
+	// These get collected by add_toolbar_button
+	// so we can call unassign_toggle_button on them in the destructor.
+	std::vector<UI::UniqueWindow::Registry> registries_;
+
 	UI::Box toolbar_;
 
 private:
@@ -240,8 +258,5 @@ private:
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> workarea_pics_;
 };
-
-#define PIC2 g_gr->images().get("images/ui_basic/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) &toolbar_, name, 0, 0, 34U, 34U, PIC2
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

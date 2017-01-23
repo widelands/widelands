@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 08:08+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,8 +49,8 @@ msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General 
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Du kan finde yderligere information om FOSS og GPL'en ved at besøge den følgende hjemmeside: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -207,8 +207,8 @@ msgid "Campaign Story"
 msgstr "Kampagnehistorie"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Høvding"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -426,8 +426,8 @@ msgstr "Spilleren med flagets farve. Hvis mere end én klient valgte den samme f
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller"
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -463,14 +463,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for knappen »type« for en spiller. Værtsspillere kan også angive opsætningen af hver spiller (mængden af bygninger, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
+"with) and the tribe and team for computer players."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Hver klient forbundet til en spiller (som ikke er en tilskuer) kan sætte stammen og holdet for den spiller"
+" and the team for that player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -542,9 +542,9 @@ msgstr "Ved at holde Alt nede skiftes til det andet alternative værktøj (hvis 
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Taltasterne (1-0) giver mulighed for at angive størrelsen for det valgte område omkring din musemarkør."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -611,39 +611,33 @@ msgstr "Håndter dine beskeder mere effektivt: Tryk »N« for Nyheder for at til
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Brug tasterne »,« (komma) og ».« (punktum) til at gå frem og tilbage mellem de seneste besøgte steder i verden."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Tryk Ctrl+(0-9) for at lagre vigtige placeringer, tryk så på 0-9 for at genfinde dem."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Fjernelse af en vej mens du holder Ctrl nede, lader dig fjerne alle flag op til det første vejknudepunkt."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Nye soldater rekrutteres i hovedkvarteret eller et varehus, hvis alle krævede værktøjer er tilgængelige. Træningssteder er til for at forbedre deres evner."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Hvis du kan lide at leve farligt, så vil tryk på Ctrl samtidig med bygningsknapperne for udvid, nedlæg eller ødelæg springe bekræftelsen over."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Tryk I for hurtigt at skifte visningen af dit lager."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

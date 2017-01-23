@@ -73,11 +73,9 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, buttons),          PROP_RO(LuaPanel, tabs),
-   PROP_RO(LuaPanel, windows),          PROP_RW(LuaPanel, mouse_position_x),
-   PROP_RW(LuaPanel, mouse_position_y), PROP_RW(LuaPanel, position_x),
-   PROP_RW(LuaPanel, position_y),       PROP_RW(LuaPanel, width),
-   PROP_RW(LuaPanel, height),           {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, buttons),    PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),
+   PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),
+   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
@@ -177,36 +175,6 @@ int LuaPanel::get_windows(lua_State* L) {
 	lua_newtable(L);
 	put_all_visible_windows_into_table(L, panel_);
 
-	return 1;
-}
-
-/* RST
-   .. attribute:: mouse_position_x, mouse_position_y
-
-      (RW) The current mouse position relative to this Panels position
-*/
-int LuaPanel::get_mouse_position_x(lua_State* L) {
-	assert(panel_);
-	lua_pushint32(L, panel_->get_mouse_position().x);
-	return 1;
-}
-int LuaPanel::set_mouse_position_x(lua_State* L) {
-	assert(panel_);
-	Vector2i p = panel_->get_mouse_position();
-	p.x = floor(luaL_checkdouble(L, -1));
-	panel_->set_mouse_pos(p);
-	return 1;
-}
-int LuaPanel::get_mouse_position_y(lua_State* L) {
-	assert(panel_);
-	lua_pushint32(L, panel_->get_mouse_position().y);
-	return 1;
-}
-int LuaPanel::set_mouse_position_y(lua_State* L) {
-	assert(panel_);
-	Vector2i p = panel_->get_mouse_position();
-	p.y = floor(luaL_checkdouble(L, -1));
-	panel_->set_mouse_pos(p);
 	return 1;
 }
 
@@ -486,12 +454,17 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, start_road_building),
    METHOD(LuaMapView, abort_road_building),
    METHOD(LuaMapView, close),
+   METHOD(LuaMapView, scroll_to_field),
+   METHOD(LuaMapView, scroll_to_map_pixel),
+   METHOD(LuaMapView, is_visible),
+   METHOD(LuaMapView, mouse_to_field),
+   METHOD(LuaMapView, mouse_to_pixel),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RW(LuaMapView, viewpoint_x), PROP_RW(LuaMapView, viewpoint_y),
-   PROP_RW(LuaMapView, buildhelp),   PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),  PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, center_map_pixel), PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),           PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road), PROP_RO(LuaMapView, is_animating),
    {nullptr, nullptr, nullptr},
 };
 
@@ -507,46 +480,23 @@ void LuaMapView::__unpersist(lua_State* L) {
  * Properties
  */
 /* RST
-   .. attribute:: viewpoint_x, viewpoint_y
+   .. attribute:: center_map_pixel
 
-      (RW) The current view position of this view. This defines the map position
-      (in pixels) that the top left pixel of this map view currently sees. This
-      can be used together with :attr:`wl.map.Field.viewpoint` to move the view
-      to fields quickly.
+		(RO) The map position (in pixels) that the center pixel of this map view
+		currently sees. This is a table containing 'x', 'y'.
 */
-int LuaMapView::get_viewpoint_x(lua_State* L) {
-	lua_pushdouble(L, get()->get_viewpoint().x);
-	return 1;
-}
-int LuaMapView::set_viewpoint_x(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
-		return 0;
-	}
+int LuaMapView::get_center_map_pixel(lua_State* L) {
+	const Vector2f center = get()->view_area().rect().center();
+	lua_newtable(L);
 
-	MapView* mv = get();
-	Vector2f p = mv->get_viewpoint();
-	p.x = luaL_checkdouble(L, -1);
-	mv->set_viewpoint(p, true);
-	return 0;
-}
-int LuaMapView::get_viewpoint_y(lua_State* L) {
-	lua_pushdouble(L, get()->get_viewpoint().y);
-	return 1;
-}
-int LuaMapView::set_viewpoint_y(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
-		return 0;
-	}
+	lua_pushstring(L, "x");
+	lua_pushdouble(L, center.x);
+	lua_rawset(L, -3);
 
-	MapView* mv = get();
-	Vector2f p = mv->get_viewpoint();
-	p.y = luaL_checkdouble(L, -1);
-	mv->set_viewpoint(p, true);
-	return 0;
+	lua_pushstring(L, "y");
+	lua_pushdouble(L, center.y);
+	lua_rawset(L, -3);
+	return 1;
 }
 
 /* RST
@@ -602,6 +552,15 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: is_animating
+
+		(RO) True if this MapView is currently paning or zooming.
+*/
+int LuaMapView::get_is_animating(lua_State* L) {
+	lua_pushboolean(L, get()->is_animating());
+	return 1;
+}
 /*
  * Lua Functions
  */
@@ -609,14 +568,15 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 /* RST
    .. method:: click(field)
 
-      Moves the mouse onto a field and clicks it just like the user would
+      Jumps the mouse onto a field and clicks it just like the user would
       have.
 
       :arg field: the field to click on
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	get()->warp_mouse_to_node((*get_user_class<LuaMaps::LuaField>(L, 2))->coords());
+	get()->mouse_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Jump);
 	get()->fieldclicked();
 	return 0;
 }
@@ -640,7 +600,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	Widelands::Coords starting_field =
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
 
-	me->warp_mouse_to_node(starting_field);
+	me->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number());
 
 	return 0;
@@ -671,6 +631,93 @@ int LuaMapView::abort_road_building(lua_State* /* L */) {
 */
 int LuaMapView::close(lua_State* /* l */) {
 	get()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	return 0;
+}
+
+/* RST
+   .. method:: scroll_to_map_pixel(x, y)
+
+		Starts an animation to center the view on top of the pixel (x, y) in map
+		pixel space. Use `is_animating` to check if the animation is still going
+		on.
+
+      :arg x: x coordinate of the pixel
+      :type x: number
+      :arg y: y coordinate of the pixel
+      :type y: number
+*/
+int LuaMapView::scroll_to_map_pixel(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	// don't move view in replays
+	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
+		return 0;
+	}
+
+	const Vector2f center(luaL_checkdouble(L, 2), luaL_checkdouble(L, 3));
+	get()->scroll_to_map_pixel(center, MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: scroll_to_map_pixel(field)
+
+		Starts an animation to center the view on top of the 'field'. Use
+		`is_animating` to check if the animation is still going on.
+
+      :arg field: the field to center on
+      :type field: :class:`wl.map.Field`
+*/
+int LuaMapView::scroll_to_field(lua_State* L) {
+	get()->scroll_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: is_visible(field)
+
+		Returns `true` if `field` is currently visible in the map view.
+
+      :arg field: the field
+      :type field: :class:`wl.map.Field`
+*/
+int LuaMapView::is_visible(lua_State* L) {
+	lua_pushboolean(
+	   L, get()->view_area().contains((*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	return 1;
+}
+
+/* RST
+   .. method:: mouse_to_pixel(x, y)
+
+		Starts an animation to move the mouse onto the pixel (x, y) of this panel.
+		Use `is_animating` to check if the animation is still going on.
+
+      :arg x: x coordinate of the pixel
+      :type x: number
+      :arg y: y coordinate of the pixel
+      :type y: number
+*/
+int LuaMapView::mouse_to_pixel(lua_State* L) {
+	int x = luaL_checkint32(L, 2);
+	int y = luaL_checkint32(L, 3);
+	get()->mouse_to_pixel(Vector2i(x, y), MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: mouse_to_field(field)
+
+		Starts an animation to move the mouse onto the 'field'. If 'field' is not
+		visible on the screen currently, does nothing. Use `is_animating` to
+		check if the animation is still going on.
+
+      :arg field: the field
+      :type field: :class:`wl.map.Field`
+*/
+int LuaMapView::mouse_to_field(lua_State* L) {
+	get()->mouse_to_field(
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
 	return 0;
 }
 

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 19:18+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 19:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -213,7 +213,7 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Mar as giorra na roinnean-rathaid agad ’s ann nas luaithe a thèid am bathar agad a ghiùlan. Bu chòir dhut dèanamh cinnteach gu bheil an uiread a ghabhas de bhrataich air na rathaidean agad air sàilleibh seo."
+msgstr "Mar as giorra na roinnean-rathaid agad ’s ann nas luaithe a thèid am bathar agad a ghiùlan. Bu chòir dhut dèanamh cinnteach gu bheil an uiread a ghabhas de bhrataichean air na rathaidean agad air sàilleibh seo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:129
 msgid ""
@@ -314,7 +314,7 @@ msgid ""
 msgstr "Tha trì dòighean ann gus an sealladh agad a ghluasad. Is a’ chiad dòigh gun chleachd thu na h-iuchraichean saighde air a’ mheur-chlàr agad. Siuthad is feuch e an-dràsta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
-msgid "Click the ‘OK’ button and then move the view using the cursor keys"
+msgid "Click the ‘OK’ button and then move the view using the cursor keys."
 msgstr "Briog air a’ phutan “Ceart ma-thà” is an uairsin gluais an sealladh leis na h-iuchraichean saighde."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
@@ -402,7 +402,7 @@ msgstr "Ionnsaich mar a chleachdas tu am meanbh-mhapa"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Fosgail am mean-mhapa ‘s tu a’ briogadh air an treas putan on taobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
+msgstr "Fosgail am meanbh-mhapa ‘s tu a’ briogadh air an treas putan on taobh chlì aig bonn na sgrìn no a’ brùthadh air an iuchair “m” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -753,9 +753,9 @@ msgstr "a’ phutan “Cuir an teachdaireachd a thagh thu dhan tasglann” gus a
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
-"Once you have deleted a message, another message will be selected "
+"Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr "Nuair a bhios tu air teachdaireachd a sguabadh às, thèid teachdaireachd eile a thaghadh dhut on liosta gu fèin-obrachail."
+msgstr "Nuair a bhios tu air teachdaireachd a chur dhan tasglann, thèid teachdaireachd eile a thaghadh dhut on liosta gu fèin-obrachail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -780,15 +780,15 @@ msgstr "Tha uinneag nan teachdaireachd cudromach gus fortan na treubha agad a st
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
-msgstr "Cuir na h-uile teachdaireachd agad dhan tasglann a-nis."
+msgstr "Cuir na h-uile teachdaireachd a tha sa bhogsa a-steach agad dhan tasglann a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid ""
-"To do so, open the message window by pressing ‘n’ or clicking the rightmost "
-"button at the very bottom of the screen. The newest message will be marked "
-"for you automatically. Keep clicking the ‘Archive selected message’ button "
-"until all messages have been archived and the list is empty."
-msgstr "An toiseach, fosgail uinneag nan teachdaireachd ’s tu a’ brùthadh air “n” no a’ briogadh air a’ phutan as fhaide deas aig a bhonn. Thèid an teachdaireachd as ùire a thaghadh dhut gu fèin-obrachail. An uairsin, briog air a’ phutan “Cuir an teachdaireachd a thagh thu dhan tasglann” a-rithist gus an deach a h-uile teachdaireachd a chur dhan tasglann agus bidh an liosta falamh."
+"To do so, open the message window by pressing ‘n’ or clicking the second "
+"button from the right at the very bottom of the screen. The newest message "
+"will be marked for you automatically. Keep clicking the ‘Archive selected "
+"message’ button until all messages have been archived and the list is empty."
+msgstr "An toiseach, fosgail uinneag nan teachdaireachd ’s tu a’ brùthadh air “n” no a’ briogadh air an dàrna putan on taobh deas aig a bhonn. Thèid an teachdaireachd as ùire a thaghadh dhut gu fèin-obrachail. An uairsin, briog air a’ phutan “Cuir an teachdaireachd a thagh thu dhan tasglann” a-rithist gus an deach a h-uile teachdaireachd a chur dhan tasglann agus bidh an liosta falamh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -833,7 +833,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile carraig air falbh o na clachairean bochda a-nis. Cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dhaibh creagan a lorg san roinn obrach aca tuilleadh an ath thuras a dh’fheuchas iad ri obair a dhèanamh."
+msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile carraig air falbh o chlachairean bochda nan cuaraidhean a-nis. An ath thuras a dh’fheuchas e ri obair a dhèanamh, cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dha creagan a lorg san raon-obrach aige tuilleadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"

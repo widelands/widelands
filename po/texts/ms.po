@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -47,8 +47,8 @@ msgstr "Permainan ini adalah Percuma dan Bersumber Terbuka (FOSS), dilesenkan di
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Anda boleh temui lagi maklumat mengenai FOSS dan GPL dengan melawati laman sesawang berikut: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -205,8 +205,8 @@ msgid "Campaign Story"
 msgstr "Cerita Kempen"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Ketua Puak"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -424,7 +424,7 @@ msgstr ""
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
+"player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
@@ -461,13 +461,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -540,9 +540,9 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Kekunci nombor (1 - 0) membolehkan anda tetapkan saiz kawasan terpilih secara terus disekitar kursor tetikus anda."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -609,39 +609,33 @@ msgstr "Urus mesej anda lebih efisyen: tekan 'N' untuk Berita mencapai tetingkap
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Guna kekunci ',' (koma) dan '.' (titik noktah) untuk pergi dan kembali diantara tempat yang kerap dilawati."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Tekan kekunci Ctrl+(0-9) untuk menyimpan lokasi penting, kemudian tekan 0-9 untuk memanggilnya semula."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Membuang jalan ketika menahan kekunci Ctrl akan membuang semua bendera anda sehingga ke simpang pertama."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Askar baharu dilatih dalam ibu pejabat atau gudang jika semua alatan yang diperlukan tersedia. Tapak latihan adalah untuk menambahbaik keupayaan mereka."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Jika anda suka bermain dengan risiko, menekan Ctrl ketika mengklik butang naik taraf, robohkan atau musnahkan bangunan akan melangkau pengesahan."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Tekan I untuk togol secara pantas paparan inventori stok anda."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

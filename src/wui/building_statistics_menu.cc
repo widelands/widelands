@@ -88,7 +88,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-        _("Low Productivity "),
+        _("Low Productivity"),
         UI::Align::kBottomLeft),
      unproductive_percent_(
         &unproductive_box_,
@@ -482,7 +482,8 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().center_view_on_coords(stats_vector[last_building_index_].pos);
+		iplayer().scroll_to_field(
+		   stats_vector[last_building_index_].pos, MapView::Transition::Smooth);
 	}
 	low_production_reset_focus();
 	update();
@@ -631,7 +632,7 @@ void BuildingStatisticsMenu::update() {
 				                                                                     0);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Productivity "));
+				unproductive_label_.set_text(_("Low Productivity"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
 				unproductive_percent_.set_visible(true);

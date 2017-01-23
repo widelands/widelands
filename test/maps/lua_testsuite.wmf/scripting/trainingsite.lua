@@ -79,102 +79,102 @@ end
 -- Ware creation
 -- ==============
 function trainingsite_tests:test_houses_empty_at_creation()
-   for wname, count in pairs(self.camp.valid_wares) do
-      assert_equal(0, self.camp:get_wares(wname))
+   for wname, count in pairs(self.camp.valid_inputs) do
+      assert_equal(0, self.camp:get_inputs(wname))
    end
 end
-function trainingsite_tests:test_valid_wares()
-   assert_equal(10, self.camp.valid_wares.barbarians_bread)
-   assert_equal(6, self.camp.valid_wares.fish)
-   assert_equal(6, self.camp.valid_wares.meat)
-   assert_equal(2, self.camp.valid_wares.ax_sharp)
-   assert_equal(2, self.camp.valid_wares.ax_broad)
-   assert_equal(2, self.camp.valid_wares.ax_bronze)
-   assert_equal(2, self.camp.valid_wares.ax_battle)
-   assert_equal(2, self.camp.valid_wares.ax_warriors)
-   assert_equal(2, self.camp.valid_wares.helmet)
-   assert_equal(2, self.camp.valid_wares.helmet_mask)
-   assert_equal(2, self.camp.valid_wares.helmet_warhelm)
-   assert_equal(nil, self.camp.valid_wares.water)
+function trainingsite_tests:test_valid_inputs()
+   assert_equal(10, self.camp.valid_inputs.barbarians_bread)
+   assert_equal(6, self.camp.valid_inputs.fish)
+   assert_equal(6, self.camp.valid_inputs.meat)
+   assert_equal(2, self.camp.valid_inputs.ax_sharp)
+   assert_equal(2, self.camp.valid_inputs.ax_broad)
+   assert_equal(2, self.camp.valid_inputs.ax_bronze)
+   assert_equal(2, self.camp.valid_inputs.ax_battle)
+   assert_equal(2, self.camp.valid_inputs.ax_warriors)
+   assert_equal(2, self.camp.valid_inputs.helmet)
+   assert_equal(2, self.camp.valid_inputs.helmet_mask)
+   assert_equal(2, self.camp.valid_inputs.helmet_warhelm)
+   assert_equal(nil, self.camp.valid_inputs.water)
 end
-function trainingsite_tests:test_valid_wares_correct_length()
+function trainingsite_tests:test_valid_inputs_correct_length()
    c = {}
-   for n,count in pairs(self.camp.valid_wares) do c[#c+1] = n end
+   for n,count in pairs(self.camp.valid_inputs) do c[#c+1] = n end
    assert_equal(11, #c)
 end
-function trainingsite_tests:test_set_wares_string_arg()
-   self.camp:set_wares("fish", 3)
-   assert_equal(3, self.camp:get_wares("fish"))
+function trainingsite_tests:test_set_inputs_string_arg()
+   self.camp:set_inputs("fish", 3)
+   assert_equal(3, self.camp:get_inputs("fish"))
 end
-function trainingsite_tests:test_set_wares_array_arg()
-   self.camp:set_wares{fish=3, meat=2}
-   assert_equal(3, self.camp:get_wares("fish"))
-   assert_equal(2, self.camp:get_wares("meat"))
+function trainingsite_tests:test_set_inputs_array_arg()
+   self.camp:set_inputs{fish=3, meat=2}
+   assert_equal(3, self.camp:get_inputs("fish"))
+   assert_equal(2, self.camp:get_inputs("meat"))
 end
-function trainingsite_tests:test_set_wares_illegal_name()
+function trainingsite_tests:test_set_inputs_illegal_name()
    assert_error("illegal ware", function()
-      self.camp:set_wares{meat = 2, log=1}
+      self.camp:set_inputs{meat = 2, log=1}
    end)
    assert_error("illegal ware", function()
-      self.camp:set_wares("log",1)
+      self.camp:set_inputs("log",1)
    end)
 end
-function trainingsite_tests:test_set_wares_nonexistant_name()
+function trainingsite_tests:test_set_inputs_nonexistant_name()
    assert_error("illegal ware", function()
-      self.camp:set_wares{meat = 2, balloon=1}
+      self.camp:set_inputs{meat = 2, balloon=1}
    end)
    assert_error("illegal ware", function()
-      self.camp:set_wares("balloon",1)
+      self.camp:set_inputs("balloon",1)
    end)
 end
-function trainingsite_tests:test_set_wares_negative_count()
+function trainingsite_tests:test_set_inputs_negative_count()
    assert_error("negative counts", function()
-      self.camp:set_wares("meat", -1)
+      self.camp:set_inputs("meat", -1)
    end)
 end
-function trainingsite_tests:test_set_wares_illegal_count()
+function trainingsite_tests:test_set_inputs_illegal_count()
    assert_error("too big count", function()
-      self.camp:set_wares("meat", 10)
+      self.camp:set_inputs("meat", 10)
    end)
 end
-function trainingsite_tests:test_get_wares_array_arg()
-   self.camp:set_wares{fish=3, meat=2}
-   rv = self.camp:get_wares{"fish", "meat"}
+function trainingsite_tests:test_get_inputs_array_arg()
+   self.camp:set_inputs{fish=3, meat=2}
+   rv = self.camp:get_inputs{"fish", "meat"}
    assert_equal(3, rv.fish)
    assert_equal(2, rv.meat)
    assert_equal(nil, rv.helmet)
 end
-function trainingsite_tests:test_get_wares_all_arg()
-   self.camp:set_wares{fish=3, meat=2}
-   rv = self.camp:get_wares("all")
+function trainingsite_tests:test_get_inputs_all_arg()
+   self.camp:set_inputs{fish=3, meat=2}
+   rv = self.camp:get_inputs("all")
    assert_equal(0, rv.barbarians_bread)
    assert_equal(0, rv.helmet)
    assert_equal(2, rv.meat)
    assert_equal(3, rv.fish)
    assert_equal(nil, rv.log)
 end
-function trainingsite_tests:test_get_wares_string_arg()
-   self.camp:set_wares{fish=3, meat=2}
-   assert_equal(2, self.camp:get_wares("meat"))
-   assert_equal(3, self.camp:get_wares("fish"))
-   assert_equal(0, self.camp:get_wares("beer"))
-   assert_equal(0, self.camp:get_wares("beer_strong"))
-   assert_equal(0, self.camp:get_wares("log"))
+function trainingsite_tests:test_get_inputs_string_arg()
+   self.camp:set_inputs{fish=3, meat=2}
+   assert_equal(2, self.camp:get_inputs("meat"))
+   assert_equal(3, self.camp:get_inputs("fish"))
+   assert_equal(0, self.camp:get_inputs("beer"))
+   assert_equal(0, self.camp:get_inputs("beer_strong"))
+   assert_equal(0, self.camp:get_inputs("log"))
 end
-function trainingsite_tests:test_get_wares_non_storable_wares()
-   self.camp:set_wares{fish=3, meat=2}
-   local rv = self.camp:get_wares{"meat", "log", "fish"}
+function trainingsite_tests:test_get_inputs_non_storable_wares()
+   self.camp:set_inputs{fish=3, meat=2}
+   local rv = self.camp:get_inputs{"meat", "log", "fish"}
    assert_equal(0, rv.log)
    assert_equal(2, rv.meat)
    assert_equal(3, rv.fish)
    assert_equal(nil, rv.beer_strong)
 end
-function trainingsite_tests:test_get_wares_non_existant_name()
+function trainingsite_tests:test_get_inputs_non_existant_name()
    assert_error("non existent ware", function()
-      self.camp:get_wares("balloon")
+      self.camp:get_inputs("balloon")
    end)
    assert_error("non existent ware", function()
-      self.camp:get_wares{"meat", "balloon"}
+      self.camp:get_inputs{"meat", "balloon"}
    end)
 end
 

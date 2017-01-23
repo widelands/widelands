@@ -50,23 +50,11 @@ std::string speed_string(int const speed) {
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const chatenabled,
                                          bool const multiplayer)
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
-     chatenabled_(chatenabled),
      multiplayer_(multiplayer),
-     playertype_(pt),
-
-#define INIT_BTN(picture, name, tooltip)                                                           \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
-
-     toggle_buildhelp_(INIT_BTN(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
-     reset_zoom_(INIT_BTN("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"))) {
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
-	reset_zoom_.sigclicked.connect(
-	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+     playertype_(pt) {
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -81,8 +69,6 @@ Widelands::Game& InteractiveGameBase::game() const {
 void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
 	chat_provider_ = &chat;
 	chat_overlay_->set_chat_provider(chat);
-
-	chatenabled_ = true;
 }
 
 ChatProvider* InteractiveGameBase::get_chat_provider() {
@@ -125,7 +111,7 @@ void InteractiveGameBase::postload() {
 	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_.set_perm_pressed(buildhelp());
+	on_buildhelp_changed(buildhelp());
 
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
@@ -134,14 +120,12 @@ void InteractiveGameBase::postload() {
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete fieldaction_.window;
-	fieldaction_.window = nullptr;
-
+	fieldaction_.destroy();
 	hide_minimap();
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_.set_perm_pressed(value);
+	toggle_buildhelp_->set_perm_pressed(value);
 }
 
 /**

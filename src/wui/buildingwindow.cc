@@ -37,9 +37,9 @@
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/helpwindow.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
-#include "wui/waresqueuedisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
@@ -317,7 +317,7 @@ Callback for bulldozing request
 ===============
 */
 void BuildingWindow::act_bulldoze() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building_.get_playercaps() & Widelands::Building::PCap_Bulldoze)
 			igbase().game().send_player_bulldoze(building_);
 	} else {
@@ -331,7 +331,7 @@ Callback for dismantling request
 ===============
 */
 void BuildingWindow::act_dismantle() {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building_.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase().game().send_player_dismantle(building_);
 	} else {
@@ -375,7 +375,7 @@ Callback for enhancement request
 ===============
 */
 void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
-	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building_.get_playercaps() & Widelands::Building::PCap_Enhancable)
 			igbase().game().send_player_enhance_building(building_, id);
 	} else {
@@ -453,7 +453,7 @@ void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
                                              Widelands::WaresQueue* const wq,
                                              bool show_only) {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
+	box->add(new InputQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
 }
 
 /**
@@ -461,7 +461,7 @@ void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase().center_view_on_coords(building().get_position());
+	igbase().scroll_to_field(building().get_position(), MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {

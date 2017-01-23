@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# D M <hunter12@home.se>, 2017
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-08-26 10:15+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2017-01-06 13:06+0000\n"
+"PO-Revision-Date: 2017-01-09 20:07+0000\n"
+"Last-Translator: D M <hunter12@home.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:38
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Detta är Widelands version %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -33,13 +34,13 @@ msgstr "Inställningar:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=value skriver över inställningar i konfigurationsfilerna"
+msgstr " --<config-entry-name>=VÄRDE skriver över inställningar i konfigurationsfilerna"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=KATALOG    Använd den givna riktningen för widelands\n                      datafiler"
+msgstr " --datadir=KATALOG    Använd den specifierade foldern för widelands\ndatafiler"
 
 #: ../../src/wlapplication_messages.cc:50
 msgid ""
@@ -60,13 +61,13 @@ msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr "--coredump=[ja|nej]\nGenererar en minnesutskrift av segmenteringsfel istället för att\nanvända SDL"
 
 #: ../../src/wlapplication_messages.cc:64
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      Ställ in språk."
+msgstr " --language=[de_DE|sv_SE|...]\nStäll in språk."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -81,17 +82,17 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Ställ in språk."
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr "--write_syncstreams=[ja|nej]\nSkapa synkströmdumpfiler för att hjälpa till att felsöka nätverksspel."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr "--autosave=[...] Spara spelet automatiskt var n:te minut"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr "--rolling_autosave=[...]\nAnvänd de här filerna för rullande automatsparningar"
 
 #: ../../src/wlapplication_messages.cc:82
 msgid "Sound options:"
@@ -99,7 +100,7 @@ msgstr "Ljudalternativ:"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Startar spelet med ljud avstängt."
+msgstr " --nosound Startar spelet med ljud avstängt."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid " --disable_fx         Disable sound effects."
@@ -107,34 +108,34 @@ msgstr " --disable_fx         Stäng av ljudeffekter."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --disable_music      Disable music."
-msgstr " --disable_music      Stäng av musik."
+msgstr " --disable_music Stäng av musik."
 
 #: ../../src/wlapplication_messages.cc:87
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              Spara inte spel som binära zip-arkiv."
+msgstr " --nozip Spara inte spel som binära zip-arkiv."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor             Starta direkt i Widelands redigerare.\n                      Lägg till =FILENAME för att direkt läsa in\n                      kartan FILENAME i redigeraren."
+msgstr " --editor  Starta direkt i Widelands kartredigerare.\nLägg till =FILNAMN för att direkt läsa in\nkartan FILNAMN i redigeraren."
 
 #: ../../src/wlapplication_messages.cc:93
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr " --scenario=FILENAME  Starta direkt FILENAME som scenariokarta."
+msgstr " --scenario=FILNAMN  Starta direkt FILNAMN som scenariokarta."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILENAME  Starta direkt det sparade spelet FILENAME."
+msgstr " --loadgame=FILNAMN  Starta direkt det sparade spelet FILNAMN."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr "--script=FILNAMN  Kör det angivna Lua scriptet efter initialisering\nBara giltigt med --scenario, --loadgame, eller --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -146,11 +147,11 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr "--auto_roadbuild_mode=[ja|nej]\nStäll in om vägbyggarläge ska startas\nautomatiskt efter att en flagga som \ninte är ansluten till en väg har placerats."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid "Graphic options:"
-msgstr ""
+msgstr "Grafikalternativ:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -161,15 +162,15 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr "--fullscreen=[ja|nej]\nOm hela skärmen ska användas\nför spelet."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr "--xres=[...] Fönstrets bredd i pixlar."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr "--yres=[...] Fönstrets höjd i pixlar."
 
 #: ../../src/wlapplication_messages.cc:123
 msgid "Options for the internal window manager:"
@@ -181,7 +182,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Flytta ett fönster till skärmkanten när \n                      fönsterkanten kommer inom detta avstånd\n                      från skärmkanten."
+msgstr " --border_snap_distance=[0 ...]\nFlytta ett fönster till skärmkanten när \nfönsterkanten kommer inom detta avstånd\nfrån skärmkanten."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -193,7 +194,7 @@ msgid ""
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr "--dock_windows_to_edges=[ja|nej]\nEliminera ett fönsters kant mot\nskärmens kant när kanten på\nfönstret ligger intill skärmens kant."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid ""
@@ -201,7 +202,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Flytta fönster till panelkanten när\n                      fönsterkanten kommer inom det här\n                      avståndet från panelkanten."
+msgstr " --panel_snap_distance=[0 ...]\nFlytta fönster till panelkanten när\nfönsterkanten kommer inom det här\navståndet från panelkanten."
 
 #: ../../src/wlapplication_messages.cc:142
 msgid ""
@@ -209,11 +210,11 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Flytta endast fönster till panelkanten om \n                      fönstret överlappar panelen."
+msgstr " --snap_windows_only_when_overlapping=[ja|nej]\nFlytta endast fönster till panelkanten om \nfönstret överlappar panelen."
 
 #: ../../src/wlapplication_messages.cc:148
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Aktivera utförliga meddelanden för felsökning"
+msgstr " --verbose  Aktivera utförliga meddelanden för felsökning"
 
 #: ../../src/wlapplication_messages.cc:149
 msgid " --help               Show this help"
@@ -225,4 +226,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Buggrapporter? Förslag? Gå in på projektets hemsida:\n        https://launchpad.net/widelands\n\nHoppas du gillar spelet!"
+msgstr "Buggrapporter? Förslag? Gå in på projektets hemsida:\nhttps://launchpad.net/widelands\n\nHoppas du gillar spelet!"

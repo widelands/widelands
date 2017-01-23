@@ -102,8 +102,8 @@ function init_player()
    {"atlanteans_horsefarm", 40, 55},
    {"atlanteans_spiderfarm", 37, 45},
    {"atlanteans_weaving_mill", 45, 45},
-   {"atlanteans_smelting_works", 35, 56, wares = {coal = 8, iron_ore = 8}}, -- no gold
-   {"atlanteans_smelting_works", 35, 59, wares = {coal = 8, iron_ore = 8}},
+   {"atlanteans_smelting_works", 35, 56, inputs = {coal = 8, iron_ore = 8}}, -- no gold
+   {"atlanteans_smelting_works", 35, 59, inputs = {coal = 8, iron_ore = 8}},
    {"atlanteans_toolsmithy", 41, 52},
    {"atlanteans_weaponsmithy", 37, 54},
    {"atlanteans_tower_small", 34, 63},

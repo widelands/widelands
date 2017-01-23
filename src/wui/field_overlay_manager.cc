@@ -40,7 +40,8 @@ FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 
 	const OverlayInfo* const buildhelp_infos_end = buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) {  // The other buildhelp overlays.
-		++buildhelp_info, ++filename;
+		++buildhelp_info;
+		++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
 		buildhelp_info->pic = g_gr->images().get(*filename);

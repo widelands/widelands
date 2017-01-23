@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
+#include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
 
@@ -37,67 +38,35 @@ class Worker;
 /**
  * This micro storage room can hold any number of items of a fixed ware.
  */
-class WaresQueue {
+class WaresQueue : public InputQueue {
 public:
-	using CallbackFn = void(Game&, WaresQueue*, DescriptionIndex ware, void* data);
-
 	WaresQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {
-		assert(ware_ == INVALID_INDEX);
+	~WaresQueue() override {
+		assert(index_ == INVALID_INDEX);
 	}
 #endif
 
-	DescriptionIndex get_ware() const {
-		return ware_;
-	}
-	Quantity get_max_fill() const {
-		return max_fill_;
-	}
-	Quantity get_max_size() const {
-		return max_size_;
-	}
-	Quantity get_filled() const {
+	Quantity get_filled() const override {
 		return filled_;
 	}
 
-	void cleanup();
+	void cleanup() override;
 
-	void set_callback(CallbackFn*, void* data);
+	void remove_from_economy(Economy&) override;
+	void add_to_economy(Economy&) override;
 
-	void remove_from_economy(Economy&);
-	void add_to_economy(Economy&);
+	void set_filled(Quantity) override;
 
-	void set_max_size(Quantity);
-	void set_max_fill(Quantity);
-	void set_filled(Quantity);
-	void set_consume_interval(uint32_t);
+protected:
+	void read_child(FileRead&, Game&, MapObjectLoader&) override;
+	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
 
-	Player& owner() const {
-		return owner_.owner();
-	}
+	void entered(DescriptionIndex index, Worker* worker) override;
 
-	void read(FileRead&, Game&, MapObjectLoader&);
-	void write(FileWrite&, Game&, MapObjectSaver&);
-
-private:
-	static void request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
-	void update();
-
-	PlayerImmovable& owner_;
-	DescriptionIndex ware_;  ///< ware ID
-	Quantity max_size_;      ///< nr of items that fit into the queue maximum
-	Quantity max_fill_;      ///< nr of wares that should be ideally in this queue
-	Quantity filled_;        ///< nr of items that are currently in the queue
-
-	///< time in ms between consumption at full speed
-	uint32_t consume_interval_;
-
-	Request* request_;  ///< currently pending request
-
-	CallbackFn* callback_fn_;
-	void* callback_data_;
+	/// Number of items that are currently in the queue
+	Quantity filled_;
 };
 }
 
