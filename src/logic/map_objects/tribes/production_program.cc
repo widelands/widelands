@@ -909,7 +909,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				assert(q <= inputqueues[i]->get_filled());
 				inputqueues[i]->set_filled(inputqueues[i]->get_filled() - q);
 
-				// Update consumption statistic
+				// Update consumption statistics
 				if (inputqueues[i]->get_type() == wwWARE) {
 					ps.owner().ware_consumed(inputqueues[i]->get_index(), q);
 				}

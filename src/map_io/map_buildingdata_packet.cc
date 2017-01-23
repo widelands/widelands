@@ -1147,7 +1147,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 			input_ware_queues_size++;
 		}
 	}
-	// Write count of ware queues and ware queues
+	// Write count of ware queues
 	fw.unsigned_16(input_ware_queues_size);
 	for (InputQueue *iq : productionsite.inputqueues()) {
 		if (iq->get_type() == wwWARE) {

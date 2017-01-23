@@ -82,7 +82,7 @@ Access to the wares queues by id
 */
 InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
     // There are no worker queues here
-    // Hopefully, our construction sites are save enough not to kill workers
+    // Hopefully, our construction sites are safe enough not to kill workers
     if (type != wwWARE) {
 		throw wexception("%s (%u) (building %s) has no WorkersQueues", descr().name().c_str(),
 					 serial(), building_->name().c_str());

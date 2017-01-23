@@ -479,8 +479,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	// - for armours and weapons to 1
 	// - for others to 6
 	// - for others to 6
-	std::vector<InputQueue*> const inputqueues1 = tso.site->inputqueues();
-	for (InputQueue *queue : inputqueues1) {
+	for (InputQueue *queue : tso.site->inputqueues()) {
 
 		if (queue->get_type() != wwWARE) {
 			continue;
@@ -522,8 +521,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
-		std::vector<InputQueue*> const inputqueues2 = tso.site->inputqueues();
-		for (InputQueue *queue : inputqueues2) {
+		for (InputQueue *queue : tso.site->inputqueues()) {
 			if (queue->get_type() != wwWARE) {
 				continue;
 			}
@@ -536,7 +534,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// checking non subsitutes
-		for (InputQueue *queue : inputqueues2) {
+		for (InputQueue *queue : tso.site->inputqueues()) {
 			if (queue->get_type() != wwWARE) {
 				continue;
 			}
