@@ -125,8 +125,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect(
-	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
 
 	toolbar_.add_space(15);
 
@@ -635,7 +636,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// Make sure that we will start at coordinates (0,0).
-		set_viewpoint(Vector2f(0, 0), true);
+		set_view(MapView::View{Vector2f(0, 0), 1.f}, Transition::Jump);
 		set_sel_pos(Widelands::NodeAndTriangle<>(
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));

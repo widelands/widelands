@@ -146,14 +146,14 @@ LuaGameInterface::LuaGameInterface(Widelands::Game* g) : factory_(new GameFactor
 LuaGameInterface::~LuaGameInterface() {
 }
 
-LuaCoroutine* LuaGameInterface::read_coroutine(FileRead& fr) {
-	LuaCoroutine* rv = new LuaCoroutine(nullptr);
+std::unique_ptr<LuaCoroutine> LuaGameInterface::read_coroutine(FileRead& fr) {
+	std::unique_ptr<LuaCoroutine> rv(new LuaCoroutine(nullptr));
 	rv->read(lua_state_, fr);
 	return rv;
 }
 
-void LuaGameInterface::write_coroutine(FileWrite& fw, LuaCoroutine* cr) {
-	cr->write(fw);
+void LuaGameInterface::write_coroutine(FileWrite& fw, const LuaCoroutine& cr) {
+	cr.write(fw);
 }
 
 void LuaGameInterface::read_global_env(FileRead& fr,

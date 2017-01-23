@@ -94,8 +94,6 @@ struct DefaultAI : ComputerPlayer {
 		kAttackableVeryWeak
 	};
 
-	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
-
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {

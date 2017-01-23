@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-04 07:02+0000\n"
-"PO-Revision-Date: 2016-12-07 21:14+0000\n"
-"Last-Translator: Nora Ghaoui\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:53+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1973,124 +1973,114 @@ msgstr ""
 msgid "Reset zoom"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgid "Go to the previous location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:69
-msgid "Go to the next location"
-msgstr ""
-
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show all messages"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show economy messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show seafaring messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show warfare messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show scenario messages only"
 msgstr ""
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Jump to the location corresponding to the current message"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Archive/Restore the current message"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
@@ -2281,7 +2271,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr "Standaard harnas voor keizerlijke soldaten. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 1 naar 2."
+msgstr "Standaard harnas voor soldaten van het Imperium. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 1 naar 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../data/tribes/wares/armor_chain/helptexts.lua:4
@@ -2290,7 +2280,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr "De maliënkolder is een middelsterk harnas voor keizerlijke soldaten. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 2 naar 3."
+msgstr "De maliënkolder is een middelsterk harnas voor soldaten van het Imperium. Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - om soldaten te trainen van levenspuntenniveau 2 naar 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../data/tribes/wares/armor_gilded/helptexts.lua:4
@@ -2453,7 +2443,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "De bakkers van het keizerrijk maken smakelijk brood uit meel en water. Het wordt gebruikt in taveernes en herbergen om porties en maaltijden te maken. Brood wordt ook gebruikt in de trainingsgebouwen (arena, colosseum, trainingskamp)."
+msgstr "De bakkers van het Imperium maken smakelijk brood uit meel en water. Het wordt gebruikt in tavernes en herbergen om rantsoenen en maaltijden te maken. Brood wordt ook gebruikt in de trainingsgebouwen (arena, colosseum, trainingskamp)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -2631,7 +2621,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr "Naast brood en vlees is ook vis een voedingsmiddel voor het keizerrijk. Vis wordt gebruikt in taveernes, herbergen en trainingsgebouwen (arena, colosseum, trainingskamp)."
+msgstr "Naast brood en vlees is ook vis een voedingsmiddel voor het Imperium. Vis wordt gebruikt in tavernes, herbergen en trainingsgebouwen (arena, colosseum, trainingskamp)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -2666,7 +2656,7 @@ msgctxt "empire_ware"
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr "Meel wordt geproduceerd door de molen uit tarwe en is nodig in de bakkerij om het heerlijke keizerlijke brood te maken."
+msgstr "Meel wordt geproduceerd door de molen uit tarwe en is nodig in de bakkerij om het heerlijke Imperiale brood te maken."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:4
@@ -2904,7 +2894,7 @@ msgctxt "empire_ware"
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr "Hoe kan men een portie of maaltijd bereiden zonder keukengerei? Ze worden geproduceerd in een werktuidsmederij en gebruikt in taveernes en herbergen."
+msgstr "Hoe kan men een rantsoen of maaltijd bereiden zonder keukengerei? Ze worden geproduceerd in een werktuigsmederij en gebruikt in tavernes en herbergen."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -2958,7 +2948,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr "Marmerzuilen zijn symbolisch voor de hoge keizerlijke cultuur, dus worden ze gebruikt in bijna ieder groot gebouw. Ze worden geproduceerd uit marmer bij een steenhouwer."
+msgstr "Marmerzuilen zijn symbolisch voor de hoge Imperiale cultuur, dus worden ze gebruikt in bijna ieder groot gebouw. Ze worden geproduceerd uit marmer bij een steenhouwer."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4

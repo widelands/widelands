@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2016
+# Juanjo, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:47+0000\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-17 21:42+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -173,7 +173,7 @@ msgstr "L'editor és per als jugadors que volen dissenyar els seus propis mapes 
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Tal i com podeu veure, l'editor està encara en procés de construcció. Conforme millori l'editor, aquests textos també s'aniran completant."
+msgstr "Tal com podeu veure, l'editor està encara en procés de construcció. A mesura que millori l'editor, aquests textos també s'aniran completant."
 
 #: ../../data/scripting/editor/editor_introduction.lua:18
 msgid "The wiki also includes a short tutorial on how to build a map."
@@ -212,7 +212,7 @@ msgstr "Els arbres no creixeran en aquest terreny."
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:18
 msgid "Preferred terrains"
-msgstr "Terrenys preferit"
+msgstr "Terrenys preferits"
 
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:39

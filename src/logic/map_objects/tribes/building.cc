@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -239,8 +240,9 @@ Building::Building(const BuildingDescr& building_descr)
 }
 
 Building::~Building() {
-	if (optionswindow_)
+	if (optionswindow_) {
 		hide_options();
+	}
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -442,10 +444,14 @@ applicable.
 void Building::destroy(EditorGameBase& egbase) {
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
+	Player* building_owner = get_owner();
+	const BuildingDescr* building_descr = &descr();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire) {
-		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe, this);
+		egbase.create_immovable_with_name(pos, "destroyed_building",
+		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
+		                                  building_descr);
 	}
 }
 
@@ -471,8 +477,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-WaresQueue& Building::waresqueue(DescriptionIndex const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*

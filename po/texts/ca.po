@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:50+0000\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-17 21:56+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgstr "Com comunicar errors"
 
 #: ../../data/txts/README.lua:29
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Si trobeu un error, per favor comuniqeu-ho al nostre registre d'errors (en anglès):"
+msgstr "Si trobeu un error, per favor comunique-ho al nostre registre d'errors (en anglès):"
 
 #: ../../data/txts/README.lua:31
 msgid "Please provide enough background information. Tell us:"
@@ -337,7 +337,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "En aquesta partida, comenceu amb un petit tros de terra amb pocs recursos. Haureu de crear un imperi amb milers d'habitants. Per aconseguir-ho, cal establir una infraestructura econòmica, explorar les terres del voltant i enfrontar-vos als clans rivals."
+msgstr "En les partides del Widelands, començareu amb un petit tros de terra amb pocs recursos amb l'objectiu de crear un imperi amb milers d'habitants. Per aconseguir-ho, caldrà que construïu infraestructures, que exploreu les terres del voltant i que us enfronteu als clans rivals."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -464,7 +464,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "L'última de les tres només la pot activar el servidor clicant el botó de «tipus» de jugador. Els jugadors amfitrions poden escollir la posició d'inici de cada jugador (incloent els edificis, béns i treballadors inicials), la cultura i l'equip dels jugadors que controlen les IA."
+msgstr "L'última de les tres només la pot activar el servidor clicant el botó de «tipus» de jugador. Els jugadors amfitrions poden escollir la posició d'inici de cada jugador (incloent-hi els edificis, béns i treballadors inicials), la cultura i l'equip dels jugadors que controlen les IA."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -482,7 +482,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Podeu veure la informació del mapa seleccionat o de la partida desada a la banda dreta. Un botó que hi ha al costat del mapa permet a l'amfitrió canviar de mapa. A més a més, l'amfitrió pot triar les condicions de victòria i pot començar la partida tan punt tots els jugadors estan preparats."
+msgstr "Podeu veure la informació del mapa seleccionat o de la partida desada a la banda dreta. Un botó que hi ha al costat del mapa permet a l'amfitrió canviar de mapa. A més a més, l'amfitrió pot triar les condicions de victòria i pot començar la partida tan bon punt tots els jugadors estan preparats."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2
@@ -611,39 +611,33 @@ msgstr "Gestioneu els vostres missatges eficientment: premeu «n» («News», en
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Useu les tecles «,» (coma) i «.» (punt) per tornar cap enrere i cap avant entre llocs del mapa recentment visitats."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Useu Ctrl+(0-9) per guardar ubicacions importants i premeu 0-9 per tornar-hi ràpidament."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Si destruïu una bandera o camí mentre manteniu premuda la tecla Ctrl, s'eliminaran totes les banderes fins a la primera cruïlla."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Els nous soldats es recluten en el quarter general, magatzems o ports si disposen de tots els elements necessaris. Els llocs d'entrenament en milloren les característiques."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Si us agrada viure al límit, prement la tecla Ctrl mentre cliqueu millorar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Premeu la tecla «i» (inventari) per obrir o tancar la finestra d'estoc."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

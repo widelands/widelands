@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-08 17:26+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -58,18 +58,18 @@ msgid "%1$s and %2$s"
 msgstr ""
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:163
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:164
 msgid "Not enough space"
 msgstr ""
 
@@ -233,50 +233,50 @@ msgstr ""
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:133
+#: ../../src/editor/editorinteractive.cc:134
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:137
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:141
+#: ../../src/editor/editorinteractive.cc:142
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:200
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:200
+#: ../../src/editor/editorinteractive.cc:201
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:213 ../../src/logic/game.cc:217
+#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:217
 #: ../../src/logic/game.cc:270
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:263
+#: ../../src/editor/editorinteractive.cc:264
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:264
+#: ../../src/editor/editorinteractive.cc:265
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:585
+#: ../../src/editor/editorinteractive.cc:586
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:588
+#: ../../src/editor/editorinteractive.cc:589
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:535
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -284,7 +284,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:591
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 #: ../../src/logic/map.h:180
@@ -292,12 +292,12 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:598
+#: ../../src/editor/editorinteractive.cc:599
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
 
-#: ../../src/editor/map_generator.cc:712
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr ""
 
@@ -453,18 +453,18 @@ msgid "Descr: %s"
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #, c-format
 msgid "Current: %s …"
 msgstr ""
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:194
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:197
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:177
 #, c-format
 msgid "Current: %s"
@@ -531,7 +531,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
-#: ../../src/scripting/lua_game.cc:431 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
 #: ../../src/ui_fsmenu/helpwindow.cc:52
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
 #: ../../src/ui_fsmenu/options.cc:132
@@ -870,7 +870,9 @@ msgstr ""
 msgid "Random height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:125
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
+#: ../../src/wui/minimap.cc:125
 msgid "Terrain"
 msgstr ""
 
@@ -880,7 +882,7 @@ msgid "Immovables"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:63
-#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:42
+#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
 msgid "Animals"
 msgstr ""
 
@@ -929,16 +931,12 @@ msgstr ""
 msgid "%1%: %2%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-msgid "Terrain Select"
-msgstr ""
-
 #: ../../src/editor/ui_menus/toolsize_menu.cc:80
 #, c-format
 msgid "Current Size: %u"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:234
+#: ../../src/logic/editor_game_base.cc:235
 msgid "Loading graphics"
 msgstr ""
 
@@ -992,7 +990,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:513
+#: ../../src/logic/map_objects/immovable.cc:511
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -1064,28 +1062,28 @@ msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:292
+#: ../../src/logic/map_objects/tribes/production_program.cc:310
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:301
+#: ../../src/logic/map_objects/tribes/production_program.cc:319
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:314
+#: ../../src/logic/map_objects/tribes/production_program.cc:332
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:324
+#: ../../src/logic/map_objects/tribes/production_program.cc:342
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr ""
@@ -1101,32 +1099,32 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:363
-#: ../../src/logic/map_objects/tribes/production_program.cc:385
-#: ../../src/logic/map_objects/tribes/production_program.cc:834
-#: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1019
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:906
+#: ../../src/logic/map_objects/tribes/production_program.cc:1016
+#: ../../src/logic/map_objects/tribes/production_program.cc:1098
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:369
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:391
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:404
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:410
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
 msgstr ""
 
@@ -1140,32 +1138,32 @@ msgstr ""
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #.
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
-#: ../../src/logic/map_objects/tribes/production_program.cc:858
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:930
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:519
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:524
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:719
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr ""
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 #.
-#: ../../src/logic/map_objects/tribes/production_program.cc:844
+#: ../../src/logic/map_objects/tribes/production_program.cc:916
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1174,7 +1172,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:948
+#: ../../src/logic/map_objects/tribes/production_program.cc:1027
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1183,45 +1181,45 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1030
+#: ../../src/logic/map_objects/tribes/production_program.cc:1109
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1236
+#: ../../src/logic/map_objects/tribes/production_program.cc:1315
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1245
-#: ../../src/logic/map_objects/tribes/production_program.cc:1322
+#: ../../src/logic/map_objects/tribes/production_program.cc:1324
+#: ../../src/logic/map_objects/tribes/production_program.cc:1401
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:261
+#: ../../src/logic/map_objects/tribes/productionsite.cc:258
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:268
+#: ../../src/logic/map_objects/tribes/productionsite.cc:265
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:275
+#: ../../src/logic/map_objects/tribes/productionsite.cc:272
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:374
-#: ../../src/wui/building_statistics_menu.cc:622
+#: ../../src/logic/map_objects/tribes/productionsite.cc:382
+#: ../../src/wui/building_statistics_menu.cc:623
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:918
+#: ../../src/logic/map_objects/tribes/productionsite.cc:945
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -1322,20 +1320,20 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1349
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1350
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:420
+#: ../../src/logic/map_objects/tribes/warehouse.cc:423
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:426
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:429
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -1363,8 +1361,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1653
-#: ../../src/wui/productionsitewindow.cc:72
-#: ../../src/wui/productionsitewindow.cc:97
+#: ../../src/wui/productionsitewindow.cc:79
+#: ../../src/wui/productionsitewindow.cc:104
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] ""
@@ -1756,7 +1754,7 @@ msgstr ""
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1772
+#: ../../src/network/nethost.cc:1770
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -1988,7 +1986,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1046 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -2039,7 +2037,7 @@ msgstr[1] ""
 msgid "About Widelands"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:124
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:123
 msgid "Close"
 msgstr ""
 
@@ -2938,48 +2936,50 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:157
+#: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:158
-#, c-format
-msgid "Do you really want to destroy this %s?"
+#: ../../src/wui/actionconfirm.cc:177
+msgid "Do you really want to destroy this building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:204
+#: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:205
-#, c-format
-msgid "Do you really want to dismantle this %s?"
+#: ../../src/wui/actionconfirm.cc:222
+msgid "Do you really want to dismantle this building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:251
+#: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:252
-#, c-format
-msgid "Do you really want to enhance this %s?"
+#: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
+msgid "Do you really want to enhance this building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:293
+#. * TRANSLATORS: Warning message when player wants to enhance a military building
+#: ../../src/wui/actionconfirm.cc:271
+msgid "Be careful if the enemy is near!"
+msgstr ""
+
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
 msgstr ""
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:295
+#: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:331
+#: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:332
+#: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
@@ -3019,7 +3019,7 @@ msgstr ""
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:91
-#: ../../src/wui/building_statistics_menu.cc:634
+#: ../../src/wui/building_statistics_menu.cc:635
 msgid "Low Productivity"
 msgstr ""
 
@@ -3064,15 +3064,15 @@ msgstr ""
 #. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:652
-#: ../../src/wui/building_statistics_menu.cc:676
-#: ../../src/wui/building_statistics_menu.cc:678
-#: ../../src/wui/productionsitewindow.cc:148
+#: ../../src/wui/building_statistics_menu.cc:653
+#: ../../src/wui/building_statistics_menu.cc:677
+#: ../../src/wui/building_statistics_menu.cc:679
+#: ../../src/wui/productionsitewindow.cc:155
 msgid "%1%/%2%"
 msgstr ""
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:666
+#: ../../src/wui/building_statistics_menu.cc:667
 msgid "Lacking Soldiers:"
 msgstr ""
 
@@ -3193,7 +3193,7 @@ msgstr ""
 msgid "Toggle building label display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:99
+#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
 msgstr ""
 
@@ -3221,8 +3221,8 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:92
-#: ../../src/wui/interactive_spectator.cc:85
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:93
+#: ../../src/wui/interactive_spectator.cc:86
 msgid "Chat"
 msgstr ""
 
@@ -3419,7 +3419,7 @@ msgid "Show Inbox"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:102
+#: ../../src/wui/interactive_player.cc:103
 msgid "Objectives"
 msgstr ""
 
@@ -3555,7 +3555,7 @@ msgid "Buildings"
 msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:60 ../../src/wui/transport_ui.cc:57
+#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:57
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr ""
@@ -3588,6 +3588,26 @@ msgstr ""
 msgid "Military"
 msgstr ""
 
+#: ../../src/wui/inputqueuedisplay.cc:185
+msgid "Highest priority"
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:188
+msgid "Normal priority"
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:191
+msgid "Lowest priority"
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:236
+msgid "Decrease the number of wares you want to be stored here."
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:245
+msgid "Increase the number of wares you want to be stored here."
+msgstr ""
+
 #: ../../src/wui/interactive_gamebase.cc:45
 msgid "PAUSE"
 msgstr ""
@@ -3603,16 +3623,16 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:106
-#: ../../src/wui/interactive_player.cc:156
+#: ../../src/wui/interactive_player.cc:107
+#: ../../src/wui/interactive_player.cc:157
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:109
+#: ../../src/wui/interactive_player.cc:110
 msgid "Tribal Encyclopedia"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:161
+#: ../../src/wui/interactive_player.cc:162
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3913,23 +3933,23 @@ msgstr ""
 msgid "game"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:73
+#: ../../src/wui/productionsitewindow.cc:80
 msgid "Exp"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:81
 msgid "Next Level"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:86
+#: ../../src/wui/productionsitewindow.cc:93
 msgid "Terminate the employment of the selected worker"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:168
 msgid "(coming)"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:168
 msgid "(vacant)"
 msgstr ""
 
@@ -3985,15 +4005,15 @@ msgstr ""
 msgid "Cancel the Expedition"
 msgstr ""
 
-#: ../../src/wui/soldiercapacitycontrol.cc:70
+#: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
 msgstr ""
 
-#: ../../src/wui/soldiercapacitycontrol.cc:79
+#: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
 msgstr ""
 
-#: ../../src/wui/soldiercapacitycontrol.cc:86
+#: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
 msgstr ""
 
@@ -4092,30 +4112,10 @@ msgstr ""
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:174
-msgid "Highest priority"
-msgstr ""
-
-#: ../../src/wui/waresqueuedisplay.cc:177
-msgid "Normal priority"
-msgstr ""
-
-#: ../../src/wui/waresqueuedisplay.cc:180
-msgid "Lowest priority"
-msgstr ""
-
-#: ../../src/wui/waresqueuedisplay.cc:225
-msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
-
-#: ../../src/wui/waresqueuedisplay.cc:234
-msgid "Increase the number of wares you want to be stored here."
-msgstr ""
-
-#: ../../src/wui/watchwindow.cc:106
+#: ../../src/wui/watchwindow.cc:105
 msgid "Follow"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:112
+#: ../../src/wui/watchwindow.cc:111
 msgid "Center the main view on this"
 msgstr ""

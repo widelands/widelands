@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:51+0000\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-17 21:52+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general és un magatzem que guarda els béns, els treballadors i els soldats que encara no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns del quarter general no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana on hi visqui."
+msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general és un magatzem que guarda els béns, els treballadors i els soldats que encara no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns del quarter general no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per viure-hi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -121,7 +121,7 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "Ja ho tens. Explicaré aquests símbols en un minut. Primer, deixeu-me mostrar-vos com fer una cabana de llenyataire i com connectar-la amb un camí. Hi ha una àrea lliure al costat d'aquests arbres per talar. Vaig a descriure els passos a realitzar i després us demanaré que cliqueu «Accepta» per mostrar-vos-ho."
+msgstr "Ja ho tens. Explicaré aquests símbols en un minut. Primer, deixeu-me mostrar-vos com fer una cabana de llenyataire i com connectar-la amb un camí. Hi ha una àrea lliure al costat d'aquests arbres per talar. Descriuré els passos a realitzar i després us demanaré que cliqueu «Accepta» per mostrar-vos-ho."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
@@ -250,7 +250,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Ara s'ha dividit el camí en dos parts amb un transportista a cada tros. Això significa menys treball per a ells i una millor eficiència per a nosaltres. A partir d'ara, hauries de plantar tantes banderes als teus camins com et sigui possible."
+msgstr "Ara s'ha dividit el camí en dues parts amb un transportista a cada tros. Això significa menys treball per a ells i una millor eficiència per a nosaltres. A partir d'ara, hauries de plantar tantes banderes als teus camins com et sigui possible."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
@@ -287,7 +287,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, anem a aconseguir granit."
+msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, aconseguirem granit."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -693,7 +693,7 @@ msgid ""
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’ and you can toggle "
 "them via the ‘c’ key or via the button on the ‘Watch’ tab of any field."
-msgstr "Mentre esperem, us mostraré molt ràpid una opció molt útil. Totes les obres en construcció i molts edificis són pareguts i costa distingir-los. El Widelands té una opció per mostrar etiquetes amb el nom dels edificis. S'anomena «cens» i la pots habilitar o deshabilitar amb la tecla «c» o amb el botó de la pestanya «Veure» en qualsevol parcel·la."
+msgstr "Mentre esperem, us mostraré ràpidament una opció molt útil. Totes les obres en construcció i molts edificis són pareguts i costa distingir-los. El Widelands té una opció per mostrar etiquetes amb el nom dels edificis. S'anomena «cens» i la pots habilitar o deshabilitar amb la tecla «c» o amb el botó de la pestanya «Veure» en qualsevol parcel·la."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:383
 msgid ""
@@ -919,7 +919,7 @@ msgstr "Tan aviat com un edifici militar es guarneixi de personal, estendrà el 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid "Let’s try it out now: build a military building on your border."
-msgstr "Anem a provar-ho: construïu un edifici militar en la vostra frontera."
+msgstr "Proveu-ho: construïu un edifici militar en la vostra frontera."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""

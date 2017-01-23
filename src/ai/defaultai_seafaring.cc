@@ -133,10 +133,11 @@ bool DefaultAI::marine_main_decisions() {
 
 			// counting stocks
 			uint8_t stocked_wares = 0;
-			std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
-			size_t const nr_warequeues = warequeues.size();
-			for (size_t i = 0; i < nr_warequeues; ++i) {
-				stocked_wares += warequeues[i]->get_filled();
+			std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+			for (InputQueue *queue : inputqueues) {
+				if (queue->get_type() == wwWARE) {
+					stocked_wares += queue->get_filled();
+				}
 			}
 			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
@@ -188,10 +189,11 @@ bool DefaultAI::marine_main_decisions() {
 				// make sure it is fully stocked
 				// counting stocks
 				uint8_t stocked_wares = 0;
-				std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
-				size_t const nr_warequeues = warequeues.size();
-				for (size_t i = 0; i < nr_warequeues; ++i) {
-					stocked_wares += warequeues[i]->get_filled();
+				std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+				for (InputQueue *queue : inputqueues) {
+					if (queue->get_type() == wwWARE) {
+						stocked_wares += queue->get_filled();
+					}
 				}
 				if (stocked_wares < 16) {
 					continue;
