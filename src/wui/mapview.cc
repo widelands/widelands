@@ -441,9 +441,10 @@ void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& tran
 }
 
 void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transition) {
-	const Rectf area = view_area().rect();
+	const TimestampedView current = animation_target_view();
+	const Rectf area = get_view_area(current.view, get_w(), get_h());
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
-	set_view(View{target_view, view_.zoom}, transition);
+	set_view(View{target_view, current.view.zoom}, transition);
 }
 
 MapView::ViewArea MapView::view_area() const {
