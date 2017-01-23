@@ -78,7 +78,7 @@ protected:
 	void clicked_goto();
 
 	void
-	create_ware_queue_panel(UI::Box*, Widelands::Building&, Widelands::WaresQueue*, bool = false);
+	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
 
 	virtual void create_capsbuttons(UI::Box* buttons);
 

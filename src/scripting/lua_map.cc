@@ -26,8 +26,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "economy/wares_queue.h"
-#include "economy/workers_queue.h"
+#include "economy/input_queue.h"
 #include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
@@ -4669,22 +4668,12 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 				             ps->descr().name().c_str());
 			}
 		}
-		if (sp.first.second == wwWARE) {
-			WaresQueue& wq = ps->waresqueue(sp.first.first);
-			if (sp.second > wq.get_max_size()) {
-				report_error(
-				   L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
-			}
-			wq.set_filled(sp.second);
-		} else {
-			assert(sp.first.second == wwWORKER);
-			WorkersQueue& wq = ps->workersqueue(sp.first.first);
-			if (sp.second > wq.get_max_size()) {
-				report_error(
-				   L, "Not enough space for %u workers, only for %i", sp.second, wq.get_max_size());
-			}
-			wq.set_filled(sp.second);
+		InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
+		if (sp.second > iq.get_max_size()) {
+			report_error(
+			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
 		}
+		iq.set_filled(sp.second);
 	}
 
 	return 0;
@@ -4715,11 +4704,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
 		if (valid_inputs.count(input)) {
-			if (input.second == wwWARE) {
-				cnt = ps->waresqueue(input.first).get_filled();
-			} else {
-				cnt = ps->workersqueue(input.first).get_filled();
-			}
+			cnt = ps->inputqueue(input.first, input.second).get_filled();
 		}
 
 		if (return_number) {  // this is the only thing the customer wants to know

@@ -560,22 +560,25 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	// reducing ware queues
 	// - for armours and weapons to 1
 	// - for others to 6
-	std::vector<WaresQueue*> const warequeues1 = tso.site->warequeues();
-	size_t nr_warequeues = warequeues1.size();
-	for (size_t i = 0; i < nr_warequeues; ++i) {
+	// - for others to 6
+	for (InputQueue *queue : tso.site->inputqueues()) {
+
+		if (queue->get_type() != wwWARE) {
+			continue;
+		}
 
 		// if it was decreased yet
-		if (warequeues1[i]->get_max_fill() <= 1) {
+		if (queue->get_max_fill() <= 1) {
 			continue;
 		}
 
 		// now modifying max_fill of armors and weapons
 		for (std::string pattern : armors_and_weapons) {
 
-			if (tribe_->get_ware_descr(warequeues1[i]->get_index())->name().find(pattern) !=
+			if (tribe_->get_ware_descr(queue->get_index())->name().find(pattern) !=
 			    std::string::npos) {
-				if (warequeues1[i]->get_max_fill() > 1) {
-					game().send_player_set_input_max_fill(*ts, warequeues1[i]->get_index(), wwWARE, 1);
+				if (queue->get_max_fill() > 1) {
+					game().send_player_set_input_max_fill(*ts, queue->get_index(), wwWARE, 1);
 					continue;
 				}
 			}
@@ -604,11 +607,12 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
-		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
-		nr_warequeues = warequeues2.size();
-		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) > 0) {
-				filled += warequeues2[i]->get_filled();
+		for (InputQueue *queue : tso.site->inputqueues()) {
+			if (queue->get_type() != wwWARE) {
+				continue;
+			}
+			if (tso.bo->substitute_inputs.count(queue->get_index()) > 0) {
+				filled += queue->get_filled();
 			}
 		}
 		if (filled < 5) {
@@ -616,12 +620,15 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// checking non subsitutes
-		for (size_t i = 0; i < nr_warequeues; ++i) {
-			if (tso.bo->substitute_inputs.count(warequeues2[i]->get_index()) == 0) {
+		for (InputQueue *queue : tso.site->inputqueues()) {
+			if (queue->get_type() != wwWARE) {
+				continue;
+			}
+			if (tso.bo->substitute_inputs.count(queue->get_index()) == 0) {
 				const uint32_t required_amount =
-				   (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
-				if (warequeues2[i]->get_filled() < required_amount) {
-					shortage += required_amount - warequeues2[i]->get_filled();
+				   (queue->get_max_fill() < 5) ? queue->get_max_fill() : 5;
+				if (queue->get_filled() < required_amount) {
+					shortage += required_amount - queue->get_filled();
 				}
 			}
 		}
@@ -794,18 +801,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 		return 0;
 	}
 
-	Tribes tribe = Tribes::kNone;
-
-	if (soldiers.at(0)->get_owner()->tribe().name() == "atlanteans") {
-		tribe = Tribes::kAtlanteans;
-	} else if (soldiers.at(0)->get_owner()->tribe().name() == "barbarians") {
-		tribe = Tribes::kBarbarians;
-	} else if (soldiers.at(0)->get_owner()->tribe().name() == "empire") {
-		tribe = Tribes::kEmpire;
-	} else {
-		throw wexception("AI warning: Unable to calculate strenght for player of tribe %s",
-		                 soldiers.at(0)->get_owner()->tribe().name().c_str());
-	}
 
 	float health = 0;
 	float attack = 0;
@@ -814,29 +809,17 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	float final = 0;
 
 	for (Soldier* soldier : soldiers) {
-		switch (tribe) {
-		case (Tribes::kAtlanteans):
-			health = 135 + 40 * soldier->get_health_level();
-			attack = 14 + 8 * soldier->get_attack_level();
-			defense = static_cast<float>(94 - 8 * soldier->get_defense_level()) / 100;
-			evade = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kBarbarians):
-			health += 130 + 28 * soldier->get_health_level();
-			attack += 14 + 7 * soldier->get_attack_level();
-			defense += static_cast<float>(97 - 8 * soldier->get_defense_level()) / 100;
-			evade += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kEmpire):
-			health += 130 + 21 * soldier->get_health_level();
-			attack += 14 + 8 * soldier->get_attack_level();
-			defense += static_cast<float>(95 - 8 * soldier->get_defense_level()) / 100;
-			evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
-			break;
-		case (Tribes::kNone):
-			NEVER_HERE();
-		}
-
+		const SoldierDescr& descr = soldier->descr();
+		health = descr.get_base_health() +
+					 descr.get_health_incr_per_level() * soldier->get_health_level();
+		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
+		          descr.get_base_min_attack() +
+					 descr.get_attack_incr_per_level() * soldier->get_attack_level();
+		defense =
+			100 - descr.get_base_defense() - 8 * soldier->get_defense_level();
+		evade =
+			100 - descr.get_base_evade() -
+									 descr.get_evade_incr_per_level() / 100.f * soldier->get_evade_level();
 		final += (attack * health) / (defense * evade);
 	}
 

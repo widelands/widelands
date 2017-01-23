@@ -316,6 +316,7 @@ uint32_t BaseListselect::get_eff_w() const {
 
 void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
+	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 	const int steps = entry_records_.size() * get_lineheight() - get_h();
 	scrollbar_.set_steps(steps);

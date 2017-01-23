@@ -94,9 +94,7 @@ struct DefaultAI : ComputerPlayer {
 		kAttackableVeryWeak
 	};
 
-	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 };
-
-	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
+	enum class SoldiersStatus : uint8_t { kFull = 0, kEnough = 1, kShortage = 3, kBadShortage = 6 }; //NOCOM needed?
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {

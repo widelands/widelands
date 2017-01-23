@@ -3575,11 +3575,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
 		bool resetting_wares = false;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
 				game().send_player_set_input_max_fill(
-				   *site.site, queue->get_index(), wwWARE, queue->get_max_size());
+				   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3593,7 +3593,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// The site is in process of emptying its input queues
 		// Counting remaining wares in the site now
 		int32_t left_wares = 0;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			left_wares += queue->get_filled();
 		}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
@@ -3679,8 +3679,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (doing_upgrade) {
 
 			// reducing input queues
-			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_input_max_fill(*site.site, queue->get_index(), wwWARE, 0);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(*site.site, queue->get_index(), queue->get_type(), 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
