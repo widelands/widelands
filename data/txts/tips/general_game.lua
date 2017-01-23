@@ -45,7 +45,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"New soldiers are recruited in the headquarters or a warehouse if all needed tools are available. Training sites are for improving their abilities.",
+      text = _"New soldiers are recruited in a barracks. Their abilities can then be improved in training sites.",
       seconds = 6
    },
    {
