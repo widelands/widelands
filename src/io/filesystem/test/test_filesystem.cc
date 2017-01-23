@@ -38,7 +38,7 @@ static std::string Win32Path(std::string s) {
 	}
 	return s;
 }
-static int setenv(const char* envname, const char* envval, int overwrite) {
+static int setenv(const char* envname, const char* envval, int /* overwrite */) {
 	return _putenv_s(envname, envval);
 }
 #else

@@ -1,11 +1,11 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
-# dr&mx <dronmax@gmail.com>, 2015
+# Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-17 06:45+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,8 +55,8 @@ msgstr "Это свободная игра с открытым исходным 
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Вы узнаете больше о FOSS и GPL посетив следующую веб-страницу: %s"
+"webpage: %s"
+msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -213,8 +213,8 @@ msgid "Campaign Story"
 msgstr "Разработка компаний"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Вождь"
+msgid "Chieftains"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -432,8 +432,8 @@ msgstr ""
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Режим наблюдателя означает то, что вы можете видеть все, но не можете управлять поселениями игроков"
+"player."
+msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -469,13 +469,13 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
+"with) and the tribe and team for computer players."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
+" and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
@@ -548,9 +548,9 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Цифровые клавиши (1—0) позволяют задать размер области выделения вокруг курсора мыши."
+msgstr ""
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -617,39 +617,33 @@ msgstr "Управляйте своими сообщениями более эф
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Используйте клавиши «,» (запятая) и «.» (точка), чтобы вернуться назад или переместиться вперёд между недавно посещёнными местами."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Нажмите Ctrl+(0—9) для сохранения расположения важных вам локаций, после чего нажимайте 0—9 для перемещения к ним."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Если удаляя дорогу вы удерживаете нажатой клавишу Ctrl, то удаляются все флаги до первого перекрёстка."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Новых солдат нанимают в штабах и на складах при условии, что там есть всё необходимое для них. Улучшение навыков солдат осуществляется в тренировочных центрах."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Если вы любите риск, удерживайте клавишу Ctrl когда нажимаете на кнопки «улучшить», «разобрать» или «разрушить» в меню здания. В этом случае все эти действия будут выполнены без подтверждения."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Нажмите I чтобы переключится на просмотр ваших запасов."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

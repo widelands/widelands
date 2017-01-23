@@ -95,16 +95,19 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	// Set bob according to bob area
 
-	if (set_immovable && (num = bobCategory->num_immovables()))
-		egbase_.create_immovable(
+	if (set_immovable && (num = bobCategory->num_immovables())) {
+		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-		   MapObjectDescr::OwnerType::kWorld);
+		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
+		   );
+	}
 
-	if (set_moveable && (num = bobCategory->num_critters()))
+	if (set_moveable && (num = bobCategory->num_critters())) {
 		egbase_.create_critter(
-		   fc, egbase_.world().get_bob(
+		   fc, egbase_.world().get_critter(
 		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 		             .c_str()));
+	}
 }
 
 void MapGenerator::generate_resources(uint32_t const* const random1,

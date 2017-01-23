@@ -184,10 +184,10 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update statistics
-			owner().ware_produced(wq.get_ware());
+			owner().ware_produced(wq.get_index());
 
-			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_ware());
-			WareInstance& ware = *new WareInstance(wq.get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
+			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
@@ -228,28 +228,11 @@ void DismantleSite::draw(uint32_t gametime,
 	// Draw the construction site marker
 	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
-	// Draw the partially dismantled building
-	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
-	const uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
-	uint32_t completed_time = DISMANTLESITE_STEP_TIME * work_completed_;
-
-	if (working_)
-		completed_time += DISMANTLESITE_STEP_TIME + gametime - work_steptime_;
-
-	uint32_t anim_idx;
-	try {
-		anim_idx = building_->get_animation("unoccupied");
-	} catch (MapObjectDescr::AnimationNonexistent&) {
-		anim_idx = building_->get_animation("idle");
-	}
-	const Animation& anim = g_gr->animations().get_animation(anim_idx);
-	const uint16_t w = anim.width();
-	const uint16_t h = anim.height();
-
-	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
-
+	// Blit bottom part of the animation according to dismantle progress
+	const uint32_t anim_idx =
+	   building_->get_animation(building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
 	dst->blit_animation(
-	   point_on_dst, scale, anim_idx, tanim, player_color, Recti(Vector2i(0, lines), w, h - lines));
+	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

@@ -67,7 +67,6 @@ TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
-	NEVER_HERE();
 }
 
 bool Tribes::tribe_exists(const std::string& tribename) {
@@ -315,8 +314,6 @@ void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerinde
 }
 
 void Tribes::load_graphics() {
-	// These will be deleted at the end of the method.
-	std::vector<std::unique_ptr<Texture>> individual_textures_;
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
 		for (const std::string& texture_path : tribe->normal_road_paths()) {
@@ -334,7 +331,7 @@ void Tribes::postload() {
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
-			for (const auto& ware_amount : de->inputs()) {
+			for (const auto& ware_amount : de->input_wares()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {

@@ -42,85 +42,59 @@
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, multiplayer),
-
-#define INIT_BTN(picture, name, tooltip)                                                           \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name)                                                          \
-	, g_gr->images().get("images/wui/menus/" picture ".png"), tooltip
-
-     toggle_chat_(INIT_BTN("menu_chat", "chat", _("Chat"))),
-     exit_(INIT_BTN("menu_exit_game", "exit_replay", _("Exit Replay"))),
-     save_(INIT_BTN("menu_save_game", "save_game", _("Save Game"))),
-     toggle_options_menu_(INIT_BTN("menu_options_menu", "options_menu", _("Main Menu"))),
-     toggle_statistics_(INIT_BTN("menu_general_stats", "general_stats", _("Statistics"))),
-     toggle_minimap_(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap"))) {
-	toggle_chat_.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
-	exit_.sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
-	save_.sigclicked.connect(boost::bind(&InteractiveSpectator::save_btn, this));
-	toggle_options_menu_.sigclicked.connect(
-	   boost::bind(&InteractiveSpectator::toggle_options_menu, this));
-	toggle_statistics_.sigclicked.connect(
-	   boost::bind(&InteractiveSpectator::toggle_statistics, this));
-	toggle_minimap_.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
-
-	toolbar_.set_layout_toplevel(true);
-	if (!is_multiplayer()) {
-		toolbar_.add(&exit_, UI::Align::kLeft);
-		toolbar_.add(&save_, UI::Align::kLeft);
-	} else
-		toolbar_.add(&toggle_options_menu_, UI::Align::kLeft);
-	toolbar_.add(&toggle_statistics_, UI::Align::kLeft);
-	toolbar_.add(&toggle_minimap_, UI::Align::kLeft);
-	toolbar_.add(&toggle_buildhelp_, UI::Align::kLeft);
-	toolbar_.add(&toggle_chat_, UI::Align::kLeft);
-
-	// TODO(unknown): instead of making unneeded buttons invisible after generation,
-	// they should not at all be generated. -> implement more dynamic toolbar UI
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
 	if (is_multiplayer()) {
-		exit_.set_visible(false);
-		exit_.set_enabled(false);
-		save_.set_visible(false);
-		save_.set_enabled(false);
+		add_toolbar_button(
+		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+
 	} else {
-		toggle_chat_.set_visible(false);
-		toggle_chat_.set_enabled(false);
-		toggle_options_menu_.set_visible(false);
-		toggle_options_menu_.set_enabled(false);
+		UI::Button* button =
+		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
+		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
+
+		add_toolbar_button(
+		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
+		main_windows_.savegame.open_window = [this] {
+			new GameMainMenuSaveGame(*this, main_windows_.savegame);
+		};
+	}
+	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
+	                   &main_windows_.general_stats, true);
+	main_windows_.general_stats.open_window = [this] {
+		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	};
+
+	toolbar_.add_space(15);
+
+	add_toolbar_button(
+	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
+	minimap_registry().open_window = [this] { toggle_minimap(); };
+
+	toggle_buildhelp_ = add_toolbar_button(
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
+
+	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
+
+	toolbar_.add_space(15);
+
+	if (is_multiplayer()) {
+		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		chat_.open_window = [this] {
+			if (chat_provider_) {
+				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			}
+		};
 	}
 
 	adjust_toolbar_position();
 
 	// Setup all screen elements
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
-
-#define INIT_BTN_HOOKS(registry, btn)                                                              \
-	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
-	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
-	if (registry.window)                                                                            \
-		btn.set_perm_pressed(true);
-
-	INIT_BTN_HOOKS(chat_, toggle_chat_)
-	INIT_BTN_HOOKS(options_, toggle_options_menu_)
-	INIT_BTN_HOOKS(main_windows_.general_stats, toggle_statistics_)
-	INIT_BTN_HOOKS(main_windows_.savegame, save_)
-	INIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
-}
-
-InteractiveSpectator::~InteractiveSpectator() {
-// We need to remove these callbacks because the opened window might
-// (theoretically) live longer than 'this' window, and thus the
-// buttons. The assertions are safeguards in case somewhere else in the
-// code someone would overwrite our hooks.
-
-#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
-	registry.on_create = 0;                                                                         \
-	registry.on_delete = 0;
-
-	DEINIT_BTN_HOOKS(chat_, toggle_chat_)
-	DEINIT_BTN_HOOKS(options_, toggle_options_menu_)
-	DEINIT_BTN_HOOKS(main_windows_.general_stats, toggle_statistics_)
-	DEINIT_BTN_HOOKS(main_windows_.savegame, save_)
-	DEINIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
 }
 
 /**
@@ -147,46 +121,11 @@ int32_t InteractiveSpectator::calculate_buildcaps(const Widelands::TCoords<Widel
 }
 
 // Toolbar button callback functions.
-void InteractiveSpectator::toggle_chat() {
-	if (chat_.window)
-		delete chat_.window;
-	else if (chat_provider_)
-		GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-}
-
 void InteractiveSpectator::exit_btn() {
 	if (is_multiplayer()) {
 		return;
 	}
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-}
-
-void InteractiveSpectator::save_btn() {
-	if (is_multiplayer()) {
-		return;
-	}
-	if (main_windows_.savegame.window)
-		delete main_windows_.savegame.window;
-	else {
-		new GameMainMenuSaveGame(*this, main_windows_.savegame);
-	}
-}
-
-void InteractiveSpectator::toggle_options_menu() {
-	if (!is_multiplayer()) {
-		return;
-	}
-	if (options_.window)
-		delete options_.window;
-	else
-		new GameOptionsMenu(*this, options_, main_windows_);
-}
-
-void InteractiveSpectator::toggle_statistics() {
-	if (main_windows_.general_stats.window)
-		delete main_windows_.general_stats.window;
-	else
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 }
 
 bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {
@@ -225,7 +164,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_m:
-			toggle_minimap();
+			minimap_registry().toggle();
 			return true;
 
 		case SDLK_c:
@@ -241,15 +180,13 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
-			if (!chat_provider_ | !chatenabled_)
-				break;
-
-			if (!chat_.window)
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-
-			dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			if (chat_provider_) {
+				if (!chat_.window) {
+					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+				}
+				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			}
 			return true;
-
 		default:
 			break;
 		}

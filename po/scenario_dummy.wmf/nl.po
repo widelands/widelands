@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-07 18:28+0000\n"
-"Last-Translator: Holger Rapp <SirVer@gmx.de>\n"
+"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"PO-Revision-Date: 2016-11-28 21:45+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,5 +34,5 @@ msgstr "\"%s\""
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nieuwe opdracht"
-msgstr[1] "Nieuwe opdrachten"
+msgstr[0] "Nieuwe Doelstelling"
+msgstr[1] "Nieuwe Doelstellingen"

@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor@sahtor.net>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-13 19:32+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,14 +46,14 @@ msgstr "Copyright 2002 - 2016 Widelands-kehittäjät."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public License (GPL) V2.0."
+msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:26
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Lisätietoa vapaista ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
+"webpage: %s"
+msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -210,8 +210,8 @@ msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Päällikkö"
+msgid "Chieftains"
+msgstr "Päälliköt"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -429,8 +429,8 @@ msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Katsoja-tila, jossa voit nähdä kaiken, mutta et voi hallita mitään pelaajaa"
+"player."
+msgstr "Sivustakatsojatila, jossa voit nähdä kaiken, mutta et voi hallita mitään pelaajaa."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -466,14 +466,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Vain pelin avannut taho (host) voi lisäksi säätää kolmea seuraavaa asetusta: Pelaajien alkutilanne, tekoälypelaajien heimo- sekä joukkuevalinnat"
+"with) and the tribe and team for computer players."
+msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tavarat ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Jokainen pelaajaan liitetty asiakas (\"Rooli\" on pelaaja) voi asettaa oman pelaajan heimon ja joukkueen"
+" and the team for that player."
+msgstr "Jokainen pelaajaan liitetty asiakas (joka ei ole sivustakatsoja) voi asettaa oman pelaajan heimon ja joukkueen."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -545,9 +545,9 @@ msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näpp
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Voit valita työkalun koon numeronäppäimillä (1-0)."
+msgstr "Numeronäppäimillä (0 - 9) voit suoraan asettaa valitun alueen koon hiiresi kohdistimen ympärillä."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -614,39 +614,33 @@ msgstr "Hallinnoi viestejä tehokkaammin. 'N' painike avaa uutisikkunan, 'G' men
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Pilkku (,) ja piste (.) painikkeilla voit vaihtaa näkymää viimeksi vierailtujen kohteiden välillä."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "CTRL + 0-9 tallentaa kiinnostavia paikkoja kartalla, 0-9 palaa niihin."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Jos pidät CTRL-näppäintä pohjassa tietä postettaessa, tie ja liput katoavat aina lähimpään risteykseen saakka."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Uusia sotilaita rektytoidaan päämajassa ja varastoissa tarpeen mukaan, jos tarvikkeita on. Koulutuspaikat parantavat sotilaiden taistelutaitoja."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Jos tunnet olevasi rohkea, pidä CTRL-näppäintä pohjassa saat sivuutettua turhat varmistuskysymykset rakenuksia laajenenttaessa, päivitettäessä ja tuhottaessa."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "I näyttää tai piiloittaa varastoluettelon."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

@@ -237,7 +237,7 @@ public:
 	*/
 	bool lock_audio_disabling_;
 
-protected:
+private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const std::string& msg);
 

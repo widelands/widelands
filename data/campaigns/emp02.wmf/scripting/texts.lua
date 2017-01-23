@@ -64,7 +64,7 @@ obj_build_mining_infrastructure = {
    title =_"Build a stonemason’s house and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason’s house and Mining Infrastructure",
-      listitem_bullet(_[[Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
+      listitem_bullet(_[[Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
    ),
 }
 
@@ -76,7 +76,7 @@ obj_build_food_infrastructure = {
       listitem_bullet(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
       listitem_bullet(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
       listitem_bullet(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
-      listitem_arrow(_[[It’s up to you what you want to build. But remember – coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
+      listitem_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
    ),
 }
 
@@ -95,6 +95,7 @@ obj_remove_the_barbarians = {
    title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
+      listitem_bullet(_[[Build a barracks to start training soldiers.]]) ..
       listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
       listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
    ),
@@ -190,7 +191,7 @@ saledus_3 = {
    title =_ "Further Mountains",
    body= saledus(_"Saledus is excited",
       -- TRANSLATORS: Saledus
-      _([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
+      _([[By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. I advise you to immediately build iron and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
       _([[However: for all these bigger buildings, we need better and more elegant building materials. So you have to build a house for the stonemason, who will cut columns from marble.]])

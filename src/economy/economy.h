@@ -221,7 +221,7 @@ private:
 	void start_request_timer(int32_t delta = 200);
 
 	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
-	void process_requests(Game&, RSPairStruct&);
+	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
 	void create_requested_workers(Game&);

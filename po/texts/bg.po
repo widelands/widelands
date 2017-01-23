@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015-2016
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 07:56+0000\n"
-"Last-Translator: Любомир Василев\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +48,7 @@ msgstr "Тази игра е безплатна и с отворен код (FOS
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Можете да намерите повече информация относно софтуера с отворен код и ОПЛ като посетите следната страница: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -206,8 +206,8 @@ msgid "Campaign Story"
 msgstr "Кампании и история"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Вожд"
+msgid "Chieftains"
+msgstr "Вождове"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -425,8 +425,8 @@ msgstr "Играчът с цвета на флага. Ако повече от �
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Режим на наблюдаване, което означава, че можете да виждате всичко, но не можете да управлявате нито един играч"
+"player."
+msgstr "Режим на наблюдаване, което означава, че можете да виждате всичко, но не можете да управлявате нито един играч."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -462,14 +462,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Последните три могат да бъдат зададени от клиента, играещ ролята на сървър, чрез щракване с ляв бутон върху бутона „тип“ на играча. Играчите, които са сървъри, могат да задават и началните настройки на всеки играч (наборът от сгради, стоки и работници, с които играчът започва) и племето и отбора за компютърните играчи"
+"with) and the tribe and team for computer players."
+msgstr "Последните три могат да бъдат зададени от клиента, играещ ролята на сървър, чрез щракване с ляв бутон върху бутона „тип“ на играча. Играчите, които са сървъри, могат да задават и началните настройки на всеки играч (наборът от сгради, стоки и работници, с които играчът започва) и племето и отбора за компютърните играчи."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Всеки клиент, свързан с играч (зададената роля е „играч“) може да избере племето и отбора на този играч"
+" and the team for that player."
+msgstr "Всеки клиент, свързан с играч (тоест не е наблюдател), може да избере племето и отбора на този играч."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -541,9 +541,9 @@ msgstr "Задържането на Алт включва втория алте�
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Клавишите с цифри (1 – 0) Ви позволяват да зададете конкретен размер на избраната област около курсора."
+msgstr "Клавишите с цифри (0 – 9) Ви позволяват да зададете конкретен размер на избраната област около курсора."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -610,39 +610,33 @@ msgstr "Управлявайте съобщенията си по-ефектив
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Използвайте клавишите „,“ (запетая) и „.“ (точка), за да преминавате назад и напред между наскоро посетените места в света."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Натиснете Контрол+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Ако премахнете път, докато натискате Контрол, ще премахнете всички флагове до първото кръстовище."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Новите войници се появяват в щаба или в някой склад, ако всички нужни инструменти са налични. Тренировъчните сгради служат за подобряване на уменията им."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Ако обичате да живеете на ръба, можете да задържите Ctrl докато натискате бутоните за надграждане, демонтиране или разрушаване на сграда. Така ще пропуснете въпроса за потвърждение."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Натиснете I, за да превключите показването на инвентара на запасите си."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

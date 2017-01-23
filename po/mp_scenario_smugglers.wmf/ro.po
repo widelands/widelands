@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-12-03 09:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-15 06:27+0000\n"
+"PO-Revision-Date: 2016-11-19 17:59+0000\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
-msgstr ""
+msgstr "Stare"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "Mărfuri de contrabandă"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
