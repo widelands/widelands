@@ -910,7 +910,7 @@ HasWares
 
 /* RST
 HasInputs
---------
+---------
 
 .. class:: HasInputs
 
