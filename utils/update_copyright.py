@@ -4,6 +4,7 @@
 import os.path
 import re
 import sys
+import traceback
 
 file_utils_script = os.path.abspath(os.path.join(os.path.dirname(__file__), 'file_utils.py'))
 exec(compile(source=open(file_utils_script).read(), filename=file_utils_script, mode='exec'))
