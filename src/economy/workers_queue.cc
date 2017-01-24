@@ -159,6 +159,17 @@ void WorkersQueue::set_max_fill(Quantity q) {
 	}
 }
 
+Worker* WorkersQueue::extract_worker() {
+	assert(get_filled() > 0);
+	assert(!workers_.empty());
+
+	Worker* w = workers_.front();
+	// Don't remove from game
+	// Remove reference from list
+	workers_.erase(workers_.begin());
+	return w;
+}
+
 /**
  * Read and write
  */

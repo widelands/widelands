@@ -61,6 +61,14 @@ public:
 
 	void set_max_fill(Quantity q) override;
 
+	/**
+	 * Extracts the first worker from the queue and returns it
+	 * without removing it from the game.
+	 * Used by ExpeditionBootstrap.
+	 * @return The first worker in stored in this list.
+	 */
+	Worker* extract_worker();
+
 protected:
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
