@@ -27,9 +27,11 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -117,16 +119,26 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				if (amount < 1 || 255 < amount) {
 					throw wexception("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
+				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const auto& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					inputs_.push_back(WareAmount(idx, amount));
+					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					throw wexception("tribes do not define a ware type with this name");
+					idx = egbase.tribes().worker_index(ware_name);
+					if (egbase.tribes().worker_exists(idx)) {
+						for (const auto& temp_inputs : input_workers()) {
+							if (temp_inputs.first == idx) {
+								throw wexception("duplicated");
+							}
+						}
+						input_workers_.push_back(WareAmount(idx, amount));
+					} else {
+						throw wexception("tribes do not define a ware or worker type with this name");
+					}
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
@@ -315,13 +327,13 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 	}
 }
 
-WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue* ip_queue : input_queues_) {
-		if (ip_queue->get_ware() == wi) {
+InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	for (InputQueue* ip_queue : input_queues_) {
+		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -391,10 +403,17 @@ void ProductionSite::calc_statistics() {
 void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	const BillOfMaterials& inputs = descr().inputs();
-	input_queues_.resize(inputs.size());
-	for (WareRange i(inputs); i; ++i)
+	const BillOfMaterials& input_wares = descr().input_wares();
+	const BillOfMaterials& input_workers = descr().input_workers();
+	input_queues_.resize(input_wares.size() + input_workers.size());
+
+	for (WareRange i(input_wares); i; ++i) {
 		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	}
+
+	for (WareRange i(input_workers); i; ++i) {
+		input_queues_[input_wares.size() + i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
+	}
 
 	//  Request missing workers.
 	WorkingPosition* wp = working_positions_;
@@ -418,7 +437,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
  */
 void ProductionSite::set_economy(Economy* const e) {
 	if (Economy* const old = get_economy()) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
@@ -429,7 +448,7 @@ void ProductionSite::set_economy(Economy* const e) {
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
@@ -454,9 +473,9 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < input_queues_.size(); ++i) {
-		input_queues_[i]->cleanup();
-		delete input_queues_[i];
+	for (InputQueue *iq : input_queues_) {
+		iq->cleanup();
+		delete iq;
 	}
 	input_queues_.clear();
 
@@ -786,11 +805,12 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* queue : input_queues_) {
-		if (queue->get_filled() > queue->get_max_fill()) {
+	// Input-workers are coming out by themselves
+	for (InputQueue* queue : input_queues_) {
+		if (queue->get_type() == wwWARE && queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;

@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -476,8 +477,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-WaresQueue& Building::waresqueue(DescriptionIndex const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*

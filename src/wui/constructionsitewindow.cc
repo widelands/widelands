@@ -19,7 +19,7 @@
 
 #include "wui/buildingwindow.h"
 
-#include "wui/waresqueuedisplay.h"
+#include "wui/inputqueuedisplay.h"
 
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -59,7 +59,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		box.add(
-		   new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
+		   new InputQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }

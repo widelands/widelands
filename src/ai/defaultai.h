@@ -94,8 +94,6 @@ struct DefaultAI : ComputerPlayer {
 		kAttackableVeryWeak
 	};
 
-	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
-
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
@@ -103,6 +101,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Normal AI");
 			icon_filename = "images/ai/ai_normal.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -116,6 +115,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Weak AI");
 			icon_filename = "images/ai/ai_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -129,6 +129,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Very Weak AI");
 			icon_filename = "images/ai/ai_very_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {

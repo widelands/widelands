@@ -52,6 +52,9 @@ class TribeDescr;
 
 namespace LuaMaps {
 
+// Used as return for parse_ware_workers_* functions
+enum class RequestedWareWorker { kAll, kSingle, kList, kUndefined };
+
 /*
  * Base class for all classes in wl.map
  */
@@ -370,7 +373,7 @@ public:
 	 * Lua methods
 	 */
 
-	int consumed_wares(lua_State*);
+	int consumed_wares_workers(lua_State*);
 	int produced_wares(lua_State*);
 	int recruited_workers(lua_State*);
 
@@ -1006,10 +1009,10 @@ public:
 	int get_workers(lua_State*);
 	int set_wares(lua_State*);
 	int set_workers(lua_State*);
-	int get_warehouse_policies(lua_State*);
-	int set_warehouse_policies(lua_State*);
 	int set_soldiers(lua_State*);
 	int get_soldiers(lua_State*);
+	int set_warehouse_policies(lua_State*);
+	int get_warehouse_policies(lua_State*);
 	int start_expedition(lua_State*);
 	int cancel_expedition(lua_State*);
 
@@ -1035,15 +1038,15 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_valid_wares(lua_State* L);
+	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
-	int get_wares(lua_State* L);
+	int get_inputs(lua_State* L);
 	int get_workers(lua_State* L);
-	int set_wares(lua_State* L);
+	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
 
 	/*
@@ -1270,6 +1273,8 @@ public:
 	int get___hash(lua_State*);
 	int get_x(lua_State* L);
 	int get_y(lua_State* L);
+	int get_viewpoint_x(lua_State* L);
+	int get_viewpoint_y(lua_State* L);
 	int get_height(lua_State* L);
 	int set_height(lua_State* L);
 	int get_raw_height(lua_State* L);
@@ -1350,9 +1355,20 @@ public:
 	 */
 };
 
+using InputMap =
+   std::map<std::pair<Widelands::DescriptionIndex, Widelands::WareWorker>, Widelands::Quantity>;
+
 int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
 int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo);
-
+RequestedWareWorker parse_wares_workers_list(lua_State*,
+                                             const Widelands::TribeDescr&,
+                                             Widelands::DescriptionIndex*,
+                                             std::vector<Widelands::DescriptionIndex>*,
+                                             bool is_ware);
+RequestedWareWorker parse_wares_workers_counted(lua_State*,
+                                                const Widelands::TribeDescr&,
+                                                LuaMaps::InputMap*,
+                                                bool is_ware);
 void luaopen_wlmap(lua_State*);
 
 }  // namespace LuaMap

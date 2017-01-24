@@ -56,7 +56,7 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
+		BuildingWindow::create_input_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }

@@ -700,7 +700,10 @@ struct RSPairStruct {
 /**
  * Walk all Requests and find potential transfer candidates.
 */
-void Economy::process_requests(Game& game, RSPairStruct& s) {
+void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
+	// Algorithm can decide that wares are not to be delivered to constructionsite
+	// right now, therefore we need to shcedule next pairing
+	bool postponed_pairing_needed = false;
 	for (Request* temp_req : requests_) {
 		Request& req = *temp_req;
 
@@ -725,8 +728,8 @@ void Economy::process_requests(Game& game, RSPairStruct& s) {
 			int32_t const idletime = game.get_gametime() + 15000 + 2 * cost - req.get_required_time();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
-				if (s.nexttimer < 0 || s.nexttimer > -idletime)
-					s.nexttimer = -idletime;
+				if (supply_pairs->nexttimer < 0 || supply_pairs->nexttimer > -idletime)
+					supply_pairs->nexttimer = -idletime;
 
 				continue;
 			}
@@ -734,6 +737,9 @@ void Economy::process_requests(Game& game, RSPairStruct& s) {
 
 		int32_t const priority = req.get_priority(cost);
 		if (priority < 0) {
+			// We dont "pair" the req with supply now, and dont set s.nexttimer right now
+			// but should not forget about this productionsite waiting for the building material
+			postponed_pairing_needed = true;
 			continue;
 		}
 
@@ -742,9 +748,13 @@ void Economy::process_requests(Game& game, RSPairStruct& s) {
 		rsp.request = &req;
 		rsp.supply = supp;
 		rsp.priority = priority;
-		rsp.pairid = ++s.pairid;
+		rsp.pairid = ++supply_pairs->pairid;
 
-		s.queue.push(rsp);
+		supply_pairs->queue.push(rsp);
+	}
+	if (postponed_pairing_needed && supply_pairs->nexttimer < 0) {
+		// so no other pair set the timer, so we set them now for after 30 seconds
+		supply_pairs->nexttimer = 30 * 1000;
 	}
 }
 
@@ -756,7 +766,7 @@ void Economy::balance_requestsupply(Game& game) {
 	rsps.nexttimer = -1;
 
 	//  Try to fulfill Requests.
-	process_requests(game, rsps);
+	process_requests(game, &rsps);
 
 	//  Now execute request/supply pairs.
 	while (!rsps.queue.empty()) {

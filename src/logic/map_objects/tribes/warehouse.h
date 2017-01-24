@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
+#include "economy/wares_queue.h"
 #include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -111,6 +112,22 @@ public:
 		kRemove = 3,
 	};
 
+	/**
+	 * Whether worker indices in count_workers() have to match exactly.
+	 */
+	enum class Match {
+		/**
+	    * Return the number of workers with matching indices.
+	    */
+		kExact,
+
+		/**
+	    * Return the number of workers with matching indices or
+	    * which are more experienced workers of the given lower type.
+	    */
+		kCompatible
+	};
+
 	Warehouse(const WarehouseDescr&);
 	virtual ~Warehouse();
 
@@ -181,7 +198,7 @@ public:
 
 	bool fetch_from_flag(Game&) override;
 
-	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&);
+	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&, Match);
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
@@ -229,7 +246,7 @@ public:
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	WaresQueue& waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void log_general_info(const EditorGameBase&) override;
 

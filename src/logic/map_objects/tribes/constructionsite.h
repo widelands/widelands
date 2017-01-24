@@ -89,7 +89,7 @@ public:
 		return info_;
 	}
 
-	WaresQueue& waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {
@@ -112,7 +112,7 @@ protected:
 	}
 	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
-	static void wares_queue_callback(Game&, WaresQueue*, DescriptionIndex, void* data);
+	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
