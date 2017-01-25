@@ -33,6 +33,7 @@ def parse_args():
         ' Recurses over all relevant files.')
     return p.parse_args()
 
+
 def main():
     parse_args()
 

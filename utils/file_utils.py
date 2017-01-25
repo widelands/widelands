@@ -9,6 +9,7 @@ import sys
 
 PYTHON3 = sys.version_info >= (3, 0)
 
+
 def read_text_file(filename):
     """Reads the contens of a text file."""
     if PYTHON3:
