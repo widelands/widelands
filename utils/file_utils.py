@@ -23,10 +23,10 @@ def read_text_file(filename):
 def write_text_file(filename, content):
     """Writes 'content' into a text file."""
     if PYTHON3:
-        with open(filename, 'w', encoding='utf-8') as f:
+        with open(filename, 'w', encoding='utf-8', newline='\n') as f:
             f.write(content)
     else:
-        with open(filename, 'w') as f:
+        with open(filename, 'w', newline='\n') as f:
             f.write(content.encode('utf-8'))
 
 
