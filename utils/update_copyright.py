@@ -5,9 +5,7 @@ import os.path
 import re
 import sys
 import traceback
-
-file_utils_script = os.path.abspath(os.path.join(os.path.dirname(__file__), 'file_utils.py'))
-exec(compile(source=open(file_utils_script).read(), filename=file_utils_script, mode='exec'))
+from file_utils import read_text_file, write_text_file, find_files
 
 def main():
     """Updates the copyright year in all source files to the given year."""

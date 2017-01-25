@@ -20,10 +20,7 @@ import os
 import re
 import sys
 from subprocess import call
-
-file_utils_script = os.path.abspath(os.path.join(os.path.dirname(__file__), 'file_utils.py'))
-exec(compile(source=open(file_utils_script).read(), filename=file_utils_script, mode='exec'))
-
+from file_utils import read_text_file, write_text_file, find_files
 
 LEADING_TABS = re.compile(r'^\s*\t+\s*')
 SPACES_PER_TAB = 3
