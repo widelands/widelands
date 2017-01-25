@@ -13,17 +13,21 @@ PYTHON3 = sys.version_info >= (3, 0)
 def read_text_file(filename):
     """Reads the contens of a text file."""
     if PYTHON3:
-        return open(filename, 'r', encoding='utf-8').read()
+        with open(filename, 'r', encoding='utf-8') as f:
+            return f.read()
     else:
-        return open(filename, 'r').read().decode('utf-8')
+        with open(filename, 'r') as f:
+            return f.read().decode('utf-8')
 
 
 def write_text_file(filename, content):
     """Writes 'content' into a text file."""
     if PYTHON3:
-        open(filename, 'w', encoding='utf-8').write(content)
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(content)
     else:
-        open(filename, 'w').write(content.encode('utf-8'))
+        with open(filename, 'w') as f:
+            f.write(content.encode('utf-8'))
 
 
 def find_files(startpath, extensions):
