@@ -26,7 +26,7 @@ def write_text_file(filename, content):
         with open(filename, 'w', encoding='utf-8', newline='\n') as f:
             f.write(content)
     else:
-        with open(filename, 'w', newline='\n') as f:
+        with open(filename, 'w') as f:
             f.write(content.encode('utf-8'))
 
 
