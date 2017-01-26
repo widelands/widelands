@@ -97,6 +97,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
+	void multiselect(uint32_t row);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -239,6 +240,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
+	void multiselect(uint32_t row);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -302,6 +304,8 @@ private:
 	UI::Button* scrollbar_filler_button_;
 	int32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
+	uint32_t last_multiselect_;  // Remembers last selected element in multiselect mode for keyboard
+	                             // navigation
 	std::set<uint32_t> multiselect_;
 	uint32_t last_click_time_;
 	uint32_t last_selection_;  // for double clicks

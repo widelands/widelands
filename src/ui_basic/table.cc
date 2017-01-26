@@ -44,8 +44,13 @@ namespace UI {
  *       w       dimensions, in pixels, of the Table
  *       h
 */
-Table<void*>::Table(
-	Panel* const parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const Image* button_background, TableRows rowtype)
+Table<void*>::Table(Panel* const parent,
+                    int32_t x,
+                    int32_t y,
+                    uint32_t w,
+                    uint32_t h,
+                    const Image* button_background,
+                    TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(
@@ -59,12 +64,13 @@ Table<void*>::Table(
         new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
+     last_multiselect_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      sort_column_(0),
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
-	  flexible_column_(std::numeric_limits<size_t>::max()),
+     flexible_column_(std::numeric_limits<size_t>::max()),
      is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending),
      ctrl_down_(false),
      shift_down_(false) {
@@ -411,31 +417,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		uint32_t const row = (y + scrollpos_ - headerheight_) / get_lineheight();
 		if (row < entry_records_.size()) {
 			play_click();
-			if (is_multiselect_) {
-				// Ranged selection with Shift
-				if (shift_down_) {
-					multiselect_.clear();
-					if (has_selection()) {
-						const uint32_t last_selected = selection_index();
-						const uint32_t lower_bound = std::min(row, selection_);
-						const uint32_t upper_bound = std::max(row, selection_);
-						for (uint32_t i = lower_bound; i <= upper_bound; ++i) {
-							toggle_entry(i);
-						}
-						select(last_selected);
-					} else {
-						select(toggle_entry(row));
-					}
-				} else {
-					// Single selection without Ctrl
-					if (!ctrl_down_) {
-						multiselect_.clear();
-					}
-					select(toggle_entry(row));
-				}
-			} else {
-				select(row);
-			}
+			multiselect(row);
 		}
 
 		// Check if doubleclicked
@@ -461,14 +443,18 @@ bool Table<void*>::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 void Table<void*>::move_selection(const int32_t offset) {
 	if (!has_selection())
 		return;
-	int32_t new_selection = selection_ + offset;
+	int32_t new_selection = (is_multiselect_ ? last_multiselect_ : selection_) + offset;
 
 	if (new_selection < 0)
 		new_selection = 0;
 	else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1)
 		new_selection = entry_records_.size() - 1;
 
-	select(static_cast<uint32_t>(new_selection));
+	if (is_multiselect_) {
+		multiselect(new_selection);
+	} else {
+		select(static_cast<uint32_t>(new_selection));
+	}
 
 	// Scroll to newly selected entry
 	if (scrollbar_) {
@@ -505,6 +491,35 @@ void Table<void*>::select(const uint32_t i) {
 	}
 
 	selected(selection_);
+}
+
+void Table<void*>::multiselect(uint32_t row) {
+	if (is_multiselect_) {
+		// Ranged selection with Shift
+		if (shift_down_) {
+			multiselect_.clear();
+			if (has_selection()) {
+				const uint32_t last_selected = selection_index();
+				const uint32_t lower_bound = std::min(row, selection_);
+				const uint32_t upper_bound = std::max(row, selection_);
+				for (uint32_t i = lower_bound; i <= upper_bound; ++i) {
+					toggle_entry(i);
+				}
+				select(last_selected);
+			} else {
+				select(toggle_entry(row));
+			}
+		} else {
+			// Single selection without Ctrl
+			if (!ctrl_down_) {
+				multiselect_.clear();
+			}
+			select(toggle_entry(row));
+		}
+		last_multiselect_ = row;
+	} else {
+		select(row);
+	}
 }
 
 /**
