@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -256,16 +256,17 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 			}
 
 			// Consumes
-			if (productionsite->inputs().size() > 0) {
+			if (productionsite->input_wares().size() > 0) {
 				fw.open_array("stored_wares");  // Consumes
 				size_t consumes_counter = 0;
-				for (WareAmount input : productionsite->inputs()) {
+				for (WareAmount input : productionsite->input_wares()) {
 					const WareDescr& ware = *tribe.get_ware_descr(input.first);
 					fw.open_brace();  // Input
 					fw.write_key_value_string("name", ware.name());
 					fw.close_element();
 					fw.write_key_value_int("amount", input.second);
-					fw.close_brace(true, consumes_counter, productionsite->inputs().size());  // Input
+					fw.close_brace(
+					   true, consumes_counter, productionsite->input_wares().size());  // Input
 					++consumes_counter;
 				}
 				fw.close_array(1, 5);  // Consumes - we need a comma

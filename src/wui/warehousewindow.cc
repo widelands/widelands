@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,16 +78,16 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 	Warehouse::StockPolicy policy = warehouse_.get_stock_policy(get_type(), ware);
 	const Image* pic = nullptr;
 	switch (policy) {
-	case Warehouse::SP_Prefer:
+	case Warehouse::StockPolicy::kPrefer:
 		pic = g_gr->images().get(pic_policy_prefer);
 		break;
-	case Warehouse::SP_DontStock:
+	case Warehouse::StockPolicy::kDontStock:
 		pic = g_gr->images().get(pic_policy_dontstock);
 		break;
-	case Warehouse::SP_Remove:
+	case Warehouse::StockPolicy::kRemove:
 		pic = g_gr->images().get(pic_policy_remove);
 		break;
-	case Warehouse::SP_Normal:
+	case Warehouse::StockPolicy::kNormal:
 		// don't draw anything for the normal policy
 		return;
 	}
@@ -139,7 +139,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	   buttons, #policy, 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),              \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
 	b->sigclicked.connect(                                                                          \
-	   boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)),            \
+	   boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::StockPolicy::k##policyname)), \
 	buttons->add(b, UI::Align::kHCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))

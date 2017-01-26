@@ -69,13 +69,9 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      atlanteans_carrier = 1,
-      tabard = 1,
-      trident_light = 1
-   },
-
    animations = animations,
+
+   default_target_quantity = 10,
 
    -- Battle attributes - initial values and per level increase
    health = {

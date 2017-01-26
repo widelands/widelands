@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
-	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
+	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(

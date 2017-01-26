@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -236,6 +236,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+}
+
+void FullscreenMenuLoadGame::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 void FullscreenMenuLoadGame::think() {

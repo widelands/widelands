@@ -16,62 +16,99 @@ world:new_editor_immovable_category{
    name = "miscellaneous",
    descname = _ "Miscellaneous",
    picture = "world/immovables/ruin5/idle.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "artifacts",
    descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
    picture = "world/immovables/manmade/artifacts/artifact00/idle.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "plants",
    descname = _ "Plants",
    picture = "world/immovables/cactus3/idle.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "standing_stones",
    descname = _ "Standing Stones",
    picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
+   items_per_row = 4,
 }
 
 world:new_editor_immovable_category{
    name = "rocks",
    descname = _ "Rocks",
    picture = "world/immovables/rocks/greenland_rocks6/idle.png",
-}
-
-world:new_editor_immovable_category{
-   name = "trees_coniferous",
-   descname = _ "Coniferous Trees",
-   picture = "world/immovables/trees/spruce/old/idle_0.png",
+   items_per_row = 6,
 }
 
 world:new_editor_immovable_category{
    name = "trees_dead",
    descname = _ "Dead Trees",
    picture = "world/immovables/trees/deadtree2/idle.png",
+   items_per_row = 8,
+}
+
+world:new_editor_immovable_category{
+   name = "trees_coniferous",
+   descname = _ "Coniferous Trees",
+   picture = "world/immovables/trees/spruce/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_deciduous",
    descname = _ "Deciduous Trees",
    picture = "world/immovables/trees/alder/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_palm",
    descname = _ "Palm Trees",
    picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+   items_per_row = 8,
 }
 
 world:new_editor_immovable_category{
    name = "trees_wasteland",
    descname = _ "Wasteland Trees",
    picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
+   items_per_row = 8,
 }
 
+world:new_editor_critter_category {
+   name = "critters_herbivores",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
+   descname = _ "Herbivores",
+   picture = "world/critters/sheep/idle_00.png",
+   items_per_row = 10,
+}
+
+world:new_editor_critter_category {
+   name = "critters_carnivores",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
+   descname = _ "Carnivores",
+   picture = "world/critters/fox/idle_00.png",
+   items_per_row = 10,
+}
+
+world:new_editor_critter_category {
+   name = "critters_aquatic",
+   -- TRANSLATORS: A category in the editor for placing animals on the map.
+   descname = _ "Aquatic",
+   picture = "world/critters/duck/idle_00.png",
+   items_per_row = 10,
+}
+
+-- NOCOM(#codereview): I do not understand the reordering here. I think
+-- alphabetically is preferable to keep future diffs smaller. If there is a
+-- deeper reason behind the reordering, you should add a comment here.
 include "world/immovables/grass1/init.lua"
 include "world/immovables/grass2/init.lua"
 include "world/immovables/grass3/init.lua"
@@ -81,39 +118,40 @@ include "world/immovables/bush3/init.lua"
 include "world/immovables/bush4/init.lua"
 include "world/immovables/bush5/init.lua"
 include "world/immovables/cactus1/init.lua"
-include "world/immovables/cactus2/init.lua"
 include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
-include "world/immovables/manmade/artifacts/artifact00/init.lua"
-include "world/immovables/manmade/artifacts/artifact01/init.lua"
-include "world/immovables/manmade/artifacts/artifact02/init.lua"
-include "world/immovables/manmade/artifacts/artifact03/init.lua"
-include "world/immovables/manmade/bar-ruin00/init.lua"
-include "world/immovables/manmade/bar-ruin01/init.lua"
-include "world/immovables/manmade/bar-ruin02/init.lua"
-include "world/immovables/manmade/bar-ruin03/init.lua"
-include "world/immovables/manmade/debris00/init.lua"
-include "world/immovables/manmade/debris01/init.lua"
-include "world/immovables/manmade/debris02/init.lua"
-include "world/immovables/manmade/snowman/init.lua"
-include "world/immovables/mushroom1/init.lua"
-include "world/immovables/mushroom2/init.lua"
+include "world/immovables/cactus2/init.lua"
 include "world/immovables/pebble1/init.lua"
 include "world/immovables/pebble2/init.lua"
 include "world/immovables/pebble3/init.lua"
 include "world/immovables/pebble4/init.lua"
 include "world/immovables/pebble5/init.lua"
 include "world/immovables/pebble6/init.lua"
+include "world/immovables/manmade/artifacts/artifact00/init.lua"
+include "world/immovables/manmade/artifacts/artifact01/init.lua"
+include "world/immovables/manmade/artifacts/artifact02/init.lua"
+include "world/immovables/manmade/artifacts/artifact03/init.lua"
+include "world/immovables/mushroom1/init.lua"
+include "world/immovables/mushroom2/init.lua"
+include "world/immovables/manmade/snowman/init.lua"
 include "world/immovables/ruin1/init.lua"
 include "world/immovables/ruin2/init.lua"
+include "world/immovables/track_winter/init.lua"
 include "world/immovables/ruin3/init.lua"
 include "world/immovables/ruin4/init.lua"
 include "world/immovables/ruin5/init.lua"
+include "world/immovables/manmade/debris00/init.lua"
+include "world/immovables/manmade/debris02/init.lua"
+include "world/immovables/manmade/debris01/init.lua"
+include "world/immovables/manmade/bar-ruin00/init.lua"
+include "world/immovables/manmade/bar-ruin02/init.lua"
+include "world/immovables/manmade/bar-ruin03/init.lua"
+include "world/immovables/manmade/bar-ruin01/init.lua"
 include "world/immovables/skeleton1/init.lua"
-include "world/immovables/skeleton2/init.lua"
 include "world/immovables/skeleton3/init.lua"
+include "world/immovables/skeleton2/init.lua"
 include "world/immovables/skeleton4/init.lua"
-include "world/immovables/track_winter/init.lua"
+
 
 -- Standing Stones
 include "world/immovables/standing_stones/standing_stone1_desert/init.lua"
@@ -198,21 +236,26 @@ include "world/immovables/trees/umbrella_red/init.lua"
 
 print_loading_message("immovables")
 
-include "world/critters/badger/init.lua"
-include "world/critters/brownbear/init.lua"
+-- Herbivores
 include "world/critters/bunny/init.lua"
+include "world/critters/sheep/init.lua"
+include "world/critters/wisent/init.lua"
+include "world/critters/wildboar/init.lua"
 include "world/critters/chamois/init.lua"
 include "world/critters/deer/init.lua"
-include "world/critters/duck/init.lua"
-include "world/critters/elk/init.lua"
-include "world/critters/fox/init.lua"
-include "world/critters/lynx/init.lua"
-include "world/critters/marten/init.lua"
 include "world/critters/reindeer/init.lua"
-include "world/critters/sheep/init.lua"
 include "world/critters/stag/init.lua"
-include "world/critters/wildboar/init.lua"
-include "world/critters/wisent/init.lua"
+include "world/critters/elk/init.lua"
+
+-- Carnivores
+include "world/critters/marten/init.lua"
+include "world/critters/badger/init.lua"
+include "world/critters/lynx/init.lua"
+include "world/critters/fox/init.lua"
 include "world/critters/wolf/init.lua"
+include "world/critters/brownbear/init.lua"
+
+-- Aquatic animals
+include "world/critters/duck/init.lua"
 
 print_loading_message("critters")

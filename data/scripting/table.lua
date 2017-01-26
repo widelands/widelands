@@ -23,20 +23,3 @@ function array_combine(...)
    end
    return t
 end
-
--- RST
--- .. function:: array_reverse(a)
---
---    Returns an array with the same values in reverse order
---
---    :arg a: One array object
---    :type a: :class:`array`
---
---    :returns: array with values in a in reversed order
-function array_reverse(a)
-   rv = {}
-   for i=#a,1,-1 do
-      rv[#rv+1] = a[i]
-   end
-   return rv
-end

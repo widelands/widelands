@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -232,7 +232,7 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	}
 
 	// The next few lines make eris error messages much more useful, but make
-	// eris much slower too. Only enable if you need more debug informations.
+	// eris much slower too. Only enable if you need more debug information.
 	lua_pushboolean(L, true);
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);

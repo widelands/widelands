@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <chrono>
 #include <exception>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -240,7 +241,8 @@ static int L_include(lua_State* L) {
 		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
 		LuaInterface* lua = static_cast<LuaInterface*>(lua_touserdata(L, -1));
 		lua_pop(L, 1);  // pop this userdata
-		lua->run_script(script);
+		std::unique_ptr<LuaTable> table(lua->run_script(script));
+		table->do_not_warn_about_unaccessed_keys();
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

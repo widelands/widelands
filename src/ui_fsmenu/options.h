@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <string>
 #include <vector>
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -98,21 +99,24 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
+	void layout() override;
+
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 
-	uint32_t const butw_;
-	uint32_t const buth_;
-	uint32_t const hmargin_;
-	uint32_t const padding_;
-	uint32_t const tab_panel_width_;
-	uint32_t const column_width_;
-	uint32_t const tab_panel_y_;
+	const uint32_t padding_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t hmargin_;
+	uint32_t tab_panel_width_;
+	uint32_t column_width_;
+	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
+	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 
 	// UI elements

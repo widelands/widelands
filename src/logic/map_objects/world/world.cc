@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "graphic/image_io.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/bob.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -35,11 +34,12 @@
 namespace Widelands {
 
 World::World()
-   : bobs_(new DescriptionMaintainer<BobDescr>()),
+   : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
      editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
+     editor_critter_categories_(new DescriptionMaintainer<EditorCategory>()),
      editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()) {
 }
 
@@ -79,7 +79,7 @@ void World::add_terrain_type(const LuaTable& table) {
 
 void World::add_critter_type(const LuaTable& table) {
 	i18n::Textdomain td("world");
-	bobs_->add(new CritterDescr(_(table.get_string("descname")), table));
+	critters_->add(new CritterDescr(_(table.get_string("descname")), table, *this));
 }
 
 const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
@@ -97,6 +97,14 @@ void World::add_editor_terrain_category(const LuaTable& table) {
 
 const DescriptionMaintainer<EditorCategory>& World::editor_terrain_categories() const {
 	return *editor_terrain_categories_;
+}
+
+void World::add_editor_critter_category(const LuaTable& table) {
+	editor_critter_categories_->add(new EditorCategory(table));
+}
+
+const DescriptionMaintainer<EditorCategory>& World::editor_critter_categories() const {
+	return *editor_critter_categories_;
 }
 
 void World::add_editor_immovable_category(const LuaTable& table) {
@@ -124,20 +132,20 @@ const TerrainDescription* World::terrain_descr(const std::string& name) const {
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
 
-DescriptionIndex World::get_bob(char const* const l) const {
-	return bobs_->get_index(l);
+DescriptionIndex World::get_critter(char const* const l) const {
+	return critters_->get_index(l);
 }
 
-BobDescr const* World::get_bob_descr(DescriptionIndex index) const {
-	return bobs_->get_mutable(index);
+const DescriptionMaintainer<CritterDescr>& World::critters() const {
+	return *critters_;
 }
 
-BobDescr const* World::get_bob_descr(const std::string& name) const {
-	return bobs_->exists(name.c_str());
+CritterDescr const* World::get_critter_descr(DescriptionIndex index) const {
+	return critters_->get_mutable(index);
 }
 
-int32_t World::get_nr_bobs() const {
-	return bobs_->size();
+CritterDescr const* World::get_critter_descr(const std::string& name) const {
+	return critters_->exists(name.c_str());
 }
 
 DescriptionIndex World::get_immovable_index(const std::string& name) const {

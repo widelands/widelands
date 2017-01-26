@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					    "before any messages have been loaded into it. This is a bug "
 					    "in the savegame loading code. It created a new message and "
 					    "added it to the queue. This is only allowed during "
-					    "simulation, not at load. The following messge will be "
+					    "simulation, not at load. The following message will be "
 					    "removed when the queue is reset:\n"
 					    "\tstype   : %u\n"
 					    "\ttitle   : %s\n"

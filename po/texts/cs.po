@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-30 11:04+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"POT-Creation-Date: 2017-01-16 07:51+0000\n"
+"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
+"webpage: %s"
 msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
 #: ../../data/txts/LICENSE.lua:27
@@ -209,8 +209,8 @@ msgid "Campaign Story"
 msgstr "Kampaně"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Náčelník"
+msgid "Chieftains"
+msgstr "Náčelníci"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -428,8 +428,8 @@ msgstr "Hráč a barva jeho vlajky. Pokud si více hráčů zvolí stejnou barvu
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "A mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče"
+"player."
+msgstr "A mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -465,14 +465,14 @@ msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Poslední tři může nastavit pouze hostitel hry klikem na tlačítko \"typ\" hráče. Hostitel může také nastavit výchozí podmínky každého hráče (budovy, suroviny a dělníky, které hráč dostane do začátku), kmen a tým počítačovým hráčům"
+"with) and the tribe and team for computer players."
+msgstr "Poslední tři může nastavit pouze hostitel, klikem na hráčovo tlačítko \"typ\". Hostitel může také nastavit startovní podmínky všech hráčů (budovy, zboží a pracovníky, které hráč dostane na začátku), kmen a týmy u počítačových hráčů."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Každý klient připojený k hráči (který není divák), může pro zvoleného hráče nastavit kmen a tým"
+" and the team for that player."
+msgstr "Každý klient připojený k hráči (který není divák), může pro zvoleného hráče nastavit kmen a tým."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -544,9 +544,9 @@ msgstr "Držení klávesy Alt aktivuje druhý alternativní nástroj (pokud exis
 
 #: ../../data/txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
+"The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Pomocí kláves čísel (1 - 0) můžeš přímo nastavit velikost vybrané oblasti v okolí kurzoru myši."
+msgstr "Pomocí numerických kláves (0 - 9) můžeš nastavit velikost vybrané oblasti v okolí kurzoru myši."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""
@@ -613,39 +613,33 @@ msgstr "Spravování tvých zpráv může být efektivnější: stisknuti \"N\" 
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Použijte \",\" (čárku) a \".\" (tečku) k přesunu mezi naposledy navštívenými místy ve světě."
-
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
 msgstr "Stisk Ctrl+(0-9) uloží zajímavou pozici a následný stisk 0-9 tuto pozici zobrazí."
 
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.tip:42
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Odebráním cesty se stisknutým Ctrl můžeš odebrat všechny vlajky až k první křižovatce."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.tip:46
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr "Noví vojáci jsou rekrutováni v hlavní budově nebo ve skladišti, pokud jsou dostupné všechny potřebné nástroje. Cvičiště vylepšují jejich schopnosti."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.tip:50
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Jestli miluješ nebezpečí, přidržení Ctrl při kliknutí na vylepšení, rozebrání nebo znišení stavby přeskočí potvrzovací dialog."
 
-#: ../../data/txts/tips/general_game.tip:58
+#: ../../data/txts/tips/general_game.tip:54
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Stikni klávesu I pro rychlé přepnutí zobrazení obsahu zásob."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.tip:58
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -180,7 +179,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				do {
 					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 					it = impls.begin() + random;
-				} while ((*it)->name == "empty");
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 				set_player_ai(number, (*it)->name, true);
 				newstate = PlayerSettings::stateComputer;
 				break;
@@ -1740,7 +1739,6 @@ void NetHost::receive_client_time(uint32_t const number, int32_t const time) {
 void NetHost::check_hung_clients() {
 	assert(d->game != nullptr);
 
-	int nrready = 0;
 	int nrdelayed = 0;
 	int nrhung = 0;
 
@@ -1751,7 +1749,6 @@ void NetHost::check_hung_clients() {
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
 		if (delta == 0) {
-			++nrready;
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
@@ -2007,8 +2004,7 @@ void NetHost::handle_network() {
 			} catch (const DisconnectException& e) {
 				disconnect_client(i, e.what());
 			} catch (const ProtocolException& e) {
-				disconnect_client(
-				   i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
+				disconnect_client(i, "PROTOCOL_EXCEPTION", true, e.what());
 			} catch (const std::exception& e) {
 				disconnect_client(i, "MALFORMED_COMMANDS", true, e.what());
 			}
@@ -2241,8 +2237,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
 		if (x != file_->md5sum) {
-			log("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(),
-			    file_->md5sum.c_str());
+			log(
+			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 			return;  // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file_->parts.size())

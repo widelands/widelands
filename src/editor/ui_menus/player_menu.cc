@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -279,8 +279,9 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
-	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		menu.center_view_on_coords(sp);
+	if (Widelands::Coords const sp = map.get_starting_pos(n)) {
+		menu.scroll_to_field(sp, MapView::Transition::Smooth);
+	}
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);

@@ -30,7 +30,7 @@ function remember_cattlefarm()
    local o = add_campaign_objective(obj_build_cattlefarm)
    while not check_for_buildings(p1, {barbarians_cattlefarm = 1}) do
       sleep(1223) end
-   o.done = true
+   set_objective_done(o)
 
 end
 
@@ -48,7 +48,7 @@ function initial_message_and_small_food_economy()
    while not check_for_buildings(p1, {barbarians_sentry=1}, game.map:get_field(57,36):region(6)) do
       sleep(1500)
    end
-   o.done = true
+   set_objective_done(o)
    sleep(3000)
 
    campaign_message_box(briefing_msg_1)
@@ -73,7 +73,7 @@ function initial_message_and_small_food_economy()
          barbarians_farm = 1,
          barbarians_bakery = 1,
       }) do sleep(3413) end
-   o.done = true
+   set_objective_done(o)
    campaign_message_box(story_note_1)
 
    sleep(600000)  -- 10 minutes
@@ -97,21 +97,21 @@ function foottracks()
    )
    p1:reveal_fields(fields)
 
-   local pts = scroll_smoothly_to(game.map:get_field(67,19))
+   local prior_center = scroll_to_field(game.map:get_field(67,19))
 
    campaign_message_box(order_msg_2_build_a_tower)
    local o = add_campaign_objective(obj_build_a_tower)
    p1:forbid_buildings{"barbarians_sentry"}
    p1:allow_buildings{"barbarians_tower"}
 
-   timed_scroll(array_reverse(pts), 10)
+   scroll_to_map_pixel(prior_center)
 
    -- Hide the tracks again
    sleep(5003)
    p1:hide_fields(fields)
 
    while not check_for_buildings(p1, {barbarians_tower=1}) do sleep(2341) end
-   o.done = true
+   set_objective_done(o)
    campaign_message_box(order_msg_3_explore_further)
    -- "explore further" is active untill "Boldreth shout out", so the player always has one open objectve.
    exploration_objective = add_campaign_objective(obj_explore_further)
@@ -140,7 +140,7 @@ function mining_and_trainingsites()
       game.map:get_field(82, 20):region(6))
    )
 
-   local pts = scroll_smoothly_to(game.map:get_field(82,20))
+   local prior_center = scroll_to_field(game.map:get_field(82,20))
 
    campaign_message_box(order_msg_4_build_mining_economy)
    local o = add_campaign_objective(obj_build_mining_economy)
@@ -156,7 +156,7 @@ function mining_and_trainingsites()
       "barbarians_micro_brewery",
    }
 
-   timed_scroll(array_reverse(pts), 10)
+   scroll_to_map_pixel(prior_center)
    sleep(500)
 
    while true do
@@ -178,7 +178,7 @@ function mining_and_trainingsites()
       end
       sleep(4139)
    end
-   o.done = true
+   set_objective_done(o)
    campaign_message_box(story_note_2)
 
    sleep(100000)
@@ -188,6 +188,7 @@ function mining_and_trainingsites()
       "barbarians_ax_workshop",
       "barbarians_warmill",
       "barbarians_helmsmithy",
+      "barbarians_barracks",
       "barbarians_battlearena",
       "barbarians_trainingcamp",
       "barbarians_inn",
@@ -208,10 +209,10 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
+   while not check_for_buildings(p1, {barbarians_barracks = 1, barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
       sleep(6523)
    end
-   o.done = true
+   set_objective_done(o)
 end
 function check_weapon_productions_obj(o)
    while true do
@@ -225,15 +226,15 @@ function check_weapon_productions_obj(o)
       end
       sleep(6523)
    end
-   o.done = true
+   set_objective_done(o)
 end
 function check_warehouse_obj(o)
    while not check_for_buildings(p1, {barbarians_warehouse = 1}) do sleep(3827) end
-   o.done = true
+   set_objective_done(o)
 end
 function check_helmsmithy_obj(o)
    while not check_for_buildings(p1, {barbarians_helmsmithy = 1}) do sleep(3827) end
-   o.done = true
+   set_objective_done(o)
 end
 
 function fortress()
@@ -247,7 +248,7 @@ function fortress()
 
    while #p1:get_buildings("barbarians_fortress") == 0 do sleep(6523) end
 
-   o.done = true
+   set_objective_done(o)
    campaign_message_box(story_note_3)
 end
 
@@ -294,7 +295,7 @@ function kalitath()
       )
    do sleep(7829) end
    -- "explore further" is done
-   exploration_objective.done = true
+   set_objective_done(exploration_objective)
 
    campaign_message_box(order_msg_7_destroy_kalitaths_army)
    local o = add_campaign_objective(obj_destroy_kalitaths_army)
@@ -302,7 +303,7 @@ function kalitath()
    while not check_player_completely_defeated(p2) do
         sleep(7837)
    end
-   o.done = true
+   set_objective_done(o)
 end
 
 function renegade_fortresses()
@@ -332,20 +333,20 @@ function renegade_fortresses()
    -- Some something of the enemy land
    p1:reveal_fields(map:get_field(129,97):region(12))
 
-   local pts = scroll_smoothly_to(map:get_field(120,92))
+   local prior_center = scroll_to_field(map:get_field(120,92))
 
    campaign_message_box(order_msg_7_renegade_fortification)
    campaign_message_box(order_msg_7_free_althunran)
    local o = add_campaign_objective(obj_military_assault_on_althunran)
 
-   timed_scroll(array_reverse(pts))
+   scroll_to_map_pixel(prior_center)
    sleep(503)
 
    while not (check_player_completely_defeated(p3) and check_player_completely_defeated(p4)) do
       sleep(6733)
    end
 
-   o.done = true
+   set_objective_done(o)
 end
 
 function mission_complete()
@@ -359,7 +360,7 @@ function mission_complete()
 
    p1:reveal_fields(map:get_field(4,9):region(6))
 
-   local pts = scroll_smoothly_to(map:get_field(4,5))
+   scroll_to_field(map:get_field(4,5))
 
    campaign_message_box(story_msg_7)
 

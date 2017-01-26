@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,13 +104,13 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
+#ifndef _WIN32
 void terminate(int) {
 	log("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
 	    " Update your sound driver and/or SDL to fix this problem\n");
-#ifndef _WIN32
 	raise(SIGKILL);
-#endif
 }
+#endif
 
 /**
  * Returns the widelands executable path.
@@ -156,9 +156,11 @@ bool is_absolute_path(const std::string& path) {
 std::string absolute_path_if_not_windows(const std::string& path) {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	realpath(path.c_str(), buffer);
-	log("Realpath: %s\n", buffer);
-	return std::string(buffer);
+	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
+	char* rp = realpath(path.c_str(), buffer);
+	log("Realpath: %s\n", rp);
+	assert(rp);
+	return std::string(rp);
 #else
 	return path;
 #endif
@@ -799,10 +801,12 @@ void WLApplication::shutdown_hardware() {
 	delete g_gr;
 	g_gr = nullptr;
 
+// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 #ifndef _WIN32
-	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
-	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
+	// TODO(GunChleoc): alarm is a POSIX function. If we found a Windows equivalent, we could call
+	// terminate in Windows as well.
 	alarm(5);
 #endif
 
@@ -1032,18 +1036,19 @@ void WLApplication::mainmenu() {
 		catch (const std::exception& e) {
 			messagetitle = "Unexpected error during the game";
 			message = e.what();
-			message +=
+			message += "\n\n";
+			message += (boost::format(_("Please report this problem to help us improve Widelands. "
+			                            "You will find related messages in the standard output "
+			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
+			            build_id().c_str() % build_type().c_str())
+			              .str();
 
-			   (boost::format(_("\n\nPlease report this problem to help us improve Widelands. "
-			                    "You will find related messages in the standard output "
-			                    "(stdout.txt on Windows). You are using build %1$s (%2$s). ")) %
-			    build_id().c_str() % build_type().c_str())
-			      .str();
-
-			message += _("Please add this information to your report.\n\n"
+			message = (boost::format("%s\n\n%s") % message %
+			           _("Please add this information to your report.\n\n"
 			             "Widelands attempts to create a savegame when errors occur "
 			             "during the game. It is often – though not always – possible "
-			             "to load it and continue playing.\n");
+			             "to load it and continue playing."))
+			             .str();
 		}
 #endif
 	}
@@ -1355,6 +1360,7 @@ void WLApplication::replay() {
 * Try to save the game instance if possible
  */
 void WLApplication::emergency_save(Widelands::Game& game) {
+	log("FATAL ERROR - game crashed. Attempting emergency save.\n");
 	if (game.is_loaded()) {
 		try {
 			SaveHandler& save_handler = game.save_handler();

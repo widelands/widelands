@@ -228,7 +228,7 @@ food_story_message = {
          _([[Ahh, but I think this is impossible to change. The preparing and eating of food is something deeply ingrained in us Atlanteans – it is a ceremony that we just need for our well-being. So I guess we cannot take this away from the individuals completely.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Colionder
-         _([[But we might find a compromise in between: for me, making bread is a troublesome task. Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; I feel a more industrial approach would be helpful here. I for one would love to just have fresh bread delivered to my house every day.]])
+         _([[But we might find a compromise in between: for me, making bread is a troublesome task. Grinding the blackroots and corn to flour and then baking the bread is tedious and boring; I feel a more industrial approach would be helpful here. I for one would love to just have fresh bread delivered to my house every day.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Colionder
          _([[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. My house is full of smoke and stinks for weeks afterwards. Don’t you think that this could be done in a special building where the side effects do not matter? I think those two things would be accepted by the people and would reduce the cooking time without taking away the ritual.]]))
@@ -419,7 +419,7 @@ field_flooded_msg = {
       pre_func = function()
          local lake_field = map:get_field(75,80)
          p1:reveal_fields(lake_field:region(10))
-         scroll_smoothly_to(lake_field)
+         scroll_to_field(lake_field)
          sleep(200)
       end,
       body = ostur(

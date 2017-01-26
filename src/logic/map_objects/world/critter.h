@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,12 +31,13 @@ namespace Widelands {
 
 struct CritterAction;
 struct CritterProgram;
+class World;
 
 //
 // Description
 //
 struct CritterDescr : BobDescr {
-	CritterDescr(const std::string& init_descname, const LuaTable&);
+	CritterDescr(const std::string& init_descname, const LuaTable&, const Widelands::World& world);
 	~CritterDescr() override;
 
 	Bob& create_object() const override;
@@ -49,10 +50,13 @@ struct CritterDescr : BobDescr {
 
 	CritterProgram const* get_program(const std::string&) const;
 
+	const EditorCategory* editor_category() const;
+
 private:
 	DirAnimations walk_anims_;
 	using Programs = std::map<std::string, CritterProgram*>;
 	Programs programs_;
+	EditorCategory* editor_category_;  // not owned.
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 

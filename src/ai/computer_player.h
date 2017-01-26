@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,9 +55,15 @@ struct ComputerPlayer {
 	 * \see get_implementations()
 	 */
 	struct Implementation {
+		enum class Type {
+			kEmpty,
+			kDefault
+		};
+
 		std::string name;
 		std::string descname;
 		std::string icon_filename;
+		Type type;
 		virtual ~Implementation() {
 		}
 		virtual ComputerPlayer* instantiate(Widelands::Game&, Widelands::PlayerNumber) const = 0;
