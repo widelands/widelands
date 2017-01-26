@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,8 +78,10 @@ public:
 	const std::vector<UI::Button*>& get_buttons() {
 		return buttons_;
 	}
+	void set_unit_width(uint32_t width);
 
 private:
+	void layout() override;
 	void update();
 	void change_value(int32_t);
 	const std::string unit_text(int32_t value) const;
@@ -88,6 +90,10 @@ private:
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;
+	uint32_t unit_width_;
+	uint32_t button_height_;
+	uint32_t padding_;
+	uint32_t number_of_paddings_;
 };
 }
 

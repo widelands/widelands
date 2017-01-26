@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 
 #include <boost/format.hpp>
 
+#include "economy/input_queue.h"
 #include "economy/request.h"
-#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -47,21 +47,16 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            ProductionSite& ps,
                                            UI::Window*& registry)
    : BuildingWindow(parent, ps, registry) {
-	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
-	const std::vector<Widelands::WorkersQueue*>& workerqueues = ps.workerqueues();
+	const std::vector<Widelands::InputQueue*>& inputqueues = ps.inputqueues();
 
-	if (warequeues.size() || workerqueues.size()) {
+	if (inputqueues.size()) {
 		// Add the wares tab
 		UI::Box* prod_box = new UI::Box(
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
-		for (uint32_t i = 0; i < warequeues.size(); ++i) {
+		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, warequeues[i]), UI::Align::kLeft);
-		}
-		for (uint32_t i = 0; i < workerqueues.size(); ++i) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, workerqueues[i]), UI::Align::kLeft);
+			   new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, inputqueues[i]), UI::Align::kLeft);
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,7 +179,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				do {
 					uint8_t random = (std::rand() % impls.size());  // Choose a random AI
 					it = impls.begin() + random;
-				} while ((*it)->name == "empty");
+				} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 				set_player_ai(number, (*it)->name, true);
 				newstate = PlayerSettings::stateComputer;
 				break;

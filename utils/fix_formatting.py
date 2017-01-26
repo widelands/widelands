@@ -20,9 +20,9 @@ import os
 import re
 import sys
 from subprocess import call
+from file_utils import read_text_file, write_text_file, find_files
 
 LEADING_TABS = re.compile(r'^\s*\t+\s*')
-PYTHON3 = sys.version_info >= (3, 0)
 SPACES_PER_TAB = 3
 
 
@@ -32,29 +32,6 @@ def parse_args():
         ' over the code base and pyformat over the utils directory.'
         ' Recurses over all relevant files.')
     return p.parse_args()
-
-
-def read_text_file(filename):
-    """Reads the contens of a text file."""
-    if PYTHON3:
-        return open(filename, 'r', encoding='utf-8').read()
-    else:
-        return open(filename, 'r').read().decode('utf-8')
-
-
-def write_text_file(filename, content):
-    """Writes 'content' into a text file."""
-    if PYTHON3:
-        open(filename, 'w', encoding='utf-8').write(content)
-    else:
-        open(filename, 'w').write(content.encode('utf-8'))
-
-
-def find_files(startpath, extensions):
-    for (dirpath, _, filenames) in os.walk(startpath):
-        for filename in filenames:
-            if os.path.splitext(filename)[-1].lower() in extensions:
-                yield os.path.join(dirpath, filename)
 
 
 def main():

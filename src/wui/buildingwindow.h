@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ protected:
 	void clicked_goto();
 
 	void
-	create_ware_queue_panel(UI::Box*, Widelands::Building&, Widelands::WaresQueue*, bool = false);
+	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
 
 	virtual void create_capsbuttons(UI::Box* buttons);
 

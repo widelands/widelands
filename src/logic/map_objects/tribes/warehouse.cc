@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1271,9 +1271,10 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-WaresQueue& Warehouse::waresqueue(DescriptionIndex index) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
+	assert(type == wwWARE);
 
 	return portdock_->expedition_bootstrap()->waresqueue(index);
 }

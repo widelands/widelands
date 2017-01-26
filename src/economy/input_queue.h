@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ public:
 	 * when wares or workers arrive at the building and should be added to the queue.
 	 * @param game The game the queue is part of.
 	 * @param q The \c InputQueue the ware or worker should be added to.
-	 * @param ware The index of the ware which arrived, if the queue is a WaresQueue.
+	 * @param ware The index of the ware or worker which arrived.
 	 * @param worker The worker which arrived, if the queue is a WorkersQueue.
 	 * @param data Unspecified data which has been given when calling set_callback().
 	 */

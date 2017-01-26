@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,6 @@
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
-#include "economy/workers_queue.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
@@ -480,19 +478,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 }
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
-	if (t == wwWARE) {
-		return waresqueue(wi);
-	} else {
-		return workersqueue(wi);
-	}
-}
-
-WaresQueue& Building::waresqueue(DescriptionIndex const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
-}
-
-WorkersQueue& Building::workersqueue(DescriptionIndex const wi) {
-	throw wexception("%s (%u) has no WorkersQueue for %u", descr().name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*
