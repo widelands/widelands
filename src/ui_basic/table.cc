@@ -450,11 +450,7 @@ void Table<void*>::move_selection(const int32_t offset) {
 	else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1)
 		new_selection = entry_records_.size() - 1;
 
-	if (is_multiselect_) {
-		multiselect(new_selection);
-	} else {
-		select(static_cast<uint32_t>(new_selection));
-	}
+	multiselect(new_selection);
 
 	// Scroll to newly selected entry
 	if (scrollbar_) {
