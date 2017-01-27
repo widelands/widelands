@@ -60,9 +60,9 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
 
-	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
-	                                kWindowWidth - 2 * kPadding, kTableHeight,
-											  g_gr->images().get("images/ui_basic/but1.png"), UI::TableRows::kMulti);
+	list = new UI::Table<uintptr_t>(
+	   this, kPadding, kButtonSize + 2 * kPadding, kWindowWidth - 2 * kPadding, kTableHeight,
+	   g_gr->images().get("images/ui_basic/but1.png"), UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -420,12 +420,12 @@ void GameMessageMenu::archive_or_restore() {
 		case Inbox:
 			// Archive highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusArchived(
-				game.get_gametime(), plnum, MessageId(selected_record)));
+			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		case Archive:
 			// Restore highlighted message
 			game.send_player_command(*new Widelands::CmdMessageSetStatusRead(
-				game.get_gametime(), plnum, MessageId(selected_record)));
+			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		}
 	}
@@ -609,10 +609,11 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		if (no_selections > 1) {
 			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 			 */
-			button_tooltip = (boost::format(ngettext("Restore the selected %d message",
-			                                  "Restore the selected %d messages", no_selections)) %
-			           no_selections)
-			             .str();
+			button_tooltip =
+			   (boost::format(ngettext("Restore the selected %d message",
+			                           "Restore the selected %d messages", no_selections)) %
+			    no_selections)
+			      .str();
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Restore selected message");
@@ -622,10 +623,11 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		if (no_selections > 1) {
 			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 			 */
-			button_tooltip = (boost::format(ngettext("Archive the selected %d message",
-			                                  "Archive the selected %d messages", no_selections)) %
-			           no_selections)
-			             .str();
+			button_tooltip =
+			   (boost::format(ngettext("Archive the selected %d message",
+			                           "Archive the selected %d messages", no_selections)) %
+			    no_selections)
+			      .str();
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Archive selected message");
