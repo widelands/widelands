@@ -659,19 +659,19 @@ void Table<void*>::layout() {
  * For example you might want to sort directories for themselves at the
  * top of list and files at the bottom.
  */
-void Table<void*>::sort(const uint32_t Begin, uint32_t End) {
+void Table<void*>::sort(const uint32_t begin, uint32_t end) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
-	if (End > size())
-		End = size();
+	if (end > size())
+		end = size();
 
 	std::vector<uint32_t> indices;
 	std::vector<EntryRecord*> copy;
 
-	indices.reserve(End - Begin);
-	copy.reserve(End - Begin);
-	for (uint32_t i = Begin; i < End; ++i) {
+	indices.reserve(end - begin);
+	copy.reserve(end - begin);
+	for (uint32_t i = begin; i < end; ++i) {
 		indices.push_back(i);
 		copy.push_back(entry_records_[i]);
 	}
@@ -680,16 +680,23 @@ void Table<void*>::sort(const uint32_t Begin, uint32_t End) {
 	   indices.begin(), indices.end(), boost::bind(&Table<void*>::sort_helper, this, _1, _2));
 
 	uint32_t newselection = selection_;
-	for (uint32_t i = Begin; i < End; ++i) {
-		uint32_t from = indices[i - Begin];
-		entry_records_[i] = copy[from - Begin];
-		if (selection_ == from)
+	std::set<uint32_t> new_multiselect;
+	for (uint32_t i = begin; i < end; ++i) {
+		uint32_t from = indices[i - begin];
+		entry_records_[i] = copy[from - begin];
+		if (selection_ == from) {
 			newselection = i;
+		}
+		if (is_multiselect_ && multiselect_.count(from) == 1) {
+			new_multiselect.insert(i);
+		}
 	}
 	selection_ = newselection;
-	multiselect_.clear();
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		multiselect_.clear();
+		for (const uint32_t entry : new_multiselect) {
+			multiselect_.insert(entry);
+		}
 	}
 }
 
