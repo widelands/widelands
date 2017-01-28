@@ -623,7 +623,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
-					WaresQueue& wq = dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
+					WaresQueue& wq =
+					   dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
 					const uint32_t cur = wq.get_filled();
 
 					// This is to help to debug the situation when colonization fails

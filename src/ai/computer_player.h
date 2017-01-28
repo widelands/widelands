@@ -55,10 +55,7 @@ struct ComputerPlayer {
 	 * \see get_implementations()
 	 */
 	struct Implementation {
-		enum class Type {
-			kEmpty,
-			kDefault
-		};
+		enum class Type { kEmpty, kDefault };
 
 		std::string name;
 		std::string descname;
