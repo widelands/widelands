@@ -22,7 +22,6 @@
 #include "base/wexception.h"
 #include "logic/field.h"
 #include "logic/map.h"
-#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 
 namespace Widelands {
