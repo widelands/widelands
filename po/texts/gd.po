@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-16 07:52+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-23 08:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -653,7 +653,7 @@ msgstr "’S urrainn dhut na h-iuchraichean “Page up” is “Page down” a c
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "’S urrainn dhut /me a chleachdadh aig toiseach teachdaireachd a’ chabadaich. Thèid “/me a tha sgìth” a shealltainn mar “-> far-ainm a tha sgìth”."
+msgstr "’S urrainn dhut /me a chleachdadh aig toiseach teachdaireachd na cabadaich. Thèid “/me a tha sgìth” a shealltainn mar “-> far-ainm a tha sgìth”."
 
 #: ../../data/txts/tips/multiplayer.tip:10
 msgid ""

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-17 21:56+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-28 12:58+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgstr "Com comunicar errors"
 
 #: ../../data/txts/README.lua:29
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Si trobeu un error, per favor comunique-ho al nostre registre d'errors (en anglès):"
+msgstr "Si trobeu un error, per favor comuniqueu-ho al nostre registre d'errors (en anglès):"
 
 #: ../../data/txts/README.lua:31
 msgid "Please provide enough background information. Tell us:"

@@ -7,15 +7,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-16 07:53+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-22 09:43+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,6 +101,14 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Piecze chleb, który dostarcza się górnikom, zwiadowcom i żołnierzom."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Wyposaża rekrutów i szkoli ich na żołnierzy."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
@@ -115,9 +123,6 @@ msgid ""
 "blackroot."
 msgstr "Farmer czarnych korzeni potrzebuje średnio %1%, aby zasiać i zebrać jedną wiązkę czarnych korzeni."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -296,9 +301,6 @@ msgid ""
 "between ports."
 msgstr "Buduje statki wykorzystywane do kolonizacji nowych lądów i handlu pomiędzy portami."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -464,6 +466,14 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
 msgstr "Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten budynek może produkować chleb pita średnio co %s."
+
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Wyposaża rekrutów i szkoli ich na żołnierzy."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -1129,6 +1139,14 @@ msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
 msgstr "Piekarz potrzebuje średnio %1%, aby upiec jeden bochenek chleba."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/empire/barracks/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Wyposaża rekrutów i szkoli ich na żołnierzy."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
 msgctxt "empire_building"
@@ -1521,7 +1539,7 @@ msgid ""
 msgstr "Służy za bazę do zamorskiej kolonizacji i handlu. Przechowuje również twoich żołnierzy, towary i narzędzia."
 
 #: ../../data/tribes/scripting/help/building_help.lua:87
-#: ../../data/tribes/scripting/help/format_help.lua:143
+#: ../../data/tribes/scripting/help/format_help.lua:153
 #, lua-format
 msgid "%s and"
 msgstr "%s i"
@@ -2095,18 +2113,27 @@ msgstr "Delete"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:135
+#: ../../data/tribes/scripting/help/format_help.lua:145
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
+#. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
+#. a productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:175
+msgid "Wares and workers consumed:"
+msgstr "Zużywane towary i pracownicy:"
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
+#. productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:178
+msgid "Workers consumed:"
+msgstr "Zużywani pracownicy:"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:162
-msgid "Ware consumed:"
-msgid_plural "Wares consumed:"
-msgstr[0] "Zużywany towar:"
-msgstr[1] "Zużywane towary:"
-msgstr[2] "Zużywane towary:"
+#: ../../data/tribes/scripting/help/format_help.lua:182
+msgid "Wares consumed:"
+msgstr "Zużywane towary:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -3453,9 +3480,6 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Wypala węgiel."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. TODO(GunChleoc): This is unused
@@ -3527,6 +3551,12 @@ msgstr "Mieli czarny korzeń i kukurydzę, by uzyskać z nich odpowiednio mąkę
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
 msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub kamienie szlachetne."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Gotów zostać żołnierzem i bronić twojego plemienia!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3743,6 +3773,12 @@ msgctxt "barbarians_worker"
 msgid "Plants trees."
 msgstr "Sadzi drzewa."
 
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
+msgctxt "barbarians_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Gotów zostać żołnierzem i bronić twojego plemienia!"
+
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -3905,6 +3941,12 @@ msgstr "Pracuje głęboko w kopalniach wydobywając węgiel, żelazo, złoto lub
 msgctxt "empire_worker"
 msgid "Breeds pigs."
 msgstr "Hoduje świnie."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
+msgctxt "empire_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Gotów zostać żołnierzem i bronić twojego plemienia!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

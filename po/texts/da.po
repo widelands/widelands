@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-16 07:52+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:29+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General 
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Du kan finde yderligere information om FOSS og GPL'en ved at besøge den følgende hjemmeside: %s"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid ""
@@ -208,7 +208,7 @@ msgstr "Kampagnehistorie"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "Høvdinge"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -427,7 +427,7 @@ msgstr "Spilleren med flagets farve. Hvis mere end én klient valgte den samme f
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player."
-msgstr ""
+msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
@@ -464,13 +464,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for »type-knappen« for en spiller. Værtsspillere kan også angive opsætningen af hver spiller (mængden af bygninger, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "Hver klient forbundet til en spiller (som ikke er en tilskuer) kan sætte stammen og holdet for den spiller."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
@@ -544,7 +544,7 @@ msgstr "Ved at holde Alt nede skiftes til det andet alternative værktøj (hvis 
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Tallene (0 - 9) giver mulighed for at angive størrelsen for det valgte område omkring din musemarkør."
 
 #: ../../data/txts/tips/editor.tip:26
 msgid ""

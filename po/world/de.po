@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# Elisabeth Jäger, 2017
 # GunChleoc, 2016
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-23 10:02+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,7 +193,7 @@ msgstr "Felsen 6"
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Tombstone"
-msgstr ""
+msgstr "Grabstein"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
@@ -774,17 +775,17 @@ msgstr "Ödlandbäume"
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:82
 msgid "Herbivores"
-msgstr ""
+msgstr "Pflanzenfresser"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:90
 msgid "Carnivores"
-msgstr ""
+msgstr "Fleischfresser"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:98
 msgid "Aquatic"
-msgstr ""
+msgstr "Wassertiere"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"
