@@ -136,6 +136,7 @@ bool FindNodeShore::accept(const Map& map, const FCoords& coords) const {
 	// Vector of fields whose neighbours are to be checked, starting with current one
 	std::vector<FCoords> nodes_to_process = {coords};
 	// Set of nodes that that are swimmable & and achievable by swimming
+	// We use hashes here
 	std::set<uint32_t> accepted_nodes = {};
 	// just not to check the same node twice
 	std::set<uint32_t> rejected_nodes = {};
