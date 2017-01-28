@@ -19,10 +19,10 @@
 
 #include "scripting/lua_globals.h"
 
-#include <chrono>
 #include <exception>
 #include <memory>
 
+#include <SDL.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -252,12 +252,10 @@ static int L_include(lua_State* L) {
 /* RST
 .. function:: system_time()
 
-	Returns the current system clock in milliseconds.
+	Returns an integer value representing the number of milliseconds since the SDL library initialized.
 */
 static int L_system_time(lua_State* L) {
-	using namespace std::chrono;
-	milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-	lua_pushinteger(L, ms.count());
+	lua_pushinteger(L, SDL_GetTicks());
 	return 1;
 }
 
