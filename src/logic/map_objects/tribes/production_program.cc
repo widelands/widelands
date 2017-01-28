@@ -1501,7 +1501,8 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<Coords> fields;
 	Map& map = game.map();
 	FindNodeAnd fna;
-	fna.add(FindNodeShore());
+	// 10 is custom value to make sure the "water" is at least 10 nodes big
+	fna.add(FindNodeShore(10));
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
 	if (map.find_reachable_fields(area, &fields, cstep, fna)) {
 		// Testing received fields to get one with less immovables nearby
