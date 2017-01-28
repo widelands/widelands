@@ -649,25 +649,27 @@ void Table<void*>::layout() {
 }
 
 /**
- * Sort the table alphabetically. Make sure that the current selection stays
+ * Sort the table alphabetically, or if set_column_compare has been set,
+ * according to its compare function.
+ * Make sure that the current selection stays
  * valid (though it might scroll out of visibility).
- * Only the subarea [start,end) is sorted.
- * For example you might want to sort directories for themselves at the
- * top of list and files at the bottom.
+ * Only the subarea [lower_bound, upper_bound) is sorted.
+ * For example, you might want to sort directories for themselves at the
+ * top of the list, and files at the bottom.
  */
-void Table<void*>::sort(const uint32_t begin, uint32_t end) {
+void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
-	if (end > size())
-		end = size();
+	if (upper_bound > size())
+		upper_bound = size();
 
 	std::vector<uint32_t> indices;
 	std::vector<EntryRecord*> copy;
 
-	indices.reserve(end - begin);
-	copy.reserve(end - begin);
-	for (uint32_t i = begin; i < end; ++i) {
+	indices.reserve(upper_bound - lower_bound);
+	copy.reserve(upper_bound - lower_bound);
+	for (uint32_t i = lower_bound; i < upper_bound; ++i) {
 		indices.push_back(i);
 		copy.push_back(entry_records_[i]);
 	}
@@ -677,9 +679,9 @@ void Table<void*>::sort(const uint32_t begin, uint32_t end) {
 
 	uint32_t newselection = selection_;
 	std::set<uint32_t> new_multiselect;
-	for (uint32_t i = begin; i < end; ++i) {
-		uint32_t from = indices[i - begin];
-		entry_records_[i] = copy[from - begin];
+	for (uint32_t i = lower_bound; i < upper_bound; ++i) {
+		uint32_t from = indices[i - lower_bound];
+		entry_records_[i] = copy[from - lower_bound];
 		if (selection_ == from) {
 			newselection = i;
 		}

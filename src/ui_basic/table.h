@@ -79,7 +79,7 @@ public:
 	uint8_t get_sort_colum() const;
 	bool get_sort_descending() const;
 
-	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
 	EntryRecord& add(void* const entry, const bool select_this = false);
@@ -200,7 +200,7 @@ public:
 		sort_descending_ = descending;
 	}
 
-	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
 	EntryRecord& add(void* entry = nullptr, bool select = false);
