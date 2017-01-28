@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 	} catch (LuaError& e) {
 		log("Error in Lua Coroutine\n");
 		log("%s\n", e.what());
-		log("Send message to all players and pause game");
+		log("Send message to all players and pause game\n");
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message& msg = *new Widelands::Message(
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",

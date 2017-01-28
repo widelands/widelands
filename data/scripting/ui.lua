@@ -42,7 +42,7 @@ end
 --    :type field: :class:`wl.map.Field`
 --
 --    :returns: the prior center map pixel of the MapView as a table containing
---    'x' and 'y' keys.
+--       'x' and 'y' keys.
 --
 function scroll_to_field(field)
    _await_animation()

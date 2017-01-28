@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ bool Worker::run_setbobdescription(Game& game, State& state, const Action& actio
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	state.ivar2 = game.world().get_bob(bob.c_str());
+	state.ivar2 = game.world().get_critter(bob.c_str());
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", bob.c_str());

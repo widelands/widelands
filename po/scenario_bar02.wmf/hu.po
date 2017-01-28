@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2017-01-07 10:02+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:23+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,12 +146,15 @@ msgid "Build a training infrastructure"
 msgstr "Építs kiképzőhelyeket"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
+msgid "Build a barracks to train some basic soldiers."
+msgstr ""
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
 msgstr "Építs egy harci arénát és egy kiképzőtábort a hegyektől nyugatra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:128
 msgid ""
 "Enhance your metal workshop to an ax workshop in order to produce weapons, "
 "and build up a second metal workshop to ensure the production of tools. When"
@@ -160,23 +163,23 @@ msgid ""
 "weapons."
 msgstr "Fejleszd tovább szerszámkészítő műhelyedet fejszekészítő műhellyé, hogy fegyvert gyártson, és építs egy másik szerszámkészítő műhelyt, hogy biztosítsd a szerszámok gyártását. Ha a kovács eléri a következő szintet (mesterkovács), a fejszekészítő műhelyt fegyverkészítő műhellyé is fejlesztheted, ahol más fegyverek is készülnek."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:136
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr "Építs egy sisakkészítőt a hegyektől nyugatra, hogy jobb páncéllal láthassa el katonáidat."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
 msgid "Build a warehouse"
 msgstr "Építs egy raktárat"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 msgid "Build a warehouse to the west of the mountains."
 msgstr "Építs egy raktárat a hegyektől nyugatra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:109
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
@@ -184,42 +187,49 @@ msgid ""
 " longer."
 msgstr "A raktár hasonló a főhadiszálláshoz, azzal a különbséggel, hogy azt nem védik katonák. Gyakran tanácsos raktárat építeni, ha területed növekszik, és a főhadiszállásodhoz vezető utak egyre hosszabbodnak."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:115
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "Build training sites"
 msgstr "Építs kiképzőhelyeket"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:117
 msgid ""
-"Training sites like a training camp or a battle arena are used for training "
-"soldiers in their different attributes. These attributes are important in "
-"fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "A kiképzőhelyek, mint a kiképzőtábor vagy a harci aréna, a katonák különböző tulajdonságainak fejlesztésére használatosak. Ezek a tulajdonságok fontosak a harcokban, és minél jobb egy katona, annál nagyobb eséllyel nyer meg egy küzdelmet."
+"Build a barracks, a battle arena and a training camp to the west of the "
+"mountains."
+msgstr ""
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
+msgid ""
+"Barracks train basic soldiers while training sites like a training camp or a"
+" battle arena are used for training soldiers in their different attributes. "
+"These attributes are important in fights and the better a soldier is, the "
+"higher is the chance to win a fight."
+msgstr ""
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
 msgstr "Az attribútumok: életerő, támadás, védelem és kitérés."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Build weapons production"
 msgstr "Létesíts fegyvergyártó műhelyeket"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 msgid "Build a helm smithy"
 msgstr "Építs egy sisakkészítőt"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
 msgid "Destroy Kalitath’s army"
 msgstr "Semmisítsd meg Kalitath seregét"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid "Destroy Kalitath’s army and expand your territory to the east."
 msgstr "Semmisítsd meg Kalitath seregét, és terjeszd ki területedet keletre."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:145
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
@@ -227,28 +237,28 @@ msgid ""
 " cross (‘Start Attack’)."
 msgstr "Ellenség megtámadásához rá kell kattintanod az ellenfél adott katonai épületének bejáratára. Egy menü jelenik meg, ahol megválaszthatod, hány katona támadjon. Ha kész vagy a szám meghatározásával, kattints a keresztre („támadás indítása”)."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:152
 msgid "Military assault on Al’thunran"
 msgstr "Al'thunran ostroma"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:152
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:153
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr "Semmisítsd meg Thron két testvérének valamennyi erősségét, hogy véget vess a trónviszálynak."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid "Close to Home"
 msgstr "Már közel az otthon"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
 msgid "Thron looks worried…"
 msgstr "Thron aggódottnak nűnik…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:164
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
@@ -256,20 +266,20 @@ msgid ""
 msgstr "Az elmúlt napokban közelebb jöttünk fővárosunkhoz. Menetközben már sokan csatlakoztak hozzánk és fektették le hitüket bennem. De félek, nem vagyunk elég erősek, hogy harcba bocsátkozzunk fivéreimmel."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr "Most az öregerdő peremén pihenünk, és felkészülünk az elkövetkező napokra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
 msgid "Another Cold Day"
 msgstr "Egy újabb hideg nap"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -279,16 +289,16 @@ msgid ""
 "around the capital, securing the outer fortification rings."
 msgstr "Nem jó hallani, milyen híreket hozott egy járőr. Kémeink azt mondják, hogy a törzsek még mindig vívják a harcot, de úgy tűnik, néhány idősebb katona és vezető kezd belefáradni ebbe az értelmetlen háborúba. Kalitath, Kun fia a első hadvezér, aki elhagyta Al'thunrant, ezzel gyengén és sebezhetőn hagyva saját oldalát. Amint azt felderítőim jelentik, ő a központ alatt foglalt helyet, és az erődítmények külső gyűrűit biztosítja."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Doubts"
 msgstr "Kételyek"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head…"
 msgstr "Boldreth rázza a fejét…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -298,33 +308,33 @@ msgid ""
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr "Thron arra a meggyőződésre hajlik, hogy Kalitath belefáradt a harcba, és hajlandó lesz csatlakozni hozzánk, ha majd bevonulunk Al'thunranba helyreállítani a jogot és a rendet. De szerintem ez nem így lesz. Kalitath apja seregünk egyik legerősebb tábornoka, akinek családja sose volt oda a gondolatért, hogy meghajoljon Chat'Karuth zászlaja előtt. Miért csatlakozna hát fiához, hogy visszaszerezze örökségét és a trónt?"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
 msgid "The Story Continues"
 msgstr "A történet folytatódik"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:189
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
 msgid "Boldreth says:"
 msgstr "Boldreth így szól:"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr "De Thron nem hallgat kételyeimre. Ki akarja terjeszteni erősségeinket Kalitath területének határáig, és egyesülni akar erőivel. Rajta kell tartanom a szemem mindazon, ami arrafelé történik."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:198
 msgid "Thron is speaking confidently."
 msgstr "Thron magabiztosan szól."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -334,18 +344,18 @@ msgid ""
 " this mission, I hope Kalitath son of Kun will follow my call."
 msgstr "Erőink arcvonala kitolódott az erdő szélére. Magunk mögött hagytunk egy hosszú és hideg telet és oly sok mérföldet. Az Ondun köré emelt erősségek biztosítják embereink és áruink gyors utánpótlását, és ha egyszer Al'thunran a kezemben lesz, a két várost egy jó és védhető infrastruktúra köti majd össze. Továbbra is bízom abban, hogy nem egyedül viszem véghez küldetésemet: remélem, Kun fia, Kalitath hajlik hívó szavamra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:205
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:310
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
 msgid "Thron says:"
 msgstr "Thron:"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -355,16 +365,16 @@ msgid ""
 "prepare for battle."
 msgstr "Küldtem embereket, hogy látogassák meg Kalitath-t erődjében. Ő eltorlaszolta a főváros régi főbejáratát, és ostromgyűrűt próbál Al'thunran köré vonni. Nem fog senkit sem átengedni, amíg a gyűrű sértetlen. Ezidáig egyetlen üzenetemre sem válaszolt. De ami késik, nem múlik. Továbbképzem katonáimat, és készülök a harcra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
 msgstr "A hű társad"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:213
 msgid "Boldreth shouts out!"
 msgstr "Boldreth felkiált!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:215
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
@@ -372,12 +382,12 @@ msgid ""
 "there is war between Kalitath and us!"
 msgstr "Ezt a GALÁDOT! A határőrségünkből csak egy ember tért vissza élve. Üzenetet hozott Kalitath-tól, hogy csapataink saját vérükkel fizetnek meg minden mozgásukért! Nem fogadhatjuk el ezt a viselkedést. Mostantól hadiállapot van Kalitath és miköztünk!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
 msgid "Renegade Fortification"
 msgstr "Hitehagyott erődítmény"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:226
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
@@ -387,7 +397,7 @@ msgid ""
 msgstr "Az áruló cserben hagyta seregét, amint rájött, hogy nem képes visszatartani erőimet. Kalitath a harc zűrzavarában eltűnt, de nem is érdekel már. Meneküljön csak el és ne is halljunk többé róla, arról a törzsfőről, aki nem volt hajlandó behódolni a fatrónnak, ami most már engem illet."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:229
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
@@ -397,7 +407,7 @@ msgid ""
 msgstr "Távozása nagy hasznot is hozott számunkra: Kalitath egész évben oly elfoglalt volt a harccal, hogy nem törődött azzal sem, hogy elég élelmet halmozzon fel embereinek. Most, hogy elmenekült, néhány fiatalabb követőjét az éhség arra vitte, hogy átálljon hozzánk. Ez a csoport egy nagy erődítményt tart a kezén a főgyűrűben."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:232
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
@@ -405,12 +415,12 @@ msgid ""
 "blinded by rage and hate, there is no sense left in them at all I believe."
 msgstr "De van még más hír is: felderítőim jelentik, hogy fivéreim hadakozó két törzsén eluralkodott a zűrzavar, és nem igazán van tudomásuk az új veszélyről, amely hamarosan lecsap rájuk. Bár szerintem ha tudnának róla, akkor sem törődnének vele – a dühöngéstől és a gyűlölködéstől elvakulva már semmi érzék nem maradt bennük, úgy hiszem."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Winter Ahead"
 msgstr "Közeleg a tél"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
@@ -419,16 +429,16 @@ msgid ""
 "cold winter!"
 msgstr "Ma reggel Thront gondterheltnek  láttam. Késő éjjel hazatért őrjáratáról és leült egy fa tövébe, táborunkat vizslatva. A viták és veszekedések száma egyre nő, a tél pedig itt van már a nyakunkon. Fel kell töltenünk az éléskamrát, hogy túléljük a hosszú, hideg telet!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:245
 msgid "The Advisor"
 msgstr "A tanácsadó"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:246
 msgid "Khantrukh nods."
 msgstr "Khantrukh bólint."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
@@ -437,23 +447,23 @@ msgid ""
 "this cold soil."
 msgstr "Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljük a hosszú, hideg telet. El kéne kezdenünk építeni egy kutat, egy halász- és egy vadászkunyhót. És ha találunk elég helyet építenünk kéne egy tanyát és egy pékséget is! Az egyik paraszt nagyon okosnak tűnik - már termesztett néhány növényt ebben a hideg talajban."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Food Economy Completed"
 msgstr "Az élelemtermelő gazdaság elkészült"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:256
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "Khantrukh most tájékoztatott, hogy alapszintű élelemtermelő gazdaságunk sikeresen kiépült. Végre egyikünknek sem kell többé félnie az éhezéstől."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
 msgid "Tracks"
 msgstr "Nyomok"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:265
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
 "settlement. He has instructed us to build a tower, to have a greater visual "
@@ -461,12 +471,12 @@ msgid ""
 "attacks."
 msgstr "Thron azt mondta nekem, hogy nyomokat fedezett fel a hóban északkeletre a településünktől. Arra utasított minket, hogy építsünk egy tornyot, hogy jobb rálátásunk legyen a területre a csarnok körül, hogy megvédhessük a népünket a hirtelen támadásoktól."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 msgid "Further Exploration"
 msgstr "További felfedezés"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:274
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -478,7 +488,7 @@ msgid ""
 msgstr "Az első erődítmény, amit Thron rendelt elkészült. Pillanatnyilag szeretné elnyerni azok bizalmát és hitét, akik kint élnek az új lakóhelyünk falain kívül, amit mi „Ondunnak” neveztük el, amely a régi nyelven azt jelenti, hogy „azok, akik várnak”. De Thron még nem elégedett – és teljesen megértem félelmeit: az erdő mély, az Al'thunrani határ közel van. Biztos vagyok benne, hogy ezer nagyobb veszély leselkedik ott kint, mint a járatlan utak."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:276
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:277
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
@@ -486,12 +496,12 @@ msgid ""
 " capture our woods."
 msgstr "Hogy főhadiszállásunk körül még több területet szemmel tarthassunk, tovább kell terjeszkednünk, még több őrt és  felderítőt kell küldenünk, hogy figyeljék a határt és rajta tartsák a szemüket a küszöbünkön tomboló háborún. Majd AKKOR készen állunk az erdőinkbe betörő vész fogadására."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Mountains Found"
 msgstr "Hegyeket találtunk"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:286
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
@@ -500,24 +510,24 @@ msgid ""
 "metal ores."
 msgstr "Épp most beszéltem az őrjáratunk vezetőjével. Azt mondta, hogy néhány hegyet találtak északkeletre és keletre a területünktől. Egy kis szerencsével ez új esélyt fog adni, hogy felfegyverezzük az embereinket, mert ha jól emlékszem, akkor az Al'thunrantól nyugatra fekvő hegyek szenet és némi fémércet rejtenek."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Mining Economy Completed"
 msgstr "A bányászgazdaság elkészült"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
 msgstr "Most értesültem, hogy bányászgazdaságunk megkezdte működését. Ez a hír mosolyt csalt arcomra – a legnehezebb rész még hátravan ugyan, de kovácsaink immár mindent megtesznek, hogy tovább könnyítsék életünket."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Fortress Needed"
 msgstr "Egy erődre van szükség"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:303
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -527,12 +537,12 @@ msgid ""
 " the east of the mountains!"
 msgstr "Boldreth és én most fedeztünk fel egy területet a három hegy körül. Úgy tűnik, hogy a terület egyik fő stratégiai problémája az, hogy két nagyobb átjáró is van – egy északra és egy délre a központi hegytől. Azok az átjárók nehezen tárhatóak ellenőrzés alatt, így csak egy esélyünk van biztosítani a hegyet az ellenséges kezektől: egy erődöt kell építenünk a hegytől keletre!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:308
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
 msgid "Fortress Completed"
 msgstr "Az erőd elkészült"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
@@ -540,12 +550,12 @@ msgid ""
 "but for now we can take a deep breath."
 msgstr "Végre! Most készült el az erőd, így településünk bejárata immár védve van. A jövőben az átjárókhoz is építhetünk még esetleg pár erődítményt, például határőrházakat vagy tornyokat, de most már megnyugodhatunk."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:316
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
 msgid "Enhanced Economy and Training"
 msgstr "Fejlett gazdaság és kiképzés"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:320
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
@@ -553,7 +563,7 @@ msgid ""
 msgstr "A bányászati gazdaságunk úgy néz ki, jól működik, ez remek hír! Mindenesetre sok férfi és nő vár a csarnokban, hogy feladatot kapjon, úgyhogy ők tudnak segíteni a katonáinknak a közelgő háborúban való felkészülésben."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:323
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -565,7 +575,7 @@ msgid ""
 msgstr "Geológusaink rengeteg további tartalékot találtak vasércből, szénből. sőt aranyércből is. Fejlesztenünk kell bányáinkat, amint bányászaink tapasztaltabbak lesznek. Építenünk kell még néhány további bányát; egy nagyobb élelemtermelő gazdaságot, hogy mindig elláthassuk embereinket a szükséges élelemmel; valamint egy további feldolgozógazdaságot. És ez még mindig nem minden – legtöbb katonánk igen fiatal, és sem jó fegyverük, sem jó kiképzésük nincs. Kiképzőhelyeket kell létesítenünk, hogy felkészíthessük őket leendő feladataikra."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -574,7 +584,7 @@ msgid ""
 msgstr "Fivéreim és katonáik halottak, és csak lángok és pusztulás maradt nyomukban. Sehol a romok között nem találtam egy férfit vagy nőt a régiek közül, így csak remélhetem, hogy elmenekültek erről a kegyetlen harcmezőről, és új életet kezdtek valahol máshol."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -584,22 +594,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Semmi sem maradt abból a szépségből, amire emlékszem, csak romok maradtak a fővárosból. Szomorú vagyok, de megkönnyebbült is. Sosem reméltem, hogy még egyszer látom Al'thunran régi szépségét – alig néhány hónapja volt, hogy azon gondolkodtam, hogy vajon egyszer újra betehetem-e oda a lábam. Most az óváros újra a kezeim között van, és nem tétovázom, hogy újjáépítsem a népem erejével. Alig várom, hogy újra a régi szépségében lássam."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Befejezted az utolsó küldetést a Barbár oktatójáték hadjáratban. Ha szeretnéd, folytathatod a játékot, egyébként menj a következő hadjáratra."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
 msgid "Military Assault"
 msgstr "Ostrom"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:345
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -607,7 +617,7 @@ msgid ""
 msgstr "Hát legyen, tábornokaim most állítják össze csapataimat, és maga Boldreth vezeti az első támadást. Vele tartok, hogy megszabadítsuk Al'thunrant ettől a háborútól és visszahozzuk a békét fővárosunkba."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -616,20 +626,20 @@ msgid ""
 msgstr "Amint az ifjú nap a fák fölé hág holnap reggel, elrendelem az ostromot. Napnyugtakor pedig már győzelmemet ünneplem a hadúri facsarnokban, és egy újszülött bárányt áldozok apám tiszteletére, akinek szemei ma rám szegeződnek."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
 msgid "So be it!"
 msgstr "Úgy legyen!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
 msgid "Faster Transportation"
 msgstr "Gyorsabb szállítás"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:357
 msgid "Khantrukh says:"
 msgstr "Khantrukh így szól:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:359
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

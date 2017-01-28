@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -331,7 +331,7 @@ void Tribes::postload() {
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
-			for (const auto& ware_amount : de->inputs()) {
+			for (const auto& ware_amount : de->input_wares()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {

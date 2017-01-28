@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "logic/player.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/waresdisplay.h"
-#include "wui/waresqueuedisplay.h"
 
 using Widelands::PortDock;
 using Widelands::Warehouse;
@@ -77,7 +77,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 
 	// Add the wares queues.
 	for (WaresQueue* wq : wh.get_portdock()->expedition_bootstrap()->wares()) {
-		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Align::kLeft);
+		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Align::kLeft);
 	}
 
 	// TODO(unknown): Implement UI for Builder + Soldiers

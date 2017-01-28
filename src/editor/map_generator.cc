@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,7 +104,7 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
 		egbase_.create_critter(
-		   fc, egbase_.world().get_bob(
+		   fc, egbase_.world().get_critter(
 		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 		             .c_str()));
 	}

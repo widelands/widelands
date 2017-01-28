@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,12 @@
 
 constexpr int kPadding = 4;
 
+namespace {
+	int text_width(int available_width, int pic_width) {
+		return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
+	}
+}
+
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
@@ -38,6 +44,8 @@ Statebox::Statebox(Panel* const parent,
                    const std::string& tooltip_text)
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
+     pic_graphics_(pic),
+     label_text_(""),
      rendered_text_(nullptr) {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
@@ -45,31 +53,45 @@ Statebox::Statebox(Panel* const parent,
 	set_size(w, h);
 	set_can_focus(true);
 	set_flags(Has_Custom_Picture, true);
-	pic_graphics_ = pic;
 }
 
 Statebox::Statebox(Panel* const parent,
                    Vector2i const p,
                    const std::string& label_text,
                    const std::string& tooltip_text,
-                   uint32_t width)
-   : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+                   int width)
+   : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
-     rendered_text_(label_text.empty() ? nullptr :
-                                         UI::g_fh1->render(as_uifont(label_text),
-                                                           width > (kStateboxSize + kPadding) ?
-                                                              width - kStateboxSize - kPadding :
-                                                              0)) {
-	pic_graphics_ = g_gr->images().get("images/ui_basic/checkbox_light.png");
-	if (rendered_text_) {
-		int w = rendered_text_->width() + kPadding + pic_graphics_->width() / 2;
-		int h = std::max(rendered_text_->height(), pic_graphics_->height());
+     pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
+     label_text_(label_text),
+     rendered_text_(nullptr) {
+	set_flags(Has_Text, !label_text_.empty());
+	layout();
+}
+
+void Statebox::layout() {
+	// We only need to relayout if we have text
+	if (flags_ & Has_Text) {
+		int w = get_w();
+		int h = kStateboxSize;
+		int pic_width = kStateboxSize;
+		if (pic_graphics_) {
+			w = std::max(pic_graphics_->width(), w);
+			h = pic_graphics_->height();
+			pic_width = pic_graphics_->width();
+		}
+		rendered_text_ = label_text_.empty() ?
+		                    nullptr :
+		                    UI::g_fh1->render(
+		                       as_uifont(label_text_),
+									  text_width(get_w(), pic_width));
+		if (rendered_text_) {
+			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
+			h = std::max(rendered_text_->height(), h);
+		}
 		set_desired_size(w, h);
 		set_size(w, h);
 	}
-}
-
-Statebox::~Statebox() {
 }
 
 /**
@@ -114,7 +136,7 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
-		dst.blit(Vector2f((get_inner_w() - w) / 2., (get_inner_h() - h) / 2.), pic_graphics_);
+		dst.blit(Vector2f((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
 
 		if (flags_ & Is_Checked) {
 			dst.draw_rect(Rectf(0.f, 0.f, get_w(), get_h()), RGBColor(229, 116, 2));

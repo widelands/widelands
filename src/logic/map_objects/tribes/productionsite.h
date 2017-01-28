@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,8 +85,11 @@ public:
 	bool is_output_worker_type(const DescriptionIndex& i) const {
 		return output_worker_types_.count(i);
 	}
-	const BillOfMaterials& inputs() const {
-		return inputs_;
+	const BillOfMaterials& input_wares() const {
+		return input_wares_;
+	}
+	const BillOfMaterials& input_workers() const {
+		return input_workers_;
 	}
 	using Output = std::set<DescriptionIndex>;
 	const Output& output_ware_types() const {
@@ -118,7 +121,8 @@ public:
 
 private:
 	BillOfMaterials working_positions_;
-	BillOfMaterials inputs_;
+	BillOfMaterials input_wares_;
+	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
 	Programs programs_;
@@ -191,7 +195,7 @@ public:
 		production_result_ = text;
 	}
 
-	WaresQueue& waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -205,10 +209,11 @@ public:
 
 	void set_economy(Economy*) override;
 
-	using InputQueues = std::vector<WaresQueue*>;
-	const InputQueues& warequeues() const {
+	using InputQueues = std::vector<InputQueue*>;
+	const InputQueues& inputqueues() const {
 		return input_queues_;
 	}
+
 	const std::vector<Worker*>& workers() const;
 
 	bool can_start_working() const;
@@ -302,7 +307,7 @@ protected:  // TrainingSite must have access to this stuff
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
-	InputQueues input_queues_;  ///< input queues for all inputs
+	InputQueues input_queues_;          ///< input queues for all inputs
 	std::vector<bool> statistics_;
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:

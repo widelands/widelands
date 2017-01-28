@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -841,7 +841,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
-			defenders = wh->count_workers(game, wh->owner().tribe().soldier(), noreq);
+			defenders =
+			   wh->count_workers(game, wh->owner().tribe().soldier(), noreq, Warehouse::Match::kExact);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;

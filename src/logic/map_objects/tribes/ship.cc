@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -623,7 +623,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
-					WaresQueue& wq = cs->waresqueue(ware->descr_index());
+					WaresQueue& wq = dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
 					const uint32_t cur = wq.get_filled();
 
 					// This is to help to debug the situation when colonization fails

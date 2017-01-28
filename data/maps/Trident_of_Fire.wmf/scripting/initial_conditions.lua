@@ -149,7 +149,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
             soldiers = { [{0,0,0,0}] = 45 },
          },
          { "barbarians_port", f_port.x, f_port.y},
-         { "barbarians_shipyard", f_shipyard.x, f_shipyard.y, wares = {
+         { "barbarians_shipyard", f_shipyard.x, f_shipyard.y, inputs = {
               blackwood = 10,
               cloth = 4,
               log = 2,
@@ -219,7 +219,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
          },
          { "empire_port", f_port.x, f_port.y},
          { "empire_shipyard", f_shipyard.x, f_shipyard.y,
-            wares = {
+            inputs = {
              cloth = 4,
              log = 2,
              planks = 10,
@@ -289,7 +289,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
          soldiers = { [{0,0,0,0}] = 45 },
          },
          { "atlanteans_port", f_port.x, f_port.y},
-         { "atlanteans_shipyard", f_shipyard.x, f_shipyard.y, wares = {
+         { "atlanteans_shipyard", f_shipyard.x, f_shipyard.y, inputs = {
            planks = 10,
            spidercloth = 4,
            log = 2,

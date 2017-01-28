@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -704,11 +704,12 @@ void Game::send_player_set_ware_priority(PlayerImmovable& imm,
 	   *new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
 }
 
-void Game::send_player_set_ware_max_fill(PlayerImmovable& imm,
-                                         DescriptionIndex const index,
-                                         uint32_t const max_fill) {
-	send_player_command(
-	   *new CmdSetWareMaxFill(get_gametime(), imm.owner().player_number(), imm, index, max_fill));
+void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
+                                          DescriptionIndex const index,
+                                          WareWorker type,
+                                          uint32_t const max_fill) {
+	send_player_command(*new CmdSetInputMaxFill(
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
