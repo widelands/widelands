@@ -25,7 +25,6 @@
 #include <stdint.h>
 
 #include "logic/widelands.h"
-#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
