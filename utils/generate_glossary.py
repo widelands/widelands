@@ -123,7 +123,12 @@ def load_extracted_glossary(glossary_file, locale):
             entry = GlossaryEntry()
             entry.term = row[term_index].strip()
             entry.translation = row[translation_index].strip()
-            # NOCOM parse translation for fuzzies
+            # Remove source information with fuzzy matches
+            regex = re.compile('(.+)( \{.*\})(.*)')
+            match = regex.match(entry.translation)
+            while match:
+                entry.translation = match.group(1) + match.group(3)
+                match = regex.match(entry.translation)
             result[entry.term.lower()] = entry
         counter = counter + 1
     return result
