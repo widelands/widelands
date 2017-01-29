@@ -246,7 +246,6 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
         pot_path = os.path.join(temp_path, 'glossary_' + locale + '.po')
 
         try:
-            print('- Generating glossary')
             # We need shell=True for the wildcards.
             poterminology_result = check_output(
                 ['poterminology -I ' + input_path + ' -o ' + pot_path], stderr=subprocess.STDOUT, shell=True)
@@ -266,11 +265,9 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
         # The po file is no longer needed, delete it.
         os.remove(pot_path)
 
-        print('- Loading glossaries')
         transifex_glossary = load_transifex_glossary(input_glossary, locale)
         extracted_glossary = load_extracted_glossary(csv_file, locale)
 
-        print('- Updating entries')
         # Add generated translation if necessary
         for key in transifex_glossary.keys():
             if transifex_glossary[key].translation == '' and extracted_glossary.has_key(key):
