@@ -229,12 +229,13 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
     if only_locale != 'all':
         locales.append(only_locale)
     else:
-        reference_textdomain = 'widelands'
-        temp_files = sorted(os.listdir(os.path.join(
-            po_dir, reference_textdomain)), key=str.lower)
-        for temp_filename in temp_files:
-            if temp_filename.endswith('.po'):
-                locales.append(temp_filename[0:-3])
+        # Get locales from the Transifex glossary file
+        header_row = read_csv_file(input_glossary)[0]
+        regex = re.compile('^(translation_)(.+)$')
+        for header in header_row:
+            match = regex.match(header)
+            if match:
+                locales.append(match.group(2))
 
     temp_path = make_path(output_path, 'temp_glossary')
 
