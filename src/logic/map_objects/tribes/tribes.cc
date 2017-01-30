@@ -49,7 +49,7 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	return tribeinfos;
 }
 
-TribeBasicInfo tribeinfo(const std::string& tribename) {
+TribeBasicInfo get_tribeinfo(const std::string& tribename) {
 	if (Widelands::tribe_exists(tribename)) {
 		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
 			if (info.name == tribename) {
@@ -164,7 +164,7 @@ void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase
 void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	const std::string name = table.get_string("name");
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::tribeinfo(name), egbase.tribes()));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}

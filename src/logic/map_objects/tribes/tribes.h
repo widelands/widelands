@@ -53,7 +53,7 @@ std::vector<std::string> get_all_tribenames();
 std::vector<TribeBasicInfo> get_all_tribeinfos();
 
 /// Returns the basic preload info for a tribe.
-TribeBasicInfo tribeinfo(const std::string& tribename);
+TribeBasicInfo get_tribeinfo(const std::string& tribename);
 
 /// Returns whether this tribe is listed in tribes/preload.lua.
 bool tribe_exists(const std::string& tribename);

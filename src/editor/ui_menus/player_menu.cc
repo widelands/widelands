@@ -169,7 +169,7 @@ void EditorPlayerMenu::update() {
 		}
 
 		plr_set_tribes_buts_[p - 1]->set_title(
-		   Widelands::tribeinfo(selected_tribes_[p - 1]).descname);
+			Widelands::get_tribeinfo(selected_tribes_[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -330,7 +330,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// place a hq and reference the tribe
 		// so that this tribe can not be changed
 		egbase.add_player(n, 0,  // TODO(SirVer): initialization index makes no sense here
-		                  Widelands::tribeinfo(selected_tribes_[n]).descname,
+								Widelands::get_tribeinfo(selected_tribes_[n]).descname,
 		                  plr_names_[n - 1]->text());
 
 		p = egbase.get_player(n);
