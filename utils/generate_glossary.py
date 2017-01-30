@@ -129,7 +129,7 @@ def load_extracted_glossary(glossary_file, locale):
             while match:
                 entry.translation = match.group(1) + match.group(3)
                 match = regex.match(entry.translation)
-            result[entry.term.lower()] = entry
+            result[entry.term] = entry
         counter = counter + 1
     return result
 
@@ -174,7 +174,7 @@ def load_transifex_glossary(glossary_file, locale):
             entry.term_comment = row[term_comment_index].strip()
             entry.translation = row[translation_index].strip()
             entry.translation_comment = row[comment_index].strip()
-            result[entry.term.lower()] = entry
+            result[entry.term] = entry
         counter = counter + 1
     return result
 
@@ -248,7 +248,7 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
         try:
             # We need shell=True for the wildcards.
             poterminology_result = check_output(
-                ['poterminology -I ' + input_path + ' -o ' + pot_path], stderr=subprocess.STDOUT, shell=True)
+                ['poterminology ' + input_path + ' -o ' + pot_path], stderr=subprocess.STDOUT, shell=True)
             if 'Error' in poterminology_result:
                 print('Error running poterminology:\n  FILE: ' + input_path + '\n  OUTPUT PATH: ' +
                       output_path + '\n  ' + poterminology_result.split('\n', 1)[1])
@@ -293,8 +293,6 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
     for key in source_terms:
         result = result + '"%s","%s","%s",' % (source_terms[key].term.replace('"', '""'), source_terms[
                                                key].wordclass.replace('"', '""'), source_terms[key].term_comment.replace('"', '""'))
-        # We check for lowercase keys in the translations.
-        key = key.lower()
         for locale in locales:
             glossary = glossaries[locale]
             translation = ''
