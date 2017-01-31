@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Matej Svrcek <mmatej@yahoo.com>, 2015
-# Milan Fašina <matrix17@seznam.cz>, 2016
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 18:35+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Noví vojácí se vytvářejí jinak než běžní dělníci: rekruti jdou ze skladiště (nebo z hlavní budovy) do kasáren, kde projdou základním výcvikem a stanou se vojáky. Základní barbarský voják nemá brnění, pouze sekeru."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""

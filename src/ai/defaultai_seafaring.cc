@@ -134,7 +134,7 @@ bool DefaultAI::marine_main_decisions() {
 			// counting stocks
 			uint8_t stocked_wares = 0;
 			std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-			for (InputQueue *queue : inputqueues) {
+			for (InputQueue* queue : inputqueues) {
 				if (queue->get_type() == wwWARE) {
 					stocked_wares += queue->get_filled();
 				}
@@ -190,7 +190,7 @@ bool DefaultAI::marine_main_decisions() {
 				// counting stocks
 				uint8_t stocked_wares = 0;
 				std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-				for (InputQueue *queue : inputqueues) {
+				for (InputQueue* queue : inputqueues) {
 					if (queue->get_type() == wwWARE) {
 						stocked_wares += queue->get_filled();
 					}
