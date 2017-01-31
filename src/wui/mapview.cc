@@ -483,9 +483,11 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 }
 
 bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_RIGHT && dragging_)
+	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
-	return true;
+		return true;
+	}
+	return false;
 }
 
 bool MapView::handle_mousemove(

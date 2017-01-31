@@ -380,9 +380,6 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	return false;
 }
 
-bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t) {
-	return false;
-}
 
 /**
  * Find the tab at the coordinates x, y

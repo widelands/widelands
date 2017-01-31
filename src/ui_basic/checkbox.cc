@@ -186,9 +186,6 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	}
 	return false;
 }
-bool Statebox::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
-}
 
 bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true;  // We handle this always by lighting up
