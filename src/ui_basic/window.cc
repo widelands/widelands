@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -387,8 +387,9 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		dragging_ = false;
+		return true;
 	}
-	return true;
+	return false;
 }
 
 // Always consume the tooltip event to prevent tooltips from

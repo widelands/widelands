@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,13 +136,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      language_dropdown_(&box_interface_,
                         0,
                         0,
-								100,  // 100 is arbitrary, will be resized in layout().
+                        100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         _("Language")),
      resolution_dropdown_(&box_interface_,
                           0,
                           0,
-								  100,  // 100 is arbitrary, will be resized in layout().
+                          100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           _("In-game resolution")),
 

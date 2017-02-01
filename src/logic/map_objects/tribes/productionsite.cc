@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -412,7 +412,8 @@ void ProductionSite::init(EditorGameBase& egbase) {
 	}
 
 	for (WareRange i(input_workers); i; ++i) {
-		input_queues_[input_wares.size() + i.i] = new WorkersQueue(*this, i.current->first, i.current->second);
+		input_queues_[input_wares.size() + i.i] =
+		   new WorkersQueue(*this, i.current->first, i.current->second);
 	}
 
 	//  Request missing workers.
@@ -473,7 +474,7 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (InputQueue *iq : input_queues_) {
+	for (InputQueue* iq : input_queues_) {
 		iq->cleanup();
 		delete iq;
 	}

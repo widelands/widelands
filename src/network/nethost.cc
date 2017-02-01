@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -590,7 +590,7 @@ NetHost::NetHost(const std::string& playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::Tribes::get_all_tribeinfos();
+	d->settings.tribes = Widelands::get_all_tribeinfos();
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;

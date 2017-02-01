@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Adam Piggott, 2016
+# Adam Piggott, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-24 21:51+0000\n"
+"Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,7 +145,7 @@ msgstr "Build a training infrastructure"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Build a barracks to train some basic soldiers."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -194,7 +194,7 @@ msgstr "Build training sites"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Build a barracks, a battle arena and a training camp to the west of the mountains."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -202,7 +202,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Barracks train basic soldiers while training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher chance they have to win a fight."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."

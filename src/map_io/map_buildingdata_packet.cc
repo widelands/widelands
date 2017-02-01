@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1142,14 +1142,14 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 
 	// Get number of ware queues. Not very pretty but avoids changing the save file format
 	uint16_t input_ware_queues_size = 0;
-	for (InputQueue *iq : productionsite.inputqueues()) {
+	for (InputQueue* iq : productionsite.inputqueues()) {
 		if (iq->get_type() == wwWARE) {
 			input_ware_queues_size++;
 		}
 	}
 	// Write count of ware queues
 	fw.unsigned_16(input_ware_queues_size);
-	for (InputQueue *iq : productionsite.inputqueues()) {
+	for (InputQueue* iq : productionsite.inputqueues()) {
 		if (iq->get_type() == wwWARE) {
 			iq->write(fw, game, mos);
 		}
@@ -1157,7 +1157,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 
 	// Same for worker queues
 	fw.unsigned_16(productionsite.input_queues_.size() - input_ware_queues_size);
-	for (InputQueue *iq : productionsite.inputqueues()) {
+	for (InputQueue* iq : productionsite.inputqueues()) {
 		if (iq->get_type() == wwWORKER) {
 			iq->write(fw, game, mos);
 		}

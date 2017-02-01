@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:18+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -127,7 +127,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Udvid dit territorium mod bjergene, send geologer ud for at søge efter malm og kul og byg en infrastruktur til minedrift med miner, traktørsteder, smelteværker og en klejnsmed."
+msgstr "Udvid dit territorium mod bjergene, send geologer ud for at søge efter malm og kul og byg en infrastruktur til minedrift med miner, værtshuse, smelteværker og en klejnsmed."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -145,7 +145,7 @@ msgstr "Byg en infrastruktur til optræning"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Byg en barak til træning af rekrutter."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -194,7 +194,7 @@ msgstr "Byg træningsanlæg"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Byg en barak, en kamparena og en træningslejr vest for bjergene."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -202,7 +202,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Barakker træner rekrutter mens træningsfaciliteter såsom træningslejre eller en kamparena bruges til at træne soldater i deres forskellige attributter. Disse attributter er vigtige i kamp og jo bedre soldaten er, jo højere er sandsynligheden for at vinde en kamp."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -467,7 +467,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron fortalte mig at han registrerede spor i sneen mod nordøst fra vores bosættelse. Han har instrueret os i at bygge et tårn, for at få større visuel udsigt over området omkring vores hal for at beskytte vores folk mod pludselige angreb."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
 msgid "Further Exploration"

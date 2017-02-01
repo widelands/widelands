@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -453,8 +453,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
-		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);

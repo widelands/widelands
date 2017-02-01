@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,9 @@
 constexpr int kPadding = 4;
 
 namespace {
-	int text_width(int available_width, int pic_width) {
-		return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
-	}
+int text_width(int available_width, int pic_width) {
+	return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
+}
 }
 
 namespace UI {
@@ -82,9 +82,7 @@ void Statebox::layout() {
 		}
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
-		                    UI::g_fh1->render(
-		                       as_uifont(label_text_),
-									  text_width(get_w(), pic_width));
+		                    UI::g_fh1->render(as_uifont(label_text_), text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
