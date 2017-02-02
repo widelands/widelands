@@ -178,13 +178,95 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite&, Game&, MapObjectSaver&) {
+constexpr uint8_t kCurrentPacketVersion = 2;
+
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersion);
+	uint8_t number_warequeues = 0;
+	for (std::unique_ptr<InputQueue>& q : queues_) {
+		if (q->get_type() == wwWARE) {
+			number_warequeues++;
+		}
+	}
+	fw.unsigned_8(queues_.size() - number_warequeues);
+	for (std::unique_ptr<InputQueue>& q : queues_) {
+		if (q->get_type() == wwWORKER) {
+			q->write(fw, game, mos);
+		}
+	}
+	fw.unsigned_8(number_warequeues);
+	for (std::unique_ptr<InputQueue>& q : queues_) {
+		if (q->get_type() == wwWARE) {
+			q->write(fw, game, mos);
+		}
+	}
 }
 
-void ExpeditionBootstrap::load(Warehouse&,
-                               FileRead&,
-                               Game&,
-                               MapObjectLoader&) {
+void ExpeditionBootstrap::load(Warehouse& warehouse,
+                               FileRead& fr,
+                               Game& game,
+                               MapObjectLoader& mol) {
+	assert(queues_.empty());
+	uint8_t packet_version = fr.unsigned_8();
+	// Load worker queues
+	// Creative data usage: A value of 0 or 1 describes the number of workers currently in the queue (old format)
+	// A value >= 2 is interpreted as a version number (new format)
+	std::vector<WorkersQueue*> wqs;
+	try {
+		if (packet_version < 2) {
+			// This code is actually quite broken/inflexible but it should work
+			// If we are here, than the packet version is actually the number of stored workers
+			const uint8_t num_workers = packet_version;
+			WorkersQueue* wq = new WorkersQueue(warehouse, warehouse.owner().tribe().builder(), 1);
+			for (uint8_t i = 0; i < num_workers; ++i) {
+
+				if (fr.unsigned_8() == 1) {
+					// Replace request inside WorkersQueue. Should not be needed/possible
+					wq->request_.reset(new Request(warehouse, 0, InputQueue::request_callback, wwWORKER));
+					wq->request_->read(fr, game, mol);
+				} else {
+					wq->workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
+				}
+			}
+			wqs.push_back(wq);
+		} else if (packet_version == kCurrentPacketVersion) {
+			uint8_t num_queues = fr.unsigned_8();
+			for (uint8_t i = 0; i < num_queues; ++i) {
+				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
+				wq->read(fr, game, mol);
+				wq->set_callback(input_callback, this);
+
+				if (wq->get_index() == INVALID_INDEX) {
+					delete wq;
+				} else {
+					wqs.push_back(wq);
+				}
+			}
+		} else {
+			throw UnhandledVersionError("ExpeditionBootstrap", packet_version, kCurrentPacketVersion);
+		}
+
+		// Load ware queues
+		// Same code for both versions
+		uint8_t num_queues = fr.unsigned_8();
+		for (uint8_t i = 0; i < num_queues; ++i) {
+			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
+			wq->read(fr, game, mol);
+			wq->set_callback(input_callback, this);
+
+			if (wq->get_index() == INVALID_INDEX) {
+				delete wq;
+			} else {
+				queues_.emplace_back(wq);
+			}
+		}
+		// Append worker queues to the end
+		for (WorkersQueue *wq : wqs) {
+			queues_.emplace_back(wq);
+		}
+	} catch (const GameDataError& e) {
+		throw GameDataError("loading ExpeditionBootstrap: %s", e.what());
+	}
 }
 
 /*

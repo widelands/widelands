@@ -75,7 +75,6 @@ public:
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
 	// packet, and there in the warehouse data packet.
-	// NOCOM(Notabilis): Methods are currently empty, not quite sure how to implement them
 	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol);
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 

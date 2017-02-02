@@ -28,6 +28,7 @@ namespace Widelands {
 
 class Economy;
 class EditorGameBase;
+class ExpeditionBootstrap;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
@@ -40,6 +41,10 @@ class Worker;
  */
 class WorkersQueue : public InputQueue {
 public:
+
+	// If we ever drop support for build19 save games, remove this and rework ExpeditionBootstrap::load()
+	friend class ExpeditionBootstrap;
+
 	WorkersQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
