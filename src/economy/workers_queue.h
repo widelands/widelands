@@ -42,9 +42,6 @@ class Worker;
 class WorkersQueue : public InputQueue {
 public:
 
-	// If we ever drop support for build19 save games, remove this and rework ExpeditionBootstrap::load()
-	friend class ExpeditionBootstrap;
-
 	WorkersQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
@@ -73,6 +70,14 @@ public:
 	 * @return The first worker in stored in this list.
 	 */
 	Worker* extract_worker();
+
+	/**
+	 * Loads the state of this WorkersQueue.
+	 * This method should only be used by ExpeditionBootstrap as compatibility helper when loading
+	 * save games for build 19.
+	 * If we ever drop support for them, remove this method and rework ExpeditionBootstrap::load().
+	 */
+	void load_for_expedition(FileRead&, Game&, MapObjectLoader&, uint8_t);
 
 protected:
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;

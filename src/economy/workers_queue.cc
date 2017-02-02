@@ -63,7 +63,13 @@ void WorkersQueue::cleanup() {
 /**
  * Called when a worker arrives at the owning building.
 */
-void WorkersQueue::entered(DescriptionIndex index, Worker* worker) {
+void WorkersQueue::entered(
+#ifndef NDEBUG
+			DescriptionIndex index,
+#else
+			DescriptionIndex,
+#endif
+			Worker* worker) {
 
 	assert(worker != nullptr);
 	assert(get_filled() < max_size_);
@@ -168,6 +174,20 @@ Worker* WorkersQueue::extract_worker() {
 	// Remove reference from list
 	workers_.erase(workers_.begin());
 	return w;
+}
+
+void WorkersQueue::load_for_expedition(FileRead& fr, Game& game, MapObjectLoader& mol, uint8_t num_workers) {
+	assert(type_ == wwWORKER);
+	assert(index_ != INVALID_INDEX);
+	for (uint8_t i = 0; i < num_workers; ++i) {
+		if (fr.unsigned_8() == 1) {
+			request_.reset(new Request(owner_, 0, InputQueue::request_callback, wwWORKER));
+			request_->read(fr, game, mol);
+		} else {
+			workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
+		}
+	}
+	// All other values have hopefully be set by the constructor or the caller
 }
 
 /**

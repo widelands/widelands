@@ -218,16 +218,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 			// If we are here, than the packet version is actually the number of stored workers
 			const uint8_t num_workers = packet_version;
 			WorkersQueue* wq = new WorkersQueue(warehouse, warehouse.owner().tribe().builder(), 1);
-			for (uint8_t i = 0; i < num_workers; ++i) {
-
-				if (fr.unsigned_8() == 1) {
-					// Replace request inside WorkersQueue. Should not be needed/possible
-					wq->request_.reset(new Request(warehouse, 0, InputQueue::request_callback, wwWORKER));
-					wq->request_->read(fr, game, mol);
-				} else {
-					wq->workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
-				}
-			}
+			wq->load_for_expedition(fr, game, mol, num_workers);
 			wqs.push_back(wq);
 		} else if (packet_version == kCurrentPacketVersion) {
 			uint8_t num_queues = fr.unsigned_8();

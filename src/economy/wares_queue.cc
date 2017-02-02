@@ -56,10 +56,12 @@ void WaresQueue::cleanup() {
 	index_ = INVALID_INDEX;
 }
 
-void WaresQueue::entered(DescriptionIndex index,
+void WaresQueue::entered(
 #ifndef NDEBUG
+                         DescriptionIndex index,
                          Worker* worker
 #else
+                         DescriptionIndex,
                          Worker*
 #endif
                          ) {
