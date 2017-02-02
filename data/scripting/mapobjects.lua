@@ -6,18 +6,17 @@
 -- and world.
 --
 
-local current_time = system_time()
 -- RST
--- .. function:: print_loading_message(itemname)
+-- .. function:: print_loading_message(preamble, func)
 --
--- Prints a loading message containing the time difference between the last time
--- that this function was called and the current system time.
--- The time is initialized when this script is included for the first time.
---
---    :arg itemname: The name of the item that was being loaded
-function print_loading_message(itemname)
-   print("Loading ".. itemname .. " took " .. (system_time() - current_time) .. "ms")
-   current_time = system_time()
+-- Prints a message containing the duration func() required to run.
+-- 
+--    :arg preamble: The name of the item that was being loaded
+--    :arg func: The function to time execution off.
+function print_loading_message(preamble, func)
+   local start = system_time()
+   func()
+   print(("%s: %dms"):format(preamble, system_time() - start))
 end
 
 
