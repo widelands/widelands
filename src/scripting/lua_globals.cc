@@ -250,11 +250,11 @@ static int L_include(lua_State* L) {
 }
 
 /* RST
-.. function:: system_time()
+.. function:: ticks()
 
 	Returns an integer value representing the number of milliseconds since the SDL library initialized.
 */
-static int L_system_time(lua_State* L) {
+static int L_ticks(lua_State* L) {
 	lua_pushinteger(L, SDL_GetTicks());
 	return 1;
 }
@@ -276,7 +276,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
-                                          {"system_time", &L_system_time},
+                                          {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

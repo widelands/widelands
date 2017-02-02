@@ -14,9 +14,9 @@
 --    :arg preamble: The name of the item that was being loaded
 --    :arg func: The function to time execution off.
 function print_loading_message(preamble, func)
-   local start = system_time()
+   local start = ticks()
    func()
-   print(("%s: %dms"):format(preamble, system_time() - start))
+   print(("%s: %dms"):format(preamble, ticks() - start))
 end
 
 

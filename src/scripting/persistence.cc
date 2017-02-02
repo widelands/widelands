@@ -199,7 +199,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "include",
                                            "path",
                                            "pgettext",
-                                           "system_time",
+                                           "ticks",
                                            nullptr};
 
 /**
