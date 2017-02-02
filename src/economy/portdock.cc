@@ -461,8 +461,7 @@ void PortDock::log_general_info(const EditorGameBase& egbase) {
 	}
 }
 
-// Increased since the version number is now for expedition_bootstrap, too, and that changed.
-constexpr uint8_t kCurrentPacketVersion = 4;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 PortDock::Loader::Loader() : warehouse_(0) {
 }
@@ -530,7 +529,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 		// The header has been peeled away by the caller
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version >= 3 || packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {

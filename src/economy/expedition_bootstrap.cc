@@ -178,10 +178,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 	cleanup(game);
 }
 
-constexpr uint8_t kCurrentPacketVersion = 2;
-
 void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
-	fw.unsigned_8(kCurrentPacketVersion);
 	uint8_t number_warequeues = 0;
 	for (std::unique_ptr<InputQueue>& q : queues_) {
 		if (q->get_type() == wwWARE) {
@@ -205,22 +202,23 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 void ExpeditionBootstrap::load(Warehouse& warehouse,
                                FileRead& fr,
                                Game& game,
-                               MapObjectLoader& mol) {
+                               MapObjectLoader& mol,
+                               uint16_t packet_version) {
+
+	static const uint16_t kCurrentPacketVersion = 7;
+
 	assert(queues_.empty());
-	uint8_t packet_version = fr.unsigned_8();
 	// Load worker queues
-	// Creative data usage: A value of 0 or 1 describes the number of workers currently in the queue (old format)
-	// A value >= 2 is interpreted as a version number (new format)
 	std::vector<WorkersQueue*> wqs;
 	try {
-		if (packet_version < 2) {
+		if (packet_version <= 6) {
 			// This code is actually quite broken/inflexible but it should work
-			// If we are here, than the packet version is actually the number of stored workers
-			const uint8_t num_workers = packet_version;
+			// If we are here, use the old loader for build 19 packets
+			const uint8_t num_workers = fr.unsigned_8();
 			WorkersQueue* wq = new WorkersQueue(warehouse, warehouse.owner().tribe().builder(), 1);
 			wq->load_for_expedition(fr, game, mol, num_workers);
 			wqs.push_back(wq);
-		} else if (packet_version == kCurrentPacketVersion) {
+		} else if (packet_version >= kCurrentPacketVersion) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
@@ -259,62 +257,5 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 		throw GameDataError("loading ExpeditionBootstrap: %s", e.what());
 	}
 }
-
-/*
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
-	// Expedition workers
-	fw.unsigned_8(workers_.size());
-	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
-		fw.unsigned_8(ew->request.get() != nullptr);
-		if (ew->request.get() != nullptr) {
-			ew->request->write(fw, game, mos);
-		} else {
-			assert(mos.is_object_known(*ew->worker));
-			fw.unsigned_32(mos.get_object_file_index(*ew->worker));
-		}
-	}
-
-	// Expedition WaresQueues
-	fw.unsigned_8(wares_.size());
-	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		wq->write(fw, game, mos);
-	}
-}
-
-void ExpeditionBootstrap::load(Warehouse& warehouse,
-                               FileRead& fr,
-                               Game& game,
-                               MapObjectLoader& mol) {
-	// Expedition workers
-	const uint8_t num_workers = fr.unsigned_8();
-	for (uint8_t i = 0; i < num_workers; ++i) {
-		workers_.emplace_back(new ExpeditionWorker(nullptr));
-		if (fr.unsigned_8() == 1) {
-			Request* worker_request =
-			   new Request(warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
-			workers_.back()->request.reset(worker_request);
-			worker_request->read(fr, game, mol);
-			workers_.back()->worker = nullptr;
-		} else {
-			workers_.back()->worker = &mol.get<Worker>(fr.unsigned_32());
-		}
-	}
-
-	// Expedition WaresQueues
-	assert(wares_.empty());
-	const uint8_t num_wares = fr.unsigned_8();
-	for (uint8_t i = 0; i < num_wares; ++i) {
-		WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-		wq->read(fr, game, mol);
-		wq->set_callback(ware_callback, this);
-
-		if (wq->get_index() == INVALID_INDEX) {
-			delete wq;
-		} else {
-			wares_.emplace_back(wq);
-		}
-	}
-}
-*/
 
 }  // namespace Widelands

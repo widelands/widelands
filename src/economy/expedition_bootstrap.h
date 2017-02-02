@@ -74,8 +74,9 @@ public:
 	void cleanup(EditorGameBase& egbase);
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
-	// packet, and there in the warehouse data packet.
-	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol);
+	// packet, and there in the warehouse data packet. The version parameter is
+	// the version number of the Warehouse packet.
+	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:
