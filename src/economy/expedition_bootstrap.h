@@ -39,14 +39,14 @@ class Warehouse;
 class WaresQueue;
 class Worker;
 
-/** 
+/**
  * Handles the mustering of workers and wares in a port for an Expedition.
  *
  * This object is created in the port dock as soon as the start expedition button is
  * pressed. As soon as the ship is loaded, this object gets destroyed.
- * In case the Expedition is ::cancel()ed the wares will be retunrted to the port dock.
+ * In case the Expedition is ::cancel()ed the wares will be returned to the port dock.
+ * Its the responsibility of the Owner to finall dispose a canceled ExpeditionBootstrap.
  *
- * TODO klaus.halfmann what happens exactly once the Expedition is canceled?
  */
 
 class ExpeditionBootstrap {

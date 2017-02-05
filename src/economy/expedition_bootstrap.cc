@@ -141,7 +141,7 @@ void ExpeditionBootstrap::start() {
 		warehouse->refresh_options(*igb);
 }
 
-/** 
+/**
  * Cancel the Expediton by putting back all wares and workers.
 ‚ */
 void ExpeditionBootstrap::cancel(Game& game) {
@@ -162,13 +162,13 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	}
 	workers_.clear();
 
-    // TODO klaus.halfman either do this directly _or_ via an event, but not both?
-
 	// Update the user interface
 	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
 		warehouse->refresh_options(*igb);
 	}
-	Notifications::publish(NoteExpeditionCanceled(this));
+
+    // This will result in bug-1658489 as some other Portdockwindow will be affexted, too
+	// Notifications::publish(NoteExpeditionCanceled(this));
 }
 
 void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {

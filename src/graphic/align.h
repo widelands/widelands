@@ -32,7 +32,7 @@ namespace UI {
  *
  * mixed aligenments are results of a binary | operation.
  *
- * TODO klaus.halfmann as this is not a real enum all compiler warnings about
+ * TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
  *      incomplete usage are useless.
  */
 enum class Align {
