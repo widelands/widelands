@@ -24,29 +24,39 @@
 
 namespace UI {
 
+/**
+ * This Enum is a binary mix of one-dimensional and two-dimensional alignments.
+ *
+ * bits 0,1 values 0,1,2,3  are horizontal
+ * bits 2,3 values 0,4,8,12 are vertical
+ *
+ * mixed aligenments are results of a binary | operation.
+ *
+ * TODO klaus.halfmann as this is not a real enum all compiler warnings about
+ *      incomplete usage are useless.
+ */
 enum class Align {
-	kLeft = 0,
-	kHCenter = 1,
-	kRight = 2,
-	kHorizontal = 3,
+	kLeft       = 0x00,
+	kHCenter    = 0x01,
+	kRight      = 0x02,
+	kHorizontal = 0x03,
 
-	kTop = 0,
-	kVCenter = 4,
-	kBottom = 8,
-	kVertical = 12,
+	kTop        = 0x00,
+	kVCenter    = 0x04,
+	kBottom     = 0x08,
+	kVertical   = 0x0C,
 
-	kTopLeft = 0,
-	kCenterLeft = Align::kVCenter,
-	kBottomLeft = Align::kBottom,
+	kTopLeft        = kLeft | kTop,
+	kCenterLeft     = kLeft | kVCenter,
+	kBottomLeft     = kLeft | kBottom,
 
-	kTopCenter = Align::kHCenter,
-	kCenter = Align::kHCenter | Align::kVCenter,
-	kBottomCenter = Align::kHCenter | Align::kBottom,
+    kTopCenter      = kHCenter | kTop,
+	kCenter         = kHCenter | kVCenter,
+	kBottomCenter   = kHCenter | kBottom,
 
-	kTopRight = Align::kRight,
-	kCenterRight = Align::kRight | Align::kVCenter,
-
-	kBottomRight = Align::kRight | Align::kBottom,
+	kTopRight       = kRight | kTop,
+	kCenterRight    = kRight | kVCenter,
+	kBottomRight    = kRight | kBottom,
 };
 
 inline Align operator&(Align a, Align b) {

@@ -39,9 +39,16 @@ class Warehouse;
 class WaresQueue;
 class Worker;
 
-// Handles the mustering of workers and wares in a port for one Expedition. This
-// object is created in the port dock as soon as the start expedition button is
-// pressed. As soon as the ship is loaded, this object gets destroyed.
+/** 
+ * Handles the mustering of workers and wares in a port for an Expedition.
+ *
+ * This object is created in the port dock as soon as the start expedition button is
+ * pressed. As soon as the ship is loaded, this object gets destroyed.
+ * In case the Expedition is ::cancel()ed the wares will be retunrted to the port dock.
+ *
+ * TODO klaus.halfmann what happens exactly once the Expedition is canceled?
+ */
+
 class ExpeditionBootstrap {
 public:
 	ExpeditionBootstrap(PortDock* const portdock);
@@ -54,9 +61,12 @@ public:
 	// the corresponding warehouse.
 	void cancel(Game& game);
 
-	// Returns a list of workers and wares that are ready to go to an
-	// expedition. Ownership is transferred and the object is in an undefined
-	// state after this and must be deleted.
+	/**
+     * Returns a list of workers and wares that are ready to go to an expediton.
+     *
+	 * Ownership is transferred and the object is in an undefined
+	 * state after this and must be deleted.
+     */
 	void get_waiting_workers_and_wares(Game&,
 	                                   const TribeDescr&,
 	                                   std::vector<Worker*>* return_workers,
@@ -74,9 +84,18 @@ public:
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
 
-	// Save/Load this into a file. The actual data is stored in the buildingdata
-	// packet, and there in the warehouse data packet.
+	/** Load this from a file.
+     *
+     * The actual data is stored in the buildingdata
+	 * packet, and there in the warehouse data packet.
+     */
 	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol);
+
+    /** Save this into a file.
+     *
+     * The actual data is stored in the buildingdata
+     * packet, and there in the warehouse data packet.
+     */
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:
@@ -90,6 +109,7 @@ private:
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
 	void is_ready(Game& game);
 
+    /** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned
 	Economy* economy_;
 

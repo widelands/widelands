@@ -141,8 +141,12 @@ void ExpeditionBootstrap::start() {
 		warehouse->refresh_options(*igb);
 }
 
+/** 
+ * Cancel the Expediton by putting back all wares and workers.
+‚ */
 void ExpeditionBootstrap::cancel(Game& game) {
-	// Put all wares from the WaresQueues back into the warehouse
+
+    // Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		warehouse->insert_wares(wq->get_index(), wq->get_filled());
@@ -157,6 +161,8 @@ void ExpeditionBootstrap::cancel(Game& game) {
 		}
 	}
 	workers_.clear();
+
+    // TODO klaus.halfman either do this directly _or_ via an event, but not both?
 
 	// Update the user interface
 	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {

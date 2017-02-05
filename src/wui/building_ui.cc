@@ -68,7 +68,6 @@ void Building::refresh_options(InteractiveGameBase& igb) {
 	if (optionswindow_) {
 		Vector2i window_position = optionswindow_->get_pos();
 		hide_options();
-		show_options(igb, true);
-		optionswindow_->set_pos(window_position);
+		show_options(igb, true, window_position);
 	}
 }
