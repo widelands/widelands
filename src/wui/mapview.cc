@@ -43,7 +43,7 @@ constexpr int kNumKeyFrames = 102;
 
 // Somewhat arbitrarily we limit the zoom to a reasonable value. This is for
 // performance and to avoid numeric glitches with more extreme values. This
-// value is used for automatic movements and for user controled zoom.
+// value is used for automatic movements and for user controlled zoom.
 constexpr float kMaxZoom = 4.f;
 
 // The time used for panning automated map movement only.
