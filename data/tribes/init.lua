@@ -19,12 +19,12 @@ include "scripting/mapobjects.lua"
 
 print("┏━ Running Lua for tribes:")
 
-print_loading_message("┗━ took", function() 
+print_loading_message("┗━ took", function()
    -- ===================================
    --    Ships
    -- ===================================
 
-   print_loading_message("┃    ships", function() 
+   print_loading_message("┃    Ships", function()
       include "tribes/ships/atlanteans/init.lua"
       include "tribes/ships/barbarians/init.lua"
       include "tribes/ships/empire/init.lua"
@@ -34,7 +34,7 @@ print_loading_message("┗━ took", function()
    --    Wares
    -- ===================================
 
-   print_loading_message("┃    wares", function() 
+   print_loading_message("┃    Wares", function()
       include "tribes/wares/armor/init.lua"
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"
@@ -126,7 +126,7 @@ print_loading_message("┗━ took", function()
    --    Immovables
    -- ===================================
 
-   print_loading_message("┃    immovables", function() 
+   print_loading_message("┃    Immovables", function()
       include "tribes/immovables/ashes/init.lua"
       include "tribes/immovables/blackrootfield_harvested/init.lua"
       include "tribes/immovables/blackrootfield_medium/init.lua"
@@ -171,7 +171,7 @@ print_loading_message("┗━ took", function()
    --    Workers, Carriers & Soldiers
    -- ===================================
 
-   print_loading_message("┃    workers", function()
+   print_loading_message("┃    Workers", function()
       include "tribes/workers/atlanteans/carrier/init.lua"
       include "tribes/workers/atlanteans/armorsmith/init.lua"
       include "tribes/workers/atlanteans/baker/init.lua"
@@ -275,7 +275,7 @@ print_loading_message("┗━ took", function()
    --    Warehouses
    -- ===================================
 
-   print_loading_message("┃    warehouses", function() 
+   print_loading_message("┃    Warehouses", function()
       include "tribes/buildings/warehouses/atlanteans/headquarters/init.lua"
       include "tribes/buildings/warehouses/atlanteans/port/init.lua"
       include "tribes/buildings/warehouses/atlanteans/warehouse/init.lua"
@@ -293,7 +293,7 @@ print_loading_message("┗━ took", function()
    --    Productionsites
    -- ===================================
 
-   print_loading_message("┃    productionsites", function()
+   print_loading_message("┃    Productionsites", function()
       -- Atlanteans small
       include "tribes/buildings/productionsites/atlanteans/quarry/init.lua"
       include "tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua"
@@ -419,7 +419,7 @@ print_loading_message("┗━ took", function()
    --    Trainingsites
    -- ===================================
 
-   print_loading_message("┃    trainingsites", function() 
+   print_loading_message("┃    Trainingsites", function()
       include "tribes/buildings/trainingsites/atlanteans/dungeon/init.lua"
       include "tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua"
       include "tribes/buildings/trainingsites/barbarians/battlearena/init.lua"
@@ -433,7 +433,7 @@ print_loading_message("┗━ took", function()
    --    Militarysites
    -- ===================================
 
-   print_loading_message("┃    militarysites", function() 
+   print_loading_message("┃    Militarysites", function()
       include "tribes/buildings/militarysites/atlanteans/guardhouse/init.lua"
       include "tribes/buildings/militarysites/atlanteans/guardhall/init.lua"
       include "tribes/buildings/militarysites/atlanteans/tower_small/init.lua"
@@ -460,7 +460,7 @@ print_loading_message("┗━ took", function()
    --    Partially Finished Buildings
    -- ===================================
 
-   print_loading_message("┃    partially finished buildings", function() 
+   print_loading_message("┃    Partially finished buildings", function()
       include "tribes/buildings/partially_finished/constructionsite/init.lua"
       include "tribes/buildings/partially_finished/dismantlesite/init.lua"
    end)
@@ -468,7 +468,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
    --    Tribes
    -- ===================================
-   print_loading_message("┃    tribe infos", function()
+   print_loading_message("┃    Tribe infos", function()
       include "tribes/atlanteans.lua"
       include "tribes/barbarians.lua"
       include "tribes/empire.lua"

@@ -6,11 +6,11 @@ include "scripting/mapobjects.lua"
 
 print("┏━ Running Lua for world:")
 print_loading_message("┗━ took", function()
-   print_loading_message("┃    resources", function()
+   print_loading_message("┃    Resources", function()
       include "world/resources/init.lua"
    end)
 
-   print_loading_message("┃    terrains", function()
+   print_loading_message("┃    Terrains", function()
       include "world/terrains/init.lua"
    end)
 
@@ -108,7 +108,7 @@ print_loading_message("┗━ took", function()
       items_per_row = 10,
    }
 
-   print_loading_message("┃    immovables", function()
+   print_loading_message("┃    Immovables", function()
       include "world/immovables/grass1/init.lua"
       include "world/immovables/grass2/init.lua"
       include "world/immovables/grass3/init.lua"
@@ -235,7 +235,7 @@ print_loading_message("┗━ took", function()
       include "world/immovables/trees/umbrella_red/init.lua"
    end)
 
-   print_loading_message("┃    critters", function()
+   print_loading_message("┃    Critters", function()
       -- Herbivores
       include "world/critters/bunny/init.lua"
       include "world/critters/sheep/init.lua"
