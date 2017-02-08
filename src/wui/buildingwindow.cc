@@ -449,9 +449,9 @@ void BuildingWindow::toggle_workarea() {
 }
 
 void BuildingWindow::create_input_queue_panel(UI::Box* const box,
-                                             Widelands::Building& b,
-                                             Widelands::InputQueue* const iq,
-                                             bool show_only) {
+                                              Widelands::Building& b,
+                                              Widelands::InputQueue* const iq,
+                                              bool show_only) {
 	// The *max* width should be larger than the default width
 	box->add(new InputQueueDisplay(box, 0, 0, igbase(), b, iq, show_only), UI::Align::kLeft);
 }

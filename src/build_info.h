@@ -23,7 +23,8 @@
 #include <string>
 
 constexpr uint16_t kWidelandsCopyrightStart = 2002;
-// If the following line is changed, the corresponding regex in 'utils/update_copyright.py' will also need updating.
+// If the following line is changed, the corresponding regex in 'utils/update_copyright.py' will
+// also need updating.
 constexpr uint16_t kWidelandsCopyrightEnd = 2017;
 
 ///\return the build id which is automagically created from the checkout's

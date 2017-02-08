@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:49+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-28 12:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -347,7 +347,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr "Sentint-se culpable, el rei es suïcidà. Sense monarca, la gent va buscar als clergues per ajudar-los, però no tenien res per ajudar-los. Molts acceptaren el seu destí, mentre que altres volien fer canviar d'opinió al déu oferint-li animals al seu temple. Però fou inútil…"
+msgstr "Sentint-se culpable, el rei se suïcidà. Sense monarca, la gent va buscar als clergues per ajudar-los, però no tenien res per ajudar-los. Molts acceptaren el seu destí, mentre que altres volien fer canviar d'opinió al déu oferint-li animals al seu temple. Però fou inútil…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -810,7 +810,7 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr "Que en Satul ens salvi! En Lutas encara ens està perseguint. Un explorador informa que l'oceà s'alça ràpid. Hem d'arribar a les terres més altes i evacuar tothom i tants béns com  puguem del quarter general cap a les muntanyes. Com podrem escapar?"
+msgstr "Que en Satul ens salvi! En Lutas encara ens està perseguint. Un explorador informa que l'oceà s'alça de pressa. Hem d'arribar a les terres més altes i evacuar tothom i tants béns com  puguem del quarter general cap a les muntanyes. Com podrem escapar?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:404
 msgid "A Young Man Approaches"

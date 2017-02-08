@@ -120,13 +120,16 @@ void InputQueue::set_consume_interval(const uint32_t time) {
 	update();
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
-		if (packet_version == kCurrentPacketVersion) {
+		// A bit messy since InputQueue started with packet version 1 but has to support the build19
+		// WaresQueue packets with version 2 and has now be changed to version 3 while fixing
+		// Unfortunately, this will probably crash when loading old pre-buil19 save games
+		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
 				index_ = owner().tribe().ware_index(fr.c_string());
@@ -145,13 +148,27 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			}
 
 			read_child(fr, game, mol);
-
-			//  Now Economy stuff. We have to add our filled items to the economy.
-			if (owner_.get_economy())
-				add_to_economy(*owner_.get_economy());
+		} else if (packet_version == 2) {
+			assert(type_ == wwWARE);
+			index_ = owner().tribe().ware_index(fr.c_string());
+			max_size_ = fr.unsigned_32();
+			max_fill_ = fr.signed_32();
+			// No read_child() call here, doing it manually since there is no child-version number
+			uint32_t filled = fr.unsigned_32();
+			consume_interval_ = fr.unsigned_32();
+			if (fr.unsigned_8()) {
+				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
+				request_->read(fr, game, mol);
+			} else {
+				request_.reset();
+			}
+			set_filled(filled);
 		} else {
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
+		//  Now Economy stuff. We have to add our filled items to the economy.
+		if (owner_.get_economy())
+			add_to_economy(*owner_.get_economy());
 	} catch (const GameDataError& e) {
 		throw GameDataError("inputqueue: %s", e.what());
 	}
