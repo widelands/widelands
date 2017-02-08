@@ -150,7 +150,7 @@ static void add_iterator_function_to_not_unpersist(lua_State* L, std::string glo
 
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
-// break safe game compatibility.
+// break save game compatibility.
 static const char* kPersistentGlobals[] = {"_VERSION",
                                            "assert",
                                            "collectgarbage",
@@ -199,6 +199,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "include",
                                            "path",
                                            "pgettext",
+                                           "ticks",
                                            nullptr};
 
 /**
