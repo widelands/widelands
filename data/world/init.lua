@@ -5,7 +5,7 @@ set_textdomain("world")
 include "scripting/mapobjects.lua"
 
 print("┏━ Running Lua for world:")
-print_loading_message("┗━ took", function() 
+print_loading_message("┗━ took", function()
    print_loading_message("┃    resources", function()
       include "world/resources/init.lua"
    end)
@@ -108,9 +108,6 @@ print_loading_message("┗━ took", function()
       items_per_row = 10,
    }
 
-   -- NOCOM(#codereview): I do not understand the reordering here. I think
-   -- alphabetically is preferable to keep future diffs smaller. If there is a
-   -- deeper reason behind the reordering, you should add a comment here.
    print_loading_message("┃    immovables", function()
       include "world/immovables/grass1/init.lua"
       include "world/immovables/grass2/init.lua"
@@ -238,7 +235,7 @@ print_loading_message("┗━ took", function()
       include "world/immovables/trees/umbrella_red/init.lua"
    end)
 
-   print_loading_message("┃    critters", function() 
+   print_loading_message("┃    critters", function()
       -- Herbivores
       include "world/critters/bunny/init.lua"
       include "world/critters/sheep/init.lua"
