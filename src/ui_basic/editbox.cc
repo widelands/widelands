@@ -83,11 +83,11 @@ EditBox::EditBox(Panel* const parent,
            x,
            y,
            w,
-           h > 0 ? h : UI::g_fh1
-                             ->render(as_editorfont(
-                                UI::g_fh1->fontset()->representative_character(), font_size))
-                             ->height() +
-                          2 * margin_y),
+           h > 0 ? h :
+                   UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
+                                                   font_size))
+                         ->height() +
+                      2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -388,8 +388,8 @@ void EditBox::draw(RenderTarget& odst) {
 	const int linewidth = entry_text_im->width();
 	const int lineheight =
 	   m_->text.empty() ?
-	      UI::g_fh1
-	         ->render(as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
+	      UI::g_fh1->render(
+	                  as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
 	         ->height() :
 	      entry_text_im->height();
 
