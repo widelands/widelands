@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/warning.h"
@@ -735,7 +734,7 @@ void NetClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
-			TribeBasicInfo info = Widelands::Tribes::tribeinfo(packet.string());
+			TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
@@ -894,7 +893,7 @@ void NetClient::handle_network() {
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
-		disconnect("PROTOCOL_EXCEPTION", boost::lexical_cast<std::string>(e.number()));
+		disconnect("PROTOCOL_EXCEPTION", e.what());
 	} catch (const std::exception& e) {
 		disconnect("SOMETHING_WRONG", e.what());
 	}

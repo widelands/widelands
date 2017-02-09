@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -235,6 +235,10 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete lua_;
 	delete mpsg_;
 	delete chat_;
+}
+
+void FullscreenMenuLaunchMPG::layout() {
+	// TODO(GunChleoc): Implement when we have redesigned this
 }
 
 void FullscreenMenuLaunchMPG::think() {

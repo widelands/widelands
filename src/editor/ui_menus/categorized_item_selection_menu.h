@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -82,7 +83,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, 0, 0, nullptr),
+     tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
      current_selection_names_(this,
                               0,
                               0,
@@ -93,6 +94,8 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
                               g_gr->images().get("images/ui_basic/but1.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
+	current_selection_names_.set_background(
+	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_, UI::Align::kCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
@@ -110,12 +113,10 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
-		const uint32_t items_in_row =
-		   static_cast<uint32_t>(std::ceil(std::sqrt(static_cast<float>(item_indices.size()))));
 		int nitems_handled = 0;
 		UI::Box* horizontal = nullptr;
 		for (const int i : item_indices) {
-			if (nitems_handled % items_in_row == 0) {
+			if (nitems_handled % category.items_per_row() == 0) {
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
@@ -148,7 +149,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	const bool multiselect = get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
+	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
 	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {

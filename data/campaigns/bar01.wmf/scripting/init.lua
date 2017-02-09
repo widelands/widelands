@@ -20,7 +20,6 @@ al_thunran = map:get_field(5,46)
 grave = map:get_field(24,28)
 
 include "map:scripting/texts.lua"
-include "map:scripting/helper_functions.lua"
 
 include "map:scripting/starting_conditions.lua"
 

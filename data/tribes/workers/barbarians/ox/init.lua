@@ -8,8 +8,8 @@ animations = {
    }
 }
 -- TODO(GunChleoc): Make real oxen animations
-add_worker_animations(animations, "walk", dirname, "walk", {21, 31}, 20)
-add_worker_animations(animations, "walkload", dirname, "walk", {21, 31}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {21, 31}, 20)
+add_walking_animations(animations, "walkload", dirname, "walk", {21, 31}, 10)
 
 
 tribes:new_carrier_type {

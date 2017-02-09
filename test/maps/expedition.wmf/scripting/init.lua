@@ -66,12 +66,16 @@ function stable_save(safename)
 end
 
 function click_on_ship(which_ship)
+   local mv = wl.ui.MapView()
    for x=0,map.width-1 do
       for y=0,map.height-1 do
          local field = map:get_field(x,y)
          for idx, bob in ipairs(field.bobs) do
             if bob == which_ship then
-               mouse_smoothly_to(field, 1)
+               if not mv:is_visible(field) then
+                  scroll_to_field(field)
+                  click_on_ship(which_ship)
+               end
                wl.ui.MapView():click(field)
                return
             end
@@ -315,7 +319,6 @@ function test_transporting_works()
    p1:get_buildings("barbarians_wood_hardener")[1]:remove()
    hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
-
 
    port:start_expedition()
    wait_for_message("Expedition")

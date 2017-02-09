@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,11 @@ template <typename T> T clamp(const T& val, const T& low, const T& high) {
 		return high;
 	}
 	return val;
+}
+
+// A simple square function.
+template <typename T> T sqr(const T& a) {
+	return a * a;
 }
 
 }  // namespace math

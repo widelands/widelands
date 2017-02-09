@@ -135,6 +135,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "barbarians_recruit",
          "barbarians_soldier",
          "barbarians_trainer",
          "barbarians_helmsmith",

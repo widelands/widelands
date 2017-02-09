@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,8 +51,8 @@ public:
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
 
 	// Input/output for coroutines.
-	LuaCoroutine* read_coroutine(FileRead&);
-	void write_coroutine(FileWrite&, LuaCoroutine*);
+	std::unique_ptr<LuaCoroutine> read_coroutine(FileRead&);
+	void write_coroutine(FileWrite&, const LuaCoroutine&);
 
 	// Input output for the global game state.
 	void read_global_env(FileRead&, Widelands::MapObjectLoader&, uint32_t);

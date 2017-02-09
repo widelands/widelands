@@ -7,8 +7,8 @@ animations = {
       fps = 5
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {9, 19}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {7, 22}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {9, 19}, 10)
+add_walking_animations(animations, "walkload", dirname, "walkload", {7, 22}, 10)
 
 
 tribes:new_carrier_type {

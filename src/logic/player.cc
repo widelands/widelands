@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -200,7 +200,7 @@ void Player::create_default_infrastructure() {
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(cr)));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < further_shared_in_player_.size(); ++n) {
@@ -213,7 +213,7 @@ void Player::create_default_infrastructure() {
 			      ->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(ncr)));
 		}
 	} else
 		throw WLWarning(_("Missing starting position"),
@@ -1080,8 +1080,21 @@ void Player::sample_statistics() {
 void Player::ware_produced(DescriptionIndex const wareid) {
 	assert(ware_productions_.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
-
 	++current_produced_statistics_[wareid];
+}
+
+/**
+ * Return count of produced wares for ware index
+ */
+uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
+	assert(wareid < egbase().tribes().nrwares());
+	assert(wareid < ware_productions_.size());
+	assert(wareid < current_produced_statistics_.size());
+	uint32_t sum = current_produced_statistics_[wareid];
+	for (const auto stat : *get_ware_production_statistics(wareid)) {
+		sum += stat;
+	}
+	return sum;
 }
 
 /**

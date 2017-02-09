@@ -5,7 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-23 18:47+0000\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2017-01-01 14:49+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -541,11 +541,11 @@ msgstr "Ahaa, mutta luulempa, että tätä on mahdotonta muuttaa. Ruuan valmista
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Mutta saataisimme löytää kompromissin siihen: minulle, leivän tekeminen on työläs tehtävä. Mustajuuren ja maissin jauhaminen jauhoiksi ja sitten leivän leipominen on tylsää ja ikävystyttävää; minusta tuntuu, että teolistuneempi lähestymistapa saattaisi olla täällä avuksi. Pitäisin siitä jos talooni olisi toimitettu joka päivä tuoretta leipää."
+msgstr "Mutta saattaisimme löytää kompromissin siihen: minulle, leivän tekeminen on työläs tehtävä. Mustajuurien ja maissin jauhaminen jauhoiksi ja sitten leivän leipominen on tylsää ja ikävystyttävää; minusta tuntuu, että teolistuneempi lähestymistapa saattaisi olla täällä avuksi. Pitäisin siitä jos talooni olisi toimitettu joka päivä tuoretta leipää."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

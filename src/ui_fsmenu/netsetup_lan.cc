@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +122,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	discovery.set_callback(discovery_callback, this);
 
 	joingame.set_enabled(false);
+}
+
+void FullscreenMenuNetSetupLAN::layout() {
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 void FullscreenMenuNetSetupLAN::think() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,8 +139,9 @@ public:
 	}
 	ImmovableProgram const* get_program(const std::string&) const;
 
-	Immovable&
-	create(EditorGameBase&, const Coords&, const Widelands::Building* former_building) const;
+	Immovable& create(EditorGameBase&,
+	                  const Coords&,
+	                  const Widelands::BuildingDescr* former_building_descr) const;
 
 	MapObjectDescr::OwnerType owner_type() const {
 		return owner_type_;
@@ -202,9 +203,10 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(ImmovableDescr)
 
 public:
-	/// If this immovable was created by a building, 'former_building' can be set in order to display
-	/// information about it.
-	Immovable(const ImmovableDescr&, const Widelands::Building* former_building = nullptr);
+	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
+	/// display information about it.
+	Immovable(const ImmovableDescr&,
+	          const Widelands::BuildingDescr* former_building_descr = nullptr);
 	~Immovable();
 
 	Coords get_position() const {
@@ -355,7 +357,7 @@ struct PlayerImmovable : public BaseImmovable {
 	/**
 	 * \return a list of workers that are currently located at this
 	 * immovable. This is not the same as the list of production
-	 * workers returned by \ref ProductionSite::get_production_workers
+	 * workers returned by \ref ProductionSite::working_positions
 	 */
 	const Workers& get_workers() const {
 		return workers_;

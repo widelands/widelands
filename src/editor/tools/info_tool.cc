@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,7 +168,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		   (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str() +
 		   "\n";
 	} else {
-		buf += "• " + std::string(_("Players: -")) + "\n";
+		buf += "• " + std::string(_("Players: –")) + "\n";
 	}
 
 	buf += "• " + (boost::format(_("Author: %s")) % map->get_author()).str() + "\n";

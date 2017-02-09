@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -493,21 +493,25 @@ private:
 	int32_t priority_;
 };
 
-struct CmdSetWareMaxFill : public PlayerCommand {
-	CmdSetWareMaxFill() : PlayerCommand(), serial_(0), index_(), max_fill_(0) {
+struct CmdSetInputMaxFill : public PlayerCommand {
+	CmdSetInputMaxFill() : PlayerCommand(), serial_(0), index_(), type_(wwWARE), max_fill_(0) {
 	}  // For savegame loading
-	CmdSetWareMaxFill(
-	   uint32_t duetime, PlayerNumber, PlayerImmovable&, DescriptionIndex, uint32_t maxfill);
+	CmdSetInputMaxFill(uint32_t duetime,
+	                   PlayerNumber,
+	                   PlayerImmovable&,
+	                   DescriptionIndex,
+	                   WareWorker,
+	                   uint32_t maxfill);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kSetWareMaxFill;
+		return QueueCommandTypes::kSetInputMaxFill;
 	}
 
-	CmdSetWareMaxFill(StreamRead&);
+	CmdSetInputMaxFill(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -515,6 +519,7 @@ struct CmdSetWareMaxFill : public PlayerCommand {
 private:
 	Serial serial_;
 	DescriptionIndex index_;
+	WareWorker type_;
 	uint32_t max_fill_;
 };
 

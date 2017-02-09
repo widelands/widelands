@@ -185,6 +185,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "atlanteans_recruit",
          "atlanteans_soldier",
          "atlanteans_trainer",
          "atlanteans_weaponsmith",

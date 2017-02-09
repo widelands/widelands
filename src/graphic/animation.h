@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,8 @@ public:
 	/// The height of this animation.
 	virtual float height() const = 0;
 
-	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the animation.
+	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
+	/// animation.
 	virtual Rectf source_rectangle(int percent_from_bottom) const = 0;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.

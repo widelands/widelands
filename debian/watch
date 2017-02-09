@@ -1,7 +1,7 @@
 # test this watch file using:
 # uscan --watchfile debian/watch --upstream-version 0.0.1 --package widelands
 #
-version=3
-opts="uversionmangle=s/^/build/,uversionmangle=s/-rc$/~rc/,dversionmangle=s/^1://" \
-https://launchpad.net/widelands/+download https://launchpad.net/widelands/.*/widelands-(.*)-src\.tar\.bz2
-
+version=4
+opts="uversionmangle=s/-rc/~rc/,dversionmangle=s/^1://" \
+https://launchpad.net/widelands/+download \
+https://launchpad.net/widelands/.*/widelands-(?:b[[:alpha:]]*)?(\d[^\s/]*)-src\.(?:tar\.xz|txz|tar\.bz2|tbz2|tar\.gz|tgz)
