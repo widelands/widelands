@@ -12,7 +12,8 @@ animations = {
       },
    },
 }
-add_walking_animations(animations, dirname, "walk", {21, 34}, 20)
+
+add_walking_animations(animations, "walk", dirname, "walk", {21, 34}, 20)
 
 world:new_critter_type{
    name = "elk",
