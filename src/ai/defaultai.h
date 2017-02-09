@@ -348,6 +348,9 @@ private:
 
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
+	
+	// Counter how many times the AI has been called so far
+	uint32_t AI_think_count_;
 
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;

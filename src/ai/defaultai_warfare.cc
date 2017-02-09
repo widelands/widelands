@@ -729,18 +729,18 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	update_buildable_field(bf);
 	usefullness_score += bf.military_score_ / 10;
 	if (military_last_dismantle_ == 0 || military_last_dismantle_ + 2 * 60 * 1000 > gametime) {
-		usefullness_score += 10;
+		usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
 	}
 	
 	if (militarysites.front().built_time + 2 * 60 * 1000 > gametime) {
-		usefullness_score += 10;
+		usefullness_score += std::abs(management_data.get_military_number_at(99)) / 2;
 	}
 	
-	usefullness_score -= static_cast<int16_t>(soldier_status_);
-	usefullness_score += (bf.enemy_accessible_) ? 2 : 0;
+	usefullness_score -= static_cast<int16_t>(soldier_status_) * std::abs(management_data.get_military_number_at(84));
+	usefullness_score += ((bf.enemy_accessible_) ? (std::abs(management_data.get_military_number_at(91))) / 2 : 0);
 	
-	const int32_t dism_treshold = 5 - management_data.get_military_number_at(89) / 6;
-	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) / 2);
+	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89) * 2 / 3;
+	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) * 3 / 2);
 	
 	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
 	Quantity const current_target = ms->soldier_capacity();
