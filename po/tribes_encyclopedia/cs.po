@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-07 17:36+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2164,7 +2164,7 @@ msgstr "Úvod"
 #: ../../data/tribes/scripting/help/init.lua:70
 #: ../../data/tribes/scripting/help/tips.lua:71
 msgid "Tips"
-msgstr ""
+msgstr "Tipy"
 
 #: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
@@ -2180,23 +2180,23 @@ msgstr "O Widelands"
 
 #: ../../data/tribes/scripting/help/tips.lua:50
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanťané"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbaři"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Empire"
-msgstr ""
+msgstr "Císařství"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Single Player"
-msgstr ""
+msgstr "Hra jednoho hráče"
 
 #: ../../data/tribes/scripting/help/tips.lua:65
 msgid "Multiplayer"
-msgstr ""
+msgstr "Hra více hráčů"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.

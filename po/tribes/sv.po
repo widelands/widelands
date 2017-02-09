@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-02 14:20+0000\n"
+"Last-Translator: D M <hunter12@home.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2579,7 +2579,7 @@ msgstr "Spelkontroller"
 
 #: ../../data/tribes/scripting/help/init.lua:70
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
