@@ -76,6 +76,9 @@ private:
 		TargetWaresDisplay display_;
 	};
 
+	/// Actions performed when a NoteEconomyWindow is received.
+	void on_economy_note(const Widelands::NoteEconomyWindow& note);
+
 	size_t economy_number_;
 	Widelands::Player& owner_;
 	UI::TabPanel tabpanel_;
