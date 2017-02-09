@@ -34,6 +34,18 @@ wl_library(wui_field_overlay_manager
     logic_widelands_geometry
 )
 
+wl_library(wui_economy_options
+  SRCS
+    economy_options_window.cc
+    economy_options_window.h
+  DEPENDS
+    economy
+    graphic
+    logic
+    ui_basic
+)
+
+
 wl_library(wui_edge_overlay_manager
   SRCS
     edge_overlay_manager.cc
@@ -124,8 +136,6 @@ wl_library(wui
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
-    economy_options_window.cc
-    economy_options_window.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -239,6 +249,7 @@ wl_library(wui
     ui_basic
     widelands_ball_of_mud
     wui_chat_ui
+    wui_economy_options
     wui_edge_overlay_manager
     wui_field_overlay_manager
     wui_mapview
