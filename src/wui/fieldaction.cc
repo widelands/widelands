@@ -594,10 +594,6 @@ void FieldActionWindow::act_configure_economy() {
 		Widelands::Economy* economy = flag->get_economy();
 		if (!economy->has_window()) {
 			new EconomyOptionsWindow(dynamic_cast<InteractiveGameBase&>(ibase()), *economy);
-		} else {
-			const size_t economy_number = economy->owner().get_economy_number(economy);
-			Notifications::publish(Widelands::NoteEconomyWindow(
-			   economy_number, economy_number, Widelands::NoteEconomyWindow::Action::kRefresh));
 		}
 	}
 }

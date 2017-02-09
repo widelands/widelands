@@ -77,14 +77,14 @@ private:
 	};
 
 	/// Actions performed when a NoteEconomyWindow is received.
-	void on_economy_note(const Widelands::NoteEconomyWindow& note);
+	void on_economy_note(const Widelands::NoteEconomy& note);
 
 	size_t economy_number_;
 	Widelands::Player& owner_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomyWindow>>
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomy>>
 	   economynotes_subscriber_;
 };
 

@@ -45,8 +45,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(InteractiveGameBase& parent, Wideland
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 	economy.set_has_window(true);
-	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomyWindow>(
-		[this](const Widelands::NoteEconomyWindow& note) {
+	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
+		[this](const Widelands::NoteEconomy& note) {
 			this->on_economy_note(note);
 		});
 }
@@ -55,17 +55,17 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	owner_.get_economy_by_number(economy_number_)->set_has_window(false);
 }
 
-void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomyWindow& note) {
+void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	if (note.old_economy == economy_number_) {
 		switch (note.action) {
-		case Widelands::NoteEconomyWindow::Action::kRefresh:
+		case Widelands::NoteEconomy::Action::kMerged:
 			economy_number_ = note.new_economy;
 			ware_panel_->set_economy_number(note.new_economy);
 			worker_panel_->set_economy_number(note.new_economy);
 			owner_.get_economy_by_number(economy_number_)->set_has_window(true);
 			move_to_top();
 			break;
-		case Widelands::NoteEconomyWindow::Action::kClose:
+		case Widelands::NoteEconomy::Action::kDeleted:
 			// Make sure that the panels stop thinking first.
 			ware_panel_->die();
 			worker_panel_->die();

@@ -49,16 +49,18 @@ struct Route;
 struct Router;
 struct Supply;
 
-struct NoteEconomyWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::EconomyWindow)
+struct NoteEconomy {
+	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
 
+	// When 2 economies have been merged, this is the economy number that has been removed
 	size_t old_economy;
+	// When 2 economies have been merged, this is the number of the resulting economy
 	size_t new_economy;
 
-	enum class Action { kRefresh, kClose };
+	enum class Action { kMerged, kDeleted };
 	const Action action;
 
-	NoteEconomyWindow(size_t init_old, size_t init_new, const Action& init_action)
+	NoteEconomy(size_t init_old, size_t init_new, const Action& init_action)
 	   : old_economy(init_old), new_economy(init_new), action(init_action) {
 	}
 };
