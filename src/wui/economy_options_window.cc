@@ -46,9 +46,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(InteractiveGameBase& parent, Wideland
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 	economy.set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
-		[this](const Widelands::NoteEconomy& note) {
-			this->on_economy_note(note);
-		});
+	   [this](const Widelands::NoteEconomy& note) { this->on_economy_note(note); });
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {

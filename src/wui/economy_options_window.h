@@ -84,8 +84,7 @@ private:
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomy>>
-	   economynotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomy>> economynotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
