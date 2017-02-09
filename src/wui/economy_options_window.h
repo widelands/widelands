@@ -24,13 +24,14 @@
 
 #include "economy/economy.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "notifications/notifications.h"
+#include "ui_basic/box.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
-#include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
 struct EconomyOptionsWindow : public UI::Window {
-	EconomyOptionsWindow(InteractiveGameBase& parent, Widelands::Economy& economy);
+	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
 	~EconomyOptionsWindow();
 
 private:
@@ -59,7 +60,7 @@ private:
 	 */
 	struct EconomyOptionsPanel : UI::Box {
 		EconomyOptionsPanel(UI::Panel* parent,
-		                    InteractiveGameBase& igbase,
+		                    bool can_act,
 		                    Widelands::WareWorker type,
 		                    size_t economy_number,
 		                    Widelands::Player& owner);

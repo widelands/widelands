@@ -42,7 +42,9 @@ wl_library(wui_economy_options
     economy
     graphic
     logic
+    notifications
     ui_basic
+    wui_waresdisplay
 )
 
 
@@ -120,6 +122,16 @@ wl_library(wui_mapview
     wui
     wui_mapview_pixelfunctions
 )
+
+wl_library(wui_waresdisplay
+  SRCS
+    waresdisplay.cc
+    waresdisplay.h
+  DEPENDS
+    logic
+    ui_basic
+)
+
 
 wl_library(wui
   SRCS
@@ -209,8 +221,6 @@ wl_library(wui
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
-    waresdisplay.cc
-    waresdisplay.h
     watchwindow.cc
     watchwindow.h
   USES_SDL2
@@ -255,4 +265,5 @@ wl_library(wui
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_waresdisplay
 )

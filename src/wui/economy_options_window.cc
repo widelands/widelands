@@ -22,6 +22,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
+#include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
@@ -31,20 +32,22 @@
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
-EconomyOptionsWindow::EconomyOptionsWindow(InteractiveGameBase& parent, Widelands::Economy& economy)
-   : UI::Window(&parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     economy_number_(economy.owner().get_economy_number(&economy)),
-     owner_(economy.owner()),
+EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
+                                           Widelands::Economy* economy,
+                                           bool can_act)
+   : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
+     economy_number_(economy->owner().get_economy_number(economy)),
+     owner_(economy->owner()),
      tabpanel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
      ware_panel_(
-        new EconomyOptionsPanel(&tabpanel_, parent, Widelands::wwWARE, economy_number_, owner_)),
-     worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, parent, Widelands::wwWORKER, economy_number_, owner_)) {
+        new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy_number_, owner_)),
+     worker_panel_(new EconomyOptionsPanel(
+        &tabpanel_, can_act, Widelands::wwWORKER, economy_number_, owner_)) {
 	set_center_panel(&tabpanel_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
-	economy.set_has_window(true);
+	economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { this->on_economy_note(note); });
 }
@@ -119,7 +122,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
  * Wraps the wares/workers display together with some buttons
  */
 EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent,
-                                                               InteractiveGameBase& igbase,
+                                                               bool can_act,
                                                                Widelands::WareWorker type,
                                                                size_t economy_number,
                                                                Widelands::Player& owner)
@@ -127,7 +130,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      type_(type),
      economy_number_(economy_number),
      owner_(owner),
-     can_act_(igbase.can_act(owner.player_number())),
+     can_act_(can_act),
      display_(this, 0, 0, owner.tribe(), type_, can_act_, economy_number, owner) {
 	add(&display_, UI::Align::kLeft, true);
 

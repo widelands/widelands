@@ -593,7 +593,9 @@ void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
 		Widelands::Economy* economy = flag->get_economy();
 		if (!economy->has_window()) {
-			new EconomyOptionsWindow(dynamic_cast<InteractiveGameBase&>(ibase()), *economy);
+			bool can_act =
+			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
+			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
 		}
 	}
 }
