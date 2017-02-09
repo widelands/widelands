@@ -186,13 +186,16 @@ private:
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable
-/// and has a neighbouring field that is swimmable
+/// and has at least one neighbouring field that is swimmable
 struct FindNodeShore {
-	FindNodeShore() {
+	FindNodeShore(uint16_t f = 1) : min_fields(f) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
+
+private:
+	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"
+	uint16_t min_fields;
 };
 }
-
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H
