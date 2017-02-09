@@ -128,6 +128,10 @@ wl_library(wui_waresdisplay
     waresdisplay.cc
     waresdisplay.h
   DEPENDS
+    base_exceptions
+    base_i18n
+    graphic
+    graphic_text_layout
     logic
     ui_basic
 )
