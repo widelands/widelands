@@ -67,7 +67,6 @@ struct EditBox : public Panel {
 	}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_textinput(const std::string& text) override;
 
