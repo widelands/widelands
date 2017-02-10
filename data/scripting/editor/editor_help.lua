@@ -65,7 +65,14 @@ return {
                title = _"Controls",
                script = "scripting/editor/editor_controls.lua",
                script_parameters = {}
+            },
+            {
+               name = "tips",
+               title = _"Tips",
+               script = "scripting/editor/tips.lua",
+               script_parameters = {}
             }
+
          }
       },
       {

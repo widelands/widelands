@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,9 @@
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/helpwindow.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
-#include "wui/waresqueuedisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
@@ -55,32 +55,36 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>([this](
 		const Widelands::NoteBuilding& note) {
-		if (note.serial == building_.serial()) {
-			switch (note.action) {
-			// The building's state has changed
-			case Widelands::NoteBuilding::Action::kRefresh:
-				init(true);
-				break;
-			// The building is no more
-			case Widelands::NoteBuilding::Action::kStartWarp:
-				igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
-			// Fallthrough intended
-			case Widelands::NoteBuilding::Action::kClose:
-				// Stop everybody from thinking to avoid segfaults
-				set_thinks(false);
-				vbox_.reset(nullptr);
-				die();
-				break;
-			default:
-				break;
-			}
-		}
+		on_building_note(note);
 	});
 }
 
 BuildingWindow::~BuildingWindow() {
 	if (workarea_overlay_id_) {
 		igbase().mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
+	}
+}
+
+void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
+	if (note.serial == building_.serial()) {
+		switch (note.action) {
+		// The building's state has changed
+		case Widelands::NoteBuilding::Action::kRefresh:
+			init(true);
+			break;
+		// The building is no more
+		case Widelands::NoteBuilding::Action::kStartWarp:
+			igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
+		// Fallthrough intended
+		case Widelands::NoteBuilding::Action::kClose:
+			// Stop everybody from thinking to avoid segfaults
+			set_thinks(false);
+			vbox_.reset(nullptr);
+			die();
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -462,12 +466,12 @@ void BuildingWindow::toggle_workarea() {
 	}
 }
 
-void BuildingWindow::create_ware_queue_panel(UI::Box* const box,
-                                             Widelands::Building& b,
-                                             Widelands::WaresQueue* const wq,
-                                             bool show_only) {
+void BuildingWindow::create_input_queue_panel(UI::Box* const box,
+                                              Widelands::Building& b,
+                                              Widelands::InputQueue* const iq,
+                                              bool show_only) {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
+	box->add(new InputQueueDisplay(box, 0, 0, igbase(), b, iq, show_only), UI::Align::kLeft);
 }
 
 /**

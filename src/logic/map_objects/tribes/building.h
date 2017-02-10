@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ namespace Widelands {
 struct Flag;
 struct Message;
 class TribeDescr;
-class WaresQueue;
+class InputQueue;
 
 class Building;
 
@@ -245,8 +245,8 @@ public:
 		return statistics_string_;
 	}
 
-	/// \returns the queue for a ware type or \throws WException.
-	virtual WaresQueue& waresqueue(DescriptionIndex);
+	/// \returns the queue for the matching ware or worker type or \throws WException.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

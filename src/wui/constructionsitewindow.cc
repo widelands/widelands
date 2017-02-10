@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,12 @@
 
 #include "wui/constructionsitewindow.h"
 
+
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
-#include "wui/waresqueuedisplay.h"
+#include "wui/inputqueuedisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
@@ -52,7 +53,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		box.add(
-		   new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
+		   new InputQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)), UI::Align::kLeft);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 

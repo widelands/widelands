@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,7 +161,7 @@ void PlayerDescriptionGroup::refresh() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			TribeBasicInfo info = Widelands::Tribes::tribeinfo(player.tribe);
+			TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;

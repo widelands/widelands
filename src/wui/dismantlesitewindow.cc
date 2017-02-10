@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick) {
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < ds.get_nrwaresqueues(); ++i)
-		BuildingWindow::create_ware_queue_panel(&box, ds, ds.get_waresqueue(i), true);
+		BuildingWindow::create_input_queue_panel(&box, ds, ds.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 	think();

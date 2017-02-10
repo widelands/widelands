@@ -76,20 +76,20 @@ return {
       })
 
       place_building_in_region(player, "barbarians_metal_workshop", sf:region(11), {
-         wares = {
+         inputs = {
             iron = 8,
             log = 8
          }
       })
 
       place_building_in_region(player, "barbarians_wood_hardener", sf:region(11), {
-         wares = {
+         inputs = {
             log = 8
          }
       })
 
       place_building_in_region(player, "barbarians_hunters_hut", sf:region(11), {
-         wares = {}
+         inputs = {}
       })
 
       place_building_in_region(player, "barbarians_tower", sf:region(13), {
