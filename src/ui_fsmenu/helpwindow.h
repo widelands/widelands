@@ -42,7 +42,6 @@ public:
 	                     uint32_t height = 0);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
