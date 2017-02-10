@@ -176,6 +176,7 @@ public:
 	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
+		entry_cache_.clear();
 	}
 
 private:

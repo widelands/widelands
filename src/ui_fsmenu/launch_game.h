@@ -40,13 +40,7 @@ class LuaInterface;
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
  *
- * The menu has a lot dynamic user-interfaces, that are only shown in specific
- * cases:
- *    UI::Button select_map_  - only shown if the player has the right to
- *                               change the map.
- *
  */
-// NOCOM fix comments
 class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
@@ -62,7 +56,8 @@ protected:
 
 	LuaInterface* lua_;
 
-	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this is a scenario or a savegame.
+	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
+	/// is a scenario or a savegame.
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
 	bool init_win_condition_label();
 
@@ -78,8 +73,7 @@ protected:
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
-																	 std::set<std::string> tags) const;
-	void set_scenario_values();
+	                                                 std::set<std::string> tags) const;
 
 	uint32_t butw_;
 	uint32_t buth_;

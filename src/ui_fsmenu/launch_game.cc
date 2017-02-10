@@ -28,8 +28,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
-#include "helper.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -40,7 +38,7 @@
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-// NOCOM Clean up includes
+
 FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
    : FullscreenMenuBase(),
@@ -103,7 +101,7 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
-			_("The game is a saved game – the win condition was set before."));
+		   _("The game is a saved game – the win condition was set before."));
 		return true;
 	} else {
 		win_condition_dropdown_.set_label("");
@@ -116,10 +114,9 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
  * Fill the dropdown with the available win conditions.
  */
 void FullscreenMenuLaunchGame::update_win_conditions() {
-	win_condition_dropdown_.clear();
 	win_condition_dropdown_.set_enabled(settings_->can_change_map() &&
 	                                    !settings_->settings().savegame &&
-													!settings_->settings().scenario);
+	                                    !settings_->settings().scenario);
 	if (!init_win_condition_label()) {
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml =
@@ -137,13 +134,11 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 			win_condition_dropdown_.set_tooltip(error_message);
 			log("Launch Game: No map loader: %s\n", error_message.c_str());
 		}
-		if (settings_->can_change_map()) {
-			win_condition_selected();
-		}
 	}
 }
 
 void FullscreenMenuLaunchGame::load_win_conditions(const Widelands::Map& map) {
+	win_condition_dropdown_.clear();
 	try {
 		const std::set<std::string> tags = map.get_tags();
 		// Make sure that the last win condition is still valid. If not, pick the first one

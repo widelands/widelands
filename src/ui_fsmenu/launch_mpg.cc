@@ -207,7 +207,6 @@ void FullscreenMenuLaunchMPG::layout() {
 	// TODO(GunChleoc): Implement when we have redesigned this
 }
 
-
 /**
  * Set a new chat provider.
  *
@@ -227,9 +226,10 @@ void FullscreenMenuLaunchMPG::clicked_back() {
 }
 
 void FullscreenMenuLaunchMPG::win_condition_selected() {
-	last_win_condition_ = win_condition_dropdown_.get_selected();
+	// last_win_condition_ = win_condition_dropdown_.get_selected();
 	if (settings_->can_change_map()) {
-		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());  // NOCOM new
+		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		last_win_condition_ = win_condition_dropdown_.get_selected();
 	}
 }
 
@@ -246,13 +246,6 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 		select_saved_game();
 	}
 	update_win_conditions();
-	// Tell the client about the current win condition
-	// NOCOM move into update_win_conditions?
-	if (win_condition_dropdown_.has_selection()) {
-		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
-	} else {
-		settings_->set_win_condition_script(last_win_condition_);
-	}
 }
 
 /**
@@ -408,21 +401,19 @@ void FullscreenMenuLaunchMPG::refresh() {
 	change_map_or_save_.set_enabled(settings_->can_change_map());
 	change_map_or_save_.set_visible(settings_->can_change_map());
 
-	if (!settings_->can_change_map()) {
-		update_win_conditions(); // NOCOM We can have the wrong win condition in the client here
-		if (!init_win_condition_label()) {
-			try {
-				std::unique_ptr<LuaTable> t = win_condition_if_valid(
-				   settings_->get_win_condition_script(), std::set<std::string>());
-				if (t) {
-					i18n::Textdomain td("win_conditions");
-					win_condition_dropdown_.set_label(_(t->get_string("name")));
-					win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
-				}
-			} catch (LuaTableKeyError& e) {
-				log("LaunchMPG: Error loading win condition: %s %s\n",
-				    settings_->get_win_condition_script().c_str(), e.what());
+	if (!settings_->can_change_map() && !init_win_condition_label()) {
+		try {
+			// We do not validate the scripts for the client - it's only a label.
+			std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
+			t->do_not_warn_about_unaccessed_keys();
+			if (t) {
+				i18n::Textdomain td("win_conditions");
+				win_condition_dropdown_.set_label(_(t->get_string("name")));
+				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			}
+		} catch (LuaTableKeyError& e) {
+			log("LaunchMPG: Error loading win condition: %s %s\n",
+			    settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}
