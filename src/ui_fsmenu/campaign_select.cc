@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,6 +112,10 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+}
+
+void FullscreenMenuCampaignSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 /**
@@ -349,6 +353,10 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.set_sort_column(0);
 
 	table_.focus();
+}
+
+void FullscreenMenuCampaignMapSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

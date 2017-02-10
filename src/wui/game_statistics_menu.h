@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ private:
 	/// \param window:              The window that's associated with this button.
 	UI::Button* add_button(const std::string& image_basename,
 	                       const std::string& name,
-								  const std::string& tooltip_text,
+	                       const std::string& tooltip_text,
 	                       UI::UniqueWindow::Registry* window);
 
 	InteractivePlayer& player_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,7 +125,11 @@ SupplyProviders IdleWareSupply::provider_type(Game* game) const {
 	if (is_a(Ship, loc)) {
 		return SupplyProviders::kShip;
 	}
-
+	if (upcast(Worker, worker, loc)) {
+		if (worker->is_shipping()) {
+			return SupplyProviders::kShip;
+		}
+	}
 	return SupplyProviders::kFlagOrRoad;
 }
 

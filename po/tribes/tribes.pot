@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-26 07:46+0000\n"
+"POT-Creation-Date: 2017-02-09 14:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -482,11 +482,9 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgid "recruiting soldier"
 msgstr ""
 
@@ -1088,12 +1086,12 @@ msgid "weaving spidercloth"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr ""
 
@@ -1117,7 +1115,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1626,7 +1624,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 msgctxt "barbarians_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2055,7 +2053,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
 msgctxt "empire_building"
-msgid "The carrier working at this well can’t find any water in his work area."
+msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2533,15 +2531,19 @@ msgstr ""
 msgid "Controls"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr ""
 
@@ -2556,7 +2558,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-msgid " Start the game with a fortified military installation"
+msgid "Start the game with a fortified military installation"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
@@ -3202,6 +3204,12 @@ msgid "Miner"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
@@ -3424,6 +3432,12 @@ msgid "Ranger"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3583,6 +3597,12 @@ msgstr ""
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:17
 msgctxt "empire_worker"
 msgid "Pig Breeder"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers

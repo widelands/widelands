@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,14 +142,13 @@ public:
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
-	Immovable& create_immovable(const Coords&,
-	                            DescriptionIndex idx,
-	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld,
-	                            const Building* former_building = nullptr);
-	Immovable& create_immovable(const Coords&,
-	                            const std::string& name,
-	                            MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld,
-	                            const Building* former_building = nullptr);
+	Immovable&
+	create_immovable(const Coords&, DescriptionIndex idx, MapObjectDescr::OwnerType, Player* owner);
+	Immovable& create_immovable_with_name(const Coords&,
+	                                      const std::string& name,
+	                                      MapObjectDescr::OwnerType,
+	                                      Player* owner,
+	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 
@@ -249,6 +248,12 @@ private:
 	// Changes the owner of 'fc' from the current player to the new player and
 	// sends notifications about this.
 	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
+
+	Immovable& do_create_immovable(const Coords& c,
+	                               DescriptionIndex const idx,
+	                               MapObjectDescr::OwnerType type,
+	                               Player* owner,
+	                               const BuildingDescr* former_building_descr);
 
 	uint32_t gametime_;
 	ObjectManager objects_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ class World;
 struct ProductionProgram {
 
 	/// A group of ware types with a count.
-	using WareTypeGroup = std::pair<std::set<DescriptionIndex>, uint8_t>;
+	using WareTypeGroup = std::pair<std::set<std::pair<DescriptionIndex, WareWorker>>, uint8_t>;
 	using Groups = std::vector<WareTypeGroup>;
 
 	/// Can be executed on a ProductionSite.
@@ -76,8 +76,8 @@ struct ProductionProgram {
 		 */
 		virtual void building_work_failed(Game&, ProductionSite&, Worker&) const;
 
-		const Groups& consumed_wares() const {
-			return consumed_wares_;
+		const Groups& consumed_wares_workers() const {
+			return consumed_wares_workers_;
 		}
 		const BillOfMaterials& produced_wares() const {
 			return produced_wares_;
@@ -87,7 +87,7 @@ struct ProductionProgram {
 		}
 
 	protected:
-		Groups consumed_wares_;
+		Groups consumed_wares_workers_;
 		BillOfMaterials produced_wares_;
 		BillOfMaterials recruited_workers_;
 
@@ -100,7 +100,8 @@ struct ProductionProgram {
 	static void parse_ware_type_group(char*& parameters,
 	                                  WareTypeGroup& group,
 	                                  const Tribes& tribes,
-	                                  const BillOfMaterials& inputs);
+	                                  const BillOfMaterials& input_wares,
+	                                  const BillOfMaterials& input_workers);
 
 	/// Returns from the program.
 	///
@@ -540,7 +541,7 @@ struct ProductionProgram {
 	size_t size() const;
 	const ProductionProgram::Action& operator[](size_t const idx) const;
 
-	const ProductionProgram::Groups& consumed_wares() const;
+	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
 
@@ -548,7 +549,7 @@ private:
 	std::string name_;
 	std::string descname_;
 	std::vector<std::unique_ptr<Action>> actions_;
-	ProductionProgram::Groups consumed_wares_;
+	ProductionProgram::Groups consumed_wares_workers_;
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };

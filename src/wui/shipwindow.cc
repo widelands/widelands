@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 - 2016 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -249,13 +249,14 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	igbase_.center_view_on_coords(ship_.get_position());
+	igbase_.scroll_to_field(ship_.get_position(), MapView::Transition::Smooth);
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
 	if (PortDock* destination = ship_.get_destination(igbase_.egbase())) {
-		igbase_.center_view_on_coords(destination->get_warehouse()->get_position());
+		igbase_.scroll_to_field(
+		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
 }
 

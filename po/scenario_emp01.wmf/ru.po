@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Олег Шевчеко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 07:30+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-08 12:40+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +86,7 @@ msgstr "Каменоломня"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Постройте каменоломню к югу и добудьте немного гранита и мрамора."
+msgstr "Постройте каменоломню к югу и добудьте немного гранита и мрамора из скал."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -268,7 +269,7 @@ msgstr "Приветствую, Люциус! Я только что встре�
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "Он рассказал мне о блокгаузе. Что ж, я думаю, нам больше не нужно думать об этом. Вместо этого - нам нужно сконцентрироваться на других вещах."
+msgstr "Он рассказал мне о блокгаузе. Что ж, я не думаю, нам нужно больше блокгаузов. Вместо этого нам сейчас нужно сконцентрироваться на других вещах."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:162
@@ -349,7 +350,7 @@ msgstr "Саледус отмечает…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr "Сир, я только что подумал о скалах, стоящих на южном берегу этой земли. Возможно, мы могли добыть в них какое-то количество строительного камня и прекрасного мрамора."
+msgstr "Сир, я только что подумал о скалах, стоящих на южном берегу этой земли. Возможно, мы могли добыть в них какое-то количество полезного гранита и прекрасного мрамора."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:207
@@ -433,7 +434,7 @@ msgstr "Сир, Вы сделали этот полуостров очень б�
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -184,10 +184,10 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update statistics
-			owner().ware_produced(wq.get_ware());
+			owner().ware_produced(wq.get_index());
 
-			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_ware());
-			WareInstance& ware = *new WareInstance(wq.get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
+			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
@@ -229,8 +229,8 @@ void DismantleSite::draw(uint32_t gametime,
 	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	const uint32_t anim_idx = building_->get_animation(
-		building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
+	const uint32_t anim_idx =
+	   building_->get_animation(building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
 	dst->blit_animation(
 	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
 

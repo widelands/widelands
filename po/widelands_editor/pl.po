@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Patryk, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-12 16:22+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-29 09:39+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -95,8 +95,8 @@ msgstr "Narzędzia"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
+msgid "0-9"
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid "Change tool size"
@@ -152,11 +152,16 @@ msgstr "Ogólne"
 msgid "Introduction"
 msgstr "Wstęp"
 
-#: ../../data/scripting/editor/editor_help.lua:74
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
+msgstr "Podpowiedzi"
+
+#: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
 msgstr "Tereny"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr "Drzewa"
 

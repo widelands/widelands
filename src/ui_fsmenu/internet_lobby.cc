@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -149,6 +149,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
 		connect_to_metaserver();
+}
+
+void FullscreenMenuInternetLobby::layout() {
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 /// think function of the UI (main loop)

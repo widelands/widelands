@@ -101,7 +101,9 @@ typedef union Value {
 typedef struct lua_TValue { TValuefields; } TValue;
 
 /* macro defining a nil value */
-#define NILCONSTANT {NULL}, LUA_TNIL
+#define NILCONSTANT                                                                                \
+	{ NULL }                                                                                        \
+	, LUA_TNIL
 
 #define val_(o) ((o)->value_)
 
@@ -290,7 +292,7 @@ typedef struct lua_TValue { TValuefields; } TValue;
 	{                                                                                               \
 		TValue* io1 = (obj1);                                                                        \
 		*io1 = *(obj2);                                                                              \
-		(void)L;                                                                                     \
+		(void) L;                                                                                    \
 		checkliveness(L, io1);                                                                       \
 	}
 
@@ -504,7 +506,7 @@ typedef union TKey {
 		const TValue* io_ = (obj);                                                                   \
 		k_->nk.value_ = io_->value_;                                                                 \
 		k_->nk.tt_ = io_->tt_;                                                                       \
-		(void)L;                                                                                     \
+		(void) L;                                                                                    \
 		checkliveness(L, io_);                                                                       \
 	}
 

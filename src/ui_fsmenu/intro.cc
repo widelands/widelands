@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,10 +37,6 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
-
-	return true;
-}
-bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return true;
 }
 

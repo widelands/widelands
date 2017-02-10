@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,6 +161,10 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 	delete lua_;
+}
+
+void FullscreenMenuLaunchSPG::layout() {
+	// TODO(GunChleoc): Implement when we have redesigned this
 }
 
 /**

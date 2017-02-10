@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # xno, 2015
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-20 09:44+0000\n"
-"PO-Revision-Date: 2016-11-24 16:34+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-28 21:58+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -446,7 +446,7 @@ msgstr "Fucina di armature"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:51
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:69
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:51
@@ -496,13 +496,11 @@ msgid "Barracks"
 msgstr "Caserma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgid "recruiting soldier"
-msgstr ""
+msgstr "reclutando un soldato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -937,7 +935,7 @@ msgstr "Cantiere navale"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 msgid "constructing a ship"
 msgstr "sta costruendo una nave"
@@ -1117,13 +1115,13 @@ msgid "weaving spidercloth"
 msgstr "tessendo della stoffa di ragno"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr "sta cucendo un tabarro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr "sta cucendo un tabarro dorato"
 
@@ -1147,9 +1145,8 @@ msgstr "Acqua esaurita"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "L'operaio che lavora a questo pozzo, non trova acqua nella sua area operativa."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1666,9 +1663,8 @@ msgstr "Pozzo"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 msgctxt "barbarians_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "L'operaio che lavora a questo pozzo, non trova acqua nella sua area operativa."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -2107,9 +2103,8 @@ msgstr "Pozzo"
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
 msgctxt "empire_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr "L'operaio che lavora a questo pozzo, non trova acqua nella sua area operativa."
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:7
@@ -2548,7 +2543,7 @@ msgstr "Barbari"
 
 #: ../../data/tribes/preload.lua:18
 msgid "The mighty tribes of the east-lands."
-msgstr ""
+msgstr "Le potenti tribù delle terre orientali."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:33
@@ -2586,15 +2581,19 @@ msgstr "Introduzione"
 msgid "Controls"
 msgstr "Controlli"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Merci"
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Lavoratori"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Edifici"
 
@@ -2610,7 +2609,7 @@ msgstr "Villaggio fortificato"
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-msgid " Start the game with a fortified military installation"
+msgid "Start the game with a fortified military installation"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
@@ -3258,6 +3257,12 @@ msgid "Miner"
 msgstr "Minatore"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
@@ -3480,6 +3485,12 @@ msgid "Ranger"
 msgstr "Guardia forestale"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3640,6 +3651,12 @@ msgstr "Mastro Minatore"
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "Allevatore di Maiali"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

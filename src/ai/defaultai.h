@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,8 +94,6 @@ struct DefaultAI : ComputerPlayer {
 		kAttackableVeryWeak
 	};
 
-	enum class Tribes : uint8_t { kNone, kBarbarians, kAtlanteans, kEmpire };
-
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
@@ -103,6 +101,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Normal AI");
 			icon_filename = "images/ai/ai_normal.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -116,6 +115,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Weak AI");
 			icon_filename = "images/ai/ai_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -129,6 +129,7 @@ struct DefaultAI : ComputerPlayer {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Very Weak AI");
 			icon_filename = "images/ai/ai_very_weak.png";
+			type = Implementation::Type::kDefault;
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -162,7 +163,7 @@ private:
 	void update_mineable_field(Widelands::MineableField&);
 	void update_productionsite_stats();
 
-	// for productionsites
+	// for production sites
 	Widelands::BuildingNecessity
 	check_building_necessity(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 
@@ -227,6 +228,7 @@ private:
 	template <typename T> void check_range(const T, const T, const char*);
 
 	// Functions used for seafaring / defaultai_seafaring.cc
+	Widelands::IslandExploreDirection randomExploreDirection();
 	void gain_ship(Widelands::Ship&, NewShip);
 	void check_ship_in_expedition(Widelands::ShipObserver&, uint32_t);
 	void expedition_management(Widelands::ShipObserver&);
@@ -337,12 +339,15 @@ private:
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
 	bool seafaring_economy;  // false by default, until first port space is found
 	uint32_t expedition_ship_;
+	uint32_t expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
+	std::unordered_set<uint32_t> expedition_visited_spots;
 
 	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr int kColonyScanStartArea = 35;
-	static constexpr int kColonyScanMinArea = 10;
-	static constexpr int kExpeditionMaxDuration = 120 * 60 * 1000;
+	static constexpr uint32_t kColonyScanStartArea = 35;
+	static constexpr uint32_t kColonyScanMinArea = 12;
+	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
+	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
 	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 	static constexpr uint32_t kNoExpedition = 0;

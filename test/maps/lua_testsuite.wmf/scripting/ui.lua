@@ -100,15 +100,6 @@ function ui_tests:test_height(x)
    assert_equal(200, w.height)
 end
 
-function ui_tests:test_mouse_pos_x(x)
-   self.mv.mouse_position_x = 200
-   assert_equal(200, self.mv.mouse_position_x)
-end
-function ui_tests:test_mouse_pos_y(x)
-   self.mv.mouse_position_y = 100
-   assert_equal(100, self.mv.mouse_position_y)
-end
-
 -- ========
 -- Buttons
 -- ========

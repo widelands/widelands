@@ -94,11 +94,11 @@ end
 
 function test_descr:test_get_workers()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(29, #tribe.workers)
+   assert_equal(30, #tribe.workers)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(31, #tribe.workers)
-   tribe = egbase:get_tribe_description("empire")
    assert_equal(32, #tribe.workers)
+   tribe = egbase:get_tribe_description("empire")
+   assert_equal(33, #tribe.workers)
 end
 
 function test_descr:test_has_building()

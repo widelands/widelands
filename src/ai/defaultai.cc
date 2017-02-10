@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010, 2012, 2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -556,7 +556,7 @@ void DefaultAI::late_initialization() {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
-			for (const auto& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -667,7 +667,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const auto& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes
@@ -870,8 +870,25 @@ void DefaultAI::late_initialization() {
 		throw wexception("Corrupted AI data");
 	}
 
+	// Initialise the max duration of a single ship's expedition
+	const uint32_t map_area = uint32_t(map.get_height()) * map.get_width();
+	const uint32_t map_area_root = round(sqrt(map_area));
+	int scope = 320 - 64;
+	int off = map_area_root - 64;
+	if (off < 0)
+		off = 0;
+	if (off > scope)
+		off = scope;
+	expedition_max_duration =
+	   kExpeditionMinDuration +
+	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
+	log(" %d: expedition max duration = %u (%u minutes), map area root: %u\n", player_number(),
+	    expedition_max_duration / 1000, expedition_max_duration / 60000, map_area_root);
+	assert(expedition_max_duration >= kExpeditionMinDuration);
+	assert(expedition_max_duration <= kExpeditionMaxDuration);
+
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
-	// f.e. human player played this player before
+	// e.g. human player played this player before
 	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
 		// Current gametime is better then 'kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
@@ -2978,8 +2995,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (RoadCandidates.get_winner(&winner_hash, (gametime % 4 > 0) ? 1 : 2)) {
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
+#ifndef NDEBUG
 		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
 		assert(pathcost >= 0);
+#else
+		map.findpath(flag.get_position(), target_coords, 0, path, check);
+#endif
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
@@ -3096,11 +3117,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
 		bool resetting_wares = false;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
-				game().send_player_set_ware_max_fill(
-				   *site.site, queue->get_ware(), queue->get_max_size());
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3114,7 +3135,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// The site is in process of emptying its input queues
 		// Counting remaining wares in the site now
 		int32_t left_wares = 0;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			left_wares += queue->get_filled();
 		}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
@@ -3200,8 +3221,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (doing_upgrade) {
 
 			// reducing input queues
-			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), 0);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
@@ -3470,7 +3492,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	return false;
 }
-
 
 /**
  * checks the first mine in list, takes care if it runs out of
@@ -4131,7 +4152,7 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 		}
 }
 
-// walk and search for territory controlled by other player
+// walk and search for territory controlled by some player type
 // usually scanning radius is enough but sometimes we must walk to
 // verify that an enemy territory is really accessible by land
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
@@ -4179,7 +4200,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 				return true;
 			}
 
-			// if anybody but not me
+			// if somebody but not me
 			if (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn) {
 				*tested_fields = done.size();
 				return true;
