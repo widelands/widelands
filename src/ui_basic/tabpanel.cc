@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -198,9 +198,9 @@ uint32_t TabPanel::add_tab(int32_t width,
 	if (border_type_ == TabPanel::Type::kBorder) {
 		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
 		                  kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
-		panel->set_pos(Point(0, kTabPanelButtonHeight));
+		panel->set_pos(Vector2i(0, kTabPanelButtonHeight));
 	} else {
-		panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+		panel->set_pos(Vector2i(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 	}
 
 	panel->set_visible(id == active_);
@@ -259,28 +259,27 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	if (pic_background_) {
 		if (!tabs_.empty()) {
-			dst.tile(Rect(Point(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(),
-			              kTabPanelButtonHeight - 2),
-			         pic_background_, Point(get_x(), get_y()));
+			dst.tile(Recti(Vector2i(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(),
+			               kTabPanelButtonHeight - 2),
+			         pic_background_, Vector2i(get_x(), get_y()));
 		}
 		assert(kTabPanelButtonHeight - 2 <= get_h());
-		dst.tile(
-		   Rect(Point(0, kTabPanelButtonHeight - 2), get_w(), get_h() - kTabPanelButtonHeight + 2),
-		   pic_background_, Point(get_x(), get_y() + kTabPanelButtonHeight - 2));
+		dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
+		               get_h() - kTabPanelButtonHeight + 2),
+		         pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
 	}
 
 	RGBColor black(0, 0, 0);
 
 	// draw the buttons
-	int32_t x = 0;
+	float x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
 		x = tabs_[idx]->get_x();
 		tab_width = tabs_[idx]->get_w();
 
 		if (highlight_ == idx) {
-			dst.brighten_rect(
-			   Rect(Point(x, 0), tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
+			dst.brighten_rect(Rectf(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
 		}
 
 		assert(tabs_[idx]->pic);
@@ -296,53 +295,51 @@ void TabPanel::draw(RenderTarget& dst) {
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
-			   Rect(x + (kTabPanelButtonHeight - picture_width) / 2,
-			        (kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
-			   tabs_[idx]->pic, Rect(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1.,
+			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2,
+			         (kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
+			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else {
-			dst.blit(
-			   Point(x + kTabPanelTextMargin, (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
-			   tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
+			dst.blit(Vector2f(x + kTabPanelTextMargin,
+			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
+			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
 		}
 
 		// Draw top part of border
-		dst.brighten_rect(Rect(Point(x, 0), tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rect(Point(x, 2), 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.fill_rect(Rect(Point(x + tab_width - 2, 2), 1, kTabPanelButtonHeight - 4), black);
-		dst.fill_rect(Rect(Point(x + tab_width - 1, 1), 1, kTabPanelButtonHeight - 3), black);
+		dst.brighten_rect(Rectf(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.fill_rect(Rectf(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
+		dst.fill_rect(Rectf(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
 		if (active_ != idx)
 			dst.brighten_rect(
-			   Rect(Point(x, kTabPanelButtonHeight - 2), tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+			   Rectf(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
-			dst.brighten_rect(
-			   Rect(Point(x, kTabPanelButtonHeight - 2), 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Rectf(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
-			dst.brighten_rect(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 2), 2, 2),
+			dst.brighten_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
 			                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
-			dst.fill_rect(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 1), 1, 1), black);
-			dst.fill_rect(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 2), 2, 1), black);
+			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
+			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
 		}
 	}
 
 	// draw the remaining separator
 	assert(x <= get_w());
-	dst.brighten_rect(Rect(Point(x + tab_width, kTabPanelButtonHeight - 2), get_w() - x, 2),
+	dst.brighten_rect(Rectf(x + tab_width, kTabPanelButtonHeight - 2, get_w() - x, 2),
 	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
 	if (border_type_ == TabPanel::Type::kBorder) {
 		//  left edge
-		dst.brighten_rect(
-		   Rect(Point(0, kTabPanelButtonHeight), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rectf(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
-		dst.fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
+		dst.fill_rect(Rectf(2, get_h() - 2, get_w() - 2, 1), black);
+		dst.fill_rect(Rectf(1, get_h() - 1, get_w() - 1, 1), black);
 		//  right edge
-		dst.fill_rect(Rect(Point(get_w() - 2, kTabPanelButtonHeight - 1), 1, get_h() - 2), black);
-		dst.fill_rect(Rect(Point(get_w() - 1, kTabPanelButtonHeight - 2), 1, get_h() - 1), black);
+		dst.fill_rect(Rectf(get_w() - 2, kTabPanelButtonHeight - 1, 1, get_h() - 2), black);
+		dst.fill_rect(Rectf(get_w() - 1, kTabPanelButtonHeight - 2, 1, get_h() - 1), black);
 	}
 }
 
@@ -380,10 +377,6 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			return true;
 		}
 	}
-	return false;
-}
-
-bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return false;
 }
 

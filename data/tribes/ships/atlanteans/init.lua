@@ -1,4 +1,6 @@
 -- RST
+-- .. _lua_tribes_ships:
+--
 -- Ships
 -- -----
 --
@@ -22,7 +24,7 @@ animations = {
       fps = 7
    }
 }
-add_worker_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
+add_walking_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
 
 
 -- RST

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -46,9 +45,9 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					bool const see_all = fr.unsigned_8();
 
 					int32_t const plnum = fr.unsigned_8();
-					if (plnum < 1 || MAX_PLAYERS < plnum)
+					if (plnum < 1 || kMaxPlayers < plnum)
 						throw GameDataError(
-						   "player number (%i) is out of range (1 .. %u)", plnum, MAX_PLAYERS);
+						   "player number (%i) is out of range (1 .. %u)", plnum, kMaxPlayers);
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();

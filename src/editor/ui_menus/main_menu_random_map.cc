@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,13 +33,17 @@
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+
+namespace {
+// The map generator can't find starting positions for too many players
+constexpr uint8_t kMaxMapgenPlayers = 8;
+}  // namespace
 
 using namespace Widelands;
 
@@ -184,7 +188,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 resources_label_.get_h(),
                 (boost::format(_("%i %%")) % mountainsval_).str(),
                 UI::Align::kHCenter),
-     island_mode_(&box_, Point(0, 0), _("Island mode")),
+     island_mode_(&box_, Vector2i(0, 0), _("Island mode")),
      // Geeky stuff
      map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      map_number_label_(&map_number_box_, 0, 0, _("Random Number:")),
@@ -406,7 +410,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
 		max_players_ = std::min(
-		   static_cast<size_t>(MAX_PLAYERS),
+		   static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);
@@ -442,7 +446,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
 		max_players_ = std::min(
-		   static_cast<size_t>(MAX_PLAYERS),
+		   static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);

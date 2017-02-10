@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,6 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -87,17 +86,6 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 }
 
 namespace Widelands {
-
-const RGBColor Player::Colors[MAX_PLAYERS] = {
-   RGBColor(2, 2, 198),      // blue
-   RGBColor(255, 41, 0),     // red
-   RGBColor(255, 232, 0),    // yellow
-   RGBColor(59, 223, 3),     // green
-   RGBColor(57, 57, 57),     // black/dark gray
-   RGBColor(255, 172, 0),    // orange
-   RGBColor(215, 0, 218),    // purple
-   RGBColor(255, 255, 255),  // white
-};
 
 /**
  * Find the longest possible enhancement chain leading to the given
@@ -212,7 +200,7 @@ void Player::create_default_infrastructure() {
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(cr)));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < further_shared_in_player_.size(); ++n) {
@@ -225,7 +213,7 @@ void Player::create_default_infrastructure() {
 			      ->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(ncr)));
 		}
 	} else
 		throw WLWarning(_("Missing starting position"),
@@ -272,7 +260,7 @@ void Player::update_team_players() {
 	if (!team_number_)
 		return;
 
-	for (PlayerNumber i = 1; i <= MAX_PLAYERS; ++i) {
+	for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
 		Player* other = egbase().get_player(i);
 		if (!other)
 			continue;
@@ -465,8 +453,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
-		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -1092,8 +1080,21 @@ void Player::sample_statistics() {
 void Player::ware_produced(DescriptionIndex const wareid) {
 	assert(ware_productions_.size() == egbase().tribes().nrwares());
 	assert(egbase().tribes().ware_exists(wareid));
-
 	++current_produced_statistics_[wareid];
+}
+
+/**
+ * Return count of produced wares for ware index
+ */
+uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
+	assert(wareid < egbase().tribes().nrwares());
+	assert(wareid < ware_productions_.size());
+	assert(wareid < current_produced_statistics_.size());
+	uint32_t sum = current_produced_statistics_[wareid];
+	for (const auto stat : *get_ware_production_statistics(wareid)) {
+		sum += stat;
+	}
+	return sum;
 }
 
 /**

@@ -6,8 +6,8 @@ animations = {
       hotspot = { 4, 23 }
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {8, 23}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
+add_walking_animations(animations, "walkload", dirname, "walk", {8, 23}, 10)
 
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
@@ -20,8 +20,7 @@ tribes:new_worker_type {
 
    buildcost = {
       barbarians_carrier = 1,
-      -- TODO (GunChleoc): Add back in when we have a casern
-      --ax = 1
+      ax = 1
    },
 
    animations = animations,

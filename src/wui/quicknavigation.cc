@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2016 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,65 +19,21 @@
 
 #include "wui/quicknavigation.h"
 
-#include "logic/editor_game_base.h"
 #include "wlapplication.h"
-#include "wui/mapviewpixelfunctions.h"
 
-static const uint32_t MaxHistorySize = 32;
-
-QuickNavigation::QuickNavigation(const Widelands::EditorGameBase& egbase,
-                                 uint32_t screenwidth,
-                                 uint32_t screenheight)
-   : egbase_(egbase), landmarks_(10) {
-	screenwidth_ = screenwidth;
-	screenheight_ = screenheight;
-
+QuickNavigation::QuickNavigation(MapView* map_view) : map_view_(map_view), landmarks_(10) {
+	map_view->changeview.connect([this] { view_changed(); });
 	havefirst_ = false;
-	update_ = true;
-	history_index_ = 0;
 }
 
-void QuickNavigation::set_setview(const QuickNavigation::SetViewFn& fn) {
-	setview_ = fn;
-}
-
-void QuickNavigation::setview(Point where) {
-	update_ = false;
-	setview_(where);
-	update_ = true;
-}
-
-void QuickNavigation::view_changed(Point newpos, bool jump) {
-	if (havefirst_ && update_) {
-		if (!jump) {
-			Point delta = MapviewPixelFunctions::calc_pix_difference(egbase_.map(), newpos, anchor_);
-
-			if (static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
-			    static_cast<uint32_t>(abs(delta.y)) > screenheight_)
-				jump = true;
-		}
-
-		if (jump) {
-			if (history_index_ < history_.size())
-				history_.erase(history_.begin() + history_index_, history_.end());
-			history_.push_back(current_);
-			if (history_.size() > MaxHistorySize)
-				history_.erase(history_.begin(), history_.end() - MaxHistorySize);
-			history_index_ = history_.size();
-		}
-	}
-
-	if (jump || !havefirst_) {
-		anchor_ = newpos;
-	}
-
-	current_ = newpos;
+void QuickNavigation::view_changed() {
+	current_ = map_view_->view();
 	havefirst_ = true;
 }
 
-void QuickNavigation::set_landmark(size_t index, const Point& point) {
+void QuickNavigation::set_landmark(size_t index, const MapView::View& view) {
 	assert(index < landmarks_.size());
-	landmarks_[index].point = point;
+	landmarks_[index].view = view;
 	landmarks_[index].set = true;
 }
 
@@ -87,36 +43,16 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	if (!down)
 		return false;
 
-	if (key.sym >= SDLK_0 && key.sym <= SDLK_9) {
+	if (key.sym >= SDLK_1 && key.sym <= SDLK_9) {
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);
 
-		bool ctrl = WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
-		            WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
-		if (ctrl) {
+		if (key.mod & KMOD_CTRL) {
 			set_landmark(which, current_);
 		} else {
-			if (landmarks_[which].set)
-				setview_(landmarks_[which].point);
-		}
-		return true;
-	}
-
-	if (key.sym == SDLK_COMMA) {
-		if (history_index_ > 0) {
-			if (history_index_ >= history_.size()) {
-				history_.push_back(current_);
+			if (landmarks_[which].set) {
+				map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
 			}
-			history_index_--;
-			setview(history_[history_index_]);
-		}
-		return true;
-	}
-
-	if (key.sym == SDLK_PERIOD) {
-		if (history_index_ + 1 < history_.size()) {
-			history_index_++;
-			setview(history_[history_index_]);
 		}
 		return true;
 	}

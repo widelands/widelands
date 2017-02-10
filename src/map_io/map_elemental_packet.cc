@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@
 
 namespace Widelands {
 
-constexpr int32_t kCurrentPacketVersion = 1;
+constexpr int32_t kEightPlayersPacketVersion = 1;
+constexpr int32_t kSixteenPlayersPacketVersion = 2;
 
 void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 	Profile prof;
@@ -39,7 +40,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 	try {
 		int32_t const packet_version = s.get_int("packet_version");
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= kEightPlayersPacketVersion &&
+		    packet_version <= kSixteenPlayersPacketVersion) {
 			map->width_ = s.get_int("map_w");
 			map->height_ = s.get_int("map_h");
 			map->set_nrplayers(s.get_int("nr_players"));
@@ -85,7 +87,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 					for (const std::string& player : players_string) {
 						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
-						assert(player_number < MAX_PLAYERS);
+						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}
 
@@ -104,7 +106,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
 		} else
-			throw UnhandledVersionError("MapElementalPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);
 	} catch (const WException& e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}
@@ -119,11 +122,17 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	Profile prof;
 	Section& global_section = prof.create_section("global");
 
-	global_section.set_int("packet_version", kCurrentPacketVersion);
 	const Map& map = egbase.map();
+	Widelands::PlayerNumber nr_players = map.get_nrplayers();
+
+	// Maps with more than 8 players won't be compatible with older versions of Widelands.
+	// The packet format itself hasn't changed, so we always want to allow loading maps with <= 8
+	// players.
+	global_section.set_int("packet_version", nr_players <= 8 ? kEightPlayersPacketVersion :
+	                                                           kSixteenPlayersPacketVersion);
 	global_section.set_int("map_w", map.get_width());
 	global_section.set_int("map_h", map.get_height());
-	global_section.set_int("nr_players", map.get_nrplayers());
+	global_section.set_int("nr_players", nr_players);
 	global_section.set_string("name", map.get_name());
 	global_section.set_string("author", map.get_author());
 	global_section.set_string("descr", map.get_description());

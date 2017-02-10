@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,12 @@ public:
 	}
 	void unsigned_32(uint32_t const x) {
 		uint32_t const y = little_32(x);
+		data(&y, 4);
+	}
+	void float_32(const float x) {
+		uint32_t y;
+		memcpy(&y, &x, 4);
+		y = little_32(y);
 		data(&y, 4);
 	}
 	void string(const std::string& str) {

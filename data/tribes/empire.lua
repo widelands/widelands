@@ -141,6 +141,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "empire_recruit",
          "empire_soldier",
          "empire_trainer",
          "empire_weaponsmith",
@@ -206,6 +207,7 @@ tribes:new_tribe {
       "empire_toolsmithy",
       "empire_armorsmithy",
       "empire_shipyard",
+      "empire_barracks",
 
       -- Big
       "empire_donkeyfarm",

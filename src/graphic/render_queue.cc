@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,14 +120,14 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 // creation. Disables GL_SCISSOR_TEST at desctruction again.
 class ScopedScissor {
 public:
-	ScopedScissor(const FloatRect& rect);
+	ScopedScissor(const Rectf& rect);
 	~ScopedScissor();
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ScopedScissor);
 };
 
-ScopedScissor::ScopedScissor(const FloatRect& rect) {
+ScopedScissor::ScopedScissor(const Rectf& rect) {
 	glScissor(rect.x, rect.y, rect.w, rect.h);
 	glEnable(GL_SCISSOR_TEST);
 }
@@ -187,9 +187,13 @@ void RenderQueue::enqueue(const Item& given_item) {
 }
 
 void RenderQueue::draw(const int screen_width, const int screen_height) {
-	if (next_z_ >= kMaximumZValue) {
-		throw wexception("Too many drawn layers. Ran out of z-values.");
-	}
+	// TODO(sirver): If next_z >= kMaximumZValue here, we ran out of z-layers to
+	// correctly order the drawing of our objects (see
+	// https://bugs.launchpad.net/widelands/+bug/1658593). This is non-critical,
+	// but will look strange. We used to crash here in this case, but since it
+	// can happen on large zoom and huge screen resolution (> 3440 x 1400), we
+	// do not crash anymore. The linked bug contains a discussion how to fix the
+	// issue properly, but it was too much work to address at the time.
 
 	Gl::State::instance().bind_framebuffer(0, 0);
 	glViewport(0, 0, screen_width, screen_height);
@@ -249,9 +253,10 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::kTerrainRoad: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			road_program_->draw(
-			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
-			   *item.terrain_arguments.fields_to_draw, item.z_value + 2 * kOpenGlZDelta);
+			road_program_->draw(item.terrain_arguments.renderbuffer_width,
+			                    item.terrain_arguments.renderbuffer_height,
+			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale,
+			                    item.z_value + 2 * kOpenGlZDelta);
 			++i;
 		} break;
 

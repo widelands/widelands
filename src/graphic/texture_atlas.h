@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,11 +68,11 @@ public:
 
 private:
 	struct Node {
-		Node(const Rect& init_r);
+		Node(const Recti& init_r);
 		void split(int w, int h);
 
 		bool used;
-		Rect r;
+		Recti r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
 

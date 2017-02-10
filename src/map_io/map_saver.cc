@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -297,10 +297,11 @@ void MapSaver::save() {
 	// Write minimap
 	{
 		std::unique_ptr<Texture> minimap(
-		   draw_minimap(egbase_, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 		FileWrite fw;
 		save_to_png(minimap.get(), &fw, ColorType::RGBA);
 		fw.write(fs_, "minimap.png");
 	}
 }
-}
+
+}  // namespace Widelands

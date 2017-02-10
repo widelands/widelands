@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "ui_basic/checkbox.h"
 
 namespace UI {
@@ -34,7 +34,7 @@ struct Radiogroup;
 struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
-	Radiobutton(Panel* parent, Point, const Image* pic, Radiogroup&, int32_t id);
+	Radiobutton(Panel* parent, Vector2i, const Image* pic, Radiogroup&, int32_t id);
 	~Radiobutton();
 
 	Radiobutton* next_button() {
@@ -64,7 +64,7 @@ struct Radiogroup {
 	boost::signals2::signal<void()> clicked;  //  clicked without things changed
 
 	int32_t add_button(Panel* parent,
-	                   Point,
+	                   Vector2i,
 	                   const Image* pic,
 	                   const std::string& tooltip = "",
 	                   Radiobutton** = nullptr);

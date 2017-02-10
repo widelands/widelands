@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 
-#include "base/point.h"
+#include "base/vector.h"
 
 namespace Widelands {
 class Game;
@@ -152,11 +152,11 @@ struct WLApplication {
 	}
 
 	// @{
-	void warp_mouse(Point);
+	void warp_mouse(Vector2i);
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Point get_mouse_position() const {
+	Vector2i get_mouse_position() const {
 		return mouse_position_;
 	}
 	//
@@ -239,15 +239,15 @@ private:
 	bool faking_middle_mouse_button_;
 
 	/// The current position of the mouse pointer
-	Point mouse_position_;
+	Vector2i mouse_position_;
 
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
 	bool mouse_locked_;
 
-	/// If the mouse needs to be moved in warp_mouse(), this Point is
+	/// If the mouse needs to be moved in warp_mouse(), this Vector2i is
 	/// used to cancel the resulting SDL_MouseMotionEvent.
-	Point mouse_compensate_warp_;
+	Vector2i mouse_compensate_warp_;
 
 	/// true if an external entity wants us to quit
 	bool should_die_;
@@ -260,6 +260,9 @@ private:
 	/// Absolute path to the data directory.
 	std::string datadir_;
 	std::string datadir_for_testing_;
+
+	/// Prevent toggling fullscreen on and off from flickering
+	uint32_t last_resolution_change_;
 
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,15 @@
 
 #include <string>
 
+#include "ui_basic/fullscreen_window.h"
 #include "ui_basic/panel.h"
 
 /**
  * This class is the base class for a fullscreen menu.
- * A fullscreen menu is a menu which takes the full screen; it has the size
- * MENU_XRES and MENU_YRES and is a modal UI Element
+ * A fullscreen menu is a menu which takes the full screen
+ * and it is a modal UI Element
  */
-class FullscreenMenuBase : public UI::Panel {
+class FullscreenMenuBase : public UI::FullscreenWindow {
 public:
 	enum class MenuTarget {
 		kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
@@ -65,17 +66,9 @@ public:
 		kJoingame
 	};
 
-	/// Calls FullscreenMenuBase(const std::string& bgpic)
-	/// with a default background image
+	/// A full screen main menu outside of the game/editor itself.
 	FullscreenMenuBase();
-	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
-
-	void draw(RenderTarget&) override;
-
-	///\return the size for texts fitting to current resolution
-	int fs_small();
-	int fs_big();
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
@@ -83,9 +76,6 @@ public:
 protected:
 	virtual void clicked_back();
 	virtual void clicked_ok();
-
-private:
-	std::string background_image_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

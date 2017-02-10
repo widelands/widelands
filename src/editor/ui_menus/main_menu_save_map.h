@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ protected:
 
 private:
 	EditorInteractive& eia();
-	void clicked_ok();
+	void clicked_ok() override;
 	void clicked_make_directory();
 	void clicked_edit_options();
 	void clicked_item();

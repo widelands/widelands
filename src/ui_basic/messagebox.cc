@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,8 +71,9 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
 	}
 
-	textarea_.reset(new MultilineTextarea(
-	   this, margin, margin, width - 2 * margin, height, text, align, scrollmode));
+	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height, text,
+	                                      align, g_gr->images().get("images/ui_basic/but1.png"),
+	                                      scrollmode));
 
 	// Now add the buttons
 	const int button_y = textarea_->get_y() + textarea_->get_h() + 2 * margin;

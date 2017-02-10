@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(InteractiveGameBase& igbase, bool avoid_fastclick, Point pos) {
+void Building::show_options(InteractiveGameBase& igbase, bool avoid_fastclick, Vector2i pos) {
 	if (optionswindow_) {
 		if (optionswindow_->is_minimal())
 			optionswindow_->restore();
@@ -66,7 +66,7 @@ void Building::hide_options() {
 void Building::refresh_options(InteractiveGameBase& igb) {
 	// Only do something if there is actually a window
 	if (optionswindow_) {
-		Point window_position = optionswindow_->get_pos();
+		Vector2i window_position = optionswindow_->get_pos();
 		hide_options();
 		show_options(igb, true);
 		optionswindow_->set_pos(window_position);

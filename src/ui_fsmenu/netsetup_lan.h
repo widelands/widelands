@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,8 @@ protected:
 	void clicked_ok() override;
 
 private:
+	void layout() override;
+
 	uint32_t butx_;
 	uint32_t butw_;
 	uint32_t buth_;

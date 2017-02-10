@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -305,7 +305,7 @@ void Map::create_empty_map(const World& world,
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
-	set_scenario_player_tribe(1, Tribes::get_all_tribenames()[0]);
+	set_scenario_player_tribe(1, Widelands::get_all_tribenames()[0]);
 	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);

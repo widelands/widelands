@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_ALIGN_H
 #define WL_GRAPHIC_ALIGN_H
 
-#include "base/point.h"
+#include "base/vector.h"
 
 namespace UI {
 
@@ -58,6 +58,6 @@ inline Align operator|(Align a, Align b) {
 }
 
 Align mirror_alignment(Align alignment);
-void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
+void correct_for_align(Align, uint32_t w, uint32_t h, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,8 @@ protected:
 	void fill_table() override;
 
 private:
+	void layout() override;
+
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);

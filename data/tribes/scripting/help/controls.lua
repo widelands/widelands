@@ -56,11 +56,13 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 0-9")), _"Remember and go to previously remembered locations") ..
-               -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey(","), _"Go to the previous location") ..
-               -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey("."), _"Go to the next location") ..
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 1-9")), _"Remember and go to previously remembered locations") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) +")), _"Increase zoom") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) -")), _"Decrease zoom") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "(Ctrl +) 0")), _"Reset zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
                toggle_fullscreen_hotkey ..

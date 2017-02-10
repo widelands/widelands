@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
 
 namespace Widelands {
@@ -144,7 +145,11 @@ protected:
 	void init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
+	void draw(uint32_t gametime,
+	          TextToDraw draw_text,
+	          const Vector2f& point_on_dst,
+	          float scale,
+	          RenderTarget* dst) override;
 
 	void wake_up_capacity_queue(Game&);
 

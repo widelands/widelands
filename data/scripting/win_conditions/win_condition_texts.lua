@@ -22,5 +22,6 @@ lost_game_over = {
 
 game_status = {
   title = _"Status",
+  -- TRANSLATORS: This is an overview for all players.
   body = h3(_"Player overview:")
 }

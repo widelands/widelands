@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2009 by the Widelands Development Team
+ * Copyright (C) 2005-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,7 @@ namespace {
 
 constexpr int kDefaultMusicVolume = 64;
 constexpr int kDefaultFxVolume = 128;
+constexpr int kNumMixingChannels = 32;
 
 void report_initalization_error(const char* msg) {
 	log("WARNING: Failed to initialize sound system: %s\n", msg);
@@ -127,6 +128,10 @@ void SoundHandler::init() {
 	if ((initted & kMixInitFlags) != kMixInitFlags) {
 		initialization_error("No Ogg support in SDL_Mixer.");
 		return;
+	}
+
+	if (Mix_AllocateChannels(kNumMixingChannels) != kNumMixingChannels) {
+		initialization_error(Mix_GetError());
 	}
 
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
@@ -309,29 +314,12 @@ int32_t SoundHandler::stereo_position(Widelands::Coords const position_map) {
 
 	// Viewpoint is the point of the map in pixel which is shown in the upper
 	// left corner of window or fullscreen
-	const InteractiveBase& ibase = *egbase_->get_ibase();
-	Point const vp = ibase.get_viewpoint();
-
-	// Resolution of window or fullscreen
-	int32_t const xres = g_gr->get_xres();
-	int32_t const yres = g_gr->get_yres();
-
-	// Get pixel coordinates of sound source from map coordinates
-	Point position_pix;
-	MapviewPixelFunctions::get_pix(egbase_->map(), position_map, position_pix.x, position_pix.y);
-
-	// Adjust pixel coordinates to viewpoint
-	position_pix.x -= vp.x;
-	position_pix.y -= vp.y;
-	// Normalizing correct invalid pixel coordinates
-	MapviewPixelFunctions::normalize_pix(egbase_->map(), position_pix);
-
-	// Make sure position is inside viewport
-	if (position_pix.x >= 0 && position_pix.x <= xres && position_pix.y >= 0 &&
-	    position_pix.y <= yres)
-		return position_pix.x * 254 / xres;
-
-	return -1;
+	const MapView::ViewArea view_area = egbase_->get_ibase()->view_area();
+	if (!view_area.contains(position_map)) {
+		return -1;
+	}
+	const Vector2f position_pix = view_area.move_inside(position_map);
+	return static_cast<int>((position_pix.x - view_area.rect().x) * 254 / view_area.rect().w);
 }
 
 /** Find out whether to actually play a certain effect right now or rather not
@@ -461,9 +449,9 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx()) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
-		if (chan == -1)
-			log("SoundHandler: Mix_PlayChannel failed\n");
-		else {
+		if (chan == -1) {
+			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
+		} else {
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());
 

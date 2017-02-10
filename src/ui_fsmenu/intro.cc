@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include "base/i18n.h"
 
 FullscreenMenuIntro::FullscreenMenuIntro()
-   : FullscreenMenuBase("images/loadscreens/splash.jpg"),
+   : FullscreenMenuBase(),
 
      // Text area
      message_(this,
@@ -32,14 +32,11 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               UI::Align::kHCenter) {
 	message_.set_fontsize(fs_small() * 6 / 5);
 	message_.set_color(RGBColor(192, 192, 128));
+	add_overlay_image("images/loadscreens/splash.jpg", UI::Align::kCenter);
 }
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
-
-	return true;
-}
-bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return true;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -64,9 +64,6 @@ struct AttackController;
  */
 class Player {
 public:
-	// hard-coded playercolors
-	static const RGBColor Colors[MAX_PLAYERS];
-
 	struct BuildingStats {
 		bool is_constructionsite;
 		Coords pos;
@@ -130,7 +127,7 @@ public:
 		return team_number_;
 	}
 	const RGBColor& get_playercolor() const {
-		return Colors[player_number_ - 1];
+		return kPlayerColors[player_number_ - 1];
 	}
 	const TribeDescr& tribe() const {
 		return tribe_;
@@ -524,6 +521,8 @@ public:
 	uint32_t get_nr_economies() const {
 		return economies_.size();
 	}
+
+	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable&, Soldier&);

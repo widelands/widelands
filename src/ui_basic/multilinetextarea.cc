@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,14 +38,16 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const uint32_t h,
                                      const std::string& text,
                                      const Align align,
+                                     const Image* button_background,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
      color_(UI_FONT_CLR_FG),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
-     scrollmode_(scroll_mode) {
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
+     scrollmode_(scroll_mode),
+     pic_background_(nullptr) {
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
 
@@ -55,8 +57,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(
-	   UI::g_fh1
-	      ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
+	   UI::g_fh1->render(
+	               as_uifont(UI::g_fh1->fontset()->representative_character(), UI_FONT_SIZE_SMALL))
 	      ->height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
@@ -134,7 +136,7 @@ void MultilineTextarea::layout() {
 	recompute();
 
 	// Take care of the scrollbar
-	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
+	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
 }
@@ -143,8 +145,11 @@ void MultilineTextarea::layout() {
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
+	if (pic_background_) {
+		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i(0, 0));
+	}
 	if (use_old_renderer_) {
-		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
+		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
 		const Image* text_im;
 		if (!is_richtext(text_)) {
@@ -157,7 +162,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
 
 		if (blit_width > 0 && blit_height > 0) {
-			int32_t anchor = 0;
+			int anchor = 0;
 			Align alignment = mirror_alignment(align_);
 			switch (alignment & UI::Align::kHorizontal) {
 			case UI::Align::kHCenter:
@@ -170,9 +175,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = RICHTEXT_MARGIN;
 			}
 
-			dst.blitrect_scale(Rect(anchor, 0, blit_width, blit_height), text_im,
-			                   Rect(0, scrollbar_.get_scrollpos(), blit_width, blit_height), 1.,
-			                   BlendMode::UseAlpha);
+			dst.blitrect(Vector2f(anchor, 0), text_im,
+			             Recti(0, scrollbar_.get_scrollpos(), blit_width, blit_height),
+			             BlendMode::UseAlpha);
 		}
 	}
 }
@@ -183,6 +188,10 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
+}
+
+void MultilineTextarea::set_background(const Image* background) {
+	pic_background_ = background;
 }
 
 std::string MultilineTextarea::make_richtext() {

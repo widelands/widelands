@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,10 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 
 }  // namespace
 
+/**
+ * The contents of 'table' are documented in
+ * /data/tribes/ships/atlanteans/init.lua
+ */
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
@@ -125,15 +129,11 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr),
-     window_(nullptr),
-     fleet_(nullptr),
-     economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
-	close_window();
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kClose));
 }
 
 PortDock* Ship::get_destination(EditorGameBase& egbase) const {
@@ -623,7 +623,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
-					WaresQueue& wq = cs->waresqueue(ware->descr_index());
+					WaresQueue& wq =
+					   dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
 					const uint32_t cur = wq.get_filled();
 
 					// This is to help to debug the situation when colonization fails
@@ -680,8 +681,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 			expedition_.reset(nullptr);
 
-			if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-				refresh_window(*igb);
+			Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 			return start_task_idle(game, descr().main_animation(), 1500);
 		}
 	}
@@ -743,7 +743,7 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 /**
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) {
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) const {
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.swim_ = true;
@@ -847,7 +847,7 @@ void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
 	expedition_->island_exploration = false;
 }
 
-WalkingDir Ship::get_scouting_direction() {
+WalkingDir Ship::get_scouting_direction() const {
 	if (expedition_ && ship_state_ == ShipStates::kExpeditionScouting &&
 	    !expedition_->island_exploration) {
 		return expedition_->scouting_direction;
@@ -882,7 +882,7 @@ void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direc
 	expedition_->island_exploration = true;
 }
 
-IslandExploreDirection Ship::get_island_explore_direction() {
+IslandExploreDirection Ship::get_island_explore_direction() const {
 	if (expedition_ && ship_state_ == ShipStates::kExpeditionScouting &&
 	    expedition_->island_exploration) {
 		return expedition_->island_explore_direction;
@@ -926,8 +926,7 @@ void Ship::exp_cancel(Game& game) {
 	expedition_.reset(nullptr);
 
 	// And finally update our ship window
-	if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-		refresh_window(*igb);
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kRefresh));
 }
 
 /// Sinks the ship
@@ -936,19 +935,22 @@ void Ship::sink_ship(Game& game) {
 	// Running colonization has the highest priority + a sink request is only valid once
 	if (!state_is_sinkable())
 		return;
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kClose));
 	ship_state_ = ShipStates::kSinkRequest;
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
-	close_window();
 }
 
-void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
-	Bob::draw(game, dst, pos);
+void Ship::draw(const EditorGameBase& egbase,
+                const TextToDraw& draw_text,
+                const Vector2f& field_on_dst,
+                const float scale,
+                RenderTarget* dst) const {
+	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
 
 	// Show ship name and current activity
-	uint32_t const display_flags = game.get_ibase()->get_display_flags();
 	std::string statistics_string = "";
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if (draw_text & TextToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -980,9 +982,8 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 		                       .str();
 	}
 
-	do_draw_info(display_flags & InteractiveBase::dfShowCensus, shipname_,
-	             display_flags & InteractiveBase::dfShowStatistics, statistics_string, dst,
-	             calc_drawpos(game, pos));
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	             scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {
@@ -1176,7 +1177,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				if (packet_version < 5) {
 					std::string tribe_name = fr.string();
 					fr.c_string();  // This used to be the ship's name, which we don't need any more.
-					if (!(egbase.tribes().tribe_exists(tribe_name))) {
+					if (!Widelands::tribe_exists(tribe_name)) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
 					}
 					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);

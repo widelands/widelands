@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,8 +43,7 @@ struct IconGridButton : public Button {
 	            background_picture_id,
 	            foreground_picture_id,
 	            tooltip_text,
-	            true,
-	            true),
+	            UI::Button::Style::kFlat),
 	     icongrid_(parent),
 	     callback_argument_id_(callback_argument_id) {
 	}

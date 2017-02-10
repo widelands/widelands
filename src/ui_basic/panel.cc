@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -190,9 +190,9 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit(app->get_mouse_position() - Point(3, 7), WLApplication::get()->is_mouse_pressed() ?
-			                                                    default_cursor_click_ :
-			                                                    default_cursor_);
+			rt.blit(
+			   (app->get_mouse_position() - Vector2i(3, 7)).cast<float>(),
+			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
@@ -252,7 +252,7 @@ void Panel::set_size(const int nw, const int nh) {
 /**
  * Move the panel. Panel's position is relative to the parent.
  */
-void Panel::set_pos(const Point n) {
+void Panel::set_pos(const Vector2i n) {
 	x_ = n.x;
 	y_ = n.y;
 }
@@ -320,11 +320,11 @@ bool Panel::get_layout_toplevel() const {
  * and translate it into the interior coordinate system of the parent
  * and return the result.
  */
-Point Panel::to_parent(const Point& pt) const {
+Vector2i Panel::to_parent(const Vector2i& pt) const {
 	if (!parent_)
 		return pt;
 
-	return pt + Point(lborder_ + x_, tborder_ + y_);
+	return pt + Vector2i(lborder_ + x_, tborder_ + y_);
 }
 
 /**
@@ -447,16 +447,16 @@ void Panel::do_think() {
 /**
  * Get mouse position relative to this panel
 */
-Point Panel::get_mouse_position() const {
+Vector2i Panel::get_mouse_position() const {
 	return (parent_ ? parent_->get_mouse_position() : WLApplication::get()->get_mouse_position()) -
-	       Point(get_x() + get_lborder(), get_y() + get_tborder());
+	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
 /**
  * Set mouse position relative to this panel
 */
-void Panel::set_mouse_pos(const Point p) {
-	const Point relative_p = p + Point(get_x() + get_lborder(), get_y() + get_tborder());
+void Panel::set_mouse_pos(const Vector2i p) {
+	const Vector2i relative_p = p + Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 	if (parent_)
 		parent_->set_mouse_pos(relative_p);
 	else
@@ -467,7 +467,7 @@ void Panel::set_mouse_pos(const Point p) {
  * Center the mouse on this panel.
 */
 void Panel::center_mouse() {
-	set_mouse_pos(Point(get_w() / 2, get_h() / 2));
+	set_mouse_pos(Vector2i(get_w() / 2, get_h() / 2));
 }
 
 /**
@@ -728,16 +728,16 @@ void Panel::do_draw(RenderTarget& dst) {
 	if (!is_visible())
 		return;
 
-	Rect outerrc;
-	Point outerofs;
+	Recti outerrc;
+	Vector2i outerofs;
 
-	if (!dst.enter_window(Rect(Point(x_, y_), w_, h_), &outerrc, &outerofs))
+	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
 
 	draw_border(dst);
 
-	Rect innerwindow(
-	   Point(lborder_, tborder_), w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
+	Recti innerwindow(
+	   Vector2i(lborder_, tborder_), w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
 
 	if (dst.enter_window(innerwindow, nullptr, nullptr))
 		do_draw_inner(dst);
@@ -804,7 +804,7 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	return handle_mousepress(btn, x, y);
 }
 
-bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos) {
+bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
 
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child; child = child->next_) {
@@ -819,8 +819,8 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_
 		}
 		// Found a child at the position
 		if (child->do_mousewheel(
-		       which, x, y, rel_mouse_pos - Point(child->get_x() + child->get_lborder(),
-		                                          child->get_y() + child->get_tborder()))) {
+		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                             child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 		// Break after the first hit panel in the list. The panels are ordered from top to bottom,
@@ -1051,9 +1051,9 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	uint16_t tip_width = rendered_text->width() + 4;
 	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rect r(WLApplication::get()->get_mouse_position() + Point(2, 32), tip_width, tip_height);
-	const Point tooltip_bottom_right = r.opposite_of_origin();
-	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	Rectf r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	const Vector2f tooltip_bottom_right = r.opposite_of_origin();
+	const Vector2f screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
@@ -1061,7 +1061,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Point(2, 2), rendered_text);
+	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
 	return true;
 }
 }

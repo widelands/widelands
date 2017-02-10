@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,13 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-     teams_list_(&teams_box_, 0, 0, max_w_, 60, true),
+     teams_list_(&teams_box_,
+                 0,
+                 0,
+                 max_w_,
+                 60,
+                 g_gr->images().get("images/ui_basic/but1.png"),
+                 UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
 
@@ -96,8 +102,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	// height.
 	hint_ =
 	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
-	                            "", g_gr->images().get("images/ui_basic/but1.png"));
+	                            "", g_gr->images().get("images/ui_basic/but1.png"),
+	                            g_gr->images().get("images/ui_basic/but1.png"));
 	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), "",
+	                                  g_gr->images().get("images/ui_basic/but1.png"),
 	                                  g_gr->images().get("images/ui_basic/but1.png"));
 
 	main_box_.add(
@@ -227,7 +235,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           std::string tag,
                                           std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Point(0, 0), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
 	box->add(cb, UI::Align::kLeft, true);
 	box->add_space(checkbox_space_);
 	parent->add(box, UI::Align::kLeft);

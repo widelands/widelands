@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,14 @@ void Box::set_min_desired_breadth(uint32_t min) {
 
 	mindesiredbreadth_ = min;
 	update_desired_size();
+}
+
+/**
+ * Sets the value for the inner spacing.
+ * \note This does not relayout the box.
+ */
+void Box::set_inner_spacing(uint32_t size) {
+	inner_spacing_ = size;
 }
 
 /**
@@ -166,10 +174,12 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, orientation_ == Horizontal));
+			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h,
+			                               g_gr->images().get("images/ui_basic/but3.png"),
+			                               orientation_ == Horizontal));
 			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
-			scrollbar_->set_pos(Point(sb_x, sb_y));
+			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
 			scrollbar_->set_size(sb_w, sb_h);
 		}
 		scrollbar_->set_steps(totaldepth - pagesize);
@@ -198,7 +208,7 @@ void Box::layout() {
 			infspace_count--;
 		}
 
-	// Forth pass: Update positions of all other items
+	// Fourth pass: Update positions of all other items
 	update_positions();
 }
 
@@ -379,9 +389,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		}
 
 		if (orientation_ == Horizontal)
-			it.u.panel.panel->set_pos(Point(pos, breadth));
+			it.u.panel.panel->set_pos(Vector2i(pos, breadth));
 		else
-			it.u.panel.panel->set_pos(Point(breadth, pos));
+			it.u.panel.panel->set_pos(Vector2i(breadth, pos));
 		break;
 	}
 

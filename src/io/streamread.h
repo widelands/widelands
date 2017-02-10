@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,7 @@ public:
 	uint16_t unsigned_16();
 	int32_t signed_32();
 	uint32_t unsigned_32();
+	float float_32();
 	std::string string();
 	virtual char const* c_string() {
 		throw;

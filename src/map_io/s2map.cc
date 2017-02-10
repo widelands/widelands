@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -585,7 +585,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = world.get_bob(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.get_critter(bobname.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
@@ -724,7 +724,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
-		egbase.create_immovable(location, idx, Widelands::MapObjectDescr::OwnerType::kWorld);
+		egbase.create_immovable(
+		   location, idx, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	};
 
 	uint8_t c;

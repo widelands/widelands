@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,10 +51,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               butw_,
               buth_,
               g_gr->images().get("images/ui_basic/but1.png"),
-              _("Join this game"),
-              std::string(),
-              true,
-              false),
+              _("Join this game")),
      hostgame(this,
               "host_game",
               get_w() * 16 / 25,
@@ -62,10 +59,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               butw_,
               buth_,
               g_gr->images().get("images/ui_basic/but1.png"),
-              _("Host a new game"),
-              std::string(),
-              true,
-              false),
+              _("Host a new game")),
      back(this,
           "back",
           get_w() * 16 / 25,
@@ -73,10 +67,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
           butw_,
           buth_,
           g_gr->images().get("images/ui_basic/but0.png"),
-          _("Back"),
-          std::string(),
-          true,
-          false),
+          _("Back")),
      loadlasthost(this,
                   "load_previous_host",
                   get_w() * 171 / 200,
@@ -85,9 +76,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                   buth_,
                   g_gr->images().get("images/ui_basic/but1.png"),
                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
-                  _("Load previous host"),
-                  true,
-                  false),
+                  _("Load previous host")),
 
      // Edit boxes
      playername(this,
@@ -133,6 +122,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	discovery.set_callback(discovery_callback, this);
 
 	joingame.set_enabled(false);
+}
+
+void FullscreenMenuNetSetupLAN::layout() {
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 void FullscreenMenuNetSetupLAN::think() {

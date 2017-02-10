@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <cassert>
 #include <limits>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/nodecaps.h"
 #include "logic/roadtype.h"
 #include "logic/widelands.h"
@@ -145,12 +145,12 @@ struct Field {
 	 * be done separately.
 	 */
 	void set_owned_by(const PlayerNumber n) {
-		assert(n <= MAX_PLAYERS);
+		assert(n <= kMaxPlayers);
 		owner_info_and_selections = n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
 	PlayerNumber get_owned_by() const {
-		assert((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
+		assert((owner_info_and_selections & Player_Number_Bitmask) <= kMaxPlayers);
 		return owner_info_and_selections & Player_Number_Bitmask;
 	}
 	bool is_border() const {
@@ -229,7 +229,7 @@ private:
 	static const OwnerInfoAndSelectionsType Player_Number_Bitmask = Border_Bitmask - 1;
 	static const OwnerInfoAndSelectionsType Owner_Info_Bitmask =
 	   Player_Number_Bitmask + Border_Bitmask;
-	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
+	static_assert(kMaxPlayers <= Player_Number_Bitmask, "Bitmask is too big.");
 
 	// Data Members
 	/** linked list, \sa Bob::linknext_ */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -34,9 +36,9 @@ class World;
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
- * modify height, place bob, place critter, place building. A Tool only makes
- * one function (like delete_building, place building, modify building are 3
- * tools).
+ * modify height, place immovable, place critter, place building. A Tool only
+ * makes one function (like delete_building, place building, modify building
+ * are 3 tools).
  */
 class EditorTool {
 public:
@@ -67,7 +69,7 @@ public:
 		   .handle_undo_impl(world, center, parent, args, map);
 	}
 
-	const char* get_sel(const ToolIndex i) {
+	const Image* get_sel(const ToolIndex i) {
 		return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
 	}
 
@@ -96,13 +98,13 @@ public:
 	                                 Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const char* get_sel_impl() const = 0;
+	virtual const Image* get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {
 		return false;
 	}
 
 protected:
-	EditorTool& second_, &third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@ namespace UI {
  * Initialize the radiobutton and link it into the group's linked list
 */
 Radiobutton::Radiobutton(
-   Panel* const parent, Point const p, const Image* pic, Radiogroup& group, int32_t const id)
+   Panel* const parent, Vector2i const p, const Image* pic, Radiogroup& group, int32_t const id)
    : Statebox(parent, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
 	group.buttons_ = this;
 }
@@ -86,7 +86,7 @@ Radiogroup::~Radiogroup() {
  * Returns the ID of the new button.
 */
 int32_t Radiogroup::add_button(Panel* const parent,
-                               Point const p,
+                               Vector2i const p,
                                const Image* pic,
                                const std::string& tooltip,
                                Radiobutton** ret_btn) {

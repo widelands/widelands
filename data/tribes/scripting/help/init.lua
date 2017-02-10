@@ -42,7 +42,7 @@ end
 
 -- Main function
 return {
-   func = function(tribename)
+   func = function(tribename, game_type)
       set_textdomain("tribes_encyclopedia")
       return {
          title = _"Tribal Encyclopedia",
@@ -64,6 +64,12 @@ return {
                      title = _"Controls",
                      script = "tribes/scripting/help/controls.lua",
                      script_parameters = {}
+                  },
+                  {
+                     name = "tips",
+                     title = _"Tips",
+                     script = "tribes/scripting/help/tips.lua",
+                     script_parameters = {tribename, game_type}
                   }
                }
             },

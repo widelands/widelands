@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ int32_t const h_space = 3;
  * rectangular bounding box.
  */
 struct Element {
-	explicit Element(const Rect& bounding_box) : bbox(bounding_box) {
+	explicit Element(const Recti& bounding_box) : bbox(bounding_box) {
 	}
 	virtual ~Element() {
 	}
@@ -52,23 +52,23 @@ struct Element {
 	 */
 	virtual void draw(RenderTarget& dst) = 0;
 
-	Rect bbox;
+	Recti bbox;
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect& bounding_box, const Image* init_image)
+	ImageElement(const Recti& bounding_box, const Image* init_image)
 	   : Element(bounding_box), image(init_image) {
 	}
 
 	void draw(RenderTarget& dst) override {
-		dst.blit(Point(0, 0), image);
+		dst.blit(Vector2f(0, 0), image);
 	}
 
 	const Image* image;
 };
 
 struct TextlineElement : Element {
-	TextlineElement(const Rect& bounding_box,
+	TextlineElement(const Recti& bounding_box,
 	                const TextStyle& init_style,
 	                std::vector<std::string>::const_iterator words_begin,
 	                std::vector<std::string>::const_iterator words_end)
@@ -107,16 +107,16 @@ struct TextlineElement : Element {
 			}
 		}
 		// Now render
-		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), result_words[0]);
+		uint32_t x = g_fh->draw_text_raw(dst, style, Vector2i(0, 0), result_words[0]);
 
 		it = result_words.begin() + 1;
 		if (it != result_words.end()) {
 			do {
 				if (style.underline)
-					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+					x += g_fh->draw_text_raw(dst, style, Vector2i(x, 0), " ");
 				else
 					x += spacewidth;
-				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
+				x += g_fh->draw_text_raw(dst, style, Vector2i(x, 0), *it++);
 			} while (it != result_words.end());
 		}
 	}
@@ -357,7 +357,7 @@ void RichText::parse(const std::string& rtext) {
 			if (!image)
 				continue;
 
-			Rect bbox;
+			Recti bbox;
 			bbox.x = text.images_width;
 			bbox.y = m->height;
 			bbox.w = image->width();
@@ -423,7 +423,7 @@ void RichText::parse(const std::string& rtext) {
 				TextBuilder::Elt elt;
 				elt.miny = elt.maxy = 0;
 
-				Rect bbox;
+				Recti bbox;
 				bbox.x = text.linewidth ? text.linewidth + text.spacewidth : 0;
 				bbox.y = 0;  // filled in later
 				bbox.w = 0;
@@ -486,16 +486,16 @@ void RichText::parse(const std::string& rtext) {
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget& dst, const Point& offset, bool background) {
+void RichText::draw(RenderTarget& dst, const Vector2i& offset, bool background) {
 	for (std::vector<Element*>::const_iterator elt = m->elements.begin(); elt != m->elements.end();
 	     ++elt) {
-		Rect oldbox;
-		Point oldofs;
-		Rect bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
+		Recti oldbox;
+		Vector2i oldofs;
+		Recti bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)
-				dst.fill_rect(Rect(Point(0, 0), bbox.w, bbox.h), m->background_color);
+				dst.fill_rect(Rectf(0.f, 0.f, bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

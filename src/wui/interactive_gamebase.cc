@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
+#include "wui/shipwindow.h"
 
 namespace {
 
@@ -49,20 +50,11 @@ std::string speed_string(int const speed) {
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const chatenabled,
                                          bool const multiplayer)
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
-     chatenabled_(chatenabled),
      multiplayer_(multiplayer),
-     playertype_(pt),
-
-#define INIT_BTN(picture, name, tooltip)                                                           \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name), g_gr->images().get("images/" picture ".png"), tooltip
-
-     toggle_buildhelp_(INIT_BTN(
-        "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))) {
-	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+     playertype_(pt) {
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -77,8 +69,6 @@ Widelands::Game& InteractiveGameBase::game() const {
 void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
 	chat_provider_ = &chat;
 	chat_overlay_->set_chat_provider(chat);
-
-	chatenabled_ = true;
 }
 
 ChatProvider* InteractiveGameBase::get_chat_provider() {
@@ -107,7 +97,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			dst.blit(Point(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
+			dst.blit(Vector2f(get_w() - 5, 5), UI::g_fh1->render(game_speed), BlendMode::UseAlpha,
 			         UI::Align::kTopRight);
 		}
 	}
@@ -121,7 +111,7 @@ void InteractiveGameBase::postload() {
 	Widelands::Map& map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	toggle_buildhelp_.set_perm_pressed(buildhelp());
+	on_buildhelp_changed(buildhelp());
 
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
@@ -130,14 +120,12 @@ void InteractiveGameBase::postload() {
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete fieldaction_.window;
-	fieldaction_.window = nullptr;
-
+	fieldaction_.destroy();
 	hide_minimap();
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_.set_perm_pressed(value);
+	toggle_buildhelp_->set_perm_pressed(value);
 }
 
 /**
@@ -158,7 +146,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				ship->show_window(*this);
+				new ShipWindow(*this, *ship);
 				return true;
 			}
 		}

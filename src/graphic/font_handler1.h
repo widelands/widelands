@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/text/font_set.h"
 

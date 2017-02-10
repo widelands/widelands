@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,12 @@ Align mirror_alignment(Align alignment) {
 	return alignment;
 }
 
-void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
+void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
+	// When correcting for align, we never move from pixel boundaries to
+	// sub-pixels, because this might lead from pixel-perfect rendering to
+	// subsampled rendering - this can lead to blurry texts. That is why we
+	// never do float divisions in this function.
+
 	// Vertical Align
 	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
 		if (static_cast<int>(align & Align::kVCenter))

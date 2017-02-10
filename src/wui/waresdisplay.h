@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ protected:
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
 	const Widelands::TribeDescr::WaresOrderCoords& icons_order_coords() const;
-	virtual Point ware_position(Widelands::DescriptionIndex) const;
+	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
 

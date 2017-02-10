@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -50,7 +49,7 @@ void MapExplorationPacket::read(FileSystem& fs,
 		}
 	}
 
-	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
+	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
@@ -82,7 +81,7 @@ void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
+	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();

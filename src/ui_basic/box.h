@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,6 +62,7 @@ struct Box : public Panel {
 	}
 
 	void set_min_desired_breadth(uint32_t min);
+	void set_inner_spacing(uint32_t size);
 
 protected:
 	void layout() override;

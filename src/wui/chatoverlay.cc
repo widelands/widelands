@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,12 +183,10 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	const int width = std::min<int>(get_w(), im->width());
 
 	if (!m->transparent_) {
-		Rect rect(0, top, width, height);
-		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128), BlendMode::Default);
+		dst.fill_rect(Rectf(0, top, width, height), RGBAColor(50, 50, 50, 128), BlendMode::Default);
 	}
 	int32_t topcrop = im->height() - height;
-	Rect cropRect(0, topcrop, width, height);
+	Recti cropRect(0, topcrop, width, height);
 
-	Point pt(0, top);
-	dst.blitrect(pt, im, cropRect);
+	dst.blitrect(Vector2f(0, top), im, cropRect);
 }

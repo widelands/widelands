@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,8 +176,15 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const EditorGameBase&, RenderTarget&, const Point&) const;
-	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
+	void draw_inner(const EditorGameBase& game,
+	                const Vector2f& point_on_dst,
+	                const float scale,
+	                RenderTarget* dst) const;
+	void draw(const EditorGameBase&,
+	          const TextToDraw& draw_text,
+	          const Vector2f& field_on_dst,
+	          float scale,
+	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
 
 	bool does_carry_ware() {

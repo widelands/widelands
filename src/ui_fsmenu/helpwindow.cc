@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,12 +48,11 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	Button* btn =
-	   new Button(this, "ok", width / 3, 0, width / 3, 0,
-	              g_gr->images().get("images/ui_basic/but5.png"), _("OK"), "", true, false);
+	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
+	                         g_gr->images().get("images/ui_basic/but5.png"), _("OK"));
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
-	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
+	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
 
 	std::string helptext;
 	try {
@@ -82,12 +81,9 @@ bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
+		return true;
 	}
-	return true;
-}
-
-bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t) {
-	return true;
+	return false;
 }
 
 bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {

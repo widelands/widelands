@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,10 @@
 
 namespace Widelands {
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -76,9 +80,15 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-WaresQueue& ConstructionSite::waresqueue(DescriptionIndex const wi) {
+InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	// There are no worker queues here
+	// Hopefully, our construction sites are safe enough not to kill workers
+	if (type != wwWARE) {
+		throw wexception("%s (%u) (building %s) has no WorkersQueues", descr().name().c_str(),
+		                 serial(), building_->name().c_str());
+	}
 	for (WaresQueue* ware : wares_) {
-		if (ware->get_ware() == wi) {
+		if (ware->get_index() == wi) {
 			return *ware;
 		}
 	}
@@ -153,7 +163,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		}
 		// Open the new building window if needed
 		if (optionswindow_) {
-			Point window_position = optionswindow_->get_pos();
+			Vector2i window_position = optionswindow_->get_pos();
 			hide_options();
 			InteractiveGameBase& igbase = dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
 			b.show_options(igbase, false, window_position);
@@ -236,8 +246,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		WaresQueue* queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;
@@ -256,7 +266,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update consumption statistic
-			owner().ware_consumed(wq.get_ware(), 1);
+			owner().ware_consumed(wq.get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -278,13 +288,11 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 /*
 ===============
-Called by WaresQueue code when an ware has arrived
+Called by InputQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(Game& game,
-                                            WaresQueue*,
-                                            DescriptionIndex,
-                                            void* const data) {
+void ConstructionSite::wares_queue_callback(
+   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_)
@@ -297,19 +305,15 @@ void ConstructionSite::wares_queue_callback(Game& game,
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw(const EditorGameBase& game,
-                            RenderTarget& dst,
-                            const FCoords& coords,
-                            const Point& pos) {
-	const uint32_t gametime = game.get_gametime();
+void ConstructionSite::draw(uint32_t gametime,
+                            TextToDraw draw_text,
+                            const Vector2f& point_on_dst,
+                            float scale,
+                            RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-
-	if (coords != position_)
-		return;  // draw big buildings only once
-
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst.blit_animation(pos, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -324,7 +328,6 @@ void ConstructionSite::draw(const EditorGameBase& game,
 	}
 
 	uint32_t anim_idx;
-	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
 	} catch (MapObjectDescr::AnimationNonexistent&) {
@@ -336,45 +339,32 @@ void ConstructionSite::draw(const EditorGameBase& game,
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
-	// Redefine tanim
+	const uint32_t cur_frame =
+	   info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	tanim = cur_frame * FRAME_LENGTH;
 
-	const uint16_t w = anim.width();
-	const uint16_t h = anim.height();
-
-	uint32_t lines = h * info_.completedtime * nr_frames;
-	if (info_.totaltime)
-		lines /= info_.totaltime;
-	assert(h * cur_frame <= lines);
-	lines -= h * cur_frame;  //  This won't work if pictures have various sizes.
-
 	if (cur_frame) {  //  not the first pic
-		//  draw the prev pic from top to where next image will be drawing
-		dst.blit_animation(
-		   pos, anim_idx, tanim - FRAME_LENGTH, player_color, Rect(Point(0, 0), w, h - lines));
+		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
+		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color);
 	} else if (!old_buildings_.empty()) {
 		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		uint32_t prev_building_anim_idx;
-		try {
-			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (MapObjectDescr::AnimationNonexistent&) {
-			prev_building_anim_idx = prev_building->get_animation("idle");
-		}
-		const Animation& prev_building_anim =
-		   g_gr->animations().get_animation(prev_building_anim_idx);
-		dst.blit_animation(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
-		                   Rect(Point(0, 0), prev_building_anim.width(),
-		                        std::min<int>(prev_building_anim.height(), h - lines)));
+		const uint32_t prev_building_anim_idx = prev_building->get_animation(
+		   prev_building->is_animation_known("unoccupied") ? "unoccupied" : "idle");
+		dst->blit_animation(
+		   point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color);
 	}
-
-	assert(lines <= h);
-	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
+	// Now blit a segment of the current construction phase from the bottom.
+	int percent = 100 * info_.completedtime * nr_frames;
+	if (info_.totaltime) {
+		percent /= info_.totaltime;
+	}
+	percent -= 100 * cur_frame;
+	dst->blit_animation(point_on_dst, scale, anim_idx, tanim, player_color, percent);
 
 	// Draw help strings
-	draw_info(game, dst, pos);
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }

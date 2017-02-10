@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,11 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -53,6 +55,10 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
+/**
+  * The contents of 'table' are documented in
+  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
+  */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
@@ -77,8 +83,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// TODO(GunChleoc): This should not be here for Militarysites.
-	// Check if they can inherit from Building directly.
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
@@ -115,16 +119,26 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				if (amount < 1 || 255 < amount) {
 					throw wexception("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
+				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const auto& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					inputs_.push_back(WareAmount(idx, amount));
+					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					throw wexception("tribes do not define a ware type with this name");
+					idx = egbase.tribes().worker_index(ware_name);
+					if (egbase.tribes().worker_exists(idx)) {
+						for (const auto& temp_inputs : input_workers()) {
+							if (temp_inputs.first == idx) {
+								throw wexception("duplicated");
+							}
+						}
+						input_workers_.push_back(WareAmount(idx, amount));
+					} else {
+						throw wexception("tribes do not define a ware or worker type with this name");
+					}
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
@@ -132,55 +146,43 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// Are we only a production site?
-	// If not, we might not have a worker
-	if (table.has_key("working_positions")) {
-		items_table = table.get_table("working_positions");
-		for (const std::string& worker_name : items_table->keys<std::string>()) {
-			int amount = items_table->get_int(worker_name);
-			try {
-				if (amount < 1 || 255 < amount) {
-					throw wexception("count is out of range 1 .. 255");
-				}
-				DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
-				if (egbase.tribes().worker_exists(woi)) {
-					for (const auto& wp : working_positions()) {
-						if (wp.first == woi) {
-							throw wexception("duplicated");
-						}
-					}
-					working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
-				} else {
-					throw wexception("invalid");
-				}
-			} catch (const WException& e) {
-				throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
+	items_table = table.get_table("working_positions");
+	for (const std::string& worker_name : items_table->keys<std::string>()) {
+		int amount = items_table->get_int(worker_name);
+		try {
+			if (amount < 1 || 255 < amount) {
+				throw wexception("count is out of range 1 .. 255");
 			}
+			DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
+			if (egbase.tribes().worker_exists(woi)) {
+				for (const auto& wp : working_positions()) {
+					if (wp.first == woi) {
+						throw wexception("duplicated");
+					}
+				}
+				working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			} else {
+				throw wexception("invalid");
+			}
+		} catch (const WException& e) {
+			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
 	}
 
-	// TODO(SirVer): this mixes militarysite concepts into the production site
-	// - maybe those building should not be in a inheritance relationship.
-	if (working_positions().empty() && !table.has_key("max_soldiers")) {
-		throw wexception("no working/soldier positions");
-	}
-
 	// Get programs
-	if (table.has_key("programs")) {
-		items_table = table.get_table("programs");
-		for (std::string program_name : items_table->keys<std::string>()) {
-			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
-			try {
-				if (programs_.count(program_name)) {
-					throw wexception("this program has already been declared");
-				}
-				std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-				programs_[program_name] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-				                         program_table->get_table("actions"), egbase, this));
-			} catch (const std::exception& e) {
-				throw wexception("program %s: %s", program_name.c_str(), e.what());
+	items_table = table.get_table("programs");
+	for (std::string program_name : items_table->keys<std::string>()) {
+		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		try {
+			if (programs_.count(program_name)) {
+				throw wexception("this program has already been declared");
 			}
+			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(
+			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
+			                         program_table->get_table("actions"), egbase, this));
+		} catch (const std::exception& e) {
+			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 }
@@ -325,13 +327,13 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& /* game */) 
 	}
 }
 
-WaresQueue& ProductionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue* ip_queue : input_queues_) {
-		if (ip_queue->get_ware() == wi) {
+InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+	for (InputQueue* ip_queue : input_queues_) {
+		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -401,10 +403,18 @@ void ProductionSite::calc_statistics() {
 void ProductionSite::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	const BillOfMaterials& inputs = descr().inputs();
-	input_queues_.resize(inputs.size());
-	for (WareRange i(inputs); i; ++i)
+	const BillOfMaterials& input_wares = descr().input_wares();
+	const BillOfMaterials& input_workers = descr().input_workers();
+	input_queues_.resize(input_wares.size() + input_workers.size());
+
+	for (WareRange i(input_wares); i; ++i) {
 		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	}
+
+	for (WareRange i(input_workers); i; ++i) {
+		input_queues_[input_wares.size() + i.i] =
+		   new WorkersQueue(*this, i.current->first, i.current->second);
+	}
 
 	//  Request missing workers.
 	WorkingPosition* wp = working_positions_;
@@ -428,7 +438,7 @@ void ProductionSite::init(EditorGameBase& egbase) {
  */
 void ProductionSite::set_economy(Economy* const e) {
 	if (Economy* const old = get_economy()) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->remove_from_economy(*old);
 		}
 	}
@@ -439,7 +449,7 @@ void ProductionSite::set_economy(Economy* const e) {
 			r->set_economy(e);
 
 	if (e) {
-		for (WaresQueue* ip_queue : input_queues_) {
+		for (InputQueue* ip_queue : input_queues_) {
 			ip_queue->add_to_economy(*e);
 		}
 	}
@@ -464,9 +474,9 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 	}
 
 	// Cleanup the wares queues
-	for (uint32_t i = 0; i < input_queues_.size(); ++i) {
-		input_queues_[i]->cleanup();
-		delete input_queues_[i];
+	for (InputQueue* iq : input_queues_) {
+		iq->cleanup();
+		delete iq;
 	}
 	input_queues_.clear();
 
@@ -796,11 +806,12 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* queue : input_queues_) {
-		if (queue->get_filled() > queue->get_max_fill()) {
+	// Input-workers are coming out by themselves
+	for (InputQueue* queue : input_queues_) {
+		if (queue->get_type() == wwWARE && queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_ware());
-			WareInstance& ware = *new WareInstance(queue->get_ware(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+			WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 			return true;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ bool Worker::run_setbobdescription(Game& game, State& state, const Action& actio
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	state.ivar2 = game.world().get_bob(bob.c_str());
+	state.ivar2 = game.world().get_critter(bob.c_str());
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", bob.c_str());
@@ -774,8 +774,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 
 	Immovable& newimm = game.create_immovable(
 	   pos, state.ivar2, state.svar1 == "tribe" ? MapObjectDescr::OwnerType::kTribe :
-	                                              MapObjectDescr::OwnerType::kWorld);
-	newimm.set_owner(get_owner());
+	                                              MapObjectDescr::OwnerType::kWorld,
+	   get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
 		state.objvar1 = &newimm;
@@ -847,7 +847,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe);
+		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
@@ -2512,25 +2512,37 @@ void Worker::scout_update(Game& game, State& state) {
 	return;
 }
 
-void Worker::draw_inner(const EditorGameBase& game, RenderTarget& dst, const Point& drawpos) const {
+void Worker::draw_inner(const EditorGameBase& game,
+                        const Vector2f& point_on_dst,
+                        const float scale,
+                        RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst.blit_animation(
-	   drawpos, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(
+	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		dst.blit_animation(drawpos - descr().get_ware_hotspot(),
-		                   carried_ware->descr().get_animation("idle"), 0, player_color);
+		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
+		const Vector2f location(
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
+		dst->blit_animation(
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 
 /**
  * Draw the worker, taking the carried ware into account.
  */
-void Worker::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
-	if (get_current_anim())
-		draw_inner(game, dst, calc_drawpos(game, pos));
+void Worker::draw(const EditorGameBase& egbase,
+                  const TextToDraw&,
+                  const Vector2f& field_on_dst,
+                  const float scale,
+                  RenderTarget* dst) const {
+	if (!get_current_anim()) {
+		return;
+	}
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
 }
 
 /*
@@ -2655,7 +2667,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
-			if (!(egbase.tribes().tribe_exists(name))) {
+			if (!Widelands::tribe_exists(name)) {
 				throw GameDataError("unknown tribe '%s'", name.c_str());
 			}
 			name = lookup_table.lookup_worker(name, fr.c_string());

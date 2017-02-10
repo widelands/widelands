@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -76,12 +76,12 @@ public:
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const {
 		assert(1 <= n);
-		assert(n <= MAX_PLAYERS);
+		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
 	Player& player(int32_t n) const {
 		assert(1 <= n);
-		assert(n <= MAX_PLAYERS);
+		assert(n <= kMaxPlayers);
 		return *players_[n - 1];
 	}
 
@@ -107,7 +107,7 @@ public:
 	void set_player_end_status(const PlayerEndStatus& status);
 
 private:
-	Player* players_[MAX_PLAYERS];
+	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
 	uint8_t number_of_players_;
 	std::vector<PlayerEndStatus> players_end_status_;

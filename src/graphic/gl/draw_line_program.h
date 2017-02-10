@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,8 @@
 
 #include <vector>
 
-#include "base/point.h"
 #include "base/rect.h"
+#include "base/vector.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -35,26 +34,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "wui/field_overlay_manager.h"
-
-namespace {
-static char const* const player_pictures[] = {"images/players/editor_player_01_starting_pos.png",
-                                              "images/players/editor_player_02_starting_pos.png",
-                                              "images/players/editor_player_03_starting_pos.png",
-                                              "images/players/editor_player_04_starting_pos.png",
-                                              "images/players/editor_player_05_starting_pos.png",
-                                              "images/players/editor_player_06_starting_pos.png",
-                                              "images/players/editor_player_07_starting_pos.png",
-                                              "images/players/editor_player_08_starting_pos.png"};
-static char const* const player_pictures_small[] = {
-   "images/players/fsel_editor_set_player_01_pos.png",
-   "images/players/fsel_editor_set_player_02_pos.png",
-   "images/players/fsel_editor_set_player_03_pos.png",
-   "images/players/fsel_editor_set_player_04_pos.png",
-   "images/players/fsel_editor_set_player_05_pos.png",
-   "images/players/fsel_editor_set_player_06_pos.png",
-   "images/players/fsel_editor_set_player_07_pos.png",
-   "images/players/fsel_editor_set_player_08_pos.png"};
-}  // namespace
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -72,8 +51,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                  20,
                  g_gr->images().get("images/ui_basic/but1.png"),
                  g_gr->images().get("images/ui_basic/scrollbar_up.png"),
-                 _("Add player"),
-                 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
+                 _("Add player")),
      remove_last_player_(this,
                          "remove_last_player",
                          5,
@@ -82,9 +60,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                          20,
                          g_gr->images().get("images/ui_basic/but1.png"),
                          g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-                         _("Remove last player"),
-                         1 < parent.egbase().map().get_nrplayers()),
-     tribenames_(eia().egbase().tribes().get_all_tribenames()) {
+                         _("Remove last player")),
+     tribenames_(Widelands::get_all_tribenames()) {
+	add_player_.set_enabled(parent.egbase().map().get_nrplayers() < kMaxPlayers);
 	add_player_.sigclicked.connect(
 	   boost::bind(&EditorPlayerMenu::clicked_add_player, boost::ref(*this)));
 	remove_last_player_.sigclicked.connect(
@@ -97,17 +75,17 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	set_inner_size(375, 135);
 
 	UI::Textarea* ta = new UI::Textarea(this, 0, 0, _("Number of Players"));
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
+	ta->set_pos(Vector2i((get_inner_w() - ta->get_w()) / 2, posy + 5));
 	posy += spacing + width;
 
 	nr_of_players_ta_ = new UI::Textarea(this, 0, 0, "5");
-	nr_of_players_ta_->set_pos(Point((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
+	nr_of_players_ta_->set_pos(Vector2i((get_inner_w() - nr_of_players_ta_->get_w()) / 2, posy + 5));
 
 	posy += width + spacing + spacing;
 
 	posy_ = posy;
 
-	for (Widelands::PlayerNumber i = 0; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = 0; i < kMaxPlayers; ++i) {
 		plr_names_[i] = nullptr;
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
@@ -150,7 +128,7 @@ void EditorPlayerMenu::update() {
 	}
 
 	//  Now remove all the unneeded stuff.
-	for (Widelands::PlayerNumber i = nr_players; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = nr_players; i < kMaxPlayers; ++i) {
 		delete plr_names_[i];
 		plr_names_[i] = nullptr;
 		delete plr_set_pos_buts_[i];
@@ -191,7 +169,7 @@ void EditorPlayerMenu::update() {
 		}
 
 		plr_set_tribes_buts_[p - 1]->set_title(
-		   eia().egbase().tribes().tribeinfo(selected_tribes_[p - 1]).descname);
+		   Widelands::get_tribeinfo(selected_tribes_[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -205,19 +183,23 @@ void EditorPlayerMenu::update() {
 			plr_set_pos_buts_[p - 1]->sigclicked.connect(
 			   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		const Image* player_image = g_gr->images().get(player_pictures_small[p - 1]);
+		const Image* player_image =
+		   playercolor_image(p - 1, g_gr->images().get("images/players/player_position_menu.png"),
+		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 
 		plr_set_pos_buts_[p - 1]->set_pic(player_image);
 		posy += size + spacing;
 	}
+	add_player_.set_enabled(nr_players < kMaxPlayers);
+	remove_last_player_.set_enabled(1 < nr_players);
 	set_inner_size(get_inner_w(), posy + spacing);
 }
 
 void EditorPlayerMenu::clicked_add_player() {
 	Widelands::Map& map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers() + 1;
-	assert(nr_players <= MAX_PLAYERS);
+	assert(nr_players <= kMaxPlayers);
 	map.set_nrplayers(nr_players);
 	{                             //  register new default name for this players
 		assert(nr_players <= 99);  //  2 decimal digits
@@ -228,7 +210,7 @@ void EditorPlayerMenu::clicked_add_player() {
 	}
 	map.set_scenario_player_tribe(nr_players, tribenames_[0]);
 	eia().set_need_save(true);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
+	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(true);
 	update();
 }
@@ -243,7 +225,9 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!menu.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			const Image* player_image = g_gr->images().get(player_pictures[old_nr_players - 1]);
+			const Image* player_image = playercolor_image(
+			   old_nr_players - 1, g_gr->images().get("images/players/player_position.png"),
+			   g_gr->images().get("images/players/player_position_pc.png"));
 			assert(player_image);
 			menu.mutable_field_overlay_manager()->remove_overlay(sp, player_image);
 		}
@@ -252,9 +236,8 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
-	add_player_.set_enabled(nr_players < MAX_PLAYERS);
+	add_player_.set_enabled(nr_players < kMaxPlayers);
 	remove_last_player_.set_enabled(1 < nr_players);
-
 	update();
 	// TODO(SirVer): Take steps when the player is referenced someplace. Not
 	// TODO(SirVer): currently possible in the editor though.
@@ -266,7 +249,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::Tribes::tribe_exists(selected_tribes_[n])) {
+		if (!Widelands::tribe_exists(selected_tribes_[n])) {
 			throw wexception(
 			   "Map defines tribe %s, but it does not exist!", selected_tribes_[n].c_str());
 		}
@@ -296,8 +279,9 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	//  jump to the current node
 	Widelands::Map& map = menu.egbase().map();
-	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		menu.move_view_to(sp);
+	if (Widelands::Coords const sp = map.get_starting_pos(n)) {
+		menu.scroll_to_field(sp, MapView::Transition::Smooth);
+	}
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);
@@ -346,7 +330,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// place a hq and reference the tribe
 		// so that this tribe can not be changed
 		egbase.add_player(n, 0,  // TODO(SirVer): initialization index makes no sense here
-		                  eia().egbase().tribes().tribeinfo(selected_tribes_[n]).descname,
+		                  Widelands::get_tribeinfo(selected_tribes_[n]).descname,
 		                  plr_names_[n - 1]->text());
 
 		p = egbase.get_player(n);
@@ -375,7 +359,9 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		const Image* player_image = g_gr->images().get(player_pictures[n - 1]);
+		const Image* player_image =
+		   playercolor_image(n - 1, g_gr->images().get("images/players/player_position.png"),
+		                     g_gr->images().get("images/players/player_position_pc.png"));
 		assert(player_image);
 		overlay_manager->remove_overlay(start_pos, player_image);
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
 class BlitProgram {
 public:
 	struct Arguments {
-		FloatRect destination_rect;
+		Rectf destination_rect;
 		float z_value;
 		BlitData texture;
 		BlitData mask;
@@ -53,7 +53,7 @@ public:
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
-	void draw(const FloatRect& gl_dest_rect,
+	void draw(const Rectf& gl_dest_rect,
 	          const float z_value,
 	          const BlitData& texture,
 	          const BlitData& mask,
@@ -64,7 +64,7 @@ public:
 	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
-	void draw_monochrome(const FloatRect& gl_dest_rect,
+	void draw_monochrome(const Rectf& gl_dest_rect,
 	                     const float z_value,
 	                     const BlitData& blit_source,
 	                     const RGBAColor& blend);

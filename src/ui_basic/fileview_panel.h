@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,11 @@ public:
 	void add_tab(const std::string& lua_script);
 
 private:
+	void update_tab_size(size_t index);
+	void layout() override;
 	const uint32_t padding_;
+	int contents_width_;
+	int contents_height_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

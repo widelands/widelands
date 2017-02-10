@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,8 +48,8 @@ struct EditorMakeInfrastructureTool : public EditorTool {
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	const char* get_sel_impl() const override {
-		return "images/ui_basic/fsel.png";
+	const Image* get_sel_impl() const override {
+		return g_gr->images().get("images/ui_basic/fsel.png");
 	}  //  Standard sel icon, most complex tool of all
 
 private:

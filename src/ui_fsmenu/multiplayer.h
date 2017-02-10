@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_MULTIPLAYER_H
 
 #include "network/internet_gaming.h"
-#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"
@@ -50,8 +49,9 @@ protected:
 	void clicked_ok() override;
 
 private:
+	void layout() override;
+
 	UI::Textarea title;
-	UI::Box vbox;
 	UI::Button metaserver;
 	UI::Button* showloginbox;
 	UI::Button lan;

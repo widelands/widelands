@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ struct Extent {
 /**
  * Structure used to store map coordinates
  */
+// TODO(sirver): This should go away and be replaced by Vector2i16.
 struct Coords {
 	Coords();
 	Coords(int16_t nx, int16_t ny);

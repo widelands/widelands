@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,8 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	virtual ~EditorToolPlaceImmovableOptionsMenu();
 
 private:
-	std::unique_ptr<
-	   CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
-	   multi_select_menu_;
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr,
+	                                             EditorPlaceImmovableTool>> multi_select_menu_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ namespace Widelands {
 struct Flag;
 struct Message;
 class TribeDescr;
-class WaresQueue;
+class InputQueue;
 
 class Building;
 
@@ -235,13 +235,15 @@ public:
 		return statistics_string_;
 	}
 
-	/// \returns the queue for a ware type or \throws WException.
-	virtual WaresQueue& waresqueue(DescriptionIndex);
+	/// \returns the queue for the matching ware or worker type or \throws WException.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
 
-	void show_options(InteractiveGameBase&, bool avoid_fastclick = false, Point pos = Point(-1, -1));
+	void show_options(InteractiveGameBase&,
+	                  bool avoid_fastclick = false,
+	                  Vector2i pos = Vector2i(-1, -1));
 	void hide_options();
 	void refresh_options(InteractiveGameBase&);
 
@@ -311,8 +313,13 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) override;
-	void draw_info(const EditorGameBase&, RenderTarget&, const Point&);
+	void draw(uint32_t gametime,
+	          TextToDraw draw_text,
+	          const Vector2f& point_on_dst,
+	          float scale,
+	          RenderTarget* dst) override;
+	void
+	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	virtual void create_options_window(InteractiveGameBase&, UI::Window*& registry) = 0;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include <memory>
 #include <string>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/color.h"
 
 class RenderTarget;
@@ -50,7 +50,7 @@ struct RichText {
 	uint32_t height();
 
 	void parse(const std::string& text);
-	void draw(RenderTarget& dst, const Point& offset, bool background = false);
+	void draw(RenderTarget& dst, const Vector2i& offset, bool background = false);
 
 private:
 	std::unique_ptr<RichTextImpl> m;

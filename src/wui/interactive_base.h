@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
+#include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
 namespace Widelands {
@@ -117,9 +118,6 @@ public:
 	}
 	void set_sel_radius(uint32_t);
 
-	void move_view_to(Widelands::Coords);
-	void move_view_to_point(Point pos);
-
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
@@ -163,35 +161,53 @@ public:
 	}
 
 	void toggle_minimap();
+	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
 	const std::vector<QuickNavigation::Landmark>& landmarks();
+
 	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const Point& point);
+	void set_landmark(size_t key, const MapView::View& view);
 
 protected:
+	/// Adds a toolbar button to the toolbar
+	/// \param image_basename:      File path for button image starting from 'images' and without
+	///                             file extension
+	/// \param name:                Internal name of the button
+	/// \param tooltip:             The button tooltip
+	/// \param window:              The window that's associated with this button.
+	/// \param bind_default_toggle: If true, the button will toggle with its 'window'.
+	UI::Button* add_toolbar_button(const std::string& image_basename,
+	                               const std::string& name,
+	                               const std::string& tooltip_text,
+	                               UI::UniqueWindow::Registry* window = nullptr,
+	                               bool bind_default_toggle = false);
+
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
 
-	void toggle_buildhelp();
 	void hide_minimap();
 
-	UI::UniqueWindow::Registry& minimap_registry();
+	MiniMap::Registry& minimap_registry();
 
-	void mainview_move(int32_t x, int32_t y);
-	void minimap_warp(int32_t x, int32_t y);
+	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
 	void unset_sel_picture();
-	void set_sel_picture(const char* const);
+	void set_sel_picture(const Image* image);
 	void adjust_toolbar_position() {
-		toolbar_.set_pos(Point((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
+		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
 
 	// TODO(sirver): why are these protected?
 	ChatOverlay* chat_overlay_;
+
+	// These get collected by add_toolbar_button
+	// so we can call unassign_toggle_button on them in the destructor.
+	std::vector<UI::UniqueWindow::Registry> registries_;
+
 	UI::Box toolbar_;
 
 private:
@@ -242,8 +258,5 @@ private:
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> workarea_pics_;
 };
-
-#define PIC2 g_gr->images().get("images/ui_basic/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) &toolbar_, name, 0, 0, 34U, 34U, PIC2
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

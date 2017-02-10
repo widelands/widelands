@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,14 +137,14 @@ bool Section::Value::get_bool() const {
 	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
 }
 
-Point Section::Value::get_point() const {
+Vector2i Section::Value::get_point() const {
 	char* endp = value_.get();
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not a Point", get_name(), get_string());
+		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_string());
 
-	return Point(x, y);
+	return Vector2i(x, y);
 }
 
 void Section::Value::set_string(char const* const value) {
@@ -413,7 +413,7 @@ char const* Section::get_string(char const* const name, char const* const def) {
 	return v ? v->get_string() : def;
 }
 
-Point Section::get_point(const char* const name, const Point def) {
+Vector2i Section::get_point(const char* const name, const Vector2i def) {
 	Value const* const v = get_val(name);
 	return v ? v->get_point() : def;
 }

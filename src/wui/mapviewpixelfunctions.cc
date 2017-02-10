@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 #include <cstdlib>
 
-#include "wui/vector.h"
+#include "base/vector.h"
 
 using namespace Widelands;
 
@@ -39,16 +39,15 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
 	constexpr float kSin60 = 0.86603f;
 	constexpr float kLightFactor = -75.0f;
 
-	static Vector sun_vect = Vector(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
-
-	Vector normal;
+	static Vector3f sun_vect =
+	   Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
 
 	// find normal
 	// more guessed than thought about
 	// but hey, results say I am good at guessing :)
 	// perhaps I will paint an explanation for this someday
 	// florian
-	normal = Vector(0, 0, kTriangleWidth);
+	Vector3f normal(0, 0, kTriangleWidth);
 	normal.x -= l * kHeightFactor;
 	normal.x += r * kHeightFactor;
 	normal.x -= tl * kHeightFactorFloat * kCos60;
@@ -61,28 +60,28 @@ float MapviewPixelFunctions::calc_brightness(int32_t const l,
 	normal.y += br * kHeightFactorFloat * kSin60;
 	normal.normalize();
 
-	return normal * sun_vect * kLightFactor;
+	return normal.dot(sun_vect) * kLightFactor;
 }
 
 /**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
-Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point b) {
-	normalize_pix(map, a);
-	normalize_pix(map, b);
+Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, Vector2f b) {
+	normalize_pix(map, &a);
+	normalize_pix(map, &b);
 
-	Point diff = a - b;
+	Vector2f diff = a - b;
 
 	int32_t map_end_screen_x = get_map_end_screen_x(map);
-	if (diff.x > map_end_screen_x / 2)
+	if (diff.x > map_end_screen_x / 2.f)
 		diff.x -= map_end_screen_x;
-	else if (diff.x < -map_end_screen_x / 2)
+	else if (diff.x < -map_end_screen_x / 2.f)
 		diff.x += map_end_screen_x;
 
 	int32_t map_end_screen_y = get_map_end_screen_y(map);
-	if (diff.y > map_end_screen_y / 2)
+	if (diff.y > map_end_screen_y / 2.f)
 		diff.y -= map_end_screen_y;
-	else if (diff.y < -map_end_screen_y / 2)
+	else if (diff.y < -map_end_screen_y / 2.f)
 		diff.y += map_end_screen_y;
 
 	return diff;
@@ -92,10 +91,10 @@ Point MapviewPixelFunctions::calc_pix_difference(const Map& map, Point a, Point 
  * Calculate the pixel (currently Manhattan) distance between the two points,
  * taking wrap-arounds into account.
 */
-uint32_t MapviewPixelFunctions::calc_pix_distance(const Map& map, Point a, Point b) {
-	normalize_pix(map, a);
-	normalize_pix(map, b);
-	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
+float MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2f a, Vector2f b) {
+	normalize_pix(map, &a);
+	normalize_pix(map, &b);
+	uint32_t dx = std::abs(a.x - b.x), dy = std::abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2)
@@ -205,7 +204,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 				      map[Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
 				            .get_height() *
 				         kHeightFactor;
-				ldy = Y_b - Y_a, pdy = Y_b - y;
+				ldy = Y_b - Y_a;
+				pdy = Y_b - y;
 				pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
@@ -232,7 +232,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 			   Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1), TCoords<>::D);
 		} else {
 			Y_b = screen_y_base - map[Coords(right_col, next_row_number)].get_height() * kHeightFactor;
-			ldy = Y_b - Y_a, pdy = Y_b - y;
+			ldy = Y_b - Y_a;
+			pdy = Y_b - y;
 			pdx = (col_number + 1) * (kTriangleWidth / 2) - x;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
@@ -262,19 +263,19 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 /**
  * Normalize pixel points of the map.
 */
-void MapviewPixelFunctions::normalize_pix(const Map& map, Point& p) {
-	{
-		const int32_t map_end_screen_x = get_map_end_screen_x(map);
-		while (p.x >= map_end_screen_x)
-			p.x -= map_end_screen_x;
-		while (p.x < 0)
-			p.x += map_end_screen_x;
+void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
+	const float map_end_screen_x = get_map_end_screen_x(map);
+	while (p->x >= map_end_screen_x) {
+		p->x -= map_end_screen_x;
 	}
-	{
-		const int32_t map_end_screen_y = get_map_end_screen_y(map);
-		while (p.y >= map_end_screen_y)
-			p.y -= map_end_screen_y;
-		while (p.y < 0)
-			p.y += map_end_screen_y;
+	while (p->x < 0) {
+		p->x += map_end_screen_x;
+	}
+	const float map_end_screen_y = get_map_end_screen_y(map);
+	while (p->y >= map_end_screen_y) {
+		p->y -= map_end_screen_y;
+	}
+	while (p->y < 0) {
+		p->y += map_end_screen_y;
 	}
 }

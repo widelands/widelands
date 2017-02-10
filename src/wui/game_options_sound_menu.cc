@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,10 @@
 GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&gb, "sound_options_menu", &registry, 160, 160, _("Sound Options")),
-     ingame_music(this, Point(hmargin(), vmargin()), _("Enable Music")),
-     ingame_sound(
-        this, Point(hmargin(), vmargin() + kStateboxSize + vspacing()), _("Enable Sound Effects")),
+     ingame_music(this, Vector2i(hmargin(), vmargin()), _("Enable Music")),
+     ingame_sound(this,
+                  Vector2i(hmargin(), vmargin() + kStateboxSize + vspacing()),
+                  _("Enable Sound Effects")),
      ingame_music_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing(),

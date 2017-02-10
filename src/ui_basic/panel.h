@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 
 class RenderTarget;
 class Image;
@@ -113,7 +113,7 @@ public:
 	// Geometry
 	void set_size(int nw, int nh);
 	void set_desired_size(int w, int h);
-	void set_pos(Point);
+	virtual void set_pos(Vector2i);
 	virtual void move_inside_parent();
 	virtual void layout();
 
@@ -128,8 +128,8 @@ public:
 	int32_t get_y() const {
 		return y_;
 	}
-	Point get_pos() const {
-		return Point(x_, y_);
+	Vector2i get_pos() const {
+		return Vector2i(x_, y_);
 	}
 	// int instead of uint because of overflow situations
 	int32_t get_w() const {
@@ -139,7 +139,7 @@ public:
 		return h_;
 	}
 
-	Point to_parent(const Point&) const;
+	Vector2i to_parent(const Vector2i&) const;
 
 	virtual bool is_snap_target() const {
 		return false;
@@ -229,8 +229,8 @@ public:
 	// Events
 	virtual void think();
 
-	Point get_mouse_position() const;
-	void set_mouse_pos(Point);
+	Vector2i get_mouse_position() const;
+	void set_mouse_pos(Vector2i);
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
@@ -337,7 +337,7 @@ private:
 	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Point rel_mouse_pos);
+	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();

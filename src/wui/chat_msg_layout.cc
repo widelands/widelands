@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,14 @@
 #include "chat/chat.h"
 #include "graphic/color.h"
 #include "graphic/text_layout.h"
-#include "logic/constants.h"
 #include "logic/player.h"
 
 namespace {
 
 // Returns the hexcolor for the 'player'.
 std::string color(const int16_t playern) {
-	if ((playern >= 0) && playern < MAX_PLAYERS) {
-		const RGBColor& clr = Widelands::Player::Colors[playern];
+	if ((playern >= 0) && playern < kMaxPlayers) {
+		const RGBColor& clr = kPlayerColors[playern];
 		char buf[sizeof("ffffff")];
 		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
 		return buf;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2011-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,7 +141,7 @@ void PortDock::set_economy(Economy* e) {
 		expedition_bootstrap_->set_economy(e);
 }
 
-void PortDock::draw(const EditorGameBase&, RenderTarget&, const FCoords&, const Point&) {
+void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
 	// do nothing
 }
 
@@ -337,8 +337,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-				ship.refresh_window(*igb);
+			Notifications::publish(NoteShipWindow(ship.serial(), NoteShipWindow::Action::kRefresh));
 			return fleet_->update(game);
 		}
 	}

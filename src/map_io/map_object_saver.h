@@ -1,5 +1,5 @@
 /*
-//  * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+//  * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <map>
 #include <string>
 
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "map_io/map_message_saver.h"
 
@@ -76,7 +76,7 @@ struct MapObjectSaver {
 	bool is_object_saved(const MapObject&);
 
 	/// \note Indexed by player number - 1.
-	MapMessageSaver message_savers[MAX_PLAYERS];
+	MapMessageSaver message_savers[kMaxPlayers];
 
 private:
 	struct MapObjectRec {

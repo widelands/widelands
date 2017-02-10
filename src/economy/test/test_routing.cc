@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2013 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -542,7 +542,7 @@ struct DistanceRoutingFixture : public ComplexRouterFixture {
 
 	TestingRoutingNode* start;
 	TestingRoutingNode* end;
-	TestingRoutingNode* d1, *d2, *d3, *d4, *d5;
+	TestingRoutingNode *d1, *d2, *d3, *d4, *d5;
 };
 BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	Nodes chain;

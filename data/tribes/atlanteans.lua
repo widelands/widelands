@@ -1,4 +1,6 @@
 -- RST
+-- .. _lua_tribes_<tribename>.lua:
+--
 -- <tribename>.lua
 -- ---------------------
 --
@@ -7,7 +9,7 @@
 dirname = path.dirname(__file__)
 
 -- RST
--- .. function:: new_tribe(table)
+-- .. function:: new_tribe{table}
 --
 --    This function adds all units to a tribe.
 --
@@ -183,6 +185,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "atlanteans_recruit",
          "atlanteans_soldier",
          "atlanteans_trainer",
          "atlanteans_weaponsmith",
@@ -246,6 +249,7 @@ tribes:new_tribe {
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
       "atlanteans_shipyard",
+      "atlanteans_barracks",
 
       -- Big
       "atlanteans_horsefarm",

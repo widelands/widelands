@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,15 +19,17 @@
 
 #include "wui/game_tips.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
-#include "profile/profile.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
-#define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
@@ -36,7 +38,7 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
      progressWindow_(progressWindow),
      registered_(false),
      lastTip_(0) {
-	// Loading texts-locals, for translating the tips
+	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
 	for (uint8_t i = 0; i < names.size(); ++i)
@@ -54,24 +56,22 @@ GameTips::~GameTips() {
 	stop();
 }
 
-/// Loads tips out of \var filename
-void GameTips::load_tips(std::string name) {
-	std::string filename = "txts/tips/" + name + ".tip";
+/// Loads tips out of \var name
+void GameTips::load_tips(const std::string& name) {
 	try {
-		Profile prof(filename.c_str());
-		while (Section* const s = prof.get_next_section(nullptr)) {
-			char const* const text = s->get_string("text");
-			if (nullptr == text)
-				continue;
-
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
+		std::unique_ptr<LuaTable> tip_table;
+		for (const int key : table->keys<int>()) {
+			tip_table = table->get_table(key);
 			Tip tip;
-			tip.text = text;
-			tip.interval = s->get_int("sec", DEFAULT_INTERVAL);
+			tip.text = tip_table->get_string("text");
+			tip.interval = tip_table->get_int("seconds");
 			tips_.push_back(tip);
 		}
-	} catch (std::exception&) {
-		// just ignore - tips do not impact game
-		return;
+	} catch (LuaError& err) {
+		log("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		// No further handling necessary - tips do not impact game
 	}
 }
 
@@ -104,15 +104,14 @@ void GameTips::show_tip(int32_t index) {
 	assert(pic_background);
 
 	RenderTarget& rt = *g_gr->get_render_target();
-	Rect tips_area;
 
 	uint16_t w = pic_background->width();
 	uint16_t h = pic_background->height();
-	Point pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
-	tips_area = Rect(pt, w, h);
+	Vector2f pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
+	Rectf tips_area(pt, w, h);
 	rt.blit(pt, pic_background);
 
-	Point center(tips_area.x + tips_area.w / 2, tips_area.y + tips_area.h / 2);
 	const Image* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
-	rt.blit(center - Point(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
+	rt.blit(tips_area.center() - Vector2f(rendered_text->width() / 2, rendered_text->height() / 2),
+	        rendered_text);
 }

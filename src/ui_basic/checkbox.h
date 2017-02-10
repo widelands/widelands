@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ struct Statebox : public Panel {
 	 * Pictorial Statebox
 	 */
 	Statebox(Panel* parent,
-	         Point,
+	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
 
@@ -49,11 +49,10 @@ struct Statebox : public Panel {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Statebox(Panel* parent,
-	         Point,
+	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
-	         uint32_t width = 0);
-	~Statebox();
+	         int width = 0);
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(bool)> changedto;
@@ -66,20 +65,15 @@ struct Statebox : public Panel {
 	}
 	void set_state(bool on);
 
-	void set_owns_custopicture_() {
-		assert(flags_ & Has_Custom_Picture);
-		set_flags(Owns_Custom_Picture, true);
-	}
-
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 private:
+	void layout() override;
 	virtual void clicked() = 0;
 
 	enum Flags {
@@ -87,7 +81,7 @@ private:
 		Is_Enabled = 0x02,
 		Is_Checked = 0x04,
 		Has_Custom_Picture = 0x08,
-		Owns_Custom_Picture = 0x10
+		Has_Text = 0x10
 	};
 	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {
@@ -96,6 +90,7 @@ private:
 			flags_ |= flags;
 	}
 	const Image* pic_graphics_;
+	const std::string label_text_;
 	const Image* rendered_text_;
 };
 
@@ -111,7 +106,7 @@ struct Checkbox : public Statebox {
 	 * Pictorial Checkbox
 	 */
 	Checkbox(Panel* const parent,
-	         Point const p,
+	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
 	   : Statebox(parent, p, pic, tooltip_text) {
@@ -123,7 +118,7 @@ struct Checkbox : public Statebox {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Checkbox(Panel* const parent,
-	         Point const p,
+	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "economy/road.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "logic/constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -43,6 +42,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -174,7 +174,7 @@ Player& EditorGameBase::player(const int32_t n) const {
 
 void EditorGameBase::inform_players_about_ownership(MapIndex const i,
                                                     PlayerNumber const new_owner) {
-	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
 		if (1 < player_field.vision) {
 			player_field.owner = new_owner;
@@ -184,7 +184,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
 	if (!Road::is_road_descr(descr))
-		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
 				player_field.map_object_descr[TCoords<>::None] = descr;
@@ -206,7 +206,7 @@ void EditorGameBase::set_map(Map* const new_map) {
 }
 
 void EditorGameBase::allocate_player_maps() {
-	iterate_players_existing(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
 	}
 }
@@ -303,11 +303,12 @@ Bob& EditorGameBase::create_bob(Coords c, const BobDescr& descr, Player* owner) 
 Bob& EditorGameBase::create_critter(const Coords& c,
                                     DescriptionIndex const bob_type_idx,
                                     Player* owner) {
-	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(bob_type_idx));
+	return create_bob(c, *descr, owner);
 }
 
 Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
-	const BobDescr* descr = world().get_bob_descr(name);
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(name));
 	if (descr == nullptr)
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str());
@@ -319,40 +320,57 @@ Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Pl
 Create an immovable at the given location.
 If tribe is not zero, create a immovable of a player (not a PlayerImmovable
 but an immovable defined by the players tribe)
-Does not perform any placability checks.
+Does not perform any placeability checks.
+If this immovable was created by a building, 'former_building' can be set in order to display
+information about it.
 ===============
 */
 Immovable& EditorGameBase::create_immovable(const Coords& c,
                                             DescriptionIndex const idx,
-                                            MapObjectDescr::OwnerType type) {
-	const ImmovableDescr& descr =
-	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
-	                                                 world().get_immovable_descr(idx));
-	assert(&descr);
-	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
-	return descr.create(*this, c);
+                                            MapObjectDescr::OwnerType type,
+                                            Player* owner) {
+	return do_create_immovable(c, idx, type, owner, nullptr);
 }
 
-Immovable& EditorGameBase::create_immovable(const Coords& c,
-                                            const std::string& name,
-                                            MapObjectDescr::OwnerType type) {
+Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
+                                                      const std::string& name,
+                                                      MapObjectDescr::OwnerType type,
+                                                      Player* owner,
+                                                      const BuildingDescr* former_building_descr) {
 	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
 		if (!tribes().immovable_exists(idx)) {
 			throw wexception(
-			   "EditorGameBase::create_immovable(%i, %i): %s is not defined for the tribes", c.x, c.y,
-			   name.c_str());
+			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the tribes",
+			   c.x, c.y, name.c_str());
 		}
 	} else {
 		idx = world().get_immovable_index(name.c_str());
 		if (idx == INVALID_INDEX) {
 			throw wexception(
-			   "EditorGameBase::create_immovable(%i, %i): %s is not defined for the world", c.x, c.y,
-			   name.c_str());
+			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the world",
+			   c.x, c.y, name.c_str());
 		}
 	}
-	return create_immovable(c, idx, type);
+	return do_create_immovable(c, idx, type, owner, former_building_descr);
+}
+
+Immovable& EditorGameBase::do_create_immovable(const Coords& c,
+                                               DescriptionIndex const idx,
+                                               MapObjectDescr::OwnerType type,
+                                               Player* owner,
+                                               const BuildingDescr* former_building_descr) {
+	const ImmovableDescr& descr =
+	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
+	                                                 world().get_immovable_descr(idx));
+	assert(&descr);
+	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
+	Immovable& immovable = descr.create(*this, c, former_building_descr);
+	if (owner != nullptr) {
+		immovable.set_owner(owner);
+	}
+	return immovable;
 }
 
 /**
@@ -483,7 +501,7 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
-	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_;
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
@@ -530,7 +548,8 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 /// This conquers a given area because of a new (military) building that is set
 /// there.
-void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
+void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
+                                  bool conquer_guarded_location) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -540,7 +559,7 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area) {
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 
-	do_conquer_area(player_area, true);
+	do_conquer_area(player_area, true, 0, conquer_guarded_location);
 
 	//  Players are not allowed to have their immovables on their borders.
 	//  Therefore the area must be enlarged before calling
@@ -605,9 +624,9 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
                                      bool const conquer,
                                      PlayerNumber const preferred_player,
+                                     bool const conquer_guarded_location_by_superior_influence,
                                      bool const neutral_when_no_influence,
-                                     bool const neutral_when_competing_influence,
-                                     bool const conquer_guarded_location_by_superior_influence) {
+                                     bool const neutral_when_competing_influence) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);

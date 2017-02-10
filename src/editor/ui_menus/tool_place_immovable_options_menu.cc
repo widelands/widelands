@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ using namespace Widelands;
 
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), pic, immovable_descr.descname());
+	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i(0, 0), pic, immovable_descr.descname());
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));

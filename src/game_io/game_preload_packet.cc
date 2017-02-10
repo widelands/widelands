@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/time_string.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -120,13 +121,17 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 
 	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 	if (sw.get() != nullptr) {
-		const MiniMapLayer flags =
+		const MiniMapLayer layers =
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+		std::unique_ptr<Texture> texture;
 		if (ipl != nullptr) {  // Player
-			write_minimap_image(game, &ipl->player(), ipl->get_viewpoint(), flags, sw.get());
+			texture = draw_minimap(
+			   game, &ipl->player(), ipl->view_area().rect(), MiniMapType::kStaticViewWindow, layers);
 		} else {  // Observer
-			write_minimap_image(game, nullptr, Point(0, 0), flags, sw.get());
+			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
 		}
+		assert(texture != nullptr);
+		save_to_png(texture.get(), sw.get(), ColorType::RGBA);
 		sw->flush();
 	}
 }

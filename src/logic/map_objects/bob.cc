@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
@@ -88,7 +89,6 @@ Bob& BobDescr::create(EditorGameBase& egbase, Player* const owner, const Coords&
 
 Bob::Bob(const BobDescr& init_descr)
    : MapObject(&init_descr),
-     owner_(nullptr),
      position_(FCoords(Coords(0, 0), nullptr)),  // not linked anywhere
      linknext_(nullptr),
      linkpprev_(nullptr),
@@ -685,45 +685,51 @@ void Bob::move_update(Game& game, State&) {
 		return schedule_act(game, walkend_ - game.get_gametime());
 }
 
-/// Calculates the actual position to draw on from the base node position.
-/// This function takes walking etc. into account.
-///
-/// pos is the location, in pixels, of the node position_ (height is already
-/// taken into account).
-Point Bob::calc_drawpos(const EditorGameBase& game, const Point pos) const {
+// Calculates the actual position to draw on from the base node position. This
+// function takes walking etc. into account.
+//
+// pos is the location, in pixels, of the node position_ on screen with scale
+// and height taken into account.
+Vector2f Bob::calc_drawpos(const EditorGameBase& game,
+                           const Vector2f& field_on_dst,
+                           const float scale) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
-	Point spos = pos, epos = pos;
+	Vector2f spos = field_on_dst;
+	Vector2f epos = field_on_dst;
+
+	const float triangle_w = kTriangleWidth * scale;
+	const float triangle_h = kTriangleHeight * scale;
 
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
-		spos.x += kTriangleWidth / 2;
-		spos.y += kTriangleHeight;
+		spos.x += triangle_w / 2.f;
+		spos.y += triangle_h;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
-		spos.x -= kTriangleWidth / 2;
-		spos.y += kTriangleHeight;
+		spos.x -= triangle_w / 2.f;
+		spos.y += triangle_h;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
-		spos.x += kTriangleWidth;
+		spos.x += triangle_w;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
-		spos.x -= kTriangleWidth;
+		spos.x -= triangle_w;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
-		spos.x += kTriangleWidth / 2;
-		spos.y -= kTriangleHeight;
+		spos.x += triangle_w / 2.f;
+		spos.y -= triangle_h;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
-		spos.x -= kTriangleWidth / 2;
-		spos.y -= kTriangleHeight;
+		spos.x -= triangle_w / 2.f;
+		spos.y -= triangle_h;
 		break;
 
 	case IDLE:
@@ -732,37 +738,38 @@ Point Bob::calc_drawpos(const EditorGameBase& game, const Point pos) const {
 	}
 
 	if (start.field) {
-		spos.y += end.field->get_height() * kHeightFactor;
-		spos.y -= start.field->get_height() * kHeightFactor;
+		spos.y += end.field->get_height() * kHeightFactor * scale;
+		spos.y -= start.field->get_height() * kHeightFactor * scale;
 
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
-		float f = static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_);
-
-		if (f < 0)
-			f = 0;
-		else if (f > 1)
-			f = 1;
-
-		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
-		epos.y = static_cast<int32_t>(f * epos.y + (1 - f) * spos.y);
+		const float f = math::clamp(
+		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
+		epos.x = f * epos.x + (1.f - f) * spos.x;
+		epos.y = f * epos.y + (1.f - f) * spos.y;
 	}
-
 	return epos;
 }
 
 /// It LERPs between start and end position when we are walking.
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
-void Bob::draw(const EditorGameBase& egbase, RenderTarget& dst, const Point& pos) const {
-	if (anim_) {
-		auto* const owner = get_owner();
-		if (owner != nullptr) {
-			dst.blit_animation(calc_drawpos(egbase, pos), anim_, egbase.get_gametime() - animstart_,
-			                   owner->get_playercolor());
-		} else {
-			dst.blit_animation(calc_drawpos(egbase, pos), anim_, egbase.get_gametime() - animstart_);
-		}
+void Bob::draw(const EditorGameBase& egbase,
+               const TextToDraw&,
+               const Vector2f& field_on_dst,
+               const float scale,
+               RenderTarget* dst) const {
+	if (!anim_) {
+		return;
+	}
+
+	auto* const owner = get_owner();
+	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
+	if (owner != nullptr) {
+		dst->blit_animation(
+		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+	} else {
+		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
 }
 

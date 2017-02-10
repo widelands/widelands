@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ private:
 
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
-	void write(FileWrite&);
+	void write(FileWrite&) const;
 	void read(lua_State*, FileRead&);
 
 	lua_State* lua_state_;

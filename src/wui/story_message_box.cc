@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,9 +64,9 @@ StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
 	center_to_parent();
 
 	if (gposx != -1)
-		set_pos(Point(gposx, get_y()));
+		set_pos(Vector2i(gposx, get_y()));
 	if (gposy != -1)
-		set_pos(Point(get_x(), gposy));
+		set_pos(Vector2i(get_x(), gposy));
 
 	move_inside_parent();
 }

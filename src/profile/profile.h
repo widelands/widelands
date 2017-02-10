@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
 // TODO(unknown): as soon as g_fs is not needed anymore,
 // include "filesystem.h" instead of layered_filesystem.h.
@@ -85,7 +85,7 @@ public:
 		char* get_string() {
 			return value_.get();
 		}
-		Point get_point() const;
+		Vector2i get_point() const;
 
 		void set_string(char const*);
 
@@ -126,7 +126,7 @@ public:
 	uint32_t get_positive(char const* name, uint32_t def = 1);
 	bool get_bool(char const* name, bool def = false);
 	const char* get_string(char const* name, char const* def = nullptr);
-	Point get_point(char const* name, Point def = Point(0, 0));
+	Vector2i get_point(char const* name, Vector2i def = Vector2i(0, 0));
 
 	int32_t get_safe_int(const char* name);
 	uint32_t get_safe_natural(char const* name);

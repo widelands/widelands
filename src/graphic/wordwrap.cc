@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -303,7 +303,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Point where, Align align, uint32_t caret) {
+void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
 	if (lines_.empty())
 		return;
 
@@ -329,7 +329,7 @@ void WordWrap::draw(RenderTarget& dst, Point where, Align align, uint32_t caret)
 		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
-		Point point(where.x, where.y);
+		Vector2f point(where.x, where.y);
 
 		if (static_cast<int>(alignment & UI::Align::kRight)) {
 			point.x += wrapwidth_ - LINE_MARGIN;
@@ -346,9 +346,9 @@ void WordWrap::draw(RenderTarget& dst, Point where, Align align, uint32_t caret)
 			int caret_x = text_width(line_to_caret, style_.font->size());
 
 			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
-			Point caretpt;
+			Vector2f caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
-			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+			caretpt.y = point.y + (fontheight - caret_image->height()) / 2.f;
 			dst.blit(caretpt, caret_image);
 		}
 	}

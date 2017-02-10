@@ -6,8 +6,8 @@ animations = {
       hotspot = { 6, 23 }
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {9, 23}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {9, 23}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {9, 23}, 10)
+add_walking_animations(animations, "walkload", dirname, "walk", {9, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -21,9 +21,8 @@ tribes:new_worker_type {
 
    buildcost = {
       empire_carrier = 1,
-      -- TODO (GunChleoc): Add back in when we have a casern
-      --armor_helmet = 1,
-      --spear_wooden = 1
+      armor_helmet = 1,
+      spear_wooden = 1
    },
 
    animations = animations,

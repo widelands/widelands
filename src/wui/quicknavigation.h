@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2016 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,11 +26,8 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "base/point.h"
-
-namespace Widelands {
-class EditorGameBase;
-}
+#include "base/vector.h"
+#include "wui/mapview.h"
 
 /**
  * Provide quick navigation shortcuts.
@@ -40,25 +37,17 @@ class EditorGameBase;
  */
 struct QuickNavigation {
 	struct Landmark {
-		Point point;
+		MapView::View view;
 		bool set;
 
 		Landmark() : set(false) {
 		}
 	};
 
-	using SetViewFn = boost::function<void(Point)>;
+	QuickNavigation(MapView* map_view);
 
-	QuickNavigation(const Widelands::EditorGameBase& egbase,
-	                uint32_t screenwidth,
-	                uint32_t screenheight);
-
-	void set_setview(const SetViewFn& fn);
-
-	void view_changed(Point point, bool jump);
-
-	// Set the landmark for 'index' to 'point'. 'index' must be < 10.
-	void set_landmark(size_t index, const Point& point);
+	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
+	void set_landmark(size_t index, const MapView::View& view);
 
 	// Returns a pointer to the first element in the landmarks array
 	const std::vector<Landmark>& landmarks() const {
@@ -68,34 +57,14 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(Point where);
+	void view_changed();
 
-	const Widelands::EditorGameBase& egbase_;
-	uint32_t screenwidth_;
-	uint32_t screenheight_;
-
-	/**
-	 * This is the callback function that we call to request a change in view position.
-	 */
-	SetViewFn setview_;
+	MapView* map_view_;
 
 	bool havefirst_;
-	bool update_;
-	Point anchor_;
-	Point current_;
+	MapView::View current_;
 
-	/**
-	 * Keeps track of what the player has looked at to allow jumping back and forth
-	 * in the history.
-	 */
-	/*@{*/
-	std::vector<Point> history_;
-	std::vector<Point>::size_type history_index_;
-	/*@}*/
-
-	/**
-	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
-	 */
+	// Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
 	std::vector<Landmark> landmarks_;
 };
 
