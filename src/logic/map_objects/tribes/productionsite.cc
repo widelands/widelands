@@ -178,9 +178,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				throw wexception("this program has already been declared");
 			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, _(program_table->get_string("descname")),
-			                         program_table->get_table("actions"), egbase, this));
+
+			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
+			// translators and disambiguate at the same time.
+			const std::string program_descname_unlocalized = program_table->get_string("descname");
+			std::string program_descname = _(program_descname_unlocalized);
+			if (program_descname == program_descname_unlocalized) {
+				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+			}
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
+			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
