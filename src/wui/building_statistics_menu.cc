@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -482,7 +482,8 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 
 	if (found) {
 		validate_pointer(&last_building_index_, stats_vector.size());
-		iplayer().center_view_on_coords(stats_vector[last_building_index_].pos);
+		iplayer().scroll_to_field(
+		   stats_vector[last_building_index_].pos, MapView::Transition::Smooth);
 	}
 	low_production_reset_focus();
 	update();

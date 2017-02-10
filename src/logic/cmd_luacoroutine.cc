@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,21 +34,22 @@
 
 namespace Widelands {
 
+CmdLuaCoroutine::~CmdLuaCoroutine() {
+}
+
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, cr_));
-			cr_ = nullptr;  // Remove our ownership so we don't delete.
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
-			delete cr_;
-			cr_ = nullptr;
+			cr_.reset();
 		}
 	} catch (LuaError& e) {
 		log("Error in Lua Coroutine\n");
 		log("%s\n", e.what());
-		log("Send message to all players and pause game");
+		log("Send message to all players and pause game\n");
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message& msg = *new Widelands::Message(
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
@@ -90,6 +91,6 @@ void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	upcast(LuaGameInterface, lgi, &egbase.lua());
 	assert(lgi);  // If this is not true, this is not a game.
 
-	lgi->write_coroutine(fw, cr_);
+	lgi->write_coroutine(fw, *cr_);
 }
 }

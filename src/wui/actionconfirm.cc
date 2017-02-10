@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
+#include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
@@ -127,18 +128,37 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              Widelands::MapObject& map_object)
    : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
      object_(&map_object) {
-	new UI::MultilineTextarea(this, 0, 0, 200, 74, message, UI::Align::kCenter);
+	const int padding = 6;
+	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
 
-	UI::Button* okbtn = new UI::Button(this, "ok", UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80,
-	                                   34, g_gr->images().get("images/ui_basic/but4.png"),
-	                                   g_gr->images().get("images/wui/menu_okay.png"));
+	UI::MultilineTextarea* textarea =
+	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::Align::kCenter,
+	                             g_gr->images().get("images/ui_basic/but1.png"),
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	textarea->force_new_renderer();
+
+	UI::Button* okbtn =
+	   new UI::Button(button_box, "ok", 0, 0, 80, 34, g_gr->images().get("images/ui_basic/but4.png"),
+	                  g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
-	UI::Button* cancelbtn =
-	   new UI::Button(this, "abort", UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
-	                  g_gr->images().get("images/ui_basic/but4.png"),
-	                  g_gr->images().get("images/wui/menu_abort.png"));
+	UI::Button* cancelbtn = new UI::Button(button_box, "abort", 0, 0, 80, 34,
+	                                       g_gr->images().get("images/ui_basic/but4.png"),
+	                                       g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
+
+	button_box->add(
+	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Align::kLeft, false, true);
+	button_box->add_space(2 * padding);
+	button_box->add(
+	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Align::kLeft, false, true);
+	main_box->add(textarea, UI::Align::kLeft);
+	main_box->add_space(1.5 * padding);
+	main_box->add(button_box, UI::Align::kLeft, true);
+	button_box->set_size(textarea->get_w(), okbtn->get_h());
+	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding);
+	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
 	center_to_parent();
 	cancelbtn->center_mouse();
@@ -152,12 +172,10 @@ Create the panels for bulldoze confirmation.
 BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
                                  Widelands::Building& building,
                                  Widelands::PlayerImmovable* todestroy)
-   : ActionConfirm(
-        parent,
-        _("Destroy building?"),
-        (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname())
-           .str(),
-        building),
+   : ActionConfirm(parent,
+                   _("Destroy building?"),
+                   _("Do you really want to destroy this building?"),
+                   building),
      todestroy_(todestroy ? todestroy : &building) {
 	// Nothing special to do
 }
@@ -199,12 +217,10 @@ Create the panels for dismantle confirmation.
 ===============
 */
 DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Building& building)
-   : ActionConfirm(
-        parent,
-        _("Dismantle building?"),
-        (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname())
-           .str(),
-        building) {
+   : ActionConfirm(parent,
+                   _("Dismantle building?"),
+                   _("Do you really want to dismantle this building?"),
+                   building) {
 	// Nothing special to do
 }
 
@@ -249,8 +265,12 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
    : ActionConfirm(
         parent,
         _("Enhance building?"),
-        (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname())
-           .str(),
+        building.descr().type() == Widelands::MapObjectType::MILITARYSITE ?
+           (boost::format("%s\n\n%s") % _("Do you really want to enhance this building?") %
+            /** TRANSLATORS: Warning message when player wants to enhance a military building */
+            _("Be careful if the enemy is near!"))
+              .str() :
+           _("Do you really want to enhance this building?"),
         building),
      id_(id) {
 	// Nothing special to do

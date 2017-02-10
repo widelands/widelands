@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -221,7 +221,7 @@ private:
 	void start_request_timer(int32_t delta = 200);
 
 	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
-	void process_requests(Game&, RSPairStruct&);
+	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
 	void create_requested_workers(Game&);

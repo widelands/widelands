@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 16:09+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -144,36 +144,40 @@ msgid "Destroy the Barbarian Tribe"
 msgstr "Mill treubh nan Tùsanach"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
+msgid "Build a barracks to start training soldiers."
+msgstr "Togh taigh-feachd gus oideachadh nan saighdearan a thòiseachadh."
+
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "Barbarian buildings."
 msgstr "Cho luath ’s a bhios saighdearan gu leòr agad, thoir ionnsaigh air togalaichean nan Tùsanach uile gus am milleadh air fad."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:100
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
 msgstr "Aig deireadh na sgeòil, tog dùn air an rubha (faisg air far an robh prìomh-àras nan Tùsanach) ach nach tuinich treubhan eile san sgìre ud."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:108
 msgid "A New Island"
 msgstr "Eilean ùr"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:230
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:257
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:121
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:258
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:278
 msgid "Diary of Lutius"
 msgstr "An leabhar-latha aig Lutius"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:112
 msgid ""
 "Finally! This island appears to have been made for us, it is a gift from the"
 " Gods to my people and myself. Until now, we have only seen a small part of "
@@ -182,19 +186,19 @@ msgid ""
 msgstr "Mu dheireadh thall! Tha coltas gun deach an t-eilean seo a chruthachadh dhuinne, ’s e tìodhlac o na Diathan don t-slugadh agam agus dhomhsa a th’ ann. Chan eil sinn ach air cnap beag dhen eilean seo fhaicinn gu ruige seo, ach ’s ann gu bheil a’ phàirt seo a’ togail mo chridhe. Ar leam lorg sinn seud nan seud, tìr coltach ri pàrras."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:115
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
 msgstr "’S ann san eilean seo a thòisicheas sinn air ar beatha ùr. Togaidh sinn tuineachadh nam fògarrach a thèid ’na dhachaigh àlainn ùr airson gach fear dhuinn, ma dh’fhaoidte."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:119
 msgid "The Green Forests"
 msgstr "Na coilltean uaine"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -202,7 +206,7 @@ msgid ""
 msgstr "Nuair a choisich mi na coilltean mìorbhaileach gu tuath cuide ri Saledus, bha sinn a’ faireachdainn gun dàinig latha ùr oirnn. Tha an tìr seo cho sìtheil àlainn math, bu toigh leam fuireach an-seo gu latha mo bhàis."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:126
 msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
@@ -210,63 +214,63 @@ msgid ""
 msgstr "Ach nach digeadh an latha ud a dh’aithghearr! Feumaidh sinn ar n-aire a thoirt air an latha an-diugh agus taighean do na coilltearan agus muileann sàbhaidh a thogail gus am faigh sinn stuthan togail bunasach."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:129
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
 msgstr "Ach na dìochuimhnicheamaid an stòras nàdarra seo a ghlèidheadh. Bu chòir do na coilltean seo mairsinn gu buan, mar sin feumaidh sinn taigh planntair-choille a thogail cuideachd."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:134
 msgid "The Rocks"
 msgstr "Na carraigean"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:138
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
 msgstr "An uairsin, chaidh mi sìos gu deas far a bheil carraigean ann agus lorg mi àite far am b’ urrainn dhuinn cuaraidh a thogail gus gaireal airson nan togalach mòra againn fhaighinn."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
 msgstr "Shaoil mi gun robh mi ann am pàrras a-rithist nuair a mhothaich mi do chlachan le coltas marmoir orra am measg nan carraigean. Tha mi ’n dùil gum bi sinn comasach air togalaichean làidir sòghail a thogail mar a bha sinn cleachdte riutha ann am Fremil."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:146
 msgid "Wood for the Colony"
 msgstr "Fiodh airson an tuineachaidh"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:150
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
 msgstr "Deagh naidheachd! Chaidh an eaconamaidh fiodha againn a choileanadh an-diugh. Bidh sinn cinnteach a-nis gum faigh sinn fiodh gu leòr airson nan togalaichean ùra againn san àm ri teachd."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:154
 msgid "Stones for the Colony"
 msgstr "Clachan airson an tuineachaidh"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:158
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
 msgstr "Nach math sin! Chaidh togail a’ chuaraidh a choileanadh an-diugh. Gheibh sinn gaireal agus marmor gu leòr a-nis gus togalaichean mòra a thogail."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:162
 msgid "Dangerous Ship Parts"
 msgstr "Fuighill luinge chunnartach"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
 msgstr "Tha Saledus mì-thoilichte"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Sire, I don’t want to start a panic, but I found something which gives me a "
 "sinking feeling in my stomach and spreads waves of fear in my heart. As I "
@@ -276,29 +280,29 @@ msgid ""
 msgstr "A thighearna, chan eil mi airson dragh a chur oirbh, ach lorg mi rudeigin a thug clisgeadh orm agus an t-eagal dha mo chridhe. Nuair a choisich mi sìos dhan chladach gu deas, lorg mi fuigheall luinge eile. Chan eil fios agam nach eil gin eile air fhàgail dhen long sin ach na pìosan ud. Co-dhiù no co-dheth, chan eil coltas sean orra."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
 msgstr "’S dòcha gun dàinig an t-aon ghailleann air na daoine a bha air bòrd na luinge ud ’s a thàinig oirnne ’s a thug gu Malac’ Mor sinn – agus gun deach an toirt dhan eilean seo cuideachd."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:172
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
 msgstr "Gum bitheadh sibh faiceallach is gun togadh sibh taighean-bloca no freiceadanan timcheall air an tuineachadh againn."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:176
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:177
 msgid "Marble on the Mountain"
 msgstr "Marmor air a’ bheinn"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:177
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:178
 msgid "Saledus smiles"
 msgstr "Tha fiamh a’ ghàire air Saledus"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
@@ -306,7 +310,7 @@ msgid ""
 msgstr "A thighearna, tha deagh naidheachd agam dhuibh: nuair a choisich mi gu ear, lorg mi beinn mhòr. Chan eil mi buileach cinnteach – bu chòir do chlach-eòlaiche dearbhadh a bheil mi ceart – ach saoilidh mi gum b’ urrainn dhuinn marmor a thogail àiteigin sa bheinn ud."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:183
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -314,20 +318,20 @@ msgid ""
 msgstr "’S e stòras math a bhiodh ann gus cur ris an deagh-mharmor againn o nach fhaigh sinn ach gu gann e on chuaraidh. Feumaidh gun robh sibh ceart nuair a thuirt sibh gun robh an t-eilean seo coltach ri pàrras."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:186
 msgid "Please, expand to that mountain and start mining marble."
 msgstr "Nach leudaich sibh ar ranntair gu ear ach an tòisicheamaid air marmor a thochladh sna beanntan?"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:191
 msgid "Further Mountains"
 msgstr "Barrachd bheanntan"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:192
 msgid "Saledus is excited"
 msgstr "Tha Saledus air a thogail"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:194
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
@@ -337,7 +341,7 @@ msgid ""
 msgstr "A dhiathan, abair thusa gur e deagh-fhortan a tha seo! Tha dà bheinn eile ann agus coltas air an dàrna tè gu bheil grunn guail innte agus clach-iarainn san tè eile. Mholainn-sa gun tog sibh mèinnean iarainn ’s guail (no sluic guail-fhiodha) sa bhad agus ceàrdaichean leaghadair, acainnean, armachd ’s arm."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
@@ -345,25 +349,25 @@ msgid ""
 msgstr "Ach thoiribh an aire: feumaidh sinn stuthan togail nas fhearr ’s nas uaisle airson nan togalaichean mòra sin. Mar sin, feumaidh sibh taigh a thogail dhan chlachair a ghearras colbhan on mharmor."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:200
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "Chan fhada gus am bi sinn beò mar a b’ àbhaist ann am Fremil a-nis."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "Food for the Miners"
 msgstr "Biadh dha na mèinnearan"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
 msgid "Amalea enters…"
 msgstr "Tha Amalea a’ tighinn a-steach…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:208
 msgid "Lutius, don’t you think you forgot something important?"
 msgstr "A Lutius, saoil na dhìochuimhnich thu dad cudromach?"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:211
 msgid ""
 "It’s nice, and of course a good idea, to build up mines, which will give us "
 "a more comfortable life, but the people working in the mines are unhappy "
@@ -372,40 +376,40 @@ msgid ""
 msgstr "Tha e snog agus ’s e deagh-bheachd a th’ ann gun teagamh mèinnean a thogail a bheir beatha nas cofhurtaile dhuinn ach tha na daoine a tha ag obair sna mèinnean mì-thoiliche leis an t-suidheachadh aca. Feumaidh iad obair gu cruaidh ’s chan eil ùine aca gus am biadh aca fhèin a dhèanamh."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
 msgstr "Saoil dè nì thu gus an cuideachadh? Chan eil fios agam dè dh’fheumas sinn gu pongail… ach seo mo bheachdan dhut:"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Our New Tavern"
 msgstr "An taigh-tàirn ùr againn"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
 msgid "Amalea smiles"
 msgstr "Tha fiamh a’ ghàire air Amalea"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:221
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:222
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
 msgstr "Tha mi air tadhal air an taigh-tàirn “Fon Craobh-phailm” ùr againn. Tha an leann aca fìor mhath. Bu chòir dhut fhèin a dhol ann agus glainne no dhà a ghabhail."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr "Nach math gu bheil àrainneachd choibhneil bhlàth san eilean againn a-nis. Mòran taing, a Lutius."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:229
 msgid "The Barbarians"
 msgstr "Na Tùsanaich"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
@@ -413,7 +417,7 @@ msgid ""
 msgstr "A dhiathan! Abair thusa gun dàinig an droch-fhortan oirnn a-rithist. Tha deuchainn romhainn a-rèir coltais – agus dhomhsa dheth bha Saledus ceart nuair a bha e amharasach mun long bhriste a lorg e."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:236
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
@@ -421,7 +425,7 @@ msgid ""
 msgstr "Nuair a choisich mi oirthir an ear an-diugh, thàinig an clisgeadh orm. Chunnaic mi fear de na treubhan olca Tùsanach as fuathail leam ’s a dh’adhbharaich grunn dhuilgheadasan dhuinn roimhe."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:239
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -430,69 +434,69 @@ msgid ""
 msgstr "Nach mise a bha gorm aig an toiseach ’s làn dòchais gum biodh iad sìtheil ach cho luath ’s a mhothaich iad dhomh, thug iad ionnsaigh orm leis na sleaghan tilgeil aca. Taing do na diathan gun deach leam teicheadh agus m’ fhalach mus do chùlaich mi don tuineachadh againn air an oidhche."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:242
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
 msgstr "’S e cnag na cùise gum feum sinn togalaichean an airm nas treuna a thogail cho luath ’s a ghabhas."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:246
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:247
 msgid "Command to Attack"
 msgstr "Òrdugh ionnsaighe"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
 msgstr "’S math sin. Tha a’ chiad togalach mòr an airm deiseil agus tha bun-structar na mèinnearachd air a dhol am feabhas. Bu chòir dhuinn beachdachadh air ar n-ullachadh airson a’ chogaidh a-nis."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:256
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid "Victory"
 msgstr "Buaidh"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "’S e latha moite a th’ ann an-diugh. Shabaid sinn airson ar dachaigh ùr agus chaidh an latha leinn."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:263
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
 msgstr "Tha cuid de na Tùsanaich nam falach san eilean againn fhathast, ach tha mi cinnteach gun lorg sinn iad a dh’aithghearr. Thèid gach Tùsanach a bheir ionnsaigh oirnn a chur air bàta leis an fheadhainn sìtheil eile agus a thilleadh don dùthaich aca fhèin."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:265
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
 msgstr "Tha thu air eaconamaidh a dh’obraicheas a stèidheachadh, air saighdearan ùra oideachadh agus air na Tùsanaich a thoirt far an eilein."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid "As Time is Running By"
 msgstr "Tha an ùine a’ dol seachad"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:272
 msgid "7 days later…"
 msgstr "7 làithean às dèidh seo…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "A Message"
 msgstr "Teachdaireachd"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Thàinig calman don eilean againn an-diugh. Thug e naidheachd dhuinn a chuir an leann-dubh ’s an t-eagal orm."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -500,7 +504,7 @@ msgid ""
 "must do…"
 msgstr "Chaidh an teachdaireachd a chur thugamsa, a’ guidhe gun tillinn gu Fremil. Tha i ag ràdh gu bheil an Impireachd a’ cogadh ris na Tùsanaich. Chaidh ionnsaigh a thoirt orra on taobh tuath leis an treubh nach d’ fhuair mi cead gus ionnsaigh a thoirt orra. Tha e follaiseach dè dh’fheumas mi dèanamh a-nis…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

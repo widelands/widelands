@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# fenris <fenris.kcf@gmail.com>, 2015-2016
+# fenris <fenris@folksprak.org>, 2015-2016
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2011
 # GunChleoc, 2014
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-28 21:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -283,32 +283,32 @@ msgstr "Viaj soldatoj venkis la malamikon ĉe la fortikaĵo."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:7
 msgctxt "barbarians_building"
 msgid "Sentry"
-msgstr ""
+msgstr "Gardejo"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:47
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:48
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Via soldatoj enmarŝis en vian gardejon."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:48
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Via gardejo ekvidis malamikon."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:49
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Via gardejo estas atakata."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:50
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la gardejo."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:51
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:52
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la gardejo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:7
@@ -390,7 +390,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:7
 msgctxt "empire_building"
 msgid "Sentry"
-msgstr ""
+msgstr "Gardejo"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:7
@@ -492,11 +492,9 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgid "recruiting soldier"
 msgstr ""
 
@@ -698,7 +696,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi fiŝojn ĉe sia labor-regiono. Sciu, ke vi povas altigi la nombron da fiŝoj per konstrui fiŝ-bredejon."
+msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi fiŝojn ĉe sia labor-regiono. Sciu, ke vi povas altigi la nombron da fiŝoj per konstrui fiŝ-bredejon."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
@@ -780,7 +778,7 @@ msgstr "bredanta ĉevalojn"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Hunter’s House"
-msgstr "Ĉasist-kabeno"
+msgstr "Ĉasist-kabano"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:43
@@ -808,7 +806,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi bestojn ĉe sia labor-regiono."
+msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi bestojn ĉe sia labor-regiono."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
@@ -1113,13 +1111,13 @@ msgid "weaving spidercloth"
 msgstr "teksanta arane-silk-ĉemizon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr "tajlanta jakon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr "tajlanta jakon oran"
 
@@ -1144,7 +1142,7 @@ msgstr "Ne plu akvo"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "La portisto, kiu laboras ĉe tiu ĉi puto, ne povas trovi akvon en sia puto."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1213,7 +1211,7 @@ msgstr "Bakejo"
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
 msgctxt "barbarians_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazerno"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1340,7 +1338,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi fiŝojn ĉe sia labor-regiono."
+msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi fiŝojn ĉe sia labor-regiono."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
@@ -1430,7 +1428,7 @@ msgstr "forĝanta milit-kaskon"
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "Ĉasist-kabeno"
+msgstr "Ĉasist-kabano"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
@@ -1439,7 +1437,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi bestojn ĉe sia labor-regiono. Sciu, ke vi povas altigi la nombron da bestoj per konstrui Best-stok-protektist-kabanon."
+msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi bestojn ĉe sia labor-regiono. Sciu, ke vi povas altigi la nombron da bestoj per konstrui Best-stok-protektist-kabanon."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:7
@@ -1496,7 +1494,7 @@ msgstr "faranta morteron"
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr "Arb-hakist-kabeno"
+msgstr "Arb-hakist-kabano"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
 msgctxt "barbarians_building"
@@ -1662,7 +1660,7 @@ msgstr "Puto"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "La portisto, kiu laboras ĉe tiu ĉi puto, ne povas trovi akvon en sia puto."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -1709,7 +1707,7 @@ msgstr "Bakejo"
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
 msgctxt "empire_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazerno"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:7
@@ -1784,7 +1782,7 @@ msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi fiŝojn ĉe sia labor-regiono."
+msgstr "La fiŝ-kaptisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi fiŝojn ĉe sia labor-regiono."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:7
@@ -1823,7 +1821,7 @@ msgstr "La ĉef-vejno de tiu ĉi or-minejo estas elĉerpita. Atendu malaltegan b
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
 msgctxt "empire_building"
 msgid "Hunter’s House"
-msgstr "Ĉasist-kabeno"
+msgstr "Ĉasist-kabano"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
@@ -1831,7 +1829,7 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabeno, ne povas trovi bestojn ĉe sia labor-regiono."
+msgstr "La ĉasisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi bestojn ĉe sia labor-regiono."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:7
@@ -1870,7 +1868,7 @@ msgstr "La ĉef-vejno de tiu ĉi fer-minejo estas elĉerpita. Atendu malaltegan 
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Arb-hakist-kabeno"
+msgstr "Arb-hakist-kabano"
 
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:56
 msgctxt "empire_building"
@@ -2579,15 +2577,19 @@ msgstr "Enkonduko"
 msgid "Controls"
 msgstr "Stirado"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Varoj"
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Laboristoj"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Konstruaĵoj"
 
@@ -3251,6 +3253,12 @@ msgid "Miner"
 msgstr "Ekspluatisto"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
@@ -3473,6 +3481,12 @@ msgid "Ranger"
 msgstr "Arbaristo"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3633,6 +3647,12 @@ msgstr "Ekspluatisto majstra"
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "Pork-bredisto"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

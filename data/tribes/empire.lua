@@ -141,6 +141,7 @@ tribes:new_tribe {
       },
       {
          -- Military
+         "empire_recruit",
          "empire_soldier",
          "empire_trainer",
          "empire_weaponsmith",

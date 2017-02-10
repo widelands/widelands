@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -196,8 +196,8 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = UI::g_fh1
-			       ->render(as_uifont(UI::g_fh1->fontset()->representative_character(), fontsize_))
+			h = UI::g_fh1->render(
+			                as_uifont(UI::g_fh1->fontset()->representative_character(), fontsize_))
 			       ->height();
 		}
 	}

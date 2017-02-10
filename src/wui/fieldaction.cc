@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -525,7 +525,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::okdialog() {
-	ibase().warp_mouse_to_node(node_);
+	ibase().mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 

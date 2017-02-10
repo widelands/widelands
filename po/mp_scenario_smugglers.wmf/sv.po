@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# D M <hunter12@home.se>, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-12-03 09:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-06 13:06+0000\n"
+"PO-Revision-Date: 2017-01-09 22:53+0000\n"
+"Last-Translator: D M <hunter12@home.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares Smuggled"
@@ -38,8 +39,8 @@ msgstr "Varor smugglade"
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i poäng"
+msgstr[1] "%i poäng"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
@@ -55,7 +56,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "Smugglare är en rolig karta för 4 spelare. Du och din medspelare startar diagonalt mot varandra på en symmetrisk ö. Det finns gott om smugglingstunnlar på denna ö, var och en bestående av en avsändande och en mottagande del."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -63,7 +64,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "För att etablera en smugglingsrutt behöver du bygga ett magasin vid en avsändar-/mottagar-plats, medan din medspelare måste bygga ett vid motsvarande avsändar-/mottagar-plats. En vara transporteras sedan var 10e sekund."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -71,32 +72,32 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
+msgstr "För smugglingsrutter som är svårare att försvara får du 2 eller 3 poäng per smugglad vara. Det lag som först har %s vinner."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr ""
+msgstr "En avsändarplats"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
-msgstr ""
+msgstr "En mottagarplats"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "Anteckningar"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
+msgstr "Kom ihåg att kartan har rotationssymmetri. Till exempel när du har hittat en plats uppe till vänster om ditt högkvarter ligger den motsvarande platsen nere till höger om din medspelares högkvarter."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr "Du kan se antalet bytta varor när som helst i den generella statitisik menyn. Lycka till!"
+msgstr "Du kan se antalet handlade varor när som helst i den generella statistikmenyn. Lycka till!"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
@@ -104,7 +105,7 @@ msgstr "Du kan se antalet bytta varor när som helst i den generella statitisik 
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr ""
+msgstr "En ny smugglingsrutt från %1$s till %2$s har etablerats! Varje vara som smugglas där är värd %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:27
@@ -112,7 +113,7 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "Ditt lag har etablerat en ny smugglingsrutt. Du har det avsändande lagret. Varje vara som smugglas här är värd %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:32
@@ -120,17 +121,17 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "Ditt lag har etablerat en ny smugglingsrutt. Du har det mottagande lagret. Varje vara som smugglas här är värd %s."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr ""
+msgstr "Smugglingsrutten från %2$s till %3$s, som är värd %1$s, har förstörts!"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid "Game over!"
-msgstr ""
+msgstr "Spelet är slut!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
@@ -138,4 +139,4 @@ msgstr ""
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr ""
+msgstr "Spelet är slut! %1$s och %2$s har vunnit spelet! %3$s och %4$s lyckades bara samla ihop %5$s."
