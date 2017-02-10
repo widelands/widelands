@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "ui_basic/unique_window.h"
+
+#include <boost/bind.hpp>
 
 namespace UI {
 /*
@@ -63,6 +65,21 @@ void UniqueWindow::Registry::toggle() {
 */
 UniqueWindow::Registry::~Registry() {
 	delete window;
+}
+
+void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
+	assert(!on_create);
+	assert(!on_delete);
+	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
+	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
+	if (window) {
+		button->set_style(UI::Button::Style::kPermpressed);
+	}
+}
+
+void UniqueWindow::Registry::unassign_toggle_button() {
+	on_create = 0;
+	on_delete = 0;
 }
 
 /**

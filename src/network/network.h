@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <vector>
 
 #include <SDL_net.h>
+#include <boost/lexical_cast.hpp>
 
 #include "base/wexception.h"
 #include "io/streamread.h"
@@ -174,24 +175,17 @@ private:
  * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code) {
-		what_ = code;
-	}
-
-	/// do NOT use!!! This exception shall only return the command number of the received message
-	/// via \ref ProtocolException:number()
-	const char* what() const noexcept override {
-		NEVER_HERE();
+	explicit ProtocolException(uint8_t code)
+	   : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
 	}
 
 	/// \returns the command number of the received message
-	virtual int number() const {
-		return what_;
+	const char* what() const noexcept override {
+		return what_.c_str();
 	}
 
 private:
-	// no uint8_t, as lexical_cast does not support that format
-	int what_;
+	const std::string what_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H

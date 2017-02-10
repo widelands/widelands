@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-15 07:56+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:07+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Fødevarer er meget vigtige for miner og militære træningsanlæg. Etabler en velfungerende fødevareproduktion ved at bygge mindst et landbrug, et rodfrugtlandbrug og en mølle. De to slags mel sammen med vand fra en mølle vil blive bagt som brød i et bageri, så byg også et bageri."
+msgstr "Fødevarer er meget vigtige for miner og militære træningsanlæg. Etabler en velfungerende fødevareproduktion ved at bygge mindst et landbrug, et rodfrugtlandbrug og en mølle. De to slags mel sammen med vand fra en brønd vil blive bagt som brød i et bageri, så byg også et bageri."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -158,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Væverne fremstiller silkeklæde og våbenkjortler i væveriet. Silkeklæde bruges til konstruktionen af visse bygninger og tøj, mens våbenkjortler bruges til at uniformere soldater. Væveriet skal bruge guldtråd og silketråd som råmaterialer. Silketråd fremstilles af silkegårde, mens guldtråd fremstilles ud fra guld af guldspindemøllen."
+msgstr "Væverne fremstiller silkeklæde og våbenkjortler i væveriet. Silkeklæde bruges til konstruktionen af visse bygninger og tøj, mens våbenkjortler bruges til at uniformere soldater. Væveriet skal bruge guldtråd og silketråd som råmaterialer. Edderkopsilke fremstilles af silkegårde, mens guldtråd fremstilles ud fra guld af guldspindemøllen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -247,7 +247,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Efterhånden som dit vejnetværk bliver længere og mere kompliceret, så kan du bruge heste til at hjælpe dine fragtmænd. Heste avles på stutterier med vand og korn. Et lager vil også hjælpe dig med at sikre, at transportsystemet ikke bryder sammen."
+msgstr "Efterhånden som dit vejnetværk bliver længere og mere kompliceret, så kan du bruge heste til at hjælpe dine bærer. Heste avles på stutterier med vand og korn. Et lager vil også hjælpe dig med at sikre, at transportsystemet ikke bryder sammen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
@@ -538,7 +538,7 @@ msgstr "Ah, men jeg tror det er umuligt at ændre. Det at tilberede og spise mad
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
@@ -597,7 +597,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "Vi tilbyder også fremstilling af tabarder til unge soldater og de gyldne tabarder for officerer. Du skal bruge dem så snart du ønsker at rekruttere nye soldater."
+msgstr "Vi tilbyder også fremstilling af våbenkjortler til unge soldater og de gyldne våbenkjortler for officerer. Du skal bruge dem så snart du ønsker at rekruttere nye soldater."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:268
@@ -606,7 +606,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Må Satul også være med dig, Opol. Jeg ønskede at forsinke produktionen af silke, men jeg forstår din utålmodighed. Dine forslag lyder rimelige i mine ører, jeg vil bygge et væveri og et silkelandbrug. Jeg vil også bygge en guldspindemølle, så at de gyldne tabarder du laver ikke kun er gyldne af navn."
+msgstr "Må Satul også være med dig, Opol. Jeg ønskede at forsinke produktionen af silke, men jeg forstår din utålmodighed. Dine forslag lyder rimelige i mine ører, jeg vil bygge et væveri og et silkelandbrug. Jeg vil også bygge en guldspindemølle, så at de gyldne våbenkjortler, du laver, ikke kun er gyldne af navn."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
 msgid "Opol Seeks Out Jundlina"
@@ -619,7 +619,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr "Må Satul være med dig, Jundlina! Væveriet, guldspindemøllen og silkelandbruget er færdige og starter produktionen mens vi snakker. Vævernes lav er meget taknemlige for din støtte og vi vil stå ved vores ord og levere den første tabard meget snart."
+msgstr "Må Satul være med dig, Jundlina! Væveriet, guldspindemøllen og silkelandbruget er færdige og starter produktionen mens vi snakker. Vævernes lav er meget taknemlige for din støtte og vi vil stå ved vores ord og levere den første våbenkjortel meget snart."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:284
@@ -684,7 +684,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Jeg er enig med dig og jeg har straffet ballademagerne hårdt. Men det er meget svært at holde mine mænd i ro: De keder sig, da de intet har at lave. Jeg vil godt have dem i gang. Jeg tror, at mere rutine i deres liv vil holde dem beskæftiget og fokuseret på deres pligter. Jeg skal bruge en forhindringsbane og en labyrint. Jeg har planerne klar, men det bliver nok ikke helt billigt."
+msgstr "Jeg er enig med dig og jeg har straffet ballademagerne hårdt. Men det er meget svært at holde mine mænd i ro: De keder sig, da de intet har at lave. Jeg vil godt have dem i gang. Jeg tror, at mere rutine i deres liv vil holde dem beskæftiget og fokuseret på deres pligter. Jeg skal bruge en fangekælder og en labyrint. Jeg har planerne klar, men det bliver nok ikke helt billigt."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:322
@@ -707,7 +707,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Jeg modtog en invitation fra Sidolus. Den første træningsdag i den nybyggede labyrint vil foregå i morgen. Forhindringsbanen er færdig og træningen starter snart. Jeg glæder mig til i morgen; jeg er meget interesseret i hvordan vores soldater trænes, og om yderligere pligter vil afholde dem fra at chikanere den civile befolkning."
+msgstr "Jeg modtog en invitation fra Sidolus. Den første træningsdag i den nybyggede labyrint vil foregå i morgen. Fangekælderen er færdig og træningen starter snart. Jeg glæder mig til i morgen; jeg er meget interesseret i hvordan vores soldater trænes, og om yderligere pligter vil afholde dem fra at chikanere den civile befolkning."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:338
 msgid "Jundlina Considers the Economy"
@@ -719,7 +719,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "Folk klager over overbefolkede veje og langsom transport. Vi bør hjælpe vores fragtmænd på vejene. Jeg har besluttet at bygge et stutteri, så hestene kan hjælpe med transport af de tunge varer."
+msgstr "Folk klager over overbefolkede veje og langsom transport. Vi bør hjælpe vores bærer på vejene. Jeg har besluttet at bygge et stutteri, så hestene kan hjælpe med transport af de tunge varer."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:344
@@ -860,7 +860,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Hurtigt, vi skal bruge en bygning til Ostur ved siden af søen, og vi skal bruge planker, træstammer og silketøj til konstruktionen. Glem alt andet, vi skal bruge disse varer på toppen af bjerget før alle vores varehuse bliver slugt af havet."
+msgstr "Hurtigt, vi skal bruge en bygning til Ostur ved siden af søen, og vi skal bruge brædder, træstammer og silketøj til konstruktionen. Glem alt andet, vi skal bruge disse varer på toppen af bjerget før alle vores varehuse bliver slugt af havet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:443
 msgid "Jundlina is Relieved"

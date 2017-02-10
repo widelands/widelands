@@ -72,7 +72,7 @@ typedef struct Labellist {
 
 /* dynamic structures used by the parser */
 typedef struct Dyndata {
-	struct { /* list of active local variables */
+	struct {/* list of active local variables */
 		Vardesc* arr;
 		int n;
 		int size;

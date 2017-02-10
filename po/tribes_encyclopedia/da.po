@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-11-03 16:11+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-28 21:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:46
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
@@ -44,7 +44,7 @@ msgid "Garrisons soldiers to expand your territory."
 msgstr "Garrisonssoldater til at udvide dit territorium."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
@@ -98,6 +98,14 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Bager brød til føde for spejdere og minearbejdere og til at træne soldater."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Giver rekrutter udstyr og træner dem som soldater."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
@@ -112,6 +120,11 @@ msgid ""
 "blackroot."
 msgstr "Rodfrugtsdyrkeren skal bruge %1% i gennemsnit for at så og høste et bundt rodfrugter."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -244,7 +257,7 @@ msgstr "Graver jernmalm ud af undergrunden i bjergterræn."
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
 msgstr "Maler rodfrugter og majs til rodfrugts- og majsmel."
 
@@ -285,6 +298,11 @@ msgid ""
 "between ports."
 msgstr "Bygger skibe som bruges til kolonisering på den anden side af havet og til at handle mellem havne."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -405,8 +423,8 @@ msgstr "Barbarernes økseværksted er det mellemste niveau i en serie af tre byg
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:67
-#: ../../data/tribes/scripting/help/global_helptexts.lua:97
+#: ../../data/tribes/scripting/help/global_helptexts.lua:69
+#: ../../data/tribes/scripting/help/global_helptexts.lua:99
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -444,6 +462,14 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
 msgstr "Hvis alle nødvendige råvarer leveres i tide, så kan denne bygning fremstille et fladbrød på %s i gennemsnit."
+
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Giver rekrutter udstyr og træner dem som soldater."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -636,7 +662,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
 " on average."
-msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guld i gennemsnitlig 19,5 sekunder."
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guldmalm i gennemsnitlig 19,5 sekunder."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -654,7 +680,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
 " on average."
-msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guld i gennemsnitlig 18,5 sekunder."
+msgstr "Hvis madforsyningen er stabil, så kan minen fremstille guldmalm i gennemsnitlig 18,5 sekunder."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -1109,6 +1135,14 @@ msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
 msgstr "Bageren skal bruge %1% i gennemsnit for at bage et brød."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/empire/barracks/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Giver rekrutter udstyr og træner dem som soldater."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
 msgctxt "empire_building"
@@ -1326,8 +1360,8 @@ msgstr "Barbarernes soldater kan ikke træne i forsvar og forbliver på det nive
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:80
-#: ../../data/tribes/scripting/help/global_helptexts.lua:96
+#: ../../data/tribes/scripting/help/global_helptexts.lua:82
+#: ../../data/tribes/scripting/help/global_helptexts.lua:98
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1500,7 +1534,7 @@ msgid ""
 msgstr "Tjener som en base til kolonisering over havet og handel. Opbevarer også soldater, varer og værktøj."
 
 #: ../../data/tribes/scripting/help/building_help.lua:87
-#: ../../data/tribes/scripting/help/format_help.lua:143
+#: ../../data/tribes/scripting/help/format_help.lua:153
 #, lua-format
 msgid "%s and"
 msgstr "%s og"
@@ -1520,6 +1554,7 @@ msgstr "Folkeminde"
 
 #: ../../data/tribes/scripting/help/building_help.lua:175
 #: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/tips.lua:45
 msgid "General"
 msgstr "Generelt"
 
@@ -1544,10 +1579,10 @@ msgstr "Helbredstræning:"
 #: ../../data/tribes/scripting/help/building_help.lua:214
 #: ../../data/tribes/scripting/help/building_help.lua:219
 #, lua-format
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "Garnisonssoldater heler med %d point per sekund"
-msgstr[1] "Garnisonssoldater heler med %d point per sekund"
+msgid "Garrisoned soldiers heal %d health point per second."
+msgid_plural "Garrisoned soldiers heal %d health points per second."
+msgstr[0] "Garnisonssoldater heler med %d point per sekund."
+msgstr[1] "Garnisonssoldater heler med %d point per sekund."
 
 #: ../../data/tribes/scripting/help/building_help.lua:215
 #: ../../data/tribes/scripting/help/building_help.lua:221
@@ -1730,7 +1765,7 @@ msgid "Crew required:"
 msgstr "Bemanding krævet:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:614
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Arbejdere"
 
@@ -1919,7 +1954,7 @@ msgstr "Home"
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "(Ctrl +) 1-9"
-msgstr ""
+msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
@@ -1930,190 +1965,190 @@ msgstr "Gem og gå til tidligere gemte steder"
 #: ../../data/tribes/scripting/help/controls.lua:61
 msgctxt "hotkey"
 msgid "(Ctrl +) +"
-msgstr ""
+msgstr "(Ctrl +) +"
 
 #: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Increase zoom"
-msgstr ""
+msgstr "Øg zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:63
 msgctxt "hotkey"
 msgid "(Ctrl +) -"
-msgstr ""
+msgstr "(Ctrl +) -"
 
 #: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Decrease zoom"
-msgstr ""
+msgstr "Mindsk zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "(Ctrl +) 0"
-msgstr ""
+msgstr "(Ctrl +) 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Reset zoom"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgid "Go to the previous location"
-msgstr "Gå til forrige sted"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:69
-msgid "Go to the next location"
-msgstr "Gå til næste sted"
+msgstr "Nulstil zoom"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr "Gem skærmbilledet"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr "Afslut spillet med det samme"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Vis fejlfindingskonsollen (kun i fejlfindingsudgaver)"
 
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "I beskedvinduet er følgende ekstra genveje tilgængelige:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show all messages"
 msgstr "Vis alle typer beskeder"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show geologists’ messages only"
 msgstr "Vis kun beskeder fra geologer"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show economy messages only"
 msgstr "Vis kun beskeder om økonomien"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show seafaring messages only"
 msgstr "Vis kun beskeder om søfart"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show warfare messages only"
 msgstr "Vis kun beskeder om krigsførsel"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show scenario messages only"
 msgstr "Vis kun beskeder om scenariet"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Jump to the location corresponding to the current message"
 msgstr "Gå til det sted som den nuværende besked handler om"
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Archive/Restore the current message"
 msgstr "Arkiver/gendan den aktuelle besked"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Slet"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:135
+#: ../../data/tribes/scripting/help/format_help.lua:145
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
+#. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
+#. a productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:175
+msgid "Wares and workers consumed:"
+msgstr "Varer og arbejdere forbrugt:"
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
+#. productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:178
+msgid "Workers consumed:"
+msgstr "Arbejdere forbrugt:"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:162
-msgid "Ware consumed:"
-msgid_plural "Wares consumed:"
-msgstr[0] "Vare forbrugt:"
-msgstr[1] "Varer forbrugt:"
+#: ../../data/tribes/scripting/help/format_help.lua:182
+msgid "Wares consumed:"
+msgstr "Varer forbrugt:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:21
-#: ../../data/tribes/scripting/help/global_helptexts.lua:43
+#: ../../data/tribes/scripting/help/global_helptexts.lua:23
+#: ../../data/tribes/scripting/help/global_helptexts.lua:45
 msgid "Text needed"
 msgstr "Tekst krævet"
 
 #. TRANSLATORS: Lore author (source for a quote) helptext for a building - it
 #. hasn't been written yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:32
+#: ../../data/tribes/scripting/help/global_helptexts.lua:34
 msgid "Source needed"
 msgstr "Kilde krævet"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/global_helptexts.lua:54
+#: ../../data/tribes/scripting/help/global_helptexts.lua:56
 msgid "Calculation needed"
 msgstr "Beregning krævet"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:95
+#: ../../data/tribes/scripting/help/global_helptexts.lua:97
 msgid "%1% and %2%"
 msgstr "%1% og %2%"
 
@@ -2121,17 +2156,42 @@ msgstr "%1% og %2%"
 msgid "Introduction"
 msgstr "Introduktion"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/tips.lua:71
+msgid "Tips"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Varer"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Bygninger"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
 msgstr "Om Widelands"
+
+#: ../../data/tribes/scripting/help/tips.lua:50
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/tips.lua:53
+msgid "Barbarians"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/tips.lua:56
+msgid "Empire"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/tips.lua:62
+msgid "Single Player"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/tips.lua:65
+msgid "Multiplayer"
+msgstr ""
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -2429,7 +2489,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Barbarernes bagere er de bedste til at lave det velsmagende fladbrød. Det laves af hvede og mel ud fra en hemmelig opskrift. Fladbrød bruges på traktørsteder, kroer og storkroer til at tilberede rationer, mellemmåltider og måltider. Brød indtages også på træningsanlæg (træningslejr og kamparena)."
+msgstr "Barbarernes bagere er de bedste til at lave det velsmagende fladbrød. Det laves af hvede og mel ud fra en hemmelig opskrift. Fladbrød bruges på værtshuse, kroer og store kroer til at tilberede rationer, mellemmåltider og måltider. Brød indtages også på træningsanlæg (træningslejr og kamparena)."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_empire/helptexts.lua:4
@@ -2438,7 +2498,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "Imperiets bagere laver et meget velsmagende brød ud af mel og vand. Det bruges på traktørsteder og kroer til at tilberede rationer og måltider. Brød indtages også på træningsanlæg (arena, kolosseum, træningslejr)."
+msgstr "Imperiets bagere laver et meget velsmagende brød ud af mel og vand. Det bruges på værtshuse og kroer til at tilberede rationer og måltider. Brød indtages også på træningsanlæg (arena, amfiteater, træningslejr)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -2608,7 +2668,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "Ud over fladbrød og kød er fisk også en fødekilde for barbarerne. Fisk bruges på traktørsteder, kroer og storkroer samt på træningsanlæg (træningslejr og kamparena)."
+msgstr "Ud over fladbrød og kød er fisk også en fødekilde for barbarerne. Fisk bruges på værtshuse, kroer og store kroer samt på træningsanlæg (træningslejr og kamparena)."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -2616,7 +2676,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr "Ud over fladbrød og kød er fisk også en fødekilde for Imperiet. Fisk bruges på traktørsteder og kroer samt på træningsanlæg (arena, kolosseum, træningslejr)."
+msgstr "Ud over fladbrød og kød er fisk også en fødekilde for Imperiet. Fisk bruges på værtshuse og kroer samt på træningsanlæg (arena, amfiteater, træningslejr)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -2659,7 +2719,7 @@ msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is obtained out of gold ore "
 "in a smelting works."
-msgstr "Guld er det mest værdifulde af alle metaller og laves ud fra guldmlam i et smelteværk."
+msgstr "Guld er det mest værdifulde af alle metaller og laves ud fra guldmalm i et smelteværk."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
@@ -2889,7 +2949,7 @@ msgctxt "empire_ware"
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
-msgstr "Hvordan kan man lave en ration eller et måltid, hvis der ikke er noget køkkenværktøj? De fremstilles hos klejnsmeden og bruges på traktørsteder og kroer."
+msgstr "Hvordan kan man lave en ration eller et måltid, hvis der ikke er noget køkkenværktøj? De fremstilles hos klejnsmeden og bruges på værtshuse og kroer."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -2984,7 +3044,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr "Kød bruges på traktørsteder, kroer og storkroe til at tilberede rationer, mellemmåltider og måltider for minearbejderne. Det indtages også i træningsanlæggene (træningslejr og kamparena)."
+msgstr "Kød bruges på værtshuse, kroer og store kroer til at tilberede rationer, mellemmåltider og måltider for minearbejderne. Det indtages også i træningsanlæggene (træningslejr og kamparena)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -2993,7 +3053,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr "Kød kan også fås som gris fra svinebrug. Det bruges på kroer og traktørsteder til at tilberede frokost til minearbejderne og indtages også i træningsanlæggene (arena, kolosseum, træningslejr)."
+msgstr "Kød kan også fås som gris fra svinebrug. Det bruges på kroer og værtshuse til at tilberede frokost til minearbejderne og indtages også i træningsanlæggene (arena, amfiteater, træningslejr)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4
@@ -3080,13 +3140,13 @@ msgctxt "barbarians_ware"
 msgid ""
 "Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
 " pitta bread."
-msgstr "Rationer tilberedes på et traktørsted, en kro eller en storkro af fladbrød og fisk eller kød."
+msgstr "Rationer tilberedes på et værtshus, en kro eller en stor kro af fladbrød og fisk eller kød."
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:8
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
-msgstr "Rationer tilberedes på et traktørsted af fisk eller kød eller brød."
+msgstr "Rationer tilberedes på et værtshus af fisk eller kød eller brød."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -3135,7 +3195,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr "Disse forfinede skjolde bruges af de bedste soldater blandt atlanterne. De fremstilles i rustningsmedjen og bruges i labyrinten - sammen med mad - til at træne soldater fra forsvarsniveau 1 til niveau 2."
+msgstr "Disse avancerede skjolde bruges af de bedste soldater blandt atlanterne. De fremstilles i rustningsmedjen og bruges i labyrinten - sammen med mad - til at træne soldater fra forsvarsniveau 1 til niveau 2."
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../data/tribes/wares/shield_steel/helptexts.lua:4
@@ -3191,7 +3251,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Røget kød er lavet af kød i et røgeri. Det leveres til minerne og træningsanlæg (labyrint og forhindringsbane), hvor minearbejdere og soldater forbereder en nærende frokost til sig selv."
+msgstr "Røget kød er lavet af kød i et røgeri. Det leveres til minerne og træningsanlæg (labyrint og fangekælder), hvor minearbejdere og soldater forbereder en nærende frokost til sig selv."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -3323,15 +3383,15 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "Den lange trefork er den første trefork i træningen af soldater. Den produceres i våbensmedjen og bruges på forhindringsbanen - sammen med mad - til at træne soldater fra angrebsniveau 0 til niveau 1."
+msgstr "Den lange trefork er den første trefork i træningen af soldater. Den produceres i våbensmedjen og bruges i fangekælderen - sammen med mad - til at træne soldater fra angrebsniveau 0 til niveau 1."
 
 #. TRANSLATORS: Helptext for a ware: Steel Trident
 #: ../../data/tribes/wares/trident_steel/helptexts.lua:4
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon  – together with food – to train from "
-"attack level 1 to level 2."
+"advanced soldiers in the dungeon – together with food – to train from attack"
+" level 1 to level 2."
 msgstr "Dette er den mellemste trefork. Den fremstilles i våbensmedjen og anvendes af avancerede soldater i fangekælderen - sammen med mad - til at træne fra angrebsniveau 1 til niveau 2."
 
 #. TRANSLATORS: Helptext for a ware: Water
@@ -3360,7 +3420,7 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr "Vand bruges i bagerier og bryggerier. Æselstutterier, fårebrug og svinestalde har også brug for forsyninger af vand."
+msgstr "Vand bruges i bagerier og bryggerier. Æselstutterier, fåreavl og svinestalde har også brug for forsyninger af vand."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4
@@ -3381,7 +3441,7 @@ msgstr "Hvede dyrkes på landbrug og bruges af bagerier, mikrobryggerier og bryg
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr "Hvede dyrkes på landbrug og bruges af møller og bryggerier. Æselstutterier, fårebrug og svinestalde har også brug for forsyninger af hvede."
+msgstr "Hvede dyrkes på landbrug og bruges af møller og bryggerier. Æselstutterier, fåreavl og svinestalde har også brug for forsyninger af hvede."
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -3433,6 +3493,12 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Brænder kul."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TODO(GunChleoc): This is unused
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
+#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -3489,7 +3555,7 @@ msgstr "Jægeren skaffer frisk råt kød til kolonisterne."
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
-"Grinds blackroot and corn to produce blackroot flour and cornmeal, "
+"Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
 msgstr "Maler rodfrugter og majs til rodfrugts- og majsmel."
 
@@ -3498,6 +3564,12 @@ msgstr "Maler rodfrugter og majs til rodfrugts- og majsmel."
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
 msgstr "Arbejder dybt i minerne for at grave kul, jern, guld eller ædelstene op."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Ivrig for at blive soldat og forsvare din stamme!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3714,6 +3786,12 @@ msgctxt "barbarians_worker"
 msgid "Plants trees."
 msgstr "Planter træer."
 
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
+msgctxt "barbarians_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Ivrig for at blive soldat og forsvare din stamme!"
+
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -3876,6 +3954,12 @@ msgstr "Arbejder dybt i minerne for at grave kul, jern, guld eller marmor op."
 msgctxt "empire_worker"
 msgid "Breeds pigs."
 msgstr "Avler grise."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
+msgctxt "empire_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Ivrig for at blive soldat og forsvare din stamme!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

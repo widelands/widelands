@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Han van Venrooij <clerris@gmail.com>, 2016
+# Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-17 22:01+0000\n"
-"Last-Translator: stdh\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 20:30+0000\n"
+"Last-Translator: Nora Ghaoui\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,10 +80,10 @@ msgstr "Voor alles wat je op de diepe zeeën wilt uitvoeren heb je havens aan wa
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
-"tabs: wares and workers in the dock. They are waiting for a ship to "
-"transport them to another port. Currently, there are none because we have "
-"not yet built a second port. So let’s change this!"
-msgstr "Daar bovenop bieden schepen de mogelijkheid om goederen en werkers te transporteren per schip. Als je op de haven klikt die je al hebt zal je twee bijkomende tabbladen zien: goederen en werkers op het dok. Ze wachten op een schip dat hen naar een andere haven zal brengen. Op dit moment is niets of niemand zo aan het wachten omdat we nog geen tweede haven hebben. Tijd om dat te veranderen."
+"tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
+"are waiting for a ship to transport them to another port. Currently, there "
+"are none because we have not yet built a second port. So let’s change this!"
+msgstr "Verder bieden havens de mogelijkheid om goederen en werkers per schip te vervoeren. Als je op de haven klikt die je al hebt zal je twee bijkomende tabbladen zien: goederen en werkers op het dok. Ze wachten op een schip dat hen naar een andere haven zal brengen. Op dit moment is niets of niemand zo aan het wachten omdat we nog geen tweede haven hebben. Tijd om dat te veranderen!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"

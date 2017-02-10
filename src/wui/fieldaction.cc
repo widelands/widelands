@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -525,7 +525,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::okdialog() {
-	ibase().warp_mouse_to_node(node_);
+	ibase().mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 
@@ -605,18 +605,17 @@ void FieldActionWindow::act_ripflag() {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	if (upcast(Widelands::Flag, flag, node_.field->get_immovable())) {
+		const bool ctrl_pressed = SDL_GetModState() & KMOD_CTRL;
 		if (Building* const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
-				if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-					game->send_player_bulldoze(
-					   *flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+				if (ctrl_pressed) {
+					game->send_player_bulldoze(*flag, ctrl_pressed);
 				} else {
 					show_bulldoze_confirm(*iaplayer, *building, flag);
 				}
 			}
 		} else {
-			game->send_player_bulldoze(
-			   *flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+			game->send_player_bulldoze(*flag, ctrl_pressed);
 		}
 	}
 }
@@ -656,8 +655,7 @@ void FieldActionWindow::act_removeroad() {
 	Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(node_))) {
 		upcast(Game, game, &ibase().egbase());
-		game->send_player_bulldoze(
-		   *road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+		game->send_player_bulldoze(*road, SDL_GetModState() & KMOD_CTRL);
 	}
 	okdialog();
 }
@@ -734,12 +732,6 @@ Bring up a field action window or continue road building.
 void show_field_action(InteractiveBase* const ibase,
                        Widelands::Player* const player,
                        UI::UniqueWindow::Registry* const registry) {
-	// Force closing of old fieldaction windows. This is necessary because
-	// show_field_action() does not always open a FieldActionWindow (e.g.
-	// connecting the road we are building to an existing flag)
-	delete registry->window;
-	*registry = UI::UniqueWindow::Registry();
-
 	if (!ibase->is_building_road()) {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_auto();
@@ -756,7 +748,8 @@ void show_field_action(InteractiveBase* const ibase,
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_road(target != ibase->get_build_road_start() &&
 		                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
-		return w.init();
+		w.init();
+		return;
 	}
 
 	// append or take away from the road
@@ -768,18 +761,27 @@ void show_field_action(InteractiveBase* const ibase,
 	}
 
 	// did he click on a flag or a road where a flag can be built?
-
 	if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 		bool finish = false;
-		if (dynamic_cast<const Widelands::Flag*>(i))
+		if (dynamic_cast<const Widelands::Flag*>(i)) {
 			finish = true;
-		else if (dynamic_cast<const Widelands::Road*>(i))
+		} else if (dynamic_cast<const Widelands::Road*>(i)) {
 			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 				upcast(Game, game, &player->egbase());
 				game->send_player_build_flag(player->player_number(), target);
 				finish = true;
 			}
-		if (finish)
+		}
+		if (finish) {
 			ibase->finish_build_road();
+			return;
+		}
 	}
+
+	// If we are here, no new window was opened yet - otherwise we would have
+	// returned already. A new window uses the same registry, so the old window
+	// will be closed. So this means the old window is still open, but but we
+	// still desire to close it. This can happen for example connecting the road
+	// we are building to an existing flag).
+	registry->destroy();
 }

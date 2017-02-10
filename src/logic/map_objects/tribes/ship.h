@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -205,6 +205,11 @@ struct Ship : Bob {
 		if (!expedition_)
 			return false;
 		return expedition_->swimmable[dir - 1];
+	}
+
+	// whether the ship's expedition is in state "island-exploration" (circular movement)
+	bool is_exploring_island() {
+		return expedition_->island_exploration;
 	}
 
 	/// \returns whether the expedition ship is close to the coast

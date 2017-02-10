@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ static std::string Win32Path(std::string s) {
 	}
 	return s;
 }
-static int setenv(const char* envname, const char* envval, int overwrite) {
+static int setenv(const char* envname, const char* envval, int /* overwrite */) {
 	return _putenv_s(envname, envval);
 }
 #else

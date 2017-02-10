@@ -10,7 +10,7 @@ return {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
-   tooltip = _" Start the game with a fortified military installation",
+   tooltip = _"Start the game with a fortified military installation",
    func =  function(plr, shared_in_start)
 
       local sf = wl.Game().map.player_slots[plr.number].starting_field
@@ -75,7 +75,7 @@ return {
       })
 
       place_building_in_region(plr, "atlanteans_labyrinth", sf:region(11), {
-         wares = {
+         inputs = {
             atlanteans_bread = 4,
             smoked_fish = 3,
             smoked_meat = 3,
@@ -83,21 +83,21 @@ return {
       })
 
       place_building_in_region(plr, "atlanteans_dungeon", sf:region(11), {
-         wares = {atlanteans_bread = 4, smoked_fish = 3, smoked_meat = 3}
+         inputs = {atlanteans_bread = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
       place_building_in_region(plr, "atlanteans_armorsmithy", sf:region(11), {
-         wares = { coal=4, gold =4 }
+         inputs = { coal=4, gold =4 }
       })
       place_building_in_region(plr, "atlanteans_toolsmithy", sf:region(11), {
-         wares = { log = 6 }
+         inputs = { log = 6 }
       })
       place_building_in_region(plr, "atlanteans_weaponsmithy", sf:region(11), {
-         wares = { coal = 8, iron = 8 }
+         inputs = { coal = 8, iron = 8 }
       })
 
       place_building_in_region(plr, "atlanteans_sawmill", sf:region(11), {
-         wares = { log = 1 }
+         inputs = { log = 1 }
       })
    end
 }

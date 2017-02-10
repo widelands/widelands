@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,9 +45,8 @@ uint32_t text_width(const std::string& text, int ptsize) {
 }
 
 uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1
-	   ->render(
-	      as_editorfont(text.empty() ? "." : text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
+	                                       ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->height();
 }
 

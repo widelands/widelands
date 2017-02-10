@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,18 +40,12 @@ class Game;
 struct InteractiveSpectator : public InteractiveGameBase {
 	InteractiveSpectator(Widelands::Game&, Section& global_s, bool multiplayer = false);
 
-	~InteractiveSpectator();
-
 	Widelands::Player* get_player() const override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
-	void toggle_chat();
-	void toggle_options_menu();
-	void toggle_statistics();
 	void exit_btn();
-	void save_btn();
 	int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords>& c) override;
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
@@ -59,13 +53,6 @@ private:
 	void node_action() override;
 
 private:
-	UI::Button toggle_chat_;
-	UI::Button exit_;
-	UI::Button save_;
-	UI::Button toggle_options_menu_;
-	UI::Button toggle_statistics_;
-	UI::Button toggle_minimap_;
-
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;
 };

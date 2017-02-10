@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -421,12 +421,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
 			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
-			log(ngettext("InternetGaming: Server time offset is %u second.",
-			             "InternetGaming: Server time offset is %u seconds.", time_offset_),
-			    time_offset_);
+			log("InternetGaming: Server time offset is %d second(s).\n", time_offset_);
 			std::string temp =
-			   (boost::format(ngettext("Server time offset is %u second.",
-			                           "Server time offset is %u seconds.", time_offset_)) %
+			   (boost::format(ngettext("Server time offset is %d second.",
+			                           "Server time offset is %d seconds.", time_offset_)) %
 			    time_offset_)
 			      .str();
 			format_and_add_chat("", "", true, temp);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@ struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu(InteractiveGameBase&,
 	                UI::UniqueWindow::Registry&,
 	                InteractiveGameBase::GameMainMenuWindows&);
+	~GameOptionsMenu();
 
 private:
 	InteractiveGameBase& igb_;
@@ -41,7 +42,6 @@ private:
 	UI::Button save_game_;
 	UI::Button exit_game_;
 
-	void clicked_sound();
 	void clicked_save_game();
 	void clicked_exit_game();
 };
