@@ -81,12 +81,9 @@ bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
+		return true;
 	}
-	return true;
-}
-
-bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t) {
-	return true;
+	return false;
 }
 
 bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {

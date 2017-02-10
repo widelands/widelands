@@ -6,7 +6,8 @@ animations = {
       hotspot = { 4, 9 },
    },
 }
-add_walking_animations(animations, dirname, "walk", {5, 9}, 4)
+
+add_walking_animations(animations, "walk", dirname, "walk", {5, 9}, 4)
 
 world:new_critter_type{
    name = "bunny",

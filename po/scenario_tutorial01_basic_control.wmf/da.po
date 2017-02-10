@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 22:28+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr "Der er tre forskellige stammer i Widelands: barbarerne, imperiet og atlantenerne. Alle stammer har forskellig infrastrukter, styrker og svagheder, men det generelle spil er ens for alle. Vi spiller nu som barbarerne."
+msgstr "Der er tre forskellige stammer i Widelands: barbarerne, imperiet og atlanterne. Alle stammer har forskellig infrastruktur, styrker og svagheder, men det generelle spil er ens for alle. Vi spiller nu som barbarerne."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -103,7 +103,7 @@ msgstr "Vis byggeplaceringer"
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr "Det er nemmere at forstå hvilke bygningstyper, der kan bygges på hvilke områder, når symbolerne for byggeplaceringer er aktiveret."
+msgstr "Det er nemmere at forstå hvilke bygningstyper, der kan bygges på hvilke områder, når symbolerne for byggepladser er aktiveret."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -177,7 +177,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Kig nu godt efter mens en bygningsarbejder forlader hovedkvarteret og går til byggepladsen. En fragtmand vil blive placeret mellem de to blå flag og bære varer fra et blå flag til det næste."
+msgstr "Kig nu godt efter mens en bygningsarbejder forlader hovedkvarteret og går til byggepladsen. En bærer vil blive placeret mellem de to blå flag og bære varer fra et blå flag til det næste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
@@ -188,7 +188,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
-msgstr "Ser godt ud, ikke? Men den stakkels fragtmand har en meget lang rute. Vi kan gøre det nemmere for ham (og mere effektivt for os) ved at placere endnu et blå flag på vejen."
+msgstr "Ser godt ud, ikke? Men den stakkels bærer har en meget lang rute. Vi kan gøre det nemmere for ham (og mere effektivt for os) ved at placere endnu et blå flag på vejen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
@@ -252,7 +252,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Nu har du delt vejen i to dele med hver sin fragtmand. Det betyder mindre arbejde for ham og højere effektivitet for os. Du skal derfor altid placere så mange flag som muligt på dine veje."
+msgstr "Nu har du delt vejen i to dele med hver sin bærer. Det betyder mindre arbejde for ham og højere effektivitet for os. Du skal derfor altid placere så mange flag som muligt på dine veje."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
 msgid "Now we only have to wait till the hut is finished."
@@ -315,7 +315,7 @@ msgstr "Der er tre måder at flytte din visning. Den første er at bruge piletas
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys."
-msgstr ""
+msgstr "Klik på knappen »O.k.« og flyt så visningen med piletasterne."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
@@ -755,7 +755,7 @@ msgstr "knappen »Arkiver valgt besked« for at flytte din til dit arkiv."
 msgid ""
 "Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "Når du har arkiveret en besked, vil en anden besked blive valgt automatisk fra listen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -788,7 +788,7 @@ msgid ""
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically. Keep clicking the ‘Archive selected "
 "message’ button until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "For at gøre dette åbnes beskedvinduet via tasten »n« eller ved at klikke på knappen yderst til højre i bunden af skærmen. Den nyeste besked vil være markeret for dig automatisk. Bliv ved med at klikke på knappen »Arkiver valgt besked« indtil alle beskeder er blevet arkiveret og listen er tom."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445

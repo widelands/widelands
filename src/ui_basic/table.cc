@@ -431,9 +431,6 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		return false;
 	}
 }
-bool Table<void*>::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
-}
 
 /**
  * move the currently selected entry up or down.

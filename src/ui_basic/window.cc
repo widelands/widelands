@@ -388,7 +388,7 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		grab_mouse(false);
 		dragging_ = false;
 	}
-	return true;
+	return false;
 }
 
 // Always consume the tooltip event to prevent tooltips from

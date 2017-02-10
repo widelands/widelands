@@ -37,10 +37,6 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
-
-	return true;
-}
-bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return true;
 }
 

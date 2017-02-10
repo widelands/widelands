@@ -623,7 +623,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
-					WaresQueue& wq = dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
+					WaresQueue& wq =
+					   dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
 					const uint32_t cur = wq.get_filled();
 
 					// This is to help to debug the situation when colonization fails
@@ -1176,7 +1177,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				if (packet_version < 5) {
 					std::string tribe_name = fr.string();
 					fr.c_string();  // This used to be the ship's name, which we don't need any more.
-					if (!(egbase.tribes().tribe_exists(tribe_name))) {
+					if (!Widelands::tribe_exists(tribe_name)) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
 					}
 					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);

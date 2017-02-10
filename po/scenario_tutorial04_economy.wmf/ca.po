@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-16 07:51+0000\n"
-"PO-Revision-Date: 2017-01-17 21:54+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-28 12:57+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -199,7 +199,7 @@ msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium Buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr "Ja està bé d'explicacions per ara. Anem a practicar-ho una mica. Volem saber si encara tenim tavernes, així que heu d'escollir la pestanya d'«Edificis mitjans». Després tanqueu la finestra d'«Estadístiques d'edificis»."
+msgstr "Ja està bé d'explicacions per ara. Practiquem-ho una mica. Volem saber si encara tenim tavernes, així que heu d'escollir la pestanya d'«Edificis mitjans». Després tanqueu la finestra d'«Estadístiques d'edificis»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
@@ -468,7 +468,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "En el nostre cas, potser voleu que les fleques funcionin tan ràpid com sigui possible perquè donen subministrament a les tavernes. Així que hauríeu de donar la màxima prioritat a l'aigua cap a les fleques. Els altres edificis, com per exemple la granja d'ases, rebria menys poals d'aigua, però almenys les fleques treballaran més ràpid."
+msgstr "En el nostre cas, potser voleu que les fleques funcionin tan de pressa com sigui possible perquè donen subministrament a les tavernes. Així que hauríeu de donar la màxima prioritat a l'aigua cap a les fleques. Els altres edificis, com per exemple la granja d'ases, rebria menys poals d'aigua, però almenys les fleques treballaran més ràpidament."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270

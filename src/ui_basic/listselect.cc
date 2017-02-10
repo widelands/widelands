@@ -487,10 +487,6 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 	}
 }
 
-bool BaseListselect::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
-}
-
 bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
