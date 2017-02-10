@@ -244,8 +244,9 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 
 		//  cursor position: align to integer value
 		calculate_cursor_position();
+		return true;
 	}
-	return true;
+	return false;
 }
 
 /**

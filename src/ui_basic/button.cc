@@ -326,8 +326,9 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
 		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
