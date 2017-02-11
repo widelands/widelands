@@ -34,23 +34,30 @@
 
 namespace UI {
 
+enum class DropdownType { kTextual, kPictorial };
+
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
 protected:
 	/// \param parent             the parent panel
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
-	/// \param w                  the dropdown's width
-	/// \param h                  the maximum height for the dropdown list
+	/// \param list_w             the dropdown's width
+	/// \param list_h             the maximum height for the dropdown list
+	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
+	/// dropdowns, this both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
+	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param background         the background image for this dropdown
 	/// \param button_background  the background image all buttons in this dropdown
 	BaseDropdown(Panel* parent,
 	             int32_t x,
 	             int32_t y,
-	             uint32_t w,
-	             uint32_t h,
+	             uint32_t list_w,
+	             uint32_t list_h,
+	             int button_dimension,
 	             const std::string& label,
+	             const DropdownType type,
 	             const Image* background,
 	             const Image* button_background);
 	~BaseDropdown();
@@ -118,14 +125,16 @@ private:
 	bool is_mouse_away() const;
 
 	int max_list_height_;
+	int button_dimension_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
-	UI::Button push_button_;
+	UI::Button* push_button_; // Only used in textual dropdowns
 	UI::Button display_button_;
 	UI::Listselect<uintptr_t> list_;
 	std::string label_;
 	std::string tooltip_;
 	uint32_t current_selection_;
+	DropdownType type_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
@@ -134,20 +143,34 @@ public:
 	/// \param parent             the parent panel
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
-	/// \param w                  the dropdown's width
-	/// \param h                  the maximum height for the dropdown list
+	/// \param list_w             the dropdown's width
+	/// \param list_h             the maximum height for the dropdown list
+	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
+	/// dropdowns, this both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
+	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param background         the background image for this dropdown
 	/// \param button_background  the background image all buttons in this dropdown
 	Dropdown(Panel* parent,
 	         int32_t x,
 	         int32_t y,
-	         uint32_t w,
-	         uint32_t h,
+	         uint32_t list_w,
+	         uint32_t list_h,
+	         int button_dimension,
 	         const std::string& label,
+	         const DropdownType type = DropdownType::kTextual,
 	         const Image* background = g_gr->images().get("images/ui_basic/but1.png"),
 	         const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"))
-	   : BaseDropdown(parent, x, y, w, h, label, background, button_background) {
+	   : BaseDropdown(parent,
+	                  x,
+	                  y,
+	                  list_w,
+	                  list_h,
+	                  button_dimension,
+	                  label,
+	                  type,
+	                  background,
+	                  button_background) {
 	}
 	~Dropdown() {
 		clear();
@@ -156,7 +179,7 @@ public:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the value for the entry
-	/// \param pic          an image to illustrate the entry
+	/// \param pic          an image to illustrate the entry. Can be nullptr in textual dropdowns only.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	void add(const std::string& name,
@@ -176,6 +199,7 @@ public:
 	/// Removes all elements from the list.
 	void clear() {
 		BaseDropdown::clear();
+		entry_cache_.clear();
 	}
 
 private:

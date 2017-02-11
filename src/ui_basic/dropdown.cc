@@ -31,9 +31,9 @@
 
 namespace {
 
-int base_height() {
+int base_height(int button_dimension) {
 	return std::max(
-	   24,
+	   button_dimension,
 	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
 }
 
@@ -46,42 +46,59 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int32_t y,
                            uint32_t w,
                            uint32_t h,
+                           int button_dimension,
                            const std::string& label,
+                           const DropdownType type,
                            const Image* background,
                            const Image* button_background)
    : UI::Panel(parent,
                x,
                y,
-               w,
-               base_height()),  // Height only to fit the button, so we can use this in Box layout.
+               type == DropdownType::kTextual ? w : button_dimension,
+               // Height only to fit the button, so we can use this in Box layout.
+               base_height(button_dimension)),
      max_list_height_(h - 2 * get_h()),
+     button_dimension_(button_dimension),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
-     push_button_(&button_box_,
-                  "dropdown_select",
-                  0,
-                  0,
-                  24,
-                  get_h(),
-                  button_background,
-                  g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-                  pgettext("dropdown", "Select Item")),
-     display_button_(&button_box_, "dropdown_label", 0, 0, w - 24, get_h(), background, label),
+     push_button_(type == DropdownType::kTextual ?
+                     new UI::Button(&button_box_,
+                                    "dropdown_select",
+                                    0,
+                                    0,
+                                    button_dimension,
+                                    get_h(),
+                                    button_background,
+                                    g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+                                    pgettext("dropdown", "Select Item")) :
+                     nullptr),
+     display_button_(&button_box_,
+                     "dropdown_label",
+                     0,
+                     0,
+                     type == DropdownType::kTextual ? w - button_dimension : button_dimension,
+                     get_h(),
+                     background,
+                     label),
      // Hook into parent so we can drop down outside the panel
      list_(parent, x, y + get_h(), w, 0, button_background, ListselectLayout::kDropdown),
-     label_(label) {
+     label_(label),
+     type_(type) {
 	list_.set_visible(false);
 	list_.set_background(background);
-	display_button_.set_perm_pressed(true);
-	button_box_.add(&display_button_, UI::Align::kLeft);
-	button_box_.add(&push_button_, UI::Align::kLeft);
-	button_box_.set_size(w, get_h());
 
+	button_box_.add(&display_button_, UI::Align::kLeft);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
-	push_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	if (push_button_ != nullptr) {
+		display_button_.set_perm_pressed(true);
+		button_box_.add(push_button_, UI::Align::kLeft);
+		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	}
+	button_box_.set_size(w, get_h());
 	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
+	set_value();
 	layout();
 }
 
@@ -90,15 +107,16 @@ BaseDropdown::~BaseDropdown() {
 }
 
 void BaseDropdown::set_height(int height) {
-	max_list_height_ = height - base_height();
+	max_list_height_ = height - base_height(button_dimension_);
 	layout();
 }
 
 void BaseDropdown::layout() {
-	const int base_h = base_height();
+	const int base_h = base_height(button_dimension_);
 	const int w = get_w();
 	button_box_.set_size(w, base_h);
-	display_button_.set_desired_size(w - 24, base_h);
+	display_button_.set_desired_size(
+	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
 	int new_list_height =
 	   std::min(static_cast<int>(list_.size()) * list_.get_lineheight(), max_list_height_);
 	list_.set_size(w, new_list_height);
@@ -110,6 +128,7 @@ void BaseDropdown::add(const std::string& name,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text) {
+	assert(pic != nullptr || type_ != DropdownType::kPictorial);
 	list_.add(name, value, pic, select_this, tooltip_text);
 	if (select_this) {
 		set_value();
@@ -127,7 +146,9 @@ uint32_t BaseDropdown::get_selected() const {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
-	display_button_.set_title(label_);
+	if (type_ == DropdownType::kTextual) {
+		display_button_.set_title(label_);
+	}
 }
 
 void BaseDropdown::set_tooltip(const std::string& text) {
@@ -137,8 +158,10 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 
 void BaseDropdown::set_enabled(bool on) {
 	set_can_focus(on);
-	push_button_.set_enabled(on);
-	push_button_.set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
+	if (push_button_ != nullptr) {
+		push_button_->set_enabled(on);
+		push_button_->set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
+	}
 	display_button_.set_enabled(on);
 	list_.set_visible(false);
 }
@@ -172,13 +195,21 @@ void BaseDropdown::set_value() {
 	                                                 /** TRANSLATORS: Selection in Dropdown menus. */
 	                            pgettext("dropdown", "Not Selected");
 
-	if (label_.empty()) {
-		display_button_.set_title(name);
+	if (type_ == DropdownType::kTextual) {
+		if (label_.empty()) {
+			display_button_.set_title(name);
+		} else {
+			/** TRANSLATORS: Label: Value. */
+			display_button_.set_title((boost::format(_("%1%: %2%")) % label_ % (name)).str());
+		}
+		display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
 	} else {
-		/** TRANSLATORS: Label: Value. */
-		display_button_.set_title((boost::format(_("%1%: %2%")) % label_ % (name)).str());
+		display_button_.set_pic(list_.has_selection() ?
+		                           list_.get_selected_image() :
+		                           g_gr->images().get("images/ui_basic/different.png"));
+		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
-	display_button_.set_tooltip(list_.has_selection() ? list_.get_selected_tooltip() : tooltip_);
+
 	selected();
 	current_selection_ = list_.selection_index();
 }

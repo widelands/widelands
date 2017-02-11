@@ -65,6 +65,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                              get_h() * 4 / 10 + buth_,
                              butw_,
                              get_h() - get_h() * 4 / 10 - buth_,
+                             buth_,
                              ""),
      back_(this,
            "back",

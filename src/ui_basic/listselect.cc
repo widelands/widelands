@@ -306,6 +306,14 @@ const std::string& BaseListselect::get_selected_tooltip() const {
 	return entry_records_[selection_]->tooltip;
 }
 
+/**
+ * \return The image for the currently selected entry. Requires an entry to have been selected.
+ */
+const Image* BaseListselect::get_selected_image() const {
+	assert(selection_ < entry_records_.size());
+	return entry_records_[selection_]->pic;
+}
+
 int BaseListselect::get_lineheight() const {
 	return lineheight_ + kMargin;
 }
