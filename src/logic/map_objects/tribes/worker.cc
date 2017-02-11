@@ -531,31 +531,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			if (map.find_reachable_fields(area, &list, cstep, functorAnyFull)) {
 				// Yes there are some such nodes, so we change the type of notification
 				fail_notification_type = FailNotificationType::kFull;
-			} else {
-				// No full nodes, but what if there are no nodes with resource fish at all?
-				// E.g. no water terrains nearby
-				FindNodeAnd functorFisheable;
-				functorFisheable.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
-				functorFisheable.add(FindNodeResourceBreedable(
-				   world.get_resource(action.sparam1.c_str()), AnimalBreedable::kNoAnimal));
-				if (action.iparam5 > -1)
-					functorFisheable.add(FindNodeImmovableAttribute(action.iparam5), true);
-
-				if (action.iparam3) {
-					functorFisheable.add(FindNodeSpace(get_location(game)));
-				}
-				if (map.find_reachable_fields(area, &list, cstep, functorFisheable) == 0) {
-					// no such fields found, so we modify the fail message
-					fail_notification_type = FailNotificationType::kNoFields;
-				}
 			}
 		}
 		switch (fail_notification_type) {
 		case FailNotificationType::kFull:
 			molog("  all reachable nodes are full\n");
-			break;
-		case FailNotificationType::kNoFields:
-			molog("  no fields with needed resources (regardless the amount of resource)\n");
 			break;
 		default:
 			molog("  no space found\n");

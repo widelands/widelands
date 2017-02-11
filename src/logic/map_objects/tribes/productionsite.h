@@ -43,7 +43,7 @@ class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
-enum class FailNotificationType {kDefault, kNoFields, kFull};
+enum class FailNotificationType {kDefault, kFull};
 
 /**
  * Every building that is part of the economics system is a production site.
