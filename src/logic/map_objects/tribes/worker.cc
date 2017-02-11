@@ -530,7 +530,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			// now we count fields full of fish
 			if (map.find_reachable_fields(area, &list, cstep, functorAnyFull)) {
 				// Yes there are some such nodes, so we change the type of notification
-				fail_notification_type = FailNotificationType::kFullOrEmpty;
+				fail_notification_type = FailNotificationType::kFull;
 			} else {
 				// No full nodes, but what if there are no nodes with resource fish at all?
 				// E.g. no water terrains nearby
@@ -551,8 +551,8 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			}
 		}
 		switch (fail_notification_type) {
-		case FailNotificationType::kFullOrEmpty:
-			molog("  all reachable nodes are either full or empty\n");
+		case FailNotificationType::kFull:
+			molog("  all reachable nodes are full\n");
 			break;
 		case FailNotificationType::kNoFields:
 			molog("  no fields with needed resources (regardless the amount of resource)\n");

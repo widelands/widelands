@@ -43,7 +43,7 @@ class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
-enum class FailNotificationType {kDefault, kNoFields, kFullOrEmpty};
+enum class FailNotificationType {kDefault, kNoFields, kFull};
 
 /**
  * Every building that is part of the economics system is a production site.
@@ -117,6 +117,11 @@ public:
 	const std::string& out_of_resource_message() const {
 		return out_of_resource_message_;
 	}
+	
+	const std::string& resource_not_needed_message() const {
+		return resource_not_needed_message_;
+	}
+	
 	uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
@@ -131,6 +136,7 @@ private:
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
+	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);

@@ -46,4 +46,7 @@ tribes:new_productionsite_type {
          }
       },
    },
+
+   -- Translators: Productivity tooltip for Atlantean fish breeders when all water fields are already full of fish
+   resource_not_needed_message = _"The fishing grounds are full";
 }
