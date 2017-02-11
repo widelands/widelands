@@ -132,19 +132,19 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
-		switch(strictness) {
-		case AnimalBreedable::kDefault:
-			if (resource == neighb.field->get_resources() &&
-				 neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
-				return true;
+		if (resource == neighb.field->get_resources()) {
+			switch(strictness) {
+			case AnimalBreedable::kDefault:
+				if (neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
+					return true;
+				}
+				break;
+			case AnimalBreedable::kAnimalFull:
+				if (neighb.field->get_resources_amount() == neighb.field->get_initial_res_amount()) {
+					return true;
+				}
+				break;
 			}
-			break;
-		case AnimalBreedable::kAnimalFull:
-			if (resource == neighb.field->get_resources() &&
-				 neighb.field->get_resources_amount() == neighb.field->get_initial_res_amount()) {
-				return true;
-			}
-			break;
 		}
 	}
 	return false;

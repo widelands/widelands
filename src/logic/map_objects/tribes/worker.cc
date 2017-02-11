@@ -516,7 +516,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		// In case this is a fishbreeder, we do more checks
 		if (action.sparam1.size() && action.iparam4) {
 
-			// we need to create create another functor, that will look for nodes full of fish
+			// We need to create create another functor that will look for nodes full of fish
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
@@ -527,9 +527,8 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			if (action.iparam3)
 				functorAnyFull.add(FindNodeSpace(get_location(game)));
 
-			// now we count fields full of fish
+			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(area, &list, cstep, functorAnyFull)) {
-				// Yes there are some such nodes, so we change the type of notification
 				fail_notification_type = FailNotificationType::kFull;
 			}
 		}

@@ -68,7 +68,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
      out_of_resource_title_(""),
      out_of_resource_heading_(""),
      out_of_resource_message_(""),
-	  resource_not_needed_message_(""),
+     resource_not_needed_message_(""),
      out_of_resource_productivity_threshold_(100) {
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -939,8 +939,8 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotification
 
 			assert(!descr().out_of_resource_message().empty());
 			send_message(game, Message::Type::kEconomy, descr().out_of_resource_title(),
-							 descr().icon_filename(), descr().out_of_resource_heading(), descr().out_of_resource_message(),
-			             true, minutes * 60000, 0);
+			             descr().icon_filename(), descr().out_of_resource_heading(),
+			             descr().out_of_resource_message(), true, minutes * 60000, 0);
 		}
 
 		// The following sends "out of resources" messages to be picked up by AI

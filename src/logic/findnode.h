@@ -176,7 +176,8 @@ private:
 	DescriptionIndex resource;
 };
 
-/// Accepts a node if it has the given resource type and a) has remaining capacity, b) is full
+/// Accepts a node if it has the given resource type and remaining capacity.
+/// If 'br' == AnimalBreedable::kAnimalFull, only accepts the node if it is full
 struct FindNodeResourceBreedable {
 	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kDefault) : resource(res), strictness(br) {
 	}
