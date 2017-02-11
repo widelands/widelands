@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-09 12:04+0000\n"
+"POT-Creation-Date: 2017-02-09 14:41+0000\n"
+"PO-Revision-Date: 2017-02-10 14:02+0000\n"
 "Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -577,7 +577,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Но когда я смотрю поверх леса, я все еще вижу черный дым, ползущий в небо. Я знаю - еще слишком рано, и он надеется, что этого пока не произойдет. Возможно, он все же прав, но я боюсь, что сразу начнется кровопролитие - с обоих сторон..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "The Oath"
@@ -585,7 +585,7 @@ msgstr "Клятва"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Трон выглядит взбешенным..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:309
@@ -593,7 +593,7 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr "Сегодня, мои воины подобрали раненного, больного старика, блуждавшего в тёмном лесу. Мы слушали в ужасе, когда он рассказывал нам о зверствах творящихся в Альтунране."
+msgstr "Сегодня, мои воины подобрали раненного, больного старика, блуждавшего в тёмном лесу. Мы слушали в ужасе, когда он рассказывал нам о зверствах творящихся в Аль'тунране."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:312
@@ -614,7 +614,7 @@ msgstr "Ваш лояльный спутник"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Отважный Болдрет шагнул на вашу сторону..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:320
@@ -623,11 +623,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Итак, ты хочешь чтобы мы продолжали стоять в этих лесах, Трон? Конечно, в этом есть здравый смысл, но мое сердце жаждет славного возвращения в Ал'тунран. Слишком долго мы ждали, пока наши братья сражались на поле боя, а наши топоры и мечи проржавели."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:326
 msgid "Khantrukh joins in…"
-msgstr "Хантрух входит в..."
+msgstr "Хантрух присоединяется..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:328
@@ -635,11 +635,11 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "Прошу прощения, вождь, но я серьёзно обеспокоен и, хочу это обсудить с вами. Скалы, рядом с нашим лагерем, усилиями наших работников, быстро иссякают, и остается мало времени, пока они не исчезнут совсем."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Болдрет воспрянул..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
@@ -648,7 +648,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Хотя, конечно, это не самая достойная задача для воина, но хоть какое-то занятие! Трон, что вы скажете, если я  возьму нескольких наших самых беспокойных воинов,и сходим к великой горе Кал'маврат - может быть, мы найдём еще скалы, по просьбе старика?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Khantrukh grumbles…"
@@ -657,16 +657,16 @@ msgstr "Хантрух ворчит..."
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:345
 msgid "Old man? Disrespectful youth!"
-msgstr "Старый человек? Невежливая молодежь!"
+msgstr "Старик? Непочтительный молодежь!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:351
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Хантрух удовлетворенно кивнул..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Наконец-то! Этих скал должно хватить на какое-то время. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:357
 msgid "Boldreth exclaims…"
@@ -677,7 +677,7 @@ msgstr "Болдрет восклицает..."
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "Только взгляни на это! На востоке великая гора Кал'маврат! Интересно, какие сокровища могут быть спрятаны под его величественными склонами!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
