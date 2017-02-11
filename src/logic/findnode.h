@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-enum class AnimalBreedable {kYes, kAnimalFull, kNoAnimal};
+enum class AnimalBreedable {kDefault, kAnimalFull};
 
 struct FCoords;
 class Map;
@@ -178,7 +178,7 @@ private:
 
 /// Accepts a node if it has the given resource type and a) has remaining capacity, b) is full
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kYes) : resource(res), strictness(br) {
+	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kDefault) : resource(res), strictness(br) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
