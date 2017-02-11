@@ -125,6 +125,7 @@ private:
 	bool is_mouse_away() const;
 
 	int max_list_height_;
+	int list_width_;
 	int button_dimension_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;

@@ -58,6 +58,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
      max_list_height_(h - 2 * get_h()),
+	  list_width_(w),
      button_dimension_(button_dimension),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
@@ -113,13 +114,13 @@ void BaseDropdown::set_height(int height) {
 
 void BaseDropdown::layout() {
 	const int base_h = base_height(button_dimension_);
-	const int w = get_w();
+	const int w = type_ == DropdownType::kTextual ? get_w() : button_dimension_;
 	button_box_.set_size(w, base_h);
 	display_button_.set_desired_size(
-	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
+		type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
 	int new_list_height =
 	   std::min(static_cast<int>(list_.size()) * list_.get_lineheight(), max_list_height_);
-	list_.set_size(w, new_list_height);
+	list_.set_size(type_ == DropdownType::kTextual ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
 }
 
