@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -357,7 +357,7 @@ struct PlayerImmovable : public BaseImmovable {
 	/**
 	 * \return a list of workers that are currently located at this
 	 * immovable. This is not the same as the list of production
-	 * workers returned by \ref ProductionSite::get_production_workers
+	 * workers returned by \ref ProductionSite::working_positions
 	 */
 	const Workers& get_workers() const {
 		return workers_;

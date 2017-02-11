@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2717,7 +2717,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
-			if (!(egbase.tribes().tribe_exists(name))) {
+			if (!Widelands::tribe_exists(name)) {
 				throw GameDataError("unknown tribe '%s'", name.c_str());
 			}
 			name = lookup_table.lookup_worker(name, fr.c_string());

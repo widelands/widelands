@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,6 +81,8 @@ public:
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	void set_height(int height);
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -105,6 +107,8 @@ protected:
 	void think() override;
 
 private:
+	void layout() override;
+
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
 	/// Toggles the dropdown list on and off.

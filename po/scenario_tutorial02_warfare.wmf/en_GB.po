@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# Adam Piggott, 2016
+# Adam Piggott, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-18 17:02+0000\n"
-"PO-Revision-Date: 2016-12-21 23:18+0000\n"
-"Last-Translator: Nora Ghaoui\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-24 21:50+0000\n"
+"Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,11 +49,11 @@ msgstr "Soldiers’ abilities"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armour from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armour, they only need an axe."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr "New soldiers are created differently from normal workers: recruits will walk from a warehouse (or your headquarters) to the barracks where they will receive some basic training and become soldiers. Basic Barbarian soldiers do not use armour, they only need an axe."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""

@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Lyubomir Vasilev, 2015
 # Любомир Василев, 2015-2016
-# Любомир Василев, 2016
+# Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 14:25+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-30 07:39+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -491,11 +491,9 @@ msgid "Barracks"
 msgstr "Казарма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgid "recruiting soldier"
 msgstr "набира войник"
 
@@ -1112,13 +1110,13 @@ msgid "weaving spidercloth"
 msgstr "тъче паяжинен плат"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr "шие наметало"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr "шие златно наметало"
 
@@ -2578,15 +2576,19 @@ msgstr "Въведение"
 msgid "Controls"
 msgstr "Управление"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr "Съвети"
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Стоки"
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Работници"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Сгради"
 
@@ -3250,6 +3252,12 @@ msgid "Miner"
 msgstr "Миньор"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr "Наборник"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
@@ -3472,6 +3480,12 @@ msgid "Ranger"
 msgstr "Лесничей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr "Наборник"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3632,6 +3646,12 @@ msgstr "Главен миньор"
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "Свинар"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
+msgstr "Наборник"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

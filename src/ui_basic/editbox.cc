@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,11 +83,11 @@ EditBox::EditBox(Panel* const parent,
            x,
            y,
            w,
-           h > 0 ? h : UI::g_fh1
-                             ->render(as_editorfont(
-                                UI::g_fh1->fontset()->representative_character(), font_size))
-                             ->height() +
-                          2 * margin_y),
+           h > 0 ? h :
+                   UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
+                                                   font_size))
+                         ->height() +
+                      2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -179,9 +179,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	}
 
 	return false;
-}
-bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT && get_can_focus();
 }
 
 /**
@@ -388,8 +385,8 @@ void EditBox::draw(RenderTarget& odst) {
 	const int linewidth = entry_text_im->width();
 	const int lineheight =
 	   m_->text.empty() ?
-	      UI::g_fh1
-	         ->render(as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
+	      UI::g_fh1->render(
+	                  as_editorfont(UI::g_fh1->fontset()->representative_character(), m_->fontsize))
 	         ->height() :
 	      entry_text_im->height();
 

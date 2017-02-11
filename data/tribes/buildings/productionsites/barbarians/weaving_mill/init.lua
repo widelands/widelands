@@ -55,11 +55,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=20000",
+            "sleep=25000",
             "check_map=seafaring",
             "return=skipped unless economy needs cloth",
             "consume=thatch_reed",
-            "animate=working 25000",
+            "play_sound=sound/barbarians weaver 120",
+            "animate=working 20000",
             "produce=cloth"
          }
       },

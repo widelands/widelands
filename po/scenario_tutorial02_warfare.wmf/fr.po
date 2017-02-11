@@ -6,14 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
-# Renaud Bouchard, 2016
+# Renaud Bouchard, 2016-2017
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2016-12-10 20:09+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-30 13:27+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -52,11 +52,11 @@ msgstr "Capacités des soldats"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Un nouveau soldat est créé de la même façon qu'un ouvrier : lorsqu'un bâtiment militaire requiert un soldat, un porteur récupère les armes et armures requises dans un entrepôt (ou votre quartier général) puis se rend dans votre nouveau bâtiment par la route. Le soldat Barbare de base n'utilise pas d'armure, il n'a besoin que d'une hache."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr "Les nouveaux soldats sont créé différemment des ouvriers normaux: les recrues marcheront de l' entrepôt (ou vos quartiers-généraux) vers les casernes où ils recevront un entraînement de base et deviendront soldats. Les soldats barbares de base n'utilisent pas d'armure, ils ont seulement besoin d'une hache."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -558,7 +558,7 @@ msgstr "Vous êtes maintenant prêt pour jouer les campagnes. Elles vous apprend
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"

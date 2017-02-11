@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "economy/wares_queue.h"
+#include "economy/input_queue.h"
 
 namespace Widelands {
 
@@ -36,7 +36,6 @@ class PortDock;
 class Request;
 class WareInstance;
 class Warehouse;
-class WaresQueue;
 class Worker;
 
 // Handles the mustering of workers and wares in a port for one Expedition. This
@@ -62,30 +61,28 @@ public:
 	                                   std::vector<Worker*>* return_workers,
 	                                   std::vector<WareInstance*>* return_wares);
 
-	// Returns the wares currently in stock.
-	std::vector<WaresQueue*> wares() const;
-
 	// Changes the economy for the wares that are already in store.
 	void set_economy(Economy* economy);
 
-	// Returns the waresqueue for this ware.
-	WaresQueue& waresqueue(DescriptionIndex index) const;
+	// Returns the wares and workers currently waiting for the expedition.
+	std::vector<InputQueue*> queues() const;
+
+	// Returns the matching input queue for the given index and type.
+	InputQueue& inputqueue(DescriptionIndex index, WareWorker type) const;
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
-	// packet, and there in the warehouse data packet.
-	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol);
+	// packet, and there in the warehouse data packet. The version parameter is
+	// the version number of the Warehouse packet.
+	void
+	load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
 	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:
-	struct ExpeditionWorker;
-
 	// Handles arriving workers and wares.
-	static void worker_callback(Game&, Request& r, DescriptionIndex, Worker*, PlayerImmovable&);
-	static void ware_callback(Game& game, WaresQueue*, DescriptionIndex, void* const data);
-	void handle_worker_callback(Game&, Request&, Worker*);
+	static void input_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void*);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
 	void is_ready(Game& game);
@@ -93,8 +90,7 @@ private:
 	PortDock* const portdock_;  // not owned
 	Economy* economy_;
 
-	std::vector<std::unique_ptr<WaresQueue>> wares_;
-	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
+	std::vector<std::unique_ptr<InputQueue>> queues_;
 
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };

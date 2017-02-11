@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -9,13 +9,14 @@
 # GunChleoc, 2016
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
+# Олег Шевчеко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-15 15:23+0000\n"
-"PO-Revision-Date: 2016-12-15 15:34+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-09 04:55+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новая задача"
@@ -69,18 +70,18 @@ msgid "%1$s and %2$s"
 msgstr "%1$s и %2$s"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:157
+#: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
 msgstr "Недостаточно пространства"
 
-#: ../../data/scripting/infrastructure.lua:158
+#: ../../data/scripting/infrastructure.lua:163
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Не хватило места для постройки некоторых ваших стартовых зданий. Вы находитесь в невыгодном положении; можете начать игру заново, чтобы стартовать на более справедливых условиях."
 
-#: ../../data/scripting/infrastructure.lua:159
+#: ../../data/scripting/infrastructure.lua:164
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
@@ -90,12 +91,12 @@ msgid "No AI"
 msgstr "Без ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:104
+#: ../../src/ai/defaultai.h:102
 msgid "Normal AI"
 msgstr "Нормальный ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:117
+#: ../../src/ai/defaultai.h:116
 msgid "Weak AI"
 msgstr "Слабый ИИ"
 
@@ -255,52 +256,52 @@ msgstr "Подсказки по типам строений (вкл/выкл)"
 #: ../../src/wui/interactive_player.cc:87
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
-msgstr ""
+msgstr "Сбросить масштабирование"
 
-#: ../../src/editor/editorinteractive.cc:133
+#: ../../src/editor/editorinteractive.cc:134
 msgid "Undo"
 msgstr "Отменить"
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:137
 msgid "Redo"
 msgstr "Повторить"
 
-#: ../../src/editor/editorinteractive.cc:141
+#: ../../src/editor/editorinteractive.cc:142
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Help"
 msgstr "Помощь"
 
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:200
 msgid "Unsupported format"
 msgstr "Неподдерживаемый формат"
 
-#: ../../src/editor/editorinteractive.cc:200
+#: ../../src/editor/editorinteractive.cc:201
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Не удается загрузить файл «%s». Возможно формат файла несовместим."
 
-#: ../../src/editor/editorinteractive.cc:213 ../../src/logic/game.cc:217
+#: ../../src/editor/editorinteractive.cc:214 ../../src/logic/game.cc:217
 #: ../../src/logic/game.cc:270
 msgid "Creating players"
 msgstr "Создание игроков"
 
-#: ../../src/editor/editorinteractive.cc:263
+#: ../../src/editor/editorinteractive.cc:264
 msgid "Unsaved Map"
 msgstr "Несохранённая карта"
 
-#: ../../src/editor/editorinteractive.cc:264
+#: ../../src/editor/editorinteractive.cc:265
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Карта не была сохранена, вы действительно хотите выйти?"
 
-#: ../../src/editor/editorinteractive.cc:585
+#: ../../src/editor/editorinteractive.cc:586
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
 msgstr "Создание пустой карты..."
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:588
+#: ../../src/editor/editorinteractive.cc:589
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:535
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -308,7 +309,7 @@ msgstr "Создание пустой карты..."
 msgid "No Name"
 msgstr "Без имени"
 
-#: ../../src/editor/editorinteractive.cc:591
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:152
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:536
 #: ../../src/logic/map.h:180
@@ -316,12 +317,12 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../../src/editor/editorinteractive.cc:598
+#: ../../src/editor/editorinteractive.cc:599
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Загрузка карты “%s”…"
 
-#: ../../src/editor/map_generator.cc:712
+#: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
 msgstr "Случайный игрок"
 
@@ -388,7 +389,7 @@ msgstr "Владелец: —"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "Has immovable"
-msgstr "Есть неподвижные объекты"
+msgstr "Имеет недвижимость"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "No immovable"
@@ -464,7 +465,7 @@ msgstr "Игроки: %u"
 
 #: ../../src/editor/tools/info_tool.cc:171
 msgid "Players: –"
-msgstr ""
+msgstr "Игроки: -"
 
 #: ../../src/editor/tools/info_tool.cc:174
 #, c-format
@@ -477,18 +478,18 @@ msgid "Descr: %s"
 msgstr "Описание: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #, c-format
 msgid "Current: %s …"
 msgstr "Текущий: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:194
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr "Кликните ЛКМ для выбора объекта. Используйте клавишу Ctrl для выбора нескольких объектов"
+msgstr "Щелкните для выбора объекта. Используйте клавишу Ctrl для выбора нескольких объектов."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:197
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:177
 #, c-format
 msgid "Current: %s"
@@ -497,8 +498,8 @@ msgstr "Текущий: %s …"
 #: ../../src/editor/ui_menus/help.cc:42
 #: ../../src/editor/ui_menus/player_menu.cc:266
 #: ../../src/ui_fsmenu/multiplayer.cc:133
-#: ../../src/wui/encyclopedia_window.cc:145
-#: ../../src/wui/tribal_encyclopedia.cc:49
+#: ../../src/wui/encyclopedia_window.cc:146
+#: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Ошибка!"
 
@@ -555,10 +556,10 @@ msgstr "Текущий каталог: %s"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
-#: ../../src/scripting/lua_game.cc:431 ../../src/ui_basic/messagebox.cc:87
+#: ../../src/scripting/lua_game.cc:432 ../../src/ui_basic/messagebox.cc:87
 #: ../../src/ui_fsmenu/helpwindow.cc:52
 #: ../../src/ui_fsmenu/load_map_or_game.cc:45
-#: ../../src/ui_fsmenu/options.cc:132
+#: ../../src/ui_fsmenu/options.cc:118
 #: ../../src/wui/game_main_menu_save_game.cc:88
 msgid "OK"
 msgstr "OK"
@@ -569,7 +570,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:228
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/launch_mpg.cc:77
-#: ../../src/ui_fsmenu/options.cc:116
+#: ../../src/ui_fsmenu/options.cc:109
 #: ../../src/wui/game_main_menu_save_game.cc:93 ../../src/wui/login_box.cc:62
 msgid "Cancel"
 msgstr "Отмена"
@@ -727,7 +728,7 @@ msgstr "Горы:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:509
-#: ../../src/ui_basic/spinbox.cc:305
+#: ../../src/ui_basic/spinbox.cc:324
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -816,7 +817,7 @@ msgstr "Ошибка сохранения карты!\nСохранённый ф
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:46
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Введите имя папки:"
 
 #: ../../src/editor/ui_menus/player_menu.cc:45
 msgid "Player Options"
@@ -870,13 +871,13 @@ msgstr "Задать значение:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Клик на карте для увеличения, Shift + клик на карте для уменьшения высоты местности"
+msgstr "Щелкните на карте для увеличения, Shift + Щелчок на карте для уменьшения высоты местности"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:68
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Ctrl + клик на карте, чтобы установить высоту местности"
+msgstr "Ctrl + щелчок на карте, чтобы установить высоту местности"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:50
 #: ../../src/editor/ui_menus/tool_menu.cc:64
@@ -888,12 +889,12 @@ msgstr "Ресурсы"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Нажмите на карту для увеличения, Shift + клик на карте, чтобы уменьшить залежи выбранного ресурса"
+msgstr "Щелкните карту для увеличения, Shift + клик на карте, чтобы уменьшить количество выбранного ресурса"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:86
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr "Ctrl + клик на карте, чтобы установить залежи выбранного ресурса"
+msgstr "Ctrl + щелчок на карте, чтобы установить количество выбранного ресурса"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
@@ -903,7 +904,9 @@ msgstr "Изменить высоту"
 msgid "Random height"
 msgstr "Случайная высота"
 
-#: ../../src/editor/ui_menus/tool_menu.cc:61 ../../src/wui/minimap.cc:125
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
+#: ../../src/wui/minimap.cc:125
 msgid "Terrain"
 msgstr "Тип местности"
 
@@ -913,7 +916,7 @@ msgid "Immovables"
 msgstr "Неподвижные объекты"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:63
-#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:42
+#: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:52
 msgid "Animals"
 msgstr "Животные"
 
@@ -945,7 +948,7 @@ msgstr "Максимальная высота:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "Нажмите на карту, чтобы установить высоту местности в случайное значение в пределах указанного диапазона"
+msgstr "Щелкните на карту, чтобы установить высоту местности в случайное значение в пределах заданного диапазона"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:96
 msgid "Random Height"
@@ -958,20 +961,16 @@ msgstr "Фиксированная высота"
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
-#: ../../src/ui_basic/dropdown.cc:157
+#: ../../src/ui_basic/dropdown.cc:179
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
-
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-msgid "Terrain Select"
-msgstr "Выбрать тип местности"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:80
 #, c-format
 msgid "Current Size: %u"
 msgstr "Текущий размер: %u"
 
-#: ../../src/logic/editor_game_base.cc:234
+#: ../../src/logic/editor_game_base.cc:235
 msgid "Loading graphics"
 msgstr "Загрузка графики"
 
@@ -1023,7 +1022,7 @@ msgstr "Эта игра была сохранена, используя стар
 msgid "No description defined"
 msgstr "Описание отсутствует"
 
-#: ../../src/logic/map_objects/immovable.cc:513
+#: ../../src/logic/map_objects/immovable.cc:511
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:74
 #, c-format
 msgid "%i%% built"
@@ -1079,7 +1078,7 @@ msgstr "Потеряно!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:775
 msgid "Militarysite lost!"
-msgstr "Военное сооружение потеряно!"
+msgstr "Военное строение потеряно!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
@@ -1105,7 +1104,7 @@ msgstr "Вы атакованы"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:292
+#: ../../src/logic/map_objects/tribes/production_program.cc:309
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "экономика нуждается в товаре «%s»"
@@ -1113,7 +1112,7 @@ msgstr "экономика нуждается в товаре «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
 #. * ware ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:301
+#: ../../src/logic/map_objects/tribes/production_program.cc:318
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "экономика не нуждается в товаре «%s»"
@@ -1121,14 +1120,14 @@ msgstr "экономика не нуждается в товаре «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:314
+#: ../../src/logic/map_objects/tribes/production_program.cc:331
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "экономике нужен работник «%s»"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/map_objects/tribes/production_program.cc:324
+#: ../../src/logic/map_objects/tribes/production_program.cc:341
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "экономике не нужен работник «%s»"
@@ -1146,36 +1145,36 @@ msgstr "экономике не нужен работник «%s»"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:363
-#: ../../src/logic/map_objects/tribes/production_program.cc:385
-#: ../../src/logic/map_objects/tribes/production_program.cc:834
-#: ../../src/logic/map_objects/tribes/production_program.cc:937
-#: ../../src/logic/map_objects/tribes/production_program.cc:1019
+#: ../../src/logic/map_objects/tribes/production_program.cc:388
+#: ../../src/logic/map_objects/tribes/production_program.cc:414
+#: ../../src/logic/map_objects/tribes/production_program.cc:877
+#: ../../src/logic/map_objects/tribes/production_program.cc:983
+#: ../../src/logic/map_objects/tribes/production_program.cc:1065
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:369
+#: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "В здании находятся следующие товары: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:391
+#: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "В здании нет следующих товаров: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:404
+#: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
 msgstr "у работника недостаточно опыта"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:410
+#: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
-msgstr "работнику не требуется дополнительный опыт"
+msgstr "работникам не нужен опыт"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1190,25 +1189,25 @@ msgstr "работнику не требуется дополнительный 
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
-#: ../../src/logic/map_objects/tribes/production_program.cc:858
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
+#: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Не начато %1$s потому что %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:519
+#: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%1$s завершено, потому что %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:524
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Не работает %1$s потому что %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:719
+#: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
 msgstr "На этой карте не используются корабли!"
 
@@ -1216,7 +1215,7 @@ msgstr "На этой карте не используются корабли!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:844
+#: ../../src/logic/map_objects/tribes/production_program.cc:887
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1228,7 +1227,7 @@ msgstr[3] "%s отсутствуют"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:948
+#: ../../src/logic/map_objects/tribes/production_program.cc:994
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1240,7 +1239,7 @@ msgstr[3] "Произведено %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1030
+#: ../../src/logic/map_objects/tribes/production_program.cc:1076
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -1249,20 +1248,20 @@ msgstr[1] "Нанято %s"
 msgstr[2] "Нанято %s"
 msgstr[3] "Нанято %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1236
+#: ../../src/logic/map_objects/tribes/production_program.cc:1282
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1245
-#: ../../src/logic/map_objects/tribes/production_program.cc:1322
+#: ../../src/logic/map_objects/tribes/production_program.cc:1291
+#: ../../src/logic/map_objects/tribes/production_program.cc:1368
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:248
+#: ../../src/logic/map_objects/tribes/productionsite.cc:259
 msgid "(not occupied)"
 msgstr "(не занято)"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:266
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Нет работника"
@@ -1270,111 +1269,111 @@ msgstr[1] "Не хватает работников"
 msgstr[2] "Не хватает работников"
 msgstr[3] "Не хватает работников"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:262
+#: ../../src/logic/map_objects/tribes/productionsite.cc:273
 msgid "(stopped)"
 msgstr "(остановлено)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:361
-#: ../../src/wui/building_statistics_menu.cc:622
+#: ../../src/logic/map_objects/tribes/productionsite.cc:372
+#: ../../src/wui/building_statistics_menu.cc:623
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:905
+#: ../../src/logic/map_objects/tribes/productionsite.cc:925
 msgid "Can’t find any more resources!"
 msgstr "Не можем найти больше ресурсов!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space"
-msgstr ""
+msgstr "Место для постройки гавани"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:416
 msgid "Port Space Found"
-msgstr ""
+msgstr "Найдено место для постройки гавани"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Экспедиционный корабль нашёл место для строительства новой гавани."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Плавание вокруг острова завершено"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
-msgstr ""
+msgstr "Ожидание"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Корабль экспедиции обогнул остров без происшествий."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
-msgstr ""
+msgstr "Берег достигнут"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
-msgstr ""
+msgstr "Земля на горизонте!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "New port construction site is gone"
-msgstr ""
+msgstr "Миновали новое место для строительства гавани"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../src/logic/map_objects/tribes/ship.cc:659
 msgid "Port Lost!"
 msgstr "Гавань потеряна!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:659
+#: ../../src/logic/map_objects/tribes/ship.cc:660
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Выгрузка изделий не удалась, экспедиция отменена."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:834
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Экспедиция"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:834
+#: ../../src/logic/map_objects/tribes/ship.cc:835
 msgid "Expedition Ready"
 msgstr "Экспедиция готова"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:835
+#: ../../src/logic/map_objects/tribes/ship.cc:836
 msgid "An expedition ship is waiting for your commands."
 msgstr "Экспедиционный корабль ждёт ваших указаний."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:956
+#: ../../src/logic/map_objects/tribes/ship.cc:957
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Транспортировка"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:960
+#: ../../src/logic/map_objects/tribes/ship.cc:961
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Ожидание"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:964
+#: ../../src/logic/map_objects/tribes/ship.cc:965
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разведывает"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:968
+#: ../../src/logic/map_objects/tribes/ship.cc:969
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Найдено место для постройки гавани"
@@ -1382,25 +1381,25 @@ msgstr "Найдено место для постройки гавани"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:974
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Найдена Колония"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1349
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1350
+#: ../../src/logic/map_objects/tribes/soldier.cc:1356
 msgid "Logic error"
 msgstr "Логическая ошибка"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:420
+#: ../../src/logic/map_objects/tribes/warehouse.cc:423
 msgid "A new port was added to your economy."
 msgstr "У нас появилась новая гавань"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:423
+#: ../../src/logic/map_objects/tribes/warehouse.cc:426
 msgid "A new headquarters was added to your economy."
 msgstr "У нас появился новый штаб"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:426
+#: ../../src/logic/map_objects/tribes/warehouse.cc:429
 msgid "A new warehouse was added to your economy."
 msgstr "У нас появился новый склад"
 
@@ -1428,8 +1427,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Ваш %s не может найти дорогу домой и, похоже, умрёт."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1653
-#: ../../src/wui/productionsitewindow.cc:72
-#: ../../src/wui/productionsitewindow.cc:97
+#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:99
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Рабочий"
@@ -1454,17 +1453,17 @@ msgstr "судоходный"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:85
 msgid "unreachable"
-msgstr ""
+msgstr "недостижимо"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:90
 msgid "mineable"
-msgstr ""
+msgstr "возможна добыча"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:95
 msgid "unwalkable"
-msgstr ""
+msgstr "непроходимо"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
@@ -1490,7 +1489,7 @@ msgstr "Игра сохранена"
 
 #: ../../src/logic/save_handler.cc:157
 msgid "Saving game…"
-msgstr ""
+msgstr "Сохранение игры..."
 
 #: ../../src/map_io/s2map.cc:423
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1557,10 +1556,10 @@ msgstr "ВНИМАНИЕ: Получена команда %s хотя соеди
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Время на сервере смещено на %d сек."
+msgstr[1] "Время на сервере смещено на %d сек."
+msgstr[2] "Время на сервере смещено на %d сек."
+msgstr[3] "Время на сервере смещено на %d сек."
 
 #: ../../src/network/internet_gaming.cc:452
 #, c-format
@@ -1826,7 +1825,7 @@ msgstr "Компьютер %u"
 msgid "Player"
 msgstr "Игрок"
 
-#: ../../src/network/nethost.cc:1772
+#: ../../src/network/nethost.cc:1770
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2066,49 +2065,49 @@ msgstr "выкл"
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1046 ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/scripting/lua_game.cc:1084 ../../src/ui_fsmenu/loadgame.cc:76
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/dropdown.cc:62 ../../src/ui_basic/dropdown.cc:119
+#: ../../src/ui_basic/dropdown.cc:68 ../../src/ui_basic/dropdown.cc:141
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Выбрать пункт"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:151
+#: ../../src/ui_basic/dropdown.cc:173
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Не выбрано"
 
-#: ../../src/ui_basic/spinbox.cc:140
+#: ../../src/ui_basic/spinbox.cc:125
 msgid "Decrease the value"
 msgstr "Уменьшить значение"
 
-#: ../../src/ui_basic/spinbox.cc:145
+#: ../../src/ui_basic/spinbox.cc:130
 msgid "Increase the value"
 msgstr "Увеличить значение"
 
-#: ../../src/ui_basic/spinbox.cc:151
+#: ../../src/ui_basic/spinbox.cc:136
 msgid "Decrease the value by 10"
 msgstr "Уменьшить значение на 10"
 
-#: ../../src/ui_basic/spinbox.cc:155
+#: ../../src/ui_basic/spinbox.cc:140
 msgid "Increase the value by 10"
 msgstr "Увеличить значение на 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:299
+#: ../../src/ui_basic/spinbox.cc:318
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d минута"
+msgstr[1] "%d минут"
+msgstr[2] "%d минут"
+msgstr[3] "%d минут"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:302
+#: ../../src/ui_basic/spinbox.cc:321
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -2121,7 +2120,7 @@ msgstr[3] "%d пикселей"
 msgid "About Widelands"
 msgstr "О Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:124
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:123
 msgid "Close"
 msgstr "Закрыть"
 
@@ -2346,7 +2345,7 @@ msgid "Version"
 msgstr "Версия"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:139
-#: ../../src/ui_fsmenu/options.cc:268
+#: ../../src/ui_fsmenu/options.cc:250
 msgid "Game"
 msgstr "Игра"
 
@@ -2549,11 +2548,11 @@ msgstr "Переключиться в эту позицию"
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
 "loaded."
-msgstr ""
+msgstr "Не удалось определить допустимые условия победы, поскольку не удалось загрузить карту '%s'."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:227 ../../src/ui_fsmenu/launch_spg.cc:274
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/ui_fsmenu/loadgame.cc:67
@@ -2776,7 +2775,7 @@ msgstr "Посмотреть повтор"
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:105
+#: ../../src/ui_fsmenu/main.cc:73 ../../src/ui_fsmenu/options.cc:98
 msgid "Options"
 msgstr "Настройки"
 
@@ -2880,122 +2879,122 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../src/ui_fsmenu/options.cc:124
+#: ../../src/ui_fsmenu/options.cc:117
 msgid "Apply"
 msgstr "Применить"
 
-#: ../../src/ui_fsmenu/options.cc:154
+#: ../../src/ui_fsmenu/options.cc:141
 msgid "Language"
 msgstr "Язык"
 
-#: ../../src/ui_fsmenu/options.cc:160
+#: ../../src/ui_fsmenu/options.cc:147
 msgid "In-game resolution"
 msgstr "Разрешение в игре"
 
-#: ../../src/ui_fsmenu/options.cc:162
+#: ../../src/ui_fsmenu/options.cc:149
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
-#: ../../src/ui_fsmenu/options.cc:163
+#: ../../src/ui_fsmenu/options.cc:150
 msgid "Grab Input"
 msgstr "Захват ввода"
 
-#: ../../src/ui_fsmenu/options.cc:173
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "Maximum FPS:"
 msgstr "Максимум FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:177
+#: ../../src/ui_fsmenu/options.cc:156
 msgid "Snap windows only when overlapping"
 msgstr "Стыковать окна только при наложении"
 
-#: ../../src/ui_fsmenu/options.cc:179
+#: ../../src/ui_fsmenu/options.cc:157
 msgid "Dock windows to edges"
 msgstr "Стыковать окна по краям"
 
-#: ../../src/ui_fsmenu/options.cc:189
+#: ../../src/ui_fsmenu/options.cc:167
 msgid "Distance for windows to snap to other panels:"
 msgstr "Дистанция стыковки окон между собой:"
 
-#: ../../src/ui_fsmenu/options.cc:200
+#: ../../src/ui_fsmenu/options.cc:178
 msgid "Distance for windows to snap to borders:"
 msgstr "Дистанция стыковки окон к границам:"
 
-#: ../../src/ui_fsmenu/options.cc:204
+#: ../../src/ui_fsmenu/options.cc:182
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable Music"
 msgstr "Музыка"
 
-#: ../../src/ui_fsmenu/options.cc:205
+#: ../../src/ui_fsmenu/options.cc:183
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable Sound Effects"
 msgstr "Включить звуки"
 
-#: ../../src/ui_fsmenu/options.cc:207
+#: ../../src/ui_fsmenu/options.cc:184
 msgid "Play a sound at message arrival"
 msgstr "Звуковой сигнал при получении сообщения"
 
-#: ../../src/ui_fsmenu/options.cc:218
+#: ../../src/ui_fsmenu/options.cc:195
 msgid "Save game automatically every:"
 msgstr "Автосохранение каждые:"
 
-#: ../../src/ui_fsmenu/options.cc:231
+#: ../../src/ui_fsmenu/options.cc:208
 msgid "Maximum number of autosave files:"
-msgstr "Максимальное число файлов автосохранения:"
+msgstr "Максимум файлов автосохранения:"
 
-#: ../../src/ui_fsmenu/options.cc:238
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr "Сжать файлы данных (карты, повторы и сохранения)"
 
-#: ../../src/ui_fsmenu/options.cc:243
+#: ../../src/ui_fsmenu/options.cc:220
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Write syncstreams in network games to debug desyncs"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:226
 msgid "Start building road after placing a flag"
 msgstr "Начинать строительство дороги сразу после установки флага"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:227
 msgid "Show buildings area preview"
 msgstr "Предпросмотр рабочей области строений"
 
-#: ../../src/ui_fsmenu/options.cc:253
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Show in-game chat with transparent background"
 msgstr "Показывать внутриигровой чат с полупрозрачным фоном."
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:259
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Use single watchwindow mode"
 msgstr "Использовать однооконный режим просмотра"
 
-#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/ui_fsmenu/options.cc:246
 msgid "Interface"
-msgstr ""
+msgstr "Интерфейс"
 
-#: ../../src/ui_fsmenu/options.cc:265
+#: ../../src/ui_fsmenu/options.cc:247
 msgid "Windows"
-msgstr ""
+msgstr "Окна"
 
-#: ../../src/ui_fsmenu/options.cc:266
+#: ../../src/ui_fsmenu/options.cc:248
 msgid "Sound"
-msgstr ""
+msgstr "Звук"
 
-#: ../../src/ui_fsmenu/options.cc:267
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Saving"
-msgstr ""
+msgstr "Сохранение"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:319
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Off"
 msgstr "Откл."
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:345 ../../src/ui_fsmenu/options.cc:354
+#: ../../src/ui_fsmenu/options.cc:325 ../../src/ui_fsmenu/options.cc:334
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:431
 msgid "Try system language"
 msgstr "Язык системы"
 
@@ -3021,14 +3020,14 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s)."
-msgstr ""
+msgstr "Сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt на Windows). Вы используете сборку %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1047
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Пожалуйста, добавьте эту информацию в отчет.\n\nWidelands пытается создать сохранение игры при возникновении ошибок во время игры. Это часто – хотя и не всегда – позволяет загрузить его и продолжить игру."
 
 #: ../../src/wui/actionconfirm.cc:176
 msgid "Destroy building?"
@@ -3036,7 +3035,7 @@ msgstr "Разрушить здание?"
 
 #: ../../src/wui/actionconfirm.cc:177
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Вы уверены, что хотите разрушить это строение?"
 
 #: ../../src/wui/actionconfirm.cc:221
 msgid "Dismantle building?"
@@ -3044,7 +3043,7 @@ msgstr "Разобрать строение?"
 
 #: ../../src/wui/actionconfirm.cc:222
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Вы уверены, что хотите разобрать это строение?"
 
 #: ../../src/wui/actionconfirm.cc:267
 msgid "Enhance building?"
@@ -3052,13 +3051,13 @@ msgstr "Улучшить здание?"
 
 #: ../../src/wui/actionconfirm.cc:269 ../../src/wui/actionconfirm.cc:273
 msgid "Do you really want to enhance this building?"
-msgstr ""
+msgstr "Вы действительно хотите улучшить это строение?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
 #: ../../src/wui/actionconfirm.cc:271
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Будьте осторожны, если враг находится рядом!"
 
 #: ../../src/wui/actionconfirm.cc:313
 msgid "Sink the ship?"
@@ -3068,11 +3067,11 @@ msgstr "Затопить корабль?"
 #: ../../src/wui/actionconfirm.cc:315
 #, c-format
 msgid "Do you really want to sink %s?"
-msgstr ""
+msgstr "Вы действительно хотите затопить %s?"
 
 #: ../../src/wui/actionconfirm.cc:351
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Отменить экспедицию?"
 
 #: ../../src/wui/actionconfirm.cc:352
 msgid "Do you really want to cancel the active expedition?"
@@ -3114,15 +3113,15 @@ msgstr "Строится:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:91
-#: ../../src/wui/building_statistics_menu.cc:634
+#: ../../src/wui/building_statistics_menu.cc:635
 msgid "Low Productivity"
-msgstr ""
+msgstr "Низкая производительность"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:106
 msgid "%:"
-msgstr ""
+msgstr "%:"
 
 #: ../../src/wui/building_statistics_menu.cc:139
 msgid "Small Buildings"
@@ -3159,15 +3158,15 @@ msgstr "Показать следующую постройку"
 #. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:652
-#: ../../src/wui/building_statistics_menu.cc:676
-#: ../../src/wui/building_statistics_menu.cc:678
-#: ../../src/wui/productionsitewindow.cc:148
+#: ../../src/wui/building_statistics_menu.cc:653
+#: ../../src/wui/building_statistics_menu.cc:677
+#: ../../src/wui/building_statistics_menu.cc:679
+#: ../../src/wui/productionsitewindow.cc:150
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:666
+#: ../../src/wui/building_statistics_menu.cc:667
 msgid "Lacking Soldiers:"
 msgstr "Недостаток в солдатах:"
 
@@ -3209,7 +3208,7 @@ msgstr "Скрыть рабочую область"
 #: ../../src/wui/buildingwindow.cc:280 ../../src/wui/fieldaction.cc:370
 #: ../../src/wui/shipwindow.cc:166
 msgid "Show Debug Window"
-msgstr ""
+msgstr "Показать окно отладки"
 
 #: ../../src/wui/buildingwindow.cc:287
 msgid "Center view on this"
@@ -3288,7 +3287,7 @@ msgstr "Переключить показ статистики построек"
 msgid "Toggle building label display"
 msgstr "Переключить показ названий построек"
 
-#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:99
+#: ../../src/wui/fieldaction.cc:376 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
 msgstr "Наблюдение"
 
@@ -3316,8 +3315,8 @@ msgstr "Отменить дорогу"
 msgid "Build roads"
 msgstr "Строить дороги"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:92
-#: ../../src/wui/interactive_spectator.cc:85
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:93
+#: ../../src/wui/interactive_spectator.cc:86
 msgid "Chat"
 msgstr "Общение"
 
@@ -3389,7 +3388,7 @@ msgstr "Заголовок"
 #: ../../src/wui/game_message_menu.cc:69
 msgctxt "message"
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:99
 msgid "Status"
@@ -3404,7 +3403,7 @@ msgstr "Статус"
 #: ../../src/wui/game_message_menu.cc:75
 msgctxt "message"
 msgid "Sent"
-msgstr ""
+msgstr "Отправление"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:123
@@ -3418,7 +3417,7 @@ msgstr "Del: %s"
 #: ../../src/wui/game_message_menu.cc:125
 #: ../../src/wui/game_message_menu.cc:608
 msgid "Archive selected message"
-msgstr ""
+msgstr "Архивировать выбранное сообщение"
 
 #: ../../src/wui/game_message_menu.cc:133
 #: ../../src/wui/game_message_menu.cc:611
@@ -3449,7 +3448,7 @@ msgstr "%1% (клавиатура: %2%)"
 #: ../../src/wui/game_message_menu.cc:521
 msgctxt "hotkey"
 msgid "Alt + 0"
-msgstr ""
+msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:521
@@ -3464,12 +3463,12 @@ msgstr "Показать только сообщения геологов"
 #: ../../src/wui/game_message_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 1"
-msgstr ""
+msgstr "Alt + 1"
 
 #: ../../src/wui/game_message_menu.cc:537
 msgctxt "hotkey"
 msgid "Alt + 2"
-msgstr ""
+msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:537
@@ -3479,7 +3478,7 @@ msgstr "Показать только сообщения о состоянии �
 #: ../../src/wui/game_message_menu.cc:541
 msgctxt "hotkey"
 msgid "Alt + 3"
-msgstr ""
+msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:541
@@ -3489,7 +3488,7 @@ msgstr "Показать только сообщения о мореплаван
 #: ../../src/wui/game_message_menu.cc:545
 msgctxt "hotkey"
 msgid "Alt + 4"
-msgstr ""
+msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:545
@@ -3499,7 +3498,7 @@ msgstr "Показать только военные сообщения"
 #: ../../src/wui/game_message_menu.cc:549
 msgctxt "hotkey"
 msgid "Alt + 5"
-msgstr ""
+msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:549
@@ -3513,14 +3512,14 @@ msgstr "Сообщения: Архив"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:596
 msgid "Restore selected message"
-msgstr ""
+msgstr "Восстановить выбранное сообщение"
 
 #: ../../src/wui/game_message_menu.cc:599
 msgid "Show Inbox"
 msgstr "Показать \"входящее\""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:102
+#: ../../src/wui/interactive_player.cc:103
 msgid "Objectives"
 msgstr "Задания"
 
@@ -3581,7 +3580,7 @@ msgstr "Игра окончена"
 
 #: ../../src/wui/game_summary.cc:58
 msgid "Player Info:"
-msgstr ""
+msgstr "Информация об игроке:"
 
 #: ../../src/wui/game_summary.cc:73
 msgid "Elapsed time:"
@@ -3643,7 +3642,7 @@ msgstr "Счет"
 
 #: ../../src/wui/game_summary.cc:246
 msgid "Team Score"
-msgstr ""
+msgstr "Командный счёт"
 
 #: ../../src/wui/general_statistics_menu.cc:135
 msgid "Land"
@@ -3659,7 +3658,7 @@ msgid "Buildings"
 msgstr "Строения"
 
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/productionsitewindow.cc:60 ../../src/wui/transport_ui.cc:57
+#: ../../src/wui/productionsitewindow.cc:62 ../../src/wui/transport_ui.cc:57
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Товары"
@@ -3692,6 +3691,26 @@ msgstr "Потеряно гражданских строений"
 msgid "Military"
 msgstr "Войска"
 
+#: ../../src/wui/inputqueuedisplay.cc:185
+msgid "Highest priority"
+msgstr "Высокий приоритет"
+
+#: ../../src/wui/inputqueuedisplay.cc:188
+msgid "Normal priority"
+msgstr "Нормальный приоритет"
+
+#: ../../src/wui/inputqueuedisplay.cc:191
+msgid "Lowest priority"
+msgstr "Низкий приоритет"
+
+#: ../../src/wui/inputqueuedisplay.cc:236
+msgid "Decrease the number of wares you want to be stored here."
+msgstr "Уменьшить количество изделий которые можно здесь хранить"
+
+#: ../../src/wui/inputqueuedisplay.cc:245
+msgid "Increase the number of wares you want to be stored here."
+msgstr "Увеличить количество изделий которые можно здесь хранить"
+
 #: ../../src/wui/interactive_gamebase.cc:45
 msgid "PAUSE"
 msgstr "ПАУЗА"
@@ -3707,16 +3726,16 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Статистика"
 
-#: ../../src/wui/interactive_player.cc:106
-#: ../../src/wui/interactive_player.cc:156
+#: ../../src/wui/interactive_player.cc:107
+#: ../../src/wui/interactive_player.cc:157
 msgid "Messages"
 msgstr "Сообщения"
 
-#: ../../src/wui/interactive_player.cc:109
+#: ../../src/wui/interactive_player.cc:110
 msgid "Tribal Encyclopedia"
 msgstr "Энциклопедия товаров"
 
-#: ../../src/wui/interactive_player.cc:161
+#: ../../src/wui/interactive_player.cc:162
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3828,7 +3847,7 @@ msgstr "Команды по 4"
 
 #: ../../src/wui/mapdata.cc:46
 msgid "No Author"
-msgstr ""
+msgstr "Нет автора"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../src/wui/mapdata.cc:147
@@ -3838,7 +3857,7 @@ msgstr "перейти выше"
 #. * TRANSLATORS: This label is shown when a folder is empty
 #: ../../src/wui/mapdata.cc:153
 msgid "empty"
-msgstr ""
+msgstr "пусто"
 
 #: ../../src/wui/mapdetails.cc:125
 msgid "Directory:"
@@ -3865,7 +3884,7 @@ msgstr "Название карты на вашем языке: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:180
 msgid "Hint:"
-msgstr ""
+msgstr "Подсказка:"
 
 #: ../../src/wui/maptable.cc:35
 msgid "Number of players"
@@ -3878,7 +3897,7 @@ msgstr "ИГ."
 
 #: ../../src/wui/maptable.cc:36 ../../src/wui/maptable.cc:65
 msgid "Filename"
-msgstr ""
+msgstr "Имя файла"
 
 #: ../../src/wui/maptable.cc:36
 msgid "The name of the map or scenario"
@@ -3937,7 +3956,7 @@ msgstr "Компьютер"
 #: ../../src/wui/multiplayersetupgroup.cc:280
 #: ../../src/wui/playerdescrgroup.cc:152
 msgid "Random AI"
-msgstr ""
+msgstr "Случайный ИИ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:290
 #: ../../src/wui/playerdescrgroup.cc:160
@@ -3973,27 +3992,27 @@ msgstr "Начальные условия"
 
 #: ../../src/wui/playerdescrgroup.cc:171
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Племя будет выбрано случайно."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:114
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%д"
+msgstr[1] "%1%д"
+msgstr[2] "%1%д"
+msgstr[3] "%1%д"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:117
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%ч"
+msgstr[1] "%1%ч"
+msgstr[2] "%1%ч"
+msgstr[3] "%1%ч"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -4001,50 +4020,50 @@ msgstr[3] ""
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%м"
+msgstr[1] "%1%м"
+msgstr[2] "%1%м"
+msgstr[3] "%1%м"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:133
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "дней"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:136
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "часов"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:139
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "минут"
 
 #: ../../src/wui/plot_area.cc:315
 msgid "game"
 msgstr "игра"
 
-#: ../../src/wui/productionsitewindow.cc:73
+#: ../../src/wui/productionsitewindow.cc:75
 msgid "Exp"
 msgstr "Опыт"
 
-#: ../../src/wui/productionsitewindow.cc:74
+#: ../../src/wui/productionsitewindow.cc:76
 msgid "Next Level"
 msgstr "Следующий уровень"
 
-#: ../../src/wui/productionsitewindow.cc:86
+#: ../../src/wui/productionsitewindow.cc:88
 msgid "Terminate the employment of the selected worker"
 msgstr "Уволить выбранного работника"
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:163
 msgid "(coming)"
 msgstr "(идёт)"
 
-#: ../../src/wui/productionsitewindow.cc:161
+#: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
 msgstr "(вакантно)"
 
@@ -4100,15 +4119,15 @@ msgstr "Затопить корабль"
 msgid "Cancel the Expedition"
 msgstr "Отменить экспедицию"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:70
+#: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid "Decrease capacity"
 msgstr "Уменьшить объём"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:79
+#: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid "Increase capacity"
 msgstr "Увеличить объём"
 
-#: ../../src/wui/soldiercapacitycontrol.cc:86
+#: ../../src/wui/soldiercapacitycontrol.cc:88
 msgid "Capacity"
 msgstr "Объём"
 
@@ -4117,6 +4136,7 @@ msgstr "Объём"
 msgid "Click soldier to send away"
 msgstr "Щёлкните чтобы отозвать солдата"
 
+#. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:389 ../../src/wui/soldierlist.cc:461
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -4196,40 +4216,20 @@ msgstr "Удалить выбранные изделия отсюда"
 
 #: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "Товары, ожидающие погрузки"
 
 #: ../../src/wui/warehousewindow.cc:202
 msgid "Workers waiting to embark"
-msgstr ""
+msgstr "Работники, ожидающие посадки на корабль"
 
 #: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
 msgstr "Экспедиция"
 
-#: ../../src/wui/waresqueuedisplay.cc:174
-msgid "Highest priority"
-msgstr "Высокий приоритет"
-
-#: ../../src/wui/waresqueuedisplay.cc:177
-msgid "Normal priority"
-msgstr "Нормальный приоритет"
-
-#: ../../src/wui/waresqueuedisplay.cc:180
-msgid "Lowest priority"
-msgstr "Низкий приоритет"
-
-#: ../../src/wui/waresqueuedisplay.cc:225
-msgid "Decrease the number of wares you want to be stored here."
-msgstr "Уменьшить количество изделий которые можно здесь хранить"
-
-#: ../../src/wui/waresqueuedisplay.cc:234
-msgid "Increase the number of wares you want to be stored here."
-msgstr "Увеличить количество изделий которые можно здесь хранить"
-
-#: ../../src/wui/watchwindow.cc:106
+#: ../../src/wui/watchwindow.cc:105
 msgid "Follow"
 msgstr "Следовать"
 
-#: ../../src/wui/watchwindow.cc:112
+#: ../../src/wui/watchwindow.cc:111
 msgid "Center the main view on this"
 msgstr "Центрировать главное окно на этом"

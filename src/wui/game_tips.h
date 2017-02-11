@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ private:
 		std::string text;
 		int32_t interval;
 	};
-	void load_tips(std::string);
+	void load_tips(const std::string& name);
 	void show_tip(int32_t index);
 
 	uint32_t lastUpdated_;

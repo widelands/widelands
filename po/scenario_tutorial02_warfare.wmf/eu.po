@@ -1,13 +1,13 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 11:00+0000\n"
+"POT-Creation-Date: 2017-01-21 14:22+0000\n"
+"PO-Revision-Date: 2017-01-21 14:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -46,10 +46,10 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
 msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38

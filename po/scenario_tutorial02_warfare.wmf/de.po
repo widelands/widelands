@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Bamstam, 2015
-# Elisabeth Jäger, 2016
+# Elisabeth Jäger, 2016-2017
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # millimarg, 2015
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-06 13:06+0000\n"
-"PO-Revision-Date: 2016-12-11 21:37+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-22 22:48+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -54,11 +54,11 @@ msgstr "Fähigkeiten der Soldaten"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Ein neuer Soldat wird wie ein Arbeiter erschaffen: Wenn ein Militärgebäude einen Soldaten benötigt, schnappt sich ein Träger die benötigte Waffe und Rüstung aus einem Lagerhaus (oder deinem Hauptquartier) und macht sich auf den Weg zu deinem neuen Gebäude. Die einfachen Krieger der Barbaren benutzen keine Rüstung, sie brauchen nur eine Axt."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr "Neue Soldaten werden anders rekrutiert als normale Arbeiter: Rekruten gehen von einem Lagerhaus (oder deinem Hauptquartier) zu einer Kaserne, wo sie eine Grundausbildung erhalten und so Soldaten werden. Einfache Barbarenkrieger benutzen keine Rüstung, sie brauchen nur eine Axt."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""

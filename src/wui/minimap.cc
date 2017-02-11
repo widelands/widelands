@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,10 +68,6 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
 	                                       *minimap_type_, *minimap_layers_ & MiniMapLayer::Zoom2));
 	return true;
-}
-
-bool MiniMap::View::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
 }
 
 void MiniMap::View::set_zoom(int32_t z) {

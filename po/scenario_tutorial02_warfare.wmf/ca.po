@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 14:06+0000\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-28 12:55+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -48,11 +48,11 @@ msgstr "Habilitats dels soldats"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
-"A new soldier is created like a worker: when a military building needs a "
-"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
-"your headquarters) and walks up the road to your new building. Basic "
-"Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Un soldat es crea com un nou treballador: quan un edifici militar necessita un soldat, un colon transportista agafa les armes i armadura que necessiti un magatzem (o del vostre quarter principal) i es posa de camí cap a l'edifici que el necessita. Els soldats bàrbars novells no utilitzen armadura: només necessiten una destral."
+"New soldiers are created differently from normal workers: recruits will walk"
+" from a warehouse (or your headquarters) to the barracks where they will "
+"receive some basic training and become soldiers. Basic Barbarian soldiers do"
+" not use armor, they only need an ax."
+msgstr "Els soldats es creen de forma diferent a la resta de treballadors. Els reclutes caminaran des d'un magatzem (o quarter general) cap als barracons, on rebran un entrenament bàsic i es convertiran en soldats. Els soldats bàrbars no utilitzen armadura: només necessiten una destral."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid ""
@@ -371,7 +371,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr "Només es pot reduir el nombre de soldats fins a un. L'últim soldat de l'edifici no podrà sortir-ne (excepte si l'edifici és atacat). Si voleu el soldat per a alguna altra tasca, haureu de cremar o desmantellar l'edific."
+msgstr "Només es pot reduir el nombre de soldats fins a un. L'últim soldat de l'edifici no podrà sortir-ne (excepte si s'ataca l'edifici). Si voleu el soldat per a alguna altra tasca, haureu de cremar o desmantellar l'edifici."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -521,6 +521,8 @@ public:
 	uint32_t get_nr_economies() const {
 		return economies_.size();
 	}
+
+	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable&, Soldier&);

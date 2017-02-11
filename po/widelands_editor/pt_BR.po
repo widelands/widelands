@@ -1,13 +1,13 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-28 21:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -150,11 +150,16 @@ msgstr ""
 msgid "Introduction"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:74
-msgid "Terrains"
+#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/tips.lua:16
+msgid "Tips"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:81
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
 msgstr ""
 
