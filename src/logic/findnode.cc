@@ -116,7 +116,7 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	if (resource != coord.field->get_resources()) {
 		return false;
 	}
-	switch(strictness) {
+	switch (strictness) {
 	case AnimalBreedable::kDefault:
 		// We test actual breedability
 		if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
@@ -133,7 +133,7 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
 		if (resource == neighb.field->get_resources()) {
-			switch(strictness) {
+			switch (strictness) {
 			case AnimalBreedable::kDefault:
 				if (neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount()) {
 					return true;

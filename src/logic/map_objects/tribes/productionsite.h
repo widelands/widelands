@@ -117,11 +117,11 @@ public:
 	const std::string& out_of_resource_message() const {
 		return out_of_resource_message_;
 	}
-	
+
 	const std::string& resource_not_needed_message() const {
 		return resource_not_needed_message_;
 	}
-	
+
 	uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
