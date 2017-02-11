@@ -94,6 +94,19 @@ function build_heavy_industrys_and_mining()
    }) do sleep(3478) end
    set_objective_done(o)
 
+   run(build_barracks)
+end
+
+function build_barracks()
+
+   msg_boxes(barracks_story)
+
+   local o = add_campaign_objective(obj_build_barracks)
+   while not check_for_buildings(p1, {
+      atlanteans_barracks = 1,
+   }) do sleep(3784) end
+   set_objective_done(o)
+
    sleep(15 * 60 * 1000) -- sleep a while
    run(build_training)
 end
