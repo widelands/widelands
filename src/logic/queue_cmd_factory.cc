@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2010, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,8 +64,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetWorkerTargetQuantity();
 	case QueueCommandTypes::kResetWorkerTargetQuantity:
 		return *new CmdResetWorkerTargetQuantity();
-	case QueueCommandTypes::kSetWareMaxFill:
-		return *new CmdSetWareMaxFill();
+	case QueueCommandTypes::kSetInputMaxFill:
+		return *new CmdSetInputMaxFill();
 	case QueueCommandTypes::kMessageSetStatusRead:
 		return *new CmdMessageSetStatusRead();
 	case QueueCommandTypes::kMessageSetStatusArchived:

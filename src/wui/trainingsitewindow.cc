@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,5 +65,8 @@ Create the training site information window.
 ===============
 */
 void TrainingSite::create_options_window(InteractiveGameBase& plr, UI::Window*& registry) {
-	new TrainingSiteWindow(plr, *this, registry);
+	ProductionSiteWindow* win =
+	   dynamic_cast<ProductionSiteWindow*>(new TrainingSiteWindow(plr, *this, registry));
+	Building::options_window_connections.push_back(Building::workers_changed.connect(
+	   boost::bind(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
 }

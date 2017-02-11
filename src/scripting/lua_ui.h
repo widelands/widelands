@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,10 +70,6 @@ public:
 	int get_buttons(lua_State* L);
 	int get_tabs(lua_State* L);
 	int get_windows(lua_State* L);
-	int get_mouse_position_x(lua_State* L);
-	int get_mouse_position_y(lua_State* L);
-	int set_mouse_position_x(lua_State* L);
-	int set_mouse_position_y(lua_State* L);
 	int get_width(lua_State* L);
 	int set_width(lua_State* L);
 	int get_height(lua_State* L);
@@ -207,10 +203,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_viewpoint_x(lua_State*);
-	int set_viewpoint_x(lua_State*);
-	int get_viewpoint_y(lua_State*);
-	int set_viewpoint_y(lua_State*);
+	int get_center_map_pixel(lua_State*);
 	int get_buildhelp(lua_State* L);
 	int set_buildhelp(lua_State* L);
 	int get_census(lua_State* L);
@@ -218,6 +211,7 @@ public:
 	int get_statistics(lua_State* L);
 	int set_statistics(lua_State* L);
 	int get_is_building_road(lua_State* L);
+	int get_is_animating(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -226,6 +220,11 @@ public:
 	int click(lua_State* L);
 	int abort_road_building(lua_State* L);
 	int start_road_building(lua_State* L);
+	int scroll_to_map_pixel(lua_State* L);
+	int scroll_to_field(lua_State* L);
+	int is_visible(lua_State* L);
+	int mouse_to_field(lua_State* L);
+	int mouse_to_pixel(lua_State* L);
 
 	/*
 	 * C Methods

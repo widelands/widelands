@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,16 +27,7 @@
 
 namespace Widelands {
 
-Tribes::Tribes()
-   : buildings_(new DescriptionMaintainer<BuildingDescr>()),
-     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
-     ships_(new DescriptionMaintainer<ShipDescr>()),
-     wares_(new DescriptionMaintainer<WareDescr>()),
-     workers_(new DescriptionMaintainer<WorkerDescr>()),
-     tribes_(new DescriptionMaintainer<TribeDescr>()) {
-}
-
-std::vector<std::string> Tribes::get_all_tribenames() {
+std::vector<std::string> get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
@@ -48,7 +39,7 @@ std::vector<std::string> Tribes::get_all_tribenames() {
 	return tribenames;
 }
 
-std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
+std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
@@ -58,25 +49,33 @@ std::vector<TribeBasicInfo> Tribes::get_all_tribeinfos() {
 	return tribeinfos;
 }
 
-TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
-	if (tribe_exists(tribename)) {
-		for (const TribeBasicInfo& info : get_all_tribeinfos()) {
+TribeBasicInfo get_tribeinfo(const std::string& tribename) {
+	if (Widelands::tribe_exists(tribename)) {
+		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
 			if (info.name == tribename) {
 				return info;
 			}
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
-	NEVER_HERE();
 }
 
-bool Tribes::tribe_exists(const std::string& tribename) {
+bool tribe_exists(const std::string& tribename) {
 	for (const std::string& name : get_all_tribenames()) {
 		if (name == tribename) {
 			return true;
 		}
 	}
 	return false;
+}
+
+Tribes::Tribes()
+   : buildings_(new DescriptionMaintainer<BuildingDescr>()),
+     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+     ships_(new DescriptionMaintainer<ShipDescr>()),
+     wares_(new DescriptionMaintainer<WareDescr>()),
+     workers_(new DescriptionMaintainer<WorkerDescr>()),
+     tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
 void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
@@ -164,8 +163,8 @@ void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase
 
 void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
 	const std::string name = table.get_string("name");
-	if (tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Tribes::tribeinfo(name), egbase.tribes()));
+	if (Widelands::tribe_exists(name)) {
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
@@ -315,8 +314,6 @@ void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerinde
 }
 
 void Tribes::load_graphics() {
-	// These will be deleted at the end of the method.
-	std::vector<std::unique_ptr<Texture>> individual_textures_;
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
 		for (const std::string& texture_path : tribe->normal_road_paths()) {
@@ -334,7 +331,7 @@ void Tribes::postload() {
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
-			for (const auto& ware_amount : de->inputs()) {
+			for (const auto& ware_amount : de->input_wares()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {
