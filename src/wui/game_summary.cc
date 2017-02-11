@@ -211,7 +211,6 @@ void GameSummaryScreen::fill_data() {
 }
 
 void GameSummaryScreen::continue_clicked() {
-	// NOCOM game speed here?
 	game_.game_controller()->set_desired_speed(desired_speed_);
 	die();
 }
