@@ -52,9 +52,10 @@ struct Supply;
 struct NoteEconomy {
 	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
 
-	// When 2 economies have been merged, this is the economy number that has been removed
+	// When 2 economies have been merged, this is the economy number that has
+	// been removed, while the other one is the number of the resulting economy.
+	// For all other messages old_economy == new_economy.
 	size_t old_economy;
-	// When 2 economies have been merged, this is the number of the resulting economy
 	size_t new_economy;
 
 	enum class Action { kMerged, kDeleted };
