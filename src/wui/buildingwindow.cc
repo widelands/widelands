@@ -168,16 +168,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 				   boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
 				capsbuttons->add(expeditionbtn_, UI::Align::kHCenter);
 
-                /* Not in use to avoid bug-1658489, ad does not compile this way...
                 expedition_canceled_subscriber_ =
-                    Notifications::subscribe<Widelands::NoteExpeditionCanceled>([this](
+                    Notifications::subscribe<Widelands::NoteExpeditionCanceled>([this, pd](
                     const Widelands::NoteExpeditionCanceled& canceld) {
                         // Check this was not just any but our Expedition
                         if (canceld.bootstrap == pd->expedition_bootstrap()) {
                             update_expedition_button(true);
                         }
                     });
-                */
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, &building_)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {

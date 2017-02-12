@@ -32,9 +32,11 @@ namespace UI {
  *
  * mixed aligenments are results of a binary | operation.
  *
- * TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
- *      incomplete usage are useless.
  */
+
+ // TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
+ // incomplete usage are useless.
+
 enum class Align {
 	kLeft       = 0x00,
 	kHCenter    = 0x01,

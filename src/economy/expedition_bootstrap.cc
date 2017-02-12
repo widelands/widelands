@@ -168,7 +168,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	}
 
     // This will result in bug-1658489 as some other Portdockwindow will be affexted, too
-	// Notifications::publish(NoteExpeditionCanceled(this));
+	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
 void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
