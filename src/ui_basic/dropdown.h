@@ -129,9 +129,10 @@ private:
 	int button_dimension_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
-	UI::Button* push_button_; // Only used in textual dropdowns
+	UI::Button* push_button_;  // Only used in textual dropdowns
 	UI::Button display_button_;
-	UI::Listselect<uintptr_t> list_;
+	// The list needs to be a pointer for destruction, because we hook into the paren't parent.
+	UI::Listselect<uintptr_t>* list_;
 	std::string label_;
 	std::string tooltip_;
 	uint32_t current_selection_;
@@ -174,13 +175,14 @@ public:
 	                  button_background) {
 	}
 	~Dropdown() {
-		clear();
+		entry_cache_.clear();
 	}
 
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the value for the entry
-	/// \param pic          an image to illustrate the entry. Can be nullptr in textual dropdowns only.
+	/// \param pic          an image to illustrate the entry. Can be nullptr in textual dropdowns
+	/// only.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	void add(const std::string& name,
