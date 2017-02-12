@@ -217,7 +217,7 @@ protected:
 
 	/**
 	 * Called when an item arrives at the owning building.
-	 * Most likely only one of \c i or \c w will be valid.
+	 * Most likely only one of \c index or \c worker will be valid.
 	 * @param index The index of the arrived ware in case of ware queues.
 	 *          Not sure about its value in worker queues.
 	 * @param worker The arrived worker or \c nullptr.

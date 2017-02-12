@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"POT-Creation-Date: 2017-02-11 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,67 +14,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../data/world/critters/badger/init.lua:14
+#: ../../data/world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr ""
 
-#: ../../data/world/critters/brownbear/init.lua:14
+#: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr ""
 
-#: ../../data/world/critters/bunny/init.lua:13
+#: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr ""
 
-#: ../../data/world/critters/chamois/init.lua:14
+#: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr ""
 
-#: ../../data/world/critters/deer/init.lua:14
+#: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr ""
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr ""
 
-#: ../../data/world/critters/elk/init.lua:19
+#: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
 msgstr ""
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
 msgstr ""
 
-#: ../../data/world/critters/lynx/init.lua:14
+#: ../../data/world/critters/lynx/init.lua:16
 msgid "Lynx"
 msgstr ""
 
-#: ../../data/world/critters/marten/init.lua:14
+#: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr ""
 
-#: ../../data/world/critters/reindeer/init.lua:14
+#: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr ""
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr ""
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:20
 msgid "Stag"
 msgstr ""
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:19
 msgid "Wild boar"
 msgstr ""
 
-#: ../../data/world/critters/wisent/init.lua:14
+#: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr ""
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
 msgstr ""
 
@@ -720,62 +720,62 @@ msgstr ""
 msgid "Red Umbrella Tree"
 msgstr ""
 
-#: ../../data/world/init.lua:11
+#: ../../data/world/init.lua:19
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "Artifacts"
 msgstr ""
 
-#: ../../data/world/init.lua:18
+#: ../../data/world/init.lua:26
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr ""
 
-#: ../../data/world/init.lua:25
+#: ../../data/world/init.lua:33
 msgid "Plants"
 msgstr ""
 
-#: ../../data/world/init.lua:32
+#: ../../data/world/init.lua:40
 msgid "Standing Stones"
 msgstr ""
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:47
 msgid "Rocks"
 msgstr ""
 
-#: ../../data/world/init.lua:46
+#: ../../data/world/init.lua:54
 msgid "Dead Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:61
 msgid "Coniferous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:60
+#: ../../data/world/init.lua:68
 msgid "Deciduous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:67
+#: ../../data/world/init.lua:75
 msgid "Palm Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:74
+#: ../../data/world/init.lua:82
 msgid "Wasteland Trees"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:82
+#: ../../data/world/init.lua:90
 msgid "Herbivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:90
+#: ../../data/world/init.lua:98
 msgid "Carnivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:98
+#: ../../data/world/init.lua:106
 msgid "Aquatic"
 msgstr ""
 

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -9,14 +9,15 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
+# Олег Шевчеко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-10 10:58+0000\n"
-"PO-Revision-Date: 2016-12-10 10:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-09 14:41+0000\n"
+"PO-Revision-Date: 2017-02-10 14:02+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,7 +132,7 @@ msgstr "Обеспечьте ваши шахты провизией"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "Постройте хижину охотника, хижину егеря и таверну."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
@@ -178,7 +179,7 @@ msgstr "Постройте плавильню."
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Железная руда, добытая шахтёрами, не может использоваться в сыром виде - сначала её необходиом переплавить в железо."
+msgstr "Железная руда, добытая шахтёрами, не может использоваться в сыром виде - сначала её необходимо переплавить в железо."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
@@ -192,7 +193,7 @@ msgstr "Улучшите шахту и таверну и постройте ма
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Улучшите шахту по добыче угля или шахту по добыче железа до глубокой шахты, а таверну улучшите до гостиницы"
+msgstr "Улучшите угольную или железную шахту до глубокой шахты, а таверну - до трактира."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
@@ -204,7 +205,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Обычные шахты могут выкопать около трети всех ресурсов, которые лежат под ними; затем они должны быть повышены до глубоких шахт для того, чтобы сохранить работу должным образом. Чтобы улучшить здание, выберите его и нажмите соответствующую кнопку в появившемся окне."
+msgstr "Обычные шахты могут выкопать около трети всех ресурсов, которые лежат под ними; затем они должны быть повышены до глубоких шахт для того, чтобы сохранить работу должным образом. Чтобы улучшить здание, выберите его и щелкните соответствующую кнопку в появившемся окне."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -212,7 +213,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "Работники получают опыт при успешной работе. При наличии достаточного опыта они становятся более продвинутыми работниками, которые необходимы для эксплуатации улучшенных зданий. Не улучшайте здание до тех пор, пока у вас не появится достаточно продвинутых работников, способных работать в расширенным зданием!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -220,14 +221,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Такие здания, как правило, предъявляют больше требований, чем основной вид этого здания, например, для глубокой шахты, вместо пайков, требуются закуски. Вам придется улучшить таверну до трактира, чтобы производить закуски из лепешек И второго вида пищи (мяса или рыбы) И пива."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "Конечно, вы можете улучшить все шахты до глубоких шахт, это мгновенно даст вам работников: большие шахты работаю немного быстрее, но маленькие потребляют более дешевую пищу. Сами решайте какую стратегию вы предпочитаете."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
@@ -242,7 +243,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Более крупные и лучшие здания, включая все военные, требуют более качественных строительных материалов. Они не могут быть построены из простых брёвен: сначала брёвна должны быть переработаны в балки. Не забывайте строить балочные мастерские до возникновения потребности в балках, так как без них невозможно продолжить развитие."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -258,7 +259,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Более совершенные здания могут также потребовать других улучшенных материалов, кроме балок. Одним из них является цемент, который производится из гранита, воды и угля обжигальщиком извести."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
@@ -272,14 +273,14 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Чтобы вызвать геолога для поиска воды, щелкните на флаге в том районе, в котором вы хотите, чтобы он искал, а затем щелкните на кнопке с надписью \"Отправить геолога исследовать район\"."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Уголь можно получить путем строительства печи углежога или угольной шахты. Обжиг древесного угля из бревен идёт медленно. Поэтому, вы должны строить печи углежога только когда нет угля."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
@@ -291,14 +292,14 @@ msgstr "Построй цементную печь и колодец. Кроме
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:135
 msgid "Build a reed yard"
-msgstr "Постройте оранжерею"
+msgstr "Постройте плантацию"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:133
 msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr ""
+msgstr "Третьим материалом требуемым для улучшенных строений является кровельный тростник, который используется для покрова крыш. Этот тростник выращивается садовниками вокруг их строений - плантаций."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
@@ -312,11 +313,11 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Когда дороги длительное время находятся под большой нагрузкой, одного носильщика обычно не достаточно для быстрой перевозки грузов. Как следствие - дорожные заторы. Поэтому для таких дорог используют второго носильщика: вол, который помогает перевозить товары. Это удваивает пропускную способность."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Волов разводят на скотном дворе, кормом им служат пшеница и вода."
+msgstr "Волов разводят на скотном дворе, с помощью пшеницы и воды."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -384,7 +385,7 @@ msgstr "Как говорил мне отец, бывают времена дл�
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Трон готовиться к войне"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid "Thron is shaking his head…"
@@ -405,7 +406,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Истории, которые они рассказывают о свершениях нашего рода, грустно слышать. Я провожу ночи без сна, беспокоюсь, и устаю больше, чем думал, что так бывает. Даже, когда я закрываю глаза, я вижу что крепость, построенная моим отцом, объята пламенем. Трон среди деревьев - символ единства и мира нашего рода - стал клином, который нас разрывает."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:220
@@ -417,18 +418,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Сегодня мои охотники привели ко мне мужчин, женщин и маленьких детей, которые прятались в лесах, пытаясь избежать войны, ненависти и мести, которые бушуют между племенами, воюющими друг с другом, как в старые времена, когда мы были не лучше диких зверей, движимыми и управляемыми инстинктами. Ни один из моих братьев никогда не добьется и не будет контролировать деревянный трон, ни одно из племен не будет достаточно сильным, чтобы покорить другое. Не будет конца этой бойне, пока... это так? Как отец и сказал?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Подняться против того, кто угрожает самому нашему существованию, хотя он может быть ваших кровей или одним из ваших соратников?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Трон обдумывает будущее"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:232
@@ -438,7 +439,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Болдрет, кажется, все больше и больше потрепанным - время никого не щадит. Духи моих собратьев угасают с приближением холодов, а мы все еще живем в лачугах и казармах. Я никогда не планировал оставаться здесь в пустыне так надолго, и никогда не думал, что мои братья также будут втянуты в эту бессмысленную битву."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:235
@@ -447,7 +448,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Возможно, настало время почувствовать себя немного уверенней. Возможно, пришло время тех, кто по-прежнему живет и думает организовать новый дом, вернув то, что давно потеряно? До тех пор, пока мы не вернемся в то место, которое мы называли нашим домом..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
 msgid "Somebody Comes up to You"
@@ -455,7 +456,7 @@ msgstr "Кто-то приблизился к Вам"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:241
 msgid "An old man says…"
-msgstr ""
+msgstr "Один старец говорит..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
@@ -470,7 +471,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Одним богам известно, как долго мы должны прятаться здесь. Воины надеются, что мы можем вернуть былую славу в любой момент, но я сильно сомневаюсь, что это случится. А дни короткие и холодные..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
@@ -487,14 +488,14 @@ msgstr "Советник"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:253
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Хантрух отметил..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Я вижу вы уже построили каменоломню и две хижины дровосека. Хорошее начало, если мы хотим остаться здесь подольше."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:258
@@ -502,14 +503,14 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Только никогда не забывайте, что эти леса наше наследие, вверенное нам нашими предками. Мы должны их уважать и заботиться о них. И всё, что мы взяли, мы должны вернуть обратно."
+msgstr "Только никогда не забывайте, что эти леса наше наследие, вверенное нам нашими предками. Мы должны их уважать и заботиться о них. И всё, что мы берём, должны вернуть обратно."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:261
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Чтобы восстановить срубленный лес, мы должны построить несколько хижин лесничего как можно ближе к хижинам дровосека."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:267
 msgid "In the Night"
@@ -526,14 +527,14 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr "В одну из бессонных ночей я поднялся на холм и пристально вглядывался на север. Огни продолжают полыхать, удовлетворяя жажду наследия моего отца."
+msgstr "В одну из бессонных ночей я поднялся на холм и пристально вглядывался на север. Огни продолжают полыхать, удовлетворяя свой голод наследием моего отца."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:273
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "Они постоянно напоминают о о том почему мы должны скрывать здесь... и почему мы должны вернуться в конце концов!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:281
 msgid "At the Tomb"
@@ -545,18 +546,18 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "Еще раз, я поднялся на могилу моего отца, в священной роще у подножия великого шпиля Кал'маврат. Я просто стоял там не ощущая, ни течение времени, ни холодных дождей льющихся из угрюмых облаков..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:287
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "Это чем-то было похоже на прощание. Впервые я задавался вопросом о том, что ожидает меня в будущем..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "The Other Day"
-msgstr "На днях"
+msgstr "В другой день"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:296
 msgid "Thron says thoughtfully…"
@@ -567,7 +568,7 @@ msgstr "Трон глубокомысленно говорит..."
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr "Недавно, ко мне подходил Болдред. Он посоветовал переместиться ближе к дому, чтобы нанести удар при первых же признаках неуверенности в войсках моих братьев."
+msgstr "Недавно, ко мне подходил Болдред. Он посоветовал переместиться поближе к дому, чтобы ударить при первых признаках, что войска моих братьев колеблются."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:301
@@ -576,7 +577,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Но когда я смотрю поверх леса, я все еще вижу черный дым, ползущий в небо. Я знаю - еще слишком рано, и он надеется, что этого пока не произойдет. Возможно, он все же прав, но я боюсь, что сразу начнется кровопролитие - с обоих сторон..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "The Oath"
@@ -584,7 +585,7 @@ msgstr "Клятва"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Трон выглядит взбешенным..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:309
@@ -592,7 +593,7 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr "Сегодня, мои воины подобрали раненного, больного старика, блуждавшего в тёмном лесу. Мы слушали в ужасе, когда он рассказывал нам о зверствах творящихся в Альтунране."
+msgstr "Сегодня, мои воины подобрали раненного, больного старика, блуждавшего в тёмном лесу. Мы слушали в ужасе, когда он рассказывал нам о зверствах творящихся в Аль'тунране."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:312
@@ -613,7 +614,7 @@ msgstr "Ваш лояльный спутник"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Отважный Болдрет шагнул на вашу сторону..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:320
@@ -622,11 +623,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Итак, ты хочешь чтобы мы продолжали стоять в этих лесах, Трон? Конечно, в этом есть здравый смысл, но мое сердце жаждет славного возвращения в Ал'тунран. Слишком долго мы ждали, пока наши братья сражались на поле боя, а наши топоры и мечи проржавели."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:326
 msgid "Khantrukh joins in…"
-msgstr "Хантрух входит в..."
+msgstr "Хантрух присоединяется..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:328
@@ -634,11 +635,11 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "Прошу прощения, вождь, но я серьёзно обеспокоен и, хочу это обсудить с вами. Скалы, рядом с нашим лагерем, усилиями наших работников, быстро иссякают, и остается мало времени, пока они не исчезнут совсем."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Болдрет воспрянул..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
@@ -647,7 +648,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Хотя, конечно, это не самая достойная задача для воина, но хоть какое-то занятие! Трон, что вы скажете, если я  возьму нескольких наших самых беспокойных воинов,и сходим к великой горе Кал'маврат - может быть, мы найдём еще скалы, по просьбе старика?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Khantrukh grumbles…"
@@ -656,16 +657,16 @@ msgstr "Хантрух ворчит..."
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:345
 msgid "Old man? Disrespectful youth!"
-msgstr "Старый человек? Невежливая молодежь!"
+msgstr "Старик? Непочтительный молодежь!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:351
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Хантрух удовлетворенно кивнул..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Наконец-то! Этих скал должно хватить на какое-то время. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:357
 msgid "Boldreth exclaims…"
@@ -676,7 +677,7 @@ msgstr "Болдрет восклицает..."
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "Только взгляни на это! На востоке великая гора Кал'маврат! Интересно, какие сокровища могут быть спрятаны под его величественными склонами!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -1039,7 +1040,7 @@ msgstr "Но они боятся, что война положит конец э
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

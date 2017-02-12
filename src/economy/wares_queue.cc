@@ -56,13 +56,13 @@ void WaresQueue::cleanup() {
 	index_ = INVALID_INDEX;
 }
 
-void WaresQueue::entered(DescriptionIndex index,
+void WaresQueue::entered(
 #ifndef NDEBUG
-                         Worker* worker
+   DescriptionIndex index, Worker* worker
 #else
-                         Worker*
+   DescriptionIndex, Worker*
 #endif
-                         ) {
+   ) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);

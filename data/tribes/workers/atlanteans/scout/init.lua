@@ -6,7 +6,7 @@ animations = {
       hotspot = { 4, 22 },
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
+add_walking_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
 
 tribes:new_worker_type {
    msgctxt = "atlanteans_worker",

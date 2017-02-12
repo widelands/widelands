@@ -6,13 +6,14 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # GunChleoc, 2016
+# Олег Шевчеко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-07 13:50+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgstr "Защитите свое поселение"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some blockhouses and sentries around the colony."
-msgstr "Постройте несколько Казарм и Караульных на границах поселения"
+msgstr "Постройте несколько блокгаузов и караульных на границах колонии."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
@@ -81,7 +82,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "Постройте домик каменщика, а потом завершите строительство добывающих и производственных  сооружений (угольная шахта и/или печь углежога, железный рудник, инструментальную мастерскую, оружейную, бронную и литейную)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
@@ -116,7 +117,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Это всё, что вы хотели построить. Но помните – угольным и железным рудникам нужно пиво, мраморным и золотым рудниами нужно вино и всем рудникам нужно немного пайков, которые производятся из хлеба ИЛИ мяса ИЛИ рыбы."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -146,7 +147,7 @@ msgstr "Уничтожьте племя варваров"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Постройте казармы для начала тренировки солдат."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
@@ -339,7 +340,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "О Боги, это невероятная удача! Есть еще две горы, и, похоже, в одной из них есть большое количество угля, а в другой - железной руды. Рекомендую вам немедленно построить железные и угольные шахты (или, по крайней мере, угольные печи), литейные, бронную и оружейную мастерские."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
@@ -516,7 +517,7 @@ msgstr "Вы закончили эту миссию. Вы можете прод�
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"
