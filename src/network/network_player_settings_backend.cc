@@ -34,6 +34,46 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	s->next_player_state(id);
 }
 
+
+void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
+	// NOCOM
+	const GameSettings& settings = s->settings();
+
+	if (id >= settings.players.size() || tribename.empty())
+		return;
+
+	if (settings.players.at(id).state != PlayerSettings::stateShared) {
+		s->set_player_tribe(id, tribename, tribename == "random");
+	} else {
+		// This button is temporarily used to select the player that uses this starting position
+		uint8_t sharedplr = settings.players.at(id).shared_in;
+		for (; sharedplr < settings.players.size(); ++sharedplr) {
+			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+				break;
+		}
+		if (sharedplr < settings.players.size()) {
+			// We have already found the next player
+			s->set_player_shared(id, sharedplr + 1);
+			return;
+		}
+		sharedplr = 0;
+		for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
+			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+				break;
+		}
+		if (sharedplr < settings.players.at(id).shared_in) {
+			// We have found the next player
+			s->set_player_shared(id, sharedplr + 1);
+			return;
+		} else {
+			// No fitting player found
+			return toggle_type(id);
+		}
+	}
+}
+
 /// Toggle through the tribes + handle shared in players
 void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 	const GameSettings& settings = s->settings();

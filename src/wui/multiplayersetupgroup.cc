@@ -32,9 +32,11 @@
 #include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
@@ -157,8 +159,30 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     n(npsb),
 	     id_(id),
 	     tribepics_(tp),
-	     tribenames_(tn) {
+		  tribenames_(tn),
+		  // NOCOM we need the parent for the list space, but it will segfault.
+		  tribes_dropdown_(this, 0, 0, 200, 200, h, _("Tribe"), UI::DropdownType::kPictorial) {
 		set_size(w, h);
+		tribes_dropdown_.set_visible(false);
+		tribes_dropdown_.set_enabled(false);
+		{
+			i18n::Textdomain td("tribes");
+			for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				tribes_dropdown_.add(_(tribeinfo.descname),
+								tribeinfo.name,
+								g_gr->images().get(tribeinfo.icon),
+								false,
+								tribeinfo.tooltip);
+			}
+		}
+		tribes_dropdown_.add(pgettext("tribe", "Random"),
+						"random",
+						g_gr->images().get("images/ui_fsmenu/random.png"),
+						true,
+						_("The tribe will be selected at random"));
+		tribes_dropdown_.selected.connect(
+					boost::bind(&MultiPlayerPlayerGroup::set_tribe, boost::ref(*this)));
+
 		const Image* player_image =
 		   playercolor_image(id, g_gr->images().get("images/players/player_position_menu.png"),
 		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
@@ -170,6 +194,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		add(type, UI::Align::kHCenter);
+		add(&tribes_dropdown_, UI::Align::kHCenter);
 		tribe = new UI::Button(
 		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		tribe->sigclicked.connect(
@@ -195,6 +220,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Toggle through the tribes + handle shared in players
 	void toggle_tribe() {
 		n->toggle_tribe(id_);
+	}
+
+	void set_tribe() {
+		n->set_block_tribe_selection(true);
+		if (tribes_dropdown_.has_selection()) {
+			const std::string& setme = tribes_dropdown_.get_selected();
+			log("NOCOM %d is setting %s\n", id_, setme.c_str());
+			n->set_tribe(id_, setme); // NOCOM
+		}
+		n->set_block_tribe_selection(false);
 	}
 
 	/// Toggle through the initializations
@@ -237,6 +272,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_style(UI::Button::Style::kRaised);
 			init->set_visible(false);
 			init->set_enabled(false);
+			tribes_dropdown_.set_visible(false);
+			tribes_dropdown_.set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type->set_tooltip(_("Open"));
@@ -248,6 +285,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_style(UI::Button::Style::kRaised);
 			init->set_visible(false);
 			init->set_enabled(false);
+			tribes_dropdown_.set_visible(false);
+			tribes_dropdown_.set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type->set_tooltip(_("Shared in"));
@@ -267,6 +306,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			// Flat ~= icon
 			tribe->set_style(initaccess ? UI::Button::Style::kRaised : UI::Button::Style::kFlat);
 			tribe->set_enabled(true);
+			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
+				tribes_dropdown_.set_visible(true);
+				tribes_dropdown_.set_enabled(!n->tribe_selection_blocked);
+			}
 		} else {
 			std::string title;
 			std::string pic = "images/";
@@ -312,6 +355,25 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			tribe->set_style(UI::Button::Style::kRaised);
 
+			tribe->set_enabled(tribeaccess);
+
+			if (!tribes_dropdown_.is_expanded() && !n->tribe_selection_blocked) {
+				const std::string selected_tribe = tribes_dropdown_.get_selected();
+				if (player_setting.random_tribe) {
+					if (selected_tribe != "random") {
+						tribes_dropdown_.select("random");
+					}
+				} else if (selected_tribe != player_setting.tribe) {
+					tribes_dropdown_.select(player_setting.tribe);
+				}
+			}
+			if (!tribes_dropdown_.is_visible()) {
+				tribes_dropdown_.set_visible(true);
+			}
+			if (tribes_dropdown_.is_enabled() != tribeaccess) {
+				tribes_dropdown_.set_enabled(tribeaccess && !n->tribe_selection_blocked);
+			}
+
 			if (player_setting.team) {
 				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
 			} else {
@@ -319,7 +381,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			team->set_visible(true);
 			team->set_enabled(teamaccess);
-			tribe->set_enabled(tribeaccess);
 		}
 		init->set_enabled(initaccess);
 		tribe->set_visible(true);
@@ -352,8 +413,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
 	uint8_t const id_;
+	// NOCOM tribepics and names should be 1 data structure
 	std::map<std::string, const Image*>& tribepics_;
 	std::map<std::string, std::string>& tribenames_;
+	UI::Dropdown<std::string> tribes_dropdown_; // NOCOM
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
