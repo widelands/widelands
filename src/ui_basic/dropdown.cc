@@ -158,7 +158,8 @@ uint32_t BaseDropdown::get_selected() const {
 void BaseDropdown::select(uint32_t entry) {
 	assert(entry < list_->size());
 	list_->select(entry);
-	set_value();
+	current_selection_ = list_->selection_index();
+	update();
 }
 
 void BaseDropdown::set_label(const std::string& text) {
@@ -182,6 +183,10 @@ void BaseDropdown::set_enabled(bool on) {
 	}
 	display_button_.set_enabled(on);
 	list_->set_visible(false);
+}
+
+bool BaseDropdown::is_expanded() const {
+	return list_->is_visible();
 }
 
 void BaseDropdown::set_pos(Vector2i point) {
@@ -208,7 +213,7 @@ uint32_t BaseDropdown::size() const {
 	return list_->size();
 }
 
-void BaseDropdown::set_value() {
+void BaseDropdown::update() {
 	const std::string name = list_->has_selection() ?
 	                            list_->get_selected_name() :
 	                            /** TRANSLATORS: Selection in Dropdown menus. */
@@ -229,7 +234,10 @@ void BaseDropdown::set_value() {
 		                           g_gr->images().get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
+}
 
+void BaseDropdown::set_value() {
+	update();
 	selected();
 	current_selection_ = list_->selection_index();
 }

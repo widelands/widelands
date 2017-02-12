@@ -79,9 +79,12 @@ public:
 	void set_enabled(bool on);
 
 	/// Whether the dropdown selection is enabled.
-	bool is_enabled() {
+	bool is_enabled() const {
 		return is_enabled_;
 	}
+
+	/// Whether the dropdown has been opened by the user.
+	bool is_expanded() const;
 
 	/// Move the dropdown. The dropdown's position is relative to the parent in
 	/// pixels.
@@ -111,7 +114,7 @@ protected:
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
 
-	/// Select the entry. Assumes that it exists.
+	/// Select the entry. Assumes that it exists. Does not trigger the 'selected' signal.
 	void select(uint32_t entry);
 
 	/// Removes all elements from the list.
@@ -123,6 +126,9 @@ protected:
 
 private:
 	void layout() override;
+
+	/// Updates the buttons
+	void update();
 
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
@@ -208,7 +214,7 @@ public:
 		return *entry_cache_[BaseDropdown::get_selected()];
 	}
 
-	/// Select the entry if it exists
+	/// Select the entry if it exists. Does not trigger the 'selected' signal.
 	void select(const Entry& entry) {
 		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
 			if (entry == *entry_cache_[i]) {
