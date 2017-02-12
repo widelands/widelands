@@ -6,14 +6,15 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
+# Олег Шевчеко <olegrock@gmail.com>, 2017
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-31 07:09+0000\n"
+"PO-Revision-Date: 2017-02-09 07:47+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,11 +25,11 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Постройте базовую экономику"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Начните сбор основных строительных материалов, и укрепите лагерь."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a lumberjack’s hut"
@@ -40,7 +41,7 @@ msgstr "Построить хижину лесничего"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a quarry"
-msgstr ""
+msgstr "Постройте каменоломню"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a wood hardener"
@@ -48,11 +49,11 @@ msgstr "Постройте лесопилку"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Постройте караульную на восточной границе"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:31
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "В конце концов, постройте плантацию и цементную печь."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
@@ -96,7 +97,7 @@ msgstr "Не забудьте построить скотный двор"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "По мере того как ваши дороги становятся длиннее и ваша экономика разрастается, вам следует лучше использовать волов для ускорения перевозок товаров."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
@@ -107,18 +108,18 @@ msgstr "Постройте башню"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Постройте башню на северо-восточной границе вашей территории, чтобы увеличить обзор и защитить людей от внезапных атак со стороны врагов."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 msgid "Explore further"
-msgstr ""
+msgstr "Исследуй далее"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:72
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Постройте больше военных зданий для изучения района вокруг штаба и обеспечения безопасности вашего народа."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
@@ -130,7 +131,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Расширяйте территорию в горы, пошлите геологов на поиск руды и угля и постройте сырьевую экономику с шахтами, тавернами, литейными и кузницей."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
@@ -144,15 +145,15 @@ msgstr "Постройте крепость на востоке от гор."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Постройте тренировочную инфраструктуру"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Постройте казармы для тренировки основных солдат."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Постройте арену поединков и тренировочный лагерь западнее гор."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:128
@@ -162,14 +163,14 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Улучшите вашу кузницу до топорной мастерской для производства оружия, потом постройте вторую кузницу для производства инструментов. Когда кузнец достигает своего следующего уровня (главный кузнец), вы сможете улучшить топорную мастерскую для военной фабрики, которая будет производить дополнительное оружие."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:136
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Постройте шлемную мастерскую западнее гор для обеспечения ваших солдат лучшей броней."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:107
@@ -186,7 +187,7 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Склады похожи на штаб, с единственной разницей, что они не защищаются солдатами. Часто разумно построить склад, когда ваша территория расширяется, и пути к вашему штабу становятся всё длиннее и длиннее."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
@@ -197,7 +198,7 @@ msgstr "Постройте тренировочные центры"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Постройте казармы, арену поединков и тренировочный лагерь западнее гор."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -205,16 +206,16 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Казармы обучают основных солдат, в то время как тренировочные центры, такие как тренировочный лагерь или арена поединков, используются для обучения различных характеристик солдат. Эти характеристики важны в боях, и чем они лучше у солдата, тем выше шанс выиграть бой."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Характеристики следующие: здоровье, атака, защита и уклонение."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:125
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Build weapons production"
-msgstr ""
+msgstr "Постройте оружейное производство"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:133
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
@@ -228,7 +229,7 @@ msgstr "Уничтожить армию Калитата"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Уничтожьте армию Калитата и расширьте свои территории на восток."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:145
 msgid ""
@@ -645,14 +646,14 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr "Вождь, помни о своих носильщиках: наши дороги становятся всё длиннее и длиннее, а нагрузка наших бедных носильщиков не становится легче. Нам нужно разводить больше быков, чтобы облегчить нагрузку наших носильщиков и сделать эффективнее перенос предметов."
+msgstr "Вождь, вспомни о несчастных носильщиках: наши дороги становятся всё длиннее и длиннее, а их грузы не становятся легче. Нам нужно разводить больше волов, чтобы облегчить работу наших носильщиков и улучшить эффективность транспортировки."
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

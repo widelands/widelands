@@ -61,7 +61,8 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
-constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
+// Responsible for warehouses and expedition bootstraps
+constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
@@ -312,7 +313,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
                                            MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionWarehouse) {
+		if (packet_version >= 6) {
 			Player& player = warehouse.owner();
 			warehouse.init_containers(player);
 			const TribeDescr& tribe = player.tribe();
@@ -427,7 +428,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
 					if (warehouse.portdock_->expedition_started()) {
-						warehouse.portdock_->expedition_bootstrap()->load(warehouse, fr, game, mol);
+						warehouse.portdock_->expedition_bootstrap()->load(
+						   warehouse, fr, game, mol, packet_version);
 					}
 				}
 			}

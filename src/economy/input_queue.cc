@@ -128,7 +128,7 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 	try {
 		// A bit messy since InputQueue started with packet version 1 but has to support the build19
 		// WaresQueue packets with version 2 and has now be changed to version 3 while fixing
-		// Unfortunately, this will probably crash when loading old pre-buil19 save games
+		// Unfortunately, this will probably crash when loading old pre-build19 save games
 		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);

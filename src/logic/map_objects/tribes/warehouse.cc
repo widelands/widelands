@@ -1274,9 +1274,8 @@ void Warehouse::check_remove_stock(Game& game) {
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	assert(type == wwWARE);
 
-	return portdock_->expedition_bootstrap()->waresqueue(index);
+	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
 /*

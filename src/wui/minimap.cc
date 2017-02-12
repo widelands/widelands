@@ -70,10 +70,6 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	return true;
 }
 
-bool MiniMap::View::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
-}
-
 void MiniMap::View::set_zoom(int32_t z) {
 	const Widelands::Map& map = ibase_.egbase().map();
 	set_size((map.get_width() * z), (map.get_height()) * z);
