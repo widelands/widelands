@@ -92,7 +92,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
         button_background,
         ListselectLayout::kDropdown)),
      label_(label),
-     type_(type) {
+     type_(type),
+     is_enabled_(true) {
 	assert(max_list_height_ > 0);
 	list_->set_visible(false);
 	list_->set_background(background);
@@ -154,6 +155,12 @@ uint32_t BaseDropdown::get_selected() const {
 	return list_->get_selected();
 }
 
+void BaseDropdown::select(uint32_t entry) {
+	assert(entry < list_->size());
+	list_->select(entry);
+	set_value();
+}
+
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
 	if (type_ == DropdownType::kTextual) {
@@ -167,6 +174,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 }
 
 void BaseDropdown::set_enabled(bool on) {
+	is_enabled_ = on;
 	set_can_focus(on);
 	if (push_button_ != nullptr) {
 		push_button_->set_enabled(on);

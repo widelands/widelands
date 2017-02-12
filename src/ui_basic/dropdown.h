@@ -78,6 +78,11 @@ public:
 	/// Enables/disables the dropdown selection.
 	void set_enabled(bool on);
 
+	/// Whether the dropdown selection is enabled.
+	bool is_enabled() {
+		return is_enabled_;
+	}
+
 	/// Move the dropdown. The dropdown's position is relative to the parent in
 	/// pixels.
 	void set_pos(Vector2i point) override;
@@ -105,6 +110,9 @@ protected:
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
+
+	/// Select the entry. Assumes that it exists.
+	void select(uint32_t entry);
 
 	/// Removes all elements from the list.
 	void clear();
@@ -137,6 +145,7 @@ private:
 	std::string tooltip_;
 	uint32_t current_selection_;
 	DropdownType type_;
+	bool is_enabled_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
@@ -197,6 +206,15 @@ public:
 	/// \return the selected element
 	const Entry& get_selected() const {
 		return *entry_cache_[BaseDropdown::get_selected()];
+	}
+
+	/// Select the entry if it exists
+	void select(const Entry& entry) {
+		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
+			if (entry == *entry_cache_[i]) {
+				BaseDropdown::select(i);
+			}
+		}
 	}
 
 	/// Removes all elements from the list.
