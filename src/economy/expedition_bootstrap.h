@@ -44,7 +44,7 @@ class Worker;
  * This object is created in the port dock as soon as the start expedition button is
  * pressed. As soon as the ship is loaded, this object gets destroyed.
  * In case the Expedition is ::cancel()ed the wares will be returned to the port dock.
- * Its the responsibility of the Owner to finall dispose a canceled ExpeditionBootstrap.
+ * Its the responsibility of the Owner to finally dispose a canceled ExpeditionBootstrap.
  *
  */
 
@@ -60,11 +60,11 @@ public:
 	// the corresponding warehouse.
 	void cancel(Game& game);
 
-	/**
+    /**
      * Returns a list of workers and wares that are ready to go to an expediton.
      *
-	 * Ownership is transferred and the object is in an undefined
-	 * state after this and must be deleted.
+     * Ownership is transferred and the object is in an undefined
+     * state after this and must be deleted.
      */
 	void get_waiting_workers_and_wares(Game&,
 	                                   const TribeDescr&,
@@ -83,10 +83,10 @@ public:
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
 
-	/** Load this from a file.
+    /** Load this from a file.
      *
      * The actual data is stored in the buildingdata
-	 * packet, and there in the warehouse data packet.
+     * packet, and there in the warehouse data packet.
      */
 	void load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
 

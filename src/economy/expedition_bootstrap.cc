@@ -117,7 +117,6 @@ void ExpeditionBootstrap::cancel(Game& game) {
 		warehouse->refresh_options(*igb);
 	}
 
-    // This will result in bug-1658489 as some other Portdockwindow will be affexted, too
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
