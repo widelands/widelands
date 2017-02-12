@@ -107,6 +107,9 @@ function build_barracks()
    }) do sleep(3784) end
    set_objective_done(o)
 
+   sleep(1 * 60 * 1000) -- give the recruits time to move
+   msg_boxes(barracks_story_end)
+
    sleep(15 * 60 * 1000) -- sleep a while
    run(build_training)
 end

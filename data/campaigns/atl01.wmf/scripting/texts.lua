@@ -322,6 +322,15 @@ barracks_story = {
    }
 }
 
+barracks_story_end = {
+   {
+      title = _"Jundlina is Satisfied",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Today I saw the first recruits gathering in front of the new barracks. If everything goes well, they should receive their training soon.]]))
+   }
+}
+
 training_story = {
    {
       title = _"Jundlina Summons Sidolus",
