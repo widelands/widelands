@@ -37,6 +37,7 @@
 class ShipWindow : public UI::Window {
 public:
 	ShipWindow(InteractiveGameBase& igb, Widelands::Ship& ship);
+	virtual ~ShipWindow();
 
 private:
 	// Resets the vbox_ and fills it with the currently needed buttons, then positions the window.

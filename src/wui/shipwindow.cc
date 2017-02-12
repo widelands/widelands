@@ -74,6 +74,11 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
 		});
 }
 
+ShipWindow::~ShipWindow() {
+	assert(ship_.optionswindow_ == this);
+	ship_.optionswindow_ = nullptr;
+}
+
 void ShipWindow::init(bool avoid_fastclick) {
 	assert(ship_.get_owner());
 
@@ -174,6 +179,19 @@ void ShipWindow::init(bool avoid_fastclick) {
 	if (!avoid_fastclick) {
 		move_out_of_the_way();
 		warp_mouse_to_fastclick_panel();
+	}
+}
+
+/**
+ * Create window.
+ */
+void Ship::create_options_window(InteractiveGameBase& parent) {
+	if (optionswindow_) {
+		if (optionswindow_->is_minimal())
+			optionswindow_->restore();
+		optionswindow_->move_to_top();
+	} else {
+		optionswindow_ = new ShipWindow(parent, *this);
 	}
 }
 

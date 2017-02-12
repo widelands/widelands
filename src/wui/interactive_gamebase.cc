@@ -146,7 +146,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				new ShipWindow(*this, *ship);
+				ship->create_options_window(*this);
 				return true;
 			}
 		}
