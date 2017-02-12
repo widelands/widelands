@@ -31,7 +31,7 @@ struct NetworkPlayerSettingsBackend {
 	}
 
 	void toggle_type(uint8_t id);
-	void toggle_tribe(uint8_t id);
+	void toggle_shared_in(uint8_t id);
 	void set_tribe(uint8_t id, const std::string& tribename);
 	void set_block_tribe_selection(bool blocked) {
 		tribe_selection_blocked = blocked;

@@ -196,7 +196,9 @@ void BaseDropdown::set_pos(Vector2i point) {
 
 void BaseDropdown::clear() {
 	list_->clear();
+	current_selection_ = list_->selection_index();
 	list_->set_size(list_->get_w(), 0);
+	list_->set_visible(false);
 	set_layout_toplevel(false);
 }
 
