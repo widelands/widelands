@@ -31,7 +31,7 @@ struct NetworkPlayerSettingsBackend {
 	}
 
 	void toggle_type(uint8_t id);
-	void toggle_shared_in(uint8_t id);
+	void set_shared_in(uint8_t id, uint8_t shared_in);
 	void set_tribe(uint8_t id, const std::string& tribename);
 	void set_block_tribe_selection(bool blocked) {
 		tribe_selection_blocked = blocked;
@@ -44,6 +44,9 @@ struct NetworkPlayerSettingsBackend {
 	GameSettingsProvider* const s;
 	std::string shared_in_tribe[kMaxPlayers];
 	bool tribe_selection_blocked;
+
+private:
+	void toggle_shared_in(uint8_t id);
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

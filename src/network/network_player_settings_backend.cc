@@ -36,7 +36,6 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 
 
 void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
-	// NOCOM
 	const GameSettings& settings = s->settings();
 
 	if (id >= settings.players.size() || tribename.empty())
@@ -44,71 +43,52 @@ void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& trib
 
 	if (settings.players.at(id).state != PlayerSettings::stateShared) {
 		s->set_player_tribe(id, tribename, tribename == "random");
-		// NOCOM
-	} else {
-		// This button is temporarily used to select the player that uses this starting position
-		uint8_t sharedplr = settings.players.at(id).shared_in;
-		for (; sharedplr < settings.players.size(); ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.size()) {
-			// We have already found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		}
-		sharedplr = 0;
-		for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.at(id).shared_in) {
-			// We have found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		} else {
-			// No fitting player found
-			return toggle_type(id);
-		}
 	}
 }
 
-/// Toggle through the tribes + handle shared in players
+/// Set the shared in player for the given id
+void NetworkPlayerSettingsBackend::set_shared_in(uint8_t id, uint8_t shared_in) {
+	const GameSettings& settings = s->settings();
+	if (id > settings.players.size() || shared_in > settings.players.size())
+		return;
+	if (settings.players.at(id).state == PlayerSettings::stateShared) {
+		s->set_player_shared(id, shared_in);
+	}
+}
+
+
+
+/// Toggle through shared in players
 void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
 	const GameSettings& settings = s->settings();
 
-	if (id >= settings.players.size())
+	if (id >= settings.players.size() || settings.players.at(id).state != PlayerSettings::stateShared)
 		return;
 
-	if (settings.players.at(id).state == PlayerSettings::stateShared) {
-		// This button is temporarily used to select the player that uses this starting position
-		uint8_t sharedplr = settings.players.at(id).shared_in;
-		for (; sharedplr < settings.players.size(); ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.size()) {
-			// We have already found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		}
-		sharedplr = 0;
-		for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
-			if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-				 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-				break;
-		}
-		if (sharedplr < settings.players.at(id).shared_in) {
-			// We have found the next player
-			s->set_player_shared(id, sharedplr + 1);
-			return;
-		} else {
-			// No fitting player found
-			return toggle_type(id);
-		}
+	uint8_t sharedplr = settings.players.at(id).shared_in;
+	for (; sharedplr < settings.players.size(); ++sharedplr) {
+		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+			 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+			break;
+	}
+	if (sharedplr < settings.players.size()) {
+		// We have already found the next player
+		set_shared_in(id, sharedplr + 1);
+		return;
+	}
+	sharedplr = 0;
+	for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
+		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
+			 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+			break;
+	}
+	if (sharedplr < settings.players.at(id).shared_in) {
+		// We have found the next player
+		set_shared_in(id, sharedplr + 1);
+		return;
+	} else {
+		// No fitting player found
+		return toggle_type(id);
 	}
 }
 
