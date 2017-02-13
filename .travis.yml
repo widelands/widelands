@@ -34,11 +34,15 @@ matrix:
      - compiler: gcc
        env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
      - compiler: gcc
+       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
+     - compiler: gcc
        env: GCC_VERSION="5" BUILD_TYPE="Debug"
      - compiler: gcc
        env: GCC_VERSION="6" BUILD_TYPE="Debug"
      - compiler: gcc
        env: GCC_VERSION="4.8" BUILD_TYPE="Release"
+     - compiler: gcc
+       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
      - compiler: gcc
        env: GCC_VERSION="5" BUILD_TYPE="Release"
      - compiler: gcc
