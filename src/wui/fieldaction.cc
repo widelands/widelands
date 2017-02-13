@@ -40,6 +40,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
+#include "wui/economy_options_window.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -589,8 +590,14 @@ void FieldActionWindow::act_buildflag() {
 }
 
 void FieldActionWindow::act_configure_economy() {
-	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable()))
-		flag->get_economy()->show_options_window();
+	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
+		Widelands::Economy* economy = flag->get_economy();
+		if (!economy->has_window()) {
+			bool can_act =
+			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
+			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
+		}
+	}
 }
 
 /*
