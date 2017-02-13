@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-09 14:41+0000\n"
+"POT-Creation-Date: 2017-02-11 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -872,7 +872,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:61
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-#: ../../src/wui/minimap.cc:125
+#: ../../src/wui/minimap.cc:121
 msgid "Terrain"
 msgstr ""
 
@@ -2291,7 +2291,7 @@ msgid "Please select"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:62 ../../src/ui_fsmenu/launch_mpg.cc:174
-#: ../../src/ui_fsmenu/netsetup_lan.cc:117 ../../src/wui/minimap.cc:114
+#: ../../src/ui_fsmenu/netsetup_lan.cc:117 ../../src/wui/minimap.cc:110
 msgid "Map"
 msgstr ""
 
@@ -3550,7 +3550,7 @@ msgstr ""
 msgid "Workers"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:146 ../../src/wui/minimap.cc:169
+#: ../../src/wui/general_statistics_menu.cc:146 ../../src/wui/minimap.cc:165
 msgid "Buildings"
 msgstr ""
 
@@ -3812,19 +3812,19 @@ msgstr ""
 msgid "Soldiers"
 msgstr ""
 
-#: ../../src/wui/minimap.cc:136
+#: ../../src/wui/minimap.cc:132
 msgid "Owner"
 msgstr ""
 
-#: ../../src/wui/minimap.cc:147
+#: ../../src/wui/minimap.cc:143
 msgid "Flags"
 msgstr ""
 
-#: ../../src/wui/minimap.cc:158
+#: ../../src/wui/minimap.cc:154
 msgid "Roads"
 msgstr ""
 
-#: ../../src/wui/minimap.cc:180
+#: ../../src/wui/minimap.cc:176
 msgid "Zoom"
 msgstr ""
 

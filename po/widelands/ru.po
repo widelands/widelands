@@ -7,16 +7,16 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2017
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевчеко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-09 04:55+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-09 14:41+0000\n"
+"PO-Revision-Date: 2017-02-09 15:58+0000\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr "%1$s и %2$s"
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:162
 msgid "No Space"
-msgstr "Недостаточно пространства"
+msgstr "Недостаточно места"
 
 #: ../../data/scripting/infrastructure.lua:163
 msgid ""

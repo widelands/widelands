@@ -1309,7 +1309,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player& player = game.player(sender());
-	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+	if (economy() < player.get_nr_economies() && game.tribes().worker_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity(
 		   ware_type(), permanent_, duetime());
 	}
