@@ -267,10 +267,10 @@ void BaseDropdown::toggle_list() {
 	// Make sure that the list covers and deactivates the elements below it
 	set_layout_toplevel(list_->is_visible());
 }
-// NOCOM fix width for pictorial dropdowns
+
 bool BaseDropdown::is_mouse_away() const {
 	return (get_mouse_position().x + mouse_tolerance_) < 0 ||
-	       get_mouse_position().x > (get_w() + mouse_tolerance_) ||
+	       get_mouse_position().x > (list_->get_w() + mouse_tolerance_) ||
 	       (get_mouse_position().y + mouse_tolerance_ / 2) < 0 ||
 	       get_mouse_position().y > (get_h() + list_->get_h() + mouse_tolerance_);
 }
