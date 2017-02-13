@@ -132,6 +132,7 @@ void BaseDropdown::layout() {
 	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
 	list_->set_size(type_ == DropdownType::kTextual ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
+	// NOCOM fix list position.
 }
 
 void BaseDropdown::add(const std::string& name,
