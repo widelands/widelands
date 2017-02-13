@@ -198,6 +198,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
 		n->set_block_tribe_selection(true);
+		tribes_dropdown_.set_disable_style(s->settings().players[id_].state == PlayerSettings::stateShared ? UI::DropdownDisableStyle::kPermpressed : UI::DropdownDisableStyle::kDisable);
 		if (tribes_dropdown_.has_selection()) {
 			if (s->settings().players[id_].state == PlayerSettings::stateShared) {
 				n->set_shared_in(
@@ -269,6 +270,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		      last_state_ == PlayerSettings::stateShared) &&
 		     player_setting.state != last_state_)) {
 			tribes_dropdown_.clear();
+
+			// We need to see the playercolor if setting shared in is disabled
+			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ? UI::DropdownDisableStyle::kPermpressed : UI::DropdownDisableStyle::kDisable);
+
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
 					if (i != id_) {
@@ -290,6 +295,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				while (shared_in == id_)
 					++shared_in;
 				tribes_dropdown_.select(shared_in_as_string(shared_in + 1));
+				tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 			} else {
 				{
 					i18n::Textdomain td("tribes");
@@ -360,19 +366,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			update_tribes_dropdown(player_setting);
 
-			// Flat ~= icon
-			// NOCOM we need to see the color if disabled
-			if (tribes_dropdown_.is_enabled() != initaccess) {
-				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked);
+			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
+				tribes_dropdown_.set_visible(true);
+				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked && tribes_dropdown_.size() > 1);
 			}
 
 			team->set_visible(false);
 			team->set_enabled(false);
 
-			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
-				tribes_dropdown_.set_visible(true);
-				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked);
-			}
 		} else {
 			std::string title;
 			std::string pic = "images/";
