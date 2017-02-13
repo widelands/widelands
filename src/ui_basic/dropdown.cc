@@ -24,10 +24,12 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
+#include "ui_basic/tabpanel.h"
 
 namespace {
 
@@ -81,20 +83,18 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      get_h(),
                      background,
                      label),
-     // Hook into parent so we can drop down outside the panel
-     // If parent is a horizontal Box, we need even more space, so we try the parent's parent first.
-     list_(new UI::Listselect<uintptr_t>(
-        parent->get_parent() ? parent->get_parent() : parent,
-        x,
-        y + get_h() + (parent->get_parent() ? parent->get_parent()->get_h() : 0),
-        w,
-        0,
-        button_background,
-        ListselectLayout::kDropdown)),
      label_(label),
      type_(type),
      is_enabled_(true) {
 	assert(max_list_height_ > 0);
+	// Hook into highest parent that we can get so that we can drop down outside the panel.
+	// Positioning breaks down with TabPanels, so we exclude them.
+	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
+		parent = parent->get_parent();
+	}
+	list_ = new UI::Listselect<uintptr_t>(
+	   parent, 0, 0, w, 0, button_background, ListselectLayout::kDropdown);
+
 	list_->set_visible(false);
 	list_->set_background(background);
 
@@ -132,7 +132,20 @@ void BaseDropdown::layout() {
 	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
 	list_->set_size(type_ == DropdownType::kTextual ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
-	// NOCOM fix list position.
+
+	// Update list position.
+	// The list is hooked into the highest parent that we can get so that we can drop down outside
+	// the panel.
+	// Positioning breaks down with TabPanels, so we exclude them.
+	UI::Panel* parent = get_parent();
+	int new_list_y = get_y() + get_h() + parent->get_y();
+	int new_list_x = get_x() + parent->get_x();
+	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
+		parent = parent->get_parent();
+		new_list_y += parent->get_y();
+		new_list_x += parent->get_x();
+	}
+	list_->set_pos(Vector2i(new_list_x, new_list_y));
 }
 
 void BaseDropdown::add(const std::string& name,
@@ -254,7 +267,7 @@ void BaseDropdown::toggle_list() {
 	// Make sure that the list covers and deactivates the elements below it
 	set_layout_toplevel(list_->is_visible());
 }
-
+// NOCOM fix width for pictorial dropdowns
 bool BaseDropdown::is_mouse_away() const {
 	return (get_mouse_position().x + mouse_tolerance_) < 0 ||
 	       get_mouse_position().x > (get_w() + mouse_tolerance_) ||
