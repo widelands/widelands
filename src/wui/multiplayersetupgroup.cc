@@ -161,7 +161,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     id_(id),
 	     tribepics_(tp),
 		  tribenames_(tn),
-		  tribes_dropdown_(this, 0, 0, 200, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
+		  tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
 		  last_state_(PlayerSettings::stateClosed),
 		  last_player_amount_(0) {
 		set_size(w, h);
