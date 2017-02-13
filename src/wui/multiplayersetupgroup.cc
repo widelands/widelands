@@ -33,12 +33,12 @@
 #include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
@@ -148,7 +148,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       int32_t const w,
 	                       int32_t const h,
 	                       GameSettingsProvider* const settings,
-								  NetworkPlayerSettingsBackend* const npsb)
+	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 	     player(nullptr),
 	     type(nullptr),
@@ -156,14 +156,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     s(settings),
 	     n(npsb),
 	     id_(id),
-		  tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-		  last_state_(PlayerSettings::stateClosed),
-		  last_player_amount_(0) {
+	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
+	     last_state_(PlayerSettings::stateClosed),
+	     last_player_amount_(0) {
 		set_size(w, h);
 		tribes_dropdown_.set_visible(false);
 		tribes_dropdown_.set_enabled(false);
 		tribes_dropdown_.selected.connect(
-					boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
+		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
 
 		const Image* player_image =
 		   playercolor_image(id, g_gr->images().get("images/players/player_position_menu.png"),
@@ -200,7 +200,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		n->set_block_tribe_selection(true);
 		if (tribes_dropdown_.has_selection()) {
 			if (s->settings().players[id_].state == PlayerSettings::stateShared) {
-				n->set_shared_in(id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+				n->set_shared_in(
+				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
 			} else {
 				n->set_tribe(id_, tribes_dropdown_.get_selected());
 			}
@@ -218,7 +219,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		n->toggle_team(id_);
 	}
 
-
 	/// Helper function to cast shared_in for use in the dropdown.
 	const std::string shared_in_as_string(uint8_t shared_in) {
 		return boost::lexical_cast<std::string>(static_cast<unsigned int>(shared_in));
@@ -227,13 +227,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Update the tribes dropdown from the server settings if the server setting changed.
 	/// This will keep the host and client UIs in sync.
 	void update_tribes_dropdown(const PlayerSettings& player_setting) {
-		if (player_setting.state == PlayerSettings::stateClosed || player_setting.state == PlayerSettings::stateOpen) {
+		if (player_setting.state == PlayerSettings::stateClosed ||
+		    player_setting.state == PlayerSettings::stateOpen) {
 			return;
 		}
 		if (!tribes_dropdown_.is_visible()) {
 			tribes_dropdown_.set_visible(true);
 		}
-		if (!tribes_dropdown_.is_expanded() && !n->tribe_selection_blocked && tribes_dropdown_.has_selection()) {
+		if (!tribes_dropdown_.is_expanded() && !n->tribe_selection_blocked &&
+		    tribes_dropdown_.has_selection()) {
 			const std::string selected_tribe = tribes_dropdown_.get_selected();
 			if (player_setting.state == PlayerSettings::stateShared) {
 				const std::string shared_in = shared_in_as_string(player_setting.shared_in);
@@ -252,53 +254,54 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
-	/// If the map was changed or the selection mode changed between shared_in and tribe, rebuild the dropdown.
+	/// If the map was changed or the selection mode changed between shared_in and tribe, rebuild the
+	/// dropdown.
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
 		const PlayerSettings& player_setting = settings.players[id_];
 
-		if (player_setting.state == PlayerSettings::stateClosed || player_setting.state == PlayerSettings::stateOpen) {
+		if (player_setting.state == PlayerSettings::stateClosed ||
+		    player_setting.state == PlayerSettings::stateOpen) {
 			return;
 		}
 
-		if (tribes_dropdown_.empty() || last_player_amount_ != settings.players.size() || ((player_setting.state == PlayerSettings::stateShared || last_state_ == PlayerSettings::stateShared) && player_setting.state != last_state_)) {
+		if (tribes_dropdown_.empty() || last_player_amount_ != settings.players.size() ||
+		    ((player_setting.state == PlayerSettings::stateShared ||
+		      last_state_ == PlayerSettings::stateShared) &&
+		     player_setting.state != last_state_)) {
 			tribes_dropdown_.clear();
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
 					if (i != id_) {
 						const PlayerSettings& current_player = settings.players[i];
-						const Image* player_image =
-							playercolor_image(i,
-													g_gr->images().get("images/players/player_position_menu.png"),
-													g_gr->images().get("images/players/player_position_menu_pc.png"));
+						const Image* player_image = playercolor_image(
+						   i, g_gr->images().get("images/players/player_position_menu.png"),
+						   g_gr->images().get("images/players/player_position_menu_pc.png"));
 						assert(player_image);
-						const std::string player_name = current_player.name.empty() ?
-							(boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str() : current_player.name;
-							tribes_dropdown_.add(player_name,
-									shared_in_as_string(i + 1),
-									player_image,
-									false,
-									player_name);
+						const std::string player_name =
+						   current_player.name.empty() ?
+						      (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
+						         .str() :
+						      current_player.name;
+						tribes_dropdown_.add(
+						   player_name, shared_in_as_string(i + 1), player_image, false, player_name);
 					}
 				}
 				int shared_in = 0;
-				while (shared_in== id_) ++shared_in;
+				while (shared_in == id_)
+					++shared_in;
 				tribes_dropdown_.select(shared_in_as_string(shared_in + 1));
 			} else {
 				{
 					i18n::Textdomain td("tribes");
 					for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-						tribes_dropdown_.add(_(tribeinfo.descname),
-										tribeinfo.name,
-										g_gr->images().get(tribeinfo.icon),
-										false,
-										tribeinfo.tooltip);
+						tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
+						                     g_gr->images().get(tribeinfo.icon), false,
+						                     tribeinfo.tooltip);
 					}
 				}
-				tribes_dropdown_.add(pgettext("tribe", "Random"),
-								"random",
-								g_gr->images().get("images/ui_fsmenu/random.png"),
-								false,
-								_("The tribe will be selected at random"));
+				tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
+				                     g_gr->images().get("images/ui_fsmenu/random.png"), false,
+				                     _("The tribe will be selected at random"));
 				if (player_setting.random_tribe) {
 					tribes_dropdown_.select("random");
 				} else {
@@ -440,9 +443,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	GameSettingsProvider* const s;
 	NetworkPlayerSettingsBackend* const n;
 	uint8_t const id_;
-	UI::Dropdown<std::string> tribes_dropdown_; /// Select the tribe or shared_in player.
-	PlayerSettings::State last_state_; /// The dropdown needs updating if this changes
-	size_t last_player_amount_; /// The dropdown needs rebuilding if this changes
+	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
+	PlayerSettings::State last_state_;           /// The dropdown needs updating if this changes
+	size_t last_player_amount_;                  /// The dropdown needs rebuilding if this changes
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
@@ -500,8 +503,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.set_size(w * 9 / 15, h - buth);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
-		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
-			&playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get());
+		multi_player_player_groups.at(i) =
+		   new MultiPlayerPlayerGroup(&playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i), UI::Align::kHCenter);
 	}
 	refresh();

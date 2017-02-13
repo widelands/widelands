@@ -34,7 +34,6 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	s->next_player_state(id);
 }
 
-
 void NetworkPlayerSettingsBackend::set_tribe(uint8_t id, const std::string& tribename) {
 	const GameSettings& settings = s->settings();
 
@@ -56,19 +55,18 @@ void NetworkPlayerSettingsBackend::set_shared_in(uint8_t id, uint8_t shared_in) 
 	}
 }
 
-
-
 /// Toggle through shared in players
 void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
 	const GameSettings& settings = s->settings();
 
-	if (id >= settings.players.size() || settings.players.at(id).state != PlayerSettings::stateShared)
+	if (id >= settings.players.size() ||
+	    settings.players.at(id).state != PlayerSettings::stateShared)
 		return;
 
 	uint8_t sharedplr = settings.players.at(id).shared_in;
 	for (; sharedplr < settings.players.size(); ++sharedplr) {
 		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-			 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+		    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
 			break;
 	}
 	if (sharedplr < settings.players.size()) {
@@ -79,7 +77,7 @@ void NetworkPlayerSettingsBackend::toggle_shared_in(uint8_t id) {
 	sharedplr = 0;
 	for (; sharedplr < settings.players.at(id).shared_in; ++sharedplr) {
 		if (settings.players.at(sharedplr).state != PlayerSettings::stateClosed &&
-			 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+		    settings.players.at(sharedplr).state != PlayerSettings::stateShared)
 			break;
 	}
 	if (sharedplr < settings.players.at(id).shared_in) {
@@ -143,9 +141,8 @@ void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 		if (player.shared_in > settings.players.size())
 			toggle_shared_in(id);
 		if (settings.players.at(player.shared_in - 1).state == PlayerSettings::stateClosed ||
-			 settings.players.at(player.shared_in - 1).state == PlayerSettings::stateShared)
+		    settings.players.at(player.shared_in - 1).state == PlayerSettings::stateShared)
 			toggle_shared_in(id);
-
 
 		if (shared_in_tribe[id] != settings.players.at(player.shared_in - 1).tribe) {
 			s->set_player_tribe(id, settings.players.at(player.shared_in - 1).tribe,
