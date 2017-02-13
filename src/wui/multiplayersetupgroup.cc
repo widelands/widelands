@@ -268,9 +268,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		}
 
-		// NOCOM implement empty() function.
-		if (tribes_dropdown_.size() < 1 || last_player_amount_ != settings.players.size() || ((player_setting.state == PlayerSettings::stateShared || last_state_ == PlayerSettings::stateShared) && player_setting.state != last_state_)) {
-
+		if (tribes_dropdown_.empty() || last_player_amount_ != settings.players.size() || ((player_setting.state == PlayerSettings::stateShared || last_state_ == PlayerSettings::stateShared) && player_setting.state != last_state_)) {
 			tribes_dropdown_.clear();
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {

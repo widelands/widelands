@@ -83,6 +83,11 @@ public:
 		return is_enabled_;
 	}
 
+	/// Whether the dropdown has no elements to select.
+	bool empty() {
+		return size() == 0;
+	}
+
 	/// Whether the dropdown has been opened by the user.
 	bool is_expanded() const;
 
