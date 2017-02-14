@@ -372,9 +372,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			update_tribes_dropdown(player_setting);
 
-			// NOCOM disabling fails for client.
-			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
-				tribes_dropdown_.set_visible(true);
+			if (tribes_dropdown_.is_enabled() != initaccess) {
 				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked &&
 				                             tribes_dropdown_.size() > 1);
 			}
