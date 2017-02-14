@@ -37,6 +37,7 @@ enum class NoteId : uint32_t {
 	ShipMessage,
 	ShipWindow,
 	Building,
+	Economy,
 	GraphicResolutionChanged,
 	NoteExpeditionCanceled
 };

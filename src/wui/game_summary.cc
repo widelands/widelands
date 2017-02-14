@@ -26,6 +26,7 @@
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/box.h"
@@ -40,7 +41,10 @@
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
-   : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")), game_(parent->game()) {
+   : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")),
+     game_(parent->game()),
+     desired_speed_(game_.game_controller()->desired_speed()) {
+	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
 	title_area_ = new UI::Textarea(vbox, "", UI::Align::kHCenter);
@@ -207,6 +211,7 @@ void GameSummaryScreen::fill_data() {
 }
 
 void GameSummaryScreen::continue_clicked() {
+	game_.game_controller()->set_desired_speed(desired_speed_);
 	die();
 }
 
