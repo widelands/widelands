@@ -37,7 +37,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
-#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 

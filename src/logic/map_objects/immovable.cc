@@ -32,6 +32,7 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -53,7 +54,6 @@
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "wui/interactive_base.h"
 
 namespace Widelands {
 
