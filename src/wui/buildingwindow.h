@@ -85,6 +85,8 @@ protected:
 
 	virtual void create_capsbuttons(UI::Box* buttons);
 
+	bool is_dying_;
+
 private:
 	/// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);

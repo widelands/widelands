@@ -50,6 +50,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
                                Widelands::Building& b,
                                bool avoid_fastclick)
    : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
+     is_dying_(false),
      building_(b),
      workarea_overlay_id_(0),
      avoid_fastclick_(avoid_fastclick),
@@ -65,7 +66,7 @@ BuildingWindow::~BuildingWindow() {
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
-	if (note.serial == building_.serial()) {
+	if (note.serial == building_.serial() && !is_dying_) {
 		switch (note.action) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kRefresh:
@@ -77,6 +78,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// Fallthrough intended
 		case Widelands::NoteBuilding::Action::kClose:
 			// Stop everybody from thinking to avoid segfaults
+			is_dying_ = true;
 			set_thinks(false);
 			vbox_.reset(nullptr);
 			die();
