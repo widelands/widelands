@@ -194,7 +194,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		n->toggle_type(id_);
 	}
 
-	/// This will update the game settings for the tribe or shard_in with the value
+	/// This will update the game settings for the tribe or shared_in with the value
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
 		n->set_block_tribe_selection(true);
@@ -274,7 +274,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		     player_setting.state != last_state_)) {
 			tribes_dropdown_.clear();
 
-			// We need to see the playercolor if setting shared in is disabled
+			// We need to see the playercolor if setting shared_in is disabled
 			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ?
 			                                      UI::ButtonDisableStyle::kPermpressed :
 			                                      UI::ButtonDisableStyle::kMonochrome);
@@ -298,8 +298,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					}
 				}
 				int shared_in = 0;
-				while (shared_in == id_)
+				while (shared_in == id_) {
 					++shared_in;
+				}
 				tribes_dropdown_.select(shared_in_as_string(shared_in + 1));
 				tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 			} else {
@@ -351,20 +352,20 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_pic(g_gr->images().get("images/ui_basic/stop.png"));
 			team->set_visible(false);
 			team->set_enabled(false);
-			init->set_visible(false);
-			init->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
 			tribes_dropdown_.set_enabled(false);
+			init->set_visible(false);
+			init->set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type->set_tooltip(_("Open"));
 			type->set_pic(g_gr->images().get("images/ui_basic/continue.png"));
 			team->set_visible(false);
 			team->set_enabled(false);
-			init->set_visible(false);
-			init->set_enabled(false);
 			tribes_dropdown_.set_visible(false);
 			tribes_dropdown_.set_enabled(false);
+			init->set_visible(false);
+			init->set_enabled(false);
 			return;
 		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type->set_tooltip(_("Shared in"));

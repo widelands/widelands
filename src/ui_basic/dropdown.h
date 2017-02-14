@@ -110,7 +110,7 @@ protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the index of the entry
-	/// \param pic          an image to illustrate the entry
+	/// \param pic          an image to illustrate the entry. Can be nullptr for textual dropdowns.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	void add(const std::string& name,
@@ -153,7 +153,7 @@ private:
 	UI::Box button_box_;
 	UI::Button* push_button_;  // Only used in textual dropdowns
 	UI::Button display_button_;
-	// The list needs to be a pointer for destruction, because we hook into the paren't parent.
+	// The list needs to be a pointer for destruction, because we hook into the highest parent that we can get.
 	UI::Listselect<uintptr_t>* list_;
 	std::string label_;
 	std::string tooltip_;

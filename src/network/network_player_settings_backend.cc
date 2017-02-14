@@ -137,7 +137,6 @@ void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 
 	if (player.state == PlayerSettings::stateShared) {
 		// ensure that the shared_in player is able to use this starting position
-
 		if (player.shared_in > settings.players.size())
 			toggle_shared_in(id);
 		if (settings.players.at(player.shared_in - 1).state == PlayerSettings::stateClosed ||
