@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-31 07:09+0000\n"
-"PO-Revision-Date: 2017-02-03 09:54+0000\n"
+"POT-Creation-Date: 2017-02-11 11:38+0000\n"
+"PO-Revision-Date: 2017-02-12 14:33+0000\n"
 "Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Артефакты"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Поиск древних артефактов. После того, как все они будут найдены, команда, которая завладеет большинством из них - выигрывает игру."
+msgstr "Ищите древние артефакты. После того, как все они будут найдены, команда, которая завладеет большинством из них - победит."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:56
 msgid "No Artifacts"
@@ -52,7 +52,7 @@ msgstr "Найден артефакт"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:64
 msgid "Your team found a new artifact."
-msgstr "Ваша группа нашла новый артефакт."
+msgstr "Ваша команда нашла новый артефакт."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:68
@@ -66,7 +66,7 @@ msgstr "Один из артефактов вашей команды был по
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "Artifact Conquered"
-msgstr "Артефакт завоеван"
+msgstr "Артефакт захвачен"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:74
 msgid "Your team stole an artifact from an enemy."
@@ -90,7 +90,7 @@ msgid_plural "%i artifacts"
 msgstr[0] "%i артефакт"
 msgstr[1] "%i артефактов"
 msgstr[2] "%i артефактов"
-msgstr[3] "%i артефакты"
+msgstr[3] "%i артефактов"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:156
@@ -138,7 +138,7 @@ msgstr[3] "Всего очков: %i"
 
 #: ../../data/scripting/win_conditions/collectors.lua:141
 msgid "The game has ended."
-msgstr "Игра окончена"
+msgstr "Игра закончилась."
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:148
@@ -210,7 +210,7 @@ msgstr "Свободная игра (без тумана)"
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Игра без правил и ограничений. Туман войны отключен."
+msgstr "Это бесконечная игра без правил и ограничений. Туман войны отключен."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
@@ -262,7 +262,7 @@ msgstr[3] "Удерживайте территорию ещё в течение 
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
-msgstr "Местное время"
+msgstr "Удержать территорию"
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
@@ -333,7 +333,7 @@ msgstr "Вы проиграли"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
-msgstr "Вы проиграли!"
+msgstr "Вы проигравший!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:24
 msgid "Status"
