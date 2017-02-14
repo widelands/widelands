@@ -282,17 +282,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
 					if (i != id_) {
-						// TODO(GunChleoc): Do not add players that are also shared_in
-						const PlayerSettings& current_player = settings.players[i];
+						// TODO(GunChleoc): Do not add players that are also shared_in.
 						const Image* player_image = playercolor_image(
 						   i, g_gr->images().get("images/players/player_position_menu.png"),
 						   g_gr->images().get("images/players/player_position_menu_pc.png"));
 						assert(player_image);
 						const std::string player_name =
-						   current_player.name.empty() ?
-						      (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
-						         .str() :
-						      current_player.name;
+						   /** TRANSLATORS: This is an option in multiplayer setup for sharing
+						      another player's starting position. */
+						   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
+						      .str();
 						tribes_dropdown_.add(
 						   player_name, shared_in_as_string(i + 1), player_image, false, player_name);
 					}
