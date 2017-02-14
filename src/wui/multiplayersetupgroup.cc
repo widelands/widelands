@@ -198,7 +198,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// currently selected in the tribes dropdown.
 	void set_tribe_or_shared_in() {
 		n->set_block_tribe_selection(true);
-		tribes_dropdown_.set_disable_style(s->settings().players[id_].state == PlayerSettings::stateShared ? UI::DropdownDisableStyle::kPermpressed : UI::DropdownDisableStyle::kDisable);
+		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
+		                                         PlayerSettings::stateShared ?
+		                                      UI::DropdownDisableStyle::kPermpressed :
+		                                      UI::DropdownDisableStyle::kDisable);
 		if (tribes_dropdown_.has_selection()) {
 			if (s->settings().players[id_].state == PlayerSettings::stateShared) {
 				n->set_shared_in(
@@ -272,11 +275,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.clear();
 
 			// We need to see the playercolor if setting shared in is disabled
-			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ? UI::DropdownDisableStyle::kPermpressed : UI::DropdownDisableStyle::kDisable);
+			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ?
+			                                      UI::DropdownDisableStyle::kPermpressed :
+			                                      UI::DropdownDisableStyle::kDisable);
 
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
 					if (i != id_) {
+						// TODO(GunChleoc): Do not add players that are also shared_in
 						const PlayerSettings& current_player = settings.players[i];
 						const Image* player_image = playercolor_image(
 						   i, g_gr->images().get("images/players/player_position_menu.png"),
@@ -368,7 +374,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
 				tribes_dropdown_.set_visible(true);
-				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked && tribes_dropdown_.size() > 1);
+				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked &&
+				                             tribes_dropdown_.size() > 1);
 			}
 
 			team->set_visible(false);
