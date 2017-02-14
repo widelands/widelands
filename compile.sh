@@ -158,8 +158,8 @@ fi
 bzr pull
 cd build
 $buildtool
-rm  -f ../VERSION || true
-rm  -f ../widelands || true
+rm  ../VERSION || true
+rm  ../widelands || true
 mv VERSION ../VERSION
 mv src/widelands ../widelands
 cd ..

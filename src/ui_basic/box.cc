@@ -356,7 +356,6 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 
 /**
  * Position the given item according to its parameters.
- *
  * pos is the position relative to the parent in the direction of the
  * orientation axis.
 */
@@ -377,15 +376,16 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			maxbreadth = get_inner_w();
 		}
 		switch (it.u.panel.align) {
-            case UI::Align::kHCenter:
-                breadth = (maxbreadth - breadth) >> 1;
-                break;
+		case UI::Align::kHCenter:
+			breadth = (maxbreadth - breadth) / 2;
+			break;
 
-            case UI::Align::kRight:
-                breadth = maxbreadth - breadth;
-                break;
-            default: // UI::Align::left
-                breadth = 0;
+		case UI::Align::kRight:
+			breadth = maxbreadth - breadth;
+			break;
+		case UI::Align::kLeft:
+		default:
+			breadth = 0;
 		}
 
 		if (orientation_ == Horizontal)

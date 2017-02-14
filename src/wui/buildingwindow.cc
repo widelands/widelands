@@ -170,9 +170,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 
                 expedition_canceled_subscriber_ =
                     Notifications::subscribe<Widelands::NoteExpeditionCanceled>([this, pd](
-                    const Widelands::NoteExpeditionCanceled& canceld) {
+                    const Widelands::NoteExpeditionCanceled& canceled) {
                         // Check this was not just any but our Expedition
-                        if (canceld.bootstrap == pd->expedition_bootstrap()) {
+                        if (canceled.bootstrap == pd->expedition_bootstrap()) {
                             update_expedition_button(true);
                         }
                     });

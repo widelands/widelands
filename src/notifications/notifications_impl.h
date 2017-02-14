@@ -70,8 +70,7 @@ public:
 
 	// Publishes 'message' to all subscribers.
 	template <typename T> void publish(const T& message) {
-        std::list<void*> subscribers = note_id_to_subscribers_[T::note_id()];
-		for (void* p_subscriber : subscribers) {
+		for (void* p_subscriber : note_id_to_subscribers_[T::note_id()]) {
 			Subscriber<T>* subscriber = static_cast<Subscriber<T>*>(p_subscriber);
 			subscriber->callback_(message);
 		}

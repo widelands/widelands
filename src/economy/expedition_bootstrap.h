@@ -44,8 +44,7 @@ class Worker;
  * This object is created in the port dock as soon as the start expedition button is
  * pressed. As soon as the ship is loaded, this object gets destroyed.
  * In case the Expedition is ::cancel()ed the wares will be returned to the port dock.
- * Its the responsibility of the Owner to finally dispose a canceled ExpeditionBootstrap.
- *
+ * It is the responsibility of the Owner to finally dispose a canceled ExpeditionBootstrap.
  */
 
 class ExpeditionBootstrap {

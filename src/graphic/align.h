@@ -31,7 +31,6 @@ namespace UI {
  * bits 2,3 values 0,4,8,12 are vertical
  *
  * mixed aligenments are results of a binary | operation.
- *
  */
 
  // TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
