@@ -27,7 +27,10 @@
  * Status window for \ref MilitarySite
  */
 struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent, Widelands::MilitarySite&, bool avoid_fastclick);
+	MilitarySiteWindow(InteractiveGameBase& parent,
+	                   UI::UniqueWindow::Registry& reg,
+	                   Widelands::MilitarySite&,
+	                   bool avoid_fastclick);
 
 	Widelands::MilitarySite& militarysite() {
 		return dynamic_cast<Widelands::MilitarySite&>(building());

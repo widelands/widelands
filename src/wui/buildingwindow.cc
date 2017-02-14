@@ -46,17 +46,16 @@ static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png"
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 
 BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
+                               UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
                                bool avoid_fastclick)
-   : UI::Window(&parent, "building_window", 0, 0, Width, 0, b.descr().descname()),
+   : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
      building_(b),
      workarea_overlay_id_(0),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
-	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>([this](
-		const Widelands::NoteBuilding& note) {
-		on_building_note(note);
-	});
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
 
 BuildingWindow::~BuildingWindow() {

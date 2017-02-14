@@ -172,8 +172,11 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 /**
  * Create the tabs of a warehouse window.
  */
-WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent, Warehouse& wh, bool avoid_fastclick)
-   : BuildingWindow(parent, wh, avoid_fastclick) {
+WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
+                                 UI::UniqueWindow::Registry& reg,
+                                 Warehouse& wh,
+                                 bool avoid_fastclick)
+   : BuildingWindow(parent, reg, wh, avoid_fastclick) {
 	init(avoid_fastclick);
 }
 

@@ -27,7 +27,10 @@
  * Status window for warehouses
  */
 struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent, Widelands::Warehouse&, bool avoid_fastclick);
+	WarehouseWindow(InteractiveGameBase& parent,
+	                UI::UniqueWindow::Registry& reg,
+	                Widelands::Warehouse&,
+	                bool avoid_fastclick);
 
 	Widelands::Warehouse& warehouse() {
 		return dynamic_cast<Widelands::Warehouse&>(building());

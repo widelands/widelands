@@ -29,6 +29,7 @@
  */
 struct DismantleSiteWindow : public BuildingWindow {
 	DismantleSiteWindow(InteractiveGameBase& parent,
+	                    UI::UniqueWindow::Registry& reg,
 	                    Widelands::DismantleSite&,
 	                    bool avoid_fastclick);
 

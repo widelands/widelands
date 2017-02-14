@@ -26,7 +26,7 @@
 #include "economy/expedition_bootstrap.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
@@ -36,14 +36,17 @@
  *
  * This class is sub-classed for all building types to provide something useful.
  */
-struct BuildingWindow : public UI::Window {
+struct BuildingWindow : public UI::UniqueWindow {
 	friend struct TrainingSiteWindow;
 	friend struct MilitarySiteWindow;
 	enum {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
-	BuildingWindow(InteractiveGameBase& parent, Widelands::Building&, bool avoid_fastclick);
+	BuildingWindow(InteractiveGameBase& parent,
+	               UI::UniqueWindow::Registry& reg,
+	               Widelands::Building&,
+	               bool avoid_fastclick);
 
 	virtual ~BuildingWindow();
 
@@ -108,8 +111,7 @@ private:
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
-	   buildingnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };
 

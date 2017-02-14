@@ -74,9 +74,10 @@ public:
 		playertype_ = pt;
 	}
 
-	void
-	add_wanted_building_window(const Widelands::Coords& coords, const Vector2i point, bool was_minimal);
-	BuildingWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
+	void add_wanted_building_window(const Widelands::Coords& coords,
+	                                const Vector2i point,
+	                                bool was_minimal);
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
 	bool is_multiplayer() {
 		return multiplayer_;
@@ -105,8 +106,7 @@ private:
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::tuple<const Widelands::Coords, const Vector2i, bool>>
 	   wanted_building_windows_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
-	   buildingnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

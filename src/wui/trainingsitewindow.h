@@ -28,7 +28,10 @@
  * Status window for \ref TrainingSite
  */
 struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent, Widelands::TrainingSite&, bool avoid_fastclick);
+	TrainingSiteWindow(InteractiveGameBase& parent,
+	                   UI::UniqueWindow::Registry& reg,
+	                   Widelands::TrainingSite&,
+	                   bool avoid_fastclick);
 
 	Widelands::TrainingSite& trainingsite() {
 		return dynamic_cast<Widelands::TrainingSite&>(building());

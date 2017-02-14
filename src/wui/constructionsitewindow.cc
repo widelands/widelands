@@ -19,7 +19,6 @@
 
 #include "wui/constructionsitewindow.h"
 
-
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
@@ -31,9 +30,10 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 using namespace Widelands;
 
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
+                                               UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick)
-   : BuildingWindow(parent, cs, avoid_fastclick) {
+   : BuildingWindow(parent, reg, cs, avoid_fastclick) {
 	init(avoid_fastclick);
 }
 

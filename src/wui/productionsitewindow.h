@@ -28,6 +28,7 @@
 
 struct ProductionSiteWindow : public BuildingWindow {
 	ProductionSiteWindow(InteractiveGameBase& parent,
+	                     UI::UniqueWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick);
 

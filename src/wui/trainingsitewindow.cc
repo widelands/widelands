@@ -32,9 +32,10 @@ using namespace Widelands;
  * Create the \ref TrainingSite specific soldier list tab.
  */
 TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
+                                       UI::UniqueWindow::Registry& reg,
                                        TrainingSite& ts,
                                        bool avoid_fastclick)
-   : ProductionSiteWindow(parent, ts, avoid_fastclick) {
+   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick) {
 	init(avoid_fastclick);
 }
 

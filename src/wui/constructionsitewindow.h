@@ -29,6 +29,7 @@
  */
 struct ConstructionSiteWindow : public BuildingWindow {
 	ConstructionSiteWindow(InteractiveGameBase& parent,
+	                       UI::UniqueWindow::Registry& reg,
 	                       Widelands::ConstructionSite&,
 	                       bool avoid_fastclick);
 

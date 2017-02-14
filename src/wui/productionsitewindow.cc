@@ -44,9 +44,10 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
+                                           UI::UniqueWindow::Registry& reg,
                                            ProductionSite& ps,
                                            bool avoid_fastclick)
-   : BuildingWindow(parent, ps, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (note.serial == building().serial()) {
@@ -73,7 +74,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-				new InputQueueDisplay(prod_box, 0, 0, igbase(), productionsite(), inputqueues[i]), UI::Align::kLeft);
+			   new InputQueueDisplay(prod_box, 0, 0, igbase(), productionsite(), inputqueues[i]),
+			   UI::Align::kLeft);
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));

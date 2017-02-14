@@ -40,6 +40,7 @@
 #include "wui/productionsitewindow.h"
 #include "wui/shipwindow.h"
 #include "wui/trainingsitewindow.h"
+#include "wui/unique_window_handler.h"
 #include "wui/warehousewindow.h"
 
 namespace {
@@ -60,7 +61,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
-	  playertype_(pt) {
+     playertype_(pt) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
@@ -70,7 +71,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   const Widelands::Coords coords = building->get_position();
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
-					   BuildingWindow* building_window = show_building_window(coords, true);
+					   UI::UniqueWindow* building_window = show_building_window(coords, true);
 					   building_window->set_pos(std::get<1>(wanted_building_windows_.at(coords.hash())));
 					   if (std::get<2>(wanted_building_windows_.at(coords.hash()))) {
 						   building_window->minimize();
@@ -157,38 +158,65 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 }
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
-																	  const Vector2i point,
+                                                     const Vector2i point,
                                                      bool was_minimal) {
 	wanted_building_windows_.insert(
 	   std::make_pair(coords.hash(), std::make_tuple(coords, point, was_minimal)));
 }
-BuildingWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
-                                                          bool avoid_fastclick) {
+
+UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
+                                                            bool avoid_fastclick) {
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
+
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		return new ConstructionSiteWindow(
-		   *this, *dynamic_cast<Widelands::ConstructionSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ConstructionSiteWindow(*this, registry,
+			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
+			                           avoid_fastclick);
+		};
+		break;
 	case Widelands::MapObjectType::DISMANTLESITE:
-		return new DismantleSiteWindow(
-		   *this, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new DismantleSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		};
+		break;
 	case Widelands::MapObjectType::MILITARYSITE:
-		return new MilitarySiteWindow(
-		   *this, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new MilitarySiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		};
+		break;
 	case Widelands::MapObjectType::PRODUCTIONSITE:
-		return new ProductionSiteWindow(
-		   *this, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new ProductionSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		};
+		break;
 	case Widelands::MapObjectType::TRAININGSITE:
-		return new TrainingSiteWindow(
-		   *this, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new TrainingSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		};
+		break;
 	case Widelands::MapObjectType::WAREHOUSE:
-		return new WarehouseWindow(
-		   *this, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new WarehouseWindow(
+			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		};
+		break;
 	default:
+		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
+		    to_string(building->descr().type()).c_str());
 		NEVER_HERE();
 	}
+	registry.create();
+	return registry.window;
 }
 
 /**

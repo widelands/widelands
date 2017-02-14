@@ -29,9 +29,10 @@ using namespace Widelands;
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
 MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
+                                       UI::UniqueWindow::Registry& reg,
                                        MilitarySite& ms,
                                        bool avoid_fastclick)
-   : BuildingWindow(parent, ms, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ms, avoid_fastclick) {
 	init(avoid_fastclick);
 }
 
