@@ -431,7 +431,7 @@ applicable.
 ===============
 */
 void Building::destroy(EditorGameBase& egbase) {
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kClose));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kDeleted));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
 	Player* building_owner = get_owner();
@@ -680,16 +680,14 @@ void Building::add_worker(Worker& worker) {
 		}
 	}
 	PlayerImmovable::add_worker(worker);
-	Notifications::publish(
-	   NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (!get_workers().size())
 		set_seeing(false);
-	Notifications::publish(
-	   NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**

@@ -24,8 +24,6 @@
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
-using namespace Widelands;
-
 DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
                                          UI::UniqueWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,

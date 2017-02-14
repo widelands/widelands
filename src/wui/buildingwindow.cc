@@ -69,14 +69,14 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 	if (note.serial == building_.serial() && !is_dying_) {
 		switch (note.action) {
 		// The building's state has changed
-		case Widelands::NoteBuilding::Action::kRefresh:
+		case Widelands::NoteBuilding::Action::kChanged:
 			init(true);
 			break;
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			igbase().add_wanted_building_window(building().get_position(), get_pos(), is_minimal());
 		// Fallthrough intended
-		case Widelands::NoteBuilding::Action::kClose:
+		case Widelands::NoteBuilding::Action::kDeleted:
 			// Stop everybody from thinking to avoid segfaults
 			is_dying_ = true;
 			set_thinks(false);
@@ -88,11 +88,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		}
 	}
 }
-
-namespace Widelands {
-class BuildingDescr;
-}
-using Widelands::Building;
 
 void BuildingWindow::init(bool avoid_fastclick) {
 	capscache_player_number_ = 0;

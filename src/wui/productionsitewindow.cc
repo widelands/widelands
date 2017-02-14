@@ -24,16 +24,11 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
-#include "logic/map_objects/tribes/constructionsite.h"
-#include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
-
-using Widelands::ProductionSite;
 
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
@@ -45,7 +40,7 @@ Create the window and its panels, add it to the registry.
 */
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& reg,
-                                           ProductionSite& ps,
+                                           Widelands::ProductionSite& ps,
                                            bool avoid_fastclick)
    : BuildingWindow(parent, reg, ps, avoid_fastclick) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(

@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "economy/expedition_bootstrap.h"
+#include "logic/map_objects/tribes/building.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"

@@ -636,8 +636,7 @@ void ProductionSite::request_worker_callback(
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
-	Notifications::publish(
-	   NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
+	Notifications::publish(NoteBuilding(psite.serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 /**
@@ -717,7 +716,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) {
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy()->rebalance_supply();
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kRefresh));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
 /**
@@ -920,8 +919,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		working_positions_[--i].worker->gain_experience(game);
-	Notifications::publish(
-	   NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {

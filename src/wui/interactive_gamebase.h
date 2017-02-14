@@ -26,10 +26,10 @@
 
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
 
-struct BuildingWindow;
 struct ChatProvider;
 
 enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };

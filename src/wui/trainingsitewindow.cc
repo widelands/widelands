@@ -26,14 +26,12 @@
 
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
-using namespace Widelands;
-
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
 TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
                                        UI::UniqueWindow::Registry& reg,
-                                       TrainingSite& ts,
+                                       Widelands::TrainingSite& ts,
                                        bool avoid_fastclick)
    : ProductionSiteWindow(parent, reg, ts, avoid_fastclick) {
 	init(avoid_fastclick);

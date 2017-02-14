@@ -87,8 +87,7 @@ void ExpeditionBootstrap::start() {
 	queues_[buildcost_size]->set_callback(input_callback, this);
 
 	// Update the user interface
-	Notifications::publish(
-	   NoteBuilding(warehouse->serial(), NoteBuilding::Action::kRefresh));
+	Notifications::publish(NoteBuilding(warehouse->serial(), NoteBuilding::Action::kChanged));
 }
 
 void ExpeditionBootstrap::cancel(Game& game) {
@@ -109,8 +108,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	queues_.clear();
 
 	// Update the user interface
-	Notifications::publish(
-	   NoteBuilding(warehouse->serial(), NoteBuilding::Action::kRefresh));
+	Notifications::publish(NoteBuilding(warehouse->serial(), NoteBuilding::Action::kChanged));
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
