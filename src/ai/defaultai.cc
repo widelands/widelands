@@ -1191,7 +1191,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_enemy_owned_walkable);
 	// printf ("enemy nearby: %4d\n",field.enemy_owned_land_nearby);
 
-	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();  //NOCOM
+	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
 	if (field.unowned_land_nearby > 0) {
 		std::vector<Coords> found_buildable_fields;
 		
@@ -2761,7 +2761,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// is nearest buildable spot reachable in regard to conquer radius
 				
-				// field.nearest_buildable_spot_nearby //NOCOM
+				// field.nearest_buildable_spot_nearby
 				if (bf->nearest_buildable_spot_nearby < bo.desc->get_conquers()) {
 					prio += std::abs(management_data.get_military_number_at(88));
 					}
@@ -4527,7 +4527,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.max_needed_preciousness == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			if (bo.current_stats < 40) {
+			if (mines_per_type[bo.mines].in_construction > 0){
+				return BuildingNecessity::kForbidden;
+				}
+			if (bo.current_stats < 50) {
 				return BuildingNecessity::kForbidden;
 			}
 			assert(bo.last_building_built != kNever);
@@ -4547,35 +4550,44 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.max_needed_preciousness > 0) {
 			//NOCOM
-			int16_t tmp_score = 0;
-			tmp_score += bo.total_count();
-			tmp_score += -1 * bo.total_count();
-			tmp_score += (bo.total_count() == 0) ? management_data.get_military_number_at(0) / 10 : 0;			
-			tmp_score += (gametime >= 25 * 60 * 1000) ? management_data.get_military_number_at(1) / 10 : 0;	
-			tmp_score += (bo.max_needed_preciousness >= 10)  ? management_data.get_military_number_at(2) / 10 : 0;			
-			tmp_score += (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size())
+			int16_t inputs[f_neuron_bit_size] = {0};
+			inputs[0] = bo.total_count();
+			inputs[1] = -1 * bo.total_count();
+			inputs[2] = (bo.total_count() == 0) ? management_data.get_military_number_at(0) / 10 : 0;			
+			inputs[3] = (gametime >= 25 * 60 * 1000) ? management_data.get_military_number_at(1) / 10 : 0;	
+			inputs[4] = (bo.max_needed_preciousness >= 10)  ? management_data.get_military_number_at(2) / 10 : 0;			
+			inputs[5] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size())
 						? management_data.get_military_number_at(3) / 10 : 0;
-			tmp_score += (needs_second_for_upgrade) ? management_data.get_military_number_at(4) / 10 : 0;
-			tmp_score += (bo.cnt_under_construction + bo.unoccupied_count) * management_data.get_military_number_at(9) / 10;
-			tmp_score += (!bo.outputs.empty() && bo.current_stats > 30 + 70 / bo.outputs.size())
+			inputs[6] = (needs_second_for_upgrade) ? management_data.get_military_number_at(4) / 10 : 0;
+			inputs[7] = (bo.cnt_under_construction + bo.unoccupied_count) * management_data.get_military_number_at(9) / 10;
+			inputs[8] = (!bo.outputs.empty() && bo.current_stats > 30 + 70 / bo.outputs.size())
 						? management_data.get_military_number_at(7) / 10 : 0;
-			tmp_score += (bo.produces_building_material) ? management_data.get_military_number_at(10) / 10 : 0;
-			tmp_score += (bo.build_material_shortage)  ? management_data.get_military_number_at(39) / 10 : 0;
-			tmp_score += (wood_policy_ == WoodPolicy::kAllowRangers)  ? management_data.get_military_number_at(15) / 10 : 0;
-			tmp_score += (gametime >= 15 * 60 * 1000) ? management_data.get_military_number_at(94) / 10 : 0;	
-			tmp_score += (bo.inputs.empty()) ? management_data.get_military_number_at(8) / 10 : 0;	
-			tmp_score += (persistent_data->trees_around_cutters > 20) ? management_data.get_military_number_at(95) / 10 : 0;	
-			tmp_score += (persistent_data->trees_around_cutters > 100) ? management_data.get_military_number_at(96) / 10 : 0;	
-			tmp_score += (player_statistics.any_enemy_seen_lately(gametime)) ? management_data.get_military_number_at(97) / 10 : 0;				
-			tmp_score += (spots_ > kSpotsEnough) ? management_data.get_military_number_at(74) / 10 : 0;				
-			tmp_score += management_data.get_military_number_at(98) / 10;
-			tmp_score += (new_buildings_stop_) ? management_data.get_military_number_at(40) / 10 : 0;
-			tmp_score += (needs_boost_economy) ? management_data.get_military_number_at(50) / 10 : 0;	
+			inputs[9] = (bo.produces_building_material) ? management_data.get_military_number_at(10) / 10 : 0;
+			inputs[10] = (bo.build_material_shortage)  ? management_data.get_military_number_at(39) / 10 : 0;
+			inputs[11] = (wood_policy_ == WoodPolicy::kAllowRangers)  ? management_data.get_military_number_at(15) / 10 : 0;
+			inputs[12] = (gametime >= 15 * 60 * 1000) ? management_data.get_military_number_at(94) / 10 : 0;	
+			inputs[13] = (bo.inputs.empty()) ? management_data.get_military_number_at(8) / 10 : 0;	
+			inputs[14] = (persistent_data->trees_around_cutters > 20) ? management_data.get_military_number_at(95) / 10 : 0;	
+			inputs[15] = (persistent_data->trees_around_cutters > 100) ? management_data.get_military_number_at(96) / 10 : 0;	
+			inputs[16] = (player_statistics.any_enemy_seen_lately(gametime)) ? management_data.get_military_number_at(97) / 10 : 0;				
+			inputs[17] = (spots_ > kSpotsEnough) ? management_data.get_military_number_at(74) / 10 : 0;				
+			inputs[18] = management_data.get_military_number_at(98) / 10;
+			inputs[19] = (new_buildings_stop_) ? management_data.get_military_number_at(40) / 10 : 0;
+			inputs[20] = (needs_boost_economy) ? management_data.get_military_number_at(50) / 10 : 0;	
 
-			if (tmp_score > std::abs(management_data.get_military_number_at(73) / 10)) {
+			int16_t tmp_score = 0;
+			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
+				if (management_data.f_neuron_pool[8].get_position(i)){
+					tmp_score += inputs[i];
+				}
+			}
+			const int16_t tmp_boost = -4; // NOCOM remove later on, an/or increase gradually
+			printf (" %2d: tmp score: %3d, needed treshold: %3d\n", player_number(), tmp_score, std::abs(management_data.get_military_number_at(73) / 20) + tmp_boost);
+
+			if (tmp_score > std::abs(management_data.get_military_number_at(73) / 20) + tmp_boost) {
 				//printf ("%2d: %-35s needed,  current count = %d, score: %d\n", player_number(), bo.name, bo.total_count(), tmp_score);
 				return BuildingNecessity::kNeeded;
-			} else if (tmp_score > 0) {
+			} else if (tmp_score > 0 + tmp_boost) {
 				//printf ("%2d: %-35s pending, current count = %d, score: %d\n", player_number(), bo.name, bo.total_count(), tmp_score);
 				return BuildingNecessity::kNeededPending;
 			} else {

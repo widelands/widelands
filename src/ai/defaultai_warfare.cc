@@ -740,7 +740,10 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	usefullness_score += ((bf.enemy_accessible_) ? (std::abs(management_data.get_military_number_at(91))) / 2 : 0);
 	
 	const int32_t dism_treshold = 20 - management_data.get_military_number_at(89) * 2 / 3;
-	const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) * 3 / 2);
+	//const int32_t pref_treshold = dism_treshold + std::abs(management_data.get_military_number_at(90) * 3 / 2);
+	const int32_t pref_treshold_upper = dism_treshold + std::abs(management_data.get_military_number_at(90) * 35 / 20);
+	const int32_t pref_treshold_lower = dism_treshold + std::abs(management_data.get_military_number_at(90) * 25 / 20);
+	//printf ("pref tresholds %d  %d\n", pref_treshold_lower, pref_treshold_upper);
 	
 	Quantity const total_capacity = ms->max_soldier_capacity(); //NOCOM
 	Quantity const current_target = ms->soldier_capacity();
@@ -755,7 +758,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_bulldoze(*ms);
 			military_last_dismantle_ = game().get_gametime();
 		}		
-	} else if (usefullness_score < pref_treshold) {
+	} else if (usefullness_score < pref_treshold_lower) {
 		// this site is not that important but is to be preserved
 		if (current_target > 1){
 			game().send_player_change_soldier_capacity(*ms, -1);
@@ -765,7 +768,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
 			changed = true;
 		}
-	} else {
+	} else if (usefullness_score > pref_treshold_upper) {
 		// this is important military site
 		if (current_target < total_capacity) {
 			game().send_player_change_soldier_capacity(*ms, 1);
