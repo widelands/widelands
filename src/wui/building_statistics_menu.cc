@@ -337,6 +337,7 @@ bool BuildingStatisticsMenu::add_button(
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
 	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	   UI::Button::Style::kFlat);
+	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome | UI::ButtonDisableStyle::kFlat);
 	button_box->add(building_buttons_[id], UI::Align::kLeft);
 
 	owned_labels_[id] =

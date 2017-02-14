@@ -200,8 +200,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		n->set_block_tribe_selection(true);
 		tribes_dropdown_.set_disable_style(s->settings().players[id_].state ==
 		                                         PlayerSettings::stateShared ?
-		                                      UI::DropdownDisableStyle::kPermpressed :
-		                                      UI::DropdownDisableStyle::kDisable);
+		                                      UI::ButtonDisableStyle::kPermpressed :
+		                                      UI::ButtonDisableStyle::kMonochrome);
 		if (tribes_dropdown_.has_selection()) {
 			if (s->settings().players[id_].state == PlayerSettings::stateShared) {
 				n->set_shared_in(
@@ -276,8 +276,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			// We need to see the playercolor if setting shared in is disabled
 			tribes_dropdown_.set_disable_style(player_setting.state == PlayerSettings::stateShared ?
-			                                      UI::DropdownDisableStyle::kPermpressed :
-			                                      UI::DropdownDisableStyle::kDisable);
+			                                      UI::ButtonDisableStyle::kPermpressed :
+			                                      UI::ButtonDisableStyle::kMonochrome);
 
 			if (player_setting.state == PlayerSettings::stateShared) {
 				for (size_t i = 0; i < settings.players.size(); ++i) {
@@ -372,6 +372,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			update_tribes_dropdown(player_setting);
 
+			// NOCOM disabling fails for client.
 			if (!tribes_dropdown_.is_visible() || !tribes_dropdown_.is_enabled()) {
 				tribes_dropdown_.set_visible(true);
 				tribes_dropdown_.set_enabled(initaccess && !n->tribe_selection_blocked &&

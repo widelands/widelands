@@ -35,7 +35,6 @@
 namespace UI {
 
 enum class DropdownType { kTextual, kPictorial };
-enum class DropdownDisableStyle { kDisable, kPermpressed };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
@@ -85,7 +84,7 @@ public:
 	}
 
 	/// Which visual style to use for disabled pictorial dropdowns.
-	void set_disable_style(DropdownDisableStyle disable_style);
+	void set_disable_style(UI::ButtonDisableStyle disable_style);
 
 	/// Whether the dropdown has no elements to select.
 	bool empty() {
@@ -160,7 +159,6 @@ private:
 	std::string tooltip_;
 	uint32_t current_selection_;
 	DropdownType type_;
-	DropdownDisableStyle disable_style_;
 	bool is_enabled_;
 };
 

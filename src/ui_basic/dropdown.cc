@@ -85,7 +85,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     disable_style_(DropdownDisableStyle::kDisable),
      is_enabled_(true) {
 	assert(max_list_height_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
@@ -196,25 +195,12 @@ void BaseDropdown::set_enabled(bool on) {
 		push_button_->set_enabled(on);
 		push_button_->set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
 	}
-	if (disable_style_ == DropdownDisableStyle::kDisable) {
-		display_button_.set_enabled(on);
-		display_button_.set_perm_pressed(false);
-	} else {
-		display_button_.set_enabled(true);
-		display_button_.set_perm_pressed(!on);
-	}
+	display_button_.set_enabled(on);
 	list_->set_visible(false);
 }
 
-void BaseDropdown::set_disable_style(DropdownDisableStyle disable_style) {
-	disable_style_ = disable_style;
-	if (disable_style_ == DropdownDisableStyle::kDisable) {
-		display_button_.set_enabled(is_enabled_);
-		display_button_.set_perm_pressed(false);
-	} else {
-		display_button_.set_enabled(true);
-		display_button_.set_perm_pressed(!is_enabled_);
-	}
+void BaseDropdown::set_disable_style(UI::ButtonDisableStyle disable_style) {
+	display_button_.set_disable_style(disable_style);
 }
 
 bool BaseDropdown::is_expanded() const {
