@@ -82,6 +82,11 @@ dirname = path.dirname(__file__)
 --                productivity_threshold = 30
 --            },
 --
+--    **resource_not_needed_message**.
+--        *Optional*. This string defines the tooltip shown by the productionsite
+--        to the player if all resources have been replenished by its worker in full.
+--        Look at the Atlantean Fish Breeder's House for an example.
+--
 tribes:new_productionsite_type {
    msgctxt = "atlanteans_building",
    name = "atlanteans_armorsmithy",
