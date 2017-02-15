@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-10-02 06:24+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2017-02-11 11:38+0000\n"
+"PO-Revision-Date: 2017-02-14 04:26+0000\n"
+"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

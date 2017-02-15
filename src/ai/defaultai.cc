@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010, 2012, 2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -556,7 +556,7 @@ void DefaultAI::late_initialization() {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
-			for (const auto& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -667,7 +667,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const auto& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes
@@ -3117,11 +3117,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
 		bool resetting_wares = false;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
-				game().send_player_set_ware_max_fill(
-				   *site.site, queue->get_ware(), queue->get_max_size());
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
 			}
 		}
 		if (resetting_wares) {
@@ -3135,7 +3135,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// The site is in process of emptying its input queues
 		// Counting remaining wares in the site now
 		int32_t left_wares = 0;
-		for (auto& queue : site.site->warequeues()) {
+		for (auto& queue : site.site->inputqueues()) {
 			left_wares += queue->get_filled();
 		}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
@@ -3221,8 +3221,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (doing_upgrade) {
 
 			// reducing input queues
-			for (auto& queue : site.site->warequeues()) {
-				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), 0);
+			for (auto& queue : site.site->inputqueues()) {
+				game().send_player_set_input_max_fill(
+				   *site.site, queue->get_index(), queue->get_type(), 0);
 			}
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;

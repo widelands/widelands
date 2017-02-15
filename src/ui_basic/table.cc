@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -444,9 +444,6 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t x, int32_t const
 	default:
 		return false;
 	}
-}
-bool Table<void*>::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT;
 }
 
 /**

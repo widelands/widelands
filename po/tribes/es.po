@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-28 21:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -499,11 +499,9 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#. TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgid "recruiting soldier"
 msgstr ""
 
@@ -1120,13 +1118,13 @@ msgid "weaving spidercloth"
 msgstr "tejiendo tela de araña"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
 msgid "tailoring a tabard"
 msgstr "confeccionando un tabardo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
 msgid "tailoring a golden tabard"
 msgstr "confeccionando un tabardo dorado"
 
@@ -2586,15 +2584,19 @@ msgstr "Introducción"
 msgid "Controls"
 msgstr "Controles"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+msgid "Tips"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Mercancías"
 
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Trabajadores"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Construcciones"
 
@@ -3258,6 +3260,12 @@ msgid "Miner"
 msgstr "Minero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
@@ -3480,6 +3488,12 @@ msgid "Ranger"
 msgstr "Agente Forestal"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Recruit"
+msgstr ""
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Scout"
@@ -3640,6 +3654,12 @@ msgstr "Maestro minero"
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "Porquero"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/empire/recruit/init.lua:17
+msgctxt "empire_worker"
+msgid "Recruit"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

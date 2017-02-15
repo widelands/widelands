@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -296,13 +296,13 @@ void TabPanel::draw(RenderTarget& dst) {
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
-			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
-			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
-			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1.,
+			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2,
+			         (kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
+			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else {
 			dst.blit(Vector2f(x + kTabPanelTextMargin,
-			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2.f),
+			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
 			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
 		}
 
@@ -380,10 +380,6 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			return true;
 		}
 	}
-	return false;
-}
-
-bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t) {
 	return false;
 }
 

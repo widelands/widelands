@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2016
+# Juanjo, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 20:53+0000\n"
+"POT-Creation-Date: 2017-01-28 21:57+0000\n"
+"PO-Revision-Date: 2017-01-29 00:13+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -98,6 +98,14 @@ msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
 msgstr "Forneja pa per alimentar els exploradors i miners i per entrenar els soldats."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
+msgctxt "atlanteans_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
@@ -112,9 +120,6 @@ msgid ""
 "blackroot."
 msgstr "El cultivador de negrarrel necessita %1% de mitjana per sembrar i recol·lectar una càrrega de negrarrel."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -293,9 +298,6 @@ msgid ""
 "between ports."
 msgstr "Construeix vaixells per comerciar i per a la colonització per la via marítima a través de ports."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -460,6 +462,14 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot elaborar una pita cada %s de mitjana."
+
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
+msgctxt "barbarians_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
@@ -1125,6 +1135,14 @@ msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
 msgstr "El flequer necessita %1% de mitjana per fornejar una barra de pa."
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/empire/barracks/helptexts.lua:16
+msgctxt "empire_building"
+msgid "Equips recruits and trains them as soldiers."
+msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
 msgctxt "empire_building"
@@ -1516,7 +1534,7 @@ msgid ""
 msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
 
 #: ../../data/tribes/scripting/help/building_help.lua:87
-#: ../../data/tribes/scripting/help/format_help.lua:143
+#: ../../data/tribes/scripting/help/format_help.lua:153
 #, lua-format
 msgid "%s and"
 msgstr "%s i"
@@ -1536,6 +1554,7 @@ msgstr "Saviesa popular"
 
 #: ../../data/tribes/scripting/help/building_help.lua:175
 #: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/tips.lua:45
 msgid "General"
 msgstr "    "
 
@@ -1746,7 +1765,7 @@ msgid "Crew required:"
 msgstr "Personal requerit:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:614
-#: ../../data/tribes/scripting/help/init.lua:80
+#: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Treballadors"
 
@@ -1813,7 +1832,7 @@ msgstr "Clic del botó del mig o Ctrl+Clic esquerre"
 
 #: ../../data/tribes/scripting/help/controls.lua:21
 msgid "Minimize/Maximize window"
-msgstr "Minimitza/Maximitza la finestra"
+msgstr "Minimitza/maximitza la finestra"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1939,7 +1958,7 @@ msgstr "(Ctrl +) 1-9"
 
 #: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Remember and go to previously remembered locations"
-msgstr "Vés a les posicions recordades anteriorment (pulsant un número mentre es prem Ctrl, recorda la posició)"
+msgstr "Vés a les posicions recordades anteriorment (prement un número i la tecla Ctrl al mateix temps, recorda la posició)"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1974,141 +1993,141 @@ msgstr "(Ctrl +) 0"
 msgid "Reset zoom"
 msgstr "Restableix el zoom"
 
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgid "Go to the previous location"
-msgstr "Vés a la posició anterior"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:69
-msgid "Go to the next location"
-msgstr "Vés a la posició següent"
-
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl+F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr "Pren una captura de pantalla"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl+F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:74
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr "Surt del programa immediatament"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Mostra la consola de depuració (només en muntatges de depuració)"
 
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "A la finestra de missatges també estan disponibles aquestes dreceres de teclat:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Show all messages"
 msgstr "Mostra tots els missatges"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Show geologists’ messages only"
 msgstr "Mostra només els missatges dels geòlegs"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Show economy messages only"
 msgstr "Mostra només els missatges de l'economia"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:88
+#: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Show seafaring messages only"
 msgstr "Mostra només els missatges de navegació marítima"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Show warfare messages only"
 msgstr "Mostra només els missatges militars"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Show scenario messages only"
 msgstr "Mostra només els missatges d'escenari"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:90
 msgid "Jump to the location corresponding to the current message"
 msgstr "Salta a la posició corresponent del missatge actual"
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgid "Archive/Restore the current message"
 msgstr "Arxiva/restaura el missatge actual"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:92
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Esborra"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:135
+#: ../../data/tribes/scripting/help/format_help.lua:145
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
+#. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
+#. a productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:175
+msgid "Wares and workers consumed:"
+msgstr "Béns i treballadors necessaris:"
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
+#. productionsite
+#: ../../data/tribes/scripting/help/format_help.lua:178
+msgid "Workers consumed:"
+msgstr "Treballadors necessaris:"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:162
-msgid "Ware consumed:"
-msgid_plural "Wares consumed:"
-msgstr[0] "Bé consumit:"
-msgstr[1] "Béns consumits:"
+#: ../../data/tribes/scripting/help/format_help.lua:182
+msgid "Wares consumed:"
+msgstr "Béns necessaris:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -2137,17 +2156,42 @@ msgstr "%1% i %2%"
 msgid "Introduction"
 msgstr "Introducció"
 
-#: ../../data/tribes/scripting/help/init.lua:73
+#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/tips.lua:71
+msgid "Tips"
+msgstr "Consells"
+
+#: ../../data/tribes/scripting/help/init.lua:79
 msgid "Wares"
 msgstr "Mercaderies"
 
-#: ../../data/tribes/scripting/help/init.lua:87
+#: ../../data/tribes/scripting/help/init.lua:93
 msgid "Buildings"
 msgstr "Edificis"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
 msgstr "Quant al Widelands"
+
+#: ../../data/tribes/scripting/help/tips.lua:50
+msgid "Atlanteans"
+msgstr "Atlants"
+
+#: ../../data/tribes/scripting/help/tips.lua:53
+msgid "Barbarians"
+msgstr "Bàrbars"
+
+#: ../../data/tribes/scripting/help/tips.lua:56
+msgid "Empire"
+msgstr "Imperial"
+
+#: ../../data/tribes/scripting/help/tips.lua:62
+msgid "Single Player"
+msgstr "Un jugador"
+
+#: ../../data/tribes/scripting/help/tips.lua:65
+msgid "Multiplayer"
+msgstr "Multijugador"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. Languages using Chinese script probably want to lose the blank space here.
@@ -3449,9 +3493,6 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Crema troncs per produir carbó vegetal."
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. TODO(GunChleoc): This is unused
@@ -3523,6 +3564,12 @@ msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
 msgstr "Treballa en mines profundes per obtenir carbó, pedres precioses o minerals d'or o de ferro."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
+msgctxt "atlanteans_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
@@ -3739,6 +3786,12 @@ msgctxt "barbarians_worker"
 msgid "Plants trees."
 msgstr "Planta arbres."
 
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
+msgctxt "barbarians_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
+
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -3901,6 +3954,12 @@ msgstr "Treballa en mines profundes per obtenir carbó, marbre o minerals d'or o
 msgctxt "empire_worker"
 msgid "Breeds pigs."
 msgstr "Cria porcs."
+
+#. TRANSLATORS: Helptext for a worker: Recruit
+#: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
+msgctxt "empire_worker"
+msgid "Eager to become a soldier and defend your tribe!"
+msgstr "Amb ganes de convertir-se en soldat i defensar el clan!"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3

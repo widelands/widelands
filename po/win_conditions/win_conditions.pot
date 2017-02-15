@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-08 17:26+0000\n"
+"POT-Creation-Date: 2017-02-14 20:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -261,7 +261,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:87
+#: ../../data/scripting/win_conditions/wood_gnome.lua:93
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
@@ -326,9 +326,9 @@ msgstr ""
 msgid "Trees owned"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:91
-#: ../../data/scripting/win_conditions/wood_gnome.lua:143
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
+#: ../../data/scripting/win_conditions/wood_gnome.lua:97
+#: ../../data/scripting/win_conditions/wood_gnome.lua:149
+#: ../../data/scripting/win_conditions/wood_gnome.lua:154
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -336,16 +336,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:94
+#: ../../data/scripting/win_conditions/wood_gnome.lua:100
 msgid "%1$s has %2$s at the moment."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:145
+#: ../../data/scripting/win_conditions/wood_gnome.lua:151
 msgid "%1$s had %2$s."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:151
+#: ../../data/scripting/win_conditions/wood_gnome.lua:157
 msgid "The winner is %1$s with %2$s."
 msgstr ""

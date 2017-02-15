@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,7 +156,6 @@ bool InteractiveGameBase::try_show_ship_window() {
 }
 
 void InteractiveGameBase::show_game_summary() {
-	game().game_controller()->set_desired_speed(0);
 	if (game_summary_.window) {
 		game_summary_.window->set_visible(true);
 		game_summary_.window->think();

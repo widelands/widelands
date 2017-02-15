@@ -97,14 +97,14 @@ function foottracks()
    )
    p1:reveal_fields(fields)
 
-   local pts = scroll_smoothly_to(game.map:get_field(67,19))
+   local prior_center = scroll_to_field(game.map:get_field(67,19))
 
    campaign_message_box(order_msg_2_build_a_tower)
    local o = add_campaign_objective(obj_build_a_tower)
    p1:forbid_buildings{"barbarians_sentry"}
    p1:allow_buildings{"barbarians_tower"}
 
-   timed_scroll(array_reverse(pts), 10)
+   scroll_to_map_pixel(prior_center)
 
    -- Hide the tracks again
    sleep(5003)
@@ -140,7 +140,7 @@ function mining_and_trainingsites()
       game.map:get_field(82, 20):region(6))
    )
 
-   local pts = scroll_smoothly_to(game.map:get_field(82,20))
+   local prior_center = scroll_to_field(game.map:get_field(82,20))
 
    campaign_message_box(order_msg_4_build_mining_economy)
    local o = add_campaign_objective(obj_build_mining_economy)
@@ -156,7 +156,7 @@ function mining_and_trainingsites()
       "barbarians_micro_brewery",
    }
 
-   timed_scroll(array_reverse(pts), 10)
+   scroll_to_map_pixel(prior_center)
    sleep(500)
 
    while true do
@@ -188,6 +188,7 @@ function mining_and_trainingsites()
       "barbarians_ax_workshop",
       "barbarians_warmill",
       "barbarians_helmsmithy",
+      "barbarians_barracks",
       "barbarians_battlearena",
       "barbarians_trainingcamp",
       "barbarians_inn",
@@ -208,7 +209,7 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
+   while not check_for_buildings(p1, {barbarians_barracks = 1, barbarians_trainingcamp = 1, barbarians_battlearena = 1}) do
       sleep(6523)
    end
    set_objective_done(o)
@@ -332,13 +333,13 @@ function renegade_fortresses()
    -- Some something of the enemy land
    p1:reveal_fields(map:get_field(129,97):region(12))
 
-   local pts = scroll_smoothly_to(map:get_field(120,92))
+   local prior_center = scroll_to_field(map:get_field(120,92))
 
    campaign_message_box(order_msg_7_renegade_fortification)
    campaign_message_box(order_msg_7_free_althunran)
    local o = add_campaign_objective(obj_military_assault_on_althunran)
 
-   timed_scroll(array_reverse(pts))
+   scroll_to_map_pixel(prior_center)
    sleep(503)
 
    while not (check_player_completely_defeated(p3) and check_player_completely_defeated(p4)) do
@@ -359,7 +360,7 @@ function mission_complete()
 
    p1:reveal_fields(map:get_field(4,9):region(6))
 
-   local pts = scroll_smoothly_to(map:get_field(4,5))
+   scroll_to_field(map:get_field(4,5))
 
    campaign_message_box(story_msg_7)
 

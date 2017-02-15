@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -256,16 +256,17 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 			}
 
 			// Consumes
-			if (productionsite->inputs().size() > 0) {
+			if (productionsite->input_wares().size() > 0) {
 				fw.open_array("stored_wares");  // Consumes
 				size_t consumes_counter = 0;
-				for (WareAmount input : productionsite->inputs()) {
+				for (WareAmount input : productionsite->input_wares()) {
 					const WareDescr& ware = *tribe.get_ware_descr(input.first);
 					fw.open_brace();  // Input
 					fw.write_key_value_string("name", ware.name());
 					fw.close_element();
 					fw.write_key_value_int("amount", input.second);
-					fw.close_brace(true, consumes_counter, productionsite->inputs().size());  // Input
+					fw.close_brace(
+					   true, consumes_counter, productionsite->input_wares().size());  // Input
 					++consumes_counter;
 				}
 				fw.close_array(1, 5);  // Consumes - we need a comma
@@ -478,7 +479,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
-	std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
+	std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",

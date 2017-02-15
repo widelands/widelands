@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,8 +76,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect(
-	   [this] { zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f)); });
+	reset_zoom_->sigclicked.connect([this] {
+		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
+	});
 
 	toolbar_.add_space(15);
 

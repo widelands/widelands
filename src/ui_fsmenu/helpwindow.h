@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,6 @@ public:
 	                     uint32_t height = 0);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;

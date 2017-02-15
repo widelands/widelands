@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2016
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2016-2017
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-01-21 21:10+0000\n"
+"PO-Revision-Date: 2017-01-27 21:59+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +122,7 @@ msgstr "Du kan også bruge genvejstasten »b«."
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr "Vinduet med bygningstatistik giver dig et overblik over dine bygninger."
+msgstr "Vinduet med bygningsstatistik giver dig et overblik over dine bygninger."
 
 #. TRANSLATORS: "it" refers to the building statistics window
 #. TRANSLATORS: "it" refers to the stock menu window
@@ -205,7 +205,7 @@ msgstr "Det er nok forklaring for nu. Prøv det selv nu. Vi ønsker at vide, om 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Look up how many taverns you have."
-msgstr "Slå op hvor mange traktørsteder du har."
+msgstr "Slå op hvor mange værtshuse du har."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
@@ -375,11 +375,11 @@ msgstr "Ellers åbn det igen og vælg det tredje faneblad."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "New taverns"
-msgstr "Nye traktørsteder"
+msgstr "Nye værtshuse"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "We need new taverns"
-msgstr "Vi har brug for nye traktørsteder"
+msgstr "Vi har brug for nye værtshuse"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
@@ -392,11 +392,11 @@ msgstr "Nu du har et overblik, bør du agere. Jeg tror vi skal bygge mere end et
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
-msgstr "Byg mindst to traktørsteder."
+msgstr "Byg mindst to værtshuse."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
-msgstr "Byg nye traktørsteder."
+msgstr "Byg nye værtshuse."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -469,7 +469,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "I vores situation, kan bagerierne eventuelt prioriteres da de er leverandør til vores værtshuse, så du kan give vand den højeste prioritet for dem. De andre bygninger (for eksempel æselfarmen) vil så få mindre vand, men bageriet kan arbejde hurtigere."
+msgstr "I vores situation, kan bagerierne eventuelt prioriteres da de er leverandør til vores værtshuse, så du kan give vand den højeste prioritet for dem. De andre bygninger (for eksempel æselstutteri) vil så få mindre vand, men bageriet kan arbejde hurtigere."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270

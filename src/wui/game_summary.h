@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,7 @@ private:
 	std::string parse_player_info(std::string info);
 
 	Widelands::Game& game_;
+	uint32_t desired_speed_;
 	UI::Textarea* title_area_;
 	UI::Textarea* gametime_label_;
 	UI::Textarea* gametime_value_;
