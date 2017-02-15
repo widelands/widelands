@@ -47,6 +47,7 @@ private:
 	std::string parse_player_info(std::string info);
 
 	Widelands::Game& game_;
+	uint32_t desired_speed_;
 	UI::Textarea* title_area_;
 	UI::Textarea* gametime_label_;
 	UI::Textarea* gametime_value_;
