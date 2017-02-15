@@ -94,6 +94,16 @@ obj_make_heavy_industry_and_mining = {
    )
 }
 
+obj_build_barracks = {
+   name = "obj_build_barracks",
+   title = _"Build a barracks",
+   number = 1,
+   body = objective_text(_"Recruiting new soldiers",
+      _[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one each and some basic training to become a soldier.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a barracks]])
+   )
+}
+
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
    title = _"Build training sites for soldiers",
@@ -300,6 +310,25 @@ heavy_industry_story = {
          _([[I have considered this, Sidolus. I think it is about time. We will make this a priority for now. You shall get your industry soon!]]))
          .. new_objectives(obj_make_heavy_industry_and_mining)
    },
+}
+
+barracks_story = {
+   {
+      title = _"Jundlina Writes a Letter",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[I have received word that our mining industry started working. Now that we are forging weapons, I will send a letter to Sidolus informing him that it’s time to build a barracks and start training soldiers.]]))
+         .. new_objectives(obj_build_barracks)
+   }
+}
+
+barracks_story_end = {
+   {
+      title = _"Jundlina is Satisfied",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Today I saw the first recruits gathering in front of the new barracks. If everything goes well, they should receive their training soon.]]))
+   }
 }
 
 training_story = {
