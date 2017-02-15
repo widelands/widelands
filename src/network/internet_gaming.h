@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -180,11 +180,11 @@ private:
 	std::string clientname_;
 	std::string clientrights_;
 
-	/// informations of the clients game
+	/// information of the clients game
 	std::string gamename_;
 	std::string gameip_;
 
-	/// Metaserver informations
+	/// Metaserver information
 	bool clientupdateonmetaserver_;
 	bool gameupdateonmetaserver_;
 	bool clientupdate_;

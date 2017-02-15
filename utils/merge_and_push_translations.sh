@@ -57,6 +57,16 @@ else
   exit 1;
 fi
 
+# Fix formatting
+utils/fix_formatting.py
+if [ $? -eq 0 ]
+then
+  echo "Fixed formatting";
+else
+  echo "Failed to fix formatting";
+  exit 1;
+fi
+
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.
 # This script can be removed if we don't get any errors in the future.

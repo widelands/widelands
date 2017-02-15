@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,6 +99,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_suitability),
    METHOD(LuaPlayer, allow_workers),
    METHOD(LuaPlayer, switchplayer),
+   METHOD(LuaPlayer, get_produced_wares_count),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -447,7 +448,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->center_view_on_coords(c);
+			game.get_ipl()->scroll_to_field(c, MapView::Transition::Jump);
 		}
 		lua_pop(L, 1);
 	}
@@ -869,6 +870,42 @@ int LuaPlayer::switchplayer(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. method:: produced_wares_count(what)
+
+      Returns count of wares produced byt the player up to now.
+      'what' can be either an "all" or single ware name or an array of names. If single
+      ware name is given, integer is returned, otherwise the table is returned.
+*/
+int LuaPlayer::get_produced_wares_count(lua_State* L) {
+	Player& p = get(L, get_egbase(L));
+	const TribeDescr& tribe = p.tribe();
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2) {
+		report_error(L, "One argument is required for produced_wares_count()");
+	}
+	std::vector<DescriptionIndex> requested_wares;
+	DescriptionIndex single_ware = INVALID_INDEX;
+
+	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, &requested_wares, true);
+
+	if (single_ware != INVALID_INDEX) {
+		// We return single number
+		lua_pushuint32(L, p.get_current_produced_statistics(single_ware));
+	} else {
+		// We return array of ware:quantity
+		assert(!requested_wares.empty());
+		lua_newtable(L);
+		for (const DescriptionIndex& idx : requested_wares) {
+			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
+			lua_pushuint32(L, p.get_current_produced_statistics(idx));
+			lua_settable(L, -3);
+		}
+	}
+
+	return 1;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -911,6 +948,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 	}
 }
+
 int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 	Player& p = get(L, get_egbase(L));
 
@@ -1190,6 +1228,8 @@ int LuaMessage::get_status(lua_State* L) {
 	case Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ bool Worker::run_setbobdescription(Game& game, State& state, const Action& actio
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	state.ivar2 = game.world().get_bob(bob.c_str());
+	state.ivar2 = game.world().get_critter(bob.c_str());
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", bob.c_str());
@@ -509,10 +509,39 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeSpace(get_location(game)));
 
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
-		molog("  no space found\n");
+
+		// This is default note "out of resources" sent to a player
+		FailNotificationType fail_notification_type = FailNotificationType::kDefault;
+
+		// In case this is a fishbreeder, we do more checks
+		if (action.sparam1.size() && action.iparam4) {
+
+			// We need to create create another functor that will look for nodes full of fish
+			FindNodeAnd functorAnyFull;
+			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
+			functorAnyFull.add(FindNodeResourceBreedable(
+			   world.get_resource(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			if (action.iparam5 > -1)
+				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
+
+			if (action.iparam3)
+				functorAnyFull.add(FindNodeSpace(get_location(game)));
+
+			// If there are fields full of fish, we change the type of notification
+			if (map.find_reachable_fields(area, &list, cstep, functorAnyFull)) {
+				fail_notification_type = FailNotificationType::kFull;
+			}
+		}
+		switch (fail_notification_type) {
+		case FailNotificationType::kFull:
+			molog("  all reachable nodes are full\n");
+			break;
+		default:
+			molog("  no space found\n");
+		}
 
 		if (upcast(ProductionSite, productionsite, get_location(game)))
-			productionsite->notify_player(game, 30);
+			productionsite->notify_player(game, 30, fail_notification_type);
 
 		send_signal(game, "fail");
 		pop_task(game);
@@ -774,8 +803,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 
 	Immovable& newimm = game.create_immovable(
 	   pos, state.ivar2, state.svar1 == "tribe" ? MapObjectDescr::OwnerType::kTribe :
-	                                              MapObjectDescr::OwnerType::kWorld);
-	newimm.set_owner(get_owner());
+	                                              MapObjectDescr::OwnerType::kWorld,
+	   get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
 		state.objvar1 = &newimm;
@@ -847,7 +876,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe);
+		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
@@ -2667,7 +2696,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
-			if (!(egbase.tribes().tribe_exists(name))) {
+			if (!Widelands::tribe_exists(name)) {
 				throw GameDataError("unknown tribe '%s'", name.c_str());
 			}
 			name = lookup_table.lookup_worker(name, fr.c_string());

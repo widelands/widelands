@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
-     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, this))),
+     m(new InteractiveBaseInternals(new QuickNavigation(this))),
      field_overlay_manager_(new FieldOverlayManager()),
      edge_overlay_manager_(new EdgeOverlayManager()),
      egbase_(the_egbase),
@@ -116,7 +116,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		});
 
 	toolbar_.set_layout_toplevel(true);
-	changeview.connect([this](bool) { mainview_move(); });
+	changeview.connect([this] { mainview_move(); });
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -133,8 +133,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 }
 
 InteractiveBase::~InteractiveBase() {
-	if (buildroad_)
+	if (buildroad_) {
 		abort_build_road();
+	}
+	for (auto& registry : registries_) {
+		registry.unassign_toggle_button();
+	}
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -215,6 +219,26 @@ void InteractiveBase::show_buildhelp(bool t) {
 
 void InteractiveBase::toggle_buildhelp() {
 	show_buildhelp(!field_overlay_manager_->buildhelp());
+}
+
+UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,
+                                                const std::string& name,
+                                                const std::string& tooltip_text,
+                                                UI::UniqueWindow::Registry* window,
+                                                bool bind_default_toggle) {
+	UI::Button* button = new UI::Button(
+	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
+	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	toolbar_.add(button, UI::Align::kLeft);
+	if (window) {
+		window->assign_toggle_button(button);
+		registries_.push_back(*window);
+		if (bind_default_toggle) {
+			button->sigclicked.connect(
+			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
+		}
+	}
+	return button;
 }
 
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
@@ -354,7 +378,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 void InteractiveBase::mainview_move() {
 	if (m->minimap.window) {
-		m->mm->set_view(get_view_area());
+		m->mm->set_view(view_area().rect());
 	}
 }
 
@@ -364,7 +388,8 @@ void InteractiveBase::toggle_minimap() {
 		delete m->minimap.window;
 	} else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&InteractiveBase::center_view_on_map_pixel, this, _1));
+		m->mm->warpview.connect(
+		   [this](const Vector2f& map_pixel) { scroll_to_map_pixel(map_pixel, Transition::Smooth); });
 		mainview_move();
 	}
 }
@@ -372,15 +397,16 @@ void InteractiveBase::toggle_minimap() {
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
 	return m->quicknavigation->landmarks();
 }
-void InteractiveBase::set_landmark(size_t key, const QuickNavigation::View& view) {
-	m->quicknavigation->set_landmark(key, view);
+
+void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
+	m->quicknavigation->set_landmark(key, landmark_view);
 }
 
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
 void InteractiveBase::hide_minimap() {
-	delete m->minimap.window;
+	m->minimap.destroy();
 }
 
 /**
@@ -478,15 +504,14 @@ void InteractiveBase::finish_build_road() {
 		else
 			egbase().get_player(road_build_player_)->build_road(*new Widelands::Path(*buildroad_));
 
-		if (allow_user_input() &&
-		    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
+		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
 			//  place flags
 			const Map& map = egbase().map();
 			const std::vector<Coords>& c_vector = buildroad_->get_coords();
 			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
-			if (get_key_state(SDL_SCANCODE_LSHIFT) || get_key_state(SDL_SCANCODE_RSHIFT)) {
+			if (SDL_GetModState() & KMOD_SHIFT) {
 				for //  start to end
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;

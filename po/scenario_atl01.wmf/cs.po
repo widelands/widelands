@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-03 16:07+0000\n"
-"PO-Revision-Date: 2016-10-30 11:07+0000\n"
+"POT-Creation-Date: 2016-12-30 14:03+0000\n"
+"PO-Revision-Date: 2016-12-31 21:37+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Zajisti základní stavební materiál pro své hospodářství:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr "Vybuduj lom"
+msgstr "Postav lom"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
@@ -539,11 +539,11 @@ msgstr "Ach, ale to nebude možné jen tak změnit. Konzumace doma připravenéh
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
-"troublesome task. Grinding the blackroot and corn to flour and then baking "
+"troublesome task. Grinding the blackroots and corn to flour and then baking "
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Ale můžeme zkusit kompromisní řešení: pro mne je příprava chleba namáhavá práce: drcení rozrazilu, mletí kukuřice a pečení chleba je zdlouhavé a nudné. Myslím, že průmyslový přístup by byl v tomto případě vhodnější. Líbilo by se mi dostat každý den čerstvý chleba až domů."
+msgstr "Ale můžeme zkusit kompromisní řešení: pro mne je příprava chleba namáhavá práce. Drcení rozrazilu, mletí kukuřice a pečení chleba je zdlouhavé a nudné. Myslím, že průmyslový přístup by byl v tomto případě vhodnější. Líbilo by se mi, dostat každý den čerstvý chleba až domů."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234

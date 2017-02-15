@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "scripting/lua_root.h"
+
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -195,16 +197,16 @@ int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 2)
-		report_error(L, "Too little arguments!");
+		report_error(L, "Too few arguments!");
 	if (nargs == 3) {
 		runtime = luaL_checkuint32(L, 3);
 		lua_pop(L, 1);
 	}
 
-	LuaCoroutine* cr = new LuaCoroutine(luaL_checkthread(L, 2));
+	std::unique_ptr<LuaCoroutine> cr(new LuaCoroutine(luaL_checkthread(L, 2)));
 	lua_pop(L, 2);  // Remove coroutine and Game object from stack
 
-	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, cr));
+	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
 
 	return 0;
 }
@@ -299,6 +301,7 @@ World
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_critter_type),
+   METHOD(LuaWorld, new_editor_critter_category),
    METHOD(LuaWorld, new_editor_immovable_category),
    METHOD(LuaWorld, new_editor_terrain_category),
    METHOD(LuaWorld, new_immovable_type),
@@ -480,6 +483,26 @@ int LuaWorld::new_editor_terrain_category(lua_State* L) {
 	try {
 		LuaTable table(L);
 		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_editor_critter_category(table)
+
+		Like :func:`new_editor_terrain_category`, but for immovables.
+
+		:returns: :const:`nil`
+*/
+int LuaWorld::new_editor_critter_category(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_editor_critter_category(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -196,7 +196,10 @@ public:
 	                                   int32_t type,
 	                                   DescriptionIndex index,
 	                                   int32_t prio);
-	void send_player_set_ware_max_fill(PlayerImmovable&, DescriptionIndex index, uint32_t);
+	void send_player_set_input_max_fill(PlayerImmovable&,
+	                                    DescriptionIndex index,
+	                                    WareWorker type,
+	                                    uint32_t);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);

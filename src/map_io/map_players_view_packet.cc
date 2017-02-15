@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -485,16 +485,20 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				const FCoords f = r;
 				Player::Field& f_player_field = *r_player_field;
 				const Vision f_vision = r_vision;
-				const bool f_everseen = r_everseen, bl_everseen = br_everseen;
-				const bool f_seen = r_seen, bl_seen = br_seen;
+				const bool f_everseen = r_everseen;
+				const bool bl_everseen = br_everseen;
+				const bool f_seen = r_seen;
+				const bool bl_seen = br_seen;
 				move_r(mapwidth, r, r_index);
 				move_r(mapwidth, br, br_index);
 				r_player_field = player_fields + r_index;
 				br_player_field = player_fields + br_index;
 				r_vision = r_player_field->vision;
 				br_vision = br_player_field->vision;
-				r_everseen = r_vision, r_seen = 1 < r_vision;
-				br_everseen = br_vision, br_seen = 1 < br_vision;
+				r_everseen = r_vision;
+				r_seen = 1 < r_vision;
+				br_everseen = br_vision;
+				br_seen = 1 < br_vision;
 
 				//  Store the player's view of roads and ownership in these
 				//  temporary variables and save it in the player when set.
@@ -867,16 +871,20 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 			bool br_everseen = br_vision, br_seen = 1 < br_vision;
 			do {
 				const Player::Field& f_player_field = *r_player_field;
-				const bool f_everseen = r_everseen, bl_everseen = br_everseen;
-				const bool f_seen = r_seen, bl_seen = br_seen;
+				const bool f_everseen = r_everseen;
+				const bool bl_everseen = br_everseen;
+				const bool f_seen = r_seen;
+				const bool bl_seen = br_seen;
 				move_r(mapwidth, r, r_index);
 				move_r(mapwidth, br, br_index);
 				r_player_field = player_fields + r_index;
 				br_player_field = player_fields + br_index;
 				r_vision = r_player_field->vision;
 				br_vision = br_player_field->vision;
-				r_everseen = r_vision, r_seen = 1 < r_vision;
-				br_everseen = br_vision, br_seen = 1 < br_vision;
+				r_everseen = r_vision;
+				r_seen = 1 < r_vision;
+				br_everseen = br_vision;
+				br_seen = 1 < br_vision;
 
 				vision_file.unsigned_32(f_player_field.vision);
 

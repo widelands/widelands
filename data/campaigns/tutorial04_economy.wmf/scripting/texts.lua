@@ -92,7 +92,7 @@ explain_building_stat = {
       p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium Buildings’ tab. Close the building statistics menu afterwards.]])
    ),
    obj_name = "check_taverns",
-   obj_title = _"Look up your number of taverns in the building statistics window.",
+   obj_title = _"Look up how many taverns you have.",
    obj_body = rt(
       listitem_bullet(_[[Choose the ‘Medium Buildings’ tab in the building statistics window.]]) ..
       listitem_bullet(_[[Look up how many taverns you have.]]) ..

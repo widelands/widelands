@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,10 +48,6 @@ public:
 	                  Widelands::PlayerNumber,
 	                  bool multiplayer);
 
-	~InteractivePlayer();
-
-	void toggle_chat();
-
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
@@ -89,13 +85,8 @@ private:
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
-	UI::Button toggle_chat_;
-	UI::Button toggle_options_menu_;
-	UI::Button toggle_statistics_menu_;
-	UI::Button toggle_objectives_;
-	UI::Button toggle_minimap_;
-	UI::Button toggle_message_menu_;
-	UI::Button toggle_help_;
+	UI::Button* toggle_chat_;
+	UI::Button* toggle_message_menu_;
 
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;
