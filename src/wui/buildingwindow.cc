@@ -159,9 +159,6 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 		// Check if this is a port building and if yes show expedition button
 		if (upcast(Widelands::Warehouse const, warehouse, &building_)) {
 			if (Widelands::PortDock* pd = warehouse->get_portdock()) {
-				expedition_canceled_subscriber_ =
-				   Notifications::subscribe<Widelands::NoteExpeditionCanceled>([this](
-				      const Widelands::NoteExpeditionCanceled&) { update_expedition_button(true); });
 				expeditionbtn_ =
 				   new UI::Button(capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34,
 				                  g_gr->images().get("images/ui_basic/but4.png"),
@@ -170,6 +167,15 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 				expeditionbtn_->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
 				capsbuttons->add(expeditionbtn_, UI::Align::kHCenter);
+
+				expedition_canceled_subscriber_ =
+				   Notifications::subscribe<Widelands::NoteExpeditionCanceled>(
+				      [this, pd](const Widelands::NoteExpeditionCanceled& canceled) {
+					      // Check this was not just any but our Expedition
+					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
+						      update_expedition_button(true);
+					      }
+					   });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, &building_)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {
