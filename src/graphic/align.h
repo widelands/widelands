@@ -37,27 +37,28 @@ namespace UI {
  // incomplete usage are useless.
 
 enum class Align {
-	kLeft       = 0x00,
-	kHCenter    = 0x01,
-	kRight      = 0x02,
-	kHorizontal = 0x03,
+	kLeft = 0,
+	kHCenter = 1,
+	kRight = 2,
+	kHorizontal = 3,
 
-	kTop        = 0x00,
-	kVCenter    = 0x04,
-	kBottom     = 0x08,
-	kVertical   = 0x0C,
+	kTop = 0,
+	kVCenter = 4,
+	kBottom = 8,
+	kVertical = 12,
 
-	kTopLeft        = kLeft | kTop,
-	kCenterLeft     = kLeft | kVCenter,
-	kBottomLeft     = kLeft | kBottom,
+	kTopLeft = 0,
+	kCenterLeft = Align::kVCenter,
+	kBottomLeft = Align::kBottom,
 
-    kTopCenter      = kHCenter | kTop,
-	kCenter         = kHCenter | kVCenter,
-	kBottomCenter   = kHCenter | kBottom,
+	kTopCenter = Align::kHCenter,
+	kCenter = Align::kHCenter | Align::kVCenter,
+	kBottomCenter = Align::kHCenter | Align::kBottom,
 
-	kTopRight       = kRight | kTop,
-	kCenterRight    = kRight | kVCenter,
-	kBottomRight    = kRight | kBottom,
+	kTopRight = Align::kRight,
+	kCenterRight = Align::kRight | Align::kVCenter,
+
+	kBottomRight = Align::kRight | Align::kBottom,
 };
 
 inline Align operator&(Align a, Align b) {
