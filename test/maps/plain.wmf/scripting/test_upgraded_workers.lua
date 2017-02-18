@@ -22,7 +22,7 @@ run(function()
    sleep(1000)
 
    -- The master miner has filled the remaining slot
-   hq:set_workers("barbarians_miner_master", 1)
+   assert_equal(0, hq:get_workers("barbarians_miner_master"))
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
