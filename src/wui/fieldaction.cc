@@ -598,6 +598,7 @@ void FieldActionWindow::act_configure_economy() {
 			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
 		}
 	}
+	die();
 }
 
 /*
@@ -781,14 +782,9 @@ void show_field_action(InteractiveBase* const ibase,
 		}
 		if (finish) {
 			ibase->finish_build_road();
+			// We are done, so we close the window.
+			registry->destroy();
 			return;
 		}
 	}
-
-	// If we are here, no new window was opened yet - otherwise we would have
-	// returned already. A new window uses the same registry, so the old window
-	// will be closed. So this means the old window is still open, but but we
-	// still desire to close it. This can happen for example connecting the road
-	// we are building to an existing flag).
-	registry->destroy();
 }
