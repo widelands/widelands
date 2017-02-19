@@ -26,7 +26,7 @@
 #include <vector>
 
 #include <SDL.h>
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -48,6 +48,7 @@
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/layered_filesystem.h"
 
 using namespace std;
 
@@ -787,8 +788,22 @@ private:
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const Image& image, double scale)
-	   : RenderNode(ns), image_(image), scale_(scale) {
+	ImgRenderNode(NodeStyle& ns,
+	              const std::string& image_filename,
+	              double scale,
+	              const RGBColor& color)
+	   : RenderNode(ns),
+	     image_(*g_gr->images().get(image_filename)),
+	     color_mask_(nullptr),
+	     scale_(scale),
+	     color_(color) {
+		if (color_.hex_value() != "000000") {
+			std::string pc_image_filename = image_filename;
+			boost::replace_all(pc_image_filename, ".png", "_pc.png");
+			if (g_fs->file_exists(pc_image_filename)) {
+				color_mask_ = g_gr->images().get(pc_image_filename);
+			}
+		}
 	}
 
 	uint16_t width() override {
@@ -804,13 +819,22 @@ public:
 
 private:
 	const Image& image_;
+	const Image* color_mask_;
 	const double scale_;
+	const RGBColor color_;
 };
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(width(), height());
-	rv->blit(Rectf(0, 0, width(), height()), image_, Rectf(0, 0, image_.width(), image_.height()),
-	         1., BlendMode::Copy);
+	if (color_mask_ != nullptr) {
+		rv->fill_rect(Rectf(0, 0, width(), height()), RGBAColor(0, 0, 0, 0));
+		rv->blit_blended(Rectf(0, 0, width(), height()), image_, *color_mask_,
+		                 Rectf(0, 0, image_.width(), image_.height()), color_);
+	} else {
+		rv->blit(Rectf(0, 0, width(), height()), image_, Rectf(0, 0, image_.width(), image_.height()),
+		         1., BlendMode::Copy);
+	}
+
 	return rv;
 }
 // End: Helper Stuff
@@ -1051,8 +1075,13 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		const Image& image = *image_cache_->get(a["src"].get_string());
+		RGBColor color;
+		const std::string image_filename = a["src"].get_string();
 		double scale = 1.0;
+
+		if (a.has("color")) {
+			color = a["color"].get_color();
+		}
 		if (a.has("width")) {
 			int width = a["width"].get_int();
 			if (width > renderer_style_.overall_width) {
@@ -1061,11 +1090,12 @@ public:
 				    width, renderer_style_.overall_width, renderer_style_.overall_width);
 				width = renderer_style_.overall_width;
 			}
-			if (width < image.width()) {
-				scale = double(width) / image.width();
+			const int image_width = image_cache_->get(image_filename)->width();
+			if (width < image_width) {
+				scale = double(width) / image_width;
 			}
 		}
-		render_node_ = new ImgRenderNode(nodestyle_, image, scale);
+		render_node_ = new ImgRenderNode(nodestyle_, image_filename, scale, color);
 	}
 	void emit_nodes(vector<RenderNode*>& nodes) override {
 		nodes.push_back(render_node_);
