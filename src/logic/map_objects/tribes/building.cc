@@ -748,9 +748,6 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	// TODO(sirver): add support into the font renderer to get to representative
-	// animations of buildings so that the messages can still be displayed, even
-	// after reload.
 	const std::string& img = descr().representative_image_filename();
 	const int width = descr().representative_image()->width();
 	const std::string rt_description =

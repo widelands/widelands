@@ -39,6 +39,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/playercolor.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
@@ -792,49 +793,37 @@ public:
 	              const std::string& image_filename,
 	              double scale,
 	              const RGBColor& color)
-	   : RenderNode(ns),
-	     image_(*g_gr->images().get(image_filename)),
-	     color_mask_(nullptr),
-	     scale_(scale),
-	     color_(color) {
+	   : RenderNode(ns), image_(g_gr->images().get(image_filename)), scale_(scale), color_(color) {
 		if (color_.hex_value() != "000000") {
 			std::string pc_image_filename = image_filename;
 			boost::replace_all(pc_image_filename, ".png", "_pc.png");
 			if (g_fs->file_exists(pc_image_filename)) {
-				color_mask_ = g_gr->images().get(pc_image_filename);
+				image_ = playercolor_image(&color_, image_, g_gr->images().get(pc_image_filename));
 			}
 		}
 	}
 
 	uint16_t width() override {
-		return scale_ * image_.width();
+		return scale_ * image_->width();
 	}
 	uint16_t height() override {
-		return scale_ * image_.height();
+		return scale_ * image_->height();
 	}
 	uint16_t hotspot_y() override {
-		return scale_ * image_.height();
+		return scale_ * image_->height();
 	}
 	Texture* render(TextureCache* texture_cache) override;
 
 private:
-	const Image& image_;
-	const Image* color_mask_;
+	const Image* image_;
 	const double scale_;
 	const RGBColor color_;
 };
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(width(), height());
-	if (color_mask_ != nullptr) {
-		rv->fill_rect(Rectf(0, 0, width(), height()), RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rectf(0, 0, width(), height()), image_, *color_mask_,
-		                 Rectf(0, 0, image_.width(), image_.height()), color_);
-	} else {
-		rv->blit(Rectf(0, 0, width(), height()), image_, Rectf(0, 0, image_.width(), image_.height()),
-		         1., BlendMode::Copy);
-	}
-
+	rv->blit(Rectf(0, 0, width(), height()), *image_, Rectf(0, 0, image_->width(), image_->height()),
+	         1., BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
