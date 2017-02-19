@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016
+# Jukka Pakarinen, 2016-2017
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-21 14:22+0000\n"
-"PO-Revision-Date: 2017-01-21 14:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-18 09:49+0000\n"
+"PO-Revision-Date: 2017-02-19 07:56+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgstr "Rakenna koulutusinfrastuktuuri"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:96
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Rakenna kasarmi koluttaaksesi tavallisia sotilaita."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:97
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -195,7 +195,7 @@ msgstr "Rakenna harjoittelupaikkoja"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Rakenna kasarmi, taisteluareena ja harjoitusleiri vuorten länsipuolelle."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:118
 msgid ""
@@ -203,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Kasarmi kouluttaa tavallisia sotilaita, kun taas koulutuspaikat kuten harjoitusleiri tai taisteluareena on tarkoitettu sotilaiden eri ominaisuuksien koulukseen. Nuo ominaisuudet ovat tärkeitä taisteluissa ja mitä parempi sotilas on, sitä suurempi on voiton mahdollisuus taistelussa."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:120
 msgid "The attributes are: health, attack, defense and evade."
@@ -650,7 +650,7 @@ msgstr "Heimopäällikkö, muistatko kantajarukkamme: Tiemme käyvät yhä pidem
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uusi tavoite"
