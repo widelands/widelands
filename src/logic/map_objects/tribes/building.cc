@@ -727,8 +727,10 @@ void Building::set_seeing(bool see) {
  * It will have the building's coordinates, and display a picture of the
  * building in its description.
  *
- * \param msgsender a computer-readable description of why the message was sent
- * \param title user-visible title of the message
+ * \param msgtype a computer-readable description of why the message was sent
+ * \param title short title to be displayed in message listings
+ * \param icon_filename the filename to be used for the icon in message listings
+ * \param heading long title to be displayed within the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
  * \param link_to_building_lifetime if true, the message will be deleted when this
@@ -750,26 +752,16 @@ void Building::send_message(Game& game,
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = descr().representative_image_filename();
-	std::string rt_description;
-	rt_description.reserve(strlen("<rt image=") + img.size() + 1 +
-	                       strlen("<p font-size=14 font-face=serif>") + description.size() +
-	                       strlen("</p></rt>"));
-	rt_description = "<rt image=";
-	rt_description += img;
-	{
-		std::string::iterator it = rt_description.end() - 1;
-		for (; it != rt_description.begin() && *it != '?'; --it) {
-		}
-		for (; *it == '?'; --it)
-			*it = '0';
-	}
-	rt_description = (boost::format("%s><p font-face=serif font-size=14>%s</p></rt>") %
-	                  rt_description % description)
-	                    .str();
+	const int width = descr().representative_image()->width();
+	const std::string rt_description =
+	   (boost::format("<sub padding_r=10><p><img width=%d src=%s></p></sub>"
+	                  "<sub width=*><p><font size=%d>%s</font></p></sub>") %
+	    width % img % UI_FONT_SIZE_MESSAGE % description)
+	      .str();
 
-	Message* msg =
-	   new Message(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
-	               get_position(), (link_to_building_lifetime ? serial_ : 0));
+	Message* msg = new Message(
+	   msgtype, game.get_gametime(), title, icon_filename, heading, rt_description, get_position(),
+	   (link_to_building_lifetime ? serial_ : 0), Message::Status::kNew, true);
 
 	if (throttle_time)
 		owner().add_message_with_timeout(game, *msg, throttle_time, throttle_radius);

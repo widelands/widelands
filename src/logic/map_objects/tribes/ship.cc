@@ -1033,28 +1033,26 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * It will have the ship's coordinates, and display a picture in its description.
  *
  * \param msgsender a computer-readable description of why the message was sent
- * \param title user-visible title of the message
+ * \param title short title to be displayed in message listings
+ * \param heading long title to be displayed within the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param picture picture name relative to the data/ directory
+ * \param picture the filename to be used for the icon in message listings
  */
 void Ship::send_message(Game& game,
                         const std::string& title,
                         const std::string& heading,
                         const std::string& description,
                         const std::string& picture) {
-	std::string rt_description;
-	if (picture.size() > 3) {
-		rt_description = "<rt image=";
-		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=serif>";
-	} else
-		rt_description = "<rt><p font-size=14 font-face=serif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	const std::string rt_description =
+	   (boost::format("<sub padding_r=10><p><img src=%s></p></sub>"
+	                  "<sub width=*><p><font size=%d>%s</font></p></sub>") %
+	    picture % UI_FONT_SIZE_MESSAGE % description)
+	      .str();
 
-	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
-	                           heading, rt_description, get_position(), serial_);
+	Message* msg =
+	   new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture, heading,
+	               rt_description, get_position(), serial_, Message::Status::kNew, true);
 
 	get_owner()->add_message(game, *msg);
 }

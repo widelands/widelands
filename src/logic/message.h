@@ -71,7 +71,8 @@ struct Message {
 	        const std::string& init_body,
 	        const Widelands::Coords& c = Coords::null(),
 	        Widelands::Serial ser = 0,
-	        Status s = Status::kNew)
+	        Status s = Status::kNew,
+	        bool new_renderer = false)
 	   : type_(msgtype),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
@@ -81,7 +82,8 @@ struct Message {
 	     sent_(sent_time),
 	     position_(c),
 	     serial_(ser),
-	     status_(s) {
+	     status_(s),
+	     use_new_renderer_(new_renderer) {
 	}
 
 	Message::Type type() const {
@@ -118,6 +120,10 @@ struct Message {
 		return status_ = s;
 	}
 
+	bool use_new_renderer() const {
+		return use_new_renderer_;
+	}
+
 	/**
 	 * Returns the main type for the message's sub type
 	 */
@@ -146,6 +152,8 @@ private:
 	Widelands::Coords position_;
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
+	// TODO(GunChleoc): Temporary switch while we migrate to the new font renderer
+	bool use_new_renderer_;
 };
 }
 

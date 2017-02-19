@@ -68,8 +68,8 @@ struct MultilineTextarea : public Panel {
 	void set_color(RGBColor fg) {
 		color_ = fg;
 	}
-	void force_new_renderer() {
-		force_new_renderer_ = true;
+	void force_new_renderer(bool force = true) {
+		force_new_renderer_ = force;
 	}
 
 	// Drawing and event handlers

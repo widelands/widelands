@@ -326,12 +326,17 @@ void GameMessageMenu::selected(uint32_t const t) {
 				   game.get_gametime(), player.player_number(), id));
 			}
 			centerviewbtn_->set_enabled(message->position());
-
-			message_body.set_text(
-			   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
-			                  "<p font-size=8> <br></p></rt>%s") %
-			    message->heading() % message->body())
-			      .str());
+			if (message->use_new_renderer()) {
+				message_body.force_new_renderer();
+				message_body.set_text(as_message(message->heading(), message->body()));
+			} else {
+				message_body.force_new_renderer(false);
+				message_body.set_text(
+								(boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
+													"<p font-size=8> <br></p></rt>%s") %
+								 message->heading() % message->body())
+									.str());
+			}
 			return;
 		}
 	}
