@@ -63,6 +63,8 @@ struct Borders {
 	uint8_t left, top, right, bottom;
 };
 
+enum class WidthUnit { kAbsolute, kPercent, kShrink, kFill };
+
 struct NodeStyle {
 	UI::FontSet const* fontset;
 	string font_face;
@@ -658,6 +660,8 @@ class SubTagRenderNode : public RenderNode {
 public:
 	SubTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
+	     desired_width_(0),
+	     desired_width_unit_(WidthUnit::kShrink),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
@@ -677,6 +681,14 @@ public:
 	}
 	uint16_t hotspot_y() override {
 		return height();
+	}
+
+	uint16_t desired_width() const {
+		return desired_width_;
+	}
+
+	WidthUnit desired_width_unit() const {
+		return desired_width_unit_;
 	}
 
 	Texture* render(TextureCache* texture_cache) override {
@@ -742,6 +754,10 @@ public:
 		h_ = inner_h;
 		margin_ = margin;
 	}
+	void set_desired_width(int w, WidthUnit unit) {
+		desired_width_ = w;
+		desired_width_unit_ = unit;
+	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
 		is_background_color_set_ = true;
@@ -758,6 +774,8 @@ public:
 	}
 
 private:
+	uint16_t desired_width_;
+	WidthUnit desired_width_unit_;
 	uint16_t w_, h_;
 	vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
@@ -1198,10 +1216,26 @@ public:
 			}
 		}
 
+		switch (render_node_->desired_width_unit()) {
+		case WidthUnit::kPercent:
+			w_ = render_node_->desired_width() * renderer_style_.overall_width / 100;
+			renderer_style_.remaining_width -= w_;
+			break;
+		case WidthUnit::kFill:
+			w_ = renderer_style_.remaining_width;
+			renderer_style_.remaining_width = 0;
+			break;
+		default:;  // Do nothing
+		}
+
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		vector<RenderNode*> nodes_to_render;
 		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, w_, padding, shrink_to_fit_);
+		if (render_node_->desired_width_unit() == WidthUnit::kShrink) {
+			w_ = max_line_width;
+			renderer_style_.remaining_width -= w_;
+		}
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
@@ -1225,9 +1259,7 @@ public:
 			w_ = max_line_width;
 		}
 
-		if (renderer_style_.remaining_width >= w_) {
-			renderer_style_.remaining_width -= w_;
-		} else {
+		if (renderer_style_.remaining_width < w_) {
 			renderer_style_.remaining_width = renderer_style_.overall_width;
 		}
 
@@ -1242,18 +1274,29 @@ public:
 	virtual void handle_unique_attributes() {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("width")) {
+			shrink_to_fit_ = false;
+			w_ = INFINITE_WIDTH;
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
-				w_ = renderer_style_.remaining_width;
+				render_node_->set_desired_width(INFINITE_WIDTH, WidthUnit::kFill);
 			} else if (boost::algorithm::ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
-				uint8_t new_width_percent = strtol(width_string.c_str(), nullptr, 10);
-				w_ = floor(renderer_style_.overall_width * new_width_percent / 100);
-				w_ = std::min(w_, renderer_style_.remaining_width);
+				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
+				if (width_percent > 100) {
+					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					width_percent = 100;
+				}
+				render_node_->set_desired_width(width_percent, WidthUnit::kPercent);
 			} else {
 				w_ = a["width"].get_int();
+				if (w_ > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
+					    "width of %d. Setting width to %d.\n",
+					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					w_ = renderer_style_.overall_width;
+				}
+				render_node_->set_desired_width(w_, WidthUnit::kAbsolute);
 			}
-			shrink_to_fit_ = false;
 		}
 		if (a.has("float")) {
 			const string s = a["float"].get_string();
