@@ -326,10 +326,12 @@ void GameMessageMenu::selected(uint32_t const t) {
 				   game.get_gametime(), player.player_number(), id));
 			}
 			centerviewbtn_->set_enabled(message->position());
-			if (message->use_new_renderer()) {
+			// TODO(GunChleoc): Programming by exception is ugly, but we need try/catch here for saveloading.
+			// Revisit this when we delete the old font renderer.
+			try {
 				message_body.force_new_renderer();
 				message_body.set_text(as_message(message->heading(), message->body()));
-			} else {
+			} catch (const std::exception&) {
 				message_body.force_new_renderer(false);
 				message_body.set_text(
 								(boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"

@@ -759,9 +759,9 @@ void Building::send_message(Game& game,
 	    width % img % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg = new Message(
-	   msgtype, game.get_gametime(), title, icon_filename, heading, rt_description, get_position(),
-	   (link_to_building_lifetime ? serial_ : 0), Message::Status::kNew, true);
+	Message* msg =
+	   new Message(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
+	               get_position(), (link_to_building_lifetime ? serial_ : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout(game, *msg, throttle_time, throttle_radius);

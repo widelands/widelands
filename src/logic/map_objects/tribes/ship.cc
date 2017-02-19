@@ -1050,9 +1050,8 @@ void Ship::send_message(Game& game,
 	    picture % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
-	Message* msg =
-	   new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture, heading,
-	               rt_description, get_position(), serial_, Message::Status::kNew, true);
+	Message* msg = new Message(Message::Type::kSeafaring, game.get_gametime(), title, picture,
+	                           heading, rt_description, get_position(), serial_);
 
 	get_owner()->add_message(game, *msg);
 }
