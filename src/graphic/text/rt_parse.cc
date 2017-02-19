@@ -204,6 +204,7 @@ Parser::Parser() {
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
 		tc.allowed_attrs.insert("ref");
+		tc.allowed_attrs.insert("width");
 		tc.text_allowed = false;
 		tc.has_closing_tag = false;
 		tag_constraints_["img"] = tc;

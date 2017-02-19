@@ -787,28 +787,30 @@ private:
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), image_(image) {
+	ImgRenderNode(NodeStyle& ns, const Image& image, double scale)
+	   : RenderNode(ns), image_(image), scale_(scale) {
 	}
 
 	uint16_t width() override {
-		return image_.width();
+		return scale_ * image_.width();
 	}
 	uint16_t height() override {
-		return image_.height();
+		return scale_ * image_.height();
 	}
 	uint16_t hotspot_y() override {
-		return image_.height();
+		return scale_ * image_.height();
 	}
 	Texture* render(TextureCache* texture_cache) override;
 
 private:
 	const Image& image_;
+	const double scale_;
 };
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	Texture* rv = new Texture(image_.width(), image_.height());
-	rv->blit(Rectf(0, 0, image_.width(), image_.height()), image_,
-	         Rectf(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
+	Texture* rv = new Texture(width(), height());
+	rv->blit(Rectf(0, 0, width(), height()), image_, Rectf(0, 0, image_.width(), image_.height()),
+	         1., BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -1049,7 +1051,21 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		render_node_ = new ImgRenderNode(nodestyle_, *image_cache_->get(a["src"].get_string()));
+		const Image& image = *image_cache_->get(a["src"].get_string());
+		double scale = 1.0;
+		if (a.has("width")) {
+			int width = a["width"].get_int();
+			if (width > renderer_style_.overall_width) {
+				log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
+				    "width of %d. Setting width to %d.\n",
+				    width, renderer_style_.overall_width, renderer_style_.overall_width);
+				width = renderer_style_.overall_width;
+			}
+			if (width < image.width()) {
+				scale = double(width) / image.width();
+			}
+		}
+		render_node_ = new ImgRenderNode(nodestyle_, image, scale);
 	}
 	void emit_nodes(vector<RenderNode*>& nodes) override {
 		nodes.push_back(render_node_);
