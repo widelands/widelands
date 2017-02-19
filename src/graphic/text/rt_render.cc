@@ -1248,13 +1248,12 @@ public:
 		Layout layout(subnodes);
 		vector<RenderNode*> nodes_to_render;
 		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, w_, padding, shrink_to_fit_);
-		if (render_node_->desired_width_unit() == WidthUnit::kShrink) {
-			w_ = max_line_width;
-			renderer_style_.remaining_width -= w_;
-		}
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
+		} else if (render_node_->desired_width_unit() == WidthUnit::kShrink) {
+			w_ = max_line_width;
+			renderer_style_.remaining_width -= w_;
 		}
 
 		// Collect all tags from children
