@@ -39,15 +39,15 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 
-uint32_t text_width(const std::string& text, int ptsize) {
+int text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
-uint32_t text_height(int ptsize) {
+int text_height(int ptsize, UI::FontSet::Face face) {
 	return UI::g_fh1
 		->render(
-			as_editorfont(UI::g_fh1->fontset()->representative_character(), ptsize - UI::g_fh1->fontset()->size_offset()))
+			as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft, ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
 	   ->height();
 }
 

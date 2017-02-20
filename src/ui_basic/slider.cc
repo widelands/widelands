@@ -508,12 +508,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h -
-               UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-                                              UI::Align::kLeft,
-                                              UI_FONT_SIZE_SMALL - 2))
-                  ->height() -
-               2,
+				h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) - 2,
             0,
             labels_in.size() - 1,
             value_,
@@ -560,11 +555,7 @@ void DiscreteSlider::layout() {
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size(
 	   w - (w / labels.size()) + slider.cursor_size_,
-	   h -
-	      UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-	                                     UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	         ->height() +
-	      2);
+		h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
 	Panel::layout();
 }
 }

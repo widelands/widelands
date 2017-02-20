@@ -32,9 +32,7 @@
 namespace {
 
 int base_height() {
-	return std::max(
-	   24,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+	return std::max(24, text_height() + 2);
 }
 
 }  // namespace

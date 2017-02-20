@@ -41,14 +41,13 @@ void replace_entities(std::string* text);
   * Returns the exact width of the text rendered as editorfont for the given font size.
   * This function is inefficient; only call when we need the exact width.
   */
-
-uint32_t text_width(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL);
+int text_width(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL);
 
 /**
-  * Returns the exact height of the text rendered as editorfont for the given font size.
+  * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
-uint32_t text_height(int ptsize = UI_FONT_SIZE_SMALL);
+int text_height(int ptsize = UI_FONT_SIZE_SMALL, UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
