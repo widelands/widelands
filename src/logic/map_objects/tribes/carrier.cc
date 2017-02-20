@@ -24,10 +24,12 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
+#include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -543,6 +545,34 @@ void Carrier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.signed_32(promised_pickup_to_);
+}
+
+void Carrier::draw_inner(const EditorGameBase& game,
+                         const Vector2f& point_on_dst,
+                         const float scale,
+                         RenderTarget* dst) const {
+	assert(get_owner() != nullptr);
+	Worker::draw_inner(game, point_on_dst, scale, dst);
+
+	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
+		const RGBColor& player_color = get_owner()->get_playercolor();
+		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
+		const Vector2f location(
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
+		dst->blit_animation(
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+	}
+}
+
+CarrierDescr::CarrierDescr(const std::string& init_descname,
+                           const LuaTable& table,
+                           const EditorGameBase& egbase)
+   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase),
+     ware_hotspot_(Vector2i(0, 15)) {
+	if (table.has_key("ware_hotspot")) {
+		std::unique_ptr<LuaTable> items_table = table.get_table("ware_hotspot");
+		ware_hotspot_ = Vector2i(items_table->get_int(1), items_table->get_int(2));
+	}
 }
 
 /**

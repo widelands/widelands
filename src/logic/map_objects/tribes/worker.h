@@ -176,10 +176,10 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const EditorGameBase& game,
-	                const Vector2f& point_on_dst,
-	                const float scale,
-	                RenderTarget* dst) const;
+	virtual void draw_inner(const EditorGameBase& game,
+	                        const Vector2f& point_on_dst,
+	                        const float scale,
+	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
