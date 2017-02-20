@@ -3,7 +3,9 @@
 Workers
 =======
 
-Workers are defined in their ``init.lua`` file. They also have a corresponding ``helptexts.lua`` file that contains their help text.
+Workers are defined in their ``init.lua`` file. They also have a corresponding
+``helptexts.lua`` file that contains their help text.
+Worker files are placed in ``data/tribes/workers/<tribe_name>/<worker_name>/``.
 
 Types of Workers
 ----------------
