@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -34,6 +35,7 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
+#include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
 namespace {
@@ -47,9 +49,8 @@ std::string as_header(const std::string& txt, MapDetails::Style style, bool is_f
 		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>") %
 		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
 		   .str();
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 std::string as_content(const std::string& txt, MapDetails::Style style) {
 	switch (style) {
@@ -62,39 +63,36 @@ std::string as_content(const std::string& txt, MapDetails::Style style) {
 		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>") %
 		        (UI_FONT_SIZE_SMALL - 2) % richtext_escape(txt))
 		   .str();
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 }  // namespace
 
-MapDetails::MapDetails(
-   Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style)
-   : UI::Panel(parent, x, y, max_w, max_h),
+MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style)
+   : UI::Panel(parent, x, y, w, h),
 
      style_(style),
      padding_(4),
-     main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
+     main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
                  0,
                  0,
-                 max_w - padding_,
-                 20,
+                 UI::Scrollbar::kSize,
+                 0,
                  "",
                  UI::Align::kLeft,
+                 g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, max_w, 20, ""),
+     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
      suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w)) {
+        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.set_size(
-	   max_w, max_h);  // We need to initialize the width, set_max_height will set the height
-	set_max_height(max_h);
+	layout();
 }
 
 void MapDetails::clear() {
@@ -103,20 +101,19 @@ void MapDetails::clear() {
 	suggested_teams_box_->hide();
 }
 
-void MapDetails::set_max_height(int new_height) {
-	max_h_ = new_height;
-	update_layout();
-}
+void MapDetails::layout() {
+	name_label_.set_size(
+	   get_w() - padding_,
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
 
-void MapDetails::update_layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Vector2i(0, max_h_ - suggested_teams_box_->get_h()));
-		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
+		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
+		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
 	} else {
-		main_box_.set_size(main_box_.get_w(), max_h_);
+		main_box_.set_size(get_w(), get_h());
 	}
-	descr_.set_size(descr_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
+	descr_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 	descr_.scroll_to_top();
 }
 
@@ -128,7 +125,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		                      as_header(_("Directory:"), style_, true) %
 		                      as_content(mapdata.localized_name, style_))
 		                        .str());
-		main_box_.set_size(main_box_.get_w(), max_h_);
+		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
 		name_label_.set_text(
@@ -195,5 +192,5 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			suggested_teams_box_->show(mapdata.suggested_teams);
 		}
 	}
-	update_layout();
+	layout();
 }

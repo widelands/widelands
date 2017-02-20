@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@ FileViewPanel::FileViewPanel(Panel* parent,
                              const Image* background,
                              TabPanel::Type border_type)
    : TabPanel(parent, x, y, w, h, background, border_type), padding_(5) {
+	layout();
 }
 
 void FileViewPanel::add_tab(const std::string& lua_script) {
@@ -53,21 +54,34 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	   std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 	size_t index = boxes_.size() - 1;
 
-	// If there is a border, we have less space
-	const int width =
-	   border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_;
-
-	const int height = border_type_ == TabPanel::Type::kNoBorder ?
-	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
-
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(
-	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, width, height, content)));
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, content)));
 	add((boost::format("about_%lu") % index).str(), title, boxes_.at(index).get(), "");
-	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
 
 	assert(boxes_.size() == textviews_.size());
 	assert(tabs().size() == textviews_.size());
+	update_tab_size(index);
+}
+
+void FileViewPanel::update_tab_size(size_t index) {
+	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
+	textviews_.at(index)->set_size(contents_width_, contents_height_);
+}
+
+void FileViewPanel::layout() {
+	assert(boxes_.size() == textviews_.size());
+
+	// If there is a border, we have less space for the contents
+	contents_width_ =
+	   border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_;
+
+	contents_height_ = border_type_ == TabPanel::Type::kNoBorder ?
+	                      get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
+	                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight;
+
+	for (size_t i = 0; i < boxes_.size(); ++i) {
+		update_tab_size(i);
+	}
 }
 
 }  // namespace UI

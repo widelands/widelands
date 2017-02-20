@@ -93,6 +93,7 @@ obj_build_training_infrastructure = {
    title = _"Build a training infrastructure",
    number = 4,
    body = objective_text(_"Build a training infrastructure",
+      listitem_bullet(_"Build a barracks to train some basic soldiers.") ..
       listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
       listitem_bullet(_"Enhance your metal workshop to an ax workshop in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the ax workshop to a war mill, which will produce additional weapons.") ..
       listitem_bullet(_"Build a helm smithy to the west of the mountains to provide your soldiers with better armor."))
@@ -113,8 +114,8 @@ obj_build_trainingssites = {
    title = _"Build training sites",
    number = 2,
    body = objective_text(_"Build training sites",
-      listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
-      listitem_arrow(_"Training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight."
+      listitem_bullet(_"Build a barracks, a battle arena and a training camp to the west of the mountains.") ..
+      listitem_arrow(_"Barracks train basic soldiers while training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight."
       .. "<br>" ..
       _"The attributes are: health, attack, defense and evade."))
 }
@@ -261,7 +262,7 @@ order_msg_2_build_a_tower = {
    title = _"Tracks",
    body = boldreth(_"Boldreth says:",
       -- TRANSLATORS: Boldreth
-      _([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower,  to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
+      _([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower, to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
       .. new_objectives(obj_build_a_tower)
 }
 

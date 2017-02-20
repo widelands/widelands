@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,17 +25,24 @@
 namespace math {
 
 // Returns 1 for positive and -1 for negative numbers.
-template <typename T>
-T sign(const T& val) {
+template <typename T> T sign(const T& val) {
 	return val < T(0.) ? T(-1.) : T(1.);
 }
 
 // Clamps 'val' to 'min' and 'max'.
-template <typename T>
-T clamp(const T& val, const T& low, const T& high) {
-	if (val < low) { return low; }
-	if (val > high) { return high; }
+template <typename T> T clamp(const T& val, const T& low, const T& high) {
+	if (val < low) {
+		return low;
+	}
+	if (val > high) {
+		return high;
+	}
 	return val;
+}
+
+// A simple square function.
+template <typename T> T sqr(const T& a) {
+	return a * a;
 }
 
 }  // namespace math

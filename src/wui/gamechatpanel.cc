@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, 2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              h - 25,
              "",
              UI::Align::kLeft,
+             g_gr->images().get("images/ui_basic/but1.png"),
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2),
      chat_message_counter(std::numeric_limits<uint32_t>::max()) {

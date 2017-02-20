@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,10 +41,8 @@ public:
 
 	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
 	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
-	void draw(const Rectf& destination_rect,
-	          float z_value,
-	          const RGBAColor& color,
-	          BlendMode blend_mode);
+	void
+	draw(const Rectf& destination_rect, float z_value, const RGBAColor& color, BlendMode blend_mode);
 
 	void draw(const std::vector<Arguments>& arguments);
 

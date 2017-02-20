@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@
 namespace {
 // The map generator can't find starting positions for too many players
 constexpr uint8_t kMaxMapgenPlayers = 8;
-} // namespace
+}  // namespace
 
 using namespace Widelands;
 
@@ -408,7 +408,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
 		max_players_ = std::min(
-			static_cast<size_t>(kMaxMapgenPlayers),
+		   static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);
@@ -444,7 +444,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
 		max_players_ = std::min(
-			static_cast<size_t>(kMaxMapgenPlayers),
+		   static_cast<size_t>(kMaxMapgenPlayers),
 		   (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) /
 		         2 +
 		      2);

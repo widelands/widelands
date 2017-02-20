@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <vector>
 
 #include "base/rect.h"
-#include "base/vector.h"
+#include "ui_basic/fullscreen_window.h"
 
 class Image;
 class RenderTarget;
@@ -46,7 +46,7 @@ struct IProgressVisualization {
 };
 
 /// Manages a progress window on the screen.
-struct ProgressWindow {
+struct ProgressWindow : public UI::FullscreenWindow {
 	ProgressWindow(const std::string& background = std::string());
 	~ProgressWindow();
 
@@ -70,7 +70,7 @@ private:
 	VisualizationArray visualizations_;
 	std::string background_;
 
-	void draw_background(RenderTarget& rt, uint32_t xres, uint32_t yres);
+	void draw(RenderTarget&) override;
 	void update(bool repaint);
 };
 }

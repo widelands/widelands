@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/box.h"
@@ -40,7 +41,10 @@
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
-   : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")), game_(parent->game()) {
+   : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")),
+     game_(parent->game()),
+     desired_speed_(game_.game_controller()->desired_speed()) {
+	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
 	title_area_ = new UI::Textarea(vbox, "", UI::Align::kHCenter);
@@ -97,7 +101,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(150, _("Player"));
 	players_table_->add_column(80, _("Team"), "", UI::Align::kHCenter);
 	players_table_->add_column(100, _("Status"), "", UI::Align::kHCenter);
-	players_table_->add_column(100, _("Time"));
+	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
 
 	// Prepare Elements
 	title_area_->set_fontsize(UI_FONT_SIZE_BIG);
@@ -207,6 +211,7 @@ void GameSummaryScreen::fill_data() {
 }
 
 void GameSummaryScreen::continue_clicked() {
+	game_.game_controller()->set_desired_speed(desired_speed_);
 	die();
 }
 

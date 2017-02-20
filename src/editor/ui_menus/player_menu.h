@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ private:
 	UI::Textarea* nr_of_players_ta_;
 	UI::EditBox* plr_names_[kMaxPlayers];
 	UI::Button add_player_, remove_last_player_;
-	UI::Button* plr_make_infrastructure_buts_[kMaxPlayers], *plr_set_pos_buts_[kMaxPlayers],
+	UI::Button *plr_make_infrastructure_buts_[kMaxPlayers], *plr_set_pos_buts_[kMaxPlayers],
 	   *plr_set_tribes_buts_[kMaxPlayers];
 
 	std::vector<std::string> tribenames_;

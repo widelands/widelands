@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                       580,
                       5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
                       _("Objectives")),
-	  list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST),
+     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST),
      objectivetext(this,
                    5,
                    130,
@@ -48,6 +48,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    FULL_OBJECTIVE_TEXT,
                    "",
                    UI::Align::kLeft,
+                   g_gr->images().get("images/ui_basic/but1.png"),
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())

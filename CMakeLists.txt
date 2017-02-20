@@ -26,12 +26,12 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
-    message(FATAL_ERROR "Widelands needs GCC >= 4.7 to compile.")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    message(FATAL_ERROR "Widelands needs GCC >= 4.8 to compile.")
   endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-    message(FATAL_ERROR "Clang version must be at least 3.2!")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
+    message(FATAL_ERROR "Clang version must be at least 3.4!")
   endif()
 else()
   message(WARNING "You are using an unsupported compiler! Supported are Clang and GCC.")
@@ -128,30 +128,17 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 else()
-  # Assuming GCC 4.7 or higher.
+  # Assuming GCC 4.8 or higher.
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
   endif()
 
-  if (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8))
-     # Because of: https://svn.boost.org/trac/boost/ticket/9240.
-     wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
-  endif()
-
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
-    # g++-4.7 complains otherwise about <:: not being a valid token in
-    # unique_ptr<::Something>. Since this is common style in c++ though, we'd
-    # rather have it swallow this frog for us.
-    wl_add_flag(WL_GENERIC_CXX_FLAGS "-fpermissive")
-  endif()
+  # Because of: https://svn.boost.org/trac/boost/ticket/9240.
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-pedantic")
-  else()
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
-  endif()
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wdeprecated-declarations")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wextra")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat")
@@ -175,6 +162,7 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
 endif()
+
 
 # Turn some warnings into errors.
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2016 by the Widelands Development Team
+ * Copyright (C) 2010-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,10 +29,6 @@
 #include "base/vector.h"
 #include "wui/mapview.h"
 
-namespace Widelands {
-class EditorGameBase;
-}
-
 /**
  * Provide quick navigation shortcuts.
  *
@@ -40,24 +36,18 @@ class EditorGameBase;
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
-	struct View {
-		Vector2f viewpoint;
-		float zoom;
-	};
-
 	struct Landmark {
-		View view;
+		MapView::View view;
 		bool set;
 
 		Landmark() : set(false) {
 		}
 	};
 
-	QuickNavigation(const Widelands::EditorGameBase& egbase,
-	                MapView* map_view);
+	QuickNavigation(MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
-	void set_landmark(size_t index, const View& view);
+	void set_landmark(size_t index, const MapView::View& view);
 
 	// Returns a pointer to the first element in the landmarks array
 	const std::vector<Landmark>& landmarks() const {
@@ -67,29 +57,14 @@ struct QuickNavigation {
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(const View& where);
-	void view_changed(bool jump);
+	void view_changed();
 
-	const Widelands::EditorGameBase& egbase_;
 	MapView* map_view_;
 
 	bool havefirst_;
-	bool update_;
-	Vector2f anchor_;  // center of last view in mappixel.
-	View current_;
+	MapView::View current_;
 
-	/**
-	 * Keeps track of what the player has looked at to allow jumping back and forth
-	 * in the history.
-	 */
-	/*@{*/
-	std::vector<View> history_;
-	size_t history_index_;
-	/*@}*/
-
-	/**
-	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
-	 */
+	// Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
 	std::vector<Landmark> landmarks_;
 };
 

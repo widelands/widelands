@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,7 @@
 #include "ui_fsmenu/main_menu.h"
 
 FullscreenMenuMainMenu::FullscreenMenuMainMenu()
-   : FullscreenMenuMainMenu("images/ui_fsmenu/ui_fsmenu.jpg") {
-}
-
-FullscreenMenuMainMenu::FullscreenMenuMainMenu(const std::string& background_image)
-   : FullscreenMenuBase(background_image),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      box_x_(get_w() * 13 / 40),

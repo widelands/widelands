@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@
 #define MAX_TOOL_AREA 9
 
 #include "base/macros.h"
+#include "editor/tools/action_args.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "editor/tools/action_args.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
@@ -36,9 +36,9 @@ class World;
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
- * modify height, place bob, place critter, place building. A Tool only makes
- * one function (like delete_building, place building, modify building are 3
- * tools).
+ * modify height, place immovable, place critter, place building. A Tool only
+ * makes one function (like delete_building, place building, modify building
+ * are 3 tools).
  */
 class EditorTool {
 public:
@@ -104,7 +104,7 @@ public:
 	}
 
 protected:
-	EditorTool& second_, &third_;
+	EditorTool &second_, &third_;
 	bool undoable_;
 
 private:

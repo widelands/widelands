@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -50,6 +51,7 @@ struct BaseListselect : public Panel {
 	               int32_t y,
 	               uint32_t w,
 	               uint32_t h,
+	               const Image* button_background,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect();
 
@@ -109,7 +111,7 @@ struct BaseListselect : public Panel {
 	}
 
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint32_t get_lineheight() const;
+	int get_lineheight() const;
 
 	uint32_t get_eff_w() const;
 
@@ -118,7 +120,6 @@ struct BaseListselect : public Panel {
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
@@ -142,8 +143,8 @@ private:
 	};
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
-	uint32_t max_pic_width_;
-	uint32_t lineheight_;
+	int max_pic_width_;
+	int lineheight_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
@@ -162,8 +163,9 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : BaseListselect(parent, x, y, w, h, selection_mode) {
+	   : BaseListselect(parent, x, y, w, h, button_background, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -214,8 +216,9 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
+	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : Base(parent, x, y, w, h, selection_mode) {
+	   : Base(parent, x, y, w, h, button_background, selection_mode) {
 	}
 
 	void add(const std::string& name,

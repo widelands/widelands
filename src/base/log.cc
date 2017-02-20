@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2007, 2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include <fstream>
 #include <iostream>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -40,7 +40,7 @@ void sdl_logging_func(void* userdata, int, SDL_LogPriority, const char* message)
 #ifdef _WIN32
 
 std::string get_output_directory() {
-	// This took inspiration from SDL 1.2 logger code.
+// This took inspiration from SDL 1.2 logger code.
 #ifdef _WIN32_WCE
 	wchar_t path[MAX_PATH];
 #else
@@ -83,7 +83,7 @@ void sdl_logging_func(void* userdata,
                       const char* message) {
 	static_cast<WindowsLogger*>(userdata)->log_cstring(message);
 }
-#else // _WIN32
+#else  // _WIN32
 
 class Logger {
 public:

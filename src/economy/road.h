@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,7 +121,7 @@ protected:
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
-				 float scale,
+	          float scale,
 	          RenderTarget* dst) override;
 
 private:

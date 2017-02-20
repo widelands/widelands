@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, true),
+     table_(this,
+            tablex_,
+            tabley_,
+            tablew_,
+            tableh_,
+            g_gr->images().get("images/ui_basic/but3.png"),
+            true),
 
      is_replay_(is_replay),
      // Main title
@@ -189,7 +195,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	delete_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	int used_width = 130;
 	if (is_replay_ || settings_->settings().multiplayer) {
 		std::vector<std::string> modes;
 		if (is_replay_) {
@@ -218,12 +223,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		   /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
 		   UI::Align::kLeft);
-		used_width += 65;
 	}
-	table_.add_column(table_.get_w() - used_width, _("Description"),
+	table_.add_column(0, _("Description"),
 	                  _("The filename that the game was saved under followed by the map’s name, "
 	                    "or the map’s name followed by the last objective achieved."),
-	                  UI::Align::kLeft);
+	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));
 	table_.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
@@ -232,6 +236,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+}
+
+void FullscreenMenuLoadGame::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 void FullscreenMenuLoadGame::think() {

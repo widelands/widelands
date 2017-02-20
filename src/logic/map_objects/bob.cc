@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -691,8 +691,8 @@ void Bob::move_update(Game& game, State&) {
 // pos is the location, in pixels, of the node position_ on screen with scale
 // and height taken into account.
 Vector2f Bob::calc_drawpos(const EditorGameBase& game,
-                             const Vector2f& field_on_dst,
-                             const float scale) const {
+                           const Vector2f& field_on_dst,
+                           const float scale) const {
 	const Map& map = game.get_map();
 	const FCoords end = position_;
 	FCoords start;
@@ -744,8 +744,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
 		const float f = math::clamp(
-				static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_),
-				0.f, 1.f);
+		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 	}

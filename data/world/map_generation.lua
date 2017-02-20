@@ -7,7 +7,6 @@
 --  Former greenland  --
 ------------------------
 
-
 greenland = {
    heights = {
       ocean = 10,

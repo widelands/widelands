@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,13 +36,15 @@ struct TextStyle;
  * @ref Editbox and @ref MultilineTextarea
  */
 struct MultilineEditbox : public Panel {
-	MultilineEditbox(Panel*,
-	                 int32_t x,
-	                 int32_t y,
-	                 uint32_t w,
-	                 uint32_t h,
-	                 const std::string& text,
-	                 const Image* background = g_gr->images().get("images/ui_basic/but2.png"));
+	MultilineEditbox(
+	   Panel*,
+	   int32_t x,
+	   int32_t y,
+	   uint32_t w,
+	   uint32_t h,
+	   const std::string& text,
+	   const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
+	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"));
 
 	boost::signals2::signal<void()> changed;
 

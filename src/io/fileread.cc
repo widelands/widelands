@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ char* FileRead::c_string(const Pos& pos) {
 	if (i >= length_)
 		throw FileBoundaryExceeded();
 	char* const result = data_ + i;
-	for (char* p = result; *p; ++p, ++i) {
+	for (char *p = result; *p; ++p, ++i) {
 	}
 	++i;                    //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string

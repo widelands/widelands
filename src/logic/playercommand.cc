@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
-#include "economy/wares_queue.h"
+#include "economy/input_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
@@ -79,7 +79,7 @@ enum {
 	PLCMD_MESSAGESETSTATUSREAD = 18,
 	PLCMD_MESSAGESETSTATUSARCHIVED = 19,
 	PLCMD_SETSTOCKPOLICY = 20,
-	PLCMD_SETWAREMAXFILL = 21,
+	PLCMD_SETINPUTMAXFILL = 21,
 	PLCMD_DISMANTLEBUILDING = 22,
 	PLCMD_EVICTWORKER = 23,
 	PLCMD_MILITARYSITESETSOLDIERPREFERENCE = 24,
@@ -149,8 +149,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMessageSetStatusArchived(des);
 	case PLCMD_SETSTOCKPOLICY:
 		return new CmdSetStockPolicy(des);
-	case PLCMD_SETWAREMAXFILL:
-		return new CmdSetWareMaxFill(des);
+	case PLCMD_SETINPUTMAXFILL:
+		return new CmdSetInputMaxFill(des);
 	case PLCMD_DISMANTLEBUILDING:
 		return new CmdDismantleBuilding(des);
 	case PLCMD_EVICTWORKER:
@@ -165,7 +165,7 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 /**
  * Write this player command to a file. Call this from base classes
  */
-constexpr uint16_t kCurrentPacketVersionPlayerCommand = 2;
+constexpr uint16_t kCurrentPacketVersionPlayerCommand = 3;
 
 void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
@@ -180,7 +180,7 @@ void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionPlayerCommand) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
 			if (!egbase.get_player(sender_))
@@ -1077,18 +1077,20 @@ void CmdSetWarePriority::serialize(StreamWrite& ser) {
 }
 
 /*** class Cmd_SetWareMaxFill ***/
-CmdSetWareMaxFill::CmdSetWareMaxFill(const uint32_t init_duetime,
-                                     const PlayerNumber init_sender,
-                                     PlayerImmovable& imm,
-                                     const DescriptionIndex index,
-                                     const uint32_t max_fill)
+CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
+                                       const PlayerNumber init_sender,
+                                       PlayerImmovable& imm,
+                                       const DescriptionIndex index,
+                                       const WareWorker type,
+                                       const uint32_t max_fill)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
+     type_(type),
      max_fill_(max_fill) {
 }
 
-void CmdSetWareMaxFill::execute(Game& game) {
+void CmdSetInputMaxFill::execute(Game& game) {
 	upcast(Building, b, game.objects().get_object(serial_));
 
 	if (!b)
@@ -1096,50 +1098,71 @@ void CmdSetWareMaxFill::execute(Game& game) {
 	if (b->owner().player_number() != sender())
 		return;
 
-	b->waresqueue(index_).set_max_fill(max_fill_);
+	b->inputqueue(index_, type_).set_max_fill(max_fill_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWareMaxFill = 1;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 2;
 
-void CmdSetWareMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionCmdSetWareMaxFill);
+void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
 
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
+	if (type_ == wwWARE) {
+		fw.unsigned_8(0);
+	} else {
+		fw.unsigned_8(1);
+	}
 	fw.unsigned_32(max_fill_);
 }
 
-void CmdSetWareMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetWareMaxFill) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
+			if (packet_version > 1) {
+				if (fr.unsigned_8() == 0) {
+					type_ = wwWARE;
+				} else {
+					type_ = wwWORKER;
+				}
+			}
 			max_fill_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(
-			   "CmdSetWareMaxFill", packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
+			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("set ware max fill: %s", e.what());
 	}
 }
 
-CmdSetWareMaxFill::CmdSetWareMaxFill(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()),
-     serial_(des.unsigned_32()),
-     index_(des.signed_32()),
-     max_fill_(des.unsigned_32()) {
+CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	index_ = des.signed_32();
+	if (des.unsigned_8() == 0) {
+		type_ = wwWARE;
+	} else {
+		type_ = wwWORKER;
+	}
+	max_fill_ = des.unsigned_32();
 }
 
-void CmdSetWareMaxFill::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWAREMAXFILL);
+void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_SETINPUTMAXFILL);
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
+	if (type_ == wwWARE) {
+		ser.unsigned_8(0);
+	} else {
+		ser.unsigned_8(1);
+	}
 	ser.unsigned_32(max_fill_);
 }
 
@@ -1286,7 +1309,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player& player = game.player(sender());
-	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+	if (economy() < player.get_nr_economies() && game.tribes().worker_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity(
 		   ware_type(), permanent_, duetime());
 	}
@@ -1691,14 +1714,6 @@ void CmdSetStockPolicy::execute(Game& game) {
 				return;
 			}
 
-			switch (policy_) {
-			case Warehouse::SP_Normal:
-			case Warehouse::SP_Prefer:
-			case Warehouse::SP_DontStock:
-			case Warehouse::SP_Remove:
-				break;
-			}
-
 			if (isworker_) {
 				if (!(game.tribes().worker_exists(ware_))) {
 					log("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(), ware_);
@@ -1729,7 +1744,7 @@ void CmdSetStockPolicy::serialize(StreamWrite& ser) {
 	ser.unsigned_32(warehouse_);
 	ser.unsigned_8(isworker_);
 	ser.unsigned_8(ware_);
-	ser.unsigned_8(policy_);
+	ser.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
 constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
@@ -1758,6 +1773,6 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_32(warehouse_);
 	fw.unsigned_8(isworker_);
 	fw.unsigned_8(ware_);
-	fw.unsigned_8(policy_);
+	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 }

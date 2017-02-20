@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,8 @@ struct FontHandler {
 	               const std::string& text,
 	               Align align = UI::Align::kCenterLeft,
 	               uint32_t caret = std::numeric_limits<uint32_t>::max());
-	uint32_t draw_text_raw(RenderTarget&, const TextStyle&, Vector2i dstpoint, const std::string& text);
+	uint32_t
+	draw_text_raw(RenderTarget&, const TextStyle&, Vector2i dstpoint, const std::string& text);
 
 	void get_size(const TextStyle&,
 	              const std::string& text,

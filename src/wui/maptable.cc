@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,12 +28,13 @@
 
 MapTable::MapTable(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const bool descending)
-   : UI::Table<uintptr_t>(parent, x, y, w, h, descending) {
+   : UI::Table<uintptr_t>(
+        parent, x, y, w, h, g_gr->images().get("images/ui_basic/but3.png"), descending) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	add_column(35, _("Pl."), _("Number of players"), UI::Align::kHCenter);
-	add_column(
-	   get_w() - 35 - 115, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft);
+	add_column(0, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft,
+	           UI::TableColumnType::kFlexible);
 	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
 	set_sort_column(0);
 }

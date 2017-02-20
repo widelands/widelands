@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
                                                          bool registered)
-   : FullscreenMenuBase("images/ui_fsmenu/internetmenu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butx_(get_w() * 13 / 40),
@@ -135,7 +135,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
 	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
-	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, _("Game"));
+	clientsonline_list_.add_column(
+	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	clientsonline_list_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_.double_clicked.connect(
@@ -148,6 +149,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
 		connect_to_metaserver();
+}
+
+void FullscreenMenuInternetLobby::layout() {
+	// TODO(GunChleoc): Box layout and then implement
 }
 
 /// think function of the UI (main loop)

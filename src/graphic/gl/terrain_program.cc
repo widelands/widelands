@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,8 +70,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
-                                const Vector2f& texture_offset) {
+void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 

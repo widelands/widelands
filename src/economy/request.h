@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,6 +83,9 @@ public:
 	uint32_t get_open_count() const {
 		return count_ - transfers_.size();
 	}
+	bool get_exact_match() const {
+		return exact_match_;
+	}
 	bool is_open() const {
 		return transfers_.size() < count_;
 	}
@@ -103,6 +106,7 @@ public:
 
 	void set_economy(Economy*);
 	void set_count(Quantity);
+	void set_exact_match(bool match);
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
@@ -153,6 +157,8 @@ private:
 	Economy* economy_;
 	DescriptionIndex index_;  //  the index of the ware descr
 	Quantity count_;          //  how many do we need in total
+	bool exact_match_;        // Whether a worker supply has to match exactly
+	                          // or if a can_act_as() comparison is good enough
 
 	CallbackFn callbackfn_;  //  called on request success
 

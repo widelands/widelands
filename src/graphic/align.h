@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,18 @@
 #include "base/vector.h"
 
 namespace UI {
+
+/**
+ * This Enum is a binary mix of one-dimensional and two-dimensional alignments.
+ *
+ * bits 0,1 values 0,1,2,3  are horizontal
+ * bits 2,3 values 0,4,8,12 are vertical
+ *
+ * mixed aligenments are results of a binary | operation.
+ */
+
+// TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
+// incomplete usage are useless.
 
 enum class Align {
 	kLeft = 0,

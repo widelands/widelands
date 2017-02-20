@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ private:
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
+   : FullscreenMenuBase(),
 
      // Values for alignment and size
      butw_(get_w() / 4),
@@ -235,6 +235,10 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete lua_;
 	delete mpsg_;
 	delete chat_;
+}
+
+void FullscreenMenuLaunchMPG::layout() {
+	// TODO(GunChleoc): Implement when we have redesigned this
 }
 
 void FullscreenMenuLaunchMPG::think() {
@@ -611,7 +615,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 }
 
 /**
- * load map informations and update the UI
+ * load map information and update the UI
  */
 void FullscreenMenuLaunchMPG::load_map_info() {
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data

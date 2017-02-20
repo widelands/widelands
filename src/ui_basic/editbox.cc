@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -175,9 +175,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	}
 
 	return false;
-}
-bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
-	return btn == SDL_BUTTON_LEFT && get_can_focus();
 }
 
 /**

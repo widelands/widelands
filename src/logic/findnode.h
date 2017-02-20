@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
+
+enum class AnimalBreedable { kDefault, kAnimalFull };
 
 struct FCoords;
 class Map;
@@ -175,24 +177,30 @@ private:
 };
 
 /// Accepts a node if it has the given resource type and remaining capacity.
+/// If 'br' == AnimalBreedable::kAnimalFull, only accepts the node if it is full
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(DescriptionIndex res) : resource(res) {
+	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kDefault)
+	   : resource(res), strictness(br) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
+	AnimalBreedable strictness;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable
-/// and has a neighbouring field that is swimmable
+/// and has at least one neighbouring field that is swimmable
 struct FindNodeShore {
-	FindNodeShore() {
+	FindNodeShore(uint16_t f = 1) : min_fields(f) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
+
+private:
+	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"
+	uint16_t min_fields;
 };
 }
-
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H

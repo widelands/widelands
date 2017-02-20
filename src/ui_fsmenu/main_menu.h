@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,13 +29,8 @@
  */
 class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
-	/// Calls FullscreenMenuMainMenu(const std::string& background_image)
-	/// with a default background image
+	/// Assigns values for alignment and size, depending on screen size
 	FullscreenMenuMainMenu();
-
-	/// Sets the background image and assigns values
-	/// for alignment and size, depending on screen size
-	FullscreenMenuMainMenu(const std::string& background_image);
 
 protected:
 	void layout() override;

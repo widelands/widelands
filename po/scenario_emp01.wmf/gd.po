@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-17 15:31+0000\n"
+"POT-Creation-Date: 2016-12-04 07:02+0000\n"
+"PO-Revision-Date: 2016-12-07 18:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -402,7 +402,7 @@ msgstr "Chan fhuirich sinn ach oidhche eile air an eilean seo. Fàgaidh sinn an 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:233
 msgid "I still wonder if we will ever see Fremil again."
-msgstr "Saoil nach fhaic sinn Freimil a-rithist gu buan?"
+msgstr "Saoil nach fhaic sinn Fremil a-rithist gu buan?"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:234
 msgid "Victory"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2010 by the Widelands Development Team
+ * Copyright (C) 2009-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -431,15 +431,13 @@ struct WarehouseSiteObserver {
 
 struct ShipObserver {
 	Widelands::Ship* ship;
-	Widelands::Coords expedition_start_point;
-	std::unordered_set<uint32_t> visited_spots;
-
-	// a ship circumvents all islands in the same direction, the value
-	// is assigned only once
-	Widelands::IslandExploreDirection island_circ_direction =
-	   Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
 	uint32_t last_command_time = 0;
+
+	// direction by which the ship circumvents an island
+	// this is the last circle-island command's direction
+	Widelands::IslandExploreDirection island_circ_direction =
+	   Widelands::IslandExploreDirection::kClockwise;
 };
 
 struct WareObserver {

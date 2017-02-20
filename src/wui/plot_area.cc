@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,9 +118,12 @@ std::string get_value_with_unit(Units unit, int value) {
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
 		return (boost::format(npgettext("unit_narrow", "%1%m", "%1%m", value)) % value).str();
-	default:
+	case Units::kMinutesGeneric:
+	case Units::kHourGeneric:
+	case Units::kDayGeneric:
 		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 std::string get_generic_unit_name(Units unit) {
@@ -134,9 +137,12 @@ std::string get_generic_unit_name(Units unit) {
 	case Units::kMinutesGeneric:
 		/** TRANSLATORS: Generic unit label. Used in statistics. */
 		return pgettext("unit_generic", "minutes");
-	default:
+	case Units::kMinutesNarrow:
+	case Units::kHourNarrow:
+	case Units::kDayNarrow:
 		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 uint32_t ms_to_unit(Units unit, uint32_t ms) {

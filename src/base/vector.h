@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,8 +75,7 @@ template <typename T> struct Vector2 {
 		return *this;
 	}
 
-	template<typename Type>
-	Vector2<Type> cast() const {
+	template <typename Type> Vector2<Type> cast() const {
 		return Vector2<Type>(Type(x), Type(y));
 	}
 

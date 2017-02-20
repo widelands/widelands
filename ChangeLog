@@ -1,7 +1,7 @@
-### Build 19 until r8139
+## Build 19-rc1
 
 
-* Animations, Icons and Overlays
+### Animations, Icons and Overlays
 
   - New animations for Barbarians buildings: Wood Hardener, Farm, Fisher's Hut,
     Gamekeeper's Hut, Lumberjack's Hut, Quarry, Ranger's Hut, Taver, Inn,
@@ -22,7 +22,7 @@
   - Fixed bug #672248:  Duplicated animations
 
 
-* Sounds
+### Sounds
 
   - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon
     Smithies, Ax workshop, Lime Kilns, Taverns, Breweries, Winery,
@@ -35,7 +35,7 @@
   - Fixed bug #1304638: Wrong sound played
 
 
-* Tutorials and Campaigns:
+### Tutorials and Campaigns:
 
   - Split tutorial into "Basic Control" and "Warefare" and added encancements.
   - New "Seafaring" and "Economy" tutorials"
@@ -52,7 +52,7 @@
   - Fixed bug #674839:  Some issues of barbarian tutorial 3
 
 
-* Maps
+### Maps
 
   - New maps: Archipelago Sea, Dolomites, Wide World
   - Removed maps: Dry Riverbed, Long long way, War of the Valleys
@@ -61,7 +61,7 @@
   - Added "hint" to the json file created by wl_map_info for use on the website.
 
 
-* Saveloading
+### Saveloading
 
   - Older savegames can no longer be loaded.
   - Older maps can be loaded, but new maps can't be loaded with previous
@@ -98,7 +98,7 @@
   - Fixed bug #979995:  Game crashes with large map when saving
 
 
-* AI:
+### AI:
 
   - AI can now build and use ships
   - Improved placing, upgrading and dismantling buildings
@@ -116,13 +116,13 @@
                         after starting a new game
 
 
-* Gameplay
+### Gameplay
 
   - Collectors win condition now reports team scores as well as player scores.
   - New win condition: Artifacts
   - Added New starting condition "Trading Outpost" that will periodically give
     the player some wares if needed (cheat mode)
-  - Other tribes’ buildings that have been conquered can now be dismantled
+  - Other tribes' buildings that have been conquered can now be dismantled
   - Balancing: Added gold to building cost for Atlantean training sites.
     Made Barbarian attack stronger.
   - When an expedition ship places a port, a bit of land is cleared of trees to
@@ -195,7 +195,7 @@
   - Fixed bug #580923:  Production of carrier does not respect building costs
 
 
-* User Interface
+### User Interface
 
   - Display Widelands version for each client in Internet lobby.
   - Overhaul of diverse menu screens and windows: map and game loading,
@@ -269,7 +269,7 @@
                         playercolor
 
 
-* Internationalization
+### Internationalization
 
   - Big string overhaul to improve translations
   - UI redesigns to make translated strings fit
@@ -287,7 +287,7 @@
   - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
 
 
-* Editor
+### Editor
 
   - Merged the four worlds into one, so any entity can be placed on any map now.
   - New forested mountain terrains
@@ -323,7 +323,7 @@
   - Fixed bug #768826:  Show altitude level in the editor
 
 
-* Help and Documentation:
+### Help and Documentation:
 
   - Generic in-game and in-editor help system driven by Lua scripts. All values
     except for performance are now read from the current Lua configuration
@@ -335,7 +335,7 @@
     for updating the encyclopedia on the website.
 
 
-* Graphics Engine:
+### Graphics Engine:
 
   - Fixed line drawing by replacing the broken use of GL_LINES with a
     tessellation algorithm for drawing lines.
@@ -392,7 +392,7 @@
   - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
 
 
-* Other Issues:
+### Other Issues:
 
   - Added build instructions for OpenBSD
   - Ships get debug window. Also its content are extended.
@@ -422,7 +422,7 @@
 
 
 
-### Build 18
+## Build 18
 - Added a preview for the costs of a building and the resources gained
   through the dismantling of a building.
 - Added a button to productionsites for evicting a worker.
@@ -720,7 +720,7 @@
 - Fixed bug #1228596: Important system messages are not forwarded to ingame chat
 
 
-### Build 17
+## Build 17
 - Diversified heal rate for military buildings - the bigger, the quicker.
 - Improved and remodelled a lot of the buildings' animations.
 - Improved and remodelled a lot of the bobs' animations.
@@ -874,7 +874,7 @@
 
 
 
-### Build 16
+## Build 16
 - Many new graphics, new sounds.
 - Added a dedicated server function for terminal use.
 - Improved and refactored font handler.
@@ -1011,7 +1011,7 @@
 - Fixed bug #568373: Removed flag display in the building statistic menu
 - Fixed many other bugs.
 
-### Build 15
+## Build 15
 - Removed registering functionality for metaserver. This is to be compatible
   with future changes to the metaserver.
 - Small text tweaks and translation updates.
@@ -1165,7 +1165,7 @@
   locales), the program would crash when a letter was typed in the description
   multilineeditbox. (svn:r4563)
 
-### Build 14
+## Build 14
 - Fix bug that the Firegames map had no water. (svn:r4533)
 - New tree and stone graphics for the Blackland world. (svn:r4525, svn:r4526,
   svn:r4527, svn:r4528, svn:r4529)
@@ -1516,7 +1516,7 @@
 - Fixed Trigger_Time (and replaced Trigger_Null with it). Introduced
   Event_Set_Timer. (svn:r3541, svn:r4485)
 
-### Build 13
+## Build 13
 - Count casualties/kills, military/civilian buildings lost/defeated and present
   them in the general statistics menu (except for civilian buildings defeated,
   which is omitted from the user interface) (svn:r3395, svn:r3407).
@@ -1705,7 +1705,7 @@
   (svn:r3539)
 
 
-### Build 12
+## Build 12
 - New feature: Additional scenario event types and trigger types.
 - New feature: Flags are automatically placed when holding down Ctrl while
   building a road.
@@ -1743,7 +1743,7 @@
   multiplayer games.
 - Many other bugfixes, optimizations and cleanups.
 
-### Build 11
+## Build 11
 - New feature: Game Tips during loading
 - New feature: Progress message windows (Loading-screens)
 - New feature: Fog of war
@@ -1768,7 +1768,7 @@
 - Many other bugfixes
 
 
-### Build 10
+## Build 10
 - Addition of new tribe "The Empire"
 - Tribe "Barbarians" was completely overhauled
 - New blender graphics for the Barbarians and the Empire by bithunter32
@@ -1794,7 +1794,7 @@
 - Bug fixes, bug fixes, bug fixes
 
 
-### Build 9half
+## Build 9half
 - Updated Campaign Missions
 - Added proper localization support (language selectable in options menu)
 - Font renderer now renders multiple newlines correctly and in richtext accepts
@@ -1817,7 +1817,7 @@
 - new font renderer
 
 
-### Build 9
+## Build 9
 - Chat for multiplayer
 - Global Stock, Menu structure reworked
 - General statistics menu
@@ -1838,7 +1838,7 @@
 - fixed crash when using 32-bit fullscreen mode under win32
 
 
-### Build 8
+## Build 8
 - some UI ergonomics (new mapselect dialog,
   double click function in listselects)
 - resources and default resources support
@@ -1851,7 +1851,7 @@
 - editor bob tool
 
 
-### Build 7
+## Build 7
 - many new buildings
 - improved in-game graphics
 - improved in-game UI
@@ -1864,14 +1864,14 @@
 - various code cleanups and bug fixes
 
 
-### Build 6
+## Build 6
 - graphics reworked
 - added functionality for the first few buildings
 - reworked transport code
 - added multiselect option for editor's set texture tool
 
 
-### Build 5
+## Build 5
 - added Immovable Tool in editor
 - added Map_Loader support
 - added support for multifield-fieldsels (for editor and to select areas)
@@ -1882,12 +1882,12 @@
 - added support for more (and most importantly: compressed) graphics formats
 
 
-### Build 4
+## Build 4
 - added Warehouse options window
 - added ware requests
 
 
-### Build 3
+## Build 3
 - added !DirAnimations for convenience
 - added Economy code
 - added record/playback code
@@ -1896,7 +1896,7 @@
 - use different background images for different menus
 
 
-### Build 2
+## Build 2
 - options handling redesigned
 - introduced System
 - added keyboard input
@@ -1913,6 +1913,6 @@
 - split of moving and non-moving objects in hierarchy
 
 
-### Build 1
+## Build 1
 * First release
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -721,7 +721,7 @@ public:
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
 				Rectf dst(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
-				                node_texture->height());
+				          node_texture->height());
 				Rectf src(0, 0, node_texture->width(), node_texture->height());
 				rv->blit(
 				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);

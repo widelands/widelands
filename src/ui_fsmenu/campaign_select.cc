@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
 
      // Main Title
      title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kHCenter),
@@ -106,12 +106,16 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 	table_.add_column(45, _("Diff."), _("Difficulty"), UI::Align::kLeft);
 	table_.add_column(100, _("Tribe"), _("Tribe Name"), UI::Align::kLeft);
 	table_.add_column(
-	   table_.get_w() - 100 - 45, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft);
+	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
+}
+
+void FullscreenMenuCampaignSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 /**
@@ -269,7 +273,7 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
  */
 FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
 
      // Main title
      title_(this,
@@ -344,10 +348,15 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	/** TRANSLATORS: Campaign scenario number table header */
 	table_.add_column(35, _("#"), number_tooltip, UI::Align::kLeft);
-	table_.add_column(table_.get_w() - 35, name_tooltip, name_tooltip, UI::Align::kLeft);
+	table_.add_column(
+	   0, name_tooltip, name_tooltip, UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_sort_column(0);
 
 	table_.focus();
+}
+
+void FullscreenMenuCampaignMapSelect::layout() {
+	// TODO(GunChleoc): Implement when we have box layout for the details.
 }
 
 std::string FullscreenMenuCampaignMapSelect::get_map() {

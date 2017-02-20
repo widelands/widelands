@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,7 @@ int main(int argc, char* argv[]) {
 		     << "') in outermost handler!\nThe exception said: " << e.what()
 		     << "\n\nThis should not happen. Please file a bug report on version " << build_id()
 		     << '(' << build_type() << ')' << ".\n"
-		     << "and remember to specify your operating system.\n\n"
-		     << flush;
+		     << "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 
 		return 1;
@@ -75,8 +74,7 @@ int main(int argc, char* argv[]) {
 		     << "') in outermost handler!\nThe exception said: " << e.what()
 		     << "\n\nThis should not happen. Please file a bug report on version " << build_id()
 		     << '(' << build_type() << ')' << ".\n"
-		     << "and remember to specify your operating system.\n\n"
-		     << flush;
+		     << "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 
 		return 1;

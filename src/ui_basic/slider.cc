@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -244,8 +244,9 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 
 		//  cursor position: align to integer value
 		calculate_cursor_position();
+		return true;
 	}
-	return true;
+	return false;
 }
 
 /**
@@ -508,10 +509,9 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             0,
             w - (w / labels_in.size()) + cursor_size,
             h -
-               UI::g_fh1
-						->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-                                        UI::Align::kLeft,
-                                        UI_FONT_SIZE_SMALL - 2))
+               UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+                                              UI::Align::kLeft,
+                                              UI_FONT_SIZE_SMALL - 2))
                   ->height() -
                2,
             0,
@@ -558,13 +558,13 @@ void DiscreteSlider::layout() {
 	uint32_t h = get_h();
 	assert(labels.size());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
-	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
-	                h -
-	                   UI::g_fh1
-								 ->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-	                                            UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	                      ->height() +
-	                   2);
+	slider.set_size(
+	   w - (w / labels.size()) + slider.cursor_size_,
+	   h -
+	      UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+	                                     UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
+	         ->height() +
+	      2);
 	Panel::layout();
 }
 }

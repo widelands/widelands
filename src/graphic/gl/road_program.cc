@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,12 +72,18 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels * scale;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels * scale;
 
-	assert(start.owner != nullptr);
+	assert(start.owner != nullptr || end.owner != nullptr);
+
+	Widelands::Player* visible_owner = start.owner;
+	if (start.owner == nullptr) {
+		visible_owner = end.owner;
+	}
+
 	const Image& texture =
 	   road_type == Widelands::RoadType::kNormal ?
-	      start.owner->tribe().road_textures().get_normal_texture(
+	      visible_owner->tribe().road_textures().get_normal_texture(
 	         start.geometric_coords, direction) :
-	      start.owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
+	      visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}

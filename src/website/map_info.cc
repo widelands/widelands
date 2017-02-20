@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,8 +88,8 @@ int main(int argc, char** argv) {
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
-		std::unique_ptr<Texture> minimap(draw_minimap(
-		   egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 
 		// Write minimap
 		{

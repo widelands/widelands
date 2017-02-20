@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,24 +26,34 @@
 #include "base/i18n.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
-#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 
+namespace {
+
+int base_height() {
+	return std::max(
+	   24,
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+}
+
+}  // namespace
+
 namespace UI {
 
-BaseDropdown::BaseDropdown(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string& label)
-   : UI::Panel(
-        parent,
-        x,
-        y,
-        w,
-        std::max(24,
-                 UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
-                       ->height() +
-                    2)),  // Height only to fit the button, so we can use this in Box layout.
+BaseDropdown::BaseDropdown(UI::Panel* parent,
+                           int32_t x,
+                           int32_t y,
+                           uint32_t w,
+                           uint32_t h,
+                           const std::string& label,
+                           const Image* background,
+                           const Image* button_background)
+   : UI::Panel(parent,
+               x,
+               y,
+               w,
+               base_height()),  // Height only to fit the button, so we can use this in Box layout.
      max_list_height_(h - 2 * get_h()),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
@@ -53,22 +63,15 @@ BaseDropdown::BaseDropdown(
                   0,
                   24,
                   get_h(),
-                  g_gr->images().get("images/ui_basic/but3.png"),
+                  button_background,
                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                   pgettext("dropdown", "Select Item")),
-     display_button_(&button_box_,
-                     "dropdown_label",
-                     0,
-                     0,
-                     w - 24,
-                     get_h(),
-                     g_gr->images().get("images/ui_basic/but1.png"),
-                     label),
+     display_button_(&button_box_, "dropdown_label", 0, 0, w - 24, get_h(), background, label),
      // Hook into parent so we can drop down outside the panel
-     list_(parent, x, y + get_h(), w, 0, ListselectLayout::kDropdown),
+     list_(parent, x, y + get_h(), w, 0, button_background, ListselectLayout::kDropdown),
      label_(label) {
 	list_.set_visible(false);
-	list_.set_background(g_gr->images().get("images/ui_basic/but1.png"));
+	list_.set_background(background);
 	display_button_.set_perm_pressed(true);
 	button_box_.add(&display_button_, UI::Align::kLeft);
 	button_box_.add(&push_button_, UI::Align::kLeft);
@@ -79,10 +82,27 @@ BaseDropdown::BaseDropdown(
 	list_.clicked.connect(boost::bind(&BaseDropdown::set_value, this));
 	list_.clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
+	layout();
 }
 
 BaseDropdown::~BaseDropdown() {
 	clear();
+}
+
+void BaseDropdown::set_height(int height) {
+	max_list_height_ = height - base_height();
+	layout();
+}
+
+void BaseDropdown::layout() {
+	const int base_h = base_height();
+	const int w = get_w();
+	button_box_.set_size(w, base_h);
+	display_button_.set_desired_size(w - 24, base_h);
+	int new_list_height =
+	   std::min(static_cast<int>(list_.size()) * list_.get_lineheight(), max_list_height_);
+	list_.set_size(w, new_list_height);
+	set_desired_size(w, base_h);
 }
 
 void BaseDropdown::add(const std::string& name,
@@ -90,12 +110,11 @@ void BaseDropdown::add(const std::string& name,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text) {
-	list_.set_size(
-	   list_.get_w(), std::min(list_.get_h() + list_.get_lineheight(), max_list_height_));
 	list_.add(name, value, pic, select_this, tooltip_text);
 	if (select_this) {
 		set_value();
 	}
+	layout();
 }
 
 bool BaseDropdown::has_selection() const {

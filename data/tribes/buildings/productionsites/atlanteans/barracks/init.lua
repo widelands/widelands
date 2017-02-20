@@ -10,56 +10,59 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 2,
-		planks = 2,
-		spidercloth = 3,
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 1,
-		planks = 1,
-		spidercloth = 1,
-	},
+      log = 2,
+      granite = 2,
+      planks = 2,
+      spidercloth = 3,
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 1,
+      planks = 1,
+      spidercloth = 1,
+   },
 
    animations = {
-		idle = {
-			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 44, 65 },
-		},
-		working = { -- TODO(GunChleoc): make animations
-			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 44, 65 },
-		}
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 44, 65 },
+      },
+      working = { -- TODO(GunChleoc): make animations
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 44, 65 },
+      }
+   },
 
-	aihints = {
-	},
+   aihints = {
+      forced_after = 1000,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
+   },
 
-	working_positions = {
-		atlanteans_trainer = 1
-	},
+   working_positions = {
+      atlanteans_trainer = 1
+   },
 
    inputs = {
       { name = "tabard", amount = 8 },
-      { name = "trident_light", amount = 8 }
+      { name = "trident_light", amount = 8 },
+      { name = "atlanteans_recruit", amount = 8 }
    },
-	outputs = {
-		"atlanteans_soldier",
+   outputs = {
+      "atlanteans_soldier",
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-			-- TODO(GunChleoc): this should cost us a carrier as well, or maybe a recruit.
-			descname = _"recruiting soldier",
-			actions = {
-				"sleep=15000",
-				"return=skipped unless economy needs atlanteans_soldier",
-				"consume=tabard trident_light",
-				"animate=working 15000",
-				"recruit=atlanteans_soldier"
-			}
-		},
-	}
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         descname = pgettext("atlanteans_building", "recruiting soldier"),
+         actions = {
+            "sleep=15000",
+            "return=skipped unless economy needs atlanteans_soldier",
+            "consume=tabard trident_light atlanteans_recruit",
+            "animate=working 15000",
+            "recruit=atlanteans_soldier"
+         }
+      },
+   }
 }

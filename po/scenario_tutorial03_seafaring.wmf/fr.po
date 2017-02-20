@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Gilles Aubert <Hellsprings@gmail.com>, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015
+# nicolas jardin <niko472006@sfr.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-14 20:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-11-30 12:41+0000\n"
+"PO-Revision-Date: 2016-11-30 23:59+0000\n"
+"Last-Translator: nicolas jardin <niko472006@sfr.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,9 +82,9 @@ msgstr "Pour tout ce que vous faites en haute mer, vous avez besoin d'un port su
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
-"tabs: wares and workers in the dock. They are waiting for a ship to "
-"transport them to another port. Currently, there are none because we have "
-"not yet built a second port. So let’s change this!"
+"tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
+"are waiting for a ship to transport them to another port. Currently, there "
+"are none because we have not yet built a second port. So let’s change this!"
 msgstr "En outre, les ports offrent la possibilité de transporter des marchandises par les navires. Lorsque vous cliquez sur le port que vous avez, vous remarquerez deux onglets supplémentaires: les marchandises et les travailleurs dans le dock. Ils attendent un navire pour les transporter vers un autre port. Actuellement, c'est infaisable car nous n'avons pas encore construit de second port. Nous allons changer ça!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55

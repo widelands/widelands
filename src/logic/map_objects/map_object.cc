@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -242,6 +242,11 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		if (icon_filename_.empty()) {
 			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
 		}
+	}
+	// TODO(GunChleoc): We can't scale down images in the font renderer yet, so we need an extra
+	// representative image if the animation has high resolution.
+	if (table.has_key("representative_image")) {
+		representative_image_filename_ = table.get_string("representative_image");
 	}
 }
 MapObjectDescr::~MapObjectDescr() {

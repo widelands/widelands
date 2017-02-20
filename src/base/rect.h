@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,7 @@ template <typename T> struct Rect {
 		return Vector2f(x + w / 2.f, y + h / 2.f);
 	}
 
-	template<typename Type>
-	Rect<Type> cast() const {
+	template <typename Type> Rect<Type> cast() const {
 		return Rect<Type>(Type(x), Type(y), Type(w), Type(h));
 	}
 

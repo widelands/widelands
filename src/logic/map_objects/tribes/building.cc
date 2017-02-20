@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
+#include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -38,6 +39,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -50,7 +52,9 @@
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
-
+/**
+  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
+  */
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
@@ -236,8 +240,9 @@ Building::Building(const BuildingDescr& building_descr)
 }
 
 Building::~Building() {
-	if (optionswindow_)
+	if (optionswindow_) {
 		hide_options();
+	}
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -439,10 +444,15 @@ applicable.
 void Building::destroy(EditorGameBase& egbase) {
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
+	Player* building_owner = get_owner();
+	const BuildingDescr* building_descr = &descr();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
-	if (fire)
-		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe);
+	if (fire) {
+		egbase.create_immovable_with_name(pos, "destroyed_building",
+		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
+		                                  building_descr);
+	}
 }
 
 std::string Building::info_string(const InfoStringFormat& format) {
@@ -462,12 +472,13 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
+		break;
 	}
 	return result;
 }
 
-WaresQueue& Building::waresqueue(DescriptionIndex const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const t) {
+	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*
@@ -586,7 +597,6 @@ bool Building::fetch_from_flag(Game&) {
 	return false;
 }
 
-
 void Building::draw(uint32_t gametime,
                     const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
@@ -608,7 +618,7 @@ Draw overlay help strings when enabled.
 */
 void Building::draw_info(const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
-								 const float scale,
+                         const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
 	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";

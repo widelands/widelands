@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,12 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
               0,
               2,
               g_gr->images().get("images/ui_basic/but1.png")),
-     ls_(this, HSPACING, VSPACING, LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
+     ls_(this,
+         HSPACING,
+         VSPACING,
+         LIST_WIDTH,
+         LIST_HEIGHT - editbox_.get_h(),
+         g_gr->images().get("images/ui_basic/but1.png")),
      name_label_(this, DESCRIPTION_X, 5, 0, 20, _("Map Name:"), UI::Align::kCenterLeft),
      mapname_(this, DESCRIPTION_X, 20, 0, 20, " ", UI::Align::kCenterLeft),
      gametime_label_(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::kCenterLeft),
