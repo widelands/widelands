@@ -83,8 +83,6 @@ Help Texts
 Each worker has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
 The function in this file returns a text that is used for the worker by the Tribal Encyclopedia.
 
-See also the helper functions in :ref:`lua_tribes_global_helptexts.lua`.
-
 .. function:: worker_helptext()
 
    Returns a localized string with the helptext for this worker type.
@@ -92,6 +90,6 @@ See also the helper functions in :ref:`lua_tribes_global_helptexts.lua`.
    message context. Example::
 
       function worker_helptext()
-          TRANSLATORS: Helptext for a worker: Armorsmith
+         -- TRANSLATORS: Helptext for a worker: Armorsmith
          return pgettext("atlanteans_worker", "Produces armor for the soldiers.")
       end
