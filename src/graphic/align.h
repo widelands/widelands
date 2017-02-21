@@ -24,6 +24,18 @@
 
 namespace UI {
 
+/**
+ * This Enum is a binary mix of one-dimensional and two-dimensional alignments.
+ *
+ * bits 0,1 values 0,1,2,3  are horizontal
+ * bits 2,3 values 0,4,8,12 are vertical
+ *
+ * mixed aligenments are results of a binary | operation.
+ */
+
+// TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
+// incomplete usage are useless.
+
 enum class Align {
 	kLeft = 0,
 	kHCenter = 1,

@@ -57,15 +57,8 @@ else
   exit 1;
 fi
 
-# Fix formatting
-utils/fix_formatting.py
-if [ $? -eq 0 ]
-then
-  echo "Fixed formatting";
-else
-  echo "Failed to fix formatting";
-  exit 1;
-fi
+# Fix formatting is being run by bunnybot
+# utils/fix_formatting.py
 
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.
