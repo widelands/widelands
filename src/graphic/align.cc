@@ -62,7 +62,7 @@ Align mirror_alignment(Align alignment) {
  * subsampled rendering - this can lead to blurry texts. That is why we
  * never do float divisions in this function.
  */
-void correct_for_align(HAlign align, uint32_t w, uint32_t /* h */, Vector2f* pt) {
+void correct_for_align(HAlign align, uint32_t w, Vector2f* pt) {
 
 	if (align & HAlign::kHCenter)
 		pt->x -= w / 2;
@@ -89,7 +89,7 @@ void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
 	}
 
 	if (align & HAlign::kHorizontal) {
-		correct_for_align(static_cast<HAlign>(align), w, h, pt);
+		correct_for_align(static_cast<HAlign>(align), w, pt);
 	}
 }
 

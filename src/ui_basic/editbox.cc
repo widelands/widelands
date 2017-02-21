@@ -24,6 +24,7 @@
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
 
+#include "graphic/align.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -68,7 +69,7 @@ struct EditBoxImpl {
 	int32_t scrolloffset;
 
 	/// Horizontal Alignment of the text. Vertical alignment is always centered.
-	/// Better: this is is the write directtion (Left to Right =^= kLeft, Right to Left =^= kRight)
+	/// Better: this is is the write direction (Left to Right =^= kLeft, Right to Left =^= kRight)
 	HAlign align; // so undefined in case kHCentered is used
 };
 
@@ -81,17 +82,16 @@ EditBox::EditBox(Panel* const parent,
                  const Image* background,
                  int font_size)
    : Panel(parent,
-           x,
-           y,
-           w,
-           h > 0 ? h :
+           x, y,
+           w, h > 0 ? h :
                    UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
                                                    font_size))
                          ->height() +
                       2 * margin_y),
-     m_(new EditBoxImpl),
-     history_active_(false),
-     history_position_(-1) {
+           m_(new EditBoxImpl),
+           history_active_(false),
+           history_position_(-1) 
+{
 	set_thinks(false);
 
 	m_->background = background;
@@ -353,8 +353,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 	return true;
 }
 
-void EditBox::draw(RenderTarget& odst) {
-	RenderTarget& dst = odst;
+void EditBox::draw(RenderTarget& dst) {
 
 	// Draw the background
 	dst.tile(Recti(0, 0, get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
@@ -391,19 +390,20 @@ void EditBox::draw(RenderTarget& odst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Vector2f point(kMarginX, get_h() / 2.f);
+	Vector2f point(kMarginX, get_h() / 2.0f);
 
 	if (m_->align & UI::HAlign::kRight) {
 		point.x += max_width;
 	}
 
-	UI::correct_for_align(m_->align, linewidth, lineheight, &point);
+	UI::correct_for_align(m_->align, linewidth, &point);
+    point.y -= lineheight >> 1;
 
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {
 		// Fix positioning for BiDi languages.
 		if (UI::g_fh1->fontset()->is_rtl()) {
-			point.x = 0.f;
+			point.x = 0.0f;
 		}
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency

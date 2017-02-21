@@ -406,7 +406,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 			point.x += maxw - picw;
 		}
 
-		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+		UI::correct_for_align(alignment, entry_text_im->width(), &point);
+		// TODO(klaus.halfmann) do we need? entry_text_im->height()
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
