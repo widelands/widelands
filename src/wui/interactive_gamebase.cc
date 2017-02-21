@@ -35,6 +35,7 @@
 #include "profile/profile.h"
 #include "wui/game_summary.h"
 #include "wui/shipwindow.h"
+#include "wui/unique_window_handler.h"
 
 namespace {
 
@@ -146,7 +147,12 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				ship->create_options_window(*this);
+				UI::UniqueWindow::Registry& registry = unique_windows().get_registry(
+					(boost::format("ship_%d") % ship->serial()).str());
+				registry.open_window = [this, &registry, ship] {
+						new ShipWindow(*this, registry, *ship);
+					};
+				registry.create();
 				return true;
 			}
 		}

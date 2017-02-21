@@ -28,8 +28,6 @@
 #include "graphic/diranimations.h"
 #include "logic/map_objects/bob.h"
 
-class ShipWindow;
-
 namespace Widelands {
 
 class Economy;
@@ -245,8 +243,6 @@ struct Ship : Bob {
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
 
-	void create_options_window(InteractiveGameBase&);
-
 protected:
 	void draw(const EditorGameBase&,
 	          const TextToDraw& draw_text,
@@ -256,8 +252,6 @@ protected:
 
 private:
 	friend struct Fleet;
-	// The destructor of the class has to set optionswindow_ to nullptr
-	friend class ::ShipWindow;
 
 	void wakeup_neighbours(Game&);
 
@@ -286,7 +280,6 @@ private:
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
 	std::string shipname_;
-	UI::Window* optionswindow_;
 
 	struct Expedition {
 		std::vector<Coords> seen_port_buildspaces;

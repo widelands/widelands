@@ -50,8 +50,8 @@ static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port
 
 using namespace Widelands;
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
-   : Window(&igb, "shipwindow", 0, 0, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
+ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship& ship)
+   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
 	init(false);
 	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
 	   [this](const Widelands::NoteShipWindow& note) {
@@ -72,11 +72,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
 			   }
 		   }
 		});
-}
-
-ShipWindow::~ShipWindow() {
-	assert(ship_.optionswindow_ == this);
-	ship_.optionswindow_ = nullptr;
 }
 
 void ShipWindow::init(bool avoid_fastclick) {
@@ -179,19 +174,6 @@ void ShipWindow::init(bool avoid_fastclick) {
 	if (!avoid_fastclick) {
 		move_out_of_the_way();
 		warp_mouse_to_fastclick_panel();
-	}
-}
-
-/**
- * Create window.
- */
-void Ship::create_options_window(InteractiveGameBase& parent) {
-	if (optionswindow_) {
-		if (optionswindow_->is_minimal())
-			optionswindow_->restore();
-		optionswindow_->move_to_top();
-	} else {
-		optionswindow_ = new ShipWindow(parent, *this);
 	}
 }
 
