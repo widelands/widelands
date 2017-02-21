@@ -33,7 +33,7 @@
 
 namespace UI {
 
-RichtextBlock::RichtextBlock() : image_align_(UI::Align::kLeft), text_align_(UI::Align::kLeft) {
+RichtextBlock::RichtextBlock() : image_align_(UI::HAlign::kLeft), text_align_(UI::HAlign::kLeft) {
 }
 
 RichtextBlock::RichtextBlock(const RichtextBlock& src) {
@@ -279,8 +279,9 @@ void TextParser::parse_text_attributes(std::string format, TextBlock& element) {
 	}
 }
 
-Align TextParser::set_align(const std::string& align) {
-	return align == "right" ? UI::Align::kRight : align == "center" ? UI::Align::kHCenter :
-	                                                                  UI::Align::kLeft;
+HAlign TextParser::set_align(const std::string& align) {
+	return align == "right"  ? UI::HAlign::kRight
+         : align == "center" ? UI::HAlign::kHCenter
+	     :                     UI::HAlign::kLeft;
 }
 }

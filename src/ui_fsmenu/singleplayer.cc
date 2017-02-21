@@ -27,31 +27,22 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Single Player"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Single Player"), UI::Align::kTopCenter),
 
      // Buttons
      new_game(&vbox_,
               "new_game",
-              0,
-              0,
-              butw_,
-              buth_,
+              0, 0, butw_, buth_,
               g_gr->images().get(button_background_),
               _("New Game")),
      campaign(&vbox_,
               "campaigns",
-              0,
-              0,
-              butw_,
-              buth_,
+              0, 0, butw_, buth_,
               g_gr->images().get(button_background_),
               _("Campaigns")),
      load_game(&vbox_,
                "load_game",
-               0,
-               0,
-               butw_,
-               buth_,
+               0, 0, butw_, buth_,
                g_gr->images().get(button_background_),
                _("Load Game")),
      back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
@@ -70,14 +61,14 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&new_game, UI::Align::kHCenter, true);
-	vbox_.add(&campaign, UI::Align::kHCenter, true);
+	vbox_.add(&new_game, UI::HAlign::kHCenter, true);
+	vbox_.add(&campaign, UI::HAlign::kHCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&load_game, UI::Align::kHCenter, true);
+	vbox_.add(&load_game, UI::HAlign::kHCenter, true);
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&back, UI::HAlign::kHCenter, true);
 
 	layout();
 }

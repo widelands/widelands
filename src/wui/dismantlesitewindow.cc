@@ -50,7 +50,7 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
 	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
 	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
-	box.add(progress_, UI::Align::kHCenter);
+	box.add(progress_, UI::HAlign::kHCenter);
 
 	box.add_space(8);
 

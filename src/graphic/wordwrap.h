@@ -51,7 +51,7 @@ struct WordWrap {
 
 	void draw(RenderTarget& dst,
 	          Vector2i where,
-	          Align align = UI::Align::kLeft,
+	          Align align = UI::Align::kTopLeft,
 	          uint32_t caret = std::numeric_limits<uint32_t>::max());
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;

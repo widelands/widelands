@@ -25,42 +25,59 @@
 namespace UI {
 
 /**
- * This Enum is a binary mix of one-dimensional and two-dimensional alignments.
+ * Horizontal alignment.
  *
- * bits 0,1 values 0,1,2,3  are horizontal
- * bits 2,3 values 0,4,8,12 are vertical
- *
- * mixed aligenments are results of a binary | operation.
+ * bits 0,1 values 0,1,2,3
  */
-
-// TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
-// incomplete usage are useless.
-
-enum class Align {
-	kLeft = 0,
-	kHCenter = 1,
-	kRight = 2,
-	kHorizontal = 3,
-
-	kTop = 0,
-	kVCenter = 4,
-	kBottom = 8,
-	kVertical = 12,
-
-	kTopLeft = 0,
-	kCenterLeft = Align::kVCenter,
-	kBottomLeft = Align::kBottom,
-
-	kTopCenter = Align::kHCenter,
-	kCenter = Align::kHCenter | Align::kVCenter,
-	kBottomCenter = Align::kHCenter | Align::kBottom,
-
-	kTopRight = Align::kRight,
-	kCenterRight = Align::kRight | Align::kVCenter,
-
-	kBottomRight = Align::kRight | Align::kBottom,
+enum HAlign {
+	kLeft       = 0x00,
+	kHCenter    = 0x01,
+	kRight      = 0x02,
+	kHorizontal = 0x03  // Use as bitmask to extract HALign values
 };
 
+extern HAlign mirror_alignment(HAlign alignment);
+
+/** Vertical alignment.
+ *
+ * bits 2,3 values 0,4,8,12
+ */
+
+enum VAlign {
+	kTop        = 0x00,
+	kVCenter    = 0x04,
+	kBottom     = 0x08,
+	kVertical   = 0x0C  // Use as bitmask to extract VALign values
+};
+
+/**
+ * This is a binary mix of HAlign and VAlign.
+ *
+ * mixed aligenments are results of a binary | operation,
+ * As C++ does not allow to do this by inheritance I must work around this.
+ */
+
+enum Align /* : public HAlign, VAlign */ {
+
+	kTopLeft        = kLeft | kTop,
+	kCenterLeft     = kLeft | VAlign::kVCenter,
+	kBottomLeft     = kLeft | kBottom,
+
+	kTopCenter      = kHCenter | kTop,
+	kCenter         = kHCenter | kVCenter,
+	kBottomCenter   = kHCenter | kBottom,
+
+	kTopRight       = kRight | kTop,
+	kCenterRight    = kRight | kVCenter,
+	kBottomRight    = kRight | kBottom,
+
+};
+
+inline bool isHCenter(HAlign align) {
+    return 0 != (align & HAlign::kHCenter);
+}
+
+/*
 inline Align operator&(Align a, Align b) {
 	return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
 }
@@ -68,8 +85,12 @@ inline Align operator&(Align a, Align b) {
 inline Align operator|(Align a, Align b) {
 	return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
 }
+*/
+
 
 Align mirror_alignment(Align alignment);
+
+void correct_for_align(HAlign, uint32_t w, uint32_t h, Vector2f* pt);
 void correct_for_align(Align, uint32_t w, uint32_t h, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

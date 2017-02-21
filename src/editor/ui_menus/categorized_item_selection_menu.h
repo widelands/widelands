@@ -85,18 +85,15 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      protect_against_recursive_select_(false),
      tab_panel_(this, 0, 0, g_gr->images().get("images/wui/window_background_dark.png")),
      current_selection_names_(this,
-                              0,
-                              0,
-                              20,
-                              20,
+                              0, 0, 20, 20,
                               "",
-                              UI::Align::kCenter,
+                              UI::HAlign::kHCenter,
                               g_gr->images().get("images/ui_basic/but1.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
 	current_selection_names_.set_background(
 	   g_gr->images().get("images/wui/window_background_dark.png"));
-	add(&tab_panel_, UI::Align::kCenter);
+	add(&tab_panel_, UI::HAlign::kHCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
@@ -120,7 +117,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
-				vertical->add(horizontal, UI::Align::kLeft);
+				vertical->add(horizontal, UI::HAlign::kLeft);
 				vertical->add_space(kSpacing);
 			}
 			assert(horizontal != nullptr);
@@ -129,13 +126,13 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
-			horizontal->add(cb, UI::Align::kLeft);
+			horizontal->add(cb, UI::HAlign::kLeft);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
 		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
-	add(&current_selection_names_, UI::Align::kCenter, true);
+	add(&current_selection_names_, UI::HAlign::kHCenter, true);
 	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
 	update_label();
 }

@@ -31,11 +31,12 @@ namespace UI {
 
 /**
  * A layouting panel that holds a number of child panels.
+ *
  * The Panels you add to the Box must be children of the Box.
  * The Box automatically resizes itself and positions the added children.
 */
 struct Box : public Panel {
-	enum {
+	enum { // TODO(klaus.halfmann): what exactly is the sematic here? compare HALign::kHorizontal / VAlign:kVertical
 		Horizontal = 0,
 		Vertical = 1,
 	};
@@ -54,7 +55,7 @@ struct Box : public Panel {
 		return items_.size();
 	}
 
-	void add(Panel* panel, UI::Align align, bool fullsize = false, bool fillspace = false);
+	void add(Panel* panel, UI::HAlign align = kLeft, bool fullsize = false, bool fillspace = false);
 	void add_space(uint32_t space);
 	void add_inf_space();
 	bool is_snap_target() const override {
@@ -90,7 +91,7 @@ private:
 		union {
 			struct {
 				Panel* panel;
-				UI::Align align;
+				UI::HAlign align;
 				bool fullsize;
 			} panel;
 			int space;

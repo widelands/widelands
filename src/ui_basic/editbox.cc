@@ -67,8 +67,9 @@ struct EditBoxImpl {
 	/// Current scrolling offset to the text anchor position, in pixels
 	int32_t scrolloffset;
 
-	/// Alignment of the text. Vertical alignment is always centered.
-	Align align;
+	/// Horizontal Alignment of the text. Vertical alignment is always centered.
+	/// Better: this is is the write directtion (Left to Right =^= kLeft, Right to Left =^= kRight)
+	HAlign align; // so undefined in case kHCentered is used
 };
 
 EditBox::EditBox(Panel* const parent,
@@ -98,7 +99,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->fontsize = font_size;
 
 	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
+	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::HAlign::kRight : UI::HAlign::kLeft;
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -392,7 +393,7 @@ void EditBox::draw(RenderTarget& odst) {
 
 	Vector2f point(kMarginX, get_h() / 2.f);
 
-	if (static_cast<int>(m_->align & UI::Align::kRight)) {
+	if (m_->align & UI::HAlign::kRight) {
 		point.x += max_width;
 	}
 
@@ -409,7 +410,7 @@ void EditBox::draw(RenderTarget& odst) {
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
 			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
-			if (static_cast<int>(m_->align & UI::Align::kRight)) {
+			if (m_->align & UI::HAlign::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point, entry_text_im,
 				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
@@ -448,11 +449,13 @@ void EditBox::check_caret() {
 
 	int32_t caretpos;
 
-	switch (m_->align & UI::Align::kHorizontal) {
-	case UI::Align::kRight:
+	switch (m_->align) {
+	  case kRight:
 		caretpos = get_w() - kMarginX + m_->scrolloffset - rightw;
 		break;
-	default:
+	  case kLeft:
+	  case kHCenter:
+	  case kHorizontal:
 		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
 
@@ -461,10 +464,10 @@ void EditBox::check_caret() {
 	else if (caretpos > get_w() - kMarginX)
 		m_->scrolloffset -= caretpos - get_w() + kMarginX + get_w() / 5;
 
-	if ((m_->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
+	if (m_->align == HAlign::kLeft) {
 		if (m_->scrolloffset > 0)
 			m_->scrolloffset = 0;
-	} else if ((m_->align & UI::Align::kHorizontal) == UI::Align::kRight) {
+	} else if (m_->align == HAlign::kRight) {
 		if (m_->scrolloffset < 0)
 			m_->scrolloffset = 0;
 	}

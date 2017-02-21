@@ -41,7 +41,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
    : Window(
         parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
      textarea_(new MultilineTextarea(
-        this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft)) {
+        this, 5, 5, width - 10, height - 30, std::string(), UI::HAlign::kLeft)) {
 	int margin = 5;
 
 	// Calculate sizes

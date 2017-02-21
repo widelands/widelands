@@ -37,7 +37,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
      listw_(get_w() * 9 / 16),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kHCenter),
+     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kTopCenter),
      opengames_(
         this, get_w() * 3 / 50, get_h() * 27 / 100, _("List of games in your local network:")),
      playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, _("Your nickname:")),

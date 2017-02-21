@@ -71,8 +71,8 @@ struct NodeStyle {
 	int font_style;
 
 	uint8_t spacing;
-	UI::Align halign;
-	UI::Align valign;
+	UI::HAlign halign;
+	UI::VAlign valign;
 	string reference;
 };
 
@@ -231,17 +231,17 @@ public:
 	void set_floating(Floating f) {
 		floating_ = f;
 	}
-	UI::Align halign() {
+	UI::HAlign halign() {
 		return halign_;
 	}
-	void set_halign(UI::Align ghalign) {
-		halign_ = ghalign;
+	void set_halign(UI::HAlign halign) {
+		halign_ = halign;
 	}
-	UI::Align valign() {
+	UI::VAlign valign() {
 		return valign_;
 	}
-	void set_valign(UI::Align gvalign) {
-		valign_ = gvalign;
+	void set_valign(UI::VAlign valign) {
+		valign_ = valign;
 	}
 	void set_x(int32_t nx) {
 		x_ = nx;
@@ -258,8 +258,8 @@ public:
 
 private:
 	Floating floating_;
-	UI::Align halign_;
-	UI::Align valign_;
+	UI::HAlign halign_;
+	UI::VAlign valign_;
 	int32_t x_, y_;
 };
 
@@ -353,8 +353,8 @@ Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shr
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
-			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
+		if (!rv->empty() && (*rv->rbegin())->halign() != UI::HAlign::kLeft) {
+			if ((*rv->rbegin())->halign() == UI::HAlign::kHCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
 			for (RenderNode* node : *rv) {
@@ -400,10 +400,10 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		// Go over again and adjust position for VALIGN
 		for (RenderNode* n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom) {
+			if (!space || n->valign() == UI::VAlign::kBottom) {
 				continue;
 			}
-			if (n->valign() == UI::Align::kCenter) {
+			if (n->valign() == UI::VAlign::kVCenter) {
 				space /= 2;
 			}
 			// Space can become negative, for example when we have mixed fontsets on the same line
@@ -982,22 +982,22 @@ public:
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
-				nodestyle_.halign = UI::Align::kRight;
+				nodestyle_.halign = UI::HAlign::kRight;
 			} else if (align == "center" || align == "middle") {
-				nodestyle_.halign = UI::Align::kCenter;
+				nodestyle_.halign = UI::HAlign::kHCenter;
 			} else {
-				nodestyle_.halign = UI::Align::kLeft;
+				nodestyle_.halign = UI::HAlign::kLeft;
 			}
 		}
 		nodestyle_.halign = mirror_alignment(nodestyle_.halign);
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
 			if (align == "bottom") {
-				nodestyle_.valign = UI::Align::kBottom;
+				nodestyle_.valign = UI::VAlign::kBottom;
 			} else if (align == "center" || align == "middle") {
-				nodestyle_.valign = UI::Align::kCenter;
+				nodestyle_.valign = UI::VAlign::kVCenter;
 			} else {
-				nodestyle_.valign = UI::Align::kTop;
+				nodestyle_.valign = UI::VAlign::kTop;
 			}
 		}
 		if (a.has("spacing"))
@@ -1214,9 +1214,9 @@ public:
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
-				if (rn->halign() == UI::Align::kCenter) {
+				if (rn->halign() == UI::HAlign::kHCenter) {
 					rn->set_x(rn->x() - extra_width / 2);
-				} else if (rn->halign() == UI::Align::kRight) {
+				} else if (rn->halign() == UI::HAlign::kRight) {
 					rn->set_x(rn->x() - extra_width);
 				}
 			}
@@ -1265,11 +1265,11 @@ public:
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
 			if (align == "top")
-				render_node_->set_valign(UI::Align::kTop);
+				render_node_->set_valign(UI::VAlign::kTop);
 			else if (align == "bottom")
-				render_node_->set_valign(UI::Align::kBottom);
+				render_node_->set_valign(UI::VAlign::kBottom);
 			else if (align == "center" || align == "middle")
-				render_node_->set_valign(UI::Align::kCenter);
+				render_node_->set_valign(UI::VAlign::kVCenter);
 		}
 	}
 
@@ -1377,8 +1377,8 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	                           RGBColor(255, 255, 0),
 	                           IFont::DEFAULT,
 	                           0,
-	                           UI::Align::kLeft,
-	                           UI::Align::kTop,
+	                           UI::HAlign::kLeft,
+	                           UI::VAlign::kTop,
 	                           ""};
 
 	RTTagHandler rtrn(

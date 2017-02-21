@@ -229,7 +229,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	UI::Button* button = new UI::Button(
 	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button, UI::Align::kLeft);
+	toolbar_.add(button);
 	if (window) {
 		window->assign_toggle_button(button);
 		registries_.push_back(*window);
@@ -372,7 +372,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		const Image* rendered_text = UI::g_fh1->render(as_condensed(
 		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
 		dst.blit(Vector2f((get_w() - rendered_text->width()) / 2, 5), rendered_text,
-		         BlendMode::UseAlpha, UI::Align::kLeft);
+		         BlendMode::UseAlpha, UI::Align::kTopLeft);
 	}
 }
 

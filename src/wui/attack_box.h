@@ -67,7 +67,7 @@ private:
 	// TODO(GunChleoc): This should also return a unique_ptr
 	UI::Textarea& add_text(UI::Box& parent,
 	                       std::string str,
-	                       UI::Align alignment = UI::Align::kTop,
+	                       UI::HAlign alignment = UI::HAlign::kLeft,
 	                       int fontsize = UI_FONT_SIZE_SMALL);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,

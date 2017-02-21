@@ -30,24 +30,18 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Choose game type"), UI::Align::kTopCenter),
 
      // Buttons
      metaserver(&vbox_,
                 "metaserver",
-                0,
-                0,
-                butw_,
-                buth_,
+                0, 0, butw_, buth_,
                 g_gr->images().get(button_background_),
                 _("Internet game")),
      showloginbox(nullptr),
      lan(&vbox_,
          "lan",
-         0,
-         0,
-         butw_,
-         buth_,
+         0, 0, butw_, buth_,
          g_gr->images().get(button_background_),
          _("LAN / Direct IP")),
      back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
@@ -64,10 +58,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&metaserver, UI::Align::kHCenter, true);
-	vbox_.add(&lan, UI::Align::kHCenter, true);
+	vbox_.add(&metaserver, UI::HAlign::kHCenter, true);
+	vbox_.add(&lan, UI::HAlign::kHCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&back, UI::HAlign::kHCenter, true);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);

@@ -32,8 +32,9 @@
 namespace UI {
 
 /**
- * Shows a standard messagebox. The message box can be used either as a modal
- * or as a non-modal dialog box.
+ * Shows a standard messagebox.
+ *
+ * The message box can be used either as a modal or as a non-modal dialog box.
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Title", "Text", MBoxType::kOK);
@@ -56,7 +57,7 @@ struct WLMessageBox : public Window {
 	             const std::string& caption,
 	             const std::string& text,
 	             MBoxType,
-	             Align = UI::Align::kCenter);
+	             HAlign = kHCenter);
 
 	boost::signals2::signal<void()> ok;
 	boost::signals2::signal<void()> cancel;

@@ -469,7 +469,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 
 	// We always render this so we can have a stable position for the statistics string.
 	const Image* rendered_census_info =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120);
+	   UI::g_fh1->render(as_condensed(census, UI::HAlign::kHCenter, font_size), 120);
 
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
 	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
@@ -482,7 +482,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
 		      .cast<float>();
 		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kLeft, font_size)),
+		          UI::g_fh1->render(as_condensed(statictics, UI::HAlign::kLeft, font_size)),
 		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }

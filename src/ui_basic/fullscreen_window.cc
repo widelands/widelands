@@ -93,14 +93,14 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 	}
 
 	// Frame edges
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile), UI::Align::kTopLeft,
-	           UI::Align::kVertical);
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile), UI::Align::kTopRight,
-	           UI::Align::kVertical);
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile), UI::Align::kTopLeft,
-	           UI::Align::kHorizontal);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
+				UI::Align::kTopLeft, UI::VAlign::kVertical);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile),
+				UI::Align::kTopRight, UI::VAlign::kVertical);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile),
+				UI::Align::kTopLeft, UI::HAlign::kHorizontal);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeBottomTile),
-	           UI::Align::kBottomLeft, UI::Align::kHorizontal);
+	           UI::Align::kBottomLeft, UI::HAlign::kHorizontal);
 
 	// Frame corners
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft), UI::Align::kTopLeft);
@@ -112,27 +112,34 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 	   dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), UI::Align::kBottomRight);
 }
 
+/**
+ *
+ * tiling may be a bitwiswe combination of kHorizontal or kVertial.
+ */
+
 void FullscreenWindow::blit_image(RenderTarget& dst,
                                   const Image* image,
                                   UI::Align align,
-                                  UI::Align tiling) {
+                                  int tiling) {
 	if (image) {
 		int x = 0;
 		int y = 0;
-		if (static_cast<int>(align & UI::Align::kRight)) {
+		// Check HAlign
+		if (align & UI::HAlign::kRight) {
 			x = get_w() - image->width();
-		} else if (static_cast<int>(align & UI::Align::kHCenter)) {
+		} else if (align & UI::HAlign::kHCenter) {
 			x = (get_w() - image->width()) / 2;
 		}
-		if (static_cast<int>(align & UI::Align::kBottom)) {
+		// Check VAlign
+		if (align & UI::VAlign::kBottom) {
 			y = get_h() - image->height();
-		} else if (static_cast<int>(align & UI::Align::kVCenter)) {
+		} else if (align & UI::VAlign::kVCenter) {
 			y = (get_h() - image->height()) / 2;
 		}
-		if (static_cast<int>(tiling & (UI::Align::kVertical | UI::Align::kHorizontal))) {
-			const int w = (static_cast<int>(tiling & UI::Align::kVertical)) ? image->width() : get_w();
-			const int h =
-			   (static_cast<int>(tiling & UI::Align::kHorizontal)) ? image->height() : get_h();
+
+		if (tiling & (UI::VAlign::kVertical | UI::HAlign::kHorizontal)) {
+			const int w = (tiling & UI::VAlign::kVertical)   ? image->width() : get_w();
+			const int h = (tiling & UI::HAlign::kHorizontal) ? image->height() : get_h();
 			dst.tile(Recti(x, y, w, h), image, Vector2i(0, 0));
 		} else {
 			dst.blit(Vector2f(x, y), image);

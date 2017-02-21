@@ -97,7 +97,7 @@ Table<void*>::~Table() {
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
-                              Align const alignment,
+                              HAlign const alignment,
                               TableColumnType column_type,
                               bool const is_checkbox_column) {
 	//  If there would be existing entries, they would not get the new column.
@@ -259,7 +259,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = columns_[i];
 			int const curw = column.width;
-			Align alignment = mirror_alignment(column.alignment);
+			HAlign alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
@@ -289,7 +289,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						}
 					}
 
-					if (static_cast<int>(alignment & UI::Align::kRight)) {
+					if (alignment & UI::HAlign::kRight) { // TODO(klaus.halfmann): what about kCenter?
 						draw_x += curw - blit_width;
 					}
 
@@ -306,7 +306,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						} else {
 							draw_x = point.x + (curw - picw) / 2.f;
 						}
-					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
+					} else if (alignment & UI::HAlign::kRight) {
 						draw_x += curw - picw;
 					}
 					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
@@ -322,9 +322,9 @@ void Table<void*>::draw(RenderTarget& dst) {
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
-			if (static_cast<int>(alignment & UI::Align::kRight)) {
+			if (alignment & UI::HAlign::kRight) {
 				point.x += curw - 2 * picw;
-			} else if (static_cast<int>(alignment & UI::Align::kHCenter)) {
+			} else if (alignment & UI::HAlign::kHCenter) {
 				point.x += (curw - picw) / 2.f;
 			}
 
@@ -339,7 +339,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset()->is_rtl()) {
-					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
+					point.x = (alignment & UI::HAlign::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
 				if (i18n::has_rtl_character(

@@ -40,7 +40,7 @@ LoginBox::LoginBox(Panel& parent)
 
 	pwd_warning = new UI::MultilineTextarea(this, margin, 65, 505, 50,
 	                                        _("WARNING: Password will be shown and saved readable!"),
-	                                        UI::Align::kLeft);
+	                                        UI::HAlign::kLeft);
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);
@@ -69,7 +69,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->focus();
 }
 
-/// called, if "login" is pressed
+/**
+ * called, if "login" is pressed.
+ */
 void LoginBox::clicked_ok() {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {

@@ -24,55 +24,72 @@
 
 namespace UI {
 
-// This mirrors the horizontal alignment for RTL languages.
-Align mirror_alignment(Align alignment) {
+/**
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
+ */
+HAlign mirror_alignment(HAlign alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
-		case Align::kBottomLeft:
-			alignment = Align::kBottomRight;
-			break;
-		case Align::kBottomRight:
-			alignment = Align::kBottomLeft;
-			break;
-		case Align::kCenterLeft:
-			alignment = Align::kCenterRight;
-			break;
-		case Align::kCenterRight:
-			alignment = Align::kCenterLeft;
-			break;
-		case Align::kTopLeft:
-			alignment = Align::kTopRight;
-			break;
-		case Align::kTopRight:
-			alignment = Align::kTopLeft;
-			break;
-		default:
-			break;
+			case HAlign::kLeft:    return HAlign::kRight;
+			case HAlign::kRight:   return HAlign::kLeft;
+			case HAlign::kHCenter: 
+			case HAlign::kHorizontal: ; // no change
 		}
 	}
 	return alignment;
 }
 
+/**
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
+ */
+Align mirror_alignment(Align alignment) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
+		int valign = alignment & VAlign::kVertical; // Using VALign correctly will reuslt in more cast only ...
+		return static_cast<Align>(valign | mirror_alignment(static_cast<HAlign>(alignment & HAlign::kHorizontal)));
+	}
+	return alignment;
+}
+
+/**
+ * Align pt horizontly to match align based on width w and height h.
+ *
+ * When correcting for align, we never move from pixel boundaries to
+ * sub-pixels, because this might lead from pixel-perfect rendering to
+ * subsampled rendering - this can lead to blurry texts. That is why we
+ * never do float divisions in this function.
+ */
+void correct_for_align(HAlign align, uint32_t w, uint32_t /* h */, Vector2f* pt) {
+
+	if (align & HAlign::kHCenter)
+		pt->x -= w / 2;
+	else if (align & HAlign::kRight)
+		pt->x -= w;
+}
+
+/**
+ * Align pt to match align based on width w and height h.
+ *
+ * When correcting for align, we never move from pixel boundaries to
+ * sub-pixels, because this might lead from pixel-perfect rendering to
+ * subsampled rendering - this can lead to blurry texts. That is why we
+ * never do float divisions in this function.
+ */
 void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
-	// When correcting for align, we never move from pixel boundaries to
-	// sub-pixels, because this might lead from pixel-perfect rendering to
-	// subsampled rendering - this can lead to blurry texts. That is why we
-	// never do float divisions in this function.
 
 	// Vertical Align
-	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
-		if (static_cast<int>(align & Align::kVCenter))
-			pt->y -= h / 2;
+	if (align & VAlign::kVertical) {
+		if (align & VAlign::kVCenter)
+			pt->y -= h >> 1;
 		else
 			pt->y -= h;
 	}
 
-	// Horizontal Align
-	if ((align & Align::kHorizontal) != Align::kLeft) {
-		if (static_cast<int>(align & Align::kHCenter))
-			pt->x -= w / 2;
-		else if (static_cast<int>(align & Align::kRight))
-			pt->x -= w;
+	if (align & HAlign::kHorizontal) {
+		correct_for_align(static_cast<HAlign>(align), w, h, pt);
 	}
 }
 

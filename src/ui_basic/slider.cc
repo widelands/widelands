@@ -510,10 +510,9 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             w - (w / labels_in.size()) + cursor_size,
             h -
                UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-                                              UI::Align::kLeft,
+                                              UI::HAlign::kLeft,
                                               UI_FONT_SIZE_SMALL - 2))
-                  ->height() -
-               2,
+                  ->height() - 2,
             0,
             labels_in.size() - 1,
             value_,
@@ -540,8 +539,8 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		dst.blit(Vector2f(gap_1 + i * gap_n, get_h()),
 		         UI::g_fh1->render(
-		            as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2)),
-		         BlendMode::UseAlpha, UI::Align::kBottomCenter);
+		            as_condensed(labels[i], UI::HAlign::kHCenter, UI_FONT_SIZE_SMALL - 2)),
+		         BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }
 
@@ -560,9 +559,8 @@ void DiscreteSlider::layout() {
 	   w - (w / labels.size()) + slider.cursor_size_,
 	   h -
 	      UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
-	                                     UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))
-	         ->height() +
-	      2);
+	                                     UI::HAlign::kLeft, UI_FONT_SIZE_SMALL - 2))
+	         ->height() + 2);
 	Panel::layout();
 }
 }

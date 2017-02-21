@@ -85,7 +85,7 @@ private:
 	void blit_image(RenderTarget& dst,
 	                const Image* image,
 	                UI::Align align,
-	                UI::Align tiling = UI::Align::kLeft);
+	                int tiling = 0);
 
 	const std::string background_image_;
 	/// These overlay images will be blitted in the order they were added and according to the given

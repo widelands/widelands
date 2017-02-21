@@ -52,7 +52,7 @@ struct MultilineTextarea : public Panel {
 	   const uint32_t w,
 	   const uint32_t h,
 	   const std::string& text = std::string(),
-	   const Align = UI::Align::kLeft,
+	   const HAlign = HAlign::kLeft,
 	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
@@ -95,7 +95,7 @@ private:
 
 	std::string text_;
 	RGBColor color_;
-	Align align_;
+	HAlign align_;
 
 	bool force_new_renderer_;
 	bool use_old_renderer_;

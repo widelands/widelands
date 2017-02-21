@@ -371,11 +371,11 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
      building_(building),
      soldierpanel_(*this, igb.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
-	add(&soldierpanel_, UI::Align::kHCenter);
+	 add(&soldierpanel_, UI::HAlign::kHCenter);
 
 	add_space(2);
 
-	add(&infotext_, UI::Align::kHCenter);
+	add(&infotext_, UI::HAlign::kHCenter);
 
 	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
@@ -406,7 +406,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		                               _("Prefer Heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button) {
-			buttons->add(button, UI::Align::kLeft);
+			buttons->add(button);
 			button = button->next_button();
 		}
 
@@ -422,9 +422,9 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building), UI::Align::kRight);
+	buttons->add(create_soldier_capacity_control(*buttons, igb, building), UI::HAlign::kRight);
 
-	add(buttons, UI::Align::kHCenter, true);
+	add(buttons, UI::HAlign::kHCenter, true);
 }
 
 SoldierControl& SoldierList::soldiers() const {

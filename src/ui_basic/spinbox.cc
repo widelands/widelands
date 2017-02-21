@@ -110,9 +110,9 @@ SpinBox::SpinBox(Panel* const parent,
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
 	sbi_->label =
-	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft, button_background,
+	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::HAlign::kLeft, button_background,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	box_->add(sbi_->label, UI::Align::kHCenter);
+	box_->add(sbi_->label, UI::HAlign::kHCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
 
@@ -148,15 +148,15 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
-		box_->add(sbi_->button_minus, UI::Align::kTop);
-		box_->add(sbi_->text, UI::Align::kTop);
-		box_->add(sbi_->button_plus, UI::Align::kTop);
-		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
+		box_->add(sbi_->button_ten_minus, UI::HAlign::kLeft);
+		box_->add(sbi_->button_minus,     UI::HAlign::kLeft);
+		box_->add(sbi_->text,             UI::HAlign::kLeft);
+		box_->add(sbi_->button_plus,      UI::HAlign::kLeft);
+		box_->add(sbi_->button_ten_plus,  UI::HAlign::kLeft);
 	} else {
-		box_->add(sbi_->button_minus, UI::Align::kHCenter);
-		box_->add(sbi_->text, UI::Align::kHCenter);
-		box_->add(sbi_->button_plus, UI::Align::kHCenter);
+		box_->add(sbi_->button_minus, UI::HAlign::kHCenter);
+		box_->add(sbi_->text,         UI::HAlign::kHCenter);
+		box_->add(sbi_->button_plus,  UI::HAlign::kHCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(

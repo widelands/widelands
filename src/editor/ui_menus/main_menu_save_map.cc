@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::kLeft) {
+                    UI::Align::kTopLeft) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button

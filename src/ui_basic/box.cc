@@ -252,7 +252,7 @@ void Box::scrollbar_moved(int32_t) {
  * This can be used to make buttons fill a box completely.
  *
  */
-void Box::add(Panel* const panel, UI::Align const align, bool fullsize, bool fillspace) {
+void Box::add(Panel* const panel, UI::HAlign const align, bool fullsize, bool fillspace) {
 	Item it;
 
 	it.type = Item::ItemPanel;
@@ -376,15 +376,15 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			maxbreadth = get_inner_w();
 		}
 		switch (it.u.panel.align) {
-		case UI::Align::kHCenter:
+		  case UI::HAlign::kHCenter:
 			breadth = (maxbreadth - breadth) / 2;
 			break;
 
-		case UI::Align::kRight:
+		  case UI::HAlign::kRight:
 			breadth = maxbreadth - breadth;
 			break;
-		case UI::Align::kLeft:
-		default:
+		  case UI::HAlign::kLeft:
+		  case UI::HAlign::kHorizontal: // should not be used but makes the enum complete
 			breadth = 0;
 		}
 
