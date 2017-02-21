@@ -208,6 +208,8 @@ wl_library(wui
     productionsitewindow.h
     shipwindow.cc
     shipwindow.h
+    ship_statistics_menu.cc
+    ship_statistics_menu.h
     soldiercapacitycontrol.cc
     soldiercapacitycontrol.h
     soldierlist.cc
