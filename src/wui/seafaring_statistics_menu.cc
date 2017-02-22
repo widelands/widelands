@@ -32,7 +32,6 @@
 #include "wui/shipwindow.h"
 #include "wui/watchwindow.h"
 
-// NOCOM documentation
 inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
@@ -369,16 +368,10 @@ void SeafaringStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRec
 	er.set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
 }
 
-/*
- * Something has been selected
- */
 void SeafaringStatisticsMenu::selected() {
 	set_buttons_enabled();
 }
 
-/**
- * a message was double clicked
- */
 void SeafaringStatisticsMenu::double_clicked() {
 	if (table_.has_selection()) {
 		center_view();
@@ -391,9 +384,6 @@ void SeafaringStatisticsMenu::set_buttons_enabled() {
 	watchbtn_.set_enabled(table_.has_selection());
 }
 
-/**
- * Handle message menu hotkeys.
- */
 bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
@@ -486,9 +476,6 @@ void SeafaringStatisticsMenu::open_ship_window() {
 	}
 }
 
-/**
- * Show only the ships that have the given status
- */
 void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	switch (status) {
 	case ShipFilterStatus::kExpeditionWaiting:
@@ -523,9 +510,6 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	fill_table();
 }
 
-/**
- * Helper for filter_ships
- */
 void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
                                                          ShipFilterStatus status) {
 	set_filter_ships_tooltips();
@@ -550,9 +534,6 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 	}
 }
 
-/**
- * Helper for filter_ships
- */
 void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))

@@ -32,14 +32,17 @@
 
 class InteractivePlayer;
 
-///  Shows a list of the ships owned by the interactive player.
+/// Shows a list of the ships owned by the interactive player with filtering and navigation options.
 struct SeafaringStatisticsMenu : public UI::UniqueWindow {
 	SeafaringStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
-	bool handle_key(bool down, SDL_Keysym code) override;
-
 private:
+	/// For identifying the columns in the table.
 	enum Cols { ColName, ColStatus };
+	/**
+	 * A list of ship status that we can filter for. This differs a bit from that the Widelands::Ship
+	 * class has, so we define our own.
+	 * */
 	enum class ShipFilterStatus {
 		kIdle,
 		kShipping,
@@ -49,9 +52,13 @@ private:
 		kExpeditionColonizing,
 		kAll
 	};
+
+	/// Returns the localized strings that we use to display the 'status' in the table.
 	const std::string status_to_string(ShipFilterStatus status) const;
+	/// Returns the icon that we use to represent the 'status' in the table and on the filter buttons.
 	const Image* status_to_image(ShipFilterStatus status) const;
 
+	/// The dataset that we need to display ships in the table.
 	struct ShipInfo {
 		ShipInfo(const std::string& init_name,
 		         const ShipFilterStatus init_status,
@@ -74,26 +81,50 @@ private:
 		const Widelands::Serial serial;
 	};
 
+	/// Creates our dataset from a 'ship'
 	const ShipInfo* create_shipinfo(const Widelands::Ship& ship) const;
+	/// Uses the 'serial' to identify and get a ship from the game.
 	Widelands::Ship* serial_to_ship(Widelands::Serial serial) const;
 
+	/// Convenience function to upcast the panel's parent.
 	InteractivePlayer& iplayer() const;
+
+	/// A ship was selected, so enable the navigation buttons.
 	void selected();
+	/// A ship was double clicked. Centers main view on ship.
 	void double_clicked();
+	/// Handle filter and navigation hotkeys
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+	/// Enables the navigation buttons if a ship is selected, disables them otherwise.
 	void set_buttons_enabled();
-
-	void fill_table();
+	/// Center the mapview on the currently selected ship.
 	void center_view();
+	/// Follow the selected ship in a watch window.
 	void watch_ship();
+	/// Center the mapview on the currently selected ship and open its window.
 	void open_ship_window();
-	/// Updates the status for the ship. If the ship is new, adds it to the table.
-	void update_ship(const Widelands::Ship&);
-	void remove_ship(Widelands::Serial serial);
-	void set_entry_record(UI::Table<uintptr_t>::EntryRecord*, const ShipInfo& info);
-	void update_entry_record(UI::Table<uintptr_t>::EntryRecord& er, const ShipInfo&);
 
+	/**
+	 * Updates the status for the ship. If the ship is new and satisfies the 'ship_filter_',
+	 * adds it to the table and data. If it doesn't satisfy the 'ship_filter_', removes the ship
+	 * instead.
+	 * */
+	void update_ship(const Widelands::Ship&);
+	/// If we listed the ship, remove it from table and data.
+	void remove_ship(Widelands::Serial serial);
+	/// Sets the contents for the entry record in the table.
+	void set_entry_record(UI::Table<uintptr_t>::EntryRecord*, const ShipInfo& info);
+	/// Updates the ship status display in the table.
+	void update_entry_record(UI::Table<uintptr_t>::EntryRecord& er, const ShipInfo&);
+	/// Rebuilds data and table with all ships that satisfy the current 'ship_filter_'.
+	void fill_table();
+
+	/// Show only the ships that have the given status. Toggle the appropriate buttons.
 	void filter_ships(ShipFilterStatus status);
+	/// Helper for filter_ships
 	void toggle_filter_ships_button(UI::Button&, ShipFilterStatus);
+	/// Helper for filter_ships
 	void set_filter_ships_tooltips();
 
 	UI::Box main_box_;
