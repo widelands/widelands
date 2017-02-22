@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-11 21:04+0000\n"
+"POT-Creation-Date: 2017-02-14 20:31+0000\n"
+"PO-Revision-Date: 2017-02-16 19:47+0000\n"
 "Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -840,7 +840,7 @@ msgstr "Многопользовательская карта для сраже�
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"
-msgstr "Вулканическая зима."
+msgstr "Вулканическая зима"
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:10
 msgid ""

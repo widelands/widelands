@@ -90,7 +90,11 @@ void ExpeditionBootstrap::start() {
 	Notifications::publish(NoteBuilding(warehouse->serial(), NoteBuilding::Action::kChanged));
 }
 
+/**
+ * Cancel the Expediton by putting back all wares and workers.
+‚ */
 void ExpeditionBootstrap::cancel(Game& game) {
+
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
