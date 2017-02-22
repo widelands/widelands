@@ -38,6 +38,7 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
      player_(plr),
      windows_(windows),
      box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 5) {
+	const bool is_seafaring = plr.egbase().map().allows_seafaring();
 	add_button("wui/menus/menu_general_stats", "general_stats", _("General Statistics"),
 	           &windows_.general_stats);
 	add_button(
@@ -45,10 +46,12 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	add_button("wui/menus/menu_building_stats", "building_stats", _("Building Statistics"),
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
-	add_button("wui/ship/ship_scout_ne", "ship_stats", _("Ship Statistics"),
-				  &windows_.ship_stats);
+	if (is_seafaring) {
+		add_button("wui/ship/ship_scout_ne", "ship_stats", _("Ship Statistics"),
+					  &windows_.ship_stats);
+	}
 	box_.set_pos(Vector2i(10, 10));
-	box_.set_size((34 + 5) * 5, 34);
+	box_.set_size((34 + 5) * (is_seafaring ? 5 : 4), 34);
 	set_inner_size(box_.get_w() + 20, box_.get_h() + 20);
 
 	windows_.general_stats.open_window = [this] {
@@ -60,10 +63,12 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	windows_.building_stats.open_window = [this] {
 		new BuildingStatisticsMenu(player_, windows_.building_stats);
 	};
-	windows_.ship_stats.open_window = [this] {
-		new ShipStatisticsMenu(player_, windows_.ship_stats);
-	};
 	// The stock window is defined in InteractivePlayer because of the keyboard shortcut.
+	if (is_seafaring) {
+		windows_.ship_stats.open_window = [this] {
+			new ShipStatisticsMenu(player_, windows_.ship_stats);
+		};
+	}
 
 	if (get_usedefaultpos())
 		center_to_parent();
