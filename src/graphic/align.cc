@@ -34,7 +34,7 @@ HAlign mirror_alignment(HAlign alignment) {
 		switch (alignment) {
 			case HAlign::kLeft:    return HAlign::kRight;
 			case HAlign::kRight:   return HAlign::kLeft;
-			case HAlign::kHCenter: 
+			case HAlign::kHCenter:
 			case HAlign::kHorizontal: ; // no change
 		}
 	}
