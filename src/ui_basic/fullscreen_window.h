@@ -77,6 +77,9 @@ protected:
 private:
 	/// Returns the image for the given frame position.
 	const Image* get_frame_image(FullscreenWindow::Frames id) const;
+
+    enum Tiling { kNone, kHorizontal, kVertical };
+
 	/**
 	 * Blit an image according to the given 'align'.
 	 * If 'tiling' is set to 'UI::Align::kVertical' or 'UI::Align::kHorizontal', the image will be
@@ -85,7 +88,7 @@ private:
 	void blit_image(RenderTarget& dst,
 	                const Image* image,
 	                UI::Align align,
-	                int tiling = 0);
+	                Tiling tiling = kNone);
 
 	const std::string background_image_;
 	/// These overlay images will be blitted in the order they were added and according to the given

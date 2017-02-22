@@ -375,6 +375,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = it.u.panel.panel->get_inner_w();
 			maxbreadth = get_inner_w();
 		}
+
 		switch (it.u.panel.align) {
 		  case UI::HAlign::kHCenter:
 			breadth = (maxbreadth - breadth) / 2;
@@ -384,7 +385,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = maxbreadth - breadth;
 			break;
 		  case UI::HAlign::kLeft:
-		  case UI::HAlign::kHorizontal: // should not be used but makes the enum complete
 			breadth = 0;
 		}
 

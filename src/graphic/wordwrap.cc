@@ -311,7 +311,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	VAlign valign = static_cast<VAlign>(align & UI::VAlign::kVertical);
+	VAlign valign = Aligner::sliceV(align);
 	if (valign != UI::VAlign::kTop) {
 		uint32_t h = height();
 

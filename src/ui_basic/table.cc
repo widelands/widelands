@@ -334,7 +334,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				text_width = text_width + scrollbar_->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, &point);
-			// TODO (klaus.halfmann): Check if we need entry_text_im->height() 
+			// TODO(klaus.halfmann): Check if we need entry_text_im->height()
 
 			// Crop to column width while blitting
 			if ((curw + picw) < text_width) {

@@ -94,33 +94,25 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 
 	// Frame edges
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
-				UI::Align::kTopLeft, UI::VAlign::kVertical);
+				UI::Align::kTopLeft, kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile),
-				UI::Align::kTopRight, UI::VAlign::kVertical);
+				UI::Align::kTopRight, kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile),
-				UI::Align::kTopLeft, UI::HAlign::kHorizontal);
+				UI::Align::kTopLeft, kHorizontal);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeBottomTile),
-	           UI::Align::kBottomLeft, UI::HAlign::kHorizontal);
+	           UI::Align::kBottomLeft, kHorizontal);
 
 	// Frame corners
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft), UI::Align::kTopLeft);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight), UI::Align::kTopRight);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft), UI::Align::kBottomLeft);
-	blit_image(
-	   dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), UI::Align::kBottomRight);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft),     UI::Align::kTopLeft);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight),    UI::Align::kTopRight);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft),  UI::Align::kBottomLeft);
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), UI::Align::kBottomRight);
 }
-
-/**
- *
- * tiling may be a bitwiswe combination of kHorizontal or kVertial.
- */
 
 void FullscreenWindow::blit_image(RenderTarget& dst,
                                   const Image* image,
                                   UI::Align align,
-                                  int tiling) {
+                                  Tiling tiling) {
 	if (image) {
 		int x = 0;
 		int y = 0;
@@ -137,9 +129,9 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 			y = (get_h() - image->height()) / 2;
 		}
 
-		if (tiling & (UI::VAlign::kVertical | UI::HAlign::kHorizontal)) {
-			const int w = (tiling & UI::VAlign::kVertical)   ? image->width() : get_w();
-			const int h = (tiling & UI::HAlign::kHorizontal) ? image->height() : get_h();
+		if (tiling != kNone) {
+			const int w = (tiling == kVertical)   ? image->width() : get_w();
+			const int h = (tiling == kHorizontal) ? image->height() : get_h();
 			dst.tile(Recti(x, y, w, h), image, Vector2i(0, 0));
 		} else {
 			dst.blit(Vector2f(x, y), image);

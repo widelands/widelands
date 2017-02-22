@@ -34,8 +34,7 @@ HAlign mirror_alignment(HAlign alignment) {
 		switch (alignment) {
 			case HAlign::kLeft:    return HAlign::kRight;
 			case HAlign::kRight:   return HAlign::kLeft;
-			case HAlign::kHCenter:
-			case HAlign::kHorizontal: ; // no change
+			case HAlign::kHCenter: ;  // no change
 		}
 	}
 	return alignment;
@@ -48,8 +47,8 @@ HAlign mirror_alignment(HAlign alignment) {
  */
 Align mirror_alignment(Align alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
-		int valign = alignment & VAlign::kVertical; // Using VALign correctly will reuslt in more cast only ...
-		return static_cast<Align>(valign | mirror_alignment(static_cast<HAlign>(alignment & HAlign::kHorizontal)));
+		VAlign valign = Aligner::sliceV(alignment);
+		return Aligner::merge(mirror_alignment(Aligner::sliceH(alignment)), valign);
 	}
 	return alignment;
 }
@@ -64,9 +63,9 @@ Align mirror_alignment(Align alignment) {
  */
 void correct_for_align(HAlign align, uint32_t w, Vector2f* pt) {
 
-	if (align & HAlign::kHCenter)
+	if (align == HAlign::kHCenter)
 		pt->x -= w / 2;
-	else if (align & HAlign::kRight)
+	else if (align == HAlign::kRight)
 		pt->x -= w;
 }
 
@@ -81,14 +80,14 @@ void correct_for_align(HAlign align, uint32_t w, Vector2f* pt) {
 void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
 
 	// Vertical Align
-	if (align & VAlign::kVertical) {
+	if (align & Aligner::kVertical) {
 		if (align & VAlign::kVCenter)
 			pt->y -= h >> 1;
 		else
 			pt->y -= h;
 	}
 
-	if (align & HAlign::kHorizontal) {
+	if (align & Aligner::kHorizontal) {
 		correct_for_align(static_cast<HAlign>(align), w, pt);
 	}
 }

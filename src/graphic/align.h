@@ -33,7 +33,6 @@ enum HAlign {
 	kLeft       = 0x00,
 	kHCenter    = 0x01,
 	kRight      = 0x02,
-	kHorizontal = 0x03  // Use as bitmask to extract HALign values
 };
 
 extern HAlign mirror_alignment(HAlign alignment);
@@ -47,7 +46,6 @@ enum VAlign {
 	kTop        = 0x00,
 	kVCenter    = 0x04,
 	kBottom     = 0x08,
-	kVertical   = 0x0C  // Use as bitmask to extract VALign values
 };
 
 /**
@@ -73,19 +71,26 @@ enum Align /* : public HAlign, VAlign */ {
 
 };
 
+/*
 inline bool isHCenter(HAlign align) {
     return 0 != (align & HAlign::kHCenter);
 }
-
-/*
-inline Align operator&(Align a, Align b) {
-	return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
-}
-
-inline Align operator|(Align a, Align b) {
-	return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
-}
 */
+
+/**
+ * Helper class to carry Alignment related functions.
+ */
+class Aligner {
+
+  public:
+	static const int kHorizontal = 0x03;  // Use as bitmask to extract HALign values
+	static const int kVertical   = 0x0C;  // Use as bitmask to extract VALign values
+
+    static VAlign sliceV(Align align) { return static_cast<VAlign>(align & kVertical); }
+    static HAlign sliceH(Align align) { return static_cast<HAlign>(align & kHorizontal); }
+
+    static Align merge(HAlign hAlign, VAlign vAlign) { return static_cast<Align>(hAlign | vAlign); }
+};
 
 
 Align mirror_alignment(Align alignment);

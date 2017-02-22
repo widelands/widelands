@@ -170,7 +170,6 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
 			  case UI::HAlign::kLeft:
-			  case UI::HAlign::kHorizontal:
 				anchor = RICHTEXT_MARGIN;
 			}
 

@@ -87,7 +87,7 @@ EditBox::EditBox(Panel* const parent,
                       2 * margin_y),
            m_(new EditBoxImpl),
            history_active_(false),
-           history_position_(-1) 
+           history_position_(-1)
 {
 	set_thinks(false);
 
