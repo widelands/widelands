@@ -29,9 +29,10 @@
 #include "logic/playercommand.h"
 #include "ui_basic/box.h"
 #include "wui/interactive_player.h"
+#include "wui/shipwindow.h"
+#include "wui/watchwindow.h"
 
-// NOCOM documentation
-// NOCOM watch and open window buttons would be nice
+// NOCOM documentation, including hotkeys in Lua
 inline InteractivePlayer& ShipStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
@@ -45,13 +46,13 @@ constexpr int kButtonSize = 34;
 ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &plr, "ship_statistics", &registry, kWindowWidth, kWindowHeight, _("Ship Statistics")),
+     ship_filter_(ShipFilterStatus::kAll),
      table_(this,
             kPadding,
             kButtonSize + 2 * kPadding,
             kWindowWidth - 2 * kPadding,
             kTableHeight,
-            g_gr->images().get("images/ui_basic/but1.png")),
-     ship_filter_(ShipFilterStatus::kAll) {
+            g_gr->images().get("images/ui_basic/but1.png")) {
 
 	table_.selected.connect(boost::bind(&ShipStatisticsMenu::selected, this));
 	table_.double_clicked.connect(boost::bind(&ShipStatisticsMenu::double_clicked, this));
@@ -110,19 +111,49 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
-	// End: Buttons for message types
-	centerviewbtn_ =
-	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
+
+	// Navigation buttons
+	button_box = new UI::Box(this, kPadding, kWindowHeight - kPadding - kButtonSize,
+	                         UI::Box::Horizontal, table_.get_w(), kButtonSize, kPadding);
+
+	watchbtn_ = new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
+	                           g_gr->images().get("images/ui_basic/but2.png"),
+	                           g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
+	                           /** TRANSLATORS: %s is a tooltip, O is the corresponding hotkey */
+	                           (boost::format(_("W: %s"))
+	                            /** TRANSLATORS: Tooltip in the ship statistics window */
+	                            % _("Watch this ship"))
+	                              .str());
+	button_box->add(watchbtn_, UI::Align::kLeft);
+	watchbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::watch_ship, this));
+
+	button_box->add_inf_space();
+
+	openwindowbtn_ =
+	   new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
 	                  g_gr->images().get("images/ui_basic/but2.png"),
+	                  g_gr->images().get("images/ui_basic/fsel.png"),
+	                  /** TRANSLATORS: %s is a tooltip, O is the corresponding hotkey */
+	                  (boost::format(_("O: %s"))
+	                   /** TRANSLATORS: Tooltip in the ship statistics window */
+	                   % _("Go to ship and open its window"))
+	                     .str());
+	button_box->add(openwindowbtn_, UI::Align::kLeft);
+	openwindowbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::open_ship_window, this));
+
+	centerviewbtn_ =
+	   new UI::Button(button_box, "ship_stats_center_main_mapview_button", 0, 0, kButtonSize,
+	                  kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
 	                  g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
 	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
 	                  (boost::format(_("G: %s"))
-	                   /** TRANSLATORS: Tooltip in the messages window */
+	                   /** TRANSLATORS: Tooltip in the ship statistics window */
 	                   % _("Center main mapview on location"))
 	                     .str());
+	button_box->add(centerviewbtn_, UI::Align::kLeft);
 	centerviewbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::center_view, this));
-	centerviewbtn_->set_enabled(false);
+
+	button_box->set_size(table_.get_w(), kButtonSize);
 
 	table_.set_sort_column(ColName);
 	fill_table();
@@ -285,12 +316,17 @@ void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 		set_entry_record(&er, *info);
 	}
 	table_.sort();
+	set_buttons_enabled();
 }
 
 void ShipStatisticsMenu::remove_ship(Widelands::Serial serial) {
 	if (data_.count(serial) == 1) {
 		table_.remove_entry(serial);
 		data_.erase(data_.find(serial));
+		if (!table_.empty() && !table_.has_selection()) {
+			table_.select(0);
+		}
+		set_buttons_enabled();
 	}
 }
 
@@ -303,7 +339,7 @@ void ShipStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRecord& 
  * Something has been selected
  */
 void ShipStatisticsMenu::selected() {
-	centerviewbtn_->set_enabled(table_.has_selection());
+	set_buttons_enabled();
 }
 
 /**
@@ -315,6 +351,12 @@ void ShipStatisticsMenu::double_clicked() {
 	}
 }
 
+void ShipStatisticsMenu::set_buttons_enabled() {
+	centerviewbtn_->set_enabled(table_.has_selection());
+	openwindowbtn_->set_enabled(table_.has_selection());
+	watchbtn_->set_enabled(table_.has_selection());
+}
+
 /**
  * Handle message menu hotkeys.
  */
@@ -323,8 +365,13 @@ bool ShipStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
 		case SDLK_g:
-			if (centerviewbtn_->enabled())
-				center_view();
+			center_view();
+			return true;
+		case SDLK_o:
+			open_ship_window();
+			return true;
+		case SDLK_w:
+			watch_ship();
 			return true;
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {
@@ -385,6 +432,23 @@ void ShipStatisticsMenu::center_view() {
 	if (table_.has_selection()) {
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		iplayer().scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
+	}
+}
+
+void ShipStatisticsMenu::watch_ship() {
+	if (table_.has_selection()) {
+		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
+		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
+		window->follow();
+	}
+}
+
+void ShipStatisticsMenu::open_ship_window() {
+	if (table_.has_selection()) {
+		center_view();
+		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
+		// NOCOM refactor after merging ship window branch
+		new ShipWindow(iplayer(), *ship);
 	}
 }
 
@@ -488,6 +552,7 @@ void ShipStatisticsMenu::set_filter_ships_tooltips() {
 void ShipStatisticsMenu::fill_table() {
 	data_.clear();
 	table_.clear();
+	set_buttons_enabled();
 	for (const auto& serial : iplayer().player().ships()) {
 		const ShipInfo* info = create_shipinfo(*serial_to_ship(serial));
 		if (info->status != ShipFilterStatus::kAll) {

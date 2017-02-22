@@ -31,63 +31,18 @@
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "ui_basic/button.h"
-#include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapview.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define NUM_VIEWS 5
 #define REFRESH_TIME 5000
 
-// Holds information for a view
-struct WatchWindowView {
-	MapView::View view;
-	Widelands::ObjectPointer tracking;  //  if non-null, we're tracking a Bob
-};
-
-struct WatchWindow : public UI::Window {
-	WatchWindow(InteractiveGameBase& parent,
-	            int32_t x,
-	            int32_t y,
-	            uint32_t w,
-	            uint32_t h,
-	            bool single_window_ = false);
-	~WatchWindow();
-
-	Widelands::Game& game() const {
-		return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
-	}
-
-	boost::signals2::signal<void(Vector2f)> warp_mainview;
-
-	void add_view(Widelands::Coords);
-	void next_view();
-	void save_coords();
-	void close_cur_view();
-	void toggle_buttons();
-
-protected:
-	void think() override;
-	void stop_tracking_by_drag();
-
-private:
-	void do_follow();
-	void do_goto();
-	void view_button_clicked(uint8_t index);
-	void set_current_view(uint8_t idx, bool save_previous = true);
-
-	MapView mapview_;
-	uint32_t last_visit_;
-	bool single_window_;
-	uint8_t cur_index_;
-	UI::Button* view_btns_[NUM_VIEWS];
-	std::vector<WatchWindowView> views_;
-};
-
 static WatchWindow* g_watch_window = nullptr;
+
+Widelands::Game& WatchWindow::game() const {
+	return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+}
 
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          int32_t const x,
@@ -103,7 +58,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	UI::Button* followbtn = new UI::Button(
 	   this, "follow", 0, h - 34, 34, 34, g_gr->images().get("images/ui_basic/but0.png"),
 	   g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
-	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
+	followbtn->sigclicked.connect(boost::bind(&WatchWindow::follow, this));
 
 	UI::Button* gotobtn = new UI::Button(this, "center_mainview_here", 34, h - 34, 34, 34,
 	                                     g_gr->images().get("images/ui_basic/but0.png"),
@@ -245,7 +200,7 @@ void WatchWindow::stop_tracking_by_drag() {
  * If we are currently tracking a bob, stop tracking.
  * Otherwise, start tracking the nearest bob from our current position.
  */
-void WatchWindow::do_follow() {
+void WatchWindow::follow() {
 	Widelands::Game& g = game();
 	if (views_[cur_index_].tracking.get(g)) {
 		views_[cur_index_].tracking = nullptr;
@@ -328,14 +283,16 @@ show_watch_window
 Open a watch window.
 ===============
 */
-void show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
+WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (!g_watch_window) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}
 		g_watch_window->add_view(coords);
+		return g_watch_window;
 	} else {
 		auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
 		window->add_view(coords);
+		return window;
 	}
 }

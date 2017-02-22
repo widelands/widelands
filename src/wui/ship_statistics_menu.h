@@ -79,9 +79,12 @@ private:
 	InteractivePlayer& iplayer() const;
 	void selected();
 	void double_clicked();
+	void set_buttons_enabled();
 
 	void fill_table();
 	void center_view();
+	void watch_ship();
+	void open_ship_window();
 	/// Updates the status for the ship. If the ship is new, adds it to the table.
 	void update_ship(const Widelands::Ship&);
 	void remove_ship(Widelands::Serial serial);
@@ -92,17 +95,23 @@ private:
 	void toggle_filter_ships_button(UI::Button&, ShipFilterStatus);
 	void set_filter_ships_tooltips();
 
-	UI::Table<uintptr_t> table_;
-	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
-	ShipFilterStatus ship_filter_;
-	UI::Button* centerviewbtn_;
-	// Buttons for message types
+	// Buttons for ship states
 	UI::Button* waiting_btn_;
 	UI::Button* scouting_btn_;
 	UI::Button* portspace_btn_;
 	UI::Button* colonizing_btn_;
 	UI::Button* shipping_btn_;
 	UI::Button* idle_btn_;
+	ShipFilterStatus ship_filter_;
+	// Navigation buttons
+	UI::Button* watchbtn_;
+	UI::Button* openwindowbtn_;
+	UI::Button* centerviewbtn_;
+
+	// Data
+	UI::Table<uintptr_t> table_;
+	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
+
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>>
 	   shipwindownotes_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
