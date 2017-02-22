@@ -54,7 +54,7 @@ return {
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
                dl(help_format_hotkey("B"), _"Toggle building statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
-               dl(help_format_hotkey("P"), _"Toggle ship statistics on seafaring maps") ..
+               dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.

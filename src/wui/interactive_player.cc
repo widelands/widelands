@@ -261,7 +261,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 
-		case SDLK_p:
+		case SDLK_e:
 			if (main_windows_.seafaring_stats.window == nullptr) {
 				new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
 			} else {
