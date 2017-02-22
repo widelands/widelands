@@ -482,7 +482,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		   round(census_pos + Vector2f(0, rendered_census_info->height() / 2.f + 10 * scale))
 		      .cast<float>();
 		dst->blit(statistics_pos,
-		          UI::g_fh1->render(as_condensed(statictics, UI::HAlign::kLeft, font_size)),
+		          UI::g_fh1->render(as_condensed(statictics, UI::HAlign::kHCenter, font_size)),
 		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }
