@@ -50,7 +50,8 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
             kButtonSize + 2 * kPadding,
             kWindowWidth - 2 * kPadding,
             kTableHeight,
-            g_gr->images().get("images/ui_basic/but1.png")) {
+            g_gr->images().get("images/ui_basic/but1.png")),
+     ship_filter_(ShipFilterStatus::kAll) {
 
 	table_.selected.connect(boost::bind(&ShipStatisticsMenu::selected, this));
 	table_.double_clicked.connect(boost::bind(&ShipStatisticsMenu::double_clicked, this));
@@ -151,7 +152,7 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 			   update_ship(*note.ship);
 			   break;
 		   case Widelands::NoteShipMessage::Message::kLost:
-			   remove_ship(*note.ship);
+			   remove_ship(note.ship->serial());
 			   break;
 		   default:
 			   break;  // Do nothing
@@ -263,6 +264,11 @@ Widelands::Ship* ShipStatisticsMenu::serial_to_ship(Widelands::Serial serial) co
 
 void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	const ShipInfo* info = create_shipinfo(ship);
+	// Remove ships that don't satisfy the filter
+	if (ship_filter_ != ShipFilterStatus::kAll && info->status != ship_filter_) {
+		remove_ship(info->serial);
+		return;
+	}
 	// Try to find the ship in the table
 	if (data_.count(info->serial) == 1) {
 		const ShipInfo* old_info = data_[info->serial];
@@ -273,7 +279,7 @@ void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 			set_entry_record(er, *info);
 		}
 	} else {
-		// This is a new ship
+		// This is a new ship or it was filteres away before
 		data_.insert(std::make_pair(info->serial, info));
 		UI::Table<uintptr_t>::EntryRecord& er = table_.add(info->serial);
 		set_entry_record(&er, *info);
@@ -281,11 +287,10 @@ void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	table_.sort();
 }
 
-void ShipStatisticsMenu::remove_ship(const Widelands::Ship& ship) {
-	const ShipInfo* const info = create_shipinfo(ship);
-	if (data_.count(info->serial) == 1) {
-		table_.remove_entry(info->serial);
-		data_.erase(data_.find(info->serial));
+void ShipStatisticsMenu::remove_ship(Widelands::Serial serial) {
+	if (data_.count(serial) == 1) {
+		table_.remove_entry(serial);
+		data_.erase(data_.find(serial));
 	}
 }
 
@@ -384,28 +389,27 @@ void ShipStatisticsMenu::center_view() {
 }
 
 /**
- * Show only messages of a certain type
- * @param msgtype the types of messages to show
+ * Show only the ships that have the given status
  */
-void ShipStatisticsMenu::filter_ships(ShipFilterStatus msgtype) {
-	switch (msgtype) {
+void ShipStatisticsMenu::filter_ships(ShipFilterStatus status) {
+	switch (status) {
 	case ShipFilterStatus::kExpeditionWaiting:
-		toggle_filter_ships_button(*waiting_btn_, msgtype);
+		toggle_filter_ships_button(*waiting_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionScouting:
-		toggle_filter_ships_button(*scouting_btn_, msgtype);
+		toggle_filter_ships_button(*scouting_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionPortspaceFound:
-		toggle_filter_ships_button(*portspace_btn_, msgtype);
+		toggle_filter_ships_button(*portspace_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionColonizing:
-		toggle_filter_ships_button(*colonizing_btn_, msgtype);
+		toggle_filter_ships_button(*colonizing_btn_, status);
 		break;
 	case ShipFilterStatus::kShipping:
-		toggle_filter_ships_button(*shipping_btn_, msgtype);
+		toggle_filter_ships_button(*shipping_btn_, status);
 		break;
 	case ShipFilterStatus::kIdle:
-		toggle_filter_ships_button(*idle_btn_, msgtype);
+		toggle_filter_ships_button(*idle_btn_, status);
 		break;
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
@@ -418,13 +422,13 @@ void ShipStatisticsMenu::filter_ships(ShipFilterStatus msgtype) {
 		idle_btn_->set_perm_pressed(false);
 		break;
 	}
-	// NOCOM filter the ships
+	fill_table();
 }
 
 /**
  * Helper for filter_ships
  */
-void ShipStatisticsMenu::toggle_filter_ships_button(UI::Button& button, ShipFilterStatus msgtype) {
+void ShipStatisticsMenu::toggle_filter_ships_button(UI::Button& button, ShipFilterStatus status) {
 	set_filter_ships_tooltips();
 	if (button.style() == UI::Button::Style::kPermpressed) {
 		button.set_perm_pressed(false);
@@ -437,7 +441,7 @@ void ShipStatisticsMenu::toggle_filter_ships_button(UI::Button& button, ShipFilt
 		shipping_btn_->set_perm_pressed(false);
 		idle_btn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
-		ship_filter_ = msgtype;
+		ship_filter_ = status;
 
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
@@ -487,9 +491,11 @@ void ShipStatisticsMenu::fill_table() {
 	for (const auto& serial : iplayer().player().ships()) {
 		const ShipInfo* info = create_shipinfo(*serial_to_ship(serial));
 		if (info->status != ShipFilterStatus::kAll) {
-			data_.insert(std::make_pair(serial, info));
-			UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial);
-			set_entry_record(&er, *info);
+			if (ship_filter_ == ShipFilterStatus::kAll || info->status == ship_filter_) {
+				data_.insert(std::make_pair(serial, info));
+				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial);
+				set_entry_record(&er, *info);
+			}
 		}
 	}
 

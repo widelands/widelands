@@ -84,16 +84,17 @@ private:
 	void center_view();
 	/// Updates the status for the ship. If the ship is new, adds it to the table.
 	void update_ship(const Widelands::Ship&);
-	void remove_ship(const Widelands::Ship&);
+	void remove_ship(Widelands::Serial serial);
 	void set_entry_record(UI::Table<uintptr_t>::EntryRecord*, const ShipInfo& info);
 	void update_entry_record(UI::Table<uintptr_t>::EntryRecord& er, const ShipInfo&);
 
-	void filter_ships(ShipFilterStatus);
+	void filter_ships(ShipFilterStatus status);
 	void toggle_filter_ships_button(UI::Button&, ShipFilterStatus);
 	void set_filter_ships_tooltips();
 
 	UI::Table<uintptr_t> table_;
 	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
+	ShipFilterStatus ship_filter_;
 	UI::Button* centerviewbtn_;
 	// Buttons for message types
 	UI::Button* waiting_btn_;
@@ -102,7 +103,6 @@ private:
 	UI::Button* colonizing_btn_;
 	UI::Button* shipping_btn_;
 	UI::Button* idle_btn_;
-	ShipFilterStatus ship_filter_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>>
 	   shipwindownotes_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
