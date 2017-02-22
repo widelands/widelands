@@ -54,7 +54,7 @@ Align mirror_alignment(Align alignment) {
 }
 
 /**
- * Align pt horizontly to match align based on width w and height h.
+ * Align pt horizontally to match align based on width w and height h.
  *
  * When correcting for align, we never move from pixel boundaries to
  * sub-pixels, because this might lead from pixel-perfect rendering to

@@ -71,12 +71,6 @@ enum Align /* : public HAlign, VAlign */ {
 
 };
 
-/*
-inline bool isHCenter(HAlign align) {
-    return 0 != (align & HAlign::kHCenter);
-}
-*/
-
 /**
  * Helper class to carry Alignment related functions.
  */
