@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/ship_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
@@ -33,7 +33,7 @@
 #include "wui/watchwindow.h"
 
 // NOCOM documentation
-inline InteractivePlayer& ShipStatisticsMenu::iplayer() const {
+inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
@@ -43,9 +43,14 @@ constexpr int kTableHeight = 300;
 constexpr int kPadding = 5;
 constexpr int kButtonSize = 34;
 
-ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &plr, "ship_statistics", &registry, kWindowWidth, kWindowHeight, _("Ship Statistics")),
+SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
+                                                 UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&plr,
+                      "seafaring_statistics",
+                      &registry,
+                      kWindowWidth,
+                      kWindowHeight,
+                      _("Seafaring Statistics")),
      ship_filter_(ShipFilterStatus::kAll),
      table_(this,
             kPadding,
@@ -54,8 +59,8 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
             kTableHeight,
             g_gr->images().get("images/ui_basic/but1.png")) {
 
-	table_.selected.connect(boost::bind(&ShipStatisticsMenu::selected, this));
-	table_.double_clicked.connect(boost::bind(&ShipStatisticsMenu::double_clicked, this));
+	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
+	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
 	table_.add_column(kWindowWidth / 2 - kPadding, pgettext("ship", "Name"));
 	table_.add_column(
 	   0, pgettext("ship", "Status"), "", UI::Align::kHCenter, UI::TableColumnType::kFlexible);
@@ -70,42 +75,42 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	                           status_to_image(ShipFilterStatus::kIdle));
 	button_box->add(idle_btn_, UI::Align::kLeft);
 	idle_btn_->sigclicked.connect(
-	   boost::bind(&ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kIdle));
+	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kIdle));
 
 	shipping_btn_ = new UI::Button(button_box, "filter_ship_transporting", 0, 0, kButtonSize,
 	                               kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
 	                               status_to_image(ShipFilterStatus::kShipping));
 	button_box->add(shipping_btn_, UI::Align::kLeft);
 	shipping_btn_->sigclicked.connect(
-	   boost::bind(&ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kShipping));
+	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kShipping));
 
 	waiting_btn_ = new UI::Button(button_box, "filter_ship_waiting", 0, 0, kButtonSize, kButtonSize,
 	                              g_gr->images().get("images/ui_basic/but0.png"),
 	                              status_to_image(ShipFilterStatus::kExpeditionWaiting));
 	button_box->add(waiting_btn_, UI::Align::kLeft);
-	waiting_btn_->sigclicked.connect(
-	   boost::bind(&ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionWaiting));
+	waiting_btn_->sigclicked.connect(boost::bind(
+	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionWaiting));
 
 	scouting_btn_ = new UI::Button(button_box, "filter_ship_scouting", 0, 0, kButtonSize,
 	                               kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
 	                               status_to_image(ShipFilterStatus::kExpeditionScouting));
 	button_box->add(scouting_btn_, UI::Align::kLeft);
-	scouting_btn_->sigclicked.connect(
-	   boost::bind(&ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionScouting));
+	scouting_btn_->sigclicked.connect(boost::bind(
+	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionScouting));
 
 	portspace_btn_ = new UI::Button(button_box, "filter_ship_portspace", 0, 0, kButtonSize,
 	                                kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
 	                                status_to_image(ShipFilterStatus::kExpeditionPortspaceFound));
 	button_box->add(portspace_btn_, UI::Align::kLeft);
 	portspace_btn_->sigclicked.connect(boost::bind(
-	   &ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionPortspaceFound));
+	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionPortspaceFound));
 
 	colonizing_btn_ = new UI::Button(button_box, "filter_ship_colonizing", 0, 0, kButtonSize,
 	                                 kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
 	                                 status_to_image(ShipFilterStatus::kExpeditionColonizing));
 	button_box->add(colonizing_btn_, UI::Align::kLeft);
 	colonizing_btn_->sigclicked.connect(boost::bind(
-	   &ShipStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionColonizing));
+	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionColonizing));
 
 	button_box->set_size(table_.get_w(), kButtonSize);
 
@@ -116,20 +121,20 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	button_box = new UI::Box(this, kPadding, kWindowHeight - kPadding - kButtonSize,
 	                         UI::Box::Horizontal, table_.get_w(), kButtonSize, kPadding);
 
-	watchbtn_ = new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
-	                           g_gr->images().get("images/ui_basic/but2.png"),
+	watchbtn_ = new UI::Button(button_box, "seafaring_stats_watch_button", 0, 0, kButtonSize,
+	                           kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
 	                           g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
 	                           (boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
 	                            % _("Watch the selected ship") % pgettext("hotkey", "W"))
 	                              .str());
 	button_box->add(watchbtn_, UI::Align::kLeft);
-	watchbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::watch_ship, this));
+	watchbtn_->sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::watch_ship, this));
 
 	button_box->add_inf_space();
 
 	openwindowbtn_ =
-	   new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
+	   new UI::Button(button_box, "seafaring_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
 	                  g_gr->images().get("images/ui_basic/but2.png"),
 	                  g_gr->images().get("images/ui_basic/fsel.png"),
 	                  (boost::format(_("%1% (Hotkey: %2%)"))
@@ -137,10 +142,11 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	                   % _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
 	                     .str());
 	button_box->add(openwindowbtn_, UI::Align::kLeft);
-	openwindowbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::open_ship_window, this));
+	openwindowbtn_->sigclicked.connect(
+	   boost::bind(&SeafaringStatisticsMenu::open_ship_window, this));
 
 	centerviewbtn_ =
-	   new UI::Button(button_box, "ship_stats_center_main_mapview_button", 0, 0, kButtonSize,
+	   new UI::Button(button_box, "seafaring_stats_center_main_mapview_button", 0, 0, kButtonSize,
 	                  kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
 	                  g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
 	                  (boost::format(_("%1% (Hotkey: %2%)"))
@@ -148,7 +154,7 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	                   % _("Center the map on the selected ship") % pgettext("hotkey", "G"))
 	                     .str());
 	button_box->add(centerviewbtn_, UI::Align::kLeft);
-	centerviewbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::center_view, this));
+	centerviewbtn_->sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::center_view, this));
 
 	button_box->set_size(table_.get_w(), kButtonSize);
 
@@ -189,21 +195,21 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 }
 
 const std::string
-ShipStatisticsMenu::status_to_string(ShipStatisticsMenu::ShipFilterStatus status) const {
+SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterStatus status) const {
 	switch (status) {
-	case ShipStatisticsMenu::ShipFilterStatus::kIdle:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		return pgettext("ship_state", "Idle");
-	case ShipStatisticsMenu::ShipFilterStatus::kShipping:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		return pgettext("ship_state", "Shipping");
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
 		return pgettext("ship_state", "Waiting");
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionScouting:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionScouting:
 		return pgettext("ship_state", "Scouting");
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		return pgettext("ship_state", "Port Space Found");
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
 		return pgettext("ship_state", "Founding a Colony");
-	case ShipStatisticsMenu::ShipFilterStatus::kAll:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
 	default:
 		NEVER_HERE();
@@ -211,28 +217,28 @@ ShipStatisticsMenu::status_to_string(ShipStatisticsMenu::ShipFilterStatus status
 }
 
 const Image*
-ShipStatisticsMenu::status_to_image(ShipStatisticsMenu::ShipFilterStatus status) const {
+SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStatus status) const {
 	std::string filename = "";
 	switch (status) {
-	case ShipStatisticsMenu::ShipFilterStatus::kIdle:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		filename = "images/wui/ship/ship_scout_e.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kShipping:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		filename = "images/wui/buildings/menu_tab_wares_dock.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
 		filename = "images/wui/buildings/start_expedition.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionScouting:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionScouting:
 		filename = "images/wui/ship/ship_explore_island_cw.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		filename = "images/wui/editor/fsel_editor_set_port_space.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
 		filename = "images/wui/fieldaction/menu_tab_buildport.png";
 		break;
-	case ShipStatisticsMenu::ShipFilterStatus::kAll:
+	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
 	default:
@@ -241,8 +247,8 @@ ShipStatisticsMenu::status_to_image(ShipStatisticsMenu::ShipFilterStatus status)
 	return g_gr->images().get(filename);
 }
 
-const ShipStatisticsMenu::ShipInfo*
-ShipStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
+const SeafaringStatisticsMenu::ShipInfo*
+SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	if (&ship == nullptr) {
 		return new ShipInfo();
 	}
@@ -275,22 +281,22 @@ ShipStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	return new ShipInfo(ship.get_shipname(), status, ship.serial());
 }
 
-void ShipStatisticsMenu::set_entry_record(UI::Table<uintptr_t>::EntryRecord* er,
-                                          const ShipInfo& info) {
+void SeafaringStatisticsMenu::set_entry_record(UI::Table<uintptr_t>::EntryRecord* er,
+                                               const ShipInfo& info) {
 	if (info.status != ShipFilterStatus::kAll) {
 		er->set_string(ColName, info.name);
 		er->set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
 	}
 }
 
-Widelands::Ship* ShipStatisticsMenu::serial_to_ship(Widelands::Serial serial) const {
+Widelands::Ship* SeafaringStatisticsMenu::serial_to_ship(Widelands::Serial serial) const {
 	Widelands::MapObject* obj = iplayer().game().objects().get_object(serial);
 	assert(obj->descr().type() == Widelands::MapObjectType::SHIP);
 	upcast(Widelands::Ship, ship, obj);
 	return ship;
 }
 
-void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
+void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	const ShipInfo* info = create_shipinfo(ship);
 	// Remove ships that don't satisfy the filter
 	if (ship_filter_ != ShipFilterStatus::kAll && info->status != ship_filter_) {
@@ -316,7 +322,7 @@ void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	set_buttons_enabled();
 }
 
-void ShipStatisticsMenu::remove_ship(Widelands::Serial serial) {
+void SeafaringStatisticsMenu::remove_ship(Widelands::Serial serial) {
 	if (data_.count(serial) == 1) {
 		table_.remove_entry(serial);
 		data_.erase(data_.find(serial));
@@ -327,28 +333,28 @@ void ShipStatisticsMenu::remove_ship(Widelands::Serial serial) {
 	}
 }
 
-void ShipStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRecord& er,
-                                             const ShipInfo& info) {
+void SeafaringStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRecord& er,
+                                                  const ShipInfo& info) {
 	er.set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
 }
 
 /*
  * Something has been selected
  */
-void ShipStatisticsMenu::selected() {
+void SeafaringStatisticsMenu::selected() {
 	set_buttons_enabled();
 }
 
 /**
  * a message was double clicked
  */
-void ShipStatisticsMenu::double_clicked() {
+void SeafaringStatisticsMenu::double_clicked() {
 	if (centerviewbtn_->enabled()) {
 		center_view();
 	}
 }
 
-void ShipStatisticsMenu::set_buttons_enabled() {
+void SeafaringStatisticsMenu::set_buttons_enabled() {
 	centerviewbtn_->set_enabled(table_.has_selection());
 	openwindowbtn_->set_enabled(table_.has_selection());
 	watchbtn_->set_enabled(table_.has_selection());
@@ -357,7 +363,7 @@ void ShipStatisticsMenu::set_buttons_enabled() {
 /**
  * Handle message menu hotkeys.
  */
-bool ShipStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
+bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
@@ -425,14 +431,14 @@ bool ShipStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 	return table_.handle_key(down, code);
 }
 
-void ShipStatisticsMenu::center_view() {
+void SeafaringStatisticsMenu::center_view() {
 	if (table_.has_selection()) {
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		iplayer().scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 	}
 }
 
-void ShipStatisticsMenu::watch_ship() {
+void SeafaringStatisticsMenu::watch_ship() {
 	if (table_.has_selection()) {
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
@@ -440,7 +446,7 @@ void ShipStatisticsMenu::watch_ship() {
 	}
 }
 
-void ShipStatisticsMenu::open_ship_window() {
+void SeafaringStatisticsMenu::open_ship_window() {
 	if (table_.has_selection()) {
 		center_view();
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
@@ -452,7 +458,7 @@ void ShipStatisticsMenu::open_ship_window() {
 /**
  * Show only the ships that have the given status
  */
-void ShipStatisticsMenu::filter_ships(ShipFilterStatus status) {
+void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	switch (status) {
 	case ShipFilterStatus::kExpeditionWaiting:
 		toggle_filter_ships_button(*waiting_btn_, status);
@@ -489,7 +495,8 @@ void ShipStatisticsMenu::filter_ships(ShipFilterStatus status) {
 /**
  * Helper for filter_ships
  */
-void ShipStatisticsMenu::toggle_filter_ships_button(UI::Button& button, ShipFilterStatus status) {
+void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
+                                                         ShipFilterStatus status) {
 	set_filter_ships_tooltips();
 	if (button.style() == UI::Button::Style::kPermpressed) {
 		button.set_perm_pressed(false);
@@ -515,7 +522,7 @@ void ShipStatisticsMenu::toggle_filter_ships_button(UI::Button& button, ShipFilt
 /**
  * Helper for filter_ships
  */
-void ShipStatisticsMenu::set_filter_ships_tooltips() {
+void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                        /** TRANSLATORS: Tooltip in the messages window */
@@ -545,7 +552,7 @@ void ShipStatisticsMenu::set_filter_ships_tooltips() {
 	                                .str());
 }
 
-void ShipStatisticsMenu::fill_table() {
+void SeafaringStatisticsMenu::fill_table() {
 	data_.clear();
 	table_.clear();
 	set_buttons_enabled();

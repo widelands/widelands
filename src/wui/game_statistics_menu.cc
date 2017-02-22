@@ -26,7 +26,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/ship_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/interactive_player.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
@@ -47,8 +47,8 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
 	if (is_seafaring) {
-		add_button("wui/ship/ship_scout_ne", "ship_stats", _("Ship Statistics"),
-					  &windows_.ship_stats);
+		add_button("wui/buildings/start_expedition", "seafaring_stats", _("Seafaring Statistics"),
+					  &windows_.seafaring_stats);
 	}
 	box_.set_pos(Vector2i(10, 10));
 	box_.set_size((34 + 5) * (is_seafaring ? 5 : 4), 34);
@@ -65,8 +65,8 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	};
 	// The stock window is defined in InteractivePlayer because of the keyboard shortcut.
 	if (is_seafaring) {
-		windows_.ship_stats.open_window = [this] {
-			new ShipStatisticsMenu(player_, windows_.ship_stats);
+		windows_.seafaring_stats.open_window = [this] {
+			new SeafaringStatisticsMenu(player_, windows_.seafaring_stats);
 		};
 	}
 

@@ -51,7 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/ship_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -262,10 +262,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_p:
-			if (main_windows_.ship_stats.window == nullptr) {
-				new ShipStatisticsMenu(*this, main_windows_.ship_stats);
+			if (main_windows_.seafaring_stats.window == nullptr) {
+				new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
 			} else {
-				main_windows_.ship_stats.toggle();
+				main_windows_.seafaring_stats.toggle();
 			}
 			return true;
 

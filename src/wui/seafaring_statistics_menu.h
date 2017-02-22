@@ -32,8 +32,8 @@
 class InteractivePlayer;
 
 ///  Shows a list of the ships owned by the interactive player.
-struct ShipStatisticsMenu : public UI::UniqueWindow {
-	ShipStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
+struct SeafaringStatisticsMenu : public UI::UniqueWindow {
+	SeafaringStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 

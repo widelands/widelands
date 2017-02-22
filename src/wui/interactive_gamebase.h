@@ -44,7 +44,7 @@ public:
 		GeneralStatisticsMenu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
-		UI::UniqueWindow::Registry ship_stats;
+		UI::UniqueWindow::Registry seafaring_stats;
 	};
 
 	InteractiveGameBase(Widelands::Game&,
