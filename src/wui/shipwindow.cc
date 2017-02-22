@@ -53,21 +53,23 @@ using namespace Widelands;
 ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship& ship)
    : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
 	init(false);
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
-	   [this](const Widelands::NoteShipWindow& note) {
-		   if (note.serial == ship_.serial()) {
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>(
+		[this](const Widelands::NoteShip& note) {
+			if (note.ship->serial() == ship_.serial()) {
 			   switch (note.action) {
 			   // The ship state has changed, e.g. expedition canceled
-			   case Widelands::NoteShipWindow::Action::kRefresh:
+				case Widelands::NoteShip::Action::kStateChanged:
 				   init(true);
 				   break;
 			   // The ship is no more
-			   case Widelands::NoteShipWindow::Action::kClose:
+				case Widelands::NoteShip::Action::kLost:
 				   // Stop this from thinking to avoid segfaults
 				   set_thinks(false);
 				   die();
-				   break;
-			   default:
+					break;
+				case Widelands::NoteShip::Action::kDestinationChanged:
+				case Widelands::NoteShip::Action::kWaitingForCommand:
+				case Widelands::NoteShip::Action::kGained:
 				   break;
 			   }
 		   }

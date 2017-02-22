@@ -41,31 +41,19 @@ enum class IslandExploreDirection {
 	kNotSet
 };
 
-struct NoteShipMessage {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
+struct NoteShip {
+	CAN_BE_SENT_AS_NOTE(NoteId::Ship)
 
 	Ship* ship;
 
-	enum class Message { kLost, kGained, kWaitingForCommand };
-	Message message;
+	enum class Action { kStateChanged, kDestinationChanged, kWaitingForCommand, kLost, kGained };
+	Action action;
 
-	NoteShipMessage(Ship* const init_ship, const Message& init_message)
-	   : ship(init_ship), message(init_message) {
+	NoteShip(Ship* const init_ship, const Action& init_action)
+		: ship(init_ship), action(init_action) {
 	}
 };
 
-struct NoteShipWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
-
-	Serial serial;
-
-	enum class Action { kRefresh, kClose, kDestinationChanged };
-	const Action action;
-
-	NoteShipWindow(Serial init_serial, const Action& init_action)
-	   : serial(init_serial), action(init_action) {
-	}
-};
 
 class ShipDescr : public BobDescr {
 public:
@@ -264,7 +252,7 @@ private:
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
-	void set_ship_state_and_notify(ShipStates state, NoteShipWindow::Action action);
+	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	void init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);

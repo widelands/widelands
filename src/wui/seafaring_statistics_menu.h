@@ -148,9 +148,7 @@ private:
 	UI::Table<uintptr_t> table_;
 	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>>
-	   shipwindownotes_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_SHIP_STATISTICS_MENU_H

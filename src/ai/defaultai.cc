@@ -168,7 +168,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 
 	// Subscribe to ShipNotes.
 	shipnotes_subscriber_ =
-	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
+		Notifications::subscribe<NoteShip>([this](const NoteShip& note) {
 
 		   // in a short time between start and late_initialization the player
 		   // can get notes that can not be processed.
@@ -180,13 +180,13 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 			   return;
 		   }
 
-		   switch (note.message) {
+			switch (note.action) {
 
-		   case NoteShipMessage::Message::kGained:
+			case NoteShip::Action::kGained:
 			   gain_ship(*note.ship, NewShip::kBuilt);
 			   break;
 
-		   case NoteShipMessage::Message::kLost:
+			case NoteShip::Action::kLost:
 			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				   if (i->ship == note.ship) {
 					   allships.erase(i);
@@ -195,13 +195,17 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 			   }
 			   break;
 
-		   case NoteShipMessage::Message::kWaitingForCommand:
+			case NoteShip::Action::kWaitingForCommand:
 			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				   if (i->ship == note.ship) {
 					   i->waiting_for_command_ = true;
 					   break;
 				   }
 			   }
+				break;
+			case NoteShip::Action::kStateChanged:
+			case NoteShip::Action::kDestinationChanged:
+				break;
 		   }
 		});
 }

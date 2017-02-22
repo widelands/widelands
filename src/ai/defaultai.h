@@ -366,7 +366,7 @@ private:
 	   outofresource_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTrainingSiteSoldierTrained>>
 	   soldiertrained_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

@@ -34,8 +34,7 @@ enum class NoteId : uint32_t {
 	FieldResourceTypeChanged,
 	ProductionSiteOutOfResources,
 	TrainingSiteSoldierTrained,
-	ShipMessage,
-	ShipWindow,
+	Ship,
 	Economy,
 	GraphicResolutionChanged,
 	NoteExpeditionCanceled

@@ -194,32 +194,20 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	set_thinks(false);
 	table_.focus();
 
-	// NOCOM unify these when the other branch is in.
-	shipwindownotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
-	   [this](const Widelands::NoteShipWindow& note) {
-		   switch (note.action) {
-		   // The ship state has changed, e.g. expedition canceled
-		   case Widelands::NoteShipWindow::Action::kRefresh:
-		   case Widelands::NoteShipWindow::Action::kDestinationChanged: {
-			   update_ship(*serial_to_ship(note.serial));
-		   } break;
-		   default:
-			   break;  // Do nothing
-		   }
-		});
-
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipMessage>(
-	   [this](const Widelands::NoteShipMessage& note) {
-		   switch (note.message) {
-		   case Widelands::NoteShipMessage::Message::kGained:
-		   case Widelands::NoteShipMessage::Message::kWaitingForCommand:
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>(
+		[this](const Widelands::NoteShip& note) {
+			switch (note.action) {
+			case Widelands::NoteShip::Action::kStateChanged:
+			case Widelands::NoteShip::Action::kDestinationChanged:
+			case Widelands::NoteShip::Action::kWaitingForCommand:
+			case Widelands::NoteShip::Action::kGained:
 			   update_ship(*note.ship);
 			   break;
-		   case Widelands::NoteShipMessage::Message::kLost:
-			   remove_ship(note.ship->serial());
+			case Widelands::NoteShip::Action::kLost:
+				remove_ship(note.ship->serial());
 			   break;
 		   default:
-			   break;  // Do nothing
+				NEVER_HERE();
 		   }
 		});
 }
