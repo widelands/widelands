@@ -55,7 +55,8 @@ private:
 
 	/// Returns the localized strings that we use to display the 'status' in the table.
 	const std::string status_to_string(ShipFilterStatus status) const;
-	/// Returns the icon that we use to represent the 'status' in the table and on the filter buttons.
+	/// Returns the icon that we use to represent the 'status' in the table and on the filter
+	/// buttons.
 	const Image* status_to_image(ShipFilterStatus status) const;
 
 	/// The dataset that we need to display ships in the table.
