@@ -51,6 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/ship_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -259,7 +260,15 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				main_windows_.building_stats.toggle();
 			}
 			return true;
-// NOCOM
+
+		case SDLK_p:
+			if (main_windows_.ship_stats.window == nullptr) {
+				new ShipStatisticsMenu(*this, main_windows_.ship_stats);
+			} else {
+				main_windows_.ship_stats.toggle();
+			}
+			return true;
+
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new GameMainMenuSaveGame(*this, main_windows_.savegame);
@@ -322,7 +331,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	DebugConsole::write(
 	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
 	player_number_ = n;
-// NOCOM
+
 	if (UI::UniqueWindow* const building_statistics_window = main_windows_.building_stats.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
