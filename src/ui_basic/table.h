@@ -80,6 +80,7 @@ public:
 
 	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(Entry);
 
 	EntryRecord& add(void* const entry, const bool select_this = false);
 
@@ -205,6 +206,7 @@ public:
 
 	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(const void* const entry);
 
 	EntryRecord& add(void* entry = nullptr, bool select = false);
 
@@ -326,6 +328,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
+	void remove_entry(Entry const* const entry) {
+		Base::remove_entry(const_cast<Entry*>(entry));
+	}
+
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
 		return Base::add(const_cast<Entry*>(entry), select_this);
 	}
@@ -356,6 +362,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
+	void remove_entry(Entry const* entry) {
+		Base::remove_entry(entry);
+	}
+
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
 		return Base::add(entry, select_this);
 	}
@@ -384,6 +394,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      const bool descending = false)
 	   : Base(parent, x, y, w, h, button_background, descending) {
+	}
+
+	void remove_entry(const Entry& entry) {
+		Base::remove_entry(&const_cast<Entry&>(entry));
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -420,6 +434,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, descending) {
 	}
 
+	void remove_entry(Entry& entry) {
+		Base::remove_entry(&entry);
+	}
+
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
 		return Base::add(&entry, select_this);
 	}
@@ -454,6 +472,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      const bool descending = false)
 	   : Base(parent, x, y, w, h, button_background, descending) {
+	}
+
+	void remove_entry(uintptr_t const entry) {
+		Base::remove_entry(reinterpret_cast<void*>(entry));
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {

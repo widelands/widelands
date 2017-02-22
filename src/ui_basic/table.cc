@@ -531,6 +531,21 @@ void Table<void*>::remove(const uint32_t i) {
 	layout();
 }
 
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	EntryRecord* er = find(entry);
+	if (er != nullptr) {
+		for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+			if (entry_records_[i] == er) {
+				remove(i);
+				return;
+			}
+		}
+	}
+}
+
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 	if (sort_descending_)
 		return columns_[sort_column_].compare(b, a);

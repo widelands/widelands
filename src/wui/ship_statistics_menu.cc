@@ -154,7 +154,6 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 		   case Widelands::NoteShipMessage::Message::kWaitingForCommand:
 			   update_ship(*note.ship);
 			   break;
-
 		   case Widelands::NoteShipMessage::Message::kLost:
 			   remove_ship(*note.ship);
 			   break;
@@ -289,12 +288,8 @@ void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 void ShipStatisticsMenu::remove_ship(const Widelands::Ship& ship) {
 	const ShipInfo* const info = create_shipinfo(ship);
 	if (data_.count(info->serial) == 1) {
-		fill_table();
-		/* // NOCOM index-based table remove doesn't work
-		const auto& iterator = data_.find(*info);
-		//table_.remove(ship.serial());
-		data_.erase(iterator);
-		*/
+		table_.remove_entry(info->serial);
+		data_.erase(data_.find(info->serial));
 	}
 }
 
