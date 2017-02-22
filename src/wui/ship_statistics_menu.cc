@@ -156,8 +156,7 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 			   break;
 
 		   case Widelands::NoteShipMessage::Message::kLost:
-			   // NOCOM remove_ship(*note.ship);
-			   fill_table();
+			   remove_ship(*note.ship);
 			   break;
 		   default:
 			   break;  // Do nothing
@@ -268,38 +267,34 @@ Widelands::Ship* ShipStatisticsMenu::serial_to_ship(Widelands::Serial serial) co
 }
 
 void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
-	const ShipInfo* const info = create_shipinfo(ship);
+	const ShipInfo* info = create_shipinfo(ship);
 	// Try to find the ship in the table
-	for (size_t i = 0; i < data_.size(); ++i) {
-		const ShipInfo& old_info = data_[i];
-		if (info->serial == old_info.serial) {
+	if (data_.count(info->serial) == 1) {
+		const ShipInfo* old_info = data_[info->serial];
+		if (info->status != old_info->status) {
 			// The status has changed - we need an update
-			if (info->status != old_info.status) {
-				data_[i].status = info->status;
-				UI::Table<uintptr_t>::EntryRecord* er = table_.find(i);
-				set_entry_record(er, *info);
-				table_.sort();
-			}
-			return;
+			data_[info->serial] = info;
+			UI::Table<uintptr_t>::EntryRecord* er = table_.find(info->serial);
+			set_entry_record(er, *info);
 		}
+	} else {
+		// This is a new ship
+		data_.insert(std::make_pair(info->serial, info));
+		UI::Table<uintptr_t>::EntryRecord& er = table_.add(info->serial);
+		set_entry_record(&er, *info);
 	}
-	// This is a new ship
-	data_.push_back(*info);
-	UI::Table<uintptr_t const>::EntryRecord& er = table_.add(data_.size() - 1);
-	set_entry_record(&er, *info);
 	table_.sort();
 }
 
 void ShipStatisticsMenu::remove_ship(const Widelands::Ship& ship) {
 	const ShipInfo* const info = create_shipinfo(ship);
-	// Try to find the ship in the table
-	for (size_t i = 0; i < data_.size(); ++i) {
-		const ShipInfo& old_info = data_[i];
-		if (info->serial == old_info.serial) {
-			// NOCOM index-based remove doesn't work
-			table_.remove(i);
-			return;
-		}
+	if (data_.count(info->serial) == 1) {
+		fill_table();
+		/* // NOCOM index-based table remove doesn't work
+		const auto& iterator = data_.find(*info);
+		//table_.remove(ship.serial());
+		data_.erase(iterator);
+		*/
 	}
 }
 
@@ -392,7 +387,7 @@ bool ShipStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 
 void ShipStatisticsMenu::center_view() {
 	if (table_.has_selection()) {
-		Widelands::Ship* ship = serial_to_ship(data_[table_.get_selected()].serial);
+		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		iplayer().scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 	}
 }
@@ -501,8 +496,8 @@ void ShipStatisticsMenu::fill_table() {
 	for (const auto& serial : iplayer().player().ships()) {
 		const ShipInfo* info = create_shipinfo(*serial_to_ship(serial));
 		if (info->status != ShipFilterStatus::kAll) {
-			data_.push_back(*info);
-			UI::Table<uintptr_t const>::EntryRecord& er = table_.add(data_.size() - 1);
+			data_.insert(std::make_pair(serial, info));
+			UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial);
 			set_entry_record(&er, *info);
 		}
 	}

@@ -20,6 +20,8 @@
 #ifndef WL_WUI_SHIP_STATISTICS_MENU_H
 #define WL_WUI_SHIP_STATISTICS_MENU_H
 
+#include <unordered_map>
+
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "notifications/notifications.h"
@@ -91,7 +93,7 @@ private:
 	void set_filter_ships_tooltips();
 
 	UI::Table<uintptr_t> table_;
-	std::vector<ShipInfo> data_;
+	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
 	UI::Button* centerviewbtn_;
 	// Buttons for message types
 	UI::Button* waiting_btn_;
