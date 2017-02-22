@@ -184,9 +184,9 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	// Configure table
 	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
 	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
-	table_.add_column(get_inner_w() / 2 - kPadding, pgettext("ship", "Name"));
 	table_.add_column(
-	   0, pgettext("ship", "Status"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+		0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	table_.add_column(get_inner_w() / 2 - kPadding, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 
