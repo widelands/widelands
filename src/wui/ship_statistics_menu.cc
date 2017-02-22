@@ -32,7 +32,7 @@
 #include "wui/shipwindow.h"
 #include "wui/watchwindow.h"
 
-// NOCOM documentation, including hotkeys in Lua
+// NOCOM documentation
 inline InteractivePlayer& ShipStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
@@ -119,10 +119,9 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	watchbtn_ = new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
 	                           g_gr->images().get("images/ui_basic/but2.png"),
 	                           g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
-	                           /** TRANSLATORS: %s is a tooltip, O is the corresponding hotkey */
-	                           (boost::format(_("W: %s"))
-	                            /** TRANSLATORS: Tooltip in the ship statistics window */
-	                            % _("Watch this ship"))
+	                           (boost::format(_("%1% (Hotkey: %2%)"))
+	                            /** TRANSLATORS: Tooltip in the messages window */
+	                            % _("Watch the selected ship") % pgettext("hotkey", "W"))
 	                              .str());
 	button_box->add(watchbtn_, UI::Align::kLeft);
 	watchbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::watch_ship, this));
@@ -133,10 +132,9 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	   new UI::Button(button_box, "ship_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
 	                  g_gr->images().get("images/ui_basic/but2.png"),
 	                  g_gr->images().get("images/ui_basic/fsel.png"),
-	                  /** TRANSLATORS: %s is a tooltip, O is the corresponding hotkey */
-	                  (boost::format(_("O: %s"))
-	                   /** TRANSLATORS: Tooltip in the ship statistics window */
-	                   % _("Go to ship and open its window"))
+	                  (boost::format(_("%1% (Hotkey: %2%)"))
+	                   /** TRANSLATORS: Tooltip in the messages window */
+	                   % _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
 	                     .str());
 	button_box->add(openwindowbtn_, UI::Align::kLeft);
 	openwindowbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::open_ship_window, this));
@@ -145,10 +143,9 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	   new UI::Button(button_box, "ship_stats_center_main_mapview_button", 0, 0, kButtonSize,
 	                  kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
 	                  g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
-	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
-	                  (boost::format(_("G: %s"))
-	                   /** TRANSLATORS: Tooltip in the ship statistics window */
-	                   % _("Center main mapview on location"))
+	                  (boost::format(_("%1% (Hotkey: %2%)"))
+	                   /** TRANSLATORS: Tooltip in the messages window */
+	                   % _("Center the map on the selected ship") % pgettext("hotkey", "G"))
 	                     .str());
 	button_box->add(centerviewbtn_, UI::Align::kLeft);
 	centerviewbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::center_view, this));
@@ -522,30 +519,29 @@ void ShipStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                        /** TRANSLATORS: Tooltip in the messages window */
-	                        % _("Show idle ships only") % pgettext("hotkey", "Alt + 1"))
+	                        % _("Show idle ships") % pgettext("hotkey", "Alt + 1"))
 	                          .str());
 	shipping_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show ships transporting wares only") %
+	                            % _("Show ships shipping wares and workers") %
 	                            pgettext("hotkey", "Alt + 2"))
 	                              .str());
 	waiting_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show waiting expeditions only") % pgettext("hotkey", "Alt + 3"))
+	                           % _("Show waiting expeditions") % pgettext("hotkey", "Alt + 3"))
 	                             .str());
 	scouting_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show scouting expeditions only") %
-	                            pgettext("hotkey", "Alt + 4"))
+	                            % _("Show scouting expeditions") % pgettext("hotkey", "Alt + 4"))
 	                              .str());
 	portspace_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show ships that found a portspace only") %
+	                             % _("Show expeditions with port space found") %
 	                             pgettext("hotkey", "Alt + 5"))
 	                               .str());
 	colonizing_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                              /** TRANSLATORS: Tooltip in the messages window */
-	                              % _("Show solonizing ships only") % pgettext("hotkey", "Alt + 6"))
+	                              % _("Show colonizing expeditions") % pgettext("hotkey", "Alt + 6"))
 	                                .str());
 }
 
