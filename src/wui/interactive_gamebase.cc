@@ -147,18 +147,21 @@ bool InteractiveGameBase::try_show_ship_window() {
 	for (Widelands::Bob* temp_ship : ships) {
 		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
-				UI::UniqueWindow::Registry& registry =
-				   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
-				registry.open_window = [this, &registry, ship] {
-					new ShipWindow(*this, registry, *ship);
-				};
-				registry.create();
+				show_ship_window(ship);
 				return true;
 			}
 		}
 	}
-
 	return false;
+}
+
+void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+		unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	registry.open_window = [this, &registry, ship] {
+		new ShipWindow(*this, registry, *ship);
+	};
+	registry.create();
 }
 
 void InteractiveGameBase::show_game_summary() {

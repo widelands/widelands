@@ -471,8 +471,7 @@ void SeafaringStatisticsMenu::open_ship_window() {
 	if (table_.has_selection()) {
 		center_view();
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
-		// NOCOM refactor after merging ship window branch
-		new ShipWindow(iplayer(), *ship);
+		iplayer().show_ship_window(ship);
 	}
 }
 
