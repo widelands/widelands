@@ -37,132 +37,163 @@ inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
-constexpr int kWindowWidth = 355;
-constexpr int kWindowHeight = 375;
-constexpr int kTableHeight = 300;
 constexpr int kPadding = 5;
 constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr,
-                      "seafaring_statistics",
-                      &registry,
-                      kWindowWidth,
-                      kWindowHeight,
-                      _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 355, 375, _("Seafaring Statistics")),
+     main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
+     filter_box_(
+        &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
+     idle_btn_(&filter_box_,
+               "filter_ship_idle",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               g_gr->images().get("images/ui_basic/but0.png"),
+               status_to_image(ShipFilterStatus::kIdle)),
+     waiting_btn_(&filter_box_,
+                  "filter_ship_waiting",
+                  0,
+                  0,
+                  kButtonSize,
+                  kButtonSize,
+                  g_gr->images().get("images/ui_basic/but0.png"),
+                  status_to_image(ShipFilterStatus::kExpeditionWaiting)),
+     scouting_btn_(&filter_box_,
+                   "filter_ship_scouting",
+                   0,
+                   0,
+                   kButtonSize,
+                   kButtonSize,
+                   g_gr->images().get("images/ui_basic/but0.png"),
+                   status_to_image(ShipFilterStatus::kExpeditionScouting)),
+     portspace_btn_(&filter_box_,
+                    "filter_ship_portspace",
+                    0,
+                    0,
+                    kButtonSize,
+                    kButtonSize,
+                    g_gr->images().get("images/ui_basic/but0.png"),
+                    status_to_image(ShipFilterStatus::kExpeditionPortspaceFound)),
+     colonizing_btn_(&filter_box_,
+                     "filter_ship_colonizing",
+                     0,
+                     0,
+                     kButtonSize,
+                     kButtonSize,
+                     g_gr->images().get("images/ui_basic/but0.png"),
+                     status_to_image(ShipFilterStatus::kExpeditionColonizing)),
+     shipping_btn_(&filter_box_,
+                   "filter_ship_transporting",
+                   0,
+                   0,
+                   kButtonSize,
+                   kButtonSize,
+                   g_gr->images().get("images/ui_basic/but0.png"),
+                   status_to_image(ShipFilterStatus::kShipping)),
      ship_filter_(ShipFilterStatus::kAll),
-     table_(this,
-            kPadding,
-            kButtonSize + 2 * kPadding,
-            kWindowWidth - 2 * kPadding,
-            kTableHeight,
+     navigation_box_(
+        &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
+     watchbtn_(&navigation_box_,
+               "seafaring_stats_watch_button",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               g_gr->images().get("images/ui_basic/but2.png"),
+               g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
+               (boost::format(_("%1% (Hotkey: %2%)"))
+                /** TRANSLATORS: Tooltip in the messages window */
+                %
+                _("Watch the selected ship") % pgettext("hotkey", "W"))
+                  .str()),
+     openwindowbtn_(&navigation_box_,
+                    "seafaring_stats_watch_button",
+                    0,
+                    0,
+                    kButtonSize,
+                    kButtonSize,
+                    g_gr->images().get("images/ui_basic/but2.png"),
+                    g_gr->images().get("images/ui_basic/fsel.png"),
+                    (boost::format(_("%1% (Hotkey: %2%)"))
+                     /** TRANSLATORS: Tooltip in the messages window */
+                     %
+                     _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
+                       .str()),
+     centerviewbtn_(&navigation_box_,
+                    "seafaring_stats_center_main_mapview_button",
+                    0,
+                    0,
+                    kButtonSize,
+                    kButtonSize,
+                    g_gr->images().get("images/ui_basic/but2.png"),
+                    g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
+                    (boost::format(_("%1% (Hotkey: %2%)"))
+                     /** TRANSLATORS: Tooltip in the messages window */
+                     %
+                     _("Center the map on the selected ship") % pgettext("hotkey", "G"))
+                       .str()),
+     table_(&main_box_,
+            0,
+            0,
+            get_inner_w() - 2 * kPadding,
+            100,
             g_gr->images().get("images/ui_basic/but1.png")) {
 
-	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
-	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
-	table_.add_column(kWindowWidth / 2 - kPadding, pgettext("ship", "Name"));
-	table_.add_column(
-	   0, pgettext("ship", "Status"), "", UI::Align::kHCenter, UI::TableColumnType::kFlexible);
-	table_.focus();
-
 	// Buttons for ship states
-	UI::Box* button_box = new UI::Box(
-	   this, kPadding, kPadding, UI::Box::Horizontal, table_.get_w(), kButtonSize, kPadding);
+	main_box_.add(&filter_box_, UI::Align::kLeft, true);
+	filter_box_.add(&idle_btn_, UI::Align::kLeft);
+	filter_box_.add(&shipping_btn_, UI::Align::kLeft);
+	filter_box_.add(&waiting_btn_, UI::Align::kLeft);
+	filter_box_.add(&scouting_btn_, UI::Align::kLeft);
+	filter_box_.add(&portspace_btn_, UI::Align::kLeft);
+	filter_box_.add(&colonizing_btn_, UI::Align::kLeft);
 
-	idle_btn_ = new UI::Button(button_box, "filter_ship_idle", 0, 0, kButtonSize, kButtonSize,
-	                           g_gr->images().get("images/ui_basic/but0.png"),
-	                           status_to_image(ShipFilterStatus::kIdle));
-	button_box->add(idle_btn_, UI::Align::kLeft);
-	idle_btn_->sigclicked.connect(
+	main_box_.add(&table_, UI::Align::kLeft, true, true);
+
+	// Navigation buttons
+	main_box_.add(&navigation_box_, UI::Align::kLeft, true);
+	navigation_box_.add(&watchbtn_, UI::Align::kLeft);
+	navigation_box_.add_inf_space();
+	navigation_box_.add(&openwindowbtn_, UI::Align::kLeft);
+	navigation_box_.add(&centerviewbtn_, UI::Align::kLeft);
+	main_box_.set_size(get_inner_w() - 2 * kPadding, get_inner_h() - 2 * kPadding);
+
+	// Configure actions
+	idle_btn_.sigclicked.connect(
 	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kIdle));
-
-	shipping_btn_ = new UI::Button(button_box, "filter_ship_transporting", 0, 0, kButtonSize,
-	                               kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                               status_to_image(ShipFilterStatus::kShipping));
-	button_box->add(shipping_btn_, UI::Align::kLeft);
-	shipping_btn_->sigclicked.connect(
+	shipping_btn_.sigclicked.connect(
 	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kShipping));
-
-	waiting_btn_ = new UI::Button(button_box, "filter_ship_waiting", 0, 0, kButtonSize, kButtonSize,
-	                              g_gr->images().get("images/ui_basic/but0.png"),
-	                              status_to_image(ShipFilterStatus::kExpeditionWaiting));
-	button_box->add(waiting_btn_, UI::Align::kLeft);
-	waiting_btn_->sigclicked.connect(boost::bind(
+	waiting_btn_.sigclicked.connect(boost::bind(
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionWaiting));
-
-	scouting_btn_ = new UI::Button(button_box, "filter_ship_scouting", 0, 0, kButtonSize,
-	                               kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                               status_to_image(ShipFilterStatus::kExpeditionScouting));
-	button_box->add(scouting_btn_, UI::Align::kLeft);
-	scouting_btn_->sigclicked.connect(boost::bind(
+	scouting_btn_.sigclicked.connect(boost::bind(
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionScouting));
-
-	portspace_btn_ = new UI::Button(button_box, "filter_ship_portspace", 0, 0, kButtonSize,
-	                                kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                                status_to_image(ShipFilterStatus::kExpeditionPortspaceFound));
-	button_box->add(portspace_btn_, UI::Align::kLeft);
-	portspace_btn_->sigclicked.connect(boost::bind(
+	portspace_btn_.sigclicked.connect(boost::bind(
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionPortspaceFound));
-
-	colonizing_btn_ = new UI::Button(button_box, "filter_ship_colonizing", 0, 0, kButtonSize,
-	                                 kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                                 status_to_image(ShipFilterStatus::kExpeditionColonizing));
-	button_box->add(colonizing_btn_, UI::Align::kLeft);
-	colonizing_btn_->sigclicked.connect(boost::bind(
+	colonizing_btn_.sigclicked.connect(boost::bind(
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionColonizing));
-
-	button_box->set_size(table_.get_w(), kButtonSize);
-
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 
-	// Navigation buttons
-	button_box = new UI::Box(this, kPadding, kWindowHeight - kPadding - kButtonSize,
-	                         UI::Box::Horizontal, table_.get_w(), kButtonSize, kPadding);
+	watchbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::watch_ship, this));
+	openwindowbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::open_ship_window, this));
+	centerviewbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::center_view, this));
 
-	watchbtn_ = new UI::Button(button_box, "seafaring_stats_watch_button", 0, 0, kButtonSize,
-	                           kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
-	                           g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
-	                           (boost::format(_("%1% (Hotkey: %2%)"))
-	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Watch the selected ship") % pgettext("hotkey", "W"))
-	                              .str());
-	button_box->add(watchbtn_, UI::Align::kLeft);
-	watchbtn_->sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::watch_ship, this));
-
-	button_box->add_inf_space();
-
-	openwindowbtn_ =
-	   new UI::Button(button_box, "seafaring_stats_watch_button", 0, 0, kButtonSize, kButtonSize,
-	                  g_gr->images().get("images/ui_basic/but2.png"),
-	                  g_gr->images().get("images/ui_basic/fsel.png"),
-	                  (boost::format(_("%1% (Hotkey: %2%)"))
-	                   /** TRANSLATORS: Tooltip in the messages window */
-	                   % _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
-	                     .str());
-	button_box->add(openwindowbtn_, UI::Align::kLeft);
-	openwindowbtn_->sigclicked.connect(
-	   boost::bind(&SeafaringStatisticsMenu::open_ship_window, this));
-
-	centerviewbtn_ =
-	   new UI::Button(button_box, "seafaring_stats_center_main_mapview_button", 0, 0, kButtonSize,
-	                  kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
-	                  g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
-	                  (boost::format(_("%1% (Hotkey: %2%)"))
-	                   /** TRANSLATORS: Tooltip in the messages window */
-	                   % _("Center the map on the selected ship") % pgettext("hotkey", "G"))
-	                     .str());
-	button_box->add(centerviewbtn_, UI::Align::kLeft);
-	centerviewbtn_->sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::center_view, this));
-
-	button_box->set_size(table_.get_w(), kButtonSize);
-
+	// Configure table
+	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
+	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
+	table_.add_column(get_inner_w() / 2 - kPadding, pgettext("ship", "Name"));
+	table_.add_column(
+	   0, pgettext("ship", "Status"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_sort_column(ColName);
 	fill_table();
+
 	set_can_focus(true);
-	focus();
 	set_thinks(false);
+	table_.focus();
 
 	// NOCOM unify these when the other branch is in.
 	shipwindownotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
@@ -349,15 +380,15 @@ void SeafaringStatisticsMenu::selected() {
  * a message was double clicked
  */
 void SeafaringStatisticsMenu::double_clicked() {
-	if (centerviewbtn_->enabled()) {
+	if (table_.has_selection()) {
 		center_view();
 	}
 }
 
 void SeafaringStatisticsMenu::set_buttons_enabled() {
-	centerviewbtn_->set_enabled(table_.has_selection());
-	openwindowbtn_->set_enabled(table_.has_selection());
-	watchbtn_->set_enabled(table_.has_selection());
+	centerviewbtn_.set_enabled(table_.has_selection());
+	openwindowbtn_.set_enabled(table_.has_selection());
+	watchbtn_.set_enabled(table_.has_selection());
 }
 
 /**
@@ -461,32 +492,32 @@ void SeafaringStatisticsMenu::open_ship_window() {
 void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	switch (status) {
 	case ShipFilterStatus::kExpeditionWaiting:
-		toggle_filter_ships_button(*waiting_btn_, status);
+		toggle_filter_ships_button(waiting_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionScouting:
-		toggle_filter_ships_button(*scouting_btn_, status);
+		toggle_filter_ships_button(scouting_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionPortspaceFound:
-		toggle_filter_ships_button(*portspace_btn_, status);
+		toggle_filter_ships_button(portspace_btn_, status);
 		break;
 	case ShipFilterStatus::kExpeditionColonizing:
-		toggle_filter_ships_button(*colonizing_btn_, status);
+		toggle_filter_ships_button(colonizing_btn_, status);
 		break;
 	case ShipFilterStatus::kShipping:
-		toggle_filter_ships_button(*shipping_btn_, status);
+		toggle_filter_ships_button(shipping_btn_, status);
 		break;
 	case ShipFilterStatus::kIdle:
-		toggle_filter_ships_button(*idle_btn_, status);
+		toggle_filter_ships_button(idle_btn_, status);
 		break;
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;
-		waiting_btn_->set_perm_pressed(false);
-		scouting_btn_->set_perm_pressed(false);
-		portspace_btn_->set_perm_pressed(false);
-		colonizing_btn_->set_perm_pressed(false);
-		shipping_btn_->set_perm_pressed(false);
-		idle_btn_->set_perm_pressed(false);
+		waiting_btn_.set_perm_pressed(false);
+		scouting_btn_.set_perm_pressed(false);
+		portspace_btn_.set_perm_pressed(false);
+		colonizing_btn_.set_perm_pressed(false);
+		shipping_btn_.set_perm_pressed(false);
+		idle_btn_.set_perm_pressed(false);
 		break;
 	}
 	fill_table();
@@ -502,12 +533,12 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 		button.set_perm_pressed(false);
 		ship_filter_ = ShipFilterStatus::kAll;
 	} else {
-		waiting_btn_->set_perm_pressed(false);
-		scouting_btn_->set_perm_pressed(false);
-		portspace_btn_->set_perm_pressed(false);
-		colonizing_btn_->set_perm_pressed(false);
-		shipping_btn_->set_perm_pressed(false);
-		idle_btn_->set_perm_pressed(false);
+		waiting_btn_.set_perm_pressed(false);
+		scouting_btn_.set_perm_pressed(false);
+		portspace_btn_.set_perm_pressed(false);
+		colonizing_btn_.set_perm_pressed(false);
+		shipping_btn_.set_perm_pressed(false);
+		idle_btn_.set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		ship_filter_ = status;
 
@@ -524,32 +555,32 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
  */
 void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
-	idle_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                        /** TRANSLATORS: Tooltip in the messages window */
-	                        % _("Show idle ships") % pgettext("hotkey", "Alt + 1"))
-	                          .str());
-	shipping_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show ships shipping wares and workers") %
-	                            pgettext("hotkey", "Alt + 2"))
-	                              .str());
-	waiting_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	idle_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	                       /** TRANSLATORS: Tooltip in the messages window */
+	                       % _("Show idle ships") % pgettext("hotkey", "Alt + 1"))
+	                         .str());
+	shipping_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show waiting expeditions") % pgettext("hotkey", "Alt + 3"))
+	                           % _("Show ships shipping wares and workers") %
+	                           pgettext("hotkey", "Alt + 2"))
 	                             .str());
-	scouting_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	waiting_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	                          /** TRANSLATORS: Tooltip in the messages window */
+	                          % _("Show waiting expeditions") % pgettext("hotkey", "Alt + 3"))
+	                            .str());
+	scouting_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	                           /** TRANSLATORS: Tooltip in the messages window */
+	                           % _("Show scouting expeditions") % pgettext("hotkey", "Alt + 4"))
+	                             .str());
+	portspace_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show scouting expeditions") % pgettext("hotkey", "Alt + 4"))
+	                            % _("Show expeditions with port space found") %
+	                            pgettext("hotkey", "Alt + 5"))
 	                              .str());
-	portspace_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	colonizing_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show expeditions with port space found") %
-	                             pgettext("hotkey", "Alt + 5"))
+	                             % _("Show colonizing expeditions") % pgettext("hotkey", "Alt + 6"))
 	                               .str());
-	colonizing_btn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                              /** TRANSLATORS: Tooltip in the messages window */
-	                              % _("Show colonizing expeditions") % pgettext("hotkey", "Alt + 6"))
-	                                .str());
 }
 
 void SeafaringStatisticsMenu::fill_table() {

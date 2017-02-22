@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "notifications/notifications.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
@@ -95,18 +96,21 @@ private:
 	void toggle_filter_ships_button(UI::Button&, ShipFilterStatus);
 	void set_filter_ships_tooltips();
 
+	UI::Box main_box_;
 	// Buttons for ship states
-	UI::Button* waiting_btn_;
-	UI::Button* scouting_btn_;
-	UI::Button* portspace_btn_;
-	UI::Button* colonizing_btn_;
-	UI::Button* shipping_btn_;
-	UI::Button* idle_btn_;
+	UI::Box filter_box_;
+	UI::Button idle_btn_;
+	UI::Button waiting_btn_;
+	UI::Button scouting_btn_;
+	UI::Button portspace_btn_;
+	UI::Button colonizing_btn_;
+	UI::Button shipping_btn_;
 	ShipFilterStatus ship_filter_;
 	// Navigation buttons
-	UI::Button* watchbtn_;
-	UI::Button* openwindowbtn_;
-	UI::Button* centerviewbtn_;
+	UI::Box navigation_box_;
+	UI::Button watchbtn_;
+	UI::Button openwindowbtn_;
+	UI::Button centerviewbtn_;
 
 	// Data
 	UI::Table<uintptr_t> table_;
