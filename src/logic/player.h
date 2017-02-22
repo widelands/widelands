@@ -114,6 +114,10 @@ public:
 		messages().set_message_status(id, status);
 	}
 
+	const std::set<Serial>& ships() const;
+	void add_ship(Serial ship);
+	void remove_ship(Serial ship);
+
 	const EditorGameBase& egbase() const {
 		return egbase_;
 	}
@@ -638,6 +642,7 @@ private:
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
 	Economies economies_;
+	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 

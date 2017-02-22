@@ -155,12 +155,14 @@ void Ship::init_auto_task(Game& game) {
 void Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
-	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 	assert(get_owner());
+	get_owner()->add_ship(serial());
 
 	// Assigning a ship name
 	shipname_ = get_owner()->pick_shipname();
 	molog("New ship: %s\n", shipname_.c_str());
+
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 }
 
 /**
@@ -179,6 +181,11 @@ void Ship::init_fleet(EditorGameBase& egbase) {
 void Ship::cleanup(EditorGameBase& egbase) {
 	if (fleet_) {
 		fleet_->remove_ship(egbase, this);
+	}
+
+	Player* owner = get_owner();
+	if (owner != nullptr) {
+		owner->remove_ship(serial());
 	}
 
 	while (!items_.empty()) {
@@ -304,6 +311,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 		destination_ = nullptr;
 		dst->ship_arrived(game, *this);
 		start_task_idle(game, descr().main_animation(), 250);
+		Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kDestinationChanged));
 		return true;
 	}
 
@@ -411,14 +419,12 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			}
 		} while (mr.advance(map));
 
+		expedition_->seen_port_buildspaces = temp_port_buildspaces;
 		if (new_port_space) {
 			ship_state_ = ShipStates::kExpeditionPortspaceFound;
 			send_message(game, _("Port Space"), _("Port Space Found"),
 			             _("An expedition ship found a new port build space."),
 			             "images/wui/editor/fsel_editor_set_port_space.png");
-		}
-		expedition_->seen_port_buildspaces = temp_port_buildspaces;
-		if (new_port_space) {
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 		}
@@ -585,7 +591,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// if we are here, it seems something really strange happend.
 				log("WARNING: ship was not able to start exploration. Entering WAIT mode.");
 				ship_state_ = ShipStates::kExpeditionWaiting;
-				return start_task_idle(game, descr().main_animation(), 1500);
+				start_task_idle(game, descr().main_animation(), 1500);
+				Notifications::publish(
+					NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
+				return;
 			}
 		} else {  // scouting towards a specific direction
 			if (exp_dir_swimmable(expedition_->scouting_direction)) {
@@ -698,6 +707,13 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	NEVER_HERE();
 }
 
+void Ship::set_ship_state_and_notify(ShipStates state, NoteShipWindow::Action action) {
+	if (ship_state_ != state) {
+		ship_state_ = state;
+		Notifications::publish(NoteShipWindow(serial(), action));
+	}
+}
+
 void Ship::set_economy(Game& game, Economy* e) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
@@ -718,6 +734,7 @@ void Ship::set_destination(Game& game, PortDock& pd) {
 	      items_.size());
 	destination_ = &pd;
 	send_signal(game, "wakeup");
+	Notifications::publish(NoteShipWindow(serial(), NoteShipWindow::Action::kDestinationChanged));
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
@@ -842,7 +859,7 @@ void Ship::start_task_expedition(Game& game) {
 /// @note only called via player command
 void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
 	assert(expedition_);
-	ship_state_ = ShipStates::kExpeditionScouting;
+	set_ship_state_and_notify(ShipStates::kExpeditionScouting, NoteShipWindow::Action::kDestinationChanged);
 	expedition_->scouting_direction = scouting_direction;
 	expedition_->island_exploration = false;
 }
@@ -868,7 +885,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	for (auto& tree : trees) {
 		tree.object->remove(game);
 	}
-	ship_state_ = ShipStates::kExpeditionColonizing;
+	set_ship_state_and_notify(ShipStates::kExpeditionColonizing, NoteShipWindow::Action::kRefresh);
 }
 
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
@@ -876,7 +893,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// @note only called via player command
 void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direction) {
 	assert(expedition_);
-	ship_state_ = ShipStates::kExpeditionScouting;
+	set_ship_state_and_notify(ShipStates::kExpeditionScouting, NoteShipWindow::Action::kDestinationChanged);
 	expedition_->island_explore_direction = island_explore_direction;
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->island_exploration = true;
@@ -1167,6 +1184,7 @@ void Ship::Loader::load_finish() {
 	// economy. Also, we might are on an expedition which means that we just now
 	// created the economy of this ship and must inform all wares.
 	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.economy_);
+	ship.get_owner()->add_ship(ship.serial());
 }
 
 MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

@@ -339,6 +339,18 @@ void Player::message_object_removed(MessageId message_id) const {
 	game->cmdqueue().enqueue(new CmdDeleteMessage(game->get_gametime(), player_number_, message_id));
 }
 
+const std::set<Serial>& Player::ships() const {
+	return ships_;
+}
+void Player::add_ship(Serial ship) {
+	ships_.insert(ship);
+}
+void Player::remove_ship(Serial ship) {
+	if (ships_.count(ship) == 1) {
+		ships_.erase(ship);
+	}
+}
+
 /*
 ===============
 Return filtered buildcaps that take the player's territory into account.

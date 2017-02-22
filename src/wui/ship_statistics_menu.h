@@ -26,24 +26,17 @@
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
-// NOCOM
-namespace Widelands {
-class Game;
-}
+
 class InteractivePlayer;
 
-///  Shows the not already fulfilled objectives.
+///  Shows a list of the ships owned by the interactive player.
 struct ShipStatisticsMenu : public UI::UniqueWindow {
 	ShipStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
-
-	/// Updates the status for the ship. If the ship is new, adds it to the table.
-	void update_ship(const Widelands::Ship&);
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	enum Cols { ColName, ColStatus };
-	enum class ReadUnread : uint8_t { allMessages, readMessages, newMessages };
 	enum class ShipFilterStatus {
 		kIdle,
 		kShipping,
@@ -69,13 +62,16 @@ private:
 		bool operator==(const ShipInfo& other) const {
 			return serial == other.serial;
 		}
+		bool operator<(const ShipInfo& other) const {
+			return serial < other.serial;
+		}
 
 		const std::string name;
-		const ShipFilterStatus status;
+		ShipFilterStatus status;
 		const Widelands::Serial serial;
 	};
+
 	const ShipInfo* create_shipinfo(const Widelands::Ship& ship) const;
-	void set_entry_record(UI::Table<const ShipInfo* const>::EntryRecord*, const ShipInfo& info);
 	Widelands::Ship* serial_to_ship(Widelands::Serial serial) const;
 
 	InteractivePlayer& iplayer() const;
@@ -84,13 +80,18 @@ private:
 
 	void fill_table();
 	void center_view();
+	/// Updates the status for the ship. If the ship is new, adds it to the table.
+	void update_ship(const Widelands::Ship&);
+	void remove_ship(const Widelands::Ship&);
+	void set_entry_record(UI::Table<uintptr_t>::EntryRecord*, const ShipInfo& info);
+	void update_entry_record(UI::Table<uintptr_t>::EntryRecord& er, const ShipInfo&);
+
 	void filter_ships(ShipFilterStatus);
 	void toggle_filter_ships_button(UI::Button&, ShipFilterStatus);
 	void set_filter_ships_tooltips();
-	void update_entry_record(UI::Table<uintptr_t>::EntryRecord& er, const ShipInfo&);
 
-	UI::Table<const ShipInfo* const> table_;
-	std::map<Widelands::Serial, ShipInfo> data_;
+	UI::Table<uintptr_t> table_;
+	std::vector<ShipInfo> data_;
 	UI::Button* centerviewbtn_;
 	// Buttons for message types
 	UI::Button* waiting_btn_;

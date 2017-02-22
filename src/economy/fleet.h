@@ -105,11 +105,6 @@ struct Fleet : MapObject {
 	bool get_path(PortDock& start, PortDock& end, Path& path);
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
-	// NOCOM this is only giving us idle ships, so maybe it can go again.
-	const std::vector<Ship*>& ships() const {
-		return ships_;
-	}
-
 	uint32_t count_ships();
 	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port);
 	uint32_t count_ports();

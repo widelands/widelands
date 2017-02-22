@@ -24,13 +24,14 @@
 
 #include "economy/fleet.h"
 #include "graphic/graphic.h"
+#include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/box.h"
 #include "wui/interactive_player.h"
 
 // NOCOM documentation
-
+// NOCOM watch and open window buttons would be nice
 inline InteractivePlayer& ShipStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
@@ -137,7 +138,8 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	   [this](const Widelands::NoteShipWindow& note) {
 		   switch (note.action) {
 		   // The ship state has changed, e.g. expedition canceled
-		   case Widelands::NoteShipWindow::Action::kRefresh: {
+		   case Widelands::NoteShipWindow::Action::kRefresh:
+		   case Widelands::NoteShipWindow::Action::kDestinationChanged: {
 			   update_ship(*serial_to_ship(note.serial));
 		   } break;
 		   default:
@@ -154,9 +156,8 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 			   break;
 
 		   case Widelands::NoteShipMessage::Message::kLost:
-			   if (data_.count(note.ship->serial()) == 1) {
-				   fill_table();
-			   }
+			   // NOCOM remove_ship(*note.ship);
+			   fill_table();
 			   break;
 		   default:
 			   break;  // Do nothing
@@ -172,7 +173,7 @@ ShipStatisticsMenu::status_to_string(ShipStatisticsMenu::ShipFilterStatus status
 	case ShipStatisticsMenu::ShipFilterStatus::kShipping:
 		return pgettext("ship_state", "Shipping");
 	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
-		return pgettext("ship_state", "Idle");
+		return pgettext("ship_state", "Waiting");
 	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionScouting:
 		return pgettext("ship_state", "Scouting");
 	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
@@ -180,7 +181,7 @@ ShipStatisticsMenu::status_to_string(ShipStatisticsMenu::ShipFilterStatus status
 	case ShipStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
 		return pgettext("ship_state", "Founding a Colony");
 	case ShipStatisticsMenu::ShipFilterStatus::kAll:
-		return "All";  // The user shouldn't see this
+		return "All";  // The user shouldn't see this, so we don't localize
 	default:
 		NEVER_HERE();
 	}
@@ -219,8 +220,11 @@ ShipStatisticsMenu::status_to_image(ShipStatisticsMenu::ShipFilterStatus status)
 
 const ShipStatisticsMenu::ShipInfo*
 ShipStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
+	if (&ship == nullptr) {
+		return new ShipInfo();
+	}
 	const Widelands::Ship::ShipStates state = ship.get_ship_state();
-	ShipFilterStatus status;
+	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
 		if (ship.get_destination(iplayer().game()) != nullptr) {
@@ -244,16 +248,16 @@ ShipStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	case Widelands::Ship::ShipStates::kSinkRequest:
 	case Widelands::Ship::ShipStates::kSinkAnimation:
 		status = ShipFilterStatus::kAll;
-	default:
-		NEVER_HERE();
 	}
 	return new ShipInfo(ship.get_shipname(), status, ship.serial());
 }
 
-void ShipStatisticsMenu::set_entry_record(
-   UI::Table<const ShipStatisticsMenu::ShipInfo* const>::EntryRecord* er, const ShipInfo& info) {
-	er->set_string(ColName, info.name);
-	er->set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
+void ShipStatisticsMenu::set_entry_record(UI::Table<uintptr_t>::EntryRecord* er,
+                                          const ShipInfo& info) {
+	if (info.status != ShipFilterStatus::kAll) {
+		er->set_string(ColName, info.name);
+		er->set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
+	}
 }
 
 Widelands::Ship* ShipStatisticsMenu::serial_to_ship(Widelands::Serial serial) const {
@@ -265,17 +269,37 @@ Widelands::Ship* ShipStatisticsMenu::serial_to_ship(Widelands::Serial serial) co
 
 void ShipStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	const ShipInfo* const info = create_shipinfo(ship);
-	if (data_.count(info->serial) == 1) {
-		const ShipInfo* const old_info = &data_[info->serial];
-		if (info->status != old_info->status) {
-			UI::Table<const ShipInfo* const>::EntryRecord* er = table_.find(old_info);
-			set_entry_record(er, *info);
-			table_.sort();
+	// Try to find the ship in the table
+	for (size_t i = 0; i < data_.size(); ++i) {
+		const ShipInfo& old_info = data_[i];
+		if (info->serial == old_info.serial) {
+			// The status has changed - we need an update
+			if (info->status != old_info.status) {
+				data_[i].status = info->status;
+				UI::Table<uintptr_t>::EntryRecord* er = table_.find(i);
+				set_entry_record(er, *info);
+				table_.sort();
+			}
+			return;
 		}
-	} else {
-		UI::Table<const ShipInfo* const>::EntryRecord& er = table_.add(info);
-		set_entry_record(&er, *info);
-		table_.sort();
+	}
+	// This is a new ship
+	data_.push_back(*info);
+	UI::Table<uintptr_t const>::EntryRecord& er = table_.add(data_.size() - 1);
+	set_entry_record(&er, *info);
+	table_.sort();
+}
+
+void ShipStatisticsMenu::remove_ship(const Widelands::Ship& ship) {
+	const ShipInfo* const info = create_shipinfo(ship);
+	// Try to find the ship in the table
+	for (size_t i = 0; i < data_.size(); ++i) {
+		const ShipInfo& old_info = data_[i];
+		if (info->serial == old_info.serial) {
+			// NOCOM index-based remove doesn't work
+			table_.remove(i);
+			return;
+		}
 	}
 }
 
@@ -368,7 +392,7 @@ bool ShipStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 
 void ShipStatisticsMenu::center_view() {
 	if (table_.has_selection()) {
-		Widelands::Ship* ship = serial_to_ship(table_.get_selected()->serial);
+		Widelands::Ship* ship = serial_to_ship(data_[table_.get_selected()].serial);
 		iplayer().scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 	}
 }
@@ -474,33 +498,12 @@ void ShipStatisticsMenu::set_filter_ships_tooltips() {
 void ShipStatisticsMenu::fill_table() {
 	data_.clear();
 	table_.clear();
-	// NOCOM we are getting only idle ships here.
-	const Widelands::Player& player = iplayer().player();
-	const Widelands::TribeDescr& tribe = player.tribe();
-	const Widelands::Map& map = iplayer().game().map();
-	const std::vector<Widelands::Player::BuildingStats>& stats_vector =
-	   player.get_building_statistics(tribe.port());
-	std::set<Widelands::Serial> handled_fleets;
-	for (const auto& stats : stats_vector) {
-		Widelands::BaseImmovable* imm = map.get_immovable(stats.pos);
-		// NOCOM assert that we have a port
-		upcast(Widelands::Warehouse, port, imm);
-		const Widelands::PortDock& portdock = *port->get_portdock();
-		const Widelands::Fleet& fleet = *portdock.get_fleet();
-		Widelands::Serial fleet_serial = fleet.serial();
-		if (handled_fleets.count(fleet_serial) == 1) {
-			continue;
-		} else {
-			handled_fleets.insert(fleet_serial);
-		}
-		for (const auto& ship : fleet.ships()) {
-			const ShipInfo* info = create_shipinfo(*ship);
-			if (info->status != ShipFilterStatus::kAll) {
-				data_.insert(std::make_pair(info->serial, *info));
-				log("NOCOM %d %s %d\n", info->serial, info->name.c_str(), info->status);
-				UI::Table<const ShipInfo* const>::EntryRecord& er = table_.add(info);
-				set_entry_record(&er, *info);
-			}
+	for (const auto& serial : iplayer().player().ships()) {
+		const ShipInfo* info = create_shipinfo(*serial_to_ship(serial));
+		if (info->status != ShipFilterStatus::kAll) {
+			data_.push_back(*info);
+			UI::Table<uintptr_t const>::EntryRecord& er = table_.add(data_.size() - 1);
+			set_entry_record(&er, *info);
 		}
 	}
 

@@ -59,7 +59,7 @@ struct NoteShipWindow {
 
 	Serial serial;
 
-	enum class Action { kRefresh, kClose };
+	enum class Action { kRefresh, kClose, kDestinationChanged };
 	const Action action;
 
 	NoteShipWindow(Serial init_serial, const Action& init_action)
@@ -263,6 +263,8 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
+	void set_ship_state_and_notify(ShipStates state, NoteShipWindow::Action action);
 
 	void init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);
