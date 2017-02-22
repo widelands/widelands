@@ -123,10 +123,6 @@ ShipStatisticsMenu::ShipStatisticsMenu(InteractivePlayer& plr, UI::UniqueWindow:
 	centerviewbtn_->sigclicked.connect(boost::bind(&ShipStatisticsMenu::center_view, this));
 	centerviewbtn_->set_enabled(false);
 
-	if (get_usedefaultpos()) {
-		center_to_parent();
-	}
-
 	table_.set_sort_column(ColName);
 	fill_table();
 	set_can_focus(true);
