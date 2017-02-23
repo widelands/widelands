@@ -289,7 +289,7 @@ struct TextBuilder {
 				}
 			}
 
-			int32_t textleft;
+			int32_t textleft = 0;
 
 			switch (mirror_alignment(richtext->get_text_align())) {
 			  case UI::HAlign::kRight:
