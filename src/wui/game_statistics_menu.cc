@@ -26,8 +26,8 @@
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/seafaring_statistics_menu.h"
 #include "wui/interactive_player.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 

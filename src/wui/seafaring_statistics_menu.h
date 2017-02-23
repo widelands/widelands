@@ -17,9 +17,10 @@
  *
  */
 
-#ifndef WL_WUI_SHIP_STATISTICS_MENU_H
-#define WL_WUI_SHIP_STATISTICS_MENU_H
+#ifndef WL_WUI_SEAFARING_STATISTICS_MENU_H
+#define WL_WUI_SEAFARING_STATISTICS_MENU_H
 
+#include <memory>
 #include <unordered_map>
 
 #include "base/i18n.h"
@@ -151,4 +152,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_SHIP_STATISTICS_MENU_H
+#endif  // end of include guard: WL_WUI_SEAFARING_STATISTICS_MENU_H
