@@ -58,7 +58,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	UI::Button* followbtn = new UI::Button(
 	   this, "follow", 0, h - 34, 34, 34, g_gr->images().get("images/ui_basic/but0.png"),
 	   g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
-	followbtn->sigclicked.connect(boost::bind(&WatchWindow::follow, this));
+	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
 	UI::Button* gotobtn = new UI::Button(this, "center_mainview_here", 34, h - 34, 34, 34,
 	                                     g_gr->images().get("images/ui_basic/but0.png"),
@@ -67,7 +67,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (init_single_window) {
-		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
+		for (uint8_t i = 0; i < kViews; ++i) {
 			view_btns_[i] = new UI::Button(this, "view", 74 + (17 * i), 200 - 34, 17, 34,
 			                               g_gr->images().get("images/ui_basic/but0.png"), "-");
 			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
@@ -92,9 +92,9 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
  * This also resets the view cycling timer.
  */
 void WatchWindow::add_view(Widelands::Coords const coords) {
-	if (views_.size() >= NUM_VIEWS)
+	if (views_.size() >= kViews)
 		return;
-	WatchWindowView view;
+	WatchWindow::View view;
 
 	mapview_.scroll_to_field(coords, MapView::Transition::Jump);
 
@@ -121,7 +121,7 @@ void WatchWindow::save_coords() {
 
 // Enables/Disables buttons for views_
 void WatchWindow::toggle_buttons() {
-	for (uint32_t i = 0; i < NUM_VIEWS; ++i) {
+	for (uint32_t i = 0; i < kViews; ++i) {
 		if (i < views_.size()) {
 			view_btns_[i]->set_title(std::to_string(i + 1));
 			view_btns_[i]->set_enabled(true);
@@ -195,12 +195,19 @@ void WatchWindow::stop_tracking_by_drag() {
 }
 
 /**
+ * Track the specified bob.
+ */
+void WatchWindow::follow(Widelands::Bob* bob) {
+	views_[cur_index_].tracking = bob;
+}
+
+/**
  * Called when the user clicks the "follow" button.
  *
  * If we are currently tracking a bob, stop tracking.
  * Otherwise, start tracking the nearest bob from our current position.
  */
-void WatchWindow::follow() {
+void WatchWindow::do_follow() {
 	Widelands::Game& g = game();
 	if (views_[cur_index_].tracking.get(g)) {
 		views_[cur_index_].tracking = nullptr;
@@ -238,7 +245,7 @@ void WatchWindow::follow() {
 				closest_dist = dist;
 			}
 		}
-		views_[cur_index_].tracking = closest;
+		follow(closest);
 	}
 }
 

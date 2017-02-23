@@ -451,7 +451,7 @@ void SeafaringStatisticsMenu::watch_ship() {
 	if (table_.has_selection()) {
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
-		window->follow();
+		window->follow(ship);
 	}
 }
 
