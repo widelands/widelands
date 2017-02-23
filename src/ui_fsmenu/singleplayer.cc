@@ -27,7 +27,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Single Player"), UI::Align::kTopCenter),
+	  title(this, 0, 0, _("Single Player"), UI::HAlign::kHCenter),
 
      // Buttons
      new_game(&vbox_,

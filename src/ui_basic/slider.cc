@@ -540,7 +540,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 		dst.blit(Vector2f(gap_1 + i * gap_n, get_h()),
 		         UI::g_fh1->render(
 		            as_condensed(labels[i], UI::HAlign::kHCenter, UI_FONT_SIZE_SMALL - 2)),
-		         BlendMode::UseAlpha, UI::Align::kCenter);
+					BlendMode::UseAlpha, UI::HAlign::kHCenter);
 	}
 }
 

@@ -1216,10 +1216,15 @@ public:
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
-				if (rn->halign() == UI::HAlign::kHCenter) {
+				switch (rn->halign()) {
+				case UI::HAlign::kHCenter:
 					rn->set_x(rn->x() - extra_width / 2);
-				} else if (rn->halign() == UI::HAlign::kRight) {
+					break;
+				case UI::HAlign::kRight:
 					rn->set_x(rn->x() - extra_width);
+					break;
+				case UI::HAlign::kLeft:
+					break;
 				}
 			}
 		}

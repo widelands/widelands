@@ -36,7 +36,8 @@ namespace UI {
  * The Box automatically resizes itself and positions the added children.
 */
 struct Box : public Panel {
-	enum { // TODO(klaus.halfmann): what exactly is the sematic here? compare HALign::kHorizontal / VAlign:kVertical
+	// Determines whether the box' contents are layed out horizontally or vertically.
+	enum {
 		Horizontal = 0,
 		Vertical = 1,
 	};

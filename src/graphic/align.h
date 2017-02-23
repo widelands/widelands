@@ -35,8 +35,6 @@ enum HAlign {
 	kRight      = 0x02,
 };
 
-extern HAlign mirror_alignment(HAlign alignment);
-
 /** Vertical alignment.
  *
  * bits 2,3 values 0,4,8,12
@@ -48,48 +46,8 @@ enum VAlign {
 	kBottom     = 0x08,
 };
 
-/**
- * This is a binary mix of HAlign and VAlign.
- *
- * mixed aligenments are results of a binary | operation,
- * As C++ does not allow to do this by inheritance I must work around this.
- */
-
-enum Align /* : public HAlign, VAlign */ {
-
-	kTopLeft        = kLeft | kTop,
-	kCenterLeft     = kLeft | VAlign::kVCenter,
-	kBottomLeft     = kLeft | kBottom,
-
-	kTopCenter      = kHCenter | kTop,
-	kCenter         = kHCenter | kVCenter,
-	kBottomCenter   = kHCenter | kBottom,
-
-	kTopRight       = kRight | kTop,
-	kCenterRight    = kRight | kVCenter,
-	kBottomRight    = kRight | kBottom,
-
-};
-
-/**
- * Helper class to carry Alignment related functions.
- */
-class Aligner {
-
-  public:
-	static const int kHorizontal = 0x03;  // Use as bitmask to extract HALign values
-	static const int kVertical   = 0x0C;  // Use as bitmask to extract VALign values
-
-    static VAlign sliceV(Align align) { return static_cast<VAlign>(align & kVertical); }
-    static HAlign sliceH(Align align) { return static_cast<HAlign>(align & kHorizontal); }
-
-    static Align merge(HAlign hAlign, VAlign vAlign) { return static_cast<Align>(hAlign | vAlign); }
-};
-
-
-Align mirror_alignment(Align alignment);
+HAlign mirror_alignment(HAlign alignment);
 
 void correct_for_align(HAlign, uint32_t w, Vector2f* pt);
-void correct_for_align(Align, uint32_t w, uint32_t h, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

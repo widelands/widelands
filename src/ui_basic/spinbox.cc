@@ -114,7 +114,7 @@ SpinBox::SpinBox(Panel* const parent,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label, UI::HAlign::kHCenter);
 
-	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
+	sbi_->text = new UI::Textarea(box_, "", UI::HAlign::kHCenter);
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 

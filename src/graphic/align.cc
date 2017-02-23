@@ -32,26 +32,19 @@ namespace UI {
 HAlign mirror_alignment(HAlign alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
-			case HAlign::kLeft:    return HAlign::kRight;
-			case HAlign::kRight:   return HAlign::kLeft;
-			case HAlign::kHCenter: ;  // no change
+		case HAlign::kLeft:
+			alignment = HAlign::kRight;
+			break;
+		case HAlign::kRight:
+			alignment = HAlign::kLeft;
+			break;
+		case HAlign::kHCenter:
+			break;
 		}
 	}
 	return alignment;
 }
 
-/**
- * This mirrors the horizontal alignment for RTL languages.
- *
- * Do not store this value as it is based on the global font setting.
- */
-Align mirror_alignment(Align alignment) {
-	if (UI::g_fh1->fontset()->is_rtl()) {
-		VAlign valign = Aligner::sliceV(alignment);
-		return Aligner::merge(mirror_alignment(Aligner::sliceH(alignment)), valign);
-	}
-	return alignment;
-}
 
 /**
  * Align pt horizontally to match align based on width w and height h.
@@ -67,29 +60,6 @@ void correct_for_align(HAlign align, uint32_t w, Vector2f* pt) {
 		pt->x -= w / 2;
 	else if (align == HAlign::kRight)
 		pt->x -= w;
-}
-
-/**
- * Align pt to match align based on width w and height h.
- *
- * When correcting for align, we never move from pixel boundaries to
- * sub-pixels, because this might lead from pixel-perfect rendering to
- * subsampled rendering - this can lead to blurry texts. That is why we
- * never do float divisions in this function.
- */
-void correct_for_align(Align align, uint32_t w, uint32_t h, Vector2f* pt) {
-
-	// Vertical Align
-	if (align & Aligner::kVertical) {
-		if (align & VAlign::kVCenter)
-			pt->y -= h >> 1;
-		else
-			pt->y -= h;
-	}
-
-	if (align & Aligner::kHorizontal) {
-		correct_for_align(static_cast<HAlign>(align), w, pt);
-	}
 }
 
 }  // namespace UI

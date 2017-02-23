@@ -75,7 +75,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, 0, 0, "", UI::Align::kTopCenter) {
+	  cur_selection_(&box_, 0, 0, "", UI::HAlign::kHCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/

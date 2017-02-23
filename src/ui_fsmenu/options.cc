@@ -95,7 +95,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kTopCenter),
+	  title_(this, 0, 0, _("Options"), UI::HAlign::kHCenter),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),

@@ -46,7 +46,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      checkbox_padding_(UI::g_fh1->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
 
      // Main title
-     title_(this, 0, 0, _("Choose a map"), UI::Align::kTopCenter),
+	  title_(this, 0, 0, _("Choose a map"), UI::HAlign::kHCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, false),
      map_details_(this,

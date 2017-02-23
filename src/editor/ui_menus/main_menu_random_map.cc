@@ -185,7 +185,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 box_width_ / 3,
                 resources_label_.get_h(),
                 (boost::format(_("%i %%")) % mountainsval_).str(),
-                UI::Align::kTopCenter),
+					 UI::HAlign::kHCenter),
      island_mode_(&box_, Vector2i(0, 0), _("Island mode")),
      // Geeky stuff
      map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),

@@ -60,10 +60,9 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	FullscreenWindow::draw(rt);
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
-	Recti wnd_rect(Vector2i(0, 0), get_w(), get_h());
 
 	const uint32_t h =
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
+		UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
 	label_rectangle_.x = get_w() / 4.f;
 	label_rectangle_.w = get_w() / 2.f;
@@ -96,9 +95,12 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
-	rt.blit(label_center_.cast<float>(),
+	// NOCOM(GunChleoc): Create a vertical centering function
+	const Image* rendered_text =
+			UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	rt.blit(Vector2f(label_center_.x, label_center_.y - rendered_text->height() / 2),
 	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-	        BlendMode::UseAlpha, UI::Align::kCenter);
+			  BlendMode::UseAlpha, UI::HAlign::kHCenter);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows

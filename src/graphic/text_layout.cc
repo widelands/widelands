@@ -93,10 +93,16 @@ std::string as_aligned(const std::string& txt,
                        const RGBColor& clr,
                        UI::FontSet::Face face) {
 	std::string alignment = "left";
-	if (align == UI::HAlign::kRight) {
-		alignment = "right";
-	} else if (align == UI::HAlign::kHCenter) {
+	switch (align) {
+	case UI::HAlign::kHCenter:
 		alignment = "center";
+		break;
+	case UI::HAlign::kRight:
+		alignment = "right";
+		break;
+	case UI::HAlign::kLeft:
+		alignment = "left";
+		break;
 	}
 
 	std::string font_face = "sans";

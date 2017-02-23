@@ -24,30 +24,30 @@
 
 namespace UI {
 
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, Align align)
+Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, HAlign align)
    : Panel(parent, x, y, 0, 0), layoutmode_(AutoMove), align_(align) {
 	init();
 	set_text(text);
 }
 
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align)
+Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, HAlign align)
    : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
 	init();
 }
 
 Textarea::Textarea(Panel* parent,
-                   int32_t x,
-                   int32_t y,
-                   uint32_t w,
-                   uint32_t h,
-                   const std::string& text,
-                   Align align)
+						 int32_t x,
+						 int32_t y,
+						 uint32_t w,
+						 uint32_t h,
+						 const std::string& text,
+						 HAlign align)
    : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
 	init();
 	set_text(text);
 }
 
-Textarea::Textarea(Panel* parent, const std::string& text, Align align)
+Textarea::Textarea(Panel* parent, const std::string& text, HAlign align)
    : Panel(parent, 0, 0, 0, 0), layoutmode_(Layouted), align_(align) {
 	init();
 	set_text(text);
@@ -126,10 +126,9 @@ void Textarea::set_fixed_width(int w) {
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f anchor((align_ & HAlign::kHCenter) ? get_w() / 2 :
-		                   (align_ & UI::HAlign::kRight) ? get_w() : 0,
-		                (align_ & UI::VAlign::kVCenter) ?  get_h() / 2 :
-		                   (align_ & UI::VAlign::kBottom) ? get_h() : 0);
+		Vector2f anchor((align_ == HAlign::kHCenter) ? get_w() / 2 :
+								 (align_ == UI::HAlign::kRight) ? get_w() : 0,
+							 0);
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
 }
@@ -141,17 +140,17 @@ void Textarea::collapse() {
 	int32_t x = get_x();
 	int32_t y = get_y();
 	int32_t w = get_w();
-	int32_t h = get_h();
 
-	if (align_ & UI::HAlign::kHCenter)
+	switch (align_) {
+	case UI::HAlign::kHCenter:
 		x += w >> 1;
-	else if (align_ & UI::HAlign::kRight)
+		break;
+	case UI::HAlign::kRight:
 		x += w;
-
-	if (align_ & UI::VAlign::kVCenter)
-		y += h >> 1;
-	else if (align_ & UI::VAlign::kBottom)
-		y += h;
+		break;
+	case UI::HAlign::kLeft:
+		break;
+	}
 
 	set_pos(Vector2i(x, y));
 	set_size(0, 0);
@@ -168,15 +167,16 @@ void Textarea::expand() {
 	int w, h;
 	get_desired_size(&w, &h);
 
-	if (align_ & UI::HAlign::kHCenter)
+	switch (align_) {
+	case UI::HAlign::kHCenter:
 		x -= w >> 1;
-	else if (align_ & UI::HAlign::kRight)
+		break;
+	case UI::HAlign::kRight:
 		x -= w;
-
-	if (align_ & UI::VAlign::kVCenter)
-		y -= h >> 1;
-	else if (align_ & UI::VAlign::kBottom)
-		y -= h;
+		break;
+	case UI::HAlign::kLeft:
+		break;
+	}
 
 	set_pos(Vector2i(x, y));
 	set_size(w, h);

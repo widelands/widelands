@@ -47,7 +47,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
-	title_area_ = new UI::Textarea(vbox, "", UI::Align::kTopCenter);
+	title_area_ = new UI::Textarea(vbox, "", UI::HAlign::kHCenter);
 	vbox->add(title_area_);
 	vbox->add_space(PADDING);
 

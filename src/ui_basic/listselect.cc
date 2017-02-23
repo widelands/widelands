@@ -402,12 +402,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		HAlign alignment =
 		   i18n::has_rtl_character(er.name.c_str(), 20) ? HAlign::kRight : HAlign::kLeft;
-		if (alignment & UI::HAlign::kRight) {
+		if (alignment == UI::HAlign::kRight) {
 			point.x += maxw - picw;
 		}
 
 		UI::correct_for_align(alignment, entry_text_im->width(), &point);
-		// TODO(klaus.halfmann): do we need? entry_text_im->height()
 
 		// Shift for image width
 		if (!UI::g_fh1->fontset()->is_rtl()) {
@@ -428,7 +427,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Crop to column width while blitting
-		if ((alignment & UI::HAlign::kRight)
+		if ((alignment == UI::HAlign::kRight)
 		 && (maxw + picw) < static_cast<uint32_t>(entry_text_im->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;

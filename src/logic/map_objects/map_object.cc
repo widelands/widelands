@@ -474,7 +474,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	// Rounding guarantees that text aligns with pixels to avoid subsampling.
 	const Vector2f census_pos = round(field_on_dst - Vector2f(0, 48) * scale).cast<float>();
 	if (draw_text & TextToDraw::kCensus) {
-		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		dst->blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::HAlign::kHCenter);
 	}
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
@@ -483,7 +483,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		      .cast<float>();
 		dst->blit(statistics_pos,
 		          UI::g_fh1->render(as_condensed(statictics, UI::HAlign::kHCenter, font_size)),
-		          BlendMode::UseAlpha, UI::Align::kCenter);
+					 BlendMode::UseAlpha, UI::HAlign::kHCenter);
 	}
 }
 

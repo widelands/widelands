@@ -41,11 +41,11 @@ struct FontHandler {
 	~FontHandler();
 
 	void draw_text(RenderTarget&,
-	               const TextStyle&,
-	               Vector2i dstpoint,
-	               const std::string& text,
-	               Align align = UI::Align::kCenterLeft,
-	               uint32_t caret = std::numeric_limits<uint32_t>::max());
+						const TextStyle&,
+						Vector2i dstpoint,
+						const std::string& text,
+						HAlign align = UI::HAlign::kLeft,
+						uint32_t caret = std::numeric_limits<uint32_t>::max());
 	uint32_t
 	draw_text_raw(RenderTarget&, const TextStyle&, Vector2i dstpoint, const std::string& text);
 

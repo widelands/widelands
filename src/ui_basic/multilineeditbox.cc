@@ -450,7 +450,7 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 
 	d_->ww.set_draw_caret(has_focus());
 
-	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kTopLeft,
+	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::HAlign::kLeft,
 	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
 }
 

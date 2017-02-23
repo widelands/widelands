@@ -53,17 +53,17 @@ struct Textarea : public Panel {
 	         int32_t x,
 	         int32_t y,
 	         const std::string& text = std::string(),
-	         Align align = kTopLeft);
+				HAlign align = HAlign::kLeft);
 	Textarea(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = kTopLeft);
+		Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, HAlign align = HAlign::kLeft);
 	Textarea(Panel* const parent,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t w,
 	         uint32_t h,
 	         const std::string& text,
-	         Align align = kTopLeft);
-	Textarea(Panel* parent, const std::string& text = std::string(), Align align = kTopLeft);
+				HAlign align = HAlign::kLeft);
+	Textarea(Panel* parent, const std::string& text = std::string(), HAlign align = HAlign::kLeft);
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.
@@ -95,7 +95,7 @@ private:
 	LayoutMode layoutmode_;
 	std::string text_;
 	const Image* rendered_text_;
-	Align align_;
+	HAlign align_;
 	RGBColor color_;
 	int fontsize_;
 

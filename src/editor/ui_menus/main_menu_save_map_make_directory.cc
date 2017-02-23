@@ -43,7 +43,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
             get_inner_w() - 2 * padding_,
             buth_,
             _("Enter Directory Name:"),
-            UI::Align::kTopLeft),
+				UI::HAlign::kLeft),
      edit_(&vbox_,
            0, 0,
            get_inner_w() - 2 * padding_,

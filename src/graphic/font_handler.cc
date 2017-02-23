@@ -203,7 +203,7 @@ void FontHandler::draw_text(RenderTarget& dst,
                             const TextStyle& style,
                             Vector2i dstpoint_i,
                             const std::string& text,
-                            Align align,
+									 HAlign align,
                             uint32_t caret) {
 	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
@@ -212,7 +212,7 @@ void FontHandler::draw_text(RenderTarget& dst,
 	const LineCacheEntry& lce = d->get_line(style, copytext);
 
 	Vector2f dstpoint = dstpoint_i.cast<float>();
-	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Vector2f(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image.get());

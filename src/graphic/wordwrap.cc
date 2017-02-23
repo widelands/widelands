@@ -303,7 +303,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
+void WordWrap::draw(RenderTarget& dst, Vector2i where, HAlign align, uint32_t caret) {
 	if (lines_.empty())
 		return;
 
@@ -311,19 +311,9 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	VAlign valign = Aligner::sliceV(align);
-	if (valign != UI::VAlign::kTop) {
-		uint32_t h = height();
-
-		if (valign == UI::VAlign::kVCenter)
-			where.y -= (h + 1) / 2;
-		else
-			where.y -= h;
-	}
-
 	++where.y;
 
-	Align alignment = mirror_alignment(align);
+	HAlign alignment = mirror_alignment(align);
 
 	uint16_t fontheight = text_height(lines_[0].text, style_.font->size());
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
@@ -332,13 +322,13 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 		Vector2f point(where.x, where.y);
 
-		if (alignment & UI::HAlign::kRight) {
+		if (alignment == UI::HAlign::kRight) {
 			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 
 		const Image* entry_text_im = UI::g_fh1->render(as_editorfont(
 		   lines_[line].text, style_.font->size() - UI::g_fh1->fontset()->size_offset(), style_.fg));
-		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
+		UI::correct_for_align(alignment, entry_text_im->width(), &point);
 		dst.blit(point, entry_text_im);
 
 		if (draw_caret_ && line == caretline) {

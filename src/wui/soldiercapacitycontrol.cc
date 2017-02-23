@@ -79,7 +79,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                g_gr->images().get("images/ui_basic/but4.png"),
                g_gr->images().get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity")),
-     value_(this, "199", UI::Align::kTopCenter) {
+	  value_(this, "199", UI::HAlign::kHCenter) {
 	decrease_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	increase_.sigclicked.connect(

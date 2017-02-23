@@ -70,7 +70,6 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 }
 
 
-// TODO(klaus.halfmann): Decide if this Align or HAlign, or even a cast.
 UI::Textarea&
 AttackBox::add_text(UI::Box& parent, std::string str, UI::HAlign alignment, int fontsize) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());

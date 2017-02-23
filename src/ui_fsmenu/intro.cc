@@ -29,7 +29,7 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               get_w() / 2,
               get_h() * 19 / 20,
               _("Press any key or click to continue…"),
-              UI::Align::kTopCenter) {
+				  UI::HAlign::kHCenter) {
 	message_.set_fontsize(fs_small() * 6 / 5);
 	message_.set_color(RGBColor(192, 192, 128));
 	add_overlay_image("images/loadscreens/splash.jpg", FullscreenWindow::Alignment(UI::HAlign::kHCenter, UI::VAlign::kVCenter));

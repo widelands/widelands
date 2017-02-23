@@ -289,7 +289,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 						}
 					}
 
-					if (alignment & UI::HAlign::kRight) { // TODO(klaus.halfmann): what about kCenter?
+					// Make room for the picture. We don't support center alignment with pictures.
+					if (alignment == UI::HAlign::kRight) {
 						draw_x += curw - blit_width;
 					}
 
@@ -306,7 +307,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 						} else {
 							draw_x = point.x + (curw - picw) / 2.f;
 						}
-					} else if (alignment & UI::HAlign::kRight) {
+					} else if (alignment == UI::HAlign::kRight) {
 						draw_x += curw - picw;
 					}
 					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
@@ -322,10 +323,15 @@ void Table<void*>::draw(RenderTarget& dst) {
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
-			if (alignment & UI::HAlign::kRight) {
+			switch (alignment) {
+			case UI::HAlign::kHCenter:
+				point.x += (curw - picw) / 2;
+				break;
+			case UI::HAlign::kRight:
 				point.x += curw - 2 * picw;
-			} else if (alignment & UI::HAlign::kHCenter) {
-				point.x += (curw - picw) / 2.f;
+				break;
+			case UI::HAlign::kLeft:
+				break;
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
@@ -334,13 +340,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 				text_width = text_width + scrollbar_->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, &point);
-			// TODO(klaus.halfmann): Check if we need entry_text_im->height()
 
 			// Crop to column width while blitting
 			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset()->is_rtl()) {
-					point.x = (alignment & UI::HAlign::kRight) ? curx : curx + picw;
+					point.x = (alignment == UI::HAlign::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
 				if (i18n::has_rtl_character(

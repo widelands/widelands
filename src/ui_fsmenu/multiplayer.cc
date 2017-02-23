@@ -30,7 +30,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kTopCenter),
+	  title(this, 0, 0, _("Choose game type"), UI::HAlign::kHCenter),
 
      // Buttons
      metaserver(&vbox_,

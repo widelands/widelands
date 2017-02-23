@@ -400,11 +400,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	labels.back()->set_fontsize(small_font);
 
 	labels.push_back(new UI::Textarea(
-	   this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::Align::kTopCenter));
+		this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::HAlign::kHCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_fontsize(small_font);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::kTopRight));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::HAlign::kRight));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_fontsize(small_font);
 

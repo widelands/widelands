@@ -178,8 +178,9 @@ void draw_value(const string& value,
                 const RGBColor& color,
                 const Vector2f& pos,
                 RenderTarget& dst) {
+	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align::kCenterRight);
+	dst.blit(Vector2f(pos.x, pos.y - pic->height() / 2), pic, BlendMode::UseAlpha, UI::HAlign::kRight);
 }
 
 /**
@@ -250,10 +251,12 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
+		// TODO(GunChleoc): The font renderer trims this away, use keep_spaces.
+		// NOCOM(GunChleoc): Create a vertical centering function
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10), xtick, BlendMode::UseAlpha,
-		         UI::Align::kCenter);
+		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10 - xtick->height() / 2), xtick, BlendMode::UseAlpha,
+					UI::HAlign::kHCenter);
 
 		posx -= sub;
 	}
@@ -268,8 +271,9 @@ void draw_diagram(uint32_t time_ms,
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
+	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	dst.blit(Vector2f(2.f, kSpacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
+	dst.blit(Vector2f(2.f, kSpacing + 2 - xtick->height() / 2), xtick, BlendMode::UseAlpha, UI::HAlign::kLeft);
 }
 
 }  // namespace
