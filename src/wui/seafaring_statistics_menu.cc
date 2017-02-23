@@ -185,8 +185,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
 	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
 	table_.add_column(
-		0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.add_column(get_inner_w() / 2 - kPadding, pgettext("ship", "Status"));
+	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	table_.add_column(200, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 
@@ -194,20 +194,20 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	set_thinks(false);
 	table_.focus();
 
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>(
-		[this](const Widelands::NoteShip& note) {
-			switch (note.action) {
-			case Widelands::NoteShip::Action::kStateChanged:
-			case Widelands::NoteShip::Action::kDestinationChanged:
-			case Widelands::NoteShip::Action::kWaitingForCommand:
-			case Widelands::NoteShip::Action::kGained:
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   switch (note.action) {
+		   case Widelands::NoteShip::Action::kStateChanged:
+		   case Widelands::NoteShip::Action::kDestinationChanged:
+		   case Widelands::NoteShip::Action::kWaitingForCommand:
+		   case Widelands::NoteShip::Action::kGained:
 			   update_ship(*note.ship);
 			   break;
-			case Widelands::NoteShip::Action::kLost:
-				remove_ship(note.ship->serial());
+		   case Widelands::NoteShip::Action::kLost:
+			   remove_ship(note.ship->serial());
 			   break;
 		   default:
-				NEVER_HERE();
+			   NEVER_HERE();
 		   }
 		});
 }
