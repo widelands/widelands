@@ -235,7 +235,7 @@ public:
 		return halign_;
 	}
 	// use p_halign to avoid name shadowing compplaint by some CC compilers
-	void set_halign(UI::HAlign p_halign) { 
+	void set_halign(UI::HAlign p_halign) {
 		halign_ = p_halign;
 	}
 	UI::VAlign valign() {
