@@ -67,7 +67,8 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
 				   set_thinks(false);
 				   die();
 				   break;
-			   // default: break;
+			   default:
+				   break;
 			   }
 		   }
 		});

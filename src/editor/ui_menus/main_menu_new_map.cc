@@ -109,22 +109,22 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
 		height_.set_value(height_index);
 	}
 
-	box_.add(&width_,  UI::Align::kLeft);
+	box_.add(&width_, UI::Align::kLeft);
 	box_.add(&height_, UI::Align::kLeft);
 	box_.add_space(margin_);
 	UI::Textarea* terrain_label = new UI::Textarea(&box_, _("Terrain:"));
 	box_.add(terrain_label, UI::Align::kLeft);
-	box_.add(&list_,        UI::Align::kLeft);
+	box_.add(&list_, UI::Align::kLeft);
 	box_.add_space(2 * margin_);
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
 	if (UI::g_fh1->fontset()->is_rtl()) {
-		button_box_.add(&ok_button_,     UI::Align::kLeft);
+		button_box_.add(&ok_button_, UI::Align::kLeft);
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
 	} else {
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
-		button_box_.add(&ok_button_,     UI::Align::kLeft);
+		button_box_.add(&ok_button_, UI::Align::kLeft);
 	}
 	box_.add(&button_box_, UI::Align::kLeft);
 

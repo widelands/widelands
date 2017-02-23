@@ -149,14 +149,14 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_plus);
 
 		box_->add(sbi_->button_ten_minus, UI::Align::kLeft);
-		box_->add(sbi_->button_minus,     UI::Align::kLeft);
-		box_->add(sbi_->text,             UI::Align::kLeft);
-		box_->add(sbi_->button_plus,      UI::Align::kLeft);
-		box_->add(sbi_->button_ten_plus,  UI::Align::kLeft);
+		box_->add(sbi_->button_minus, UI::Align::kLeft);
+		box_->add(sbi_->text, UI::Align::kLeft);
+		box_->add(sbi_->button_plus, UI::Align::kLeft);
+		box_->add(sbi_->button_ten_plus, UI::Align::kLeft);
 	} else {
 		box_->add(sbi_->button_minus, UI::Align::kCenter);
-		box_->add(sbi_->text,         UI::Align::kCenter);
-		box_->add(sbi_->button_plus,  UI::Align::kCenter);
+		box_->add(sbi_->text, UI::Align::kCenter);
+		box_->add(sbi_->button_plus, UI::Align::kCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(

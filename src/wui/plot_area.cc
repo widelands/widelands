@@ -180,7 +180,8 @@ void draw_value(const string& value,
                 RenderTarget& dst) {
 	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(Vector2f(pos.x, pos.y - pic->height() / 2), pic, BlendMode::UseAlpha, UI::Align::kRight);
+	dst.blit(
+	   Vector2f(pos.x, pos.y - pic->height() / 2), pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
 /**
@@ -255,8 +256,8 @@ void draw_diagram(uint32_t time_ms,
 		// NOCOM(GunChleoc): Create a vertical centering function
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10 - xtick->height() / 2), xtick, BlendMode::UseAlpha,
-					UI::Align::kCenter);
+		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10 - xtick->height() / 2), xtick,
+		         BlendMode::UseAlpha, UI::Align::kCenter);
 
 		posx -= sub;
 	}
@@ -273,7 +274,8 @@ void draw_diagram(uint32_t time_ms,
 	//  print the used unit
 	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	dst.blit(Vector2f(2.f, kSpacing + 2 - xtick->height() / 2), xtick, BlendMode::UseAlpha, UI::Align::kLeft);
+	dst.blit(Vector2f(2.f, kSpacing + 2 - xtick->height() / 2), xtick, BlendMode::UseAlpha,
+	         UI::Align::kLeft);
 }
 
 }  // namespace

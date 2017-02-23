@@ -276,8 +276,10 @@ void Window::draw_border(RenderTarget& dst) {
 		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		dst.blit(Vector2f(get_lborder() + get_inner_w() / 2, (TP_B_PIXMAP_THICKNESS - text->height()) / 2), text,
-					BlendMode::UseAlpha, UI::Align::kCenter);
+		// NOCOM(GunChleoc): Create a vertical centering function
+		dst.blit(
+		   Vector2f(get_lborder() + get_inner_w() / 2, (TP_B_PIXMAP_THICKNESS - text->height()) / 2),
+		   text, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {

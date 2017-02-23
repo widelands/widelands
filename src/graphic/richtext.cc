@@ -292,13 +292,13 @@ struct TextBuilder {
 			int32_t textleft = 0;
 
 			switch (mirror_alignment(richtext->get_text_align())) {
-			  case UI::Align::kRight:
+			case UI::Align::kRight:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
-			  case UI::Align::kCenter:
+			case UI::Align::kCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
-			  case UI::Align::kLeft:
+			case UI::Align::kLeft:
 				textleft = alignref_left;
 				break;
 			}

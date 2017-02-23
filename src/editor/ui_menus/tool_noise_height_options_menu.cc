@@ -93,9 +93,9 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
 	UI::Textarea* label =
-		new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
+	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
-	box_.add(label,   UI::Align::kCenter);
+	box_.add(label, UI::Align::kCenter);
 	box_.add(&upper_, UI::Align::kCenter);
 	box_.add(&lower_, UI::Align::kCenter);
 

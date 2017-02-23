@@ -234,16 +234,14 @@ public:
 	UI::Align halign() {
 		return halign_;
 	}
-	// use p_halign to avoid name shadowing compplaint by some CC compilers
-	void set_halign(UI::Align p_halign) {
-		halign_ = p_halign;
+	void set_halign(UI::Align ghalign) {
+		halign_ = ghalign;
 	}
 	UI::Align valign() {
 		return valign_;
 	}
-	// use p_valign to avoid name shadowing compplaint by some CC compilers
-	void set_valign(UI::Align p_valign) {
-		valign_ = p_valign;
+	void set_valign(UI::Align gvalign) {
+		valign_ = gvalign;
 	}
 	void set_x(int32_t nx) {
 		x_ = nx;

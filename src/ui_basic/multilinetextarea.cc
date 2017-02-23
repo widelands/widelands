@@ -43,7 +43,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
    : Panel(parent, x, y, w, h),
      text_(text),
      color_(UI_FONT_CLR_FG),
-	 align_(align),
+     align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
@@ -163,13 +163,13 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 			int anchor = 0;
 			Align alignment = mirror_alignment(align_);
 			switch (alignment) {
-			  case UI::Align::kCenter:
+			case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
 				break;
-			  case UI::Align::kRight:
+			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
-			  case UI::Align::kLeft:
+			case UI::Align::kLeft:
 				anchor = RICHTEXT_MARGIN;
 			}
 

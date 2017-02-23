@@ -62,7 +62,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
 
 	const uint32_t h =
-		UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
+	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
 	label_rectangle_.x = get_w() / 4.f;
 	label_rectangle_.w = get_w() / 2.f;
@@ -82,9 +82,11 @@ void ProgressWindow::draw(RenderTarget& rt) {
 void ProgressWindow::set_background(const std::string& file_name) {
 	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		add_overlay_image(file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
+		add_overlay_image(
+		   file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 	} else {
-		add_overlay_image("images/loadscreens/progress.png", FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
+		add_overlay_image("images/loadscreens/progress.png",
+		                  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
 	}
 	draw(*g_gr->get_render_target());
 }
@@ -97,10 +99,10 @@ void ProgressWindow::step(const std::string& description) {
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* rendered_text =
-			UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
 	rt.blit(Vector2f(label_center_.x, label_center_.y - rendered_text->height() / 2),
 	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-			  BlendMode::UseAlpha, UI::Align::kCenter);
+	        BlendMode::UseAlpha, UI::Align::kCenter);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows

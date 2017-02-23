@@ -56,7 +56,10 @@ struct Box : public Panel {
 		return items_.size();
 	}
 
-	void add(Panel* panel, UI::Align align = UI::Align::kLeft, bool fullsize = false, bool fillspace = false);
+	void add(Panel* panel,
+	         UI::Align align = UI::Align::kLeft,
+	         bool fullsize = false,
+	         bool fillspace = false);
 	void add_space(uint32_t space);
 	void add_inf_space();
 	bool is_snap_target() const override {

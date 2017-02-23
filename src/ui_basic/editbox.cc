@@ -67,7 +67,8 @@ struct EditBoxImpl {
 	/// Current scrolling offset to the text anchor position, in pixels
 	int32_t scrolloffset;
 
-	bool rtl; // Write directtion right to left (Arabic, Hebrew ...)
+	/// Alignment of the text. Vertical alignment is always centered.
+	Align align;
 };
 
 EditBox::EditBox(Panel* const parent,
@@ -79,24 +80,25 @@ EditBox::EditBox(Panel* const parent,
                  const Image* background,
                  int font_size)
    : Panel(parent,
-           x, y,
-           w, h > 0 ? h :
+           x,
+           y,
+           w,
+           h > 0 ? h :
                    UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
                                                    font_size))
                          ->height() +
                       2 * margin_y),
-           m_(new EditBoxImpl),
-           history_active_(false),
-           history_position_(-1)
-{
+     m_(new EditBoxImpl),
+     history_active_(false),
+     history_position_(-1) {
 	set_thinks(false);
 
 	m_->background = background;
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
 
-	// Store UI language's principal writing direction
-	m_->rtl = UI::g_fh1->fontset()->is_rtl();
+	// Set alignment to the UI language's principal writing direction
+	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -387,26 +389,27 @@ void EditBox::draw(RenderTarget& dst) {
 	         ->height() :
 	      entry_text_im->height();
 
-	Vector2f point(kMarginX, get_h() / 2.0f);
+	Vector2f point(kMarginX, get_h() / 2);
 
-	if (m_->rtl) {
+	if (m_->align == UI::Align::kRight) {
 		point.x += max_width - linewidth;
 	}
 
-    point.y -= lineheight >> 1;
+	// NOCOM(GunChleoc): Create a vertical centering function
+	point.y -= lineheight >> 1;
 
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {
 		// Fix positioning for BiDi languages.
 		if (UI::g_fh1->fontset()->is_rtl()) {
-			point.x = 0.0f;
+			point.x = 0.f;
 		}
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
 			// TODO(GunChleoc): Arabic: Fix scrolloffset
 			dst.blitrect(point, entry_text_im, Recti(linewidth - max_width, 0, linewidth, lineheight));
 		} else {
-			if (m_->rtl) {
+			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point, entry_text_im,
 				             Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
@@ -443,11 +446,14 @@ void EditBox::check_caret() {
 	int32_t leftw = text_width(leftstr, m_->fontsize);
 	int32_t rightw = text_width(rightstr, m_->fontsize);
 
-	int32_t caretpos;
+	int32_t caretpos = 0;
 
-	if (m_->rtl) {
+	switch (m_->align) {
+	case UI::Align::kRight:
 		caretpos = get_w() - kMarginX + m_->scrolloffset - rightw;
-	} else {
+		break;
+	case UI::Align::kCenter:
+	case UI::Align::kLeft:
 		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
 
@@ -456,10 +462,10 @@ void EditBox::check_caret() {
 	else if (caretpos > get_w() - kMarginX)
 		m_->scrolloffset -= caretpos - get_w() + kMarginX + get_w() / 5;
 
-	if (!m_->rtl) {
+	if (m_->align == UI::Align::kLeft) {
 		if (m_->scrolloffset > 0)
 			m_->scrolloffset = 0;
-	} else {
+	} else if (m_->align == UI::Align::kRight) {
 		if (m_->scrolloffset < 0)
 			m_->scrolloffset = 0;
 	}

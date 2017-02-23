@@ -31,60 +31,80 @@ FullscreenMenuMain::FullscreenMenuMain()
      // Buttons
      playtutorial(&vbox_,
                   "play_tutorial",
-                  0, 0, butw_, buth_,
+                  0,
+                  0,
+                  butw_,
+                  buth_,
                   g_gr->images().get(button_background_),
                   _("Play Tutorial")),
      singleplayer(&vbox_,
                   "single_player",
-                  0, 0, butw_, buth_,
+                  0,
+                  0,
+                  butw_,
+                  buth_,
                   g_gr->images().get(button_background_),
                   _("Single Player")),
      multiplayer(&vbox_,
                  "multi_player",
-                 0, 0, butw_, buth_,
+                 0,
+                 0,
+                 butw_,
+                 buth_,
                  g_gr->images().get(button_background_),
                  _("Multiplayer")),
      replay(&vbox_,
             "replay",
-            0, 0, butw_, buth_,
+            0,
+            0,
+            butw_,
+            buth_,
             g_gr->images().get(button_background_),
             _("Watch Replay")),
      editor(
         &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
      options(&vbox_,
              "options",
-             0, 0, butw_, buth_,
+             0,
+             0,
+             butw_,
+             buth_,
              g_gr->images().get(button_background_),
              _("Options")),
      about(&vbox_,
            "about",
-           0, 0, butw_, buth_,
+           0,
+           0,
+           butw_,
+           buth_,
            g_gr->images().get(button_background_),
            _("About Widelands")),
      exit(&vbox_,
           "exit",
-          0, 0, butw_, buth_,
+          0,
+          0,
+          butw_,
+          buth_,
           g_gr->images().get(button_background_),
           _("Exit Widelands")),
 
      // Textlabels
      version(
         this,
-        0, 0,
+        0,
+        0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
         (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-		  UI::Align::kRight),
+        UI::Align::kRight),
      copyright(this,
-               0, 0,
+               0,
+               0,
                /** TRANSLATORS: Placeholders are the copyright years */
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str(),
-					UI::Align::kLeft),
-     gpl(this,
-         0, 0,
-         _("Licensed under the GNU General Public License V2.0"),
-			UI::Align::kLeft) {
+               UI::Align::kLeft),
+     gpl(this, 0, 0, _("Licensed under the GNU General Public License V2.0"), UI::Align::kLeft) {
 	playtutorial.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kTutorial));
@@ -112,7 +132,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 
 	vbox_.add(&playtutorial, UI::Align::kCenter, true);
 	vbox_.add(&singleplayer, UI::Align::kCenter, true);
-	vbox_.add(&multiplayer,  UI::Align::kCenter, true);
+	vbox_.add(&multiplayer, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
 	vbox_.add(&replay, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
@@ -124,7 +144,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Align::kCenter, true);
 
-	add_overlay_image("images/ui_fsmenu/main_title.png", FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kTop));
+	add_overlay_image("images/ui_fsmenu/main_title.png",
+	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kTop));
 
 	layout();
 }

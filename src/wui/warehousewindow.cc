@@ -142,10 +142,10 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	   boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::StockPolicy::k##policyname)), \
 	buttons->add(b, UI::Align::kCenter);
 
-		ADD_POLICY_BUTTON(normal,    Normal,     _("Normal policy"))
-		ADD_POLICY_BUTTON(prefer,    Prefer,    _("Preferably store selected wares here"))
+		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
+		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
-		ADD_POLICY_BUTTON(remove,    Remove,    _("Remove selected wares from here"))
+		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 	}
 }
 

@@ -154,7 +154,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-	  title_(this, get_w() / 2, get_h() / 25, _("Multiplayer Game Setup"), UI::Align::kCenter),
+     title_(this, get_w() / 2, get_h() / 25, _("Multiplayer Game Setup"), UI::Align::kCenter),
      mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
      clients_(this,
               // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
@@ -163,20 +163,20 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               (get_w() * 57 / 80) / 3,
               get_h() / 10,
               _("Clients"),
-				  UI::Align::kCenter),
+              UI::Align::kCenter),
      players_(this,
               get_w() / 50 + (get_w() * 57 / 80) * 6 / 15,
               get_h() / 10,
               (get_w() * 57 / 80) * 9 / 15,
               get_h() / 10,
               _("Players"),
-				  UI::Align::kCenter),
-	  map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
+              UI::Align::kCenter),
+     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 10 / 20 - 1.5 * label_height_,
                         _("Type of game"),
-								UI::Align::kCenter),
+                        UI::Align::kCenter),
 
      map_info_(
         this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),

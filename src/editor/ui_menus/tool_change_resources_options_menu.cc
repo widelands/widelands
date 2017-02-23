@@ -75,7 +75,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-	  cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {
+     cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -91,7 +91,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_set_to, boost::ref(*this)));
 
 	box_.add(&change_by_, UI::Align::kLeft);
-	box_.add(&set_to_,    UI::Align::kLeft);
+	box_.add(&set_to_, UI::Align::kLeft);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 
 	// Add resource buttons

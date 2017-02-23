@@ -45,7 +45,6 @@ Align mirror_alignment(Align alignment) {
 	return alignment;
 }
 
-
 /**
  * Align pt horizontally to match align based on width w.
  *

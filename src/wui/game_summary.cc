@@ -99,9 +99,9 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	// Prepare table
 	players_table_->add_column(150, _("Player"));
-	players_table_->add_column(80, _("Team")   , "", UI::Align::kCenter);
+	players_table_->add_column(80, _("Team"), "", UI::Align::kCenter);
 	players_table_->add_column(100, _("Status"), "", UI::Align::kCenter);
-	players_table_->add_column(0, _("Time")    , "", UI::Align::kRight, UI::TableColumnType::kFlexible);
+	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
 
 	// Prepare Elements
 	title_area_->set_fontsize(UI_FONT_SIZE_BIG);

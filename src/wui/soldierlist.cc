@@ -371,7 +371,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
      building_(building),
      soldierpanel_(*this, igb.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
-	 add(&soldierpanel_, UI::Align::kCenter);
+	add(&soldierpanel_, UI::Align::kCenter);
 
 	add_space(2);
 

@@ -95,26 +95,34 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-	  title_(this, 0, 0, _("Options"), UI::Align::kCenter),
+     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
      cancel_(&button_box_,
              "cancel",
-             0, 0, 0, 0,
+             0,
+             0,
+             0,
+             0,
              g_gr->images().get("images/ui_basic/but0.png"),
              _("Cancel")),
      apply_(&button_box_,
             "apply",
-            0, 0, 0, 0,
+            0,
+            0,
+            0,
+            0,
             g_gr->images().get("images/ui_basic/but0.png"),
             _("Apply")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
 
      // Tabs
      tabs_(this,
-           0, 0,
-           100, 100,  // 100 is arbitrary, will be resized in layout().
+           0,
+           0,
+           100,  // 100 is arbitrary, will be resized in layout().
+           100,
            g_gr->images().get("images/ui_basic/but1.png"),
            UI::TabPanel::Type::kBorder),
 
@@ -126,12 +134,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      language_dropdown_(&box_interface_,
-                        0, 0,
-                        100,  100,  // 100 is arbitrary, will be resized in layout().
+                        0,
+                        0,
+                        100,  // 100 is arbitrary, will be resized in layout().
+                        100,  // 100 is arbitrary, will be resized in layout().
                         _("Language")),
      resolution_dropdown_(&box_interface_,
-                          0, 0,
-                          100,  100,  // 100 is arbitrary, will be resized in layout().
+                          0,
+                          0,
+                          100,  // 100 is arbitrary, will be resized in layout().
+                          100,  // 100 is arbitrary, will be resized in layout().
                           _("In-game resolution")),
 
      fullscreen_(&box_interface_, Vector2i(0, 0), _("Fullscreen"), "", 0),
@@ -145,7 +157,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      dock_windows_to_edges_(&box_windows_, Vector2i(0, 0), _("Dock windows to edges"), "", 0),
 
      sb_dis_panel_(&box_windows_,
-                   0, 0, 0, 0,
+                   0,
+                   0,
+                   0,
+                   0,
                    opt.panel_snap_distance,
                    0,
                    99,
@@ -153,7 +168,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    UI::SpinBox::Units::kPixels),
 
      sb_dis_border_(&box_windows_,
-                    0, 0, 0, 0,
+                    0,
+                    0,
+                    0,
+                    0,
                     opt.border_snap_distance,
                     0,
                     99,
@@ -167,7 +185,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Saving options
      sb_autosave_(&box_saving_,
-                  0, 0, 0, 0,
+                  0,
+                  0,
+                  0,
+                  0,
                   opt.autosave / 60,
                   0,
                   100,
@@ -177,7 +198,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   UI::SpinBox::Type::kBig),
 
      sb_rolling_autosave_(&box_saving_,
-                          0, 0, 0, 0,
+                          0,
+                          0,
+                          0,
+                          0,
                           opt.rolling_autosave,
                           1,
                           20,

@@ -289,7 +289,6 @@ void Table<void*>::draw(RenderTarget& dst) {
 						}
 					}
 
-					// Make room for the picture. We don't support center alignment with pictures.
 					if (alignment == UI::Align::kRight) {
 						draw_x += curw - blit_width;
 					}

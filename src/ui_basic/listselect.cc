@@ -400,8 +400,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			         er.pic);
 		}
 
-		Align alignment =
-		   i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
 		if (alignment == UI::Align::kRight) {
 			point.x += maxw - picw;
 		}
@@ -427,8 +426,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Crop to column width while blitting
-		if ((alignment == UI::Align::kRight)
-		 && (maxw + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+		if ((alignment == UI::Align::kRight) &&
+		    (maxw + picw) < static_cast<uint32_t>(entry_text_im->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;
 

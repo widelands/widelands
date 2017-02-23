@@ -400,7 +400,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	labels.back()->set_fontsize(small_font);
 
 	labels.push_back(new UI::Textarea(
-		this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::Align::kCenter));
+	   this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::Align::kCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_fontsize(small_font);
 

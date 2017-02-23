@@ -68,28 +68,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      tab_panel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
-		  &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
+        &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
      owned_label_(&navigation_panel_,
                   kMargin,
                   kButtonRowHeight,
                   0,
                   kButtonHeight,
                   _("Owned:"),
-						UI::Align::kLeft),
+                  UI::Align::kLeft),
      construction_label_(&navigation_panel_,
                          kMargin,
                          2 * kButtonRowHeight,
                          0,
                          kButtonHeight,
                          _("Under Construction:"),
-								 UI::Align::kLeft),
+                         UI::Align::kLeft),
      unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
      unproductive_label_(
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
         _("Low Productivity"),
-		  UI::Align::kLeft),
+        UI::Align::kLeft),
      unproductive_percent_(
         &unproductive_box_,
         0,
@@ -104,28 +104,28 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         /** TRANSLATORS: This is the second part of productivity with input field */
         /** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
         _("%:"),
-		  UI::Align::kLeft),
+        UI::Align::kLeft),
      no_owned_label_(&navigation_panel_,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
                      kButtonRowHeight,
                      0,
                      kButtonHeight,
                      "",
-							UI::Align::kRight),
+                     UI::Align::kRight),
      no_construction_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             2 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-									 UI::Align::kRight),
+                            UI::Align::kRight),
      no_unproductive_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             3 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-									 UI::Align::kRight),
+                            UI::Align::kRight),
      low_production_(33),
      has_selection_(false) {
 
@@ -343,13 +343,13 @@ bool BuildingStatisticsMenu::add_button(
 	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =
-		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
+	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	owned_labels_[id]->set_fontsize(kLabelFontSize);
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
-		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
+	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	productivity_labels_[id]->set_fontsize(kLabelFontSize);
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);

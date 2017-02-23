@@ -483,7 +483,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		      .cast<float>();
 		dst->blit(statistics_pos,
 		          UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size)),
-					 BlendMode::UseAlpha, UI::Align::kCenter);
+		          BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 }
 
