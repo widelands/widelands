@@ -50,8 +50,8 @@ static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port
 
 using namespace Widelands;
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, Ship& ship)
-   : Window(&igb, "shipwindow", 0, 0, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
+ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship& ship)
+   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()), igbase_(igb), ship_(ship) {
 	init(false);
 	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShipWindow>(
 	   [this](const Widelands::NoteShipWindow& note) {
