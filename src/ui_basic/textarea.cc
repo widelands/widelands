@@ -24,13 +24,13 @@
 
 namespace UI {
 
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, HAlign align)
+Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, Align align)
    : Panel(parent, x, y, 0, 0), layoutmode_(AutoMove), align_(align) {
 	init();
 	set_text(text);
 }
 
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, HAlign align)
+Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align)
    : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
 	init();
 }
@@ -41,13 +41,13 @@ Textarea::Textarea(Panel* parent,
 						 uint32_t w,
 						 uint32_t h,
 						 const std::string& text,
-						 HAlign align)
+						 Align align)
    : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
 	init();
 	set_text(text);
 }
 
-Textarea::Textarea(Panel* parent, const std::string& text, HAlign align)
+Textarea::Textarea(Panel* parent, const std::string& text, Align align)
    : Panel(parent, 0, 0, 0, 0), layoutmode_(Layouted), align_(align) {
 	init();
 	set_text(text);
@@ -126,8 +126,8 @@ void Textarea::set_fixed_width(int w) {
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2f anchor((align_ == HAlign::kHCenter) ? get_w() / 2 :
-								 (align_ == UI::HAlign::kRight) ? get_w() : 0,
+		Vector2f anchor((align_ == Align::kCenter) ? get_w() / 2 :
+								 (align_ == UI::Align::kRight) ? get_w() : 0,
 							 0);
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
@@ -142,13 +142,13 @@ void Textarea::collapse() {
 	int32_t w = get_w();
 
 	switch (align_) {
-	case UI::HAlign::kHCenter:
+	case UI::Align::kCenter:
 		x += w >> 1;
 		break;
-	case UI::HAlign::kRight:
+	case UI::Align::kRight:
 		x += w;
 		break;
-	case UI::HAlign::kLeft:
+	case UI::Align::kLeft:
 		break;
 	}
 
@@ -168,13 +168,13 @@ void Textarea::expand() {
 	get_desired_size(&w, &h);
 
 	switch (align_) {
-	case UI::HAlign::kHCenter:
+	case UI::Align::kCenter:
 		x -= w >> 1;
 		break;
-	case UI::HAlign::kRight:
+	case UI::Align::kRight:
 		x -= w;
 		break;
-	case UI::HAlign::kLeft:
+	case UI::Align::kLeft:
 		break;
 	}
 

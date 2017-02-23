@@ -303,7 +303,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Vector2i where, HAlign align, uint32_t caret) {
+void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
 	if (lines_.empty())
 		return;
 
@@ -313,7 +313,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, HAlign align, uint32_t ca
 
 	++where.y;
 
-	HAlign alignment = mirror_alignment(align);
+	Align alignment = mirror_alignment(align);
 
 	uint16_t fontheight = text_height(lines_[0].text, style_.font->size());
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
@@ -322,7 +322,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, HAlign align, uint32_t ca
 
 		Vector2f point(where.x, where.y);
 
-		if (alignment == UI::HAlign::kRight) {
+		if (alignment == UI::Align::kRight) {
 			point.x += wrapwidth_ - LINE_MARGIN;
 		}
 

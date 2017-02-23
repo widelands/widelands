@@ -145,7 +145,7 @@ void RenderTarget::brighten_rect(const Rectf& rect, int32_t factor) {
 void RenderTarget::blit(const Vector2f& dst,
                         const Image* image,
                         BlendMode blend_mode,
-								UI::HAlign align) {
+								UI::Align align) {
 	Vector2f destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 
@@ -162,7 +162,7 @@ void RenderTarget::blit(const Vector2f& dst,
 void RenderTarget::blit_monochrome(const Vector2f& dst,
                                    const Image* image,
                                    const RGBAColor& blend_mode,
-											  UI::HAlign align) {
+											  UI::Align align) {
 	Vector2f destination_point(dst);
 	UI::correct_for_align(align, image->width(), &destination_point);
 

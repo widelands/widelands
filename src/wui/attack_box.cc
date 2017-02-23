@@ -71,7 +71,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 
 
 UI::Textarea&
-AttackBox::add_text(UI::Box& parent, std::string str, UI::HAlign alignment, int fontsize) {
+AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, int fontsize) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
 	result.set_fontsize(fontsize);
 	parent.add(&result, alignment);
@@ -145,7 +145,7 @@ void AttackBox::init() {
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
 	soldiers_text_.reset(
-	   &add_text(columnbox, attack_string, UI::HAlign::kHCenter, UI_FONT_SIZE_ULTRASMALL));
+	   &add_text(columnbox, attack_string, UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0,
 	                              "images/ui_basic/but2.png", _("Number of soldiers"));

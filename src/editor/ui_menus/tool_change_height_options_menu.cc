@@ -71,8 +71,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	set_to_.changed.connect(
 	   boost::bind(&EditorToolChangeHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
-	box_.add(&change_by_, UI::HAlign::kLeft);
-	box_.add(&set_to_, UI::HAlign::kLeft);
+	box_.add(&change_by_, UI::Align::kLeft);
+	box_.add(&set_to_, UI::Align::kLeft);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
 }

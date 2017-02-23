@@ -67,7 +67,7 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                HAlign = HAlign::kLeft,
+	                Align = Align::kLeft,
 	                TableColumnType column_type = TableColumnType::kFixed,
 	                bool is_checkbox_column = false);
 
@@ -181,7 +181,7 @@ public:
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
-	                HAlign = HAlign::kLeft,
+	                Align = Align::kLeft,
 	                TableColumnType column_type = TableColumnType::kFixed,
 	                bool is_checkbox_column = false);
 
@@ -282,7 +282,7 @@ private:
 	struct Column {
 		Button* btn;
 		uint32_t width;
-		HAlign alignment;
+		Align alignment;
 		bool is_checkbox_column;
 		CompareFn compare;
 	};

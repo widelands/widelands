@@ -133,17 +133,17 @@ struct RichtextBlock {
 		return images_;
 	}
 
-	void set_image_align(HAlign const image_align) {
+	void set_image_align(Align const image_align) {
 		image_align_ = image_align;
 	}
-	HAlign get_image_align() const {
+	Align get_image_align() const {
 		return image_align_;
 	}
 
-	void set_text_align(HAlign const text_align) {
+	void set_text_align(Align const text_align) {
 		text_align_ = text_align;
 	}
-	HAlign get_text_align() const {
+	Align get_text_align() const {
 		return text_align_;
 	}
 
@@ -157,8 +157,8 @@ struct RichtextBlock {
 private:
 	std::vector<std::string> images_;
 	std::vector<TextBlock> text_blocks_;
-	HAlign image_align_;
-	HAlign text_align_;
+	Align image_align_;
+	Align text_align_;
 };
 
 struct TextParser {
@@ -177,7 +177,7 @@ private:
 	                          const std::string& block_start,
 	                          const std::string& format_end,
 	                          const std::string& block_end);
-	HAlign set_align(const std::string&);
+	Align set_align(const std::string&);
 	void split_words(const std::string& in, std::vector<std::string>* plist);
 };
 }

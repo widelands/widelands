@@ -55,7 +55,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   kWindowWidth - 2 * kPadding,
                   get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
                   "",
-                  UI::HAlign::kLeft,
+                  UI::Align::kLeft,
                   g_gr->images().get("images/ui_basic/but1.png"),
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
@@ -66,13 +66,13 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
-	list->add_column(60, pgettext("message", "Type"), "", UI::HAlign::kHCenter);
-	list->add_column(60, _("Status"), "", UI::HAlign::kHCenter);
+	list->add_column(60, pgettext("message", "Type"), "", UI::Align::kCenter);
+	list->add_column(60, _("Status"), "", UI::Align::kCenter);
 	/** TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time
 	 * Sent" */
 	/** TRANSLATORS: This is used in the game messages menu - please open an issue if you need more
 	 * space. */
-	list->add_column(75, pgettext("message", "Sent"), "", UI::HAlign::kRight);
+	list->add_column(75, pgettext("message", "Sent"), "", UI::Align::kRight);
 	list->focus();
 
 	// Buttons for message types

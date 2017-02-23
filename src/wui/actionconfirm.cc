@@ -133,7 +133,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::HAlign::kHCenter,
+	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::Align::kCenter,
 	                             g_gr->images().get("images/ui_basic/but1.png"),
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	textarea->force_new_renderer();
@@ -149,13 +149,13 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::HAlign::kLeft, false, true);
+	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Align::kLeft, false, true);
 	button_box->add_space(2 * padding);
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::HAlign::kLeft, false, true);
+	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Align::kLeft, false, true);
 	main_box->add(textarea);
 	main_box->add_space(1.5 * padding);
-	main_box->add(button_box, UI::HAlign::kLeft, true);
+	main_box->add(button_box, UI::Align::kLeft, true);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
 	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding);
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);

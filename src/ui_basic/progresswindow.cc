@@ -82,9 +82,9 @@ void ProgressWindow::draw(RenderTarget& rt) {
 void ProgressWindow::set_background(const std::string& file_name) {
 	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		add_overlay_image(file_name, FullscreenWindow::Alignment(UI::HAlign::kHCenter, UI::VAlign::kVCenter));
+		add_overlay_image(file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 	} else {
-		add_overlay_image("images/loadscreens/progress.png", FullscreenWindow::Alignment(UI::HAlign::kLeft, UI::VAlign::kBottom));
+		add_overlay_image("images/loadscreens/progress.png", FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
 	}
 	draw(*g_gr->get_render_target());
 }
@@ -100,7 +100,7 @@ void ProgressWindow::step(const std::string& description) {
 			UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
 	rt.blit(Vector2f(label_center_.x, label_center_.y - rendered_text->height() / 2),
 	        UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
-			  BlendMode::UseAlpha, UI::HAlign::kHCenter);
+			  BlendMode::UseAlpha, UI::Align::kCenter);
 
 #ifdef _WIN32
 	// Pump events to prevent "not responding" on windows

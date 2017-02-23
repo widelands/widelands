@@ -277,7 +277,7 @@ void Window::draw_border(RenderTarget& dst) {
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		dst.blit(Vector2f(get_lborder() + get_inner_w() / 2, (TP_B_PIXMAP_THICKNESS - text->height()) / 2), text,
-					BlendMode::UseAlpha, UI::HAlign::kHCenter);
+					BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {

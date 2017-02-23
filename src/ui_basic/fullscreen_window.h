@@ -57,13 +57,13 @@ public:
 	};
 
 	struct Alignment {
-		Alignment(UI::HAlign h, UI::VAlign v) : halign(h), valign(v) {
+		Alignment(UI::Align h, UI::Align v) : halign(h), valign(v) {
 		}
-		Alignment() : Alignment(UI::HAlign::kLeft, UI::VAlign::kTop) {
+		Alignment() : Alignment(UI::Align::kLeft, UI::Align::kTop) {
 		}
 
-		UI::HAlign halign;
-		UI::VAlign valign;
+		UI::Align halign;
+		UI::Align valign;
 	};
 
 	/// A full screen main menu outside of the game/editor itself.

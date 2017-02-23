@@ -50,7 +50,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
 	suggested_teams_.clear();
 	set_size(max_x, max_y);
 
-	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::HAlign::kLeft);
+	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::Align::kLeft);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
@@ -109,7 +109,7 @@ void SuggestedTeamsBox::show(
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
-					vs_label = new UI::Textarea(lineup_box_, "x", UI::HAlign::kHCenter);
+					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kCenter);
 					lineup_box_->add(vs_label);
 					vs_label->set_visible(true);
 					vs_labels_.push_back(vs_label);

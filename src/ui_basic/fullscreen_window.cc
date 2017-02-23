@@ -52,7 +52,7 @@ FullscreenWindow::FullscreenWindow()
 	set_frame_image(FullscreenWindow::Frames::kEdgeRightTile, "images/ui_fsmenu/right.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeTopTile, "images/ui_fsmenu/top.png");
 	set_frame_image(FullscreenWindow::Frames::kEdgeBottomTile, "images/ui_fsmenu/bottom.png");
-	add_overlay_image("images/ui_fsmenu/center.png", FullscreenWindow::Alignment(UI::HAlign::kHCenter, UI::VAlign::kVCenter));
+	add_overlay_image("images/ui_fsmenu/center.png", FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
 }
 
 FullscreenWindow::~FullscreenWindow() {
@@ -94,19 +94,19 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 
 	// Frame edges
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
-				Alignment(UI::HAlign::kLeft, UI::VAlign::kTop), kVertical);
+				Alignment(UI::Align::kLeft, UI::Align::kTop), kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeRightTile),
-				Alignment(UI::HAlign::kRight, UI::VAlign::kTop), kVertical);
+				Alignment(UI::Align::kRight, UI::Align::kTop), kVertical);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeTopTile),
-				Alignment(UI::HAlign::kLeft, UI::VAlign::kTop), kHorizontal);
+				Alignment(UI::Align::kLeft, UI::Align::kTop), kHorizontal);
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeBottomTile),
-				  Alignment(UI::HAlign::kLeft, UI::VAlign::kBottom), kHorizontal);
+				  Alignment(UI::Align::kLeft, UI::Align::kBottom), kHorizontal);
 
 	// Frame corners
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft),     FullscreenWindow::Alignment(UI::HAlign::kLeft, UI::VAlign::kTop));
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight),    FullscreenWindow::Alignment(UI::HAlign::kRight, UI::VAlign::kTop));
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft),  FullscreenWindow::Alignment(UI::HAlign::kLeft, UI::VAlign::kBottom));
-	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), FullscreenWindow::Alignment(UI::HAlign::kRight, UI::VAlign::kBottom));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopLeft),     FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kTop));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerTopRight),    FullscreenWindow::Alignment(UI::Align::kRight, UI::Align::kTop));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomLeft),  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
+	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCornerBottomRight), FullscreenWindow::Alignment(UI::Align::kRight, UI::Align::kBottom));
 }
 
 void FullscreenWindow::blit_image(RenderTarget& dst,
@@ -118,25 +118,25 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 		int y = 0;
 		// Adjust horizontal alignment
 		switch (align.halign) {
-		case UI::HAlign::kRight:
+		case UI::Align::kRight:
 			x = get_w() - image->width();
 			break;
-		case UI::HAlign::kHCenter:
+		case UI::Align::kCenter:
 			x = (get_w() - image->width()) / 2;
 			break;
-		case UI::HAlign::kLeft:
+		case UI::Align::kLeft:
 			break;
 		}
 
 		// Adjust vertical alignment
 		switch (align.valign) {
-		case UI::VAlign::kBottom:
+		case UI::Align::kBottom:
 			y = get_h() - image->height();
 			break;
-		case UI::VAlign::kVCenter:
+		case UI::Align::kCenter:
 			y = (get_h() - image->height()) / 2;
 			break;
-		case UI::VAlign::kTop:
+		case UI::Align::kTop:
 			break;
 		}
 

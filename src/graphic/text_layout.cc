@@ -69,11 +69,11 @@ std::string as_game_tip(const std::string& txt) {
 
 std::string
 as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
-	return as_aligned(txt, UI::HAlign::kLeft, size, clr, face);
+	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
 std::string
-as_condensed(const std::string& text, UI::HAlign align, int ptsize, const RGBColor& clr) {
+as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
 	return as_aligned(text, align, ptsize, clr, UI::FontSet::Face::kCondensed);
 }
 
@@ -88,19 +88,19 @@ std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& c
 }
 
 std::string as_aligned(const std::string& txt,
-                       UI::HAlign align,
+                       UI::Align align,
                        int ptsize,
                        const RGBColor& clr,
                        UI::FontSet::Face face) {
 	std::string alignment = "left";
 	switch (align) {
-	case UI::HAlign::kHCenter:
+	case UI::Align::kCenter:
 		alignment = "center";
 		break;
-	case UI::HAlign::kRight:
+	case UI::Align::kRight:
 		alignment = "right";
 		break;
-	case UI::HAlign::kLeft:
+	case UI::Align::kLeft:
 		alignment = "left";
 		break;
 	}
@@ -151,7 +151,7 @@ const Image* autofit_ui_text(const std::string& text, int width, RGBColor color,
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
 			result = UI::g_fh1->render(
-			   as_condensed(richtext_escape(text), UI::HAlign::kLeft, fontsize, color));
+			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
 	return result;

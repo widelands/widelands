@@ -80,7 +80,7 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
                  UI::Scrollbar::kSize,
                  0,
                  "",
-                 UI::HAlign::kLeft,
+                 UI::Align::kLeft,
                  g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),

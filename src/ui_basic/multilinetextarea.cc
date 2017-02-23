@@ -37,7 +37,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const uint32_t w,
                                      const uint32_t h,
                                      const std::string& text,
-                                     const HAlign align,
+                                     const Align align,
                                      const Image* button_background,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
@@ -161,15 +161,15 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;
-			HAlign alignment = mirror_alignment(align_);
+			Align alignment = mirror_alignment(align_);
 			switch (alignment) {
-			  case UI::HAlign::kHCenter:
+			  case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
 				break;
-			  case UI::HAlign::kRight:
+			  case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
-			  case UI::HAlign::kLeft:
+			  case UI::Align::kLeft:
 				anchor = RICHTEXT_MARGIN;
 			}
 

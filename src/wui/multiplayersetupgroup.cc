@@ -56,7 +56,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     save_(-2) {
 		set_size(w, h);
 		name = new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h);
-		add(name, UI::HAlign::kHCenter);
+		add(name, UI::Align::kCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) {  // Our Client
 			type = new UI::Button(
@@ -67,7 +67,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {  // just a shown client
 			type_icon = new UI::Icon(
 			   this, 0, 0, h, h, g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"));
-			add(type_icon, UI::HAlign::kHCenter);
+			add(type_icon, UI::Align::kCenter);
 		}
 	}
 
@@ -164,27 +164,27 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
-		add(player, UI::HAlign::kHCenter);
+		add(player, UI::Align::kCenter);
 		type = new UI::Button(
 		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
-		add(type, UI::HAlign::kHCenter);
+		add(type, UI::Align::kCenter);
 		tribe = new UI::Button(
 		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		tribe->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
-		add(tribe, UI::HAlign::kHCenter);
+		add(tribe, UI::Align::kCenter);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
 		                      g_gr->images().get("images/ui_basic/but1.png"), "");
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		add(init, UI::HAlign::kHCenter);
+		add(init, UI::Align::kCenter);
 		team = new UI::Button(
 		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
-		add(team, UI::HAlign::kHCenter);
+		add(team, UI::Align::kCenter);
 	}
 
 	/// Toggle through the types
@@ -400,11 +400,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	labels.back()->set_fontsize(small_font);
 
 	labels.push_back(new UI::Textarea(
-		this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::HAlign::kHCenter));
+		this, w * 6 / 15 + buth * 3, buth / 3, w * 9 / 15 - 4 * buth, buth, UI::Align::kCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_fontsize(small_font);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::HAlign::kRight));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::kRight));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_fontsize(small_font);
 
@@ -413,7 +413,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
 		   &playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get(), tribepics_, tribenames_);
-		playerbox.add(multi_player_player_groups.at(i), UI::HAlign::kHCenter);
+		playerbox.add(multi_player_player_groups.at(i), UI::Align::kCenter);
 	}
 	refresh();
 }
@@ -435,7 +435,7 @@ void MultiPlayerSetupGroup::refresh() {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, i, 0, 0, clientbox.get_w(), buth_, s);
-			clientbox.add(&*multi_player_client_groups.at(i), UI::HAlign::kHCenter);
+			clientbox.add(&*multi_player_client_groups.at(i), UI::Align::kCenter);
 		}
 		multi_player_client_groups.at(i)->refresh();
 	}

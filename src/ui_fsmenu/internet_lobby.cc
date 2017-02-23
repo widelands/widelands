@@ -48,7 +48,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      prev_clientlist_len_(1000),
 
      // Text labels
-	  title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::HAlign::kHCenter),
+	  title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
      clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
      opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of games:")),
      servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
@@ -136,7 +136,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
 	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
 	clientsonline_list_.add_column(
-	   0, _("Game"), "", UI::HAlign::kLeft, UI::TableColumnType::kFlexible);
+	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	clientsonline_list_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_.double_clicked.connect(
@@ -367,7 +367,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 				     "There seems to be a network problem, either on your side or on the side\n"
 				     "of the server.\n"));
 				UI::WLMessageBox mmb(this, _("Connection timed out"), warning,
-				                     UI::WLMessageBox::MBoxType::kOk, UI::HAlign::kLeft);
+				                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
 			}
@@ -394,7 +394,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
 			UI::WLMessageBox mmb(
-			   this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::HAlign::kLeft);
+			   this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost(&peer, ip.c_str(), WIDELANDS_PORT);

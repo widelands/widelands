@@ -40,7 +40,7 @@ LoginBox::LoginBox(Panel& parent)
 
 	pwd_warning = new UI::MultilineTextarea(this, margin, 65, 505, 50,
 	                                        _("WARNING: Password will be shown and saved readable!"),
-	                                        UI::HAlign::kLeft);
+	                                        UI::Align::kLeft);
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);

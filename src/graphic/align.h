@@ -24,30 +24,18 @@
 
 namespace UI {
 
-/**
- * Horizontal alignment.
- *
- * bits 0,1 values 0,1,2,3
- */
-enum HAlign {
-	kLeft       = 0x00,
-	kHCenter    = 0x01,
-	kRight      = 0x02,
+// NOCOM(GunChleoc): Rename to kFront, kCenter, kBack
+// If clang complains about the switch statements.
+/// Alignment
+enum class Align {
+	kLeft,
+	kCenter,
+	kRight,
+	kTop = kLeft,
+	kBottom = kRight,
 };
 
-/** Vertical alignment.
- *
- * bits 2,3 values 0,4,8,12
- */
-
-enum VAlign {
-	kTop        = 0x00,
-	kVCenter    = 0x04,
-	kBottom     = 0x08,
-};
-
-HAlign mirror_alignment(HAlign alignment);
-
-void correct_for_align(HAlign, uint32_t w, Vector2f* pt);
+Align mirror_alignment(Align alignment);
+void correct_for_align(Align, uint32_t w, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

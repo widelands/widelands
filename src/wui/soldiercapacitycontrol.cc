@@ -79,16 +79,16 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                g_gr->images().get("images/ui_basic/but4.png"),
                g_gr->images().get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity")),
-	  value_(this, "199", UI::HAlign::kHCenter) {
+	  value_(this, "199", UI::Align::kCenter) {
 	decrease_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	increase_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), UI::HAlign::kHCenter);
-	add(&decrease_, UI::HAlign::kHCenter);
-	add(&value_,    UI::HAlign::kHCenter);
-	add(&increase_, UI::HAlign::kHCenter);
+	add(new UI::Textarea(this, _("Capacity")), UI::Align::kCenter);
+	add(&decrease_, UI::Align::kCenter);
+	add(&value_,    UI::Align::kCenter);
+	add(&increase_, UI::Align::kCenter);
 
 	decrease_.set_repeating(true);
 	increase_.set_repeating(true);
