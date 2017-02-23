@@ -32,7 +32,7 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               UI::Align::kTopCenter) {
 	message_.set_fontsize(fs_small() * 6 / 5);
 	message_.set_color(RGBColor(192, 192, 128));
-	add_overlay_image("images/loadscreens/splash.jpg", UI::Align::kCenter);
+	add_overlay_image("images/loadscreens/splash.jpg", FullscreenWindow::Alignment(UI::HAlign::kHCenter, UI::VAlign::kVCenter));
 }
 
 bool FullscreenMenuIntro::handle_mousepress(uint8_t, int32_t, int32_t) {

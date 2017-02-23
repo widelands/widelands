@@ -124,7 +124,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::HAlign::kHCenter, true);
 
-	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
+	add_overlay_image("images/ui_fsmenu/main_title.png", FullscreenWindow::Alignment(UI::HAlign::kHCenter, UI::VAlign::kTop));
 
 	layout();
 }

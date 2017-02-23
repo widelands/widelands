@@ -56,6 +56,16 @@ public:
 		}
 	};
 
+	struct Alignment {
+		Alignment(UI::HAlign h, UI::VAlign v) : halign(h), valign(v) {
+		}
+		Alignment() : Alignment(UI::HAlign::kLeft, UI::VAlign::kTop) {
+		}
+
+		UI::HAlign halign;
+		UI::VAlign valign;
+	};
+
 	/// A full screen main menu outside of the game/editor itself.
 	FullscreenWindow();
 	virtual ~FullscreenWindow();
@@ -70,7 +80,7 @@ protected:
 	/// Sets the image for the given frame position.
 	void set_frame_image(FullscreenWindow::Frames id, const std::string& filename);
 	/// Add an overlay images to be blitted according to 'align'.
-	void add_overlay_image(const std::string& filename, UI::Align align);
+	void add_overlay_image(const std::string& filename, Alignment align);
 	/// Remove all overlay images
 	void clear_overlays();
 
@@ -87,13 +97,13 @@ private:
 	 */
 	void blit_image(RenderTarget& dst,
 	                const Image* image,
-	                UI::Align align,
+	                Alignment align,
 	                Tiling tiling = kNone);
 
 	const std::string background_image_;
 	/// These overlay images will be blitted in the order they were added and according to the given
 	/// align.
-	std::vector<std::pair<const Image*, UI::Align>> overlays_;
+	std::vector<std::pair<const Image*, Alignment>> overlays_;
 	/// Images for the edges. They will be blitted in top of the overlays_.
 	std::unordered_map<FullscreenWindow::Frames, const Image*, FullscreenWindow::FramesHash>
 	   frame_overlays_;
