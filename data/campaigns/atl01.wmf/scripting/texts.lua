@@ -99,7 +99,7 @@ obj_build_barracks = {
    title = _"Build a barracks",
    number = 1,
    body = objective_text(_"Recruiting new soldiers",
-      _[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one each and some basic training to become a soldier.]] .. paragraphdivider() ..
+      _[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one of each and some basic training to become a soldier.]] .. paragraphdivider() ..
       listitem_bullet(_[[Build a barracks]])
    )
 }
@@ -317,7 +317,7 @@ barracks_story = {
       title = _"Jundlina Writes a Letter",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[I have received word that our mining industry started working. Now that we are forging weapons, I will send a letter to Sidolus informing him that it’s time to build a barracks and start training soldiers.]]))
+         _([[I have received word that our mining industry started working. Now that we are forging weapons, I will send a letter to Sidolus informing him that it’s time to build a barracks and start recruiting soldiers.]]))
          .. new_objectives(obj_build_barracks)
    }
 }

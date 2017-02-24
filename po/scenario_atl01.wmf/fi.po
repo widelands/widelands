@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-14 20:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-18 09:49+0000\n"
+"PO-Revision-Date: 2017-02-19 15:02+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr "Rakenna kaksi puunhakkaajan mökkiä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr "Rakenna kaksi puunistuttajan mökkiä"
+msgstr "Rakenna kaksi metsänhoitajan mökkiä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -219,11 +219,11 @@ msgstr "Rakenna työkalupaja"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a barracks"
-msgstr ""
+msgstr "Rakenna parakki"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Palkataan uusia sotilaita"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -231,7 +231,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one each and some basic training to "
 "become a soldier."
-msgstr ""
+msgstr "Koska nyt aseita ollaan takomassa, uusia sotilaita voidaan palkata. Sitä varten miedän tulee toimittaa kevyitä atraimia ja taisteluasuja kasarmille. Alokkaat saapuvat varastolta ja he saavat varusteensa sekä peruskoulutuksen tullakseen sotilaiksi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build training sites for soldiers"
@@ -479,7 +479,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Lämmittäköön Satul sinua, Jundlina! Kaikkein tärkeimpiä asioita asutuksen rakentamiseksi ovat rakennusmateriaalit. Puuta on ainakin saatavilla, joten meidän pitäisi rakentaa asumuksia joillekkin puunhakkaajille ja tottakai myös metsänvartijoille, jotta puut eivät pääse loppumaan. Niin, ja meidän ei pidä unohtaa sahaa, koska useimpia rakennuksia ei voi tehdä pelkistä puun rungoista. Vahvemmat rakennukset tarvitsevat myös graniittia, jota on runsain mitoin täältä koilliseen katsottaessa; meidän vain tarvitsee rakentaa louhos ja kivanhakkaaja tulee menemään työhönsä ripeästi."
+msgstr "Lämmittäköön Satul sinua, Jundlina! Kaikkein tärkeimpiä asioita asutuksen rakentamiseksi ovat rakennusmateriaalit. Puuta on ainakin saatavilla, joten meidän pitäisi rakentaa asumuksia joillekkin puunhakkaajille ja tottakai myös metsänhoitajille, jotta puut eivät pääse loppumaan. Niin, ja meidän ei pidä unohtaa sahaa, koska useimpia rakennuksia ei voi tehdä pelkistä puun rungoista. Vahvemmat rakennukset tarvitsevat myös graniittia, jota on runsain mitoin täältä koilliseen katsottaessa; meidän vain tarvitsee rakentaa louhos ja kivanhakkaaja tulee menemään työhönsä ripeästi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 msgid "Sidolus Speaks"
@@ -679,7 +679,7 @@ msgstr "Olen harkinnut tätä, Sidolus. Luulempa nyt olevan jo aika. Teemme täs
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina Kirjoittaa Kirjeen"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
@@ -687,14 +687,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start training soldiers."
-msgstr ""
+msgstr "Olen saanut tiedon, että kaivosteollisuus aloitti toiminnan. Koska nyt valmistamme aseita, lähetän kirjeen Sidolusille kertoakseni, että on aika rakentaa kasarmi ja aloittaa sotilaiden kouluttaminen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "Tänään näin ensimmäisten alokkaiden kokoontuvan uuden kasarmin edustalle. Jos kaikki menee hyvin, heidän pitäisi kohta saada koulutuksensa."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"
