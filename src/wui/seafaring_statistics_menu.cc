@@ -245,7 +245,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 		filename = "images/wui/ship/ship_explore_island_cw.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
-		filename = "images/wui/editor/fsel_editor_set_port_space.png";
+		filename = "images/wui/stats/ship_stats_port_space.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
 		return colony_icon_;
