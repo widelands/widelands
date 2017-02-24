@@ -36,6 +36,8 @@ enum class Align {
 };
 
 Align mirror_alignment(Align alignment);
+
+void center_vertically(uint32_t h, Vector2f* pt);
 void correct_for_align(Align, uint32_t w, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

@@ -390,13 +390,10 @@ void EditBox::draw(RenderTarget& dst) {
 	      entry_text_im->height();
 
 	Vector2f point(kMarginX, get_h() / 2);
-
 	if (m_->align == UI::Align::kRight) {
 		point.x += max_width - linewidth;
 	}
-
-	// NOCOM(GunChleoc): Create a vertical centering function
-	point.y -= lineheight >> 1;
+	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {

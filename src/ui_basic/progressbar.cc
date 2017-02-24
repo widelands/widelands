@@ -84,14 +84,12 @@ void ProgressBar::draw(RenderTarget& dst) {
 		dst.fill_rect(Rectf(0.f, h, get_w(), get_h() - h), color);
 	}
 
-	// Print the state in percent
-	// TODO(unknown): use UI_FNT_COLOR_BRIGHT when merged
-	uint32_t percent = static_cast<uint32_t>(fraction * 100);
+	// Print the state in percent without decimal points.
 	const std::string progress_text =
-	   (boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
-	// NOCOM(GunChleoc): Create a vertical centering function
+		(boost::format("<font color=%s>%u%%</font>") % UI_FONT_CLR_BRIGHT.hex_value() % floor(fraction * 100)).str();
 	const Image* rendered_text = UI::g_fh1->render(as_uifont(progress_text));
-	dst.blit(Vector2f(get_w() / 2, (get_h() - rendered_text->height()) / 2), rendered_text,
-	         BlendMode::UseAlpha, UI::Align::kCenter);
+	Vector2f pos(get_w() / 2, get_h() / 2);
+	UI::center_vertically(rendered_text->height(), &pos);
+	dst.blit(pos, rendered_text, BlendMode::UseAlpha, UI::Align::kCenter);
 }
 }

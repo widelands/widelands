@@ -61,4 +61,12 @@ void correct_for_align(Align align, uint32_t w, Vector2f* pt) {
 		pt->x -= w;
 }
 
+
+/**
+ * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
+ */
+void center_vertically(uint32_t h, Vector2f* pt) {
+	pt->y -= h / 2;
+}
+
 }  // namespace UI

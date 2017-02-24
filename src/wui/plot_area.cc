@@ -53,8 +53,8 @@ const uint32_t time_in_ms[] = {
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor kAxisLineColor(0, 0, 0);
-constexpr float kAxisLinesWidth = 2.0f;
-constexpr float kPlotLinesWidth = 3.f;
+constexpr int kAxisLinesWidth = 2;
+constexpr int kPlotLinesWidth = 3;
 const RGBColor kZeroLineColor(255, 255, 255);
 
 enum class Units {
@@ -68,7 +68,7 @@ enum class Units {
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
 	static boost::format f(
-	   "<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+		"<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
@@ -178,10 +178,10 @@ void draw_value(const string& value,
                 const RGBColor& color,
                 const Vector2f& pos,
                 RenderTarget& dst) {
-	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(
-	   Vector2f(pos.x, pos.y - pic->height() / 2), pic, BlendMode::UseAlpha, UI::Align::kRight);
+	Vector2f point(pos);  // Un-const this
+	UI::center_vertically(pic->height(), &point);
+	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
 }
 
 /**
@@ -252,12 +252,11 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		// TODO(GunChleoc): The font renderer trims this away, use keep_spaces.
-		// NOCOM(GunChleoc): Create a vertical centering function
 		const Image* xtick = UI::g_fh1->render(
 		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		dst.blit(Vector2f(posx, inner_h - kSpaceBottom + 10 - xtick->height() / 2), xtick,
-		         BlendMode::UseAlpha, UI::Align::kCenter);
+		Vector2f pos(posx, inner_h - kSpaceBottom + 10);
+		UI::center_vertically(xtick->height(), &pos);
+		dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kCenter);
 
 		posx -= sub;
 	}
@@ -272,10 +271,10 @@ void draw_diagram(uint32_t time_ms,
 	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	// NOCOM(GunChleoc): Create a vertical centering function
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	dst.blit(Vector2f(2.f, kSpacing + 2 - xtick->height() / 2), xtick, BlendMode::UseAlpha,
-	         UI::Align::kLeft);
+	Vector2f pos(2, kSpacing + 2);
+	UI::center_vertically(xtick->height(), &pos);
+	dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kLeft);
 }
 
 }  // namespace
@@ -296,7 +295,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      yline_length_(get_inner_h() - kSpaceBottom - kSpacing),
      time_ms_(0),
      highest_scale_(0),
-     sub_(0.0f),
+	  sub_(0),
      time_(TIME_GAME),
      game_time_id_(0) {
 	update();
