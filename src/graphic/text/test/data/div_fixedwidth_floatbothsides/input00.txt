@@ -6,7 +6,7 @@ tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 </p>
-<sub width=100 float=right background=ff0000>
+<div width=100 float=right background=ff0000>
    <p>
 Hello World
 Hello World
@@ -14,11 +14,11 @@ Hello World
 Hello World
 Hello World
    </p>
-</sub>
+</div>
 <p>
 Lorem ipsum dolor sit amet, consetetur sadipscing
 </p>
-<sub width=100 float=left background=00ff00>
+<div width=100 float=left background=00ff00>
    <p>
 Hello World
 Hello World
@@ -26,7 +26,7 @@ Hello World
 Hello World
 Hello World
    </p>
-</sub>
+</div>
 <p>elitr, sed diam nonumy eir mod tem por invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 no sea takimata sanctus est Lorem ipsum dolor sit amet.

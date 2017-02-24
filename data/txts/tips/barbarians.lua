@@ -5,7 +5,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _"Always build a ranger’s and a gamekeeper’s hut, so you will not run out of logs.",
+      text = _"Always build a ranger’s and a gamekeeper’s hut, so you will not run out of logs or game.",
       seconds = 5
    },
 }
