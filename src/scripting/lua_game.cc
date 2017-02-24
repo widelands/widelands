@@ -688,30 +688,16 @@ int LuaPlayer::reveal_campaign(lua_State* L) {
 */
 int LuaPlayer::get_ships(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	Map* map = egbase.get_map();
 	PlayerNumber p = (get(L, egbase)).player_number();
 	lua_newtable(L);
 	uint32_t cidx = 1;
-
-	std::set<OPtr<Ship>> found_ships;
-	for (int16_t y = 0; y < map->get_height(); ++y) {
-		for (int16_t x = 0; x < map->get_width(); ++x) {
-			FCoords f = map->get_fcoords(Coords(x, y));
-			// there are too many bobs on the map so we investigate
-			// only bobs on water
-			if (f.field->nodecaps() & MOVECAPS_SWIM) {
-				for (Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
-					if (upcast(Ship, ship, bob)) {
-						if (ship->get_owner()->player_number() == p && !found_ships.count(ship)) {
-							found_ships.insert(ship);
-							lua_pushuint32(L, cidx++);
-							LuaMaps::upcasted_map_object_to_lua(L, ship);
-							lua_rawset(L, -3);
-						}
-					}
-				}
-			}
-		}
+	for (const auto& serial : egbase.player(p).ships()) {
+		Widelands::MapObject* obj = egbase.objects().get_object(serial);
+		assert(obj->descr().type() == Widelands::MapObjectType::SHIP);
+		upcast(Widelands::Ship, ship, obj);
+		lua_pushuint32(L, cidx++);
+		LuaMaps::upcasted_map_object_to_lua(L, ship);
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
