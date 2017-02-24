@@ -196,19 +196,21 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   switch (note.action) {
-		   case Widelands::NoteShip::Action::kStateChanged:
-		   case Widelands::NoteShip::Action::kDestinationChanged:
-		   case Widelands::NoteShip::Action::kWaitingForCommand:
-		   case Widelands::NoteShip::Action::kGained:
-			   update_ship(*note.ship);
-			   break;
-		   case Widelands::NoteShip::Action::kLost:
-			   remove_ship(note.ship->serial());
-			   break;
-		   default:
-			   NEVER_HERE();
-		   }
+			if (iplayer().get_player() == note.ship->get_owner()) {
+				switch (note.action) {
+				case Widelands::NoteShip::Action::kStateChanged:
+				case Widelands::NoteShip::Action::kDestinationChanged:
+				case Widelands::NoteShip::Action::kWaitingForCommand:
+				case Widelands::NoteShip::Action::kGained:
+					update_ship(*note.ship);
+					break;
+				case Widelands::NoteShip::Action::kLost:
+					remove_ship(note.ship->serial());
+					break;
+				default:
+					NEVER_HERE();
+				}
+			}
 		});
 }
 
@@ -315,6 +317,7 @@ Widelands::Ship* SeafaringStatisticsMenu::serial_to_ship(Widelands::Serial seria
 }
 
 void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
+	assert(iplayer().get_player() == ship.get_owner());
 	const ShipInfo* info = create_shipinfo(ship);
 	// Remove ships that don't satisfy the filter
 	if (ship_filter_ != ShipFilterStatus::kAll && info->status != ship_filter_) {
@@ -556,7 +559,9 @@ void SeafaringStatisticsMenu::fill_table() {
 	table_.clear();
 	set_buttons_enabled();
 	for (const auto& serial : iplayer().player().ships()) {
-		const ShipInfo* info = create_shipinfo(*serial_to_ship(serial));
+		Widelands::Ship* ship = serial_to_ship(serial);
+		assert(iplayer().get_player() == ship->get_owner());
+		const ShipInfo* info = create_shipinfo(*ship);
 		if (info->status != ShipFilterStatus::kAll) {
 			if (ship_filter_ == ShipFilterStatus::kAll || info->status == ship_filter_) {
 				data_.insert(std::make_pair(serial, info));
