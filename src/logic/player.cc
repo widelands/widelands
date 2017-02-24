@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 #include <boost/signals2.hpp>
 
 #include "base/i18n.h"
@@ -1224,7 +1225,7 @@ const std::string Player::pick_shipname() {
 		remaining_shipnames_.erase(it);
 		return new_name;
 	}
-	return "Ship";
+	return (boost::format(pgettext("shipname", "Ship %d")) % ships_.size()).str();
 }
 
 /**
