@@ -24,9 +24,9 @@
 
 namespace UI {
 
-// NOCOM(GunChleoc): Rename to kFront, kCenter, kBack
-// If clang complains about the switch statements.
-/// Alignment
+// TODO(GunChleoc): Step 1: Clean up superfluous usages of kLeft/kTop, especially with dalls to Box::ad and Textarea constructor.
+// TODO(GunChleoc): Step 2: Rename to kBeginning, kCenter, kEnd
+/// Horizontal or vertical alignment
 enum class Align {
 	kLeft,
 	kCenter,
