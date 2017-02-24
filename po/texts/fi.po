@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-28 21:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-02-18 09:49+0000\n"
+"PO-Revision-Date: 2017-02-19 14:26+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -492,13 +492,13 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "Pidä kalastajiasi silmällä ja rakenna kalankasvattajan mökki. Kun kalaresurssit loppuvat työskentelyalueelta, kalakantaa ei voi enää elvyttää."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Rakenna aina metsänhoitajan ja metsurin mökit, jotta tukit eivät pääse loppumaan."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
@@ -510,7 +510,7 @@ msgstr "Pidä kalastajia silmällä. Kun kalaresurssit loppuvat työalueelta he 
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs."
-msgstr ""
+msgstr "Rakenna aina metsänvartijan ja riistanvartijan mökit, jotta tukit ja riista eivät pääse loppumaan."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -557,7 +557,7 @@ msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennu
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Rakenna aina metsänvartijan talo, jottei taloutesi tukehtuisi tukkipulaan."
+msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipulaan."
 
 #: ../../data/txts/tips/general_game.lua:4
 msgid ""
@@ -628,7 +628,7 @@ msgstr "Jos pidät CTRL-näppäintä pohjassa tietä postettaessa, tie ja liput 
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "Uusia sotilaita palkataan kasarmiin. Heidän taitoja voi parantaa harjoittelupaikoissa."
 
 #: ../../data/txts/tips/general_game.lua:52
 msgid ""

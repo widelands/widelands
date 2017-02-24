@@ -656,11 +656,11 @@ private:
 };
 
 /*
- * This is a sub tag node. It is also the same as a full rich text render node.
+ * This is a div tag node. It is also the same as a full rich text render node.
  */
-class SubTagRenderNode : public RenderNode {
+class DivTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle& ns)
+	DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(0),
 	     desired_width_unit_(WidthUnit::kShrink),
@@ -668,7 +668,7 @@ public:
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
 	}
-	virtual ~SubTagRenderNode() {
+	virtual ~DivTagRenderNode() {
 		for (RenderNode* n : nodes_to_render_) {
 			delete n;
 		}
@@ -1193,9 +1193,9 @@ public:
 	}
 };
 
-class SubTagHandler : public TagHandler {
+class DivTagHandler : public TagHandler {
 public:
-	SubTagHandler(Tag& tag,
+	DivTagHandler(Tag& tag,
 	              FontCache& fc,
 	              NodeStyle ns,
 	              ImageCache* image_cache,
@@ -1206,7 +1206,7 @@ public:
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
 	     w_(max_w),
-	     render_node_(new SubTagRenderNode(ns)) {
+	     render_node_(new DivTagRenderNode(ns)) {
 	}
 
 	void enter() override {
@@ -1304,7 +1304,7 @@ public:
 		nodes.push_back(render_node_);
 	}
 
-	// Handle attributes that are in sub, but not in rt.
+	// Handle attributes that are in div, but not in rt.
 	virtual void handle_unique_attributes() {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("width")) {
@@ -1355,10 +1355,10 @@ protected:
 
 private:
 	uint16_t w_;
-	SubTagRenderNode* render_node_;
+	DivTagRenderNode* render_node_;
 };
 
-class RTTagHandler : public SubTagHandler {
+class RTTagHandler : public DivTagHandler {
 public:
 	RTTagHandler(Tag& tag,
 	             FontCache& fc,
@@ -1367,10 +1367,10 @@ public:
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets& fontsets,
 	             uint16_t w)
-	   : SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
+	   : DivTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
-	// Handle attributes that are in rt, but not in sub.
+	// Handle attributes that are in rt, but not in div.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
@@ -1406,7 +1406,7 @@ TagHandler* create_taghandler(Tag& tag,
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
 		map["font"] = &create_taghandler<FontTagHandler>;
-		map["sub"] = &create_taghandler<SubTagHandler>;
+		map["div"] = &create_taghandler<DivTagHandler>;
 		map["p"] = &create_taghandler<PTagHandler>;
 		map["img"] = &create_taghandler<ImgTagHandler>;
 		map["vspace"] = &create_taghandler<VspaceTagHandler>;

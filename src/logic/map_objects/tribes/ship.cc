@@ -1045,8 +1045,8 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   (boost::format("<sub padding_r=10><p><img src=%s></p></sub>"
-	                  "<sub width=*><p><font size=%d>%s</font></p></sub>") %
+		(boost::format("<div padding_r=10><p><img src=%s></p></div>"
+							"<div width=*><p><font size=%d>%s</font></p></div>") %
 	    picture % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 

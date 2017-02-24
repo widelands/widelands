@@ -751,8 +751,8 @@ void Building::send_message(Game& game,
 	const std::string& img = descr().representative_image_filename();
 	const int width = descr().representative_image()->width();
 	const std::string rt_description =
-	   (boost::format("<sub padding_r=10><p><img width=%d src=%s color=%s></p></sub>"
-	                  "<sub width=*><p><font size=%d>%s</font></p></sub>") %
+		(boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
+							"<div width=*><p><font size=%d>%s</font></p></div>") %
 	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 

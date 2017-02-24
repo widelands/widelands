@@ -198,7 +198,7 @@ public:
 
 	bool fetch_from_flag(Game&) override;
 
-	Quantity count_workers(const Game&, DescriptionIndex, const Requirements&, Match);
+	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
 
 	// Adds the worker to the inventory. Takes ownership and might delete

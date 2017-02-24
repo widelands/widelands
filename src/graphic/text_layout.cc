@@ -54,8 +54,8 @@ bool is_paragraph(const std::string& text) {
 	return boost::starts_with(text, "<p");
 }
 
-bool is_sub(const std::string& text) {
-	return boost::starts_with(text, "<sub");
+bool is_div(const std::string& text) {
+	return boost::starts_with(text, "<div");
 }
 
 std::string richtext_escape(const std::string& given_text) {
@@ -151,7 +151,7 @@ std::string as_waresinfo(const std::string& txt) {
 std::string as_message(const std::string& heading, const std::string& body) {
 	return ((boost::format(
 	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	         heading % (is_paragraph(body) || is_sub(body) ? body : "<p>" + body + "</p>"))
+				heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
 	           .str());
 }
 
