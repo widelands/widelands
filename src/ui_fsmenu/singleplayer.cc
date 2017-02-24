@@ -27,7 +27,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Single Player"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Single Player"), UI::Align::kCenter),
 
      // Buttons
      new_game(&vbox_,
@@ -70,14 +70,14 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&new_game, UI::Align::kHCenter, true);
-	vbox_.add(&campaign, UI::Align::kHCenter, true);
+	vbox_.add(&new_game, UI::Align::kCenter, true);
+	vbox_.add(&campaign, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&load_game, UI::Align::kHCenter, true);
+	vbox_.add(&load_game, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&back, UI::Align::kCenter, true);
 
 	layout();
 }

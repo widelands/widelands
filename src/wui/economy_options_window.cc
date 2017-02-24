@@ -135,14 +135,14 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	add(&display_, UI::Align::kLeft, true);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	add(buttons, UI::Align::kLeft);
+	add(buttons);
 
 	UI::Button* b =
 	   new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
 	                  g_gr->images().get("images/ui_basic/but4.png"), "-", _("Decrease target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
-	buttons->add(b, UI::Align::kHCenter);
+	buttons->add(b, UI::Align::kCenter);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
@@ -150,7 +150,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	                   g_gr->images().get("images/ui_basic/but4.png"), "+", _("Increase target"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
-	buttons->add(b, UI::Align::kHCenter);
+	buttons->add(b, UI::Align::kCenter);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
@@ -158,7 +158,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	                   g_gr->images().get("images/ui_basic/but4.png"), "R", _("Reset to default"));
 	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
-	buttons->add(b, UI::Align::kHCenter);
+	buttons->add(b, UI::Align::kCenter);
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::set_economy_number(size_t economy_number) {

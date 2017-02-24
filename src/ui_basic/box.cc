@@ -376,7 +376,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			maxbreadth = get_inner_w();
 		}
 		switch (it.u.panel.align) {
-		case UI::Align::kHCenter:
+		case UI::Align::kCenter:
 			breadth = (maxbreadth - breadth) / 2;
 			break;
 
@@ -384,7 +384,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = maxbreadth - breadth;
 			break;
 		case UI::Align::kLeft:
-		default:
 			breadth = 0;
 		}
 

@@ -65,7 +65,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
                                                             char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
 	   &parent, 0, 0, width, height, min, max, initial, g_gr->images().get(picname), hint));
-	parent.add(result.get(), UI::Align::kHCenter);
+	parent.add(result.get());
 	return result;
 }
 
@@ -85,7 +85,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
 	                                                  g_gr->images().get("images/ui_basic/but2.png"),
 	                                                  text, tooltip_text));
 	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
-	parent.add(button.get(), UI::Align::kHCenter);
+	parent.add(button.get());
 	return button;
 }
 
@@ -129,7 +129,7 @@ void AttackBox::init() {
 	uint32_t max_attackers = get_max_attackers();
 
 	UI::Box& linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	add(&linebox, UI::Align::kHCenter);
+	add(&linebox);
 	add_text(linebox, _("Soldiers:"));
 	linebox.add_space(8);
 
@@ -138,13 +138,13 @@ void AttackBox::init() {
 
 	//  Spliter of soldiers
 	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-	linebox.add(&columnbox, UI::Align::kHCenter);
+	linebox.add(&columnbox);
 
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
 	soldiers_text_.reset(
-	   &add_text(columnbox, attack_string, UI::Align::kHCenter, UI_FONT_SIZE_ULTRASMALL));
+	   &add_text(columnbox, attack_string, UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0,
 	                              "images/ui_basic/but2.png", _("Number of soldiers"));

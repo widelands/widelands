@@ -99,7 +99,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	plot_.set_time(my_registry_->time);
 
 	// Setup Widgets
-	box_.add(&plot_, UI::Align::kTop);
+	box_.add(&plot_);
 
 	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -125,7 +125,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	else  //  player nr p does not exist
 	   cbs_[p - 1] = nullptr;
 
-	box_.add(hbox1, UI::Align::kTop, true);
+	box_.add(hbox1, UI::Align::kLeft, true);
 
 	UI::Box* hbox2 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -195,11 +195,11 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	radiogroup_.set_state(selected_information_);
 	radiogroup_.changedto.connect(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
 
-	box_.add(hbox2, UI::Align::kTop, true);
+	box_.add(hbox2, UI::Align::kLeft, true);
 
 	box_.add(new WuiPlotAreaSlider(
 	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png")),
-	         UI::Align::kTop, true);
+	         UI::Align::kLeft, true);
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {

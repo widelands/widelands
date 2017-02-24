@@ -94,12 +94,12 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			   tab_name, std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
 			                boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height))));
 
-			boxes_.at(tab_name)->add(lists_.at(tab_name).get(), UI::Align::kLeft);
+			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
 			boxes_.at(tab_name)->add_space(kPadding);
-			boxes_.at(tab_name)->add(contents_.at(tab_name).get(), UI::Align::kLeft);
+			boxes_.at(tab_name)->add(contents_.at(tab_name).get());
 
 			wrapper_boxes_.at(tab_name)->add_space(kPadding);
-			wrapper_boxes_.at(tab_name)->add(boxes_.at(tab_name).get(), UI::Align::kLeft);
+			wrapper_boxes_.at(tab_name)->add(boxes_.at(tab_name).get());
 
 			if (tab_icon.empty()) {
 				tabs_.add("encyclopedia_" + tab_name, tab_title, wrapper_boxes_.at(tab_name).get());

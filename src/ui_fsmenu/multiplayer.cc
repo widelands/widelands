@@ -30,7 +30,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kHCenter),
+     title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
 
      // Buttons
      metaserver(&vbox_,
@@ -64,10 +64,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&metaserver, UI::Align::kHCenter, true);
-	vbox_.add(&lan, UI::Align::kHCenter, true);
+	vbox_.add(&metaserver, UI::Align::kCenter, true);
+	vbox_.add(&lan, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kHCenter, true);
+	vbox_.add(&back, UI::Align::kCenter, true);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);

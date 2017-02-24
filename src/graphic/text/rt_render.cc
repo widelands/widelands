@@ -1214,10 +1214,15 @@ public:
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
-				if (rn->halign() == UI::Align::kCenter) {
+				switch (rn->halign()) {
+				case UI::Align::kCenter:
 					rn->set_x(rn->x() - extra_width / 2);
-				} else if (rn->halign() == UI::Align::kRight) {
+					break;
+				case UI::Align::kRight:
 					rn->set_x(rn->x() - extra_width);
+					break;
+				case UI::Align::kLeft:
+					break;
 				}
 			}
 		}

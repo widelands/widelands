@@ -95,7 +95,7 @@ FullscreenMenuMain::FullscreenMenuMain()
         0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
         (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-        UI::Align::kBottomRight),
+        UI::Align::kRight),
      copyright(this,
                0,
                0,
@@ -103,12 +103,8 @@ FullscreenMenuMain::FullscreenMenuMain()
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str(),
-               UI::Align::kBottomLeft),
-     gpl(this,
-         0,
-         0,
-         _("Licensed under the GNU General Public License V2.0"),
-         UI::Align::kBottomLeft) {
+               UI::Align::kLeft),
+     gpl(this, 0, 0, _("Licensed under the GNU General Public License V2.0"), UI::Align::kLeft) {
 	playtutorial.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kTutorial));
@@ -134,21 +130,22 @@ FullscreenMenuMain::FullscreenMenuMain()
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox_.add(&playtutorial, UI::Align::kHCenter, true);
-	vbox_.add(&singleplayer, UI::Align::kHCenter, true);
-	vbox_.add(&multiplayer, UI::Align::kHCenter, true);
+	vbox_.add(&playtutorial, UI::Align::kCenter, true);
+	vbox_.add(&singleplayer, UI::Align::kCenter, true);
+	vbox_.add(&multiplayer, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&replay, UI::Align::kHCenter, true);
+	vbox_.add(&replay, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&editor, UI::Align::kHCenter, true);
+	vbox_.add(&editor, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&options, UI::Align::kHCenter, true);
+	vbox_.add(&options, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&about, UI::Align::kHCenter, true);
+	vbox_.add(&about, UI::Align::kCenter, true);
 	vbox_.add_inf_space();
-	vbox_.add(&exit, UI::Align::kHCenter, true);
+	vbox_.add(&exit, UI::Align::kCenter, true);
 
-	add_overlay_image("images/ui_fsmenu/main_title.png", UI::Align::kTopCenter);
+	add_overlay_image("images/ui_fsmenu/main_title.png",
+	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kTop));
 
 	layout();
 }

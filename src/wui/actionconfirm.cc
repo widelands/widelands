@@ -153,7 +153,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	button_box->add_space(2 * padding);
 	button_box->add(
 	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Align::kLeft, false, true);
-	main_box->add(textarea, UI::Align::kLeft);
+	main_box->add(textarea);
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Align::kLeft, true);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
