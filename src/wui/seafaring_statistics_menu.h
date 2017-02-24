@@ -129,6 +129,7 @@ private:
 	/// Helper for filter_ships
 	void set_filter_ships_tooltips();
 
+	const Image* colony_icon_;
 	UI::Box main_box_;
 	// Buttons for ship states
 	UI::Box filter_box_;

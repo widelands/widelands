@@ -134,6 +134,9 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
             100,
             g_gr->images().get("images/ui_basic/but1.png")) {
 
+	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
+	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
+
 	// Buttons for ship states
 	main_box_.add(&filter_box_, UI::Align::kLeft, true);
 	filter_box_.add(&idle_btn_, UI::Align::kLeft);
@@ -230,10 +233,10 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	std::string filename = "";
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
-		filename = "images/wui/ship/ship_scout_e.png";
+		filename = "images/wui/stats/ship_stats_idle.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
-		filename = "images/wui/buildings/menu_tab_wares_dock.png";
+		filename = "images/wui/stats/ship_stats_shipping.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
 		filename = "images/wui/buildings/start_expedition.png";
@@ -245,8 +248,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 		filename = "images/wui/editor/fsel_editor_set_port_space.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
-		filename = "images/wui/fieldaction/menu_tab_buildport.png";
-		break;
+		return colony_icon_;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
