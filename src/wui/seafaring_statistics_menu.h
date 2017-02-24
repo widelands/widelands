@@ -136,7 +136,6 @@ private:
 	UI::Button waiting_btn_;
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
-	UI::Button colonizing_btn_;
 	UI::Button shipping_btn_;
 	ShipFilterStatus ship_filter_;
 	// Navigation buttons

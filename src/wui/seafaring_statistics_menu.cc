@@ -77,14 +77,6 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     g_gr->images().get("images/ui_basic/but4.png"),
                     status_to_image(ShipFilterStatus::kExpeditionPortspaceFound)),
-     colonizing_btn_(&filter_box_,
-                     "filter_ship_colonizing",
-                     0,
-                     0,
-                     kButtonSize,
-                     kButtonSize,
-                     g_gr->images().get("images/ui_basic/but4.png"),
-                     status_to_image(ShipFilterStatus::kExpeditionColonizing)),
      shipping_btn_(&filter_box_,
                    "filter_ship_transporting",
                    0,
@@ -149,7 +141,6 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	filter_box_.add(&waiting_btn_, UI::Align::kLeft);
 	filter_box_.add(&scouting_btn_, UI::Align::kLeft);
 	filter_box_.add(&portspace_btn_, UI::Align::kLeft);
-	filter_box_.add(&colonizing_btn_, UI::Align::kLeft);
 
 	main_box_.add(&table_, UI::Align::kLeft, true, true);
 
@@ -172,8 +163,6 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionScouting));
 	portspace_btn_.sigclicked.connect(boost::bind(
 	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionPortspaceFound));
-	colonizing_btn_.sigclicked.connect(boost::bind(
-	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionColonizing));
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 
@@ -477,22 +466,20 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kExpeditionPortspaceFound:
 		toggle_filter_ships_button(portspace_btn_, status);
 		break;
-	case ShipFilterStatus::kExpeditionColonizing:
-		toggle_filter_ships_button(colonizing_btn_, status);
-		break;
 	case ShipFilterStatus::kShipping:
 		toggle_filter_ships_button(shipping_btn_, status);
 		break;
 	case ShipFilterStatus::kIdle:
 		toggle_filter_ships_button(idle_btn_, status);
 		break;
+		// We're not interested in the "colonizing" status for filtering.
+	case ShipFilterStatus::kExpeditionColonizing:
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;
 		waiting_btn_.set_perm_pressed(false);
 		scouting_btn_.set_perm_pressed(false);
 		portspace_btn_.set_perm_pressed(false);
-		colonizing_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
 		break;
@@ -510,7 +497,6 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 		waiting_btn_.set_perm_pressed(false);
 		scouting_btn_.set_perm_pressed(false);
 		portspace_btn_.set_perm_pressed(false);
-		colonizing_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
 		button.set_perm_pressed(true);
@@ -548,10 +534,6 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	                            % _("Show expeditions with port space found") %
 	                            pgettext("hotkey", "Alt + 5"))
 	                              .str());
-	colonizing_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show colonizing expeditions") % pgettext("hotkey", "Alt + 6"))
-	                               .str());
 }
 
 void SeafaringStatisticsMenu::fill_table() {
