@@ -539,6 +539,7 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 }
 
 void SeafaringStatisticsMenu::fill_table() {
+	const Widelands::Serial last_selection = table_.has_selection() ? table_.get_selected() : Widelands::INVALID_INDEX;
 	data_.clear();
 	table_.clear();
 	set_buttons_enabled();
@@ -549,7 +550,7 @@ void SeafaringStatisticsMenu::fill_table() {
 		if (info->status != ShipFilterStatus::kAll) {
 			if (ship_filter_ == ShipFilterStatus::kAll || info->status == ship_filter_) {
 				data_.insert(std::make_pair(serial, info));
-				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial);
+				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial, serial == last_selection);
 				set_entry_record(&er, *info);
 			}
 		}
@@ -557,6 +558,8 @@ void SeafaringStatisticsMenu::fill_table() {
 
 	if (!table_.empty()) {
 		table_.sort();
-		table_.select(0);
+		if (!table_.has_selection()) {
+			table_.select(0);
+		}
 	}
 }
