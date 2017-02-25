@@ -103,11 +103,11 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 		radiogroup_.add_button(&resources_box_, Vector2i(0, 0),
 		                       g_gr->images().get(resource.representative_image()),
 		                       resource.descname());
-		resources_box_.add(radiogroup_.get_first_button(), UI::Align::kLeft, false, true);
+		resources_box_.add(radiogroup_.get_first_button(), false, true);
 	}
 
 	box_.add_space(vspacing());
-	box_.add(&resources_box_, UI::Align::kLeft, true);
+	box_.add(&resources_box_, true);
 	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
 	radiogroup_.set_state(increase_tool_.get_cur_res());

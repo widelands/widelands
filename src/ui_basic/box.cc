@@ -252,7 +252,7 @@ void Box::scrollbar_moved(int32_t) {
  * This can be used to make buttons fill a box completely.
  *
  */
-void Box::add(Panel* const panel, UI::Align const align, bool fullsize, bool fillspace) {
+void Box::add(Panel* const panel, bool fullsize, bool fillspace, UI::Align const align) {
 	Item it;
 
 	it.type = Item::ItemPanel;

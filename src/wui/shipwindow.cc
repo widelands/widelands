@@ -81,16 +81,16 @@ void ShipWindow::init(bool avoid_fastclick) {
 
 	display_ = new ItemWaresDisplay(vbox_.get(), *ship_.get_owner());
 	display_->set_capacity(ship_.descr().get_capacity());
-	vbox_->add(display_, UI::Align::kCenter, false);
+	vbox_->add(display_, false, false, UI::Align::kCenter);
 
 	// Expedition buttons
 	if (ship_.state_is_expedition()) {
 		UI::Box* exp_top = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_top, UI::Align::kCenter);
+		vbox_->add(exp_top, false, false, UI::Align::kCenter);
 		UI::Box* exp_mid = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_mid, UI::Align::kCenter);
+		vbox_->add(exp_mid, false, false, UI::Align::kCenter);
 		UI::Box* exp_bot = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
-		vbox_->add(exp_bot, UI::Align::kCenter);
+		vbox_->add(exp_bot, false, false, UI::Align::kCenter);
 
 		btn_scout_[WALK_NW - 1] =
 		   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,

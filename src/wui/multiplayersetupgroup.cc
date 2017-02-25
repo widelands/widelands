@@ -413,7 +413,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	for (uint8_t i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
 		   &playerbox, i, 0, 0, playerbox.get_w(), buth, s, npsb.get(), tribepics_, tribenames_);
-		playerbox.add(multi_player_player_groups.at(i), UI::Align::kCenter);
+		playerbox.add(multi_player_player_groups.at(i), false, false, UI::Align::kCenter);
 	}
 	refresh();
 }
@@ -435,7 +435,7 @@ void MultiPlayerSetupGroup::refresh() {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, i, 0, 0, clientbox.get_w(), buth_, s);
-			clientbox.add(&*multi_player_client_groups.at(i), UI::Align::kCenter);
+			clientbox.add(&*multi_player_client_groups.at(i), false, false, UI::Align::kCenter);
 		}
 		multi_player_client_groups.at(i)->refresh();
 	}

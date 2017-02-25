@@ -66,10 +66,10 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	tabs_ = new UI::TabPanel(vbox, 0, 0, nullptr);
-	vbox->add(tabs_, UI::Align::kLeft, true);
+	vbox->add(tabs_, true);
 
 	capsbuttons_ = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(capsbuttons_, UI::Align::kLeft, true);
+	vbox->add(capsbuttons_, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 

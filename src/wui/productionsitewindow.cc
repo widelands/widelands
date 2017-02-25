@@ -90,9 +90,9 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			worker_caps_->add(evict_button);
 		}
 
-		worker_box->add(worker_table_, UI::Align::kLeft, true);
+		worker_box->add(worker_table_, true);
 		worker_box->add_space(4);
-		worker_box->add(worker_caps_, UI::Align::kLeft, true);
+		worker_box->add(worker_caps_, true);
 		get_tabs()->add(
 		   "workers", g_gr->images().get(pic_tab_workers), worker_box,
 		   (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));

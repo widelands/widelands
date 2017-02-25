@@ -135,7 +135,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		}
 		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
-	add(&current_selection_names_, UI::Align::kCenter, true);
+	add(&current_selection_names_, true);
 	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
 	update_label();
 }

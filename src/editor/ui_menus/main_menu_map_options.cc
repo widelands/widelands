@@ -139,8 +139,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
-	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")),
-	               UI::Align::kLeft);
+	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add(&teams_list_);
 	// TODO(GunChleoc): We need team images in the listselect here,
 	// so map editors will be able to delete entries.
@@ -152,7 +151,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
 
-	tab_box_.add(&tabs_, UI::Align::kLeft, true);
+	tab_box_.add(&tabs_, true);
 	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
@@ -236,7 +235,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           std::string displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
-	box->add(cb, UI::Align::kLeft, true);
+	box->add(cb, true);
 	box->add_space(checkbox_space_);
 	parent->add(box);
 	parent->add_space(padding_);
