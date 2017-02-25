@@ -52,7 +52,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
 	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
-	box.add(progress_, false, false, UI::Align::kCenter);
+	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	box.add_space(8);
 

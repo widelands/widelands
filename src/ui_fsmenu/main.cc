@@ -130,19 +130,19 @@ FullscreenMenuMain::FullscreenMenuMain()
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox_.add(&playtutorial, true);
-	vbox_.add(&singleplayer, true);
-	vbox_.add(&multiplayer, true);
+	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
+	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);
+	vbox_.add(&multiplayer, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&replay, true);
+	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&editor, true);
+	vbox_.add(&editor, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&options, true);
+	vbox_.add(&options, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&about, true);
+	vbox_.add(&about, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&exit, true);
+	vbox_.add(&exit, UI::Box::Resizing::kFullSize);
 
 	add_overlay_image("images/ui_fsmenu/main_title.png",
 	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kTop));

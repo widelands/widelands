@@ -127,7 +127,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      can_act_(gb_.can_act(wh_.owner().player_number())),
      type_(type),
      display_(this, width, wh_, type_, can_act_) {
-	add(&display_, true);
+	add(&display_, Resizing::kFullSize);
 
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);

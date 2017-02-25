@@ -149,13 +149,13 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	button_box->add(
-		UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, false, true);
+		UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
 	button_box->add_space(2 * padding);
 	button_box->add(
-		UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, false, true);
+		UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	main_box->add_space(1.5 * padding);
-	main_box->add(button_box, true);
+	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
 	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding);
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);

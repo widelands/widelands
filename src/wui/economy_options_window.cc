@@ -132,7 +132,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      owner_(owner),
      can_act_(can_act),
      display_(this, 0, 0, owner.tribe(), type_, can_act_, economy_number, owner) {
-	add(&display_, true);
+	add(&display_, UI::Box::Resizing::kFullSize);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(buttons);
