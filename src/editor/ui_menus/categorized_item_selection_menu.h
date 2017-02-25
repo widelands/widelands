@@ -96,7 +96,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      tool_(tool) {
 	current_selection_names_.set_background(
 	   g_gr->images().get("images/wui/window_background_dark.png"));
-	add(&tab_panel_, UI::Align::kCenter);
+	add(&tab_panel_);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
@@ -120,7 +120,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
-				vertical->add(horizontal, UI::Align::kLeft);
+				vertical->add(horizontal);
 				vertical->add_space(kSpacing);
 			}
 			assert(horizontal != nullptr);
@@ -129,7 +129,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
-			horizontal->add(cb, UI::Align::kLeft);
+			horizontal->add(cb);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}

@@ -180,7 +180,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 UI::SpinBox::Type::kSmall,
                 5),
      mountains_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     mountains_label_(&mountains_box_, 0, 0, _("Mountains:")),
+	  mountains_label_(&mountains_box_, 0, 0, _("Mountains:")),
      mountains_(&mountains_box_,
                 0,
                 0,
@@ -248,14 +248,14 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	height_.get_buttons()[1]->sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kMapSize));
 
-	box_.add(&width_, UI::Align::kLeft);
-	box_.add(&height_, UI::Align::kLeft);
+	box_.add(&width_);
+	box_.add(&height_);
 	box_height += margin_ + width_.get_h();
 	box_height += margin_ + height_.get_h();
 
 	// ---------- Players -----------
 
-	box_.add(&players_, UI::Align::kLeft);
+	box_.add(&players_);
 	box_height += margin_ + players_.get_h();
 
 	box_.add_space(margin_);
@@ -266,30 +266,30 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 
 	// ---------- Worlds ----------
 
-	world_box_.add(&world_label_, UI::Align::kLeft);
+	world_box_.add(&world_label_);
 	if (world_label_.get_w() < resources_label_.get_w()) {
 		world_box_.add_space(resources_label_.get_w() - world_label_.get_w() - margin_);
 	}
 
 	world_.sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWorld));
-	world_box_.add(&world_, UI::Align::kLeft);
-	box_.add(&world_box_, UI::Align::kLeft);
+	world_box_.add(&world_);
+	box_.add(&world_box_);
 	box_height += margin_ + world_box_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
 
 	// ---------- Amount of Resources (Low/Medium/High) ----------
 
-	resources_box_.add(&resources_label_, UI::Align::kLeft);
+	resources_box_.add(&resources_label_);
 	if (resources_label_.get_w() < world_label_.get_w()) {
 		resources_box_.add_space(world_label_.get_w() - resources_label_.get_w() - margin_);
 	}
 
 	resources_.sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kResources));
-	resources_box_.add(&resources_, UI::Align::kLeft);
-	box_.add(&resources_box_, UI::Align::kLeft);
+	resources_box_.add(&resources_);
+	box_.add(&resources_box_);
 	box_height += margin_ + resources_box_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
@@ -300,7 +300,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	water_.get_buttons()[1]->sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWater));
 
-	box_.add(&water_, UI::Align::kLeft);
+	box_.add(&water_);
 	box_height += margin_ + water_.get_h();
 
 	// ---------- Land -----------
@@ -310,7 +310,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	land_.get_buttons()[1]->sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kLand));
 
-	box_.add(&land_, UI::Align::kLeft);
+	box_.add(&land_);
 	box_height += margin_ + land_.get_h();
 
 	// ---------- Wasteland -----------
@@ -320,21 +320,21 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	wasteland_.get_buttons()[1]->sigclicked.connect(
 	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWasteland));
 
-	box_.add(&wasteland_, UI::Align::kLeft);
+	box_.add(&wasteland_);
 	box_height += margin_ + wasteland_.get_h();
 
 	// ---------- Mountains -----------
 
-	mountains_box_.add(&mountains_label_, UI::Align::kLeft);
+	mountains_box_.add(&mountains_label_);
 
 	// Convince the value label to align with the spinbox labels above
 	mountains_box_.add_space(box_width_ - box_width_ / 6 - mountains_label_.get_w() -
 	                         mountains_.get_w() + margin_ + 3);
 	mountains_.set_fixed_width(box_width_ / 3 - margin_);
-	mountains_box_.add(&mountains_, UI::Align::kLeft);
+	mountains_box_.add(&mountains_);
 	mountains_box_.set_size(box_width_, mountains_label_.get_h());
 
-	box_.add(&mountains_box_, UI::Align::kLeft);
+	box_.add(&mountains_box_);
 	box_height += margin_ + mountains_box_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
@@ -342,7 +342,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	// ---------- Island mode ----------
 
 	island_mode_.set_state(true);
-	box_.add(&island_mode_, UI::Align::kLeft);
+	box_.add(&island_mode_);
 	box_height += margin_ + island_mode_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
@@ -352,7 +352,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 
 	// ---------- Random map number edit ----------
 
-	map_number_box_.add(&map_number_label_, UI::Align::kLeft);
+	map_number_box_.add(&map_number_label_);
 
 	map_number_edit_.changed.connect(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
 	RNG rng;
@@ -360,8 +360,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	rng.rand();
 	map_number_ = rng.rand();
 	map_number_edit_.set_text(std::to_string(static_cast<unsigned int>(map_number_)));
-	map_number_box_.add(&map_number_edit_, UI::Align::kLeft);
-	box_.add(&map_number_box_, UI::Align::kLeft);
+	map_number_box_.add(&map_number_edit_);
+	box_.add(&map_number_box_);
 
 	box_height += margin_ + map_number_box_.get_h();
 	box_.add_space(margin_);
@@ -369,12 +369,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 
 	// ---------- Map ID String edit ----------
 
-	map_id_box_.add(&map_id_label_, UI::Align::kLeft);
+	map_id_box_.add(&map_id_label_);
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
 	map_id_edit_.changed.connect(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
-	map_id_box_.add(&map_id_edit_, UI::Align::kLeft);
-	box_.add(&map_id_box_, UI::Align::kLeft);
+	map_id_box_.add(&map_id_edit_);
+	box_.add(&map_id_box_);
 	box_height += margin_ + map_id_edit_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
@@ -383,13 +383,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	if (UI::g_fh1->fontset()->is_rtl()) {
-		button_box_.add(&ok_button_, UI::Align::kLeft);
-		button_box_.add(&cancel_button_, UI::Align::kLeft);
+		button_box_.add(&ok_button_);
+		button_box_.add(&cancel_button_);
 	} else {
-		button_box_.add(&cancel_button_, UI::Align::kLeft);
-		button_box_.add(&ok_button_, UI::Align::kLeft);
+		button_box_.add(&cancel_button_);
+		button_box_.add(&ok_button_);
 	}
-	box_.add(&button_box_, UI::Align::kLeft);
+	box_.add(&button_box_);
 	box_height += margin_ + button_box_.get_h();
 	box_height += 6 * margin_;
 

@@ -85,7 +85,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 	increase_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), UI::Align::kCenter);
+	add(new UI::Textarea(this, _("Capacity")));
 	add(&decrease_, UI::Align::kCenter);
 	add(&value_, UI::Align::kCenter);
 	add(&increase_, UI::Align::kCenter);

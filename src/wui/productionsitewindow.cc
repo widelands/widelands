@@ -87,7 +87,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			   _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect(
 			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
-			worker_caps_->add(evict_button, UI::Align::kCenter);
+			worker_caps_->add(evict_button);
 		}
 
 		worker_box->add(worker_table_, UI::Align::kLeft, true);

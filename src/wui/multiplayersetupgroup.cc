@@ -56,7 +56,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     save_(-2) {
 		set_size(w, h);
 		name = new UI::Textarea(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h);
-		add(name, UI::Align::kCenter);
+		add(name);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) {  // Our Client
 			type = new UI::Button(
@@ -67,7 +67,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {  // just a shown client
 			type_icon = new UI::Icon(
 			   this, 0, 0, h, h, g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"));
-			add(type_icon, UI::Align::kCenter);
+			add(type_icon);
 		}
 	}
 
@@ -164,27 +164,27 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		                     g_gr->images().get("images/players/player_position_menu_pc.png"));
 		assert(player_image);
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
-		add(player, UI::Align::kCenter);
+		add(player);
 		type = new UI::Button(
 		   this, "player_type", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		type->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
-		add(type, UI::Align::kCenter);
+		add(type);
 		tribe = new UI::Button(
 		   this, "player_tribe", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		tribe->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
-		add(tribe, UI::Align::kCenter);
+		add(tribe);
 		init = new UI::Button(this, "player_init", 0, 0, w - 4 * h, h,
 		                      g_gr->images().get("images/ui_basic/but1.png"), "");
 		init->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		add(init, UI::Align::kCenter);
+		add(init);
 		team = new UI::Button(
 		   this, "player_team", 0, 0, h, h, g_gr->images().get("images/ui_basic/but1.png"), "");
 		team->sigclicked.connect(
 		   boost::bind(&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
-		add(team, UI::Align::kCenter);
+		add(team);
 	}
 
 	/// Toggle through the types

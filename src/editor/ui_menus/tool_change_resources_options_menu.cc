@@ -90,8 +90,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	set_to_.changed.connect(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_set_to, boost::ref(*this)));
 
-	box_.add(&change_by_, UI::Align::kLeft);
-	box_.add(&set_to_, UI::Align::kLeft);
+	box_.add(&change_by_);
+	box_.add(&set_to_);
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 
 	// Add resource buttons
@@ -119,7 +119,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	// Add label
 	cur_selection_.set_fixed_width(box_.get_inner_w());
-	box_.add(&cur_selection_, UI::Align::kLeft);
+	box_.add(&cur_selection_);
 
 	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + cur_selection_.get_h());
 	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());

@@ -422,8 +422,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building), UI::Align::kRight);
-
+	buttons->add(create_soldier_capacity_control(*buttons, igb, building));
 	add(buttons, UI::Align::kCenter, true);
 }
 

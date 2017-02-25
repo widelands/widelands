@@ -247,7 +247,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 				      waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
-				capsbuttons->add(dismantlebtn, UI::Align::kCenter);
+				capsbuttons->add(dismantlebtn);
 				requires_destruction_separator = true;
 			}
 		}
