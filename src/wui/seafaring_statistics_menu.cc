@@ -51,7 +51,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-               g_gr->images().get("images/ui_basic/but4.png"),
+					g_gr->images().get("images/ui_basic/but0.png"),
                status_to_image(ShipFilterStatus::kIdle)),
      waiting_btn_(&filter_box_,
                   "filter_ship_waiting",
@@ -59,7 +59,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                   0,
                   kButtonSize,
                   kButtonSize,
-                  g_gr->images().get("images/ui_basic/but4.png"),
+						g_gr->images().get("images/ui_basic/but0.png"),
                   status_to_image(ShipFilterStatus::kExpeditionWaiting)),
      scouting_btn_(&filter_box_,
                    "filter_ship_scouting",
@@ -67,7 +67,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-                   g_gr->images().get("images/ui_basic/but4.png"),
+						 g_gr->images().get("images/ui_basic/but0.png"),
                    status_to_image(ShipFilterStatus::kExpeditionScouting)),
      portspace_btn_(&filter_box_,
                     "filter_ship_portspace",
@@ -75,7 +75,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-                    g_gr->images().get("images/ui_basic/but4.png"),
+						  g_gr->images().get("images/ui_basic/but0.png"),
                     status_to_image(ShipFilterStatus::kExpeditionPortspaceFound)),
      shipping_btn_(&filter_box_,
                    "filter_ship_transporting",
@@ -83,7 +83,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-                   g_gr->images().get("images/ui_basic/but4.png"),
+						 g_gr->images().get("images/ui_basic/but0.png"),
                    status_to_image(ShipFilterStatus::kShipping)),
      ship_filter_(ShipFilterStatus::kAll),
      navigation_box_(
@@ -94,7 +94,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-               g_gr->images().get("images/ui_basic/but4.png"),
+					g_gr->images().get("images/ui_basic/but2.png"),
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                (boost::format(_("%1% (Hotkey: %2%)"))
                 /** TRANSLATORS: Tooltip in the messages window */
@@ -107,7 +107,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-                    g_gr->images().get("images/ui_basic/but4.png"),
+						  g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/ui_basic/fsel.png"),
                     (boost::format(_("%1% (Hotkey: %2%)"))
                      /** TRANSLATORS: Tooltip in the messages window */
@@ -120,7 +120,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-                    g_gr->images().get("images/ui_basic/but4.png"),
+						  g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     (boost::format(_("%1% (Hotkey: %2%)"))
                      /** TRANSLATORS: Tooltip in the messages window */
@@ -245,7 +245,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 		filename = "images/wui/ship/ship_explore_island_cw.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
-		filename = "images/wui/stats/ship_stats_port_space.png";
+		filename = "images/wui/ship/ship_construct_port_space.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
 		return colony_icon_;

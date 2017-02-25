@@ -45,7 +45,7 @@ static const char pic_scout_w[] = "images/wui/ship/ship_scout_w.png";
 static const char pic_scout_e[] = "images/wui/ship/ship_scout_e.png";
 static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
 static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
-static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port_space.png";
+static const char pic_construct_port[] = "images/wui/ship/ship_construct_port_space.png";
 }  // namespace
 
 using namespace Widelands;
