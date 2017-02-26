@@ -99,7 +99,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             get_w() / 2,
             tabley_ / 3,
             is_replay_ ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kHCenter),
+            UI::Align::kCenter),
 
      // Savegame description
      label_mapname_(this, right_column_x_, tabley_, "", UI::Align::kLeft),

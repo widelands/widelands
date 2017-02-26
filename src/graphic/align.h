@@ -24,52 +24,21 @@
 
 namespace UI {
 
-/**
- * This Enum is a binary mix of one-dimensional and two-dimensional alignments.
- *
- * bits 0,1 values 0,1,2,3  are horizontal
- * bits 2,3 values 0,4,8,12 are vertical
- *
- * mixed aligenments are results of a binary | operation.
- */
-
-// TODO(klaus.halfmann): as this is not a real enum all compiler warnings about
-// incomplete usage are useless.
-
+// TODO(GunChleoc): Step 1: Clean up superfluous usages of kLeft/kTop, especially with dalls to
+// Box::ad and Textarea constructor.
+// TODO(GunChleoc): Step 2: Rename to kBeginning, kCenter, kEnd
+/// Horizontal or vertical alignment
 enum class Align {
-	kLeft = 0,
-	kHCenter = 1,
-	kRight = 2,
-	kHorizontal = 3,
-
-	kTop = 0,
-	kVCenter = 4,
-	kBottom = 8,
-	kVertical = 12,
-
-	kTopLeft = 0,
-	kCenterLeft = Align::kVCenter,
-	kBottomLeft = Align::kBottom,
-
-	kTopCenter = Align::kHCenter,
-	kCenter = Align::kHCenter | Align::kVCenter,
-	kBottomCenter = Align::kHCenter | Align::kBottom,
-
-	kTopRight = Align::kRight,
-	kCenterRight = Align::kRight | Align::kVCenter,
-
-	kBottomRight = Align::kRight | Align::kBottom,
+	kLeft,
+	kCenter,
+	kRight,
+	kTop = kLeft,
+	kBottom = kRight,
 };
 
-inline Align operator&(Align a, Align b) {
-	return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
-}
-
-inline Align operator|(Align a, Align b) {
-	return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
-}
-
 Align mirror_alignment(Align alignment);
-void correct_for_align(Align, uint32_t w, uint32_t h, Vector2f* pt);
+
+void center_vertically(uint32_t h, Vector2f* pt);
+void correct_for_align(Align, uint32_t w, Vector2f* pt);
 }
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H
