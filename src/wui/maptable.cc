@@ -35,7 +35,7 @@ MapTable::MapTable(
 	add_column(35, _("Pl."), _("Number of players"), UI::Align::kCenter);
 	add_column(0, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft,
 	           UI::TableColumnType::kFlexible);
-	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
+	add_column(115, _("Size"), _("The size of the map (Width x Height)"));
 	set_sort_column(0);
 }
 
