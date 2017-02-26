@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-14 20:31+0000\n"
-"PO-Revision-Date: 2017-02-15 21:39+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-25 18:12+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Subministreu béns de construcció"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr "Subministreu els materials bàsics per la construcció per a la teva economia:"
+msgstr "Subministreu els materials bàsics per la construcció per a la vostra economia:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -226,8 +226,8 @@ msgstr "Reclutament de nous soldats"
 msgid ""
 "Now that weapons are being forged, new soldiers can be recruited. For this, "
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
-" arrive from the warehouse and receive one each and some basic training to "
-"become a soldier."
+" arrive from the warehouse and receive one of each and some basic training "
+"to become a soldier."
 msgstr "Un cop ja estem forjant armes, podem reclutar nous soldats. Per això, cal enviar tridents i tabards als barracons. Els reclutes arribaran des d'algun magatzem i en rebran un de cada. Després se'ls entrenarà per convertir-se en soldats."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
@@ -683,8 +683,8 @@ msgstr "La Jundlina escriu una carta"
 msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
-" time to build a barracks and start training soldiers."
-msgstr "He rebut notícies de que la nostra indústria minera ha començat a funcionar. Ara que forjarem armes, escriuré una carta a en Sidolus per informar-lo que ja és hora de construir barracons i entrenar soldats."
+" time to build a barracks and start recruiting soldiers."
+msgstr "He rebut notícies de que la nostra indústria minera ha començat a funcionar. Ara que forjarem armes, escriuré una carta a en Sidolus per informar-lo que ja és hora de construir barracons i reclutar soldats."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
