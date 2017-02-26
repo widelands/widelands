@@ -301,6 +301,7 @@ private:
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 	uint16_t numof_warehouses_;
+	uint16_t numof_warehouses_in_const_;
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 	std::map<int32_t, Widelands::MilitarySiteSizeObserver> msites_per_size;
@@ -349,9 +350,6 @@ private:
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
 	
-	// Counter how many times the AI has been called so far
-	uint32_t AI_think_count_;
-
 	// id of iron_ore to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = -1;
 

@@ -18,6 +18,7 @@
  */
 
 #include "ai/defaultai.h"
+//#include "ai/tmp_constants.h" NOCOM
 
 #include <algorithm>
 #include <cmath>
@@ -101,6 +102,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      num_prod_constructionsites(0),
      num_ports(0),
      numof_warehouses_(0),
+     numof_warehouses_in_const_(0),
      military_last_dismantle_(0),
      military_last_build_(0),
      time_of_last_construction_(0),
@@ -118,7 +120,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      resource_necessity_water_(0),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
-     AI_think_count_(0),
      seafaring_economy(false),
      expedition_ship_(kNoShip) {
 
@@ -248,7 +249,6 @@ void DefaultAI::think() {
 	// AI now thinks twice in a seccond, if the game engine allows this
 	// if too busy, the period can be many seconds.
 	next_ai_think_ = gametime + 500;
-	AI_think_count_ += 1;
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 
 	sort_task_pool();
@@ -451,12 +451,9 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kManagementUpdate:
 			management_data.review(
 			   gametime, player_number(), player_statistics.get_player_power(player_number()),
-			   static_cast<int32_t>(player_statistics.get_player_power(player_number())) -
-			      static_cast<int32_t>(player_statistics.get_enemies_max_power()),
 			   player_statistics.get_player_land(player_number()),
-			   static_cast<int32_t>(player_statistics.get_player_land(player_number())) -
-			      static_cast<int32_t>(player_statistics.get_enemies_max_land()),
-			   attackers_count_, AI_think_count_);
+			   attackers_count_,
+			   militarysites.size());
 			set_taskpool_task_time(
 			   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			break;
@@ -1672,10 +1669,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// military and enemies
 	//  own sites (finished, unstationed)
 
-	inputs[37] = -2 *
+	inputs[37] = -3 *
 	            management_data.neuron_pool[8].get_result_safe(
 	               (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
-	inputs[38] = -2 *
+	inputs[38] = -3 *
 	            management_data.neuron_pool[74].get_result_safe(
 	               (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
 	inputs[39] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
@@ -1696,7 +1693,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	inputs[44] =
 	   -1 * management_data.neuron_pool[58].get_result_safe(field.own_military_presence, kAbsValue);
-	inputs[46] = -10 *
+	inputs[46] = -3 *
 	             management_data.neuron_pool[59].get_result_safe(
 	                static_cast<uint8_t>(soldier_status_) * 3, kAbsValue);
 	inputs[47] = -5 * std::min<int16_t>(field.own_military_presence, 20);
@@ -1731,14 +1728,29 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
 
 	// other vanilla
-	inputs[62] = -150;
-	inputs[63] = 150;
-	inputs[64] = -50;
-	inputs[65] = 50;
-	inputs[66] = -100;
-	inputs[67] = 100;	
+	inputs[62] = field.own_non_military_nearby * 2;
+	inputs[63] = field.own_non_military_nearby * 4;
+	inputs[64] = field.own_non_military_nearby * 6;
+	inputs[65] = (field.own_non_military_nearby) ? 20 : 0;
+	inputs[66] = -40;
+	inputs[67] = 25;
+	inputs[68] = -25;
+	inputs[69] = 25;
+	inputs[70] = -20;
+	inputs[71] = 20;
+	inputs[72] = 30;
+	inputs[73] = 10;
+	inputs[74] = -20;
+	inputs[75] = 20;
+	inputs[76] = -25;
+	inputs[77] = 25;
+	inputs[78] = 15;
+	inputs[79] = 25;
+	inputs[80] = std::max(inputs[10],  std::max(inputs[20], inputs[30]));
+	inputs[81] = std::max(inputs[5],  std::max(inputs[15], inputs[25]));	
+	inputs[82] = std::max(inputs[35],  std::max(inputs[40], inputs[45]));	
 	// Fneurons per situation
-	uint8_t applyied_neuron[6] = {255, 255, 255, 11, 47, 50};  // just defaults, latter three are common for all
+	uint8_t applyied_neuron[6] = {255, 255, 255};  // just defaults, latter three are common for all
 	uint8_t multiplicator;
 	if (field.is_militarysite) {
 		if (field.enemy_accessible_) {
@@ -1765,19 +1777,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			applyied_neuron[0] = 15;  // f_neuron_pool[15]
 			applyied_neuron[1] = 16;  // f_neuron_pool[16]
 			applyied_neuron[2] = 46;  // f_neuron_pool[46]
-			applyied_neuron[3] = 57;  // f_neuron_pool[57]
 			multiplicator = 2 * std::abs(management_data.get_military_number_at(48));
 		} else {
 			// no enemy nearby
 			applyied_neuron[0] = 17;  // f_neuron_pool[17]
 			applyied_neuron[1] = 18;   // f_neuron_pool[18]
 			applyied_neuron[2] = 45;  // f_neuron_pool[45]
-			applyied_neuron[3] = 59;  // f_neuron_pool[59]
 			multiplicator = 2 * std::abs(management_data.get_military_number_at(68));				
 		}	
 	}
-	
-	int32_t max_score = -10000;
+	//int32_t max_score = -10000;
 
 	for (int i = 0; i < f_neuron_bit_size; i = i + 1) {
 		if (management_data.f_neuron_pool[applyied_neuron[0]].get_position(i)) {
@@ -1803,18 +1812,28 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			// inputs[i+f_neuron_bit_size]);
 			//}
 		}
-		if (management_data.f_neuron_pool[applyied_neuron[3]].get_position(i)) {
-			max_score = std::max<uint32_t>(inputs[i], max_score);
-		}
-		if (management_data.f_neuron_pool[applyied_neuron[4]].get_position(i)) {
-			max_score = std::max<uint32_t>(inputs[i+ f_neuron_bit_size], max_score);
-		}
-		if (management_data.f_neuron_pool[applyied_neuron[5]].get_position(i)) {
-			max_score = std::max<uint32_t>(inputs[i + 2 * f_neuron_bit_size], max_score);
-		}
+		//if (management_data.f_neuron_pool[applyied_neuron[3]].get_position(i)) {
+			//max_score = std::max<uint32_t>(inputs[i], max_score);
+		//}
+		//if (management_data.f_neuron_pool[applyied_neuron[4]].get_position(i)) {
+			//max_score = std::max<uint32_t>(inputs[i+ f_neuron_bit_size], max_score);
+		//}
+		//if (management_data.f_neuron_pool[applyied_neuron[5]].get_position(i)) {
+			//max_score = std::max<uint32_t>(inputs[i + 2 * f_neuron_bit_size], max_score);
+		//}
 	}
-	field.military_score_ += max_score;
+	//field.military_score_ += max_score;
 	field.military_score_ = field.military_score_ * multiplicator / 100;
+	////if (field.is_militarysite) {
+		////if(!field.enemy_nearby) {
+		//////temporary bonus NOCOM
+			////field.military_score_ += kdecreasor + 120;
+		////} else {
+			////field.military_score_ += kdecreasor + 120;			
+		////}
+	////} else {
+		//field.military_score_ += kdecreasor;
+	////}
 	
 	//// Statistics for inputs utilization
 	//std::vector<uint8_t> neurons1 = {53, 54, 55, 56};
@@ -3144,7 +3163,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismantled
 		// if there is shortage of spots we do it always
 		if (last_road_dismantled_ + 15 * 1000 < gametime &&
-		    (std::rand() % 5 == 0 || spots_ < kSpotsTooLittle)) {
+		    (std::rand() % 5 == 0 || spots_ <= kSpotsEnough)) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
@@ -3248,10 +3267,13 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 
 	// We do not dismantle (even consider it) if the road is busy (some wares on flags), unless there
 	// is shortage of build spots
-	if (spots_ > kSpotsTooLittle &&
+	
+	if (spots_ > kSpotsEnough &&
 	    roadstartflag.current_wares() + roadendflag.current_wares() > 0) {
 		return false;
-	}
+	} else if (roadstartflag.current_wares() + roadendflag.current_wares() > 2) {
+		return false;
+	}		
 
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
@@ -4192,73 +4214,53 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
                                                        const uint32_t gametime) {
 	bo.primary_priority = 0;
 
-	if (bo.cnt_under_construction > 0 ||
+	if (numof_warehouses_in_const_ > 0 ||
 	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 		bo.new_building_overdue = 0;
+		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
 	}
 
-	bool warehouse_needed = false;
+	if (bo.is_port && !seafaring_economy) {
+		bo.new_building_overdue = 0;
+		bo.primary_priority = 0;
+		return BuildingNecessity::kForbidden;
+	}
+
+
+	bo.primary_priority = 0;
 
 	//  Build one warehouse for ~every 35 productionsites and mines_.
 	//  Militarysites are slightly important as well, to have a bigger
 	//  chance for a warehouses (containing waiting soldiers or wares
 	//  needed for soldier training) near the frontier.
 	int32_t needed_count = static_cast<int32_t>(productionsites.size() + mines_.size()) /
-	                          (40 + management_data.get_military_number_at(21) / 10) +
-	                       1;
+	                          (40 + management_data.get_military_number_at(21) / 10) + 1;
 	assert(needed_count >= 0 &&
 	       needed_count <= (static_cast<uint16_t>(productionsites.size() + mines_.size()) / 10) + 2);
 
-	if (needed_count > numof_warehouses_) {
-		warehouse_needed = true;
-		bo.primary_priority = (needed_count - numof_warehouses_) *
-		                      (20 + management_data.get_military_number_at(22) / 10);
-	} else {
-		bo.primary_priority = 0;
+	
+	if (player_statistics.any_enemy_seen_lately(gametime) + (productionsites.size() + mines_.size()) > 10) {
+		needed_count += 1;
 	}
 
-	if ((productionsites.size() + mines_.size()) > 20 && numof_warehouses_ <= 1) {
-		bo.primary_priority += 15 + management_data.get_military_number_at(23) / 5;
+	if (bo.is_port && (productionsites.size() + mines_.size()) > 10) {
+		needed_count += 1;
 	}
-
-	if (numof_warehouses_ <= 1 && player_statistics.any_enemy_seen_lately(gametime)) {
-		bo.primary_priority += 15 + management_data.get_military_number_at(24) / 10;
-	}
-
-	bo.primary_priority +=
-	   management_data.neuron_pool[45].get_result_safe(7 - numof_warehouses_ * 3, kAbsValue) / 5;
-	bo.primary_priority +=
-	   management_data.neuron_pool[46].get_result_safe(gametime / 1000 / 60 / 5, kAbsValue) / 5;
-
-	// But we still can built a port if it is first one
-	if (bo.is_port && bo.total_count() == 0 && productionsites.size() > 5 && seafaring_economy) {
-		bo.primary_priority += std::abs(management_data.get_military_number_at(16)) / 5;
-		warehouse_needed = true;
-	}
-
-	if (!warehouse_needed) {
-		bo.new_building_overdue = 0;
-		return BuildingNecessity::kForbidden;
-		;
-	}
-
-	// we prefer ports to a normal warehouse
-	if (bo.is_port) {
-		bo.primary_priority += std::abs(management_data.get_military_number_at(17)) / 10;
-	}
-
-	// considering overdue time
-	bo.primary_priority += -20 + bo.new_building_overdue;
-
-	if (bo.primary_priority > 0) {
-		bo.new_building_overdue += 1;
-		return BuildingNecessity::kAllowed;
-	} else {
+	
+	if (needed_count <= numof_warehouses_in_const_ + numof_warehouses_){
 		bo.new_building_overdue = 0;
 		return BuildingNecessity::kForbidden;
 	}
+	
+	//So now we know the warehouse here is needed.
+	bo.primary_priority = 1 + (needed_count - numof_warehouses_in_const_ - numof_warehouses_) * std::abs(management_data.get_military_number_at(22) / 5);
+	bo.new_building_overdue += 1;
+	bo.primary_priority += bo.new_building_overdue / std::abs(management_data.get_military_number_at(16) + 1);
+	printf (" %2d %-20s (warehouses now: %d) needed %2d with primary priority %d, overdue %d\n", player_number(), bo.name, numof_warehouses_, needed_count, bo.primary_priority, bo.new_building_overdue);
+	return BuildingNecessity::kAllowed;
 }
+	
 
 // this receives an building observer and have to decide if new/one of
 // current buildings of this type is needed
@@ -4425,7 +4427,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		} else if (bo.is_hunter || bo.is_fisher || bo.mines_water) {
 
-			bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 40;
+			bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 30;
 
 			if (bo.max_needed_preciousness == 0) {
 				return BuildingNecessity::kNotNeeded;
@@ -4550,44 +4552,98 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.max_needed_preciousness > 0) {
 			//NOCOM
-			int16_t inputs[f_neuron_bit_size] = {0};
-			inputs[0] = bo.total_count();
-			inputs[1] = -1 * bo.total_count();
-			inputs[2] = (bo.total_count() == 0) ? management_data.get_military_number_at(0) / 10 : 0;			
-			inputs[3] = (gametime >= 25 * 60 * 1000) ? management_data.get_military_number_at(1) / 10 : 0;	
-			inputs[4] = (bo.max_needed_preciousness >= 10)  ? management_data.get_military_number_at(2) / 10 : 0;			
+			int16_t inputs[2 * f_neuron_bit_size] = {0};
+			inputs[0] = 2 * bo.total_count();
+			inputs[1] = -2 * bo.total_count();
+			inputs[2] = (bo.total_count() == 0) ? std::abs(management_data.get_military_number_at(0)) / 10 : 0;			
+			inputs[3] = (gametime >= 25 * 60 * 1000 && bo.inputs.empty()) ? management_data.get_military_number_at(1) / 10 : 0;	
+			inputs[4] = (bo.max_needed_preciousness >= 10)  ? std::abs(management_data.get_military_number_at(2)) / 10 : 0;			
 			inputs[5] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size())
 						? management_data.get_military_number_at(3) / 10 : 0;
-			inputs[6] = (needs_second_for_upgrade) ? management_data.get_military_number_at(4) / 10 : 0;
-			inputs[7] = (bo.cnt_under_construction + bo.unoccupied_count) * management_data.get_military_number_at(9) / 10;
+			inputs[6] = (needs_second_for_upgrade) ? std::abs(management_data.get_military_number_at(4)) / 10 : 0;
+			inputs[7] = (bo.cnt_under_construction + bo.unoccupied_count) * -1 * std::abs(management_data.get_military_number_at(9)) / 5;
 			inputs[8] = (!bo.outputs.empty() && bo.current_stats > 30 + 70 / bo.outputs.size())
-						? management_data.get_military_number_at(7) / 10 : 0;
-			inputs[9] = (bo.produces_building_material) ? management_data.get_military_number_at(10) / 10 : 0;
+						? management_data.get_military_number_at(7) / 8 : 0;
+			inputs[9] = (bo.produces_building_material) ? std::abs(management_data.get_military_number_at(10)) / 10 : 0;
 			inputs[10] = (bo.build_material_shortage)  ? management_data.get_military_number_at(39) / 10 : 0;
-			inputs[11] = (wood_policy_ == WoodPolicy::kAllowRangers)  ? management_data.get_military_number_at(15) / 10 : 0;
-			inputs[12] = (gametime >= 15 * 60 * 1000) ? management_data.get_military_number_at(94) / 10 : 0;	
-			inputs[13] = (bo.inputs.empty()) ? management_data.get_military_number_at(8) / 10 : 0;	
-			inputs[14] = (persistent_data->trees_around_cutters > 20) ? management_data.get_military_number_at(95) / 10 : 0;	
-			inputs[15] = (persistent_data->trees_around_cutters > 100) ? management_data.get_military_number_at(96) / 10 : 0;	
+			inputs[11] = (wood_policy_ == WoodPolicy::kDismantleRangers || wood_policy_ ==  WoodPolicy::kStopRangers)  ?
+							std::abs(management_data.get_military_number_at(15)) / 10 : 0;
+			inputs[12] = (gametime >= 15 * 60 * 1000) ? std::abs(management_data.get_military_number_at(94)) / 10 : 0;	
+			inputs[13] = management_data.get_military_number_at(8) / 10;	
+			inputs[14] = (persistent_data->trees_around_cutters < 20) ? -1 * std::abs(management_data.get_military_number_at(95)) / 10 : 0;	
+			inputs[15] = (persistent_data->trees_around_cutters > 100) ? std::abs(management_data.get_military_number_at(96)) / 10 : 0;	
 			inputs[16] = (player_statistics.any_enemy_seen_lately(gametime)) ? management_data.get_military_number_at(97) / 10 : 0;				
-			inputs[17] = (spots_ > kSpotsEnough) ? management_data.get_military_number_at(74) / 10 : 0;				
+			inputs[17] = (spots_ > kSpotsEnough) ? std::abs(management_data.get_military_number_at(74)) / 10 : 0;				
 			inputs[18] = management_data.get_military_number_at(98) / 10;
-			inputs[19] = (new_buildings_stop_) ? management_data.get_military_number_at(40) / 10 : 0;
-			inputs[20] = (needs_boost_economy) ? management_data.get_military_number_at(50) / 10 : 0;	
-
+			inputs[19] = (new_buildings_stop_) ? -1 * std::abs(management_data.get_military_number_at(40)) / 10 : 0;
+			inputs[20] = (needs_boost_economy) ? std::abs(management_data.get_military_number_at(50)) / 10 : 0;
+			inputs[21] = (needs_boost_economy) ? 3 : 0;	
+			inputs[22] = 5;
+			if (bo.cnt_built > 0 && !bo.outputs.empty()){
+				inputs[22] += bo.current_stats / 10;
+				}
+			inputs[23] = (!player_statistics.strong_enough(player_number())) ? 5 : 0;
+			inputs[24] = (bo.inputs.empty()) ? 6 : 0;
+			inputs[25] = -5;
+			inputs[26] = (needs_boost_economy) ? 2 : 0;				
+			inputs[27] = (wood_policy_ == WoodPolicy::kDismantleRangers || wood_policy_ ==  WoodPolicy::kStopRangers) ? 4 : 0;
+			inputs[28] = (bo.max_needed_preciousness >= 10) ? 4 : 0;
+			inputs[29] = (bo.inputs.empty() && bo.max_needed_preciousness >= 10) ? 3 : 0;
+			inputs[30] = bo.max_needed_preciousness / 2;
+			inputs[31] = ((bo.cnt_under_construction + bo.unoccupied_count) > 0) ? -5 : 0;
+			inputs[32] = bo.max_needed_preciousness / 2;
+			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
+			inputs[34] = 5;
+			if (bo.cnt_built > 0 && !bo.outputs.empty()){
+				inputs[34] += bo.current_stats / 10;
+				}
+			inputs[35] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ? 2 : 0;
+			inputs[36] = (!bo.outputs.empty() && !bo.inputs.empty() && bo.cnt_under_construction + bo.unoccupied_count == 0)
+						? bo.current_stats / 12 : 0;
+			inputs[37] = -5;						
+			inputs[38] = (bo.cnt_under_construction + bo.unoccupied_count > 0) ? 15 : 0;						
+			inputs[39] = 5;
+			inputs[40] = (needs_boost_economy) ? 3 : 0;	
+			inputs[41] = (bo.build_material_shortage)  ? -3 : 0;				
+			inputs[42] = (!player_statistics.strong_enough(player_number())) ? 2 : 0;
+			inputs[43] = (bo.inputs.empty()) ? 3 : 0;
+			inputs[44] = (bo.inputs.empty() && bo.max_needed_preciousness >= 10) ? 3 : 0;
+			inputs[45] = bo.max_needed_preciousness / 2;			
+			inputs[46] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ? 4 : 0;
+			inputs[47] = (!bo.outputs.empty() && bo.current_stats > 85) ? 4 : 0;
+			inputs[48] = (bo.max_needed_preciousness >= 10 && (bo.cnt_under_construction + bo.unoccupied_count) == 1) ? 5 : 0;
+			inputs[49] = (new_buildings_stop_) ? -4 : 1;
+			inputs[50] = (new_buildings_stop_) ? -1 : 1;	
+			inputs[51] = (gametime < 20 * 60 * 1000) ? -4 : 0;
+			inputs[52] = -10;
+			inputs[53] = -8;
+			inputs[54] = (spots_ < kSpotsEnough) ? -5 : 0;
+			inputs[55] = (bo.max_needed_preciousness >= 10 && (bo.cnt_under_construction + bo.unoccupied_count) == 1) ? 3 : 0;
+			inputs[56] = (new_buildings_stop_) ? -8 : 1;
+			inputs[57] = (new_buildings_stop_) ? -16 : 1;
+			inputs[58] = (new_buildings_stop_) ? -20 : 1;
+			inputs[59] = (new_buildings_stop_) ? -12 : 1;
+			inputs[60] = (spots_ < kSpotsTooLittle) ? -10 : 0;
+			inputs[61] = (player_statistics.any_enemy_seen_lately(gametime)) ? 2 : 0;
+			inputs[62] = (player_statistics.any_enemy_seen_lately(gametime) && bo.cnt_under_construction + bo.unoccupied_count == 0) ? 6 : 0;
+			inputs[63] = (!bo.outputs.empty() && !bo.inputs.empty())
+						? bo.current_stats / 8 : 0;
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < f_neuron_bit_size; i +=1) {
 				if (management_data.f_neuron_pool[8].get_position(i)){
 					tmp_score += inputs[i];
 				}
+				if (management_data.f_neuron_pool[11].get_position(i)){
+					tmp_score += inputs[i+f_neuron_bit_size];
+				}
 			}
-			const int16_t tmp_boost = -4; // NOCOM remove later on, an/or increase gradually
-			printf (" %2d: tmp score: %3d, needed treshold: %3d\n", player_number(), tmp_score, std::abs(management_data.get_military_number_at(73) / 20) + tmp_boost);
+			//NOCOM
+			//printf (" %2d: tmp score: %3d, needed treshold: %3d\n", player_number(), tmp_score, std::abs(management_data.get_military_number_at(73) / 20));
 
-			if (tmp_score > std::abs(management_data.get_military_number_at(73) / 20) + tmp_boost) {
+			if (tmp_score > std::abs(management_data.get_military_number_at(73) / 20)) {
 				//printf ("%2d: %-35s needed,  current count = %d, score: %d\n", player_number(), bo.name, bo.total_count(), tmp_score);
 				return BuildingNecessity::kNeeded;
-			} else if (tmp_score > 0 + tmp_boost) {
+			} else if (tmp_score > 0) {
 				//printf ("%2d: %-35s pending, current count = %d, score: %d\n", player_number(), bo.name, bo.total_count(), tmp_score);
 				return BuildingNecessity::kNeededPending;
 			} else {
@@ -4918,6 +4974,9 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 		if (target_bo.type == BuildingObserver::Type::kMine) {
 			mines_per_type[target_bo.mines].in_construction += 1;
 		}
+		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
+			numof_warehouses_in_const_ += 1;
+		}
 		if (target_bo.type == BuildingObserver::Type::kTrainingsite) {
 			if (target_bo.trainingsite_type == TrainingSiteType::kBasic) {
 				ts_basic_const_count_ += 1;
@@ -5039,6 +5098,9 @@ void DefaultAI::lose_building(const Building& b) {
 		}
 		if (target_bo.type == BuildingObserver::Type::kMine) {
 			mines_per_type[target_bo.mines].in_construction -= 1;
+		}
+		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
+			numof_warehouses_in_const_ -= 1;
 		}
 		if (target_bo.type == BuildingObserver::Type::kTrainingsite) {
 			if (target_bo.trainingsite_type == TrainingSiteType::kBasic) {

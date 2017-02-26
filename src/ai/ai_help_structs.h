@@ -569,7 +569,7 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* pd;
 
 	void mutate(uint32_t, PlayerNumber = 0);
-	void review(uint32_t, PlayerNumber, uint32_t, int32_t, uint32_t, int32_t, uint16_t, uint32_t);
+	void review(uint32_t, PlayerNumber, uint32_t, uint32_t, uint16_t, uint32_t);
 	void dump_data();
 	void initialize(uint8_t, bool reinitializing = false);
 	uint16_t new_neuron_id() {
@@ -592,7 +592,7 @@ struct ManagementData {
 	bool test_consistency();
 
 private:
-	int32_t scores[3];
+	int32_t score;
 	uint8_t primary_parent;
 	uint32_t last_mutate_time;
 	uint16_t review_count;
