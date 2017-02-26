@@ -371,11 +371,11 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
      building_(building),
      soldierpanel_(*this, igb.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
-	add(&soldierpanel_, UI::Align::kCenter);
+	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);
 
-	add(&infotext_, UI::Align::kCenter);
+	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
@@ -422,9 +422,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building), UI::Align::kRight);
-
-	add(buttons, UI::Align::kCenter, true);
+	buttons->add(create_soldier_capacity_control(*buttons, igb, building));
+	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
 SoldierControl& SoldierList::soldiers() const {

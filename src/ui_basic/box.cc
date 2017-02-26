@@ -244,22 +244,27 @@ void Box::scrollbar_moved(int32_t) {
 /**
  * Add a new panel to be controlled by this box
  *
- * @param fullsize when true, @p panel will be extended to cover the entire width (or height)
- * of the box for horizontal (vertical) panels. If false, then @p panel may end up smaller;
- * in that case, it will be aligned according to @p align
+ * @param resizing:
  *
- * @param fillspace when true, @p panel will be expanded as an infinite space would be.
+ * When Resizing::kAlign, then @p panel will be aligned according to @p align
+ *
+ * When Resizing::kFullSize, @p panel will be extended to cover the entire width (or height)
+ * of the box for horizontal (vertical) panels.
+ *
+ * When Resizing::kFillSpace, @p panel will be expanded as an infinite space would be.
  * This can be used to make buttons fill a box completely.
  *
+ * When Resizing::kExpandBoth, both width and height of @p panel will be expanded.
+ *
  */
-void Box::add(Panel* const panel, UI::Align const align, bool fullsize, bool fillspace) {
+void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 	Item it;
 
 	it.type = Item::ItemPanel;
 	it.u.panel.panel = panel;
 	it.u.panel.align = align;
-	it.u.panel.fullsize = fullsize;
-	it.fillspace = fillspace;
+	it.u.panel.fullsize = resizing == Resizing::kFullSize || resizing == Resizing::kExpandBoth;
+	it.fillspace = resizing == Resizing::kFillSpace || resizing == Resizing::kExpandBoth;
 	it.assigned_var_depth = 0;
 
 	items_.push_back(it);

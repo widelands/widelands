@@ -70,14 +70,14 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&new_game, UI::Align::kCenter, true);
-	vbox_.add(&campaign, UI::Align::kCenter, true);
+	vbox_.add(&new_game, UI::Box::Resizing::kFullSize);
+	vbox_.add(&campaign, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&load_game, UI::Align::kCenter, true);
+	vbox_.add(&load_game, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kCenter, true);
+	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
 	layout();
 }
