@@ -56,6 +56,10 @@ def generate_translation_stats(po_dir, output_file):
             # We need shell=True, otherwise we get "No such file or directory".
             stats_output = check_output(
                 ['pocount ' + subdir + ' --short-words'], stderr=subprocess.STDOUT, shell=True)
+            if 'ERROR' in stats_output:
+                print('\nError running pocount:\n' + stats_output.split('\n', 1)
+                      [0]) + '\nAborted creating translation statistics.'
+                return False
 
         except CalledProcessError:
             print('Failed to run pocount:\n  FILE: ' + po_dir +
@@ -93,9 +97,9 @@ def generate_translation_stats(po_dir, output_file):
         result = result + 'total=' + str(entry.total) + '\n\n'
 
     with open(output_file, 'w+') as destination:
-        destination.write(result[:-1]) # Strip the final \n
+        destination.write(result[:-1])  # Strip the final \n
     print('\nResult written to ' + output_file)
-    return 0
+    return True
 
 
 def main():
