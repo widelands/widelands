@@ -49,7 +49,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
-     table_(this, tablex_, tabley_, tablew_, tableh_, false),
+     table_(this, tablex_, tabley_, tablew_, tableh_),
      map_details_(this,
                   right_column_x_,
                   tabley_,
