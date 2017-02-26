@@ -55,8 +55,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, inputqueues[i]), UI::Align::kLeft);
+			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, igbase(), ps, inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -88,12 +87,12 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			   _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect(
 			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
-			worker_caps_->add(evict_button, UI::Align::kHCenter);
+			worker_caps_->add(evict_button);
 		}
 
-		worker_box->add(worker_table_, UI::Align::kLeft, true);
+		worker_box->add(worker_table_, UI::Box::Resizing::kFullSize);
 		worker_box->add_space(4);
-		worker_box->add(worker_caps_, UI::Align::kLeft, true);
+		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
 		get_tabs()->add(
 		   "workers", g_gr->images().get(pic_tab_workers), worker_box,
 		   (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));

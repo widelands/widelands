@@ -5,13 +5,14 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Олег Шевченко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-11 11:38+0000\n"
-"PO-Revision-Date: 2017-02-14 04:26+0000\n"
-"Last-Translator: Олег Шевчеко <olegrock@gmail.com>\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-21 08:15+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +80,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Дело в том, что на первом острове есть Камень и Дерево, на втором - только луга и ресурсы. Налаженная экономика, которую Вы оставляете позади, продолжит работать на Вас, но реальную выгоду вы получите в тот момент, когда достигнете нового острова."
+msgstr "Дело в том, что на первом острове есть только скалы и деревья, на втором - только луга и ресурсы. Экономика, которую Вы оставляете позади, продолжит работать для вас, но пользоваться благами вы сможете только в тот момент, когда достигнете нового острова."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."

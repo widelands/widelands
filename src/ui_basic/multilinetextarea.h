@@ -95,7 +95,7 @@ private:
 
 	std::string text_;
 	RGBColor color_;
-	Align align_;
+	const Align align_;
 
 	bool force_new_renderer_;
 	bool use_old_renderer_;

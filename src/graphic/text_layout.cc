@@ -101,10 +101,16 @@ std::string as_aligned(const std::string& txt,
                        const RGBColor& clr,
                        UI::FontSet::Face face) {
 	std::string alignment = "left";
-	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
-		alignment = "right";
-	} else if ((align & UI::Align::kHorizontal) == UI::Align::kHCenter) {
+	switch (align) {
+	case UI::Align::kCenter:
 		alignment = "center";
+		break;
+	case UI::Align::kRight:
+		alignment = "right";
+		break;
+	case UI::Align::kLeft:
+		alignment = "left";
+		break;
 	}
 
 	std::string font_face = "sans";
