@@ -48,7 +48,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
 	title_area_ = new UI::Textarea(vbox, "", UI::Align::kCenter);
-	vbox->add(title_area_);
+	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(PADDING);
 
 	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -64,7 +64,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	info_area_ = new UI::MultilineTextarea(
 	   info_box, 0, 0, 130,
 	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), "");
-	info_box->add(info_area_, UI::Align::kLeft, true);
+	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
 	info_box->add_space(PADDING);
 	hbox1->add(info_box);
 	hbox1->add_space(PADDING);
@@ -75,10 +75,10 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	bottom_box->add_space(PADDING);
 
 	gametime_label_ = new UI::Textarea(bottom_box, _("Elapsed time:"));
-	bottom_box->add(gametime_label_);
+	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	bottom_box->add_space(PADDING);
 	gametime_value_ = new UI::Textarea(bottom_box, gametimestring(game_.get_gametime()));
-	bottom_box->add(gametime_value_);
+	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	bottom_box->add_inf_space();
 
@@ -93,7 +93,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 
-	vbox->add(bottom_box, UI::Align::kLeft, true);
+	vbox->add(bottom_box, UI::Box::Resizing::kFullSize);
 	vbox->add_space(PADDING);
 	set_center_panel(vbox);
 

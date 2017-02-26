@@ -64,10 +64,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	title.set_fontsize(fs_big());
 
-	vbox_.add(&metaserver, UI::Align::kCenter, true);
-	vbox_.add(&lan, UI::Align::kCenter, true);
+	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
+	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&back, UI::Align::kCenter, true);
+	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);

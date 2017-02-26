@@ -86,14 +86,14 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_ =
 	   new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
 	                  g_gr->images().get("images/ui_basic/but1.png"), _("Show Map Names"));
-	vbox->add(show_mapnames_, UI::Align::kLeft, true);
+	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	cb_dont_localize_mapnames_ =
 	   new UI::Checkbox(vbox, Vector2i(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
-	vbox->add(cb_dont_localize_mapnames_, UI::Align::kLeft, true);
+	vbox->add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
 	vbox->set_size(get_inner_w(), buth_);
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));

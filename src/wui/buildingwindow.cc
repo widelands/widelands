@@ -66,10 +66,10 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	tabs_ = new UI::TabPanel(vbox, 0, 0, nullptr);
-	vbox->add(tabs_, UI::Align::kLeft, true);
+	vbox->add(tabs_, UI::Box::Resizing::kFullSize);
 
 	capsbuttons_ = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(capsbuttons_, UI::Align::kLeft, true);
+	vbox->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -247,7 +247,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons) {
 				      waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
-				capsbuttons->add(dismantlebtn, UI::Align::kCenter);
+				capsbuttons->add(dismantlebtn);
 				requires_destruction_separator = true;
 			}
 		}
