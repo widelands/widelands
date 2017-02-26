@@ -103,6 +103,7 @@ private:
 
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
+	void update_language_stats(bool include_system_lang);
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
@@ -111,8 +112,6 @@ private:
 	uint32_t butw_;
 	uint32_t buth_;
 	uint32_t hmargin_;
-	uint32_t tab_panel_width_;
-	uint32_t column_width_;
 	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
@@ -122,6 +121,7 @@ private:
 	// UI elements
 	UI::TabPanel tabs_;
 	UI::Box box_interface_;
+	UI::Box box_interface_left_;
 	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
@@ -133,6 +133,7 @@ private:
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
 	UI::SpinBox sb_maxfps_;
+	UI::MultilineTextarea translation_info_;
 
 	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
@@ -168,6 +169,26 @@ private:
 
 	/// All supported screen resolutions.
 	std::vector<ScreenResolution> resolutions_;
+
+	// Data model for the entries in the language selection list.
+	struct LanguageEntry {
+		LanguageEntry(const std::string& init_localename,
+		              const std::string& init_descname,
+		              const std::string& init_sortname)
+		   : localename(init_localename), descname(init_descname), sortname(init_sortname) {
+		}
+		LanguageEntry() : LanguageEntry("", "", "") {
+		}
+
+		bool operator<(const LanguageEntry& other) const {
+			return sortname < other.sortname;
+		}
+
+		std::string localename;  // ISO code for the locale
+		std::string descname;    // Native language name
+		std::string sortname;    // ASCII Language name used for sorting
+	};
+	std::map<std::string, LanguageEntry> language_entries_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H
