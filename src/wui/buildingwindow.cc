@@ -66,11 +66,13 @@ BuildingWindow::~BuildingWindow() {
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
-	if (note.serial == building_.serial() && !is_dying_) {
+	if (note.serial == building_.serial()) {
 		switch (note.action) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
-			init(true);
+			if (!is_dying_) {
+				init(true);
+			}
 			break;
 		// The building is no more
 		case Widelands::NoteBuilding::Action::kStartWarp:
