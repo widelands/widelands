@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-01-28 21:57+0000\n"
-"PO-Revision-Date: 2017-01-29 00:20+0000\n"
+"POT-Creation-Date: 2017-02-19 19:34+0000\n"
+"PO-Revision-Date: 2017-02-19 23:36+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -506,8 +506,8 @@ msgstr "Vigileu els pescadors. Quan s'esgotin els recursos pesquers en la seva �
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs."
-msgstr "Construïu sempre una cabana de guarda forestal i una cabana de guarda de peces de caça. Així evitareu quedar-vos sense troncs."
+"logs or game."
+msgstr "Construïu sempre cabanes de guarda forestal i del guarda de caça, per a no quedar-vos sense troncs ni peces de caça."
 
 #: ../../data/txts/tips/editor.lua:4
 msgid ""
@@ -631,7 +631,7 @@ msgstr "Els soldats nous es recluten als barracons. Les seves habilitats es pode
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si us agrada viure al límit, prement la tecla Ctrl mentre cliqueu millorar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
+msgstr "Si us agrada viure al límit, prement la tecla Ctrl mentre cliqueu ampliar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
 
 #: ../../data/txts/tips/general_game.lua:56
 msgid "Press I to quickly toggle the display of your stock inventory."

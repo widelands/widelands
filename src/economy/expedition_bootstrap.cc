@@ -91,7 +91,11 @@ void ExpeditionBootstrap::start() {
 		warehouse->refresh_options(*igb);
 }
 
+/**
+ * Cancel the Expediton by putting back all wares and workers.
+‚ */
 void ExpeditionBootstrap::cancel(Game& game) {
+
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
@@ -112,6 +116,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
 		warehouse->refresh_options(*igb);
 	}
+
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 

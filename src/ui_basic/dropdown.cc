@@ -98,11 +98,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->set_visible(false);
 	list_->set_background(background);
 
-	button_box_.add(&display_button_, UI::Align::kLeft);
+	button_box_.add(&display_button_);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
-		button_box_.add(push_button_, UI::Align::kLeft);
+		button_box_.add(push_button_);
 		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	}
 	button_box_.set_size(w, get_h());

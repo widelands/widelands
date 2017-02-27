@@ -127,12 +127,12 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      can_act_(gb_.can_act(wh_.owner().player_number())),
      type_(type),
      display_(this, width, wh_, type_, can_act_) {
-	add(&display_, UI::Align::kLeft, true);
+	add(&display_, Resizing::kFullSize);
 
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button* b;
-		add(buttons, UI::Align::kLeft);
+		add(buttons);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
@@ -140,7 +140,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
 	b->sigclicked.connect(                                                                          \
 	   boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::StockPolicy::k##policyname)), \
-	buttons->add(b, UI::Align::kHCenter);
+	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))

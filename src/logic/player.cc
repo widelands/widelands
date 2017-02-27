@@ -1221,6 +1221,8 @@ const std::string Player::pick_shipname() {
  * \param fr source stream
  */
 void Player::read_remaining_shipnames(FileRead& fr) {
+	// First get rid of default shipnames
+	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
